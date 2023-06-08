@@ -1,2 +1,3 @@
 packages:
-  - package
+  - framer-for-next
+  - nextjs-app
