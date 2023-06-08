@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  ci:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/pnpm
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+      # setup pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      # scripts
+      - run: pnpm i --store-dir ~/pnpm
+      - run: pnpm build
+      - run: pnpm test
