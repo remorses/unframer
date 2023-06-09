@@ -46,7 +46,7 @@ function getClassMap(breakpoints: Breakpoint[]): Record<Breakpoint, string> {
     return classMap
 }
 
-export function FontsForComponent({ Components }) {
+export function FontsForComponents({ Components }) {
     let styles: string[] = []
     for (let Component of Components) {
         const fonts = getFonts(Component)
