@@ -18,7 +18,15 @@
     "keywords": [],
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "license": "",
-    "devDependencies": {},
-    "dependencies": {},
-    "peerDependencies": {}
+    "peerDependencies": {
+        "framer": "*",
+        "react": "*"
+    },
+    "devDependencies": {
+        "@types/react": "18.2.9",
+        "framer": "^2.3.0"
+    },
+    "dependencies": {
+        "classnames": "^2.3.2"
+    }
 }
