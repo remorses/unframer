@@ -15,7 +15,7 @@ export default function Home() {
             <div className="pt-[200px]"></div>
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
-                    breakpoints={{
+                    variants={{
                         Desktop: 'desktop',
                         Tablet: 'tablet',
                         Mobile: 'mobile',

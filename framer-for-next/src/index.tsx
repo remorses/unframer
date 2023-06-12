@@ -77,10 +77,10 @@ export function FontsForComponents({ Components }) {
 
 export function WithFramerBreakpoints({
     children,
-    breakpoints: breakpointsMap = defaultMap,
+    variants: breakpointsMap = defaultMap,
 }: {
     children: any
-    breakpoints?: Record<Breakpoint, string>
+    variants?: Record<Breakpoint, string>
 }) {
     let child = React.Children.only(children)
     if (!child) {
@@ -89,11 +89,11 @@ export function WithFramerBreakpoints({
     if (!React.isValidElement<any>(child)) {
         return null
     }
-    let inverted = Object.fromEntries(
-        breakpointsMap
-            ? Object.entries(breakpointsMap).map(([k, v]) => [v, k])
-            : [],
-    )
+    // let inverted = Object.fromEntries(
+    //     breakpointsMap
+    //         ? Object.entries(breakpointsMap).map(([k, v]) => [v, k])
+    //         : [],
+    // )
 
     const controls = child.type['propertyControls']
 
