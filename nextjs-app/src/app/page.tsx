@@ -4,6 +4,7 @@ import 'framer-for-next/styles.css'
 import { FontsForComponents, WithFramerBreakpoints } from 'framer-for-next/src'
 import Cultrure from 'https://framer.com/m/cultrure-b10L.js#x'
 import MegaMenu from 'https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl'
+import LogoTicker from 'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
 
 export default function Home() {
     return (
@@ -12,7 +13,7 @@ export default function Home() {
             <div className='z-50 fixed top-12 '>
                 <MegaMenu />
             </div>
-            <div className="pt-[200px]"></div>
+            <div className='pt-[200px]'></div>
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
                     breakpoints={{
@@ -22,6 +23,17 @@ export default function Home() {
                     }}
                 >
                     <Cultrure style={{ width: '100%' }} />
+                </WithFramerBreakpoints>
+            </div>
+            <div className='max-w-[1200px] w-full'>
+                <WithFramerBreakpoints
+                    breakpoints={{
+                        Desktop: 'Primary',
+                        Tablet: 'Logo Ticker - M',
+                        Mobile: 'Logo Ticker - M',
+                    }}
+                >
+                    <LogoTicker style={{ width: '100%' }} />
                 </WithFramerBreakpoints>
             </div>
         </div>
