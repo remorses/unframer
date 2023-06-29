@@ -147,7 +147,8 @@ export function propControlsToType(controls: PropertyControls) {
             return `  ${key}: ${typescriptType(value)}`
         })
         .join('\n')
-    const defaultPropsTypes = `  children?: React.ReactNode\n  style?: React.CSSProperties\n  className?: string\n`
+
+    const defaultPropsTypes = `  children?: React.ReactNode\n  style?: React.CSSProperties\n  className?: string\n  id?: string\n  width?: any\n  height?: any\n  layoutId?: string\n`
     let t = ''
     t += 'import * as React from "react"\n'
     t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n`
