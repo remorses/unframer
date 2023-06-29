@@ -41,9 +41,6 @@ importers:
       express:
         specifier: ^4.18.2
         version: 4.18.2
-      framer.com/m/Mega-Menu-2wT3.js:
-        specifier: http://localhost:8080/Mega-Menu-2wT3.js
-        version: '@localhost+8080/Mega-Menu-2wT3.js(framer-motion@10.12.16)(react-dom@18.2.0)(react@18.2.0)'
       native-fetch:
         specifier: ^4.0.2
         version: 4.0.2(undici@5.22.1)
@@ -4525,20 +4522,4 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
-    dev: false
-
-  '@localhost+8080/Mega-Menu-2wT3.js(framer-motion@10.12.16)(react-dom@18.2.0)(react@18.2.0)':
-    resolution: {tarball: http://localhost:8080/Mega-Menu-2wT3.js}
-    id: '@localhost+8080/Mega-Menu-2wT3.js'
-    name: framer.com/m/Mega-Menu-2wT3.js
-    version: 0.0.0
-    peerDependencies:
-      framer-motion: '*'
-      react: '*'
-      react-dom: '*'
-    dependencies:
-      framer: 2.3.0(framer-motion@10.12.16)(react-dom@18.2.0)(react@18.2.0)
-      framer-motion: 10.12.16(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false

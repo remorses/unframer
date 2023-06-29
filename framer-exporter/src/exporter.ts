@@ -26,7 +26,7 @@ export async function bundle({ cwd = '', url }) {
         'framer-motion': '*',
     }
     const u = new URL(url)
-    const withoutHttps = u.host + u.pathname
+
     const result = await build({
         entryPoints: {
             main: url,
@@ -60,8 +60,18 @@ export async function bundle({ cwd = '', url }) {
     }
     const propControls: PropertyControls = module.default.propertyControls
     const types = propControlsToType(propControls)
+    // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+    let name = u.pathname
+        .split('/')
+        .slice(-1)[0]
+        // https://regex101.com/r/8prywY/1
+        .replace(/-[\w\d]{4}\.js/i, '')
+        .replace(/@.*/, '')
+        .toLowerCase()
+    name = 'framer-' + name
+    console.log('name', name)
     const packageJson = {
-        name: withoutHttps,
+        name: name,
         version: '0.0.0',
         main: 'dist/main.js',
         types: 'dist/main.d.ts',
@@ -182,7 +192,6 @@ export function esbuildPlugin({ onDependency }) {
         setup(build) {
             build.onResolve({ filter: /^https?:\/\// }, (args) => {
                 const url = new URL(args.path)
-                const withoutHttps = url.host + url.pathname
                 return {
                     path: args.path,
                     external: false,
@@ -231,8 +240,6 @@ export function esbuildPlugin({ onDependency }) {
                 return {
                     contents: code,
                     loader: 'js',
-
-                    // resolveDir: path.resolve(folderPath, u.host),
                 }
             })
         },

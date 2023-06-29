@@ -19,17 +19,21 @@ app.get('/:moduleName', async (req, response, next) => {
         throw new Error('No module name provided')
     }
     try {
+        // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+        let url = `https://framer.com/m/${moduleName}`
+        const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
+        console.log('tempFolder', tempFolder)
+        const { files, packageJson } = await bundle({ url, cwd: tempFolder })
         response.setHeader(
             'Content-Disposition',
-            `attachment; filename="${['package']
+            `attachment; filename="${[packageJson.name]
                 .filter(Boolean)
                 .join('-')}.tgz"`,
         )
         response.setHeader('Content-Type', 'application/gzip')
-        // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
-        let url = `https://framer.com/m/${moduleName}`
-        const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
-        const { files } = await bundle({ url, cwd: tempFolder })
+        // cache in CDN for 10 seconds
+        response.setHeader('Cache-Control', 'public, max-age=10')
+        // response.setHeader('Content-Type', 'application/gzip')
         await pipeline([
             // read all files in tempFolder and zip them
             stream.Readable.from([
