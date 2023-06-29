@@ -19,14 +19,13 @@
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "license": "",
     "peerDependencies": {
-        "framer": "*",
         "react": "*"
     },
     "devDependencies": {
-        "@types/react": "18.2.9",
-        "framer": "^2.3.0"
+        "@types/react": "18.2.9"
     },
     "dependencies": {
+        "framer": "https://github.com/remorses/framer-fixed",
         "classnames": "^2.3.2"
     }
 }

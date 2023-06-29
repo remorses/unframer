@@ -94,6 +94,9 @@ importers:
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
+      framer:
+        specifier: https://github.com/remorses/framer-fixed
+        version: github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: '*'
         version: 18.2.0
@@ -101,9 +104,6 @@ importers:
       '@types/react':
         specifier: 18.2.9
         version: 18.2.9
-      framer:
-        specifier: ^2.3.0
-        version: 2.3.0(framer-motion@7.10.3)(react-dom@18.2.0)(react@18.2.0)
 
   nextjs-app:
     dependencies:
@@ -126,8 +126,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       framer-avatar:
-        specifier: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#xxxcsdsdfsdfsdfsdfssdfsdf
-        version: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#xxxcsdsdfsdfsdfsdfssdfsdf(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)'
+        specifier: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzzsdfsdf
+        version: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz(react-dom@18.2.0)(react@18.2.0)'
       framer-for-next:
         specifier: workspace:*
         version: link:../framer-for-next
@@ -882,6 +882,7 @@ packages:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
       tslib: 2.5.3
+    dev: false
 
   /@motionone/dom@10.16.2:
     resolution: {integrity: sha512-bnuHdNbge1FutZXv+k7xub9oPWcF0hsu8y1HTH/qg6av58YI0VufZ3ngfC7p2xhMJMnoh0LXFma2EGTgPeCkeg==}
@@ -892,12 +893,14 @@ packages:
       '@motionone/utils': 10.15.1
       hey-listen: 1.0.8
       tslib: 2.5.3
+    dev: false
 
   /@motionone/easing@10.15.1:
     resolution: {integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==}
     dependencies:
       '@motionone/utils': 10.15.1
       tslib: 2.6.0
+    dev: false
 
   /@motionone/generators@10.15.1:
     resolution: {integrity: sha512-67HLsvHJbw6cIbLA/o+gsm7h+6D4Sn7AUrB/GPxvujse1cGZ38F5H7DzoH7PhX+sjvtDnt2IhFYF2Zp1QTMKWQ==}
@@ -905,9 +908,11 @@ packages:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
       tslib: 2.5.3
+    dev: false
 
   /@motionone/types@10.15.1:
     resolution: {integrity: sha512-iIUd/EgUsRZGrvW0jqdst8st7zKTzS9EsKkP+6c6n4MPZoQHwiHuVtTQLD6Kp0bsBLhNzKIBlHXponn/SDT4hA==}
+    dev: false
 
   /@motionone/utils@10.15.1:
     resolution: {integrity: sha512-p0YncgU+iklvYr/Dq4NobTRdAPv9PveRDUXabPEeOjBLSO/1FNB2phNTZxOxpi1/GZwYpAoECEa0Wam+nsmhSw==}
@@ -915,6 +920,7 @@ packages:
       '@motionone/types': 10.15.1
       hey-listen: 1.0.8
       tslib: 2.5.3
+    dev: false
 
   /@next/env@13.4.4:
     resolution: {integrity: sha512-q/y7VZj/9YpgzDe64Zi6rY1xPizx80JjlU2BTevlajtaE3w1LqweH1gGgxou2N7hdFosXHjGrI4OUvtFXXhGLg==}
@@ -2168,21 +2174,6 @@ packages:
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
 
-  /framer-motion@7.10.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-k2ccYeZNSpPg//HTaqrU+4pRq9f9ZpaaN7rr0+Rx5zA4wZLbk547wtDzge2db1sB+1mnJ6r59P4xb+aEIi/W+w==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      '@motionone/dom': 10.16.2
-      hey-listen: 1.0.8
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      tslib: 2.4.0
-    optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
-    dev: true
-
   /framer@2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-sVAwMEO3LEfHElJOueRjnlBEYN3X8ztbXwZ22RvBHUftOdDpBkrJfISdAds87O8FEWsn5T7Dp3sLfmrBKXXIaQ==}
     requiresBuild: true
@@ -2199,24 +2190,6 @@ packages:
       hsluv: 0.0.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-
-  /framer@2.3.0(framer-motion@7.10.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-sVAwMEO3LEfHElJOueRjnlBEYN3X8ztbXwZ22RvBHUftOdDpBkrJfISdAds87O8FEWsn5T7Dp3sLfmrBKXXIaQ==}
-    requiresBuild: true
-    peerDependencies:
-      framer-motion: ^7.6.12
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      '@juggle/resize-observer': 3.4.0
-      eventemitter3: 3.1.2
-      fontfaceobserver: 2.3.0
-      framer-motion: 7.10.3(react-dom@18.2.0)(react@18.2.0)
-      hoist-non-react-statics: 3.3.2
-      hsluv: 0.0.3
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: true
 
   /framesync@6.1.2:
     resolution: {integrity: sha512-jBTqhX6KaQVDyus8muwZbBeGGP0XgujBRbQ7gM7BRdS3CadCZIHiawyzYLnafYcvZIh5j8WE7cxZKFn7dXhu9g==}
@@ -4086,6 +4059,7 @@ packages:
 
   /tslib@2.5.3:
     resolution: {integrity: sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==}
+    dev: false
 
   /tslib@2.6.0:
     resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
@@ -4547,18 +4521,42 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#xxxcsdsdfsdfsdfsdfssdfsdf(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)':
-    resolution: {tarball: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#xxxcsdsdfsdfsdfsdfssdfsdf}
-    id: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#xxxcsdsdfsdfsdfsdfssdfsdf'
+  '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz(react-dom@18.2.0)(react@18.2.0)':
+    resolution: {tarball: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz}
+    id: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz'
     name: framer-avatar
     version: 0.0.0
     peerDependencies:
-      framer-motion: '*'
       react: '*'
       react-dom: '*'
     dependencies:
-      framer: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
+      framer: github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/remorses/framer-fixed/tar.gz/be19e45ac2ccaac29caacaf12e202b767618c26b}
+    id: github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b
+    name: framer
+    version: 2.3.0
+    requiresBuild: true
+    peerDependencies:
+      framer-motion: '*'
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@juggle/resize-observer': 3.4.0
+      csstype: 3.1.2
+      eventemitter3: 3.1.2
+      fontfaceobserver: 2.3.0
+      framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
+      hey-listen: 1.0.8
+      hoist-non-react-statics: 3.3.2
+      hsluv: 0.0.3
+      popmotion: 11.0.5
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      style-value-types: 5.1.2
     dev: false

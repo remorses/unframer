@@ -5,7 +5,7 @@
   "types": "dist/main.d.ts",
   "type": "module",
   "dependencies": {
-    "framer": "*"
+    "framer": "https://github.com/remorses/framer-fixed"
   },
   "peerDependencies": {
     "react": "*",

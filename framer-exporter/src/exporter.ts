@@ -37,6 +37,7 @@ export async function bundle({ cwd = '', url }) {
     }
     const dependencies = {
         framer: 'https://github.com/remorses/framer-fixed',
+        'framer-motion': '^10.12.17',
     }
     const u = new URL(url)
 
@@ -137,11 +138,14 @@ export async function bundle({ cwd = '', url }) {
     }
 }
 
+function decapitalize(str: string) {
+    return str.charAt(0).toLowerCase() + str.slice(1)
+}
 export async function extractPropControls(url) {
     try {
         const text = await fetch(url).then((x) => x.text())
         const propControlsCode = await parsePropertyControls(text)
-        console.log('propControlsCode', propControlsCode)
+        // console.log('propControlsCode', propControlsCode)
         const propControls: PropertyControls | undefined = (() => {
             if (!propControlsCode) return
             const vm = new VM({})
@@ -218,9 +222,13 @@ export function propControlsToType(controls?: PropertyControls) {
                         return 'Function'
                 }
             }
-            let name = value.title || key
+            let name = decapitalize(value.title || key || '')
+            if (!name) {
+                return ''
+            }
             return `  ${name}?: ${typescriptType(value)}`
         })
+        .filter(Boolean)
         .join('\n')
 
     const defaultPropsTypes = `  children?: React.ReactNode\n  style?: React.CSSProperties\n  className?: string\n  id?: string\n  width?: any\n  height?: any\n  layoutId?: string\n`

@@ -15,7 +15,7 @@ export default function Home() {
                 <MegaMenu />
             </div>
             <div className='pt-[200px]'></div>
-            <Avatar />
+            <Avatar image={{src: '/next.svg'}} />
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
                     breakpoints={{
