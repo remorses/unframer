@@ -31,6 +31,7 @@ export async function bundle({ cwd = '', url }) {
         entryPoints: {
             main: url,
         },
+
         bundle: true,
         platform: 'browser',
         format: 'esm',
@@ -84,7 +85,27 @@ export async function bundle({ cwd = '', url }) {
         JSON.stringify(packageJson, null, 2),
     )
     fs.writeFileSync(path.resolve(cwd, 'dist/main.d.ts'), types)
-    return { resultFile, packageJson, propControls, types }
+    return {
+        resultFile,
+        packageJson,
+        propControls,
+        types,
+
+        files: [
+            {
+                name: 'package.json',
+                content: JSON.stringify(packageJson, null, 2),
+            },
+            {
+                name: 'dist/main.d.ts',
+                content: types,
+            },
+            {
+                name: 'dist/main.js',
+                content: fs.readFileSync(resultFile, 'utf-8'),
+            },
+        ],
+    }
 }
 
 export function propControlsToType(controls: PropertyControls) {
