@@ -13,7 +13,7 @@ const port = 8080
 import * as tt from 'tar-transform'
 import { bundle } from './exporter'
 
-app.get('/:moduleName', async (req, response, next) => {
+app.get('/m/:moduleName', async (req, response, next) => {
     const { moduleName } = req.params
     if (!moduleName) {
         throw new Error('No module name provided')
