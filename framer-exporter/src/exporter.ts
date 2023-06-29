@@ -8,14 +8,23 @@ import path from 'path'
 
 const logger = {
     log(...args) {
-        logger.log(...args)
+        console.log(...args)
     },
     error(...args) {
         console.error(...args)
     },
 }
 
+function validateUrl(url: string) {
+    try {
+        const u = new URL(url)
+    } catch (e) {
+        throw new Error(`Invalid URL: ${url}`)
+    }
+}
+
 export async function bundle({ cwd = '', url }) {
+    validateUrl(url)
     const deps = new Set<string>()
     cwd ||= path.resolve(process.cwd(), 'example')
     cwd = path.resolve(cwd)
@@ -54,6 +63,7 @@ export async function bundle({ cwd = '', url }) {
     })
     // logger.log('result', result)
     const resultFile = path.resolve(cwd, './dist/main.js')
+    // TODO this is a vulnerability, i need to sandbox this somehow
     const module = await import(resultFile).catch((e) => e)
     if (module instanceof Error) {
         throw new Error(`Generated module is invalid: ${module.message}`)
@@ -75,6 +85,12 @@ export async function bundle({ cwd = '', url }) {
         version: '0.0.0',
         main: 'dist/main.js',
         types: 'dist/main.d.ts',
+        module: 'dist/main.js',
+        // files: ['dist', 'package.json'],
+        exports: {
+            '.': 'dist/main.js',
+            './package.json': './package.json',
+        },
         type: 'module',
         dependencies: [...deps]
             .filter(
@@ -107,11 +123,11 @@ export async function bundle({ cwd = '', url }) {
                 content: JSON.stringify(packageJson, null, 2),
             },
             {
-                name: 'dist/main.d.ts',
+                name: './dist/main.d.ts',
                 content: types,
             },
             {
-                name: 'dist/main.js',
+                name: './dist/main.js',
                 content: fs.readFileSync(resultFile, 'utf-8'),
             },
         ],
@@ -119,6 +135,9 @@ export async function bundle({ cwd = '', url }) {
 }
 
 export function propControlsToType(controls: PropertyControls) {
+    if (!controls) {
+        return ''
+    }
     const types = Object.entries(controls)
         .map(([key, value]) => {
             if (!value) {
@@ -180,7 +199,7 @@ export function propControlsToType(controls: PropertyControls) {
     let t = ''
     t += 'import * as React from "react"\n'
     t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n`
-    t += `export default function(props: Props): React.ReactNode\n`
+    t += `export default function(props: Props): any\n`
 
     return t
 }

@@ -3,6 +3,7 @@ import 'framer-for-next/styles.css'
 
 import { FontsForComponents, WithFramerBreakpoints } from 'framer-for-next/src'
 import Cultrure from 'https://framer.com/m/cultrure-b10L.js#x'
+import Avatar from 'framer-avatar'
 import MegaMenu from 'https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl'
 import LogoTicker from 'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
 
@@ -14,6 +15,7 @@ export default function Home() {
                 <MegaMenu />
             </div>
             <div className='pt-[200px]'></div>
+            <Avatar />
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
                     breakpoints={{
