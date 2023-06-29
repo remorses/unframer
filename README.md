@@ -16,3 +16,8 @@ install framer components as packages
 -   add typescript support
 -   many components in one package?
 -   support for other frameworks (svelte, vue, etc)
+
+
+```
+pnpm i http://localhost:3000/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#xxxc
+```
