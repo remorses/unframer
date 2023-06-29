@@ -1,13 +1,10 @@
-import { transform, Plugin, build } from 'esbuild'
+import { Plugin, build, transform } from 'esbuild'
 
-import { PropertyControls, ControlType, ControlDescription } from 'framer'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { ControlDescription, ControlType, PropertyControls } from 'framer'
 import { fetch } from 'native-fetch'
-
 import fs from 'fs'
-
 import path from 'path'
-import { PluginOption, transformWithEsbuild } from 'vite/dist/node'
 
 const logger = {
     log(...args) {
