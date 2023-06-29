@@ -8,3 +8,11 @@
 </div>
 
 Utility components to use Framer components with Next.js
+
+install framer components as packages
+
+-   works in Nodejs, bun, cloudflare workers, etc
+-   no need to install deps separately
+-   add typescript support
+-   many components in one package?
+-   support for other frameworks (svelte, vue, etc)

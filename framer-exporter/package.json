@@ -1,0 +1,34 @@
+{
+    "name": "framer-exporter",
+    "version": "0.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "module": "esm/index.js",
+    "types": "dist/index.d.ts",
+    "repository": "https://github.com/remorses/",
+    "scripts": {
+        "build": "tsc && tsc -m es6 --outDir esm",
+        "watch": "tsc -w"
+    },
+    "files": [
+        "dist",
+        "src",
+        "esm"
+    ],
+    "keywords": [],
+    "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
+    "license": "",
+    "dependencies": {
+        "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+        "esbuild": "^0.18.10",
+        "native-fetch": "^4.0.2",
+        "undici": "^5.22.1"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.14",
+        "framer": "^2.3.0",
+        "framer-motion": "^10.12.16",
+        "popmotion": "^11.0.5",
+        "react": "^18.2.0"
+    }
+}
