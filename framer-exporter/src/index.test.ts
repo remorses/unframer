@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest'
 import { build } from 'esbuild'
-import { bundle, esbuildPlugin } from '.'
+import { bundle, esbuildPlugin } from './exporter'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
 test(
