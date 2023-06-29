@@ -32,7 +32,10 @@ export async function bundle({ cwd = '', url }) {
     const peerDependencies = {
         react: '*',
         'react-dom': '*',
-        'framer-motion': '*',
+        // 'framer-motion': '*',
+    }
+    const dependencies = {
+        framer: 'https://github.com/remorses/framer-fixed',
     }
     const u = new URL(url)
 
@@ -92,18 +95,21 @@ export async function bundle({ cwd = '', url }) {
             './package.json': './package.json',
         },
         type: 'module',
-        dependencies: [...deps]
-            .filter(
-                (x) =>
-                    !peerDependencies[x] &&
-                    !Object.keys(peerDependencies).some((y) =>
-                        x.startsWith(y + '/'),
-                    ),
-            )
-            .reduce((acc, x) => {
-                acc[x] = '*'
-                return acc
-            }, {}),
+        dependencies: {
+            ...[...deps]
+                .filter(
+                    (x) =>
+                        !peerDependencies[x] &&
+                        !Object.keys(peerDependencies).some((y) =>
+                            x.startsWith(y + '/'),
+                        ),
+                )
+                .reduce((acc, x) => {
+                    acc[x] = '*'
+                    return acc
+                }, {}),
+            ...dependencies,
+        },
         peerDependencies,
     }
     fs.writeFileSync(
@@ -191,7 +197,7 @@ export function propControlsToType(controls: PropertyControls) {
                 }
             }
 
-            return `  ${key}: ${typescriptType(value)}`
+            return `  ${key}?: ${typescriptType(value)}`
         })
         .join('\n')
 

@@ -16,7 +16,15 @@
         "vite": "^4.3.9",
         "vitest": "^0.32.0"
     },
+    "pnpm": {
+        "overrides": {
+            "framer-motion": "10.12.17"
+        }
+    },
     "repository": "https://github.com/remorses/",
     "author": "remorses <beats.by.morse@gmail.com>",
-    "license": ""
+    "license": "",
+    "dependencies": {
+        "framer-motion": "10.12.17"
+    }
 }
