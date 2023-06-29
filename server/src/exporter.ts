@@ -94,7 +94,7 @@ export async function bundle({ cwd = '', url }) {
         },
         type: 'module',
         dependencies: {
-            ...[...deps]
+            ...[...deps.values()]
                 .filter(
                     (x) =>
                         !peerDependencies[x] &&

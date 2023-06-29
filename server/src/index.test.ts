@@ -52,8 +52,3 @@ test(
     },
     1000 * 10,
 )
-
-test.skip('types', async () => {
-    const m = await import('../example-generated/dist/main.js')
-    m.default({ variant: 'Feature' })
-})
