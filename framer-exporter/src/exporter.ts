@@ -68,7 +68,7 @@ export async function bundle({ cwd = '', url }) {
     // logger.log('result', result)
     const resultFile = path.resolve(cwd, './dist/main.js')
     // TODO this is a vulnerability, i need to sandbox this somehow
-
+    const propControls = await extractPropControls(url)
     const types = propControlsToType(propControls)
     // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
     let name = u.pathname
@@ -117,7 +117,7 @@ export async function bundle({ cwd = '', url }) {
     return {
         resultFile,
         packageJson,
-        propControls,
+        // propControls,
         types,
 
         files: [
@@ -138,24 +138,28 @@ export async function bundle({ cwd = '', url }) {
 }
 
 export async function extractPropControls(url) {
-    const text = await fetch(url).then((x) => x.text())
-    const propControlsCode = await parsePropertyControls(text)
-    console.log('propControlsCode', propControlsCode)
-    const propControls: PropertyControls | undefined = (() => {
-        if (!propControlsCode) return
-        const vm = new VM({})
-        let result = undefined
-        vm.setGlobals({
-            ControlType,
-            __return: (x) => {
-                result = x
-            },
-        })
+    try {
+        const text = await fetch(url).then((x) => x.text())
+        const propControlsCode = await parsePropertyControls(text)
+        console.log('propControlsCode', propControlsCode)
+        const propControls: PropertyControls | undefined = (() => {
+            if (!propControlsCode) return
+            const vm = new VM({})
+            let result = undefined
+            vm.setGlobals({
+                ControlType,
+                __return: (x) => {
+                    result = x
+                },
+            })
 
-        vm.run(`__return(${propControlsCode})`)
-        return result
-    })()
-    return propControls
+            vm.run(`__return(${propControlsCode})`)
+            return result
+        })()
+        return propControls
+    } catch (e: any) {
+        console.error(`Cannot get proprty controls for ${url}`, e.stack)
+    }
 }
 
 export function propControlsToType(controls?: PropertyControls) {
@@ -214,8 +218,8 @@ export function propControlsToType(controls?: PropertyControls) {
                         return 'Function'
                 }
             }
-
-            return `  ${key}?: ${typescriptType(value)}`
+            let name = value.title || key
+            return `  ${name}?: ${typescriptType(value)}`
         })
         .join('\n')
 

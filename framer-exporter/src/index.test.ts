@@ -37,10 +37,18 @@ test(
 test(
     'extractPropControls',
     async () => {
-        const res = await extractPropControls(
-            'https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl',
-        )
-        console.log(res)
+        {
+            const res = await extractPropControls(
+                'https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl',
+            )
+            console.log(res)
+        }
+        {
+            const res = await extractPropControls(
+                'https://framer.com/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q',
+            )
+            console.log(res)
+        }
     },
     1000 * 10,
 )
