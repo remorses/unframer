@@ -8,7 +8,7 @@ import path from 'path'
 
 const logger = {
     log(...args) {
-        console.log(...args)
+        logger.log(...args)
     },
     error(...args) {
         console.error(...args)
@@ -42,7 +42,7 @@ export async function bundle({ cwd = '', url }) {
         plugins: [
             esbuildPlugin({
                 onDependency: (x) => {
-                    console.log('dep', x)
+                    logger.log('dep', x)
                     deps.add(x)
                 },
             }),
@@ -52,7 +52,7 @@ export async function bundle({ cwd = '', url }) {
         // outfile: 'dist/example.js',
         outdir: path.resolve(cwd, 'dist'),
     })
-    // console.log('result', result)
+    // logger.log('result', result)
     const resultFile = path.resolve(cwd, './dist/main.js')
     const module = await import(resultFile).catch((e) => e)
     if (module instanceof Error) {
@@ -69,7 +69,7 @@ export async function bundle({ cwd = '', url }) {
         .replace(/@.*/, '')
         .toLowerCase()
     name = 'framer-' + name
-    console.log('name', name)
+    logger.log('name', name)
     const packageJson = {
         name: name,
         version: '0.0.0',
