@@ -259,10 +259,10 @@ export function parsePropertyControls(code: string) {
 
     const end = current
     const propControls = code.substring(start, end)
-    if (propControls.indexOf(',') === -1) {
+    const realStart = propControls.indexOf(',')
+    if (realStart === -1) {
         return ''
     }
-    const realStart = propControls.indexOf(',')
     return propControls.slice(realStart + 1, -1)
 }
 
