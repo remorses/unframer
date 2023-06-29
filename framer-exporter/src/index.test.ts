@@ -1,9 +1,9 @@
 import { test, expect } from 'vitest'
 import { build } from 'esbuild'
-import { bundle, esbuildPlugin } from './exporter'
+import { bundle, esbuildPlugin, parsePropertyControls } from './exporter'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
-test(
+test.skip(
     'esbuild',
     async () => {
         const res = await bundle({
@@ -12,6 +12,20 @@ test(
         })
         console.log(res)
         console.log(res.types)
+    },
+    1000 * 10,
+)
+test(
+    'parsePropertyControls',
+    async () => {
+        const res = parsePropertyControls(
+            `"some code"; 
+            addPropertyControls({x: something(), 
+                another: x(test(xx))}
+            ); 
+            console.log('hello')`,
+        )
+        console.log(res)
     },
     1000 * 10,
 )

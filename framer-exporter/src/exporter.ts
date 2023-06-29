@@ -210,6 +210,38 @@ export function propControlsToType(controls: PropertyControls) {
     return t
 }
 
+export function parsePropertyControls(code: string) {
+    const start = code.indexOf('addPropertyControls(')
+    if (start === -1) {
+        return null
+    }
+    // count all parentheses to find when the addPropertyControls ends
+    let openParentheses = 0
+    let closedParentheses = 0
+    let current = start
+    while (current < code.length) {
+        const newP = code.indexOf('(', current)
+        const newC = code.indexOf(')', current)
+        if (newP === -1 && newC === -1) {
+            break
+        }
+        if (newP !== -1 && newP < newC) {
+            openParentheses++
+            current = newP + 1
+        }
+        if (newC !== -1 && newC < newP) {
+            closedParentheses++
+            current = newC + 1
+        }
+        if (openParentheses === closedParentheses) {
+            break
+        }
+    }
+    const end = current
+    const propControls = code.substring(start, end)
+    return propControls.replace('addPropertyControls', '')
+}
+
 export function esbuildPlugin({ onDependency }) {
     const cache = new Map()
     const plugin: Plugin = {
