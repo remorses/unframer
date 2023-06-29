@@ -18,7 +18,7 @@ export default function Home() {
             <Avatar image={{src: '/next.svg'}} />
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
-                    breakpoints={{
+                    variants={{
                         Desktop: 'desktop',
                         Tablet: 'tablet',
                         Mobile: 'mobile',
