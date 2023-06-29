@@ -2,3 +2,4 @@ packages:
   - framer-for-next
   - nextjs-app
   - framer-exporter
+  - server
