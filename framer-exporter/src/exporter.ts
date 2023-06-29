@@ -237,6 +237,7 @@ export function parsePropertyControls(code: string) {
     let openParentheses = 0
     let closedParentheses = 0
     let current = start
+    // parses using parentheses
     while (current < code.length) {
         const newP = code.indexOf('(', current)
         const newC = code.indexOf(')', current)
