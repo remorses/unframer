@@ -127,7 +127,7 @@ importers:
         version: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       framer-avatar:
         specifier: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzzsdfsdf
-        version: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz(react-dom@18.2.0)(react@18.2.0)'
+        version: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzzsdfsdf(react-dom@18.2.0)(react@18.2.0)'
       framer-for-next:
         specifier: workspace:*
         version: link:../framer-for-next
@@ -4521,9 +4521,9 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz(react-dom@18.2.0)(react@18.2.0)':
-    resolution: {tarball: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz}
-    id: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzz'
+  '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzzsdfsdf(react-dom@18.2.0)(react@18.2.0)':
+    resolution: {tarball: http://localhost:8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzzsdfsdf}
+    id: '@localhost+8080/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q#zzzzsdfsdf'
     name: framer-avatar
     version: 0.0.0
     peerDependencies:

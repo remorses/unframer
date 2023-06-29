@@ -211,7 +211,7 @@ export function propControlsToType(controls?: PropertyControls) {
                     case ControlType.Link:
                         return 'string'
                     case ControlType.ResponsiveImage:
-                        return `{src: string, srcSet: string, alt?: string}`
+                        return `{src: string, srcSet?: string, alt?: string}`
                     case ControlType.RichText:
                         return 'any'
                     case ControlType.FusedNumber:
