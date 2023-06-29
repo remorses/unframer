@@ -15,7 +15,7 @@ export default function Home() {
                 <MegaMenu />
             </div>
             <div className='pt-[200px]'></div>
-            <Avatar image={{src: '/next.svg'}} />
+            <Avatar radius={10} image={{src: '/next.svg'}} />
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
                     variants={{
@@ -29,7 +29,7 @@ export default function Home() {
             </div>
             <div className='max-w-[1200px] w-full'>
                 <WithFramerBreakpoints
-                    breakpoints={{
+                    variants={{
                         Desktop: 'Primary',
                         Tablet: 'Logo Ticker - M',
                         Mobile: 'Logo Ticker - M',

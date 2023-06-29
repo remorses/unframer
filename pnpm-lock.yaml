@@ -125,6 +125,9 @@ importers:
       framer:
         specifier: ^2.3.0
         version: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
+      framer-avatar:
+        specifier: https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q
+        version: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)'
       framer-for-next:
         specifier: workspace:*
         version: link:../framer-for-next
@@ -4586,6 +4589,21 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)':
+    resolution: {tarball: https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q}
+    id: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q'
+    name: framer-avatar
+    version: 0.0.0
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      framer: github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
+      framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0):
