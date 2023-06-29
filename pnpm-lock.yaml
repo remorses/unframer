@@ -179,9 +179,6 @@ importers:
       framer:
         specifier: ^2.3.0
         version: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
-      framer-for-next:
-        specifier: workspace:*
-        version: link:../framer-for-next
       framer-motion:
         specifier: 10.12.17
         version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
