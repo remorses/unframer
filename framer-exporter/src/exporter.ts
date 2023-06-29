@@ -1,4 +1,5 @@
 import { Plugin, build, transform } from 'esbuild'
+import { VM } from 'vm2'
 
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { ControlDescription, ControlType, PropertyControls } from 'framer'
@@ -67,11 +68,7 @@ export async function bundle({ cwd = '', url }) {
     // logger.log('result', result)
     const resultFile = path.resolve(cwd, './dist/main.js')
     // TODO this is a vulnerability, i need to sandbox this somehow
-    const module = await import(resultFile).catch((e) => e)
-    if (module instanceof Error) {
-        throw new Error(`Generated module is invalid: ${module.message}`)
-    }
-    const propControls: PropertyControls = module.default.propertyControls
+
     const types = propControlsToType(propControls)
     // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
     let name = u.pathname
@@ -140,7 +137,28 @@ export async function bundle({ cwd = '', url }) {
     }
 }
 
-export function propControlsToType(controls: PropertyControls) {
+export async function extractPropControls(url) {
+    const text = await fetch(url).then((x) => x.text())
+    const propControlsCode = await parsePropertyControls(text)
+    console.log('propControlsCode', propControlsCode)
+    const propControls: PropertyControls | undefined = (() => {
+        if (!propControlsCode) return
+        const vm = new VM({})
+        let result = undefined
+        vm.setGlobals({
+            ControlType,
+            __return: (x) => {
+                result = x
+            },
+        })
+
+        vm.run(`__return(${propControlsCode})`)
+        return result
+    })()
+    return propControls
+}
+
+export function propControlsToType(controls?: PropertyControls) {
     if (!controls) {
         return ''
     }
@@ -237,9 +255,14 @@ export function parsePropertyControls(code: string) {
             break
         }
     }
+
     const end = current
     const propControls = code.substring(start, end)
-    return propControls.replace('addPropertyControls', '')
+    if (propControls.indexOf(',') === -1) {
+        return ''
+    }
+    const realStart = propControls.indexOf(',')
+    return propControls.slice(realStart + 1, -1)
 }
 
 export function esbuildPlugin({ onDependency }) {
