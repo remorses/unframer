@@ -56,7 +56,10 @@ export async function bundle({ cwd = '', url }) {
     })
     // console.log('result', result)
     const resultFile = path.resolve(cwd, './dist/main.js')
-    const module = await import(resultFile)
+    const module = await import(resultFile).catch((e) => e)
+    if (module instanceof Error) {
+        throw new Error(`Generated module is invalid: ${module.message}`)
+    }
     const propControls: PropertyControls = module.default.propertyControls
     const types = propControlsToType(propControls)
     const packageJson = {
