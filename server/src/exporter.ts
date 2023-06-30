@@ -76,7 +76,8 @@ export async function bundle({ cwd = '', url }) {
         .split('/')
         .slice(-1)[0]
         // https://regex101.com/r/8prywY/1
-        .replace(/-[\w\d]{4}\.js/i, '')
+        // .replace(/-[\w\d]{4}\.js/i, '')
+        .replace(/\.js/i, '')
         .replace(/@.*/, '')
         .toLowerCase()
     name = 'framer-' + name
