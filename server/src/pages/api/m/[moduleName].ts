@@ -56,12 +56,13 @@ export default async function handler(
         ])
             .pipe(tt.pack({ gzip: true }))
             .pipe(response)
-        e.on('error', (e) => {
-            console.error(e)
-            response.status(500).json({ error: e.message })
-        })
+
         await new Promise((resolve, reject) => {
             e.on('finish', resolve)
+            e.on('error', (e) => {
+                console.error(e)
+                reject(e)
+            })
         })
 
         console.log('done')
