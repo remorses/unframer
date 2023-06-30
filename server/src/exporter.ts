@@ -36,7 +36,7 @@ export async function bundle({ cwd = '', url }) {
         // 'framer-motion': '*',
     }
     const dependencies = {
-        framer: 'https://github.com/remorses/framer-fixed',
+        framer: 'remorses/framer-fixed',
         'framer-motion': '^10.12.17',
     }
     const u = new URL(url)
@@ -86,7 +86,7 @@ export async function bundle({ cwd = '', url }) {
         name: name,
         version: '0.0.0',
         main: 'dist/main.js',
-        types: 'dist/main.d.ts',
+        types: types ? 'dist/main.d.ts' : undefined,
         module: 'dist/main.js',
         // files: ['dist', 'package.json'],
         exports: {
@@ -241,7 +241,8 @@ export function propControlsToType(controls?: PropertyControls) {
 
         return t
     } catch (e: any) {
-        console.error('cannot generate types', e.stack)
+        logger.error('cannot generate types', e.stack)
+        return ''
     }
 }
 
