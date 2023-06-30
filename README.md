@@ -19,6 +19,6 @@ install framer components as packages
 
 
 ```
-pnpm i http://localhost:3000/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q
-pnpm i https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q
+pnpm i http://localhost:3000/api/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+pnpm i https://installable-framer.vercel.app/api/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
 ```
