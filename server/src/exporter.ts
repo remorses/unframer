@@ -129,11 +129,11 @@ export async function bundle({ cwd = '', url }) {
                 content: JSON.stringify(packageJson, null, 2),
             },
             {
-                name: './dist/main.d.ts',
+                name: 'dist/main.d.ts',
                 content: types,
             },
             {
-                name: './dist/main.js',
+                name: 'dist/main.js',
                 content: fs.readFileSync(resultFile, 'utf-8'),
             },
         ],

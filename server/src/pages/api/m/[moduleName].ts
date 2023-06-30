@@ -12,9 +12,15 @@ export default async function handler(
     req: NextApiRequest,
     response: NextApiResponse,
 ) {
-    const { moduleName } = req.query
+    let { moduleName } = req.query
     if (!moduleName) {
         throw new Error('No module name provided')
+    }
+    if (typeof moduleName !== 'string') {
+        throw new Error('Module name must be a string')
+    }
+    if (moduleName.endsWith('.tgz')) {
+        moduleName = moduleName.slice(0, -4)
     }
     try {
         // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
