@@ -95,7 +95,7 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
       framer:
-        specifier: https://github.com/remorses/framer-fixed
+        specifier: remorses/framer-fixed
         version: github.com/remorses/framer-fixed/be19e45ac2ccaac29caacaf12e202b767618c26b(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: '*'

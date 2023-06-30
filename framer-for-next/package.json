@@ -25,7 +25,7 @@
         "@types/react": "18.2.9"
     },
     "dependencies": {
-        "framer": "https://github.com/remorses/framer-fixed",
+        "framer": "remorses/framer-fixed",
         "classnames": "^2.3.2"
     }
 }
