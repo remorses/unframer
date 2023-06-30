@@ -125,12 +125,12 @@ export async function bundle({ cwd = '', url }) {
 
         files: [
             {
-                name: 'package.json',
-                content: JSON.stringify(packageJson, null, 2),
-            },
-            {
                 name: 'dist/main.d.ts',
                 content: types,
+            },
+            {
+                name: './package.json',
+                content: JSON.stringify(packageJson, null, 2),
             },
             {
                 name: 'dist/main.js',
