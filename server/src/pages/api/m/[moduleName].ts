@@ -5,13 +5,19 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import * as stream from 'stream'
 import { promisify } from 'util'
 import { bundle } from '@/exporter'
-const pipeline = promisify(stream.pipeline)
+import { cookies } from 'next/dist/client/components/headers'
+// const pipeline = promisify(stream.pipeline)
 
 // nextjs api handler
 export default async function handler(
     req: NextApiRequest,
     response: NextApiResponse,
 ) {
+    console.log('req.method', req.method)
+    if (req.method !== 'GET') {
+        response.status(405).json({ error: 'Method not allowed' })
+        return
+    }
     let { moduleName } = req.query
     if (!moduleName) {
         throw new Error('No module name provided')
@@ -22,6 +28,8 @@ export default async function handler(
     if (moduleName.endsWith('.tgz')) {
         moduleName = moduleName.slice(0, -4)
     }
+    // moduleName = 'Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q'
+
     try {
         // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
         let url = `https://framer.com/m/${moduleName}`
@@ -34,22 +42,30 @@ export default async function handler(
                 .filter(Boolean)
                 .join('-')}.tgz"`,
         )
+        response.status(200)
         response.setHeader('Content-Type', 'application/gzip')
         // cache in CDN for 10 seconds
-        response.setHeader('Cache-Control', 'public, max-age=10')
-        // response.setHeader('Content-Type', 'application/gzip')
-        await pipeline([
-            // read all files in tempFolder and zip them
-            stream.Readable.from([
-                // { headers: { name: "README.md" }, content: "# tar-transform" },
-                ...files.map((x) => ({
-                    headers: { name: x.name },
-                    content: x.content,
-                })),
-            ]),
-            tt.pack({ gzip: true }),
-            response,
+        // response.setHeader('Cache-Control', 'public, max-age=10')
+        console.log(files.map((x) => x.name))
+        const e = stream.Readable.from([
+            // { headers: { name: "README.md" }, content: "# tar-transform" },
+            ...files.map((x) => ({
+                headers: { name: x.name },
+                content: x.content,
+            })),
         ])
+            .pipe(tt.pack({ gzip: true }))
+            .pipe(response)
+        e.on('error', (e) => {
+            console.error(e)
+            response.status(500).json({ error: e.message })
+        })
+        await new Promise((resolve, reject) => {
+            e.on('finish', resolve)
+        })
+
+        console.log('done')
+        response.end()
     } catch (e: any) {
         console.error(e)
         response.status(500).json({ error: e.message })
