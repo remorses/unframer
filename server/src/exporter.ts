@@ -171,74 +171,78 @@ export function propControlsToType(controls?: PropertyControls) {
     if (!controls) {
         return ''
     }
-    const types = Object.entries(controls)
-        .map(([key, value]) => {
-            if (!value) {
-                return
-            }
-
-            const typescriptType = (
-                value: ControlDescription<Partial<any>>,
-            ) => {
-                switch (value.type) {
-                    case ControlType.Color:
-                        return 'string'
-                    case ControlType.Boolean:
-                        return 'boolean'
-                    case ControlType.Number:
-                        return 'number'
-                    case ControlType.String:
-                        return 'string'
-                    case ControlType.Enum: {
-                        const options = value.optionTitles || value.options
-                        return options.map((x) => `'${x}'`).join(' | ')
-                    }
-                    case ControlType.File:
-                        return 'string'
-                    case ControlType.Image:
-                        return 'string'
-                    case ControlType.ComponentInstance:
-                        return 'React.ReactNode'
-                    case ControlType.Array:
-                        return `${typescriptType(value.control)}[]`
-                    case ControlType.Object:
-                        return `{${Object.entries(value.controls)
-                            .map(([k, v]) => {
-                                return `${k}: ${typescriptType(v)}`
-                            })
-                            .join(', ')}`
-                    case ControlType.Date:
-                        return 'string | Date'
-                    case ControlType.Link:
-                        return 'string'
-                    case ControlType.ResponsiveImage:
-                        return `{src: string, srcSet?: string, alt?: string}`
-                    case ControlType.RichText:
-                        return 'any'
-                    case ControlType.FusedNumber:
-                        return 'number'
-                    case ControlType.Transition:
-                        return 'any'
-                    case ControlType.EventHandler:
-                        return 'Function'
+    try {
+        const types = Object.entries(controls)
+            .map(([key, value]) => {
+                if (!value) {
+                    return
                 }
-            }
-            let name = decapitalize(value.title || key || '')
-            if (!name) {
-                return ''
-            }
-            return `  ${name}?: ${typescriptType(value)}`
-        })
-        .filter(Boolean)
-        .join('\n')
 
-    const defaultPropsTypes = `  children?: React.ReactNode\n  style?: React.CSSProperties\n  className?: string\n  id?: string\n  width?: any\n  height?: any\n  layoutId?: string\n`
-    let t = ''
-    t += 'import * as React from "react"\n'
-    t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n`
-    t += `export default function(props: Props): any\n`
+                const typescriptType = (
+                    value: ControlDescription<Partial<any>>,
+                ) => {
+                    switch (value.type) {
+                        case ControlType.Color:
+                            return 'string'
+                        case ControlType.Boolean:
+                            return 'boolean'
+                        case ControlType.Number:
+                            return 'number'
+                        case ControlType.String:
+                            return 'string'
+                        case ControlType.Enum: {
+                            const options = value.optionTitles || value.options
+                            return options.map((x) => `'${x}'`).join(' | ')
+                        }
+                        case ControlType.File:
+                            return 'string'
+                        case ControlType.Image:
+                            return 'string'
+                        case ControlType.ComponentInstance:
+                            return 'React.ReactNode'
+                        case ControlType.Array:
+                            return `${typescriptType(value.control)}[]`
+                        case ControlType.Object:
+                            return `{${Object.entries(value.controls)
+                                .map(([k, v]) => {
+                                    return `${k}: ${typescriptType(v)}`
+                                })
+                                .join(', ')}`
+                        case ControlType.Date:
+                            return 'string | Date'
+                        case ControlType.Link:
+                            return 'string'
+                        case ControlType.ResponsiveImage:
+                            return `{src: string, srcSet?: string, alt?: string}`
+                        case ControlType.RichText:
+                            return 'any'
+                        case ControlType.FusedNumber:
+                            return 'number'
+                        case ControlType.Transition:
+                            return 'any'
+                        case ControlType.EventHandler:
+                            return 'Function'
+                    }
+                }
+                let name = decapitalize(value.title || key || '')
+                if (!name) {
+                    return ''
+                }
+                return `  ${name}?: ${typescriptType(value)}`
+            })
+            .filter(Boolean)
+            .join('\n')
 
-    return t
+        const defaultPropsTypes = `  children?: React.ReactNode\n  style?: React.CSSProperties\n  className?: string\n  id?: string\n  width?: any\n  height?: any\n  layoutId?: string\n`
+        let t = ''
+        t += 'import * as React from "react"\n'
+        t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n`
+        t += `export default function(props: Props): any\n`
+
+        return t
+    } catch (e: any) {
+        console.error('cannot generate types', e.stack)
+    }
 }
 
 export function parsePropertyControls(code: string) {
