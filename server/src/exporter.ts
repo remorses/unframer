@@ -80,7 +80,7 @@ export async function bundle({ cwd = '', url }) {
         .replace(/\.js/i, '')
         .replace(/@.*/, '')
         .toLowerCase()
-    name = 'framer-' + name
+    // name = 'framer-' + name
     logger.log('name', name)
     const packageJson = {
         name: name,
