@@ -36,7 +36,7 @@ export async function bundle({ cwd = '', url }) {
         // 'framer-motion': '*',
     }
     const dependencies = {
-        framer: 'remorses/framer-fixed',
+        framer: 'github:remorses/framer-fixed',
         'framer-motion': '^10.12.17',
     }
     const u = new URL(url)

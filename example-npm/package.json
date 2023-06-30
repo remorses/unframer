@@ -1,0 +1,15 @@
+{
+    "name": "example-npm",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
+    "dependencies": {
+        "component": "https://installable-framer.vercel.app/api/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl"
+    },
+    "license": "ISC"
+}
