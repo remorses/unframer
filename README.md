@@ -24,7 +24,7 @@ install framer components as packages
 ## Example
 
 ```
-pnpm i https://installable-framer.vercel.app/api/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+npm i https://installable-framer.vercel.app/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
 ```
 
 ```tsx
