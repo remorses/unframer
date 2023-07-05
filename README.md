@@ -18,8 +18,9 @@ install framer components as packages
 ## Usage
 
 1. Copy the framer component url
-2. Replace `framer.com` with `installable-framer.vercel.app/api`
-3. `npm install` the url
+![url import](./assets/framer-url-import.png)
+2. Replace `framer.com` with `installable-framer.vercel.app`
+3. `npm install {url}`
 
 ## Example
 
