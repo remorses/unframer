@@ -9,11 +9,13 @@
 
 install framer components as packages
 
--   works in Nodejs, bun, cloudflare workers, etc
--   no need to install deps separately
--   add typescript support
--   many components in one package?
--   support for other frameworks (svelte, vue, etc)
+-   Works with any React framework (Next.js, Gatsby, Vite, etc)
+-   Includes all your components dependencies
+-   Has Typescript support, inferred from your component variables (like `variant`)
+
+Planned features:
+
+-   Support for other frameworks (svelte, vue, etc)
 
 ## Usage
 
@@ -26,7 +28,7 @@ install framer components as packages
 ## Example
 
 ```
-npm i https://installable-framer.vercel.app/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+    npm i https://installable-framer.vercel.app/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
 ```
 
 ```tsx
