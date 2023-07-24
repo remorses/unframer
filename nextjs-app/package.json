@@ -18,7 +18,7 @@
         "framer-avatar": "https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q",
         "framer-for-next": "workspace:*",
         "framer-motion": "10.12.17",
-        "next": "13.4.7",
+        "next": "13.4.12",
         "popmotion": "^11.0.5",
         "postcss": "8.4.24",
         "react": "18.2.0",

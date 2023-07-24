@@ -19,7 +19,7 @@
         "framer": "^2.3.0",
         "framer-motion": "10.12.17",
         "native-fetch": "^4.0.2",
-        "next": "13.4.7",
+        "next": "13.4.12",
         "popmotion": "^11.0.5",
         "postcss": "8.4.24",
         "react": "18.2.0",
