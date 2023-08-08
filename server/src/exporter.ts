@@ -29,7 +29,7 @@ export async function bundle({ cwd = '', url }) {
     const deps = new Set<string>()
     cwd ||= path.resolve(process.cwd(), 'example')
     cwd = path.resolve(cwd)
-    fs.mkdirSync(path.resolve(cwd, './dist'), { recursive: true })
+    fs.mkdirSync(path.resolve(cwd), { recursive: true })
     const peerDependencies = {
         react: '*',
         'react-dom': '*',
@@ -65,10 +65,10 @@ export async function bundle({ cwd = '', url }) {
         ],
         write: true,
         // outfile: 'dist/example.js',
-        outdir: path.resolve(cwd, 'dist'),
+        outdir: path.resolve(cwd),
     })
     // logger.log('result', result)
-    const resultFile = path.resolve(cwd, './dist/main.js')
+    const resultFile = path.resolve(cwd, './main.js')
     // TODO this is a vulnerability, i need to sandbox this somehow
     const propControls = await extractPropControls(url)
     const types = propControlsToType(propControls)
@@ -86,12 +86,12 @@ export async function bundle({ cwd = '', url }) {
     const packageJson = {
         name: name,
         version: '0.0.0',
-        main: 'dist/main.js',
-        types: types ? 'dist/main.d.ts' : undefined,
-        module: 'dist/main.js',
+        main: 'main.js',
+        types: types ? 'main.d.ts' : undefined,
+        module: 'main.js',
         // files: ['dist', 'package.json'],
         exports: {
-            '.': 'dist/main.js',
+            '.': 'main.js',
             './package.json': './package.json',
         },
         type: 'module',
@@ -116,7 +116,7 @@ export async function bundle({ cwd = '', url }) {
         path.resolve(cwd, 'package.json'),
         JSON.stringify(packageJson, null, 2),
     )
-    fs.writeFileSync(path.resolve(cwd, 'dist/main.d.ts'), types)
+    fs.writeFileSync(path.resolve(cwd, 'main.d.ts'), types)
     return {
         resultFile,
         packageJson,
@@ -125,7 +125,7 @@ export async function bundle({ cwd = '', url }) {
 
         files: [
             {
-                name: 'dist/main.d.ts',
+                name: './main.d.ts',
                 content: types,
             },
             {
@@ -133,7 +133,7 @@ export async function bundle({ cwd = '', url }) {
                 content: JSON.stringify(packageJson, null, 2),
             },
             {
-                name: 'dist/main.js',
+                name: './main.js',
                 content: fs.readFileSync(resultFile, 'utf-8'),
             },
         ],

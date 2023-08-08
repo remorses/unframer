@@ -9,7 +9,8 @@
     "keywords": [],
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "dependencies": {
-        "avatar-jptx": "http://localhost:3000/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q.tgz?xxsdfdszzzsdfasfdasdfsdf"
+        "avatar-jptx": "http://localhost:2323/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q.tgz?xxsdfdszzzsdfasfdasdfsdf",
+        "pricing-table-gmzp": "http://localhost:2323/m/Pricing-Table-gmzP.js@gwFmseXxhUO3VHfFNdaT#aaaaax"
     },
     "license": "ISC"
 }

@@ -47,7 +47,7 @@ importers:
         version: 2.3.2
       framer:
         specifier: github:remorses/framer-fixed
-        version: github.com/remorses/framer-fixed/3b18ef83d5c16b80299e9e6ffb01b496c235f48a(framer-motion@10.13.0)(react-dom@18.2.0)(react@18.2.0)
+        version: github.com/remorses/framer-fixed/3b18ef83d5c16b80299e9e6ffb01b496c235f48a(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: '*'
         version: 18.2.0
@@ -410,6 +410,7 @@ packages:
 
   /@emotion/memoize@0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -1966,24 +1967,6 @@ packages:
 
   /framer-motion@10.12.17(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-IR+aAYntsyu6ofyxqQV4QYotmOqzcuKxhqNpfc3DXJjNWOPpOeSyH0A+In3IEBu49Yx/+PNht+YMeZSdCNaYbw==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      tslib: 2.6.0
-    optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
-    dev: false
-
-  /framer-motion@10.13.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-xKhw9VCizmwEHbopOfluaoVunGHSZyMztGbTvsgOYqCjaKu6qtlwWY1J+6GhL41NY1P157JgEikjDm67XCFnvQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -4225,30 +4208,6 @@ packages:
       eventemitter3: 3.1.2
       fontfaceobserver: 2.3.0
       framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
-      hey-listen: 1.0.8
-      hoist-non-react-statics: 3.3.2
-      hsluv: 0.0.3
-      popmotion: 11.0.5
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      style-value-types: 5.1.2
-    dev: false
-
-  github.com/remorses/framer-fixed/3b18ef83d5c16b80299e9e6ffb01b496c235f48a(framer-motion@10.13.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/remorses/framer-fixed/tar.gz/3b18ef83d5c16b80299e9e6ffb01b496c235f48a}
-    id: github.com/remorses/framer-fixed/3b18ef83d5c16b80299e9e6ffb01b496c235f48a
-    name: framer
-    version: 2.3.0
-    peerDependencies:
-      framer-motion: '*'
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      '@juggle/resize-observer': 3.4.0
-      csstype: 3.1.2
-      eventemitter3: 3.1.2
-      fontfaceobserver: 2.3.0
-      framer-motion: 10.13.0(react-dom@18.2.0)(react@18.2.0)
       hey-listen: 1.0.8
       hoist-non-react-statics: 3.3.2
       hsluv: 0.0.3
