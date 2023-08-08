@@ -86,12 +86,12 @@ export async function bundle({ cwd = '', url }) {
     const packageJson = {
         name: name,
         version: '0.0.0',
-        main: 'main.js',
+        main: './main.js',
         types: types ? 'main.d.ts' : undefined,
-        module: 'main.js',
+        module: './main.js',
         // files: ['dist', 'package.json'],
         exports: {
-            '.': 'main.js',
+            '.': './main.js',
             './package.json': './package.json',
         },
         type: 'module',
