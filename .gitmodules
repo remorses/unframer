@@ -1,0 +1,3 @@
+[submodule "framer-fixed"]
+	path = framer-fixed
+	url = https://github.com/remorses/framer-fixed
