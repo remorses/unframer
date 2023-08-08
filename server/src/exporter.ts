@@ -35,7 +35,7 @@ export async function bundle({ cwd = '', url }) {
         'react-dom': '*',
         // 'framer-motion': '*',
     }
-    const sha = `3b18ef83d5c16b80299e9e6ffb01b496c235f48a`.slice(0, 7)
+    const sha = `c7d58771405ed9a6925859653b495bbde56f83d8`.slice(0, 7)
     const dependencies = {
         framer: `github:remorses/framer-fixed#${sha}`,
         'framer-motion': '^10.12.17',
