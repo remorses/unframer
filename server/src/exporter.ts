@@ -286,7 +286,7 @@ export function parsePropertyControls(code: string) {
 }
 
 export function esbuildPlugin({ onDependency }) {
-    const cache = new Map()
+    const codeCache = new Map()
     const plugin: Plugin = {
         name: 'esbuild-plugin',
         setup(build) {
@@ -313,8 +313,8 @@ export function esbuildPlugin({ onDependency }) {
                 const url = args.path
                 const u = new URL(url)
                 const resolved = await resolveRedirect(u)
-                if (cache.has(url)) {
-                    const code = await cache.get(url)
+                if (codeCache.has(url)) {
+                    const code = await codeCache.get(url)
                     return {
                         contents: code,
                         loader: 'js',
@@ -334,7 +334,7 @@ export function esbuildPlugin({ onDependency }) {
                     return transformed.code
                 })
 
-                cache.set(url, promise)
+                codeCache.set(url, promise)
                 const code = await promise
                 return {
                     contents: code,
@@ -346,15 +346,15 @@ export function esbuildPlugin({ onDependency }) {
     return plugin
 }
 
-let cache = new Map<string, string>()
+let redirectCache = new Map<string, Promise<string>>()
 
 export async function resolveRedirect(url) {
-    if (cache.has(url)) {
-        return cache.get(url)
+    if (redirectCache.has(url)) {
+        return await redirectCache.get(url)
     }
-    const res = await recursiveResolveRedirect(url)
-    cache.set(url, res)
-    return url
+    const p = recursiveResolveRedirect(url)
+    redirectCache.set(url, p)
+    return await p
 }
 
 export async function recursiveResolveRedirect(url) {
