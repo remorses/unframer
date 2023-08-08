@@ -44,6 +44,10 @@ export default async function handler(
         )
         response.status(200)
         response.setHeader('Content-Type', 'application/gzip')
+        response.setHeader(
+            'cache-control',
+            'no-store, no-cache, must-revalidate',
+        )
         // cache in CDN for 10 seconds
         // response.setHeader('Cache-Control', 'public, max-age=10')
         console.log(files.map((x) => x.name))
