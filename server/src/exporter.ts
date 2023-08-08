@@ -311,6 +311,8 @@ export function esbuildPlugin({ onDependency }) {
             })
             build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
                 const url = args.path
+                const u = new URL(url)
+                const resolved = await resolveRedirect(u)
                 if (cache.has(url)) {
                     const code = await cache.get(url)
                     return {
@@ -318,18 +320,15 @@ export function esbuildPlugin({ onDependency }) {
                         loader: 'js',
                     }
                 }
-                const u = new URL(url)
                 const promise = Promise.resolve().then(async () => {
-                    const resolved = await resolveRedirect(u)
                     const res = await fetch(resolved)
                     const text = await res.text()
 
                     const transformed = await transform(text, {
                         define: {
-                            'import.meta.url': JSON.stringify(url),
+                            'import.meta.url': JSON.stringify(resolved),
                         },
                         minify: false,
-
                         platform: 'browser',
                     })
                     return transformed.code
@@ -347,13 +346,25 @@ export function esbuildPlugin({ onDependency }) {
     return plugin
 }
 
+let cache = new Map<string, string>()
+
 export async function resolveRedirect(url) {
+    if (cache.has(url)) {
+        return cache.get(url)
+    }
+    const res = await recursiveResolveRedirect(url)
+    cache.set(url, res)
+    return url
+}
+
+export async function recursiveResolveRedirect(url) {
     let res = await fetch(url, { redirect: 'manual', method: 'HEAD' })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
         logger.log('redirect', loc)
-        return resolveRedirect(res.headers.get('location'))
+        return recursiveResolveRedirect(res.headers.get('location'))
     }
+
     return url
 }
 
