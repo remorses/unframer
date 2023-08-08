@@ -287,6 +287,7 @@ export function parsePropertyControls(code: string) {
 
 export function esbuildPlugin({ onDependency }) {
     const codeCache = new Map()
+    let redirectCache = new Map<string, Promise<string>>()
     const plugin: Plugin = {
         name: 'esbuild-plugin',
         setup(build) {
@@ -312,7 +313,7 @@ export function esbuildPlugin({ onDependency }) {
             build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
                 const url = args.path
                 const u = new URL(url)
-                const resolved = await resolveRedirect(u)
+                const resolved = await resolveRedirect(u, redirectCache)
                 if (codeCache.has(url)) {
                     const code = await codeCache.get(url)
                     return {
@@ -346,9 +347,7 @@ export function esbuildPlugin({ onDependency }) {
     return plugin
 }
 
-let redirectCache = new Map<string, Promise<string>>()
-
-export async function resolveRedirect(url) {
+export async function resolveRedirect(url, redirectCache) {
     if (redirectCache.has(url)) {
         return await redirectCache.get(url)
     }
