@@ -1,0 +1,3517 @@
+{
+    "data": [
+       {
+          "id": "iZBAaPfADlyHVFx7zymV",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/aCSrRfbmy",
+          "saveId": "8Q5QBMgzyFpEz8r8aIyD",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "aCSrRfbmy.js",
+             "nodeTree": "tree.json",
+             "source": "aCSrRfbmy.tsx",
+             "sourceMap": "aCSrRfbmy.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 958,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "aCSrRfbmy",
+          "title": "Pricing Table Copy",
+          "baseURL": "https://framerusercontent.com/modules/iZBAaPfADlyHVFx7zymV/8Q5QBMgzyFpEz8r8aIyD/",
+          "importURL": "https://framer.com/m/Pricing-Table-Copy-RHgz.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "../css/jRlNrjZfR",
+                "../css/Q4kC2bTJ2",
+                "../css/eshFTHo2K",
+                "./j1CXYH1vu",
+                "./imqCP4fEz",
+                "../css/cRmkgGutV",
+                "./cwMgH3g_H"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "480YEpZDyyFWAbtgCxyt",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/BJHoxGP9V",
+          "saveId": "VONKPTB8D9oJJ81Uhsw9",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "BJHoxGP9V.js",
+             "nodeTree": "tree.json",
+             "source": "BJHoxGP9V.tsx",
+             "sourceMap": "BJHoxGP9V.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 376,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "BJHoxGP9V",
+          "title": "free for open source",
+          "baseURL": "https://framerusercontent.com/modules/480YEpZDyyFWAbtgCxyt/VONKPTB8D9oJJ81Uhsw9/",
+          "importURL": "https://framer.com/m/free-for-open-source-i17O.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "./j1CXYH1vu",
+                "./N3BIRIlrO",
+                "../css/ZSzgV3xdi"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "8yACAyDcJLV5GBVy2w3C",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/BpekYQ77g",
+          "saveId": "kBDju4CXCsTg5gJGdiJB",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "BpekYQ77g.js",
+             "nodeTree": "tree.json",
+             "source": "BpekYQ77g.tsx",
+             "sourceMap": "BpekYQ77g.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 150,
+             "intrinsicWidth": 368,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "BpekYQ77g",
+          "title": "Feature Opened",
+          "baseURL": "https://framerusercontent.com/modules/8yACAyDcJLV5GBVy2w3C/kBDju4CXCsTg5gJGdiJB/",
+          "importURL": "https://framer.com/m/Feature-Opened-ep5M.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react/jsx-runtime",
+                "react",
+                "framer-motion"
+             ],
+             "relative": [
+                "../css/doG0Bk1lQ"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "naa0ugoTqrGMOULkYjia",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/cwMgH3g_H",
+          "saveId": "YtKw3bHve5Yx4hWLdfNd",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "cwMgH3g_H.js",
+             "nodeTree": "tree.json",
+             "source": "cwMgH3g_H.tsx",
+             "sourceMap": "cwMgH3g_H.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 50,
+             "intrinsicWidth": 292,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "cwMgH3g_H",
+          "title": "Pricing Feature Item",
+          "baseURL": "https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/YtKw3bHve5Yx4hWLdfNd/",
+          "importURL": "https://framer.com/m/Pricing-Feature-Item-1Sve.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../css/eshFTHo2K"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "jPAlORl0Rm24zBoIn3jX",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/DqgL3f_lG",
+          "saveId": "px6UnEIj7XPVrUHbyHvs",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "DqgL3f_lG.js",
+             "nodeTree": "tree.json",
+             "source": "DqgL3f_lG.tsx",
+             "sourceMap": "DqgL3f_lG.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 48,
+             "intrinsicWidth": 400,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "DqgL3f_lG",
+          "title": "Footer Feature Slider",
+          "baseURL": "https://framerusercontent.com/modules/jPAlORl0Rm24zBoIn3jX/px6UnEIj7XPVrUHbyHvs/",
+          "importURL": "https://framer.com/m/Footer-Feature-Slider-e1oa.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [
+                "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js"
+             ],
+             "bare": [
+                "react",
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "./pDc3zf6xX"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "aVnZLQFQgLi8ufibJswn",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/DwwO6is_Q",
+          "saveId": "kY8aytpuQYgnpjmiUBzB",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "DwwO6is_Q.js",
+             "nodeTree": "tree.json",
+             "source": "DwwO6is_Q.tsx",
+             "sourceMap": "DwwO6is_Q.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 862,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "DwwO6is_Q",
+          "title": "Footer Content",
+          "baseURL": "https://framerusercontent.com/modules/aVnZLQFQgLi8ufibJswn/kY8aytpuQYgnpjmiUBzB/",
+          "importURL": "https://framer.com/m/Footer-Content-Am3D.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "../css/ZSzgV3xdi",
+                "./HboWyb5qi",
+                "./DqgL3f_lG",
+                "./N3BIRIlrO",
+                "./j1CXYH1vu",
+                "../css/eshFTHo2K"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "nlM8JOvDr928PGHfGRto",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/DxJuV9CJ2",
+          "saveId": "7uQW8VJS3EmxRGpgqgWZ",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "DxJuV9CJ2.js",
+             "nodeTree": "tree.json",
+             "source": "DxJuV9CJ2.tsx",
+             "sourceMap": "DxJuV9CJ2.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 95,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "DxJuV9CJ2",
+          "title": "Top Navigation",
+          "baseURL": "https://framerusercontent.com/modules/nlM8JOvDr928PGHfGRto/7uQW8VJS3EmxRGpgqgWZ/",
+          "importURL": "https://framer.com/m/Top-Navigation-p6r5.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react",
+                "react/jsx-runtime",
+                "framer-motion"
+             ],
+             "relative": [
+                "./x2GOdaUSJ",
+                "./j1CXYH1vu"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "voblns21QvjoNLKdf1Tl",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/eaYqW6xw3",
+          "saveId": "5pDWpkwSw2svdhPncQOG",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "eaYqW6xw3.js",
+             "nodeTree": "tree.json",
+             "source": "eaYqW6xw3.tsx",
+             "sourceMap": "eaYqW6xw3.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 806,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "eaYqW6xw3",
+          "title": "Pricing Table",
+          "baseURL": "https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/5pDWpkwSw2svdhPncQOG/",
+          "importURL": "https://framer.com/m/Pricing-Table-9kxI.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../css/Q4kC2bTJ2",
+                "../css/jRlNrjZfR",
+                "../css/eshFTHo2K",
+                "./cwMgH3g_H",
+                "./j1CXYH1vu",
+                "./imqCP4fEz",
+                "../css/cRmkgGutV"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "7cNlsbWgKceJ4gyMViEU",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/Eh2zxv_2R",
+          "saveId": "GdbiIhAlRMacQMNqySS6",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "Eh2zxv_2R.js",
+             "nodeTree": "tree.json",
+             "source": "Eh2zxv_2R.tsx",
+             "sourceMap": "Eh2zxv_2R.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 508,
+             "intrinsicWidth": 428,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "Eh2zxv_2R",
+          "title": "Right",
+          "baseURL": "https://framerusercontent.com/modules/7cNlsbWgKceJ4gyMViEU/GdbiIhAlRMacQMNqySS6/",
+          "importURL": "https://framer.com/m/Right-4u7B.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "react",
+                "framer-motion"
+             ],
+             "relative": [
+                "../codeFile/Follow_mouse.tsx",
+                "../css/aLfVqe1FC",
+                "../css/oO0T_QVXO"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "ukOrbETJl3kVyDiTGUjl",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/FUoF7gtwJ",
+          "saveId": "uu29JwNaMc5lasZL0Gcg",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "FUoF7gtwJ.js",
+             "nodeTree": "tree.json",
+             "source": "FUoF7gtwJ.tsx",
+             "sourceMap": "FUoF7gtwJ.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 181,
+             "intrinsicWidth": 281,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "FUoF7gtwJ",
+          "title": "cursor 1",
+          "baseURL": "https://framerusercontent.com/modules/ukOrbETJl3kVyDiTGUjl/uu29JwNaMc5lasZL0Gcg/",
+          "importURL": "https://framer.com/m/cursor-1-hmix.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [
+                "https://framerusercontent.com/modules/IkBwZdevUKkDEL8WwMpK/4ke8ljccyxGKk9eKGzyc/YRaQGc7QU.js"
+             ],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "6uZVHHHK0BIyMMwRhC5A",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/HboWyb5qi",
+          "saveId": "hSumCq47tiEvy71P5G9l",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "HboWyb5qi.js",
+             "nodeTree": "tree.json",
+             "source": "HboWyb5qi.tsx",
+             "sourceMap": "HboWyb5qi.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 26,
+             "intrinsicWidth": 106,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "HboWyb5qi",
+          "title": "Text Link",
+          "baseURL": "https://framerusercontent.com/modules/6uZVHHHK0BIyMMwRhC5A/hSumCq47tiEvy71P5G9l/",
+          "importURL": "https://framer.com/m/Text-Link-TuHt.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../css/eshFTHo2K"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "fxMtDUxtbGhI6E06HMtO",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/imqCP4fEz",
+          "saveId": "zLq4n78yurInKr8Z2EZL",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "imqCP4fEz.js",
+             "nodeTree": "tree.json",
+             "source": "imqCP4fEz.tsx",
+             "sourceMap": "imqCP4fEz.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 254,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "imqCP4fEz",
+          "title": "Section Title",
+          "baseURL": "https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/zLq4n78yurInKr8Z2EZL/",
+          "importURL": "https://framer.com/m/Section-Title-IYuN.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "react",
+                "framer",
+                "framer-motion"
+             ],
+             "relative": [
+                "../css/aLfVqe1FC",
+                "../css/cRmkgGutV",
+                "./N3BIRIlrO"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "1gobdaiETEZYApPHkFW8",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/j1CXYH1vu",
+          "saveId": "TS5bVHXl8xyGuRQdNPNV",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "j1CXYH1vu.js",
+             "nodeTree": "tree.json",
+             "source": "j1CXYH1vu.tsx",
+             "sourceMap": "j1CXYH1vu.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 58,
+             "intrinsicWidth": 209,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "j1CXYH1vu",
+          "title": "Button",
+          "baseURL": "https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/TS5bVHXl8xyGuRQdNPNV/",
+          "importURL": "https://framer.com/m/Button-3lCV.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react",
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "../css/Q4kC2bTJ2",
+                "../css/tr0U97vbW"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "yAEClyg5l3sNY3ZaoggP",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/jJINZDwMF",
+          "saveId": "LUGoceXrtdjGuXigUb2f",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "jJINZDwMF.js",
+             "nodeTree": "tree.json",
+             "source": "jJINZDwMF.tsx",
+             "sourceMap": "jJINZDwMF.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 124,
+             "intrinsicWidth": 428,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "jJINZDwMF",
+          "title": "Feature Opened",
+          "baseURL": "https://framerusercontent.com/modules/yAEClyg5l3sNY3ZaoggP/LUGoceXrtdjGuXigUb2f/",
+          "importURL": "https://framer.com/m/Feature-Opened-2ESa.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react",
+                "react/jsx-runtime",
+                "framer"
+             ],
+             "relative": [
+                "./rg7tq8SMe",
+                "../css/eshFTHo2K",
+                "../css/doG0Bk1lQ"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "uKzXqxejM1TKTv0aJefw",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/JjNLDr9JX",
+          "saveId": "bTytoe33z10SV8kkdiW8",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "JjNLDr9JX.js",
+             "nodeTree": "tree.json",
+             "source": "JjNLDr9JX.tsx",
+             "sourceMap": "JjNLDr9JX.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 452,
+             "intrinsicWidth": 337,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "JjNLDr9JX",
+          "title": "Card Feature White",
+          "baseURL": "https://framerusercontent.com/modules/uKzXqxejM1TKTv0aJefw/bTytoe33z10SV8kkdiW8/",
+          "importURL": "https://framer.com/m/Card-Feature-White-Hm2x.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react",
+                "react/jsx-runtime",
+                "framer-motion",
+                "framer"
+             ],
+             "relative": [
+                "../css/eshFTHo2K",
+                "../css/doG0Bk1lQ"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "pnhudyRqqZwiW1vl9hmq",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/k722xVG7C",
+          "saveId": "cKejf6xNfFbPAOS3TTjd",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "k722xVG7C.js",
+             "nodeTree": "tree.json",
+             "source": "k722xVG7C.tsx",
+             "sourceMap": "k722xVG7C.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 406,
+             "intrinsicWidth": 520,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "k722xVG7C",
+          "title": "Integrations",
+          "baseURL": "https://framerusercontent.com/modules/pnhudyRqqZwiW1vl9hmq/cKejf6xNfFbPAOS3TTjd/",
+          "importURL": "https://framer.com/m/Integrations-zQxi.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [
+                "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js"
+             ],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "./VNTGVxjEc"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "tHUKQOaUozw3DrAqZWgn",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/l2WOxAzKp",
+          "saveId": "wHypBpmai4f7rZGQZe2a",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "l2WOxAzKp.js",
+             "nodeTree": "tree.json",
+             "source": "l2WOxAzKp.tsx",
+             "sourceMap": "l2WOxAzKp.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 520,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "l2WOxAzKp",
+          "title": "Section 4",
+          "baseURL": "https://framerusercontent.com/modules/tHUKQOaUozw3DrAqZWgn/wHypBpmai4f7rZGQZe2a/",
+          "importURL": "https://framer.com/m/Section-4-0FoM.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react",
+                "framer-motion",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "./jJINZDwMF",
+                "./imqCP4fEz"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "nMYcyJVA9l5rgg89gLLm",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/LnQMzmpqJ",
+          "saveId": "Vx5998tFsTsugGprvGnD",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "LnQMzmpqJ.js",
+             "nodeTree": "tree.json",
+             "source": "LnQMzmpqJ.tsx",
+             "sourceMap": "LnQMzmpqJ.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 460,
+             "intrinsicWidth": 1080,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "LnQMzmpqJ",
+          "title": "Comments",
+          "baseURL": "https://framerusercontent.com/modules/nMYcyJVA9l5rgg89gLLm/Vx5998tFsTsugGprvGnD/",
+          "importURL": "https://framer.com/m/Comments-xUEK.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [
+                "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/HrxLgn3HodsTJEblZU6m/Ticker.js"
+             ],
+             "bare": [
+                "react/jsx-runtime",
+                "react",
+                "framer",
+                "framer-motion"
+             ],
+             "relative": [
+                "./rbf1DFpj4"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "eZEsQMfYIO1Oc0WtNyQ5",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/LxjQIHxba",
+          "saveId": "ZFJnjIyGRqGq1GodJxEb",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "LxjQIHxba.js",
+             "nodeTree": "tree.json",
+             "source": "LxjQIHxba.tsx",
+             "sourceMap": "LxjQIHxba.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 67,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "LxjQIHxba",
+          "title": "Brand Logo Ticker",
+          "baseURL": "https://framerusercontent.com/modules/eZEsQMfYIO1Oc0WtNyQ5/ZFJnjIyGRqGq1GodJxEb/",
+          "importURL": "https://framer.com/m/Brand-Logo-Ticker-Uc8E.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [
+                "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js"
+             ],
+             "bare": [
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "5hLu0nnJQoZgBzIrIxTq",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/mTsWzXslb",
+          "saveId": "cTs1Z8w939Bjj1bn7LOG",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "mTsWzXslb.js",
+             "nodeTree": "tree.json",
+             "source": "mTsWzXslb.tsx",
+             "sourceMap": "mTsWzXslb.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 508,
+             "intrinsicWidth": 612,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "mTsWzXslb",
+          "title": "Left",
+          "baseURL": "https://framerusercontent.com/modules/5hLu0nnJQoZgBzIrIxTq/cTs1Z8w939Bjj1bn7LOG/",
+          "importURL": "https://framer.com/m/Left-RML0.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../codeFile/Follow_mouse.tsx",
+                "../css/aLfVqe1FC",
+                "../css/oO0T_QVXO"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "xbEU1ZG7Y68ZIKffZz4a",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/N3BIRIlrO",
+          "saveId": "DxIgeoGwJzNsrOjPMem7",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "N3BIRIlrO.js",
+             "nodeTree": "tree.json",
+             "source": "N3BIRIlrO.tsx",
+             "sourceMap": "N3BIRIlrO.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 30,
+             "intrinsicWidth": 118,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "N3BIRIlrO",
+          "title": "Tag",
+          "baseURL": "https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/DxIgeoGwJzNsrOjPMem7/",
+          "importURL": "https://framer.com/m/Tag-kp1y.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react",
+                "react/jsx-runtime",
+                "framer"
+             ],
+             "relative": [
+                "../css/Q4kC2bTJ2"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "sxB6aGxuAffzQvtzMf6R",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/OGgphMANG",
+          "saveId": "LE82oSPlBFcVJf23cCv9",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "OGgphMANG.js",
+             "nodeTree": "tree.json",
+             "source": "OGgphMANG.tsx",
+             "sourceMap": "OGgphMANG.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 872,
+             "intrinsicWidth": 1190,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "OGgphMANG",
+          "title": "Hero Image",
+          "baseURL": "https://framerusercontent.com/modules/sxB6aGxuAffzQvtzMf6R/LE82oSPlBFcVJf23cCv9/",
+          "importURL": "https://framer.com/m/Hero-Image-vSRw.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react",
+                "react/jsx-runtime",
+                "framer-motion"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "3olo98EweY7s6QugILaT",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/pDc3zf6xX",
+          "saveId": "jeXbJQUzlB5RqxT0D8c7",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "pDc3zf6xX.js",
+             "nodeTree": "tree.json",
+             "source": "pDc3zf6xX.tsx",
+             "sourceMap": "pDc3zf6xX.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 50,
+             "intrinsicWidth": 169,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "pDc3zf6xX",
+          "title": "Footer Slider",
+          "baseURL": "https://framerusercontent.com/modules/3olo98EweY7s6QugILaT/jeXbJQUzlB5RqxT0D8c7/",
+          "importURL": "https://framer.com/m/Footer-Slider-doen.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../css/eshFTHo2K"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "smGVHfsuFu9f45Y8rp5v",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/r20S5u2K1",
+          "saveId": "PPqPXPnkxAIjizDAs8LO",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "r20S5u2K1.js",
+             "nodeTree": "tree.json",
+             "source": "r20S5u2K1.tsx",
+             "sourceMap": "r20S5u2K1.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 38,
+             "intrinsicWidth": 522,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "r20S5u2K1",
+          "title": "Alert",
+          "baseURL": "https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/PPqPXPnkxAIjizDAs8LO/",
+          "importURL": "https://framer.com/m/Alert-7uIr.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react",
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "../css/Q4kC2bTJ2"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "728OXEGHOBz60gCADSK0",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/rbf1DFpj4",
+          "saveId": "MemRlbuY0whYHQPUEzdQ",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "rbf1DFpj4.js",
+             "nodeTree": "tree.json",
+             "source": "rbf1DFpj4.tsx",
+             "sourceMap": "rbf1DFpj4.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 156,
+             "intrinsicWidth": 336,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "rbf1DFpj4",
+          "title": "Comment",
+          "baseURL": "https://framerusercontent.com/modules/728OXEGHOBz60gCADSK0/MemRlbuY0whYHQPUEzdQ/",
+          "importURL": "https://framer.com/m/Comment-SwHD.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react/jsx-runtime",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "../css/Q4kC2bTJ2"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "A1kDf58OW4zR8xCfmnDQ",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/rg7tq8SMe",
+          "saveId": "eVV7HNQtbx6iaBRaYXCj",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "rg7tq8SMe.js",
+             "nodeTree": "tree.json",
+             "source": "rg7tq8SMe.tsx",
+             "sourceMap": "rg7tq8SMe.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 16,
+             "intrinsicWidth": 16,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "rg7tq8SMe",
+          "title": "Plus + Minus",
+          "baseURL": "https://framerusercontent.com/modules/A1kDf58OW4zR8xCfmnDQ/eVV7HNQtbx6iaBRaYXCj/",
+          "importURL": "https://framer.com/m/Plus-Minus-Dx0C.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "react",
+                "framer-motion",
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "A2frUJnxQCpazaMx279l",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/RILZsbvl4",
+          "saveId": "eGdi36dnWOeJdMoJHcxT",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "RILZsbvl4.js",
+             "nodeTree": "tree.json",
+             "source": "RILZsbvl4.tsx",
+             "sourceMap": "RILZsbvl4.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 48,
+             "intrinsicWidth": 152,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "RILZsbvl4",
+          "title": "Slider Item",
+          "baseURL": "https://framerusercontent.com/modules/A2frUJnxQCpazaMx279l/eGdi36dnWOeJdMoJHcxT/",
+          "importURL": "https://framer.com/m/Slider-Item-WjHc.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "3EqD5thHr5d2d9CQNcnx",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/rmhE7E8QG",
+          "saveId": "AGvLz3Umh4twPfwPXnLN",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "rmhE7E8QG.js",
+             "nodeTree": "tree.json",
+             "source": "rmhE7E8QG.tsx",
+             "sourceMap": "rmhE7E8QG.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 500,
+             "intrinsicWidth": 318,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "rmhE7E8QG",
+          "title": "Empty Card",
+          "baseURL": "https://framerusercontent.com/modules/3EqD5thHr5d2d9CQNcnx/AGvLz3Umh4twPfwPXnLN/",
+          "importURL": "https://framer.com/m/Empty-Card-EQua.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "../css/eshFTHo2K",
+                "../css/aLfVqe1FC",
+                "../css/jRlNrjZfR"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "8bzLzi9bMy6c8MKTcSp9",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/rWpbaXaRc",
+          "saveId": "UU2W4i5bMHnFcddSjhiU",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "rWpbaXaRc.js",
+             "nodeTree": "tree.json",
+             "source": "rWpbaXaRc.tsx",
+             "sourceMap": "rWpbaXaRc.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 56,
+             "intrinsicWidth": 56,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "rWpbaXaRc",
+          "title": "Avatar",
+          "baseURL": "https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/",
+          "importURL": "https://framer.com/m/Avatar-ZEWo.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer-motion",
+                "framer",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "5r7AtuDljGzdzJBJduFu",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/ssZdhZx3o",
+          "saveId": "6SjLRZRPOSVbi431iIdV",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "ssZdhZx3o.js",
+             "nodeTree": "tree.json",
+             "source": "ssZdhZx3o.tsx",
+             "sourceMap": "ssZdhZx3o.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 80,
+             "intrinsicWidth": 1200,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "ssZdhZx3o",
+          "title": "Navbar Dark",
+          "baseURL": "https://framerusercontent.com/modules/5r7AtuDljGzdzJBJduFu/6SjLRZRPOSVbi431iIdV/",
+          "importURL": "https://framer.com/m/Navbar-Dark-PKIM.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react/jsx-runtime",
+                "framer-motion",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "AhOvtC4d5reUrYQkqtv6",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/su6NRfr7P",
+          "saveId": "riIZz1GOAwIY3jotnsMb",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "su6NRfr7P.js",
+             "nodeTree": "tree.json",
+             "source": "su6NRfr7P.tsx",
+             "sourceMap": "su6NRfr7P.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 1161,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "su6NRfr7P",
+          "title": "Screen Slider",
+          "baseURL": "https://framerusercontent.com/modules/AhOvtC4d5reUrYQkqtv6/riIZz1GOAwIY3jotnsMb/",
+          "importURL": "https://framer.com/m/Screen-Slider-PU6c.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "./imqCP4fEz"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "nqiHIK1BOLLfGfzzC4iP",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/t6SpWiPnx",
+          "saveId": "dr1WC1GTQMpMniP3Ssav",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "t6SpWiPnx.js",
+             "nodeTree": "tree.json",
+             "source": "t6SpWiPnx.tsx",
+             "sourceMap": "t6SpWiPnx.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "t6SpWiPnx",
+          "title": "Blocker",
+          "baseURL": "https://framerusercontent.com/modules/nqiHIK1BOLLfGfzzC4iP/dr1WC1GTQMpMniP3Ssav/",
+          "importURL": "https://framer.com/m/Blocker-rgsJ.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react",
+                "react/jsx-runtime"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "ySMBXs084hIlXdPnyDI3",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/UlD_B5dnq",
+          "saveId": "yMLrACEgrQGFFeGTi8kB",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "UlD_B5dnq.js",
+             "nodeTree": "tree.json",
+             "source": "UlD_B5dnq.tsx",
+             "sourceMap": "UlD_B5dnq.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 104,
+             "intrinsicWidth": 200,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "UlD_B5dnq",
+          "title": "Icon \u0026 Text",
+          "baseURL": "https://framerusercontent.com/modules/ySMBXs084hIlXdPnyDI3/yMLrACEgrQGFFeGTi8kB/",
+          "importURL": "https://framer.com/m/Icon-Text-jD3K.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react",
+                "framer",
+                "react/jsx-runtime",
+                "framer-motion"
+             ],
+             "relative": [
+                "../css/doG0Bk1lQ",
+                "../css/eshFTHo2K"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "pwDxHyBi7f1PxpMozAmU",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/urcS7Vk5E",
+          "saveId": "0KfI05h85CQf8crm8w29",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "urcS7Vk5E.js",
+             "nodeTree": "tree.json",
+             "source": "urcS7Vk5E.tsx",
+             "sourceMap": "urcS7Vk5E.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "urcS7Vk5E",
+          "title": "Navigation",
+          "baseURL": "https://framerusercontent.com/modules/pwDxHyBi7f1PxpMozAmU/0KfI05h85CQf8crm8w29/",
+          "importURL": "https://framer.com/m/Navigation-7ikf.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react",
+                "react/jsx-runtime",
+                "framer-motion"
+             ],
+             "relative": [
+                "./j1CXYH1vu",
+                "./x2GOdaUSJ"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "8PUcqeq6Thm4YPvsPVQz",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/VNTGVxjEc",
+          "saveId": "OGGCeJ0M8QWduAgt0PoR",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "VNTGVxjEc.js",
+             "nodeTree": "tree.json",
+             "source": "VNTGVxjEc.tsx",
+             "sourceMap": "VNTGVxjEc.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 140,
+             "intrinsicWidth": 140,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "VNTGVxjEc",
+          "title": "Integration Item",
+          "baseURL": "https://framerusercontent.com/modules/8PUcqeq6Thm4YPvsPVQz/OGGCeJ0M8QWduAgt0PoR/",
+          "importURL": "https://framer.com/m/Integration-Item-3sBw.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "lGcdBOjNDW7LCNQgX1qq",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/w6GprrWoY",
+          "saveId": "eyUrp4W6acZBX2qZFTbk",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "w6GprrWoY.js",
+             "nodeTree": "tree.json",
+             "source": "w6GprrWoY.tsx",
+             "sourceMap": "w6GprrWoY.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 520,
+             "intrinsicWidth": 1070,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "w6GprrWoY",
+          "title": "Features Image Left Content",
+          "baseURL": "https://framerusercontent.com/modules/lGcdBOjNDW7LCNQgX1qq/eyUrp4W6acZBX2qZFTbk/",
+          "importURL": "https://framer.com/m/Features-Image-Left-Content-VQxM.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "./zfHuJoYj1",
+                "./imqCP4fEz"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "b7IavQDbrgKIT6xDNOSx",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/WAXCmYiyl",
+          "saveId": "5h18uXFzoZIuhNTecWt8",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "WAXCmYiyl.js",
+             "nodeTree": "tree.json",
+             "source": "WAXCmYiyl.tsx",
+             "sourceMap": "WAXCmYiyl.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "WAXCmYiyl",
+          "title": "Comment Row 1",
+          "baseURL": "https://framerusercontent.com/modules/b7IavQDbrgKIT6xDNOSx/5h18uXFzoZIuhNTecWt8/",
+          "importURL": "https://framer.com/m/Comment-Row-1-rVTZ.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react/jsx-runtime",
+                "react",
+                "framer-motion"
+             ],
+             "relative": [
+                "./rbf1DFpj4"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "hB9EXsckuRgNbiNlXC9H",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/wbQNWcE_N",
+          "saveId": "3C8aLMf154c1yF7VYY9g",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "wbQNWcE_N.js",
+             "nodeTree": "tree.json",
+             "source": "wbQNWcE_N.tsx",
+             "sourceMap": "wbQNWcE_N.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 48,
+             "intrinsicWidth": 70,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "wbQNWcE_N",
+          "title": "Cursor",
+          "baseURL": "https://framerusercontent.com/modules/hB9EXsckuRgNbiNlXC9H/3C8aLMf154c1yF7VYY9g/",
+          "importURL": "https://framer.com/m/Cursor-Yjke.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react",
+                "react/jsx-runtime",
+                "framer-motion"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "ikrkjozrPSyinmn7L7g9",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/x2GOdaUSJ",
+          "saveId": "1DUIxNw3x9zhJCxb1A7Y",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "x2GOdaUSJ.js",
+             "nodeTree": "tree.json",
+             "source": "x2GOdaUSJ.tsx",
+             "sourceMap": "x2GOdaUSJ.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 38,
+             "intrinsicWidth": 69,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "x2GOdaUSJ",
+          "title": "Navbar Link Item",
+          "baseURL": "https://framerusercontent.com/modules/ikrkjozrPSyinmn7L7g9/1DUIxNw3x9zhJCxb1A7Y/",
+          "importURL": "https://framer.com/m/Navbar-Link-Item-k81O.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "../css/Q4kC2bTJ2",
+                "../css/aLfVqe1FC"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "6XXaTpkGmj6cVcos1Eds",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/yDepeG_JB",
+          "saveId": "CNH5YLMsfreqm04yoGxW",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "yDepeG_JB.js",
+             "nodeTree": "tree.json",
+             "source": "yDepeG_JB.tsx",
+             "sourceMap": "yDepeG_JB.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 72,
+             "intrinsicWidth": 368,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "yDepeG_JB",
+          "title": "Feature Opener 1",
+          "baseURL": "https://framerusercontent.com/modules/6XXaTpkGmj6cVcos1Eds/CNH5YLMsfreqm04yoGxW/",
+          "importURL": "https://framer.com/m/Feature-Opener-1-EccB.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react",
+                "react/jsx-runtime",
+                "framer-motion",
+                "framer"
+             ],
+             "relative": [
+                "../css/doG0Bk1lQ"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "jLa0lRUBB7hSzWHlohC8",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/z9KG_twvs",
+          "saveId": "AqOzzVHF7EnI0jUYHNTb",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "z9KG_twvs.js",
+             "nodeTree": "tree.json",
+             "source": "z9KG_twvs.tsx",
+             "sourceMap": "z9KG_twvs.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 160,
+             "intrinsicWidth": 428,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "z9KG_twvs",
+          "title": "Question Opened",
+          "baseURL": "https://framerusercontent.com/modules/jLa0lRUBB7hSzWHlohC8/AqOzzVHF7EnI0jUYHNTb/",
+          "importURL": "https://framer.com/m/Question-Opened-hk28.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react/jsx-runtime",
+                "framer",
+                "react"
+             ],
+             "relative": [
+                "./rg7tq8SMe",
+                "../css/eshFTHo2K",
+                "../css/tr0U97vbW"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "zNGgQvBp10qyS9DApgle",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "canvasComponent",
+          "deletedAt": null,
+          "description": null,
+          "localId": "canvasComponent/zfHuJoYj1",
+          "saveId": "CQQlIkgSag7tCQ9dsna5",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "zfHuJoYj1.js",
+             "nodeTree": "tree.json",
+             "source": "zfHuJoYj1.tsx",
+             "sourceMap": "zfHuJoYj1.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 62,
+             "intrinsicWidth": 428,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "zfHuJoYj1",
+          "title": "Feature Link",
+          "baseURL": "https://framerusercontent.com/modules/zNGgQvBp10qyS9DApgle/CQQlIkgSag7tCQ9dsna5/",
+          "importURL": "https://framer.com/m/Feature-Link-kvsj.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "framer",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../css/aLfVqe1FC",
+                "./rg7tq8SMe"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "zUbdrxWhyjKy2LDQ4vk0",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "codeFile",
+          "deletedAt": null,
+          "description": null,
+          "localId": "codeFile/o7CBpzZ",
+          "saveId": "BCOE6aUMwSTHhyyndmK9",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "Follow_mouse.js",
+             "source": "Follow_mouse.tsx",
+             "sourceMap": "Follow_mouse.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "withCursorFollow",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "Follow_mouse.tsx",
+          "title": "Follow_mouse",
+          "baseURL": "https://framerusercontent.com/modules/zUbdrxWhyjKy2LDQ4vk0/BCOE6aUMwSTHhyyndmK9/",
+          "importURL": "https://framer.com/m/Follow-mouse-WvcB.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react",
+                "react/jsx-runtime"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "wG3YWBlnMEy1hKfcXuby",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "codeFile",
+          "deletedAt": null,
+          "description": null,
+          "localId": "codeFile/b6KPE0t",
+          "saveId": "HUpR1XxEarbMnFEDoFym",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "Test_2.js",
+             "source": "Test_2.tsx",
+             "sourceMap": "Test_2.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "withCountUp1000speed1",
+             "withCountUpBlurTranslate",
+             "withCountUpTranslation",
+             "withCountUp10speed500",
+             "withCountUp50speed50",
+             "withCountUpRotate",
+             "withCountUpColor",
+             "withCountUpOpacity",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "Test_2.tsx",
+          "title": "Test_2",
+          "baseURL": "https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/",
+          "importURL": "https://framer.com/m/Test-2-IrYF.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react",
+                "react/jsx-runtime"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "jcPFAQWGaONPqPbVInRU",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "codeFile",
+          "deletedAt": null,
+          "description": null,
+          "localId": "codeFile/vWaxe28",
+          "saveId": "ohk9CNdxjpIgzk7Nh895",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "Test.js",
+             "source": "Test.tsx",
+             "sourceMap": "Test.map"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "withCountUp50speed50",
+             "withCountUpColor",
+             "withCountUp10speed500",
+             "withCountUpTranslation",
+             "withCountUp1000speed1",
+             "withCountUpOpacity",
+             "withCountUpRotate",
+             "withCountUpBlurTranslate",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "Test.tsx",
+          "title": "Test",
+          "baseURL": "https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/",
+          "importURL": "https://framer.com/m/Test-aEkE.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "jNfhjQL2GNeB9EFE4J76",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "collection",
+          "deletedAt": null,
+          "description": null,
+          "localId": "collection/CDpELmxe6",
+          "saveId": "IF6KKnkh44Oa2fsPCYsW",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "CDpELmxe6.js",
+             "nodeTree": "tree.json",
+             "source": "CDpELmxe6.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "CDpELmxe6",
+          "title": "Blog",
+          "baseURL": "https://framerusercontent.com/modules/jNfhjQL2GNeB9EFE4J76/IF6KKnkh44Oa2fsPCYsW/",
+          "importURL": "https://framer.com/m/Blog-3766.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "react/jsx-runtime",
+                "framer",
+                "react"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "yKD3Q0CXPmx7hQl48ftR",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "config",
+          "deletedAt": null,
+          "description": null,
+          "localId": "config/dependencies",
+          "saveId": "KDDtGOabk0wZDeBeXBA7",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "dependencies": "dependencies.json",
+             "importMap": "importMap.json"
+          },
+          "metadata": {},
+          "exports": [],
+          "reExportedModules": [],
+          "name": "dependencies",
+          "title": "dependencies",
+          "baseURL": "https://framerusercontent.com/modules/yKD3Q0CXPmx7hQl48ftR/KDDtGOabk0wZDeBeXBA7/",
+          "importURL": "https://framer.com/m/dependencies-IkQc.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "dO0XaNyepaB8zJrTob4r",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/aLfVqe1FC",
+          "saveId": "DS6WfDgwG37205NDid5h",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "aLfVqe1FC.js",
+             "nodeTree": "tree.json",
+             "source": "aLfVqe1FC.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "css",
+             "className",
+             "fonts",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "aLfVqe1FC",
+          "title": "Text / Large",
+          "baseURL": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/DS6WfDgwG37205NDid5h/",
+          "importURL": "https://framer.com/m/Text-Large-eOVC.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "lag7sUsQW69DzJd7WTvQ",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/cRmkgGutV",
+          "saveId": "Zvmfq4RiC3U6oNQYr8FN",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "cRmkgGutV.js",
+             "nodeTree": "tree.json",
+             "source": "cRmkgGutV.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "className",
+             "fonts",
+             "css",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "cRmkgGutV",
+          "title": "Heading 4",
+          "baseURL": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/Zvmfq4RiC3U6oNQYr8FN/",
+          "importURL": "https://framer.com/m/Heading-4-Ca0f.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "4emW1oaOGUYfD408qrg4",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/doG0Bk1lQ",
+          "saveId": "2geawomJGsSUtbP0QjyC",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "doG0Bk1lQ.js",
+             "nodeTree": "tree.json",
+             "source": "doG0Bk1lQ.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "className",
+             "fonts",
+             "css",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "doG0Bk1lQ",
+          "title": "Heading / 6",
+          "baseURL": "https://framerusercontent.com/modules/4emW1oaOGUYfD408qrg4/2geawomJGsSUtbP0QjyC/",
+          "importURL": "https://framer.com/m/Heading-6-QJbz.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "rSbiLfsnHLTrF3vDy2qI",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/eshFTHo2K",
+          "saveId": "gOc3l3rtHp11Nd7Yh30B",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "eshFTHo2K.js",
+             "nodeTree": "tree.json",
+             "source": "eshFTHo2K.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "className",
+             "css",
+             "fonts",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "eshFTHo2K",
+          "title": "Text / Medium",
+          "baseURL": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/gOc3l3rtHp11Nd7Yh30B/",
+          "importURL": "https://framer.com/m/Text-Medium-YZgA.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "xdYOvx241dDHpa3LBnTw",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/FIstDthqj",
+          "saveId": "syO7CmGHukdx5JrkyOEX",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "FIstDthqj.js",
+             "nodeTree": "tree.json",
+             "source": "FIstDthqj.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "fonts",
+             "css",
+             "className",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "FIstDthqj",
+          "title": "Rectangle",
+          "baseURL": "https://framerusercontent.com/modules/xdYOvx241dDHpa3LBnTw/syO7CmGHukdx5JrkyOEX/",
+          "importURL": "https://framer.com/m/Rectangle-CFzM.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "jPZc4kIpXwA3A0T4XadM",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/jRlNrjZfR",
+          "saveId": "zykALp21TXbRbs4TU8E1",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "jRlNrjZfR.js",
+             "nodeTree": "tree.json",
+             "source": "jRlNrjZfR.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "className",
+             "css",
+             "fonts",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "jRlNrjZfR",
+          "title": "Title / 2",
+          "baseURL": "https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zykALp21TXbRbs4TU8E1/",
+          "importURL": "https://framer.com/m/Title-2-Zcoq.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "sRe4syBMY3A5EU26o6h1",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/oO0T_QVXO",
+          "saveId": "e2GEukTloqK6EA7O6MR3",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "oO0T_QVXO.js",
+             "nodeTree": "tree.json",
+             "source": "oO0T_QVXO.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "css",
+             "className",
+             "fonts",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "oO0T_QVXO",
+          "title": "Heading 5",
+          "baseURL": "https://framerusercontent.com/modules/sRe4syBMY3A5EU26o6h1/e2GEukTloqK6EA7O6MR3/",
+          "importURL": "https://framer.com/m/Heading-5-hDx0.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "isE4jHYyF7A7RdFya7TS",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/Q4kC2bTJ2",
+          "saveId": "K3FFIef17dyAez6QnFto",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "Q4kC2bTJ2.js",
+             "nodeTree": "tree.json",
+             "source": "Q4kC2bTJ2.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "css",
+             "className",
+             "fonts",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "Q4kC2bTJ2",
+          "title": "Text / Small",
+          "baseURL": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/",
+          "importURL": "https://framer.com/m/Text-Small-zjQN.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "irtADPc9MsWpaOZ5xWct",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/tr0U97vbW",
+          "saveId": "Cqtyndb7HgebXowgH7mP",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "tr0U97vbW.js",
+             "nodeTree": "tree.json",
+             "source": "tr0U97vbW.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "className",
+             "fonts",
+             "css",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "tr0U97vbW",
+          "title": "Text / Medium / Bold",
+          "baseURL": "https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/",
+          "importURL": "https://framer.com/m/Text-Medium-Bold-vScy.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "ng3ERammeRl2eDx1J5dS",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/uKO_ptksm",
+          "saveId": "gb55dDxeM4LHlmD5o5MG",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "uKO_ptksm.js",
+             "nodeTree": "tree.json",
+             "source": "uKO_ptksm.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "css",
+             "fonts",
+             "className",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "uKO_ptksm",
+          "title": "Rectangle",
+          "baseURL": "https://framerusercontent.com/modules/ng3ERammeRl2eDx1J5dS/gb55dDxeM4LHlmD5o5MG/",
+          "importURL": "https://framer.com/m/Rectangle-X4WtN.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "bnjbl1lEgfVdQu0UU2ln",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/VWhDrilVn",
+          "saveId": "9eJ2WEy0VAWreUHAgTEh",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "VWhDrilVn.js",
+             "nodeTree": "tree.json",
+             "source": "VWhDrilVn.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "fonts",
+             "css",
+             "className",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "VWhDrilVn",
+          "title": "Body",
+          "baseURL": "https://framerusercontent.com/modules/bnjbl1lEgfVdQu0UU2ln/9eJ2WEy0VAWreUHAgTEh/",
+          "importURL": "https://framer.com/m/Body-OJog.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "cxD5eSzAs0tNpvGdn2nJ",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "css",
+          "deletedAt": null,
+          "description": null,
+          "localId": "css/ZSzgV3xdi",
+          "saveId": "dFhDv2g0Wm2foYMTncet",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "ZSzgV3xdi.js",
+             "nodeTree": "tree.json",
+             "source": "ZSzgV3xdi.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "css",
+             "fonts",
+             "className",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "ZSzgV3xdi",
+          "title": "Heading 1",
+          "baseURL": "https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/dFhDv2g0Wm2foYMTncet/",
+          "importURL": "https://framer.com/m/Heading-1-TyAJ.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer"
+             ],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "pY5lWBn2CZ8BflbDntaC",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/AM7fvVnwH",
+          "saveId": "C57l49hAkuY2fvJpov7q",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "AM7fvVnwH.js",
+             "nodeTree": "tree.json",
+             "source": "AM7fvVnwH.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 1080,
+             "intrinsicWidth": 1200,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "AM7fvVnwH",
+          "title": "Login",
+          "baseURL": "https://framerusercontent.com/modules/pY5lWBn2CZ8BflbDntaC/C57l49hAkuY2fvJpov7q/",
+          "importURL": "https://framer.com/m/Login-Ukso.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react/jsx-runtime",
+                "framer-motion",
+                "react"
+             ],
+             "relative": [
+                "../webPageMetadata/AM7fvVnwH"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "sDEay3U72nSBYI4BnWmA",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/augiA20Il",
+          "saveId": "tN9OIshYmwnL7KCVF18I",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "augiA20Il.js",
+             "nodeTree": "tree.json",
+             "source": "augiA20Il.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 4504,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "augiA20Il",
+          "title": "Home",
+          "baseURL": "https://framerusercontent.com/modules/sDEay3U72nSBYI4BnWmA/tN9OIshYmwnL7KCVF18I/",
+          "importURL": "https://framer.com/m/Home-ZNSEr.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [
+                "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
+             ],
+             "bare": [
+                "framer-motion",
+                "react",
+                "react/jsx-runtime",
+                "framer"
+             ],
+             "relative": [
+                "../canvasComponent/wbQNWcE_N",
+                "../canvasComponent/Eh2zxv_2R",
+                "../webPageMetadata/augiA20Il",
+                "../canvasComponent/z9KG_twvs",
+                "../canvasComponent/JjNLDr9JX",
+                "../css/cRmkgGutV",
+                "../canvasComponent/FUoF7gtwJ",
+                "../canvasComponent/rWpbaXaRc",
+                "../canvasComponent/imqCP4fEz",
+                "../css/aLfVqe1FC",
+                "../canvasComponent/eaYqW6xw3",
+                "../canvasComponent/DxJuV9CJ2",
+                "../canvasComponent/j1CXYH1vu",
+                "../canvasComponent/r20S5u2K1",
+                "../canvasComponent/mTsWzXslb",
+                "../css/ZSzgV3xdi"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "dEfGnP4nqTP3bDApU1Wr",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/cYjyjvRG5",
+          "saveId": "jpyYQRQeQUC284XbiLnE",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "cYjyjvRG5.js",
+             "nodeTree": "tree.json",
+             "source": "cYjyjvRG5.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 2368,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "cYjyjvRG5",
+          "title": "Blog",
+          "baseURL": "https://framerusercontent.com/modules/dEfGnP4nqTP3bDApU1Wr/jpyYQRQeQUC284XbiLnE/",
+          "importURL": "https://framer.com/m/Blog-Oceo.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react",
+                "framer",
+                "react/jsx-runtime"
+             ],
+             "relative": [
+                "../canvasComponent/DwwO6is_Q",
+                "../css/Q4kC2bTJ2",
+                "../collection/CDpELmxe6",
+                "../webPageMetadata/cYjyjvRG5",
+                "../canvasComponent/DxJuV9CJ2",
+                "../css/eshFTHo2K",
+                "../css/cRmkgGutV",
+                "../css/uKO_ptksm"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "v2OdkYAhq1hh6hfk5FfM",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/FLoLX3_lF",
+          "saveId": "LB37F3hb7BQhFLb0vScG",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "FLoLX3_lF.js",
+             "nodeTree": "tree.json",
+             "source": "FLoLX3_lF.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 2220,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "FLoLX3_lF",
+          "title": "Pricing",
+          "baseURL": "https://framerusercontent.com/modules/v2OdkYAhq1hh6hfk5FfM/LB37F3hb7BQhFLb0vScG/",
+          "importURL": "https://framer.com/m/Pricing-WRC5.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../canvasComponent/DwwO6is_Q",
+                "../canvasComponent/DxJuV9CJ2",
+                "../webPageMetadata/FLoLX3_lF",
+                "../canvasComponent/eaYqW6xw3"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "bZJ8c3sPRNtapE6mRQx7",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/qXcPcVO5K",
+          "saveId": "vsenyUu6NDFQGgo2lt6q",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "qXcPcVO5K.js",
+             "nodeTree": "tree.json",
+             "source": "qXcPcVO5K.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 3379,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "qXcPcVO5K",
+          "title": "Blog Detail",
+          "baseURL": "https://framerusercontent.com/modules/bZJ8c3sPRNtapE6mRQx7/vsenyUu6NDFQGgo2lt6q/",
+          "importURL": "https://framer.com/m/Blog-Detail-R86s.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "react/jsx-runtime",
+                "react",
+                "framer-motion"
+             ],
+             "relative": [
+                "../canvasComponent/DxJuV9CJ2",
+                "../css/cRmkgGutV",
+                "../css/ZSzgV3xdi",
+                "../css/uKO_ptksm",
+                "../collection/CDpELmxe6",
+                "../webPageMetadata/qXcPcVO5K",
+                "../css/FIstDthqj",
+                "../css/oO0T_QVXO",
+                "../css/eshFTHo2K",
+                "../canvasComponent/DwwO6is_Q"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "ck02A5fYE5pc5wqfwbdd",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/uPJ5w0Lws",
+          "saveId": "pzrPjN4ZxgS8ZCI5WuaF",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "uPJ5w0Lws.js",
+             "nodeTree": "tree.json",
+             "source": "uPJ5w0Lws.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 5249,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "uPJ5w0Lws",
+          "title": "Features",
+          "baseURL": "https://framerusercontent.com/modules/ck02A5fYE5pc5wqfwbdd/pzrPjN4ZxgS8ZCI5WuaF/",
+          "importURL": "https://framer.com/m/Features-joHe.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer",
+                "framer-motion",
+                "react/jsx-runtime",
+                "react"
+             ],
+             "relative": [
+                "../canvasComponent/mTsWzXslb",
+                "../canvasComponent/l2WOxAzKp",
+                "../canvasComponent/JjNLDr9JX",
+                "../canvasComponent/DxJuV9CJ2",
+                "../canvasComponent/Eh2zxv_2R",
+                "../canvasComponent/w6GprrWoY",
+                "../webPageMetadata/uPJ5w0Lws",
+                "../canvasComponent/su6NRfr7P",
+                "../canvasComponent/imqCP4fEz",
+                "../canvasComponent/DwwO6is_Q"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "dfPLM9mLzLRZzhkUoDWK",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "screen",
+          "deletedAt": null,
+          "description": null,
+          "localId": "screen/XCpKyV6kk",
+          "saveId": "TYxqWruLqWiP84N7ia3y",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "XCpKyV6kk.js",
+             "nodeTree": "tree.json",
+             "source": "XCpKyV6kk.tsx"
+          },
+          "metadata": {
+             "codeGenVersion": 2,
+             "compilerContractVersion": 1,
+             "intrinsicHeight": 7619,
+             "intrinsicWidth": 1440,
+             "packageDependencies": []
+          },
+          "exports": [
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "XCpKyV6kk",
+          "title": "Features",
+          "baseURL": "https://framerusercontent.com/modules/dfPLM9mLzLRZzhkUoDWK/TYxqWruLqWiP84N7ia3y/",
+          "importURL": "https://framer.com/m/Features-LNmX.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [
+                "framer-motion",
+                "react",
+                "react/jsx-runtime",
+                "framer"
+             ],
+             "relative": [
+                "../canvasComponent/eaYqW6xw3",
+                "../canvasComponent/DwwO6is_Q",
+                "../canvasComponent/imqCP4fEz",
+                "../canvasComponent/su6NRfr7P",
+                "../canvasComponent/j1CXYH1vu",
+                "../canvasComponent/l2WOxAzKp",
+                "../canvasComponent/k722xVG7C",
+                "../canvasComponent/Eh2zxv_2R",
+                "../canvasComponent/JjNLDr9JX",
+                "../canvasComponent/mTsWzXslb",
+                "../canvasComponent/w6GprrWoY",
+                "../webPageMetadata/XCpKyV6kk",
+                "../canvasComponent/DxJuV9CJ2",
+                "../canvasComponent/z9KG_twvs"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "aKbcRdXTdcV3ibCjOgVc",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "siteMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "siteMetadata/siteMetadata",
+          "saveId": "6LDYFjQhXYyhpd19lau7",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "siteMetadata.js",
+             "source": "siteMetadata.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "default",
+             "metadataVersion",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "siteMetadata",
+          "title": "siteMetadata",
+          "baseURL": "https://framerusercontent.com/modules/aKbcRdXTdcV3ibCjOgVc/6LDYFjQhXYyhpd19lau7/",
+          "importURL": "https://framer.com/m/siteMetadata-ULXw0.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "cCP8nBWAwbQ1olNAs9Bo",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/AM7fvVnwH",
+          "saveId": "bno4jUbGaxnMpk0SFhCR",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "AM7fvVnwH.js",
+             "source": "AM7fvVnwH.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "metadataVersion",
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "AM7fvVnwH",
+          "title": "AM7fvVnwH",
+          "baseURL": "https://framerusercontent.com/modules/cCP8nBWAwbQ1olNAs9Bo/bno4jUbGaxnMpk0SFhCR/",
+          "importURL": "https://framer.com/m/AM7fvVnwH-8UL0.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": [
+                "../siteMetadata/siteMetadata"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "z4gJyD919VlTLv19hHOd",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/augiA20Il",
+          "saveId": "xrgTdJnAlnGDhr4RkJ6k",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "augiA20Il.js",
+             "source": "augiA20Il.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "default",
+             "metadataVersion",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "augiA20Il",
+          "title": "augiA20Il",
+          "baseURL": "https://framerusercontent.com/modules/z4gJyD919VlTLv19hHOd/xrgTdJnAlnGDhr4RkJ6k/",
+          "importURL": "https://framer.com/m/augiA20Il-llcv.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "8zLuVYQPzUyFnLKbsPav",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/cYjyjvRG5",
+          "saveId": "MM7j3R0aQaZgGnkkgSYs",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "cYjyjvRG5.js",
+             "source": "cYjyjvRG5.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "default",
+             "metadataVersion",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "cYjyjvRG5",
+          "title": "cYjyjvRG5",
+          "baseURL": "https://framerusercontent.com/modules/8zLuVYQPzUyFnLKbsPav/MM7j3R0aQaZgGnkkgSYs/",
+          "importURL": "https://framer.com/m/cYjyjvRG5-sVXG.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": [
+                "../siteMetadata/siteMetadata"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "piQt4d21mvdXvnucxdyB",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/FLoLX3_lF",
+          "saveId": "BiUqfKrDB53diAUBsuuS",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "FLoLX3_lF.js",
+             "source": "FLoLX3_lF.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "default",
+             "metadataVersion",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "FLoLX3_lF",
+          "title": "FLoLX3_lF",
+          "baseURL": "https://framerusercontent.com/modules/piQt4d21mvdXvnucxdyB/BiUqfKrDB53diAUBsuuS/",
+          "importURL": "https://framer.com/m/FLoLX3-lF-FPc2.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": [
+                "../siteMetadata/siteMetadata"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "ixccEtiNaLS2rwKHEf4l",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/qXcPcVO5K",
+          "saveId": "TyfkN8TMxFx6jwZqVv27",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "qXcPcVO5K.js",
+             "source": "qXcPcVO5K.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "default",
+             "metadataVersion",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "qXcPcVO5K",
+          "title": "qXcPcVO5K",
+          "baseURL": "https://framerusercontent.com/modules/ixccEtiNaLS2rwKHEf4l/TyfkN8TMxFx6jwZqVv27/",
+          "importURL": "https://framer.com/m/qXcPcVO5K-uFYs.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": []
+          },
+          "submodules": []
+       },
+       {
+          "id": "pk2DEIa39Z10YJmDQu2R",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/uPJ5w0Lws",
+          "saveId": "cR94tjnc0ALqsIumWRxe",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "uPJ5w0Lws.js",
+             "source": "uPJ5w0Lws.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "metadataVersion",
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "uPJ5w0Lws",
+          "title": "uPJ5w0Lws",
+          "baseURL": "https://framerusercontent.com/modules/pk2DEIa39Z10YJmDQu2R/cR94tjnc0ALqsIumWRxe/",
+          "importURL": "https://framer.com/m/uPJ5w0Lws-BEpg.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": [
+                "../siteMetadata/siteMetadata"
+             ]
+          },
+          "submodules": []
+       },
+       {
+          "id": "6btuHhbj1eI7t2fCHm5I",
+          "ownerId": "it8lAdrjxQ0oTUUeX4V4",
+          "ownerType": "project",
+          "createdAt": "2023-08-10T14:02:54.118755Z",
+          "updatedAt": "2023-08-10T14:02:54.118755Z",
+          "type": "webPageMetadata",
+          "deletedAt": null,
+          "description": null,
+          "localId": "webPageMetadata/XCpKyV6kk",
+          "saveId": "vHF30kLHXVkZNdlWV04B",
+          "userId": "72e6ad2e-95e0-4e3a-9831-7d2f681ed72e",
+          "savedAt": "2023-08-10T14:02:54.118755Z",
+          "files": {
+             "module": "XCpKyV6kk.js",
+             "source": "XCpKyV6kk.tsx"
+          },
+          "metadata": {
+             "compilerContractVersion": 1
+          },
+          "exports": [
+             "metadataVersion",
+             "default",
+             "__FramerMetadata__"
+          ],
+          "reExportedModules": [],
+          "name": "XCpKyV6kk",
+          "title": "XCpKyV6kk",
+          "baseURL": "https://framerusercontent.com/modules/6btuHhbj1eI7t2fCHm5I/vHF30kLHXVkZNdlWV04B/",
+          "importURL": "https://framer.com/m/XCpKyV6kk-QM0n.js",
+          "lastPublish": null,
+          "imports": {
+             "absolute": [],
+             "bare": [],
+             "relative": []
+          },
+          "submodules": []
+       }
+    ]
+ }
+ 

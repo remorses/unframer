@@ -11,6 +11,7 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 import { execSync } from 'child_process'
 import { tmpdir } from 'os'
 import path from 'path'
+import { getProjectComponents } from './utils'
 
 test(
     'bundle',
@@ -24,6 +25,17 @@ test(
     },
     1000 * 10,
 )
+test(
+    'getProjectComponents',
+    async () => {
+        const res = await getProjectComponents({
+            // project: 'Se1qpbnUsS1NDUxLzXVs',
+        })
+        console.log(res)
+    },
+    1000 * 10,
+)
+
 test.skip(
     'server',
     async () => {
