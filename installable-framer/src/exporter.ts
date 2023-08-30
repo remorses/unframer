@@ -351,7 +351,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                     }
                 }
                 const promise = Promise.resolve().then(async () => {
-                    logger.log('fetching', resolved.toString())
+                    logger.log('fetching', url)
                     const res = await fetch(resolved)
                     if (!res.ok) {
                         throw new Error(
