@@ -1,14 +1,13 @@
 {
     "name": "framer-for-next",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "private": true,
     "description": "",
     "main": "dist/index.js",
-    "module": "esm/index.js",
     "types": "dist/index.d.ts",
     "repository": "https://github.com/remorses/",
     "scripts": {
-        "build": "tsc && tsc -m es6 --outDir esm",
+        "build": "tsc",
         "watch": "tsc -w"
     },
     "files": [
@@ -26,7 +25,6 @@
         "@types/react": "18.2.9"
     },
     "dependencies": {
-        "framer": "github:remorses/framer-fixed",
         "classnames": "^2.3.2"
     }
 }

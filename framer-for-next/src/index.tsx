@@ -3,8 +3,13 @@
 
 import classNames from 'classnames'
 import { ReactNode } from 'react'
-import { getFonts, getPropertyControls } from 'framer'
+
 import React from 'react'
+
+function getFonts(component) {
+    const fonts = component.fonts;
+    return fonts || [];
+}
 
 const defaultBreakpoints = ['Desktop', 'Tablet', 'Mobile'] as const
 
