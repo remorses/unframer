@@ -1,7 +1,9 @@
 {
-    "extends": "../tsconfig.base.json",
+    
     "compilerOptions": {
         "rootDir": "src",
+        "module": "NodeNext",
+      "skipLibCheck": true,
         "outDir": "dist"
     },
     "include": ["src"]

@@ -17,6 +17,7 @@
         "framer": "^2.3.0",
         "framer-avatar": "https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q",
         "framer-for-next": "workspace:*",
+        "installable-framer": "workspace:*",
         "framer-motion": "10.12.17",
         "next": "13.4.12",
         "popmotion": "^11.0.5",

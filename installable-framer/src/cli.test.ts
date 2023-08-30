@@ -1,7 +1,7 @@
 import tmp from 'tmp'
 import path from 'path'
 import { test, expect } from 'vitest'
-import { bundle } from './exporter'
+import { bundle } from './exporter.js'
 
 test('bundle', async () => {
     const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name

@@ -7,12 +7,13 @@ import { fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
 
-const logger = {
+const prefix = '[installable-framer]'
+export const logger = {
     log(...args) {
-        console.log(...args)
+        console.log(prefix, ...args)
     },
     error(...args) {
-        console.error(...args)
+        console.error(prefix, ...args)
     },
 }
 
@@ -57,7 +58,7 @@ export async function bundle({ cwd = '', url }) {
         plugins: [
             esbuildPluginBundleDependencies({
                 onDependency: (x) => {
-                    logger.log('dep', x)
+                    // logger.log('dep', x)
                     deps.add(x)
                 },
             }),
@@ -82,7 +83,7 @@ export async function bundle({ cwd = '', url }) {
         .replace(/@.*/, '')
         .toLowerCase()
     // name = 'framer-' + name
-    logger.log('name', name)
+    // logger.log('name', name)
     const packageJson = {
         name: name,
         version: '0.0.0',
@@ -314,7 +315,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                 }
                 onDependency && onDependency(args.path)
                 const url = `https://esm.sh/${args.path}`
-                console.log('url', url)
+
                 return {
                     path: url,
                     namespace: 'https',
@@ -376,7 +377,7 @@ export async function recursiveResolveRedirect(url) {
     let res = await fetch(url, { redirect: 'manual', method: 'HEAD' })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
-        logger.log('redirect', loc)
+        // logger.log('redirect', loc)
         return recursiveResolveRedirect(res.headers.get('location'))
     }
 

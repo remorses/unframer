@@ -224,10 +224,13 @@ importers:
         version: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)'
       framer-for-next:
         specifier: workspace:*
-        version: link:../installable-framer
+        version: link:../framer-for-next
       framer-motion:
         specifier: 10.12.17
         version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
+      installable-framer:
+        specifier: workspace:*
+        version: link:../installable-framer
       next:
         specifier: 13.4.12
         version: 13.4.12(react-dom@18.2.0)(react@18.2.0)

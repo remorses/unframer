@@ -2,14 +2,15 @@
     "name": "installable-framer",
     "version": "0.0.0",
     "description": "",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "type": "module",
+
     "repository": "https://github.com/remorses/installable-framer",
     "scripts": {
         "build": "tsc",
+        "postinstall": "node bin.mjs",
         "watch": "tsc -w"
     },
-    "bin": "bin.js",
+    "bin": "bin.mjs",
     "files": [
         "dist",
         "bin.js",
