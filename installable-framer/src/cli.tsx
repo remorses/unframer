@@ -10,7 +10,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname)
 export async function postinstall() {
     const cwd = process.cwd()
     logger.log(`Looking for ${configName} in ${cwd}`)
-    const configPath = await findUp([configName], {cwd})
+    const configPath = await findUp([configName], { cwd })
     if (!configPath) {
         logger.log(`No ${configName} found`)
         return
@@ -21,7 +21,7 @@ export async function postinstall() {
         return
     }
     const config = JSON.parse(configContent)
-    const installDir = __dirname
+    const installDir = path.resolve(__dirname, '..')
     const { components } = config || {}
     if (!components) {
         logger.log(`No components found in ${configName}`)
@@ -39,6 +39,7 @@ export async function postinstall() {
             })
             const out = path.resolve(installDir, name)
             fs.mkdirSync(out, { recursive: true })
+            logger.log(`Copying ${files.length} files to ${out}`)
             await fs.copy(tempFolder, out, { overwrite: true })
         }),
     )

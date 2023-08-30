@@ -286,7 +286,12 @@ export function parsePropertyControls(code: string) {
     return propControls.slice(realStart + 1, -1)
 }
 
-const whitelist = new Set(['framer', 'framer-motion'])
+const whitelist = [
+    'react',
+    'react-dom',
+    'framer',
+    'framer-motion', //
+]
 
 export function esbuildPluginBundleDependencies({ onDependency }) {
     const codeCache = new Map()
@@ -312,7 +317,11 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         namespace: 'https',
                     }
                 }
-                if (whitelist.has(args.path)) {
+                if (
+                    whitelist.some(
+                        (x) => x === args.path || args.path.startsWith(x + '/'),
+                    )
+                ) {
                     return {
                         path: args.path,
                         external: true,

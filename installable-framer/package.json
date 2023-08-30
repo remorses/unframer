@@ -18,6 +18,10 @@
     "keywords": [],
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "license": "",
+    "peerDependencies": {
+        "react": "*",
+        "react-dom": "*"
+    },
     "dependencies": {
         "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
         "esbuild": "^0.19.2",
@@ -31,6 +35,8 @@
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",
+        "react": "*",
+        "react-dom": "*",
         "@types/node": "^20.5.7"
     }
 }
