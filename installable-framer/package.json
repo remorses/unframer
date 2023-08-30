@@ -13,7 +13,7 @@
     "bin": "bin.mjs",
     "files": [
         "dist",
-        "bin.js",
+        "bin.mjs",
         "src",
         "esm"
     ],
