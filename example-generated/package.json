@@ -1,0 +1,20 @@
+{
+  "name": "mega-menu-2wt3",
+  "version": "0.0.0",
+  "main": "./main.js",
+  "types": "main.d.ts",
+  "module": "./main.js",
+  "exports": {
+    ".": "./main.js",
+    "./package.json": "./package.json"
+  },
+  "type": "module",
+  "dependencies": {
+    "framer": "github:remorses/framer-fixed#c7d5877",
+    "framer-motion": "^10.12.17"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  }
+}

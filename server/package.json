@@ -15,7 +15,7 @@
         "@types/react": "18.2.9",
         "@types/react-dom": "18.2.4",
         "autoprefixer": "10.4.14",
-        "esbuild": "^0.18.10",
+        "esbuild": "^0.19.2",
         "framer": "^2.3.0",
         "framer-motion": "10.12.17",
         "native-fetch": "^4.0.2",

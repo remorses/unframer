@@ -6,7 +6,7 @@ import { bundle } from './exporter.js'
 test('bundle', async () => {
     const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
     console.log('tempFolder', tempFolder)
-    const url = 'https://framer.com/m/Pricing-Table-9kxI.js@NDWJBIQUoNPAR7okuHyI'
+    const url = 'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
     const { files, packageJson } = await bundle({
         url,
         cwd: tempFolder,

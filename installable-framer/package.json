@@ -3,11 +3,9 @@
     "version": "0.0.0",
     "description": "",
     "type": "module",
-
     "repository": "https://github.com/remorses/installable-framer",
     "scripts": {
         "build": "tsc",
-        "postinstall": "node bin.mjs",
         "watch": "tsc -w"
     },
     "bin": "bin.mjs",
@@ -22,7 +20,7 @@
     "license": "",
     "dependencies": {
         "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
-        "esbuild": "^0.18.10",
+        "esbuild": "^0.19.2",
         "find-up": "^6.3.0",
         "framer": "github:remorses/framer-fixed#c7d58771405ed9a6925859653b495bbde56f83d8",
         "framer-motion": "10.12.17",

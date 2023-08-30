@@ -54,7 +54,7 @@ export async function bundle({ cwd = '', url }) {
         minify: false,
         treeShaking: true,
         // splitting: true,
-
+        logLevel: 'error',
         plugins: [
             esbuildPluginBundleDependencies({
                 onDependency: (x) => {
@@ -299,13 +299,18 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                 return {
                     path: args.path,
                     external: false,
-                    sideEffects: false,
+                    // sideEffects: false,
                     namespace: 'https',
                 }
             })
-            build.onResolve({ filter: /^\w/ }, (args) => {
+            const resolveDep = (args) => {
                 if (args.path.startsWith('https://')) {
-                    return
+                    return {
+                        path: args.path,
+                        external: false,
+                        // sideEffects: false,
+                        namespace: 'https',
+                    }
                 }
                 if (whitelist.has(args.path)) {
                     return {
@@ -313,20 +318,27 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         external: true,
                     }
                 }
-                onDependency && onDependency(args.path)
+
+                // console.log('resolve', args.path)
+                if (args.path.startsWith('.') || args.path.startsWith('/')) {
+                    const u = new URL(args.path, args.importer).toString()
+                    // logger.log('resolve', u)
+                    return {
+                        path: u,
+                        namespace: 'https',
+                    }
+                }
+
                 const url = `https://esm.sh/${args.path}`
 
                 return {
                     path: url,
                     namespace: 'https',
-                    sideEffects: false,
                     external: false,
                 }
-            })
-            build.onResolve({ filter: /.*/, namespace: 'https' }, (args) => ({
-                path: new URL(args.path, args.importer).toString(),
-                namespace: 'https',
-            }))
+            }
+            // build.onResolve({ filter: /^\w/ }, resolveDep)
+            build.onResolve({ filter: /.*/, namespace: 'https' }, resolveDep)
             build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
                 const url = args.path
                 const u = new URL(url)
@@ -339,7 +351,13 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                     }
                 }
                 const promise = Promise.resolve().then(async () => {
+                    logger.log('fetching', resolved.toString())
                     const res = await fetch(resolved)
+                    if (!res.ok) {
+                        throw new Error(
+                            `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
+                        )
+                    }
                     const text = await res.text()
 
                     const transformed = await transform(text, {
@@ -347,6 +365,10 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                             'import.meta.url': JSON.stringify(resolved),
                         },
                         minify: false,
+                        format: 'esm',
+                        jsx: 'transform',
+                        logLevel: 'error',
+                        loader: 'jsx',
                         platform: 'browser',
                     })
                     return transformed.code
@@ -354,8 +376,10 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
 
                 codeCache.set(url, promise)
                 const code = await promise
+
                 return {
                     contents: code,
+
                     loader: 'js',
                 }
             })

@@ -5,21 +5,28 @@ import tmp from 'tmp'
 import path from 'path'
 const configName = 'installable-framer.json'
 
-
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 export async function postinstall() {
-    const configPath = await findUp([configName])
+    const cwd = process.cwd()
+    logger.log(`Looking for ${configName} in ${cwd}`)
+    const configPath = await findUp([configName], {cwd})
     if (!configPath) {
         logger.log(`No ${configName} found`)
         return
     }
-    const config = require(configPath)
-    if (!config) {
-        logger.log(`No ${configName} found`)
+    const configContent = fs.readFileSync(configPath, 'utf8')
+    if (!configContent) {
+        logger.log(`No ${configName} contents found`)
         return
     }
+    const config = JSON.parse(configContent)
     const installDir = __dirname
-    const { components } = config
+    const { components } = config || {}
+    if (!components) {
+        logger.log(`No components found in ${configName}`)
+        return
+    }
     await Promise.all(
         Object.keys(components).map(async (name) => {
             const url = components[name]
