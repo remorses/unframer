@@ -1,7 +1,6 @@
 {
     "name": "framer-for-next",
     "version": "0.0.2",
-    "private": true,
     "description": "",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
