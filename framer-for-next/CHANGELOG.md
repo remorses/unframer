@@ -1,5 +1,11 @@
 # framer-for-next
 
+## 0.0.3
+
+### Patch Changes
+
+-   publish styles.css
+
 ## 0.0.2
 
 ### Patch Changes
