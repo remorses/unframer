@@ -3,3 +3,4 @@ packages:
   - nextjs-app
   - server
   - framer-fixed
+  - installable-framer

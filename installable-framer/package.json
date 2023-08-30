@@ -1,0 +1,37 @@
+{
+    "name": "installable-framer",
+    "version": "0.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": "https://github.com/remorses/installable-framer",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w"
+    },
+    "bin": "bin.js",
+    "files": [
+        "dist",
+        "bin.js",
+        "src",
+        "esm"
+    ],
+    "keywords": [],
+    "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
+    "license": "",
+    "dependencies": {
+        "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+        "esbuild": "^0.18.10",
+        "find-up": "^6.3.0",
+        "framer": "github:remorses/framer-fixed#c7d58771405ed9a6925859653b495bbde56f83d8",
+        "framer-motion": "10.12.17",
+        "fs-extra": "^11.1.1",
+        "native-fetch": "^4.0.2",
+        "tmp": "^0.2.1",
+        "vm2": "^3.9.19"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.1",
+        "@types/node": "^20.5.7"
+    }
+}

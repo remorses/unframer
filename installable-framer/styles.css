@@ -1,0 +1,33 @@
+:root {
+    --desktop-breakpoint: 1024px;
+    --tablet-breakpoint: 768px;
+    --mobile-breakpoint: 767px;
+}
+
+.FramerTablet,
+.FramerMobile,
+.FramerDesktop {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .FramerDesktop {
+        display: contents;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .FramerTablet {
+        display: contents;
+    }
+}
+
+@media (max-width: 767px) {
+    .FramerMobile {
+        display: contents;
+    }
+}
+
+.contents {
+    display: contents;
+}
