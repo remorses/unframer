@@ -1,5 +1,11 @@
 # framer-for-next
 
+## 0.0.4
+
+### Patch Changes
+
+-   fix fonts loading
+
 ## 0.0.3
 
 ### Patch Changes
