@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.1.2
+
+### Patch Changes
+
+-   Fix components without props controls
+
 ## 0.1.1
 
 ### Patch Changes

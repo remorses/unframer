@@ -90,6 +90,9 @@ export async function bundle({ cwd = '', url }) {
         fs.readFileSync(resultFile, 'utf-8'),
         name,
     )
+    if (!propControls) {
+        logger.log(`no property controls found for ${name}`)
+    }
     const types = propControlsToType(propControls)
     // name = 'framer-' + name
     // logger.log('name', name)
@@ -162,17 +165,19 @@ export async function extractPropControlsUnsafe(text, name) {
 
         fs.writeFileSync(tempFile, text, 'utf-8')
         const delimiter = '__delimiter__'
+        let propCode = `JSON.stringify(x.default?.propertyControls || null, null, 2)`
+        // propCode = `x.default`
         const code = `import(${JSON.stringify(
             tempFile,
         )}).then(x => { console.log(${JSON.stringify(
             delimiter,
-        )}); console.log(JSON.stringify(x.default?.propertyControls, null, 2))
+        )}); console.log(${propCode})
         })`
         const res = execSync(`node -e '${code}'`)
         let stdout = res.toString()
         stdout = stdout.split(delimiter)[1]
         // console.log(stdout)
-        return JSON.parse(stdout)
+        return safeJsonParse(stdout)
     } catch (e: any) {
         console.error(`Cannot get property controls for ${name}`, e.stack)
     } finally {
@@ -180,12 +185,18 @@ export async function extractPropControlsUnsafe(text, name) {
     }
 }
 
-export function propControlsToType(controls?: PropertyControls) {
-    if (!controls) {
-        return ''
-    }
+function safeJsonParse(text) {
     try {
-        const types = Object.entries(controls)
+        return JSON.parse(text)
+    } catch (e) {
+        logger.error('cannot parse json', text.slice(0, 100))
+        return null
+    }
+}
+
+export function propControlsToType(controls?: PropertyControls) {
+    try {
+        const types = Object.entries(controls || {})
             .map(([key, value]) => {
                 if (!value) {
                     return
