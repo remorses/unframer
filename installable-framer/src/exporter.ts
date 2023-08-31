@@ -252,7 +252,7 @@ export function propControlsToType(controls?: PropertyControls) {
                 if (!name) {
                     return ''
                 }
-                return `  ${name}?: ${typescriptType(value)}`
+                return `  ${JSON.stringify(name)}?: ${typescriptType(value)}`
             })
             .filter(Boolean)
             .join('\n')
@@ -269,6 +269,7 @@ export function propControlsToType(controls?: PropertyControls) {
         return ''
     }
 }
+
 
 export function parsePropertyControls(code: string) {
     const start = code.indexOf('addPropertyControls(')
