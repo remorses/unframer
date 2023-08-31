@@ -79,6 +79,7 @@ export function FontsForComponents({ Components }) {
     return (
         <style
             dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
+            suppressHydrationWarning
             hidden
         />
     )
