@@ -185,6 +185,9 @@ importers:
       native-fetch:
         specifier: ^4.0.2
         version: 4.0.2(undici@5.23.0)
+      picocolors:
+        specifier: ^1.0.0
+        version: 1.0.0
       tmp:
         specifier: ^0.2.1
         version: 0.2.1

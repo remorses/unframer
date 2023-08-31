@@ -30,13 +30,14 @@
         "framer-motion": "10.12.17",
         "fs-extra": "^11.1.1",
         "native-fetch": "^4.0.2",
+        "picocolors": "^1.0.0",
         "tmp": "^0.2.1",
         "vm2": "^3.9.19"
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",
+        "@types/node": "^20.5.7",
         "react": "*",
-        "react-dom": "*",
-        "@types/node": "^20.5.7"
+        "react-dom": "*"
     }
 }

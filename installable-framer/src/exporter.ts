@@ -1,5 +1,6 @@
 import { Plugin, build, transform } from 'esbuild'
 import { VM } from 'vm2'
+import pico from 'picocolors'
 
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { ControlDescription, ControlType, PropertyControls } from 'framer'
@@ -13,7 +14,7 @@ export const logger = {
         console.log(prefix, ...args)
     },
     error(...args) {
-        console.error(prefix, ...args)
+        console.error([prefix, ...args].map((x) => pico.red(x)).join(' '))
     },
 }
 
@@ -130,12 +131,13 @@ export async function extractPropControls(url) {
         })()
         return propControls
     } catch (e: any) {
-        console.error(`Cannot get proprty controls for ${url}`, e.stack)
+        console.error(`Cannot get property controls for ${url}`, e.stack)
     }
 }
 
 export function propControlsToType(controls?: PropertyControls) {
     if (!controls) {
+        logger.log('no controls found')
         return ''
     }
     try {
