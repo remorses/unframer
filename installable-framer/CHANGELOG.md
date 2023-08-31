@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.1.0
+
+### Minor Changes
+
+-   Better prop controls extraction
+
 ## 0.0.3
 
 ### Patch Changes
