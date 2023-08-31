@@ -129,6 +129,10 @@ export async function extractPropControls(url) {
             vm.run(`__return(${propControlsCode})`)
             return result
         })()
+        if (!propControls) {
+            logger.error(`no property controls found for ${url}`)
+            return
+        }
         return propControls
     } catch (e: any) {
         console.error(`Cannot get property controls for ${url}`, e.stack)
