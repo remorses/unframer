@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.1.1
+
+### Patch Changes
+
+-   remove deps
+
 ## 0.1.0
 
 ### Minor Changes
