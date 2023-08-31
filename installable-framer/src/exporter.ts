@@ -141,7 +141,6 @@ export async function extractPropControls(url) {
 
 export function propControlsToType(controls?: PropertyControls) {
     if (!controls) {
-        logger.log('no controls found')
         return ''
     }
     try {
@@ -222,6 +221,7 @@ export function propControlsToType(controls?: PropertyControls) {
 export function parsePropertyControls(code: string) {
     const start = code.indexOf('addPropertyControls(')
     if (start === -1) {
+        logger.error('no addPropertyControls call found')
         return null
     }
     // count all parentheses to find when the addPropertyControls ends
