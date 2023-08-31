@@ -7,7 +7,7 @@ import Avatar from 'framer-avatar'
 import MegaMenu from 'https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl'
 import LogoTicker from 'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
 
-import Logos from 'installable-framer/components/logos'
+import Logos from '@/framer/logos'
 
 export default function Home() {
     return (

@@ -45,7 +45,7 @@ export async function bundle({ cwd = '', url }) {
 
     const result = await build({
         entryPoints: {
-            main: url,
+            index: url,
         },
 
         bundle: true,
@@ -69,7 +69,7 @@ export async function bundle({ cwd = '', url }) {
         outdir: path.resolve(cwd),
     })
     // logger.log('result', result)
-    const resultFile = path.resolve(cwd, './main.js')
+    const resultFile = path.resolve(cwd, './index.js')
     // TODO this is a vulnerability, i need to sandbox this somehow
     const propControls = await extractPropControls(url)
     const types = propControlsToType(propControls)
@@ -84,57 +84,22 @@ export async function bundle({ cwd = '', url }) {
         .toLowerCase()
     // name = 'framer-' + name
     // logger.log('name', name)
-    const packageJson = {
-        name: name,
-        version: '0.0.0',
-        main: './main.js',
-        types: types ? 'main.d.ts' : undefined,
-        module: './main.js',
-        // files: ['dist', 'package.json'],
-        exports: {
-            '.': './main.js',
-            './package.json': './package.json',
-        },
-        type: 'module',
-        dependencies: {
-            ...[...deps.values()]
-                .filter(
-                    (x) =>
-                        !peerDependencies[x] &&
-                        !Object.keys(peerDependencies).some((y) =>
-                            x.startsWith(y + '/'),
-                        ),
-                )
-                .reduce((acc, x) => {
-                    acc[x] = '*'
-                    return acc
-                }, {}),
-            ...dependencies,
-        },
-        peerDependencies,
-    }
-    fs.writeFileSync(
-        path.resolve(cwd, 'package.json'),
-        JSON.stringify(packageJson, null, 2),
-    )
-    fs.writeFileSync(path.resolve(cwd, 'main.d.ts'), types)
+
+    fs.writeFileSync(path.resolve(cwd, 'index.d.ts'), types)
+
     return {
         resultFile,
-        packageJson,
         // propControls,
         types,
 
         files: [
             {
-                name: './main.d.ts',
+                name: './index.d.ts',
                 content: types,
             },
+
             {
-                name: './package.json',
-                content: JSON.stringify(packageJson, null, 2),
-            },
-            {
-                name: './main.js',
+                name: './index.js',
                 content: fs.readFileSync(resultFile, 'utf-8'),
             },
         ],
@@ -315,6 +280,12 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         external: false,
                         // sideEffects: false,
                         namespace: 'https',
+                    }
+                }
+                if (args.path === 'framer') {
+                    return {
+                        path: 'installable-framer/dist/framer',
+                        external: true,
                     }
                 }
                 if (

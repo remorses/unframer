@@ -7,8 +7,8 @@ import { ReactNode } from 'react'
 import React from 'react'
 
 function getFonts(component) {
-    const fonts = component.fonts;
-    return fonts || [];
+    const fonts = component.fonts
+    return fonts || []
 }
 
 const defaultBreakpoints = ['Desktop', 'Tablet', 'Mobile'] as const
@@ -51,11 +51,11 @@ function getClassMap(breakpoints: Breakpoint[]): Record<Breakpoint, string> {
     return classMap
 }
 
-export function FontsForComponents({ Components }) {
+export function getFontsStyles(Components) {
     let styles: string[] = []
     for (let Component of Components) {
         const fonts = getFonts(Component)
-        console.log(JSON.stringify(fonts, null, 2))
+        // console.log(JSON.stringify(fonts, null, 2))
         let str = fonts
             .map((x) => {
                 let str = `@font-face { font-family: '${x.family}'; src: url(${x.url});`
@@ -72,11 +72,13 @@ export function FontsForComponents({ Components }) {
         styles.push(str)
     }
     let str = styles.join('\n')
+    return str
+}
+
+export function FontsForComponents({ Components }) {
     return (
         // @ts-ignore
-        <style hidden jsx global>
-            {str}
-        </style>
+        <style hidden>{getFontsStyles(Components)}</style>
     )
 }
 
@@ -123,7 +125,7 @@ export function WithFramerBreakpoints({
 
         let map = getClassMap(mapped)[breakpointName]
         let className = classNames('', map)
-        console.log({ mapped, options, map, realVariant, className })
+        // console.log({ mapped, options, map, realVariant, className })
         parts.push(
             // hidden disable the tailwind spacing for other elements
             <div className={className}>

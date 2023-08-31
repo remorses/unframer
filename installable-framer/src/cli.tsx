@@ -21,8 +21,8 @@ export async function postinstall() {
         return
     }
     const config = JSON.parse(configContent)
-    const installDir = path.resolve(__dirname, '..')
-    const { components } = config || {}
+    const { components, outDir } = config || {}
+    const installDir = path.resolve(process.cwd(), outDir || 'framer')
     if (!components) {
         logger.log(`No components found in ${configName}`)
         return
@@ -33,14 +33,22 @@ export async function postinstall() {
             logger.log(`Installing framer component installable-framer/${name}`)
             const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
             // logger.log('tempFolder', tempFolder)
-            const { files, packageJson } = await bundle({
+            const { files } = await bundle({
                 url,
                 cwd: tempFolder,
             })
             const out = path.resolve(installDir, name)
             fs.mkdirSync(out, { recursive: true })
-            logger.log(`Copying ${files.length} files to ${out}`)
-            await fs.copy(tempFolder, out, { overwrite: true })
+            logger.log(`Copying files to ${out}`)
+            await fs.copy(tempFolder, out, {
+                overwrite: true,
+                filter(x) {
+                    if (x.includes('package.json')) {
+                        return false
+                    }
+                    return true
+                },
+            })
         }),
     )
 }

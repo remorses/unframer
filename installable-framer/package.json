@@ -26,7 +26,7 @@
         "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
         "esbuild": "^0.19.2",
         "find-up": "^6.3.0",
-        "framer": "github:remorses/framer-fixed#91fb707018ad71ac656b2a7c8fff6968ebe483ab",
+        "framer": "github:remorses/framer-fixed#b7cfab6da24085c619e19fec82d02b9a477ee462",
         "framer-motion": "10.12.17",
         "fs-extra": "^11.1.1",
         "native-fetch": "^4.0.2",
