@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.0.3
+
+### Patch Changes
+
+-   Added outDir option
+
 ## 0.0.2
 
 ### Patch Changes

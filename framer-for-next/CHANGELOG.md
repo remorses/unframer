@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+-   Added outDir option
+
+## 0.0.3
+
+### Patch Changes
+
 -   publish styles.css
 
 ## 0.0.2
