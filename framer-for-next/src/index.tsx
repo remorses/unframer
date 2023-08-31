@@ -77,8 +77,10 @@ export function getFontsStyles(Components) {
 
 export function FontsForComponents({ Components }) {
     return (
-        // @ts-ignore
-        <style hidden>{getFontsStyles(Components)}</style>
+        <style
+            dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
+            hidden
+        />
     )
 }
 
