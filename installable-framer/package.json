@@ -15,6 +15,11 @@
         "src",
         "esm"
     ],
+    "exports": {
+        "./dist/framer": {
+            "default": "./dist/framer.js"
+        }
+    },
     "keywords": [],
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "license": "",
@@ -29,6 +34,7 @@
         "framer": "github:remorses/framer-fixed#b7cfab6da24085c619e19fec82d02b9a477ee462",
         "framer-motion": "10.12.17",
         "fs-extra": "^11.1.1",
+        "isolated-vm": "^4.6.0",
         "native-fetch": "^4.0.2",
         "picocolors": "^1.0.0",
         "tmp": "^0.2.1",

@@ -10,10 +10,11 @@ test(
         console.log('tempFolder', tempFolder)
         const url =
             'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
-        const { files } = await bundle({
+        const { types } = await bundle({
             url,
             cwd: tempFolder,
         })
+        console.log(types)
         console.log(tempFolder)
     },
     1000 * 10,

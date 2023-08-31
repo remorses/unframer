@@ -1,5 +1,6 @@
 import { Plugin, build, transform } from 'esbuild'
-import { VM } from 'vm2'
+import tmp from 'tmp'
+
 import pico from 'picocolors'
 
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
@@ -7,7 +8,9 @@ import { ControlDescription, ControlType, PropertyControls } from 'framer'
 import { fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
-
+import { execSync } from 'child_process'
+import { s } from 'vitest/dist/reporters-2ff87305.js'
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 const prefix = '[installable-framer]'
 export const logger = {
     log(...args) {
@@ -72,8 +75,7 @@ export async function bundle({ cwd = '', url }) {
     // logger.log('result', result)
     const resultFile = path.resolve(cwd, './index.js')
     // TODO this is a vulnerability, i need to sandbox this somehow
-    const propControls = await extractPropControls(url)
-    const types = propControlsToType(propControls)
+
     // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
     let name = u.pathname
         .split('/')
@@ -83,6 +85,12 @@ export async function bundle({ cwd = '', url }) {
         .replace(/\.js/i, '')
         .replace(/@.*/, '')
         .toLowerCase()
+
+    const propControls = await extractPropControlsUnsafe(
+        fs.readFileSync(resultFile, 'utf-8'),
+        name,
+    )
+    const types = propControlsToType(propControls)
     // name = 'framer-' + name
     // logger.log('name', name)
 
@@ -92,7 +100,6 @@ export async function bundle({ cwd = '', url }) {
         resultFile,
         // propControls,
         types,
-
         files: [
             {
                 name: './index.d.ts',
@@ -110,32 +117,66 @@ export async function bundle({ cwd = '', url }) {
 function decapitalize(str: string) {
     return str.charAt(0).toLowerCase() + str.slice(1)
 }
-export async function extractPropControls(url) {
+
+export async function extractPropControlsSafe(text, name) {
     try {
-        const text = await fetch(url).then((x) => x.text())
         const propControlsCode = await parsePropertyControls(text)
         // console.log('propControlsCode', propControlsCode)
-        const propControls: PropertyControls | undefined = (() => {
-            if (!propControlsCode) return
-            const vm = new VM({})
-            let result = undefined
-            vm.setGlobals({
-                ControlType,
-                __return: (x) => {
-                    result = x
-                },
-            })
+        const propControls: PropertyControls | undefined =
+            await Promise.resolve().then(async () => {
+                if (!propControlsCode) return
+                const ivm = require('isolated-vm')
+                const vm = new ivm.Isolate({ memoryLimit: 128 })
 
-            vm.run(`__return(${propControlsCode})`)
-            return result
-        })()
+                const context = vm.createContextSync()
+
+                const jail = context.global
+
+                let result = undefined
+                context.global.setSync('__return', (x) => {
+                    result = x
+                })
+
+                const mod = vm.compileModuleSync(`${text}`)
+                await mod.instantiateSync(context, (spec, mod) => {
+                    // TODO instantiate framer, react, framer-motion etc
+                    return
+                })
+                await mod.evaluate({})
+                return result
+            })
         if (!propControls) {
-            logger.error(`no property controls found for ${url}`)
+            logger.error(`no property controls found for component ${name}`)
             return
         }
         return propControls
     } catch (e: any) {
-        console.error(`Cannot get property controls for ${url}`, e.stack)
+        console.error(`Cannot get property controls for ${name}`, e.stack)
+    }
+}
+
+export async function extractPropControlsUnsafe(text, name) {
+    const tempFile = path.resolve(__dirname, `temp_${Date.now()}.js`)
+    try {
+        if (!text) return
+
+        fs.writeFileSync(tempFile, text, 'utf-8')
+        const delimiter = '__delimiter__'
+        const code = `import(${JSON.stringify(
+            tempFile,
+        )}).then(x => { console.log(${JSON.stringify(
+            delimiter,
+        )}); console.log(JSON.stringify(x.default?.propertyControls, null, 2))
+        })`
+        const res = execSync(`node -e '${code}'`)
+        let stdout = res.toString()
+        stdout = stdout.split(delimiter)[1]
+        // console.log(stdout)
+        return JSON.parse(stdout)
+    } catch (e: any) {
+        console.error(`Cannot get property controls for ${name}`, e.stack)
+    } finally {
+        fs.unlinkSync(tempFile)
     }
 }
 
