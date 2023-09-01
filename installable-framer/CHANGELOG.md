@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.2.1
+
+### Patch Changes
+
+-   fix semicolons syntax errors
+
 ## 0.2.0
 
 ### Minor Changes
