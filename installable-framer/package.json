@@ -18,6 +18,9 @@
     "exports": {
         "./dist/framer": {
             "default": "./dist/framer.js"
+        },
+        "./dist/react": {
+            "default": "./dist/react.js"
         }
     },
     "keywords": [],
@@ -31,7 +34,7 @@
         "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
         "esbuild": "^0.19.2",
         "find-up": "^6.3.0",
-        "framer": "github:remorses/framer-fixed#b7cfab6da24085c619e19fec82d02b9a477ee462",
+        "framer": "github:remorses/framer-fixed#07fec977d70bc68f8ff38a15654f065342aea459",
         "framer-motion": "10.12.17",
         "fs-extra": "^11.1.1",
         "native-fetch": "^4.0.2",

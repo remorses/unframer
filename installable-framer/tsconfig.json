@@ -4,6 +4,7 @@
         "rootDir": "src",
         "module": "NodeNext",
       "skipLibCheck": true,
+      "jsx": "react-jsx",
         "outDir": "dist"
     },
     "include": ["src"]

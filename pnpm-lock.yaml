@@ -174,8 +174,8 @@ importers:
         specifier: ^6.3.0
         version: 6.3.0
       framer:
-        specifier: github:remorses/framer-fixed#b7cfab6da24085c619e19fec82d02b9a477ee462
-        version: github.com/remorses/framer-fixed/b7cfab6da24085c619e19fec82d02b9a477ee462(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
+        specifier: github:remorses/framer-fixed#07fec977d70bc68f8ff38a15654f065342aea459
+        version: github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       framer-motion:
         specifier: 10.12.17
         version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
@@ -5439,7 +5439,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      framer: github.com/remorses/framer-fixed/b7cfab6da24085c619e19fec82d02b9a477ee462(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
+      framer: github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -5451,9 +5451,9 @@ packages:
     version: 0.0.2
     dev: true
 
-  github.com/remorses/framer-fixed/b7cfab6da24085c619e19fec82d02b9a477ee462(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/remorses/framer-fixed/tar.gz/b7cfab6da24085c619e19fec82d02b9a477ee462}
-    id: github.com/remorses/framer-fixed/b7cfab6da24085c619e19fec82d02b9a477ee462
+  github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/remorses/framer-fixed/tar.gz/07fec977d70bc68f8ff38a15654f065342aea459}
+    id: github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459
     name: framer
     version: 2.3.0
     peerDependencies:
