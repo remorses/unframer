@@ -1,4 +1,5 @@
 import { Plugin, build, transform } from 'esbuild'
+import dprint from 'dprint-node'
 import tmp from 'tmp'
 
 import pico from 'picocolors'
@@ -74,6 +75,14 @@ export async function bundle({ cwd = '', url }) {
     })
     // logger.log('result', result)
     const resultFile = path.resolve(cwd, './index.js')
+    const output = fs.readFileSync(resultFile, 'utf-8')
+    const code = dprint.format(resultFile, output, {
+        lineWidth: 140,
+        quoteStyle: 'alwaysSingle',
+        trailingCommas: 'always',
+        semiColons: 'asi',
+    })
+    fs.writeFileSync(resultFile, code, 'utf-8')
     // TODO this is a vulnerability, i need to sandbox this somehow
 
     // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
@@ -86,10 +95,7 @@ export async function bundle({ cwd = '', url }) {
         .replace(/@.*/, '')
         .toLowerCase()
 
-    const propControls = await extractPropControlsUnsafe(
-        fs.readFileSync(resultFile, 'utf-8'),
-        name,
-    )
+    const propControls = await extractPropControlsUnsafe(output, name)
     if (!propControls) {
         logger.log(`no property controls found for ${name}`)
     }
@@ -101,6 +107,7 @@ export async function bundle({ cwd = '', url }) {
 
     return {
         resultFile,
+        code,
         // propControls,
         types,
         files: [
@@ -269,7 +276,6 @@ export function propControlsToType(controls?: PropertyControls) {
         return ''
     }
 }
-
 
 export function parsePropertyControls(code: string) {
     const start = code.indexOf('addPropertyControls(')

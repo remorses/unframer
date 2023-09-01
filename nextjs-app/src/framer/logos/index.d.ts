@@ -7,6 +7,6 @@ export interface Props {
   width?: any
   height?: any
   layoutId?: string
-  variant?: 'Logo Ticker' | 'Logo Ticker - M'
+  "variant"?: 'Logo Ticker' | 'Logo Ticker - M'
 }
 export default function(props: Props): any

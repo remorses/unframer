@@ -32,6 +32,7 @@
     },
     "dependencies": {
         "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+        "dprint-node": "^1.0.7",
         "esbuild": "^0.19.2",
         "find-up": "^6.3.0",
         "framer": "github:remorses/framer-fixed#07fec977d70bc68f8ff38a15654f065342aea459",
