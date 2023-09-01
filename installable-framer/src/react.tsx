@@ -85,6 +85,43 @@ export function getFontsStyles(Components) {
     return str
 }
 
+const breakpointsStyles = `
+:root {
+    --desktop-breakpoint: 1024px;
+    --tablet-breakpoint: 768px;
+    --mobile-breakpoint: 767px;
+}
+
+.FramerTablet,
+.FramerMobile,
+.FramerDesktop {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .FramerDesktop {
+        display: contents;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .FramerTablet {
+        display: contents;
+    }
+}
+
+@media (max-width: 767px) {
+    .FramerMobile {
+        display: contents;
+    }
+}
+
+.contents {
+    display: contents;
+}
+
+`
+
 export function FramerStyles({ Components = [] as any[] }) {
     return (
         <>
@@ -94,7 +131,14 @@ export function FramerStyles({ Components = [] as any[] }) {
                 hidden
             />
             <style
-                dangerouslySetInnerHTML={{ __html: combinedCSSRules }}
+                dangerouslySetInnerHTML={{
+                    __html: combinedCSSRules.join('\n'),
+                }}
+                suppressHydrationWarning
+                hidden
+            />
+            <style
+                dangerouslySetInnerHTML={{ __html: breakpointsStyles }}
                 suppressHydrationWarning
                 hidden
             />

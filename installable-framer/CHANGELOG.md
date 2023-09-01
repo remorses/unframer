@@ -1,5 +1,15 @@
 # installable-framer
 
+## 0.2.0
+
+### Minor Changes
+
+-   Added more react utilities, format outputs
+
+### Patch Changes
+
+-   Added breakpoints styles
+
 ## 0.1.3
 
 ### Patch Changes
