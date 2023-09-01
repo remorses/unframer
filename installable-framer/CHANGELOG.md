@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.1.3
+
+### Patch Changes
+
+-   export framer styles to make ssr work
+
 ## 0.1.2
 
 ### Patch Changes
