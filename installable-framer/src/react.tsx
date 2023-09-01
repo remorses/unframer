@@ -86,11 +86,6 @@ export function getFontsStyles(Components) {
 }
 
 const breakpointsStyles = `
-:root {
-    --desktop-breakpoint: 1024px;
-    --tablet-breakpoint: 768px;
-    --mobile-breakpoint: 767px;
-}
 
 .FramerTablet,
 .FramerMobile,
@@ -178,13 +173,10 @@ export function WithFramerBreakpoints<
         let className = classNames('', map)
 
         parts.push(
-            // @ts-expect-error
-            <Component
-                key={breakpointName}
-                {...rest}
-                className={className}
-                variant={realVariant}
-            />,
+            <div key={breakpointName} className={className}>
+                {/* @ts-expect-error */}
+                <Component {...rest} variant={realVariant} />
+            </div>,
         )
     }
 

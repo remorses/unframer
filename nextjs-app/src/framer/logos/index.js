@@ -1,5 +1,5 @@
 // https:https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav
-import { jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime'
+import { jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
   addFonts,
   addPropertyControls as addPropertyControls2,
@@ -10,86 +10,86 @@ import {
   RichText,
   useVariantState,
   withCSS,
-} from 'installable-framer/dist/framer'
-import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'framer-motion'
-import * as React from 'react'
+} from 'installable-framer/dist/framer';
+import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'framer-motion';
+import * as React from 'react';
 
 // https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/ddeyjQ2r9Xibg9wdL56v/Ticker.js
-import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime'
-import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react'
-import { addPropertyControls, ControlType, RenderTarget, } from 'installable-framer/dist/framer'
-import { LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'framer-motion'
+import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
+import { addPropertyControls, ControlType, RenderTarget, } from 'installable-framer/dist/framer';
+import { LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'framer-motion';
 
 // https:https://esm.sh/v131/@motionone/utils@10.15.1/node/utils.mjs
 function h(o, r2,) {
-  o.indexOf(r2,) === -1 && o.push(r2,)
+  o.indexOf(r2,) === -1 && o.push(r2,);
 }
-var x = (o, r2, e,) => Math.min(Math.max(e, o,), r2,)
-var b = { duration: 0.3, delay: 0, endDelay: 0, repeat: 0, easing: 'ease', }
-var s = (o,) => typeof o == 'number'
-var a = (o,) => Array.isArray(o,) && !s(o[0],)
+var x = (o, r2, e,) => Math.min(Math.max(e, o,), r2,);
+var b = { duration: 0.3, delay: 0, endDelay: 0, repeat: 0, easing: 'ease', };
+var s = (o,) => typeof o == 'number';
+var a = (o,) => Array.isArray(o,) && !s(o[0],);
 var l = (o, r2, e,) => {
-  let t2 = r2 - o
-  return ((e - o) % t2 + t2) % t2 + o
-}
+  let t2 = r2 - o;
+  return ((e - o) % t2 + t2) % t2 + o;
+};
 function g(o, r2,) {
-  return a(o,) ? o[l(0, o.length, r2,)] : o
+  return a(o,) ? o[l(0, o.length, r2,)] : o;
 }
-var i = (o, r2, e,) => -e * o + e * r2 + o
+var i = (o, r2, e,) => -e * o + e * r2 + o;
 var O = () => {
-}
-var u = (o,) => o
-var f = (o, r2, e,) => r2 - o === 0 ? 1 : (e - o) / (r2 - o)
+};
+var u = (o,) => o;
+var f = (o, r2, e,) => r2 - o === 0 ? 1 : (e - o) / (r2 - o);
 function m(o, r2,) {
-  let e = o[o.length - 1]
+  let e = o[o.length - 1];
   for (let t2 = 1; t2 <= r2; t2++) {
-    let p2 = f(0, r2, t2,)
-    o.push(i(e, 1, p2,),)
+    let p2 = f(0, r2, t2,);
+    o.push(i(e, 1, p2,),);
   }
 }
 function d(o,) {
-  let r2 = [0,]
-  return m(r2, o - 1,), r2
+  let r2 = [0,];
+  return m(r2, o - 1,), r2;
 }
 function S(o, r2 = d(o.length,), e = u,) {
-  let t2 = o.length, p2 = t2 - r2.length
+  let t2 = o.length, p2 = t2 - r2.length;
   return p2 > 0 && m(r2, p2,), (y,) => {
-    let n = 0
+    let n = 0;
     for (; n < t2 - 2 && !(y < r2[n + 1]); n++);
-    let c = x(0, 1, f(r2[n], r2[n + 1], y,),)
-    return c = g(e, n,)(c,), i(o[n], o[n + 1], c,)
-  }
+    let c = x(0, 1, f(r2[n], r2[n + 1], y,),);
+    return c = g(e, n,)(c,), i(o[n], o[n + 1], c,);
+  };
 }
-var A = (o,) => Array.isArray(o,) && s(o[0],)
-var F = (o,) => typeof o == 'object' && !!o.createAnimation
-var I = (o,) => typeof o == 'function'
-var v = (o,) => typeof o == 'string'
-var N = { ms: (o,) => o * 1e3, s: (o,) => o / 1e3, }
+var A = (o,) => Array.isArray(o,) && s(o[0],);
+var F = (o,) => typeof o == 'object' && !!o.createAnimation;
+var I = (o,) => typeof o == 'function';
+var v = (o,) => typeof o == 'string';
+var N = { ms: (o,) => o * 1e3, s: (o,) => o / 1e3, };
 function R(o, r2,) {
-  return r2 ? o * (1e3 / r2) : 0
+  return r2 ? o * (1e3 / r2) : 0;
 }
 
 // https:https://esm.sh/v131/@motionone/easing@10.15.1/node/easing.mjs
-var s2 = (n, e, t2,) => (((1 - 3 * t2 + 3 * e) * n + (3 * t2 - 6 * e)) * n + 3 * e) * n
-var f2 = 1e-7
-var d2 = 12
+var s2 = (n, e, t2,) => (((1 - 3 * t2 + 3 * e) * n + (3 * t2 - 6 * e)) * n + 3 * e) * n;
+var f2 = 1e-7;
+var d2 = 12;
 function b2(n, e, t2, r2, o,) {
-  let i3, c, u2 = 0
-  do c = e + (t2 - e) / 2, i3 = s2(c, r2, o,) - n, i3 > 0 ? t2 = c : e = c while (Math.abs(i3,) > f2 && ++u2 < d2)
-  return c
+  let i3, c, u2 = 0;
+  do c = e + (t2 - e) / 2, i3 = s2(c, r2, o,) - n, i3 > 0 ? t2 = c : e = c; while (Math.abs(i3,) > f2 && ++u2 < d2);
+  return c;
 }
 function l2(n, e, t2, r2,) {
   if (n === e && t2 === r2) {
-    return u
+    return u;
   }
-  let o = (i3,) => b2(i3, 0, 1, n, t2,)
-  return (i3,) => i3 === 0 || i3 === 1 ? i3 : s2(o(i3,), e, r2,)
+  let o = (i3,) => b2(i3, 0, 1, n, t2,);
+  return (i3,) => i3 === 0 || i3 === 1 ? i3 : s2(o(i3,), e, r2,);
 }
 var h2 = (n, e = 'end',) => (t2,) => {
-  t2 = e === 'end' ? Math.min(t2, 0.999,) : Math.max(t2, 1e-3,)
-  let r2 = t2 * n, o = e === 'end' ? Math.floor(r2,) : Math.ceil(r2,)
-  return x(0, 1, o / n,)
-}
+  t2 = e === 'end' ? Math.min(t2, 0.999,) : Math.max(t2, 1e-3,);
+  let r2 = t2 * n, o = e === 'end' ? Math.floor(r2,) : Math.ceil(r2,);
+  return x(0, 1, o / n,);
+};
 
 // https:https://esm.sh/v131/@motionone/animation@10.15.1/node/animation.mjs
 var F2 = {
@@ -97,26 +97,26 @@ var F2 = {
   'ease-in': l2(0.42, 0, 1, 1,),
   'ease-in-out': l2(0.42, 0, 0.58, 1,),
   'ease-out': l2(0, 0, 0.58, 1,),
-}
-var w = /\((.*?)\)/
+};
+var w = /\((.*?)\)/;
 function l3(i3,) {
   if (I(i3,)) {
-    return i3
+    return i3;
   }
   if (A(i3,)) {
-    return l2(...i3,)
+    return l2(...i3,);
   }
   if (F2[i3]) {
-    return F2[i3]
+    return F2[i3];
   }
   if (i3.startsWith('steps',)) {
-    let t2 = w.exec(i3,)
+    let t2 = w.exec(i3,);
     if (t2) {
-      let a2 = t2[1].split(',',)
-      return h2(parseFloat(a2[0],), a2[1].trim(),)
+      let a2 = t2[1].split(',',);
+      return h2(parseFloat(a2[0],), a2[1].trim(),);
     }
   }
-  return u
+  return u;
 }
 var T = class {
   constructor(
@@ -143,91 +143,91 @@ var T = class {
         this.repeat = 0,
         this.playState = 'idle',
         this.finished = new Promise((r2, h3,) => {
-          this.resolve = r2, this.reject = h3
+          this.resolve = r2, this.reject = h3;
         },),
         s3 = s3 || b.easing,
         F(s3,)
     ) {
-      let r2 = s3.createAnimation(a2,)
-      s3 = r2.easing, a2 = r2.keyframes || a2, m2 = r2.duration || m2
+      let r2 = s3.createAnimation(a2,);
+      s3 = r2.easing, a2 = r2.keyframes || a2, m2 = r2.duration || m2;
     }
-    this.repeat = A2, this.easing = a(s3,) ? u : l3(s3,), this.updateDuration(m2,)
-    let q = S(a2, x2, a(s3,) ? s3.map(l3,) : u,)
+    this.repeat = A2, this.easing = a(s3,) ? u : l3(s3,), this.updateDuration(m2,);
+    let q = S(a2, x2, a(s3,) ? s3.map(l3,) : u,);
     this.tick = (r2,) => {
-      var h3
-      p2 = p2
-      let e = 0
+      var h3;
+      p2 = p2;
+      let e = 0;
       this.pauseTime !== void 0 ? e = this.pauseTime : e = (r2 - this.startTime) * this.rate,
         this.t = e,
         e /= 1e3,
         e = Math.max(e - p2, 0,),
-        this.playState === 'finished' && this.pauseTime === void 0 && (e = this.totalDuration)
-      let f3 = e / this.duration, g2 = Math.floor(f3,), n = f3 % 1
-      !n && f3 >= 1 && (n = 1), n === 1 && g2--
-      let y = g2 % 2
-      ;(c === 'reverse' || c === 'alternate' && y || c === 'alternate-reverse' && !y) && (n = 1 - n)
-      let D = e >= this.totalDuration ? 1 : Math.min(n, 1,), v2 = q(this.easing(D,),)
+        this.playState === 'finished' && this.pauseTime === void 0 && (e = this.totalDuration);
+      let f3 = e / this.duration, g2 = Math.floor(f3,), n = f3 % 1;
+      !n && f3 >= 1 && (n = 1), n === 1 && g2--;
+      let y = g2 % 2;
+      (c === 'reverse' || c === 'alternate' && y || c === 'alternate-reverse' && !y) && (n = 1 - n);
+      let D = e >= this.totalDuration ? 1 : Math.min(n, 1,), v2 = q(this.easing(D,),);
       t2(v2,),
         this.pauseTime === void 0 && (this.playState === 'finished' || e >= this.totalDuration + R3)
           ? (this.playState = 'finished', (h3 = this.resolve) === null || h3 === void 0 || h3.call(this, v2,))
-          : this.playState !== 'idle' && (this.frameRequestId = requestAnimationFrame(this.tick,))
-    }, this.play()
+          : this.playState !== 'idle' && (this.frameRequestId = requestAnimationFrame(this.tick,));
+    }, this.play();
   }
   play() {
-    let t2 = performance.now()
+    let t2 = performance.now();
     this.playState = 'running',
       this.pauseTime !== void 0 ? this.startTime = t2 - this.pauseTime : this.startTime || (this.startTime = t2),
       this.cancelTimestamp = this.startTime,
       this.pauseTime = void 0,
-      this.frameRequestId = requestAnimationFrame(this.tick,)
+      this.frameRequestId = requestAnimationFrame(this.tick,);
   }
   pause() {
-    this.playState = 'paused', this.pauseTime = this.t
+    this.playState = 'paused', this.pauseTime = this.t;
   }
   finish() {
-    this.playState = 'finished', this.tick(0,)
+    this.playState = 'finished', this.tick(0,);
   }
   stop() {
-    var t2
+    var t2;
     this.playState = 'idle',
       this.frameRequestId !== void 0 && cancelAnimationFrame(this.frameRequestId,),
-      (t2 = this.reject) === null || t2 === void 0 || t2.call(this, false,)
+      (t2 = this.reject) === null || t2 === void 0 || t2.call(this, false,);
   }
   cancel() {
-    this.stop(), this.tick(this.cancelTimestamp,)
+    this.stop(), this.tick(this.cancelTimestamp,);
   }
   reverse() {
-    this.rate *= -1
+    this.rate *= -1;
   }
   commitStyles() {
   }
   updateDuration(t2,) {
-    this.duration = t2, this.totalDuration = t2 * (this.repeat + 1)
+    this.duration = t2, this.totalDuration = t2 * (this.repeat + 1);
   }
   get currentTime() {
-    return this.t
+    return this.t;
   }
   set currentTime(t2,) {
-    this.pauseTime !== void 0 || this.rate === 0 ? this.pauseTime = t2 : this.startTime = performance.now() - t2 / this.rate
+    this.pauseTime !== void 0 || this.rate === 0 ? this.pauseTime = t2 : this.startTime = performance.now() - t2 / this.rate;
   }
   get playbackRate() {
-    return this.rate
+    return this.rate;
   }
   set playbackRate(t2,) {
-    this.rate = t2
+    this.rate = t2;
   }
-}
+};
 
 // https:https://esm.sh/v131/@motionone/generators@10.15.1/node/generators.mjs
-var O2 = 5
+var O2 = 5;
 function T2(t2, o, r2,) {
-  let s3 = Math.max(o - O2, 0,)
-  return R(r2 - t2(s3,), o - s3,)
+  let s3 = Math.max(o - O2, 0,);
+  return R(r2 - t2(s3,), o - s3,);
 }
-var p = { stiffness: 100, damping: 10, mass: 1, }
-var w2 = (t2 = p.stiffness, o = p.damping, r2 = p.mass,) => o / (2 * Math.sqrt(t2 * r2,))
+var p = { stiffness: 100, damping: 10, mass: 1, };
+var w2 = (t2 = p.stiffness, o = p.damping, r2 = p.mass,) => o / (2 * Math.sqrt(t2 * r2,));
 function S2(t2, o, r2,) {
-  return t2 < o && r2 >= o || t2 > o && r2 <= o
+  return t2 < o && r2 >= o || t2 > o && r2 <= o;
 }
 var B = (
   {
@@ -241,24 +241,24 @@ var B = (
     restDistance: l4 = 0.5,
   } = {},
 ) => {
-  i3 = i3 ? N.s(i3,) : 0
+  i3 = i3 ? N.s(i3,) : 0;
   let c = { done: false, hasReachedTarget: false, current: s3, target: n, },
     h3 = n - s3,
     m2 = Math.sqrt(t2 / r2,) / 1e3,
     a2 = w2(t2, o, r2,),
-    M2
+    M2;
   if (a2 < 1) {
-    let u2 = m2 * Math.sqrt(1 - a2 * a2,)
-    M2 = (d3,) => n - Math.exp(-a2 * m2 * d3,) * ((-i3 + a2 * m2 * h3) / u2 * Math.sin(u2 * d3,) + h3 * Math.cos(u2 * d3,))
+    let u2 = m2 * Math.sqrt(1 - a2 * a2,);
+    M2 = (d3,) => n - Math.exp(-a2 * m2 * d3,) * ((-i3 + a2 * m2 * h3) / u2 * Math.sin(u2 * d3,) + h3 * Math.cos(u2 * d3,));
   } else {
-    M2 = (u2,) => n - Math.exp(-m2 * u2,) * (h3 + (-i3 + m2 * h3) * u2)
+    M2 = (u2,) => n - Math.exp(-m2 * u2,) * (h3 + (-i3 + m2 * h3) * u2);
   }
   return (u2,) => {
-    c.current = M2(u2,)
-    let d3 = u2 === 0 ? i3 : T2(M2, u2, c.current,), R3 = Math.abs(d3,) <= f3, g2 = Math.abs(n - c.current,) <= l4
-    return c.done = R3 && g2, c.hasReachedTarget = S2(s3, n, c.current,), c
-  }
-}
+    c.current = M2(u2,);
+    let d3 = u2 === 0 ? i3 : T2(M2, u2, c.current,), R3 = Math.abs(d3,) <= f3, g2 = Math.abs(n - c.current,) <= l4;
+    return c.done = R3 && g2, c.hasReachedTarget = S2(s3, n, c.current,), c;
+  };
+};
 var L = (
   {
     from: t2 = 0,
@@ -274,19 +274,19 @@ var L = (
     restSpeed: m2,
   },
 ) => {
-  s3 = N.ms(s3,)
+  s3 = N.ms(s3,);
   let a2 = { hasReachedTarget: false, done: false, current: t2, target: t2, },
     M2 = (e,) => l4 !== void 0 && e < l4 || c !== void 0 && e > c,
     u2 = (e,) => l4 === void 0 ? c : c === void 0 || Math.abs(l4 - e,) < Math.abs(c - e,) ? l4 : c,
     d3 = r2 * o,
     R3 = t2 + d3,
-    g2 = f3 === void 0 ? R3 : f3(R3,)
-  a2.target = g2, g2 !== R3 && (d3 = g2 - t2)
+    g2 = f3 === void 0 ? R3 : f3(R3,);
+  a2.target = g2, g2 !== R3 && (d3 = g2 - t2);
   let b3 = (e,) => -d3 * Math.exp(-e / s3,),
     q = (e,) => g2 + b3(e,),
     F4 = (e,) => {
-      let y = b3(e,), k2 = q(e,)
-      a2.done = Math.abs(y,) <= h3, a2.current = a2.done ? g2 : k2
+      let y = b3(e,), k2 = q(e,);
+      a2.done = Math.abs(y,) <= h3, a2.current = a2.done ? g2 : k2;
     },
     x2,
     D,
@@ -301,51 +301,51 @@ var L = (
             stiffness: i3,
             restDistance: h3,
             restSpeed: m2,
-          },))
-    }
+          },));
+    };
   return G2(0,), (e,) => {
-    let y = false
+    let y = false;
     return !D && x2 === void 0 && (y = true, F4(e,), G2(e,)),
-      x2 !== void 0 && e > x2 ? (a2.hasReachedTarget = true, D(e - x2,)) : (a2.hasReachedTarget = false, !y && F4(e,), a2)
-  }
-}
-var V = 10
-var $ = 1e4
+      x2 !== void 0 && e > x2 ? (a2.hasReachedTarget = true, D(e - x2,)) : (a2.hasReachedTarget = false, !y && F4(e,), a2);
+  };
+};
+var V = 10;
+var $ = 1e4;
 function j(t2, o = u,) {
-  let r2, s3 = V, n = t2(0,), i3 = [o(n.current,),]
+  let r2, s3 = V, n = t2(0,), i3 = [o(n.current,),];
   for (; !n.done && s3 < $;) {
-    n = t2(s3,), i3.push(o(n.done ? n.target : n.current,),), r2 === void 0 && n.hasReachedTarget && (r2 = s3), s3 += V
+    n = t2(s3,), i3.push(o(n.done ? n.target : n.current,),), r2 === void 0 && n.hasReachedTarget && (r2 = s3), s3 += V;
   }
-  let f3 = s3 - V
-  return i3.length === 1 && i3.push(n.current,), { keyframes: i3, duration: f3 / 1e3, overshootDuration: (r2 ?? f3) / 1e3, }
+  let f3 = s3 - V;
+  return i3.length === 1 && i3.push(n.current,), { keyframes: i3, duration: f3 / 1e3, overshootDuration: (r2 ?? f3) / 1e3, };
 }
 
 // https:https://esm.sh/v131/hey-listen@1.0.8/node/hey-listen.mjs
 var i2 = function () {
-}
+};
 var r = function () {
-}
+};
 i2 = function (n, o,) {
-  !n && typeof console < 'u' && console.warn(o,)
+  !n && typeof console < 'u' && console.warn(o,);
 },
   r = function (n, o,) {
     if (!n) {
-      throw new Error(o,)
+      throw new Error(o,);
     }
-  }
+  };
 
 // https:https://esm.sh/v131/tslib@2.6.2/node/tslib.mjs
 function S3(e, t2,) {
-  var n = {}
+  var n = {};
   for (var r2 in e) {
-    Object.prototype.hasOwnProperty.call(e, r2,) && t2.indexOf(r2,) < 0 && (n[r2] = e[r2])
+    Object.prototype.hasOwnProperty.call(e, r2,) && t2.indexOf(r2,) < 0 && (n[r2] = e[r2]);
   }
   if (e != null && typeof Object.getOwnPropertySymbols == 'function') {
     for (var i3 = 0, r2 = Object.getOwnPropertySymbols(e,); i3 < r2.length; i3++) {
-      t2.indexOf(r2[i3],) < 0 && Object.prototype.propertyIsEnumerable.call(e, r2[i3],) && (n[r2[i3]] = e[r2[i3]])
+      t2.indexOf(r2[i3],) < 0 && Object.prototype.propertyIsEnumerable.call(e, r2[i3],) && (n[r2[i3]] = e[r2[i3]]);
     }
   }
-  return n
+  return n;
 }
 
 // https:https://esm.sh/v131/@motionone/types@10.15.1/node/types.mjs
@@ -353,141 +353,141 @@ var t = class {
   setAnimation(i3,) {
     this.animation = i3,
       i3?.finished.then(() => this.clearAnimation()).catch(() => {
-      },)
+      },);
   }
   clearAnimation() {
-    this.animation = this.generator = void 0
+    this.animation = this.generator = void 0;
   }
-}
+};
 
 // https:https://esm.sh/v131/@motionone/dom@10.16.2/node/dom.mjs
-var ct = /* @__PURE__ */ new WeakMap()
+var ct = /* @__PURE__ */ new WeakMap();
 function j2(t2,) {
-  return ct.has(t2,) || ct.set(t2, { transforms: [], values: /* @__PURE__ */ new Map(), },), ct.get(t2,)
+  return ct.has(t2,) || ct.set(t2, { transforms: [], values: /* @__PURE__ */ new Map(), },), ct.get(t2,);
 }
 function Vt(t2, e,) {
-  return t2.has(e,) || t2.set(e, new t(),), t2.get(e,)
+  return t2.has(e,) || t2.set(e, new t(),), t2.get(e,);
 }
-var he = ['', 'X', 'Y', 'Z',]
-var ve = ['translate', 'scale', 'rotate', 'skew',]
-var z = { x: 'translateX', y: 'translateY', z: 'translateZ', }
-var Wt = { syntax: '<angle>', initialValue: '0deg', toDefaultUnit: (t2,) => t2 + 'deg', }
+var he = ['', 'X', 'Y', 'Z',];
+var ve = ['translate', 'scale', 'rotate', 'skew',];
+var z = { x: 'translateX', y: 'translateY', z: 'translateZ', };
+var Wt = { syntax: '<angle>', initialValue: '0deg', toDefaultUnit: (t2,) => t2 + 'deg', };
 var ye = {
   translate: { syntax: '<length-percentage>', initialValue: '0px', toDefaultUnit: (t2,) => t2 + 'px', },
   rotate: Wt,
   scale: { syntax: '<number>', initialValue: 1, toDefaultUnit: u, },
   skew: Wt,
-}
-var T3 = /* @__PURE__ */ new Map()
-var F3 = (t2,) => `--motion-${t2}`
-var X = ['x', 'y', 'z',]
+};
+var T3 = /* @__PURE__ */ new Map();
+var F3 = (t2,) => `--motion-${t2}`;
+var X = ['x', 'y', 'z',];
 ve.forEach((t2,) => {
   he.forEach((e,) => {
-    X.push(t2 + e,), T3.set(F3(t2 + e,), ye[t2],)
-  },)
-},)
-var xe = (t2, e,) => X.indexOf(t2,) - X.indexOf(e,)
-var we = new Set(X,)
-var H = (t2,) => we.has(t2,)
+    X.push(t2 + e,), T3.set(F3(t2 + e,), ye[t2],);
+  },);
+},);
+var xe = (t2, e,) => X.indexOf(t2,) - X.indexOf(e,);
+var we = new Set(X,);
+var H = (t2,) => we.has(t2,);
 var Mt = (t2, e,) => {
-  z[e] && (e = z[e])
-  let { transforms: n, } = j2(t2,)
-  h(n, e,), t2.style.transform = ft(n,)
-}
-var ft = (t2,) => t2.sort(xe,).reduce(Ee, '',).trim()
-var Ee = (t2, e,) => `${t2} ${e}(var(${F3(e,)}))`
-var R2 = (t2,) => t2.startsWith('--',)
-var Pt = /* @__PURE__ */ new Set()
+  z[e] && (e = z[e]);
+  let { transforms: n, } = j2(t2,);
+  h(n, e,), t2.style.transform = ft(n,);
+};
+var ft = (t2,) => t2.sort(xe,).reduce(Ee, '',).trim();
+var Ee = (t2, e,) => `${t2} ${e}(var(${F3(e,)}))`;
+var R2 = (t2,) => t2.startsWith('--',);
+var Pt = /* @__PURE__ */ new Set();
 function Nt(t2,) {
   if (!Pt.has(t2,)) {
-    Pt.add(t2,)
+    Pt.add(t2,);
     try {
-      let { syntax: e, initialValue: n, } = T3.has(t2,) ? T3.get(t2,) : {}
-      CSS.registerProperty({ name: t2, inherits: false, syntax: e, initialValue: n, },)
+      let { syntax: e, initialValue: n, } = T3.has(t2,) ? T3.get(t2,) : {};
+      CSS.registerProperty({ name: t2, inherits: false, syntax: e, initialValue: n, },);
     } catch {
     }
   }
 }
-var lt = (t2, e,) => document.createElement('div',).animate(t2, e,)
+var lt = (t2, e,) => document.createElement('div',).animate(t2, e,);
 var It = {
   cssRegisterProperty: () => typeof CSS < 'u' && Object.hasOwnProperty.call(CSS, 'registerProperty',),
   waapi: () => Object.hasOwnProperty.call(Element.prototype, 'animate',),
   partialKeyframes: () => {
     try {
-      lt({ opacity: [1,], },)
+      lt({ opacity: [1,], },);
     } catch {
-      return false
+      return false;
     }
-    return true
+    return true;
   },
   finished: () => !!lt({ opacity: [0, 1,], }, { duration: 1e-3, },).finished,
   linearEasing: () => {
     try {
-      lt({ opacity: 0, }, { easing: 'linear(0, 1)', },)
+      lt({ opacity: 0, }, { easing: 'linear(0, 1)', },);
     } catch {
-      return false
+      return false;
     }
-    return true
+    return true;
   },
-}
-var mt = {}
-var V2 = {}
+};
+var mt = {};
+var V2 = {};
 for (let t2 in It) {
-  V2[t2] = () => (mt[t2] === void 0 && (mt[t2] = It[t2]()), mt[t2])
+  V2[t2] = () => (mt[t2] === void 0 && (mt[t2] = It[t2]()), mt[t2]);
 }
-var Te = 0.015
+var Te = 0.015;
 var Le = (t2, e,) => {
-  let n = '', r2 = Math.round(e / Te,)
+  let n = '', r2 = Math.round(e / Te,);
   for (let o = 0; o < r2; o++) {
-    n += t2(f(0, r2 - 1, o,),) + ', '
+    n += t2(f(0, r2 - 1, o,),) + ', ';
   }
-  return n.substring(0, n.length - 2,)
-}
-var ut = (t2, e,) => I(t2,) ? V2.linearEasing() ? `linear(${Le(t2, e,)})` : b.easing : A(t2,) ? De(t2,) : t2
-var De = ([t2, e, n, r2,],) => `cubic-bezier(${t2}, ${e}, ${n}, ${r2})`
+  return n.substring(0, n.length - 2,);
+};
+var ut = (t2, e,) => I(t2,) ? V2.linearEasing() ? `linear(${Le(t2, e,)})` : b.easing : A(t2,) ? De(t2,) : t2;
+var De = ([t2, e, n, r2,],) => `cubic-bezier(${t2}, ${e}, ${n}, ${r2})`;
 function _t(t2, e,) {
   for (let n = 0; n < t2.length; n++) {
-    t2[n] === null && (t2[n] = n ? t2[n - 1] : e())
+    t2[n] === null && (t2[n] = n ? t2[n - 1] : e());
   }
-  return t2
+  return t2;
 }
-var Y = (t2,) => Array.isArray(t2,) ? t2 : [t2,]
+var Y = (t2,) => Array.isArray(t2,) ? t2 : [t2,];
 function W(t2,) {
-  return z[t2] && (t2 = z[t2]), H(t2,) ? F3(t2,) : t2
+  return z[t2] && (t2 = z[t2]), H(t2,) ? F3(t2,) : t2;
 }
 var M = {
   get: (t2, e,) => {
-    e = W(e,)
-    let n = R2(e,) ? t2.style.getPropertyValue(e,) : getComputedStyle(t2,)[e]
+    e = W(e,);
+    let n = R2(e,) ? t2.style.getPropertyValue(e,) : getComputedStyle(t2,)[e];
     if (!n && n !== 0) {
-      let r2 = T3.get(e,)
-      r2 && (n = r2.initialValue)
+      let r2 = T3.get(e,);
+      r2 && (n = r2.initialValue);
     }
-    return n
+    return n;
   },
   set: (t2, e, n,) => {
-    e = W(e,), R2(e,) ? t2.style.setProperty(e, n,) : t2.style[e] = n
+    e = W(e,), R2(e,) ? t2.style.setProperty(e, n,) : t2.style[e] = n;
   },
-}
+};
 function J(t2, e = true,) {
   if (!(!t2 || t2.playState === 'finished')) {
     try {
-      t2.stop ? t2.stop() : (e && t2.commitStyles(), t2.cancel())
+      t2.stop ? t2.stop() : (e && t2.commitStyles(), t2.cancel());
     } catch {
     }
   }
 }
 function Q(t2, e,) {
-  var n
-  let r2 = e?.toDefaultUnit || u, o = t2[t2.length - 1]
+  var n;
+  let r2 = e?.toDefaultUnit || u, o = t2[t2.length - 1];
   if (v(o,)) {
-    let i3 = ((n = o.match(/(-?[\d.]+)([a-z%]*)/,)) === null || n === void 0 ? void 0 : n[2]) || ''
-    i3 && (r2 = (s3,) => s3 + i3)
+    let i3 = ((n = o.match(/(-?[\d.]+)([a-z%]*)/,)) === null || n === void 0 ? void 0 : n[2]) || '';
+    i3 && (r2 = (s3,) => s3 + i3);
   }
-  return r2
+  return r2;
 }
 function We() {
-  return window.__MOTION_DEV_TOOLS_RECORD
+  return window.__MOTION_DEV_TOOLS_RECORD;
 }
 function _(t2, e, n, r2 = {}, o,) {
   let i3 = We(),
@@ -506,26 +506,26 @@ function _(t2, e, n, r2 = {}, o,) {
     } = r2,
     y = j2(t2,),
     b3 = H(e,),
-    w3 = V2.waapi()
-  b3 && Mt(t2, e,)
-  let E2 = W(e,), A2 = Vt(y.values, E2,), x2 = T3.get(E2,)
+    w3 = V2.waapi();
+  b3 && Mt(t2, e,);
+  let E2 = W(e,), A2 = Vt(y.values, E2,), x2 = T3.get(E2,);
   return J(A2.animation, !(F(f3,) && A2.generator) && r2.record !== false,), () => {
     let h3 = () => {
-        var v2, D
-        return (D = (v2 = M.get(t2, E2,)) !== null && v2 !== void 0 ? v2 : x2?.initialValue) !== null && D !== void 0 ? D : 0
+        var v2, D;
+        return (D = (v2 = M.get(t2, E2,)) !== null && v2 !== void 0 ? v2 : x2?.initialValue) !== null && D !== void 0 ? D : 0;
       },
       u2 = _t(Y(n,), h3,),
-      L2 = Q(u2, x2,)
+      L2 = Q(u2, x2,);
     if (F(f3,)) {
-      let v2 = f3.createAnimation(u2, e !== 'opacity', h3, E2, A2,)
-      f3 = v2.easing, u2 = v2.keyframes || u2, p2 = v2.duration || p2
+      let v2 = f3.createAnimation(u2, e !== 'opacity', h3, E2, A2,);
+      f3 = v2.easing, u2 = v2.keyframes || u2, p2 = v2.duration || p2;
     }
     if (
       R2(E2,) && (V2.cssRegisterProperty() ? Nt(E2,) : w3 = false),
         b3 && !V2.linearEasing() && (I(f3,) || a(f3,) && f3.some(I,)) && (w3 = false),
         w3
     ) {
-      x2 && (u2 = u2.map((C,) => s(C,) ? x2.toDefaultUnit(C,) : C)), u2.length === 1 && (!V2.partialKeyframes() || s3) && u2.unshift(h3(),)
+      x2 && (u2 = u2.map((C,) => s(C,) ? x2.toDefaultUnit(C,) : C)), u2.length === 1 && (!V2.partialKeyframes() || s3) && u2.unshift(h3(),);
       let v2 = {
         delay: N.ms(a2,),
         duration: N.ms(p2,),
@@ -534,286 +534,286 @@ function _(t2, e, n, r2 = {}, o,) {
         direction: S4,
         iterations: d3 + 1,
         fill: 'both',
-      }
+      };
       l4 = t2.animate({ [E2]: u2, offset: m2, easing: a(f3,) ? f3.map((C,) => ut(C, p2,)) : void 0, }, v2,),
         l4.finished || (l4.finished = new Promise((C, Z,) => {
-          l4.onfinish = C, l4.oncancel = Z
-        },))
-      let D = u2[u2.length - 1]
+          l4.onfinish = C, l4.oncancel = Z;
+        },));
+      let D = u2[u2.length - 1];
       l4.finished.then(() => {
-        O3 || (M.set(t2, E2, D,), l4.cancel())
-      },).catch(O,), g2 || (l4.playbackRate = 1.000001)
+        O3 || (M.set(t2, E2, D,), l4.cancel());
+      },).catch(O,), g2 || (l4.playbackRate = 1.000001);
     } else if (o && b3) {
       u2 = u2.map((v2,) => typeof v2 == 'string' ? parseFloat(v2,) : v2),
         u2.length === 1 && u2.unshift(parseFloat(h3(),),),
         l4 = new o(
           (v2,) => {
-            M.set(t2, E2, L2 ? L2(v2,) : v2,)
+            M.set(t2, E2, L2 ? L2(v2,) : v2,);
           },
           u2,
           Object.assign(Object.assign({}, r2,), { duration: p2, easing: f3, },),
-        )
+        );
     } else {
-      let v2 = u2[u2.length - 1]
-      M.set(t2, E2, x2 && s(v2,) ? x2.toDefaultUnit(v2,) : v2,)
+      let v2 = u2[u2.length - 1];
+      M.set(t2, E2, x2 && s(v2,) ? x2.toDefaultUnit(v2,) : v2,);
     }
-    return s3 && i3(t2, e, u2, { duration: p2, delay: a2, easing: f3, repeat: d3, offset: m2, }, 'motion-one',), A2.setAnimation(l4,), l4
-  }
+    return s3 && i3(t2, e, u2, { duration: p2, delay: a2, easing: f3, repeat: d3, offset: m2, }, 'motion-one',), A2.setAnimation(l4,), l4;
+  };
 }
-var U = (t2, e,) => t2[e] ? Object.assign(Object.assign({}, t2,), t2[e],) : Object.assign({}, t2,)
+var U = (t2, e,) => t2[e] ? Object.assign(Object.assign({}, t2,), t2[e],) : Object.assign({}, t2,);
 function P(t2, e,) {
-  var n
+  var n;
   return typeof t2 == 'string'
     ? e
       ? ((n = e[t2]) !== null && n !== void 0 || (e[t2] = document.querySelectorAll(t2,)), t2 = e[t2])
       : t2 = document.querySelectorAll(t2,)
     : t2 instanceof Element && (t2 = [t2,]),
-    Array.from(t2 || [],)
+    Array.from(t2 || [],);
 }
-var Ne = (t2,) => t2()
-var G = (t2, e, n = b.duration,) => new Proxy({ animations: t2.map(Ne,).filter(Boolean,), duration: n, options: e, }, _e,)
-var Ie = (t2,) => t2.animations[0]
+var Ne = (t2,) => t2();
+var G = (t2, e, n = b.duration,) => new Proxy({ animations: t2.map(Ne,).filter(Boolean,), duration: n, options: e, }, _e,);
+var Ie = (t2,) => t2.animations[0];
 var _e = {
   get: (t2, e,) => {
-    let n = Ie(t2,)
+    let n = Ie(t2,);
     switch (e) {
       case 'duration':
-        return t2.duration
+        return t2.duration;
       case 'currentTime':
-        return N.s(n?.[e] || 0,)
+        return N.s(n?.[e] || 0,);
       case 'playbackRate':
       case 'playState':
-        return n?.[e]
+        return n?.[e];
       case 'finished':
-        return t2.finished || (t2.finished = Promise.all(t2.animations.map(Be,),).catch(O,)), t2.finished
+        return t2.finished || (t2.finished = Promise.all(t2.animations.map(Be,),).catch(O,)), t2.finished;
       case 'stop':
         return () => {
-          t2.animations.forEach((r2,) => J(r2,))
-        }
+          t2.animations.forEach((r2,) => J(r2,));
+        };
       case 'forEachNative':
         return (r2,) => {
-          t2.animations.forEach((o,) => r2(o, t2,))
-        }
+          t2.animations.forEach((o,) => r2(o, t2,));
+        };
       default:
-        return typeof n?.[e] > 'u' ? void 0 : () => t2.animations.forEach((r2,) => r2[e]())
+        return typeof n?.[e] > 'u' ? void 0 : () => t2.animations.forEach((r2,) => r2[e]());
     }
   },
   set: (t2, e, n,) => {
     switch (e) {
       case 'currentTime':
-        n = N.ms(n,)
+        n = N.ms(n,);
       case 'currentTime':
       case 'playbackRate':
         for (let r2 = 0; r2 < t2.animations.length; r2++) {
-          t2.animations[r2][e] = n
+          t2.animations[r2][e] = n;
         }
-        return true
+        return true;
     }
-    return false
+    return false;
   },
-}
-var Be = (t2,) => t2.finished
+};
+var Be = (t2,) => t2.finished;
 function tt(t2, e, n,) {
-  return I(t2,) ? t2(e, n,) : t2
+  return I(t2,) ? t2(e, n,) : t2;
 }
 function gt(t2,) {
   return function (n, r2, o = {},) {
-    n = P(n,)
-    let i3 = n.length
-    r(!!i3, 'No valid element provided.',), r(!!r2, 'No keyframes defined.',)
-    let s3 = []
+    n = P(n,);
+    let i3 = n.length;
+    r(!!i3, 'No valid element provided.',), r(!!r2, 'No keyframes defined.',);
+    let s3 = [];
     for (let l4 = 0; l4 < i3; l4++) {
-      let p2 = n[l4]
+      let p2 = n[l4];
       for (let a2 in r2) {
-        let c = U(o, a2,)
-        c.delay = tt(c.delay, l4, i3,)
-        let d3 = _(p2, a2, r2[a2], c, t2,)
-        s3.push(d3,)
+        let c = U(o, a2,);
+        c.delay = tt(c.delay, l4, i3,);
+        let d3 = _(p2, a2, r2[a2], c, t2,);
+        s3.push(d3,);
       }
     }
-    return G(s3, o, o.duration,)
-  }
+    return G(s3, o, o.duration,);
+  };
 }
-var Ge = gt(T,)
+var Ge = gt(T,);
 function Gt(t2,) {
-  return s(t2,) && !isNaN(t2,)
+  return s(t2,) && !isNaN(t2,);
 }
 function yt(t2,) {
-  return v(t2,) ? parseFloat(t2,) : t2
+  return v(t2,) ? parseFloat(t2,) : t2;
 }
 function et(t2,) {
-  let e = /* @__PURE__ */ new WeakMap()
+  let e = /* @__PURE__ */ new WeakMap();
   return (n = {},) => {
     let r2 = /* @__PURE__ */ new Map(),
       o = (s3 = 0, l4 = 100, p2 = 0, a2 = false,) => {
-        let c = `${s3}-${l4}-${p2}-${a2}`
+        let c = `${s3}-${l4}-${p2}-${a2}`;
         return r2.has(c,) ||
           r2.set(c, t2(Object.assign({ from: s3, to: l4, velocity: p2, restSpeed: a2 ? 0.05 : 2, restDistance: a2 ? 0.01 : 0.5, }, n,),),),
-          r2.get(c,)
+          r2.get(c,);
       },
-      i3 = (s3, l4,) => (e.has(s3,) || e.set(s3, j(s3, l4,),), e.get(s3,))
+      i3 = (s3, l4,) => (e.has(s3,) || e.set(s3, j(s3, l4,),), e.get(s3,));
     return {
       createAnimation: (s3, l4 = true, p2, a2, c,) => {
-        let d3, f3, O3, S4 = 0, m2 = u, g2 = s3.length
+        let d3, f3, O3, S4 = 0, m2 = u, g2 = s3.length;
         if (l4) {
-          m2 = Q(s3, a2 ? T3.get(W(a2,),) : void 0,)
-          let y = s3[g2 - 1]
+          m2 = Q(s3, a2 ? T3.get(W(a2,),) : void 0,);
+          let y = s3[g2 - 1];
           if (O3 = yt(y,), g2 > 1 && s3[0] !== null) {
-            f3 = yt(s3[0],)
+            f3 = yt(s3[0],);
           } else {
-            let b3 = c?.generator
+            let b3 = c?.generator;
             if (b3) {
               let { animation: w3, generatorStartTime: E2, } = c,
                 A2 = w3?.startTime || E2 || 0,
                 x2 = w3?.currentTime || performance.now() - A2,
-                h3 = b3(x2,).current
-              f3 = h3, S4 = T2((u2,) => b3(u2,).current, x2, h3,)
+                h3 = b3(x2,).current;
+              f3 = h3, S4 = T2((u2,) => b3(u2,).current, x2, h3,);
             } else {
-              p2 && (f3 = yt(p2(),))
+              p2 && (f3 = yt(p2(),));
             }
           }
         }
         if (Gt(f3,) && Gt(O3,)) {
-          let y = o(f3, O3, S4, a2?.includes('scale',),)
+          let y = o(f3, O3, S4, a2?.includes('scale',),);
           d3 = Object.assign(Object.assign({}, i3(y, m2,),), { easing: 'linear', },),
-            c && (c.generator = y, c.generatorStartTime = performance.now())
+            c && (c.generator = y, c.generatorStartTime = performance.now());
         }
-        return d3 || (d3 = { easing: 'ease', duration: i3(o(0, 100,),).overshootDuration, }), d3
+        return d3 || (d3 = { easing: 'ease', duration: i3(o(0, 100,),).overshootDuration, }), d3;
       },
-    }
-  }
+    };
+  };
 }
-var hn = et(B,)
-var yn = et(L,)
-var wn = { any: 0, all: 1, }
+var hn = et(B,);
+var yn = et(L,);
+var wn = { any: 0, all: 1, };
 function xt(t2, e, { root: n, margin: r2, amount: o = 'any', } = {},) {
   if (typeof IntersectionObserver > 'u') {
     return () => {
-    }
+    };
   }
   let i3 = P(t2,),
     s3 = /* @__PURE__ */ new WeakMap(),
     l4 = (a2,) => {
       a2.forEach((c,) => {
-        let d3 = s3.get(c.target,)
+        let d3 = s3.get(c.target,);
         if (c.isIntersecting !== !!d3) {
           if (c.isIntersecting) {
-            let f3 = e(c,)
-            I(f3,) ? s3.set(c.target, f3,) : p2.unobserve(c.target,)
+            let f3 = e(c,);
+            I(f3,) ? s3.set(c.target, f3,) : p2.unobserve(c.target,);
           } else {
-            d3 && (d3(c,), s3.delete(c.target,))
+            d3 && (d3(c,), s3.delete(c.target,));
           }
         }
-      },)
+      },);
     },
-    p2 = new IntersectionObserver(l4, { root: n, rootMargin: r2, threshold: typeof o == 'number' ? o : wn[o], },)
-  return i3.forEach((a2,) => p2.observe(a2,)), () => p2.disconnect()
+    p2 = new IntersectionObserver(l4, { root: n, rootMargin: r2, threshold: typeof o == 'number' ? o : wn[o], },);
+  return i3.forEach((a2,) => p2.observe(a2,)), () => p2.disconnect();
 }
-var nt = /* @__PURE__ */ new WeakMap()
-var N2
+var nt = /* @__PURE__ */ new WeakMap();
+var N2;
 function En(t2, e,) {
   if (e) {
-    let { inlineSize: n, blockSize: r2, } = e[0]
-    return { width: n, height: r2, }
+    let { inlineSize: n, blockSize: r2, } = e[0];
+    return { width: n, height: r2, };
   } else {
-    return t2 instanceof SVGElement && 'getBBox' in t2 ? t2.getBBox() : { width: t2.offsetWidth, height: t2.offsetHeight, }
+    return t2 instanceof SVGElement && 'getBBox' in t2 ? t2.getBBox() : { width: t2.offsetWidth, height: t2.offsetHeight, };
   }
 }
 function Sn({ target: t2, contentRect: e, borderBoxSize: n, },) {
-  var r2
-  ;(r2 = nt.get(t2,)) === null || r2 === void 0 || r2.forEach((o,) => {
+  var r2;
+  (r2 = nt.get(t2,)) === null || r2 === void 0 || r2.forEach((o,) => {
     o({
       target: t2,
       contentSize: e,
       get size() {
-        return En(t2, n,)
+        return En(t2, n,);
       },
-    },)
-  },)
+    },);
+  },);
 }
 function bn(t2,) {
-  t2.forEach(Sn,)
+  t2.forEach(Sn,);
 }
 function On() {
-  typeof ResizeObserver > 'u' || (N2 = new ResizeObserver(bn,))
+  typeof ResizeObserver > 'u' || (N2 = new ResizeObserver(bn,));
 }
 function Kt(t2, e,) {
-  N2 || On()
-  let n = P(t2,)
+  N2 || On();
+  let n = P(t2,);
   return n.forEach((r2,) => {
-    let o = nt.get(r2,)
-    o || (o = /* @__PURE__ */ new Set(), nt.set(r2, o,)), o.add(e,), N2?.observe(r2,)
+    let o = nt.get(r2,);
+    o || (o = /* @__PURE__ */ new Set(), nt.set(r2, o,)), o.add(e,), N2?.observe(r2,);
   },),
     () => {
       n.forEach((r2,) => {
-        let o = nt.get(r2,)
-        o?.delete(e,), o?.size || N2?.unobserve(r2,)
-      },)
-    }
+        let o = nt.get(r2,);
+        o?.delete(e,), o?.size || N2?.unobserve(r2,);
+      },);
+    };
 }
-var rt = /* @__PURE__ */ new Set()
-var K
+var rt = /* @__PURE__ */ new Set();
+var K;
 function An() {
   K = () => {
-    let t2 = { width: window.innerWidth, height: window.innerHeight, }, e = { target: window, size: t2, contentSize: t2, }
-    rt.forEach((n,) => n(e,))
-  }, window.addEventListener('resize', K,)
+    let t2 = { width: window.innerWidth, height: window.innerHeight, }, e = { target: window, size: t2, contentSize: t2, };
+    rt.forEach((n,) => n(e,));
+  }, window.addEventListener('resize', K,);
 }
 function qt(t2,) {
   return rt.add(t2,), K || An(), () => {
-    rt.delete(t2,), !rt.size && K && (K = void 0)
-  }
+    rt.delete(t2,), !rt.size && K && (K = void 0);
+  };
 }
 function wt(t2, e,) {
-  return I(t2,) ? qt(t2,) : Kt(t2, e,)
+  return I(t2,) ? qt(t2,) : Kt(t2, e,);
 }
 function k(t2, e, n,) {
-  t2.dispatchEvent(new CustomEvent(e, { detail: { originalEvent: n, }, },),)
+  t2.dispatchEvent(new CustomEvent(e, { detail: { originalEvent: n, }, },),);
 }
 function Tt(t2, e, n,) {
-  t2.dispatchEvent(new CustomEvent(e, { detail: { originalEntry: n, }, },),)
+  t2.dispatchEvent(new CustomEvent(e, { detail: { originalEntry: n, }, },),);
 }
 var ce = {
   isActive: (t2,) => !!t2.inView,
   subscribe: (t2, { enable: e, disable: n, }, { inViewOptions: r2 = {}, },) => {
-    let { once: o, } = r2, i3 = S3(r2, ['once',],)
+    let { once: o, } = r2, i3 = S3(r2, ['once',],);
     return xt(t2, (s3,) => {
       if (e(), Tt(t2, 'viewenter', s3,), !o) {
         return (l4,) => {
-          n(), Tt(t2, 'viewleave', l4,)
-        }
+          n(), Tt(t2, 'viewleave', l4,);
+        };
       }
-    }, i3,)
+    }, i3,);
   },
-}
+};
 var fe = (t2, e, n,) => (r2,) => {
-  r2.pointerType && r2.pointerType !== 'mouse' || (n(), k(t2, e, r2,))
-}
+  r2.pointerType && r2.pointerType !== 'mouse' || (n(), k(t2, e, r2,));
+};
 var le = {
   isActive: (t2,) => !!t2.hover,
   subscribe: (t2, { enable: e, disable: n, },) => {
-    let r2 = fe(t2, 'hoverstart', e,), o = fe(t2, 'hoverend', n,)
+    let r2 = fe(t2, 'hoverstart', e,), o = fe(t2, 'hoverend', n,);
     return t2.addEventListener('pointerenter', r2,), t2.addEventListener('pointerleave', o,), () => {
-      t2.removeEventListener('pointerenter', r2,), t2.removeEventListener('pointerleave', o,)
-    }
+      t2.removeEventListener('pointerenter', r2,), t2.removeEventListener('pointerleave', o,);
+    };
   },
-}
+};
 var me = {
   isActive: (t2,) => !!t2.press,
   subscribe: (t2, { enable: e, disable: n, },) => {
     let r2 = (i3,) => {
-        n(), k(t2, 'pressend', i3,), window.removeEventListener('pointerup', r2,)
+        n(), k(t2, 'pressend', i3,), window.removeEventListener('pointerup', r2,);
       },
       o = (i3,) => {
-        e(), k(t2, 'pressstart', i3,), window.addEventListener('pointerup', r2,)
-      }
+        e(), k(t2, 'pressstart', i3,), window.addEventListener('pointerup', r2,);
+      };
     return t2.addEventListener('pointerdown', o,), () => {
-      t2.removeEventListener('pointerdown', o,), window.removeEventListener('pointerup', r2,)
-    }
+      t2.removeEventListener('pointerdown', o,), window.removeEventListener('pointerup', r2,);
+    };
   },
-}
-var st = { inView: ce, hover: le, press: me, }
-var ue = ['initial', 'animate', ...Object.keys(st,), 'exit',]
+};
+var st = { inView: ce, hover: le, press: me, };
+var ue = ['initial', 'animate', ...Object.keys(st,), 'exit',];
 
 // https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/ddeyjQ2r9Xibg9wdL56v/Ticker.js
 var directionTransformers = {
@@ -821,8 +821,8 @@ var directionTransformers = {
   right: (offset,) => `translateX(${offset}px)`,
   top: (offset,) => `translateY(-${offset}px)`,
   bottom: (offset,) => `translateY(${offset}px)`,
-}
-var supportsAcceleratedAnimations = typeof Animation !== 'undefined' && typeof Animation.prototype.updatePlaybackRate === 'function'
+};
+var supportsAcceleratedAnimations = typeof Animation !== 'undefined' && typeof Animation.prototype.updatePlaybackRate === 'function';
 function Ticker(props,) {
   let {
     slots,
@@ -840,77 +840,77 @@ function Ticker(props,) {
     sizingOptions,
     fadeOptions,
     style,
-  } = props
-  const { fadeContent, overflow, fadeWidth, fadeInset, fadeAlpha, } = fadeOptions
-  const { widthType, heightType, } = sizingOptions
-  const paddingValue = paddingPerSide ? `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px` : `${padding}px`
-  const isCanvas = RenderTarget.current() === RenderTarget.canvas
-  const numChildren = Children.count(slots,)
-  const hasChildren = numChildren > 0
+  } = props;
+  const { fadeContent, overflow, fadeWidth, fadeInset, fadeAlpha, } = fadeOptions;
+  const { widthType, heightType, } = sizingOptions;
+  const paddingValue = paddingPerSide ? `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px` : `${padding}px`;
+  const isCanvas = RenderTarget.current() === RenderTarget.canvas;
+  const numChildren = Children.count(slots,);
+  const hasChildren = numChildren > 0;
   if (direction === true) {
-    direction = 'left'
+    direction = 'left';
   }
-  const isHorizontal = direction === 'left' || direction === 'right'
-  const offset = useMotionValue(0,)
-  const transformer = directionTransformers[direction]
-  const transform = useTransform(offset, transformer,)
-  const parentRef = useRef(null,)
+  const isHorizontal = direction === 'left' || direction === 'right';
+  const offset = useMotionValue(0,);
+  const transformer = directionTransformers[direction];
+  const transform = useTransform(offset, transformer,);
+  const parentRef = useRef(null,);
   const childrenRef = useMemo(() => {
-    return [/* @__PURE__ */ createRef(), /* @__PURE__ */ createRef(),]
-  }, [],)
-  const [size, setSize,] = useState({ parent: null, children: null, },)
-  let clonedChildren = []
-  let dupedChildren = []
-  let duplicateBy = 0
-  let opacity = 0
+    return [/* @__PURE__ */ createRef(), /* @__PURE__ */ createRef(),];
+  }, [],);
+  const [size, setSize,] = useState({ parent: null, children: null, },);
+  let clonedChildren = [];
+  let dupedChildren = [];
+  let duplicateBy = 0;
+  let opacity = 0;
   if (isCanvas) {
-    duplicateBy = numChildren ? Math.floor(10 / numChildren,) : 0
-    opacity = 1
+    duplicateBy = numChildren ? Math.floor(10 / numChildren,) : 0;
+    opacity = 1;
   }
   if (!isCanvas && hasChildren && size.parent) {
-    duplicateBy = Math.round(size.parent / size.children * 2,) + 1
-    opacity = 1
+    duplicateBy = Math.round(size.parent / size.children * 2,) + 1;
+    opacity = 1;
   }
   const measure = useCallback(() => {
     if (hasChildren && parentRef.current) {
-      const parentLength = isHorizontal ? parentRef.current.offsetWidth : parentRef.current.offsetHeight
-      const start = childrenRef[0].current ? isHorizontal ? childrenRef[0].current.offsetLeft : childrenRef[0].current.offsetTop : 0
+      const parentLength = isHorizontal ? parentRef.current.offsetWidth : parentRef.current.offsetHeight;
+      const start = childrenRef[0].current ? isHorizontal ? childrenRef[0].current.offsetLeft : childrenRef[0].current.offsetTop : 0;
       const end = childrenRef[1].current
         ? isHorizontal
           ? childrenRef[1].current.offsetLeft + childrenRef[1].current.offsetWidth
           : childrenRef[1].current.offsetTop + childrenRef[1].current.offsetHeight
-        : 0
-      const childrenLength = end - start + gap
-      setSize({ parent: parentLength, children: childrenLength, },)
+        : 0;
+      const childrenLength = end - start + gap;
+      setSize({ parent: parentLength, children: childrenLength, },);
     }
-  }, [],)
-  const childrenStyles = isCanvas ? { contentVisibility: 'auto', } : {}
+  }, [],);
+  const childrenStyles = isCanvas ? { contentVisibility: 'auto', } : {};
   if (hasChildren) {
     if (!isCanvas) {
-      let initialResize = useRef(true,)
+      let initialResize = useRef(true,);
       useEffect(() => {
-        measure()
+        measure();
         return wt(parentRef.current, ({ contentSize, },) => {
           if (!initialResize.current && (contentSize.width || contentSize.height)) {
-            measure()
+            measure();
           }
-          initialResize.current = false
-        },)
-      }, [],)
+          initialResize.current = false;
+        },);
+      }, [],);
     }
     clonedChildren = Children.map(slots, (child, index,) => {
-      var ref, ref1, ref2, ref3
-      let ref4
+      var ref, ref1, ref2, ref3;
+      let ref4;
       if (index === 0) {
-        ref4 = childrenRef[0]
+        ref4 = childrenRef[0];
       }
       if (index === slots.length - 1) {
-        ref4 = childrenRef[1]
+        ref4 = childrenRef[1];
       }
       const size2 = {
         width: widthType ? (ref = child.props) === null || ref === void 0 ? void 0 : ref.width : '100%',
         height: heightType ? (ref1 = child.props) === null || ref1 === void 0 ? void 0 : ref1.height : '100%',
-      }
+      };
       return /* @__PURE__ */ _jsx(LayoutGroup, {
         inherit: 'id',
         children: /* @__PURE__ */ _jsx('li', {
@@ -926,15 +926,15 @@ function Ticker(props,) {
             layoutId: void 0,
           }, (ref3 = child.props) === null || ref3 === void 0 ? void 0 : ref3.children,),
         },),
-      },)
-    },)
+      },);
+    },);
   }
   if (!isCanvas) {
     for (let i3 = 0; i3 < duplicateBy; i3++) {
       dupedChildren = [
         ...dupedChildren,
         ...Children.map(slots, (child, childIndex,) => {
-          var ref, ref1, ref2, ref3
+          var ref, ref1, ref2, ref3;
           return /* @__PURE__ */ _jsx(LayoutGroup, {
             inherit: 'id',
             children: /* @__PURE__ */ _jsx('li', {
@@ -952,64 +952,64 @@ function Ticker(props,) {
                 layoutId: void 0,
               }, (ref3 = child.props) === null || ref3 === void 0 ? void 0 : ref3.children,),
             }, i3 + 'li' + childIndex,),
-          }, i3 + 'lg' + childIndex,)
+          }, i3 + 'lg' + childIndex,);
         },),
-      ]
+      ];
     }
   }
-  const animateToValue = size.children + size.children * Math.round(size.parent / size.children,)
-  const initialTime = useRef(null,)
-  const prevTime = useRef(null,)
-  const xOrY = useRef(0,)
-  const isHover = useRef(false,)
-  const isInView = useInView(parentRef,)
-  const isReducedMotion = useReducedMotion()
-  const listRef = useRef(null,)
-  const animationRef = useRef(null,)
+  const animateToValue = size.children + size.children * Math.round(size.parent / size.children,);
+  const initialTime = useRef(null,);
+  const prevTime = useRef(null,);
+  const xOrY = useRef(0,);
+  const isHover = useRef(false,);
+  const isInView = useInView(parentRef,);
+  const isReducedMotion = useReducedMotion();
+  const listRef = useRef(null,);
+  const animationRef = useRef(null,);
   if (!isCanvas) {
     if (supportsAcceleratedAnimations) {
       useEffect(() => {
         if (isReducedMotion || !animateToValue || !speed) {
-          return
+          return;
         }
         animationRef.current = listRef.current.animate({ transform: [transformer(0,), transformer(animateToValue,),], }, {
           duration: Math.abs(animateToValue,) / speed * 1e3,
           iterations: Infinity,
           easing: 'linear',
-        },)
-        return () => animationRef.current.cancel()
-      }, [hoverFactor, animateToValue, speed,],)
+        },);
+        return () => animationRef.current.cancel();
+      }, [hoverFactor, animateToValue, speed,],);
     } else {
       useAnimationFrame((t2,) => {
         if (!animateToValue || isReducedMotion || supportsAcceleratedAnimations) {
-          return
+          return;
         }
         if (initialTime.current === null) {
-          initialTime.current = t2
+          initialTime.current = t2;
         }
-        t2 = t2 - initialTime.current
-        const timeSince = prevTime.current === null ? 0 : t2 - prevTime.current
-        let delta = timeSince * (speed / 1e3)
+        t2 = t2 - initialTime.current;
+        const timeSince = prevTime.current === null ? 0 : t2 - prevTime.current;
+        let delta = timeSince * (speed / 1e3);
         if (isHover.current) {
-          delta *= hoverFactor
+          delta *= hoverFactor;
         }
-        xOrY.current += delta
-        xOrY.current = wrap(0, animateToValue, xOrY.current,)
-        prevTime.current = t2
+        xOrY.current += delta;
+        xOrY.current = wrap(0, animateToValue, xOrY.current,);
+        prevTime.current = t2;
         if (!isInView) {
-          return
+          return;
         }
-        offset.set(xOrY.current,)
-      },)
+        offset.set(xOrY.current,);
+      },);
     }
   }
-  const fadeDirection = isHorizontal ? 'to right' : 'to bottom'
-  const fadeWidthStart = fadeWidth / 2
-  const fadeWidthEnd = 100 - fadeWidth / 2
-  const fadeInsetStart = clamp(fadeInset, 0, fadeWidthStart,)
-  const fadeInsetEnd = 100 - fadeInset
+  const fadeDirection = isHorizontal ? 'to right' : 'to bottom';
+  const fadeWidthStart = fadeWidth / 2;
+  const fadeWidthEnd = 100 - fadeWidth / 2;
+  const fadeInsetStart = clamp(fadeInset, 0, fadeWidthStart,);
+  const fadeInsetEnd = 100 - fadeInset;
   const fadeMask =
-    `linear-gradient(${fadeDirection}, rgba(0, 0, 0, ${fadeAlpha}) ${fadeInsetStart}%, rgba(0, 0, 0, 1) ${fadeWidthStart}%, rgba(0, 0, 0, 1) ${fadeWidthEnd}%, rgba(0, 0, 0, ${fadeAlpha}) ${fadeInsetEnd}%)`
+    `linear-gradient(${fadeDirection}, rgba(0, 0, 0, ${fadeAlpha}) ${fadeInsetStart}%, rgba(0, 0, 0, 1) ${fadeWidthStart}%, rgba(0, 0, 0, 1) ${fadeWidthEnd}%, rgba(0, 0, 0, ${fadeAlpha}) ${fadeInsetEnd}%)`;
   if (!hasChildren) {
     return /* @__PURE__ */ _jsxs('section', {
       style: placeholderStyles,
@@ -1018,7 +1018,7 @@ function Ticker(props,) {
         /* @__PURE__ */ _jsx('p', { style: titleStyles, children: 'Connect to Content', },),
         /* @__PURE__ */ _jsx('p', { style: subtitleStyles, children: 'Add layers or components to infinitely loop on your page.', },),
       ],
-    },)
+    },);
   }
   return /* @__PURE__ */ _jsx('section', {
     style: {
@@ -1046,20 +1046,20 @@ function Ticker(props,) {
         willChange: 'transform',
       },
       onMouseEnter: () => {
-        isHover.current = true
+        isHover.current = true;
         if (animationRef.current) {
-          animationRef.current.updatePlaybackRate(hoverFactor,)
+          animationRef.current.updatePlaybackRate(hoverFactor,);
         }
       },
       onMouseLeave: () => {
-        isHover.current = false
+        isHover.current = false;
         if (animationRef.current) {
-          animationRef.current.updatePlaybackRate(1,)
+          animationRef.current.updatePlaybackRate(1,);
         }
       },
       children: [clonedChildren, dupedChildren,],
     },),
-  },)
+  },);
 }
 Ticker.defaultProps = {
   gap: 10,
@@ -1067,7 +1067,7 @@ Ticker.defaultProps = {
   sizingOptions: { widthType: true, heightType: true, },
   fadeOptions: { fadeContent: true, overflow: false, fadeWidth: 25, fadeAlpha: 0, fadeInset: 0, },
   direction: true,
-}
+};
 addPropertyControls(Ticker, {
   slots: { type: ControlType.Array, title: 'Children', control: { type: ControlType.ComponentInstance, }, },
   speed: { type: ControlType.Number, title: 'Speed', min: 0, max: 1e3, defaultValue: 100, unit: '%', displayStepper: true, step: 5, },
@@ -1125,7 +1125,7 @@ addPropertyControls(Ticker, {
         disabledTitle: 'Hide',
         defaultValue: false,
         hidden(props,) {
-          return props.fadeContent === true
+          return props.fadeContent === true;
         },
       },
       fadeWidth: {
@@ -1136,7 +1136,7 @@ addPropertyControls(Ticker, {
         max: 100,
         unit: '%',
         hidden(props,) {
-          return props.fadeContent === false
+          return props.fadeContent === false;
         },
       },
       fadeInset: {
@@ -1147,7 +1147,7 @@ addPropertyControls(Ticker, {
         max: 100,
         unit: '%',
         hidden(props,) {
-          return props.fadeContent === false
+          return props.fadeContent === false;
         },
       },
       fadeAlpha: {
@@ -1158,7 +1158,7 @@ addPropertyControls(Ticker, {
         max: 1,
         step: 0.05,
         hidden(props,) {
-          return props.fadeContent === false
+          return props.fadeContent === false;
         },
       },
     },
@@ -1174,7 +1174,7 @@ addPropertyControls(Ticker, {
     displayStepper: true,
     description: 'Slows down the speed while you are hovering.',
   },
-},)
+},);
 var containerStyle = {
   display: 'flex',
   width: '100%',
@@ -1186,7 +1186,7 @@ var containerStyle = {
   padding: 0,
   listStyleType: 'none',
   textIndent: 'none',
-}
+};
 var placeholderStyles = {
   display: 'flex',
   width: '100%',
@@ -1199,42 +1199,42 @@ var placeholderStyles = {
   fontSize: 11,
   overflow: 'hidden',
   padding: '20px 20px 30px 20px',
-}
-var emojiStyles = { fontSize: 32, marginBottom: 10, }
-var titleStyles = { margin: 0, marginBottom: 10, fontWeight: 600, textAlign: 'center', }
-var subtitleStyles = { margin: 0, opacity: 0.7, maxWidth: 150, lineHeight: 1.5, textAlign: 'center', }
-var clamp = (num, min, max,) => Math.min(Math.max(num, min,), max,)
-var isValidNumber = (value,) => typeof value === 'number' && !isNaN(value,)
+};
+var emojiStyles = { fontSize: 32, marginBottom: 10, };
+var titleStyles = { margin: 0, marginBottom: 10, fontWeight: 600, textAlign: 'center', };
+var subtitleStyles = { margin: 0, opacity: 0.7, maxWidth: 150, lineHeight: 1.5, textAlign: 'center', };
+var clamp = (num, min, max,) => Math.min(Math.max(num, min,), max,);
+var isValidNumber = (value,) => typeof value === 'number' && !isNaN(value,);
 
 // https:https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav
-var TickerFonts = getFonts(Ticker,)
-var cycleOrder = ['GSFRnChFA', 'l9f6iav4R',]
-var variantClassNames = { GSFRnChFA: 'framer-v-uvc2d5', l9f6iav4R: 'framer-v-1w9d22v', }
+var TickerFonts = getFonts(Ticker,);
+var cycleOrder = ['GSFRnChFA', 'l9f6iav4R',];
+var variantClassNames = { GSFRnChFA: 'framer-v-uvc2d5', l9f6iav4R: 'framer-v-1w9d22v', };
 function addPropertyOverrides(overrides, ...variants) {
-  const nextOverrides = {}
+  const nextOverrides = {};
   variants === null || variants === void 0
     ? void 0
-    : variants.forEach((variant,) => variant && Object.assign(nextOverrides, overrides[variant],))
-  return nextOverrides
+    : variants.forEach((variant,) => variant && Object.assign(nextOverrides, overrides[variant],));
+  return nextOverrides;
 }
-var humanReadableVariantMap = { 'Logo Ticker - M': 'l9f6iav4R', 'Logo Ticker': 'GSFRnChFA', }
+var humanReadableVariantMap = { 'Logo Ticker - M': 'l9f6iav4R', 'Logo Ticker': 'GSFRnChFA', };
 var transitions = {
   default: { damping: 60, delay: 0, duration: 0.3, ease: [0.44, 0, 0.56, 1,], mass: 1, stiffness: 500, type: 'spring', },
-}
-var transformTemplate = (_2, t2,) => `translate(-50%, -50%) ${t2}`
+};
+var transformTemplate = (_2, t2,) => `translate(-50%, -50%) ${t2}`;
 var Component = /* @__PURE__ */ React.forwardRef(
   function ({ id, style, className, width, height, layoutId, variant: outerVariant = 'GSFRnChFA', ...restProps }, ref,) {
-    const outerVariantId = humanReadableVariantMap[outerVariant]
-    const variant = outerVariantId || outerVariant
+    const outerVariantId = humanReadableVariantMap[outerVariant];
+    const variant = outerVariantId || outerVariant;
     const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, transition, variants, } = useVariantState({
       cycleOrder,
       defaultVariant: 'GSFRnChFA',
       transitions,
       variant,
       variantClassNames,
-    },)
-    const layoutDependency = variants.join('-',) + restProps.layoutDependency
-    const defaultLayoutId = React.useId()
+    },);
+    const layoutDependency = variants.join('-',) + restProps.layoutDependency;
+    const defaultLayoutId = React.useId();
     return /* @__PURE__ */ _jsx2(LayoutGroup2, {
       id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
       children: /* @__PURE__ */ _jsx2(motion2.div, {
@@ -1450,9 +1450,9 @@ var Component = /* @__PURE__ */ React.forwardRef(
           ],
         },),
       },),
-    },)
+    },);
   },
-)
+);
 var css = [
   '.framer-d7otB [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
@@ -1471,11 +1471,11 @@ var css = [
   '.framer-d7otB.framer-v-1w9d22v .framer-uvc2d5 { gap: 0px; height: 96px; padding: 32px 0px 32px 0px; width: 359px; }',
   '.framer-d7otB.framer-v-1w9d22v .framer-33yjyg { width: 100%; }',
   '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-d7otB.framer-v-1w9d22v .framer-uvc2d5 { gap: 0px; } .framer-d7otB.framer-v-1w9d22v .framer-uvc2d5 > * { margin: 0px; margin-bottom: calc(0px / 2); margin-top: calc(0px / 2); } .framer-d7otB.framer-v-1w9d22v .framer-uvc2d5 > :first-child { margin-top: 0px; } .framer-d7otB.framer-v-1w9d22v .framer-uvc2d5 > :last-child { margin-bottom: 0px; } }',
-]
-var FramerF1yUSD211 = withCSS(Component, css, 'framer-d7otB',)
-var stdin_default = FramerF1yUSD211
-FramerF1yUSD211.displayName = 'Logo Ticker'
-FramerF1yUSD211.defaultProps = { height: 64, width: 708, }
+];
+var FramerF1yUSD211 = withCSS(Component, css, 'framer-d7otB',);
+var stdin_default = FramerF1yUSD211;
+FramerF1yUSD211.displayName = 'Logo Ticker';
+FramerF1yUSD211.defaultProps = { height: 64, width: 708, };
 addPropertyControls2(FramerF1yUSD211, {
   variant: {
     options: ['GSFRnChFA', 'l9f6iav4R',],
@@ -1483,8 +1483,8 @@ addPropertyControls2(FramerF1yUSD211, {
     title: 'Variant',
     type: ControlType2.Enum,
   },
-},)
-addFonts(FramerF1yUSD211, [...TickerFonts,],)
+},);
+addFonts(FramerF1yUSD211, [...TickerFonts,],);
 var __FramerMetadata__ = {
   'exports': {
     'default': {
@@ -1502,5 +1502,5 @@ var __FramerMetadata__ = {
     'Props': { 'type': 'tsType', 'annotations': { 'framerContractVersion': '1', }, },
     '__FramerMetadata__': { 'type': 'variable', },
   },
-}
-export { __FramerMetadata__, stdin_default as default, }
+};
+export { __FramerMetadata__, stdin_default as default, };

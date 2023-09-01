@@ -1,5 +1,5 @@
 // https:https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
-import { jsx as _jsx4, jsxs as _jsxs, } from 'react/jsx-runtime'
+import { jsx as _jsx4, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
   addPropertyControls as addPropertyControls3,
@@ -11,27 +11,27 @@ import {
   useActiveVariantCallback,
   useVariantState as useVariantState2,
   withCSS as withCSS2,
-} from 'installable-framer/dist/framer'
-import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'framer-motion'
-import * as React4 from 'react'
+} from 'installable-framer/dist/framer';
+import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'framer-motion';
+import * as React4 from 'react';
 
 // https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
-import { jsx as _jsx2, } from 'react/jsx-runtime'
-import * as React2 from 'react'
-import { useEffect, useRef, useState, } from 'react'
-import { addPropertyControls, ControlType as ControlType2, RenderTarget, } from 'installable-framer/dist/framer'
-import { motion, } from 'framer-motion'
+import { jsx as _jsx2, } from 'react/jsx-runtime';
+import * as React2 from 'react';
+import { useEffect, useRef, useState, } from 'react';
+import { addPropertyControls, ControlType as ControlType2, RenderTarget, } from 'installable-framer/dist/framer';
+import { motion, } from 'framer-motion';
 
 // https:https://framer.com/m/framer/icon-nullstate.js@0.7.0
-import { jsx as _jsx, } from 'react/jsx-runtime'
-import * as React from 'react'
+import { jsx as _jsx, } from 'react/jsx-runtime';
+import * as React from 'react';
 var containerStyles = {
   width: '100%',
   height: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-}
+};
 var emptyStateStyle = {
   ...containerStyles,
   borderRadius: 6,
@@ -39,16 +39,16 @@ var emptyStateStyle = {
   border: '1px dashed rgba(149, 149, 149, 0.15)',
   color: '#a5a5a5',
   flexDirection: 'column',
-}
+};
 var NullState = /* @__PURE__ */ React.forwardRef((_, ref,) => {
   return /* @__PURE__ */ _jsx('div', {
     style: emptyStateStyle,
     ref,
-  },)
-},)
+  },);
+},);
 
 // https:https://framer.com/m/hero-icons/Home.js@0.0.27
-var r
+var r;
 var l = (e,) => {
   if (!r) {
     const t = ({ size: o = 24, ...a }, n,) =>
@@ -58,37 +58,37 @@ var l = (e,) => {
         e.createElement('path', {
           d: 'M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z',
         },),
-      )
-    r = e.forwardRef(t,)
+      );
+    r = e.forwardRef(t,);
   }
-  return r
-}
+  return r;
+};
 
 // https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
-import { useMemo, } from 'react'
-import { ControlType, } from 'installable-framer/dist/framer'
+import { useMemo, } from 'react';
+import { ControlType, } from 'installable-framer/dist/framer';
 var defaultEvents = {
   onClick: { type: ControlType.EventHandler, },
   onMouseDown: { type: ControlType.EventHandler, },
   onMouseUp: { type: ControlType.EventHandler, },
   onMouseEnter: { type: ControlType.EventHandler, },
   onMouseLeave: { type: ControlType.EventHandler, },
-}
-var findByArray = (arr, search,) => arr.find((a,) => a.toLowerCase().includes(search,))
+};
+var findByArray = (arr, search,) => arr.find((a,) => a.toLowerCase().includes(search,));
 function useIconSelection(iconKeys2, selectByList, iconSearch = '', iconSelection, lowercaseIconKeyPairs2,) {
   const iconSearchResult = useMemo(() => {
     if (iconSearch == null || (iconSearch === null || iconSearch === void 0 ? void 0 : iconSearch.length) === 0) {
-      return null
+      return null;
     }
-    const iconSearchTerm = iconSearch.toLowerCase().replace(/-|\s/g, '',)
-    var _iconSearchTerm
+    const iconSearchTerm = iconSearch.toLowerCase().replace(/-|\s/g, '',);
+    var _iconSearchTerm;
     const searchResult = (_iconSearchTerm = lowercaseIconKeyPairs2[iconSearchTerm]) !== null && _iconSearchTerm !== void 0
       ? _iconSearchTerm
-      : findByArray(iconKeys2, iconSearchTerm,)
-    return searchResult
-  }, [iconSelection, iconSearch,],)
-  const name = selectByList ? iconSelection : iconSearchResult
-  return name
+      : findByArray(iconKeys2, iconSearchTerm,);
+    return searchResult;
+  }, [iconSelection, iconSearch,],);
+  const name = selectByList ? iconSelection : iconSearchResult;
+  return name;
 }
 
 // https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
@@ -507,42 +507,42 @@ var iconKeys = [
   'ZoomInOutline',
   'ZoomOut',
   'ZoomOutOutline',
-]
-var moduleBaseUrl = 'https://framer.com/m/hero-icons/'
+];
+var moduleBaseUrl = 'https://framer.com/m/hero-icons/';
 var lowercaseIconKeyPairs = iconKeys.reduce((res, key,) => {
-  res[key.toLowerCase()] = key
-  return res
-}, {},)
+  res[key.toLowerCase()] = key;
+  return res;
+}, {},);
 function Icon(props,) {
-  const { color, selectByList, iconSearch, iconSelection, onClick, onMouseDown, onMouseUp, onMouseEnter, onMouseLeave, mirrored, } = props
-  const isMounted = useRef(false,)
-  const iconKey = useIconSelection(iconKeys, selectByList, iconSearch, iconSelection, lowercaseIconKeyPairs,)
-  const [SelectedIcon, setSelectedIcon,] = useState(iconKey === 'Home' ? l(React2,) : null,)
+  const { color, selectByList, iconSearch, iconSelection, onClick, onMouseDown, onMouseUp, onMouseEnter, onMouseLeave, mirrored, } = props;
+  const isMounted = useRef(false,);
+  const iconKey = useIconSelection(iconKeys, selectByList, iconSearch, iconSelection, lowercaseIconKeyPairs,);
+  const [SelectedIcon, setSelectedIcon,] = useState(iconKey === 'Home' ? l(React2,) : null,);
   async function importModule() {
     try {
-      const iconModuleUrl = `${moduleBaseUrl}${iconKey}.js@0.0.27`
+      const iconModuleUrl = `${moduleBaseUrl}${iconKey}.js@0.0.27`;
       const module = await import(
         /* webpackIgnore: true */
         iconModuleUrl
-      )
+      );
       if (isMounted.current) {
-        setSelectedIcon(module.default(React2,),)
+        setSelectedIcon(module.default(React2,),);
       }
     } catch {
       if (isMounted.current) {
-        setSelectedIcon(null,)
+        setSelectedIcon(null,);
       }
     }
   }
   useEffect(() => {
-    isMounted.current = true
-    importModule()
+    isMounted.current = true;
+    importModule();
     return () => {
-      isMounted.current = false
-    }
-  }, [iconKey,],)
-  const isOnCanvas = RenderTarget.current() === RenderTarget.canvas
-  const emptyState = isOnCanvas ? /* @__PURE__ */ _jsx2(NullState, {},) : null
+      isMounted.current = false;
+    };
+  }, [iconKey,],);
+  const isOnCanvas = RenderTarget.current() === RenderTarget.canvas;
+  const emptyState = isOnCanvas ? /* @__PURE__ */ _jsx2(NullState, {},) : null;
   return /* @__PURE__ */ _jsx2(motion.div, {
     style: { display: 'contents', },
     onClick,
@@ -556,9 +556,9 @@ function Icon(props,) {
         color,
       },)
       : emptyState,
-  },)
+  },);
 }
-Icon.displayName = 'Hero'
+Icon.displayName = 'Hero';
 Icon.defaultProps = {
   width: 24,
   height: 24,
@@ -567,7 +567,7 @@ Icon.defaultProps = {
   color: '#66F',
   selectByList: true,
   mirrored: false,
-}
+};
 addPropertyControls(Icon, {
   selectByList: {
     type: ControlType2.Boolean,
@@ -593,12 +593,12 @@ addPropertyControls(Icon, {
   mirrored: { type: ControlType2.Boolean, enabledTitle: 'Yes', disabledTitle: 'No', defaultValue: Icon.defaultProps.mirrored, },
   color: { type: ControlType2.Color, title: 'Color', defaultValue: Icon.defaultProps.color, },
   ...defaultEvents,
-},)
+},);
 
 // https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
-import { jsx as _jsx3, } from 'react/jsx-runtime'
-import * as React3 from 'react'
-import { LayoutGroup, motion as motion2, } from 'framer-motion'
+import { jsx as _jsx3, } from 'react/jsx-runtime';
+import * as React3 from 'react';
+import { LayoutGroup, motion as motion2, } from 'framer-motion';
 import {
   addFonts,
   addPropertyControls as addPropertyControls2,
@@ -609,29 +609,29 @@ import {
   useAddVariantProps,
   useVariantState,
   withCSS,
-} from 'installable-framer/dist/framer'
+} from 'installable-framer/dist/framer';
 
 // https:https://framer.com/m/framer/useConstant.js@^1.0.0
-import { useRef as useRef2, } from 'react'
+import { useRef as useRef2, } from 'react';
 function useConstant(init,) {
-  const ref = useRef2(null,)
+  const ref = useRef2(null,);
   if (ref.current === null) {
-    ref.current = init()
+    ref.current = init();
   }
-  return ref.current
+  return ref.current;
 }
 
 // https:https://framer.com/m/framer/randomID.js@^2.0.0
-var BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+var BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 function randomID(length = 5,) {
   return Array(length,).fill(0,).map(
     () => BASE62[Math.floor(Math.random() * BASE62.length,)],
-  ).join('',)
+  ).join('',);
 }
 function useRandomID(length = 5,) {
   return useConstant(
     () => randomID(length,),
-  )
+  );
 }
 
 // https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
@@ -671,7 +671,7 @@ var cycleOrder = [
   'OYkCSZPL0',
   'bOMpuyzc_',
   'NqCoJY2pH',
-]
+];
 var variantClassNames = {
   'AD1uRb789': 'framer-v-rqhbs3',
   't6uYX0tBZ': 'framer-v-ina8tq',
@@ -708,7 +708,7 @@ var variantClassNames = {
   'OYkCSZPL0': 'framer-v-hblyuj',
   'bOMpuyzc_': 'framer-v-cra8ie',
   'NqCoJY2pH': 'framer-v-1sz721s',
-}
+};
 var humanReadableVariantMap = {
   'Jason': 'AD1uRb789',
   'Jess': 't6uYX0tBZ',
@@ -744,10 +744,10 @@ var humanReadableVariantMap = {
   'Alejandro': 'bNhqIdQoj',
   'Denny': 'bOMpuyzc_',
   'Becca': 'NqCoJY2pH',
-}
+};
 var transitions = {
   'default': { 'type': 'spring', 'ease': [0.44, 0, 0.56, 1,], 'duration': 0.3, 'delay': 0, 'stiffness': 500, 'damping': 60, 'mass': 1, },
-}
+};
 var Component = /* @__PURE__ */ React3.forwardRef(
   function (
     {
@@ -764,15 +764,15 @@ var Component = /* @__PURE__ */ React3.forwardRef(
     },
     ref,
   ) {
-    const outerVariantId = humanReadableVariantMap[outerVariant]
-    const variant = outerVariantId || outerVariant
+    const outerVariantId = humanReadableVariantMap[outerVariant];
+    const variant = outerVariantId || outerVariant;
     const { variants, baseVariant, gestureVariant, classNames, transition, setVariant, setGestureState, } = useVariantState({
       defaultVariant: 'AD1uRb789',
       variant,
       transitions,
       variantClassNames,
       cycleOrder,
-    },)
+    },);
     const variantProps = React3.useMemo(
       () => ({
         't6uYX0tBZ': {
@@ -1559,9 +1559,9 @@ var Component = /* @__PURE__ */ React3.forwardRef(
         },
       }),
       [],
-    )
-    const addVariantProps = useAddVariantProps(baseVariant, gestureVariant, variantProps,)
-    const defaultLayoutId = useRandomID()
+    );
+    const addVariantProps = useAddVariantProps(baseVariant, gestureVariant, variantProps,);
+    const defaultLayoutId = useRandomID();
     return /* @__PURE__ */ _jsx3(LayoutGroup, {
       id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
       children: /* @__PURE__ */ _jsx3(motion2.div, {
@@ -1633,20 +1633,20 @@ var Component = /* @__PURE__ */ React3.forwardRef(
           },),
         },),
       },),
-    },)
+    },);
   },
-)
+);
 var css = [
   '.framer-47hmZ [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none;}',
   '.framer-47hmZ .framer-rqhbs3 { position: relative; overflow: hidden; width: 100px; height: 100px; }',
   '.framer-47hmZ .framer-kj56m6 { position: relative; overflow: visible; width: 1px; height: 100%; flex: 1 0 0px; }',
   '.framer-47hmZ.framer-v-ina8tq .framer-rqhbs3, .framer-47hmZ.framer-v-lwbc2o .framer-rqhbs3, .framer-47hmZ.framer-v-vqryag .framer-rqhbs3, .framer-47hmZ.framer-v-kwp1i3 .framer-rqhbs3, .framer-47hmZ.framer-v-1h8ejmh .framer-rqhbs3, .framer-47hmZ.framer-v-c75qsa .framer-rqhbs3, .framer-47hmZ.framer-v-1ftwjq5 .framer-rqhbs3, .framer-47hmZ.framer-v-osfy8l .framer-rqhbs3, .framer-47hmZ.framer-v-5qhg5s .framer-rqhbs3, .framer-47hmZ.framer-v-5ats54 .framer-rqhbs3, .framer-47hmZ.framer-v-z5mnn6 .framer-rqhbs3, .framer-47hmZ.framer-v-6xnqop .framer-rqhbs3, .framer-47hmZ.framer-v-xmx6ye .framer-rqhbs3, .framer-47hmZ.framer-v-a1v8wx .framer-rqhbs3, .framer-47hmZ.framer-v-1oj0oue .framer-rqhbs3, .framer-47hmZ.framer-v-19e1lqz .framer-rqhbs3, .framer-47hmZ.framer-v-16en86l .framer-rqhbs3, .framer-47hmZ.framer-v-1vzsblg .framer-rqhbs3, .framer-47hmZ.framer-v-1kgllbw .framer-rqhbs3, .framer-47hmZ.framer-v-zia1yx .framer-rqhbs3, .framer-47hmZ.framer-v-9mi1m7 .framer-rqhbs3, .framer-47hmZ.framer-v-zgdwlg .framer-rqhbs3, .framer-47hmZ.framer-v-1dgnypb .framer-rqhbs3, .framer-47hmZ.framer-v-rum36c .framer-rqhbs3, .framer-47hmZ.framer-v-1u5c2u8 .framer-rqhbs3, .framer-47hmZ.framer-v-1dt8e1w .framer-rqhbs3, .framer-47hmZ.framer-v-1rkl824 .framer-rqhbs3, .framer-47hmZ.framer-v-17d51pb .framer-rqhbs3, .framer-47hmZ.framer-v-158neyh .framer-rqhbs3, .framer-47hmZ.framer-v-1atb71u .framer-rqhbs3, .framer-47hmZ.framer-v-1x8h963 .framer-rqhbs3, .framer-47hmZ.framer-v-hblyuj .framer-rqhbs3, .framer-47hmZ.framer-v-cra8ie .framer-rqhbs3, .framer-47hmZ.framer-v-1sz721s .framer-rqhbs3 { width: 100px; height: 100px; }',
   '.framer-47hmZ.framer-v-1ftwjq5 .framer-kj56m6, .framer-47hmZ.framer-v-osfy8l .framer-kj56m6 { width: 1px; height: 100%; right: auto; bottom: auto; left: auto; top: auto; flex: 1 0 0px; }',
-]
-var FramerdkRfXNUhM = withCSS(Component, css,)
-var stdin_default = FramerdkRfXNUhM
-FramerdkRfXNUhM.displayName = 'Memoji'
-FramerdkRfXNUhM.defaultProps = { 'width': 100, 'height': 100, }
+];
+var FramerdkRfXNUhM = withCSS(Component, css,);
+var stdin_default = FramerdkRfXNUhM;
+FramerdkRfXNUhM.displayName = 'Memoji';
+FramerdkRfXNUhM.defaultProps = { 'width': 100, 'height': 100, };
 addPropertyControls2(FramerdkRfXNUhM, {
   'variant': {
     'type': ControlType3.Enum,
@@ -1729,26 +1729,26 @@ addPropertyControls2(FramerdkRfXNUhM, {
   'VurELiPqN': { 'type': ControlType3.Color, 'title': 'Background', 'defaultValue': 'rgb(255, 219, 222)', },
   'Z2NuoQS1k': { 'type': ControlType3.Number, 'title': 'Radius', 'defaultValue': 60, 'min': 0, },
   'tc_6nmlts': { 'type': ControlType3.Number, 'title': 'Rotation', 'defaultValue': 0, 'min': -180, 'max': 180, 'unit': '\xB0', },
-},)
-addFonts(FramerdkRfXNUhM, [],)
+},);
+addFonts(FramerdkRfXNUhM, [],);
 
 // https:https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
-var HeroFonts = getFonts(Icon,)
-var MemojiFonts = getFonts(stdin_default,)
-var cycleOrder2 = ['bkNTL_hDD', 'SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',]
+var HeroFonts = getFonts(Icon,);
+var MemojiFonts = getFonts(stdin_default,);
+var cycleOrder2 = ['bkNTL_hDD', 'SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',];
 var variantClassNames2 = {
   bkNTL_hDD: 'framer-v-1lrc4mm',
   q40bx8oO9: 'framer-v-1ts3cmm',
   SUKuEnEm3: 'framer-v-1opdecj',
   uKYMy2q_h: 'framer-v-wgi97k',
   XKqaB2Aqx: 'framer-v-18fh10w',
-}
+};
 function addPropertyOverrides(overrides, ...variants) {
-  const nextOverrides = {}
+  const nextOverrides = {};
   variants === null || variants === void 0
     ? void 0
-    : variants.forEach((variant,) => variant && Object.assign(nextOverrides, overrides[variant],))
-  return nextOverrides
+    : variants.forEach((variant,) => variant && Object.assign(nextOverrides, overrides[variant],));
+  return nextOverrides;
 }
 var humanReadableVariantMap2 = {
   'Our team': 'XKqaB2Aqx',
@@ -1756,65 +1756,65 @@ var humanReadableVariantMap2 = {
   Feature: 'SUKuEnEm3',
   Learn: 'uKYMy2q_h',
   Normal: 'bkNTL_hDD',
-}
+};
 var transitions2 = {
   default: { damping: 57, delay: 0, duration: 0.3, ease: [0.44, 0, 0.56, 1,], mass: 0.9, stiffness: 547, type: 'spring', },
   uKYMy2q_h: { damping: 57, delay: 0, duration: 0.3, ease: [0, 1.08, 0.56, 1,], mass: 0.9, stiffness: 547, type: 'tween', },
-}
-var transformTemplate = (_, t,) => `translateX(-50%) ${t}`
+};
+var transformTemplate = (_, t,) => `translateX(-50%) ${t}`;
 var Component2 = /* @__PURE__ */ React4.forwardRef(
   function ({ id, style, className, width, height, layoutId, variant: outerVariant = 'bkNTL_hDD', ...restProps }, ref,) {
-    const outerVariantId = humanReadableVariantMap2[outerVariant]
-    const variant = outerVariantId || outerVariant
+    const outerVariantId = humanReadableVariantMap2[outerVariant];
+    const variant = outerVariantId || outerVariant;
     const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, transition, variants, } = useVariantState2({
       cycleOrder: cycleOrder2,
       defaultVariant: 'bkNTL_hDD',
       transitions: transitions2,
       variant,
       variantClassNames: variantClassNames2,
-    },)
-    const layoutDependency = variants.join('-',) + restProps.layoutDependency
-    const { activeVariantCallback, delay, } = useActiveVariantCallback(baseVariant,)
+    },);
+    const layoutDependency = variants.join('-',) + restProps.layoutDependency;
+    const { activeVariantCallback, delay, } = useActiveVariantCallback(baseVariant,);
     const onMouseLeave19yhvao = activeVariantCallback(async (...args) => {
-      setVariant('bkNTL_hDD',)
-    },)
+      setVariant('bkNTL_hDD',);
+    },);
     const onMouseEnterw91hx7 = activeVariantCallback(async (...args) => {
-      setVariant('SUKuEnEm3',)
-    },)
+      setVariant('SUKuEnEm3',);
+    },);
     const onMouseEnterwdtlpu = activeVariantCallback(async (...args) => {
-      setVariant('uKYMy2q_h',)
-    },)
+      setVariant('uKYMy2q_h',);
+    },);
     const onMouseEnterf9bpm1 = activeVariantCallback(async (...args) => {
-      setVariant('q40bx8oO9',)
-    },)
+      setVariant('q40bx8oO9',);
+    },);
     const onMouseEnter13rq2kx = activeVariantCallback(async (...args) => {
-      setVariant('XKqaB2Aqx',)
-    },)
+      setVariant('XKqaB2Aqx',);
+    },);
     const isDisplayed = () => {
       if (['SUKuEnEm3', 'q40bx8oO9',].includes(baseVariant,)) {
-        return false
+        return false;
       }
-      return true
-    }
+      return true;
+    };
     const isDisplayed1 = () => {
       if (['SUKuEnEm3', 'uKYMy2q_h', 'XKqaB2Aqx',].includes(baseVariant,)) {
-        return false
+        return false;
       }
-      return true
-    }
+      return true;
+    };
     const isDisplayed2 = () => {
       if (['uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',].includes(baseVariant,)) {
-        return false
+        return false;
       }
-      return true
-    }
+      return true;
+    };
     const isDisplayed3 = () => {
       if (['SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9',].includes(baseVariant,)) {
-        return false
+        return false;
       }
-      return true
-    }
-    const defaultLayoutId = React4.useId()
+      return true;
+    };
+    const defaultLayoutId = React4.useId();
     return /* @__PURE__ */ _jsx4(LayoutGroup2, {
       id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
       children: /* @__PURE__ */ _jsx4(motion3.div, {
@@ -3252,9 +3252,9 @@ var Component2 = /* @__PURE__ */ React4.forwardRef(
           ],
         },),
       },),
-    },)
+    },);
   },
-)
+);
 var css2 = [
   '.framer-WJ0iJ [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
@@ -3298,11 +3298,11 @@ var css2 = [
   '.framer-WJ0iJ.framer-v-18fh10w .framer-1ir1cuw { left: unset; right: 204px; top: 10px; width: 111px; }',
   '.framer-WJ0iJ.framer-v-18fh10w .framer-1w1b19f { top: 130px; }',
   '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-WJ0iJ.framer-v-18fh10w .framer-1lrc4mm { gap: 0px; } .framer-WJ0iJ.framer-v-18fh10w .framer-1lrc4mm > *, .framer-WJ0iJ.framer-v-18fh10w .framer-1lrc4mm > :first-child, .framer-WJ0iJ.framer-v-18fh10w .framer-1lrc4mm > :last-child { margin: 0px; } }',
-]
-var FramerrXuKNGhVw = withCSS2(Component2, css2, 'framer-WJ0iJ',)
-var stdin_default2 = FramerrXuKNGhVw
-FramerrXuKNGhVw.displayName = 'Mega Menu'
-FramerrXuKNGhVw.defaultProps = { height: 59, width: 420, }
+];
+var FramerrXuKNGhVw = withCSS2(Component2, css2, 'framer-WJ0iJ',);
+var stdin_default2 = FramerrXuKNGhVw;
+FramerrXuKNGhVw.displayName = 'Mega Menu';
+FramerrXuKNGhVw.defaultProps = { height: 59, width: 420, };
 addPropertyControls3(FramerrXuKNGhVw, {
   variant: {
     options: ['bkNTL_hDD', 'SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',],
@@ -3310,7 +3310,7 @@ addPropertyControls3(FramerrXuKNGhVw, {
     title: 'Variant',
     type: ControlType4.Enum,
   },
-},)
+},);
 addFonts2(FramerrXuKNGhVw, [
   {
     family: 'Syne',
@@ -3324,7 +3324,7 @@ addFonts2(FramerrXuKNGhVw, [
   },
   ...HeroFonts,
   ...MemojiFonts,
-],)
+],);
 var __FramerMetadata__ = {
   'exports': {
     'Props': { 'type': 'tsType', 'annotations': { 'framerContractVersion': '1', }, },
@@ -3342,5 +3342,5 @@ var __FramerMetadata__ = {
     },
     '__FramerMetadata__': { 'type': 'variable', },
   },
-}
-export { __FramerMetadata__, stdin_default2 as default, }
+};
+export { __FramerMetadata__, stdin_default2 as default, };

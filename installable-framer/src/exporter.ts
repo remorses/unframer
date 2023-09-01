@@ -36,16 +36,7 @@ export async function bundle({ cwd = '', url }) {
     cwd ||= path.resolve(process.cwd(), 'example')
     cwd = path.resolve(cwd)
     fs.mkdirSync(path.resolve(cwd), { recursive: true })
-    const peerDependencies = {
-        react: '*',
-        'react-dom': '*',
-        // 'framer-motion': '*',
-    }
-    const sha = `c7d58771405ed9a6925859653b495bbde56f83d8`.slice(0, 7)
-    const dependencies = {
-        framer: `github:remorses/framer-fixed#${sha}`,
-        'framer-motion': '^10.12.17',
-    }
+
     const u = new URL(url)
 
     const result = await build({
@@ -80,7 +71,7 @@ export async function bundle({ cwd = '', url }) {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
         trailingCommas: 'always',
-        semiColons: 'asi',
+        semiColons: 'always',
     })
     fs.writeFileSync(resultFile, code, 'utf-8')
     // TODO this is a vulnerability, i need to sandbox this somehow

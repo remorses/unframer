@@ -24,8 +24,9 @@ export default function Home() {
                         Mobile: 'Logo Ticker - M',
                     }}
                     Component={Logos}
-                    style={{ width: '100%' }}
+                    // style={{ width: '100%' }}
                 ></WithFramerBreakpoints>
+                {/* <Logos variant='Logo Ticker - M' /> */}
             </div>
             <div className='pt-[200px]'></div>
             <Avatar radius={10} image={{ src: '/next.svg' }} />
