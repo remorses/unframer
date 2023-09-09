@@ -20,7 +20,7 @@ Planned features:
 
 1. Install the package
 
-    ```
+    ```sh
     npm install installable-framer framer-motion
     ```
 
