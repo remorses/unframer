@@ -51,3 +51,7 @@ export default function App() {
     return <Menu />
 }
 ```
+
+## Example
+
+Look at the [nextjs-app](./nextjs-app) folder for an example
