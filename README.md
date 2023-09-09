@@ -2,7 +2,6 @@
     <br/>
     <br/>
     <h3>installable-framer</h3>
-    <p>project under heavy development</p>
     <br/>
     <br/>
 </div>
@@ -19,22 +18,36 @@ Planned features:
 
 ## Usage
 
-1. Copy the framer component url
-   ![url import](./assets/framer-url-import.png)
-2. Replace `framer.com` with `installable-framer.vercel.app`
-3. `npm install {url}`
-4. Import the component inside your `jsx` files, the package name used will be the component name
+1. Install the package
 
-## Example
+    ```
+    npm install installable-framer framer-motion
+    ```
 
-```
-    npm i https://installable-framer.vercel.app/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
-```
+1. Create an `installable-framer.json` file like the following (the key will be used for the component folder inside `outDir`)
+
+    ```
+    {
+        "outDir": "./framer",
+        "components": {
+            "logos": "https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav",
+            "menus": "https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl"
+        }
+    }
+
+    ```
+
+1. Copy your framer component url and add it to your config (remove the part after `@` to always use the latest version)
+
+    ![url import](./assets/framer-url-import.png)
+
+1. Run the command `npx installable-framer` to download the components and their types in the `outDir` directory
+1. Import the component inside your `jsx` files, for example
 
 ```tsx
-import Component from 'mega-menu-2wt3'
+import Menu from './framer/menus'
 
 export default function App() {
-    return <Component />
+    return <Menu />
 }
 ```
