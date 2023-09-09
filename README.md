@@ -26,7 +26,7 @@ Planned features:
 
 1. Create an `installable-framer.json` file like the following (the key will be used for the component folder inside `outDir`)
 
-    ```
+    ```json
     {
         "outDir": "./framer",
         "components": {
