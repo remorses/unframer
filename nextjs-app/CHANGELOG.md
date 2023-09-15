@@ -1,5 +1,12 @@
 # nextjs-app
 
+## 0.1.15
+
+### Patch Changes
+
+-   Updated dependencies
+    -   installable-framer@0.3.0
+
 ## 0.1.14
 
 ### Patch Changes

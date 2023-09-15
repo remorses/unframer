@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.0
+
+### Minor Changes
+
+-   Added Component.Responsive shortcut
+
 ## 0.2.1
 
 ### Patch Changes
