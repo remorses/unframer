@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.2
+
+### Patch Changes
+
+-   Fix json handling again
+
 ## 0.3.1
 
 ### Patch Changes
