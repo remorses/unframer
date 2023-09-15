@@ -429,12 +429,14 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                             `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
                         )
                     }
+                    // console.log('type', res.headers.get('content-type'))
                     if (
                         res.headers
                             .get('content-type')
                             ?.startsWith('application/json')
                     ) {
                         loader = 'json'
+                        return await res.text()
                     }
                     const text = await res.text()
 
@@ -446,7 +448,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         format: 'esm',
                         jsx: 'transform',
                         logLevel: 'error',
-                        loader: 'jsx',
+                        loader,
                         platform: 'browser',
                     })
                     return transformed.code

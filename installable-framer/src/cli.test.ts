@@ -25,7 +25,7 @@ test(
     async () => {
         const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
         console.log('tempFolder', tempFolder)
-        const url = 'https://framer.com/m/Brand-Logo-Ticker-Uc8E.js'
+        const url = 'https://framer.com/m/Brand-Logo-Ticker-Uc8E.js@WLfLN2D3C6m9DWtZu0ci'
         const { types } = await bundle({
             url,
             cwd: tempFolder,
