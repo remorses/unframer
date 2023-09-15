@@ -51,7 +51,7 @@ export default function App() {
     return (
         <div>
             {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components=[Menu] />
+            <FramerStyles Components={[Menu]} />
             <Menu componentVariable='some variable' />
         </div>
     )
@@ -68,9 +68,38 @@ export default function App() {
     return (
         <div>
             {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components=[Logos] />
+            <FramerStyles Components={[Logos]} />
             {/* Changes component variant based on breakpoint */}
             <Logos.Responsive
+                variants={{
+                    Desktop: 'Logo Ticker',
+                    Tablet: 'Logo Ticker - M',
+                    Mobile: 'Logo Ticker - M',
+                }}
+            />
+        </div>
+    )
+}
+```
+
+## Styling
+
+You can use `className` or `style` props to style your components
+
+Notice that you will often need to use `!important` to override styles already defined in framer like `width` and `height`
+
+```tsx
+import Logos from './framer/logos'
+import { FramerStyles } from 'installable-framer/dist/react'
+
+export default function App() {
+    return (
+        <div>
+            {/* Injects fonts and other framer utility styles */}
+            <FramerStyles Components={[Logos]} />
+            {/* Changes component variant based on breakpoint */}
+            <Logos.responsive
+                className='!w-full'
                 variants={{
                     Desktop: 'Logo Ticker',
                     Tablet: 'Logo Ticker - M',
