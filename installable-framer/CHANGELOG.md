@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.3
+
+### Patch Changes
+
+-   fix json handling in transform
+
 ## 0.3.2
 
 ### Patch Changes
