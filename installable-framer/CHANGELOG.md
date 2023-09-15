@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.4
+
+### Patch Changes
+
+-   fix expty defs
+
 ## 0.3.3
 
 ### Patch Changes
