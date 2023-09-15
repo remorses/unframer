@@ -220,9 +220,6 @@ function safeJsonParse(text) {
 }
 
 export function propControlsToType(controls?: PropertyControls) {
-    if (!controls) {
-        return ''
-    }
     try {
         const types = Object.entries(controls || ({} as PropertyControls))
             .map(([key, value]) => {
