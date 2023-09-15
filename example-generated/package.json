@@ -10,7 +10,6 @@
   },
   "type": "module",
   "dependencies": {
-    "framer": "github:remorses/framer-fixed#c7d5877",
     "framer-motion": "^10.12.17"
   },
   "peerDependencies": {

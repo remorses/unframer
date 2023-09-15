@@ -11,6 +11,7 @@
     "bin": "bin.mjs",
     "files": [
         "dist",
+        "framer-fixed",
         "bin.mjs",
         "src",
         "esm"
@@ -35,12 +36,20 @@
         "dprint-node": "^1.0.7",
         "esbuild": "^0.19.2",
         "find-up": "^6.3.0",
-        "framer": "github:remorses/framer-fixed#07fec977d70bc68f8ff38a15654f065342aea459",
         "framer-motion": "10.12.17",
         "fs-extra": "^11.1.1",
         "native-fetch": "^4.0.2",
         "picocolors": "^1.0.0",
-        "tmp": "^0.2.1"
+        "tmp": "^0.2.1",
+        "@juggle/resize-observer": "^3.3.1",
+        "csstype": "^3.1.2",
+        "eventemitter3": "^3.1.0",
+        "fontfaceobserver": "^2.1.0",
+        "hey-listen": "^1.0.8",
+        "hoist-non-react-statics": "^3.3.2",
+        "hsluv": "^0.0.3",
+        "style-value-types": "^5.1.2",
+        "popmotion": "^11.0.5"
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",

@@ -5,8 +5,12 @@ import tmp from 'tmp'
 import pico from 'picocolors'
 
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import { ControlDescription, ControlType, PropertyControls } from 'framer'
-import { fetch } from 'native-fetch'
+import {
+    ControlDescription,
+    ControlType,
+    PropertyControls,
+} from '../framer-fixed/build/index.js'
+import { fetch as _fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
@@ -21,6 +25,8 @@ export const logger = {
         console.error([prefix, ...args].map((x) => pico.red(x)).join(' '))
     },
 }
+
+const fetch = retryTwice(_fetch)
 
 function validateUrl(url: string) {
     try {
@@ -51,6 +57,7 @@ export async function bundle({ cwd = '', url }) {
         treeShaking: true,
         // splitting: true,
         logLevel: 'error',
+        pure: ['addPropertyControls'],
         plugins: [
             esbuildPluginBundleDependencies({
                 onDependency: (x) => {
@@ -193,8 +200,11 @@ function safeJsonParse(text) {
 }
 
 export function propControlsToType(controls?: PropertyControls) {
+    if (!controls) {
+        return ''
+    }
     try {
-        const types = Object.entries(controls || {})
+        const types = Object.entries(controls || ({} as PropertyControls))
             .map(([key, value]) => {
                 if (!value) {
                     return
@@ -457,4 +467,15 @@ function addExtension(p) {
     //     return p + '.js'
     // }
     return p
+}
+
+function retryTwice<F extends Function>(fn: Function): Function {
+    return async (...args) => {
+        try {
+            return await fn(...args)
+        } catch (e: any) {
+            logger.error('retrying', e.message)
+            return await fn(...args)
+        }
+    }
 }
