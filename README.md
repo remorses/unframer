@@ -12,10 +12,6 @@ install framer components as packages
 -   Includes all your components dependencies
 -   Has Typescript support, inferred from your component variables (like `variant`)
 
-Planned features:
-
--   Support for other frameworks (svelte, vue, etc)
-
 ## Usage
 
 1. Install the package
