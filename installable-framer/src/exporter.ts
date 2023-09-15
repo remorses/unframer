@@ -36,7 +36,7 @@ function validateUrl(url: string) {
     }
 }
 
-export async function bundle({ cwd = '', url }) {
+export async function bundle({ cwd = '', name, url }) {
     validateUrl(url)
     const deps = new Set<string>()
     cwd ||= path.resolve(process.cwd(), 'example')
@@ -44,11 +44,26 @@ export async function bundle({ cwd = '', url }) {
     fs.mkdirSync(path.resolve(cwd), { recursive: true })
 
     const u = new URL(url)
-
+    const sourcefile = `${name}.js`
     const result = await build({
-        entryPoints: {
-            index: url,
+        // entryPoints: {
+        //     index: url,
+        // },
+        stdin: {
+            contents: /** js */ `
+            'use client'
+            import Component from '${url}'
+            import { WithFramerBreakpoints } from 'installable-framer/dist/react'
+            Component.Responsive = (props) => {
+                return <WithFramerBreakpoints Component={Component} {...props} />
+            }
+            export default Component
+            `,
+            loader: 'jsx',
+
+            sourcefile,
         },
+        jsx: 'automatic',
 
         bundle: true,
         platform: 'browser',
@@ -58,6 +73,7 @@ export async function bundle({ cwd = '', url }) {
         // splitting: true,
         logLevel: 'error',
         pure: ['addPropertyControls'],
+        external: whitelist,
         plugins: [
             esbuildPluginBundleDependencies({
                 onDependency: (x) => {
@@ -69,10 +85,14 @@ export async function bundle({ cwd = '', url }) {
         ],
         write: true,
         // outfile: 'dist/example.js',
-        outdir: path.resolve(cwd),
+        outfile: path.resolve(cwd, sourcefile),
     })
     // logger.log('result', result)
-    const resultFile = path.resolve(cwd, './index.js')
+    fs.writeFileSync(
+        path.resolve(cwd, 'index.js'),
+        `'use client'\nimport Component from './${sourcefile}'; export default Component`,
+    )
+    const resultFile = path.resolve(cwd, sourcefile)
     const output = fs.readFileSync(resultFile, 'utf-8')
     const code = dprint.format(resultFile, output, {
         lineWidth: 140,
@@ -84,14 +104,14 @@ export async function bundle({ cwd = '', url }) {
     // TODO this is a vulnerability, i need to sandbox this somehow
 
     // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
-    let name = u.pathname
-        .split('/')
-        .slice(-1)[0]
-        // https://regex101.com/r/8prywY/1
-        // .replace(/-[\w\d]{4}\.js/i, '')
-        .replace(/\.js/i, '')
-        .replace(/@.*/, '')
-        .toLowerCase()
+    // let name = u.pathname
+    //     .split('/')
+    //     .slice(-1)[0]
+    //     // https://regex101.com/r/8prywY/1
+    //     // .replace(/-[\w\d]{4}\.js/i, '')
+    //     .replace(/\.js/i, '')
+    //     .replace(/@.*/, '')
+    //     .toLowerCase()
 
     const propControls = await extractPropControlsUnsafe(output, name)
     if (!propControls) {
@@ -269,7 +289,10 @@ export function propControlsToType(controls?: PropertyControls) {
         let t = ''
         t += 'import * as React from "react"\n'
         t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n`
-        t += `export default function(props: Props): any\n`
+        t += `const Component = (props: Props) => any\n`
+        t += `export default Component\n`
+        t += `type Breakpoint = 'Desktop' | 'Tablet' | 'Mobile'\n`
+        t += `Component.Responsive = (props: Omit<Props, 'variant'> & {variants: Record<Breakpoint, ComponentPropsWithoutRef<Component>['variant']>}) => any\n`
 
         return t
     } catch (e: any) {
@@ -321,6 +344,7 @@ const whitelist = [
     'react',
     'react-dom',
     'framer',
+    'installable-framer',
     'framer-motion', //
 ]
 

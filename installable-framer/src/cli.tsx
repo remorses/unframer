@@ -35,6 +35,7 @@ export async function postinstall() {
             // logger.log('tempFolder', tempFolder)
             const { files } = await bundle({
                 url,
+                name,
                 cwd: tempFolder,
             })
             const out = path.resolve(installDir, name)

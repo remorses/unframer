@@ -1,13 +1,17 @@
 'use client'
 import 'framer-for-next/styles.css'
 
-
 import Cultrure from 'https://framer.com/m/cultrure-b10L.js#x'
 import Avatar from 'framer-avatar'
 import MegaMenu from 'https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl'
 import LogoTicker from 'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
-import { FramerStyles, WithFramerBreakpoints } from 'installable-framer/dist/react'
+import {
+    FramerStyles,
+    WithFramerBreakpoints,
+} from 'installable-framer/dist/react'
 import Logos from '@/framer/logos'
+
+console.log('Logos', Logos)
 
 export default function Home() {
     return (
@@ -26,6 +30,13 @@ export default function Home() {
                     Component={Logos}
                     // style={{ width: '100%' }}
                 ></WithFramerBreakpoints>
+                <Logos.Responsive
+                    variants={{
+                        Desktop: 'Logo Ticker',
+                        Tablet: 'Logo Ticker - M',
+                        Mobile: 'Logo Ticker - M',
+                    }}
+                />
                 {/* <Logos variant='Logo Ticker - M' /> */}
             </div>
             <div className='pt-[200px]'></div>

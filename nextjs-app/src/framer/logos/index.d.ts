@@ -9,4 +9,7 @@ export interface Props {
   layoutId?: string
   "variant"?: 'Logo Ticker' | 'Logo Ticker - M'
 }
-export default function(props: Props): any
+const Component = (props: Props) => any
+export default Component
+type Breakpoint = 'Desktop' | 'Tablet' | 'Mobile'
+Component.Responsive = (props: Omit<Props, 'variant'> & {variants: Record<Breakpoint, ComponentPropsWithoutRef<Component>['variant']>}) => any

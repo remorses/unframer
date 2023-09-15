@@ -13,6 +13,7 @@ test(
         const { types } = await bundle({
             url,
             cwd: tempFolder,
+            name: 'ticker',
         })
         console.log(types)
         console.log(tempFolder)
@@ -24,11 +25,11 @@ test(
     async () => {
         const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
         console.log('tempFolder', tempFolder)
-        const url =
-            'https://framer.com/m/Brand-Logo-Ticker-Uc8E.js'
+        const url = 'https://framer.com/m/Brand-Logo-Ticker-Uc8E.js'
         const { types } = await bundle({
             url,
             cwd: tempFolder,
+            name: 'logos',
         })
         console.log(types)
         console.log(tempFolder)
