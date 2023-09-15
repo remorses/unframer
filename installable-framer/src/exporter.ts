@@ -26,7 +26,7 @@ export const logger = {
     },
 }
 
-const fetch = retryTwice(_fetch)
+const fetchWithRetry = retryTwice(_fetch) as typeof fetch
 
 function validateUrl(url: string) {
     try {
@@ -423,7 +423,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                 let loader = 'jsx' as any
                 const promise = Promise.resolve().then(async () => {
                     logger.log('fetching', url)
-                    const res = await fetch(resolved)
+                    const res = await fetchWithRetry(resolved)
                     if (!res.ok) {
                         throw new Error(
                             `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
@@ -432,7 +432,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                     if (
                         res.headers
                             .get('content-type')
-                            .startWith('application/json')
+                            ?.startsWith('application/json')
                     ) {
                         loader = 'json'
                     }
@@ -476,7 +476,7 @@ export async function resolveRedirect(url, redirectCache) {
 }
 
 export async function recursiveResolveRedirect(url) {
-    let res = await fetch(url, { redirect: 'manual', method: 'HEAD' })
+    let res = await fetchWithRetry(url, { redirect: 'manual', method: 'HEAD' })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
         // logger.log('redirect', loc)

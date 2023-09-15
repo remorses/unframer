@@ -109,6 +109,9 @@ importers:
       tmp:
         specifier: ^0.2.1
         version: 0.2.1
+      undici:
+        specifier: ^5.22.1
+        version: 5.23.0
     devDependencies:
       '@types/fs-extra':
         specifier: ^11.0.1
@@ -145,7 +148,7 @@ importers:
         version: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
       framer-avatar:
         specifier: https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q
-        version: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)'
+        version: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js/zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)'
       framer-for-next:
         specifier: workspace:*
         version: link:../framer-for-next
@@ -4509,7 +4512,7 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)':
+  '@installable-framer.vercel.app/api/m/Avatar-Jptx.js/zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)':
     resolution: {tarball: https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q}
     id: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q'
     name: framer-avatar
