@@ -420,6 +420,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         loader: 'js',
                     }
                 }
+                let loader = 'jsx' as any
                 const promise = Promise.resolve().then(async () => {
                     logger.log('fetching', url)
                     const res = await fetch(resolved)
@@ -427,6 +428,13 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         throw new Error(
                             `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
                         )
+                    }
+                    if (
+                        res.headers
+                            .get('content-type')
+                            .startWith('application/json')
+                    ) {
+                        loader = 'json'
                     }
                     const text = await res.text()
 
@@ -450,7 +458,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                 return {
                     contents: code,
 
-                    loader: 'js',
+                    loader,
                 }
             })
         },
