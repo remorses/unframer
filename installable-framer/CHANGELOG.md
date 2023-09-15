@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.5
+
+### Patch Changes
+
+-   update framer
+
 ## 0.3.4
 
 ### Patch Changes
