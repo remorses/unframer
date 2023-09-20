@@ -1,5 +1,4 @@
 packages:
-  - framer-for-next
   - nextjs-app
   - server
   - installable-framer

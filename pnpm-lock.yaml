@@ -40,19 +40,6 @@ importers:
         specifier: ^0.34.3
         version: 0.34.3
 
-  framer-for-next:
-    dependencies:
-      classnames:
-        specifier: ^2.3.2
-        version: 2.3.2
-      react:
-        specifier: '*'
-        version: 18.2.0
-    devDependencies:
-      '@types/react':
-        specifier: 18.2.9
-        version: 18.2.9
-
   installable-framer:
     dependencies:
       '@esbuild-plugins/node-modules-polyfill':
@@ -143,15 +130,6 @@ importers:
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
-      framer:
-        specifier: ^2.3.0
-        version: 2.3.0(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
-      framer-avatar:
-        specifier: https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q
-        version: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js/zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)'
-      framer-for-next:
-        specifier: workspace:*
-        version: link:../framer-for-next
       framer-motion:
         specifier: 10.12.17
         version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
@@ -1399,6 +1377,7 @@ packages:
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: false
 
   /@types/react-dom@18.2.4:
     resolution: {integrity: sha512-G2mHoTMTL4yoydITgOGwWdWMVd8sNgyEP85xVmMKAPUBwQWm9wBPQUmvbeF4V3WBY1P7mmL4BkjQ0SqUpf1snw==}
@@ -1412,9 +1391,11 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
       csstype: 3.1.2
+    dev: false
 
   /@types/scheduler@0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
+    dev: false
 
   /@types/semver@6.2.3:
     resolution: {integrity: sha512-KQf+QAMWKMrtBMsB8/24w53tEsxllMj6TuA80TT/5igJalLI/zm0L3oXRbIAl4Ohfc85gyHX/jhMwsVkmhLU4A==}
@@ -1772,10 +1753,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /classnames@2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
-    dev: false
-
   /client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: false
@@ -1872,6 +1849,7 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
+    dev: false
 
   /csv-generate@3.4.3:
     resolution: {integrity: sha512-w/T+rqR0vwvHqWs/1ZyMDWtHHSJaN06klRqJXBEpDJaM/+dZkso0OKh1VcuuYvK3XM53KysVNq8Ko/epCK8wOw==}
@@ -4510,43 +4488,4 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
-    dev: false
-
-  '@installable-framer.vercel.app/api/m/Avatar-Jptx.js/zytD4VDFUKBkIHh56Z3q(react-dom@18.2.0)(react@18.2.0)':
-    resolution: {tarball: https://installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q}
-    id: '@installable-framer.vercel.app/api/m/Avatar-Jptx.js@zytD4VDFUKBkIHh56Z3q'
-    name: framer-avatar
-    version: 0.0.0
-    peerDependencies:
-      react: '*'
-      react-dom: '*'
-    dependencies:
-      framer: github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0)
-      framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459(framer-motion@10.12.17)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/remorses/framer-fixed/tar.gz/07fec977d70bc68f8ff38a15654f065342aea459}
-    id: github.com/remorses/framer-fixed/07fec977d70bc68f8ff38a15654f065342aea459
-    name: framer
-    version: 2.3.0
-    peerDependencies:
-      framer-motion: '*'
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      '@juggle/resize-observer': 3.4.0
-      csstype: 3.1.2
-      eventemitter3: 3.1.2
-      fontfaceobserver: 2.3.0
-      framer-motion: 10.12.17(react-dom@18.2.0)(react@18.2.0)
-      hey-listen: 1.0.8
-      hoist-non-react-statics: 3.3.2
-      hsluv: 0.0.3
-      popmotion: 11.0.5
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      style-value-types: 5.1.2
     dev: false
