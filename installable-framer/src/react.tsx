@@ -1,12 +1,15 @@
 'use client'
 import { combinedCSSRules } from '../framer-fixed/build/index.js'
 
-import classNames from 'classnames'
 import { ComponentPropsWithoutRef, ComponentType, ReactNode } from 'react'
 
 function getFonts(component) {
     const fonts = component.fonts
     return fonts || []
+}
+
+function classNames(...args) {
+    return args.filter(Boolean).join(' ')
 }
 
 const defaultBreakpoints = ['Desktop', 'Tablet', 'Mobile'] as const
