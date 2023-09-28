@@ -1,11 +1,12 @@
 {
     "name": "installable-framer",
-    "version": "0.3.5",
+    "version": "0.3.6",
     "description": "",
     "type": "module",
     "repository": "https://github.com/remorses/installable-framer",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc && cp ../README.md ./README.md",
+        "prepublishOnly": "pnpm build",
         "watch": "tsc -w"
     },
     "bin": "bin.mjs",
@@ -14,6 +15,7 @@
         "framer-fixed",
         "bin.mjs",
         "src",
+        "README.md",
         "esm"
     ],
     "exports": {

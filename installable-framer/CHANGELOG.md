@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.6
+
+### Patch Changes
+
+-   Fix missing dependency
+
 ## 0.3.5
 
 ### Patch Changes
