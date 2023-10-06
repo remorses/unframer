@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.3.7
+
+### Patch Changes
+
+-   Added useLocaleCode export, fix #2
+
 ## 0.3.6
 
 ### Patch Changes
