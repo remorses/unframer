@@ -7,7 +7,7 @@
 </div>
 
 > [!IMPORTANT]
-> New Framer components no longer work, framer npm package is no longer updated and keeping a working fork has become too difficult
+> New Framer components no longer work, framer npm package is no longer updated and keeping a working fork has become too difficult.
 > If you want to use Framer components contact Framer and tell them you are willing to pay to have this feature back, it's currently not prioritized because of low demand
 
 
