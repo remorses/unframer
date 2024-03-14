@@ -1,5 +1,5 @@
 'use client'
-import { combinedCSSRules } from '../framer-fixed/build/index.js'
+import { combinedCSSRules } from '../framer-fixed/dist/framer.js'
 
 import { ComponentPropsWithoutRef, ComponentType, ReactNode } from 'react'
 

@@ -50,18 +50,31 @@ export async function main({ framerUrl, framerTypesUrl }) {
         outfile: resultFile,
     })
     // logger.log('result', result)
+    let types = await fetch(framerTypesUrl).then((x) => x.text())
+    types += `
+    export declare const combinedCSSRules: string[]
+
+    `
     fs.writeFileSync(
         path.resolve(out, 'framer.d.ts'),
-        await fetch(framerTypesUrl).then((x) => x.text()),
+        types,
     )
 
     const output = fs.readFileSync(resultFile, 'utf-8')
-    const code = dprint.format(resultFile, output, {
+    let code = dprint.format(resultFile, output, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
         trailingCommas: 'always',
         semiColons: 'always',
     })
+    let codeAfter = code.replace(
+        'var combinedCSSRules =',
+        'export var combinedCSSRules =',
+    )
+    if (code === codeAfter) {
+        throw new Error('Failed to export combinedCSSRules')
+    }
+    code = codeAfter
     fs.writeFileSync(resultFile, code, 'utf-8')
 }
 

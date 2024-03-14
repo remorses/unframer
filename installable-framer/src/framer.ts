@@ -1,1 +1,1 @@
-export * from '../framer-fixed/build/index.js'
+export * from '../framer-fixed/dist/framer.js'

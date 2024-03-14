@@ -2,6 +2,7 @@
     "outDir": "src/framer",
     "components": {
         "logos": "https://framer.com/m/Logo-Ticker-1CEq.js",
+        "testimonials": "https://framer.com/m/Comments-Hm3h.js",
         "menus": "https://framer.com/m/Mega-Menu-2wT3.js"
     }
 }
