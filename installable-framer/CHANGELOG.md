@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.4.1
+
+### Patch Changes
+
+-   defd822: fixed installable framer deadlock because of dprint
+
 ## 0.4.0
 
 ### Minor Changes
