@@ -12,7 +12,7 @@ import Comp from '@/framer/fylo'
 export default function Home() {
     return (
         <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
-            <FramerStyles Components={[Logos]} />
+            <FramerStyles Components={[Logos, Comp]} />
             <div className='relative h-[500px]'>
                 <Test.Responsive
                     variants={{
