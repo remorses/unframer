@@ -7,11 +7,9 @@
 </div>
 
 > [!IMPORTANT]
-> New Framer components no longer work, framer npm package is no longer updated and keeping a working fork has become too difficult.
-> If you want to use Framer components contact Framer and tell them you are willing to pay to have this feature back, it's currently not prioritized because of low demand
+> If your component has any problem like missing imports create an issue with the component url, these issues are usually because of updates to the `framer` runtime which is kept in sync in this repository in [installable-framer/framer-fixed/dist](./installable-framer/framer-fixed/dist) folder
 
-
-install framer components as packages
+Download framer components as simple files
 
 -   Works with any React framework (Next.js, Gatsby, Vite, etc)
 -   Includes all your components dependencies
@@ -124,6 +122,16 @@ export default function App() {
 -   Rich text, created when you use a `richText` variable in Framer
 -   Color, a string
 -   React component, created when you use a `component` variable in Framer, for example in the Ticker component
+
+Known limitations:
+
+-   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
+
+```css
+:root {
+    --token-64603892-5c8b-477a-82d6-e795e75dd5dc: #0b5c96;
+}
+```
 
 ## Example
 

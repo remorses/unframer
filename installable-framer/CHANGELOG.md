@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.5.1
+
+### Patch Changes
+
+-   Fix variants types, don't render variants that are not in the current breakpoint on client, only do it on server thanks to useSyncExternalStore
+
 ## 0.5.0
 
 ### Minor Changes
