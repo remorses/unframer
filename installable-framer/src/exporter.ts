@@ -79,7 +79,7 @@ export async function bundle({
         treeShaking: true,
         // splitting: true,
         logLevel: 'error',
-        
+
         pure: ['addPropertyControls'],
         external: whitelist,
         plugins: [
