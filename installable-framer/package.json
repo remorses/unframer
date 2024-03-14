@@ -1,6 +1,6 @@
 {
     "name": "installable-framer",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "description": "",
     "type": "module",
     "repository": "https://github.com/remorses/installable-framer",
@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "@juggle/resize-observer": "^3.3.1",
+        "chokidar": "^3.5.3",
         "csstype": "^3.1.2",
         "dprint-node": "^1.0.8",
         "esbuild": "^0.20.1",

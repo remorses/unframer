@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.5.0
+
+### Minor Changes
+
+-   a9d22e5: Added --watch option
+
 ## 0.4.1
 
 ### Patch Changes
