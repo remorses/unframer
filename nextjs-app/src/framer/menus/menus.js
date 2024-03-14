@@ -775,793 +775,790 @@ var Component = /* @__PURE__ */ React3.forwardRef(
       variantClassNames,
       cycleOrder,
     },);
-    const variantProps = React3.useMemo(
-      () => ({
-        't6uYX0tBZ': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Jess',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/XfjXHJ2H7SzzlzPr1bGFm1T9BpI.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+    const variantProps = React3.useMemo(() => ({
+      't6uYX0tBZ': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Jess',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/XfjXHJ2H7SzzlzPr1bGFm1T9BpI.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'AnI2DvQZf': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Olli',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/qCpU7HJtiveCC9wTFuh7L4wc8YM.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'AnI2DvQZf': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Olli',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/qCpU7HJtiveCC9wTFuh7L4wc8YM.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'JG7MxGgTY': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Myah',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/Q8IGGb6PvVKrjNuovM2HijDWFU.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'JG7MxGgTY': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Myah',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/Q8IGGb6PvVKrjNuovM2HijDWFU.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'snFARdAmz': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Ammaar',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/iGk4x1NJSVgWzFvuQQADJp9I.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'snFARdAmz': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Ammaar',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/iGk4x1NJSVgWzFvuQQADJp9I.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'Nz_Z2NTH0': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Siena',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/ikD34vgzaLM6N50MKdcR9HVBnk.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'Nz_Z2NTH0': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Siena',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/ikD34vgzaLM6N50MKdcR9HVBnk.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'cHv8JY9g7': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Cheryl',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/mUVPNgOqhd1MFYjLtFtiBwvxfY.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'cHv8JY9g7': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Cheryl',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/mUVPNgOqhd1MFYjLtFtiBwvxfY.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'tR7FlThNE': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Aleeza',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/62fnqd1V6QN3j0vPr4hlpB3HnQ.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'tR7FlThNE': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Aleeza',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/62fnqd1V6QN3j0vPr4hlpB3HnQ.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'bg0lLngd2': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Elli',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/Vu8TxX7VMCMZDjoliFK7D0nOyX0.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'bg0lLngd2': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Elli',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/Vu8TxX7VMCMZDjoliFK7D0nOyX0.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'FKNQjSL73': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Piotr',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/ofIUD8MCjke7Xz8jkh29AWqajJo.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'FKNQjSL73': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Piotr',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/ofIUD8MCjke7Xz8jkh29AWqajJo.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'UozSdcuUY': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Ayisha',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/5nnqp2inSINDktAAWpI7gxJei0w.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'UozSdcuUY': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Ayisha',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/5nnqp2inSINDktAAWpI7gxJei0w.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'EgLxQrxHD': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Nataniel',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/lKaaStgbmdIe8TfrIkFlKzHazV0.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'EgLxQrxHD': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Nataniel',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/lKaaStgbmdIe8TfrIkFlKzHazV0.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'vol5AdrV3': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Nikita',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/bpeWvtoxuajqEtlukZhUFt9KM.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'vol5AdrV3': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Nikita',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/bpeWvtoxuajqEtlukZhUFt9KM.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'rbMcqs1eA': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Tim',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/GoWNvgKZvVTzmZQKHoh2Ccnk4E.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'rbMcqs1eA': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Tim',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/GoWNvgKZvVTzmZQKHoh2Ccnk4E.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'OY_j7HdJV': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Carley',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/40ioqcNOrsoBIVnpfGVsXh9jpM.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'OY_j7HdJV': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Carley',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/40ioqcNOrsoBIVnpfGVsXh9jpM.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'mcvPgNUgN': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Arda',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/U8RU6HcYtcK32VUY2uTSF9QTqo.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'mcvPgNUgN': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Arda',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/U8RU6HcYtcK32VUY2uTSF9QTqo.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'Jj_gJ6raO': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Lacey-Mae',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/1OwzdZHx9ElDw1ZAavs6WGWBSw.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'Jj_gJ6raO': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Lacey-Mae',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/1OwzdZHx9ElDw1ZAavs6WGWBSw.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'UYFenO8zH': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Bo',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/Tlwk5hINm0ferm6DGDyUoqL6pc.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'UYFenO8zH': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Bo',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/Tlwk5hINm0ferm6DGDyUoqL6pc.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'RpMB9X2cU': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Shelbie',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/Pm9TTOkN341IYtePLdPGmhG0E.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'RpMB9X2cU': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Shelbie',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/Pm9TTOkN341IYtePLdPGmhG0E.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'tExww8aRk': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Dillon',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/GOsVbTpzcPHfZ9EMcOSPddNS6go.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'tExww8aRk': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Dillon',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/GOsVbTpzcPHfZ9EMcOSPddNS6go.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'anaA6RL0b': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Selin',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/GaxkgrTkzKlxI7B3EJtZp4dabI.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'anaA6RL0b': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Selin',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/GaxkgrTkzKlxI7B3EJtZp4dabI.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'y8osi5SA0': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Rhian',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/LEd8c4Zf28fU29XZ4c04ImOzs.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'y8osi5SA0': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Rhian',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/LEd8c4Zf28fU29XZ4c04ImOzs.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'v2n6jd8d8': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Ada',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/3oPVBjvZEnTN9DZf7tUMW54TS2k.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'v2n6jd8d8': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Ada',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/3oPVBjvZEnTN9DZf7tUMW54TS2k.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'vrPxXX3Sq': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Lois',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/99qcDQP7xzsxlgXsq47uID7sAm4.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'vrPxXX3Sq': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Lois',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/99qcDQP7xzsxlgXsq47uID7sAm4.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'YC5psLXzO': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Maisie',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/BRu6MhHhp9NjldqU9TTCEAEoGKg.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'YC5psLXzO': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Maisie',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/BRu6MhHhp9NjldqU9TTCEAEoGKg.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'wQ9whLvFH': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Lori',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/ebCaegtDakUaQGRtXSYmPR43Q.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'wQ9whLvFH': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Lori',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/ebCaegtDakUaQGRtXSYmPR43Q.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'hUi9TraZo': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Jardel',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/B8580pOtLEBrg7wIFp62oXfFQ.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'hUi9TraZo': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Jardel',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/B8580pOtLEBrg7wIFp62oXfFQ.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'ji0e3Gqv5': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Jethro',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/szTmT1K4f8nn5CutvLWFlBdt8k.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'ji0e3Gqv5': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Jethro',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/szTmT1K4f8nn5CutvLWFlBdt8k.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'nMHdUM1t6': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Carmen',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/e6GZhp0s96FXaIiLYSRyZYZYypo.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'nMHdUM1t6': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Carmen',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/e6GZhp0s96FXaIiLYSRyZYZYypo.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'Stnp3oRU4': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Patrik',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/6xGPl1j87mG8XoUzCwRYzEohM8.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'Stnp3oRU4': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Patrik',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/6xGPl1j87mG8XoUzCwRYzEohM8.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'TxmZTsvXB': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Barry',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/mhC7dhzvLcqmUofPcC2BW8vh4.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'TxmZTsvXB': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Barry',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/mhC7dhzvLcqmUofPcC2BW8vh4.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'bNhqIdQoj': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Alejandro',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/YynUn6LSLWVQia4pOtIxhY77SSA.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'bNhqIdQoj': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Alejandro',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/YynUn6LSLWVQia4pOtIxhY77SSA.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'OYkCSZPL0': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Selin',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/u2K6WSbQVKHiOUvOF3auFya79y8.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'OYkCSZPL0': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Selin',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/u2K6WSbQVKHiOUvOF3auFya79y8.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'bOMpuyzc_': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Denny',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/BJytCbStiWSy9rxpQ0wU6I3SNiI.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'bOMpuyzc_': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Denny',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/BJytCbStiWSy9rxpQ0wU6I3SNiI.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-        'NqCoJY2pH': {
-          'AD1uRb789': {
-            'center': false,
-            'data-framer-name': 'Becca',
-            '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
-          },
-          'XGgsiaAin': {
-            'background': {
-              'src':
-                new URL(
-                  'assets/xyIaIR0LhPm1PVVUVrQ7TDGTyA.png',
-                  'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
-                ).href,
-              'pixelWidth': 440,
-              'pixelHeight': 440,
-              'intrinsicWidth': 440,
-              'intrinsicHeight': 440,
-              'fit': 'fill',
-            },
+      },
+      'NqCoJY2pH': {
+        'AD1uRb789': {
+          'center': false,
+          'data-framer-name': 'Becca',
+          '__contentWrapperStyle': { 'width': '100%', 'height': '100%', 'padding': '0px 0px 0px 0px', },
+        },
+        'XGgsiaAin': {
+          'background': {
+            'src':
+              new URL(
+                'assets/xyIaIR0LhPm1PVVUVrQ7TDGTyA.png',
+                'https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js',
+              ).href,
+            'pixelWidth': 440,
+            'pixelHeight': 440,
             'intrinsicWidth': 440,
             'intrinsicHeight': 440,
+            'fit': 'fill',
           },
+          'intrinsicWidth': 440,
+          'intrinsicHeight': 440,
         },
-      }),
-      [],
-    );
+      },
+    }), [],);
     const addVariantProps = useAddVariantProps(baseVariant, gestureVariant, variantProps,);
     const defaultLayoutId = useRandomID();
     return /* @__PURE__ */ _jsx3(LayoutGroup, {
@@ -2064,8 +2061,7 @@ var Component2 = /* @__PURE__ */ React4.forwardRef(
                 XKqaB2Aqx: { backgroundColor: 'rgb(209, 238, 250)', opacity: 1, },
               },
             },),
-            isDisplayed() && /* @__PURE__ */
-            _jsxs(motion3.div, {
+            isDisplayed() && /* @__PURE__ */ _jsxs(motion3.div, {
               className: 'framer-glg9l4',
               'data-framer-name': 'Learn',
               layoutDependency,
@@ -2370,8 +2366,7 @@ var Component2 = /* @__PURE__ */ React4.forwardRef(
                 },),
               ],
             },),
-            isDisplayed1() && /* @__PURE__ */
-            _jsxs(motion3.div, {
+            isDisplayed1() && /* @__PURE__ */ _jsxs(motion3.div, {
               className: 'framer-sl2zhn',
               'data-framer-name': 'Why us',
               layoutDependency,
@@ -2824,8 +2819,7 @@ var Component2 = /* @__PURE__ */ React4.forwardRef(
                 },),
               ],
             },),
-            isDisplayed2() && /* @__PURE__ */
-            _jsxs(motion3.div, {
+            isDisplayed2() && /* @__PURE__ */ _jsxs(motion3.div, {
               className: 'framer-1vmebvn',
               'data-framer-name': 'Features',
               layoutDependency,
@@ -3148,8 +3142,7 @@ var Component2 = /* @__PURE__ */ React4.forwardRef(
                 },),
               ],
             },),
-            isDisplayed3() && /* @__PURE__ */
-            _jsxs(motion3.div, {
+            isDisplayed3() && /* @__PURE__ */ _jsxs(motion3.div, {
               className: 'framer-1w1b19f',
               'data-framer-name': 'About',
               layoutDependency,

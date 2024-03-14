@@ -4,7 +4,8 @@ import tmp from 'tmp'
 
 import pico from 'picocolors'
 
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { polyfillNode } from "esbuild-plugin-polyfill-node";
+
 import {
     ControlDescription,
     ControlType,
@@ -14,7 +15,7 @@ import { fetch as _fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
-import { s } from 'vitest/dist/reporters-2ff87305.js'
+
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 const prefix = '[installable-framer]'
 export const logger = {
@@ -81,7 +82,7 @@ export async function bundle({ cwd = '', name, url }) {
                     deps.add(x)
                 },
             }),
-            NodeModulesPolyfillPlugin({}),
+            polyfillNode({}),
         ],
         write: true,
         // outfile: 'dist/example.js',
@@ -94,6 +95,7 @@ export async function bundle({ cwd = '', name, url }) {
     )
     const resultFile = path.resolve(cwd, sourcefile)
     const output = fs.readFileSync(resultFile, 'utf-8')
+    logger.log(`formatting`, sourcefile)
     const code = dprint.format(resultFile, output, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
@@ -412,7 +414,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
             build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
                 const url = args.path
                 const u = new URL(url)
-                const resolved = await resolveRedirect(u, redirectCache)
+                const resolved = await resolveRedirect(url, redirectCache)
                 if (codeCache.has(url)) {
                     const code = await codeCache.get(url)
                     return {
@@ -451,6 +453,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                         loader,
                         platform: 'browser',
                     })
+                    // console.log('transformed', resolved)
                     return transformed.code
                 })
 
@@ -468,21 +471,30 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
     return plugin
 }
 
-export async function resolveRedirect(url, redirectCache) {
+export async function resolveRedirect(url?: string, redirectCache?: any) {
+    if (!url) {
+        return ''
+    }
+    url = url.toString()
     if (redirectCache.has(url)) {
         return await redirectCache.get(url)
     }
+    
     const p = recursiveResolveRedirect(url)
     redirectCache.set(url, p)
     return await p
 }
 
-export async function recursiveResolveRedirect(url) {
+export async function recursiveResolveRedirect(url?: string) {
+    if (!url) {
+        return
+    }
+    
     let res = await fetchWithRetry(url, { redirect: 'manual', method: 'HEAD' })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
         // logger.log('redirect', loc)
-        return recursiveResolveRedirect(res.headers.get('location'))
+        return recursiveResolveRedirect(res.headers.get('location') || '')
     }
 
     return url

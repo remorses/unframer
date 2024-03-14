@@ -1634,8 +1634,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
             gestureVariant,
           ),
           children: [
-            isDisplayed() && /* @__PURE__ */
-            _jsx3(ComponentViewportProvider, {
+            isDisplayed() && /* @__PURE__ */ _jsx3(ComponentViewportProvider, {
               children: /* @__PURE__ */ _jsx3(motion3.div, {
                 className: 'framer-1q8iobv-container',
                 layoutDependency,
@@ -1737,8 +1736,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                 },),
               },),
             },),
-            isDisplayed1() && /* @__PURE__ */
-            _jsx3(ComponentViewportProvider, {
+            isDisplayed1() && /* @__PURE__ */ _jsx3(ComponentViewportProvider, {
               children: /* @__PURE__ */ _jsx3(motion3.div, {
                 className: 'framer-q10t3o-container',
                 layoutDependency,
@@ -1804,8 +1802,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                 },),
               },),
             },),
-            isDisplayed1() && /* @__PURE__ */
-            _jsx3(ComponentViewportProvider, {
+            isDisplayed1() && /* @__PURE__ */ _jsx3(ComponentViewportProvider, {
               children: /* @__PURE__ */ _jsx3(motion3.div, {
                 className: 'framer-1s0uzy2-container',
                 layoutDependency,
@@ -1890,8 +1887,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                 },),
               },),
             },),
-            isDisplayed2() && /* @__PURE__ */
-            _jsx3(ComponentViewportProvider, {
+            isDisplayed2() && /* @__PURE__ */ _jsx3(ComponentViewportProvider, {
               children: /* @__PURE__ */ _jsx3(motion3.div, {
                 className: 'framer-16yuehg-container',
                 layoutDependency,

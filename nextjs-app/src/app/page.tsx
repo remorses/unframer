@@ -7,6 +7,7 @@ import {
 import Logos from '@/framer/logos'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
+import Comp from '@/framer/fylo'
 
 export default function Home() {
     return (
@@ -15,6 +16,7 @@ export default function Home() {
             <div className='relative h-[500px]'>
                 <Test variant='Desktop' />
             </div>
+            <Comp />
             <div className='pt-[500px]'>
                 <Menus />
 
