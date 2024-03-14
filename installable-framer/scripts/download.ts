@@ -78,7 +78,16 @@ export async function main({ framerUrl, framerTypesUrl }) {
     fs.writeFileSync(resultFile, code, 'utf-8')
 }
 
+
+// find these scripts in Framer html:
+// <script>
+//     window.exportAssets = Object.freeze({
+//         library: "https://app.framerstatic.com/framer.5AKNTIWS.js",
+//         framerMotion: "https://app.framerstatic.com/framer-motion.5PJAF455.js",
+//     })
+// </script>
 main({
     framerTypesUrl: 'https://app.framerstatic.com/framer-KJWFDJQN.dts',
+    framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
     framerUrl: `https://app.framerstatic.com/framer.5AKNTIWS.js`,
 })
