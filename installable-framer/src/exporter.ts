@@ -300,7 +300,7 @@ export function propControlsToType(controls?: PropertyControls) {
         t += `const Component = (props: Props) => any\n`
         t += `export default Component\n`
         t += `type Breakpoint = 'Desktop' | 'Tablet' | 'Mobile'\n`
-        t += `Component.Responsive = (props: Omit<Props, 'variant'> & {variants: Record<Breakpoint, ComponentPropsWithoutRef<Component>['variant']>}) => any\n`
+        t += `Component.Responsive = (props: Omit<Props, 'variant'> & {variants: Record<Breakpoint, Props['variant']>}) => any\n`
 
         return t
     } catch (e: any) {

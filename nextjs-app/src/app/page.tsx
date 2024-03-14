@@ -26,15 +26,6 @@ export default function Home() {
             <div className='pt-[500px]'>
                 <Menus />
 
-                <WithFramerBreakpoints
-                    variants={{
-                        Desktop: 'Logo Ticker',
-                        Tablet: 'Logo Ticker - M',
-                        Mobile: 'Logo Ticker - M',
-                    }}
-                    Component={Logos}
-                    // style={{ width: '100%' }}
-                ></WithFramerBreakpoints>
                 <Logos.Responsive
                     variants={{
                         Desktop: 'Logo Ticker',
