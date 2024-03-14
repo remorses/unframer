@@ -1,7 +1,13 @@
 'use client'
 import { combinedCSSRules } from '../framer-fixed/dist/framer.js'
 
-import { ComponentPropsWithoutRef, ComponentType, ReactNode } from 'react'
+import {
+    ComponentPropsWithoutRef,
+    ComponentType,
+    ReactNode,
+    useEffect,
+    useSyncExternalStore,
+} from 'react'
 
 function getFonts(component) {
     const fonts = component.fonts
@@ -88,6 +94,18 @@ export function getFontsStyles(Components) {
     return str
 }
 
+const breakpointSizes: Record<(typeof defaultBreakpoints)[number], number> = {
+    Desktop: 1024,
+    Tablet: 768,
+    Mobile: 0,
+}
+
+function getBreakpointNameFromWindowWidth(windowWidth: number) {
+    return defaultBreakpoints.find(
+        (name) => windowWidth >= breakpointSizes[name],
+    )
+}
+
 const breakpointsStyles = `
 
 .FramerTablet,
@@ -96,19 +114,19 @@ const breakpointsStyles = `
     display: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: ${breakpointSizes.Desktop}px) {
     .FramerDesktop {
         display: contents;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: ${breakpointSizes.Tablet}px) and (max-width: ${breakpointSizes.Desktop}px) {
     .FramerTablet {
         display: contents;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: ${breakpointSizes.Tablet}px) {
     .FramerMobile {
         display: contents;
     }
@@ -164,8 +182,27 @@ export function WithFramerBreakpoints<
 
     const options = variantControls?.optionTitles
 
+    const currentBreakpoint = useSyncExternalStore(
+        onResize,
+        () => {
+            // console.log('window.innerWidth', window.innerWidth)
+            const breakpoint = getBreakpointNameFromWindowWidth(
+                window.innerWidth,
+            )
+            return breakpoint
+        },
+        () => {
+            // on server
+            return ''
+        },
+    )
+    // console.log('currentBreakpoint', currentBreakpoint)
+
     let parts: ReactNode[] = []
     for (let breakpointName of defaultBreakpoints) {
+        if (currentBreakpoint && currentBreakpoint !== breakpointName) {
+            continue
+        }
         let realVariant = breakpointsMap[breakpointName]
         if (!realVariant) {
             continue
@@ -183,5 +220,10 @@ export function WithFramerBreakpoints<
         )
     }
 
-    return <>{parts}</>
+    return parts
+}
+
+const onResize = (callback) => {
+    window.addEventListener('resize', callback)
+    return () => window.removeEventListener('resize', callback)
 }

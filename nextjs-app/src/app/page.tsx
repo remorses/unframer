@@ -14,7 +14,13 @@ export default function Home() {
         <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
             <FramerStyles Components={[Logos]} />
             <div className='relative h-[500px]'>
-                <Test variant='Desktop' />
+                <Test.Responsive
+                    variants={{
+                        Desktop: 'Desktop',
+                        Tablet: 'Tablet',
+                        Mobile: 'Mobile',
+                    }}
+                />
             </div>
             <Comp />
             <div className='pt-[500px]'>
