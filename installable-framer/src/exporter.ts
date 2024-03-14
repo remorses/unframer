@@ -4,7 +4,7 @@ import tmp from 'tmp'
 
 import pico from 'picocolors'
 
-import { polyfillNode } from "esbuild-plugin-polyfill-node";
+import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 
 import {
     ControlDescription,
@@ -37,7 +37,12 @@ function validateUrl(url: string) {
     }
 }
 
-export async function bundle({ cwd = '', name, url }) {
+export async function bundle({
+    cwd = '',
+    name,
+    url,
+    signal = new AbortController().signal,
+}) {
     validateUrl(url)
     const deps = new Set<string>()
     cwd ||= path.resolve(process.cwd(), 'example')
@@ -50,6 +55,7 @@ export async function bundle({ cwd = '', name, url }) {
         // entryPoints: {
         //     index: url,
         // },
+
         stdin: {
             contents: /** js */ `
             'use client'
@@ -73,21 +79,23 @@ export async function bundle({ cwd = '', name, url }) {
         treeShaking: true,
         // splitting: true,
         logLevel: 'error',
+        
         pure: ['addPropertyControls'],
         external: whitelist,
         plugins: [
             esbuildPluginBundleDependencies({
-                onDependency: (x) => {
-                    // logger.log('dep', x)
-                    deps.add(x)
-                },
+                signal,
             }),
             polyfillNode({}),
         ],
         write: true,
+
         // outfile: 'dist/example.js',
         outfile: path.resolve(cwd, sourcefile),
     })
+    if (signal.aborted) {
+        throw new Error('aborted')
+    }
     // logger.log('result', result)
     fs.writeFileSync(
         path.resolve(cwd, 'index.js'),
@@ -229,9 +237,7 @@ export function propControlsToType(controls?: PropertyControls) {
                     return
                 }
 
-                const typescriptType = (
-                    value: ControlDescription<any>,
-                ) => {
+                const typescriptType = (value: ControlDescription<any>) => {
                     value.type
                     switch (value.type) {
                         case ControlType.Color:
@@ -350,7 +356,7 @@ const whitelist = [
     'framer-motion', //
 ]
 
-export function esbuildPluginBundleDependencies({ onDependency }) {
+export function esbuildPluginBundleDependencies({ signal }) {
     const codeCache = new Map()
     let redirectCache = new Map<string, Promise<string>>()
     const plugin: Plugin = {
@@ -366,6 +372,9 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                 }
             })
             const resolveDep = (args) => {
+                if (signal.aborted) {
+                    throw new Error('aborted')
+                }
                 if (args.path.startsWith('https://')) {
                     return {
                         path: args.path,
@@ -412,6 +421,9 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
             // build.onResolve({ filter: /^\w/ }, resolveDep)
             build.onResolve({ filter: /.*/, namespace: 'https' }, resolveDep)
             build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
+                if (signal.aborted) {
+                    throw new Error('aborted')
+                }
                 const url = args.path
                 const u = new URL(url)
                 const resolved = await resolveRedirect(url, redirectCache)
@@ -425,7 +437,7 @@ export function esbuildPluginBundleDependencies({ onDependency }) {
                 let loader = 'jsx' as any
                 const promise = Promise.resolve().then(async () => {
                     logger.log('fetching', url)
-                    const res = await fetchWithRetry(resolved)
+                    const res = await fetchWithRetry(resolved, { signal })
                     if (!res.ok) {
                         throw new Error(
                             `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
@@ -479,7 +491,7 @@ export async function resolveRedirect(url?: string, redirectCache?: any) {
     if (redirectCache.has(url)) {
         return await redirectCache.get(url)
     }
-    
+
     const p = recursiveResolveRedirect(url)
     redirectCache.set(url, p)
     return await p
@@ -489,7 +501,7 @@ export async function recursiveResolveRedirect(url?: string) {
     if (!url) {
         return
     }
-    
+
     let res = await fetchWithRetry(url, { redirect: 'manual', method: 'HEAD' })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
@@ -520,6 +532,10 @@ function retryTwice<F extends Function>(fn: Function): Function {
         try {
             return await fn(...args)
         } catch (e: any) {
+            // ignore abort errors
+            if (e.name === 'AbortError') {
+                return
+            }
             logger.error('retrying', e.message)
             return await fn(...args)
         }
