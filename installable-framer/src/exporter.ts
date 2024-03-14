@@ -9,7 +9,7 @@ import {
     ControlDescription,
     ControlType,
     PropertyControls,
-} from '../framer-fixed/build/index.js'
+} from '../framer-fixed/dist/framer.js'
 import { fetch as _fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
@@ -228,8 +228,9 @@ export function propControlsToType(controls?: PropertyControls) {
                 }
 
                 const typescriptType = (
-                    value: ControlDescription<Partial<any>>,
+                    value: ControlDescription<any>,
                 ) => {
+                    value.type
                     switch (value.type) {
                         case ControlType.Color:
                             return 'string'
@@ -240,6 +241,7 @@ export function propControlsToType(controls?: PropertyControls) {
                         case ControlType.String:
                             return 'string'
                         case ControlType.Enum: {
+                            // @ts-expect-error
                             const options = value.optionTitles || value.options
                             return options.map((x) => `'${x}'`).join(' | ')
                         }
@@ -250,10 +252,13 @@ export function propControlsToType(controls?: PropertyControls) {
                         case ControlType.ComponentInstance:
                             return 'React.ReactNode'
                         case ControlType.Array:
+                            // @ts-expect-error
                             return `${typescriptType(value.control)}[]`
                         case ControlType.Object:
+                            // @ts-expect-error
                             return `{${Object.entries(value.controls)
                                 .map(([k, v]) => {
+                                    // @ts-expect-error
                                     return `${k}: ${typescriptType(v)}`
                                 })
                                 .join(', ')}`
@@ -263,8 +268,6 @@ export function propControlsToType(controls?: PropertyControls) {
                             return 'string'
                         case ControlType.ResponsiveImage:
                             return `{src: string, srcSet?: string, alt?: string}`
-                        case ControlType.RichText:
-                            return 'any'
                         case ControlType.FusedNumber:
                             return 'number'
                         case ControlType.Transition:

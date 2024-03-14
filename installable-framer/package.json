@@ -42,7 +42,7 @@
         "eventemitter3": "^3.1.0",
         "find-up": "^6.3.0",
         "fontfaceobserver": "^2.1.0",
-        "framer-motion": "10.12.17",
+        "framer-motion": "11.0.13",
         "fs-extra": "^11.1.1",
         "hey-listen": "^1.0.8",
         "hoist-non-react-statics": "^3.3.2",
@@ -57,7 +57,7 @@
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",
         "@types/node": "^20.5.7",
-        "react": "*",
-        "react-dom": "*"
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     }
 }

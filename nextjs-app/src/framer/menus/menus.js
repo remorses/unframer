@@ -1,6 +1,6 @@
 'use client';
 
-// https:https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+// https:https://framer.com/m/Mega-Menu-2wT3.js
 import { jsx as _jsx4, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
@@ -1734,7 +1734,7 @@ addPropertyControls2(FramerdkRfXNUhM, {
 },);
 addFonts(FramerdkRfXNUhM, [],);
 
-// https:https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
+// https:https://framer.com/m/Mega-Menu-2wT3.js
 var HeroFonts = getFonts(Icon,);
 var MemojiFonts = getFonts(stdin_default,);
 var cycleOrder2 = ['bkNTL_hDD', 'SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',];

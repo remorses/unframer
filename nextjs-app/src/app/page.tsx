@@ -5,6 +5,7 @@ import {
     WithFramerBreakpoints,
 } from 'installable-framer/dist/react'
 import Logos from '@/framer/logos'
+import Menus from '@/framer/menus'
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
             <FramerStyles Components={[Logos]} />
 
             <div className='pt-[500px]'>
+                <Menus />
                 <WithFramerBreakpoints
                     variants={{
                         Desktop: 'Logo Ticker',
