@@ -1,5 +1,11 @@
 # installable-framer
 
+## 0.4.0
+
+### Minor Changes
+
+-   Use latest framer package bundle, should work with latest components
+
 ## 0.3.7
 
 ### Patch Changes
