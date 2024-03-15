@@ -1,5 +1,11 @@
 # unframer
 
+## 0.6.1
+
+### Patch Changes
+
+-   Fix layout animations getting triggered on mount, disable layout animations during hydration
+
 ## 0.6.0
 
 ### Minor Changes
