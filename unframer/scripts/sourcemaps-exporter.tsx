@@ -6,15 +6,7 @@ import fsExtra from 'fs-extra'
 
 import path from 'path'
 
-downloadSourcemapsEsm({
-    outputPath: 'example-framer-site',
-    entryUrl:
-        'https://framerusercontent.com/sites/7AozRUZsw4uLQqKSq2WA8i/preview_script0.NVJQNMQQ.mjs',
-    // findExport: {
-    //     regex: /(deserializeFromProtocolBuffer)/,
-    //     srcPath: 'serialization.ts',
-    // },
-})
+
 
 export async function downloadSourcemapsIife({
     outputPath,
@@ -219,6 +211,9 @@ export function httpPlugin({
 
                     let { pathname } = new URL(source.url)
                     let loader = pathname!.match(/[^.]+$/)![0]
+                    if (loader === 'mjs') {
+                        loader = 'js'
+                    }
 
                     return { contents, loader }
                 },
@@ -256,7 +251,7 @@ export async function extractSourceMap({ contents, baseUrl }) {
                 const spJSON: any = await spContent.json()
                 return spJSON
             })()
-            // console.log(JSON.stringify(spJSON.sources, null, 2))
+            // console.log(JSON.stringify(spJSON.sourcesContent, null, 2))
             if (!spJSON.sourcesContent) {
                 console.log(`XXX no sourcesContent`)
                 return
