@@ -356,7 +356,9 @@ const whitelist = [
     'framer-motion', //
 ]
 
-export function esbuildPluginBundleDependencies({ signal }) {
+export function esbuildPluginBundleDependencies({
+    signal = undefined as AbortSignal | undefined,
+}) {
     const codeCache = new Map()
     let redirectCache = new Map<string, Promise<string>>()
     const plugin: Plugin = {
@@ -372,7 +374,7 @@ export function esbuildPluginBundleDependencies({ signal }) {
                 }
             })
             const resolveDep = (args) => {
-                if (signal.aborted) {
+                if (signal?.aborted) {
                     throw new Error('aborted')
                 }
                 if (args.path.startsWith('https://')) {
@@ -421,7 +423,7 @@ export function esbuildPluginBundleDependencies({ signal }) {
             // build.onResolve({ filter: /^\w/ }, resolveDep)
             build.onResolve({ filter: /.*/, namespace: 'https' }, resolveDep)
             build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
-                if (signal.aborted) {
+                if (signal?.aborted) {
                     throw new Error('aborted')
                 }
                 const url = args.path

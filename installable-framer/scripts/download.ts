@@ -1,4 +1,3 @@
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import dprint from 'dprint-node'
 
 import fs from 'fs'
@@ -36,15 +35,7 @@ export async function main({ framerUrl, framerTypesUrl }) {
         logLevel: 'error',
         pure: ['addPropertyControls'],
         external: [],
-        plugins: [
-            esbuildPluginBundleDependencies({
-                onDependency: (x) => {
-                    // logger.log('dep', x)
-                    deps.add(x)
-                },
-            }),
-            NodeModulesPolyfillPlugin({}),
-        ],
+        plugins: [esbuildPluginBundleDependencies({})],
         write: true,
         // outfile: 'dist/example.js',
         outfile: resultFile,
@@ -55,10 +46,7 @@ export async function main({ framerUrl, framerTypesUrl }) {
     export declare const combinedCSSRules: string[]
 
     `
-    fs.writeFileSync(
-        path.resolve(out, 'framer.d.ts'),
-        types,
-    )
+    fs.writeFileSync(path.resolve(out, 'framer.d.ts'), types)
 
     const output = fs.readFileSync(resultFile, 'utf-8')
     let code = dprint.format(resultFile, output, {
@@ -78,7 +66,6 @@ export async function main({ framerUrl, framerTypesUrl }) {
     fs.writeFileSync(resultFile, code, 'utf-8')
 }
 
-
 // find these scripts in Framer html:
 // <script>
 //     window.exportAssets = Object.freeze({
@@ -88,6 +75,6 @@ export async function main({ framerUrl, framerTypesUrl }) {
 // </script>
 main({
     framerTypesUrl: 'https://app.framerstatic.com/framer-KJWFDJQN.dts',
-    framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
+    // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
     framerUrl: `https://app.framerstatic.com/framer.5AKNTIWS.js`,
 })
