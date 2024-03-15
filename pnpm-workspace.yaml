@@ -1,4 +1,2 @@
 packages:
-  - nextjs-app
-  - server
-  - unframer
+  - ./*

@@ -1,5 +1,11 @@
 # unframer
 
+## 0.6.0
+
+### Minor Changes
+
+-   Renamed to unframer from installable-framer
+
 ## 0.5.1
 
 ### Patch Changes
