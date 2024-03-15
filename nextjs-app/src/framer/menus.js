@@ -14,7 +14,7 @@ import {
   useActiveVariantCallback,
   useVariantState as useVariantState2,
   withCSS as withCSS2,
-} from 'installable-framer/dist/framer';
+} from 'unframer/dist/framer';
 import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'framer-motion';
 import * as React4 from 'react';
 
@@ -22,7 +22,7 @@ import * as React4 from 'react';
 import { jsx as _jsx2, } from 'react/jsx-runtime';
 import * as React2 from 'react';
 import { useEffect, useRef, useState, } from 'react';
-import { addPropertyControls, ControlType as ControlType2, RenderTarget, } from 'installable-framer/dist/framer';
+import { addPropertyControls, ControlType as ControlType2, RenderTarget, } from 'unframer/dist/framer';
 import { motion, } from 'framer-motion';
 
 // https:https://framer.com/m/framer/icon-nullstate.js@0.7.0
@@ -69,7 +69,7 @@ var l = (e,) => {
 
 // https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
 import { useMemo, } from 'react';
-import { ControlType, } from 'installable-framer/dist/framer';
+import { ControlType, } from 'unframer/dist/framer';
 var defaultEvents = {
   onClick: { type: ControlType.EventHandler, },
   onMouseDown: { type: ControlType.EventHandler, },
@@ -612,7 +612,7 @@ import {
   useAddVariantProps,
   useVariantState,
   withCSS,
-} from 'installable-framer/dist/framer';
+} from 'unframer/dist/framer';
 
 // https:https://framer.com/m/framer/useConstant.js@^1.0.0
 import { useRef as useRef2, } from 'react';
@@ -3323,7 +3323,7 @@ addFonts2(FramerrXuKNGhVw, [
 ],);
 
 // virtual:menus
-import { WithFramerBreakpoints, } from 'installable-framer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer/dist/react';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default2.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default2, ...props, },);

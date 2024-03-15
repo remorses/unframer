@@ -3,7 +3,7 @@
 import {
     FramerStyles,
     WithFramerBreakpoints,
-} from 'installable-framer/dist/react'
+} from 'unframer/dist/react'
 import Logos from '@/framer/logos'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'

@@ -14,14 +14,14 @@ import {
   RichText,
   useVariantState,
   withCSS,
-} from 'installable-framer/dist/framer';
+} from 'unframer/dist/framer';
 import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'framer-motion';
 import * as React from 'react';
 
 // https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
-import { addPropertyControls, ControlType, RenderTarget, } from 'installable-framer/dist/framer';
+import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
 import { LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'framer-motion';
 var directionTransformers = {
   left: (offset,) => `translateX(-${offset}px)`,
@@ -692,7 +692,7 @@ addPropertyControls2(FramerF1yUSD211, {
 addFonts(FramerF1yUSD211, [...TickerFonts,],);
 
 // virtual:logos
-import { WithFramerBreakpoints, } from 'installable-framer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer/dist/react';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props, },);

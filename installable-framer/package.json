@@ -1,9 +1,9 @@
 {
-    "name": "installable-framer",
+    "name": "unframer",
     "version": "0.5.1",
     "description": "",
     "type": "module",
-    "repository": "https://github.com/remorses/installable-framer",
+    "repository": "https://github.com/remorses/unframer",
     "scripts": {
         "build": "tsc && cp ../README.md ./README.md",
         "prepublishOnly": "pnpm build",

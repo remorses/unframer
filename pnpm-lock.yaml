@@ -40,7 +40,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1
 
-  installable-framer:
+  unframer:
     dependencies:
       '@juggle/resize-observer':
         specifier: ^3.3.1
@@ -136,9 +136,9 @@ importers:
       framer-motion:
         specifier: 10.12.17
         version: 10.12.17(react-dom@18.2.0)(react@18.2.0)
-      installable-framer:
+      unframer:
         specifier: workspace:*
-        version: link:../installable-framer
+        version: link:../unframer
       next:
         specifier: 14.1.3
         version: 14.1.3(react-dom@18.2.0)(react@18.2.0)

@@ -1,4 +1,4 @@
-# installable-framer
+# unframer
 
 ## 0.5.1
 

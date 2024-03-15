@@ -1,13 +1,13 @@
 <div align='center'>
     <br/>
     <br/>
-    <h3>installable-framer</h3>
+    <h3>unframer</h3>
     <br/>
     <br/>
 </div>
 
 > [!IMPORTANT]
-> If your component has any problem like missing imports create an issue with the component url, these issues are usually because of updates to the `framer` runtime which is kept in sync in this repository in [installable-framer/framer-fixed/dist](./installable-framer/framer-fixed/dist) folder
+> If your component has any problem like missing imports create an issue with the component url, these issues are usually because of updates to the `framer` runtime which is kept in sync in this repository in [unframer/framer-fixed/dist](./unframer/framer-fixed/dist) folder
 
 Download framer components as simple files
 
@@ -20,10 +20,10 @@ Download framer components as simple files
 1. Install the package
 
     ```sh
-    npm install installable-framer framer-motion
+    npm install unframer framer-motion
     ```
 
-1. Create an `installable-framer.json` file like the following (the key will be used for the component folder inside `outDir`)
+1. Create an `unframer.json` file like the following (the key will be used for the component folder inside `outDir`)
 
     ```json
     {
@@ -39,12 +39,12 @@ Download framer components as simple files
 
     ![url import](./assets/framer-url-import.png)
 
-1. Run the command `npx installable-framer` to download the components and their types in the `outDir` directory
+1. Run the command `npx unframer` to download the components and their types in the `outDir` directory
 1. Import the component inside your `jsx` files, for example
 
 ```tsx
 import Menu from './framer/menus'
-import { FramerStyles } from 'installable-framer/dist/react'
+import { FramerStyles } from 'unframer/dist/react'
 
 export default function App() {
     return (
@@ -61,7 +61,7 @@ export default function App() {
 
 ```tsx
 import Logos from './framer/logos'
-import { FramerStyles } from 'installable-framer/dist/react'
+import { FramerStyles } from 'unframer/dist/react'
 
 export default function App() {
     return (
@@ -89,7 +89,7 @@ Notice that you will often need to use `!important` to override styles already d
 
 ```tsx
 import Logos from './framer/logos'
-import { FramerStyles } from 'installable-framer/dist/react'
+import { FramerStyles } from 'unframer/dist/react'
 
 export default function App() {
     return (
@@ -112,7 +112,7 @@ export default function App() {
 
 ## Supported component props
 
-`installable-framer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:
+`unframer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:
 
 -   `variant`, created when you use variants in Framer
 -   functions, created when you use an `event` variable in Framer

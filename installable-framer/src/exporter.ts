@@ -17,7 +17,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
-const prefix = '[installable-framer]'
+const prefix = '[unframer]'
 export const logger = {
     log(...args) {
         console.log(prefix, ...args)
@@ -100,7 +100,7 @@ export async function bundle({
                             return {
                                 contents: /** js */ `'use client'
                                 import Component from '${url}'
-                                import { WithFramerBreakpoints } from 'installable-framer/dist/react'
+                                import { WithFramerBreakpoints } from 'unframer/dist/react'
                                 Component.Responsive = (props) => {
                                     return <WithFramerBreakpoints Component={Component} {...props} />
                                 }
@@ -379,7 +379,7 @@ const whitelist = [
     'react',
     'react-dom',
     'framer',
-    'installable-framer',
+    'unframer',
     'framer-motion', //
 ]
 
@@ -414,7 +414,7 @@ export function esbuildPluginBundleDependencies({
                 }
                 if (args.path === 'framer') {
                     return {
-                        path: 'installable-framer/dist/framer',
+                        path: 'unframer/dist/framer',
                         external: true,
                     }
                 }

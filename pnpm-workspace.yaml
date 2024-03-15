@@ -1,4 +1,4 @@
 packages:
   - nextjs-app
   - server
-  - installable-framer
+  - unframer

@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import { findUp } from 'find-up'
 import tmp from 'tmp'
 import path from 'path'
-const configName = 'installable-framer.json'
+const configName = 'unframer.json'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
