@@ -7,8 +7,10 @@ import {
     ReactNode,
     useEffect,
     useMemo,
+    useState,
     useSyncExternalStore,
 } from 'react'
+import { useInstantLayoutTransition } from 'framer-motion'
 
 function getFonts(component) {
     const fonts = component.fonts
@@ -205,7 +207,8 @@ export function WithFramerBreakpoints<
     }
 
     const options = variantControls?.optionTitles
-
+    // TODO if i remove some elements the component motion.div will move out on first render, probably because they take another element as anchor, which means it thinks that before it was a different variant, so it animates
+    const start = useInstantLayoutTransition()
     const currentBreakpoint = useSyncExternalStore(
         onResize,
         () => {
@@ -217,6 +220,7 @@ export function WithFramerBreakpoints<
         },
         () => {
             // on server
+            start()
             return ''
         },
     )
@@ -224,8 +228,7 @@ export function WithFramerBreakpoints<
     const parts = useMemo(() => {
         return defaultBreakpoints.map((breakpointName) => {
             if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-                // TODO if i remove some elements the component motion.div will move out on first render, probably because they take another element as anchor, which means it thinks that before it was a different variant, so it animates
-                // return null
+                return null
             }
             let realVariant = breakpointsMap[breakpointName]
             if (!realVariant) {
