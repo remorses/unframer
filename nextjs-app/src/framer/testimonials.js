@@ -2,7 +2,7 @@
 import { Et, } from './chunk-LQBDGSDV.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framer.com/m/Comments-Hm3h.js
+// https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
 import { jsx as _jsx3, jsxs as _jsxs3, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
@@ -743,7 +743,7 @@ addFonts(Framerrbf1DFpj4, [{
   weight: '400',
 }, ...fonts,],);
 
-// https:https://framer.com/m/Comments-Hm3h.js
+// https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
 var CommentFonts = getFonts(stdin_default,);
 var TickerFonts = getFonts(Ticker,);
 var cycleOrder2 = ['Ss6tBuxYW', 'jbqU_7iL0', 'dGbAdK8tT',];

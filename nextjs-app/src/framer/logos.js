@@ -2,7 +2,7 @@
 import { Et, } from './chunk-LQBDGSDV.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framer.com/m/Logo-Ticker-1CEq.js
+// https:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js
 import { jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -413,7 +413,7 @@ var subtitleStyles = { margin: 0, opacity: 0.7, maxWidth: 150, lineHeight: 1.5, 
 var clamp = (num, min, max,) => Math.min(Math.max(num, min,), max,);
 var isValidNumber = (value,) => typeof value === 'number' && !isNaN(value,);
 
-// https:https://framer.com/m/Logo-Ticker-1CEq.js
+// https:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js
 var TickerFonts = getFonts(Ticker,);
 var cycleOrder = ['GSFRnChFA', 'l9f6iav4R',];
 var variantClassNames = { GSFRnChFA: 'framer-v-uvc2d5', l9f6iav4R: 'framer-v-1w9d22v', };

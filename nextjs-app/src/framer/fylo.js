@@ -1,7 +1,7 @@
 'use client';
 import { __export, } from './chunk-6C3VEZWH.js';
 
-// https:https://framer.com/m/FYLO-COMPOSITION-5nyv.js@SvdQ0E7jGkV2jj2lbCzd
+// https:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js
 import { jsx as _jsx9, jsxs as _jsxs7, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts6,
@@ -9696,7 +9696,7 @@ addFonts5(FramerpSxPslti_, [
   ...TypewriterFonts3,
 ],);
 
-// https:https://framer.com/m/FYLO-COMPOSITION-5nyv.js@SvdQ0E7jGkV2jj2lbCzd
+// https:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js
 var AnimatorFonts = getFonts5(Animator,);
 var MotionDivWithFX = withFX(motion8.div,);
 var NodeFonts = getFonts5(stdin_default6,);
