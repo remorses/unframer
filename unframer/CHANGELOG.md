@@ -1,5 +1,11 @@
 # unframer
 
+## 0.6.2
+
+### Patch Changes
+
+-   Render all variants at the same time again, nextjs was bugging
+
 ## 0.6.1
 
 ### Patch Changes
