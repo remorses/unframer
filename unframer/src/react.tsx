@@ -224,7 +224,8 @@ export function WithFramerBreakpoints<
     const parts = useMemo(() => {
         return defaultBreakpoints.map((breakpointName) => {
             if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-                return null
+                // TODO if i remove some elements the component motion.div will move out on first render, probably because they take another element as anchor, which means it thinks that before it was a different variant, so it animates
+                // return null
             }
             let realVariant = breakpointsMap[breakpointName]
             if (!realVariant) {
