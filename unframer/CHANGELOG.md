@@ -1,5 +1,11 @@
 # unframer
 
+## 0.6.3
+
+### Patch Changes
+
+-   Fix url redirect for root url
+
 ## 0.6.2
 
 ### Patch Changes
