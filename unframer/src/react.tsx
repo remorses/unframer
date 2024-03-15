@@ -6,6 +6,7 @@ import {
     ComponentType,
     ReactNode,
     useEffect,
+    useMemo,
     useSyncExternalStore,
 } from 'react'
 
@@ -138,23 +139,47 @@ const breakpointsStyles = `
 
 `
 
+const nothing = () => {}
 export function FramerStyles({ Components = [] as any[] }): any {
+    const isClient = useSyncExternalStore(
+        nothing,
+        () => true,
+        () => false,
+    )
+    const breakpoints = (
+        <style
+            dangerouslySetInnerHTML={{ __html: breakpointsStyles }}
+            key='breakpointsStyles'
+            suppressHydrationWarning
+            hidden
+        />
+    )
+    const fonts = (
+        <style
+            dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
+            suppressHydrationWarning
+            key='fonts'
+            hidden
+        />
+    )
+    // if (isClient) {
+    //     // on client framer injects the styles by itself
+    //     return (
+    //         <>
+    //             {breakpoints}
+    //             {fonts}
+    //         </>
+    //     )
+    // }
     return (
         <>
-            <style
-                dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
-                suppressHydrationWarning
-                hidden
-            />
+            {breakpoints}
+            {fonts}
             <style
                 dangerouslySetInnerHTML={{
                     __html: combinedCSSRules.join('\n'),
                 }}
-                suppressHydrationWarning
-                hidden
-            />
-            <style
-                dangerouslySetInnerHTML={{ __html: breakpointsStyles }}
+                key='combinedCSSRules'
                 suppressHydrationWarning
                 hidden
             />
@@ -195,28 +220,34 @@ export function WithFramerBreakpoints<
             return ''
         },
     )
-    // console.log('currentBreakpoint', currentBreakpoint)
 
-    let parts: ReactNode[] = []
-    for (let breakpointName of defaultBreakpoints) {
-        if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-            continue
+    const parts = useMemo(() => {
+        let parts: ReactNode[] = []
+        for (let breakpointName of defaultBreakpoints) {
+            if (currentBreakpoint && currentBreakpoint !== breakpointName) {
+                continue
+            }
+            let realVariant = breakpointsMap[breakpointName]
+            if (!realVariant) {
+                continue
+            }
+            let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
+
+            let map = getClassMap(mapped)[breakpointName]
+            let className = classNames('', map)
+
+            parts.push(
+                <div key={breakpointName} className={className}>
+                    <Component
+                        key={breakpointName}
+                        {...rest}
+                        variant={realVariant}
+                    />
+                </div>,
+            )
+            return parts
         }
-        let realVariant = breakpointsMap[breakpointName]
-        if (!realVariant) {
-            continue
-        }
-        let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
-
-        let map = getClassMap(mapped)[breakpointName]
-        let className = classNames('', map)
-
-        parts.push(
-            <div key={breakpointName} className={className}>
-                <Component {...rest} variant={realVariant} />
-            </div>,
-        )
-    }
+    }, [currentBreakpoint])
 
     return parts
 }
