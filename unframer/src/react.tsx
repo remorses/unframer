@@ -222,31 +222,31 @@ export function WithFramerBreakpoints<
     )
 
     const parts = useMemo(() => {
-        let parts: ReactNode[] = []
-        for (let breakpointName of defaultBreakpoints) {
+        return defaultBreakpoints.map((breakpointName) => {
             if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-                continue
+                return null
             }
             let realVariant = breakpointsMap[breakpointName]
             if (!realVariant) {
-                continue
+                // console.error(breakpointName, 'not found in', breakpointsMap)
+                return null
             }
             let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
 
             let map = getClassMap(mapped)[breakpointName]
             let className = classNames('', map)
 
-            parts.push(
+            return (
                 <div key={breakpointName} className={className}>
                     <Component
                         key={breakpointName}
+                        layoutId={breakpointName}
                         {...rest}
                         variant={realVariant}
                     />
-                </div>,
+                </div>
             )
-            return parts
-        }
+        })
     }, [currentBreakpoint])
 
     return parts
