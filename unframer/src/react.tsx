@@ -138,7 +138,7 @@ const breakpointsStyles = `
 
 `
 
-export function FramerStyles({ Components = [] as any[] }) {
+export function FramerStyles({ Components = [] as any[] }): any {
     return (
         <>
             <style
@@ -171,12 +171,11 @@ export function WithFramerBreakpoints<
 }: {
     Component: T
     variants?: Record<Breakpoint, ComponentPropsWithoutRef<T>['variant']>
-} & Omit<ComponentPropsWithoutRef<T>, 'variant'>) {
+} & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any {
     const controls = Component['propertyControls']
 
     const variantControls = controls?.['variant']
     if (!variantControls) {
-        // @ts-expect-error
         return <Component variant={undefined} {...rest} />
     }
 
@@ -214,7 +213,6 @@ export function WithFramerBreakpoints<
 
         parts.push(
             <div key={breakpointName} className={className}>
-                {/* @ts-expect-error */}
                 <Component {...rest} variant={realVariant} />
             </div>,
         )
