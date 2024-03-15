@@ -1,7 +1,7 @@
 {
     "extends": "../tsconfig.base.json",
     "compilerOptions": {
-        "rootDir": "../installable-framer/src",
+        "rootDir": "src",
         "target": "ESNext",
         "lib": ["dom"],
         "moduleResolution": "NodeNext",
@@ -9,7 +9,7 @@
         "noEmit": false,
         "skipLibCheck": true,
         "jsx": "react-jsx",
-        "outDir": "../installable-framer/dist"
+        "outDir": "dist"
     },
-    "include": ["../installable-framer/src"]
+    "include": ["src"]
 }
