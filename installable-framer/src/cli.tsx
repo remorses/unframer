@@ -99,37 +99,11 @@ async function processConfig(config: Config, signal?: AbortSignal) {
             return
         }
 
-        await Promise.all(
-            Object.keys(components).map(async (name) => {
-                const url = components[name]
-                logger.log(
-                    `Installing framer component installable-framer/${name}`,
-                )
-                const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
-                // logger.log('tempFolder', tempFolder)
-                const { files } = await bundle({
-                    url,
-                    name,
-                    cwd: tempFolder,
-                    signal,
-                })
-                if (signal?.aborted) {
-                    return
-                }
-                const out = path.resolve(installDir, name)
-                fs.mkdirSync(out, { recursive: true })
-                logger.log(`Copying files to ${out}`)
-                await fs.copy(tempFolder, out, {
-                    overwrite: true,
-                    filter(x) {
-                        if (x.includes('package.json')) {
-                            return false
-                        }
-                        return true
-                    },
-                })
-            }),
-        )
+        await bundle({
+            components,
+            cwd: installDir,
+            signal,
+        })
     } catch (e: any) {
         if (signal) {
             logger.log('Error processing config', e.message)

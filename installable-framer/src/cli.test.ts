@@ -10,13 +10,12 @@ test(
         console.log('tempFolder', tempFolder)
         const url =
             'https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav'
-        const { types } = await bundle({
-            url,
+        await bundle({
+            components: {
+                ticker: url,
+            },
             cwd: tempFolder,
-            name: 'ticker',
         })
-        console.log(types)
-        console.log(tempFolder)
     },
     1000 * 10,
 )
@@ -26,13 +25,12 @@ test(
         const tempFolder = tmp.dirSync({ unsafeCleanup: true }).name
         console.log('tempFolder', tempFolder)
         const url = 'https://framer.com/m/Item-Qetw.js@vUDyI0yvPLONiBDf8Kzw'
-        const { types } = await bundle({
-            url,
+        await bundle({
+            components: {
+                item: url,
+            },
             cwd: tempFolder,
-            name: 'item',
         })
-        console.log(types)
-        console.log(tempFolder)
     },
     1000 * 10,
 )
@@ -43,13 +41,12 @@ test(
         console.log('tempFolder', tempFolder)
         const url =
             'https://framer.com/m/Brand-Logo-Ticker-Uc8E.js@WLfLN2D3C6m9DWtZu0ci'
-        const { types } = await bundle({
-            url,
+        await bundle({
+            components: {
+                logos: url,
+            },
             cwd: tempFolder,
-            name: 'logos',
         })
-        console.log(types)
-        console.log(tempFolder)
     },
     1000 * 10,
 )

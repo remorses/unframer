@@ -38,45 +38,40 @@ function validateUrl(url: string) {
 }
 
 export async function bundle({
-    cwd = '',
-    name,
-    url,
+    cwd: out = '',
+    components = {} as Record<string, string>,
     signal = new AbortController().signal,
 }) {
-    validateUrl(url)
-    const deps = new Set<string>()
-    cwd ||= path.resolve(process.cwd(), 'example')
-    cwd = path.resolve(cwd)
-    fs.mkdirSync(path.resolve(cwd), { recursive: true })
+    out ||= path.resolve(process.cwd(), 'example')
+    out = path.resolve(out)
+    try {
+        fs.rmSync(out, { recursive: true, force: true })
+    } catch (e) {}
+    fs.mkdirSync(path.resolve(out), { recursive: true })
 
-    const u = new URL(url)
-    const sourcefile = `${name}.js`
     const result = await build({
         // entryPoints: {
         //     index: url,
         // },
 
-        stdin: {
-            contents: /** js */ `
-            'use client'
-            import Component from '${url}'
-            import { WithFramerBreakpoints } from 'installable-framer/dist/react'
-            Component.Responsive = (props) => {
-                return <WithFramerBreakpoints Component={Component} {...props} />
-            }
-            export default Component
-            `,
-            loader: 'jsx',
+        entryPoints: Object.keys(components).map((name) => {
+            const url = components[name]
+            validateUrl(url)
 
-            sourcefile,
-        },
+            return {
+                in: `virtual:${name}`,
+                out: name,
+            }
+        }),
         jsx: 'automatic',
 
         bundle: true,
         platform: 'browser',
+        metafile: true,
         format: 'esm',
         minify: false,
         treeShaking: true,
+        splitting: true,
         // splitting: true,
         logLevel: 'error',
 
@@ -87,30 +82,88 @@ export async function bundle({
                 signal,
             }),
             polyfillNode({}),
+            {
+                name: 'virtual loader',
+                setup(build) {
+                    build.onResolve({ filter: /^virtual:.*/ }, (args) => {
+                        return {
+                            path: args.path.replace(/^virtual:/, ''),
+                            namespace: 'virtual',
+                        }
+                    })
+                    build.onLoad(
+                        { filter: /.*/, namespace: 'virtual' },
+                        async (args) => {
+                            const name = args.path
+                            const url = components[name]
+
+                            return {
+                                contents: /** js */ `'use client'
+                                import Component from '${url}'
+                                import { WithFramerBreakpoints } from 'installable-framer/dist/react'
+                                Component.Responsive = (props) => {
+                                    return <WithFramerBreakpoints Component={Component} {...props} />
+                                }
+                                export default Component
+                                `,
+                                loader: 'jsx',
+                            }
+                        },
+                    )
+                },
+            },
         ],
         write: true,
 
         // outfile: 'dist/example.js',
-        outfile: path.resolve(cwd, sourcefile),
+        outdir: out,
+        // outfile: path.resolve(cwd, sourcefile),
     })
+
+    fs.writeFileSync(
+        path.resolve(out, 'meta.json'),
+        JSON.stringify(result.metafile, null, 2),
+        'utf-8',
+    )
+
     if (signal.aborted) {
         throw new Error('aborted')
     }
     // logger.log('result', result)
-    fs.writeFileSync(
-        path.resolve(cwd, 'index.js'),
-        `'use client'\nimport Component from './${sourcefile}'; export default Component`,
-    )
-    const resultFile = path.resolve(cwd, sourcefile)
-    const output = fs.readFileSync(resultFile, 'utf-8')
-    logger.log(`formatting`, sourcefile)
-    const code = dprint.format(resultFile, output, {
-        lineWidth: 140,
-        quoteStyle: 'alwaysSingle',
-        trailingCommas: 'always',
-        semiColons: 'always',
-    })
-    fs.writeFileSync(resultFile, code, 'utf-8')
+
+    const files = fs.readdirSync(out)
+    for (let file of files) {
+        if (!file.endsWith('.js')) {
+            continue
+        }
+        const resultFile = path.resolve(out, file)
+        const output = fs.readFileSync(resultFile, 'utf-8')
+        logger.log(`formatting`, file)
+        const code = dprint.format(resultFile, output, {
+            lineWidth: 140,
+            quoteStyle: 'alwaysSingle',
+            trailingCommas: 'always',
+            semiColons: 'always',
+        })
+        fs.writeFileSync(resultFile, code, 'utf-8')
+        const name = file.replace(/\.js$/, '')
+        if (components[name]) {
+            logger.log(`extracting types for ${name}`)
+            const propControls = await extractPropControlsUnsafe(
+                resultFile,
+                name,
+            )
+            if (!propControls) {
+                logger.log(`no property controls found for ${name}`)
+            }
+            const types = propControlsToType(propControls)
+            // name = 'framer-' + name
+            // logger.log('name', name)
+
+            fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+        }
+    }
+
     // TODO this is a vulnerability, i need to sandbox this somehow
 
     // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
@@ -122,34 +175,6 @@ export async function bundle({
     //     .replace(/\.js/i, '')
     //     .replace(/@.*/, '')
     //     .toLowerCase()
-
-    const propControls = await extractPropControlsUnsafe(output, name)
-    if (!propControls) {
-        logger.log(`no property controls found for ${name}`)
-    }
-    const types = propControlsToType(propControls)
-    // name = 'framer-' + name
-    // logger.log('name', name)
-
-    fs.writeFileSync(path.resolve(cwd, 'index.d.ts'), types)
-
-    return {
-        resultFile,
-        code,
-        // propControls,
-        types,
-        files: [
-            {
-                name: './index.d.ts',
-                content: types,
-            },
-
-            {
-                name: './index.js',
-                content: fs.readFileSync(resultFile, 'utf-8'),
-            },
-        ],
-    }
 }
 
 function decapitalize(str: string) {
@@ -193,22 +218,24 @@ export async function extractPropControlsSafe(text, name) {
     }
 }
 
-export async function extractPropControlsUnsafe(text, name) {
-    const tempFile = path.resolve(__dirname, `temp_${Date.now()}.js`)
+export async function extractPropControlsUnsafe(filename, name) {
+    const packageJson = path.resolve(path.dirname(filename), 'package.json')
     try {
-        if (!text) return
-
-        fs.writeFileSync(tempFile, text, 'utf-8')
+        fs.writeFileSync(
+            packageJson,
+            JSON.stringify({ type: 'module' }),
+            'utf-8',
+        )
         const delimiter = '__delimiter__'
         let propCode = `JSON.stringify(x.default?.propertyControls || null, null, 2)`
         // propCode = `x.default`
         const code = `import(${JSON.stringify(
-            tempFile,
+            filename,
         )}).then(x => { console.log(${JSON.stringify(
             delimiter,
         )}); console.log(${propCode})
         })`
-        const res = execSync(`node -e '${code}'`)
+        const res = execSync(`node --input-type=module -e '${code}'`)
         let stdout = res.toString()
         stdout = stdout.split(delimiter)[1]
         // console.log(stdout)
@@ -216,7 +243,7 @@ export async function extractPropControlsUnsafe(text, name) {
     } catch (e: any) {
         console.error(`Cannot get property controls for ${name}`, e.stack)
     } finally {
-        fs.unlinkSync(tempFile)
+        fs.rmSync(packageJson)
     }
 }
 

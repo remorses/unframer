@@ -1,10 +1,5 @@
 'use client';
-var __defProp = Object.defineProperty;
-var __export = (target, all,) => {
-  for (var name in all) {
-    __defProp(target, name, { get: all[name], enumerable: true, },);
-  }
-};
+import { __export, } from './chunk-6C3VEZWH.js';
 
 // https:https://framer.com/m/FYLO-COMPOSITION-5nyv.js@SvdQ0E7jGkV2jj2lbCzd
 import { jsx as _jsx9, jsxs as _jsxs7, } from 'react/jsx-runtime';
@@ -13903,7 +13898,7 @@ addFonts6(FramerC6ZYtBmll, [
   ...SeedFonts,
 ],);
 
-// fylo.js
+// virtual:fylo
 import { WithFramerBreakpoints, } from 'installable-framer/dist/react';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default8.Responsive = (props,) => {

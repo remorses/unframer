@@ -1,4 +1,5 @@
 'use client';
+import './chunk-6C3VEZWH.js';
 
 // https:https://framer.com/m/Mega-Menu-2wT3.js
 import { jsx as _jsx4, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -3321,7 +3322,7 @@ addFonts2(FramerrXuKNGhVw, [
   ...MemojiFonts,
 ],);
 
-// menus.js
+// virtual:menus
 import { WithFramerBreakpoints, } from 'installable-framer/dist/react';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default2.Responsive = (props,) => {
