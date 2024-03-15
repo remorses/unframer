@@ -219,7 +219,7 @@ export function WithFramerBreakpoints<
             return breakpoint
         },
         () => {
-            // on server
+            // on server and during hydration
             start()
             return ''
         },
@@ -244,7 +244,7 @@ export function WithFramerBreakpoints<
                 <div key={breakpointName} className={className}>
                     <Component
                         key={breakpointName}
-                        layoutId={breakpointName}
+                        // layoutId={breakpointName}
                         {...rest}
                         variant={realVariant}
                     />
