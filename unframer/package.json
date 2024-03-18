@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "description": "",
     "type": "module",
     "repository": "https://github.com/remorses/unframer",
@@ -21,16 +21,16 @@
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "default": "./dist/index.js",
-            "types": "./dist/index.d.ts"
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
         },
         "./dist/framer": {
-            "default": "./dist/index.js",
-            "types": "./dist/framer.d.ts"
+            "types": "./dist/framer.d.ts",
+            "default": "./dist/index.js"
         },
         "./dist/react": {
-            "default": "./dist/react.js",
-            "types": "./dist/react.d.ts"
+            "types": "./dist/react.d.ts",
+            "default": "./dist/react.js"
         }
     },
     "keywords": [],

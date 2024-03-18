@@ -1,5 +1,11 @@
 # unframer
 
+## 0.7.1
+
+### Patch Changes
+
+-   Module not found: Default condition should be last one
+
 ## 0.7.0
 
 ### Minor Changes
