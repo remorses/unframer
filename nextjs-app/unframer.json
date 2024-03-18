@@ -2,10 +2,13 @@
     "outDir": "src/framer",
     "components": {
         "fylo": "https://framer.com/m/FYLO-COMPOSITION-5nyv.js@SvdQ0E7jGkV2jj2lbCzd",
+        "hero": "https://framer.com/m/Header-WtSW.js",
+
         "logos": "https://framer.com/m/Logo-Ticker-1CEq.js",
         "testimonials": "https://framer.com/m/Comments-Hm3h.js",
         "menu-overlay": "https://framer.com/m/MenuOverlay-Wegr.js",
         "full-page": "https://framer.com/m/FullPage-gsP5.js",
+        "pricing": "https://framer.com/m/Pricing-Table-9kxI.js",
         "menus": "https://framer.com/m/Mega-Menu-2wT3.js"
     }
 }

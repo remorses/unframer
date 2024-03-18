@@ -7,6 +7,7 @@ import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
 import Comp from '@/framer/fylo'
 import FullPage from '@/framer/full-page'
+import Hero from '@/framer/hero'
 import MenuOverlay from '@/framer/menu-overlay'
 
 export default function Home() {
@@ -14,6 +15,14 @@ export default function Home() {
         <>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
+                <Hero.Responsive
+                    variants={{
+                        Desktop: 'Variant 1',
+                        Tablet: 'mobile',
+                        Mobile: 'mobile',
+                    }}
+                    className='bg-gray-800'
+                />
                 <MenuOverlay />
                 <FramerStyles Components={[Logos, Comp]} />
                 <div className='relative h-[500px]'>

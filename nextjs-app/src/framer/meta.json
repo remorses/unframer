@@ -1365,6 +1365,509 @@
       ],
       "format": "esm"
     },
+    "https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
+      "bytes": 5912,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
+      "bytes": 5912,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
+      "bytes": 1483,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
+      "bytes": 1479,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
+      "bytes": 1456,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
+      "bytes": 2711,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
+      "bytes": 1485,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
+      "bytes": 6147,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
+      "bytes": 7798,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
+      "bytes": 11536,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
+      "bytes": 4421,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
+      "bytes": 24590,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "virtual:hero": {
+      "bytes": 547,
+      "imports": [
+        {
+          "path": "https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js"
+        },
+        {
+          "path": "unframer/dist/react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
     "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
       "bytes": 1777,
       "imports": [
@@ -2497,6 +3000,359 @@
       ],
       "format": "esm"
     },
+    "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
+      "bytes": 2708,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
+      "bytes": 8290,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
+      "bytes": 7630,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
+      "bytes": 12699,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
+      "bytes": 1345,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
+      "bytes": 14928,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
+      "bytes": 35391,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js"
+        },
+        {
+          "path": "https:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "virtual:pricing": {
+      "bytes": 547,
+      "imports": [
+        {
+          "path": "https:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js"
+        },
+        {
+          "path": "unframer/dist/react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
     "https:https://framer.com/m/hero-icons/Home.js@0.0.27": {
       "bytes": 487,
       "imports": [
@@ -3200,6 +4056,205 @@
       },
       "bytes": 547679
     },
+    "src/framer/hero.js": {
+      "imports": [
+        {
+          "path": "src/framer/chunk-SF7ISK24.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/framer/chunk-6C3VEZWH.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "virtual:hero",
+      "inputs": {
+        "https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
+          "bytesInOutput": 23125
+        },
+        "https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
+          "bytesInOutput": 559
+        },
+        "https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
+          "bytesInOutput": 602
+        },
+        "https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
+          "bytesInOutput": 1088
+        },
+        "https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
+          "bytesInOutput": 2335
+        },
+        "https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
+          "bytesInOutput": 7016
+        },
+        "https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
+          "bytesInOutput": 5265
+        },
+        "https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
+          "bytesInOutput": 10732
+        },
+        "https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
+          "bytesInOutput": 3781
+        },
+        "virtual:hero": {
+          "bytesInOutput": 275
+        }
+      },
+      "bytes": 56133
+    },
     "src/framer/logos.js": {
       "imports": [
         {
@@ -3559,6 +4614,211 @@
         }
       },
       "bytes": 57965
+    },
+    "src/framer/pricing.js": {
+      "imports": [
+        {
+          "path": "src/framer/chunk-SF7ISK24.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "src/framer/chunk-6C3VEZWH.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "framer-motion",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "virtual:pricing",
+      "inputs": {
+        "https:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
+          "bytesInOutput": 34379
+        },
+        "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
+          "bytesInOutput": 2317
+        },
+        "https:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
+          "bytesInOutput": 7492
+        },
+        "https:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
+          "bytesInOutput": 11818
+        },
+        "https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
+          "bytesInOutput": 6901
+        },
+        "https:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
+          "bytesInOutput": 13885
+        },
+        "https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
+          "bytesInOutput": 969
+        },
+        "virtual:pricing": {
+          "bytesInOutput": 278
+        }
+      },
+      "bytes": 79305
+    },
+    "src/framer/chunk-SF7ISK24.js": {
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "className",
+        "className2",
+        "className3",
+        "css",
+        "css2",
+        "css3",
+        "fonts",
+        "fonts2",
+        "fonts3"
+      ],
+      "inputs": {
+        "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
+          "bytesInOutput": 1089
+        },
+        "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
+          "bytesInOutput": 1080
+        },
+        "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
+          "bytesInOutput": 1109
+        }
+      },
+      "bytes": 3691
     },
     "src/framer/menus.js": {
       "imports": [

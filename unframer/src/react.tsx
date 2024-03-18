@@ -226,6 +226,10 @@ export function WithFramerBreakpoints<
             return ''
         },
     )
+    // const [isMounted, setIsMounted] = useState(false)
+    // useEffect(() => {
+    //     setIsMounted(true)
+    // }, [])
 
     const parts = useMemo(() => {
         const variants = [] as { className: string; variant: string }[]
@@ -234,6 +238,10 @@ export function WithFramerBreakpoints<
             if (!realVariant) {
                 continue
             }
+            // if (isMounted && currentBreakpoint !== breakpointName) {
+            //     continue
+            // }
+
             let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
             const existingVariant = variants.find(
                 (x) => x.variant === realVariant,
@@ -261,7 +269,7 @@ export function WithFramerBreakpoints<
                 </div>
             )
         })
-    }, [currentBreakpoint])
+    }, [currentBreakpoint, rest, breakpointsMap])
 
     return parts
 }
