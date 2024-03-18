@@ -3,7 +3,7 @@
     "version": "0.1.30",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev --port 5543 --turbo",
         "build": "next build",
         "start": "next start",
         "_postinstall": "pnpm unframer",

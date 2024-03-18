@@ -7,8 +7,7 @@ export interface Props {
   width?: any
   height?: any
   layoutId?: string
-  "variant"?: 'Desktop 1' | 'Tablet 1' | 'Mobile 1' | 'Mobile 2'
-  "buyEvent"?: Function
+  "variant"?: 'Normal' | 'Feature' | 'Learn' | 'Why us' | 'Our team'
 }
 const Component = (props: Props) => any
 export default Component

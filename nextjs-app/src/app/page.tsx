@@ -6,13 +6,15 @@ import Logos from '@/framer/logos'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
 import Comp from '@/framer/fylo'
-import Prices from '@/framer/prices'
+import FullPage from '@/framer/full-page'
+import MenuOverlay from '@/framer/menu-overlay'
 
 export default function Home() {
     return (
         <>
-            <PageRoot  routeId='sdf' localeId='it-it' RootComponent='div' />
+            {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
+                <MenuOverlay />
                 <FramerStyles Components={[Logos, Comp]} />
                 <div className='relative h-[500px]'>
                     <Test.Responsive
@@ -23,7 +25,13 @@ export default function Home() {
                         }}
                     />
                 </div>
-                <Prices />
+                <FullPage.Responsive
+                    variants={{
+                        Desktop: 'Desktop',
+                        Tablet: 'Tablet',
+                        Mobile: 'Tablet',
+                    }}
+                />
                 <Comp />
                 <div className='pt-[500px]'>
                     <Menus />
