@@ -141,7 +141,9 @@ const breakpointsStyles = `
 
 `
 
-const nothing = () => {}
+const nothing = () => {
+    return () => {}
+}
 export function FramerStyles({ Components = [] as any[] }): any {
     const isClient = useSyncExternalStore(
         nothing,
@@ -203,6 +205,7 @@ export function WithFramerBreakpoints<
 
     const variantControls = controls?.['variant']
     if (!variantControls) {
+        // @ts-ignore
         return <Component variant={undefined} {...rest} />
     }
 
@@ -225,28 +228,35 @@ export function WithFramerBreakpoints<
     )
 
     const parts = useMemo(() => {
-        return defaultBreakpoints.map((breakpointName) => {
-            if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-                // TODO if i remove some elements the component motion.div will move out on first render, probably because they take another element as anchor, which means it thinks that before it was a different variant, so it animates
-                // return null
-            }
-            let realVariant = breakpointsMap[breakpointName]
+        const variants = [] as { className: string; variant: string }[]
+        for (let breakpointName in breakpointsMap) {
+            const realVariant = breakpointsMap[breakpointName]
             if (!realVariant) {
-                // console.error(breakpointName, 'not found in', breakpointsMap)
-                return null
+                continue
             }
             let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
-
-            let map = getClassMap(mapped)[breakpointName]
-            let className = classNames('', map)
-
+            const existingVariant = variants.find(
+                (x) => x.variant === realVariant,
+            )
+            let className = classNames(
+                existingVariant?.className,
+                getClassMap(mapped)[breakpointName],
+            )
+            if (existingVariant) {
+                existingVariant.className = className
+            } else {
+                variants.push({ className, variant: realVariant })
+            }
+        }
+        return variants.map(({ className, variant }) => {
             return (
-                <div key={breakpointName} className={className}>
+                <div key={variant} className={className}>
+                    {/* @ts-ignore */}
                     <Component
-                        key={breakpointName}
+                        key={variant}
                         // layoutId={breakpointName}
                         {...rest}
-                        variant={realVariant}
+                        variant={variant as any}
                     />
                 </div>
             )
