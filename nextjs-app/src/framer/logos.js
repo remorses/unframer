@@ -15,14 +15,14 @@ import {
   useVariantState,
   withCSS,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'unframer';
 import * as React from 'react';
 
 // https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
-import { LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'framer-motion';
+import { LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'unframer';
 var directionTransformers = {
   left: (offset,) => `translateX(-${offset}px)`,
   right: (offset,) => `translateX(${offset}px)`,

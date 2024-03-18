@@ -1,7 +1,8 @@
 'use client'
 
 import { FramerStyles, WithFramerBreakpoints } from 'unframer/dist/react'
-import { AnimatePresence, PageRoot } from 'unframer/dist/framer'
+import { AnimatePresence } from 'unframer'
+
 import Logos from '@/framer/logos'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
@@ -21,7 +22,7 @@ export default function Home() {
                         Tablet: 'mobile',
                         Mobile: 'mobile',
                     }}
-                    className='bg-gray-800'
+                    className='bg-gray-800 !p-14'
                 />
                 <AnimatePresence>
                     <MenuOverlay />

@@ -16,24 +16,14 @@ import {
   useVariantState as useVariantState2,
   withCSS as withCSS2,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup3, motion as motion3, MotionConfigContext, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup3, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React2 from 'react';
 
 // https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
-import {
-  frame,
-  LayoutGroup,
-  motion,
-  useAnimationFrame,
-  useInView,
-  useMotionValue,
-  useReducedMotion,
-  useTransform,
-  wrap,
-} from 'framer-motion';
+import { frame, LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'unframer';
 var MAX_DUPLICATED_ITEMS = 100;
 var directionTransformers = {
   left: (offset,) => `translateX(-${offset}px)`,
@@ -460,7 +450,7 @@ import {
   useVariantState,
   withCSS,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'unframer';
 import * as React from 'react';
 
 // https:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js

@@ -16,7 +16,7 @@ import {
   useVariantState as useVariantState2,
   withCSS as withCSS2,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'unframer';
 import * as React3 from 'react';
 
 // https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
@@ -24,7 +24,7 @@ import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 import { useEffect, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
-import { motion, } from 'framer-motion';
+import { motion, } from 'unframer';
 
 // https:https://framer.com/m/hero-icons/Home.js@0.0.27
 var r;
@@ -550,7 +550,7 @@ addPropertyControls(Icon, {
 // https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
 import { jsx as _jsx2, } from 'react/jsx-runtime';
 import * as React2 from 'react';
-import { LayoutGroup, motion as motion2, } from 'framer-motion';
+import { LayoutGroup, motion as motion2, } from 'unframer';
 import {
   addFonts,
   addPropertyControls as addPropertyControls2,

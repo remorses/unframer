@@ -18,7 +18,7 @@ import {
   useVariantState as useVariantState5,
   withCSS as withCSS5,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup5, motion as motion5, MotionConfigContext as MotionConfigContext5, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup5, motion as motion5, MotionConfigContext as MotionConfigContext5, } from 'unframer';
 import * as React5 from 'react';
 
 // https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js
@@ -54,7 +54,7 @@ import {
   useVariantState,
   withCSS,
 } from 'unframer/dist/framer';
-import { LayoutGroup, motion, MotionConfigContext, } from 'framer-motion';
+import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 var cycleOrder = ['TrJsulOOg', 'y5k4iwWcs',];
 var variantClassNames = { TrJsulOOg: 'framer-v-1jux976', y5k4iwWcs: 'framer-v-1y53r9x', };
@@ -243,7 +243,7 @@ import {
   useVariantState as useVariantState3,
   withCSS as withCSS3,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup3, motion as motion3, MotionConfigContext as MotionConfigContext3, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup3, motion as motion3, MotionConfigContext as MotionConfigContext3, } from 'unframer';
 import * as React3 from 'react';
 
 // https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js
@@ -259,7 +259,7 @@ import {
   useVariantState as useVariantState2,
   withCSS as withCSS2,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup2, motion as motion2, MotionConfigContext as MotionConfigContext2, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup2, motion as motion2, MotionConfigContext as MotionConfigContext2, } from 'unframer';
 import * as React2 from 'react';
 var cycleOrder2 = ['I167:27650;111:39602',];
 var variantClassNames2 = { 'I167:27650;111:39602': 'framer-v-1wvyaxi', };
@@ -694,7 +694,7 @@ import {
   useVariantState as useVariantState4,
   withCSS as withCSS4,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup4, motion as motion4, MotionConfigContext as MotionConfigContext4, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup4, motion as motion4, MotionConfigContext as MotionConfigContext4, } from 'unframer';
 import * as React4 from 'react';
 
 // https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js

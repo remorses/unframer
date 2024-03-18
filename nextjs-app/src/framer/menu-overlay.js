@@ -16,7 +16,7 @@ import {
   withCSS,
   withFX,
 } from 'unframer/dist/framer';
-import { AnimatePresence, LayoutGroup, motion, MotionConfigContext, } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 var MotionDivWithFX = withFX(motion.div,);
 var cycleOrder = ['afltwohg0',];

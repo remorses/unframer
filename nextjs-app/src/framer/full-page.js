@@ -20,7 +20,7 @@ import {
   withCSS,
   withFX,
 } from 'unframer/dist/framer';
-import { LayoutGroup, motion as motion2, MotionConfigContext, } from 'framer-motion';
+import { LayoutGroup, motion as motion2, MotionConfigContext, } from 'unframer';
 import * as React2 from 'react';
 
 // https:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
@@ -28,7 +28,7 @@ import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 import { useEffect, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
-import { motion, } from 'framer-motion';
+import { motion, } from 'unframer';
 
 // https:https://framer.com/m/phosphor-icons/House.js@0.0.50
 var Component;

@@ -422,6 +422,12 @@ export function esbuildPluginBundleDependencies({
                         external: true,
                     }
                 }
+                if ('framer-motion' === args.path) {
+                    return {
+                        path: 'unframer',
+                        external: true,
+                    }
+                }
                 if (
                     whitelist.some(
                         (x) => x === args.path || args.path.startsWith(x + '/'),

@@ -20,14 +20,14 @@ import {
   withCSS as withCSS8,
   withFX,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup6, motion as motion8, MotionConfigContext as MotionConfigContext6, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup6, motion as motion8, MotionConfigContext as MotionConfigContext6, } from 'unframer';
 import * as React8 from 'react';
 
 // https:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
-import { motion, useMotionValue, useTransform, } from 'framer-motion';
+import { motion, useMotionValue, useTransform, } from 'unframer';
 function Animator(props,) {
   const { pathAnimation, from, to, animate: animate3, shouldLoop, loopOptions, slots = [], endCircle, } = props;
   const hasChildren = Children.count(slots,) > 0;
@@ -247,7 +247,7 @@ import {
   useVariantState as useVariantState4,
   withCSS as withCSS6,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup4, motion as motion6, MotionConfigContext as MotionConfigContext4, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup4, motion as motion6, MotionConfigContext as MotionConfigContext4, } from 'unframer';
 import * as React6 from 'react';
 
 // https:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js
@@ -2993,7 +2993,7 @@ import {
   useVariantState as useVariantState3,
   withCSS as withCSS5,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup3, motion as motion5, MotionConfigContext as MotionConfigContext3, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup3, motion as motion5, MotionConfigContext as MotionConfigContext3, } from 'unframer';
 import * as React5 from 'react';
 
 // https:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js
@@ -3011,7 +3011,7 @@ import {
   useVariantState as useVariantState2,
   withCSS as withCSS4,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'unframer';
 import * as React4 from 'react';
 
 // https:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js
@@ -3022,7 +3022,7 @@ import {
   RenderTarget as RenderTarget5,
   withCSS as withCSS2,
 } from 'unframer/dist/framer';
-import { animate as animate2, motion as motion2, transform, useTransform as useTransform2, } from 'framer-motion';
+import { animate as animate2, motion as motion2, transform, useTransform as useTransform2, } from 'unframer';
 import { useCallback as useCallback2, useRef as useRef3, useState as useState3, } from 'react';
 
 // https:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js
@@ -3659,7 +3659,7 @@ import {
   useVariantState,
   withCSS as withCSS3,
 } from 'unframer/dist/framer';
-import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'framer-motion';
+import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React3 from 'react';
 var enabledGestures = { nPpSWwiWE: { hover: true, pressed: true, }, r5tWv5mqY: { hover: true, pressed: true, }, };
 var cycleOrder = ['r5tWv5mqY', 'nPpSWwiWE',];
@@ -3846,7 +3846,7 @@ import {
   useVariantState as s,
   withCSS as p4,
 } from 'unframer/dist/framer';
-import { LayoutGroup as m2, motion as f2, MotionConfigContext as g2, } from 'framer-motion';
+import { LayoutGroup as m2, motion as f2, MotionConfigContext as g2, } from 'unframer';
 import * as v2 from 'react';
 var h2 = { J6MeOBYHD: { hover: true, pressed: true, }, ygo8X2vVX: { hover: true, pressed: true, }, };
 var c2 = ['ygo8X2vVX', 'J6MeOBYHD',];
@@ -4112,7 +4112,7 @@ import {
   useVariantState as l4,
   withCSS as f3,
 } from 'unframer/dist/framer';
-import { LayoutGroup as m3, motion as p5, MotionConfigContext as c3, } from 'framer-motion';
+import { LayoutGroup as m3, motion as p5, MotionConfigContext as c3, } from 'unframer';
 import * as h3 from 'react';
 var u2 = { jy1UKfzw2: { hover: true, pressed: true, }, KDR2W3FAc: { hover: true, pressed: true, }, };
 var g3 = ['jy1UKfzw2', 'KDR2W3FAc',];
@@ -8861,7 +8861,7 @@ import {
   useVariantState as useVariantState5,
   withCSS as withCSS7,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext5, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext5, } from 'unframer';
 import * as React7 from 'react';
 var TypewriterFonts3 = getFonts4(TypeWriter,);
 var cycleOrder5 = ['R_0SntBXV', 'RspHZjbvA', 'KzyHUFutd', 'lR29aQ4aC', 'CDTOPoYwJ', 'AKBlJHd8s', 'NfdKYRGKU',];

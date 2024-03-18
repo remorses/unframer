@@ -4826,4 +4826,5 @@ export { }
 
     export declare const combinedCSSRules: string[]
 
+    export * from 'real-framer-motion'
     

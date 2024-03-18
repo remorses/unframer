@@ -1,18 +1,14 @@
 'use client'
-import { combinedCSSRules } from '../framer-fixed/dist/framer.js'
+import { combinedCSSRules, LayoutGroup } from '../framer-fixed/dist/framer.js'
 
 import {
     ComponentPropsWithoutRef,
     ComponentType,
-    ReactNode,
     forwardRef,
-    useEffect,
     useId,
     useMemo,
-    useState,
     useSyncExternalStore,
 } from 'react'
-import { LayoutGroup, useInstantLayoutTransition } from 'framer-motion'
 
 function getFonts(component) {
     const fonts = component.fonts
@@ -75,7 +71,7 @@ function deduplicateByKey<T>(arr: T[], key: (k: T) => string) {
     return Array.from(map.values())
 }
 
-export function getFontsStyles(Components) {
+function getFontsStyles(Components) {
     const allFonts = deduplicateByKey<{ family; url; style; weight }>(
         Components.map(getFonts).flat(),
         (x) => x.url,
@@ -234,9 +230,9 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             if (!realVariant) {
                 continue
             }
-            // if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-            //     continue
-            // }
+            if (currentBreakpoint && currentBreakpoint !== breakpointName) {
+                continue
+            }
 
             let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
             const existingVariant = variants.find(
@@ -255,11 +251,12 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
         return variants.map(({ className, variant }) => {
             return (
                 <div key={variant} className={className}>
-                    <LayoutGroup key={variant} id={variant}>
+                    <LayoutGroup key={variant} id={id + variant}>
+                        {/* @ts-ignore */}
                         <Component
                             ref={ref}
                             key={variant}
-                            layoutDependency={id}
+                            // layoutDependency={id}
                             // layoutId={id + variant}
                             // layoutId={breakpointName}
                             {...rest}

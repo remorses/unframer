@@ -15,12 +15,12 @@ import {
   useVariantState as useVariantState5,
   withCSS as withCSS5,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext4, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext4, } from 'unframer';
 import * as React5 from 'react';
 
 // https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
-import { motion, } from 'framer-motion';
+import { motion, } from 'unframer';
 import { useEffect, useState, } from 'react';
 function withCountUp50speed50(Component6,) {
   return (props,) => {
@@ -39,7 +39,7 @@ function withCountUp50speed50(Component6,) {
 
 // https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js
 import { jsx as _jsx2, } from 'react/jsx-runtime';
-import { motion as motion2, } from 'framer-motion';
+import { motion as motion2, } from 'unframer';
 import { useEffect as useEffect2, useState as useState2, } from 'react';
 function withCountUp50speed502(Component6,) {
   return (props,) => {
@@ -105,13 +105,13 @@ import {
   useVariantState as useVariantState2,
   withCSS as withCSS2,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'unframer';
 import * as React2 from 'react';
 
 // https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js
 import { jsx as _jsx3, } from 'react/jsx-runtime';
 import { addFonts, cx, SVG, useComponentViewport, useLocaleInfo, useVariantState, withCSS, } from 'unframer/dist/framer';
-import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'framer-motion';
+import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 var cycleOrder = ['gzT3814Te',];
 var serializationHash = 'framer-iInDf';
@@ -365,7 +365,7 @@ import {
   useVariantState as useVariantState3,
   withCSS as withCSS3,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup3, motion as motion5, MotionConfigContext as MotionConfigContext3, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup3, motion as motion5, MotionConfigContext as MotionConfigContext3, } from 'unframer';
 import * as React3 from 'react';
 var cycleOrder3 = ['qa5zH5jg8',];
 var variantClassNames3 = { qa5zH5jg8: 'framer-v-1tbdnh', };
@@ -577,7 +577,7 @@ import {
   useVariantState as useVariantState4,
   withCSS as withCSS4,
 } from 'unframer/dist/framer';
-import { LayoutGroup as LayoutGroup4, motion as motion6, } from 'framer-motion';
+import { LayoutGroup as LayoutGroup4, motion as motion6, } from 'unframer';
 import * as React4 from 'react';
 var cycleOrder4 = ['L6GyWOWSZ',];
 var variantClassNames4 = { L6GyWOWSZ: 'framer-v-i4jn9m', };

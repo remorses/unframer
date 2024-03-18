@@ -13,7 +13,6 @@ import {
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 export async function main({ framerUrl, framerTypesUrl }) {
-    const deps = new Set<string>()
     let out = path.resolve(__dirname, '../framer-fixed/dist')
     out = path.resolve(out)
     fs.mkdirSync(path.resolve(out), { recursive: true })
@@ -34,9 +33,10 @@ export async function main({ framerUrl, framerTypesUrl }) {
         // splitting: true,
         logLevel: 'error',
         pure: ['addPropertyControls'],
-        external: [],
+        
         plugins: [esbuildPluginBundleDependencies({})],
         write: true,
+        // inject: [path.resolve(__dirname, '../src/inject.ts')],
         // outfile: 'dist/example.js',
         outfile: resultFile,
     })
@@ -45,6 +45,7 @@ export async function main({ framerUrl, framerTypesUrl }) {
     types += `
     export declare const combinedCSSRules: string[]
 
+    export * from 'real-framer-motion'
     `
     fs.writeFileSync(path.resolve(out, 'framer.d.ts'), types)
 
