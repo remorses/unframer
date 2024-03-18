@@ -20,7 +20,7 @@ Download framer components as simple files
 1. Install the package
 
     ```sh
-    npm install unframer framer-motion
+    npm install unframer
     ```
 
 1. Map `framer-motion` to `unframer`. This is required because the Framer runtime ships its own version of `framer-motion`, this will prevent you from having multiple instances of `framer-motion` in your project.
