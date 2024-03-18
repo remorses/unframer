@@ -99,7 +99,10 @@ export async function bundle({
 
                             return {
                                 contents: /** js */ `'use client'
-                                import Component from '${url}'
+                                import Component from '${await resolveRedirect(
+                                    url,
+                                    redirectCache,
+                                )}'
                                 import { WithFramerBreakpoints } from 'unframer/dist/react'
                                 Component.Responsive = (props) => {
                                     return <WithFramerBreakpoints Component={Component} {...props} />
@@ -383,11 +386,12 @@ const whitelist = [
     'framer-motion', //
 ]
 
+let redirectCache = new Map<string, Promise<string>>()
 export function esbuildPluginBundleDependencies({
     signal = undefined as AbortSignal | undefined,
 }) {
     const codeCache = new Map()
-    let redirectCache = new Map<string, Promise<string>>()
+
     const plugin: Plugin = {
         name: 'esbuild-plugin',
         setup(build) {

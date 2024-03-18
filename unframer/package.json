@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "0.6.0",
+    "version": "0.6.3",
     "description": "",
     "type": "module",
     "repository": "https://github.com/remorses/unframer",
@@ -58,6 +58,8 @@
     "devDependencies": {
         "@types/fs-extra": "^11.0.1",
         "@types/node": "^20.5.7",
+        "node-fetch-cache": "^4.1.0",
+        "posthtml": "^0.16.6",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     }

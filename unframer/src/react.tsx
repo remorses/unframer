@@ -6,8 +6,11 @@ import {
     ComponentType,
     ReactNode,
     useEffect,
+    useMemo,
+    useState,
     useSyncExternalStore,
 } from 'react'
+import { useInstantLayoutTransition } from 'framer-motion'
 
 function getFonts(component) {
     const fonts = component.fonts
@@ -138,23 +141,47 @@ const breakpointsStyles = `
 
 `
 
-export function FramerStyles({ Components = [] as any[] }) {
+const nothing = () => {}
+export function FramerStyles({ Components = [] as any[] }): any {
+    const isClient = useSyncExternalStore(
+        nothing,
+        () => true,
+        () => false,
+    )
+    const breakpoints = (
+        <style
+            dangerouslySetInnerHTML={{ __html: breakpointsStyles }}
+            key='breakpointsStyles'
+            suppressHydrationWarning
+            hidden
+        />
+    )
+    const fonts = (
+        <style
+            dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
+            suppressHydrationWarning
+            key='fonts'
+            hidden
+        />
+    )
+    // if (isClient) {
+    //     // on client framer injects the styles by itself
+    //     return (
+    //         <>
+    //             {breakpoints}
+    //             {fonts}
+    //         </>
+    //     )
+    // }
     return (
         <>
-            <style
-                dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
-                suppressHydrationWarning
-                hidden
-            />
+            {breakpoints}
+            {fonts}
             <style
                 dangerouslySetInnerHTML={{
                     __html: combinedCSSRules.join('\n'),
                 }}
-                suppressHydrationWarning
-                hidden
-            />
-            <style
-                dangerouslySetInnerHTML={{ __html: breakpointsStyles }}
+                key='combinedCSSRules'
                 suppressHydrationWarning
                 hidden
             />
@@ -171,12 +198,11 @@ export function WithFramerBreakpoints<
 }: {
     Component: T
     variants?: Record<Breakpoint, ComponentPropsWithoutRef<T>['variant']>
-} & Omit<ComponentPropsWithoutRef<T>, 'variant'>) {
+} & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any {
     const controls = Component['propertyControls']
 
     const variantControls = controls?.['variant']
     if (!variantControls) {
-        // @ts-expect-error
         return <Component variant={undefined} {...rest} />
     }
 
@@ -192,33 +218,40 @@ export function WithFramerBreakpoints<
             return breakpoint
         },
         () => {
-            // on server
+            // on server and during hydration
+
             return ''
         },
     )
-    // console.log('currentBreakpoint', currentBreakpoint)
 
-    let parts: ReactNode[] = []
-    for (let breakpointName of defaultBreakpoints) {
-        if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-            continue
-        }
-        let realVariant = breakpointsMap[breakpointName]
-        if (!realVariant) {
-            continue
-        }
-        let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
+    const parts = useMemo(() => {
+        return defaultBreakpoints.map((breakpointName) => {
+            if (currentBreakpoint && currentBreakpoint !== breakpointName) {
+                // TODO if i remove some elements the component motion.div will move out on first render, probably because they take another element as anchor, which means it thinks that before it was a different variant, so it animates
+                // return null
+            }
+            let realVariant = breakpointsMap[breakpointName]
+            if (!realVariant) {
+                // console.error(breakpointName, 'not found in', breakpointsMap)
+                return null
+            }
+            let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
 
-        let map = getClassMap(mapped)[breakpointName]
-        let className = classNames('', map)
+            let map = getClassMap(mapped)[breakpointName]
+            let className = classNames('', map)
 
-        parts.push(
-            <div key={breakpointName} className={className}>
-                {/* @ts-expect-error */}
-                <Component {...rest} variant={realVariant} />
-            </div>,
-        )
-    }
+            return (
+                <div key={breakpointName} className={className}>
+                    <Component
+                        key={breakpointName}
+                        // layoutId={breakpointName}
+                        {...rest}
+                        variant={realVariant}
+                    />
+                </div>
+            )
+        })
+    }, [currentBreakpoint])
 
     return parts
 }

@@ -1,5 +1,23 @@
 # unframer
 
+## 0.6.3
+
+### Patch Changes
+
+-   Fix url redirect for root url
+
+## 0.6.2
+
+### Patch Changes
+
+-   Render all variants at the same time again, nextjs was bugging
+
+## 0.6.1
+
+### Patch Changes
+
+-   Fix layout animations getting triggered on mount, disable layout animations during hydration
+
 ## 0.6.0
 
 ### Minor Changes
