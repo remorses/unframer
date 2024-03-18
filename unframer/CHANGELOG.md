@@ -1,5 +1,11 @@
 # unframer
 
+## 0.7.0
+
+### Minor Changes
+
+-   Added index export. Export framer-motion from unframer, prevent mismatches by using unframer instead of framer-motion
+
 ## 0.6.3
 
 ### Patch Changes

@@ -20,7 +20,13 @@ Download framer components as simple files
 1. Install the package
 
     ```sh
-    npm install unframer framer-motion
+    npm install unframer
+    ```
+
+1. Map `framer-motion` to `unframer`. This is required because the Framer runtime ships its own version of `framer-motion`, this will prevent you from having multiple instances of `framer-motion` in your project.
+
+    ```sh
+    npm install framer-motion@npm:unframer
     ```
 
 1. Create an `unframer.json` file like the following (the key will be used for the component folder inside `outDir`)
@@ -44,7 +50,7 @@ Download framer components as simple files
 
 ```tsx
 import Menu from './framer/menus'
-import { FramerStyles } from 'unframer/dist/react'
+import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
@@ -61,7 +67,7 @@ export default function App() {
 
 ```tsx
 import Logos from './framer/logos'
-import { FramerStyles } from 'unframer/dist/react'
+import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
@@ -89,7 +95,7 @@ Notice that you will often need to use `!important` to override styles already d
 
 ```tsx
 import Logos from './framer/logos'
-import { FramerStyles } from 'unframer/dist/react'
+import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
