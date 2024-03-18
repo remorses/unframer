@@ -1,7 +1,7 @@
 'use client'
 
 import { FramerStyles, WithFramerBreakpoints } from 'unframer/dist/react'
-import { PageRoot } from 'unframer/dist/framer'
+import { AnimatePresence, PageRoot } from 'unframer/dist/framer'
 import Logos from '@/framer/logos'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
@@ -23,7 +23,9 @@ export default function Home() {
                     }}
                     className='bg-gray-800'
                 />
-                <MenuOverlay />
+                <AnimatePresence>
+                    <MenuOverlay />
+                </AnimatePresence>
                 <FramerStyles Components={[Logos, Comp]} />
                 <div className='relative h-[500px]'>
                     <Test.Responsive

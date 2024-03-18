@@ -43,7 +43,7 @@
         "eventemitter3": "^3.1.0",
         "find-up": "^6.3.0",
         "fontfaceobserver": "^2.1.0",
-        "framer-motion": "11.0.13",
+        "framer-motion": "11.0.14",
         "fs-extra": "^11.1.1",
         "hey-listen": "^1.0.8",
         "hoist-non-react-statics": "^3.3.2",

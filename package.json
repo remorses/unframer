@@ -18,14 +18,12 @@
         "vitest": "^1.3.1"
     },
     "pnpm": {
-        "overrides": {
-            "framer-motion": "10.12.17"
-        }
+        "overrides": {}
     },
     "repository": "https://github.com/remorses/",
     "author": "remorses <beats.by.morse@gmail.com>",
     "license": "",
     "dependencies": {
-        "framer-motion": "11.0.13"
+        "framer-motion": "11.0.14"
     }
 }

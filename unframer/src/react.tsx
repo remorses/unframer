@@ -5,12 +5,14 @@ import {
     ComponentPropsWithoutRef,
     ComponentType,
     ReactNode,
+    forwardRef,
     useEffect,
+    useId,
     useMemo,
     useState,
     useSyncExternalStore,
 } from 'react'
-import { useInstantLayoutTransition } from 'framer-motion'
+import { LayoutGroup, useInstantLayoutTransition } from 'framer-motion'
 
 function getFonts(component) {
     const fonts = component.fonts
@@ -191,26 +193,20 @@ export function FramerStyles({ Components = [] as any[] }): any {
     )
 }
 
-export function WithFramerBreakpoints<
+export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
     T extends ComponentType<{ variant?: any; className?: string }>,
->({
-    Component,
-    variants: breakpointsMap = defaultMap,
-    ...rest
-}: {
-    Component: T
-    variants?: Record<Breakpoint, ComponentPropsWithoutRef<T>['variant']>
-} & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any {
-    const controls = Component['propertyControls']
-
-    const variantControls = controls?.['variant']
-    if (!variantControls) {
-        // @ts-ignore
-        return <Component variant={undefined} {...rest} />
-    }
-
-    const options = variantControls?.optionTitles
-
+>(
+    {
+        Component,
+        variants: breakpointsMap = defaultMap,
+        ...rest
+    }: {
+        Component: T
+        variants?: Record<Breakpoint, ComponentPropsWithoutRef<T>['variant']>
+    } & Omit<ComponentPropsWithoutRef<T>, 'variant'>,
+    ref,
+): any {
+    const id = useId()
     const currentBreakpoint = useSyncExternalStore(
         onResize,
         () => {
@@ -238,7 +234,7 @@ export function WithFramerBreakpoints<
             if (!realVariant) {
                 continue
             }
-            // if (isMounted && currentBreakpoint !== breakpointName) {
+            // if (currentBreakpoint && currentBreakpoint !== breakpointName) {
             //     continue
             // }
 
@@ -259,20 +255,24 @@ export function WithFramerBreakpoints<
         return variants.map(({ className, variant }) => {
             return (
                 <div key={variant} className={className}>
-                    {/* @ts-ignore */}
-                    <Component
-                        key={variant}
-                        // layoutId={breakpointName}
-                        {...rest}
-                        variant={variant as any}
-                    />
+                    <LayoutGroup key={variant} id={variant}>
+                        <Component
+                            ref={ref}
+                            key={variant}
+                            layoutDependency={id}
+                            // layoutId={id + variant}
+                            // layoutId={breakpointName}
+                            {...rest}
+                            variant={variant as any}
+                        />
+                    </LayoutGroup>
                 </div>
             )
         })
     }, [currentBreakpoint, rest, breakpointsMap])
 
     return parts
-}
+})
 
 const onResize = (callback) => {
     window.addEventListener('resize', callback)
