@@ -1,5 +1,11 @@
 # unframer
 
+## 1.0.0
+
+### Major Changes
+
+-   Use tailwind style breaking points instead of Desktop etc
+
 ## 0.7.1
 
 ### Patch Changes
