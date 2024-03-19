@@ -23,11 +23,7 @@ export default function Home() {
                 </div>
                 <div className='pt-[200px]'></div>
                 <Hero.Responsive
-                    variants={{
-                        Desktop: 'Variant 1',
-                        Tablet: 'mobile',
-                        Mobile: 'mobile',
-                    }}
+                    variants={{ base: 'mobile', lg: 'Variant 1' }}
                     className='bg-gray-800 !p-14'
                 />
                 <AnimatePresence>
@@ -37,17 +33,17 @@ export default function Home() {
                 <div className='relative h-[500px]'>
                     <Test.Responsive
                         variants={{
-                            Desktop: 'Desktop',
-                            Tablet: 'Tablet',
-                            Mobile: 'Mobile',
+                            lg: 'Desktop',
+                            md: 'Tablet',
+                            base: 'Mobile',
                         }}
                     />
                 </div>
                 <FullPage.Responsive
                     variants={{
-                        Desktop: 'Desktop',
-                        Tablet: 'Tablet',
-                        Mobile: 'Tablet',
+                        lg: 'Desktop',
+                        md: 'Tablet',
+                        base: 'Tablet',
                     }}
                 />
                 <Comp />

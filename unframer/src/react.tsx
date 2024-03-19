@@ -19,46 +19,6 @@ function classNames(...args) {
     return args.filter(Boolean).join(' ')
 }
 
-const defaultBreakpoints = ['Desktop', 'Tablet', 'Mobile'] as const
-
-type Breakpoint = (typeof defaultBreakpoints)[number]
-
-let defaultMap: Record<Breakpoint, string> = Object.fromEntries(
-    defaultBreakpoints.map((x) => [x, x]),
-) as any
-
-function getClassMap(breakpoints: Breakpoint[]): Record<Breakpoint, string> {
-    const classMap: Record<Breakpoint, string> = {
-        Desktop: '',
-        Tablet: '',
-        Mobile: '',
-    }
-
-    if (breakpoints.length === 1) {
-        classMap[breakpoints[0]] = 'FramerDesktop FramerTablet FramerMobile'
-    } else if (breakpoints.length === 2) {
-        if (breakpoints.includes('Desktop')) {
-            classMap.Desktop = 'Desktop'
-            classMap[breakpoints.find((b) => b !== 'Desktop')!] =
-                'FramerTablet FramerMobile'
-        } else if (breakpoints.includes('Tablet')) {
-            classMap.Tablet = 'Tablet'
-            classMap[breakpoints.find((b) => b !== 'Tablet')!] =
-                'FramerDesktop FramerMobile'
-        } else {
-            classMap.Mobile = 'Mobile'
-            classMap[breakpoints.find((b) => b !== 'Mobile')!] =
-                'FramerDesktop FramerTablet'
-        }
-    } else if (breakpoints.length === 3) {
-        classMap.Desktop = 'FramerDesktop'
-        classMap.Tablet = 'FramerTablet'
-        classMap.Mobile = 'FramerMobile'
-    }
-
-    return classMap
-}
-
 function deduplicateByKey<T>(arr: T[], key: (k: T) => string) {
     let map = new Map()
     for (let item of arr) {
@@ -95,11 +55,21 @@ function getFontsStyles(Components) {
     return str
 }
 
-const breakpointSizes: Record<(typeof defaultBreakpoints)[number], number> = {
-    Desktop: 1024,
-    Tablet: 768,
-    Mobile: 0,
-}
+const breakpointSizes = {
+    base: 0,
+    sm: 320,
+    md: 768,
+    lg: 960,
+    xl: 1200,
+    '2xl': 1536,
+} as const
+
+// breakpoints from the higher to the lower
+const defaultBreakpoints = Object.keys(
+    breakpointSizes,
+).reverse() as UnframerBreakpoint[]
+
+export type UnframerBreakpoint = keyof typeof breakpointSizes
 
 function getBreakpointNameFromWindowWidth(windowWidth: number) {
     return defaultBreakpoints.find(
@@ -107,37 +77,80 @@ function getBreakpointNameFromWindowWidth(windowWidth: number) {
     )
 }
 
-const breakpointsStyles = `
+const breakpointsStyles = /* css */ `
+/* Base */
+@media (min-width: ${breakpointSizes.base}px) and (max-width: ${
+    breakpointSizes.sm - 1
+}px) {
+    .unframer-hidden.unframer-base { 
+        display: contents;
+    }
+}
 
-.FramerTablet,
-.FramerMobile,
-.FramerDesktop {
+/* Small */
+@media (min-width: ${breakpointSizes.sm}px) and (max-width: ${
+    breakpointSizes.md - 1
+}px) {
+    .unframer-hidden.unframer-sm { 
+        display: contents;
+    }
+}
+
+/* Medium */
+@media (min-width: ${breakpointSizes.md}px) and (max-width: ${
+    breakpointSizes.lg - 1
+}px) {
+    .unframer-hidden.unframer-md { 
+        display: contents;
+    }
+}
+
+/* Large */
+@media (min-width: ${breakpointSizes.lg}px) and (max-width: ${
+    breakpointSizes.xl - 1
+}px) {
+    .unframer-hidden.unframer-lg { 
+        display: contents;
+    }
+}
+
+/* Extra Large */
+@media (min-width: ${breakpointSizes.xl}px) and (max-width: ${
+    breakpointSizes['2xl'] - 1
+}px) {
+    .unframer-hidden.unframer-xl { 
+        display: contents;
+    }
+}
+
+/* 2 Extra Large */
+@media (min-width: ${breakpointSizes['2xl']}px) {
+    .unframer-hidden.unframer-2xl { 
+        display: contents;
+    }
+}
+
+.unframer-hidden {
     display: none;
 }
-
-@media (min-width: ${breakpointSizes.Desktop}px) {
-    .FramerDesktop {
-        display: contents;
-    }
-}
-
-@media (min-width: ${breakpointSizes.Tablet}px) and (max-width: ${breakpointSizes.Desktop}px) {
-    .FramerTablet {
-        display: contents;
-    }
-}
-
-@media (max-width: ${breakpointSizes.Tablet}px) {
-    .FramerMobile {
-        display: contents;
-    }
-}
-
-.contents {
-    display: contents;
-}
-
 `
+type Breakpoints = Record<UnframerBreakpoint, string>
+
+function fillBreakpoints(breakpoints: Breakpoints): Breakpoints {
+    const breakpointsOrder = ['base', 'sm', 'md', 'lg', 'xl', '2xl']
+    const filledBreakpoints: Breakpoints = { ...breakpoints }
+
+    for (let i = 1; i < breakpointsOrder.length; i++) {
+        const currentBreakpoint = breakpointsOrder[i]
+        const previousBreakpoint = breakpointsOrder[i - 1]
+
+        if (!filledBreakpoints[currentBreakpoint]) {
+            filledBreakpoints[currentBreakpoint] =
+                filledBreakpoints[previousBreakpoint]
+        }
+    }
+    return filledBreakpoints
+}
 
 const nothing = () => {
     return () => {}
@@ -194,11 +207,14 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
 >(
     {
         Component,
-        variants: breakpointsMap = defaultMap,
+        variants: _breakpointsMap,
         ...rest
     }: {
         Component: T
-        variants?: Record<Breakpoint, ComponentPropsWithoutRef<T>['variant']>
+        variants: Record<
+            UnframerBreakpoint,
+            ComponentPropsWithoutRef<T>['variant']
+        >
     } & Omit<ComponentPropsWithoutRef<T>, 'variant'>,
     ref,
 ): any {
@@ -218,15 +234,15 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             return ''
         },
     )
-    // const [isMounted, setIsMounted] = useState(false)
-    // useEffect(() => {
-    //     setIsMounted(true)
-    // }, [])
 
     const parts = useMemo(() => {
-        const variants = [] as { className: string; variant: string }[]
-        for (let breakpointName in breakpointsMap) {
-            const realVariant = breakpointsMap[breakpointName]
+        const allBreakpoints = fillBreakpoints(_breakpointsMap)
+        const variants = {} as Record<
+            string,
+            { className: string; variant: string }
+        >
+        for (let breakpointName of Object.keys(allBreakpoints)) {
+            const realVariant = allBreakpoints[breakpointName]
             if (!realVariant) {
                 continue
             }
@@ -234,21 +250,14 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
                 continue
             }
 
-            let mapped = defaultBreakpoints.filter((x) => breakpointsMap[x])
-            const existingVariant = variants.find(
-                (x) => x.variant === realVariant,
-            )
             let className = classNames(
-                existingVariant?.className,
-                getClassMap(mapped)[breakpointName],
+                variants[realVariant]?.className || 'unframer-hidden',
+                `unframer-${breakpointName}`,
             )
-            if (existingVariant) {
-                existingVariant.className = className
-            } else {
-                variants.push({ className, variant: realVariant })
-            }
+            variants[realVariant] = { className, variant: realVariant }
         }
-        return variants.map(({ className, variant }) => {
+
+        return Object.values(variants).map(({ className, variant }) => {
             return (
                 <div key={variant} className={className}>
                     <LayoutGroup key={variant} id={id + variant}>
@@ -266,7 +275,7 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
                 </div>
             )
         })
-    }, [currentBreakpoint, rest, breakpointsMap])
+    }, [currentBreakpoint, rest, _breakpointsMap])
 
     return parts
 })

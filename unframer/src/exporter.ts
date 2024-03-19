@@ -44,9 +44,8 @@ export async function bundle({
 }) {
     out ||= path.resolve(process.cwd(), 'example')
     out = path.resolve(out)
-    try {
-        fs.rmSync(out, { recursive: true, force: true })
-    } catch (e) {}
+    const prevFiles = fs.readdirSync(out).map((x) => path.resolve(out, x))
+
     fs.mkdirSync(path.resolve(out), { recursive: true })
 
     const result = await build({
@@ -116,12 +115,29 @@ export async function bundle({
                 },
             },
         ],
-        write: true,
+        write: false,
 
         // outfile: 'dist/example.js',
         outdir: out,
         // outfile: path.resolve(cwd, sourcefile),
     })
+
+    for (let file of result.outputFiles!) {
+        const abs = path.resolve(out, file.path)
+        const existing = await fs.promises
+            .readFile(file.path, 'utf-8')
+            .catch(() => null)
+        if (existing === file.text) {
+            continue
+        }
+        fs.writeFileSync(abs, file.text, 'utf-8')
+    }
+
+    const outFiles = result.outputFiles.map((x) => path.resolve(out, x.path))
+    const filesToDelete = prevFiles.filter((x) => !outFiles.includes(x))
+    for (let file of filesToDelete) {
+        fs.rmSync(file)
+    }
 
     fs.writeFileSync(
         path.resolve(out, 'meta.json'),
@@ -217,7 +233,7 @@ export async function extractPropControlsSafe(text, name) {
         }
         return propControls
     } catch (e: any) {
-        console.error(`Cannot get property controls for ${name}`, e.stack)
+        logger.error(`Cannot get property controls for ${name}`, e.stack)
     }
 }
 
@@ -244,7 +260,7 @@ export async function extractPropControlsUnsafe(filename, name) {
         // console.log(stdout)
         return safeJsonParse(stdout)
     } catch (e: any) {
-        console.error(`Cannot get property controls for ${name}`, e.stack)
+        logger.error(`Cannot get property controls for ${name}`, e.stack)
     } finally {
         fs.rmSync(packageJson)
     }
@@ -318,19 +334,31 @@ export function propControlsToType(controls?: PropertyControls) {
                 if (!name) {
                     return ''
                 }
-                return `  ${JSON.stringify(name)}?: ${typescriptType(value)}`
+                return `    ${JSON.stringify(name)}?: ${typescriptType(value)}`
             })
             .filter(Boolean)
             .join('\n')
 
-        const defaultPropsTypes = `  children?: React.ReactNode\n  style?: React.CSSProperties\n  className?: string\n  id?: string\n  width?: any\n  height?: any\n  layoutId?: string\n`
+        const defaultPropsTypes =
+            [
+                'children?: React.ReactNode',
+                'style?: React.CSSProperties',
+                'className?: string',
+                'id?: string',
+                'width?: any',
+                'height?: any',
+                'layoutId?: string',
+            ]
+                .map((line) => `    ${line}`)
+                .join('\n') + '\n'
         let t = ''
-        t += 'import * as React from "react"\n'
-        t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n`
-        t += `const Component = (props: Props) => any\n`
-        t += `export default Component\n`
-        t += `type Breakpoint = 'Desktop' | 'Tablet' | 'Mobile'\n`
-        t += `Component.Responsive = (props: Omit<Props, 'variant'> & {variants: Record<Breakpoint, Props['variant']>}) => any\n`
+        t += 'import * as React from "react"\n\n'
+        t += 'import { UnframerBreakpoint } from "unframer"\n\n'
+        t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n\n`
+        t += `const Component = (props: Props) => any\n\n`
+        t += `type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }\n\n`
+        t += `Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any\n\n`
+        t += `export default Component\n\n`
 
         return t
     } catch (e: any) {

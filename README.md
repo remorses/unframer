@@ -77,9 +77,9 @@ export default function App() {
             {/* Changes component variant based on breakpoint */}
             <Logos.Responsive
                 variants={{
-                    Desktop: 'Logo Ticker',
-                    Tablet: 'Logo Ticker - M',
-                    Mobile: 'Logo Ticker - M',
+                    lg: 'Desktop Variant',
+                    md: 'Tablet Variant',
+                    base: 'Mobile Variant',
                 }}
             />
         </div>
@@ -106,9 +106,9 @@ export default function App() {
             <Logos.responsive
                 className='!w-full'
                 variants={{
-                    Desktop: 'Logo Ticker',
-                    Tablet: 'Logo Ticker - M',
-                    Mobile: 'Logo Ticker - M',
+                    lg: 'Desktop',
+                    md: 'Tablet',
+                    base: 'Mobile',
                 }}
             />
         </div>
