@@ -10,12 +10,18 @@ import Comp from '@/framer/fylo'
 import FullPage from '@/framer/full-page'
 import Hero from '@/framer/hero'
 import MenuOverlay from '@/framer/menu-overlay'
+import Collection from '@/framer/collection'
 
 export default function Home() {
     return (
         <>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
+
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
+                <div className=' flex z-10 w-full absolute flex-col items-center'>
+                    <Menus className=' mx-auto' />
+                </div>
+                <div className='pt-[200px]'></div>
                 <Hero.Responsive
                     variants={{
                         Desktop: 'Variant 1',
@@ -45,18 +51,8 @@ export default function Home() {
                     }}
                 />
                 <Comp />
-                <div className='pt-[500px]'>
-                    <Menus />
+                <Collection />
 
-                    <Logos.Responsive
-                        variants={{
-                            Desktop: 'Logo Ticker',
-                            Tablet: 'Logo Ticker - M',
-                            Mobile: 'Logo Ticker - M',
-                        }}
-                    />
-                    {/* <Logos variant='Logo Ticker - M' /> */}
-                </div>
                 <div className='pt-[200px]'></div>
             </div>
         </>
