@@ -6,9 +6,6 @@
     <br/>
 </div>
 
-> [!IMPORTANT]
-> If your component has any problem like missing imports create an issue with the component url, these issues are usually because of updates to the `framer` runtime which is kept in sync in this repository in [unframer/framer-fixed/dist](./unframer/framer-fixed/dist) folder
-
 Download framer components as simple files
 
 -   Works with any React framework (Next.js, Gatsby, Vite, etc)
