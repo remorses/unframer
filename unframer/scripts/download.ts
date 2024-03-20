@@ -64,6 +64,10 @@ export async function main({ framerUrl, framerTypesUrl }) {
         throw new Error('Failed to export combinedCSSRules')
     }
     code = codeAfter
+    const framerVersion = extractFramerVersion(code)
+    const framerMotionVersion = extractFramerMotionVersion(code)
+    logger.log('framer version:', framerVersion)
+    logger.log('framer motion version', framerMotionVersion)
     fs.writeFileSync(resultFile, code, 'utf-8')
 }
 
@@ -79,3 +83,24 @@ main({
     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
     framerUrl: `https://app.framerstatic.com/framer.YTPROCQS.js`,
 })
+
+// function that extracts version from this code:
+// name: 'framer',
+// version: '2.4.1',
+function extractFramerVersion(code: string) {
+    const match = code.match(/name: 'framer',\n\s*version: '([^']+)'/)
+    if (!match) {
+        return ''
+    }
+    return match[1]
+}
+
+// function that extracts framer motion version from this code:
+// this.version = '11.0.7';
+function extractFramerMotionVersion(code: string) {
+    const match = code.match(/this.version = '([^']+)'/)
+    if (!match) {
+        return ''
+    }
+    return match[1]
+}
