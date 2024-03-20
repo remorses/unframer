@@ -139,6 +139,10 @@ Known limitations:
 }
 ```
 
+-   Instead of using links to your Framer pages you should make links variables and set them when rendering the component. This is because links to Framer pages are not supported in `unframer`.
+
+-   Internationalization is not supported
+
 ## Example
 
 Look at the [nextjs-app](./nextjs-app) folder for an example
