@@ -87,6 +87,7 @@ export async function main({ framerTypesUrl }) {
         ---
         unframer: patch
         --- 
+        
         Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
         `
         fs.writeFileSync(
@@ -95,7 +96,6 @@ export async function main({ framerTypesUrl }) {
             'utf-8',
         )
         // increase package.json version with a patch, with pnpm
-        await shell('pnpm version patch')
 
         // await changeset()
     }
