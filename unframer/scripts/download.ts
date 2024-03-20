@@ -13,11 +13,13 @@ import {
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 const session = process.env.FRAMER_SESSION
+if (!session) {
+    throw new Error('Missing session')
+}
 
 export async function main({ framerUrl, framerTypesUrl }) {
     const { src } = await getLatestFramerScriptSrc({ session })
-    console.log('src', src)
-    return
+    // console.log('src', src)
     let out = path.resolve(__dirname, '../framer-fixed/dist')
     out = path.resolve(out)
     fs.mkdirSync(path.resolve(out), { recursive: true })
@@ -124,8 +126,6 @@ async function getLatestFramerScriptSrc({ session }) {
                 'upgrade-insecure-requests': '1',
                 cookie: `session=${session};`,
             },
-            referrer:
-                'https://framer.com/projects/?teamId=68b7d393-dc1e-4609-bf20-92f559ab1ce6',
             referrerPolicy: 'strict-origin-when-cross-origin',
             body: null,
             method: 'GET',
