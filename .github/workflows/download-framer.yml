@@ -4,6 +4,7 @@ on:
     schedule:
         # every day at 12:30
         - cron: '30 12 * * *'
+    workflow_dispatch:
 
 jobs:
     download:
