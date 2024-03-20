@@ -115,8 +115,8 @@ importers:
         specifier: ^20.5.7
         version: 20.5.7
       '@xmorse/deployment-utils':
-        specifier: ^0.0.32
-        version: 0.0.32
+        specifier: ^0.1.0
+        version: 0.1.0
       posthtml:
         specifier: ^0.16.6
         version: 0.16.6
@@ -1352,11 +1352,12 @@ packages:
       pretty-format: 29.7.0
     dev: true
 
-  /@xmorse/deployment-utils@0.0.32:
-    resolution: {integrity: sha512-PInZHgb00skyaWL5WEqJ7szf1Il464JqVCZtvdHpawoN9WgMdLEsFO3Hsk+w9wNvR+Rcjynx64wrHGE5pQ40yA==}
+  /@xmorse/deployment-utils@0.1.0:
+    resolution: {integrity: sha512-IJNhgzMXs08dbmDH3JQiP96SSszUHVR/C+T7VfhB6QOCmYB5tN+RmE6kCQrlMqLUyAlrCgL9FhK111CkVA9gSQ==}
     dependencies:
       '@actions/cache': 3.2.4
       '@types/folder-hash': 4.0.4
+      async-sema: 3.1.1
       folder-hash: 4.0.4
       fs-extra: 10.1.0
       picocolors: 1.0.0
@@ -1463,6 +1464,10 @@ packages:
 
   /assertion-error@1.1.0:
     resolution: {integrity: sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==}
+    dev: true
+
+  /async-sema@3.1.1:
+    resolution: {integrity: sha512-tLRNUXati5MFePdAk8dw7Qt7DpxPB60ofAgn8WRhW6a2rcimZnYBP9oxHiv0OHy+Wz7kPMG+t4LGdt31+4EmGg==}
     dev: true
 
   /asynckit@0.4.0:
@@ -2254,7 +2259,7 @@ packages:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
-      universalify: 2.0.0
+      universalify: 2.0.1
     dev: true
 
   /fs-extra@11.1.1:
@@ -4050,6 +4055,11 @@ packages:
   /universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+
+  /universalify@2.0.1:
+    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
+    engines: {node: '>= 10.0.0'}
+    dev: true
 
   /update-browserslist-db@1.0.11(browserslist@4.21.7):
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
