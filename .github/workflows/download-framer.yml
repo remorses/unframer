@@ -1,0 +1,30 @@
+name: Downlod Framer script
+
+on:
+    schedule:
+        # every day at 12:30
+        - cron: '30 12 * * *'
+
+jobs:
+    download:
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  registry-url: https://registry.npmjs.org/
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 9
+                  run_install: false
+            - name: Install pnpm dependencies (with cache)
+              uses: covbot/pnpm-install-with-cache@v1
+            # scripts
+            - run: pnpm download-framer
+              env:
+                  FRAMER_SESSION: ${{ secrets.FRAMER_SESSION }}
+            - uses: stefanzweifel/git-auto-commit-action@v5
