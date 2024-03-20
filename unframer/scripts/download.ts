@@ -1,4 +1,5 @@
 import dprint from 'dprint-node'
+import { shell } from '@xmorse/deployment-utils/src'
 
 import fs from 'fs'
 import { build } from 'esbuild'
@@ -17,10 +18,12 @@ if (!session) {
     throw new Error('Missing session')
 }
 
-export async function main({ framerUrl, framerTypesUrl }) {
-    const { src } = await getLatestFramerScriptSrc({ session })
+export async function main({ framerTypesUrl }) {
+    const { src: framerUrl } = await getLatestFramerScriptSrc({ session })
+
     // console.log('src', src)
     let out = path.resolve(__dirname, '../framer-fixed/dist')
+    const prevFile = fs.readFileSync(path.resolve(out, `framer.js`), 'utf-8')
     out = path.resolve(out)
     fs.mkdirSync(path.resolve(out), { recursive: true })
 
@@ -76,6 +79,12 @@ export async function main({ framerUrl, framerTypesUrl }) {
     logger.log('framer version:', framerVersion)
     logger.log('framer motion version:', framerMotionVersion)
     fs.writeFileSync(resultFile, code, 'utf-8')
+    // if the file changed, call changeset
+    if (prevFile !== code) {
+        logger.log('new framer version found, versioning...')
+        await shell(`pnpm changeset version`)
+        // await changeset()
+    }
 }
 
 // find these scripts in Framer html:
@@ -88,7 +97,6 @@ export async function main({ framerUrl, framerTypesUrl }) {
 main({
     framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
-    framerUrl: `https://app.framerstatic.com/framer.YTPROCQS.js`,
 })
 
 // function that extracts version from this code:
