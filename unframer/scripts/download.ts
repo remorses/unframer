@@ -74,7 +74,7 @@ export async function main({ framerUrl, framerTypesUrl }) {
     const framerVersion = extractFramerVersion(code)
     const framerMotionVersion = extractFramerMotionVersion(code)
     logger.log('framer version:', framerVersion)
-    logger.log('framer motion version', framerMotionVersion)
+    logger.log('framer motion version:', framerMotionVersion)
     fs.writeFileSync(resultFile, code, 'utf-8')
 }
 
