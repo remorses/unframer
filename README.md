@@ -142,4 +142,4 @@ Known limitations:
 
 ## Example
 
-Look at the [nextjs-app](./nextjs-app) folder for an example
+Look at the [nextjs-app](./nextjs-app) folder for an example and the deployed example [here](https://unframer-nextjs-app.vercel.app/)
