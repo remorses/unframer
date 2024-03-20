@@ -1,6 +1,6 @@
 /// <reference types="react" />
 
-import { AnimationPlaybackControls } from 'framer-motion';
+import type { AnimationPlaybackControls } from 'framer-motion';
 import { Component } from 'react';
 import { ComponentType } from 'react';
 import { ForwardRefExoticComponent } from 'react';
@@ -9,19 +9,19 @@ import { DeprecatedLayoutGroupContext as LayoutGroupContext } from 'framer-motio
 import { MotionProps } from 'framer-motion';
 import type { MotionStyle } from 'framer-motion';
 import type { MotionTransform } from 'framer-motion';
-import { MotionValue } from 'framer-motion';
+import type { MotionValue } from 'framer-motion';
 import { PanInfo } from 'framer-motion';
 import { PropsWithoutRef } from 'react';
 import { default as React_2 } from 'react';
 import type { ReactNode } from 'react';
 import { RefAttributes } from 'react';
-import { SpringOptions as SpringOptions_2 } from 'framer-motion';
-import { TargetAndTransition } from 'framer-motion';
-import { Transition } from 'framer-motion';
+import type { SpringOptions as SpringOptions_2 } from 'framer-motion';
+import type { TargetAndTransition } from 'framer-motion';
+import type { Transition } from 'framer-motion';
 import { useDeprecatedAnimatedState as useAnimatedState } from 'framer-motion';
 import { useDeprecatedInvertedScale as useInvertedScale } from 'framer-motion';
-import { ValueAnimationTransition } from 'framer-motion';
-import { VariantLabels } from 'framer-motion';
+import type { ValueAnimationTransition } from 'framer-motion';
+import type { VariantLabels } from 'framer-motion';
 
 /** @public */
 export declare function addFonts(component: React_2.ComponentType<unknown>, passedFonts: (ComponentFontV1 | ComponentFontBundle)[], flags?: {
@@ -3457,7 +3457,7 @@ export declare type PageProps = Partial<PageProperties> & Partial<Omit<FrameProp
  * Webkit issue: https://bugs.webkit.org/show_bug.cgi?id=240653
  * */
 /** @public */
-export declare function PageRoot({ RootComponent, isWebsite, routeId, pathVariables, routes, collectionUtils, notFoundPage, isReducedMotion, includeDataObserver, localeId, locales, preserveQueryParams, enableSuspenseThatPreservesDom, }: PageRootProps): JSX.Element;
+export declare function PageRoot({ RootComponent, isWebsite, routeId, pathVariables, routes, collectionUtils, notFoundPage, isReducedMotion, includeDataObserver, localeId, locales, preserveQueryParams, enableSuspenseThatPreservesDom, shouldMarkHydrationEnd, }: PageRootProps): JSX.Element;
 
 declare interface PageRootProps {
     RootComponent: RouteComponent;
@@ -3472,7 +3472,10 @@ declare interface PageRootProps {
     locales?: Locale[];
     localeId?: LocaleId;
     preserveQueryParams?: boolean;
+    /** Is `true` when the noWhiteFlashSuspense experiment is enabled. To be removed when the experiment is removed. */
     enableSuspenseThatPreservesDom?: boolean;
+    /** Is `true` when the page root is used at the live site and is being hydrated. */
+    shouldMarkHydrationEnd?: boolean;
 }
 
 export declare interface PageScopeControlDescription<P = any> extends BaseControlDescription<P> {

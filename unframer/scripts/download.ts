@@ -33,7 +33,7 @@ export async function main({ framerUrl, framerTypesUrl }) {
         // splitting: true,
         logLevel: 'error',
         pure: ['addPropertyControls'],
-        
+
         plugins: [esbuildPluginBundleDependencies({})],
         write: true,
         // inject: [path.resolve(__dirname, '../src/inject.ts')],
@@ -75,7 +75,7 @@ export async function main({ framerUrl, framerTypesUrl }) {
 //     })
 // </script>
 main({
-    framerTypesUrl: 'https://app.framerstatic.com/framer-KJWFDJQN.dts',
+    framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
-    framerUrl: `https://app.framerstatic.com/framer.5AKNTIWS.js`,
+    framerUrl: `https://app.framerstatic.com/framer.YTPROCQS.js`,
 })
