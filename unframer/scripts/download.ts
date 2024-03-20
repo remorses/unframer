@@ -1,4 +1,5 @@
 import dprint from 'dprint-node'
+import dedent from 'dedent'
 import { shell } from '@xmorse/deployment-utils/src'
 
 import fs from 'fs'
@@ -82,7 +83,20 @@ export async function main({ framerTypesUrl }) {
     // if the file changed, call changeset
     if (prevFile !== code) {
         logger.log('new framer version found, versioning...')
-        await shell(`pnpm changeset version`)
+        const change = dedent`
+        ---
+        unframer: patch
+        --- 
+        Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
+        `
+        fs.writeFileSync(
+            `.changeset/${framerVersion}-${framerMotionVersion}.md`,
+            change,
+            'utf-8',
+        )
+        // increase package.json version with a patch, with pnpm
+        await shell('pnpm version patch')
+
         // await changeset()
     }
 }

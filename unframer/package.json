@@ -43,6 +43,7 @@
     },
     "dependencies": {
         "chokidar": "^3.5.3",
+        "dedent": "^1.5.1",
         "dprint-node": "^1.0.8",
         "esbuild": "^0.20.2",
         "esbuild-plugin-polyfill-node": "^0.3.0",
