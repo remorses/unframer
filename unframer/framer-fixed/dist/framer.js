@@ -9022,7 +9022,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https:https://app.framerstatic.com/framer.YTPROCQS.js
+// https:https://app.framerstatic.com/framer.LKURAB5Q.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import React112, { startTransition as startTransition2, } from 'react';
@@ -9120,21 +9120,22 @@ import React622 from 'react';
 import React61 from 'react';
 import React63 from 'react';
 import React65, { createContext as createContext42, useContext as useContext122, useRef as useRef112, } from 'react';
-import React66 from 'react';
-import React68 from 'react';
 import React67 from 'react';
-import React71, { useContext as useContext132, } from 'react';
-import React70 from 'react';
+import * as React66 from 'react';
 import React69 from 'react';
-import React722 from 'react';
-import ReactDOM from 'react-dom';
+import React68 from 'react';
+import React722, { useContext as useContext132, } from 'react';
+import React71 from 'react';
+import React70 from 'react';
 import React73 from 'react';
+import ReactDOM from 'react-dom';
 import React74 from 'react';
 import React75 from 'react';
 import React76 from 'react';
-import * as React77 from 'react';
-import React78 from 'react';
+import React77 from 'react';
+import * as React78 from 'react';
 import React79 from 'react';
+import React80 from 'react';
 import {
   startTransition as startTransition22,
   useCallback as useCallback8,
@@ -9143,40 +9144,40 @@ import {
   useRef as useRef122,
 } from 'react';
 import { useMemo as useMemo52, } from 'react';
-import React80, { createRef, } from 'react';
-import React81 from 'react';
+import React81, { createRef, } from 'react';
 import React822 from 'react';
 import React83 from 'react';
 import React84 from 'react';
 import React85 from 'react';
-import { useRef as useRef132, } from 'react';
 import React86 from 'react';
+import { useRef as useRef132, } from 'react';
 import React87 from 'react';
 import React88 from 'react';
-import React89, { useRef as useRef14, } from 'react';
-import React100, { Component as Component14, } from 'react';
-import React90 from 'react';
-import React93 from 'react';
+import React89 from 'react';
+import React90, { useRef as useRef14, } from 'react';
+import React101, { Component as Component14, } from 'react';
 import React91 from 'react';
-import React922 from 'react';
-import React95, { useEffect as useEffect112, useRef as useRef15, } from 'react';
 import React94 from 'react';
-import React98 from 'react';
-import React96, { Component as Component12, } from 'react';
-import React97, { Component as Component13, } from 'react';
+import React922 from 'react';
+import React93 from 'react';
+import React96, { useEffect as useEffect112, useRef as useRef15, } from 'react';
+import React95 from 'react';
 import React99 from 'react';
-import React101 from 'react';
+import React97, { Component as Component12, } from 'react';
+import React98, { Component as Component13, } from 'react';
+import React100 from 'react';
 import React1022 from 'react';
-import React104, {
+import React103 from 'react';
+import React105, {
   Children as Children22,
   cloneElement as cloneElement22,
-  forwardRef as forwardRef42,
+  forwardRef as forwardRef52,
   isValidElement as isValidElement22,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
   useRef as useRef17,
 } from 'react';
-import * as React103 from 'react';
+import * as React104 from 'react';
 import { useRef as useRef16, } from 'react';
 import { useEffect as useEffect132, useState as useState22, } from 'react';
 var require_hsluv = __commonJS({
@@ -10097,6 +10098,41 @@ var require_hoist_non_react_statics_cjs = __commonJS({
     module.exports = hoistNonReactStatics;
   },
 },);
+var require_archy = __commonJS({
+  '../../../node_modules/archy/index.js'(exports, module,) {
+    module.exports = function archy2(obj, prefix2, opts,) {
+      if (prefix2 === void 0) {
+        prefix2 = '';
+      }
+      if (!opts) {
+        opts = {};
+      }
+      var chr = function (s,) {
+        var chars = {
+          '\u2502': '|',
+          '\u2514': '`',
+          '\u251C': '+',
+          '\u2500': '-',
+          '\u252C': '-',
+        };
+        return opts.unicode === false ? chars[s] : s;
+      };
+      if (typeof obj === 'string') {
+        obj = { label: obj, };
+      }
+      var nodes = obj.nodes || [];
+      var lines = (obj.label || '').split('\n',);
+      var splitter = '\n' + prefix2 + (nodes.length ? chr('\u2502',) : ' ') + ' ';
+      return prefix2 + lines.join(splitter,) + '\n' + nodes.map(function (node, ix,) {
+        var last = ix === nodes.length - 1;
+        var more = node.nodes && node.nodes.length;
+        var prefix_ = prefix2 + (last ? ' ' : chr('\u2502',)) + ' ';
+        return prefix2 + (last ? chr('\u2514',) : chr('\u251C',)) + chr('\u2500',) + (more ? chr('\u252C',) : chr('\u2500',)) + ' ' +
+          archy2(node, prefix_, opts,).slice(prefix2.length + 2,);
+      },).join('',);
+    };
+  },
+},);
 var require_fontfaceobserver_standalone = __commonJS({
   '../../../node_modules/fontfaceobserver/fontfaceobserver.standalone.js'(exports, module,) {
     (function () {
@@ -10339,8 +10375,8 @@ var ErrorBoundary = class extends Component2 {
     return renderPage(notFoundPage, defaultPageStyle,);
   }
 };
-var pathVariablesRegExpRaw = ':([a-zA-Z][a-zA-Z0-9_]*)';
-var pathVariablesRegExp = new RegExp(pathVariablesRegExpRaw, 'g',);
+var pathVariablesRegExpRaw = ':([a-z]\\w*)';
+var pathVariablesRegExp = new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
   return path.replace(pathVariablesRegExp, (match, name,) => {
     const value = variables[name];
@@ -11577,7 +11613,7 @@ function inferInitialRouteFromPath(routes, decodedLocationPath, fallback = true,
   return { routeId: firstRoute, localeId, };
 }
 function pathDepth(path,) {
-  const pathWithTrimmedSlashes = path.replace(/(?:^\/|\/$)/g, '',);
+  const pathWithTrimmedSlashes = path.replace(/^\/|\/$/g, '',);
   if (pathWithTrimmedSlashes === '') {
     return 0;
   }
@@ -11899,15 +11935,12 @@ var AnimatableValue = class {
 };
 function roundedNumber(value, decimals,) {
   const d = Math.round(Math.abs(decimals,),);
-  const multiplier = Math.pow(10, d,);
+  const multiplier = 10 ** d;
   return Math.round(value * multiplier,) / multiplier;
 }
 function roundedNumberString(value, decimals,) {
   const result = value.toFixed(decimals,);
-  if (decimals === 0) {
-    return result;
-  }
-  return result.replace(/\.?0+$/, '',);
+  return decimals === 0 ? result : `${+result}`;
 }
 function roundWithOffset(value, offset,) {
   if (offset === 0) {
@@ -12814,7 +12847,7 @@ function percentToFraction(val,) {
   return 0;
 }
 function numberFromString(input,) {
-  const match = input.match(/\d?\.?\d+/,);
+  const match = /\d?\.?\d+/u.exec(input,);
   return match ? Number(match[0],) : void 0;
 }
 var { hsluvToRgb, rgbToHsluv: rgbToHsluvExternal, } = import_hsluv.default;
@@ -13017,10 +13050,10 @@ var matchers = (() => {
     hsla: new RegExp('hsla' + permissiveMatch4,),
     hsv: new RegExp('hsv' + permissiveMatch3,),
     hsva: new RegExp('hsva' + permissiveMatch4,),
-    hex3: /^([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex6: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
-    hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
+    hex3: /^([\da-f])([\da-f])([\da-f])$/iu,
+    hex6: /^([\da-f]{2})([\da-f]{2})([\da-f]{2})$/iu,
+    hex4: /^#?([\da-f])([\da-f])([\da-f])([\da-f])$/iu,
+    hex8: /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})([\da-f]{2})$/iu,
   };
 })();
 function stringToObject(inputColor,) {
@@ -13031,9 +13064,8 @@ function stringToObject(inputColor,) {
   if (inputColor.includes('var(',)) {
     return false;
   }
-  const trimLeft = /^[\s,#]+/;
-  const trimRight = /\s+$/;
-  let color2 = inputColor.replace(trimLeft, '',).replace(trimRight, '',).toLowerCase();
+  const trimLeft = /^[\s,#]+/u;
+  let color2 = inputColor.replace(trimLeft, '',).trimEnd().toLowerCase();
   const namedColor = cssNames[color2];
   if (namedColor) {
     color2 = namedColor;
@@ -15155,13 +15187,20 @@ var Rect;
       y: rect.y + rect.height / 2,
     };
   };
-  Rect2.fromPoints = (ps,) => {
+  Rect2.boundingRectFromPoints = (ps,) => {
     const xValues = ps.map((point2,) => point2.x);
     const yValues = ps.map((point2,) => point2.y);
     const x = Math.min(...xValues,);
     const y = Math.min(...yValues,);
     const width = Math.max(...xValues,) - x;
     const height = Math.max(...yValues,) - y;
+    return { x, y, width, height, };
+  };
+  Rect2.fromPoints = (ps,) => {
+    const [tl, tr, _, bl,] = ps;
+    const { x, y, } = tl;
+    const width = Point.distance(tl, tr,);
+    const height = Point.distance(tl, bl,);
     return { x, y, width, height, };
   };
   Rect2.merge = (...rect) => {
@@ -18355,7 +18394,7 @@ function memoize(fn,) {
   };
 }
 var reactPropsRegex =
-  /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+  /^(?:children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|[dkrxyz]|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y1|y2|yChannelSelector|zoomAndPan|for|class|autofocus|(?:[Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*)$/;
 var isPropValid = /* @__PURE__ */ memoize(
   (prop,) => reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91,
   /* Z+1 */
@@ -18396,8 +18435,8 @@ var isSafari = () => safeNavigator && /Safari/.test(safeNavigator.userAgent,) &&
 var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/.test(safeNavigator.userAgent,);
 var isFramerX = () => safeNavigator && /FramerX/.test(safeNavigator.userAgent,);
 var isEdge = () => safeNavigator && /Edg\//.test(safeNavigator.userAgent,);
-var isAndroid = () => safeNavigator && /(android)/i.test(safeNavigator.userAgent,);
-var isIOS = () => safeNavigator && /(iPhone|iPod|iPad)/i.test(safeNavigator.platform,);
+var isAndroid = () => safeNavigator && /android/i.test(safeNavigator.userAgent,);
+var isIOS = () => safeNavigator && /iPhone|iPod|iPad/i.test(safeNavigator.platform,);
 var isMacOS = () => safeNavigator && /Mac/.test(safeNavigator.platform,);
 var isWindows = () => safeNavigator && /Win/.test(safeNavigator.platform,);
 var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
@@ -18408,8 +18447,8 @@ var isMobile = () => isPhone() || isTablet();
 var isFileUrl = (url,) => url.startsWith('file://',);
 var isDataUrl = (url,) => url.startsWith('data:',);
 var isTest = () => import_process.default.env.NODE_ENV === 'test';
-var isRelativeUrl = (url,) => !/^([a-zA-Z]{1,8}:\/\/).*$/.test(url,);
-var isLocalServerUrl = (url,) => /[a-zA-Z]{1,8}:\/\/127\.0\.0\.1/.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/.test(url,);
+var isRelativeUrl = (url,) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
+var isLocalServerUrl = (url,) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/.test(url,);
 var isLocalUrl = (url,) => {
   if (isFileUrl(url,)) {
     return true;
@@ -18443,10 +18482,10 @@ var isJP2Supported = function () {
 };
 var isWebPSupported = () => isChrome();
 var deviceType = () => {
-  if (safeNavigator && /(tablet)|(iPad)|(Nexus 9)/i.test(safeNavigator.userAgent,)) {
+  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) {
     return 'tablet';
   }
-  if (safeNavigator && /(mobi)/i.test(safeNavigator.userAgent,)) {
+  if (safeNavigator && /mobi/i.test(safeNavigator.userAgent,)) {
     return 'phone';
   }
   return 'desktop';
@@ -18524,6 +18563,10 @@ var mockWithWarning = (message,) => {
     warnOnce2(message,);
   };
 };
+var mockWithoutWarning = () => {
+  return () => {
+  };
+};
 var implementation = {
   // We need a default implementation for useImageSource and useImageElement as it is used for rendering image backgrounds which would break otherwise.
   // The default value is used for HTML export and when using the library without Framer.
@@ -18549,11 +18592,13 @@ var runtimeProxy = {
     if (Reflect.has(target, key7,)) {
       return Reflect.get(target, key7, reciever,);
     }
+    if (['getLogger',].includes(String(key7,),)) {
+      return mockWithoutWarning();
+    }
     if (isRuntimeInjected) {
       return mockWithWarning(`${String(key7,)} is not available in this version of Framer.`,);
-    } else {
-      return mockWithWarning(`${String(key7,)} is only available inside of Framer. https://www.framer.com/`,);
     }
+    return mockWithWarning(`${String(key7,)} is only available inside of Framer. https://www.framer.com/`,);
   },
 };
 var runtime = new Proxy(implementation, runtimeProxy,);
@@ -18686,12 +18731,13 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
     'img',
     {
       ref: imageRef,
+      decoding: 'async',
+      loading: image.loading,
+      sizes: measuredSizes != null ? measuredSizes : image.sizes,
+      srcSet: image.srcSet,
       src: source,
       alt: alt != null ? alt : image.alt,
-      srcSet: image.srcSet,
-      sizes: measuredSizes != null ? measuredSizes : image.sizes,
       style: imageStyle,
-      loading: image.loading,
     },
   );
 }
@@ -19821,7 +19867,7 @@ function isEqual(a, b, deep = true,) {
   try {
     return equal(a, b, deep,);
   } catch (error) {
-    if (error instanceof Error && error.message.match(/stack|recursion/i,)) {
+    if (error instanceof Error && /stack|recursion/iu.exec(error.message,)) {
       console.warn('Warning: isEqual does not handle circular references.', error.name, error.message,);
       return false;
     }
@@ -28235,55 +28281,63 @@ function ComponentPresetsConsumer({ componentIdentifier, children, },) {
   const presetProps = (_a = componentPresets[componentIdentifier]) != null ? _a : {};
   return children(presetProps,);
 }
-var ComponentViewportContext = /* @__PURE__ */ React66.createContext({},);
+var cloneChildrenWithPropsAndRef = (children, props, ref,) => {
+  if (React66.Children.count(children,) > 1 && ref) {
+    if (false) {
+      throw new ReferenceError(
+        'cloneChildrenWithPropsAndRef: Only one child should be passed when using refs. Ref assignment will be ignored.',
+      );
+    }
+    ref = void 0;
+  }
+  return React66.Children.map(children, (child,) => {
+    if (React66.isValidElement(child,)) {
+      const hasOwnRef = 'ref' in child && child.ref;
+      const shouldAssign = ref && !hasOwnRef;
+      const newProps = shouldAssign ? { ...props, ref, } : props;
+      return React66.cloneElement(child, newProps,);
+    }
+    return child;
+  },);
+};
+var ComponentViewportContext = /* @__PURE__ */ React67.createContext({},);
 function useComponentViewport() {
-  return React66.useContext(ComponentViewportContext,);
+  return React67.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = React66.forwardRef(
+var ComponentViewportProvider = /* @__PURE__ */ React67.forwardRef(
   ({ width, children, ...rest }, ref,) => {
-    const componentViewport = React66.useMemo(() => {
+    const componentViewport = React67.useMemo(() => {
       return { width, };
     }, [width,],);
-    const childrenWithForwardedProps2 = React66.Children.map(children, (child,) => {
-      var _a;
-      if (React66.isValidElement(child,)) {
-        const props = { ...rest, ref, };
-        if ('ref' in child) {
-          props.ref = (_a = child.ref) != null ? _a : ref;
-        }
-        return React66.cloneElement(child, props,);
-      }
-      return child;
-    },);
-    return /* @__PURE__ */ React66.createElement(
+    return /* @__PURE__ */ React67.createElement(
       ComponentViewportContext.Provider,
       { value: componentViewport, },
-      childrenWithForwardedProps2,
+      cloneChildrenWithPropsAndRef(children, rest, ref,),
     );
   },
 );
 var withGeneratedLayoutId = (Component15,) =>
-  React67.forwardRef((props, ref,) => {
+  React68.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ React67.createElement(Component15, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
+    return /* @__PURE__ */ React68.createElement(Component15, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
   },);
-var Providers = /* @__PURE__ */ React68.forwardRef(
+var Providers = /* @__PURE__ */ React69.forwardRef(
   ({ children, layoutId, ...props }, ref,) => {
     const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
-    return /* @__PURE__ */ React68.createElement(
+    return /* @__PURE__ */ React69.createElement(
       motion.div,
       { layoutId: outerLayoutId, ...props, ref, },
-      /* @__PURE__ */ React68.createElement(
+      /* @__PURE__ */ React69.createElement(
         ComponentContainerContext.Provider,
         { value: true, },
-        /* @__PURE__ */ React68.createElement(
+        /* @__PURE__ */ React69.createElement(
           AutomaticLayoutIds,
           { enabled: false, },
-          /* @__PURE__ */ React68.createElement(
+          /* @__PURE__ */ React69.createElement(
             LayoutGroup,
             { id: layoutId != null ? layoutId : '', inherit: 'id', },
-            React68.Children.map(children, (child,) => {
-              return React68.isValidElement(child,) ? React68.cloneElement(child, { layoutId, },) : child;
+            React69.Children.map(children, (child,) => {
+              return React69.isValidElement(child,) ? React69.cloneElement(child, { layoutId, },) : child;
             },),
           ),
         ),
@@ -28292,7 +28346,7 @@ var Providers = /* @__PURE__ */ React68.forwardRef(
   },
 );
 var Container = /* @__PURE__ */ withGeneratedLayoutId(Providers,);
-var StyleSheetContext = /* @__PURE__ */ React69.createContext(void 0,);
+var StyleSheetContext = /* @__PURE__ */ React70.createContext(void 0,);
 if (isBrowser2()) {
   for (const node of document.querySelectorAll('style[data-framer-css-ssr]',)) {
     document.head.appendChild(node,);
@@ -28313,15 +28367,15 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
 })();
 var styleTagSSRMarker = { 'data-framer-css-ssr': true, };
 var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
-  React70.forwardRef((props, ref,) => {
+  React71.forwardRef((props, ref,) => {
     var _a;
-    const { sheet, cache: cache3, } = (_a = React70.useContext(StyleSheetContext,)) != null ? _a : {};
+    const { sheet, cache: cache3, } = (_a = React71.useContext(StyleSheetContext,)) != null ? _a : {};
     if (!isBrowser2()) {
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ React70.createElement(
-        React70.Fragment,
+      return /* @__PURE__ */ React71.createElement(
+        React71.Fragment,
         null,
-        /* @__PURE__ */ React70.createElement(
+        /* @__PURE__ */ React71.createElement(
           'style',
           {
             ...styleTagSSRMarker,
@@ -28329,19 +28383,19 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
             dangerouslySetInnerHTML: { __html: concatenatedCSS, },
           },
         ),
-        /* @__PURE__ */ React70.createElement(Component15, { ...props, ref, },),
+        /* @__PURE__ */ React71.createElement(Component15, { ...props, ref, },),
       );
     }
-    React70.useInsertionEffect(() => {
+    React71.useInsertionEffect(() => {
       if (componentSerializationId && componentsWithServerRenderedStyles.has(componentSerializationId,)) {
         return;
       }
       const css = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
       css.forEach((rule,) => rule && injectCSSRule(rule, sheet, cache3,));
     }, [],);
-    return /* @__PURE__ */ React70.createElement(Component15, { ...props, ref, },);
+    return /* @__PURE__ */ React71.createElement(Component15, { ...props, ref, },);
   },);
-var CustomCursorContext = /* @__PURE__ */ React71.createContext({
+var CustomCursorContext = /* @__PURE__ */ React722.createContext({
   onRegisterCursors: () => () => {
   },
   registerCursors: () => {
@@ -28349,7 +28403,7 @@ var CustomCursorContext = /* @__PURE__ */ React71.createContext({
 },);
 var replaceCursorClassName = 'framer-cursor-none';
 var cursorComponentClassName = 'framer-pointer-events-none';
-var CustomCursorContextProvider = /* @__PURE__ */ React71.memo(function CustomCursorList({
+var CustomCursorContextProvider = /* @__PURE__ */ React722.memo(function CustomCursorList({
   children,
 },) {
   const value = useConstant2(() => {
@@ -28378,11 +28432,11 @@ var CustomCursorContextProvider = /* @__PURE__ */ React71.memo(function CustomCu
     };
   },);
   const shouldReduceMotion = useReducedMotionConfig();
-  return /* @__PURE__ */ React71.createElement(
+  return /* @__PURE__ */ React722.createElement(
     CustomCursorContext.Provider,
     { value, },
     children,
-    !shouldReduceMotion && /* @__PURE__ */ React71.createElement(CustomCursorComponent, null,),
+    !shouldReduceMotion && /* @__PURE__ */ React722.createElement(CustomCursorComponent, null,),
   );
 },);
 var CustomCursorHost = /* @__PURE__ */ withCSS(CustomCursorContextProvider, [
@@ -28462,17 +28516,17 @@ function isEmptyObject(object,) {
   }
   return true;
 }
-var CustomCursorComponent = /* @__PURE__ */ React71.memo(function CustomCursorComponent2() {
+var CustomCursorComponent = /* @__PURE__ */ React722.memo(function CustomCursorComponent2() {
   var _a;
   const { onRegisterCursors, } = useContext132(CustomCursorContext,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
-  const cursorRef = React71.useRef(null,);
-  const internalState = React71.useRef({ cursors: {}, cursorHash: void 0, },);
+  const cursorRef = React722.useRef(null,);
+  const internalState = React722.useRef({ cursors: {}, cursorHash: void 0, },);
   const forceRender = useForceUpdate3();
   const hasCursors = !isEmptyObject(internalState.current.cursors,);
-  React71.useEffect(() => {
+  React722.useEffect(() => {
     let x2 = 0;
     let y2 = 0;
     function updateValues() {
@@ -28528,7 +28582,7 @@ var CustomCursorComponent = /* @__PURE__ */ React71.memo(function CustomCursorCo
       cancelFrame(updateVariant,);
     };
   }, [opacity, pointerX, pointerY, hasCursors, forceRender,],);
-  React71.useEffect(() => {
+  React722.useEffect(() => {
     function hideCursor() {
       animate(opacity, 0, { type: 'tween', duration: 0.2, },);
     }
@@ -28539,7 +28593,7 @@ var CustomCursorComponent = /* @__PURE__ */ React71.memo(function CustomCursorCo
       safeWindow.removeEventListener('blur', hideCursor,);
     };
   }, [opacity,],);
-  React71.useLayoutEffect(() => {
+  React722.useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
       internalState.current.cursorHash = getCursorHash(pointerX.get(), pointerY.get(),);
@@ -28554,7 +28608,7 @@ var CustomCursorComponent = /* @__PURE__ */ React71.memo(function CustomCursorCo
   const { cursors, cursorHash, } = internalState.current;
   const cursor = cursorHash ? cursors[cursorHash] : null;
   const replaceNativeCursor = customCursorReplacesNativeCursor(cursor,);
-  React71.useLayoutEffect(() => {
+  React722.useLayoutEffect(() => {
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor,],);
   const Cursor = cursor == null ? void 0 : cursor.component;
@@ -28571,14 +28625,14 @@ var CustomCursorComponent = /* @__PURE__ */ React71.memo(function CustomCursorCo
   },);
   const alignment = cursor == null ? void 0 : cursor.alignment;
   const placement = cursor == null ? void 0 : cursor.placement;
-  const transformTemplate2 = React71.useCallback(
+  const transformTemplate2 = React722.useCallback(
     (_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`,
     [alignment, placement,],
   );
   if (!cursor || !Cursor) {
     return null;
   }
-  return /* @__PURE__ */ React71.createElement(
+  return /* @__PURE__ */ React722.createElement(
     Cursor,
     {
       transformTemplate: transformTemplate2,
@@ -28598,7 +28652,7 @@ var CustomCursorComponent = /* @__PURE__ */ React71.memo(function CustomCursorCo
 function useCustomCursors(webPageCursors,) {
   const { registerCursors, } = useContext132(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
-  React71.useLayoutEffect(() => {
+  React722.useLayoutEffect(() => {
     registerCursors(cursors,);
   }, [cursors, registerCursors,],);
 }
@@ -28869,12 +28923,12 @@ function updatePosition(floatingPositionRef, position, rect,) {
     top: ((_b = rect == null ? void 0 : rect.y) != null ? _b : 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
   },);
 }
-var FloatingStackingContext = /* @__PURE__ */ React722.createContext(/* @__PURE__ */ new Set(),);
+var FloatingStackingContext = /* @__PURE__ */ React73.createContext(/* @__PURE__ */ new Set(),);
 function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { safeArea, onDismiss, },) {
   const descendantStackingContext = useConstant2(() => /* @__PURE__ */ new Set());
-  const ancestorStackingContext = React722.useContext(FloatingStackingContext,);
+  const ancestorStackingContext = React73.useContext(FloatingStackingContext,);
   const [isPresent2, safeToRemove,] = usePresence();
-  React722.useEffect(() => {
+  React73.useEffect(() => {
     if (isPresent2) {
       if (!floatingPositionRef.current) {
         return;
@@ -28890,7 +28944,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { 
       safeToRemove();
     }
   }, [isPresent2, floatingPositionRef, ancestorStackingContext,],);
-  React722.useEffect(() => {
+  React73.useEffect(() => {
     if (!safeArea) {
       const handleEscape = (e,) => {
         if (e.key !== 'Escape') {
@@ -28978,7 +29032,7 @@ function childrenWithOrigin(child, { x, y, },) {
     originX: x,
     originY: y,
   };
-  return React722.cloneElement(child, { style, },);
+  return React73.cloneElement(child, { style, },);
 }
 function Floating({
   alignment,
@@ -28997,11 +29051,11 @@ function Floating({
   ...rest
 },) {
   var _a;
-  const floatingPositionRef = React722.useRef(null,);
-  const safeAreaRef = React722.useRef(null,);
-  const contentRef = React722.useRef(null,);
+  const floatingPositionRef = React73.useRef(null,);
+  const safeAreaRef = React73.useRef(null,);
+  const contentRef = React73.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
-  React722.useLayoutEffect(() => {
+  React73.useLayoutEffect(() => {
     if (!isRef(anchorRef,) || !contentRef.current || !placement || !alignment) {
       return;
     }
@@ -29065,7 +29119,7 @@ function Floating({
     onDismiss,
   },);
   return ReactDOM.createPortal(
-    /* @__PURE__ */ React722.createElement(
+    /* @__PURE__ */ React73.createElement(
       'div',
       {
         ref: floatingPositionRef,
@@ -29082,22 +29136,22 @@ function Floating({
         ...rest,
       },
       safeArea
-        ? /* @__PURE__ */ React722.createElement('div', { ref: safeAreaRef, style: { position: 'absolute', }, 'data-safearea': true, },)
-        : /* @__PURE__ */ React722.createElement('div', {
+        ? /* @__PURE__ */ React73.createElement('div', { ref: safeAreaRef, style: { position: 'absolute', }, 'data-safearea': true, },)
+        : /* @__PURE__ */ React73.createElement('div', {
           style: { position: 'fixed', inset: 0, },
           'aria-hidden': true,
           onMouseDown: onDismiss,
         },),
-      /* @__PURE__ */ React722.createElement(
+      /* @__PURE__ */ React73.createElement(
         FloatingStackingContext.Provider,
         { value: descendantContext, },
-        /* @__PURE__ */ React722.createElement('div', { ref: contentRef, }, childrenWithOrigin(children, origin,),),
+        /* @__PURE__ */ React73.createElement('div', { ref: contentRef, }, childrenWithOrigin(children, origin,),),
       ),
     ),
     (_a = document.querySelector(portalSelector,)) != null ? _a : document.body,
   );
 }
-var GeneratedComponentContext = /* @__PURE__ */ React73.createContext(
+var GeneratedComponentContext = /* @__PURE__ */ React74.createContext(
   void 0,
 );
 var LazyValue = class {
@@ -29339,11 +29393,11 @@ function linkFromFramerPageLink(link,) {
     pathVariables: createVariablesFromPageLinkCollectionItem(collectionItem,),
   };
 }
-var pathVariablesRegExp2 = /:([a-zA-Z][a-zA-Z0-9_]*)/g;
-var PathVariablesContext = React74.createContext(void 0,);
+var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
+var PathVariablesContext = React75.createContext(void 0,);
 function useImplicitPathVariables() {
   var _a;
-  const contextPathVariables = React74.useContext(PathVariablesContext,);
+  const contextPathVariables = React75.useContext(PathVariablesContext,);
   const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
@@ -29370,7 +29424,7 @@ function linkMatchesRoute(route, { webPageId, hash: hash2, pathVariables, }, imp
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = React74.useContext(PathVariablesContext,);
+  const contextPathVariables = React75.useContext(PathVariablesContext,);
   if (!route) {
     return false;
   }
@@ -29505,13 +29559,13 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
-var Link = /* @__PURE__ */ React74.forwardRef(
+var Link = /* @__PURE__ */ React75.forwardRef(
   ({ children, href, openInNewTab, smoothScroll, ...restProps }, forwardedRef,) => {
     const router = useRouter();
     const currentRoute = useCurrentRoute();
     const implicitPathVariables = useImplicitPathVariables();
     const { activeLocale, } = useLocaleInfo();
-    const props = React74.useMemo(() => {
+    const props = React75.useMemo(() => {
       var _a;
       if (!href) {
         return {};
@@ -29573,11 +29627,11 @@ var Link = /* @__PURE__ */ React74.forwardRef(
     if (!children) {
       return null;
     }
-    const child = React74.Children.only(children,);
-    if (!React74.isValidElement(child,)) {
+    const child = React75.Children.only(children,);
+    if (!React75.isValidElement(child,)) {
       return null;
     }
-    return React74.cloneElement(child, { ...restProps, ...props, ref: forwardedRef != null ? forwardedRef : restProps.ref, },);
+    return React75.cloneElement(child, { ...restProps, ...props, ref: forwardedRef != null ? forwardedRef : restProps.ref, },);
   },
 );
 function resolveLink(href, router, implicitPathVariables,) {
@@ -29651,26 +29705,26 @@ function PageRoot({
   enableSuspenseThatPreservesDom,
   shouldMarkHydrationEnd = false,
 },) {
-  React75.useLayoutEffect(() => {
+  React76.useLayoutEffect(() => {
     if (shouldMarkHydrationEnd) {
       performance.mark('framer-hydration-end',);
       performance.measure('framer-hydration', 'framer-hydration-start', 'framer-hydration-end',);
     }
   }, [],);
-  React75.useEffect(() => {
+  React76.useEffect(() => {
     if (isWebsite) {
       return;
     }
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ React75.createElement(
+    return /* @__PURE__ */ React76.createElement(
       MotionConfig,
       { reducedMotion: isReducedMotion ? 'user' : 'never', },
-      /* @__PURE__ */ React75.createElement(
+      /* @__PURE__ */ React76.createElement(
         CustomCursorHost,
         null,
-        /* @__PURE__ */ React75.createElement(
+        /* @__PURE__ */ React76.createElement(
           Router,
           {
             initialRoute: routeId,
@@ -29688,17 +29742,17 @@ function PageRoot({
       ),
     );
   } else {
-    const Wrapper = includeDataObserver ? DataObserver : React75.Fragment;
-    return /* @__PURE__ */ React75.createElement(
+    const Wrapper = includeDataObserver ? DataObserver : React76.Fragment;
+    return /* @__PURE__ */ React76.createElement(
       Wrapper,
       null,
-      /* @__PURE__ */ React75.createElement(
+      /* @__PURE__ */ React76.createElement(
         RoutesProvider,
         { routes, },
-        /* @__PURE__ */ React75.createElement(
+        /* @__PURE__ */ React76.createElement(
           NavigationWrapper,
           null,
-          React75.isValidElement(RootComponent,) ? RootComponent : React75.createElement(
+          React76.isValidElement(RootComponent,) ? RootComponent : React76.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
             RootComponent,
@@ -29709,7 +29763,7 @@ function PageRoot({
     );
   }
 }
-var SSRParentVariantsContext = /* @__PURE__ */ React76.createContext(void 0,);
+var SSRParentVariantsContext = /* @__PURE__ */ React77.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function propsForClonedChild(child, props, ref,) {
   var _a;
@@ -29719,14 +29773,14 @@ function propsForClonedChild(child, props, ref,) {
   return { ...props, ref, };
 }
 function childrenWithForwardedProps(children, props, ref,) {
-  return /* @__PURE__ */ React76.createElement(
-    React76.Fragment,
+  return /* @__PURE__ */ React77.createElement(
+    React77.Fragment,
     null,
-    React76.Children.map(children, (child,) => {
+    React77.Children.map(children, (child,) => {
       if (!child || !isReactChild(child,) || !isReactElement(child,)) {
         return null;
       }
-      return React76.cloneElement(child, propsForClonedChild(child, props, ref,),);
+      return React77.cloneElement(child, propsForClonedChild(child, props, ref,),);
     },),
   );
 }
@@ -29740,9 +29794,9 @@ function renderBranchedChildrenFromPropertyOverrides(
   parentVariants,
   type,
 ) {
-  const childrenArray = React76.Children.toArray(children,);
+  const childrenArray = React77.Children.toArray(children,);
   const child = childrenArray[0];
-  if (childrenArray.length !== 1 || !React76.isValidElement(child,)) {
+  if (childrenArray.length !== 1 || !React77.isValidElement(child,)) {
     console.warn(type + ': expected exactly one React element for a child', children,);
     return childrenWithForwardedProps(children, props, ref,);
   }
@@ -29763,7 +29817,7 @@ function renderBranchedChildrenFromPropertyOverrides(
     }
   }
   if (branches.length === 0) {
-    return React76.cloneElement(child, { ...props, ref, },);
+    return React77.cloneElement(child, { ...props, ref, },);
   }
   const remainingVariants = [primaryVariantId, ...nonOverriddenVariants,];
   const effectiveRemainingVariants = intersection(remainingVariants, parentVariants,);
@@ -29771,10 +29825,10 @@ function renderBranchedChildrenFromPropertyOverrides(
     branches.unshift({ variants: effectiveRemainingVariants, },);
   }
   const displayContents = `.${SSRVariantClassName} { display: contents }`;
-  return /* @__PURE__ */ React76.createElement(
-    React76.Fragment,
+  return /* @__PURE__ */ React77.createElement(
+    React77.Fragment,
     null,
-    !parentVariants && /* @__PURE__ */ React76.createElement('style', { ...styleTagSSRMarker, }, displayContents,),
+    !parentVariants && /* @__PURE__ */ React77.createElement('style', { ...styleTagSSRMarker, }, displayContents,),
     branches.map(({ variants, propOverrides, },) => {
       const key7 = variants.join('+',);
       let element = (
@@ -29783,16 +29837,16 @@ function renderBranchedChildrenFromPropertyOverrides(
         // arrays, so it might not really be an optimization. And
         // since it's just a context, it doesn't affect the size of
         // the generated HTML.
-        /* @__PURE__ */ React76.createElement(
+        /* @__PURE__ */ React77.createElement(
           SSRParentVariantsContext.Provider,
           { key: key7, value: new Set(variants,), },
-          React76.cloneElement(child, { ...props, ...propOverrides, ref, },),
+          React77.cloneElement(child, { ...props, ...propOverrides, ref, },),
         )
       );
       const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
       if (hiddenClassNames.length) {
         assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-        element = /* @__PURE__ */ React76.createElement('div', {
+        element = /* @__PURE__ */ React77.createElement('div', {
           key: key7,
           className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
         }, element,);
@@ -29803,19 +29857,19 @@ function renderBranchedChildrenFromPropertyOverrides(
     },),
   );
 }
-var SSRVariants = /* @__PURE__ */ React76.forwardRef(
+var SSRVariants = /* @__PURE__ */ React77.forwardRef(
   function SSRVariants2({ id: nodeId, children, ...props }, ref,) {
     if (isBrowser2()) {
       return childrenWithForwardedProps(children, props, ref,);
     }
-    const generatedComponentContext = React76.useContext(GeneratedComponentContext,);
+    const generatedComponentContext = React77.useContext(GeneratedComponentContext,);
     if (!generatedComponentContext || !generatedComponentContext.variantProps) {
       console.warn('SSRVariants is missing GeneratedComponentContext',);
       return childrenWithForwardedProps(children, props, ref,);
     }
-    const parentVariants = React76.useContext(SSRParentVariantsContext,);
+    const parentVariants = React77.useContext(SSRParentVariantsContext,);
     const { primaryVariantId, variantClassNames, variantProps: variantProps2, } = generatedComponentContext;
-    const overrides = React76.useMemo(() => {
+    const overrides = React77.useMemo(() => {
       const nextOverrides = {};
       for (const [variant, values,] of Object.entries(variantProps2,)) {
         nextOverrides[variant] = values[nodeId];
@@ -29877,18 +29931,18 @@ function propsForBreakpoint(variant, props, overrides,) {
   }
   return { ...props, ...overrides[variant], };
 }
-var PropertyOverrides = /* @__PURE__ */ React76.forwardRef(
+var PropertyOverrides = /* @__PURE__ */ React77.forwardRef(
   function PropertyOverrides2({ breakpoint, overrides, children, ...props }, ref,) {
     if (isBrowser2()) {
       return childrenWithForwardedProps(children, propsForBreakpoint(breakpoint, props, overrides,), ref,);
     }
-    const generatedComponentContext = React76.useContext(GeneratedComponentContext,);
+    const generatedComponentContext = React77.useContext(GeneratedComponentContext,);
     if (!generatedComponentContext) {
       console.warn('PropertyOverrides is missing GeneratedComponentContext',);
       return childrenWithForwardedProps(children, props, ref,);
     }
     const { primaryVariantId, variantClassNames, } = generatedComponentContext;
-    const parentVariants = React76.useContext(SSRParentVariantsContext,);
+    const parentVariants = React77.useContext(SSRParentVariantsContext,);
     return renderBranchedChildrenFromPropertyOverrides(
       overrides,
       children,
@@ -29901,14 +29955,7 @@ var PropertyOverrides = /* @__PURE__ */ React76.forwardRef(
     );
   },
 );
-var cloneWithPropsForwarding = (childrenWithLinks, rest,) =>
-  React77.Children.map(childrenWithLinks, (child,) => {
-    if (React77.isValidElement(child,)) {
-      return React77.cloneElement(child, rest,);
-    }
-    return child;
-  },);
-function ResolveLinks({ links, children, ...rest },) {
+var ResolveLinks = /* @__PURE__ */ React78.forwardRef(function ResolveLinksInner({ links, children, ...rest }, ref,) {
   const router = useRouter();
   const { activeLocale, } = useLocaleInfo();
   const promises = [];
@@ -29948,9 +29995,34 @@ function ResolveLinks({ links, children, ...rest },) {
     throw Promise.allSettled(promises,);
   }
   const childrenWithLinks = children(resolvedLinks,);
-  return cloneWithPropsForwarding(childrenWithLinks, rest,);
-}
+  return /* @__PURE__ */ React78.createElement(React78.Fragment, null, cloneChildrenWithPropsAndRef(childrenWithLinks, rest, ref,),);
+},);
 var callEach = (...fns) => fns.forEach((fn,) => fn && fn());
+var import_archy = __toESM(require_archy(), 1,);
+function getLogger(name,) {
+  return {
+    trace(...args) {
+      var _a;
+      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.trace(...args,);
+    },
+    debug(...args) {
+      var _a;
+      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.debug(...args,);
+    },
+    info(...args) {
+      var _a;
+      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.info(...args,);
+    },
+    warn(...args) {
+      var _a;
+      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.warn(...args,);
+    },
+    error(...args) {
+      var _a;
+      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.error(...args,);
+    },
+  };
+}
 function isLegacyCollectionModule(value,) {
   return isArray(value,) && value.every(isObject2,);
 }
@@ -30010,6 +30082,34 @@ var DatabaseValue = {
       return false;
     }
     return compare(left, right, collation,) >= 0;
+  },
+  stringify(value,) {
+    if (value === null) {
+      return 'null';
+    }
+    switch (value.type) {
+      case 'boolean':
+      case 'number':
+        return String(value.value,);
+      case 'string':
+        return `'${value.value}'`;
+      case 'enum':
+        return `'${value.value}' /* Enum */`;
+      case 'color':
+        return `'${value.value}' /* Color */`;
+      case 'date':
+        return `'${value.value}' /* Date */`;
+      case 'richtext':
+        return 'RichText';
+      case 'responsiveimage':
+        return 'ResponsiveImage';
+      case 'file':
+        return 'File';
+      case 'link':
+        return isString22(value.value,) ? `'${value.value}' /* Link */` : 'Link';
+      default:
+        assertNever(value,);
+    }
   },
 };
 function compare(left, right, collation,) {
@@ -30132,8 +30232,9 @@ function compare(left, right, collation,) {
       }
       return 0;
     }
-    default:
+    default: {
       assertNever(left,);
+    }
   }
 }
 var INDEX_IDENTIFIER = 'index';
@@ -30167,6 +30268,9 @@ var ScalarIdentifier = class extends ScalarExpression {
       this.definition = definition;
     }
   }
+  stringify() {
+    return this.name;
+  }
   equals(other,) {
     return other instanceof ScalarIdentifier && isEqual(this.definition, other.definition,) && isEqual(other.name, this.name,);
   }
@@ -30187,6 +30291,9 @@ var ScalarLiteralValue = class extends ScalarExpression {
     super();
     this.definition = definition;
     this.value = value;
+  }
+  stringify() {
+    return DatabaseValue.stringify(this.value,);
   }
   static fromNull() {
     return new ScalarLiteralValue(null, null,);
@@ -30261,6 +30368,9 @@ var ScalarFunctionCallContains = class extends ScalarFunctionCall {
     __publicField(this, 'sourceExpression', this.getArgumentExpression(0,),);
     __publicField(this, 'targetExpression', this.getArgumentExpression(1,),);
   }
+  stringify() {
+    return `CONTAINS(${this.sourceExpression.stringify()}, ${this.targetExpression.stringify()})`;
+  }
   getValue(source, target,) {
     if (isNull(source,) || source.type !== 'string') {
       return false;
@@ -30295,6 +30405,9 @@ var ScalarFunctionCallStartsWith = class extends ScalarFunctionCall {
     __publicField(this, 'sourceExpression', this.getArgumentExpression(0,),);
     __publicField(this, 'targetExpression', this.getArgumentExpression(1,),);
   }
+  stringify() {
+    return `STARTS_WITH(${this.sourceExpression.stringify()}, ${this.targetExpression.stringify()})`;
+  }
   getValue(source, target,) {
     if (isNull(source,) || source.type !== 'string') {
       return false;
@@ -30328,6 +30441,9 @@ var ScalarFunctionCallEndsWith = class extends ScalarFunctionCall {
     },);
     __publicField(this, 'sourceExpression', this.getArgumentExpression(0,),);
     __publicField(this, 'targetExpression', this.getArgumentExpression(1,),);
+  }
+  stringify() {
+    return `ENDS_WITH(${this.sourceExpression.stringify()}, ${this.targetExpression.stringify()})`;
   }
   getValue(source, target,) {
     if (isNull(source,) || source.type !== 'string') {
@@ -30382,6 +30498,20 @@ var ScalarCase = class extends ScalarExpression {
       }
     }
     this.definition = firstDefinition != null ? firstDefinition : null;
+  }
+  stringify() {
+    let result = 'CASE';
+    if (this.valueExpression) {
+      result += ` ${this.valueExpression.stringify()}`;
+    }
+    for (const { whenExpression, thenExpression, } of this.conditions) {
+      result += ` WHEN ${whenExpression.stringify()} THEN ${thenExpression.stringify()}`;
+    }
+    if (this.elseExpression) {
+      result += ` ELSE ${this.elseExpression.stringify()}`;
+    }
+    result += ' END';
+    return result;
   }
   equals(other,) {
     return other instanceof ScalarCase && isEqual(this.valueExpression, other.valueExpression,) &&
@@ -30443,6 +30573,9 @@ var ScalarUnaryOperationNot = class extends ScalarUnaryOperation {
       isNullable: false,
     },);
   }
+  stringify() {
+    return `NOT ${this.valueExpression.stringify()}`;
+  }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
     return {
@@ -30460,6 +30593,9 @@ var ScalarLogicalOperation = class extends ScalarExpression {
       isNullable: false,
     },);
   }
+  stringify() {
+    return this.operandExpressions.map((expression,) => expression.stringify()).join(' AND ',);
+  }
   equals(other,) {
     return other instanceof ScalarLogicalOperation && isEqual(this.constructor, other.constructor,) &&
       isEqual(this.operandExpressions, other.operandExpressions,);
@@ -30471,6 +30607,10 @@ var ScalarLogicalOperation = class extends ScalarExpression {
   }
 };
 var ScalarLogicalOperationAnd = class extends ScalarLogicalOperation {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', 'AND',);
+  }
   evaluate(item,) {
     const result = this.operandExpressions.every((expression,) => {
       const value = expression.evaluate(item,);
@@ -30483,6 +30623,10 @@ var ScalarLogicalOperationAnd = class extends ScalarLogicalOperation {
   }
 };
 var ScalarLogicalOperationOr = class extends ScalarLogicalOperation {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', 'OR',);
+  }
   evaluate(item,) {
     const result = this.operandExpressions.some((expression,) => {
       const value = expression.evaluate(item,);
@@ -30508,6 +30652,9 @@ var ScalarComparison = class extends ScalarExpression {
       /* CaseInsensitive */
     },);
   }
+  stringify() {
+    return `${this.leftExpression.stringify()} ${this.operator} ${this.rightExpression.stringify()}`;
+  }
   equals(other,) {
     return other instanceof ScalarComparison && isEqual(this.constructor, other.constructor,) &&
       isEqual(this.leftExpression, other.leftExpression,) && isEqual(this.rightExpression, other.rightExpression,);
@@ -30517,6 +30664,10 @@ var ScalarComparison = class extends ScalarExpression {
   }
 };
 var ScalarComparisonEquals = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', '=',);
+  }
   evaluate(item,) {
     const leftValue = this.leftExpression.evaluate(item,);
     const rightValue = this.rightExpression.evaluate(item,);
@@ -30527,6 +30678,10 @@ var ScalarComparisonEquals = class extends ScalarComparison {
   }
 };
 var ScalarComparisonNotEquals = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', '!=',);
+  }
   evaluate(item,) {
     const leftValue = this.leftExpression.evaluate(item,);
     const rightValue = this.rightExpression.evaluate(item,);
@@ -30537,6 +30692,10 @@ var ScalarComparisonNotEquals = class extends ScalarComparison {
   }
 };
 var ScalarComparisonLessThan = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', '<',);
+  }
   evaluate(item,) {
     const leftValue = this.leftExpression.evaluate(item,);
     const rightValue = this.rightExpression.evaluate(item,);
@@ -30547,6 +30706,10 @@ var ScalarComparisonLessThan = class extends ScalarComparison {
   }
 };
 var ScalarComparisonLessThanOrEqual = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', '<=',);
+  }
   evaluate(item,) {
     const leftValue = this.leftExpression.evaluate(item,);
     const rightValue = this.rightExpression.evaluate(item,);
@@ -30557,6 +30720,10 @@ var ScalarComparisonLessThanOrEqual = class extends ScalarComparison {
   }
 };
 var ScalarComparisonGreaterThan = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', '>',);
+  }
   evaluate(item,) {
     const leftValue = this.leftExpression.evaluate(item,);
     const rightValue = this.rightExpression.evaluate(item,);
@@ -30567,6 +30734,10 @@ var ScalarComparisonGreaterThan = class extends ScalarComparison {
   }
 };
 var ScalarComparisonGreaterThanOrEqual = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', '>=',);
+  }
   evaluate(item,) {
     const leftValue = this.leftExpression.evaluate(item,);
     const rightValue = this.rightExpression.evaluate(item,);
@@ -30581,6 +30752,9 @@ var ScalarTypeCast = class extends ScalarExpression {
     super();
     this.valueExpression = valueExpression;
   }
+  stringify() {
+    return `CAST(${this.valueExpression.stringify()} AS ${this.dataType})`;
+  }
   equals(other,) {
     return other instanceof ScalarTypeCast && isEqual(this.constructor, other.constructor,) &&
       isEqual(this.valueExpression, other.valueExpression,);
@@ -30592,6 +30766,7 @@ var ScalarTypeCast = class extends ScalarExpression {
 var ScalarTypeCastBoolean = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
+    __publicField(this, 'dataType', 'BOOLEAN',);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -30621,6 +30796,7 @@ function convertToBoolean(value,) {
 var ScalarTypeCastDate = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
+    __publicField(this, 'dataType', 'DATE',);
     __publicField(this, 'definition', {
       type: 'date',
       isNullable: true,
@@ -30658,6 +30834,7 @@ function convertToDate(value,) {
 var ScalarTypeCastNumber = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
+    __publicField(this, 'dataType', 'NUMBER',);
     __publicField(this, 'definition', {
       type: 'number',
       isNullable: true,
@@ -30694,6 +30871,7 @@ function convertToNumber(value,) {
 var ScalarTypeCastString = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
+    __publicField(this, 'dataType', 'STRING',);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: true,
@@ -30984,14 +31162,36 @@ function createScalarTypeCastString(valueExpression,) {
   }
   return new ScalarTypeCastString(valueExpression,);
 }
+function stringifyExecutionTime(self, total,) {
+  return `(self: ${self}ms${total ? `, total: ${total}ms` : ''})`;
+}
+function stringifyItems(items,) {
+  return `(items: ${items})`;
+}
 var QueryPlan = class {
+  constructor() {
+    __publicField(this, 'executionTime', 0,);
+    __publicField(this, 'itemCount', 0,);
+  }
+  async execute() {
+    const start = performance.now();
+    const result = await this._execute();
+    this.executionTime = performance.now() - start;
+    this.itemCount = result.length;
+    return result;
+  }
 };
 var ScanCollectionPlan = class extends QueryPlan {
   constructor(collection,) {
     super();
     this.collection = collection;
   }
-  async execute() {
+  inspect() {
+    return {
+      label: `ScanCollectionPlan ${stringifyExecutionTime(this.executionTime,)} ${stringifyItems(this.itemCount,)}`,
+    };
+  }
+  async _execute() {
     return this.collection.scanItems();
   }
 };
@@ -31001,7 +31201,39 @@ var LookupIndexPlan = class extends QueryPlan {
     this.index = index;
     this.query = query;
   }
-  async execute() {
+  inspect() {
+    const name = this.index.fields.map((field,) => {
+      if (field.type === 'Identifier') {
+        return `"${field.name}"`;
+      }
+      return field.type;
+    },);
+    const lookup = this.query.map((indexLookup,) => {
+      switch (indexLookup.type) {
+        case 'All':
+          return indexLookup.type;
+        case 'Equals':
+        case 'NotEquals':
+        case 'LessThan':
+        case 'GreaterThan':
+        case 'Contains':
+        case 'StartsWith':
+        case 'EndsWith':
+          return `${indexLookup.type}, ${DatabaseValue.stringify(indexLookup.value,)}`;
+        default: {
+          assertNever(indexLookup,);
+        }
+      }
+    },);
+    return {
+      label: `LookupIndexPlan(${name}, ${lookup}) ${stringifyExecutionTime(this.executionTime,)} ${
+        stringifyItems(
+          this.itemCount,
+        )
+      }`,
+    };
+  }
+  async _execute() {
     return this.index.lookupItems(this.query,);
   }
 };
@@ -31010,7 +31242,22 @@ var UnionPlan = class extends QueryPlan {
     super();
     this.childPlans = childPlans;
   }
-  async execute() {
+  inspect() {
+    const childPlansTime = Math.max(...this.childPlans.map((childPlan,) => {
+      var _a;
+      return (_a = childPlan.executionTime) != null ? _a : 0;
+    },),);
+    return {
+      label: `UnionPlan ${
+        stringifyExecutionTime(
+          this.executionTime - childPlansTime,
+          this.executionTime,
+        )
+      } ${stringifyItems(this.itemCount,)}`,
+      nodes: this.childPlans.map((childPlan,) => childPlan.inspect()),
+    };
+  }
+  async _execute() {
     var _a;
     const childItemMaps = await Promise.all(
       this.childPlans.map(async (childPlan,) => {
@@ -31034,7 +31281,22 @@ var IntersectionPlan = class extends QueryPlan {
     super();
     this.childPlans = childPlans;
   }
-  async execute() {
+  inspect() {
+    const childPlansTime = Math.max(...this.childPlans.map((childPlan,) => {
+      var _a;
+      return (_a = childPlan.executionTime) != null ? _a : 0;
+    },),);
+    return {
+      label: `IntersectionPlan ${
+        stringifyExecutionTime(
+          this.executionTime - childPlansTime,
+          this.executionTime,
+        )
+      } ${stringifyItems(this.itemCount,)} ${stringifyItems(this.itemCount,)}`,
+      nodes: this.childPlans.map((childPlan,) => childPlan.inspect()),
+    };
+  }
+  async _execute() {
     var _a;
     const childItemMaps = await Promise.all(
       this.childPlans.map(async (childPlan,) => {
@@ -31059,7 +31321,18 @@ var ResolveItemsPlan = class extends QueryPlan {
     this.childPlan = childPlan;
     this.collection = collection;
   }
-  async execute() {
+  inspect() {
+    return {
+      label: `ResolveItemsPlan ${
+        stringifyExecutionTime(
+          this.executionTime - this.childPlan.executionTime,
+          this.executionTime,
+        )
+      } ${stringifyItems(this.itemCount,)} ${stringifyItems(this.itemCount,)}`,
+      nodes: [this.childPlan.inspect(),],
+    };
+  }
+  async _execute() {
     const childItems = await this.childPlan.execute();
     const childPointers = childItems.map((item,) => item.pointer);
     return this.collection.resolveItems(childPointers,);
@@ -31071,7 +31344,18 @@ var FilterItemsPlan = class extends QueryPlan {
     this.childPlan = childPlan;
     this.filterExpression = filterExpression;
   }
-  async execute() {
+  inspect() {
+    return {
+      label: `FilterItemsPlan(${this.filterExpression.stringify()}) ${
+        stringifyExecutionTime(
+          this.executionTime - this.childPlan.executionTime,
+          this.executionTime,
+        )
+      } ${stringifyItems(this.itemCount,)} ${stringifyItems(this.itemCount,)}`,
+      nodes: [this.childPlan.inspect(),],
+    };
+  }
+  async _execute() {
     const childItems = await this.childPlan.execute();
     return childItems.filter((item,) => {
       const result = this.filterExpression.evaluate(item,);
@@ -31086,7 +31370,20 @@ var SortItemsPlan = class extends QueryPlan {
     this.orderExpressions = orderExpressions;
     this.collection = collection;
   }
-  async execute() {
+  inspect() {
+    const order = this.orderExpressions.map((expression,) => `${expression.expression.stringify()} ${expression.direction.toUpperCase()}`)
+      .join(', ',);
+    return {
+      label: `SortItemsPlan(${order}) ${
+        stringifyExecutionTime(
+          this.executionTime - this.childPlan.executionTime,
+          this.executionTime,
+        )
+      } ${stringifyItems(this.itemCount,)}`,
+      nodes: [this.childPlan.inspect(),],
+    };
+  }
+  async _execute() {
     const childItems = await this.childPlan.execute();
     return childItems.sort((leftItem, rightItem,) => {
       for (const { expression, direction, collation, } of this.orderExpressions) {
@@ -31126,6 +31423,20 @@ var SliceItemsPlan = class extends QueryPlan {
     this.offsetExpression = offsetExpression;
     this.limitExpression = limitExpression;
   }
+  inspect() {
+    var _a, _b, _c, _d;
+    return {
+      label: `SliceItemsPlan(LIMIT ${
+        (_b = (_a = this.limitExpression) == null ? void 0 : _a.stringify()) != null ? _b : 'Infinity'
+      }, OFFSET ${(_d = (_c = this.offsetExpression) == null ? void 0 : _c.stringify()) != null ? _d : '0'}) ${
+        stringifyExecutionTime(
+          this.executionTime - this.childPlan.executionTime,
+          this.executionTime,
+        )
+      } ${stringifyItems(this.itemCount,)}`,
+      nodes: [this.childPlan.inspect(),],
+    };
+  }
   getOffset() {
     var _a;
     const value = (_a = this.offsetExpression) == null ? void 0 : _a.evaluate();
@@ -31142,7 +31453,7 @@ var SliceItemsPlan = class extends QueryPlan {
     }
     return value.value;
   }
-  async execute() {
+  async _execute() {
     var _a, _b;
     const childItems = await this.childPlan.execute();
     const offset = (_a = this.getOffset()) != null ? _a : 0;
@@ -31181,6 +31492,135 @@ var DatabaseItemMap = class extends Map {
     return [...values,];
   }
 };
+function stringifyIdentifier(data2, expression,) {
+  var _a;
+  if (isDatabaseCollectionModule(data2,)) {
+    const propertyControls = getPropertyControls(data2,);
+    const title = (_a = propertyControls == null ? void 0 : propertyControls[expression.name]) == null ? void 0 : _a.title;
+    if (title) {
+      return `"${expression.name}" /* ${title} */`;
+    }
+  }
+  return `"${expression.name}"`;
+}
+function stringifyLiteralValue(expression,) {
+  if (typeof expression.value === 'string') {
+    return `'${expression.value}'`;
+  }
+  return expression.value;
+}
+function stringifyFunctionCall(data2, expression,) {
+  return `${expression.functionName}(${expression.arguments.map((argument,) => stringifyExpression(data2, argument,)).join(', ',)})`;
+}
+function stringifyCaseExpression(data2, expression,) {
+  let caseString = 'CASE';
+  if (expression.value) {
+    caseString += ` ${stringifyExpression(data2, expression.value,)}`;
+  }
+  for (const condition of expression.conditions) {
+    caseString += ` WHEN ${stringifyExpression(data2, condition.when,)} THEN ${
+      stringifyExpression(
+        data2,
+        condition.then,
+      )
+    }`;
+  }
+  if (expression.else) {
+    caseString += ` ELSE ${expression.else}`;
+  }
+  caseString += ' END';
+  return caseString;
+}
+function stringifyUnaryOperation(data2, expression,) {
+  const value = stringifyExpression(data2, expression.value,);
+  const operator = expression.operator.toUpperCase();
+  return `${operator} ${value}`;
+}
+function stringifyBinaryOperation(data2, expression,) {
+  const left = stringifyExpression(data2, expression.left,);
+  const right = stringifyExpression(data2, expression.right,);
+  const operator = expression.operator.toUpperCase();
+  return `${left} ${operator} ${right}`;
+}
+function stringifyTypeCast(data2, expression,) {
+  return `CAST(${stringifyExpression(data2, expression.value,)} as ${expression.dataType})`;
+}
+function stringifyExpression(data2, expression,) {
+  switch (expression.type) {
+    case 'Identifier':
+      return stringifyIdentifier(data2, expression,);
+    case 'LiteralValue':
+      return stringifyLiteralValue(expression,);
+    case 'FunctionCall':
+      return stringifyFunctionCall(data2, expression,);
+    case 'Case':
+      return stringifyCaseExpression(data2, expression,);
+    case 'UnaryOperation':
+      return stringifyUnaryOperation(data2, expression,);
+    case 'BinaryOperation':
+      return stringifyBinaryOperation(data2, expression,);
+    case 'TypeCast':
+      return stringifyTypeCast(data2, expression,);
+    default: {
+      assertNever(expression,);
+    }
+  }
+}
+function autoIndentSql(sql,) {
+  let formattedSql = '';
+  const tokens = sql.split(/\s+/u,);
+  tokens.forEach((token,) => {
+    if (token === '') {
+      return;
+    }
+    if (['SELECT', 'FROM', 'WHERE', 'ORDER', 'LIMIT', 'OFFSET',].includes(token,)) {
+      formattedSql += `
+${token}`;
+    } else if (['AND', 'OR',].includes(token,)) {
+      formattedSql += `
+	${token}`;
+    } else {
+      formattedSql += ` ${token}`;
+    }
+  },);
+  return formattedSql.trim();
+}
+function stringifyQuery(query,) {
+  let queryString = '';
+  queryString += `SELECT ${
+    query.select.map((selectExpression,) => {
+      const expressionString = stringifyExpression(query.from.data, selectExpression,);
+      if (selectExpression.alias) {
+        return `${expressionString} AS ${selectExpression.alias}`;
+      }
+      return expressionString;
+    },).join(', ',)
+  }`;
+  if (isDatabaseCollectionModule(query.from.data,)) {
+    queryString += ` FROM ${query.from.data.displayName}`;
+  } else {
+    queryString += ` FROM ${query.from.data.displayName}`;
+  }
+  if (query.where) {
+    queryString += ` WHERE ${stringifyExpression(query.from.data, query.where,)}`;
+  }
+  if (query.orderBy) {
+    queryString += ` ORDER BY ${
+      query.orderBy.map((orderExpression,) => {
+        var _a;
+        return `${stringifyExpression(query.from.data, orderExpression,)} ${(_a = orderExpression.direction) != null ? _a : 'asc'}`;
+      },).join(', ',)
+    }`;
+  }
+  if (query.limit) {
+    queryString += ` LIMIT ${stringifyExpression(query.from.data, query.limit,)}`;
+  }
+  if (query.offset) {
+    queryString += ` OFFSET ${stringifyExpression(query.from.data, query.offset,)}`;
+  }
+  return autoIndentSql(queryString,);
+}
+var log = getLogger('query-engine',);
 function getDatabaseCollection({ data: data2, }, locale,) {
   if (isDatabaseCollectionModule(data2,)) {
     while (locale) {
@@ -31197,8 +31637,12 @@ function getDatabaseCollection({ data: data2, }, locale,) {
 var QueryEngine = class {
   async query(query, locale,) {
     const [collection, plan,] = this.createQueryPlan(query, locale,);
-    console.log('Query Plan:', query, plan,);
-    return this.executeQueryPlan(collection, query, plan,);
+    const items = await this.executeQueryPlan(collection, query, plan,);
+    log.debug(`Query:
+${stringifyQuery(query,)}
+
+${(0, import_archy.default)(plan.inspect(),)}`,);
+    return items;
   }
   createQueryPlan(query, locale,) {
     var _a;
@@ -31543,20 +31987,20 @@ function useActiveVariantCallback(baseVariant,) {
   useOnCurrentTargetChange(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   },);
-  React78.useEffect(() => {
+  React79.useEffect(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   }, [pendingPromises, pendingTimers,],);
-  React78.useEffect(() => {
+  React79.useEffect(() => {
     rejectPending(pendingTimers, pendingPromises,);
   }, [baseVariant, pendingPromises, pendingTimers,],);
-  return React78.useRef({
+  return React79.useRef({
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */
     activeVariantCallback: (callback,) => (...args) => {
       return new Promise((resolve, reject,) => {
         pendingPromises.add(reject,);
-        return callback(...args,).then(resolve,);
+        callback(...args,).then(resolve,);
       },).catch(() => {
       },);
     },
@@ -31573,13 +32017,13 @@ function useActiveVariantCallback(baseVariant,) {
 }
 function useActiveTargetCallback() {
   const value = useActiveVariantCallback(void 0,);
-  return React78.useRef({
+  return React79.useRef({
     activeTargetCallback: value.activeVariantCallback,
     delay: value.delay,
   },).current;
 }
 function useAddVariantProps(baseVariant, gestureVariant, variantProps2,) {
-  return React79.useCallback(
+  return React80.useCallback(
     (id3,) => {
       var _a, _b, _c;
       if (!variantProps2) {
@@ -31710,7 +32154,7 @@ function useDataRecord(collection, variables,) {
 }
 function useDynamicRefs() {
   const map = useConstant2(() => /* @__PURE__ */ new Map());
-  return React80.useCallback(
+  return React81.useCallback(
     (key7,) => {
       const existing = map.get(key7,);
       if (existing) {
@@ -31811,7 +32255,7 @@ function createGamepadPoller() {
   };
 }
 var gamepadPoller = /* @__PURE__ */ createGamepadPoller();
-var GamepadContext = /* @__PURE__ */ React81.createContext(gamepadPoller,);
+var GamepadContext = /* @__PURE__ */ React822.createContext(gamepadPoller,);
 function getGamepadInputs() {
   let firstConnectedGamepad = null;
   const gamepads = navigator.getGamepads();
@@ -31860,16 +32304,16 @@ function isButtonPressed(button,) {
   return button.pressed === true || button.value > 0;
 }
 function useGamepad(input, callback, { mapping, on, } = {},) {
-  const context = React81.useContext(GamepadContext,);
+  const context = React822.useContext(GamepadContext,);
   const settings = useConstant2(() => ({
     mapping: mapping != null ? mapping : 'standard',
     on: on != null ? on : 'keydown',
   }));
-  const stateRef = React81.useRef({
+  const stateRef = React822.useRef({
     pressed: false,
     handler: callback,
   },);
-  const cb = React81.useCallback(
+  const cb = React822.useCallback(
     (gamepad,) => {
       const { pressed, handler, } = stateRef.current;
       if (gamepad.inputs.includes(input,) && settings.mapping === gamepad.mapping) {
@@ -31891,10 +32335,10 @@ function useGamepad(input, callback, { mapping, on, } = {},) {
     }
     return () => context.unregister(cb,);
   }, [],);
-  React81.useEffect(() => {
+  React822.useEffect(() => {
     return () => context.unregister(cb,);
   }, [cb, context,],);
-  React81.useEffect(() => {
+  React822.useEffect(() => {
     stateRef.current.handler = callback;
   }, [callback,],);
 }
@@ -31921,13 +32365,13 @@ function createShortcutDefinition(shortcut,) {
   };
 }
 function useHotkey(shortcut, callback,) {
-  const inTarget = React822.useRef(true,);
+  const inTarget = React83.useRef(true,);
   const shortcutDefinition = useConstant2(() => createShortcutDefinition(shortcut,));
   useOnCurrentTargetChange((isCurrentTarget, isOverlayed,) => {
     inTarget.current = isCurrentTarget && !isOverlayed;
     return () => inTarget.current = false;
   },);
-  const eventHandler = React822.useCallback(
+  const eventHandler = React83.useCallback(
     (event,) => {
       if (!shortcutDefinition) {
         return;
@@ -31943,7 +32387,7 @@ function useHotkey(shortcut, callback,) {
     },
     [shortcutDefinition, callback,],
   );
-  React822.useEffect(() => {
+  React83.useEffect(() => {
     document.addEventListener('keydown', eventHandler,);
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
@@ -31980,8 +32424,8 @@ function useOnVariantChange(variant, callbackMap,) {
   if (isOnFramerCanvas) {
     return;
   }
-  const isActiveScreenRef = React83.useRef(true,);
-  const callbackMapRef = React83.useRef(callbackMap,);
+  const isActiveScreenRef = React84.useRef(true,);
+  const callbackMapRef = React84.useRef(callbackMap,);
   useOnCurrentTargetChange((isCurrent, isOverlayed,) => {
     const isActiveScreen = isCurrent && !isOverlayed;
     if (!isActiveScreenRef.current && isActiveScreen) {
@@ -31992,7 +32436,7 @@ function useOnVariantChange(variant, callbackMap,) {
     }
     isActiveScreenRef.current = isActiveScreen;
   }, [],);
-  React83.useEffect(() => {
+  React84.useEffect(() => {
     if (isActiveScreenRef.current) {
       const callback = callbackForVariant(callbackMapRef.current, variant,);
       if (callback) {
@@ -32005,8 +32449,8 @@ function useOnAppear(callback,) {
   useOnVariantChange('default', { default: callback, },);
 }
 function useOverlayState({ blockDocumentScrolling = true, } = {},) {
-  const [showOverlay, setShowOverlay,] = React84.useState(false,);
-  const callback = React84.useCallback(
+  const [showOverlay, setShowOverlay,] = React85.useState(false,);
+  const callback = React85.useCallback(
     (show,) => {
       setShowOverlay(show,);
       if (blockDocumentScrolling === false) {
@@ -32020,7 +32464,7 @@ function useOverlayState({ blockDocumentScrolling = true, } = {},) {
     },
     [blockDocumentScrolling,],
   );
-  React84.useEffect(
+  React85.useEffect(
     () => () => {
       if (blockDocumentScrolling === false) {
         return;
@@ -32039,13 +32483,13 @@ async function componentForRoute(route,) {
   if (!routeComponent) {
     return;
   }
-  if (React85.isValidElement(routeComponent,)) {
+  if (React86.isValidElement(routeComponent,)) {
     return routeComponent;
   }
   if (withPreload(routeComponent,)) {
     await routeComponent.preload();
   }
-  return React85.createElement(routeComponent, { key: route.path, },);
+  return React86.createElement(routeComponent, { key: route.path, },);
 }
 var preloadKey2 = 'preload';
 function withPreload(component,) {
@@ -32055,7 +32499,7 @@ function usePrototypeNavigate({ preload, } = {},) {
   const navigation = useNavigation();
   const { getRoute, } = useRouter();
   const onCanvas = useIsOnFramerCanvas();
-  React85.useEffect(() => {
+  React86.useEffect(() => {
     if (!navigation || onCanvas) {
       return;
     }
@@ -32089,7 +32533,7 @@ function usePrototypeNavigate({ preload, } = {},) {
     const Component15 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {
       },)
-      : React85.isValidElement(target,)
+      : React86.isValidElement(target,)
       ? target
       : null;
     if (!Component15) {
@@ -32309,7 +32753,7 @@ function useExecuteSelect(data2, select,) {
     var _a;
     const selected = {};
     for (const expression of select) {
-      const name = (_a = expression.alias) != null ? _a : stringifyExpression(expression,);
+      const name = (_a = expression.alias) != null ? _a : stringifyExpression2(expression,);
       selected[name] = evaluateExpression(expression, {
         resolveIdentifier(identifier,) {
           const value = item[identifier];
@@ -32586,7 +33030,7 @@ function evaluateTypeCast(expression, context,) {
     }
   }
 }
-function stringifyExpression(expression,) {
+function stringifyExpression2(expression,) {
   switch (expression.type) {
     case 'Identifier': {
       return expression.name;
@@ -32718,7 +33162,7 @@ function useVariantState({
 },) {
   const forceUpdate = useForceUpdate3();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
-  const internalState = React86.useRef({
+  const internalState = React87.useRef({
     isHovered: false,
     isPressed: false,
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
@@ -32732,7 +33176,7 @@ function useVariantState({
     cycleOrder: externalCycleOrder,
     transitions: externalTransitions,
   },);
-  const resolveNextVariant = React86.useCallback(
+  const resolveNextVariant = React87.useCallback(
     (targetBaseVariant,) => {
       const { isHovered: isHovered2, isPressed: isPressed2, enabledGestures: enabledGestures2, defaultVariant: defaultVariant2, } =
         internalState.current;
@@ -32743,7 +33187,7 @@ function useVariantState({
     },
     [validBaseVariants,],
   );
-  const setGestureState = React86.useCallback(
+  const setGestureState = React87.useCallback(
     ({ isHovered: isHovered2, isPressed: isPressed2, },) => {
       if (isHovered2 !== void 0) {
         internalState.current.isHovered = isHovered2;
@@ -32761,7 +33205,7 @@ function useVariantState({
     },
     [resolveNextVariant, forceUpdate,],
   );
-  const setVariant = React86.useCallback(
+  const setVariant = React87.useCallback(
     (proposedVariant,) => {
       const { defaultVariant: defaultVariant2, cycleOrder, baseVariant: baseVariant2, gestureVariant: gestureVariant2, } =
         internalState.current;
@@ -32791,7 +33235,7 @@ function useVariantState({
     internalState.current.gestureVariant,
     variantProps2,
   );
-  return React86.useMemo(() => {
+  return React87.useMemo(() => {
     const variants = [];
     if (baseVariant !== defaultVariant) {
       variants.push(baseVariant,);
@@ -32845,7 +33289,7 @@ function withMappedReactProps(Component15, info,) {
     for (const key7 in rawProps) {
       asRecord(props,)[(_a = mapping == null ? void 0 : mapping[key7]) != null ? _a : key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ React87.createElement(Component15, { ...props, },);
+    return /* @__PURE__ */ React88.createElement(Component15, { ...props, },);
   };
 }
 var keys2 = /* @__PURE__ */ new Set([
@@ -32884,12 +33328,12 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
   return { inputRange: [0, Math.max(firstItem - 1, 0,), ...inputRange,], outputRange: [-1, -1, ...outputRange,], };
 }
 var withVariantAppearEffect = (Component15,) =>
-  React88.forwardRef(
+  React89.forwardRef(
     (props, forwardedRef,) => {
       if (RenderTarget.current() === 'CANVAS') {
-        return /* @__PURE__ */ React88.createElement(Component15, { ...props, ref: forwardedRef, },);
+        return /* @__PURE__ */ React89.createElement(Component15, { ...props, ref: forwardedRef, },);
       }
-      const fallbackRef = React88.useRef(null,);
+      const fallbackRef = React89.useRef(null,);
       const ref = forwardedRef != null ? forwardedRef : fallbackRef;
       const [options, rest,] = extractPrefixedProps(props, keys2,);
       const {
@@ -32902,8 +33346,8 @@ var withVariantAppearEffect = (Component15,) =>
         exitTarget,
         scrollDirection,
       } = options;
-      const [activeVariant, setVariant,] = React88.useState(obscuredVariantId,);
-      const animateState = React88.useRef(false,);
+      const [activeVariant, setVariant,] = React89.useState(obscuredVariantId,);
+      const animateState = React89.useRef(false,);
       useAppearEffect(
         ref,
         (appears,) => {
@@ -32934,7 +33378,7 @@ var withVariantAppearEffect = (Component15,) =>
           },
         },
       );
-      React88.useEffect(() => {
+      React89.useEffect(() => {
         if (scrollDirection) {
           return;
         }
@@ -32974,18 +33418,18 @@ var withVariantAppearEffect = (Component15,) =>
         repeat: !animateOnce,
       },);
       if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-        return /* @__PURE__ */ React88.createElement(Component15, {
+        return /* @__PURE__ */ React89.createElement(Component15, {
           ...rest,
           variant: activeVariant != null ? activeVariant : props.variant,
           ref,
         },);
       } else {
-        return /* @__PURE__ */ React88.createElement(Component15, { ...rest, },);
+        return /* @__PURE__ */ React89.createElement(Component15, { ...rest, },);
       }
     },
   );
 var withVariantFX = (Component15,) =>
-  React89.forwardRef(
+  React90.forwardRef(
     ({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
       const ref = useRef14();
       const effect = usePresenceAnimation(
@@ -32997,7 +33441,7 @@ var withVariantFX = (Component15,) =>
         forwardedRef != null ? forwardedRef : ref,
         true,
       );
-      return /* @__PURE__ */ React89.createElement(Component15, {
+      return /* @__PURE__ */ React90.createElement(Component15, {
         ...props,
         style: { ...props == null ? void 0 : props.style, ...effect.values, },
         ref: forwardedRef != null ? forwardedRef : ref,
@@ -33047,10 +33491,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
     }
     renderErrorPlaceholder(file, error,) {
       const { RenderPlaceholder, } = runtime;
-      return /* @__PURE__ */ React90.createElement(
+      return /* @__PURE__ */ React91.createElement(
         FrameWithMotion,
         { ...this.props, background: null, },
-        /* @__PURE__ */ React90.createElement(RenderPlaceholder, { error: { error, file, }, },),
+        /* @__PURE__ */ React91.createElement(RenderPlaceholder, { error: { error, file, }, },),
       );
     }
     render() {
@@ -33107,18 +33551,18 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
           heightType,
           ...childProps
         } = frameProps;
-        children = React90.Children.map(originalChildren, (child,) => {
+        children = React91.Children.map(originalChildren, (child,) => {
           if (!isReactChild(child,) || !isReactElement(child,)) {
             return child;
           }
           if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ React90.createElement(
+            return /* @__PURE__ */ React91.createElement(
               LayoutGroup,
               { inherit: false, id: this.props.__layoutId, },
-              /* @__PURE__ */ React90.createElement(AutomaticLayoutIds, { enabled: false, }, React90.cloneElement(child, childProps,),),
+              /* @__PURE__ */ React91.createElement(AutomaticLayoutIds, { enabled: false, }, React91.cloneElement(child, childProps,),),
             );
           }
-          return React90.cloneElement(child, childProps,);
+          return React91.cloneElement(child, childProps,);
         },);
         frameProps = {
           style,
@@ -33156,10 +33600,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
          * that is passed to be rendered here
          * See the stackBackgroundTest.tsx integration test for an example of such a case
          */
-        /* @__PURE__ */ React90.createElement(
+        /* @__PURE__ */ React91.createElement(
           ComponentContainerContext.Provider,
           { value: true, },
-          /* @__PURE__ */ React90.createElement(
+          /* @__PURE__ */ React91.createElement(
             FrameWithMotion,
             {
               'data-framer-component-container': true,
@@ -33407,10 +33851,10 @@ function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
   const imageId = `id${id3}g${'-fillImage'}`;
   return { id: imageId, path: (_d = fill.src) != null ? _d : '', transform: transform2, width, height, offsetX, offsetY, };
 }
-var WindowContext = /* @__PURE__ */ React91.createContext(
+var WindowContext = /* @__PURE__ */ React922.createContext(
   void 0,
 );
-var useProvidedWindow = () => React91.useContext(WindowContext,);
+var useProvidedWindow = () => React922.useContext(WindowContext,);
 var mediaType2 = 'framer/asset-reference,';
 function isAssetReference(value,) {
   return value.startsWith(`data:${mediaType2}`,);
@@ -33445,7 +33889,7 @@ var ImagePatternElement = ({
   offsetY,
 },) => {
   const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ React922.createElement(
+  return /* @__PURE__ */ React93.createElement(
     'pattern',
     {
       id: id3,
@@ -33456,7 +33900,7 @@ var ImagePatternElement = ({
       x: repeat ? offsetX : void 0,
       y: repeat ? offsetY : void 0,
     },
-    /* @__PURE__ */ React922.createElement(
+    /* @__PURE__ */ React93.createElement(
       'image',
       {
         key: href,
@@ -33633,7 +34077,7 @@ function prefixIdsInSVG(svg, prefix2,) {
   recursivelyPrefixId(svg, sanitizedPrefix,);
 }
 function sanitizeString(str,) {
-  return str.replace(/[^a-z0-9\-_:.]|^[^a-z]+/gi, '',);
+  return str.replace(/[^\w\-:.]|^[^a-z]+/gi, '',);
 }
 function recursivelyPrefixId(el, prefix2,) {
   prefixId(el, prefix2,);
@@ -33686,7 +34130,7 @@ function parseLength(value,) {
   if (!value) {
     return;
   }
-  const m2 = /(-?[0-9.]+)([a-z%]*)/.exec(value,);
+  const m2 = /(-?[\d.]+)([a-z%]*)/.exec(value,);
   if ((m2 == null ? void 0 : m2[1]) === void 0 || (m2 == null ? void 0 : m2[2]) === void 0) {
     return;
   }
@@ -33709,10 +34153,10 @@ function getSVGSize(svg,) {
 function SVG(props,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const layoutRef = React93.useRef(null,);
+  const layoutRef = React94.useRef(null,);
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ React93.createElement(
+  return /* @__PURE__ */ React94.createElement(
     SVGComponent,
     {
       ...props,
@@ -33772,7 +34216,7 @@ function sizeSVG(container, props,) {
   svg.setAttribute('height', '100%',);
 }
 function SVGStyleSheet() {
-  React93.useInsertionEffect(() => {
+  React94.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -33782,7 +34226,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
   return _a = class extends Layer {
     constructor() {
       super(...arguments,);
-      __publicField(this, 'container', React93.createRef(),);
+      __publicField(this, 'container', React94.createRef(),);
       __publicField(this, 'svgElement', null,);
       __publicField(this, 'setSVGElement', (element,) => {
         this.svgElement = element;
@@ -33934,7 +34378,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${LinearGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const { stops, x1, x2, y1, y2, } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ React93.createElement(
+        fillElement = /* @__PURE__ */ React94.createElement(
           'svg',
           {
             ref: this.setSVGElement,
@@ -33943,11 +34387,11 @@ var SVGComponent = /* @__PURE__ */ (() => {
             height: '100%',
             style: { position: 'absolute', },
           },
-          /* @__PURE__ */ React93.createElement(
+          /* @__PURE__ */ React94.createElement(
             'linearGradient',
             { id: gradientId, x1, x2, y1, y2, },
             stops.map((stop, idx,) => {
-              return /* @__PURE__ */ React93.createElement(
+              return /* @__PURE__ */ React94.createElement(
                 'stop',
                 {
                   key: idx,
@@ -33964,7 +34408,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ React93.createElement(
+        fillElement = /* @__PURE__ */ React94.createElement(
           'svg',
           {
             ref: this.setSVGElement,
@@ -33973,7 +34417,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
             height: '100%',
             style: { position: 'absolute', },
           },
-          /* @__PURE__ */ React93.createElement(
+          /* @__PURE__ */ React94.createElement(
             'radialGradient',
             {
               id: gradientId,
@@ -33982,7 +34426,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
               r: gradient.widthFactor,
             },
             elementProperties.stops.map((stop, idx,) => {
-              return /* @__PURE__ */ React93.createElement(
+              return /* @__PURE__ */ React94.createElement(
                 'stop',
                 {
                   key: idx,
@@ -33998,7 +34442,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const imagePattern = imagePatternPropsForFill(fill, size2, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ React93.createElement(
+          fillElement = /* @__PURE__ */ React94.createElement(
             'svg',
             {
               ref: this.setSVGElement,
@@ -34008,10 +34452,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
               height: '100%',
               style: { position: 'absolute', },
             },
-            /* @__PURE__ */ React93.createElement(
+            /* @__PURE__ */ React94.createElement(
               'defs',
               null,
-              /* @__PURE__ */ React93.createElement(ImagePatternElement, { ...imagePattern, },),
+              /* @__PURE__ */ React94.createElement(ImagePatternElement, { ...imagePattern, },),
             ),
           );
         }
@@ -34039,11 +34483,11 @@ var SVGComponent = /* @__PURE__ */ (() => {
         if (hasBorderRadius(outerStyle,)) {
           outerStyle.overflow = 'hidden';
         }
-        content = /* @__PURE__ */ React93.createElement(
-          React93.Fragment,
+        content = /* @__PURE__ */ React94.createElement(
+          React94.Fragment,
           null,
           fillElement,
-          /* @__PURE__ */ React93.createElement(
+          /* @__PURE__ */ React94.createElement(
             'div',
             {
               key: BackgroundImage.isImageObject(fill,) ? fill.src : '',
@@ -34057,7 +34501,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
       }
       const MotionComponent = htmlElementAsMotionComponent(this.props.as,);
       const { href, target, rel, onClick, } = this.props;
-      return /* @__PURE__ */ React93.createElement(
+      return /* @__PURE__ */ React94.createElement(
         MotionComponent,
         {
           ...dataProps,
@@ -34076,7 +34520,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           ...{ href, target, rel, onClick, },
         },
         content,
-        /* @__PURE__ */ React93.createElement(SVGStyleSheet, null,),
+        /* @__PURE__ */ React94.createElement(SVGStyleSheet, null,),
       );
     }
   },
@@ -34170,6 +34614,7 @@ var import_process4 = __toESM(require_browser(), 1,);
 var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2,) => {
   FontSourceNames2['Google'] = 'google';
   FontSourceNames2['Fontshare'] = 'fontshare';
+  FontSourceNames2['Framer'] = 'framer';
   FontSourceNames2['Local'] = 'local';
   FontSourceNames2['Custom'] = 'custom';
   return FontSourceNames2;
@@ -34254,7 +34699,7 @@ var CustomFontSource = class {
       (value,) => tokens.includes(value,) || tokens.includes(value.replace(/\s+/g, '',),),
     );
     if (foundToken) {
-      return foundToken.replace(/(^\w|\s\w)/g, (char,) => char.toUpperCase(),);
+      return foundToken.replace(/^\w|\s\w/g, (char,) => char.toUpperCase(),);
     }
     return 'Regular';
   }
@@ -34397,7 +34842,7 @@ var weightNameToNumber = {
   // Alternative name for "black".
 };
 var weightNames = Object.keys(weightNameToNumber,);
-var allowedVariantsRegex = new RegExp(`^(${[...weightNames, 'italic',].join('|',)})`,);
+var allowedVariantsRegex = new RegExp(`^(?:${[...weightNames, 'italic',].join('|',)})`, 'u',);
 var FontshareSource = class {
   constructor() {
     __publicField(
@@ -34521,6 +34966,81 @@ function mapToKnownCategory(categoryString,) {
   const category = parseFontshareCategories(categoryString,)[0];
   return category && categoryMapping[category];
 }
+var framerFontPrefix = 'Inter';
+var weightNameToNumber2 = {
+  Thin: 100,
+  ExtraLight: 200,
+  Light: 300,
+  '': 400,
+  // Regular weights have a selector like "Inter" or "Inter-Italic", with no mention of weight.
+  Medium: 500,
+  SemiBold: 600,
+  Bold: 700,
+  ExtraBold: 800,
+  Black: 900,
+};
+var FramerFontSource = class {
+  constructor() {
+    __publicField(
+      this,
+      'name',
+      'framer',
+      /* Framer */
+    );
+    __publicField(this, 'fontFamilies', [],);
+    __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
+  }
+  getFontFamilyByName(family,) {
+    var _a;
+    return (_a = this.byFamilyName.get(family,)) != null ? _a : null;
+  }
+  addFontFamily(familyName,) {
+    const fontFamily = { name: familyName, fonts: [], source: this.name, };
+    this.fontFamilies.push(fontFamily,);
+    this.byFamilyName.set(fontFamily.name, fontFamily,);
+    return fontFamily;
+  }
+  static getDraftFontPropertiesBySelector(selector,) {
+    if (!selector.startsWith(framerFontPrefix,)) {
+      return null;
+    }
+    const tokens = selector.split('-',);
+    const [family, weightAndStyleInfo = '',] = tokens;
+    if (!family) {
+      return null;
+    }
+    const style = weightAndStyleInfo.includes('Italic',) ? 'italic' : 'normal';
+    const weightName = weightAndStyleInfo.replace('Italic', '',);
+    const weight = weightName && weightNameToNumber2[weightName] || 400;
+    return {
+      family,
+      style,
+      weight,
+      source: 'framer',
+      variant: void 0,
+      category: 'sans-serif',
+    };
+  }
+  importFonts(framerFonts,) {
+    this.fontFamilies.length = 0;
+    this.byFamilyName.clear();
+    const fonts = [];
+    framerFonts.forEach((framerFont,) => {
+      const { familyName, ...rest } = framerFont;
+      let fontFamily = this.getFontFamilyByName(familyName,);
+      if (!fontFamily) {
+        fontFamily = this.addFontFamily(familyName,);
+      }
+      const font = {
+        ...rest,
+        family: fontFamily,
+      };
+      fontFamily.fonts.push(font,);
+      fonts.push(font,);
+    },);
+    return fonts;
+  }
+};
 var googleFontSelectorPrefix = 'GF;';
 var GoogleFontSource = class {
   constructor() {
@@ -34541,7 +35061,7 @@ var GoogleFontSource = class {
     if (variant === 'regular') {
       return { style: 'normal', weight: 400, };
     }
-    const match = /([0-9]*)(normal|italic)?/.exec(variant,);
+    const match = /(\d*)(normal|italic)?/.exec(variant,);
     if (!match) {
       return null;
     }
@@ -34938,7 +35458,6 @@ var LocalFontSource = class {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
     __publicField(this, 'fontAliasBySelector', /* @__PURE__ */ new Map(),);
     __publicField(this, 'fontAliases', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'interFontSelectors', /* @__PURE__ */ new Set(),);
   }
   getFontFamilyByName(family,) {
     var _a;
@@ -34989,174 +35508,7 @@ var LocalFontSource = class {
       this.addFontAlias(key7, value,);
     }
     fonts.push(...systemFontFamily.fonts,);
-    const interFontFamily = this.importInterFontFamily();
-    fonts.push(...interFontFamily.fonts,);
     return fonts;
-  }
-  importInterFontFamily() {
-    const inter = [
-      {
-        variant: 'Regular',
-        selector: 'Inter',
-        weight: 400,
-        selectorBold: 'Inter-Bold',
-        selectorBoldItalic: 'Inter-BoldItalic',
-        selectorItalic: 'Inter-Italic',
-      },
-      {
-        variant: 'Thin',
-        selector: 'Inter-Thin',
-        weight: 100,
-        selectorBold: 'Inter',
-        selectorBoldItalic: 'Inter-Italic',
-        selectorItalic: 'Inter-ThinItalic',
-      },
-      {
-        variant: 'Extra Light',
-        selector: 'Inter-ExtraLight',
-        weight: 200,
-        selectorBold: 'Inter',
-        selectorBoldItalic: 'Inter-Italic',
-        selectorItalic: 'Inter-ExtraLightItalic',
-      },
-      {
-        variant: 'Light',
-        selector: 'Inter-Light',
-        weight: 300,
-        selectorBold: 'Inter',
-        selectorBoldItalic: 'Inter-Italic',
-        selectorItalic: 'Inter-LightItalic',
-      },
-      {
-        variant: 'Medium',
-        selector: 'Inter-Medium',
-        weight: 500,
-        selectorBold: 'Inter-Bold',
-        selectorBoldItalic: 'Inter-BoldItalic',
-        selectorItalic: 'Inter-MediumItalic',
-      },
-      {
-        variant: 'Semibold',
-        selector: 'Inter-SemiBold',
-        weight: 600,
-        selectorBold: 'Inter-Black',
-        selectorBoldItalic: 'Inter-BlackItalic',
-        selectorItalic: 'Inter-SemiBoldItalic',
-      },
-      {
-        variant: 'Bold',
-        selector: 'Inter-Bold',
-        weight: 700,
-        selectorBold: 'Inter-Black',
-        selectorBoldItalic: 'Inter-BlackItalic',
-        selectorItalic: 'Inter-BoldItalic',
-      },
-      {
-        variant: 'Extra Bold',
-        selector: 'Inter-ExtraBold',
-        weight: 800,
-        selectorBold: 'Inter-Black',
-        selectorBoldItalic: 'Inter-BlackItalic',
-        selectorItalic: 'Inter-ExtraBoldItalic',
-      },
-      {
-        variant: 'Black',
-        selector: 'Inter-Black',
-        weight: 900,
-        selectorBold: void 0,
-        selectorBoldItalic: 'Inter-BlackItalic',
-        selectorItalic: void 0,
-      },
-      {
-        variant: 'Thin Italic',
-        selector: 'Inter-ThinItalic',
-        weight: 100,
-        selectorBold: 'Inter-Italic',
-        selectorBoldItalic: 'Inter-Italic',
-        selectorItalic: 'Inter-ThinItalic',
-      },
-      {
-        variant: 'Extra Light Italic',
-        selector: 'Inter-ExtraLightItalic',
-        weight: 200,
-        selectorBold: 'Inter-Italic',
-        selectorBoldItalic: 'Inter-Italic',
-        selectorItalic: 'Inter-ExtraLightItalic',
-      },
-      {
-        variant: 'Light Italic',
-        selector: 'Inter-LightItalic',
-        weight: 300,
-        selectorBold: 'Inter-Italic',
-        selectorBoldItalic: 'Inter-Italic',
-        selectorItalic: 'Inter-LightItalic',
-      },
-      {
-        variant: 'Italic',
-        selector: 'Inter-Italic',
-        weight: 400,
-        selectorBold: 'Inter-BoldItalic',
-        selectorBoldItalic: 'Inter-BoldItalic',
-        selectorItalic: 'Inter-Italic',
-      },
-      {
-        variant: 'Medium Italic',
-        selector: 'Inter-MediumItalic',
-        weight: 500,
-        selectorBold: 'Inter-BoldItalic',
-        selectorBoldItalic: 'Inter-BoldItalic',
-        selectorItalic: 'Inter-MediumItalic',
-      },
-      {
-        variant: 'Semibold Italic',
-        selector: 'Inter-SemiBoldItalic',
-        weight: 600,
-        selectorBold: 'Inter-BoldItalic',
-        selectorBoldItalic: 'Inter-BoldItalic',
-        selectorItalic: 'Inter-SemiBoldItalic',
-      },
-      {
-        variant: 'Bold Italic',
-        selector: 'Inter-BoldItalic',
-        weight: 700,
-        selectorBold: 'Inter-BlackItalic',
-        selectorBoldItalic: 'Inter-BlackItalic',
-        selectorItalic: 'Inter-BoldItalic',
-      },
-      {
-        variant: 'Extra Bold Italic',
-        selector: 'Inter-ExtraBoldItalic',
-        weight: 800,
-        selectorBold: 'Inter-BlackItalic',
-        selectorBoldItalic: 'Inter-BlackItalic',
-        selectorItalic: 'Inter-ExtraBoldItalic',
-      },
-      {
-        variant: 'Black Italic',
-        selector: 'Inter-BlackItalic',
-        weight: 900,
-        selectorBold: void 0,
-        selectorBoldItalic: void 0,
-        selectorItalic: 'Inter-BlackItalic',
-      },
-    ];
-    const fontFamily = this.createFontFamily('Inter',);
-    for (const entry of inter) {
-      const { variant, selector, weight, selectorBold, selectorBoldItalic, selectorItalic, } = entry;
-      const font = {
-        variant,
-        selector,
-        selectorBold,
-        selectorBoldItalic,
-        selectorItalic,
-        weight,
-        family: fontFamily,
-        style: /italic/i.test(selector,) ? 'italic' : 'normal',
-      };
-      fontFamily.fonts.push(font,);
-    }
-    fontFamily.fonts.forEach((t,) => this.interFontSelectors.add(t.selector,));
-    return fontFamily;
   }
   addFontAlias(key7, value,) {
     this.fontAliases.set(key7, value,);
@@ -35196,7 +35548,7 @@ var LocalFontSource = class {
   }
   /** Font family aliases are in the format of `__Alias-Name__` */
   isFontFamilyAlias(value,) {
-    if (value && value.match(/^__.*__$/,)) {
+    if (value && /^__.*__$/u.exec(value,)) {
       return true;
     }
     return false;
@@ -35231,20 +35583,18 @@ var FontStore = class {
     __publicField(this, 'getFontshareFontsListPromise',);
     __publicField(this, 'loadedSelectors', /* @__PURE__ */ new Set(),);
     __publicField(this, 'googleFamilyNames', /* @__PURE__ */ new Set(),);
-    __publicField(this, 'defaultFont',);
     __publicField(this, 'local',);
     __publicField(this, 'google',);
     __publicField(this, 'fontshare',);
+    __publicField(this, 'framer',);
     __publicField(this, 'custom',);
     this.local = new LocalFontSource();
     this.google = new GoogleFontSource();
     this.fontshare = new FontshareSource();
+    this.framer = new FramerFontSource();
     this.custom = new CustomFontSource();
     this.bySelector = /* @__PURE__ */ new Map();
     this.importLocalFonts();
-    const defaultFont = this.getFontBySelector('Inter',);
-    assert(defaultFont, 'Can\u2019t find Inter font',);
-    this.defaultFont = defaultFont;
   }
   addFont(font,) {
     this.bySelector.set(font.selector, font,);
@@ -35255,9 +35605,7 @@ var FontStore = class {
   importLocalFonts() {
     for (const font of this.local.importFonts()) {
       this.addFont(font,);
-      if (!this.local.interFontSelectors.has(font.selector,)) {
-        this.loadFont(font,);
-      }
+      this.loadFont(font,);
     }
   }
   async importGoogleFonts() {
@@ -35282,6 +35630,11 @@ var FontStore = class {
       }
     }
     return this.getFontshareFontsListPromise;
+  }
+  importFramerFonts(fonts,) {
+    this.framer.importFonts(fonts,).forEach((font,) => {
+      this.addFont(font,);
+    },);
   }
   importCustomFonts(assets,) {
     this.bySelector.forEach((_, key7,) => {
@@ -35347,6 +35700,10 @@ var FontStore = class {
         };
       }
     }
+    const framerFontDraftProperties = FramerFontSource.getDraftFontPropertiesBySelector(selector,);
+    if (framerFontDraftProperties) {
+      return framerFontDraftProperties;
+    }
     return null;
   }
   isSelectorLoaded(selector,) {
@@ -35359,27 +35716,37 @@ var FontStore = class {
     if (this.isSelectorLoaded(font.selector,)) {
       return 0;
     }
-    if (font.family.source === 'local') {
-      if (this.local.interFontSelectors.has(font.selector,) && import_process4.default.env.NODE_ENV !== 'test') {
-        await isFontReady(font.family.name, font.style, font.weight,);
-      }
-      this.loadedSelectors.add(font.selector,);
-      return 1;
+    const source = font.family.source;
+    switch (source) {
+      case 'local':
+        this.loadedSelectors.add(font.selector,);
+        return 1;
+      case 'framer':
+        if (import_process4.default.env.NODE_ENV !== 'test') {
+          await isFontReady(font.family.name, font.style, font.weight,);
+        }
+        this.loadedSelectors.add(font.selector,);
+        return 1;
+      case 'google':
+      case 'fontshare':
+      case 'custom':
+        if (!font.file) {
+          return Promise.reject(`Unable to load font: ${font.selector}`,);
+        }
+        await loadFont(
+          {
+            family: font.family.name,
+            url: font.file,
+            weight: font.weight,
+            style: font.style,
+          },
+          document,
+        );
+        this.loadedSelectors.add(font.selector,);
+        return 1;
+      default:
+        assertNever(source,);
     }
-    if (!font.file) {
-      return Promise.reject(`Unable to load font: ${font.selector}`,);
-    }
-    await loadFont(
-      {
-        family: font.family.name,
-        url: font.file,
-        weight: font.weight,
-        style: font.style,
-      },
-      document,
-    );
-    this.loadedSelectors.add(font.selector,);
-    return 1;
   }
   async loadFontsFromSelectors(selectors,) {
     if (!this.enabled) {
@@ -35442,6 +35809,14 @@ var FontStore = class {
   async loadWebFontsFromSelectors(selectors,) {
     return this.loadFontsFromSelectors(selectors,);
   }
+  // defaultFont doesn’t seem to be used anywhere in our code (except tests),
+  // but keeping it for backwards compatibility with any compiled code.
+  /** @deprecated This will be removed in the future. Don’t use it. */
+  get defaultFont() {
+    const defaultFont = this.getFontBySelector('Inter',);
+    assert(defaultFont, 'Can\u2019t find Inter font',);
+    return defaultFont;
+  }
 };
 var fontStore = /* @__PURE__ */ new FontStore();
 Promise.allSettled = Promise.allSettled || ((promises,) =>
@@ -35452,10 +35827,10 @@ Promise.allSettled = Promise.allSettled || ((promises,) =>
   ));
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s,) => !fontStore.isSelectorLoaded(s,));
-  const [fontLoadStatus, setFontLoadStatus,] = React94.useState(
+  const [fontLoadStatus, setFontLoadStatus,] = React95.useState(
     missingFontSelectors.length ? 'loading' : 'done',
   );
-  React94.useEffect(() => {
+  React95.useEffect(() => {
     if (!missingFontSelectors.length) {
       return;
     }
@@ -35474,12 +35849,12 @@ function isShallowEqualArray(a, b,) {
   return a.length === b.length && a.every((v, i,) => v === b[i]);
 }
 function TextStyleSheet() {
-  React95.useInsertionEffect(() => {
+  React96.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
 }
-var Text = /* @__PURE__ */ React95.forwardRef(function Text2(props, forwardedRef,) {
+var Text = /* @__PURE__ */ React96.forwardRef(function Text2(props, forwardedRef,) {
   var _a, _b;
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
@@ -35511,7 +35886,7 @@ var Text = /* @__PURE__ */ React95.forwardRef(function Text2(props, forwardedRef
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React95.useCallback(
+  const interceptPageLinks = React96.useCallback(
     (event,) => {
       const anchorElement = findAnchorElement(event.target, layoutRef.current,);
       if (event.metaKey || !navigate || !anchorElement) {
@@ -35530,13 +35905,13 @@ var Text = /* @__PURE__ */ React95.forwardRef(function Text2(props, forwardedRef
     const ref = layoutRef.current;
     return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React95.useMemo(() => {
+  const rawHTML = React96.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) {
       return props.rawHTML;
     }
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, onCanvas, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ React95.createElement(
+  return /* @__PURE__ */ React96.createElement(
     TextComponent,
     {
       ...props,
@@ -35654,7 +36029,7 @@ var TextComponent = /* @__PURE__ */ (() => {
             asRecord(style,)['--framer-text-alignment'] = alignment;
           }
           const tabIndexProps = getTabIndexProps(tabIndex,);
-          return /* @__PURE__ */ React95.createElement(
+          return /* @__PURE__ */ React96.createElement(
             motion.div,
             {
               layoutId,
@@ -35689,11 +36064,11 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ React95.createElement(
-        React95.Fragment,
+      return /* @__PURE__ */ React96.createElement(
+        React96.Fragment,
         null,
-        /* @__PURE__ */ React95.createElement(ComponentContainerContext.Consumer, null, this.renderMain,),
-        /* @__PURE__ */ React95.createElement(TextStyleSheet, null,),
+        /* @__PURE__ */ React96.createElement(ComponentContainerContext.Consumer, null, this.renderMain,),
+        /* @__PURE__ */ React96.createElement(TextStyleSheet, null,),
       );
     }
     collectLayout(style, inCodeComponent,) {
@@ -36101,11 +36476,11 @@ function transformString(transform2,) {
 var LinearGradientElement = class extends Component12 {
   render() {
     const { id: id3, stops, x1, x2, y1, y2, } = this.props;
-    return /* @__PURE__ */ React96.createElement(
+    return /* @__PURE__ */ React97.createElement(
       'linearGradient',
       { id: id3, x1, x2, y1, y2, },
       stops.map((stop, idx,) => {
-        return /* @__PURE__ */ React96.createElement('stop', {
+        return /* @__PURE__ */ React97.createElement('stop', {
           key: idx,
           offset: stop.position,
           stopColor: stop.color,
@@ -36118,7 +36493,7 @@ var LinearGradientElement = class extends Component12 {
 var RadialGradientElement = class extends Component12 {
   render() {
     const { centerAnchorX, centerAnchorY, id: id3, widthFactor, heightFactor, stops, } = this.props;
-    return /* @__PURE__ */ React96.createElement(
+    return /* @__PURE__ */ React97.createElement(
       'radialGradient',
       {
         id: id3,
@@ -36130,7 +36505,7 @@ var RadialGradientElement = class extends Component12 {
         }) translate(-${centerAnchorX}, -${centerAnchorY})`,
       },
       stops.map((stop, idx,) => {
-        return /* @__PURE__ */ React96.createElement('stop', {
+        return /* @__PURE__ */ React97.createElement('stop', {
           key: idx,
           offset: stop.position,
           stopColor: stop.color,
@@ -36155,7 +36530,7 @@ var SVGRoot = class extends Component13 {
       transform: `translate(${fx}px, ${fy}px)`,
     };
     Layer.applyWillChange(this.props, svgStyle, false,);
-    return /* @__PURE__ */ React97.createElement(
+    return /* @__PURE__ */ React98.createElement(
       'svg',
       {
         width: '100%',
@@ -36296,22 +36671,22 @@ var Vector = /* @__PURE__ */ (() => {
       const currentName = target === 'PREVIEW' ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ React98.createElement(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
+        shapeReference = /* @__PURE__ */ React99.createElement(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ React98.createElement(
+          strokeClipPath = /* @__PURE__ */ React99.createElement(
             'clipPath',
             { id: internalStrokeClipId.id, },
-            /* @__PURE__ */ React98.createElement('use', { xlinkHref: internalShapeId.link, },),
+            /* @__PURE__ */ React99.createElement('use', { xlinkHref: internalShapeId.link, },),
           );
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ React98.createElement('use', {
+          mainElement = /* @__PURE__ */ React99.createElement('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ React98.createElement(
+          strokeElement = /* @__PURE__ */ React99.createElement(
             'use',
             {
               xlinkHref: internalShapeId.link,
@@ -36322,7 +36697,7 @@ var Vector = /* @__PURE__ */ (() => {
             },
           );
         } else {
-          mainElement = /* @__PURE__ */ React98.createElement(
+          mainElement = /* @__PURE__ */ React99.createElement(
             'use',
             {
               xlinkHref: internalShapeId.link,
@@ -36336,7 +36711,7 @@ var Vector = /* @__PURE__ */ (() => {
         }
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ React98.createElement(
+        mainElement = /* @__PURE__ */ React99.createElement(
           motion.path,
           {
             ...{
@@ -36351,7 +36726,7 @@ var Vector = /* @__PURE__ */ (() => {
         );
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ React98.createElement(
+        ? /* @__PURE__ */ React99.createElement(
           ImagePatternElement,
           {
             ...imagePattern,
@@ -36361,13 +36736,13 @@ var Vector = /* @__PURE__ */ (() => {
         : void 0;
       let gradient;
       if (linearGradient) {
-        gradient = /* @__PURE__ */ React98.createElement(LinearGradientElement, { ...linearGradient, },);
+        gradient = /* @__PURE__ */ React99.createElement(LinearGradientElement, { ...linearGradient, },);
       } else if (radialGradient) {
-        gradient = /* @__PURE__ */ React98.createElement(RadialGradientElement, { ...radialGradient, },);
+        gradient = /* @__PURE__ */ React99.createElement(RadialGradientElement, { ...radialGradient, },);
       }
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
-        defs = /* @__PURE__ */ React98.createElement(
+        defs = /* @__PURE__ */ React99.createElement(
           'defs',
           null,
           shapeReference,
@@ -36379,7 +36754,7 @@ var Vector = /* @__PURE__ */ (() => {
       }
       const opacityValue = opacity != null ? opacity : variants ? 1 : void 0;
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ React98.createElement(
+        mainElement = /* @__PURE__ */ React99.createElement(
           motion.path,
           {
             ...{
@@ -36396,7 +36771,7 @@ var Vector = /* @__PURE__ */ (() => {
         return this.renderElement(mainElement,);
       }
       return this.renderElement(
-        /* @__PURE__ */ React98.createElement(
+        /* @__PURE__ */ React99.createElement(
           motion.g,
           { opacity: opacityValue, variants, transition, },
           defs,
@@ -36417,7 +36792,7 @@ var Vector = /* @__PURE__ */ (() => {
       if (includeTransform) {
         return element;
       }
-      return /* @__PURE__ */ React98.createElement(
+      return /* @__PURE__ */ React99.createElement(
         SVGRoot,
         {
           frame: frame2,
@@ -36509,7 +36884,11 @@ var VectorGroup = /* @__PURE__ */ (() => {
         }
       }
       return this.renderElement(
-        /* @__PURE__ */ React99.createElement('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, }, children,),
+        /* @__PURE__ */ React100.createElement(
+          'g',
+          { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, },
+          children,
+        ),
       );
     }
     renderElement(element,) {
@@ -36520,7 +36899,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
       if (includeTransform) {
         return element;
       }
-      return /* @__PURE__ */ React99.createElement(
+      return /* @__PURE__ */ React100.createElement(
         SVGRoot,
         {
           frame: frame2,
@@ -36669,7 +37048,7 @@ var DesignComponent = class extends Component14 {
     }
     const c = children && children.map((child,) => this._renderData(child, componentProps, void 0,));
     children = children ? c : [];
-    return React100.createElement(type, props, children,);
+    return React101.createElement(type, props, children,);
   }
   render() {
     asRecord(safeWindow,)['__checkBudget__']();
@@ -36731,13 +37110,13 @@ function createDesignComponent(canvasStore, id3, propertyControls, width = 200, 
         if (!this.state.data && renderNode) {
           asRecord(safeWindow,)['__checkBudget__']();
           const el = renderNode(nodeId,);
-          if (el && React100.isValidElement(el,) && typeof el.type !== 'string') {
-            return React100.createElement(WithOverride(el.type, this.props,), el.props,);
+          if (el && React101.isValidElement(el,) && typeof el.type !== 'string') {
+            return React101.createElement(WithOverride(el.type, this.props,), el.props,);
           }
         }
         return super.render();
       };
-      return /* @__PURE__ */ React100.createElement(RenderNodeContext.Consumer, null, maybeRenderWithProvider,);
+      return /* @__PURE__ */ React101.createElement(RenderNodeContext.Consumer, null, maybeRenderWithProvider,);
     }
     componentWillUnmount() {
       canvasStore.removeListener(this,);
@@ -36754,26 +37133,26 @@ function createDesignComponent(canvasStore, id3, propertyControls, width = 200, 
     },),
     _a;
 }
-var RenderNodeContext = React100.createContext(null,);
+var RenderNodeContext = React101.createContext(null,);
 var RenderNodeProvider = RenderNodeContext.Provider;
 var localPackageFallbackIdentifier = '|local|';
 function CustomProperties({
   children,
   customProperties,
 },) {
-  return /* @__PURE__ */ React101.createElement('div', { style: customProperties, }, children,);
+  return /* @__PURE__ */ React1022.createElement('div', { style: customProperties, }, children,);
 }
-var Image2 = /* @__PURE__ */ React1022.forwardRef(function Image3(props, ref,) {
+var Image2 = /* @__PURE__ */ React103.forwardRef(function Image3(props, ref,) {
   const { background, children, alt, ...rest } = props;
   const style = { ...rest.style, };
   if (background) {
     delete style.background;
   }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ React1022.createElement(
+  return /* @__PURE__ */ React103.createElement(
     MotionComponent,
     { ...rest, style, ref, },
-    background && /* @__PURE__ */ React1022.createElement(BackgroundImageComponent, { image: background, alt, },),
+    background && /* @__PURE__ */ React103.createElement(BackgroundImageComponent, { image: background, alt, },),
     children,
   );
 },);
@@ -36912,7 +37291,7 @@ function escapeHTML2(str,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React103.forwardRef(
+var DeprecatedRichText = /* @__PURE__ */ React104.forwardRef(
   function Text3(props, forwardedRef,) {
     var _a, _b;
     const {
@@ -36961,7 +37340,7 @@ var DeprecatedRichText = /* @__PURE__ */ React103.forwardRef(
     const currentRoute = useCurrentRoute();
     useRoutePreloader((_a = props.preload) != null ? _a : [],);
     useMeasureLayout(props, layoutRef,);
-    const inCodeComponent = React103.useContext(ComponentContainerContext,);
+    const inCodeComponent = React104.useContext(ComponentContainerContext,);
     const isOnCanvas = useIsOnFramerCanvas();
     let textOrOverride = text;
     const forwardedOverrideId = _forwardedOverrideId != null ? _forwardedOverrideId : id3;
@@ -36984,13 +37363,13 @@ var DeprecatedRichText = /* @__PURE__ */ React103.forwardRef(
       innerHTML = htmlFromDesign;
     }
     const implicitPathVariables = useImplicitPathVariables();
-    const innerHTMLWithReplacedFramerPageLinks = React103.useMemo(() => {
+    const innerHTMLWithReplacedFramerPageLinks = React104.useMemo(() => {
       if (isOnCanvas || !getRoute || !currentRoute) {
         return innerHTML;
       }
       return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
     }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-    React103.useEffect(() => {
+    React104.useEffect(() => {
       const container = layoutRef.current;
       if (container === null) {
         return;
@@ -37011,7 +37390,7 @@ var DeprecatedRichText = /* @__PURE__ */ React103.forwardRef(
       };
     }, [navigate, implicitPathVariables,],);
     useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-    React103.useInsertionEffect(() => {
+    React104.useInsertionEffect(() => {
       injectComponentCSSRules();
     }, [],);
     if (!visible) {
@@ -37067,7 +37446,7 @@ var DeprecatedRichText = /* @__PURE__ */ React103.forwardRef(
       forceLayerBackingWithCSSProperties(style,);
     }
     Object.assign(style, props.style,);
-    return /* @__PURE__ */ React103.createElement(
+    return /* @__PURE__ */ React104.createElement(
       motion.div,
       {
         id: id3,
@@ -37109,12 +37488,12 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
     },);
   }
 }
-var FitText = /* @__PURE__ */ forwardRef42(
+var FitText = /* @__PURE__ */ forwardRef52(
   ({ viewBoxScale, viewBox, children, ...props }, ref,) => {
-    return /* @__PURE__ */ React104.createElement(
+    return /* @__PURE__ */ React105.createElement(
       motion.svg,
       { ref, ...props, viewBox, },
-      /* @__PURE__ */ React104.createElement(
+      /* @__PURE__ */ React105.createElement(
         motion.foreignObject,
         {
           width: '100%',
@@ -37128,7 +37507,7 @@ var FitText = /* @__PURE__ */ forwardRef42(
     );
   },
 );
-var RichTextContainer = /* @__PURE__ */ forwardRef42(
+var RichTextContainer = /* @__PURE__ */ forwardRef52(
   (props, ref,) => {
     var _a;
     const {
@@ -37238,7 +37617,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef42(
     const Component15 = htmlElementAsMotionComponent(props.as,);
     if (isString22(props.viewBox,)) {
       if (props.as !== void 0) {
-        return /* @__PURE__ */ React104.createElement(
+        return /* @__PURE__ */ React105.createElement(
           Component15,
           {
             ...rest,
@@ -37249,7 +37628,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef42(
             'data-framer-name': name,
             'data-framer-component-type': 'RichTextContainer',
           },
-          /* @__PURE__ */ React104.createElement(
+          /* @__PURE__ */ React105.createElement(
             FitText,
             {
               viewBox,
@@ -37260,7 +37639,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef42(
           ),
         );
       } else {
-        return /* @__PURE__ */ React104.createElement(
+        return /* @__PURE__ */ React105.createElement(
           FitText,
           {
             ...rest,
@@ -37277,7 +37656,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef42(
         );
       }
     }
-    return /* @__PURE__ */ React104.createElement(
+    return /* @__PURE__ */ React105.createElement(
       Component15,
       {
         ...rest,
@@ -37314,7 +37693,7 @@ function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
   }
   return cloneElement22(element, props, ...children,);
 }
-var RichText = /* @__PURE__ */ forwardRef42(
+var RichText = /* @__PURE__ */ forwardRef52(
   ({ children, html, htmlFromDesign, ...props }, ref,) => {
     const content = html || children || htmlFromDesign;
     if (isString22(content,)) {
@@ -37325,7 +37704,7 @@ var RichText = /* @__PURE__ */ forwardRef42(
         // We need to use the original prop name.
         [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
       };
-      return /* @__PURE__ */ React104.createElement(DeprecatedRichText, { ...props, ...contentProp, ref, },);
+      return /* @__PURE__ */ React105.createElement(DeprecatedRichText, { ...props, ...contentProp, ref, },);
     }
     if (!props.stylesPresetsClassNames && isString22(props.stylesPresetsClassName,)) {
       const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
@@ -37335,7 +37714,7 @@ var RichText = /* @__PURE__ */ forwardRef42(
         props.stylesPresetsClassNames = { h1, h2, h3, p, a, };
       }
     }
-    return /* @__PURE__ */ React104.createElement(RichTextContainer, { ...props, ref, }, isValidElement22(content,) ? content : void 0,);
+    return /* @__PURE__ */ React105.createElement(RichTextContainer, { ...props, ref, }, isValidElement22(content,) ? content : void 0,);
   },
 );
 var key6 = 'calculatedPaths';
@@ -37720,7 +38099,7 @@ var package_default = {
     prepublishOnly: 'make build',
     coverage: 'yarn :jest --coverage',
     lint: 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet',
-    'lint:fix': 'yarn lint --fix',
+    'lint:fix': 'yarn lint --fix --cache',
     test: 'yarn :jest',
     watch: 'yarn :jest --watch',
     postinstall: 'node postinstall.cjs',
