@@ -14,6 +14,7 @@ jobs:
         permissions:
             # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
             contents: write
+            actions: write
         steps:
             - name: Checkout Repo
               uses: actions/checkout@v3
@@ -40,3 +41,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - run: gh workflow run release.yml --ref main
