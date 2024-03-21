@@ -71,6 +71,7 @@ export async function main({ framerTypesUrl }) {
         'var combinedCSSRules =',
         'export var combinedCSSRules =',
     )
+    code = '// @ts-nocheck\n' + code
     if (code === codeAfter) {
         throw new Error('Failed to export combinedCSSRules')
     }
@@ -87,7 +88,7 @@ export async function main({ framerTypesUrl }) {
         ---
         unframer: patch
         --- 
-        
+
         Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
         `
         fs.writeFileSync(
