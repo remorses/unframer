@@ -71,11 +71,12 @@ export async function main({ framerTypesUrl }) {
         'var combinedCSSRules =',
         'export var combinedCSSRules =',
     )
-    code = '// @ts-nocheck\n' + code
+
     if (code === codeAfter) {
         throw new Error('Failed to export combinedCSSRules')
     }
     code = codeAfter
+    code = '// @ts-nocheck\n' + code
     const framerVersion = extractFramerVersion(code)
     const framerMotionVersion = extractFramerMotionVersion(code)
     logger.log('framer version:', framerVersion)
