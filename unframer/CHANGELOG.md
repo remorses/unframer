@@ -1,5 +1,11 @@
 # unframer
 
+## 1.0.1
+
+### Patch Changes
+
+-   eddf196: Update framer to 2.4.1, update framer motion to 11.0.7
+
 ## 1.0.0
 
 ### Major Changes
