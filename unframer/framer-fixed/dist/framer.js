@@ -1,3 +1,4 @@
+// @ts-nocheck
 // https:https://app.framerstatic.com/chunk-4NJGI344.js
 import { createContext, } from 'react';
 import { createContext as createContext2, } from 'react';
@@ -38583,5 +38584,3 @@ react-is/cjs/react-is.production.min.js:
    * LICENSE file in the root directory of this source tree.
    *)
 */
-
-
