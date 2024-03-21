@@ -91,7 +91,7 @@ export async function main({ framerTypesUrl }) {
         Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
         `
         fs.writeFileSync(
-            `.changeset/${framerVersion}-${framerMotionVersion}.md`,
+            `../.changeset/${framerVersion}-${framerMotionVersion}.md`,
             change,
             'utf-8',
         )
