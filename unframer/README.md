@@ -6,9 +6,6 @@
     <br/>
 </div>
 
-> [!IMPORTANT]
-> If your component has any problem like missing imports create an issue with the component url, these issues are usually because of updates to the `framer` runtime which is kept in sync in this repository in [unframer/framer-fixed/dist](./unframer/framer-fixed/dist) folder
-
 Download framer components as simple files
 
 -   Works with any React framework (Next.js, Gatsby, Vite, etc)
@@ -139,6 +136,10 @@ Known limitations:
 }
 ```
 
+-   Instead of using links to your Framer pages you should make links variables and set them when rendering the component. This is because links to Framer pages are not supported in `unframer`.
+
+-   Internationalization is not supported
+
 ## Example
 
-Look at the [nextjs-app](./nextjs-app) folder for an example
+Look at the [nextjs-app](./nextjs-app) folder for an example and the deployed example [here](https://unframer-nextjs-app.vercel.app/)
