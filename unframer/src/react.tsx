@@ -260,18 +260,18 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
         return Object.values(variants).map(({ className, variant }) => {
             return (
                 <div key={variant} className={className}>
-                    <LayoutGroup key={variant} id={id + variant}>
-                        {/* @ts-ignore */}
-                        <Component
-                            ref={ref}
-                            key={variant}
-                            // layoutDependency={id}
-                            // layoutId={id + variant}
-                            // layoutId={breakpointName}
-                            {...rest}
-                            variant={variant as any}
-                        />
-                    </LayoutGroup>
+                    {/* @ts-ignore */}
+                    <Component
+                        ref={ref}
+                        key={variant}
+                        // LayoutGroup is used internally
+                        layoutId={id + variant}
+                        // layoutDependency={id}
+                        // layoutId={id + variant}
+                        // layoutId={breakpointName}
+                        {...rest}
+                        variant={variant as any}
+                    />
                 </div>
             )
         })
