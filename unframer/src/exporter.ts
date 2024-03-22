@@ -1,4 +1,4 @@
-import { Plugin, build, transform } from 'esbuild'
+import { Plugin, build, transform, context } from 'esbuild'
 import dprint from 'dprint-node'
 import tmp from 'tmp'
 
@@ -39,6 +39,7 @@ function validateUrl(url: string) {
 
 export async function bundle({
     cwd: out = '',
+    watch = false,
     components = {} as Record<string, string>,
     signal = new AbortController().signal,
 }) {
@@ -48,7 +49,7 @@ export async function bundle({
 
     fs.mkdirSync(path.resolve(out), { recursive: true })
 
-    const result = await build({
+    const buildContext = await context({
         // entryPoints: {
         //     index: url,
         // },
@@ -98,10 +99,11 @@ export async function bundle({
 
                             return {
                                 contents: /** js */ `'use client'
-                                import Component from '${await resolveRedirect(
+                                import Component from '${await resolveRedirect({
                                     url,
+                                    signal,
                                     redirectCache,
-                                )}'
+                                })}'
                                 import { WithFramerBreakpoints } from 'unframer/dist/react'
                                 Component.Responsive = (props) => {
                                     return <WithFramerBreakpoints Component={Component} {...props} />
@@ -122,78 +124,114 @@ export async function bundle({
         // outfile: path.resolve(cwd, sourcefile),
     })
 
-    for (let file of result.outputFiles!) {
-        const abs = path.resolve(out, file.path)
-        const existing = await fs.promises
-            .readFile(file.path, 'utf-8')
-            .catch(() => null)
-        if (existing === file.text) {
-            continue
-        }
-        fs.writeFileSync(abs, file.text, 'utf-8')
-    }
+    async function rebuild() {
+        const result = await buildContext.rebuild()
 
-    const outFiles = result.outputFiles.map((x) => path.resolve(out, x.path))
-    const filesToDelete = prevFiles.filter((x) => !outFiles.includes(x))
-    for (let file of filesToDelete) {
-        fs.rmSync(file)
-    }
-
-    fs.writeFileSync(
-        path.resolve(out, 'meta.json'),
-        JSON.stringify(result.metafile, null, 2),
-        'utf-8',
-    )
-
-    if (signal.aborted) {
-        throw new Error('aborted')
-    }
-    // logger.log('result', result)
-
-    const files = fs.readdirSync(out)
-    for (let file of files) {
-        if (!file.endsWith('.js')) {
-            continue
-        }
-        const resultFile = path.resolve(out, file)
-        const output = fs.readFileSync(resultFile, 'utf-8')
-        logger.log(`formatting`, file)
-        const code = dprint.format(resultFile, output, {
-            lineWidth: 140,
-            quoteStyle: 'alwaysSingle',
-            trailingCommas: 'always',
-            semiColons: 'always',
-        })
-        fs.writeFileSync(resultFile, code, 'utf-8')
-        const name = file.replace(/\.js$/, '')
-        if (components[name]) {
-            logger.log(`extracting types for ${name}`)
-            const propControls = await extractPropControlsUnsafe(
-                resultFile,
-                name,
-            )
-            if (!propControls) {
-                logger.log(`no property controls found for ${name}`)
+        for (let file of result.outputFiles!) {
+            const abs = path.resolve(out, file.path)
+            const existing = await fs.promises
+                .readFile(file.path, 'utf-8')
+                .catch(() => null)
+            if (existing === file.text) {
+                continue
             }
-            const types = propControlsToType(propControls)
-            // name = 'framer-' + name
-            // logger.log('name', name)
+            fs.writeFileSync(abs, file.text, 'utf-8')
+        }
 
-            fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+        const outFiles = result.outputFiles.map((x) =>
+            path.resolve(out, x.path),
+        )
+        const filesToDelete = prevFiles.filter((x) => !outFiles.includes(x))
+        for (let file of filesToDelete) {
+            fs.rmSync(file)
+        }
+
+        fs.writeFileSync(
+            path.resolve(out, 'meta.json'),
+            JSON.stringify(result.metafile, null, 2),
+            'utf-8',
+        )
+
+        if (signal.aborted) {
+            throw new Error('aborted')
+        }
+        // logger.log('result', result)
+
+        const files = fs.readdirSync(out)
+        for (let file of files) {
+            if (!file.endsWith('.js')) {
+                continue
+            }
+            const resultFile = path.resolve(out, file)
+            const output = fs.readFileSync(resultFile, 'utf-8')
+            logger.log(`formatting`, file)
+            const code = dprint.format(resultFile, output, {
+                lineWidth: 140,
+                quoteStyle: 'alwaysSingle',
+                trailingCommas: 'always',
+                semiColons: 'always',
+            })
+            fs.writeFileSync(resultFile, code, 'utf-8')
+            const name = file.replace(/\.js$/, '')
+            if (components[name]) {
+                logger.log(`extracting types for ${name}`)
+                const propControls = await extractPropControlsUnsafe(
+                    resultFile,
+                    name,
+                )
+                if (!propControls) {
+                    logger.log(`no property controls found for ${name}`)
+                }
+                const types = propControlsToType(propControls)
+                // name = 'framer-' + name
+                // logger.log('name', name)
+
+                fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+            }
+        }
+        if (watch) {
+            logger.log('waiting for components or config changes')
         }
     }
 
-    // TODO this is a vulnerability, i need to sandbox this somehow
+    if (!watch) {
+        await rebuild()
+        await buildContext.dispose()
+        return
+    }
 
-    // https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl
-    // let name = u.pathname
-    //     .split('/')
-    //     .slice(-1)[0]
-    //     // https://regex101.com/r/8prywY/1
-    //     // .replace(/-[\w\d]{4}\.js/i, '')
-    //     .replace(/\.js/i, '')
-    //     .replace(/@.*/, '')
-    //     .toLowerCase()
+    // when user press ctrl+c dispose
+    process.on('SIGINT', () => {
+        buildContext.dispose()
+    })
+    process.on('SIGABRT', () => {
+        buildContext.dispose()
+    })
+    await rebuild()
+
+    const getResolvedUrls = () =>
+        Promise.all(
+            Object.values(components).map((u) =>
+                resolveRedirect({ url: u, signal }),
+            ),
+        )
+    let prevUrls = await getResolvedUrls()
+    while (!signal?.aborted) {
+        const urls = await getResolvedUrls()
+        const changed = urls
+            .map((x, i) => (x !== prevUrls[i] ? i : null))
+            .filter(Boolean)
+        if (!changed?.length) {
+            await new Promise((res) => setTimeout(res, 1000))
+            continue
+        }
+        const changedNames = Object.keys(components).filter((_, i) =>
+            changed.includes(i),
+        )
+        logger.log(`found new component URLs for ${changedNames.join(', ')}`)
+        prevUrls = urls
+        await rebuild()
+    }
 }
 
 function decapitalize(str: string) {
@@ -493,7 +531,11 @@ export function esbuildPluginBundleDependencies({
                 }
                 const url = args.path
                 const u = new URL(url)
-                const resolved = await resolveRedirect(url, redirectCache)
+                const resolved = await resolveRedirect({
+                    url,
+                    redirectCache,
+                    signal,
+                })
                 if (codeCache.has(url)) {
                     const code = await codeCache.get(url)
                     return {
@@ -550,26 +592,47 @@ export function esbuildPluginBundleDependencies({
     return plugin
 }
 
-export async function resolveRedirect(url?: string, redirectCache?: any) {
+export async function resolveRedirect({
+    redirectCache,
+    signal,
+    url,
+}: {
+    url?: string
+    redirectCache?: any
+    signal?: AbortSignal
+}) {
     if (!url) {
         return ''
     }
     url = url.toString()
-    if (redirectCache.has(url)) {
+
+    if (redirectCache && redirectCache.has(url)) {
         return await redirectCache.get(url)
     }
 
-    const p = recursiveResolveRedirect(url)
-    redirectCache.set(url, p)
+    // console.time(`resolveRedirect ${url}`)
+    const p = recursiveResolveRedirect(url, signal)
+    // console.timeEnd(`resolveRedirect ${url}`)
+
+    if (redirectCache) {
+        redirectCache.set(url, p)
+    }
     return await p
 }
 
-export async function recursiveResolveRedirect(url?: string) {
+export async function recursiveResolveRedirect(
+    url?: string,
+    signal?: AbortSignal,
+) {
     if (!url) {
         return
     }
 
-    let res = await fetchWithRetry(url, { redirect: 'manual', method: 'HEAD' })
+    let res = await fetchWithRetry(url, {
+        redirect: 'manual',
+        method: 'HEAD',
+        signal: signal,
+    })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
         // logger.log('redirect', loc)

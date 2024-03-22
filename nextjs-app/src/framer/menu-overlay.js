@@ -1,7 +1,7 @@
 'use client';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/NS9YFlXuIrL5CscRDP5m/vitO4v4o_.js
+// https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_.js
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -20,13 +20,13 @@ import { AnimatePresence, LayoutGroup, motion, MotionConfigContext, } from 'unfr
 import * as React from 'react';
 var MotionDivWithFX = withFX(motion.div,);
 var cycleOrder = ['afltwohg0',];
-var serializationHash = 'framer-6ORqs';
+var serializationHash = 'framer-fzQf5';
 var variantClassNames = { afltwohg0: 'framer-v-15a397', };
-var transitions = { default: { damping: 60, delay: 0, mass: 1, stiffness: 500, type: 'spring', }, };
+var transition1 = { damping: 60, delay: 0, mass: 1, stiffness: 500, type: 'spring', };
 var transformTemplate1 = (_, t,) => `translate(-50%, -50%) ${t}`;
-var transition1 = { damping: 30, delay: 0, mass: 1, stiffness: 400, type: 'spring', };
-var animation = { opacity: 0, rotate: 0, scale: 1, transition: transition1, x: 0, y: 0, };
-var animation1 = { opacity: 1, rotate: 0, rotateX: 0, rotateY: 0, scale: 1, transition: transition1, x: 0, y: 0, };
+var transition2 = { damping: 30, delay: 0, mass: 1, stiffness: 400, type: 'spring', };
+var animation = { opacity: 0, rotate: 0, scale: 1, transition: transition2, x: 0, y: 0, };
+var animation1 = { opacity: 1, rotate: 0, rotateX: 0, rotateY: 0, scale: 1, transition: transition2, x: 0, y: 0, };
 var animation2 = { opacity: 0, rotate: 0, scale: 1, x: 0, y: 0, };
 var Overlay = ({ children, blockDocumentScrolling, enabled = true, },) => {
   const [visible, setVisible,] = useOverlayState({ blockDocumentScrolling, },);
@@ -51,10 +51,9 @@ var createLayoutDependency = (props, variants,) => variants.join('-',) + props.l
 var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
   const { activeLocale, setLocale, } = useLocaleInfo();
   const { style, className, layoutId, variant, ...restProps } = getProps(props,);
-  const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, transition, variants, } = useVariantState({
+  const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, variants, } = useVariantState({
     cycleOrder,
     defaultVariant: 'afltwohg0',
-    transitions,
     variant,
     variantClassNames,
   },);
@@ -76,7 +75,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
       animate: variants,
       initial: false,
       children: /* @__PURE__ */ _jsx(Transition, {
-        value: transition,
+        value: transition1,
         children: /* @__PURE__ */ _jsx(motion.div, {
           ...restProps,
           className: cx(serializationHash, ...sharedStyleClassNames, 'framer-15a397', className, classNames,),
@@ -102,6 +101,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
                     },),
                     className: 'framer-is140v',
                     'data-highlight': true,
+                    fonts: ['Inter',],
                     id: `${layoutId}-is140v`,
                     layoutDependency,
                     layoutId: 'I8j2gyKel',
@@ -596,24 +596,127 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
   },);
 },);
 var css = [
-  '.framer-6ORqs[data-border="true"]::after, .framer-6ORqs [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
-  '.framer-6ORqs.framer-1o80vlf, .framer-6ORqs .framer-1o80vlf { display: block; }',
-  '.framer-6ORqs.framer-15a397 { height: 19px; overflow: hidden; position: relative; width: 114px; }',
-  '.framer-6ORqs .framer-is140v { flex: none; height: auto; left: 50%; position: absolute; top: 47%; white-space: pre; width: auto; }',
-  '.framer-6ORqs .framer-1vp15te { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: center; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: min-content; will-change: var(--framer-will-change-override, transform); }',
-  '.framer-6ORqs .framer-10c8ste { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; padding: 0px 0px 0px 0px; position: relative; width: 600px; }',
-  '.framer-6ORqs .framer-1qzcvpp, .framer-6ORqs .framer-1sh9f8 { align-content: flex-start; align-items: flex-start; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 20px; height: min-content; justify-content: center; overflow: hidden; padding: 30px 30px 30px 30px; position: relative; width: 1px; }',
-  '.framer-6ORqs .framer-raoq06, .framer-6ORqs .framer-g5uqtm, .framer-6ORqs .framer-voq7s, .framer-6ORqs .framer-13n82ol, .framer-6ORqs .framer-ymbyn1, .framer-6ORqs .framer-teephp, .framer-6ORqs .framer-1xz664v, .framer-6ORqs .framer-mx5ump, .framer-6ORqs .framer-v0k3th, .framer-6ORqs .framer-8nhvva, .framer-6ORqs .framer-1a7j7w7, .framer-6ORqs .framer-qqg1d0, .framer-6ORqs .framer-1uzmh27, .framer-6ORqs .framer-12r8zo1 { -webkit-user-select: none; flex: none; height: auto; position: relative; user-select: none; white-space: pre; width: auto; }',
-  '.framer-6ORqs .framer-16wtwv1, .framer-6ORqs .framer-156v7m6, .framer-6ORqs .framer-yyzakw, .framer-6ORqs .framer-1bg32dx, .framer-6ORqs .framer-1hqddui, .framer-6ORqs .framer-1tqxgjz { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: 100%; }',
-  '.framer-6ORqs .framer-yao7d8 { align-self: stretch; flex: none; height: auto; overflow: hidden; position: relative; width: 1px; }',
-  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-6ORqs .framer-1vp15te, .framer-6ORqs .framer-10c8ste, .framer-6ORqs .framer-1qzcvpp, .framer-6ORqs .framer-16wtwv1, .framer-6ORqs .framer-156v7m6, .framer-6ORqs .framer-yyzakw, .framer-6ORqs .framer-1sh9f8, .framer-6ORqs .framer-1bg32dx, .framer-6ORqs .framer-1hqddui, .framer-6ORqs .framer-1tqxgjz { gap: 0px; } .framer-6ORqs .framer-1vp15te > * { margin: 0px; margin-bottom: calc(10px / 2); margin-top: calc(10px / 2); } .framer-6ORqs .framer-1vp15te > :first-child, .framer-6ORqs .framer-1qzcvpp > :first-child, .framer-6ORqs .framer-16wtwv1 > :first-child, .framer-6ORqs .framer-156v7m6 > :first-child, .framer-6ORqs .framer-yyzakw > :first-child, .framer-6ORqs .framer-1sh9f8 > :first-child, .framer-6ORqs .framer-1bg32dx > :first-child, .framer-6ORqs .framer-1hqddui > :first-child, .framer-6ORqs .framer-1tqxgjz > :first-child { margin-top: 0px; } .framer-6ORqs .framer-1vp15te > :last-child, .framer-6ORqs .framer-1qzcvpp > :last-child, .framer-6ORqs .framer-16wtwv1 > :last-child, .framer-6ORqs .framer-156v7m6 > :last-child, .framer-6ORqs .framer-yyzakw > :last-child, .framer-6ORqs .framer-1sh9f8 > :last-child, .framer-6ORqs .framer-1bg32dx > :last-child, .framer-6ORqs .framer-1hqddui > :last-child, .framer-6ORqs .framer-1tqxgjz > :last-child { margin-bottom: 0px; } .framer-6ORqs .framer-10c8ste > * { margin: 0px; margin-left: calc(0px / 2); margin-right: calc(0px / 2); } .framer-6ORqs .framer-10c8ste > :first-child { margin-left: 0px; } .framer-6ORqs .framer-10c8ste > :last-child { margin-right: 0px; } .framer-6ORqs .framer-1qzcvpp > *, .framer-6ORqs .framer-1sh9f8 > * { margin: 0px; margin-bottom: calc(20px / 2); margin-top: calc(20px / 2); } .framer-6ORqs .framer-16wtwv1 > *, .framer-6ORqs .framer-156v7m6 > *, .framer-6ORqs .framer-yyzakw > *, .framer-6ORqs .framer-1bg32dx > *, .framer-6ORqs .framer-1hqddui > *, .framer-6ORqs .framer-1tqxgjz > * { margin: 0px; margin-bottom: calc(0px / 2); margin-top: calc(0px / 2); } }',
+  '.framer-fzQf5.framer-1o80vlf, .framer-fzQf5 .framer-1o80vlf { display: block; }',
+  '.framer-fzQf5.framer-15a397 { height: 19px; overflow: hidden; position: relative; width: 114px; }',
+  '.framer-fzQf5 .framer-is140v { flex: none; height: auto; left: 50%; position: absolute; top: 47%; white-space: pre; width: auto; }',
+  '.framer-fzQf5 .framer-1vp15te { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: center; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: min-content; will-change: var(--framer-will-change-override, transform); }',
+  '.framer-fzQf5 .framer-10c8ste { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; padding: 0px 0px 0px 0px; position: relative; width: 600px; }',
+  '.framer-fzQf5 .framer-1qzcvpp, .framer-fzQf5 .framer-1sh9f8 { align-content: flex-start; align-items: flex-start; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 20px; height: min-content; justify-content: center; overflow: hidden; padding: 30px 30px 30px 30px; position: relative; width: 1px; }',
+  '.framer-fzQf5 .framer-raoq06, .framer-fzQf5 .framer-g5uqtm, .framer-fzQf5 .framer-voq7s, .framer-fzQf5 .framer-13n82ol, .framer-fzQf5 .framer-ymbyn1, .framer-fzQf5 .framer-teephp, .framer-fzQf5 .framer-1xz664v, .framer-fzQf5 .framer-mx5ump, .framer-fzQf5 .framer-v0k3th, .framer-fzQf5 .framer-8nhvva, .framer-fzQf5 .framer-1a7j7w7, .framer-fzQf5 .framer-qqg1d0, .framer-fzQf5 .framer-1uzmh27, .framer-fzQf5 .framer-12r8zo1 { -webkit-user-select: none; flex: none; height: auto; position: relative; user-select: none; white-space: pre; width: auto; }',
+  '.framer-fzQf5 .framer-16wtwv1, .framer-fzQf5 .framer-156v7m6, .framer-fzQf5 .framer-yyzakw, .framer-fzQf5 .framer-1bg32dx, .framer-fzQf5 .framer-1hqddui, .framer-fzQf5 .framer-1tqxgjz { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: 100%; }',
+  '.framer-fzQf5 .framer-yao7d8 { align-self: stretch; flex: none; height: auto; overflow: hidden; position: relative; width: 1px; }',
+  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-fzQf5 .framer-1vp15te, .framer-fzQf5 .framer-10c8ste, .framer-fzQf5 .framer-1qzcvpp, .framer-fzQf5 .framer-16wtwv1, .framer-fzQf5 .framer-156v7m6, .framer-fzQf5 .framer-yyzakw, .framer-fzQf5 .framer-1sh9f8, .framer-fzQf5 .framer-1bg32dx, .framer-fzQf5 .framer-1hqddui, .framer-fzQf5 .framer-1tqxgjz { gap: 0px; } .framer-fzQf5 .framer-1vp15te > * { margin: 0px; margin-bottom: calc(10px / 2); margin-top: calc(10px / 2); } .framer-fzQf5 .framer-1vp15te > :first-child, .framer-fzQf5 .framer-1qzcvpp > :first-child, .framer-fzQf5 .framer-16wtwv1 > :first-child, .framer-fzQf5 .framer-156v7m6 > :first-child, .framer-fzQf5 .framer-yyzakw > :first-child, .framer-fzQf5 .framer-1sh9f8 > :first-child, .framer-fzQf5 .framer-1bg32dx > :first-child, .framer-fzQf5 .framer-1hqddui > :first-child, .framer-fzQf5 .framer-1tqxgjz > :first-child { margin-top: 0px; } .framer-fzQf5 .framer-1vp15te > :last-child, .framer-fzQf5 .framer-1qzcvpp > :last-child, .framer-fzQf5 .framer-16wtwv1 > :last-child, .framer-fzQf5 .framer-156v7m6 > :last-child, .framer-fzQf5 .framer-yyzakw > :last-child, .framer-fzQf5 .framer-1sh9f8 > :last-child, .framer-fzQf5 .framer-1bg32dx > :last-child, .framer-fzQf5 .framer-1hqddui > :last-child, .framer-fzQf5 .framer-1tqxgjz > :last-child { margin-bottom: 0px; } .framer-fzQf5 .framer-10c8ste > * { margin: 0px; margin-left: calc(0px / 2); margin-right: calc(0px / 2); } .framer-fzQf5 .framer-10c8ste > :first-child { margin-left: 0px; } .framer-fzQf5 .framer-10c8ste > :last-child { margin-right: 0px; } .framer-fzQf5 .framer-1qzcvpp > *, .framer-fzQf5 .framer-1sh9f8 > * { margin: 0px; margin-bottom: calc(20px / 2); margin-top: calc(20px / 2); } .framer-fzQf5 .framer-16wtwv1 > *, .framer-fzQf5 .framer-156v7m6 > *, .framer-fzQf5 .framer-yyzakw > *, .framer-fzQf5 .framer-1bg32dx > *, .framer-fzQf5 .framer-1hqddui > *, .framer-fzQf5 .framer-1tqxgjz > * { margin: 0px; margin-bottom: calc(0px / 2); margin-top: calc(0px / 2); } }',
+  '.framer-fzQf5[data-border="true"]::after, .framer-fzQf5 [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
-var FramervitO4v4o_ = withCSS(Component, css, 'framer-6ORqs',);
+var FramervitO4v4o_ = withCSS(Component, css, 'framer-fzQf5',);
 var stdin_default = FramervitO4v4o_;
 FramervitO4v4o_.displayName = 'MenuOverlay';
 FramervitO4v4o_.defaultProps = { height: 19, width: 114, };
-addFonts(FramervitO4v4o_, [],);
+addFonts(FramervitO4v4o_, [{
+  explicitInter: true,
+  fonts: [{
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F',
+    url: 'https://app.framerstatic.com/Inter-Regular.cyrillic-ext-CFTLRB35.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+    url: 'https://app.framerstatic.com/Inter-Regular.cyrillic-KKLZBALH.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+1F00-1FFF',
+    url: 'https://app.framerstatic.com/Inter-Regular.greek-ext-ULEBLIFV.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0370-03FF',
+    url: 'https://app.framerstatic.com/Inter-Regular.greek-IRHSNFQB.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+    url: 'https://app.framerstatic.com/Inter-Regular.latin-ext-VZDUGU3Q.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange:
+      'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    url: 'https://app.framerstatic.com/Inter-Regular.latin-JLQMKCHE.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB',
+    url: 'https://app.framerstatic.com/Inter-Regular.vietnamese-QK7VSWXK.woff2',
+    weight: '400',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F',
+    url: 'https://app.framerstatic.com/Inter-Medium.cyrillic-ext-M4WHNGTS.woff2',
+    weight: '500',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+    url: 'https://app.framerstatic.com/Inter-Medium.cyrillic-JVU2PANX.woff2',
+    weight: '500',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+1F00-1FFF',
+    url: 'https://app.framerstatic.com/Inter-Medium.greek-ext-4KCQBEIZ.woff2',
+    weight: '500',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0370-03FF',
+    url: 'https://app.framerstatic.com/Inter-Medium.greek-DPOQGN7L.woff2',
+    weight: '500',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+    url: 'https://app.framerstatic.com/Inter-Medium.latin-ext-J4DBSW7F.woff2',
+    weight: '500',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange:
+      'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    url: 'https://app.framerstatic.com/Inter-Medium.latin-Y3IVPL46.woff2',
+    weight: '500',
+  }, {
+    family: 'Inter',
+    source: 'framer',
+    style: 'normal',
+    unicodeRange: 'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB',
+    url: 'https://app.framerstatic.com/Inter-Medium.vietnamese-PJV76O4P.woff2',
+    weight: '500',
+  },],
+},], { supportsExplicitInterCodegen: true, },);
 
 // virtual:menu-overlay
 import { WithFramerBreakpoints, } from 'unframer/dist/react';

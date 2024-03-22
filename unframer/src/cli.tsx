@@ -1,4 +1,6 @@
 import { bundle, logger } from './exporter.js'
+import events, { EventEmitter, setMaxListeners } from 'events'
+
 import chokidar from 'chokidar'
 import fs from 'fs-extra'
 import { findUp } from 'find-up'
@@ -7,6 +9,8 @@ import path from 'path'
 const configName = 'unframer.json'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
+
+process.setMaxListeners(0)
 
 export async function cli() {
     const cwd = process.cwd()
@@ -24,37 +28,41 @@ export async function cli() {
     }
     let config = JSON.parse(configContent)
 
-    await processConfig(config)
-    if (watch) {
-        const watcher = chokidar.watch(configPath, {
-            persistent: true,
-        })
-        let controller = new AbortController()
-
-        watcher.on('change', async (path) => {
-            console.log()
-            controller.abort()
-            controller = new AbortController()
-
-            const newConfig = safeJsonParse(fs.readFileSync(configPath, 'utf8'))
-            if (!newConfig) {
-                logger.log(`Invalid ${configName} file`)
-                return
-            }
-            const newNames = getNewNames(config, newConfig)
-            if (newNames.length) {
-                logger.log(`New components found: ${newNames.join(', ')}`)
-                await processConfig(
-                    {
-                        ...newConfig,
-                        components: pluck(newConfig.components, newNames),
-                    },
-                    controller.signal,
-                )
-            }
-            config = newConfig
-        })
+    await processConfig({ config, watch })
+    if (!watch) {
+        return
     }
+    const watcher = chokidar.watch(configPath, {
+        persistent: true,
+    })
+    let controller = new AbortController()
+    setMaxListeners(400, controller.signal)
+    watcher.on('change', async (path) => {
+        console.log()
+        controller.abort()
+
+        controller = new AbortController()
+        setMaxListeners(400, controller.signal)
+
+        const newConfig = safeJsonParse(fs.readFileSync(configPath, 'utf8'))
+        if (!newConfig) {
+            logger.log(`Invalid ${configName} file`)
+            return
+        }
+        const newNames = getNewNames(config, newConfig)
+        if (newNames.length) {
+            logger.log(`New components found: ${newNames.join(', ')}`)
+            await processConfig({
+                config: {
+                    ...newConfig,
+                    components: pluck(newConfig.components, newNames),
+                },
+                watch,
+                signal: controller.signal,
+            })
+        }
+        config = newConfig
+    })
 }
 function safeJsonParse(json: string) {
     try {
@@ -90,7 +98,15 @@ type Config = {
     }
     outDir?: string
 }
-async function processConfig(config: Config, signal?: AbortSignal) {
+async function processConfig({
+    config,
+    watch,
+    signal,
+}: {
+    config: Config
+    watch: boolean
+    signal?: AbortSignal
+}) {
     try {
         const { components, outDir } = config || {}
         const installDir = path.resolve(process.cwd(), outDir || 'framer')
@@ -102,6 +118,7 @@ async function processConfig(config: Config, signal?: AbortSignal) {
         await bundle({
             components,
             cwd: installDir,
+            watch,
             signal,
         })
     } catch (e: any) {
