@@ -74,6 +74,9 @@ importers:
 
   unframer:
     dependencies:
+      '@types/react':
+        specifier: '*'
+        version: 18.2.66
       chokidar:
         specifier: ^3.5.3
         version: 3.5.3
