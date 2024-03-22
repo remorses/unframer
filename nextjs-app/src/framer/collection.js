@@ -2,7 +2,7 @@
 import { className, className2, css, css2, fonts, fonts2, } from './chunk-D3CFT23D.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/z6p5NBe4ZAQYKgiFyY5i/bhAfNR9wU.js
+// https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -21,11 +21,11 @@ import {
 import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 
-// https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/4ic6QnC8ZUTUlk24aFXQ/b9ZvTRprK.js
+// https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js
 import { jsx as e, jsxs as t, } from 'react/jsx-runtime';
 import { addPropertyControls as o, ControlType as n, LazyValue as a, } from 'unframer/dist/framer';
 import * as i from 'react';
-var r = { j95Se8Jpd: new a(() => import('./b9ZvTRprK-0-Z4QDUV3P.js')), };
+var r = { j95Se8Jpd: new a(() => import('./b9ZvTRprK-0-J475YF2Y.js')), };
 var s = (e2,) => {
   let t2 = [];
   for (; e2;) {
@@ -61,7 +61,7 @@ var f = {
     let s2 = [{
       index: 0,
       id: 'VkWs2hMlE',
-      [h]: 'still another one',
+      [h]: 'still another one xxxx',
       [d]: 'another-one',
       [c]: '2222-02-11T00:00:00.000Z',
       [p]: u(void 0, '',),
@@ -75,7 +75,7 @@ var f = {
       [p]: u({
         src: 'https://framerusercontent.com/images/64n4wnVJKDJspLlFZ6DarCP0M4.jpg',
         srcSet:
-          'https://framerusercontent.com/images/64n4wnVJKDJspLlFZ6DarCP0M4.jpg?scale-down-to=1024 682w, https://framerusercontent.com/images/64n4wnVJKDJspLlFZ6DarCP0M4.jpg 1000w',
+          'https://framerusercontent.com/images/64n4wnVJKDJspLlFZ6DarCP0M4.jpg?scale-down-to=1024 682w,https://framerusercontent.com/images/64n4wnVJKDJspLlFZ6DarCP0M4.jpg 1000w',
       }, 'Blue Flower',),
       [g]: /* @__PURE__ */ t(i.Fragment, {
         children: [
@@ -109,7 +109,7 @@ var f = {
       [p]: u({
         src: 'https://framerusercontent.com/images/Rl7uGNBoQidNiG0BinP7yXCyw.jpg',
         srcSet:
-          'https://framerusercontent.com/images/Rl7uGNBoQidNiG0BinP7yXCyw.jpg?scale-down-to=1024 682w, https://framerusercontent.com/images/Rl7uGNBoQidNiG0BinP7yXCyw.jpg 1000w',
+          'https://framerusercontent.com/images/Rl7uGNBoQidNiG0BinP7yXCyw.jpg?scale-down-to=1024 682w,https://framerusercontent.com/images/Rl7uGNBoQidNiG0BinP7yXCyw.jpg 1000w',
       }, 'Teal Flower',),
       [g]: /* @__PURE__ */ t(i.Fragment, {
         children: [
@@ -155,7 +155,7 @@ var f = {
       [p]: u({
         src: 'https://framerusercontent.com/images/0cSPcD2tWYGinXwWUR7fJ2kgXGk.jpg',
         srcSet:
-          'https://framerusercontent.com/images/0cSPcD2tWYGinXwWUR7fJ2kgXGk.jpg?scale-down-to=1024 767w, https://framerusercontent.com/images/0cSPcD2tWYGinXwWUR7fJ2kgXGk.jpg 1000w',
+          'https://framerusercontent.com/images/0cSPcD2tWYGinXwWUR7fJ2kgXGk.jpg?scale-down-to=1024 767w,https://framerusercontent.com/images/0cSPcD2tWYGinXwWUR7fJ2kgXGk.jpg 1000w',
       }, 'Pink Flower',),
       [g]: /* @__PURE__ */ t(i.Fragment, {
         children: [
@@ -248,7 +248,7 @@ var f = {
       [p]: u({
         src: 'https://framerusercontent.com/images/InuNHIQ0GzOduJG7DthhRGJV8fY.jpg',
         srcSet:
-          'https://framerusercontent.com/images/InuNHIQ0GzOduJG7DthhRGJV8fY.jpg?scale-down-to=1024 767w, https://framerusercontent.com/images/InuNHIQ0GzOduJG7DthhRGJV8fY.jpg 1000w',
+          'https://framerusercontent.com/images/InuNHIQ0GzOduJG7DthhRGJV8fY.jpg?scale-down-to=1024 767w,https://framerusercontent.com/images/InuNHIQ0GzOduJG7DthhRGJV8fY.jpg 1000w',
       }, 'Yellow Flower',),
       [g]: /* @__PURE__ */ t(i.Fragment, {
         children: [
@@ -282,7 +282,7 @@ var f = {
       [p]: u({
         src: 'https://framerusercontent.com/images/8yfgC6RHF3rdJakSSJjblRQVM.jpg',
         srcSet:
-          'https://framerusercontent.com/images/8yfgC6RHF3rdJakSSJjblRQVM.jpg?scale-down-to=1024 668w, https://framerusercontent.com/images/8yfgC6RHF3rdJakSSJjblRQVM.jpg 914w',
+          'https://framerusercontent.com/images/8yfgC6RHF3rdJakSSJjblRQVM.jpg?scale-down-to=1024 668w,https://framerusercontent.com/images/8yfgC6RHF3rdJakSSJjblRQVM.jpg 914w',
       }, 'Purple Flower',),
       [g]: /* @__PURE__ */ t(i.Fragment, {
         children: [
@@ -334,7 +334,7 @@ o(f, {
   f.displayName = 'Blog';
 var stdin_default = f;
 
-// https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/z6p5NBe4ZAQYKgiFyY5i/bhAfNR9wU.js
+// https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js
 var cycleOrder = ['kNUF41QDw',];
 var serializationHash = 'framer-4XavX';
 var variantClassNames = { kNUF41QDw: 'framer-v-czp6l9', };
