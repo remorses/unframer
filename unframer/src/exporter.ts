@@ -129,7 +129,7 @@ export async function bundle({
             const existing = await fs.promises
                 .readFile(file.path, 'utf-8')
                 .catch(() => null)
-            logger.log(`formatting`, file)
+
             const codeNew = dprint.format(resultPathAbs, file.text, {
                 lineWidth: 140,
                 quoteStyle: 'alwaysSingle',
@@ -140,11 +140,15 @@ export async function bundle({
             if (existing === codeNew) {
                 continue
             }
+            logger.log(`writing`, path.relative(out, file.path))
             fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
             const name = path.basename(file.path).replace(/\.js$/, '')
             if (components[name]) {
                 logger.log(`extracting types for ${name}`)
-                const propControls = await extractPropControlsUnsafe(resultPathAbs, name)
+                const propControls = await extractPropControlsUnsafe(
+                    resultPathAbs,
+                    name,
+                )
                 if (!propControls) {
                     logger.log(`no property controls found for ${name}`)
                 }
@@ -156,11 +160,17 @@ export async function bundle({
             }
         }
 
-        const outFiles = result.outputFiles.map((x) =>
-            path.resolve(out, x.path),
-        )
+        const outFiles = result.outputFiles
+            .map((x) => path.resolve(out, x.path))
+            .concat([path.resolve(out, 'meta.json')])
+            .concat(
+                result.outputFiles.map((x) =>
+                    path.resolve(out, x.path.replace('.js', '.d.ts')),
+                ),
+            )
         const filesToDelete = prevFiles.filter((x) => !outFiles.includes(x))
         for (let file of filesToDelete) {
+            logger.log('deleting', path.relative(out, file))
             fs.rmSync(file)
         }
 
@@ -202,12 +212,16 @@ export async function bundle({
 
     await rebuild()
 
+    /**
+     * Get resolved URLs for all components and also wait for 1 second if it took less time than that
+     */
     const getResolvedUrls = () =>
-        Promise.all(
-            Object.values(components).map((u) =>
+        Promise.all([
+            ...Object.values(components).map((u) =>
                 resolveRedirect({ url: u, signal }),
             ),
-        )
+            new Promise((res) => setTimeout(res, 3000)),
+        ])
     let prevUrls = await getResolvedUrls()
     while (!signal?.aborted) {
         const urls = await getResolvedUrls()
@@ -215,7 +229,6 @@ export async function bundle({
             .map((x, i) => (x !== prevUrls[i] ? i : null))
             .filter(Boolean)
         if (!changed?.length) {
-            await new Promise((res) => setTimeout(res, 1000))
             continue
         }
         const changedNames = Object.keys(components).filter((_, i) =>
@@ -538,7 +551,7 @@ export function esbuildPluginBundleDependencies({
                 }
                 let loader = 'jsx' as any
                 const promise = Promise.resolve().then(async () => {
-                    logger.log('fetching', url)
+                    logger.log('fetching', url.replace(/https?:\/\//, ''))
                     const res = await fetchWithRetry(resolved, { signal })
                     if (!res.ok) {
                         throw new Error(
