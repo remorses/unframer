@@ -99,7 +99,6 @@ export async function bundle({
                                 import Component from '${await resolveRedirect({
                                     url,
                                     signal,
-                                    redirectCache,
                                 })}'
                                 import { WithFramerBreakpoints } from 'unframer/dist/react'
                                 Component.Responsive = (props) => {
@@ -126,14 +125,35 @@ export async function bundle({
         const result = await buildContext.rebuild()
 
         for (let file of result.outputFiles!) {
-            const abs = path.resolve(out, file.path)
+            const resultPathAbs = path.resolve(out, file.path)
             const existing = await fs.promises
                 .readFile(file.path, 'utf-8')
                 .catch(() => null)
-            if (existing === file.text) {
+            logger.log(`formatting`, file)
+            const codeNew = dprint.format(resultPathAbs, file.text, {
+                lineWidth: 140,
+                quoteStyle: 'alwaysSingle',
+                trailingCommas: 'always',
+                semiColons: 'always',
+            })
+
+            if (existing === codeNew) {
                 continue
             }
-            fs.writeFileSync(abs, file.text, 'utf-8')
+            fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
+            const name = path.basename(file.path).replace(/\.js$/, '')
+            if (components[name]) {
+                logger.log(`extracting types for ${name}`)
+                const propControls = await extractPropControlsUnsafe(resultPathAbs, name)
+                if (!propControls) {
+                    logger.log(`no property controls found for ${name}`)
+                }
+                const types = propControlsToType(propControls)
+                // name = 'framer-' + name
+                // logger.log('name', name)
+
+                fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+            }
         }
 
         const outFiles = result.outputFiles.map((x) =>
@@ -155,38 +175,6 @@ export async function bundle({
         }
         // logger.log('result', result)
 
-        const files = fs.readdirSync(out)
-        for (let file of files) {
-            if (!file.endsWith('.js')) {
-                continue
-            }
-            const resultFile = path.resolve(out, file)
-            const output = fs.readFileSync(resultFile, 'utf-8')
-            logger.log(`formatting`, file)
-            const code = dprint.format(resultFile, output, {
-                lineWidth: 140,
-                quoteStyle: 'alwaysSingle',
-                trailingCommas: 'always',
-                semiColons: 'always',
-            })
-            fs.writeFileSync(resultFile, code, 'utf-8')
-            const name = file.replace(/\.js$/, '')
-            if (components[name]) {
-                logger.log(`extracting types for ${name}`)
-                const propControls = await extractPropControlsUnsafe(
-                    resultFile,
-                    name,
-                )
-                if (!propControls) {
-                    logger.log(`no property controls found for ${name}`)
-                }
-                const types = propControlsToType(propControls)
-                // name = 'framer-' + name
-                // logger.log('name', name)
-
-                fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
-            }
-        }
         if (watch) {
             logger.log('waiting for components or config changes')
         }
