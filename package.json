@@ -5,7 +5,7 @@
         "test": "NODE_ENV=test vitest",
         "watch": "pnpm -r watch",
         "download-framer": "pnpm --filter unframer run download-framer",
-        "build": "pnpm -r build",
+        "build": "pnpm --filter unframer build",
         "release": "pnpm build && changeset"
     },
     "devDependencies": {

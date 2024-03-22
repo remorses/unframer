@@ -1,2 +1,6 @@
 export * from '../framer-fixed/dist/framer.js'
-export * from './react.js'
+export {
+    FramerStyles,
+    UnframerBreakpoint,
+    WithFramerBreakpoints,
+} from './react.js'

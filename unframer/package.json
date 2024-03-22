@@ -5,7 +5,7 @@
     "type": "module",
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
-        "build": "tsc && cp ../README.md ./README.md",
+        "build": "rm -rf dist && tsc && cp ../README.md ./README.md",
         "prepublishOnly": "pnpm build",
         "postinstall": "pnpm build",
         "download-framer": "tsx scripts/download.ts",

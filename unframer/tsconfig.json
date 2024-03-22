@@ -9,7 +9,9 @@
         "noEmit": false,
         "skipLibCheck": true,
         "jsx": "react-jsx",
-        "outDir": "dist"
+
+        "outDir": "dist",
     },
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": ["dist", "bin.mjs"],
 }
