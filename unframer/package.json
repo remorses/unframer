@@ -9,7 +9,7 @@
         "prepublishOnly": "pnpm build",
         "postinstall": "pnpm build",
         "download-framer": "tsx scripts/download.ts",
-        "watch": "tsc -w"
+        "watch": "rm -rf dist && tsc -w"
     },
     "bin": "bin.mjs",
     "files": [
