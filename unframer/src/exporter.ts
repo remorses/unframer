@@ -217,9 +217,11 @@ export async function bundle({
      */
     const getResolvedUrls = () =>
         Promise.all([
-            ...Object.values(components).map((u) =>
-                resolveRedirect({ url: u, signal }),
-            ),
+            ...Object.values(components).map((u) => {
+                const url = new URL(u)
+                url.searchParams.set('ts', Date.now().toString())
+                return resolveRedirect({ url: url.toString(), signal })
+            }),
             new Promise((res) => setTimeout(res, 3000)),
         ])
     let prevUrls = await getResolvedUrls()
