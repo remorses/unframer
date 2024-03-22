@@ -41,7 +41,7 @@ export async function bundle({
     cwd: out = '',
     watch = false,
     components = {} as Record<string, string>,
-    signal = new AbortController().signal,
+    signal = undefined as AbortSignal | undefined,
 }) {
     out ||= path.resolve(process.cwd(), 'example')
     out = path.resolve(out)
@@ -152,7 +152,7 @@ export async function bundle({
             'utf-8',
         )
 
-        if (signal.aborted) {
+        if (signal?.aborted) {
             throw new Error('aborted')
         }
         // logger.log('result', result)
@@ -201,12 +201,19 @@ export async function bundle({
     }
 
     // when user press ctrl+c dispose
-    process.on('SIGINT', () => {
+    process.on('SIGINT', async () => {
+        await buildContext.cancel()
         buildContext.dispose()
     })
-    process.on('SIGABRT', () => {
+    process.on('SIGABRT', async () => {
+        await buildContext.cancel()
         buildContext.dispose()
     })
+    signal?.addEventListener('abort', async () => {
+        await buildContext.cancel()
+        buildContext.dispose()
+    })
+
     await rebuild()
 
     const getResolvedUrls = () =>

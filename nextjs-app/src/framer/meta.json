@@ -3848,42 +3848,6 @@
       ],
       "format": "esm"
     },
-    "virtual:anotther": {
-      "bytes": 547,
-      "imports": [
-        {
-          "path": "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/z6p5NBe4ZAQYKgiFyY5i/bhAfNR9wU.js",
-          "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/z6p5NBe4ZAQYKgiFyY5i/bhAfNR9wU.js"
-        },
-        {
-          "path": "unframer/dist/react",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "react/jsx-runtime",
-          "kind": "import-statement",
-          "external": true
-        }
-      ],
-      "format": "esm"
-    },
     "https:https://framer.com/m/hero-icons/Home.js@0.0.27": {
       "bytes": 487,
       "imports": [
@@ -4156,79 +4120,11 @@
     "src/framer/collection.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-6GLPHCCR.js",
-          "kind": "import-statement"
-        },
-        {
           "path": "src/framer/chunk-D3CFT23D.js",
           "kind": "import-statement"
         },
         {
           "path": "src/framer/chunk-6C3VEZWH.js",
-          "kind": "import-statement"
-        },
-        {
-          "path": "unframer/dist/react",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "react/jsx-runtime",
-          "kind": "import-statement",
-          "external": true
-        }
-      ],
-      "exports": [
-        "default"
-      ],
-      "entryPoint": "virtual:collection",
-      "inputs": {
-        "virtual:collection": {
-          "bytesInOutput": 278
-        }
-      },
-      "bytes": 474
-    },
-    "src/framer/anotther.js": {
-      "imports": [
-        {
-          "path": "src/framer/chunk-6GLPHCCR.js",
-          "kind": "import-statement"
-        },
-        {
-          "path": "src/framer/chunk-D3CFT23D.js",
-          "kind": "import-statement"
-        },
-        {
-          "path": "src/framer/chunk-6C3VEZWH.js",
-          "kind": "import-statement"
-        },
-        {
-          "path": "unframer/dist/react",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "react/jsx-runtime",
-          "kind": "import-statement",
-          "external": true
-        }
-      ],
-      "exports": [
-        "default"
-      ],
-      "entryPoint": "virtual:anotther",
-      "inputs": {
-        "virtual:anotther": {
-          "bytesInOutput": 276
-        }
-      },
-      "bytes": 468
-    },
-    "src/framer/chunk-6GLPHCCR.js": {
-      "imports": [
-        {
-          "path": "src/framer/chunk-D3CFT23D.js",
           "kind": "import-statement"
         },
         {
@@ -4269,20 +4165,34 @@
         {
           "path": "src/framer/b9ZvTRprK-0-Z4QDUV3P.js",
           "kind": "dynamic-import"
+        },
+        {
+          "path": "unframer/dist/react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
         }
       ],
       "exports": [
-        "stdin_default"
+        "default"
       ],
+      "entryPoint": "virtual:collection",
       "inputs": {
         "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/z6p5NBe4ZAQYKgiFyY5i/bhAfNR9wU.js": {
           "bytesInOutput": 9874
         },
         "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/4ic6QnC8ZUTUlk24aFXQ/b9ZvTRprK.js": {
           "bytesInOutput": 22391
+        },
+        "virtual:collection": {
+          "bytesInOutput": 281
         }
       },
-      "bytes": 32720
+      "bytes": 33065
     },
     "src/framer/menus.js": {
       "imports": [

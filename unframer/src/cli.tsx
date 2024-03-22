@@ -10,8 +10,6 @@ const configName = 'unframer.json'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
-process.setMaxListeners(0)
-
 export async function cli() {
     const cwd = process.cwd()
     const watch = process.argv.includes('--watch')
@@ -28,23 +26,26 @@ export async function cli() {
     }
     let config = JSON.parse(configContent)
 
-    await processConfig({ config, watch })
+    let controller = new AbortController()
+    setMaxListeners(0, controller.signal)
+    processConfig({ config, watch, signal: controller.signal })
     if (!watch) {
         return
     }
-    const watcher = chokidar.watch(configPath, {
+
+    const watcher = chokidar.watch(configPath!, {
         persistent: true,
     })
-    let controller = new AbortController()
-    setMaxListeners(400, controller.signal)
+
     watcher.on('change', async (path) => {
+        logger.log(`${configName} changed`)
         console.log()
         controller.abort()
 
         controller = new AbortController()
-        setMaxListeners(400, controller.signal)
+        setMaxListeners(0, controller.signal)
 
-        const newConfig = safeJsonParse(fs.readFileSync(configPath, 'utf8'))
+        const newConfig = safeJsonParse(fs.readFileSync(configPath!, 'utf8'))
         if (!newConfig) {
             logger.log(`Invalid ${configName} file`)
             return
@@ -58,7 +59,7 @@ export async function cli() {
                     components: pluck(newConfig.components, newNames),
                 },
                 watch,
-                signal: controller.signal,
+                // signal: controller.signal,
             })
         }
         config = newConfig
