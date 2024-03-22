@@ -222,7 +222,7 @@ export async function bundle({
                 url.searchParams.set('ts', Date.now().toString())
                 return resolveRedirect({ url: url.toString(), signal })
             }),
-            new Promise((res) => setTimeout(res, 2000)),
+            new Promise((res) => setTimeout(res, 5000)),
         ])
     let prevUrls = await getResolvedUrls()
     while (!signal?.aborted) {
