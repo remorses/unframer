@@ -586,7 +586,9 @@ export function esbuildPluginBundleDependencies({
                     return transformed.code
                 })
 
-                codeCache.set(url, promise)
+                if (loader === 'jsx') {
+                    codeCache.set(url, promise)
+                }
                 const code = await promise
 
                 return {
