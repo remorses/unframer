@@ -2645,7 +2645,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_-0.js": {
+    "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -2666,8 +2666,8 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_.js": {
-      "bytes": 28111,
+    "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
+      "bytes": 28116,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2690,7 +2690,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_-0.js",
+          "path": "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js",
           "kind": "import-statement",
           "original": "./vitO4v4o_-0.js"
         },
@@ -2716,9 +2716,9 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_.js",
+          "path": "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_.js"
+          "original": "https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js"
         },
         {
           "path": "unframer/dist/react",
@@ -5230,14 +5230,14 @@
       ],
       "entryPoint": "virtual:menu-overlay",
       "inputs": {
-        "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/nLEVvpVkSnEsaKm225sf/vitO4v4o_.js": {
-          "bytesInOutput": 26808
+        "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
+          "bytesInOutput": 26813
         },
         "virtual:menu-overlay": {
           "bytesInOutput": 280
         }
       },
-      "bytes": 27306
+      "bytes": 27311
     },
     "src/framer/full-page.js": {
       "imports": [

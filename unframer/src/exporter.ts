@@ -45,9 +45,6 @@ export async function bundle({
 }) {
     out ||= path.resolve(process.cwd(), 'example')
     out = path.resolve(out)
-    const prevFiles = fs.readdirSync(out).map((x) => path.resolve(out, x))
-
-    fs.mkdirSync(path.resolve(out), { recursive: true })
 
     const buildContext = await context({
         // entryPoints: {
@@ -125,6 +122,7 @@ export async function bundle({
     })
 
     async function rebuild() {
+        const prevFiles = fs.readdirSync(out).map((x) => path.resolve(out, x))
         const result = await buildContext.rebuild()
 
         for (let file of result.outputFiles!) {
