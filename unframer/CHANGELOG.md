@@ -1,5 +1,16 @@
 # unframer
 
+## 1.1.0
+
+### Minor Changes
+
+-   9ddc21d: Fix .json files in components
+-   72602a7: Added --watch option to watch for Framer or config changes
+
+### Patch Changes
+
+-   4537169: remove additional LayoutGroup component, use the one already inside the Fremer component
+
 ## 1.0.1
 
 ### Patch Changes
