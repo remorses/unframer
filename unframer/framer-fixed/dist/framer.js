@@ -9023,7 +9023,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https:https://app.framerstatic.com/framer.LKURAB5Q.js
+// https:https://app.framerstatic.com/framer.ZHGXIIKY.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import React112, { startTransition as startTransition2, } from 'react';
@@ -9037,37 +9037,38 @@ import React82, { Suspense as Suspense2, } from 'react';
 import React72, { Component as Component22, Suspense, } from 'react';
 import React92 from 'react';
 import React102 from 'react';
+import { useCallback as useCallback32, useEffect as useEffect22, useRef as useRef22, } from 'react';
 import React122, { useContext as useContext16, } from 'react';
 import React14 from 'react';
 import React13 from 'react';
 import React15 from 'react';
 import React16 from 'react';
 import React17 from 'react';
-import React18, { useCallback as useCallback32, useContext as useContext22, useMemo as useMemo8, useRef as useRef22, } from 'react';
+import React18, { useCallback as useCallback42, useContext as useContext22, useMemo as useMemo8, useRef as useRef32, } from 'react';
 import React20, { Component as Component3, } from 'react';
-import { useRef as useRef32, } from 'react';
+import { useRef as useRef42, } from 'react';
 import React19 from 'react';
 import React23 from 'react';
 import React21 from 'react';
 import React222 from 'react';
 import React322 from 'react';
-import React31, { forwardRef as forwardRef4, useContext as useContext52, useRef as useRef52, } from 'react';
+import React31, { forwardRef as forwardRef4, useContext as useContext52, useRef as useRef62, } from 'react';
 import React25 from 'react';
 import React24 from 'react';
 import React26 from 'react';
 import React27 from 'react';
 import { useContext as useContext32, useMemo as useMemo22, } from 'react';
 import { useContext as useContext42, } from 'react';
-import { useEffect as useEffect22, useLayoutEffect as useLayoutEffect2, } from 'react';
+import { useEffect as useEffect32, useLayoutEffect as useLayoutEffect2, } from 'react';
 import React28 from 'react';
-import React30, { useEffect as useEffect32, } from 'react';
+import React30, { useEffect as useEffect42, } from 'react';
 import React29 from 'react';
 import { Component as Component4, } from 'react';
-import { useEffect as useEffect42, useRef as useRef42, } from 'react';
+import { useEffect as useEffect52, useRef as useRef52, } from 'react';
 import React45, { Component as Component7, } from 'react';
 import React33, { Component as Component5, } from 'react';
 import React34 from 'react';
-import React44, { useContext as useContext82, useEffect as useEffect62, useRef as useRef72, } from 'react';
+import React44, { useContext as useContext82, useEffect as useEffect72, useRef as useRef82, } from 'react';
 import React35 from 'react';
 import React40, { forwardRef as forwardRef22, } from 'react';
 import React37 from 'react';
@@ -9078,15 +9079,15 @@ import React41, { Component as Component6, } from 'react';
 import React422, { useContext as useContext62, } from 'react';
 import React43, {
   createContext as createContext9,
-  useCallback as useCallback42,
+  useCallback as useCallback52,
   useContext as useContext72,
-  useEffect as useEffect52,
-  useRef as useRef62,
+  useEffect as useEffect62,
+  useRef as useRef72,
 } from 'react';
 import { createContext as createContext22, } from 'react';
 import React46 from 'react';
 import React50 from 'react';
-import { useCallback as useCallback52, useRef as useRef82, } from 'react';
+import { useCallback as useCallback6, useRef as useRef92, } from 'react';
 import React49 from 'react';
 import React48 from 'react';
 import React47 from 'react';
@@ -9095,18 +9096,18 @@ import { Component as Component8, } from 'react';
 import { Component as Component9, } from 'react';
 import React55 from 'react';
 import React522, {
-  useCallback as useCallback6,
+  useCallback as useCallback7,
   useInsertionEffect as useInsertionEffect5,
   useMemo as useMemo32,
-  useRef as useRef92,
+  useRef as useRef102,
 } from 'react';
 import React54, { useInsertionEffect as useInsertionEffect22, } from 'react';
-import React53, { useEffect as useEffect72, } from 'react';
+import React53, { useEffect as useEffect82, } from 'react';
 import { useContext as useContext92, } from 'react';
 import {
   createContext as createContext32,
   useContext as useContext102,
-  useEffect as useEffect82,
+  useEffect as useEffect92,
   useMemo as useMemo42,
   useState as useState8,
 } from 'react';
@@ -9114,13 +9115,13 @@ import React56, { Component as Component11, } from 'react';
 import React57, { useContext as useContext112, } from 'react';
 import React64 from 'react';
 import React58 from 'react';
-import React59, { useCallback as useCallback7, useEffect as useEffect92, useRef as useRef102, } from 'react';
+import React59, { useCallback as useCallback8, useEffect as useEffect102, useRef as useRef112, } from 'react';
 import React60 from 'react';
 import { useLayoutEffect as useLayoutEffect22, } from 'react';
 import React622 from 'react';
 import React61 from 'react';
 import React63 from 'react';
-import React65, { createContext as createContext42, useContext as useContext122, useRef as useRef112, } from 'react';
+import React65, { createContext as createContext42, useContext as useContext122, useRef as useRef122, } from 'react';
 import React67 from 'react';
 import * as React66 from 'react';
 import React69 from 'react';
@@ -9139,10 +9140,10 @@ import React79 from 'react';
 import React80 from 'react';
 import {
   startTransition as startTransition22,
-  useCallback as useCallback8,
+  useCallback as useCallback9,
   useContext as useContext142,
-  useEffect as useEffect102,
-  useRef as useRef122,
+  useEffect as useEffect112,
+  useRef as useRef132,
 } from 'react';
 import { useMemo as useMemo52, } from 'react';
 import React81, { createRef, } from 'react';
@@ -9151,17 +9152,17 @@ import React83 from 'react';
 import React84 from 'react';
 import React85 from 'react';
 import React86 from 'react';
-import { useRef as useRef132, } from 'react';
+import { useRef as useRef14, } from 'react';
 import React87 from 'react';
 import React88 from 'react';
 import React89 from 'react';
-import React90, { useRef as useRef14, } from 'react';
+import React90, { useRef as useRef15, } from 'react';
 import React101, { Component as Component14, } from 'react';
 import React91 from 'react';
 import React94 from 'react';
 import React922 from 'react';
 import React93 from 'react';
-import React96, { useEffect as useEffect112, useRef as useRef15, } from 'react';
+import React96, { useEffect as useEffect122, useRef as useRef16, } from 'react';
 import React95 from 'react';
 import React99 from 'react';
 import React97, { Component as Component12, } from 'react';
@@ -9176,11 +9177,11 @@ import React105, {
   isValidElement as isValidElement22,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef17,
+  useRef as useRef18,
 } from 'react';
 import * as React104 from 'react';
-import { useRef as useRef16, } from 'react';
-import { useEffect as useEffect132, useState as useState22, } from 'react';
+import { useRef as useRef17, } from 'react';
+import { useEffect as useEffect142, useState as useState22, } from 'react';
 var require_hsluv = __commonJS({
   '../../../node_modules/hsluv/hsluv.js'(exports, module,) {
     var hsluv = hsluv || {};
@@ -11254,15 +11255,12 @@ var SuspenseErrorBoundary = class extends Component22 {
     this.state = { error: void 0, };
   }
   static getDerivedStateFromError(error,) {
+    console.error('Error in SuspenseErrorBoundary (getDerivedStateFromError).', error,);
     return { error, };
   }
   componentDidCatch(error, errorInfo,) {
     var _a;
-    console.error(
-      'Error in SuspenseThatPreservesDom. That likely hints to some set state that has not been wrapped in startTransition.',
-      error,
-      errorInfo,
-    );
+    console.error('Caught error in in SuspenseErrorBoundary.', error, errorInfo,);
     (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push([
       'published_site_load_recoverable_error',
       {
@@ -11326,6 +11324,28 @@ function useLocaleCode() {
 function useLocale() {
   return useLocaleCode();
 }
+function useMonitorNextRender(label,) {
+  const startLabel = `start-${label}`;
+  const endLabel = `end-${label}`;
+  const resolveHasPainted = useRef22(void 0,);
+  useEffect22(() => {
+    if (resolveHasPainted.current) {
+      resolveHasPainted.current();
+      resolveHasPainted.current = void 0;
+    }
+  },);
+  return useCallback32(() => {
+    const hasPainted = new Promise((resolve,) => {
+      resolveHasPainted.current = resolve;
+    },);
+    performance.mark(startLabel,);
+    hasPainted.then(() => {
+      performance.mark(endLabel,);
+      performance.measure(label, startLabel, endLabel,);
+    },).catch(() => {
+    },);
+  }, [label, startLabel, endLabel,],);
+}
 function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   const element = hash2 && document.getElementById(hash2,);
   if (element) {
@@ -11373,6 +11393,7 @@ function Router(
     initialLocaleId,
   },);
   const startViewTransition2 = useViewTransition();
+  const monitorNextRender = useMonitorNextRender('route-change',);
   const currentRouteRef = React112.useRef(initialRoute,);
   const currentPathVariablesRef = React112.useRef(initialPathVariables,);
   const currentLocaleIdRef = React112.useRef(initialLocaleId,);
@@ -11427,11 +11448,21 @@ function Router(
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
           startViewTransition2(currentRouteRef.current, currentRouteId2, () => startTransition2(forceUpdate,),);
+          monitorNextRender();
         } catch {
         }
       },
     };
-  }, [activeLocale, collectionUtils, forceUpdate, locales, routes, startViewTransition2, preserveQueryParams,],);
+  }, [
+    activeLocale,
+    collectionUtils,
+    forceUpdate,
+    locales,
+    monitorNextRender,
+    routes,
+    startViewTransition2,
+    preserveQueryParams,
+  ],);
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const setCurrentRouteId = React112.useCallback(
     (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
@@ -11442,8 +11473,9 @@ function Router(
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
       startTransition2(forceUpdate,);
+      monitorNextRender();
     },
-    [forceUpdate, scheduleSideEffect,],
+    [forceUpdate, monitorNextRender, scheduleSideEffect,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = React112.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
@@ -12030,15 +12062,15 @@ function Point(x, y,) {
   }
   Point2.center = center;
   function insidePoints(point2, points,) {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
+    var _a, _b, _c, _d;
     const x = point2.x;
     const y = point2.y;
     let isInside = false;
     for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
-      const xi = (_b = (_a = points[i]) == null ? void 0 : _a.x) != null ? _b : 0;
-      const yi = (_d = (_c = points[i]) == null ? void 0 : _c.y) != null ? _d : 0;
-      const xj = (_f = (_e = points[j]) == null ? void 0 : _e.x) != null ? _f : 0;
-      const yj = (_h = (_g = points[j]) == null ? void 0 : _g.y) != null ? _h : 0;
+      const xi = ((_a = points[i]) == null ? void 0 : _a.x) ?? 0;
+      const yi = ((_b = points[i]) == null ? void 0 : _b.y) ?? 0;
+      const xj = ((_c = points[j]) == null ? void 0 : _c.x) ?? 0;
+      const yj = ((_d = points[j]) == null ? void 0 : _d.y) ?? 0;
       const intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
       if (intersect) {
         isInside = !isInside;
@@ -13058,7 +13090,6 @@ var matchers = (() => {
   };
 })();
 function stringToObject(inputColor,) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B;
   if (inputColor.includes('gradient(',)) {
     return false;
   }
@@ -13084,9 +13115,9 @@ function stringToObject(inputColor,) {
   let match;
   if (match = matchers.rgb.exec(color2,)) {
     return {
-      r: parseInt((_a = match[1]) != null ? _a : '',),
-      g: parseInt((_b = match[2]) != null ? _b : '',),
-      b: parseInt((_c = match[3]) != null ? _c : '',),
+      r: parseInt(match[1] ?? '',),
+      g: parseInt(match[2] ?? '',),
+      b: parseInt(match[3] ?? '',),
       a: 1,
       format: 'rgb',
       /* RGB */
@@ -13094,19 +13125,19 @@ function stringToObject(inputColor,) {
   }
   if (match = matchers.rgba.exec(color2,)) {
     return {
-      r: parseInt((_d = match[1]) != null ? _d : '',),
-      g: parseInt((_e = match[2]) != null ? _e : '',),
-      b: parseInt((_f = match[3]) != null ? _f : '',),
-      a: parseFloat((_g = match[4]) != null ? _g : '',),
+      r: parseInt(match[1] ?? '',),
+      g: parseInt(match[2] ?? '',),
+      b: parseInt(match[3] ?? '',),
+      a: parseFloat(match[4] ?? '',),
       format: 'rgb',
       /* RGB */
     };
   }
   if (match = matchers.hsl.exec(color2,)) {
     return {
-      h: parseInt((_h = match[1]) != null ? _h : '',),
-      s: percentToFraction((_i = match[2]) != null ? _i : '',),
-      l: percentToFraction((_j = match[3]) != null ? _j : '',),
+      h: parseInt(match[1] ?? '',),
+      s: percentToFraction(match[2] ?? '',),
+      l: percentToFraction(match[3] ?? '',),
       a: 1,
       format: 'hsl',
       /* HSL */
@@ -13114,19 +13145,19 @@ function stringToObject(inputColor,) {
   }
   if (match = matchers.hsla.exec(color2,)) {
     return {
-      h: parseInt((_k = match[1]) != null ? _k : '',),
-      s: percentToFraction((_l = match[2]) != null ? _l : '',),
-      l: percentToFraction((_m = match[3]) != null ? _m : '',),
-      a: parseFloat((_n = match[4]) != null ? _n : '',),
+      h: parseInt(match[1] ?? '',),
+      s: percentToFraction(match[2] ?? '',),
+      l: percentToFraction(match[3] ?? '',),
+      a: parseFloat(match[4] ?? '',),
       format: 'hsl',
       /* HSL */
     };
   }
   if (match = matchers.hsv.exec(color2,)) {
     return {
-      h: parseInt((_o = match[1]) != null ? _o : '',),
-      s: percentToFraction((_p = match[2]) != null ? _p : '',),
-      v: percentToFraction((_q = match[3]) != null ? _q : '',),
+      h: parseInt(match[1] ?? '',),
+      s: percentToFraction(match[2] ?? '',),
+      v: percentToFraction(match[3] ?? '',),
       a: 1,
       format: 'hsv',
       /* HSV */
@@ -13134,29 +13165,29 @@ function stringToObject(inputColor,) {
   }
   if (match = matchers.hsva.exec(color2,)) {
     return {
-      h: parseInt((_r = match[1]) != null ? _r : '',),
-      s: percentToFraction((_s = match[2]) != null ? _s : '',),
-      v: percentToFraction((_t = match[3]) != null ? _t : '',),
-      a: parseFloat((_u = match[4]) != null ? _u : '',),
+      h: parseInt(match[1] ?? '',),
+      s: percentToFraction(match[2] ?? '',),
+      v: percentToFraction(match[3] ?? '',),
+      a: parseFloat(match[4] ?? '',),
       format: 'hsv',
       /* HSV */
     };
   }
   if (match = matchers.hex8.exec(color2,)) {
     return {
-      r: parseIntFromHex((_v = match[1]) != null ? _v : '',),
-      g: parseIntFromHex((_w = match[2]) != null ? _w : '',),
-      b: parseIntFromHex((_x = match[3]) != null ? _x : '',),
-      a: convertHexToDecimal((_y = match[4]) != null ? _y : '',),
+      r: parseIntFromHex(match[1] ?? '',),
+      g: parseIntFromHex(match[2] ?? '',),
+      b: parseIntFromHex(match[3] ?? '',),
+      a: convertHexToDecimal(match[4] ?? '',),
       format: namedColor ? 'name' : 'hex',
       /* HEX */
     };
   }
   if (match = matchers.hex6.exec(color2,)) {
     return {
-      r: parseIntFromHex((_z = match[1]) != null ? _z : '',),
-      g: parseIntFromHex((_A = match[2]) != null ? _A : '',),
-      b: parseIntFromHex((_B = match[3]) != null ? _B : '',),
+      r: parseIntFromHex(match[1] ?? '',),
+      g: parseIntFromHex(match[2] ?? '',),
+      b: parseIntFromHex(match[3] ?? '',),
       a: 1,
       format: namedColor ? 'name' : 'hex',
       /* HEX */
@@ -14459,7 +14490,7 @@ function LayoutIdProvider({ children, },) {
   if (context.top) {
     return /* @__PURE__ */ React18.createElement(React18.Fragment, null, children,);
   }
-  const cache3 = useRef22({
+  const cache3 = useRef32({
     // When we provide a layoutId for a node based on it's first
     // duplicatedFrom id, we save it's layoutId mapped to it's actual id.
     // Future screen's nodes will check this cache first, to see if they've
@@ -14485,7 +14516,7 @@ function LayoutIdProvider({ children, },) {
       byName: {},
     },
   },);
-  const screen = useRef22({
+  const screen = useRef32({
     byId: {},
     byName: {},
     byLastId: {},
@@ -14493,9 +14524,8 @@ function LayoutIdProvider({ children, },) {
     byLastName: {},
     byLayoutId: {},
   },);
-  const usedIds = useRef22(/* @__PURE__ */ new Set(),).current;
-  const getLayoutId = useCallback32(({ id: id3, name, duplicatedFrom, },) => {
-    var _a;
+  const usedIds = useRef32(/* @__PURE__ */ new Set(),).current;
+  const getLayoutId = useCallback42(({ id: id3, name, duplicatedFrom, },) => {
     if (!id3) {
       return null;
     }
@@ -14562,7 +14592,7 @@ function LayoutIdProvider({ children, },) {
     }
     const rootDuplicatedId = duplicatedFrom == null ? void 0 : duplicatedFrom[0];
     const identifier = name || rootDuplicatedId || id3;
-    const value = ((_a = cache3.current.count[cacheKey][identifier]) != null ? _a : -1) + 1;
+    const value = (cache3.current.count[cacheKey][identifier] ?? -1) + 1;
     const { layoutId, value: nextValue, } = nextLayoutId(identifier, value, usedIds,);
     cache3.current.count[cacheKey][identifier] = nextValue;
     screen.current[cacheKey][id3] = layoutId;
@@ -14589,7 +14619,7 @@ function LayoutIdProvider({ children, },) {
     usedIds.add(layoutId,);
     return layoutId;
   }, [],);
-  const persistLayoutIdCache = useCallback32(() => {
+  const persistLayoutIdCache = useCallback42(() => {
     cache3.current = {
       byId: {
         ...cache3.current.byId,
@@ -14633,7 +14663,7 @@ function LayoutIdProvider({ children, },) {
     };
     usedIds.clear();
   }, [],);
-  const contextValue = useRef22({
+  const contextValue = useRef32({
     getLayoutId,
     persistLayoutIdCache,
     top: true,
@@ -14661,7 +14691,7 @@ function AutomaticLayoutIds({ enabled = true, ...props },) {
   return /* @__PURE__ */ React18.createElement(LayoutIdContext.Provider, { ...props, value: contextValue, },);
 }
 function useConstant2(init,) {
-  const ref = useRef32(null,);
+  const ref = useRef42(null,);
   if (ref.current === null) {
     ref.current = init();
   }
@@ -14839,8 +14869,7 @@ function Device({
     [scaleDataRef,],
   );
   const updateScale = React20.useCallback(() => {
-    var _a2;
-    const { deviceOptions, scaleTo, onScaleChange, } = (_a2 = optionsRef.current) != null ? _a2 : {};
+    const { deviceOptions, scaleTo, onScaleChange, } = optionsRef.current ?? {};
     if (!deviceOptions || !scaleTo || scaleTo !== 'dynamic' || !containerRef.current) {
       return;
     }
@@ -14936,7 +14965,6 @@ function getComponentSize(options,) {
   };
 }
 function getDeviceStyle({ scaleTo, deviceOptions, overrideTheme, } = {},) {
-  var _a, _b, _c;
   const noDeviceStyle = { containerStyle: {}, deviceStyle: {}, screenStyle: {}, };
   if (!deviceOptions) {
     return noDeviceStyle;
@@ -14974,9 +15002,9 @@ function getDeviceStyle({ scaleTo, deviceOptions, overrideTheme, } = {},) {
       boxShadows.push(`inset 0 0 15px ${overriddenColors.bezelShadeColor || appearance.bezelShadeColor}`,);
     }
   }
-  const handOffsetLeft = (_a = hand == null ? void 0 : hand.offsetLeft) != null ? _a : 0;
-  const handOffsetRight = (_b = hand == null ? void 0 : hand.offsetRight) != null ? _b : 0;
-  const handOffsetBottom = (_c = hand == null ? void 0 : hand.offsetBottom) != null ? _c : 0;
+  const handOffsetLeft = (hand == null ? void 0 : hand.offsetLeft) ?? 0;
+  const handOffsetRight = (hand == null ? void 0 : hand.offsetRight) ?? 0;
+  const handOffsetBottom = (hand == null ? void 0 : hand.offsetBottom) ?? 0;
   const handScale = (deviceWidth - handOffsetLeft - handOffsetRight) / HAND_IMG_GAP_WIDTH;
   return {
     containerStyle: {
@@ -15380,6 +15408,21 @@ var Rect;
       y: rect.height < minHeight ? rect.y + diffY / 2 : rect.y,
     };
   };
+  Rect2.anyPointsOutsideRect = (rect, ps,) => {
+    const rectMinX = (0, Rect2.minX)(rect,);
+    const rectMinY = (0, Rect2.minY)(rect,);
+    const rectMaxX = (0, Rect2.maxX)(rect,);
+    const rectMaxY = (0, Rect2.maxY)(rect,);
+    for (const point2 of ps) {
+      if (point2.x < rectMinX || point2.x > rectMaxX) {
+        return true;
+      }
+      if (point2.y < rectMinY || point2.y > rectMaxY) {
+        return true;
+      }
+    }
+    return false;
+  };
   Rect2.rebaseRectOnto = (rect, anchorRect, direction, alignment,) => {
     const rebasedRect = { ...rect, };
     switch (direction) {
@@ -15648,18 +15691,17 @@ var ConstraintValues;
       height,
       values,
       {
-        height: parentHeight != null ? parentHeight : 0,
-        width: parentWidth != null ? parentWidth : 0,
+        height: parentHeight ?? 0,
+        width: parentWidth ?? 0,
       },
       parentSizeInfo == null ? void 0 : parentSizeInfo.viewport,
     );
   };
   ConstraintValues2.toRect = (values, parentSizeInfo = null, autoSize = null, pixelAlign = false, freeSpace = null,) => {
-    var _a;
     let x = values.left || 0;
     let y = values.top || 0;
     const { width, height, } = ConstraintValues2.toSize(values, parentSizeInfo, autoSize, freeSpace,);
-    const parentSizeForPositioning = (_a = parentSizeInfo == null ? void 0 : parentSizeInfo.positioning) != null ? _a : null;
+    const parentSizeForPositioning = (parentSizeInfo == null ? void 0 : parentSizeInfo.positioning) ?? null;
     const positioningParentWidth = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.width,) : null;
     const positioningParentHeight = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.height,) : null;
     if (values.left !== null) {
@@ -16000,6 +16042,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2,) => {
   ControlType2['PageScope'] = 'pagescope';
   ControlType2['ScrollSectionRef'] = 'scrollsectionref';
   ControlType2['CustomCursor'] = 'customcursor';
+  ControlType2['Border'] = 'border';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -16957,6 +17000,8 @@ function getControlDefaultValue(control,) {
       case 'number':
         return isNumber2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'transition':
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'border':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'font':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
@@ -18018,8 +18063,7 @@ var devicePresetsMap = devicePresets.reduce(
   {},
 );
 function getDevicePreset(presetId,) {
-  var _a;
-  return (_a = devicePresetsMap[presetId]) != null ? _a : devicePresetsMap[defaultPresetId];
+  return devicePresetsMap[presetId] ?? devicePresetsMap[defaultPresetId];
 }
 var defaultDeviceProps = {
   preset: defaultPresetId,
@@ -18040,7 +18084,7 @@ var defaultDeviceProps = {
   backgroundColor: void 0,
 };
 function convertPropsToDeviceOptions(props, { forceOldClay = false, } = {},) {
-  var _a, _b, _c, _d, _e, _f, _g;
+  var _a;
   if (props.preset === 'no-device') {
     return;
   }
@@ -18074,7 +18118,7 @@ function convertPropsToDeviceOptions(props, { forceOldClay = false, } = {},) {
     deviceHeight = preset.realisticImage.height;
     screenOffsetTop = preset.realisticImage.screenOffsetTop;
     screenOffsetLeft = preset.realisticImage.screenOffsetLeft;
-    colorId = colorId != null ? colorId : colorIdForTheme(props.theme, preset.realisticImage.availableColors,);
+    colorId = colorId ?? colorIdForTheme(props.theme, preset.realisticImage.availableColors,);
     appearance = {
       type: 'realistic',
       imageUrl: colorId
@@ -18085,10 +18129,10 @@ function convertPropsToDeviceOptions(props, { forceOldClay = false, } = {},) {
       rotateImage: rotate,
     };
   } else {
-    deviceWidth = preset.screenWidth + ((_a = preset.clayBezelLeft) != null ? _a : 0) + ((_b = preset.clayBezelRight) != null ? _b : 0);
-    deviceHeight = preset.screenHeight + ((_c = preset.clayBezelTop) != null ? _c : 0) + ((_d = preset.clayBezelBottom) != null ? _d : 0);
-    screenOffsetTop = (_e = preset.clayBezelTop) != null ? _e : 0;
-    screenOffsetLeft = (_f = preset.clayBezelLeft) != null ? _f : 0;
+    deviceWidth = preset.screenWidth + (preset.clayBezelLeft ?? 0) + (preset.clayBezelRight ?? 0);
+    deviceHeight = preset.screenHeight + (preset.clayBezelTop ?? 0) + (preset.clayBezelBottom ?? 0);
+    screenOffsetTop = preset.clayBezelTop ?? 0;
+    screenOffsetLeft = preset.clayBezelLeft ?? 0;
     if (preset.externalClay && !forceOldClay) {
       deviceWidth = preset.externalClay.width;
       deviceHeight = preset.externalClay.height;
@@ -18118,7 +18162,7 @@ function convertPropsToDeviceOptions(props, { forceOldClay = false, } = {},) {
     [screenWidth, screenHeight,] = [screenHeight, screenWidth,];
     [screenOffsetTop, screenOffsetLeft,] = [screenOffsetRight, screenOffsetTop,];
   }
-  const handOffset = (_g = preset.realisticImage) == null ? void 0 : _g.handOffset;
+  const handOffset = (_a = preset.realisticImage) == null ? void 0 : _a.handOffset;
   return {
     deviceWidth,
     deviceHeight,
@@ -18404,7 +18448,7 @@ var LibraryFeaturesContext = /* @__PURE__ */ React24.createContext(void 0,);
 var LibraryFeaturesProvider = LibraryFeaturesContext.Provider;
 var useLibraryFeatures = () => {
   const context = React24.useContext(LibraryFeaturesContext,);
-  return context != null ? context : {};
+  return context ?? {};
 };
 var import_process = __toESM(require_browser(), 1,);
 var safeNavigator = typeof navigator !== 'undefined' ? navigator : void 0;
@@ -18572,8 +18616,7 @@ var implementation = {
   // We need a default implementation for useImageSource and useImageElement as it is used for rendering image backgrounds which would break otherwise.
   // The default value is used for HTML export and when using the library without Framer.
   useImageSource(image,) {
-    var _a;
-    return (_a = image.src) != null ? _a : '';
+    return image.src ?? '';
   },
   useImageElement(image, rect, nodeId,) {
     const element = new Image();
@@ -18608,10 +18651,9 @@ function _injectRuntime(injectedRuntime,) {
   isRuntimeInjected = true;
 }
 function minZoomForPixelatedImageRendering(image, containerSize, devicePixelRatio3 = 1,) {
-  var _a, _b, _c, _d;
   let { width: frameWidth, height: frameHeight, } = containerSize;
-  const imageWidth = (_b = (_a = image.pixelWidth) != null ? _a : image.intrinsicWidth) != null ? _b : 0;
-  const imageHeight = (_d = (_c = image.pixelHeight) != null ? _c : image.intrinsicHeight) != null ? _d : 0;
+  const imageWidth = image.pixelWidth ?? image.intrinsicWidth ?? 0;
+  const imageHeight = image.pixelHeight ?? image.intrinsicHeight ?? 0;
   if (frameWidth < 1 || frameHeight < 1 || imageWidth < 1 || imageHeight < 1) {
     return void 0;
   }
@@ -18662,8 +18704,8 @@ function cssObjectFit(imageFit,) {
   }
 }
 function cssObjectPosition(positionX, positionY,) {
-  const x = positionX != null ? positionX : 'center';
-  const y = positionY != null ? positionY : 'center';
+  const x = positionX ?? 'center';
+  const y = positionY ?? 'center';
   if (x === 'center' && y === 'center') {
     return 'center';
   }
@@ -18734,10 +18776,10 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
       ref: imageRef,
       decoding: 'async',
       loading: image.loading,
-      sizes: measuredSizes != null ? measuredSizes : image.sizes,
+      sizes: measuredSizes ?? image.sizes,
       srcSet: image.srcSet,
       src: source,
-      alt: alt != null ? alt : image.alt,
+      alt: alt ?? image.alt,
       style: imageStyle,
     },
   );
@@ -18824,7 +18866,7 @@ var BackgroundImage;
 })(BackgroundImage || (BackgroundImage = {}),);
 function applyForwardOverrides(background, props,) {
   const { _forwardedOverrideId, _forwardedOverrides, id: id3, } = props;
-  const forwardedOverrideId = _forwardedOverrideId != null ? _forwardedOverrideId : id3;
+  const forwardedOverrideId = _forwardedOverrideId ?? id3;
   const src = _forwardedOverrides && forwardedOverrideId ? _forwardedOverrides[forwardedOverrideId] : void 0;
   if (src && typeof src === 'string') {
     background = { ...background, src, };
@@ -19002,7 +19044,7 @@ function useLayoutId2(props, { specificLayoutId, postfix, } = {},) {
     return postfix ? `${layoutIdCandidate}-${postfix}` : layoutIdCandidate;
   }, [enabled,],);
 }
-var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect2 : useEffect22;
+var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect2 : useEffect32;
 var ComponentContainerContext = React28.createContext(false,);
 var resizeObservers = [];
 var hasActiveObservations = function () {
@@ -19540,8 +19582,7 @@ var SharedObserver = class {
   constructor() {
     __privateAdd(this, _sharedResizeObserver, void 0,);
     __privateAdd(this, _callbacks, /* @__PURE__ */ new WeakMap(),);
-    var _a;
-    const ResizeObserver22 = (_a = safeWindow.ResizeObserver) != null ? _a : ResizeObserver2;
+    const ResizeObserver22 = safeWindow.ResizeObserver ?? ResizeObserver2;
     __privateSet(this, _sharedResizeObserver, new ResizeObserver22(this.updateResizedElements.bind(this,),),);
   }
   updateResizedElements(entries,) {
@@ -19566,7 +19607,7 @@ _callbacks = /* @__PURE__ */ new WeakMap();
 var sharedResizeObserver = isBrowser2() ? new SharedObserver() : void 0;
 function useRerenderOnResize(ref,) {
   const update = useForceUpdate3();
-  useEffect32(() => {
+  useEffect42(() => {
     const element = ref == null ? void 0 : ref.current;
     if (!element) {
       return;
@@ -19610,13 +19651,12 @@ function useMeasuredSize(ref,) {
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
 var withMeasuredSize = (Component15,) => (props,) => {
-  var _a, _b, _c, _d;
   const ref = React30.useRef(null,);
   const size2 = useMeasuredSize(ref,);
   const dataProps = { [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true, };
   const shouldRender = Boolean(size2,);
-  const fallbackWidth = (_a = props.width) != null ? _a : DEFAULT_SIZE;
-  const fallbackHeight = (_b = props.height) != null ? _b : DEFAULT_SIZE;
+  const fallbackWidth = props.width ?? DEFAULT_SIZE;
+  const fallbackHeight = props.height ?? DEFAULT_SIZE;
   return /* @__PURE__ */ React30.createElement(
     'div',
     { style: { width: '100%', height: '100%', pointerEvents: 'none', }, ref, ...dataProps, },
@@ -19624,8 +19664,8 @@ var withMeasuredSize = (Component15,) => (props,) => {
       Component15,
       {
         ...props,
-        width: (_c = size2 == null ? void 0 : size2.width) != null ? _c : fallbackWidth,
-        height: (_d = size2 == null ? void 0 : size2.height) != null ? _d : fallbackHeight,
+        width: (size2 == null ? void 0 : size2.width) ?? fallbackWidth,
+        height: (size2 == null ? void 0 : size2.height) ?? fallbackHeight,
       },
     ),
   );
@@ -20370,7 +20410,6 @@ function unwrapFrameProps(frameProps,) {
 }
 var defaultFrameRect = { x: 0, y: 0, width: 200, height: 200, };
 function useStyleAndRect(props,) {
-  var _a, _b, _c;
   React31.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
@@ -20380,7 +20419,7 @@ function useStyleAndRect(props,) {
   const constraintsRect = useConstraints(unwrappedProps,);
   const defaultStyle = {
     display: 'block',
-    flex: (_a = style == null ? void 0 : style.flex) != null ? _a : '0 0 auto',
+    flex: (style == null ? void 0 : style.flex) ?? '0 0 auto',
     userSelect: RenderTarget.current() !== 'PREVIEW' ? 'none' : void 0,
   };
   if (!props.__fromCanvasComponent) {
@@ -20430,8 +20469,8 @@ function useStyleAndRect(props,) {
   }
   Object.assign(defaultStyle, centerTextStyle, _initialStyle, propsStyle, constraintsStyle, style,);
   Object.assign(defaultStyle, {
-    overflowX: (_b = defaultStyle.overflowX) != null ? _b : defaultStyle.overflow,
-    overflowY: (_c = defaultStyle.overflowY) != null ? _c : defaultStyle.overflow,
+    overflowX: defaultStyle.overflowX ?? defaultStyle.overflow,
+    overflowY: defaultStyle.overflowY ?? defaultStyle.overflow,
     overflow: void 0,
   },);
   Layer.applyWillChange(props, defaultStyle, true,);
@@ -20502,14 +20541,13 @@ function hasDataFramerName(props,) {
   return 'data-framer-name' in props;
 }
 var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, forwardedRef,) {
-  var _a;
   const { name, center, border, _border, __portal, } = props;
   const { props: propsWithOverrides, children, } = processOverrideForwarding(props,);
   const motionProps = getMotionProps(propsWithOverrides,);
   const layoutId = useLayoutId2(props,);
   const cursor = getCursorFromEvents(props,);
-  const fallbackRef = useRef52(null,);
-  const ref = forwardedRef != null ? forwardedRef : fallbackRef;
+  const fallbackRef = useRef62(null,);
+  const ref = forwardedRef ?? fallbackRef;
   const dataProps = {
     'data-framer-component-type': 'Frame',
     'data-framer-cursor': cursor,
@@ -20543,9 +20581,9 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
         ? /* @__PURE__ */ React31.createElement(
           BackgroundImageComponent,
           {
-            alt: (_a = props.alt) != null ? _a : '',
+            alt: props.alt ?? '',
             image: backgroundImage,
-            containerSize: rect != null ? rect : void 0,
+            containerSize: rect ?? void 0,
             nodeId: props.id && nodeIdFromString(props.id,),
             layoutId,
           },
@@ -20883,12 +20921,11 @@ function useAppearEffect(ref, appearCallback, options,) {
   const { enabled, animateOnce, threshold, rootMargin = `0px 0px 0px 0px`, } = options;
   const callback = React35.useCallback(
     ([entry,],) => {
-      var _a;
       if (!entry) {
         return;
       }
       const { isInView, hasAnimatedOnce, } = internalState.current;
-      const isIntersecting = isIntersectingWithThreshold(entry, (_a = threshold == null ? void 0 : threshold.y) != null ? _a : 0,);
+      const isIntersecting = isIntersectingWithThreshold(entry, (threshold == null ? void 0 : threshold.y) ?? 0,);
       if (isIntersecting && !isInView) {
         if (animateOnce && hasAnimatedOnce) {
           return;
@@ -20912,7 +20949,7 @@ function useAppearEffect(ref, appearCallback, options,) {
   useSharedIntersectionObserver(ref, callback, {
     threshold: thresholds2,
     rootMargin,
-    enabled: enabled != null ? enabled : true,
+    enabled: enabled ?? true,
   },);
 }
 function calculatedIntersection(intersectionRect, boundingClientRect,) {
@@ -22905,7 +22942,7 @@ var NavigationTargetContext = /* @__PURE__ */ createContext9({
 },);
 var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
   const callbacks2 = useMap();
-  const register = useCallback42(
+  const register = useCallback52(
     (fn,) => {
       if (callbacks2.has(fn,)) {
         console.warn('NavigationTargetWrapper: already registered',);
@@ -22918,7 +22955,7 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
       /* constant, so should never change */
     ],
   );
-  const deregister = useCallback42(
+  const deregister = useCallback52(
     (fn,) => {
       const cleanup = callbacks2.get(fn,);
       cleanup == null ? void 0 : cleanup();
@@ -22929,8 +22966,8 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
       /* constant, so should never change */
     ],
   );
-  const value = useRef62({ register, deregister, },).current;
-  useEffect52(() => {
+  const value = useRef72({ register, deregister, },).current;
+  useEffect62(() => {
     callbacks2.forEach((_, cb,) => {
       const newCleanup = cb(isCurrent, isOverlayed,);
       callbacks2.set(cb, isFunction(newCleanup,) ? newCleanup : void 0,);
@@ -22954,7 +22991,7 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
 };
 function useOnCurrentTargetChange(callback, deps = [],) {
   const { register, deregister, } = useContext72(NavigationTargetContext,);
-  useEffect52(() => {
+  useEffect62(() => {
     if (!callback) {
       return;
     }
@@ -22989,19 +23026,19 @@ var NavigationContainer = /* @__PURE__ */ React44.memo(function NavigationContai
   const animate3 = useAnimation();
   const presence = useContext82(PresenceContext,);
   const { persistLayoutIdCache, } = useContext82(LayoutIdContext,);
-  const previousState = useRef72({
+  const previousState = useRef82({
     wasCurrent: void 0,
     wasPrevious: false,
     wasBeingRemoved: false,
     wasReset: true,
     origins: getOriginProps({}, initialProps, transitionProps,),
   },);
-  const viewportRef = useRef72(null,);
+  const viewportRef = useRef82(null,);
   const isBeingRemoved = presence !== null && !presence.isPresent;
   if (isCurrent && previousState.current.wasCurrent === void 0) {
     persistLayoutIdCache();
   }
-  useEffect62(() => {
+  useEffect72(() => {
     if (isLayeredContainer || !animate3) {
       return;
     }
@@ -24138,14 +24175,14 @@ function containerContent(item,) {
   const content = React45.Children.map(
     item.component,
     (child,) => {
-      var _a, _b;
+      var _a;
       if (!isReactChild(child,) || !isReactElement(child,) || !child.props) {
         return child;
       }
       const props = {
-        style: (_a = child.props.style) != null ? _a : {},
+        style: child.props.style ?? {},
       };
-      const position = (_b = item == null ? void 0 : item.transition) == null ? void 0 : _b.position;
+      const position = (_a = item == null ? void 0 : item.transition) == null ? void 0 : _a.position;
       const shouldStretchWidth = !position || position.left !== void 0 && position.right !== void 0;
       const shouldStretchHeight = !position || position.top !== void 0 && position.bottom !== void 0;
       const canStretchStyle = 'style' in child.props ? isObject2(child.props.style,) : true;
@@ -24304,8 +24341,8 @@ function useWheelScroll(ref, {
   onScroll,
   onScrollEnd,
 },) {
-  const isWheelScrollActive = useRef82(false,);
-  const getPointData = useCallback52(() => {
+  const isWheelScrollActive = useRef92(false,);
+  const getPointData = useCallback6(() => {
     const point2 = getPoint(offsetX, offsetY,);
     const data2 = {
       point: point2,
@@ -24440,7 +24477,6 @@ function useSafariGapFix(gap, ref, display,) {
 var Stack = /* @__PURE__ */ (() => {
   const StackInner = React48.forwardRef(
     function StackInner2(stackProps, forwardedRef,) {
-      var _a, _b;
       const {
         as = 'div',
         direction = 'vertical',
@@ -24476,8 +24512,8 @@ var Stack = /* @__PURE__ */ (() => {
       }
       const layoutId = useLayoutId2(stackProps,);
       const { children: _children, props, } = processOverrideForwarding(containerProps, children,);
-      const widthType = (_a = containerProps.widthType) != null ? _a : containerProps.width === 'auto' ? 2 : 0;
-      const heightType = (_b = containerProps.heightType) != null ? _b : containerProps.height === 'auto' ? 2 : 0;
+      const widthType = containerProps.widthType ?? (containerProps.width === 'auto' ? 2 : 0);
+      const heightType = containerProps.heightType ?? (containerProps.height === 'auto' ? 2 : 0);
       const fractionChildren = handleFraction(_children, direction, widthType, heightType,);
       const gapChildren = wrapInGapElementForLegacyGap(
         fractionChildren,
@@ -24489,7 +24525,7 @@ var Stack = /* @__PURE__ */ (() => {
       );
       const content = useProvideParentSize(
         gapChildren,
-        parentSize != null ? parentSize : 1,
+        parentSize ?? 1,
         /* Disabled */
       );
       const attributes = {
@@ -24899,8 +24935,8 @@ var Page = /* @__PURE__ */ React50.forwardRef(function Page2(props, forwardedRef
   const scrollableRef = React50.useRef(null,);
   const pageEffectValuesRef = React50.useRef([],);
   const pageRectsRef = React50.useRef([],);
-  const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX != null ? contentOffsetX : 0,);
-  const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY != null ? contentOffsetY : 0,);
+  const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX ?? 0,);
+  const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY ?? 0,);
   const contentOffsetRef = React50.useRef({
     x: isMotionValue2(contentOffsetX,) ? contentOffsetX : internalX,
     y: isMotionValue2(contentOffsetY,) ? contentOffsetY : internalY,
@@ -24997,14 +25033,13 @@ var Page = /* @__PURE__ */ React50.forwardRef(function Page2(props, forwardedRef
       return;
     }
     requestAnimationFrame(() => {
-      var _a2;
       currentContentPageRef.current = currentPage;
       const contentOffset = contentOffsetRef.current;
       contentOffset.x.on('change', applyEffects,);
       contentOffset.y.on('change', applyEffects,);
       applyEffects();
       hasMountedRef.current = true;
-      const containerSize = (_a2 = measureContainerSize()) != null ? _a2 : containerSizeRef.current;
+      const containerSize = measureContainerSize() ?? containerSizeRef.current;
       updateMaxOffsetFromPageContents(containerSize,);
       updateAndSnapToPage(currentContentPageRef.current, true,);
     },);
@@ -25016,7 +25051,7 @@ var Page = /* @__PURE__ */ React50.forwardRef(function Page2(props, forwardedRef
   }, [currentPage,],);
   const handleMeasureLifecycle = () => {
     const newContainerSize = measureContainerSize();
-    updateMaxOffsetFromPageContents(newContainerSize != null ? newContainerSize : containerSizeRef.current,);
+    updateMaxOffsetFromPageContents(newContainerSize ?? containerSizeRef.current,);
     updateAndSnapToPage(currentContentPageRef.current,);
     if (newContainerSize || direction !== lastDirectionRef.current) {
       if (direction === 'horizontal') {
@@ -25103,7 +25138,6 @@ var Page = /* @__PURE__ */ React50.forwardRef(function Page2(props, forwardedRef
   };
   pageEffectValuesRef.current = [];
   const childComponents = React50.Children.map(children, (child, index,) => {
-    var _a2;
     if (!isReactChild(child,) || !isReactElement(child,)) {
       return child;
     }
@@ -25117,7 +25151,7 @@ var Page = /* @__PURE__ */ React50.forwardRef(function Page2(props, forwardedRef
       },
     };
     if (containerProps.__fromCanvasComponent) {
-      update.style = (_a2 = child.props.style) != null ? _a2 : {};
+      update.style = child.props.style ?? {};
       if (contentWidth === 'stretch') {
         update.style.width = '100%';
       }
@@ -26025,7 +26059,6 @@ var FramerEventSession = class {
    * @param n - number of events to use for calculation
    */
   velocity(t = Loop.TimeStep * 2,) {
-    var _a;
     if (!this.isStarted || this.events.length < 2) {
       return { x: 0, y: 0, };
     }
@@ -26033,7 +26066,7 @@ var FramerEventSession = class {
     let i = events2.length - 1;
     let event = null;
     while (i >= 0) {
-      event = (_a = events2[i]) != null ? _a : null;
+      event = events2[i] ?? null;
       if (!event || MainLoop.time - event.loopTime > t) {
         break;
       }
@@ -26242,10 +26275,10 @@ var EmulatedScroll = /* @__PURE__ */ React522.forwardRef(
     const defaultY = useMotionValue(typeof contentOffsetY === 'number' ? contentOffsetY : 0,);
     const x = isMotionValue2(contentOffsetX,) ? contentOffsetX : defaultX;
     const y = isMotionValue2(contentOffsetY,) ? contentOffsetY : defaultY;
-    const measuredConstraints = useRef92(null,);
+    const measuredConstraints = useRef102(null,);
     const dragControls = useDragControls();
     const isInTarget = useIsInCurrentNavigationTarget();
-    const wasInTargetRef = useRef92(true,);
+    const wasInTargetRef = useRef102(true,);
     useInsertionEffect5(() => {
       injectComponentCSSRules();
     }, [],);
@@ -26259,15 +26292,15 @@ var EmulatedScroll = /* @__PURE__ */ React522.forwardRef(
       }
       return measuredConstraints.current = constraints;
     }
-    const { initial, prev, } = useRef92({
+    const { initial, prev, } = useRef102({
       initial: { x: 0, y: 0, },
       prev: { x: 0, y: 0, },
     },).current;
     const isPreview = RenderTarget.current() === 'PREVIEW';
-    const containerFallbackRef = useRef92(null,);
+    const containerFallbackRef = useRef102(null,);
     const containerRef = forwardedRef || containerFallbackRef;
-    const contentRef = useRef92(null,);
-    const lastOffsetRef = useRef92(null,);
+    const contentRef = useRef102(null,);
+    const lastOffsetRef = useRef102(null,);
     function shouldResetScroll(inTarget,) {
       const hasEnteredTarget = inTarget && wasInTargetRef.current === false;
       return resetOffset && hasEnteredTarget;
@@ -26329,14 +26362,14 @@ var EmulatedScroll = /* @__PURE__ */ React522.forwardRef(
       }
     }, [isInTarget,],);
     const getLatestPoint = () => ({ x: x.get(), y: y.get(), });
-    const resetInitialPoint = useCallback6(() => {
+    const resetInitialPoint = useCallback7(() => {
       const point2 = getLatestPoint();
       initial.x = point2.x;
       initial.y = point2.y;
       prev.x = point2.x;
       prev.y = point2.y;
     }, [],);
-    const getPointData = useCallback6(() => {
+    const getPointData = useCallback7(() => {
       const point2 = getLatestPoint();
       const data2 = {
         point: point2,
@@ -26348,11 +26381,11 @@ var EmulatedScroll = /* @__PURE__ */ React522.forwardRef(
       prev.y = point2.y;
       return data2;
     }, [x, y,],);
-    const updateScrollListeners = useCallback6(() => {
+    const updateScrollListeners = useCallback7(() => {
       onUpdate && onUpdate({ x: x.get(), y: y.get(), },);
       onScroll && onScroll(getPointData(),);
     }, [onScroll, onUpdate, getPointData, x, y,],);
-    const scheduleUpdateScrollListeners = useCallback6(() => {
+    const scheduleUpdateScrollListeners = useCallback7(() => {
       frame.update(updateScrollListeners, false, true,);
     }, [updateScrollListeners,],);
     const onMotionDragStart = (event, info,) => {
@@ -26710,7 +26743,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
     return emptyObject;
   }
   const scrollAnimationControlsRef = React53.useRef(null,);
-  useEffect72(() => {
+  useEffect82(() => {
     if (!ref.current) {
       return;
     }
@@ -27203,7 +27236,7 @@ function createData(defaultState2, actions,) {
     }, [id3,],);
     const [, notifyUpdates,] = useState8(store.getVersion(),);
     const storeValueAtHookCallTime = useMemo42(() => store.get(), [store,],);
-    useEffect82(() => {
+    useEffect92(() => {
       const unsubscribe = store.subscribe(notifyUpdates,);
       if (storeValueAtHookCallTime !== store.get()) {
         notifyUpdates(store.getVersion(),);
@@ -27325,16 +27358,15 @@ var effectValuesKeys = [
   'transformPerspective',
 ];
 var makeFXValues = (defaults,) => {
-  var _a, _b, _c, _d, _e, _f, _g, _h;
   return {
-    x: motionValue((_a = defaults == null ? void 0 : defaults.x) != null ? _a : 0,),
-    y: motionValue((_b = defaults == null ? void 0 : defaults.y) != null ? _b : 0,),
-    opacity: motionValue((_c = defaults == null ? void 0 : defaults.opacity) != null ? _c : 1,),
-    scale: motionValue((_d = defaults == null ? void 0 : defaults.scale) != null ? _d : 1,),
-    rotate: motionValue((_e = defaults == null ? void 0 : defaults.rotate) != null ? _e : 0,),
-    rotateX: motionValue((_f = defaults == null ? void 0 : defaults.rotateX) != null ? _f : 0,),
-    rotateY: motionValue((_g = defaults == null ? void 0 : defaults.rotateY) != null ? _g : 0,),
-    transformPerspective: motionValue((_h = defaults == null ? void 0 : defaults.transformPerspective) != null ? _h : 0,),
+    x: motionValue((defaults == null ? void 0 : defaults.x) ?? 0,),
+    y: motionValue((defaults == null ? void 0 : defaults.y) ?? 0,),
+    opacity: motionValue((defaults == null ? void 0 : defaults.opacity) ?? 1,),
+    scale: motionValue((defaults == null ? void 0 : defaults.scale) ?? 1,),
+    rotate: motionValue((defaults == null ? void 0 : defaults.rotate) ?? 0,),
+    rotateX: motionValue((defaults == null ? void 0 : defaults.rotateX) ?? 0,),
+    rotateY: motionValue((defaults == null ? void 0 : defaults.rotateY) ?? 0,),
+    transformPerspective: motionValue((defaults == null ? void 0 : defaults.transformPerspective) ?? 0,),
   };
 };
 var defaultFXValues = {
@@ -27371,8 +27403,8 @@ var loopOptionsKeys = /* @__PURE__ */ new Set([
   'loopRepeatDelay',
 ],);
 var useDelay = () => {
-  const timeoutRef = useRef102();
-  useEffect92(() => {
+  const timeoutRef = useRef112();
+  useEffect102(() => {
     return () => {
       clearTimeout(timeoutRef.current,);
     };
@@ -27406,18 +27438,16 @@ function useLoop({
     mirrorStateRef.current = !mirrorStateRef.current;
     return Promise.all(
       effectValuesKeys.map((key7,) => {
-        var _a;
         if (shouldReduceMotion && key7 !== 'opacity') {
           return;
         }
-        effect.values[key7].set((_a = from[key7]) != null ? _a : defaultFXValues[key7],);
+        effect.values[key7].set(from[key7] ?? defaultFXValues[key7],);
         return new Promise((resolve,) => {
-          var _a2;
           const opts = {
             ...transition,
             onComplete: () => resolve(),
           };
-          animate(effect.values[key7], (_a2 = to[key7]) != null ? _a2 : from[key7], opts,);
+          animate(effect.values[key7], to[key7] ?? from[key7], opts,);
         },);
       },),
     );
@@ -27427,10 +27457,10 @@ function useLoop({
       return;
     }
     await animateValues();
-    await delay2(loopRepeatDelay != null ? loopRepeatDelay : 0,);
+    await delay2(loopRepeatDelay ?? 0,);
     await start();
   };
-  const stop = useCallback7(() => {
+  const stop = useCallback8(() => {
     effectValuesKeys.forEach((key7,) => {
       effect.values[key7].stop();
     },);
@@ -27479,14 +27509,13 @@ function useParallax(options, ref, visibilityStyle,) {
   );
   React60.useLayoutEffect(() => {
     frame.read(() => {
-      var _a, _b, _c;
-      originalPosition.current =
-        (_c = (_b = (_a = ref.current) == null ? void 0 : _a.getBoundingClientRect()) == null ? void 0 : _b.top) != null ? _c : 0;
+      var _a, _b;
+      originalPosition.current = ((_b = (_a = ref.current) == null ? void 0 : _a.getBoundingClientRect()) == null ? void 0 : _b.top) ?? 0;
     },);
     frame.update(() => {
       parallaxY.set(transform2(scrollY.get(),),);
       if (adjustPosition) {
-        visibility.set(visibilityStyle != null ? visibilityStyle : 'initial',);
+        visibility.set(visibilityStyle ?? 'initial',);
       }
     },);
   }, [ref, originalPosition, adjustPosition,],);
@@ -27516,17 +27545,12 @@ async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appea
   return Promise.all(
     effectValuesKeys.map((key7,) => {
       return new Promise((resolve,) => {
-        var _a;
         if (shouldReduceMotion && key7 !== 'opacity') {
           return resolve();
         }
         const motionValue2 = effect.values[key7];
         motionValue2.stop();
-        let value = !isObject2(target,)
-          ? defaultFXValues[key7]
-          : (_a = target == null ? void 0 : target[key7]) != null
-          ? _a
-          : defaultFXValues[key7];
+        let value = !isObject2(target,) ? defaultFXValues[key7] : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
         if (isMotionValue(value,)) {
           value = value.get();
         }
@@ -27573,9 +27597,9 @@ function usePresenceAnimation(
   enabled,
   appearId,
 ) {
-  const initial = presenceInitial != null ? presenceInitial : motionInitial;
-  const animateConfig = presenceAnimate != null ? presenceAnimate : motionAnimate;
-  const exit = presenceExit != null ? presenceExit : motionExit;
+  const initial = presenceInitial ?? motionInitial;
+  const animateConfig = presenceAnimate ?? motionAnimate;
+  const exit = presenceExit ?? motionExit;
   const effect = useConstant2(() => {
     var _a;
     if (!isObject2(initial,)) {
@@ -27629,17 +27653,17 @@ function calcOffsetTop(element, container,) {
 }
 var scrollObserverOffset = 1;
 function createTransformInputRange(transformTargets, threshold = 0, callback,) {
-  var _a, _b, _c;
+  var _a;
   const starts = [];
   const inputRange = [];
   for (let index = transformTargets.length; index >= 0; index--) {
-    const { ref: targetRef, offset, } = (_a = transformTargets[index]) != null ? _a : {};
+    const { ref: targetRef, offset, } = transformTargets[index] ?? {};
     if (!targetRef || !targetRef.current) {
       continue;
     }
     const offsetTop = calcOffsetTop(targetRef.current, document.documentElement,);
-    const top = offsetTop - scrollObserverOffset - (offset != null ? offset : 0) - threshold;
-    const height = (_c = (_b = targetRef.current) == null ? void 0 : _b.clientHeight) != null ? _c : 0;
+    const top = offsetTop - scrollObserverOffset - (offset ?? 0) - threshold;
+    const height = ((_a = targetRef.current) == null ? void 0 : _a.clientHeight) ?? 0;
     const previousTop = starts[starts.length - 1];
     const end = Math.max(top + height, 0,);
     starts.push(top,);
@@ -27659,7 +27683,7 @@ function currentScrollDirection(offset, lastOffset = 0,) {
 }
 var scrollDirectionThreshold = 4;
 function useScrollDirectionChange(scrollDirection, cb, options = {},) {
-  const { direction, target, } = scrollDirection != null ? scrollDirection : {};
+  const { direction, target, } = scrollDirection ?? {};
   const { repeat = true, enabled = true, } = options;
   React61.useEffect(() => {
     if (!direction || !enabled) {
@@ -27747,19 +27771,16 @@ function createInputOutputRange(targets, threshold, hasExit,) {
   };
 }
 function makeStyle(defaults,) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i;
   return {
-    x: (_a = defaults == null ? void 0 : defaults.x) != null ? _a : defaultFXValues.x,
-    y: (_b = defaults == null ? void 0 : defaults.y) != null ? _b : defaultFXValues.y,
-    scale: (_c = defaults == null ? void 0 : defaults.scale) != null ? _c : defaultFXValues.scale,
-    opacity: (_d = defaults == null ? void 0 : defaults.opacity) != null ? _d : defaultFXValues.opacity,
-    transformPerspective: (_e = defaults == null ? void 0 : defaults.transformPerspective) != null
-      ? _e
-      : defaultFXValues.transformPerspective,
-    rotate: (_f = defaults == null ? void 0 : defaults.rotate) != null ? _f : defaultFXValues.rotate,
-    rotateX: (_g = defaults == null ? void 0 : defaults.rotateX) != null ? _g : defaultFXValues.rotateX,
-    rotateY: (_h = defaults == null ? void 0 : defaults.rotateY) != null ? _h : defaultFXValues.rotateY,
-    transition: (_i = defaults == null ? void 0 : defaults.transition) != null ? _i : void 0,
+    x: (defaults == null ? void 0 : defaults.x) ?? defaultFXValues.x,
+    y: (defaults == null ? void 0 : defaults.y) ?? defaultFXValues.y,
+    scale: (defaults == null ? void 0 : defaults.scale) ?? defaultFXValues.scale,
+    opacity: (defaults == null ? void 0 : defaults.opacity) ?? defaultFXValues.opacity,
+    transformPerspective: (defaults == null ? void 0 : defaults.transformPerspective) ?? defaultFXValues.transformPerspective,
+    rotate: (defaults == null ? void 0 : defaults.rotate) ?? defaultFXValues.rotate,
+    rotateX: (defaults == null ? void 0 : defaults.rotateX) ?? defaultFXValues.rotateX,
+    rotateY: (defaults == null ? void 0 : defaults.rotateY) ?? defaultFXValues.rotateY,
+    transition: (defaults == null ? void 0 : defaults.transition) ?? void 0,
   };
 }
 function useAnimationVariants({
@@ -27772,20 +27793,17 @@ function useAnimationVariants({
   ...defaultStyles
 },) {
   return React622.useMemo(
-    () => {
-      var _a;
-      return {
-        initial: enter != null ? enter : makeStyle({
-          ...defaultStyles,
-          opacity: (_a = opacity != null ? opacity : targetOpacity) != null ? _a : 1,
-          transformPerspective,
-        },),
-        animate: animateVariant2 != null ? animateVariant2 : makeStyle({
-          opacity: targetOpacity,
-        },),
-        exit: exit != null ? exit : makeStyle(),
-      };
-    },
+    () => ({
+      initial: enter ?? makeStyle({
+        ...defaultStyles,
+        opacity: opacity ?? targetOpacity ?? 1,
+        transformPerspective,
+      },),
+      animate: animateVariant2 ?? makeStyle({
+        opacity: targetOpacity,
+      },),
+      exit: exit ?? makeStyle(),
+    }),
     [animateVariant2, defaultStyles, enter, exit, opacity, targetOpacity, transformPerspective,],
   );
 }
@@ -27802,16 +27820,14 @@ function useStyleAppearEffect(options, ref,) {
   const animation = React622.useRef();
   const runAnimation = React622.useCallback(
     async ({ transition, ...target }, fromInitial,) => {
-      var _a;
-      const transitionWithFallback = (_a = transition != null ? transition : variants.animate.transition) != null ? _a : options.transition;
+      const transitionWithFallback = transition ?? variants.animate.transition ?? options.transition;
       await animation.current;
       animation.current = Promise.all(
         effectValuesKeys.map((key7,) => {
-          var _a2, _b;
           if (fromInitial) {
-            effect.values[key7].set((_a2 = variants.initial[key7]) != null ? _a2 : defaultFXValues[key7],);
+            effect.values[key7].set(variants.initial[key7] ?? defaultFXValues[key7],);
           }
-          const toValue = (_b = target[key7]) != null ? _b : defaultFXValues[key7];
+          const toValue = target[key7] ?? defaultFXValues[key7];
           const visualElement = visualElementStore.get(ref.current,);
           if (visualElement && typeof toValue !== 'object') {
             visualElement.setBaseTarget(key7, toValue,);
@@ -27869,7 +27885,6 @@ function useStyleAppearEffect(options, ref,) {
     const playedState = { initial: true, };
     let lastVariant = 'initial';
     return scrollInfo(({ y: scrollY, },) => {
-      var _a;
       const { targets, } = options;
       if (!targets) {
         return;
@@ -27879,7 +27894,7 @@ function useStyleAppearEffect(options, ref,) {
       }
       const { inputRange, outputRange, } = createInputOutputRange(
         targets,
-        ((_a = options.threshold) != null ? _a : 0) * scrollY.containerLength,
+        (options.threshold ?? 0) * scrollY.containerLength,
         !!options.exit,
       );
       if (inputRange.length === 0 || inputRange.length !== outputRange.length) {
@@ -27901,7 +27916,7 @@ function useStyleAppearEffect(options, ref,) {
       runAnimation(variantAnimation,);
     },);
   }, [animateWithScrollInfo,],);
-  useScrollDirectionChange(options.scrollDirection, (target,) => runAnimation(target != null ? target : variants.animate,), {
+  useScrollDirectionChange(options.scrollDirection, (target,) => runAnimation(target ?? variants.animate,), {
     enabled,
     repeat: !options.animateOnce,
   },);
@@ -27915,9 +27930,9 @@ var styleTransformOptionsKeys = /* @__PURE__ */ new Set([
   'transformTrigger',
 ],);
 var defaultValues = (transformTargets, shouldReduceMotion,) => {
-  var _a, _b;
+  var _a;
   const initial = (_a = transformTargets == null ? void 0 : transformTargets[0]) == null ? void 0 : _a.target;
-  return shouldReduceMotion ? { opacity: (_b = initial == null ? void 0 : initial.opacity) != null ? _b : 1, } : initial;
+  return shouldReduceMotion ? { opacity: (initial == null ? void 0 : initial.opacity) ?? 1, } : initial;
 };
 var defaultRanges2 = () => ({
   opacity: [],
@@ -27963,15 +27978,15 @@ function useAttachOptionalSpring(values, spring2,) {
 function createInputOutputRanges(transformTargets, threshold,) {
   const effectKeyOutputRange = defaultRanges2();
   const inputRange = createTransformInputRange(transformTargets, threshold, (index,) => {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c;
     const previousTarget = (_a = transformTargets[index - 1]) == null ? void 0 : _a.target;
     const currentTarget = (_b = transformTargets[index]) == null ? void 0 : _b.target;
     for (const key7 of effectValuesKeys) {
-      (_e = effectKeyOutputRange[key7]) == null
+      (_c = effectKeyOutputRange[key7]) == null
         ? void 0
-        : _e.unshift(
-          (_c = previousTarget == null ? void 0 : previousTarget[key7]) != null ? _c : 0,
-          (_d = currentTarget == null ? void 0 : currentTarget[key7]) != null ? _d : 0,
+        : _c.unshift(
+          (previousTarget == null ? void 0 : previousTarget[key7]) ?? 0,
+          (currentTarget == null ? void 0 : currentTarget[key7]) ?? 0,
         );
     }
   },);
@@ -27998,7 +28013,6 @@ function useStyleTransform({
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
   React63.useLayoutEffect(() => {
-    var _a;
     if (!styleTransformEffectEnabled || !transformTargets) {
       return;
     }
@@ -28018,7 +28032,7 @@ function useStyleTransform({
         },
         transformTrigger === 'onInView'
           ? {
-            target: (_a = ref.current) != null ? _a : void 0,
+            target: ref.current ?? void 0,
             offset: [`start end`, `end end`,],
           }
           : void 0,
@@ -28158,7 +28172,7 @@ var withFX = (Component15,) =>
       },);
     }
     const fallbackRef = React64.useRef(null,);
-    const ref = forwardedRef != null ? forwardedRef : fallbackRef;
+    const ref = forwardedRef ?? fallbackRef;
     const {
       parallax = {},
       styleAppear = {},
@@ -28172,7 +28186,7 @@ var withFX = (Component15,) =>
       __perspectiveFX: withPerspective,
       __smartComponentFX: inSmartComponent = false,
     } = props;
-    const targetOpacity = useMotionValue(targetOpacityValue != null ? targetOpacityValue : 1,);
+    const targetOpacity = useMotionValue(targetOpacityValue ?? 1,);
     const { values: presenceEffectValues, } = usePresenceAnimation(
       presence,
       ref,
@@ -28270,16 +28284,15 @@ var withParallaxTransform = withFX;
 var withStyleAppearEffect = withFX;
 var Context = /* @__PURE__ */ createContext42({},);
 function ComponentPresetsProvider({ presets, children, },) {
-  const lastPresets = useRef112(presets,);
+  const lastPresets = useRef122(presets,);
   if (!isEqual(presets, lastPresets.current, false,)) {
     lastPresets.current = presets;
   }
   return /* @__PURE__ */ React65.createElement(Context.Provider, { value: lastPresets.current, }, children,);
 }
 function ComponentPresetsConsumer({ componentIdentifier, children, },) {
-  var _a;
   const componentPresets = useContext122(Context,);
-  const presetProps = (_a = componentPresets[componentIdentifier]) != null ? _a : {};
+  const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
 var cloneChildrenWithPropsAndRef = (children, props, ref,) => {
@@ -28336,7 +28349,7 @@ var Providers = /* @__PURE__ */ React69.forwardRef(
           { enabled: false, },
           /* @__PURE__ */ React69.createElement(
             LayoutGroup,
-            { id: layoutId != null ? layoutId : '', inherit: 'id', },
+            { id: layoutId ?? '', inherit: 'id', },
             React69.Children.map(children, (child,) => {
               return React69.isValidElement(child,) ? React69.cloneElement(child, { layoutId, },) : child;
             },),
@@ -28369,8 +28382,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
 var styleTagSSRMarker = { 'data-framer-css-ssr': true, };
 var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
   React71.forwardRef((props, ref,) => {
-    var _a;
-    const { sheet, cache: cache3, } = (_a = React71.useContext(StyleSheetContext,)) != null ? _a : {};
+    const { sheet, cache: cache3, } = React71.useContext(StyleSheetContext,) ?? {};
     if (!isBrowser2()) {
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
       return /* @__PURE__ */ React71.createElement(
@@ -28417,10 +28429,9 @@ var CustomCursorContextProvider = /* @__PURE__ */ React722.memo(function CustomC
         return () => events2.delete(callback,);
       },
       registerCursors: (cursors,) => {
-        var _a;
         const nextCursors = {};
         for (const key7 in cursors) {
-          const cursor = (_a = allCursors[key7]) != null ? _a : cursors[key7];
+          const cursor = allCursors[key7] ?? cursors[key7];
           if (cursor) {
             nextCursors[key7] = cursor;
           }
@@ -28489,7 +28500,6 @@ function getCenteringTransform(placement, alignment = 'center',) {
 }
 var portalIdAttribute = 'data-framer-portal-id';
 function getCursorHash(x, y,) {
-  var _a;
   let el = document.elementFromPoint(x, y,);
   while (el) {
     if (el === document.body) {
@@ -28503,7 +28513,7 @@ function getCursorHash(x, y,) {
       const id3 = el.getAttribute(portalIdAttribute,);
       el = el.parentElement;
       if (id3) {
-        el = (_a = document.getElementById(id3,)) != null ? _a : el;
+        el = document.getElementById(id3,) ?? el;
       }
     } else {
       el = el.parentElement;
@@ -28518,7 +28528,6 @@ function isEmptyObject(object,) {
   return true;
 }
 var CustomCursorComponent = /* @__PURE__ */ React722.memo(function CustomCursorComponent2() {
-  var _a;
   const { onRegisterCursors, } = useContext132(CustomCursorContext,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
@@ -28569,8 +28578,8 @@ var CustomCursorComponent = /* @__PURE__ */ React722.memo(function CustomCursorC
         button: e.button,
       },);
       frame.update(() => {
-        var _a2;
-        (_a2 = cursorRef.current) == null ? void 0 : _a2.dispatchEvent(event,);
+        var _a;
+        (_a = cursorRef.current) == null ? void 0 : _a.dispatchEvent(event,);
       },);
     }
     safeWindow.addEventListener('pointermove', updateCursor,);
@@ -28613,16 +28622,16 @@ var CustomCursorComponent = /* @__PURE__ */ React722.memo(function CustomCursorC
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor,],);
   const Cursor = cursor == null ? void 0 : cursor.component;
-  const spring2 = (_a = cursor == null ? void 0 : cursor.transition) != null ? _a : { duration: 0, };
+  const spring2 = (cursor == null ? void 0 : cursor.transition) ?? { duration: 0, };
   const sprungX = useSpring(pointerX, spring2,);
   const sprungY = useSpring(pointerY, spring2,);
   const x = useTransform(() => {
-    var _a2, _b;
-    return sprungX.get() + ((_b = (_a2 = cursor == null ? void 0 : cursor.offset) == null ? void 0 : _a2.x) != null ? _b : 0);
+    var _a;
+    return sprungX.get() + (((_a = cursor == null ? void 0 : cursor.offset) == null ? void 0 : _a.x) ?? 0);
   },);
   const y = useTransform(() => {
-    var _a2, _b;
-    return sprungY.get() + ((_b = (_a2 = cursor == null ? void 0 : cursor.offset) == null ? void 0 : _a2.y) != null ? _b : 0);
+    var _a;
+    return sprungY.get() + (((_a = cursor == null ? void 0 : cursor.offset) == null ? void 0 : _a.y) ?? 0);
   },);
   const alignment = cursor == null ? void 0 : cursor.alignment;
   const placement = cursor == null ? void 0 : cursor.placement;
@@ -28899,12 +28908,12 @@ function createUpdateSafeArea(safeAreaRef,) {
   let x = 0;
   let y = 0;
   return (anchorRect, calculatedRect, placement, event,) => {
-    var _a, _b, _c;
+    var _a;
     if (!((_a = safeAreaRef.current) == null ? void 0 : _a.style)) {
       return;
     }
-    x = (_b = event == null ? void 0 : event.clientX) != null ? _b : x;
-    y = (_c = event == null ? void 0 : event.clientY) != null ? _c : y;
+    x = (event == null ? void 0 : event.clientX) ?? x;
+    y = (event == null ? void 0 : event.clientY) ?? y;
     Object.assign(
       safeAreaRef.current.style,
       floatingPositionSafeAreaStyle(x, y, placement, anchorRect, calculatedRect,),
@@ -28912,7 +28921,6 @@ function createUpdateSafeArea(safeAreaRef,) {
   };
 }
 function updatePosition(floatingPositionRef, position, rect,) {
-  var _a, _b;
   if (!floatingPositionRef.current) {
     return;
   }
@@ -28920,8 +28928,8 @@ function updatePosition(floatingPositionRef, position, rect,) {
     position,
     visibility: 'visible',
     // Append "px" because we are assigning this object straight to style.
-    left: ((_a = rect == null ? void 0 : rect.x) != null ? _a : 0) + (position === 'fixed' ? 0 : safeWindow.scrollX) + 'px',
-    top: ((_b = rect == null ? void 0 : rect.y) != null ? _b : 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
+    left: ((rect == null ? void 0 : rect.x) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollX) + 'px',
+    top: ((rect == null ? void 0 : rect.y) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
   },);
 }
 var FloatingStackingContext = /* @__PURE__ */ React73.createContext(/* @__PURE__ */ new Set(),);
@@ -29051,7 +29059,6 @@ function Floating({
   onDismiss,
   ...rest
 },) {
-  var _a;
   const floatingPositionRef = React73.useRef(null,);
   const safeAreaRef = React73.useRef(null,);
   const contentRef = React73.useRef(null,);
@@ -29064,8 +29071,8 @@ function Floating({
     const elementRect = contentRef.current.getBoundingClientRect();
     const initialAnchorRect = anchorRef.current.getBoundingClientRect();
     const offset = {
-      x: offsetX != null ? offsetX : 0,
-      y: offsetY != null ? offsetY : 0,
+      x: offsetX ?? 0,
+      y: offsetY ?? 0,
     };
     const getSafePlacementRect = makeGetSafePlacementFloatingPositionRect({
       placement,
@@ -29149,7 +29156,7 @@ function Floating({
         /* @__PURE__ */ React73.createElement('div', { ref: contentRef, }, childrenWithOrigin(children, origin,),),
       ),
     ),
-    (_a = document.querySelector(portalSelector,)) != null ? _a : document.body,
+    document.querySelector(portalSelector,) ?? document.body,
   );
 }
 var GeneratedComponentContext = /* @__PURE__ */ React74.createContext(
@@ -29282,7 +29289,7 @@ function shouldOpenLinkInNewTab(link,) {
   return !isFramerPageLink(link,);
 }
 function navigateFromAttributes(navigate, element, implicitPathVariables,) {
-  var _a, _b, _c;
+  var _a;
   let routeId = element.getAttribute(
     'data-framer-page-link-target',
     /* Page */
@@ -29290,12 +29297,10 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
   let elementId;
   let pathVariables;
   if (routeId) {
-    elementId = (_a = element.getAttribute(
-        'data-framer-page-link-element',
-        /* Element */
-      )) != null
-      ? _a
-      : void 0;
+    elementId = element.getAttribute(
+      'data-framer-page-link-element',
+      /* Element */
+    ) ?? void 0;
     const pathVariablesRaw = element.getAttribute(
       'data-framer-page-link-path-variables',
       /* PathVariables */
@@ -29313,8 +29318,8 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
       return false;
     }
     routeId = link.target;
-    elementId = (_b = link.element) != null ? _b : void 0;
-    pathVariables = (_c = link.collectionItem) == null ? void 0 : _c.pathVariables;
+    elementId = link.element ?? void 0;
+    pathVariables = (_a = link.collectionItem) == null ? void 0 : _a.pathVariables;
   }
   const smoothScroll = elementId ? element.dataset.framerSmoothScroll !== void 0 : void 0;
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
@@ -29323,9 +29328,9 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
 var noLocale = {};
 var resolveSlugCache = /* @__PURE__ */ new WeakMap();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
-  var _a, _b, _c, _d;
+  var _a, _b;
   const cache3 =
-    (_b = (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get(activeLocale != null ? activeLocale : noLocale,)) == null
+    (_b = (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get(activeLocale ?? noLocale,)) == null
         ? void 0
         : _a.get(unresolvedSlug.collectionId,)) == null
       ? void 0
@@ -29333,11 +29338,9 @@ function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
   if (cache3) {
     return cache3;
   }
-  const collectionCache = (_c = resolveSlugCache.get(activeLocale != null ? activeLocale : noLocale,)) != null
-    ? _c
-    : /* @__PURE__ */ new Map();
-  resolveSlugCache.set(activeLocale != null ? activeLocale : noLocale, collectionCache,);
-  const collectionItemCache = (_d = collectionCache.get(unresolvedSlug.collectionId,)) != null ? _d : /* @__PURE__ */ new Map();
+  const collectionCache = resolveSlugCache.get(activeLocale ?? noLocale,) ?? /* @__PURE__ */ new Map();
+  resolveSlugCache.set(activeLocale ?? noLocale, collectionCache,);
+  const collectionItemCache = collectionCache.get(unresolvedSlug.collectionId,) ?? /* @__PURE__ */ new Map();
   collectionCache.set(unresolvedSlug.collectionId, collectionItemCache,);
   const lazyValue = new LazyValue(async () => {
     try {
@@ -29349,7 +29352,7 @@ function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
       if (!utils) {
         throw new Error('Collection does not contain utility functions',);
       }
-      const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale != null ? activeLocale : void 0,);
+      const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
       return slug;
     } catch (error) {
       console.warn(`Failed to resolve slug: ${error instanceof Error ? error.message : 'Unknown error'}`,);
@@ -29390,7 +29393,7 @@ function linkFromFramerPageLink(link,) {
   }
   return {
     webPageId: target,
-    hash: element != null ? element : void 0,
+    hash: element ?? void 0,
     pathVariables: createVariablesFromPageLinkCollectionItem(collectionItem,),
   };
 }
@@ -29632,7 +29635,7 @@ var Link = /* @__PURE__ */ React75.forwardRef(
     if (!React75.isValidElement(child,)) {
       return null;
     }
-    return React75.cloneElement(child, { ...restProps, ...props, ref: forwardedRef != null ? forwardedRef : restProps.ref, },);
+    return React75.cloneElement(child, { ...restProps, ...props, ref: forwardedRef ?? restProps.ref, },);
   },
 );
 function resolveLink(href, router, implicitPathVariables,) {
@@ -29767,9 +29770,8 @@ function PageRoot({
 var SSRParentVariantsContext = /* @__PURE__ */ React77.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function propsForClonedChild(child, props, ref,) {
-  var _a;
   if ('ref' in child) {
-    return { ...props, ref: (_a = child.ref) != null ? _a : ref, };
+    return { ...props, ref: child.ref ?? ref, };
   }
   return { ...props, ref, };
 }
@@ -30241,13 +30243,7 @@ function compare(left, right, collation,) {
 var INDEX_IDENTIFIER = 'index';
 var ScalarExpression = class {
   static from(expression, schema,) {
-    const scalarExpression = convertExpression(expression, schema,);
-    const isLiteralValue = scalarExpression instanceof ScalarLiteralValue;
-    if (scalarExpression.canEvaluate() && !isLiteralValue) {
-      const value = scalarExpression.evaluate();
-      return new ScalarLiteralValue(scalarExpression.definition, value,);
-    }
-    return scalarExpression;
+    return convertExpression(expression, schema, void 0,);
   }
 };
 var ScalarIdentifier = class extends ScalarExpression {
@@ -30276,12 +30272,11 @@ var ScalarIdentifier = class extends ScalarExpression {
     return other instanceof ScalarIdentifier && isEqual(this.definition, other.definition,) && isEqual(other.name, this.name,);
   }
   evaluate(item,) {
-    var _a;
     const name = this.name;
     if (isUndefined(item,) || name === INDEX_IDENTIFIER) {
       throw new Error(`Can't evaluate identifier: ${name}`,);
     }
-    return (_a = item.data[name]) != null ? _a : null;
+    return item.data[name] ?? null;
   }
   canEvaluate() {
     return false;
@@ -30301,26 +30296,32 @@ var ScalarLiteralValue = class extends ScalarExpression {
   }
   static fromBoolean(value,) {
     return new ScalarLiteralValue(
-      { type: 'boolean', isNullable: false, },
-      { type: 'boolean', value, },
+      { type: 'boolean', isNullable: isNull(value,), },
+      isNull(value,) ? null : { type: 'boolean', value, },
     );
   }
   static fromDate(value,) {
     return new ScalarLiteralValue(
-      { type: 'date', isNullable: false, },
-      { type: 'date', value: value.toISOString(), },
+      { type: 'date', isNullable: isNull(value,), },
+      isNull(value,) ? null : { type: 'date', value: value.toISOString(), },
+    );
+  }
+  static fromEnum(value,) {
+    return new ScalarLiteralValue(
+      { type: 'enum', isNullable: isNull(value,), },
+      isNull(value,) ? null : { type: 'enum', value, },
     );
   }
   static fromNumber(value,) {
     return new ScalarLiteralValue(
-      { type: 'number', isNullable: false, },
-      { type: 'number', value, },
+      { type: 'number', isNullable: isNull(value,), },
+      isNull(value,) ? null : { type: 'number', value, },
     );
   }
   static fromString(value,) {
     return new ScalarLiteralValue(
-      { type: 'string', isNullable: false, },
-      { type: 'string', value, },
+      { type: 'string', isNullable: isNull(value,), },
+      isNull(value,) ? null : { type: 'string', value, },
     );
   }
   equals(other,) {
@@ -30362,12 +30363,15 @@ var ScalarFunctionCall = class extends ScalarExpression {
 var ScalarFunctionCallContains = class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'definition', {
-      type: 'boolean',
-      isNullable: false,
-    },);
+    __publicField(this, 'definition', ScalarFunctionCallContains.getDefinition(),);
     __publicField(this, 'sourceExpression', this.getArgumentExpression(0,),);
     __publicField(this, 'targetExpression', this.getArgumentExpression(1,),);
+  }
+  static getDefinition() {
+    return {
+      type: 'boolean',
+      isNullable: false,
+    };
   }
   stringify() {
     return `CONTAINS(${this.sourceExpression.stringify()}, ${this.targetExpression.stringify()})`;
@@ -30399,12 +30403,15 @@ var ScalarFunctionCallContains = class extends ScalarFunctionCall {
 var ScalarFunctionCallStartsWith = class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'definition', {
-      type: 'boolean',
-      isNullable: false,
-    },);
+    __publicField(this, 'definition', ScalarFunctionCallStartsWith.getDefinition(),);
     __publicField(this, 'sourceExpression', this.getArgumentExpression(0,),);
     __publicField(this, 'targetExpression', this.getArgumentExpression(1,),);
+  }
+  static getDefinition() {
+    return {
+      type: 'boolean',
+      isNullable: false,
+    };
   }
   stringify() {
     return `STARTS_WITH(${this.sourceExpression.stringify()}, ${this.targetExpression.stringify()})`;
@@ -30436,12 +30443,15 @@ var ScalarFunctionCallStartsWith = class extends ScalarFunctionCall {
 var ScalarFunctionCallEndsWith = class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'definition', {
-      type: 'boolean',
-      isNullable: false,
-    },);
+    __publicField(this, 'definition', ScalarFunctionCallEndsWith.getDefinition(),);
     __publicField(this, 'sourceExpression', this.getArgumentExpression(0,),);
     __publicField(this, 'targetExpression', this.getArgumentExpression(1,),);
+  }
+  static getDefinition() {
+    return {
+      type: 'boolean',
+      isNullable: false,
+    };
   }
   stringify() {
     return `ENDS_WITH(${this.sourceExpression.stringify()}, ${this.targetExpression.stringify()})`;
@@ -30483,22 +30493,24 @@ var ScalarCase = class extends ScalarExpression {
     },);
     const definitions = [];
     for (const { thenExpression, } of conditions) {
-      if (thenExpression.definition) {
-        definitions.push(thenExpression.definition,);
-      }
+      definitions.push(thenExpression.definition,);
     }
-    if (elseExpression && elseExpression.definition) {
+    if (elseExpression) {
       definitions.push(elseExpression.definition,);
     }
-    const [firstDefinition, ...otherDefinitions] = definitions;
-    if (firstDefinition) {
-      for (const definition of otherDefinitions) {
-        if (definition.type !== firstDefinition.type) {
-          throw new Error('Incompatible types in CASE expression',);
-        }
+    this.definition = ScalarCase.getDefinition(definitions,);
+  }
+  static getDefinition(definitions,) {
+    let result = null;
+    let isNullable = false;
+    for (const definition of definitions) {
+      result ?? (result = definition);
+      if (result && definition && result.type !== definition.type) {
+        throw new Error('Incompatible types in CASE expression',);
       }
+      isNullable || (isNullable = (definition == null ? void 0 : definition.isNullable) ?? true);
     }
-    this.definition = firstDefinition != null ? firstDefinition : null;
+    return result ? { type: result.type, isNullable, } : null;
   }
   stringify() {
     let result = 'CASE';
@@ -30519,8 +30531,8 @@ var ScalarCase = class extends ScalarExpression {
       isEqual(this.conditions, other.conditions,) && isEqual(this.elseExpression, other.elseExpression,);
   }
   evaluate(item,) {
-    var _a, _b, _c, _d;
-    const value = (_b = (_a = this.valueExpression) == null ? void 0 : _a.evaluate(item,)) != null ? _b : null;
+    var _a, _b;
+    const value = ((_a = this.valueExpression) == null ? void 0 : _a.evaluate(item,)) ?? null;
     for (const { whenExpression, thenExpression, } of this.conditions) {
       const when = whenExpression.evaluate(item,);
       const isMatching = this.valueExpression ? DatabaseValue.equal(when, value, this.collation,) : convertToBoolean(when,);
@@ -30528,7 +30540,7 @@ var ScalarCase = class extends ScalarExpression {
         return thenExpression.evaluate(item,);
       }
     }
-    return (_d = (_c = this.elseExpression) == null ? void 0 : _c.evaluate(item,)) != null ? _d : null;
+    return ((_b = this.elseExpression) == null ? void 0 : _b.evaluate(item,)) ?? null;
   }
   canEvaluate() {
     const expressions = [];
@@ -30569,10 +30581,13 @@ var ScalarUnaryOperation = class extends ScalarExpression {
 var ScalarUnaryOperationNot = class extends ScalarUnaryOperation {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'definition', {
+    __publicField(this, 'definition', ScalarUnaryOperationNot.getDefinition(),);
+  }
+  static getDefinition() {
+    return {
       type: 'boolean',
       isNullable: false,
-    },);
+    };
   }
   stringify() {
     return `NOT ${this.valueExpression.stringify()}`;
@@ -30589,10 +30604,13 @@ var ScalarLogicalOperation = class extends ScalarExpression {
   constructor(operandExpressions,) {
     super();
     this.operandExpressions = operandExpressions;
-    __publicField(this, 'definition', {
+    __publicField(this, 'definition', ScalarLogicalOperation.getDefinition(),);
+  }
+  static getDefinition() {
+    return {
       type: 'boolean',
       isNullable: false,
-    },);
+    };
   }
   stringify() {
     return this.operandExpressions.map((expression,) => expression.stringify()).join(' AND ',);
@@ -30644,14 +30662,17 @@ var ScalarComparison = class extends ScalarExpression {
     super();
     this.leftExpression = leftExpression;
     this.rightExpression = rightExpression;
-    __publicField(this, 'definition', {
-      type: 'boolean',
-      isNullable: false,
-    },);
+    __publicField(this, 'definition', ScalarComparison.getDefinition(),);
     __publicField(this, 'collation', {
       type: 0,
       /* CaseInsensitive */
     },);
+  }
+  static getDefinition() {
+    return {
+      type: 'boolean',
+      isNullable: false,
+    };
   }
   stringify() {
     return `${this.leftExpression.stringify()} ${this.operator} ${this.rightExpression.stringify()}`;
@@ -30768,10 +30789,13 @@ var ScalarTypeCastBoolean = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'BOOLEAN',);
-    __publicField(this, 'definition', {
+    __publicField(this, 'definition', ScalarTypeCastBoolean.getDefinition(),);
+  }
+  static getDefinition() {
+    return {
       type: 'boolean',
       isNullable: false,
-    },);
+    };
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
@@ -30782,10 +30806,7 @@ var ScalarTypeCastBoolean = class extends ScalarTypeCast {
   }
 };
 function convertToBoolean(value,) {
-  if (isNull(value,)) {
-    return false;
-  }
-  switch (value.type) {
+  switch (value == null ? void 0 : value.type) {
     case 'boolean':
     case 'number':
     case 'string': {
@@ -30798,10 +30819,13 @@ var ScalarTypeCastDate = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'DATE',);
-    __publicField(this, 'definition', {
+    __publicField(this, 'definition', ScalarTypeCastDate.getDefinition(),);
+  }
+  static getDefinition() {
+    return {
       type: 'date',
       isNullable: true,
-    },);
+    };
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
@@ -30816,10 +30840,7 @@ var ScalarTypeCastDate = class extends ScalarTypeCast {
   }
 };
 function convertToDate(value,) {
-  if (isNull(value,)) {
-    return null;
-  }
-  switch (value.type) {
+  switch (value == null ? void 0 : value.type) {
     case 'date':
     case 'number':
     case 'string': {
@@ -30836,10 +30857,13 @@ var ScalarTypeCastNumber = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'NUMBER',);
-    __publicField(this, 'definition', {
+    __publicField(this, 'definition', ScalarTypeCastNumber.getDefinition(),);
+  }
+  static getDefinition() {
+    return {
       type: 'number',
       isNullable: true,
-    },);
+    };
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
@@ -30854,10 +30878,7 @@ var ScalarTypeCastNumber = class extends ScalarTypeCast {
   }
 };
 function convertToNumber(value,) {
-  if (isNull(value,)) {
-    return null;
-  }
-  switch (value.type) {
+  switch (value == null ? void 0 : value.type) {
     case 'number':
     case 'string': {
       const number2 = Number(value.value,);
@@ -30873,10 +30894,13 @@ var ScalarTypeCastString = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'STRING',);
-    __publicField(this, 'definition', {
-      type: 'boolean',
+    __publicField(this, 'definition', ScalarTypeCastString.getDefinition(),);
+  }
+  static getDefinition() {
+    return {
+      type: 'string',
       isNullable: true,
-    },);
+    };
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
@@ -30891,10 +30915,7 @@ var ScalarTypeCastString = class extends ScalarTypeCast {
   }
 };
 function convertToString(value,) {
-  if (isNull(value,)) {
-    return null;
-  }
-  switch (value.type) {
+  switch (value == null ? void 0 : value.type) {
     case 'string':
     case 'number': {
       return String(value.value,);
@@ -30902,16 +30923,25 @@ function convertToString(value,) {
   }
   return null;
 }
-function convertExpression(expression, schema,) {
+function convertExpression(expression, schema, typeAffinity,) {
+  const scalarExpression = getScalarExpression(expression, schema, typeAffinity,);
+  const isLiteralValue = scalarExpression instanceof ScalarLiteralValue;
+  if (scalarExpression.canEvaluate() && !isLiteralValue) {
+    const value = scalarExpression.evaluate();
+    return new ScalarLiteralValue(scalarExpression.definition, value,);
+  }
+  return scalarExpression;
+}
+function getScalarExpression(expression, schema, typeAffinity,) {
   switch (expression.type) {
     case 'Identifier':
       return convertIdentifier(expression, schema,);
     case 'LiteralValue':
-      return convertLiteralValue(expression,);
+      return convertLiteralValue(expression, typeAffinity,);
     case 'FunctionCall':
       return convertFunctionCall(expression, schema,);
     case 'Case':
-      return convertCase(expression, schema,);
+      return convertCase(expression, schema, typeAffinity,);
     case 'UnaryOperation':
       return convertUnaryOperation(expression, schema,);
     case 'BinaryOperation':
@@ -30925,8 +30955,36 @@ function convertExpression(expression, schema,) {
 function convertIdentifier(expression, schema,) {
   return new ScalarIdentifier(schema, expression.name,);
 }
-function convertLiteralValue(expression,) {
-  const value = expression.value;
+function convertLiteralValue(expression, typeAffinity,) {
+  var _a;
+  const scalarExpression = getScalarLiteralValue(expression.value,);
+  switch (typeAffinity == null ? void 0 : typeAffinity.type) {
+    case 'boolean': {
+      const value = convertToBoolean(scalarExpression.value,);
+      return ScalarLiteralValue.fromBoolean(value,);
+    }
+    case 'date': {
+      const value = convertToDate(scalarExpression.value,);
+      return ScalarLiteralValue.fromDate(value,);
+    }
+    case 'enum': {
+      if (((_a = scalarExpression.value) == null ? void 0 : _a.type) === 'string') {
+        return ScalarLiteralValue.fromEnum(scalarExpression.value.value,);
+      }
+      return scalarExpression;
+    }
+    case 'number': {
+      const value = convertToNumber(scalarExpression.value,);
+      return ScalarLiteralValue.fromNumber(value,);
+    }
+    case 'string': {
+      const value = convertToString(scalarExpression.value,);
+      return ScalarLiteralValue.fromString(value,);
+    }
+  }
+  return scalarExpression;
+}
+function getScalarLiteralValue(value,) {
   if (isBoolean(value,)) {
     return ScalarLiteralValue.fromBoolean(value,);
   }
@@ -30943,7 +31001,7 @@ function convertLiteralValue(expression,) {
 }
 function convertFunctionCall(expression, schema,) {
   const argumentExpressions = expression.arguments.map((argument,) => {
-    return ScalarExpression.from(argument, schema,);
+    return convertExpression(argument, schema, void 0,);
   },);
   switch (expression.functionName) {
     case 'CONTAINS':
@@ -30953,29 +31011,30 @@ function convertFunctionCall(expression, schema,) {
     case 'ENDS_WITH':
       return new ScalarFunctionCallEndsWith(argumentExpressions,);
     default:
-      throw new Error(`Unsupported function: ${expression.functionName}`,);
+      throw new Error(`Unsupported function name: ${expression.functionName}`,);
   }
 }
-function convertCase(expression, schema,) {
-  const valueExpression = expression.value && ScalarExpression.from(expression.value, schema,);
+function convertCase(expression, schema, typeAffinity,) {
+  const valueExpression = expression.value && convertExpression(expression.value, schema, void 0,);
+  const valueTypeAffinity = expression.value && getExpressionType(expression.value, schema,);
   const conditions = expression.conditions.map((condition,) => {
-    const whenExpression = ScalarExpression.from(condition.when, schema,);
-    const thenExpression = ScalarExpression.from(condition.then, schema,);
+    const whenExpression = convertExpression(condition.when, schema, valueTypeAffinity,);
+    const thenExpression = convertExpression(condition.then, schema, typeAffinity,);
     return new ScalarCaseCondition(whenExpression, thenExpression,);
   },);
-  const elseExpression = expression.else && ScalarExpression.from(expression.else, schema,);
+  const elseExpression = expression.else && convertExpression(expression.else, schema, typeAffinity,);
   return new ScalarCase(valueExpression, conditions, elseExpression,);
 }
 function convertUnaryOperation(expression, schema,) {
-  const valueExpression = ScalarExpression.from(expression.value, schema,);
+  const valueExpression = convertExpression(expression.value, schema, void 0,);
   switch (expression.operator) {
     case 'not':
-      return createScalarUnaryOperationNot(valueExpression,);
+      return getScalarUnaryOperationNot(valueExpression,);
     default:
       throw new Error(`Unsupported unary operator: ${expression.operator}`,);
   }
 }
-function createScalarUnaryOperationNot(valueExpression,) {
+function getScalarUnaryOperationNot(valueExpression,) {
   var _a;
   if (valueExpression instanceof ScalarUnaryOperationNot) {
     const innerExpression = valueExpression.valueExpression;
@@ -31010,41 +31069,44 @@ function createScalarUnaryOperationNot(valueExpression,) {
   }
   if (valueExpression instanceof ScalarLogicalOperationAnd) {
     const { operandExpressions, } = valueExpression;
-    const notExpressions = operandExpressions.map(createScalarUnaryOperationNot,);
+    const notExpressions = operandExpressions.map(getScalarUnaryOperationNot,);
     return new ScalarLogicalOperationOr(notExpressions,);
   }
   if (valueExpression instanceof ScalarLogicalOperationAnd) {
     const { operandExpressions, } = valueExpression;
-    const notExpressions = operandExpressions.map(createScalarUnaryOperationNot,);
+    const notExpressions = operandExpressions.map(getScalarUnaryOperationNot,);
     return new ScalarLogicalOperationAnd(notExpressions,);
   }
   return new ScalarUnaryOperationNot(valueExpression,);
 }
 function convertBinaryOperation(expression, schema,) {
-  const leftExpression = ScalarExpression.from(expression.left, schema,);
-  const rightExpression = ScalarExpression.from(expression.right, schema,);
+  const typeAffinity = expression.operator !== 'and' && expression.operator !== 'or'
+    ? getExpressionType(expression.left, schema,) || getExpressionType(expression.right, schema,)
+    : void 0;
+  const leftExpression = convertExpression(expression.left, schema, typeAffinity,);
+  const rightExpression = convertExpression(expression.right, schema, typeAffinity,);
   switch (expression.operator) {
     case 'and':
-      return createScalarLogicalOperationAnd(leftExpression, rightExpression,);
+      return getScalarLogicalOperationAnd(leftExpression, rightExpression,);
     case 'or':
-      return createScalarLogicalOperationOr(leftExpression, rightExpression,);
+      return getScalarLogicalOperationOr(leftExpression, rightExpression,);
     case '==':
-      return createScalarComparisonEquals(leftExpression, rightExpression,);
+      return getScalarComparisonEquals(leftExpression, rightExpression,);
     case '!=':
-      return createScalarComparisonNotEquals(leftExpression, rightExpression,);
+      return getScalarComparisonNotEquals(leftExpression, rightExpression,);
     case '<':
-      return createScalarComparisonLessThan(leftExpression, rightExpression,);
+      return getScalarComparisonLessThan(leftExpression, rightExpression,);
     case '<=':
-      return convertScalarComparisonLessThanOrEqual(leftExpression, rightExpression,);
+      return getScalarComparisonLessThanOrEqual(leftExpression, rightExpression,);
     case '>':
-      return convertScalarComparisonGreaterThan(leftExpression, rightExpression,);
+      return getScalarComparisonGreaterThan(leftExpression, rightExpression,);
     case '>=':
-      return convertScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
+      return getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
     default:
       throw new Error(`Unsupported binary operator: ${expression.operator}`,);
   }
 }
-function createScalarLogicalOperationAnd(leftExpression, rightExpression,) {
+function getScalarLogicalOperationAnd(leftExpression, rightExpression,) {
   const operandExpressions = [];
   if (leftExpression instanceof ScalarLogicalOperationAnd) {
     operandExpressions.push(...leftExpression.operandExpressions,);
@@ -31058,7 +31120,7 @@ function createScalarLogicalOperationAnd(leftExpression, rightExpression,) {
   }
   return new ScalarLogicalOperationAnd(operandExpressions,);
 }
-function createScalarLogicalOperationOr(leftExpression, rightExpression,) {
+function getScalarLogicalOperationOr(leftExpression, rightExpression,) {
   const operandExpressions = [];
   if (leftExpression instanceof ScalarLogicalOperationOr) {
     operandExpressions.push(...leftExpression.operandExpressions,);
@@ -31072,7 +31134,7 @@ function createScalarLogicalOperationOr(leftExpression, rightExpression,) {
   }
   return new ScalarLogicalOperationOr(operandExpressions,);
 }
-function createScalarComparisonEquals(leftExpression, rightExpression,) {
+function getScalarComparisonEquals(leftExpression, rightExpression,) {
   const isLeftIdentifier = leftExpression instanceof ScalarIdentifier;
   const isRightIdentifier = rightExpression instanceof ScalarIdentifier;
   if (isRightIdentifier && !isLeftIdentifier) {
@@ -31080,7 +31142,7 @@ function createScalarComparisonEquals(leftExpression, rightExpression,) {
   }
   return new ScalarComparisonEquals(leftExpression, rightExpression,);
 }
-function createScalarComparisonNotEquals(leftExpression, rightExpression,) {
+function getScalarComparisonNotEquals(leftExpression, rightExpression,) {
   const isLeftIdentifier = leftExpression instanceof ScalarIdentifier;
   const isRightIdentifier = rightExpression instanceof ScalarIdentifier;
   if (isRightIdentifier && !isLeftIdentifier) {
@@ -31088,7 +31150,7 @@ function createScalarComparisonNotEquals(leftExpression, rightExpression,) {
   }
   return new ScalarComparisonNotEquals(leftExpression, rightExpression,);
 }
-function createScalarComparisonLessThan(leftExpression, rightExpression,) {
+function getScalarComparisonLessThan(leftExpression, rightExpression,) {
   const isLeftIdentifier = leftExpression instanceof ScalarIdentifier;
   const isRightIdentifier = rightExpression instanceof ScalarIdentifier;
   if (isRightIdentifier && !isLeftIdentifier) {
@@ -31096,7 +31158,7 @@ function createScalarComparisonLessThan(leftExpression, rightExpression,) {
   }
   return new ScalarComparisonLessThan(leftExpression, rightExpression,);
 }
-function convertScalarComparisonLessThanOrEqual(leftExpression, rightExpression,) {
+function getScalarComparisonLessThanOrEqual(leftExpression, rightExpression,) {
   const isLeftIdentifier = leftExpression instanceof ScalarIdentifier;
   const isRightIdentifier = rightExpression instanceof ScalarIdentifier;
   if (isRightIdentifier && !isLeftIdentifier) {
@@ -31104,7 +31166,7 @@ function convertScalarComparisonLessThanOrEqual(leftExpression, rightExpression,
   }
   return new ScalarComparisonLessThanOrEqual(leftExpression, rightExpression,);
 }
-function convertScalarComparisonGreaterThan(leftExpression, rightExpression,) {
+function getScalarComparisonGreaterThan(leftExpression, rightExpression,) {
   const isLeftIdentifier = leftExpression instanceof ScalarIdentifier;
   const isRightIdentifier = rightExpression instanceof ScalarIdentifier;
   if (isRightIdentifier && !isLeftIdentifier) {
@@ -31112,7 +31174,7 @@ function convertScalarComparisonGreaterThan(leftExpression, rightExpression,) {
   }
   return new ScalarComparisonGreaterThan(leftExpression, rightExpression,);
 }
-function convertScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,) {
+function getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,) {
   const isLeftIdentifier = leftExpression instanceof ScalarIdentifier;
   const isRightIdentifier = rightExpression instanceof ScalarIdentifier;
   if (isRightIdentifier && !isLeftIdentifier) {
@@ -31121,47 +31183,136 @@ function convertScalarComparisonGreaterThanOrEqual(leftExpression, rightExpressi
   return new ScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
 }
 function convertTypeCast(expression, schema,) {
-  const valueExpression = ScalarExpression.from(expression.value, schema,);
+  const valueExpression = convertExpression(expression.value, schema, void 0,);
   switch (expression.dataType) {
     case 'BOOLEAN':
-      return createScalarTypeCastBoolean(valueExpression,);
+      return getScalarTypeCastBoolean(valueExpression,);
     case 'DATE':
-      return createScalarTypeCastDate(valueExpression,);
+      return getScalarTypeCastDate(valueExpression,);
     case 'NUMBER':
-      return createScalarTypeCastNumber(valueExpression,);
+      return getScalarTypeCastNumber(valueExpression,);
     case 'STRING':
-      return createScalarTypeCastString(valueExpression,);
+      return getScalarTypeCastString(valueExpression,);
     default:
       throw new Error(`Unsupported data type: ${expression.dataType}`,);
   }
 }
-function createScalarTypeCastBoolean(valueExpression,) {
+function getScalarTypeCastBoolean(valueExpression,) {
   var _a;
   if (((_a = valueExpression.definition) == null ? void 0 : _a.type) === 'boolean') {
     return valueExpression;
   }
   return new ScalarTypeCastBoolean(valueExpression,);
 }
-function createScalarTypeCastDate(valueExpression,) {
+function getScalarTypeCastDate(valueExpression,) {
   var _a;
   if (((_a = valueExpression.definition) == null ? void 0 : _a.type) === 'date') {
     return valueExpression;
   }
   return new ScalarTypeCastDate(valueExpression,);
 }
-function createScalarTypeCastNumber(valueExpression,) {
+function getScalarTypeCastNumber(valueExpression,) {
   var _a;
   if (((_a = valueExpression.definition) == null ? void 0 : _a.type) === 'number') {
     return valueExpression;
   }
   return new ScalarTypeCastNumber(valueExpression,);
 }
-function createScalarTypeCastString(valueExpression,) {
+function getScalarTypeCastString(valueExpression,) {
   var _a;
   if (((_a = valueExpression.definition) == null ? void 0 : _a.type) === 'string') {
     return valueExpression;
   }
   return new ScalarTypeCastString(valueExpression,);
+}
+function getExpressionType(expression, schema,) {
+  switch (expression.type) {
+    case 'Identifier':
+      return getIdentifierType(expression, schema,);
+    case 'LiteralValue':
+      return void 0;
+    case 'FunctionCall':
+      return getFunctionCallType(expression,);
+    case 'Case':
+      return getCaseType(expression, schema,);
+    case 'UnaryOperation':
+      return getUnaryOperationType(expression,);
+    case 'BinaryOperation':
+      return getBinaryOperationType(expression,);
+    case 'TypeCast':
+      return getTypeCastType(expression,);
+    default:
+      throw new Error(`Unsupported expression: ${JSON.stringify(expression,)}`,);
+  }
+}
+function getIdentifierType(expression, schema,) {
+  return schema[expression.name];
+}
+function getFunctionCallType(expression,) {
+  switch (expression.functionName) {
+    case 'CONTAINS':
+      return ScalarFunctionCallContains.getDefinition();
+    case 'STARTS_WITH':
+      return ScalarFunctionCallStartsWith.getDefinition();
+    case 'ENDS_WITH':
+      return ScalarFunctionCallEndsWith.getDefinition();
+    default:
+      throw new Error(`Unsupported function name: ${expression.functionName}`,);
+  }
+}
+function getCaseType(expression, schema,) {
+  const definitions = [];
+  for (const condition of expression.conditions) {
+    const type = getExpressionType(condition.then, schema,);
+    if (!isUndefined(type,)) {
+      definitions.push(type,);
+    }
+  }
+  if (expression.else) {
+    const type = getExpressionType(expression.else, schema,);
+    if (!isUndefined(type,)) {
+      definitions.push(type,);
+    }
+  }
+  return ScalarCase.getDefinition(definitions,) ?? void 0;
+}
+function getUnaryOperationType(expression,) {
+  switch (expression.operator) {
+    case 'not':
+      return ScalarUnaryOperationNot.getDefinition();
+    default:
+      throw new Error(`Unsupported unary operator: ${expression.operator}`,);
+  }
+}
+function getBinaryOperationType(expression,) {
+  switch (expression.operator) {
+    case 'and':
+    case 'or':
+      return ScalarLogicalOperation.getDefinition();
+    case '==':
+    case '!=':
+    case '<':
+    case '<=':
+    case '>':
+    case '>=':
+      return ScalarComparison.getDefinition();
+    default:
+      throw new Error(`Unsupported binary operator: ${expression.operator}`,);
+  }
+}
+function getTypeCastType(expression,) {
+  switch (expression.dataType) {
+    case 'BOOLEAN':
+      return ScalarTypeCastBoolean.getDefinition();
+    case 'DATE':
+      return ScalarTypeCastDate.getDefinition();
+    case 'NUMBER':
+      return ScalarTypeCastNumber.getDefinition();
+    case 'STRING':
+      return ScalarTypeCastString.getDefinition();
+    default:
+      throw new Error(`Unsupported data type: ${expression.dataType}`,);
+  }
 }
 function stringifyExecutionTime(self, total,) {
   return `(self: ${self}ms${total ? `, total: ${total}ms` : ''})`;
@@ -31244,10 +31395,7 @@ var UnionPlan = class extends QueryPlan {
     this.childPlans = childPlans;
   }
   inspect() {
-    const childPlansTime = Math.max(...this.childPlans.map((childPlan,) => {
-      var _a;
-      return (_a = childPlan.executionTime) != null ? _a : 0;
-    },),);
+    const childPlansTime = Math.max(...this.childPlans.map((childPlan,) => childPlan.executionTime ?? 0),);
     return {
       label: `UnionPlan ${
         stringifyExecutionTime(
@@ -31259,7 +31407,6 @@ var UnionPlan = class extends QueryPlan {
     };
   }
   async _execute() {
-    var _a;
     const childItemMaps = await Promise.all(
       this.childPlans.map(async (childPlan,) => {
         const items = await childPlan.execute();
@@ -31274,7 +31421,7 @@ var UnionPlan = class extends QueryPlan {
         result = itemMap;
       }
     }
-    return (_a = result == null ? void 0 : result.items()) != null ? _a : [];
+    return (result == null ? void 0 : result.items()) ?? [];
   }
 };
 var IntersectionPlan = class extends QueryPlan {
@@ -31283,10 +31430,7 @@ var IntersectionPlan = class extends QueryPlan {
     this.childPlans = childPlans;
   }
   inspect() {
-    const childPlansTime = Math.max(...this.childPlans.map((childPlan,) => {
-      var _a;
-      return (_a = childPlan.executionTime) != null ? _a : 0;
-    },),);
+    const childPlansTime = Math.max(...this.childPlans.map((childPlan,) => childPlan.executionTime ?? 0),);
     return {
       label: `IntersectionPlan ${
         stringifyExecutionTime(
@@ -31298,7 +31442,6 @@ var IntersectionPlan = class extends QueryPlan {
     };
   }
   async _execute() {
-    var _a;
     const childItemMaps = await Promise.all(
       this.childPlans.map(async (childPlan,) => {
         const items = await childPlan.execute();
@@ -31313,7 +31456,7 @@ var IntersectionPlan = class extends QueryPlan {
         result = itemMap;
       }
     }
-    return (_a = result == null ? void 0 : result.items()) != null ? _a : [];
+    return (result == null ? void 0 : result.items()) ?? [];
   }
 };
 var ResolveItemsPlan = class extends QueryPlan {
@@ -31425,11 +31568,11 @@ var SliceItemsPlan = class extends QueryPlan {
     this.limitExpression = limitExpression;
   }
   inspect() {
-    var _a, _b, _c, _d;
+    var _a, _b;
     return {
-      label: `SliceItemsPlan(LIMIT ${
-        (_b = (_a = this.limitExpression) == null ? void 0 : _a.stringify()) != null ? _b : 'Infinity'
-      }, OFFSET ${(_d = (_c = this.offsetExpression) == null ? void 0 : _c.stringify()) != null ? _d : '0'}) ${
+      label: `SliceItemsPlan(LIMIT ${((_a = this.limitExpression) == null ? void 0 : _a.stringify()) ?? 'Infinity'}, OFFSET ${
+        ((_b = this.offsetExpression) == null ? void 0 : _b.stringify()) ?? '0'
+      }) ${
         stringifyExecutionTime(
           this.executionTime - this.childPlan.executionTime,
           this.executionTime,
@@ -31455,10 +31598,9 @@ var SliceItemsPlan = class extends QueryPlan {
     return value.value;
   }
   async _execute() {
-    var _a, _b;
     const childItems = await this.childPlan.execute();
-    const offset = (_a = this.getOffset()) != null ? _a : 0;
-    const limit = (_b = this.getLimit()) != null ? _b : Infinity;
+    const offset = this.getOffset() ?? 0;
+    const limit = this.getLimit() ?? Infinity;
     return childItems.slice(offset, offset + limit,);
   }
 };
@@ -31608,8 +31750,7 @@ function stringifyQuery(query,) {
   if (query.orderBy) {
     queryString += ` ORDER BY ${
       query.orderBy.map((orderExpression,) => {
-        var _a;
-        return `${stringifyExpression(query.from.data, orderExpression,)} ${(_a = orderExpression.direction) != null ? _a : 'asc'}`;
+        return `${stringifyExpression(query.from.data, orderExpression,)} ${orderExpression.direction ?? 'asc'}`;
       },).join(', ',)
     }`;
   }
@@ -31655,19 +31796,17 @@ ${(0, import_archy.default)(plan.inspect(),)}`,);
       plan = new ResolveItemsPlan(plan, collection,);
     }
     const sortExpressions = (_a = query.orderBy) == null ? void 0 : _a.map(
-      (expression,) => {
-        var _a2;
-        return new ScalarOrderExpression(
+      (expression,) =>
+        new ScalarOrderExpression(
           ScalarExpression.from(expression, collection.schema,),
-          (_a2 = expression.direction) != null ? _a2 : 'asc',
+          expression.direction ?? 'asc',
           {
             type: 0,
             /* CaseInsensitive */
           },
-        );
-      },
+        ),
     );
-    plan = new SortItemsPlan(plan, sortExpressions != null ? sortExpressions : [], collection,);
+    plan = new SortItemsPlan(plan, sortExpressions ?? [], collection,);
     let offsetExpression;
     if (query.offset) {
       offsetExpression = ScalarExpression.from(query.offset, collection.schema,);
@@ -31716,7 +31855,6 @@ async function resolveValue(collection, value,) {
   return value.value;
 }
 function createPlanForWhereClause(collection, expression,) {
-  var _a;
   if (expression instanceof ScalarLogicalOperationAnd) {
     const childPlans = expression.operandExpressions.map(
       (expression2,) => createPlanForWhereClause(collection, expression2,),
@@ -31729,14 +31867,28 @@ function createPlanForWhereClause(collection, expression,) {
     );
     return new UnionPlan(childPlans,);
   }
-  return (_a = findLookupIndexPlan(collection, expression,)) != null ? _a : createScanCollectionPlan(collection, expression,);
+  return findLookupIndexPlan(collection, expression,) ?? createScanCollectionPlan(collection, expression,);
 }
 function findLookupIndexPlan(collection, expression,) {
+  var _a, _b;
   if (expression instanceof ScalarComparison) {
     return findLookupIndexPlanForComparison(collection, expression,);
   }
   if (expression instanceof ScalarFunctionCall) {
     return findLookupIndexPlanForFunctionCall(collection, expression,);
+  }
+  if (expression instanceof ScalarIdentifier && ((_a = expression.definition) == null ? void 0 : _a.type) === 'boolean') {
+    const value = ScalarLiteralValue.fromBoolean(true,);
+    const comparison = new ScalarComparisonEquals(expression, value,);
+    return findLookupIndexPlanForComparison(collection, comparison,);
+  }
+  if (
+    expression instanceof ScalarUnaryOperationNot && expression.valueExpression instanceof ScalarIdentifier &&
+    ((_b = expression.valueExpression.definition) == null ? void 0 : _b.type) === 'boolean'
+  ) {
+    const value = ScalarLiteralValue.fromBoolean(true,);
+    const comparison = new ScalarComparisonNotEquals(expression.valueExpression, value,);
+    return findLookupIndexPlanForComparison(collection, comparison,);
   }
 }
 function findLookupIndexPlanForComparison(collection, expression,) {
@@ -32071,13 +32223,12 @@ function activeMediaQueryFromWindow(mediaQueries,) {
   }
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
-  var _a;
   const isInitialNavigation = useContext142(IsInitialNavigationContext,);
-  const baseVariant = useRef122(isBrowser2() ? (_a = activeMediaQueryFromWindow(mediaQueries,)) != null ? _a : initial : initial,);
-  const basePropsVariant = useRef122(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
+  const baseVariant = useRef132(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const basePropsVariant = useRef132(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate3();
   const instantTransition = useInstantTransition();
-  const setActiveVariantInstant = useCallback8(
+  const setActiveVariantInstant = useCallback9(
     (variant,) => {
       if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
         instantTransition(() => {
@@ -32096,7 +32247,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
     }
     setActiveVariantInstant(baseVariant.current,);
   }, [],);
-  useEffect102(() => {
+  useEffect112(() => {
     const callbacks2 = [];
     for (const [variant, query,] of Object.entries(mediaQueries,)) {
       const mql = safeWindow.matchMedia(query,);
@@ -32150,7 +32301,7 @@ function useDataRecord(collection, variables,) {
         return String(value,) === String(recordValue,);
       },);
     },);
-    return pageRecord != null ? pageRecord : null;
+    return pageRecord ?? null;
   }, [collection, variables,],);
 }
 function useDynamicRefs() {
@@ -32307,8 +32458,8 @@ function isButtonPressed(button,) {
 function useGamepad(input, callback, { mapping, on, } = {},) {
   const context = React822.useContext(GamepadContext,);
   const settings = useConstant2(() => ({
-    mapping: mapping != null ? mapping : 'standard',
-    on: on != null ? on : 'keydown',
+    mapping: mapping ?? 'standard',
+    on: on ?? 'keydown',
   }));
   const stateRef = React822.useRef({
     pressed: false,
@@ -32596,9 +32747,8 @@ function getCollectionId(collection,) {
   return id3;
 }
 function getCacheKey({ from, ...query }, locale,) {
-  var _a;
   const fromId = getCollectionId(from.data,);
-  const localeId = (_a = locale == null ? void 0 : locale.id) != null ? _a : 'default';
+  const localeId = (locale == null ? void 0 : locale.id) ?? 'default';
   return fromId + JSON.stringify(query,) + localeId;
 }
 function use(promise,) {
@@ -32613,8 +32763,7 @@ var DeepWeakMap = class {
     return map2 == null ? void 0 : map2.get(key22,);
   }
   set(key1, key22, value,) {
-    var _a;
-    const map2 = (_a = this.map1.get(key1,)) != null ? _a : /* @__PURE__ */ new WeakMap();
+    const map2 = this.map1.get(key1,) ?? /* @__PURE__ */ new WeakMap();
     this.map1.set(key1, map2,);
     return map2.set(key22, value,);
   }
@@ -32751,10 +32900,9 @@ function useExecuteSelect(data2, select,) {
     use(preloadPromise,);
   }
   const result = data2.map((item,) => {
-    var _a;
     const selected = {};
     for (const expression of select) {
-      const name = (_a = expression.alias) != null ? _a : stringifyExpression2(expression,);
+      const name = expression.alias ?? stringifyExpression2(expression,);
       selected[name] = evaluateExpression(expression, {
         resolveIdentifier(identifier,) {
           const value = item[identifier];
@@ -32844,7 +32992,7 @@ function useQueryData(query,) {
   if (isDatabaseCollectionModule(query.from.data,)) {
     return useQueryDataWithQueryEngine(query,);
   }
-  const queryRef = useRef132();
+  const queryRef = useRef14();
   if (queryRef.current && isEqual(queryRef.current, query,)) {
     query = queryRef.current;
   } else {
@@ -33284,11 +33432,10 @@ function extractMappingFromInfo(info,) {
 }
 function withMappedReactProps(Component15, info,) {
   return (rawProps,) => {
-    var _a;
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
-      asRecord(props,)[(_a = mapping == null ? void 0 : mapping[key7]) != null ? _a : key7] = rawProps[key7];
+      asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
     return /* @__PURE__ */ React88.createElement(Component15, { ...props, },);
   };
@@ -33335,7 +33482,7 @@ var withVariantAppearEffect = (Component15,) =>
         return /* @__PURE__ */ React89.createElement(Component15, { ...props, ref: forwardedRef, },);
       }
       const fallbackRef = React89.useRef(null,);
-      const ref = forwardedRef != null ? forwardedRef : fallbackRef;
+      const ref = forwardedRef ?? fallbackRef;
       const [options, rest,] = extractPrefixedProps(props, keys2,);
       const {
         visibleVariantId,
@@ -33389,13 +33536,13 @@ var withVariantAppearEffect = (Component15,) =>
         const playedState = {};
         let currentVariant = void 0;
         return scrollInfo(({ y: scrollY, },) => {
-          var _a, _b;
+          var _a;
           if (!targets[0] || targets[0].ref && !targets[0].ref.current) {
             return;
           }
           const { inputRange, outputRange, } = createInputOutputRanges2(
             targets,
-            (threshold != null ? threshold : 0) * scrollY.containerLength,
+            (threshold ?? 0) * scrollY.containerLength,
             exitTarget,
           );
           if (inputRange.length === 0 || inputRange.length !== outputRange.length) {
@@ -33406,7 +33553,7 @@ var withVariantAppearEffect = (Component15,) =>
             return;
           }
           playedState[index] = true;
-          const variant = (_b = (_a = targets[index]) == null ? void 0 : _a.target) != null ? _b : void 0;
+          const variant = ((_a = targets[index]) == null ? void 0 : _a.target) ?? void 0;
           if (variant === currentVariant) {
             return;
           }
@@ -33419,11 +33566,7 @@ var withVariantAppearEffect = (Component15,) =>
         repeat: !animateOnce,
       },);
       if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-        return /* @__PURE__ */ React89.createElement(Component15, {
-          ...rest,
-          variant: activeVariant != null ? activeVariant : props.variant,
-          ref,
-        },);
+        return /* @__PURE__ */ React89.createElement(Component15, { ...rest, variant: activeVariant ?? props.variant, ref, },);
       } else {
         return /* @__PURE__ */ React89.createElement(Component15, { ...rest, },);
       }
@@ -33432,20 +33575,20 @@ var withVariantAppearEffect = (Component15,) =>
 var withVariantFX = (Component15,) =>
   React90.forwardRef(
     ({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
-      const ref = useRef14();
+      const ref = useRef15();
       const effect = usePresenceAnimation(
         {
           initial,
           animate: animate3,
           exit,
         },
-        forwardedRef != null ? forwardedRef : ref,
+        forwardedRef ?? ref,
         true,
       );
       return /* @__PURE__ */ React90.createElement(Component15, {
         ...props,
         style: { ...props == null ? void 0 : props.style, ...effect.values, },
-        ref: forwardedRef != null ? forwardedRef : ref,
+        ref: forwardedRef ?? ref,
       },);
     },
   );
@@ -33723,11 +33866,11 @@ function linearGradientLine(angle,) {
   return Line(start, end,);
 }
 function elementPropertiesForLinearGradient(gradient, id3,) {
-  var _a, _b, _c, _d;
+  var _a, _b;
   const line = linearGradientLine(gradient.angle,);
   const stops = gradientColorStops(gradient,);
-  const startPosition = (_b = (_a = stops[0]) == null ? void 0 : _a.position) != null ? _b : 0;
-  const endPosition = (_d = (_c = stops[stops.length - 1]) == null ? void 0 : _c.position) != null ? _d : 1;
+  const startPosition = ((_a = stops[0]) == null ? void 0 : _a.position) ?? 0;
+  const endPosition = ((_b = stops[stops.length - 1]) == null ? void 0 : _b.position) ?? 1;
   const startPoint = Line.pointAtPercentDistance(line, startPosition,);
   const endPoint = Line.pointAtPercentDistance(line, endPosition,);
   const interpolator = interpolate([startPosition, endPosition,], [0, 1,],);
@@ -33800,7 +33943,6 @@ function getPositionYFraction(positionY,) {
   return 0.5;
 }
 function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
-  var _a, _b, _c, _d;
   fill = Animatable.get(fill, '#09F',);
   if (!BackgroundImage.isImageObject(fill,)) {
     return void 0;
@@ -33824,11 +33966,11 @@ function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
     const validScaleX = realWidth / frame2.width;
     const validScaleY = realHeight / frame2.height;
     if (fit === 'tile') {
-      (_a = fill.backgroundSize) != null ? _a : fill.backgroundSize = 1;
+      fill.backgroundSize ?? (fill.backgroundSize = 1);
       width = Math.round(fill.backgroundSize * (imageWidth / 2),);
       height = Math.round(fill.backgroundSize * (imageHeight / 2),);
-      const layerPositionX = (_b = frame2.x) != null ? _b : 0;
-      const layerPositionY = (_c = frame2.y) != null ? _c : 0;
+      const layerPositionX = frame2.x ?? 0;
+      const layerPositionY = frame2.y ?? 0;
       let extraOffsetX = 0;
       let extraOffsetY = 0;
       if (includeTransform) {
@@ -33850,7 +33992,7 @@ function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
     }
   }
   const imageId = `id${id3}g${'-fillImage'}`;
-  return { id: imageId, path: (_d = fill.src) != null ? _d : '', transform: transform2, width, height, offsetX, offsetY, };
+  return { id: imageId, path: fill.src ?? '', transform: transform2, width, height, offsetX, offsetY, };
 }
 var WindowContext = /* @__PURE__ */ React922.createContext(
   void 0,
@@ -33861,7 +34003,6 @@ function isAssetReference(value,) {
   return value.startsWith(`data:${mediaType2}`,);
 }
 function imageUrlForAsset(asset, pixelSize,) {
-  var _a;
   if (/^\w+:/.test(asset,) && !isAssetReference(asset,)) {
     return asset;
   }
@@ -33877,7 +34018,7 @@ function imageUrlForAsset(asset, pixelSize,) {
     pixelSize = 4096;
   }
   const isExport = RenderTarget.current() === 'EXPORT';
-  return (_a = runtime.assetResolver(asset, { pixelSize, isExport, },)) != null ? _a : '';
+  return runtime.assetResolver(asset, { pixelSize, isExport, },) ?? '';
 }
 var ImagePatternElement = ({
   id: id3,
@@ -34180,12 +34321,12 @@ function hasBorderRadius(style,) {
     style.borderTopRightRadius);
 }
 function sizeSVG(container, props,) {
-  var _a, _b, _c;
+  var _a, _b;
   const div = container.current;
   if (!div) {
     return;
   }
-  const localWindow = (_a = props.providedWindow) != null ? _a : safeWindow;
+  const localWindow = props.providedWindow ?? safeWindow;
   const svg = div.firstElementChild;
   if (!svg || !(svg instanceof localWindow.SVGSVGElement)) {
     return;
@@ -34203,7 +34344,7 @@ function sizeSVG(container, props,) {
   }
   const { intrinsicWidth, intrinsicHeight, _constraints, } = props;
   if (
-    ((_b = svg.viewBox.baseVal) == null ? void 0 : _b.width) === 0 && ((_c = svg.viewBox.baseVal) == null ? void 0 : _c.height) === 0 &&
+    ((_a = svg.viewBox.baseVal) == null ? void 0 : _a.width) === 0 && ((_b = svg.viewBox.baseVal) == null ? void 0 : _b.height) === 0 &&
     isFiniteNumber(intrinsicWidth,) && isFiniteNumber(intrinsicHeight,)
   ) {
     svg.setAttribute('viewBox', `0 0 ${intrinsicWidth} ${intrinsicHeight}`,);
@@ -34334,7 +34475,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      var _a2;
       countNodeRender();
       const {
         id: id3,
@@ -34360,7 +34500,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
       if (!withExternalLayout && (!visible || !id3)) {
         return null;
       }
-      const identifier = (_a2 = id3 != null ? id3 : layoutId) != null ? _a2 : 'svg';
+      const identifier = id3 ?? layoutId ?? 'svg';
       const frame2 = this.frame;
       const size2 = frame2 || { width: intrinsicWidth || 100, height: intrinsicHeight || 100, };
       const outerStyle = { ...style, imageRendering: 'pixelated', flexShrink: 0, };
@@ -34567,7 +34707,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
   return rawHTML.replace(
     regex,
     (original, pre1, tag, pre2, value1, value2, post,) => {
-      var _a, _b, _c;
+      var _a, _b;
       if (tag.toLowerCase() !== 'a') {
         return original;
       }
@@ -34586,7 +34726,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
         return original;
       }
       let attributes = ` ${'data-framer-page-link-target'}="${pageLink.target}"`;
-      const elementId = getRouteElementId(targetRoute, (_a = pageLink.element) != null ? _a : void 0,);
+      const elementId = getRouteElementId(targetRoute, pageLink.element ?? void 0,);
       if (elementId) {
         attributes += ` ${'data-framer-page-link-element'}="${pageLink.element}"`;
       }
@@ -34598,11 +34738,11 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
         attributes += ` ${'data-framer-page-link-current'}`;
       }
       let relativePath = targetPath;
-      const pathVariables = Object.assign({}, implicitPathVariables, (_b = pageLink.collectionItem) == null ? void 0 : _b.pathVariables,);
+      const pathVariables = Object.assign({}, implicitPathVariables, (_a = pageLink.collectionItem) == null ? void 0 : _a.pathVariables,);
       if (Object.keys(pathVariables,).length > 0) {
         relativePath = relativePath.replace(pathVariablesRegExp2, (_, key7,) => '' + pathVariables[key7],);
       }
-      if ((_c = pageLink.collectionItem) == null ? void 0 : _c.pathVariables) {
+      if ((_b = pageLink.collectionItem) == null ? void 0 : _b.pathVariables) {
         const params = new URLSearchParams(pageLink.collectionItem.pathVariables,);
         attributes += ` ${'data-framer-page-link-path-variables'}="${params}"`;
       }
@@ -34766,7 +34906,6 @@ var CustomFontSource = class {
   }
 };
 function getFontVariants(currentVariant, variants, parseVariant,) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k;
   if (variants.length === 0) {
     return {};
   }
@@ -34792,29 +34931,18 @@ function getFontVariants(currentVariant, variants, parseVariant,) {
     }
   },);
   let variantBold = boldVariantByStyle.get(currentStyle,);
-  let variantBoldItalic = (_a = boldVariantByStyle.get('italic',)) != null ? _a : boldVariantByStyle.get('oblique',);
+  let variantBoldItalic = boldVariantByStyle.get('italic',) ?? boldVariantByStyle.get('oblique',);
   if (currentVariantInfo.weight <= 300) {
-    variantBold = (_b = variantByWeightAndStyle.get(`400-${currentStyle}`,)) != null ? _b : variantBold;
-    variantBoldItalic =
-      (_d = (_c = variantByWeightAndStyle.get('400-italic',)) != null ? _c : variantByWeightAndStyle.get('400-oblique',)) != null
-        ? _d
-        : variantBoldItalic;
+    variantBold = variantByWeightAndStyle.get(`400-${currentStyle}`,) ?? variantBold;
+    variantBoldItalic = variantByWeightAndStyle.get('400-italic',) ?? variantByWeightAndStyle.get('400-oblique',) ?? variantBoldItalic;
   } else if (currentVariantInfo.weight <= 500) {
-    variantBold = (_e = variantByWeightAndStyle.get(`700-${currentStyle}`,)) != null ? _e : variantBold;
-    variantBoldItalic =
-      (_g = (_f = variantByWeightAndStyle.get('700-italic',)) != null ? _f : variantByWeightAndStyle.get('700-oblique',)) != null
-        ? _g
-        : variantBoldItalic;
+    variantBold = variantByWeightAndStyle.get(`700-${currentStyle}`,) ?? variantBold;
+    variantBoldItalic = variantByWeightAndStyle.get('700-italic',) ?? variantByWeightAndStyle.get('700-oblique',) ?? variantBoldItalic;
   } else {
-    variantBold = (_h = variantByWeightAndStyle.get(`900-${currentStyle}`,)) != null ? _h : variantBold;
-    variantBoldItalic =
-      (_j = (_i = variantByWeightAndStyle.get('900-italic',)) != null ? _i : variantByWeightAndStyle.get('900-oblique',)) != null
-        ? _j
-        : variantBoldItalic;
+    variantBold = variantByWeightAndStyle.get(`900-${currentStyle}`,) ?? variantBold;
+    variantBoldItalic = variantByWeightAndStyle.get('900-italic',) ?? variantByWeightAndStyle.get('900-oblique',) ?? variantBoldItalic;
   }
-  const variantItalic = (_k = variantByWeightAndStyle.get(`${currentWeight}-italic`,)) != null
-    ? _k
-    : variantByWeightAndStyle.get(`${currentWeight}-oblique`,);
+  const variantItalic = variantByWeightAndStyle.get(`${currentWeight}-italic`,) ?? variantByWeightAndStyle.get(`${currentWeight}-oblique`,);
   return { variantBold, variantItalic, variantBoldItalic, };
 }
 var knownFontshareCategories = ['display', 'sans', 'serif', 'slab', 'handwritten', 'script',];
@@ -34856,8 +34984,7 @@ var FontshareSource = class {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
   }
   getFontFamilyByName(family,) {
-    var _a;
-    return (_a = this.byFamilyName.get(family,)) != null ? _a : null;
+    return this.byFamilyName.get(family,) ?? null;
   }
   /**
    * Parses variant a string into a weight number and style, defaulting to a
@@ -34992,8 +35119,7 @@ var FramerFontSource = class {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
   }
   getFontFamilyByName(family,) {
-    var _a;
-    return (_a = this.byFamilyName.get(family,)) != null ? _a : null;
+    return this.byFamilyName.get(family,) ?? null;
   }
   addFontFamily(familyName,) {
     const fontFamily = { name: familyName, fonts: [], source: this.name, };
@@ -35055,8 +35181,7 @@ var GoogleFontSource = class {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
   }
   getFontFamilyByName(family,) {
-    var _a;
-    return (_a = this.byFamilyName.get(family,)) != null ? _a : null;
+    return this.byFamilyName.get(family,) ?? null;
   }
   static parseVariant(variant,) {
     if (variant === 'regular') {
@@ -35099,13 +35224,13 @@ var GoogleFontSource = class {
     const fonts = [];
     webFonts.forEach((webFont,) => {
       webFont.variants.forEach((variant,) => {
-        var _a, _b;
+        var _a;
         const family = webFont.family;
         let fontFamily = this.getFontFamilyByName(family,);
         if (!fontFamily) {
           fontFamily = this.addFontFamily(family,);
         }
-        const variantInfo = (_a = GoogleFontSource.parseVariant(variant,)) != null ? _a : {};
+        const variantInfo = GoogleFontSource.parseVariant(variant,) ?? {};
         const { weight, style, } = variantInfo;
         const selector = GoogleFontSource.createSelector(family, variant,);
         const { variantBold, variantItalic, variantBoldItalic, } = getFontVariants(
@@ -35123,7 +35248,7 @@ var GoogleFontSource = class {
           weight,
           style,
           category: mapToKnownCategory2(webFont.category,),
-          file: (_b = webFont.files[variant]) == null ? void 0 : _b.replace('http://', 'https://',),
+          file: (_a = webFont.files[variant]) == null ? void 0 : _a.replace('http://', 'https://',),
         };
         fontFamily.fonts.push(font,);
         fonts.push(font,);
@@ -35461,8 +35586,7 @@ var LocalFontSource = class {
     __publicField(this, 'fontAliases', /* @__PURE__ */ new Map(),);
   }
   getFontFamilyByName(family,) {
-    var _a;
-    return (_a = this.byFamilyName.get(family,)) != null ? _a : null;
+    return this.byFamilyName.get(family,) ?? null;
   }
   // TODO: these are duplicated across implementations of FontSource
   // When adding a third source, we should abstract them
@@ -35856,23 +35980,22 @@ function TextStyleSheet() {
   return null;
 }
 var Text = /* @__PURE__ */ React96.forwardRef(function Text2(props, forwardedRef,) {
-  var _a, _b;
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef15(null,);
-  const layoutRef = forwardedRef != null ? forwardedRef : fallbackLayoutRef;
+  const fallbackLayoutRef = useRef16(null,);
+  const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
-  useRoutePreloader((_a = props.preload) != null ? _a : [],);
+  useRoutePreloader(props.preload ?? [],);
   const onCanvas = useIsOnFramerCanvas();
   const matchesCurrentRoute = useLinkMatchesRoute(props.__link,);
   const fontLoadStatus = useFontLoadStatus(props.fonts,);
   useMeasureLayout(props, layoutRef,);
   const { fonts, __fromCanvasComponent, } = props;
-  const prevFontsRef = useRef15([],);
-  const fontsDidChange = !isShallowEqualArray((_b = prevFontsRef.current) != null ? _b : [], fonts != null ? fonts : [],);
+  const prevFontsRef = useRef16([],);
+  const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
-  useEffect112(() => {
+  useEffect122(() => {
     if (!fontsDidChange || !fonts) {
       return;
     }
@@ -35900,9 +36023,9 @@ var Text = /* @__PURE__ */ React96.forwardRef(function Text2(props, forwardedRef
     },
     [navigate, implicitPathVariables,],
   );
-  useEffect112(() => {
-    var _a2;
-    (_a2 = layoutRef.current) == null ? void 0 : _a2.addEventListener('click', interceptPageLinks,);
+  useEffect122(() => {
+    var _a;
+    (_a = layoutRef.current) == null ? void 0 : _a.addEventListener('click', interceptPageLinks,);
     const ref = layoutRef.current;
     return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
@@ -36056,7 +36179,7 @@ var TextComponent = /* @__PURE__ */ (() => {
     }
     getOverrideText() {
       const { _forwardedOverrideId, _forwardedOverrides, id: id3, } = this.props;
-      const forwardedOverrideId = _forwardedOverrideId != null ? _forwardedOverrideId : id3;
+      const forwardedOverrideId = _forwardedOverrideId ?? id3;
       if (forwardedOverrideId && _forwardedOverrides) {
         const text = _forwardedOverrides[forwardedOverrideId];
         if (isString22(text,)) {
@@ -36549,7 +36672,6 @@ var Vector = /* @__PURE__ */ (() => {
   var _a;
   return _a = class extends Layer {
     render() {
-      var _a2, _b;
       countNodeRender();
       const {
         opacity,
@@ -36582,7 +36704,7 @@ var Vector = /* @__PURE__ */ (() => {
       if (!id3 || !shapeId || !strokeClipId) {
         return null;
       }
-      const rotate = (_b = (_a2 = this.props.rotate) != null ? _a2 : rotation) != null ? _b : 0;
+      const rotate = this.props.rotate ?? rotation ?? 0;
       const { target, } = RenderEnvironment;
       const transform2 = transformValues(rect, rotate, isRootVectorNode, includeTransform,);
       let vectorFill;
@@ -36635,7 +36757,7 @@ var Vector = /* @__PURE__ */ (() => {
         elementTransform = transformString(transform2,);
       }
       const pathAttributes = {
-        d: d != null ? d : toSVGPath(calculatedPath, pathTranslate, target,),
+        d: d ?? toSVGPath(calculatedPath, pathTranslate, target,),
         transform: elementTransform,
       };
       const svgStrokeAttributes = {};
@@ -36753,7 +36875,7 @@ var Vector = /* @__PURE__ */ (() => {
           imagePatternElement,
         );
       }
-      const opacityValue = opacity != null ? opacity : variants ? 1 : void 0;
+      const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
         mainElement = /* @__PURE__ */ React99.createElement(
           motion.path,
@@ -36784,9 +36906,8 @@ var Vector = /* @__PURE__ */ (() => {
       );
     }
     renderElement(element,) {
-      var _a2, _b;
       const { isRootVectorNode, width, height, rect, willChangeTransform, includeTransform, } = this.props;
-      const frame2 = (_b = (_a2 = this.props.frame) != null ? _a2 : rect) != null ? _b : { x: 0, y: 0, width: 100, height: 100, };
+      const frame2 = this.props.frame ?? rect ?? { x: 0, y: 0, width: 100, height: 100, };
       if (!isRootVectorNode) {
         return element;
       }
@@ -37283,18 +37404,12 @@ var htmlEscapes = {
 var reUnescapedHtml = /[&<>"']/g;
 var reHasUnescapedHtml = RegExp(reUnescapedHtml.source,);
 function escapeHTML2(str,) {
-  return str && reHasUnescapedHtml.test(str,)
-    ? str.replace(reUnescapedHtml, (chr,) => {
-      var _a;
-      return (_a = htmlEscapes[chr]) != null ? _a : '';
-    },)
-    : str || '';
+  return str && reHasUnescapedHtml.test(str,) ? str.replace(reUnescapedHtml, (chr,) => htmlEscapes[chr] ?? '',) : str || '';
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
 var DeprecatedRichText = /* @__PURE__ */ React104.forwardRef(
   function Text3(props, forwardedRef,) {
-    var _a, _b;
     const {
       id: id3,
       name,
@@ -37335,16 +37450,16 @@ var DeprecatedRichText = /* @__PURE__ */ React104.forwardRef(
     } = props;
     const parentSize = useParentSize();
     const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef16(null,);
-    const layoutRef = forwardedRef != null ? forwardedRef : fallbackLayoutRef;
+    const fallbackLayoutRef = useRef17(null,);
+    const layoutRef = forwardedRef ?? fallbackLayoutRef;
     const { navigate, getRoute, } = useRouter();
     const currentRoute = useCurrentRoute();
-    useRoutePreloader((_a = props.preload) != null ? _a : [],);
+    useRoutePreloader(props.preload ?? [],);
     useMeasureLayout(props, layoutRef,);
     const inCodeComponent = React104.useContext(ComponentContainerContext,);
     const isOnCanvas = useIsOnFramerCanvas();
     let textOrOverride = text;
-    const forwardedOverrideId = _forwardedOverrideId != null ? _forwardedOverrideId : id3;
+    const forwardedOverrideId = _forwardedOverrideId ?? id3;
     if (forwardedOverrideId && _forwardedOverrides) {
       const override = _forwardedOverrides[forwardedOverrideId];
       if (typeof override === 'string') {
@@ -37410,7 +37525,7 @@ var DeprecatedRichText = /* @__PURE__ */ React104.forwardRef(
     const frame2 = calculateRect(props, parentSize || 0, false,);
     const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
     const hasTransformTemplate = !!props.transformTemplate || !frame2 || !restrictedRenderTarget || __fromCanvasComponent || isAutoSized2;
-    const template = hasTransformTemplate ? (_b = props.transformTemplate) != null ? _b : transformTemplate(center,) : void 0;
+    const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
     if (!withExternalLayout) {
       if (frame2 && restrictedRenderTarget && !isAutoSized2) {
         const rotate = Animatable.getNumber(rotation,).toFixed(4,);
@@ -37476,7 +37591,7 @@ function convertVerticalAlignment2(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef16([],);
+  const prevFontsRef = useRef17([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
@@ -37510,7 +37625,6 @@ var FitText = /* @__PURE__ */ forwardRef52(
 );
 var RichTextContainer = /* @__PURE__ */ forwardRef52(
   (props, ref,) => {
-    var _a;
     const {
       __fromCanvasComponent = false,
       _forwardedOverrideId,
@@ -37552,8 +37666,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const isOnCanvas = useIsOnFramerCanvas();
     const inCodeComponent = useContext162(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef17(null,);
-    const containerRef = ref != null ? ref : fallbackRef;
+    const fallbackRef = useRef18(null,);
+    const containerRef = ref ?? fallbackRef;
     useMeasureLayout(props, containerRef,);
     useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
     useInsertionEffect42(() => {
@@ -37575,7 +37689,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const frame2 = calculateRect(props, parentSize || 0, false,);
     const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
     const hasTransformTemplate = !!props.transformTemplate || !frame2 || !restrictedRenderTarget || __fromCanvasComponent || isAutoSized2;
-    const template = hasTransformTemplate ? (_a = props.transformTemplate) != null ? _a : transformTemplate(center,) : void 0;
+    const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
     if (!withExternalLayout) {
       if (frame2 && restrictedRenderTarget && !isAutoSized2) {
         const rotate = Animatable.getNumber(rotation,).toFixed(4,);
@@ -37760,11 +37874,27 @@ var Size = /* @__PURE__ */ (() => {
   Size2.isZero = function (size2,) {
     return size2 === Size2.zero || size2.width === 0 && size2.height === 0;
   };
+  Size2.points = (size2,) => {
+    return [
+      { x: 0, y: 0, },
+      { x: size2.width, y: 0, },
+      { x: size2.width, y: size2.height, },
+      { x: 0, y: size2.height, },
+    ];
+  };
   Size2.defaultIfZero = function (width, height, size2,) {
     if (Size2.isZero(size2,)) {
       return Size2(width, height,);
     }
     return size2;
+  };
+  Size2.points = (size2,) => {
+    return [
+      { x: 0, y: 0, },
+      { x: size2.width, y: 0, },
+      { x: size2.width, y: size2.height, },
+      { x: 0, y: size2.height, },
+    ];
   };
   return Size2;
 })();
@@ -37910,7 +38040,7 @@ function addFonts(component, passedFonts, flags,) {
 }
 function getFonts(component,) {
   const fonts = component.fonts;
-  return fonts != null ? fonts : [];
+  return fonts ?? [];
 }
 function getFontsFromSharedStyle(fonts,) {
   if (fonts.length === 0) {
@@ -38069,7 +38199,7 @@ function useInitialRouteComponent(routes, homeNodeId,) {
   const [RouteComponent, setRouteComponent,] = useState22(
     initialRouteComponent(InitialRouteComponent,),
   );
-  useEffect132(() => {
+  useEffect142(() => {
     if (withPreload(InitialRouteComponent,)) {
       InitialRouteComponent.preload().then(setRouteComponent,);
     }
