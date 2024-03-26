@@ -7,7 +7,6 @@
     "scripts": {
         "build": "rm -rf dist && tsc && cp ../README.md ./README.md",
         "prepublishOnly": "pnpm build",
-        "postinstall": "pnpm build",
         "download-framer": "tsx scripts/download.ts",
         "watch": "rm -rf dist && tsc -w"
     },
