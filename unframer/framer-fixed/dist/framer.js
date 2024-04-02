@@ -9023,7 +9023,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https:https://app.framerstatic.com/framer.LFR4ZPAO.js
+// https:https://app.framerstatic.com/framer.RQSONY2U.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -27432,6 +27432,9 @@ var effectValuesKeys = [
   'rotate',
   'rotateX',
   'rotateY',
+  'skewX',
+  'skewY',
+  /** @deprecated */
   'transformPerspective',
 ];
 var makeFXValues = (defaults,) => {
@@ -27443,6 +27446,9 @@ var makeFXValues = (defaults,) => {
     rotate: motionValue((defaults == null ? void 0 : defaults.rotate) ?? 0,),
     rotateX: motionValue((defaults == null ? void 0 : defaults.rotateX) ?? 0,),
     rotateY: motionValue((defaults == null ? void 0 : defaults.rotateY) ?? 0,),
+    skewX: motionValue((defaults == null ? void 0 : defaults.skewX) ?? 0,),
+    skewY: motionValue((defaults == null ? void 0 : defaults.skewY) ?? 0,),
+    /** @deprecated */
     transformPerspective: motionValue((defaults == null ? void 0 : defaults.transformPerspective) ?? 0,),
   };
 };
@@ -27451,10 +27457,13 @@ var defaultFXValues = {
   y: 0,
   scale: 1,
   opacity: 1,
-  transformPerspective: 0,
   rotate: 0,
   rotateX: 0,
   rotateY: 0,
+  skewX: 0,
+  skewY: 0,
+  /** @deprecated */
+  transformPerspective: 0,
 };
 function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({ values: makeFXValues(enabled ? values : void 0,), }));
@@ -27857,6 +27866,8 @@ function makeStyle(defaults,) {
     rotate: (defaults == null ? void 0 : defaults.rotate) ?? defaultFXValues.rotate,
     rotateX: (defaults == null ? void 0 : defaults.rotateX) ?? defaultFXValues.rotateX,
     rotateY: (defaults == null ? void 0 : defaults.rotateY) ?? defaultFXValues.rotateY,
+    skewX: (defaults == null ? void 0 : defaults.skewX) ?? defaultFXValues.skewX,
+    skewY: (defaults == null ? void 0 : defaults.skewY) ?? defaultFXValues.skewY,
     transition: (defaults == null ? void 0 : defaults.transition) ?? void 0,
   };
 }
@@ -28019,6 +28030,8 @@ var defaultRanges2 = () => ({
   rotate: [],
   rotateX: [],
   rotateY: [],
+  skewX: [],
+  skewY: [],
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
@@ -28293,12 +28306,15 @@ var withFX = (Component15,) =>
           presenceEffectValues.rotateY,
           transformValues2.rotateY,
         ],
+        skewX: [appearEffectValues.skewX, loopValues.skewX, presenceEffectValues.skewX, transformValues2.skewX,],
+        skewY: [appearEffectValues.skewY, loopValues.skewY, presenceEffectValues.skewY, transformValues2.skewY,],
+        /** @deprecated */
         transformPerspective: [
           transformValues2.transformPerspective,
           appearEffectValues.transformPerspective,
           // We stopped animating transformPerspective with `withFX`
-          // before introducing `useLoop`, so it does not have a value
-          // here on purpose.
+          // before introducing `useLoop` etc, so it does not have a
+          // value here on purpose.
         ],
       };
     }, [targetOpacity, transformValues2, parallaxValues, appearEffectValues, loopValues, presenceEffectValues,],);
@@ -28310,6 +28326,8 @@ var withFX = (Component15,) =>
     const rotate = useTransform(fxValues.rotate, add2,);
     const rotateX = useTransform(fxValues.rotateX, add2,);
     const rotateY = useTransform(fxValues.rotateY, add2,);
+    const skewX = useTransform(fxValues.skewX, add2,);
+    const skewY = useTransform(fxValues.skewY, add2,);
     const transformPerspective = useTransform(fxValues.transformPerspective, add2,);
     const { drag: drag2, dragConstraints, } = forwardedProps;
     useRerenderOnResize(drag2 && isReactRefObject(dragConstraints,) ? dragConstraints : void 0,);
@@ -28321,6 +28339,8 @@ var withFX = (Component15,) =>
       rotate,
       rotateX,
       rotateY,
+      skewX,
+      skewY,
     };
     if (isUndefined(withPerspective,)) {
       motionValueStyle.transformPerspective = transformPerspective;
@@ -30029,19 +30049,8 @@ function intersection(variants, parentVariants,) {
   }
   return variants.filter((variant,) => parentVariants.has(variant,));
 }
-function propertyKeyDifferenceShouldBeIgnored(key7,) {
-  switch (key7) {
-    case 'transformTemplate':
-      return false;
-    default:
-      return false;
-  }
-}
 function arePropOverridesEffectivelyDifferent(props, propOverrides,) {
   for (const key7 of Object.keys(propOverrides,)) {
-    if (propertyKeyDifferenceShouldBeIgnored(key7,)) {
-      continue;
-    }
     if (!isEqual(props[key7], propOverrides[key7], true,)) {
       return true;
     }
@@ -31597,7 +31606,7 @@ var ResolveItemsPlan = class extends QueryPlan {
           this.executionTime - this.childPlan.executionTime,
           this.executionTime,
         )
-      } ${stringifyItems(this.itemCount,)} ${stringifyItems(this.itemCount,)}`,
+      } ${stringifyItems(this.itemCount,)}`,
       nodes: [this.childPlan.inspect(),],
     };
   }
@@ -31946,7 +31955,6 @@ ${(0, import_archy.default)(plan.inspect(),)}`,);
     if (query.where) {
       const filterExpression = ScalarExpression.from(query.where, collection.schema,);
       plan = createPlanForWhereClause(collection, filterExpression,);
-      plan = new ResolveItemsPlan(plan, collection, richTextResolver, query.select,);
     }
     const sortExpressions = (_a = query.orderBy) == null ? void 0 : _a.map(
       (expression,) =>
@@ -31970,6 +31978,9 @@ ${(0, import_archy.default)(plan.inspect(),)}`,);
     }
     if (offsetExpression || limitExpression) {
       plan = new SliceItemsPlan(plan, offsetExpression, limitExpression,);
+    }
+    if (query.select.length > 0) {
+      plan = new ResolveItemsPlan(plan, collection, richTextResolver, query.select,);
     }
     return plan;
   }
