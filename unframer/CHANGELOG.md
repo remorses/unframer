@@ -1,5 +1,11 @@
 # unframer
 
+## 1.1.2
+
+### Patch Changes
+
+-   3301e77: Update framer to 2.4.1, update framer motion to 11.0.7
+
 ## 1.1.1
 
 ### Patch Changes
