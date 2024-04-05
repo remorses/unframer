@@ -1,5 +1,5 @@
 // @ts-nocheck
-// https:https://app.framerstatic.com/chunk-4NJGI344.js
+// https:https://app.framerstatic.com/chunk-73TYJ7YB.js
 import { createContext, } from 'react';
 import { createContext as createContext2, } from 'react';
 import { createContext as createContext3, } from 'react';
@@ -23,37 +23,37 @@ import { useCallback as useCallback2, useState, } from 'react';
 import { useRef as useRef3, } from 'react';
 import { useEffect as useEffect4, } from 'react';
 import * as React4 from 'react';
-import { Children, cloneElement as cloneElement2, isValidElement, useContext as useContext7, useRef as useRef5, } from 'react';
+import { Children, cloneElement as cloneElement2, isValidElement, useContext as useContext8, useRef as useRef5, } from 'react';
 import * as React3 from 'react';
 import { useId as useId3, useMemo as useMemo5, } from 'react';
 import * as React2 from 'react';
-import { useId as useId2, useInsertionEffect as useInsertionEffect2, useRef as useRef4, } from 'react';
+import { useContext as useContext7, useId as useId2, useInsertionEffect as useInsertionEffect2, useRef as useRef4, } from 'react';
 import * as React5 from 'react';
-import { useContext as useContext8, useMemo as useMemo6, } from 'react';
+import { useContext as useContext9, useMemo as useMemo6, } from 'react';
 import * as React6 from 'react';
 import { useEffect as useEffect6, useRef as useRef6, useState as useState2, } from 'react';
 import { createContext as createContext7, } from 'react';
 import * as React7 from 'react';
-import { useContext as useContext9, useMemo as useMemo7, useRef as useRef7, } from 'react';
-import { useContext as useContext10, useEffect as useEffect7, useState as useState3, } from 'react';
+import { useContext as useContext10, useMemo as useMemo7, useRef as useRef7, } from 'react';
+import { useContext as useContext11, useEffect as useEffect7, useState as useState3, } from 'react';
 import * as React8 from 'react';
 import { forwardRef as forwardRef2, useEffect as useEffect8, useRef as useRef8, } from 'react';
 import { createContext as createContext8, } from 'react';
 import * as React9 from 'react';
-import { forwardRef as forwardRef3, useContext as useContext11, } from 'react';
-import { useContext as useContext12, useInsertionEffect as useInsertionEffect3, useRef as useRef9, } from 'react';
+import { forwardRef as forwardRef3, useContext as useContext12, } from 'react';
+import { useContext as useContext13, useInsertionEffect as useInsertionEffect3, useRef as useRef9, } from 'react';
 import { useInsertionEffect as useInsertionEffect4, } from 'react';
 import { useEffect as useEffect9, } from 'react';
-import { useContext as useContext13, useEffect as useEffect10, useRef as useRef10, } from 'react';
+import { useContext as useContext14, useEffect as useEffect10, useRef as useRef10, } from 'react';
 import { useState as useState4, } from 'react';
-import { useContext as useContext14, } from 'react';
+import { useContext as useContext15, } from 'react';
 import { useCallback as useCallback3, useRef as useRef11, useState as useState5, } from 'react';
 import { useEffect as useEffect11, useState as useState6, } from 'react';
 import { useEffect as useEffect12, } from 'react';
 import { useEffect as useEffect13, useRef as useRef12, } from 'react';
 import * as React10 from 'react';
 import { useEffect as useEffect14, useState as useState7, } from 'react';
-import { useContext as useContext15, } from 'react';
+import { useContext as useContext16, } from 'react';
 import * as React11 from 'react';
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -154,7 +154,7 @@ var MotionContext = createContext2({},);
 var PresenceContext = createContext3(null,);
 var isBrowser = typeof document !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
-var camelToDash = (str,) => str.replace(/([a-z])([A-Z])/g, '$1-$2',).toLowerCase();
+var camelToDash = (str,) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
 var optimizedAppearDataId = 'framerAppearId';
 var optimizedAppearDataAttribute = 'data-' + camelToDash(optimizedAppearDataId,);
 var MotionGlobalConfig = {
@@ -577,9 +577,10 @@ var clamp = (min, max, v,) => {
   return v;
 };
 var sanitize = (v,) => Math.round(v * 1e5,) / 1e5;
-var floatRegex = /(-)?([\d]*\.?[\d])+/g;
-var colorRegex = /(#[0-9a-f]{3,8}|(rgb|hsl)a?\((-?[\d\.]+%?[,\s]+){2}(-?[\d\.]+%?)\s*[\,\/]?\s*[\d\.]*%?\))/gi;
-var singleColorRegex = /^(#[0-9a-f]{3,8}|(rgb|hsl)a?\((-?[\d\.]+%?[,\s]+){2}(-?[\d\.]+%?)\s*[\,\/]?\s*[\d\.]*%?\))$/i;
+var floatRegex = /-?(?:\d+(?:\.\d+)?|\.\d+)/gu;
+var colorRegex = /(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))/giu;
+var singleColorRegex =
+  /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))$/iu;
 function isString(v,) {
   return typeof v === 'string';
 }
@@ -1002,10 +1003,9 @@ var VAR_TOKEN = 'var';
 var VAR_FUNCTION_TOKEN = 'var(';
 var SPLIT_TOKEN = '${}';
 var complexRegex =
-  /(var\s*\(\s*--[\w-]+(\s*,\s*(?:(?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)+)?\s*\))|(#[0-9a-f]{3,8}|(rgb|hsl)a?\((-?[\d\.]+%?[,\s]+){2}(-?[\d\.]+%?)\s*[\,\/]?\s*[\d\.]*%?\))|((-)?([\d]*\.?[\d])+)/gi;
+  /var\s*\(\s*--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)|#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\)|-?(?:\d+(?:\.\d+)?|\.\d+)/giu;
 function analyseComplexValue(value,) {
   const originalValue = value.toString();
-  const matchedValues = originalValue.match(complexRegex,) || [];
   const values = [];
   const indexes = {
     color: [],
@@ -1013,8 +1013,8 @@ function analyseComplexValue(value,) {
     var: [],
   };
   const types2 = [];
-  for (let i = 0; i < matchedValues.length; i++) {
-    const parsedValue = matchedValues[i];
+  let i = 0;
+  const tokenised = originalValue.replace(complexRegex, (parsedValue,) => {
     if (color.test(parsedValue,)) {
       indexes.color.push(i,);
       types2.push(COLOR_TOKEN,);
@@ -1028,8 +1028,9 @@ function analyseComplexValue(value,) {
       types2.push(NUMBER_TOKEN,);
       values.push(parseFloat(parsedValue,),);
     }
-  }
-  const tokenised = originalValue.replace(complexRegex, SPLIT_TOKEN,);
+    ++i;
+    return SPLIT_TOKEN;
+  },);
   const split = tokenised.split(SPLIT_TOKEN,);
   return { values, split, indexes, types: types2, };
 }
@@ -1151,7 +1152,7 @@ var isCSSVariableToken = (value,) => {
   }
   return singleCssVariableRegex.test(value.split('/*',)[0].trim(),);
 };
-var singleCssVariableRegex = /var\s*\(\s*--[\w-]+(\s*,\s*(?:(?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)+)?\s*\)$/i;
+var singleCssVariableRegex = /var\(--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)$/iu;
 function mixImmediate(a, b,) {
   return (p,) => p > 0 ? b : a;
 }
@@ -1936,7 +1937,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.0.7';
+    this.version = '11.0.11-sync.2';
     this.canTrackVelocity = false;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -2190,8 +2191,8 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
-var isNumericalString = (v,) => /^\-?\d*\.?\d+$/.test(v,);
-var isZeroValueString = (v,) => /^0[^.\s]+$/.test(v,);
+var isNumericalString = (v,) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
+var isZeroValueString = (v,) => /^0[^.\s]+$/u.test(v,);
 var maxDefaults = /* @__PURE__ */ new Set(['brightness', 'contrast', 'saturate', 'opacity',],);
 function applyDefaultFilter(v,) {
   const [name, value,] = v.slice(0, -1,).split('(',);
@@ -2209,7 +2210,7 @@ function applyDefaultFilter(v,) {
   }
   return name + '(' + defaultValue + unit + ')';
 }
-var functionRegex = /([a-z-]*)\(.*?\)/g;
+var functionRegex = /\b([a-z-]*)\(.*?\)/gu;
 var filter = {
   ...complex,
   getAnimatableNone: (v,) => {
@@ -3053,6 +3054,10 @@ function createAnimationState(visualElement,) {
           removedKeys.delete(key7,);
         }
         typeState.needsAnimating[key7] = true;
+        const motionValue2 = visualElement.getValue(key7,);
+        if (motionValue2) {
+          motionValue2.liveStyle = false;
+        }
       };
       for (const key7 in allKeys) {
         const next = resolvedValues[key7];
@@ -3099,6 +3104,10 @@ function createAnimationState(visualElement,) {
         const fallbackTarget = visualElement.getBaseTarget(key7,);
         if (fallbackTarget !== void 0) {
           fallbackAnimation[key7] = fallbackTarget;
+        }
+        const motionValue2 = visualElement.getValue(key7,);
+        if (motionValue2) {
+          motionValue2.liveStyle = true;
         }
       },);
       animations2.push({ animation: fallbackAnimation, },);
@@ -3377,8 +3386,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.0.7',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.0.7 may not work as expected.`,
+          nextValue.version === '11.0.11-sync.2',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.0.11-sync.2 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -3389,7 +3398,11 @@ function updateMotionValuesFromProps(element, next, prev,) {
     } else if (prevValue !== nextValue) {
       if (element.hasValue(key7,)) {
         const existingValue = element.getValue(key7,);
-        !existingValue.hasAnimated && existingValue.set(nextValue,);
+        if (existingValue.liveStyle === true) {
+          existingValue.jump(nextValue,);
+        } else if (!existingValue.hasAnimated) {
+          existingValue.set(nextValue,);
+        }
       } else {
         const latestValue = element.getStaticValue(key7,);
         element.addValue(key7, motionValue(latestValue !== void 0 ? latestValue : nextValue, { owner: element, },),);
@@ -3454,7 +3467,7 @@ var VisualElement = class {
       this.variantChildren = /* @__PURE__ */ new Set();
     }
     this.manuallyAnimateOnMount = Boolean(parent && parent.current,);
-    const { willChange, ...initialMotionValues } = this.scrapeMotionValuesFromProps(props, {},);
+    const { willChange, ...initialMotionValues } = this.scrapeMotionValuesFromProps(props, {}, this,);
     for (const key7 in initialMotionValues) {
       const value = initialMotionValues[key7];
       if (latestValues[key7] !== void 0 && isMotionValue(value,)) {
@@ -3472,7 +3485,7 @@ var VisualElement = class {
    * This isn't an abstract method as it needs calling in the constructor, but it is
    * intended to be one.
    */
-  scrapeMotionValuesFromProps(_props, _prevProps,) {
+  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
     return {};
   }
   mount(instance,) {
@@ -3647,7 +3660,7 @@ var VisualElement = class {
     }
     this.prevMotionValues = updateMotionValuesFromProps(
       this,
-      this.scrapeMotionValuesFromProps(props, this.prevProps,),
+      this.scrapeMotionValuesFromProps(props, this.prevProps, this,),
       this.prevMotionValues,
     );
     if (this.handleChildMotionValue) {
@@ -3866,7 +3879,7 @@ function isSVGComponent(Component23,) {
     lowercaseSVGElements.indexOf(Component23,) > -1 || /**
      * If it contains a capital letter, it's an SVG component
      */
-    /[A-Z]/.test(Component23,)
+    /[A-Z]/u.test(Component23,)
   ) {
     return true;
   }
@@ -4108,18 +4121,24 @@ function renderSVG(element, renderState, _styleProp, projection,) {
     element.setAttribute(!camelCaseAttributes.has(key7,) ? camelToDash(key7,) : key7, renderState.attrs[key7],);
   }
 }
-function scrapeMotionValuesFromProps(props, prevProps,) {
+function scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
+  var _a;
   const { style, } = props;
   const newValues = {};
   for (const key7 in style) {
-    if (isMotionValue(style[key7],) || prevProps.style && isMotionValue(prevProps.style[key7],) || isForcedMotionValue(key7, props,)) {
+    if (
+      isMotionValue(style[key7],) || prevProps.style && isMotionValue(prevProps.style[key7],) || isForcedMotionValue(key7, props,) ||
+      ((_a = visualElement === null || visualElement === void 0 ? void 0 : visualElement.getValue(key7,)) === null || _a === void 0
+          ? void 0
+          : _a.liveStyle) !== void 0
+    ) {
       newValues[key7] = style[key7];
     }
   }
   return newValues;
 }
-function scrapeMotionValuesFromProps2(props, prevProps,) {
-  const newValues = scrapeMotionValuesFromProps(props, prevProps,);
+function scrapeMotionValuesFromProps2(props, prevProps, visualElement,) {
+  const newValues = scrapeMotionValuesFromProps(props, prevProps, visualElement,);
   for (const key7 in props) {
     if (isMotionValue(props[key7],) || isMotionValue(prevProps[key7],)) {
       const targetKey = transformPropOrder.indexOf(key7,) !== -1 ? 'attr' + key7.charAt(0,).toUpperCase() + key7.substring(1,) : key7;
@@ -4704,7 +4723,8 @@ function hasScale({ scale: scale2, scaleX, scaleY, },) {
   return !isIdentityScale(scale2,) || !isIdentityScale(scaleX,) || !isIdentityScale(scaleY,);
 }
 function hasTransform(values,) {
-  return hasScale(values,) || has2DTranslate(values,) || values.z || values.rotate || values.rotateX || values.rotateY;
+  return hasScale(values,) || has2DTranslate(values,) || values.z || values.rotate || values.rotateX || values.rotateY || values.skewX ||
+    values.skewY;
 }
 function has2DTranslate(values,) {
   return is2DTranslate(values.x,) || is2DTranslate(values.y,);
@@ -5620,14 +5640,15 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
   let transform2 = '';
   const xTranslate = delta.x.translate / treeScale.x;
   const yTranslate = delta.y.translate / treeScale.y;
-  if (xTranslate || yTranslate) {
-    transform2 = `translate3d(${xTranslate}px, ${yTranslate}px, 0) `;
+  const zTranslate = (latestTransform === null || latestTransform === void 0 ? void 0 : latestTransform.z) || 0;
+  if (xTranslate || yTranslate || zTranslate) {
+    transform2 = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
   }
   if (treeScale.x !== 1 || treeScale.y !== 1) {
     transform2 += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
   }
   if (latestTransform) {
-    const { rotate, rotateX, rotateY, } = latestTransform;
+    const { rotate, rotateX, rotateY, skewX, skewY, } = latestTransform;
     if (rotate) {
       transform2 += `rotate(${rotate}deg) `;
     }
@@ -5636,6 +5657,12 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
     }
     if (rotateY) {
       transform2 += `rotateY(${rotateY}deg) `;
+    }
+    if (skewX) {
+      transform2 += `skewX(${skewX}deg) `;
+    }
+    if (skewY) {
+      transform2 += `skewY(${skewY}deg) `;
     }
   }
   const elementScaleX = delta.x.scale * treeScale.x;
@@ -5660,6 +5687,13 @@ function animateSingleValue(value, keyframes2, options,) {
 }
 var transformAxes = ['', 'X', 'Y', 'Z',];
 var hiddenVisibility = { visibility: 'hidden', };
+function resetDistortingTransform(key7, visualElement, values,) {
+  const { latestValues, } = visualElement;
+  if (latestValues[key7]) {
+    values[key7] = latestValues[key7];
+    visualElement.setStaticValue(key7, 0,);
+  }
+}
 var animationTarget = 1e3;
 var id2 = 0;
 var projectionFrameData = {
@@ -5888,6 +5922,9 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
         this.nodes.forEach(clearIsLayoutDirty,);
       }
       this.isUpdating = false;
+      if (window.HandoffCancelAllAnimations) {
+        window.HandoffCancelAllAnimations();
+      }
       this.nodes.forEach(resetTransformStyle,);
       this.nodes.forEach(updateLayout,);
       this.nodes.forEach(notifyLayoutUpdate,);
@@ -6439,19 +6476,22 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
       }
       let hasRotate = false;
       const { latestValues, } = visualElement;
-      if (latestValues.rotate || latestValues.rotateX || latestValues.rotateY || latestValues.rotateZ) {
+      if (
+        latestValues.z || latestValues.rotate || latestValues.rotateX || latestValues.rotateY || latestValues.rotateZ ||
+        latestValues.skewX || latestValues.skewY
+      ) {
         hasRotate = true;
       }
       if (!hasRotate) {
         return;
       }
       const resetValues = {};
+      if (latestValues.z) {
+        resetDistortingTransform('z', visualElement, resetValues,);
+      }
       for (let i = 0; i < transformAxes.length; i++) {
-        const key7 = 'rotate' + transformAxes[i];
-        if (latestValues[key7]) {
-          resetValues[key7] = latestValues[key7];
-          visualElement.setStaticValue(key7, 0,);
-        }
+        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues,);
+        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues,);
       }
       visualElement.render();
       for (const key7 in resetValues) {
@@ -6749,14 +6789,17 @@ var drag = {
     MeasureLayout,
   },
 };
-var splitCSSVariableRegex = /var\((--[a-zA-Z0-9-_]+),? ?([a-zA-Z0-9 ()%#.,-]+)?\)/;
+var splitCSSVariableRegex = (
+  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
+  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u
+);
 function parseCSSVariable(current,) {
   const match = splitCSSVariableRegex.exec(current,);
   if (!match) {
     return [,];
   }
-  const [, token, fallback,] = match;
-  return [token, fallback,];
+  const [, token1, token2, fallback,] = match;
+  return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback,];
 }
 var maxDepth = 4;
 function getVariableValue(current, element, depth = 1,) {
@@ -6772,11 +6815,8 @@ function getVariableValue(current, element, depth = 1,) {
   if (resolved) {
     const trimmed = resolved.trim();
     return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
-  } else if (isCSSVariableToken(fallback,)) {
-    return getVariableValue(fallback, element, depth + 1,);
-  } else {
-    return fallback;
   }
+  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
 }
 function resolveCSSVariables(visualElement, { ...target }, transitionEnd,) {
   const element = visualElement.current;
@@ -6837,11 +6877,11 @@ var getTranslateFromMatrix = (pos2, pos3,) => (_bbox, { transform: transform2, }
   if (transform2 === 'none' || !transform2) {
     return 0;
   }
-  const matrix3d = transform2.match(/^matrix3d\((.+)\)$/,);
+  const matrix3d = transform2.match(/^matrix3d\((.+)\)$/u,);
   if (matrix3d) {
     return getPosFromMatrix(matrix3d[1], pos3,);
   } else {
-    const matrix = transform2.match(/^matrix\((.+)\)$/,);
+    const matrix = transform2.match(/^matrix\((.+)\)$/u,);
     if (matrix) {
       return getPosFromMatrix(matrix[1], pos2,);
     } else {
@@ -7047,8 +7087,8 @@ var HTMLVisualElement = class extends DOMVisualElement {
   build(renderState, latestValues, options, props,) {
     buildHTMLStyles(renderState, latestValues, options, props.transformTemplate,);
   }
-  scrapeMotionValuesFromProps(props, prevProps,) {
-    return scrapeMotionValuesFromProps(props, prevProps,);
+  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
+    return scrapeMotionValuesFromProps(props, prevProps, visualElement,);
   }
   handleChildMotionValue() {
     if (this.childSubscription) {
@@ -7089,7 +7129,7 @@ var SVGVisualElement = class extends DOMVisualElement {
     return createBox();
   }
   scrapeMotionValuesFromProps(props, prevProps,) {
-    return scrapeMotionValuesFromProps2(props, prevProps,);
+    return scrapeMotionValuesFromProps2(props, prevProps, this,);
   }
   build(renderState, latestValues, options, props,) {
     buildSVGAttrs(renderState, latestValues, options, this.isSVGTag, props.transformTemplate,);
@@ -7178,6 +7218,7 @@ function PopChild({ children, isPresent: isPresent2, },) {
     top: 0,
     left: 0,
   },);
+  const { nonce, } = useContext7(MotionConfigContext,);
   useInsertionEffect2(() => {
     const { width, height, top, left, } = size2.current;
     if (isPresent2 || !ref.current || !width || !height) {
@@ -7185,6 +7226,9 @@ function PopChild({ children, isPresent: isPresent2, },) {
     }
     ref.current.dataset.motionPopId = id4;
     const style = document.createElement('style',);
+    if (nonce) {
+      style.nonce = nonce;
+    }
     document.head.appendChild(style,);
     if (style.sheet) {
       style.sheet.insertRule(`
@@ -7271,7 +7315,7 @@ var AnimatePresence = (
   { children, custom, initial = true, onExitComplete, exitBeforeEnter, presenceAffectsLayout = true, mode = 'sync', },
 ) => {
   invariant(!exitBeforeEnter, 'Replace exitBeforeEnter with mode=\'wait\'',);
-  const forceRender = useContext7(LayoutGroupContext,).forceRender || useForceUpdate()[0];
+  const forceRender = useContext8(LayoutGroupContext,).forceRender || useForceUpdate()[0];
   const isMounted = useIsMounted();
   const filteredChildren = onlyElements(children,);
   let childrenToRender = filteredChildren;
@@ -7379,7 +7423,7 @@ var AnimatePresence = (
 };
 function MotionConfig({ children, isValidProp, ...config },) {
   isValidProp && loadExternalIsValidProp(isValidProp,);
-  config = { ...useContext8(MotionConfigContext,), ...config, };
+  config = { ...useContext9(MotionConfigContext,), ...config, };
   config.isStatic = useConstant(() => config.isStatic);
   const context = useMemo6(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
   return React5.createElement(MotionConfigContext.Provider, { value: context, }, children,);
@@ -7432,8 +7476,8 @@ function nodeGroup() {
 var shouldInheritGroup = (inherit,) => inherit === true;
 var shouldInheritId = (inherit,) => shouldInheritGroup(inherit === true,) || inherit === 'id';
 var LayoutGroup = ({ children, id: id4, inherit = true, },) => {
-  const layoutGroupContext = useContext9(LayoutGroupContext,);
-  const deprecatedLayoutGroupContext = useContext9(DeprecatedLayoutGroupContext,);
+  const layoutGroupContext = useContext10(LayoutGroupContext,);
+  const deprecatedLayoutGroupContext = useContext10(DeprecatedLayoutGroupContext,);
   const [forceRender, key7,] = useForceUpdate();
   const context = useRef7(null,);
   const upstreamId = layoutGroupContext.id || deprecatedLayoutGroupContext;
@@ -7451,7 +7495,7 @@ var LayoutGroup = ({ children, id: id4, inherit = true, },) => {
 };
 function useMotionValue(initial,) {
   const value = useConstant(() => motionValue(initial,));
-  const { isStatic, } = useContext10(MotionConfigContext,);
+  const { isStatic, } = useContext11(MotionConfigContext,);
   if (isStatic) {
     const [, setLatest,] = useState3(initial,);
     useEffect7(() => value.on('change', setLatest,), [],);
@@ -7586,7 +7630,7 @@ function useDefaultMotionValue(value, defaultValue = 0,) {
 }
 function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: layout2 = true, ...props }, externalRef,) {
   const Component23 = useConstant(() => motion(as,));
-  const context = useContext11(ReorderContext,);
+  const context = useContext12(ReorderContext,);
   const point2 = {
     x: useDefaultMotionValue(style.x,),
     y: useDefaultMotionValue(style.y,),
@@ -7641,7 +7685,7 @@ function useMotionTemplate(fragments, ...values) {
   return useCombineMotionValues(values.filter(isMotionValue,), buildValue,);
 }
 function useSpring(source, config = {},) {
-  const { isStatic, } = useContext12(MotionConfigContext,);
+  const { isStatic, } = useContext13(MotionConfigContext,);
   const activeSpringAnimation = useRef9(null,);
   const value = useMotionValue(isMotionValue(source,) ? source.get() : source,);
   const stopAnimation2 = () => {
@@ -7955,7 +7999,7 @@ function getTargetSize(target,) {
   return 'getBBox' in target && target.tagName !== 'svg' ? target.getBBox() : { width: target.clientWidth, height: target.clientHeight, };
 }
 function resolveOffsets(container, info, options,) {
-  let { offset: offsetDefinition = ScrollOffset.All, } = options;
+  const { offset: offsetDefinition = ScrollOffset.All, } = options;
   const { target = container, axis = 'y', } = options;
   const lengthLabel = axis === 'y' ? 'height' : 'width';
   const inset2 = target !== container ? calcInset(target, container,) : point;
@@ -8125,7 +8169,7 @@ function useViewportScroll() {
 }
 function useAnimationFrame(callback,) {
   const initialTimestamp = useRef10(0,);
-  const { isStatic, } = useContext13(MotionConfigContext,);
+  const { isStatic, } = useContext14(MotionConfigContext,);
   useEffect10(() => {
     if (isStatic) {
       return;
@@ -8192,7 +8236,7 @@ function useReducedMotion() {
 }
 function useReducedMotionConfig() {
   const reducedMotionPreference = useReducedMotion();
-  const { reducedMotion, } = useContext14(MotionConfigContext,);
+  const { reducedMotion, } = useContext15(MotionConfigContext,);
   if (reducedMotion === 'never') {
     return false;
   } else if (reducedMotion === 'always') {
@@ -8865,6 +8909,15 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       animation: readyAnimation,
       startTime: null,
     },);
+    if (!window.HandoffCancelAllAnimations) {
+      window.HandoffCancelAllAnimations = () => {
+        appearAnimationStore.forEach(({ animation, },) => {
+          animation.cancel();
+        },);
+        appearAnimationStore.clear();
+        window.HandoffCancelAllAnimations = void 0;
+      };
+    }
   }
   const startAnimation2 = () => {
     readyAnimation.cancel();
@@ -8952,7 +9005,7 @@ var hasWarned = false;
 function useInvertedScale(scale2,) {
   let parentScaleX = useMotionValue(1,);
   let parentScaleY = useMotionValue(1,);
-  const { visualElement, } = useContext15(MotionContext,);
+  const { visualElement, } = useContext16(MotionContext,);
   invariant(
     !!(scale2 || visualElement),
     'If no scale values are provided, useInvertedScale must be used within a child of another motion component.',
@@ -9023,7 +9076,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https:https://app.framerstatic.com/framer.RQSONY2U.js
+// https:https://app.framerstatic.com/framer.Q2DHSUSM.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9044,7 +9097,7 @@ import React72 from 'react';
 import React82 from 'react';
 import { useCallback as useCallback32, useEffect as useEffect22, useRef as useRef22, } from 'react';
 import { jsx as _jsx6, } from 'react/jsx-runtime';
-import React102, { useContext as useContext16, } from 'react';
+import React102, { useContext as useContext17, } from 'react';
 import React122 from 'react';
 import React112 from 'react';
 import React13 from 'react';
@@ -9149,12 +9202,12 @@ import React53 from 'react';
 import React47 from 'react';
 import React48, { useCallback as useCallback8, useEffect as useEffect102, useRef as useRef112, } from 'react';
 import React49 from 'react';
-import { useLayoutEffect as useLayoutEffect22, } from 'react';
+import { useLayoutEffect as useLayoutEffect22, useRef as useRef122, } from 'react';
 import React51 from 'react';
 import React50 from 'react';
 import React522 from 'react';
 import { jsx as jsx33, } from 'react/jsx-runtime';
-import { createContext as createContext42, useContext as useContext122, useRef as useRef122, } from 'react';
+import { createContext as createContext42, useContext as useContext122, useRef as useRef132, } from 'react';
 import { jsx as jsx34, } from 'react/jsx-runtime';
 import React55 from 'react';
 import * as React54 from 'react';
@@ -9188,7 +9241,7 @@ import {
   useCallback as useCallback9,
   useContext as useContext142,
   useEffect as useEffect112,
-  useRef as useRef132,
+  useRef as useRef14,
 } from 'react';
 import { useMemo as useMemo52, } from 'react';
 import React70, { createRef, } from 'react';
@@ -9197,12 +9250,12 @@ import React722 from 'react';
 import React73 from 'react';
 import React74 from 'react';
 import React75 from 'react';
-import { useRef as useRef14, } from 'react';
+import { useRef as useRef15, } from 'react';
 import React76 from 'react';
 import { jsx as jsx45, } from 'react/jsx-runtime';
 import React77 from 'react';
 import { jsx as jsx46, } from 'react/jsx-runtime';
-import React78, { useRef as useRef15, } from 'react';
+import React78, { useRef as useRef16, } from 'react';
 import { jsx as jsx47, } from 'react/jsx-runtime';
 import React84, { Component as Component14, } from 'react';
 import React79 from 'react';
@@ -9211,7 +9264,7 @@ import React81 from 'react';
 import React80 from 'react';
 import { jsx as jsx49, } from 'react/jsx-runtime';
 import { Fragment as Fragment10, jsx as jsx50, jsxs as jsxs16, } from 'react/jsx-runtime';
-import React83, { useEffect as useEffect122, useRef as useRef16, } from 'react';
+import React83, { useEffect as useEffect122, useRef as useRef17, } from 'react';
 import React822 from 'react';
 import { Fragment as Fragment11, jsx as jsx51, jsxs as jsxs17, } from 'react/jsx-runtime';
 import { Component as Component12, } from 'react';
@@ -9231,10 +9284,10 @@ import {
   isValidElement as isValidElement32,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef18,
+  useRef as useRef19,
 } from 'react';
 import * as React86 from 'react';
-import { useRef as useRef17, } from 'react';
+import { useRef as useRef18, } from 'react';
 import { jsx as jsx59, } from 'react/jsx-runtime';
 import { jsx as jsx60, } from 'react/jsx-runtime';
 import { useEffect as useEffect142, useState as useState22, } from 'react';
@@ -11755,7 +11808,7 @@ var CurrentRouteContext = React102.createContext(void 0,);
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
-  const override = useContext16(CurrentRouteContext,);
+  const override = useContext17(CurrentRouteContext,);
   const id3 = override !== null && override !== void 0 ? override : router.currentRouteId;
   if (!id3) {
     return void 0;
@@ -27465,6 +27518,9 @@ var defaultFXValues = {
   /** @deprecated */
   transformPerspective: 0,
 };
+function isFXValuesKey(key7,) {
+  return key7 in defaultFXValues;
+}
 function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({ values: makeFXValues(enabled ? values : void 0,), }));
   React47.useEffect(() => {
@@ -27670,6 +27726,16 @@ var presenceOptionsKeys = /* @__PURE__ */ new Set([
   'presenceAnimate',
   'presenceExit',
 ],);
+function getVisualElementBase(visualElement, style,) {
+  const ctx = visualElement.getVariantContext();
+  const base = { ...style, };
+  if (Array.isArray(ctx == null ? void 0 : ctx.animate,)) {
+    for (const variant of ctx.animate) {
+      Object.assign(base, visualElement.getVariant(variant,),);
+    }
+  }
+  return base;
+}
 function usePresenceAnimation(
   {
     initial: motionInitial,
@@ -27681,22 +27747,22 @@ function usePresenceAnimation(
   },
   ref,
   enabled,
+  style,
   appearId,
 ) {
   const initial = presenceInitial ?? motionInitial;
   const animateConfig = presenceAnimate ?? motionAnimate;
   const exit = presenceExit ?? motionExit;
+  const hasMounted = useRef122(false,);
   const effect = useConstant2(() => {
     var _a;
-    if (!isObject2(initial,)) {
+    const base = initial ?? style;
+    if (!isObject2(base,)) {
       return { values: makeFXValues(), };
     }
     const defaults = {};
-    for (const key7 in initial) {
-      let value = isObject2(initial,) ? (_a = asRecord(initial,)) == null ? void 0 : _a[key7] : void 0;
-      if (isMotionValue(value,)) {
-        value = value.get();
-      }
+    for (const key7 in base) {
+      const value = isObject2(base,) ? (_a = asRecord(base,)) == null ? void 0 : _a[key7] : void 0;
       if (!isNumber2(value,)) {
         continue;
       }
@@ -27707,6 +27773,7 @@ function usePresenceAnimation(
   const [isPresent2, safeToRemove,] = usePresence();
   const shouldReduceMotion = useReducedMotionConfig();
   useLayoutEffect22(() => {
+    hasMounted.current = true;
     if (!enabled) {
       safeToRemove == null ? void 0 : safeToRemove();
       return;
@@ -27723,6 +27790,23 @@ function usePresenceAnimation(
       }
     }
   }, [isPresent2,],);
+  useLayoutEffect22(() => {
+    if (!hasMounted.current) {
+      return;
+    }
+    const visualElement = visualElementStore.get(ref.current,);
+    if (!visualElement) {
+      return;
+    }
+    const base = isObject2(animateConfig,) ? animateConfig : getVisualElementBase(visualElement, style,);
+    for (const key7 in effect.values) {
+      if (!isFXValuesKey(key7,)) {
+        continue;
+      }
+      const value = base == null ? void 0 : base[key7];
+      visualElement.setBaseTarget(key7, isNumber2(value,) ? value : defaultFXValues[key7],);
+    }
+  }, [JSON.stringify(animateConfig,),],);
   return effect;
 }
 function calcOffsetTop(element, container,) {
@@ -28236,9 +28320,6 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList(value,) {
   return isString22(value,) || Array.isArray(value,);
 }
-function isFXValuesKey(key7,) {
-  return key7 in defaultFXValues;
-}
 var withFX = (Component15,) =>
   React53.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
@@ -28269,6 +28350,7 @@ var withFX = (Component15,) =>
       presence,
       ref,
       inSmartComponent,
+      props.style,
       props[optimizedAppearDataAttribute],
     );
     const { values: parallaxValues, style: parallaxStyle, } = useParallax(parallax, ref,);
@@ -28369,7 +28451,7 @@ var withParallaxTransform = withFX;
 var withStyleAppearEffect = withFX;
 var Context = /* @__PURE__ */ createContext42({},);
 function ComponentPresetsProvider({ presets, children, },) {
-  const lastPresets = useRef122(presets,);
+  const lastPresets = useRef132(presets,);
   if (!isEqual(presets, lastPresets.current, false,)) {
     lastPresets.current = presets;
   }
@@ -32399,8 +32481,8 @@ function activeMediaQueryFromWindow(mediaQueries,) {
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext142(IsInitialNavigationContext,);
-  const baseVariant = useRef132(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
-  const basePropsVariant = useRef132(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
+  const baseVariant = useRef14(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const basePropsVariant = useRef14(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate3();
   const instantTransition = useInstantTransition();
   const setActiveVariantInstant = useCallback9(
@@ -33167,7 +33249,7 @@ function useQueryData(query,) {
   if (isDatabaseCollectionModule(query.from.data,)) {
     return useQueryDataWithQueryEngine(query,);
   }
-  const queryRef = useRef14();
+  const queryRef = useRef15();
   if (queryRef.current && isEqual(queryRef.current, query,)) {
     query = queryRef.current;
   } else {
@@ -33750,7 +33832,7 @@ var withVariantAppearEffect = (Component15,) =>
 var withVariantFX = (Component15,) =>
   React78.forwardRef(
     ({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
-      const ref = useRef15();
+      const ref = useRef16();
       const effect = usePresenceAnimation(
         {
           initial,
@@ -36157,7 +36239,7 @@ function TextStyleSheet() {
 var Text = /* @__PURE__ */ React83.forwardRef(function Text2(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef16(null,);
+  const fallbackLayoutRef = useRef17(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
@@ -36167,7 +36249,7 @@ var Text = /* @__PURE__ */ React83.forwardRef(function Text2(props, forwardedRef
   const fontLoadStatus = useFontLoadStatus(props.fonts,);
   useMeasureLayout(props, layoutRef,);
   const { fonts, __fromCanvasComponent, } = props;
-  const prevFontsRef = useRef16([],);
+  const prevFontsRef = useRef17([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
   useEffect122(() => {
@@ -37619,7 +37701,7 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
     } = props;
     const parentSize = useParentSize();
     const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef17(null,);
+    const fallbackLayoutRef = useRef18(null,);
     const layoutRef = forwardedRef ?? fallbackLayoutRef;
     const { navigate, getRoute, } = useRouter();
     const currentRoute = useCurrentRoute();
@@ -37760,7 +37842,7 @@ function convertVerticalAlignment2(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef17([],);
+  const prevFontsRef = useRef18([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
@@ -37836,7 +37918,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const isOnCanvas = useIsOnFramerCanvas();
     const inCodeComponent = useContext162(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef18(null,);
+    const fallbackRef = useRef19(null,);
     const containerRef = ref ?? fallbackRef;
     useMeasureLayout(props, containerRef,);
     useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
