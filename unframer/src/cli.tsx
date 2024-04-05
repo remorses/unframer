@@ -1,4 +1,5 @@
 import { bundle, logger } from './exporter.js'
+import JSON from 'json5'
 import events, { EventEmitter, setMaxListeners } from 'events'
 
 import chokidar from 'chokidar'
@@ -73,18 +74,18 @@ cli.command('', 'Run unframer')
         })
     })
 
+const defaultConfig = `{
+    "schema": "https://unframer-schema.vercel.app/schema.json",
+    "outDir": "./framer",
+    "components": {
+        // add here your Framer components urls, the code will be written to outDir/{componentName}.js
+        "example-hero": "https://framer.com/m/Header-WtSW.js",
+    }
+}
+`
+
 cli.command('init', 'Init the unframer.json config').action(async (options) => {
-    fs.writeFileSync(
-        `unframer.json`,
-        JSON.stringify(
-            {
-                components: { hero: 'https://framer.com/m/Header-WtSW.js' },
-                outDir: 'framer',
-            },
-            null,
-            2,
-        ),
-    )
+    fs.writeFileSync(`unframer.json`, defaultConfig)
     const p = path.resolve(process.cwd(), 'unframer.json')
     console.log(`${p} file created`)
 })
