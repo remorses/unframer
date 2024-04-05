@@ -77,6 +77,9 @@ importers:
       '@types/react':
         specifier: '*'
         version: 18.2.66
+      cac:
+        specifier: ^6.7.14
+        version: 6.7.14
       chokidar:
         specifier: ^3.5.3
         version: 3.5.3
@@ -1579,7 +1582,6 @@ packages:
   /cac@6.7.14:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
-    dev: true
 
   /call-bind@1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}

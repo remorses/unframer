@@ -7,64 +7,89 @@ import { findUp } from 'find-up'
 import tmp from 'tmp'
 import path from 'path'
 const configName = 'unframer.json'
+import { cac } from 'cac'
+
+export const cli = cac()
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
-export async function cli() {
-    const cwd = process.cwd()
-    const watch = process.argv.includes('--watch')
-    logger.log(`Looking for ${configName} in ${cwd}`)
-    const configPath = await findUp([configName], { cwd })
-    if (!configPath) {
-        logger.log(`No ${configName} found`)
-        return
-    }
-    const configContent = fs.readFileSync(configPath, 'utf8')
-    if (!configContent) {
-        logger.log(`No ${configName} contents found`)
-        return
-    }
-    let config = JSON.parse(configContent)
-
-    let controller = new AbortController()
-    setMaxListeners(0, controller.signal)
-    processConfig({ config, watch, signal: controller.signal })
-    if (!watch) {
-        return
-    }
-
-    const watcher = chokidar.watch(configPath!, {
-        persistent: true,
-    })
-
-    watcher.on('change', async (path) => {
-        logger.log(`${configName} changed`)
-        console.log()
-        controller.abort()
-
-        controller = new AbortController()
-        setMaxListeners(0, controller.signal)
-
-        const newConfig = safeJsonParse(fs.readFileSync(configPath!, 'utf8'))
-        if (!newConfig) {
-            logger.log(`Invalid ${configName} file`)
+cli.command('', 'Run unframer')
+    .option('--watch', 'Watch for Framer and unframer.json changes')
+    .action(async function main(options) {
+        console.log({ options })
+        const cwd = process.cwd()
+        const watch = process.argv.includes('--watch')
+        logger.log(`Looking for ${configName} in ${cwd}`)
+        const configPath = await findUp([configName], { cwd })
+        if (!configPath) {
+            logger.log(`No ${configName} found`)
             return
         }
-        const newNames = getNewNames(config, newConfig)
-        if (newNames.length) {
-            logger.log(`New components found: ${newNames.join(', ')}`)
-            await processConfig({
-                config: {
-                    ...newConfig,
-                    components: pluck(newConfig.components, newNames),
-                },
-                watch,
-                // signal: controller.signal,
-            })
+        const configContent = fs.readFileSync(configPath, 'utf8')
+        if (!configContent) {
+            logger.log(`No ${configName} contents found`)
+            return
         }
-        config = newConfig
+        let config = JSON.parse(configContent)
+
+        let controller = new AbortController()
+        setMaxListeners(0, controller.signal)
+        processConfig({ config, watch, signal: controller.signal })
+        if (!watch) {
+            return
+        }
+
+        const watcher = chokidar.watch(configPath!, {
+            persistent: true,
+        })
+
+        watcher.on('change', async (path) => {
+            logger.log(`${configName} changed`)
+            console.log()
+            controller.abort()
+
+            controller = new AbortController()
+            setMaxListeners(0, controller.signal)
+
+            const newConfig = safeJsonParse(
+                fs.readFileSync(configPath!, 'utf8'),
+            )
+            if (!newConfig) {
+                logger.log(`Invalid ${configName} file`)
+                return
+            }
+            const newNames = getNewNames(config, newConfig)
+            if (newNames.length) {
+                logger.log(`New components found: ${newNames.join(', ')}`)
+                await processConfig({
+                    config: {
+                        ...newConfig,
+                        components: pluck(newConfig.components, newNames),
+                    },
+                    watch,
+                    // signal: controller.signal,
+                })
+            }
+            config = newConfig
+        })
     })
-}
+
+cli.command('init', 'Init the unframer.json config').action(async (options) => {
+    fs.writeFileSync(
+        `unframer.json`,
+        JSON.stringify(
+            {
+                components: { hero: 'https://framer.com/m/Header-WtSW.js' },
+                outDir: 'framer',
+            },
+            null,
+            2,
+        ),
+    )
+})
+
+cli.help()
+
 function safeJsonParse(json: string) {
     try {
         return JSON.parse(json)
