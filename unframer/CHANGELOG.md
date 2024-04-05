@@ -1,5 +1,11 @@
 # unframer
 
+## 1.2.2
+
+### Patch Changes
+
+-   extract component types only after i have written the files on disk
+
 ## 1.2.1
 
 ### Patch Changes

@@ -145,22 +145,26 @@ export async function bundle({
             }
             logger.log(`writing`, path.relative(out, file.path))
             fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
+        }
+        for (let file of result.outputFiles!) {
             const name = path.basename(file.path).replace(/\.js$/, '')
-            if (components[name]) {
-                logger.log(`extracting types for ${name}`)
-                const propControls = await extractPropControlsUnsafe(
-                    resultPathAbs,
-                    name,
-                )
-                if (!propControls) {
-                    logger.log(`no property controls found for ${name}`)
-                }
-                const types = propControlsToType(propControls)
-                // name = 'framer-' + name
-                // logger.log('name', name)
-
-                fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+            const resultPathAbs = path.resolve(out, file.path)
+            if (!components[name]) {
+                continue
             }
+            logger.log(`extracting types for ${name}`)
+            const propControls = await extractPropControlsUnsafe(
+                resultPathAbs,
+                name,
+            )
+            if (!propControls) {
+                logger.log(`no property controls found for ${name}`)
+            }
+            const types = propControlsToType(propControls)
+            // name = 'framer-' + name
+            // logger.log('name', name)
+
+            fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
         }
 
         const outFiles = result.outputFiles
