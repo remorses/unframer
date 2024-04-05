@@ -256,12 +256,16 @@ export async function bundle({
                     usedBy +
                     '\n' +
                     [...x]
-                        .map(
-                            (x) =>
-                                `    ${x.tokenName}: ${
-                                    [...x.defaultValues][0]
-                                };`,
-                        )
+                        .map((x) => {
+                            const possibleValues = [...x.defaultValues].sort()
+                            let comment =
+                                possibleValues.length > 1
+                                    ? `/* Also seen as ${possibleValues
+                                          .slice(1)
+                                          .join(', ')} */`
+                                    : ''
+                            return `    ${x.tokenName}: ${possibleValues[0]}; ${comment}`
+                        })
                         .join('\n')
                 )
             })
