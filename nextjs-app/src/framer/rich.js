@@ -1,8 +1,8 @@
 'use client';
-import { className, className2, css, css2, fonts, fonts2, } from './chunk-D3CFT23D.js';
+import { className, className2, css, css2, fonts, fonts2, } from './chunk-S7T2OB4C.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js
+// https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -19,7 +19,7 @@ import {
 import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 
-// https:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js
+// https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js
 var props = {
   dPCM_W_tA: {
     borderRadius: 15,
@@ -58,7 +58,7 @@ var fonts3 = {
   },],
 };
 
-// https:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js
+// https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js
 import { fontStore, } from 'unframer/dist/framer';
 fontStore.loadFonts(['Inter-Bold', 'Inter-Black', 'Inter-BlackItalic', 'Inter-BoldItalic',],);
 var fonts4 = [];
@@ -67,7 +67,7 @@ var css3 = [
 ];
 var className3 = 'framer-ufZwl';
 
-// https:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js
+// https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js
 import { fontStore as fontStore2, } from 'unframer/dist/framer';
 fontStore2.loadFonts([],);
 var fonts5 = [];
@@ -76,7 +76,7 @@ var css4 = [
 ];
 var className4 = 'framer-zNzA5';
 
-// https:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js
+// https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js
 import { fontStore as fontStore3, } from 'unframer/dist/framer';
 fontStore3.loadFonts(['GF;Fragment Mono-regular',],);
 var fonts6 = [{
@@ -91,7 +91,7 @@ var css5 = [
 ];
 var className5 = 'framer-2yfsT';
 
-// https:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js
+// https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js
 import { fontStore as fontStore4, } from 'unframer/dist/framer';
 fontStore4.loadFonts(['Inter-Bold', 'Inter-Black', 'Inter-BlackItalic', 'Inter-BoldItalic',],);
 var fonts7 = [];
@@ -100,7 +100,7 @@ var css6 = [
 ];
 var className6 = 'framer-FeewW';
 
-// https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js
+// https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js
 var _componentPresets_fonts;
 var cycleOrder = ['d2jfXgaaM',];
 var serializationHash = 'framer-mFLy0';

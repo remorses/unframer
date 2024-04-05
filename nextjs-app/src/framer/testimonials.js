@@ -1,8 +1,8 @@
 'use client';
-import { Et, } from './chunk-LQBDGSDV.js';
+import { Et, } from './chunk-GZE2AZR4.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
+// https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
 import { jsx as _jsx3, jsxs as _jsxs3, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
@@ -19,7 +19,7 @@ import {
 import { LayoutGroup as LayoutGroup3, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React2 from 'react';
 
-// https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js
+// https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
@@ -437,7 +437,7 @@ var subtitleStyles = { margin: 0, opacity: 0.7, maxWidth: 150, lineHeight: 1.5, 
 var clamp = (num, min, max,) => Math.min(Math.max(num, min,), max,);
 var isValidNumber = (value,) => typeof value === 'number' && !isNaN(value,);
 
-// https:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js
+// https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js
 import { jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -453,7 +453,7 @@ import {
 import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'unframer';
 import * as React from 'react';
 
-// https:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js
+// https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js
 import { fontStore, } from 'unframer/dist/framer';
 fontStore.loadWebFontsFromSelectors(['GF;DM Sans-500',],);
 var fonts = [{
@@ -471,7 +471,7 @@ var css = [
 ];
 var className = 'framer-1aFoR';
 
-// https:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js
+// https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js
 var enabledGestures = { q7F_XsaAT: { hover: true, }, };
 var cycleOrder = ['q7F_XsaAT',];
 var variantClassNames = { q7F_XsaAT: 'framer-v-1sc8lhv', };
@@ -733,7 +733,7 @@ addFonts(Framerrbf1DFpj4, [{
   weight: '400',
 }, ...fonts,],);
 
-// https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
+// https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
 var CommentFonts = getFonts(stdin_default,);
 var TickerFonts = getFonts(Ticker,);
 var cycleOrder2 = ['Ss6tBuxYW', 'jbqU_7iL0', 'dGbAdK8tT',];

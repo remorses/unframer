@@ -476,13 +476,14 @@ export function esbuildPluginBundleDependencies({
     const plugin: Plugin = {
         name: 'esbuild-plugin',
         setup(build) {
+            const namespace = 'https '
             build.onResolve({ filter: /^https?:\/\// }, (args) => {
                 const url = new URL(args.path)
                 return {
                     path: args.path,
                     external: false,
                     // sideEffects: false,
-                    namespace: 'https',
+                    namespace,
                 }
             })
             const resolveDep = (args) => {
@@ -494,7 +495,7 @@ export function esbuildPluginBundleDependencies({
                         path: args.path,
                         external: false,
                         // sideEffects: false,
-                        namespace: 'https',
+                        namespace,
                     }
                 }
                 if (args.path === 'framer') {
@@ -526,7 +527,7 @@ export function esbuildPluginBundleDependencies({
                     // logger.log('resolve', u)
                     return {
                         path: u,
-                        namespace: 'https',
+                        namespace,
                     }
                 }
 
@@ -534,13 +535,13 @@ export function esbuildPluginBundleDependencies({
 
                 return {
                     path: url,
-                    namespace: 'https',
+                    namespace,
                     external: false,
                 }
             }
             // build.onResolve({ filter: /^\w/ }, resolveDep)
-            build.onResolve({ filter: /.*/, namespace: 'https' }, resolveDep)
-            build.onLoad({ filter: /.*/, namespace: 'https' }, async (args) => {
+            build.onResolve({ filter: /.*/, namespace }, resolveDep)
+            build.onLoad({ filter: /.*/, namespace }, async (args) => {
                 if (signal?.aborted) {
                     throw new Error('aborted')
                 }

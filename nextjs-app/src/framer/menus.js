@@ -1,8 +1,8 @@
 'use client';
-import { defaultEvents, NullState, useIconSelection, } from './chunk-E2XMAXEX.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-RSQQT5RN.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js
+// https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js
 import { jsx as _jsx3, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
@@ -19,14 +19,14 @@ import {
 import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'unframer';
 import * as React3 from 'react';
 
-// https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
+// https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 import { useEffect, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
 import { motion, } from 'unframer';
 
-// https:https://framer.com/m/hero-icons/Home.js@0.0.27
+// https :https://framer.com/m/hero-icons/Home.js@0.0.27
 var r;
 var l = (e,) => {
   if (!r) {
@@ -43,7 +43,7 @@ var l = (e,) => {
   return r;
 };
 
-// https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
+// https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js
 var iconKeys = [
   'AcademicCap',
   'AcademicCapOutline',
@@ -547,7 +547,7 @@ addPropertyControls(Icon, {
   ...defaultEvents,
 },);
 
-// https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
+// https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
 import { jsx as _jsx2, } from 'react/jsx-runtime';
 import * as React2 from 'react';
 import { LayoutGroup, motion as motion2, } from 'unframer';
@@ -563,7 +563,7 @@ import {
   withCSS,
 } from 'unframer/dist/framer';
 
-// https:https://framer.com/m/framer/useConstant.js@^1.0.0
+// https :https://framer.com/m/framer/useConstant.js@^1.0.0
 import { useRef as useRef2, } from 'react';
 function useConstant(init,) {
   const ref = useRef2(null,);
@@ -573,7 +573,7 @@ function useConstant(init,) {
   return ref.current;
 }
 
-// https:https://framer.com/m/framer/randomID.js@^2.0.0
+// https :https://framer.com/m/framer/randomID.js@^2.0.0
 var BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 function randomID(length = 5,) {
   return Array(length,).fill(0,).map(
@@ -586,7 +586,7 @@ function useRandomID(length = 5,) {
   );
 }
 
-// https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
+// https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js
 var cycleOrder = [
   'AD1uRb789',
   't6uYX0tBZ',
@@ -1681,7 +1681,7 @@ addPropertyControls2(FramerdkRfXNUhM, {
 },);
 addFonts(FramerdkRfXNUhM, [],);
 
-// https:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js
+// https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js
 var HeroFonts = getFonts(Icon,);
 var MemojiFonts = getFonts(stdin_default,);
 var cycleOrder2 = ['bkNTL_hDD', 'SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',];

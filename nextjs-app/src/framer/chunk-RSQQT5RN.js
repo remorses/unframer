@@ -1,4 +1,4 @@
-// https:https://framer.com/m/framer/icon-nullstate.js@0.7.0
+// https :https://framer.com/m/framer/icon-nullstate.js@0.7.0
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 var containerStyles = {
@@ -23,7 +23,7 @@ var NullState = /* @__PURE__ */ React.forwardRef((_, ref,) => {
   },);
 },);
 
-// https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
+// https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
 import { useMemo, } from 'react';
 import { ControlType, } from 'unframer/dist/framer';
 var defaultEvents = {

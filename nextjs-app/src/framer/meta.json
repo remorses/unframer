@@ -69,7 +69,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
+    "https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
       "bytes": 6122,
       "imports": [
         {
@@ -110,7 +110,7 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/stable/react@18.2.0/esnext/react.mjs": {
+    "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs": {
       "bytes": 12295,
       "imports": [
         {
@@ -131,7 +131,7 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/node_events.js": {
+    "https :https://esm.sh/v135/node_events.js": {
       "bytes": 8257,
       "imports": [
         {
@@ -152,11 +152,11 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/node_process.js": {
+    "https :https://esm.sh/v135/node_process.js": {
       "bytes": 2719,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/node_events.js",
+          "path": "https :https://esm.sh/v135/node_events.js",
           "kind": "import-statement",
           "original": "./node_events.js"
         },
@@ -178,16 +178,16 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
+    "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
       "bytes": 48113,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/node_process.js",
+          "path": "https :https://esm.sh/v135/node_process.js",
           "kind": "import-statement",
           "original": "/v135/node_process.js"
         },
         {
-          "path": "https:https://esm.sh/stable/react@18.2.0/esnext/react.mjs",
+          "path": "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs",
           "kind": "import-statement",
           "original": "/stable/react@18.2.0/esnext/react.mjs"
         },
@@ -209,21 +209,21 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/typewriter-effect": {
+    "https :https://esm.sh/typewriter-effect": {
       "bytes": 258,
       "imports": [
         {
-          "path": "https:https://esm.sh/stable/react@18.2.0/esnext/react.mjs",
+          "path": "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs",
           "kind": "import-statement",
           "original": "/stable/react@18.2.0/esnext/react.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs",
+          "path": "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs",
           "kind": "import-statement",
           "original": "/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs",
+          "path": "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs",
           "kind": "import-statement",
           "original": "/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs"
         },
@@ -245,7 +245,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
+    "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
       "bytes": 6604,
       "imports": [
         {
@@ -259,7 +259,7 @@
           "external": true
         },
         {
-          "path": "https:https://esm.sh/typewriter-effect",
+          "path": "https :https://esm.sh/typewriter-effect",
           "kind": "import-statement",
           "original": "typewriter-effect"
         },
@@ -281,7 +281,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
+    "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
       "bytes": 7061,
       "imports": [
         {
@@ -307,7 +307,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
+    "https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
       "bytes": 805,
       "imports": [
         {
@@ -338,7 +338,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
+    "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
       "bytes": 355,
       "imports": [
         {
@@ -364,7 +364,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
+    "https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
       "bytes": 574,
       "imports": [
         {
@@ -390,7 +390,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
+    "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
       "bytes": 279,
       "imports": [
         {
@@ -416,7 +416,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
+    "https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
       "bytes": 877,
       "imports": [
         {
@@ -442,7 +442,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
+    "https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
       "bytes": 1491,
       "imports": [
         {
@@ -468,7 +468,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
+    "https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
       "bytes": 770,
       "imports": [
         {
@@ -494,7 +494,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
+    "https :https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
       "bytes": 989,
       "imports": [
         {
@@ -503,7 +503,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
+          "path": "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js"
         },
@@ -525,7 +525,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js": {
+    "https :https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js": {
       "bytes": 672,
       "imports": [
         {
@@ -546,7 +546,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
+    "https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
       "bytes": 2098,
       "imports": [
         {
@@ -560,12 +560,12 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
+          "path": "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
+          "path": "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js"
         },
@@ -587,7 +587,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
+    "https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
       "bytes": 1307,
       "imports": [
         {
@@ -601,7 +601,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
+          "path": "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js"
         },
@@ -623,7 +623,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
+    "https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
       "bytes": 920,
       "imports": [
         {
@@ -654,7 +654,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
+    "https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
       "bytes": 448,
       "imports": [
         {
@@ -680,7 +680,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
+    "https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
       "bytes": 2497,
       "imports": [
         {
@@ -711,7 +711,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js": {
+    "https :https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js": {
       "bytes": 464,
       "imports": [
         {
@@ -732,86 +732,86 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/framer/default-utils.js@^0.45.0": {
+    "https :https://framer.com/m/framer/default-utils.js@^0.45.0": {
       "bytes": 5937,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
+          "path": "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js",
+          "path": "https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
+          "path": "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js",
+          "path": "https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
+          "path": "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js",
+          "path": "https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js",
+          "path": "https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js",
+          "path": "https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js",
+          "path": "https :https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js",
+          "path": "https :https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js",
+          "path": "https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js",
+          "path": "https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js",
+          "path": "https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js",
+          "path": "https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js",
+          "path": "https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js",
+          "path": "https :https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js"
         },
@@ -833,7 +833,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/framer/lodash.js@0.3.0": {
+    "https :https://framer.com/m/framer/lodash.js@0.3.0": {
       "bytes": 4435,
       "imports": [
         {
@@ -854,7 +854,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
+    "https :https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
       "bytes": 8474,
       "imports": [
         {
@@ -878,12 +878,12 @@
           "external": true
         },
         {
-          "path": "https:https://framer.com/m/framer/default-utils.js@^0.45.0",
+          "path": "https :https://framer.com/m/framer/default-utils.js@^0.45.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/default-utils.js@^0.45.0"
         },
         {
-          "path": "https:https://framer.com/m/framer/lodash.js@0.3.0",
+          "path": "https :https://framer.com/m/framer/lodash.js@0.3.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/lodash.js@0.3.0"
         },
@@ -905,7 +905,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
+    "https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
       "bytes": 1271,
       "imports": [
         {
@@ -931,7 +931,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
+    "https :https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
       "bytes": 10408,
       "imports": [
         {
@@ -972,7 +972,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
+    "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
       "bytes": 10771,
       "imports": [
         {
@@ -1013,7 +1013,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
+    "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
       "bytes": 10045,
       "imports": [
         {
@@ -1054,7 +1054,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
+    "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
       "bytes": 55564,
       "imports": [
         {
@@ -1078,32 +1078,32 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
+          "path": "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js",
+          "path": "https :https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js",
+          "path": "https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js",
+          "path": "https :https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js",
+          "path": "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js",
+          "path": "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js"
         },
@@ -1125,7 +1125,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
+    "https :https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
       "bytes": 21247,
       "imports": [
         {
@@ -1149,7 +1149,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
+          "path": "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js"
         },
@@ -1171,7 +1171,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
+    "https :https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
       "bytes": 111107,
       "imports": [
         {
@@ -1195,17 +1195,17 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
+          "path": "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js",
+          "path": "https :https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
+          "path": "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js"
         },
@@ -1227,7 +1227,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
+    "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
       "bytes": 45202,
       "imports": [
         {
@@ -1251,7 +1251,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
+          "path": "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
         },
@@ -1273,7 +1273,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
+    "https :https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
       "bytes": 182415,
       "imports": [
         {
@@ -1297,17 +1297,17 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js",
+          "path": "https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js",
+          "path": "https :https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js",
+          "path": "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js"
         },
@@ -1333,7 +1333,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js",
+          "path": "https :https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js"
         },
@@ -1365,7 +1365,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
+    "https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
       "bytes": 5912,
       "imports": [
         {
@@ -1401,7 +1401,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
+    "https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
       "bytes": 5912,
       "imports": [
         {
@@ -1437,7 +1437,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
+    "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
       "bytes": 1483,
       "imports": [
         {
@@ -1463,7 +1463,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
+    "https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
       "bytes": 1479,
       "imports": [
         {
@@ -1489,7 +1489,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
+    "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
       "bytes": 1456,
       "imports": [
         {
@@ -1515,7 +1515,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
+    "https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
       "bytes": 2711,
       "imports": [
         {
@@ -1541,7 +1541,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
+    "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
       "bytes": 1485,
       "imports": [
         {
@@ -1567,7 +1567,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
+    "https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
       "bytes": 6147,
       "imports": [
         {
@@ -1608,7 +1608,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
+    "https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
       "bytes": 7798,
       "imports": [
         {
@@ -1632,12 +1632,12 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
+          "path": "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js",
+          "path": "https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js"
         },
@@ -1659,7 +1659,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
+    "https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
       "bytes": 11536,
       "imports": [
         {
@@ -1683,7 +1683,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
@@ -1705,7 +1705,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
+    "https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
       "bytes": 4421,
       "imports": [
         {
@@ -1746,7 +1746,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
+    "https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
       "bytes": 24590,
       "imports": [
         {
@@ -1770,47 +1770,47 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js",
+          "path": "https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js",
+          "path": "https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
+          "path": "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js",
+          "path": "https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js",
+          "path": "https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js",
+          "path": "https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js",
+          "path": "https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js",
+          "path": "https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js"
         },
@@ -1836,7 +1836,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js",
+          "path": "https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js"
         },
@@ -1868,7 +1868,7 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
+    "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
       "bytes": 1777,
       "imports": [
         {
@@ -1889,26 +1889,26 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
+    "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
       "bytes": 3031,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
@@ -1930,7 +1930,7 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
+    "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
       "bytes": 13811,
       "imports": [
         {
@@ -1951,7 +1951,7 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
+    "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
       "bytes": 89,
       "imports": [
         {
@@ -1972,16 +1972,16 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
+    "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
       "bytes": 826,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
@@ -2003,21 +2003,21 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
+    "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
       "bytes": 3686,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/easing@10.17.0/esnext/easing.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
@@ -2039,7 +2039,7 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
+    "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
       "bytes": 237,
       "imports": [
         {
@@ -2060,181 +2060,181 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
+    "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
       "bytes": 27680,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
+          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
           "kind": "import-statement",
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/types@10.17.0/esnext/types.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
+          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
           "kind": "import-statement",
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
+          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
           "kind": "import-statement",
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
@@ -2256,41 +2256,41 @@
       ],
       "format": "esm"
     },
-    "https:https://esm.sh/@motionone/dom": {
+    "https :https://esm.sh/@motionone/dom": {
       "bytes": 411,
       "imports": [
         {
-          "path": "https:https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
+          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
           "kind": "import-statement",
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/types@10.17.0/esnext/types.mjs"
         },
         {
-          "path": "https:https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/dom@10.17.0/esnext/dom.mjs"
         },
@@ -2312,7 +2312,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
+    "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
       "bytes": 12974,
       "imports": [
         {
@@ -2336,7 +2336,7 @@
           "external": true
         },
         {
-          "path": "https:https://esm.sh/@motionone/dom",
+          "path": "https :https://esm.sh/@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         },
@@ -2358,7 +2358,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
+    "https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
       "bytes": 11218,
       "imports": [
         {
@@ -2382,7 +2382,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js",
+          "path": "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js"
         },
@@ -2408,7 +2408,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js",
+          "path": "https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js"
         },
@@ -2440,7 +2440,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
+    "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
       "bytes": 14046,
       "imports": [
         {
@@ -2464,7 +2464,7 @@
           "external": true
         },
         {
-          "path": "https:https://esm.sh/@motionone/dom",
+          "path": "https :https://esm.sh/@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         },
@@ -2486,7 +2486,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
+    "https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
       "bytes": 1456,
       "imports": [
         {
@@ -2512,7 +2512,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
+    "https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
       "bytes": 12461,
       "imports": [
         {
@@ -2536,7 +2536,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js",
+          "path": "https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js"
         },
@@ -2558,7 +2558,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
+    "https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
       "bytes": 18229,
       "imports": [
         {
@@ -2582,12 +2582,12 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js",
+          "path": "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js",
+          "path": "https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js"
         },
@@ -2613,7 +2613,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js",
+          "path": "https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js"
         },
@@ -2645,7 +2645,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js": {
+    "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -2666,7 +2666,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
+    "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
       "bytes": 28116,
       "imports": [
         {
@@ -2690,7 +2690,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js",
+          "path": "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js",
           "kind": "import-statement",
           "original": "./vitO4v4o_-0.js"
         },
@@ -2716,7 +2716,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js",
+          "path": "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js"
         },
@@ -2748,7 +2748,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
+    "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
       "bytes": 1003,
       "imports": [
         {
@@ -2779,7 +2779,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/phosphor-icons/House.js@0.0.50": {
+    "https :https://framer.com/m/phosphor-icons/House.js@0.0.50": {
       "bytes": 4087,
       "imports": [
         {
@@ -2800,7 +2800,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
+    "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
       "bytes": 2402,
       "imports": [
         {
@@ -2831,7 +2831,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
+    "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
       "bytes": 18970,
       "imports": [
         {
@@ -2860,17 +2860,17 @@
           "external": true
         },
         {
-          "path": "https:https://framer.com/m/framer/icon-nullstate.js@0.7.0",
+          "path": "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/icon-nullstate.js@0.7.0"
         },
         {
-          "path": "https:https://framer.com/m/phosphor-icons/House.js@0.0.50",
+          "path": "https :https://framer.com/m/phosphor-icons/House.js@0.0.50",
           "kind": "import-statement",
           "original": "https://framer.com/m/phosphor-icons/House.js@0.0.50"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
+          "path": "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js"
         },
@@ -2892,7 +2892,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3-0.js": {
+    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -2913,7 +2913,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js": {
+    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js": {
       "bytes": 36083,
       "imports": [
         {
@@ -2937,12 +2937,12 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js",
+          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3-0.js",
+          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3-0.js",
           "kind": "import-statement",
           "original": "./q64yDrOL3-0.js"
         },
@@ -2968,7 +2968,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js",
+          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js"
         },
@@ -3000,7 +3000,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
+    "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
       "bytes": 2708,
       "imports": [
         {
@@ -3026,7 +3026,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
+    "https :https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
       "bytes": 8290,
       "imports": [
         {
@@ -3050,7 +3050,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
+          "path": "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js"
         },
@@ -3072,7 +3072,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
+    "https :https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
       "bytes": 7630,
       "imports": [
         {
@@ -3096,7 +3096,7 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
@@ -3118,7 +3118,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
+    "https :https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
       "bytes": 12699,
       "imports": [
         {
@@ -3142,17 +3142,17 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
+          "path": "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
+          "path": "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js",
+          "path": "https :https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js"
         },
@@ -3174,7 +3174,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
+    "https :https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
       "bytes": 1345,
       "imports": [
         {
@@ -3200,7 +3200,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
+    "https :https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
       "bytes": 14928,
       "imports": [
         {
@@ -3224,12 +3224,12 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js",
+          "path": "https :https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js"
         },
@@ -3251,7 +3251,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
+    "https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
       "bytes": 35391,
       "imports": [
         {
@@ -3275,27 +3275,27 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
+          "path": "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js",
+          "path": "https :https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js",
+          "path": "https :https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js",
+          "path": "https :https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js"
         },
@@ -3321,7 +3321,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js",
+          "path": "https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js"
         },
@@ -3353,7 +3353,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js": {
+    "https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js": {
       "bytes": 1025,
       "imports": [
         {
@@ -3374,7 +3374,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
+    "https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
       "bytes": 1566,
       "imports": [
         {
@@ -3400,7 +3400,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
+    "https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
       "bytes": 921,
       "imports": [
         {
@@ -3426,7 +3426,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
+    "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
       "bytes": 1545,
       "imports": [
         {
@@ -3452,7 +3452,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
+    "https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
       "bytes": 1210,
       "imports": [
         {
@@ -3478,7 +3478,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
+    "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
       "bytes": 1560,
       "imports": [
         {
@@ -3504,7 +3504,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
+    "https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
       "bytes": 1562,
       "imports": [
         {
@@ -3530,7 +3530,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK-0.js": {
+    "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -3551,7 +3551,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js": {
+    "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js": {
       "bytes": 8287,
       "imports": [
         {
@@ -3575,42 +3575,42 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js",
+          "path": "https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js",
+          "path": "https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js",
+          "path": "https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
+          "path": "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js",
+          "path": "https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
+          "path": "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js",
+          "path": "https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK-0.js",
+          "path": "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK-0.js",
           "kind": "import-statement",
           "original": "./inWBH4dIK-0.js"
         },
@@ -3636,7 +3636,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js",
+          "path": "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js"
         },
@@ -3668,7 +3668,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
+    "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -3689,7 +3689,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
+    "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
       "bytes": 23658,
       "imports": [
         {
@@ -3723,14 +3723,14 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
+          "path": "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
           "kind": "dynamic-import",
           "original": "./b9ZvTRprK-0.js"
         }
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js": {
+    "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -3751,7 +3751,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
+    "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
       "bytes": 11579,
       "imports": [
         {
@@ -3775,22 +3775,22 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js",
+          "path": "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
+          "path": "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
+          "path": "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js",
+          "path": "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js",
           "kind": "import-statement",
           "original": "./bhAfNR9wU-0.js"
         },
@@ -3816,7 +3816,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js",
+          "path": "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js"
         },
@@ -3848,7 +3848,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/hero-icons/Home.js@0.0.27": {
+    "https :https://framer.com/m/hero-icons/Home.js@0.0.27": {
       "bytes": 487,
       "imports": [
         {
@@ -3869,7 +3869,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
+    "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
       "bytes": 10221,
       "imports": [
         {
@@ -3898,17 +3898,17 @@
           "external": true
         },
         {
-          "path": "https:https://framer.com/m/framer/icon-nullstate.js@0.7.0",
+          "path": "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/icon-nullstate.js@0.7.0"
         },
         {
-          "path": "https:https://framer.com/m/hero-icons/Home.js@0.0.27",
+          "path": "https :https://framer.com/m/hero-icons/Home.js@0.0.27",
           "kind": "import-statement",
           "original": "https://framer.com/m/hero-icons/Home.js@0.0.27"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
+          "path": "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js"
         },
@@ -3930,7 +3930,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/framer/useConstant.js@^1.0.0": {
+    "https :https://framer.com/m/framer/useConstant.js@^1.0.0": {
       "bytes": 355,
       "imports": [
         {
@@ -3956,11 +3956,11 @@
       ],
       "format": "esm"
     },
-    "https:https://framer.com/m/framer/randomID.js@^2.0.0": {
+    "https :https://framer.com/m/framer/randomID.js@^2.0.0": {
       "bytes": 1370,
       "imports": [
         {
-          "path": "https:https://framer.com/m/framer/useConstant.js@^1.0.0",
+          "path": "https :https://framer.com/m/framer/useConstant.js@^1.0.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/useConstant.js@^1.0.0"
         },
@@ -3982,7 +3982,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
+    "https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
       "bytes": 29202,
       "imports": [
         {
@@ -4006,7 +4006,7 @@
           "external": true
         },
         {
-          "path": "https:https://framer.com/m/framer/randomID.js@^2.0.0",
+          "path": "https :https://framer.com/m/framer/randomID.js@^2.0.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/randomID.js@^2.0.0"
         },
@@ -4028,7 +4028,7 @@
       ],
       "format": "esm"
     },
-    "https:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
+    "https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
       "bytes": 58189,
       "imports": [
         {
@@ -4052,12 +4052,12 @@
           "external": true
         },
         {
-          "path": "https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js",
+          "path": "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js"
         },
         {
-          "path": "https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js",
+          "path": "https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js"
         },
@@ -4083,7 +4083,7 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js",
+          "path": "https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js"
         },
@@ -4120,7 +4120,7 @@
     "src/framer/collection.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-D3CFT23D.js",
+          "path": "src/framer/chunk-S7T2OB4C.js",
           "kind": "import-statement"
         },
         {
@@ -4163,7 +4163,7 @@
           "external": true
         },
         {
-          "path": "src/framer/b9ZvTRprK-0-J475YF2Y.js",
+          "path": "src/framer/b9ZvTRprK-0-J32I5EDE.js",
           "kind": "dynamic-import"
         },
         {
@@ -4182,22 +4182,22 @@
       ],
       "entryPoint": "virtual:collection",
       "inputs": {
-        "https:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
+        "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
           "bytesInOutput": 9874
         },
-        "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
+        "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
           "bytesInOutput": 22391
         },
         "virtual:collection": {
           "bytesInOutput": 281
         }
       },
-      "bytes": 33065
+      "bytes": 33068
     },
     "src/framer/menus.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-E2XMAXEX.js",
+          "path": "src/framer/chunk-RSQQT5RN.js",
           "kind": "import-statement"
         },
         {
@@ -4290,31 +4290,31 @@
       ],
       "entryPoint": "virtual:menus",
       "inputs": {
-        "https:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
+        "https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
           "bytesInOutput": 57645
         },
-        "https:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
+        "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
           "bytesInOutput": 9349
         },
-        "https:https://framer.com/m/hero-icons/Home.js@0.0.27": {
+        "https :https://framer.com/m/hero-icons/Home.js@0.0.27": {
           "bytesInOutput": 460
         },
-        "https:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
+        "https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
           "bytesInOutput": 27053
         },
-        "https:https://framer.com/m/framer/useConstant.js@^1.0.0": {
+        "https :https://framer.com/m/framer/useConstant.js@^1.0.0": {
           "bytesInOutput": 185
         },
-        "https:https://framer.com/m/framer/randomID.js@^2.0.0": {
+        "https :https://framer.com/m/framer/randomID.js@^2.0.0": {
           "bytesInOutput": 314
         },
         "virtual:menus": {
           "bytesInOutput": 276
         }
       },
-      "bytes": 96253
+      "bytes": 96262
     },
-    "src/framer/b9ZvTRprK-0-J475YF2Y.js": {
+    "src/framer/b9ZvTRprK-0-J32I5EDE.js": {
       "imports": [
         {
           "path": "src/framer/chunk-6C3VEZWH.js",
@@ -4324,13 +4324,13 @@
       "exports": [
         "__FramerMetadata__"
       ],
-      "entryPoint": "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
+      "entryPoint": "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
       "inputs": {
-        "https:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
+        "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
           "bytesInOutput": 90
         }
       },
-      "bytes": 258
+      "bytes": 259
     },
     "src/framer/fylo.js": {
       "imports": [
@@ -4664,112 +4664,112 @@
       ],
       "entryPoint": "virtual:fylo",
       "inputs": {
-        "https:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
+        "https :https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
           "bytesInOutput": 181117
         },
-        "https:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
+        "https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
           "bytesInOutput": 5690
         },
-        "https:https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
+        "https :https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
           "bytesInOutput": 109785
         },
-        "https:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
+        "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
           "bytesInOutput": 6210
         },
-        "https:https://esm.sh/stable/react@18.2.0/esnext/react.mjs": {
+        "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs": {
           "bytesInOutput": 12758
         },
-        "https:https://esm.sh/v135/node_events.js": {
+        "https :https://esm.sh/v135/node_events.js": {
           "bytesInOutput": 7214
         },
-        "https:https://esm.sh/v135/node_process.js": {
+        "https :https://esm.sh/v135/node_process.js": {
           "bytesInOutput": 2738
         },
-        "https:https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
+        "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
           "bytesInOutput": 50747
         },
-        "https:https://esm.sh/typewriter-effect": {
+        "https :https://esm.sh/typewriter-effect": {
           "bytesInOutput": 0
         },
-        "https:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
+        "https :https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
           "bytesInOutput": 20702
         },
-        "https:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
+        "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
           "bytesInOutput": 54119
         },
-        "https:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
+        "https :https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
           "bytesInOutput": 8010
         },
-        "https:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
+        "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
           "bytesInOutput": 1437
         },
-        "https:https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
+        "https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
           "bytesInOutput": 106
         },
-        "https:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
+        "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
           "bytesInOutput": 173
         },
-        "https:https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
+        "https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
           "bytesInOutput": 46
         },
-        "https:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
+        "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
           "bytesInOutput": 107
         },
-        "https:https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
+        "https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
           "bytesInOutput": 32
         },
-        "https:https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
+        "https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
           "bytesInOutput": 68
         },
-        "https:https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
+        "https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
           "bytesInOutput": 33
         },
-        "https:https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
+        "https :https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
           "bytesInOutput": 251
         },
-        "https:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
+        "https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
           "bytesInOutput": 1714
         },
-        "https:https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
+        "https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
           "bytesInOutput": 99
         },
-        "https:https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
+        "https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
           "bytesInOutput": 115
         },
-        "https:https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
+        "https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
           "bytesInOutput": 33
         },
-        "https:https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
+        "https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
           "bytesInOutput": 929
         },
-        "https:https://framer.com/m/framer/lodash.js@0.3.0": {
+        "https :https://framer.com/m/framer/lodash.js@0.3.0": {
           "bytesInOutput": 4081
         },
-        "https:https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
+        "https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
           "bytesInOutput": 877
         },
-        "https:https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
+        "https :https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
           "bytesInOutput": 9727
         },
-        "https:https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
+        "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
           "bytesInOutput": 10204
         },
-        "https:https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
+        "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
           "bytesInOutput": 9487
         },
-        "https:https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
+        "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
           "bytesInOutput": 44640
         },
         "virtual:fylo": {
           "bytesInOutput": 275
         }
       },
-      "bytes": 547629
+      "bytes": 547666
     },
     "src/framer/hero.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-SF7ISK24.js",
+          "path": "src/framer/chunk-MEJ7UUIH.js",
           "kind": "import-statement"
         },
         {
@@ -4932,43 +4932,43 @@
       ],
       "entryPoint": "virtual:hero",
       "inputs": {
-        "https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
+        "https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
           "bytesInOutput": 23120
         },
-        "https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
+        "https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
           "bytesInOutput": 554
         },
-        "https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
+        "https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
           "bytesInOutput": 597
         },
-        "https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
+        "https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
           "bytesInOutput": 1088
         },
-        "https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
+        "https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
           "bytesInOutput": 2335
         },
-        "https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
+        "https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
           "bytesInOutput": 7011
         },
-        "https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
+        "https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
           "bytesInOutput": 5260
         },
-        "https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
+        "https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
           "bytesInOutput": 10727
         },
-        "https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
+        "https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
           "bytesInOutput": 3776
         },
         "virtual:hero": {
           "bytesInOutput": 275
         }
       },
-      "bytes": 56098
+      "bytes": 56109
     },
     "src/framer/logos.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-LQBDGSDV.js",
+          "path": "src/framer/chunk-GZE2AZR4.js",
           "kind": "import-statement"
         },
         {
@@ -5031,22 +5031,22 @@
       ],
       "entryPoint": "virtual:logos",
       "inputs": {
-        "https:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
+        "https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
           "bytesInOutput": 10608
         },
-        "https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
+        "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
           "bytesInOutput": 12481
         },
         "virtual:logos": {
           "bytesInOutput": 273
         }
       },
-      "bytes": 23813
+      "bytes": 23816
     },
     "src/framer/testimonials.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-LQBDGSDV.js",
+          "path": "src/framer/chunk-GZE2AZR4.js",
           "kind": "import-statement"
         },
         {
@@ -5134,59 +5134,59 @@
       ],
       "entryPoint": "virtual:testimonials",
       "inputs": {
-        "https:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
+        "https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
           "bytesInOutput": 17593
         },
-        "https:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
+        "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
           "bytesInOutput": 13553
         },
-        "https:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
+        "https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
           "bytesInOutput": 11709
         },
-        "https:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
+        "https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
           "bytesInOutput": 1062
         },
         "virtual:testimonials": {
           "bytesInOutput": 283
         }
       },
-      "bytes": 44974
+      "bytes": 44980
     },
-    "src/framer/chunk-LQBDGSDV.js": {
+    "src/framer/chunk-GZE2AZR4.js": {
       "imports": [],
       "exports": [
         "Et"
       ],
       "inputs": {
-        "https:https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
+        "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
           "bytesInOutput": 1325
         },
-        "https:https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
+        "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
           "bytesInOutput": 680
         },
-        "https:https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
+        "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
           "bytesInOutput": 3358
         },
-        "https:https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
+        "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
           "bytesInOutput": 24
         },
-        "https:https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
+        "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
           "bytesInOutput": 209
         },
-        "https:https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
+        "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
           "bytesInOutput": 421
         },
-        "https:https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
+        "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
           "bytesInOutput": 2803
         },
-        "https:https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
+        "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
           "bytesInOutput": 13071
         },
-        "https:https://esm.sh/@motionone/dom": {
+        "https :https://esm.sh/@motionone/dom": {
           "bytesInOutput": 0
         }
       },
-      "bytes": 22484
+      "bytes": 22492
     },
     "src/framer/menu-overlay.js": {
       "imports": [
@@ -5230,19 +5230,19 @@
       ],
       "entryPoint": "virtual:menu-overlay",
       "inputs": {
-        "https:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
+        "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
           "bytesInOutput": 26813
         },
         "virtual:menu-overlay": {
           "bytesInOutput": 280
         }
       },
-      "bytes": 27311
+      "bytes": 27312
     },
     "src/framer/full-page.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-E2XMAXEX.js",
+          "path": "src/framer/chunk-RSQQT5RN.js",
           "kind": "import-statement"
         },
         {
@@ -5310,22 +5310,22 @@
       ],
       "entryPoint": "virtual:full-page",
       "inputs": {
-        "https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js": {
+        "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js": {
           "bytesInOutput": 35013
         },
-        "https:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
+        "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
           "bytesInOutput": 18198
         },
-        "https:https://framer.com/m/phosphor-icons/House.js@0.0.50": {
+        "https :https://framer.com/m/phosphor-icons/House.js@0.0.50": {
           "bytesInOutput": 3835
         },
         "virtual:full-page": {
           "bytesInOutput": 277
         }
       },
-      "bytes": 57992
+      "bytes": 57997
     },
-    "src/framer/chunk-E2XMAXEX.js": {
+    "src/framer/chunk-RSQQT5RN.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -5354,19 +5354,19 @@
         "useIconSelection"
       ],
       "inputs": {
-        "https:https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
+        "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
           "bytesInOutput": 567
         },
-        "https:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
+        "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
           "bytesInOutput": 1139
         }
       },
-      "bytes": 1928
+      "bytes": 1930
     },
     "src/framer/pricing.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-SF7ISK24.js",
+          "path": "src/framer/chunk-MEJ7UUIH.js",
           "kind": "import-statement"
         },
         {
@@ -5499,34 +5499,34 @@
       ],
       "entryPoint": "virtual:pricing",
       "inputs": {
-        "https:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
+        "https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
           "bytesInOutput": 34374
         },
-        "https:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
+        "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
           "bytesInOutput": 2317
         },
-        "https:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
+        "https :https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
           "bytesInOutput": 7487
         },
-        "https:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
+        "https :https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
           "bytesInOutput": 11813
         },
-        "https:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
+        "https :https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
           "bytesInOutput": 6896
         },
-        "https:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
+        "https :https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
           "bytesInOutput": 13880
         },
-        "https:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
+        "https :https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
           "bytesInOutput": 969
         },
         "virtual:pricing": {
           "bytesInOutput": 278
         }
       },
-      "bytes": 79280
+      "bytes": 79290
     },
-    "src/framer/chunk-SF7ISK24.js": {
+    "src/framer/chunk-MEJ7UUIH.js": {
       "imports": [
         {
           "path": "unframer/dist/framer",
@@ -5556,22 +5556,22 @@
         "fonts3"
       ],
       "inputs": {
-        "https:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
+        "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
           "bytesInOutput": 1089
         },
-        "https:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
+        "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
           "bytesInOutput": 1080
         },
-        "https:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
+        "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
           "bytesInOutput": 1109
         }
       },
-      "bytes": 3691
+      "bytes": 3694
     },
     "src/framer/rich.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-D3CFT23D.js",
+          "path": "src/framer/chunk-S7T2OB4C.js",
           "kind": "import-statement"
         },
         {
@@ -5634,31 +5634,31 @@
       ],
       "entryPoint": "virtual:rich",
       "inputs": {
-        "https:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js": {
+        "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js": {
           "bytesInOutput": 5831
         },
-        "https:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js": {
+        "https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/4XEDFM67PIdVF4XKO1zT/componentPresets.js": {
           "bytesInOutput": 715
         },
-        "https:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
+        "https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
           "bytesInOutput": 1175
         },
-        "https:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
+        "https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
           "bytesInOutput": 545
         },
-        "https:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
+        "https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
           "bytesInOutput": 834
         },
-        "https:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
+        "https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
           "bytesInOutput": 1186
         },
         "virtual:rich": {
           "bytesInOutput": 274
         }
       },
-      "bytes": 11486
+      "bytes": 11493
     },
-    "src/framer/chunk-D3CFT23D.js": {
+    "src/framer/chunk-S7T2OB4C.js": {
       "imports": [
         {
           "path": "unframer/dist/framer",
@@ -5680,14 +5680,14 @@
         "fonts2"
       ],
       "inputs": {
-        "https:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
+        "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
           "bytesInOutput": 1151
         },
-        "https:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
+        "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
           "bytesInOutput": 1184
         }
       },
-      "bytes": 2613
+      "bytes": 2615
     },
     "src/framer/chunk-6C3VEZWH.js": {
       "imports": [],

@@ -1,8 +1,8 @@
 'use client';
-import { className, className2, className3, css, css2, css3, fonts, fonts2, fonts3, } from './chunk-SF7ISK24.js';
+import { className, className2, className3, css, css2, css3, fonts, fonts2, fonts3, } from './chunk-MEJ7UUIH.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js
+// https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js
 import { jsx as _jsx7, jsxs as _jsxs3, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts5,
@@ -18,7 +18,7 @@ import {
 import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext4, } from 'unframer';
 import * as React5 from 'react';
 
-// https:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js
+// https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import { motion, } from 'unframer';
 import { useEffect, useState, } from 'react';
@@ -37,7 +37,7 @@ function withCountUp50speed50(Component6,) {
   };
 }
 
-// https:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js
+// https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js
 import { jsx as _jsx2, } from 'react/jsx-runtime';
 import { motion as motion2, } from 'unframer';
 import { useEffect as useEffect2, useState as useState2, } from 'react';
@@ -56,7 +56,7 @@ function withCountUp50speed502(Component6,) {
   };
 }
 
-// https:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js
+// https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js
 import { fontStore, } from 'unframer/dist/framer';
 fontStore.loadWebFontsFromSelectors(['GF;DM Sans-700',],);
 var fonts4 = [{
@@ -74,7 +74,7 @@ var css4 = [
 ];
 var className4 = 'framer-HNAxs';
 
-// https:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js
+// https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js
 import { fontStore as fontStore2, } from 'unframer/dist/framer';
 fontStore2.loadWebFontsFromSelectors(['GF;DM Sans-700',],);
 var fonts5 = [{
@@ -94,7 +94,7 @@ var css5 = [
 ];
 var className5 = 'framer-GjzcW';
 
-// https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js
+// https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js
 import { jsx as _jsx4, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
@@ -108,7 +108,7 @@ import {
 import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'unframer';
 import * as React2 from 'react';
 
-// https:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js
+// https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js
 import { jsx as _jsx3, } from 'react/jsx-runtime';
 import { addFonts, cx, SVG, useComponentViewport, useLocaleInfo, useVariantState, withCSS, } from 'unframer/dist/framer';
 import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'unframer';
@@ -193,7 +193,7 @@ FramerjijvTv89r.displayName = 'star';
 FramerjijvTv89r.defaultProps = { height: 31, width: 34, };
 addFonts(FramerjijvTv89r, [],);
 
-// https:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js
+// https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js
 var StarFonts = getFonts(stdin_default,);
 var cycleOrder2 = ['AOKwt5tx8',];
 var variantClassNames2 = { AOKwt5tx8: 'framer-v-30tkrw', };
@@ -348,7 +348,7 @@ FramerfAeI1HtaF.displayName = 'stars';
 FramerfAeI1HtaF.defaultProps = { height: 67, width: 49, };
 addFonts2(FramerfAeI1HtaF, [...StarFonts, ...fonts3,],);
 
-// https:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js
+// https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js
 import { jsx as _jsx5, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts3,
@@ -566,7 +566,7 @@ addPropertyControls(Framerr20S5u2K1, {
 },);
 addFonts3(Framerr20S5u2K1, [...fonts2,],);
 
-// https:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js
+// https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js
 import { jsx as _jsx6, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts4,
@@ -678,7 +678,7 @@ addPropertyControls2(FramerrWpbaXaRc, {
 },);
 addFonts4(FramerrWpbaXaRc, [],);
 
-// https:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js
+// https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js
 var AlertFonts = getFonts2(stdin_default3,);
 var StarsFonts = getFonts2(stdin_default2,);
 var RichTextWithCountUp50speed50 = withCountUp50speed50(RichText3,);

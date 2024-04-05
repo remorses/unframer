@@ -1,8 +1,8 @@
 'use client';
-import { defaultEvents, NullState, useIconSelection, } from './chunk-E2XMAXEX.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-RSQQT5RN.js';
 import './chunk-6C3VEZWH.js';
 
-// https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
+// https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
 import { jsx as _jsx2, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -23,14 +23,14 @@ import {
 import { LayoutGroup, motion as motion2, MotionConfigContext, } from 'unframer';
 import * as React2 from 'react';
 
-// https:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
+// https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 import { useEffect, useRef, useState, } from 'react';
 import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
 import { motion, } from 'unframer';
 
-// https:https://framer.com/m/phosphor-icons/House.js@0.0.50
+// https :https://framer.com/m/phosphor-icons/House.js@0.0.50
 var Component;
 var House_default = (React3,) => {
   if (!Component) {
@@ -145,7 +145,7 @@ var House_default = (React3,) => {
   return Component;
 };
 
-// https:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
+// https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
 var iconKeys = [
   'Activity',
   'AddressBook',
@@ -1284,7 +1284,7 @@ addPropertyControls(Icon, {
   ...defaultEvents,
 },);
 
-// https:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
+// https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
 var PhosphorFonts = getFonts(Icon,);
 var MotionDivWithFX = withFX(motion2.div,);
 var RichTextWithFX = withFX(RichText,);
