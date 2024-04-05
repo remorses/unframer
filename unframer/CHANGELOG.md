@@ -1,5 +1,15 @@
 # unframer
 
+## 1.2.0
+
+### Minor Changes
+
+-   Added init command
+
+### Patch Changes
+
+-   e2d334a: Update framer to 2.4.1, update framer motion to 11.0.11-sync.2
+
 ## 1.1.2
 
 ### Patch Changes
