@@ -1,4 +1,4 @@
-import { Plugin, build, transform, context } from 'esbuild'
+import { Plugin, build, transform, context, BuildResult } from 'esbuild'
 import dprint from 'dprint-node'
 import tmp from 'tmp'
 
@@ -196,82 +196,9 @@ export async function bundle({
             logger.log('waiting for components or config changes')
         }
 
-        const allTokens = [] as {
-            tokenName: string
-            defaultValues: Set<string>
-            usedBy: Set<string>
-        }[]
-
-        for (let file of result.outputFiles!) {
-            const tokens = extractTokenInfo(file.text)
-            // console.log('tokens', tokens)
-            for (let token of tokens) {
-                const already = allTokens.find(
-                    (x) => x.tokenName === token.tokenName,
-                )
-                const filePath = path.relative(out, file.path)
-
-                const filePaths = (() => {
-                    if (!filePath.startsWith('chunk-')) {
-                        return [filePath]
-                    }
-                    const files = Object.entries(
-                        result.metafile.outputs,
-                    ).filter(([k, v]) => {
-                        const filename = path.basename(k)
-                        if (filename.startsWith('chunk-')) {
-                            return false
-                        }
-                        const doesItImport = v.imports.find(
-                            (x) => x.path === filePath,
-                        )
-                        return doesItImport
-                    })
-                    return files.map(([k, v]) => k)
-                })()
-                if (!token?.tokenName?.startsWith('--token')) {
-                    continue
-                }
-                if (!already) {
-                    allTokens.push({
-                        tokenName: token.tokenName,
-                        defaultValues: new Set([token.defaultValue]),
-                        usedBy: new Set([...filePaths]),
-                    })
-                } else {
-                    already.defaultValues.add(token.defaultValue)
-                    filePaths.map((x) => already.usedBy.add(x))
-                }
-            }
-        }
-        const groupedByUsers = groupBy(allTokens, (x) => {
-            const str = `/* Used by ${[...x.usedBy].sort().join(', ')} */`
-            return str
-        })
-
-        const cssStrings = [...groupedByUsers.entries()]
-            .map(([usedBy, x]) => {
-                return (
-                    '   ' +
-                    usedBy +
-                    '\n' +
-                    [...x]
-                        .map((x) => {
-                            const possibleValues = [...x.defaultValues].sort()
-                            let comment =
-                                possibleValues.length > 1
-                                    ? `/* Also seen as ${possibleValues
-                                          .slice(1)
-                                          .join(', ')} */`
-                                    : ''
-                            return `    ${x.tokenName}: ${possibleValues[0]}; ${comment}`
-                        })
-                        .join('\n')
-                )
-            })
-            .join('\n')
-        const tokensCss = `:root {\n${cssStrings}\n}`
         logger.log('Found the following tokens:\n')
+
+        const tokensCss = getTokensCss({ out, result })
         console.log(tokensCss)
     }
 
@@ -366,6 +293,101 @@ export async function extractPropControlsSafe(text, name) {
     } catch (e: any) {
         logger.error(`Cannot get property controls for ${name}`, e.stack)
     }
+}
+
+function getTokensCss({
+    out,
+    result,
+}: {
+    out: string
+    result: BuildResult<{ metafile: true }>
+}) {
+    const allTokens = [] as {
+        tokenName: string
+        defaultValues: Set<string>
+        nameAnnotation?: string
+        usedBy: Set<string>
+    }[]
+    for (let file of result.outputFiles!) {
+        const code = fs.readFileSync(path.resolve(out, file.path), 'utf-8')
+        const tokens = extractTokenInfo(code)
+        // console.log('tokens', tokens)
+        for (let token of tokens) {
+            const already = allTokens.find(
+                (x) => x.tokenName === token.tokenName,
+            )
+            const filePath = path.relative(out, file.path)
+
+            const filePaths = (() => {
+                if (!filePath.startsWith('chunk-')) {
+                    return [filePath]
+                }
+                const files = Object.entries(result.metafile.outputs).filter(
+                    ([k, v]) => {
+                        const filename = path.basename(k)
+                        if (filename.startsWith('chunk-')) {
+                            return false
+                        }
+                        const doesItImport = v.imports.find(
+                            (x) => x.path === filePath,
+                        )
+                        return doesItImport
+                    },
+                )
+                return files.map(([k, v]) => k)
+            })()
+            if (!token?.tokenName?.startsWith('--token')) {
+                continue
+            }
+            if (!already) {
+                allTokens.push({
+                    tokenName: token.tokenName,
+                    defaultValues: new Set([token.defaultValue]),
+                    nameAnnotation: token.metadata?.name,
+                    usedBy: new Set([...filePaths]),
+                })
+            } else {
+                already.defaultValues.add(token.defaultValue)
+                if (!already.nameAnnotation && token.metadata?.name) {
+                    already.nameAnnotation = token.metadata.name
+                }
+                filePaths.map((x) => already.usedBy.add(x))
+            }
+        }
+    }
+    const groupedByUsers = groupBy(allTokens, (x) => {
+        const str = `/* Used by ${[...x.usedBy].sort().join(', ')} */`
+        return str
+    })
+
+    const cssStrings = [...groupedByUsers.entries()]
+        .map(([usedBy, x]) => {
+            return (
+                `    /* Used by ${[...x[0].usedBy].sort().join(', ')} */\n` +
+                [...x]
+                    .map((x) => {
+                        const possibleValues = [...x.defaultValues].sort()
+                        let comment = ''
+                        comment += x.nameAnnotation
+                            ? ` Named as ${JSON.stringify(x.nameAnnotation)} in Framer.`
+                            : ''
+                        comment +=
+                            possibleValues.length > 1
+                                ? ` Also seen as ${possibleValues
+                                      .slice(1)
+                                      .join(', ')}.`
+                                : ''
+
+                        return `    ${x.tokenName}: ${possibleValues[0]}; ${
+                            comment ? `/*${comment} */` : ''
+                        }`
+                    })
+                    .join('\n')
+            )
+        })
+        .join('\n')
+    const tokensCss = `:root {\n${cssStrings}\n}`
+    return tokensCss
 }
 
 export async function extractPropControlsUnsafe(filename, name) {
@@ -781,6 +803,8 @@ export function deduplicateByKey<T>(key: keyof T, arr: (T | undefined)[]) {
 
 type TokenInfo = {
     tokenName: string
+    metadata?: Record<string, any>
+
     defaultValue: string
 }
 
@@ -808,17 +832,33 @@ export function extractTokenInfo(code: string): TokenInfo[] {
 
                 varStatement += line[i]
                 if (parCount === 0) {
-                    // console.log('parCount', parCount, line.slice(0, i + 1))
                     break
                 }
             }
             varStatement = varStatement.trim().slice(1).slice(0, -1) // Remove starting and closing parenthesis
             const [tokenName, defaultValue] = splitOnce(varStatement, ',')
 
+            let metadata: Record<string, any> | undefined
+            const jsonStartIndex = line.indexOf('/*', startIndex)
+            if (jsonStartIndex !== -1) {
+                const jsonEndIndex = line.indexOf('*/', jsonStartIndex)
+                if (jsonEndIndex !== -1) {
+                    const jsonString = line
+                        .slice(jsonStartIndex + 2, jsonEndIndex)
+                        .trim()
+                    try {
+                        metadata = JSON.parse(jsonString)
+                    } catch (error) {
+                        // console.warn('Failed to parse JSON metadata:', error)
+                    }
+                }
+            }
+
             if (tokenName && defaultValue) {
                 tokens.push({
                     tokenName,
                     defaultValue: defaultValue.trim(),
+                    metadata,
                 })
             }
 

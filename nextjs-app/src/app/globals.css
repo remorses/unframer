@@ -26,20 +26,34 @@ body {
         rgb(var(--background-start-rgb));
 }
 
-html {
+
+:root {
     /* Used by fylo.js */
-    --token-bb315df6-c2cd-4c31-805d-6d1891fd5658: #101942;
-    --token-8bf6d357-6f97-4b36-9b48-c398e1a81f28: rgb(150, 55, 78);
-    --token-c5dba3e8-a617-4220-8bf7-b36ab38ac589: rgb(69, 164, 176);
-    /* Used by hero.js, pricing.js */
-    --token-67c1333b-4249-4ff1-a333-3581964020b4: #ffffff;
-    /* Used by hero.js */
-    --token-6b0f6268-7b27-460d-9b70-67f2c49e8da5: rgb(242, 199, 41);
+    --token-bb315df6-c2cd-4c31-805d-6d1891fd5658: #101942; /* named as Space in Framer. also seen as rgb(16, 25, 66). */
+    --token-8bf6d357-6f97-4b36-9b48-c398e1a81f28: rgb(150, 55, 78); /* named as Amaranth in Framer. */
+    --token-c5dba3e8-a617-4220-8bf7-b36ab38ac589: rgb(69, 164, 176); /* named as Moonstone in Framer. */
+    --token-99545d54-94e2-40c6-a83a-7a0b21f2cb8c: rgb(210, 216, 232); /* named as Lavendar in Framer. */
+    --token-67b50491-f6a9-41d1-8457-d6676b88b0fb: rgb(108, 223, 239); /* named as Electric in Framer. */
+    --token-800ccd72-4302-43ed-8d67-0e06f1a5b359: rgb(232, 173, 166); /* named as Melon in Framer. */
+    --token-73c02931-d7f7-4ef9-bb83-00d2076801a3: rgb(245, 122, 41); /* named as Amber in Framer. */
+    --token-e822dd2c-d150-4a11-98b6-5a9a4e20fdc0: rgb(156, 93, 229); /* named as Amethyst in Framer. */
+    --token-67c2bbe6-d0ed-466b-8293-294df87a6675: rgb(205, 93, 204); /* named as Orchid in Framer. */
     /* Used by hero.js, pricing.js, testimonials.js */
-    --token-c97db126-8e49-4dfa-8a8a-566d4fa3e425: #000000;
+    --token-67c1333b-4249-4ff1-a333-3581964020b4: #ffffff; /* also seen as rgb(255, 255, 255). */
+    --token-c97db126-8e49-4dfa-8a8a-566d4fa3e425: #000000; /* also seen as rgb(0, 0, 0). */
+    /* Used by hero.js */
+    --token-6b0f6268-7b27-460d-9b70-67f2c49e8da5: rgb(242, 199, 41); 
+    /* Used by hero.js, pricing.js */
+    --token-64603892-5c8b-477a-82d6-e795e75dd5dc: rgb(12, 64, 233); /* named as Orange in Framer. also seen as rgb(23, 116, 242), rgb(255, 79, 0). */
+    /* Used by logos.js */
+    --token-15fc6ab8-c2ea-472c-853a-fd5eab1ecf4a: rgba(10, 10, 13, 0.6); 
     /* Used by pricing.js, testimonials.js */
-    --token-19c4737c-eef7-4396-b22a-028772ac270e: rgba(0, 0, 0, 0.1);
+    --token-19c4737c-eef7-4396-b22a-028772ac270e: rgba(0, 0, 0, 0.1); /* named as Outline in Framer. */
+    --token-eefc1276-32c2-4c77-8e03-3e6e9899c005: rgba(0, 0, 0, 0.6); 
     /* Used by full-page.js */
-    --token-40c03004-286a-43c1-b36f-58b60663152c: rgb(242, 242, 242);
-    /* Used by pricing.js */
+    --token-40c03004-286a-43c1-b36f-58b60663152c: rgb(242, 242, 242); 
+    --token-fb4b67b5-91ba-4b73-b4a6-f55417ea1c0c: rgb(102, 102, 102); 
+    --token-b9c3c957-2c66-49c4-9732-fa196fddac20: rgb(0, 17, 34); 
+    --token-fcce9699-25b1-4529-9491-d24458dec076: rgb(103, 102, 255); 
+    --token-6e365f09-eb16-423f-93f7-5f3b4b83d578: rgb(255, 204, 34); /* named as Yellow in Framer. */
 }
