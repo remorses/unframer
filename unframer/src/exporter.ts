@@ -196,10 +196,8 @@ export async function bundle({
             logger.log('waiting for components or config changes')
         }
 
-        logger.log('Found the following tokens:\n')
-
         const tokensCss = getTokensCss({ out, result })
-        console.log(tokensCss)
+        fs.writeFileSync(path.resolve(out, 'tokens.css'), tokensCss, 'utf-8')
     }
 
     if (!watch) {
@@ -369,7 +367,9 @@ function getTokensCss({
                         const possibleValues = [...x.defaultValues].sort()
                         let comment = ''
                         comment += x.nameAnnotation
-                            ? ` Named as ${JSON.stringify(x.nameAnnotation)} in Framer.`
+                            ? ` Named as ${JSON.stringify(
+                                  x.nameAnnotation,
+                              )} in Framer.`
                             : ''
                         comment +=
                             possibleValues.length > 1
