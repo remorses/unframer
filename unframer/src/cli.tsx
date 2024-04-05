@@ -16,7 +16,6 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname)
 cli.command('', 'Run unframer')
     .option('--watch', 'Watch for Framer and unframer.json changes')
     .action(async function main(options) {
-        console.log({ options })
         const cwd = process.cwd()
         const watch = process.argv.includes('--watch')
         logger.log(`Looking for ${configName} in ${cwd}`)

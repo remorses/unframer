@@ -45,6 +45,9 @@ export async function bundle({
 }) {
     out ||= path.resolve(process.cwd(), 'example')
     out = path.resolve(out)
+    try {
+        fs.mkdirSync(out, { recursive: true })
+    } catch (e) {}
 
     const buildContext = await context({
         // entryPoints: {
