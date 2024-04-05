@@ -86,6 +86,8 @@ cli.command('init', 'Init the unframer.json config').action(async (options) => {
             2,
         ),
     )
+    const p = path.resolve(process.cwd(), 'unframer.json')
+    console.log(`${p} file created`)
 })
 
 cli.help()
