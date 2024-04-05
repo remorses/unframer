@@ -10,6 +10,9 @@ test(
         some other code
         else: --framer-text-color: var(--token-67c1333b-4249-4ff1-a333-3581964020b4, #ffffff);
         else: --framer-text-color: var(--token-67c1333b-4249-4ff1-a333-3581964020b4, rgb(0, 0, 0));
+        var(not a token)
+        mltiple lines
+        --framer-text-color: var(--token-same-line, rgb(9,34,76)); another-one: --framer-text: var(--token-another-one-in-line, #ffffff);
         `
         const tokens = extractTokenInfo(str)
         expect(tokens).toMatchInlineSnapshot(`
@@ -21,6 +24,14 @@ test(
             {
               "defaultValue": "rgb(0, 0, 0)",
               "tokenName": "--token-67c1333b-4249-4ff1-a333-3581964020b4",
+            },
+            {
+              "defaultValue": "rgb(9,34,76)",
+              "tokenName": "--token-same-line",
+            },
+            {
+              "defaultValue": "#ffffff",
+              "tokenName": "--token-another-one-in-line",
             },
           ]
         `)

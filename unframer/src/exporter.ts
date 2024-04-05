@@ -790,40 +790,44 @@ export function extractTokenInfo(code: string): TokenInfo[] {
     const tokens: TokenInfo[] = []
 
     for (const line of tokenLines) {
-        const startIndex = line.indexOf('var(--')
-        if (startIndex === -1) {
-            continue
-        }
-
-        let parCount = 0
-        let varStatement = ''
-        for (let i = startIndex + 3; i < line.length; i++) {
-            if (line[i] === '(') {
-                parCount++
-            } else if (line[i] === ')') {
-                parCount--
-            }
-
-            varStatement += line[i]
-            if (parCount === 0) {
-                // console.log('parCount', parCount, line.slice(0, i + 1))
+        let startIndex = 0
+        while (startIndex < line.length) {
+            startIndex = line.indexOf('var(--', startIndex)
+            if (startIndex === -1) {
                 break
             }
-        }
-        varStatement = varStatement.trim().slice(1).slice(0, -1) // Remove starting and closing parenthesis
-        const [tokenName, defaultValue] = splitOnce(varStatement, ',')
 
-        if (tokenName && defaultValue) {
-            tokens.push({
-                tokenName,
-                defaultValue: defaultValue.trim(),
-            })
+            let parCount = 0
+            let varStatement = ''
+            for (let i = startIndex + 3; i < line.length; i++) {
+                if (line[i] === '(') {
+                    parCount++
+                } else if (line[i] === ')') {
+                    parCount--
+                }
+
+                varStatement += line[i]
+                if (parCount === 0) {
+                    // console.log('parCount', parCount, line.slice(0, i + 1))
+                    break
+                }
+            }
+            varStatement = varStatement.trim().slice(1).slice(0, -1) // Remove starting and closing parenthesis
+            const [tokenName, defaultValue] = splitOnce(varStatement, ',')
+
+            if (tokenName && defaultValue) {
+                tokens.push({
+                    tokenName,
+                    defaultValue: defaultValue.trim(),
+                })
+            }
+
+            startIndex += varStatement.length + 'var(--'.length // Move the startIndex to the end of the current var(--token)
         }
     }
 
     return tokens
 }
-
 function splitOnce(str: string, separator: string) {
     const index = str.indexOf(separator)
     if (index === -1) {
