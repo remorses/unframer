@@ -53,7 +53,7 @@ export async function bundle({
         // entryPoints: {
         //     index: url,
         // },
-
+        absWorkingDir: out,
         entryPoints: Object.keys(components).map((name) => {
             const url = components[name]
             validateUrl(url)
@@ -195,6 +195,80 @@ export async function bundle({
         if (watch) {
             logger.log('waiting for components or config changes')
         }
+
+        const allTokens = [] as {
+            tokenName: string
+            defaultValues: Set<string>
+            usedBy: Set<string>
+        }[]
+
+        for (let file of result.outputFiles!) {
+            const tokens = extractTokenInfo(file.text)
+            // console.log('tokens', tokens)
+            for (let token of tokens) {
+                const already = allTokens.find(
+                    (x) => x.tokenName === token.tokenName,
+                )
+                const filePath = path.relative(out, file.path)
+
+                const filePaths = (() => {
+                    if (!filePath.startsWith('chunk-')) {
+                        return [filePath]
+                    }
+                    const files = Object.entries(
+                        result.metafile.outputs,
+                    ).filter(([k, v]) => {
+                        const filename = path.basename(k)
+                        if (filename.startsWith('chunk-')) {
+                            return false
+                        }
+                        const doesItImport = v.imports.find(
+                            (x) => x.path === filePath,
+                        )
+                        return doesItImport
+                    })
+                    return files.map(([k, v]) => k)
+                })()
+                if (!token?.tokenName?.startsWith('--token')) {
+                    continue
+                }
+                if (!already) {
+                    allTokens.push({
+                        tokenName: token.tokenName,
+                        defaultValues: new Set([token.defaultValue]),
+                        usedBy: new Set([...filePaths]),
+                    })
+                } else {
+                    already.defaultValues.add(token.defaultValue)
+                    filePaths.map((x) => already.usedBy.add(x))
+                }
+            }
+        }
+        const groupedByUsers = groupBy(allTokens, (x) => {
+            const str = `/* Used by ${[...x.usedBy].sort().join(', ')} */`
+            return str
+        })
+
+        const cssStrings = [...groupedByUsers.entries()]
+            .map(([usedBy, x]) => {
+                return (
+                    '   ' +
+                    usedBy +
+                    '\n' +
+                    [...x]
+                        .map(
+                            (x) =>
+                                `    ${x.tokenName}: ${
+                                    [...x.defaultValues][0]
+                                };`,
+                        )
+                        .join('\n')
+                )
+            })
+            .join('\n')
+        const tokensCss = `:root {\n${cssStrings}\n}`
+        logger.log('Found the following tokens:\n')
+        console.log(tokensCss)
     }
 
     if (!watch) {
@@ -688,4 +762,80 @@ function retryTwice<F extends Function>(fn: Function): Function {
             return await fn(...args)
         }
     }
+}
+
+export function deduplicateByKey<T>(key: keyof T, arr: (T | undefined)[]) {
+    const map = new Map()
+    for (let item of arr) {
+        if (!item) {
+            continue
+        }
+        map.set(item?.[key], item)
+    }
+    return Array.from(map.values())
+}
+
+type TokenInfo = {
+    tokenName: string
+    defaultValue: string
+}
+
+export function extractTokenInfo(code: string): TokenInfo[] {
+    const lines = code.split('\n')
+    const tokenLines = lines.filter((line) => line.includes('var(--token'))
+    const tokens: TokenInfo[] = []
+
+    for (const line of tokenLines) {
+        const startIndex = line.indexOf('var(--')
+        if (startIndex === -1) {
+            continue
+        }
+
+        let parCount = 0
+        let varStatement = ''
+        for (let i = startIndex + 3; i < line.length; i++) {
+            if (line[i] === '(') {
+                parCount++
+            } else if (line[i] === ')') {
+                parCount--
+            }
+
+            varStatement += line[i]
+            if (parCount === 0) {
+                // console.log('parCount', parCount, line.slice(0, i + 1))
+                break
+            }
+        }
+        varStatement = varStatement.trim().slice(1).slice(0, -1) // Remove starting and closing parenthesis
+        const [tokenName, defaultValue] = splitOnce(varStatement, ',')
+
+        if (tokenName && defaultValue) {
+            tokens.push({
+                tokenName,
+                defaultValue: defaultValue.trim(),
+            })
+        }
+    }
+
+    return tokens
+}
+
+function splitOnce(str: string, separator: string) {
+    const index = str.indexOf(separator)
+    if (index === -1) {
+        return [str]
+    }
+    return [str.slice(0, index), str.slice(index + 1)]
+}
+
+function groupBy<T>(arr: T[], key: (x: T) => string) {
+    const map = new Map<string, T[]>()
+    for (let item of arr) {
+        const k = key(item)
+        if (!map.has(k)) {
+            map.set(k, [])
+        }
+        map.get(k)?.push(item)
+    }
+    return map
 }

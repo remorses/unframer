@@ -1,8 +1,32 @@
 import tmp from 'tmp'
 import path from 'path'
 import { test, expect } from 'vitest'
-import { bundle } from './exporter.js'
+import { bundle, extractTokenInfo } from './exporter.js'
 
+test(
+    'extractTokenInfo',
+    async () => {
+        const str = `
+        some other code
+        else: --framer-text-color: var(--token-67c1333b-4249-4ff1-a333-3581964020b4, #ffffff);
+        else: --framer-text-color: var(--token-67c1333b-4249-4ff1-a333-3581964020b4, rgb(0, 0, 0));
+        `
+        const tokens = extractTokenInfo(str)
+        expect(tokens).toMatchInlineSnapshot(`
+          [
+            {
+              "defaultValue": "#ffffff",
+              "tokenName": "--token-67c1333b-4249-4ff1-a333-3581964020b4",
+            },
+            {
+              "defaultValue": "rgb(0, 0, 0)",
+              "tokenName": "--token-67c1333b-4249-4ff1-a333-3581964020b4",
+            },
+          ]
+        `)
+    },
+    1000 * 10,
+)
 test(
     'bundle simple component',
     async () => {

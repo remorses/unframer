@@ -1,11 +1,11 @@
 {
   "inputs": {
-    "../node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js": {
+    "../../../node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js": {
       "bytes": 30,
       "imports": [],
       "format": "esm"
     },
-    "../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/process.js": {
+    "../../../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/process.js": {
       "bytes": 7074,
       "imports": [
         {
@@ -26,18 +26,18 @@
       ],
       "format": "esm"
     },
-    "../node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js": {
+    "../../../node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js": {
       "bytes": 36,
       "imports": [
         {
-          "path": "../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/process.js",
+          "path": "../../../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/process.js",
           "kind": "import-statement",
           "original": "process"
         }
       ],
       "format": "esm"
     },
-    "../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/buffer.js": {
+    "../../../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/buffer.js": {
       "bytes": 68034,
       "imports": [
         {
@@ -58,11 +58,11 @@
       ],
       "format": "esm"
     },
-    "../node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js": {
+    "../../../node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js": {
       "bytes": 33,
       "imports": [
         {
-          "path": "../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/buffer.js",
+          "path": "../../../node_modules/.pnpm/@jspm+core@2.0.1/node_modules/@jspm/core/nodelibs/browser/buffer.js",
           "kind": "import-statement",
           "original": "buffer"
         }
@@ -4117,14 +4117,14 @@
     }
   },
   "outputs": {
-    "src/framer/collection.js": {
+    "collection.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-S7T2OB4C.js",
+          "path": "chunk-S7T2OB4C.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -4163,7 +4163,7 @@
           "external": true
         },
         {
-          "path": "src/framer/b9ZvTRprK-0-J32I5EDE.js",
+          "path": "b9ZvTRprK-0-J32I5EDE.js",
           "kind": "dynamic-import"
         },
         {
@@ -4194,14 +4194,14 @@
       },
       "bytes": 33068
     },
-    "src/framer/menus.js": {
+    "menus.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-RSQQT5RN.js",
+          "path": "chunk-RSQQT5RN.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -4314,10 +4314,10 @@
       },
       "bytes": 96262
     },
-    "src/framer/b9ZvTRprK-0-J32I5EDE.js": {
+    "b9ZvTRprK-0-J32I5EDE.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         }
       ],
@@ -4332,10 +4332,10 @@
       },
       "bytes": 259
     },
-    "src/framer/fylo.js": {
+    "fylo.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -4766,14 +4766,14 @@
       },
       "bytes": 547666
     },
-    "src/framer/hero.js": {
+    "hero.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-MEJ7UUIH.js",
+          "path": "chunk-MEJ7UUIH.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -4965,14 +4965,14 @@
       },
       "bytes": 56109
     },
-    "src/framer/logos.js": {
+    "logos.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-GZE2AZR4.js",
+          "path": "chunk-GZE2AZR4.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -5043,14 +5043,14 @@
       },
       "bytes": 23816
     },
-    "src/framer/testimonials.js": {
+    "testimonials.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-GZE2AZR4.js",
+          "path": "chunk-GZE2AZR4.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -5152,7 +5152,7 @@
       },
       "bytes": 44980
     },
-    "src/framer/chunk-GZE2AZR4.js": {
+    "chunk-GZE2AZR4.js": {
       "imports": [],
       "exports": [
         "Et"
@@ -5188,10 +5188,10 @@
       },
       "bytes": 22492
     },
-    "src/framer/menu-overlay.js": {
+    "menu-overlay.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -5239,14 +5239,14 @@
       },
       "bytes": 27312
     },
-    "src/framer/full-page.js": {
+    "full-page.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-RSQQT5RN.js",
+          "path": "chunk-RSQQT5RN.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -5325,7 +5325,7 @@
       },
       "bytes": 57997
     },
-    "src/framer/chunk-RSQQT5RN.js": {
+    "chunk-RSQQT5RN.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -5363,14 +5363,14 @@
       },
       "bytes": 1930
     },
-    "src/framer/pricing.js": {
+    "pricing.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-MEJ7UUIH.js",
+          "path": "chunk-MEJ7UUIH.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -5526,7 +5526,7 @@
       },
       "bytes": 79290
     },
-    "src/framer/chunk-MEJ7UUIH.js": {
+    "chunk-MEJ7UUIH.js": {
       "imports": [
         {
           "path": "unframer/dist/framer",
@@ -5568,14 +5568,14 @@
       },
       "bytes": 3694
     },
-    "src/framer/rich.js": {
+    "rich.js": {
       "imports": [
         {
-          "path": "src/framer/chunk-S7T2OB4C.js",
+          "path": "chunk-S7T2OB4C.js",
           "kind": "import-statement"
         },
         {
-          "path": "src/framer/chunk-6C3VEZWH.js",
+          "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
@@ -5658,7 +5658,7 @@
       },
       "bytes": 11493
     },
-    "src/framer/chunk-S7T2OB4C.js": {
+    "chunk-S7T2OB4C.js": {
       "imports": [
         {
           "path": "unframer/dist/framer",
@@ -5689,7 +5689,7 @@
       },
       "bytes": 2615
     },
-    "src/framer/chunk-6C3VEZWH.js": {
+    "chunk-6C3VEZWH.js": {
       "imports": [],
       "exports": [
         "__export"
