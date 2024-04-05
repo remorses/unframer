@@ -1,5 +1,11 @@
 # unframer
 
+## 1.3.0
+
+### Minor Changes
+
+-   Output the tokens css with comments
+
 ## 1.2.2
 
 ### Patch Changes
