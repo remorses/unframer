@@ -128,7 +128,6 @@ export default function App() {
 
 Known limitations:
 
-
 -   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
 
 ```css
@@ -137,7 +136,11 @@ Known limitations:
 }
 ```
 
--   Instead of using relative links to your Framer components you should either use link variables or absolute links (starting with https://, not links to other Framer pages). This is because links to Framer pages are encoded with opaque ids.
+-   Links to Framer pages won't work, this is because links to Framer pages are encoded with opaque ids. Instead you should
+
+    1. use link variables
+    1. absolute links (starting with https://, not links to other Framer pages).
+    1. append a query when creating a link (for example instead of writing `/home` you write `/home?` and don't press enter, this will preserve the link as it is)
 
 -   Internationalization is not supported
 
