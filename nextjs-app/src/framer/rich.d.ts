@@ -13,11 +13,11 @@ export interface Props {
     "content"?: undefined
 }
 
-const Component = (props: Props) => any
+const RichFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+RichFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
 
-export default Component
+export default RichFramerComponent
 

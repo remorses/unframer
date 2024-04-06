@@ -15,11 +15,11 @@ export interface Props {
     "heading"?: string
 }
 
-const Component = (props: Props) => any
+const HeroFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+HeroFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
 
-export default Component
+export default HeroFramerComponent
 

@@ -13,11 +13,11 @@ export interface Props {
     "variant"?: 'Desktop' | 'Tablet' | 'Mobile'
 }
 
-const Component = (props: Props) => any
+const TestimonialsFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+TestimonialsFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
 
-export default Component
+export default TestimonialsFramerComponent
 

@@ -1,7 +1,15 @@
 import tmp from 'tmp'
 import path from 'path'
 import { test, expect } from 'vitest'
-import { bundle, extractTokenInfo } from './exporter.js'
+import { bundle, componentCamelCase, extractTokenInfo } from './exporter.js'
+
+test('componentCamelCase', () => {
+    expect(componentCamelCase('logo-ticker')).toMatchInlineSnapshot(`"LogoTickerFramerComponent"`)
+    expect(componentCamelCase('Logo-Ticker')).toMatchInlineSnapshot(`"LogoTickerFramerComponent"`)
+    expect(componentCamelCase('logo')).toMatchInlineSnapshot(`"LogoFramerComponent"`)
+    expect(componentCamelCase('nav')).toMatchInlineSnapshot(`"NavFramerComponent"`)
+    expect(componentCamelCase('framer_nav')).toMatchInlineSnapshot(`"FramerNavFramerComponent"`)
+})
 
 test(
     'extractTokenInfo',

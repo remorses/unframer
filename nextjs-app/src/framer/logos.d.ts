@@ -13,11 +13,11 @@ export interface Props {
     "variant"?: 'Logo Ticker' | 'Logo Ticker - M'
 }
 
-const Component = (props: Props) => any
+const LogosFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+LogosFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
 
-export default Component
+export default LogosFramerComponent
 

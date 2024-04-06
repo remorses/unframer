@@ -142,7 +142,10 @@ export async function bundle({
             const lines = findRelativeLinks(codeNew)
             if (lines.length) {
                 logger.error(
-                    `found broken links for ${path.relative(out, file.path)}, don't use relative links in Framer components`,
+                    `found broken links for ${path.relative(
+                        out,
+                        file.path,
+                    )}, don't use relative links in Framer components`,
                 )
                 lines.forEach((line) => {
                     logger.error(`${path.resolve(out, file.path)}:${line + 1}`)
@@ -169,7 +172,7 @@ export async function bundle({
             if (!propControls) {
                 logger.log(`no property controls found for ${name}`)
             }
-            const types = propControlsToType(propControls)
+            const types = propControlsToType(propControls, name)
             // name = 'framer-' + name
             // logger.log('name', name)
 
@@ -454,7 +457,7 @@ function safeJsonParse(text) {
     }
 }
 
-export function propControlsToType(controls?: PropertyControls) {
+export function propControlsToType(controls: PropertyControls, fileName) {
     try {
         const types = Object.entries(controls || ({} as PropertyControls))
             .map(([key, value]) => {
@@ -518,6 +521,8 @@ export function propControlsToType(controls?: PropertyControls) {
             .filter(Boolean)
             .join('\n')
 
+        const componentName = componentCamelCase(fileName?.replace(/\.js$/, ''))
+
         const defaultPropsTypes =
             [
                 'children?: React.ReactNode',
@@ -534,10 +539,10 @@ export function propControlsToType(controls?: PropertyControls) {
         t += 'import * as React from "react"\n\n'
         t += 'import { UnframerBreakpoint } from "unframer"\n\n'
         t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n\n`
-        t += `const Component = (props: Props) => any\n\n`
+        t += `const ${componentName} = (props: Props) => any\n\n`
         t += `type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }\n\n`
-        t += `Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any\n\n`
-        t += `export default Component\n\n`
+        t += `${componentName}.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any\n\n`
+        t += `export default ${componentName}\n\n`
 
         return t
     } catch (e: any) {
@@ -912,4 +917,15 @@ function groupBy<T>(arr: T[], key: (x: T) => string) {
         map.get(k)?.push(item)
     }
     return map
+}
+
+export function componentCamelCase(str: string) {
+    if (!str) {
+        return 'FramerComponent'
+    }
+    str = str.replace(/-([\w])/g, (g) => g[1].toUpperCase())
+    str = str.replace(/_([a-z])/g, (g) => g[1].toUpperCase())
+    str = str[0].toUpperCase() + str.slice(1)
+    str = str + 'FramerComponent'
+    return str
 }

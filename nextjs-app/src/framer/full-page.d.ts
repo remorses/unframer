@@ -13,11 +13,11 @@ export interface Props {
     "variant"?: 'Desktop' | 'Tablet'
 }
 
-const Component = (props: Props) => any
+const FullPageFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+FullPageFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
 
-export default Component
+export default FullPageFramerComponent
 

@@ -14,11 +14,11 @@ export interface Props {
     "buyEvent"?: Function
 }
 
-const Component = (props: Props) => any
+const PricingFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Component.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+PricingFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
 
-export default Component
+export default PricingFramerComponent
 

@@ -40,6 +40,7 @@ export default function Home() {
                         }}
                     />
                 </div>
+
                 <FullPage.Responsive
                     variants={{
                         lg: 'Desktop',
