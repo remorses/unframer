@@ -113,6 +113,32 @@ export default function App() {
 }
 ```
 
+## Sizing components
+
+Framer components can have a fixed size, this comes from the root element in the Framer component editor. To override this size you will need to use the `style` prop or use a class with high specificity.
+
+```tsx
+import Logos from './framer/logos'
+import { FramerStyles } from 'unframer'
+
+export default function App() {
+    return (
+        <div>
+            <FramerStyles Components={[Logos]} />
+            <Logos.responsive
+                className='!w-full' // use !important to override framer default size
+                style={{ width: '100%' }} // or use style prop, which has higher specificity than the Framer class
+                variants={{
+                    lg: 'Desktop',
+                    md: 'Tablet',
+                    base: 'Mobile',
+                }}
+            />
+        </div>
+    )
+}
+```
+
 ## Supported component props
 
 `unframer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:
