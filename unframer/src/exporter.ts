@@ -139,6 +139,15 @@ export async function bundle({
                 trailingCommas: 'always',
                 semiColons: 'always',
             })
+            const lines = findRelativeLinks(codeNew)
+            if (lines.length) {
+                logger.error(
+                    `found broken links for ${path.relative(out, file.path)}, don't use relative links in Framer components`,
+                )
+                lines.forEach((line) => {
+                    logger.error(`${path.resolve(out, file.path)}:${line + 1}`)
+                })
+            }
 
             if (existing === codeNew) {
                 continue
@@ -257,6 +266,20 @@ export async function bundle({
 
 function decapitalize(str: string) {
     return str.charAt(0).toLowerCase() + str.slice(1)
+}
+
+export function findRelativeLinks(text: string) {
+    // regex to match these objects, could be in different lines or formatted, webPageId is the key element
+    // href: { webPageId: 'someId' }
+    const regex = /webPageId:\s+/g
+    const matches = text.matchAll(regex)
+    // get line number for each match
+    const lines = text.split('\n')
+    const lineNumbers = Array.from(matches, (match) => {
+        const index = lines.findIndex((line) => line.includes(match[0]))
+        return index
+    })
+    return lineNumbers
 }
 
 export async function extractPropControlsSafe(text, name) {
