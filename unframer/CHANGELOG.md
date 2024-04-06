@@ -1,5 +1,15 @@
 # unframer
 
+## 1.6.0
+
+### Minor Changes
+
+-   Generate styles.css file with all the necessary styles and fonts
+
+### Patch Changes
+
+-   abc122e: Update framer to 2.4.1, update framer motion to 11.0.11-sync.2
+
 ## 1.5.0
 
 ### Minor Changes
