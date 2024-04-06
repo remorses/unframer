@@ -169,7 +169,10 @@ export async function bundle({
 
         const outFiles = result.outputFiles
             .map((x) => path.resolve(out, x.path))
-            .concat([path.resolve(out, 'meta.json')])
+            .concat([
+                path.resolve(out, 'meta.json'),
+                path.resolve(out, 'tokens.css'),
+            ])
             .concat(
                 result.outputFiles.map((x) =>
                     path.resolve(out, x.path.replace('.js', '.d.ts')),
