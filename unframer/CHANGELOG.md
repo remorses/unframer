@@ -1,5 +1,11 @@
 # unframer
 
+## 1.4.0
+
+### Minor Changes
+
+-   tell user if there are broken Framer links
+
 ## 1.3.0
 
 ### Minor Changes
