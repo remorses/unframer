@@ -136,7 +136,7 @@ Known limitations:
 }
 ```
 
--   Instead of using links to your Framer pages you should make links variables and set them when rendering the component. This is because links to Framer pages are not supported in `unframer`.
+-   Instead of using relative links to your Framer components you should either use link variables or absolute links (starting with https://, not links to other Framer pages). This is because links to Framer pages are encoded with opaque ids.
 
 -   Internationalization is not supported
 
