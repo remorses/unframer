@@ -128,6 +128,7 @@ export default function App() {
 
 Known limitations:
 
+
 -   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
 
 ```css

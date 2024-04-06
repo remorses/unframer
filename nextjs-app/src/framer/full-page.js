@@ -1,14 +1,15 @@
 'use client';
-import { defaultEvents, NullState, useIconSelection, } from './chunk-RSQQT5RN.js';
+import { Icon, } from './chunk-S3ZL2HBZ.js';
+import './chunk-RSQQT5RN.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
-import { jsx as _jsx2, jsxs as _jsxs, } from 'react/jsx-runtime';
+import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
-  addPropertyControls as addPropertyControls2,
+  addPropertyControls,
   ComponentViewportProvider,
-  ControlType as ControlType2,
+  ControlType,
   cx,
   getFonts,
   Image,
@@ -20,1273 +21,10 @@ import {
   withCSS,
   withFX,
 } from 'unframer/dist/framer';
-import { LayoutGroup, motion as motion2, MotionConfigContext, } from 'unframer';
-import * as React2 from 'react';
-
-// https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
-import { jsx as _jsx, } from 'react/jsx-runtime';
+import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
-import { useEffect, useRef, useState, } from 'react';
-import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
-import { motion, } from 'unframer';
-
-// https :https://framer.com/m/phosphor-icons/House.js@0.0.50
-var Component;
-var House_default = (React3,) => {
-  if (!Component) {
-    const renderPathForWeight = (weight, color, pathsByWeight2,) =>
-      !!pathsByWeight2.get(weight,) ? pathsByWeight2.get(weight,)(color,) : null;
-    const pathsByWeight = /* @__PURE__ */ new Map();
-    pathsByWeight.set(
-      'bold',
-      (color,) =>
-        /* @__PURE__ */ React3.createElement(
-          React3.Fragment,
-          null,
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z',
-            fill: 'none',
-            stroke: color,
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            strokeWidth: '24',
-          },),
-        ),
-    );
-    pathsByWeight.set(
-      'duotone',
-      (color,) =>
-        /* @__PURE__ */ React3.createElement(
-          React3.Fragment,
-          null,
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z',
-            opacity: '0.2',
-          },),
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z',
-            fill: 'none',
-            stroke: color,
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            strokeWidth: '16',
-          },),
-        ),
-    );
-    pathsByWeight.set(
-      'fill',
-      () =>
-        /* @__PURE__ */ React3.createElement(
-          React3.Fragment,
-          null,
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M218.8,103.7,138.8,31a16,16,0,0,0-21.6,0l-80,72.7A16,16,0,0,0,32,115.5v92.1a16.4,16.4,0,0,0,4,11A15.9,15.9,0,0,0,48,224H96a8,8,0,0,0,8-8V168a8,8,0,0,1,8-8h32a8,8,0,0,1,8,8v48a8,8,0,0,0,8,8h48a15.6,15.6,0,0,0,7.6-1.9A16.1,16.1,0,0,0,224,208V115.5A16,16,0,0,0,218.8,103.7Z',
-          },),
-        ),
-    );
-    pathsByWeight.set(
-      'light',
-      (color,) =>
-        /* @__PURE__ */ React3.createElement(
-          React3.Fragment,
-          null,
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z',
-            fill: 'none',
-            stroke: color,
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            strokeWidth: '12',
-          },),
-        ),
-    );
-    pathsByWeight.set(
-      'thin',
-      (color,) =>
-        /* @__PURE__ */ React3.createElement(
-          React3.Fragment,
-          null,
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z',
-            fill: 'none',
-            stroke: color,
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            strokeWidth: '8',
-          },),
-        ),
-    );
-    pathsByWeight.set(
-      'regular',
-      (color,) =>
-        /* @__PURE__ */ React3.createElement(
-          React3.Fragment,
-          null,
-          /* @__PURE__ */ React3.createElement('path', {
-            d: 'M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z',
-            fill: 'none',
-            stroke: color,
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            strokeWidth: '16',
-          },),
-        ),
-    );
-    const renderPath = (weight, color,) => renderPathForWeight(weight, color, pathsByWeight,);
-    const House = React3.forwardRef((props, ref,) =>
-      /* @__PURE__ */ React3.createElement('g', {
-        ref,
-        ...props,
-      }, renderPath(props.weight, props.color,),)
-    );
-    House.displayName = 'House';
-    Component = House;
-  }
-  return Component;
-};
-
-// https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
-var iconKeys = [
-  'Activity',
-  'AddressBook',
-  'Airplane',
-  'AirplaneInFlight',
-  'AirplaneLanding',
-  'AirplaneTakeoff',
-  'AirplaneTilt',
-  'Airplay',
-  'Alarm',
-  'Alien',
-  'AlignBottom',
-  'AlignBottomSimple',
-  'AlignCenterVertical',
-  'AlignLeft',
-  'AlignLeftSimple',
-  'AlignRight',
-  'AlignRightSimple',
-  'AlignTop',
-  'AlignTopSimple',
-  'Anchor',
-  'AnchorSimple',
-  'AndroidLogo',
-  'AngularLogo',
-  'Aperture',
-  'AppStoreLogo',
-  'AppWindow',
-  'AppleLogo',
-  'ApplePodcastsLogo',
-  'Archive',
-  'ArchiveBox',
-  'ArchiveTray',
-  'Armchair',
-  'ArrowArcLeft',
-  'ArrowArcRight',
-  'ArrowBendDownLeft',
-  'ArrowBendDownRight',
-  'ArrowBendLeftDown',
-  'ArrowBendLeftUp',
-  'ArrowBendRightDown',
-  'ArrowBendRightUp',
-  'ArrowBendUpLeft',
-  'ArrowBendUpRight',
-  'ArrowCircleDown',
-  'ArrowCircleDownLeft',
-  'ArrowCircleDownRight',
-  'ArrowCircleLeft',
-  'ArrowCircleRight',
-  'ArrowCircleUp',
-  'ArrowCircleUpLeft',
-  'ArrowCircleUpRight',
-  'ArrowClockwise',
-  'ArrowDown',
-  'ArrowDownLeft',
-  'ArrowDownRight',
-  'ArrowElbowDownLeft',
-  'ArrowElbowDownRight',
-  'ArrowElbowLeft',
-  'ArrowElbowLeftDown',
-  'ArrowElbowLeftUp',
-  'ArrowElbowRight',
-  'ArrowElbowRightDown',
-  'ArrowElbowRightUp',
-  'ArrowElbowUpLeft',
-  'ArrowElbowUpRight',
-  'ArrowFatDown',
-  'ArrowFatLeft',
-  'ArrowFatLineDown',
-  'ArrowFatLineLeft',
-  'ArrowFatLineRight',
-  'ArrowFatLineUp',
-  'ArrowFatLinesDown',
-  'ArrowFatLinesLeft',
-  'ArrowFatLinesRight',
-  'ArrowFatLinesUp',
-  'ArrowFatRight',
-  'ArrowFatUp',
-  'ArrowLeft',
-  'ArrowLineDown',
-  'ArrowLineDownLeft',
-  'ArrowLineDownRight',
-  'ArrowLineLeft',
-  'ArrowLineRight',
-  'ArrowLineUp',
-  'ArrowLineUpLeft',
-  'ArrowLineUpRight',
-  'ArrowRight',
-  'ArrowSquareDown',
-  'ArrowSquareDownLeft',
-  'ArrowSquareDownRight',
-  'ArrowSquareIn',
-  'ArrowSquareLeft',
-  'ArrowSquareOut',
-  'ArrowSquareRight',
-  'ArrowSquareUp',
-  'ArrowSquareUpLeft',
-  'ArrowSquareUpRight',
-  'ArrowUDownLeft',
-  'ArrowUDownRight',
-  'ArrowULeftDown',
-  'ArrowULeftUp',
-  'ArrowURightDown',
-  'ArrowURightUp',
-  'ArrowUUpLeft',
-  'ArrowUUpRight',
-  'ArrowUp',
-  'ArrowUpLeft',
-  'ArrowUpRight',
-  'ArrowsClockwise',
-  'ArrowsDownUp',
-  'ArrowsHorizontal',
-  'ArrowsIn',
-  'ArrowsInCardinal',
-  'ArrowsInLineVertical',
-  'ArrowsInSimple',
-  'ArrowsLeftRight',
-  'ArrowsOut',
-  'ArrowsOutCardinal',
-  'ArrowsOutSimple',
-  'ArrowsVertical',
-  'Article',
-  'ArticleMedium',
-  'ArticleNyTimes',
-  'Asterisk',
-  'AsteriskSimple',
-  'At',
-  'Atom',
-  'Baby',
-  'Backpack',
-  'Backspace',
-  'Bag',
-  'BagSimple',
-  'Balloon',
-  'Bandaids',
-  'Bank',
-  'Barbell',
-  'Barcode',
-  'Barricade',
-  'Baseball',
-  'Basketball',
-  'Bathtub',
-  'BatteryCharging',
-  'BatteryEmpty',
-  'BatteryFull',
-  'BatteryHigh',
-  'BatteryLow',
-  'BatteryMedium',
-  'BatteryPlus',
-  'BatteryWarning',
-  'Bed',
-  'BeerBottle',
-  'BehanceLogo',
-  'Bell',
-  'BellRinging',
-  'BellSimple',
-  'BellSimpleRinging',
-  'BellSimpleSlash',
-  'BellSimpleZ',
-  'BellSlash',
-  'BellZ',
-  'BezierCurve',
-  'Bicycle',
-  'Binoculars',
-  'Bird',
-  'Bluetooth',
-  'BluetoothConnected',
-  'BluetoothSlash',
-  'BluetoothX',
-  'Boat',
-  'Book',
-  'BookBookmark',
-  'BookOpen',
-  'Bookmark',
-  'BookmarkSimple',
-  'Bookmarks',
-  'BookmarksSimple',
-  'Books',
-  'BoundingBox',
-  'BracketsAngle',
-  'BracketsCurly',
-  'BracketsRound',
-  'BracketsSquare',
-  'Brain',
-  'Brandy',
-  'Briefcase',
-  'BriefcaseMetal',
-  'Broadcast',
-  'Browser',
-  'Browsers',
-  'Bug',
-  'BugBeetle',
-  'BugDroid',
-  'Buildings',
-  'Bus',
-  'Butterfly',
-  'Cactus',
-  'Cake',
-  'Calculator',
-  'Calendar',
-  'CalendarBlank',
-  'CalendarCheck',
-  'CalendarPlus',
-  'CalendarX',
-  'Camera',
-  'CameraRotate',
-  'CameraSlash',
-  'Campfire',
-  'Car',
-  'CarSimple',
-  'Cardholder',
-  'Cards',
-  'CaretCircleDoubleUp',
-  'CaretCircleDown',
-  'CaretCircleLeft',
-  'CaretCircleRight',
-  'CaretCircleUp',
-  'CaretDoubleDown',
-  'CaretDoubleLeft',
-  'CaretDoubleRight',
-  'CaretDoubleUp',
-  'CaretDown',
-  'CaretLeft',
-  'CaretRight',
-  'CaretUp',
-  'Cat',
-  'CellSignalFull',
-  'CellSignalHigh',
-  'CellSignalLow',
-  'CellSignalMedium',
-  'CellSignalNone',
-  'CellSignalSlash',
-  'CellSignalX',
-  'Chalkboard',
-  'ChalkboardSimple',
-  'ChalkboardTeacher',
-  'ChartBar',
-  'ChartBarHorizontal',
-  'ChartLine',
-  'ChartLineUp',
-  'ChartPie',
-  'ChartPieSlice',
-  'Chat',
-  'ChatCentered',
-  'ChatCenteredDots',
-  'ChatCenteredText',
-  'ChatCircle',
-  'ChatCircleDots',
-  'ChatCircleText',
-  'ChatDots',
-  'ChatTeardrop',
-  'ChatTeardropDots',
-  'ChatTeardropText',
-  'ChatText',
-  'Chats',
-  'ChatsCircle',
-  'ChatsTeardrop',
-  'Check',
-  'CheckCircle',
-  'CheckSquare',
-  'CheckSquareOffset',
-  'Checks',
-  'Circle',
-  'CircleDashed',
-  'CircleHalf',
-  'CircleHalfTilt',
-  'CircleNotch',
-  'CircleWavy',
-  'CircleWavyCheck',
-  'CircleWavyQuestion',
-  'CircleWavyWarning',
-  'CirclesFour',
-  'CirclesThree',
-  'CirclesThreePlus',
-  'Clipboard',
-  'ClipboardText',
-  'Clock',
-  'ClockAfternoon',
-  'ClockClockwise',
-  'ClosedCaptioning',
-  'Cloud',
-  'CloudArrowDown',
-  'CloudArrowUp',
-  'CloudCheck',
-  'CloudFog',
-  'CloudLightning',
-  'CloudMoon',
-  'CloudRain',
-  'CloudSlash',
-  'CloudSnow',
-  'CloudSun',
-  'Club',
-  'CoatHanger',
-  'Code',
-  'CodeSimple',
-  'CodepenLogo',
-  'CodesandboxLogo',
-  'Coffee',
-  'Coin',
-  'CoinVertical',
-  'Coins',
-  'Columns',
-  'Command',
-  'Compass',
-  'ComputerTower',
-  'Confetti',
-  'Cookie',
-  'CookingPot',
-  'Copy',
-  'CopySimple',
-  'Copyleft',
-  'Copyright',
-  'CornersIn',
-  'CornersOut',
-  'Cpu',
-  'CreditCard',
-  'Crop',
-  'Crosshair',
-  'CrosshairSimple',
-  'Crown',
-  'CrownSimple',
-  'Cube',
-  'CurrencyBtc',
-  'CurrencyCircleDollar',
-  'CurrencyCny',
-  'CurrencyDollar',
-  'CurrencyDollarSimple',
-  'CurrencyEth',
-  'CurrencyEur',
-  'CurrencyGbp',
-  'CurrencyInr',
-  'CurrencyJpy',
-  'CurrencyKrw',
-  'CurrencyKzt',
-  'CurrencyNgn',
-  'CurrencyRub',
-  'Cursor',
-  'CursorText',
-  'Cylinder',
-  'Database',
-  'Desktop',
-  'DesktopTower',
-  'Detective',
-  'DeviceMobile',
-  'DeviceMobileCamera',
-  'DeviceMobileSpeaker',
-  'DeviceTablet',
-  'DeviceTabletCamera',
-  'DeviceTabletSpeaker',
-  'Diamond',
-  'DiamondsFour',
-  'DiceFive',
-  'DiceFour',
-  'DiceOne',
-  'DiceSix',
-  'DiceThree',
-  'DiceTwo',
-  'Disc',
-  'DiscordLogo',
-  'Divide',
-  'Dog',
-  'Door',
-  'DotsNine',
-  'DotsSix',
-  'DotsSixVertical',
-  'DotsThree',
-  'DotsThreeCircle',
-  'DotsThreeOutline',
-  'DotsThreeVertical',
-  'Download',
-  'DownloadSimple',
-  'DribbbleLogo',
-  'Drop',
-  'DropHalf',
-  'DropHalfBottom',
-  'Ear',
-  'EarSlash',
-  'Egg',
-  'EggCrack',
-  'Eject',
-  'EjectSimple',
-  'Envelope',
-  'EnvelopeOpen',
-  'EnvelopeSimple',
-  'EnvelopeSimpleOpen',
-  'Equalizer',
-  'Equals',
-  'Eraser',
-  'Exam',
-  'Export',
-  'Eye',
-  'EyeClosed',
-  'EyeSlash',
-  'Eyedropper',
-  'EyedropperSample',
-  'Eyeglasses',
-  'FaceMask',
-  'FacebookLogo',
-  'Factory',
-  'Faders',
-  'FadersHorizontal',
-  'FastForward',
-  'FastForwardCircle',
-  'FigmaLogo',
-  'File',
-  'FileArrowDown',
-  'FileArrowUp',
-  'FileAudio',
-  'FileCloud',
-  'FileCode',
-  'FileCss',
-  'FileCsv',
-  'FileDoc',
-  'FileDotted',
-  'FileHtml',
-  'FileImage',
-  'FileJpg',
-  'FileJs',
-  'FileJsx',
-  'FileLock',
-  'FileMinus',
-  'FilePdf',
-  'FilePlus',
-  'FilePng',
-  'FilePpt',
-  'FileRs',
-  'FileSearch',
-  'FileText',
-  'FileTs',
-  'FileTsx',
-  'FileVideo',
-  'FileVue',
-  'FileX',
-  'FileXls',
-  'FileZip',
-  'Files',
-  'FilmScript',
-  'FilmSlate',
-  'FilmStrip',
-  'Fingerprint',
-  'FingerprintSimple',
-  'FinnTheHuman',
-  'Fire',
-  'FireSimple',
-  'FirstAid',
-  'FirstAidKit',
-  'Fish',
-  'FishSimple',
-  'Flag',
-  'FlagBanner',
-  'FlagCheckered',
-  'Flame',
-  'Flashlight',
-  'Flask',
-  'FloppyDisk',
-  'FloppyDiskBack',
-  'FlowArrow',
-  'Flower',
-  'FlowerLotus',
-  'FlyingSaucer',
-  'Folder',
-  'FolderDotted',
-  'FolderLock',
-  'FolderMinus',
-  'FolderNotch',
-  'FolderNotchMinus',
-  'FolderNotchOpen',
-  'FolderNotchPlus',
-  'FolderOpen',
-  'FolderPlus',
-  'FolderSimple',
-  'FolderSimpleDotted',
-  'FolderSimpleLock',
-  'FolderSimpleMinus',
-  'FolderSimplePlus',
-  'FolderSimpleStar',
-  'FolderSimpleUser',
-  'FolderStar',
-  'FolderUser',
-  'Folders',
-  'Football',
-  'ForkKnife',
-  'FrameCorners',
-  'FramerLogo',
-  'Function',
-  'Funnel',
-  'FunnelSimple',
-  'GameController',
-  'GasPump',
-  'Gauge',
-  'Gear',
-  'GearSix',
-  'GenderFemale',
-  'GenderIntersex',
-  'GenderMale',
-  'GenderNeuter',
-  'GenderNonbinary',
-  'GenderTransgender',
-  'Ghost',
-  'Gif',
-  'Gift',
-  'GitBranch',
-  'GitCommit',
-  'GitDiff',
-  'GitFork',
-  'GitMerge',
-  'GitPullRequest',
-  'GithubLogo',
-  'GitlabLogo',
-  'GitlabLogoSimple',
-  'Globe',
-  'GlobeHemisphereEast',
-  'GlobeHemisphereWest',
-  'GlobeSimple',
-  'GlobeStand',
-  'GoogleChromeLogo',
-  'GoogleLogo',
-  'GooglePhotosLogo',
-  'GooglePlayLogo',
-  'GooglePodcastsLogo',
-  'Gradient',
-  'GraduationCap',
-  'Graph',
-  'GridFour',
-  'Hamburger',
-  'Hand',
-  'HandEye',
-  'HandFist',
-  'HandGrabbing',
-  'HandPalm',
-  'HandPointing',
-  'HandSoap',
-  'HandWaving',
-  'Handbag',
-  'HandbagSimple',
-  'HandsClapping',
-  'Handshake',
-  'HardDrive',
-  'HardDrives',
-  'Hash',
-  'HashStraight',
-  'Headlights',
-  'Headphones',
-  'Headset',
-  'Heart',
-  'HeartBreak',
-  'HeartStraight',
-  'HeartStraightBreak',
-  'Heartbeat',
-  'Hexagon',
-  'HighlighterCircle',
-  'Horse',
-  'Hourglass',
-  'HourglassHigh',
-  'HourglassLow',
-  'HourglassMedium',
-  'HourglassSimple',
-  'HourglassSimpleHigh',
-  'HourglassSimpleLow',
-  'House',
-  'HouseLine',
-  'HouseSimple',
-  'IdentificationBadge',
-  'IdentificationCard',
-  'Image',
-  'ImageSquare',
-  'Infinity',
-  'Info',
-  'InstagramLogo',
-  'Intersect',
-  'Jeep',
-  'Kanban',
-  'Key',
-  'KeyReturn',
-  'Keyboard',
-  'Keyhole',
-  'Knife',
-  'Ladder',
-  'LadderSimple',
-  'Lamp',
-  'Laptop',
-  'Layout',
-  'Leaf',
-  'Lifebuoy',
-  'Lightbulb',
-  'LightbulbFilament',
-  'Lightning',
-  'LightningSlash',
-  'LineSegment',
-  'LineSegments',
-  'Link',
-  'LinkBreak',
-  'LinkSimple',
-  'LinkSimpleBreak',
-  'LinkSimpleHorizontal',
-  'LinkedinLogo',
-  'LinuxLogo',
-  'List',
-  'ListBullets',
-  'ListChecks',
-  'ListDashes',
-  'ListNumbers',
-  'ListPlus',
-  'Lock',
-  'LockKey',
-  'LockKeyOpen',
-  'LockLaminated',
-  'LockLaminatedOpen',
-  'LockOpen',
-  'LockSimple',
-  'LockSimpleOpen',
-  'MagicWand',
-  'Magnet',
-  'MagnetStraight',
-  'MagnifyingGlass',
-  'MagnifyingGlassMinus',
-  'MagnifyingGlassPlus',
-  'MapPin',
-  'MapPinLine',
-  'MapTrifold',
-  'MarkerCircle',
-  'Martini',
-  'MaskHappy',
-  'MaskSad',
-  'MathOperations',
-  'Medal',
-  'MediumLogo',
-  'Megaphone',
-  'MegaphoneSimple',
-  'MessengerLogo',
-  'Microphone',
-  'MicrophoneSlash',
-  'MicrophoneStage',
-  'MicrosoftExcelLogo',
-  'MicrosoftTeamsLogo',
-  'MicrosoftWordLogo',
-  'Minus',
-  'MinusCircle',
-  'Money',
-  'Monitor',
-  'MonitorPlay',
-  'Moon',
-  'MoonStars',
-  'Mountains',
-  'Mouse',
-  'MouseSimple',
-  'MusicNote',
-  'MusicNoteSimple',
-  'MusicNotes',
-  'MusicNotesPlus',
-  'MusicNotesSimple',
-  'NavigationArrow',
-  'Needle',
-  'Newspaper',
-  'NewspaperClipping',
-  'Note',
-  'NoteBlank',
-  'NotePencil',
-  'Notebook',
-  'Notepad',
-  'Notification',
-  'NumberCircleEight',
-  'NumberCircleFive',
-  'NumberCircleFour',
-  'NumberCircleNine',
-  'NumberCircleOne',
-  'NumberCircleSeven',
-  'NumberCircleSix',
-  'NumberCircleThree',
-  'NumberCircleTwo',
-  'NumberCircleZero',
-  'NumberEight',
-  'NumberFive',
-  'NumberFour',
-  'NumberNine',
-  'NumberOne',
-  'NumberSeven',
-  'NumberSix',
-  'NumberSquareEight',
-  'NumberSquareFive',
-  'NumberSquareFour',
-  'NumberSquareNine',
-  'NumberSquareOne',
-  'NumberSquareSeven',
-  'NumberSquareSix',
-  'NumberSquareThree',
-  'NumberSquareTwo',
-  'NumberSquareZero',
-  'NumberThree',
-  'NumberTwo',
-  'NumberZero',
-  'Nut',
-  'NyTimesLogo',
-  'Octagon',
-  'Option',
-  'Package',
-  'PaintBrush',
-  'PaintBrushBroad',
-  'PaintBrushHousehold',
-  'PaintBucket',
-  'PaintRoller',
-  'Palette',
-  'PaperPlane',
-  'PaperPlaneRight',
-  'PaperPlaneTilt',
-  'Paperclip',
-  'PaperclipHorizontal',
-  'Parachute',
-  'Password',
-  'Path',
-  'Pause',
-  'PauseCircle',
-  'PawPrint',
-  'Peace',
-  'Pen',
-  'PenNib',
-  'PenNibStraight',
-  'Pencil',
-  'PencilCircle',
-  'PencilLine',
-  'PencilSimple',
-  'PencilSimpleLine',
-  'Percent',
-  'Person',
-  'PersonSimple',
-  'PersonSimpleRun',
-  'PersonSimpleWalk',
-  'Perspective',
-  'Phone',
-  'PhoneCall',
-  'PhoneDisconnect',
-  'PhoneIncoming',
-  'PhoneOutgoing',
-  'PhoneSlash',
-  'PhoneX',
-  'PhosphorLogo',
-  'PianoKeys',
-  'PictureInPicture',
-  'Pill',
-  'PinterestLogo',
-  'Pinwheel',
-  'Pizza',
-  'Placeholder',
-  'Planet',
-  'Play',
-  'PlayCircle',
-  'Playlist',
-  'Plug',
-  'Plugs',
-  'PlugsConnected',
-  'Plus',
-  'PlusCircle',
-  'PlusMinus',
-  'PokerChip',
-  'PoliceCar',
-  'Polygon',
-  'Popcorn',
-  'Power',
-  'Prescription',
-  'Presentation',
-  'PresentationChart',
-  'Printer',
-  'Prohibit',
-  'ProhibitInset',
-  'ProjectorScreen',
-  'ProjectorScreenChart',
-  'PushPin',
-  'PushPinSimple',
-  'PushPinSimpleSlash',
-  'PushPinSlash',
-  'PuzzlePiece',
-  'QrCode',
-  'Question',
-  'Queue',
-  'Quotes',
-  'Radical',
-  'Radio',
-  'RadioButton',
-  'Rainbow',
-  'RainbowCloud',
-  'Receipt',
-  'Record',
-  'Rectangle',
-  'Recycle',
-  'RedditLogo',
-  'Repeat',
-  'RepeatOnce',
-  'Rewind',
-  'RewindCircle',
-  'Robot',
-  'Rocket',
-  'RocketLaunch',
-  'Rows',
-  'Rss',
-  'RssSimple',
-  'Rug',
-  'Ruler',
-  'Scales',
-  'Scan',
-  'Scissors',
-  'Screencast',
-  'ScribbleLoop',
-  'Scroll',
-  'Selection',
-  'SelectionAll',
-  'SelectionBackground',
-  'SelectionForeground',
-  'SelectionInverse',
-  'SelectionPlus',
-  'SelectionSlash',
-  'Share',
-  'ShareNetwork',
-  'Shield',
-  'ShieldCheck',
-  'ShieldCheckered',
-  'ShieldChevron',
-  'ShieldPlus',
-  'ShieldSlash',
-  'ShieldStar',
-  'ShieldWarning',
-  'ShoppingBag',
-  'ShoppingBagOpen',
-  'ShoppingCart',
-  'ShoppingCartSimple',
-  'Shower',
-  'Shuffle',
-  'ShuffleAngular',
-  'ShuffleSimple',
-  'Sidebar',
-  'SidebarSimple',
-  'SignIn',
-  'SignOut',
-  'Signpost',
-  'SimCard',
-  'SketchLogo',
-  'SkipBack',
-  'SkipBackCircle',
-  'SkipForward',
-  'SkipForwardCircle',
-  'Skull',
-  'SlackLogo',
-  'Sliders',
-  'SlidersHorizontal',
-  'Smiley',
-  'SmileyBlank',
-  'SmileyMeh',
-  'SmileyNervous',
-  'SmileySad',
-  'SmileySticker',
-  'SmileyWink',
-  'SmileyXEyes',
-  'SnapchatLogo',
-  'Snowflake',
-  'SoccerBall',
-  'SortAscending',
-  'SortDescending',
-  'Spade',
-  'Sparkle',
-  'SpeakerHigh',
-  'SpeakerLow',
-  'SpeakerNone',
-  'SpeakerSimpleHigh',
-  'SpeakerSimpleLow',
-  'SpeakerSimpleNone',
-  'SpeakerSimpleSlash',
-  'SpeakerSimpleX',
-  'SpeakerSlash',
-  'SpeakerX',
-  'Spinner',
-  'SpinnerGap',
-  'Spiral',
-  'SpotifyLogo',
-  'Square',
-  'SquareHalf',
-  'SquareHalfBottom',
-  'SquareLogo',
-  'SquaresFour',
-  'Stack',
-  'StackOverflowLogo',
-  'StackSimple',
-  'Stamp',
-  'Star',
-  'StarFour',
-  'StarHalf',
-  'Sticker',
-  'Stop',
-  'StopCircle',
-  'Storefront',
-  'Strategy',
-  'StripeLogo',
-  'Student',
-  'Suitcase',
-  'SuitcaseSimple',
-  'Sun',
-  'SunDim',
-  'SunHorizon',
-  'Sunglasses',
-  'Swap',
-  'Swatches',
-  'Sword',
-  'Syringe',
-  'TShirt',
-  'Table',
-  'Tabs',
-  'Tag',
-  'TagChevron',
-  'TagSimple',
-  'Target',
-  'Taxi',
-  'TelegramLogo',
-  'Television',
-  'TelevisionSimple',
-  'TennisBall',
-  'Terminal',
-  'TerminalWindow',
-  'TestTube',
-  'TextAa',
-  'TextAlignCenter',
-  'TextAlignJustify',
-  'TextAlignLeft',
-  'TextAlignRight',
-  'TextBolder',
-  'TextH',
-  'TextHFive',
-  'TextHFour',
-  'TextHOne',
-  'TextHSix',
-  'TextHThree',
-  'TextHTwo',
-  'TextIndent',
-  'TextItalic',
-  'TextOutdent',
-  'TextStrikethrough',
-  'TextT',
-  'TextUnderline',
-  'Textbox',
-  'Thermometer',
-  'ThermometerCold',
-  'ThermometerHot',
-  'ThermometerSimple',
-  'ThumbsDown',
-  'ThumbsUp',
-  'Ticket',
-  'TiktokLogo',
-  'Timer',
-  'ToggleLeft',
-  'ToggleRight',
-  'Toilet',
-  'ToiletPaper',
-  'Tote',
-  'ToteSimple',
-  'TrademarkRegistered',
-  'TrafficCone',
-  'TrafficSign',
-  'TrafficSignal',
-  'Train',
-  'TrainRegional',
-  'TrainSimple',
-  'Translate',
-  'Trash',
-  'TrashSimple',
-  'Tray',
-  'Tree',
-  'TreeEvergreen',
-  'TreeStructure',
-  'TrendDown',
-  'TrendUp',
-  'Triangle',
-  'Trophy',
-  'Truck',
-  'TwitchLogo',
-  'TwitterLogo',
-  'Umbrella',
-  'UmbrellaSimple',
-  'Upload',
-  'UploadSimple',
-  'User',
-  'UserCircle',
-  'UserCircleGear',
-  'UserCircleMinus',
-  'UserCirclePlus',
-  'UserFocus',
-  'UserGear',
-  'UserList',
-  'UserMinus',
-  'UserPlus',
-  'UserRectangle',
-  'UserSquare',
-  'UserSwitch',
-  'Users',
-  'UsersFour',
-  'UsersThree',
-  'Vault',
-  'Vibrate',
-  'VideoCamera',
-  'VideoCameraSlash',
-  'Vignette',
-  'Voicemail',
-  'Volleyball',
-  'Wall',
-  'Wallet',
-  'Warning',
-  'WarningCircle',
-  'WarningOctagon',
-  'Watch',
-  'WaveSawtooth',
-  'WaveSine',
-  'WaveSquare',
-  'WaveTriangle',
-  'Waves',
-  'Webcam',
-  'WhatsappLogo',
-  'Wheelchair',
-  'WifiHigh',
-  'WifiLow',
-  'WifiMedium',
-  'WifiNone',
-  'WifiSlash',
-  'WifiX',
-  'Wind',
-  'WindowsLogo',
-  'Wine',
-  'Wrench',
-  'X',
-  'XCircle',
-  'XSquare',
-  'YinYang',
-  'YoutubeLogo',
-];
-var moduleBaseUrl = 'https://framer.com/m/phosphor-icons/';
-var weightOptions = ['thin', 'light', 'regular', 'bold', 'fill', 'duotone',];
-var lowercaseIconKeyPairs = iconKeys.reduce((res, key,) => {
-  res[key.toLowerCase()] = key;
-  return res;
-}, {},);
-function Icon(props,) {
-  const { color, selectByList, iconSearch, iconSelection, onClick, onMouseDown, onMouseUp, onMouseEnter, onMouseLeave, weight, mirrored, } =
-    props;
-  const isMounted = useRef(false,);
-  const iconKey = useIconSelection(iconKeys, selectByList, iconSearch, iconSelection, lowercaseIconKeyPairs,);
-  const [SelectedIcon, setSelectedIcon,] = useState(iconKey === 'Home' ? House_default(React,) : null,);
-  async function importModule() {
-    try {
-      const version = '0.0.50';
-      const iconModuleUrl = `${moduleBaseUrl}${iconKey}.js@${version}`;
-      const module = await import(
-        /* webpackIgnore: true */
-        iconModuleUrl
-      );
-      if (isMounted.current) {
-        setSelectedIcon(module.default(React,),);
-      }
-    } catch (err) {
-      if (isMounted.current) {
-        setSelectedIcon(null,);
-      }
-    }
-  }
-  useEffect(() => {
-    isMounted.current = true;
-    importModule();
-    return () => {
-      isMounted.current = false;
-    };
-  }, [iconKey,],);
-  const isOnCanvas = RenderTarget.current() === RenderTarget.canvas;
-  const emptyState = isOnCanvas ? /* @__PURE__ */ _jsx(NullState, {},) : null;
-  return /* @__PURE__ */ _jsx(motion.div, {
-    style: { display: 'contents', },
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    onMouseDown,
-    onMouseUp,
-    children: SelectedIcon
-      ? /* @__PURE__ */ _jsx('svg', {
-        xmlns: 'http://www.w3.org/2000/svg',
-        viewBox: '0 0 256 256',
-        style: {
-          userSelect: 'none',
-          width: '100%',
-          height: '100%',
-          display: 'inline-block',
-          fill: color,
-          flexShrink: 0,
-          transform: mirrored ? 'scale(-1, 1)' : void 0,
-        },
-        focusable: 'false',
-        color,
-        children: /* @__PURE__ */ _jsx(SelectedIcon, { color, weight, },),
-      },)
-      : emptyState,
-  },);
-}
-Icon.displayName = 'Phosphor';
-Icon.defaultProps = {
-  width: 24,
-  height: 24,
-  iconSelection: 'House',
-  iconSearch: 'House',
-  color: '#66F',
-  selectByList: true,
-  weight: 'regular',
-  mirrored: false,
-};
-addPropertyControls(Icon, {
-  selectByList: {
-    type: ControlType.Boolean,
-    title: 'Select',
-    enabledTitle: 'List',
-    disabledTitle: 'Search',
-    defaultValue: Icon.defaultProps.selectByList,
-  },
-  iconSelection: {
-    type: ControlType.Enum,
-    options: iconKeys,
-    defaultValue: Icon.defaultProps.iconSelection,
-    title: 'Name',
-    hidden: ({ selectByList, },) => !selectByList,
-    description: 'Find every icon name on the [Phosphor site](https://phosphoricons.com/)',
-  },
-  iconSearch: {
-    type: ControlType.String,
-    title: 'Name',
-    placeholder: 'Menu, Wifi, Box\u2026',
-    hidden: ({ selectByList, },) => selectByList,
-  },
-  color: { type: ControlType.Color, title: 'Color', defaultValue: Icon.defaultProps.color, },
-  weight: {
-    type: ControlType.Enum,
-    title: 'Weight',
-    optionTitles: weightOptions.map((piece,) => piece.charAt(0,).toUpperCase() + piece.slice(1,)),
-    options: weightOptions,
-    defaultValue: Icon.defaultProps.weight,
-  },
-  mirrored: { type: ControlType.Boolean, enabledTitle: 'Yes', disabledTitle: 'No', defaultValue: Icon.defaultProps.mirrored, },
-  ...defaultEvents,
-},);
-
-// https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
 var PhosphorFonts = getFonts(Icon,);
-var MotionDivWithFX = withFX(motion2.div,);
+var MotionDivWithFX = withFX(motion.div,);
 var RichTextWithFX = withFX(RichText,);
 var cycleOrder = ['QJ6X5OV2Q', 'jNQqNcpjl',];
 var serializationHash = 'framer-wYQyN';
@@ -1308,12 +46,12 @@ var animation2 = { opacity: 0, rotate: 0, rotateX: 0, rotateY: 0, scale: 1, tran
 var transition4 = { damping: 40, delay: 0.3, mass: 1, stiffness: 400, type: 'spring', };
 var animation3 = { opacity: 0, rotate: 0, rotateX: 0, rotateY: 0, scale: 1, transition: transition4, x: 0, y: 20, };
 var Transition = ({ value, children, },) => {
-  const config = React2.useContext(MotionConfigContext,);
+  const config = React.useContext(MotionConfigContext,);
   const transition = value !== null && value !== void 0 ? value : config.transition;
-  const contextValue = React2.useMemo(() => ({ ...config, transition, }), [JSON.stringify(transition,),],);
-  return /* @__PURE__ */ _jsx2(MotionConfigContext.Provider, { value: contextValue, children, },);
+  const contextValue = React.useMemo(() => ({ ...config, transition, }), [JSON.stringify(transition,),],);
+  return /* @__PURE__ */ _jsx(MotionConfigContext.Provider, { value: contextValue, children, },);
 };
-var Variants = motion2(React2.Fragment,);
+var Variants = motion(React.Fragment,);
 var humanReadableVariantMap = { Desktop: 'QJ6X5OV2Q', Tablet: 'jNQqNcpjl', };
 var getProps = ({ height, id, width, ...props },) => {
   var _humanReadableVariantMap_props_variant, _ref;
@@ -1330,7 +68,7 @@ var getProps = ({ height, id, width, ...props },) => {
   };
 };
 var createLayoutDependency = (props, variants,) => variants.join('-',) + props.layoutDependency;
-var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
+var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
   const { activeLocale, setLocale, } = useLocaleInfo();
   const { style, className, layoutId, variant, ...restProps } = getProps(props,);
   const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, variants, } = useVariantState({
@@ -1340,18 +78,18 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
     variantClassNames,
   },);
   const layoutDependency = createLayoutDependency(props, variants,);
-  const ref1 = React2.useRef(null,);
-  const defaultLayoutId = React2.useId();
+  const ref1 = React.useRef(null,);
+  const defaultLayoutId = React.useId();
   const sharedStyleClassNames = [];
   const componentViewport = useComponentViewport();
-  return /* @__PURE__ */ _jsx2(LayoutGroup, {
+  return /* @__PURE__ */ _jsx(LayoutGroup, {
     id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
-    children: /* @__PURE__ */ _jsx2(Variants, {
+    children: /* @__PURE__ */ _jsx(Variants, {
       animate: variants,
       initial: false,
-      children: /* @__PURE__ */ _jsx2(Transition, {
+      children: /* @__PURE__ */ _jsx(Transition, {
         value: transition1,
-        children: /* @__PURE__ */ _jsxs(motion2.div, {
+        children: /* @__PURE__ */ _jsxs(motion.div, {
           ...restProps,
           className: cx(serializationHash, ...sharedStyleClassNames, 'framer-1b5ydyb', className, classNames,),
           'data-framer-name': 'Desktop',
@@ -1366,7 +104,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
           style: { backgroundColor: 'rgb(255, 255, 255)', ...style, },
           ...addPropertyOverrides({ jNQqNcpjl: { 'data-framer-name': 'Tablet', }, }, baseVariant, gestureVariant,),
           children: [
-            /* @__PURE__ */ _jsxs(motion2.div, {
+            /* @__PURE__ */ _jsxs(motion.div, {
               className: 'framer-1wzq7ls',
               'data-framer-name': 'Header',
               layoutDependency,
@@ -1387,7 +125,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                   layoutId: 'j6rISou1p',
                   transformTemplate: transformTemplate1,
                   children: [
-                    /* @__PURE__ */ _jsx2(Image, {
+                    /* @__PURE__ */ _jsx(Image, {
                       background: { alt: '', fit: 'fill', intrinsicHeight: 120, intrinsicWidth: 120, },
                       className: 'framer-emhnvy',
                       layoutDependency,
@@ -1399,12 +137,12 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                         borderTopRightRadius: 41,
                       },
                     },),
-                    /* @__PURE__ */ _jsx2(motion2.div, {
+                    /* @__PURE__ */ _jsx(motion.div, {
                       className: 'framer-6eneq3',
                       'data-framer-name': 'Twitter',
                       layoutDependency,
                       layoutId: 'ODS9Kq_Yt',
-                      children: /* @__PURE__ */ _jsx2(motion2.div, {
+                      children: /* @__PURE__ */ _jsx(motion.div, {
                         className: 'framer-5mjn9m',
                         'data-framer-name': 'Button Icon',
                         layoutDependency,
@@ -1416,12 +154,12 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                           borderTopLeftRadius: '50%',
                           borderTopRightRadius: '50%',
                         },
-                        children: /* @__PURE__ */ _jsx2(ComponentViewportProvider, {
-                          children: /* @__PURE__ */ _jsx2(motion2.div, {
+                        children: /* @__PURE__ */ _jsx(ComponentViewportProvider, {
+                          children: /* @__PURE__ */ _jsx(motion.div, {
                             className: 'framer-yuqshr-container',
                             layoutDependency,
                             layoutId: 'ZEz3L23bN-container',
-                            children: /* @__PURE__ */ _jsx2(Icon, {
+                            children: /* @__PURE__ */ _jsx(Icon, {
                               color: 'var(--token-fb4b67b5-91ba-4b73-b4a6-f55417ea1c0c, rgb(102, 102, 102))',
                               height: '100%',
                               iconSearch: 'House',
@@ -1440,7 +178,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                     },),
                   ],
                 },),
-                /* @__PURE__ */ _jsx2(RichTextWithFX, {
+                /* @__PURE__ */ _jsx(RichTextWithFX, {
                   __framer__animate: { transition: transition3, },
                   __framer__animateOnce: true,
                   __framer__enter: animation,
@@ -1451,8 +189,8 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                   __perspectiveFX: false,
                   __smartComponentFX: true,
                   __targetOpacity: 1,
-                  children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                    children: /* @__PURE__ */ _jsxs(motion2.h3, {
+                  children: /* @__PURE__ */ _jsx(React.Fragment, {
+                    children: /* @__PURE__ */ _jsxs(motion.h3, {
                       style: {
                         '--font-selector': 'R0Y7SW50ZXItNjAw',
                         '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1465,11 +203,11 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                       },
                       children: [
                         'I\'m Dana Parker, a designer at ',
-                        /* @__PURE__ */ _jsx2(Link, {
+                        /* @__PURE__ */ _jsx(Link, {
                           href: 'https://www.framer.com/',
                           openInNewTab: true,
                           smoothScroll: false,
-                          children: /* @__PURE__ */ _jsx2(motion2.a, { children: 'Framer', },),
+                          children: /* @__PURE__ */ _jsx(motion.a, { children: 'Framer', },),
                         },),
                         '. I am focusing on creating the best website building tool with my talented team. A high level of craft is very important to me and my work.',
                       ],
@@ -1517,17 +255,17 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
               },
               transformTemplate: transformTemplate1,
               children: [
-                /* @__PURE__ */ _jsxs(motion2.div, {
+                /* @__PURE__ */ _jsxs(motion.div, {
                   className: 'framer-1of4spd',
                   'data-framer-name': 'Bookmarks',
                   layoutDependency,
                   layoutId: 'fR7JbRnxe',
                   style: { borderBottomLeftRadius: 28, borderBottomRightRadius: 28, borderTopLeftRadius: 28, borderTopRightRadius: 28, },
                   children: [
-                    /* @__PURE__ */ _jsx2(RichText, {
+                    /* @__PURE__ */ _jsx(RichText, {
                       __fromCanvasComponent: true,
-                      children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                        children: /* @__PURE__ */ _jsx2(motion2.p, {
+                      children: /* @__PURE__ */ _jsx(React.Fragment, {
+                        children: /* @__PURE__ */ _jsx(motion.p, {
                           style: {
                             '--font-selector': 'R0Y7SW50ZXItNTAw',
                             '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1557,17 +295,17 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                       verticalAlignment: 'top',
                       withExternalLayout: true,
                     },),
-                    /* @__PURE__ */ _jsxs(motion2.div, {
+                    /* @__PURE__ */ _jsxs(motion.div, {
                       className: 'framer-e223h2',
                       'data-framer-name': 'Bookmark',
                       layoutDependency,
                       layoutId: 'Bb4DRr77N',
                       children: [
-                        /* @__PURE__ */ _jsx2(motion2.div, {
+                        /* @__PURE__ */ _jsx(motion.div, {
                           className: 'framer-1xokyxn',
                           layoutDependency,
                           layoutId: 'Qwexip93p',
-                          children: /* @__PURE__ */ _jsx2(Image, {
+                          children: /* @__PURE__ */ _jsx(Image, {
                             background: { alt: '', fit: 'fill', },
                             className: 'framer-10r2vr8',
                             layoutDependency,
@@ -1580,19 +318,19 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                             },
                           },),
                         },),
-                        /* @__PURE__ */ _jsx2(motion2.div, {
+                        /* @__PURE__ */ _jsx(motion.div, {
                           className: 'framer-47n4du',
                           layoutDependency,
                           layoutId: 'C6uSsaOq2',
-                          children: /* @__PURE__ */ _jsxs(motion2.div, {
+                          children: /* @__PURE__ */ _jsxs(motion.div, {
                             className: 'framer-1w2t1oi',
                             layoutDependency,
                             layoutId: 'bdCvztvz2',
                             children: [
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.h3, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.h3, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNjAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1620,10 +358,10 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                                 verticalAlignment: 'top',
                                 withExternalLayout: true,
                               },),
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.p, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.p, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNTAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1656,17 +394,17 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                         },),
                       ],
                     },),
-                    /* @__PURE__ */ _jsxs(motion2.div, {
+                    /* @__PURE__ */ _jsxs(motion.div, {
                       className: 'framer-vyjk6',
                       'data-framer-name': 'Bookmark Copy',
                       layoutDependency,
                       layoutId: 'ZXyBL3UxK',
                       children: [
-                        /* @__PURE__ */ _jsx2(motion2.div, {
+                        /* @__PURE__ */ _jsx(motion.div, {
                           className: 'framer-1nnbol7',
                           layoutDependency,
                           layoutId: 'GbsCPfY0X',
-                          children: /* @__PURE__ */ _jsx2(Image, {
+                          children: /* @__PURE__ */ _jsx(Image, {
                             background: { alt: '', fit: 'fill', },
                             className: 'framer-1pt1hk2',
                             layoutDependency,
@@ -1679,19 +417,19 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                             },
                           },),
                         },),
-                        /* @__PURE__ */ _jsx2(motion2.div, {
+                        /* @__PURE__ */ _jsx(motion.div, {
                           className: 'framer-gu1odh',
                           layoutDependency,
                           layoutId: 'diOrHb28Y',
-                          children: /* @__PURE__ */ _jsxs(motion2.div, {
+                          children: /* @__PURE__ */ _jsxs(motion.div, {
                             className: 'framer-6jxmdw',
                             layoutDependency,
                             layoutId: 'A4L0BOGT4',
                             children: [
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.h3, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.h3, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNjAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1719,10 +457,10 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                                 verticalAlignment: 'top',
                                 withExternalLayout: true,
                               },),
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.p, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.p, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNTAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1757,22 +495,22 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                     },),
                   ],
                 },),
-                /* @__PURE__ */ _jsx2(motion2.div, {
+                /* @__PURE__ */ _jsx(motion.div, {
                   className: 'framer-vadw1i',
                   'data-framer-name': 'Sidebar',
                   layoutDependency,
                   layoutId: 'VzEzxbLPF',
-                  children: /* @__PURE__ */ _jsxs(motion2.div, {
+                  children: /* @__PURE__ */ _jsxs(motion.div, {
                     className: 'framer-1ffgcrw',
                     'data-framer-name': 'Friends',
                     layoutDependency,
                     layoutId: 'Wl_VW_8EB',
                     style: { borderBottomLeftRadius: 28, borderBottomRightRadius: 28, borderTopLeftRadius: 28, borderTopRightRadius: 28, },
                     children: [
-                      /* @__PURE__ */ _jsx2(RichText, {
+                      /* @__PURE__ */ _jsx(RichText, {
                         __fromCanvasComponent: true,
-                        children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                          children: /* @__PURE__ */ _jsx2(motion2.p, {
+                        children: /* @__PURE__ */ _jsx(React.Fragment, {
+                          children: /* @__PURE__ */ _jsx(motion.p, {
                             style: {
                               '--font-selector': 'R0Y7SW50ZXItNTAw',
                               '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1802,18 +540,18 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                         verticalAlignment: 'top',
                         withExternalLayout: true,
                       },),
-                      /* @__PURE__ */ _jsxs(motion2.div, {
+                      /* @__PURE__ */ _jsxs(motion.div, {
                         className: 'framer-1j9mdi3',
                         layoutDependency,
                         layoutId: 'FZhY17jix',
                         children: [
-                          /* @__PURE__ */ _jsxs(motion2.div, {
+                          /* @__PURE__ */ _jsxs(motion.div, {
                             className: 'framer-1c8di1n',
                             'data-framer-name': 'Friend',
                             layoutDependency,
                             layoutId: 'Od496hw91',
                             children: [
-                              /* @__PURE__ */ _jsx2(Image, {
+                              /* @__PURE__ */ _jsx(Image, {
                                 background: { alt: '', fit: 'fill', intrinsicHeight: 400, intrinsicWidth: 400, },
                                 className: 'framer-tgjfdb',
                                 layoutDependency,
@@ -1825,10 +563,10 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                                   borderTopRightRadius: 20,
                                 },
                               },),
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.p, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.p, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNTAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1858,13 +596,13 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                               },),
                             ],
                           },),
-                          /* @__PURE__ */ _jsxs(motion2.div, {
+                          /* @__PURE__ */ _jsxs(motion.div, {
                             className: 'framer-kl86d3',
                             'data-framer-name': 'Friend',
                             layoutDependency,
                             layoutId: 'g2haIhUiP',
                             children: [
-                              /* @__PURE__ */ _jsx2(Image, {
+                              /* @__PURE__ */ _jsx(Image, {
                                 background: { alt: '', fit: 'fill', intrinsicHeight: 400, intrinsicWidth: 400, },
                                 className: 'framer-1peibnf',
                                 layoutDependency,
@@ -1876,10 +614,10 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                                   borderTopRightRadius: 20,
                                 },
                               },),
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.p, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.p, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNTAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1909,13 +647,13 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                               },),
                             ],
                           },),
-                          /* @__PURE__ */ _jsxs(motion2.div, {
+                          /* @__PURE__ */ _jsxs(motion.div, {
                             className: 'framer-13oeh66',
                             'data-framer-name': 'Friend',
                             layoutDependency,
                             layoutId: 'c_MNpcuvQ',
                             children: [
-                              /* @__PURE__ */ _jsx2(Image, {
+                              /* @__PURE__ */ _jsx(Image, {
                                 background: { alt: '', fit: 'fill', intrinsicHeight: 400, intrinsicWidth: 400, },
                                 className: 'framer-17a6c1i',
                                 layoutDependency,
@@ -1927,10 +665,10 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                                   borderTopRightRadius: 20,
                                 },
                               },),
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.p, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.p, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNTAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -1960,13 +698,13 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                               },),
                             ],
                           },),
-                          /* @__PURE__ */ _jsxs(motion2.div, {
+                          /* @__PURE__ */ _jsxs(motion.div, {
                             className: 'framer-feaqek',
                             'data-framer-name': 'Friend',
                             layoutDependency,
                             layoutId: 'ChX4_mOC8',
                             children: [
-                              /* @__PURE__ */ _jsx2(Image, {
+                              /* @__PURE__ */ _jsx(Image, {
                                 background: { alt: '', fit: 'fill', intrinsicHeight: 400, intrinsicWidth: 400, },
                                 className: 'framer-1saurrb',
                                 layoutDependency,
@@ -1978,10 +716,10 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
                                   borderTopRightRadius: 20,
                                 },
                               },),
-                              /* @__PURE__ */ _jsx2(RichText, {
+                              /* @__PURE__ */ _jsx(RichText, {
                                 __fromCanvasComponent: true,
-                                children: /* @__PURE__ */ _jsx2(React2.Fragment, {
-                                  children: /* @__PURE__ */ _jsx2(motion2.p, {
+                                children: /* @__PURE__ */ _jsx(React.Fragment, {
+                                  children: /* @__PURE__ */ _jsx(motion.p, {
                                     style: {
                                       '--font-selector': 'R0Y7SW50ZXItNTAw',
                                       '--framer-font-family': '"Inter", "Inter Placeholder", sans-serif',
@@ -2056,12 +794,12 @@ var css = [
   '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-wYQyN.framer-v-tez7sd .framer-18oyuoj { gap: 0px; } .framer-wYQyN.framer-v-tez7sd .framer-18oyuoj > * { margin: 0px; margin-bottom: calc(60px / 2); margin-top: calc(60px / 2); } .framer-wYQyN.framer-v-tez7sd .framer-18oyuoj > :first-child { margin-top: 0px; } .framer-wYQyN.framer-v-tez7sd .framer-18oyuoj > :last-child { margin-bottom: 0px; } }',
   '.framer-wYQyN[data-border="true"]::after, .framer-wYQyN [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
-var Framerq64yDrOL3 = withCSS(Component2, css, 'framer-wYQyN',);
+var Framerq64yDrOL3 = withCSS(Component, css, 'framer-wYQyN',);
 var stdin_default = Framerq64yDrOL3;
 Framerq64yDrOL3.displayName = 'FullPage';
 Framerq64yDrOL3.defaultProps = { height: 593, width: 1200, };
-addPropertyControls2(Framerq64yDrOL3, {
-  variant: { options: ['QJ6X5OV2Q', 'jNQqNcpjl',], optionTitles: ['Desktop', 'Tablet',], title: 'Variant', type: ControlType2.Enum, },
+addPropertyControls(Framerq64yDrOL3, {
+  variant: { options: ['QJ6X5OV2Q', 'jNQqNcpjl',], optionTitles: ['Desktop', 'Tablet',], title: 'Variant', type: ControlType.Enum, },
 },);
 addFonts(Framerq64yDrOL3, [{
   explicitInter: true,
