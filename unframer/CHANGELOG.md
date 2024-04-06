@@ -1,5 +1,11 @@
 # unframer
 
+## 1.5.0
+
+### Minor Changes
+
+-   give names to framer components
+
 ## 1.4.0
 
 ### Minor Changes

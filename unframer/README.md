@@ -128,6 +128,7 @@ export default function App() {
 
 Known limitations:
 
+
 -   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
 
 ```css
@@ -136,7 +137,7 @@ Known limitations:
 }
 ```
 
--   Instead of using links to your Framer pages you should make links variables and set them when rendering the component. This is because links to Framer pages are not supported in `unframer`.
+-   Instead of using relative links to your Framer components you should either use link variables or absolute links (starting with https://, not links to other Framer pages). This is because links to Framer pages are encoded with opaque ids.
 
 -   Internationalization is not supported
 
