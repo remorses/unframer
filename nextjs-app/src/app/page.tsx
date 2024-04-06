@@ -1,6 +1,7 @@
 'use client'
 
-import { FramerStyles, WithFramerBreakpoints } from 'unframer/dist/react'
+import {  WithFramerBreakpoints } from 'unframer/dist/react'
+import '@/framer/styles.css'
 import { AnimatePresence } from 'unframer'
 
 import Logos from '@/framer/logos'
@@ -30,7 +31,7 @@ export default function Home() {
                 <AnimatePresence>
                     <MenuOverlay />
                 </AnimatePresence>
-                <FramerStyles Components={[Logos, Comp]} />
+
                 <div className='relative h-[500px]'>
                     <Test.Responsive
                         variants={{

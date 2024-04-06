@@ -9,60 +9,11 @@ import {
     useMemo,
     useSyncExternalStore,
 } from 'react'
-
-function getFonts(component) {
-    const fonts = component.fonts
-    return fonts || []
-}
+import { breakpointSizes, breakpointsStyles, getFontsStyles } from './css.js'
 
 function classNames(...args) {
     return args.filter(Boolean).join(' ')
 }
-
-function deduplicateByKey<T>(arr: T[], key: (k: T) => string) {
-    let map = new Map()
-    for (let item of arr) {
-        let value = item[key(item)]
-        if (map.has(value)) {
-            continue
-        }
-        map.set(value, item)
-    }
-    return Array.from(map.values())
-}
-
-function getFontsStyles(Components) {
-    const allFonts = deduplicateByKey<{ family; url; style; weight }>(
-        Components.map(getFonts).flat(),
-        (x) => x.url,
-    ).filter((x) => x.url)
-
-    // console.log(JSON.stringify(fonts, null, 2))
-    let str = allFonts
-        .map((x) => {
-            let str = `@font-face { font-family: '${x.family}'; src: url(${x.url});`
-            if (x.style) {
-                str += ` font-style: ${x.style};`
-            }
-            if (x.weight) {
-                str += ` font-weight: ${x.weight};`
-            }
-            str += ` }`
-            return str
-        })
-        .join('\n')
-
-    return str
-}
-
-const breakpointSizes = {
-    base: 0,
-    sm: 320,
-    md: 768,
-    lg: 960,
-    xl: 1200,
-    '2xl': 1536,
-} as const
 
 // breakpoints from the higher to the lower
 const defaultBreakpoints = Object.keys(
@@ -77,63 +28,6 @@ function getBreakpointNameFromWindowWidth(windowWidth: number) {
     )
 }
 
-const breakpointsStyles = /* css */ `
-/* Base */
-@media (min-width: ${breakpointSizes.base}px) and (max-width: ${
-    breakpointSizes.sm - 1
-}px) {
-    .unframer-hidden.unframer-base { 
-        display: contents;
-    }
-}
-
-/* Small */
-@media (min-width: ${breakpointSizes.sm}px) and (max-width: ${
-    breakpointSizes.md - 1
-}px) {
-    .unframer-hidden.unframer-sm { 
-        display: contents;
-    }
-}
-
-/* Medium */
-@media (min-width: ${breakpointSizes.md}px) and (max-width: ${
-    breakpointSizes.lg - 1
-}px) {
-    .unframer-hidden.unframer-md { 
-        display: contents;
-    }
-}
-
-/* Large */
-@media (min-width: ${breakpointSizes.lg}px) and (max-width: ${
-    breakpointSizes.xl - 1
-}px) {
-    .unframer-hidden.unframer-lg { 
-        display: contents;
-    }
-}
-
-/* Extra Large */
-@media (min-width: ${breakpointSizes.xl}px) and (max-width: ${
-    breakpointSizes['2xl'] - 1
-}px) {
-    .unframer-hidden.unframer-xl { 
-        display: contents;
-    }
-}
-
-/* 2 Extra Large */
-@media (min-width: ${breakpointSizes['2xl']}px) {
-    .unframer-hidden.unframer-2xl { 
-        display: contents;
-    }
-}
-
-.unframer-hidden {
-    display: none;
-}
-`
 type Breakpoints = Record<UnframerBreakpoint, string>
 
 function fillBreakpoints(breakpoints: Breakpoints): Breakpoints {
@@ -171,7 +65,11 @@ export function FramerStyles({ Components = [] as any[] }): any {
     )
     const fonts = (
         <style
-            dangerouslySetInnerHTML={{ __html: getFontsStyles(Components) }}
+            dangerouslySetInnerHTML={{
+                __html: getFontsStyles(
+                    Components.map((x) => x.fonts || []).flat(),
+                ),
+            }}
             suppressHydrationWarning
             key='fonts'
             hidden

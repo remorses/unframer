@@ -46,14 +46,13 @@ Download framer components as simple files
 1. Import the component inside your `jsx` files, for example
 
 ```tsx
+import './framer/styles.cs'
 import Menu from './framer/menus'
 import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
         <div>
-            {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components={[Menu]} />
             <Menu componentVariable='some variable' />
         </div>
     )
@@ -63,14 +62,13 @@ export default function App() {
 ## Using responsive variants
 
 ```tsx
+import './framer/styles.cs'
 import Logos from './framer/logos'
 import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
         <div>
-            {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components={[Logos]} />
             {/* Changes component variant based on breakpoint */}
             <Logos.Responsive
                 variants={{
@@ -97,8 +95,6 @@ import { FramerStyles } from 'unframer'
 export default function App() {
     return (
         <div>
-            {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components={[Logos]} />
             {/* Changes component variant based on breakpoint */}
             <Logos.responsive
                 className='!w-full'
@@ -127,7 +123,6 @@ export default function App() {
 -   React component, created when you use a `component` variable in Framer, for example in the Ticker component
 
 Known limitations:
-
 
 -   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
 

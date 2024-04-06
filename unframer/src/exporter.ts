@@ -7,14 +7,18 @@ import pico from 'picocolors'
 import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 
 import {
+    ComponentFont,
     ControlDescription,
     ControlType,
     PropertyControls,
+    combinedCSSRules,
 } from '../framer-fixed/dist/framer.js'
 import { fetch as _fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
+import { ComponentFontBundle, breakpointsStyles, getFontsStyles } from './css.js'
+import dedent from 'dedent'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 const prefix = '[unframer]'
@@ -158,6 +162,7 @@ export async function bundle({
             logger.log(`writing`, path.relative(out, file.path))
             fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
         }
+        let allFonts = [] as ComponentFontBundle[]
         for (let file of result.outputFiles!) {
             const name = path.basename(file.path).replace(/\.js$/, '')
             const resultPathAbs = path.resolve(out, file.path)
@@ -165,25 +170,36 @@ export async function bundle({
                 continue
             }
             logger.log(`extracting types for ${name}`)
-            const propControls = await extractPropControlsUnsafe(
+            const { propertyControls, fonts } = await extractPropControlsUnsafe(
                 resultPathAbs,
                 name,
             )
-            if (!propControls) {
+            if (!propertyControls) {
                 logger.log(`no property controls found for ${name}`)
             }
-            const types = propControlsToType(propControls, name)
+            
+            allFonts.push(...(fonts || []))
+            const types = propControlsToType(propertyControls!, name)
             // name = 'framer-' + name
             // logger.log('name', name)
 
             fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
         }
 
+        const cssString =
+            breakpointsStyles +
+            '\n' +
+            (combinedCSSRules.map(x => x?.startsWith('  ') ? dedent(x) : x).join('\n')) +
+            getFontsStyles(allFonts)
+
+        fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
+
         const outFiles = result.outputFiles
             .map((x) => path.resolve(out, x.path))
             .concat([
                 path.resolve(out, 'meta.json'),
                 path.resolve(out, 'tokens.css'),
+                path.resolve(out, 'styles.css'),
             ])
             .concat(
                 result.outputFiles.map((x) =>
@@ -419,7 +435,13 @@ function getTokensCss({
     return tokensCss
 }
 
-export async function extractPropControlsUnsafe(filename, name) {
+export async function extractPropControlsUnsafe(
+    filename,
+    name,
+): Promise<{
+    propertyControls?: PropertyControls
+    fonts?: ComponentFontBundle[]
+}> {
     const packageJson = path.resolve(path.dirname(filename), 'package.json')
     try {
         fs.writeFileSync(
@@ -428,7 +450,7 @@ export async function extractPropControlsUnsafe(filename, name) {
             'utf-8',
         )
         const delimiter = '__delimiter__'
-        let propCode = `JSON.stringify(x.default?.propertyControls || null, null, 2)`
+        let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
         // propCode = `x.default`
         const code = `import(${JSON.stringify(
             filename,
@@ -443,6 +465,7 @@ export async function extractPropControlsUnsafe(filename, name) {
         return safeJsonParse(stdout)
     } catch (e: any) {
         logger.error(`Cannot get property controls for ${name}`, e.stack)
+        return {}
     } finally {
         fs.rmSync(packageJson)
     }
@@ -819,17 +842,6 @@ function retryTwice<F extends Function>(fn: Function): Function {
             return await fn(...args)
         }
     }
-}
-
-export function deduplicateByKey<T>(key: keyof T, arr: (T | undefined)[]) {
-    const map = new Map()
-    for (let item of arr) {
-        if (!item) {
-            continue
-        }
-        map.set(item?.[key], item)
-    }
-    return Array.from(map.values())
 }
 
 type TokenInfo = {

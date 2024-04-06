@@ -46,14 +46,12 @@ Download framer components as simple files
 1. Import the component inside your `jsx` files, for example
 
 ```tsx
+import './framer/styles.cs' // load base Framer styles
 import Menu from './framer/menus'
-import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
         <div>
-            {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components={[Menu]} />
             <Menu componentVariable='some variable' />
         </div>
     )
@@ -63,14 +61,12 @@ export default function App() {
 ## Using responsive variants
 
 ```tsx
+import './framer/styles.cs'
 import Logos from './framer/logos'
-import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
         <div>
-            {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components={[Logos]} />
             {/* Changes component variant based on breakpoint */}
             <Logos.Responsive
                 variants={{
@@ -91,14 +87,12 @@ You can use `className` or `style` props to style your components
 Notice that you will often need to use `!important` to override styles already defined in framer like `width` and `height`
 
 ```tsx
+import './framer/styles.cs'
 import Logos from './framer/logos'
-import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
         <div>
-            {/* Injects fonts and other framer utility styles */}
-            <FramerStyles Components={[Logos]} />
             {/* Changes component variant based on breakpoint */}
             <Logos.responsive
                 className='!w-full'
@@ -118,13 +112,12 @@ export default function App() {
 Framer components can have a fixed size, this comes from the root element in the Framer component editor. To override this size you will need to use the `style` prop or use a class with high specificity.
 
 ```tsx
+import './framer/styles.cs'
 import Logos from './framer/logos'
-import { FramerStyles } from 'unframer'
 
 export default function App() {
     return (
         <div>
-            <FramerStyles Components={[Logos]} />
             <Logos.responsive
                 className='!w-full' // use !important to override framer default size
                 style={{ width: '100%' }} // or use style prop, which has higher specificity than the Framer class
