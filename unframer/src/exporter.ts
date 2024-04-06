@@ -17,7 +17,11 @@ import { fetch as _fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
-import { ComponentFontBundle, breakpointsStyles, getFontsStyles } from './css.js'
+import {
+    ComponentFontBundle,
+    breakpointsStyles,
+    getFontsStyles,
+} from './css.js'
 import dedent from 'dedent'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
@@ -177,7 +181,7 @@ export async function bundle({
             if (!propertyControls) {
                 logger.log(`no property controls found for ${name}`)
             }
-            
+
             allFonts.push(...(fonts || []))
             const types = propControlsToType(propertyControls!, name)
             // name = 'framer-' + name
@@ -187,9 +191,12 @@ export async function bundle({
         }
 
         const cssString =
+            '/* This css file has all the necessary styles to run all your components */\n' +
             breakpointsStyles +
             '\n' +
-            (combinedCSSRules.map(x => x?.startsWith('  ') ? dedent(x) : x).join('\n')) +
+            combinedCSSRules
+                .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
+                .join('\n') +
             getFontsStyles(allFonts)
 
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
@@ -227,7 +234,10 @@ export async function bundle({
             logger.log('waiting for components or config changes')
         }
 
-        const tokensCss = getTokensCss({ out, result })
+        const tokensCss =
+            "/* This css file contains your color variables, sometimes these get desynced when updated in Framer so it's good that you copy and paste this snippet into your app css */\n" +
+            "/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n" +
+            getTokensCss({ out, result })
         fs.writeFileSync(path.resolve(out, 'tokens.css'), tokensCss, 'utf-8')
     }
 
