@@ -1,5 +1,5 @@
 // @ts-nocheck
-// https:https://app.framerstatic.com/chunk-73TYJ7YB.js
+// https :https://app.framerstatic.com/chunk-73TYJ7YB.js
 import { createContext, } from 'react';
 import { createContext as createContext2, } from 'react';
 import { createContext as createContext3, } from 'react';
@@ -9076,7 +9076,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https:https://app.framerstatic.com/framer.Q2DHSUSM.js
+// https :https://app.framerstatic.com/framer.Q2DHSUSM.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
