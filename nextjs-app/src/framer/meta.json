@@ -3930,8 +3930,8 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/VGcWv4yBQviXQAW2DR83/s0SoIjUSw8e8ntLKzryP/GPDKd6Ic6.js": {
-      "bytes": 4467,
+    "https :https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js": {
+      "bytes": 4501,
       "imports": [
         {
           "path": "unframer/dist/framer",
@@ -3956,7 +3956,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/Hx4zCT3rTfGaaLZ9mCei/CJojYRnjbqWwnIhvuDe7/PWn1k_MD2.js": {
+    "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
       "bytes": 2568,
       "imports": [
         {
@@ -3982,7 +3982,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/Fc42YbiZnUmIvfMJiYGP/K8gkfuUrDFkOuMotDAXs/FLXzApIyg.js": {
+    "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
       "bytes": 12524,
       "imports": [
         {
@@ -4028,7 +4028,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/yi2ROyMbL0reFFfsmDLe/Wk_vueg3a.js": {
+    "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js": {
       "bytes": 20875,
       "imports": [
         {
@@ -4062,19 +4062,19 @@
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/VGcWv4yBQviXQAW2DR83/s0SoIjUSw8e8ntLKzryP/GPDKd6Ic6.js",
+          "path": "https :https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/VGcWv4yBQviXQAW2DR83/s0SoIjUSw8e8ntLKzryP/GPDKd6Ic6.js"
+          "original": "https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Hx4zCT3rTfGaaLZ9mCei/CJojYRnjbqWwnIhvuDe7/PWn1k_MD2.js",
+          "path": "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/Hx4zCT3rTfGaaLZ9mCei/CJojYRnjbqWwnIhvuDe7/PWn1k_MD2.js"
+          "original": "https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Fc42YbiZnUmIvfMJiYGP/K8gkfuUrDFkOuMotDAXs/FLXzApIyg.js",
+          "path": "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/Fc42YbiZnUmIvfMJiYGP/K8gkfuUrDFkOuMotDAXs/FLXzApIyg.js"
+          "original": "https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js"
         },
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
@@ -4098,9 +4098,9 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/yi2ROyMbL0reFFfsmDLe/Wk_vueg3a.js",
+          "path": "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/yi2ROyMbL0reFFfsmDLe/Wk_vueg3a.js"
+          "original": "https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js"
         },
         {
           "path": "unframer/dist/react",
@@ -4581,7 +4581,7 @@
       ],
       "entryPoint": "virtual:card",
       "inputs": {
-        "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/yi2ROyMbL0reFFfsmDLe/Wk_vueg3a.js": {
+        "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js": {
           "bytesInOutput": 19385
         },
         "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
@@ -4590,20 +4590,20 @@
         "https :https://framer.com/m/phosphor-icons/House.js@0.0.53": {
           "bytesInOutput": 3812
         },
-        "https :https://framerusercontent.com/modules/VGcWv4yBQviXQAW2DR83/s0SoIjUSw8e8ntLKzryP/GPDKd6Ic6.js": {
-          "bytesInOutput": 4073
+        "https :https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js": {
+          "bytesInOutput": 4107
         },
-        "https :https://framerusercontent.com/modules/Hx4zCT3rTfGaaLZ9mCei/CJojYRnjbqWwnIhvuDe7/PWn1k_MD2.js": {
+        "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
           "bytesInOutput": 2192
         },
-        "https :https://framerusercontent.com/modules/Fc42YbiZnUmIvfMJiYGP/K8gkfuUrDFkOuMotDAXs/FLXzApIyg.js": {
+        "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
           "bytesInOutput": 11584
         },
         "virtual:card": {
           "bytesInOutput": 275
         }
       },
-      "bytes": 63303
+      "bytes": 63337
     },
     "menus.js": {
       "imports": [
