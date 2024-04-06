@@ -3982,6 +3982,32 @@
       ],
       "format": "esm"
     },
+    "https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js": {
+      "bytes": 881,
+      "imports": [
+        {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
     "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
       "bytes": 12524,
       "imports": [
@@ -4028,8 +4054,8 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js": {
-      "bytes": 20875,
+    "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
+      "bytes": 23938,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -4072,6 +4098,11 @@
           "original": "https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js"
         },
         {
+          "path": "https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js"
+        },
+        {
           "path": "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js"
@@ -4098,9 +4129,9 @@
       "bytes": 547,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js",
+          "path": "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js"
+          "original": "https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js"
         },
         {
           "path": "unframer/dist/react",
@@ -4546,6 +4577,11 @@
           "external": true
         },
         {
+          "path": "unframer/dist/framer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -4581,8 +4617,8 @@
       ],
       "entryPoint": "virtual:card",
       "inputs": {
-        "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js": {
-          "bytesInOutput": 19385
+        "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
+          "bytesInOutput": 22260
         },
         "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
           "bytesInOutput": 20960
@@ -4596,6 +4632,9 @@
         "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
           "bytesInOutput": 2192
         },
+        "https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js": {
+          "bytesInOutput": 505
+        },
         "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
           "bytesInOutput": 11584
         },
@@ -4603,7 +4642,7 @@
           "bytesInOutput": 275
         }
       },
-      "bytes": 63337
+      "bytes": 66821
     },
     "menus.js": {
       "imports": [

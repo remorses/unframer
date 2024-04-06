@@ -1,8 +1,8 @@
 :root {
     /* Used by card.js */
-    --token-700a1961-c2b8-4f37-ad37-e3c28ea0fc93: rgba(34, 34, 34, 0.1); /* Named as "Border Day" in Framer. */
+    --token-700a1961-c2b8-4f37-ad37-e3c28ea0fc93: rgba(34, 34, 34, 0.1); 
     --token-8c47652b-dea5-4767-a9f2-5d952dcce49a: rgb(255, 255, 255); 
-    --token-58a904ff-197a-49b3-8356-adaa464e1642: rgba(255, 255, 255, 0.12); /* Named as "Border Night" in Framer. */
+    --token-58a904ff-197a-49b3-8356-adaa464e1642: rgba(255, 255, 255, 0.12); 
     --token-fae2c128-35fb-45de-a6c2-32169f920c68: rgb(13, 13, 13); 
     /* Used by fylo.js */
     --token-bb315df6-c2cd-4c31-805d-6d1891fd5658: #101942; /* Named as "Space" in Framer. Also seen as rgb(16, 25, 66). */

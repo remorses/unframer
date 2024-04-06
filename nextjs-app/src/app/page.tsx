@@ -11,6 +11,7 @@ import FullPage from '@/framer/full-page'
 import Hero from '@/framer/hero'
 import MenuOverlay from '@/framer/menu-overlay'
 import Collection from '@/framer/collection'
+import Card from '@/framer/card'
 
 export default function Home() {
     return (
@@ -48,6 +49,7 @@ export default function Home() {
                 />
                 <Comp />
                 <Collection />
+                <Card />
 
                 <div className='pt-[200px]'></div>
             </div>

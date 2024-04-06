@@ -3,17 +3,21 @@ import { Icon, } from './chunk-S3ZL2HBZ.js';
 import { defaultEvents, NullState, useIconSelection, } from './chunk-RSQQT5RN.js';
 import './chunk-6C3VEZWH.js';
 
-// https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js
+// https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js
 import { jsx as _jsx3, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
   addPropertyControls as addPropertyControls3,
+  ComponentViewportProvider,
   ControlType as ControlType3,
   cx as cx2,
   getFonts as getFonts2,
+  getFontsFromSharedStyle,
   getPropertyControls,
   Image,
+  Link as Link2,
   RichText as RichText2,
+  useComponentViewport,
   useLocaleInfo as useLocaleInfo2,
   useVariantState as useVariantState2,
   withCSS as withCSS2,
@@ -1529,6 +1533,15 @@ var css2 = [
 ];
 var className2 = 'framer-0Y23w';
 
+// https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js
+import { fontStore as fontStore3, } from 'unframer/dist/framer';
+fontStore3.loadFonts([],);
+var fonts3 = [];
+var css3 = [
+  '.framer-PeTIw .framer-styles-preset-1636swi:not(.rich-text-wrapper), .framer-PeTIw .framer-styles-preset-1636swi.rich-text-wrapper a { --framer-link-current-text-decoration: none; --framer-link-hover-text-color: #000000; --framer-link-hover-text-decoration: none; --framer-link-text-color: rgba(0, 0, 0, 0.7); --framer-link-text-decoration: none; }',
+];
+var className3 = 'framer-PeTIw';
+
 // https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js
 import { jsx as _jsx2, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
@@ -1586,7 +1599,7 @@ var getProps = ({ color, height, id, link, title, width, ...props },) => {
 var createLayoutDependency = (props, variants,) => variants.join('-',) + props.layoutDependency;
 var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
   const { activeLocale, setLocale, } = useLocaleInfo();
-  const { style, className: className3, layoutId, variant, bVToBLBTS, KqeH5xil_, MJWWsEY26, ...restProps } = getProps(props,);
+  const { style, className: className4, layoutId, variant, bVToBLBTS, KqeH5xil_, MJWWsEY26, ...restProps } = getProps(props,);
   const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, transition, variants, } = useVariantState({
     cycleOrder,
     defaultVariant: 'd77WtBORe',
@@ -1610,7 +1623,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
           ...addPropertyOverrides({ I27BjI0db: { href: MJWWsEY26, }, uvXz5tOXs: { href: MJWWsEY26, }, }, baseVariant, gestureVariant,),
           children: /* @__PURE__ */ _jsxs(motion2.a, {
             ...restProps,
-            className: `${cx(serializationHash, ...sharedStyleClassNames, 'framer-os1iv6', className3, classNames,)} framer-1o3ofrl`,
+            className: `${cx(serializationHash, ...sharedStyleClassNames, 'framer-os1iv6', className4, classNames,)} framer-1o3ofrl`,
             'data-framer-name': 'Large',
             layoutDependency,
             layoutId: 'd77WtBORe',
@@ -1735,7 +1748,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
     },),
   },);
 },);
-var css3 = [
+var css4 = [
   '.framer-TnArR[data-border="true"]::after, .framer-TnArR [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
   '.framer-TnArR.framer-1o3ofrl, .framer-TnArR .framer-1o3ofrl { display: block; }',
@@ -1755,7 +1768,7 @@ var css3 = [
   '.framer-TnArR.framer-v-2sp4oc.hover .framer-169dxvj-container { left: calc(50.00000000000002% - 16px / 2); right: unset; }',
   '.framer-TnArR.framer-v-1s908fg.hover .framer-169dxvj-container { left: unset; right: 0px; }',
 ];
-var FramerFLXzApIyg = withCSS(Component2, css3, 'framer-TnArR',);
+var FramerFLXzApIyg = withCSS(Component2, css4, 'framer-TnArR',);
 var stdin_default = FramerFLXzApIyg;
 FramerFLXzApIyg.displayName = 'CTA';
 FramerFLXzApIyg.defaultProps = { height: 30, width: 128.5, };
@@ -1779,12 +1792,12 @@ addFonts(FramerFLXzApIyg, [{
   weight: '500',
 }, ...PhosphorFonts,],);
 
-// https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/vBFplqDT1icjpgv7VJVR/Wk_vueg3a.js
+// https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js
 var PhosphorFonts2 = getFonts2(Icon,);
 var CTAFonts = getFonts2(stdin_default,);
 var Phosphor1Controls = getPropertyControls(Icon2,);
 var cycleOrder2 = ['s4zc08oCU', 'FGm07QIce', 'Gp4GjxKpI', 'EsJzlpnfQ',];
-var serializationHash2 = 'framer-FsXuI';
+var serializationHash2 = 'framer-UJJ9E';
 var variantClassNames2 = {
   EsJzlpnfQ: 'framer-v-ku9xom',
   FGm07QIce: 'framer-v-1iom2qn',
@@ -1798,7 +1811,7 @@ function addPropertyOverrides2(overrides, ...variants) {
     : variants.forEach((variant,) => variant && Object.assign(nextOverrides, overrides[variant],));
   return nextOverrides;
 }
-var transitions2 = { default: { damping: 60, delay: 0, mass: 1, stiffness: 500, type: 'spring', }, };
+var transition1 = { damping: 60, delay: 0, mass: 1, stiffness: 500, type: 'spring', };
 var toResponsiveImage = (value,) => {
   if (typeof value === 'object' && value !== null && typeof value.src === 'string') {
     return value;
@@ -1861,7 +1874,7 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
   const { activeLocale, setLocale, } = useLocaleInfo2();
   const {
     style,
-    className: className3,
+    className: className4,
     layoutId,
     variant,
     OLqpcuIeL,
@@ -1877,27 +1890,27 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
     cX1P9xQse,
     ...restProps
   } = getProps2(props,);
-  const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, transition, variants, } = useVariantState2({
+  const { baseVariant, classNames, gestureVariant, setGestureState, setVariant, variants, } = useVariantState2({
     cycleOrder: cycleOrder2,
     defaultVariant: 's4zc08oCU',
-    transitions: transitions2,
     variant,
     variantClassNames: variantClassNames2,
   },);
   const layoutDependency = createLayoutDependency2(props, variants,);
   const ref1 = React3.useRef(null,);
   const defaultLayoutId = React3.useId();
-  const sharedStyleClassNames = [className, className2,];
+  const sharedStyleClassNames = [className, className3, className2,];
+  const componentViewport = useComponentViewport();
   return /* @__PURE__ */ _jsx3(LayoutGroup2, {
     id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
     children: /* @__PURE__ */ _jsx3(Variants2, {
       animate: variants,
       initial: false,
       children: /* @__PURE__ */ _jsx3(Transition2, {
-        value: transition,
+        value: transition1,
         children: /* @__PURE__ */ _jsxs2(motion3.div, {
           ...restProps,
-          className: cx2(serializationHash2, ...sharedStyleClassNames, 'framer-x9hesa', className3, classNames,),
+          className: cx2(serializationHash2, ...sharedStyleClassNames, 'framer-x9hesa', className4, classNames,),
           'data-border': true,
           'data-framer-name': '\u26AA\uFE0F Day Middle',
           layoutDependency,
@@ -1925,13 +1938,11 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
           },
           variants: {
             EsJzlpnfQ: {
-              '--border-color':
-                'var(--token-58a904ff-197a-49b3-8356-adaa464e1642, rgba(255, 255, 255, 0.12)) /* {"name":"Border Night"} */',
+              '--border-color': 'var(--token-58a904ff-197a-49b3-8356-adaa464e1642, rgba(255, 255, 255, 0.12))',
               backgroundColor: 'var(--token-fae2c128-35fb-45de-a6c2-32169f920c68, rgb(13, 13, 13))',
             },
             Gp4GjxKpI: {
-              '--border-color':
-                'var(--token-58a904ff-197a-49b3-8356-adaa464e1642, rgba(255, 255, 255, 0.12)) /* {"name":"Border Night"} */',
+              '--border-color': 'var(--token-58a904ff-197a-49b3-8356-adaa464e1642, rgba(255, 255, 255, 0.12))',
               backgroundColor: 'var(--token-fae2c128-35fb-45de-a6c2-32169f920c68, rgb(13, 13, 13))',
             },
           },
@@ -1953,7 +1964,9 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                 intrinsicWidth: 9600,
                 pixelHeight: 5400,
                 pixelWidth: 9600,
-                sizes: 'calc(min(360px, 100vw) - 80px)',
+                sizes: `calc(${
+                  (componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || '100vw'
+                } - 80px)`,
                 ...toResponsiveImage(PFec_i8Ff,),
               },
               className: 'framer-1vknc1w',
@@ -1962,7 +1975,7 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
               layoutId: 'MR2TfNxSa',
               style: {
                 '--border-bottom-width': '1px',
-                '--border-color': 'var(--token-700a1961-c2b8-4f37-ad37-e3c28ea0fc93, rgba(34, 34, 34, 0.1)) /* {"name":"Border Day"} */',
+                '--border-color': 'var(--token-700a1961-c2b8-4f37-ad37-e3c28ea0fc93, rgba(34, 34, 34, 0.1))',
                 '--border-left-width': '1px',
                 '--border-right-width': '1px',
                 '--border-style': 'solid',
@@ -1985,22 +1998,24 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
               },
-              children: /* @__PURE__ */ _jsx3(motion3.div, {
-                className: 'framer-5o30rf-container',
-                layoutDependency,
-                layoutId: 'eGjgS4oFq-container',
-                children: /* @__PURE__ */ _jsx3(Icon, {
-                  color: jFgwazo_q,
-                  height: '100%',
-                  iconSearch: 'House',
-                  iconSelection: aa5hKvvkV,
-                  id: 'eGjgS4oFq',
-                  layoutId: 'eGjgS4oFq',
-                  mirrored: false,
-                  selectByList: true,
-                  style: { height: '100%', width: '100%', },
-                  weight: 'regular',
-                  width: '100%',
+              children: /* @__PURE__ */ _jsx3(ComponentViewportProvider, {
+                children: /* @__PURE__ */ _jsx3(motion3.div, {
+                  className: 'framer-5o30rf-container',
+                  layoutDependency,
+                  layoutId: 'eGjgS4oFq-container',
+                  children: /* @__PURE__ */ _jsx3(Icon, {
+                    color: jFgwazo_q,
+                    height: '100%',
+                    iconSearch: 'House',
+                    iconSelection: aa5hKvvkV,
+                    id: 'eGjgS4oFq',
+                    layoutId: 'eGjgS4oFq',
+                    mirrored: false,
+                    selectByList: true,
+                    style: { height: '100%', width: '100%', },
+                    weight: 'regular',
+                    width: '100%',
+                  },),
                 },),
               },),
             },),
@@ -2015,22 +2030,27 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                     children: /* @__PURE__ */ _jsx3(motion3.h5, {
                       className: 'framer-styles-preset-13rf66x',
                       'data-styles-preset': 'GPDKd6Ic6',
-                      style: { '--framer-text-color': 'var(--extracted-1lwpl3i, hsl(0, 0%, 0%))', },
-                      children: 'Integration ecosystem',
+                      style: { '--framer-text-color': 'var(--extracted-1lwpl3i, rgb(0, 0, 0))', },
+                      children: /* @__PURE__ */ _jsx3(Link2, {
+                        href: '/another-page?',
+                        openInNewTab: false,
+                        smoothScroll: false,
+                        children: /* @__PURE__ */ _jsx3(motion3.a, {
+                          className: 'framer-styles-preset-1636swi',
+                          'data-styles-preset': 'ygZFiHa3w',
+                          children: 'Integration ecosystem',
+                        },),
+                      },),
                     },),
                   },),
                   className: 'framer-1qfo9mb',
+                  fonts: ['Inter',],
                   layoutDependency,
                   layoutId: 'VDM1CnOXu',
-                  style: {
-                    '--extracted-1lwpl3i': 'hsl(0, 0%, 0%)',
-                    '--framer-link-text-color': 'rgb(0, 153, 255)',
-                    '--framer-link-text-decoration': 'underline',
-                  },
+                  style: { '--extracted-1lwpl3i': 'rgb(0, 0, 0)', },
                   text: oc_8kOa9a,
                   variants: {
                     EsJzlpnfQ: { '--extracted-1lwpl3i': 'rgb(255, 255, 255)', },
-                    FGm07QIce: { '--extracted-1lwpl3i': 'rgb(0, 0, 0)', },
                     Gp4GjxKpI: { '--extracted-1lwpl3i': 'rgb(255, 255, 255)', },
                   },
                   verticalAlignment: 'top',
@@ -2046,7 +2066,16 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                               '--framer-text-alignment': 'left',
                               '--framer-text-color': 'var(--extracted-1lwpl3i, rgb(255, 255, 255))',
                             },
-                            children: 'Integration ecosystem',
+                            children: /* @__PURE__ */ _jsx3(Link2, {
+                              href: '/another-page?',
+                              openInNewTab: false,
+                              smoothScroll: false,
+                              children: /* @__PURE__ */ _jsx3(motion3.a, {
+                                className: 'framer-styles-preset-1636swi',
+                                'data-styles-preset': 'ygZFiHa3w',
+                                children: 'Integration ecosystem',
+                              },),
+                            },),
                           },),
                         },),
                       },
@@ -2056,7 +2085,16 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                             className: 'framer-styles-preset-13rf66x',
                             'data-styles-preset': 'GPDKd6Ic6',
                             style: { '--framer-text-alignment': 'left', '--framer-text-color': 'var(--extracted-1lwpl3i, rgb(0, 0, 0))', },
-                            children: 'Integration ecosystem',
+                            children: /* @__PURE__ */ _jsx3(Link2, {
+                              href: '/another-page?',
+                              openInNewTab: false,
+                              smoothScroll: false,
+                              children: /* @__PURE__ */ _jsx3(motion3.a, {
+                                className: 'framer-styles-preset-1636swi',
+                                'data-styles-preset': 'ygZFiHa3w',
+                                children: 'Integration ecosystem',
+                              },),
+                            },),
                           },),
                         },),
                       },
@@ -2066,7 +2104,16 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                             className: 'framer-styles-preset-13rf66x',
                             'data-styles-preset': 'GPDKd6Ic6',
                             style: { '--framer-text-color': 'var(--extracted-1lwpl3i, rgb(255, 255, 255))', },
-                            children: 'Integration ecosystem',
+                            children: /* @__PURE__ */ _jsx3(Link2, {
+                              href: '/another-page?',
+                              openInNewTab: false,
+                              smoothScroll: false,
+                              children: /* @__PURE__ */ _jsx3(motion3.a, {
+                                className: 'framer-styles-preset-1636swi',
+                                'data-styles-preset': 'ygZFiHa3w',
+                                children: 'Integration ecosystem',
+                              },),
+                            },),
                           },),
                         },),
                       },
@@ -2087,6 +2134,7 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                     },),
                   },),
                   className: 'framer-mz35j0',
+                  fonts: ['Inter',],
                   layoutDependency,
                   layoutId: 'DKc1gyg4g',
                   style: {
@@ -2149,20 +2197,21 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
                     gestureVariant,
                   ),
                 },),
-                ZA2T3dGW4 && /* @__PURE__ */
-                _jsx3(motion3.div, {
-                  className: 'framer-14ygfl1-container',
-                  layoutDependency,
-                  layoutId: 'hqHfwdps7-container',
-                  children: /* @__PURE__ */ _jsx3(stdin_default, {
-                    bVToBLBTS: qkbS0bCx8,
-                    height: '100%',
-                    id: 'hqHfwdps7',
-                    KqeH5xil_: 'rgb(0, 0, 0)',
-                    layoutId: 'hqHfwdps7',
-                    MJWWsEY26: cX1P9xQse,
-                    variant: 'uvXz5tOXs',
-                    width: '100%',
+                ZA2T3dGW4 && /* @__PURE__ */ _jsx3(ComponentViewportProvider, {
+                  children: /* @__PURE__ */ _jsx3(motion3.div, {
+                    className: 'framer-14ygfl1-container',
+                    layoutDependency,
+                    layoutId: 'hqHfwdps7-container',
+                    children: /* @__PURE__ */ _jsx3(stdin_default, {
+                      bVToBLBTS: qkbS0bCx8,
+                      height: '100%',
+                      id: 'hqHfwdps7',
+                      KqeH5xil_: 'rgb(0, 0, 0)',
+                      layoutId: 'hqHfwdps7',
+                      MJWWsEY26: cX1P9xQse,
+                      variant: 'uvXz5tOXs',
+                      width: '100%',
+                    },),
                   },),
                 },),
               ],
@@ -2173,27 +2222,28 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
     },),
   },);
 },);
-var css4 = [
-  '.framer-FsXuI[data-border="true"]::after, .framer-FsXuI [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
+var css5 = [
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
-  '.framer-FsXuI.framer-qu831b, .framer-FsXuI .framer-qu831b { display: block; }',
-  '.framer-FsXuI.framer-x9hesa { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 30px; height: min-content; justify-content: flex-start; max-width: 400px; overflow: hidden; padding: 40px 40px 40px 40px; position: relative; width: 360px; will-change: var(--framer-will-change-override, transform); }',
-  '.framer-FsXuI .framer-1vknc1w { flex: none; height: 200px; overflow: hidden; position: relative; width: 100%; will-change: var(--framer-will-change-override, transform); }',
-  '.framer-FsXuI .framer-1hypwoz { align-content: center; align-items: center; aspect-ratio: 1 / 1; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 10px; height: var(--framer-aspect-ratio-supported, 56px); justify-content: center; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: 56px; will-change: var(--framer-will-change-override, transform); }',
-  '.framer-FsXuI .framer-5o30rf-container { flex: none; height: 32px; position: relative; width: 32px; }',
-  '.framer-FsXuI .framer-2bn85y { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: center; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: 100%; }',
-  '.framer-FsXuI .framer-1qfo9mb { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }',
-  '.framer-FsXuI .framer-mz35j0 { flex: none; height: auto; max-width: 400px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }',
-  '.framer-FsXuI .framer-14ygfl1-container { flex: none; height: auto; position: relative; width: auto; }',
-  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-FsXuI.framer-x9hesa, .framer-FsXuI .framer-1hypwoz, .framer-FsXuI .framer-2bn85y { gap: 0px; } .framer-FsXuI.framer-x9hesa > * { margin: 0px; margin-bottom: calc(30px / 2); margin-top: calc(30px / 2); } .framer-FsXuI.framer-x9hesa > :first-child, .framer-FsXuI .framer-2bn85y > :first-child { margin-top: 0px; } .framer-FsXuI.framer-x9hesa > :last-child, .framer-FsXuI .framer-2bn85y > :last-child { margin-bottom: 0px; } .framer-FsXuI .framer-1hypwoz > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-FsXuI .framer-1hypwoz > :first-child { margin-left: 0px; } .framer-FsXuI .framer-1hypwoz > :last-child { margin-right: 0px; } .framer-FsXuI .framer-2bn85y > * { margin: 0px; margin-bottom: calc(10px / 2); margin-top: calc(10px / 2); } }',
-  '.framer-FsXuI.framer-v-1iom2qn.framer-x9hesa, .framer-FsXuI.framer-v-1iom2qn .framer-2bn85y, .framer-FsXuI.framer-v-ku9xom.framer-x9hesa, .framer-FsXuI.framer-v-ku9xom .framer-2bn85y { align-content: flex-start; align-items: flex-start; }',
+  '.framer-UJJ9E.framer-qu831b, .framer-UJJ9E .framer-qu831b { display: block; }',
+  '.framer-UJJ9E.framer-x9hesa { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 30px; height: min-content; justify-content: flex-start; max-width: 400px; overflow: hidden; padding: 40px 40px 40px 40px; position: relative; width: 360px; will-change: var(--framer-will-change-override, transform); }',
+  '.framer-UJJ9E .framer-1vknc1w { flex: none; height: 200px; overflow: hidden; position: relative; width: 100%; will-change: var(--framer-will-change-override, transform); }',
+  '.framer-UJJ9E .framer-1hypwoz { align-content: center; align-items: center; aspect-ratio: 1 / 1; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 10px; height: var(--framer-aspect-ratio-supported, 56px); justify-content: center; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: 56px; will-change: var(--framer-will-change-override, transform); }',
+  '.framer-UJJ9E .framer-5o30rf-container { flex: none; height: 32px; position: relative; width: 32px; }',
+  '.framer-UJJ9E .framer-2bn85y { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: center; overflow: hidden; padding: 0px 0px 0px 0px; position: relative; width: 100%; }',
+  '.framer-UJJ9E .framer-1qfo9mb { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }',
+  '.framer-UJJ9E .framer-mz35j0 { flex: none; height: auto; max-width: 400px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }',
+  '.framer-UJJ9E .framer-14ygfl1-container { flex: none; height: auto; position: relative; width: auto; }',
+  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-UJJ9E.framer-x9hesa, .framer-UJJ9E .framer-1hypwoz, .framer-UJJ9E .framer-2bn85y { gap: 0px; } .framer-UJJ9E.framer-x9hesa > * { margin: 0px; margin-bottom: calc(30px / 2); margin-top: calc(30px / 2); } .framer-UJJ9E.framer-x9hesa > :first-child, .framer-UJJ9E .framer-2bn85y > :first-child { margin-top: 0px; } .framer-UJJ9E.framer-x9hesa > :last-child, .framer-UJJ9E .framer-2bn85y > :last-child { margin-bottom: 0px; } .framer-UJJ9E .framer-1hypwoz > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-UJJ9E .framer-1hypwoz > :first-child { margin-left: 0px; } .framer-UJJ9E .framer-1hypwoz > :last-child { margin-right: 0px; } .framer-UJJ9E .framer-2bn85y > * { margin: 0px; margin-bottom: calc(10px / 2); margin-top: calc(10px / 2); } }',
+  '.framer-UJJ9E.framer-v-1iom2qn.framer-x9hesa, .framer-UJJ9E.framer-v-1iom2qn .framer-2bn85y, .framer-UJJ9E.framer-v-ku9xom.framer-x9hesa, .framer-UJJ9E.framer-v-ku9xom .framer-2bn85y { align-content: flex-start; align-items: flex-start; }',
   ...css,
+  ...css3,
   ...css2,
+  '.framer-UJJ9E[data-border="true"]::after, .framer-UJJ9E [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
-var FramerWk_vueg3a = withCSS2(Component3, css4, 'framer-FsXuI',);
+var FramerWk_vueg3a = withCSS2(Component3, css5, 'framer-UJJ9E',);
 var stdin_default2 = FramerWk_vueg3a;
 FramerWk_vueg3a.displayName = 'Feature Card';
-FramerWk_vueg3a.defaultProps = { height: 271.5, width: 360, };
+FramerWk_vueg3a.defaultProps = { height: 270, width: 360, };
 addPropertyControls3(FramerWk_vueg3a, {
   variant: {
     options: ['s4zc08oCU', 'FGm07QIce', 'Gp4GjxKpI', 'EsJzlpnfQ',],
@@ -2224,7 +2274,67 @@ addPropertyControls3(FramerWk_vueg3a, {
   qkbS0bCx8: { defaultValue: 'Learn more', displayTextArea: false, title: 'CTA', type: ControlType3.String, },
   cX1P9xQse: { title: 'Link', type: ControlType3.Link, },
 },);
-addFonts2(FramerWk_vueg3a, [...PhosphorFonts2, ...CTAFonts, ...fonts, ...fonts2,],);
+addFonts2(FramerWk_vueg3a, [
+  {
+    explicitInter: true,
+    fonts: [{
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange: 'U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F',
+      url: 'https://app.framerstatic.com/Inter-Regular.cyrillic-ext-CFTLRB35.woff2',
+      weight: '400',
+    }, {
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange: 'U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+      url: 'https://app.framerstatic.com/Inter-Regular.cyrillic-KKLZBALH.woff2',
+      weight: '400',
+    }, {
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange: 'U+1F00-1FFF',
+      url: 'https://app.framerstatic.com/Inter-Regular.greek-ext-ULEBLIFV.woff2',
+      weight: '400',
+    }, {
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange: 'U+0370-03FF',
+      url: 'https://app.framerstatic.com/Inter-Regular.greek-IRHSNFQB.woff2',
+      weight: '400',
+    }, {
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange: 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+      url: 'https://app.framerstatic.com/Inter-Regular.latin-ext-VZDUGU3Q.woff2',
+      weight: '400',
+    }, {
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange:
+        'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+      url: 'https://app.framerstatic.com/Inter-Regular.latin-JLQMKCHE.woff2',
+      weight: '400',
+    }, {
+      family: 'Inter',
+      source: 'framer',
+      style: 'normal',
+      unicodeRange: 'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB',
+      url: 'https://app.framerstatic.com/Inter-Regular.vietnamese-QK7VSWXK.woff2',
+      weight: '400',
+    },],
+  },
+  ...PhosphorFonts2,
+  ...CTAFonts,
+  ...getFontsFromSharedStyle(fonts,),
+  ...getFontsFromSharedStyle(fonts3,),
+  ...getFontsFromSharedStyle(fonts2,),
+], { supportsExplicitInterCodegen: true, },);
 
 // virtual:card
 import { WithFramerBreakpoints, } from 'unframer/dist/react';
