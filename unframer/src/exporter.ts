@@ -21,6 +21,7 @@ import {
     ComponentFontBundle,
     breakpointsStyles,
     getFontsStyles,
+    groupBy,
 } from './css.js'
 import dedent from 'dedent'
 
@@ -182,7 +183,12 @@ export async function bundle({
                 logger.log(`no property controls found for ${name}`)
             }
 
-            allFonts.push(...(fonts || []))
+            allFonts.push(
+                ...(fonts || []).map((x) => ({
+                    ...x,
+                    fileName: path.basename(file.path),
+                })),
+            )
             const types = propControlsToType(propertyControls!, name)
             // name = 'framer-' + name
             // logger.log('name', name)
@@ -193,7 +199,7 @@ export async function bundle({
         const cssString =
             '/* This css file has all the necessary styles to run all your components */\n' +
             breakpointsStyles +
-            '\n' +
+            '\n\n' +
             combinedCSSRules
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
                 .join('\n') +
@@ -927,18 +933,6 @@ function splitOnce(str: string, separator: string) {
         return [str]
     }
     return [str.slice(0, index), str.slice(index + 1)]
-}
-
-function groupBy<T>(arr: T[], key: (x: T) => string) {
-    const map = new Map<string, T[]>()
-    for (let item of arr) {
-        const k = key(item)
-        if (!map.has(k)) {
-            map.set(k, [])
-        }
-        map.get(k)?.push(item)
-    }
-    return map
 }
 
 export function componentCamelCase(str: string) {

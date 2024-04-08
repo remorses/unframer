@@ -151,7 +151,7 @@ async function processConfig({
         })
     } catch (e: any) {
         if (signal) {
-            logger.log('Error processing config', e.message)
+            logger.log('Error processing config', e.stack)
             return
         }
         throw e

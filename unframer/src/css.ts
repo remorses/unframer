@@ -32,44 +32,60 @@ export type ComponentFontBundle = {
      * https://www.notion.so/framer/RFC-ComponentFont-v2-d5fd3e822fb049ffb6971554ab0e4e42
      */
     explicitInter: boolean
+    fileName?: string
     fonts: ComponentFont[]
 }
 
 export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
-    let fontsDefs = _fontsDefs?.flatMap((x) => x.fonts)
-    if (!fontsDefs?.length) {
-        return ''
+    let urlToFilenames = new Map<string, Set<string>>()
+    for (let fontDefBundle of _fontsDefs) {
+        let filename = fontDefBundle.fileName
+        for (let font of fontDefBundle.fonts) {
+            if (urlToFilenames.has(font.url)) {
+                urlToFilenames.get(font.url)!.add(filename!)
+            } else {
+                urlToFilenames.set(font.url, new Set([filename!]))
+            }
+        }
     }
-    
+    const allFonts = deduplicateByKey(
+        _fontsDefs.flatMap((x) => x.fonts),
+        (x) => x?.url,
+    ).filter((x) => x.url)
 
-    const allFonts = deduplicateByKey(fontsDefs, (x) => x?.url).filter(
-        (x) => x.url,
-    )
-    // console.log('fontsDefs', JSON.stringify(allFonts, null, 2))
+    // group fonts by the filenames users
+    const grouped = groupBy(allFonts, (x) => {
+        return [...(urlToFilenames.get(x.url) || [])].sort().join(', ')
+    })
+    let str = '\n\n'
+    for (let [groupComment, fonts] of grouped.entries()) {
+        str += `/* used by ${groupComment} */\n`
+        str +=
+            '\n' +
+            fonts
+                .map((x) => {
+                    let str = ''
+                    str += dedent`
+                    @font-face {
+                        font-family: '${x.family}'; 
+                        src: url(${x.url});\n`
+                    if (x.style) {
+                        str += `    font-style: ${x.style};\n`
+                    }
+                    if (x.weight) {
+                        str += `    font-weight: ${x.weight};\n`
+                    }
+                    if (x.unicodeRange) {
+                        str += `    unicodeRange: ${x.unicodeRange};\n`
+                    }
+                    str += `}\n`
+                    return str
+                })
+                .join('\n') +
+            '\n'
+    }
 
-    // console.log(JSON.stringify(fonts, null, 2))
-    let str = allFonts
-        .map((x) => {
-            let str = `/* From ${x.source} */\n`
-            str += dedent`
-            @font-face {
-                font-family: '${x.family}'; 
-                src: url(${x.url});\n`
-            if (x.style) {
-                str += `    font-style: ${x.style};\n`
-            }
-            if (x.weight) {
-                str += `    font-weight: ${x.weight};\n`
-            }
-            if (x.unicodeRange) {
-                str += `    unicodeRange: ${x.unicodeRange};\n`
-            }
-            str += `}\n`
-            return str
-        })
-        .join('\n')
-
-    return '\n' + str + '\n'
+    return str
 }
 
 export const breakpointsStyles = /* css */ `
@@ -129,3 +145,15 @@ export const breakpointsStyles = /* css */ `
     display: none;
 }
 `
+
+export function groupBy<T>(arr: T[], key: (x: T) => string) {
+    const map = new Map<string, T[]>()
+    for (let item of arr) {
+        const k = key(item)
+        if (!map.has(k)) {
+            map.set(k, [])
+        }
+        map.get(k)?.push(item)
+    }
+    return map
+}
