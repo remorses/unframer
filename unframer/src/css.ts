@@ -1,6 +1,5 @@
 import dedent from 'dedent'
 import { ComponentFont } from './framer.js'
-import { logger } from './exporter.js'
 
 export const breakpointSizes = {
     base: 0,
@@ -39,7 +38,7 @@ export type ComponentFontBundle = {
 
 export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
     if (!fontsBundles.length) {
-        return
+        return ''
     }
     let familyToFilenames = new Map<string, Set<string>>()
     for (let fontDefBundle of fontsBundles) {
@@ -59,7 +58,7 @@ export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
             str += `  - ${filename}\n`
         }
     }
-    str.split('\n').forEach((x) => logger.log(x))
+    return str
 }
 
 export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {

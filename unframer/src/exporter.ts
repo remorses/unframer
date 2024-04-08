@@ -3,8 +3,6 @@ import { Sema } from 'async-sema'
 import dprint from 'dprint-node'
 import tmp from 'tmp'
 
-import pico from 'picocolors'
-
 import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 
 import {
@@ -26,17 +24,7 @@ import {
     logFontsUsage,
 } from './css.js'
 import dedent from 'dedent'
-
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
-const prefix = '[unframer]'
-export const logger = {
-    log(...args) {
-        console.log(prefix, ...args)
-    },
-    error(...args) {
-        console.error([prefix, ...args].map((x) => pico.red(x)).join(' '))
-    },
-}
+import { logger } from './utils.js'
 
 const fetchWithRetry = retryTwice(_fetch) as typeof fetch
 
@@ -234,6 +222,9 @@ export async function bundle({
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
 
         logFontsUsage(allFonts)
+            .split('\n')
+            .forEach((x) => logger.log(x))
+
         const outFiles = result.outputFiles
             .map((x) => path.resolve(out, x.path))
             .concat([
