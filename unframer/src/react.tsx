@@ -49,6 +49,11 @@ function fillBreakpoints(breakpoints: Breakpoints): Breakpoints {
 const nothing = () => {
     return () => {}
 }
+
+
+/**
+ * @deprecated Use styles.css import instead
+ */
 export function FramerStyles({ Components = [] as any[] }): any {
     const isClient = useSyncExternalStore(
         nothing,
