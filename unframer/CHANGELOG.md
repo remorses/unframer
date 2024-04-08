@@ -1,5 +1,11 @@
 # unframer
 
+## 1.7.1
+
+### Patch Changes
+
+-   Remove native deps from react export
+
 ## 1.7.0
 
 ### Minor Changes
