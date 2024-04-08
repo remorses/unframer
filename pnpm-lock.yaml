@@ -77,6 +77,9 @@ importers:
       '@types/react':
         specifier: '*'
         version: 18.2.66
+      async-sema:
+        specifier: ^3.1.1
+        version: 3.1.1
       cac:
         specifier: ^6.7.14
         version: 6.7.14
@@ -1480,7 +1483,6 @@ packages:
 
   /async-sema@3.1.1:
     resolution: {integrity: sha512-tLRNUXati5MFePdAk8dw7Qt7DpxPB60ofAgn8WRhW6a2rcimZnYBP9oxHiv0OHy+Wz7kPMG+t4LGdt31+4EmGg==}
-    dev: true
 
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}

@@ -43,6 +43,7 @@
         "react-dom": "*"
     },
     "dependencies": {
+        "async-sema": "^3.1.1",
         "cac": "^6.7.14",
         "chokidar": "^3.5.3",
         "dedent": "^1.5.1",

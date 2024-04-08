@@ -81,8 +81,10 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
     const grouped = groupBy(allFonts, (x) => {
         return [...(urlToFilenames.get(x.url) || [])].sort().join(', ')
     })
+
     let str = '\n\n'
     for (let [groupComment, fonts] of grouped.entries()) {
+        fonts = sortByKey(fonts, (x) => x.url)
         str += `/* used by ${groupComment} */\n`
         str +=
             '\n' +
@@ -180,4 +182,8 @@ export function groupBy<T>(arr: T[], key: (x: T) => string) {
         map.get(k)?.push(item)
     }
     return map
+}
+
+function sortByKey<T>(arr: T[], key: (x: T) => string) {
+    return arr.slice().sort((a, b) => key(a).localeCompare(key(b)))
 }

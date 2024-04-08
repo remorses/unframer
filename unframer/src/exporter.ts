@@ -1,4 +1,5 @@
 import { Plugin, build, transform, context, BuildResult } from 'esbuild'
+import { Sema } from 'async-sema'
 import dprint from 'dprint-node'
 import tmp from 'tmp'
 
@@ -16,7 +17,7 @@ import {
 import { fetch as _fetch } from 'native-fetch'
 import fs from 'fs'
 import path from 'path'
-import { execSync } from 'child_process'
+import { exec, execSync } from 'child_process'
 import {
     ComponentFontBundle,
     breakpointsStyles,
@@ -169,32 +170,56 @@ export async function bundle({
             fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
         }
         let allFonts = [] as ComponentFontBundle[]
-        for (let file of result.outputFiles!) {
-            const name = path.basename(file.path).replace(/\.js$/, '')
-            const resultPathAbs = path.resolve(out, file.path)
-            if (!components[name]) {
-                continue
-            }
-            logger.log(`extracting types for ${name}`)
-            const { propertyControls, fonts } = await extractPropControlsUnsafe(
-                resultPathAbs,
-                name,
-            )
-            if (!propertyControls) {
-                logger.log(`no property controls found for ${name}`)
-            }
+        const sema = new Sema(10)
+        const packageJson = path.resolve(out, 'package.json')
+        fs.writeFileSync(
+            packageJson,
+            JSON.stringify({ type: 'module' }),
+            'utf-8',
+        )
+        try {
+            await Promise.all(
+                result.outputFiles.map(async (file) => {
+                    try {
+                        await sema.acquire()
+                        const name = path
+                            .basename(file.path)
+                            .replace(/\.js$/, '')
+                        const resultPathAbs = path.resolve(out, file.path)
+                        if (!components[name]) {
+                            return
+                        }
+                        logger.log(`extracting types for ${name}`)
+                        const { propertyControls, fonts } =
+                            await extractPropControlsUnsafe(resultPathAbs, name)
+                        if (!propertyControls) {
+                            logger.log(`no property controls found for ${name}`)
+                        }
 
-            allFonts.push(
-                ...(fonts || []).map((x) => ({
-                    ...x,
-                    fileName: path.basename(file.path),
-                })),
-            )
-            const types = propControlsToType(propertyControls!, name)
-            // name = 'framer-' + name
-            // logger.log('name', name)
+                        allFonts.push(
+                            ...(fonts || []).map((x) => ({
+                                ...x,
+                                fileName: path.basename(file.path),
+                            })),
+                        )
+                        const types = propControlsToType(
+                            propertyControls!,
+                            name,
+                        )
+                        // name = 'framer-' + name
+                        // logger.log('name', name)
 
-            fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+                        fs.writeFileSync(
+                            path.resolve(out, `${name}.d.ts`),
+                            types,
+                        )
+                    } finally {
+                        sema.release()
+                    }
+                }),
+            )
+        } finally {
+            fs.rmSync(packageJson)
         }
 
         const cssString =
@@ -460,33 +485,27 @@ export async function extractPropControlsUnsafe(
     propertyControls?: PropertyControls
     fonts?: ComponentFontBundle[]
 }> {
-    const packageJson = path.resolve(path.dirname(filename), 'package.json')
-    try {
-        fs.writeFileSync(
-            packageJson,
-            JSON.stringify({ type: 'module' }),
-            'utf-8',
-        )
-        const delimiter = '__delimiter__'
-        let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
-        // propCode = `x.default`
-        const code = `import(${JSON.stringify(
-            filename,
-        )}).then(x => { console.log(${JSON.stringify(
-            delimiter,
-        )}); console.log(${propCode})
+    const delimiter = '__delimiter__'
+    let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
+    // propCode = `x.default`
+    const code = `import(${JSON.stringify(
+        filename,
+    )}).then(x => { console.log(${JSON.stringify(
+        delimiter,
+    )}); console.log(${propCode})
         })`
-        const res = execSync(`node --input-type=module -e '${code}'`)
-        let stdout = res.toString()
-        stdout = stdout.split(delimiter)[1]
-        // console.log(stdout)
-        return safeJsonParse(stdout)
-    } catch (e: any) {
-        logger.error(`Cannot get property controls for ${name}`, e.stack)
-        return {}
-    } finally {
-        fs.rmSync(packageJson)
-    }
+    let stdout = await new Promise<string>((res, rej) =>
+        exec(`node --input-type=module -e '${code}'`, (err, stdout) => {
+            if (err) {
+                return rej(err)
+            }
+            res(stdout)
+        }),
+    )
+
+    stdout = stdout.split(delimiter)[1]
+    // console.log(stdout)
+    return safeJsonParse(stdout)
 }
 
 function safeJsonParse(text) {
