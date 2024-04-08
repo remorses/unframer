@@ -1,5 +1,11 @@
 # unframer
 
+## 1.7.0
+
+### Minor Changes
+
+-   6cecaa5: Show where each font comes from in the styles
+
 ## 1.6.0
 
 ### Minor Changes
