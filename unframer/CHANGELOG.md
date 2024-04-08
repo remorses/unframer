@@ -1,5 +1,15 @@
 # unframer
 
+## 2.0.0
+
+### Major Changes
+
+-   Added commonjs support, remove ./dist exports from package.json
+
+### Patch Changes
+
+-   895255a: Update framer to 2.4.1, update framer motion to 11.0.11-sync.2
+
 ## 1.7.1
 
 ### Patch Changes
