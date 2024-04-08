@@ -38,6 +38,9 @@ export type ComponentFontBundle = {
 }
 
 export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
+    if (!fontsBundles.length) {
+        return
+    }
     let familyToFilenames = new Map<string, Set<string>>()
     for (let fontDefBundle of fontsBundles) {
         let filename = fontDefBundle.fileName
@@ -60,6 +63,9 @@ export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
 }
 
 export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
+    if (!_fontsDefs.length) {
+        return ''
+    }
     let urlToFilenames = new Map<string, Set<string>>()
 
     for (let fontDefBundle of _fontsDefs) {
