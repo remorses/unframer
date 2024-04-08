@@ -236,7 +236,7 @@ export async function bundle({
 
         const tokensCss =
             "/* This css file contains your color variables, sometimes these get desynced when updated in Framer so it's good that you copy and paste this snippet into your app css */\n" +
-            "/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n" +
+            '/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n' +
             getTokensCss({ out, result })
         fs.writeFileSync(path.resolve(out, 'tokens.css'), tokensCss, 'utf-8')
     }
@@ -308,7 +308,7 @@ export function findRelativeLinks(text: string) {
         const index = lines.findIndex((line) => line.includes(match[0]))
         return index
     })
-    return lineNumbers
+    return [...new Set(lineNumbers)]
 }
 
 export async function extractPropControlsSafe(text, name) {
