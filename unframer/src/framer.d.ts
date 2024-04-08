@@ -4823,11 +4823,9 @@ export declare const withVariantAppearEffect: <T extends {
 export declare const withVariantFX: <T extends MotionProps>(Component: React_2.ComponentType<T>) => React_2.ForwardRefExoticComponent<React_2.PropsWithoutRef<Props_3<T>> & React_2.RefAttributes<HTMLElement>>;
 
 
-export * from "framer-motion";
+
 
 export { }
+export declare const combinedCSSRules: string[]
 
-    export declare const combinedCSSRules: string[]
-
-    export * from 'real-framer-motion'
-    
+export * from 'real-framer-motion'

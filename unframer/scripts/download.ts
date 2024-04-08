@@ -50,7 +50,8 @@ export async function main({ framerTypesUrl }) {
     })
     // logger.log('result', result)
     let types = await fetch(framerTypesUrl).then((x) => x.text())
-    types += `
+    types = types.replace('export * from "framer-motion";', '')
+    types += dedent`
     export declare const combinedCSSRules: string[]
 
     export * from 'real-framer-motion'

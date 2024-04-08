@@ -1,6 +1,5 @@
 'use client'
 
-
 import '@/framer/styles.css'
 import { AnimatePresence } from 'unframer'
 
