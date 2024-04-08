@@ -22,6 +22,7 @@ import {
     breakpointsStyles,
     getFontsStyles,
     groupBy,
+    logFontsUsage,
 } from './css.js'
 import dedent from 'dedent'
 
@@ -207,6 +208,7 @@ export async function bundle({
 
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
 
+        logFontsUsage(allFonts)
         const outFiles = result.outputFiles
             .map((x) => path.resolve(out, x.path))
             .concat([
