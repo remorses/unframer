@@ -1,4 +1,4 @@
-import { bundle, logger } from './exporter.js'
+import { bundle } from './exporter.js'
 import JSON from 'json5'
 import events, { EventEmitter, setMaxListeners } from 'events'
 
@@ -9,6 +9,7 @@ import tmp from 'tmp'
 import path from 'path'
 const configName = 'unframer.json'
 import { cac } from 'cac'
+import { logger } from './utils.js'
 
 export const cli = cac()
 
