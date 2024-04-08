@@ -1,14 +1,44 @@
 import tmp from 'tmp'
 import path from 'path'
 import { test, expect } from 'vitest'
-import { bundle, componentCamelCase, extractTokenInfo } from './exporter.js'
+import {
+    bundle,
+    componentCamelCase,
+    extractTokenInfo,
+    findRelativeLinks,
+} from './exporter.js'
 
 test('componentCamelCase', () => {
-    expect(componentCamelCase('logo-ticker')).toMatchInlineSnapshot(`"LogoTickerFramerComponent"`)
-    expect(componentCamelCase('Logo-Ticker')).toMatchInlineSnapshot(`"LogoTickerFramerComponent"`)
-    expect(componentCamelCase('logo')).toMatchInlineSnapshot(`"LogoFramerComponent"`)
-    expect(componentCamelCase('nav')).toMatchInlineSnapshot(`"NavFramerComponent"`)
-    expect(componentCamelCase('framer_nav')).toMatchInlineSnapshot(`"FramerNavFramerComponent"`)
+    expect(componentCamelCase('logo-ticker')).toMatchInlineSnapshot(
+        `"LogoTickerFramerComponent"`,
+    )
+    expect(componentCamelCase('Logo-Ticker')).toMatchInlineSnapshot(
+        `"LogoTickerFramerComponent"`,
+    )
+    expect(componentCamelCase('logo')).toMatchInlineSnapshot(
+        `"LogoFramerComponent"`,
+    )
+    expect(componentCamelCase('nav')).toMatchInlineSnapshot(
+        `"NavFramerComponent"`,
+    )
+    expect(componentCamelCase('framer_nav')).toMatchInlineSnapshot(
+        `"FramerNavFramerComponent"`,
+    )
+})
+test('findRelativeLinks', () => {
+    expect(
+        findRelativeLinks(`
+    some code
+    href: { pathVariables: { m3uy2HDcr: m3uy2HDcry78Q_MgWu2, }, webPageId: 'MREmP2Mxd', },
+    other code
+    webPageId: 'another id', webPageId: 'xxx',
+    `),
+    ).toMatchInlineSnapshot(`
+      [
+        2,
+        4,
+      ]
+    `)
 })
 
 test(

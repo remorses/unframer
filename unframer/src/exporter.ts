@@ -298,17 +298,17 @@ function decapitalize(str: string) {
 }
 
 export function findRelativeLinks(text: string) {
-    // regex to match these objects, could be in different lines or formatted, webPageId is the key element
-    // href: { webPageId: 'someId' }
     const regex = /webPageId:\s+/g
-    const matches = text.matchAll(regex)
-    // get line number for each match
     const lines = text.split('\n')
-    const lineNumbers = Array.from(matches, (match) => {
-        const index = lines.findIndex((line) => line.includes(match[0]))
-        return index
-    })
-    return [...new Set(lineNumbers)]
+    const lineNumbers = new Set<number>()
+
+    for (let i = 0; i < lines.length; i++) {
+        if (regex.test(lines[i])) {
+            lineNumbers.add(i)
+        }
+    }
+
+    return [...lineNumbers]
 }
 
 export async function extractPropControlsSafe(text, name) {
