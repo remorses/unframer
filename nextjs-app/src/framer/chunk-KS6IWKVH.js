@@ -25,7 +25,7 @@ var NullState = /* @__PURE__ */ React.forwardRef((_, ref,) => {
 
 // https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
 import { useMemo, } from 'react';
-import { ControlType, } from 'unframer/dist/framer';
+import { ControlType, } from 'unframer';
 var defaultEvents = {
   onClick: { type: ControlType.EventHandler, },
   onMouseDown: { type: ControlType.EventHandler, },

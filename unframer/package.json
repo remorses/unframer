@@ -2,19 +2,18 @@
     "name": "unframer",
     "version": "1.7.1",
     "description": "",
-    "type": "module",
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
-        "build": "rm -rf dist && tsc && cp ../README.md ./README.md",
+        "build": "rm -rf dist && tsc -m esnext --outDir esm && tsc && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
         "prepublishOnly": "pnpm build",
         "download-framer": "tsx scripts/download.ts",
         "watch": "rm -rf dist && tsc -w"
     },
-    "bin": "bin.mjs",
+    "bin": "bin.js",
     "files": [
         "dist",
         "framer-fixed",
-        "bin.mjs",
+        "bin.js",
         "src",
         "README.md",
         "esm"
@@ -23,15 +22,8 @@
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
+            "module": "./esm/index.js",
             "default": "./dist/index.js"
-        },
-        "./dist/framer": {
-            "types": "./dist/framer.d.ts",
-            "default": "./dist/index.js"
-        },
-        "./dist/react": {
-            "types": "./dist/react.d.ts",
-            "default": "./dist/react.js"
         }
     },
     "keywords": [],
@@ -51,7 +43,7 @@
         "esbuild": "^0.20.2",
         "esbuild-plugin-polyfill-node": "^0.3.0",
         "eventemitter3": "^3.1.0",
-        "find-up": "^6.3.0",
+        "find-up": "^5.0.0",
         "fs-extra": "^11.1.1",
         "json5": "^2.2.3",
         "native-fetch": "^4.0.2",

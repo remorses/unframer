@@ -1,6 +1,6 @@
 'use client'
 
-import {  WithFramerBreakpoints } from 'unframer/dist/react'
+
 import '@/framer/styles.css'
 import { AnimatePresence } from 'unframer'
 

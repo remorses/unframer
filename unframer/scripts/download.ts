@@ -1,16 +1,11 @@
-import dprint from 'dprint-node'
 import dedent from 'dedent'
-import { shell } from '@xmorse/deployment-utils/src'
+import dprint from 'dprint-node'
 
-import fs from 'fs'
 import { build } from 'esbuild'
+import fs from 'fs'
 import path from 'path'
-import {
-    esbuildPluginBundleDependencies,
-    extractPropControlsUnsafe,
-    logger,
-    propControlsToType,
-} from '../src/exporter'
+import { esbuildPluginBundleDependencies } from '../src/esbuild'
+import { logger } from '../src/utils'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
@@ -23,8 +18,10 @@ export async function main({ framerTypesUrl }) {
     const { src: framerUrl } = await getLatestFramerScriptSrc({ session })
 
     // console.log('src', src)
-    let out = path.resolve(__dirname, '../framer-fixed/dist')
-    const prevFile = fs.readFileSync(path.resolve(out, `framer.js`), 'utf-8')
+    let out = path.resolve(__dirname, '../src')
+    const prevFile = await fs.promises
+        .readFile(path.resolve(out, `framer.js`), 'utf-8')
+        .catch(() => '')
     out = path.resolve(out)
     fs.mkdirSync(path.resolve(out), { recursive: true })
 
@@ -175,5 +172,3 @@ async function getLatestFramerScriptSrc({ session }) {
     const src = match[1]
     return { src }
 }
-
-

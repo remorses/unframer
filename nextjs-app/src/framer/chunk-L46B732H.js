@@ -1,5 +1,5 @@
 // https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js
-import { fontStore, } from 'unframer/dist/framer';
+import { fontStore, } from 'unframer';
 fontStore.loadWebFontsFromSelectors(['GF;DM Sans-regular',],);
 var fonts = [{
   family: 'DM Sans',
@@ -17,7 +17,7 @@ var css = [
 var className = 'framer-9DKEt';
 
 // https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js
-import { fontStore as fontStore2, } from 'unframer/dist/framer';
+import { fontStore as fontStore2, } from 'unframer';
 fontStore2.loadWebFontsFromSelectors(['GF;DM Sans-500',],);
 var fonts2 = [{
   family: 'DM Sans',
@@ -35,7 +35,7 @@ var css2 = [
 var className2 = 'framer-1aFoR';
 
 // https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js
-import { fontStore as fontStore3, } from 'unframer/dist/framer';
+import { fontStore as fontStore3, } from 'unframer';
 fontStore3.loadWebFontsFromSelectors(['GF;DM Sans-regular',],);
 var fonts3 = [{
   family: 'DM Sans',

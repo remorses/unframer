@@ -1,6 +1,6 @@
 'use client';
-import { Icon, } from './chunk-S3ZL2HBZ.js';
-import './chunk-RSQQT5RN.js';
+import { Icon, } from './chunk-NYGXGF5D.js';
+import './chunk-KS6IWKVH.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js
@@ -20,7 +20,7 @@ import {
   useVariantState,
   withCSS,
   withFX,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 var PhosphorFonts = getFonts(Icon,);
@@ -819,7 +819,7 @@ addFonts(Framerq64yDrOL3, [{
 }, ...PhosphorFonts,], { supportsExplicitInterCodegen: true, },);
 
 // virtual:full-page
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props, },);

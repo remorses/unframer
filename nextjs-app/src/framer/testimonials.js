@@ -15,14 +15,14 @@ import {
   useLocaleInfo,
   useVariantState as useVariantState2,
   withCSS as withCSS2,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup3, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React2 from 'react';
 
 // https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, cloneElement, createRef, useCallback, useEffect, useMemo, useRef, useState, } from 'react';
-import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
+import { addPropertyControls, ControlType, RenderTarget, } from 'unframer';
 import { frame, LayoutGroup, motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion, useTransform, wrap, } from 'unframer';
 var MAX_DUPLICATED_ITEMS = 100;
 var directionTransformers = {
@@ -449,12 +449,12 @@ import {
   Text,
   useVariantState,
   withCSS,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup2, motion as motion2, } from 'unframer';
 import * as React from 'react';
 
 // https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js
-import { fontStore, } from 'unframer/dist/framer';
+import { fontStore, } from 'unframer';
 fontStore.loadWebFontsFromSelectors(['GF;DM Sans-500',],);
 var fonts = [{
   family: 'DM Sans',
@@ -1190,7 +1190,7 @@ addPropertyControls3(FramerLnQMzmpqJ, {
 addFonts2(FramerLnQMzmpqJ, [...CommentFonts, ...TickerFonts,],);
 
 // virtual:testimonials
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default2.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default2, ...props, },);

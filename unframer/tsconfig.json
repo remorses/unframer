@@ -2,16 +2,17 @@
     "extends": "../tsconfig.base.json",
     "compilerOptions": {
         "rootDir": "src",
-        "target": "ESNext",
+        "target": "ES2015",
+        "esModuleInterop": true,
         "lib": ["dom"],
-        "moduleResolution": "NodeNext",
-        "module": "NodeNext",
+        "moduleResolution": "Node",
+        "module": "CommonJS",
         "noEmit": false,
         "skipLibCheck": true,
         "jsx": "react-jsx",
 
-        "outDir": "dist",
+        "outDir": "dist"
     },
     "include": ["src"],
-    "exclude": ["dist", "bin.mjs"],
+    "exclude": ["dist", "bin.js"]
 }

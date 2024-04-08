@@ -15,7 +15,7 @@ import {
   useVariantState,
   withCSS,
   withFX,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { AnimatePresence, LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 var MotionDivWithFX = withFX(motion.div,);
@@ -719,7 +719,7 @@ addFonts(FramervitO4v4o_, [{
 },], { supportsExplicitInterCodegen: true, },);
 
 // virtual:menu-overlay
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props, },);

@@ -1,4 +1,4 @@
-export * from '../framer-fixed/dist/framer.js'
+export * from './framer'
 export {
     FramerStyles,
     UnframerBreakpoint,

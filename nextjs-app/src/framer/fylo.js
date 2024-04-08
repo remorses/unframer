@@ -19,14 +19,14 @@ import {
   useVariantState as useVariantState6,
   withCSS as withCSS8,
   withFX,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup6, motion as motion8, MotionConfigContext as MotionConfigContext6, } from 'unframer';
 import * as React8 from 'react';
 
 // https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { Children, } from 'react';
-import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
+import { addPropertyControls, ControlType, RenderTarget, } from 'unframer';
 import { motion, useMotionValue, useTransform, } from 'unframer';
 function Animator(props,) {
   const { pathAnimation, from, to, animate: animate3, shouldLoop, loopOptions, slots = [], endCircle, } = props;
@@ -246,7 +246,7 @@ import {
   useLocaleInfo as useLocaleInfo4,
   useVariantState as useVariantState4,
   withCSS as withCSS6,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup4, motion as motion6, MotionConfigContext as MotionConfigContext4, } from 'unframer';
 import * as React6 from 'react';
 
@@ -257,7 +257,7 @@ import {
   ControlType as ControlType2,
   RenderTarget as RenderTarget2,
   withCSS,
-} from 'unframer/dist/framer';
+} from 'unframer';
 
 // https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs
 var react_exports = {};
@@ -2992,7 +2992,7 @@ import {
   useLocaleInfo as useLocaleInfo3,
   useVariantState as useVariantState3,
   withCSS as withCSS5,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup3, motion as motion5, MotionConfigContext as MotionConfigContext3, } from 'unframer';
 import * as React5 from 'react';
 
@@ -3010,7 +3010,7 @@ import {
   useLocaleInfo as useLocaleInfo2,
   useVariantState as useVariantState2,
   withCSS as withCSS4,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'unframer';
 import * as React4 from 'react';
 
@@ -3021,12 +3021,12 @@ import {
   ControlType as ControlType6,
   RenderTarget as RenderTarget5,
   withCSS as withCSS2,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { animate as animate2, motion as motion2, transform, useTransform as useTransform2, } from 'unframer';
 import { useCallback as useCallback2, useRef as useRef3, useState as useState3, } from 'react';
 
 // https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js
-import { ControlType as ControlType3, } from 'unframer/dist/framer';
+import { ControlType as ControlType3, } from 'unframer';
 var containerStyles = {
   position: 'relative',
   width: '100%',
@@ -3106,7 +3106,7 @@ var fontControls = {
 };
 
 // https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js
-import { useIsInCurrentNavigationTarget, } from 'unframer/dist/framer';
+import { useIsInCurrentNavigationTarget, } from 'unframer';
 import { useEffect, } from 'react';
 
 // https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js
@@ -3120,17 +3120,17 @@ function useConstant(init,) {
 }
 
 // https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js
-import { Color, } from 'unframer/dist/framer';
+import { Color, } from 'unframer';
 
 // https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js
-import { MotionValue, } from 'unframer/dist/framer';
+import { MotionValue, } from 'unframer';
 var isMotionValue = (v4,) => v4 instanceof MotionValue;
 
 // https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js
 import * as React from 'react';
 
 // https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js
-import { ControlType as ControlType4, } from 'unframer/dist/framer';
+import { ControlType as ControlType4, } from 'unframer';
 
 // https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js
 import { useMemo, } from 'react';
@@ -3148,7 +3148,7 @@ function useOnChange(value, callback,) {
 
 // https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js
 import { useCallback, useEffect as useEffect4, useRef as useRef2, } from 'react';
-import { animate, motionValue, RenderTarget as RenderTarget3, } from 'unframer/dist/framer';
+import { animate, motionValue, RenderTarget as RenderTarget3, } from 'unframer';
 function useAutoMotionValue(inputValue, options,) {
   var ref;
   const optionsRef = useRef2(options,);
@@ -3191,19 +3191,19 @@ function useAutoMotionValue(inputValue, options,) {
 }
 
 // https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js
-import { fontStore, } from 'unframer/dist/framer';
+import { fontStore, } from 'unframer';
 import { useEffect as useEffect5, } from 'react';
 
 // https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js
 import { useMemo as useMemo2, } from 'react';
-import { RenderTarget as RenderTarget4, } from 'unframer/dist/framer';
+import { RenderTarget as RenderTarget4, } from 'unframer';
 
 // https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js
 import * as React2 from 'react';
 
 // https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js
 import { useMemo as useMemo3, } from 'react';
-import { ControlType as ControlType5, } from 'unframer/dist/framer';
+import { ControlType as ControlType5, } from 'unframer';
 var borderRadiusControl = {
   borderRadius: {
     title: 'Radius',
@@ -3638,7 +3638,7 @@ addPropertyControls3(Slider, {
 },);
 
 // https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js
-import { fontStore as r, } from 'unframer/dist/framer';
+import { fontStore as r, } from 'unframer';
 r.loadWebFontsFromSelectors(['CUSTOM;PP Supply Sans Medium',],);
 var fonts = [{ family: 'PP Supply Sans Medium', url: 'https://framerusercontent.com/assets/0kF4T3RnZOnNCKwJnGNdr51Rg.ttf', },];
 var css = [
@@ -3658,7 +3658,7 @@ import {
   useLocaleInfo,
   useVariantState,
   withCSS as withCSS3,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React3 from 'react';
 var enabledGestures = { nPpSWwiWE: { hover: true, pressed: true, }, r5tWv5mqY: { hover: true, pressed: true, }, };
@@ -3845,7 +3845,7 @@ import {
   useLocaleInfo as l3,
   useVariantState as s,
   withCSS as p4,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as m2, motion as f2, MotionConfigContext as g2, } from 'unframer';
 import * as v2 from 'react';
 var h2 = { J6MeOBYHD: { hover: true, pressed: true, }, ygo8X2vVX: { hover: true, pressed: true, }, };
@@ -4111,7 +4111,7 @@ import {
   useLocaleInfo as s2,
   useVariantState as l4,
   withCSS as f3,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as m3, motion as p5, MotionConfigContext as c3, } from 'unframer';
 import * as h3 from 'react';
 var u2 = { jy1UKfzw2: { hover: true, pressed: true, }, KDR2W3FAc: { hover: true, pressed: true, }, };
@@ -8860,7 +8860,7 @@ import {
   useLocaleInfo as useLocaleInfo5,
   useVariantState as useVariantState5,
   withCSS as withCSS7,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext5, } from 'unframer';
 import * as React7 from 'react';
 var TypewriterFonts3 = getFonts4(TypeWriter,);
@@ -13899,7 +13899,7 @@ addFonts6(FramerC6ZYtBmll, [
 ],);
 
 // virtual:fylo
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default8.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default8, ...props, },);

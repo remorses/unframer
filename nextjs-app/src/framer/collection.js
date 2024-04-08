@@ -1,5 +1,5 @@
 'use client';
-import { className, className2, css, css2, fonts, fonts2, } from './chunk-S7T2OB4C.js';
+import { className, className2, css, css2, fonts, fonts2, } from './chunk-7SJVVYGA.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js
@@ -17,13 +17,13 @@ import {
   useQueryData,
   useVariantState,
   withCSS,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 
 // https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js
 import { jsx as e, jsxs as t, } from 'react/jsx-runtime';
-import { addPropertyControls as o, ControlType as n, LazyValue as a, } from 'unframer/dist/framer';
+import { addPropertyControls as o, ControlType as n, LazyValue as a, } from 'unframer';
 import * as i from 'react';
 var r = { j95Se8Jpd: new a(() => import('./b9ZvTRprK-0-J32I5EDE.js')), };
 var s = (e2,) => {
@@ -555,7 +555,7 @@ FramerbhAfNR9wU.defaultProps = { height: 1100, width: 600, };
 addFonts(FramerbhAfNR9wU, [...fonts2, ...fonts,],);
 
 // virtual:collection
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default2.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default2, ...props, },);

@@ -1,5 +1,5 @@
 'use client';
-import { className, className2, css, css2, fonts, fonts2, } from './chunk-S7T2OB4C.js';
+import { className, className2, css, css2, fonts, fonts2, } from './chunk-7SJVVYGA.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js
@@ -15,7 +15,7 @@ import {
   useLocaleInfo,
   useVariantState,
   withCSS,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 
@@ -59,7 +59,7 @@ var fonts3 = {
 };
 
 // https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js
-import { fontStore, } from 'unframer/dist/framer';
+import { fontStore, } from 'unframer';
 fontStore.loadFonts(['Inter-Bold', 'Inter-Black', 'Inter-BlackItalic', 'Inter-BoldItalic',],);
 var fonts4 = [];
 var css3 = [
@@ -68,7 +68,7 @@ var css3 = [
 var className3 = 'framer-ufZwl';
 
 // https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js
-import { fontStore as fontStore2, } from 'unframer/dist/framer';
+import { fontStore as fontStore2, } from 'unframer';
 fontStore2.loadFonts([],);
 var fonts5 = [];
 var css4 = [
@@ -77,7 +77,7 @@ var css4 = [
 var className4 = 'framer-zNzA5';
 
 // https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js
-import { fontStore as fontStore3, } from 'unframer/dist/framer';
+import { fontStore as fontStore3, } from 'unframer';
 fontStore3.loadFonts(['GF;Fragment Mono-regular',],);
 var fonts6 = [{
   family: 'Fragment Mono',
@@ -92,7 +92,7 @@ var css5 = [
 var className5 = 'framer-2yfsT';
 
 // https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js
-import { fontStore as fontStore4, } from 'unframer/dist/framer';
+import { fontStore as fontStore4, } from 'unframer';
 fontStore4.loadFonts(['Inter-Bold', 'Inter-Black', 'Inter-BlackItalic', 'Inter-BoldItalic',],);
 var fonts7 = [];
 var css6 = [
@@ -232,7 +232,7 @@ addFonts(FramerinWBH4dIK, [
 ],);
 
 // virtual:rich
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default.Responsive = (props2,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props2, },);

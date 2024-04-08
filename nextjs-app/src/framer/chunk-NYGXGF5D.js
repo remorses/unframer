@@ -1,10 +1,10 @@
-import { defaultEvents, NullState, useIconSelection, } from './chunk-RSQQT5RN.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
 
 // https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 import { useEffect, useRef, useState, } from 'react';
-import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
+import { addPropertyControls, ControlType, RenderTarget, } from 'unframer';
 import { motion, } from 'unframer';
 
 // https :https://framer.com/m/phosphor-icons/House.js@0.0.50

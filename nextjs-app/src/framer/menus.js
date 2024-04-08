@@ -1,5 +1,5 @@
 'use client';
-import { defaultEvents, NullState, useIconSelection, } from './chunk-RSQQT5RN.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js
@@ -15,7 +15,7 @@ import {
   useActiveVariantCallback,
   useVariantState as useVariantState2,
   withCSS as withCSS2,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup2, motion as motion3, } from 'unframer';
 import * as React3 from 'react';
 
@@ -23,7 +23,7 @@ import * as React3 from 'react';
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import * as React from 'react';
 import { useEffect, useRef, useState, } from 'react';
-import { addPropertyControls, ControlType, RenderTarget, } from 'unframer/dist/framer';
+import { addPropertyControls, ControlType, RenderTarget, } from 'unframer';
 import { motion, } from 'unframer';
 
 // https :https://framer.com/m/hero-icons/Home.js@0.0.27
@@ -561,7 +561,7 @@ import {
   useAddVariantProps,
   useVariantState,
   withCSS,
-} from 'unframer/dist/framer';
+} from 'unframer';
 
 // https :https://framer.com/m/framer/useConstant.js@^1.0.0
 import { useRef as useRef2, } from 'react';
@@ -3272,7 +3272,7 @@ addFonts2(FramerrXuKNGhVw, [
 ],);
 
 // virtual:menus
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default2.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default2, ...props, },);

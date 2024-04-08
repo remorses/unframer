@@ -1,5 +1,5 @@
 'use client';
-import { className, className2, className3, css, css2, css3, fonts, fonts2, fonts3, } from './chunk-MEJ7UUIH.js';
+import { className, className2, className3, css, css2, css3, fonts, fonts2, fonts3, } from './chunk-L46B732H.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js
@@ -14,7 +14,7 @@ import {
   useLocaleInfo as useLocaleInfo4,
   useVariantState as useVariantState5,
   withCSS as withCSS5,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup5, motion as motion7, MotionConfigContext as MotionConfigContext4, } from 'unframer';
 import * as React5 from 'react';
 
@@ -57,7 +57,7 @@ function withCountUp50speed502(Component6,) {
 }
 
 // https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js
-import { fontStore, } from 'unframer/dist/framer';
+import { fontStore, } from 'unframer';
 fontStore.loadWebFontsFromSelectors(['GF;DM Sans-700',],);
 var fonts4 = [{
   family: 'DM Sans',
@@ -75,7 +75,7 @@ var css4 = [
 var className4 = 'framer-HNAxs';
 
 // https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js
-import { fontStore as fontStore2, } from 'unframer/dist/framer';
+import { fontStore as fontStore2, } from 'unframer';
 fontStore2.loadWebFontsFromSelectors(['GF;DM Sans-700',],);
 var fonts5 = [{
   family: 'DM Sans',
@@ -104,13 +104,13 @@ import {
   useLocaleInfo as useLocaleInfo2,
   useVariantState as useVariantState2,
   withCSS as withCSS2,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup2, motion as motion4, MotionConfigContext as MotionConfigContext2, } from 'unframer';
 import * as React2 from 'react';
 
 // https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js
 import { jsx as _jsx3, } from 'react/jsx-runtime';
-import { addFonts, cx, SVG, useComponentViewport, useLocaleInfo, useVariantState, withCSS, } from 'unframer/dist/framer';
+import { addFonts, cx, SVG, useComponentViewport, useLocaleInfo, useVariantState, withCSS, } from 'unframer';
 import { LayoutGroup, motion as motion3, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 var cycleOrder = ['gzT3814Te',];
@@ -364,7 +364,7 @@ import {
   useOnVariantChange,
   useVariantState as useVariantState3,
   withCSS as withCSS3,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup3, motion as motion5, MotionConfigContext as MotionConfigContext3, } from 'unframer';
 import * as React3 from 'react';
 var cycleOrder3 = ['qa5zH5jg8',];
@@ -576,7 +576,7 @@ import {
   Image,
   useVariantState as useVariantState4,
   withCSS as withCSS4,
-} from 'unframer/dist/framer';
+} from 'unframer';
 import { LayoutGroup as LayoutGroup4, motion as motion6, } from 'unframer';
 import * as React4 from 'react';
 var cycleOrder4 = ['L6GyWOWSZ',];
@@ -1224,7 +1224,7 @@ addFonts5(FramereaL2rwfV9, [
 ],);
 
 // virtual:hero
-import { WithFramerBreakpoints, } from 'unframer/dist/react';
+import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 stdin_default5.Responsive = (props,) => {
   return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default5, ...props, },);

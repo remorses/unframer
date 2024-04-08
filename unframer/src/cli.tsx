@@ -4,7 +4,7 @@ import events, { EventEmitter, setMaxListeners } from 'events'
 
 import chokidar from 'chokidar'
 import fs from 'fs-extra'
-import { findUp } from 'find-up'
+import findUp from 'find-up'
 import tmp from 'tmp'
 import path from 'path'
 const configName = 'unframer.json'
@@ -12,8 +12,6 @@ import { cac } from 'cac'
 import { logger } from './utils.js'
 
 export const cli = cac()
-
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 cli.command('', 'Run unframer')
     .option('--watch', 'Watch for Framer and unframer.json changes')

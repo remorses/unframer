@@ -1,5 +1,5 @@
 // https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js
-import { fontStore, } from 'unframer/dist/framer';
+import { fontStore, } from 'unframer';
 fontStore.loadFonts(['Inter', 'Inter-Bold', 'Inter-BoldItalic', 'Inter-Italic',],);
 var fonts = [];
 var css = [
@@ -8,7 +8,7 @@ var css = [
 var className = 'framer-0jROA';
 
 // https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js
-import { fontStore as fontStore2, } from 'unframer/dist/framer';
+import { fontStore as fontStore2, } from 'unframer';
 fontStore2.loadFonts(['Inter-Bold', 'Inter-Black', 'Inter-BlackItalic', 'Inter-BoldItalic',],);
 var fonts2 = [];
 var css2 = [
