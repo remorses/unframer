@@ -1,5 +1,5 @@
 // @ts-nocheck
-// https :https://app.framerstatic.com/chunk-73TYJ7YB.js
+// https :https://app.framerstatic.com/chunk-O7E5UDPD.js
 import { createContext, } from 'react';
 import { createContext as createContext2, } from 'react';
 import { createContext as createContext3, } from 'react';
@@ -19,6 +19,7 @@ import { createElement as createElement2, Fragment, useMemo as useMemo4, } from 
 import { useMemo as useMemo2, } from 'react';
 import { useMemo as useMemo3, } from 'react';
 import React__default, { useContext as useContext6, } from 'react';
+import React__default2 from 'react';
 import { useCallback as useCallback2, useState, } from 'react';
 import { useRef as useRef3, } from 'react';
 import { useEffect as useEffect4, } from 'react';
@@ -1937,7 +1938,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.0.11-sync.2';
+    this.version = '11.0.11-sync.5';
     this.canTrackVelocity = false;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3386,8 +3387,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.0.11-sync.2',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.0.11-sync.2 may not work as expected.`,
+          nextValue.version === '11.0.11-sync.5',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.0.11-sync.5 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -3418,6 +3419,12 @@ function updateMotionValuesFromProps(element, next, prev,) {
 }
 var featureNames = Object.keys(featureDefinitions,);
 var numFeatures = featureNames.length;
+function getClosestProjectingNode(visualElement,) {
+  if (!visualElement) {
+    return void 0;
+  }
+  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
+}
 var propEventHandlers = [
   'AnimationStart',
   'AnimationComplete',
@@ -3575,7 +3582,7 @@ var VisualElement = class {
       }
     }
     if ((this.type === 'html' || this.type === 'svg') && !this.projection && ProjectionNodeConstructor) {
-      this.projection = new ProjectionNodeConstructor(this.latestValues, this.parent && this.parent.projection,);
+      this.projection = new ProjectionNodeConstructor(this.latestValues, getClosestProjectingNode(this.parent,),);
       const { layoutId, layout: layout2, drag: drag2, dragConstraints, layoutScroll, layoutRoot, } = renderedProps;
       this.projection.setOptions({
         layoutId,
@@ -5648,7 +5655,10 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
     transform2 += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
   }
   if (latestTransform) {
-    const { rotate, rotateX, rotateY, skewX, skewY, } = latestTransform;
+    const { transformPerspective, rotate, rotateX, rotateY, skewX, skewY, } = latestTransform;
+    if (transformPerspective) {
+      transform2 = `perspective(${transformPerspective}px) ${transform2}`;
+    }
     if (rotate) {
       transform2 += `rotate(${rotate}deg) `;
     }
@@ -7145,7 +7155,10 @@ var SVGVisualElement = class extends DOMVisualElement {
 var createDomVisualElement = (Component23, options,) => {
   return isSVGComponent(Component23,)
     ? new SVGVisualElement(options, { enableHardwareAcceleration: false, },)
-    : new HTMLVisualElement(options, { enableHardwareAcceleration: true, },);
+    : new HTMLVisualElement(options, {
+      enableHardwareAcceleration: true,
+      allowProjection: Component23 !== React__default2.Fragment,
+    },);
 };
 var layout = {
   layout: {
@@ -9076,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.Q2DHSUSM.js
+// https :https://app.framerstatic.com/framer.L736M3IJ.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9275,8 +9288,13 @@ import { jsx as jsx54, jsxs as jsxs18, } from 'react/jsx-runtime';
 import { jsx as jsx55, } from 'react/jsx-runtime';
 import { jsx as jsx56, } from 'react/jsx-runtime';
 import { jsx as jsx57, } from 'react/jsx-runtime';
+import { jsx as jsx58, } from 'react/jsx-runtime';
+import { useRef as useRef18, } from 'react';
+import { jsx as jsx59, } from 'react/jsx-runtime';
+import { useRef as useRef19, } from 'react';
+import { jsx as jsx60, } from 'react/jsx-runtime';
 import React85 from 'react';
-import { jsx as jsx58, jsxs as jsxs19, } from 'react/jsx-runtime';
+import { jsx as jsx61, jsxs as jsxs19, } from 'react/jsx-runtime';
 import {
   Children as Children32,
   cloneElement as cloneElement32,
@@ -9284,12 +9302,12 @@ import {
   isValidElement as isValidElement32,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef19,
+  useRef as useRef21,
 } from 'react';
 import * as React86 from 'react';
-import { useRef as useRef18, } from 'react';
-import { jsx as jsx59, } from 'react/jsx-runtime';
-import { jsx as jsx60, } from 'react/jsx-runtime';
+import { useRef as useRef20, } from 'react';
+import { jsx as jsx62, } from 'react/jsx-runtime';
+import { jsx as jsx63, } from 'react/jsx-runtime';
 import { useEffect as useEffect142, useState as useState22, } from 'react';
 var require_hsluv = __commonJS({
   '../../../node_modules/hsluv/hsluv.js'(exports, module,) {
@@ -12139,6 +12157,9 @@ function Point(x, y,) {
   Point2.angle = (a, b,) => {
     return Math.atan2(b.y - a.y, b.x - a.x,) * 180 / Math.PI - 90;
   };
+  Point2.angleFromX = (a, b,) => {
+    return Math.atan2(b.y - a.y, b.x - a.x,) * 180 / Math.PI;
+  };
   Point2.isEqual = (a, b,) => {
     return a.x === b.x && a.y === b.y;
   };
@@ -12168,24 +12189,6 @@ function Point(x, y,) {
     };
   }
   Point2.center = center;
-  function insidePoints(point2, points,) {
-    var _a, _b, _c, _d;
-    const x = point2.x;
-    const y = point2.y;
-    let isInside = false;
-    for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
-      const xi = ((_a = points[i]) == null ? void 0 : _a.x) ?? 0;
-      const yi = ((_b = points[i]) == null ? void 0 : _b.y) ?? 0;
-      const xj = ((_c = points[j]) == null ? void 0 : _c.x) ?? 0;
-      const yj = ((_d = points[j]) == null ? void 0 : _d.y) ?? 0;
-      const intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
-      if (intersect) {
-        isInside = !isInside;
-      }
-    }
-    return isInside;
-  }
-  Point2.insidePoints = insidePoints;
 })(Point || (Point = {}),);
 var BezierDefaults = {
   curve: 'ease',
@@ -14908,15 +14911,18 @@ var ErrorBoundary2 = class extends Component3 {
     __publicField(this, 'state', {},);
   }
   componentDidCatch(error, info,) {
-    let stack = info.componentStack.split('\n',).filter((line,) => line.length !== 0);
+    var _a;
+    let stack = (_a = info.componentStack) == null ? void 0 : _a.split('\n',).filter((line,) => line.length !== 0);
     let currentIndex = 0;
-    for (const line of stack) {
-      if (line.startsWith(`    in ${this.constructor.name}`,)) {
-        break;
+    if (stack) {
+      for (const line of stack) {
+        if (line.startsWith(`    in ${this.constructor.name}`,)) {
+          break;
+        }
+        currentIndex++;
       }
-      currentIndex++;
+      stack = stack.slice(0, currentIndex,);
     }
-    stack = stack.slice(0, currentIndex,);
     this.setState({
       lastError: {
         error,
@@ -15325,13 +15331,18 @@ var Rect;
     };
   };
   Rect2.boundingRectFromPoints = (ps,) => {
-    const xValues = ps.map((point2,) => point2.x);
-    const yValues = ps.map((point2,) => point2.y);
-    const x = Math.min(...xValues,);
-    const y = Math.min(...yValues,);
-    const width = Math.max(...xValues,) - x;
-    const height = Math.max(...yValues,) - y;
-    return { x, y, width, height, };
+    let minX2 = Infinity;
+    let maxX2 = -Infinity;
+    let minY2 = Infinity;
+    let maxY2 = -Infinity;
+    for (let i = 0; i < ps.length; i++) {
+      const point2 = ps[i];
+      minX2 = Math.min(minX2, point2.x,);
+      maxX2 = Math.max(maxX2, point2.x,);
+      minY2 = Math.min(minY2, point2.y,);
+      maxY2 = Math.max(maxY2, point2.y,);
+    }
+    return { x: minX2, y: minY2, width: maxX2 - minX2, height: maxY2 - minY2, };
   };
   Rect2.fromPoints = (ps,) => {
     const [tl, tr, _, bl,] = ps;
@@ -16153,6 +16164,8 @@ var ControlType = /* @__PURE__ */ ((ControlType2,) => {
   ControlType2['CustomCursor'] = 'customcursor';
   ControlType2['Border'] = 'border';
   ControlType2['Cursor'] = 'cursor';
+  ControlType2['Padding'] = 'padding';
+  ControlType2['BorderRadius'] = 'borderradius';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -17099,6 +17112,8 @@ function getControlDefaultValue(control,) {
       case 'date':
       case 'link':
       case 'boxshadow':
+      case 'padding':
+      case 'borderradius':
         return isString22(control.defaultValue,) ? control.defaultValue : void 0;
       case 'boolean':
         return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
@@ -20044,7 +20059,7 @@ function setTranslateZHack(style, enabled,) {
   if (!useTranslateZHack || !onCanvas) {
     return;
   }
-  const transform2 = style.transform || '';
+  const transform2 = isString22(style.transform,) ? style.transform || '' : '';
   if (enabled) {
     const hasTranslateZ = transform2.includes(translateZ,);
     if (!hasTranslateZ) {
@@ -27682,7 +27697,7 @@ function getTransition(value,) {
   }
   return value == null ? void 0 : value.transition;
 }
-async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId,) {
+async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
   const transition = getTransition(target,);
   return Promise.all(
     effectValuesKeys.map((key7,) => {
@@ -27709,14 +27724,17 @@ async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appea
               elapsed: safeWindow.HandoffAppearAnimations(appearId, key7, motionValue2, frame,),
             }
             : void 0;
-        const opts = {
-          ...transition,
-          velocity: 0,
-          elapsed: 0,
-          ...handoff,
-          onComplete: () => resolve(),
-        };
-        animate(motionValue2, value, opts,);
+        if (instant) {
+          motionValue2.set(value,);
+        } else {
+          animate(motionValue2, value, {
+            ...transition,
+            velocity: 0,
+            elapsed: 0,
+            ...handoff,
+            onComplete: () => resolve(),
+          },);
+        }
       },);
     },),
   );
@@ -27726,16 +27744,6 @@ var presenceOptionsKeys = /* @__PURE__ */ new Set([
   'presenceAnimate',
   'presenceExit',
 ],);
-function getVisualElementBase(visualElement, style,) {
-  const ctx = visualElement.getVariantContext();
-  const base = { ...style, };
-  if (Array.isArray(ctx == null ? void 0 : ctx.animate,)) {
-    for (const variant of ctx.animate) {
-      Object.assign(base, visualElement.getVariant(variant,),);
-    }
-  }
-  return base;
-}
 function usePresenceAnimation(
   {
     initial: motionInitial,
@@ -27754,6 +27762,9 @@ function usePresenceAnimation(
   const animateConfig = presenceAnimate ?? motionAnimate;
   const exit = presenceExit ?? motionExit;
   const hasMounted = useRef122(false,);
+  const lastAnimate = useRef122(animateConfig,);
+  const [isPresent2, safeToRemove,] = usePresence();
+  const lastPresence = useRef122(false,);
   const effect = useConstant2(() => {
     var _a;
     const base = initial ?? style;
@@ -27770,43 +27781,51 @@ function usePresenceAnimation(
     }
     return { values: makeFXValues(defaults,), };
   },);
-  const [isPresent2, safeToRemove,] = usePresence();
-  const shouldReduceMotion = useReducedMotionConfig();
   useLayoutEffect22(() => {
-    hasMounted.current = true;
-    if (!enabled) {
-      safeToRemove == null ? void 0 : safeToRemove();
-      return;
-    }
-    if (isPresent2) {
-      if (initial && animateConfig) {
-        runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
-      }
-    } else {
-      if (exit) {
-        runEffectAnimation(exit, effect, shouldReduceMotion, ref,).then(() => safeToRemove());
-      } else {
-        safeToRemove();
-      }
-    }
-  }, [isPresent2,],);
-  useLayoutEffect22(() => {
-    if (!hasMounted.current) {
+    if (hasMounted.current && animateConfig) {
       return;
     }
     const visualElement = visualElementStore.get(ref.current,);
     if (!visualElement) {
       return;
     }
-    const base = isObject2(animateConfig,) ? animateConfig : getVisualElementBase(visualElement, style,);
+    hasMounted.current = true;
     for (const key7 in effect.values) {
       if (!isFXValuesKey(key7,)) {
         continue;
       }
-      const value = base == null ? void 0 : base[key7];
+      const value = style == null ? void 0 : style[key7];
       visualElement.setBaseTarget(key7, isNumber2(value,) ? value : defaultFXValues[key7],);
     }
-  }, [JSON.stringify(animateConfig,),],);
+  }, [animateConfig,],);
+  const shouldReduceMotion = useReducedMotionConfig();
+  useLayoutEffect22(() => {
+    if (!enabled) {
+      safeToRemove == null ? void 0 : safeToRemove();
+      return;
+    }
+    if (isPresent2 !== lastPresence.current) {
+      lastPresence.current = isPresent2;
+      if (isPresent2) {
+        if (initial && animateConfig) {
+          runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
+        }
+      } else {
+        if (exit) {
+          runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
+        } else {
+          safeToRemove();
+        }
+      }
+    } else {
+      const hasAnimateChanged = !isEqual(animateConfig, lastAnimate.current,);
+      if (!hasAnimateChanged || !animateConfig) {
+        return;
+      }
+      lastAnimate.current = animateConfig;
+      runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId, true,);
+    }
+  },);
   return effect;
 }
 function calcOffsetTop(element, container,) {
@@ -28909,6 +28928,181 @@ function useCustomCursors(webPageCursors,) {
     registerCursors(cursors,);
   }, [cursors, registerCursors,],);
 }
+function degreesToRadians(degrees2,) {
+  return degrees2 * (Math.PI / 180);
+}
+var Line = /* @__PURE__ */ (() => {
+  function Line2(a, b,) {
+    return { a, b, };
+  }
+  Line2.offset = (line, offset,) => {
+    const angle = Point.angleFromX(line.a, line.b,);
+    const rad = degreesToRadians(angle,);
+    const x = offset * Math.sin(rad,);
+    const y = offset * Math.cos(rad,);
+    return Line2(
+      { x: line.a.x + x, y: line.a.y - y, },
+      {
+        x: line.b.x + x,
+        y: line.b.y - y,
+      },
+    );
+  };
+  Line2.intersection = (lineA, lineB,) => {
+    const x1 = lineA.a.x;
+    const y1 = lineA.a.y;
+    const x2 = lineA.b.x;
+    const y2 = lineA.b.y;
+    const x3 = lineB.a.x;
+    const y3 = lineB.a.y;
+    const x4 = lineB.b.x;
+    const y4 = lineB.b.y;
+    const d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+    if (d === 0) {
+      return null;
+    }
+    const xi = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
+    const yi = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+    return { x: xi, y: yi, };
+  };
+  Line2.intersectionAngle = (lineA, lineB,) => {
+    const deltaAX = lineA.b.x - lineA.a.x;
+    const deltaAY = lineA.b.y - lineA.a.y;
+    const deltaBX = lineB.b.x - lineB.a.x;
+    const deltaBY = lineB.b.y - lineB.a.y;
+    const angle = Math.atan2(deltaAX * deltaBY - deltaAY * deltaBX, deltaAX * deltaBX + deltaAY * deltaBY,);
+    return angle * (180 / Math.PI);
+  };
+  Line2.isOrthogonal = (line,) => {
+    return line.a.x === line.b.x || line.a.y === line.b.y;
+  };
+  Line2.perpendicular = (line, pointOnLine,) => {
+    const deltaX = line.a.x - line.b.x;
+    const deltaY = line.a.y - line.b.y;
+    const pointB = Point(pointOnLine.x - deltaY, pointOnLine.y + deltaX,);
+    return Line2(pointB, pointOnLine,);
+  };
+  Line2.projectPoint = (line, point2,) => {
+    const perp = Line2.perpendicular(line, point2,);
+    return Line2.intersection(line, perp,);
+  };
+  Line2.pointAtPercentDistance = (line, distance2,) => {
+    const hypotenuse = Line2.distance(line,);
+    const r = distance2 * hypotenuse / hypotenuse;
+    return {
+      x: r * line.b.x + (1 - r) * line.a.x,
+      y: r * line.b.y + (1 - r) * line.a.y,
+    };
+  };
+  Line2.distance = (line,) => {
+    return Point.distance(line.a, line.b,);
+  };
+  return Line2;
+})();
+var Polygon = {
+  /**
+   * Determine if the vertices are ordered clockwise or counter-clockwise. This works for simple
+   * (non-self-intersecting) convex polygons. If the polygon is collapsed into a line (signedArea = 0), we consider it
+   * clockwise for it works with how Framer draws the polygons.
+   * See: https://paulbourke.net/geometry/polygonmesh/
+   * @internal */
+  isClockwise: (points,) => {
+    return Polygon.signedArea(points,) <= 0;
+  },
+  /**
+   * Calculate the signed area to determine if the vertices go clockwise or counter clockwise. We flip all the y
+   * values because the y axis in our canvas coordinate is fipped.
+   * See: https://mathworld.wolfram.com/PolygonArea.html
+   * @internal */
+  signedArea: (points,) => {
+    let sum = 0;
+    const len = points.length;
+    for (let i = 0; i < len; i++) {
+      const pointA = points[i];
+      const pointB = points[(i + 1) % len];
+      if (!pointA || !pointB) {
+        continue;
+      }
+      sum += pointA.x * -pointB.y - pointB.x * -pointA.y;
+    }
+    return 1 / 2 * sum;
+  },
+  /**
+   * Determine if some Point lies inside the polygon formed by other Points.
+   * The other points must be provided in a clockwise/counter clockwise order.
+   *
+   * Ray-casting algorithm based on
+   * https://wrf.ecse.rpi.edu/Research/Short_Notes/pnpoly.html
+   *
+   * @internal */
+  containsPoint: (polygonPoints2, point2,) => {
+    var _a, _b, _c, _d;
+    const x = point2.x;
+    const y = point2.y;
+    let isInside = false;
+    for (let i = 0, j = polygonPoints2.length - 1; i < polygonPoints2.length; j = i++) {
+      const xi = ((_a = polygonPoints2[i]) == null ? void 0 : _a.x) ?? 0;
+      const yi = ((_b = polygonPoints2[i]) == null ? void 0 : _b.y) ?? 0;
+      const xj = ((_c = polygonPoints2[j]) == null ? void 0 : _c.x) ?? 0;
+      const yj = ((_d = polygonPoints2[j]) == null ? void 0 : _d.y) ?? 0;
+      const intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
+      if (intersect) {
+        isInside = !isInside;
+      }
+    }
+    return isInside;
+  },
+  /** @internal */
+  intersect: (pointsA, pointsB,) => {
+    if (pointsA.length < 1 || pointsB.length < 1) {
+      return false;
+    }
+    const boundingRectA = Rect.boundingRectFromPoints(pointsA,);
+    const boundingRectB = Rect.boundingRectFromPoints(pointsB,);
+    if (!Rect.intersects(boundingRectA, boundingRectB,)) {
+      return false;
+    }
+    const edgesA = [];
+    const pointsALength = pointsA.length;
+    pointsA.forEach((point2, index,) => {
+      const nextPoint = pointsA[(index + 1) % pointsALength];
+      if (!nextPoint) {
+        return;
+      }
+      edgesA.push(Line(point2, nextPoint,),);
+    },);
+    const edgesB = [];
+    const pointsBLength = pointsB.length;
+    pointsB.forEach((point2, index,) => {
+      const nextPoint = pointsB[(index + 1) % pointsBLength];
+      if (!nextPoint) {
+        return;
+      }
+      edgesB.push(Line(point2, nextPoint,),);
+    },);
+    for (const edgeA of edgesA) {
+      for (const edgeB of edgesB) {
+        const intersection2 = segmentsIntersect(edgeA, edgeB,);
+        if (intersection2) {
+          return true;
+        }
+      }
+    }
+    if (Polygon.containsPoint(pointsB, pointsA[0],)) {
+      return true;
+    }
+    if (Polygon.containsPoint(pointsA, pointsB[0],)) {
+      return true;
+    }
+    return false;
+  },
+};
+function segmentsIntersect(segmentA, segmentB,) {
+  const { a, b, } = segmentA;
+  const { a: c, b: d, } = segmentB;
+  return Polygon.isClockwise([a, c, d,],) !== Polygon.isClockwise([b, c, d,],) &&
+    Polygon.isClockwise([a, b, c,],) !== Polygon.isClockwise([a, b, d,],);
+}
 function invertPlacement(placement,) {
   switch (placement) {
     case 'top':
@@ -29020,7 +29214,7 @@ function getSafePlacementFloatingPositionRect(
   ];
 }
 function preferredPoint(a, b, points,) {
-  if (Point.insidePoints(a, [b, ...points,],)) {
+  if (Polygon.containsPoint([b, ...points,], a,)) {
     return b;
   }
   return a;
@@ -33264,6 +33458,10 @@ function useQueryData(query,) {
   result = useExecuteSelect(result, query.select,);
   return result;
 }
+function useQueryCount(query,) {
+  const collection = useQueryData(query,);
+  return collection.length;
+}
 function evaluateExpression(expression, context,) {
   switch (expression.type) {
     case 'Identifier':
@@ -33872,15 +34070,18 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
       },);
     }
     componentDidCatch(error, info,) {
-      let stack = info.componentStack.split('\n',).filter((line,) => line.length !== 0);
+      var _a2;
+      let stack = (_a2 = info.componentStack) == null ? void 0 : _a2.split('\n',).filter((line,) => line.length !== 0);
       let currentIndex = 0;
-      for (const line of stack) {
-        if (line.startsWith(`    in ${this.constructor.name}`,)) {
-          break;
+      if (stack) {
+        for (const line of stack) {
+          if (line.startsWith(`    in ${this.constructor.name}`,)) {
+            break;
+          }
+          currentIndex++;
         }
-        currentIndex++;
+        stack = stack.slice(0, currentIndex,);
       }
-      stack = stack.slice(0, currentIndex,);
       this.setState({
         lastError: {
           children: this.props.children,
@@ -34043,61 +34244,6 @@ function isPageOrScroll(identifier,) {
   }
   return false;
 }
-var Line = /* @__PURE__ */ (() => {
-  function Line2(a, b,) {
-    return { a, b, };
-  }
-  Line2.intersection = (lineA, lineB,) => {
-    const x1 = lineA.a.x;
-    const y1 = lineA.a.y;
-    const x2 = lineA.b.x;
-    const y2 = lineA.b.y;
-    const x3 = lineB.a.x;
-    const y3 = lineB.a.y;
-    const x4 = lineB.b.x;
-    const y4 = lineB.b.y;
-    const d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-    if (d === 0) {
-      return null;
-    }
-    const xi = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-    const yi = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
-    return { x: xi, y: yi, };
-  };
-  Line2.intersectionAngle = (lineA, lineB,) => {
-    const deltaAX = lineA.b.x - lineA.a.x;
-    const deltaAY = lineA.b.y - lineA.a.y;
-    const deltaBX = lineB.b.x - lineB.a.x;
-    const deltaBY = lineB.b.y - lineB.a.y;
-    const angle = Math.atan2(deltaAX * deltaBY - deltaAY * deltaBX, deltaAX * deltaBX + deltaAY * deltaBY,);
-    return angle * (180 / Math.PI);
-  };
-  Line2.isOrthogonal = (line,) => {
-    return line.a.x === line.b.x || line.a.y === line.b.y;
-  };
-  Line2.perpendicular = (line, pointOnLine,) => {
-    const deltaX = line.a.x - line.b.x;
-    const deltaY = line.a.y - line.b.y;
-    const pointB = Point(pointOnLine.x - deltaY, pointOnLine.y + deltaX,);
-    return Line2(pointB, pointOnLine,);
-  };
-  Line2.projectPoint = (line, point2,) => {
-    const perp = Line2.perpendicular(line, point2,);
-    return Line2.intersection(line, perp,);
-  };
-  Line2.pointAtPercentDistance = (line, distance2,) => {
-    const hypotenuse = Line2.distance(line,);
-    const r = distance2 * hypotenuse / hypotenuse;
-    return {
-      x: r * line.b.x + (1 - r) * line.a.x,
-      y: r * line.b.y + (1 - r) * line.a.y,
-    };
-  };
-  Line2.distance = (line,) => {
-    return Point.distance(line.a, line.b,);
-  };
-  return Line2;
-})();
 function linearGradientLine(angle,) {
   var _a, _b;
   const rad = angle * Math.PI / 180;
@@ -37512,6 +37658,75 @@ function CustomProperties({
 },) {
   return /* @__PURE__ */ jsx57('div', { style: customProperties, children, },);
 }
+var FormContainer = (props,) => {
+  return /* @__PURE__ */ jsx58(FrameWithMotion, { ...props, as: 'form', },);
+};
+var FormButton = (props,) => {
+  const { __fromCanvasComponent, style: baseStyle2, } = props;
+  const layoutId = useLayoutId2(props,);
+  const ref = useRef18(null,);
+  const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
+  const dataProps = {
+    'data-layoutid': layoutId,
+  };
+  const isDisabled = Boolean(__fromCanvasComponent,);
+  useMeasureLayout(props, ref,);
+  return /* @__PURE__ */ jsx59(
+    motion.input,
+    {
+      type: props.type,
+      disabled: isDisabled,
+      ...dataProps,
+      layoutId,
+      ref,
+      style: { ...baseStyle2, ...style, },
+      value: props.value ?? 'Submit',
+    },
+  );
+};
+function mergeWithDefaultStyle(style,) {
+  return {
+    display: 'block',
+    padding: '12px',
+    width: '100%',
+    background: '#222',
+    color: '#fff',
+    borderRadius: '10px',
+    border: '1px solid rgba(0,0,0,0.05)',
+    ...style,
+  };
+}
+var FormPlainTextInput = (props,) => {
+  const { __fromCanvasComponent, } = props;
+  const layoutId = useLayoutId2(props,);
+  const ref = useRef19(null,);
+  const dataProps = {
+    'data-layoutid': layoutId,
+  };
+  const isDisabled = Boolean(__fromCanvasComponent,);
+  useMeasureLayout(props, ref,);
+  const baseStyle2 = {
+    padding: '12px',
+    width: '100%',
+    background: '#f5f5f5',
+    borderRadius: '10px',
+    border: '1px solid rgba(0,0,0,0.05)',
+  };
+  return /* @__PURE__ */ jsx60(
+    motion.input,
+    {
+      disabled: isDisabled,
+      ...dataProps,
+      layoutId,
+      ref,
+      style: {
+        ...baseStyle2,
+        ...props.style,
+      },
+      placeholder: props.placeholder,
+    },
+  );
+};
 var Image2 = /* @__PURE__ */ React85.forwardRef(function Image3(props, ref,) {
   const { background, children, alt, ...rest } = props;
   const style = { ...rest.style, };
@@ -37524,7 +37739,7 @@ var Image2 = /* @__PURE__ */ React85.forwardRef(function Image3(props, ref,) {
     style,
     ref,
     children: [
-      background && /* @__PURE__ */ jsx58(BackgroundImageComponent, { image: background, alt, },),
+      background && /* @__PURE__ */ jsx61(BackgroundImageComponent, { image: background, alt, },),
       children,
     ],
   },);
@@ -37701,7 +37916,7 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
     } = props;
     const parentSize = useParentSize();
     const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef18(null,);
+    const fallbackLayoutRef = useRef20(null,);
     const layoutRef = forwardedRef ?? fallbackLayoutRef;
     const { navigate, getRoute, } = useRouter();
     const currentRoute = useCurrentRoute();
@@ -37813,7 +38028,7 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
       forceLayerBackingWithCSSProperties(style,);
     }
     Object.assign(style, props.style,);
-    return /* @__PURE__ */ jsx59(
+    return /* @__PURE__ */ jsx62(
       motion.div,
       {
         id: id3,
@@ -37842,7 +38057,7 @@ function convertVerticalAlignment2(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef18([],);
+  const prevFontsRef = useRef20([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
@@ -37857,11 +38072,11 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
 }
 var FitText = /* @__PURE__ */ forwardRef52(
   ({ viewBoxScale, viewBox, children, ...props }, ref,) => {
-    return /* @__PURE__ */ jsx60(motion.svg, {
+    return /* @__PURE__ */ jsx63(motion.svg, {
       ref,
       ...props,
       viewBox,
-      children: /* @__PURE__ */ jsx60(
+      children: /* @__PURE__ */ jsx63(
         motion.foreignObject,
         {
           width: '100%',
@@ -37918,7 +38133,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const isOnCanvas = useIsOnFramerCanvas();
     const inCodeComponent = useContext162(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef19(null,);
+    const fallbackRef = useRef21(null,);
     const containerRef = ref ?? fallbackRef;
     useMeasureLayout(props, containerRef,);
     useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
@@ -37944,8 +38159,9 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
     if (!withExternalLayout) {
       if (frame2 && restrictedRenderTarget && !isAutoSized2) {
-        const rotate = Animatable.getNumber(rotation,).toFixed(4,);
-        containerStyle.transform = `translate(${frame2.x}px, ${frame2.y}px) rotate(${rotate}deg)`;
+        containerStyle.x = frame2.x;
+        containerStyle.y = frame2.y;
+        containerStyle.rotate = Animatable.getNumber(rotation,);
         containerStyle.width = frame2.width;
         containerStyle.minWidth = frame2.width;
         containerStyle.height = frame2.height;
@@ -37984,7 +38200,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const Component15 = htmlElementAsMotionComponent(props.as,);
     if (isString22(props.viewBox,)) {
       if (props.as !== void 0) {
-        return /* @__PURE__ */ jsx60(
+        return /* @__PURE__ */ jsx63(
           Component15,
           {
             ...rest,
@@ -37994,7 +38210,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
             transformTemplate: template,
             'data-framer-name': name,
             'data-framer-component-type': 'RichTextContainer',
-            children: /* @__PURE__ */ jsx60(
+            children: /* @__PURE__ */ jsx63(
               FitText,
               {
                 viewBox,
@@ -38006,7 +38222,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
           },
         );
       } else {
-        return /* @__PURE__ */ jsx60(
+        return /* @__PURE__ */ jsx63(
           FitText,
           {
             ...rest,
@@ -38023,7 +38239,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
         );
       }
     }
-    return /* @__PURE__ */ jsx60(
+    return /* @__PURE__ */ jsx63(
       Component15,
       {
         ...rest,
@@ -38071,7 +38287,7 @@ var RichText = /* @__PURE__ */ forwardRef52(
         // We need to use the original prop name.
         [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
       };
-      return /* @__PURE__ */ jsx60(DeprecatedRichText, { ...props, ...contentProp, ref, },);
+      return /* @__PURE__ */ jsx63(DeprecatedRichText, { ...props, ...contentProp, ref, },);
     }
     if (!props.stylesPresetsClassNames && isString22(props.stylesPresetsClassName,)) {
       const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
@@ -38081,7 +38297,7 @@ var RichText = /* @__PURE__ */ forwardRef52(
         props.stylesPresetsClassNames = { h1, h2, h3, p, a, };
       }
     }
-    return /* @__PURE__ */ jsx60(RichTextContainer, { ...props, ref, children: isValidElement32(content,) ? content : void 0, },);
+    return /* @__PURE__ */ jsx63(RichTextContainer, { ...props, ref, children: isValidElement32(content,) ? content : void 0, },);
   },
 );
 var key6 = 'calculatedPaths';
@@ -38504,8 +38720,8 @@ var package_default = {
     '@types/google.fonts': '1.0.3',
     '@types/hsluv': 'https://github.com/framer/typed_hsluv#bump',
     '@types/node': '^18.17.15',
-    '@types/react': '^18.0.26',
-    '@types/react-dom': '^18.0.10',
+    '@types/react': '^18.2.67',
+    '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.19',
     '@typescript-eslint/eslint-plugin': '^6.16.0',
     '@typescript-eslint/parser': '^6.16.0',
@@ -38521,7 +38737,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.0.7',
+    'framer-motion': '11.0.11-sync.4',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -38639,6 +38855,7 @@ export {
   DataObserverContext,
   debounce,
   defaultDeviceProps,
+  degreesToRadians,
   delay,
   DeprecatedComponentContainer,
   DeprecatedFrameWithEvents,
@@ -38671,6 +38888,9 @@ export {
   FontSourceNames,
   fontStore,
   forceLayerBackingWithCSSProperties,
+  FormButton,
+  FormContainer,
+  FormPlainTextInput,
   fraction,
   Frame,
   frame,
@@ -38778,6 +38998,7 @@ export {
   PathVariablesContext,
   pipe,
   Point,
+  Polygon,
   PresenceContext,
   print,
   progress,
@@ -38885,6 +39106,7 @@ export {
   usePresence,
   usePrototypeNavigate,
   useProvidedWindow,
+  useQueryCount,
   useQueryData,
   useReducedMotion,
   useReducedMotionConfig,
