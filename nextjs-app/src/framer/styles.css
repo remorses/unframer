@@ -758,15 +758,6 @@ NavigationContainer
     font-weight: 700;
 }
 
-/* used by pricing.js */
-
-@font-face {
-    font-family: 'DM Sans'; 
-    src: url(https://fonts.gstatic.com/s/dmsans/v11/rP2Cp2ywxg089UriAWCrOB-sClQX6Cg.ttf);
-    font-style: normal;
-    font-weight: 500;
-}
-
 /* used by card.js, menu-overlay.js */
 
 @font-face {
@@ -823,114 +814,6 @@ NavigationContainer
     font-style: normal;
     font-weight: 400;
     unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-/* used by card.js */
-
-@font-face {
-    font-family: 'Switzer'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/2UC2M25RQ2XRSGCBJRQ2G5SNXCROECQB/QJT3T33NN372363FJY5EO5D63GKDKLDK/IOAFMDAPNX3S6OL2GYQQJ2FFJIRSVB3N.woff2);
-    font-style: italic;
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: 'Switzer'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/5SZVFDB7V52TI6ULVC6J3WQZQCIZVDV5/ODYPSTCUDMKSTYIPTV4CLQ7URIK7XYBJ/YS3VPNVO4B3TOJMEXDGFZQ4TLZGGSRZC.woff2);
-    font-style: normal;
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: 'Switzer'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/A54N3N7J5AY6YOPYJKLHF5VH7G7HSSUN/ERWIWIB434FMFHQFSSBD233EP3C62HOI/TOHQHMLIEIPKVF2JPM6SVKXFYGO5G2TJ.woff2);
-    font-style: normal;
-    font-weight: 900;
-}
-
-@font-face {
-    font-family: 'Satoshi'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/CDEBEFT2R7XKNGXSBBLZGMY4MMHZG75P/HEVKDGQCYDZ7Z6CDVR2ZQGBCTUD6ZARH/BKWEE3VKGTFABE37K2DTH625VUSN2N35.woff2);
-    font-style: italic;
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: 'Switzer'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/FQHNKZEV35SAMFWVFCFSORJXUNHNILL4/X4YCR4COAQTK5XB6JCDDBS7Q33AQWUAE/J7XVDQ2IJENINPUAVBDJNH3VEXVDSPQQ.woff2);
-    font-style: italic;
-    font-weight: 900;
-}
-
-@font-face {
-    font-family: 'Satoshi'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2);
-    font-style: normal;
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: 'Satoshi'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/MPIFA4B3XXRNY2MJDGP6GOOOAF6EOCLO/W5E4ZFYPJ3V6JKMBGHB6YMITK6EWS2XA/QOMBWPST76ICDYF6WOBS7SQ7RBT67QW2.woff2);
-    font-style: italic;
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: 'Satoshi'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2);
-    font-style: normal;
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: 'Satoshi'; 
-    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2);
-    font-style: normal;
-    font-weight: 400;
-}
-
-/* used by menus.js */
-
-@font-face {
-    font-family: 'Syne'; 
-    src: url(https://fonts.gstatic.com/s/syne/v16/8vIS7w4qzmVxsWxjBZRjr0FKM_0KuT6kR47NCV5Z.ttf);
-    font-style: normal;
-    font-weight: 500;
-}
-
-/* used by fylo.js */
-
-@font-face {
-    font-family: 'Roboto'; 
-    src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vBh05IsDqlA.woff2);
-    font-style: normal;
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: 'PP Supply Sans Medium'; 
-    src: url(https://framerusercontent.com/assets/0kF4T3RnZOnNCKwJnGNdr51Rg.ttf);
-}
-
-@font-face {
-    font-family: 'PP Supply Sans Regular'; 
-    src: url(https://framerusercontent.com/assets/IIwW8kvIZ9g5LjEOU4ekY5CtLI.ttf);
-}
-
-@font-face {
-    font-family: 'PP Supply Sans Variable'; 
-    src: url(https://framerusercontent.com/assets/nTnfVPKvx4BNtayjhoEgyhNSc.ttf);
-}
-
-@font-face {
-    font-family: 'PP Supply Sans Semibold'; 
-    src: url(https://framerusercontent.com/assets/pTQFOoSKHkP8mTGMzsUIQQeIh4.ttf);
-}
-
-@font-face {
-    font-family: 'PP Supply Sans Light'; 
-    src: url(https://framerusercontent.com/assets/qRqpS3XmgDWz2V8lG9yQbA2xWg.ttf);
 }
 
 /* used by menu-overlay.js */
@@ -1007,6 +890,80 @@ NavigationContainer
     font-weight: 500;
 }
 
+/* used by pricing.js */
+
+@font-face {
+    font-family: 'DM Sans'; 
+    src: url(https://fonts.gstatic.com/s/dmsans/v11/rP2Cp2ywxg089UriAWCrOB-sClQX6Cg.ttf);
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* used by card.js */
+
+@font-face {
+    font-family: 'Switzer'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/2UC2M25RQ2XRSGCBJRQ2G5SNXCROECQB/QJT3T33NN372363FJY5EO5D63GKDKLDK/IOAFMDAPNX3S6OL2GYQQJ2FFJIRSVB3N.woff2);
+    font-style: italic;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Switzer'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/5SZVFDB7V52TI6ULVC6J3WQZQCIZVDV5/ODYPSTCUDMKSTYIPTV4CLQ7URIK7XYBJ/YS3VPNVO4B3TOJMEXDGFZQ4TLZGGSRZC.woff2);
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Switzer'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/A54N3N7J5AY6YOPYJKLHF5VH7G7HSSUN/ERWIWIB434FMFHQFSSBD233EP3C62HOI/TOHQHMLIEIPKVF2JPM6SVKXFYGO5G2TJ.woff2);
+    font-style: normal;
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'Satoshi'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/CDEBEFT2R7XKNGXSBBLZGMY4MMHZG75P/HEVKDGQCYDZ7Z6CDVR2ZQGBCTUD6ZARH/BKWEE3VKGTFABE37K2DTH625VUSN2N35.woff2);
+    font-style: italic;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Switzer'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/FQHNKZEV35SAMFWVFCFSORJXUNHNILL4/X4YCR4COAQTK5XB6JCDDBS7Q33AQWUAE/J7XVDQ2IJENINPUAVBDJNH3VEXVDSPQQ.woff2);
+    font-style: italic;
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'Satoshi'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2);
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Satoshi'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/MPIFA4B3XXRNY2MJDGP6GOOOAF6EOCLO/W5E4ZFYPJ3V6JKMBGHB6YMITK6EWS2XA/QOMBWPST76ICDYF6WOBS7SQ7RBT67QW2.woff2);
+    font-style: italic;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Satoshi'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2);
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Satoshi'; 
+    src: url(https://framerusercontent.com/third-party-assets/fontshare/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2);
+    font-style: normal;
+    font-weight: 400;
+}
+
 /* used by testimonials.js */
 
 @font-face {
@@ -1021,6 +978,49 @@ NavigationContainer
     src: url(https://fonts.gstatic.com/s/dmsans/v11/rP2Hp2ywxg089UriOZSCHBeHFl0.ttf);
     font-style: normal;
     font-weight: 400;
+}
+
+/* used by menus.js */
+
+@font-face {
+    font-family: 'Syne'; 
+    src: url(https://fonts.gstatic.com/s/syne/v16/8vIS7w4qzmVxsWxjBZRjr0FKM_0KuT6kR47NCV5Z.ttf);
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* used by fylo.js */
+
+@font-face {
+    font-family: 'Roboto'; 
+    src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vBh05IsDqlA.woff2);
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'PP Supply Sans Medium'; 
+    src: url(https://framerusercontent.com/assets/0kF4T3RnZOnNCKwJnGNdr51Rg.ttf);
+}
+
+@font-face {
+    font-family: 'PP Supply Sans Regular'; 
+    src: url(https://framerusercontent.com/assets/IIwW8kvIZ9g5LjEOU4ekY5CtLI.ttf);
+}
+
+@font-face {
+    font-family: 'PP Supply Sans Variable'; 
+    src: url(https://framerusercontent.com/assets/nTnfVPKvx4BNtayjhoEgyhNSc.ttf);
+}
+
+@font-face {
+    font-family: 'PP Supply Sans Semibold'; 
+    src: url(https://framerusercontent.com/assets/pTQFOoSKHkP8mTGMzsUIQQeIh4.ttf);
+}
+
+@font-face {
+    font-family: 'PP Supply Sans Light'; 
+    src: url(https://framerusercontent.com/assets/qRqpS3XmgDWz2V8lG9yQbA2xWg.ttf);
 }
 
 /* used by rich.js */

@@ -69,6 +69,7 @@ export async function bundle({
         metafile: true,
         format: 'esm',
         minify: false,
+        
         treeShaking: true,
         splitting: true,
         // splitting: true,

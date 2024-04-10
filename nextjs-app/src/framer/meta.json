@@ -2892,7 +2892,84 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3-0.js": {
+    "https :https://framerusercontent.com/modules/V9ryrjN5Am9WM1dJeyyJ/9mrJHeWj7rhvLTLu7Yzt/UsePageVisibility.js": {
+      "bytes": 2087,
+      "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https :https://framerusercontent.com/modules/zvkTOpMSuRzRhLzZZIwG/3fgSkLJzAAAU6lAT4hVj/SlideShow.js": {
+      "bytes": 30519,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "https :https://esm.sh/@motionone/dom",
+          "kind": "import-statement",
+          "original": "@motionone/dom"
+        },
+        {
+          "path": "https :https://framerusercontent.com/modules/V9ryrjN5Am9WM1dJeyyJ/9mrJHeWj7rhvLTLu7Yzt/UsePageVisibility.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/V9ryrjN5Am9WM1dJeyyJ/9mrJHeWj7rhvLTLu7Yzt/UsePageVisibility.js"
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/k5fduSyomXw5y49TabEw/q64yDrOL3-0.js": {
       "bytes": 125,
       "imports": [
         {
@@ -2913,8 +2990,8 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js": {
-      "bytes": 36083,
+    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/k5fduSyomXw5y49TabEw/q64yDrOL3.js": {
+      "bytes": 40337,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2942,7 +3019,12 @@
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3-0.js",
+          "path": "https :https://framerusercontent.com/modules/zvkTOpMSuRzRhLzZZIwG/3fgSkLJzAAAU6lAT4hVj/SlideShow.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/zvkTOpMSuRzRhLzZZIwG/3fgSkLJzAAAU6lAT4hVj/SlideShow.js"
+        },
+        {
+          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/k5fduSyomXw5y49TabEw/q64yDrOL3-0.js",
           "kind": "import-statement",
           "original": "./q64yDrOL3-0.js"
         },
@@ -2968,9 +3050,9 @@
       "bytes": 536,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js",
+          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/k5fduSyomXw5y49TabEw/q64yDrOL3.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js"
+          "original": "https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/k5fduSyomXw5y49TabEw/q64yDrOL3.js"
         },
         {
           "path": "unframer",
@@ -5602,42 +5684,6 @@
       },
       "bytes": 44921
     },
-    "chunk-GZE2AZR4.js": {
-      "imports": [],
-      "exports": [
-        "Et"
-      ],
-      "inputs": {
-        "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
-          "bytesInOutput": 1325
-        },
-        "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
-          "bytesInOutput": 680
-        },
-        "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
-          "bytesInOutput": 3358
-        },
-        "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
-          "bytesInOutput": 24
-        },
-        "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
-          "bytesInOutput": 209
-        },
-        "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
-          "bytesInOutput": 421
-        },
-        "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
-          "bytesInOutput": 2803
-        },
-        "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
-          "bytesInOutput": 13071
-        },
-        "https :https://esm.sh/@motionone/dom": {
-          "bytesInOutput": 0
-        }
-      },
-      "bytes": 22492
-    },
     "menu-overlay.js": {
       "imports": [
         {
@@ -5700,11 +5746,40 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunk-GZE2AZR4.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "chunk-6C3VEZWH.js",
           "kind": "import-statement"
         },
         {
           "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
           "kind": "import-statement",
           "external": true
         },
@@ -5739,14 +5814,20 @@
       ],
       "entryPoint": "virtual:full-page",
       "inputs": {
-        "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/4QsZ7UuPCBwlQefNVCo2/q64yDrOL3.js": {
-          "bytesInOutput": 34837
+        "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/k5fduSyomXw5y49TabEw/q64yDrOL3.js": {
+          "bytesInOutput": 39158
+        },
+        "https :https://framerusercontent.com/modules/zvkTOpMSuRzRhLzZZIwG/3fgSkLJzAAAU6lAT4hVj/SlideShow.js": {
+          "bytesInOutput": 29904
+        },
+        "https :https://framerusercontent.com/modules/V9ryrjN5Am9WM1dJeyyJ/9mrJHeWj7rhvLTLu7Yzt/UsePageVisibility.js": {
+          "bytesInOutput": 1361
         },
         "virtual:full-page": {
           "bytesInOutput": 266
         }
       },
-      "bytes": 35392
+      "bytes": 71446
     },
     "chunk-NYGXGF5D.js": {
       "imports": [
@@ -5830,6 +5911,42 @@
         }
       },
       "bytes": 1918
+    },
+    "chunk-GZE2AZR4.js": {
+      "imports": [],
+      "exports": [
+        "Et"
+      ],
+      "inputs": {
+        "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
+          "bytesInOutput": 1325
+        },
+        "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
+          "bytesInOutput": 680
+        },
+        "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
+          "bytesInOutput": 3358
+        },
+        "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
+          "bytesInOutput": 24
+        },
+        "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
+          "bytesInOutput": 209
+        },
+        "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
+          "bytesInOutput": 421
+        },
+        "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
+          "bytesInOutput": 2803
+        },
+        "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
+          "bytesInOutput": 13071
+        },
+        "https :https://esm.sh/@motionone/dom": {
+          "bytesInOutput": 0
+        }
+      },
+      "bytes": 22492
     },
     "pricing.js": {
       "imports": [
