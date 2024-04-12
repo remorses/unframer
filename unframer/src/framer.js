@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.L736M3IJ.js
+// https :https://app.framerstatic.com/framer.OWEUU6LX.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9288,13 +9288,13 @@ import { jsx as jsx54, jsxs as jsxs18, } from 'react/jsx-runtime';
 import { jsx as jsx55, } from 'react/jsx-runtime';
 import { jsx as jsx56, } from 'react/jsx-runtime';
 import { jsx as jsx57, } from 'react/jsx-runtime';
-import { jsx as jsx58, } from 'react/jsx-runtime';
-import { useRef as useRef18, } from 'react';
-import { jsx as jsx59, } from 'react/jsx-runtime';
-import { useRef as useRef19, } from 'react';
-import { jsx as jsx60, } from 'react/jsx-runtime';
 import React85 from 'react';
-import { jsx as jsx61, jsxs as jsxs19, } from 'react/jsx-runtime';
+import { jsx as jsx58, } from 'react/jsx-runtime';
+import { jsx as jsx59, } from 'react/jsx-runtime';
+import React86 from 'react';
+import { jsx as jsx60, jsxs as jsxs19, } from 'react/jsx-runtime';
+import React87 from 'react';
+import { jsx as jsx61, jsxs as jsxs20, } from 'react/jsx-runtime';
 import {
   Children as Children32,
   cloneElement as cloneElement32,
@@ -9302,10 +9302,10 @@ import {
   isValidElement as isValidElement32,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef21,
+  useRef as useRef19,
 } from 'react';
-import * as React86 from 'react';
-import { useRef as useRef20, } from 'react';
+import * as React88 from 'react';
+import { useRef as useRef18, } from 'react';
 import { jsx as jsx62, } from 'react/jsx-runtime';
 import { jsx as jsx63, } from 'react/jsx-runtime';
 import { useEffect as useEffect142, useState as useState22, } from 'react';
@@ -37658,37 +37658,27 @@ function CustomProperties({
 },) {
   return /* @__PURE__ */ jsx57('div', { style: customProperties, children, },);
 }
-var FormContainer = (props,) => {
-  return /* @__PURE__ */ jsx58(FrameWithMotion, { ...props, as: 'form', },);
-};
-var FormButton = (props,) => {
-  const { __fromCanvasComponent, style: baseStyle2, } = props;
-  const layoutId = useLayoutId2(props,);
-  const ref = useRef18(null,);
+var FormButton = /* @__PURE__ */ React85.forwardRef(function FormButon(props, ref,) {
+  const { style: baseStyle2, } = props;
   const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
-  const dataProps = {
-    'data-layoutid': layoutId,
-  };
-  const isDisabled = Boolean(__fromCanvasComponent,);
-  useMeasureLayout(props, ref,);
-  return /* @__PURE__ */ jsx59(
+  return /* @__PURE__ */ jsx58(
     motion.input,
     {
       type: props.type,
-      disabled: isDisabled,
-      ...dataProps,
-      layoutId,
+      disabled: props.isDisabled,
       ref,
-      style: { ...baseStyle2, ...style, },
+      style,
       value: props.value ?? 'Submit',
     },
   );
-};
+},);
 function mergeWithDefaultStyle(style,) {
   return {
     display: 'block',
     padding: '12px',
+    fontSize: '14px',
     width: '100%',
+    fontWeight: 'bold',
     background: '#222',
     color: '#fff',
     borderRadius: '10px',
@@ -37696,29 +37686,61 @@ function mergeWithDefaultStyle(style,) {
     ...style,
   };
 }
-var FormPlainTextInput = (props,) => {
-  const { __fromCanvasComponent, } = props;
-  const layoutId = useLayoutId2(props,);
-  const ref = useRef19(null,);
-  const dataProps = {
-    'data-layoutid': layoutId,
+var FormContainer = ({ action: _, formId, ...props },) => {
+  const handleSubmit = async (event,) => {
+    event.preventDefault();
+    const data2 = new URLSearchParams();
+    for (const [key7, value,] of new FormData(event.currentTarget,)) {
+      data2.append(key7, value,);
+    }
+    await fetch('https://hooks.zapier.com/hooks/catch/8935032/3pzgf76/', {
+      body: new URLSearchParams(data2,),
+      method: 'POST',
+    },);
   };
-  const isDisabled = Boolean(__fromCanvasComponent,);
-  useMeasureLayout(props, ref,);
+  return /* @__PURE__ */ jsx59(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: props.children, },);
+};
+var passwordManagerIgnoreDataProps = {
+  // 1Password
+  'data-1p-ignore': true,
+  // LastPass
+  'data-lpignore': true,
+};
+var sensibleInputDefaults = {
+  autocomplete: 'off',
+};
+var labelStyles = {
+  display: 'block',
+  marginBottom: 8,
+  fontSize: 12,
+  color: '#000',
+  width: '100%',
+  fontWeight: 'bold',
+  textTransform: 'capitalize',
+};
+var FormPlainTextInput = /* @__PURE__ */ React86.forwardRef(function FormPlainTextInput2(props, ref,) {
+  const dataProps = {
+    ...sensibleInputDefaults,
+    ...passwordManagerIgnoreDataProps,
+  };
   const baseStyle2 = {
     padding: '12px',
+    fontSize: '14px',
     width: '100%',
     background: '#f5f5f5',
     borderRadius: '10px',
     border: '1px solid rgba(0,0,0,0.05)',
   };
-  return /* @__PURE__ */ jsx60(
+  const input = /* @__PURE__ */ jsx60(
     motion.input,
     {
-      disabled: isDisabled,
+      id: props.inputName,
+      disabled: props.isDisabled,
       ...dataProps,
-      layoutId,
-      ref,
+      type: props.type,
+      required: props.required,
+      autoFocus: props.autoFocus,
+      name: props.inputName,
       style: {
         ...baseStyle2,
         ...props.style,
@@ -37726,15 +37748,30 @@ var FormPlainTextInput = (props,) => {
       placeholder: props.placeholder,
     },
   );
-};
-var Image2 = /* @__PURE__ */ React85.forwardRef(function Image3(props, ref,) {
+  if (props.label) {
+    return /* @__PURE__ */ jsx60('div', {
+      ref,
+      style: { width: '100%', },
+      children: /* @__PURE__ */ jsxs19('label', {
+        style: { width: '100%', },
+        htmlFor: props.inputName,
+        children: [
+          /* @__PURE__ */ jsx60('span', { style: labelStyles, children: props.label, },),
+          input,
+        ],
+      },),
+    },);
+  }
+  return /* @__PURE__ */ jsx60('div', { ref, style: { width: '100%', }, children: input, },);
+},);
+var Image2 = /* @__PURE__ */ React87.forwardRef(function Image3(props, ref,) {
   const { background, children, alt, ...rest } = props;
   const style = { ...rest.style, };
   if (background) {
     delete style.background;
   }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ jsxs19(MotionComponent, {
+  return /* @__PURE__ */ jsxs20(MotionComponent, {
     ...rest,
     style,
     ref,
@@ -37874,7 +37911,7 @@ function escapeHTML2(str,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
+var DeprecatedRichText = /* @__PURE__ */ React88.forwardRef(
   function Text3(props, forwardedRef,) {
     const {
       id: id3,
@@ -37916,13 +37953,13 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
     } = props;
     const parentSize = useParentSize();
     const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef20(null,);
+    const fallbackLayoutRef = useRef18(null,);
     const layoutRef = forwardedRef ?? fallbackLayoutRef;
     const { navigate, getRoute, } = useRouter();
     const currentRoute = useCurrentRoute();
     useRoutePreloader(props.preload ?? [],);
     useMeasureLayout(props, layoutRef,);
-    const inCodeComponent = React86.useContext(ComponentContainerContext,);
+    const inCodeComponent = React88.useContext(ComponentContainerContext,);
     const isOnCanvas = useIsOnFramerCanvas();
     let textOrOverride = text;
     const forwardedOverrideId = _forwardedOverrideId ?? id3;
@@ -37945,13 +37982,13 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
       innerHTML = htmlFromDesign;
     }
     const implicitPathVariables = useImplicitPathVariables();
-    const innerHTMLWithReplacedFramerPageLinks = React86.useMemo(() => {
+    const innerHTMLWithReplacedFramerPageLinks = React88.useMemo(() => {
       if (isOnCanvas || !getRoute || !currentRoute) {
         return innerHTML;
       }
       return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
     }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-    React86.useEffect(() => {
+    React88.useEffect(() => {
       const container = layoutRef.current;
       if (container === null) {
         return;
@@ -37972,7 +38009,7 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
       };
     }, [navigate, implicitPathVariables,],);
     useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-    React86.useInsertionEffect(() => {
+    React88.useInsertionEffect(() => {
       injectComponentCSSRules();
     }, [],);
     if (!visible) {
@@ -38057,7 +38094,7 @@ function convertVerticalAlignment2(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef20([],);
+  const prevFontsRef = useRef18([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
@@ -38133,7 +38170,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const isOnCanvas = useIsOnFramerCanvas();
     const inCodeComponent = useContext162(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef21(null,);
+    const fallbackRef = useRef19(null,);
     const containerRef = ref ?? fallbackRef;
     useMeasureLayout(props, containerRef,);
     useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
