@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.OWEUU6LX.js
+// https :https://app.framerstatic.com/framer.WMJD6UJN.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -28220,6 +28220,9 @@ function useStyleTransform({
             if (pageInputRange.length !== outputRange[key7].length) {
               continue;
             }
+            if (outputRange[key7][0] === void 0) {
+              continue;
+            }
             effect.values[key7].set(transform(scrollY.progress, pageInputRange, outputRange[key7],),);
           }
         },
@@ -28247,6 +28250,9 @@ function useStyleTransform({
             continue;
           }
           if (scrollYInputRange.length !== effectKeyOutputRange[key7].length) {
+            continue;
+          }
+          if (effectKeyOutputRange[key7][0] === void 0) {
             continue;
           }
           effect.values[key7].set(transform(scrollY.current, scrollYInputRange, effectKeyOutputRange[key7],),);
