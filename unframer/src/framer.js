@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.WMJD6UJN.js
+// https :https://app.framerstatic.com/framer.PRO3WDEJ.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -10463,11 +10463,12 @@ var require_fontfaceobserver_standalone = __commonJS({
   },
 },);
 function renderPage(Page4, defaultPageStyle,) {
-  return React12.isValidElement(Page4,)
-    ? React12.cloneElement(Page4, { style: defaultPageStyle, },)
-    : React12.createElement(Page4, { style: defaultPageStyle, },);
+  const style = { style: defaultPageStyle, };
+  return React12.isValidElement(Page4,) ? React12.cloneElement(Page4, style,) : React12.createElement(Page4, style,);
 }
 var NotFoundError = class extends Error {
+};
+var ErrorBoundaryCaughtError = class extends Error {
 };
 var ErrorBoundary = class extends Component2 {
   constructor(props,) {
@@ -10495,7 +10496,9 @@ var ErrorBoundary = class extends Component2 {
       return this.props.children;
     }
     if (!(this.state.error instanceof NotFoundError)) {
-      throw this.state.error;
+      const error = new ErrorBoundaryCaughtError();
+      error.cause = this.state.error;
+      throw error;
     }
     const { notFoundPage, defaultPageStyle, } = this.props;
     if (!notFoundPage) {
@@ -11377,17 +11380,17 @@ function RoutesProvider({ routes, children, },) {
   return _jsx2(RouterContext.Provider, { value: { getRoute, }, children, },);
 }
 var SuspenseErrorBoundary = class extends Component22 {
-  constructor(props,) {
-    super(props,);
+  constructor() {
+    super(...arguments,);
     this.state = { error: void 0, };
   }
   static getDerivedStateFromError(error,) {
-    console.error('Error in SuspenseErrorBoundary (getDerivedStateFromError).', error,);
+    console.error('Derived error in SuspenseErrorBoundary', error,);
     return { error, };
   }
   componentDidCatch(error, errorInfo,) {
     var _a;
-    console.error('Caught error in in SuspenseErrorBoundary.', error, errorInfo,);
+    console.error('Caught error in SuspenseErrorBoundary', error, errorInfo,);
     (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push([
       'published_site_load_recoverable_error',
       {
@@ -11399,6 +11402,9 @@ var SuspenseErrorBoundary = class extends Component22 {
   render() {
     if (this.state.error === void 0) {
       return this.props.children;
+    }
+    if (this.state.error instanceof ErrorBoundaryCaughtError) {
+      throw this.state.error.cause;
     }
     return _jsx3(Suspense, { children: this.props.fallbackChildren, },);
   }
@@ -17030,6 +17036,7 @@ var hideScrollbars = [
   `[data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }`,
   `[data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }`,
 ];
+var formInputRules = [`[data-framer-component-type="Form"] input { padding: var(--input-padding); }`,];
 var frameCSSRules = (isPreview,) => {
   return isPreview ? frameCSS : [];
 };
@@ -17051,6 +17058,7 @@ var combineCSSRules = (isPreview,) => [
   ...svgCSSRules,
   ...resetCSS,
   ...hideScrollbars,
+  ...formInputRules,
 ];
 export var combinedCSSRules = combineCSSRules(false,);
 var combinedCSSRulesForPreview = combineCSSRules(true,);
@@ -20674,7 +20682,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
   const fallbackRef = useRef62(null,);
   const ref = forwardedRef ?? fallbackRef;
   const dataProps = {
-    'data-framer-component-type': 'Frame',
+    'data-framer-component-type': props.componentType ?? 'Frame',
     'data-framer-cursor': cursor,
     'data-framer-highlight': cursor === 'pointer' ? true : void 0,
     'data-layoutid': layoutId,
@@ -24573,6 +24581,9 @@ function makePaddingString({
   bottom,
   right,
 },) {
+  if (top === right && right === bottom && bottom === left) {
+    return `${top}px`;
+  }
   return `${top}px ${right}px ${bottom}px ${left}px`;
 }
 function triggerStackReflow(element, display,) {
@@ -37665,16 +37676,25 @@ function CustomProperties({
   return /* @__PURE__ */ jsx57('div', { style: customProperties, children, },);
 }
 var FormButton = /* @__PURE__ */ React85.forwardRef(function FormButon(props, ref,) {
+  const [submitting, setSubmitting,] = React85.useState(false,);
   const { style: baseStyle2, } = props;
   const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
+  const onSubmit = () => {
+    setSubmitting(true,);
+    setTimeout(() => {
+      setSubmitting(false,);
+    }, 500,);
+  };
   return /* @__PURE__ */ jsx58(
     motion.input,
     {
       type: props.type,
-      disabled: props.isDisabled,
+      'data-submitting': submitting,
+      disabled: props.isDisabled || submitting,
       ref,
       style,
-      value: props.value ?? 'Submit',
+      value: submitting ? 'Submitting' : props.value ?? 'Submit',
+      onClick: onSubmit,
     },
   );
 },);
@@ -37685,6 +37705,7 @@ function mergeWithDefaultStyle(style,) {
     fontSize: '14px',
     width: '100%',
     fontWeight: 'bold',
+    cursor: 'pointer',
     background: '#222',
     color: '#fff',
     borderRadius: '10px',
@@ -37730,7 +37751,6 @@ var FormPlainTextInput = /* @__PURE__ */ React86.forwardRef(function FormPlainTe
     ...passwordManagerIgnoreDataProps,
   };
   const baseStyle2 = {
-    padding: '12px',
     fontSize: '14px',
     width: '100%',
     background: '#f5f5f5',
@@ -37747,10 +37767,7 @@ var FormPlainTextInput = /* @__PURE__ */ React86.forwardRef(function FormPlainTe
       required: props.required,
       autoFocus: props.autoFocus,
       name: props.inputName,
-      style: {
-        ...baseStyle2,
-        ...props.style,
-      },
+      style: baseStyle2,
       placeholder: props.placeholder,
     },
   );
@@ -38740,7 +38757,9 @@ var package_default = {
   scripts: {
     prepublishOnly: 'make build',
     coverage: 'yarn :jest --coverage',
-    lint: 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet',
+    lint: 'yarn format-check:ts && yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet',
+    'format:ts': 'yarn :format "src/**/*.{ts,tsx}"',
+    'format-check:ts': 'yarn :format-check "src/**/*.{ts,tsx}"',
     'lint:fix': 'yarn lint --fix --cache',
     test: 'yarn :jest',
     watch: 'yarn :jest --watch',
