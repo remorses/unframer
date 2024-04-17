@@ -159,7 +159,6 @@ Known limitations:
 
     1. use link variables
     1. absolute links (starting with https://, not links to other Framer pages).
-    1. append a query when creating a link (for example instead of writing `/home` you write `/home?` and don't press enter, this will preserve the link as it is)
 
 -   Internationalization is not supported
 
