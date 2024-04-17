@@ -1,3 +1,4 @@
+/* eslint-disable */
 // https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js
 import { fontStore, } from 'unframer';
 fontStore.loadFonts(['Inter', 'Inter-Bold', 'Inter-BoldItalic', 'Inter-Italic',],);

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
 
 // https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js

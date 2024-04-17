@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import './chunk-6C3VEZWH.js';
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import { Icon, } from './chunk-NYGXGF5D.js';
 import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';

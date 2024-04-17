@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
 import './chunk-6C3VEZWH.js';

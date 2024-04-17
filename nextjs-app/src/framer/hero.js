@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import { className, className2, className3, css, css2, css3, fonts, fonts2, fonts3, } from './chunk-L46B732H.js';
 import './chunk-6C3VEZWH.js';
