@@ -1,5 +1,12 @@
 # unframer
 
+## 2.0.2
+
+### Patch Changes
+
+-   875c212: Update framer to 2.4.1, update framer motion to 11.0.11-sync.5
+-   c693f54: Add package.json export
+
 ## 2.0.1
 
 ### Patch Changes
