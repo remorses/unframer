@@ -21,13 +21,13 @@ jobs:
             - name: Checkout Repo
               uses: actions/checkout@v3
 
-            - name: Setup Node.js 20.x
+            - name: Setup Node.js
               uses: actions/setup-node@v3
               with:
                   node-version: 20.x
             - uses: pnpm/action-setup@v2
               with:
-                  version: 8
+                  version: 9
                   run_install: false
             - name: Install pnpm dependencies (with cache)
               uses: covbot/pnpm-install-with-cache@v1
