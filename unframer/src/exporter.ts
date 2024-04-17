@@ -26,7 +26,11 @@ import {
 } from './css.js'
 import dedent from 'dedent'
 import { logger } from './utils.js'
-import { esbuildPluginBundleDependencies, resolveRedirect, externalPackages } from './esbuild'
+import {
+    esbuildPluginBundleDependencies,
+    resolveRedirect,
+    externalPackages,
+} from './esbuild'
 
 function validateUrl(url: string) {
     try {
@@ -69,7 +73,7 @@ export async function bundle({
         metafile: true,
         format: 'esm',
         minify: false,
-        
+
         treeShaking: true,
         splitting: true,
         // splitting: true,
@@ -133,12 +137,14 @@ export async function bundle({
                 .readFile(file.path, 'utf-8')
                 .catch(() => null)
 
-            const codeNew = dprint.format(resultPathAbs, file.text, {
-                lineWidth: 140,
-                quoteStyle: 'alwaysSingle',
-                trailingCommas: 'always',
-                semiColons: 'always',
-            })
+            let codeNew =
+                `/* eslint-disable */\n` +
+                dprint.format(resultPathAbs, file.text, {
+                    lineWidth: 140,
+                    quoteStyle: 'alwaysSingle',
+                    trailingCommas: 'always',
+                    semiColons: 'always',
+                })
             const lines = findRelativeLinks(codeNew)
             if (lines.length) {
                 logger.error(
