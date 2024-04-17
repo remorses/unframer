@@ -80,7 +80,9 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
     const allFonts = deduplicateByKey(
         _fontsDefs.flatMap((x) => x.fonts),
         (x) => x?.url,
-    ).filter((x) => x.url)
+    )
+        .filter((x) => x.url)
+        .sort((a, b) => a.url.localeCompare(b.url))
 
     // group fonts by the filenames users
     const grouped = groupBy(allFonts, (x) => {
