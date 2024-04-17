@@ -46,7 +46,7 @@ Download framer components as simple files
 1. Import the component inside your `jsx` files, for example
 
 ```tsx
-import './framer/styles.cs' // load base Framer styles
+import './framer/styles.css' // load base Framer styles
 import Menu from './framer/menus'
 
 export default function App() {
@@ -61,7 +61,7 @@ export default function App() {
 ## Using responsive variants
 
 ```tsx
-import './framer/styles.cs'
+import './framer/styles.css'
 import Logos from './framer/logos'
 
 export default function App() {
@@ -87,7 +87,7 @@ You can use `className` or `style` props to style your components
 Notice that you will often need to use `!important` to override styles already defined in framer like `width` and `height`
 
 ```tsx
-import './framer/styles.cs'
+import './framer/styles.css'
 import Logos from './framer/logos'
 
 export default function App() {
@@ -112,7 +112,7 @@ export default function App() {
 Framer components can have a fixed size, this comes from the root element in the Framer component editor. To override this size you will need to use the `style` prop or use a class with high specificity.
 
 ```tsx
-import './framer/styles.cs'
+import './framer/styles.css'
 import Logos from './framer/logos'
 
 export default function App() {
