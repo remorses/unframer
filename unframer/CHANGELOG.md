@@ -1,5 +1,12 @@
 # unframer
 
+## 2.1.0
+
+### Minor Changes
+
+-   dd49b57: disable eslint for framer generated files
+-   c09dc3c: styles.css is deterministic
+
 ## 2.0.2
 
 ### Patch Changes
