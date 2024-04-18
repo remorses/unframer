@@ -1,5 +1,11 @@
 # unframer
 
+## 2.2.1
+
+### Patch Changes
+
+-   6f5b4ab: Use file urls for import, should work on Windows
+
 ## 2.2.0
 
 ### Minor Changes
