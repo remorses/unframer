@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.PRO3WDEJ.js
+// https :https://app.framerstatic.com/framer.72DXX3NM.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -15381,6 +15381,14 @@ var Rect;
       { x: (0, Rect2.minX)(rect,), y: (0, Rect2.maxY)(rect,), },
       { x: (0, Rect2.maxX)(rect,), y: (0, Rect2.minY)(rect,), },
       { x: (0, Rect2.maxX)(rect,), y: (0, Rect2.maxY)(rect,), },
+    ];
+  };
+  Rect2.pointsAtOrigin = (rect,) => {
+    return [
+      { x: 0, y: 0, },
+      { x: rect.width, y: 0, },
+      { x: rect.width, y: rect.height, },
+      { x: 0, y: rect.height, },
     ];
   };
   Rect2.transform = (rect, matrix,) => {
@@ -29045,32 +29053,48 @@ var Polygon = {
     return 1 / 2 * sum;
   },
   /**
-   * Determine if some Point lies inside the polygon formed by other Points.
-   * The other points must be provided in a clockwise/counter clockwise order.
+   * Determine if some Point lies inside (or on) the polygon formed by other
+   * Points. The other points must be provided in a clockwise/counter
+   * clockwise order otherwise the line segments we create to test the polygon
+   * will not be representative.
    *
-   * Ray-casting algorithm based on
-   * https://wrf.ecse.rpi.edu/Research/Short_Notes/pnpoly.html
+   * Solution for convex polygons based on:
+   * https://www.eecs.umich.edu/courses/eecs380/HANDOUTS/PROJ2/InsidePoly.html
    *
-   * @internal */
+   * We create a line segment for each side of the polygon. The point we are
+   * testing must be on or on the same side of each line segment.
+   *
+   * @internal
+   */
   containsPoint: (polygonPoints2, point2,) => {
     var _a, _b, _c, _d;
-    const x = point2.x;
-    const y = point2.y;
-    let isInside = false;
-    for (let i = 0, j = polygonPoints2.length - 1; i < polygonPoints2.length; j = i++) {
-      const xi = ((_a = polygonPoints2[i]) == null ? void 0 : _a.x) ?? 0;
-      const yi = ((_b = polygonPoints2[i]) == null ? void 0 : _b.y) ?? 0;
-      const xj = ((_c = polygonPoints2[j]) == null ? void 0 : _c.x) ?? 0;
-      const yj = ((_d = polygonPoints2[j]) == null ? void 0 : _d.y) ?? 0;
-      const intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
-      if (intersect) {
-        isInside = !isInside;
+    let sign = void 0;
+    for (let i = 0; i < polygonPoints2.length; i++) {
+      if (Point.isEqual(polygonPoints2[i], point2,)) {
+        return true;
+      }
+      const x1 = ((_a = polygonPoints2[i]) == null ? void 0 : _a.x) ?? 0;
+      const y1 = ((_b = polygonPoints2[i]) == null ? void 0 : _b.y) ?? 0;
+      const i2 = (i + 1) % polygonPoints2.length;
+      if (Point.isEqual(polygonPoints2[i2], point2,)) {
+        return true;
+      }
+      const x2 = ((_c = polygonPoints2[i2]) == null ? void 0 : _c.x) ?? 0;
+      const y2 = ((_d = polygonPoints2[i2]) == null ? void 0 : _d.y) ?? 0;
+      const d = (point2.x - x1) * (y2 - y1) - (point2.y - y1) * (x2 - x1);
+      if (d === 0) {
+        continue;
+      }
+      const localSign = d > 0;
+      sign ?? (sign = localSign);
+      if (sign !== localSign) {
+        return false;
       }
     }
-    return isInside;
+    return true;
   },
   /** @internal */
-  intersect: (pointsA, pointsB,) => {
+  intersects: (pointsA, pointsB,) => {
     if (pointsA.length < 1 || pointsB.length < 1) {
       return false;
     }
@@ -29112,6 +29136,15 @@ var Polygon = {
       return true;
     }
     return false;
+  },
+  /** @internal */
+  contains: (pointsA, pointsB,) => {
+    for (let i = 0; i < pointsB.length; i++) {
+      if (!Polygon.containsPoint(pointsA, pointsB[i],)) {
+        return false;
+      }
+    }
+    return true;
   },
 };
 function segmentsIntersect(segmentA, segmentB,) {
@@ -38402,27 +38435,11 @@ var Size = /* @__PURE__ */ (() => {
   Size2.isZero = function (size2,) {
     return size2 === Size2.zero || size2.width === 0 && size2.height === 0;
   };
-  Size2.points = (size2,) => {
-    return [
-      { x: 0, y: 0, },
-      { x: size2.width, y: 0, },
-      { x: size2.width, y: size2.height, },
-      { x: 0, y: size2.height, },
-    ];
-  };
   Size2.defaultIfZero = function (width, height, size2,) {
     if (Size2.isZero(size2,)) {
       return Size2(width, height,);
     }
     return size2;
-  };
-  Size2.points = (size2,) => {
-    return [
-      { x: 0, y: 0, },
-      { x: size2.width, y: 0, },
-      { x: size2.width, y: size2.height, },
-      { x: 0, y: size2.height, },
-    ];
   };
   return Size2;
 })();
