@@ -490,15 +490,17 @@ export async function extractPropControlsUnsafe(
         filename,
     )}).then(x => { console.log(${JSON.stringify(
         delimiter,
-    )}); console.log(${propCode})
-        })`
+    )}); console.log(${propCode}) })`
     let stdout = await new Promise<string>((res, rej) =>
-        exec(`node --input-type=module -e '${code}'`, (err, stdout) => {
-            if (err) {
-                return rej(err)
-            }
-            res(stdout)
-        }),
+        exec(
+            `node --input-type=module -e ${JSON.stringify(code)}`,
+            (err, stdout) => {
+                if (err) {
+                    return rej(err)
+                }
+                res(stdout)
+            },
+        ),
     )
 
     stdout = stdout.split(delimiter)[1]

@@ -1972,6 +1972,27 @@
       ],
       "format": "esm"
     },
+    "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
+      "bytes": 237,
+      "imports": [
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
     "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
       "bytes": 826,
       "imports": [
@@ -2021,27 +2042,6 @@
           "kind": "import-statement",
           "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
         },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
-          "kind": "import-statement",
-          "external": true
-        }
-      ],
-      "format": "esm"
-    },
-    "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
-      "bytes": 237,
-      "imports": [
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
           "kind": "import-statement",
@@ -2265,6 +2265,11 @@
           "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
         },
         {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+        },
+        {
           "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
@@ -2275,19 +2280,14 @@
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/types@10.17.0/esnext/types.mjs"
         },
         {
           "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
           "kind": "import-statement",
           "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/types@10.17.0/esnext/types.mjs"
         },
         {
           "path": "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs",
