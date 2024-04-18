@@ -1,4 +1,5 @@
 import { Plugin, build, transform, context, BuildResult } from 'esbuild'
+import url from 'url'
 
 import { Sema } from 'async-sema'
 import dprint from 'dprint-node'
@@ -486,8 +487,9 @@ export async function extractPropControlsUnsafe(
     const delimiter = '__delimiter__'
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
     const nodePath = process.execPath || 'node'
+    const fileUrl = url.pathToFileURL(filename).href
     const code = `import(${JSON.stringify(
-        filename,
+        fileUrl,
     )}).then(x => { console.log(${JSON.stringify(
         delimiter,
     )}); console.log(${propCode}) })`
