@@ -485,7 +485,7 @@ export async function extractPropControlsUnsafe(
 }> {
     const delimiter = '__delimiter__'
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
-    // propCode = `x.default`
+    const nodePath = process.execPath || 'node'
     const code = `import(${JSON.stringify(
         filename,
     )}).then(x => { console.log(${JSON.stringify(
@@ -493,7 +493,9 @@ export async function extractPropControlsUnsafe(
     )}); console.log(${propCode}) })`
     let stdout = await new Promise<string>((res, rej) =>
         exec(
-            `node --input-type=module -e ${JSON.stringify(code)}`,
+            `${JSON.stringify(
+                nodePath,
+            )} --input-type=module -e ${JSON.stringify(code)}`,
             (err, stdout) => {
                 if (err) {
                     return rej(err)
