@@ -1,5 +1,15 @@
 # unframer
 
+## 2.2.0
+
+### Minor Changes
+
+-   Use the current Node.js path to extract component types
+
+### Patch Changes
+
+-   994d53d: Fix unframer when running in Windows, fix #12
+
 ## 2.1.0
 
 ### Minor Changes
