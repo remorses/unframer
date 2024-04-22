@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.A44HQQOX.js
+// https :https://app.framerstatic.com/framer.NZOZ74ML.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9264,13 +9264,12 @@ import React73 from 'react';
 import React74 from 'react';
 import React75 from 'react';
 import React76 from 'react';
-import { useRef as useRef15, } from 'react';
 import { useEffect as useEffect122, useMemo as useMemo62, } from 'react';
 import React77 from 'react';
 import { jsx as jsx45, } from 'react/jsx-runtime';
 import React78 from 'react';
 import { jsx as jsx46, } from 'react/jsx-runtime';
-import React79, { useRef as useRef16, } from 'react';
+import React79, { useRef as useRef15, } from 'react';
 import { jsx as jsx47, } from 'react/jsx-runtime';
 import React85, { Component as Component14, } from 'react';
 import React80 from 'react';
@@ -9279,7 +9278,7 @@ import React822 from 'react';
 import React81 from 'react';
 import { jsx as jsx49, } from 'react/jsx-runtime';
 import { Fragment as Fragment10, jsx as jsx50, jsxs as jsxs16, } from 'react/jsx-runtime';
-import React84, { useEffect as useEffect132, useRef as useRef17, } from 'react';
+import React84, { useEffect as useEffect132, useRef as useRef16, } from 'react';
 import React83 from 'react';
 import { Fragment as Fragment11, jsx as jsx51, jsxs as jsxs17, } from 'react/jsx-runtime';
 import { Component as Component12, } from 'react';
@@ -9304,10 +9303,10 @@ import {
   isValidElement as isValidElement32,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef19,
+  useRef as useRef18,
 } from 'react';
 import * as React89 from 'react';
-import { useRef as useRef18, } from 'react';
+import { useRef as useRef17, } from 'react';
 import { jsx as jsx62, } from 'react/jsx-runtime';
 import { jsx as jsx63, } from 'react/jsx-runtime';
 import { useEffect as useEffect152, useState as useState22, } from 'react';
@@ -27447,7 +27446,7 @@ var defaultId = /* @__PURE__ */ Symbol('default',);
 var DataContext = /* @__PURE__ */ createContext32(defaultId,);
 function createData(defaultState2, actions,) {
   const stores = /* @__PURE__ */ new Map();
-  const useData2 = (id3, initialState2,) => {
+  const useData = (id3, initialState2,) => {
     const contextId = useContext102(DataContext,);
     id3 = id3 || contextId;
     const store = useMemo42(() => {
@@ -27467,7 +27466,7 @@ function createData(defaultState2, actions,) {
     }, [store, storeValueAtHookCallTime,],);
     return [store.get(), store.getActions(),];
   };
-  return useData2;
+  return useData;
 }
 var initialState = { update: 0, };
 var DataObserverContext = /* @__PURE__ */ React47.createContext({ update: NaN, },);
@@ -30226,7 +30225,7 @@ function resolvePageScope(pageLink, router,) {
     currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
     currentPathVariables: router.currentPathVariables,
     relative: false,
-    preserveQueryParams: router.preserveQueryParams,
+    preserveQueryParams: false,
   },);
 }
 function PageRoot({
@@ -30540,15 +30539,102 @@ function getLogger(name,) {
     },
   };
 }
-function isLegacyCollectionModule(value,) {
+function isLegacyCollection(value,) {
   return isArray(value,) && value.every(isObject2,);
 }
-function isLegacyLocalizedCollectionModule(value,) {
+function isLegacyLocalizedCollection(value,) {
   return isObject2(value,) && isFunction(value.read,) && isFunction(value.preload,);
 }
-function isDatabaseCollectionModule(value,) {
+function isAnyLegacyCollection(value,) {
+  return isLegacyCollection(value,) || isLegacyLocalizedCollection(value,);
+}
+function isDatabaseCollection(value,) {
+  return isObject2(value,) && isObject2(value.schema,);
+}
+function isLocalizedDatabaseCollection(value,) {
   return isObject2(value,) && isObject2(value.collectionByLocaleId,);
 }
+async function getCollection(collection, locale,) {
+  if (isLegacyLocalizedCollection(collection,)) {
+    await collection.preload(locale,);
+    return collection.read(locale,);
+  }
+  return collection;
+}
+var CompatibilityDatabaseCollection = class {
+  constructor(collection, locale,) {
+    this.collection = collection;
+    this.locale = locale;
+    __publicField(this, 'schema',);
+    __publicField(this, 'indexes', [],);
+    const propertyControls = getPropertyControls(collection,);
+    assert(propertyControls, 'Collection does not have properties',);
+    const schema = {
+      id: {
+        type: 'string',
+        isNullable: false,
+      },
+    };
+    const controlEntries = Object.entries(propertyControls,);
+    for (const [key7, controlDescription,] of controlEntries) {
+      if (!controlDescription) {
+        continue;
+      }
+      schema[key7] = {
+        type: controlDescription.type,
+        isNullable: true,
+      };
+    }
+    this.schema = schema;
+  }
+  getDatabaseItem(item, pointer,) {
+    const data2 = {};
+    for (const key7 in this.schema) {
+      const value = item[key7];
+      if (isNullish(value,)) {
+        continue;
+      }
+      const definition = this.schema[key7];
+      if (isUndefined(definition,)) {
+        continue;
+      }
+      data2[key7] = {
+        type: definition.type,
+        value,
+      };
+    }
+    return { pointer, data: data2, };
+  }
+  async resolveRichText(pointer,) {
+    if (LazyValue.is(pointer,)) {
+      const promise = pointer.preload();
+      if (promise) {
+        await promise;
+      }
+      return pointer.read();
+    }
+    return pointer;
+  }
+  async scanItems() {
+    const collection = await getCollection(this.collection, this.locale,);
+    return collection.map((item, index,) => {
+      const pointer = String(index,);
+      return this.getDatabaseItem(item, pointer,);
+    },);
+  }
+  async resolveItems(pointers,) {
+    const collection = await getCollection(this.collection, this.locale,);
+    return pointers.map((pointer,) => {
+      const index = Number(pointer,);
+      const item = collection[index];
+      assert(item, 'Can\'t find collection item',);
+      return this.getDatabaseItem(item, pointer,);
+    },);
+  }
+  compareItems(left, right,) {
+    return Number(left.pointer,) - Number(right.pointer,);
+  }
+};
 var DatabaseValue = {
   /**
    * Checks if the left value is equal to the right value. Returns false if
@@ -32182,7 +32268,7 @@ var RichTextResolver = class {
 };
 function stringifyIdentifier(data2, expression,) {
   var _a;
-  if (isDatabaseCollectionModule(data2,)) {
+  if (isLocalizedDatabaseCollection(data2,)) {
     const propertyControls = getPropertyControls(data2,);
     const title = (_a = propertyControls == null ? void 0 : propertyControls[expression.name]) == null ? void 0 : _a.title;
     if (title) {
@@ -32284,7 +32370,7 @@ function stringifyQuery(query,) {
       return expressionString;
     },).join(', ',)
   }`;
-  if (isDatabaseCollectionModule(query.from.data,)) {
+  if (isLocalizedDatabaseCollection(query.from.data,)) {
     queryString += ` FROM ${query.from.data.displayName}`;
   } else {
     queryString += ` FROM ${query.from.data.displayName}`;
@@ -32309,7 +32395,13 @@ function stringifyQuery(query,) {
 }
 var log = getLogger('query-engine',);
 function getDatabaseCollection({ data: data2, }, locale,) {
-  if (isDatabaseCollectionModule(data2,)) {
+  if (isAnyLegacyCollection(data2,)) {
+    return new CompatibilityDatabaseCollection(data2, locale,);
+  }
+  if (isDatabaseCollection(data2,)) {
+    return data2;
+  }
+  if (isLocalizedDatabaseCollection(data2,)) {
     while (locale) {
       const collection = data2.collectionByLocaleId[locale.id];
       if (collection) {
@@ -32319,7 +32411,7 @@ function getDatabaseCollection({ data: data2, }, locale,) {
     }
     return data2.collectionByLocaleId.default;
   }
-  throw new Error('Unsupported collection type',);
+  assertNever(data2, 'Unsupported collection type',);
 }
 var QueryEngine = class {
   async query(query, locale,) {
@@ -33313,232 +33405,9 @@ function getCacheKey({ from, ...query }, locale,) {
 function use(promise,) {
   throw promise;
 }
-var DeepWeakMap = class {
-  constructor() {
-    __publicField(this, 'map1', /* @__PURE__ */ new WeakMap(),);
-  }
-  get(key1, key22,) {
-    const map2 = this.map1.get(key1,);
-    return map2 == null ? void 0 : map2.get(key22,);
-  }
-  set(key1, key22, value,) {
-    const map2 = this.map1.get(key1,) ?? /* @__PURE__ */ new WeakMap();
-    this.map1.set(key1, map2,);
-    return map2.set(key22, value,);
-  }
-};
-function useData({ data: data2, },) {
-  const { activeLocale, } = useLocaleInfo();
-  if (isLegacyCollectionModule(data2,)) {
-    return data2;
-  }
-  if (isLegacyLocalizedCollectionModule(data2,)) {
-    const promise = data2.preload(activeLocale,);
-    if (promise) {
-      use(promise,);
-    }
-    return data2.read(activeLocale,);
-  }
-  throw new Error('Unsupported collection module',);
-}
-var indexCache = /* @__PURE__ */ new WeakMap();
-function useInsertIndex(data2,) {
-  const cached = indexCache.get(data2,);
-  if (cached) {
-    return cached;
-  }
-  const result = data2.map((item, index,) => {
-    return { ...item, index, };
-  },);
-  indexCache.set(data2, result,);
-  return result;
-}
-var whereCache = /* @__PURE__ */ new DeepWeakMap();
-function useExecuteWhere(data2, where,) {
-  if (!where) {
-    return data2;
-  }
-  const cached = whereCache.get(data2, where,);
-  if (cached) {
-    return cached;
-  }
-  const result = data2.filter((item,) => {
-    return evaluateExpression(where, {
-      resolveIdentifier(identifier,) {
-        return item[identifier];
-      },
-    },);
-  },);
-  whereCache.set(data2, where, result,);
-  return result;
-}
-var orderByCache = /* @__PURE__ */ new DeepWeakMap();
-function useExecuteOrderBy(data2, orderBy,) {
-  if (!orderBy) {
-    return data2;
-  }
-  const cached = orderByCache.get(data2, orderBy,);
-  if (cached) {
-    return cached;
-  }
-  const result = [...data2,].sort((leftItem, rightItem,) => {
-    let order = 0;
-    for (const expression of orderBy) {
-      const leftValue = evaluateExpression(expression, {
-        resolveIdentifier(identifier,) {
-          return leftItem[identifier];
-        },
-      },);
-      const rightValue = evaluateExpression(expression, {
-        resolveIdentifier(identifier,) {
-          return rightItem[identifier];
-        },
-      },);
-      if (isNumber2(leftValue,) && isNumber2(rightValue,)) {
-        order = leftValue - rightValue;
-      }
-      if (isString22(leftValue,) && isString22(rightValue,)) {
-        order = leftValue.localeCompare(rightValue, 'en',);
-      }
-      if (order !== 0) {
-        return expression.direction === 'desc' ? -order : order;
-      }
-    }
-    if (isNumber2(leftItem.index,) && isNumber2(rightItem.index,)) {
-      return leftItem.index - rightItem.index;
-    }
-    return 0;
-  },);
-  orderByCache.set(data2, orderBy, result,);
-  return result;
-}
-var offsetCache = /* @__PURE__ */ new DeepWeakMap();
-function useExecuteOffset(data2, offset,) {
-  if (!offset) {
-    return data2;
-  }
-  const cached = offsetCache.get(data2, offset,);
-  if (cached) {
-    return cached;
-  }
-  const offsetValue = evaluateExpression(offset, {
-    resolveIdentifier() {
-      throw new Error('Can\'t resolve identifier',);
-    },
-  },);
-  const result = isNumber2(offsetValue,) ? data2.slice(offsetValue,) : data2;
-  offsetCache.set(data2, offset, result,);
-  return result;
-}
-var limitCache = /* @__PURE__ */ new DeepWeakMap();
-function useExecuteLimit(data2, limit,) {
-  if (!limit) {
-    return data2;
-  }
-  const cached = limitCache.get(data2, limit,);
-  if (cached) {
-    return cached;
-  }
-  const limitValue = evaluateExpression(limit, {
-    resolveIdentifier() {
-      throw new Error('Can\'t resolve identifier',);
-    },
-  },);
-  const result = isNumber2(limitValue,) ? data2.slice(0, limitValue,) : data2;
-  limitCache.set(data2, limit, result,);
-  return result;
-}
-var selectCache = /* @__PURE__ */ new DeepWeakMap();
-function useExecuteSelect(data2, select,) {
-  const cached = selectCache.get(data2, select,);
-  if (cached) {
-    return cached;
-  }
-  const preloadPromise = preloadExpressions(select, data2,);
-  if (preloadPromise) {
-    use(preloadPromise,);
-  }
-  const result = data2.map((item,) => {
-    const selected = {};
-    for (const expression of select) {
-      const name = expression.alias ?? stringifyExpression2(expression,);
-      selected[name] = evaluateExpression(expression, {
-        resolveIdentifier(identifier,) {
-          const value = item[identifier];
-          if (LazyValue.is(value,)) {
-            return value.read();
-          }
-          return value;
-        },
-      },);
-    }
-    return selected;
-  },);
-  selectCache.set(data2, select, result,);
-  return result;
-}
-function preloadExpressions(expressions, data2,) {
-  const identifiers = [];
-  for (const expression of expressions) {
-    extractIdentifiers(identifiers, expression,);
-  }
-  if (identifiers.length === 0) {
-    return;
-  }
-  const preloadPromises = [];
-  for (const item of data2) {
-    for (const identifier of identifiers) {
-      const value = item[identifier];
-      if (!LazyValue.is(value,)) {
-        continue;
-      }
-      const promise = value.preload();
-      if (!promise) {
-        continue;
-      }
-      preloadPromises.push(promise,);
-    }
-  }
-  if (preloadPromises.length === 0) {
-    return;
-  }
-  return Promise.all(preloadPromises,);
-}
-function extractIdentifiers(identifiers, expression,) {
-  if (expression.type === 'Identifier') {
-    identifiers.push(expression.name,);
-  }
-  if (expression.type === 'FunctionCall') {
-    for (const argument of expression.arguments) {
-      extractIdentifiers(identifiers, argument,);
-    }
-  }
-  if (expression.type === 'Case') {
-    if (expression.value) {
-      extractIdentifiers(identifiers, expression.value,);
-    }
-    for (const condition of expression.conditions) {
-      extractIdentifiers(identifiers, condition.when,);
-      extractIdentifiers(identifiers, condition.then,);
-    }
-    if (expression.else) {
-      extractIdentifiers(identifiers, expression.else,);
-    }
-  }
-  if (expression.type === 'UnaryOperation') {
-    extractIdentifiers(identifiers, expression.value,);
-  }
-  if (expression.type === 'BinaryOperation') {
-    extractIdentifiers(identifiers, expression.left,);
-    extractIdentifiers(identifiers, expression.right,);
-  }
-  if (expression.type === 'TypeCast') {
-    extractIdentifiers(identifiers, expression.value,);
-  }
-}
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
-function useQueryDataWithQueryEngine(query,) {
+function useQueryData(query,) {
   const { activeLocale, } = useLocaleInfo();
   const cached = queryCache.get(query, activeLocale,);
   const promise = cached.preload();
@@ -33547,222 +33416,9 @@ function useQueryDataWithQueryEngine(query,) {
   }
   return cached.read();
 }
-function useQueryData(query,) {
-  if (isDatabaseCollectionModule(query.from.data,)) {
-    return useQueryDataWithQueryEngine(query,);
-  }
-  const queryRef = useRef15();
-  if (queryRef.current && isEqual(queryRef.current, query,)) {
-    query = queryRef.current;
-  } else {
-    queryRef.current = query;
-  }
-  let result = useData(query.from,);
-  result = useInsertIndex(result,);
-  result = useExecuteWhere(result, query.where,);
-  result = useExecuteOrderBy(result, query.orderBy,);
-  result = useExecuteOffset(result, query.offset,);
-  result = useExecuteLimit(result, query.limit,);
-  result = useExecuteSelect(result, query.select,);
-  return result;
-}
 function useQueryCount(query,) {
   const collection = useQueryData(query,);
   return collection.length;
-}
-function evaluateExpression(expression, context,) {
-  switch (expression.type) {
-    case 'Identifier':
-      return context.resolveIdentifier(expression.name,);
-    case 'LiteralValue':
-      return expression.value;
-    case 'FunctionCall':
-      return evaluateFunctionCall(expression, context,);
-    case 'Case':
-      return evaluateCase(expression, context,);
-    case 'UnaryOperation':
-      return evaluateUnaryOperation(expression, context,);
-    case 'BinaryOperation':
-      return evaluateBinaryOperation(expression, context,);
-    case 'TypeCast':
-      return evaluateTypeCast(expression, context,);
-    default:
-      throw new Error(`Unsupported expression: ${JSON.stringify(expression,)}`,);
-  }
-}
-function evaluateFunctionCall(expression, context,) {
-  function getArgument(index,) {
-    const argument = expression.arguments[index];
-    if (argument) {
-      return evaluateExpression(argument, context,);
-    }
-  }
-  switch (expression.functionName) {
-    case 'CONTAINS': {
-      const value = getArgument(0,);
-      const search = getArgument(1,);
-      if (isString22(value,) && isString22(search,)) {
-        return value.toLowerCase().includes(search.toLowerCase(),);
-      }
-      return false;
-    }
-    case 'STARTS_WITH': {
-      const value = getArgument(0,);
-      const search = getArgument(1,);
-      if (isString22(value,) && isString22(search,)) {
-        return value.toLowerCase().startsWith(search.toLowerCase(),);
-      }
-      return false;
-    }
-    case 'ENDS_WITH': {
-      const value = getArgument(0,);
-      const search = getArgument(1,);
-      if (isString22(value,) && isString22(search,)) {
-        return value.toLowerCase().endsWith(search.toLowerCase(),);
-      }
-      return false;
-    }
-    default: {
-      throw new Error(`Unsupported function: ${expression.functionName}`,);
-    }
-  }
-}
-function evaluateCase(expression, context,) {
-  const value = expression.value && evaluateExpression(expression.value, context,);
-  for (const condition of expression.conditions) {
-    const when = evaluateExpression(condition.when, context,);
-    if (expression.value ? isLooseEqual(when, value,) : when) {
-      return evaluateExpression(condition.then, context,);
-    }
-  }
-  if (expression.else) {
-    return evaluateExpression(expression.else, context,);
-  }
-}
-function evaluateUnaryOperation(expression, context,) {
-  const value = evaluateExpression(expression.value, context,);
-  switch (expression.operator) {
-    case 'not': {
-      return !value;
-    }
-    default: {
-      throw new Error(`Unsupported unary operation: ${expression.operator}`,);
-    }
-  }
-}
-function evaluateBinaryOperation(expression, context,) {
-  const left = evaluateExpression(expression.left, context,);
-  const right = evaluateExpression(expression.right, context,);
-  switch (expression.operator) {
-    case 'and': {
-      return Boolean(left && right,);
-    }
-    case 'or': {
-      return Boolean(left || right,);
-    }
-    case '==': {
-      return isLooseEqual(left, right,);
-    }
-    case '!=': {
-      return !isLooseEqual(left, right,);
-    }
-    case '<': {
-      if (isNumber2(left,) && isNumber2(right,)) {
-        return left < right;
-      }
-      if (isValidDate(left,) && isValidDate(right,)) {
-        return left < right;
-      }
-      return false;
-    }
-    case '<=': {
-      if (isNumber2(left,) && isNumber2(right,)) {
-        return left <= right;
-      }
-      if (isValidDate(left,) && isValidDate(right,)) {
-        return left <= right;
-      }
-      return false;
-    }
-    case '>': {
-      if (isNumber2(left,) && isNumber2(right,)) {
-        return left > right;
-      }
-      if (isValidDate(left,) && isValidDate(right,)) {
-        return left > right;
-      }
-      return false;
-    }
-    case '>=': {
-      if (isNumber2(left,) && isNumber2(right,)) {
-        return left >= right;
-      }
-      if (isValidDate(left,) && isValidDate(right,)) {
-        return left >= right;
-      }
-      return false;
-    }
-    default: {
-      throw new Error(`Unsupported binary operation: ${expression.operator}`,);
-    }
-  }
-}
-function evaluateTypeCast(expression, context,) {
-  const value = evaluateExpression(expression.value, context,);
-  switch (expression.dataType) {
-    case 'BOOLEAN': {
-      return Boolean(value,);
-    }
-    case 'NUMBER': {
-      if (isNumber2(value,) && isFinite(value,)) {
-        return value;
-      }
-      if (isString22(value,)) {
-        const parsed = parseFloat(value,);
-        if (isFinite(parsed,)) {
-          return parsed;
-        }
-      }
-      return 0;
-    }
-    case 'DATE': {
-      if (value instanceof Date) {
-        return value;
-      }
-      if (!isString22(value,) && !isNumber2(value,)) {
-        return void 0;
-      }
-      return new Date(value,);
-    }
-    case 'STRING': {
-      return String(value,);
-    }
-    default: {
-      throw new Error(`Unsupported type cast: ${expression.dataType}`,);
-    }
-  }
-}
-function stringifyExpression2(expression,) {
-  switch (expression.type) {
-    case 'Identifier': {
-      return expression.name;
-    }
-    default: {
-      throw new Error(`Can't stringify expression: ${JSON.stringify(expression,)}`,);
-    }
-  }
-}
-function isLooseEqual(left, right,) {
-  if (left == null && right == null) {
-    return true;
-  }
-  if (isString22(left,) && isString22(right,)) {
-    return left.toLowerCase() === right.toLowerCase();
-  }
-  if (isValidDate(left,) && isValidDate(right,)) {
-    return left.getTime() === right.getTime();
-  }
-  return left === right;
 }
 function getWhereExpressionFromPathVariables(pathVariables,) {
   const entries = Object.entries(pathVariables,).filter(([, value,],) => {
@@ -34163,7 +33819,7 @@ var withVariantAppearEffect = (Component15,) =>
 var withVariantFX = (Component15,) =>
   React79.forwardRef(
     ({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
-      const ref = useRef16();
+      const ref = useRef15();
       const effect = usePresenceAnimation(
         {
           initial,
@@ -36518,7 +36174,7 @@ function TextStyleSheet() {
 var Text = /* @__PURE__ */ React84.forwardRef(function Text2(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef17(null,);
+  const fallbackLayoutRef = useRef16(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
@@ -36528,7 +36184,7 @@ var Text = /* @__PURE__ */ React84.forwardRef(function Text2(props, forwardedRef
   const fontLoadStatus = useFontLoadStatus(props.fonts,);
   useMeasureLayout(props, layoutRef,);
   const { fonts, __fromCanvasComponent, } = props;
-  const prevFontsRef = useRef17([],);
+  const prevFontsRef = useRef16([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
   useEffect132(() => {
@@ -38087,7 +37743,7 @@ var DeprecatedRichText = /* @__PURE__ */ React89.forwardRef(
     } = props;
     const parentSize = useParentSize();
     const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef18(null,);
+    const fallbackLayoutRef = useRef17(null,);
     const layoutRef = forwardedRef ?? fallbackLayoutRef;
     const { navigate, getRoute, } = useRouter();
     const currentRoute = useCurrentRoute();
@@ -38228,7 +37884,7 @@ function convertVerticalAlignment2(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef18([],);
+  const prevFontsRef = useRef17([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
@@ -38304,7 +37960,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const isOnCanvas = useIsOnFramerCanvas();
     const inCodeComponent = useContext162(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef19(null,);
+    const fallbackRef = useRef18(null,);
     const containerRef = ref ?? fallbackRef;
     useMeasureLayout(props, containerRef,);
     useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
