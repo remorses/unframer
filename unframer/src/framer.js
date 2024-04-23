@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.NZOZ74ML.js
+// https :https://app.framerstatic.com/framer.WNIOWGUM.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -12254,6 +12254,28 @@ function Point(x, y,) {
     };
   }
   Point2.center = center;
+  function centroid(points,) {
+    let sumX = 0;
+    let sumY = 0;
+    points.forEach((point2,) => {
+      sumX += point2.x;
+      sumY += point2.y;
+    },);
+    const centroidX = sumX / points.length;
+    const centroidY = sumY / points.length;
+    return { x: centroidX, y: centroidY, };
+  }
+  Point2.centroid = centroid;
+  function sortClockwise(points,) {
+    const centerPoint = Point2.centroid(points,);
+    const angles = /* @__PURE__ */ new Map();
+    for (let i = 0; i < points.length; i++) {
+      const point2 = points[i];
+      angles.set(point2, Math.atan2(point2.x - centerPoint.x, point2.y - centerPoint.y,),);
+    }
+    return points.sort((a, b,) => angles.get(a,) - angles.get(b,));
+  }
+  Point2.sortClockwise = sortClockwise;
 })(Point || (Point = {}),);
 var BezierDefaults = {
   curve: 'ease',
@@ -15269,6 +15291,88 @@ function isReactElement(test2,) {
 function isReactChild(test2,) {
   return test2 !== null && typeof test2 !== 'undefined' && typeof test2 !== 'boolean' && !isEmpty(test2,);
 }
+function degreesToRadians(degrees2,) {
+  return degrees2 * (Math.PI / 180);
+}
+var Line = /* @__PURE__ */ (() => {
+  function Line2(a, b,) {
+    return { a, b, };
+  }
+  Line2.offset = (line, offset,) => {
+    const angle = Point.angleFromX(line.a, line.b,);
+    const rad = degreesToRadians(angle,);
+    const x = offset * Math.sin(rad,);
+    const y = offset * Math.cos(rad,);
+    return Line2(
+      { x: line.a.x + x, y: line.a.y - y, },
+      {
+        x: line.b.x + x,
+        y: line.b.y - y,
+      },
+    );
+  };
+  Line2.intersection = (lineA, lineB, segments,) => {
+    const x1 = lineA.a.x;
+    const y1 = lineA.a.y;
+    const x2 = lineA.b.x;
+    const y2 = lineA.b.y;
+    const x3 = lineB.a.x;
+    const y3 = lineB.a.y;
+    const x4 = lineB.b.x;
+    const y4 = lineB.b.y;
+    const a1 = (x4 - x3) * (y3 - y1) - (y4 - y3) * (x3 - x1);
+    const b1 = (x4 - x3) * (y2 - y1) - (y4 - y3) * (x2 - x1);
+    const c1 = (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
+    if (a1 === 0 && b1 === 0) {
+      return null;
+    }
+    if (b1 === 0) {
+      return null;
+    }
+    const alpha2 = a1 / b1;
+    const beta = c1 / b1;
+    if (segments && (alpha2 < 0 || alpha2 > 1 || beta < 0 || beta > 1)) {
+      return null;
+    }
+    return {
+      x: x1 + alpha2 * (x2 - x1),
+      y: y1 + alpha2 * (y2 - y1),
+    };
+  };
+  Line2.intersectionAngle = (lineA, lineB,) => {
+    const deltaAX = lineA.b.x - lineA.a.x;
+    const deltaAY = lineA.b.y - lineA.a.y;
+    const deltaBX = lineB.b.x - lineB.a.x;
+    const deltaBY = lineB.b.y - lineB.a.y;
+    const angle = Math.atan2(deltaAX * deltaBY - deltaAY * deltaBX, deltaAX * deltaBX + deltaAY * deltaBY,);
+    return angle * (180 / Math.PI);
+  };
+  Line2.isOrthogonal = (line,) => {
+    return line.a.x === line.b.x || line.a.y === line.b.y;
+  };
+  Line2.perpendicular = (line, pointOnLine,) => {
+    const deltaX = line.a.x - line.b.x;
+    const deltaY = line.a.y - line.b.y;
+    const pointB = Point(pointOnLine.x - deltaY, pointOnLine.y + deltaX,);
+    return Line2(pointB, pointOnLine,);
+  };
+  Line2.projectPoint = (line, point2,) => {
+    const perp = Line2.perpendicular(line, point2,);
+    return Line2.intersection(line, perp,);
+  };
+  Line2.pointAtPercentDistance = (line, distance2,) => {
+    const hypotenuse = Line2.distance(line,);
+    const r = distance2 * hypotenuse / hypotenuse;
+    return {
+      x: r * line.b.x + (1 - r) * line.a.x,
+      y: r * line.b.y + (1 - r) * line.a.y,
+    };
+  };
+  Line2.distance = (line,) => {
+    return Point.distance(line.a, line.b,);
+  };
+  return Line2;
+})();
 var Rect;
 ((Rect2,) => {
   function equals(rect, other,) {
@@ -15614,6 +15718,10 @@ var Rect;
       }
     }
     return false;
+  };
+  Rect2.edges = (rect,) => {
+    const [tl, tr, br, bl,] = (0, Rect2.cornerPoints)(rect,);
+    return [Line(tl, tr,), Line(tr, br,), Line(br, bl,), Line(bl, tl,),];
   };
   Rect2.rebaseRectOnto = (rect, anchorRect, direction, alignment,) => {
     const rebasedRect = { ...rect, };
@@ -29010,77 +29118,6 @@ function useCustomCursors(webPageCursors,) {
     registerCursors(cursors,);
   }, [cursors, registerCursors,],);
 }
-function degreesToRadians(degrees2,) {
-  return degrees2 * (Math.PI / 180);
-}
-var Line = /* @__PURE__ */ (() => {
-  function Line2(a, b,) {
-    return { a, b, };
-  }
-  Line2.offset = (line, offset,) => {
-    const angle = Point.angleFromX(line.a, line.b,);
-    const rad = degreesToRadians(angle,);
-    const x = offset * Math.sin(rad,);
-    const y = offset * Math.cos(rad,);
-    return Line2(
-      { x: line.a.x + x, y: line.a.y - y, },
-      {
-        x: line.b.x + x,
-        y: line.b.y - y,
-      },
-    );
-  };
-  Line2.intersection = (lineA, lineB,) => {
-    const x1 = lineA.a.x;
-    const y1 = lineA.a.y;
-    const x2 = lineA.b.x;
-    const y2 = lineA.b.y;
-    const x3 = lineB.a.x;
-    const y3 = lineB.a.y;
-    const x4 = lineB.b.x;
-    const y4 = lineB.b.y;
-    const d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-    if (d === 0) {
-      return null;
-    }
-    const xi = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-    const yi = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
-    return { x: xi, y: yi, };
-  };
-  Line2.intersectionAngle = (lineA, lineB,) => {
-    const deltaAX = lineA.b.x - lineA.a.x;
-    const deltaAY = lineA.b.y - lineA.a.y;
-    const deltaBX = lineB.b.x - lineB.a.x;
-    const deltaBY = lineB.b.y - lineB.a.y;
-    const angle = Math.atan2(deltaAX * deltaBY - deltaAY * deltaBX, deltaAX * deltaBX + deltaAY * deltaBY,);
-    return angle * (180 / Math.PI);
-  };
-  Line2.isOrthogonal = (line,) => {
-    return line.a.x === line.b.x || line.a.y === line.b.y;
-  };
-  Line2.perpendicular = (line, pointOnLine,) => {
-    const deltaX = line.a.x - line.b.x;
-    const deltaY = line.a.y - line.b.y;
-    const pointB = Point(pointOnLine.x - deltaY, pointOnLine.y + deltaX,);
-    return Line2(pointB, pointOnLine,);
-  };
-  Line2.projectPoint = (line, point2,) => {
-    const perp = Line2.perpendicular(line, point2,);
-    return Line2.intersection(line, perp,);
-  };
-  Line2.pointAtPercentDistance = (line, distance2,) => {
-    const hypotenuse = Line2.distance(line,);
-    const r = distance2 * hypotenuse / hypotenuse;
-    return {
-      x: r * line.b.x + (1 - r) * line.a.x,
-      y: r * line.b.y + (1 - r) * line.a.y,
-    };
-  };
-  Line2.distance = (line,) => {
-    return Point.distance(line.a, line.b,);
-  };
-  return Line2;
-})();
 var Polygon = {
   /**
    * Determine if the vertices are ordered clockwise or counter-clockwise. This works for simple
@@ -29180,7 +29217,7 @@ var Polygon = {
     },);
     for (const edgeA of edgesA) {
       for (const edgeB of edgesB) {
-        const intersection2 = segmentsIntersect(edgeA, edgeB,);
+        const intersection2 = Line.intersection(edgeA, edgeB, true,);
         if (intersection2) {
           return true;
         }
@@ -29203,12 +29240,53 @@ var Polygon = {
     }
     return true;
   },
+  /** @internal */
+  clipToRect: (points, rect,) => {
+    const edges = Rect.edges(rect,);
+    const seen = /* @__PURE__ */ new Set();
+    const count = points.length;
+    const clippedPoints = [];
+    const originalPoints = [];
+    for (let i = 0; i < count; i++) {
+      const point2 = points[i];
+      const nextPoint = points[(i + 1) % count];
+      if (Rect.containsPoint(rect, point2,)) {
+        const intersectionKey = keyForPoint(point2,);
+        seen.add(intersectionKey,);
+        originalPoints.push(point2,);
+        if (Rect.containsPoint(rect, nextPoint,)) {
+          continue;
+        }
+      }
+      const line = Line(point2, nextPoint,);
+      edges.forEach((edge,) => {
+        const intersection2 = Line.intersection(line, edge, true,);
+        if (!intersection2) {
+          return;
+        }
+        const intersectionKey = keyForPoint(intersection2,);
+        if (seen.has(intersectionKey,)) {
+          return;
+        }
+        seen.add(intersectionKey,);
+        clippedPoints.push(intersection2,);
+      },);
+    }
+    if (clippedPoints.length === 0) {
+      return originalPoints;
+    }
+    Rect.points(rect,).forEach((point2,) => {
+      if (!Polygon.containsPoint(points, point2,)) {
+        return;
+      }
+      seen.add(keyForPoint(point2,),);
+      clippedPoints.push(point2,);
+    },);
+    return Point.sortClockwise([...originalPoints, ...clippedPoints,],);
+  },
 };
-function segmentsIntersect(segmentA, segmentB,) {
-  const { a, b, } = segmentA;
-  const { a: c, b: d, } = segmentB;
-  return Polygon.isClockwise([a, c, d,],) !== Polygon.isClockwise([b, c, d,],) &&
-    Polygon.isClockwise([a, b, c,],) !== Polygon.isClockwise([a, b, d,],);
+function keyForPoint(point2,) {
+  return `${point2 == null ? void 0 : point2.x}-${point2 == null ? void 0 : point2.y}`;
 }
 function invertPlacement(placement,) {
   switch (placement) {
@@ -37507,8 +37585,13 @@ var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextIn
     ...sensibleInputDefaults,
     ...passwordManagerIgnoreDataProps,
   };
-  const baseStyle2 = {
+  const baseWrapperStyle = {
     width: '100%',
+  };
+  const baseStyle2 = {
+    height: props.height,
+    width: props.width,
+    ...props.style,
   };
   const input = /* @__PURE__ */ jsx60(
     motion.input,
@@ -37516,21 +37599,21 @@ var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextIn
       id: props.inputName,
       ...dataProps,
       type: props.type,
+      ref,
       required: props.required,
       autoFocus: props.autoFocus,
       name: props.inputName,
       style: baseStyle2,
       placeholder: props.placeholder,
-      className: inputClassName,
+      className: cx(props.className, inputClassName,),
     },
   );
   if (props.label) {
-    return /* @__PURE__ */ jsx60('div', {
-      ref,
-      style: { width: '100%', },
+    return /* @__PURE__ */ jsx60(motion.div, {
+      style: { ...baseWrapperStyle, ...props.style, },
       children: /* @__PURE__ */ jsxs19('label', {
-        style: { width: '100%', },
         htmlFor: props.inputName,
+        style: baseWrapperStyle,
         children: [
           /* @__PURE__ */ jsx60('span', { style: labelStyles, children: props.label, },),
           input,
@@ -37538,7 +37621,7 @@ var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextIn
       },),
     },);
   }
-  return /* @__PURE__ */ jsx60('div', { ref, style: { width: '100%', }, children: input, },);
+  return /* @__PURE__ */ jsx60(motion.div, { style: { ...baseWrapperStyle, ...props.style, }, children: input, },);
 },);
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
   `.${inputClassName} {
