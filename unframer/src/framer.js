@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.WNIOWGUM.js
+// https :https://app.framerstatic.com/framer.U2CJWUE6.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -20493,7 +20493,11 @@ var RadialGradient = {
   toCSS: (radialGradient,) => {
     const { alpha: alpha2, widthFactor, heightFactor, centerAnchorX, centerAnchorY, } = radialGradient;
     const stops = gradientColorStops(radialGradient, alpha2,);
-    const cssStops = stops.map((stop,) => `${stop.value} ${stop.position * 100}%`);
+    const cssStops = stops.map((stop, index,) => {
+      const nextStop = stops[index + 1];
+      const position = stop.position === 1 && (nextStop == null ? void 0 : nextStop.position) === 1 ? stop.position - 1e-4 : stop.position;
+      return `${stop.value} ${position * 100}%`;
+    },);
     return `radial-gradient(${widthFactor * 100}% ${heightFactor * 100}% at ${centerAnchorX * 100}% ${centerAnchorY * 100}%, ${
       cssStops.join(', ',)
     })`;
@@ -37573,13 +37577,11 @@ var sensibleInputDefaults = {
 var labelStyles = {
   display: 'block',
   marginBottom: 8,
-  fontSize: 12,
-  color: '#000',
   width: '100%',
-  fontWeight: 'bold',
   textTransform: 'capitalize',
 };
 var inputClassName = 'framer-form-input';
+var labelClassName = 'framer-form-label';
 var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextInput(props, ref,) {
   const dataProps = {
     ...sensibleInputDefaults,
@@ -37588,6 +37590,7 @@ var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextIn
   const baseWrapperStyle = {
     width: '100%',
   };
+  const isHiddenInput = props.type === 'hidden';
   const baseStyle2 = {
     height: props.height,
     width: props.width,
@@ -37608,6 +37611,9 @@ var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextIn
       className: cx(props.className, inputClassName,),
     },
   );
+  if (isHiddenInput) {
+    return input;
+  }
   if (props.label) {
     return /* @__PURE__ */ jsx60(motion.div, {
       style: { ...baseWrapperStyle, ...props.style, },
@@ -37615,7 +37621,7 @@ var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextIn
         htmlFor: props.inputName,
         style: baseWrapperStyle,
         children: [
-          /* @__PURE__ */ jsx60('span', { style: labelStyles, children: props.label, },),
+          /* @__PURE__ */ jsx60('span', { style: labelStyles, className: labelClassName, children: props.label, },),
           input,
         ],
       },),
@@ -37635,6 +37641,15 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         font-weight: var(${'--framer-input-font-weight'});
         font-size: var(${'--framer-input-font-size'});
         color: var(${'--framer-input-font-color'});
+    }`,
+  `.${inputClassName}::placeholder {
+        color: var(${'--framer-input-placeholder-color'});
+    }`,
+  `.${labelClassName} {
+        font-family: var(${'--framer-input-label-font-family'});
+        font-weight: var(${'--framer-input-label-font-weight'});
+        font-size: var(${'--framer-input-label-font-size'});
+        color: var(${'--framer-input-label-font-color'});
     }`,
 ],);
 var Image2 = /* @__PURE__ */ React88.forwardRef(function Image3(props, ref,) {
