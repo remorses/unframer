@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.U2CJWUE6.js
+// https :https://app.framerstatic.com/framer.OWVTYCFZ.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9271,31 +9271,17 @@ import React78 from 'react';
 import { jsx as jsx46, } from 'react/jsx-runtime';
 import React79, { useRef as useRef15, } from 'react';
 import { jsx as jsx47, } from 'react/jsx-runtime';
-import React85, { Component as Component14, } from 'react';
 import React80 from 'react';
 import { jsx as jsx48, } from 'react/jsx-runtime';
-import React822 from 'react';
 import React81 from 'react';
 import { jsx as jsx49, } from 'react/jsx-runtime';
-import { Fragment as Fragment10, jsx as jsx50, jsxs as jsxs16, } from 'react/jsx-runtime';
-import React84, { useEffect as useEffect132, useRef as useRef16, } from 'react';
+import React822 from 'react';
+import { jsx as jsx50, } from 'react/jsx-runtime';
+import { jsx as jsx51, } from 'react/jsx-runtime';
 import React83 from 'react';
-import { Fragment as Fragment11, jsx as jsx51, jsxs as jsxs17, } from 'react/jsx-runtime';
-import { Component as Component12, } from 'react';
-import { jsx as jsx52, } from 'react/jsx-runtime';
-import { Component as Component13, } from 'react';
-import { jsx as jsx53, } from 'react/jsx-runtime';
-import { jsx as jsx54, jsxs as jsxs18, } from 'react/jsx-runtime';
-import { jsx as jsx55, } from 'react/jsx-runtime';
-import { jsx as jsx56, } from 'react/jsx-runtime';
-import { jsx as jsx57, } from 'react/jsx-runtime';
-import React86 from 'react';
-import { jsx as jsx58, } from 'react/jsx-runtime';
-import { jsx as jsx59, } from 'react/jsx-runtime';
-import React87 from 'react';
-import { jsx as jsx60, jsxs as jsxs19, } from 'react/jsx-runtime';
-import React88 from 'react';
-import { jsx as jsx61, jsxs as jsxs20, } from 'react/jsx-runtime';
+import { jsx as jsx52, jsxs as jsxs16, } from 'react/jsx-runtime';
+import React84 from 'react';
+import { jsx as jsx53, jsxs as jsxs17, } from 'react/jsx-runtime';
 import {
   Children as Children32,
   cloneElement as cloneElement32,
@@ -9303,362 +9289,25 @@ import {
   isValidElement as isValidElement32,
   useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef18,
+  useRef as useRef17,
 } from 'react';
-import * as React89 from 'react';
-import { useRef as useRef17, } from 'react';
+import * as React85 from 'react';
+import { useRef as useRef16, } from 'react';
+import { jsx as jsx54, } from 'react/jsx-runtime';
+import { jsx as jsx55, } from 'react/jsx-runtime';
+import React86 from 'react';
+import { jsx as jsx56, } from 'react/jsx-runtime';
+import { Fragment as Fragment10, jsx as jsx57, jsxs as jsxs18, } from 'react/jsx-runtime';
+import React88, { useEffect as useEffect142, useRef as useRef18, } from 'react';
+import React87 from 'react';
+import { Fragment as Fragment11, jsx as jsx58, jsxs as jsxs19, } from 'react/jsx-runtime';
+import { Component as Component12, } from 'react';
+import { jsx as jsx59, } from 'react/jsx-runtime';
+import { Component as Component13, } from 'react';
+import { jsx as jsx60, } from 'react/jsx-runtime';
+import { jsx as jsx61, jsxs as jsxs20, } from 'react/jsx-runtime';
 import { jsx as jsx62, } from 'react/jsx-runtime';
-import { jsx as jsx63, } from 'react/jsx-runtime';
 import { useEffect as useEffect152, useState as useState22, } from 'react';
-var require_hsluv = __commonJS({
-  '../../../node_modules/hsluv/hsluv.js'(exports, module,) {
-    var hsluv = hsluv || {};
-    hsluv.Geometry = function () {
-    };
-    hsluv.Geometry.intersectLineLine = function (a, b,) {
-      var x = (a.intercept - b.intercept) / (b.slope - a.slope);
-      var y = a.slope * x + a.intercept;
-      return { x, y, };
-    };
-    hsluv.Geometry.distanceFromOrigin = function (point2,) {
-      return Math.sqrt(Math.pow(point2.x, 2,) + Math.pow(point2.y, 2,),);
-    };
-    hsluv.Geometry.distanceLineFromOrigin = function (line,) {
-      return Math.abs(line.intercept,) / Math.sqrt(Math.pow(line.slope, 2,) + 1,);
-    };
-    hsluv.Geometry.perpendicularThroughPoint = function (line, point2,) {
-      var slope = -1 / line.slope;
-      var intercept = point2.y - slope * point2.x;
-      return { slope, intercept, };
-    };
-    hsluv.Geometry.angleFromOrigin = function (point2,) {
-      return Math.atan2(point2.y, point2.x,);
-    };
-    hsluv.Geometry.normalizeAngle = function (angle,) {
-      var m2 = 2 * Math.PI;
-      return (angle % m2 + m2) % m2;
-    };
-    hsluv.Geometry.lengthOfRayUntilIntersect = function (theta, line,) {
-      return line.intercept / (Math.sin(theta,) - line.slope * Math.cos(theta,));
-    };
-    hsluv.Hsluv = function () {
-    };
-    hsluv.Hsluv.getBounds = function (L,) {
-      var result = [];
-      var sub1 = Math.pow(L + 16, 3,) / 1560896;
-      var sub2 = sub1 > hsluv.Hsluv.epsilon ? sub1 : L / hsluv.Hsluv.kappa;
-      var _g = 0;
-      while (_g < 3) {
-        var c = _g++;
-        var m1 = hsluv.Hsluv.m[c][0];
-        var m2 = hsluv.Hsluv.m[c][1];
-        var m3 = hsluv.Hsluv.m[c][2];
-        var _g1 = 0;
-        while (_g1 < 2) {
-          var t = _g1++;
-          var top1 = (284517 * m1 - 94839 * m3) * sub2;
-          var top2 = (838422 * m3 + 769860 * m2 + 731718 * m1) * L * sub2 - 769860 * t * L;
-          var bottom = (632260 * m3 - 126452 * m2) * sub2 + 126452 * t;
-          result.push({ slope: top1 / bottom, intercept: top2 / bottom, },);
-        }
-      }
-      return result;
-    };
-    hsluv.Hsluv.maxSafeChromaForL = function (L,) {
-      var bounds = hsluv.Hsluv.getBounds(L,);
-      var min = Infinity;
-      var _g = 0;
-      while (_g < bounds.length) {
-        var bound = bounds[_g];
-        ++_g;
-        var length = hsluv.Geometry.distanceLineFromOrigin(bound,);
-        min = Math.min(min, length,);
-      }
-      return min;
-    };
-    hsluv.Hsluv.maxChromaForLH = function (L, H,) {
-      var hrad = H / 360 * Math.PI * 2;
-      var bounds = hsluv.Hsluv.getBounds(L,);
-      var min = Infinity;
-      var _g = 0;
-      while (_g < bounds.length) {
-        var bound = bounds[_g];
-        ++_g;
-        var length = hsluv.Geometry.lengthOfRayUntilIntersect(hrad, bound,);
-        if (length >= 0) {
-          min = Math.min(min, length,);
-        }
-      }
-      return min;
-    };
-    hsluv.Hsluv.dotProduct = function (a, b,) {
-      var sum = 0;
-      var _g1 = 0;
-      var _g = a.length;
-      while (_g1 < _g) {
-        var i = _g1++;
-        sum += a[i] * b[i];
-      }
-      return sum;
-    };
-    hsluv.Hsluv.fromLinear = function (c,) {
-      if (c <= 31308e-7) {
-        return 12.92 * c;
-      } else {
-        return 1.055 * Math.pow(c, 0.4166666666666667,) - 0.055;
-      }
-    };
-    hsluv.Hsluv.toLinear = function (c,) {
-      if (c > 0.04045) {
-        return Math.pow((c + 0.055) / 1.055, 2.4,);
-      } else {
-        return c / 12.92;
-      }
-    };
-    hsluv.Hsluv.xyzToRgb = function (tuple,) {
-      return [
-        hsluv.Hsluv.fromLinear(hsluv.Hsluv.dotProduct(hsluv.Hsluv.m[0], tuple,),),
-        hsluv.Hsluv.fromLinear(hsluv.Hsluv.dotProduct(hsluv.Hsluv.m[1], tuple,),),
-        hsluv.Hsluv.fromLinear(hsluv.Hsluv.dotProduct(hsluv.Hsluv.m[2], tuple,),),
-      ];
-    };
-    hsluv.Hsluv.rgbToXyz = function (tuple,) {
-      var rgbl = [hsluv.Hsluv.toLinear(tuple[0],), hsluv.Hsluv.toLinear(tuple[1],), hsluv.Hsluv.toLinear(tuple[2],),];
-      return [
-        hsluv.Hsluv.dotProduct(hsluv.Hsluv.minv[0], rgbl,),
-        hsluv.Hsluv.dotProduct(hsluv.Hsluv.minv[1], rgbl,),
-        hsluv.Hsluv.dotProduct(hsluv.Hsluv.minv[2], rgbl,),
-      ];
-    };
-    hsluv.Hsluv.yToL = function (Y,) {
-      if (Y <= hsluv.Hsluv.epsilon) {
-        return Y / hsluv.Hsluv.refY * hsluv.Hsluv.kappa;
-      } else {
-        return 116 * Math.pow(Y / hsluv.Hsluv.refY, 0.3333333333333333,) - 16;
-      }
-    };
-    hsluv.Hsluv.lToY = function (L,) {
-      if (L <= 8) {
-        return hsluv.Hsluv.refY * L / hsluv.Hsluv.kappa;
-      } else {
-        return hsluv.Hsluv.refY * Math.pow((L + 16) / 116, 3,);
-      }
-    };
-    hsluv.Hsluv.xyzToLuv = function (tuple,) {
-      var X = tuple[0];
-      var Y = tuple[1];
-      var Z = tuple[2];
-      var divider = X + 15 * Y + 3 * Z;
-      var varU = 4 * X;
-      var varV = 9 * Y;
-      if (divider != 0) {
-        varU /= divider;
-        varV /= divider;
-      } else {
-        varU = NaN;
-        varV = NaN;
-      }
-      var L = hsluv.Hsluv.yToL(Y,);
-      if (L == 0) {
-        return [0, 0, 0,];
-      }
-      var U = 13 * L * (varU - hsluv.Hsluv.refU);
-      var V = 13 * L * (varV - hsluv.Hsluv.refV);
-      return [L, U, V,];
-    };
-    hsluv.Hsluv.luvToXyz = function (tuple,) {
-      var L = tuple[0];
-      var U = tuple[1];
-      var V = tuple[2];
-      if (L == 0) {
-        return [0, 0, 0,];
-      }
-      var varU = U / (13 * L) + hsluv.Hsluv.refU;
-      var varV = V / (13 * L) + hsluv.Hsluv.refV;
-      var Y = hsluv.Hsluv.lToY(L,);
-      var X = 0 - 9 * Y * varU / ((varU - 4) * varV - varU * varV);
-      var Z = (9 * Y - 15 * varV * Y - varV * X) / (3 * varV);
-      return [X, Y, Z,];
-    };
-    hsluv.Hsluv.luvToLch = function (tuple,) {
-      var L = tuple[0];
-      var U = tuple[1];
-      var V = tuple[2];
-      var C = Math.sqrt(U * U + V * V,);
-      var H;
-      if (C < 1e-8) {
-        H = 0;
-      } else {
-        var Hrad = Math.atan2(V, U,);
-        H = Hrad * 180 / Math.PI;
-        if (H < 0) {
-          H = 360 + H;
-        }
-      }
-      return [L, C, H,];
-    };
-    hsluv.Hsluv.lchToLuv = function (tuple,) {
-      var L = tuple[0];
-      var C = tuple[1];
-      var H = tuple[2];
-      var Hrad = H / 360 * 2 * Math.PI;
-      var U = Math.cos(Hrad,) * C;
-      var V = Math.sin(Hrad,) * C;
-      return [L, U, V,];
-    };
-    hsluv.Hsluv.hsluvToLch = function (tuple,) {
-      var H = tuple[0];
-      var S = tuple[1];
-      var L = tuple[2];
-      if (L > 99.9999999) {
-        return [100, 0, H,];
-      }
-      if (L < 1e-8) {
-        return [0, 0, H,];
-      }
-      var max = hsluv.Hsluv.maxChromaForLH(L, H,);
-      var C = max / 100 * S;
-      return [L, C, H,];
-    };
-    hsluv.Hsluv.lchToHsluv = function (tuple,) {
-      var L = tuple[0];
-      var C = tuple[1];
-      var H = tuple[2];
-      if (L > 99.9999999) {
-        return [H, 0, 100,];
-      }
-      if (L < 1e-8) {
-        return [H, 0, 0,];
-      }
-      var max = hsluv.Hsluv.maxChromaForLH(L, H,);
-      var S = C / max * 100;
-      return [H, S, L,];
-    };
-    hsluv.Hsluv.hpluvToLch = function (tuple,) {
-      var H = tuple[0];
-      var S = tuple[1];
-      var L = tuple[2];
-      if (L > 99.9999999) {
-        return [100, 0, H,];
-      }
-      if (L < 1e-8) {
-        return [0, 0, H,];
-      }
-      var max = hsluv.Hsluv.maxSafeChromaForL(L,);
-      var C = max / 100 * S;
-      return [L, C, H,];
-    };
-    hsluv.Hsluv.lchToHpluv = function (tuple,) {
-      var L = tuple[0];
-      var C = tuple[1];
-      var H = tuple[2];
-      if (L > 99.9999999) {
-        return [H, 0, 100,];
-      }
-      if (L < 1e-8) {
-        return [H, 0, 0,];
-      }
-      var max = hsluv.Hsluv.maxSafeChromaForL(L,);
-      var S = C / max * 100;
-      return [H, S, L,];
-    };
-    hsluv.Hsluv.rgbToHex = function (tuple,) {
-      var h = '#';
-      var _g = 0;
-      while (_g < 3) {
-        var i = _g++;
-        var chan = tuple[i];
-        var c = Math.round(chan * 255,);
-        var digit2 = c % 16;
-        var digit1 = (c - digit2) / 16 | 0;
-        h += hsluv.Hsluv.hexChars.charAt(digit1,) + hsluv.Hsluv.hexChars.charAt(digit2,);
-      }
-      return h;
-    };
-    hsluv.Hsluv.hexToRgb = function (hex2,) {
-      hex2 = hex2.toLowerCase();
-      var ret = [];
-      var _g = 0;
-      while (_g < 3) {
-        var i = _g++;
-        var digit1 = hsluv.Hsluv.hexChars.indexOf(hex2.charAt(i * 2 + 1,),);
-        var digit2 = hsluv.Hsluv.hexChars.indexOf(hex2.charAt(i * 2 + 2,),);
-        var n = digit1 * 16 + digit2;
-        ret.push(n / 255,);
-      }
-      return ret;
-    };
-    hsluv.Hsluv.lchToRgb = function (tuple,) {
-      return hsluv.Hsluv.xyzToRgb(hsluv.Hsluv.luvToXyz(hsluv.Hsluv.lchToLuv(tuple,),),);
-    };
-    hsluv.Hsluv.rgbToLch = function (tuple,) {
-      return hsluv.Hsluv.luvToLch(hsluv.Hsluv.xyzToLuv(hsluv.Hsluv.rgbToXyz(tuple,),),);
-    };
-    hsluv.Hsluv.hsluvToRgb = function (tuple,) {
-      return hsluv.Hsluv.lchToRgb(hsluv.Hsluv.hsluvToLch(tuple,),);
-    };
-    hsluv.Hsluv.rgbToHsluv = function (tuple,) {
-      return hsluv.Hsluv.lchToHsluv(hsluv.Hsluv.rgbToLch(tuple,),);
-    };
-    hsluv.Hsluv.hpluvToRgb = function (tuple,) {
-      return hsluv.Hsluv.lchToRgb(hsluv.Hsluv.hpluvToLch(tuple,),);
-    };
-    hsluv.Hsluv.rgbToHpluv = function (tuple,) {
-      return hsluv.Hsluv.lchToHpluv(hsluv.Hsluv.rgbToLch(tuple,),);
-    };
-    hsluv.Hsluv.hsluvToHex = function (tuple,) {
-      return hsluv.Hsluv.rgbToHex(hsluv.Hsluv.hsluvToRgb(tuple,),);
-    };
-    hsluv.Hsluv.hpluvToHex = function (tuple,) {
-      return hsluv.Hsluv.rgbToHex(hsluv.Hsluv.hpluvToRgb(tuple,),);
-    };
-    hsluv.Hsluv.hexToHsluv = function (s,) {
-      return hsluv.Hsluv.rgbToHsluv(hsluv.Hsluv.hexToRgb(s,),);
-    };
-    hsluv.Hsluv.hexToHpluv = function (s,) {
-      return hsluv.Hsluv.rgbToHpluv(hsluv.Hsluv.hexToRgb(s,),);
-    };
-    hsluv.Hsluv.m = [[3.240969941904521, -1.537383177570093, -0.498610760293,], [-0.96924363628087, 1.87596750150772, 0.041555057407175,], [
-      0.055630079696993,
-      -0.20397695888897,
-      1.056971514242878,
-    ],];
-    hsluv.Hsluv.minv = [[0.41239079926595, 0.35758433938387, 0.18048078840183,], [0.21263900587151, 0.71516867876775, 0.072192315360733,], [
-      0.019330818715591,
-      0.11919477979462,
-      0.95053215224966,
-    ],];
-    hsluv.Hsluv.refY = 1;
-    hsluv.Hsluv.refU = 0.19783000664283;
-    hsluv.Hsluv.refV = 0.46831999493879;
-    hsluv.Hsluv.kappa = 903.2962962;
-    hsluv.Hsluv.epsilon = 0.0088564516;
-    hsluv.Hsluv.hexChars = '0123456789abcdef';
-    var root = {
-      'hsluvToRgb': hsluv.Hsluv.hsluvToRgb,
-      'rgbToHsluv': hsluv.Hsluv.rgbToHsluv,
-      'hpluvToRgb': hsluv.Hsluv.hpluvToRgb,
-      'rgbToHpluv': hsluv.Hsluv.rgbToHpluv,
-      'hsluvToHex': hsluv.Hsluv.hsluvToHex,
-      'hexToHsluv': hsluv.Hsluv.hexToHsluv,
-      'hpluvToHex': hsluv.Hsluv.hpluvToHex,
-      'hexToHpluv': hsluv.Hsluv.hexToHpluv,
-      'lchToHpluv': hsluv.Hsluv.lchToHpluv,
-      'hpluvToLch': hsluv.Hsluv.hpluvToLch,
-      'lchToHsluv': hsluv.Hsluv.lchToHsluv,
-      'hsluvToLch': hsluv.Hsluv.hsluvToLch,
-      'lchToLuv': hsluv.Hsluv.lchToLuv,
-      'luvToLch': hsluv.Hsluv.luvToLch,
-      'xyzToLuv': hsluv.Hsluv.xyzToLuv,
-      'luvToXyz': hsluv.Hsluv.luvToXyz,
-      'xyzToRgb': hsluv.Hsluv.xyzToRgb,
-      'rgbToXyz': hsluv.Hsluv.rgbToXyz,
-      'lchToRgb': hsluv.Hsluv.lchToRgb,
-      'rgbToLch': hsluv.Hsluv.rgbToLch,
-    };
-    module.exports = root;
-  },
-},);
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
@@ -10698,13 +10347,13 @@ function lazy(factory,) {
   const LazyComponent = React22.lazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component15 = React22.forwardRef(function LazyWithPreload(props, ref,) {
+  const Component14 = React22.forwardRef(function LazyWithPreload(props, ref,) {
     return React22.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
       Object.assign(ref ? { ref, } : {}, props,),
     );
   },);
-  Component15.preload = () => {
+  Component14.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module,) => {
         LoadedComponent = module.default;
@@ -10713,7 +10362,7 @@ function lazy(factory,) {
     }
     return factoryPromise;
   };
-  return Component15;
+  return Component14;
 }
 function getRouteElementId(route, hash2,) {
   if (hash2 && route) {
@@ -12864,7 +12513,333 @@ var InertialScrollAnimator = class {
   //
   // Therefore, a real solution exists if 1 - (k * (x - x(0)) / v(0) > 0
 };
-var import_hsluv = __toESM(require_hsluv(), 1,);
+var Hsluv = class {
+  constructor() {
+    this.hex = '#000000';
+    this.rgb_r = 0;
+    this.rgb_g = 0;
+    this.rgb_b = 0;
+    this.xyz_x = 0;
+    this.xyz_y = 0;
+    this.xyz_z = 0;
+    this.luv_l = 0;
+    this.luv_u = 0;
+    this.luv_v = 0;
+    this.lch_l = 0;
+    this.lch_c = 0;
+    this.lch_h = 0;
+    this.hsluv_h = 0;
+    this.hsluv_s = 0;
+    this.hsluv_l = 0;
+    this.hpluv_h = 0;
+    this.hpluv_p = 0;
+    this.hpluv_l = 0;
+    this.r0s = 0;
+    this.r0i = 0;
+    this.r1s = 0;
+    this.r1i = 0;
+    this.g0s = 0;
+    this.g0i = 0;
+    this.g1s = 0;
+    this.g1i = 0;
+    this.b0s = 0;
+    this.b0i = 0;
+    this.b1s = 0;
+    this.b1i = 0;
+  }
+  static fromLinear(c,) {
+    if (c <= 31308e-7) {
+      return 12.92 * c;
+    } else {
+      return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
+    }
+  }
+  static toLinear(c,) {
+    if (c > 0.04045) {
+      return Math.pow((c + 0.055) / 1.055, 2.4,);
+    } else {
+      return c / 12.92;
+    }
+  }
+  static yToL(Y,) {
+    if (Y <= Hsluv.epsilon) {
+      return Y / Hsluv.refY * Hsluv.kappa;
+    } else {
+      return 116 * Math.pow(Y / Hsluv.refY, 1 / 3,) - 16;
+    }
+  }
+  static lToY(L,) {
+    if (L <= 8) {
+      return Hsluv.refY * L / Hsluv.kappa;
+    } else {
+      return Hsluv.refY * Math.pow((L + 16) / 116, 3,);
+    }
+  }
+  static rgbChannelToHex(chan,) {
+    const c = Math.round(chan * 255,);
+    const digit2 = c % 16;
+    const digit1 = (c - digit2) / 16 | 0;
+    return Hsluv.hexChars.charAt(digit1,) + Hsluv.hexChars.charAt(digit2,);
+  }
+  static hexToRgbChannel(hex2, offset,) {
+    const digit1 = Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
+    const digit2 = Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
+    const n = digit1 * 16 + digit2;
+    return n / 255;
+  }
+  static distanceFromOriginAngle(slope, intercept, angle,) {
+    const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
+    if (d < 0) {
+      return Infinity;
+    } else {
+      return d;
+    }
+  }
+  static distanceFromOrigin(slope, intercept,) {
+    return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
+  }
+  static min6(f1, f2, f3, f4, f5, f6,) {
+    return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
+  }
+  rgbToHex() {
+    this.hex = '#';
+    this.hex += Hsluv.rgbChannelToHex(this.rgb_r,);
+    this.hex += Hsluv.rgbChannelToHex(this.rgb_g,);
+    this.hex += Hsluv.rgbChannelToHex(this.rgb_b,);
+  }
+  hexToRgb() {
+    this.hex = this.hex.toLowerCase();
+    this.rgb_r = Hsluv.hexToRgbChannel(this.hex, 1,);
+    this.rgb_g = Hsluv.hexToRgbChannel(this.hex, 3,);
+    this.rgb_b = Hsluv.hexToRgbChannel(this.hex, 5,);
+  }
+  xyzToRgb() {
+    this.rgb_r = Hsluv.fromLinear(Hsluv.m_r0 * this.xyz_x + Hsluv.m_r1 * this.xyz_y + Hsluv.m_r2 * this.xyz_z,);
+    this.rgb_g = Hsluv.fromLinear(Hsluv.m_g0 * this.xyz_x + Hsluv.m_g1 * this.xyz_y + Hsluv.m_g2 * this.xyz_z,);
+    this.rgb_b = Hsluv.fromLinear(Hsluv.m_b0 * this.xyz_x + Hsluv.m_b1 * this.xyz_y + Hsluv.m_b2 * this.xyz_z,);
+  }
+  rgbToXyz() {
+    const lr = Hsluv.toLinear(this.rgb_r,);
+    const lg = Hsluv.toLinear(this.rgb_g,);
+    const lb = Hsluv.toLinear(this.rgb_b,);
+    this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
+    this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
+    this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
+  }
+  xyzToLuv() {
+    const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
+    let varU = 4 * this.xyz_x;
+    let varV = 9 * this.xyz_y;
+    if (divider !== 0) {
+      varU /= divider;
+      varV /= divider;
+    } else {
+      varU = NaN;
+      varV = NaN;
+    }
+    this.luv_l = Hsluv.yToL(this.xyz_y,);
+    if (this.luv_l === 0) {
+      this.luv_u = 0;
+      this.luv_v = 0;
+    } else {
+      this.luv_u = 13 * this.luv_l * (varU - Hsluv.refU);
+      this.luv_v = 13 * this.luv_l * (varV - Hsluv.refV);
+    }
+  }
+  luvToXyz() {
+    if (this.luv_l === 0) {
+      this.xyz_x = 0;
+      this.xyz_y = 0;
+      this.xyz_z = 0;
+      return;
+    }
+    const varU = this.luv_u / (13 * this.luv_l) + Hsluv.refU;
+    const varV = this.luv_v / (13 * this.luv_l) + Hsluv.refV;
+    this.xyz_y = Hsluv.lToY(this.luv_l,);
+    this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
+    this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
+  }
+  luvToLch() {
+    this.lch_l = this.luv_l;
+    this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
+    if (this.lch_c < 1e-8) {
+      this.lch_h = 0;
+    } else {
+      const hrad = Math.atan2(this.luv_v, this.luv_u,);
+      this.lch_h = hrad * 180 / Math.PI;
+      if (this.lch_h < 0) {
+        this.lch_h = 360 + this.lch_h;
+      }
+    }
+  }
+  lchToLuv() {
+    const hrad = this.lch_h / 180 * Math.PI;
+    this.luv_l = this.lch_l;
+    this.luv_u = Math.cos(hrad,) * this.lch_c;
+    this.luv_v = Math.sin(hrad,) * this.lch_c;
+  }
+  calculateBoundingLines(l,) {
+    const sub1 = Math.pow(l + 16, 3,) / 1560896;
+    const sub2 = sub1 > Hsluv.epsilon ? sub1 : l / Hsluv.kappa;
+    const s1r = sub2 * (284517 * Hsluv.m_r0 - 94839 * Hsluv.m_r2);
+    const s2r = sub2 * (838422 * Hsluv.m_r2 + 769860 * Hsluv.m_r1 + 731718 * Hsluv.m_r0);
+    const s3r = sub2 * (632260 * Hsluv.m_r2 - 126452 * Hsluv.m_r1);
+    const s1g = sub2 * (284517 * Hsluv.m_g0 - 94839 * Hsluv.m_g2);
+    const s2g = sub2 * (838422 * Hsluv.m_g2 + 769860 * Hsluv.m_g1 + 731718 * Hsluv.m_g0);
+    const s3g = sub2 * (632260 * Hsluv.m_g2 - 126452 * Hsluv.m_g1);
+    const s1b = sub2 * (284517 * Hsluv.m_b0 - 94839 * Hsluv.m_b2);
+    const s2b = sub2 * (838422 * Hsluv.m_b2 + 769860 * Hsluv.m_b1 + 731718 * Hsluv.m_b0);
+    const s3b = sub2 * (632260 * Hsluv.m_b2 - 126452 * Hsluv.m_b1);
+    this.r0s = s1r / s3r;
+    this.r0i = s2r * l / s3r;
+    this.r1s = s1r / (s3r + 126452);
+    this.r1i = (s2r - 769860) * l / (s3r + 126452);
+    this.g0s = s1g / s3g;
+    this.g0i = s2g * l / s3g;
+    this.g1s = s1g / (s3g + 126452);
+    this.g1i = (s2g - 769860) * l / (s3g + 126452);
+    this.b0s = s1b / s3b;
+    this.b0i = s2b * l / s3b;
+    this.b1s = s1b / (s3b + 126452);
+    this.b1i = (s2b - 769860) * l / (s3b + 126452);
+  }
+  calcMaxChromaHpluv() {
+    const r0 = Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
+    const r1 = Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
+    const g0 = Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
+    const g1 = Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
+    const b0 = Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
+    const b1 = Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
+    return Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+  }
+  calcMaxChromaHsluv(h,) {
+    const hueRad = h / 360 * Math.PI * 2;
+    const r0 = Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
+    const r1 = Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
+    const g0 = Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
+    const g1 = Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
+    const b0 = Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
+    const b1 = Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
+    return Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+  }
+  hsluvToLch() {
+    if (this.hsluv_l > 99.9999999) {
+      this.lch_l = 100;
+      this.lch_c = 0;
+    } else if (this.hsluv_l < 1e-8) {
+      this.lch_l = 0;
+      this.lch_c = 0;
+    } else {
+      this.lch_l = this.hsluv_l;
+      this.calculateBoundingLines(this.hsluv_l,);
+      const max = this.calcMaxChromaHsluv(this.hsluv_h,);
+      this.lch_c = max / 100 * this.hsluv_s;
+    }
+    this.lch_h = this.hsluv_h;
+  }
+  lchToHsluv() {
+    if (this.lch_l > 99.9999999) {
+      this.hsluv_s = 0;
+      this.hsluv_l = 100;
+    } else if (this.lch_l < 1e-8) {
+      this.hsluv_s = 0;
+      this.hsluv_l = 0;
+    } else {
+      this.calculateBoundingLines(this.lch_l,);
+      const max = this.calcMaxChromaHsluv(this.lch_h,);
+      this.hsluv_s = this.lch_c / max * 100;
+      this.hsluv_l = this.lch_l;
+    }
+    this.hsluv_h = this.lch_h;
+  }
+  hpluvToLch() {
+    if (this.hpluv_l > 99.9999999) {
+      this.lch_l = 100;
+      this.lch_c = 0;
+    } else if (this.hpluv_l < 1e-8) {
+      this.lch_l = 0;
+      this.lch_c = 0;
+    } else {
+      this.lch_l = this.hpluv_l;
+      this.calculateBoundingLines(this.hpluv_l,);
+      const max = this.calcMaxChromaHpluv();
+      this.lch_c = max / 100 * this.hpluv_p;
+    }
+    this.lch_h = this.hpluv_h;
+  }
+  lchToHpluv() {
+    if (this.lch_l > 99.9999999) {
+      this.hpluv_p = 0;
+      this.hpluv_l = 100;
+    } else if (this.lch_l < 1e-8) {
+      this.hpluv_p = 0;
+      this.hpluv_l = 0;
+    } else {
+      this.calculateBoundingLines(this.lch_l,);
+      const max = this.calcMaxChromaHpluv();
+      this.hpluv_p = this.lch_c / max * 100;
+      this.hpluv_l = this.lch_l;
+    }
+    this.hpluv_h = this.lch_h;
+  }
+  hsluvToRgb() {
+    this.hsluvToLch();
+    this.lchToLuv();
+    this.luvToXyz();
+    this.xyzToRgb();
+  }
+  hpluvToRgb() {
+    this.hpluvToLch();
+    this.lchToLuv();
+    this.luvToXyz();
+    this.xyzToRgb();
+  }
+  hsluvToHex() {
+    this.hsluvToRgb();
+    this.rgbToHex();
+  }
+  hpluvToHex() {
+    this.hpluvToRgb();
+    this.rgbToHex();
+  }
+  rgbToHsluv() {
+    this.rgbToXyz();
+    this.xyzToLuv();
+    this.luvToLch();
+    this.lchToHpluv();
+    this.lchToHsluv();
+  }
+  rgbToHpluv() {
+    this.rgbToXyz();
+    this.xyzToLuv();
+    this.luvToLch();
+    this.lchToHpluv();
+    this.lchToHpluv();
+  }
+  hexToHsluv() {
+    this.hexToRgb();
+    this.rgbToHsluv();
+  }
+  hexToHpluv() {
+    this.hexToRgb();
+    this.rgbToHpluv();
+  }
+};
+Hsluv.hexChars = '0123456789abcdef';
+Hsluv.refY = 1;
+Hsluv.refU = 0.19783000664283;
+Hsluv.refV = 0.46831999493879;
+Hsluv.kappa = 903.2962962;
+Hsluv.epsilon = 0.0088564516;
+Hsluv.m_r0 = 3.240969941904521;
+Hsluv.m_r1 = -1.537383177570093;
+Hsluv.m_r2 = -0.498610760293;
+Hsluv.m_g0 = -0.96924363628087;
+Hsluv.m_g1 = 1.87596750150772;
+Hsluv.m_g2 = 0.041555057407175;
+Hsluv.m_b0 = 0.055630079696993;
+Hsluv.m_b1 = -0.20397695888897;
+Hsluv.m_b2 = 1.056971514242878;
 var cssNames = {
   aliceblue: 'f0f8ff',
   antiquewhite: 'faebd7',
@@ -13080,17 +13055,27 @@ function numberFromString(input,) {
   const match = /\d?\.?\d+/u.exec(input,);
   return match ? Number(match[0],) : void 0;
 }
-var { hsluvToRgb, rgbToHsluv: rgbToHsluvExternal, } = import_hsluv.default;
+var hsluvConverter = new Hsluv();
 function rgbToHsluv(r, g, b,) {
-  const [h, s, l,] = rgbToHsluvExternal([r / 255, g / 255, b / 255,],);
-  return { h, s, l, };
+  hsluvConverter.rgb_r = r / 255;
+  hsluvConverter.rgb_g = g / 255;
+  hsluvConverter.rgb_b = b / 255;
+  hsluvConverter.rgbToHsluv();
+  return {
+    h: hsluvConverter.hsluv_h,
+    s: hsluvConverter.hsluv_s,
+    l: hsluvConverter.hsluv_l,
+  };
 }
 function rgbaFromHusl(h, s, l, a = 1,) {
-  const rgb = hsluvToRgb([h, s, l,],);
+  hsluvConverter.hsluv_h = h;
+  hsluvConverter.hsluv_s = s;
+  hsluvConverter.hsluv_l = l;
+  hsluvConverter.hsluvToRgb();
   return {
-    r: rgb[0] * 255,
-    g: rgb[1] * 255,
-    b: rgb[2] * 255,
+    r: hsluvConverter.rgb_r * 255,
+    g: hsluvConverter.rgb_g * 255,
+    b: hsluvConverter.rgb_b * 255,
     a,
   };
 }
@@ -19955,7 +19940,7 @@ function useMeasuredSize(ref,) {
   return size2.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component15,) => (props,) => {
+var withMeasuredSize = (Component14,) => (props,) => {
   const ref = React26.useRef(null,);
   const size2 = useMeasuredSize(ref,);
   const dataProps = { [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true, };
@@ -19967,7 +19952,7 @@ var withMeasuredSize = (Component15,) => (props,) => {
     ref,
     ...dataProps,
     children: shouldRender && /* @__PURE__ */ jsx9(
-      Component15,
+      Component14,
       {
         ...props,
         width: (size2 == null ? void 0 : size2.width) ?? fallbackWidth,
@@ -21399,7 +21384,7 @@ var clamp2 = (value, a, b,) => {
   return value;
 };
 var DraggingContext = React31.createContext({ dragging: false, },);
-function WithDragging(Component15,) {
+function WithDragging(Component14,) {
   const _WithDraggingHOC = class extends React31.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
@@ -21942,7 +21927,7 @@ function WithDragging(Component15,) {
       originalProps.top = this.y;
       return /* @__PURE__ */ jsx14(DraggingContext.Provider, {
         value: { dragging: this.state.isDragging, },
-        children: /* @__PURE__ */ jsx14(Component15, { ...originalProps, },),
+        children: /* @__PURE__ */ jsx14(Component14, { ...originalProps, },),
       },);
     }
   };
@@ -21973,12 +21958,12 @@ function WithDragging(Component15,) {
     'defaultProps',
     Object.assign(
       {},
-      Component15.defaultProps,
+      Component14.defaultProps,
       _WithDraggingHOC.draggingDefaultProps,
     ),
   );
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics.default)(withDragging, Component15,);
+  (0, import_hoist_non_react_statics.default)(withDragging, Component14,);
   return withDragging;
 }
 var hoverProps = {
@@ -27645,7 +27630,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component15, override,) {
+function WithOverride(Component14, override,) {
   const useOverride = typeof override === 'function'
     ? (props,) => override(convertColorProps(props,),)
     : () => convertColorProps(override,);
@@ -27653,10 +27638,10 @@ function WithOverride(Component15, override,) {
     useContext112(DataObserverContext,);
     const overrideProps = useOverride(props,);
     const { style, ...rest } = props;
-    return /* @__PURE__ */ jsx32(Component15, { ...rest, ...overrideProps, _initialStyle: style, },);
+    return /* @__PURE__ */ jsx32(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component15,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component15.displayName || Component15.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component14,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component14.displayName || Component14.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -28533,15 +28518,15 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList(value,) {
   return isString22(value,) || Array.isArray(value,);
 }
-var withFX = (Component15,) =>
+var withFX = (Component14,) =>
   React54.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx33(Component15, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
+      return /* @__PURE__ */ jsx33(Component14, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
     }
     if (RenderTarget.current() === 'CANVAS') {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ jsx33(Component15, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
+      return /* @__PURE__ */ jsx33(Component14, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
     }
     const fallbackRef = React54.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
@@ -28645,7 +28630,7 @@ var withFX = (Component15,) =>
     const exit = isVariantOrVariantList(props.exit,) ? props.exit : void 0;
     const motionGestures = inSmartComponent && !presence.presenceInitial ? { initial, animate: animate3, exit, } : {};
     return /* @__PURE__ */ jsx33(
-      Component15,
+      Component14,
       {
         ...forwardedProps,
         ...motionGestures,
@@ -28786,10 +28771,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React56.forwardRef(
     },);
   },
 );
-var withGeneratedLayoutId = (Component15,) =>
+var withGeneratedLayoutId = (Component14,) =>
   React57.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx37(Component15, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
+    return /* @__PURE__ */ jsx37(Component14, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
   },);
 var Providers = /* @__PURE__ */ React58.forwardRef(
   ({ children, layoutId, ...props }, ref,) => {
@@ -28835,7 +28820,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var styleTagSSRMarker = { 'data-framer-css-ssr': true, };
-var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component14, escapedCSS, componentSerializationId,) =>
   React60.forwardRef((props, ref,) => {
     const { sheet, cache: cache3, } = React60.useContext(StyleSheetContext,) ?? {};
     if (!isBrowser2()) {
@@ -28850,7 +28835,7 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
               dangerouslySetInnerHTML: { __html: concatenatedCSS, },
             },
           ),
-          /* @__PURE__ */ jsx39(Component15, { ...props, ref, },),
+          /* @__PURE__ */ jsx39(Component14, { ...props, ref, },),
         ],
       },);
     }
@@ -28861,7 +28846,7 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
       const css = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
       css.forEach((rule,) => rule && injectCSSRule(rule, sheet, cache3,));
     }, [],);
-    return /* @__PURE__ */ jsx39(Component15, { ...props, ref, },);
+    return /* @__PURE__ */ jsx39(Component14, { ...props, ref, },);
   },);
 var CustomCursorContext = /* @__PURE__ */ React61.createContext({
   onRegisterCursors: () => () => {
@@ -33415,38 +33400,38 @@ function usePrototypeNavigate({ preload, } = {},) {
       navigation.goBack();
       return false;
     }
-    const Component15 = typeof target === 'string'
+    const Component14 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {
       },)
       : React76.isValidElement(target,)
       ? target
       : null;
-    if (!Component15) {
+    if (!Component14) {
       return;
     }
     const { appearsFrom, backdropColor, animation, } = options;
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component15,);
+        navigation.instant(Component14,);
         break;
       case 'fade':
-        navigation.fade(Component15, { animation, },);
+        navigation.fade(Component14, { animation, },);
         break;
       case 'push':
-        navigation.push(Component15, { appearsFrom, animation, },);
+        navigation.push(Component14, { appearsFrom, animation, },);
         break;
       case 'flip':
-        navigation.flip(Component15, { appearsFrom, animation, },);
+        navigation.flip(Component14, { appearsFrom, animation, },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component15, { animation, },);
+        navigation.magicMotion(Component14, { animation, },);
         break;
       case 'modal':
-        navigation.modal(Component15, { backdropColor, animation, },);
+        navigation.modal(Component14, { backdropColor, animation, },);
         break;
       case 'overlay':
-        navigation.overlay(Component15, { appearsFrom, backdropColor, animation, },);
+        navigation.overlay(Component14, { appearsFrom, backdropColor, animation, },);
         break;
     }
     return false;
@@ -33756,14 +33741,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component15, info,) {
+function withMappedReactProps(Component14, info,) {
   return (rawProps,) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx45(Component15, { ...props, },);
+    return /* @__PURE__ */ jsx45(Component14, { ...props, },);
   };
 }
 var keys2 = /* @__PURE__ */ new Set([
@@ -33801,11 +33786,11 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
   }
   return { inputRange: [0, Math.max(firstItem - 1, 0,), ...inputRange,], outputRange: [-1, -1, ...outputRange,], };
 }
-var withVariantAppearEffect = (Component15,) =>
+var withVariantAppearEffect = (Component14,) =>
   React78.forwardRef(
     (props, forwardedRef,) => {
       if (RenderTarget.current() === 'CANVAS') {
-        return /* @__PURE__ */ jsx46(Component15, { ...props, ref: forwardedRef, },);
+        return /* @__PURE__ */ jsx46(Component14, { ...props, ref: forwardedRef, },);
       }
       const fallbackRef = React78.useRef(null,);
       const ref = forwardedRef ?? fallbackRef;
@@ -33892,13 +33877,13 @@ var withVariantAppearEffect = (Component15,) =>
         repeat: !animateOnce,
       },);
       if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-        return /* @__PURE__ */ jsx46(Component15, { ...rest, variant: activeVariant ?? props.variant, ref, },);
+        return /* @__PURE__ */ jsx46(Component14, { ...rest, variant: activeVariant ?? props.variant, ref, },);
       } else {
-        return /* @__PURE__ */ jsx46(Component15, { ...rest, },);
+        return /* @__PURE__ */ jsx46(Component14, { ...rest, },);
       }
     },
   );
-var withVariantFX = (Component15,) =>
+var withVariantFX = (Component14,) =>
   React79.forwardRef(
     ({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
       const ref = useRef15();
@@ -33911,13 +33896,17 @@ var withVariantFX = (Component15,) =>
         forwardedRef ?? ref,
         true,
       );
-      return /* @__PURE__ */ jsx47(Component15, {
+      return /* @__PURE__ */ jsx47(Component14, {
         ...props,
         style: { ...props == null ? void 0 : props.style, ...effect.values, },
         ref: forwardedRef ?? ref,
       },);
     },
   );
+var WindowContext = /* @__PURE__ */ React80.createContext(
+  void 0,
+);
+var useProvidedWindow = () => React80.useContext(WindowContext,);
 function isDesignDefinition(d,) {
   return d.type === 'master';
 }
@@ -33927,1105 +33916,233 @@ function isOverride(d,) {
 function isReactDefinition(d,) {
   return d.type !== 'master';
 }
-var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
-  var _a;
-  return _a = class extends Layer {
-    constructor() {
-      super(...arguments,);
-      __publicField(this, 'state', {},);
-      __publicField(this, 'setElement', (element,) => {
-        if (this.props.innerRef) {
-          this.props.innerRef.current = element;
-        }
-        this.setLayerElement(element,);
-      },);
-    }
-    componentDidCatch(error, info,) {
-      var _a2;
-      let stack = (_a2 = info.componentStack) == null ? void 0 : _a2.split('\n',).filter((line,) => line.length !== 0);
-      let currentIndex = 0;
-      if (stack) {
-        for (const line of stack) {
-          if (line.startsWith(`    in ${this.constructor.name}`,)) {
-            break;
-          }
-          currentIndex++;
-        }
-        stack = stack.slice(0, currentIndex,);
-      }
-      this.setState({
-        lastError: {
-          children: this.props.children,
-          name: error.name,
-          message: error.message,
-          componentStack: stack,
-        },
-      },);
-    }
-    renderErrorPlaceholder(file, error,) {
-      const { RenderPlaceholder, } = runtime;
-      return /* @__PURE__ */ jsx48(FrameWithMotion, {
-        ...this.props,
-        background: null,
-        children: /* @__PURE__ */ jsx48(RenderPlaceholder, { error: { error, file, }, },),
-      },);
-    }
-    render() {
-      var _a2, _b;
-      countNodeRender();
-      let { children, } = this.props;
-      const { componentIdentifier, } = this.props;
-      const { lastError: error, } = this.state;
-      const noChildren = !children || Array.isArray(children,) && children.filter((c,) => c).length === 0;
-      if (noChildren) {
-        const errorComponent = runtime.componentLoader.errorForIdentifier(componentIdentifier,);
-        if (errorComponent) {
-          return this.renderErrorPlaceholder(errorComponent.file, errorComponent.error,);
-        }
-      }
-      if (error && error.children === children) {
-        const component = runtime.componentLoader.componentForIdentifier(componentIdentifier,);
-        const file = component ? component.file : '???';
-        return this.renderErrorPlaceholder(file, error.message,);
-      }
-
-      (_b = (_a2 = asRecord(safeWindow,))['__checkComponentBudget__']) == null ? void 0 : _b.call(_a2,);
-      let frameProps = this.props;
-      if (RenderTarget.current() !== 'CANVAS') {
-        const {
-          left,
-          right,
-          top,
-          bottom,
-          center,
-          centerX,
-          centerY,
-          aspectRatio: aspectRatio2,
-          parentSize,
-          width,
-          height,
-          rotation,
-          opacity,
-          visible,
-          _constraints,
-          _initialStyle,
-          name,
-          positionSticky,
-          positionStickyTop,
-          positionStickyRight,
-          positionStickyBottom,
-          positionStickyLeft,
-          // Remove the children and the componentIdentifier from the props passed into the component
-          componentIdentifier: originalComponentIdentifier,
-          children: originalChildren,
-          style,
-          duplicatedFrom,
-          widthType,
-          heightType,
-          ...childProps
-        } = frameProps;
-        children = React80.Children.map(originalChildren, (child,) => {
-          if (!isReactChild(child,) || !isReactElement(child,)) {
-            return child;
-          }
-          if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ jsx48(LayoutGroup, {
-              inherit: false,
-              id: this.props.__layoutId,
-              children: /* @__PURE__ */ jsx48(AutomaticLayoutIds, { enabled: false, children: React80.cloneElement(child, childProps,), },),
-            },);
-          }
-          return React80.cloneElement(child, childProps,);
-        },);
-        frameProps = {
-          style,
-          _constraints,
-          _initialStyle,
-          left,
-          right,
-          top,
-          bottom,
-          center,
-          centerX,
-          centerY,
-          aspectRatio: aspectRatio2,
-          parentSize,
-          width,
-          height,
-          rotation,
-          visible,
-          name,
-          duplicatedFrom,
-          id: frameProps.id,
-          layoutId: this.props.__layoutId,
-          widthType,
-          heightType,
-          positionSticky,
-          positionStickyTop,
-          positionStickyRight,
-          positionStickyBottom,
-          positionStickyLeft,
-        };
-      }
-      return (
-        /* The background should come before the frameProps. It looks like there never should be a background in frameProps,
-         * but published design components can contain an old version of the presentation tree that expects the background
-         * that is passed to be rendered here
-         * See the stackBackgroundTest.tsx integration test for an example of such a case
-         */
-        /* @__PURE__ */ jsx48(ComponentContainerContext.Provider, {
-          value: true,
-          children: /* @__PURE__ */ jsx48(
-            FrameWithMotion,
-            {
-              'data-framer-component-container': true,
-              background: null,
-              overflow: 'visible',
-              ref: this.setElement,
-              ...frameProps,
-              children,
-            },
-          ),
-        },)
-      );
-    }
+var localPackageFallbackIdentifier = '|local|';
+var safeFonts = {
+  Arial: {
+    Regular: { selector: 'Arial', weight: void 0, },
+    Black: { selector: 'Arial-Black', weight: void 0, },
+    Narrow: { selector: 'Arial Narrow', weight: void 0, },
+    'Rounded Bold': { selector: 'Arial Rounded MT Bold', weight: void 0, },
   },
-    __publicField(_a, 'supportsConstraints', true,),
-    __publicField(_a, 'defaultComponentContainerProps', {
-      style: {},
-      visible: true,
-      componentIdentifier: '',
-    },),
-    __publicField(_a, 'defaultProps', {
-      ...Layer.defaultProps,
-      ..._a.defaultComponentContainerProps,
-    },),
-    __publicField(_a, 'contextType', ComponentContainerContext,),
-    _a;
-})();
-function isPageOrScroll(identifier,) {
-  if (!identifier) {
-    return false;
-  }
-  if (identifier === 'framer/Page') {
-    return true;
-  }
-  if (identifier === 'framer/Scroll') {
-    return true;
-  }
-  return false;
-}
-function linearGradientLine(angle,) {
-  var _a, _b;
-  const rad = angle * Math.PI / 180;
-  const offset = {
-    x: -Math.sin(rad,) * 100,
-    y: Math.cos(rad,) * 100,
-  };
-  const anglePoint = Point(offset.x, offset.y,);
-  const angleLine = Line(Point(0.5, 0.5,), anglePoint,);
-  const points = Rect.points({ x: 0, y: 0, width: 1, height: 1, },);
-  const sortedPoints = points.map((point2,) => ({ point: point2, distance: Point.distance(anglePoint, point2,), })).sort((a2, b2,) =>
-    a2.distance - b2.distance
-  );
-  const a = (_a = sortedPoints[0]) == null ? void 0 : _a.point;
-  const b = (_b = sortedPoints[1]) == null ? void 0 : _b.point;
-  assert(a && b, 'linearGradientLine: Must have 2 closest points.',);
-  const [c, d,] = points.filter((point2,) => !Point.isEqual(point2, a,) && !Point.isEqual(point2, b,));
-  assert(c && d, 'linearGradientLine: Must have 2 opposing points.',);
-  const start = Line.intersection(angleLine, Line(a, b,),);
-  const end = Line.intersection(angleLine, Line(c, d,),);
-  assert(start && end, 'linearGradientLine: Must have a start and end point.',);
-  return Line(start, end,);
-}
-function elementPropertiesForLinearGradient(gradient, id3,) {
-  var _a, _b;
-  const line = linearGradientLine(gradient.angle,);
-  const stops = gradientColorStops(gradient,);
-  const startPosition = ((_a = stops[0]) == null ? void 0 : _a.position) ?? 0;
-  const endPosition = ((_b = stops[stops.length - 1]) == null ? void 0 : _b.position) ?? 1;
-  const startPoint = Line.pointAtPercentDistance(line, startPosition,);
-  const endPoint = Line.pointAtPercentDistance(line, endPosition,);
-  const interpolator = interpolate([startPosition, endPosition,], [0, 1,],);
-  return {
-    id: `id${id3}g${LinearGradient.hash(gradient,)}`,
-    x1: startPoint.x,
-    y1: startPoint.y,
-    x2: endPoint.x,
-    y2: endPoint.y,
-    stops: stops.map((stop,) => ({
-      color: stop.value,
-      alpha: ConvertColor.getAlpha(stop.value,) * gradient.alpha,
-      position: interpolator(stop.position,),
-    })),
-  };
-}
-function elementPropertiesForRadialGradient(gradient, id3,) {
-  return {
-    id: `id${id3}g${RadialGradient.hash(gradient,)}`,
-    widthFactor: gradient.widthFactor,
-    heightFactor: gradient.heightFactor,
-    centerAnchorX: gradient.centerAnchorX,
-    centerAnchorY: gradient.centerAnchorY,
-    stops: gradientColorStops(gradient,).map((stop,) => ({
-      color: stop.value,
-      alpha: ConvertColor.getAlpha(stop.value,) * gradient.alpha,
-      position: stop.position,
-    })),
-  };
-}
-function isRelativeNumber(value,) {
-  if (!isString22(value,)) {
-    return false;
-  }
-  const lastChar = value.charAt(value.length - 1,);
-  if (lastChar !== '%') {
-    return false;
-  }
-  const withoutLastChar = value.slice(0, -1,);
-  const float = parseFloat(withoutLastChar,);
-  return isNumber2(float,);
-}
-function getRelativeNumberValue(value,) {
-  const withoutLastChar = value.slice(0, -1,);
-  const float = parseFloat(withoutLastChar,);
-  return isNumber2(float,) ? float : 50;
-}
-function getPositionXFraction(positionX,) {
-  if (isRelativeNumber(positionX,)) {
-    return getRelativeNumberValue(positionX,) / 100;
-  }
-  if (positionX === 'left') {
-    return 0;
-  }
-  if (positionX === 'right') {
-    return 1;
-  }
-  return 0.5;
-}
-function getPositionYFraction(positionY,) {
-  if (isRelativeNumber(positionY,)) {
-    return getRelativeNumberValue(positionY,) / 100;
-  }
-  if (positionY === 'top') {
-    return 0;
-  }
-  if (positionY === 'bottom') {
-    return 1;
-  }
-  return 0.5;
-}
-function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
-  fill = Animatable.get(fill, '#09F',);
-  if (!BackgroundImage.isImageObject(fill,)) {
-    return void 0;
-  }
-  if (!fill.pixelWidth || !fill.pixelHeight) {
-    return void 0;
-  }
-  const imageWidth = fill.pixelWidth;
-  const imageHeight = fill.pixelHeight;
-  let transform2;
-  const { fit, } = fill;
-  let width = 1, height = 1;
-  let offsetX = 0;
-  let offsetY = 0;
-  if (fit === 'fill' || fit === 'fit' || fit === 'tile' || !fit) {
-    let scaleX = 1;
-    let scaleY = 1;
-    const imageRatio = imageWidth / imageHeight;
-    const realWidth = frame2.height * imageRatio;
-    const realHeight = frame2.width / imageRatio;
-    const validScaleX = realWidth / frame2.width;
-    const validScaleY = realHeight / frame2.height;
-    if (fit === 'tile') {
-      fill.backgroundSize ?? (fill.backgroundSize = 1);
-      width = Math.round(fill.backgroundSize * (imageWidth / 2),);
-      height = Math.round(fill.backgroundSize * (imageHeight / 2),);
-      const layerPositionX = frame2.x ?? 0;
-      const layerPositionY = frame2.y ?? 0;
-      let extraOffsetX = 0;
-      let extraOffsetY = 0;
-      if (includeTransform) {
-        extraOffsetX = layerPositionX;
-        extraOffsetY = layerPositionY;
-      }
-      offsetX = (frame2.width - width) * getPositionXFraction(fill.positionX,) + extraOffsetX;
-      offsetY = (frame2.height - height) * getPositionYFraction(fill.positionY,) + extraOffsetY;
-      transform2 = `translate(${offsetX + layerPositionX}, ${offsetY + layerPositionY})`;
-    } else {
-      if (fit === 'fill' || !fit ? validScaleY > validScaleX : validScaleY < validScaleX) {
-        scaleY = validScaleY;
-        offsetY = (1 - validScaleY) * getPositionYFraction(fill.positionY,);
-      } else {
-        scaleX = validScaleX;
-        offsetX = (1 - validScaleX) * getPositionXFraction(fill.positionX,);
-      }
-      transform2 = `translate(${offsetX}, ${offsetY}) scale(${scaleX}, ${scaleY})`;
-    }
-  }
-  const imageId = `id${id3}g${'-fillImage'}`;
-  return { id: imageId, path: fill.src ?? '', transform: transform2, width, height, offsetX, offsetY, };
-}
-var WindowContext = /* @__PURE__ */ React81.createContext(
-  void 0,
-);
-var useProvidedWindow = () => React81.useContext(WindowContext,);
-var mediaType2 = 'framer/asset-reference,';
-function isAssetReference(value,) {
-  return value.startsWith(`data:${mediaType2}`,);
-}
-function imageUrlForAsset(asset, pixelSize,) {
-  if (/^\w+:/.test(asset,) && !isAssetReference(asset,)) {
-    return asset;
-  }
-  if (typeof pixelSize !== 'number') {
-    pixelSize = void 0;
-  } else if (pixelSize <= 512) {
-    pixelSize = 512;
-  } else if (pixelSize <= 1024) {
-    pixelSize = 1024;
-  } else if (pixelSize <= 2048) {
-    pixelSize = 2048;
-  } else {
-    pixelSize = 4096;
-  }
-  const isExport = RenderTarget.current() === 'EXPORT';
-  return runtime.assetResolver(asset, { pixelSize, isExport, },) ?? '';
-}
-var ImagePatternElement = ({
-  id: id3,
-  path,
-  transform: transform2,
-  repeat,
-  width,
-  height,
-  offsetX,
-  offsetY,
-},) => {
-  const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ jsx49(
-    'pattern',
-    {
-      id: id3,
-      width: repeat ? width : '100%',
-      height: repeat ? height : '100%',
-      patternContentUnits: repeat ? void 0 : 'objectBoundingBox',
-      patternUnits: repeat ? 'userSpaceOnUse' : void 0,
-      x: repeat ? offsetX : void 0,
-      y: repeat ? offsetY : void 0,
-      children: /* @__PURE__ */ jsx49(
-        'image',
-        {
-          width: repeat ? width : 1,
-          height: repeat ? height : 1,
-          href,
-          preserveAspectRatio: 'none',
-          transform: repeat ? void 0 : transform2,
-          x: repeat ? 0 : void 0,
-          y: repeat ? 0 : void 0,
-        },
-        href,
-      ),
-    },
-  );
-};
-var useDOM = isBrowser2();
-var SharedSVGEntry = class {
-  constructor(id3, svg, innerHTML, viewBox, count = 0,) {
-    this.id = id3;
-    this.svg = svg;
-    this.innerHTML = innerHTML;
-    this.viewBox = viewBox;
-    this.count = count;
-  }
-};
-var SharedSVGManager = class {
-  constructor() {
-    __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
-  }
-  debugGetEntries() {
-    return this.entries;
-  }
-  /** Request to render a svg, this will ensure there is a global instance and will return a
-   * template referencing the image. Must be balanced with `unsubscribe()` calls using the same
-   * svg. If called multiple times while the shared SVG exists, the generateUniqueIds and
-   * contentId parameters are ignored. */
-  subscribe(svg, generateUniqueIds, contentId,) {
-    if (!svg || svg === '') {
-      return '';
-    }
-    let entry = this.entries.get(svg,);
-    if (!entry) {
-      if (!contentId) {
-        contentId = 'svg' + String(hash(svg,),) + '_' + String(svg.length,);
-      }
-      let uniqueSVG = svg;
-      let svgSize;
-      const svgDom = parseSVG(svg,);
-      if (svgDom) {
-        if (generateUniqueIds) {
-          prefixIdsInSVG(svgDom, contentId,);
-        }
-        svgDom.id = contentId;
-        svgSize = getSVGSize(svgDom,);
-        uniqueSVG = svgDom.outerHTML;
-      }
-      entry = this.createDOMElementFor(uniqueSVG, contentId, svgSize,);
-      this.entries.set(svg, entry,);
-    }
-    entry.count += 1;
-    return entry.innerHTML;
-  }
-  /** Returns the viewBox for the svg, or undefined if there is no viewBox. */
-  getViewBox(svg,) {
-    if (!svg || svg === '') {
-      return;
-    }
-    const entry = this.entries.get(svg,);
-    return entry == null ? void 0 : entry.viewBox;
-  }
-  /** When no longer rendering an svg it must be unsubscribed from so resources can be cleaned up.
-   * Pass in the same svg as used with `subscribe()`. */
-  unsubscribe(svg,) {
-    if (!svg || svg === '') {
-      return;
-    }
-    const entry = this.entries.get(svg,);
-    if (!entry) {
-      return;
-    }
-    entry.count -= 1;
-    if (entry.count > 0) {
-      return;
-    }
-    setTimeout(() => this.maybeRemoveEntry(svg,), 5e3,);
-  }
-  maybeRemoveEntry(svg,) {
-    const entry = this.entries.get(svg,);
-    if (!entry) {
-      return;
-    }
-    if (entry.count > 0) {
-      return;
-    }
-    this.entries.delete(svg,);
-    this.removeDOMElement(entry,);
-  }
-  removeDOMElement(entry,) {
-    const containerId = 'container_' + entry.id;
-    if (useDOM) {
-      const container = document == null ? void 0 : document.querySelector('#' + containerId,);
-      container == null ? void 0 : container.remove();
-    }
-  }
-  createDOMElementFor(svg, id3, size2,) {
-    const containerId = 'container_' + id3;
-    if (useDOM) {
-      let svgTemplates = document.querySelector('#svg-templates',);
-      if (!svgTemplates) {
-        svgTemplates = document.createElement('div',);
-        svgTemplates.id = 'svg-templates';
-        svgTemplates.style.position = 'absolute';
-        svgTemplates.style.top = '0';
-        svgTemplates.style.left = '0';
-        svgTemplates.style.width = '0';
-        svgTemplates.style.height = '0';
-        svgTemplates.style.overflow = 'hidden';
-        document.body.appendChild(svgTemplates,);
-      }
-      if (!document.querySelector('#' + containerId,)) {
-        const container = document.createElement('div',);
-        container.id = containerId;
-        container.innerHTML = svg;
-        if (container.firstElementChild) {
-          container.firstElementChild.id = id3;
-        }
-        svgTemplates.appendChild(container,);
-      }
-    }
-    const box = size2 ? `0 0 ${size2.width} ${size2.height}` : void 0;
-    const viewBox = box ? ` viewBox="${box}"` : '';
-    const innerHTML =
-      `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%"${viewBox}><use href="#${id3}"></use></svg>`;
-    return new SharedSVGEntry(id3, svg, innerHTML, box,);
-  }
-  clear() {
-    this.entries.clear();
-  }
-  /** Returns a string containing a div#svg-templates and all the current svg templates. Can be
-   * used after running `ReactDOMServer.renderToString()` */
-  generateTemplates() {
-    const output = [];
-    const style = 'position: absolute; overflow: hidden; top: 0; left: 0; width: 0; height: 0';
-    output.push(`<div id="svg-templates" style="${style}">`,);
-    for (const value of this.entries.values()) {
-      const containerId = 'container_' + value.id;
-      output.push(`  <div id="${containerId}">`,);
-      output.push(`    ${value.svg}`,);
-      output.push('  </div>',);
-    }
-    output.push('</div>',);
-    return output.join('\n',);
-  }
-};
-var sharedSVGManager = /* @__PURE__ */ new SharedSVGManager();
-function parseSVG(svg,) {
-  if (typeof DOMParser === 'undefined') {
-    console.warn('unable to find DOMParser',);
-    return;
-  }
-  try {
-    const domParser = new DOMParser();
-    const doc = domParser.parseFromString(svg, 'text/html',);
-    const node = doc.getElementsByTagName('svg',)[0];
-    if (!node) {
-      throw Error('no svg element found',);
-    }
-    return node;
-  } catch {
-    return;
-  }
-}
-function prefixIdsInSVG(svg, prefix2,) {
-  const sanitizedPrefix = sanitizeString(prefix2,);
-  recursivelyPrefixId(svg, sanitizedPrefix,);
-}
-function sanitizeString(str,) {
-  return str.replace(/[^\w\-:.]|^[^a-z]+/gi, '',);
-}
-function recursivelyPrefixId(el, prefix2,) {
-  prefixId(el, prefix2,);
-  const childNodes = Array.from(el.children,);
-  childNodes.forEach((node,) => {
-    recursivelyPrefixId(node, prefix2,);
-  },);
-}
-function prefixId(el, prefix2,) {
-  const attributes = el.getAttributeNames();
-  attributes.forEach((attr,) => {
-    const value = el.getAttribute(attr,);
-    if (!value) {
-      return;
-    }
-    if (attr === 'id') {
-      el.setAttribute(attr, `${prefix2}_${value}`,);
-    }
-    if (attr === 'href' || attr === 'xlink:href') {
-      const [base, fragmentIdentifier,] = value.split('#',);
-      if (base) {
-        return;
-      }
-      el.setAttribute(attr, `#${prefix2}_${fragmentIdentifier}`,);
-      return;
-    }
-    const URL_REF = 'url(#';
-    if (value.includes(URL_REF,)) {
-      const prefixedValue = value.replace(URL_REF, `${URL_REF}${prefix2}_`,);
-      el.setAttribute(attr, prefixedValue,);
-    }
-  },);
-}
-var unitsToPixels = {
-  cm: 96 / 2.54,
-  mm: 96 / 2.54 / 10,
-  Q: 96 / 2.54 / 40,
-  in: 96,
-  pc: 96 / 6,
-  pt: 96 / 72,
-  px: 1,
-  // A few assumptions about relative units.
-  em: 16,
-  ex: 8,
-  ch: 8,
-  rem: 16,
-};
-function parseLength(value,) {
-  var _a;
-  if (!value) {
-    return;
-  }
-  const m2 = /(-?[\d.]+)([a-z%]*)/.exec(value,);
-  if ((m2 == null ? void 0 : m2[1]) === void 0 || (m2 == null ? void 0 : m2[2]) === void 0) {
-    return;
-  }
-  if ((_a = m2[2]) == null ? void 0 : _a.startsWith('%',)) {
-    return;
-  }
-  return Math.round(parseFloat(m2[1],) * (unitsToPixels[m2[2]] || 1),);
-}
-function getSVGSize(svg,) {
-  const width = parseLength(svg.getAttribute('width',),);
-  const height = parseLength(svg.getAttribute('height',),);
-  if (typeof width !== 'number' || typeof height !== 'number') {
-    return;
-  }
-  if (width <= 0 || height <= 0) {
-    return;
-  }
-  return { width, height, };
-}
-function SVG(props,) {
-  const parentSize = useParentSize();
-  const layoutId = useLayoutId2(props,);
-  const layoutRef = React822.useRef(null,);
-  const providedWindow = useProvidedWindow();
-  useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ jsx50(
-    SVGComponent,
-    {
-      ...props,
-      innerRef: layoutRef,
-      parentSize,
-      layoutId,
-      providedWindow,
-    },
-  );
-}
-var MAX_BACKGROUND_SVG_TEXT_LENGTH = 5e4;
-function containsImageReference(svg,) {
-  return svg.indexOf('image',) >= 0;
-}
-function containsCustomPropertyReference(svg,) {
-  return svg.indexOf('var(--',) >= 0;
-}
-function hasBorderRadius(style,) {
-  return !!(style.borderRadius || style.borderBottomLeftRadius || style.borderBottomRightRadius || style.borderTopLeftRadius ||
-    style.borderTopRightRadius);
-}
-function sizeSVG(container, props,) {
-  var _a, _b;
-  const div = container.current;
-  if (!div) {
-    return;
-  }
-  const localWindow = props.providedWindow ?? safeWindow;
-  const svg = div.firstElementChild;
-  if (!svg || !(svg instanceof localWindow.SVGSVGElement)) {
-    return;
-  }
-  if (!svg.getAttribute('viewBox',)) {
-    const viewBox = sharedSVGManager.getViewBox(props.svg,);
-    if (viewBox) {
-      svg.setAttribute('viewBox', viewBox,);
-    }
-  }
-  const { withExternalLayout, parentSize, } = props;
-  const canUseCalculatedOnCanvasSize = !withExternalLayout && constraintsEnabled(props,) && parentSize !== 1 && parentSize !== 2;
-  if (canUseCalculatedOnCanvasSize) {
-    return;
-  }
-  const { intrinsicWidth, intrinsicHeight, _constraints, } = props;
-  if (
-    ((_a = svg.viewBox.baseVal) == null ? void 0 : _a.width) === 0 && ((_b = svg.viewBox.baseVal) == null ? void 0 : _b.height) === 0 &&
-    isFiniteNumber(intrinsicWidth,) && isFiniteNumber(intrinsicHeight,)
-  ) {
-    svg.setAttribute('viewBox', `0 0 ${intrinsicWidth} ${intrinsicHeight}`,);
-  }
-  if (_constraints && _constraints.aspectRatio) {
-    svg.setAttribute('preserveAspectRatio', '',);
-  } else {
-    svg.setAttribute('preserveAspectRatio', 'none',);
-  }
-  svg.setAttribute('width', '100%',);
-  svg.setAttribute('height', '100%',);
-}
-function SVGStyleSheet() {
-  React822.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
-  return null;
-}
-var SVGComponent = /* @__PURE__ */ (() => {
-  var _a;
-  return _a = class extends Layer {
-    constructor() {
-      super(...arguments,);
-      __publicField(this, 'container', React822.createRef(),);
-      __publicField(this, 'svgElement', null,);
-      __publicField(this, 'setSVGElement', (element,) => {
-        this.svgElement = element;
-        this.setLayerElement(element,);
-      },);
-      __publicField(this, 'previouslyRenderedSVG', '',);
-      __publicField(this, 'unmountedSVG', '',);
-    }
-    static frame(props,) {
-      return calculateRect(
-        props,
-        props.parentSize || 0,
-        /* Unknown */
-      );
-    }
-    get frame() {
-      return calculateRect(
-        this.props,
-        this.props.parentSize || 0,
-        /* Unknown */
-      );
-    }
-    componentDidMount() {
-      if (this.unmountedSVG) {
-        const { svgContentId, } = this.props;
-        const contentid = svgContentId ? 'svg' + svgContentId : null;
-        sharedSVGManager.subscribe(this.unmountedSVG, !svgContentId, contentid,);
-        this.previouslyRenderedSVG = this.unmountedSVG;
-      }
-      if (this.props.svgContentId) {
-        return;
-      }
-      sizeSVG(this.container, this.props,);
-    }
-    componentWillUnmount() {
-      sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
-      this.unmountedSVG = this.previouslyRenderedSVG;
-      this.previouslyRenderedSVG = '';
-    }
-    componentDidUpdate(prevProps,) {
-      super.componentDidUpdate(prevProps,);
-      if (this.props.svgContentId) {
-        return;
-      }
-      const { fill, } = this.props;
-      if (BackgroundImage.isImageObject(fill,) && BackgroundImage.isImageObject(prevProps.fill,) && fill.src !== prevProps.fill.src) {
-        resetSetStyle(this.svgElement, 'fill', null, false,);
-      }
-      sizeSVG(this.container, this.props,);
-    }
-    collectLayout(style, innerStyle,) {
-      if (this.props.withExternalLayout) {
-        innerStyle.width = '100%';
-        innerStyle.height = '100%';
-        innerStyle.aspectRatio = 'inherit';
-        return;
-      }
-      const frame2 = this.frame;
-      const { rotation, intrinsicWidth, intrinsicHeight, width, height, } = this.props;
-      const rotate = Animatable.getNumber(rotation,);
-      style.opacity = isFiniteNumber(this.props.opacity,) ? this.props.opacity : 1;
-      if (RenderTarget.hasRestrictions() && frame2) {
-        Object.assign(style, {
-          transform: `translate(${frame2.x}px, ${frame2.y}px) rotate(${rotate.toFixed(4,)}deg)`,
-          width: `${frame2.width}px`,
-          height: `${frame2.height}px`,
-        },);
-        if (constraintsEnabled(this.props,)) {
-          style.position = 'absolute';
-        }
-        const xFactor = frame2.width / (intrinsicWidth || 1);
-        const yFactor = frame2.height / (intrinsicHeight || 1);
-        innerStyle.transformOrigin = 'top left';
-        const { zoom, target, } = RenderEnvironment;
-        if (target === 'EXPORT') {
-          const zoomFactor = zoom > 1 ? zoom : 1;
-          innerStyle.transform = `scale(${xFactor * zoomFactor}, ${yFactor * zoomFactor})`;
-          innerStyle.zoom = 1 / zoomFactor;
-        } else {
-          innerStyle.transform = `scale(${xFactor}, ${yFactor})`;
-        }
-        if (intrinsicWidth && intrinsicHeight) {
-          innerStyle.width = intrinsicWidth;
-          innerStyle.height = intrinsicHeight;
-        }
-      } else {
-        const { left, right, top, bottom, } = this.props;
-        Object.assign(style, {
-          left,
-          right,
-          top,
-          bottom,
-          width,
-          height,
-          rotate,
-        },);
-        Object.assign(innerStyle, {
-          left: 0,
-          top: 0,
-          bottom: 0,
-          right: 0,
-          position: 'absolute',
-        },);
-      }
-    }
-    render() {
-      countNodeRender();
-      const {
-        id: id3,
-        visible,
-        style,
-        fill,
-        svg,
-        intrinsicHeight,
-        intrinsicWidth,
-        title,
-        description,
-        layoutId,
-        className,
-        variants,
-        withExternalLayout,
-        innerRef,
-        svgContentId,
-        height,
-        opacity,
-        width,
-        ...rest
-      } = this.props;
-      if (!withExternalLayout && (!visible || !id3)) {
-        return null;
-      }
-      const identifier = id3 ?? layoutId ?? 'svg';
-      const frame2 = this.frame;
-      const size2 = frame2 || { width: intrinsicWidth || 100, height: intrinsicHeight || 100, };
-      const outerStyle = { ...style, imageRendering: 'pixelated', flexShrink: 0, };
-      const innerStyle = {};
-      this.collectLayout(outerStyle, innerStyle,);
-      collectOpacityFromProps(this.props, outerStyle,);
-      collectFiltersFromProps(this.props, outerStyle,);
-      Layer.applyWillChange(this.props, outerStyle, false,);
-      let fillElement = null;
-      if (typeof fill === 'string' || Color.isColorObject(fill,)) {
-        const fillColor = Color.isColorObject(fill,) ? fill.initialValue || Color.toRgbString(fill,) : fill;
-        outerStyle.fill = fillColor;
-        outerStyle.color = fillColor;
-      } else if (LinearGradient.isLinearGradient(fill,)) {
-        const gradient = fill;
-        const gradientId = `${encodeURI(id3 || '',)}g${LinearGradient.hash(gradient,)}`;
-        outerStyle.fill = `url(#${gradientId})`;
-        const { stops, x1, x2, y1, y2, } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx50(
-          'svg',
-          {
-            ref: this.setSVGElement,
-            xmlns: 'http://www.w3.org/2000/svg',
-            width: '100%',
-            height: '100%',
-            style: { position: 'absolute', },
-            children: /* @__PURE__ */ jsx50('linearGradient', {
-              id: gradientId,
-              x1,
-              x2,
-              y1,
-              y2,
-              children: stops.map((stop, idx,) => {
-                return /* @__PURE__ */ jsx50(
-                  'stop',
-                  {
-                    offset: stop.position,
-                    stopColor: stop.color,
-                    stopOpacity: stop.alpha,
-                  },
-                  idx,
-                );
-              },),
-            },),
-          },
-        );
-      } else if (RadialGradient.isRadialGradient(fill,)) {
-        const gradient = fill;
-        const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
-        outerStyle.fill = `url(#${gradientId})`;
-        const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx50(
-          'svg',
-          {
-            ref: this.setSVGElement,
-            xmlns: 'http://www.w3.org/2000/svg',
-            width: '100%',
-            height: '100%',
-            style: { position: 'absolute', },
-            children: /* @__PURE__ */ jsx50(
-              'radialGradient',
-              {
-                id: gradientId,
-                cy: gradient.centerAnchorY,
-                cx: gradient.centerAnchorX,
-                r: gradient.widthFactor,
-                children: elementProperties.stops.map((stop, idx,) => {
-                  return /* @__PURE__ */ jsx50(
-                    'stop',
-                    {
-                      offset: stop.position,
-                      stopColor: stop.color,
-                      stopOpacity: stop.alpha,
-                    },
-                    idx,
-                  );
-                },),
-              },
-            ),
-          },
-        );
-      } else if (BackgroundImage.isImageObject(fill,)) {
-        const imagePattern = imagePatternPropsForFill(fill, size2, identifier,);
-        if (imagePattern) {
-          outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ jsx50(
-            'svg',
-            {
-              ref: this.setSVGElement,
-              xmlns: 'http://www.w3.org/2000/svg',
-              xmlnsXlink: 'http://www.w3.org/1999/xlink',
-              width: '100%',
-              height: '100%',
-              style: { position: 'absolute', },
-              children: /* @__PURE__ */ jsx50('defs', { children: /* @__PURE__ */ jsx50(ImagePatternElement, { ...imagePattern, },), },),
-            },
-          );
-        }
-      }
-      const dataProps = {
-        'data-framer-component-type': 'SVG',
-      };
-      const hasTransformTemplate = !frame2;
-      if (hasTransformTemplate) {
-        Object.assign(dataProps, layoutHintDataPropsForCenter(this.props.center,),);
-      }
-      const svgAsBackgroundImage = !fillElement && !outerStyle.fill && !outerStyle.background && !outerStyle.backgroundImage &&
-        svg.length < MAX_BACKGROUND_SVG_TEXT_LENGTH && !containsImageReference(svg,) && !containsCustomPropertyReference(svg,);
-      let content = null;
-      if (svgAsBackgroundImage) {
-        outerStyle.backgroundSize = '100% 100%';
-        outerStyle.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg,)}')`;
-        sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
-        this.previouslyRenderedSVG = '';
-      } else {
-        const contentid = svgContentId ? 'svg' + svgContentId : null;
-        const __html = sharedSVGManager.subscribe(svg, !svgContentId, contentid,);
-        sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
-        this.previouslyRenderedSVG = svg;
-        if (hasBorderRadius(outerStyle,)) {
-          outerStyle.overflow = 'hidden';
-        }
-        content = /* @__PURE__ */ jsxs16(Fragment10, {
-          children: [
-            fillElement,
-            /* @__PURE__ */ jsx50(
-              'div',
-              {
-                className: 'svgContainer',
-                style: innerStyle,
-                ref: this.container,
-                dangerouslySetInnerHTML: { __html, },
-              },
-              BackgroundImage.isImageObject(fill,) ? fill.src : '',
-            ),
-          ],
-        },);
-      }
-      const MotionComponent = htmlElementAsMotionComponent(this.props.as,);
-      const { href, target, rel, onClick, } = this.props;
-      return /* @__PURE__ */ jsxs16(
-        MotionComponent,
-        {
-          ...dataProps,
-          ...rest,
-          layoutId,
-          transformTemplate: hasTransformTemplate ? transformTemplate(this.props.center,) : void 0,
-          id: id3,
-          ref: innerRef,
-          style: outerStyle,
-          className,
-          variants,
-          tabIndex: this.props.tabIndex,
-          role: title || description ? 'img' : void 0,
-          'aria-label': title,
-          'aria-description': description,
-          ...{ href, target, rel, onClick, },
-          children: [
-            content,
-            /* @__PURE__ */ jsx50(SVGStyleSheet, {},),
-          ],
-        },
-      );
-    }
+  Avenir: {
+    Book: { selector: 'Avenir', weight: void 0, },
+    Light: { selector: 'Avenir-Light', weight: void 0, },
+    Medium: { selector: 'Avenir-Medium', weight: void 0, },
+    Heavy: { selector: 'Avenir-Heavy', weight: void 0, },
+    Black: { selector: 'Avenir-Black', weight: void 0, },
   },
-    __publicField(_a, 'supportsConstraints', true,),
-    __publicField(_a, 'defaultSVGProps', {
-      left: void 0,
-      right: void 0,
-      top: void 0,
-      bottom: void 0,
-      style: void 0,
-      _constraints: {
-        enabled: true,
-        aspectRatio: null,
-      },
-      parentSize: 0,
-      rotation: 0,
-      visible: true,
-      svg: '',
-      shadows: [],
-    },),
-    __publicField(_a, 'defaultProps', {
-      ...Layer.defaultProps,
-      ..._a.defaultSVGProps,
-    },),
-    _a;
-})();
-var htmlRegExp = /[&<>'"]/g;
-var escapeHTML = (str,) =>
-  str.replace(
-    htmlRegExp,
-    (tag,) =>
-      ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '\'': '&#39;',
-        '"': '&quot;',
-      })[tag] || tag,
-  );
-var regex =
-  /(<([a-z]+)(?:\s+(?!href[\s=])[^=\s]+=(?:'[^']*'|"[^"]*"))*)(?:(\s+href\s*=)(?:'([^']*)'|"([^"]*)"))?((?:\s+[^=\s]+=(?:'[^']*'|"[^"]*"))*>)/gi;
-function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVariables,) {
-  return rawHTML.replace(
-    regex,
-    (original, pre1, tag, pre2, value1, value2, post,) => {
-      var _a, _b;
-      if (tag.toLowerCase() !== 'a') {
-        return original;
-      }
-      const href = value1 || value2;
-      const pageLink = parseFramerPageLink(href.replace(/&amp;/g, '&',),);
-      if (!pageLink || !pageLink.target) {
-        return original;
-      }
-      const targetRoute = getRoute(pageLink.target,);
-      if (!isRoute(targetRoute,) || !isRoute(currentRoute,)) {
-        return original;
-      }
-      const targetPath = targetRoute.path;
-      const currentPath = currentRoute.path;
-      if (!targetPath || !currentPath) {
-        return original;
-      }
-      let attributes = ` ${'data-framer-page-link-target'}="${pageLink.target}"`;
-      const elementId = getRouteElementId(targetRoute, pageLink.element ?? void 0,);
-      if (elementId) {
-        attributes += ` ${'data-framer-page-link-element'}="${pageLink.element}"`;
-      }
-      const link = linkFromFramerPageLink(href,);
-      if (!link || isString22(link,)) {
-        return original;
-      }
-      if (linkMatchesRoute(currentRoute, link, implicitPathVariables,)) {
-        attributes += ` ${'data-framer-page-link-current'}`;
-      }
-      let relativePath = targetPath;
-      const pathVariables = Object.assign({}, implicitPathVariables, (_a = pageLink.collectionItem) == null ? void 0 : _a.pathVariables,);
-      if (Object.keys(pathVariables,).length > 0) {
-        relativePath = relativePath.replace(pathVariablesRegExp2, (_, key7,) => '' + pathVariables[key7],);
-      }
-      if ((_b = pageLink.collectionItem) == null ? void 0 : _b.pathVariables) {
-        const params = new URLSearchParams(pageLink.collectionItem.pathVariables,);
-        attributes += ` ${'data-framer-page-link-path-variables'}="${params}"`;
-      }
-      relativePath = computeRelativePath(currentPath, relativePath,);
-      return pre1 + pre2 + `"${escapeHTML(relativePath + (elementId ? `#${elementId}` : ''),)}"` + attributes + post;
-    },
-  );
-}
-var import_process4 = __toESM(require_browser(), 1,);
+  'Avenir Next': {
+    Regular: { selector: 'Avenir Next', weight: void 0, },
+    'Ultra Light': { selector: 'AvenirNext-UltraLight', weight: void 0, },
+    Medium: { selector: 'AvenirNext-Medium', weight: void 0, },
+    'Demi Bold': { selector: 'AvenirNext-DemiBold', weight: void 0, },
+    Heavy: { selector: 'AvenirNext-Heavy', weight: void 0, },
+  },
+  'Avenir Next Condensed': {
+    Regular: { selector: 'Avenir Next Condensed', weight: void 0, },
+    'Ultra Light': { selector: 'AvenirNextCondensed-UltraLight', weight: void 0, },
+    Medium: { selector: 'AvenirNextCondensed-Medium', weight: void 0, },
+    'Demi Bold': { selector: 'AvenirNextCondensed-DemiBold', weight: void 0, },
+    Heavy: { selector: 'AvenirNextCondensed-Heavy', weight: void 0, },
+  },
+  Baskerville: {
+    Regular: { selector: 'Baskerville', weight: void 0, },
+    'Semi Bold': { selector: 'Baskerville-SemiBold', weight: void 0, },
+  },
+  'Bodoni 72': {
+    Book: { selector: 'Bodoni 72', weight: void 0, },
+    Oldstyle: { selector: 'Bodoni 72 Oldstyle', weight: void 0, },
+    Smallcaps: { selector: 'Bodoni 72 Smallcaps', weight: void 0, },
+  },
+  Courier: { Regular: { selector: 'Courier', weight: void 0, }, },
+  'Courier New': { Regular: { selector: 'Courier New', weight: void 0, }, },
+  Futura: {
+    Medium: { selector: 'Futura', weight: void 0, },
+    Condensed: { selector: 'Futura-CondensedMedium', weight: void 0, },
+    'Condensed ExtraBold': { selector: 'Futura-CondensedExtraBold', weight: void 0, },
+  },
+  Georgia: { Regular: { selector: 'Georgia', weight: void 0, }, },
+  'Gill Sans': {
+    Regular: { selector: 'Gill Sans', weight: void 0, },
+    Light: { selector: 'GillSans-Light', weight: void 0, },
+    SemiBold: { selector: 'GillSans-SemiBold', weight: void 0, },
+    UltraBold: { selector: 'GillSans-UltraBold', weight: void 0, },
+  },
+  Helvetica: {
+    Regular: { selector: 'Helvetica', weight: void 0, },
+    Light: { selector: 'Helvetica-Light', weight: void 0, },
+    Bold: { selector: 'Helvetica-Bold', weight: void 0, },
+    Oblique: { selector: 'Helvetica-Oblique', weight: void 0, },
+    'Light Oblique': { selector: 'Helvetica-LightOblique', weight: void 0, },
+    'Bold Oblique': { selector: 'Helvetica-BoldOblique', weight: void 0, },
+  },
+  'Helvetica Neue': {
+    Regular: { selector: 'Helvetica Neue', weight: void 0, },
+    UltraLight: { selector: 'HelveticaNeue-UltraLight', weight: void 0, },
+    Thin: { selector: 'HelveticaNeue-Thin', weight: void 0, },
+    Light: { selector: 'HelveticaNeue-Light', weight: void 0, },
+    Medium: { selector: 'HelveticaNeue-Medium', weight: void 0, },
+    Bold: { selector: 'HelveticaNeue-Bold', weight: void 0, },
+    Italic: { selector: 'HelveticaNeue-Italic', weight: void 0, },
+    'UltraLight Italic': { selector: 'HelveticaNeue-UltraLightItalic', weight: void 0, },
+    'Thin Italic': { selector: 'HelveticaNeue-ThinItalic', weight: void 0, },
+    'Light Italic': { selector: 'HelveticaNeue-LightItalic', weight: void 0, },
+    'Medium Italic': { selector: 'HelveticaNeue-MediumItalic', weight: void 0, },
+    'Bold Italic': { selector: 'HelveticaNeue-BoldItalic', weight: void 0, },
+    'Condensed Bold': { selector: 'HelveticaNeue-CondensedBold', weight: void 0, },
+    'Condensed Black': { selector: 'HelveticaNeue-CondensedBlack', weight: void 0, },
+  },
+  'Hoefler Text': { Regular: { selector: 'Hoefler Text', weight: void 0, }, },
+  Impact: { Regular: { selector: 'Impact', weight: void 0, }, },
+  'Lucida Grande': { Regular: { selector: 'Lucida Grande', weight: void 0, }, },
+  Menlo: { Regular: { selector: 'Menlo', weight: void 0, }, },
+  Monaco: { Regular: { selector: 'Monaco', weight: void 0, }, },
+  Optima: {
+    Regular: { selector: 'Optima', weight: void 0, },
+    ExtraBlack: { selector: 'Optima-ExtraBlack', weight: void 0, },
+  },
+  Palatino: { Regular: { selector: 'Palatino', weight: void 0, }, },
+  'SF Pro Display': {
+    Regular: { selector: '__SF-UI-Display-Regular__', weight: 400, },
+    Ultralight: { selector: '__SF-UI-Display-Ultralight__', weight: 100, },
+    Thin: { selector: '__SF-UI-Display-Thin__', weight: 200, },
+    Light: { selector: '__SF-UI-Display-Light__', weight: 300, },
+    Medium: { selector: '__SF-UI-Display-Medium__', weight: 500, },
+    Semibold: { selector: '__SF-UI-Display-Semibold__', weight: 600, },
+    Bold: { selector: '__SF-UI-Display-Bold__', weight: 700, },
+    Heavy: { selector: '__SF-UI-Display-Heavy__', weight: 800, },
+    Black: { selector: '__SF-UI-Display-Black__', weight: 900, },
+    Italic: { selector: '__SF-UI-Display-Italic__', weight: 400, },
+    'Ultralight Italic': { selector: '__SF-UI-Display-Ultralight-Italic__', weight: 100, },
+    'Thin Italic': { selector: '__SF-UI-Display-Thin-Italic__', weight: 200, },
+    'Light Italic': { selector: '__SF-UI-Display-Light-Italic__', weight: 300, },
+    'Medium Italic': { selector: '__SF-UI-Display-Medium-Italic__', weight: 500, },
+    'Semibold Italic': { selector: '__SF-UI-Display-Semibold-Italic__', weight: 600, },
+    'Bold Italic': { selector: '__SF-UI-Display-Bold-Italic__', weight: 700, },
+    'Heavy Italic': { selector: '__SF-UI-Display-Heavy-Italic__', weight: 800, },
+    'Black Italic': { selector: '__SF-UI-Display-Black-Italic__', weight: 900, },
+  },
+  'SF Pro Display Condensed': {
+    Regular: { selector: '__SF-UI-Display-Condensed-Regular__', weight: 400, },
+    Ultralight: { selector: '__SF-UI-Display-Condensed-Ultralight__', weight: 100, },
+    Thin: { selector: '__SF-UI-Display-Condensed-Thin__', weight: 200, },
+    Light: { selector: '__SF-UI-Display-Condensed-Light__', weight: 300, },
+    Medium: { selector: '__SF-UI-Display-Condensed-Medium__', weight: 500, },
+    Semibold: { selector: '__SF-UI-Display-Condensed-Semibold__', weight: 600, },
+    Bold: { selector: '__SF-UI-Display-Condensed-Bold__', weight: 700, },
+    Heavy: { selector: '__SF-UI-Display-Condensed-Heavy__', weight: 800, },
+    Black: { selector: '__SF-UI-Display-Condensed-Black__', weight: 900, },
+  },
+  'SF Pro Text': {
+    Regular: { selector: '__SF-UI-Text-Regular__', weight: 400, },
+    Light: { selector: '__SF-UI-Text-Light__', weight: 200, },
+    Medium: { selector: '__SF-UI-Text-Medium__', weight: 500, },
+    Semibold: { selector: '__SF-UI-Text-Semibold__', weight: 600, },
+    Bold: { selector: '__SF-UI-Text-Bold__', weight: 700, },
+    Heavy: { selector: '__SF-UI-Text-Heavy__', weight: 800, },
+    Italic: { selector: '__SF-UI-Text-Italic__', weight: 400, },
+    'Light Italic': { selector: '__SF-UI-Text-Light-Italic__', weight: 200, },
+    'Medium Italic': { selector: '__SF-UI-Text-Medium-Italic__', weight: 500, },
+    'Semibold Italic': { selector: '__SF-UI-Text-Semibold-Italic__', weight: 600, },
+    'Bold Italic': { selector: '__SF-UI-Text-Bold-Italic__', weight: 700, },
+    'Heavy Italic': { selector: '__SF-UI-Text-Heavy-Italic__', weight: 800, },
+  },
+  'SF Pro Text Condensed': {
+    Regular: { selector: '__SF-UI-Text-Condensed-Regular__', weight: 400, },
+    Light: { selector: '__SF-UI-Text-Condensed-Light__', weight: 200, },
+    Medium: { selector: '__SF-UI-Text-Condensed-Medium__', weight: 500, },
+    Semibold: { selector: '__SF-UI-Text-Condensed-Semibold__', weight: 600, },
+    Bold: { selector: '__SF-UI-Text-Condensed-Bold__', weight: 700, },
+    Heavy: { selector: '__SF-UI-Text-Condensed-Heavy__', weight: 800, },
+  },
+  Tahoma: { Regular: { selector: 'Tahoma', weight: void 0, }, },
+  Times: { Regular: { selector: 'Times', weight: void 0, }, },
+  'Times New Roman': { Regular: { selector: 'Times New Roman', weight: void 0, }, },
+  Trebuchet: { Regular: { selector: 'Trebuchet MS', weight: void 0, }, },
+  Verdana: { Regular: { selector: 'Verdana', weight: void 0, }, },
+};
+var fontAliases = {
+  '__SF-Compact-Display-Regular__': 'SFCompactDisplay-Regular|.SFCompactDisplay-Regular',
+  '__SF-Compact-Display-Ultralight__': 'SFCompactDisplay-Ultralight|.SFCompactDisplay-Ultralight',
+  '__SF-Compact-Display-Thin__': 'SFCompactDisplay-Thin|.SFCompactDisplay-Thin',
+  '__SF-Compact-Display-Light__': 'SFCompactDisplay-Light|.SFCompactDisplay-Light',
+  '__SF-Compact-Display-Medium__': 'SFCompactDisplay-Medium|.SFCompactDisplay-Medium',
+  '__SF-Compact-Display-Semibold__': 'SFCompactDisplay-Semibold|.SFCompactDisplay-Semibold',
+  '__SF-Compact-Display-Heavy__': 'SFCompactDisplay-Heavy|.SFCompactDisplay-Heavy',
+  '__SF-Compact-Display-Black__': 'SFCompactDisplay-Black|.SFCompactDisplay-Black',
+  '__SF-Compact-Display-Bold__': 'SFCompactDisplay-Bold|.SFCompactDisplay-Bold',
+  '__SF-UI-Text-Regular__': '.SFNSText|SFProText-Regular|SFUIText-Regular|.SFUIText',
+  '__SF-UI-Text-Light__': '.SFNSText-Light|SFProText-Light|SFUIText-Light|.SFUIText-Light',
+  '__SF-UI-Text-Medium__': '.SFNSText-Medium|SFProText-Medium|SFUIText-Medium|.SFUIText-Medium',
+  '__SF-UI-Text-Semibold__': '.SFNSText-Semibold|SFProText-Semibold|SFUIText-Semibold|.SFUIText-Semibold',
+  '__SF-UI-Text-Bold__': '.SFNSText-Bold|SFProText-Bold|SFUIText-Bold|.SFUIText-Bold',
+  '__SF-UI-Text-Heavy__': '.SFNSText-Heavy|SFProText-Heavy|.SFUIText-Heavy',
+  '__SF-UI-Text-Italic__': '.SFNSText-Italic|SFProText-Italic|SFUIText-Italic|.SFUIText-Italic',
+  '__SF-UI-Text-Light-Italic__': '.SFNSText-LightItalic|SFProText-LightItalic|SFUIText-LightItalic|.SFUIText-LightItalic',
+  '__SF-UI-Text-Medium-Italic__': '.SFNSText-MediumItalic|SFProText-MediumItalic|SFUIText-MediumItalic|.SFUIText-MediumItalic',
+  '__SF-UI-Text-Semibold-Italic__': '.SFNSText-SemiboldItalic|SFProText-SemiboldItalic|SFUIText-SemiboldItalic|.SFUIText-SemiboldItalic',
+  '__SF-UI-Text-Bold-Italic__': '.SFNSText-BoldItalic|SFProText-BoldItalic|SFUIText-BoldItalic|.SFUIText-BoldItalic',
+  '__SF-UI-Text-Heavy-Italic__': '.SFNSText-HeavyItalic|SFProText-HeavyItalic|.SFUIText-HeavyItalic',
+  '__SF-Compact-Text-Regular__': 'SFCompactText-Regular|.SFCompactText-Regular',
+  '__SF-Compact-Text-Light__': 'SFCompactText-Light|.SFCompactText-Light',
+  '__SF-Compact-Text-Medium__': 'SFCompactText-Medium|.SFCompactText-Medium',
+  '__SF-Compact-Text-Semibold__': 'SFCompactText-Semibold|.SFCompactText-Semibold',
+  '__SF-Compact-Text-Bold__': 'SFCompactText-Bold|.SFCompactText-Bold',
+  '__SF-Compact-Text-Heavy__': 'SFCompactText-Heavy|.SFCompactText-Heavy',
+  '__SF-Compact-Text-Italic__': 'SFCompactText-Italic|.SFCompactText-Italic',
+  '__SF-Compact-Text-Light-Italic__': 'SFCompactText-LightItalic|.SFCompactText-LightItalic',
+  '__SF-Compact-Text-Medium-Italic__': 'SFCompactText-MediumItalic|.SFCompactText-MediumItalic',
+  '__SF-Compact-Text-Semibold-Italic__': 'SFCompactText-SemiboldItalic|.SFCompactText-SemiboldItalic',
+  '__SF-Compact-Text-Bold-Italic__': 'SFCompactText-BoldItalic|.SFCompactText-BoldItalic',
+  '__SF-Compact-Text-Heavy-Italic__': 'SFCompactText-HeavyItalic|.SFCompactText-HeavyItalic',
+  '__SF-UI-Display-Condensed-Regular__': '.SFNSDisplayCondensed-Regular|SFUIDisplayCondensed-Regular|.SFUIDisplayCondensed-Regular',
+  '__SF-UI-Display-Condensed-Ultralight__':
+    '.SFNSDisplayCondensed-Ultralight|SFUIDisplayCondensed-Ultralight|.SFUIDisplayCondensed-Ultralight',
+  '__SF-UI-Display-Condensed-Thin__': '.SFNSDisplayCondensed-Thin|SFUIDisplayCondensed-Thin|.SFUIDisplayCondensed-Thin',
+  '__SF-UI-Display-Condensed-Light__': '.SFNSDisplayCondensed-Light|SFUIDisplayCondensed-Light|.SFUIDisplayCondensed-Light',
+  '__SF-UI-Display-Condensed-Medium__': '.SFNSDisplayCondensed-Medium|SFUIDisplayCondensed-Medium|.SFUIDisplayCondensed-Medium',
+  '__SF-UI-Display-Condensed-Semibold__': '.SFNSDisplayCondensed-Semibold|SFUIDisplayCondensed-Semibold|.SFUIDisplayCondensed-Semibold',
+  '__SF-UI-Display-Condensed-Bold__': '.SFNSDisplayCondensed-Bold|SFUIDisplayCondensed-Bold|.SFUIDisplayCondensed-Bold',
+  '__SF-UI-Display-Condensed-Heavy__': '.SFNSDisplayCondensed-Heavy|SFUIDisplayCondensed-Heavy|.SFUIDisplayCondensed-Heavy',
+  '__SF-UI-Display-Condensed-Black__': '.SFNSDisplayCondensed-Black|.SFUIDisplayCondensed-Black',
+  '__SF-UI-Display-Regular__': '.SFNSDisplay|SFProDisplay-Regular|SFUIDisplay-Regular|.SFUIDisplay',
+  '__SF-UI-Display-Ultralight__': '.SFNSDisplay-Ultralight|SFProDisplay-Ultralight|SFUIDisplay-Ultralight|.SFUIDisplay-Ultralight',
+  '__SF-UI-Display-Thin__': '.SFNSDisplay-Thin|SFProDisplay-Thin|SFUIDisplay-Thin|.SFUIDisplay-Thin',
+  '__SF-UI-Display-Light__': '.SFNSDisplay-Light|SFProDisplay-Light|SFUIDisplay-Light|.SFUIDisplay-Light',
+  '__SF-UI-Display-Medium__': '.SFNSDisplay-Medium|SFProDisplay-Medium|SFUIDisplay-Medium|.SFUIDisplay-Medium',
+  '__SF-UI-Display-Semibold__': '.SFNSDisplay-Semibold|SFProDisplay-Semibold|SFUIDisplay-Semibold|.SFUIDisplay-Semibold',
+  '__SF-UI-Display-Bold__': '.SFNSDisplay-Bold|SFProDisplay-Bold|SFUIDisplay-Bold|.SFUIDisplay-Bold',
+  '__SF-UI-Display-Heavy__': '.SFNSDisplay-Heavy|SFProDisplay-Heavy|SFUIDisplay-Heavy|.SFUIDisplay-Heavy',
+  '__SF-UI-Display-Black__': '.SFNSDisplay-Black|SFProDisplay-Black|.SFUIDisplay-Black',
+  '__SF-UI-Display-Italic__': '.SFNSDisplay-Italic|SFProDisplay-Italic|SFUIDisplay-Italic',
+  '__SF-UI-Display-Ultralight-Italic__':
+    '.SFNSDisplay-UltralightItalic|SFProDisplay-UltralightItalic|SFUIDisplay-UltralightItalic|.SFUIDisplay-UltralightItalic',
+  '__SF-UI-Display-Thin-Italic__': '.SFNSDisplay-ThinItalic|SFProDisplay-ThinItalic|SFUIDisplay-ThinItalic|.SFUIDisplay-ThinItalic',
+  '__SF-UI-Display-Light-Italic__': '.SFNSDisplay-LightItalic|SFProDisplay-LightItalic|SFUIDisplay-LightItalic|.SFUIDisplay-LightItalic',
+  '__SF-UI-Display-Medium-Italic__':
+    '.SFNSDisplay-MediumItalic|SFProDisplay-MediumItalic|SFUIDisplay-MediumItalic|.SFUIDisplay-MediumItalic',
+  '__SF-UI-Display-Semibold-Italic__':
+    '.SFNSDisplay-SemiboldItalic|SFProDisplay-SemiboldItalic|SFUIDisplay-SemiboldItalic|.SFUIDisplay-SemiboldItalic',
+  '__SF-UI-Display-Bold-Italic__': '.SFNSDisplay-BoldItalic|SFProDisplay-BoldItalic|SFUIDisplay-BoldItalic|.SFUIDisplay-BoldItalic',
+  '__SF-UI-Display-Heavy-Italic__': '.SFNSDisplay-HeavyItalic|SFProDisplay-HeavyItalic|SFUIDisplay-HeavyItalic|.SFUIDisplay-HeavyItalic',
+  '__SF-UI-Display-Black-Italic__': '.SFNSDisplay-BlackItalic|SFProDisplay-BlackItalic|.SFUIDisplay-BlackItalic',
+  '__SF-UI-Text-Condensed-Regular__': '.SFNSTextCondensed-Regular|SFUITextCondensed-Regular|.SFUITextCondensed-Regular',
+  '__SF-UI-Text-Condensed-Light__': '.SFNSTextCondensed-Light|SFUITextCondensed-Light|.SFUITextCondensed-Light',
+  '__SF-UI-Text-Condensed-Medium__': '.SFNSTextCondensed-Medium|SFUITextCondensed-Medium|.SFUITextCondensed-Medium',
+  '__SF-UI-Text-Condensed-Semibold__': '.SFNSTextCondensed-Semibold|SFUITextCondensed-Semibold|.SFUITextCondensed-Semibold',
+  '__SF-UI-Text-Condensed-Bold__': '.SFNSTextCondensed-Bold|SFUITextCondensed-Bold|.SFUITextCondensed-Bold',
+  '__SF-UI-Text-Condensed-Heavy__': '.SFNSTextCondensed-Heavy|.SFUITextCondensed-Heavy',
+  '__SF-Compact-Rounded-Regular__': 'SFCompactRounded-Regular|.SFCompactRounded-Regular',
+  '__SF-Compact-Rounded-Ultralight__': 'SFCompactRounded-Ultralight|.SFCompactRounded-Ultralight',
+  '__SF-Compact-Rounded-Thin__': 'SFCompactRounded-Thin|.SFCompactRounded-Thin',
+  '__SF-Compact-Rounded-Light__': 'SFCompactRounded-Light|.SFCompactRounded-Light',
+  '__SF-Compact-Rounded-Medium__': 'SFCompactRounded-Medium|.SFCompactRounded-Medium',
+  '__SF-Compact-Rounded-Semibold__': 'SFCompactRounded-Semibold|.SFCompactRounded-Semibold',
+  '__SF-Compact-Rounded-Bold__': 'SFCompactRounded-Bold|.SFCompactRounded-Bold',
+  '__SF-Compact-Rounded-Heavy__': 'SFCompactRounded-Heavy|.SFCompactRounded-Heavy',
+  '__SF-Compact-Rounded-Black__': 'SFCompactRounded-Black|.SFCompactRounded-Black',
+};
+var fontFamilies = safeFonts;
 var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2,) => {
   FontSourceNames2['Google'] = 'google';
   FontSourceNames2['Fontshare'] = 'fontshare';
@@ -35034,6 +34151,136 @@ var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2,) => {
   FontSourceNames2['Custom'] = 'custom';
   return FontSourceNames2;
 })(FontSourceNames || {},);
+var systemFontFamilyName = 'System Default';
+var LocalFontSource = class {
+  constructor() {
+    __publicField(
+      this,
+      'name',
+      'local',
+      /* Local */
+    );
+    __publicField(this, 'fontFamilies', [],);
+    __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'fontAliasBySelector', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'fontAliases', /* @__PURE__ */ new Map(),);
+  }
+  getFontFamilyByName(family,) {
+    return this.byFamilyName.get(family,) ?? null;
+  }
+  // TODO: these are duplicated across implementations of FontSource
+  // When adding a third source, we should abstract them
+  createFontFamily(family,) {
+    const fontFamily = { name: family, fonts: [], source: this.name, };
+    this.addFontFamily(fontFamily,);
+    return fontFamily;
+  }
+  addFontFamily(fontFamily,) {
+    this.fontFamilies.push(fontFamily,);
+    this.byFamilyName.set(fontFamily.name, fontFamily,);
+  }
+  // end of duplication
+  importFonts() {
+    const fonts = [];
+    for (const family of Object.keys(fontFamilies,)) {
+      const members = fontFamilies[family];
+      if (!members) {
+        continue;
+      }
+      const fontFamily = this.createFontFamily(family,);
+      for (const variant of Object.keys(members,)) {
+        const member = members[variant];
+        if (!member) {
+          continue;
+        }
+        const { selector, weight, } = member;
+        const font = {
+          variant,
+          selector,
+          weight,
+          family: fontFamily,
+        };
+        fontFamily.fonts.push(font,);
+      }
+      fonts.push(...fontFamily.fonts,);
+    }
+    for (const [key7, value,] of Object.entries(fontAliases,)) {
+      this.addFontAlias(key7, value,);
+    }
+    const { fontFamily: systemFontFamily, aliases, } = this.getSystemFontFamily();
+    this.addFontFamily(systemFontFamily,);
+    for (const [key7, value,] of aliases) {
+      this.addFontAlias(key7, value,);
+    }
+    fonts.push(...systemFontFamily.fonts,);
+    return fonts;
+  }
+  addFontAlias(key7, value,) {
+    this.fontAliases.set(key7, value,);
+    this.fontAliasBySelector.set(value, key7,);
+  }
+  getSystemFontFamily() {
+    const fontFamilies2 = (
+      // System fonts - Taken from https://furbo.org/stuff/systemfonts-new.html - "All Platforms" section
+      'system-ui|-apple-system|BlinkMacSystemFont|Segoe UI|Roboto|Oxygen|Ubuntu|Cantarell|Fira Sans|Droid Sans|Helvetica Neue|sans-serif'
+    );
+    const fontFamily = { name: systemFontFamilyName, fonts: [], source: this.name, };
+    const aliases = /* @__PURE__ */ new Map();
+    const weights = [400, 100, 200, 300, 500, 600, 700, 800, 900,];
+    const styles = ['normal', 'italic',];
+    for (const style of styles) {
+      for (const weight of weights) {
+        const variant = createVariantName(weight, style,);
+        const alias = `__SystemDefault-${weight}-${style}__`;
+        const font = {
+          variant,
+          selector: alias,
+          style,
+          weight,
+          family: fontFamily,
+        };
+        fontFamily.fonts.push(font,);
+        aliases.set(alias, fontFamilies2,);
+      }
+    }
+    return { fontFamily, aliases, };
+  }
+  getFontAliasBySelector(selector,) {
+    return this.fontAliasBySelector.get(selector,) || null;
+  }
+  getFontSelectorByAlias(alias,) {
+    return this.fontAliases.get(alias,) || null;
+  }
+  /** Font family aliases are in the format of `__Alias-Name__` */
+  isFontFamilyAlias(value,) {
+    if (value && /^__.*__$/u.exec(value,)) {
+      return true;
+    }
+    return false;
+  }
+};
+var fontWeightNames = {
+  '100': 'Thin',
+  '200': 'Extra Light',
+  '300': 'Light',
+  '400': 'Normal',
+  '500': 'Medium',
+  '600': 'Semi Bold',
+  '700': 'Bold',
+  '800': 'Extra Bold',
+  '900': 'Black',
+};
+function createVariantName(weight, style,) {
+  const friendlyStyle = style === 'normal' ? 'Regular' : 'Italic';
+  if (weight === 400) {
+    return friendlyStyle;
+  }
+  if (style !== 'normal') {
+    return `${fontWeightNames[weight]} ${friendlyStyle}`;
+  }
+  return `${fontWeightNames[weight]}`;
+}
+var import_process4 = __toESM(require_browser(), 1,);
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
   if (!properties) {
@@ -35619,361 +34866,6 @@ async function isFontReady(family, style, weight,) {
     );
   }
 }
-var safeFonts = {
-  Arial: {
-    Regular: { selector: 'Arial', weight: void 0, },
-    Black: { selector: 'Arial-Black', weight: void 0, },
-    Narrow: { selector: 'Arial Narrow', weight: void 0, },
-    'Rounded Bold': { selector: 'Arial Rounded MT Bold', weight: void 0, },
-  },
-  Avenir: {
-    Book: { selector: 'Avenir', weight: void 0, },
-    Light: { selector: 'Avenir-Light', weight: void 0, },
-    Medium: { selector: 'Avenir-Medium', weight: void 0, },
-    Heavy: { selector: 'Avenir-Heavy', weight: void 0, },
-    Black: { selector: 'Avenir-Black', weight: void 0, },
-  },
-  'Avenir Next': {
-    Regular: { selector: 'Avenir Next', weight: void 0, },
-    'Ultra Light': { selector: 'AvenirNext-UltraLight', weight: void 0, },
-    Medium: { selector: 'AvenirNext-Medium', weight: void 0, },
-    'Demi Bold': { selector: 'AvenirNext-DemiBold', weight: void 0, },
-    Heavy: { selector: 'AvenirNext-Heavy', weight: void 0, },
-  },
-  'Avenir Next Condensed': {
-    Regular: { selector: 'Avenir Next Condensed', weight: void 0, },
-    'Ultra Light': { selector: 'AvenirNextCondensed-UltraLight', weight: void 0, },
-    Medium: { selector: 'AvenirNextCondensed-Medium', weight: void 0, },
-    'Demi Bold': { selector: 'AvenirNextCondensed-DemiBold', weight: void 0, },
-    Heavy: { selector: 'AvenirNextCondensed-Heavy', weight: void 0, },
-  },
-  Baskerville: {
-    Regular: { selector: 'Baskerville', weight: void 0, },
-    'Semi Bold': { selector: 'Baskerville-SemiBold', weight: void 0, },
-  },
-  'Bodoni 72': {
-    Book: { selector: 'Bodoni 72', weight: void 0, },
-    Oldstyle: { selector: 'Bodoni 72 Oldstyle', weight: void 0, },
-    Smallcaps: { selector: 'Bodoni 72 Smallcaps', weight: void 0, },
-  },
-  Courier: { Regular: { selector: 'Courier', weight: void 0, }, },
-  'Courier New': { Regular: { selector: 'Courier New', weight: void 0, }, },
-  Futura: {
-    Medium: { selector: 'Futura', weight: void 0, },
-    Condensed: { selector: 'Futura-CondensedMedium', weight: void 0, },
-    'Condensed ExtraBold': { selector: 'Futura-CondensedExtraBold', weight: void 0, },
-  },
-  Georgia: { Regular: { selector: 'Georgia', weight: void 0, }, },
-  'Gill Sans': {
-    Regular: { selector: 'Gill Sans', weight: void 0, },
-    Light: { selector: 'GillSans-Light', weight: void 0, },
-    SemiBold: { selector: 'GillSans-SemiBold', weight: void 0, },
-    UltraBold: { selector: 'GillSans-UltraBold', weight: void 0, },
-  },
-  Helvetica: {
-    Regular: { selector: 'Helvetica', weight: void 0, },
-    Light: { selector: 'Helvetica-Light', weight: void 0, },
-    Bold: { selector: 'Helvetica-Bold', weight: void 0, },
-    Oblique: { selector: 'Helvetica-Oblique', weight: void 0, },
-    'Light Oblique': { selector: 'Helvetica-LightOblique', weight: void 0, },
-    'Bold Oblique': { selector: 'Helvetica-BoldOblique', weight: void 0, },
-  },
-  'Helvetica Neue': {
-    Regular: { selector: 'Helvetica Neue', weight: void 0, },
-    UltraLight: { selector: 'HelveticaNeue-UltraLight', weight: void 0, },
-    Thin: { selector: 'HelveticaNeue-Thin', weight: void 0, },
-    Light: { selector: 'HelveticaNeue-Light', weight: void 0, },
-    Medium: { selector: 'HelveticaNeue-Medium', weight: void 0, },
-    Bold: { selector: 'HelveticaNeue-Bold', weight: void 0, },
-    Italic: { selector: 'HelveticaNeue-Italic', weight: void 0, },
-    'UltraLight Italic': { selector: 'HelveticaNeue-UltraLightItalic', weight: void 0, },
-    'Thin Italic': { selector: 'HelveticaNeue-ThinItalic', weight: void 0, },
-    'Light Italic': { selector: 'HelveticaNeue-LightItalic', weight: void 0, },
-    'Medium Italic': { selector: 'HelveticaNeue-MediumItalic', weight: void 0, },
-    'Bold Italic': { selector: 'HelveticaNeue-BoldItalic', weight: void 0, },
-    'Condensed Bold': { selector: 'HelveticaNeue-CondensedBold', weight: void 0, },
-    'Condensed Black': { selector: 'HelveticaNeue-CondensedBlack', weight: void 0, },
-  },
-  'Hoefler Text': { Regular: { selector: 'Hoefler Text', weight: void 0, }, },
-  Impact: { Regular: { selector: 'Impact', weight: void 0, }, },
-  'Lucida Grande': { Regular: { selector: 'Lucida Grande', weight: void 0, }, },
-  Menlo: { Regular: { selector: 'Menlo', weight: void 0, }, },
-  Monaco: { Regular: { selector: 'Monaco', weight: void 0, }, },
-  Optima: {
-    Regular: { selector: 'Optima', weight: void 0, },
-    ExtraBlack: { selector: 'Optima-ExtraBlack', weight: void 0, },
-  },
-  Palatino: { Regular: { selector: 'Palatino', weight: void 0, }, },
-  'SF Pro Display': {
-    Regular: { selector: '__SF-UI-Display-Regular__', weight: 400, },
-    Ultralight: { selector: '__SF-UI-Display-Ultralight__', weight: 100, },
-    Thin: { selector: '__SF-UI-Display-Thin__', weight: 200, },
-    Light: { selector: '__SF-UI-Display-Light__', weight: 300, },
-    Medium: { selector: '__SF-UI-Display-Medium__', weight: 500, },
-    Semibold: { selector: '__SF-UI-Display-Semibold__', weight: 600, },
-    Bold: { selector: '__SF-UI-Display-Bold__', weight: 700, },
-    Heavy: { selector: '__SF-UI-Display-Heavy__', weight: 800, },
-    Black: { selector: '__SF-UI-Display-Black__', weight: 900, },
-    Italic: { selector: '__SF-UI-Display-Italic__', weight: 400, },
-    'Ultralight Italic': { selector: '__SF-UI-Display-Ultralight-Italic__', weight: 100, },
-    'Thin Italic': { selector: '__SF-UI-Display-Thin-Italic__', weight: 200, },
-    'Light Italic': { selector: '__SF-UI-Display-Light-Italic__', weight: 300, },
-    'Medium Italic': { selector: '__SF-UI-Display-Medium-Italic__', weight: 500, },
-    'Semibold Italic': { selector: '__SF-UI-Display-Semibold-Italic__', weight: 600, },
-    'Bold Italic': { selector: '__SF-UI-Display-Bold-Italic__', weight: 700, },
-    'Heavy Italic': { selector: '__SF-UI-Display-Heavy-Italic__', weight: 800, },
-    'Black Italic': { selector: '__SF-UI-Display-Black-Italic__', weight: 900, },
-  },
-  'SF Pro Display Condensed': {
-    Regular: { selector: '__SF-UI-Display-Condensed-Regular__', weight: 400, },
-    Ultralight: { selector: '__SF-UI-Display-Condensed-Ultralight__', weight: 100, },
-    Thin: { selector: '__SF-UI-Display-Condensed-Thin__', weight: 200, },
-    Light: { selector: '__SF-UI-Display-Condensed-Light__', weight: 300, },
-    Medium: { selector: '__SF-UI-Display-Condensed-Medium__', weight: 500, },
-    Semibold: { selector: '__SF-UI-Display-Condensed-Semibold__', weight: 600, },
-    Bold: { selector: '__SF-UI-Display-Condensed-Bold__', weight: 700, },
-    Heavy: { selector: '__SF-UI-Display-Condensed-Heavy__', weight: 800, },
-    Black: { selector: '__SF-UI-Display-Condensed-Black__', weight: 900, },
-  },
-  'SF Pro Text': {
-    Regular: { selector: '__SF-UI-Text-Regular__', weight: 400, },
-    Light: { selector: '__SF-UI-Text-Light__', weight: 200, },
-    Medium: { selector: '__SF-UI-Text-Medium__', weight: 500, },
-    Semibold: { selector: '__SF-UI-Text-Semibold__', weight: 600, },
-    Bold: { selector: '__SF-UI-Text-Bold__', weight: 700, },
-    Heavy: { selector: '__SF-UI-Text-Heavy__', weight: 800, },
-    Italic: { selector: '__SF-UI-Text-Italic__', weight: 400, },
-    'Light Italic': { selector: '__SF-UI-Text-Light-Italic__', weight: 200, },
-    'Medium Italic': { selector: '__SF-UI-Text-Medium-Italic__', weight: 500, },
-    'Semibold Italic': { selector: '__SF-UI-Text-Semibold-Italic__', weight: 600, },
-    'Bold Italic': { selector: '__SF-UI-Text-Bold-Italic__', weight: 700, },
-    'Heavy Italic': { selector: '__SF-UI-Text-Heavy-Italic__', weight: 800, },
-  },
-  'SF Pro Text Condensed': {
-    Regular: { selector: '__SF-UI-Text-Condensed-Regular__', weight: 400, },
-    Light: { selector: '__SF-UI-Text-Condensed-Light__', weight: 200, },
-    Medium: { selector: '__SF-UI-Text-Condensed-Medium__', weight: 500, },
-    Semibold: { selector: '__SF-UI-Text-Condensed-Semibold__', weight: 600, },
-    Bold: { selector: '__SF-UI-Text-Condensed-Bold__', weight: 700, },
-    Heavy: { selector: '__SF-UI-Text-Condensed-Heavy__', weight: 800, },
-  },
-  Tahoma: { Regular: { selector: 'Tahoma', weight: void 0, }, },
-  Times: { Regular: { selector: 'Times', weight: void 0, }, },
-  'Times New Roman': { Regular: { selector: 'Times New Roman', weight: void 0, }, },
-  Trebuchet: { Regular: { selector: 'Trebuchet MS', weight: void 0, }, },
-  Verdana: { Regular: { selector: 'Verdana', weight: void 0, }, },
-};
-var fontAliases = {
-  '__SF-Compact-Display-Regular__': 'SFCompactDisplay-Regular|.SFCompactDisplay-Regular',
-  '__SF-Compact-Display-Ultralight__': 'SFCompactDisplay-Ultralight|.SFCompactDisplay-Ultralight',
-  '__SF-Compact-Display-Thin__': 'SFCompactDisplay-Thin|.SFCompactDisplay-Thin',
-  '__SF-Compact-Display-Light__': 'SFCompactDisplay-Light|.SFCompactDisplay-Light',
-  '__SF-Compact-Display-Medium__': 'SFCompactDisplay-Medium|.SFCompactDisplay-Medium',
-  '__SF-Compact-Display-Semibold__': 'SFCompactDisplay-Semibold|.SFCompactDisplay-Semibold',
-  '__SF-Compact-Display-Heavy__': 'SFCompactDisplay-Heavy|.SFCompactDisplay-Heavy',
-  '__SF-Compact-Display-Black__': 'SFCompactDisplay-Black|.SFCompactDisplay-Black',
-  '__SF-Compact-Display-Bold__': 'SFCompactDisplay-Bold|.SFCompactDisplay-Bold',
-  '__SF-UI-Text-Regular__': '.SFNSText|SFProText-Regular|SFUIText-Regular|.SFUIText',
-  '__SF-UI-Text-Light__': '.SFNSText-Light|SFProText-Light|SFUIText-Light|.SFUIText-Light',
-  '__SF-UI-Text-Medium__': '.SFNSText-Medium|SFProText-Medium|SFUIText-Medium|.SFUIText-Medium',
-  '__SF-UI-Text-Semibold__': '.SFNSText-Semibold|SFProText-Semibold|SFUIText-Semibold|.SFUIText-Semibold',
-  '__SF-UI-Text-Bold__': '.SFNSText-Bold|SFProText-Bold|SFUIText-Bold|.SFUIText-Bold',
-  '__SF-UI-Text-Heavy__': '.SFNSText-Heavy|SFProText-Heavy|.SFUIText-Heavy',
-  '__SF-UI-Text-Italic__': '.SFNSText-Italic|SFProText-Italic|SFUIText-Italic|.SFUIText-Italic',
-  '__SF-UI-Text-Light-Italic__': '.SFNSText-LightItalic|SFProText-LightItalic|SFUIText-LightItalic|.SFUIText-LightItalic',
-  '__SF-UI-Text-Medium-Italic__': '.SFNSText-MediumItalic|SFProText-MediumItalic|SFUIText-MediumItalic|.SFUIText-MediumItalic',
-  '__SF-UI-Text-Semibold-Italic__': '.SFNSText-SemiboldItalic|SFProText-SemiboldItalic|SFUIText-SemiboldItalic|.SFUIText-SemiboldItalic',
-  '__SF-UI-Text-Bold-Italic__': '.SFNSText-BoldItalic|SFProText-BoldItalic|SFUIText-BoldItalic|.SFUIText-BoldItalic',
-  '__SF-UI-Text-Heavy-Italic__': '.SFNSText-HeavyItalic|SFProText-HeavyItalic|.SFUIText-HeavyItalic',
-  '__SF-Compact-Text-Regular__': 'SFCompactText-Regular|.SFCompactText-Regular',
-  '__SF-Compact-Text-Light__': 'SFCompactText-Light|.SFCompactText-Light',
-  '__SF-Compact-Text-Medium__': 'SFCompactText-Medium|.SFCompactText-Medium',
-  '__SF-Compact-Text-Semibold__': 'SFCompactText-Semibold|.SFCompactText-Semibold',
-  '__SF-Compact-Text-Bold__': 'SFCompactText-Bold|.SFCompactText-Bold',
-  '__SF-Compact-Text-Heavy__': 'SFCompactText-Heavy|.SFCompactText-Heavy',
-  '__SF-Compact-Text-Italic__': 'SFCompactText-Italic|.SFCompactText-Italic',
-  '__SF-Compact-Text-Light-Italic__': 'SFCompactText-LightItalic|.SFCompactText-LightItalic',
-  '__SF-Compact-Text-Medium-Italic__': 'SFCompactText-MediumItalic|.SFCompactText-MediumItalic',
-  '__SF-Compact-Text-Semibold-Italic__': 'SFCompactText-SemiboldItalic|.SFCompactText-SemiboldItalic',
-  '__SF-Compact-Text-Bold-Italic__': 'SFCompactText-BoldItalic|.SFCompactText-BoldItalic',
-  '__SF-Compact-Text-Heavy-Italic__': 'SFCompactText-HeavyItalic|.SFCompactText-HeavyItalic',
-  '__SF-UI-Display-Condensed-Regular__': '.SFNSDisplayCondensed-Regular|SFUIDisplayCondensed-Regular|.SFUIDisplayCondensed-Regular',
-  '__SF-UI-Display-Condensed-Ultralight__':
-    '.SFNSDisplayCondensed-Ultralight|SFUIDisplayCondensed-Ultralight|.SFUIDisplayCondensed-Ultralight',
-  '__SF-UI-Display-Condensed-Thin__': '.SFNSDisplayCondensed-Thin|SFUIDisplayCondensed-Thin|.SFUIDisplayCondensed-Thin',
-  '__SF-UI-Display-Condensed-Light__': '.SFNSDisplayCondensed-Light|SFUIDisplayCondensed-Light|.SFUIDisplayCondensed-Light',
-  '__SF-UI-Display-Condensed-Medium__': '.SFNSDisplayCondensed-Medium|SFUIDisplayCondensed-Medium|.SFUIDisplayCondensed-Medium',
-  '__SF-UI-Display-Condensed-Semibold__': '.SFNSDisplayCondensed-Semibold|SFUIDisplayCondensed-Semibold|.SFUIDisplayCondensed-Semibold',
-  '__SF-UI-Display-Condensed-Bold__': '.SFNSDisplayCondensed-Bold|SFUIDisplayCondensed-Bold|.SFUIDisplayCondensed-Bold',
-  '__SF-UI-Display-Condensed-Heavy__': '.SFNSDisplayCondensed-Heavy|SFUIDisplayCondensed-Heavy|.SFUIDisplayCondensed-Heavy',
-  '__SF-UI-Display-Condensed-Black__': '.SFNSDisplayCondensed-Black|.SFUIDisplayCondensed-Black',
-  '__SF-UI-Display-Regular__': '.SFNSDisplay|SFProDisplay-Regular|SFUIDisplay-Regular|.SFUIDisplay',
-  '__SF-UI-Display-Ultralight__': '.SFNSDisplay-Ultralight|SFProDisplay-Ultralight|SFUIDisplay-Ultralight|.SFUIDisplay-Ultralight',
-  '__SF-UI-Display-Thin__': '.SFNSDisplay-Thin|SFProDisplay-Thin|SFUIDisplay-Thin|.SFUIDisplay-Thin',
-  '__SF-UI-Display-Light__': '.SFNSDisplay-Light|SFProDisplay-Light|SFUIDisplay-Light|.SFUIDisplay-Light',
-  '__SF-UI-Display-Medium__': '.SFNSDisplay-Medium|SFProDisplay-Medium|SFUIDisplay-Medium|.SFUIDisplay-Medium',
-  '__SF-UI-Display-Semibold__': '.SFNSDisplay-Semibold|SFProDisplay-Semibold|SFUIDisplay-Semibold|.SFUIDisplay-Semibold',
-  '__SF-UI-Display-Bold__': '.SFNSDisplay-Bold|SFProDisplay-Bold|SFUIDisplay-Bold|.SFUIDisplay-Bold',
-  '__SF-UI-Display-Heavy__': '.SFNSDisplay-Heavy|SFProDisplay-Heavy|SFUIDisplay-Heavy|.SFUIDisplay-Heavy',
-  '__SF-UI-Display-Black__': '.SFNSDisplay-Black|SFProDisplay-Black|.SFUIDisplay-Black',
-  '__SF-UI-Display-Italic__': '.SFNSDisplay-Italic|SFProDisplay-Italic|SFUIDisplay-Italic',
-  '__SF-UI-Display-Ultralight-Italic__':
-    '.SFNSDisplay-UltralightItalic|SFProDisplay-UltralightItalic|SFUIDisplay-UltralightItalic|.SFUIDisplay-UltralightItalic',
-  '__SF-UI-Display-Thin-Italic__': '.SFNSDisplay-ThinItalic|SFProDisplay-ThinItalic|SFUIDisplay-ThinItalic|.SFUIDisplay-ThinItalic',
-  '__SF-UI-Display-Light-Italic__': '.SFNSDisplay-LightItalic|SFProDisplay-LightItalic|SFUIDisplay-LightItalic|.SFUIDisplay-LightItalic',
-  '__SF-UI-Display-Medium-Italic__':
-    '.SFNSDisplay-MediumItalic|SFProDisplay-MediumItalic|SFUIDisplay-MediumItalic|.SFUIDisplay-MediumItalic',
-  '__SF-UI-Display-Semibold-Italic__':
-    '.SFNSDisplay-SemiboldItalic|SFProDisplay-SemiboldItalic|SFUIDisplay-SemiboldItalic|.SFUIDisplay-SemiboldItalic',
-  '__SF-UI-Display-Bold-Italic__': '.SFNSDisplay-BoldItalic|SFProDisplay-BoldItalic|SFUIDisplay-BoldItalic|.SFUIDisplay-BoldItalic',
-  '__SF-UI-Display-Heavy-Italic__': '.SFNSDisplay-HeavyItalic|SFProDisplay-HeavyItalic|SFUIDisplay-HeavyItalic|.SFUIDisplay-HeavyItalic',
-  '__SF-UI-Display-Black-Italic__': '.SFNSDisplay-BlackItalic|SFProDisplay-BlackItalic|.SFUIDisplay-BlackItalic',
-  '__SF-UI-Text-Condensed-Regular__': '.SFNSTextCondensed-Regular|SFUITextCondensed-Regular|.SFUITextCondensed-Regular',
-  '__SF-UI-Text-Condensed-Light__': '.SFNSTextCondensed-Light|SFUITextCondensed-Light|.SFUITextCondensed-Light',
-  '__SF-UI-Text-Condensed-Medium__': '.SFNSTextCondensed-Medium|SFUITextCondensed-Medium|.SFUITextCondensed-Medium',
-  '__SF-UI-Text-Condensed-Semibold__': '.SFNSTextCondensed-Semibold|SFUITextCondensed-Semibold|.SFUITextCondensed-Semibold',
-  '__SF-UI-Text-Condensed-Bold__': '.SFNSTextCondensed-Bold|SFUITextCondensed-Bold|.SFUITextCondensed-Bold',
-  '__SF-UI-Text-Condensed-Heavy__': '.SFNSTextCondensed-Heavy|.SFUITextCondensed-Heavy',
-  '__SF-Compact-Rounded-Regular__': 'SFCompactRounded-Regular|.SFCompactRounded-Regular',
-  '__SF-Compact-Rounded-Ultralight__': 'SFCompactRounded-Ultralight|.SFCompactRounded-Ultralight',
-  '__SF-Compact-Rounded-Thin__': 'SFCompactRounded-Thin|.SFCompactRounded-Thin',
-  '__SF-Compact-Rounded-Light__': 'SFCompactRounded-Light|.SFCompactRounded-Light',
-  '__SF-Compact-Rounded-Medium__': 'SFCompactRounded-Medium|.SFCompactRounded-Medium',
-  '__SF-Compact-Rounded-Semibold__': 'SFCompactRounded-Semibold|.SFCompactRounded-Semibold',
-  '__SF-Compact-Rounded-Bold__': 'SFCompactRounded-Bold|.SFCompactRounded-Bold',
-  '__SF-Compact-Rounded-Heavy__': 'SFCompactRounded-Heavy|.SFCompactRounded-Heavy',
-  '__SF-Compact-Rounded-Black__': 'SFCompactRounded-Black|.SFCompactRounded-Black',
-};
-var fontFamilies = safeFonts;
-var systemFontFamilyName = 'System Default';
-var LocalFontSource = class {
-  constructor() {
-    __publicField(
-      this,
-      'name',
-      'local',
-      /* Local */
-    );
-    __publicField(this, 'fontFamilies', [],);
-    __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'fontAliasBySelector', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'fontAliases', /* @__PURE__ */ new Map(),);
-  }
-  getFontFamilyByName(family,) {
-    return this.byFamilyName.get(family,) ?? null;
-  }
-  // TODO: these are duplicated across implementations of FontSource
-  // When adding a third source, we should abstract them
-  createFontFamily(family,) {
-    const fontFamily = { name: family, fonts: [], source: this.name, };
-    this.addFontFamily(fontFamily,);
-    return fontFamily;
-  }
-  addFontFamily(fontFamily,) {
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-  }
-  // end of duplication
-  importFonts() {
-    const fonts = [];
-    for (const family of Object.keys(fontFamilies,)) {
-      const members = fontFamilies[family];
-      if (!members) {
-        continue;
-      }
-      const fontFamily = this.createFontFamily(family,);
-      for (const variant of Object.keys(members,)) {
-        const member = members[variant];
-        if (!member) {
-          continue;
-        }
-        const { selector, weight, } = member;
-        const font = {
-          variant,
-          selector,
-          weight,
-          family: fontFamily,
-        };
-        fontFamily.fonts.push(font,);
-      }
-      fonts.push(...fontFamily.fonts,);
-    }
-    for (const [key7, value,] of Object.entries(fontAliases,)) {
-      this.addFontAlias(key7, value,);
-    }
-    const { fontFamily: systemFontFamily, aliases, } = this.getSystemFontFamily();
-    this.addFontFamily(systemFontFamily,);
-    for (const [key7, value,] of aliases) {
-      this.addFontAlias(key7, value,);
-    }
-    fonts.push(...systemFontFamily.fonts,);
-    return fonts;
-  }
-  addFontAlias(key7, value,) {
-    this.fontAliases.set(key7, value,);
-    this.fontAliasBySelector.set(value, key7,);
-  }
-  getSystemFontFamily() {
-    const fontFamilies2 = (
-      // System fonts - Taken from https://furbo.org/stuff/systemfonts-new.html - "All Platforms" section
-      'system-ui|-apple-system|BlinkMacSystemFont|Segoe UI|Roboto|Oxygen|Ubuntu|Cantarell|Fira Sans|Droid Sans|Helvetica Neue|sans-serif'
-    );
-    const fontFamily = { name: systemFontFamilyName, fonts: [], source: this.name, };
-    const aliases = /* @__PURE__ */ new Map();
-    const weights = [400, 100, 200, 300, 500, 600, 700, 800, 900,];
-    const styles = ['normal', 'italic',];
-    for (const style of styles) {
-      for (const weight of weights) {
-        const variant = createVariantName(weight, style,);
-        const alias = `__SystemDefault-${weight}-${style}__`;
-        const font = {
-          variant,
-          selector: alias,
-          style,
-          weight,
-          family: fontFamily,
-        };
-        fontFamily.fonts.push(font,);
-        aliases.set(alias, fontFamilies2,);
-      }
-    }
-    return { fontFamily, aliases, };
-  }
-  getFontAliasBySelector(selector,) {
-    return this.fontAliasBySelector.get(selector,) || null;
-  }
-  getFontSelectorByAlias(alias,) {
-    return this.fontAliases.get(alias,) || null;
-  }
-  /** Font family aliases are in the format of `__Alias-Name__` */
-  isFontFamilyAlias(value,) {
-    if (value && /^__.*__$/u.exec(value,)) {
-      return true;
-    }
-    return false;
-  }
-};
-var fontWeightNames = {
-  '100': 'Thin',
-  '200': 'Extra Light',
-  '300': 'Light',
-  '400': 'Normal',
-  '500': 'Medium',
-  '600': 'Semi Bold',
-  '700': 'Bold',
-  '800': 'Extra Bold',
-  '900': 'Black',
-};
-function createVariantName(weight, style,) {
-  const friendlyStyle = style === 'normal' ? 'Regular' : 'Italic';
-  if (weight === 400) {
-    return friendlyStyle;
-  }
-  if (style !== 'normal') {
-    return `${fontWeightNames[weight]} ${friendlyStyle}`;
-  }
-  return `${fontWeightNames[weight]}`;
-}
 var FontStore = class {
   constructor() {
     __publicField(this, 'enabled', false,);
@@ -36224,12 +35116,1811 @@ Promise.allSettled = Promise.allSettled || ((promises,) =>
       (p,) => p.then((v,) => ({ status: 'fulfilled', value: v, })).catch((e,) => ({ status: 'rejected', reason: e, })),
     ),
   ));
+function CustomProperties({
+  children,
+  customProperties,
+},) {
+  return /* @__PURE__ */ jsx48('div', { style: customProperties, children, },);
+}
+var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
+  var _a;
+  return _a = class extends Layer {
+    constructor() {
+      super(...arguments,);
+      __publicField(this, 'state', {},);
+      __publicField(this, 'setElement', (element,) => {
+        if (this.props.innerRef) {
+          this.props.innerRef.current = element;
+        }
+        this.setLayerElement(element,);
+      },);
+    }
+    componentDidCatch(error, info,) {
+      var _a2;
+      let stack = (_a2 = info.componentStack) == null ? void 0 : _a2.split('\n',).filter((line,) => line.length !== 0);
+      let currentIndex = 0;
+      if (stack) {
+        for (const line of stack) {
+          if (line.startsWith(`    in ${this.constructor.name}`,)) {
+            break;
+          }
+          currentIndex++;
+        }
+        stack = stack.slice(0, currentIndex,);
+      }
+      this.setState({
+        lastError: {
+          children: this.props.children,
+          name: error.name,
+          message: error.message,
+          componentStack: stack,
+        },
+      },);
+    }
+    renderErrorPlaceholder(file, error,) {
+      const { RenderPlaceholder, } = runtime;
+      return /* @__PURE__ */ jsx49(FrameWithMotion, {
+        ...this.props,
+        background: null,
+        children: /* @__PURE__ */ jsx49(RenderPlaceholder, { error: { error, file, }, },),
+      },);
+    }
+    render() {
+      var _a2, _b;
+      countNodeRender();
+      let { children, } = this.props;
+      const { componentIdentifier, } = this.props;
+      const { lastError: error, } = this.state;
+      const noChildren = !children || Array.isArray(children,) && children.filter((c,) => c).length === 0;
+      if (noChildren) {
+        const errorComponent = runtime.componentLoader.errorForIdentifier(componentIdentifier,);
+        if (errorComponent) {
+          return this.renderErrorPlaceholder(errorComponent.file, errorComponent.error,);
+        }
+      }
+      if (error && error.children === children) {
+        const component = runtime.componentLoader.componentForIdentifier(componentIdentifier,);
+        const file = component ? component.file : '???';
+        return this.renderErrorPlaceholder(file, error.message,);
+      }
+
+      (_b = (_a2 = asRecord(safeWindow,))['__checkComponentBudget__']) == null ? void 0 : _b.call(_a2,);
+      let frameProps = this.props;
+      if (RenderTarget.current() !== 'CANVAS') {
+        const {
+          left,
+          right,
+          top,
+          bottom,
+          center,
+          centerX,
+          centerY,
+          aspectRatio: aspectRatio2,
+          parentSize,
+          width,
+          height,
+          rotation,
+          opacity,
+          visible,
+          _constraints,
+          _initialStyle,
+          name,
+          positionSticky,
+          positionStickyTop,
+          positionStickyRight,
+          positionStickyBottom,
+          positionStickyLeft,
+          // Remove the children and the componentIdentifier from the props passed into the component
+          componentIdentifier: originalComponentIdentifier,
+          children: originalChildren,
+          style,
+          duplicatedFrom,
+          widthType,
+          heightType,
+          ...childProps
+        } = frameProps;
+        children = React81.Children.map(originalChildren, (child,) => {
+          if (!isReactChild(child,) || !isReactElement(child,)) {
+            return child;
+          }
+          if (!isPageOrScroll(originalComponentIdentifier,)) {
+            return /* @__PURE__ */ jsx49(LayoutGroup, {
+              inherit: false,
+              id: this.props.__layoutId,
+              children: /* @__PURE__ */ jsx49(AutomaticLayoutIds, { enabled: false, children: React81.cloneElement(child, childProps,), },),
+            },);
+          }
+          return React81.cloneElement(child, childProps,);
+        },);
+        frameProps = {
+          style,
+          _constraints,
+          _initialStyle,
+          left,
+          right,
+          top,
+          bottom,
+          center,
+          centerX,
+          centerY,
+          aspectRatio: aspectRatio2,
+          parentSize,
+          width,
+          height,
+          rotation,
+          visible,
+          name,
+          duplicatedFrom,
+          id: frameProps.id,
+          layoutId: this.props.__layoutId,
+          widthType,
+          heightType,
+          positionSticky,
+          positionStickyTop,
+          positionStickyRight,
+          positionStickyBottom,
+          positionStickyLeft,
+        };
+      }
+      return (
+        /* The background should come before the frameProps. It looks like there never should be a background in frameProps,
+         * but published design components can contain an old version of the presentation tree that expects the background
+         * that is passed to be rendered here
+         * See the stackBackgroundTest.tsx integration test for an example of such a case
+         */
+        /* @__PURE__ */ jsx49(ComponentContainerContext.Provider, {
+          value: true,
+          children: /* @__PURE__ */ jsx49(
+            FrameWithMotion,
+            {
+              'data-framer-component-container': true,
+              background: null,
+              overflow: 'visible',
+              ref: this.setElement,
+              ...frameProps,
+              children,
+            },
+          ),
+        },)
+      );
+    }
+  },
+    __publicField(_a, 'supportsConstraints', true,),
+    __publicField(_a, 'defaultComponentContainerProps', {
+      style: {},
+      visible: true,
+      componentIdentifier: '',
+    },),
+    __publicField(_a, 'defaultProps', {
+      ...Layer.defaultProps,
+      ..._a.defaultComponentContainerProps,
+    },),
+    __publicField(_a, 'contextType', ComponentContainerContext,),
+    _a;
+})();
+function isPageOrScroll(identifier,) {
+  if (!identifier) {
+    return false;
+  }
+  if (identifier === 'framer/Page') {
+    return true;
+  }
+  if (identifier === 'framer/Scroll') {
+    return true;
+  }
+  return false;
+}
+var FormButton = /* @__PURE__ */ React822.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
+  const { style: baseStyle2, } = props;
+  const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
+  return /* @__PURE__ */ jsx50(motion.input, { type, ref, style, value, },);
+},);
+function mergeWithDefaultStyle(style,) {
+  return {
+    display: 'block',
+    padding: '12px',
+    fontSize: '14px',
+    width: '100%',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    background: '#222',
+    color: '#fff',
+    borderRadius: '10px',
+    border: '1px solid rgba(0,0,0,0.05)',
+    ...style,
+  };
+}
+var FormContainer = ({ action, formId, ...props },) => {
+  const handleSubmit = async (event,) => {
+    event.preventDefault();
+    const data2 = new FormData(event.currentTarget,);
+    for (const [key7, value,] of data2) {
+      if (value instanceof File) {
+        data2.delete(key7,);
+      }
+    }
+    try {
+      await fetch(action, { body: data2, method: 'POST', },);
+    } catch (error) {
+    }
+  };
+  return /* @__PURE__ */ jsx51(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: props.children, },);
+};
+var passwordManagerIgnoreDataProps = {
+  // 1Password
+  'data-1p-ignore': true,
+  // LastPass
+  'data-lpignore': true,
+};
+var sensibleInputDefaults = {
+  autocomplete: 'off',
+};
+var labelStyles = {
+  display: 'block',
+  marginBottom: 8,
+  width: '100%',
+  textTransform: 'capitalize',
+};
+var inputClassName = 'framer-form-input';
+var labelClassName = 'framer-form-label';
+var PlainTextInput = /* @__PURE__ */ React83.forwardRef(function FormPlainTextInput(props, ref,) {
+  const dataProps = {
+    ...sensibleInputDefaults,
+    ...passwordManagerIgnoreDataProps,
+  };
+  const baseWrapperStyle = {
+    width: '100%',
+  };
+  const isHiddenInput = props.type === 'hidden';
+  const baseStyle2 = {
+    height: props.height,
+    width: props.width,
+    ...props.style,
+  };
+  const input = /* @__PURE__ */ jsx52(
+    motion.input,
+    {
+      id: props.inputName,
+      ...dataProps,
+      type: props.type,
+      ref,
+      required: props.required,
+      autoFocus: props.autoFocus,
+      name: props.inputName,
+      style: baseStyle2,
+      placeholder: props.placeholder,
+      className: cx(props.className, inputClassName,),
+    },
+  );
+  if (isHiddenInput) {
+    return input;
+  }
+  if (props.label) {
+    return /* @__PURE__ */ jsx52(motion.div, {
+      style: { ...baseWrapperStyle, ...props.style, },
+      children: /* @__PURE__ */ jsxs16('label', {
+        htmlFor: props.inputName,
+        style: baseWrapperStyle,
+        children: [
+          /* @__PURE__ */ jsx52('span', { style: labelStyles, className: labelClassName, children: props.label, },),
+          input,
+        ],
+      },),
+    },);
+  }
+  return /* @__PURE__ */ jsx52(motion.div, { style: { ...baseWrapperStyle, ...props.style, }, children: input, },);
+},);
+var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
+  `.${inputClassName} {
+        padding: var(${'--framer-input-padding'});
+        border-radius: var(${'--framer-input-border-radius'});
+        border-color: var(${'--framer-input-border-color'});
+        border-width: var(${'--framer-input-border-width'});
+        border-style: var(${'--framer-input-border-style'});
+        background: var(${'--framer-input-background'});
+        font-family: var(${'--framer-input-font-family'});
+        font-weight: var(${'--framer-input-font-weight'});
+        font-size: var(${'--framer-input-font-size'});
+        color: var(${'--framer-input-font-color'});
+    }`,
+  `.${inputClassName}::placeholder {
+        color: var(${'--framer-input-placeholder-color'});
+    }`,
+  `.${labelClassName} {
+        font-family: var(${'--framer-input-label-font-family'});
+        font-weight: var(${'--framer-input-label-font-weight'});
+        font-size: var(${'--framer-input-label-font-size'});
+        color: var(${'--framer-input-label-font-color'});
+    }`,
+],);
+var Image2 = /* @__PURE__ */ React84.forwardRef(function Image3(props, ref,) {
+  const { background, children, alt, ...rest } = props;
+  const style = { ...rest.style, };
+  if (background) {
+    delete style.background;
+  }
+  const MotionComponent = htmlElementAsMotionComponent(props.as,);
+  return /* @__PURE__ */ jsxs17(MotionComponent, {
+    ...rest,
+    style,
+    ref,
+    children: [
+      background && /* @__PURE__ */ jsx53(BackgroundImageComponent, { image: background, alt, },),
+      children,
+    ],
+  },);
+},);
+function isShallowEqualArray(a, b,) {
+  return a.length === b.length && a.every((v, i,) => v === b[i]);
+}
+function convertPresentationTree(node, converter, componentDefinitionProvider, getCachedNode, skipCodeComponentPropsCache = false,) {
+  const cachedNode = getCachedNode && getCachedNode(node,);
+  if (cachedNode) {
+    return cachedNode;
+  }
+  let children;
+  if (isCodeComponentContainerPresentation(node,)) {
+    children = convertCodeComponentContainer(
+      componentDefinitionProvider,
+      node,
+      converter,
+      getCachedNode,
+      skipCodeComponentPropsCache,
+    );
+  } else if (node.children) {
+    children = node.children.map(
+      (n,) =>
+        convertPresentationTree(
+          n,
+          converter,
+          componentDefinitionProvider,
+          getCachedNode,
+          skipCodeComponentPropsCache,
+        ),
+    );
+  }
+  return converter(node, children,);
+}
+function isCodeComponentContainerPresentation(value,) {
+  return !!value.codeComponentIdentifier;
+}
+function convertCodeComponentContainer(componentDefinitionProvider, node, converter, getCachedNode, skipCodeComponentPropsCache = false,) {
+  var _a;
+  const codeComponentChildren = node.getComponentChildren ? node.getComponentChildren(componentDefinitionProvider,) : [];
+  const codeComponentSlots = node.getComponentSlotChildren ? node.getComponentSlotChildren(componentDefinitionProvider,) : {};
+  let codeComponentPresentation;
+  const props = node.getCodeComponentProps
+    ? node.getCodeComponentProps(componentDefinitionProvider, { skipCache: skipCodeComponentPropsCache, },)
+    : void 0;
+  if (node.cache.codeComponentPresentation) {
+    codeComponentPresentation = node.cache.codeComponentPresentation;
+    if (!isShallowEqualArray(codeComponentPresentation.children, codeComponentChildren,)) {
+      codeComponentPresentation.cache.reactElement = null;
+      codeComponentPresentation.children = codeComponentChildren;
+    }
+    if (!isEqual(codeComponentPresentation.props, props,)) {
+      codeComponentPresentation.cache.reactElement = null;
+      codeComponentPresentation.cache.props = null;
+      codeComponentPresentation.props = props;
+    }
+  } else {
+    const { id: containerId, codeComponentIdentifier: identifier, codeComponentPackageVersion, } = node;
+    node.cache.codeComponentPresentation = codeComponentPresentation = new CodeComponentPresentation(
+      containerId + identifier,
+      identifier,
+      codeComponentPackageVersion,
+      props,
+      codeComponentChildren,
+    );
+  }
+  codeComponentPresentation.props.placeholders = node.cache.placeholders;
+  const slotKeys = Object.keys(codeComponentSlots,);
+  if (slotKeys.length) {
+    codeComponentPresentation.props = { ...codeComponentPresentation.props, };
+    codeComponentPresentation.props.__slotKeys = slotKeys;
+    for (const slotKey of slotKeys) {
+      const slotChildren = (_a = codeComponentSlots[slotKey]) == null ? void 0 : _a.map(
+        (child,) =>
+          convertPresentationTree(
+            child,
+            converter,
+            componentDefinitionProvider,
+            getCachedNode,
+            skipCodeComponentPropsCache,
+          ),
+      );
+      codeComponentPresentation.props[slotKey] = slotChildren;
+    }
+  }
+  return [
+    converter(
+      codeComponentPresentation,
+      codeComponentPresentation.children.map(
+        (child,) =>
+          convertPresentationTree(
+            child,
+            converter,
+            componentDefinitionProvider,
+            getCachedNode,
+            skipCodeComponentPropsCache,
+          ),
+      ),
+    ),
+  ];
+}
+var CodeComponentPresentation = class {
+  constructor(id3, componentIdentifier, packageVersion, props, children, codeOverrideIdentifier,) {
+    this.id = id3;
+    this.componentIdentifier = componentIdentifier;
+    this.packageVersion = packageVersion;
+    this.props = props;
+    this.children = children;
+    this.codeOverrideIdentifier = codeOverrideIdentifier;
+    __publicField(this, 'cache', {},);
+  }
+  getProps() {
+    return {
+      ...this.props,
+      id: this.id,
+      key: this.id,
+    };
+  }
+  rect(_parentSizeInfo,) {
+    return { x: 0, y: 0, width: 0, height: 0, };
+  }
+};
+var htmlRegExp = /[&<>'"]/g;
+var escapeHTML = (str,) =>
+  str.replace(
+    htmlRegExp,
+    (tag,) =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '\'': '&#39;',
+        '"': '&quot;',
+      })[tag] || tag,
+  );
+var regex =
+  /(<([a-z]+)(?:\s+(?!href[\s=])[^=\s]+=(?:'[^']*'|"[^"]*"))*)(?:(\s+href\s*=)(?:'([^']*)'|"([^"]*)"))?((?:\s+[^=\s]+=(?:'[^']*'|"[^"]*"))*>)/gi;
+function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVariables,) {
+  return rawHTML.replace(
+    regex,
+    (original, pre1, tag, pre2, value1, value2, post,) => {
+      var _a, _b;
+      if (tag.toLowerCase() !== 'a') {
+        return original;
+      }
+      const href = value1 || value2;
+      const pageLink = parseFramerPageLink(href.replace(/&amp;/g, '&',),);
+      if (!pageLink || !pageLink.target) {
+        return original;
+      }
+      const targetRoute = getRoute(pageLink.target,);
+      if (!isRoute(targetRoute,) || !isRoute(currentRoute,)) {
+        return original;
+      }
+      const targetPath = targetRoute.path;
+      const currentPath = currentRoute.path;
+      if (!targetPath || !currentPath) {
+        return original;
+      }
+      let attributes = ` ${'data-framer-page-link-target'}="${pageLink.target}"`;
+      const elementId = getRouteElementId(targetRoute, pageLink.element ?? void 0,);
+      if (elementId) {
+        attributes += ` ${'data-framer-page-link-element'}="${pageLink.element}"`;
+      }
+      const link = linkFromFramerPageLink(href,);
+      if (!link || isString22(link,)) {
+        return original;
+      }
+      if (linkMatchesRoute(currentRoute, link, implicitPathVariables,)) {
+        attributes += ` ${'data-framer-page-link-current'}`;
+      }
+      let relativePath = targetPath;
+      const pathVariables = Object.assign({}, implicitPathVariables, (_a = pageLink.collectionItem) == null ? void 0 : _a.pathVariables,);
+      if (Object.keys(pathVariables,).length > 0) {
+        relativePath = relativePath.replace(pathVariablesRegExp2, (_, key7,) => '' + pathVariables[key7],);
+      }
+      if ((_b = pageLink.collectionItem) == null ? void 0 : _b.pathVariables) {
+        const params = new URLSearchParams(pageLink.collectionItem.pathVariables,);
+        attributes += ` ${'data-framer-page-link-path-variables'}="${params}"`;
+      }
+      relativePath = computeRelativePath(currentPath, relativePath,);
+      return pre1 + pre2 + `"${escapeHTML(relativePath + (elementId ? `#${elementId}` : ''),)}"` + attributes + post;
+    },
+  );
+}
+var htmlEscapes = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  '\'': '&#39;',
+};
+var reUnescapedHtml = /[&<>"']/g;
+var reHasUnescapedHtml = RegExp(reUnescapedHtml.source,);
+function escapeHTML2(str,) {
+  return str && reHasUnescapedHtml.test(str,) ? str.replace(reUnescapedHtml, (chr,) => htmlEscapes[chr] ?? '',) : str || '';
+}
+var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
+var richTextWrapperClassName = 'rich-text-wrapper';
+var DeprecatedRichText = /* @__PURE__ */ React85.forwardRef(
+  function Text(props, forwardedRef,) {
+    const {
+      id: id3,
+      name,
+      html,
+      htmlFromDesign,
+      text,
+      textFromDesign,
+      fonts = [],
+      width,
+      height,
+      left,
+      right,
+      top,
+      bottom,
+      center,
+      className,
+      stylesPresetsClassName,
+      visible = true,
+      opacity,
+      rotation = 0,
+      verticalAlignment = 'top',
+      isEditable = false,
+      willChangeTransform,
+      environment: environment2 = RenderTarget.current,
+      withExternalLayout = false,
+      positionSticky,
+      positionStickyTop,
+      positionStickyRight,
+      positionStickyBottom,
+      positionStickyLeft,
+      __htmlStructure,
+      __fromCanvasComponent = false,
+      _forwardedOverrideId,
+      _forwardedOverrides,
+      _usesDOMRect,
+      children,
+      ...rest
+    } = props;
+    const parentSize = useParentSize();
+    const layoutId = useLayoutId2(props,);
+    const fallbackLayoutRef = useRef16(null,);
+    const layoutRef = forwardedRef ?? fallbackLayoutRef;
+    const { navigate, getRoute, } = useRouter();
+    const currentRoute = useCurrentRoute();
+    useRoutePreloader(props.preload ?? [],);
+    useMeasureLayout(props, layoutRef,);
+    const inCodeComponent = React85.useContext(ComponentContainerContext,);
+    const isOnCanvas = useIsOnFramerCanvas();
+    let textOrOverride = text;
+    const forwardedOverrideId = _forwardedOverrideId ?? id3;
+    if (forwardedOverrideId && _forwardedOverrides) {
+      const override = _forwardedOverrides[forwardedOverrideId];
+      if (typeof override === 'string') {
+        textOrOverride = override;
+      }
+    }
+    let innerHTML = '';
+    if (textOrOverride) {
+      const escapedText = escapeHTML2(textOrOverride,);
+      innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
+    } else if (html) {
+      innerHTML = html;
+    } else if (textFromDesign) {
+      const escapedText = escapeHTML2(textFromDesign,);
+      innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
+    } else if (htmlFromDesign) {
+      innerHTML = htmlFromDesign;
+    }
+    const implicitPathVariables = useImplicitPathVariables();
+    const innerHTMLWithReplacedFramerPageLinks = React85.useMemo(() => {
+      if (isOnCanvas || !getRoute || !currentRoute) {
+        return innerHTML;
+      }
+      return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
+    }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
+    React85.useEffect(() => {
+      const container = layoutRef.current;
+      if (container === null) {
+        return;
+      }
+      function interceptPageLinks(event,) {
+        const anchorElement = findAnchorElement(event.target, layoutRef.current,);
+        if (event.metaKey || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
+          return;
+        }
+        const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
+        if (didNavigate) {
+          event.preventDefault();
+        }
+      }
+      container.addEventListener('click', interceptPageLinks,);
+      return () => {
+        container.removeEventListener('click', interceptPageLinks,);
+      };
+    }, [navigate, implicitPathVariables,],);
+    useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
+    React85.useInsertionEffect(() => {
+      injectComponentCSSRules();
+    }, [],);
+    if (!visible) {
+      return null;
+    }
+    const isHidden2 = isEditable && environment2() === 'CANVAS';
+    const style = {
+      outline: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: convertVerticalAlignment(verticalAlignment,),
+      opacity: isHidden2 ? 0 : opacity,
+      flexShrink: 0,
+    };
+    const restrictedRenderTarget = RenderTarget.hasRestrictions();
+    const frame2 = calculateRect(props, parentSize || 0, false,);
+    const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
+    const hasTransformTemplate = !!props.transformTemplate || !frame2 || !restrictedRenderTarget || __fromCanvasComponent || isAutoSized2;
+    const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
+    if (!withExternalLayout) {
+      if (frame2 && restrictedRenderTarget && !isAutoSized2) {
+        const rotate = Animatable.getNumber(rotation,).toFixed(4,);
+        style.transform = `translate(${frame2.x}px, ${frame2.y}px) rotate(${rotate}deg)`;
+        style.width = frame2.width;
+        style.minWidth = frame2.width;
+        style.height = frame2.height;
+      } else {
+        style.left = left;
+        style.right = right;
+        style.top = top;
+        style.bottom = bottom;
+        style.width = width;
+        style.height = height;
+        style.rotate = rotation;
+      }
+      if (positionSticky) {
+        if (!isOnCanvas || inCodeComponent) {
+          style.position = 'sticky';
+          style.willChange = 'transform';
+          style.zIndex = 1;
+          style.top = positionStickyTop;
+          style.right = positionStickyRight;
+          style.bottom = positionStickyBottom;
+          style.left = positionStickyLeft;
+        }
+      } else if (isOnCanvas && (props.positionFixed || props.positionAbsolute)) {
+        style.position = 'absolute';
+      }
+    }
+    collectFiltersFromProps(props, style,);
+    collectTextShadowsForProps(props, style,);
+    if (willChangeTransform) {
+      forceLayerBackingWithCSSProperties(style,);
+    }
+    Object.assign(style, props.style,);
+    return /* @__PURE__ */ jsx54(
+      motion.div,
+      {
+        id: id3,
+        ref: layoutRef,
+        ...rest,
+        style,
+        layoutId,
+        'data-framer-name': name,
+        'data-framer-component-type': 'DeprecatedRichText',
+        'data-center': center,
+        className: cx(className, stylesPresetsClassName, richTextWrapperClassName,),
+        transformTemplate: template,
+        dangerouslySetInnerHTML: { __html: innerHTMLWithReplacedFramerPageLinks, },
+      },
+    );
+  },
+);
+function convertVerticalAlignment(verticalAlignment,) {
+  switch (verticalAlignment) {
+    case 'top':
+      return 'flex-start';
+    case 'center':
+      return 'center';
+    case 'bottom':
+      return 'flex-end';
+  }
+}
+function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
+  const prevFontsRef = useRef16([],);
+  if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
+    prevFontsRef.current = fonts;
+    fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
+      if (!fromCanvasComponent || !containerRef.current || RenderTarget.current() !== 'CANVAS') {
+        return;
+      }
+      if (newlyLoadedFontCount > 0) {
+        measureClosestComponentContainer(containerRef.current,);
+      }
+    },);
+  }
+}
+var FitText = /* @__PURE__ */ forwardRef52(
+  ({ viewBoxScale, viewBox, children, ...props }, ref,) => {
+    return /* @__PURE__ */ jsx55(motion.svg, {
+      ref,
+      ...props,
+      viewBox,
+      children: /* @__PURE__ */ jsx55(
+        motion.foreignObject,
+        {
+          width: '100%',
+          height: '100%',
+          className: 'framer-fit-text',
+          transform: `scale(${viewBoxScale})`,
+          style: { overflow: 'visible', transformOrigin: 'center center', },
+          children,
+        },
+      ),
+    },);
+  },
+);
+var RichTextContainer = /* @__PURE__ */ forwardRef52(
+  (props, ref,) => {
+    const {
+      __fromCanvasComponent = false,
+      _forwardedOverrideId,
+      _forwardedOverrides,
+      _usesDOMRect,
+      as,
+      bottom,
+      center,
+      children,
+      environment: environment2 = RenderTarget.current,
+      fonts = [],
+      height,
+      isEditable = false,
+      left,
+      name,
+      opacity,
+      positionSticky,
+      positionStickyBottom,
+      positionStickyLeft,
+      positionStickyRight,
+      positionStickyTop,
+      right,
+      rotation = 0,
+      style,
+      _initialStyle,
+      stylesPresetsClassNames,
+      text: plainText,
+      top,
+      verticalAlignment = 'top',
+      visible = true,
+      width,
+      willChangeTransform,
+      withExternalLayout = false,
+      viewBox,
+      viewBoxScale = 1,
+      ...rest
+    } = props;
+    const parentSize = useParentSize();
+    const isOnCanvas = useIsOnFramerCanvas();
+    const inCodeComponent = useContext162(ComponentContainerContext,);
+    const layoutId = useLayoutId2(props,);
+    const fallbackRef = useRef17(null,);
+    const containerRef = ref ?? fallbackRef;
+    useMeasureLayout(props, containerRef,);
+    useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
+    useInsertionEffect42(() => {
+      injectComponentCSSRules();
+    }, [],);
+    if (!visible) {
+      return null;
+    }
+    const isHidden2 = isEditable && environment2() === 'CANVAS';
+    const containerStyle = {
+      outline: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: convertVerticalAlignment(verticalAlignment,),
+      opacity: isHidden2 ? 0 : opacity,
+      flexShrink: 0,
+    };
+    const restrictedRenderTarget = RenderTarget.hasRestrictions();
+    const frame2 = calculateRect(props, parentSize || 0, false,);
+    const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
+    const hasTransformTemplate = !!props.transformTemplate || !frame2 || !restrictedRenderTarget || __fromCanvasComponent || isAutoSized2;
+    const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
+    if (!withExternalLayout) {
+      if (frame2 && restrictedRenderTarget && !isAutoSized2) {
+        containerStyle.x = frame2.x;
+        containerStyle.y = frame2.y;
+        containerStyle.rotate = Animatable.getNumber(rotation,);
+        containerStyle.width = frame2.width;
+        containerStyle.minWidth = frame2.width;
+        containerStyle.height = frame2.height;
+      } else {
+        containerStyle.left = left;
+        containerStyle.right = right;
+        containerStyle.top = top;
+        containerStyle.bottom = bottom;
+        containerStyle.width = width;
+        containerStyle.height = height;
+        containerStyle.rotate = rotation;
+      }
+      if (positionSticky) {
+        if (!isOnCanvas || inCodeComponent) {
+          containerStyle.position = 'sticky';
+          containerStyle.willChange = 'transform';
+          containerStyle.zIndex = 1;
+          containerStyle.top = positionStickyTop;
+          containerStyle.right = positionStickyRight;
+          containerStyle.bottom = positionStickyBottom;
+          containerStyle.left = positionStickyLeft;
+        }
+      } else if (isOnCanvas && (props.positionFixed || props.positionAbsolute)) {
+        containerStyle.position = 'absolute';
+      }
+    }
+    collectFiltersFromProps(props, containerStyle,);
+    collectTextShadowsForProps(props, containerStyle,);
+    if (willChangeTransform) {
+      forceLayerBackingWithCSSProperties(containerStyle,);
+    }
+    Object.assign(containerStyle, _initialStyle, style,);
+    if (layoutId) {
+      rest.layout = 'preserve-aspect';
+    }
+    const Component14 = htmlElementAsMotionComponent(props.as,);
+    if (isString22(props.viewBox,)) {
+      if (props.as !== void 0) {
+        return /* @__PURE__ */ jsx55(
+          Component14,
+          {
+            ...rest,
+            ref: containerRef,
+            style: containerStyle,
+            layoutId,
+            transformTemplate: template,
+            'data-framer-name': name,
+            'data-framer-component-type': 'RichTextContainer',
+            children: /* @__PURE__ */ jsx55(
+              FitText,
+              {
+                viewBox,
+                viewBoxScale,
+                style: { width: '100%', height: '100%', },
+                children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
+              },
+            ),
+          },
+        );
+      } else {
+        return /* @__PURE__ */ jsx55(
+          FitText,
+          {
+            ...rest,
+            ref: containerRef,
+            style: containerStyle,
+            layoutId,
+            viewBox,
+            viewBoxScale,
+            transformTemplate: template,
+            'data-framer-name': name,
+            'data-framer-component-type': 'RichTextContainer',
+            children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
+          },
+        );
+      }
+    }
+    return /* @__PURE__ */ jsx55(
+      Component14,
+      {
+        ...rest,
+        ref: containerRef,
+        style: containerStyle,
+        layoutId,
+        transformTemplate: template,
+        'data-framer-name': name,
+        'data-framer-component-type': 'RichTextContainer',
+        children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
+      },
+    );
+  },
+);
+function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
+  let children = Children32.toArray(element.props.children,);
+  if (isString22(plainText,)) {
+    children = children.slice(0, 1,);
+  }
+  children = children.map((child,) => {
+    if (isValidElement32(child,)) {
+      return styleRichTextChildren(child, stylesPresetsClassNames, plainText,);
+    }
+    if (isString22(plainText,)) {
+      return plainText;
+    }
+    return child;
+  },);
+  const { ['data-preset-tag']: dataPresetTag, ...props } = element.props;
+  if (isString22(element.type,) || isMotionComponent(element.type,)) {
+    const tag = dataPresetTag || unwrapMotionComponent(element.type,) || element.type;
+    const stylesPresetClassName = isString22(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
+    props.className = cx('framer-text', props.className, stylesPresetClassName,);
+  }
+  return cloneElement32(element, props, ...children,);
+}
+var RichText = /* @__PURE__ */ forwardRef52(
+  ({ children, html, htmlFromDesign, ...props }, ref,) => {
+    const content = html || children || htmlFromDesign;
+    if (isString22(content,)) {
+      if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
+        props.stylesPresetsClassName = Object.values(props.stylesPresetsClassNames,).join(' ',);
+      }
+      const contentProp = {
+        // We need to use the original prop name.
+        [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
+      };
+      return /* @__PURE__ */ jsx55(DeprecatedRichText, { ...props, ...contentProp, ref, },);
+    }
+    if (!props.stylesPresetsClassNames && isString22(props.stylesPresetsClassName,)) {
+      const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
+      if (h1 === void 0 || h2 === void 0 || h3 === void 0 || p === void 0 || a === void 0) {
+        console.warn(`Encountered invalid stylesPresetsClassNames: ${props.stylesPresetsClassNames}`,);
+      } else {
+        props.stylesPresetsClassNames = { h1, h2, h3, p, a, };
+      }
+    }
+    return /* @__PURE__ */ jsx55(RichTextContainer, { ...props, ref, children: isValidElement32(content,) ? content : void 0, },);
+  },
+);
+function linearGradientLine(angle,) {
+  var _a, _b;
+  const rad = angle * Math.PI / 180;
+  const offset = {
+    x: -Math.sin(rad,) * 100,
+    y: Math.cos(rad,) * 100,
+  };
+  const anglePoint = Point(offset.x, offset.y,);
+  const angleLine = Line(Point(0.5, 0.5,), anglePoint,);
+  const points = Rect.points({ x: 0, y: 0, width: 1, height: 1, },);
+  const sortedPoints = points.map((point2,) => ({ point: point2, distance: Point.distance(anglePoint, point2,), })).sort((a2, b2,) =>
+    a2.distance - b2.distance
+  );
+  const a = (_a = sortedPoints[0]) == null ? void 0 : _a.point;
+  const b = (_b = sortedPoints[1]) == null ? void 0 : _b.point;
+  assert(a && b, 'linearGradientLine: Must have 2 closest points.',);
+  const [c, d,] = points.filter((point2,) => !Point.isEqual(point2, a,) && !Point.isEqual(point2, b,));
+  assert(c && d, 'linearGradientLine: Must have 2 opposing points.',);
+  const start = Line.intersection(angleLine, Line(a, b,),);
+  const end = Line.intersection(angleLine, Line(c, d,),);
+  assert(start && end, 'linearGradientLine: Must have a start and end point.',);
+  return Line(start, end,);
+}
+function elementPropertiesForLinearGradient(gradient, id3,) {
+  var _a, _b;
+  const line = linearGradientLine(gradient.angle,);
+  const stops = gradientColorStops(gradient,);
+  const startPosition = ((_a = stops[0]) == null ? void 0 : _a.position) ?? 0;
+  const endPosition = ((_b = stops[stops.length - 1]) == null ? void 0 : _b.position) ?? 1;
+  const startPoint = Line.pointAtPercentDistance(line, startPosition,);
+  const endPoint = Line.pointAtPercentDistance(line, endPosition,);
+  const interpolator = interpolate([startPosition, endPosition,], [0, 1,],);
+  return {
+    id: `id${id3}g${LinearGradient.hash(gradient,)}`,
+    x1: startPoint.x,
+    y1: startPoint.y,
+    x2: endPoint.x,
+    y2: endPoint.y,
+    stops: stops.map((stop,) => ({
+      color: stop.value,
+      alpha: ConvertColor.getAlpha(stop.value,) * gradient.alpha,
+      position: interpolator(stop.position,),
+    })),
+  };
+}
+function elementPropertiesForRadialGradient(gradient, id3,) {
+  return {
+    id: `id${id3}g${RadialGradient.hash(gradient,)}`,
+    widthFactor: gradient.widthFactor,
+    heightFactor: gradient.heightFactor,
+    centerAnchorX: gradient.centerAnchorX,
+    centerAnchorY: gradient.centerAnchorY,
+    stops: gradientColorStops(gradient,).map((stop,) => ({
+      color: stop.value,
+      alpha: ConvertColor.getAlpha(stop.value,) * gradient.alpha,
+      position: stop.position,
+    })),
+  };
+}
+function isRelativeNumber(value,) {
+  if (!isString22(value,)) {
+    return false;
+  }
+  const lastChar = value.charAt(value.length - 1,);
+  if (lastChar !== '%') {
+    return false;
+  }
+  const withoutLastChar = value.slice(0, -1,);
+  const float = parseFloat(withoutLastChar,);
+  return isNumber2(float,);
+}
+function getRelativeNumberValue(value,) {
+  const withoutLastChar = value.slice(0, -1,);
+  const float = parseFloat(withoutLastChar,);
+  return isNumber2(float,) ? float : 50;
+}
+function getPositionXFraction(positionX,) {
+  if (isRelativeNumber(positionX,)) {
+    return getRelativeNumberValue(positionX,) / 100;
+  }
+  if (positionX === 'left') {
+    return 0;
+  }
+  if (positionX === 'right') {
+    return 1;
+  }
+  return 0.5;
+}
+function getPositionYFraction(positionY,) {
+  if (isRelativeNumber(positionY,)) {
+    return getRelativeNumberValue(positionY,) / 100;
+  }
+  if (positionY === 'top') {
+    return 0;
+  }
+  if (positionY === 'bottom') {
+    return 1;
+  }
+  return 0.5;
+}
+function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
+  fill = Animatable.get(fill, '#09F',);
+  if (!BackgroundImage.isImageObject(fill,)) {
+    return void 0;
+  }
+  if (!fill.pixelWidth || !fill.pixelHeight) {
+    return void 0;
+  }
+  const imageWidth = fill.pixelWidth;
+  const imageHeight = fill.pixelHeight;
+  let transform2;
+  const { fit, } = fill;
+  let width = 1, height = 1;
+  let offsetX = 0;
+  let offsetY = 0;
+  if (fit === 'fill' || fit === 'fit' || fit === 'tile' || !fit) {
+    let scaleX = 1;
+    let scaleY = 1;
+    const imageRatio = imageWidth / imageHeight;
+    const realWidth = frame2.height * imageRatio;
+    const realHeight = frame2.width / imageRatio;
+    const validScaleX = realWidth / frame2.width;
+    const validScaleY = realHeight / frame2.height;
+    if (fit === 'tile') {
+      fill.backgroundSize ?? (fill.backgroundSize = 1);
+      width = Math.round(fill.backgroundSize * (imageWidth / 2),);
+      height = Math.round(fill.backgroundSize * (imageHeight / 2),);
+      const layerPositionX = frame2.x ?? 0;
+      const layerPositionY = frame2.y ?? 0;
+      let extraOffsetX = 0;
+      let extraOffsetY = 0;
+      if (includeTransform) {
+        extraOffsetX = layerPositionX;
+        extraOffsetY = layerPositionY;
+      }
+      offsetX = (frame2.width - width) * getPositionXFraction(fill.positionX,) + extraOffsetX;
+      offsetY = (frame2.height - height) * getPositionYFraction(fill.positionY,) + extraOffsetY;
+      transform2 = `translate(${offsetX + layerPositionX}, ${offsetY + layerPositionY})`;
+    } else {
+      if (fit === 'fill' || !fit ? validScaleY > validScaleX : validScaleY < validScaleX) {
+        scaleY = validScaleY;
+        offsetY = (1 - validScaleY) * getPositionYFraction(fill.positionY,);
+      } else {
+        scaleX = validScaleX;
+        offsetX = (1 - validScaleX) * getPositionXFraction(fill.positionX,);
+      }
+      transform2 = `translate(${offsetX}, ${offsetY}) scale(${scaleX}, ${scaleY})`;
+    }
+  }
+  const imageId = `id${id3}g${'-fillImage'}`;
+  return { id: imageId, path: fill.src ?? '', transform: transform2, width, height, offsetX, offsetY, };
+}
+var mediaType2 = 'framer/asset-reference,';
+function isAssetReference(value,) {
+  return value.startsWith(`data:${mediaType2}`,);
+}
+function imageUrlForAsset(asset, pixelSize,) {
+  if (/^\w+:/.test(asset,) && !isAssetReference(asset,)) {
+    return asset;
+  }
+  if (typeof pixelSize !== 'number') {
+    pixelSize = void 0;
+  } else if (pixelSize <= 512) {
+    pixelSize = 512;
+  } else if (pixelSize <= 1024) {
+    pixelSize = 1024;
+  } else if (pixelSize <= 2048) {
+    pixelSize = 2048;
+  } else {
+    pixelSize = 4096;
+  }
+  const isExport = RenderTarget.current() === 'EXPORT';
+  return runtime.assetResolver(asset, { pixelSize, isExport, },) ?? '';
+}
+var ImagePatternElement = ({
+  id: id3,
+  path,
+  transform: transform2,
+  repeat,
+  width,
+  height,
+  offsetX,
+  offsetY,
+},) => {
+  const href = imageUrlForAsset(path,);
+  return /* @__PURE__ */ jsx56(
+    'pattern',
+    {
+      id: id3,
+      width: repeat ? width : '100%',
+      height: repeat ? height : '100%',
+      patternContentUnits: repeat ? void 0 : 'objectBoundingBox',
+      patternUnits: repeat ? 'userSpaceOnUse' : void 0,
+      x: repeat ? offsetX : void 0,
+      y: repeat ? offsetY : void 0,
+      children: /* @__PURE__ */ jsx56(
+        'image',
+        {
+          width: repeat ? width : 1,
+          height: repeat ? height : 1,
+          href,
+          preserveAspectRatio: 'none',
+          transform: repeat ? void 0 : transform2,
+          x: repeat ? 0 : void 0,
+          y: repeat ? 0 : void 0,
+        },
+        href,
+      ),
+    },
+  );
+};
+var useDOM = isBrowser2();
+var SharedSVGEntry = class {
+  constructor(id3, svg, innerHTML, viewBox, count = 0,) {
+    this.id = id3;
+    this.svg = svg;
+    this.innerHTML = innerHTML;
+    this.viewBox = viewBox;
+    this.count = count;
+  }
+};
+var SharedSVGManager = class {
+  constructor() {
+    __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
+  }
+  debugGetEntries() {
+    return this.entries;
+  }
+  /** Request to render a svg, this will ensure there is a global instance and will return a
+   * template referencing the image. Must be balanced with `unsubscribe()` calls using the same
+   * svg. If called multiple times while the shared SVG exists, the generateUniqueIds and
+   * contentId parameters are ignored. */
+  subscribe(svg, generateUniqueIds, contentId,) {
+    if (!svg || svg === '') {
+      return '';
+    }
+    let entry = this.entries.get(svg,);
+    if (!entry) {
+      if (!contentId) {
+        contentId = 'svg' + String(hash(svg,),) + '_' + String(svg.length,);
+      }
+      let uniqueSVG = svg;
+      let svgSize;
+      const svgDom = parseSVG(svg,);
+      if (svgDom) {
+        if (generateUniqueIds) {
+          prefixIdsInSVG(svgDom, contentId,);
+        }
+        svgDom.id = contentId;
+        svgSize = getSVGSize(svgDom,);
+        uniqueSVG = svgDom.outerHTML;
+      }
+      entry = this.createDOMElementFor(uniqueSVG, contentId, svgSize,);
+      this.entries.set(svg, entry,);
+    }
+    entry.count += 1;
+    return entry.innerHTML;
+  }
+  /** Returns the viewBox for the svg, or undefined if there is no viewBox. */
+  getViewBox(svg,) {
+    if (!svg || svg === '') {
+      return;
+    }
+    const entry = this.entries.get(svg,);
+    return entry == null ? void 0 : entry.viewBox;
+  }
+  /** When no longer rendering an svg it must be unsubscribed from so resources can be cleaned up.
+   * Pass in the same svg as used with `subscribe()`. */
+  unsubscribe(svg,) {
+    if (!svg || svg === '') {
+      return;
+    }
+    const entry = this.entries.get(svg,);
+    if (!entry) {
+      return;
+    }
+    entry.count -= 1;
+    if (entry.count > 0) {
+      return;
+    }
+    setTimeout(() => this.maybeRemoveEntry(svg,), 5e3,);
+  }
+  maybeRemoveEntry(svg,) {
+    const entry = this.entries.get(svg,);
+    if (!entry) {
+      return;
+    }
+    if (entry.count > 0) {
+      return;
+    }
+    this.entries.delete(svg,);
+    this.removeDOMElement(entry,);
+  }
+  removeDOMElement(entry,) {
+    const containerId = 'container_' + entry.id;
+    if (useDOM) {
+      const container = document == null ? void 0 : document.querySelector('#' + containerId,);
+      container == null ? void 0 : container.remove();
+    }
+  }
+  createDOMElementFor(svg, id3, size2,) {
+    const containerId = 'container_' + id3;
+    if (useDOM) {
+      let svgTemplates = document.querySelector('#svg-templates',);
+      if (!svgTemplates) {
+        svgTemplates = document.createElement('div',);
+        svgTemplates.id = 'svg-templates';
+        svgTemplates.style.position = 'absolute';
+        svgTemplates.style.top = '0';
+        svgTemplates.style.left = '0';
+        svgTemplates.style.width = '0';
+        svgTemplates.style.height = '0';
+        svgTemplates.style.overflow = 'hidden';
+        document.body.appendChild(svgTemplates,);
+      }
+      if (!document.querySelector('#' + containerId,)) {
+        const container = document.createElement('div',);
+        container.id = containerId;
+        container.innerHTML = svg;
+        if (container.firstElementChild) {
+          container.firstElementChild.id = id3;
+        }
+        svgTemplates.appendChild(container,);
+      }
+    }
+    const box = size2 ? `0 0 ${size2.width} ${size2.height}` : void 0;
+    const viewBox = box ? ` viewBox="${box}"` : '';
+    const innerHTML =
+      `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%"${viewBox}><use href="#${id3}"></use></svg>`;
+    return new SharedSVGEntry(id3, svg, innerHTML, box,);
+  }
+  clear() {
+    this.entries.clear();
+  }
+  /** Returns a string containing a div#svg-templates and all the current svg templates. Can be
+   * used after running `ReactDOMServer.renderToString()` */
+  generateTemplates() {
+    const output = [];
+    const style = 'position: absolute; overflow: hidden; top: 0; left: 0; width: 0; height: 0';
+    output.push(`<div id="svg-templates" style="${style}">`,);
+    for (const value of this.entries.values()) {
+      const containerId = 'container_' + value.id;
+      output.push(`  <div id="${containerId}">`,);
+      output.push(`    ${value.svg}`,);
+      output.push('  </div>',);
+    }
+    output.push('</div>',);
+    return output.join('\n',);
+  }
+};
+var sharedSVGManager = /* @__PURE__ */ new SharedSVGManager();
+function parseSVG(svg,) {
+  if (typeof DOMParser === 'undefined') {
+    console.warn('unable to find DOMParser',);
+    return;
+  }
+  try {
+    const domParser = new DOMParser();
+    const doc = domParser.parseFromString(svg, 'text/html',);
+    const node = doc.getElementsByTagName('svg',)[0];
+    if (!node) {
+      throw Error('no svg element found',);
+    }
+    return node;
+  } catch {
+    return;
+  }
+}
+function prefixIdsInSVG(svg, prefix2,) {
+  const sanitizedPrefix = sanitizeString(prefix2,);
+  recursivelyPrefixId(svg, sanitizedPrefix,);
+}
+function sanitizeString(str,) {
+  return str.replace(/[^\w\-:.]|^[^a-z]+/gi, '',);
+}
+function recursivelyPrefixId(el, prefix2,) {
+  prefixId(el, prefix2,);
+  const childNodes = Array.from(el.children,);
+  childNodes.forEach((node,) => {
+    recursivelyPrefixId(node, prefix2,);
+  },);
+}
+function prefixId(el, prefix2,) {
+  const attributes = el.getAttributeNames();
+  attributes.forEach((attr,) => {
+    const value = el.getAttribute(attr,);
+    if (!value) {
+      return;
+    }
+    if (attr === 'id') {
+      el.setAttribute(attr, `${prefix2}_${value}`,);
+    }
+    if (attr === 'href' || attr === 'xlink:href') {
+      const [base, fragmentIdentifier,] = value.split('#',);
+      if (base) {
+        return;
+      }
+      el.setAttribute(attr, `#${prefix2}_${fragmentIdentifier}`,);
+      return;
+    }
+    const URL_REF = 'url(#';
+    if (value.includes(URL_REF,)) {
+      const prefixedValue = value.replace(URL_REF, `${URL_REF}${prefix2}_`,);
+      el.setAttribute(attr, prefixedValue,);
+    }
+  },);
+}
+var unitsToPixels = {
+  cm: 96 / 2.54,
+  mm: 96 / 2.54 / 10,
+  Q: 96 / 2.54 / 40,
+  in: 96,
+  pc: 96 / 6,
+  pt: 96 / 72,
+  px: 1,
+  // A few assumptions about relative units.
+  em: 16,
+  ex: 8,
+  ch: 8,
+  rem: 16,
+};
+function parseLength(value,) {
+  var _a;
+  if (!value) {
+    return;
+  }
+  const m2 = /(-?[\d.]+)([a-z%]*)/.exec(value,);
+  if ((m2 == null ? void 0 : m2[1]) === void 0 || (m2 == null ? void 0 : m2[2]) === void 0) {
+    return;
+  }
+  if ((_a = m2[2]) == null ? void 0 : _a.startsWith('%',)) {
+    return;
+  }
+  return Math.round(parseFloat(m2[1],) * (unitsToPixels[m2[2]] || 1),);
+}
+function getSVGSize(svg,) {
+  const width = parseLength(svg.getAttribute('width',),);
+  const height = parseLength(svg.getAttribute('height',),);
+  if (typeof width !== 'number' || typeof height !== 'number') {
+    return;
+  }
+  if (width <= 0 || height <= 0) {
+    return;
+  }
+  return { width, height, };
+}
+function SVG(props,) {
+  const parentSize = useParentSize();
+  const layoutId = useLayoutId2(props,);
+  const layoutRef = React86.useRef(null,);
+  const providedWindow = useProvidedWindow();
+  useMeasureLayout(props, layoutRef,);
+  return /* @__PURE__ */ jsx57(
+    SVGComponent,
+    {
+      ...props,
+      innerRef: layoutRef,
+      parentSize,
+      layoutId,
+      providedWindow,
+    },
+  );
+}
+var MAX_BACKGROUND_SVG_TEXT_LENGTH = 5e4;
+function containsImageReference(svg,) {
+  return svg.indexOf('image',) >= 0;
+}
+function containsCustomPropertyReference(svg,) {
+  return svg.indexOf('var(--',) >= 0;
+}
+function hasBorderRadius(style,) {
+  return !!(style.borderRadius || style.borderBottomLeftRadius || style.borderBottomRightRadius || style.borderTopLeftRadius ||
+    style.borderTopRightRadius);
+}
+function sizeSVG(container, props,) {
+  var _a, _b;
+  const div = container.current;
+  if (!div) {
+    return;
+  }
+  const localWindow = props.providedWindow ?? safeWindow;
+  const svg = div.firstElementChild;
+  if (!svg || !(svg instanceof localWindow.SVGSVGElement)) {
+    return;
+  }
+  if (!svg.getAttribute('viewBox',)) {
+    const viewBox = sharedSVGManager.getViewBox(props.svg,);
+    if (viewBox) {
+      svg.setAttribute('viewBox', viewBox,);
+    }
+  }
+  const { withExternalLayout, parentSize, } = props;
+  const canUseCalculatedOnCanvasSize = !withExternalLayout && constraintsEnabled(props,) && parentSize !== 1 && parentSize !== 2;
+  if (canUseCalculatedOnCanvasSize) {
+    return;
+  }
+  const { intrinsicWidth, intrinsicHeight, _constraints, } = props;
+  if (
+    ((_a = svg.viewBox.baseVal) == null ? void 0 : _a.width) === 0 && ((_b = svg.viewBox.baseVal) == null ? void 0 : _b.height) === 0 &&
+    isFiniteNumber(intrinsicWidth,) && isFiniteNumber(intrinsicHeight,)
+  ) {
+    svg.setAttribute('viewBox', `0 0 ${intrinsicWidth} ${intrinsicHeight}`,);
+  }
+  if (_constraints && _constraints.aspectRatio) {
+    svg.setAttribute('preserveAspectRatio', '',);
+  } else {
+    svg.setAttribute('preserveAspectRatio', 'none',);
+  }
+  svg.setAttribute('width', '100%',);
+  svg.setAttribute('height', '100%',);
+}
+function SVGStyleSheet() {
+  React86.useInsertionEffect(() => {
+    injectComponentCSSRules();
+  }, [],);
+  return null;
+}
+var SVGComponent = /* @__PURE__ */ (() => {
+  var _a;
+  return _a = class extends Layer {
+    constructor() {
+      super(...arguments,);
+      __publicField(this, 'container', React86.createRef(),);
+      __publicField(this, 'svgElement', null,);
+      __publicField(this, 'setSVGElement', (element,) => {
+        this.svgElement = element;
+        this.setLayerElement(element,);
+      },);
+      __publicField(this, 'previouslyRenderedSVG', '',);
+      __publicField(this, 'unmountedSVG', '',);
+    }
+    static frame(props,) {
+      return calculateRect(
+        props,
+        props.parentSize || 0,
+        /* Unknown */
+      );
+    }
+    get frame() {
+      return calculateRect(
+        this.props,
+        this.props.parentSize || 0,
+        /* Unknown */
+      );
+    }
+    componentDidMount() {
+      if (this.unmountedSVG) {
+        const { svgContentId, } = this.props;
+        const contentid = svgContentId ? 'svg' + svgContentId : null;
+        sharedSVGManager.subscribe(this.unmountedSVG, !svgContentId, contentid,);
+        this.previouslyRenderedSVG = this.unmountedSVG;
+      }
+      if (this.props.svgContentId) {
+        return;
+      }
+      sizeSVG(this.container, this.props,);
+    }
+    componentWillUnmount() {
+      sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
+      this.unmountedSVG = this.previouslyRenderedSVG;
+      this.previouslyRenderedSVG = '';
+    }
+    componentDidUpdate(prevProps,) {
+      super.componentDidUpdate(prevProps,);
+      if (this.props.svgContentId) {
+        return;
+      }
+      const { fill, } = this.props;
+      if (BackgroundImage.isImageObject(fill,) && BackgroundImage.isImageObject(prevProps.fill,) && fill.src !== prevProps.fill.src) {
+        resetSetStyle(this.svgElement, 'fill', null, false,);
+      }
+      sizeSVG(this.container, this.props,);
+    }
+    collectLayout(style, innerStyle,) {
+      if (this.props.withExternalLayout) {
+        innerStyle.width = '100%';
+        innerStyle.height = '100%';
+        innerStyle.aspectRatio = 'inherit';
+        return;
+      }
+      const frame2 = this.frame;
+      const { rotation, intrinsicWidth, intrinsicHeight, width, height, } = this.props;
+      const rotate = Animatable.getNumber(rotation,);
+      style.opacity = isFiniteNumber(this.props.opacity,) ? this.props.opacity : 1;
+      if (RenderTarget.hasRestrictions() && frame2) {
+        Object.assign(style, {
+          transform: `translate(${frame2.x}px, ${frame2.y}px) rotate(${rotate.toFixed(4,)}deg)`,
+          width: `${frame2.width}px`,
+          height: `${frame2.height}px`,
+        },);
+        if (constraintsEnabled(this.props,)) {
+          style.position = 'absolute';
+        }
+        const xFactor = frame2.width / (intrinsicWidth || 1);
+        const yFactor = frame2.height / (intrinsicHeight || 1);
+        innerStyle.transformOrigin = 'top left';
+        const { zoom, target, } = RenderEnvironment;
+        if (target === 'EXPORT') {
+          const zoomFactor = zoom > 1 ? zoom : 1;
+          innerStyle.transform = `scale(${xFactor * zoomFactor}, ${yFactor * zoomFactor})`;
+          innerStyle.zoom = 1 / zoomFactor;
+        } else {
+          innerStyle.transform = `scale(${xFactor}, ${yFactor})`;
+        }
+        if (intrinsicWidth && intrinsicHeight) {
+          innerStyle.width = intrinsicWidth;
+          innerStyle.height = intrinsicHeight;
+        }
+      } else {
+        const { left, right, top, bottom, } = this.props;
+        Object.assign(style, {
+          left,
+          right,
+          top,
+          bottom,
+          width,
+          height,
+          rotate,
+        },);
+        Object.assign(innerStyle, {
+          left: 0,
+          top: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+        },);
+      }
+    }
+    render() {
+      countNodeRender();
+      const {
+        id: id3,
+        visible,
+        style,
+        fill,
+        svg,
+        intrinsicHeight,
+        intrinsicWidth,
+        title,
+        description,
+        layoutId,
+        className,
+        variants,
+        withExternalLayout,
+        innerRef,
+        svgContentId,
+        height,
+        opacity,
+        width,
+        ...rest
+      } = this.props;
+      if (!withExternalLayout && (!visible || !id3)) {
+        return null;
+      }
+      const identifier = id3 ?? layoutId ?? 'svg';
+      const frame2 = this.frame;
+      const size2 = frame2 || { width: intrinsicWidth || 100, height: intrinsicHeight || 100, };
+      const outerStyle = { ...style, imageRendering: 'pixelated', flexShrink: 0, };
+      const innerStyle = {};
+      this.collectLayout(outerStyle, innerStyle,);
+      collectOpacityFromProps(this.props, outerStyle,);
+      collectFiltersFromProps(this.props, outerStyle,);
+      Layer.applyWillChange(this.props, outerStyle, false,);
+      let fillElement = null;
+      if (typeof fill === 'string' || Color.isColorObject(fill,)) {
+        const fillColor = Color.isColorObject(fill,) ? fill.initialValue || Color.toRgbString(fill,) : fill;
+        outerStyle.fill = fillColor;
+        outerStyle.color = fillColor;
+      } else if (LinearGradient.isLinearGradient(fill,)) {
+        const gradient = fill;
+        const gradientId = `${encodeURI(id3 || '',)}g${LinearGradient.hash(gradient,)}`;
+        outerStyle.fill = `url(#${gradientId})`;
+        const { stops, x1, x2, y1, y2, } = elementPropertiesForLinearGradient(gradient, identifier,);
+        fillElement = /* @__PURE__ */ jsx57(
+          'svg',
+          {
+            ref: this.setSVGElement,
+            xmlns: 'http://www.w3.org/2000/svg',
+            width: '100%',
+            height: '100%',
+            style: { position: 'absolute', },
+            children: /* @__PURE__ */ jsx57('linearGradient', {
+              id: gradientId,
+              x1,
+              x2,
+              y1,
+              y2,
+              children: stops.map((stop, idx,) => {
+                return /* @__PURE__ */ jsx57(
+                  'stop',
+                  {
+                    offset: stop.position,
+                    stopColor: stop.color,
+                    stopOpacity: stop.alpha,
+                  },
+                  idx,
+                );
+              },),
+            },),
+          },
+        );
+      } else if (RadialGradient.isRadialGradient(fill,)) {
+        const gradient = fill;
+        const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
+        outerStyle.fill = `url(#${gradientId})`;
+        const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
+        fillElement = /* @__PURE__ */ jsx57(
+          'svg',
+          {
+            ref: this.setSVGElement,
+            xmlns: 'http://www.w3.org/2000/svg',
+            width: '100%',
+            height: '100%',
+            style: { position: 'absolute', },
+            children: /* @__PURE__ */ jsx57(
+              'radialGradient',
+              {
+                id: gradientId,
+                cy: gradient.centerAnchorY,
+                cx: gradient.centerAnchorX,
+                r: gradient.widthFactor,
+                children: elementProperties.stops.map((stop, idx,) => {
+                  return /* @__PURE__ */ jsx57(
+                    'stop',
+                    {
+                      offset: stop.position,
+                      stopColor: stop.color,
+                      stopOpacity: stop.alpha,
+                    },
+                    idx,
+                  );
+                },),
+              },
+            ),
+          },
+        );
+      } else if (BackgroundImage.isImageObject(fill,)) {
+        const imagePattern = imagePatternPropsForFill(fill, size2, identifier,);
+        if (imagePattern) {
+          outerStyle.fill = `url(#${imagePattern.id})`;
+          fillElement = /* @__PURE__ */ jsx57(
+            'svg',
+            {
+              ref: this.setSVGElement,
+              xmlns: 'http://www.w3.org/2000/svg',
+              xmlnsXlink: 'http://www.w3.org/1999/xlink',
+              width: '100%',
+              height: '100%',
+              style: { position: 'absolute', },
+              children: /* @__PURE__ */ jsx57('defs', { children: /* @__PURE__ */ jsx57(ImagePatternElement, { ...imagePattern, },), },),
+            },
+          );
+        }
+      }
+      const dataProps = {
+        'data-framer-component-type': 'SVG',
+      };
+      const hasTransformTemplate = !frame2;
+      if (hasTransformTemplate) {
+        Object.assign(dataProps, layoutHintDataPropsForCenter(this.props.center,),);
+      }
+      const svgAsBackgroundImage = !fillElement && !outerStyle.fill && !outerStyle.background && !outerStyle.backgroundImage &&
+        svg.length < MAX_BACKGROUND_SVG_TEXT_LENGTH && !containsImageReference(svg,) && !containsCustomPropertyReference(svg,);
+      let content = null;
+      if (svgAsBackgroundImage) {
+        outerStyle.backgroundSize = '100% 100%';
+        outerStyle.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg,)}')`;
+        sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
+        this.previouslyRenderedSVG = '';
+      } else {
+        const contentid = svgContentId ? 'svg' + svgContentId : null;
+        const __html = sharedSVGManager.subscribe(svg, !svgContentId, contentid,);
+        sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
+        this.previouslyRenderedSVG = svg;
+        if (hasBorderRadius(outerStyle,)) {
+          outerStyle.overflow = 'hidden';
+        }
+        content = /* @__PURE__ */ jsxs18(Fragment10, {
+          children: [
+            fillElement,
+            /* @__PURE__ */ jsx57(
+              'div',
+              {
+                className: 'svgContainer',
+                style: innerStyle,
+                ref: this.container,
+                dangerouslySetInnerHTML: { __html, },
+              },
+              BackgroundImage.isImageObject(fill,) ? fill.src : '',
+            ),
+          ],
+        },);
+      }
+      const MotionComponent = htmlElementAsMotionComponent(this.props.as,);
+      const { href, target, rel, onClick, } = this.props;
+      return /* @__PURE__ */ jsxs18(
+        MotionComponent,
+        {
+          ...dataProps,
+          ...rest,
+          layoutId,
+          transformTemplate: hasTransformTemplate ? transformTemplate(this.props.center,) : void 0,
+          id: id3,
+          ref: innerRef,
+          style: outerStyle,
+          className,
+          variants,
+          tabIndex: this.props.tabIndex,
+          role: title || description ? 'img' : void 0,
+          'aria-label': title,
+          'aria-description': description,
+          ...{ href, target, rel, onClick, },
+          children: [
+            content,
+            /* @__PURE__ */ jsx57(SVGStyleSheet, {},),
+          ],
+        },
+      );
+    }
+  },
+    __publicField(_a, 'supportsConstraints', true,),
+    __publicField(_a, 'defaultSVGProps', {
+      left: void 0,
+      right: void 0,
+      top: void 0,
+      bottom: void 0,
+      style: void 0,
+      _constraints: {
+        enabled: true,
+        aspectRatio: null,
+      },
+      parentSize: 0,
+      rotation: 0,
+      visible: true,
+      svg: '',
+      shadows: [],
+    },),
+    __publicField(_a, 'defaultProps', {
+      ...Layer.defaultProps,
+      ..._a.defaultSVGProps,
+    },),
+    _a;
+})();
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s,) => !fontStore.isSelectorLoaded(s,));
-  const [fontLoadStatus, setFontLoadStatus,] = React83.useState(
+  const [fontLoadStatus, setFontLoadStatus,] = React87.useState(
     missingFontSelectors.length ? 'loading' : 'done',
   );
-  React83.useEffect(() => {
+  React87.useEffect(() => {
     if (!missingFontSelectors.length) {
       return;
     }
@@ -36244,19 +36935,16 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   }, [fontSelectors.join(', ',), missingFontSelectors.join(', ',),],);
   return fontLoadStatus;
 }
-function isShallowEqualArray(a, b,) {
-  return a.length === b.length && a.every((v, i,) => v === b[i]);
-}
 function TextStyleSheet() {
-  React84.useInsertionEffect(() => {
+  React88.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
 }
-var Text = /* @__PURE__ */ React84.forwardRef(function Text2(props, forwardedRef,) {
+var Text2 = /* @__PURE__ */ React88.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef16(null,);
+  const fallbackLayoutRef = useRef18(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
@@ -36266,10 +36954,10 @@ var Text = /* @__PURE__ */ React84.forwardRef(function Text2(props, forwardedRef
   const fontLoadStatus = useFontLoadStatus(props.fonts,);
   useMeasureLayout(props, layoutRef,);
   const { fonts, __fromCanvasComponent, } = props;
-  const prevFontsRef = useRef16([],);
+  const prevFontsRef = useRef18([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
-  useEffect132(() => {
+  useEffect142(() => {
     if (!fontsDidChange || !fonts) {
       return;
     }
@@ -36284,7 +36972,7 @@ var Text = /* @__PURE__ */ React84.forwardRef(function Text2(props, forwardedRef
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React84.useCallback(
+  const interceptPageLinks = React88.useCallback(
     (event,) => {
       const anchorElement = findAnchorElement(event.target, layoutRef.current,);
       if (event.metaKey || !navigate || !anchorElement) {
@@ -36297,19 +36985,19 @@ var Text = /* @__PURE__ */ React84.forwardRef(function Text2(props, forwardedRef
     },
     [navigate, implicitPathVariables,],
   );
-  useEffect132(() => {
+  useEffect142(() => {
     var _a;
     (_a = layoutRef.current) == null ? void 0 : _a.addEventListener('click', interceptPageLinks,);
     const ref = layoutRef.current;
     return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React84.useMemo(() => {
+  const rawHTML = React88.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) {
       return props.rawHTML;
     }
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, onCanvas, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ jsx51(
+  return /* @__PURE__ */ jsx58(
     TextComponent,
     {
       ...props,
@@ -36365,7 +37053,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           return null;
         }
         const isHidden2 = this.props.isEditable && this.props.environment() === 'CANVAS';
-        const justifyContent = convertVerticalAlignment(this.props.verticalAlignment,);
+        const justifyContent = convertVerticalAlignment2(this.props.verticalAlignment,);
         const style = {
           outline: 'none',
           display: 'flex',
@@ -36427,7 +37115,7 @@ var TextComponent = /* @__PURE__ */ (() => {
             asRecord(style,)['--framer-text-alignment'] = alignment;
           }
           const tabIndexProps = getTabIndexProps(tabIndex,);
-          return /* @__PURE__ */ jsx51(
+          return /* @__PURE__ */ jsx58(
             motion.div,
             {
               layoutId,
@@ -36462,10 +37150,10 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ jsxs17(Fragment11, {
+      return /* @__PURE__ */ jsxs19(Fragment11, {
         children: [
-          /* @__PURE__ */ jsx51(ComponentContainerContext.Consumer, { children: this.renderMain, },),
-          /* @__PURE__ */ jsx51(TextStyleSheet, {},),
+          /* @__PURE__ */ jsx58(ComponentContainerContext.Consumer, { children: this.renderMain, },),
+          /* @__PURE__ */ jsx58(TextStyleSheet, {},),
         ],
       },);
     }
@@ -36604,7 +37292,7 @@ function replaceDraftHTMLWithText(rawHTML, text,) {
     (_, openingTags, inlineClosingTag2, closingTags,) => openingTags + text + inlineClosingTag2 + '<br>' + closingTags,
   );
 }
-function convertVerticalAlignment(verticalAlignment,) {
+function convertVerticalAlignment2(verticalAlignment,) {
   switch (verticalAlignment) {
     case 'top':
       return 'flex-start';
@@ -36874,14 +37562,14 @@ function transformString(transform2,) {
 var LinearGradientElement = class extends Component12 {
   render() {
     const { id: id3, stops, x1, x2, y1, y2, } = this.props;
-    return /* @__PURE__ */ jsx52('linearGradient', {
+    return /* @__PURE__ */ jsx59('linearGradient', {
       id: id3,
       x1,
       x2,
       y1,
       y2,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx52('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+        return /* @__PURE__ */ jsx59('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
       },),
     },);
   }
@@ -36889,7 +37577,7 @@ var LinearGradientElement = class extends Component12 {
 var RadialGradientElement = class extends Component12 {
   render() {
     const { centerAnchorX, centerAnchorY, id: id3, widthFactor, heightFactor, stops, } = this.props;
-    return /* @__PURE__ */ jsx52(
+    return /* @__PURE__ */ jsx59(
       'radialGradient',
       {
         id: id3,
@@ -36900,7 +37588,7 @@ var RadialGradientElement = class extends Component12 {
           heightFactor / widthFactor
         }) translate(-${centerAnchorX}, -${centerAnchorY})`,
         children: stops.map((stop, idx,) => {
-          return /* @__PURE__ */ jsx52('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+          return /* @__PURE__ */ jsx59('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
         },),
       },
     );
@@ -36921,7 +37609,7 @@ var SVGRoot = class extends Component13 {
       transform: `translate(${fx}px, ${fy}px)`,
     };
     Layer.applyWillChange(this.props, svgStyle, false,);
-    return /* @__PURE__ */ jsx53(
+    return /* @__PURE__ */ jsx60(
       'svg',
       {
         width: '100%',
@@ -37061,21 +37749,21 @@ var Vector = /* @__PURE__ */ (() => {
       const currentName = target === 'PREVIEW' ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ jsx54(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
+        shapeReference = /* @__PURE__ */ jsx61(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ jsx54('clipPath', {
+          strokeClipPath = /* @__PURE__ */ jsx61('clipPath', {
             id: internalStrokeClipId.id,
-            children: /* @__PURE__ */ jsx54('use', { xlinkHref: internalShapeId.link, },),
+            children: /* @__PURE__ */ jsx61('use', { xlinkHref: internalShapeId.link, },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ jsx54('use', {
+          mainElement = /* @__PURE__ */ jsx61('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ jsx54(
+          strokeElement = /* @__PURE__ */ jsx61(
             'use',
             {
               xlinkHref: internalShapeId.link,
@@ -37086,7 +37774,7 @@ var Vector = /* @__PURE__ */ (() => {
             },
           );
         } else {
-          mainElement = /* @__PURE__ */ jsx54(
+          mainElement = /* @__PURE__ */ jsx61(
             'use',
             {
               xlinkHref: internalShapeId.link,
@@ -37100,7 +37788,7 @@ var Vector = /* @__PURE__ */ (() => {
         }
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ jsx54(
+        mainElement = /* @__PURE__ */ jsx61(
           motion.path,
           {
             ...{
@@ -37115,7 +37803,7 @@ var Vector = /* @__PURE__ */ (() => {
         );
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ jsx54(
+        ? /* @__PURE__ */ jsx61(
           ImagePatternElement,
           {
             ...imagePattern,
@@ -37125,13 +37813,13 @@ var Vector = /* @__PURE__ */ (() => {
         : void 0;
       let gradient;
       if (linearGradient) {
-        gradient = /* @__PURE__ */ jsx54(LinearGradientElement, { ...linearGradient, },);
+        gradient = /* @__PURE__ */ jsx61(LinearGradientElement, { ...linearGradient, },);
       } else if (radialGradient) {
-        gradient = /* @__PURE__ */ jsx54(RadialGradientElement, { ...radialGradient, },);
+        gradient = /* @__PURE__ */ jsx61(RadialGradientElement, { ...radialGradient, },);
       }
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
-        defs = /* @__PURE__ */ jsxs18('defs', {
+        defs = /* @__PURE__ */ jsxs20('defs', {
           children: [
             shapeReference,
             strokeClipPath,
@@ -37143,7 +37831,7 @@ var Vector = /* @__PURE__ */ (() => {
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ jsx54(
+        mainElement = /* @__PURE__ */ jsx61(
           motion.path,
           {
             ...{
@@ -37160,7 +37848,7 @@ var Vector = /* @__PURE__ */ (() => {
         return this.renderElement(mainElement,);
       }
       return this.renderElement(
-        /* @__PURE__ */ jsxs18(motion.g, {
+        /* @__PURE__ */ jsxs20(motion.g, {
           opacity: opacityValue,
           variants,
           transition,
@@ -37183,7 +37871,7 @@ var Vector = /* @__PURE__ */ (() => {
       if (includeTransform) {
         return element;
       }
-      return /* @__PURE__ */ jsx54(
+      return /* @__PURE__ */ jsx61(
         SVGRoot,
         {
           frame: frame2,
@@ -37275,7 +37963,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
         }
       }
       return this.renderElement(
-        /* @__PURE__ */ jsx55('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
+        /* @__PURE__ */ jsx62('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
       );
     }
     renderElement(element,) {
@@ -37286,7 +37974,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
       if (includeTransform) {
         return element;
       }
-      return /* @__PURE__ */ jsx55(
+      return /* @__PURE__ */ jsx62(
         SVGRoot,
         {
           frame: frame2,
@@ -37320,911 +38008,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
     },),
     _a;
 })();
-var _CanvasStore = class {
-  constructor() {
-    __publicField(this, 'canvas', { children: [], },);
-    __publicField(this, 'listeners', [],);
-    __publicField(this, 'ids', [],);
-  }
-  static shared(data2,) {
-    if (data2) {
-      const store = new _CanvasStore();
-      store.setCanvas(data2,);
-      return store;
-    }
-    if (!_CanvasStore.__shared) {
-      _CanvasStore.__shared = new _CanvasStore();
-    }
-    return _CanvasStore.__shared;
-  }
-  updateNode(presentationNode,) {
-    const id3 = presentationNode.props.id;
-    let children = this.canvas.children;
-    if (!children) {
-      this.canvas.children = children = [];
-    }
-    let found = false;
-    for (let i = 0; i < children.length; i++) {
-      const child = children[i];
-      if ((child == null ? void 0 : child.props.id) === id3) {
-        found = true;
-        children[i] = presentationNode;
-        break;
-      }
-    }
-    if (!found) {
-      children.push(presentationNode,);
-    }
-    this.setCanvas(this.canvas,);
-  }
-  setCanvas(canvas,) {
-    if (!canvas.children) {
-      return;
-    }
-    this.canvas = canvas;
-    this.listeners.forEach((l, at,) => {
-      const id3 = this.ids[at];
-      if (!id3) {
-        return;
-      }
-      const data2 = findNodeFor(canvas, id3,);
-      l.setState({ data: data2, },);
-    },);
-  }
-  registerListener(listener, idOrName,) {
-    this.listeners.push(listener,);
-    this.ids.push(idOrName,);
-    return findNodeFor(this.canvas, idOrName,);
-  }
-  removeListener(listener,) {
-    const at = this.listeners.indexOf(listener,);
-    if (at === -1) {
-      return;
-    }
-    this.listeners.splice(at, 1,);
-    this.ids.splice(at, 1,);
-  }
-};
-var CanvasStore = _CanvasStore;
-__publicField(CanvasStore, '__shared', null,);
-var builtInComponents = { Frame, Vector, Stack, VectorGroup, SVG, Text, DeprecatedComponentContainer, };
-var DesignComponent = class extends Component14 {
-  _typeForName(name,) {
-    const builtIn = asRecord(builtInComponents,)[name];
-    if (builtIn) {
-      return builtIn;
-    }
-    const codeComponent = runtime.componentLoader.componentForIdentifier(name,);
-    if (codeComponent && isReactDefinition(codeComponent,)) {
-      return codeComponent.class;
-    }
-    return Frame;
-  }
-  _renderData(presentation, componentProps, topLevelProps,) {
-    asRecord(safeWindow,)['__checkBudget__']();
-    const { componentClass, name, } = presentation;
-    let { props, children, } = presentation;
-    props = { ...props, _constraints: { enabled: false, }, };
-    const type = this._typeForName(componentClass,);
-    if (!type) {
-      return null;
-    }
-    if (topLevelProps) {
-      const { style, ...rest } = props;
-      props = { ...rest, ...topLevelProps, _initialStyle: style, };
-    }
-    if (!props.size && props._sizeOfMasterOnCanvas) {
-      if (!props.width) {
-        props.width = props._sizeOfMasterOnCanvas.width;
-      }
-      if (!props.height) {
-        props.height = props._sizeOfMasterOnCanvas.height;
-      }
-    }
-    if (name && componentProps.hasOwnProperty(name,)) {
-      if (componentClass === 'Text') {
-        const text = componentProps[name];
-        if (text) {
-          props = { ...props, text: componentProps[name], };
-        }
-      } else {
-        const orig = props.background;
-        const background = { src: componentProps[name], fit: orig.fit, };
-        props = { ...props, background, };
-      }
-    }
-    const c = children && children.map((child,) => this._renderData(child, componentProps, void 0,));
-    children = children ? c : [];
-    return React85.createElement(type, props, children,);
-  }
-  render() {
-    asRecord(safeWindow,)['__checkBudget__']();
-    const data2 = this.state.data;
-    if (!data2) {
-      throw new Error('Unable to connect to canvas data store.',);
-    }
-    return this._renderData(this.state.data, this.props, this.props,);
-  }
-};
-function isNode(id3, presentation,) {
-  const { name, props, } = presentation;
-  return props && props.id === id3 || name === id3;
-}
-function findNodeFor(presentation, id3,) {
-  if (!presentation) {
-    return null;
-  }
-  if (isNode(id3, presentation,)) {
-    return presentation;
-  }
-  const { children, } = presentation;
-  if (!children || !isArray(children,)) {
-    return null;
-  }
-  for (const child of children) {
-    if (isNode(id3, child,)) {
-      return child;
-    }
-  }
-  for (const child of children) {
-    const result = findNodeFor(child, id3,);
-    if (result) {
-      return result;
-    }
-  }
-  return null;
-}
-function createDesignComponent(canvasStore, id3, propertyControls, width = 200, height = 200,) {
-  var _a;
-  return _a = class extends DesignComponent {
-    static rect(props,) {
-      const constraintValues = ConstraintValues.fromProperties(props,);
-      const parentSizeInfo = props.parentSize ? { sizing: props.parentSize, positioning: props.parentSize, viewport: null, } : null;
-      return ConstraintValues.toRect(constraintValues, parentSizeInfo, null,);
-    }
-    static size(props, parentSize, freeSpace,) {
-      const constraintValues = ConstraintValues.fromProperties(props,);
-      return ConstraintValues.toSize(constraintValues, parentSize || null, null, freeSpace,);
-    }
-    constructor(props, context,) {
-      super(props, context,);
-      const data2 = canvasStore.registerListener(this, id3,);
-      this.state = { data: data2, };
-    }
-    render() {
-      const maybeRenderWithProvider = (renderNode,) => {
-        const nodeId = nodeIdFromString(id3,);
-        if (!this.state.data && renderNode) {
-          asRecord(safeWindow,)['__checkBudget__']();
-          const el = renderNode(nodeId,);
-          if (el && React85.isValidElement(el,) && typeof el.type !== 'string') {
-            return React85.createElement(WithOverride(el.type, this.props,), el.props,);
-          }
-        }
-        return super.render();
-      };
-      return /* @__PURE__ */ jsx56(RenderNodeContext.Consumer, { children: maybeRenderWithProvider, },);
-    }
-    componentWillUnmount() {
-      canvasStore.removeListener(this,);
-    }
-  },
-    __publicField(_a, 'displayName', `DesignComponent(${id3})`,),
-    __publicField(_a, 'propertyControls', propertyControls,),
-    __publicField(_a, 'supportsConstraints', true,),
-    __publicField(_a, 'defaultProps', {
-      _sizeOfMasterOnCanvas: {
-        width,
-        height,
-      },
-    },),
-    _a;
-}
-var RenderNodeContext = React85.createContext(null,);
-var RenderNodeProvider = RenderNodeContext.Provider;
-var localPackageFallbackIdentifier = '|local|';
-function CustomProperties({
-  children,
-  customProperties,
-},) {
-  return /* @__PURE__ */ jsx57('div', { style: customProperties, children, },);
-}
-var FormButton = /* @__PURE__ */ React86.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
-  const { style: baseStyle2, } = props;
-  const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
-  return /* @__PURE__ */ jsx58(motion.input, { type, ref, style, value, },);
-},);
-function mergeWithDefaultStyle(style,) {
-  return {
-    display: 'block',
-    padding: '12px',
-    fontSize: '14px',
-    width: '100%',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    background: '#222',
-    color: '#fff',
-    borderRadius: '10px',
-    border: '1px solid rgba(0,0,0,0.05)',
-    ...style,
-  };
-}
-var FormContainer = ({ action, formId, ...props },) => {
-  const handleSubmit = async (event,) => {
-    event.preventDefault();
-    const data2 = new FormData(event.currentTarget,);
-    for (const [key7, value,] of data2) {
-      if (value instanceof File) {
-        data2.delete(key7,);
-      }
-    }
-    try {
-      await fetch(action, { body: data2, method: 'POST', },);
-    } catch (error) {
-    }
-  };
-  return /* @__PURE__ */ jsx59(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: props.children, },);
-};
-var passwordManagerIgnoreDataProps = {
-  // 1Password
-  'data-1p-ignore': true,
-  // LastPass
-  'data-lpignore': true,
-};
-var sensibleInputDefaults = {
-  autocomplete: 'off',
-};
-var labelStyles = {
-  display: 'block',
-  marginBottom: 8,
-  width: '100%',
-  textTransform: 'capitalize',
-};
-var inputClassName = 'framer-form-input';
-var labelClassName = 'framer-form-label';
-var PlainTextInput = /* @__PURE__ */ React87.forwardRef(function FormPlainTextInput(props, ref,) {
-  const dataProps = {
-    ...sensibleInputDefaults,
-    ...passwordManagerIgnoreDataProps,
-  };
-  const baseWrapperStyle = {
-    width: '100%',
-  };
-  const isHiddenInput = props.type === 'hidden';
-  const baseStyle2 = {
-    height: props.height,
-    width: props.width,
-    ...props.style,
-  };
-  const input = /* @__PURE__ */ jsx60(
-    motion.input,
-    {
-      id: props.inputName,
-      ...dataProps,
-      type: props.type,
-      ref,
-      required: props.required,
-      autoFocus: props.autoFocus,
-      name: props.inputName,
-      style: baseStyle2,
-      placeholder: props.placeholder,
-      className: cx(props.className, inputClassName,),
-    },
-  );
-  if (isHiddenInput) {
-    return input;
-  }
-  if (props.label) {
-    return /* @__PURE__ */ jsx60(motion.div, {
-      style: { ...baseWrapperStyle, ...props.style, },
-      children: /* @__PURE__ */ jsxs19('label', {
-        htmlFor: props.inputName,
-        style: baseWrapperStyle,
-        children: [
-          /* @__PURE__ */ jsx60('span', { style: labelStyles, className: labelClassName, children: props.label, },),
-          input,
-        ],
-      },),
-    },);
-  }
-  return /* @__PURE__ */ jsx60(motion.div, { style: { ...baseWrapperStyle, ...props.style, }, children: input, },);
-},);
-var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
-  `.${inputClassName} {
-        padding: var(${'--framer-input-padding'});
-        border-radius: var(${'--framer-input-border-radius'});
-        border-color: var(${'--framer-input-border-color'});
-        border-width: var(${'--framer-input-border-width'});
-        border-style: var(${'--framer-input-border-style'});
-        background: var(${'--framer-input-background'});
-        font-family: var(${'--framer-input-font-family'});
-        font-weight: var(${'--framer-input-font-weight'});
-        font-size: var(${'--framer-input-font-size'});
-        color: var(${'--framer-input-font-color'});
-    }`,
-  `.${inputClassName}::placeholder {
-        color: var(${'--framer-input-placeholder-color'});
-    }`,
-  `.${labelClassName} {
-        font-family: var(${'--framer-input-label-font-family'});
-        font-weight: var(${'--framer-input-label-font-weight'});
-        font-size: var(${'--framer-input-label-font-size'});
-        color: var(${'--framer-input-label-font-color'});
-    }`,
-],);
-var Image2 = /* @__PURE__ */ React88.forwardRef(function Image3(props, ref,) {
-  const { background, children, alt, ...rest } = props;
-  const style = { ...rest.style, };
-  if (background) {
-    delete style.background;
-  }
-  const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ jsxs20(MotionComponent, {
-    ...rest,
-    style,
-    ref,
-    children: [
-      background && /* @__PURE__ */ jsx61(BackgroundImageComponent, { image: background, alt, },),
-      children,
-    ],
-  },);
-},);
-function convertPresentationTree(node, converter, componentDefinitionProvider, getCachedNode, skipCodeComponentPropsCache = false,) {
-  const cachedNode = getCachedNode && getCachedNode(node,);
-  if (cachedNode) {
-    return cachedNode;
-  }
-  let children;
-  if (isCodeComponentContainerPresentation(node,)) {
-    children = convertCodeComponentContainer(
-      componentDefinitionProvider,
-      node,
-      converter,
-      getCachedNode,
-      skipCodeComponentPropsCache,
-    );
-  } else if (node.children) {
-    children = node.children.map(
-      (n,) =>
-        convertPresentationTree(
-          n,
-          converter,
-          componentDefinitionProvider,
-          getCachedNode,
-          skipCodeComponentPropsCache,
-        ),
-    );
-  }
-  return converter(node, children,);
-}
-function isCodeComponentContainerPresentation(value,) {
-  return !!value.codeComponentIdentifier;
-}
-function convertCodeComponentContainer(componentDefinitionProvider, node, converter, getCachedNode, skipCodeComponentPropsCache = false,) {
-  var _a;
-  const codeComponentChildren = node.getComponentChildren ? node.getComponentChildren(componentDefinitionProvider,) : [];
-  const codeComponentSlots = node.getComponentSlotChildren ? node.getComponentSlotChildren(componentDefinitionProvider,) : {};
-  let codeComponentPresentation;
-  const props = node.getCodeComponentProps
-    ? node.getCodeComponentProps(componentDefinitionProvider, { skipCache: skipCodeComponentPropsCache, },)
-    : void 0;
-  if (node.cache.codeComponentPresentation) {
-    codeComponentPresentation = node.cache.codeComponentPresentation;
-    if (!isShallowEqualArray(codeComponentPresentation.children, codeComponentChildren,)) {
-      codeComponentPresentation.cache.reactElement = null;
-      codeComponentPresentation.children = codeComponentChildren;
-    }
-    if (!isEqual(codeComponentPresentation.props, props,)) {
-      codeComponentPresentation.cache.reactElement = null;
-      codeComponentPresentation.cache.props = null;
-      codeComponentPresentation.props = props;
-    }
-  } else {
-    const { id: containerId, codeComponentIdentifier: identifier, codeComponentPackageVersion, } = node;
-    node.cache.codeComponentPresentation = codeComponentPresentation = new CodeComponentPresentation(
-      containerId + identifier,
-      identifier,
-      codeComponentPackageVersion,
-      props,
-      codeComponentChildren,
-    );
-  }
-  codeComponentPresentation.props.placeholders = node.cache.placeholders;
-  const slotKeys = Object.keys(codeComponentSlots,);
-  if (slotKeys.length) {
-    codeComponentPresentation.props = { ...codeComponentPresentation.props, };
-    codeComponentPresentation.props.__slotKeys = slotKeys;
-    for (const slotKey of slotKeys) {
-      const slotChildren = (_a = codeComponentSlots[slotKey]) == null ? void 0 : _a.map(
-        (child,) =>
-          convertPresentationTree(
-            child,
-            converter,
-            componentDefinitionProvider,
-            getCachedNode,
-            skipCodeComponentPropsCache,
-          ),
-      );
-      codeComponentPresentation.props[slotKey] = slotChildren;
-    }
-  }
-  return [
-    converter(
-      codeComponentPresentation,
-      codeComponentPresentation.children.map(
-        (child,) =>
-          convertPresentationTree(
-            child,
-            converter,
-            componentDefinitionProvider,
-            getCachedNode,
-            skipCodeComponentPropsCache,
-          ),
-      ),
-    ),
-  ];
-}
-var CodeComponentPresentation = class {
-  constructor(id3, componentIdentifier, packageVersion, props, children, codeOverrideIdentifier,) {
-    this.id = id3;
-    this.componentIdentifier = componentIdentifier;
-    this.packageVersion = packageVersion;
-    this.props = props;
-    this.children = children;
-    this.codeOverrideIdentifier = codeOverrideIdentifier;
-    __publicField(this, 'cache', {},);
-  }
-  getProps() {
-    return {
-      ...this.props,
-      id: this.id,
-      key: this.id,
-    };
-  }
-  rect(_parentSizeInfo,) {
-    return { x: 0, y: 0, width: 0, height: 0, };
-  }
-};
-var htmlEscapes = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  '\'': '&#39;',
-};
-var reUnescapedHtml = /[&<>"']/g;
-var reHasUnescapedHtml = RegExp(reUnescapedHtml.source,);
-function escapeHTML2(str,) {
-  return str && reHasUnescapedHtml.test(str,) ? str.replace(reUnescapedHtml, (chr,) => htmlEscapes[chr] ?? '',) : str || '';
-}
-var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
-var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React89.forwardRef(
-  function Text3(props, forwardedRef,) {
-    const {
-      id: id3,
-      name,
-      html,
-      htmlFromDesign,
-      text,
-      textFromDesign,
-      fonts = [],
-      width,
-      height,
-      left,
-      right,
-      top,
-      bottom,
-      center,
-      className,
-      stylesPresetsClassName,
-      visible = true,
-      opacity,
-      rotation = 0,
-      verticalAlignment = 'top',
-      isEditable = false,
-      willChangeTransform,
-      environment: environment2 = RenderTarget.current,
-      withExternalLayout = false,
-      positionSticky,
-      positionStickyTop,
-      positionStickyRight,
-      positionStickyBottom,
-      positionStickyLeft,
-      __htmlStructure,
-      __fromCanvasComponent = false,
-      _forwardedOverrideId,
-      _forwardedOverrides,
-      _usesDOMRect,
-      children,
-      ...rest
-    } = props;
-    const parentSize = useParentSize();
-    const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef17(null,);
-    const layoutRef = forwardedRef ?? fallbackLayoutRef;
-    const { navigate, getRoute, } = useRouter();
-    const currentRoute = useCurrentRoute();
-    useRoutePreloader(props.preload ?? [],);
-    useMeasureLayout(props, layoutRef,);
-    const inCodeComponent = React89.useContext(ComponentContainerContext,);
-    const isOnCanvas = useIsOnFramerCanvas();
-    let textOrOverride = text;
-    const forwardedOverrideId = _forwardedOverrideId ?? id3;
-    if (forwardedOverrideId && _forwardedOverrides) {
-      const override = _forwardedOverrides[forwardedOverrideId];
-      if (typeof override === 'string') {
-        textOrOverride = override;
-      }
-    }
-    let innerHTML = '';
-    if (textOrOverride) {
-      const escapedText = escapeHTML2(textOrOverride,);
-      innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
-    } else if (html) {
-      innerHTML = html;
-    } else if (textFromDesign) {
-      const escapedText = escapeHTML2(textFromDesign,);
-      innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
-    } else if (htmlFromDesign) {
-      innerHTML = htmlFromDesign;
-    }
-    const implicitPathVariables = useImplicitPathVariables();
-    const innerHTMLWithReplacedFramerPageLinks = React89.useMemo(() => {
-      if (isOnCanvas || !getRoute || !currentRoute) {
-        return innerHTML;
-      }
-      return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
-    }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-    React89.useEffect(() => {
-      const container = layoutRef.current;
-      if (container === null) {
-        return;
-      }
-      function interceptPageLinks(event,) {
-        const anchorElement = findAnchorElement(event.target, layoutRef.current,);
-        if (event.metaKey || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
-          return;
-        }
-        const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
-        if (didNavigate) {
-          event.preventDefault();
-        }
-      }
-      container.addEventListener('click', interceptPageLinks,);
-      return () => {
-        container.removeEventListener('click', interceptPageLinks,);
-      };
-    }, [navigate, implicitPathVariables,],);
-    useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-    React89.useInsertionEffect(() => {
-      injectComponentCSSRules();
-    }, [],);
-    if (!visible) {
-      return null;
-    }
-    const isHidden2 = isEditable && environment2() === 'CANVAS';
-    const style = {
-      outline: 'none',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: convertVerticalAlignment2(verticalAlignment,),
-      opacity: isHidden2 ? 0 : opacity,
-      flexShrink: 0,
-    };
-    const restrictedRenderTarget = RenderTarget.hasRestrictions();
-    const frame2 = calculateRect(props, parentSize || 0, false,);
-    const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
-    const hasTransformTemplate = !!props.transformTemplate || !frame2 || !restrictedRenderTarget || __fromCanvasComponent || isAutoSized2;
-    const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
-    if (!withExternalLayout) {
-      if (frame2 && restrictedRenderTarget && !isAutoSized2) {
-        const rotate = Animatable.getNumber(rotation,).toFixed(4,);
-        style.transform = `translate(${frame2.x}px, ${frame2.y}px) rotate(${rotate}deg)`;
-        style.width = frame2.width;
-        style.minWidth = frame2.width;
-        style.height = frame2.height;
-      } else {
-        style.left = left;
-        style.right = right;
-        style.top = top;
-        style.bottom = bottom;
-        style.width = width;
-        style.height = height;
-        style.rotate = rotation;
-      }
-      if (positionSticky) {
-        if (!isOnCanvas || inCodeComponent) {
-          style.position = 'sticky';
-          style.willChange = 'transform';
-          style.zIndex = 1;
-          style.top = positionStickyTop;
-          style.right = positionStickyRight;
-          style.bottom = positionStickyBottom;
-          style.left = positionStickyLeft;
-        }
-      } else if (isOnCanvas && (props.positionFixed || props.positionAbsolute)) {
-        style.position = 'absolute';
-      }
-    }
-    collectFiltersFromProps(props, style,);
-    collectTextShadowsForProps(props, style,);
-    if (willChangeTransform) {
-      forceLayerBackingWithCSSProperties(style,);
-    }
-    Object.assign(style, props.style,);
-    return /* @__PURE__ */ jsx62(
-      motion.div,
-      {
-        id: id3,
-        ref: layoutRef,
-        ...rest,
-        style,
-        layoutId,
-        'data-framer-name': name,
-        'data-framer-component-type': 'DeprecatedRichText',
-        'data-center': center,
-        className: cx(className, stylesPresetsClassName, richTextWrapperClassName,),
-        transformTemplate: template,
-        dangerouslySetInnerHTML: { __html: innerHTMLWithReplacedFramerPageLinks, },
-      },
-    );
-  },
-);
-function convertVerticalAlignment2(verticalAlignment,) {
-  switch (verticalAlignment) {
-    case 'top':
-      return 'flex-start';
-    case 'center':
-      return 'center';
-    case 'bottom':
-      return 'flex-end';
-  }
-}
-function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef17([],);
-  if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
-    prevFontsRef.current = fonts;
-    fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
-      if (!fromCanvasComponent || !containerRef.current || RenderTarget.current() !== 'CANVAS') {
-        return;
-      }
-      if (newlyLoadedFontCount > 0) {
-        measureClosestComponentContainer(containerRef.current,);
-      }
-    },);
-  }
-}
-var FitText = /* @__PURE__ */ forwardRef52(
-  ({ viewBoxScale, viewBox, children, ...props }, ref,) => {
-    return /* @__PURE__ */ jsx63(motion.svg, {
-      ref,
-      ...props,
-      viewBox,
-      children: /* @__PURE__ */ jsx63(
-        motion.foreignObject,
-        {
-          width: '100%',
-          height: '100%',
-          className: 'framer-fit-text',
-          transform: `scale(${viewBoxScale})`,
-          style: { overflow: 'visible', transformOrigin: 'center center', },
-          children,
-        },
-      ),
-    },);
-  },
-);
-var RichTextContainer = /* @__PURE__ */ forwardRef52(
-  (props, ref,) => {
-    const {
-      __fromCanvasComponent = false,
-      _forwardedOverrideId,
-      _forwardedOverrides,
-      _usesDOMRect,
-      as,
-      bottom,
-      center,
-      children,
-      environment: environment2 = RenderTarget.current,
-      fonts = [],
-      height,
-      isEditable = false,
-      left,
-      name,
-      opacity,
-      positionSticky,
-      positionStickyBottom,
-      positionStickyLeft,
-      positionStickyRight,
-      positionStickyTop,
-      right,
-      rotation = 0,
-      style,
-      _initialStyle,
-      stylesPresetsClassNames,
-      text: plainText,
-      top,
-      verticalAlignment = 'top',
-      visible = true,
-      width,
-      willChangeTransform,
-      withExternalLayout = false,
-      viewBox,
-      viewBoxScale = 1,
-      ...rest
-    } = props;
-    const parentSize = useParentSize();
-    const isOnCanvas = useIsOnFramerCanvas();
-    const inCodeComponent = useContext162(ComponentContainerContext,);
-    const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef18(null,);
-    const containerRef = ref ?? fallbackRef;
-    useMeasureLayout(props, containerRef,);
-    useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
-    useInsertionEffect42(() => {
-      injectComponentCSSRules();
-    }, [],);
-    if (!visible) {
-      return null;
-    }
-    const isHidden2 = isEditable && environment2() === 'CANVAS';
-    const containerStyle = {
-      outline: 'none',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: convertVerticalAlignment2(verticalAlignment,),
-      opacity: isHidden2 ? 0 : opacity,
-      flexShrink: 0,
-    };
-    const restrictedRenderTarget = RenderTarget.hasRestrictions();
-    const frame2 = calculateRect(props, parentSize || 0, false,);
-    const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
-    const hasTransformTemplate = !!props.transformTemplate || !frame2 || !restrictedRenderTarget || __fromCanvasComponent || isAutoSized2;
-    const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
-    if (!withExternalLayout) {
-      if (frame2 && restrictedRenderTarget && !isAutoSized2) {
-        containerStyle.x = frame2.x;
-        containerStyle.y = frame2.y;
-        containerStyle.rotate = Animatable.getNumber(rotation,);
-        containerStyle.width = frame2.width;
-        containerStyle.minWidth = frame2.width;
-        containerStyle.height = frame2.height;
-      } else {
-        containerStyle.left = left;
-        containerStyle.right = right;
-        containerStyle.top = top;
-        containerStyle.bottom = bottom;
-        containerStyle.width = width;
-        containerStyle.height = height;
-        containerStyle.rotate = rotation;
-      }
-      if (positionSticky) {
-        if (!isOnCanvas || inCodeComponent) {
-          containerStyle.position = 'sticky';
-          containerStyle.willChange = 'transform';
-          containerStyle.zIndex = 1;
-          containerStyle.top = positionStickyTop;
-          containerStyle.right = positionStickyRight;
-          containerStyle.bottom = positionStickyBottom;
-          containerStyle.left = positionStickyLeft;
-        }
-      } else if (isOnCanvas && (props.positionFixed || props.positionAbsolute)) {
-        containerStyle.position = 'absolute';
-      }
-    }
-    collectFiltersFromProps(props, containerStyle,);
-    collectTextShadowsForProps(props, containerStyle,);
-    if (willChangeTransform) {
-      forceLayerBackingWithCSSProperties(containerStyle,);
-    }
-    Object.assign(containerStyle, _initialStyle, style,);
-    if (layoutId) {
-      rest.layout = 'preserve-aspect';
-    }
-    const Component15 = htmlElementAsMotionComponent(props.as,);
-    if (isString22(props.viewBox,)) {
-      if (props.as !== void 0) {
-        return /* @__PURE__ */ jsx63(
-          Component15,
-          {
-            ...rest,
-            ref: containerRef,
-            style: containerStyle,
-            layoutId,
-            transformTemplate: template,
-            'data-framer-name': name,
-            'data-framer-component-type': 'RichTextContainer',
-            children: /* @__PURE__ */ jsx63(
-              FitText,
-              {
-                viewBox,
-                viewBoxScale,
-                style: { width: '100%', height: '100%', },
-                children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
-              },
-            ),
-          },
-        );
-      } else {
-        return /* @__PURE__ */ jsx63(
-          FitText,
-          {
-            ...rest,
-            ref: containerRef,
-            style: containerStyle,
-            layoutId,
-            viewBox,
-            viewBoxScale,
-            transformTemplate: template,
-            'data-framer-name': name,
-            'data-framer-component-type': 'RichTextContainer',
-            children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
-          },
-        );
-      }
-    }
-    return /* @__PURE__ */ jsx63(
-      Component15,
-      {
-        ...rest,
-        ref: containerRef,
-        style: containerStyle,
-        layoutId,
-        transformTemplate: template,
-        'data-framer-name': name,
-        'data-framer-component-type': 'RichTextContainer',
-        children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
-      },
-    );
-  },
-);
-function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
-  let children = Children32.toArray(element.props.children,);
-  if (isString22(plainText,)) {
-    children = children.slice(0, 1,);
-  }
-  children = children.map((child,) => {
-    if (isValidElement32(child,)) {
-      return styleRichTextChildren(child, stylesPresetsClassNames, plainText,);
-    }
-    if (isString22(plainText,)) {
-      return plainText;
-    }
-    return child;
-  },);
-  const { ['data-preset-tag']: dataPresetTag, ...props } = element.props;
-  if (isString22(element.type,) || isMotionComponent(element.type,)) {
-    const tag = dataPresetTag || unwrapMotionComponent(element.type,) || element.type;
-    const stylesPresetClassName = isString22(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
-    props.className = cx('framer-text', props.className, stylesPresetClassName,);
-  }
-  return cloneElement32(element, props, ...children,);
-}
-var RichText = /* @__PURE__ */ forwardRef52(
-  ({ children, html, htmlFromDesign, ...props }, ref,) => {
-    const content = html || children || htmlFromDesign;
-    if (isString22(content,)) {
-      if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
-        props.stylesPresetsClassName = Object.values(props.stylesPresetsClassNames,).join(' ',);
-      }
-      const contentProp = {
-        // We need to use the original prop name.
-        [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
-      };
-      return /* @__PURE__ */ jsx63(DeprecatedRichText, { ...props, ...contentProp, ref, },);
-    }
-    if (!props.stylesPresetsClassNames && isString22(props.stylesPresetsClassName,)) {
-      const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
-      if (h1 === void 0 || h2 === void 0 || h3 === void 0 || p === void 0 || a === void 0) {
-        console.warn(`Encountered invalid stylesPresetsClassNames: ${props.stylesPresetsClassNames}`,);
-      } else {
-        props.stylesPresetsClassNames = { h1, h2, h3, p, a, };
-      }
-    }
-    return /* @__PURE__ */ jsx63(RichTextContainer, { ...props, ref, children: isValidElement32(content,) ? content : void 0, },);
-  },
-);
 var key6 = 'calculatedPaths';
 function withShape(target,) {
   return key6 in target;
@@ -38620,7 +38403,7 @@ var package_default = {
     eventemitter3: '^3.1.0',
     fontfaceobserver: '^2.1.0',
     'hoist-non-react-statics': '^3.3.2',
-    hsluv: '^0.0.3',
+    hsluv: '^1.0.1',
   },
   devDependencies: {
     '@microsoft/api-extractor': '^7.42.3',
@@ -38629,7 +38412,6 @@ var package_default = {
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
     '@types/google.fonts': '1.0.3',
-    '@types/hsluv': 'https://github.com/framer/typed_hsluv#bump',
     '@types/node': '^18.17.15',
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
@@ -38722,7 +38504,6 @@ export {
   callEach,
   cancelFrame,
   cancelSync,
-  CanvasStore,
   checkTargetForNewValues,
   circIn,
   circInOut,
@@ -38749,7 +38530,6 @@ export {
   convertPropsToDeviceOptions,
   createBox,
   createData,
-  createDesignComponent,
   createDomMotionComponent,
   createFramerPageLink,
   createMotionComponent,
@@ -38921,7 +38701,6 @@ export {
   RadialGradient,
   Rect,
   removeHiddenBreakpointLayers,
-  RenderNodeProvider,
   RenderTarget,
   Reorder,
   resolveLink,
@@ -38954,7 +38733,7 @@ export {
   SwitchLayoutGroupContext,
   sync,
   systemFontFamilyName,
-  Text,
+  Text2 as Text,
   throttle,
   toFlexDirection,
   toJustifyOrAlignment,
