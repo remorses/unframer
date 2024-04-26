@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  unframer: workspace:*
+
 importers:
 
   .:
@@ -48,8 +51,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
       framer-motion:
-        specifier: npm:unframer@workspace
-        version: link:../unframer
+        specifier: npm:unframer
+        version: unframer@2.2.1(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(undici@6.13.0)
       next:
         specifier: 14.2.1
         version: 14.2.1(@opentelemetry/api@1.8.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -118,7 +121,7 @@ importers:
         version: 1.0.0
       real-framer-motion:
         specifier: npm:framer-motion@11.0.14
-        version: framer-motion@11.0.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: framer-motion@11.0.14(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       tmp:
         specifier: ^0.2.1
         version: 0.2.1
@@ -136,11 +139,11 @@ importers:
         specifier: ^0.16.6
         version: 0.16.6
       react:
-        specifier: ^18.2.0
-        version: 18.2.0
+        specifier: ^18.3.0
+        version: 18.3.0
       react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        specifier: ^18.3.0
+        version: 18.3.0(react@18.3.0)
 
 packages:
 
@@ -1999,11 +2002,20 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
+  react-dom@18.3.0:
+    resolution: {integrity: sha512-zaKdLBftQJnvb7FtDIpZtsAIb2MZU087RM8bRDZU8LVCCFYjPTsDZJNFUWPcVz3HFSN1n/caxi0ca4B/aaVQGQ==}
+    peerDependencies:
+      react: ^18.3.0
+
   react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
   react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+    engines: {node: '>=0.10.0'}
+
+  react@18.3.0:
+    resolution: {integrity: sha512-RPutkJftSAldDibyrjuku7q11d3oy6wKOyPe5K1HA/HwwrXcEqBdHsLypkC2FFYjP7bPUa6gbzSBhw4sY2JcDg==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -2081,6 +2093,9 @@ packages:
 
   scheduler@0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
+
+  scheduler@0.23.1:
+    resolution: {integrity: sha512-5GKS5JGfiah1O38Vfa9srZE4s3wdHbwjlCrvIookrg2FO9aIwKLOJXuJQFlEfNcVSOXuaL2hzDeY20uVXcUtrw==}
 
   semver@5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -2358,6 +2373,14 @@ packages:
   undici@6.13.0:
     resolution: {integrity: sha512-Q2rtqmZWrbP8nePMq7mOJIN98M0fYvSgV89vwl/BQRT4mDOeY2GXZngfGpcBBhtky3woM7G24wZV3Q304Bv6cw==}
     engines: {node: '>=18.0'}
+
+  unframer@2.2.1:
+    resolution: {integrity: sha512-6vPiOM7ZAg7Oq94CV/GeuYsgjJW2hRGnVLkrppO1O4Rh8Rje9yS0btn+rWGhT1XhZfWJCOWHjcnQfmt+toajZQ==}
+    hasBin: true
+    peerDependencies:
+      '@types/react': '*'
+      react: '*'
+      react-dom: '*'
 
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -3781,6 +3804,13 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
+  framer-motion@11.0.14(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+    dependencies:
+      tslib: 2.6.2
+    optionalDependencies:
+      react: 18.3.0
+      react-dom: 18.3.0(react@18.3.0)
+
   fs-extra@10.1.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -4449,9 +4479,19 @@ snapshots:
       react: 18.2.0
       scheduler: 0.23.0
 
+  react-dom@18.3.0(react@18.3.0):
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.3.0
+      scheduler: 0.23.1
+
   react-is@18.2.0: {}
 
   react@18.2.0:
+    dependencies:
+      loose-envify: 1.4.0
+
+  react@18.3.0:
     dependencies:
       loose-envify: 1.4.0
 
@@ -4553,6 +4593,10 @@ snapshots:
   sax@1.3.0: {}
 
   scheduler@0.23.0:
+    dependencies:
+      loose-envify: 1.4.0
+
+  scheduler@0.23.1:
     dependencies:
       loose-envify: 1.4.0
 
@@ -4830,6 +4874,31 @@ snapshots:
       '@fastify/busboy': 2.1.1
 
   undici@6.13.0: {}
+
+  unframer@2.2.1(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(undici@6.13.0):
+    dependencies:
+      '@types/react': 18.2.66
+      async-sema: 3.1.1
+      cac: 6.7.14
+      chokidar: 3.5.3
+      dedent: 1.5.1
+      dprint-node: 1.0.8
+      esbuild: 0.20.2
+      esbuild-plugin-polyfill-node: 0.3.0(esbuild@0.20.2)
+      eventemitter3: 3.1.2
+      find-up: 5.0.0
+      fs-extra: 11.1.1
+      json5: 2.2.3
+      native-fetch: 4.0.2(undici@6.13.0)
+      picocolors: 1.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      real-framer-motion: framer-motion@11.0.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      tmp: 0.2.1
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - babel-plugin-macros
+      - undici
 
   universalify@0.1.2: {}
 

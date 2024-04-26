@@ -13,7 +13,7 @@
         "@types/react": "18.2.66",
         "@types/react-dom": "18.2.22",
         "autoprefixer": "10.4.14",
-        "framer-motion": "npm:unframer@workspace",
+        "framer-motion": "npm:unframer",
         "next": "14.2.1",
         "postcss": "8.4.24",
         "react": "18.2.0",
