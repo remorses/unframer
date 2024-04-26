@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.OWVTYCFZ.js
+// https :https://app.framerstatic.com/framer.LSNNSQ5X.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9277,29 +9277,30 @@ import React81 from 'react';
 import { jsx as jsx49, } from 'react/jsx-runtime';
 import React822 from 'react';
 import { jsx as jsx50, } from 'react/jsx-runtime';
-import { jsx as jsx51, } from 'react/jsx-runtime';
 import React83 from 'react';
+import { jsx as jsx51, } from 'react/jsx-runtime';
+import React84, { useContext as useContext152, } from 'react';
 import { jsx as jsx52, jsxs as jsxs16, } from 'react/jsx-runtime';
-import React84 from 'react';
+import React85 from 'react';
 import { jsx as jsx53, jsxs as jsxs17, } from 'react/jsx-runtime';
 import {
   Children as Children32,
   cloneElement as cloneElement32,
   forwardRef as forwardRef52,
   isValidElement as isValidElement32,
-  useContext as useContext162,
+  useContext as useContext172,
   useInsertionEffect as useInsertionEffect42,
   useRef as useRef17,
 } from 'react';
-import * as React85 from 'react';
+import * as React86 from 'react';
 import { useRef as useRef16, } from 'react';
 import { jsx as jsx54, } from 'react/jsx-runtime';
 import { jsx as jsx55, } from 'react/jsx-runtime';
-import React86 from 'react';
+import React87 from 'react';
 import { jsx as jsx56, } from 'react/jsx-runtime';
 import { Fragment as Fragment10, jsx as jsx57, jsxs as jsxs18, } from 'react/jsx-runtime';
-import React88, { useEffect as useEffect142, useRef as useRef18, } from 'react';
-import React87 from 'react';
+import React89, { useEffect as useEffect142, useRef as useRef18, } from 'react';
+import React88 from 'react';
 import { Fragment as Fragment11, jsx as jsx58, jsxs as jsxs19, } from 'react/jsx-runtime';
 import { Component as Component12, } from 'react';
 import { jsx as jsx59, } from 'react/jsx-runtime';
@@ -16610,6 +16611,7 @@ var richTextCSSRules = [
   `
         .framer-fit-text .framer-text {
             white-space: nowrap;
+            white-space-collapse: preserve;
         }
     `,
   /* css */
@@ -35330,6 +35332,9 @@ function mergeWithDefaultStyle(style,) {
     ...style,
   };
 }
+var FormContainerContext = React83.createContext({
+  hideInputLabel: false,
+},);
 var FormContainer = ({ action, formId, ...props },) => {
   const handleSubmit = async (event,) => {
     event.preventDefault();
@@ -35344,7 +35349,15 @@ var FormContainer = ({ action, formId, ...props },) => {
     } catch (error) {
     }
   };
-  return /* @__PURE__ */ jsx51(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: props.children, },);
+  return /* @__PURE__ */ jsx51(motion.form, {
+    ...props,
+    'data-formid': formId,
+    onSubmit: handleSubmit,
+    children: /* @__PURE__ */ jsx51(FormContainerContext.Provider, {
+      value: { hideInputLabel: props.hideInputLabels, },
+      children: props.children,
+    },),
+  },);
 };
 var passwordManagerIgnoreDataProps = {
   // 1Password
@@ -35356,59 +35369,55 @@ var sensibleInputDefaults = {
   autocomplete: 'off',
 };
 var labelStyles = {
-  display: 'block',
+  display: 'flex',
+  flexDirection: 'column',
   marginBottom: 8,
-  width: '100%',
-  textTransform: 'capitalize',
 };
 var inputClassName = 'framer-form-input';
 var labelClassName = 'framer-form-label';
-var PlainTextInput = /* @__PURE__ */ React83.forwardRef(function FormPlainTextInput(props, ref,) {
+var PlainTextInput = /* @__PURE__ */ React84.forwardRef(function FormPlainTextInput(props, ref,) {
+  const { style, inputName, label, type, required, autoFocus, placeholder, ...rest } = props;
+  const { hideInputLabel, } = useContext152(FormContainerContext,);
   const dataProps = {
     ...sensibleInputDefaults,
     ...passwordManagerIgnoreDataProps,
   };
   const baseWrapperStyle = {
-    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   };
-  const isHiddenInput = props.type === 'hidden';
+  const isHiddenInput = type === 'hidden';
   const baseStyle2 = {
-    height: props.height,
-    width: props.width,
-    ...props.style,
+    width: '100%',
+    flexGrow: 1,
   };
   const input = /* @__PURE__ */ jsx52(
     motion.input,
     {
-      id: props.inputName,
+      id: inputName,
       ...dataProps,
-      type: props.type,
-      ref,
-      required: props.required,
-      autoFocus: props.autoFocus,
-      name: props.inputName,
+      type,
+      required,
+      autoFocus,
+      name: inputName,
       style: baseStyle2,
-      placeholder: props.placeholder,
-      className: cx(props.className, inputClassName,),
+      placeholder,
+      className: inputClassName,
     },
   );
   if (isHiddenInput) {
     return input;
   }
-  if (props.label) {
-    return /* @__PURE__ */ jsx52(motion.div, {
-      style: { ...baseWrapperStyle, ...props.style, },
-      children: /* @__PURE__ */ jsxs16('label', {
-        htmlFor: props.inputName,
-        style: baseWrapperStyle,
-        children: [
-          /* @__PURE__ */ jsx52('span', { style: labelStyles, className: labelClassName, children: props.label, },),
-          input,
-        ],
-      },),
-    },);
-  }
-  return /* @__PURE__ */ jsx52(motion.div, { style: { ...baseWrapperStyle, ...props.style, }, children: input, },);
+  return /* @__PURE__ */ jsxs16(motion.div, {
+    ref,
+    style: { ...baseWrapperStyle, ...style, },
+    ...rest,
+    children: [
+      label && !hideInputLabel && /* @__PURE__ */
+      jsx52('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
+      input,
+    ],
+  },);
 },);
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
   `.${inputClassName} {
@@ -35433,7 +35442,7 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         color: var(${'--framer-input-label-font-color'});
     }`,
 ],);
-var Image2 = /* @__PURE__ */ React84.forwardRef(function Image3(props, ref,) {
+var Image2 = /* @__PURE__ */ React85.forwardRef(function Image3(props, ref,) {
   const { background, children, alt, ...rest } = props;
   const style = { ...rest.style, };
   if (background) {
@@ -35646,7 +35655,7 @@ function escapeHTML2(str,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React85.forwardRef(
+var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
   function Text(props, forwardedRef,) {
     const {
       id: id3,
@@ -35694,7 +35703,7 @@ var DeprecatedRichText = /* @__PURE__ */ React85.forwardRef(
     const currentRoute = useCurrentRoute();
     useRoutePreloader(props.preload ?? [],);
     useMeasureLayout(props, layoutRef,);
-    const inCodeComponent = React85.useContext(ComponentContainerContext,);
+    const inCodeComponent = React86.useContext(ComponentContainerContext,);
     const isOnCanvas = useIsOnFramerCanvas();
     let textOrOverride = text;
     const forwardedOverrideId = _forwardedOverrideId ?? id3;
@@ -35717,13 +35726,13 @@ var DeprecatedRichText = /* @__PURE__ */ React85.forwardRef(
       innerHTML = htmlFromDesign;
     }
     const implicitPathVariables = useImplicitPathVariables();
-    const innerHTMLWithReplacedFramerPageLinks = React85.useMemo(() => {
+    const innerHTMLWithReplacedFramerPageLinks = React86.useMemo(() => {
       if (isOnCanvas || !getRoute || !currentRoute) {
         return innerHTML;
       }
       return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
     }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-    React85.useEffect(() => {
+    React86.useEffect(() => {
       const container = layoutRef.current;
       if (container === null) {
         return;
@@ -35744,7 +35753,7 @@ var DeprecatedRichText = /* @__PURE__ */ React85.forwardRef(
       };
     }, [navigate, implicitPathVariables,],);
     useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-    React85.useInsertionEffect(() => {
+    React86.useInsertionEffect(() => {
       injectComponentCSSRules();
     }, [],);
     if (!visible) {
@@ -35903,7 +35912,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     } = props;
     const parentSize = useParentSize();
     const isOnCanvas = useIsOnFramerCanvas();
-    const inCodeComponent = useContext162(ComponentContainerContext,);
+    const inCodeComponent = useContext172(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
     const fallbackRef = useRef17(null,);
     const containerRef = ref ?? fallbackRef;
@@ -36521,7 +36530,7 @@ function getSVGSize(svg,) {
 function SVG(props,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const layoutRef = React86.useRef(null,);
+  const layoutRef = React87.useRef(null,);
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
   return /* @__PURE__ */ jsx57(
@@ -36584,7 +36593,7 @@ function sizeSVG(container, props,) {
   svg.setAttribute('height', '100%',);
 }
 function SVGStyleSheet() {
-  React86.useInsertionEffect(() => {
+  React87.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -36594,7 +36603,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
   return _a = class extends Layer {
     constructor() {
       super(...arguments,);
-      __publicField(this, 'container', React86.createRef(),);
+      __publicField(this, 'container', React87.createRef(),);
       __publicField(this, 'svgElement', null,);
       __publicField(this, 'setSVGElement', (element,) => {
         this.svgElement = element;
@@ -36917,10 +36926,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
 })();
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s,) => !fontStore.isSelectorLoaded(s,));
-  const [fontLoadStatus, setFontLoadStatus,] = React87.useState(
+  const [fontLoadStatus, setFontLoadStatus,] = React88.useState(
     missingFontSelectors.length ? 'loading' : 'done',
   );
-  React87.useEffect(() => {
+  React88.useEffect(() => {
     if (!missingFontSelectors.length) {
       return;
     }
@@ -36936,12 +36945,12 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   return fontLoadStatus;
 }
 function TextStyleSheet() {
-  React88.useInsertionEffect(() => {
+  React89.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
 }
-var Text2 = /* @__PURE__ */ React88.forwardRef(function Text3(props, forwardedRef,) {
+var Text2 = /* @__PURE__ */ React89.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
   const fallbackLayoutRef = useRef18(null,);
@@ -36972,7 +36981,7 @@ var Text2 = /* @__PURE__ */ React88.forwardRef(function Text3(props, forwardedRe
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React88.useCallback(
+  const interceptPageLinks = React89.useCallback(
     (event,) => {
       const anchorElement = findAnchorElement(event.target, layoutRef.current,);
       if (event.metaKey || !navigate || !anchorElement) {
@@ -36991,7 +37000,7 @@ var Text2 = /* @__PURE__ */ React88.forwardRef(function Text3(props, forwardedRe
     const ref = layoutRef.current;
     return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React88.useMemo(() => {
+  const rawHTML = React89.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) {
       return props.rawHTML;
     }
