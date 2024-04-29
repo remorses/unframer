@@ -1,5 +1,12 @@
 # unframer
 
+## 2.2.2
+
+### Patch Changes
+
+-   5b8f7f5: Update framer to 2.4.1, update framer motion to 11.0.11-sync.5
+-   "sideEffects": false
+
 ## 2.2.1
 
 ### Patch Changes

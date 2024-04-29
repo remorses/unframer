@@ -1,7 +1,8 @@
 {
     "name": "unframer",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "description": "",
+    "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
         "build": "rm -rf dist && tsc -m esnext --outDir esm && tsc && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
