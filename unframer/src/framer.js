@@ -9089,7 +9089,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.LSNNSQ5X.js
+// https :https://app.framerstatic.com/framer.XXAFTV53.js
 import { Component as Component2, } from 'react';
 import React12 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
@@ -9112,124 +9112,125 @@ import React92 from 'react';
 import { useCallback as useCallback32, useEffect as useEffect22, useRef as useRef22, } from 'react';
 import { jsx as _jsx6, } from 'react/jsx-runtime';
 import React112, { useContext as useContext17, } from 'react';
-import React13 from 'react';
 import React122 from 'react';
+import { useEffect as useEffect32, } from 'react';
+import React13 from 'react';
 import React14 from 'react';
-import React15 from 'react';
 import { Fragment as Fragment3, jsx, } from 'react/jsx-runtime';
-import React16, { useCallback as useCallback42, useContext as useContext22, useMemo as useMemo8, useRef as useRef32, } from 'react';
+import React15, { useCallback as useCallback42, useContext as useContext22, useMemo as useMemo8, useRef as useRef32, } from 'react';
 import { Fragment as Fragment22, jsx as jsx2, } from 'react/jsx-runtime';
-import React17, { Component as Component3, } from 'react';
+import React16, { Component as Component3, } from 'react';
 import { useRef as useRef42, } from 'react';
 import { jsx as jsx3, jsxs, } from 'react/jsx-runtime';
 import { jsx as jsx4, jsxs as jsxs2, } from 'react/jsx-runtime';
-import React20 from 'react';
-import React18 from 'react';
-import { Fragment as Fragment32, jsx as jsx5, } from 'react/jsx-runtime';
 import React19 from 'react';
+import React17 from 'react';
+import { Fragment as Fragment32, jsx as jsx5, } from 'react/jsx-runtime';
+import React18 from 'react';
 import { jsx as jsx6, } from 'react/jsx-runtime';
-import React28 from 'react';
-import React27, { forwardRef as forwardRef4, useContext as useContext52, useRef as useRef62, } from 'react';
-import React222 from 'react';
+import React27 from 'react';
+import React26, { forwardRef as forwardRef4, useContext as useContext52, useRef as useRef62, } from 'react';
 import React21 from 'react';
+import React20 from 'react';
 import { jsx as jsx7, } from 'react/jsx-runtime';
 import { jsx as jsx8, } from 'react/jsx-runtime';
-import React23 from 'react';
+import React222 from 'react';
 import { useContext as useContext32, useMemo as useMemo22, } from 'react';
 import { useContext as useContext42, } from 'react';
-import { useEffect as useEffect32, useLayoutEffect as useLayoutEffect2, } from 'react';
+import { useEffect as useEffect42, useLayoutEffect as useLayoutEffect2, } from 'react';
+import React23 from 'react';
+import React25, { useEffect as useEffect52, } from 'react';
 import React24 from 'react';
-import React26, { useEffect as useEffect42, } from 'react';
-import React25 from 'react';
 import { jsx as jsx9, } from 'react/jsx-runtime';
 import { Component as Component4, } from 'react';
-import { useEffect as useEffect52, useRef as useRef52, } from 'react';
+import { useEffect as useEffect62, useRef as useRef52, } from 'react';
 import { Fragment as Fragment4, jsx as jsx10, jsxs as jsxs3, } from 'react/jsx-runtime';
 import { jsx as jsx11, jsxs as jsxs4, } from 'react/jsx-runtime';
-import React37, { Component as Component7, } from 'react';
-import React29, { Component as Component5, } from 'react';
+import React36, { Component as Component7, } from 'react';
+import React28, { Component as Component5, } from 'react';
 import { jsx as jsx12, } from 'react/jsx-runtime';
 import { jsx as jsx13, } from 'react/jsx-runtime';
-import React36, { useContext as useContext82, useEffect as useEffect72, useRef as useRef82, } from 'react';
-import React30 from 'react';
+import React35, { useContext as useContext82, useEffect as useEffect82, useRef as useRef82, } from 'react';
+import React29 from 'react';
 import { forwardRef as forwardRef22, } from 'react';
-import React322 from 'react';
 import React31 from 'react';
+import React30 from 'react';
 import { jsx as jsx14, } from 'react/jsx-runtime';
 import { jsx as jsx15, } from 'react/jsx-runtime';
-import React33 from 'react';
+import React322 from 'react';
 import { Fragment as Fragment5, jsx as jsx16, jsxs as jsxs5, } from 'react/jsx-runtime';
 import { jsx as jsx17, jsxs as jsxs6, } from 'react/jsx-runtime';
 import { jsx as jsx18, } from 'react/jsx-runtime';
-import React34, { Component as Component6, } from 'react';
+import React33, { Component as Component6, } from 'react';
 import { jsx as jsx19, } from 'react/jsx-runtime';
-import React35, { useContext as useContext62, } from 'react';
+import React34, { useContext as useContext62, } from 'react';
 import {
   createContext as createContext9,
   useCallback as useCallback52,
   useContext as useContext72,
-  useEffect as useEffect62,
+  useEffect as useEffect72,
   useRef as useRef72,
 } from 'react';
 import { jsx as jsx20, } from 'react/jsx-runtime';
 import { jsx as jsx21, jsxs as jsxs7, } from 'react/jsx-runtime';
 import { createContext as createContext22, } from 'react';
 import { jsx as jsx22, jsxs as jsxs8, } from 'react/jsx-runtime';
-import React38 from 'react';
+import React37 from 'react';
 import { jsx as jsx23, } from 'react/jsx-runtime';
-import React41 from 'react';
-import { useCallback as useCallback6, useRef as useRef92, } from 'react';
 import React40 from 'react';
+import { useCallback as useCallback6, useRef as useRef92, } from 'react';
 import React39 from 'react';
+import React38 from 'react';
 import { jsx as jsx24, } from 'react/jsx-runtime';
 import { jsx as jsx25, } from 'react/jsx-runtime';
 import { jsx as jsx26, jsxs as jsxs9, } from 'react/jsx-runtime';
-import React422, { Component as Component10, } from 'react';
+import React41, { Component as Component10, } from 'react';
 import { Component as Component8, } from 'react';
 import { Component as Component9, } from 'react';
 import { jsx as jsx27, } from 'react/jsx-runtime';
-import React46 from 'react';
-import React43, {
+import React45 from 'react';
+import React422, {
   useCallback as useCallback7,
   useInsertionEffect as useInsertionEffect5,
   useMemo as useMemo32,
   useRef as useRef102,
 } from 'react';
 import { jsx as jsx28, jsxs as jsxs10, } from 'react/jsx-runtime';
-import React45, { useInsertionEffect as useInsertionEffect22, } from 'react';
-import React44, { useEffect as useEffect82, } from 'react';
+import React44, { useInsertionEffect as useInsertionEffect22, } from 'react';
+import React43, { useEffect as useEffect92, } from 'react';
 import { jsx as jsx29, jsxs as jsxs11, } from 'react/jsx-runtime';
 import { jsx as jsx30, } from 'react/jsx-runtime';
 import { useContext as useContext92, } from 'react';
 import {
   createContext as createContext32,
   useContext as useContext102,
-  useEffect as useEffect92,
+  useEffect as useEffect102,
   useMemo as useMemo42,
   useState as useState8,
 } from 'react';
-import React47, { Component as Component11, } from 'react';
+import React46, { Component as Component11, } from 'react';
 import { jsx as jsx31, } from 'react/jsx-runtime';
 import { useContext as useContext112, } from 'react';
 import { jsx as jsx32, } from 'react/jsx-runtime';
-import React54 from 'react';
-import React48 from 'react';
-import React49, { useCallback as useCallback8, useEffect as useEffect102, useRef as useRef112, } from 'react';
-import React50 from 'react';
-import { useLayoutEffect as useLayoutEffect22, useRef as useRef122, } from 'react';
-import React522 from 'react';
-import React51 from 'react';
 import React53 from 'react';
+import React47 from 'react';
+import React48, { useCallback as useCallback8, useEffect as useEffect112, useRef as useRef112, } from 'react';
+import React49 from 'react';
+import { useLayoutEffect as useLayoutEffect22, useRef as useRef122, } from 'react';
+import React51 from 'react';
+import React50 from 'react';
+import React522 from 'react';
 import { jsx as jsx33, } from 'react/jsx-runtime';
 import { createContext as createContext42, useContext as useContext122, useRef as useRef132, } from 'react';
 import { jsx as jsx34, } from 'react/jsx-runtime';
-import React56 from 'react';
-import * as React55 from 'react';
+import React55 from 'react';
+import * as React54 from 'react';
 import { Fragment as Fragment6, jsx as jsx35, } from 'react/jsx-runtime';
 import { jsx as jsx36, } from 'react/jsx-runtime';
 import React58 from 'react';
-import React57 from 'react';
+import React56 from 'react';
 import { jsx as jsx37, } from 'react/jsx-runtime';
+import React57 from 'react';
 import { jsx as jsx38, } from 'react/jsx-runtime';
 import React61, { useContext as useContext132, } from 'react';
 import React60 from 'react';
@@ -9240,7 +9241,7 @@ import React622 from 'react';
 import ReactDOM from 'react-dom';
 import { jsx as jsx41, jsxs as jsxs14, } from 'react/jsx-runtime';
 import React63 from 'react';
-import React64 from 'react';
+import React64, { useCallback as useCallback9, useImperativeHandle, useRef as useRef14, } from 'react';
 import React65 from 'react';
 import { jsx as jsx42, } from 'react/jsx-runtime';
 import React67 from 'react';
@@ -9252,10 +9253,10 @@ import React69 from 'react';
 import React70 from 'react';
 import {
   startTransition as startTransition22,
-  useCallback as useCallback9,
+  useCallback as useCallback10,
   useContext as useContext142,
-  useEffect as useEffect112,
-  useRef as useRef14,
+  useEffect as useEffect122,
+  useRef as useRef15,
 } from 'react';
 import { useMemo as useMemo52, } from 'react';
 import React71, { createRef, } from 'react';
@@ -9264,12 +9265,12 @@ import React73 from 'react';
 import React74 from 'react';
 import React75 from 'react';
 import React76 from 'react';
-import { useEffect as useEffect122, useMemo as useMemo62, } from 'react';
+import { useEffect as useEffect132, useMemo as useMemo62, } from 'react';
 import React77 from 'react';
 import { jsx as jsx45, } from 'react/jsx-runtime';
 import React78 from 'react';
 import { jsx as jsx46, } from 'react/jsx-runtime';
-import React79, { useRef as useRef15, } from 'react';
+import React79, { useRef as useRef16, } from 'react';
 import { jsx as jsx47, } from 'react/jsx-runtime';
 import React80 from 'react';
 import { jsx as jsx48, } from 'react/jsx-runtime';
@@ -9290,16 +9291,16 @@ import {
   isValidElement as isValidElement32,
   useContext as useContext172,
   useInsertionEffect as useInsertionEffect42,
-  useRef as useRef17,
+  useRef as useRef18,
 } from 'react';
 import * as React86 from 'react';
-import { useRef as useRef16, } from 'react';
+import { useRef as useRef17, } from 'react';
 import { jsx as jsx54, } from 'react/jsx-runtime';
 import { jsx as jsx55, } from 'react/jsx-runtime';
 import React87 from 'react';
 import { jsx as jsx56, } from 'react/jsx-runtime';
 import { Fragment as Fragment10, jsx as jsx57, jsxs as jsxs18, } from 'react/jsx-runtime';
-import React89, { useEffect as useEffect142, useRef as useRef18, } from 'react';
+import React89, { useEffect as useEffect152, useRef as useRef19, } from 'react';
 import React88 from 'react';
 import { Fragment as Fragment11, jsx as jsx58, jsxs as jsxs19, } from 'react/jsx-runtime';
 import { Component as Component12, } from 'react';
@@ -9308,7 +9309,7 @@ import { Component as Component13, } from 'react';
 import { jsx as jsx60, } from 'react/jsx-runtime';
 import { jsx as jsx61, jsxs as jsxs20, } from 'react/jsx-runtime';
 import { jsx as jsx62, } from 'react/jsx-runtime';
-import { useEffect as useEffect152, useState as useState22, } from 'react';
+import { useEffect as useEffect162, useState as useState22, } from 'react';
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
@@ -10351,7 +10352,7 @@ function lazy(factory,) {
   const Component14 = React22.forwardRef(function LazyWithPreload(props, ref,) {
     return React22.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
-      Object.assign(ref ? { ref, } : {}, props,),
+      ref ? { ref, ...props, } : props,
     );
   },);
   Component14.preload = () => {
@@ -10376,7 +10377,25 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 function isBot(userAgent,) {
-  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/i.test(userAgent,);
+  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/iu.test(userAgent,);
+}
+function yieldToMain(isHighPriority,) {
+  if ('scheduler' in window) {
+    const options = { priority: isHighPriority ? 'user-blocking' : 'user-visible', };
+    if ('yield' in scheduler) {
+      return scheduler.yield(options,);
+    }
+    if ('postTask' in scheduler) {
+      return scheduler.postTask(() => {
+      }, options,);
+    }
+  }
+  if (isHighPriority) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve,) => {
+    setTimeout(resolve, 0,);
+  },);
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
@@ -11575,24 +11594,30 @@ function useRoute(routeId,) {
 var shouldPreloadBasedOnUA = typeof window !== 'undefined' && !isBot(navigator.userAgent,);
 function useRoutePreloader(routeIds, enabled = true,) {
   const { getRoute, } = useRouter();
-  React122.useEffect(() => {
+  useEffect32(() => {
     if (!getRoute || !enabled || !shouldPreloadBasedOnUA) {
       return;
     }
     for (const routeId of routeIds) {
-      const route = getRoute(routeId,);
-      if (route === null || route === void 0 ? void 0 : route.page) {
-        preloadComponent(route.page,);
-      }
+      void preloadRoute(getRoute(routeId,),);
     }
   }, [routeIds, getRoute, enabled,],);
 }
-function preloadComponent(component,) {
-  if (!shouldPreloadBasedOnUA) {
+async function preloadRoute(route,) {
+  if (!shouldPreloadBasedOnUA || !route) {
     return;
   }
-  if (isLazyComponentType(component,)) {
-    void component.preload();
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) {
+    return;
+  }
+  await yieldToMain();
+  try {
+    await component.preload();
+  } catch (e) {
+    if (false) {
+      console.warn('Preload failed', route, e,);
+    }
   }
 }
 function useRouteAnchor(routeId, { elementId, hash: linkHash, } = {},) {
@@ -11602,19 +11627,19 @@ function useRouteAnchor(routeId, { elementId, hash: linkHash, } = {},) {
   const currentRoute = useRoute(currentRouteId !== null && currentRouteId !== void 0 ? currentRouteId : '',);
   useRoutePreloader([routeId,], true,);
   const hash2 = linkHash !== null && linkHash !== void 0 ? linkHash : elementId;
-  const href = React13.useMemo(() =>
+  const href = React122.useMemo(() =>
     getPathForRoute(route, {
       currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
       currentPathVariables,
       hash: hash2,
       preserveQueryParams,
     },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],);
-  const navigateToRoute = React13.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
+  const navigateToRoute = React122.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
     hash2,
     navigate,
     routeId,
   ],);
-  const onClick = React13.useCallback((event,) => {
+  const onClick = React122.useCallback((event,) => {
     event.preventDefault();
     navigateToRoute();
   }, [navigateToRoute,],);
@@ -11624,7 +11649,7 @@ function useRouteElementId(id3, targetRouteId,) {
   var _a;
   const currentRoute = useCurrentRoute();
   const route = (_a = useRoute(targetRouteId,)) !== null && _a !== void 0 ? _a : currentRoute;
-  return React14.useMemo(() => {
+  return React13.useMemo(() => {
     if (!route) {
       return id3;
     }
@@ -11634,7 +11659,7 @@ function useRouteElementId(id3, targetRouteId,) {
 function useRouteHandler(routeId, preload = false, elementId,) {
   const { navigate, } = useRouter();
   useRoutePreloader([routeId,], preload,);
-  const handler = React15.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
+  const handler = React14.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
     navigate,
     elementId,
     routeId,
@@ -14661,7 +14686,7 @@ function assert(condition, ...msg2) {
 function assertNever(x, error,) {
   throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
 }
-var LayoutIdContext = React16.createContext({
+var LayoutIdContext = React15.createContext({
   getLayoutId: (args,) => null,
   persistLayoutIdCache: () => {
   },
@@ -15025,15 +15050,15 @@ function Device({
   ...options
 },) {
   var _a, _b;
-  const optionsRef = React17.useRef(void 0,);
+  const optionsRef = React16.useRef(void 0,);
   if (optionsRef.current === void 0) {
     optionsRef.current = options;
   }
   const deviceAppearance = (_a = options.deviceOptions) == null ? void 0 : _a.appearance.type;
-  const scaleDataRef = React17.useRef();
-  const containerRef = React17.useRef(null,);
-  const deviceRef = React17.useRef(null,);
-  const screenRef = React17.useRef(null,);
+  const scaleDataRef = React16.useRef();
+  const containerRef = React16.useRef(null,);
+  const deviceRef = React16.useRef(null,);
+  const screenRef = React16.useRef(null,);
   const updateImperativeScale = ({ scale: scale2, screenScalePixelFix, },) => {
     if (!scaleDataRef.current || !deviceRef.current || !screenRef.current) {
       return;
@@ -15045,7 +15070,7 @@ function Device({
     const scale2 = scaleDataRef.current = getScaleData(options.deviceOptions, options.scaleTo,);
     updateImperativeScale(scale2,);
   }
-  const invertScale2 = React17.useCallback(
+  const invertScale2 = React16.useCallback(
     (point2,) => {
       if (!scaleDataRef.current) {
         return point2;
@@ -15055,7 +15080,7 @@ function Device({
     },
     [scaleDataRef,],
   );
-  const updateScale = React17.useCallback(() => {
+  const updateScale = React16.useCallback(() => {
     const { deviceOptions, scaleTo, onScaleChange, } = optionsRef.current ?? {};
     if (!deviceOptions || !scaleTo || scaleTo !== 'dynamic' || !containerRef.current) {
       return;
@@ -15076,7 +15101,7 @@ function Device({
     }
     return new ResizeObserver22(() => updateScale());
   },);
-  React17.useLayoutEffect(() => {
+  React16.useLayoutEffect(() => {
     optionsRef.current = {
       deviceOptions: options.deviceOptions,
       onScaleChange: options.onScaleChange,
@@ -15084,10 +15109,10 @@ function Device({
       scaleTo: options.scaleTo,
     };
   }, [options.deviceOptions, options.onScaleChange, options.overrideTheme, options.scaleTo,],);
-  React17.useLayoutEffect(() => {
+  React16.useLayoutEffect(() => {
     updateScale();
   }, [updateScale,],);
-  React17.useEffect(() => {
+  React16.useEffect(() => {
     if (!observer2 || !containerRef.current) {
       return;
     }
@@ -16259,7 +16284,7 @@ var ParentSizeState = /* @__PURE__ */ ((ParentSizeState2,) => {
   ParentSizeState2[ParentSizeState2['DisabledForCurrentLevel'] = 2] = 'DisabledForCurrentLevel';
   return ParentSizeState2;
 })(ParentSizeState || {},);
-var ConstraintsContext = React18.createContext({
+var ConstraintsContext = React17.createContext({
   parentSize: 0,
   /* Unknown */
 },);
@@ -16270,7 +16295,7 @@ function deprecatedParentSize(parentSize,) {
   return parentSize;
 }
 function useParentSize() {
-  return React18.useContext(ConstraintsContext,).parentSize;
+  return React17.useContext(ConstraintsContext,).parentSize;
 }
 function isSize(o,) {
   return typeof o === 'object';
@@ -16278,7 +16303,7 @@ function isSize(o,) {
 var ProvideParentSize = (props,) => {
   const currentParentSize = useParentSize();
   const { parentSize, children, } = props;
-  const value = React18.useMemo(
+  const value = React17.useMemo(
     () => ({ parentSize, }),
     // We are generating the memoKeys in runtime and react doesn't like it,
     // but it should be safe to ignore.
@@ -18545,7 +18570,7 @@ function applyMetaTag(name, props,) {
   }
 }
 function usePrototypingMetaTags() {
-  React19.useEffect(() => {
+  React18.useEffect(() => {
     applyMetaTag('mobile-web-app-capable', { content: 'yes', },);
     applyMetaTag('apple-mobile-web-app-capable', { content: 'yes', },);
     applyMetaTag('apple-mobile-web-app-status-bar-style', {
@@ -18559,7 +18584,7 @@ function usePrototypingMetaTags() {
 function DeviceCodeComponentInner({ children, ...props },) {
   usePrototypingMetaTags();
   const deviceOptions = convertPropsToDeviceOptions(props, { forceOldClay: true, },);
-  React20.useInsertionEffect(() => {
+  React19.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
@@ -18574,8 +18599,8 @@ function DeviceCodeComponentInner({ children, ...props },) {
     );
   }
   const child = Array.isArray(children,) ? children[0] : children;
-  const resizedChild = child && React20.isValidElement(child,)
-    ? React20.cloneElement(child, {
+  const resizedChild = child && React19.isValidElement(child,)
+    ? React19.cloneElement(child, {
       width: deviceOptions.screenWidth,
       height: deviceOptions.screenHeight,
     },)
@@ -18736,10 +18761,10 @@ var isPropValid = /* @__PURE__ */ memoize(
   (prop,) => reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91,
   /* Z+1 */
 );
-var LibraryFeaturesContext = /* @__PURE__ */ React21.createContext(void 0,);
+var LibraryFeaturesContext = /* @__PURE__ */ React20.createContext(void 0,);
 var LibraryFeaturesProvider = LibraryFeaturesContext.Provider;
 var useLibraryFeatures = () => {
-  const context = React21.useContext(LibraryFeaturesContext,);
+  const context = React20.useContext(LibraryFeaturesContext,);
   return context ?? {};
 };
 var import_process = __toESM(require_browser(), 1,);
@@ -19029,10 +19054,10 @@ function getImageStyle(image, containerSize,) {
 function StaticImage({ image, containerSize, nodeId, alt, },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  const [measuredSizes, setMeasuredSizes,] = React222.useState();
-  const imageRef = React222.useRef(null,);
+  const [measuredSizes, setMeasuredSizes,] = React21.useState();
+  const imageRef = React21.useRef(null,);
   const libraryFeatures = useLibraryFeatures();
-  React222.useEffect(() => {
+  React21.useEffect(() => {
     if (!libraryFeatures.imgSizesWorkaroundEnabled) {
       return;
     }
@@ -19077,10 +19102,10 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
   );
 }
 function CanvasImage({ image, containerSize, nodeId, },) {
-  const wrapperRef = React222.useRef(null,);
+  const wrapperRef = React21.useRef(null,);
   const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  React222.useLayoutEffect(() => {
+  React21.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) {
       return;
@@ -19094,9 +19119,9 @@ function CanvasImage({ image, containerSize, nodeId, },) {
   return /* @__PURE__ */ jsx7('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function OptimizedCanvasImage({ nodeId, image, containerSize, },) {
-  const wrapperRef = React222.useRef(null,);
+  const wrapperRef = React21.useRef(null,);
   const source = runtime.useImageSource(image, containerSize, nodeId,);
-  React222.useLayoutEffect(() => {
+  React21.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) {
       return;
@@ -19294,11 +19319,11 @@ function processOverrideForwarding(props, children,) {
   if (!_forwardedOverrides) {
     return { props, children, };
   }
-  children = React23.Children.map(children, (child,) => {
-    if (!React23.isValidElement(child,)) {
+  children = React222.Children.map(children, (child,) => {
+    if (!React222.isValidElement(child,)) {
       return child;
     }
-    return React23.cloneElement(child, { _forwardedOverrides, },);
+    return React222.cloneElement(child, { _forwardedOverrides, },);
   },);
   return { props, children, };
 }
@@ -19336,8 +19361,8 @@ function useLayoutId2(props, { specificLayoutId, postfix, } = {},) {
     return postfix ? `${layoutIdCandidate}-${postfix}` : layoutIdCandidate;
   }, [enabled,],);
 }
-var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect2 : useEffect32;
-var ComponentContainerContext = React24.createContext(false,);
+var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect2 : useEffect42;
+var ComponentContainerContext = React23.createContext(false,);
 var resizeObservers = [];
 var hasActiveObservations = function () {
   return resizeObservers.some(function (ro,) {
@@ -19741,11 +19766,11 @@ var Scheduler = function () {
   };
   return Scheduler2;
 }();
-var scheduler = new Scheduler();
+var scheduler2 = new Scheduler();
 var updateCount = function (n,) {
-  !watching && n > 0 && scheduler.start();
+  !watching && n > 0 && scheduler2.start();
   watching += n;
-  !watching && scheduler.stop();
+  !watching && scheduler2.stop();
 };
 var skipNotifyOnElement = function (target,) {
   return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
@@ -19804,7 +19829,7 @@ var ResizeObserverController = function () {
       firstObservation && resizeObservers.push(detail,);
       detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
       updateCount(1,);
-      scheduler.schedule();
+      scheduler2.schedule();
     }
   };
   ResizeObserverController2.unobserve = function (resizeObserver, target,) {
@@ -19864,8 +19889,8 @@ var ResizeObserver2 = function () {
   return ResizeObserver22;
 }();
 function useForceUpdate3() {
-  const [_, setForcedRenderCount,] = React25.useState(0,);
-  return React25.useCallback(() => setForcedRenderCount((v,) => v + 1), [],);
+  const [_, setForcedRenderCount,] = React24.useState(0,);
+  return React24.useCallback(() => setForcedRenderCount((v,) => v + 1), [],);
 }
 var DEFAULT_SIZE = 200;
 var _sharedResizeObserver;
@@ -19899,7 +19924,7 @@ _callbacks = /* @__PURE__ */ new WeakMap();
 var sharedResizeObserver = isBrowser2() ? new SharedObserver() : void 0;
 function useRerenderOnResize(ref,) {
   const update = useForceUpdate3();
-  useEffect42(() => {
+  useEffect52(() => {
     const element = ref == null ? void 0 : ref.current;
     if (!element) {
       return;
@@ -19912,7 +19937,7 @@ function useRerenderOnResize(ref,) {
 }
 function useMeasuredSize(ref,) {
   const forceUpdate = useForceUpdate3();
-  const size2 = React26.useRef(null,);
+  const size2 = React25.useRef(null,);
   function updateSize(newSize,) {
     if (newSize.width === 0 && newSize.height === 0) {
       return;
@@ -19943,7 +19968,7 @@ function useMeasuredSize(ref,) {
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
 var withMeasuredSize = (Component14,) => (props,) => {
-  const ref = React26.useRef(null,);
+  const ref = React25.useRef(null,);
   const size2 = useMeasuredSize(ref,);
   const dataProps = { [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true, };
   const shouldRender = Boolean(size2,);
@@ -20707,7 +20732,7 @@ function unwrapFrameProps(frameProps,) {
 }
 var defaultFrameRect = { x: 0, y: 0, width: 200, height: 200, };
 function useStyleAndRect(props,) {
-  React27.useInsertionEffect(() => {
+  React26.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   const inCodeComponent = Boolean(useContext52(ComponentContainerContext,),);
@@ -20727,7 +20752,7 @@ function useStyleAndRect(props,) {
   if (shouldDisablePointerEvents && safeToEditPointerEvents) {
     defaultStyle.pointerEvents = 'none';
   }
-  const addTextCentering = React27.Children.count(props.children,) > 0 && React27.Children.toArray(props.children,).every((child,) => {
+  const addTextCentering = React26.Children.count(props.children,) > 0 && React26.Children.toArray(props.children,).every((child,) => {
     return typeof child === 'string' || typeof child === 'number';
   },);
   const centerTextStyle = addTextCentering && {
@@ -20971,7 +20996,7 @@ function EmptyState({
   position = 'absolute',
 },) {
   const { target, } = RenderEnvironment;
-  const childCount = React28.Children.count(children,);
+  const childCount = React27.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
     return /* @__PURE__ */ jsx11(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
   }
@@ -21063,7 +21088,7 @@ function Description({ children, },) {
   );
 }
 var TREE_ROOT_ID = '__LAYOUT_TREE_ROOT';
-var SharedLayoutContext = /* @__PURE__ */ React29.createContext({
+var SharedLayoutContext = /* @__PURE__ */ React28.createContext({
   schedulePromoteTree: () => {
   },
   scheduleProjectionDidUpdate: () => {
@@ -21191,15 +21216,15 @@ var SharedIntersectionObserver = class {
 };
 _sharedIntersectionObserver = /* @__PURE__ */ new WeakMap();
 _callbacks2 = /* @__PURE__ */ new WeakMap();
-var SharedIntersectionObserverContext = /* @__PURE__ */ React30.createContext(/* @__PURE__ */ new Map(),);
+var SharedIntersectionObserverContext = /* @__PURE__ */ React29.createContext(/* @__PURE__ */ new Map(),);
 function useSharedIntersectionObserver(ref, callback, options,) {
   if (typeof IntersectionObserver === 'undefined') {
     return;
   }
   const key7 = useConstant2(() => `${options.rootMargin}`);
-  const observers2 = React30.useContext(SharedIntersectionObserverContext,);
+  const observers2 = React29.useContext(SharedIntersectionObserverContext,);
   const { enabled, } = options;
-  React30.useEffect(() => {
+  React29.useEffect(() => {
     var _a;
     const element = ref.current;
     if (!enabled || !element) {
@@ -21216,14 +21241,14 @@ function useSharedIntersectionObserver(ref, callback, options,) {
   }, [enabled,],);
 }
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
-var ViewportContext = /* @__PURE__ */ React30.createContext(null,);
+var ViewportContext = /* @__PURE__ */ React29.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
-  const internalState = React30.useRef({
+  const internalState = React29.useRef({
     isInView: false,
     hasAnimatedOnce: false,
   },);
   const { enabled, animateOnce, threshold, rootMargin = `0px 0px 0px 0px`, } = options;
-  const callback = React30.useCallback(
+  const callback = React29.useCallback(
     ([entry,],) => {
       if (!entry) {
         return;
@@ -21385,9 +21410,9 @@ var clamp2 = (value, a, b,) => {
   }
   return value;
 };
-var DraggingContext = React31.createContext({ dragging: false, },);
+var DraggingContext = React30.createContext({ dragging: false, },);
 function WithDragging(Component14,) {
-  const _WithDraggingHOC = class extends React31.Component {
+  const _WithDraggingHOC = class extends React30.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', {
@@ -21987,13 +22012,13 @@ var eventHandlerMapping = {
 var tapEventKeys = /* @__PURE__ */ new Set(['tapstart', 'tap', 'tapend',],);
 function WithEvents(BaseComponent,) {
   var _a;
-  const withEvents = (_a = class extends React322.Component {
+  const withEvents = (_a = class extends React31.Component {
     constructor() {
       super(...arguments,);
       __publicField(this, 'shouldCancelTap', false,);
       __publicField(this, 'activeEventListeners', /* @__PURE__ */ new Map(),);
       __publicField(this, 'hasFramerEventListener', false,);
-      __publicField(this, 'component', React322.createRef(),);
+      __publicField(this, 'component', React31.createRef(),);
     }
     get element() {
       return this.component.current && this.component.current.element;
@@ -23019,14 +23044,14 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
           _forwardedOverrides = void 0;
         }
       }
-      let children = React33.Children.map(this.props.children, (child,) => {
+      let children = React322.Children.map(this.props.children, (child,) => {
         if (isConstraintSupportingChild(child,)) {
-          return React33.cloneElement(child, {
+          return React322.cloneElement(child, {
             parentSize: this.state.size,
             _forwardedOverrides,
           },);
         } else if (_forwardedOverrides && child) {
-          return React33.cloneElement(child, { _forwardedOverrides, },);
+          return React322.cloneElement(child, { _forwardedOverrides, },);
         } else {
           return child;
         }
@@ -23232,10 +23257,10 @@ var LayoutTree = class extends Component6 {
   }
 };
 var SharedLayoutTree = (props,) => {
-  const sharedLayoutContext = React34.useContext(SharedLayoutContext,);
+  const sharedLayoutContext = React33.useContext(SharedLayoutContext,);
   return /* @__PURE__ */ jsx19(LayoutTree, { ...props, sharedLayoutContext, },);
 };
-var NavigationContainerContext = React35.createContext(true,);
+var NavigationContainerContext = React34.createContext(true,);
 function useIsInCurrentNavigationTarget() {
   const isInCurrentNavigationTarget = useContext62(NavigationContainerContext,);
   return isInCurrentNavigationTarget;
@@ -23279,7 +23304,7 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
     ],
   );
   const value = useRef72({ register, deregister, },).current;
-  useEffect62(() => {
+  useEffect72(() => {
     callbacks2.forEach((_, cb,) => {
       const newCleanup = cb(isCurrent, isOverlayed,);
       callbacks2.set(cb, isFunction(newCleanup,) ? newCleanup : void 0,);
@@ -23303,7 +23328,7 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
 };
 function useOnCurrentTargetChange(callback, deps = [],) {
   const { register, deregister, } = useContext72(NavigationTargetContext,);
-  useEffect62(() => {
+  useEffect72(() => {
     if (!callback) {
       return;
     }
@@ -23311,7 +23336,7 @@ function useOnCurrentTargetChange(callback, deps = [],) {
     return () => deregister(callback,);
   }, [register, deregister, ...deps,],);
 }
-var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContainer2({
+var NavigationContainer = /* @__PURE__ */ React35.memo(function NavigationContainer2({
   isLayeredContainer,
   isCurrent,
   isPrevious,
@@ -23350,7 +23375,7 @@ var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContai
   if (isCurrent && previousState.current.wasCurrent === void 0) {
     persistLayoutIdCache();
   }
-  useEffect72(() => {
+  useEffect82(() => {
     if (isLayeredContainer || !animate3) {
       return;
     }
@@ -24055,9 +24080,9 @@ function sequence(direction, transition, animation,) {
   };
 }
 var NavigationConsumer = NavigationContext.Consumer;
-var NavigationCallbackContext = React37.createContext(void 0,);
+var NavigationCallbackContext = React36.createContext(void 0,);
 var NavigationCallbackProvider = NavigationCallbackContext.Provider;
-var IsInitialNavigationContext = React37.createContext(void 0,);
+var IsInitialNavigationContext = React36.createContext(void 0,);
 var Navigation = class extends Component7 {
   constructor(props,) {
     var _a;
@@ -24478,7 +24503,7 @@ function containerIsVisible(containerIndex, stackState,) {
   return false;
 }
 function containerContent(item,) {
-  const content = React37.Children.map(
+  const content = React36.Children.map(
     item.component,
     (child,) => {
       var _a;
@@ -24510,7 +24535,7 @@ function containerContent(item,) {
           props.style.height = '100%';
         }
       }
-      return React37.cloneElement(child, props,);
+      return React36.cloneElement(child, props,);
     },
   );
   return content;
@@ -24521,7 +24546,7 @@ function backdropTapAction(transition, goBackAction,) {
   }
 }
 function NavigationStyleSheet() {
-  React37.useInsertionEffect(() => {
+  React36.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -24555,7 +24580,7 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2,) => 
   return NavigationTransitionType2;
 })(NavigationTransitionType || {},);
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = class extends React38.Component {
+  const InternalWithNavigator = class extends React37.Component {
     render() {
       return /* @__PURE__ */ jsx23(NavigationContext.Consumer, {
         children: (navigation,) => {
@@ -24763,11 +24788,11 @@ function useSafariGapFix(gap, ref, display,) {
   if (!requiresPolyfill) {
     return void 0;
   }
-  const isInitialRender = React39.useRef(true,);
-  const hasTriggeredReflow = React39.useRef(false,);
-  const prevGapValue = React39.useRef(gap,);
+  const isInitialRender = React38.useRef(true,);
+  const hasTriggeredReflow = React38.useRef(false,);
+  const prevGapValue = React38.useRef(gap,);
   hasTriggeredReflow.current = false;
-  React39.useLayoutEffect(() => {
+  React38.useLayoutEffect(() => {
     prevGapValue.current = gap;
     if (isInitialRender.current) {
       isInitialRender.current = false;
@@ -24778,7 +24803,7 @@ function useSafariGapFix(gap, ref, display,) {
       hasTriggeredReflow.current = true;
     }
   }, [gap, ref, prevGapValue, display,],);
-  return React39.useCallback(() => {
+  return React38.useCallback(() => {
     if (prevGapValue.current === gap) {
       return;
     }
@@ -24789,7 +24814,7 @@ function useSafariGapFix(gap, ref, display,) {
   }, [gap, ref,],);
 }
 var Stack = /* @__PURE__ */ (() => {
-  const StackInner = React40.forwardRef(
+  const StackInner = React39.forwardRef(
     function StackInner2(stackProps, forwardedRef,) {
       const {
         as = 'div',
@@ -24809,7 +24834,7 @@ var Stack = /* @__PURE__ */ (() => {
         ...containerProps
       } = stackProps;
       const useFlexboxGap = Boolean(externalUseFlexboxGap || wrap2,);
-      const stackRef = React40.useRef(null,);
+      const stackRef = React39.useRef(null,);
       const onBeforeLayoutMeasure = useSafariGapFix(gap, stackRef, 'flex',);
       const flexDirection = toFlexDirection(direction,);
       const isReverse = isReverseDirection(flexDirection,);
@@ -24965,7 +24990,7 @@ function fraction(dimension,) {
   return isFiniteNumber(value,) ? value : 0;
 }
 function handleFraction(children, direction, widthType, heightType,) {
-  return React40.Children.map(children, (child,) => {
+  return React39.Children.map(children, (child,) => {
     if (!isReactChild(child,) || !isReactElement(child,)) {
       return;
     }
@@ -25021,7 +25046,7 @@ function handleFraction(children, direction, widthType, heightType,) {
       return child;
     }
     const nextStyle = { ...propsStyle, ...style, };
-    return React40.cloneElement(child, {
+    return React39.cloneElement(child, {
       width: newWidth,
       height: newHeight,
       style: nextStyle,
@@ -25183,7 +25208,7 @@ function PageContainer({
     },
   );
 }
-var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef,) {
+var Page = /* @__PURE__ */ React40.forwardRef(function Page2(props, forwardedRef,) {
   var _a;
   const {
     direction = 'horizontal',
@@ -25220,7 +25245,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
   } = props;
   const layoutId = useLayoutId2(props, { specificLayoutId, postfix: 'page', },);
   const containerProps = { ...rest, background, };
-  const hasMountedRef = React41.useRef(false,);
+  const hasMountedRef = React40.useRef(false,);
   const hasFixedSize = RenderTarget.hasRestrictions() && props.__fromCodeComponentNode && isFiniteNumber(containerProps.width,) &&
     isFiniteNumber(containerProps.height,);
   if (!hasFixedSize && __fromCodeComponentNode && !containerProps.__fromCanvasComponent) {
@@ -25228,7 +25253,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     containerProps.height = '100%';
     containerProps._constraints = { enabled: true, };
   }
-  const { initial, prev, } = React41.useRef({
+  const { initial, prev, } = React40.useRef({
     initial: { x: 0, y: 0, },
     prev: { x: 0, y: 0, },
   },).current;
@@ -25238,41 +25263,41 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     warnOnce2(`The 'gap' property of Page component can not be negative, but is ${gapValue}.`,);
     gap = 0;
   }
-  React41.useInsertionEffect(() => {
+  React40.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const pageCount = React41.Children.count(children,);
-  const maxOffsetRef = React41.useRef(0,);
-  const constraints = React41.useRef({ top: 0, left: 0, right: 0, bottom: 0, },);
-  const fallbackContainerRef = React41.useRef(null,);
+  const pageCount = React40.Children.count(children,);
+  const maxOffsetRef = React40.useRef(0,);
+  const constraints = React40.useRef({ top: 0, left: 0, right: 0, bottom: 0, },);
+  const fallbackContainerRef = React40.useRef(null,);
   const containerRef = forwardedRef || fallbackContainerRef;
-  const scrollableRef = React41.useRef(null,);
-  const pageEffectValuesRef = React41.useRef([],);
-  const pageRectsRef = React41.useRef([],);
+  const scrollableRef = React40.useRef(null,);
+  const pageEffectValuesRef = React40.useRef([],);
+  const pageRectsRef = React40.useRef([],);
   const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX ?? 0,);
   const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY ?? 0,);
-  const contentOffsetRef = React41.useRef({
+  const contentOffsetRef = React40.useRef({
     x: isMotionValue2(contentOffsetX,) ? contentOffsetX : internalX,
     y: isMotionValue2(contentOffsetY,) ? contentOffsetY : internalY,
   },);
-  const currentContentPageRef = React41.useRef(currentPage,);
-  const propsBoundedCurrentPageRef = React41.useRef(currentPage,);
-  const latestPropsRef = React41.useRef(props,);
+  const currentContentPageRef = React40.useRef(currentPage,);
+  const propsBoundedCurrentPageRef = React40.useRef(currentPage,);
+  const latestPropsRef = React40.useRef(props,);
   latestPropsRef.current = props;
-  const lastDirectionRef = React41.useRef(props.direction,);
+  const lastDirectionRef = React40.useRef(props.direction,);
   const snapToPage = useSnapToPage(currentContentPageRef, contentOffsetRef, isHorizontal,);
-  const [_, setForceUpdateCount,] = React41.useState(0,);
-  const containerSizeRef = React41.useRef({ width: 200, height: 200, },);
+  const [_, setForceUpdateCount,] = React40.useState(0,);
+  const containerSizeRef = React40.useRef({ width: 200, height: 200, },);
   if (hasFixedSize && isFiniteNumber(containerProps.width,) && isFiniteNumber(containerProps.height,)) {
     containerSizeRef.current.width = containerProps.width;
     containerSizeRef.current.height = containerProps.height;
   }
-  const updateOnResize = React41.useCallback(() => {
+  const updateOnResize = React40.useCallback(() => {
     if (!hasFixedSize) {
       setForceUpdateCount((v,) => v + 1);
     }
   }, [hasFixedSize,],);
-  React41.useEffect(() => {
+  React40.useEffect(() => {
     if (RenderTarget.current() !== 'PREVIEW') {
       return;
     }
@@ -25358,7 +25383,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
       updateAndSnapToPage(currentContentPageRef.current, true,);
     },);
   }, [],);
-  React41.useEffect(() => {
+  React40.useEffect(() => {
     if (currentPage !== currentContentPageRef.current) {
       updateAndSnapToPage(currentPage,);
     }
@@ -25451,7 +25476,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     },);
   };
   pageEffectValuesRef.current = [];
-  const childComponents = React41.Children.map(children, (child, index,) => {
+  const childComponents = React40.Children.map(children, (child, index,) => {
     if (!isReactChild(child,) || !isReactElement(child,)) {
       return child;
     }
@@ -25507,7 +25532,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
         onDrag: onDragHandler,
         onDragEnd: onDragEndHandler,
         layoutId: layoutId ? `${layoutId}-${index}` : void 0,
-        children: React41.cloneElement(child, update,),
+        children: React40.cloneElement(child, update,),
       },
       index,
     );
@@ -26532,7 +26557,7 @@ var useUpdateChildSize = ({
   fromCanvasComponent,
 },) => {
   return useMemo32(() => {
-    return React43.Children.map(children, (child,) => {
+    return React422.Children.map(children, (child,) => {
       if (child === null || typeof child !== 'object' || typeof child.type === 'string') {
         return child;
       }
@@ -26548,14 +26573,14 @@ var useUpdateChildSize = ({
           return child;
       }
       const update = fromCanvasComponent ? { style: Object.assign({}, child.props.style, updatedSize,), } : updatedSize;
-      return React43.cloneElement(child, update,);
+      return React422.cloneElement(child, update,);
     },);
   }, [dragDirection, children,],);
 };
 var numberFromOptionalMotionValue = (value,) => {
   return typeof value === 'number' ? value : value.get();
 };
-var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(
+var EmulatedScroll = /* @__PURE__ */ React422.forwardRef(
   function EmulatedScroll2(props, forwardedRef,) {
     const {
       direction = 'vertical',
@@ -26669,7 +26694,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(
       }
       measureAndUpdateScrollOffset();
     }, [],);
-    React43.useEffect(() => {
+    React422.useEffect(() => {
       if (shouldResetScroll(isInTarget,)) {
         measureAndUpdateScrollOffset();
       }
@@ -26779,7 +26804,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(
       }
       return y.on('change', setScrollY,);
     }, [y, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
-    const nativeOnScroll = React43.useCallback(() => {
+    const nativeOnScroll = React422.useCallback(() => {
       const element = containerRef.current;
       if (!(element instanceof HTMLDivElement)) {
         return;
@@ -26793,7 +26818,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(
         y.set(-element.scrollTop,);
       }
     }, [x, y,],);
-    const isEmpty2 = React43.Children.count(children,) === 0;
+    const isEmpty2 = React422.Children.count(children,) === 0;
     const width = direction !== 'vertical' && !isEmpty2 ? 'auto' : '100%';
     const height = direction !== 'horizontal' && !isEmpty2 ? 'auto' : '100%';
     const size2 = !containerProps.__fromCanvasComponent
@@ -27060,8 +27085,8 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
   if (RenderTarget.current() !== 'PREVIEW') {
     return emptyObject;
   }
-  const scrollAnimationControlsRef = React44.useRef(null,);
-  useEffect82(() => {
+  const scrollAnimationControlsRef = React43.useRef(null,);
+  useEffect92(() => {
     if (!ref.current) {
       return;
     }
@@ -27218,7 +27243,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
       (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
     };
   }, [ref, direction, enabled,],);
-  return React44.useMemo(() => {
+  return React43.useMemo(() => {
     return {
       cancelEmulatedTouchScrollAnimation: () => {
         var _a;
@@ -27281,7 +27306,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
     [offset,],
   );
 }
-var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(props, forwardedRef,) {
+var NativeScroll = /* @__PURE__ */ React44.forwardRef(function NativeScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     scrollBarVisible = false,
@@ -27315,14 +27340,14 @@ var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(pro
     ...containerProps
   } = props;
   const layoutId = useLayoutId2(props, { specificLayoutId, postfix: 'scroll', },);
-  const fallbackRef = React45.useRef(null,);
+  const fallbackRef = React44.useRef(null,);
   const ref = forwardedRef || fallbackRef;
   const { cancelEmulatedTouchScrollAnimation, } = useEmulateTouchScroll(ref, direction, dragEnabled,);
   useInsertionEffect22(() => {
     injectComponentCSSRules();
   }, [],);
   const isInTarget = useIsInCurrentNavigationTarget();
-  const previousIsInTargetRef = React45.useRef(isInTarget,);
+  const previousIsInTargetRef = React44.useRef(isInTarget,);
   const updateScrollOffsetHandler = () => {
     if (!resetOffset) {
       return;
@@ -27388,7 +27413,7 @@ var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(pro
   );
 },);
 var Scroll = /* @__PURE__ */ (() => {
-  const ScrollInner = React46.forwardRef(function ScrollInner2(props, forwardedRef,) {
+  const ScrollInner = React45.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
       return /* @__PURE__ */ jsx30(NativeScroll, { ref: forwardedRef, ...props, },);
     } else {
@@ -27556,7 +27581,7 @@ function createData(defaultState2, actions,) {
     }, [id3,],);
     const [, notifyUpdates,] = useState8(store.getVersion(),);
     const storeValueAtHookCallTime = useMemo42(() => store.get(), [store,],);
-    useEffect92(() => {
+    useEffect102(() => {
       const unsubscribe = store.subscribe(notifyUpdates,);
       if (storeValueAtHookCallTime !== store.get()) {
         notifyUpdates(store.getVersion(),);
@@ -27568,9 +27593,9 @@ function createData(defaultState2, actions,) {
   return useData;
 }
 var initialState = { update: 0, };
-var DataObserverContext = /* @__PURE__ */ React47.createContext({ update: NaN, },);
+var DataObserverContext = /* @__PURE__ */ React46.createContext({ update: NaN, },);
 function useObserveData() {
-  const context = React47.useContext(DataObserverContext,);
+  const context = React46.useContext(DataObserverContext,);
   return !isNaN(context.update,);
 }
 var DataObserver = class extends Component11 {
@@ -27713,7 +27738,7 @@ function isFXValuesKey(key7,) {
 }
 function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({ values: makeFXValues(enabled ? values : void 0,), }));
-  React48.useEffect(() => {
+  React47.useEffect(() => {
     if (enabled) {
       return;
     }
@@ -27736,7 +27761,7 @@ var loopOptionsKeys = /* @__PURE__ */ new Set([
 ],);
 var useDelay = () => {
   const timeoutRef = useRef112();
-  useEffect102(() => {
+  useEffect112(() => {
     return () => {
       clearTimeout(timeoutRef.current,);
     };
@@ -27757,7 +27782,7 @@ function useLoop({
 },) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useConstant2(() => ({ values: makeFXValues(), }));
-  const mirrorStateRef = React49.useRef(false,);
+  const mirrorStateRef = React48.useRef(false,);
   const delay2 = useDelay();
   const animateValues = async () => {
     if (!loop) {
@@ -27801,7 +27826,7 @@ function useLoop({
     },);
     mirrorStateRef.current = false;
   }, [effect,],);
-  React49.useEffect(() => {
+  React48.useEffect(() => {
     if (loopEffectEnabled && loop) {
       start();
     } else {
@@ -27825,9 +27850,9 @@ var parallaxOptionsKeys = /* @__PURE__ */ new Set([
 ],);
 function useParallax(options, ref, visibilityStyle,) {
   const { speed = 100, offset = 0, adjustPosition = false, parallaxTransformEnabled, } = options;
-  const originalPosition = React50.useRef(null,);
+  const originalPosition = React49.useRef(null,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const transform2 = React50.useCallback(
+  const transform2 = React49.useCallback(
     (yValue,) => {
       if (originalPosition.current === null) {
         return 0;
@@ -27839,7 +27864,7 @@ function useParallax(options, ref, visibilityStyle,) {
     },
     [originalPosition, speed, offset, adjustPosition,],
   );
-  React50.useLayoutEffect(() => {
+  React49.useLayoutEffect(() => {
     frame.read(() => {
       var _a, _b;
       originalPosition.current = ((_b = (_a = ref.current) == null ? void 0 : _a.getBoundingClientRect()) == null ? void 0 : _b.top) ?? 0;
@@ -28049,7 +28074,7 @@ var scrollDirectionThreshold = 4;
 function useScrollDirectionChange(scrollDirection, cb, options = {},) {
   const { direction, target, } = scrollDirection ?? {};
   const { repeat = true, enabled = true, } = options;
-  React51.useEffect(() => {
+  React50.useEffect(() => {
     if (!direction || !enabled) {
       return;
     }
@@ -28158,7 +28183,7 @@ function useAnimationVariants({
   animate: animateVariant2,
   ...defaultStyles
 },) {
-  return React522.useMemo(
+  return React51.useMemo(
     () => ({
       initial: enter ?? makeStyle({
         ...defaultStyles,
@@ -28178,13 +28203,13 @@ function useStyleAppearEffect(options, ref,) {
   const variants = useAnimationVariants(options,);
   const enabled = options.styleAppearEffectEnabled;
   const effect = useFXValues(enabled ? variants.initial : variants.animate, enabled,);
-  const playState = React522.useRef({
+  const playState = React51.useRef({
     isPlaying: false,
     scheduledAppearState: void 0,
     lastAppearState: !options.styleAppearEffectEnabled,
   },);
-  const animation = React522.useRef();
-  const runAnimation = React522.useCallback(
+  const animation = React51.useRef();
+  const runAnimation = React51.useCallback(
     async ({ transition, ...target }, fromInitial,) => {
       const transitionWithFallback = transition ?? variants.animate.transition ?? options.transition;
       await animation.current;
@@ -28244,7 +28269,7 @@ function useStyleAppearEffect(options, ref,) {
     },
   );
   const animateWithScrollInfo = options.targets && enabled && !options.scrollDirection;
-  React522.useEffect(() => {
+  React51.useEffect(() => {
     if (!animateWithScrollInfo) {
       return;
     }
@@ -28313,8 +28338,8 @@ var defaultRanges2 = () => ({
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
-  const springs = React53.useRef({},);
-  React53.useEffect(() => {
+  const springs = React522.useRef({},);
+  React522.useEffect(() => {
     if (spring2 === void 0) {
       return;
     }
@@ -28380,7 +28405,7 @@ function useStyleTransform({
 }, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
-  React53.useLayoutEffect(() => {
+  React522.useLayoutEffect(() => {
     if (!styleTransformEffectEnabled || !transformTargets) {
       return;
     }
@@ -28521,7 +28546,7 @@ function isVariantOrVariantList(value,) {
   return isString22(value,) || Array.isArray(value,);
 }
 var withFX = (Component14,) =>
-  React54.forwardRef((props, forwardedRef,) => {
+  React53.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
       return /* @__PURE__ */ jsx33(Component14, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
     }
@@ -28530,7 +28555,7 @@ var withFX = (Component14,) =>
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
       return /* @__PURE__ */ jsx33(Component14, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
     }
-    const fallbackRef = React54.useRef(null,);
+    const fallbackRef = React53.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const {
       parallax = {},
@@ -28557,7 +28582,7 @@ var withFX = (Component14,) =>
     const { values: transformValues2, } = useStyleTransform(styleTransform, ref,);
     const { values: appearEffectValues, } = useStyleAppearEffect(styleAppear, ref,);
     const { values: loopValues, } = useLoop(loop,);
-    const fxValues = React54.useMemo(() => {
+    const fxValues = React53.useMemo(() => {
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
         opacity: [
@@ -28701,7 +28726,7 @@ function createHook(forwardedRef,) {
       );
     }
     preventNextCall = true;
-    if (React55.Children.count(children,) > 1 && forwardedRef) {
+    if (React54.Children.count(children,) > 1 && forwardedRef) {
       if (false) {
         throw new ReferenceError(
           'useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',
@@ -28710,12 +28735,12 @@ function createHook(forwardedRef,) {
       state.forwardedRef = void 0;
       state.ref = state.childRef;
     }
-    return React55.Children.map(children, (child,) => {
-      if (React55.isValidElement(child,)) {
+    return React54.Children.map(children, (child,) => {
+      if (React54.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state.forwardedRef, ownRef,);
         const newProps = state.ref !== ownRef ? { ...props, ref: state.ref, } : props;
-        return React55.cloneElement(child, newProps,);
+        return React54.cloneElement(child, newProps,);
       }
       return child;
     },);
@@ -28757,13 +28782,13 @@ function setRef(ref, value,) {
 function isMutableRef(ref,) {
   return isObject2(ref,) && 'current' in ref;
 }
-var ComponentViewportContext = /* @__PURE__ */ React56.createContext({},);
+var ComponentViewportContext = /* @__PURE__ */ React55.createContext({},);
 function useComponentViewport() {
-  return React56.useContext(ComponentViewportContext,);
+  return React55.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = /* @__PURE__ */ React56.forwardRef(
+var ComponentViewportProvider = /* @__PURE__ */ React55.forwardRef(
   ({ width, children, ...rest }, ref,) => {
-    const componentViewport = React56.useMemo(() => {
+    const componentViewport = React55.useMemo(() => {
       return { width, };
     }, [width,],);
     const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
@@ -28774,10 +28799,25 @@ var ComponentViewportProvider = /* @__PURE__ */ React56.forwardRef(
   },
 );
 var withGeneratedLayoutId = (Component14,) =>
-  React57.forwardRef((props, ref,) => {
+  React56.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
     return /* @__PURE__ */ jsx37(Component14, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
   },);
+var ContainerErrorBoundary = class extends React57.Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', { hasError: false, },);
+  }
+  static getDerivedStateFromError() {
+    console.error('Error in component (see previous error log). This component has been hidden.',);
+    return { hasError: true, };
+  }
+  render() {
+    const { children, } = this.props;
+    const { hasError, } = this.state;
+    return hasError ? null : children;
+  }
+};
 var Providers = /* @__PURE__ */ React58.forwardRef(
   ({ children, layoutId, ...props }, ref,) => {
     const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
@@ -28792,8 +28832,10 @@ var Providers = /* @__PURE__ */ React58.forwardRef(
           children: /* @__PURE__ */ jsx38(LayoutGroup, {
             id: layoutId ?? '',
             inherit: 'id',
-            children: React58.Children.map(children, (child,) => {
-              return React58.isValidElement(child,) ? React58.cloneElement(child, { layoutId, },) : child;
+            children: /* @__PURE__ */ jsx38(ContainerErrorBoundary, {
+              children: React58.Children.map(children, (child,) => {
+                return React58.isValidElement(child,) ? React58.cloneElement(child, { layoutId, },) : child;
+              },),
             },),
           },),
         },),
@@ -29935,6 +29977,106 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
   return true;
 }
+var PRELOAD_AFTER_MS = 500;
+var OBSERVER_THRESHOLD = 0.9;
+var LOW_MEMORY_THRESHOLD = 1.7;
+var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
+var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
+var nodeToRoute = /* @__PURE__ */ new WeakMap();
+var preloadedRoutes = /* @__PURE__ */ new Set();
+var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function getObserveRouteForPreloadingFn() {
+  var _a;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+  const lowDeviceMemory = navigator.deviceMemory && navigator.deviceMemory > LOW_MEMORY_THRESHOLD;
+  let effectiveType, preloadDisabled, maxPreloadAmount;
+  function updateConnection() {
+    effectiveType = connection.effectiveType || '';
+    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
+    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
+      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
+      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
+  }
+  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
+  updateConnection();
+  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, { threshold: OBSERVER_THRESHOLD, },);
+  let activePreloadsAmount = 0;
+  async function preloadTimeout(route, target,) {
+    if (preloadDisabled) {
+      return;
+    }
+    const nodesInViewport = routeToNodesInViewport.get(route,);
+    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) {
+      return;
+    }
+    ++activePreloadsAmount;
+    preloadedRoutes.add(route,);
+    const preloadDone = preloadRoute(route,).catch(() => {
+      if (false) {
+        throw new Error(
+          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
+        );
+      }
+    },);
+    observer2.unobserve(target,);
+    nodeToRoute.delete(target,);
+    for (const node of nodesInViewport) {
+      observer2.unobserve(node,);
+      nodeToRoute.delete(node,);
+    }
+    nodesInViewport.clear();
+    routeToNodesInViewport.delete(route,);
+    await preloadDone;
+    --activePreloadsAmount;
+  }
+  function onPreloadIntersectionChange(entries,) {
+    var _a2;
+    for (const entry of entries) {
+      const target = entry.target;
+      const route = nodeToRoute.get(target,);
+      if (!route || preloadedRoutes.has(route,)) {
+        observer2.unobserve(target,);
+        nodeToRoute.delete(target,);
+        continue;
+      }
+      const nodes = routeToNodesInViewport.get(route,);
+      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
+      if (entry.isIntersecting) {
+        if (activePreloadsAmount >= maxPreloadAmount) {
+          continue;
+        }
+        if (nodes) {
+          nodes.add(target,);
+        } else {
+          routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
+        }
+        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
+      } else {
+        if (nodes) {
+          nodes.delete(target,);
+        }
+        if (amountOfNodesInViewport <= 1) {
+          routeToNodesInViewport.delete(route,);
+        }
+      }
+    }
+  }
+  return (route, node,) => {
+    if (preloadedRoutes.has(route,)) {
+      return;
+    }
+    nodeToRoute.set(node, route,);
+    observer2.observe(node,);
+    return () => {
+      nodeToRoute.delete(node,);
+      observer2.unobserve(node,);
+    };
+  };
+}
+var observeRouteForPreloading = (
+  // this also guards `window`
+  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn()
+);
 var noLocale = {};
 var resolveSlugCache = /* @__PURE__ */ new WeakMap();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -30100,47 +30242,6 @@ function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariab
     (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
 }
-function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
-  const isInternal = isInternalURL(href,);
-  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-    return propsForLink(href, openInNewTab,);
-  }
-  try {
-    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
-    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    assert(pathname !== void 0, 'A href must have a defined pathname.',);
-    const { routeId, pathVariables, } = inferInitialRouteFromPath(router.routes, pathname,);
-    const route = router.getRoute(routeId,);
-    if (route) {
-      preloadComponent(route.page,);
-      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
-      const path = getPathForRoute(route, {
-        currentRoutePath: currentRoute.path,
-        currentPathVariables: currentRoute.pathVariables,
-        // The hash value is already fully resolved so we don't need to
-        // provide any hashVariables.
-        hash: hash2 || void 0,
-        pathVariables: combinedPathVariables,
-        preserveQueryParams: router.preserveQueryParams,
-      },);
-      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-      return {
-        href: path,
-        target: anchorTarget,
-        onClick: createOnClickLinkHandler(
-          router,
-          routeId,
-          hash2 || void 0,
-          combinedPathVariables,
-          smoothScroll,
-        ),
-      };
-    }
-  } catch {
-  }
-  return propsForLink(href, openInNewTab,);
-}
 function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
   const promises = [];
   function handleSlugs(unresolvedSlugs,) {
@@ -30173,13 +30274,98 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
+function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
+  const isInternal = isInternalURL(href,);
+  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+    return propsForLink(href, openInNewTab,);
+  }
+  try {
+    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
+    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const { routeId, pathVariables, } = inferInitialRouteFromPath(router.routes, pathname,);
+    const route = router.getRoute(routeId,);
+    if (route) {
+      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      const path = getPathForRoute(route, {
+        currentRoutePath: currentRoute.path,
+        currentPathVariables: currentRoute.pathVariables,
+        // The hash value is already fully resolved so we don't need to
+        // provide any hashVariables.
+        hash: hash2 || void 0,
+        pathVariables: combinedPathVariables,
+        preserveQueryParams: router.preserveQueryParams,
+      },);
+      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+      return {
+        href: path,
+        target: anchorTarget,
+        onClick: createOnClickLinkHandler(
+          router,
+          routeId,
+          hash2 || void 0,
+          combinedPathVariables,
+          smoothScroll,
+        ),
+      };
+    }
+  } catch {
+  }
+  return propsForLink(href, openInNewTab,);
+}
+function getRouteFromPageLink(pageLink, router, currentRoute,) {
+  var _a;
+  if (isString22(pageLink,)) {
+    const isInternal = isInternalURL(pageLink,);
+    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+      return;
+    }
+    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
+    if (pathnameWithQueryParams === void 0) {
+      return;
+    }
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    if (pathname === void 0) {
+      return;
+    }
+    const { routeId, } = inferInitialRouteFromPath(router.routes, pathname,);
+    return router.getRoute(routeId,);
+  }
+  const { webPageId, } = pageLink;
+  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
+}
 var Link = /* @__PURE__ */ React64.forwardRef(
   ({ children, href, openInNewTab, smoothScroll, ...restProps }, forwardedRef,) => {
     const router = useRouter();
     const currentRoute = useCurrentRoute();
     const implicitPathVariables = useImplicitPathVariables();
     const { activeLocale, } = useLocaleInfo();
-    const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
+    const innerRef = useRef14(null,);
+    const cleanupRef = useRef14();
+    const observeRef = useCallback9(
+      (node,) => {
+        var _a, _b;
+        innerRef.current = node;
+        if (node === null) {
+          (_a = cleanupRef.current) == null ? void 0 : _a.call(cleanupRef,);
+          cleanupRef.current = void 0;
+          return;
+        }
+        const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+        if (!pageLink) {
+          return;
+        }
+        const route = getRouteFromPageLink(pageLink, router, currentRoute,);
+        if (!route) {
+          return;
+        }
+        cleanupRef.current = (_b = observeRouteForPreloading) == null ? void 0 : _b(route, node,);
+      },
+      [href, router, currentRoute,],
+    );
+    useImperativeHandle(forwardedRef, () => innerRef.current,);
+    const clone = useCloneChildrenWithPropsAndRef(observeRef,);
     const props = React64.useMemo(() => {
       var _a;
       if (!href) {
@@ -30200,16 +30386,12 @@ var Link = /* @__PURE__ */ React64.forwardRef(
         );
       }
       const { webPageId, hash: hash2, pathVariables, hashVariables, unresolvedHashSlugs, unresolvedPathSlugs, } = pageLink;
-      const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
       const resolvedSlugs = resolveSlugsWithSuspense(
         unresolvedPathSlugs,
         unresolvedHashSlugs,
         router.collectionUtils,
         activeLocale,
       );
-      if (route) {
-        preloadComponent(route.page,);
-      }
       const combinedPathVariable = Object.assign(
         {},
         implicitPathVariables,
@@ -30223,6 +30405,7 @@ var Link = /* @__PURE__ */ React64.forwardRef(
         resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
       );
       const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+      const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
       const resolvedHref = getPathForRoute(route, {
         currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
         currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
@@ -32944,11 +33127,11 @@ function activeMediaQueryFromWindow(mediaQueries,) {
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext142(IsInitialNavigationContext,);
-  const baseVariant = useRef14(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
-  const basePropsVariant = useRef14(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
+  const baseVariant = useRef15(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const basePropsVariant = useRef15(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate3();
   const instantTransition = useInstantTransition();
-  const setActiveVariantInstant = useCallback9(
+  const setActiveVariantInstant = useCallback10(
     (variant,) => {
       if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
         instantTransition(() => {
@@ -32967,7 +33150,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
     }
     setActiveVariantInstant(baseVariant.current,);
   }, [],);
-  useEffect112(() => {
+  useEffect122(() => {
     const callbacks2 = [];
     for (const [variant, query,] of Object.entries(mediaQueries,)) {
       const mql = safeWindow.matchMedia(query,);
@@ -33386,7 +33569,7 @@ function usePrototypeNavigate({ preload, } = {},) {
         component = componentOrRoute;
       }
       if (component && withPreload(component,)) {
-        component.preload();
+        void component.preload();
       }
     },);
   }, [],);
@@ -33540,7 +33723,7 @@ function useLoadMorePaginatedQuery(query, pageSize,) {
     const totalPages = Math.ceil(count / pageSize,);
     return { currentPage: 1, totalPages, type: 'loadMore', };
   }, [count, pageSize,],);
-  useEffect122(() => {
+  useEffect132(() => {
     if (!paginationInfo) {
       setPaginationInfo(initialPaginationInfo,);
     }
@@ -33888,7 +34071,7 @@ var withVariantAppearEffect = (Component14,) =>
 var withVariantFX = (Component14,) =>
   React79.forwardRef(
     ({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
-      const ref = useRef15();
+      const ref = useRef16();
       const effect = usePresenceAnimation(
         {
           initial,
@@ -35648,7 +35831,7 @@ var htmlEscapes = {
   '"': '&quot;',
   '\'': '&#39;',
 };
-var reUnescapedHtml = /[&<>"']/g;
+var reUnescapedHtml = /[&<>"']/gu;
 var reHasUnescapedHtml = RegExp(reUnescapedHtml.source,);
 function escapeHTML2(str,) {
   return str && reHasUnescapedHtml.test(str,) ? str.replace(reUnescapedHtml, (chr,) => htmlEscapes[chr] ?? '',) : str || '';
@@ -35697,7 +35880,7 @@ var DeprecatedRichText = /* @__PURE__ */ React86.forwardRef(
     } = props;
     const parentSize = useParentSize();
     const layoutId = useLayoutId2(props,);
-    const fallbackLayoutRef = useRef16(null,);
+    const fallbackLayoutRef = useRef17(null,);
     const layoutRef = forwardedRef ?? fallbackLayoutRef;
     const { navigate, getRoute, } = useRouter();
     const currentRoute = useCurrentRoute();
@@ -35838,10 +36021,10 @@ function convertVerticalAlignment(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef16([],);
+  const prevFontsRef = useRef17([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
-    fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
+    void fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
       if (!fromCanvasComponent || !containerRef.current || RenderTarget.current() !== 'CANVAS') {
         return;
       }
@@ -35914,7 +36097,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     const isOnCanvas = useIsOnFramerCanvas();
     const inCodeComponent = useContext172(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
-    const fallbackRef = useRef17(null,);
+    const fallbackRef = useRef18(null,);
     const containerRef = ref ?? fallbackRef;
     useMeasureLayout(props, containerRef,);
     useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
@@ -36953,7 +37136,7 @@ function TextStyleSheet() {
 var Text2 = /* @__PURE__ */ React89.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef18(null,);
+  const fallbackLayoutRef = useRef19(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
@@ -36963,14 +37146,14 @@ var Text2 = /* @__PURE__ */ React89.forwardRef(function Text3(props, forwardedRe
   const fontLoadStatus = useFontLoadStatus(props.fonts,);
   useMeasureLayout(props, layoutRef,);
   const { fonts, __fromCanvasComponent, } = props;
-  const prevFontsRef = useRef18([],);
+  const prevFontsRef = useRef19([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
-  useEffect142(() => {
+  useEffect152(() => {
     if (!fontsDidChange || !fonts) {
       return;
     }
-    fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
+    void fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
       if (!__fromCanvasComponent || !layoutRef.current || RenderTarget.current() !== 'CANVAS') {
         return;
       }
@@ -36994,7 +37177,7 @@ var Text2 = /* @__PURE__ */ React89.forwardRef(function Text3(props, forwardedRe
     },
     [navigate, implicitPathVariables,],
   );
-  useEffect142(() => {
+  useEffect152(() => {
     var _a;
     (_a = layoutRef.current) == null ? void 0 : _a.addEventListener('click', interceptPageLinks,);
     const ref = layoutRef.current;
@@ -38368,9 +38551,9 @@ function useInitialRouteComponent(routes, homeNodeId,) {
   const [RouteComponent, setRouteComponent,] = useState22(
     initialRouteComponent(InitialRouteComponent,),
   );
-  useEffect152(() => {
+  useEffect162(() => {
     if (withPreload(InitialRouteComponent,)) {
-      InitialRouteComponent.preload().then(setRouteComponent,);
+      void InitialRouteComponent.preload().then(setRouteComponent,);
     }
   }, [],);
   return RouteComponent;
