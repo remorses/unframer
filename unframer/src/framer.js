@@ -1,12 +1,12 @@
 // @ts-nocheck
-// https :https://app.framerstatic.com/chunk-O7E5UDPD.js
+// https :https://app.framerstatic.com/chunk-UWIWYCX2.js
 import { createContext, } from 'react';
 import { createContext as createContext2, } from 'react';
 import { createContext as createContext3, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { createContext as createContext4, } from 'react';
 import { createContext as createContext5, } from 'react';
-import * as React from 'react';
+import { jsx, jsxs, } from 'react/jsx-runtime';
 import { forwardRef, useContext as useContext3, } from 'react';
 import { useContext, useEffect as useEffect2, useInsertionEffect, useRef, } from 'react';
 import { createContext as createContext6, } from 'react';
@@ -15,32 +15,35 @@ import { useContext as useContext2, useMemo, } from 'react';
 import { useContext as useContext4, } from 'react';
 import { useRef as useRef2, } from 'react';
 import { useContext as useContext5, useEffect as useEffect3, useId, } from 'react';
-import { createElement as createElement2, Fragment, useMemo as useMemo4, } from 'react';
+import { createElement, Fragment, useMemo as useMemo4, } from 'react';
 import { useMemo as useMemo2, } from 'react';
 import { useMemo as useMemo3, } from 'react';
-import React__default, { useContext as useContext6, } from 'react';
-import React__default2 from 'react';
+import { jsx as jsx2, } from 'react/jsx-runtime';
+import { Component, useContext as useContext6, } from 'react';
+import { Fragment as Fragment2, } from 'react';
 import { useCallback as useCallback2, useState, } from 'react';
 import { useRef as useRef3, } from 'react';
 import { useEffect as useEffect4, } from 'react';
-import * as React4 from 'react';
+import { Fragment as Fragment3, jsx as jsx5, } from 'react/jsx-runtime';
 import { Children, cloneElement as cloneElement2, isValidElement, useContext as useContext8, useRef as useRef5, } from 'react';
-import * as React3 from 'react';
-import { useId as useId3, useMemo as useMemo5, } from 'react';
+import { jsx as jsx4, } from 'react/jsx-runtime';
 import * as React2 from 'react';
+import { useId as useId3, useMemo as useMemo5, } from 'react';
+import { jsx as jsx3, } from 'react/jsx-runtime';
+import * as React from 'react';
 import { useContext as useContext7, useId as useId2, useInsertionEffect as useInsertionEffect2, useRef as useRef4, } from 'react';
-import * as React5 from 'react';
+import { jsx as jsx6, } from 'react/jsx-runtime';
 import { useContext as useContext9, useMemo as useMemo6, } from 'react';
-import * as React6 from 'react';
+import { jsx as jsx7, } from 'react/jsx-runtime';
 import { useEffect as useEffect6, useRef as useRef6, useState as useState2, } from 'react';
 import { createContext as createContext7, } from 'react';
-import * as React7 from 'react';
+import { jsx as jsx8, } from 'react/jsx-runtime';
 import { useContext as useContext10, useMemo as useMemo7, useRef as useRef7, } from 'react';
 import { useContext as useContext11, useEffect as useEffect7, useState as useState3, } from 'react';
-import * as React8 from 'react';
+import { jsx as jsx9, } from 'react/jsx-runtime';
 import { forwardRef as forwardRef2, useEffect as useEffect8, useRef as useRef8, } from 'react';
 import { createContext as createContext8, } from 'react';
-import * as React9 from 'react';
+import { jsx as jsx10, } from 'react/jsx-runtime';
 import { forwardRef as forwardRef3, useContext as useContext12, } from 'react';
 import { useContext as useContext13, useInsertionEffect as useInsertionEffect3, useRef as useRef9, } from 'react';
 import { useInsertionEffect as useInsertionEffect4, } from 'react';
@@ -52,10 +55,11 @@ import { useCallback as useCallback3, useRef as useRef11, useState as useState5,
 import { useEffect as useEffect11, useState as useState6, } from 'react';
 import { useEffect as useEffect12, } from 'react';
 import { useEffect as useEffect13, useRef as useRef12, } from 'react';
-import * as React10 from 'react';
+import { useCallback as useCallback4, } from 'react';
 import { useEffect as useEffect14, useState as useState7, } from 'react';
 import { useContext as useContext16, } from 'react';
-import * as React11 from 'react';
+import { jsx as jsx11, } from 'react/jsx-runtime';
+import * as React3 from 'react';
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -136,7 +140,7 @@ var require_is_prop_valid_browser_cjs = __commonJS({
     }
     var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
     var reactPropsRegex2 =
-      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|inert|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
     var index = memoize3(
       function (prop,) {
         return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
@@ -250,12 +254,18 @@ function createRenderStep(runNextFrame,) {
   return step2;
 }
 var stepsOrder = [
-  'prepare',
   'read',
+  // Read
+  'resolveKeyframes',
+  // Write/Read/Write/Read
   'update',
+  // Compute
   'preRender',
+  // Compute
   'render',
+  // Write
   'postRender',
+  // Compute
 ];
 var maxElapsed = 40;
 function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
@@ -307,7 +317,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
   return { schedule, cancel, state, steps: steps2, };
 }
 var { schedule: microtask, cancel: cancelMicrotask, } = createRenderBatcher(queueMicrotask, false,);
-function useVisualElement(Component23, visualState, props, createVisualElement2,) {
+function useVisualElement(Component33, visualState, props, createVisualElement2,) {
   const { visualElement: parent, } = useContext(MotionContext,);
   const lazyContext = useContext(LazyContext,);
   const presenceContext = useContext(PresenceContext,);
@@ -315,7 +325,7 @@ function useVisualElement(Component23, visualState, props, createVisualElement2,
   const visualElementRef = useRef();
   createVisualElement2 = createVisualElement2 || lazyContext.renderer;
   if (!visualElementRef.current && createVisualElement2) {
-    visualElementRef.current = createVisualElement2(Component23, {
+    visualElementRef.current = createVisualElement2(Component33, {
       visualState,
       parent,
       props,
@@ -459,7 +469,7 @@ function createMotionComponent(
     createVisualElement: createVisualElement2,
     useRender,
     useVisualState: useVisualState2,
-    Component: Component23,
+    Component: Component33,
   },
 ) {
   preloadedFeatures2 && loadFeatures(preloadedFeatures2,);
@@ -474,7 +484,7 @@ function createMotionComponent(
     const context = useCreateMotionContext(props,);
     const visualState = useVisualState2(props, isStatic,);
     if (!isStatic && isBrowser) {
-      context.visualElement = useVisualElement(Component23, visualState, configAndProps, createVisualElement2,);
+      context.visualElement = useVisualElement(Component33, visualState, configAndProps, createVisualElement2,);
       const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
       const isStrict = useContext3(LazyContext,).strict;
       if (context.visualElement) {
@@ -487,24 +497,23 @@ function createMotionComponent(
         );
       }
     }
-    return React.createElement(
-      MotionContext.Provider,
-      { value: context, },
-      MeasureLayout2 && context.visualElement
-        ? React.createElement(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps, },)
-        : null,
-      useRender(
-        Component23,
-        props,
-        useMotionRef(visualState, context.visualElement, externalRef,),
-        visualState,
-        isStatic,
-        context.visualElement,
-      ),
-    );
+    return jsxs(MotionContext.Provider, {
+      value: context,
+      children: [
+        MeasureLayout2 && context.visualElement ? jsx(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps, },) : null,
+        useRender(
+          Component33,
+          props,
+          useMotionRef(visualState, context.visualElement, externalRef,),
+          visualState,
+          isStatic,
+          context.visualElement,
+        ),
+      ],
+    },);
   }
   const ForwardRefComponent = forwardRef(MotionComponent,);
-  ForwardRefComponent[motionComponentSymbol] = Component23;
+  ForwardRefComponent[motionComponentSymbol] = Component33;
   return ForwardRefComponent;
 }
 function useLayoutId({ layoutId, },) {
@@ -775,8 +784,8 @@ var isPrimaryPointer = (event,) => {
 function extractEventInfo(event, pointType = 'page',) {
   return {
     point: {
-      x: event[pointType + 'X'],
-      y: event[pointType + 'Y'],
+      x: event[`${pointType}X`],
+      y: event[`${pointType}Y`],
     },
   };
 }
@@ -854,47 +863,6 @@ if (false) {
     }
   };
 }
-var calcBezier = (t, a1, a2,) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
-var subdivisionPrecision = 1e-7;
-var subdivisionMaxIterations = 12;
-function binarySubdivide(x, lowerBound, upperBound, mX1, mX2,) {
-  let currentX;
-  let currentT;
-  let i = 0;
-  do {
-    currentT = lowerBound + (upperBound - lowerBound) / 2;
-    currentX = calcBezier(currentT, mX1, mX2,) - x;
-    if (currentX > 0) {
-      upperBound = currentT;
-    } else {
-      lowerBound = currentT;
-    }
-  } while (Math.abs(currentX,) > subdivisionPrecision && ++i < subdivisionMaxIterations);
-  return currentT;
-}
-function cubicBezier(mX1, mY1, mX2, mY2,) {
-  if (mX1 === mY1 && mX2 === mY2) {
-    return noop;
-  }
-  const getTForX = (aX,) => binarySubdivide(aX, 0, 1, mX1, mX2,);
-  return (t,) => t === 0 || t === 1 ? t : calcBezier(getTForX(t,), mY1, mY2,);
-}
-var easeIn = cubicBezier(0.42, 0, 1, 1,);
-var easeOut = cubicBezier(0, 0, 0.58, 1,);
-var easeInOut = cubicBezier(0.42, 0, 0.58, 1,);
-var mirrorEasing = (easing,) => (p,) => p <= 0.5 ? easing(2 * p,) / 2 : (2 - easing(2 * (1 - p),)) / 2;
-var reverseEasing = (easing,) => (p,) => 1 - easing(1 - p,);
-var circIn = (p,) => 1 - Math.sin(Math.acos(p,),);
-var circOut = reverseEasing(circIn,);
-var circInOut = mirrorEasing(circIn,);
-var backOut = cubicBezier(0.33, 1.53, 0.69, 0.99,);
-var backIn = reverseEasing(backOut,);
-var backInOut = mirrorEasing(backIn,);
-var anticipate = (p,) => (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
-var progress = (from, to, value,) => {
-  const toFromDifference = to - from;
-  return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
-};
 var number = {
   test: (v,) => typeof v === 'number',
   parse: parseFloat,
@@ -1013,40 +981,40 @@ function analyseComplexValue(value,) {
     number: [],
     var: [],
   };
-  const types2 = [];
+  const types = [];
   let i = 0;
   const tokenised = originalValue.replace(complexRegex, (parsedValue,) => {
     if (color.test(parsedValue,)) {
       indexes.color.push(i,);
-      types2.push(COLOR_TOKEN,);
+      types.push(COLOR_TOKEN,);
       values.push(color.parse(parsedValue,),);
     } else if (parsedValue.startsWith(VAR_FUNCTION_TOKEN,)) {
       indexes.var.push(i,);
-      types2.push(VAR_TOKEN,);
+      types.push(VAR_TOKEN,);
       values.push(parsedValue,);
     } else {
       indexes.number.push(i,);
-      types2.push(NUMBER_TOKEN,);
+      types.push(NUMBER_TOKEN,);
       values.push(parseFloat(parsedValue,),);
     }
     ++i;
     return SPLIT_TOKEN;
   },);
   const split = tokenised.split(SPLIT_TOKEN,);
-  return { values, split, indexes, types: types2, };
+  return { values, split, indexes, types, };
 }
 function parseComplexValue(v,) {
   return analyseComplexValue(v,).values;
 }
 function createTransformer(source,) {
-  const { split, types: types2, } = analyseComplexValue(source,);
+  const { split, types, } = analyseComplexValue(source,);
   const numSections = split.length;
   return (v,) => {
     let output = '';
     for (let i = 0; i < numSections; i++) {
       output += split[i];
       if (v[i] !== void 0) {
-        const type = types2[i];
+        const type = types[i];
         if (type === NUMBER_TOKEN) {
           output += sanitize(v[i],);
         } else if (type === COLOR_TOKEN) {
@@ -1070,6 +1038,218 @@ var complex = {
   parse: parseComplexValue,
   createTransformer,
   getAnimatableNone,
+};
+var secondsToMilliseconds = (seconds,) => seconds * 1e3;
+var millisecondsToSeconds = (milliseconds,) => milliseconds / 1e3;
+function velocityPerSecond(velocity, frameDuration,) {
+  return frameDuration ? velocity * (1e3 / frameDuration) : 0;
+}
+var velocitySampleDuration = 5;
+function calcGeneratorVelocity(resolveValue2, t, current,) {
+  const prevT = Math.max(t - velocitySampleDuration, 0,);
+  return velocityPerSecond(current - resolveValue2(prevT,), t - prevT,);
+}
+var safeMin = 1e-3;
+var minDuration = 0.01;
+var maxDuration = 10;
+var minDamping = 0.05;
+var maxDamping = 1;
+function findSpring({ duration = 800, bounce = 0.25, velocity = 0, mass = 1, },) {
+  let envelope;
+  let derivative;
+  warning(duration <= secondsToMilliseconds(maxDuration,), 'Spring duration must be 10 seconds or less',);
+  let dampingRatio = 1 - bounce;
+  dampingRatio = clamp(minDamping, maxDamping, dampingRatio,);
+  duration = clamp(minDuration, maxDuration, millisecondsToSeconds(duration,),);
+  if (dampingRatio < 1) {
+    envelope = (undampedFreq2,) => {
+      const exponentialDecay = undampedFreq2 * dampingRatio;
+      const delta = exponentialDecay * duration;
+      const a = exponentialDecay - velocity;
+      const b = calcAngularFreq(undampedFreq2, dampingRatio,);
+      const c = Math.exp(-delta,);
+      return safeMin - a / b * c;
+    };
+    derivative = (undampedFreq2,) => {
+      const exponentialDecay = undampedFreq2 * dampingRatio;
+      const delta = exponentialDecay * duration;
+      const d = delta * velocity + velocity;
+      const e = Math.pow(dampingRatio, 2,) * Math.pow(undampedFreq2, 2,) * duration;
+      const f = Math.exp(-delta,);
+      const g = calcAngularFreq(Math.pow(undampedFreq2, 2,), dampingRatio,);
+      const factor = -envelope(undampedFreq2,) + safeMin > 0 ? -1 : 1;
+      return factor * ((d - e) * f) / g;
+    };
+  } else {
+    envelope = (undampedFreq2,) => {
+      const a = Math.exp(-undampedFreq2 * duration,);
+      const b = (undampedFreq2 - velocity) * duration + 1;
+      return -safeMin + a * b;
+    };
+    derivative = (undampedFreq2,) => {
+      const a = Math.exp(-undampedFreq2 * duration,);
+      const b = (velocity - undampedFreq2) * (duration * duration);
+      return a * b;
+    };
+  }
+  const initialGuess = 5 / duration;
+  const undampedFreq = approximateRoot(envelope, derivative, initialGuess,);
+  duration = secondsToMilliseconds(duration,);
+  if (isNaN(undampedFreq,)) {
+    return {
+      stiffness: 100,
+      damping: 10,
+      duration,
+    };
+  } else {
+    const stiffness = Math.pow(undampedFreq, 2,) * mass;
+    return {
+      stiffness,
+      damping: dampingRatio * 2 * Math.sqrt(mass * stiffness,),
+      duration,
+    };
+  }
+}
+var rootIterations = 12;
+function approximateRoot(envelope, derivative, initialGuess,) {
+  let result = initialGuess;
+  for (let i = 1; i < rootIterations; i++) {
+    result = result - envelope(result,) / derivative(result,);
+  }
+  return result;
+}
+function calcAngularFreq(undampedFreq, dampingRatio,) {
+  return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio,);
+}
+var durationKeys = ['duration', 'bounce',];
+var physicsKeys = ['stiffness', 'damping', 'mass',];
+function isSpringType(options, keys23,) {
+  return keys23.some((key7,) => options[key7] !== void 0);
+}
+function getSpringOptions(options,) {
+  let springOptions = {
+    velocity: 0,
+    stiffness: 100,
+    damping: 10,
+    mass: 1,
+    isResolvedFromDuration: false,
+    ...options,
+  };
+  if (!isSpringType(options, physicsKeys,) && isSpringType(options, durationKeys,)) {
+    const derived = findSpring(options,);
+    springOptions = {
+      ...springOptions,
+      ...derived,
+      mass: 1,
+    };
+    springOptions.isResolvedFromDuration = true;
+  }
+  return springOptions;
+}
+function spring({ keyframes: keyframes2, restDelta, restSpeed, ...options },) {
+  const origin = keyframes2[0];
+  const target = keyframes2[keyframes2.length - 1];
+  const state = { done: false, value: origin, };
+  const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration, } = getSpringOptions({
+    ...options,
+    velocity: -millisecondsToSeconds(options.velocity || 0,),
+  },);
+  const initialVelocity = velocity || 0;
+  const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass,));
+  const initialDelta = target - origin;
+  const undampedAngularFreq = millisecondsToSeconds(Math.sqrt(stiffness / mass,),);
+  const isGranularScale = Math.abs(initialDelta,) < 5;
+  restSpeed || (restSpeed = isGranularScale ? 0.01 : 2);
+  restDelta || (restDelta = isGranularScale ? 5e-3 : 0.5);
+  let resolveSpring;
+  if (dampingRatio < 1) {
+    const angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio,);
+    resolveSpring = (t,) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
+      return target -
+        envelope *
+          ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq * Math.sin(angularFreq * t,) +
+            initialDelta * Math.cos(angularFreq * t,));
+    };
+  } else if (dampingRatio === 1) {
+    resolveSpring = (t,) =>
+      target - Math.exp(-undampedAngularFreq * t,) * (initialDelta + (initialVelocity + undampedAngularFreq * initialDelta) * t);
+  } else {
+    const dampedAngularFreq = undampedAngularFreq * Math.sqrt(dampingRatio * dampingRatio - 1,);
+    resolveSpring = (t,) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
+      const freqForT = Math.min(dampedAngularFreq * t, 300,);
+      return target -
+        envelope *
+          ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) * Math.sinh(freqForT,) +
+            dampedAngularFreq * initialDelta * Math.cosh(freqForT,)) /
+          dampedAngularFreq;
+    };
+  }
+  return {
+    calculatedDuration: isResolvedFromDuration ? duration || null : null,
+    next: (t,) => {
+      const current = resolveSpring(t,);
+      if (!isResolvedFromDuration) {
+        let currentVelocity = initialVelocity;
+        if (t !== 0) {
+          if (dampingRatio < 1) {
+            currentVelocity = calcGeneratorVelocity(resolveSpring, t, current,);
+          } else {
+            currentVelocity = 0;
+          }
+        }
+        const isBelowVelocityThreshold = Math.abs(currentVelocity,) <= restSpeed;
+        const isBelowDisplacementThreshold = Math.abs(target - current,) <= restDelta;
+        state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
+      } else {
+        state.done = t >= duration;
+      }
+      state.value = state.done ? target : current;
+      return state;
+    },
+  };
+}
+var calcBezier = (t, a1, a2,) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
+var subdivisionPrecision = 1e-7;
+var subdivisionMaxIterations = 12;
+function binarySubdivide(x, lowerBound, upperBound, mX1, mX2,) {
+  let currentX;
+  let currentT;
+  let i = 0;
+  do {
+    currentT = lowerBound + (upperBound - lowerBound) / 2;
+    currentX = calcBezier(currentT, mX1, mX2,) - x;
+    if (currentX > 0) {
+      upperBound = currentT;
+    } else {
+      lowerBound = currentT;
+    }
+  } while (Math.abs(currentX,) > subdivisionPrecision && ++i < subdivisionMaxIterations);
+  return currentT;
+}
+function cubicBezier(mX1, mY1, mX2, mY2,) {
+  if (mX1 === mY1 && mX2 === mY2) {
+    return noop;
+  }
+  const getTForX = (aX,) => binarySubdivide(aX, 0, 1, mX1, mX2,);
+  return (t,) => t === 0 || t === 1 ? t : calcBezier(getTForX(t,), mY1, mY2,);
+}
+var easeIn = cubicBezier(0.42, 0, 1, 1,);
+var easeOut = cubicBezier(0, 0, 0.58, 1,);
+var easeInOut = cubicBezier(0.42, 0, 0.58, 1,);
+var mirrorEasing = (easing,) => (p,) => p <= 0.5 ? easing(2 * p,) / 2 : (2 - easing(2 * (1 - p),)) / 2;
+var reverseEasing = (easing,) => (p,) => 1 - easing(1 - p,);
+var circIn = (p,) => 1 - Math.sin(Math.acos(p,),);
+var circOut = reverseEasing(circIn,);
+var circInOut = mirrorEasing(circIn,);
+var backOut = cubicBezier(0.33, 1.53, 0.69, 0.99,);
+var backIn = reverseEasing(backOut,);
+var backInOut = mirrorEasing(backIn,);
+var anticipate = (p,) => (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
+var progress = (from, to, value,) => {
+  const toFromDifference = to - from;
+  return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
 };
 var mixNumber = (from, to, progress2,) => {
   return from + (to - from) * progress2;
@@ -1255,6 +1435,9 @@ function interpolate(input, output, { clamp: isClamp = true, ease: ease2, mixer,
   if (inputLength === 1) {
     return () => output[0];
   }
+  if (inputLength === 2 && input[0] === input[1]) {
+    return () => output[1];
+  }
   if (input[0] > input[inputLength - 1]) {
     input = [...input,].reverse();
     output = [...output,].reverse();
@@ -1275,174 +1458,270 @@ function interpolate(input, output, { clamp: isClamp = true, ease: ease2, mixer,
   };
   return isClamp ? (v,) => interpolator(clamp(input[0], input[inputLength - 1], v,),) : interpolator;
 }
-var secondsToMilliseconds = (seconds,) => seconds * 1e3;
-var millisecondsToSeconds = (milliseconds,) => milliseconds / 1e3;
-function velocityPerSecond(velocity, frameDuration,) {
-  return frameDuration ? velocity * (1e3 / frameDuration) : 0;
-}
-var velocitySampleDuration = 5;
-function calcGeneratorVelocity(resolveValue2, t, current,) {
-  const prevT = Math.max(t - velocitySampleDuration, 0,);
-  return velocityPerSecond(current - resolveValue2(prevT,), t - prevT,);
-}
-var safeMin = 1e-3;
-var minDuration = 0.01;
-var maxDuration = 10;
-var minDamping = 0.05;
-var maxDamping = 1;
-function findSpring({ duration = 800, bounce = 0.25, velocity = 0, mass = 1, },) {
-  let envelope;
-  let derivative;
-  warning(duration <= secondsToMilliseconds(maxDuration,), 'Spring duration must be 10 seconds or less',);
-  let dampingRatio = 1 - bounce;
-  dampingRatio = clamp(minDamping, maxDamping, dampingRatio,);
-  duration = clamp(minDuration, maxDuration, millisecondsToSeconds(duration,),);
-  if (dampingRatio < 1) {
-    envelope = (undampedFreq2,) => {
-      const exponentialDecay = undampedFreq2 * dampingRatio;
-      const delta = exponentialDecay * duration;
-      const a = exponentialDecay - velocity;
-      const b = calcAngularFreq(undampedFreq2, dampingRatio,);
-      const c = Math.exp(-delta,);
-      return safeMin - a / b * c;
-    };
-    derivative = (undampedFreq2,) => {
-      const exponentialDecay = undampedFreq2 * dampingRatio;
-      const delta = exponentialDecay * duration;
-      const d = delta * velocity + velocity;
-      const e = Math.pow(dampingRatio, 2,) * Math.pow(undampedFreq2, 2,) * duration;
-      const f = Math.exp(-delta,);
-      const g = calcAngularFreq(Math.pow(undampedFreq2, 2,), dampingRatio,);
-      const factor = -envelope(undampedFreq2,) + safeMin > 0 ? -1 : 1;
-      return factor * ((d - e) * f) / g;
-    };
+var positionalKeys = /* @__PURE__ */ new Set([
+  'width',
+  'height',
+  'top',
+  'left',
+  'right',
+  'bottom',
+  'x',
+  'y',
+  'translateX',
+  'translateY',
+],);
+var isNumOrPxType = (v,) => v === number || v === px;
+var getPosFromMatrix = (matrix, pos,) => parseFloat(matrix.split(', ',)[pos],);
+var getTranslateFromMatrix = (pos2, pos3,) => (_bbox, { transform: transform2, },) => {
+  if (transform2 === 'none' || !transform2) {
+    return 0;
+  }
+  const matrix3d = transform2.match(/^matrix3d\((.+)\)$/u,);
+  if (matrix3d) {
+    return getPosFromMatrix(matrix3d[1], pos3,);
   } else {
-    envelope = (undampedFreq2,) => {
-      const a = Math.exp(-undampedFreq2 * duration,);
-      const b = (undampedFreq2 - velocity) * duration + 1;
-      return -safeMin + a * b;
-    };
-    derivative = (undampedFreq2,) => {
-      const a = Math.exp(-undampedFreq2 * duration,);
-      const b = (velocity - undampedFreq2) * (duration * duration);
-      return a * b;
-    };
+    const matrix = transform2.match(/^matrix\((.+)\)$/u,);
+    if (matrix) {
+      return getPosFromMatrix(matrix[1], pos2,);
+    } else {
+      return 0;
+    }
   }
-  const initialGuess = 5 / duration;
-  const undampedFreq = approximateRoot(envelope, derivative, initialGuess,);
-  duration = secondsToMilliseconds(duration,);
-  if (isNaN(undampedFreq,)) {
-    return {
-      stiffness: 100,
-      damping: 10,
-      duration,
-    };
-  } else {
-    const stiffness = Math.pow(undampedFreq, 2,) * mass;
-    return {
-      stiffness,
-      damping: dampingRatio * 2 * Math.sqrt(mass * stiffness,),
-      duration,
-    };
-  }
-}
-var rootIterations = 12;
-function approximateRoot(envelope, derivative, initialGuess,) {
-  let result = initialGuess;
-  for (let i = 1; i < rootIterations; i++) {
-    result = result - envelope(result,) / derivative(result,);
-  }
-  return result;
-}
-function calcAngularFreq(undampedFreq, dampingRatio,) {
-  return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio,);
-}
-var durationKeys = ['duration', 'bounce',];
-var physicsKeys = ['stiffness', 'damping', 'mass',];
-function isSpringType(options, keys23,) {
-  return keys23.some((key7,) => options[key7] !== void 0);
-}
-function getSpringOptions(options,) {
-  let springOptions = {
-    velocity: 0,
-    stiffness: 100,
-    damping: 10,
-    mass: 1,
-    isResolvedFromDuration: false,
-    ...options,
-  };
-  if (!isSpringType(options, physicsKeys,) && isSpringType(options, durationKeys,)) {
-    const derived = findSpring(options,);
-    springOptions = {
-      ...springOptions,
-      ...derived,
-      mass: 1,
-    };
-    springOptions.isResolvedFromDuration = true;
-  }
-  return springOptions;
-}
-function spring({ keyframes: keyframes2, restDelta, restSpeed, ...options },) {
-  const origin = keyframes2[0];
-  const target = keyframes2[keyframes2.length - 1];
-  const state = { done: false, value: origin, };
-  const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration, } = getSpringOptions({
-    ...options,
-    velocity: -millisecondsToSeconds(options.velocity || 0,),
+};
+var transformKeys = /* @__PURE__ */ new Set(['x', 'y', 'z',],);
+var nonTranslationalTransformKeys = transformPropOrder.filter((key7,) => !transformKeys.has(key7,));
+function removeNonTranslationalTransform(visualElement,) {
+  const removedTransforms = [];
+  nonTranslationalTransformKeys.forEach((key7,) => {
+    const value = visualElement.getValue(key7,);
+    if (value !== void 0) {
+      removedTransforms.push([key7, value.get(),],);
+      value.set(key7.startsWith('scale',) ? 1 : 0,);
+    }
   },);
-  const initialVelocity = velocity || 0;
-  const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass,));
-  const initialDelta = target - origin;
-  const undampedAngularFreq = millisecondsToSeconds(Math.sqrt(stiffness / mass,),);
-  const isGranularScale = Math.abs(initialDelta,) < 5;
-  restSpeed || (restSpeed = isGranularScale ? 0.01 : 2);
-  restDelta || (restDelta = isGranularScale ? 5e-3 : 0.5);
-  let resolveSpring;
-  if (dampingRatio < 1) {
-    const angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio,);
-    resolveSpring = (t,) => {
-      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
-      return target -
-        envelope *
-          ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq * Math.sin(angularFreq * t,) +
-            initialDelta * Math.cos(angularFreq * t,));
-    };
-  } else if (dampingRatio === 1) {
-    resolveSpring = (t,) =>
-      target - Math.exp(-undampedAngularFreq * t,) * (initialDelta + (initialVelocity + undampedAngularFreq * initialDelta) * t);
-  } else {
-    const dampedAngularFreq = undampedAngularFreq * Math.sqrt(dampingRatio * dampingRatio - 1,);
-    resolveSpring = (t,) => {
-      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
-      const freqForT = Math.min(dampedAngularFreq * t, 300,);
-      return target -
-        envelope *
-          ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) * Math.sinh(freqForT,) +
-            dampedAngularFreq * initialDelta * Math.cosh(freqForT,)) /
-          dampedAngularFreq;
-    };
-  }
-  return {
-    calculatedDuration: isResolvedFromDuration ? duration || null : null,
-    next: (t,) => {
-      const current = resolveSpring(t,);
-      if (!isResolvedFromDuration) {
-        let currentVelocity = initialVelocity;
-        if (t !== 0) {
-          if (dampingRatio < 1) {
-            currentVelocity = calcGeneratorVelocity(resolveSpring, t, current,);
-          } else {
-            currentVelocity = 0;
-          }
-        }
-        const isBelowVelocityThreshold = Math.abs(currentVelocity,) <= restSpeed;
-        const isBelowDisplacementThreshold = Math.abs(target - current,) <= restDelta;
-        state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
-      } else {
-        state.done = t >= duration;
+  return removedTransforms;
+}
+var positionalValues = {
+  // Dimensions
+  width: ({ x, }, { paddingLeft = '0', paddingRight = '0', },) => x.max - x.min - parseFloat(paddingLeft,) - parseFloat(paddingRight,),
+  height: ({ y, }, { paddingTop = '0', paddingBottom = '0', },) => y.max - y.min - parseFloat(paddingTop,) - parseFloat(paddingBottom,),
+  top: (_bbox, { top, },) => parseFloat(top,),
+  left: (_bbox, { left, },) => parseFloat(left,),
+  bottom: ({ y, }, { top, },) => parseFloat(top,) + (y.max - y.min),
+  right: ({ x, }, { left, },) => parseFloat(left,) + (x.max - x.min),
+  // Transform
+  x: getTranslateFromMatrix(4, 13,),
+  y: getTranslateFromMatrix(5, 14,),
+};
+positionalValues.translateX = positionalValues.x;
+positionalValues.translateY = positionalValues.y;
+var toResolve = /* @__PURE__ */ new Set();
+var isScheduled = false;
+var anyNeedsMeasurement = false;
+function measureAllKeyframes() {
+  if (anyNeedsMeasurement) {
+    const resolversToMeasure = Array.from(toResolve,).filter((resolver,) => resolver.needsMeasurement);
+    const elementsToMeasure = new Set(resolversToMeasure.map((resolver,) => resolver.element),);
+    const transformsToRestore = /* @__PURE__ */ new Map();
+    elementsToMeasure.forEach((element,) => {
+      const removedTransforms = removeNonTranslationalTransform(element,);
+      if (!removedTransforms.length) {
+        return;
       }
-      state.value = state.done ? target : current;
-      return state;
+      transformsToRestore.set(element, removedTransforms,);
+      element.render();
+    },);
+    resolversToMeasure.forEach((resolver,) => resolver.measureInitialState());
+    elementsToMeasure.forEach((element,) => {
+      element.render();
+      const restore = transformsToRestore.get(element,);
+      if (restore) {
+        restore.forEach(([key7, value,],) => {
+          var _a;
+          (_a = element.getValue(key7,)) === null || _a === void 0 ? void 0 : _a.set(value,);
+        },);
+      }
+    },);
+    resolversToMeasure.forEach((resolver,) => resolver.measureEndState());
+    resolversToMeasure.forEach((resolver,) => {
+      if (resolver.suspendedScrollY !== void 0) {
+        window.scrollTo(0, resolver.suspendedScrollY,);
+      }
+    },);
+  }
+  anyNeedsMeasurement = false;
+  isScheduled = false;
+  toResolve.forEach((resolver,) => resolver.complete());
+  toResolve.clear();
+}
+function readAllKeyframes() {
+  toResolve.forEach((resolver,) => {
+    resolver.readKeyframes();
+    if (resolver.needsMeasurement) {
+      anyNeedsMeasurement = true;
+    }
+  },);
+}
+function flushKeyframeResolvers() {
+  readAllKeyframes();
+  measureAllKeyframes();
+}
+var KeyframeResolver = class {
+  constructor(unresolvedKeyframes, onComplete, name, motionValue2, element, isAsync = false,) {
+    this.isComplete = false;
+    this.isAsync = false;
+    this.needsMeasurement = false;
+    this.isScheduled = false;
+    this.unresolvedKeyframes = [...unresolvedKeyframes,];
+    this.onComplete = onComplete;
+    this.name = name;
+    this.motionValue = motionValue2;
+    this.element = element;
+    this.isAsync = isAsync;
+  }
+  scheduleResolve() {
+    this.isScheduled = true;
+    if (this.isAsync) {
+      toResolve.add(this,);
+      if (!isScheduled) {
+        isScheduled = true;
+        frame.read(readAllKeyframes,);
+        frame.resolveKeyframes(measureAllKeyframes,);
+      }
+    } else {
+      this.readKeyframes();
+      this.complete();
+    }
+  }
+  readKeyframes() {
+    const { unresolvedKeyframes, name, element, motionValue: motionValue2, } = this;
+    for (let i = 0; i < unresolvedKeyframes.length; i++) {
+      if (unresolvedKeyframes[i] === null) {
+        if (i === 0) {
+          const currentValue = motionValue2 === null || motionValue2 === void 0 ? void 0 : motionValue2.get();
+          const finalKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
+          if (currentValue !== void 0) {
+            unresolvedKeyframes[0] = currentValue;
+          } else if (element && name) {
+            const valueAsRead = element.readValue(name, finalKeyframe,);
+            if (valueAsRead !== void 0 && valueAsRead !== null) {
+              unresolvedKeyframes[0] = valueAsRead;
+            }
+          }
+          if (unresolvedKeyframes[0] === void 0) {
+            unresolvedKeyframes[0] = finalKeyframe;
+          }
+          if (motionValue2 && currentValue === void 0) {
+            motionValue2.set(unresolvedKeyframes[0],);
+          }
+        } else {
+          unresolvedKeyframes[i] = unresolvedKeyframes[i - 1];
+        }
+      }
+    }
+  }
+  setFinalKeyframe() {
+  }
+  measureInitialState() {
+  }
+  renderEndStyles() {
+  }
+  measureEndState() {
+  }
+  complete() {
+    this.isComplete = true;
+    this.onComplete(this.unresolvedKeyframes, this.finalKeyframe,);
+    toResolve.delete(this,);
+  }
+  cancel() {
+    if (!this.isComplete) {
+      this.isScheduled = false;
+      toResolve.delete(this,);
+    }
+  }
+  resume() {
+    if (!this.isComplete) {
+      this.scheduleResolve();
+    }
+  }
+};
+function inertia(
+  {
+    keyframes: keyframes2,
+    velocity = 0,
+    power = 0.8,
+    timeConstant: timeConstant2 = 325,
+    bounceDamping = 10,
+    bounceStiffness = 500,
+    modifyTarget,
+    min,
+    max,
+    restDelta = 0.5,
+    restSpeed,
+  },
+) {
+  const origin = keyframes2[0];
+  const state = {
+    done: false,
+    value: origin,
+  };
+  const isOutOfBounds = (v,) => min !== void 0 && v < min || max !== void 0 && v > max;
+  const nearestBoundary = (v,) => {
+    if (min === void 0) {
+      return max;
+    }
+    if (max === void 0) {
+      return min;
+    }
+    return Math.abs(min - v,) < Math.abs(max - v,) ? min : max;
+  };
+  let amplitude = power * velocity;
+  const ideal = origin + amplitude;
+  const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal,);
+  if (target !== ideal) {
+    amplitude = target - origin;
+  }
+  const calcDelta = (t,) => -amplitude * Math.exp(-t / timeConstant2,);
+  const calcLatest = (t,) => target + calcDelta(t,);
+  const applyFriction = (t,) => {
+    const delta = calcDelta(t,);
+    const latest = calcLatest(t,);
+    state.done = Math.abs(delta,) <= restDelta;
+    state.value = state.done ? target : latest;
+  };
+  let timeReachedBoundary;
+  let spring$1;
+  const checkCatchBoundary = (t,) => {
+    if (!isOutOfBounds(state.value,)) {
+      return;
+    }
+    timeReachedBoundary = t;
+    spring$1 = spring({
+      keyframes: [state.value, nearestBoundary(state.value,),],
+      velocity: calcGeneratorVelocity(calcLatest, t, state.value,),
+      // TODO: This should be passing * 1000
+      damping: bounceDamping,
+      stiffness: bounceStiffness,
+      restDelta,
+      restSpeed,
+    },);
+  };
+  checkCatchBoundary(0,);
+  return {
+    calculatedDuration: null,
+    next: (t,) => {
+      let hasUpdatedFrame = false;
+      if (!spring$1 && timeReachedBoundary === void 0) {
+        hasUpdatedFrame = true;
+        applyFriction(t,);
+        checkCatchBoundary(t,);
+      }
+      if (timeReachedBoundary !== void 0 && t >= timeReachedBoundary) {
+        return spring$1.next(t - timeReachedBoundary,);
+      } else {
+        !hasUpdatedFrame && applyFriction(t,);
+        return state;
+      }
     },
   };
 }
@@ -1515,84 +1794,140 @@ function keyframes({ duration = 300, keyframes: keyframeValues, times, ease: eas
     },
   };
 }
-function inertia(
-  {
-    keyframes: keyframes2,
-    velocity = 0,
-    power = 0.8,
-    timeConstant: timeConstant2 = 325,
-    bounceDamping = 10,
-    bounceStiffness = 500,
-    modifyTarget,
-    min,
-    max,
-    restDelta = 0.5,
-    restSpeed,
-  },
-) {
-  const origin = keyframes2[0];
-  const state = {
-    done: false,
-    value: origin,
-  };
-  const isOutOfBounds = (v,) => min !== void 0 && v < min || max !== void 0 && v > max;
-  const nearestBoundary = (v,) => {
-    if (min === void 0) {
-      return max;
-    }
-    if (max === void 0) {
-      return min;
-    }
-    return Math.abs(min - v,) < Math.abs(max - v,) ? min : max;
-  };
-  let amplitude = power * velocity;
-  const ideal = origin + amplitude;
-  const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal,);
-  if (target !== ideal) {
-    amplitude = target - origin;
+var instantAnimationState = {
+  current: false,
+};
+var isAnimatable = (value, name,) => {
+  if (name === 'zIndex') {
+    return false;
   }
-  const calcDelta = (t,) => -amplitude * Math.exp(-t / timeConstant2,);
-  const calcLatest = (t,) => target + calcDelta(t,);
-  const applyFriction = (t,) => {
-    const delta = calcDelta(t,);
-    const latest = calcLatest(t,);
-    state.done = Math.abs(delta,) <= restDelta;
-    state.value = state.done ? target : latest;
-  };
-  let timeReachedBoundary;
-  let spring$1;
-  const checkCatchBoundary = (t,) => {
-    if (!isOutOfBounds(state.value,)) {
+  if (typeof value === 'number' || Array.isArray(value,)) {
+    return true;
+  }
+  if (
+    typeof value === 'string' && // It's animatable if we have a string
+    (complex.test(value,) || value === '0') && // And it contains numbers and/or colors
+    !value.startsWith('url(',)
+  ) {
+    return true;
+  }
+  return false;
+};
+function hasKeyframesChanged(keyframes2,) {
+  const current = keyframes2[0];
+  if (keyframes2.length === 1) {
+    return true;
+  }
+  for (let i = 0; i < keyframes2.length; i++) {
+    if (keyframes2[i] !== current) {
+      return true;
+    }
+  }
+}
+function canAnimate(keyframes2, name, type, velocity,) {
+  const originKeyframe = keyframes2[0];
+  if (originKeyframe === null) {
+    return false;
+  }
+  const targetKeyframe = keyframes2[keyframes2.length - 1];
+  const isOriginAnimatable = isAnimatable(originKeyframe, name,);
+  const isTargetAnimatable = isAnimatable(targetKeyframe, name,);
+  warning(
+    isOriginAnimatable === isTargetAnimatable,
+    `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". ${originKeyframe} is not an animatable value - to enable this animation set ${originKeyframe} to a value animatable to ${targetKeyframe} via the \`style\` property.`,
+  );
+  if (!isOriginAnimatable || !isTargetAnimatable) {
+    return false;
+  }
+  return hasKeyframesChanged(keyframes2,) || type === 'spring' && velocity;
+}
+var isNotNull = (value,) => value !== null;
+function getFinalKeyframe(keyframes2, { repeat, repeatType = 'loop', }, finalKeyframe,) {
+  const resolvedKeyframes = keyframes2.filter(isNotNull,);
+  const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
+  return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
+}
+var BaseAnimation = class {
+  constructor({ autoplay = true, delay: delay2 = 0, type = 'keyframes', repeat = 0, repeatDelay = 0, repeatType = 'loop', ...options },) {
+    this.isStopped = false;
+    this.hasAttemptedResolve = false;
+    this.options = {
+      autoplay,
+      delay: delay2,
+      type,
+      repeat,
+      repeatDelay,
+      repeatType,
+      ...options,
+    };
+    this.updateFinishedPromise();
+  }
+  /**
+   * A getter for resolved data. If keyframes are not yet resolved, accessing
+   * this.resolved will synchronously flush all pending keyframe resolvers.
+   * This is a deoptimisation, but at its worst still batches read/writes.
+   */
+  get resolved() {
+    if (!this._resolved && !this.hasAttemptedResolve) {
+      flushKeyframeResolvers();
+    }
+    return this._resolved;
+  }
+  /**
+   * A method to be called when the keyframes resolver completes. This method
+   * will check if its possible to run the animation and, if not, skip it.
+   * Otherwise, it will call initPlayback on the implementing class.
+   */
+  onKeyframesResolved(keyframes2, finalKeyframe,) {
+    this.hasAttemptedResolve = true;
+    const { name, type, velocity, delay: delay2, onComplete, onUpdate, isGenerator, } = this.options;
+    if (!isGenerator && !canAnimate(keyframes2, name, type, velocity,)) {
+      if (instantAnimationState.current || !delay2) {
+        onUpdate === null || onUpdate === void 0 ? void 0 : onUpdate(getFinalKeyframe(keyframes2, this.options, finalKeyframe,),);
+        onComplete === null || onComplete === void 0 ? void 0 : onComplete();
+        this.resolveFinishedPromise();
+        return;
+      } else {
+        this.options.duration = 0;
+      }
+    }
+    const resolvedAnimation = this.initPlayback(keyframes2, finalKeyframe,);
+    if (resolvedAnimation === false) {
       return;
     }
-    timeReachedBoundary = t;
-    spring$1 = spring({
-      keyframes: [state.value, nearestBoundary(state.value,),],
-      velocity: calcGeneratorVelocity(calcLatest, t, state.value,),
-      damping: bounceDamping,
-      stiffness: bounceStiffness,
-      restDelta,
-      restSpeed,
+    this._resolved = {
+      keyframes: keyframes2,
+      finalKeyframe,
+      ...resolvedAnimation,
+    };
+    this.onPostResolved();
+  }
+  onPostResolved() {
+  }
+  /**
+   * Allows the returned animation to be awaited or promise-chained. Currently
+   * resolves when the animation finishes at all but in a future update could/should
+   * reject if its cancels.
+   */
+  then(resolve, reject,) {
+    return this.currentFinishedPromise.then(resolve, reject,);
+  }
+  updateFinishedPromise() {
+    this.currentFinishedPromise = new Promise((resolve,) => {
+      this.resolveFinishedPromise = resolve;
     },);
-  };
-  checkCatchBoundary(0,);
-  return {
-    calculatedDuration: null,
-    next: (t,) => {
-      let hasUpdatedFrame = false;
-      if (!spring$1 && timeReachedBoundary === void 0) {
-        hasUpdatedFrame = true;
-        applyFriction(t,);
-        checkCatchBoundary(t,);
-      }
-      if (timeReachedBoundary !== void 0 && t > timeReachedBoundary) {
-        return spring$1.next(t - timeReachedBoundary,);
-      } else {
-        !hasUpdatedFrame && applyFriction(t,);
-        return state;
-      }
-    },
-  };
+  }
+};
+var maxGeneratorDuration = 2e4;
+function calcGeneratorDuration(generator,) {
+  let duration = 0;
+  const timeStep = 50;
+  let state = generator.next(duration,);
+  while (!state.done && duration < maxGeneratorDuration) {
+    duration += timeStep;
+    state = generator.next(duration,);
+  }
+  return duration >= maxGeneratorDuration ? Infinity : duration;
 }
 var now;
 function clearTime() {
@@ -1622,18 +1957,7 @@ var frameloopDriver = (update,) => {
     now: () => frameData.isProcessing ? frameData.timestamp : time.now(),
   };
 };
-var maxGeneratorDuration = 2e4;
-function calcGeneratorDuration(generator,) {
-  let duration = 0;
-  const timeStep = 50;
-  let state = generator.next(duration,);
-  while (!state.done && duration < maxGeneratorDuration) {
-    duration += timeStep;
-    state = generator.next(duration,);
-  }
-  return duration >= maxGeneratorDuration ? Infinity : duration;
-}
-var types = {
+var generators = {
   decay: inertia,
   inertia,
   tween: keyframes,
@@ -1641,95 +1965,124 @@ var types = {
   spring,
 };
 var percentToProgress = (percent2,) => percent2 / 100;
-function animateValue(
-  {
-    autoplay = true,
-    delay: delay2 = 0,
-    driver = frameloopDriver,
-    keyframes: keyframes$1,
-    type = 'keyframes',
-    repeat = 0,
-    repeatDelay = 0,
-    repeatType = 'loop',
-    onPlay,
-    onStop,
-    onComplete,
-    onUpdate,
-    ...options
-  },
-) {
-  let speed = 1;
-  let hasStopped = false;
-  let resolveFinishedPromise;
-  let currentFinishedPromise;
-  const updateFinishedPromise = () => {
-    currentFinishedPromise = new Promise((resolve,) => {
-      resolveFinishedPromise = resolve;
-    },);
-  };
-  updateFinishedPromise();
-  let animationDriver;
-  const generatorFactory = types[type] || keyframes;
-  let mapNumbersToKeyframes;
-  if (generatorFactory !== keyframes && typeof keyframes$1[0] !== 'number') {
-    if (false) {
-      invariant(
-        keyframes$1.length === 2,
-        `Only two keyframes currently supported with spring and inertia animations. Trying to animate ${keyframes$1}`,
-      );
-    }
-    mapNumbersToKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1],),);
-    keyframes$1 = [0, 100,];
-  }
-  const generator = generatorFactory({ ...options, keyframes: keyframes$1, },);
-  let mirroredGenerator;
-  if (repeatType === 'mirror') {
-    mirroredGenerator = generatorFactory({
-      ...options,
-      keyframes: [...keyframes$1,].reverse(),
-      velocity: -(options.velocity || 0),
-    },);
-  }
-  let playState = 'idle';
-  let holdTime = null;
-  let startTime = null;
-  let cancelTime = null;
-  if (generator.calculatedDuration === null && repeat) {
-    generator.calculatedDuration = calcGeneratorDuration(generator,);
-  }
-  const { calculatedDuration, } = generator;
-  let resolvedDuration = Infinity;
-  let totalDuration = Infinity;
-  if (calculatedDuration !== null) {
-    resolvedDuration = calculatedDuration + repeatDelay;
-    totalDuration = resolvedDuration * (repeat + 1) - repeatDelay;
-  }
-  let currentTime = 0;
-  const tick = (timestamp,) => {
-    if (startTime === null) {
-      return;
-    }
-    if (speed > 0) {
-      startTime = Math.min(startTime, timestamp,);
-    }
-    if (speed < 0) {
-      startTime = Math.min(timestamp - totalDuration / speed, startTime,);
-    }
-    if (holdTime !== null) {
-      currentTime = holdTime;
+var MainThreadAnimation = class extends BaseAnimation {
+  constructor({ KeyframeResolver: KeyframeResolver$1 = KeyframeResolver, ...options },) {
+    super(options,);
+    this.holdTime = null;
+    this.startTime = null;
+    this.cancelTime = null;
+    this.currentTime = 0;
+    this.playbackSpeed = 1;
+    this.pendingPlayState = 'running';
+    this.state = 'idle';
+    this.stop = () => {
+      this.resolver.cancel();
+      this.isStopped = true;
+      if (this.state === 'idle') {
+        return;
+      }
+      this.teardown();
+      const { onStop, } = this.options;
+      onStop && onStop();
+    };
+    const { name, motionValue: motionValue2, keyframes: keyframes2, } = this.options;
+    const onResolved = (resolvedKeyframes, finalKeyframe,) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe,);
+    if (name && motionValue2 && motionValue2.owner) {
+      this.resolver = motionValue2.owner.resolveKeyframes(keyframes2, onResolved, name, motionValue2,);
     } else {
-      currentTime = Math.round(timestamp - startTime,) * speed;
+      this.resolver = new KeyframeResolver$1(keyframes2, onResolved, name, motionValue2,);
     }
-    const timeWithoutDelay = currentTime - delay2 * (speed >= 0 ? 1 : -1);
-    const isInDelayPhase = speed >= 0 ? timeWithoutDelay < 0 : timeWithoutDelay > totalDuration;
-    currentTime = Math.max(timeWithoutDelay, 0,);
-    if (playState === 'finished' && holdTime === null) {
-      currentTime = totalDuration;
+    this.resolver.scheduleResolve();
+  }
+  initPlayback(keyframes$1,) {
+    const { type = 'keyframes', repeat = 0, repeatDelay = 0, repeatType, velocity = 0, } = this.options;
+    const generatorFactory = generators[type] || keyframes;
+    let mapPercentToKeyframes;
+    let mirroredGenerator;
+    if (generatorFactory !== keyframes && typeof keyframes$1[0] !== 'number') {
+      if (false) {
+        invariant(
+          keyframes$1.length === 2,
+          `Only two keyframes currently supported with spring and inertia animations. Trying to animate ${keyframes$1}`,
+        );
+      }
+      mapPercentToKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1],),);
+      keyframes$1 = [0, 100,];
     }
-    let elapsed = currentTime;
+    const generator = generatorFactory({ ...this.options, keyframes: keyframes$1, },);
+    if (repeatType === 'mirror') {
+      mirroredGenerator = generatorFactory({
+        ...this.options,
+        keyframes: [...keyframes$1,].reverse(),
+        velocity: -velocity,
+      },);
+    }
+    if (generator.calculatedDuration === null) {
+      generator.calculatedDuration = calcGeneratorDuration(generator,);
+    }
+    const { calculatedDuration, } = generator;
+    const resolvedDuration = calculatedDuration + repeatDelay;
+    const totalDuration = resolvedDuration * (repeat + 1) - repeatDelay;
+    return {
+      generator,
+      mirroredGenerator,
+      mapPercentToKeyframes,
+      calculatedDuration,
+      resolvedDuration,
+      totalDuration,
+    };
+  }
+  onPostResolved() {
+    const { autoplay = true, } = this.options;
+    this.play();
+    if (this.pendingPlayState === 'paused' || !autoplay) {
+      this.pause();
+    } else {
+      this.state = this.pendingPlayState;
+    }
+  }
+  tick(timestamp, sample = false,) {
+    const { resolved, } = this;
+    if (!resolved) {
+      const { keyframes: keyframes3, } = this.options;
+      return { done: true, value: keyframes3[keyframes3.length - 1], };
+    }
+    const {
+      finalKeyframe,
+      generator,
+      mirroredGenerator,
+      mapPercentToKeyframes,
+      keyframes: keyframes2,
+      calculatedDuration,
+      totalDuration,
+      resolvedDuration,
+    } = resolved;
+    if (this.startTime === null) {
+      return generator.next(0,);
+    }
+    const { delay: delay2, repeat, repeatType, repeatDelay, onUpdate, } = this.options;
+    if (this.speed > 0) {
+      this.startTime = Math.min(this.startTime, timestamp,);
+    } else if (this.speed < 0) {
+      this.startTime = Math.min(timestamp - totalDuration / this.speed, this.startTime,);
+    }
+    if (sample) {
+      this.currentTime = timestamp;
+    } else if (this.holdTime !== null) {
+      this.currentTime = this.holdTime;
+    } else {
+      this.currentTime = Math.round(timestamp - this.startTime,) * this.speed;
+    }
+    const timeWithoutDelay = this.currentTime - delay2 * (this.speed >= 0 ? 1 : -1);
+    const isInDelayPhase = this.speed >= 0 ? timeWithoutDelay < 0 : timeWithoutDelay > totalDuration;
+    this.currentTime = Math.max(timeWithoutDelay, 0,);
+    if (this.state === 'finished' && this.holdTime === null) {
+      this.currentTime = totalDuration;
+    }
+    let elapsed = this.currentTime;
     let frameGenerator = generator;
     if (repeat) {
-      const progress2 = Math.min(currentTime, totalDuration,) / resolvedDuration;
+      const progress2 = Math.min(this.currentTime, totalDuration,) / resolvedDuration;
       let currentIteration = Math.floor(progress2,);
       let iterationProgress = progress2 % 1;
       if (!iterationProgress && progress2 >= 1) {
@@ -1750,128 +2103,721 @@ function animateValue(
       }
       elapsed = clamp(0, 1, iterationProgress,) * resolvedDuration;
     }
-    const state = isInDelayPhase ? { done: false, value: keyframes$1[0], } : frameGenerator.next(elapsed,);
-    if (mapNumbersToKeyframes) {
-      state.value = mapNumbersToKeyframes(state.value,);
+    const state = isInDelayPhase ? { done: false, value: keyframes2[0], } : frameGenerator.next(elapsed,);
+    if (mapPercentToKeyframes) {
+      state.value = mapPercentToKeyframes(state.value,);
     }
     let { done, } = state;
     if (!isInDelayPhase && calculatedDuration !== null) {
-      done = speed >= 0 ? currentTime >= totalDuration : currentTime <= 0;
+      done = this.speed >= 0 ? this.currentTime >= totalDuration : this.currentTime <= 0;
     }
-    const isAnimationFinished = holdTime === null && (playState === 'finished' || playState === 'running' && done);
+    const isAnimationFinished = this.holdTime === null && (this.state === 'finished' || this.state === 'running' && done);
+    if (isAnimationFinished && finalKeyframe !== void 0) {
+      state.value = getFinalKeyframe(keyframes2, this.options, finalKeyframe,);
+    }
     if (onUpdate) {
       onUpdate(state.value,);
     }
     if (isAnimationFinished) {
-      finish();
+      this.finish();
     }
     return state;
-  };
-  const stopAnimationDriver = () => {
-    animationDriver && animationDriver.stop();
-    animationDriver = void 0;
-  };
-  const cancel = () => {
-    playState = 'idle';
-    stopAnimationDriver();
-    resolveFinishedPromise();
-    updateFinishedPromise();
-    startTime = cancelTime = null;
-  };
-  const finish = () => {
-    playState = 'finished';
-    onComplete && onComplete();
-    stopAnimationDriver();
-    resolveFinishedPromise();
-  };
-  const play = () => {
-    if (hasStopped) {
+  }
+  get duration() {
+    const { resolved, } = this;
+    return resolved ? millisecondsToSeconds(resolved.calculatedDuration,) : 0;
+  }
+  get time() {
+    return millisecondsToSeconds(this.currentTime,);
+  }
+  set time(newTime,) {
+    newTime = secondsToMilliseconds(newTime,);
+    this.currentTime = newTime;
+    if (this.holdTime !== null || this.speed === 0) {
+      this.holdTime = newTime;
+    } else if (this.driver) {
+      this.startTime = this.driver.now() - newTime / this.speed;
+    }
+  }
+  get speed() {
+    return this.playbackSpeed;
+  }
+  set speed(newSpeed,) {
+    const hasChanged = this.playbackSpeed !== newSpeed;
+    this.playbackSpeed = newSpeed;
+    if (hasChanged) {
+      this.time = millisecondsToSeconds(this.currentTime,);
+    }
+  }
+  play() {
+    if (!this.resolver.isScheduled) {
+      this.resolver.resume();
+    }
+    if (!this._resolved) {
+      this.pendingPlayState = 'running';
       return;
     }
-    if (!animationDriver) {
-      animationDriver = driver(tick,);
+    if (this.isStopped) {
+      return;
     }
-    const now2 = animationDriver.now();
+    const { driver = frameloopDriver, onPlay, } = this.options;
+    if (!this.driver) {
+      this.driver = driver((timestamp,) => this.tick(timestamp,));
+    }
     onPlay && onPlay();
-    if (holdTime !== null) {
-      startTime = now2 - holdTime;
-    } else if (!startTime || playState === 'finished') {
-      startTime = now2;
+    const now2 = this.driver.now();
+    if (this.holdTime !== null) {
+      this.startTime = now2 - this.holdTime;
+    } else if (!this.startTime || this.state === 'finished') {
+      this.startTime = now2;
     }
-    if (playState === 'finished') {
-      updateFinishedPromise();
+    if (this.state === 'finished') {
+      this.updateFinishedPromise();
     }
-    cancelTime = startTime;
-    holdTime = null;
-    playState = 'running';
-    animationDriver.start();
-  };
-  if (autoplay) {
-    play();
+    this.cancelTime = this.startTime;
+    this.holdTime = null;
+    this.state = 'running';
+    this.driver.start();
   }
-  const controls = {
-    then(resolve, reject,) {
-      return currentFinishedPromise.then(resolve, reject,);
-    },
-    get time() {
-      return millisecondsToSeconds(currentTime,);
-    },
-    set time(newTime,) {
-      newTime = secondsToMilliseconds(newTime,);
-      currentTime = newTime;
-      if (holdTime !== null || !animationDriver || speed === 0) {
-        holdTime = newTime;
-      } else {
-        startTime = animationDriver.now() - newTime / speed;
-      }
-    },
-    get duration() {
-      const duration = generator.calculatedDuration === null ? calcGeneratorDuration(generator,) : generator.calculatedDuration;
-      return millisecondsToSeconds(duration,);
-    },
-    get speed() {
-      return speed;
-    },
-    set speed(newSpeed,) {
-      if (newSpeed === speed || !animationDriver) {
-        return;
-      }
-      speed = newSpeed;
-      controls.time = millisecondsToSeconds(currentTime,);
-    },
-    get state() {
-      return playState;
-    },
-    play,
-    pause: () => {
-      playState = 'paused';
-      holdTime = currentTime;
-    },
-    stop: () => {
-      hasStopped = true;
-      if (playState === 'idle') {
-        return;
-      }
-      playState = 'idle';
-      onStop && onStop();
-      cancel();
-    },
-    cancel: () => {
-      if (cancelTime !== null) {
-        tick(cancelTime,);
-      }
-      cancel();
-    },
-    complete: () => {
-      playState = 'finished';
-    },
-    sample: (elapsed,) => {
-      startTime = 0;
-      return tick(elapsed,);
-    },
-  };
-  return controls;
+  pause() {
+    var _a;
+    if (!this._resolved) {
+      this.pendingPlayState = 'paused';
+      return;
+    }
+    this.state = 'paused';
+    this.holdTime = (_a = this.currentTime) !== null && _a !== void 0 ? _a : 0;
+  }
+  complete() {
+    if (this.state !== 'running') {
+      this.play();
+    }
+    this.pendingPlayState = this.state = 'finished';
+    this.holdTime = null;
+  }
+  finish() {
+    this.teardown();
+    this.state = 'finished';
+    const { onComplete, } = this.options;
+    onComplete && onComplete();
+  }
+  cancel() {
+    if (this.cancelTime !== null) {
+      this.tick(this.cancelTime,);
+    }
+    this.teardown();
+    this.updateFinishedPromise();
+  }
+  teardown() {
+    this.state = 'idle';
+    this.stopDriver();
+    this.resolveFinishedPromise();
+    this.updateFinishedPromise();
+    this.startTime = this.cancelTime = null;
+    this.resolver.cancel();
+  }
+  stopDriver() {
+    if (!this.driver) {
+      return;
+    }
+    this.driver.stop();
+    this.driver = void 0;
+  }
+  sample(time22,) {
+    this.startTime = 0;
+    return this.tick(time22, true,);
+  }
+};
+function animateValue(options,) {
+  return new MainThreadAnimation(options,);
 }
+var isZeroValueString = (v,) => /^0[^.\s]+$/u.test(v,);
+function isNone(value,) {
+  if (typeof value === 'number') {
+    return value === 0;
+  } else if (value !== null) {
+    return value === 'none' || value === '0' || isZeroValueString(value,);
+  } else {
+    return true;
+  }
+}
+var isNumericalString = (v,) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
+var splitCSSVariableRegex = (
+  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
+  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u
+);
+function parseCSSVariable(current,) {
+  const match = splitCSSVariableRegex.exec(current,);
+  if (!match) {
+    return [,];
+  }
+  const [, token1, token2, fallback,] = match;
+  return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback,];
+}
+var maxDepth = 4;
+function getVariableValue(current, element, depth = 1,) {
+  invariant(
+    depth <= maxDepth,
+    `Max CSS variable fallback depth detected in property "${current}". This may indicate a circular fallback dependency.`,
+  );
+  const [token, fallback,] = parseCSSVariable(current,);
+  if (!token) {
+    return;
+  }
+  const resolved = window.getComputedStyle(element,).getPropertyValue(token,);
+  if (resolved) {
+    const trimmed = resolved.trim();
+    return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
+  }
+  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
+}
+var testValueType = (v,) => (type,) => type.test(v,);
+var auto = {
+  test: (v,) => v === 'auto',
+  parse: (v,) => v,
+};
+var dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto,];
+var findDimensionValueType = (v,) => dimensionValueTypes.find(testValueType(v,),);
+var maxDefaults = /* @__PURE__ */ new Set(['brightness', 'contrast', 'saturate', 'opacity',],);
+function applyDefaultFilter(v,) {
+  const [name, value,] = v.slice(0, -1,).split('(',);
+  if (name === 'drop-shadow') {
+    return v;
+  }
+  const [number2,] = value.match(floatRegex,) || [];
+  if (!number2) {
+    return v;
+  }
+  const unit = value.replace(number2, '',);
+  let defaultValue = maxDefaults.has(name,) ? 1 : 0;
+  if (number2 !== value) {
+    defaultValue *= 100;
+  }
+  return name + '(' + defaultValue + unit + ')';
+}
+var functionRegex = /\b([a-z-]*)\(.*?\)/gu;
+var filter = {
+  ...complex,
+  getAnimatableNone: (v,) => {
+    const functions = v.match(functionRegex,);
+    return functions ? functions.map(applyDefaultFilter,).join(' ',) : v;
+  },
+};
+var int = {
+  ...number,
+  transform: Math.round,
+};
+var numberValueTypes = {
+  // Border props
+  borderWidth: px,
+  borderTopWidth: px,
+  borderRightWidth: px,
+  borderBottomWidth: px,
+  borderLeftWidth: px,
+  borderRadius: px,
+  radius: px,
+  borderTopLeftRadius: px,
+  borderTopRightRadius: px,
+  borderBottomRightRadius: px,
+  borderBottomLeftRadius: px,
+  // Positioning props
+  width: px,
+  maxWidth: px,
+  height: px,
+  maxHeight: px,
+  size: px,
+  top: px,
+  right: px,
+  bottom: px,
+  left: px,
+  // Spacing props
+  padding: px,
+  paddingTop: px,
+  paddingRight: px,
+  paddingBottom: px,
+  paddingLeft: px,
+  margin: px,
+  marginTop: px,
+  marginRight: px,
+  marginBottom: px,
+  marginLeft: px,
+  // Transform props
+  rotate: degrees,
+  rotateX: degrees,
+  rotateY: degrees,
+  rotateZ: degrees,
+  scale,
+  scaleX: scale,
+  scaleY: scale,
+  scaleZ: scale,
+  skew: degrees,
+  skewX: degrees,
+  skewY: degrees,
+  distance: px,
+  translateX: px,
+  translateY: px,
+  translateZ: px,
+  x: px,
+  y: px,
+  z: px,
+  perspective: px,
+  transformPerspective: px,
+  opacity: alpha,
+  originX: progressPercentage,
+  originY: progressPercentage,
+  originZ: px,
+  // Misc
+  zIndex: int,
+  backgroundPositionX: px,
+  backgroundPositionY: px,
+  // SVG
+  fillOpacity: alpha,
+  strokeOpacity: alpha,
+  numOctaves: int,
+};
+var defaultValueTypes = {
+  ...numberValueTypes,
+  // Color props
+  color,
+  backgroundColor: color,
+  outlineColor: color,
+  fill: color,
+  stroke: color,
+  // Border props
+  borderColor: color,
+  borderTopColor: color,
+  borderRightColor: color,
+  borderBottomColor: color,
+  borderLeftColor: color,
+  filter,
+  WebkitFilter: filter,
+};
+var getDefaultValueType = (key7,) => defaultValueTypes[key7];
+function getAnimatableNone2(key7, value,) {
+  let defaultValueType = getDefaultValueType(key7,);
+  if (defaultValueType !== filter) {
+    defaultValueType = complex;
+  }
+  return defaultValueType.getAnimatableNone ? defaultValueType.getAnimatableNone(value,) : void 0;
+}
+function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name,) {
+  let i = 0;
+  let animatableTemplate = void 0;
+  while (i < unresolvedKeyframes.length && !animatableTemplate) {
+    if (typeof unresolvedKeyframes[i] === 'string' && unresolvedKeyframes[i] !== 'none' && unresolvedKeyframes[i] !== '0') {
+      animatableTemplate = unresolvedKeyframes[i];
+    }
+    i++;
+  }
+  if (animatableTemplate && name) {
+    for (const noneIndex of noneKeyframeIndexes) {
+      unresolvedKeyframes[noneIndex] = getAnimatableNone2(name, animatableTemplate,);
+    }
+  }
+}
+var DOMKeyframesResolver = class extends KeyframeResolver {
+  constructor(unresolvedKeyframes, onComplete, name, motionValue2,) {
+    super(
+      unresolvedKeyframes,
+      onComplete,
+      name,
+      motionValue2,
+      motionValue2 === null || motionValue2 === void 0 ? void 0 : motionValue2.owner,
+      true,
+    );
+  }
+  readKeyframes() {
+    const { unresolvedKeyframes, element, name, } = this;
+    if (!element.current) {
+      return;
+    }
+    super.readKeyframes();
+    for (let i = 0; i < unresolvedKeyframes.length; i++) {
+      const keyframe = unresolvedKeyframes[i];
+      if (typeof keyframe === 'string' && isCSSVariableToken(keyframe,)) {
+        const resolved = getVariableValue(keyframe, element.current,);
+        if (resolved !== void 0) {
+          unresolvedKeyframes[i] = resolved;
+        }
+        if (i === unresolvedKeyframes.length - 1) {
+          this.finalKeyframe = keyframe;
+        }
+      }
+    }
+    if (!positionalKeys.has(name,) || unresolvedKeyframes.length !== 2) {
+      return this.resolveNoneKeyframes();
+    }
+    const [origin, target,] = unresolvedKeyframes;
+    const originType = findDimensionValueType(origin,);
+    const targetType = findDimensionValueType(target,);
+    if (originType === targetType) {
+      return;
+    }
+    if (isNumOrPxType(originType,) && isNumOrPxType(targetType,)) {
+      for (let i = 0; i < unresolvedKeyframes.length; i++) {
+        const value = unresolvedKeyframes[i];
+        if (typeof value === 'string') {
+          unresolvedKeyframes[i] = parseFloat(value,);
+        }
+      }
+    } else {
+      this.needsMeasurement = true;
+    }
+  }
+  resolveNoneKeyframes() {
+    const { unresolvedKeyframes, name, } = this;
+    const noneKeyframeIndexes = [];
+    for (let i = 0; i < unresolvedKeyframes.length; i++) {
+      if (isNone(unresolvedKeyframes[i],)) {
+        noneKeyframeIndexes.push(i,);
+      }
+    }
+    if (noneKeyframeIndexes.length) {
+      makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name,);
+    }
+  }
+  measureInitialState() {
+    const { element, unresolvedKeyframes, name, } = this;
+    if (!element.current) {
+      return;
+    }
+    if (name === 'height') {
+      this.suspendedScrollY = window.pageYOffset;
+    }
+    this.measuredOrigin = positionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current,),);
+    unresolvedKeyframes[0] = this.measuredOrigin;
+    const measureKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
+    if (measureKeyframe !== void 0) {
+      element.getValue(name, measureKeyframe,).jump(measureKeyframe, false,);
+    }
+  }
+  measureEndState() {
+    var _a;
+    const { element, name, unresolvedKeyframes, } = this;
+    if (!element.current) {
+      return;
+    }
+    const value = element.getValue(name,);
+    value && value.jump(this.measuredOrigin, false,);
+    const finalKeyframeIndex = unresolvedKeyframes.length - 1;
+    const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex];
+    unresolvedKeyframes[finalKeyframeIndex] = positionalValues[name](
+      element.measureViewportBox(),
+      window.getComputedStyle(element.current,),
+    );
+    if (finalKeyframe !== null && this.finalKeyframe === void 0) {
+      this.finalKeyframe = finalKeyframe;
+    }
+    if ((_a = this.removedTransforms) === null || _a === void 0 ? void 0 : _a.length) {
+      this.removedTransforms.forEach(([unsetTransformName, unsetTransformValue,],) => {
+        element.getValue(unsetTransformName,).set(unsetTransformValue,);
+      },);
+    }
+    this.resolveNoneKeyframes();
+  }
+};
+function memo(callback,) {
+  let result;
+  return () => {
+    if (result === void 0) {
+      result = callback();
+    }
+    return result;
+  };
+}
+var isBezierDefinition = (easing,) => Array.isArray(easing,) && typeof easing[0] === 'number';
+function isWaapiSupportedEasing(easing,) {
+  return Boolean(
+    !easing || typeof easing === 'string' && easing in supportedWaapiEasing || isBezierDefinition(easing,) ||
+      Array.isArray(easing,) && easing.every(isWaapiSupportedEasing,),
+  );
+}
+var cubicBezierAsString = ([a, b, c, d,],) => `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
+var supportedWaapiEasing = {
+  linear: 'linear',
+  ease: 'ease',
+  easeIn: 'ease-in',
+  easeOut: 'ease-out',
+  easeInOut: 'ease-in-out',
+  circIn: cubicBezierAsString([0, 0.65, 0.55, 1,],),
+  circOut: cubicBezierAsString([0.55, 0, 1, 0.45,],),
+  backIn: cubicBezierAsString([0.31, 0.01, 0.66, -0.59,],),
+  backOut: cubicBezierAsString([0.33, 1.53, 0.69, 0.99,],),
+};
+function mapEasingToNativeEasingWithDefault(easing,) {
+  return mapEasingToNativeEasing(easing,) || supportedWaapiEasing.easeOut;
+}
+function mapEasingToNativeEasing(easing,) {
+  if (!easing) {
+    return void 0;
+  } else if (isBezierDefinition(easing,)) {
+    return cubicBezierAsString(easing,);
+  } else if (Array.isArray(easing,)) {
+    return easing.map(mapEasingToNativeEasingWithDefault,);
+  } else {
+    return supportedWaapiEasing[easing];
+  }
+}
+function animateStyle(
+  element,
+  valueName,
+  keyframes2,
+  { delay: delay2 = 0, duration = 300, repeat = 0, repeatType = 'loop', ease: ease2, times, } = {},
+) {
+  const keyframeOptions = { [valueName]: keyframes2, };
+  if (times) {
+    keyframeOptions.offset = times;
+  }
+  const easing = mapEasingToNativeEasing(ease2,);
+  if (Array.isArray(easing,)) {
+    keyframeOptions.easing = easing;
+  }
+  return element.animate(keyframeOptions, {
+    delay: delay2,
+    duration,
+    easing: !Array.isArray(easing,) ? easing : 'linear',
+    fill: 'both',
+    iterations: repeat + 1,
+    direction: repeatType === 'reverse' ? 'alternate' : 'normal',
+  },);
+}
+var supportsWaapi = memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
+var acceleratedValues = /* @__PURE__ */ new Set([
+  'opacity',
+  'clipPath',
+  'filter',
+  'transform',
+  // TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
+  // or until we implement support for linear() easing.
+  // "background-color"
+],);
+var sampleDelta = 10;
+var maxDuration2 = 2e4;
+function requiresPregeneratedKeyframes(options,) {
+  return options.type === 'spring' || options.name === 'backgroundColor' || !isWaapiSupportedEasing(options.ease,);
+}
+function pregenerateKeyframes(keyframes2, options,) {
+  const sampleAnimation = new MainThreadAnimation({
+    ...options,
+    keyframes: keyframes2,
+    repeat: 0,
+    delay: 0,
+    isGenerator: true,
+  },);
+  let state = { done: false, value: keyframes2[0], };
+  const pregeneratedKeyframes = [];
+  let t = 0;
+  while (!state.done && t < maxDuration2) {
+    state = sampleAnimation.sample(t,);
+    pregeneratedKeyframes.push(state.value,);
+    t += sampleDelta;
+  }
+  return {
+    times: void 0,
+    keyframes: pregeneratedKeyframes,
+    duration: t - sampleDelta,
+    ease: 'linear',
+  };
+}
+var AcceleratedAnimation = class extends BaseAnimation {
+  constructor(options,) {
+    super(options,);
+    const { name, motionValue: motionValue2, keyframes: keyframes2, } = this.options;
+    this.resolver = new DOMKeyframesResolver(
+      keyframes2,
+      (resolvedKeyframes, finalKeyframe,) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe,),
+      name,
+      motionValue2,
+    );
+    this.resolver.scheduleResolve();
+  }
+  initPlayback(keyframes2, finalKeyframe,) {
+    var _a;
+    let { duration = 300, times, ease: ease2, type, motionValue: motionValue2, name, } = this.options;
+    if (!((_a = motionValue2.owner) === null || _a === void 0 ? void 0 : _a.current)) {
+      return false;
+    }
+    if (requiresPregeneratedKeyframes(this.options,)) {
+      const { onComplete, onUpdate, motionValue: motionValue3, ...options } = this.options;
+      const pregeneratedAnimation = pregenerateKeyframes(keyframes2, options,);
+      keyframes2 = pregeneratedAnimation.keyframes;
+      if (keyframes2.length === 1) {
+        keyframes2[1] = keyframes2[0];
+      }
+      duration = pregeneratedAnimation.duration;
+      times = pregeneratedAnimation.times;
+      ease2 = pregeneratedAnimation.ease;
+      type = 'keyframes';
+    }
+    const animation = animateStyle(motionValue2.owner.current, name, keyframes2, { ...this.options, duration, times, ease: ease2, },);
+    animation.startTime = time.now();
+    if (this.pendingTimeline) {
+      animation.timeline = this.pendingTimeline;
+      this.pendingTimeline = void 0;
+    } else {
+      animation.onfinish = () => {
+        const { onComplete, } = this.options;
+        motionValue2.set(getFinalKeyframe(keyframes2, this.options, finalKeyframe,),);
+        onComplete && onComplete();
+        this.cancel();
+        this.resolveFinishedPromise();
+      };
+    }
+    return {
+      animation,
+      duration,
+      times,
+      type,
+      ease: ease2,
+      keyframes: keyframes2,
+    };
+  }
+  get duration() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return 0;
+    }
+    const { duration, } = resolved;
+    return millisecondsToSeconds(duration,);
+  }
+  get time() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return 0;
+    }
+    const { animation, } = resolved;
+    return millisecondsToSeconds(animation.currentTime || 0,);
+  }
+  set time(newTime,) {
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    const { animation, } = resolved;
+    animation.currentTime = secondsToMilliseconds(newTime,);
+  }
+  get speed() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return 1;
+    }
+    const { animation, } = resolved;
+    return animation.playbackRate;
+  }
+  set speed(newSpeed,) {
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    const { animation, } = resolved;
+    animation.playbackRate = newSpeed;
+  }
+  get state() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return 'idle';
+    }
+    const { animation, } = resolved;
+    return animation.playState;
+  }
+  /**
+   * Replace the default DocumentTimeline with another AnimationTimeline.
+   * Currently used for scroll animations.
+   */
+  attachTimeline(timeline,) {
+    if (!this._resolved) {
+      this.pendingTimeline = timeline;
+    } else {
+      const { resolved, } = this;
+      if (!resolved) {
+        return noop;
+      }
+      const { animation, } = resolved;
+      animation.timeline = timeline;
+      animation.onfinish = null;
+    }
+    return noop;
+  }
+  play() {
+    if (this.isStopped) {
+      return;
+    }
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    const { animation, } = resolved;
+    if (animation.playState === 'finished') {
+      this.updateFinishedPromise();
+    }
+    animation.play();
+  }
+  pause() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    const { animation, } = resolved;
+    animation.pause();
+  }
+  stop() {
+    this.resolver.cancel();
+    this.isStopped = true;
+    if (this.state === 'idle') {
+      return;
+    }
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    const { animation, keyframes: keyframes2, duration, type, ease: ease2, times, } = resolved;
+    if (animation.playState === 'idle' || animation.playState === 'finished') {
+      return;
+    }
+    if (this.time) {
+      const { motionValue: motionValue2, onUpdate, onComplete, ...options } = this.options;
+      const sampleAnimation = new MainThreadAnimation({
+        ...options,
+        keyframes: keyframes2,
+        duration,
+        type,
+        ease: ease2,
+        times,
+        isGenerator: true,
+      },);
+      const sampleTime = secondsToMilliseconds(this.time,);
+      motionValue2.setWithVelocity(
+        sampleAnimation.sample(sampleTime - sampleDelta,).value,
+        sampleAnimation.sample(sampleTime,).value,
+        sampleDelta,
+      );
+    }
+    this.cancel();
+  }
+  complete() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    resolved.animation.finish();
+  }
+  cancel() {
+    const { resolved, } = this;
+    if (!resolved) {
+      return;
+    }
+    resolved.animation.cancel();
+  }
+  static supports(options,) {
+    const { motionValue: motionValue2, name, repeatDelay, repeatType, damping, type, } = options;
+    return supportsWaapi() && name && acceleratedValues.has(name,) && motionValue2 && motionValue2.owner &&
+      motionValue2.owner.current instanceof HTMLElement && /**
+       * If we're outputting values to onUpdate then we can't use WAAPI as there's
+       * no way to read the value from WAAPI every frame.
+       */
+      !motionValue2.owner.getProps().onUpdate && !repeatDelay && repeatType !== 'mirror' && damping !== 0 && type !== 'inertia';
+  }
+};
 function addUniqueItem(arr, item,) {
   if (arr.indexOf(item,) === -1) {
     arr.push(item,);
@@ -1938,7 +2884,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.0.11-sync.5';
+    this.version = '11.1.7';
     this.canTrackVelocity = false;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -2077,11 +3023,11 @@ var MotionValue = class {
    * Set the state of the `MotionValue`, stopping any active animations,
    * effects, and resets velocity to `0`.
    */
-  jump(v,) {
+  jump(v, endAnimation = true,) {
     this.updateAndNotify(v,);
     this.prev = v;
     this.prevUpdatedAt = this.prevFrameValue = void 0;
-    this.stop();
+    endAnimation && this.stop();
     if (this.stopPassiveEffect) {
       this.stopPassiveEffect();
     }
@@ -2192,137 +3138,6 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
-var isNumericalString = (v,) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
-var isZeroValueString = (v,) => /^0[^.\s]+$/u.test(v,);
-var maxDefaults = /* @__PURE__ */ new Set(['brightness', 'contrast', 'saturate', 'opacity',],);
-function applyDefaultFilter(v,) {
-  const [name, value,] = v.slice(0, -1,).split('(',);
-  if (name === 'drop-shadow') {
-    return v;
-  }
-  const [number2,] = value.match(floatRegex,) || [];
-  if (!number2) {
-    return v;
-  }
-  const unit = value.replace(number2, '',);
-  let defaultValue = maxDefaults.has(name,) ? 1 : 0;
-  if (number2 !== value) {
-    defaultValue *= 100;
-  }
-  return name + '(' + defaultValue + unit + ')';
-}
-var functionRegex = /\b([a-z-]*)\(.*?\)/gu;
-var filter = {
-  ...complex,
-  getAnimatableNone: (v,) => {
-    const functions = v.match(functionRegex,);
-    return functions ? functions.map(applyDefaultFilter,).join(' ',) : v;
-  },
-};
-var int = {
-  ...number,
-  transform: Math.round,
-};
-var numberValueTypes = {
-  // Border props
-  borderWidth: px,
-  borderTopWidth: px,
-  borderRightWidth: px,
-  borderBottomWidth: px,
-  borderLeftWidth: px,
-  borderRadius: px,
-  radius: px,
-  borderTopLeftRadius: px,
-  borderTopRightRadius: px,
-  borderBottomRightRadius: px,
-  borderBottomLeftRadius: px,
-  // Positioning props
-  width: px,
-  maxWidth: px,
-  height: px,
-  maxHeight: px,
-  size: px,
-  top: px,
-  right: px,
-  bottom: px,
-  left: px,
-  // Spacing props
-  padding: px,
-  paddingTop: px,
-  paddingRight: px,
-  paddingBottom: px,
-  paddingLeft: px,
-  margin: px,
-  marginTop: px,
-  marginRight: px,
-  marginBottom: px,
-  marginLeft: px,
-  // Transform props
-  rotate: degrees,
-  rotateX: degrees,
-  rotateY: degrees,
-  rotateZ: degrees,
-  scale,
-  scaleX: scale,
-  scaleY: scale,
-  scaleZ: scale,
-  skew: degrees,
-  skewX: degrees,
-  skewY: degrees,
-  distance: px,
-  translateX: px,
-  translateY: px,
-  translateZ: px,
-  x: px,
-  y: px,
-  z: px,
-  perspective: px,
-  transformPerspective: px,
-  opacity: alpha,
-  originX: progressPercentage,
-  originY: progressPercentage,
-  originZ: px,
-  // Misc
-  zIndex: int,
-  // SVG
-  fillOpacity: alpha,
-  strokeOpacity: alpha,
-  numOctaves: int,
-};
-var defaultValueTypes = {
-  ...numberValueTypes,
-  // Color props
-  color,
-  backgroundColor: color,
-  outlineColor: color,
-  fill: color,
-  stroke: color,
-  // Border props
-  borderColor: color,
-  borderTopColor: color,
-  borderRightColor: color,
-  borderBottomColor: color,
-  borderLeftColor: color,
-  filter,
-  WebkitFilter: filter,
-};
-var getDefaultValueType = (key7,) => defaultValueTypes[key7];
-function getAnimatableNone2(key7, value,) {
-  let defaultValueType = getDefaultValueType(key7,);
-  if (defaultValueType !== filter) {
-    defaultValueType = complex;
-  }
-  return defaultValueType.getAnimatableNone ? defaultValueType.getAnimatableNone(value,) : void 0;
-}
-var testValueType = (v,) => (type,) => type.test(v,);
-var auto = {
-  test: (v,) => v === 'auto',
-  parse: (v,) => v,
-};
-var dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto,];
-var findDimensionValueType = (v,) => dimensionValueTypes.find(testValueType(v,),);
-var valueTypes = [...dimensionValueTypes, color, complex,];
-var findValueType = (v,) => valueTypes.find(testValueType(v,),);
 function getCurrent(visualElement,) {
   const current = {};
   visualElement.values.forEach((value, key7,) => current[key7] = value.get());
@@ -2342,337 +3157,6 @@ function resolveVariant(visualElement, definition, custom,) {
     getCurrent(visualElement,),
     getVelocity(visualElement,),
   );
-}
-function setMotionValue(visualElement, key7, value,) {
-  if (visualElement.hasValue(key7,)) {
-    visualElement.getValue(key7,).set(value,);
-  } else {
-    visualElement.addValue(key7, motionValue(value,),);
-  }
-}
-function setTarget(visualElement, definition,) {
-  const resolved = resolveVariant(visualElement, definition,);
-  let { transitionEnd = {}, transition = {}, ...target } = resolved ? visualElement.makeTargetAnimatable(resolved, false,) : {};
-  target = { ...target, ...transitionEnd, };
-  for (const key7 in target) {
-    const value = resolveFinalValueInKeyframes(target[key7],);
-    setMotionValue(visualElement, key7, value,);
-  }
-}
-function setVariants(visualElement, variantLabels,) {
-  const reversedLabels = [...variantLabels,].reverse();
-  reversedLabels.forEach((key7,) => {
-    const variant = visualElement.getVariant(key7,);
-    variant && setTarget(visualElement, variant,);
-    if (visualElement.variantChildren) {
-      visualElement.variantChildren.forEach((child,) => {
-        setVariants(child, variantLabels,);
-      },);
-    }
-  },);
-}
-function setValues(visualElement, definition,) {
-  if (Array.isArray(definition,)) {
-    return setVariants(visualElement, definition,);
-  } else if (typeof definition === 'string') {
-    return setVariants(visualElement, [definition,],);
-  } else {
-    setTarget(visualElement, definition,);
-  }
-}
-function checkTargetForNewValues(visualElement, target, origin,) {
-  var _a, _b;
-  const newValueKeys = Object.keys(target,).filter((key7,) => !visualElement.hasValue(key7,));
-  const numNewValues = newValueKeys.length;
-  if (!numNewValues) {
-    return;
-  }
-  for (let i = 0; i < numNewValues; i++) {
-    const key7 = newValueKeys[i];
-    const targetValue = target[key7];
-    let value = null;
-    if (Array.isArray(targetValue,)) {
-      value = targetValue[0];
-    }
-    if (value === null) {
-      value = (_b = (_a = origin[key7]) !== null && _a !== void 0 ? _a : visualElement.readValue(key7,)) !== null && _b !== void 0
-        ? _b
-        : target[key7];
-    }
-    if (value === void 0 || value === null) {
-      continue;
-    }
-    if (typeof value === 'string' && (isNumericalString(value,) || isZeroValueString(value,))) {
-      value = parseFloat(value,);
-    } else if (!findValueType(value,) && complex.test(targetValue,)) {
-      value = getAnimatableNone2(key7, targetValue,);
-    }
-    visualElement.addValue(key7, motionValue(value, { owner: visualElement, },),);
-    if (origin[key7] === void 0) {
-      origin[key7] = value;
-    }
-    if (value !== null) {
-      visualElement.setBaseTarget(key7, value,);
-    }
-  }
-}
-function getOriginFromTransition(key7, transition,) {
-  if (!transition) {
-    return;
-  }
-  const valueTransition = transition[key7] || transition['default'] || transition;
-  return valueTransition.from;
-}
-function getOrigin(target, transition, visualElement,) {
-  const origin = {};
-  for (const key7 in target) {
-    const transitionOrigin = getOriginFromTransition(key7, transition,);
-    if (transitionOrigin !== void 0) {
-      origin[key7] = transitionOrigin;
-    } else {
-      const value = visualElement.getValue(key7,);
-      if (value) {
-        origin[key7] = value.get();
-      }
-    }
-  }
-  return origin;
-}
-var instantAnimationState = {
-  current: false,
-};
-var isBezierDefinition = (easing,) => Array.isArray(easing,) && typeof easing[0] === 'number';
-function isWaapiSupportedEasing(easing,) {
-  return Boolean(
-    !easing || typeof easing === 'string' && supportedWaapiEasing[easing] || isBezierDefinition(easing,) ||
-      Array.isArray(easing,) && easing.every(isWaapiSupportedEasing,),
-  );
-}
-var cubicBezierAsString = ([a, b, c, d,],) => `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
-var supportedWaapiEasing = {
-  linear: 'linear',
-  ease: 'ease',
-  easeIn: 'ease-in',
-  easeOut: 'ease-out',
-  easeInOut: 'ease-in-out',
-  circIn: cubicBezierAsString([0, 0.65, 0.55, 1,],),
-  circOut: cubicBezierAsString([0.55, 0, 1, 0.45,],),
-  backIn: cubicBezierAsString([0.31, 0.01, 0.66, -0.59,],),
-  backOut: cubicBezierAsString([0.33, 1.53, 0.69, 0.99,],),
-};
-function mapEasingToNativeEasing(easing,) {
-  if (!easing) {
-    return void 0;
-  }
-  return isBezierDefinition(easing,)
-    ? cubicBezierAsString(easing,)
-    : Array.isArray(easing,)
-    ? easing.map(mapEasingToNativeEasing,)
-    : supportedWaapiEasing[easing];
-}
-function animateStyle(
-  element,
-  valueName,
-  keyframes2,
-  { delay: delay2 = 0, duration, repeat = 0, repeatType = 'loop', ease: ease2, times, } = {},
-) {
-  const keyframeOptions = { [valueName]: keyframes2, };
-  if (times) {
-    keyframeOptions.offset = times;
-  }
-  const easing = mapEasingToNativeEasing(ease2,);
-  if (Array.isArray(easing,)) {
-    keyframeOptions.easing = easing;
-  }
-  return element.animate(keyframeOptions, {
-    delay: delay2,
-    duration,
-    easing: !Array.isArray(easing,) ? easing : 'linear',
-    fill: 'both',
-    iterations: repeat + 1,
-    direction: repeatType === 'reverse' ? 'alternate' : 'normal',
-  },);
-}
-function getFinalKeyframe(keyframes2, { repeat, repeatType = 'loop', },) {
-  const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : keyframes2.length - 1;
-  return keyframes2[index];
-}
-function memo(callback,) {
-  let result;
-  return () => {
-    if (result === void 0) {
-      result = callback();
-    }
-    return result;
-  };
-}
-var supportsWaapi = memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
-var acceleratedValues = /* @__PURE__ */ new Set([
-  'opacity',
-  'clipPath',
-  'filter',
-  'transform',
-],);
-var sampleDelta = 10;
-var maxDuration2 = 2e4;
-var requiresPregeneratedKeyframes = (valueName, options,) =>
-  options.type === 'spring' || valueName === 'backgroundColor' || !isWaapiSupportedEasing(options.ease,);
-function createAcceleratedAnimation(value, valueName, { onUpdate, onComplete, ...options },) {
-  const canAccelerateAnimation = supportsWaapi() && acceleratedValues.has(valueName,) && !options.repeatDelay &&
-    options.repeatType !== 'mirror' && options.damping !== 0 && options.type !== 'inertia';
-  if (!canAccelerateAnimation) {
-    return false;
-  }
-  let hasStopped = false;
-  let resolveFinishedPromise;
-  let currentFinishedPromise;
-  let pendingCancel = false;
-  const updateFinishedPromise = () => {
-    currentFinishedPromise = new Promise((resolve,) => {
-      resolveFinishedPromise = resolve;
-    },);
-  };
-  updateFinishedPromise();
-  let { keyframes: keyframes2, duration = 300, ease: ease2, times, } = options;
-  if (requiresPregeneratedKeyframes(valueName, options,)) {
-    const sampleAnimation = animateValue({
-      ...options,
-      repeat: 0,
-      delay: 0,
-    },);
-    let state = { done: false, value: keyframes2[0], };
-    const pregeneratedKeyframes = [];
-    let t = 0;
-    while (!state.done && t < maxDuration2) {
-      state = sampleAnimation.sample(t,);
-      pregeneratedKeyframes.push(state.value,);
-      t += sampleDelta;
-    }
-    times = void 0;
-    keyframes2 = pregeneratedKeyframes;
-    duration = t - sampleDelta;
-    ease2 = 'linear';
-  }
-  const animation = animateStyle(value.owner.current, valueName, keyframes2, {
-    ...options,
-    duration,
-    /**
-     * This function is currently not called if ease is provided
-     * as a function so the cast is safe.
-     *
-     * However it would be possible for a future refinement to port
-     * in easing pregeneration from Motion One for browsers that
-     * support the upcoming `linear()` easing function.
-     */
-    ease: ease2,
-    times,
-  },);
-  const cancelAnimation = () => {
-    pendingCancel = false;
-    animation.cancel();
-  };
-  const safeCancel = () => {
-    pendingCancel = true;
-    frame.update(cancelAnimation,);
-    resolveFinishedPromise();
-    updateFinishedPromise();
-  };
-  animation.onfinish = () => {
-    if (pendingCancel) {
-      return;
-    }
-    value.set(getFinalKeyframe(keyframes2, options,),);
-    onComplete && onComplete();
-    safeCancel();
-  };
-  const controls = {
-    then(resolve, reject,) {
-      return currentFinishedPromise.then(resolve, reject,);
-    },
-    attachTimeline(timeline,) {
-      animation.timeline = timeline;
-      animation.onfinish = null;
-      return noop;
-    },
-    get time() {
-      return millisecondsToSeconds(animation.currentTime || 0,);
-    },
-    set time(newTime,) {
-      animation.currentTime = secondsToMilliseconds(newTime,);
-    },
-    get speed() {
-      return animation.playbackRate;
-    },
-    set speed(newSpeed,) {
-      animation.playbackRate = newSpeed;
-    },
-    get duration() {
-      return millisecondsToSeconds(duration,);
-    },
-    play: () => {
-      if (hasStopped) {
-        return;
-      }
-      animation.play();
-      cancelFrame(cancelAnimation,);
-    },
-    pause: () => animation.pause(),
-    stop: () => {
-      hasStopped = true;
-      if (animation.playState === 'idle') {
-        return;
-      }
-      const { currentTime, } = animation;
-      if (currentTime) {
-        const sampleAnimation = animateValue({
-          ...options,
-          autoplay: false,
-        },);
-        value.setWithVelocity(
-          sampleAnimation.sample(currentTime - sampleDelta,).value,
-          sampleAnimation.sample(currentTime,).value,
-          sampleDelta,
-        );
-      }
-      safeCancel();
-    },
-    complete: () => {
-      if (pendingCancel) {
-        return;
-      }
-      animation.finish();
-    },
-    cancel: safeCancel,
-  };
-  return controls;
-}
-function createInstantAnimation({ keyframes: keyframes2, delay: delay2, onUpdate, onComplete, },) {
-  const setValue = () => {
-    onUpdate && onUpdate(keyframes2[keyframes2.length - 1],);
-    onComplete && onComplete();
-    return {
-      time: 0,
-      speed: 1,
-      duration: 0,
-      play: noop,
-      pause: noop,
-      stop: noop,
-      then: (resolve,) => {
-        resolve();
-        return Promise.resolve();
-      },
-      cancel: noop,
-      complete: noop,
-    };
-  };
-  return delay2
-    ? animateValue({
-      keyframes: [0, 1,],
-      duration: 0,
-      delay: delay2,
-      onComplete: setValue,
-    },)
-    : setValue();
 }
 var underDampedSpring = {
   type: 'spring',
@@ -2703,59 +3187,6 @@ var getDefaultTransition = (valueKey, { keyframes: keyframes2, },) => {
   }
   return ease;
 };
-var isAnimatable = (key7, value,) => {
-  if (key7 === 'zIndex') {
-    return false;
-  }
-  if (typeof value === 'number' || Array.isArray(value,)) {
-    return true;
-  }
-  if (
-    typeof value === 'string' && // It's animatable if we have a string
-    (complex.test(value,) || value === '0') && // And it contains numbers and/or colors
-    !value.startsWith('url(',)
-  ) {
-    return true;
-  }
-  return false;
-};
-function isNone(value,) {
-  if (typeof value === 'number') {
-    return value === 0;
-  } else if (value !== null) {
-    return value === 'none' || value === '0' || isZeroValueString(value,);
-  }
-}
-function getKeyframes(value, valueName, target, transition,) {
-  const isTargetAnimatable = isAnimatable(valueName, target,);
-  let keyframes2;
-  if (Array.isArray(target,)) {
-    keyframes2 = [...target,];
-  } else {
-    keyframes2 = [null, target,];
-  }
-  const defaultOrigin = transition.from !== void 0 ? transition.from : value.get();
-  let animatableTemplateValue = void 0;
-  const noneKeyframeIndexes = [];
-  for (let i = 0; i < keyframes2.length; i++) {
-    if (keyframes2[i] === null) {
-      keyframes2[i] = i === 0 ? defaultOrigin : keyframes2[i - 1];
-    }
-    if (isNone(keyframes2[i],)) {
-      noneKeyframeIndexes.push(i,);
-    }
-    if (typeof keyframes2[i] === 'string' && keyframes2[i] !== 'none' && keyframes2[i] !== '0') {
-      animatableTemplateValue = keyframes2[i];
-    }
-  }
-  if (isTargetAnimatable && noneKeyframeIndexes.length && animatableTemplateValue) {
-    for (let i = 0; i < noneKeyframeIndexes.length; i++) {
-      const index = noneKeyframeIndexes[i];
-      keyframes2[index] = getAnimatableNone2(valueName, animatableTemplateValue,);
-    }
-  }
-  return keyframes2;
-}
 function isTransitionDefined(
   { when, delay: _delay, delayChildren, staggerChildren, staggerDirection, repeat, repeatType, repeatDelay, from, elapsed, ...transition },
 ) {
@@ -2764,96 +3195,99 @@ function isTransitionDefined(
 function getValueTransition(transition, key7,) {
   return transition[key7] || transition['default'] || transition;
 }
-var animateMotionValue = (valueName, value, target, transition = {},) => {
-  return (onComplete,) => {
-    const valueTransition = getValueTransition(transition, valueName,) || {};
-    const delay2 = valueTransition.delay || transition.delay || 0;
-    let { elapsed = 0, } = transition;
-    elapsed = elapsed - secondsToMilliseconds(delay2,);
-    const keyframes2 = getKeyframes(value, valueName, target, valueTransition,);
-    const originKeyframe = keyframes2[0];
-    const targetKeyframe = keyframes2[keyframes2.length - 1];
-    const isOriginAnimatable = isAnimatable(valueName, originKeyframe,);
-    const isTargetAnimatable = isAnimatable(valueName, targetKeyframe,);
-    warning(
-      isOriginAnimatable === isTargetAnimatable,
-      `You are trying to animate ${valueName} from "${originKeyframe}" to "${targetKeyframe}". ${originKeyframe} is not an animatable value - to enable this animation set ${originKeyframe} to a value animatable to ${targetKeyframe} via the \`style\` property.`,
-    );
-    let options = {
-      keyframes: keyframes2,
-      velocity: value.getVelocity(),
-      ease: 'easeOut',
-      ...valueTransition,
-      delay: -elapsed,
-      onUpdate: (v,) => {
-        value.set(v,);
-        valueTransition.onUpdate && valueTransition.onUpdate(v,);
-      },
-      onComplete: () => {
-        onComplete();
-        valueTransition.onComplete && valueTransition.onComplete();
-      },
-    };
-    if (!isTransitionDefined(valueTransition,)) {
-      options = {
-        ...options,
-        ...getDefaultTransition(valueName, options,),
-      };
-    }
-    if (options.duration) {
-      options.duration = secondsToMilliseconds(options.duration,);
-    }
-    if (options.repeatDelay) {
-      options.repeatDelay = secondsToMilliseconds(options.repeatDelay,);
-    }
-    if (
-      !isOriginAnimatable || !isTargetAnimatable || instantAnimationState.current || valueTransition.type === false ||
-      MotionGlobalConfig.skipAnimations
-    ) {
-      return createInstantAnimation(instantAnimationState.current ? { ...options, delay: 0, } : options,);
-    }
-    if (
-      /**
-       * If this is a handoff animation, the optimised animation will be running via
-       * WAAPI. Therefore, this animation must be JS to ensure it runs "under" the
-       * optimised animation.
-       */
-      !transition.isHandoff && value.owner && value.owner.current instanceof HTMLElement && /**
-       * If we're outputting values to onUpdate then we can't use WAAPI as there's
-       * no way to read the value from WAAPI every frame.
-       */
-      !value.owner.getProps().onUpdate
-    ) {
-      const acceleratedAnimation = createAcceleratedAnimation(value, valueName, options,);
-      if (acceleratedAnimation) {
-        return acceleratedAnimation;
-      }
-    }
-    return animateValue(options,);
+var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete,) => {
+  const valueTransition = getValueTransition(transition, name,) || {};
+  const delay2 = valueTransition.delay || transition.delay || 0;
+  let { elapsed = 0, } = transition;
+  elapsed = elapsed - secondsToMilliseconds(delay2,);
+  let options = {
+    keyframes: Array.isArray(target,) ? target : [null, target,],
+    ease: 'easeOut',
+    velocity: value.getVelocity(),
+    ...valueTransition,
+    delay: -elapsed,
+    onUpdate: (v,) => {
+      value.set(v,);
+      valueTransition.onUpdate && valueTransition.onUpdate(v,);
+    },
+    onComplete: () => {
+      onComplete();
+      valueTransition.onComplete && valueTransition.onComplete();
+    },
+    name,
+    motionValue: value,
+    element: isHandoff ? void 0 : element,
   };
+  if (!isTransitionDefined(valueTransition,)) {
+    options = {
+      ...options,
+      ...getDefaultTransition(name, options,),
+    };
+  }
+  if (options.duration) {
+    options.duration = secondsToMilliseconds(options.duration,);
+  }
+  if (options.repeatDelay) {
+    options.repeatDelay = secondsToMilliseconds(options.repeatDelay,);
+  }
+  if (options.from !== void 0) {
+    options.keyframes[0] = options.from;
+  }
+  let shouldSkip = false;
+  if (options.type === false || options.duration === 0 && !options.repeatDelay) {
+    options.duration = 0;
+    if (options.delay === 0) {
+      shouldSkip = true;
+    }
+  }
+  if (instantAnimationState.current || MotionGlobalConfig.skipAnimations) {
+    shouldSkip = true;
+    options.duration = 0;
+    options.delay = 0;
+  }
+  if (shouldSkip && !isHandoff && value.get() !== void 0) {
+    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition,);
+    if (finalKeyframe !== void 0) {
+      frame.update(() => {
+        options.onUpdate(finalKeyframe,);
+        options.onComplete();
+      },);
+      return;
+    }
+  }
+  if (!isHandoff && AcceleratedAnimation.supports(options,)) {
+    return new AcceleratedAnimation(options,);
+  } else {
+    return new MainThreadAnimation(options,);
+  }
 };
 function isWillChangeMotionValue(value,) {
   return Boolean(isMotionValue(value,) && value.add,);
+}
+function setMotionValue(visualElement, key7, value,) {
+  if (visualElement.hasValue(key7,)) {
+    visualElement.getValue(key7,).set(value,);
+  } else {
+    visualElement.addValue(key7, motionValue(value,),);
+  }
+}
+function setTarget(visualElement, definition,) {
+  const resolved = resolveVariant(visualElement, definition,);
+  let { transitionEnd = {}, transition = {}, ...target } = resolved || {};
+  target = { ...target, ...transitionEnd, };
+  for (const key7 in target) {
+    const value = resolveFinalValueInKeyframes(target[key7],);
+    setMotionValue(visualElement, key7, value,);
+  }
 }
 function shouldBlockAnimation({ protectedKeys, needsAnimating, }, key7,) {
   const shouldBlock = protectedKeys.hasOwnProperty(key7,) && needsAnimating[key7] !== true;
   needsAnimating[key7] = false;
   return shouldBlock;
 }
-function hasKeyframesChanged(value, target,) {
-  const current = value.get();
-  if (Array.isArray(target,)) {
-    for (let i = 0; i < target.length; i++) {
-      if (target[i] !== current) {
-        return true;
-      }
-    }
-  } else {
-    return current !== target;
-  }
-}
-function animateTarget(visualElement, definition, { delay: delay2 = 0, transitionOverride, type, } = {},) {
-  let { transition = visualElement.getDefaultTransition(), transitionEnd, ...target } = visualElement.makeTargetAnimatable(definition,);
+function animateTarget(visualElement, targetAndTransition, { delay: delay2 = 0, transitionOverride, type, } = {},) {
+  var _a;
+  let { transition = visualElement.getDefaultTransition(), transitionEnd, ...target } = targetAndTransition;
   const willChange = visualElement.getValue('willChange',);
   if (transitionOverride) {
     transition = transitionOverride;
@@ -2861,9 +3295,9 @@ function animateTarget(visualElement, definition, { delay: delay2 = 0, transitio
   const animations2 = [];
   const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
   for (const key7 in target) {
-    const value = visualElement.getValue(key7,);
+    const value = visualElement.getValue(key7, (_a = visualElement.latestValues[key7]) !== null && _a !== void 0 ? _a : null,);
     const valueTarget = target[key7];
-    if (!value || valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key7,)) {
+    if (valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key7,)) {
       continue;
     }
     const valueTransition = {
@@ -2871,25 +3305,17 @@ function animateTarget(visualElement, definition, { delay: delay2 = 0, transitio
       elapsed: 0,
       ...getValueTransition(transition || {}, key7,),
     };
+    let isHandoff = false;
     if (window.HandoffAppearAnimations) {
-      const appearId = visualElement.getProps()[optimizedAppearDataAttribute];
+      const props = visualElement.getProps();
+      const appearId = props[optimizedAppearDataAttribute];
       if (appearId) {
-        const elapsed = window.HandoffAppearAnimations(appearId, key7, value, frame,);
+        const elapsed = window.HandoffAppearAnimations(appearId, key7,);
         if (elapsed !== null) {
           valueTransition.elapsed = elapsed;
-          valueTransition.isHandoff = true;
+          isHandoff = true;
         }
       }
-    }
-    let canSkip = !valueTransition.isHandoff && !hasKeyframesChanged(value, valueTarget,);
-    if (valueTransition.type === 'spring' && (value.getVelocity() || valueTransition.velocity)) {
-      canSkip = false;
-    }
-    if (value.animation) {
-      canSkip = false;
-    }
-    if (canSkip) {
-      continue;
     }
     value.start(
       animateMotionValue(
@@ -2897,24 +3323,35 @@ function animateTarget(visualElement, definition, { delay: delay2 = 0, transitio
         value,
         valueTarget,
         visualElement.shouldReduceMotion && transformProps.has(key7,) ? { type: false, } : valueTransition,
+        visualElement,
+        isHandoff,
       ),
     );
     const animation = value.animation;
-    if (isWillChangeMotionValue(willChange,)) {
-      willChange.add(key7,);
-      animation.then(() => willChange.remove(key7,));
+    if (animation) {
+      if (isWillChangeMotionValue(willChange,)) {
+        willChange.add(key7,);
+        animation.then(() => willChange.remove(key7,));
+      }
+      animations2.push(animation,);
     }
-    animations2.push(animation,);
   }
   if (transitionEnd) {
     Promise.all(animations2,).then(() => {
-      transitionEnd && setTarget(visualElement, transitionEnd,);
+      frame.update(() => {
+        transitionEnd && setTarget(visualElement, transitionEnd,);
+      },);
     },);
   }
   return animations2;
 }
 function animateVariant(visualElement, variant, options = {},) {
-  const resolved = resolveVariant(visualElement, variant, options.custom,);
+  var _a;
+  const resolved = resolveVariant(
+    visualElement,
+    variant,
+    options.type === 'exit' ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom : void 0,
+  );
   let { transition = visualElement.getDefaultTransition() || {}, } = resolved || {};
   if (options.transitionOverride) {
     transition = options.transitionOverride;
@@ -2966,7 +3403,11 @@ function animateVisualElement(visualElement, definition, options = {},) {
     const resolvedDefinition = typeof definition === 'function' ? resolveVariant(visualElement, definition, options.custom,) : definition;
     animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options,),);
   }
-  return animation.then(() => visualElement.notify('AnimationComplete', definition,));
+  return animation.then(() => {
+    frame.postRender(() => {
+      visualElement.notify('AnimationComplete', definition,);
+    },);
+  },);
 }
 function shallowCompare(next, prev,) {
   if (!Array.isArray(prev,)) {
@@ -2993,8 +3434,13 @@ function createAnimationState(visualElement,) {
   let animate22 = animateList(visualElement,);
   const state = createState();
   let isInitialRender = true;
-  const buildResolvedTypeValues = (acc, definition,) => {
-    const resolved = resolveVariant(visualElement, definition,);
+  const buildResolvedTypeValues = (type,) => (acc, definition,) => {
+    var _a;
+    const resolved = resolveVariant(
+      visualElement,
+      definition,
+      type === 'exit' ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom : void 0,
+    );
     if (resolved) {
       const { transition, transitionEnd, ...target } = resolved;
       acc = { ...acc, ...target, ...transitionEnd, };
@@ -3004,7 +3450,7 @@ function createAnimationState(visualElement,) {
   function setAnimateFunction(makeAnimator,) {
     animate22 = makeAnimator(visualElement,);
   }
-  function animateChanges(options, changedActiveType,) {
+  function animateChanges(changedActiveType,) {
     const props = visualElement.getProps();
     const context = visualElement.getVariantContext(true,) || {};
     const animations2 = [];
@@ -3039,7 +3485,7 @@ function createAnimationState(visualElement,) {
         i > removedVariantIndex && propIsVariant;
       let handledRemovedValues = false;
       const definitionList = Array.isArray(prop,) ? prop : [prop,];
-      let resolvedValues = definitionList.reduce(buildResolvedTypeValues, {},);
+      let resolvedValues = definitionList.reduce(buildResolvedTypeValues(type,), {},);
       if (activeDelta === false) {
         resolvedValues = {};
       }
@@ -3073,7 +3519,7 @@ function createAnimationState(visualElement,) {
           valueHasChanged = next !== prev;
         }
         if (valueHasChanged) {
-          if (next !== void 0) {
+          if (next !== void 0 && next !== null) {
             markToAnimate(key7,);
           } else {
             removedKeys.add(key7,);
@@ -3095,7 +3541,7 @@ function createAnimationState(visualElement,) {
       if (shouldAnimateType && (!isInherited || handledRemovedValues)) {
         animations2.push(...definitionList.map((animation,) => ({
           animation,
-          options: { type, ...options, },
+          options: { type, },
         })),);
       }
     }
@@ -3103,13 +3549,11 @@ function createAnimationState(visualElement,) {
       const fallbackAnimation = {};
       removedKeys.forEach((key7,) => {
         const fallbackTarget = visualElement.getBaseTarget(key7,);
-        if (fallbackTarget !== void 0) {
-          fallbackAnimation[key7] = fallbackTarget;
-        }
         const motionValue2 = visualElement.getValue(key7,);
         if (motionValue2) {
           motionValue2.liveStyle = true;
         }
+        fallbackAnimation[key7] = fallbackTarget !== null && fallbackTarget !== void 0 ? fallbackTarget : null;
       },);
       animations2.push({ animation: fallbackAnimation, },);
     }
@@ -3120,7 +3564,7 @@ function createAnimationState(visualElement,) {
     isInitialRender = false;
     return shouldAnimate ? animate22(animations2,) : Promise.resolve();
   }
-  function setActive(type, isActive, options,) {
+  function setActive(type, isActive,) {
     var _a;
     if (state[type].isActive === isActive) {
       return Promise.resolve();
@@ -3130,7 +3574,7 @@ function createAnimationState(visualElement,) {
       return (_a2 = child.animationState) === null || _a2 === void 0 ? void 0 : _a2.setActive(type, isActive,);
     },);
     state[type].isActive = isActive;
-    const animations2 = animateChanges(options, type,);
+    const animations2 = animateChanges(type,);
     for (const key7 in state) {
       state[key7].protectedKeys = {};
     }
@@ -3221,14 +3665,12 @@ var ExitAnimationFeature = class extends Feature {
     if (!this.node.presenceContext) {
       return;
     }
-    const { isPresent: isPresent2, onExitComplete, custom, } = this.node.presenceContext;
+    const { isPresent: isPresent2, onExitComplete, } = this.node.presenceContext;
     const { isPresent: prevIsPresent, } = this.node.prevPresenceContext || {};
     if (!this.node.animationState || isPresent2 === prevIsPresent) {
       return;
     }
-    const exitAnimation = this.node.animationState.setActive('exit', !isPresent2, {
-      custom: custom !== null && custom !== void 0 ? custom : this.node.getProps().custom,
-    },);
+    const exitAnimation = this.node.animationState.setActive('exit', !isPresent2,);
     if (onExitComplete && !isPresent2) {
       exitAnimation.then(() => onExitComplete(this.id,));
     }
@@ -3387,8 +3829,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.0.11-sync.5',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.0.11-sync.5 may not work as expected.`,
+          nextValue.version === '11.1.7',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.1.7 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -3417,14 +3859,10 @@ function updateMotionValuesFromProps(element, next, prev,) {
   }
   return next;
 }
+var valueTypes = [...dimensionValueTypes, color, complex,];
+var findValueType = (v,) => valueTypes.find(testValueType(v,),);
 var featureNames = Object.keys(featureDefinitions,);
 var numFeatures = featureNames.length;
-function getClosestProjectingNode(visualElement,) {
-  if (!visualElement) {
-    return void 0;
-  }
-  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
-}
 var propEventHandlers = [
   'AnimationStart',
   'AnimationComplete',
@@ -3435,14 +3873,34 @@ var propEventHandlers = [
   'LayoutAnimationComplete',
 ];
 var numVariantProps = variantProps.length;
+function getClosestProjectingNode(visualElement,) {
+  if (!visualElement) {
+    return void 0;
+  }
+  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
+}
 var VisualElement = class {
-  constructor({ parent, props, presenceContext, reducedMotionConfig, visualState, }, options = {},) {
+  /**
+   * This method takes React props and returns found MotionValues. For example, HTML
+   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
+   *
+   * This isn't an abstract method as it needs calling in the constructor, but it is
+   * intended to be one.
+   */
+  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
+    return {};
+  }
+  constructor({ parent, props, presenceContext, reducedMotionConfig, blockInitialAnimation, visualState, }, options = {},) {
+    this.resolveKeyframes = (keyframes2, onComplete, name, value,) => {
+      return new this.KeyframeResolver(keyframes2, onComplete, name, value, this,);
+    };
     this.current = null;
     this.children = /* @__PURE__ */ new Set();
     this.isVariantNode = false;
     this.isControllingVariants = false;
     this.shouldReduceMotion = null;
     this.values = /* @__PURE__ */ new Map();
+    this.KeyframeResolver = KeyframeResolver;
     this.features = {};
     this.valueSubscriptions = /* @__PURE__ */ new Map();
     this.prevMotionValues = {};
@@ -3468,6 +3926,7 @@ var VisualElement = class {
     this.depth = parent ? parent.depth + 1 : 0;
     this.reducedMotionConfig = reducedMotionConfig;
     this.options = options;
+    this.blockInitialAnimation = Boolean(blockInitialAnimation,);
     this.isControllingVariants = isControllingVariants(props,);
     this.isVariantNode = isVariantNode(props,);
     if (this.isVariantNode) {
@@ -3484,16 +3943,6 @@ var VisualElement = class {
         }
       }
     }
-  }
-  /**
-   * This method takes React props and returns found MotionValues. For example, HTML
-   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
-   *
-   * This isn't an abstract method as it needs calling in the constructor, but it is
-   * intended to be one.
-   */
-  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
-    return {};
   }
   mount(instance,) {
     this.current = instance;
@@ -3522,6 +3971,7 @@ var VisualElement = class {
     this.update(this.props, this.presenceContext,);
   }
   unmount() {
+    var _a;
     visualElementStore.delete(this.current,);
     this.projection && this.projection.unmount();
     cancelFrame(this.notifyUpdate,);
@@ -3533,7 +3983,7 @@ var VisualElement = class {
       this.events[key7].clear();
     }
     for (const key7 in this.features) {
-      this.features[key7].unmount();
+      (_a = this.features[key7]) === null || _a === void 0 ? void 0 : _a.unmount();
     }
     this.current = null;
   }
@@ -3541,7 +3991,7 @@ var VisualElement = class {
     const valueIsTransform = transformProps.has(key7,);
     const removeOnChange = value.on('change', (latestValue,) => {
       this.latestValues[key7] = latestValue;
-      this.props.onUpdate && frame.update(this.notifyUpdate, false, true,);
+      this.props.onUpdate && frame.preRender(this.notifyUpdate,);
       if (valueIsTransform && this.projection) {
         this.projection.isTransformDirty = true;
       }
@@ -3550,6 +4000,9 @@ var VisualElement = class {
     this.valueSubscriptions.set(key7, () => {
       removeOnChange();
       removeOnRenderRequest();
+      if (value.owner) {
+        value.stop();
+      }
     },);
   }
   sortNodePosition(other,) {
@@ -3633,16 +4086,6 @@ var VisualElement = class {
     this.latestValues[key7] = value;
   }
   /**
-   * Make a target animatable by Popmotion. For instance, if we're
-   * trying to animate width from 100px to 100vw we need to measure 100vw
-   * in pixels to determine what we really need to animate to. This is also
-   * pluggable to support Framer's custom value types like Color,
-   * and CSS variables.
-   */
-  makeTargetAnimatable(target, canMutate = true,) {
-    return this.makeTargetAnimatableFromInstance(target, canMutate,);
-  }
-  /**
    * Update the provided props. Ensure any newly-added motion values are
    * added to our map, old ones removed, and listeners updated.
    */
@@ -3660,7 +4103,8 @@ var VisualElement = class {
         this.propEventSubscriptions[key7]();
         delete this.propEventSubscriptions[key7];
       }
-      const listener = props['on' + key7];
+      const listenerName = 'on' + key7;
+      const listener = props[listenerName];
       if (listener) {
         this.propEventSubscriptions[key7] = this.on(key7, listener,);
       }
@@ -3730,12 +4174,15 @@ var VisualElement = class {
    * Add a motion value and bind it to this visual element.
    */
   addValue(key7, value,) {
-    if (value !== this.values.get(key7,)) {
-      this.removeValue(key7,);
+    const existingValue = this.values.get(key7,);
+    if (value !== existingValue) {
+      if (existingValue) {
+        this.removeValue(key7,);
+      }
       this.bindToMotionValue(key7, value,);
+      this.values.set(key7, value,);
+      this.latestValues[key7] = value.get();
     }
-    this.values.set(key7, value,);
-    this.latestValues[key7] = value.get();
   }
   /**
    * Remove a motion value and unbind any active subscriptions.
@@ -3762,7 +4209,7 @@ var VisualElement = class {
     }
     let value = this.values.get(key7,);
     if (value === void 0 && defaultValue !== void 0) {
-      value = motionValue(defaultValue, { owner: this, },);
+      value = motionValue(defaultValue === null ? void 0 : defaultValue, { owner: this, },);
       this.addValue(key7, value,);
     }
     return value;
@@ -3772,13 +4219,22 @@ var VisualElement = class {
    * we need to check for it in our state and as a last resort read it
    * directly from the instance (which might have performance implications).
    */
-  readValue(key7,) {
+  readValue(key7, target,) {
     var _a;
-    return this.latestValues[key7] !== void 0 || !this.current
+    let value = this.latestValues[key7] !== void 0 || !this.current
       ? this.latestValues[key7]
       : (_a = this.getBaseTargetFromProps(this.props, key7,)) !== null && _a !== void 0
       ? _a
       : this.readValueFromInstance(this.current, key7, this.options,);
+    if (value !== void 0 && value !== null) {
+      if (typeof value === 'string' && (isNumericalString(value,) || isZeroValueString(value,))) {
+        value = parseFloat(value,);
+      } else if (!findValueType(value,) && complex.test(target,)) {
+        value = getAnimatableNone2(key7, target,);
+      }
+      this.setBaseTarget(key7, isMotionValue(value,) ? value.get() : value,);
+    }
+    return isMotionValue(value,) ? value.get() : value;
   }
   /**
    * Set the base target to later animate back to. This is currently
@@ -3794,9 +4250,17 @@ var VisualElement = class {
   getBaseTarget(key7,) {
     var _a;
     const { initial, } = this.props;
-    const valueFromInitial = typeof initial === 'string' || typeof initial === 'object'
-      ? (_a = resolveVariantFromProps(this.props, initial,)) === null || _a === void 0 ? void 0 : _a[key7]
-      : void 0;
+    let valueFromInitial;
+    if (typeof initial === 'string' || typeof initial === 'object') {
+      const variant = resolveVariantFromProps(
+        this.props,
+        initial,
+        (_a = this.presenceContext) === null || _a === void 0 ? void 0 : _a.custom,
+      );
+      if (variant) {
+        valueFromInitial = variant[key7];
+      }
+    }
     if (initial && valueFromInitial !== void 0) {
       return valueFromInitial;
     }
@@ -3819,8 +4283,8 @@ var VisualElement = class {
   }
 };
 function createMotionProxy(createConfig,) {
-  function custom(Component23, customMotionComponentConfig = {},) {
-    return createMotionComponent(createConfig(Component23, customMotionComponentConfig,),);
+  function custom(Component33, customMotionComponentConfig = {},) {
+    return createMotionComponent(createConfig(Component33, customMotionComponentConfig,),);
   }
   if (typeof Proxy === 'undefined') {
     return custom;
@@ -3867,26 +4331,26 @@ var lowercaseSVGElements = [
   'use',
   'view',
 ];
-function isSVGComponent(Component23,) {
+function isSVGComponent(Component33,) {
   if (
     /**
      * If it's not a string, it's a custom React component. Currently we only support
      * HTML custom React components.
      */
-    typeof Component23 !== 'string' || /**
+    typeof Component33 !== 'string' || /**
      * If it contains a dash, the element is a custom HTML webcomponent.
      */
-    Component23.includes('-',)
+    Component33.includes('-',)
   ) {
     return false;
   } else if (
     /**
      * If it's in our list of lowercase SVG tags, it's an SVG component
      */
-    lowercaseSVGElements.indexOf(Component23,) > -1 || /**
+    lowercaseSVGElements.indexOf(Component33,) > -1 || /**
      * If it contains a capital letter, it's an SVG component
      */
-    /[A-Z]/u.test(Component23,)
+    /[A-Z]/u.test(Component33,)
   ) {
     return true;
   }
@@ -4060,10 +4524,10 @@ var createSvgRenderState = () => ({
   attrs: {},
 });
 var isSVGTag = (tag,) => typeof tag === 'string' && tag.toLowerCase() === 'svg';
-function useSVGProps(props, visualState, _isStatic, Component23,) {
+function useSVGProps(props, visualState, _isStatic, Component33,) {
   const visualProps = useMemo3(() => {
     const state = createSvgRenderState();
-    buildSVGAttrs(state, visualState, { enableHardwareAcceleration: false, }, isSVGTag(Component23,), props.transformTemplate,);
+    buildSVGAttrs(state, visualState, { enableHardwareAcceleration: false, }, isSVGTag(Component33,), props.transformTemplate,);
     return {
       ...state.attrs,
       style: { ...state.style, },
@@ -4077,14 +4541,14 @@ function useSVGProps(props, visualState, _isStatic, Component23,) {
   return visualProps;
 }
 function createUseRender(forwardMotionProps = false,) {
-  const useRender = (Component23, props, ref, { latestValues, }, isStatic,) => {
-    const useVisualProps = isSVGComponent(Component23,) ? useSVGProps : useHTMLProps;
-    const visualProps = useVisualProps(props, latestValues, isStatic, Component23,);
-    const filteredProps2 = filterProps(props, typeof Component23 === 'string', forwardMotionProps,);
-    const elementProps = Component23 !== Fragment ? { ...filteredProps2, ...visualProps, ref, } : {};
+  const useRender = (Component33, props, ref, { latestValues, }, isStatic,) => {
+    const useVisualProps = isSVGComponent(Component33,) ? useSVGProps : useHTMLProps;
+    const visualProps = useVisualProps(props, latestValues, isStatic, Component33,);
+    const filteredProps2 = filterProps(props, typeof Component33 === 'string', forwardMotionProps,);
+    const elementProps = Component33 !== Fragment ? { ...filteredProps2, ...visualProps, ref, } : {};
     const { children, } = props;
     const renderedChildren = useMemo4(() => isMotionValue(children,) ? children.get() : children, [children,],);
-    return createElement2(Component23, {
+    return createElement(Component33, {
       ...elementProps,
       children: renderedChildren,
     },);
@@ -4190,19 +4654,19 @@ var htmlMotionConfig = {
     createRenderState: createHtmlRenderState,
   },),
 };
-function createDomMotionConfig(Component23, { forwardMotionProps = false, }, preloadedFeatures2, createVisualElement2,) {
-  const baseConfig = isSVGComponent(Component23,) ? svgMotionConfig : htmlMotionConfig;
+function createDomMotionConfig(Component33, { forwardMotionProps = false, }, preloadedFeatures2, createVisualElement2,) {
+  const baseConfig = isSVGComponent(Component33,) ? svgMotionConfig : htmlMotionConfig;
   return {
     ...baseConfig,
     preloadedFeatures: preloadedFeatures2,
     useRender: createUseRender(forwardMotionProps,),
     createVisualElement: createVisualElement2,
-    Component: Component23,
+    Component: Component33,
   };
 }
 function addHoverEvent(node, isActive,) {
-  const eventName = 'pointer' + (isActive ? 'enter' : 'leave');
-  const callbackName = 'onHover' + (isActive ? 'Start' : 'End');
+  const eventName = isActive ? 'pointerenter' : 'pointerleave';
+  const callbackName = isActive ? 'onHoverStart' : 'onHoverEnd';
   const handleEvent = (event, info,) => {
     if (event.pointerType === 'touch' || isDragActive()) {
       return;
@@ -4211,8 +4675,9 @@ function addHoverEvent(node, isActive,) {
     if (node.animationState && props.whileHover) {
       node.animationState.setActive('whileHover', isActive,);
     }
-    if (props[callbackName]) {
-      frame.update(() => props[callbackName](event, info,));
+    const callback = props[callbackName];
+    if (callback) {
+      callback(event, info,);
     }
   };
   return addPointerEvent(node.current, eventName, handleEvent, {
@@ -4293,11 +4758,9 @@ var PressGesture = class extends Feature {
           return;
         }
         const { onTap, onTapCancel, globalTapTarget, } = this.node.getProps();
-        frame.update(() => {
-          !globalTapTarget && !isNodeOrChild(this.node.current, endEvent.target,)
-            ? onTapCancel && onTapCancel(endEvent, endInfo,)
-            : onTap && onTap(endEvent, endInfo,);
-        },);
+        !globalTapTarget && !isNodeOrChild(this.node.current, endEvent.target,)
+          ? onTapCancel && onTapCancel(endEvent, endInfo,)
+          : onTap && onTap(endEvent, endInfo,);
       };
       const removePointerUpListener = addPointerEvent(window, 'pointerup', endPointerPress, {
         passive: !(props.onTap || props['onPointerUp']),
@@ -4306,7 +4769,9 @@ var PressGesture = class extends Feature {
         window,
         'pointercancel',
         (cancelEvent, cancelInfo,) => this.cancelPress(cancelEvent, cancelInfo,),
-        { passive: !(props.onTapCancel || props['onPointerCancel']), },
+        {
+          passive: !(props.onTapCancel || props['onPointerCancel']),
+        },
       );
       this.removeEndListeners = pipe(removePointerUpListener, removePointerCancelListener,);
       this.startPress(startEvent, startInfo,);
@@ -4323,7 +4788,7 @@ var PressGesture = class extends Feature {
           fireSyntheticPointerEvent('up', (event, info,) => {
             const { onTap, } = this.node.getProps();
             if (onTap) {
-              frame.update(() => onTap(event, info,));
+              onTap(event, info,);
             }
           },);
         };
@@ -4351,7 +4816,7 @@ var PressGesture = class extends Feature {
       this.node.animationState.setActive('whileTap', true,);
     }
     if (onTapStart) {
-      frame.update(() => onTapStart(event, info,));
+      onTapStart(event, info,);
     }
   }
   checkPressEnd() {
@@ -4369,7 +4834,7 @@ var PressGesture = class extends Feature {
     }
     const { onTapCancel, } = this.node.getProps();
     if (onTapCancel) {
-      frame.update(() => onTapCancel(event, info,));
+      onTapCancel(event, info,);
     }
   }
   mount() {
@@ -4378,7 +4843,9 @@ var PressGesture = class extends Feature {
       props.globalTapTarget ? window : this.node.current,
       'pointerdown',
       this.startPointerPress,
-      { passive: !(props.onTapStart || props['onPointerStart']), },
+      {
+        passive: !(props.onTapStart || props['onPointerStart']),
+      },
     );
     const removeFocusListener = addDomEvent(this.node.current, 'focus', this.startAccessiblePress,);
     this.removeStartListeners = pipe(removePointerListener, removeFocusListener,);
@@ -4884,7 +5351,7 @@ var VisualElementDragControls = class {
         this.originPoint[axis] = current;
       },);
       if (onDragStart) {
-        frame.update(() => onDragStart(event, info,), false, true,);
+        onDragStart(event, info,);
       }
       const { animationState, } = this.visualElement;
       animationState && animationState.setActive('whileDrag', true,);
@@ -4937,7 +5404,7 @@ var VisualElementDragControls = class {
     this.startAnimation(velocity,);
     const { onDragEnd, } = this.getProps();
     if (onDragEnd) {
-      frame.update(() => onDragEnd(event, info,));
+      onDragEnd(event, info,);
     }
   }
   cancel() {
@@ -4990,7 +5457,7 @@ var VisualElementDragControls = class {
     this.elastic = resolveDragElastic(dragElastic,);
     if (prevConstraints !== this.constraints && layout2 && this.constraints && !this.hasMutatedConstraints) {
       eachAxis((axis,) => {
-        if (this.getAxisMotionValue(axis,)) {
+        if (this.constraints !== false && this.getAxisMotionValue(axis,)) {
           this.constraints[axis] = rebaseAxisConstraints(layout2.layoutBox[axis], this.constraints[axis],);
         }
       },);
@@ -5051,7 +5518,7 @@ var VisualElementDragControls = class {
   }
   startAxisValueAnimation(axis, transition,) {
     const axisValue = this.getAxisMotionValue(axis,);
-    return axisValue.start(animateMotionValue(axis, axisValue, 0, transition,),);
+    return axisValue.start(animateMotionValue(axis, axisValue, 0, transition, this.visualElement,),);
   }
   stopAnimation() {
     eachAxis((axis,) => this.getAxisMotionValue(axis,).stop());
@@ -5073,7 +5540,7 @@ var VisualElementDragControls = class {
    * - Otherwise, we apply the delta to the x/y motion values.
    */
   getAxisMotionValue(axis,) {
-    const dragKey = '_drag' + axis.toUpperCase();
+    const dragKey = `_drag${axis.toUpperCase()}`;
     const props = this.visualElement.getProps();
     const externalMotionValue = props[dragKey];
     return externalMotionValue
@@ -5112,7 +5579,7 @@ var VisualElementDragControls = class {
     const boxProgress = { x: 0, y: 0, };
     eachAxis((axis,) => {
       const axisValue = this.getAxisMotionValue(axis,);
-      if (axisValue) {
+      if (axisValue && this.constraints !== false) {
         const latest = axisValue.get();
         boxProgress[axis] = calcOrigin2({ min: latest, max: latest, }, this.constraints[axis],);
       }
@@ -5229,7 +5696,7 @@ var DragGesture = class extends Feature {
 };
 var asyncHandler = (handler,) => (event, info,) => {
   if (handler) {
-    frame.update(() => handler(event, info,));
+    handler(event, info,);
   }
 };
 var PanGesture = class extends Feature {
@@ -5252,7 +5719,7 @@ var PanGesture = class extends Feature {
       onEnd: (event, info,) => {
         delete this.session;
         if (onPanEnd) {
-          frame.update(() => onPanEnd(event, info,));
+          onPanEnd(event, info,);
         }
       },
     };
@@ -5326,7 +5793,7 @@ var correctBoxShadow = {
     return template(shadow,);
   },
 };
-var MeasureLayoutWithContext = class extends React__default.Component {
+var MeasureLayoutWithContext = class extends Component {
   /**
    * This only mounts projection nodes for components that
    * need measuring, we might want to do it for all components
@@ -5415,7 +5882,7 @@ var MeasureLayoutWithContext = class extends React__default.Component {
 function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
   const layoutGroup = useContext6(LayoutGroupContext,);
-  return React__default.createElement(MeasureLayoutWithContext, {
+  return jsx2(MeasureLayoutWithContext, {
     ...props,
     layoutGroup,
     switchLayoutGroup: useContext6(SwitchLayoutGroupContext,),
@@ -5697,13 +6164,6 @@ function animateSingleValue(value, keyframes2, options,) {
 }
 var transformAxes = ['', 'X', 'Y', 'Z',];
 var hiddenVisibility = { visibility: 'hidden', };
-function resetDistortingTransform(key7, visualElement, values,) {
-  const { latestValues, } = visualElement;
-  if (latestValues[key7]) {
-    values[key7] = latestValues[key7];
-    visualElement.setStaticValue(key7, 0,);
-  }
-}
 var animationTarget = 1e3;
 var id2 = 0;
 var projectionFrameData = {
@@ -5712,6 +6172,16 @@ var projectionFrameData = {
   resolvedTargetDeltas: 0,
   recalculatedProjection: 0,
 };
+function resetDistortingTransform(key7, visualElement, values, sharedAnimationValues,) {
+  const { latestValues, } = visualElement;
+  if (latestValues[key7]) {
+    values[key7] = latestValues[key7];
+    visualElement.setStaticValue(key7, 0,);
+    if (sharedAnimationValues) {
+      sharedAnimationValues[key7] = 0;
+    }
+  }
+}
 function createProjectionNode({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, },) {
   return class ProjectionNode {
     constructor(latestValues = {}, parent = defaultParent === null || defaultParent === void 0 ? void 0 : defaultParent(),) {
@@ -5884,7 +6354,7 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
         return;
       }
       this.isUpdating = true;
-      this.nodes && this.nodes.forEach(resetRotation,);
+      this.nodes && this.nodes.forEach(resetSkewAndRotation,);
       this.animationId++;
     }
     getTransformTemplate() {
@@ -6479,33 +6949,36 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
         return false;
       }
     }
-    resetRotation() {
+    resetSkewAndRotation() {
       const { visualElement, } = this.options;
       if (!visualElement) {
         return;
       }
-      let hasRotate = false;
+      let hasDistortingTransform = false;
       const { latestValues, } = visualElement;
       if (
         latestValues.z || latestValues.rotate || latestValues.rotateX || latestValues.rotateY || latestValues.rotateZ ||
         latestValues.skewX || latestValues.skewY
       ) {
-        hasRotate = true;
+        hasDistortingTransform = true;
       }
-      if (!hasRotate) {
+      if (!hasDistortingTransform) {
         return;
       }
       const resetValues = {};
       if (latestValues.z) {
-        resetDistortingTransform('z', visualElement, resetValues,);
+        resetDistortingTransform('z', visualElement, resetValues, this.animationValues,);
       }
       for (let i = 0; i < transformAxes.length; i++) {
-        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues,);
-        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues,);
+        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues, this.animationValues,);
+        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues, this.animationValues,);
       }
       visualElement.render();
       for (const key7 in resetValues) {
         visualElement.setStaticValue(key7, resetValues[key7],);
+        if (this.animationValues) {
+          this.animationValues[key7] = resetValues[key7];
+        }
       }
       visualElement.scheduleRender();
     }
@@ -6717,8 +7190,8 @@ function resolveTargetDelta(node,) {
 function calcProjection(node,) {
   node.calcProjection();
 }
-function resetRotation(node,) {
-  node.resetRotation();
+function resetSkewAndRotation(node,) {
+  node.resetSkewAndRotation();
 }
 function removeLeadSnapshots(stack,) {
   stack.removeLeadSnapshot();
@@ -6799,255 +7272,11 @@ var drag = {
     MeasureLayout,
   },
 };
-var splitCSSVariableRegex = (
-  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
-  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u
-);
-function parseCSSVariable(current,) {
-  const match = splitCSSVariableRegex.exec(current,);
-  if (!match) {
-    return [,];
-  }
-  const [, token1, token2, fallback,] = match;
-  return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback,];
-}
-var maxDepth = 4;
-function getVariableValue(current, element, depth = 1,) {
-  invariant(
-    depth <= maxDepth,
-    `Max CSS variable fallback depth detected in property "${current}". This may indicate a circular fallback dependency.`,
-  );
-  const [token, fallback,] = parseCSSVariable(current,);
-  if (!token) {
-    return;
-  }
-  const resolved = window.getComputedStyle(element,).getPropertyValue(token,);
-  if (resolved) {
-    const trimmed = resolved.trim();
-    return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
-  }
-  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
-}
-function resolveCSSVariables(visualElement, { ...target }, transitionEnd,) {
-  const element = visualElement.current;
-  if (!(element instanceof Element)) {
-    return { target, transitionEnd, };
-  }
-  if (transitionEnd) {
-    transitionEnd = { ...transitionEnd, };
-  }
-  visualElement.values.forEach((value,) => {
-    const current = value.get();
-    if (!isCSSVariableToken(current,)) {
-      return;
-    }
-    const resolved = getVariableValue(current, element,);
-    if (resolved) {
-      value.set(resolved,);
-    }
-  },);
-  for (const key7 in target) {
-    const current = target[key7];
-    if (!isCSSVariableToken(current,)) {
-      continue;
-    }
-    const resolved = getVariableValue(current, element,);
-    if (!resolved) {
-      continue;
-    }
-    target[key7] = resolved;
-    if (!transitionEnd) {
-      transitionEnd = {};
-    }
-    if (transitionEnd[key7] === void 0) {
-      transitionEnd[key7] = current;
-    }
-  }
-  return { target, transitionEnd, };
-}
-var positionalKeys = /* @__PURE__ */ new Set([
-  'width',
-  'height',
-  'top',
-  'left',
-  'right',
-  'bottom',
-  'x',
-  'y',
-  'translateX',
-  'translateY',
-],);
-var isPositionalKey = (key7,) => positionalKeys.has(key7,);
-var hasPositionalKey = (target,) => {
-  return Object.keys(target,).some(isPositionalKey,);
-};
-var isNumOrPxType = (v,) => v === number || v === px;
-var getPosFromMatrix = (matrix, pos,) => parseFloat(matrix.split(', ',)[pos],);
-var getTranslateFromMatrix = (pos2, pos3,) => (_bbox, { transform: transform2, },) => {
-  if (transform2 === 'none' || !transform2) {
-    return 0;
-  }
-  const matrix3d = transform2.match(/^matrix3d\((.+)\)$/u,);
-  if (matrix3d) {
-    return getPosFromMatrix(matrix3d[1], pos3,);
-  } else {
-    const matrix = transform2.match(/^matrix\((.+)\)$/u,);
-    if (matrix) {
-      return getPosFromMatrix(matrix[1], pos2,);
-    } else {
-      return 0;
-    }
-  }
-};
-var transformKeys = /* @__PURE__ */ new Set(['x', 'y', 'z',],);
-var nonTranslationalTransformKeys = transformPropOrder.filter((key7,) => !transformKeys.has(key7,));
-function removeNonTranslationalTransform(visualElement,) {
-  const removedTransforms = [];
-  nonTranslationalTransformKeys.forEach((key7,) => {
-    const value = visualElement.getValue(key7,);
-    if (value !== void 0) {
-      removedTransforms.push([key7, value.get(),],);
-      value.set(key7.startsWith('scale',) ? 1 : 0,);
-    }
-  },);
-  if (removedTransforms.length) {
-    visualElement.render();
-  }
-  return removedTransforms;
-}
-var positionalValues = {
-  // Dimensions
-  width: ({ x, }, { paddingLeft = '0', paddingRight = '0', },) => x.max - x.min - parseFloat(paddingLeft,) - parseFloat(paddingRight,),
-  height: ({ y, }, { paddingTop = '0', paddingBottom = '0', },) => y.max - y.min - parseFloat(paddingTop,) - parseFloat(paddingBottom,),
-  top: (_bbox, { top, },) => parseFloat(top,),
-  left: (_bbox, { left, },) => parseFloat(left,),
-  bottom: ({ y, }, { top, },) => parseFloat(top,) + (y.max - y.min),
-  right: ({ x, }, { left, },) => parseFloat(left,) + (x.max - x.min),
-  // Transform
-  x: getTranslateFromMatrix(4, 13,),
-  y: getTranslateFromMatrix(5, 14,),
-};
-positionalValues.translateX = positionalValues.x;
-positionalValues.translateY = positionalValues.y;
-var convertChangedValueTypes = (target, visualElement, changedKeys,) => {
-  const originBbox = visualElement.measureViewportBox();
-  const element = visualElement.current;
-  const elementComputedStyle = getComputedStyle(element,);
-  const { display, } = elementComputedStyle;
-  const origin = {};
-  if (display === 'none') {
-    visualElement.setStaticValue('display', target.display || 'block',);
-  }
-  changedKeys.forEach((key7,) => {
-    origin[key7] = positionalValues[key7](originBbox, elementComputedStyle,);
-  },);
-  visualElement.render();
-  const targetBbox = visualElement.measureViewportBox();
-  changedKeys.forEach((key7,) => {
-    const value = visualElement.getValue(key7,);
-    value && value.jump(origin[key7],);
-    target[key7] = positionalValues[key7](targetBbox, elementComputedStyle,);
-  },);
-  return target;
-};
-var checkAndConvertChangedValueTypes = (visualElement, target, origin = {}, transitionEnd = {},) => {
-  target = { ...target, };
-  transitionEnd = { ...transitionEnd, };
-  const targetPositionalKeys = Object.keys(target,).filter(isPositionalKey,);
-  let removedTransformValues = [];
-  let hasAttemptedToRemoveTransformValues = false;
-  const changedValueTypeKeys = [];
-  targetPositionalKeys.forEach((key7,) => {
-    const value = visualElement.getValue(key7,);
-    if (!visualElement.hasValue(key7,)) {
-      return;
-    }
-    let from = origin[key7];
-    let fromType = findDimensionValueType(from,);
-    const to = target[key7];
-    let toType;
-    if (isKeyframesTarget(to,)) {
-      const numKeyframes = to.length;
-      const fromIndex = to[0] === null ? 1 : 0;
-      from = to[fromIndex];
-      fromType = findDimensionValueType(from,);
-      for (let i = fromIndex; i < numKeyframes; i++) {
-        if (to[i] === null) {
-          break;
-        }
-        if (!toType) {
-          toType = findDimensionValueType(to[i],);
-          invariant(
-            toType === fromType || isNumOrPxType(fromType,) && isNumOrPxType(toType,),
-            'Keyframes must be of the same dimension as the current value',
-          );
-        } else {
-          invariant(findDimensionValueType(to[i],) === toType, 'All keyframes must be of the same type',);
-        }
-      }
-    } else {
-      toType = findDimensionValueType(to,);
-    }
-    if (fromType !== toType) {
-      if (isNumOrPxType(fromType,) && isNumOrPxType(toType,)) {
-        const current = value.get();
-        if (typeof current === 'string') {
-          value.set(parseFloat(current,),);
-        }
-        if (typeof to === 'string') {
-          target[key7] = parseFloat(to,);
-        } else if (Array.isArray(to,) && toType === px) {
-          target[key7] = to.map(parseFloat,);
-        }
-      } else if (
-        (fromType === null || fromType === void 0 ? void 0 : fromType.transform) &&
-        (toType === null || toType === void 0 ? void 0 : toType.transform) && (from === 0 || to === 0)
-      ) {
-        if (from === 0) {
-          value.set(toType.transform(from,),);
-        } else {
-          target[key7] = fromType.transform(to,);
-        }
-      } else {
-        if (!hasAttemptedToRemoveTransformValues) {
-          removedTransformValues = removeNonTranslationalTransform(visualElement,);
-          hasAttemptedToRemoveTransformValues = true;
-        }
-        changedValueTypeKeys.push(key7,);
-        transitionEnd[key7] = transitionEnd[key7] !== void 0 ? transitionEnd[key7] : target[key7];
-        value.jump(to,);
-      }
-    }
-  },);
-  if (changedValueTypeKeys.length) {
-    const scrollY = changedValueTypeKeys.indexOf('height',) >= 0 ? window.pageYOffset : null;
-    const convertedTarget = convertChangedValueTypes(target, visualElement, changedValueTypeKeys,);
-    if (removedTransformValues.length) {
-      removedTransformValues.forEach(([key7, value,],) => {
-        visualElement.getValue(key7,).set(value,);
-      },);
-    }
-    visualElement.render();
-    if (isBrowser && scrollY !== null) {
-      window.scrollTo({ top: scrollY, },);
-    }
-    return { target: convertedTarget, transitionEnd, };
-  } else {
-    return { target, transitionEnd, };
-  }
-};
-function unitConversion(visualElement, target, origin, transitionEnd,) {
-  return hasPositionalKey(target,)
-    ? checkAndConvertChangedValueTypes(visualElement, target, origin, transitionEnd,)
-    : { target, transitionEnd, };
-}
-var parseDomVariant = (visualElement, target, origin, transitionEnd,) => {
-  const resolved = resolveCSSVariables(visualElement, target, transitionEnd,);
-  target = resolved.target;
-  transitionEnd = resolved.transitionEnd;
-  return unitConversion(visualElement, target, origin, transitionEnd,);
-};
 var DOMVisualElement = class extends VisualElement {
+  constructor() {
+    super(...arguments,);
+    this.KeyframeResolver = DOMKeyframesResolver;
+  }
   sortInstanceNodePosition(a, b,) {
     return a.compareDocumentPosition(b,) & 2 ? 1 : -1;
   }
@@ -7057,20 +7286,6 @@ var DOMVisualElement = class extends VisualElement {
   removeValueFromRenderState(key7, { vars, style, },) {
     delete vars[key7];
     delete style[key7];
-  }
-  makeTargetAnimatableFromInstance({ transition, transitionEnd, ...target }, isMounted,) {
-    const origin = getOrigin(target, transition || {}, this,);
-    if (isMounted) {
-      checkTargetForNewValues(this, target, origin,);
-      const parsed = parseDomVariant(this, target, origin, transitionEnd,);
-      transitionEnd = parsed.transitionEnd;
-      target = parsed.target;
-    }
-    return {
-      transition,
-      transitionEnd,
-      ...target,
-    };
   }
 };
 function getComputedStyle2(element,) {
@@ -7138,8 +7353,8 @@ var SVGVisualElement = class extends DOMVisualElement {
   measureInstanceViewportBox() {
     return createBox();
   }
-  scrapeMotionValuesFromProps(props, prevProps,) {
-    return scrapeMotionValuesFromProps2(props, prevProps, this,);
+  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
+    return scrapeMotionValuesFromProps2(props, prevProps, visualElement,);
   }
   build(renderState, latestValues, options, props,) {
     buildSVGAttrs(renderState, latestValues, options, this.isSVGTag, props.transformTemplate,);
@@ -7152,12 +7367,12 @@ var SVGVisualElement = class extends DOMVisualElement {
     super.mount(instance,);
   }
 };
-var createDomVisualElement = (Component23, options,) => {
-  return isSVGComponent(Component23,)
+var createDomVisualElement = (Component33, options,) => {
+  return isSVGComponent(Component33,)
     ? new SVGVisualElement(options, { enableHardwareAcceleration: false, },)
     : new HTMLVisualElement(options, {
+      allowProjection: Component33 !== Fragment2,
       enableHardwareAcceleration: true,
-      allowProjection: Component23 !== React__default2.Fragment,
     },);
 };
 var layout = {
@@ -7172,8 +7387,8 @@ var preloadedFeatures = {
   ...drag,
   ...layout,
 };
-var motion = /* @__PURE__ */ createMotionProxy((Component23, config,) =>
-  createDomMotionConfig(Component23, config, preloadedFeatures, createDomVisualElement,)
+var motion = /* @__PURE__ */ createMotionProxy((Component33, config,) =>
+  createDomMotionConfig(Component33, config, preloadedFeatures, createDomVisualElement,)
 );
 function createDomMotionComponent(key7,) {
   return createMotionComponent(createDomMotionConfig(key7, { forwardMotionProps: false, }, preloadedFeatures, createDomVisualElement,),);
@@ -7201,7 +7416,7 @@ function useForceUpdate() {
 function useUnmountEffect(callback,) {
   return useEffect4(() => () => callback(), [],);
 }
-var PopChildMeasure = class extends React2.Component {
+var PopChildMeasure = class extends React.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
@@ -7258,11 +7473,12 @@ function PopChild({ children, isPresent: isPresent2, },) {
       document.head.removeChild(style,);
     };
   }, [isPresent2,],);
-  return React2.createElement(
-    PopChildMeasure,
-    { isPresent: isPresent2, childRef: ref, sizeRef: size2, },
-    React2.cloneElement(children, { ref, },),
-  );
+  return jsx3(PopChildMeasure, {
+    isPresent: isPresent2,
+    childRef: ref,
+    sizeRef: size2,
+    children: React.cloneElement(children, { ref, },),
+  },);
 }
 var PresenceChild = ({ children, initial, isPresent: isPresent2, onExitComplete, custom, presenceAffectsLayout, mode, },) => {
   const presenceChildren = useConstant(newChildrenMap,);
@@ -7292,18 +7508,18 @@ var PresenceChild = ({ children, initial, isPresent: isPresent2, onExitComplete,
      * we want to make a new context value to ensure they get re-rendered
      * so they can detect that layout change.
      */
-    presenceAffectsLayout ? void 0 : [isPresent2,],
+    presenceAffectsLayout ? [Math.random(),] : [isPresent2,],
   );
   useMemo5(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
   }, [isPresent2,],);
-  React3.useEffect(() => {
+  React2.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
   if (mode === 'popLayout') {
-    children = React3.createElement(PopChild, { isPresent: isPresent2, }, children,);
+    children = jsx4(PopChild, { isPresent: isPresent2, children, },);
   }
-  return React3.createElement(PresenceContext.Provider, { value: context, }, children,);
+  return jsx4(PresenceContext.Provider, { value: context, children, },);
 };
 function newChildrenMap() {
   return /* @__PURE__ */ new Map();
@@ -7347,19 +7563,15 @@ var AnimatePresence = (
     exitingChildren.clear();
   },);
   if (isInitialRender.current) {
-    return React4.createElement(
-      React4.Fragment,
-      null,
-      childrenToRender.map((child,) =>
-        React4.createElement(PresenceChild, {
-          key: getChildKey(child,),
-          isPresent: true,
-          initial: initial ? void 0 : false,
-          presenceAffectsLayout,
-          mode,
-        }, child,)
+    return jsx5(Fragment3, {
+      children: childrenToRender.map((child,) =>
+        jsx5(
+          PresenceChild,
+          { isPresent: true, initial: initial ? void 0 : false, presenceAffectsLayout, mode, children: child, },
+          getChildKey(child,),
+        )
       ),
-    );
+    },);
   }
   childrenToRender = [...childrenToRender,];
   const presentKeys = presentChildren.current.map(getChildKey,);
@@ -7405,14 +7617,14 @@ var AnimatePresence = (
           onExitComplete && onExitComplete();
         }
       };
-      exitingComponent = React4.createElement(PresenceChild, {
-        key: getChildKey(child,),
+      exitingComponent = jsx5(PresenceChild, {
         isPresent: false,
         onExitComplete: onExit,
         custom,
         presenceAffectsLayout,
         mode,
-      }, child,);
+        children: child,
+      }, getChildKey(child,),);
       exitingChildren.set(key7, exitingComponent,);
     }
     childrenToRender.splice(insertionIndex, 0, exitingComponent,);
@@ -7421,25 +7633,21 @@ var AnimatePresence = (
     const key7 = child.key;
     return exitingChildren.has(key7,)
       ? child
-      : React4.createElement(PresenceChild, { key: getChildKey(child,), isPresent: true, presenceAffectsLayout, mode, }, child,);
+      : jsx5(PresenceChild, { isPresent: true, presenceAffectsLayout, mode, children: child, }, getChildKey(child,),);
   },);
   if (false) {
     console.warn(
       `You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`,
     );
   }
-  return React4.createElement(
-    React4.Fragment,
-    null,
-    exitingChildren.size ? childrenToRender : childrenToRender.map((child,) => cloneElement2(child,)),
-  );
+  return jsx5(Fragment3, { children: exitingChildren.size ? childrenToRender : childrenToRender.map((child,) => cloneElement2(child,)), },);
 };
 function MotionConfig({ children, isValidProp, ...config },) {
   isValidProp && loadExternalIsValidProp(isValidProp,);
   config = { ...useContext9(MotionConfigContext,), ...config, };
   config.isStatic = useConstant(() => config.isStatic);
   const context = useMemo6(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
-  return React5.createElement(MotionConfigContext.Provider, { value: context, }, children,);
+  return jsx6(MotionConfigContext.Provider, { value: context, children, },);
 }
 function LazyMotion({ children, features, strict = false, },) {
   const [, setIsLoaded,] = useState2(!isLazyBundle(features,),);
@@ -7458,7 +7666,7 @@ function LazyMotion({ children, features, strict = false, },) {
       },);
     }
   }, [],);
-  return React6.createElement(LazyContext.Provider, { value: { renderer: loadedRenderer.current, strict, }, }, children,);
+  return jsx7(LazyContext.Provider, { value: { renderer: loadedRenderer.current, strict, }, children, },);
 }
 function isLazyBundle(features,) {
   return typeof features === 'function';
@@ -7504,7 +7712,7 @@ var LayoutGroup = ({ children, id: id4, inherit = true, },) => {
     };
   }
   const memoizedContext = useMemo7(() => ({ ...context.current, forceRender, }), [key7,],);
-  return React7.createElement(LayoutGroupContext.Provider, { value: memoizedContext, }, children,);
+  return jsx8(LayoutGroupContext.Provider, { value: memoizedContext, children, },);
 };
 function useMotionValue(initial,) {
   const value = useConstant(() => motionValue(initial,));
@@ -7537,7 +7745,7 @@ function useCombineMotionValues(values, combineValues,) {
   const updateValue = () => value.set(combineValues(),);
   updateValue();
   useIsomorphicLayoutEffect(() => {
-    const scheduleUpdate = () => frame.update(updateValue, false, true,);
+    const scheduleUpdate = () => frame.preRender(updateValue, false, true,);
     const subscriptions = values.map((v,) => v.on('change', scheduleUpdate,));
     return () => {
       subscriptions.forEach((unsubscribe,) => unsubscribe());
@@ -7596,7 +7804,7 @@ function checkReorder(order, value, offset, velocity,) {
   return order;
 }
 function ReorderGroup({ children, as = 'ul', axis = 'y', onReorder, values, ...props }, externalRef,) {
-  const Component23 = useConstant(() => motion(as,));
+  const Component33 = useConstant(() => motion(as,));
   const order = [];
   const isReordering = useRef8(false,);
   invariant(Boolean(values,), 'Reorder.Group must be provided a values prop',);
@@ -7625,11 +7833,12 @@ function ReorderGroup({ children, as = 'ul', axis = 'y', onReorder, values, ...p
   useEffect8(() => {
     isReordering.current = false;
   },);
-  return React8.createElement(
-    Component23,
-    { ...props, ref: externalRef, ignoreStrict: true, },
-    React8.createElement(ReorderContext.Provider, { value: context, }, children,),
-  );
+  return jsx9(Component33, {
+    ...props,
+    ref: externalRef,
+    ignoreStrict: true,
+    children: jsx9(ReorderContext.Provider, { value: context, children, },),
+  },);
 }
 var Group = forwardRef2(ReorderGroup,);
 function getValue(item,) {
@@ -7642,7 +7851,7 @@ function useDefaultMotionValue(value, defaultValue = 0,) {
   return isMotionValue(value,) ? value : useMotionValue(defaultValue,);
 }
 function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: layout2 = true, ...props }, externalRef,) {
-  const Component23 = useConstant(() => motion(as,));
+  const Component33 = useConstant(() => motion(as,));
   const context = useContext12(ReorderContext,);
   const point2 = {
     x: useDefaultMotionValue(style.x,),
@@ -7651,7 +7860,7 @@ function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: l
   const zIndex = useTransform([point2.x, point2.y,], ([latestX, latestY,],) => latestX || latestY ? 1 : 'unset',);
   invariant(Boolean(context,), 'Reorder.Item must be a child of Reorder.Group',);
   const { axis, registerItem, updateOrder, } = context;
-  return React9.createElement(Component23, {
+  return jsx10(Component33, {
     drag: axis,
     ...props,
     dragSnapToOrigin: true,
@@ -7665,7 +7874,8 @@ function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: l
     onLayoutMeasure: (measured,) => registerItem(value, measured,),
     ref: externalRef,
     ignoreStrict: true,
-  }, children,);
+    children,
+  },);
 }
 var Item = forwardRef3(ReorderItem,);
 var Reorder = {
@@ -7894,8 +8104,8 @@ function updateAxisInfo(element, axisName, info, time22,) {
   const { length, position, } = keys[axisName];
   const prev = axis.current;
   const prevTime = info.time;
-  axis.current = element['scroll' + position];
-  axis.scrollLength = element['scroll' + length] - element['client' + length];
+  axis.current = element[`scroll${position}`];
+  axis.scrollLength = element[`scroll${length}`] - element[`client${length}`];
   axis.offset.length = 0;
   axis.offset[0] = 0;
   axis.offset[1] = axis.scrollLength;
@@ -7966,7 +8176,7 @@ var namedEdges = {
 };
 function resolveEdge(edge, length, inset2 = 0,) {
   let delta = 0;
-  if (namedEdges[edge] !== void 0) {
+  if (edge in namedEdges) {
     edge = namedEdges[edge];
   }
   if (typeof edge === 'string') {
@@ -8260,6 +8470,27 @@ function useReducedMotionConfig() {
 }
 function stopAnimation(visualElement,) {
   visualElement.values.forEach((value,) => value.stop());
+}
+function setVariants(visualElement, variantLabels,) {
+  const reversedLabels = [...variantLabels,].reverse();
+  reversedLabels.forEach((key7,) => {
+    const variant = visualElement.getVariant(key7,);
+    variant && setTarget(visualElement, variant,);
+    if (visualElement.variantChildren) {
+      visualElement.variantChildren.forEach((child,) => {
+        setVariants(child, variantLabels,);
+      },);
+    }
+  },);
+}
+function setValues(visualElement, definition,) {
+  if (Array.isArray(definition,)) {
+    return setVariants(visualElement, definition,);
+  } else if (typeof definition === 'string') {
+    return setVariants(visualElement, [definition,],);
+  } else {
+    setTarget(visualElement, definition,);
+  }
 }
 function animationControls() {
   let hasMounted = false;
@@ -8623,7 +8854,12 @@ function keyframesAsList(keyframes2,) {
   return Array.isArray(keyframes2,) ? keyframes2 : [keyframes2,];
 }
 function getValueTransition2(transition, key7,) {
-  return transition[key7] ? { ...transition, ...transition[key7], } : { ...transition, };
+  return transition[key7]
+    ? {
+      ...transition,
+      ...transition[key7],
+    }
+    : { ...transition, };
 }
 var isNumber = (keyframe,) => typeof keyframe === 'number';
 var isNumberKeyframesArray = (keyframes2,) => keyframes2.every(isNumber,);
@@ -8682,6 +8918,7 @@ var animate = createScopedAnimate();
 function useAnimate() {
   const scope = useConstant(() => ({
     current: null,
+    // Will be hydrated by React
     animations: [],
   }));
   const animate22 = useConstant(() => createScopedAnimate(scope,));
@@ -8857,7 +9094,7 @@ function disableInstantTransitions() {
   instantAnimationState.current = false;
 }
 function useResetProjection() {
-  const reset = React10.useCallback(() => {
+  const reset = useCallback4(() => {
     const root = rootProjectionNode.current;
     if (!root) {
       return;
@@ -8980,11 +9217,6 @@ var StateVisualElement = class extends VisualElement {
   sortInstanceNodePosition() {
     return 0;
   }
-  makeTargetAnimatableFromInstance({ transition, transitionEnd, ...target },) {
-    const origin = getOrigin(target, transition || {}, this,);
-    checkTargetForNewValues(this, target, origin,);
-    return { transition, transitionEnd, ...target, };
-  }
 };
 var useVisualState = makeUseVisualState({
   scrapeMotionValuesFromProps: createObject,
@@ -9089,51 +9321,51 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.XXAFTV53.js
-import { Component as Component2, } from 'react';
-import React12 from 'react';
+// https :https://app.framerstatic.com/framer.QJDPQWCB.js
+import { Component as Component3, } from 'react';
+import React4 from 'react';
 import { jsx as _jsx5, } from 'react/jsx-runtime';
-import React102, { startTransition as startTransition2, } from 'react';
+import React10, { startTransition as startTransition2, } from 'react';
 import React42, { useCallback as useCallback22, } from 'react';
 import React22 from 'react';
 import { useCallback as useCallback5, useEffect as useEffect16, useRef as useRef13, } from 'react';
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import React32 from 'react';
 import { jsx as _jsx2, } from 'react/jsx-runtime';
-import React62 from 'react';
-import React52 from 'react';
+import React6 from 'react';
+import React5 from 'react';
 import { jsx as _jsx4, } from 'react/jsx-runtime';
 import { Suspense as Suspense2, } from 'react';
 import { jsx as _jsx3, } from 'react/jsx-runtime';
 import { Component as Component22, Suspense, } from 'react';
-import React72 from 'react';
-import React82 from 'react';
-import React92 from 'react';
+import React7 from 'react';
+import React8 from 'react';
+import React9 from 'react';
 import { useCallback as useCallback32, useEffect as useEffect22, useRef as useRef22, } from 'react';
 import { jsx as _jsx6, } from 'react/jsx-runtime';
-import React112, { useContext as useContext17, } from 'react';
-import React122 from 'react';
+import React11, { useContext as useContext17, } from 'react';
+import React12 from 'react';
 import { useEffect as useEffect32, } from 'react';
 import React13 from 'react';
 import React14 from 'react';
-import { Fragment as Fragment3, jsx, } from 'react/jsx-runtime';
+import { Fragment as Fragment4, jsx as jsx12, } from 'react/jsx-runtime';
 import React15, { useCallback as useCallback42, useContext as useContext22, useMemo as useMemo8, useRef as useRef32, } from 'react';
-import { Fragment as Fragment22, jsx as jsx2, } from 'react/jsx-runtime';
-import React16, { Component as Component3, } from 'react';
+import { Fragment as Fragment22, jsx as jsx22, } from 'react/jsx-runtime';
+import React16, { Component as Component32, } from 'react';
 import { useRef as useRef42, } from 'react';
-import { jsx as jsx3, jsxs, } from 'react/jsx-runtime';
-import { jsx as jsx4, jsxs as jsxs2, } from 'react/jsx-runtime';
+import { jsx as jsx32, jsxs as jsxs2, } from 'react/jsx-runtime';
+import { jsx as jsx42, jsxs as jsxs22, } from 'react/jsx-runtime';
 import React19 from 'react';
 import React17 from 'react';
-import { Fragment as Fragment32, jsx as jsx5, } from 'react/jsx-runtime';
+import { Fragment as Fragment32, jsx as jsx52, } from 'react/jsx-runtime';
 import React18 from 'react';
-import { jsx as jsx6, } from 'react/jsx-runtime';
+import { jsx as jsx62, } from 'react/jsx-runtime';
 import React27 from 'react';
 import React26, { forwardRef as forwardRef4, useContext as useContext52, useRef as useRef62, } from 'react';
 import React21 from 'react';
 import React20 from 'react';
-import { jsx as jsx7, } from 'react/jsx-runtime';
-import { jsx as jsx8, } from 'react/jsx-runtime';
+import { jsx as jsx72, } from 'react/jsx-runtime';
+import { jsx as jsx82, } from 'react/jsx-runtime';
 import React222 from 'react';
 import { useContext as useContext32, useMemo as useMemo22, } from 'react';
 import { useContext as useContext42, } from 'react';
@@ -9141,14 +9373,14 @@ import { useEffect as useEffect42, useLayoutEffect as useLayoutEffect2, } from '
 import React23 from 'react';
 import React25, { useEffect as useEffect52, } from 'react';
 import React24 from 'react';
-import { jsx as jsx9, } from 'react/jsx-runtime';
+import { jsx as jsx92, } from 'react/jsx-runtime';
 import { Component as Component4, } from 'react';
 import { useEffect as useEffect62, useRef as useRef52, } from 'react';
-import { Fragment as Fragment4, jsx as jsx10, jsxs as jsxs3, } from 'react/jsx-runtime';
-import { jsx as jsx11, jsxs as jsxs4, } from 'react/jsx-runtime';
+import { Fragment as Fragment42, jsx as jsx102, jsxs as jsxs3, } from 'react/jsx-runtime';
+import { jsx as jsx112, jsxs as jsxs4, } from 'react/jsx-runtime';
 import React36, { Component as Component7, } from 'react';
 import React28, { Component as Component5, } from 'react';
-import { jsx as jsx12, } from 'react/jsx-runtime';
+import { jsx as jsx122, } from 'react/jsx-runtime';
 import { jsx as jsx13, } from 'react/jsx-runtime';
 import React35, { useContext as useContext82, useEffect as useEffect82, useRef as useRef82, } from 'react';
 import React29 from 'react';
@@ -9174,7 +9406,7 @@ import {
 import { jsx as jsx20, } from 'react/jsx-runtime';
 import { jsx as jsx21, jsxs as jsxs7, } from 'react/jsx-runtime';
 import { createContext as createContext22, } from 'react';
-import { jsx as jsx22, jsxs as jsxs8, } from 'react/jsx-runtime';
+import { jsx as jsx222, jsxs as jsxs8, } from 'react/jsx-runtime';
 import React37 from 'react';
 import { jsx as jsx23, } from 'react/jsx-runtime';
 import React40 from 'react';
@@ -9211,7 +9443,7 @@ import {
 import React46, { Component as Component11, } from 'react';
 import { jsx as jsx31, } from 'react/jsx-runtime';
 import { useContext as useContext112, } from 'react';
-import { jsx as jsx32, } from 'react/jsx-runtime';
+import { jsx as jsx322, } from 'react/jsx-runtime';
 import React53 from 'react';
 import React47 from 'react';
 import React48, { useCallback as useCallback8, useEffect as useEffect112, useRef as useRef112, } from 'react';
@@ -9219,7 +9451,7 @@ import React49 from 'react';
 import { useLayoutEffect as useLayoutEffect22, useRef as useRef122, } from 'react';
 import React51 from 'react';
 import React50 from 'react';
-import React522 from 'react';
+import React52 from 'react';
 import { jsx as jsx33, } from 'react/jsx-runtime';
 import { createContext as createContext42, useContext as useContext122, useRef as useRef132, } from 'react';
 import { jsx as jsx34, } from 'react/jsx-runtime';
@@ -9237,13 +9469,13 @@ import React60 from 'react';
 import React59 from 'react';
 import { Fragment as Fragment7, jsx as jsx39, jsxs as jsxs12, } from 'react/jsx-runtime';
 import { jsx as jsx40, jsxs as jsxs13, } from 'react/jsx-runtime';
-import React622 from 'react';
+import React62 from 'react';
 import ReactDOM from 'react-dom';
 import { jsx as jsx41, jsxs as jsxs14, } from 'react/jsx-runtime';
 import React63 from 'react';
 import React64, { useCallback as useCallback9, useImperativeHandle, useRef as useRef14, } from 'react';
 import React65 from 'react';
-import { jsx as jsx42, } from 'react/jsx-runtime';
+import { jsx as jsx422, } from 'react/jsx-runtime';
 import React67 from 'react';
 import * as React66 from 'react';
 import { Fragment as Fragment8, jsx as jsx43, } from 'react/jsx-runtime';
@@ -9260,7 +9492,7 @@ import {
 } from 'react';
 import { useMemo as useMemo52, } from 'react';
 import React71, { createRef, } from 'react';
-import React722 from 'react';
+import React72 from 'react';
 import React73 from 'react';
 import React74 from 'react';
 import React75 from 'react';
@@ -9276,12 +9508,12 @@ import React80 from 'react';
 import { jsx as jsx48, } from 'react/jsx-runtime';
 import React81 from 'react';
 import { jsx as jsx49, } from 'react/jsx-runtime';
-import React822 from 'react';
+import React82 from 'react';
 import { jsx as jsx50, } from 'react/jsx-runtime';
 import React83 from 'react';
 import { jsx as jsx51, } from 'react/jsx-runtime';
 import React84, { useContext as useContext152, } from 'react';
-import { jsx as jsx52, jsxs as jsxs16, } from 'react/jsx-runtime';
+import { jsx as jsx522, jsxs as jsxs16, } from 'react/jsx-runtime';
 import React85 from 'react';
 import { jsx as jsx53, jsxs as jsxs17, } from 'react/jsx-runtime';
 import {
@@ -9308,7 +9540,7 @@ import { jsx as jsx59, } from 'react/jsx-runtime';
 import { Component as Component13, } from 'react';
 import { jsx as jsx60, } from 'react/jsx-runtime';
 import { jsx as jsx61, jsxs as jsxs20, } from 'react/jsx-runtime';
-import { jsx as jsx62, } from 'react/jsx-runtime';
+import { jsx as jsx622, } from 'react/jsx-runtime';
 import { useEffect as useEffect162, useState as useState22, } from 'react';
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
@@ -10116,13 +10348,13 @@ var require_fontfaceobserver_standalone = __commonJS({
 },);
 function renderPage(Page4, defaultPageStyle,) {
   const style = { style: defaultPageStyle, };
-  return React12.isValidElement(Page4,) ? React12.cloneElement(Page4, style,) : React12.createElement(Page4, style,);
+  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
 }
 var NotFoundError = class extends Error {
 };
 var ErrorBoundaryCaughtError = class extends Error {
 };
-var ErrorBoundary = class extends Component2 {
+var ErrorBoundary = class extends Component3 {
   constructor(props,) {
     super(props,);
     this.state = { error: void 0, forceUpdateKey: props.forceUpdateKey, };
@@ -11049,14 +11281,14 @@ function isSamePage(a, b,) {
     Object.keys(aPathVariables,).every((key7,) => aPathVariables[key7] === bPathVariables[key7]);
 }
 function useGetRouteCallback(routes,) {
-  return React52.useCallback((routeId,) => routes[routeId], [routes,],);
+  return React5.useCallback((routeId,) => routes[routeId], [routes,],);
 }
-var RouterContext = React62.createContext({},);
+var RouterContext = React6.createContext({},);
 function RouterAPIProvider({ api, children, },) {
   return _jsx2(RouterContext.Provider, { value: api, children, },);
 }
 function useRouter() {
-  return React62.useContext(RouterContext,);
+  return React6.useContext(RouterContext,);
 }
 function RoutesProvider({ routes, children, },) {
   const getRoute = useGetRouteCallback(routes,);
@@ -11116,13 +11348,13 @@ var defaultCollectionListPaginationInfo = {
   setPaginationInfo: noopAsync,
   loadMore: noopAsync,
 };
-var CollectionListPaginationInfoContext = /* @__PURE__ */ React72.createContext(defaultCollectionListPaginationInfo,);
+var CollectionListPaginationInfoContext = /* @__PURE__ */ React7.createContext(defaultCollectionListPaginationInfo,);
 function useCollectionListPaginationInfo() {
-  return React72.useContext(CollectionListPaginationInfoContext,);
+  return React7.useContext(CollectionListPaginationInfoContext,);
 }
 function useForceUpdate2() {
-  const [_, setForcedRenderCount,] = React82.useState(0,);
-  return [_, React82.useCallback(() => setForcedRenderCount((v,) => v + 1), [],),];
+  const [_, setForcedRenderCount,] = React8.useState(0,);
+  return [_, React8.useCallback(() => setForcedRenderCount((v,) => v + 1), [],),];
 }
 var noopAsync2 = async () => {
 };
@@ -11131,9 +11363,9 @@ var defaultLocaleInfo = {
   locales: [],
   setLocale: noopAsync2,
 };
-var LocaleInfoContext = /* @__PURE__ */ React92.createContext(defaultLocaleInfo,);
+var LocaleInfoContext = /* @__PURE__ */ React9.createContext(defaultLocaleInfo,);
 function useLocaleInfo() {
-  return React92.useContext(LocaleInfoContext,);
+  return React9.useContext(LocaleInfoContext,);
 }
 function useLocalizationInfo() {
   const { activeLocale, locales, setLocale, } = useLocaleInfo();
@@ -11184,8 +11416,8 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   window.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
-  const actions = React102.useRef([],);
-  React102.useLayoutEffect(() => {
+  const actions = React10.useRef([],);
+  React10.useLayoutEffect(() => {
     var _a;
     if (!((_a = actions.current) === null || _a === void 0 ? void 0 : _a.length)) {
       return;
@@ -11193,7 +11425,7 @@ function useScheduleRenderSideEffects(dep,) {
     actions.current.forEach((action,) => action());
     actions.current = [];
   }, [dep,],);
-  return React102.useCallback((cb,) => {
+  return React10.useCallback((cb,) => {
     actions.current.push(cb,);
   }, [],);
 }
@@ -11221,11 +11453,11 @@ function Router(
   },);
   const startViewTransition2 = useViewTransition();
   const monitorNextRender = useMonitorNextRender('route-change',);
-  const currentRouteRef = React102.useRef(initialRoute,);
-  const currentPathVariablesRef = React102.useRef(initialPathVariables,);
-  const currentLocaleIdRef = React102.useRef(initialLocaleId,);
+  const currentRouteRef = React10.useRef(initialRoute,);
+  const currentPathVariablesRef = React10.useRef(initialPathVariables,);
+  const currentLocaleIdRef = React10.useRef(initialLocaleId,);
   const currentLocaleId = currentLocaleIdRef.current;
-  const activeLocale = React102.useMemo(() => {
+  const activeLocale = React10.useMemo(() => {
     var _a2;
     return (_a2 = locales.find(({ id: id3, },) => {
             if (!currentLocaleId) {
@@ -11237,7 +11469,7 @@ function Router(
       : null;
   }, [currentLocaleId, locales,],);
   const [dep, forceUpdate,] = useForceUpdate2();
-  const [paginationInfo, setPaginationInfo,] = React102.useState(
+  const [paginationInfo, setPaginationInfo,] = React10.useState(
     typeof window !== 'undefined'
       ? (_b = (_a = window === null || window === void 0 ? void 0 : window.history) === null || _a === void 0 ? void 0 : _a.state) ===
             null || _b === void 0
@@ -11245,7 +11477,7 @@ function Router(
         : _b.pagination
       : void 0,
   );
-  const collectionListPaginationInfo = React102.useMemo(() => {
+  const collectionListPaginationInfo = React10.useMemo(() => {
     return {
       paginationInfo,
       setPaginationInfo: async (newPaginationInfo,) => {
@@ -11265,7 +11497,7 @@ function Router(
       },
     };
   }, [paginationInfo,],);
-  const localeInfo = React102.useMemo(() => {
+  const localeInfo = React10.useMemo(() => {
     return {
       activeLocale,
       locales,
@@ -11321,7 +11553,7 @@ function Router(
     startViewTransition2,
   ],);
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const setCurrentRouteId = React102.useCallback(
+  const setCurrentRouteId = React10.useCallback(
     (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -11335,7 +11567,7 @@ function Router(
     [forceUpdate, monitorNextRender, scheduleSideEffect,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = React102.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
+  const navigate = React10.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
     var _a2, _b2;
     const newRoute = routes[routeId];
     if (pathVariables) {
@@ -11395,7 +11627,7 @@ function Router(
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
-  const api = React102.useMemo(() => ({
+  const api = React10.useMemo(() => ({
     navigate,
     getRoute,
     currentRouteId,
@@ -11417,7 +11649,7 @@ function Router(
     notFoundPage,
     defaultPageStyle,
     forceUpdateKey: dep,
-    children: _jsx5(React102.Fragment, {
+    children: _jsx5(React10.Fragment, {
       children: pageExistsInCurrentLocale
         ? renderPage(current.page, defaultPageStyle,)
         : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
@@ -11431,7 +11663,7 @@ function Router(
         value: collectionListPaginationInfo,
         children: enableSuspenseThatPreservesDom
           ? _jsx5(SuspenseThatPreservesDom, { children: suspenseChildren, },)
-          : _jsx5(React102.Suspense, { fallback: null, children: suspenseChildren, },),
+          : _jsx5(React10.Suspense, { fallback: null, children: suspenseChildren, },),
       },),
     },),
   },);
@@ -11556,7 +11788,7 @@ var key = 'page';
 function isRoute(route,) {
   return isObject(route,) && key in route && route.page !== void 0;
 }
-var CurrentRouteContext = React112.createContext(void 0,);
+var CurrentRouteContext = React11.createContext(void 0,);
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
@@ -11627,19 +11859,19 @@ function useRouteAnchor(routeId, { elementId, hash: linkHash, } = {},) {
   const currentRoute = useRoute(currentRouteId !== null && currentRouteId !== void 0 ? currentRouteId : '',);
   useRoutePreloader([routeId,], true,);
   const hash2 = linkHash !== null && linkHash !== void 0 ? linkHash : elementId;
-  const href = React122.useMemo(() =>
+  const href = React12.useMemo(() =>
     getPathForRoute(route, {
       currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
       currentPathVariables,
       hash: hash2,
       preserveQueryParams,
     },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],);
-  const navigateToRoute = React122.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
+  const navigateToRoute = React12.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
     hash2,
     navigate,
     routeId,
   ],);
-  const onClick = React122.useCallback((event,) => {
+  const onClick = React12.useCallback((event,) => {
     event.preventDefault();
     navigateToRoute();
   }, [navigateToRoute,],);
@@ -14589,7 +14821,7 @@ addScaleCorrector({
   borderBottomWidth: correctBorderScale('y',),
 },);
 function MotionSetup({ children, },) {
-  return /* @__PURE__ */ jsx(Fragment3, { children, },);
+  return /* @__PURE__ */ jsx12(Fragment4, { children, },);
 }
 function startAnimation(_key, value, target, transition = {},) {
   warnOnce2(
@@ -14696,7 +14928,7 @@ var LayoutIdContext = React15.createContext({
 function LayoutIdProvider({ children, },) {
   const context = useContext22(LayoutIdContext,);
   if (context.top) {
-    return /* @__PURE__ */ jsx2(Fragment22, { children, },);
+    return /* @__PURE__ */ jsx22(Fragment22, { children, },);
   }
   const cache3 = useRef32({
     // When we provide a layoutId for a node based on it's first
@@ -14877,7 +15109,7 @@ function LayoutIdProvider({ children, },) {
     top: true,
     enabled: true,
   },).current;
-  return /* @__PURE__ */ jsx2(LayoutIdContext.Provider, { value: contextValue, children, },);
+  return /* @__PURE__ */ jsx22(LayoutIdContext.Provider, { value: contextValue, children, },);
 }
 function nextLayoutId(identifier, initialValue, usedIds,) {
   let value = initialValue;
@@ -14896,7 +15128,7 @@ function AutomaticLayoutIds({ enabled = true, ...props },) {
       enabled,
     };
   }, [enabled,],);
-  return /* @__PURE__ */ jsx2(LayoutIdContext.Provider, { ...props, value: contextValue, },);
+  return /* @__PURE__ */ jsx22(LayoutIdContext.Provider, { ...props, value: contextValue, },);
 }
 function useConstant2(init,) {
   const ref = useRef42(null,);
@@ -14949,11 +15181,11 @@ function ErrorPlaceholder(props,) {
   const { error, file, } = props;
   const title = file ? `Error in ${stripSlash(file,)}` : 'Error';
   const message = error instanceof Error ? error.message : '' + error;
-  return /* @__PURE__ */ jsxs('div', {
+  return /* @__PURE__ */ jsxs2('div', {
     style: errorStyle,
     children: [
-      /* @__PURE__ */ jsx3('div', { className: 'text', style: titleStyle, children: title, },),
-      message && /* @__PURE__ */ jsx3('div', { className: 'text', style: messageStyle, children: message, },),
+      /* @__PURE__ */ jsx32('div', { className: 'text', style: titleStyle, children: title, },),
+      message && /* @__PURE__ */ jsx32('div', { className: 'text', style: messageStyle, children: message, },),
     ],
   },);
 }
@@ -15003,7 +15235,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = class extends Component3 {
+var ErrorBoundary2 = class extends Component32 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -15038,7 +15270,7 @@ var ErrorBoundary2 = class extends Component3 {
   }
   render() {
     if (this.state.lastError) {
-      return /* @__PURE__ */ jsx4(ErrorPlaceholder, { error: this.state.lastError.error.message, file: 'Prototype', },);
+      return /* @__PURE__ */ jsx42(ErrorPlaceholder, { error: this.state.lastError.error.message, file: 'Prototype', },);
     }
     return this.props.children;
   }
@@ -15129,16 +15361,16 @@ function Device({
     }
     : {};
   const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
-  return /* @__PURE__ */ jsx4('div', {
+  return /* @__PURE__ */ jsx42('div', {
     style: { ...containerStyle, ...resizeStyles, },
     ref: containerRef,
-    children: /* @__PURE__ */ jsxs2('div', {
+    children: /* @__PURE__ */ jsxs22('div', {
       style: { ...deviceStyle, },
       ref: deviceRef,
       children: [
-        handStyle && /* @__PURE__ */ jsx4('div', { style: handStyle, },),
-        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx4('div', { style: deviceImageStyle, },),
-        /* @__PURE__ */ jsx4(
+        handStyle && /* @__PURE__ */ jsx42('div', { style: handStyle, },),
+        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx42('div', { style: deviceImageStyle, },),
+        /* @__PURE__ */ jsx42(
           'div',
           {
             style: {
@@ -15147,13 +15379,13 @@ function Device({
               backgroundColor: children ? screenBackground : screenStyle.backgroundColor,
             },
             ref: screenRef,
-            children: /* @__PURE__ */ jsx4(MotionConfig, {
+            children: /* @__PURE__ */ jsx42(MotionConfig, {
               transformPagePoint: invertScale2,
-              children: /* @__PURE__ */ jsx4(ErrorBoundary2, { children, },),
+              children: /* @__PURE__ */ jsx42(ErrorBoundary2, { children, },),
             },),
           },
         ),
-        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx4('div', { style: deviceImageStyle, },),
+        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx42('div', { style: deviceImageStyle, },),
       ],
     },),
   },);
@@ -16311,9 +16543,9 @@ var ProvideParentSize = (props,) => {
     [getParentWidth(parentSize,), getParentHeight(parentSize,),],
   );
   if (currentParentSize === 1) {
-    return children ? /* @__PURE__ */ jsx5(Fragment32, { children, },) : null;
+    return children ? /* @__PURE__ */ jsx52(Fragment32, { children, },) : null;
   }
-  return /* @__PURE__ */ jsx5(ConstraintsContext.Provider, { value, children, },);
+  return /* @__PURE__ */ jsx52(ConstraintsContext.Provider, { value, children, },);
 };
 function getParentWidth(parentSize,) {
   return isSize(parentSize,) ? parentSize.width : parentSize;
@@ -16323,7 +16555,7 @@ function getParentHeight(parentSize,) {
 }
 var ConsumeParentSize = ConstraintsContext.Consumer;
 function useProvideParentSize(node, parentSize,) {
-  return /* @__PURE__ */ jsx5(ProvideParentSize, { parentSize, children: node, },);
+  return /* @__PURE__ */ jsx52(ProvideParentSize, { parentSize, children: node, },);
 }
 function useConstraints(props,) {
   const parentSize = useParentSize();
@@ -18588,13 +18820,13 @@ function DeviceCodeComponentInner({ children, ...props },) {
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
-    return /* @__PURE__ */ jsx6(
+    return /* @__PURE__ */ jsx62(
       'div',
       {
         'data-framer-component-type': 'DeviceComponent',
         className: 'no-device',
         style: { width: '100%', height: '100%', },
-        children: /* @__PURE__ */ jsx6(ProvideParentSize, { parentSize: 1, children, },),
+        children: /* @__PURE__ */ jsx62(ProvideParentSize, { parentSize: 1, children, },),
       },
     );
   }
@@ -18605,7 +18837,7 @@ function DeviceCodeComponentInner({ children, ...props },) {
       height: deviceOptions.screenHeight,
     },)
     : null;
-  return /* @__PURE__ */ jsx6(Device, { scaleTo: 'dynamic', deviceOptions, children: resizedChild, },);
+  return /* @__PURE__ */ jsx62(Device, { scaleTo: 'dynamic', deviceOptions, children: resizedChild, },);
 }
 var DeviceCodeComponent = /* @__PURE__ */ (() => {
   const { componentWidth: defaultWidth2, componentHeight: defaultHeight2, } = getComponentSize(
@@ -19087,7 +19319,7 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
     }
     setMeasuredSizes(imageNodeWidth + 'px',);
   }, [image.sizes,],);
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx72(
     'img',
     {
       ref: imageRef,
@@ -19116,7 +19348,7 @@ function CanvasImage({ image, containerSize, nodeId, },) {
     };
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ jsx7('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
+  return /* @__PURE__ */ jsx72('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function OptimizedCanvasImage({ nodeId, image, containerSize, },) {
   const wrapperRef = React21.useRef(null,);
@@ -19129,7 +19361,7 @@ function OptimizedCanvasImage({ nodeId, image, containerSize, },) {
     const imageStyle = getImageStyle(image, containerSize,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source, containerSize,],);
-  return /* @__PURE__ */ jsx7('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
+  return /* @__PURE__ */ jsx72('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function BackgroundImageComponent({ layoutId, image, ...props },) {
   if (layoutId) {
@@ -19154,14 +19386,14 @@ function BackgroundImageComponent({ layoutId, image, ...props },) {
       fallbackWrapperStyles.border = 0;
       imageNode = null;
     } else if (RenderTarget.current() !== 'CANVAS') {
-      imageNode = /* @__PURE__ */ jsx7(StaticImage, { image, ...props, },);
+      imageNode = /* @__PURE__ */ jsx72(StaticImage, { image, ...props, },);
     } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
-      imageNode = /* @__PURE__ */ jsx7(OptimizedCanvasImage, { image, ...props, },);
+      imageNode = /* @__PURE__ */ jsx72(OptimizedCanvasImage, { image, ...props, },);
     } else {
-      imageNode = /* @__PURE__ */ jsx7(CanvasImage, { image, ...props, },);
+      imageNode = /* @__PURE__ */ jsx72(CanvasImage, { image, ...props, },);
     }
   }
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx72(
     motion.div,
     {
       layoutId,
@@ -19257,13 +19489,13 @@ function Border(props,) {
   };
   if (props.border) {
     style.border = props.border;
-    return /* @__PURE__ */ jsx8(motion.div, { style, },);
+    return /* @__PURE__ */ jsx82(motion.div, { style, },);
   }
   collectBorderStyleForProps(props, style, false,);
-  return /* @__PURE__ */ jsx8(motion.div, { 'data-frame-border': true, style, layoutId, },);
+  return /* @__PURE__ */ jsx82(motion.div, { 'data-frame-border': true, style, layoutId, },);
 }
 function htmlElementAsMotionComponent(asElem,) {
-  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
+  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion(asElem,) : motion['div'];
 }
 var isChrome2 = isChrome();
 function layoutHintDataPropsForCenter(center,) {
@@ -19974,11 +20206,11 @@ var withMeasuredSize = (Component14,) => (props,) => {
   const shouldRender = Boolean(size2,);
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
-  return /* @__PURE__ */ jsx9('div', {
+  return /* @__PURE__ */ jsx92('div', {
     style: { width: '100%', height: '100%', pointerEvents: 'none', },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx9(
+    children: shouldRender && /* @__PURE__ */ jsx92(
       Component14,
       {
         ...props,
@@ -20896,10 +21128,10 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
   const inCodeComponent = Boolean(useContext52(ComponentContainerContext,),);
   const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, inCodeComponent,);
   const wrappedContent = useProvideParentSize(
-    /* @__PURE__ */ jsxs3(Fragment4, {
+    /* @__PURE__ */ jsxs3(Fragment42, {
       children: [
         backgroundImage
-          ? /* @__PURE__ */ jsx10(
+          ? /* @__PURE__ */ jsx102(
             BackgroundImageComponent,
             {
               alt: props.alt ?? '',
@@ -20911,7 +21143,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
           )
           : null,
         children,
-        /* @__PURE__ */ jsx10(Border, { ..._border, border, layoutId, },),
+        /* @__PURE__ */ jsx102(Border, { ..._border, border, layoutId, },),
       ],
     },),
     parentSize,
@@ -20954,7 +21186,7 @@ var FrameWithMotion = /* @__PURE__ */ forwardRef4(
     if (!visible) {
       return null;
     }
-    return /* @__PURE__ */ jsx10(VisibleFrame, { ...props, ref, },);
+    return /* @__PURE__ */ jsx102(VisibleFrame, { ...props, ref, },);
   },
 );
 function resolveParentSize(props, unwrappedProps, rect, inCodeComponent,) {
@@ -20998,7 +21230,7 @@ function EmptyState({
   const { target, } = RenderEnvironment;
   const childCount = React27.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
-    return /* @__PURE__ */ jsx11(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
+    return /* @__PURE__ */ jsx112(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
   }
   if (target !== 'CANVAS') {
     return null;
@@ -21009,7 +21241,7 @@ function EmptyState({
   if (childCount !== 0) {
     return null;
   }
-  return /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsx112(
     FrameWithMotion,
     {
       className: 'framerInternalUI-canvasPlaceholder',
@@ -21018,7 +21250,7 @@ function EmptyState({
       bottom: 0,
       right: 0,
       style: { position, ...size2, },
-      children: /* @__PURE__ */ jsx11(
+      children: /* @__PURE__ */ jsx112(
         'div',
         {
           style: {
@@ -21041,8 +21273,8 @@ function EmptyState({
                 WebkitMaskImage: `linear-gradient(90deg, black, black calc(100% - 12px * ${scaleFactor}), transparent)`,
               },
               children: [
-                /* @__PURE__ */ jsx11(Title, { children: title, },),
-                /* @__PURE__ */ jsx11(Description, { children: description, },),
+                /* @__PURE__ */ jsx112(Title, { children: title, },),
+                /* @__PURE__ */ jsx112(Description, { children: description, },),
               ],
             },
           ),
@@ -21054,7 +21286,7 @@ function EmptyState({
 }
 var scaleFactor = 'var(--framerInternalCanvas-canvasPlaceholderContentScaleFactor, 1)';
 function Title({ children, },) {
-  return /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsx112(
     'span',
     {
       style: {
@@ -21071,7 +21303,7 @@ function Title({ children, },) {
   );
 }
 function Description({ children, },) {
-  return /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsx112(
     'span',
     {
       style: {
@@ -21165,7 +21397,7 @@ var SharedLayoutRoot = class extends Component5 {
     }
   }
   render() {
-    return /* @__PURE__ */ jsx12(SharedLayoutContext.Provider, { value: this.sharedLayoutContext, children: this.props.children, },);
+    return /* @__PURE__ */ jsx122(SharedLayoutContext.Provider, { value: this.sharedLayoutContext, children: this.props.children, },);
   }
 };
 var rootStyles = {
@@ -24259,7 +24491,7 @@ var Navigation = class extends Component7 {
       const withMagicMotion = ((_a = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a.withMagicMotion) ||
         isCurrent && !!this.state.previousTransition;
       contentContainers.push(
-        /* @__PURE__ */ jsx22(
+        /* @__PURE__ */ jsx222(
           NavigationContainer,
           {
             id: key7,
@@ -24279,7 +24511,7 @@ var Navigation = class extends Component7 {
             exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
             withMagicMotion,
             areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
-            children: /* @__PURE__ */ jsx22(MagicMotionCrossfadeRoot, {
+            children: /* @__PURE__ */ jsx222(MagicMotionCrossfadeRoot, {
               children: containerContent({
                 component,
                 transition: historyItem == null ? void 0 : historyItem.transition,
@@ -24291,7 +24523,7 @@ var Navigation = class extends Component7 {
       );
     }
     const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
-      return /* @__PURE__ */ jsx22(
+      return /* @__PURE__ */ jsx222(
         NavigationContainer,
         {
           isLayeredContainer: true,
@@ -24315,7 +24547,7 @@ var Navigation = class extends Component7 {
         item.key,
       );
     },);
-    return /* @__PURE__ */ jsx22(
+    return /* @__PURE__ */ jsx222(
       FrameWithMotion,
       {
         'data-framer-component-type': 'NavigationRoot',
@@ -24325,12 +24557,12 @@ var Navigation = class extends Component7 {
         height: '100%',
         position: 'relative',
         style: { overflow: 'hidden', backgroundColor: 'unset', pointerEvents: void 0, ...this.props.style, },
-        children: /* @__PURE__ */ jsx22(NavigationContext.Provider, {
+        children: /* @__PURE__ */ jsx222(NavigationContext.Provider, {
           value: this,
           children: /* @__PURE__ */ jsxs8(IsInitialNavigationContext.Provider, {
             value: isInitial,
             children: [
-              /* @__PURE__ */ jsx22(
+              /* @__PURE__ */ jsx222(
                 NavigationContainer,
                 {
                   isLayeredContainer: true,
@@ -24344,14 +24576,14 @@ var Navigation = class extends Component7 {
                   backdropColor: void 0,
                   onTapBackdrop: void 0,
                   index: 0,
-                  children: /* @__PURE__ */ jsx22(LayoutIdProvider, {
-                    children: /* @__PURE__ */ jsx22(SharedLayoutRoot, {
-                      children: /* @__PURE__ */ jsx22(AnimatePresence, { presenceAffectsLayout: false, children: contentContainers, },),
+                  children: /* @__PURE__ */ jsx222(LayoutIdProvider, {
+                    children: /* @__PURE__ */ jsx222(SharedLayoutRoot, {
+                      children: /* @__PURE__ */ jsx222(AnimatePresence, { presenceAffectsLayout: false, children: contentContainers, },),
                     },),
                   },),
                 },
               ),
-              /* @__PURE__ */ jsx22(AnimatePresence, { children: overlayContainers, },),
+              /* @__PURE__ */ jsx222(AnimatePresence, { children: overlayContainers, },),
             ],
           },),
         },),
@@ -24560,7 +24792,7 @@ function NavigationWrapper(props,) {
     skipLayoutAnimation,
     children: [
       props.children,
-      /* @__PURE__ */ jsx22(NavigationStyleSheet, {},),
+      /* @__PURE__ */ jsx222(NavigationStyleSheet, {},),
     ],
   },);
 }
@@ -27665,7 +27897,7 @@ function WithOverride(Component14, override,) {
     useContext112(DataObserverContext,);
     const overrideProps = useOverride(props,);
     const { style, ...rest } = props;
-    return /* @__PURE__ */ jsx32(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
+    return /* @__PURE__ */ jsx322(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
   };
   (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component14,);
   ComponentWithOverride['displayName'] = `WithOverride(${Component14.displayName || Component14.name})`;
@@ -28338,8 +28570,8 @@ var defaultRanges2 = () => ({
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
-  const springs = React522.useRef({},);
-  React522.useEffect(() => {
+  const springs = React52.useRef({},);
+  React52.useEffect(() => {
     if (spring2 === void 0) {
       return;
     }
@@ -28405,7 +28637,7 @@ function useStyleTransform({
 }, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
-  React522.useLayoutEffect(() => {
+  React52.useLayoutEffect(() => {
     if (!styleTransformEffectEnabled || !transformTargets) {
       return;
     }
@@ -29587,12 +29819,12 @@ function updatePosition(floatingPositionRef, position, rect,) {
     top: ((rect == null ? void 0 : rect.y) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
   },);
 }
-var FloatingStackingContext = /* @__PURE__ */ React622.createContext(/* @__PURE__ */ new Set(),);
+var FloatingStackingContext = /* @__PURE__ */ React62.createContext(/* @__PURE__ */ new Set(),);
 function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { safeArea, onDismiss, },) {
   const descendantStackingContext = useConstant2(() => /* @__PURE__ */ new Set());
-  const ancestorStackingContext = React622.useContext(FloatingStackingContext,);
+  const ancestorStackingContext = React62.useContext(FloatingStackingContext,);
   const [isPresent2, safeToRemove,] = usePresence();
-  React622.useEffect(() => {
+  React62.useEffect(() => {
     if (isPresent2) {
       if (!floatingPositionRef.current) {
         return;
@@ -29608,7 +29840,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { 
       safeToRemove();
     }
   }, [isPresent2, floatingPositionRef, ancestorStackingContext,],);
-  React622.useEffect(() => {
+  React62.useEffect(() => {
     if (!safeArea) {
       const handleEscape = (e,) => {
         if (e.key !== 'Escape') {
@@ -29696,7 +29928,7 @@ function childrenWithOrigin(child, { x, y, },) {
     originX: x,
     originY: y,
   };
-  return React622.cloneElement(child, { style, },);
+  return React62.cloneElement(child, { style, },);
 }
 function Floating({
   alignment,
@@ -29714,11 +29946,11 @@ function Floating({
   onDismiss,
   ...rest
 },) {
-  const floatingPositionRef = React622.useRef(null,);
-  const safeAreaRef = React622.useRef(null,);
-  const contentRef = React622.useRef(null,);
+  const floatingPositionRef = React62.useRef(null,);
+  const safeAreaRef = React62.useRef(null,);
+  const contentRef = React62.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
-  React622.useLayoutEffect(() => {
+  React62.useLayoutEffect(() => {
     if (!isRef(anchorRef,) || !contentRef.current || !placement || !alignment) {
       return;
     }
@@ -30509,10 +30741,10 @@ function PageRoot({
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx42(MotionConfig, {
+    return /* @__PURE__ */ jsx422(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx42(CustomCursorHost, {
-        children: /* @__PURE__ */ jsx42(
+      children: /* @__PURE__ */ jsx422(CustomCursorHost, {
+        children: /* @__PURE__ */ jsx422(
           Router,
           {
             initialRoute: routeId,
@@ -30531,10 +30763,10 @@ function PageRoot({
     },);
   } else {
     const Wrapper = includeDataObserver ? DataObserver : React65.Fragment;
-    return /* @__PURE__ */ jsx42(Wrapper, {
-      children: /* @__PURE__ */ jsx42(RoutesProvider, {
+    return /* @__PURE__ */ jsx422(Wrapper, {
+      children: /* @__PURE__ */ jsx422(RoutesProvider, {
         routes,
-        children: /* @__PURE__ */ jsx42(NavigationWrapper, {
+        children: /* @__PURE__ */ jsx422(NavigationWrapper, {
           children: React65.isValidElement(RootComponent,) ? RootComponent : React65.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
@@ -33310,7 +33542,7 @@ function createGamepadPoller() {
   };
 }
 var gamepadPoller = /* @__PURE__ */ createGamepadPoller();
-var GamepadContext = /* @__PURE__ */ React722.createContext(gamepadPoller,);
+var GamepadContext = /* @__PURE__ */ React72.createContext(gamepadPoller,);
 function getGamepadInputs() {
   let firstConnectedGamepad = null;
   const gamepads = navigator.getGamepads();
@@ -33359,16 +33591,16 @@ function isButtonPressed(button,) {
   return button.pressed === true || button.value > 0;
 }
 function useGamepad(input, callback, { mapping, on, } = {},) {
-  const context = React722.useContext(GamepadContext,);
+  const context = React72.useContext(GamepadContext,);
   const settings = useConstant2(() => ({
     mapping: mapping ?? 'standard',
     on: on ?? 'keydown',
   }));
-  const stateRef = React722.useRef({
+  const stateRef = React72.useRef({
     pressed: false,
     handler: callback,
   },);
-  const cb = React722.useCallback(
+  const cb = React72.useCallback(
     (gamepad,) => {
       const { pressed, handler, } = stateRef.current;
       if (gamepad.inputs.includes(input,) && settings.mapping === gamepad.mapping) {
@@ -33390,10 +33622,10 @@ function useGamepad(input, callback, { mapping, on, } = {},) {
     }
     return () => context.unregister(cb,);
   }, [],);
-  React722.useEffect(() => {
+  React72.useEffect(() => {
     return () => context.unregister(cb,);
   }, [cb, context,],);
-  React722.useEffect(() => {
+  React72.useEffect(() => {
     stateRef.current.handler = callback;
   }, [callback,],);
 }
@@ -35495,7 +35727,7 @@ function isPageOrScroll(identifier,) {
   }
   return false;
 }
-var FormButton = /* @__PURE__ */ React822.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
+var FormButton = /* @__PURE__ */ React82.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
   const { style: baseStyle2, } = props;
   const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
   return /* @__PURE__ */ jsx50(motion.input, { type, ref, style, value, },);
@@ -35574,7 +35806,7 @@ var PlainTextInput = /* @__PURE__ */ React84.forwardRef(function FormPlainTextIn
     width: '100%',
     flexGrow: 1,
   };
-  const input = /* @__PURE__ */ jsx52(
+  const input = /* @__PURE__ */ jsx522(
     motion.input,
     {
       id: inputName,
@@ -35597,7 +35829,7 @@ var PlainTextInput = /* @__PURE__ */ React84.forwardRef(function FormPlainTextIn
     ...rest,
     children: [
       label && !hideInputLabel && /* @__PURE__ */
-      jsx52('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
+      jsx522('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
       input,
     ],
   },);
@@ -38155,7 +38387,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
         }
       }
       return this.renderElement(
-        /* @__PURE__ */ jsx62('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
+        /* @__PURE__ */ jsx622('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
       );
     }
     renderElement(element,) {
@@ -38166,7 +38398,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
       if (includeTransform) {
         return element;
       }
-      return /* @__PURE__ */ jsx62(
+      return /* @__PURE__ */ jsx622(
         SVGRoot,
         {
           frame: frame2,
@@ -38622,7 +38854,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.0.11-sync.5',
+    'framer-motion': '11.1.7',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -38664,6 +38896,7 @@ if (false) {
 }
 export {
   _injectRuntime,
+  AcceleratedAnimation,
   addActionControls,
   addFonts,
   addPointerEvent,
@@ -38696,7 +38929,6 @@ export {
   callEach,
   cancelFrame,
   cancelSync,
-  checkTargetForNewValues,
   circIn,
   circInOut,
   circOut,

@@ -40,8 +40,11 @@ export async function main({ framerTypesUrl }) {
         treeShaking: true,
         // splitting: true,
         logLevel: 'error',
+        jsxSideEffects: false,
         pure: ['addPropertyControls'],
-
+        define: {
+            'RenderEnvironment.target': JSON.stringify('PREVIEW'),
+        },
         plugins: [esbuildPluginBundleDependencies({})],
         write: true,
         // inject: [path.resolve(__dirname, '../src/inject.ts')],
@@ -80,6 +83,9 @@ export async function main({ framerTypesUrl }) {
     logger.log('framer version:', framerVersion)
     logger.log('framer motion version:', framerMotionVersion)
     fs.writeFileSync(resultFile, code, 'utf-8')
+
+    const size = fs.statSync(resultFile).size / 1024 / 1024
+    console.log(`framer.js size is ${Number(size).toFixed(2)} Mb`)
     // if the file changed, call changeset
     if (prevFile !== code) {
         logger.log('new framer version found, versioning...')
