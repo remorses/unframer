@@ -1,7 +1,10 @@
 import dedent from 'dedent'
+import annotateAsPure from '@babel/helper-annotate-as-pure'
+
 import dprint from 'dprint-node'
 
 import { build } from 'esbuild'
+import { transform } from '@babel/core'
 import fs from 'fs'
 import path from 'path'
 import { esbuildPluginBundleDependencies } from '../src/esbuild'
@@ -41,7 +44,8 @@ export async function main({ framerTypesUrl }) {
         // splitting: true,
         logLevel: 'error',
         jsxSideEffects: false,
-        pure: ['addPropertyControls'],
+
+        pure: ['addPropertyControls', '__commonJS'],
         define: {
             'RenderEnvironment.target': JSON.stringify('PREVIEW'),
         },
@@ -62,7 +66,37 @@ export async function main({ framerTypesUrl }) {
     fs.writeFileSync(path.resolve(out, 'framer.d.ts'), types)
 
     const output = fs.readFileSync(resultFile, 'utf-8')
-    let code = dprint.format(resultFile, output, {
+
+    const babelRes = transform(output || '', {
+        babelrc: false,
+        sourceType: 'module',
+        plugins: [
+            // ['@babel/plugin-syntax-typescript', { isTSX: true }],
+            ({ types: t }) => ({
+                visitor: {
+                    CallExpression(path) {
+                        if (path.getFunctionParent()) return
+
+                        const { parent } = path
+                        if (
+                            t.isVariableDeclarator(parent) ||
+                            t.isAssignmentExpression(parent) ||
+                            t.isObjectProperty(parent) ||
+                            t.isArrayExpression(parent) ||
+                            t.isCallExpression(parent)
+                        ) {
+                            // annotateAsPure(path)
+                        }
+                    },
+                },
+            }),
+        ],
+        filename: '',
+
+        sourceMaps: false,
+    })
+
+    let code = dprint.format(resultFile, babelRes.code, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
         trailingCommas: 'always',
