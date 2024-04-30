@@ -18,6 +18,7 @@ export async function main() {
         external: ['react', 'react-dom'],
         // minifyWhitespace: true,
         // minifySyntax: true,
+        // minify: true,
         bundle: true,
         write: false,
     })
