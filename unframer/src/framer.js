@@ -9321,16 +9321,17 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.QJDPQWCB.js
+// https :https://app.framerstatic.com/framer.PPEFMRJI.js
 import { Component as Component3, } from 'react';
 import React4 from 'react';
-import { jsx as _jsx5, } from 'react/jsx-runtime';
+import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
 import React10, { startTransition as startTransition2, } from 'react';
 import React42, { useCallback as useCallback22, } from 'react';
 import React22 from 'react';
 import { useCallback as useCallback5, useEffect as useEffect16, useRef as useRef13, } from 'react';
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import React32 from 'react';
+import { useLayoutEffect as useLayoutEffect2, } from 'react';
 import { jsx as _jsx2, } from 'react/jsx-runtime';
 import React6 from 'react';
 import React5 from 'react';
@@ -9369,7 +9370,7 @@ import { jsx as jsx82, } from 'react/jsx-runtime';
 import React222 from 'react';
 import { useContext as useContext32, useMemo as useMemo22, } from 'react';
 import { useContext as useContext42, } from 'react';
-import { useEffect as useEffect42, useLayoutEffect as useLayoutEffect2, } from 'react';
+import { useEffect as useEffect42, useLayoutEffect as useLayoutEffect22, } from 'react';
 import React23 from 'react';
 import React25, { useEffect as useEffect52, } from 'react';
 import React24 from 'react';
@@ -9448,7 +9449,7 @@ import React53 from 'react';
 import React47 from 'react';
 import React48, { useCallback as useCallback8, useEffect as useEffect112, useRef as useRef112, } from 'react';
 import React49 from 'react';
-import { useLayoutEffect as useLayoutEffect22, useRef as useRef122, } from 'react';
+import { useLayoutEffect as useLayoutEffect3, useRef as useRef122, } from 'react';
 import React51 from 'react';
 import React50 from 'react';
 import React52 from 'react';
@@ -11280,6 +11281,81 @@ function isSamePage(a, b,) {
   return aPathVariables.length === bPathVariables.length &&
     Object.keys(aPathVariables,).every((key7,) => aPathVariables[key7] === bPathVariables[key7]);
 }
+var eventsToStop = [
+  'mousedown',
+  'mouseup',
+  'touchcancel',
+  'touchend',
+  'touchstart',
+  'auxclick',
+  'dblclick',
+  'pointercancel',
+  'pointerdown',
+  'pointerup',
+  'dragend',
+  'dragstart',
+  'drop',
+  'compositionend',
+  'compositionstart',
+  'keydown',
+  'keypress',
+  'keyup',
+  'input',
+  'textInput',
+  // Intentionally camelCase
+  'copy',
+  'cut',
+  'paste',
+  'click',
+  'change',
+  'contextmenu',
+  'reset',
+];
+var stopFn = (event,) => {
+  var _a, _b;
+  if (
+    !((_b = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest) === null || _b === void 0 ? void 0 : _b.call(_a, '#main',))
+  ) {
+    return;
+  }
+  event.stopPropagation();
+  performance.mark('framer-react-event-handling-prevented',);
+};
+if (typeof window !== 'undefined') {
+  window.__FRAMER_TURN_OFF_REACT_EVENT_HANDLING__ = function () {
+    if (!eventsToStop) {
+      return;
+    }
+    const options = { capture: true, };
+    eventsToStop.forEach((event,) => document.body.addEventListener(event, stopFn, options,));
+    window.__FRAMER_TURN_OFF_REACT_EVENT_HANDLING__ = void 0;
+  };
+}
+function turnOnReactEventHandling() {
+  if (!eventsToStop) {
+    return;
+  }
+  const options = { capture: true, };
+  eventsToStop.forEach((event,) => document.body.removeEventListener(event, stopFn, options,));
+  eventsToStop = void 0;
+}
+var hydrated = false;
+function OnHydrationEnd({ addHydrationEndMarker, turnOffEventHandlerHack, },) {
+  useLayoutEffect2(() => {
+    if (hydrated) {
+      return;
+    }
+    hydrated = true;
+    if (turnOffEventHandlerHack) {
+      turnOnReactEventHandling();
+    }
+    if (addHydrationEndMarker) {
+      performance.mark('framer-hydration-end',);
+      performance.measure('framer-hydration', 'framer-hydration-start', 'framer-hydration-end',);
+    }
+  }, [],);
+  return null;
+}
 function useGetRouteCallback(routes,) {
   return React5.useCallback((routeId,) => routes[routeId], [routes,],);
 }
@@ -11441,7 +11517,8 @@ function Router(
     initialLocaleId,
     locales = [],
     preserveQueryParams = false,
-    enableSuspenseThatPreservesDom,
+    enableImproveInpDuringHydration = false,
+    shouldMarkHydrationEnd = false,
   },
 ) {
   var _a, _b;
@@ -11645,25 +11722,30 @@ function Router(
     ? fillPathVariables(current.path, currentPathVariables,)
     : current.path;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  const suspenseChildren = _jsx5(ErrorBoundary, {
-    notFoundPage,
-    defaultPageStyle,
-    forceUpdateKey: dep,
-    children: _jsx5(React10.Fragment, {
-      children: pageExistsInCurrentLocale
-        ? renderPage(current.page, defaultPageStyle,)
-        : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-    }, remountKey,),
-  },);
   return _jsx5(RouterAPIProvider, {
     api,
     children: _jsx5(LocaleInfoContext.Provider, {
       value: localeInfo,
       children: _jsx5(CollectionListPaginationInfoContext.Provider, {
         value: collectionListPaginationInfo,
-        children: enableSuspenseThatPreservesDom
-          ? _jsx5(SuspenseThatPreservesDom, { children: suspenseChildren, },)
-          : _jsx5(React10.Suspense, { fallback: null, children: suspenseChildren, },),
+        children: _jsxs(SuspenseThatPreservesDom, {
+          children: [
+            _jsx5(ErrorBoundary, {
+              notFoundPage,
+              defaultPageStyle,
+              forceUpdateKey: dep,
+              children: _jsx5(React10.Fragment, {
+                children: pageExistsInCurrentLocale
+                  ? renderPage(current.page, defaultPageStyle,)
+                  : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+              }, remountKey,),
+            },),
+            _jsx5(OnHydrationEnd, {
+              addHydrationEndMarker: shouldMarkHydrationEnd,
+              turnOffEventHandlerHack: enableImproveInpDuringHydration,
+            },),
+          ],
+        },),
       },),
     },),
   },);
@@ -19593,7 +19675,7 @@ function useLayoutId2(props, { specificLayoutId, postfix, } = {},) {
     return postfix ? `${layoutIdCandidate}-${postfix}` : layoutIdCandidate;
   }, [enabled,],);
 }
-var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect2 : useEffect42;
+var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect22 : useEffect42;
 var ComponentContainerContext = React23.createContext(false,);
 var resizeObservers = [];
 var hasActiveObservations = function () {
@@ -28213,7 +28295,7 @@ function usePresenceAnimation(
     }
     return { values: makeFXValues(defaults,), };
   },);
-  useLayoutEffect22(() => {
+  useLayoutEffect3(() => {
     if (hasMounted.current && animateConfig) {
       return;
     }
@@ -28231,7 +28313,7 @@ function usePresenceAnimation(
     }
   }, [animateConfig,],);
   const shouldReduceMotion = useReducedMotionConfig();
-  useLayoutEffect22(() => {
+  useLayoutEffect3(() => {
     if (!enabled) {
       safeToRemove == null ? void 0 : safeToRemove();
       return;
@@ -30725,15 +30807,9 @@ function PageRoot({
   localeId,
   locales,
   preserveQueryParams,
-  enableSuspenseThatPreservesDom,
+  enableImproveInpDuringHydration,
   shouldMarkHydrationEnd = false,
 },) {
-  React65.useLayoutEffect(() => {
-    if (shouldMarkHydrationEnd) {
-      performance.mark('framer-hydration-end',);
-      performance.measure('framer-hydration', 'framer-hydration-start', 'framer-hydration-end',);
-    }
-  }, [],);
   React65.useEffect(() => {
     if (isWebsite) {
       return;
@@ -30756,7 +30832,8 @@ function PageRoot({
             locales,
             defaultPageStyle: { minHeight: '100vh', width: 'auto', },
             preserveQueryParams,
-            enableSuspenseThatPreservesDom,
+            enableImproveInpDuringHydration,
+            shouldMarkHydrationEnd,
           },
         ),
       },),
@@ -35753,6 +35830,9 @@ var FormContainerContext = React83.createContext({
 var FormContainer = ({ action, formId, ...props },) => {
   const handleSubmit = async (event,) => {
     event.preventDefault();
+    if (!action) {
+      return;
+    }
     const data2 = new FormData(event.currentTarget,);
     for (const [key7, value,] of data2) {
       if (value instanceof File) {
@@ -35846,6 +35926,7 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         font-weight: var(${'--framer-input-font-weight'});
         font-size: var(${'--framer-input-font-size'});
         color: var(${'--framer-input-font-color'});
+        box-shadow: var(${'--framer-input-box-shadow'});
     }`,
   `.${inputClassName}::placeholder {
         color: var(${'--framer-input-placeholder-color'});
