@@ -1,4 +1,5 @@
 node_modules
+bundled.js
 dist
 esm
 .DS_Store

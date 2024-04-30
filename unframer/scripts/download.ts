@@ -71,12 +71,11 @@ export async function main({ framerTypesUrl }) {
         babelrc: false,
         sourceType: 'module',
         plugins: [
-            // ['@babel/plugin-syntax-typescript', { isTSX: true }],
+            '@babel/plugin-transform-react-pure-annotations',
             ({ types: t }) => ({
                 visitor: {
                     CallExpression(path) {
                         if (path.getFunctionParent()) return
-
                         const { parent } = path
                         if (
                             t.isVariableDeclarator(parent) ||
@@ -85,7 +84,7 @@ export async function main({ framerTypesUrl }) {
                             t.isArrayExpression(parent) ||
                             t.isCallExpression(parent)
                         ) {
-                            // annotateAsPure(path)
+                            annotateAsPure(path)
                         }
                     },
                 },
@@ -96,7 +95,7 @@ export async function main({ framerTypesUrl }) {
         sourceMaps: false,
     })
 
-    let code = dprint.format(resultFile, babelRes.code, {
+    let code = dprint.format(resultFile, output, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
         trailingCommas: 'always',

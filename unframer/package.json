@@ -56,6 +56,7 @@
     "devDependencies": {
         "@babel/core": "^7.24.5",
         "@babel/helper-annotate-as-pure": "^7.22.5",
+        "@babel/plugin-transform-react-pure-annotations": "^7.24.1",
         "@babel/types": "^7.24.5",
         "@babel__core": "link:@types/@babel__core",
         "@types/fs-extra": "^11.0.1",
