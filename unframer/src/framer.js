@@ -9321,7 +9321,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.PPEFMRJI.js
+// https :https://app.framerstatic.com/framer.VTTKPT7M.js
 import { Component as Component3, } from 'react';
 import React4 from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -9513,7 +9513,7 @@ import React82 from 'react';
 import { jsx as jsx50, } from 'react/jsx-runtime';
 import React83 from 'react';
 import { jsx as jsx51, } from 'react/jsx-runtime';
-import React84, { useContext as useContext152, } from 'react';
+import React84 from 'react';
 import { jsx as jsx522, jsxs as jsxs16, } from 'react/jsx-runtime';
 import React85 from 'react';
 import { jsx as jsx53, jsxs as jsxs17, } from 'react/jsx-runtime';
@@ -9522,7 +9522,7 @@ import {
   cloneElement as cloneElement32,
   forwardRef as forwardRef52,
   isValidElement as isValidElement32,
-  useContext as useContext172,
+  useContext as useContext162,
   useInsertionEffect as useInsertionEffect42,
   useRef as useRef18,
 } from 'react';
@@ -35824,10 +35824,26 @@ function mergeWithDefaultStyle(style,) {
     ...style,
   };
 }
-var FormContainerContext = React83.createContext({
-  hideInputLabel: false,
-},);
-var FormContainer = ({ action, formId, ...props },) => {
+function formReducer(_state, { type, },) {
+  switch (type) {
+    case 'submit':
+      return { state: 'pending', };
+    case 'success':
+      return { state: 'success', };
+    case 'error':
+      return { state: 'error', };
+    default:
+      assertNever(type,);
+  }
+}
+var FormContainer = ({
+  action,
+  formId,
+  disabled,
+  children,
+  ...props
+},) => {
+  const [state, dispatch,] = React83.useReducer(formReducer, { state: disabled ? 'disabled' : void 0, },);
   const handleSubmit = async (event,) => {
     event.preventDefault();
     if (!action) {
@@ -35840,19 +35856,14 @@ var FormContainer = ({ action, formId, ...props },) => {
       }
     }
     try {
+      dispatch({ type: 'submit', },);
       await fetch(action, { body: data2, method: 'POST', },);
+      dispatch({ type: 'success', },);
     } catch (error) {
+      dispatch({ type: 'error', },);
     }
   };
-  return /* @__PURE__ */ jsx51(motion.form, {
-    ...props,
-    'data-formid': formId,
-    onSubmit: handleSubmit,
-    children: /* @__PURE__ */ jsx51(FormContainerContext.Provider, {
-      value: { hideInputLabel: props.hideInputLabels, },
-      children: props.children,
-    },),
-  },);
+  return /* @__PURE__ */ jsx51(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: children(state,), },);
 };
 var passwordManagerIgnoreDataProps = {
   // 1Password
@@ -35871,8 +35882,7 @@ var labelStyles = {
 var inputClassName = 'framer-form-input';
 var labelClassName = 'framer-form-label';
 var PlainTextInput = /* @__PURE__ */ React84.forwardRef(function FormPlainTextInput(props, ref,) {
-  const { style, inputName, label, type, required, autoFocus, placeholder, ...rest } = props;
-  const { hideInputLabel, } = useContext152(FormContainerContext,);
+  const { style, inputName, label, type, required, autoFocus, placeholder, hideInputLabel, ...rest } = props;
   const dataProps = {
     ...sensibleInputDefaults,
     ...passwordManagerIgnoreDataProps,
@@ -36408,7 +36418,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52(
     } = props;
     const parentSize = useParentSize();
     const isOnCanvas = useIsOnFramerCanvas();
-    const inCodeComponent = useContext172(ComponentContainerContext,);
+    const inCodeComponent = useContext162(ComponentContainerContext,);
     const layoutId = useLayoutId2(props,);
     const fallbackRef = useRef18(null,);
     const containerRef = ref ?? fallbackRef;
