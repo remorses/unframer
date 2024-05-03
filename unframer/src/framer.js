@@ -9321,7 +9321,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.AF33SJ2Y.js
+// https :https://app.framerstatic.com/framer.2F4JFJ4K.js
 import { Component as Component3, } from 'react';
 import React4 from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -35783,6 +35783,9 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         font-size: var(${'--framer-input-font-size'});
         color: var(${'--framer-input-font-color'});
         box-shadow: var(${'--framer-input-box-shadow'});
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }`,
   `.${inputClassName}::placeholder {
         color: var(${'--framer-input-placeholder-color'});
