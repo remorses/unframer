@@ -153,7 +153,7 @@
       "format": "esm"
     },
     "https :https://esm.sh/v135/node_process.js": {
-      "bytes": 2719,
+      "bytes": 2292,
       "imports": [
         {
           "path": "https :https://esm.sh/v135/node_events.js",
@@ -5215,10 +5215,10 @@
           "bytesInOutput": 7214
         },
         "https :https://esm.sh/v135/node_process.js": {
-          "bytesInOutput": 2738
+          "bytesInOutput": 2275
         },
         "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
-          "bytesInOutput": 50747
+          "bytesInOutput": 50752
         },
         "https :https://esm.sh/typewriter-effect": {
           "bytesInOutput": 0
@@ -5284,10 +5284,10 @@
           "bytesInOutput": 9715
         },
         "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
-          "bytesInOutput": 10192
+          "bytesInOutput": 10180
         },
         "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
-          "bytesInOutput": 9475
+          "bytesInOutput": 9473
         },
         "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
           "bytesInOutput": 44628
@@ -5296,7 +5296,7 @@
           "bytesInOutput": 264
         }
       },
-      "bytes": 547403
+      "bytes": 546931
     },
     "hero.js": {
       "imports": [

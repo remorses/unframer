@@ -41,7 +41,7 @@ describe('babelPluginDeduplicateImports', () => {
           import { createContext } from 'react';
           import { useEffect, useLayoutEffect } from 'react';
           import { jsx, jsxs } from 'react/jsx-runtime';
-          console.log(React1, React2, createContext, createContext2, createContext3, useEffect, useLayoutEffect, createContext4, createContext5, jsx, jsxs);"
+          console.log(React1, React1, createContext, createContext, createContext, useEffect, useLayoutEffect, createContext, createContext, jsx, jsxs);"
         `)
     })
 })

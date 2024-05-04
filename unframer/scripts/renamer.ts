@@ -1,3 +1,4 @@
+// original https://github.com/babel/babel/blob/9c77558234c87b9220604fbc1519089e2d6334e2/packages/babel-traverse/src/scope/lib/renamer.ts#L61
 import splitExportDeclaration from '@babel/helper-split-export-declaration'
 import type { Scope } from '@babel/traverse'
 import { visitors } from '@babel/traverse'
@@ -11,6 +12,7 @@ import type { Identifier } from '@babel/types'
 const renameVisitor: Visitor<BatchRenamer> = {
     ReferencedIdentifier({ node }, state) {
         for (let [oldName, newName] of state.map) {
+            // console.log(node.name, oldName, newName)
             if (node.name === oldName) {
                 node.name = newName
             }
@@ -65,6 +67,7 @@ const renameVisitor: Visitor<BatchRenamer> = {
 
         for (const name in ids) {
             for (let [oldName, newName] of state.map) {
+                // console.log(name, oldName, newName)
                 if (name === oldName) ids[name].name = newName
             }
         }
@@ -138,8 +141,8 @@ export default class BatchRenamer {
                 const bindingIds = parentDeclar.getOuterBindingIdentifiers()
                 const oldNames = Object.keys(bindingIds)
                 for (let oldName of oldNames) {
-                    const binding = scope.getBinding(oldName)!
-                    if (bindingIds[oldName] === binding.identifier) {
+                    const binding = scope.getBinding(oldName)
+                    if (binding && bindingIds[oldName] === binding.identifier) {
                         // When we are renaming an exported identifier, we need to ensure that
                         // the exported binding keeps the old name.
                         this.maybeConvertFromExportDeclaration(parentDeclar)
@@ -148,11 +151,8 @@ export default class BatchRenamer {
             }
         }
 
-        const blockToTraverse = process.env.BABEL_8_BREAKING
-            ? scope.block
-            : (arguments[0] as t.Pattern | t.Scopable) || scope.block
         traverseNode(
-            blockToTraverse,
+            scope.block,
             visitors.explode(renameVisitor),
             scope,
             this,
@@ -165,16 +165,15 @@ export default class BatchRenamer {
         for (let [oldName, newName] of map) {
             if (oldName === newName) continue
 
-            if (process.env.BABEL_8_BREAKING) {
+            if (!arguments[0]) {
                 scope.removeOwnBinding(oldName)
-                const binding = scope.getBinding(oldName)!
-                scope.bindings[newName] = binding
-                binding.identifier.name = newName
-            } else if (!arguments[0]) {
-                scope.removeOwnBinding(oldName)
-                const binding = scope.getBinding(oldName)!
-                scope.bindings[newName] = binding
-                binding.identifier.name = newName
+                const binding = scope.getBinding(oldName)
+                if (binding) {
+                    binding.identifier.name = newName
+                    scope.bindings[newName] = binding
+                } else {
+                    console.log(`binding not found for ${oldName}`)
+                }
             }
         }
     }

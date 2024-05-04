@@ -115,11 +115,20 @@ export function babelPluginDeduplicateImports({
                     }
 
                     const map = new Map<string, string>(
-                        Object.values(importAliasMap).map((x) => [
-                            x.importName,
-                            x.consolidated,
-                        ]),
+                        [...importAliasMap.values()].flatMap((x) => {
+                            return [...x.entries()]
+                                .map(([prev, x]) => {
+                                    if (prev === x.consolidated) {
+                                        return
+                                    }
+                                    return [prev, x.consolidated]
+                                })
+                                .filter((x) => x !== undefined) as Array<
+                                [string, string]
+                            >
+                        }),
                     )
+                    // console.log([...map.entries()])
                     const renamer = new BatchRenamer(path.scope, map)
                     renamer.rename()
 

@@ -2,15 +2,15 @@
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
-import { forwardRef, useContext as useContext3, } from 'react';
+import { forwardRef, useContext, } from 'react';
 import { useInsertionEffect, useRef, } from 'react';
 import { useCallback, } from 'react';
 import { useMemo, } from 'react';
 import { useId, } from 'react';
-import { createElement as createElement2, Fragment, } from 'react';
+import { createElement, Fragment, } from 'react';
 import React__default from 'react';
 import { useState, } from 'react';
-import { Children, cloneElement as cloneElement2, isValidElement, } from 'react';
+import { Children, cloneElement, isValidElement, } from 'react';
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -92,17 +92,17 @@ var require_is_prop_valid_browser_cjs = __commonJS({
   },
 },);
 var MotionConfigContext = createContext({ transformPagePoint: (p) => p, isStatic: false, reducedMotion: 'never', },);
-var MotionContext = createContext2({},);
-var PresenceContext = createContext3(null,);
+var MotionContext = createContext({},);
+var PresenceContext = createContext(null,);
 var isBrowser = typeof document !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 var camelToDash = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
 var optimizedAppearDataId = 'framerAppearId';
 var optimizedAppearDataAttribute = 'data-' + camelToDash(optimizedAppearDataId,);
 var MotionGlobalConfig = { skipAnimations: false, useManualTiming: false, };
-var LayoutGroupContext = createContext4({},);
-var SwitchLayoutGroupContext = createContext5({},);
-var LazyContext = createContext6({ strict: false, },);
+var LayoutGroupContext = createContext({},);
+var SwitchLayoutGroupContext = createContext({},);
+var LazyContext = createContext({ strict: false, },);
 var Queue = class {
   constructor() {
     this.order = [];
@@ -250,7 +250,7 @@ function useVisualElement(Component23, visualState, props, createVisualElement2,
     microtask.postRender(visualElement.render,);
     if (wantsHandoff.current && visualElement.animationState) visualElement.animationState.animateChanges();
   },);
-  useEffect2(() => {
+  useEffect(() => {
     if (!visualElement) return;
     visualElement.updateFeatures();
     if (!wantsHandoff.current && visualElement.animationState) visualElement.animationState.animateChanges();
@@ -303,7 +303,7 @@ function getCurrentTreeVariants(props, context,) {
   return props.inherit !== false ? context : {};
 }
 function useCreateMotionContext(props,) {
-  const { initial, animate: animate22, } = getCurrentTreeVariants(props, useContext2(MotionContext,),);
+  const { initial, animate: animate22, } = getCurrentTreeVariants(props, useContext(MotionContext,),);
   return useMemo(() => ({ initial, animate: animate22, }), [variantLabelsAsDependency(initial,), variantLabelsAsDependency(animate22,),],);
 }
 function variantLabelsAsDependency(prop,) {
@@ -338,14 +338,14 @@ function createMotionComponent(
   preloadedFeatures2 && loadFeatures(preloadedFeatures2,);
   function MotionComponent(props, externalRef,) {
     let MeasureLayout2;
-    const configAndProps = { ...useContext3(MotionConfigContext,), ...props, layoutId: useLayoutId(props,), };
+    const configAndProps = { ...useContext(MotionConfigContext,), ...props, layoutId: useLayoutId(props,), };
     const { isStatic, } = configAndProps;
     const context = useCreateMotionContext(props,);
     const visualState = useVisualState2(props, isStatic,);
     if (!isStatic && isBrowser) {
       context.visualElement = useVisualElement(Component23, visualState, configAndProps, createVisualElement2,);
-      const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
-      const isStrict = useContext3(LazyContext,).strict;
+      const initialLayoutGroupConfig = useContext(SwitchLayoutGroupContext,);
+      const isStrict = useContext(LazyContext,).strict;
       if (context.visualElement) {
         MeasureLayout2 = context.visualElement.loadFeatures( // Note: Pass the full new combined props to correctly re-render dynamic feature components.
           configAndProps,
@@ -376,7 +376,7 @@ function createMotionComponent(
   return ForwardRefComponent;
 }
 function useLayoutId({ layoutId, },) {
-  const layoutGroupId = useContext3(LayoutGroupContext,).id;
+  const layoutGroupId = useContext(LayoutGroupContext,).id;
   return layoutGroupId && layoutId !== void 0 ? layoutGroupId + '-' + layoutId : layoutId;
 }
 var scaleCorrectors = {};
@@ -525,7 +525,7 @@ function resolveVariantFromProps(props, definition, custom, currentValues = {}, 
   return definition;
 }
 function useConstant(init,) {
-  const ref = useRef2(null,);
+  const ref = useRef(null,);
   if (ref.current === null) ref.current = init();
   return ref.current;
 }
@@ -543,8 +543,8 @@ function makeState(
   return state;
 }
 var makeUseVisualState = (config) => (props, isStatic,) => {
-  const context = useContext4(MotionContext,);
-  const presenceContext = useContext4(PresenceContext,);
+  const context = useContext(MotionContext,);
+  const presenceContext = useContext(PresenceContext,);
   const make = () => makeState(config, props, context, presenceContext,);
   return isStatic ? make() : useConstant(make,);
 };
@@ -2600,16 +2600,16 @@ var createDelta = () => ({ x: createAxisDelta(), y: createAxisDelta(), });
 var createAxis = () => ({ min: 0, max: 0, });
 var createBox = () => ({ x: createAxis(), y: createAxis(), });
 function usePresence() {
-  const context = useContext5(PresenceContext,);
+  const context = useContext(PresenceContext,);
   if (context === null) return [true, null,];
   const { isPresent: isPresent2, onExitComplete, register, } = context;
   const id4 = useId();
-  useEffect3(() => register(id4,), [],);
+  useEffect(() => register(id4,), [],);
   const safeToRemove = () => onExitComplete && onExitComplete(id4,);
   return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
 }
 function useIsPresent() {
-  return isPresent(useContext5(PresenceContext,),);
+  return isPresent(useContext(PresenceContext,),);
 }
 function isPresent(context,) {
   return context === null ? true : context.isPresent;
@@ -3148,7 +3148,7 @@ function copyRawValuesOnly(target, source, props,) {
   for (const key7 in source) if (!isMotionValue(source[key7],) && !isForcedMotionValue(key7, props,)) target[key7] = source[key7];
 }
 function useInitialMotionValues({ transformTemplate: transformTemplate2, }, visualState, isStatic,) {
-  return useMemo2(() => {
+  return useMemo(() => {
     const state = createHtmlRenderState();
     buildHTMLStyles(state, visualState, { enableHardwareAcceleration: !isStatic, }, transformTemplate2,);
     return Object.assign({}, state.vars, state.style,);
@@ -3231,7 +3231,7 @@ function buildSVGAttrs(
 var createSvgRenderState = () => ({ ...createHtmlRenderState(), attrs: {}, });
 var isSVGTag = (tag) => typeof tag === 'string' && tag.toLowerCase() === 'svg';
 function useSVGProps(props, visualState, _isStatic, Component23,) {
-  const visualProps = useMemo3(() => {
+  const visualProps = useMemo(() => {
     const state = createSvgRenderState();
     buildSVGAttrs(state, visualState, { enableHardwareAcceleration: false, }, isSVGTag(Component23,), props.transformTemplate,);
     return { ...state.attrs, style: { ...state.style, }, };
@@ -3250,8 +3250,8 @@ function createUseRender(forwardMotionProps = false,) {
     const filteredProps2 = filterProps(props, typeof Component23 === 'string', forwardMotionProps,);
     const elementProps = Component23 !== Fragment ? { ...filteredProps2, ...visualProps, ref, } : {};
     const { children, } = props;
-    const renderedChildren = useMemo4(() => isMotionValue(children,) ? children.get() : children, [children,],);
-    return createElement2(Component23, { ...elementProps, children: renderedChildren, },);
+    const renderedChildren = useMemo(() => isMotionValue(children,) ? children.get() : children, [children,],);
+    return createElement(Component23, { ...elementProps, children: renderedChildren, },);
   };
   return useRender;
 }
@@ -4302,11 +4302,11 @@ var MeasureLayoutWithContext = class extends React__default.Component {
 };
 function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
-  const layoutGroup = useContext6(LayoutGroupContext,);
+  const layoutGroup = useContext(LayoutGroupContext,);
   return React__default.createElement(MeasureLayoutWithContext, {
     ...props,
     layoutGroup,
-    switchLayoutGroup: useContext6(SwitchLayoutGroupContext,),
+    switchLayoutGroup: useContext(SwitchLayoutGroupContext,),
     isPresent: isPresent2,
     safeToRemove,
   },);
@@ -5719,7 +5719,7 @@ var SVGVisualElement = class extends DOMVisualElement {
 var createDomVisualElement = (Component23, options,) => {
   return isSVGComponent(Component23,)
     ? new SVGVisualElement(options, { enableHardwareAcceleration: false, },)
-    : new HTMLVisualElement(options, { enableHardwareAcceleration: true, allowProjection: Component23 !== React__default2.Fragment, },);
+    : new HTMLVisualElement(options, { enableHardwareAcceleration: true, allowProjection: Component23 !== React__default.Fragment, },);
 };
 var layout = { layout: { ProjectionNode: HTMLProjectionNode, MeasureLayout, }, };
 var preloadedFeatures = { ...animations, ...gestureAnimations, ...drag, ...layout, };
@@ -5731,7 +5731,7 @@ function createDomMotionComponent(key7,) {
 }
 var m = createMotionProxy(createDomMotionConfig,);
 function useIsMounted() {
-  const isMounted = useRef3(false,);
+  const isMounted = useRef(false,);
   useIsomorphicLayoutEffect(() => {
     isMounted.current = true;
     return () => {
@@ -5743,16 +5743,16 @@ function useIsMounted() {
 function useForceUpdate() {
   const isMounted = useIsMounted();
   const [forcedRenderCount, setForcedRenderCount,] = useState(0,);
-  const forceRender = useCallback2(() => {
+  const forceRender = useCallback(() => {
     isMounted.current && setForcedRenderCount(forcedRenderCount + 1,);
   }, [forcedRenderCount,],);
-  const deferredForceRender = useCallback2(() => frame.postRender(forceRender,), [forceRender,],);
+  const deferredForceRender = useCallback(() => frame.postRender(forceRender,), [forceRender,],);
   return [deferredForceRender, forcedRenderCount,];
 }
 function useUnmountEffect(callback,) {
-  return useEffect4(() => () => callback(), [],);
+  return useEffect(() => () => callback(), [],);
 }
-var PopChildMeasure = class extends React2.Component {
+var PopChildMeasure = class extends React.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
@@ -5773,11 +5773,11 @@ var PopChildMeasure = class extends React2.Component {
   }
 };
 function PopChild({ children, isPresent: isPresent2, },) {
-  const id4 = useId2();
-  const ref = useRef4(null,);
-  const size2 = useRef4({ width: 0, height: 0, top: 0, left: 0, },);
-  const { nonce, } = useContext7(MotionConfigContext,);
-  useInsertionEffect2(() => {
+  const id4 = useId();
+  const ref = useRef(null,);
+  const size2 = useRef({ width: 0, height: 0, top: 0, left: 0, },);
+  const { nonce, } = useContext(MotionConfigContext,);
+  useInsertionEffect(() => {
     const { width, height, top, left, } = size2.current;
     if (isPresent2 || !ref.current || !width || !height) return;
     ref.current.dataset.motionPopId = id4;
@@ -5799,16 +5799,16 @@ function PopChild({ children, isPresent: isPresent2, },) {
       document.head.removeChild(style,);
     };
   }, [isPresent2,],);
-  return React2.createElement(
+  return React.createElement(
     PopChildMeasure,
     { isPresent: isPresent2, childRef: ref, sizeRef: size2, },
-    React2.cloneElement(children, { ref, },),
+    React.cloneElement(children, { ref, },),
   );
 }
 var PresenceChild = ({ children, initial, isPresent: isPresent2, onExitComplete, custom, presenceAffectsLayout, mode, },) => {
   const presenceChildren = useConstant(newChildrenMap,);
-  const id4 = useId3();
-  const context = useMemo5(() => ({
+  const id4 = useId();
+  const context = useMemo(() => ({
     id: id4,
     initial,
     isPresent: isPresent2,
@@ -5827,14 +5827,14 @@ var PresenceChild = ({ children, initial, isPresent: isPresent2, onExitComplete,
    * we want to make a new context value to ensure they get re-rendered
    * so they can detect that layout change.
    */ presenceAffectsLayout ? void 0 : [isPresent2,],);
-  useMemo5(() => {
+  useMemo(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
   }, [isPresent2,],);
-  React3.useEffect(() => {
+  React.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
-  if (mode === 'popLayout') children = React3.createElement(PopChild, { isPresent: isPresent2, }, children,);
-  return React3.createElement(PresenceContext.Provider, { value: context, }, children,);
+  if (mode === 'popLayout') children = React.createElement(PopChild, { isPresent: isPresent2, }, children,);
+  return React.createElement(PresenceContext.Provider, { value: context, }, children,);
 };
 function newChildrenMap() {
   return /* @__PURE__ */ new Map();
@@ -5857,14 +5857,14 @@ var AnimatePresence = (
   { children, custom, initial = true, onExitComplete, exitBeforeEnter, presenceAffectsLayout = true, mode = 'sync', },
 ) => {
   invariant(!exitBeforeEnter, 'Replace exitBeforeEnter with mode=\'wait\'',);
-  const forceRender = useContext8(LayoutGroupContext,).forceRender || useForceUpdate()[0];
+  const forceRender = useContext(LayoutGroupContext,).forceRender || useForceUpdate()[0];
   const isMounted = useIsMounted();
   const filteredChildren = onlyElements(children,);
   let childrenToRender = filteredChildren;
-  const exitingChildren = useRef5(/* @__PURE__ */ new Map(),).current;
-  const presentChildren = useRef5(childrenToRender,);
-  const allChildren = useRef5(/* @__PURE__ */ new Map(),).current;
-  const isInitialRender = useRef5(true,);
+  const exitingChildren = useRef(/* @__PURE__ */ new Map(),).current;
+  const presentChildren = useRef(childrenToRender,);
+  const allChildren = useRef(/* @__PURE__ */ new Map(),).current;
+  const isInitialRender = useRef(true,);
   useIsomorphicLayoutEffect(() => {
     isInitialRender.current = false;
     updateChildLookup(filteredChildren, allChildren,);
@@ -5876,11 +5876,11 @@ var AnimatePresence = (
     exitingChildren.clear();
   },);
   if (isInitialRender.current) {
-    return React4.createElement(
-      React4.Fragment,
+    return React.createElement(
+      React.Fragment,
       null,
       childrenToRender.map((child) =>
-        React4.createElement(PresenceChild, {
+        React.createElement(PresenceChild, {
           key: getChildKey(child,),
           isPresent: true,
           initial: initial ? void 0 : false,
@@ -5923,7 +5923,7 @@ var AnimatePresence = (
           onExitComplete && onExitComplete();
         }
       };
-      exitingComponent = React4.createElement(PresenceChild, {
+      exitingComponent = React.createElement(PresenceChild, {
         key: getChildKey(child,),
         isPresent: false,
         onExitComplete: onExit,
@@ -5939,35 +5939,35 @@ var AnimatePresence = (
     const key7 = child.key;
     return exitingChildren.has(key7,)
       ? child
-      : React4.createElement(PresenceChild, { key: getChildKey(child,), isPresent: true, presenceAffectsLayout, mode, }, child,);
+      : React.createElement(PresenceChild, { key: getChildKey(child,), isPresent: true, presenceAffectsLayout, mode, }, child,);
   },);
   if (false) {
     console.warn(
       `You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`,
     );
   }
-  return React4.createElement(
-    React4.Fragment,
+  return React.createElement(
+    React.Fragment,
     null,
-    exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement2(child,)),
+    exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement(child,)),
   );
 };
 function MotionConfig({ children, isValidProp, ...config },) {
   isValidProp && loadExternalIsValidProp(isValidProp,);
-  config = { ...useContext9(MotionConfigContext,), ...config, };
+  config = { ...useContext(MotionConfigContext,), ...config, };
   config.isStatic = useConstant(() => config.isStatic);
-  const context = useMemo6(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
-  return React5.createElement(MotionConfigContext.Provider, { value: context, }, children,);
+  const context = useMemo(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
+  return React.createElement(MotionConfigContext.Provider, { value: context, }, children,);
 }
 function LazyMotion({ children, features, strict = false, },) {
-  const [, setIsLoaded,] = useState2(!isLazyBundle(features,),);
-  const loadedRenderer = useRef6(void 0,);
+  const [, setIsLoaded,] = useState(!isLazyBundle(features,),);
+  const loadedRenderer = useRef(void 0,);
   if (!isLazyBundle(features,)) {
     const { renderer, ...loadedFeatures } = features;
     loadedRenderer.current = renderer;
     loadFeatures(loadedFeatures,);
   }
-  useEffect6(() => {
+  useEffect(() => {
     if (isLazyBundle(features,)) {
       features().then(({ renderer, ...loadedFeatures },) => {
         loadFeatures(loadedFeatures,);
@@ -5976,12 +5976,12 @@ function LazyMotion({ children, features, strict = false, },) {
       },);
     }
   }, [],);
-  return React6.createElement(LazyContext.Provider, { value: { renderer: loadedRenderer.current, strict, }, }, children,);
+  return React.createElement(LazyContext.Provider, { value: { renderer: loadedRenderer.current, strict, }, }, children,);
 }
 function isLazyBundle(features,) {
   return typeof features === 'function';
 }
-var DeprecatedLayoutGroupContext = createContext7(null,);
+var DeprecatedLayoutGroupContext = createContext(null,);
 var notify = (node) => !node.isLayoutDirty && node.willUpdate(false,);
 function nodeGroup() {
   const nodes = /* @__PURE__ */ new Set();
@@ -6007,24 +6007,24 @@ function nodeGroup() {
 var shouldInheritGroup = (inherit) => inherit === true;
 var shouldInheritId = (inherit) => shouldInheritGroup(inherit === true,) || inherit === 'id';
 var LayoutGroup = ({ children, id: id4, inherit = true, },) => {
-  const layoutGroupContext = useContext10(LayoutGroupContext,);
-  const deprecatedLayoutGroupContext = useContext10(DeprecatedLayoutGroupContext,);
+  const layoutGroupContext = useContext(LayoutGroupContext,);
+  const deprecatedLayoutGroupContext = useContext(DeprecatedLayoutGroupContext,);
   const [forceRender, key7,] = useForceUpdate();
-  const context = useRef7(null,);
+  const context = useRef(null,);
   const upstreamId = layoutGroupContext.id || deprecatedLayoutGroupContext;
   if (context.current === null) {
     if (shouldInheritId(inherit,) && upstreamId) id4 = id4 ? upstreamId + '-' + id4 : upstreamId;
     context.current = { id: id4, group: shouldInheritGroup(inherit,) ? layoutGroupContext.group || nodeGroup() : nodeGroup(), };
   }
-  const memoizedContext = useMemo7(() => ({ ...context.current, forceRender, }), [key7,],);
-  return React7.createElement(LayoutGroupContext.Provider, { value: memoizedContext, }, children,);
+  const memoizedContext = useMemo(() => ({ ...context.current, forceRender, }), [key7,],);
+  return React.createElement(LayoutGroupContext.Provider, { value: memoizedContext, }, children,);
 };
 function useMotionValue(initial,) {
   const value = useConstant(() => motionValue(initial,));
-  const { isStatic, } = useContext11(MotionConfigContext,);
+  const { isStatic, } = useContext(MotionConfigContext,);
   if (isStatic) {
-    const [, setLatest,] = useState3(initial,);
-    useEffect7(() => value.on('change', setLatest,), [],);
+    const [, setLatest,] = useState(initial,);
+    useEffect(() => value.on('change', setLatest,), [],);
   }
   return value;
 }
@@ -6079,7 +6079,7 @@ function useListTransform(values, transformer,) {
     return transformer(latest,);
   },);
 }
-var ReorderContext = createContext8(null,);
+var ReorderContext = createContext(null,);
 function checkReorder(order, value, offset, velocity,) {
   if (!velocity) return order;
   const index = order.findIndex((item2) => item2.value === value);
@@ -6098,7 +6098,7 @@ function checkReorder(order, value, offset, velocity,) {
 function ReorderGroup({ children, as = 'ul', axis = 'y', onReorder, values, ...props }, externalRef,) {
   const Component23 = useConstant(() => motion(as,));
   const order = [];
-  const isReordering = useRef8(false,);
+  const isReordering = useRef(false,);
   invariant(Boolean(values,), 'Reorder.Group must be provided a values prop',);
   const context = {
     axis,
@@ -6117,16 +6117,16 @@ function ReorderGroup({ children, as = 'ul', axis = 'y', onReorder, values, ...p
       }
     },
   };
-  useEffect8(() => {
+  useEffect(() => {
     isReordering.current = false;
   },);
-  return React8.createElement(
+  return React.createElement(
     Component23,
     { ...props, ref: externalRef, ignoreStrict: true, },
-    React8.createElement(ReorderContext.Provider, { value: context, }, children,),
+    React.createElement(ReorderContext.Provider, { value: context, }, children,),
   );
 }
-var Group = forwardRef2(ReorderGroup,);
+var Group = forwardRef(ReorderGroup,);
 function getValue(item,) {
   return item.value;
 }
@@ -6138,12 +6138,12 @@ function useDefaultMotionValue(value, defaultValue = 0,) {
 }
 function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: layout2 = true, ...props }, externalRef,) {
   const Component23 = useConstant(() => motion(as,));
-  const context = useContext12(ReorderContext,);
+  const context = useContext(ReorderContext,);
   const point2 = { x: useDefaultMotionValue(style.x,), y: useDefaultMotionValue(style.y,), };
   const zIndex = useTransform([point2.x, point2.y,], ([latestX, latestY,],) => latestX || latestY ? 1 : 'unset',);
   invariant(Boolean(context,), 'Reorder.Item must be a child of Reorder.Group',);
   const { axis, registerItem, updateOrder, } = context;
-  return React9.createElement(Component23, {
+  return React.createElement(Component23, {
     drag: axis,
     ...props,
     dragSnapToOrigin: true,
@@ -6159,7 +6159,7 @@ function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: l
     ignoreStrict: true,
   }, children,);
 }
-var Item = forwardRef3(ReorderItem,);
+var Item = forwardRef(ReorderItem,);
 var Reorder = { Group, Item, };
 var domAnimation = { renderer: createDomVisualElement, ...animations, ...gestureAnimations, };
 var domMax = { ...domAnimation, ...drag, ...layout, };
@@ -6177,13 +6177,13 @@ function useMotionTemplate(fragments, ...values) {
   return useCombineMotionValues(values.filter(isMotionValue,), buildValue,);
 }
 function useSpring(source, config = {},) {
-  const { isStatic, } = useContext13(MotionConfigContext,);
-  const activeSpringAnimation = useRef9(null,);
+  const { isStatic, } = useContext(MotionConfigContext,);
+  const activeSpringAnimation = useRef(null,);
   const value = useMotionValue(isMotionValue(source,) ? source.get() : source,);
   const stopAnimation2 = () => {
     if (activeSpringAnimation.current) activeSpringAnimation.current.stop();
   };
-  useInsertionEffect3(() => {
+  useInsertionEffect(() => {
     return value.attach((v, set,) => {
       if (isStatic) return set(v,);
       const animation = activeSpringAnimation.current;
@@ -6207,7 +6207,7 @@ function useSpring(source, config = {},) {
   return value;
 }
 function useMotionValueEvent(value, event, callback,) {
-  useInsertionEffect4(() => value.on(event, callback,), [value, event, callback,],);
+  useInsertionEffect(() => value.on(event, callback,), [value, event, callback,],);
 }
 function useVelocity(value,) {
   const velocity = useMotionValue(value.getVelocity(),);
@@ -6524,7 +6524,7 @@ var createScrollMotionValues = () => ({
 });
 function useScroll({ container, target, layoutEffect = true, ...options } = {},) {
   const values = useConstant(createScrollMotionValues,);
-  const useLifecycleEffect = layoutEffect ? useIsomorphicLayoutEffect : useEffect9;
+  const useLifecycleEffect = layoutEffect ? useIsomorphicLayoutEffect : useEffect;
   useLifecycleEffect(() => {
     refWarning('target', target,);
     refWarning('container', container,);
@@ -6550,9 +6550,9 @@ function useViewportScroll() {
   return useScroll();
 }
 function useAnimationFrame(callback,) {
-  const initialTimestamp = useRef10(0,);
-  const { isStatic, } = useContext14(MotionConfigContext,);
-  useEffect10(() => {
+  const initialTimestamp = useRef(0,);
+  const { isStatic, } = useContext(MotionConfigContext,);
+  useEffect(() => {
     if (isStatic) return;
     const provideTimeSinceStart = ({ timestamp, delta, },) => {
       if (!initialTimestamp.current) initialTimestamp.current = timestamp;
@@ -6600,7 +6600,7 @@ function useWillChange() {
 }
 function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
-  const [shouldReduceMotion,] = useState4(prefersReducedMotion.current,);
+  const [shouldReduceMotion,] = useState(prefersReducedMotion.current,);
   if (false) {
     warnOnce(shouldReduceMotion !== true, 'You have Reduced Motion enabled on your device. Animations may not appear as expected.',);
   }
@@ -6608,7 +6608,7 @@ function useReducedMotion() {
 }
 function useReducedMotionConfig() {
   const reducedMotionPreference = useReducedMotion();
-  const { reducedMotion, } = useContext15(MotionConfigContext,);
+  const { reducedMotion, } = useContext(MotionConfigContext,);
   if (reducedMotion === 'never') return false;
   else if (reducedMotion === 'always') return true;
   else return reducedMotionPreference;
@@ -6984,9 +6984,9 @@ function useAnimationControls() {
 }
 var useAnimation = useAnimationControls;
 function useCycle(...items) {
-  const index = useRef11(0,);
-  const [item, setItem,] = useState5(items[index.current],);
-  const runCycle = useCallback3(
+  const index = useRef(0,);
+  const [item, setItem,] = useState(items[index.current],);
+  const runCycle = useCallback(
     (next) => {
       index.current = typeof next !== 'number' ? wrap(0, items.length, index.current + 1,) : next;
       setItem(items[index.current],);
@@ -7024,8 +7024,8 @@ function inView(elementOrSelector, onStart, { root, margin: rootMargin, amount =
   return () => observer2.disconnect();
 }
 function useInView(ref, { root, margin, amount, once = false, } = {},) {
-  const [isInView, setInView,] = useState6(false,);
-  useEffect11(() => {
+  const [isInView, setInView,] = useState(false,);
+  useEffect(() => {
     if (!ref.current || once && isInView) return;
     const onEnter = () => {
       setInView(true,);
@@ -7075,7 +7075,7 @@ function useDragControls() {
   return useConstant(createDragControls,);
 }
 function useDomEvent(ref, eventName, handler, options,) {
-  useEffect12(() => {
+  useEffect(() => {
     const element = ref.current;
     if (handler && element) return addDomEvent(element, eventName, handler, options,);
   }, [ref, eventName, handler, options,],);
@@ -7099,8 +7099,8 @@ function startTransition(callback,) {
 function useInstantTransition() {
   const [forceUpdate, forcedRenderCount,] = useForceUpdate();
   const startInstantLayoutTransition = useInstantLayoutTransition();
-  const unlockOnFrameRef = useRef12();
-  useEffect13(() => {
+  const unlockOnFrameRef = useRef();
+  useEffect(() => {
     frame.postRender(() =>
       frame.postRender(() => {
         if (forcedRenderCount !== unlockOnFrameRef.current) return;
@@ -7121,7 +7121,7 @@ function disableInstantTransitions() {
   instantAnimationState.current = false;
 }
 function useResetProjection() {
-  const reset = React10.useCallback(() => {
+  const reset = React.useCallback(() => {
     const root = rootProjectionNode.current;
     if (!root) return;
     root.resetTree();
@@ -7219,16 +7219,16 @@ var StateVisualElement = class extends VisualElement {
 };
 var useVisualState = makeUseVisualState({ scrapeMotionValuesFromProps: createObject, createRenderState: createObject, },);
 function useAnimatedState(initialState2,) {
-  const [animationState, setAnimationState,] = useState7(initialState2,);
+  const [animationState, setAnimationState,] = useState(initialState2,);
   const visualState = useVisualState({}, false,);
   const element = useConstant(() => {
     return new StateVisualElement({ props: {}, visualState, presenceContext: null, }, { initialState: initialState2, },);
   },);
-  useEffect14(() => {
+  useEffect(() => {
     element.mount({},);
     return () => element.unmount();
   }, [element,],);
-  useEffect14(() => {
+  useEffect(() => {
     element.update({
       onUpdate: (v) => {
         setAnimationState({ ...v, },);
@@ -7246,7 +7246,7 @@ var hasWarned = false;
 function useInvertedScale(scale2,) {
   let parentScaleX = useMotionValue(1,);
   let parentScaleY = useMotionValue(1,);
-  const { visualElement, } = useContext16(MotionContext,);
+  const { visualElement, } = useContext(MotionContext,);
   invariant(
     !!(scale2 || visualElement),
     'If no scale values are provided, useInvertedScale must be used within a child of another motion component.',
@@ -7312,10 +7312,10 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   acc[key7] = (process2) => cancelFrame(process2,);
   return acc;
 }, {},); // https :https://app.framerstatic.com/framer.6AXODO6Q.js
-import { Component as Component2, } from 'react';
-import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
-import { startTransition as startTransition2, } from 'react';
-import { Suspense as Suspense2, } from 'react';
+import { Component, } from 'react';
+import { jsx, jsxs, } from 'react/jsx-runtime';
+import { startTransition, } from 'react';
+import { Suspense, } from 'react';
 import { createRef, } from 'react';
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
@@ -7984,11 +7984,11 @@ var require_fontfaceobserver_standalone = __commonJS({
 },);
 function renderPage(Page4, defaultPageStyle,) {
   const style = { style: defaultPageStyle, };
-  return React12.isValidElement(Page4,) ? React12.cloneElement(Page4, style,) : React12.createElement(Page4, style,);
+  return React__default.isValidElement(Page4,) ? React__default.cloneElement(Page4, style,) : React__default.createElement(Page4, style,);
 }
 var NotFoundError = class extends Error {};
 var ErrorBoundaryCaughtError = class extends Error {};
-var ErrorBoundary = class extends Component2 {
+var ErrorBoundary = class extends Component {
   constructor(props,) {
     super(props,);
     this.state = { error: void 0, forceUpdateKey: props.forceUpdateKey, };
@@ -8157,15 +8157,15 @@ function isString2(value,) {
 }
 var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
-  return typeof componentType === 'object' && componentType !== null && !React22.isValidElement(componentType,) &&
+  return typeof componentType === 'object' && componentType !== null && !React__default.isValidElement(componentType,) &&
     preloadKey in componentType;
 }
 function lazy(factory,) {
-  const LazyComponent = React22.lazy(factory,);
+  const LazyComponent = React__default.lazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component14 = React22.forwardRef(function LazyWithPreload(props, ref,) {
-    return React22.createElement(
+  const Component14 = React__default.forwardRef(function LazyWithPreload(props, ref,) {
+    return React__default.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
       Object.assign(ref ? { ref, } : {}, props,),
     );
@@ -8269,12 +8269,12 @@ function getPageEffectForRoute(currentRouteId, nextRouteId, { global: global2, r
   return ((_a = routes[currentRouteId]) === null || _a === void 0 ? void 0 : _a[nextRouteId]) || global2;
 }
 var defaultSitePageEffects = { global: void 0, routes: {}, };
-var PageEffectsContext = React32.createContext(defaultSitePageEffects,);
+var PageEffectsContext = React__default.createContext(defaultSitePageEffects,);
 function PageEffectsProvider({ children, value, },) {
-  return _jsx(PageEffectsContext.Provider, { value, children, },);
+  return jsx(PageEffectsContext.Provider, { value, children, },);
 }
 function usePageEffects() {
-  return React32.useContext(PageEffectsContext,);
+  return React__default.useContext(PageEffectsContext,);
 }
 var step = 10;
 var maxDuration3 = 1e4;
@@ -8544,14 +8544,14 @@ function startViewTransition(updateView, effect,) {
 }
 function useViewTransition() {
   const sitePageEffects = usePageEffects();
-  const resolveHasPainted = useRef13(void 0,);
-  useEffect16(() => {
+  const resolveHasPainted = useRef(void 0,);
+  useEffect(() => {
     if (resolveHasPainted.current) {
       resolveHasPainted.current();
       resolveHasPainted.current = void 0;
     }
   },);
-  return useCallback5((currentRouteId, nextRouteId, update,) => {
+  return useCallback((currentRouteId, nextRouteId, update,) => {
     const pageEffect = getPageEffectForRoute(currentRouteId, nextRouteId, sitePageEffects,);
     if (pageEffect) {
       const hasPainted = new Promise((resolve) => {
@@ -8598,15 +8598,15 @@ function pushHistoryState(data2, url,) {
   );
 }
 function useReplaceInitialState({ disabled, routeId, initialPathVariables, initialLocaleId, },) {
-  React42.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     if (disabled) return;
     replaceHistoryState({ routeId, pathVariables: initialPathVariables, localeId: initialLocaleId, },);
   }, [],);
 }
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
-  const viewTransitionReady = React42.useRef(void 0,);
-  const popStateHandler = React42.useCallback(({ state, },) => {
+  const viewTransitionReady = React__default.useRef(void 0,);
+  const popStateHandler = React__default.useCallback(({ state, },) => {
     var _a, _b, _c;
     if (!isObject(state,)) return;
     const { routeId, hash: hash2, pathVariables, localeId, } = state;
@@ -8628,7 +8628,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       );
     } else (_c = viewTransitionReady.current) === null || _c === void 0 ? void 0 : _c.resolve();
   }, [currentRouteId, setCurrentRouteId, startViewTransition2,],);
-  const traversalHandler = useCallback22((event) => {
+  const traversalHandler = useCallback((event) => {
     if (event.navigationType !== 'traverse') return;
     event.intercept({
       async handler() {
@@ -8639,7 +8639,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       scroll: 'after-transition',
     },);
   }, [],);
-  React42.useEffect(() => {
+  React__default.useEffect(() => {
     var _a;
     window.addEventListener('popstate', popStateHandler,);
     (_a = window.navigation) === null || _a === void 0 ? void 0 : _a.addEventListener('navigate', traversalHandler,);
@@ -8778,7 +8778,7 @@ function turnOnReactEventHandling() {
 }
 var hydrated = false;
 function OnHydrationEnd({ addHydrationEndMarker, turnOffEventHandlerHack, },) {
-  useLayoutEffect2(() => {
+  useLayoutEffect(() => {
     if (hydrated) return;
     hydrated = true;
     if (turnOffEventHandlerHack) turnOnReactEventHandling();
@@ -8790,20 +8790,20 @@ function OnHydrationEnd({ addHydrationEndMarker, turnOffEventHandlerHack, },) {
   return null;
 }
 function useGetRouteCallback(routes,) {
-  return React52.useCallback((routeId) => routes[routeId], [routes,],);
+  return React__default.useCallback((routeId) => routes[routeId], [routes,],);
 }
-var RouterContext = React62.createContext({},);
+var RouterContext = React__default.createContext({},);
 function RouterAPIProvider({ api, children, },) {
-  return _jsx2(RouterContext.Provider, { value: api, children, },);
+  return jsx(RouterContext.Provider, { value: api, children, },);
 }
 function useRouter() {
-  return React62.useContext(RouterContext,);
+  return React__default.useContext(RouterContext,);
 }
 function RoutesProvider({ routes, children, },) {
   const getRoute = useGetRouteCallback(routes,);
-  return _jsx2(RouterContext.Provider, { value: { getRoute, }, children, },);
+  return jsx(RouterContext.Provider, { value: { getRoute, }, children, },);
 }
-var SuspenseErrorBoundary = class extends Component22 {
+var SuspenseErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     this.state = { error: void 0, };
@@ -8825,7 +8825,7 @@ var SuspenseErrorBoundary = class extends Component22 {
   render() {
     if (this.state.error === void 0) return this.props.children;
     if (this.state.error instanceof ErrorBoundaryCaughtError) throw this.state.error.cause;
-    return _jsx3(Suspense, { children: this.props.fallbackChildren, },);
+    return jsx(Suspense, { children: this.props.fallbackChildren, },);
   }
 };
 var suspendPromise = typeof window !== 'undefined' ? new Promise(() => {},) : null;
@@ -8834,27 +8834,24 @@ function Suspend() {
   throw suspendPromise;
 }
 function SuspenseThatPreservesDom({ children, },) {
-  return _jsx4(SuspenseErrorBoundary, {
-    fallbackChildren: children,
-    children: _jsx4(Suspense2, { fallback: _jsx4(Suspend, {},), children, },),
-  },);
+  return jsx(SuspenseErrorBoundary, { fallbackChildren: children, children: jsx(Suspense, { fallback: jsx(Suspend, {},), children, },), },);
 }
 var defaultLocaleId = 'default';
 var noopAsync = async () => {};
 var defaultCollectionListPaginationInfo = { paginationInfo: void 0, setPaginationInfo: noopAsync, loadMore: noopAsync, };
-var CollectionListPaginationInfoContext = /* @__PURE__ */ React72.createContext(defaultCollectionListPaginationInfo,);
+var CollectionListPaginationInfoContext = /* @__PURE__ */ React__default.createContext(defaultCollectionListPaginationInfo,);
 function useCollectionListPaginationInfo() {
-  return React72.useContext(CollectionListPaginationInfoContext,);
+  return React__default.useContext(CollectionListPaginationInfoContext,);
 }
 function useForceUpdate2() {
-  const [_, setForcedRenderCount,] = React82.useState(0,);
-  return [_, React82.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
+  const [_, setForcedRenderCount,] = React__default.useState(0,);
+  return [_, React__default.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
 var noopAsync2 = async () => {};
 var defaultLocaleInfo = { activeLocale: null, locales: [], setLocale: noopAsync2, };
-var LocaleInfoContext = /* @__PURE__ */ React92.createContext(defaultLocaleInfo,);
+var LocaleInfoContext = /* @__PURE__ */ React__default.createContext(defaultLocaleInfo,);
 function useLocaleInfo() {
-  return React92.useContext(LocaleInfoContext,);
+  return React__default.useContext(LocaleInfoContext,);
 }
 function useLocalizationInfo() {
   const { activeLocale, locales, setLocale, } = useLocaleInfo();
@@ -8870,14 +8867,14 @@ function useLocale() {
 function useMonitorNextRender(label,) {
   const startLabel = `start-${label}`;
   const endLabel = `end-${label}`;
-  const resolveHasPainted = useRef22(void 0,);
-  useEffect22(() => {
+  const resolveHasPainted = useRef(void 0,);
+  useEffect(() => {
     if (resolveHasPainted.current) {
       resolveHasPainted.current();
       resolveHasPainted.current = void 0;
     }
   },);
-  return useCallback32(() => {
+  return useCallback(() => {
     const hasPainted = new Promise((resolve) => {
       resolveHasPainted.current = resolve;
     },);
@@ -8898,14 +8895,14 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   window.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
-  const actions = React102.useRef([],);
-  React102.useLayoutEffect(() => {
+  const actions = React__default.useRef([],);
+  React__default.useLayoutEffect(() => {
     var _a;
     if (!((_a = actions.current) === null || _a === void 0 ? void 0 : _a.length)) return;
     actions.current.forEach((action) => action());
     actions.current = [];
   }, [dep,],);
-  return React102.useCallback((cb) => {
+  return React__default.useCallback((cb) => {
     actions.current.push(cb,);
   }, [],);
 }
@@ -8929,11 +8926,11 @@ function Router(
   useReplaceInitialState({ disabled: disableHistory, routeId: initialRoute, initialPathVariables, initialLocaleId, },);
   const startViewTransition2 = useViewTransition();
   const monitorNextRender = useMonitorNextRender('route-change',);
-  const currentRouteRef = React102.useRef(initialRoute,);
-  const currentPathVariablesRef = React102.useRef(initialPathVariables,);
-  const currentLocaleIdRef = React102.useRef(initialLocaleId,);
+  const currentRouteRef = React__default.useRef(initialRoute,);
+  const currentPathVariablesRef = React__default.useRef(initialPathVariables,);
+  const currentLocaleIdRef = React__default.useRef(initialLocaleId,);
   const currentLocaleId = currentLocaleIdRef.current;
-  const activeLocale = React102.useMemo(() => {
+  const activeLocale = React__default.useMemo(() => {
     var _a2;
     return (_a2 = locales.find(({ id: id3, },) => {
             if (!currentLocaleId) return id3 === defaultLocaleId;
@@ -8943,7 +8940,7 @@ function Router(
       : null;
   }, [currentLocaleId, locales,],);
   const [dep, forceUpdate,] = useForceUpdate2();
-  const [paginationInfo, setPaginationInfo,] = React102.useState(
+  const [paginationInfo, setPaginationInfo,] = React__default.useState(
     typeof window !== 'undefined'
       ? (_b = (_a = window === null || window === void 0 ? void 0 : window.history) === null || _a === void 0 ? void 0 : _a.state) ===
             null || _b === void 0
@@ -8951,11 +8948,11 @@ function Router(
         : _b.pagination
       : void 0,
   );
-  const collectionListPaginationInfo = React102.useMemo(() => {
+  const collectionListPaginationInfo = React__default.useMemo(() => {
     return {
       paginationInfo,
       setPaginationInfo: async (newPaginationInfo) => {
-        startTransition2(() => {
+        startTransition(() => {
           setPaginationInfo(newPaginationInfo,);
         },);
       },
@@ -8963,13 +8960,13 @@ function Router(
         if ((paginationInfo === null || paginationInfo === void 0 ? void 0 : paginationInfo.type) !== 'loadMore') return;
         const newPaginationInfo = { ...paginationInfo, currentPage: paginationInfo.currentPage + 1, };
         pushLoadMoreHistory(newPaginationInfo,);
-        startTransition2(() => {
+        startTransition(() => {
           setPaginationInfo(newPaginationInfo,);
         },);
       },
     };
   }, [paginationInfo,],);
-  const localeInfo = React102.useMemo(() => {
+  const localeInfo = React__default.useMemo(() => {
     return {
       activeLocale,
       locales,
@@ -8998,7 +8995,7 @@ function Router(
           if (!localeResult) return;
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
-          startViewTransition2(currentRouteRef.current, currentRouteId2, () => startTransition2(forceUpdate,),);
+          startViewTransition2(currentRouteRef.current, currentRouteId2, () => startTransition(forceUpdate,),);
           monitorNextRender();
         } catch {}
       },
@@ -9015,7 +9012,7 @@ function Router(
     startViewTransition2,
   ],);
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const setCurrentRouteId = React102.useCallback(
+  const setCurrentRouteId = React__default.useCallback(
     (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -9023,13 +9020,13 @@ function Router(
       scheduleSideEffect(() => {
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
-      startTransition2(forceUpdate,);
+      startTransition(forceUpdate,);
       monitorNextRender();
     },
     [forceUpdate, monitorNextRender, scheduleSideEffect,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = React102.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
+  const navigate = React__default.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
     var _a2, _b2;
     const newRoute = routes[routeId];
     if (pathVariables) {
@@ -9080,7 +9077,7 @@ function Router(
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
-  const api = React102.useMemo(
+  const api = React__default.useMemo(
     () => ({ navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams, }),
     [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams,],
   );
@@ -9091,25 +9088,25 @@ function Router(
     ? fillPathVariables(current.path, currentPathVariables,)
     : current.path;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  return _jsx5(RouterAPIProvider, {
+  return jsx(RouterAPIProvider, {
     api,
-    children: _jsx5(LocaleInfoContext.Provider, {
+    children: jsx(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: _jsx5(CollectionListPaginationInfoContext.Provider, {
+      children: jsx(CollectionListPaginationInfoContext.Provider, {
         value: collectionListPaginationInfo,
-        children: _jsxs(SuspenseThatPreservesDom, {
+        children: jsxs(SuspenseThatPreservesDom, {
           children: [
-            _jsx5(ErrorBoundary, {
+            jsx(ErrorBoundary, {
               notFoundPage,
               defaultPageStyle,
               forceUpdateKey: dep,
-              children: _jsx5(React102.Fragment, {
+              children: jsx(React__default.Fragment, {
                 children: pageExistsInCurrentLocale
                   ? renderPage(current.page, defaultPageStyle,)
                   : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
               }, remountKey,),
             },),
-            _jsx5(OnHydrationEnd, {
+            jsx(OnHydrationEnd, {
               addHydrationEndMarker: shouldMarkHydrationEnd,
               turnOffEventHandlerHack: enableImproveInpDuringHydration,
             },),
@@ -9212,11 +9209,11 @@ var key = 'page';
 function isRoute(route,) {
   return isObject(route,) && key in route && route.page !== void 0;
 }
-var CurrentRouteContext = React112.createContext(void 0,);
+var CurrentRouteContext = React__default.createContext(void 0,);
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
-  const override = useContext17(CurrentRouteContext,);
+  const override = useContext(CurrentRouteContext,);
   const id3 = override !== null && override !== void 0 ? override : router.currentRouteId;
   if (!id3) return void 0;
   const route = (_a = router.getRoute) === null || _a === void 0 ? void 0 : _a.call(router, id3,);
@@ -9240,7 +9237,7 @@ function useRoute(routeId,) {
 var shouldPreloadBasedOnUA = typeof window !== 'undefined' && !isBot(navigator.userAgent,);
 function useRoutePreloader(routeIds, enabled = true,) {
   const { getRoute, } = useRouter();
-  React122.useEffect(() => {
+  React__default.useEffect(() => {
     if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
       const route = getRoute(routeId,);
@@ -9259,7 +9256,7 @@ function useRouteAnchor(routeId, { elementId, hash: linkHash, } = {},) {
   const currentRoute = useRoute(currentRouteId !== null && currentRouteId !== void 0 ? currentRouteId : '',);
   useRoutePreloader([routeId,], true,);
   const hash2 = linkHash !== null && linkHash !== void 0 ? linkHash : elementId;
-  const href = React13.useMemo(
+  const href = React__default.useMemo(
     () =>
       getPathForRoute(route, {
         currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
@@ -9269,12 +9266,12 @@ function useRouteAnchor(routeId, { elementId, hash: linkHash, } = {},) {
       },),
     [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],
   );
-  const navigateToRoute = React13.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
+  const navigateToRoute = React__default.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
     hash2,
     navigate,
     routeId,
   ],);
-  const onClick = React13.useCallback((event) => {
+  const onClick = React__default.useCallback((event) => {
     event.preventDefault();
     navigateToRoute();
   }, [navigateToRoute,],);
@@ -9284,7 +9281,7 @@ function useRouteElementId(id3, targetRouteId,) {
   var _a;
   const currentRoute = useCurrentRoute();
   const route = (_a = useRoute(targetRouteId,)) !== null && _a !== void 0 ? _a : currentRoute;
-  return React14.useMemo(() => {
+  return React__default.useMemo(() => {
     if (!route) return id3;
     return getRouteElementId(route, id3,);
   }, [id3, route,],);
@@ -9292,7 +9289,7 @@ function useRouteElementId(id3, targetRouteId,) {
 function useRouteHandler(routeId, preload = false, elementId,) {
   const { navigate, } = useRouter();
   useRoutePreloader([routeId,], preload,);
-  const handler = React15.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
+  const handler = React__default.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
     navigate,
     elementId,
     routeId,
@@ -11750,7 +11747,7 @@ addScaleCorrector({
   borderBottomWidth: correctBorderScale('y',),
 },);
 function MotionSetup({ children, },) {
-  return /* @__PURE__ */ jsx(Fragment3, { children, },);
+  return /* @__PURE__ */ jsx(Fragment, { children, },);
 }
 function startAnimation(_key, value, target, transition = {},) {
   warnOnce2(`"startAnimation" is unsupported. Use "animate" instead: https://www.framer.com/api/motion/utilities/#animate`,);
@@ -11816,11 +11813,16 @@ function assert(condition, ...msg2) {
 function assertNever(x, error,) {
   throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
 }
-var LayoutIdContext = React16.createContext({ getLayoutId: (args) => null, persistLayoutIdCache: () => {}, top: false, enabled: true, },);
+var LayoutIdContext = React__default.createContext({
+  getLayoutId: (args) => null,
+  persistLayoutIdCache: () => {},
+  top: false,
+  enabled: true,
+},);
 function LayoutIdProvider({ children, },) {
-  const context = useContext22(LayoutIdContext,);
-  if (context.top) return /* @__PURE__ */ jsx2(Fragment22, { children, },);
-  const cache3 = useRef32({ // When we provide a layoutId for a node based on it's first
+  const context = useContext(LayoutIdContext,);
+  if (context.top) return /* @__PURE__ */ jsx(Fragment, { children, },);
+  const cache3 = useRef({ // When we provide a layoutId for a node based on it's first
     // duplicatedFrom id, we save it's layoutId mapped to it's actual id.
     // Future screen's nodes will check this cache first, to see if they've
     // previously been assigned a layoutId, or if any of there other
@@ -11840,9 +11842,9 @@ function LayoutIdProvider({ children, },) {
     // record those separately.
     count: { byId: {}, byName: {}, },
   },);
-  const screen = useRef32({ byId: {}, byName: {}, byLastId: {}, byPossibleId: {}, byLastName: {}, byLayoutId: {}, },);
-  const usedIds = useRef32(/* @__PURE__ */ new Set(),).current;
-  const getLayoutId = useCallback42(({ id: id3, name, duplicatedFrom, },) => {
+  const screen = useRef({ byId: {}, byName: {}, byLastId: {}, byPossibleId: {}, byLastName: {}, byLayoutId: {}, },);
+  const usedIds = useRef(/* @__PURE__ */ new Set(),).current;
+  const getLayoutId = useCallback(({ id: id3, name, duplicatedFrom, },) => {
     if (!id3) return null;
     const cacheKey = name ? 'byName' : 'byId';
     const previousId = cache3.current[cacheKey][id3];
@@ -11926,7 +11928,7 @@ function LayoutIdProvider({ children, },) {
     usedIds.add(layoutId,);
     return layoutId;
   }, [],);
-  const persistLayoutIdCache = useCallback42(() => {
+  const persistLayoutIdCache = useCallback(() => {
     cache3.current = {
       byId: { ...cache3.current.byId, ...screen.current.byId, },
       byLastId: { ...cache3.current.byLastId, ...screen.current.byLastId, },
@@ -11947,8 +11949,8 @@ function LayoutIdProvider({ children, },) {
     screen.current = { byId: {}, byName: {}, byLastId: {}, byPossibleId: {}, byLastName: {}, byLayoutId: {}, };
     usedIds.clear();
   }, [],);
-  const contextValue = useRef32({ getLayoutId, persistLayoutIdCache, top: true, enabled: true, },).current;
-  return /* @__PURE__ */ jsx2(LayoutIdContext.Provider, { value: contextValue, children, },);
+  const contextValue = useRef({ getLayoutId, persistLayoutIdCache, top: true, enabled: true, },).current;
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, { value: contextValue, children, },);
 }
 function nextLayoutId(identifier, initialValue, usedIds,) {
   let value = initialValue;
@@ -11960,14 +11962,14 @@ function nextLayoutId(identifier, initialValue, usedIds,) {
   return { layoutId, value, };
 }
 function AutomaticLayoutIds({ enabled = true, ...props },) {
-  const context = useContext22(LayoutIdContext,);
-  const contextValue = useMemo8(() => {
+  const context = useContext(LayoutIdContext,);
+  const contextValue = useMemo(() => {
     return { ...context, enabled, };
   }, [enabled,],);
-  return /* @__PURE__ */ jsx2(LayoutIdContext.Provider, { ...props, value: contextValue, },);
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, { ...props, value: contextValue, },);
 }
 function useConstant2(init,) {
-  const ref = useRef42(null,);
+  const ref = useRef(null,);
   if (ref.current === null) ref.current = init();
   return ref.current;
 }
@@ -12010,8 +12012,8 @@ function ErrorPlaceholder(props,) {
   return /* @__PURE__ */ jsxs('div', {
     style: errorStyle,
     children: [
-      /* @__PURE__ */ jsx3('div', { className: 'text', style: titleStyle, children: title, },),
-      message && /* @__PURE__ */ jsx3('div', { className: 'text', style: messageStyle, children: message, },),
+      /* @__PURE__ */ jsx('div', { className: 'text', style: titleStyle, children: title, },),
+      message && /* @__PURE__ */ jsx('div', { className: 'text', style: messageStyle, children: message, },),
     ],
   },);
 }
@@ -12055,7 +12057,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = class extends Component3 {
+var ErrorBoundary2 = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -12079,20 +12081,20 @@ var ErrorBoundary2 = class extends Component3 {
   }
   render() {
     if (this.state.lastError) {
-      return /* @__PURE__ */ jsx4(ErrorPlaceholder, { error: this.state.lastError.error.message, file: 'Prototype', },);
+      return /* @__PURE__ */ jsx(ErrorPlaceholder, { error: this.state.lastError.error.message, file: 'Prototype', },);
     }
     return this.props.children;
   }
 };
 function Device({ canResize = false, children, ResizeObserver: ResizeObserver22 = safeWindow.ResizeObserver, ...options },) {
   var _a, _b;
-  const optionsRef = React17.useRef(void 0,);
+  const optionsRef = React__default.useRef(void 0,);
   if (optionsRef.current === void 0) optionsRef.current = options;
   const deviceAppearance = (_a = options.deviceOptions) == null ? void 0 : _a.appearance.type;
-  const scaleDataRef = React17.useRef();
-  const containerRef = React17.useRef(null,);
-  const deviceRef = React17.useRef(null,);
-  const screenRef = React17.useRef(null,);
+  const scaleDataRef = React__default.useRef();
+  const containerRef = React__default.useRef(null,);
+  const deviceRef = React__default.useRef(null,);
+  const screenRef = React__default.useRef(null,);
   const updateImperativeScale = ({ scale: scale2, screenScalePixelFix, },) => {
     if (!scaleDataRef.current || !deviceRef.current || !screenRef.current) return;
     deviceRef.current.style.transform = `scale(${scale2})`;
@@ -12102,12 +12104,12 @@ function Device({ canResize = false, children, ResizeObserver: ResizeObserver22 
     const scale2 = scaleDataRef.current = getScaleData(options.deviceOptions, options.scaleTo,);
     updateImperativeScale(scale2,);
   }
-  const invertScale2 = React17.useCallback((point2) => {
+  const invertScale2 = React__default.useCallback((point2) => {
     if (!scaleDataRef.current) return point2;
     const { scale: scale2 = 1, } = scaleDataRef.current;
     return { x: point2.x / scale2, y: point2.y / scale2, };
   }, [scaleDataRef,],);
-  const updateScale = React17.useCallback(() => {
+  const updateScale = React__default.useCallback(() => {
     const { deviceOptions, scaleTo, onScaleChange, } = optionsRef.current ?? {};
     if (!deviceOptions || !scaleTo || scaleTo !== 'dynamic' || !containerRef.current) return;
     if (containerRef.current.offsetWidth === 0 || containerRef.current.offsetHeight === 0) return;
@@ -12122,7 +12124,7 @@ function Device({ canResize = false, children, ResizeObserver: ResizeObserver22 
     if (!ResizeObserver22) return;
     return new ResizeObserver22(() => updateScale());
   },);
-  React17.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     optionsRef.current = {
       deviceOptions: options.deviceOptions,
       onScaleChange: options.onScaleChange,
@@ -12130,10 +12132,10 @@ function Device({ canResize = false, children, ResizeObserver: ResizeObserver22 
       scaleTo: options.scaleTo,
     };
   }, [options.deviceOptions, options.onScaleChange, options.overrideTheme, options.scaleTo,],);
-  React17.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     updateScale();
   }, [updateScale,],);
-  React17.useEffect(() => {
+  React__default.useEffect(() => {
     if (!observer2 || !containerRef.current) return;
     observer2.observe(containerRef.current,);
     return () => observer2.disconnect();
@@ -12141,24 +12143,24 @@ function Device({ canResize = false, children, ResizeObserver: ResizeObserver22 
   const { containerStyle, handStyle, deviceStyle, deviceImageStyle, screenStyle, } = getDeviceStyle(options,);
   const resizeStyles = canResize ? { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', } : {};
   const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
-  return /* @__PURE__ */ jsx4('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: { ...containerStyle, ...resizeStyles, },
     ref: containerRef,
-    children: /* @__PURE__ */ jsxs2('div', {
+    children: /* @__PURE__ */ jsxs('div', {
       style: { ...deviceStyle, },
       ref: deviceRef,
       children: [
-        handStyle && /* @__PURE__ */ jsx4('div', { style: handStyle, },),
-        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx4('div', { style: deviceImageStyle, },),
-        /* @__PURE__ */ jsx4('div', {
+        handStyle && /* @__PURE__ */ jsx('div', { style: handStyle, },),
+        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx('div', { style: deviceImageStyle, },),
+        /* @__PURE__ */ jsx('div', {
           style: { ...screenStyle, pointerEvents: void 0, backgroundColor: children ? screenBackground : screenStyle.backgroundColor, },
           ref: screenRef,
-          children: /* @__PURE__ */ jsx4(MotionConfig, {
+          children: /* @__PURE__ */ jsx(MotionConfig, {
             transformPagePoint: invertScale2,
-            children: /* @__PURE__ */ jsx4(ErrorBoundary2, { children, },),
+            children: /* @__PURE__ */ jsx(ErrorBoundary2, { children, },),
           },),
         },),
-        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx4('div', { style: deviceImageStyle, },),
+        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx('div', { style: deviceImageStyle, },),
       ],
     },),
   },);
@@ -13040,13 +13042,13 @@ var ParentSizeState = /* @__PURE__ */ ((ParentSizeState2) => {
   ParentSizeState2[ParentSizeState2['DisabledForCurrentLevel'] = 2] = 'DisabledForCurrentLevel';
   return ParentSizeState2;
 })(ParentSizeState || {},);
-var ConstraintsContext = React18.createContext({ parentSize: 0, /* Unknown */ },);
+var ConstraintsContext = React__default.createContext({ parentSize: 0, /* Unknown */ },);
 function deprecatedParentSize(parentSize,) {
   if (parentSize === 0 || parentSize === 1 || parentSize === 2) return null;
   return parentSize;
 }
 function useParentSize() {
-  return React18.useContext(ConstraintsContext,).parentSize;
+  return React__default.useContext(ConstraintsContext,).parentSize;
 }
 function isSize(o,) {
   return typeof o === 'object';
@@ -13054,14 +13056,14 @@ function isSize(o,) {
 var ProvideParentSize = (props) => {
   const currentParentSize = useParentSize();
   const { parentSize, children, } = props;
-  const value = React18.useMemo(
+  const value = React__default.useMemo(
     () => ({ parentSize, }), // We are generating the memoKeys in runtime and react doesn't like it,
     // but it should be safe to ignore.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [getParentWidth(parentSize,), getParentHeight(parentSize,),],
   );
-  if (currentParentSize === 1) return children ? /* @__PURE__ */ jsx5(Fragment32, { children, },) : null;
-  return /* @__PURE__ */ jsx5(ConstraintsContext.Provider, { value, children, },);
+  if (currentParentSize === 1) return children ? /* @__PURE__ */ jsx(Fragment, { children, },) : null;
+  return /* @__PURE__ */ jsx(ConstraintsContext.Provider, { value, children, },);
 };
 function getParentWidth(parentSize,) {
   return isSize(parentSize,) ? parentSize.width : parentSize;
@@ -13071,7 +13073,7 @@ function getParentHeight(parentSize,) {
 }
 var ConsumeParentSize = ConstraintsContext.Consumer;
 function useProvideParentSize(node, parentSize,) {
-  return /* @__PURE__ */ jsx5(ProvideParentSize, { parentSize, children: node, },);
+  return /* @__PURE__ */ jsx(ProvideParentSize, { parentSize, children: node, },);
 }
 function useConstraints(props,) {
   const parentSize = useParentSize();
@@ -14932,7 +14934,7 @@ function applyMetaTag(name, props,) {
   for (const [k, v,] of Object.entries(props,)) tag.setAttribute(k, v,);
 }
 function usePrototypingMetaTags() {
-  React19.useEffect(() => {
+  React__default.useEffect(() => {
     applyMetaTag('mobile-web-app-capable', { content: 'yes', },);
     applyMetaTag('apple-mobile-web-app-capable', { content: 'yes', },);
     applyMetaTag('apple-mobile-web-app-status-bar-style', { content: 'black-translucent', },);
@@ -14942,22 +14944,22 @@ function usePrototypingMetaTags() {
 function DeviceCodeComponentInner({ children, ...props },) {
   usePrototypingMetaTags();
   const deviceOptions = convertPropsToDeviceOptions(props, { forceOldClay: true, },);
-  React20.useInsertionEffect(() => {
+  React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
-    return /* @__PURE__ */ jsx6('div', {
+    return /* @__PURE__ */ jsx('div', {
       'data-framer-component-type': 'DeviceComponent',
       className: 'no-device',
       style: { width: '100%', height: '100%', },
-      children: /* @__PURE__ */ jsx6(ProvideParentSize, { parentSize: 1, children, },),
+      children: /* @__PURE__ */ jsx(ProvideParentSize, { parentSize: 1, children, },),
     },);
   }
   const child = Array.isArray(children,) ? children[0] : children;
-  const resizedChild = child && React20.isValidElement(child,)
-    ? React20.cloneElement(child, { width: deviceOptions.screenWidth, height: deviceOptions.screenHeight, },)
+  const resizedChild = child && React__default.isValidElement(child,)
+    ? React__default.cloneElement(child, { width: deviceOptions.screenWidth, height: deviceOptions.screenHeight, },)
     : null;
-  return /* @__PURE__ */ jsx6(Device, { scaleTo: 'dynamic', deviceOptions, children: resizedChild, },);
+  return /* @__PURE__ */ jsx(Device, { scaleTo: 'dynamic', deviceOptions, children: resizedChild, },);
 }
 var DeviceCodeComponent = /* @__PURE__ */ (() => {
   const { componentWidth: defaultWidth2, componentHeight: defaultHeight2, } = getComponentSize(
@@ -15071,10 +15073,10 @@ var reactPropsRegex =
 var isPropValid = /* @__PURE__ */ memoize((prop) =>
   reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91 /* Z+1 */
 );
-var LibraryFeaturesContext = /* @__PURE__ */ React21.createContext(void 0,);
+var LibraryFeaturesContext = /* @__PURE__ */ React__default.createContext(void 0,);
 var LibraryFeaturesProvider = LibraryFeaturesContext.Provider;
 var useLibraryFeatures = () => {
-  const context = React21.useContext(LibraryFeaturesContext,);
+  const context = React__default.useContext(LibraryFeaturesContext,);
   return context ?? {};
 };
 var import_process = __toESM(require_browser(), 1,);
@@ -15293,10 +15295,10 @@ function getImageStyle(image, containerSize,) {
 function StaticImage({ image, containerSize, nodeId, alt, },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  const [measuredSizes, setMeasuredSizes,] = React222.useState();
-  const imageRef = React222.useRef(null,);
+  const [measuredSizes, setMeasuredSizes,] = React__default.useState();
+  const imageRef = React__default.useRef(null,);
   const libraryFeatures = useLibraryFeatures();
-  React222.useEffect(() => {
+  React__default.useEffect(() => {
     if (!libraryFeatures.imgSizesWorkaroundEnabled) return;
     const imageElement = imageRef.current;
     if (!imageElement) return;
@@ -15314,7 +15316,7 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
     ) return;
     setMeasuredSizes(imageNodeWidth + 'px',);
   }, [image.sizes,],);
-  return /* @__PURE__ */ jsx7('img', {
+  return /* @__PURE__ */ jsx('img', {
     ref: imageRef,
     decoding: 'async',
     loading: image.loading,
@@ -15326,10 +15328,10 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
   },);
 }
 function CanvasImage({ image, containerSize, nodeId, },) {
-  const wrapperRef = React222.useRef(null,);
+  const wrapperRef = React__default.useRef(null,);
   const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  React222.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     wrapper.appendChild(imageElement,);
@@ -15338,18 +15340,18 @@ function CanvasImage({ image, containerSize, nodeId, },) {
     };
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ jsx7('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
+  return /* @__PURE__ */ jsx('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function OptimizedCanvasImage({ nodeId, image, containerSize, },) {
-  const wrapperRef = React222.useRef(null,);
+  const wrapperRef = React__default.useRef(null,);
   const source = runtime.useImageSource(image, containerSize, nodeId,);
-  React222.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     const imageStyle = getImageStyle(image, containerSize,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source, containerSize,],);
-  return /* @__PURE__ */ jsx7('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
+  return /* @__PURE__ */ jsx('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function BackgroundImageComponent({ layoutId, image, ...props },) {
   if (layoutId) layoutId = layoutId + '-background';
@@ -15366,12 +15368,12 @@ function BackgroundImageComponent({ layoutId, image, ...props },) {
       if (image.pixelWidth) fallbackWrapperStyles.backgroundSize = `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`;
       fallbackWrapperStyles.border = 0;
       imageNode = null;
-    } else if (RenderTarget.current() !== 'CANVAS') imageNode = /* @__PURE__ */ jsx7(StaticImage, { image, ...props, },);
+    } else if (RenderTarget.current() !== 'CANVAS') imageNode = /* @__PURE__ */ jsx(StaticImage, { image, ...props, },);
     else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
-      imageNode = /* @__PURE__ */ jsx7(OptimizedCanvasImage, { image, ...props, },);
-    } else imageNode = /* @__PURE__ */ jsx7(CanvasImage, { image, ...props, },);
+      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, { image, ...props, },);
+    } else imageNode = /* @__PURE__ */ jsx(CanvasImage, { image, ...props, },);
   }
-  return /* @__PURE__ */ jsx7(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     layoutId,
     style: imageNode ? wrapperStyle : fallbackWrapperStyles,
     'data-framer-background-image-wrapper': true,
@@ -15439,10 +15441,10 @@ function Border(props,) {
   const style = { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, borderRadius: 'inherit', pointerEvents: 'none', };
   if (props.border) {
     style.border = props.border;
-    return /* @__PURE__ */ jsx8(motion.div, { style, },);
+    return /* @__PURE__ */ jsx(motion.div, { style, },);
   }
   collectBorderStyleForProps(props, style, false,);
-  return /* @__PURE__ */ jsx8(motion.div, { 'data-frame-border': true, style, layoutId, },);
+  return /* @__PURE__ */ jsx(motion.div, { 'data-frame-border': true, style, layoutId, },);
 }
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
@@ -15487,9 +15489,9 @@ function processOverrideForwarding(props, children,) {
     }
   }
   if (!_forwardedOverrides) return { props, children, };
-  children = React23.Children.map(children, (child) => {
-    if (!React23.isValidElement(child,)) return child;
-    return React23.cloneElement(child, { _forwardedOverrides, },);
+  children = React__default.Children.map(children, (child) => {
+    if (!React__default.isValidElement(child,)) return child;
+    return React__default.cloneElement(child, { _forwardedOverrides, },);
   },);
   return { props, children, };
 }
@@ -15503,8 +15505,8 @@ function transformTemplate(center,) {
 }
 function useLayoutId2(props, { specificLayoutId, postfix, } = {},) {
   const { name, layoutIdKey, duplicatedFrom, __fromCodeComponentNode = false, drag: drag2, } = props;
-  const { getLayoutId, enabled, } = useContext32(LayoutIdContext,);
-  return useMemo22(() => {
+  const { getLayoutId, enabled, } = useContext(LayoutIdContext,);
+  return useMemo(() => {
     if (!enabled) return props.layoutId;
     const existingLayoutId = specificLayoutId || props.layoutId;
     if (!existingLayoutId) if (drag2 || !layoutIdKey || __fromCodeComponentNode) return void 0;
@@ -15513,8 +15515,8 @@ function useLayoutId2(props, { specificLayoutId, postfix, } = {},) {
     return postfix ? `${layoutIdCandidate}-${postfix}` : layoutIdCandidate;
   }, [enabled,],);
 }
-var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect22 : useEffect32;
-var ComponentContainerContext = React24.createContext(false,);
+var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect : useEffect;
+var ComponentContainerContext = React__default.createContext(false,);
 var resizeObservers = [];
 var hasActiveObservations = function () {
   return resizeObservers.some(function (ro,) {
@@ -15987,8 +15989,8 @@ var ResizeObserver2 = function () {
   return ResizeObserver22;
 }();
 function useForceUpdate3() {
-  const [_, setForcedRenderCount,] = React25.useState(0,);
-  return React25.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
+  const [_, setForcedRenderCount,] = React__default.useState(0,);
+  return React__default.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
 }
 var DEFAULT_SIZE = 200;
 var _sharedResizeObserver;
@@ -16020,7 +16022,7 @@ _callbacks = /* @__PURE__ */ new WeakMap();
 var sharedResizeObserver = isBrowser2() ? new SharedObserver() : void 0;
 function useRerenderOnResize(ref,) {
   const update = useForceUpdate3();
-  useEffect42(() => {
+  useEffect(() => {
     const element = ref == null ? void 0 : ref.current;
     if (!element) return;
     sharedResizeObserver == null ? void 0 : sharedResizeObserver.observeElementWithCallback(ref.current, update,);
@@ -16031,7 +16033,7 @@ function useRerenderOnResize(ref,) {
 }
 function useMeasuredSize(ref,) {
   const forceUpdate = useForceUpdate3();
-  const size2 = React26.useRef(null,);
+  const size2 = React__default.useRef(null,);
   function updateSize(newSize,) {
     if (newSize.width === 0 && newSize.height === 0) return;
     if (!size2.current || newSize.height !== size2.current.height || newSize.width !== size2.current.width) {
@@ -16053,18 +16055,18 @@ function useMeasuredSize(ref,) {
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
 var withMeasuredSize = (Component14) => (props) => {
-  const ref = React26.useRef(null,);
+  const ref = React__default.useRef(null,);
   const size2 = useMeasuredSize(ref,);
   const dataProps = { [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true, };
   const shouldRender = Boolean(size2,);
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
-  return /* @__PURE__ */ jsx9('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: { width: '100%', height: '100%', pointerEvents: 'none', },
     ref,
     ...dataProps,
     children: shouldRender && /* @__PURE__ */
-      jsx9(Component14, {
+      jsx(Component14, {
         ...props,
         width: (size2 == null ? void 0 : size2.width) ?? fallbackWidth,
         height: (size2 == null ? void 0 : size2.height) ?? fallbackHeight,
@@ -16096,7 +16098,7 @@ function unwrapInlinedDisplayContents(element,) {
 function useMeasureLayout(props, ref, getChildren = () => [], options = {},) {
   const { id: id3, visible, _needsMeasure, } = props;
   const { skipHook = false, } = options;
-  const inCodeComponent = Boolean(useContext42(ComponentContainerContext,),);
+  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
   const onCanvas = RenderTarget.current() === 'CANVAS';
   useIsomorphicLayoutEffect2(() => {
     if (!onCanvas || inCodeComponent || skipHook) return;
@@ -16246,7 +16248,7 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
   if (microtask2) void Promise.resolve().then(reset,);
   else setTimeout(reset, 0,);
 }
-var Layer = class extends Component4 {
+var Layer = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layerElement', null,);
@@ -16608,10 +16610,10 @@ function unwrapFrameProps(frameProps,) {
 }
 var defaultFrameRect = { x: 0, y: 0, width: 200, height: 200, };
 function useStyleAndRect(props,) {
-  React27.useInsertionEffect(() => {
+  React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const inCodeComponent = Boolean(useContext52(ComponentContainerContext,),);
+  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
   const { style, _initialStyle, __fromCanvasComponent, size: size2, } = props;
   const unwrappedProps = unwrapFrameProps(props,);
   const constraintsRect = useConstraints(unwrappedProps,);
@@ -16624,9 +16626,10 @@ function useStyleAndRect(props,) {
   const shouldDisablePointerEvents = !hasEvents(props,) && !props.__fromCanvasComponent && !hasScrollableContent(props,);
   const safeToEditPointerEvents = props.style ? !('pointerEvents' in props.style) : true;
   if (shouldDisablePointerEvents && safeToEditPointerEvents) defaultStyle.pointerEvents = 'none';
-  const addTextCentering = React27.Children.count(props.children,) > 0 && React27.Children.toArray(props.children,).every((child) => {
-    return typeof child === 'string' || typeof child === 'number';
-  },);
+  const addTextCentering = React__default.Children.count(props.children,) > 0 &&
+    React__default.Children.toArray(props.children,).every((child) => {
+      return typeof child === 'string' || typeof child === 'number';
+    },);
   const centerTextStyle = addTextCentering && { display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', };
   const propsStyle = getStyleForFrameProps(props,);
   if (size2 === void 0 && !__fromCanvasComponent) {
@@ -16712,13 +16715,13 @@ function getMotionProps(props,) {
 function hasDataFramerName(props,) {
   return 'data-framer-name' in props;
 }
-var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, forwardedRef,) {
+var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forwardedRef,) {
   const { name, center, border, _border, __portal, } = props;
   const { props: propsWithOverrides, children, } = processOverrideForwarding(props,);
   const motionProps = getMotionProps(propsWithOverrides,);
   const layoutId = useLayoutId2(props,);
   const cursor = getCursorFromEvents(props,);
-  const fallbackRef = useRef62(null,);
+  const fallbackRef = useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
   const dataProps = {
     'data-framer-component-type': props.componentType ?? 'Frame',
@@ -16737,13 +16740,13 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
   } else if (!motionProps.transformTemplate) motionProps.transformTemplate = void 0;
   useMeasureLayout(props, ref,);
   const backgroundImage = backgroundImageFromProps(props,);
-  const inCodeComponent = Boolean(useContext52(ComponentContainerContext,),);
+  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
   const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, inCodeComponent,);
   const wrappedContent = useProvideParentSize(
-    /* @__PURE__ */ jsxs3(Fragment4, {
+    /* @__PURE__ */ jsxs(Fragment, {
       children: [
         backgroundImage
-          ? /* @__PURE__ */ jsx10(BackgroundImageComponent, {
+          ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
             alt: props.alt ?? '',
             image: backgroundImage,
             containerSize: rect ?? void 0,
@@ -16752,7 +16755,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
           },)
           : null,
         children,
-        /* @__PURE__ */ jsx10(Border, { ..._border, border, layoutId, },),
+        /* @__PURE__ */ jsx(Border, { ..._border, border, layoutId, },),
       ],
     },),
     parentSize,
@@ -16772,7 +16775,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
     delete currentStyle.shadow;
     currentStyle.boxShadow = shadow;
   }
-  return /* @__PURE__ */ jsxs3(MotionComponent, {
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     ...dataProps,
     ...motionProps,
     layoutId,
@@ -16781,11 +16784,11 @@ var VisibleFrame = /* @__PURE__ */ forwardRef4(function VisibleFrame2(props, for
     children: [wrappedContent, __portal,],
   },);
 },);
-var FrameWithMotion = /* @__PURE__ */ forwardRef4(function FrameWithMotion2(props, ref,) {
+var FrameWithMotion = /* @__PURE__ */ forwardRef(function FrameWithMotion2(props, ref,) {
   countNodeRender();
   const { visible = true, } = props;
   if (!visible) return null;
-  return /* @__PURE__ */ jsx10(VisibleFrame, { ...props, ref, },);
+  return /* @__PURE__ */ jsx(VisibleFrame, { ...props, ref, },);
 },);
 function resolveParentSize(props, unwrappedProps, rect, inCodeComponent,) {
   if (inCodeComponent) {
@@ -16814,23 +16817,21 @@ function EmptyState(
   },
 ) {
   const { target, } = RenderEnvironment;
-  const childCount = React28.Children.count(children,);
-  if (insideUserCodeComponent && childCount === 0) {
-    return /* @__PURE__ */ jsx11(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
-  }
+  const childCount = React__default.Children.count(children,);
+  if (insideUserCodeComponent && childCount === 0) return /* @__PURE__ */ jsx(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
   if (target !== 'CANVAS') return null;
   if (hide) return null;
   if (childCount !== 0) return null;
-  return /* @__PURE__ */ jsx11(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
     style: { position, ...size2, },
-    children: /* @__PURE__ */ jsx11('div', {
+    children: /* @__PURE__ */ jsx('div', {
       style: { display: 'flex', alignItems: 'center', lineHeight: '1.4', height: '100%', width: '100%', },
-      children: /* @__PURE__ */ jsxs4('div', {
+      children: /* @__PURE__ */ jsxs('div', {
         style: {
           display: 'flex',
           alignItems: 'center',
@@ -16839,14 +16840,14 @@ function EmptyState(
           width: '100%', // Use a mask to fade out the right edge of the content as it gets cropped.
           WebkitMaskImage: `linear-gradient(90deg, black, black calc(100% - 12px * ${scaleFactor}), transparent)`,
         },
-        children: [/* @__PURE__ */ jsx11(Title, { children: title, },), /* @__PURE__ */ jsx11(Description, { children: description, },),],
+        children: [/* @__PURE__ */ jsx(Title, { children: title, },), /* @__PURE__ */ jsx(Description, { children: description, },),],
       },),
     },),
   }, 'empty-state',);
 }
 var scaleFactor = 'var(--framerInternalCanvas-canvasPlaceholderContentScaleFactor, 1)';
 function Title({ children, },) {
-  return /* @__PURE__ */ jsx11('span', {
+  return /* @__PURE__ */ jsx('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -16860,7 +16861,7 @@ function Title({ children, },) {
   },);
 }
 function Description({ children, },) {
-  return /* @__PURE__ */ jsx11('span', {
+  return /* @__PURE__ */ jsx('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -16874,12 +16875,12 @@ function Description({ children, },) {
   },);
 }
 var TREE_ROOT_ID = '__LAYOUT_TREE_ROOT';
-var SharedLayoutContext = /* @__PURE__ */ React29.createContext({
+var SharedLayoutContext = /* @__PURE__ */ React__default.createContext({
   schedulePromoteTree: () => {},
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
 },);
-var SharedLayoutRoot = class extends Component5 {
+var SharedLayoutRoot = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'shouldAnimate', false,);
@@ -16941,12 +16942,12 @@ var SharedLayoutRoot = class extends Component5 {
     }
   }
   render() {
-    return /* @__PURE__ */ jsx12(SharedLayoutContext.Provider, { value: this.sharedLayoutContext, children: this.props.children, },);
+    return /* @__PURE__ */ jsx(SharedLayoutContext.Provider, { value: this.sharedLayoutContext, children: this.props.children, },);
   }
 };
 var rootStyles = { width: '100%', height: '100%', backgroundColor: 'none', };
 function MagicMotionCrossfadeRoot(props,) {
-  return /* @__PURE__ */ jsx13(motion.div, { layoutId: TREE_ROOT_ID, style: rootStyles, children: props.children, },);
+  return /* @__PURE__ */ jsx(motion.div, { layoutId: TREE_ROOT_ID, style: rootStyles, children: props.children, },);
 }
 var _sharedIntersectionObserver;
 var _callbacks2;
@@ -16980,13 +16981,13 @@ var SharedIntersectionObserver = class {
 };
 _sharedIntersectionObserver = /* @__PURE__ */ new WeakMap();
 _callbacks2 = /* @__PURE__ */ new WeakMap();
-var SharedIntersectionObserverContext = /* @__PURE__ */ React30.createContext(/* @__PURE__ */ new Map(),);
+var SharedIntersectionObserverContext = /* @__PURE__ */ React__default.createContext(/* @__PURE__ */ new Map(),);
 function useSharedIntersectionObserver(ref, callback, options,) {
   if (typeof IntersectionObserver === 'undefined') return;
   const key7 = useConstant2(() => `${options.rootMargin}`);
-  const observers2 = React30.useContext(SharedIntersectionObserverContext,);
+  const observers2 = React__default.useContext(SharedIntersectionObserverContext,);
   const { enabled, } = options;
-  React30.useEffect(() => {
+  React__default.useEffect(() => {
     var _a;
     const element = ref.current;
     if (!enabled || !element) return;
@@ -17001,11 +17002,11 @@ function useSharedIntersectionObserver(ref, callback, options,) {
   }, [enabled,],);
 }
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
-var ViewportContext = /* @__PURE__ */ React30.createContext(null,);
+var ViewportContext = /* @__PURE__ */ React__default.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
-  const internalState = React30.useRef({ isInView: false, hasAnimatedOnce: false, },);
+  const internalState = React__default.useRef({ isInView: false, hasAnimatedOnce: false, },);
   const { enabled, animateOnce, threshold, rootMargin = `0px 0px 0px 0px`, } = options;
-  const callback = React30.useCallback(([entry,],) => {
+  const callback = React__default.useCallback(([entry,],) => {
     if (!entry) return;
     const { isInView, hasAnimatedOnce, } = internalState.current;
     const isIntersecting = isIntersectingWithThreshold(entry, (threshold == null ? void 0 : threshold.y) ?? 0,);
@@ -17122,9 +17123,9 @@ var clamp2 = (value, a, b,) => {
   if (value > max) value = max;
   return value;
 };
-var DraggingContext = React31.createContext({ dragging: false, },);
+var DraggingContext = React__default.createContext({ dragging: false, },);
 function WithDragging(Component14,) {
-  const _WithDraggingHOC = class extends React31.Component {
+  const _WithDraggingHOC = class extends React__default.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', { isDragging: false, },);
@@ -17470,9 +17471,9 @@ function WithDragging(Component14,) {
       originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, onMouseWheelEnd,);
       originalProps.left = this.x;
       originalProps.top = this.y;
-      return /* @__PURE__ */ jsx14(DraggingContext.Provider, {
+      return /* @__PURE__ */ jsx(DraggingContext.Provider, {
         value: { dragging: this.state.isDragging, },
-        children: /* @__PURE__ */ jsx14(Component14, { ...originalProps, },),
+        children: /* @__PURE__ */ jsx(Component14, { ...originalProps, },),
       },);
     }
   };
@@ -17519,13 +17520,13 @@ var eventHandlerMapping = {
 var tapEventKeys = /* @__PURE__ */ new Set(['tapstart', 'tap', 'tapend',],);
 function WithEvents(BaseComponent,) {
   var _a;
-  const withEvents = (_a = class extends React322.Component {
+  const withEvents = (_a = class extends React__default.Component {
     constructor() {
       super(...arguments,);
       __publicField(this, 'shouldCancelTap', false,);
       __publicField(this, 'activeEventListeners', /* @__PURE__ */ new Map(),);
       __publicField(this, 'hasFramerEventListener', false,);
-      __publicField(this, 'component', React322.createRef(),);
+      __publicField(this, 'component', React__default.createRef(),);
     }
     get element() {
       return this.component.current && this.component.current.element;
@@ -17590,10 +17591,10 @@ function WithEvents(BaseComponent,) {
       },);
     }
     render() {
-      return /* @__PURE__ */ jsx15(DraggingContext.Consumer, {
+      return /* @__PURE__ */ jsx(DraggingContext.Consumer, {
         children: (value) => {
           this.shouldCancelTap = value.dragging;
-          return /* @__PURE__ */ jsx15(BaseComponent, { ...this.props, ref: this.component, },);
+          return /* @__PURE__ */ jsx(BaseComponent, { ...this.props, ref: this.component, },);
         },
       },);
     }
@@ -17850,7 +17851,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     const filterY = shadowRect.y / height * 100;
     const filterWidth = shadowRect.width / width * 100;
     const filterHeight = shadowRect.height / height * 100;
-    definition.push(/* @__PURE__ */ jsxs5('filter', {
+    definition.push(/* @__PURE__ */ jsxs('filter', {
       id: outsideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -17858,12 +17859,12 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       height: `${filterHeight.toFixed(1,)}%`,
       filterUnits: 'objectBoundingBox',
       ...svgShadowProps,
-      children: [filterElements, shadows.length > 1 ? /* @__PURE__ */ jsx16('feMerge', { children: mergeElements, },) : null,],
+      children: [filterElements, shadows.length > 1 ? /* @__PURE__ */ jsx('feMerge', { children: mergeElements, },) : null,],
     }, outsideShadowId.id,),);
-    outsetElement = /* @__PURE__ */ jsx16('g', {
+    outsetElement = /* @__PURE__ */ jsx('g', {
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
-      children: /* @__PURE__ */ jsx16('use', {
+      children: /* @__PURE__ */ jsx('use', {
         ...svgStrokeAttributes,
         fill: 'black',
         fillOpacity: fillAlpha <= 0 ? 0 : 1,
@@ -17901,7 +17902,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       filterElements.push(shadowElements.filterElements,);
       mergeElements.push(shadowElements.mergeElement,);
     }
-    definition.push(/* @__PURE__ */ jsxs5('filter', {
+    definition.push(/* @__PURE__ */ jsxs('filter', {
       id: insideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -17909,11 +17910,11 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       height: `${filterHeight.toFixed(1,)}%`,
       filterUnits: 'objectBoundingBox',
       ...svgShadowProps,
-      children: [filterElements, insetShadows.length > 1 ? /* @__PURE__ */ jsx16('feMerge', { children: mergeElements, },) : null,],
+      children: [filterElements, insetShadows.length > 1 ? /* @__PURE__ */ jsx('feMerge', { children: mergeElements, },) : null,],
     }, insideShadowId.id,),);
     let clipPath;
     if (needsStrokeClip) clipPath = strokeClipId.urlLink;
-    insetElement = /* @__PURE__ */ jsx16('use', {
+    insetElement = /* @__PURE__ */ jsx('use', {
       fill: 'black',
       fillOpacity: '1',
       filter: insideShadowId.urlLink,
@@ -17929,13 +17930,13 @@ function outerShadowElements(shapeID, shadow, index,) {
   const offsetResultId = shadowKey.add('offset',).id;
   const blurResultId = shadowKey.add('blur',).id;
   const matrixResultId = shadowKey.add('matrix',).id;
-  const filterElements = /* @__PURE__ */ jsx16(OuterShadowFilterElements, {
+  const filterElements = /* @__PURE__ */ jsx(OuterShadowFilterElements, {
     shadow,
     blurId: blurResultId,
     offsetId: offsetResultId,
     matrixId: matrixResultId,
   }, shadowKey.id + '-filters',);
-  const mergeElement = /* @__PURE__ */ jsx16('feMergeNode', { in: matrixResultId, }, shadowKey.id + '-merge',);
+  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', { in: matrixResultId, }, shadowKey.id + '-merge',);
   return { filterElements, mergeElement, };
 }
 var OuterShadowFilterElements = (props) => {
@@ -17946,11 +17947,11 @@ var OuterShadowFilterElements = (props) => {
   const g = roundedNumberString(rgb.g / 255, 3,);
   const b = roundedNumberString(rgb.b / 255, 3,);
   const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
-  return /* @__PURE__ */ jsxs5(Fragment5, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx16('feOffset', { dx: shadow.x, dy: shadow.y, in: 'SourceAlpha', result: offsetId, },),
-      /* @__PURE__ */ jsx16('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: offsetId, result: blurId, },),
-      /* @__PURE__ */ jsx16('feColorMatrix', {
+      /* @__PURE__ */ jsx('feOffset', { dx: shadow.x, dy: shadow.y, in: 'SourceAlpha', result: offsetId, },),
+      /* @__PURE__ */ jsx('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: offsetId, result: blurId, },),
+      /* @__PURE__ */ jsx('feColorMatrix', {
         colorInterpolationFilters: 'sRGB',
         values: matrixValues,
         type: 'matrix',
@@ -17966,12 +17967,12 @@ function innerShadowElements(shapeID, shadow, index,) {
   const offsetId = shadowKey.add('offset',).id;
   const compositeId = shadowKey.add('composite',).id;
   const matrixId = shadowKey.add('matrix',).id;
-  const filterElements = /* @__PURE__ */ jsx16(
+  const filterElements = /* @__PURE__ */ jsx(
     InnerShadowFilterElements,
     { shadow, blurId, offsetId, compositeId, matrixId, },
     shadowKey.id + '-filters',
   );
-  const mergeElement = /* @__PURE__ */ jsx16('feMergeNode', { in: matrixId, }, shadowKey.id + '-merge',);
+  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', { in: matrixId, }, shadowKey.id + '-merge',);
   return { filterElements, mergeElement, };
 }
 var InnerShadowFilterElements = (props) => {
@@ -17982,11 +17983,11 @@ var InnerShadowFilterElements = (props) => {
   const g = rgb.g / 255;
   const b = rgb.b / 255;
   const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
-  return /* @__PURE__ */ jsxs5(Fragment5, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx16('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: 'SourceAlpha', result: blurId, },),
-      /* @__PURE__ */ jsx16('feOffset', { dx: shadow.x, dy: shadow.y, in: blurId, result: offsetId, },),
-      /* @__PURE__ */ jsx16('feComposite', {
+      /* @__PURE__ */ jsx('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: 'SourceAlpha', result: blurId, },),
+      /* @__PURE__ */ jsx('feOffset', { dx: shadow.x, dy: shadow.y, in: blurId, result: offsetId, },),
+      /* @__PURE__ */ jsx('feComposite', {
         in: offsetId,
         in2: 'SourceAlpha',
         operator: 'arithmetic',
@@ -17994,7 +17995,7 @@ var InnerShadowFilterElements = (props) => {
         k3: '1',
         result: compositeId,
       },),
-      /* @__PURE__ */ jsx16('feColorMatrix', {
+      /* @__PURE__ */ jsx('feColorMatrix', {
         colorInterpolationFilters: 'sRGB',
         values: matrixValues,
         type: 'matrix',
@@ -18337,14 +18338,14 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       const style = this.getStyle();
       const rect = this.rect;
       const parentSize = { width: rect.width, height: rect.height, };
-      return /* @__PURE__ */ jsxs6('div', {
+      return /* @__PURE__ */ jsxs('div', {
         id: id3,
         style,
         ref: this.setElement,
         className,
         children: [
-          /* @__PURE__ */ jsx17(ProvideParentSize, { parentSize, children: this.layoutChildren(), },),
-          /* @__PURE__ */ jsx17(Border, { ...this.props, },),
+          /* @__PURE__ */ jsx(ProvideParentSize, { parentSize, children: this.layoutChildren(), },),
+          /* @__PURE__ */ jsx(Border, { ...this.props, },),
         ],
       },);
     }
@@ -18360,13 +18361,14 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         }
         if (!added) _forwardedOverrides = void 0;
       }
-      let children = React33.Children.map(this.props.children, (child) => {
-        if (isConstraintSupportingChild(child,)) return React33.cloneElement(child, { parentSize: this.state.size, _forwardedOverrides, },);
-        else if (_forwardedOverrides && child) return React33.cloneElement(child, { _forwardedOverrides, },);
+      let children = React__default.Children.map(this.props.children, (child) => {
+        if (isConstraintSupportingChild(child,)) {
+          return React__default.cloneElement(child, { parentSize: this.state.size, _forwardedOverrides, },);
+        } else if (_forwardedOverrides && child) return React__default.cloneElement(child, { _forwardedOverrides, },);
         else return child;
       },);
       if (children && children.length === 1 && typeof children[0] === 'string') {
-        children = [/* @__PURE__ */ jsx17(Center, { children, }, '0',),];
+        children = [/* @__PURE__ */ jsx(Center, { children, }, '0',),];
       }
       return children;
     }
@@ -18395,7 +18397,7 @@ function Center(props,) {
     justifyContent: 'center',
     fontFamily: 'Helvetica',
   }, props.style || {},);
-  return /* @__PURE__ */ jsx17('div', { style, children: props.children, },);
+  return /* @__PURE__ */ jsx('div', { style, children: props.children, },);
 }
 var frameWithMotionPropsFields = [
   '_border',
@@ -18453,18 +18455,18 @@ function isDeprecatedFrameProps(props,) {
 }
 var DeprecatedFrameWithEvents = /* @__PURE__ */ WithEvents(DeprecatedFrame,);
 var Frame = /* @__PURE__ */ (() => {
-  const FrameInner = forwardRef22(function FrameInner2(props, ref,) {
+  const FrameInner = forwardRef(function FrameInner2(props, ref,) {
     const parentSize = useParentSize();
     if (isDeprecatedFrameProps(props,)) {
       const currentParentSize = props.parentSize || deprecatedParentSize(parentSize,);
-      return /* @__PURE__ */ jsx18(DeprecatedFrameWithEvents, { ...props, parentSize: currentParentSize, },);
+      return /* @__PURE__ */ jsx(DeprecatedFrameWithEvents, { ...props, parentSize: currentParentSize, },);
     }
-    return /* @__PURE__ */ jsx18(FrameWithMotion, { ...props, ref, },);
+    return /* @__PURE__ */ jsx(FrameWithMotion, { ...props, ref, },);
   },);
   FrameInner['displayName'] = 'Frame';
   return FrameInner;
 })();
-var LayoutTree = class extends Component6 {
+var LayoutTree = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layoutMaybeMutated',);
@@ -18518,19 +18520,19 @@ var LayoutTree = class extends Component6 {
     if (layoutId) this.projectionNodes.delete(layoutId,);
   }
   render() {
-    return /* @__PURE__ */ jsx19(SwitchLayoutGroupContext.Provider, {
+    return /* @__PURE__ */ jsx(SwitchLayoutGroupContext.Provider, {
       value: this.switchLayoutGroupContext,
       children: this.props.children,
     },);
   }
 };
 var SharedLayoutTree = (props) => {
-  const sharedLayoutContext = React34.useContext(SharedLayoutContext,);
-  return /* @__PURE__ */ jsx19(LayoutTree, { ...props, sharedLayoutContext, },);
+  const sharedLayoutContext = React__default.useContext(SharedLayoutContext,);
+  return /* @__PURE__ */ jsx(LayoutTree, { ...props, sharedLayoutContext, },);
 };
-var NavigationContainerContext = React35.createContext(true,);
+var NavigationContainerContext = React__default.createContext(true,);
 function useIsInCurrentNavigationTarget() {
-  const isInCurrentNavigationTarget = useContext62(NavigationContainerContext,);
+  const isInCurrentNavigationTarget = useContext(NavigationContainerContext,);
   return isInCurrentNavigationTarget;
 }
 function newMap() {
@@ -18539,23 +18541,23 @@ function newMap() {
 function useMap() {
   return useConstant2(newMap,);
 }
-var NavigationTargetContext = /* @__PURE__ */ createContext9({ register: () => {}, deregister: () => {}, },);
+var NavigationTargetContext = /* @__PURE__ */ createContext({ register: () => {}, deregister: () => {}, },);
 var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
   const callbacks2 = useMap();
-  const register = useCallback52((fn) => {
+  const register = useCallback((fn) => {
     if (callbacks2.has(fn,)) {
       console.warn('NavigationTargetWrapper: already registered',);
       return;
     }
     callbacks2.set(fn, void 0,);
   }, [callbacks2, /* constant, so should never change */],);
-  const deregister = useCallback52((fn) => {
+  const deregister = useCallback((fn) => {
     const cleanup = callbacks2.get(fn,);
     cleanup == null ? void 0 : cleanup();
     callbacks2.delete(fn,);
   }, [callbacks2, /* constant, so should never change */],);
-  const value = useRef72({ register, deregister, },).current;
-  useEffect62(() => {
+  const value = useRef({ register, deregister, },).current;
+  useEffect(() => {
     callbacks2.forEach((_, cb,) => {
       const newCleanup = cb(isCurrent, isOverlayed,);
       callbacks2.set(cb, isFunction(newCleanup,) ? newCleanup : void 0,);
@@ -18568,17 +18570,17 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
       },);
     };
   }, [isCurrent, isOverlayed, callbacks2, /* constant, so should never change */],);
-  return /* @__PURE__ */ jsx20(NavigationTargetContext.Provider, { value, children, },);
+  return /* @__PURE__ */ jsx(NavigationTargetContext.Provider, { value, children, },);
 };
 function useOnCurrentTargetChange(callback, deps = [],) {
-  const { register, deregister, } = useContext72(NavigationTargetContext,);
-  useEffect62(() => {
+  const { register, deregister, } = useContext(NavigationTargetContext,);
+  useEffect(() => {
     if (!callback) return;
     register(callback,);
     return () => deregister(callback,);
   }, [register, deregister, ...deps,],);
 }
-var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContainer2({
+var NavigationContainer = /* @__PURE__ */ React__default.memo(function NavigationContainer2({
   isLayeredContainer,
   isCurrent,
   isPrevious,
@@ -18603,19 +18605,19 @@ var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContai
   isInitial,
 },) {
   const animate3 = useAnimation();
-  const presence = useContext82(PresenceContext,);
-  const { persistLayoutIdCache, } = useContext82(LayoutIdContext,);
-  const previousState = useRef82({
+  const presence = useContext(PresenceContext,);
+  const { persistLayoutIdCache, } = useContext(LayoutIdContext,);
+  const previousState = useRef({
     wasCurrent: void 0,
     wasPrevious: false,
     wasBeingRemoved: false,
     wasReset: true,
     origins: getOriginProps({}, initialProps, transitionProps,),
   },);
-  const viewportRef = useRef82(null,);
+  const viewportRef = useRef(null,);
   const isBeingRemoved = presence !== null && !presence.isPresent;
   if (isCurrent && previousState.current.wasCurrent === void 0) persistLayoutIdCache();
-  useEffect72(() => {
+  useEffect(() => {
     if (isLayeredContainer || !animate3) return;
     if (isBeingRemoved) {
       previousState.current = { ...previousState.current, wasBeingRemoved: isBeingRemoved, };
@@ -18657,7 +18659,7 @@ var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContai
   const isPresent2 = isBeingRemoved || areMagicMotionLayersPresent === false ? false : true;
   const isCurrentTarget = !!isCurrent && isPresent2;
   const forceOpacity = isCurrent && isInitial;
-  return /* @__PURE__ */ jsxs7(FrameWithMotion, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion, {
     'data-framer-component-type': 'NavigationContainerWrapper',
     width: '100%',
     height: '100%',
@@ -18674,7 +18676,7 @@ var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContai
       perspective,
     },
     children: [
-      isLayeredContainer && /* @__PURE__ */ jsx21(FrameWithMotion, {
+      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion, {
         width: '100%',
         height: '100%',
         'data-framer-component-type': 'NavigationContainerBackdrop',
@@ -18685,7 +18687,7 @@ var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContai
         backgroundColor: backdropColor ? backdropColor : 'transparent',
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
-      /* @__PURE__ */ jsx21(FrameWithMotion, {
+      /* @__PURE__ */ jsx(FrameWithMotion, {
         ...layout2,
         ...animations2,
         transition: { default: transition, originX: { type: false, }, originY: { type: false, }, originZ: { type: false, }, },
@@ -18700,14 +18702,14 @@ var NavigationContainer = /* @__PURE__ */ React36.memo(function NavigationContai
         },
         'data-is-present': isPresent2 ? void 0 : false,
         ref: viewportRef,
-        children: /* @__PURE__ */ jsx21(ViewportContext.Provider, {
+        children: /* @__PURE__ */ jsx(ViewportContext.Provider, {
           value: viewportRef,
-          children: /* @__PURE__ */ jsx21(NavigationContainerContext.Provider, {
+          children: /* @__PURE__ */ jsx(NavigationContainerContext.Provider, {
             value: isCurrentTarget,
-            children: /* @__PURE__ */ jsx21(NavigationTargetWrapper, {
+            children: /* @__PURE__ */ jsx(NavigationTargetWrapper, {
               isCurrent: isCurrentTarget,
               isOverlayed,
-              children: /* @__PURE__ */ jsx21(SharedLayoutTree, {
+              children: /* @__PURE__ */ jsx(SharedLayoutTree, {
                 isLead: isCurrent,
                 animatesLayout: !!withMagicMotion,
                 transition,
@@ -18793,7 +18795,7 @@ var NavigatorMock = class {
   }
 };
 var navigatorMock = new NavigatorMock();
-var NavigationContext = createContext22(navigatorMock,);
+var NavigationContext = createContext(navigatorMock,);
 var TransitionDefaults = {
   Fade: { exit: { opacity: 0, }, enter: { opacity: 0, }, },
   PushLeft: { exit: { x: '-30%', }, enter: { x: '100%', }, },
@@ -19118,10 +19120,10 @@ function sequence(direction, transition, animation,) {
   return { ...value, transition: { ...from, }, };
 }
 var NavigationConsumer = NavigationContext.Consumer;
-var NavigationCallbackContext = React37.createContext(void 0,);
+var NavigationCallbackContext = React__default.createContext(void 0,);
 var NavigationCallbackProvider = NavigationCallbackContext.Provider;
-var IsInitialNavigationContext = React37.createContext(void 0,);
-var Navigation = class extends Component7 {
+var IsInitialNavigationContext = React__default.createContext(void 0,);
+var Navigation = class extends Component {
   constructor(props,) {
     var _a;
     super(props,);
@@ -19252,7 +19254,7 @@ var Navigation = class extends Component7 {
       const areMagicMotionLayersPresent = isCurrent ? false : removed;
       const withMagicMotion = ((_a = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a.withMagicMotion) ||
         isCurrent && !!this.state.previousTransition;
-      contentContainers.push(/* @__PURE__ */ jsx22(NavigationContainer, {
+      contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
         id: key7,
         index: visualIndex,
         isInitial,
@@ -19270,13 +19272,13 @@ var Navigation = class extends Component7 {
         exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
         withMagicMotion,
         areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
-        children: /* @__PURE__ */ jsx22(MagicMotionCrossfadeRoot, {
+        children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
           children: containerContent({ component, transition: historyItem == null ? void 0 : historyItem.transition, },),
         },),
       }, key7,),);
     }
     const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
-      return /* @__PURE__ */ jsx22(NavigationContainer, {
+      return /* @__PURE__ */ jsx(NavigationContainer, {
         isLayeredContainer: true,
         isCurrent: stackIndex === this.state.currentOverlay,
         position: item.transition.position,
@@ -19293,7 +19295,7 @@ var Navigation = class extends Component7 {
         children: containerContent({ component: item.component, transition: item.transition, },),
       }, item.key,);
     },);
-    return /* @__PURE__ */ jsx22(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       'data-framer-component-type': 'NavigationRoot',
       top: 0,
       left: 0,
@@ -19301,12 +19303,12 @@ var Navigation = class extends Component7 {
       height: '100%',
       position: 'relative',
       style: { overflow: 'hidden', backgroundColor: 'unset', pointerEvents: void 0, ...this.props.style, },
-      children: /* @__PURE__ */ jsx22(NavigationContext.Provider, {
+      children: /* @__PURE__ */ jsx(NavigationContext.Provider, {
         value: this,
-        children: /* @__PURE__ */ jsxs8(IsInitialNavigationContext.Provider, {
+        children: /* @__PURE__ */ jsxs(IsInitialNavigationContext.Provider, {
           value: isInitial,
           children: [
-            /* @__PURE__ */ jsx22(NavigationContainer, {
+            /* @__PURE__ */ jsx(NavigationContainer, {
               isLayeredContainer: true,
               position: void 0,
               initialProps: {},
@@ -19318,13 +19320,13 @@ var Navigation = class extends Component7 {
               backdropColor: void 0,
               onTapBackdrop: void 0,
               index: 0,
-              children: /* @__PURE__ */ jsx22(LayoutIdProvider, {
-                children: /* @__PURE__ */ jsx22(SharedLayoutRoot, {
-                  children: /* @__PURE__ */ jsx22(AnimatePresence, { presenceAffectsLayout: false, children: contentContainers, },),
+              children: /* @__PURE__ */ jsx(LayoutIdProvider, {
+                children: /* @__PURE__ */ jsx(SharedLayoutRoot, {
+                  children: /* @__PURE__ */ jsx(AnimatePresence, { presenceAffectsLayout: false, children: contentContainers, },),
                 },),
               },),
             },),
-            /* @__PURE__ */ jsx22(AnimatePresence, { children: overlayContainers, },),
+            /* @__PURE__ */ jsx(AnimatePresence, { children: overlayContainers, },),
           ],
         },),
       },),
@@ -19426,7 +19428,7 @@ function containerIsVisible(containerIndex, stackState,) {
   return false;
 }
 function containerContent(item,) {
-  const content = React37.Children.map(item.component, (child) => {
+  const content = React__default.Children.map(item.component, (child) => {
     var _a;
     if (!isReactChild(child,) || !isReactElement(child,) || !child.props) return child;
     const props = { style: child.props.style ?? {}, };
@@ -19444,7 +19446,7 @@ function containerContent(item,) {
       if (canStretchHeight) props.height = '100%';
       if (canStretchStyle) props.style.height = '100%';
     }
-    return React37.cloneElement(child, props,);
+    return React__default.cloneElement(child, props,);
   },);
   return content;
 }
@@ -19452,7 +19454,7 @@ function backdropTapAction(transition, goBackAction,) {
   if (transition.goBackOnTapOutside !== false) return goBackAction;
 }
 function NavigationStyleSheet() {
-  React37.useInsertionEffect(() => {
+  React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -19460,11 +19462,11 @@ function NavigationStyleSheet() {
 function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  return /* @__PURE__ */ jsxs8(Navigation, {
+  return /* @__PURE__ */ jsxs(Navigation, {
     ...props,
     resetProjection,
     skipLayoutAnimation,
-    children: [props.children, /* @__PURE__ */ jsx22(NavigationStyleSheet, {},),],
+    children: [props.children, /* @__PURE__ */ jsx(NavigationStyleSheet, {},),],
   },);
 }
 var import_hoist_non_react_statics3 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
@@ -19483,9 +19485,9 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
   return NavigationTransitionType2;
 })(NavigationTransitionType || {},);
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = class extends React38.Component {
+  const InternalWithNavigator = class extends React__default.Component {
     render() {
-      return /* @__PURE__ */ jsx23(NavigationContext.Consumer, {
+      return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
         children: (navigation) => {
           const navigate = () => {
             if (navigationTransition === 'goBack') {
@@ -19526,7 +19528,7 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
               navigate.apply(this, args,);
             };
           } else props.onTap = navigate;
-          return /* @__PURE__ */ jsx23(BaseComponent, { ...props, },);
+          return /* @__PURE__ */ jsx(BaseComponent, { ...props, },);
         },
       },);
     }
@@ -19562,8 +19564,8 @@ function debounce(fn, time22,) {
   return debounced;
 }
 function useWheelScroll(ref, { enabled, initial, prev, direction, constraints, offsetX, offsetY, onScrollStart, onScroll, onScrollEnd, },) {
-  const isWheelScrollActive = useRef92(false,);
-  const getPointData = useCallback6(() => {
+  const isWheelScrollActive = useRef(false,);
+  const getPointData = useCallback(() => {
     const point2 = getPoint(offsetX, offsetY,);
     const data2 = {
       point: point2,
@@ -19657,11 +19659,11 @@ function triggerStackReflow(element, display,) {
 var requiresPolyfill = Boolean(isSafari() && safariVersion() < 15.4,);
 function useSafariGapFix(gap, ref, display,) {
   if (!requiresPolyfill) return void 0;
-  const isInitialRender = React39.useRef(true,);
-  const hasTriggeredReflow = React39.useRef(false,);
-  const prevGapValue = React39.useRef(gap,);
+  const isInitialRender = React__default.useRef(true,);
+  const hasTriggeredReflow = React__default.useRef(false,);
+  const prevGapValue = React__default.useRef(gap,);
   hasTriggeredReflow.current = false;
-  React39.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     prevGapValue.current = gap;
     if (isInitialRender.current) {
       isInitialRender.current = false;
@@ -19672,14 +19674,14 @@ function useSafariGapFix(gap, ref, display,) {
       hasTriggeredReflow.current = true;
     }
   }, [gap, ref, prevGapValue, display,],);
-  return React39.useCallback(() => {
+  return React__default.useCallback(() => {
     if (prevGapValue.current === gap) return;
     if (!hasTriggeredReflow.current) triggerStackReflow(ref.current, display,);
     hasTriggeredReflow.current = true;
   }, [gap, ref,],);
 }
 var Stack = /* @__PURE__ */ (() => {
-  const StackInner = React40.forwardRef(function StackInner2(stackProps, forwardedRef,) {
+  const StackInner = React__default.forwardRef(function StackInner2(stackProps, forwardedRef,) {
     const {
       as = 'div',
       direction = 'vertical',
@@ -19698,7 +19700,7 @@ var Stack = /* @__PURE__ */ (() => {
       ...containerProps
     } = stackProps;
     const useFlexboxGap = Boolean(externalUseFlexboxGap || wrap2,);
-    const stackRef = React40.useRef(null,);
+    const stackRef = React__default.useRef(null,);
     const onBeforeLayoutMeasure = useSafariGapFix(gap, stackRef, 'flex',);
     const flexDirection = toFlexDirection(direction,);
     const isReverse = isReverseDirection(flexDirection,);
@@ -19746,7 +19748,7 @@ var Stack = /* @__PURE__ */ (() => {
       if (styleProp == null ? void 0 : styleProp.width) contentWrapperStyle.width = styleProp == null ? void 0 : styleProp.width;
       if (styleProp == null ? void 0 : styleProp.height) contentWrapperStyle.height = styleProp == null ? void 0 : styleProp.height;
     }
-    return /* @__PURE__ */ jsx24(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       as,
       background: fromCanvasComponent ? void 0 : 'none',
       ...props,
@@ -19756,7 +19758,7 @@ var Stack = /* @__PURE__ */ (() => {
       style,
       className,
       layoutScroll: true,
-      children: /* @__PURE__ */ jsx24(motion.div, {
+      children: /* @__PURE__ */ jsx(motion.div, {
         'data-framer-stack-content-wrapper': true,
         'data-framer-stack-direction-reverse': isReverse,
         'data-framer-stack-gap-enabled': gapEnabled,
@@ -19808,7 +19810,7 @@ function fraction(dimension,) {
   return isFiniteNumber(value,) ? value : 0;
 }
 function handleFraction(children, direction, widthType, heightType,) {
-  return React40.Children.map(children, (child) => {
+  return React__default.Children.map(children, (child) => {
     if (!isReactChild(child,) || !isReactElement(child,)) return;
     const isVertical = direction === 'vertical';
     const style = {};
@@ -19850,7 +19852,7 @@ function handleFraction(children, direction, widthType, heightType,) {
     }
     if (!hasFraction) return child;
     const nextStyle = { ...propsStyle, ...style, };
-    return React40.cloneElement(child, { width: newWidth, height: newHeight, style: nextStyle, },);
+    return React__default.cloneElement(child, { width: newWidth, height: newHeight, style: nextStyle, },);
   },);
 }
 function isGapSupportedInMainAxis(justifyContent,) {
@@ -19874,7 +19876,7 @@ function wrapInGapElementForLegacyGap(children, gap, direction, justifyContent, 
     asRecord(gapStyle,)['--stack-gap-x'] = `${isVertical ? 0 : gap}px`;
     asRecord(gapStyle,)['--stack-gap-y'] = `${isVertical ? gap : 0}px`;
   }
-  return /* @__PURE__ */ jsx24('div', {
+  return /* @__PURE__ */ jsx('div', {
     'data-framer-legacy-stack-gap-enabled': gapEnabled,
     'data-framer-stack-flexbox-gap': useFlexboxGap,
     style: gapStyle,
@@ -19951,7 +19953,7 @@ function PageContainer(
   const wrapperHeight = hasAutoHeight ? 'auto' : '100%';
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
-  return /* @__PURE__ */ jsx25(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
     width: containerWidth,
@@ -19968,7 +19970,7 @@ function PageContainer(
     onDragEnd,
     preserve3d: true,
     style: { pointerEvents: void 0, paddingRight: hasHorizontalGap ? gap : 0, paddingBottom: hasVerticalGap ? gap : 0, },
-    children: /* @__PURE__ */ jsx25(FrameWithMotion, {
+    children: /* @__PURE__ */ jsx(FrameWithMotion, {
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
       width: wrapperWidth,
@@ -19986,7 +19988,7 @@ function PageContainer(
     }, effect ? Object.keys(effect,).join('',) : '',),
   },);
 }
-var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef,) {
+var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwardedRef,) {
   var _a;
   const {
     direction = 'horizontal',
@@ -20023,7 +20025,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
   } = props;
   const layoutId = useLayoutId2(props, { specificLayoutId, postfix: 'page', },);
   const containerProps = { ...rest, background, };
-  const hasMountedRef = React41.useRef(false,);
+  const hasMountedRef = React__default.useRef(false,);
   const hasFixedSize = RenderTarget.hasRestrictions() && props.__fromCodeComponentNode && isFiniteNumber(containerProps.width,) &&
     isFiniteNumber(containerProps.height,);
   if (!hasFixedSize && __fromCodeComponentNode && !containerProps.__fromCanvasComponent) {
@@ -20031,46 +20033,46 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     containerProps.height = '100%';
     containerProps._constraints = { enabled: true, };
   }
-  const { initial, prev, } = React41.useRef({ initial: { x: 0, y: 0, }, prev: { x: 0, y: 0, }, },).current;
+  const { initial, prev, } = React__default.useRef({ initial: { x: 0, y: 0, }, prev: { x: 0, y: 0, }, },).current;
   const isHorizontal = direction === 'horizontal';
   let gap = gapValue;
   if (gap < 0) {
     warnOnce2(`The 'gap' property of Page component can not be negative, but is ${gapValue}.`,);
     gap = 0;
   }
-  React41.useInsertionEffect(() => {
+  React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const pageCount = React41.Children.count(children,);
-  const maxOffsetRef = React41.useRef(0,);
-  const constraints = React41.useRef({ top: 0, left: 0, right: 0, bottom: 0, },);
-  const fallbackContainerRef = React41.useRef(null,);
+  const pageCount = React__default.Children.count(children,);
+  const maxOffsetRef = React__default.useRef(0,);
+  const constraints = React__default.useRef({ top: 0, left: 0, right: 0, bottom: 0, },);
+  const fallbackContainerRef = React__default.useRef(null,);
   const containerRef = forwardedRef || fallbackContainerRef;
-  const scrollableRef = React41.useRef(null,);
-  const pageEffectValuesRef = React41.useRef([],);
-  const pageRectsRef = React41.useRef([],);
+  const scrollableRef = React__default.useRef(null,);
+  const pageEffectValuesRef = React__default.useRef([],);
+  const pageRectsRef = React__default.useRef([],);
   const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX ?? 0,);
   const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY ?? 0,);
-  const contentOffsetRef = React41.useRef({
+  const contentOffsetRef = React__default.useRef({
     x: isMotionValue2(contentOffsetX,) ? contentOffsetX : internalX,
     y: isMotionValue2(contentOffsetY,) ? contentOffsetY : internalY,
   },);
-  const currentContentPageRef = React41.useRef(currentPage,);
-  const propsBoundedCurrentPageRef = React41.useRef(currentPage,);
-  const latestPropsRef = React41.useRef(props,);
+  const currentContentPageRef = React__default.useRef(currentPage,);
+  const propsBoundedCurrentPageRef = React__default.useRef(currentPage,);
+  const latestPropsRef = React__default.useRef(props,);
   latestPropsRef.current = props;
-  const lastDirectionRef = React41.useRef(props.direction,);
+  const lastDirectionRef = React__default.useRef(props.direction,);
   const snapToPage = useSnapToPage(currentContentPageRef, contentOffsetRef, isHorizontal,);
-  const [_, setForceUpdateCount,] = React41.useState(0,);
-  const containerSizeRef = React41.useRef({ width: 200, height: 200, },);
+  const [_, setForceUpdateCount,] = React__default.useState(0,);
+  const containerSizeRef = React__default.useRef({ width: 200, height: 200, },);
   if (hasFixedSize && isFiniteNumber(containerProps.width,) && isFiniteNumber(containerProps.height,)) {
     containerSizeRef.current.width = containerProps.width;
     containerSizeRef.current.height = containerProps.height;
   }
-  const updateOnResize = React41.useCallback(() => {
+  const updateOnResize = React__default.useCallback(() => {
     if (!hasFixedSize) setForceUpdateCount((v) => v + 1);
   }, [hasFixedSize,],);
-  React41.useEffect(() => {
+  React__default.useEffect(() => {
     if (RenderTarget.current() !== 'PREVIEW') return;
     globalThis.addEventListener('resize', updateOnResize,);
     return () => {
@@ -20134,7 +20136,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
       updateAndSnapToPage(currentContentPageRef.current, true,);
     },);
   }, [],);
-  React41.useEffect(() => {
+  React__default.useEffect(() => {
     if (currentPage !== currentContentPageRef.current) updateAndSnapToPage(currentPage,);
   }, [currentPage,],);
   const handleMeasureLifecycle = () => {
@@ -20202,7 +20204,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     animate(handler, offset, { type: 'spring', velocity, stiffness: 500, damping: 50, onComplete: onDragTransitionEnd, },);
   };
   pageEffectValuesRef.current = [];
-  const childComponents = React41.Children.map(children, (child, index,) => {
+  const childComponents = React__default.Children.map(children, (child, index,) => {
     if (!isReactChild(child,) || !isReactElement(child,)) return child;
     const update = { right: void 0, bottom: void 0, top: void 0, left: void 0, _constraints: { enabled: false, }, };
     if (containerProps.__fromCanvasComponent) {
@@ -20220,7 +20222,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
       for (const key7 in values) effectDictionary[key7] = motionValue(values[key7],);
     }
     pageEffectValuesRef.current.push(effectDictionary,);
-    return /* @__PURE__ */ jsx26(PageContainer, {
+    return /* @__PURE__ */ jsx(PageContainer, {
       effect: effectDictionary,
       dragEnabled,
       direction,
@@ -20236,7 +20238,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
       onDrag: onDragHandler,
       onDragEnd: onDragEndHandler,
       layoutId: layoutId ? `${layoutId}-${index}` : void 0,
-      children: React41.cloneElement(child, update,),
+      children: React__default.cloneElement(child, update,),
     }, index,);
   },);
   useWheelScroll(scrollableRef, {
@@ -20251,7 +20253,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     onScroll,
     onScrollEnd,
   },);
-  return /* @__PURE__ */ jsx26(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
     perspective: hasEffect(props,) ? 1200 : void 0,
@@ -20260,7 +20262,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
     layoutId,
     ref: containerRef,
     onLayoutMeasure: handleMeasureLifecycle,
-    children: /* @__PURE__ */ jsxs9(FrameWithMotion, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
       'data-framer-component-type': 'Page',
       ref: scrollableRef,
       background: null,
@@ -20278,7 +20280,7 @@ var Page = /* @__PURE__ */ React41.forwardRef(function Page2(props, forwardedRef
         pointerEvents: (_a = props.style) == null ? void 0 : _a.pointerEvents,
       },
       children: [
-        /* @__PURE__ */ jsx26(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
           children,
@@ -20901,7 +20903,7 @@ var FramerEventSession = class {
     return subtract(event.devicePoint, this.startEvent.devicePoint,);
   }
 };
-var MouseEventListener = class extends Component8 {
+var MouseEventListener = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domMouseDown', (originalEvent) => {
@@ -20953,7 +20955,7 @@ var MouseEventListener = class extends Component8 {
     safeWindow.removeEventListener('wheel', this.domMouseWheel,);
   }
 };
-var TouchEventListener = class extends Component9 {
+var TouchEventListener = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domTouchStart', (originalEvent) => {
@@ -21000,8 +21002,8 @@ function convertScrollDirectionToDrag(scrollDirection,) {
   return scrollDirection ? directionMap[scrollDirection] : scrollDirection;
 }
 var useUpdateChildSize = ({ dragDirection, children, fromCanvasComponent, },) => {
-  return useMemo32(() => {
-    return React43.Children.map(children, (child) => {
+  return useMemo(() => {
+    return React__default.Children.map(children, (child) => {
       if (child === null || typeof child !== 'object' || typeof child.type === 'string') return child;
       const updatedSize = {};
       switch (dragDirection) {
@@ -21015,14 +21017,14 @@ var useUpdateChildSize = ({ dragDirection, children, fromCanvasComponent, },) =>
           return child;
       }
       const update = fromCanvasComponent ? { style: Object.assign({}, child.props.style, updatedSize,), } : updatedSize;
-      return React43.cloneElement(child, update,);
+      return React__default.cloneElement(child, update,);
     },);
   }, [dragDirection, children,],);
 };
 var numberFromOptionalMotionValue = (value) => {
   return typeof value === 'number' ? value : value.get();
 };
-var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
+var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     directionLock = false,
@@ -21057,11 +21059,11 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
   const defaultY = useMotionValue(typeof contentOffsetY === 'number' ? contentOffsetY : 0,);
   const x = isMotionValue2(contentOffsetX,) ? contentOffsetX : defaultX;
   const y = isMotionValue2(contentOffsetY,) ? contentOffsetY : defaultY;
-  const measuredConstraints = useRef102(null,);
+  const measuredConstraints = useRef(null,);
   const dragControls = useDragControls();
   const isInTarget = useIsInCurrentNavigationTarget();
-  const wasInTargetRef = useRef102(true,);
-  useInsertionEffect5(() => {
+  const wasInTargetRef = useRef(true,);
+  useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   function setMeasureDragConstraints(constraints,) {
@@ -21070,12 +21072,12 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
     if (contentHeight !== void 0) constraints.top = -contentHeight;
     return measuredConstraints.current = constraints;
   }
-  const { initial, prev, } = useRef102({ initial: { x: 0, y: 0, }, prev: { x: 0, y: 0, }, },).current;
+  const { initial, prev, } = useRef({ initial: { x: 0, y: 0, }, prev: { x: 0, y: 0, }, },).current;
   const isPreview = RenderTarget.current() === 'PREVIEW';
-  const containerFallbackRef = useRef102(null,);
+  const containerFallbackRef = useRef(null,);
   const containerRef = forwardedRef || containerFallbackRef;
-  const contentRef = useRef102(null,);
-  const lastOffsetRef = useRef102(null,);
+  const contentRef = useRef(null,);
+  const lastOffsetRef = useRef(null,);
   function shouldResetScroll(inTarget,) {
     const hasEnteredTarget = inTarget && wasInTargetRef.current === false;
     return resetOffset && hasEnteredTarget;
@@ -21120,19 +21122,19 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
     if (RenderTarget.current() === 'CANVAS') return;
     measureAndUpdateScrollOffset();
   }, [],);
-  React43.useEffect(() => {
+  React__default.useEffect(() => {
     if (shouldResetScroll(isInTarget,)) measureAndUpdateScrollOffset();
     if (isInTarget === false) wasInTargetRef.current = false;
   }, [isInTarget,],);
   const getLatestPoint = () => ({ x: x.get(), y: y.get(), });
-  const resetInitialPoint = useCallback7(() => {
+  const resetInitialPoint = useCallback(() => {
     const point2 = getLatestPoint();
     initial.x = point2.x;
     initial.y = point2.y;
     prev.x = point2.x;
     prev.y = point2.y;
   }, [],);
-  const getPointData = useCallback7(() => {
+  const getPointData = useCallback(() => {
     const point2 = getLatestPoint();
     const data2 = {
       point: point2,
@@ -21144,11 +21146,11 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
     prev.y = point2.y;
     return data2;
   }, [x, y,],);
-  const updateScrollListeners = useCallback7(() => {
+  const updateScrollListeners = useCallback(() => {
     onUpdate && onUpdate({ x: x.get(), y: y.get(), },);
     onScroll && onScroll(getPointData(),);
   }, [onScroll, onUpdate, getPointData, x, y,],);
-  const scheduleUpdateScrollListeners = useCallback7(() => {
+  const scheduleUpdateScrollListeners = useCallback(() => {
     frame.update(updateScrollListeners, false, true,);
   }, [updateScrollListeners,],);
   const onMotionDragStart = (event, info,) => {
@@ -21210,7 +21212,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
     if (currentY !== 0) setScrollY(currentY,);
     return y.on('change', setScrollY,);
   }, [y, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
-  const nativeOnScroll = React43.useCallback(() => {
+  const nativeOnScroll = React__default.useCallback(() => {
     const element = containerRef.current;
     if (!(element instanceof HTMLDivElement)) return;
     const xDelta = Math.abs(x.get() + element.scrollLeft,);
@@ -21218,7 +21220,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
     if (xDelta > 1) x.set(-element.scrollLeft,);
     if (yDelta > 1) y.set(-element.scrollTop,);
   }, [x, y,],);
-  const isEmpty2 = React43.Children.count(children,) === 0;
+  const isEmpty2 = React__default.Children.count(children,) === 0;
   const width = direction !== 'vertical' && !isEmpty2 ? 'auto' : '100%';
   const height = direction !== 'horizontal' && !isEmpty2 ? 'auto' : '100%';
   const size2 = !containerProps.__fromCanvasComponent
@@ -21227,7 +21229,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsx28(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     'data-framer-component-type': 'Scroll',
     background: 'none',
     ...containerProps,
@@ -21243,7 +21245,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
     layoutId,
     layoutScroll: true,
     onBeforeLayoutMeasure: measureAndUpdateScrollOffset,
-    children: /* @__PURE__ */ jsxs10(FrameWithMotion, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
       'data-framer-component-type': 'ScrollContentWrapper',
       animate: scrollAnimate,
       drag: dragEnabled && convertScrollDirectionToDrag(direction,),
@@ -21277,7 +21279,7 @@ var EmulatedScroll = /* @__PURE__ */ React43.forwardRef(function EmulatedScroll2
       },
       preserve3d: containerProps.preserve3d,
       children: [
-        /* @__PURE__ */ jsx28(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           children,
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -21414,8 +21416,8 @@ Object.freeze(emptyObject,);
 function useEmulateTouchScroll(ref, direction, enabled,) {
   if (isTouchDevice) return emptyObject;
   if (RenderTarget.current() !== 'PREVIEW') return emptyObject;
-  const scrollAnimationControlsRef = React44.useRef(null,);
-  useEffect82(() => {
+  const scrollAnimationControlsRef = React__default.useRef(null,);
+  useEffect(() => {
     if (!ref.current) return;
     const element = ref.current;
     let phase = 0;
@@ -21537,7 +21539,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
       (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
     };
   }, [ref, direction, enabled,],);
-  return React44.useMemo(() => {
+  return React__default.useMemo(() => {
     return {
       cancelEmulatedTouchScrollAnimation: () => {
         var _a;
@@ -21585,7 +21587,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
     [offset,],
   );
 }
-var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(props, forwardedRef,) {
+var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     scrollBarVisible = false,
@@ -21617,14 +21619,14 @@ var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(pro
     ...containerProps
   } = props;
   const layoutId = useLayoutId2(props, { specificLayoutId, postfix: 'scroll', },);
-  const fallbackRef = React45.useRef(null,);
+  const fallbackRef = React__default.useRef(null,);
   const ref = forwardedRef || fallbackRef;
   const { cancelEmulatedTouchScrollAnimation, } = useEmulateTouchScroll(ref, direction, dragEnabled,);
-  useInsertionEffect22(() => {
+  useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   const isInTarget = useIsInCurrentNavigationTarget();
-  const previousIsInTargetRef = React45.useRef(isInTarget,);
+  const previousIsInTargetRef = React__default.useRef(isInTarget,);
   const updateScrollOffsetHandler = () => {
     if (!resetOffset) return;
     const previousIsTarget = previousIsInTargetRef.current;
@@ -21651,7 +21653,7 @@ var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(pro
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsxs11(FrameWithMotion, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion, {
     ref,
     'data-framer-component-type': 'NativeScroll',
     background: 'none',
@@ -21663,7 +21665,7 @@ var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(pro
     layoutScroll: true,
     className: cx(className, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
-      /* @__PURE__ */ jsx29(EmptyState, {
+      /* @__PURE__ */ jsx(EmptyState, {
         children,
         size: {
           width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -21678,9 +21680,9 @@ var NativeScroll = /* @__PURE__ */ React45.forwardRef(function NativeScroll2(pro
   },);
 },);
 var Scroll = /* @__PURE__ */ (() => {
-  const ScrollInner = React46.forwardRef(function ScrollInner2(props, forwardedRef,) {
-    if (props.native) return /* @__PURE__ */ jsx30(NativeScroll, { ref: forwardedRef, ...props, },);
-    else return /* @__PURE__ */ jsx30(EmulatedScroll, { ref: forwardedRef, ...props, },);
+  const ScrollInner = React__default.forwardRef(function ScrollInner2(props, forwardedRef,) {
+    if (props.native) return /* @__PURE__ */ jsx(NativeScroll, { ref: forwardedRef, ...props, },);
+    else return /* @__PURE__ */ jsx(EmulatedScroll, { ref: forwardedRef, ...props, },);
   },);
   ScrollInner.defaultProps = { directionLock: false, };
   addPropertyControls(ScrollInner, {
@@ -21743,7 +21745,7 @@ var Scroll = /* @__PURE__ */ (() => {
   return ScrollInner;
 })();
 function useNavigation() {
-  return useContext92(NavigationContext,);
+  return useContext(NavigationContext,);
 }
 var data = /* @__PURE__ */ (() => {
   function Data2(initial = {},) {
@@ -21807,19 +21809,19 @@ function createStore(initialState2, unboundActions,) {
   };
 }
 var defaultId = /* @__PURE__ */ Symbol('default',);
-var DataContext = /* @__PURE__ */ createContext32(defaultId,);
+var DataContext = /* @__PURE__ */ createContext(defaultId,);
 function createData(defaultState2, actions,) {
   const stores = /* @__PURE__ */ new Map();
   const useData = (id3, initialState2,) => {
-    const contextId = useContext102(DataContext,);
+    const contextId = useContext(DataContext,);
     id3 = id3 || contextId;
-    const store = useMemo42(() => {
+    const store = useMemo(() => {
       if (!stores.has(id3,)) stores.set(id3, createStore(initialState2 || defaultState2, actions,),);
       return stores.get(id3,);
     }, [id3,],);
-    const [, notifyUpdates,] = useState8(store.getVersion(),);
-    const storeValueAtHookCallTime = useMemo42(() => store.get(), [store,],);
-    useEffect92(() => {
+    const [, notifyUpdates,] = useState(store.getVersion(),);
+    const storeValueAtHookCallTime = useMemo(() => store.get(), [store,],);
+    useEffect(() => {
       const unsubscribe = store.subscribe(notifyUpdates,);
       if (storeValueAtHookCallTime !== store.get()) notifyUpdates(store.getVersion(),);
       return unsubscribe;
@@ -21829,12 +21831,12 @@ function createData(defaultState2, actions,) {
   return useData;
 }
 var initialState = { update: 0, };
-var DataObserverContext = /* @__PURE__ */ React47.createContext({ update: NaN, },);
+var DataObserverContext = /* @__PURE__ */ React__default.createContext({ update: NaN, },);
 function useObserveData() {
-  const context = React47.useContext(DataObserverContext,);
+  const context = React__default.useContext(DataObserverContext,);
   return !isNaN(context.update,);
 }
-var DataObserver = class extends Component11 {
+var DataObserver = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'observers', [],);
@@ -21862,7 +21864,7 @@ var DataObserver = class extends Component11 {
       const observer2 = Data.addObserver(d, this.observer,);
       this.observers.push(observer2,);
     },);
-    return /* @__PURE__ */ jsx31(DataObserverContext.Provider, { value: { ...this.state, }, children, },);
+    return /* @__PURE__ */ jsx(DataObserverContext.Provider, { value: { ...this.state, }, children, },);
   }
 };
 var import_hoist_non_react_statics4 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
@@ -21885,10 +21887,10 @@ function convertColorProps(props,) {
 function WithOverride(Component14, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
-    useContext112(DataObserverContext,);
+    useContext(DataObserverContext,);
     const overrideProps = useOverride(props,);
     const { style, ...rest } = props;
-    return /* @__PURE__ */ jsx32(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
+    return /* @__PURE__ */ jsx(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
   };
   (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component14,);
   ComponentWithOverride['displayName'] = `WithOverride(${Component14.displayName || Component14.name})`;
@@ -21956,7 +21958,7 @@ function isFXValuesKey(key7,) {
 }
 function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({ values: makeFXValues(enabled ? values : void 0,), }));
-  React48.useEffect(() => {
+  React__default.useEffect(() => {
     if (enabled) return;
     for (const key7 of effectValuesKeys) {
       const value = defaultFXValues[key7];
@@ -21968,8 +21970,8 @@ function useFXValues(values, enabled,) {
 }
 var loopOptionsKeys = /* @__PURE__ */ new Set(['loopEffectEnabled', 'loopTransition', 'loop', 'loopRepeatType', 'loopRepeatDelay',],);
 var useDelay = () => {
-  const timeoutRef = useRef112();
-  useEffect102(() => {
+  const timeoutRef = useRef();
+  useEffect(() => {
     return () => {
       clearTimeout(timeoutRef.current,);
     };
@@ -21984,7 +21986,7 @@ var useDelay = () => {
 function useLoop({ loopEffectEnabled, loopRepeatDelay, loopTransition, loopRepeatType, loop, },) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useConstant2(() => ({ values: makeFXValues(), }));
-  const mirrorStateRef = React49.useRef(false,);
+  const mirrorStateRef = React__default.useRef(false,);
   const delay2 = useDelay();
   const animateValues = async () => {
     if (!loop) return;
@@ -22008,7 +22010,7 @@ function useLoop({ loopEffectEnabled, loopRepeatDelay, loopTransition, loopRepea
     await delay2(loopRepeatDelay ?? 0,);
     await start();
   };
-  const stop = useCallback8(() => {
+  const stop = useCallback(() => {
     effectValuesKeys.forEach((key7) => {
       effect.values[key7].stop();
     },);
@@ -22017,7 +22019,7 @@ function useLoop({ loopEffectEnabled, loopRepeatDelay, loopTransition, loopRepea
     },);
     mirrorStateRef.current = false;
   }, [effect,],);
-  React49.useEffect(() => {
+  React__default.useEffect(() => {
     if (loopEffectEnabled && loop) start();
     else stop();
     return () => stop();
@@ -22033,14 +22035,14 @@ function parallaxTransform(scrollY, originalPosition, speed, offset, adjustPosit
 var parallaxOptionsKeys = /* @__PURE__ */ new Set(['speed', 'adjustPosition', 'offset', 'parallaxTransformEnabled',],);
 function useParallax(options, ref, visibilityStyle,) {
   const { speed = 100, offset = 0, adjustPosition = false, parallaxTransformEnabled, } = options;
-  const originalPosition = React50.useRef(null,);
+  const originalPosition = React__default.useRef(null,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const transform2 = React50.useCallback((yValue) => {
+  const transform2 = React__default.useCallback((yValue) => {
     if (originalPosition.current === null) return 0;
     if (speed === 100) return 0;
     return parallaxTransform(yValue, originalPosition.current, speed, offset, adjustPosition,);
   }, [originalPosition, speed, offset, adjustPosition,],);
-  React50.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     frame.read(() => {
       var _a, _b;
       originalPosition.current = ((_b = (_a = ref.current) == null ? void 0 : _a.getBoundingClientRect()) == null ? void 0 : _b.top) ?? 0;
@@ -22095,10 +22097,10 @@ function usePresenceAnimation(
   const initial = presenceInitial ?? motionInitial;
   const animateConfig = presenceAnimate ?? motionAnimate;
   const exit = presenceExit ?? motionExit;
-  const hasMounted = useRef122(false,);
-  const lastAnimate = useRef122(animateConfig,);
+  const hasMounted = useRef(false,);
+  const lastAnimate = useRef(animateConfig,);
   const [isPresent2, safeToRemove,] = usePresence();
-  const lastPresence = useRef122(false,);
+  const lastPresence = useRef(false,);
   const effect = useConstant2(() => {
     var _a;
     const base = initial ?? style;
@@ -22111,7 +22113,7 @@ function usePresenceAnimation(
     }
     return { values: makeFXValues(defaults,), };
   },);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (hasMounted.current && animateConfig) return;
     const visualElement = visualElementStore.get(ref.current,);
     if (!visualElement) return;
@@ -22123,7 +22125,7 @@ function usePresenceAnimation(
     }
   }, [animateConfig,],);
   const shouldReduceMotion = useReducedMotionConfig();
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (!enabled) {
       safeToRemove == null ? void 0 : safeToRemove();
       return;
@@ -22179,7 +22181,7 @@ var scrollDirectionThreshold = 4;
 function useScrollDirectionChange(scrollDirection, cb, options = {},) {
   const { direction, target, } = scrollDirection ?? {};
   const { repeat = true, enabled = true, } = options;
-  React51.useEffect(() => {
+  React__default.useEffect(() => {
     if (!direction || !enabled) return;
     let lastOffset = void 0;
     let directionChangeOffset = 0;
@@ -22262,7 +22264,7 @@ function makeStyle(defaults,) {
 function useAnimationVariants(
   { opacity, targetOpacity, perspective: transformPerspective, enter, exit, animate: animateVariant2, ...defaultStyles },
 ) {
-  return React522.useMemo(
+  return React__default.useMemo(
     () => ({
       initial: enter ?? makeStyle({ ...defaultStyles, opacity: opacity ?? targetOpacity ?? 1, transformPerspective, },),
       animate: animateVariant2 ?? makeStyle({ opacity: targetOpacity, },),
@@ -22276,13 +22278,13 @@ function useStyleAppearEffect(options, ref,) {
   const variants = useAnimationVariants(options,);
   const enabled = options.styleAppearEffectEnabled;
   const effect = useFXValues(enabled ? variants.initial : variants.animate, enabled,);
-  const playState = React522.useRef({
+  const playState = React__default.useRef({
     isPlaying: false,
     scheduledAppearState: void 0,
     lastAppearState: !options.styleAppearEffectEnabled,
   },);
-  const animation = React522.useRef();
-  const runAnimation = React522.useCallback(
+  const animation = React__default.useRef();
+  const runAnimation = React__default.useCallback(
     async ({ transition, ...target }, fromInitial,) => {
       const transitionWithFallback = transition ?? variants.animate.transition ?? options.transition;
       await animation.current;
@@ -22318,7 +22320,7 @@ function useStyleAppearEffect(options, ref,) {
     runAnimation(appears ? variants.animate : variants.exit, appears,);
   }, { enabled: animateWithIntersectionObserver, animateOnce: !!options.animateOnce, threshold: { y: options.threshold, }, },);
   const animateWithScrollInfo = options.targets && enabled && !options.scrollDirection;
-  React522.useEffect(() => {
+  React__default.useEffect(() => {
     if (!animateWithScrollInfo) return;
     const playedState = { initial: true, };
     let lastVariant = 'initial';
@@ -22373,8 +22375,8 @@ var defaultRanges2 = () => ({
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
-  const springs = React53.useRef({},);
-  React53.useEffect(() => {
+  const springs = React__default.useRef({},);
+  React__default.useEffect(() => {
     if (spring2 === void 0) return;
     for (const key7 of objectKeys(values,)) {
       const m2 = values[key7];
@@ -22433,7 +22435,7 @@ function useStyleTransform(
 ) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
-  React53.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     if (!styleTransformEffectEnabled || !transformTargets) return;
     if (transformTrigger !== 'onScrollTarget') {
       const outputRange = createPageOutputRange(transformTargets,);
@@ -22524,16 +22526,16 @@ function isVariantOrVariantList(value,) {
   return isString22(value,) || Array.isArray(value,);
 }
 var withFX = (Component14) =>
-  React54.forwardRef((props, forwardedRef,) => {
+  React__default.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx33(Component14, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
+      return /* @__PURE__ */ jsx(Component14, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
     }
     if (RenderTarget.current() === 'CANVAS') {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ jsx33(Component14, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
+      return /* @__PURE__ */ jsx(Component14, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
     }
-    const fallbackRef = React54.useRef(null,);
+    const fallbackRef = React__default.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const { parallax = {}, styleAppear = {}, styleTransform = {}, presence = {}, loop = {}, forwardedProps, } = extractFXOptions(props,);
     const { __targetOpacity: targetOpacityValue, __perspectiveFX: withPerspective, __smartComponentFX: inSmartComponent = false, } = props;
@@ -22549,7 +22551,7 @@ var withFX = (Component14) =>
     const { values: transformValues2, } = useStyleTransform(styleTransform, ref,);
     const { values: appearEffectValues, } = useStyleAppearEffect(styleAppear, ref,);
     const { values: loopValues, } = useLoop(loop,);
-    const fxValues = React54.useMemo(() => {
+    const fxValues = React__default.useMemo(() => {
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
         opacity: [
@@ -22593,7 +22595,7 @@ var withFX = (Component14) =>
     const initial = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
     const exit = isVariantOrVariantList(props.exit,) ? props.exit : void 0;
     const motionGestures = inSmartComponent && !presence.presenceInitial ? { initial, animate: animate3, exit, } : {};
-    return /* @__PURE__ */ jsx33(Component14, {
+    return /* @__PURE__ */ jsx(Component14, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -22604,14 +22606,14 @@ var withFX = (Component14) =>
   },);
 var withParallaxTransform = withFX;
 var withStyleAppearEffect = withFX;
-var Context = /* @__PURE__ */ createContext42({},);
+var Context = /* @__PURE__ */ createContext({},);
 function ComponentPresetsProvider({ presets, children, },) {
-  const lastPresets = useRef132(presets,);
+  const lastPresets = useRef(presets,);
   if (!isEqual(presets, lastPresets.current, false,)) lastPresets.current = presets;
-  return /* @__PURE__ */ jsx34(Context.Provider, { value: lastPresets.current, children, },);
+  return /* @__PURE__ */ jsx(Context.Provider, { value: lastPresets.current, children, },);
 }
 function ComponentPresetsConsumer({ componentIdentifier, children, },) {
-  const componentPresets = useContext122(Context,);
+  const componentPresets = useContext(Context,);
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
@@ -22648,25 +22650,25 @@ function createHook(forwardedRef,) {
       );
     }
     preventNextCall = true;
-    if (React55.Children.count(children,) > 1 && forwardedRef) {
+    if (React.Children.count(children,) > 1 && forwardedRef) {
       if (false) {
         throw new ReferenceError('useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',);
       }
       state.forwardedRef = void 0;
       state.ref = state.childRef;
     }
-    return React55.Children.map(children, (child) => {
-      if (React55.isValidElement(child,)) {
+    return React.Children.map(children, (child) => {
+      if (React.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state.forwardedRef, ownRef,);
         const newProps = state.ref !== ownRef ? { ...props, ref: state.ref, } : props;
-        return React55.cloneElement(child, newProps,);
+        return React.cloneElement(child, newProps,);
       }
       return child;
     },);
   }
   const cloneAsElement = function cloneAsElement2(children, props,) {
-    return /* @__PURE__ */ jsx35(Fragment6, { children: cloneChildrenWithPropsAndRef(children, props,), },);
+    return /* @__PURE__ */ jsx(Fragment, { children: cloneChildrenWithPropsAndRef(children, props,), },);
   };
   cloneAsElement.cloneAsArray = cloneChildrenWithPropsAndRef;
   return { // used during render phase to sync props with state
@@ -22695,26 +22697,26 @@ function setRef(ref, value,) {
 function isMutableRef(ref,) {
   return isObject2(ref,) && 'current' in ref;
 }
-var ComponentViewportContext = /* @__PURE__ */ React56.createContext({},);
+var ComponentViewportContext = /* @__PURE__ */ React__default.createContext({},);
 function useComponentViewport() {
-  return React56.useContext(ComponentViewportContext,);
+  return React__default.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = /* @__PURE__ */ React56.forwardRef(({ width, children, ...rest }, ref,) => {
-  const componentViewport = React56.useMemo(() => {
+var ComponentViewportProvider = /* @__PURE__ */ React__default.forwardRef(({ width, children, ...rest }, ref,) => {
+  const componentViewport = React__default.useMemo(() => {
     return { width, };
   }, [width,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
-  return /* @__PURE__ */ jsx36(ComponentViewportContext.Provider, {
+  return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
     value: componentViewport,
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
 var withGeneratedLayoutId = (Component14) =>
-  React57.forwardRef((props, ref,) => {
+  React__default.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx37(Component14, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
+    return /* @__PURE__ */ jsx(Component14, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
   },);
-var ContainerErrorBoundary = class extends React58.Component {
+var ContainerErrorBoundary = class extends React__default.Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', { hasError: false, },);
@@ -22729,22 +22731,22 @@ var ContainerErrorBoundary = class extends React58.Component {
     return hasError ? null : children;
   }
 };
-var Providers = /* @__PURE__ */ React59.forwardRef(({ children, layoutId, ...props }, ref,) => {
+var Providers = /* @__PURE__ */ React__default.forwardRef(({ children, layoutId, ...props }, ref,) => {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
-  return /* @__PURE__ */ jsx38(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     layoutId: outerLayoutId,
     ...props,
     ref,
-    children: /* @__PURE__ */ jsx38(ComponentContainerContext.Provider, {
+    children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
       value: true,
-      children: /* @__PURE__ */ jsx38(AutomaticLayoutIds, {
+      children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
         enabled: false,
-        children: /* @__PURE__ */ jsx38(LayoutGroup, {
+        children: /* @__PURE__ */ jsx(LayoutGroup, {
           id: layoutId ?? '',
           inherit: 'id',
-          children: /* @__PURE__ */ jsx38(ContainerErrorBoundary, {
-            children: React59.Children.map(children, (child) => {
-              return React59.isValidElement(child,) ? React59.cloneElement(child, { layoutId, },) : child;
+          children: /* @__PURE__ */ jsx(ContainerErrorBoundary, {
+            children: React__default.Children.map(children, (child) => {
+              return React__default.isValidElement(child,) ? React__default.cloneElement(child, { layoutId, },) : child;
             },),
           },),
         },),
@@ -22753,7 +22755,7 @@ var Providers = /* @__PURE__ */ React59.forwardRef(({ children, layoutId, ...pro
   },);
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(Providers,);
-var StyleSheetContext = /* @__PURE__ */ React60.createContext(void 0,);
+var StyleSheetContext = /* @__PURE__ */ React__default.createContext(void 0,);
 if (isBrowser2()) for (const node of document.querySelectorAll('style[data-framer-css-ssr]',)) document.head.appendChild(node,);
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   var _a;
@@ -22766,32 +22768,32 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
 })();
 var styleTagSSRMarker = { 'data-framer-css-ssr': true, };
 var withCSS = (Component14, escapedCSS, componentSerializationId,) =>
-  React61.forwardRef((props, ref,) => {
-    const { sheet, cache: cache3, } = React61.useContext(StyleSheetContext,) ?? {};
+  React__default.forwardRef((props, ref,) => {
+    const { sheet, cache: cache3, } = React__default.useContext(StyleSheetContext,) ?? {};
     if (!isBrowser2()) {
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ jsxs12(Fragment7, {
+      return /* @__PURE__ */ jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ jsx39('style', {
+          /* @__PURE__ */ jsx('style', {
             ...styleTagSSRMarker,
             'data-framer-component': componentSerializationId,
             dangerouslySetInnerHTML: { __html: concatenatedCSS, },
           },),
-          /* @__PURE__ */ jsx39(Component14, { ...props, ref, },),
+          /* @__PURE__ */ jsx(Component14, { ...props, ref, },),
         ],
       },);
     }
-    React61.useInsertionEffect(() => {
+    React__default.useInsertionEffect(() => {
       if (componentSerializationId && componentsWithServerRenderedStyles.has(componentSerializationId,)) return;
       const css = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
       css.forEach((rule) => rule && injectCSSRule(rule, sheet, cache3,));
     }, [],);
-    return /* @__PURE__ */ jsx39(Component14, { ...props, ref, },);
+    return /* @__PURE__ */ jsx(Component14, { ...props, ref, },);
   },);
-var CustomCursorContext = /* @__PURE__ */ React622.createContext({ onRegisterCursors: () => () => {}, registerCursors: () => {}, },);
+var CustomCursorContext = /* @__PURE__ */ React__default.createContext({ onRegisterCursors: () => () => {}, registerCursors: () => {}, },);
 var replaceCursorClassName = 'framer-cursor-none';
 var cursorComponentClassName = 'framer-pointer-events-none';
-var CustomCursorContextProvider = /* @__PURE__ */ React622.memo(function CustomCursorList({ children, },) {
+var CustomCursorContextProvider = /* @__PURE__ */ React__default.memo(function CustomCursorList({ children, },) {
   const value = useConstant2(() => {
     const events2 = /* @__PURE__ */ new Set();
     let allCursors = {};
@@ -22813,9 +22815,9 @@ var CustomCursorContextProvider = /* @__PURE__ */ React622.memo(function CustomC
     };
   },);
   const shouldReduceMotion = useReducedMotionConfig();
-  return /* @__PURE__ */ jsxs13(CustomCursorContext.Provider, {
+  return /* @__PURE__ */ jsxs(CustomCursorContext.Provider, {
     value,
-    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx40(CustomCursorComponent, {},),],
+    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {},),],
   },);
 },);
 var CustomCursorHost = /* @__PURE__ */ withCSS(CustomCursorContextProvider, [
@@ -22879,16 +22881,16 @@ function isEmptyObject(object,) {
   for (const _ in object) return false;
   return true;
 }
-var CustomCursorComponent = /* @__PURE__ */ React622.memo(function CustomCursorComponent2() {
-  const { onRegisterCursors, } = useContext132(CustomCursorContext,);
+var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomCursorComponent2() {
+  const { onRegisterCursors, } = useContext(CustomCursorContext,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
-  const cursorRef = React622.useRef(null,);
-  const internalState = React622.useRef({ cursors: {}, cursorHash: void 0, },);
+  const cursorRef = React__default.useRef(null,);
+  const internalState = React__default.useRef({ cursors: {}, cursorHash: void 0, },);
   const forceRender = useForceUpdate3();
   const hasCursors = !isEmptyObject(internalState.current.cursors,);
-  React622.useEffect(() => {
+  React__default.useEffect(() => {
     let x2 = 0;
     let y2 = 0;
     function updateValues() {
@@ -22938,7 +22940,7 @@ var CustomCursorComponent = /* @__PURE__ */ React622.memo(function CustomCursorC
       cancelFrame(updateVariant,);
     };
   }, [opacity, pointerX, pointerY, hasCursors, forceRender,],);
-  React622.useEffect(() => {
+  React__default.useEffect(() => {
     function hideCursor() {
       animate(opacity, 0, { type: 'tween', duration: 0.2, },);
     }
@@ -22949,7 +22951,7 @@ var CustomCursorComponent = /* @__PURE__ */ React622.memo(function CustomCursorC
       safeWindow.removeEventListener('blur', hideCursor,);
     };
   }, [opacity,],);
-  React622.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
       internalState.current.cursorHash = getCursorHash(pointerX.get(), pointerY.get(),);
@@ -22964,7 +22966,7 @@ var CustomCursorComponent = /* @__PURE__ */ React622.memo(function CustomCursorC
   const { cursors, cursorHash, } = internalState.current;
   const cursor = cursorHash ? cursors[cursorHash] : null;
   const replaceNativeCursor = customCursorReplacesNativeCursor(cursor,);
-  React622.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor,],);
   const Cursor = cursor == null ? void 0 : cursor.component;
@@ -22981,12 +22983,12 @@ var CustomCursorComponent = /* @__PURE__ */ React622.memo(function CustomCursorC
   },);
   const alignment = cursor == null ? void 0 : cursor.alignment;
   const placement = cursor == null ? void 0 : cursor.placement;
-  const transformTemplate2 = React622.useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
+  const transformTemplate2 = React__default.useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
     alignment,
     placement,
   ],);
   if (!cursor || !Cursor) return null;
-  return /* @__PURE__ */ jsx40(Cursor, {
+  return /* @__PURE__ */ jsx(Cursor, {
     transformTemplate: transformTemplate2,
     style: { ...staticCursorStyle, x, y, opacity, },
     globalTapTarget: true,
@@ -22996,9 +22998,9 @@ var CustomCursorComponent = /* @__PURE__ */ React622.memo(function CustomCursorC
   },);
 },);
 function useCustomCursors(webPageCursors,) {
-  const { registerCursors, } = useContext132(CustomCursorContext,);
+  const { registerCursors, } = useContext(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
-  React622.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     registerCursors(cursors,);
   }, [cursors, registerCursors,],);
 }
@@ -23329,12 +23331,12 @@ function updatePosition(floatingPositionRef, position, rect,) {
     top: ((rect == null ? void 0 : rect.y) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
   },);
 }
-var FloatingStackingContext = /* @__PURE__ */ React63.createContext(/* @__PURE__ */ new Set(),);
+var FloatingStackingContext = /* @__PURE__ */ React__default.createContext(/* @__PURE__ */ new Set(),);
 function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { safeArea, onDismiss, },) {
   const descendantStackingContext = useConstant2(() => /* @__PURE__ */ new Set());
-  const ancestorStackingContext = React63.useContext(FloatingStackingContext,);
+  const ancestorStackingContext = React__default.useContext(FloatingStackingContext,);
   const [isPresent2, safeToRemove,] = usePresence();
-  React63.useEffect(() => {
+  React__default.useEffect(() => {
     if (isPresent2) {
       if (!floatingPositionRef.current) return;
       floatingPositionRef.current.style.pointerEvents = '';
@@ -23346,7 +23348,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { 
       safeToRemove();
     }
   }, [isPresent2, floatingPositionRef, ancestorStackingContext,],);
-  React63.useEffect(() => {
+  React__default.useEffect(() => {
     if (!safeArea) {
       const handleEscape = (e) => {
         if (e.key !== 'Escape') return;
@@ -23404,7 +23406,7 @@ function childrenWithOrigin(child, { x, y, },) {
   if (!child || !isReactChild(child,) || !isReactElement(child,)) return null;
   if (!isObject2(child.props.style,) && !isUndefined(child.props.style,)) return null;
   const style = { ...child.props.style, originX: x, originY: y, };
-  return React63.cloneElement(child, { style, },);
+  return React__default.cloneElement(child, { style, },);
 }
 function Floating(
   {
@@ -23424,11 +23426,11 @@ function Floating(
     ...rest
   },
 ) {
-  const floatingPositionRef = React63.useRef(null,);
-  const safeAreaRef = React63.useRef(null,);
-  const contentRef = React63.useRef(null,);
+  const floatingPositionRef = React__default.useRef(null,);
+  const safeAreaRef = React__default.useRef(null,);
+  const contentRef = React__default.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
-  React63.useLayoutEffect(() => {
+  React__default.useLayoutEffect(() => {
     if (!isRef(anchorRef,) || !contentRef.current || !placement || !alignment) return;
     const { position, scrolls, } = getAncestorInfo(anchorRef,);
     const elementRect = contentRef.current.getBoundingClientRect();
@@ -23477,7 +23479,7 @@ function Floating(
   }, [safeArea, placement, alignment, offsetX, offsetY, anchorRef, collisionDetection, collisionDetectionPadding, updateOrigin,],);
   const descendantContext = useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { safeArea, onDismiss, },);
   return ReactDOM.createPortal(
-    /* @__PURE__ */ jsxs14('div', {
+    /* @__PURE__ */ jsxs('div', {
       ref: floatingPositionRef,
       className,
       style: { // Initially rendered as hidden, but the layout effect will set
@@ -23491,18 +23493,18 @@ function Floating(
       ...rest,
       children: [
         safeArea
-          ? /* @__PURE__ */ jsx41('div', { ref: safeAreaRef, style: { position: 'absolute', }, 'data-safearea': true, },)
-          : /* @__PURE__ */ jsx41('div', { style: { position: 'fixed', inset: 0, }, 'aria-hidden': true, onMouseDown: onDismiss, },),
-        /* @__PURE__ */ jsx41(FloatingStackingContext.Provider, {
+          ? /* @__PURE__ */ jsx('div', { ref: safeAreaRef, style: { position: 'absolute', }, 'data-safearea': true, },)
+          : /* @__PURE__ */ jsx('div', { style: { position: 'fixed', inset: 0, }, 'aria-hidden': true, onMouseDown: onDismiss, },),
+        /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
           value: descendantContext,
-          children: /* @__PURE__ */ jsx41('div', { ref: contentRef, children: childrenWithOrigin(children, origin,), },),
+          children: /* @__PURE__ */ jsx('div', { ref: contentRef, children: childrenWithOrigin(children, origin,), },),
         },),
       ],
     },),
     document.querySelector(portalSelector,) ?? document.body,
   );
 }
-var GeneratedComponentContext = /* @__PURE__ */ React64.createContext(void 0,);
+var GeneratedComponentContext = /* @__PURE__ */ React__default.createContext(void 0,);
 var LazyValue = class {
   constructor(resolver,) {
     this.resolver = resolver;
@@ -23673,10 +23675,10 @@ function linkFromFramerPageLink(link,) {
   return { webPageId: target, hash: element ?? void 0, pathVariables: createVariablesFromPageLinkCollectionItem(collectionItem,), };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
-var PathVariablesContext = React65.createContext(void 0,);
+var PathVariablesContext = React__default.createContext(void 0,);
 function useImplicitPathVariables() {
   var _a;
-  const contextPathVariables = React65.useContext(PathVariablesContext,);
+  const contextPathVariables = React__default.useContext(PathVariablesContext,);
   const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
@@ -23695,7 +23697,7 @@ function linkMatchesRoute(route, { webPageId, hash: hash2, pathVariables, }, imp
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = React65.useContext(PathVariablesContext,);
+  const contextPathVariables = React__default.useContext(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString22(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
@@ -23791,13 +23793,13 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   if (promises.length) throw Promise.allSettled(promises,);
   return result;
 }
-var Link = /* @__PURE__ */ React65.forwardRef(({ children, href, openInNewTab, smoothScroll, ...restProps }, forwardedRef,) => {
+var Link = /* @__PURE__ */ React__default.forwardRef(({ children, href, openInNewTab, smoothScroll, ...restProps }, forwardedRef,) => {
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
   const { activeLocale, } = useLocaleInfo();
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  const props = React65.useMemo(() => {
+  const props = React__default.useMemo(() => {
     var _a;
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
@@ -23905,15 +23907,15 @@ function PageRoot(
     shouldMarkHydrationEnd = false,
   },
 ) {
-  React66.useEffect(() => {
+  React__default.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx42(MotionConfig, {
+    return /* @__PURE__ */ jsx(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx42(CustomCursorHost, {
-        children: /* @__PURE__ */ jsx42(Router, {
+      children: /* @__PURE__ */ jsx(CustomCursorHost, {
+        children: /* @__PURE__ */ jsx(Router, {
           initialRoute: routeId,
           initialPathVariables: pathVariables,
           initialLocaleId: localeId,
@@ -23929,12 +23931,12 @@ function PageRoot(
       },),
     },);
   } else {
-    const Wrapper = includeDataObserver ? DataObserver : React66.Fragment;
-    return /* @__PURE__ */ jsx42(Wrapper, {
-      children: /* @__PURE__ */ jsx42(RoutesProvider, {
+    const Wrapper = includeDataObserver ? DataObserver : React__default.Fragment;
+    return /* @__PURE__ */ jsx(Wrapper, {
+      children: /* @__PURE__ */ jsx(RoutesProvider, {
         routes,
-        children: /* @__PURE__ */ jsx42(NavigationWrapper, {
-          children: React66.isValidElement(RootComponent,) ? RootComponent : React66.createElement( // @ts-expect-error to figure out how to type this properly, as tests are using different
+        children: /* @__PURE__ */ jsx(NavigationWrapper, {
+          children: React__default.isValidElement(RootComponent,) ? RootComponent : React__default.createElement( // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
             RootComponent,
             { key: routeId, },
@@ -23945,14 +23947,14 @@ function PageRoot(
   }
 }
 function cloneChildrenWithProps(children, props, asNode,) {
-  const cloned = React67.Children.map(children, (child) => {
-    if (React67.isValidElement(child,)) return React67.cloneElement(child, props,);
+  const cloned = React.Children.map(children, (child) => {
+    if (React.isValidElement(child,)) return React.cloneElement(child, props,);
     return child;
   },);
   if (asNode) return cloned;
-  return /* @__PURE__ */ jsx43(Fragment8, { children: cloned, },);
+  return /* @__PURE__ */ jsx(Fragment, { children: cloned, },);
 }
-var SSRParentVariantsContext = /* @__PURE__ */ React68.createContext(void 0,);
+var SSRParentVariantsContext = /* @__PURE__ */ React__default.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function renderBranchedChildrenFromPropertyOverridesOnServer(
   overrides,
@@ -23964,9 +23966,9 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
   type,
 ) {
   if (isBrowser2()) throw new Error('This should not be called on the client',);
-  const childrenArray = React68.Children.toArray(children,);
+  const childrenArray = React__default.Children.toArray(children,);
   const child = childrenArray[0];
-  if (childrenArray.length !== 1 || !React68.isValidElement(child,)) {
+  if (childrenArray.length !== 1 || !React__default.isValidElement(child,)) {
     console.warn(type + ': expected exactly one React element for a child', children,);
     return cloneChildrenWithProps(children, props,);
   }
@@ -23987,9 +23989,9 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
   const effectiveRemainingVariants = intersection(remainingVariants, parentVariants,);
   if (effectiveRemainingVariants.length) branches.unshift({ variants: effectiveRemainingVariants, },);
   const displayContents = `.${SSRVariantClassName} { display: contents }`;
-  return /* @__PURE__ */ jsxs15(Fragment9, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      !parentVariants && /* @__PURE__ */ jsx44('style', { ...styleTagSSRMarker, children: displayContents, },),
+      !parentVariants && /* @__PURE__ */ jsx('style', { ...styleTagSSRMarker, children: displayContents, },),
       branches.map(({ variants, propOverrides, },) => {
         const key7 = variants.join('+',);
         let element = // We could omit the SSRParentVariantsContext if variants is
@@ -23997,14 +23999,14 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
           // arrays, so it might not really be an optimization. And
           // since it's just a context, it doesn't affect the size of
           // the generated HTML.
-          /* @__PURE__ */ jsx44(SSRParentVariantsContext.Provider, {
+          /* @__PURE__ */ jsx(SSRParentVariantsContext.Provider, {
             value: new Set(variants,),
             children: cloneChildrenWithProps(child, { ...props, ...propOverrides, },),
           }, key7,);
         const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
         if (hiddenClassNames.length) {
           assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-          element = /* @__PURE__ */ jsx44(
+          element = /* @__PURE__ */ jsx(
             'div',
             { className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`, children: element, },
             key7,
@@ -24015,17 +24017,17 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
     ],
   },);
 }
-var SSRVariants = /* @__PURE__ */ React68.forwardRef(function SSRVariants2({ id: nodeId, children, ...props }, ref,) {
+var SSRVariants = /* @__PURE__ */ React__default.forwardRef(function SSRVariants2({ id: nodeId, children, ...props }, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
   if (isBrowser2()) return cloneWithRefs(children, props,);
-  const generatedComponentContext = React68.useContext(GeneratedComponentContext,);
+  const generatedComponentContext = React__default.useContext(GeneratedComponentContext,);
   if (!generatedComponentContext || !generatedComponentContext.variantProps) {
     console.warn('SSRVariants is missing GeneratedComponentContext',);
     return cloneWithRefs(children, props,);
   }
-  const parentVariants = React68.useContext(SSRParentVariantsContext,);
+  const parentVariants = React__default.useContext(SSRParentVariantsContext,);
   const { primaryVariantId, variantClassNames, variantProps: variantProps2, } = generatedComponentContext;
-  const overrides = React68.useMemo(() => {
+  const overrides = React__default.useMemo(() => {
     const nextOverrides = {};
     for (const [variant, values,] of Object.entries(variantProps2,)) nextOverrides[variant] = values[nodeId];
     return nextOverrides;
@@ -24062,17 +24064,17 @@ function propsForBreakpoint(variant, props, overrides,) {
   if (!overrides || !variant) return props;
   return { ...props, ...overrides[variant], };
 }
-var PropertyOverrides = /* @__PURE__ */ React68.forwardRef(
+var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(
   function PropertyOverrides2({ breakpoint, overrides, children, ...props }, ref,) {
     const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
     if (isBrowser2()) return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
-    const generatedComponentContext = React68.useContext(GeneratedComponentContext,);
+    const generatedComponentContext = React__default.useContext(GeneratedComponentContext,);
     if (!generatedComponentContext) {
       console.warn('PropertyOverrides is missing GeneratedComponentContext',);
       return cloneWithRefs(children, props,);
     }
     const { primaryVariantId, variantClassNames, } = generatedComponentContext;
-    const parentVariants = React68.useContext(SSRParentVariantsContext,);
+    const parentVariants = React__default.useContext(SSRParentVariantsContext,);
     return renderBranchedChildrenFromPropertyOverridesOnServer(
       overrides,
       children,
@@ -24084,7 +24086,7 @@ var PropertyOverrides = /* @__PURE__ */ React68.forwardRef(
     );
   },
 );
-var ResolveLinks = /* @__PURE__ */ React69.forwardRef(function ResolveLinksInner({ links, children, ...rest }, ref,) {
+var ResolveLinks = /* @__PURE__ */ React.forwardRef(function ResolveLinksInner({ links, children, ...rest }, ref,) {
   const router = useRouter();
   const { activeLocale, } = useLocaleInfo();
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
@@ -25866,13 +25868,13 @@ function useActiveVariantCallback(baseVariant,) {
   useOnCurrentTargetChange(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   },);
-  React70.useEffect(() => {
+  React__default.useEffect(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   }, [pendingPromises, pendingTimers,],);
-  React70.useEffect(() => {
+  React__default.useEffect(() => {
     rejectPending(pendingTimers, pendingPromises,);
   }, [baseVariant, pendingPromises, pendingTimers,],);
-  return React70.useRef({
+  return React__default.useRef({
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */ activeVariantCallback: (callback) => (...args) => {
@@ -25893,10 +25895,10 @@ function useActiveVariantCallback(baseVariant,) {
 }
 function useActiveTargetCallback() {
   const value = useActiveVariantCallback(void 0,);
-  return React70.useRef({ activeTargetCallback: value.activeVariantCallback, delay: value.delay, },).current;
+  return React__default.useRef({ activeTargetCallback: value.activeVariantCallback, delay: value.delay, },).current;
 }
 function useAddVariantProps(baseVariant, gestureVariant, variantProps2,) {
-  return React71.useCallback((id3) => {
+  return React__default.useCallback((id3) => {
     var _a, _b, _c;
     if (!variantProps2) return {};
     if (!baseVariant) return {};
@@ -25928,16 +25930,16 @@ function activeMediaQueryFromWindow(mediaQueries,) {
   }
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
-  const isInitialNavigation = useContext142(IsInitialNavigationContext,);
-  const baseVariant = useRef14(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
-  const basePropsVariant = useRef14(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
+  const isInitialNavigation = useContext(IsInitialNavigationContext,);
+  const baseVariant = useRef(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate3();
   const instantTransition = useInstantTransition();
-  const setActiveVariantInstant = useCallback9((variant) => {
+  const setActiveVariantInstant = useCallback((variant) => {
     if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
       instantTransition(() => {
         baseVariant.current = basePropsVariant.current = variant;
-        startTransition22(() => {
+        startTransition(() => {
           forceUpdate();
         },);
       },);
@@ -25947,7 +25949,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
     if (!hydratedWithInitial || isInitialNavigation !== true) return;
     setActiveVariantInstant(baseVariant.current,);
   }, [],);
-  useEffect112(() => {
+  useEffect(() => {
     const callbacks2 = [];
     for (const [variant, query,] of Object.entries(mediaQueries,)) {
       const mql = safeWindow.matchMedia(query,);
@@ -25976,7 +25978,7 @@ function useBreakpointVariants(initial, _width, breakpoints,) {
 }
 function removeHiddenBreakpointLayers(_initial, _mediaQueries, _variantClassNames,) {}
 function useDataRecord(collection, variables,) {
-  return useMemo52(() => {
+  return useMemo(() => {
     if (!Array.isArray(collection,)) return null;
     if (!variables) return null;
     const pageRecord = collection.find((record2) => {
@@ -25991,7 +25993,7 @@ function useDataRecord(collection, variables,) {
 }
 function useDynamicRefs() {
   const map = useConstant2(() => /* @__PURE__ */ new Map());
-  return React722.useCallback((key7) => {
+  return React__default.useCallback((key7) => {
     const existing = map.get(key7,);
     if (existing) return existing;
     const ref = createRef();
@@ -26065,7 +26067,7 @@ function createGamepadPoller() {
   };
 }
 var gamepadPoller = /* @__PURE__ */ createGamepadPoller();
-var GamepadContext = /* @__PURE__ */ React73.createContext(gamepadPoller,);
+var GamepadContext = /* @__PURE__ */ React__default.createContext(gamepadPoller,);
 function getGamepadInputs() {
   let firstConnectedGamepad = null;
   const gamepads = navigator.getGamepads();
@@ -26096,10 +26098,10 @@ function isButtonPressed(button,) {
   return button.pressed === true || button.value > 0;
 }
 function useGamepad(input, callback, { mapping, on, } = {},) {
-  const context = React73.useContext(GamepadContext,);
+  const context = React__default.useContext(GamepadContext,);
   const settings = useConstant2(() => ({ mapping: mapping ?? 'standard', on: on ?? 'keydown', }));
-  const stateRef = React73.useRef({ pressed: false, handler: callback, },);
-  const cb = React73.useCallback((gamepad) => {
+  const stateRef = React__default.useRef({ pressed: false, handler: callback, },);
+  const cb = React__default.useCallback((gamepad) => {
     const { pressed, handler, } = stateRef.current;
     if (gamepad.inputs.includes(input,) && settings.mapping === gamepad.mapping) {
       settings.on === 'keydown' && handler();
@@ -26115,10 +26117,10 @@ function useGamepad(input, callback, { mapping, on, } = {},) {
     else context.unregister(cb,);
     return () => context.unregister(cb,);
   }, [],);
-  React73.useEffect(() => {
+  React__default.useEffect(() => {
     return () => context.unregister(cb,);
   }, [cb, context,],);
-  React73.useEffect(() => {
+  React__default.useEffect(() => {
     stateRef.current.handler = callback;
   }, [callback,],);
 }
@@ -26132,20 +26134,20 @@ function createShortcutDefinition(shortcut,) {
   return { ...modifierDefaults, ...modifiers, key: key7, };
 }
 function useHotkey(shortcut, callback,) {
-  const inTarget = React74.useRef(true,);
+  const inTarget = React__default.useRef(true,);
   const shortcutDefinition = useConstant2(() => createShortcutDefinition(shortcut,));
   useOnCurrentTargetChange((isCurrentTarget, isOverlayed,) => {
     inTarget.current = isCurrentTarget && !isOverlayed;
     return () => inTarget.current = false;
   },);
-  const eventHandler = React74.useCallback((event) => {
+  const eventHandler = React__default.useCallback((event) => {
     if (!shortcutDefinition) return;
     if (!inTarget.current) return;
     if (!Object.keys(shortcutDefinition,).every((key7) => shortcutDefinition[key7] === asRecord(event,)[key7])) return;
     event.preventDefault();
     callback();
   }, [shortcutDefinition, callback,],);
-  React74.useEffect(() => {
+  React__default.useEffect(() => {
     document.addEventListener('keydown', eventHandler,);
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
@@ -26171,8 +26173,8 @@ function callbackForVariant(map, variant,) {
 function useOnVariantChange(variant, callbackMap,) {
   const isOnFramerCanvas = useIsOnFramerCanvas();
   if (isOnFramerCanvas) return;
-  const isActiveScreenRef = React75.useRef(true,);
-  const callbackMapRef = React75.useRef(callbackMap,);
+  const isActiveScreenRef = React__default.useRef(true,);
+  const callbackMapRef = React__default.useRef(callbackMap,);
   useOnCurrentTargetChange((isCurrent, isOverlayed,) => {
     const isActiveScreen = isCurrent && !isOverlayed;
     if (!isActiveScreenRef.current && isActiveScreen) {
@@ -26181,7 +26183,7 @@ function useOnVariantChange(variant, callbackMap,) {
     }
     isActiveScreenRef.current = isActiveScreen;
   }, [],);
-  React75.useEffect(() => {
+  React__default.useEffect(() => {
     if (isActiveScreenRef.current) {
       const callback = callbackForVariant(callbackMapRef.current, variant,);
       if (callback) callback();
@@ -26192,14 +26194,14 @@ function useOnAppear(callback,) {
   useOnVariantChange('default', { default: callback, },);
 }
 function useOverlayState({ blockDocumentScrolling = true, } = {},) {
-  const [showOverlay, setShowOverlay,] = React76.useState(false,);
-  const callback = React76.useCallback((show) => {
+  const [showOverlay, setShowOverlay,] = React__default.useState(false,);
+  const callback = React__default.useCallback((show) => {
     setShowOverlay(show,);
     if (blockDocumentScrolling === false) return;
     if (show) document.documentElement.style.setProperty('overflow', 'hidden',);
     else document.documentElement.style.removeProperty('overflow',);
   }, [blockDocumentScrolling,],);
-  React76.useEffect(() => () => {
+  React__default.useEffect(() => () => {
     if (blockDocumentScrolling === false) return;
     document.documentElement.style.removeProperty('overflow',);
   }, [blockDocumentScrolling,],);
@@ -26209,9 +26211,9 @@ async function componentForRoute(route,) {
   if (!isRoute(route,)) return;
   const { page: routeComponent, } = route;
   if (!routeComponent) return;
-  if (React77.isValidElement(routeComponent,)) return routeComponent;
+  if (React__default.isValidElement(routeComponent,)) return routeComponent;
   if (withPreload(routeComponent,)) await routeComponent.preload();
-  return React77.createElement(routeComponent, { key: route.path, },);
+  return React__default.createElement(routeComponent, { key: route.path, },);
 }
 var preloadKey2 = 'preload';
 function withPreload(component,) {
@@ -26221,7 +26223,7 @@ function usePrototypeNavigate({ preload, } = {},) {
   const navigation = useNavigation();
   const { getRoute, } = useRouter();
   const onCanvas = useIsOnFramerCanvas();
-  React77.useEffect(() => {
+  React__default.useEffect(() => {
     if (!navigation || onCanvas) return;
     preload == null ? void 0 : preload.forEach((componentOrRoute) => {
       let component;
@@ -26241,7 +26243,7 @@ function usePrototypeNavigate({ preload, } = {},) {
     }
     const Component14 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
-      : React77.isValidElement(target,)
+      : React__default.isValidElement(target,)
       ? target
       : null;
     if (!Component14) return;
@@ -26335,14 +26337,14 @@ function getWhereExpressionFromPathVariables(pathVariables,) {
 function useLoadMorePaginatedQuery(query, pageSize,) {
   const { paginationInfo, setPaginationInfo, } = useCollectionListPaginationInfo();
   const count = useQueryCount(query,);
-  const initialPaginationInfo = useMemo62(() => {
+  const initialPaginationInfo = useMemo(() => {
     const totalPages = Math.ceil(count / pageSize,);
     return { currentPage: 1, totalPages, type: 'loadMore', };
   }, [count, pageSize,],);
-  useEffect122(() => {
+  useEffect(() => {
     if (!paginationInfo) setPaginationInfo(initialPaginationInfo,);
   }, [count, initialPaginationInfo, paginationInfo, setPaginationInfo,],);
-  const paginatedQuery = useMemo62(() => {
+  const paginatedQuery = useMemo(() => {
     const currentPaginationInfo = paginationInfo ?? initialPaginationInfo;
     let limit = pageSize * currentPaginationInfo.currentPage;
     if (query.limit) {
@@ -26405,7 +26407,7 @@ function useVariantState(
 ) {
   const forceUpdate = useForceUpdate3();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
-  const internalState = React78.useRef({
+  const internalState = React__default.useRef({
     isHovered: false,
     isPressed: false,
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
@@ -26418,7 +26420,7 @@ function useVariantState(
     cycleOrder: externalCycleOrder,
     transitions: externalTransitions,
   },);
-  const resolveNextVariant = React78.useCallback((targetBaseVariant) => {
+  const resolveNextVariant = React__default.useCallback((targetBaseVariant) => {
     const { isHovered: isHovered2, isPressed: isPressed2, enabledGestures: enabledGestures2, defaultVariant: defaultVariant2, } =
       internalState.current;
     const nextBaseVariant = safeBaseVariant(targetBaseVariant, defaultVariant2, validBaseVariants,);
@@ -26426,7 +26428,7 @@ function useVariantState(
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [validBaseVariants,],);
-  const setGestureState = React78.useCallback(({ isHovered: isHovered2, isPressed: isPressed2, },) => {
+  const setGestureState = React__default.useCallback(({ isHovered: isHovered2, isPressed: isPressed2, },) => {
     if (isHovered2 !== void 0) internalState.current.isHovered = isHovered2;
     if (isPressed2 !== void 0) internalState.current.isPressed = isPressed2;
     const { baseVariant: baseVariant2, gestureVariant: gestureVariant2, defaultVariant: defaultVariant2, } = internalState.current;
@@ -26437,7 +26439,7 @@ function useVariantState(
       forceUpdate();
     }
   }, [resolveNextVariant, forceUpdate,],);
-  const setVariant = React78.useCallback((proposedVariant) => {
+  const setVariant = React__default.useCallback((proposedVariant) => {
     const { defaultVariant: defaultVariant2, cycleOrder, baseVariant: baseVariant2, gestureVariant: gestureVariant2, } =
       internalState.current;
     const nextBaseVariant = proposedVariant === CycleVariantState
@@ -26460,7 +26462,7 @@ function useVariantState(
   }
   const { baseVariant, gestureVariant, defaultVariant, enabledGestures, isHovered, isPressed, } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
-  return React78.useMemo(() => {
+  return React__default.useMemo(() => {
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
     if (gestureVariant) variants.push(gestureVariant,);
@@ -26505,7 +26507,7 @@ function withMappedReactProps(Component14, info,) {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
-    return /* @__PURE__ */ jsx45(Component14, { ...props, },);
+    return /* @__PURE__ */ jsx(Component14, { ...props, },);
   };
 }
 var keys2 = /* @__PURE__ */ new Set([
@@ -26534,9 +26536,9 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
   return { inputRange: [0, Math.max(firstItem - 1, 0,), ...inputRange,], outputRange: [-1, -1, ...outputRange,], };
 }
 var withVariantAppearEffect = (Component14) =>
-  React79.forwardRef((props, forwardedRef,) => {
-    if (RenderTarget.current() === 'CANVAS') return /* @__PURE__ */ jsx46(Component14, { ...props, ref: forwardedRef, },);
-    const fallbackRef = React79.useRef(null,);
+  React__default.forwardRef((props, forwardedRef,) => {
+    if (RenderTarget.current() === 'CANVAS') return /* @__PURE__ */ jsx(Component14, { ...props, ref: forwardedRef, },);
+    const fallbackRef = React__default.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const [options, rest,] = extractPrefixedProps(props, keys2,);
     const {
@@ -26549,8 +26551,8 @@ var withVariantAppearEffect = (Component14) =>
       exitTarget,
       scrollDirection,
     } = options;
-    const [activeVariant, setVariant,] = React79.useState(obscuredVariantId,);
-    const animateState = React79.useRef(false,);
+    const [activeVariant, setVariant,] = React__default.useState(obscuredVariantId,);
+    const animateState = React__default.useRef(false,);
     useAppearEffect(ref, (appears) => {
       if (options.targets) return;
       if (options.scrollDirection) return;
@@ -26560,7 +26562,7 @@ var withVariantAppearEffect = (Component14) =>
       if (appears) setVariant(visibleVariantId,);
       else setVariant(obscuredVariantId,);
     }, { enabled: variantAppearEffectEnabled, animateOnce, threshold: { y: threshold, }, },);
-    React79.useEffect(() => {
+    React__default.useEffect(() => {
       if (scrollDirection) return;
       if (!targets) return;
       const playedState = {};
@@ -26581,21 +26583,21 @@ var withVariantAppearEffect = (Component14) =>
     }, [animateOnce, threshold, targets, props.variant,],);
     useScrollDirectionChange(scrollDirection, setVariant, { enabled: variantAppearEffectEnabled, repeat: !animateOnce, },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx46(Component14, { ...rest, variant: activeVariant ?? props.variant, ref, },);
-    } else return /* @__PURE__ */ jsx46(Component14, { ...rest, },);
+      return /* @__PURE__ */ jsx(Component14, { ...rest, variant: activeVariant ?? props.variant, ref, },);
+    } else return /* @__PURE__ */ jsx(Component14, { ...rest, },);
   },);
 var withVariantFX = (Component14) =>
-  React80.forwardRef(({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
-    const ref = useRef15();
+  React__default.forwardRef(({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
+    const ref = useRef();
     const effect = usePresenceAnimation({ initial, animate: animate3, exit, }, forwardedRef ?? ref, true,);
-    return /* @__PURE__ */ jsx47(Component14, {
+    return /* @__PURE__ */ jsx(Component14, {
       ...props,
       style: { ...(props == null ? void 0 : props.style), ...effect.values, },
       ref: forwardedRef ?? ref,
     },);
   },);
-var WindowContext = /* @__PURE__ */ React81.createContext(void 0,);
-var useProvidedWindow = () => React81.useContext(WindowContext,);
+var WindowContext = /* @__PURE__ */ React__default.createContext(void 0,);
+var useProvidedWindow = () => React__default.useContext(WindowContext,);
 function isDesignDefinition(d,) {
   return d.type === 'master';
 }
@@ -27581,7 +27583,7 @@ Promise.allSettled = Promise.allSettled ||
       promises.map((p) => p.then((v) => ({ status: 'fulfilled', value: v, })).catch((e) => ({ status: 'rejected', reason: e, }))),
     ));
 function CustomProperties({ children, customProperties, },) {
-  return /* @__PURE__ */ jsx48('div', { style: customProperties, children, },);
+  return /* @__PURE__ */ jsx('div', { style: customProperties, children, },);
 }
 var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
   var _a;
@@ -27609,10 +27611,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
     }
     renderErrorPlaceholder(file, error,) {
       const { RenderPlaceholder, } = runtime;
-      return /* @__PURE__ */ jsx49(FrameWithMotion, {
+      return /* @__PURE__ */ jsx(FrameWithMotion, {
         ...this.props,
         background: null,
-        children: /* @__PURE__ */ jsx49(RenderPlaceholder, { error: { error, file, }, },),
+        children: /* @__PURE__ */ jsx(RenderPlaceholder, { error: { error, file, }, },),
       },);
     }
     render() {
@@ -27665,19 +27667,19 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
           heightType,
           ...childProps
         } = frameProps;
-        children = React822.Children.map(originalChildren, (child) => {
+        children = React__default.Children.map(originalChildren, (child) => {
           if (!isReactChild(child,) || !isReactElement(child,)) return child;
           if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ jsx49(LayoutGroup, {
+            return /* @__PURE__ */ jsx(LayoutGroup, {
               inherit: false,
               id: this.props.__layoutId,
-              children: /* @__PURE__ */ jsx49(AutomaticLayoutIds, {
+              children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
                 enabled: false,
-                children: React822.cloneElement(child, childProps,),
+                children: React__default.cloneElement(child, childProps,),
               },),
             },);
           }
-          return React822.cloneElement(child, childProps,);
+          return React__default.cloneElement(child, childProps,);
         },);
         frameProps = {
           style,
@@ -27714,9 +27716,9 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
          * but published design components can contain an old version of the presentation tree that expects the background
          * that is passed to be rendered here
          * See the stackBackgroundTest.tsx integration test for an example of such a case
-         */ /* @__PURE__ */ jsx49(ComponentContainerContext.Provider, {
+         */ /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
           value: true,
-          children: /* @__PURE__ */ jsx49(FrameWithMotion, {
+          children: /* @__PURE__ */ jsx(FrameWithMotion, {
             'data-framer-component-container': true,
             background: null,
             overflow: 'visible',
@@ -27740,10 +27742,10 @@ function isPageOrScroll(identifier,) {
   if (identifier === 'framer/Scroll') return true;
   return false;
 }
-var FormButton = /* @__PURE__ */ React83.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
+var FormButton = /* @__PURE__ */ React__default.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
   const { style: baseStyle2, } = props;
   const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
-  return /* @__PURE__ */ jsx50(motion.input, { type, ref, style, value, },);
+  return /* @__PURE__ */ jsx(motion.input, { type, ref, style, value, },);
 },);
 function mergeWithDefaultStyle(style,) {
   return {
@@ -27773,7 +27775,7 @@ function formReducer(_state, { type, },) {
   }
 }
 var FormContainer = ({ action, formId, disabled, children, ...props },) => {
-  const [state, dispatch,] = React84.useReducer(formReducer, { state: disabled ? 'disabled' : void 0, },);
+  const [state, dispatch,] = React__default.useReducer(formReducer, { state: disabled ? 'disabled' : void 0, },);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!action) return;
@@ -27787,7 +27789,7 @@ var FormContainer = ({ action, formId, disabled, children, ...props },) => {
       dispatch({ type: 'error', },);
     }
   };
-  return /* @__PURE__ */ jsx51(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: children(state,), },);
+  return /* @__PURE__ */ jsx(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: children(state,), },);
 };
 var passwordManagerIgnoreDataProps = { // 1Password
   'data-1p-ignore': true, // LastPass
@@ -27797,13 +27799,13 @@ var sensibleInputDefaults = { autocomplete: 'off', };
 var labelStyles = { display: 'flex', flexDirection: 'column', marginBottom: 8, };
 var inputClassName = 'framer-form-input';
 var labelClassName = 'framer-form-label';
-var PlainTextInput = /* @__PURE__ */ React85.forwardRef(function FormPlainTextInput(props, ref,) {
+var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlainTextInput(props, ref,) {
   const { style, inputName, label, type, required, autoFocus, placeholder, hideInputLabel, ...rest } = props;
   const dataProps = { ...sensibleInputDefaults, ...passwordManagerIgnoreDataProps, };
   const baseWrapperStyle = { display: 'flex', flexDirection: 'column', };
   const isHiddenInput = type === 'hidden';
   const baseStyle2 = { width: '100%', flexGrow: 1, };
-  const input = /* @__PURE__ */ jsx52(motion.input, {
+  const input = /* @__PURE__ */ jsx(motion.input, {
     id: inputName,
     ...dataProps,
     type,
@@ -27815,13 +27817,13 @@ var PlainTextInput = /* @__PURE__ */ React85.forwardRef(function FormPlainTextIn
     className: inputClassName,
   },);
   if (isHiddenInput) return input;
-  return /* @__PURE__ */ jsxs16(motion.div, {
+  return /* @__PURE__ */ jsxs(motion.div, {
     ref,
     style: { ...baseWrapperStyle, ...style, },
     ...rest,
     children: [
       label && !hideInputLabel && /* @__PURE__ */
-      jsx52('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
+      jsx('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
       input,
     ],
   },);
@@ -27856,16 +27858,16 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         color: var(${'--framer-input-label-font-color'});
     }`,
 ],);
-var Image2 = /* @__PURE__ */ React86.forwardRef(function Image3(props, ref,) {
+var Image2 = /* @__PURE__ */ React__default.forwardRef(function Image3(props, ref,) {
   const { background, children, alt, ...rest } = props;
   const style = { ...rest.style, };
   if (background) delete style.background;
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ jsxs17(MotionComponent, {
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     ...rest,
     style,
     ref,
-    children: [background && /* @__PURE__ */ jsx53(BackgroundImageComponent, { image: background, alt, },), children,],
+    children: [background && /* @__PURE__ */ jsx(BackgroundImageComponent, { image: background, alt, },), children,],
   },);
 },);
 function isShallowEqualArray(a, b,) {
@@ -28001,7 +28003,7 @@ function escapeHTML2(str,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React87.forwardRef(function Text(props, forwardedRef,) {
+var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, forwardedRef,) {
   const {
     id: id3,
     name,
@@ -28042,13 +28044,13 @@ var DeprecatedRichText = /* @__PURE__ */ React87.forwardRef(function Text(props,
   } = props;
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef16(null,);
+  const fallbackLayoutRef = useRef(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
   useRoutePreloader(props.preload ?? [],);
   useMeasureLayout(props, layoutRef,);
-  const inCodeComponent = React87.useContext(ComponentContainerContext,);
+  const inCodeComponent = React.useContext(ComponentContainerContext,);
   const isOnCanvas = useIsOnFramerCanvas();
   let textOrOverride = text;
   const forwardedOverrideId = _forwardedOverrideId ?? id3;
@@ -28066,11 +28068,11 @@ var DeprecatedRichText = /* @__PURE__ */ React87.forwardRef(function Text(props,
     innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
   } else if (htmlFromDesign) innerHTML = htmlFromDesign;
   const implicitPathVariables = useImplicitPathVariables();
-  const innerHTMLWithReplacedFramerPageLinks = React87.useMemo(() => {
+  const innerHTMLWithReplacedFramerPageLinks = React.useMemo(() => {
     if (isOnCanvas || !getRoute || !currentRoute) return innerHTML;
     return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-  React87.useEffect(() => {
+  React.useEffect(() => {
     const container = layoutRef.current;
     if (container === null) return;
     function interceptPageLinks(event,) {
@@ -28085,7 +28087,7 @@ var DeprecatedRichText = /* @__PURE__ */ React87.forwardRef(function Text(props,
     };
   }, [navigate, implicitPathVariables,],);
   useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-  React87.useInsertionEffect(() => {
+  React.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!visible) return null;
@@ -28135,7 +28137,7 @@ var DeprecatedRichText = /* @__PURE__ */ React87.forwardRef(function Text(props,
   collectTextShadowsForProps(props, style,);
   if (willChangeTransform) forceLayerBackingWithCSSProperties(style,);
   Object.assign(style, props.style,);
-  return /* @__PURE__ */ jsx54(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     id: id3,
     ref: layoutRef,
     ...rest,
@@ -28160,7 +28162,7 @@ function convertVerticalAlignment(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef16([],);
+  const prevFontsRef = useRef([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     void fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
@@ -28169,12 +28171,12 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
     },);
   }
 }
-var FitText = /* @__PURE__ */ forwardRef52(({ viewBoxScale, viewBox, children, ...props }, ref,) => {
-  return /* @__PURE__ */ jsx55(motion.svg, {
+var FitText = /* @__PURE__ */ forwardRef(({ viewBoxScale, viewBox, children, ...props }, ref,) => {
+  return /* @__PURE__ */ jsx(motion.svg, {
     ref,
     ...props,
     viewBox,
-    children: /* @__PURE__ */ jsx55(motion.foreignObject, {
+    children: /* @__PURE__ */ jsx(motion.foreignObject, {
       width: '100%',
       height: '100%',
       className: 'framer-fit-text',
@@ -28184,7 +28186,7 @@ var FitText = /* @__PURE__ */ forwardRef52(({ viewBoxScale, viewBox, children, .
     },),
   },);
 },);
-var RichTextContainer = /* @__PURE__ */ forwardRef52((props, ref,) => {
+var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   const {
     __fromCanvasComponent = false,
     _forwardedOverrideId,
@@ -28224,13 +28226,13 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52((props, ref,) => {
   } = props;
   const parentSize = useParentSize();
   const isOnCanvas = useIsOnFramerCanvas();
-  const inCodeComponent = useContext162(ComponentContainerContext,);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
-  const fallbackRef = useRef17(null,);
+  const fallbackRef = useRef(null,);
   const containerRef = ref ?? fallbackRef;
   useMeasureLayout(props, containerRef,);
   useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
-  useInsertionEffect42(() => {
+  useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!visible) return null;
@@ -28285,7 +28287,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52((props, ref,) => {
   const Component14 = htmlElementAsMotionComponent(props.as,);
   if (isString22(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx55(Component14, {
+      return /* @__PURE__ */ jsx(Component14, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -28293,14 +28295,14 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52((props, ref,) => {
         transformTemplate: template,
         'data-framer-name': name,
         'data-framer-component-type': 'RichTextContainer',
-        children: /* @__PURE__ */ jsx55(FitText, {
+        children: /* @__PURE__ */ jsx(FitText, {
           viewBox,
           viewBoxScale,
           style: { width: '100%', height: '100%', },
           children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
         },),
       },);
-    } else {return /* @__PURE__ */ jsx55(FitText, {
+    } else {return /* @__PURE__ */ jsx(FitText, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -28313,7 +28315,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52((props, ref,) => {
         children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
       },);}
   }
-  return /* @__PURE__ */ jsx55(Component14, {
+  return /* @__PURE__ */ jsx(Component14, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -28325,10 +28327,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef52((props, ref,) => {
   },);
 },);
 function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
-  let children = Children32.toArray(element.props.children,);
+  let children = Children.toArray(element.props.children,);
   if (isString22(plainText,)) children = children.slice(0, 1,);
   children = children.map((child) => {
-    if (isValidElement32(child,)) return styleRichTextChildren(child, stylesPresetsClassNames, plainText,);
+    if (isValidElement(child,)) return styleRichTextChildren(child, stylesPresetsClassNames, plainText,);
     if (isString22(plainText,)) return plainText;
     return child;
   },);
@@ -28338,9 +28340,9 @@ function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
     const stylesPresetClassName = isString22(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
     props.className = cx('framer-text', props.className, stylesPresetClassName,);
   }
-  return cloneElement32(element, props, ...children,);
+  return cloneElement(element, props, ...children,);
 }
-var RichText = /* @__PURE__ */ forwardRef52(({ children, html, htmlFromDesign, ...props }, ref,) => {
+var RichText = /* @__PURE__ */ forwardRef(({ children, html, htmlFromDesign, ...props }, ref,) => {
   const content = html || children || htmlFromDesign;
   if (isString22(content,)) {
     if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
@@ -28349,7 +28351,7 @@ var RichText = /* @__PURE__ */ forwardRef52(({ children, html, htmlFromDesign, .
     const contentProp = { // We need to use the original prop name.
       [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
     };
-    return /* @__PURE__ */ jsx55(DeprecatedRichText, { ...props, ...contentProp, ref, },);
+    return /* @__PURE__ */ jsx(DeprecatedRichText, { ...props, ...contentProp, ref, },);
   }
   if (!props.stylesPresetsClassNames && isString22(props.stylesPresetsClassName,)) {
     const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
@@ -28357,7 +28359,7 @@ var RichText = /* @__PURE__ */ forwardRef52(({ children, html, htmlFromDesign, .
       console.warn(`Encountered invalid stylesPresetsClassNames: ${props.stylesPresetsClassNames}`,);
     } else props.stylesPresetsClassNames = { h1, h2, h3, p, a, };
   }
-  return /* @__PURE__ */ jsx55(RichTextContainer, { ...props, ref, children: isValidElement32(content,) ? content : void 0, },);
+  return /* @__PURE__ */ jsx(RichTextContainer, { ...props, ref, children: isValidElement(content,) ? content : void 0, },);
 },);
 function linearGradientLine(angle,) {
   var _a, _b;
@@ -28504,7 +28506,7 @@ function imageUrlForAsset(asset, pixelSize,) {
 }
 var ImagePatternElement = ({ id: id3, path, transform: transform2, repeat, width, height, offsetX, offsetY, },) => {
   const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ jsx56('pattern', {
+  return /* @__PURE__ */ jsx('pattern', {
     id: id3,
     width: repeat ? width : '100%',
     height: repeat ? height : '100%',
@@ -28512,7 +28514,7 @@ var ImagePatternElement = ({ id: id3, path, transform: transform2, repeat, width
     patternUnits: repeat ? 'userSpaceOnUse' : void 0,
     x: repeat ? offsetX : void 0,
     y: repeat ? offsetY : void 0,
-    children: /* @__PURE__ */ jsx56('image', {
+    children: /* @__PURE__ */ jsx('image', {
       width: repeat ? width : 1,
       height: repeat ? height : 1,
       href,
@@ -28719,10 +28721,10 @@ function getSVGSize(svg,) {
 function SVG(props,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const layoutRef = React88.useRef(null,);
+  const layoutRef = React__default.useRef(null,);
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ jsx57(SVGComponent, { ...props, innerRef: layoutRef, parentSize, layoutId, providedWindow, },);
+  return /* @__PURE__ */ jsx(SVGComponent, { ...props, innerRef: layoutRef, parentSize, layoutId, providedWindow, },);
 }
 var MAX_BACKGROUND_SVG_TEXT_LENGTH = 5e4;
 function containsImageReference(svg,) {
@@ -28760,7 +28762,7 @@ function sizeSVG(container, props,) {
   svg.setAttribute('height', '100%',);
 }
 function SVGStyleSheet() {
-  React88.useInsertionEffect(() => {
+  React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -28770,7 +28772,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
   return _a = class extends Layer {
     constructor() {
       super(...arguments,);
-      __publicField(this, 'container', React88.createRef(),);
+      __publicField(this, 'container', React__default.createRef(),);
       __publicField(this, 'svgElement', null,);
       __publicField(this, 'setSVGElement', (element) => {
         this.svgElement = element;
@@ -28889,20 +28891,20 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${LinearGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const { stops, x1, x2, y1, y2, } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx57('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
           xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
           height: '100%',
           style: { position: 'absolute', },
-          children: /* @__PURE__ */ jsx57('linearGradient', {
+          children: /* @__PURE__ */ jsx('linearGradient', {
             id: gradientId,
             x1,
             x2,
             y1,
             y2,
             children: stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx57('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+              return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
             },),
           },),
         },);
@@ -28911,19 +28913,19 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx57('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
           xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
           height: '100%',
           style: { position: 'absolute', },
-          children: /* @__PURE__ */ jsx57('radialGradient', {
+          children: /* @__PURE__ */ jsx('radialGradient', {
             id: gradientId,
             cy: gradient.centerAnchorY,
             cx: gradient.centerAnchorX,
             r: gradient.widthFactor,
             children: elementProperties.stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx57('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+              return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
             },),
           },),
         },);
@@ -28931,14 +28933,14 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const imagePattern = imagePatternPropsForFill(fill, size2, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ jsx57('svg', {
+          fillElement = /* @__PURE__ */ jsx('svg', {
             ref: this.setSVGElement,
             xmlns: 'http://www.w3.org/2000/svg',
             xmlnsXlink: 'http://www.w3.org/1999/xlink',
             width: '100%',
             height: '100%',
             style: { position: 'absolute', },
-            children: /* @__PURE__ */ jsx57('defs', { children: /* @__PURE__ */ jsx57(ImagePatternElement, { ...imagePattern, },), },),
+            children: /* @__PURE__ */ jsx('defs', { children: /* @__PURE__ */ jsx(ImagePatternElement, { ...imagePattern, },), },),
           },);
         }
       }
@@ -28959,10 +28961,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = svg;
         if (hasBorderRadius(outerStyle,)) outerStyle.overflow = 'hidden';
-        content = /* @__PURE__ */ jsxs18(Fragment10, {
+        content = /* @__PURE__ */ jsxs(Fragment, {
           children: [
             fillElement,
-            /* @__PURE__ */ jsx57('div', {
+            /* @__PURE__ */ jsx('div', {
               className: 'svgContainer',
               style: innerStyle,
               ref: this.container,
@@ -28973,7 +28975,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
       }
       const MotionComponent = htmlElementAsMotionComponent(this.props.as,);
       const { href, target, rel, onClick, } = this.props;
-      return /* @__PURE__ */ jsxs18(MotionComponent, {
+      return /* @__PURE__ */ jsxs(MotionComponent, {
         ...dataProps,
         ...rest,
         layoutId,
@@ -28988,7 +28990,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         'aria-label': title,
         'aria-description': description,
         ...{ href, target, rel, onClick, },
-        children: [content, /* @__PURE__ */ jsx57(SVGStyleSheet, {},),],
+        children: [content, /* @__PURE__ */ jsx(SVGStyleSheet, {},),],
       },);
     }
   },
@@ -29011,8 +29013,8 @@ var SVGComponent = /* @__PURE__ */ (() => {
 })();
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s) => !fontStore.isSelectorLoaded(s,));
-  const [fontLoadStatus, setFontLoadStatus,] = React89.useState(missingFontSelectors.length ? 'loading' : 'done',);
-  React89.useEffect(() => {
+  const [fontLoadStatus, setFontLoadStatus,] = React__default.useState(missingFontSelectors.length ? 'loading' : 'done',);
+  React__default.useEffect(() => {
     if (!missingFontSelectors.length) return;
     setFontLoadStatus('loading',);
     const timer = setTimeout(() => {
@@ -29026,15 +29028,15 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   return fontLoadStatus;
 }
 function TextStyleSheet() {
-  React90.useInsertionEffect(() => {
+  React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
 }
-var Text2 = /* @__PURE__ */ React90.forwardRef(function Text3(props, forwardedRef,) {
+var Text2 = /* @__PURE__ */ React__default.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef18(null,);
+  const fallbackLayoutRef = useRef(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const { navigate, getRoute, } = useRouter();
   const currentRoute = useCurrentRoute();
@@ -29044,10 +29046,10 @@ var Text2 = /* @__PURE__ */ React90.forwardRef(function Text3(props, forwardedRe
   const fontLoadStatus = useFontLoadStatus(props.fonts,);
   useMeasureLayout(props, layoutRef,);
   const { fonts, __fromCanvasComponent, } = props;
-  const prevFontsRef = useRef18([],);
+  const prevFontsRef = useRef([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
-  useEffect142(() => {
+  useEffect(() => {
     if (!fontsDidChange || !fonts) return;
     void fontStore.loadFonts(fonts,).then(({ newlyLoadedFontCount, },) => {
       if (!__fromCanvasComponent || !layoutRef.current || RenderTarget.current() !== 'CANVAS') return;
@@ -29056,23 +29058,23 @@ var Text2 = /* @__PURE__ */ React90.forwardRef(function Text3(props, forwardedRe
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React90.useCallback((event) => {
+  const interceptPageLinks = React__default.useCallback((event) => {
     const anchorElement = findAnchorElement(event.target, layoutRef.current,);
     if (event.metaKey || !navigate || !anchorElement) return;
     const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
     if (didNavigate) event.preventDefault();
   }, [navigate, implicitPathVariables,],);
-  useEffect142(() => {
+  useEffect(() => {
     var _a;
     (_a = layoutRef.current) == null ? void 0 : _a.addEventListener('click', interceptPageLinks,);
     const ref = layoutRef.current;
     return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React90.useMemo(() => {
+  const rawHTML = React__default.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, onCanvas, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ jsx58(TextComponent, {
+  return /* @__PURE__ */ jsx(TextComponent, {
     ...props,
     innerRef: layoutRef,
     layoutId,
@@ -29157,7 +29159,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           Object.assign(style, styleProp,);
           if (alignment) asRecord(style,)['--framer-text-alignment'] = alignment;
           const tabIndexProps = getTabIndexProps(tabIndex,);
-          return /* @__PURE__ */ jsx58(motion.div, {
+          return /* @__PURE__ */ jsx(motion.div, {
             layoutId,
             id: id3,
             ...tabIndexProps,
@@ -29187,10 +29189,10 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ jsxs19(Fragment11, {
+      return /* @__PURE__ */ jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ jsx58(ComponentContainerContext.Consumer, { children: this.renderMain, },),
-          /* @__PURE__ */ jsx58(TextStyleSheet, {},),
+          /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, { children: this.renderMain, },),
+          /* @__PURE__ */ jsx(TextStyleSheet, {},),
         ],
       },);
     }
@@ -29514,25 +29516,25 @@ function transformString(transform2,) {
   }
   return result;
 }
-var LinearGradientElement = class extends Component12 {
+var LinearGradientElement = class extends Component {
   render() {
     const { id: id3, stops, x1, x2, y1, y2, } = this.props;
-    return /* @__PURE__ */ jsx59('linearGradient', {
+    return /* @__PURE__ */ jsx('linearGradient', {
       id: id3,
       x1,
       x2,
       y1,
       y2,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx59('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+        return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
       },),
     },);
   }
 };
-var RadialGradientElement = class extends Component12 {
+var RadialGradientElement = class extends Component {
   render() {
     const { centerAnchorX, centerAnchorY, id: id3, widthFactor, heightFactor, stops, } = this.props;
-    return /* @__PURE__ */ jsx59('radialGradient', {
+    return /* @__PURE__ */ jsx('radialGradient', {
       id: id3,
       cy: centerAnchorY,
       cx: centerAnchorX,
@@ -29541,12 +29543,12 @@ var RadialGradientElement = class extends Component12 {
         heightFactor / widthFactor
       }) translate(-${centerAnchorX}, -${centerAnchorY})`,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx59('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+        return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
       },),
     },);
   }
 };
-var SVGRoot = class extends Component13 {
+var SVGRoot = class extends Component {
   render() {
     const { children, frame: frame2, innerRef, } = this.props;
     const { width, height, } = frame2;
@@ -29561,7 +29563,7 @@ var SVGRoot = class extends Component13 {
       transform: `translate(${fx}px, ${fy}px)`,
     };
     Layer.applyWillChange(this.props, svgStyle, false,);
-    return /* @__PURE__ */ jsx60('svg', {
+    return /* @__PURE__ */ jsx('svg', {
       width: '100%',
       height: '100%',
       xmlns: 'http://www.w3.org/2000/svg',
@@ -29682,28 +29684,28 @@ var Vector = /* @__PURE__ */ (() => {
       const currentName = target === 'PREVIEW' ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ jsx61(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
+        shapeReference = /* @__PURE__ */ jsx(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ jsx61('clipPath', {
+          strokeClipPath = /* @__PURE__ */ jsx('clipPath', {
             id: internalStrokeClipId.id,
-            children: /* @__PURE__ */ jsx61('use', { xlinkHref: internalShapeId.link, },),
+            children: /* @__PURE__ */ jsx('use', { xlinkHref: internalShapeId.link, },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ jsx61('use', {
+          mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ jsx61('use', {
+          strokeElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             clipPath: internalStrokeClipId.urlLink,
             fill: 'transparent',
             ...svgStrokeAttributes,
             strokeWidth,
           },);
-        } else {mainElement = /* @__PURE__ */ jsx61('use', {
+        } else {mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             clipPath: internalStrokeClipId.urlLink,
@@ -29713,7 +29715,7 @@ var Vector = /* @__PURE__ */ (() => {
           },);}
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ jsx61(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           ...{ ...pathAttributes, fill: vectorFill, ...svgStrokeAttributes, },
           name: currentName,
           variants,
@@ -29721,23 +29723,23 @@ var Vector = /* @__PURE__ */ (() => {
         },);
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ jsx61(ImagePatternElement, {
+        ? /* @__PURE__ */ jsx(ImagePatternElement, {
           ...imagePattern,
           repeat: BackgroundImage.isImageObject(fill,) && fill.fit === 'tile',
         },)
         : void 0;
       let gradient;
-      if (linearGradient) gradient = /* @__PURE__ */ jsx61(LinearGradientElement, { ...linearGradient, },);
-      else if (radialGradient) gradient = /* @__PURE__ */ jsx61(RadialGradientElement, { ...radialGradient, },);
+      if (linearGradient) gradient = /* @__PURE__ */ jsx(LinearGradientElement, { ...linearGradient, },);
+      else if (radialGradient) gradient = /* @__PURE__ */ jsx(RadialGradientElement, { ...radialGradient, },);
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
-        defs = /* @__PURE__ */ jsxs20('defs', {
+        defs = /* @__PURE__ */ jsxs('defs', {
           children: [shapeReference, strokeClipPath, shadow.definition, gradient, imagePatternElement,],
         },);
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ jsx61(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           ...{ ...pathAttributes, fill: vectorFill, ...svgStrokeAttributes, },
           opacity: opacityValue,
           variants,
@@ -29747,7 +29749,7 @@ var Vector = /* @__PURE__ */ (() => {
         return this.renderElement(mainElement,);
       }
       return this.renderElement(
-        /* @__PURE__ */ jsxs20(motion.g, {
+        /* @__PURE__ */ jsxs(motion.g, {
           opacity: opacityValue,
           variants,
           transition,
@@ -29760,7 +29762,7 @@ var Vector = /* @__PURE__ */ (() => {
       const frame2 = this.props.frame ?? rect ?? { x: 0, y: 0, width: 100, height: 100, };
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx61(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         frame: frame2,
         width,
         height,
@@ -29840,14 +29842,14 @@ var VectorGroup = /* @__PURE__ */ (() => {
         else name = defaultName;
       }
       return this.renderElement(
-        /* @__PURE__ */ jsx62('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
+        /* @__PURE__ */ jsx('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
       );
     }
     renderElement(element,) {
       const { isRootVectorNode, width, height, frame: frame2, willChangeTransform, includeTransform, } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx62(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         frame: frame2,
         width,
         height,
@@ -30116,8 +30118,8 @@ function initialRouteComponent(component,) {
 function useInitialRouteComponent(routes, homeNodeId,) {
   var _a;
   const InitialRouteComponent = (_a = routes[homeNodeId]) == null ? void 0 : _a.page;
-  const [RouteComponent, setRouteComponent,] = useState22(initialRouteComponent(InitialRouteComponent,),);
-  useEffect152(() => {
+  const [RouteComponent, setRouteComponent,] = useState(initialRouteComponent(InitialRouteComponent,),);
+  useEffect(() => {
     if (withPreload(InitialRouteComponent,)) void InitialRouteComponent.preload().then(setRouteComponent,);
   }, [],);
   return RouteComponent;
