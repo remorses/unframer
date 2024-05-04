@@ -117,15 +117,16 @@ export async function fixFramerCode({ resultFile }) {
         sourceType: 'module',
         plugins: [
             // '@babel/plugin-transform-react-pure-annotations',
-            // babelPluginDeduplicateImports,
+            babelPluginDeduplicateImports,
             // purePlugin,
         ],
         filename: '',
-
+        compact: false,
+        
         sourceMaps: false,
     })
 
-    let codeToFormat = output
+    let codeToFormat = babelRes!.code!
     let code = dprint.format('x.js', codeToFormat, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
