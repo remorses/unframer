@@ -107,37 +107,24 @@ export function babelPluginDeduplicateImports({
 
                         const specifiers = importDec.specifiers
                         for (let specifier of specifiers) {
-                            if (BabelTypes.isImportSpecifier(specifier)) {
-                                if (
-                                    !BabelTypes.isIdentifier(specifier.imported)
-                                ) {
-                                    continue
-                                }
-
-                                const importName = specifier.imported.name
-                                const str = `${source} - ${importName}`
-
-                                if (definedImports.has(str)) {
-                                    console.log(
-                                        `removing ${str} from ${source}...`,
-                                    )
-
-                                    importDec.specifiers =
-                                        importDec.specifiers.filter(
-                                            (x) => x !== specifier,
-                                        )
-                                    if (!importDec.specifiers.length) {
-                                        path.node.body = path.node.body.filter(
-                                            (x) => x !== importDec,
-                                        )
-                                    }
-                                }
-                                definedImports.add(str)
-                            }
                             if (
+                                BabelTypes.isImportSpecifier(specifier) ||
                                 BabelTypes.isImportDefaultSpecifier(specifier)
                             ) {
-                                const importName = specifier.local.name
+                                let importName = ''
+                                if (BabelTypes.isImportSpecifier(specifier)) {
+                                    if (
+                                        !BabelTypes.isIdentifier(
+                                            specifier.imported,
+                                        )
+                                    ) {
+                                        continue
+                                    }
+                                    importName = specifier.imported.name
+                                } else {
+                                    importName = 'default'
+                                }
+
                                 const str = `${source} - ${importName}`
 
                                 if (definedImports.has(str)) {
