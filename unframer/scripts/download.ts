@@ -158,11 +158,11 @@ export async function fixFramerCode({ resultFile }) {
 //         framerMotion: "https://app.framerstatic.com/framer-motion.5PJAF455.js",
 //     })
 // </script>
-// main({
-//     framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
-//     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
-// })
-fixFramerCode({ resultFile: path.resolve(__dirname, '../src/framer.js') })
+main({
+    framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
+    // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
+})
+// fixFramerCode({ resultFile: path.resolve(__dirname, '../src/framer.js') })
 
 // function that extracts version from this code:
 // name: 'framer',

@@ -1,35 +1,35 @@
 import splitExportDeclaration from '@babel/helper-split-export-declaration'
-import { Binding, visitors } from '@babel/traverse'
+import type { Scope } from '@babel/traverse'
+import { visitors } from '@babel/traverse'
 import { traverseNode } from '@babel/traverse/lib/traverse-node'
 
 import * as t from '@babel/types'
-import { isBinding } from '@babel/types'
 
-import { requeueComputedKeyAndDecorators } from '@babel/helper-environment-visitor'
-
+import { NodePath, Visitor } from '@babel/core'
 import type { Identifier } from '@babel/types'
-import { Visitor, NodePath } from '@babel/core'
 
-const renameVisitor: Visitor<Renamer> = {
+const renameVisitor: Visitor<BatchRenamer> = {
     ReferencedIdentifier({ node }, state) {
-        if (node.name === state.oldName) {
-            node.name = state.newName
-        }
-    },
-
-    Scope(path, state) {
-        if (
-            !path.scope.bindingIdentifierEquals(
-                state.oldName,
-                state.binding.identifier,
-            )
-        ) {
-            path.skip()
-            if (path.isMethod()) {
-                requeueComputedKeyAndDecorators(path)
+        for (let [oldName, newName] of state.map) {
+            if (node.name === oldName) {
+                node.name = newName
             }
         }
     },
+
+    // Scope(path, state) {
+    //     if (
+    //         !path.scope.bindingIdentifierEquals(
+    //             state.oldName,
+    //             state.binding.identifier,
+    //         )
+    //     ) {
+    //         path.skip()
+    //         if (path.isMethod()) {
+    //             requeueComputedKeyAndDecorators(path)
+    //         }
+    //     }
+    // },
 
     ObjectProperty({ node, scope }, state) {
         const { name } = node.key as Identifier
@@ -39,15 +39,21 @@ const renameVisitor: Visitor<Renamer> = {
             // AssignmentExpression|Declaration|VariableDeclarator visitor,
             // while in object literals it's renamed later by the
             // ReferencedIdentifier visitor.
-            (name === state.oldName || name === state.newName) &&
+            // (name === state.oldName || name === state.newName) &&
+            (state.map.has(name) || inverseMap(state.map).has(name)) &&
             // Ignore shadowed bindings
-            scope.getBindingIdentifier(name) === state.binding.identifier
+            [...state.map.keys()].some(
+                (oldName) =>
+                    state.scope.getBindingIdentifier(oldName) ===
+                    scope.getBindingIdentifier(name),
+            )
         ) {
             node.shorthand = false
             if (node.extra?.shorthand) node.extra.shorthand = false
         }
     },
 
+    // @ts-ignore
     'AssignmentExpression|Declaration|VariableDeclarator'(
         path: NodePath<
             t.AssignmentPattern | t.Declaration | t.VariableDeclarator
@@ -58,21 +64,33 @@ const renameVisitor: Visitor<Renamer> = {
         const ids = path.getOuterBindingIdentifiers()
 
         for (const name in ids) {
-            if (name === state.oldName) ids[name].name = state.newName
+            for (let [oldName, newName] of state.map) {
+                if (name === oldName) ids[name].name = newName
+            }
         }
     },
 }
 
-export default class Renamer {
-    constructor(binding: Binding, oldName: string, newName: string) {
-        this.newName = newName
-        this.oldName = oldName
-        this.binding = binding
+let cache = new WeakMap()
+function inverseMap(map: Map<string, string>) {
+    if (cache.has(map)) return cache.get(map)
+    const inverse = new Map()
+    for (let [key, value] of map) {
+        inverse.set(value, key)
+    }
+    cache.set(map, inverse)
+    return inverse
+}
+
+export default class BatchRenamer {
+    constructor(scope: Scope, map: Map<string, string>) {
+        this.map = map
+        this.scope = scope
     }
 
-    declare oldName: string
-    declare newName: string
-    declare binding: Binding
+    declare map: Map<string, string>
+
+    declare scope: Scope
 
     maybeConvertFromExportDeclaration(parentDeclar: NodePath) {
         const maybeExportDeclar = parentDeclar.parentPath
@@ -99,59 +117,34 @@ export default class Renamer {
         )
     }
 
-    maybeConvertFromClassFunctionDeclaration(path: NodePath) {
-        return path // TODO
-
-        // // retain the `name` of a class/function declaration
-
-        // if (!path.isFunctionDeclaration() && !path.isClassDeclaration()) return;
-        // if (this.binding.kind !== "hoisted") return;
-
-        // path.node.id = identifier(this.oldName);
-        // path.node._blockHoist = 3;
-
-        // path.replaceWith(
-        //   variableDeclaration("let", [
-        //     variableDeclarator(identifier(this.newName), toExpression(path.node)),
-        //   ]),
-        // );
-    }
-
     maybeConvertFromClassFunctionExpression(path: NodePath) {
-        return path // TODO
-
-        // // retain the `name` of a class/function expression
-
-        // if (!path.isFunctionExpression() && !path.isClassExpression()) return;
-        // if (this.binding.kind !== "local") return;
-
-        // path.node.id = identifier(this.oldName);
-
-        // this.binding.scope.parent.push({
-        //   id: identifier(this.newName),
-        // });
-
-        // path.replaceWith(
-        //   assignmentExpression("=", identifier(this.newName), path.node),
-        // );
+        return path
     }
 
     rename(/* Babel 7 - block?: t.Pattern | t.Scopable */) {
-        const { binding, oldName, newName } = this
-        const { scope, path } = binding
+        const { scope, map } = this
 
-        const parentDeclar = path.find(
-            (path) =>
-                path.isDeclaration() ||
-                path.isFunctionExpression() ||
-                path.isClassExpression(),
-        )
-        if (parentDeclar) {
-            const bindingIds = parentDeclar.getOuterBindingIdentifiers()
-            if (bindingIds[oldName] === binding.identifier) {
-                // When we are renaming an exported identifier, we need to ensure that
-                // the exported binding keeps the old name.
-                this.maybeConvertFromExportDeclaration(parentDeclar)
+        for (let binding of [...map.keys()].map((name) =>
+            scope.getBinding(name),
+        )) {
+            const path = binding!.path
+            const parentDeclar = path.find(
+                (path) =>
+                    path.isDeclaration() ||
+                    path.isFunctionExpression() ||
+                    path.isClassExpression(),
+            )
+            if (parentDeclar) {
+                const bindingIds = parentDeclar.getOuterBindingIdentifiers()
+                const oldNames = Object.keys(bindingIds)
+                for (let oldName of oldNames) {
+                    const binding = scope.getBinding(oldName)!
+                    if (bindingIds[oldName] === binding.identifier) {
+                        // When we are renaming an exported identifier, we need to ensure that
+                        // the exported binding keeps the old name.
+                        this.maybeConvertFromExportDeclaration(parentDeclar)
+                    }
+                }
             }
         }
 
@@ -169,19 +162,20 @@ export default class Renamer {
             { discriminant: true },
         )
 
-        if (process.env.BABEL_8_BREAKING) {
-            scope.removeOwnBinding(oldName)
-            scope.bindings[newName] = binding
-            this.binding.identifier.name = newName
-        } else if (!arguments[0]) {
-            scope.removeOwnBinding(oldName)
-            scope.bindings[newName] = binding
-            this.binding.identifier.name = newName
-        }
+        for (let [oldName, newName] of map) {
+            if (oldName === newName) continue
 
-        if (parentDeclar) {
-            this.maybeConvertFromClassFunctionDeclaration(path)
-            this.maybeConvertFromClassFunctionExpression(path)
+            if (process.env.BABEL_8_BREAKING) {
+                scope.removeOwnBinding(oldName)
+                const binding = scope.getBinding(oldName)!
+                scope.bindings[newName] = binding
+                binding.identifier.name = newName
+            } else if (!arguments[0]) {
+                scope.removeOwnBinding(oldName)
+                const binding = scope.getBinding(oldName)!
+                scope.bindings[newName] = binding
+                binding.identifier.name = newName
+            }
         }
     }
 }

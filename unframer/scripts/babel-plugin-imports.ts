@@ -2,7 +2,7 @@ import * as BabelTypes from '@babel/types'
 
 import { PluginObj } from '@babel/core'
 import { ImportDeclaration, ImportSpecifier, Identifier } from '@babel/types'
-import Renamer from './renamer'
+import BatchRenamer from './renamer'
 
 export function babelPluginDeduplicateImports({
     types: t,
@@ -111,14 +111,21 @@ export function babelPluginDeduplicateImports({
                             console.log(
                                 `renaming ${local} to ${consolidated}...`,
                             )
-                            const renamer = new Renamer(
-                                path.scope.getBinding(local)!,
-                                local,
-                                consolidated,
-                            )
-                            renamer.rename()
                         }
                     }
+
+                    const map = new Map<string, string>(
+                        Object.values(importAliasMap).map((x) => [
+                            x.importName,
+                            x.consolidated,
+                        ]),
+                    )
+                    const renamer = new BatchRenamer(
+                        path.scope,
+                        map,
+                    )
+                    renamer.rename()
+
                     const importDecs = path.node.body
                         .slice(0, 200)
                         .filter((node) =>
