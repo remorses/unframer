@@ -58,7 +58,7 @@
         "@babel/helper-annotate-as-pure": "^7.22.5",
         "@babel/plugin-transform-react-pure-annotations": "^7.24.1",
         "@babel/types": "^7.24.5",
-        "@babel__core": "link:@types/@babel__core",
+        "@types/babel__core": "^7.20.5",
         "@types/fs-extra": "^11.0.1",
         "@types/node": "^20.5.7",
         "@xmorse/deployment-utils": "^0.1.0",

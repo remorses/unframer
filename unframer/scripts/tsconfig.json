@@ -1,0 +1,15 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "target": "ES2015",
+        "esModuleInterop": true,
+        "lib": ["dom"],
+        "moduleResolution": "Node",
+        "module": "ESNext",
+        "noEmit": false,
+        "skipLibCheck": true,
+        "jsx": "react-jsx",
+
+        "outDir": "dist"
+    }
+}

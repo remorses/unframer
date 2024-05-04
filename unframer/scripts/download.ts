@@ -9,6 +9,7 @@ import fs from 'fs'
 import path from 'path'
 import { esbuildPluginBundleDependencies } from '../src/esbuild'
 import { logger } from '../src/utils'
+import { babelPluginDeduplicateImports } from './babel-plugin-imports'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
@@ -65,13 +66,39 @@ export async function main({ framerTypesUrl }) {
     `
     fs.writeFileSync(path.resolve(out, 'framer.d.ts'), types)
 
-    const output = fs.readFileSync(resultFile, 'utf-8')
+    const { code, framerMotionVersion, framerVersion } = await fixFramerCode({
+        resultFile,
+    })
 
+    // if the file changed, call changeset
+    if (prevFile !== code) {
+        logger.log('new framer version found, versioning...')
+        const change = dedent`
+        ---
+        unframer: patch
+        --- 
+
+        Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
+        `
+        fs.writeFileSync(
+            `../.changeset/${framerVersion}-${framerMotionVersion}.md`,
+            change,
+            'utf-8',
+        )
+        // increase package.json version with a patch, with pnpm
+
+        // await changeset()
+    }
+}
+
+async function fixFramerCode({ resultFile }) {
+    const output = fs.readFileSync(resultFile, 'utf-8')
     const babelRes = transform(output || '', {
         babelrc: false,
         sourceType: 'module',
         plugins: [
-            '@babel/plugin-transform-react-pure-annotations',
+            // '@babel/plugin-transform-react-pure-annotations',
+            babelPluginDeduplicateImports,
             ({ types: t }) => ({
                 visitor: {
                     CallExpression(path) {
@@ -95,7 +122,7 @@ export async function main({ framerTypesUrl }) {
         sourceMaps: false,
     })
 
-    let code = dprint.format(resultFile, output, {
+    let code = dprint.format(resultFile, babelRes?.code!, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
         trailingCommas: 'always',
@@ -119,25 +146,7 @@ export async function main({ framerTypesUrl }) {
 
     const size = fs.statSync(resultFile).size / 1024 / 1024
     console.log(`framer.js size is ${Number(size).toFixed(2)} Mb`)
-    // if the file changed, call changeset
-    if (prevFile !== code) {
-        logger.log('new framer version found, versioning...')
-        const change = dedent`
-        ---
-        unframer: patch
-        --- 
-
-        Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
-        `
-        fs.writeFileSync(
-            `../.changeset/${framerVersion}-${framerMotionVersion}.md`,
-            change,
-            'utf-8',
-        )
-        // increase package.json version with a patch, with pnpm
-
-        // await changeset()
-    }
+    return { code, framerVersion, framerMotionVersion }
 }
 
 // find these scripts in Framer html:
