@@ -10,7 +10,7 @@
         "noEmit": false,
         "skipLibCheck": true,
         "jsx": "react-jsx",
-
+        "allowJs": true,
         "outDir": "dist"
     },
     "include": ["src"],

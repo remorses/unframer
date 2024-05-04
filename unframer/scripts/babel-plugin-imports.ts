@@ -120,17 +120,12 @@ export function babelPluginDeduplicateImports({
                             x.consolidated,
                         ]),
                     )
-                    const renamer = new BatchRenamer(
-                        path.scope,
-                        map,
-                    )
+                    const renamer = new BatchRenamer(path.scope, map)
                     renamer.rename()
 
-                    const importDecs = path.node.body
-                        .slice(0, 200)
-                        .filter((node) =>
-                            t.isImportDeclaration(node),
-                        ) as ImportDeclaration[]
+                    const importDecs = path.node.body.filter((node) =>
+                        t.isImportDeclaration(node),
+                    ) as ImportDeclaration[]
 
                     const definedImports = new Set<string>()
                     const later = [] as Function[]
