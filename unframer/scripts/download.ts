@@ -121,7 +121,7 @@ export async function fixFramerCode({ resultFile }) {
             // purePlugin,
         ],
         filename: '',
-        compact: false,
+        compact: true,
         
         sourceMaps: false,
     })
