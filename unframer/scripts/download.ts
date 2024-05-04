@@ -23,7 +23,7 @@ export async function main({ framerTypesUrl }) {
 
     // console.log('src', src)
     let out = path.resolve(__dirname, '../src')
-    const prevFile = await fs.promises
+    const prevFileCode = await fs.promises
         .readFile(path.resolve(out, `framer.js`), 'utf-8')
         .catch(() => '')
     out = path.resolve(out)
@@ -72,7 +72,7 @@ export async function main({ framerTypesUrl }) {
     })
 
     // if the file changed, call changeset
-    if (prevFile !== code) {
+    if (prevFileCode !== code) {
         logger.log('new framer version found, versioning...')
         const change = dedent`
         ---
