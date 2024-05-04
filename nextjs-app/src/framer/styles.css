@@ -220,6 +220,7 @@
 
         .framer-fit-text .framer-text {
             white-space: nowrap;
+            white-space-collapse: preserve;
         }
     
 
@@ -732,7 +733,6 @@ NavigationContainer
 }
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
-[data-framer-component-type="Form"] input { padding: var(--input-padding); }
 
 /* used by menu-overlay.js */
 

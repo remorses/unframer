@@ -11,7 +11,10 @@ export function babelPluginDeduplicateImports({
 }): PluginObj {
     const importAliasMap = new Map<
         string,
-        Map<string, { consolidated: string; importName; path: ImportSpecifier }>
+        Map<
+            string,
+            { consolidated: string; importName; path: ImportSpecifier; source }
+        >
     >()
 
     function addImport({
@@ -32,14 +35,21 @@ export function babelPluginDeduplicateImports({
         }
         importAliasMap
             .get(source)
-            ?.set(local, { consolidated, importName, path })
+            ?.set(local, { consolidated, importName, path, source })
     }
 
     function getConsolidatedName({ source, importName, defaultOne }) {
         const allSpecifiers = [...importAliasMap.values()].flatMap((x) => [
             ...x.values(),
         ])
-        const first = allSpecifiers.find((x) => x.importName === importName)
+        const first = allSpecifiers.find((x) => {
+            if (importName === 'default' || importName === 'namespace') {
+                if (source !== x.source) {
+                    return false
+                }
+            }
+            return x.importName === importName
+        })
         return first?.consolidated || defaultOne
     }
 
@@ -156,28 +166,28 @@ export function babelPluginDeduplicateImports({
                             ) {
                                 continue
                             }
-                            let importName = ''
+                            let importKey = ''
                             if (
                                 BabelTypes.isImportDefaultSpecifier(specifier)
                             ) {
-                                importName = 'default'
+                                importKey = source + 'default'
                             } else if (
                                 BabelTypes.isImportNamespaceSpecifier(specifier)
                             ) {
-                                importName = 'namespace'
+                                importKey = source + 'namespace'
                             } else {
                                 if (
                                     !BabelTypes.isIdentifier(specifier.imported)
                                 ) {
                                     continue
                                 }
-                                importName = specifier.imported.name
+                                importKey = specifier.imported.name
                             }
 
-                            if (definedImports.has(importName)) {
+                            if (definedImports.has(importKey)) {
                                 later.push(() => {
                                     console.log(
-                                        `removing ${importName} from ${source}...`,
+                                        `removing ${importKey} from ${source}...`,
                                     )
 
                                     importDec.specifiers =
@@ -192,7 +202,7 @@ export function babelPluginDeduplicateImports({
                                     }
                                 })
                             }
-                            definedImports.add(importName)
+                            definedImports.add(importKey)
                         }
                     }
                     for (let fn of later) {

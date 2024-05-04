@@ -40,13 +40,13 @@ export default function Home() {
                     />
                 </div>
 
-                <FullPage.Responsive
+                {/* <FullPage.Responsive
                     variants={{
                         lg: 'Desktop',
                         md: 'Tablet',
                         base: 'Tablet',
                     }}
-                />
+                /> */}
                 <Comp />
                 <Collection />
                 <Card />

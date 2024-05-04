@@ -1,7 +1,7 @@
 'use client'
 
 import 'nextjs-app/src/framer/styles.css'
-import { AnimatePresence } from 'unframer'
+import { AnimatePresence, PageRoot } from 'unframer'
 
 import Logos from 'nextjs-app/src/framer/logos'
 import Menus from 'nextjs-app/src/framer/menus'
@@ -15,12 +15,12 @@ import Card from 'nextjs-app/src/framer/card'
 
 export default function Home() {
     return (
-        <AnimatePresence>
-            {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
+        <>
+            <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' />
 
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
                 <div className=' flex z-10 w-full absolute flex-col items-center'>
-                    <Menus className=' mx-auto' />
+                    <Menus  className=' mx-auto' />
                 </div>
                 <div className='pt-[200px]'></div>
                 <Hero.Responsive
@@ -39,20 +39,20 @@ export default function Home() {
                         }}
                     />
                 </div>
-
-                <FullPage.Responsive
+                
+                {/* <FullPage.Responsive
                     variants={{
                         lg: 'Desktop',
                         md: 'Tablet',
                         base: 'Tablet',
                     }}
-                />
+                /> */}
                 <Comp />
                 <Collection />
                 <Card />
 
                 <div className='pt-[200px]'></div>
             </div>
-        </AnimatePresence>
+        </>
     )
 }

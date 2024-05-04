@@ -117,7 +117,7 @@ export async function fixFramerCode({ resultFile }) {
         sourceType: 'module',
         plugins: [
             // '@babel/plugin-transform-react-pure-annotations',
-            babelPluginDeduplicateImports,
+            // babelPluginDeduplicateImports,
             // purePlugin,
         ],
         filename: '',
@@ -189,7 +189,7 @@ function extractFramerMotionVersion(code: string) {
 
 async function getLatestFramerScriptSrc({ session }) {
     const res = await fetch(
-        'https://framer.com/projects/unframer--MOHUmEgItazhBLBtW6H0-adT3u?node=augiA20Il',
+        'https://framer.com/projects/unframer-source--XOxwdyyCrFEE9uKnKFPq-6gX7n',
         {
             headers: {
                 accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
