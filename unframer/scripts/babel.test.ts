@@ -1,4 +1,5 @@
 import { test, expect, describe } from 'vitest'
+import dprint from 'dprint-node'
 import dedent from 'dedent'
 import { babelPluginDeduplicateImports } from './babel-plugin-imports'
 import { transform } from '@babel/core'
@@ -8,11 +9,50 @@ function trans(code: string) {
         babelrc: false,
         sourceType: 'module',
         plugins: [babelPluginDeduplicateImports],
-        filename: '',
+        filename: 'x.js',
         sourceMaps: false,
     })
-    return res!.code!
+    let out = res!.code!
+    let formatted = dprint.format('x', out, {
+        lineWidth: 140,
+        quoteStyle: 'alwaysSingle',
+
+        trailingCommas: 'always',
+        semiColons: 'always',
+    })
+    return formatted
 }
+
+test('babel bug', () => {
+    expect(
+        trans(dedent`
+        if (isPresent2) {
+            if (initial && animateConfig) {
+            runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
+            }
+        } else {
+            if (exit) {
+            runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
+            } else {
+            safeToRemove();
+            }
+        }
+        `),
+    ).toMatchInlineSnapshot(`
+      "if (isPresent2) {
+        if (initial && animateConfig) {
+          runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
+        }
+      } else {
+        if (exit) {
+          runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
+        } else {
+          safeToRemove();
+        }
+      }
+      "
+    `)
+})
 
 describe('babelPluginDeduplicateImports', () => {
     test('simple', () => {
@@ -37,11 +77,24 @@ describe('babelPluginDeduplicateImports', () => {
         ).toMatchInlineSnapshot(`
           "import React1 from 'react';
           import * as ReactAll from 'react';
-          import { Fragment } from 'react/jsx-runtime';
-          import { createContext } from 'react';
-          import { useEffect, useLayoutEffect } from 'react';
-          import { jsx, jsxs } from 'react/jsx-runtime';
-          console.log(React1, React1, createContext, createContext, createContext, useEffect, useLayoutEffect, createContext, createContext, jsx, jsxs);"
+          import { Fragment, } from 'react/jsx-runtime';
+          import { createContext, } from 'react';
+          import { useEffect, useLayoutEffect, } from 'react';
+          import { jsx, jsxs, } from 'react/jsx-runtime';
+          console.log(
+            React1,
+            React1,
+            createContext,
+            createContext,
+            createContext,
+            useEffect,
+            useLayoutEffect,
+            createContext,
+            createContext,
+            jsx,
+            jsxs,
+          );
+          "
         `)
     })
 })

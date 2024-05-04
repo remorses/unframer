@@ -125,9 +125,11 @@ export async function fixFramerCode({ resultFile }) {
         sourceMaps: false,
     })
 
-    let code = dprint.format(resultFile, babelRes?.code!, {
+    let codeToFormat = output
+    let code = dprint.format('x.js', codeToFormat, {
         lineWidth: 140,
         quoteStyle: 'alwaysSingle',
+
         trailingCommas: 'always',
         semiColons: 'always',
     })
