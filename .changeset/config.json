@@ -6,5 +6,5 @@
     "access": "public",
     "baseBranch": "main",
     "updateInternalDependencies": "patch",
-    "ignore": ["nextjs-app"]
+    "ignore": ["nextjs-app", "remix-app"]
 }
