@@ -132,13 +132,25 @@ importers:
       '@babel/helper-annotate-as-pure':
         specifier: ^7.22.5
         version: 7.22.5
+      '@babel/helper-environment-visitor':
+        specifier: ^7.22.20
+        version: 7.22.20
+      '@babel/helper-split-export-declaration':
+        specifier: ^7.24.5
+        version: 7.24.5
       '@babel/plugin-transform-react-pure-annotations':
         specifier: ^7.24.1
         version: 7.24.1(@babel/core@7.24.5)
+      '@babel/traverse':
+        specifier: ^7.24.5
+        version: 7.24.5
       '@babel/types':
         specifier: ^7.24.5
         version: 7.24.5
       '@types/babel__core':
+        specifier: ^7.20.5
+        version: 7.20.5
+      '@types/babel__traverse':
         specifier: ^7.20.5
         version: 7.20.5
       '@types/fs-extra':

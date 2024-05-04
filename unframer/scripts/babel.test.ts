@@ -11,7 +11,7 @@ function trans(code: string) {
         filename: '',
         sourceMaps: false,
     })
-    return res.code!
+    return res!.code!
 }
 
 describe('babelPluginDeduplicateImports', () => {
@@ -20,6 +20,10 @@ describe('babelPluginDeduplicateImports', () => {
             trans(dedent`
             import React1 from 'react';
             import React2 from 'react';
+            import * as ReactAll from 'react';
+            import * as ReactEverything from 'react';
+            import { Fragment, } from 'react/jsx-runtime'
+            import { Fragment as Fragment2, } from 'react'
             import { createContext, } from 'react';
             import { createContext as createContext2, } from 'react';
             import { createContext as createContext3, } from 'react';
@@ -32,6 +36,8 @@ describe('babelPluginDeduplicateImports', () => {
         `),
         ).toMatchInlineSnapshot(`
           "import React1 from 'react';
+          import * as ReactAll from 'react';
+          import { Fragment } from 'react/jsx-runtime';
           import { createContext } from 'react';
           import { useEffect, useLayoutEffect } from 'react';
           import { jsx, jsxs } from 'react/jsx-runtime';

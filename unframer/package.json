@@ -56,9 +56,13 @@
     "devDependencies": {
         "@babel/core": "^7.24.5",
         "@babel/helper-annotate-as-pure": "^7.22.5",
+        "@babel/helper-environment-visitor": "^7.22.20",
+        "@babel/helper-split-export-declaration": "^7.24.5",
         "@babel/plugin-transform-react-pure-annotations": "^7.24.1",
+        "@babel/traverse": "^7.24.5",
         "@babel/types": "^7.24.5",
         "@types/babel__core": "^7.20.5",
+        "@types/babel__traverse": "^7.20.5",
         "@types/fs-extra": "^11.0.1",
         "@types/node": "^20.5.7",
         "@xmorse/deployment-utils": "^0.1.0",
