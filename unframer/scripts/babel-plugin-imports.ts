@@ -8,89 +8,181 @@ export function babelPluginDeduplicateImports({
 }: {
     types: typeof BabelTypes
 }): PluginObj {
-    const importAliasMap = new Map<string, Map<string, string>>()
+    const importAliasMap = new Map<
+        string,
+        Map<string, { consolidated: string; importName; path: ImportSpecifier }>
+    >()
 
-    function addImport(source: string, imported: string, local: string) {
+    function addImport({
+        source,
+        local,
+        consolidated,
+        importName,
+        path,
+    }: {
+        source: string
+        local: string
+        consolidated: string
+        importName: string
+        path
+    }) {
         if (!importAliasMap.has(source)) {
             importAliasMap.set(source, new Map())
         }
-        importAliasMap.get(source)?.set(imported, local)
+        importAliasMap
+            .get(source)
+            ?.set(local, { consolidated, importName, path })
     }
 
-    function getLocalImportName(source: string, imported: string) {
-        return importAliasMap.get(source)?.get(imported)
+    function getConsolidatedName({ source, importName, defaultOne }) {
+        const modMap = importAliasMap.get(source)
+        if (!modMap) {
+            return defaultOne
+        }
+        const first = [...modMap.values()].find(
+            (x) => x.importName === importName,
+        )
+        return first?.consolidated || defaultOne
     }
 
     return {
         visitor: {
             ImportDeclaration(path) {
                 const source = path.node.source.value
+
                 path.node.specifiers.forEach((specifier) => {
                     if (
                         t.isImportSpecifier(specifier) &&
                         BabelTypes.isIdentifier(specifier.imported)
                     ) {
-                        addImport(
+                        const importName = specifier.imported.name
+                        const modMap = importAliasMap.get(source)
+                        const consolidatedName = importName
+                        addImport({
                             source,
-                            specifier.imported.name,
-                            specifier.local.name,
-                        )
+                            local: specifier.local.name,
+                            importName,
+                            consolidated: consolidatedName,
+                            path,
+                        })
                     } else if (
                         t.isImportDefaultSpecifier(specifier) ||
                         t.isImportNamespaceSpecifier(specifier)
                     ) {
-                        addImport(source, 'default', specifier.local.name)
+                        const importName = 'default'
+                        const modMap = importAliasMap.get(source)
+                        const consolidatedName = getConsolidatedName({
+                            source,
+                            importName,
+                            defaultOne: specifier.local.name,
+                        })
+                        addImport({
+                            source,
+                            local: specifier.local.name,
+                            importName,
+                            consolidated: consolidatedName,
+                            path,
+                        })
                     }
                 })
 
                 // Remove the current import declaration to later add the consolidated one
-                path.remove()
+                // path.remove()
             },
             Program: {
                 exit(path) {
-                    const consolidatedImports = new Map<
-                        string,
-                        ImportDeclaration
-                    >()
+                    for (const [source, modMap] of importAliasMap) {
+                        // rename import names to consolidated names
+                        for (let [local, { consolidated, path: p }] of modMap) {
+                            path.scope.rename(local, consolidated)
+                        }
+                    }
+                    const importDecs = path.node.body.filter((node) =>
+                        t.isImportDeclaration(node),
+                    ) as ImportDeclaration[]
 
-                    importAliasMap.forEach((aliases, source) => {
-                        const specifiers: ImportSpecifier[] = []
-                        aliases.forEach((local, imported) => {
-                            specifiers.push(
-                                t.importSpecifier(
-                                    t.identifier(local),
-                                    t.identifier(imported),
-                                ),
-                            )
-                        })
-                        consolidatedImports.set(
-                            source,
-                            t.importDeclaration(
-                                specifiers,
-                                t.stringLiteral(source),
-                            ),
-                        )
-                    })
+                    const definedImports = new Set<string>()
+                    for (let importDec of importDecs) {
+                        const source = importDec.source.value
 
-                    consolidatedImports.forEach((importDeclaration) => {
-                        path.unshiftContainer('body', importDeclaration)
-                    })
+                        const specifiers = importDec.specifiers
+                        for (let specifier of specifiers) {
+                            if (BabelTypes.isImportSpecifier(specifier)) {
+                                if (
+                                    !BabelTypes.isIdentifier(specifier.imported)
+                                ) {
+                                    continue
+                                }
+
+                                const importName = specifier.imported.name
+                                const str = `${source} - ${importName}`
+
+                                if (definedImports.has(str)) {
+                                    console.log(
+                                        `removing ${str} from ${source}...`,
+                                    )
+
+                                    importDec.specifiers =
+                                        importDec.specifiers.filter(
+                                            (x) => x !== specifier,
+                                        )
+                                    if (!importDec.specifiers.length) {
+                                        path.node.body = path.node.body.filter(
+                                            (x) => x !== importDec,
+                                        )
+                                    }
+                                }
+                                definedImports.add(str)
+                            }
+                            if (
+                                BabelTypes.isImportDefaultSpecifier(specifier)
+                            ) {
+                                const importName = specifier.local.name
+                                const str = `${source} - ${importName}`
+
+                                if (definedImports.has(str)) {
+                                    console.log(
+                                        `removing ${str} from ${source}...`,
+                                    )
+
+                                    importDec.specifiers =
+                                        importDec.specifiers.filter(
+                                            (x) => x !== specifier,
+                                        )
+                                    if (!importDec.specifiers.length) {
+                                        path.node.body = path.node.body.filter(
+                                            (x) => x !== importDec,
+                                        )
+                                    }
+                                }
+                                definedImports.add(str)
+                            }
+                        }
+                    }
                 },
             },
-            Identifier(path) {
-                const name = path.node.name
-                const binding = path.scope.getBinding(name)
+            // Identifier(path) {
+            //     const name = path.node.name
+            //     const binding = path.scope.getBinding(name)
 
-                if (binding && t.isImportSpecifier(binding.path.node)) {
-                    const source = (binding.path.parent as ImportDeclaration)
-                        .source.value
-                    const localName = getLocalImportName(source, name)
+            //     if (binding && t.isImportSpecifier(binding.path.node)) {
+            //         const source = (binding.path.parent as ImportDeclaration)
+            //             .source.value
+            //         const localName = getLocalImportName(source, name)
 
-                    if (localName && localName !== name) {
-                        path.node.name = localName
-                    }
-                }
-            },
+            //         if (localName && localName !== name) {
+            //             path.node.name = localName
+            //         }
+            //     }
+            // },
         },
     }
+}
+
+function jsonStringifyWithMaps(map) {
+    return JSON.stringify(
+        [...map],
+        (key, value) => (value instanceof Map ? [...value] : value),
+        2,
+    )
 }

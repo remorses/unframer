@@ -91,7 +91,25 @@ export async function main({ framerTypesUrl }) {
     }
 }
 
-async function fixFramerCode({ resultFile }) {
+const purePlugin = ({ types: t }) => ({
+    visitor: {
+        CallExpression(path) {
+            if (path.getFunctionParent()) return
+            const { parent } = path
+            if (
+                t.isVariableDeclarator(parent) ||
+                t.isAssignmentExpression(parent) ||
+                t.isObjectProperty(parent) ||
+                t.isArrayExpression(parent) ||
+                t.isCallExpression(parent)
+            ) {
+                annotateAsPure(path)
+            }
+        },
+    },
+})
+
+export async function fixFramerCode({ resultFile }) {
     const output = fs.readFileSync(resultFile, 'utf-8')
     const babelRes = transform(output || '', {
         babelrc: false,
@@ -99,23 +117,7 @@ async function fixFramerCode({ resultFile }) {
         plugins: [
             // '@babel/plugin-transform-react-pure-annotations',
             babelPluginDeduplicateImports,
-            ({ types: t }) => ({
-                visitor: {
-                    CallExpression(path) {
-                        if (path.getFunctionParent()) return
-                        const { parent } = path
-                        if (
-                            t.isVariableDeclarator(parent) ||
-                            t.isAssignmentExpression(parent) ||
-                            t.isObjectProperty(parent) ||
-                            t.isArrayExpression(parent) ||
-                            t.isCallExpression(parent)
-                        ) {
-                            annotateAsPure(path)
-                        }
-                    },
-                },
-            }),
+            // purePlugin,
         ],
         filename: '',
 
@@ -156,10 +158,11 @@ async function fixFramerCode({ resultFile }) {
 //         framerMotion: "https://app.framerstatic.com/framer-motion.5PJAF455.js",
 //     })
 // </script>
-main({
-    framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
-    // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
-})
+// main({
+//     framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
+//     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
+// })
+fixFramerCode({ resultFile: path.resolve(__dirname, '../src/framer.js') })
 
 // function that extracts version from this code:
 // name: 'framer',
