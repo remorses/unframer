@@ -10,7 +10,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Variant 6' | 'Variant 1' | 'Variant 2' | 'Variant 3' | 'Variant 4' | 'Variant 5' | 'Variant 7' | 'Variant 8' | 'Variant 9' | 'Variant 12' | 'Variant 13' | 'Variant 14' | 'Variant 15' | 'Variant 16' | 'Variant 17' | 'Variant 21' | 'Variant 22' | 'Variant 23' | 'Variant 24' | 'Variant 25' | 'Variant 26' | 'Variant 26' | 'Variant 12' | 'Variant 17' | 'Variant 17' | 'Variant 17' | 'Variant 17' | 'Variant 17' | 'Variant 17' | 'Variant 21' | 'Variant 21' | 'Variant 21' | 'Variant 26' | 'Variant 21'
+    "variant"?: 'Variant B-2' | 'Variant A-1' | 'Variant A-2' | 'Variant A-3' | 'Variant A-4' | 'Variant B-1' | 'Variant B-3' | 'Variant B-3' | 'Variant B-7' | 'Variant B-8' | 'Variant C-1' | 'Variant C-2' | 'Variant C-3' | 'Variant C-4' | 'Variant C-5' | 'Variant C-6' | 'Variant D-1' | 'Variant D-2' | 'Variant D-3' | 'Variant D-4' | 'Variant E-1' | 'Variant E-2' | 'Variant E-3' | 'Variant E-4' | 'Variant E-5' | 'Variant E-6' | 'Variant E-7' | 'Variant F-1' | 'Variant F-2' | 'Variant F-3' | 'Variant F-4' | 'Variant F-5' | 'Variant B-6'
 }
 
 const FyloFramerComponent = (props: Props) => any

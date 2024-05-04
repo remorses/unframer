@@ -31,10 +31,10 @@ importers:
         version: 5.4.2
       vite:
         specifier: ^5.2.8
-        version: 5.2.8(@types/node@20.12.7)
+        version: 5.2.8(@types/node@20.12.8)
       vitest:
         specifier: ^1.5.0
-        version: 1.5.0(@types/node@20.12.7)
+        version: 1.5.0(@types/node@20.12.8)
 
   nextjs-app:
     dependencies:
@@ -51,8 +51,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
       framer-motion:
-        specifier: npm:unframer
-        version: unframer@2.2.1(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(undici@6.13.0)
+        specifier: link:../unframer
+        version: link:../unframer
       next:
         specifier: 14.2.1
         version: 14.2.1(@opentelemetry/api@1.8.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -115,13 +115,13 @@ importers:
         version: 2.2.3
       native-fetch:
         specifier: ^4.0.2
-        version: 4.0.2(undici@6.13.0)
+        version: 4.0.2(undici@6.15.0)
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
       real-framer-motion:
-        specifier: npm:framer-motion@11.0.14
-        version: framer-motion@11.0.14(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: npm:framer-motion@11.1.7
+        version: framer-motion@11.1.7(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       tmp:
         specifier: ^0.2.1
         version: 0.2.1
@@ -941,8 +941,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@20.12.7':
-    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+  '@types/node@20.12.8':
+    resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
 
   '@types/node@20.2.5':
     resolution: {integrity: sha512-JJulVEQXmiY9Px5axXHeYGLSjhkZEnD+MDPDGbCbIAbMslkKwmygtZFy1X6s/075Yo94sf8GuSlFfPzysQrWZQ==}
@@ -1454,8 +1454,8 @@ packages:
   fraction.js@4.2.0:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
 
-  framer-motion@11.0.14:
-    resolution: {integrity: sha512-RFjo2hB1MTW0EWsHQaXgVn0AEUDGxAs0ZL2vVjTTJJu3N7wFiLkmqTn5ysLjL+qKZ9jvfpKXDb9waN9AyLqk8g==}
+  framer-motion@11.1.7:
+    resolution: {integrity: sha512-cW11Pu53eDAXUEhv5hEiWuIXWhfkbV32PlgVISn7jRdcAiVrJ1S03YQQ0/DzoswGYYwKi4qYmHHjCzAH52eSdQ==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -2555,17 +2555,9 @@ packages:
     resolution: {integrity: sha512-3ItfzbrhDlINjaP0duwnNsKpDQk3acHI3gVJ1z4fmwMK31k5G9OVIAMLSIaP6w4FaGkaAkN6zaQO9LUvZ1t7VA==}
     engines: {node: '>=14.0'}
 
-  undici@6.13.0:
-    resolution: {integrity: sha512-Q2rtqmZWrbP8nePMq7mOJIN98M0fYvSgV89vwl/BQRT4mDOeY2GXZngfGpcBBhtky3woM7G24wZV3Q304Bv6cw==}
-    engines: {node: '>=18.0'}
-
-  unframer@2.2.1:
-    resolution: {integrity: sha512-6vPiOM7ZAg7Oq94CV/GeuYsgjJW2hRGnVLkrppO1O4Rh8Rje9yS0btn+rWGhT1XhZfWJCOWHjcnQfmt+toajZQ==}
-    hasBin: true
-    peerDependencies:
-      '@types/react': '*'
-      react: '*'
-      react-dom: '*'
+  undici@6.15.0:
+    resolution: {integrity: sha512-VviMt2tlMg1BvQ0FKXxrz1eJuyrcISrL2sPfBf7ZskX/FCEc/7LeThQaoygsMJpNqrATWQIsRVx+1Dpe4jaYuQ==}
+    engines: {node: '>=18.17'}
 
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -3550,7 +3542,7 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@20.12.7':
+  '@types/node@20.12.8':
     dependencies:
       undici-types: 5.26.5
     optional: true
@@ -4177,14 +4169,7 @@ snapshots:
 
   fraction.js@4.2.0: {}
 
-  framer-motion@11.0.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      tslib: 2.6.2
-    optionalDependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-
-  framer-motion@11.0.14(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  framer-motion@11.1.7(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       tslib: 2.6.2
     optionalDependencies:
@@ -4629,9 +4614,9 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  native-fetch@4.0.2(undici@6.13.0):
+  native-fetch@4.0.2(undici@6.15.0):
     dependencies:
-      undici: 6.13.0
+      undici: 6.15.0
 
   next@14.2.1(@opentelemetry/api@1.8.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
@@ -5267,32 +5252,7 @@ snapshots:
     dependencies:
       '@fastify/busboy': 2.1.1
 
-  undici@6.13.0: {}
-
-  unframer@2.2.1(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(undici@6.13.0):
-    dependencies:
-      '@types/react': 18.2.66
-      async-sema: 3.1.1
-      cac: 6.7.14
-      chokidar: 3.5.3
-      dedent: 1.5.1
-      dprint-node: 1.0.8
-      esbuild: 0.20.2
-      esbuild-plugin-polyfill-node: 0.3.0(esbuild@0.20.2)
-      eventemitter3: 3.1.2
-      find-up: 5.0.0
-      fs-extra: 11.1.1
-      json5: 2.2.3
-      native-fetch: 4.0.2(undici@6.13.0)
-      picocolors: 1.0.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      real-framer-motion: framer-motion@11.0.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      tmp: 0.2.1
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - babel-plugin-macros
-      - undici
+  undici@6.15.0: {}
 
   universalify@0.1.2: {}
 
@@ -5329,13 +5289,13 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite-node@1.5.0(@types/node@20.12.7):
+  vite-node@1.5.0(@types/node@20.12.8):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.8(@types/node@20.12.7)
+      vite: 5.2.8(@types/node@20.12.8)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -5346,16 +5306,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.8(@types/node@20.12.7):
+  vite@5.2.8(@types/node@20.12.8):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.14.3
     optionalDependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
       fsevents: 2.3.3
 
-  vitest@1.5.0(@types/node@20.12.7):
+  vitest@1.5.0(@types/node@20.12.8):
     dependencies:
       '@vitest/expect': 1.5.0
       '@vitest/runner': 1.5.0
@@ -5374,11 +5334,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.7.0
       tinypool: 0.8.4
-      vite: 5.2.8(@types/node@20.12.7)
-      vite-node: 1.5.0(@types/node@20.12.7)
+      vite: 5.2.8(@types/node@20.12.8)
+      vite-node: 1.5.0(@types/node@20.12.8)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.8
     transitivePeerDependencies:
       - less
       - lightningcss

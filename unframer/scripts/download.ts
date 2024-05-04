@@ -139,6 +139,7 @@ export async function fixFramerCode({ resultFile }) {
         throw new Error('Failed to export combinedCSSRules')
     }
     code = codeAfter
+    // code = code.replace(/safeToRemove\(\)/g, 'safeToRemove?.()')
     // code = '// @ts-nocheck\n' + code
     const framerVersion = extractFramerVersion(code)
     const framerMotionVersion = extractFramerMotionVersion(code)

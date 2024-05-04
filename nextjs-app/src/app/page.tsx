@@ -15,7 +15,7 @@ import Card from '@/framer/card'
 
 export default function Home() {
     return (
-        <>
+        <AnimatePresence>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
 
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
@@ -27,9 +27,8 @@ export default function Home() {
                     variants={{ base: 'mobile', lg: 'Variant 1' }}
                     className='bg-gray-800 !p-14'
                 />
-                <AnimatePresence>
-                    <MenuOverlay />
-                </AnimatePresence>
+
+                <MenuOverlay />
 
                 <div className='relative h-[500px]'>
                     <Test.Responsive
@@ -54,6 +53,6 @@ export default function Home() {
 
                 <div className='pt-[200px]'></div>
             </div>
-        </>
+        </AnimatePresence>
     )
 }
