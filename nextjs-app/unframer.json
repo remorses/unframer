@@ -3,7 +3,7 @@
     "components": {
         "fylo": "https://framer.com/m/FYLO-COMPOSITION-5nyv.js@SvdQ0E7jGkV2jj2lbCzd",
         "hero": "https://framer.com/m/Header-WtSW.js",
-
+        "framerNav": "https://framer.com/m/Navigation-NMpQ.js",
         "logos": "https://framer.com/m/Logo-Ticker-1CEq.js",
         "testimonials": "https://framer.com/m/Comments-Hm3h.js",
         "menu-overlay": "https://framer.com/m/MenuOverlay-Wegr.js",

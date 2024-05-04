@@ -8,6 +8,7 @@ import Menus from 'nextjs-app/src/framer/menus'
 import Test from 'nextjs-app/src/framer/testimonials'
 import Comp from 'nextjs-app/src/framer/fylo'
 import FullPage from 'nextjs-app/src/framer/full-page'
+import FramerNav from 'nextjs-app/src/framer/framerNav'
 import Hero from 'nextjs-app/src/framer/hero'
 import MenuOverlay from 'nextjs-app/src/framer/menu-overlay'
 import Collection from 'nextjs-app/src/framer/collection'
@@ -20,8 +21,9 @@ export default function Home() {
 
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
                 <div className=' flex z-10 w-full absolute flex-col items-center'>
-                    <Menus  className=' mx-auto' />
+                    {/* <Menus  className=' mx-auto' /> */}
                 </div>
+                <FramerNav className='!w-full' />
                 <div className='pt-[200px]'></div>
                 <Hero.Responsive
                     variants={{ base: 'mobile', lg: 'Variant 1' }}
