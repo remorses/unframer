@@ -1639,6 +1639,7 @@ var MotionValue = class {
    * Set the state of the `MotionValue`, stopping any active animations,
    * effects, and resets velocity to `0`.
    */
+
   jump(v,) {
     this.updateAndNotify(v,);
     this.prev = v;
@@ -2760,16 +2761,6 @@ var VisualElement = class {
   scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
     return {};
   }
-  /**
-   * This method takes React props and returns found MotionValues. For example, HTML
-   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
-   *
-   * This isn't an abstract method as it needs calling in the constructor, but it is
-   * intended to be one.
-   */
-  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
-    return {};
-  }
   mount(instance,) {
     this.current = instance;
     visualElementStore.set(instance, this,);
@@ -3008,6 +2999,7 @@ var VisualElement = class {
    * we need to check for it in our state and as a last resort read it
    * directly from the instance (which might have performance implications).
    */
+
   readValue(key7,) {
     var _a;
     return this.latestValues[key7] !== void 0 || !this.current
