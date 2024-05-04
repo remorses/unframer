@@ -48,6 +48,7 @@ export async function main({ framerTypesUrl }) {
 
         pure: ['addPropertyControls'],
         define: {
+            'process.env.NODE_ENV': JSON.stringify('production'),
             // 'RenderEnvironment.target': JSON.stringify('PREVIEW'),
         },
         plugins: [esbuildPluginBundleDependencies({})],
