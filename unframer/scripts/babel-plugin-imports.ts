@@ -36,13 +36,10 @@ export function babelPluginDeduplicateImports({
     }
 
     function getConsolidatedName({ source, importName, defaultOne }) {
-        const modMap = importAliasMap.get(source)
-        if (!modMap) {
-            return defaultOne
-        }
-        const first = [...modMap.values()].find(
-            (x) => x.importName === importName,
-        )
+        const allSpecifiers = [...importAliasMap.values()].flatMap((x) => [
+            ...x.values(),
+        ])
+        const first = allSpecifiers.find((x) => x.importName === importName)
         return first?.consolidated || defaultOne
     }
 
@@ -58,7 +55,11 @@ export function babelPluginDeduplicateImports({
                     ) {
                         const importName = specifier.imported.name
 
-                        const consolidatedName = importName
+                        const consolidatedName = getConsolidatedName({
+                            source,
+                            importName,
+                            defaultOne: specifier.local.name,
+                        })
                         addImport({
                             source,
                             local: specifier.local.name,

@@ -2,15 +2,15 @@
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
-import { forwardRef, useContext, } from 'react';
+import { forwardRef, useContext as useContext3, } from 'react';
 import { useInsertionEffect, useRef, } from 'react';
 import { useCallback, } from 'react';
 import { useMemo, } from 'react';
 import { useId, } from 'react';
-import { createElement, Fragment, } from 'react';
+import { createElement as createElement2, Fragment, } from 'react';
 import React__default from 'react';
 import { useState, } from 'react';
-import { Children, cloneElement, isValidElement, } from 'react';
+import { Children, cloneElement as cloneElement2, isValidElement, } from 'react';
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -224,10 +224,10 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
 }
 var { schedule: microtask, cancel: cancelMicrotask, } = createRenderBatcher(queueMicrotask, false,);
 function useVisualElement(Component23, visualState, props, createVisualElement2,) {
-  const { visualElement: parent, } = useContext(MotionContext,);
-  const lazyContext = useContext(LazyContext,);
-  const presenceContext = useContext(PresenceContext,);
-  const reducedMotionConfig = useContext(MotionConfigContext,).reducedMotion;
+  const { visualElement: parent, } = useContext3(MotionContext,);
+  const lazyContext = useContext3(LazyContext,);
+  const presenceContext = useContext3(PresenceContext,);
+  const reducedMotionConfig = useContext3(MotionConfigContext,).reducedMotion;
   const visualElementRef = useRef();
   createVisualElement2 = createVisualElement2 || lazyContext.renderer;
   if (!visualElementRef.current && createVisualElement2) {
@@ -303,7 +303,7 @@ function getCurrentTreeVariants(props, context,) {
   return props.inherit !== false ? context : {};
 }
 function useCreateMotionContext(props,) {
-  const { initial, animate: animate22, } = getCurrentTreeVariants(props, useContext(MotionContext,),);
+  const { initial, animate: animate22, } = getCurrentTreeVariants(props, useContext3(MotionContext,),);
   return useMemo(() => ({ initial, animate: animate22, }), [variantLabelsAsDependency(initial,), variantLabelsAsDependency(animate22,),],);
 }
 function variantLabelsAsDependency(prop,) {
@@ -338,14 +338,14 @@ function createMotionComponent(
   preloadedFeatures2 && loadFeatures(preloadedFeatures2,);
   function MotionComponent(props, externalRef,) {
     let MeasureLayout2;
-    const configAndProps = { ...useContext(MotionConfigContext,), ...props, layoutId: useLayoutId(props,), };
+    const configAndProps = { ...useContext3(MotionConfigContext,), ...props, layoutId: useLayoutId(props,), };
     const { isStatic, } = configAndProps;
     const context = useCreateMotionContext(props,);
     const visualState = useVisualState2(props, isStatic,);
     if (!isStatic && isBrowser) {
       context.visualElement = useVisualElement(Component23, visualState, configAndProps, createVisualElement2,);
-      const initialLayoutGroupConfig = useContext(SwitchLayoutGroupContext,);
-      const isStrict = useContext(LazyContext,).strict;
+      const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
+      const isStrict = useContext3(LazyContext,).strict;
       if (context.visualElement) {
         MeasureLayout2 = context.visualElement.loadFeatures( // Note: Pass the full new combined props to correctly re-render dynamic feature components.
           configAndProps,
@@ -376,7 +376,7 @@ function createMotionComponent(
   return ForwardRefComponent;
 }
 function useLayoutId({ layoutId, },) {
-  const layoutGroupId = useContext(LayoutGroupContext,).id;
+  const layoutGroupId = useContext3(LayoutGroupContext,).id;
   return layoutGroupId && layoutId !== void 0 ? layoutGroupId + '-' + layoutId : layoutId;
 }
 var scaleCorrectors = {};
@@ -543,8 +543,8 @@ function makeState(
   return state;
 }
 var makeUseVisualState = (config) => (props, isStatic,) => {
-  const context = useContext(MotionContext,);
-  const presenceContext = useContext(PresenceContext,);
+  const context = useContext3(MotionContext,);
+  const presenceContext = useContext3(PresenceContext,);
   const make = () => makeState(config, props, context, presenceContext,);
   return isStatic ? make() : useConstant(make,);
 };
@@ -2600,7 +2600,7 @@ var createDelta = () => ({ x: createAxisDelta(), y: createAxisDelta(), });
 var createAxis = () => ({ min: 0, max: 0, });
 var createBox = () => ({ x: createAxis(), y: createAxis(), });
 function usePresence() {
-  const context = useContext(PresenceContext,);
+  const context = useContext3(PresenceContext,);
   if (context === null) return [true, null,];
   const { isPresent: isPresent2, onExitComplete, register, } = context;
   const id4 = useId();
@@ -2609,7 +2609,7 @@ function usePresence() {
   return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
 }
 function useIsPresent() {
-  return isPresent(useContext(PresenceContext,),);
+  return isPresent(useContext3(PresenceContext,),);
 }
 function isPresent(context,) {
   return context === null ? true : context.isPresent;
@@ -3251,7 +3251,7 @@ function createUseRender(forwardMotionProps = false,) {
     const elementProps = Component23 !== Fragment ? { ...filteredProps2, ...visualProps, ref, } : {};
     const { children, } = props;
     const renderedChildren = useMemo(() => isMotionValue(children,) ? children.get() : children, [children,],);
-    return createElement(Component23, { ...elementProps, children: renderedChildren, },);
+    return createElement2(Component23, { ...elementProps, children: renderedChildren, },);
   };
   return useRender;
 }
@@ -4302,11 +4302,11 @@ var MeasureLayoutWithContext = class extends React__default.Component {
 };
 function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
-  const layoutGroup = useContext(LayoutGroupContext,);
+  const layoutGroup = useContext3(LayoutGroupContext,);
   return React__default.createElement(MeasureLayoutWithContext, {
     ...props,
     layoutGroup,
-    switchLayoutGroup: useContext(SwitchLayoutGroupContext,),
+    switchLayoutGroup: useContext3(SwitchLayoutGroupContext,),
     isPresent: isPresent2,
     safeToRemove,
   },);
@@ -5776,7 +5776,7 @@ function PopChild({ children, isPresent: isPresent2, },) {
   const id4 = useId();
   const ref = useRef(null,);
   const size2 = useRef({ width: 0, height: 0, top: 0, left: 0, },);
-  const { nonce, } = useContext(MotionConfigContext,);
+  const { nonce, } = useContext3(MotionConfigContext,);
   useInsertionEffect(() => {
     const { width, height, top, left, } = size2.current;
     if (isPresent2 || !ref.current || !width || !height) return;
@@ -5857,7 +5857,7 @@ var AnimatePresence = (
   { children, custom, initial = true, onExitComplete, exitBeforeEnter, presenceAffectsLayout = true, mode = 'sync', },
 ) => {
   invariant(!exitBeforeEnter, 'Replace exitBeforeEnter with mode=\'wait\'',);
-  const forceRender = useContext(LayoutGroupContext,).forceRender || useForceUpdate()[0];
+  const forceRender = useContext3(LayoutGroupContext,).forceRender || useForceUpdate()[0];
   const isMounted = useIsMounted();
   const filteredChildren = onlyElements(children,);
   let childrenToRender = filteredChildren;
@@ -5949,12 +5949,12 @@ var AnimatePresence = (
   return React.createElement(
     React.Fragment,
     null,
-    exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement(child,)),
+    exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement2(child,)),
   );
 };
 function MotionConfig({ children, isValidProp, ...config },) {
   isValidProp && loadExternalIsValidProp(isValidProp,);
-  config = { ...useContext(MotionConfigContext,), ...config, };
+  config = { ...useContext3(MotionConfigContext,), ...config, };
   config.isStatic = useConstant(() => config.isStatic);
   const context = useMemo(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
   return React.createElement(MotionConfigContext.Provider, { value: context, }, children,);
@@ -6007,8 +6007,8 @@ function nodeGroup() {
 var shouldInheritGroup = (inherit) => inherit === true;
 var shouldInheritId = (inherit) => shouldInheritGroup(inherit === true,) || inherit === 'id';
 var LayoutGroup = ({ children, id: id4, inherit = true, },) => {
-  const layoutGroupContext = useContext(LayoutGroupContext,);
-  const deprecatedLayoutGroupContext = useContext(DeprecatedLayoutGroupContext,);
+  const layoutGroupContext = useContext3(LayoutGroupContext,);
+  const deprecatedLayoutGroupContext = useContext3(DeprecatedLayoutGroupContext,);
   const [forceRender, key7,] = useForceUpdate();
   const context = useRef(null,);
   const upstreamId = layoutGroupContext.id || deprecatedLayoutGroupContext;
@@ -6021,7 +6021,7 @@ var LayoutGroup = ({ children, id: id4, inherit = true, },) => {
 };
 function useMotionValue(initial,) {
   const value = useConstant(() => motionValue(initial,));
-  const { isStatic, } = useContext(MotionConfigContext,);
+  const { isStatic, } = useContext3(MotionConfigContext,);
   if (isStatic) {
     const [, setLatest,] = useState(initial,);
     useEffect(() => value.on('change', setLatest,), [],);
@@ -6138,7 +6138,7 @@ function useDefaultMotionValue(value, defaultValue = 0,) {
 }
 function ReorderItem({ children, style = {}, value, as = 'li', onDrag, layout: layout2 = true, ...props }, externalRef,) {
   const Component23 = useConstant(() => motion(as,));
-  const context = useContext(ReorderContext,);
+  const context = useContext3(ReorderContext,);
   const point2 = { x: useDefaultMotionValue(style.x,), y: useDefaultMotionValue(style.y,), };
   const zIndex = useTransform([point2.x, point2.y,], ([latestX, latestY,],) => latestX || latestY ? 1 : 'unset',);
   invariant(Boolean(context,), 'Reorder.Item must be a child of Reorder.Group',);
@@ -6177,7 +6177,7 @@ function useMotionTemplate(fragments, ...values) {
   return useCombineMotionValues(values.filter(isMotionValue,), buildValue,);
 }
 function useSpring(source, config = {},) {
-  const { isStatic, } = useContext(MotionConfigContext,);
+  const { isStatic, } = useContext3(MotionConfigContext,);
   const activeSpringAnimation = useRef(null,);
   const value = useMotionValue(isMotionValue(source,) ? source.get() : source,);
   const stopAnimation2 = () => {
@@ -6551,7 +6551,7 @@ function useViewportScroll() {
 }
 function useAnimationFrame(callback,) {
   const initialTimestamp = useRef(0,);
-  const { isStatic, } = useContext(MotionConfigContext,);
+  const { isStatic, } = useContext3(MotionConfigContext,);
   useEffect(() => {
     if (isStatic) return;
     const provideTimeSinceStart = ({ timestamp, delta, },) => {
@@ -6608,7 +6608,7 @@ function useReducedMotion() {
 }
 function useReducedMotionConfig() {
   const reducedMotionPreference = useReducedMotion();
-  const { reducedMotion, } = useContext(MotionConfigContext,);
+  const { reducedMotion, } = useContext3(MotionConfigContext,);
   if (reducedMotion === 'never') return false;
   else if (reducedMotion === 'always') return true;
   else return reducedMotionPreference;
@@ -7246,7 +7246,7 @@ var hasWarned = false;
 function useInvertedScale(scale2,) {
   let parentScaleX = useMotionValue(1,);
   let parentScaleY = useMotionValue(1,);
-  const { visualElement, } = useContext(MotionContext,);
+  const { visualElement, } = useContext3(MotionContext,);
   invariant(
     !!(scale2 || visualElement),
     'If no scale values are provided, useInvertedScale must be used within a child of another motion component.',
@@ -7312,10 +7312,10 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   acc[key7] = (process2) => cancelFrame(process2,);
   return acc;
 }, {},); // https :https://app.framerstatic.com/framer.6AXODO6Q.js
-import { Component, } from 'react';
-import { jsx, jsxs, } from 'react/jsx-runtime';
-import { startTransition, } from 'react';
-import { Suspense, } from 'react';
+import { Component as Component2, } from 'react';
+import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
+import { startTransition as startTransition2, } from 'react';
+import { Suspense as Suspense2, } from 'react';
 import { createRef, } from 'react';
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
@@ -7988,7 +7988,7 @@ function renderPage(Page4, defaultPageStyle,) {
 }
 var NotFoundError = class extends Error {};
 var ErrorBoundaryCaughtError = class extends Error {};
-var ErrorBoundary = class extends Component {
+var ErrorBoundary = class extends Component2 {
   constructor(props,) {
     super(props,);
     this.state = { error: void 0, forceUpdateKey: props.forceUpdateKey, };
@@ -8271,7 +8271,7 @@ function getPageEffectForRoute(currentRouteId, nextRouteId, { global: global2, r
 var defaultSitePageEffects = { global: void 0, routes: {}, };
 var PageEffectsContext = React__default.createContext(defaultSitePageEffects,);
 function PageEffectsProvider({ children, value, },) {
-  return jsx(PageEffectsContext.Provider, { value, children, },);
+  return _jsx5(PageEffectsContext.Provider, { value, children, },);
 }
 function usePageEffects() {
   return React__default.useContext(PageEffectsContext,);
@@ -8794,16 +8794,16 @@ function useGetRouteCallback(routes,) {
 }
 var RouterContext = React__default.createContext({},);
 function RouterAPIProvider({ api, children, },) {
-  return jsx(RouterContext.Provider, { value: api, children, },);
+  return _jsx5(RouterContext.Provider, { value: api, children, },);
 }
 function useRouter() {
   return React__default.useContext(RouterContext,);
 }
 function RoutesProvider({ routes, children, },) {
   const getRoute = useGetRouteCallback(routes,);
-  return jsx(RouterContext.Provider, { value: { getRoute, }, children, },);
+  return _jsx5(RouterContext.Provider, { value: { getRoute, }, children, },);
 }
-var SuspenseErrorBoundary = class extends Component {
+var SuspenseErrorBoundary = class extends Component2 {
   constructor() {
     super(...arguments,);
     this.state = { error: void 0, };
@@ -8825,7 +8825,7 @@ var SuspenseErrorBoundary = class extends Component {
   render() {
     if (this.state.error === void 0) return this.props.children;
     if (this.state.error instanceof ErrorBoundaryCaughtError) throw this.state.error.cause;
-    return jsx(Suspense, { children: this.props.fallbackChildren, },);
+    return _jsx5(Suspense2, { children: this.props.fallbackChildren, },);
   }
 };
 var suspendPromise = typeof window !== 'undefined' ? new Promise(() => {},) : null;
@@ -8834,7 +8834,10 @@ function Suspend() {
   throw suspendPromise;
 }
 function SuspenseThatPreservesDom({ children, },) {
-  return jsx(SuspenseErrorBoundary, { fallbackChildren: children, children: jsx(Suspense, { fallback: jsx(Suspend, {},), children, },), },);
+  return _jsx5(SuspenseErrorBoundary, {
+    fallbackChildren: children,
+    children: _jsx5(Suspense2, { fallback: _jsx5(Suspend, {},), children, },),
+  },);
 }
 var defaultLocaleId = 'default';
 var noopAsync = async () => {};
@@ -8952,7 +8955,7 @@ function Router(
     return {
       paginationInfo,
       setPaginationInfo: async (newPaginationInfo) => {
-        startTransition(() => {
+        startTransition2(() => {
           setPaginationInfo(newPaginationInfo,);
         },);
       },
@@ -8960,7 +8963,7 @@ function Router(
         if ((paginationInfo === null || paginationInfo === void 0 ? void 0 : paginationInfo.type) !== 'loadMore') return;
         const newPaginationInfo = { ...paginationInfo, currentPage: paginationInfo.currentPage + 1, };
         pushLoadMoreHistory(newPaginationInfo,);
-        startTransition(() => {
+        startTransition2(() => {
           setPaginationInfo(newPaginationInfo,);
         },);
       },
@@ -8995,7 +8998,7 @@ function Router(
           if (!localeResult) return;
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
-          startViewTransition2(currentRouteRef.current, currentRouteId2, () => startTransition(forceUpdate,),);
+          startViewTransition2(currentRouteRef.current, currentRouteId2, () => startTransition2(forceUpdate,),);
           monitorNextRender();
         } catch {}
       },
@@ -9020,7 +9023,7 @@ function Router(
       scheduleSideEffect(() => {
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
-      startTransition(forceUpdate,);
+      startTransition2(forceUpdate,);
       monitorNextRender();
     },
     [forceUpdate, monitorNextRender, scheduleSideEffect,],
@@ -9088,25 +9091,25 @@ function Router(
     ? fillPathVariables(current.path, currentPathVariables,)
     : current.path;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  return jsx(RouterAPIProvider, {
+  return _jsx5(RouterAPIProvider, {
     api,
-    children: jsx(LocaleInfoContext.Provider, {
+    children: _jsx5(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: jsx(CollectionListPaginationInfoContext.Provider, {
+      children: _jsx5(CollectionListPaginationInfoContext.Provider, {
         value: collectionListPaginationInfo,
-        children: jsxs(SuspenseThatPreservesDom, {
+        children: _jsxs(SuspenseThatPreservesDom, {
           children: [
-            jsx(ErrorBoundary, {
+            _jsx5(ErrorBoundary, {
               notFoundPage,
               defaultPageStyle,
               forceUpdateKey: dep,
-              children: jsx(React__default.Fragment, {
+              children: _jsx5(React__default.Fragment, {
                 children: pageExistsInCurrentLocale
                   ? renderPage(current.page, defaultPageStyle,)
                   : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
               }, remountKey,),
             },),
-            jsx(OnHydrationEnd, {
+            _jsx5(OnHydrationEnd, {
               addHydrationEndMarker: shouldMarkHydrationEnd,
               turnOffEventHandlerHack: enableImproveInpDuringHydration,
             },),
@@ -9213,7 +9216,7 @@ var CurrentRouteContext = React__default.createContext(void 0,);
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
-  const override = useContext(CurrentRouteContext,);
+  const override = useContext3(CurrentRouteContext,);
   const id3 = override !== null && override !== void 0 ? override : router.currentRouteId;
   if (!id3) return void 0;
   const route = (_a = router.getRoute) === null || _a === void 0 ? void 0 : _a.call(router, id3,);
@@ -11747,7 +11750,7 @@ addScaleCorrector({
   borderBottomWidth: correctBorderScale('y',),
 },);
 function MotionSetup({ children, },) {
-  return /* @__PURE__ */ jsx(Fragment, { children, },);
+  return /* @__PURE__ */ _jsx5(Fragment, { children, },);
 }
 function startAnimation(_key, value, target, transition = {},) {
   warnOnce2(`"startAnimation" is unsupported. Use "animate" instead: https://www.framer.com/api/motion/utilities/#animate`,);
@@ -11820,8 +11823,8 @@ var LayoutIdContext = React__default.createContext({
   enabled: true,
 },);
 function LayoutIdProvider({ children, },) {
-  const context = useContext(LayoutIdContext,);
-  if (context.top) return /* @__PURE__ */ jsx(Fragment, { children, },);
+  const context = useContext3(LayoutIdContext,);
+  if (context.top) return /* @__PURE__ */ _jsx5(Fragment, { children, },);
   const cache3 = useRef({ // When we provide a layoutId for a node based on it's first
     // duplicatedFrom id, we save it's layoutId mapped to it's actual id.
     // Future screen's nodes will check this cache first, to see if they've
@@ -11950,7 +11953,7 @@ function LayoutIdProvider({ children, },) {
     usedIds.clear();
   }, [],);
   const contextValue = useRef({ getLayoutId, persistLayoutIdCache, top: true, enabled: true, },).current;
-  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, { value: contextValue, children, },);
+  return /* @__PURE__ */ _jsx5(LayoutIdContext.Provider, { value: contextValue, children, },);
 }
 function nextLayoutId(identifier, initialValue, usedIds,) {
   let value = initialValue;
@@ -11962,11 +11965,11 @@ function nextLayoutId(identifier, initialValue, usedIds,) {
   return { layoutId, value, };
 }
 function AutomaticLayoutIds({ enabled = true, ...props },) {
-  const context = useContext(LayoutIdContext,);
+  const context = useContext3(LayoutIdContext,);
   const contextValue = useMemo(() => {
     return { ...context, enabled, };
   }, [enabled,],);
-  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, { ...props, value: contextValue, },);
+  return /* @__PURE__ */ _jsx5(LayoutIdContext.Provider, { ...props, value: contextValue, },);
 }
 function useConstant2(init,) {
   const ref = useRef(null,);
@@ -12009,11 +12012,11 @@ function ErrorPlaceholder(props,) {
   const { error, file, } = props;
   const title = file ? `Error in ${stripSlash(file,)}` : 'Error';
   const message = error instanceof Error ? error.message : '' + error;
-  return /* @__PURE__ */ jsxs('div', {
+  return /* @__PURE__ */ _jsxs('div', {
     style: errorStyle,
     children: [
-      /* @__PURE__ */ jsx('div', { className: 'text', style: titleStyle, children: title, },),
-      message && /* @__PURE__ */ jsx('div', { className: 'text', style: messageStyle, children: message, },),
+      /* @__PURE__ */ _jsx5('div', { className: 'text', style: titleStyle, children: title, },),
+      message && /* @__PURE__ */ _jsx5('div', { className: 'text', style: messageStyle, children: message, },),
     ],
   },);
 }
@@ -12057,7 +12060,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = class extends Component {
+var ErrorBoundary2 = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -12081,7 +12084,7 @@ var ErrorBoundary2 = class extends Component {
   }
   render() {
     if (this.state.lastError) {
-      return /* @__PURE__ */ jsx(ErrorPlaceholder, { error: this.state.lastError.error.message, file: 'Prototype', },);
+      return /* @__PURE__ */ _jsx5(ErrorPlaceholder, { error: this.state.lastError.error.message, file: 'Prototype', },);
     }
     return this.props.children;
   }
@@ -12143,24 +12146,24 @@ function Device({ canResize = false, children, ResizeObserver: ResizeObserver22 
   const { containerStyle, handStyle, deviceStyle, deviceImageStyle, screenStyle, } = getDeviceStyle(options,);
   const resizeStyles = canResize ? { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', } : {};
   const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
-  return /* @__PURE__ */ jsx('div', {
+  return /* @__PURE__ */ _jsx5('div', {
     style: { ...containerStyle, ...resizeStyles, },
     ref: containerRef,
-    children: /* @__PURE__ */ jsxs('div', {
+    children: /* @__PURE__ */ _jsxs('div', {
       style: { ...deviceStyle, },
       ref: deviceRef,
       children: [
-        handStyle && /* @__PURE__ */ jsx('div', { style: handStyle, },),
-        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx('div', { style: deviceImageStyle, },),
-        /* @__PURE__ */ jsx('div', {
+        handStyle && /* @__PURE__ */ _jsx5('div', { style: handStyle, },),
+        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ _jsx5('div', { style: deviceImageStyle, },),
+        /* @__PURE__ */ _jsx5('div', {
           style: { ...screenStyle, pointerEvents: void 0, backgroundColor: children ? screenBackground : screenStyle.backgroundColor, },
           ref: screenRef,
-          children: /* @__PURE__ */ jsx(MotionConfig, {
+          children: /* @__PURE__ */ _jsx5(MotionConfig, {
             transformPagePoint: invertScale2,
-            children: /* @__PURE__ */ jsx(ErrorBoundary2, { children, },),
+            children: /* @__PURE__ */ _jsx5(ErrorBoundary2, { children, },),
           },),
         },),
-        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx('div', { style: deviceImageStyle, },),
+        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ _jsx5('div', { style: deviceImageStyle, },),
       ],
     },),
   },);
@@ -13062,8 +13065,8 @@ var ProvideParentSize = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [getParentWidth(parentSize,), getParentHeight(parentSize,),],
   );
-  if (currentParentSize === 1) return children ? /* @__PURE__ */ jsx(Fragment, { children, },) : null;
-  return /* @__PURE__ */ jsx(ConstraintsContext.Provider, { value, children, },);
+  if (currentParentSize === 1) return children ? /* @__PURE__ */ _jsx5(Fragment, { children, },) : null;
+  return /* @__PURE__ */ _jsx5(ConstraintsContext.Provider, { value, children, },);
 };
 function getParentWidth(parentSize,) {
   return isSize(parentSize,) ? parentSize.width : parentSize;
@@ -13073,7 +13076,7 @@ function getParentHeight(parentSize,) {
 }
 var ConsumeParentSize = ConstraintsContext.Consumer;
 function useProvideParentSize(node, parentSize,) {
-  return /* @__PURE__ */ jsx(ProvideParentSize, { parentSize, children: node, },);
+  return /* @__PURE__ */ _jsx5(ProvideParentSize, { parentSize, children: node, },);
 }
 function useConstraints(props,) {
   const parentSize = useParentSize();
@@ -14948,18 +14951,18 @@ function DeviceCodeComponentInner({ children, ...props },) {
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
-    return /* @__PURE__ */ jsx('div', {
+    return /* @__PURE__ */ _jsx5('div', {
       'data-framer-component-type': 'DeviceComponent',
       className: 'no-device',
       style: { width: '100%', height: '100%', },
-      children: /* @__PURE__ */ jsx(ProvideParentSize, { parentSize: 1, children, },),
+      children: /* @__PURE__ */ _jsx5(ProvideParentSize, { parentSize: 1, children, },),
     },);
   }
   const child = Array.isArray(children,) ? children[0] : children;
   const resizedChild = child && React__default.isValidElement(child,)
     ? React__default.cloneElement(child, { width: deviceOptions.screenWidth, height: deviceOptions.screenHeight, },)
     : null;
-  return /* @__PURE__ */ jsx(Device, { scaleTo: 'dynamic', deviceOptions, children: resizedChild, },);
+  return /* @__PURE__ */ _jsx5(Device, { scaleTo: 'dynamic', deviceOptions, children: resizedChild, },);
 }
 var DeviceCodeComponent = /* @__PURE__ */ (() => {
   const { componentWidth: defaultWidth2, componentHeight: defaultHeight2, } = getComponentSize(
@@ -15316,7 +15319,7 @@ function StaticImage({ image, containerSize, nodeId, alt, },) {
     ) return;
     setMeasuredSizes(imageNodeWidth + 'px',);
   }, [image.sizes,],);
-  return /* @__PURE__ */ jsx('img', {
+  return /* @__PURE__ */ _jsx5('img', {
     ref: imageRef,
     decoding: 'async',
     loading: image.loading,
@@ -15340,7 +15343,7 @@ function CanvasImage({ image, containerSize, nodeId, },) {
     };
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ jsx('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
+  return /* @__PURE__ */ _jsx5('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function OptimizedCanvasImage({ nodeId, image, containerSize, },) {
   const wrapperRef = React__default.useRef(null,);
@@ -15351,7 +15354,7 @@ function OptimizedCanvasImage({ nodeId, image, containerSize, },) {
     const imageStyle = getImageStyle(image, containerSize,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source, containerSize,],);
-  return /* @__PURE__ */ jsx('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
+  return /* @__PURE__ */ _jsx5('div', { ref: wrapperRef, style: { display: 'contents', borderRadius: 'inherit', }, },);
 }
 function BackgroundImageComponent({ layoutId, image, ...props },) {
   if (layoutId) layoutId = layoutId + '-background';
@@ -15368,12 +15371,12 @@ function BackgroundImageComponent({ layoutId, image, ...props },) {
       if (image.pixelWidth) fallbackWrapperStyles.backgroundSize = `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`;
       fallbackWrapperStyles.border = 0;
       imageNode = null;
-    } else if (RenderTarget.current() !== 'CANVAS') imageNode = /* @__PURE__ */ jsx(StaticImage, { image, ...props, },);
+    } else if (RenderTarget.current() !== 'CANVAS') imageNode = /* @__PURE__ */ _jsx5(StaticImage, { image, ...props, },);
     else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
-      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, { image, ...props, },);
-    } else imageNode = /* @__PURE__ */ jsx(CanvasImage, { image, ...props, },);
+      imageNode = /* @__PURE__ */ _jsx5(OptimizedCanvasImage, { image, ...props, },);
+    } else imageNode = /* @__PURE__ */ _jsx5(CanvasImage, { image, ...props, },);
   }
-  return /* @__PURE__ */ jsx(motion.div, {
+  return /* @__PURE__ */ _jsx5(motion.div, {
     layoutId,
     style: imageNode ? wrapperStyle : fallbackWrapperStyles,
     'data-framer-background-image-wrapper': true,
@@ -15441,10 +15444,10 @@ function Border(props,) {
   const style = { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, borderRadius: 'inherit', pointerEvents: 'none', };
   if (props.border) {
     style.border = props.border;
-    return /* @__PURE__ */ jsx(motion.div, { style, },);
+    return /* @__PURE__ */ _jsx5(motion.div, { style, },);
   }
   collectBorderStyleForProps(props, style, false,);
-  return /* @__PURE__ */ jsx(motion.div, { 'data-frame-border': true, style, layoutId, },);
+  return /* @__PURE__ */ _jsx5(motion.div, { 'data-frame-border': true, style, layoutId, },);
 }
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
@@ -15505,7 +15508,7 @@ function transformTemplate(center,) {
 }
 function useLayoutId2(props, { specificLayoutId, postfix, } = {},) {
   const { name, layoutIdKey, duplicatedFrom, __fromCodeComponentNode = false, drag: drag2, } = props;
-  const { getLayoutId, enabled, } = useContext(LayoutIdContext,);
+  const { getLayoutId, enabled, } = useContext3(LayoutIdContext,);
   return useMemo(() => {
     if (!enabled) return props.layoutId;
     const existingLayoutId = specificLayoutId || props.layoutId;
@@ -16061,12 +16064,12 @@ var withMeasuredSize = (Component14) => (props) => {
   const shouldRender = Boolean(size2,);
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
-  return /* @__PURE__ */ jsx('div', {
+  return /* @__PURE__ */ _jsx5('div', {
     style: { width: '100%', height: '100%', pointerEvents: 'none', },
     ref,
     ...dataProps,
     children: shouldRender && /* @__PURE__ */
-      jsx(Component14, {
+      _jsx5(Component14, {
         ...props,
         width: (size2 == null ? void 0 : size2.width) ?? fallbackWidth,
         height: (size2 == null ? void 0 : size2.height) ?? fallbackHeight,
@@ -16098,7 +16101,7 @@ function unwrapInlinedDisplayContents(element,) {
 function useMeasureLayout(props, ref, getChildren = () => [], options = {},) {
   const { id: id3, visible, _needsMeasure, } = props;
   const { skipHook = false, } = options;
-  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
+  const inCodeComponent = Boolean(useContext3(ComponentContainerContext,),);
   const onCanvas = RenderTarget.current() === 'CANVAS';
   useIsomorphicLayoutEffect2(() => {
     if (!onCanvas || inCodeComponent || skipHook) return;
@@ -16248,7 +16251,7 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
   if (microtask2) void Promise.resolve().then(reset,);
   else setTimeout(reset, 0,);
 }
-var Layer = class extends Component {
+var Layer = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layerElement', null,);
@@ -16613,7 +16616,7 @@ function useStyleAndRect(props,) {
   React__default.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
+  const inCodeComponent = Boolean(useContext3(ComponentContainerContext,),);
   const { style, _initialStyle, __fromCanvasComponent, size: size2, } = props;
   const unwrappedProps = unwrapFrameProps(props,);
   const constraintsRect = useConstraints(unwrappedProps,);
@@ -16740,13 +16743,13 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   } else if (!motionProps.transformTemplate) motionProps.transformTemplate = void 0;
   useMeasureLayout(props, ref,);
   const backgroundImage = backgroundImageFromProps(props,);
-  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
+  const inCodeComponent = Boolean(useContext3(ComponentContainerContext,),);
   const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, inCodeComponent,);
   const wrappedContent = useProvideParentSize(
-    /* @__PURE__ */ jsxs(Fragment, {
+    /* @__PURE__ */ _jsxs(Fragment, {
       children: [
         backgroundImage
-          ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
+          ? /* @__PURE__ */ _jsx5(BackgroundImageComponent, {
             alt: props.alt ?? '',
             image: backgroundImage,
             containerSize: rect ?? void 0,
@@ -16755,7 +16758,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
           },)
           : null,
         children,
-        /* @__PURE__ */ jsx(Border, { ..._border, border, layoutId, },),
+        /* @__PURE__ */ _jsx5(Border, { ..._border, border, layoutId, },),
       ],
     },),
     parentSize,
@@ -16775,7 +16778,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     delete currentStyle.shadow;
     currentStyle.boxShadow = shadow;
   }
-  return /* @__PURE__ */ jsxs(MotionComponent, {
+  return /* @__PURE__ */ _jsxs(MotionComponent, {
     ...dataProps,
     ...motionProps,
     layoutId,
@@ -16788,7 +16791,7 @@ var FrameWithMotion = /* @__PURE__ */ forwardRef(function FrameWithMotion2(props
   countNodeRender();
   const { visible = true, } = props;
   if (!visible) return null;
-  return /* @__PURE__ */ jsx(VisibleFrame, { ...props, ref, },);
+  return /* @__PURE__ */ _jsx5(VisibleFrame, { ...props, ref, },);
 },);
 function resolveParentSize(props, unwrappedProps, rect, inCodeComponent,) {
   if (inCodeComponent) {
@@ -16818,20 +16821,22 @@ function EmptyState(
 ) {
   const { target, } = RenderEnvironment;
   const childCount = React__default.Children.count(children,);
-  if (insideUserCodeComponent && childCount === 0) return /* @__PURE__ */ jsx(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
+  if (insideUserCodeComponent && childCount === 0) {
+    return /* @__PURE__ */ _jsx5(FrameWithMotion, { ...size2, 'data-name': 'placeholder', },);
+  }
   if (target !== 'CANVAS') return null;
   if (hide) return null;
   if (childCount !== 0) return null;
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
     style: { position, ...size2, },
-    children: /* @__PURE__ */ jsx('div', {
+    children: /* @__PURE__ */ _jsx5('div', {
       style: { display: 'flex', alignItems: 'center', lineHeight: '1.4', height: '100%', width: '100%', },
-      children: /* @__PURE__ */ jsxs('div', {
+      children: /* @__PURE__ */ _jsxs('div', {
         style: {
           display: 'flex',
           alignItems: 'center',
@@ -16840,14 +16845,14 @@ function EmptyState(
           width: '100%', // Use a mask to fade out the right edge of the content as it gets cropped.
           WebkitMaskImage: `linear-gradient(90deg, black, black calc(100% - 12px * ${scaleFactor}), transparent)`,
         },
-        children: [/* @__PURE__ */ jsx(Title, { children: title, },), /* @__PURE__ */ jsx(Description, { children: description, },),],
+        children: [/* @__PURE__ */ _jsx5(Title, { children: title, },), /* @__PURE__ */ _jsx5(Description, { children: description, },),],
       },),
     },),
   }, 'empty-state',);
 }
 var scaleFactor = 'var(--framerInternalCanvas-canvasPlaceholderContentScaleFactor, 1)';
 function Title({ children, },) {
-  return /* @__PURE__ */ jsx('span', {
+  return /* @__PURE__ */ _jsx5('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -16861,7 +16866,7 @@ function Title({ children, },) {
   },);
 }
 function Description({ children, },) {
-  return /* @__PURE__ */ jsx('span', {
+  return /* @__PURE__ */ _jsx5('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -16880,7 +16885,7 @@ var SharedLayoutContext = /* @__PURE__ */ React__default.createContext({
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
 },);
-var SharedLayoutRoot = class extends Component {
+var SharedLayoutRoot = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'shouldAnimate', false,);
@@ -16942,12 +16947,12 @@ var SharedLayoutRoot = class extends Component {
     }
   }
   render() {
-    return /* @__PURE__ */ jsx(SharedLayoutContext.Provider, { value: this.sharedLayoutContext, children: this.props.children, },);
+    return /* @__PURE__ */ _jsx5(SharedLayoutContext.Provider, { value: this.sharedLayoutContext, children: this.props.children, },);
   }
 };
 var rootStyles = { width: '100%', height: '100%', backgroundColor: 'none', };
 function MagicMotionCrossfadeRoot(props,) {
-  return /* @__PURE__ */ jsx(motion.div, { layoutId: TREE_ROOT_ID, style: rootStyles, children: props.children, },);
+  return /* @__PURE__ */ _jsx5(motion.div, { layoutId: TREE_ROOT_ID, style: rootStyles, children: props.children, },);
 }
 var _sharedIntersectionObserver;
 var _callbacks2;
@@ -17471,9 +17476,9 @@ function WithDragging(Component14,) {
       originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, onMouseWheelEnd,);
       originalProps.left = this.x;
       originalProps.top = this.y;
-      return /* @__PURE__ */ jsx(DraggingContext.Provider, {
+      return /* @__PURE__ */ _jsx5(DraggingContext.Provider, {
         value: { dragging: this.state.isDragging, },
-        children: /* @__PURE__ */ jsx(Component14, { ...originalProps, },),
+        children: /* @__PURE__ */ _jsx5(Component14, { ...originalProps, },),
       },);
     }
   };
@@ -17591,10 +17596,10 @@ function WithEvents(BaseComponent,) {
       },);
     }
     render() {
-      return /* @__PURE__ */ jsx(DraggingContext.Consumer, {
+      return /* @__PURE__ */ _jsx5(DraggingContext.Consumer, {
         children: (value) => {
           this.shouldCancelTap = value.dragging;
-          return /* @__PURE__ */ jsx(BaseComponent, { ...this.props, ref: this.component, },);
+          return /* @__PURE__ */ _jsx5(BaseComponent, { ...this.props, ref: this.component, },);
         },
       },);
     }
@@ -17851,7 +17856,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     const filterY = shadowRect.y / height * 100;
     const filterWidth = shadowRect.width / width * 100;
     const filterHeight = shadowRect.height / height * 100;
-    definition.push(/* @__PURE__ */ jsxs('filter', {
+    definition.push(/* @__PURE__ */ _jsxs('filter', {
       id: outsideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -17859,12 +17864,12 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       height: `${filterHeight.toFixed(1,)}%`,
       filterUnits: 'objectBoundingBox',
       ...svgShadowProps,
-      children: [filterElements, shadows.length > 1 ? /* @__PURE__ */ jsx('feMerge', { children: mergeElements, },) : null,],
+      children: [filterElements, shadows.length > 1 ? /* @__PURE__ */ _jsx5('feMerge', { children: mergeElements, },) : null,],
     }, outsideShadowId.id,),);
-    outsetElement = /* @__PURE__ */ jsx('g', {
+    outsetElement = /* @__PURE__ */ _jsx5('g', {
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
-      children: /* @__PURE__ */ jsx('use', {
+      children: /* @__PURE__ */ _jsx5('use', {
         ...svgStrokeAttributes,
         fill: 'black',
         fillOpacity: fillAlpha <= 0 ? 0 : 1,
@@ -17902,7 +17907,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       filterElements.push(shadowElements.filterElements,);
       mergeElements.push(shadowElements.mergeElement,);
     }
-    definition.push(/* @__PURE__ */ jsxs('filter', {
+    definition.push(/* @__PURE__ */ _jsxs('filter', {
       id: insideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -17910,11 +17915,11 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       height: `${filterHeight.toFixed(1,)}%`,
       filterUnits: 'objectBoundingBox',
       ...svgShadowProps,
-      children: [filterElements, insetShadows.length > 1 ? /* @__PURE__ */ jsx('feMerge', { children: mergeElements, },) : null,],
+      children: [filterElements, insetShadows.length > 1 ? /* @__PURE__ */ _jsx5('feMerge', { children: mergeElements, },) : null,],
     }, insideShadowId.id,),);
     let clipPath;
     if (needsStrokeClip) clipPath = strokeClipId.urlLink;
-    insetElement = /* @__PURE__ */ jsx('use', {
+    insetElement = /* @__PURE__ */ _jsx5('use', {
       fill: 'black',
       fillOpacity: '1',
       filter: insideShadowId.urlLink,
@@ -17930,13 +17935,13 @@ function outerShadowElements(shapeID, shadow, index,) {
   const offsetResultId = shadowKey.add('offset',).id;
   const blurResultId = shadowKey.add('blur',).id;
   const matrixResultId = shadowKey.add('matrix',).id;
-  const filterElements = /* @__PURE__ */ jsx(OuterShadowFilterElements, {
+  const filterElements = /* @__PURE__ */ _jsx5(OuterShadowFilterElements, {
     shadow,
     blurId: blurResultId,
     offsetId: offsetResultId,
     matrixId: matrixResultId,
   }, shadowKey.id + '-filters',);
-  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', { in: matrixResultId, }, shadowKey.id + '-merge',);
+  const mergeElement = /* @__PURE__ */ _jsx5('feMergeNode', { in: matrixResultId, }, shadowKey.id + '-merge',);
   return { filterElements, mergeElement, };
 }
 var OuterShadowFilterElements = (props) => {
@@ -17947,11 +17952,11 @@ var OuterShadowFilterElements = (props) => {
   const g = roundedNumberString(rgb.g / 255, 3,);
   const b = roundedNumberString(rgb.b / 255, 3,);
   const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
-  return /* @__PURE__ */ jsxs(Fragment, {
+  return /* @__PURE__ */ _jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx('feOffset', { dx: shadow.x, dy: shadow.y, in: 'SourceAlpha', result: offsetId, },),
-      /* @__PURE__ */ jsx('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: offsetId, result: blurId, },),
-      /* @__PURE__ */ jsx('feColorMatrix', {
+      /* @__PURE__ */ _jsx5('feOffset', { dx: shadow.x, dy: shadow.y, in: 'SourceAlpha', result: offsetId, },),
+      /* @__PURE__ */ _jsx5('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: offsetId, result: blurId, },),
+      /* @__PURE__ */ _jsx5('feColorMatrix', {
         colorInterpolationFilters: 'sRGB',
         values: matrixValues,
         type: 'matrix',
@@ -17967,12 +17972,12 @@ function innerShadowElements(shapeID, shadow, index,) {
   const offsetId = shadowKey.add('offset',).id;
   const compositeId = shadowKey.add('composite',).id;
   const matrixId = shadowKey.add('matrix',).id;
-  const filterElements = /* @__PURE__ */ jsx(
+  const filterElements = /* @__PURE__ */ _jsx5(
     InnerShadowFilterElements,
     { shadow, blurId, offsetId, compositeId, matrixId, },
     shadowKey.id + '-filters',
   );
-  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', { in: matrixId, }, shadowKey.id + '-merge',);
+  const mergeElement = /* @__PURE__ */ _jsx5('feMergeNode', { in: matrixId, }, shadowKey.id + '-merge',);
   return { filterElements, mergeElement, };
 }
 var InnerShadowFilterElements = (props) => {
@@ -17983,11 +17988,11 @@ var InnerShadowFilterElements = (props) => {
   const g = rgb.g / 255;
   const b = rgb.b / 255;
   const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
-  return /* @__PURE__ */ jsxs(Fragment, {
+  return /* @__PURE__ */ _jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: 'SourceAlpha', result: blurId, },),
-      /* @__PURE__ */ jsx('feOffset', { dx: shadow.x, dy: shadow.y, in: blurId, result: offsetId, },),
-      /* @__PURE__ */ jsx('feComposite', {
+      /* @__PURE__ */ _jsx5('feGaussianBlur', { stdDeviation: shadow.blur / 2, in: 'SourceAlpha', result: blurId, },),
+      /* @__PURE__ */ _jsx5('feOffset', { dx: shadow.x, dy: shadow.y, in: blurId, result: offsetId, },),
+      /* @__PURE__ */ _jsx5('feComposite', {
         in: offsetId,
         in2: 'SourceAlpha',
         operator: 'arithmetic',
@@ -17995,7 +18000,7 @@ var InnerShadowFilterElements = (props) => {
         k3: '1',
         result: compositeId,
       },),
-      /* @__PURE__ */ jsx('feColorMatrix', {
+      /* @__PURE__ */ _jsx5('feColorMatrix', {
         colorInterpolationFilters: 'sRGB',
         values: matrixValues,
         type: 'matrix',
@@ -18338,14 +18343,14 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       const style = this.getStyle();
       const rect = this.rect;
       const parentSize = { width: rect.width, height: rect.height, };
-      return /* @__PURE__ */ jsxs('div', {
+      return /* @__PURE__ */ _jsxs('div', {
         id: id3,
         style,
         ref: this.setElement,
         className,
         children: [
-          /* @__PURE__ */ jsx(ProvideParentSize, { parentSize, children: this.layoutChildren(), },),
-          /* @__PURE__ */ jsx(Border, { ...this.props, },),
+          /* @__PURE__ */ _jsx5(ProvideParentSize, { parentSize, children: this.layoutChildren(), },),
+          /* @__PURE__ */ _jsx5(Border, { ...this.props, },),
         ],
       },);
     }
@@ -18368,7 +18373,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         else return child;
       },);
       if (children && children.length === 1 && typeof children[0] === 'string') {
-        children = [/* @__PURE__ */ jsx(Center, { children, }, '0',),];
+        children = [/* @__PURE__ */ _jsx5(Center, { children, }, '0',),];
       }
       return children;
     }
@@ -18397,7 +18402,7 @@ function Center(props,) {
     justifyContent: 'center',
     fontFamily: 'Helvetica',
   }, props.style || {},);
-  return /* @__PURE__ */ jsx('div', { style, children: props.children, },);
+  return /* @__PURE__ */ _jsx5('div', { style, children: props.children, },);
 }
 var frameWithMotionPropsFields = [
   '_border',
@@ -18459,14 +18464,14 @@ var Frame = /* @__PURE__ */ (() => {
     const parentSize = useParentSize();
     if (isDeprecatedFrameProps(props,)) {
       const currentParentSize = props.parentSize || deprecatedParentSize(parentSize,);
-      return /* @__PURE__ */ jsx(DeprecatedFrameWithEvents, { ...props, parentSize: currentParentSize, },);
+      return /* @__PURE__ */ _jsx5(DeprecatedFrameWithEvents, { ...props, parentSize: currentParentSize, },);
     }
-    return /* @__PURE__ */ jsx(FrameWithMotion, { ...props, ref, },);
+    return /* @__PURE__ */ _jsx5(FrameWithMotion, { ...props, ref, },);
   },);
   FrameInner['displayName'] = 'Frame';
   return FrameInner;
 })();
-var LayoutTree = class extends Component {
+var LayoutTree = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layoutMaybeMutated',);
@@ -18520,7 +18525,7 @@ var LayoutTree = class extends Component {
     if (layoutId) this.projectionNodes.delete(layoutId,);
   }
   render() {
-    return /* @__PURE__ */ jsx(SwitchLayoutGroupContext.Provider, {
+    return /* @__PURE__ */ _jsx5(SwitchLayoutGroupContext.Provider, {
       value: this.switchLayoutGroupContext,
       children: this.props.children,
     },);
@@ -18528,11 +18533,11 @@ var LayoutTree = class extends Component {
 };
 var SharedLayoutTree = (props) => {
   const sharedLayoutContext = React__default.useContext(SharedLayoutContext,);
-  return /* @__PURE__ */ jsx(LayoutTree, { ...props, sharedLayoutContext, },);
+  return /* @__PURE__ */ _jsx5(LayoutTree, { ...props, sharedLayoutContext, },);
 };
 var NavigationContainerContext = React__default.createContext(true,);
 function useIsInCurrentNavigationTarget() {
-  const isInCurrentNavigationTarget = useContext(NavigationContainerContext,);
+  const isInCurrentNavigationTarget = useContext3(NavigationContainerContext,);
   return isInCurrentNavigationTarget;
 }
 function newMap() {
@@ -18570,10 +18575,10 @@ var NavigationTargetWrapper = ({ isCurrent, isOverlayed, children, },) => {
       },);
     };
   }, [isCurrent, isOverlayed, callbacks2, /* constant, so should never change */],);
-  return /* @__PURE__ */ jsx(NavigationTargetContext.Provider, { value, children, },);
+  return /* @__PURE__ */ _jsx5(NavigationTargetContext.Provider, { value, children, },);
 };
 function useOnCurrentTargetChange(callback, deps = [],) {
-  const { register, deregister, } = useContext(NavigationTargetContext,);
+  const { register, deregister, } = useContext3(NavigationTargetContext,);
   useEffect(() => {
     if (!callback) return;
     register(callback,);
@@ -18605,8 +18610,8 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
   isInitial,
 },) {
   const animate3 = useAnimation();
-  const presence = useContext(PresenceContext,);
-  const { persistLayoutIdCache, } = useContext(LayoutIdContext,);
+  const presence = useContext3(PresenceContext,);
+  const { persistLayoutIdCache, } = useContext3(LayoutIdContext,);
   const previousState = useRef({
     wasCurrent: void 0,
     wasPrevious: false,
@@ -18659,7 +18664,7 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
   const isPresent2 = isBeingRemoved || areMagicMotionLayersPresent === false ? false : true;
   const isCurrentTarget = !!isCurrent && isPresent2;
   const forceOpacity = isCurrent && isInitial;
-  return /* @__PURE__ */ jsxs(FrameWithMotion, {
+  return /* @__PURE__ */ _jsxs(FrameWithMotion, {
     'data-framer-component-type': 'NavigationContainerWrapper',
     width: '100%',
     height: '100%',
@@ -18676,7 +18681,7 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
       perspective,
     },
     children: [
-      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion, {
+      isLayeredContainer && /* @__PURE__ */ _jsx5(FrameWithMotion, {
         width: '100%',
         height: '100%',
         'data-framer-component-type': 'NavigationContainerBackdrop',
@@ -18687,7 +18692,7 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
         backgroundColor: backdropColor ? backdropColor : 'transparent',
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
-      /* @__PURE__ */ jsx(FrameWithMotion, {
+      /* @__PURE__ */ _jsx5(FrameWithMotion, {
         ...layout2,
         ...animations2,
         transition: { default: transition, originX: { type: false, }, originY: { type: false, }, originZ: { type: false, }, },
@@ -18702,14 +18707,14 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
         },
         'data-is-present': isPresent2 ? void 0 : false,
         ref: viewportRef,
-        children: /* @__PURE__ */ jsx(ViewportContext.Provider, {
+        children: /* @__PURE__ */ _jsx5(ViewportContext.Provider, {
           value: viewportRef,
-          children: /* @__PURE__ */ jsx(NavigationContainerContext.Provider, {
+          children: /* @__PURE__ */ _jsx5(NavigationContainerContext.Provider, {
             value: isCurrentTarget,
-            children: /* @__PURE__ */ jsx(NavigationTargetWrapper, {
+            children: /* @__PURE__ */ _jsx5(NavigationTargetWrapper, {
               isCurrent: isCurrentTarget,
               isOverlayed,
-              children: /* @__PURE__ */ jsx(SharedLayoutTree, {
+              children: /* @__PURE__ */ _jsx5(SharedLayoutTree, {
                 isLead: isCurrent,
                 animatesLayout: !!withMagicMotion,
                 transition,
@@ -19123,7 +19128,7 @@ var NavigationConsumer = NavigationContext.Consumer;
 var NavigationCallbackContext = React__default.createContext(void 0,);
 var NavigationCallbackProvider = NavigationCallbackContext.Provider;
 var IsInitialNavigationContext = React__default.createContext(void 0,);
-var Navigation = class extends Component {
+var Navigation = class extends Component2 {
   constructor(props,) {
     var _a;
     super(props,);
@@ -19254,7 +19259,7 @@ var Navigation = class extends Component {
       const areMagicMotionLayersPresent = isCurrent ? false : removed;
       const withMagicMotion = ((_a = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a.withMagicMotion) ||
         isCurrent && !!this.state.previousTransition;
-      contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
+      contentContainers.push(/* @__PURE__ */ _jsx5(NavigationContainer, {
         id: key7,
         index: visualIndex,
         isInitial,
@@ -19272,13 +19277,13 @@ var Navigation = class extends Component {
         exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
         withMagicMotion,
         areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
-        children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
+        children: /* @__PURE__ */ _jsx5(MagicMotionCrossfadeRoot, {
           children: containerContent({ component, transition: historyItem == null ? void 0 : historyItem.transition, },),
         },),
       }, key7,),);
     }
     const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
-      return /* @__PURE__ */ jsx(NavigationContainer, {
+      return /* @__PURE__ */ _jsx5(NavigationContainer, {
         isLayeredContainer: true,
         isCurrent: stackIndex === this.state.currentOverlay,
         position: item.transition.position,
@@ -19295,7 +19300,7 @@ var Navigation = class extends Component {
         children: containerContent({ component: item.component, transition: item.transition, },),
       }, item.key,);
     },);
-    return /* @__PURE__ */ jsx(FrameWithMotion, {
+    return /* @__PURE__ */ _jsx5(FrameWithMotion, {
       'data-framer-component-type': 'NavigationRoot',
       top: 0,
       left: 0,
@@ -19303,12 +19308,12 @@ var Navigation = class extends Component {
       height: '100%',
       position: 'relative',
       style: { overflow: 'hidden', backgroundColor: 'unset', pointerEvents: void 0, ...this.props.style, },
-      children: /* @__PURE__ */ jsx(NavigationContext.Provider, {
+      children: /* @__PURE__ */ _jsx5(NavigationContext.Provider, {
         value: this,
-        children: /* @__PURE__ */ jsxs(IsInitialNavigationContext.Provider, {
+        children: /* @__PURE__ */ _jsxs(IsInitialNavigationContext.Provider, {
           value: isInitial,
           children: [
-            /* @__PURE__ */ jsx(NavigationContainer, {
+            /* @__PURE__ */ _jsx5(NavigationContainer, {
               isLayeredContainer: true,
               position: void 0,
               initialProps: {},
@@ -19320,13 +19325,13 @@ var Navigation = class extends Component {
               backdropColor: void 0,
               onTapBackdrop: void 0,
               index: 0,
-              children: /* @__PURE__ */ jsx(LayoutIdProvider, {
-                children: /* @__PURE__ */ jsx(SharedLayoutRoot, {
-                  children: /* @__PURE__ */ jsx(AnimatePresence, { presenceAffectsLayout: false, children: contentContainers, },),
+              children: /* @__PURE__ */ _jsx5(LayoutIdProvider, {
+                children: /* @__PURE__ */ _jsx5(SharedLayoutRoot, {
+                  children: /* @__PURE__ */ _jsx5(AnimatePresence, { presenceAffectsLayout: false, children: contentContainers, },),
                 },),
               },),
             },),
-            /* @__PURE__ */ jsx(AnimatePresence, { children: overlayContainers, },),
+            /* @__PURE__ */ _jsx5(AnimatePresence, { children: overlayContainers, },),
           ],
         },),
       },),
@@ -19462,11 +19467,11 @@ function NavigationStyleSheet() {
 function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  return /* @__PURE__ */ jsxs(Navigation, {
+  return /* @__PURE__ */ _jsxs(Navigation, {
     ...props,
     resetProjection,
     skipLayoutAnimation,
-    children: [props.children, /* @__PURE__ */ jsx(NavigationStyleSheet, {},),],
+    children: [props.children, /* @__PURE__ */ _jsx5(NavigationStyleSheet, {},),],
   },);
 }
 var import_hoist_non_react_statics3 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
@@ -19487,7 +19492,7 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
   const InternalWithNavigator = class extends React__default.Component {
     render() {
-      return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
+      return /* @__PURE__ */ _jsx5(NavigationContext.Consumer, {
         children: (navigation) => {
           const navigate = () => {
             if (navigationTransition === 'goBack') {
@@ -19528,7 +19533,7 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
               navigate.apply(this, args,);
             };
           } else props.onTap = navigate;
-          return /* @__PURE__ */ jsx(BaseComponent, { ...props, },);
+          return /* @__PURE__ */ _jsx5(BaseComponent, { ...props, },);
         },
       },);
     }
@@ -19748,7 +19753,7 @@ var Stack = /* @__PURE__ */ (() => {
       if (styleProp == null ? void 0 : styleProp.width) contentWrapperStyle.width = styleProp == null ? void 0 : styleProp.width;
       if (styleProp == null ? void 0 : styleProp.height) contentWrapperStyle.height = styleProp == null ? void 0 : styleProp.height;
     }
-    return /* @__PURE__ */ jsx(FrameWithMotion, {
+    return /* @__PURE__ */ _jsx5(FrameWithMotion, {
       as,
       background: fromCanvasComponent ? void 0 : 'none',
       ...props,
@@ -19758,7 +19763,7 @@ var Stack = /* @__PURE__ */ (() => {
       style,
       className,
       layoutScroll: true,
-      children: /* @__PURE__ */ jsx(motion.div, {
+      children: /* @__PURE__ */ _jsx5(motion.div, {
         'data-framer-stack-content-wrapper': true,
         'data-framer-stack-direction-reverse': isReverse,
         'data-framer-stack-gap-enabled': gapEnabled,
@@ -19876,7 +19881,7 @@ function wrapInGapElementForLegacyGap(children, gap, direction, justifyContent, 
     asRecord(gapStyle,)['--stack-gap-x'] = `${isVertical ? 0 : gap}px`;
     asRecord(gapStyle,)['--stack-gap-y'] = `${isVertical ? gap : 0}px`;
   }
-  return /* @__PURE__ */ jsx('div', {
+  return /* @__PURE__ */ _jsx5('div', {
     'data-framer-legacy-stack-gap-enabled': gapEnabled,
     'data-framer-stack-flexbox-gap': useFlexboxGap,
     style: gapStyle,
@@ -19953,7 +19958,7 @@ function PageContainer(
   const wrapperHeight = hasAutoHeight ? 'auto' : '100%';
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
     width: containerWidth,
@@ -19970,7 +19975,7 @@ function PageContainer(
     onDragEnd,
     preserve3d: true,
     style: { pointerEvents: void 0, paddingRight: hasHorizontalGap ? gap : 0, paddingBottom: hasVerticalGap ? gap : 0, },
-    children: /* @__PURE__ */ jsx(FrameWithMotion, {
+    children: /* @__PURE__ */ _jsx5(FrameWithMotion, {
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
       width: wrapperWidth,
@@ -20222,7 +20227,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
       for (const key7 in values) effectDictionary[key7] = motionValue(values[key7],);
     }
     pageEffectValuesRef.current.push(effectDictionary,);
-    return /* @__PURE__ */ jsx(PageContainer, {
+    return /* @__PURE__ */ _jsx5(PageContainer, {
       effect: effectDictionary,
       dragEnabled,
       direction,
@@ -20253,7 +20258,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     onScroll,
     onScrollEnd,
   },);
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
     perspective: hasEffect(props,) ? 1200 : void 0,
@@ -20262,7 +20267,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     layoutId,
     ref: containerRef,
     onLayoutMeasure: handleMeasureLifecycle,
-    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
+    children: /* @__PURE__ */ _jsxs(FrameWithMotion, {
       'data-framer-component-type': 'Page',
       ref: scrollableRef,
       background: null,
@@ -20280,7 +20285,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
         pointerEvents: (_a = props.style) == null ? void 0 : _a.pointerEvents,
       },
       children: [
-        /* @__PURE__ */ jsx(EmptyState, {
+        /* @__PURE__ */ _jsx5(EmptyState, {
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
           children,
@@ -20903,7 +20908,7 @@ var FramerEventSession = class {
     return subtract(event.devicePoint, this.startEvent.devicePoint,);
   }
 };
-var MouseEventListener = class extends Component {
+var MouseEventListener = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domMouseDown', (originalEvent) => {
@@ -20955,7 +20960,7 @@ var MouseEventListener = class extends Component {
     safeWindow.removeEventListener('wheel', this.domMouseWheel,);
   }
 };
-var TouchEventListener = class extends Component {
+var TouchEventListener = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domTouchStart', (originalEvent) => {
@@ -21229,7 +21234,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
     'data-framer-component-type': 'Scroll',
     background: 'none',
     ...containerProps,
@@ -21245,7 +21250,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
     layoutId,
     layoutScroll: true,
     onBeforeLayoutMeasure: measureAndUpdateScrollOffset,
-    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
+    children: /* @__PURE__ */ _jsxs(FrameWithMotion, {
       'data-framer-component-type': 'ScrollContentWrapper',
       animate: scrollAnimate,
       drag: dragEnabled && convertScrollDirectionToDrag(direction,),
@@ -21279,7 +21284,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
       },
       preserve3d: containerProps.preserve3d,
       children: [
-        /* @__PURE__ */ jsx(EmptyState, {
+        /* @__PURE__ */ _jsx5(EmptyState, {
           children,
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -21653,7 +21658,7 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsxs(FrameWithMotion, {
+  return /* @__PURE__ */ _jsxs(FrameWithMotion, {
     ref,
     'data-framer-component-type': 'NativeScroll',
     background: 'none',
@@ -21665,7 +21670,7 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
     layoutScroll: true,
     className: cx(className, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
-      /* @__PURE__ */ jsx(EmptyState, {
+      /* @__PURE__ */ _jsx5(EmptyState, {
         children,
         size: {
           width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -21681,8 +21686,8 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
 },);
 var Scroll = /* @__PURE__ */ (() => {
   const ScrollInner = React__default.forwardRef(function ScrollInner2(props, forwardedRef,) {
-    if (props.native) return /* @__PURE__ */ jsx(NativeScroll, { ref: forwardedRef, ...props, },);
-    else return /* @__PURE__ */ jsx(EmulatedScroll, { ref: forwardedRef, ...props, },);
+    if (props.native) return /* @__PURE__ */ _jsx5(NativeScroll, { ref: forwardedRef, ...props, },);
+    else return /* @__PURE__ */ _jsx5(EmulatedScroll, { ref: forwardedRef, ...props, },);
   },);
   ScrollInner.defaultProps = { directionLock: false, };
   addPropertyControls(ScrollInner, {
@@ -21745,7 +21750,7 @@ var Scroll = /* @__PURE__ */ (() => {
   return ScrollInner;
 })();
 function useNavigation() {
-  return useContext(NavigationContext,);
+  return useContext3(NavigationContext,);
 }
 var data = /* @__PURE__ */ (() => {
   function Data2(initial = {},) {
@@ -21813,7 +21818,7 @@ var DataContext = /* @__PURE__ */ createContext(defaultId,);
 function createData(defaultState2, actions,) {
   const stores = /* @__PURE__ */ new Map();
   const useData = (id3, initialState2,) => {
-    const contextId = useContext(DataContext,);
+    const contextId = useContext3(DataContext,);
     id3 = id3 || contextId;
     const store = useMemo(() => {
       if (!stores.has(id3,)) stores.set(id3, createStore(initialState2 || defaultState2, actions,),);
@@ -21836,7 +21841,7 @@ function useObserveData() {
   const context = React__default.useContext(DataObserverContext,);
   return !isNaN(context.update,);
 }
-var DataObserver = class extends Component {
+var DataObserver = class extends Component2 {
   constructor() {
     super(...arguments,);
     __publicField(this, 'observers', [],);
@@ -21864,7 +21869,7 @@ var DataObserver = class extends Component {
       const observer2 = Data.addObserver(d, this.observer,);
       this.observers.push(observer2,);
     },);
-    return /* @__PURE__ */ jsx(DataObserverContext.Provider, { value: { ...this.state, }, children, },);
+    return /* @__PURE__ */ _jsx5(DataObserverContext.Provider, { value: { ...this.state, }, children, },);
   }
 };
 var import_hoist_non_react_statics4 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
@@ -21887,10 +21892,10 @@ function convertColorProps(props,) {
 function WithOverride(Component14, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
-    useContext(DataObserverContext,);
+    useContext3(DataObserverContext,);
     const overrideProps = useOverride(props,);
     const { style, ...rest } = props;
-    return /* @__PURE__ */ jsx(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
+    return /* @__PURE__ */ _jsx5(Component14, { ...rest, ...overrideProps, _initialStyle: style, },);
   };
   (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component14,);
   ComponentWithOverride['displayName'] = `WithOverride(${Component14.displayName || Component14.name})`;
@@ -22528,12 +22533,12 @@ function isVariantOrVariantList(value,) {
 var withFX = (Component14) =>
   React__default.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx(Component14, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
+      return /* @__PURE__ */ _jsx5(Component14, { ...props, animate: void 0, initial: void 0, exit: void 0, ref: forwardedRef, },);
     }
     if (RenderTarget.current() === 'CANVAS') {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ jsx(Component14, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
+      return /* @__PURE__ */ _jsx5(Component14, { ...props, animate: animate4, initial: initial2, exit: void 0, ref: forwardedRef, },);
     }
     const fallbackRef = React__default.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
@@ -22595,7 +22600,7 @@ var withFX = (Component14) =>
     const initial = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
     const exit = isVariantOrVariantList(props.exit,) ? props.exit : void 0;
     const motionGestures = inSmartComponent && !presence.presenceInitial ? { initial, animate: animate3, exit, } : {};
-    return /* @__PURE__ */ jsx(Component14, {
+    return /* @__PURE__ */ _jsx5(Component14, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -22610,10 +22615,10 @@ var Context = /* @__PURE__ */ createContext({},);
 function ComponentPresetsProvider({ presets, children, },) {
   const lastPresets = useRef(presets,);
   if (!isEqual(presets, lastPresets.current, false,)) lastPresets.current = presets;
-  return /* @__PURE__ */ jsx(Context.Provider, { value: lastPresets.current, children, },);
+  return /* @__PURE__ */ _jsx5(Context.Provider, { value: lastPresets.current, children, },);
 }
 function ComponentPresetsConsumer({ componentIdentifier, children, },) {
-  const componentPresets = useContext(Context,);
+  const componentPresets = useContext3(Context,);
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
@@ -22668,7 +22673,7 @@ function createHook(forwardedRef,) {
     },);
   }
   const cloneAsElement = function cloneAsElement2(children, props,) {
-    return /* @__PURE__ */ jsx(Fragment, { children: cloneChildrenWithPropsAndRef(children, props,), },);
+    return /* @__PURE__ */ _jsx5(Fragment, { children: cloneChildrenWithPropsAndRef(children, props,), },);
   };
   cloneAsElement.cloneAsArray = cloneChildrenWithPropsAndRef;
   return { // used during render phase to sync props with state
@@ -22706,7 +22711,7 @@ var ComponentViewportProvider = /* @__PURE__ */ React__default.forwardRef(({ wid
     return { width, };
   }, [width,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
-  return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
+  return /* @__PURE__ */ _jsx5(ComponentViewportContext.Provider, {
     value: componentViewport,
     children: cloneWithPropsAndRef(children, rest,),
   },);
@@ -22714,7 +22719,7 @@ var ComponentViewportProvider = /* @__PURE__ */ React__default.forwardRef(({ wid
 var withGeneratedLayoutId = (Component14) =>
   React__default.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx(Component14, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
+    return /* @__PURE__ */ _jsx5(Component14, { layoutId, ...props, layoutIdKey: void 0, duplicatedFrom: void 0, ref, },);
   },);
 var ContainerErrorBoundary = class extends React__default.Component {
   constructor() {
@@ -22733,18 +22738,18 @@ var ContainerErrorBoundary = class extends React__default.Component {
 };
 var Providers = /* @__PURE__ */ React__default.forwardRef(({ children, layoutId, ...props }, ref,) => {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
-  return /* @__PURE__ */ jsx(motion.div, {
+  return /* @__PURE__ */ _jsx5(motion.div, {
     layoutId: outerLayoutId,
     ...props,
     ref,
-    children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
+    children: /* @__PURE__ */ _jsx5(ComponentContainerContext.Provider, {
       value: true,
-      children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
+      children: /* @__PURE__ */ _jsx5(AutomaticLayoutIds, {
         enabled: false,
-        children: /* @__PURE__ */ jsx(LayoutGroup, {
+        children: /* @__PURE__ */ _jsx5(LayoutGroup, {
           id: layoutId ?? '',
           inherit: 'id',
-          children: /* @__PURE__ */ jsx(ContainerErrorBoundary, {
+          children: /* @__PURE__ */ _jsx5(ContainerErrorBoundary, {
             children: React__default.Children.map(children, (child) => {
               return React__default.isValidElement(child,) ? React__default.cloneElement(child, { layoutId, },) : child;
             },),
@@ -22772,14 +22777,14 @@ var withCSS = (Component14, escapedCSS, componentSerializationId,) =>
     const { sheet, cache: cache3, } = React__default.useContext(StyleSheetContext,) ?? {};
     if (!isBrowser2()) {
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ jsxs(Fragment, {
+      return /* @__PURE__ */ _jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ jsx('style', {
+          /* @__PURE__ */ _jsx5('style', {
             ...styleTagSSRMarker,
             'data-framer-component': componentSerializationId,
             dangerouslySetInnerHTML: { __html: concatenatedCSS, },
           },),
-          /* @__PURE__ */ jsx(Component14, { ...props, ref, },),
+          /* @__PURE__ */ _jsx5(Component14, { ...props, ref, },),
         ],
       },);
     }
@@ -22788,7 +22793,7 @@ var withCSS = (Component14, escapedCSS, componentSerializationId,) =>
       const css = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
       css.forEach((rule) => rule && injectCSSRule(rule, sheet, cache3,));
     }, [],);
-    return /* @__PURE__ */ jsx(Component14, { ...props, ref, },);
+    return /* @__PURE__ */ _jsx5(Component14, { ...props, ref, },);
   },);
 var CustomCursorContext = /* @__PURE__ */ React__default.createContext({ onRegisterCursors: () => () => {}, registerCursors: () => {}, },);
 var replaceCursorClassName = 'framer-cursor-none';
@@ -22815,9 +22820,9 @@ var CustomCursorContextProvider = /* @__PURE__ */ React__default.memo(function C
     };
   },);
   const shouldReduceMotion = useReducedMotionConfig();
-  return /* @__PURE__ */ jsxs(CustomCursorContext.Provider, {
+  return /* @__PURE__ */ _jsxs(CustomCursorContext.Provider, {
     value,
-    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {},),],
+    children: [children, !shouldReduceMotion && /* @__PURE__ */ _jsx5(CustomCursorComponent, {},),],
   },);
 },);
 var CustomCursorHost = /* @__PURE__ */ withCSS(CustomCursorContextProvider, [
@@ -22882,7 +22887,7 @@ function isEmptyObject(object,) {
   return true;
 }
 var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomCursorComponent2() {
-  const { onRegisterCursors, } = useContext(CustomCursorContext,);
+  const { onRegisterCursors, } = useContext3(CustomCursorContext,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
@@ -22988,7 +22993,7 @@ var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomC
     placement,
   ],);
   if (!cursor || !Cursor) return null;
-  return /* @__PURE__ */ jsx(Cursor, {
+  return /* @__PURE__ */ _jsx5(Cursor, {
     transformTemplate: transformTemplate2,
     style: { ...staticCursorStyle, x, y, opacity, },
     globalTapTarget: true,
@@ -22998,7 +23003,7 @@ var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomC
   },);
 },);
 function useCustomCursors(webPageCursors,) {
-  const { registerCursors, } = useContext(CustomCursorContext,);
+  const { registerCursors, } = useContext3(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
   React__default.useLayoutEffect(() => {
     registerCursors(cursors,);
@@ -23478,8 +23483,8 @@ function Floating(
     };
   }, [safeArea, placement, alignment, offsetX, offsetY, anchorRef, collisionDetection, collisionDetectionPadding, updateOrigin,],);
   const descendantContext = useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, { safeArea, onDismiss, },);
-  return ReactDOM.createPortal(
-    /* @__PURE__ */ jsxs('div', {
+  return React__default.createPortal(
+    /* @__PURE__ */ _jsxs('div', {
       ref: floatingPositionRef,
       className,
       style: { // Initially rendered as hidden, but the layout effect will set
@@ -23493,11 +23498,11 @@ function Floating(
       ...rest,
       children: [
         safeArea
-          ? /* @__PURE__ */ jsx('div', { ref: safeAreaRef, style: { position: 'absolute', }, 'data-safearea': true, },)
-          : /* @__PURE__ */ jsx('div', { style: { position: 'fixed', inset: 0, }, 'aria-hidden': true, onMouseDown: onDismiss, },),
-        /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
+          ? /* @__PURE__ */ _jsx5('div', { ref: safeAreaRef, style: { position: 'absolute', }, 'data-safearea': true, },)
+          : /* @__PURE__ */ _jsx5('div', { style: { position: 'fixed', inset: 0, }, 'aria-hidden': true, onMouseDown: onDismiss, },),
+        /* @__PURE__ */ _jsx5(FloatingStackingContext.Provider, {
           value: descendantContext,
-          children: /* @__PURE__ */ jsx('div', { ref: contentRef, children: childrenWithOrigin(children, origin,), },),
+          children: /* @__PURE__ */ _jsx5('div', { ref: contentRef, children: childrenWithOrigin(children, origin,), },),
         },),
       ],
     },),
@@ -23912,10 +23917,10 @@ function PageRoot(
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx(MotionConfig, {
+    return /* @__PURE__ */ _jsx5(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx(CustomCursorHost, {
-        children: /* @__PURE__ */ jsx(Router, {
+      children: /* @__PURE__ */ _jsx5(CustomCursorHost, {
+        children: /* @__PURE__ */ _jsx5(Router, {
           initialRoute: routeId,
           initialPathVariables: pathVariables,
           initialLocaleId: localeId,
@@ -23932,10 +23937,10 @@ function PageRoot(
     },);
   } else {
     const Wrapper = includeDataObserver ? DataObserver : React__default.Fragment;
-    return /* @__PURE__ */ jsx(Wrapper, {
-      children: /* @__PURE__ */ jsx(RoutesProvider, {
+    return /* @__PURE__ */ _jsx5(Wrapper, {
+      children: /* @__PURE__ */ _jsx5(RoutesProvider, {
         routes,
-        children: /* @__PURE__ */ jsx(NavigationWrapper, {
+        children: /* @__PURE__ */ _jsx5(NavigationWrapper, {
           children: React__default.isValidElement(RootComponent,) ? RootComponent : React__default.createElement( // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
             RootComponent,
@@ -23952,7 +23957,7 @@ function cloneChildrenWithProps(children, props, asNode,) {
     return child;
   },);
   if (asNode) return cloned;
-  return /* @__PURE__ */ jsx(Fragment, { children: cloned, },);
+  return /* @__PURE__ */ _jsx5(Fragment, { children: cloned, },);
 }
 var SSRParentVariantsContext = /* @__PURE__ */ React__default.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
@@ -23989,9 +23994,9 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
   const effectiveRemainingVariants = intersection(remainingVariants, parentVariants,);
   if (effectiveRemainingVariants.length) branches.unshift({ variants: effectiveRemainingVariants, },);
   const displayContents = `.${SSRVariantClassName} { display: contents }`;
-  return /* @__PURE__ */ jsxs(Fragment, {
+  return /* @__PURE__ */ _jsxs(Fragment, {
     children: [
-      !parentVariants && /* @__PURE__ */ jsx('style', { ...styleTagSSRMarker, children: displayContents, },),
+      !parentVariants && /* @__PURE__ */ _jsx5('style', { ...styleTagSSRMarker, children: displayContents, },),
       branches.map(({ variants, propOverrides, },) => {
         const key7 = variants.join('+',);
         let element = // We could omit the SSRParentVariantsContext if variants is
@@ -23999,14 +24004,14 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
           // arrays, so it might not really be an optimization. And
           // since it's just a context, it doesn't affect the size of
           // the generated HTML.
-          /* @__PURE__ */ jsx(SSRParentVariantsContext.Provider, {
+          /* @__PURE__ */ _jsx5(SSRParentVariantsContext.Provider, {
             value: new Set(variants,),
             children: cloneChildrenWithProps(child, { ...props, ...propOverrides, },),
           }, key7,);
         const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
         if (hiddenClassNames.length) {
           assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-          element = /* @__PURE__ */ jsx(
+          element = /* @__PURE__ */ _jsx5(
             'div',
             { className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`, children: element, },
             key7,
@@ -25930,7 +25935,7 @@ function activeMediaQueryFromWindow(mediaQueries,) {
   }
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
-  const isInitialNavigation = useContext(IsInitialNavigationContext,);
+  const isInitialNavigation = useContext3(IsInitialNavigationContext,);
   const baseVariant = useRef(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
   const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate3();
@@ -25939,7 +25944,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
     if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
       instantTransition(() => {
         baseVariant.current = basePropsVariant.current = variant;
-        startTransition(() => {
+        startTransition2(() => {
           forceUpdate();
         },);
       },);
@@ -26507,7 +26512,7 @@ function withMappedReactProps(Component14, info,) {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
-    return /* @__PURE__ */ jsx(Component14, { ...props, },);
+    return /* @__PURE__ */ _jsx5(Component14, { ...props, },);
   };
 }
 var keys2 = /* @__PURE__ */ new Set([
@@ -26537,7 +26542,7 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
 }
 var withVariantAppearEffect = (Component14) =>
   React__default.forwardRef((props, forwardedRef,) => {
-    if (RenderTarget.current() === 'CANVAS') return /* @__PURE__ */ jsx(Component14, { ...props, ref: forwardedRef, },);
+    if (RenderTarget.current() === 'CANVAS') return /* @__PURE__ */ _jsx5(Component14, { ...props, ref: forwardedRef, },);
     const fallbackRef = React__default.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const [options, rest,] = extractPrefixedProps(props, keys2,);
@@ -26583,14 +26588,14 @@ var withVariantAppearEffect = (Component14) =>
     }, [animateOnce, threshold, targets, props.variant,],);
     useScrollDirectionChange(scrollDirection, setVariant, { enabled: variantAppearEffectEnabled, repeat: !animateOnce, },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx(Component14, { ...rest, variant: activeVariant ?? props.variant, ref, },);
-    } else return /* @__PURE__ */ jsx(Component14, { ...rest, },);
+      return /* @__PURE__ */ _jsx5(Component14, { ...rest, variant: activeVariant ?? props.variant, ref, },);
+    } else return /* @__PURE__ */ _jsx5(Component14, { ...rest, },);
   },);
 var withVariantFX = (Component14) =>
   React__default.forwardRef(({ initial, animate: animate3, exit, ...props }, forwardedRef,) => {
     const ref = useRef();
     const effect = usePresenceAnimation({ initial, animate: animate3, exit, }, forwardedRef ?? ref, true,);
-    return /* @__PURE__ */ jsx(Component14, {
+    return /* @__PURE__ */ _jsx5(Component14, {
       ...props,
       style: { ...(props == null ? void 0 : props.style), ...effect.values, },
       ref: forwardedRef ?? ref,
@@ -27583,7 +27588,7 @@ Promise.allSettled = Promise.allSettled ||
       promises.map((p) => p.then((v) => ({ status: 'fulfilled', value: v, })).catch((e) => ({ status: 'rejected', reason: e, }))),
     ));
 function CustomProperties({ children, customProperties, },) {
-  return /* @__PURE__ */ jsx('div', { style: customProperties, children, },);
+  return /* @__PURE__ */ _jsx5('div', { style: customProperties, children, },);
 }
 var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
   var _a;
@@ -27611,10 +27616,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
     }
     renderErrorPlaceholder(file, error,) {
       const { RenderPlaceholder, } = runtime;
-      return /* @__PURE__ */ jsx(FrameWithMotion, {
+      return /* @__PURE__ */ _jsx5(FrameWithMotion, {
         ...this.props,
         background: null,
-        children: /* @__PURE__ */ jsx(RenderPlaceholder, { error: { error, file, }, },),
+        children: /* @__PURE__ */ _jsx5(RenderPlaceholder, { error: { error, file, }, },),
       },);
     }
     render() {
@@ -27670,10 +27675,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
         children = React__default.Children.map(originalChildren, (child) => {
           if (!isReactChild(child,) || !isReactElement(child,)) return child;
           if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ jsx(LayoutGroup, {
+            return /* @__PURE__ */ _jsx5(LayoutGroup, {
               inherit: false,
               id: this.props.__layoutId,
-              children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
+              children: /* @__PURE__ */ _jsx5(AutomaticLayoutIds, {
                 enabled: false,
                 children: React__default.cloneElement(child, childProps,),
               },),
@@ -27716,9 +27721,9 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
          * but published design components can contain an old version of the presentation tree that expects the background
          * that is passed to be rendered here
          * See the stackBackgroundTest.tsx integration test for an example of such a case
-         */ /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
+         */ /* @__PURE__ */ _jsx5(ComponentContainerContext.Provider, {
           value: true,
-          children: /* @__PURE__ */ jsx(FrameWithMotion, {
+          children: /* @__PURE__ */ _jsx5(FrameWithMotion, {
             'data-framer-component-container': true,
             background: null,
             overflow: 'visible',
@@ -27745,7 +27750,7 @@ function isPageOrScroll(identifier,) {
 var FormButton = /* @__PURE__ */ React__default.forwardRef(function FormButon({ type = 'submit', value = 'Submit', ...props }, ref,) {
   const { style: baseStyle2, } = props;
   const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
-  return /* @__PURE__ */ jsx(motion.input, { type, ref, style, value, },);
+  return /* @__PURE__ */ _jsx5(motion.input, { type, ref, style, value, },);
 },);
 function mergeWithDefaultStyle(style,) {
   return {
@@ -27789,7 +27794,7 @@ var FormContainer = ({ action, formId, disabled, children, ...props },) => {
       dispatch({ type: 'error', },);
     }
   };
-  return /* @__PURE__ */ jsx(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: children(state,), },);
+  return /* @__PURE__ */ _jsx5(motion.form, { ...props, 'data-formid': formId, onSubmit: handleSubmit, children: children(state,), },);
 };
 var passwordManagerIgnoreDataProps = { // 1Password
   'data-1p-ignore': true, // LastPass
@@ -27805,7 +27810,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
   const baseWrapperStyle = { display: 'flex', flexDirection: 'column', };
   const isHiddenInput = type === 'hidden';
   const baseStyle2 = { width: '100%', flexGrow: 1, };
-  const input = /* @__PURE__ */ jsx(motion.input, {
+  const input = /* @__PURE__ */ _jsx5(motion.input, {
     id: inputName,
     ...dataProps,
     type,
@@ -27817,13 +27822,13 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
     className: inputClassName,
   },);
   if (isHiddenInput) return input;
-  return /* @__PURE__ */ jsxs(motion.div, {
+  return /* @__PURE__ */ _jsxs(motion.div, {
     ref,
     style: { ...baseWrapperStyle, ...style, },
     ...rest,
     children: [
       label && !hideInputLabel && /* @__PURE__ */
-      jsx('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
+      _jsx5('label', { htmlFor: inputName, style: { ...labelStyles, }, className: labelClassName, children: label, },),
       input,
     ],
   },);
@@ -27863,11 +27868,11 @@ var Image2 = /* @__PURE__ */ React__default.forwardRef(function Image3(props, re
   const style = { ...rest.style, };
   if (background) delete style.background;
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ jsxs(MotionComponent, {
+  return /* @__PURE__ */ _jsxs(MotionComponent, {
     ...rest,
     style,
     ref,
-    children: [background && /* @__PURE__ */ jsx(BackgroundImageComponent, { image: background, alt, },), children,],
+    children: [background && /* @__PURE__ */ _jsx5(BackgroundImageComponent, { image: background, alt, },), children,],
   },);
 },);
 function isShallowEqualArray(a, b,) {
@@ -28137,7 +28142,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
   collectTextShadowsForProps(props, style,);
   if (willChangeTransform) forceLayerBackingWithCSSProperties(style,);
   Object.assign(style, props.style,);
-  return /* @__PURE__ */ jsx(motion.div, {
+  return /* @__PURE__ */ _jsx5(motion.div, {
     id: id3,
     ref: layoutRef,
     ...rest,
@@ -28172,11 +28177,11 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
   }
 }
 var FitText = /* @__PURE__ */ forwardRef(({ viewBoxScale, viewBox, children, ...props }, ref,) => {
-  return /* @__PURE__ */ jsx(motion.svg, {
+  return /* @__PURE__ */ _jsx5(motion.svg, {
     ref,
     ...props,
     viewBox,
-    children: /* @__PURE__ */ jsx(motion.foreignObject, {
+    children: /* @__PURE__ */ _jsx5(motion.foreignObject, {
       width: '100%',
       height: '100%',
       className: 'framer-fit-text',
@@ -28226,7 +28231,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   } = props;
   const parentSize = useParentSize();
   const isOnCanvas = useIsOnFramerCanvas();
-  const inCodeComponent = useContext(ComponentContainerContext,);
+  const inCodeComponent = useContext3(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
   const fallbackRef = useRef(null,);
   const containerRef = ref ?? fallbackRef;
@@ -28287,7 +28292,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   const Component14 = htmlElementAsMotionComponent(props.as,);
   if (isString22(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx(Component14, {
+      return /* @__PURE__ */ _jsx5(Component14, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -28295,14 +28300,14 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
         transformTemplate: template,
         'data-framer-name': name,
         'data-framer-component-type': 'RichTextContainer',
-        children: /* @__PURE__ */ jsx(FitText, {
+        children: /* @__PURE__ */ _jsx5(FitText, {
           viewBox,
           viewBoxScale,
           style: { width: '100%', height: '100%', },
           children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
         },),
       },);
-    } else {return /* @__PURE__ */ jsx(FitText, {
+    } else {return /* @__PURE__ */ _jsx5(FitText, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -28315,7 +28320,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
         children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
       },);}
   }
-  return /* @__PURE__ */ jsx(Component14, {
+  return /* @__PURE__ */ _jsx5(Component14, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -28340,7 +28345,7 @@ function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
     const stylesPresetClassName = isString22(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
     props.className = cx('framer-text', props.className, stylesPresetClassName,);
   }
-  return cloneElement(element, props, ...children,);
+  return cloneElement2(element, props, ...children,);
 }
 var RichText = /* @__PURE__ */ forwardRef(({ children, html, htmlFromDesign, ...props }, ref,) => {
   const content = html || children || htmlFromDesign;
@@ -28351,7 +28356,7 @@ var RichText = /* @__PURE__ */ forwardRef(({ children, html, htmlFromDesign, ...
     const contentProp = { // We need to use the original prop name.
       [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
     };
-    return /* @__PURE__ */ jsx(DeprecatedRichText, { ...props, ...contentProp, ref, },);
+    return /* @__PURE__ */ _jsx5(DeprecatedRichText, { ...props, ...contentProp, ref, },);
   }
   if (!props.stylesPresetsClassNames && isString22(props.stylesPresetsClassName,)) {
     const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
@@ -28359,7 +28364,7 @@ var RichText = /* @__PURE__ */ forwardRef(({ children, html, htmlFromDesign, ...
       console.warn(`Encountered invalid stylesPresetsClassNames: ${props.stylesPresetsClassNames}`,);
     } else props.stylesPresetsClassNames = { h1, h2, h3, p, a, };
   }
-  return /* @__PURE__ */ jsx(RichTextContainer, { ...props, ref, children: isValidElement(content,) ? content : void 0, },);
+  return /* @__PURE__ */ _jsx5(RichTextContainer, { ...props, ref, children: isValidElement(content,) ? content : void 0, },);
 },);
 function linearGradientLine(angle,) {
   var _a, _b;
@@ -28506,7 +28511,7 @@ function imageUrlForAsset(asset, pixelSize,) {
 }
 var ImagePatternElement = ({ id: id3, path, transform: transform2, repeat, width, height, offsetX, offsetY, },) => {
   const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ jsx('pattern', {
+  return /* @__PURE__ */ _jsx5('pattern', {
     id: id3,
     width: repeat ? width : '100%',
     height: repeat ? height : '100%',
@@ -28514,7 +28519,7 @@ var ImagePatternElement = ({ id: id3, path, transform: transform2, repeat, width
     patternUnits: repeat ? 'userSpaceOnUse' : void 0,
     x: repeat ? offsetX : void 0,
     y: repeat ? offsetY : void 0,
-    children: /* @__PURE__ */ jsx('image', {
+    children: /* @__PURE__ */ _jsx5('image', {
       width: repeat ? width : 1,
       height: repeat ? height : 1,
       href,
@@ -28724,7 +28729,7 @@ function SVG(props,) {
   const layoutRef = React__default.useRef(null,);
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ jsx(SVGComponent, { ...props, innerRef: layoutRef, parentSize, layoutId, providedWindow, },);
+  return /* @__PURE__ */ _jsx5(SVGComponent, { ...props, innerRef: layoutRef, parentSize, layoutId, providedWindow, },);
 }
 var MAX_BACKGROUND_SVG_TEXT_LENGTH = 5e4;
 function containsImageReference(svg,) {
@@ -28891,20 +28896,20 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${LinearGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const { stops, x1, x2, y1, y2, } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx('svg', {
+        fillElement = /* @__PURE__ */ _jsx5('svg', {
           ref: this.setSVGElement,
           xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
           height: '100%',
           style: { position: 'absolute', },
-          children: /* @__PURE__ */ jsx('linearGradient', {
+          children: /* @__PURE__ */ _jsx5('linearGradient', {
             id: gradientId,
             x1,
             x2,
             y1,
             y2,
             children: stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+              return /* @__PURE__ */ _jsx5('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
             },),
           },),
         },);
@@ -28913,19 +28918,19 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx('svg', {
+        fillElement = /* @__PURE__ */ _jsx5('svg', {
           ref: this.setSVGElement,
           xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
           height: '100%',
           style: { position: 'absolute', },
-          children: /* @__PURE__ */ jsx('radialGradient', {
+          children: /* @__PURE__ */ _jsx5('radialGradient', {
             id: gradientId,
             cy: gradient.centerAnchorY,
             cx: gradient.centerAnchorX,
             r: gradient.widthFactor,
             children: elementProperties.stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+              return /* @__PURE__ */ _jsx5('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
             },),
           },),
         },);
@@ -28933,14 +28938,14 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const imagePattern = imagePatternPropsForFill(fill, size2, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ jsx('svg', {
+          fillElement = /* @__PURE__ */ _jsx5('svg', {
             ref: this.setSVGElement,
             xmlns: 'http://www.w3.org/2000/svg',
             xmlnsXlink: 'http://www.w3.org/1999/xlink',
             width: '100%',
             height: '100%',
             style: { position: 'absolute', },
-            children: /* @__PURE__ */ jsx('defs', { children: /* @__PURE__ */ jsx(ImagePatternElement, { ...imagePattern, },), },),
+            children: /* @__PURE__ */ _jsx5('defs', { children: /* @__PURE__ */ _jsx5(ImagePatternElement, { ...imagePattern, },), },),
           },);
         }
       }
@@ -28961,10 +28966,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = svg;
         if (hasBorderRadius(outerStyle,)) outerStyle.overflow = 'hidden';
-        content = /* @__PURE__ */ jsxs(Fragment, {
+        content = /* @__PURE__ */ _jsxs(Fragment, {
           children: [
             fillElement,
-            /* @__PURE__ */ jsx('div', {
+            /* @__PURE__ */ _jsx5('div', {
               className: 'svgContainer',
               style: innerStyle,
               ref: this.container,
@@ -28975,7 +28980,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
       }
       const MotionComponent = htmlElementAsMotionComponent(this.props.as,);
       const { href, target, rel, onClick, } = this.props;
-      return /* @__PURE__ */ jsxs(MotionComponent, {
+      return /* @__PURE__ */ _jsxs(MotionComponent, {
         ...dataProps,
         ...rest,
         layoutId,
@@ -28990,7 +28995,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         'aria-label': title,
         'aria-description': description,
         ...{ href, target, rel, onClick, },
-        children: [content, /* @__PURE__ */ jsx(SVGStyleSheet, {},),],
+        children: [content, /* @__PURE__ */ _jsx5(SVGStyleSheet, {},),],
       },);
     }
   },
@@ -29074,7 +29079,7 @@ var Text2 = /* @__PURE__ */ React__default.forwardRef(function Text3(props, forw
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, onCanvas, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ jsx(TextComponent, {
+  return /* @__PURE__ */ _jsx5(TextComponent, {
     ...props,
     innerRef: layoutRef,
     layoutId,
@@ -29159,7 +29164,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           Object.assign(style, styleProp,);
           if (alignment) asRecord(style,)['--framer-text-alignment'] = alignment;
           const tabIndexProps = getTabIndexProps(tabIndex,);
-          return /* @__PURE__ */ jsx(motion.div, {
+          return /* @__PURE__ */ _jsx5(motion.div, {
             layoutId,
             id: id3,
             ...tabIndexProps,
@@ -29189,10 +29194,10 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ jsxs(Fragment, {
+      return /* @__PURE__ */ _jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, { children: this.renderMain, },),
-          /* @__PURE__ */ jsx(TextStyleSheet, {},),
+          /* @__PURE__ */ _jsx5(ComponentContainerContext.Consumer, { children: this.renderMain, },),
+          /* @__PURE__ */ _jsx5(TextStyleSheet, {},),
         ],
       },);
     }
@@ -29516,25 +29521,25 @@ function transformString(transform2,) {
   }
   return result;
 }
-var LinearGradientElement = class extends Component {
+var LinearGradientElement = class extends Component2 {
   render() {
     const { id: id3, stops, x1, x2, y1, y2, } = this.props;
-    return /* @__PURE__ */ jsx('linearGradient', {
+    return /* @__PURE__ */ _jsx5('linearGradient', {
       id: id3,
       x1,
       x2,
       y1,
       y2,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+        return /* @__PURE__ */ _jsx5('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
       },),
     },);
   }
 };
-var RadialGradientElement = class extends Component {
+var RadialGradientElement = class extends Component2 {
   render() {
     const { centerAnchorX, centerAnchorY, id: id3, widthFactor, heightFactor, stops, } = this.props;
-    return /* @__PURE__ */ jsx('radialGradient', {
+    return /* @__PURE__ */ _jsx5('radialGradient', {
       id: id3,
       cy: centerAnchorY,
       cx: centerAnchorX,
@@ -29543,12 +29548,12 @@ var RadialGradientElement = class extends Component {
         heightFactor / widthFactor
       }) translate(-${centerAnchorX}, -${centerAnchorY})`,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
+        return /* @__PURE__ */ _jsx5('stop', { offset: stop.position, stopColor: stop.color, stopOpacity: stop.alpha, }, idx,);
       },),
     },);
   }
 };
-var SVGRoot = class extends Component {
+var SVGRoot = class extends Component2 {
   render() {
     const { children, frame: frame2, innerRef, } = this.props;
     const { width, height, } = frame2;
@@ -29563,7 +29568,7 @@ var SVGRoot = class extends Component {
       transform: `translate(${fx}px, ${fy}px)`,
     };
     Layer.applyWillChange(this.props, svgStyle, false,);
-    return /* @__PURE__ */ jsx('svg', {
+    return /* @__PURE__ */ _jsx5('svg', {
       width: '100%',
       height: '100%',
       xmlns: 'http://www.w3.org/2000/svg',
@@ -29684,28 +29689,28 @@ var Vector = /* @__PURE__ */ (() => {
       const currentName = target === 'PREVIEW' ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ jsx(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
+        shapeReference = /* @__PURE__ */ _jsx5(motion.path, { ...{ ...pathAttributes, }, variants, transition, },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ jsx('clipPath', {
+          strokeClipPath = /* @__PURE__ */ _jsx5('clipPath', {
             id: internalStrokeClipId.id,
-            children: /* @__PURE__ */ jsx('use', { xlinkHref: internalShapeId.link, },),
+            children: /* @__PURE__ */ _jsx5('use', { xlinkHref: internalShapeId.link, },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ jsx('use', {
+          mainElement = /* @__PURE__ */ _jsx5('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ jsx('use', {
+          strokeElement = /* @__PURE__ */ _jsx5('use', {
             xlinkHref: internalShapeId.link,
             clipPath: internalStrokeClipId.urlLink,
             fill: 'transparent',
             ...svgStrokeAttributes,
             strokeWidth,
           },);
-        } else {mainElement = /* @__PURE__ */ jsx('use', {
+        } else {mainElement = /* @__PURE__ */ _jsx5('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             clipPath: internalStrokeClipId.urlLink,
@@ -29715,7 +29720,7 @@ var Vector = /* @__PURE__ */ (() => {
           },);}
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ jsx(motion.path, {
+        mainElement = /* @__PURE__ */ _jsx5(motion.path, {
           ...{ ...pathAttributes, fill: vectorFill, ...svgStrokeAttributes, },
           name: currentName,
           variants,
@@ -29723,23 +29728,23 @@ var Vector = /* @__PURE__ */ (() => {
         },);
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ jsx(ImagePatternElement, {
+        ? /* @__PURE__ */ _jsx5(ImagePatternElement, {
           ...imagePattern,
           repeat: BackgroundImage.isImageObject(fill,) && fill.fit === 'tile',
         },)
         : void 0;
       let gradient;
-      if (linearGradient) gradient = /* @__PURE__ */ jsx(LinearGradientElement, { ...linearGradient, },);
-      else if (radialGradient) gradient = /* @__PURE__ */ jsx(RadialGradientElement, { ...radialGradient, },);
+      if (linearGradient) gradient = /* @__PURE__ */ _jsx5(LinearGradientElement, { ...linearGradient, },);
+      else if (radialGradient) gradient = /* @__PURE__ */ _jsx5(RadialGradientElement, { ...radialGradient, },);
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
-        defs = /* @__PURE__ */ jsxs('defs', {
+        defs = /* @__PURE__ */ _jsxs('defs', {
           children: [shapeReference, strokeClipPath, shadow.definition, gradient, imagePatternElement,],
         },);
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ jsx(motion.path, {
+        mainElement = /* @__PURE__ */ _jsx5(motion.path, {
           ...{ ...pathAttributes, fill: vectorFill, ...svgStrokeAttributes, },
           opacity: opacityValue,
           variants,
@@ -29749,7 +29754,7 @@ var Vector = /* @__PURE__ */ (() => {
         return this.renderElement(mainElement,);
       }
       return this.renderElement(
-        /* @__PURE__ */ jsxs(motion.g, {
+        /* @__PURE__ */ _jsxs(motion.g, {
           opacity: opacityValue,
           variants,
           transition,
@@ -29762,7 +29767,7 @@ var Vector = /* @__PURE__ */ (() => {
       const frame2 = this.props.frame ?? rect ?? { x: 0, y: 0, width: 100, height: 100, };
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx(SVGRoot, {
+      return /* @__PURE__ */ _jsx5(SVGRoot, {
         frame: frame2,
         width,
         height,
@@ -29842,14 +29847,14 @@ var VectorGroup = /* @__PURE__ */ (() => {
         else name = defaultName;
       }
       return this.renderElement(
-        /* @__PURE__ */ jsx('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
+        /* @__PURE__ */ _jsx5('g', { transform: transformString(transform2,), ...{ id: id3, name, opacity, }, children, },),
       );
     }
     renderElement(element,) {
       const { isRootVectorNode, width, height, frame: frame2, willChangeTransform, includeTransform, } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx(SVGRoot, {
+      return /* @__PURE__ */ _jsx5(SVGRoot, {
         frame: frame2,
         width,
         height,

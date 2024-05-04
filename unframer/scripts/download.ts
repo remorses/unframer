@@ -46,9 +46,9 @@ export async function main({ framerTypesUrl }) {
         logLevel: 'error',
         jsxSideEffects: false,
 
-        pure: ['addPropertyControls', '__commonJS'],
+        pure: ['addPropertyControls'],
         define: {
-            'RenderEnvironment.target': JSON.stringify('PREVIEW'),
+            // 'RenderEnvironment.target': JSON.stringify('PREVIEW'),
         },
         plugins: [esbuildPluginBundleDependencies({})],
         write: true,
