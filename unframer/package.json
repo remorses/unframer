@@ -66,8 +66,10 @@
         "@types/fs-extra": "^11.0.1",
         "@types/node": "^20.5.7",
         "@xmorse/deployment-utils": "^0.1.0",
+        "openai": "^4.40.2",
         "posthtml": "^0.16.6",
         "react": "^18.3.0",
-        "react-dom": "^18.3.0"
+        "react-dom": "^18.3.0",
+        "tiktoken": "^1.0.14"
     }
 }
