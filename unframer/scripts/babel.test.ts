@@ -10,6 +10,7 @@ function trans(code: string) {
         sourceType: 'module',
         plugins: [babelPluginDeduplicateImports],
         filename: 'x.js',
+        compact: true,
         sourceMaps: false,
     })
     let out = res!.code!
@@ -23,32 +24,18 @@ function trans(code: string) {
     return formatted
 }
 
-test('babel bug', () => {
+test('babel bug?', () => {
     expect(
         trans(dedent`
-        if (isPresent2) {
-            if (initial && animateConfig) {
-            runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
-            }
-        } else {
-            if (exit) {
-            runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
-            } else {
-            safeToRemove();
-            }
-        }
+      if (isPresent2) if (initial && animateConfig) runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
+      else {if (exit) runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
+      else safeToRemove();}
         `),
     ).toMatchInlineSnapshot(`
       "if (isPresent2) {
-        if (initial && animateConfig) {
-          runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
-        }
-      } else {
-        if (exit) {
-          runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
-        } else {
-          safeToRemove();
-        }
+        if (initial && animateConfig) runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
+        else {if (exit) runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
+          else safeToRemove();}
       }
       "
     `)
