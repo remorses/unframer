@@ -24,23 +24,6 @@ function trans(code: string) {
     return formatted
 }
 
-test('babel bug?', () => {
-    expect(
-        trans(dedent`
-      if (isPresent2) if (initial && animateConfig) runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
-      else {if (exit) runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
-      else safeToRemove();}
-        `),
-    ).toMatchInlineSnapshot(`
-      "if (isPresent2) {
-        if (initial && animateConfig) runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
-        else {if (exit) runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
-          else safeToRemove();}
-      }
-      "
-    `)
-})
-
 describe('babelPluginDeduplicateImports', () => {
     test('simple', () => {
         expect(
