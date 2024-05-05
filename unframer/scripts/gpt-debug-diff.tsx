@@ -131,10 +131,19 @@ export async function main() {
             stream: true,
             temperature: 0.5,
         })
+        const resultFile = 'scripts/gpt-result.md'
+        let part = 0
+        let acc = '\n'
         for await (const message of response) {
             const delta = message.choices[0].delta.content
             process.stdout.write(delta || '')
+            acc += delta || ''
+            part += 1
+            if (part % 100 == 0) {
+                fs.writeFileSync(resultFile, acc)
+            }
         }
+
         console.log()
     }
 }
