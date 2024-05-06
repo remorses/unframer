@@ -35,7 +35,7 @@ jobs:
                   FRAMER_SESSION: ${{ secrets.FRAMER_SESSION }}
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
-                  commit_message: New Framer script
+                  commit_message: New Framer script @remorses
             - run: gh workflow run release.yml --ref main
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
