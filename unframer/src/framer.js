@@ -9623,7 +9623,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.2CYBC7FS.js
+// https :https://app.framerstatic.com/framer.6AXODO6Q.js
 import { Component as Component2, } from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { startTransition as startTransition2, } from 'react';
@@ -30500,15 +30500,10 @@ function getAncestorInfo(anchorRef,) {
   }
   return info;
 }
-function createAnimationFrameLoop(cb,) {
-  let frame2;
-  function loop() {
-    frame2 = requestAnimationFrame(() => {
-      cb();
-      loop();
-    },);
-  }
-  return [loop, () => cancelAnimationFrame(frame2,),];
+function createAnimationFrameLoop(onRead,) {
+  const startLoop = () => frame.read(onRead, true,);
+  const cancelLoop = () => cancelFrame(onRead,);
+  return [startLoop, cancelLoop,];
 }
 function createUpdateSafeArea(safeAreaRef,) {
   let x = 0;
@@ -30560,18 +30555,23 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
       safeWindow.addEventListener('keyup', handleEscape,);
       return () => safeWindow.removeEventListener('keyup', handleEscape,);
     }
-    function maybeDismiss(event,) {
-      if (descendantStackingContext.size !== 0) return;
-      for (const element of document.elementsFromPoint(event.x, event.y,)) {
+    let latestEvent;
+    function maybeDismiss() {
+      if (!latestEvent || descendantStackingContext.size !== 0) return;
+      for (const element of document.elementsFromPoint(latestEvent.x, latestEvent.y,)) {
         if (element === anchorRef.current) return;
         if (element === floatingPositionRef.current) return;
         if (element === safeAreaRef.current) return;
       }
       onDismiss();
     }
-    safeWindow.addEventListener('mousemove', maybeDismiss,);
+    function scheduleMaybeDismiss(event,) {
+      latestEvent = event;
+      frame.read(maybeDismiss,);
+    }
+    safeWindow.addEventListener('mousemove', scheduleMaybeDismiss,);
     return () => {
-      safeWindow.removeEventListener('mousemove', maybeDismiss,);
+      safeWindow.removeEventListener('mousemove', scheduleMaybeDismiss,);
     };
   }, [
     onDismiss,
@@ -30672,22 +30672,31 @@ function Floating({
       collisionDetectionPadding,
     },);
     const [initialSafePlacement, initialCalculatedRect,] = getSafePlacementRect(initialAnchorRect, elementRect,);
-    updatePosition(floatingPositionRef, position, initialCalculatedRect,);
-    updateOrigin(initialSafePlacement,);
+    frame.render(() => {
+      if (!floatingPositionRef.current) return;
+      updatePosition(floatingPositionRef, position, initialCalculatedRect,);
+      updateOrigin(initialSafePlacement,);
+    },);
     const updateSafeArea = createUpdateSafeArea(safeAreaRef,);
-    const [loop, cancelAnimationFrameLoop,] = createAnimationFrameLoop(() => {
-      const anchorRect = anchorRef.current.getBoundingClientRect();
+    let anchorRect = initialAnchorRect;
+    let latestEvent;
+    const onRender = () => {
       const [safePlacement, calculatedRect,] = getSafePlacementRect(anchorRect, elementRect,);
       updatePosition(floatingPositionRef, position, calculatedRect,);
       updateOrigin(safePlacement,);
-      if (safeArea) updateSafeArea(anchorRect, calculatedRect, safePlacement,);
-    },);
+      if (safeArea) updateSafeArea(anchorRect, calculatedRect, safePlacement, latestEvent,);
+      latestEvent = void 0;
+    };
+    const onRead = () => {
+      anchorRect = anchorRef.current.getBoundingClientRect();
+      frame.render(onRender,);
+    };
+    const [loop, cancelAnimationFrameLoop,] = createAnimationFrameLoop(onRead,);
     if (scrolls) loop == null ? void 0 : loop();
     if (!safeArea) return () => cancelAnimationFrameLoop == null ? void 0 : cancelAnimationFrameLoop();
     const handleMouseMove = (event) => {
-      const rect = anchorRef.current.getBoundingClientRect();
-      const [safePlacement, calculatedRect,] = getSafePlacementRect(rect, elementRect,);
-      updateSafeArea(rect, calculatedRect, safePlacement, event,);
+      latestEvent = event;
+      frame.read(onRead,);
     };
     const anchor = anchorRef.current;
     anchor.addEventListener('mousemove', handleMouseMove,);
@@ -36587,7 +36596,10 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
   `.${inputClassName} {
         padding: var(${'--framer-input-padding'});
-        border-radius: var(${'--framer-input-border-radius'});
+        border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
+        border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
+        border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
+        border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
         border-color: var(${'--framer-input-border-color'});
         border-width: var(${'--framer-input-border-width'});
         border-style: var(${'--framer-input-border-style'});
@@ -36597,6 +36609,9 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         font-size: var(${'--framer-input-font-size'});
         color: var(${'--framer-input-font-color'});
         box-shadow: var(${'--framer-input-box-shadow'});
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }`,
   `.${inputClassName}::placeholder {
         color: var(${'--framer-input-placeholder-color'});
