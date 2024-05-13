@@ -9623,7 +9623,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.6AXODO6Q.js
+// https :https://app.framerstatic.com/framer.J3VGOF2I.js
 import { Component as Component2, } from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { startTransition as startTransition2, } from 'react';
@@ -10631,14 +10631,12 @@ function lazy(factory,) {
   const Component14 = React__default.forwardRef(function LazyWithPreload(props, ref,) {
     return React__default.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
-      Object.assign(
-        ref
-          ? {
-            ref,
-          }
-          : {},
-        props,
-      ),
+      ref
+        ? {
+          ref,
+          ...props,
+        }
+        : props,
     );
   },);
   Component14.preload = () => {
@@ -10663,7 +10661,22 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 function isBot(userAgent,) {
-  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/i.test(userAgent,);
+  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/iu.test(userAgent,);
+}
+function yieldToMain(isHighPriority,) {
+  if ('scheduler' in window) {
+    const options = {
+      priority: isHighPriority ? 'user-blocking' : 'user-visible',
+    };
+    if ('yield' in scheduler) return scheduler.yield(options,);
+    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
+  }
+  if (isHighPriority) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    setTimeout(resolve, 0,);
+  },);
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
@@ -12041,18 +12054,22 @@ function useRoutePreloader(routeIds, enabled = true,) {
   const {
     getRoute,
   } = useRouter();
-  React__default.useEffect(() => {
+  useEffect(() => {
     if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
-      const route = getRoute(routeId,);
-      if (route === null || route === void 0 ? void 0 : route.page) preloadComponent(route.page,);
+      void preloadRoute(getRoute(routeId,),);
     }
   }, [routeIds, getRoute, enabled,],);
 }
-function preloadComponent(component,) {
-  if (!shouldPreloadBasedOnUA) return;
-  if (isLazyComponentType(component,)) {
-    void component.preload();
+async function preloadRoute(route,) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  await yieldToMain();
+  try {
+    await component.preload();
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
   }
 }
 function useRouteAnchor(routeId, {
@@ -20681,11 +20698,11 @@ var Scheduler = function () {
   };
   return Scheduler2;
 }();
-var scheduler = new Scheduler();
+var scheduler2 = new Scheduler();
 var updateCount = function (n,) {
-  !watching && n > 0 && scheduler.start();
+  !watching && n > 0 && scheduler2.start();
   watching += n;
-  !watching && scheduler.stop();
+  !watching && scheduler2.stop();
 };
 var skipNotifyOnElement = function (target,) {
   return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
@@ -20743,7 +20760,7 @@ var ResizeObserverController = function () {
       firstObservation && resizeObservers.push(detail,);
       detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
       updateCount(1,);
-      scheduler.schedule();
+      scheduler2.schedule();
     }
   };
   ResizeObserverController2.unobserve = function (resizeObserver, target,) {
@@ -29648,6 +29665,30 @@ function ComponentPresetsConsumer({
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
+function setRef(ref, value,) {
+  if (isFunction(ref,)) {
+    ref(value,);
+  } else if (isMutableRef(ref,)) {
+    ref.current = value;
+  }
+}
+function isMutableRef(ref,) {
+  return isObject2(ref,) && 'current' in ref;
+}
+function createStableRefCallback(ref, callback,) {
+  return {
+    get current() {
+      return ref.current;
+    },
+    set current(value,) {
+      ref.current = value;
+      callback(value,);
+    },
+  };
+}
+function mergeRefs(...refs) {
+  return (value) => refs.forEach((ref) => setRef(ref, value,));
+}
 function useCloneChildrenWithPropsAndRef(forwardedRef,) {
   const hook = useConstant2(() => createHook(forwardedRef,));
   hook.useSetup(forwardedRef,);
@@ -29736,16 +29777,6 @@ function createRefFunction(state,) {
     setRef(prevChildRef, value,);
     setRef(prevForwardedRef, value,);
   };
-}
-function setRef(ref, value,) {
-  if (isFunction(ref,)) {
-    ref(value,);
-  } else if (isMutableRef(ref,)) {
-    ref.current = value;
-  }
-}
-function isMutableRef(ref,) {
-  return isObject2(ref,) && 'current' in ref;
 }
 var ComponentViewportContext = /* @__PURE__ */ React__default.createContext({},);
 function useComponentViewport() {
@@ -30899,6 +30930,92 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
   return true;
 }
+var PRELOAD_AFTER_MS = 500;
+var OBSERVER_THRESHOLD = 0.9;
+var LOW_MEMORY_THRESHOLD = 1.7;
+var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
+var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
+var nodeToRoute = /* @__PURE__ */ new WeakMap();
+var preloadedRoutes = /* @__PURE__ */ new Set();
+var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function getObserveRouteForPreloadingFn() {
+  var _a;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+  const lowDeviceMemory = navigator.deviceMemory && navigator.deviceMemory > LOW_MEMORY_THRESHOLD;
+  let effectiveType, preloadDisabled, maxPreloadAmount;
+  function updateConnection() {
+    effectiveType = connection.effectiveType || '';
+    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
+    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
+      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
+      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
+  }
+  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
+  updateConnection();
+  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
+    threshold: OBSERVER_THRESHOLD,
+  },);
+  let activePreloadsAmount = 0;
+  async function preloadTimeout(route, target,) {
+    if (preloadDisabled) return;
+    const nodesInViewport = routeToNodesInViewport.get(route,);
+    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) return;
+    ++activePreloadsAmount;
+    preloadedRoutes.add(route,);
+    const preloadDone = preloadRoute(route,).catch(() => {
+      if (false) {
+        throw new Error(
+          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
+        );
+      }
+    },);
+    observer2.unobserve(target,);
+    nodeToRoute.delete(target,);
+    for (const node of nodesInViewport) {
+      observer2.unobserve(node,);
+      nodeToRoute.delete(node,);
+    }
+    nodesInViewport.clear();
+    routeToNodesInViewport.delete(route,);
+    await preloadDone;
+    --activePreloadsAmount;
+  }
+  function onPreloadIntersectionChange(entries,) {
+    var _a2;
+    for (const entry of entries) {
+      const target = entry.target;
+      const route = nodeToRoute.get(target,);
+      if (!route || preloadedRoutes.has(route,)) {
+        observer2.unobserve(target,);
+        nodeToRoute.delete(target,);
+        continue;
+      }
+      const nodes = routeToNodesInViewport.get(route,);
+      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
+      if (entry.isIntersecting) {
+        if (activePreloadsAmount >= maxPreloadAmount) continue;
+        if (nodes) nodes.add(target,);
+        else routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
+        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
+      } else {
+        if (nodes) nodes.delete(target,);
+        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(route,);
+      }
+    }
+  }
+  return (route, node,) => {
+    if (preloadedRoutes.has(route,)) return;
+    nodeToRoute.set(node, route,);
+    observer2.observe(node,);
+    return () => {
+      nodeToRoute.delete(node,);
+      observer2.unobserve(node,);
+    };
+  };
+}
+var observeRouteForPreloading =
+  // this also guards `window`
+  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 var noLocale = {};
 var resolveSlugCache = /* @__PURE__ */ new WeakMap();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -30960,10 +31077,10 @@ function linkFromFramerPageLink(link,) {
   };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
-var PathVariablesContext = React__default.createContext(void 0,);
+var PathVariablesContext = createContext(void 0,);
 function useImplicitPathVariables() {
   var _a;
-  const contextPathVariables = React__default.useContext(PathVariablesContext,);
+  const contextPathVariables = useContext3(PathVariablesContext,);
   const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
@@ -30988,7 +31105,7 @@ function linkMatchesRoute(route, {
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = React__default.useContext(PathVariablesContext,);
+  const contextPathVariables = useContext3(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString22(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
@@ -31039,43 +31156,6 @@ function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariab
     (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
 }
-function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
-  const isInternal = isInternalURL(href,);
-  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-    return propsForLink(href, openInNewTab,);
-  }
-  try {
-    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
-    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    assert(pathname !== void 0, 'A href must have a defined pathname.',);
-    const {
-      routeId,
-      pathVariables,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    const route = router.getRoute(routeId,);
-    if (route) {
-      preloadComponent(route.page,);
-      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
-      const path = getPathForRoute(route, {
-        currentRoutePath: currentRoute.path,
-        currentPathVariables: currentRoute.pathVariables,
-        // The hash value is already fully resolved so we don't need to
-        // provide any hashVariables.
-        hash: hash2 || void 0,
-        pathVariables: combinedPathVariables,
-        preserveQueryParams: router.preserveQueryParams,
-      },);
-      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-      return {
-        href: path,
-        target: anchorTarget,
-        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
-      };
-    }
-  } catch {}
-  return propsForLink(href, openInNewTab,);
-}
 function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
   const promises = [];
   function handleSlugs(unresolvedSlugs,) {
@@ -31106,7 +31186,64 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
-var Link = /* @__PURE__ */ React__default.forwardRef(({
+function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
+  const isInternal = isInternalURL(href,);
+  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+    return propsForLink(href, openInNewTab,);
+  }
+  try {
+    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
+    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const {
+      routeId,
+      pathVariables,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    const route = router.getRoute(routeId,);
+    if (route) {
+      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      const path = getPathForRoute(route, {
+        currentRoutePath: currentRoute.path,
+        currentPathVariables: currentRoute.pathVariables,
+        // The hash value is already fully resolved so we don't need to
+        // provide any hashVariables.
+        hash: hash2 || void 0,
+        pathVariables: combinedPathVariables,
+        preserveQueryParams: router.preserveQueryParams,
+      },);
+      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+      return {
+        href: path,
+        target: anchorTarget,
+        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
+      };
+    }
+  } catch {}
+  return propsForLink(href, openInNewTab,);
+}
+function getRouteFromPageLink(pageLink, router, currentRoute,) {
+  var _a;
+  if (isString22(pageLink,)) {
+    const isInternal = isInternalURL(pageLink,);
+    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+      return;
+    }
+    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
+    if (pathnameWithQueryParams === void 0) return;
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    if (pathname === void 0) return;
+    const {
+      routeId,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    return router.getRoute(routeId,);
+  }
+  const {
+    webPageId,
+  } = pageLink;
+  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
+}
+var Link = /* @__PURE__ */ forwardRef(({
   children,
   href,
   openInNewTab,
@@ -31119,8 +31256,28 @@ var Link = /* @__PURE__ */ React__default.forwardRef(({
   const {
     activeLocale,
   } = useLocaleInfo();
+  const cleanupRef = useRef();
+  const observeRef = useCallback((node) => {
+    var _a, _b;
+    if (node === null) {
+      (_a = cleanupRef.current) == null ? void 0 : _a.call(cleanupRef,);
+      cleanupRef.current = void 0;
+      return;
+    }
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    const route = getRouteFromPageLink(pageLink, router, currentRoute,);
+    if (!route) return;
+    cleanupRef.current = (_b = observeRouteForPreloading) == null ? void 0 : _b(route, node,);
+  }, [href, router, currentRoute,],);
+  const stableChildRef = useMemo(() => {
+    if (isValidElement(children,) && 'ref' in children) {
+      if (isMutableRef(children.ref,)) return createStableRefCallback(children.ref, observeRef,);
+      if (isFunction(children.ref,)) return mergeRefs(children.ref, observeRef,);
+    }
+  }, [observeRef, children,],);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  const props = React__default.useMemo(() => {
+  const props = useMemo(() => {
     var _a;
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
@@ -31136,9 +31293,7 @@ var Link = /* @__PURE__ */ React__default.forwardRef(({
       unresolvedHashSlugs,
       unresolvedPathSlugs,
     } = pageLink;
-    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
     const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-    if (route) preloadComponent(route.page,);
     const combinedPathVariable = Object.assign(
       {},
       implicitPathVariables,
@@ -31152,6 +31307,7 @@ var Link = /* @__PURE__ */ React__default.forwardRef(({
       resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
     );
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
     const resolvedHref = getPathForRoute(route, {
       currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
       currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
@@ -31171,6 +31327,8 @@ var Link = /* @__PURE__ */ React__default.forwardRef(({
   return clone(children, {
     ...restProps,
     ...props,
+    ref: stableChildRef ? stableChildRef : observeRef,
+    // only use stableRef if the child has a ref attached.
   },);
 },);
 function resolveLink(href, router, implicitPathVariables,) {
@@ -31306,23 +31464,21 @@ function cloneChildrenWithProps(children, props, asNode,) {
 }
 var SSRParentVariantsContext = /* @__PURE__ */ React__default.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
-function renderBranchedChildrenFromPropertyOverridesOnServer(
+function renderBranchedChildrenFromPropertyOverrides(
   overrides,
   children,
   props,
   variantClassNames,
   primaryVariantId,
   parentVariants,
-  type,
+  cloneChildren,
+  activeVariantId,
 ) {
-  if (isBrowser2()) {
-    throw new Error('This should not be called on the client',);
-  }
   const childrenArray = React__default.Children.toArray(children,);
   const child = childrenArray[0];
   if (childrenArray.length !== 1 || !React__default.isValidElement(child,)) {
-    console.warn(type + ': expected exactly one React element for a child', children,);
-    return cloneChildrenWithProps(children, props,);
+    console.warn('PropertyOverrides: expected exactly one React element for a child', children,);
+    return cloneChildren(children, props,);
   }
   const branches = [];
   const nonOverriddenVariants = [];
@@ -31341,7 +31497,7 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
       },);
     }
   }
-  if (branches.length === 0) return cloneChildrenWithProps(child, props,);
+  if (branches.length === 0) return cloneChildren(child, props,);
   const remainingVariants = [primaryVariantId, ...nonOverriddenVariants,];
   const effectiveRemainingVariants = intersection(remainingVariants, parentVariants,);
   if (effectiveRemainingVariants.length) {
@@ -31350,48 +31506,59 @@ function renderBranchedChildrenFromPropertyOverridesOnServer(
     },);
   }
   const displayContents = `.${SSRVariantClassName} { display: contents }`;
+  const renderedBranches = [];
+  for (
+    const {
+      variants,
+      propOverrides,
+    } of branches
+  ) {
+    if (activeVariantId && !variants.includes(activeVariantId,)) {
+      continue;
+    }
+    const key7 = variants.join('+',);
+    let element =
+      // We could omit the SSRParentVariantsContext if variants is the same as parentVariants, but that'd require
+      // comparing arrays, so it might not really be an optimization. And since it's just a context, it doesn't
+      // affect the size of the generated HTML.
+      /* @__PURE__ */
+      _jsx5(SSRParentVariantsContext.Provider, {
+        value: new Set(variants,),
+        children: cloneChildren(
+          child,
+          propOverrides
+            ? {
+              ...props,
+              ...propOverrides,
+            }
+            : props,
+        ),
+      }, key7,);
+    const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
+    if (hiddenClassNames.length) {
+      assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
+      element = /* @__PURE__ */ _jsx5('div', {
+        className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
+        children: element,
+      }, key7,);
+    } else {
+      assert(branches.length === 1, 'Cannot branch out when hiddenClassNames is empty',);
+    }
+    renderedBranches.push(element,);
+  }
+  assert(!activeVariantId || renderedBranches.length === 1, 'Must render exactly one branch when activeVariantId is given',);
   return /* @__PURE__ */ _jsxs(Fragment, {
     children: [
-      !parentVariants && /* @__PURE__ */ _jsx5('style', {
+      !parentVariants && !isBrowser2() && /* @__PURE__ */ _jsx5('style', {
         ...styleTagSSRMarker,
         children: displayContents,
       },),
-      branches.map(({
-        variants,
-        propOverrides,
-      },) => {
-        const key7 = variants.join('+',);
-        let element =
-          // We could omit the SSRParentVariantsContext if variants is
-          // the same as parentVariants, but that'd require comparing
-          // arrays, so it might not really be an optimization. And
-          // since it's just a context, it doesn't affect the size of
-          // the generated HTML.
-          /* @__PURE__ */
-          _jsx5(SSRParentVariantsContext.Provider, {
-            value: new Set(variants,),
-            children: cloneChildrenWithProps(child, {
-              ...props,
-              ...propOverrides,
-            },),
-          }, key7,);
-        const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
-        if (hiddenClassNames.length) {
-          assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-          element = /* @__PURE__ */ _jsx5('div', {
-            className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
-            children: element,
-          }, key7,);
-        } else {
-          assert(branches.length === 1, 'Cannot branch out when hiddenClassNames is empty',);
-        }
-        return element;
-      },),
+      renderedBranches,
     ],
   },);
 }
 var SSRVariants = /* @__PURE__ */ React__default.forwardRef(function SSRVariants2({
-  id: nodeId,
+  id: _nodeId,
   children,
   ...props
 }, ref,) {
@@ -31399,33 +31566,7 @@ var SSRVariants = /* @__PURE__ */ React__default.forwardRef(function SSRVariants
   if (isBrowser2()) {
     return cloneWithRefs(children, props,);
   }
-  const generatedComponentContext = React__default.useContext(GeneratedComponentContext,);
-  if (!generatedComponentContext || !generatedComponentContext.variantProps) {
-    console.warn('SSRVariants is missing GeneratedComponentContext',);
-    return cloneWithRefs(children, props,);
-  }
-  const parentVariants = React__default.useContext(SSRParentVariantsContext,);
-  const {
-    primaryVariantId,
-    variantClassNames,
-    variantProps: variantProps2,
-  } = generatedComponentContext;
-  const overrides = React__default.useMemo(() => {
-    const nextOverrides = {};
-    for (const [variant, values,] of Object.entries(variantProps2,)) {
-      nextOverrides[variant] = values[nodeId];
-    }
-    return nextOverrides;
-  }, [nodeId, variantProps2,],);
-  return renderBranchedChildrenFromPropertyOverridesOnServer(
-    overrides,
-    children,
-    props,
-    variantClassNames,
-    primaryVariantId,
-    parentVariants,
-    'SSRVariants',
-  );
+  throw new Error('SSRVariants is no longer supported outside canvas and preview',);
 },);
 function generateHiddenClassNames(showOnlyInVariantIds, parentVariants, variantClassNames,) {
   const classNames = [];
@@ -31456,6 +31597,9 @@ function propsForBreakpoint(variant, props, overrides,) {
     ...overrides[variant],
   };
 }
+var noopSubscribe = () => () => {};
+var returnTrue = () => true;
+var returnFalse = () => false;
 var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(function PropertyOverrides2({
   breakpoint,
   overrides,
@@ -31463,9 +31607,19 @@ var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(function Prope
   ...props
 }, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  if (isBrowser2()) {
-    return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
-  }
+  const parentVariants = React__default.useContext(SSRParentVariantsContext,);
+  const isHydrationOrSSR = React__default.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
+  const action = useConstant2(() => {
+    if (isHydrationOrSSR) {
+      if (isBrowser2()) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } else {
+      return 0;
+    }
+  },);
   const generatedComponentContext = React__default.useContext(GeneratedComponentContext,);
   if (!generatedComponentContext) {
     console.warn('PropertyOverrides is missing GeneratedComponentContext',);
@@ -31475,16 +31629,39 @@ var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(function Prope
     primaryVariantId,
     variantClassNames,
   } = generatedComponentContext;
-  const parentVariants = React__default.useContext(SSRParentVariantsContext,);
-  return renderBranchedChildrenFromPropertyOverridesOnServer(
-    overrides,
-    children,
-    props,
-    variantClassNames,
-    primaryVariantId,
-    parentVariants,
-    'PropertyOverrides',
-  );
+  switch (action) {
+    case 0:
+      return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
+    case 1:
+      return renderBranchedChildrenFromPropertyOverrides(
+        overrides,
+        children,
+        props,
+        variantClassNames,
+        primaryVariantId,
+        parentVariants,
+        cloneWithRefs,
+        breakpoint,
+        // only render the single, active branch
+      );
+    case 2:
+      return renderBranchedChildrenFromPropertyOverrides(
+        overrides,
+        children,
+        props,
+        variantClassNames,
+        primaryVariantId,
+        parentVariants,
+        // On the server, we use plain cloneChildrenWithProps instead of useCloneChildrenWithPropsAndRef,
+        // because we can't clone one ref to multiple branched-out elements (useCloneChildrenWithPropsAndRef
+        // even guards against it), but luckily, refs mean nothing on the server anyway.
+        cloneChildrenWithProps,
+        void 0,
+        // render all branches
+      );
+    default:
+      assertNever(action,);
+  }
 },);
 var ResolveLinks = /* @__PURE__ */ React.forwardRef(function ResolveLinksInner({
   links,
@@ -33773,6 +33950,20 @@ function activeMediaQueryFromWindow(mediaQueries,) {
     if (mql.matches) return variant;
   }
 }
+function activeBreakpointHashFromWindow(breakpoints,) {
+  var _a;
+  for (
+    const {
+      hash: hash2,
+      mediaQuery,
+    } of breakpoints
+  ) {
+    if (!mediaQuery) continue;
+    const mql = safeWindow.matchMedia(mediaQuery,);
+    if (mql.matches) return hash2;
+  }
+  return (_a = breakpoints[0]) == null ? void 0 : _a.hash;
+}
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext3(IsInitialNavigationContext,);
   const baseVariant = useRef(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
@@ -33827,6 +34018,18 @@ function useBreakpointVariants(initial, _width, breakpoints,) {
   return initialVariant;
 }
 function removeHiddenBreakpointLayers(_initial, _mediaQueries, _variantClassNames,) {}
+function removeHiddenBreakpointLayersV2(breakpoints,) {
+  var _a, _b;
+  const activeBreakpointHash = activeBreakpointHashFromWindow(breakpoints,);
+  if (activeBreakpointHash) {
+    for (const hiddenLayer of document.querySelectorAll('.hidden-' + activeBreakpointHash,)) {
+      (_a = hiddenLayer.parentNode) == null ? void 0 : _a.removeChild(hiddenLayer,);
+    }
+  }
+  for (const ssrVariant of document.querySelectorAll('.ssr-variant:empty',)) {
+    (_b = ssrVariant.parentNode) == null ? void 0 : _b.removeChild(ssrVariant,);
+  }
+}
 function useDataRecord(collection, variables,) {
   return useMemo(() => {
     if (!Array.isArray(collection,)) {
@@ -34403,7 +34606,7 @@ function useVariantState({
 },) {
   const forceUpdate = useForceUpdate3();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
-  const internalState = React__default.useRef({
+  const internalState = useRef({
     isHovered: false,
     isPressed: false,
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
@@ -34417,7 +34620,7 @@ function useVariantState({
     cycleOrder: externalCycleOrder,
     transitions: externalTransitions,
   },);
-  const resolveNextVariant = React__default.useCallback((targetBaseVariant) => {
+  const resolveNextVariant = useCallback((targetBaseVariant) => {
     const {
       isHovered: isHovered2,
       isPressed: isPressed2,
@@ -34429,7 +34632,7 @@ function useVariantState({
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [validBaseVariants,],);
-  const setGestureState = React__default.useCallback(({
+  const setGestureState = useCallback(({
     isHovered: isHovered2,
     isPressed: isPressed2,
   },) => {
@@ -34444,10 +34647,10 @@ function useVariantState({
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      forceUpdate();
+      startTransition2(forceUpdate,);
     }
   }, [resolveNextVariant, forceUpdate,],);
-  const setVariant = React__default.useCallback((proposedVariant) => {
+  const setVariant = useCallback((proposedVariant) => {
     const {
       defaultVariant: defaultVariant2,
       cycleOrder,
@@ -34461,7 +34664,7 @@ function useVariantState({
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      forceUpdate();
+      startTransition2(forceUpdate,);
     }
   }, [resolveNextVariant, forceUpdate,],);
   if (variant !== internalState.current.lastVariant) {
@@ -34481,7 +34684,7 @@ function useVariantState({
     isPressed,
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
-  return React__default.useMemo(() => {
+  return useMemo(() => {
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
     if (gestureVariant) variants.push(gestureVariant,);
@@ -36534,6 +36737,8 @@ var labelStyles = {
 };
 var inputClassName = 'framer-form-input';
 var labelClassName = 'framer-form-label';
+var focusedClassName = 'framer-form-input-focused';
+var inputWrapperClassName = 'framer-form-input-wrapper';
 var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlainTextInput(props, ref,) {
   const {
     style,
@@ -36544,6 +36749,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
     autoFocus,
     placeholder,
     hideInputLabel,
+    value,
     ...rest
   } = props;
   const dataProps = {
@@ -36554,44 +36760,93 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
     display: 'flex',
     flexDirection: 'column',
   };
-  const isHiddenInput = type === 'hidden';
   const baseStyle2 = {
     width: '100%',
     flexGrow: 1,
   };
-  const input = /* @__PURE__ */ _jsx5(motion.input, {
-    id: inputName,
-    ...dataProps,
-    type,
-    required,
-    autoFocus,
-    name: inputName,
-    style: baseStyle2,
-    placeholder,
-    className: inputClassName,
-  },);
-  if (isHiddenInput) {
-    return input;
-  }
-  return /* @__PURE__ */ _jsxs(motion.div, {
-    ref,
-    style: {
-      ...baseWrapperStyle,
-      ...style,
-    },
-    ...rest,
-    children: [
-      label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
-        htmlFor: inputName,
+  switch (type) {
+    case 'hidden':
+      return /* @__PURE__ */ _jsx5(motion.input, {
+        type: 'hidden',
+        name: inputName,
+        value,
+      },);
+    case 'textarea':
+      return /* @__PURE__ */ _jsxs(motion.div, {
+        ref,
         style: {
-          ...labelStyles,
+          ...baseWrapperStyle,
+          ...style,
         },
-        className: labelClassName,
-        children: label,
-      },),
-      input,
-    ],
-  },);
+        ...rest,
+        children: [
+          label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
+            htmlFor: inputName,
+            style: {
+              ...labelStyles,
+            },
+            className: labelClassName,
+            children: label,
+          },),
+          /* @__PURE__ */ _jsxs('div', {
+            className: inputWrapperClassName,
+            children: [
+              /* @__PURE__ */ _jsx5(motion.textarea, {
+                id: inputName,
+                ...dataProps,
+                required,
+                autoFocus,
+                name: inputName,
+                style: baseStyle2,
+                placeholder,
+                className: inputClassName,
+              },),
+              /* @__PURE__ */ _jsx5('div', {
+                className: focusedClassName,
+              },),
+            ],
+          },),
+        ],
+      },);
+    default:
+      return /* @__PURE__ */ _jsxs(motion.div, {
+        ref,
+        style: {
+          ...baseWrapperStyle,
+          ...style,
+        },
+        ...rest,
+        children: [
+          label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
+            htmlFor: inputName,
+            style: {
+              ...labelStyles,
+            },
+            className: labelClassName,
+            children: label,
+          },),
+          /* @__PURE__ */ _jsxs('div', {
+            className: inputWrapperClassName,
+            children: [
+              /* @__PURE__ */ _jsx5(motion.input, {
+                id: inputName,
+                ...dataProps,
+                type,
+                required,
+                autoFocus,
+                name: inputName,
+                style: baseStyle2,
+                placeholder,
+                className: inputClassName,
+              },),
+              /* @__PURE__ */ _jsx5('div', {
+                className: focusedClassName,
+              },),
+            ],
+          },),
+        ],
+      },);
+  }
 },);
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
   `.${inputClassName} {
@@ -36601,7 +36856,10 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
         border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
         border-color: var(${'--framer-input-border-color'});
-        border-width: var(${'--framer-input-border-width'});
+        border-top-width: var(${'--framer-input-border-top-width'});
+        border-right-width: var(${'--framer-input-border-right-width'});
+        border-bottom-width: var(${'--framer-input-border-bottom-width'});
+        border-left-width: var(${'--framer-input-border-left-width'});
         border-style: var(${'--framer-input-border-style'});
         background: var(${'--framer-input-background'});
         font-family: var(${'--framer-input-font-family'});
@@ -36612,15 +36870,54 @@ var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        z-index: var(${'--framer-input-z-index'});
     }`,
   `.${inputClassName}::placeholder {
         color: var(${'--framer-input-placeholder-color'});
+    }`,
+  `textarea.${inputClassName} {
+        resize: var(${'--framer-textarea-resize'});
+        min-height: var(${'--framer-textarea-min-height'});
+    }`,
+  `.${inputClassName}:focus {
+        background: var(${'--framer-input-focused-background'}, var(${'--framer-input-background'}));
+        box-shadow: var(${'--framer-input-focused-box-shadow'}, var(${'--framer-input-box-shadow'}));
+    }`,
+  // We can't use normal CSS borders on focus, because different border widths between normal and
+  // focused states could cause the elements to jump (due to overall size constraints of
+  // the element changing). Instead we use a different element to display the focused border,
+  // which is absolutely positioned over the input, with all pointer events disabled.
+  // The result is that borders are applied like an inset box shadow so that the overall size of
+  // the input never changes, and doesn't cause any jumps.
+  // This approach is roughly analogous to how borders are implemented for frames.
+  `.${inputClassName}:focus + .${focusedClassName} {
+        border-color: var(${'--framer-input-focused-border-color'});
+        border-width: var(${'--framer-input-focused-border-width'});
+        border-style: var(${'--framer-input-focused-border-style'});
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
+        border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
+        border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
+        border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
+    }`,
+  `.${inputClassName}:focus-visible {
+        outline: none;
     }`,
   `.${labelClassName} {
         font-family: var(${'--framer-input-label-font-family'});
         font-weight: var(${'--framer-input-label-font-weight'});
         font-size: var(${'--framer-input-label-font-size'});
         color: var(${'--framer-input-label-font-color'});
+    }`,
+  `.${inputWrapperClassName} {
+        display: flex;
+        position: relative;
+        flex-grow: 1;
     }`,
 ],);
 var Image2 = /* @__PURE__ */ React__default.forwardRef(function Image3(props, ref,) {
@@ -39905,6 +40202,7 @@ export {
   RadialGradient,
   Rect,
   removeHiddenBreakpointLayers,
+  removeHiddenBreakpointLayersV2,
   RenderTarget,
   Reorder,
   resolveLink,
