@@ -9623,7 +9623,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.J3VGOF2I.js
+// https :https://app.framerstatic.com/framer.E5E3FQ23.js
 import { Component as Component2, } from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { startTransition as startTransition2, } from 'react';
@@ -10631,12 +10631,14 @@ function lazy(factory,) {
   const Component14 = React__default.forwardRef(function LazyWithPreload(props, ref,) {
     return React__default.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
-      ref
-        ? {
-          ref,
-          ...props,
-        }
-        : props,
+      Object.assign(
+        ref
+          ? {
+            ref,
+          }
+          : {},
+        props,
+      ),
     );
   },);
   Component14.preload = () => {
@@ -10661,22 +10663,7 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 function isBot(userAgent,) {
-  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/iu.test(userAgent,);
-}
-function yieldToMain(isHighPriority,) {
-  if ('scheduler' in window) {
-    const options = {
-      priority: isHighPriority ? 'user-blocking' : 'user-visible',
-    };
-    if ('yield' in scheduler) return scheduler.yield(options,);
-    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
-  }
-  if (isHighPriority) {
-    return Promise.resolve();
-  }
-  return new Promise((resolve) => {
-    setTimeout(resolve, 0,);
-  },);
+  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/i.test(userAgent,);
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
@@ -12054,22 +12041,18 @@ function useRoutePreloader(routeIds, enabled = true,) {
   const {
     getRoute,
   } = useRouter();
-  useEffect(() => {
+  React__default.useEffect(() => {
     if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
-      void preloadRoute(getRoute(routeId,),);
+      const route = getRoute(routeId,);
+      if (route === null || route === void 0 ? void 0 : route.page) preloadComponent(route.page,);
     }
   }, [routeIds, getRoute, enabled,],);
 }
-async function preloadRoute(route,) {
-  if (!shouldPreloadBasedOnUA || !route) return;
-  const component = route.page;
-  if (!component || !isLazyComponentType(component,)) return;
-  await yieldToMain();
-  try {
-    await component.preload();
-  } catch (e) {
-    if (false) console.warn('Preload failed', route, e,);
+function preloadComponent(component,) {
+  if (!shouldPreloadBasedOnUA) return;
+  if (isLazyComponentType(component,)) {
+    void component.preload();
   }
 }
 function useRouteAnchor(routeId, {
@@ -20698,11 +20681,11 @@ var Scheduler = function () {
   };
   return Scheduler2;
 }();
-var scheduler2 = new Scheduler();
+var scheduler = new Scheduler();
 var updateCount = function (n,) {
-  !watching && n > 0 && scheduler2.start();
+  !watching && n > 0 && scheduler.start();
   watching += n;
-  !watching && scheduler2.stop();
+  !watching && scheduler.stop();
 };
 var skipNotifyOnElement = function (target,) {
   return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
@@ -20760,7 +20743,7 @@ var ResizeObserverController = function () {
       firstObservation && resizeObservers.push(detail,);
       detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
       updateCount(1,);
-      scheduler2.schedule();
+      scheduler.schedule();
     }
   };
   ResizeObserverController2.unobserve = function (resizeObserver, target,) {
@@ -29665,30 +29648,6 @@ function ComponentPresetsConsumer({
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
-function setRef(ref, value,) {
-  if (isFunction(ref,)) {
-    ref(value,);
-  } else if (isMutableRef(ref,)) {
-    ref.current = value;
-  }
-}
-function isMutableRef(ref,) {
-  return isObject2(ref,) && 'current' in ref;
-}
-function createStableRefCallback(ref, callback,) {
-  return {
-    get current() {
-      return ref.current;
-    },
-    set current(value,) {
-      ref.current = value;
-      callback(value,);
-    },
-  };
-}
-function mergeRefs(...refs) {
-  return (value) => refs.forEach((ref) => setRef(ref, value,));
-}
 function useCloneChildrenWithPropsAndRef(forwardedRef,) {
   const hook = useConstant2(() => createHook(forwardedRef,));
   hook.useSetup(forwardedRef,);
@@ -29777,6 +29736,16 @@ function createRefFunction(state,) {
     setRef(prevChildRef, value,);
     setRef(prevForwardedRef, value,);
   };
+}
+function setRef(ref, value,) {
+  if (isFunction(ref,)) {
+    ref(value,);
+  } else if (isMutableRef(ref,)) {
+    ref.current = value;
+  }
+}
+function isMutableRef(ref,) {
+  return isObject2(ref,) && 'current' in ref;
 }
 var ComponentViewportContext = /* @__PURE__ */ React__default.createContext({},);
 function useComponentViewport() {
@@ -30930,92 +30899,6 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
   return true;
 }
-var PRELOAD_AFTER_MS = 500;
-var OBSERVER_THRESHOLD = 0.9;
-var LOW_MEMORY_THRESHOLD = 1.7;
-var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
-var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
-var nodeToRoute = /* @__PURE__ */ new WeakMap();
-var preloadedRoutes = /* @__PURE__ */ new Set();
-var routeToNodesInViewport = /* @__PURE__ */ new Map();
-function getObserveRouteForPreloadingFn() {
-  var _a;
-  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
-  const lowDeviceMemory = navigator.deviceMemory && navigator.deviceMemory > LOW_MEMORY_THRESHOLD;
-  let effectiveType, preloadDisabled, maxPreloadAmount;
-  function updateConnection() {
-    effectiveType = connection.effectiveType || '';
-    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
-    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
-      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
-      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
-  }
-  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
-  updateConnection();
-  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
-    threshold: OBSERVER_THRESHOLD,
-  },);
-  let activePreloadsAmount = 0;
-  async function preloadTimeout(route, target,) {
-    if (preloadDisabled) return;
-    const nodesInViewport = routeToNodesInViewport.get(route,);
-    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) return;
-    ++activePreloadsAmount;
-    preloadedRoutes.add(route,);
-    const preloadDone = preloadRoute(route,).catch(() => {
-      if (false) {
-        throw new Error(
-          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
-        );
-      }
-    },);
-    observer2.unobserve(target,);
-    nodeToRoute.delete(target,);
-    for (const node of nodesInViewport) {
-      observer2.unobserve(node,);
-      nodeToRoute.delete(node,);
-    }
-    nodesInViewport.clear();
-    routeToNodesInViewport.delete(route,);
-    await preloadDone;
-    --activePreloadsAmount;
-  }
-  function onPreloadIntersectionChange(entries,) {
-    var _a2;
-    for (const entry of entries) {
-      const target = entry.target;
-      const route = nodeToRoute.get(target,);
-      if (!route || preloadedRoutes.has(route,)) {
-        observer2.unobserve(target,);
-        nodeToRoute.delete(target,);
-        continue;
-      }
-      const nodes = routeToNodesInViewport.get(route,);
-      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
-      if (entry.isIntersecting) {
-        if (activePreloadsAmount >= maxPreloadAmount) continue;
-        if (nodes) nodes.add(target,);
-        else routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
-        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
-      } else {
-        if (nodes) nodes.delete(target,);
-        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(route,);
-      }
-    }
-  }
-  return (route, node,) => {
-    if (preloadedRoutes.has(route,)) return;
-    nodeToRoute.set(node, route,);
-    observer2.observe(node,);
-    return () => {
-      nodeToRoute.delete(node,);
-      observer2.unobserve(node,);
-    };
-  };
-}
-var observeRouteForPreloading =
-  // this also guards `window`
-  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 var noLocale = {};
 var resolveSlugCache = /* @__PURE__ */ new WeakMap();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -31077,10 +30960,10 @@ function linkFromFramerPageLink(link,) {
   };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
-var PathVariablesContext = createContext(void 0,);
+var PathVariablesContext = React__default.createContext(void 0,);
 function useImplicitPathVariables() {
   var _a;
-  const contextPathVariables = useContext3(PathVariablesContext,);
+  const contextPathVariables = React__default.useContext(PathVariablesContext,);
   const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
@@ -31105,7 +30988,7 @@ function linkMatchesRoute(route, {
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = useContext3(PathVariablesContext,);
+  const contextPathVariables = React__default.useContext(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString22(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
@@ -31156,6 +31039,43 @@ function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariab
     (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
 }
+function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
+  const isInternal = isInternalURL(href,);
+  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+    return propsForLink(href, openInNewTab,);
+  }
+  try {
+    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
+    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const {
+      routeId,
+      pathVariables,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    const route = router.getRoute(routeId,);
+    if (route) {
+      preloadComponent(route.page,);
+      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      const path = getPathForRoute(route, {
+        currentRoutePath: currentRoute.path,
+        currentPathVariables: currentRoute.pathVariables,
+        // The hash value is already fully resolved so we don't need to
+        // provide any hashVariables.
+        hash: hash2 || void 0,
+        pathVariables: combinedPathVariables,
+        preserveQueryParams: router.preserveQueryParams,
+      },);
+      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+      return {
+        href: path,
+        target: anchorTarget,
+        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
+      };
+    }
+  } catch {}
+  return propsForLink(href, openInNewTab,);
+}
 function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
   const promises = [];
   function handleSlugs(unresolvedSlugs,) {
@@ -31186,64 +31106,7 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
-function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
-  const isInternal = isInternalURL(href,);
-  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-    return propsForLink(href, openInNewTab,);
-  }
-  try {
-    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
-    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    assert(pathname !== void 0, 'A href must have a defined pathname.',);
-    const {
-      routeId,
-      pathVariables,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    const route = router.getRoute(routeId,);
-    if (route) {
-      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
-      const path = getPathForRoute(route, {
-        currentRoutePath: currentRoute.path,
-        currentPathVariables: currentRoute.pathVariables,
-        // The hash value is already fully resolved so we don't need to
-        // provide any hashVariables.
-        hash: hash2 || void 0,
-        pathVariables: combinedPathVariables,
-        preserveQueryParams: router.preserveQueryParams,
-      },);
-      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-      return {
-        href: path,
-        target: anchorTarget,
-        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
-      };
-    }
-  } catch {}
-  return propsForLink(href, openInNewTab,);
-}
-function getRouteFromPageLink(pageLink, router, currentRoute,) {
-  var _a;
-  if (isString22(pageLink,)) {
-    const isInternal = isInternalURL(pageLink,);
-    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-      return;
-    }
-    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
-    if (pathnameWithQueryParams === void 0) return;
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    if (pathname === void 0) return;
-    const {
-      routeId,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    return router.getRoute(routeId,);
-  }
-  const {
-    webPageId,
-  } = pageLink;
-  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
-}
-var Link = /* @__PURE__ */ forwardRef(({
+var Link = /* @__PURE__ */ React__default.forwardRef(({
   children,
   href,
   openInNewTab,
@@ -31256,28 +31119,8 @@ var Link = /* @__PURE__ */ forwardRef(({
   const {
     activeLocale,
   } = useLocaleInfo();
-  const cleanupRef = useRef();
-  const observeRef = useCallback((node) => {
-    var _a, _b;
-    if (node === null) {
-      (_a = cleanupRef.current) == null ? void 0 : _a.call(cleanupRef,);
-      cleanupRef.current = void 0;
-      return;
-    }
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    const route = getRouteFromPageLink(pageLink, router, currentRoute,);
-    if (!route) return;
-    cleanupRef.current = (_b = observeRouteForPreloading) == null ? void 0 : _b(route, node,);
-  }, [href, router, currentRoute,],);
-  const stableChildRef = useMemo(() => {
-    if (isValidElement(children,) && 'ref' in children) {
-      if (isMutableRef(children.ref,)) return createStableRefCallback(children.ref, observeRef,);
-      if (isFunction(children.ref,)) return mergeRefs(children.ref, observeRef,);
-    }
-  }, [observeRef, children,],);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  const props = useMemo(() => {
+  const props = React__default.useMemo(() => {
     var _a;
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
@@ -31293,7 +31136,9 @@ var Link = /* @__PURE__ */ forwardRef(({
       unresolvedHashSlugs,
       unresolvedPathSlugs,
     } = pageLink;
+    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
     const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+    if (route) preloadComponent(route.page,);
     const combinedPathVariable = Object.assign(
       {},
       implicitPathVariables,
@@ -31307,7 +31152,6 @@ var Link = /* @__PURE__ */ forwardRef(({
       resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
     );
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
     const resolvedHref = getPathForRoute(route, {
       currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
       currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
@@ -31327,8 +31171,6 @@ var Link = /* @__PURE__ */ forwardRef(({
   return clone(children, {
     ...restProps,
     ...props,
-    ref: stableChildRef ? stableChildRef : observeRef,
-    // only use stableRef if the child has a ref attached.
   },);
 },);
 function resolveLink(href, router, implicitPathVariables,) {
