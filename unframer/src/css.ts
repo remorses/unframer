@@ -1,15 +1,6 @@
 import dedent from 'dedent'
 import { ComponentFont } from './framer.js'
 
-export const breakpointSizes = {
-    base: 0,
-    sm: 320,
-    md: 768,
-    lg: 960,
-    xl: 1200,
-    '2xl': 1536,
-} as const
-
 function deduplicateByKey<T>(arr: T[], key: (k: T) => string): T[] {
     let map = new Map()
     for (let item of arr) {
@@ -121,11 +112,24 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
     return str
 }
 
-export const breakpointsStyles = /* css */ `
+export const defaultBreakpointSizes = {
+    base: 0,
+    sm: 320,
+    md: 768,
+    lg: 960,
+    xl: 1200,
+    '2xl': 1536,
+} as const
+
+export type BreakpointSizes = typeof defaultBreakpointSizes
+
+export const breakpointsStyles = (breakpointSizes?: BreakpointSizes) => {
+    breakpointSizes = { ...defaultBreakpointSizes, ...breakpointSizes }
+    return /* css */ `
 /* Base */
 @media (min-width: ${breakpointSizes.base}px) and (max-width: ${
-    breakpointSizes.sm - 1
-}px) {
+        breakpointSizes.sm - 1
+    }px) {
     .unframer-hidden.unframer-base { 
         display: contents;
     }
@@ -133,8 +137,8 @@ export const breakpointsStyles = /* css */ `
 
 /* Small */
 @media (min-width: ${breakpointSizes.sm}px) and (max-width: ${
-    breakpointSizes.md - 1
-}px) {
+        breakpointSizes.md - 1
+    }px) {
     .unframer-hidden.unframer-sm { 
         display: contents;
     }
@@ -142,8 +146,8 @@ export const breakpointsStyles = /* css */ `
 
 /* Medium */
 @media (min-width: ${breakpointSizes.md}px) and (max-width: ${
-    breakpointSizes.lg - 1
-}px) {
+        breakpointSizes.lg - 1
+    }px) {
     .unframer-hidden.unframer-md { 
         display: contents;
     }
@@ -151,8 +155,8 @@ export const breakpointsStyles = /* css */ `
 
 /* Large */
 @media (min-width: ${breakpointSizes.lg}px) and (max-width: ${
-    breakpointSizes.xl - 1
-}px) {
+        breakpointSizes.xl - 1
+    }px) {
     .unframer-hidden.unframer-lg { 
         display: contents;
     }
@@ -160,8 +164,8 @@ export const breakpointsStyles = /* css */ `
 
 /* Extra Large */
 @media (min-width: ${breakpointSizes.xl}px) and (max-width: ${
-    breakpointSizes['2xl'] - 1
-}px) {
+        breakpointSizes['2xl'] - 1
+    }px) {
     .unframer-hidden.unframer-xl { 
         display: contents;
     }
@@ -178,6 +182,7 @@ export const breakpointsStyles = /* css */ `
     display: none;
 }
 `
+}
 
 export function groupBy<T>(arr: T[], key: (x: T) => string) {
     const map = new Map<string, T[]>()

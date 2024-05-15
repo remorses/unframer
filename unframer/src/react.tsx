@@ -9,7 +9,11 @@ import {
     useMemo,
     useSyncExternalStore,
 } from 'react'
-import { breakpointSizes, breakpointsStyles, getFontsStyles } from './css.js'
+import {
+    breakpointsStyles,
+    defaultBreakpointSizes,
+    getFontsStyles,
+} from './css.js'
 
 function classNames(...args) {
     return args.filter(Boolean).join(' ')
@@ -17,14 +21,14 @@ function classNames(...args) {
 
 // breakpoints from the higher to the lower
 const defaultBreakpoints = Object.keys(
-    breakpointSizes,
+    defaultBreakpointSizes,
 ).reverse() as UnframerBreakpoint[]
 
-export type UnframerBreakpoint = keyof typeof breakpointSizes
+export type UnframerBreakpoint = keyof typeof defaultBreakpointSizes
 
 function getBreakpointNameFromWindowWidth(windowWidth: number) {
     return defaultBreakpoints.find(
-        (name) => windowWidth >= breakpointSizes[name],
+        (name) => windowWidth >= defaultBreakpointSizes[name],
     )
 }
 
@@ -50,7 +54,6 @@ const nothing = () => {
     return () => {}
 }
 
-
 /**
  * @deprecated Use styles.css import instead
  */
@@ -62,7 +65,9 @@ export function FramerStyles({ Components = [] as any[] }): any {
     )
     const breakpoints = (
         <style
-            dangerouslySetInnerHTML={{ __html: breakpointsStyles }}
+            dangerouslySetInnerHTML={{
+                __html: breakpointsStyles(defaultBreakpointSizes),
+            }}
             key='breakpointsStyles'
             suppressHydrationWarning
             hidden

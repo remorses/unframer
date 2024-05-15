@@ -10,6 +10,7 @@ import path from 'path'
 const configName = 'unframer.json'
 import { cac } from 'cac'
 import { logger } from './utils.js'
+import { BreakpointSizes } from './css.js'
 
 export const cli = cac()
 
@@ -123,6 +124,7 @@ type Config = {
     components: {
         [name: string]: string
     }
+    breakpoints?: BreakpointSizes
     outDir?: string
 }
 async function processConfig({
@@ -135,7 +137,7 @@ async function processConfig({
     signal?: AbortSignal
 }) {
     try {
-        const { components, outDir } = config || {}
+        const { components, breakpoints, outDir } = config || {}
         const installDir = path.resolve(process.cwd(), outDir || 'framer')
         if (!components) {
             logger.log(`No components found in ${configName}`)
@@ -144,6 +146,7 @@ async function processConfig({
 
         await bundle({
             components,
+            breakpoints,
             cwd: installDir,
             watch,
             signal,

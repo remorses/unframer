@@ -11,7 +11,19 @@
                 "type": "string",
                 "format": "uri"
             }
+        },
+        "breakpoints": {
+            "type": "object",
+            "properties": {
+                "sm": { "type": "number" },
+                "md": { "type": "number" },
+                "lg": { "type": "number" },
+                "xl": { "type": "number" },
+                "2xl": { "type": "number" }
+            },
+            "additionalProperties": false
         }
     },
+
     "required": ["outDir", "components"]
 }

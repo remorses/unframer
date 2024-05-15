@@ -19,6 +19,7 @@ import fs from 'fs'
 import path from 'path'
 import { exec, execSync } from 'child_process'
 import {
+    BreakpointSizes,
     ComponentFontBundle,
     breakpointsStyles,
     getFontsStyles,
@@ -45,6 +46,7 @@ export async function bundle({
     cwd: out = '',
     watch = false,
     components = {} as Record<string, string>,
+    breakpoints = {} as BreakpointSizes,
     signal = undefined as AbortSignal | undefined,
 }) {
     out ||= path.resolve(process.cwd(), 'example')
@@ -220,7 +222,7 @@ export async function bundle({
 
         const cssString =
             '/* This css file has all the necessary styles to run all your components */\n' +
-            breakpointsStyles +
+            breakpointsStyles(breakpoints) +
             '\n\n' +
             combinedCSSRules
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
