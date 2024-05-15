@@ -15,11 +15,11 @@
         "breakpoints": {
             "type": "object",
             "properties": {
-                "sm": { "type": "number" },
-                "md": { "type": "number" },
-                "lg": { "type": "number" },
-                "xl": { "type": "number" },
-                "2xl": { "type": "number" }
+                "sm": { "type": "number", "default": 320 },
+                "md": { "type": "number", "default": 768 },
+                "lg": { "type": "number", "default": 960 },
+                "xl": { "type": "number", "default": 1200 },
+                "2xl": { "type": "number", "default": 1536 }
             },
             "additionalProperties": false
         }

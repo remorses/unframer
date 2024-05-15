@@ -1,5 +1,16 @@
 # unframer
 
+## 2.3.0
+
+### Minor Changes
+
+-   Support custom breakpoints
+
+### Patch Changes
+
+-   d263c49: Update framer to 2.4.1, update framer motion to 11.0.11-sync.5
+-   bff8fb4: Update framer to 2.4.1, update framer motion to 11.1.7
+
 ## 2.2.2
 
 ### Patch Changes

@@ -132,6 +132,19 @@ export default function App() {
 }
 ```
 
+## Custom breakpoints for responsive variants
+
+You can change the breakpoints by passing a breakpoints in your `unframer.json` config
+
+```json
+{
+    "$schema": "https://unframer-schema.vercel.app/schema.json",
+    "outDir": "./src/framer",
+    "breakpoints": { "sm": 300, "md": 760 },
+    "components": {}
+}
+```
+
 ## Supported component props
 
 `unframer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:

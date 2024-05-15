@@ -1,14 +1,14 @@
 /* This css file has all the necessary styles to run all your components */
 
 /* Base */
-@media (min-width: 0px) and (max-width: 319px) {
+@media (min-width: 0px) and (max-width: 299px) {
     .unframer-hidden.unframer-base { 
         display: contents;
     }
 }
 
 /* Small */
-@media (min-width: 320px) and (max-width: 767px) {
+@media (min-width: 300px) and (max-width: 767px) {
     .unframer-hidden.unframer-sm { 
         display: contents;
     }
