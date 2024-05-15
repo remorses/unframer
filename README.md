@@ -30,6 +30,7 @@ Download framer components as simple files
 
     ```json
     {
+        "$schema": "https://unframer-schema.vercel.app/schema.json",
         "outDir": "./framer",
         "components": {
             "logos": "https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav",
