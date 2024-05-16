@@ -1,16 +1,17 @@
-// https :https://app.framerstatic.com/chunk-O7E5UDPD.js
+// https :https://app.framerstatic.com/chunk-M7U3O6KM.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
-import * as React from 'react';
+import { jsx, jsxs, } from 'react/jsx-runtime';
 import { forwardRef, useContext as useContext3, } from 'react';
 import { useInsertionEffect, useRef, } from 'react';
 import { useCallback, } from 'react';
 import { useMemo, } from 'react';
 import { useId, } from 'react';
-import { createElement as createElement2, Fragment, } from 'react';
-import React__default from 'react';
+import { createElement, Fragment, } from 'react';
+import { Component, } from 'react';
 import { useState, } from 'react';
 import { Children, cloneElement as cloneElement2, isValidElement, } from 'react';
+import * as React2 from 'react';
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -67,8 +68,8 @@ var __publicField = (obj, key7, value,) => {
   __defNormalProp(obj, typeof key7 !== 'symbol' ? key7 + '' : key7, value,);
   return value;
 };
-var __accessCheck = (obj, member, msg2,) => {
-  if (!member.has(obj,)) throw TypeError('Cannot ' + msg2,);
+var __accessCheck = (obj, member, msg,) => {
+  if (!member.has(obj,)) throw TypeError('Cannot ' + msg,);
 };
 var __privateGet = (obj, member, getter,) => {
   __accessCheck(obj, member, 'read from private field',);
@@ -83,6 +84,10 @@ var __privateSet = (obj, member, value, setter,) => {
   setter ? setter.call(obj, value,) : member.set(obj, value,);
   return value;
 };
+var __privateMethod = (obj, member, method,) => {
+  __accessCheck(obj, member, 'access private method',);
+  return method;
+};
 var require_memoize_browser_cjs = __commonJS({
   '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
     'use strict';
@@ -91,10 +96,10 @@ var require_memoize_browser_cjs = __commonJS({
       value: true,
     },);
     function memoize3(fn,) {
-      var cache3 = {};
+      var cache2 = {};
       return function (arg,) {
-        if (cache3[arg] === void 0) cache3[arg] = fn(arg,);
-        return cache3[arg];
+        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
+        return cache2[arg];
       };
     }
     exports.default = memoize3;
@@ -112,7 +117,7 @@ var require_is_prop_valid_browser_cjs = __commonJS({
     }
     var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
     var reactPropsRegex2 =
-      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|inert|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
     var index = memoize3(function (prop,) {
       return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
     },/* Z+1 */
@@ -223,7 +228,20 @@ function createRenderStep(runNextFrame,) {
   };
   return step2;
 }
-var stepsOrder = ['prepare', 'read', 'update', 'preRender', 'render', 'postRender',];
+var stepsOrder = [
+  'read',
+  // Read
+  'resolveKeyframes',
+  // Write/Read/Write/Read
+  'update',
+  // Compute
+  'preRender',
+  // Compute
+  'render',
+  // Write
+  'postRender',
+  // Compute
+];
 var maxElapsed = 40;
 function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
   let runNextFrame = false;
@@ -280,7 +298,7 @@ var {
   schedule: microtask,
   cancel: cancelMicrotask,
 } = createRenderBatcher(queueMicrotask, false,);
-function useVisualElement(Component23, visualState, props, createVisualElement2,) {
+function useVisualElement(Component33, visualState, props, createVisualElement2,) {
   const {
     visualElement: parent,
   } = useContext3(MotionContext,);
@@ -290,7 +308,7 @@ function useVisualElement(Component23, visualState, props, createVisualElement2,
   const visualElementRef = useRef();
   createVisualElement2 = createVisualElement2 || lazyContext.renderer;
   if (!visualElementRef.current && createVisualElement2) {
-    visualElementRef.current = createVisualElement2(Component23, {
+    visualElementRef.current = createVisualElement2(Component33, {
       visualState,
       parent,
       props,
@@ -418,7 +436,7 @@ function createMotionComponent({
   createVisualElement: createVisualElement2,
   useRender,
   useVisualState: useVisualState2,
-  Component: Component23,
+  Component: Component33,
 },) {
   preloadedFeatures2 && loadFeatures(preloadedFeatures2,);
   function MotionComponent(props, externalRef,) {
@@ -434,7 +452,7 @@ function createMotionComponent({
     const context = useCreateMotionContext(props,);
     const visualState = useVisualState2(props, isStatic,);
     if (!isStatic && isBrowser) {
-      context.visualElement = useVisualElement(Component23, visualState, configAndProps, createVisualElement2,);
+      context.visualElement = useVisualElement(Component33, visualState, configAndProps, createVisualElement2,);
       const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
       const isStrict = useContext3(LazyContext,).strict;
       if (context.visualElement) {
@@ -447,29 +465,28 @@ function createMotionComponent({
         );
       }
     }
-    return React.createElement(
-      MotionContext.Provider,
-      {
-        value: context,
-      },
-      MeasureLayout2 && context.visualElement
-        ? React.createElement(MeasureLayout2, {
-          visualElement: context.visualElement,
-          ...configAndProps,
-        },)
-        : null,
-      useRender(
-        Component23,
-        props,
-        useMotionRef(visualState, context.visualElement, externalRef,),
-        visualState,
-        isStatic,
-        context.visualElement,
-      ),
-    );
+    return jsxs(MotionContext.Provider, {
+      value: context,
+      children: [
+        MeasureLayout2 && context.visualElement
+          ? jsx(MeasureLayout2, {
+            visualElement: context.visualElement,
+            ...configAndProps,
+          },)
+          : null,
+        useRender(
+          Component33,
+          props,
+          useMotionRef(visualState, context.visualElement, externalRef,),
+          visualState,
+          isStatic,
+          context.visualElement,
+        ),
+      ],
+    },);
   }
   const ForwardRefComponent = forwardRef(MotionComponent,);
-  ForwardRefComponent[motionComponentSymbol] = Component23;
+  ForwardRefComponent[motionComponentSymbol] = Component33;
   return ForwardRefComponent;
 }
 function useLayoutId({
@@ -742,8 +759,8 @@ var isPrimaryPointer = (event) => {
 function extractEventInfo(event, pointType = 'page',) {
   return {
     point: {
-      x: event[pointType + 'X'],
-      y: event[pointType + 'Y'],
+      x: event[`${pointType}X`],
+      y: event[`${pointType}Y`],
     },
   };
 }
@@ -817,45 +834,6 @@ if (false) {
     }
   };
 }
-var calcBezier = (t, a1, a2,) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
-var subdivisionPrecision = 1e-7;
-var subdivisionMaxIterations = 12;
-function binarySubdivide(x, lowerBound, upperBound, mX1, mX2,) {
-  let currentX;
-  let currentT;
-  let i = 0;
-  do {
-    currentT = lowerBound + (upperBound - lowerBound) / 2;
-    currentX = calcBezier(currentT, mX1, mX2,) - x;
-    if (currentX > 0) {
-      upperBound = currentT;
-    } else {
-      lowerBound = currentT;
-    }
-  } while (Math.abs(currentX,) > subdivisionPrecision && ++i < subdivisionMaxIterations);
-  return currentT;
-}
-function cubicBezier(mX1, mY1, mX2, mY2,) {
-  if (mX1 === mY1 && mX2 === mY2) return noop;
-  const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2,);
-  return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t,), mY1, mY2,);
-}
-var easeIn = cubicBezier(0.42, 0, 1, 1,);
-var easeOut = cubicBezier(0, 0, 0.58, 1,);
-var easeInOut = cubicBezier(0.42, 0, 0.58, 1,);
-var mirrorEasing = (easing) => (p) => p <= 0.5 ? easing(2 * p,) / 2 : (2 - easing(2 * (1 - p),)) / 2;
-var reverseEasing = (easing) => (p) => 1 - easing(1 - p,);
-var circIn = (p) => 1 - Math.sin(Math.acos(p,),);
-var circOut = reverseEasing(circIn,);
-var circInOut = mirrorEasing(circIn,);
-var backOut = cubicBezier(0.33, 1.53, 0.69, 0.99,);
-var backIn = reverseEasing(backOut,);
-var backInOut = mirrorEasing(backIn,);
-var anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
-var progress = (from, to, value,) => {
-  const toFromDifference = to - from;
-  return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
-};
 var number = {
   test: (v) => typeof v === 'number',
   parse: parseFloat,
@@ -982,20 +960,20 @@ function analyseComplexValue(value,) {
     number: [],
     var: [],
   };
-  const types2 = [];
+  const types = [];
   let i = 0;
   const tokenised = originalValue.replace(complexRegex, (parsedValue) => {
     if (color.test(parsedValue,)) {
       indexes.color.push(i,);
-      types2.push(COLOR_TOKEN,);
+      types.push(COLOR_TOKEN,);
       values.push(color.parse(parsedValue,),);
     } else if (parsedValue.startsWith(VAR_FUNCTION_TOKEN,)) {
       indexes.var.push(i,);
-      types2.push(VAR_TOKEN,);
+      types.push(VAR_TOKEN,);
       values.push(parsedValue,);
     } else {
       indexes.number.push(i,);
-      types2.push(NUMBER_TOKEN,);
+      types.push(NUMBER_TOKEN,);
       values.push(parseFloat(parsedValue,),);
     }
     ++i;
@@ -1006,7 +984,7 @@ function analyseComplexValue(value,) {
     values,
     split,
     indexes,
-    types: types2,
+    types,
   };
 }
 function parseComplexValue(v,) {
@@ -1015,7 +993,7 @@ function parseComplexValue(v,) {
 function createTransformer(source,) {
   const {
     split,
-    types: types2,
+    types,
   } = analyseComplexValue(source,);
   const numSections = split.length;
   return (v) => {
@@ -1023,7 +1001,7 @@ function createTransformer(source,) {
     for (let i = 0; i < numSections; i++) {
       output += split[i];
       if (v[i] !== void 0) {
-        const type = types2[i];
+        const type = types[i];
         if (type === NUMBER_TOKEN) {
           output += sanitize(v[i],);
         } else if (type === COLOR_TOKEN) {
@@ -1048,212 +1026,6 @@ var complex = {
   createTransformer,
   getAnimatableNone,
 };
-var mixNumber = (from, to, progress2,) => {
-  return from + (to - from) * progress2;
-};
-function hueToRgb(p, q, t,) {
-  if (t < 0) t += 1;
-  if (t > 1) t -= 1;
-  if (t < 1 / 6) return p + (q - p) * 6 * t;
-  if (t < 1 / 2) return q;
-  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-  return p;
-}
-function hslaToRgba({
-  hue,
-  saturation,
-  lightness,
-  alpha: alpha2,
-},) {
-  hue /= 360;
-  saturation /= 100;
-  lightness /= 100;
-  let red = 0;
-  let green = 0;
-  let blue = 0;
-  if (!saturation) {
-    red = green = blue = lightness;
-  } else {
-    const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
-    const p = 2 * lightness - q;
-    red = hueToRgb(p, q, hue + 1 / 3,);
-    green = hueToRgb(p, q, hue,);
-    blue = hueToRgb(p, q, hue - 1 / 3,);
-  }
-  return {
-    red: Math.round(red * 255,),
-    green: Math.round(green * 255,),
-    blue: Math.round(blue * 255,),
-    alpha: alpha2,
-  };
-}
-var mixLinearColor = (from, to, v,) => {
-  const fromExpo = from * from;
-  const expo = v * (to * to - fromExpo) + fromExpo;
-  return expo < 0 ? 0 : Math.sqrt(expo,);
-};
-var colorTypes = [hex, rgba, hsla,];
-var getColorType = (v) => colorTypes.find((type) => type.test(v,));
-function asRGBA(color2,) {
-  const type = getColorType(color2,);
-  invariant(Boolean(type,), `'${color2}' is not an animatable color. Use the equivalent color code instead.`,);
-  let model = type.parse(color2,);
-  if (type === hsla) {
-    model = hslaToRgba(model,);
-  }
-  return model;
-}
-var mixColor = (from, to,) => {
-  const fromRGBA = asRGBA(from,);
-  const toRGBA = asRGBA(to,);
-  const blended = {
-    ...fromRGBA,
-  };
-  return (v) => {
-    blended.red = mixLinearColor(fromRGBA.red, toRGBA.red, v,);
-    blended.green = mixLinearColor(fromRGBA.green, toRGBA.green, v,);
-    blended.blue = mixLinearColor(fromRGBA.blue, toRGBA.blue, v,);
-    blended.alpha = mixNumber(fromRGBA.alpha, toRGBA.alpha, v,);
-    return rgba.transform(blended,);
-  };
-};
-var checkStringStartsWith = (token) => (key7) => typeof key7 === 'string' && key7.startsWith(token,);
-var isCSSVariableName = checkStringStartsWith('--',);
-var startsAsVariableToken = checkStringStartsWith('var(--',);
-var isCSSVariableToken = (value) => {
-  const startsWithToken = startsAsVariableToken(value,);
-  if (!startsWithToken) return false;
-  return singleCssVariableRegex.test(value.split('/*',)[0].trim(),);
-};
-var singleCssVariableRegex = /var\(--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)$/iu;
-function mixImmediate(a, b,) {
-  return (p) => p > 0 ? b : a;
-}
-function mixNumber2(a, b,) {
-  return (p) => mixNumber(a, b, p,);
-}
-function getMixer(a,) {
-  if (typeof a === 'number') {
-    return mixNumber2;
-  } else if (typeof a === 'string') {
-    return isCSSVariableToken(a,) ? mixImmediate : color.test(a,) ? mixColor : mixComplex;
-  } else if (Array.isArray(a,)) {
-    return mixArray;
-  } else if (typeof a === 'object') {
-    return color.test(a,) ? mixColor : mixObject;
-  }
-  return mixImmediate;
-}
-function mixArray(a, b,) {
-  const output = [...a,];
-  const numValues = output.length;
-  const blendValue = a.map((v, i,) => getMixer(v,)(v, b[i],));
-  return (p) => {
-    for (let i = 0; i < numValues; i++) {
-      output[i] = blendValue[i](p,);
-    }
-    return output;
-  };
-}
-function mixObject(a, b,) {
-  const output = {
-    ...a,
-    ...b,
-  };
-  const blendValue = {};
-  for (const key7 in output) {
-    if (a[key7] !== void 0 && b[key7] !== void 0) {
-      blendValue[key7] = getMixer(a[key7],)(a[key7], b[key7],);
-    }
-  }
-  return (v) => {
-    for (const key7 in blendValue) {
-      output[key7] = blendValue[key7](v,);
-    }
-    return output;
-  };
-}
-function matchOrder(origin, target,) {
-  var _a;
-  const orderedOrigin = [];
-  const pointers = {
-    color: 0,
-    var: 0,
-    number: 0,
-  };
-  for (let i = 0; i < target.values.length; i++) {
-    const type = target.types[i];
-    const originIndex = origin.indexes[type][pointers[type]];
-    const originValue = (_a = origin.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
-    orderedOrigin[i] = originValue;
-    pointers[type]++;
-  }
-  return orderedOrigin;
-}
-var mixComplex = (origin, target,) => {
-  const template = complex.createTransformer(target,);
-  const originStats = analyseComplexValue(origin,);
-  const targetStats = analyseComplexValue(target,);
-  const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length &&
-    originStats.indexes.color.length === targetStats.indexes.color.length &&
-    originStats.indexes.number.length >= targetStats.indexes.number.length;
-  if (canInterpolate) {
-    return pipe(mixArray(matchOrder(originStats, targetStats,), targetStats.values,), template,);
-  } else {
-    warning(
-      true,
-      `Complex values '${origin}' and '${target}' too different to mix. Ensure all colors are of the same type, and that each contains the same quantity of number and color values. Falling back to instant transition.`,
-    );
-    return mixImmediate(origin, target,);
-  }
-};
-function mix(from, to, p,) {
-  if (typeof from === 'number' && typeof to === 'number' && typeof p === 'number') {
-    return mixNumber(from, to, p,);
-  }
-  const mixer = getMixer(from,);
-  return mixer(from, to,);
-}
-function createMixers(output, ease2, customMixer,) {
-  const mixers = [];
-  const mixerFactory = customMixer || mix;
-  const numMixers = output.length - 1;
-  for (let i = 0; i < numMixers; i++) {
-    let mixer = mixerFactory(output[i], output[i + 1],);
-    if (ease2) {
-      const easingFunction = Array.isArray(ease2,) ? ease2[i] || noop : ease2;
-      mixer = pipe(easingFunction, mixer,);
-    }
-    mixers.push(mixer,);
-  }
-  return mixers;
-}
-function interpolate(input, output, {
-  clamp: isClamp = true,
-  ease: ease2,
-  mixer,
-} = {},) {
-  const inputLength = input.length;
-  invariant(inputLength === output.length, 'Both input and output ranges must be the same length',);
-  if (inputLength === 1) return () => output[0];
-  if (input[0] > input[inputLength - 1]) {
-    input = [...input,].reverse();
-    output = [...output,].reverse();
-  }
-  const mixers = createMixers(output, ease2, mixer,);
-  const numMixers = mixers.length;
-  const interpolator = (v) => {
-    let i = 0;
-    if (numMixers > 1) {
-      for (; i < input.length - 2; i++) {
-        if (v < input[i + 1]) break;
-      }
-    }
-    const progressInRange = progress(input[i], input[i + 1], v,);
-    return mixers[i](progressInRange,);
-  };
-  return isClamp ? (v) => interpolator(clamp(input[0], input[inputLength - 1], v,),) : interpolator;
-}
 var secondsToMilliseconds = (seconds) => seconds * 1e3;
 var millisecondsToSeconds = (milliseconds) => milliseconds / 1e3;
 function velocityPerSecond(velocity, frameDuration,) {
@@ -1445,6 +1217,518 @@ function spring({
     },
   };
 }
+var calcBezier = (t, a1, a2,) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
+var subdivisionPrecision = 1e-7;
+var subdivisionMaxIterations = 12;
+function binarySubdivide(x, lowerBound, upperBound, mX1, mX2,) {
+  let currentX;
+  let currentT;
+  let i = 0;
+  do {
+    currentT = lowerBound + (upperBound - lowerBound) / 2;
+    currentX = calcBezier(currentT, mX1, mX2,) - x;
+    if (currentX > 0) {
+      upperBound = currentT;
+    } else {
+      lowerBound = currentT;
+    }
+  } while (Math.abs(currentX,) > subdivisionPrecision && ++i < subdivisionMaxIterations);
+  return currentT;
+}
+function cubicBezier(mX1, mY1, mX2, mY2,) {
+  if (mX1 === mY1 && mX2 === mY2) return noop;
+  const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2,);
+  return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t,), mY1, mY2,);
+}
+var easeIn = cubicBezier(0.42, 0, 1, 1,);
+var easeOut = cubicBezier(0, 0, 0.58, 1,);
+var easeInOut = cubicBezier(0.42, 0, 0.58, 1,);
+var mirrorEasing = (easing) => (p) => p <= 0.5 ? easing(2 * p,) / 2 : (2 - easing(2 * (1 - p),)) / 2;
+var reverseEasing = (easing) => (p) => 1 - easing(1 - p,);
+var circIn = (p) => 1 - Math.sin(Math.acos(p,),);
+var circOut = reverseEasing(circIn,);
+var circInOut = mirrorEasing(circIn,);
+var backOut = cubicBezier(0.33, 1.53, 0.69, 0.99,);
+var backIn = reverseEasing(backOut,);
+var backInOut = mirrorEasing(backIn,);
+var anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
+var progress = (from, to, value,) => {
+  const toFromDifference = to - from;
+  return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
+};
+var mixNumber = (from, to, progress2,) => {
+  return from + (to - from) * progress2;
+};
+function hueToRgb(p, q, t,) {
+  if (t < 0) t += 1;
+  if (t > 1) t -= 1;
+  if (t < 1 / 6) return p + (q - p) * 6 * t;
+  if (t < 1 / 2) return q;
+  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+  return p;
+}
+function hslaToRgba({
+  hue,
+  saturation,
+  lightness,
+  alpha: alpha2,
+},) {
+  hue /= 360;
+  saturation /= 100;
+  lightness /= 100;
+  let red = 0;
+  let green = 0;
+  let blue = 0;
+  if (!saturation) {
+    red = green = blue = lightness;
+  } else {
+    const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
+    const p = 2 * lightness - q;
+    red = hueToRgb(p, q, hue + 1 / 3,);
+    green = hueToRgb(p, q, hue,);
+    blue = hueToRgb(p, q, hue - 1 / 3,);
+  }
+  return {
+    red: Math.round(red * 255,),
+    green: Math.round(green * 255,),
+    blue: Math.round(blue * 255,),
+    alpha: alpha2,
+  };
+}
+var mixLinearColor = (from, to, v,) => {
+  const fromExpo = from * from;
+  const expo = v * (to * to - fromExpo) + fromExpo;
+  return expo < 0 ? 0 : Math.sqrt(expo,);
+};
+var colorTypes = [hex, rgba, hsla,];
+var getColorType = (v) => colorTypes.find((type) => type.test(v,));
+function asRGBA(color2,) {
+  const type = getColorType(color2,);
+  invariant(Boolean(type,), `'${color2}' is not an animatable color. Use the equivalent color code instead.`,);
+  let model = type.parse(color2,);
+  if (type === hsla) {
+    model = hslaToRgba(model,);
+  }
+  return model;
+}
+var mixColor = (from, to,) => {
+  const fromRGBA = asRGBA(from,);
+  const toRGBA = asRGBA(to,);
+  const blended = {
+    ...fromRGBA,
+  };
+  return (v) => {
+    blended.red = mixLinearColor(fromRGBA.red, toRGBA.red, v,);
+    blended.green = mixLinearColor(fromRGBA.green, toRGBA.green, v,);
+    blended.blue = mixLinearColor(fromRGBA.blue, toRGBA.blue, v,);
+    blended.alpha = mixNumber(fromRGBA.alpha, toRGBA.alpha, v,);
+    return rgba.transform(blended,);
+  };
+};
+var checkStringStartsWith = (token) => (key7) => typeof key7 === 'string' && key7.startsWith(token,);
+var isCSSVariableName = checkStringStartsWith('--',);
+var startsAsVariableToken = checkStringStartsWith('var(--',);
+var isCSSVariableToken = (value) => {
+  const startsWithToken = startsAsVariableToken(value,);
+  if (!startsWithToken) return false;
+  return singleCssVariableRegex.test(value.split('/*',)[0].trim(),);
+};
+var singleCssVariableRegex = /var\(--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)$/iu;
+function mixImmediate(a, b,) {
+  return (p) => p > 0 ? b : a;
+}
+function mixNumber2(a, b,) {
+  return (p) => mixNumber(a, b, p,);
+}
+function getMixer(a,) {
+  if (typeof a === 'number') {
+    return mixNumber2;
+  } else if (typeof a === 'string') {
+    return isCSSVariableToken(a,) ? mixImmediate : color.test(a,) ? mixColor : mixComplex;
+  } else if (Array.isArray(a,)) {
+    return mixArray;
+  } else if (typeof a === 'object') {
+    return color.test(a,) ? mixColor : mixObject;
+  }
+  return mixImmediate;
+}
+function mixArray(a, b,) {
+  const output = [...a,];
+  const numValues = output.length;
+  const blendValue = a.map((v, i,) => getMixer(v,)(v, b[i],));
+  return (p) => {
+    for (let i = 0; i < numValues; i++) {
+      output[i] = blendValue[i](p,);
+    }
+    return output;
+  };
+}
+function mixObject(a, b,) {
+  const output = {
+    ...a,
+    ...b,
+  };
+  const blendValue = {};
+  for (const key7 in output) {
+    if (a[key7] !== void 0 && b[key7] !== void 0) {
+      blendValue[key7] = getMixer(a[key7],)(a[key7], b[key7],);
+    }
+  }
+  return (v) => {
+    for (const key7 in blendValue) {
+      output[key7] = blendValue[key7](v,);
+    }
+    return output;
+  };
+}
+function matchOrder(origin, target,) {
+  var _a;
+  const orderedOrigin = [];
+  const pointers = {
+    color: 0,
+    var: 0,
+    number: 0,
+  };
+  for (let i = 0; i < target.values.length; i++) {
+    const type = target.types[i];
+    const originIndex = origin.indexes[type][pointers[type]];
+    const originValue = (_a = origin.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
+    orderedOrigin[i] = originValue;
+    pointers[type]++;
+  }
+  return orderedOrigin;
+}
+var mixComplex = (origin, target,) => {
+  const template = complex.createTransformer(target,);
+  const originStats = analyseComplexValue(origin,);
+  const targetStats = analyseComplexValue(target,);
+  const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length &&
+    originStats.indexes.color.length === targetStats.indexes.color.length &&
+    originStats.indexes.number.length >= targetStats.indexes.number.length;
+  if (canInterpolate) {
+    return pipe(mixArray(matchOrder(originStats, targetStats,), targetStats.values,), template,);
+  } else {
+    warning(
+      true,
+      `Complex values '${origin}' and '${target}' too different to mix. Ensure all colors are of the same type, and that each contains the same quantity of number and color values. Falling back to instant transition.`,
+    );
+    return mixImmediate(origin, target,);
+  }
+};
+function mix(from, to, p,) {
+  if (typeof from === 'number' && typeof to === 'number' && typeof p === 'number') {
+    return mixNumber(from, to, p,);
+  }
+  const mixer = getMixer(from,);
+  return mixer(from, to,);
+}
+function createMixers(output, ease2, customMixer,) {
+  const mixers = [];
+  const mixerFactory = customMixer || mix;
+  const numMixers = output.length - 1;
+  for (let i = 0; i < numMixers; i++) {
+    let mixer = mixerFactory(output[i], output[i + 1],);
+    if (ease2) {
+      const easingFunction = Array.isArray(ease2,) ? ease2[i] || noop : ease2;
+      mixer = pipe(easingFunction, mixer,);
+    }
+    mixers.push(mixer,);
+  }
+  return mixers;
+}
+function interpolate(input, output, {
+  clamp: isClamp = true,
+  ease: ease2,
+  mixer,
+} = {},) {
+  const inputLength = input.length;
+  invariant(inputLength === output.length, 'Both input and output ranges must be the same length',);
+  if (inputLength === 1) return () => output[0];
+  if (inputLength === 2 && input[0] === input[1]) return () => output[1];
+  if (input[0] > input[inputLength - 1]) {
+    input = [...input,].reverse();
+    output = [...output,].reverse();
+  }
+  const mixers = createMixers(output, ease2, mixer,);
+  const numMixers = mixers.length;
+  const interpolator = (v) => {
+    let i = 0;
+    if (numMixers > 1) {
+      for (; i < input.length - 2; i++) {
+        if (v < input[i + 1]) break;
+      }
+    }
+    const progressInRange = progress(input[i], input[i + 1], v,);
+    return mixers[i](progressInRange,);
+  };
+  return isClamp ? (v) => interpolator(clamp(input[0], input[inputLength - 1], v,),) : interpolator;
+}
+var positionalKeys = /* @__PURE__ */ new Set(['width', 'height', 'top', 'left', 'right', 'bottom', 'x', 'y', 'translateX', 'translateY',],);
+var isNumOrPxType = (v) => v === number || v === px;
+var getPosFromMatrix = (matrix, pos,) => parseFloat(matrix.split(', ',)[pos],);
+var getTranslateFromMatrix = (pos2, pos3,) =>
+(_bbox, {
+  transform: transform2,
+},) => {
+  if (transform2 === 'none' || !transform2) return 0;
+  const matrix3d = transform2.match(/^matrix3d\((.+)\)$/u,);
+  if (matrix3d) {
+    return getPosFromMatrix(matrix3d[1], pos3,);
+  } else {
+    const matrix = transform2.match(/^matrix\((.+)\)$/u,);
+    if (matrix) {
+      return getPosFromMatrix(matrix[1], pos2,);
+    } else {
+      return 0;
+    }
+  }
+};
+var transformKeys = /* @__PURE__ */ new Set(['x', 'y', 'z',],);
+var nonTranslationalTransformKeys = transformPropOrder.filter((key7) => !transformKeys.has(key7,));
+function removeNonTranslationalTransform(visualElement,) {
+  const removedTransforms = [];
+  nonTranslationalTransformKeys.forEach((key7) => {
+    const value = visualElement.getValue(key7,);
+    if (value !== void 0) {
+      removedTransforms.push([key7, value.get(),],);
+      value.set(key7.startsWith('scale',) ? 1 : 0,);
+    }
+  },);
+  return removedTransforms;
+}
+var positionalValues = {
+  // Dimensions
+  width: ({
+    x,
+  }, {
+    paddingLeft = '0',
+    paddingRight = '0',
+  },) => x.max - x.min - parseFloat(paddingLeft,) - parseFloat(paddingRight,),
+  height: ({
+    y,
+  }, {
+    paddingTop = '0',
+    paddingBottom = '0',
+  },) => y.max - y.min - parseFloat(paddingTop,) - parseFloat(paddingBottom,),
+  top: (_bbox, {
+    top,
+  },) => parseFloat(top,),
+  left: (_bbox, {
+    left,
+  },) => parseFloat(left,),
+  bottom: ({
+    y,
+  }, {
+    top,
+  },) => parseFloat(top,) + (y.max - y.min),
+  right: ({
+    x,
+  }, {
+    left,
+  },) => parseFloat(left,) + (x.max - x.min),
+  // Transform
+  x: getTranslateFromMatrix(4, 13,),
+  y: getTranslateFromMatrix(5, 14,),
+};
+positionalValues.translateX = positionalValues.x;
+positionalValues.translateY = positionalValues.y;
+var toResolve = /* @__PURE__ */ new Set();
+var isScheduled = false;
+var anyNeedsMeasurement = false;
+function measureAllKeyframes() {
+  if (anyNeedsMeasurement) {
+    const resolversToMeasure = Array.from(toResolve,).filter((resolver) => resolver.needsMeasurement);
+    const elementsToMeasure = new Set(resolversToMeasure.map((resolver) => resolver.element),);
+    const transformsToRestore = /* @__PURE__ */ new Map();
+    elementsToMeasure.forEach((element) => {
+      const removedTransforms = removeNonTranslationalTransform(element,);
+      if (!removedTransforms.length) return;
+      transformsToRestore.set(element, removedTransforms,);
+      element.render();
+    },);
+    resolversToMeasure.forEach((resolver) => resolver.measureInitialState());
+    elementsToMeasure.forEach((element) => {
+      element.render();
+      const restore = transformsToRestore.get(element,);
+      if (restore) {
+        restore.forEach(([key7, value,],) => {
+          var _a;
+          (_a = element.getValue(key7,)) === null || _a === void 0 ? void 0 : _a.set(value,);
+        },);
+      }
+    },);
+    resolversToMeasure.forEach((resolver) => resolver.measureEndState());
+    resolversToMeasure.forEach((resolver) => {
+      if (resolver.suspendedScrollY !== void 0) {
+        window.scrollTo(0, resolver.suspendedScrollY,);
+      }
+    },);
+  }
+  anyNeedsMeasurement = false;
+  isScheduled = false;
+  toResolve.forEach((resolver) => resolver.complete());
+  toResolve.clear();
+}
+function readAllKeyframes() {
+  toResolve.forEach((resolver) => {
+    resolver.readKeyframes();
+    if (resolver.needsMeasurement) {
+      anyNeedsMeasurement = true;
+    }
+  },);
+}
+function flushKeyframeResolvers() {
+  readAllKeyframes();
+  measureAllKeyframes();
+}
+var KeyframeResolver = class {
+  constructor(unresolvedKeyframes, onComplete, name, motionValue2, element, isAsync = false,) {
+    this.isComplete = false;
+    this.isAsync = false;
+    this.needsMeasurement = false;
+    this.isScheduled = false;
+    this.unresolvedKeyframes = [...unresolvedKeyframes,];
+    this.onComplete = onComplete;
+    this.name = name;
+    this.motionValue = motionValue2;
+    this.element = element;
+    this.isAsync = isAsync;
+  }
+  scheduleResolve() {
+    this.isScheduled = true;
+    if (this.isAsync) {
+      toResolve.add(this,);
+      if (!isScheduled) {
+        isScheduled = true;
+        frame.read(readAllKeyframes,);
+        frame.resolveKeyframes(measureAllKeyframes,);
+      }
+    } else {
+      this.readKeyframes();
+      this.complete();
+    }
+  }
+  readKeyframes() {
+    const {
+      unresolvedKeyframes,
+      name,
+      element,
+      motionValue: motionValue2,
+    } = this;
+    for (let i = 0; i < unresolvedKeyframes.length; i++) {
+      if (unresolvedKeyframes[i] === null) {
+        if (i === 0) {
+          const currentValue = motionValue2 === null || motionValue2 === void 0 ? void 0 : motionValue2.get();
+          const finalKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
+          if (currentValue !== void 0) {
+            unresolvedKeyframes[0] = currentValue;
+          } else if (element && name) {
+            const valueAsRead = element.readValue(name, finalKeyframe,);
+            if (valueAsRead !== void 0 && valueAsRead !== null) {
+              unresolvedKeyframes[0] = valueAsRead;
+            }
+          }
+          if (unresolvedKeyframes[0] === void 0) {
+            unresolvedKeyframes[0] = finalKeyframe;
+          }
+          if (motionValue2 && currentValue === void 0) {
+            motionValue2.set(unresolvedKeyframes[0],);
+          }
+        } else {
+          unresolvedKeyframes[i] = unresolvedKeyframes[i - 1];
+        }
+      }
+    }
+  }
+  setFinalKeyframe() {}
+  measureInitialState() {}
+  renderEndStyles() {}
+  measureEndState() {}
+  complete() {
+    this.isComplete = true;
+    this.onComplete(this.unresolvedKeyframes, this.finalKeyframe,);
+    toResolve.delete(this,);
+  }
+  cancel() {
+    if (!this.isComplete) {
+      this.isScheduled = false;
+      toResolve.delete(this,);
+    }
+  }
+  resume() {
+    if (!this.isComplete) this.scheduleResolve();
+  }
+};
+function inertia({
+  keyframes: keyframes2,
+  velocity = 0,
+  power = 0.8,
+  timeConstant: timeConstant2 = 325,
+  bounceDamping = 10,
+  bounceStiffness = 500,
+  modifyTarget,
+  min,
+  max,
+  restDelta = 0.5,
+  restSpeed,
+},) {
+  const origin = keyframes2[0];
+  const state = {
+    done: false,
+    value: origin,
+  };
+  const isOutOfBounds = (v) => min !== void 0 && v < min || max !== void 0 && v > max;
+  const nearestBoundary = (v) => {
+    if (min === void 0) return max;
+    if (max === void 0) return min;
+    return Math.abs(min - v,) < Math.abs(max - v,) ? min : max;
+  };
+  let amplitude = power * velocity;
+  const ideal = origin + amplitude;
+  const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal,);
+  if (target !== ideal) amplitude = target - origin;
+  const calcDelta = (t) => -amplitude * Math.exp(-t / timeConstant2,);
+  const calcLatest = (t) => target + calcDelta(t,);
+  const applyFriction = (t) => {
+    const delta = calcDelta(t,);
+    const latest = calcLatest(t,);
+    state.done = Math.abs(delta,) <= restDelta;
+    state.value = state.done ? target : latest;
+  };
+  let timeReachedBoundary;
+  let spring$1;
+  const checkCatchBoundary = (t) => {
+    if (!isOutOfBounds(state.value,)) return;
+    timeReachedBoundary = t;
+    spring$1 = spring({
+      keyframes: [state.value, nearestBoundary(state.value,),],
+      velocity: calcGeneratorVelocity(calcLatest, t, state.value,),
+      // TODO: This should be passing * 1000
+      damping: bounceDamping,
+      stiffness: bounceStiffness,
+      restDelta,
+      restSpeed,
+    },);
+  };
+  checkCatchBoundary(0,);
+  return {
+    calculatedDuration: null,
+    next: (t) => {
+      let hasUpdatedFrame = false;
+      if (!spring$1 && timeReachedBoundary === void 0) {
+        hasUpdatedFrame = true;
+        applyFriction(t,);
+        checkCatchBoundary(t,);
+      }
+      if (timeReachedBoundary !== void 0 && t >= timeReachedBoundary) {
+        return spring$1.next(t - timeReachedBoundary,);
+      } else {
+        !hasUpdatedFrame && applyFriction(t,);
+        return state;
+      }
+    },
+  };
+}
 var isEasingArray = (ease2) => {
   return Array.isArray(ease2,) && typeof ease2[0] !== 'number';
 };
@@ -1519,74 +1803,149 @@ function keyframes({
     },
   };
 }
-function inertia({
-  keyframes: keyframes2,
-  velocity = 0,
-  power = 0.8,
-  timeConstant: timeConstant2 = 325,
-  bounceDamping = 10,
-  bounceStiffness = 500,
-  modifyTarget,
-  min,
-  max,
-  restDelta = 0.5,
-  restSpeed,
-},) {
-  const origin = keyframes2[0];
-  const state = {
-    done: false,
-    value: origin,
-  };
-  const isOutOfBounds = (v) => min !== void 0 && v < min || max !== void 0 && v > max;
-  const nearestBoundary = (v) => {
-    if (min === void 0) return max;
-    if (max === void 0) return min;
-    return Math.abs(min - v,) < Math.abs(max - v,) ? min : max;
-  };
-  let amplitude = power * velocity;
-  const ideal = origin + amplitude;
-  const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal,);
-  if (target !== ideal) amplitude = target - origin;
-  const calcDelta = (t) => -amplitude * Math.exp(-t / timeConstant2,);
-  const calcLatest = (t) => target + calcDelta(t,);
-  const applyFriction = (t) => {
-    const delta = calcDelta(t,);
-    const latest = calcLatest(t,);
-    state.done = Math.abs(delta,) <= restDelta;
-    state.value = state.done ? target : latest;
-  };
-  let timeReachedBoundary;
-  let spring$1;
-  const checkCatchBoundary = (t) => {
-    if (!isOutOfBounds(state.value,)) return;
-    timeReachedBoundary = t;
-    spring$1 = spring({
-      keyframes: [state.value, nearestBoundary(state.value,),],
-      velocity: calcGeneratorVelocity(calcLatest, t, state.value,),
-      damping: bounceDamping,
-      stiffness: bounceStiffness,
-      restDelta,
-      restSpeed,
-    },);
-  };
-  checkCatchBoundary(0,);
-  return {
-    calculatedDuration: null,
-    next: (t) => {
-      let hasUpdatedFrame = false;
-      if (!spring$1 && timeReachedBoundary === void 0) {
-        hasUpdatedFrame = true;
-        applyFriction(t,);
-        checkCatchBoundary(t,);
-      }
-      if (timeReachedBoundary !== void 0 && t > timeReachedBoundary) {
-        return spring$1.next(t - timeReachedBoundary,);
+var instantAnimationState = {
+  current: false,
+};
+var isAnimatable = (value, name,) => {
+  if (name === 'zIndex') return false;
+  if (typeof value === 'number' || Array.isArray(value,)) return true;
+  if (
+    typeof value === 'string' && (
+      // It's animatable if we have a string
+      complex.test(value,) || value === '0'
+    ) &&
+    // And it contains numbers and/or colors
+    !value.startsWith('url(',)
+  ) {
+    return true;
+  }
+  return false;
+};
+function hasKeyframesChanged(keyframes2,) {
+  const current = keyframes2[0];
+  if (keyframes2.length === 1) return true;
+  for (let i = 0; i < keyframes2.length; i++) {
+    if (keyframes2[i] !== current) return true;
+  }
+}
+function canAnimate(keyframes2, name, type, velocity,) {
+  const originKeyframe = keyframes2[0];
+  if (originKeyframe === null) return false;
+  const targetKeyframe = keyframes2[keyframes2.length - 1];
+  const isOriginAnimatable = isAnimatable(originKeyframe, name,);
+  const isTargetAnimatable = isAnimatable(targetKeyframe, name,);
+  warning(
+    isOriginAnimatable === isTargetAnimatable,
+    `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". ${originKeyframe} is not an animatable value - to enable this animation set ${originKeyframe} to a value animatable to ${targetKeyframe} via the \`style\` property.`,
+  );
+  if (!isOriginAnimatable || !isTargetAnimatable) {
+    return false;
+  }
+  return hasKeyframesChanged(keyframes2,) || type === 'spring' && velocity;
+}
+var isNotNull = (value) => value !== null;
+function getFinalKeyframe(keyframes2, {
+  repeat,
+  repeatType = 'loop',
+}, finalKeyframe,) {
+  const resolvedKeyframes = keyframes2.filter(isNotNull,);
+  const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
+  return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
+}
+var BaseAnimation = class {
+  constructor({
+    autoplay = true,
+    delay: delay2 = 0,
+    type = 'keyframes',
+    repeat = 0,
+    repeatDelay = 0,
+    repeatType = 'loop',
+    ...options
+  },) {
+    this.isStopped = false;
+    this.hasAttemptedResolve = false;
+    this.options = {
+      autoplay,
+      delay: delay2,
+      type,
+      repeat,
+      repeatDelay,
+      repeatType,
+      ...options,
+    };
+    this.updateFinishedPromise();
+  }
+  /**
+   * A getter for resolved data. If keyframes are not yet resolved, accessing
+   * this.resolved will synchronously flush all pending keyframe resolvers.
+   * This is a deoptimisation, but at its worst still batches read/writes.
+   */
+  get resolved() {
+    if (!this._resolved && !this.hasAttemptedResolve) {
+      flushKeyframeResolvers();
+    }
+    return this._resolved;
+  }
+  /**
+   * A method to be called when the keyframes resolver completes. This method
+   * will check if its possible to run the animation and, if not, skip it.
+   * Otherwise, it will call initPlayback on the implementing class.
+   */
+  onKeyframesResolved(keyframes2, finalKeyframe,) {
+    this.hasAttemptedResolve = true;
+    const {
+      name,
+      type,
+      velocity,
+      delay: delay2,
+      onComplete,
+      onUpdate,
+      isGenerator,
+    } = this.options;
+    if (!isGenerator && !canAnimate(keyframes2, name, type, velocity,)) {
+      if (instantAnimationState.current || !delay2) {
+        onUpdate === null || onUpdate === void 0 ? void 0 : onUpdate(getFinalKeyframe(keyframes2, this.options, finalKeyframe,),);
+        onComplete === null || onComplete === void 0 ? void 0 : onComplete();
+        this.resolveFinishedPromise();
+        return;
       } else {
-        !hasUpdatedFrame && applyFriction(t,);
-        return state;
+        this.options.duration = 0;
       }
-    },
-  };
+    }
+    const resolvedAnimation = this.initPlayback(keyframes2, finalKeyframe,);
+    if (resolvedAnimation === false) return;
+    this._resolved = {
+      keyframes: keyframes2,
+      finalKeyframe,
+      ...resolvedAnimation,
+    };
+    this.onPostResolved();
+  }
+  onPostResolved() {}
+  /**
+   * Allows the returned animation to be awaited or promise-chained. Currently
+   * resolves when the animation finishes at all but in a future update could/should
+   * reject if its cancels.
+   */
+  then(resolve, reject,) {
+    return this.currentFinishedPromise.then(resolve, reject,);
+  }
+  updateFinishedPromise() {
+    this.currentFinishedPromise = new Promise((resolve) => {
+      this.resolveFinishedPromise = resolve;
+    },);
+  }
+};
+var maxGeneratorDuration = 2e4;
+function calcGeneratorDuration(generator,) {
+  let duration = 0;
+  const timeStep = 50;
+  let state = generator.next(duration,);
+  while (!state.done && duration < maxGeneratorDuration) {
+    duration += timeStep;
+    state = generator.next(duration,);
+  }
+  return duration >= maxGeneratorDuration ? Infinity : duration;
 }
 var now;
 function clearTime() {
@@ -1618,18 +1977,7 @@ var frameloopDriver = (update) => {
     now: () => frameData.isProcessing ? frameData.timestamp : time.now(),
   };
 };
-var maxGeneratorDuration = 2e4;
-function calcGeneratorDuration(generator,) {
-  let duration = 0;
-  const timeStep = 50;
-  let state = generator.next(duration,);
-  while (!state.done && duration < maxGeneratorDuration) {
-    duration += timeStep;
-    state = generator.next(duration,);
-  }
-  return duration >= maxGeneratorDuration ? Infinity : duration;
-}
-var types = {
+var generators = {
   decay: inertia,
   inertia,
   tween: keyframes,
@@ -1637,92 +1985,155 @@ var types = {
   spring,
 };
 var percentToProgress = (percent2) => percent2 / 100;
-function animateValue({
-  autoplay = true,
-  delay: delay2 = 0,
-  driver = frameloopDriver,
-  keyframes: keyframes$1,
-  type = 'keyframes',
-  repeat = 0,
-  repeatDelay = 0,
-  repeatType = 'loop',
-  onPlay,
-  onStop,
-  onComplete,
-  onUpdate,
-  ...options
-},) {
-  let speed = 1;
-  let hasStopped = false;
-  let resolveFinishedPromise;
-  let currentFinishedPromise;
-  const updateFinishedPromise = () => {
-    currentFinishedPromise = new Promise((resolve) => {
-      resolveFinishedPromise = resolve;
-    },);
-  };
-  updateFinishedPromise();
-  let animationDriver;
-  const generatorFactory = types[type] || keyframes;
-  let mapNumbersToKeyframes;
-  if (generatorFactory !== keyframes && typeof keyframes$1[0] !== 'number') {
-    if (false) {
-      invariant(
-        keyframes$1.length === 2,
-        `Only two keyframes currently supported with spring and inertia animations. Trying to animate ${keyframes$1}`,
-      );
-    }
-    mapNumbersToKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1],),);
-    keyframes$1 = [0, 100,];
-  }
-  const generator = generatorFactory({
-    ...options,
-    keyframes: keyframes$1,
-  },);
-  let mirroredGenerator;
-  if (repeatType === 'mirror') {
-    mirroredGenerator = generatorFactory({
-      ...options,
-      keyframes: [...keyframes$1,].reverse(),
-      velocity: -(options.velocity || 0),
-    },);
-  }
-  let playState = 'idle';
-  let holdTime = null;
-  let startTime = null;
-  let cancelTime = null;
-  if (generator.calculatedDuration === null && repeat) {
-    generator.calculatedDuration = calcGeneratorDuration(generator,);
-  }
-  const {
-    calculatedDuration,
-  } = generator;
-  let resolvedDuration = Infinity;
-  let totalDuration = Infinity;
-  if (calculatedDuration !== null) {
-    resolvedDuration = calculatedDuration + repeatDelay;
-    totalDuration = resolvedDuration * (repeat + 1) - repeatDelay;
-  }
-  let currentTime = 0;
-  const tick = (timestamp) => {
-    if (startTime === null) return;
-    if (speed > 0) startTime = Math.min(startTime, timestamp,);
-    if (speed < 0) startTime = Math.min(timestamp - totalDuration / speed, startTime,);
-    if (holdTime !== null) {
-      currentTime = holdTime;
+var MainThreadAnimation = class extends BaseAnimation {
+  constructor({
+    KeyframeResolver: KeyframeResolver$1 = KeyframeResolver,
+    ...options
+  },) {
+    super(options,);
+    this.holdTime = null;
+    this.startTime = null;
+    this.cancelTime = null;
+    this.currentTime = 0;
+    this.playbackSpeed = 1;
+    this.pendingPlayState = 'running';
+    this.state = 'idle';
+    this.stop = () => {
+      this.resolver.cancel();
+      this.isStopped = true;
+      if (this.state === 'idle') return;
+      this.teardown();
+      const {
+        onStop,
+      } = this.options;
+      onStop && onStop();
+    };
+    const {
+      name,
+      motionValue: motionValue2,
+      keyframes: keyframes2,
+    } = this.options;
+    const onResolved = (resolvedKeyframes, finalKeyframe,) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe,);
+    if (name && motionValue2 && motionValue2.owner) {
+      this.resolver = motionValue2.owner.resolveKeyframes(keyframes2, onResolved, name, motionValue2,);
     } else {
-      currentTime = Math.round(timestamp - startTime,) * speed;
+      this.resolver = new KeyframeResolver$1(keyframes2, onResolved, name, motionValue2,);
     }
-    const timeWithoutDelay = currentTime - delay2 * (speed >= 0 ? 1 : -1);
-    const isInDelayPhase = speed >= 0 ? timeWithoutDelay < 0 : timeWithoutDelay > totalDuration;
-    currentTime = Math.max(timeWithoutDelay, 0,);
-    if (playState === 'finished' && holdTime === null) {
-      currentTime = totalDuration;
+    this.resolver.scheduleResolve();
+  }
+  initPlayback(keyframes$1,) {
+    const {
+      type = 'keyframes',
+      repeat = 0,
+      repeatDelay = 0,
+      repeatType,
+      velocity = 0,
+    } = this.options;
+    const generatorFactory = generators[type] || keyframes;
+    let mapPercentToKeyframes;
+    let mirroredGenerator;
+    if (generatorFactory !== keyframes && typeof keyframes$1[0] !== 'number') {
+      if (false) {
+        invariant(
+          keyframes$1.length === 2,
+          `Only two keyframes currently supported with spring and inertia animations. Trying to animate ${keyframes$1}`,
+        );
+      }
+      mapPercentToKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1],),);
+      keyframes$1 = [0, 100,];
     }
-    let elapsed = currentTime;
+    const generator = generatorFactory({
+      ...this.options,
+      keyframes: keyframes$1,
+    },);
+    if (repeatType === 'mirror') {
+      mirroredGenerator = generatorFactory({
+        ...this.options,
+        keyframes: [...keyframes$1,].reverse(),
+        velocity: -velocity,
+      },);
+    }
+    if (generator.calculatedDuration === null) {
+      generator.calculatedDuration = calcGeneratorDuration(generator,);
+    }
+    const {
+      calculatedDuration,
+    } = generator;
+    const resolvedDuration = calculatedDuration + repeatDelay;
+    const totalDuration = resolvedDuration * (repeat + 1) - repeatDelay;
+    return {
+      generator,
+      mirroredGenerator,
+      mapPercentToKeyframes,
+      calculatedDuration,
+      resolvedDuration,
+      totalDuration,
+    };
+  }
+  onPostResolved() {
+    const {
+      autoplay = true,
+    } = this.options;
+    this.play();
+    if (this.pendingPlayState === 'paused' || !autoplay) {
+      this.pause();
+    } else {
+      this.state = this.pendingPlayState;
+    }
+  }
+  tick(timestamp, sample = false,) {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) {
+      const {
+        keyframes: keyframes3,
+      } = this.options;
+      return {
+        done: true,
+        value: keyframes3[keyframes3.length - 1],
+      };
+    }
+    const {
+      finalKeyframe,
+      generator,
+      mirroredGenerator,
+      mapPercentToKeyframes,
+      keyframes: keyframes2,
+      calculatedDuration,
+      totalDuration,
+      resolvedDuration,
+    } = resolved;
+    if (this.startTime === null) return generator.next(0,);
+    const {
+      delay: delay2,
+      repeat,
+      repeatType,
+      repeatDelay,
+      onUpdate,
+    } = this.options;
+    if (this.speed > 0) {
+      this.startTime = Math.min(this.startTime, timestamp,);
+    } else if (this.speed < 0) {
+      this.startTime = Math.min(timestamp - totalDuration / this.speed, this.startTime,);
+    }
+    if (sample) {
+      this.currentTime = timestamp;
+    } else if (this.holdTime !== null) {
+      this.currentTime = this.holdTime;
+    } else {
+      this.currentTime = Math.round(timestamp - this.startTime,) * this.speed;
+    }
+    const timeWithoutDelay = this.currentTime - delay2 * (this.speed >= 0 ? 1 : -1);
+    const isInDelayPhase = this.speed >= 0 ? timeWithoutDelay < 0 : timeWithoutDelay > totalDuration;
+    this.currentTime = Math.max(timeWithoutDelay, 0,);
+    if (this.state === 'finished' && this.holdTime === null) {
+      this.currentTime = totalDuration;
+    }
+    let elapsed = this.currentTime;
     let frameGenerator = generator;
     if (repeat) {
-      const progress2 = Math.min(currentTime, totalDuration,) / resolvedDuration;
+      const progress2 = Math.min(this.currentTime, totalDuration,) / resolvedDuration;
       let currentIteration = Math.floor(progress2,);
       let iterationProgress = progress2 % 1;
       if (!iterationProgress && progress2 >= 1) {
@@ -1746,122 +2157,778 @@ function animateValue({
     const state = isInDelayPhase
       ? {
         done: false,
-        value: keyframes$1[0],
+        value: keyframes2[0],
       }
       : frameGenerator.next(elapsed,);
-    if (mapNumbersToKeyframes) {
-      state.value = mapNumbersToKeyframes(state.value,);
+    if (mapPercentToKeyframes) {
+      state.value = mapPercentToKeyframes(state.value,);
     }
     let {
       done,
     } = state;
     if (!isInDelayPhase && calculatedDuration !== null) {
-      done = speed >= 0 ? currentTime >= totalDuration : currentTime <= 0;
+      done = this.speed >= 0 ? this.currentTime >= totalDuration : this.currentTime <= 0;
     }
-    const isAnimationFinished = holdTime === null && (playState === 'finished' || playState === 'running' && done);
+    const isAnimationFinished = this.holdTime === null && (this.state === 'finished' || this.state === 'running' && done);
+    if (isAnimationFinished && finalKeyframe !== void 0) {
+      state.value = getFinalKeyframe(keyframes2, this.options, finalKeyframe,);
+    }
     if (onUpdate) {
       onUpdate(state.value,);
     }
     if (isAnimationFinished) {
-      finish();
+      this.finish();
     }
     return state;
-  };
-  const stopAnimationDriver = () => {
-    animationDriver && animationDriver.stop();
-    animationDriver = void 0;
-  };
-  const cancel = () => {
-    playState = 'idle';
-    stopAnimationDriver();
-    resolveFinishedPromise();
-    updateFinishedPromise();
-    startTime = cancelTime = null;
-  };
-  const finish = () => {
-    playState = 'finished';
-    onComplete && onComplete();
-    stopAnimationDriver();
-    resolveFinishedPromise();
-  };
-  const play = () => {
-    if (hasStopped) return;
-    if (!animationDriver) animationDriver = driver(tick,);
-    const now2 = animationDriver.now();
-    onPlay && onPlay();
-    if (holdTime !== null) {
-      startTime = now2 - holdTime;
-    } else if (!startTime || playState === 'finished') {
-      startTime = now2;
-    }
-    if (playState === 'finished') {
-      updateFinishedPromise();
-    }
-    cancelTime = startTime;
-    holdTime = null;
-    playState = 'running';
-    animationDriver.start();
-  };
-  if (autoplay) {
-    play();
   }
-  const controls = {
-    then(resolve, reject,) {
-      return currentFinishedPromise.then(resolve, reject,);
-    },
-    get time() {
-      return millisecondsToSeconds(currentTime,);
-    },
-    set time(newTime,) {
-      newTime = secondsToMilliseconds(newTime,);
-      currentTime = newTime;
-      if (holdTime !== null || !animationDriver || speed === 0) {
-        holdTime = newTime;
-      } else {
-        startTime = animationDriver.now() - newTime / speed;
-      }
-    },
-    get duration() {
-      const duration = generator.calculatedDuration === null ? calcGeneratorDuration(generator,) : generator.calculatedDuration;
-      return millisecondsToSeconds(duration,);
-    },
-    get speed() {
-      return speed;
-    },
-    set speed(newSpeed,) {
-      if (newSpeed === speed || !animationDriver) return;
-      speed = newSpeed;
-      controls.time = millisecondsToSeconds(currentTime,);
-    },
-    get state() {
-      return playState;
-    },
-    play,
-    pause: () => {
-      playState = 'paused';
-      holdTime = currentTime;
-    },
-    stop: () => {
-      hasStopped = true;
-      if (playState === 'idle') return;
-      playState = 'idle';
-      onStop && onStop();
-      cancel();
-    },
-    cancel: () => {
-      if (cancelTime !== null) tick(cancelTime,);
-      cancel();
-    },
-    complete: () => {
-      playState = 'finished';
-    },
-    sample: (elapsed) => {
-      startTime = 0;
-      return tick(elapsed,);
-    },
-  };
-  return controls;
+  get duration() {
+    const {
+      resolved,
+    } = this;
+    return resolved ? millisecondsToSeconds(resolved.calculatedDuration,) : 0;
+  }
+  get time() {
+    return millisecondsToSeconds(this.currentTime,);
+  }
+  set time(newTime,) {
+    newTime = secondsToMilliseconds(newTime,);
+    this.currentTime = newTime;
+    if (this.holdTime !== null || this.speed === 0) {
+      this.holdTime = newTime;
+    } else if (this.driver) {
+      this.startTime = this.driver.now() - newTime / this.speed;
+    }
+  }
+  get speed() {
+    return this.playbackSpeed;
+  }
+  set speed(newSpeed,) {
+    const hasChanged = this.playbackSpeed !== newSpeed;
+    this.playbackSpeed = newSpeed;
+    if (hasChanged) {
+      this.time = millisecondsToSeconds(this.currentTime,);
+    }
+  }
+  play() {
+    if (!this.resolver.isScheduled) {
+      this.resolver.resume();
+    }
+    if (!this._resolved) {
+      this.pendingPlayState = 'running';
+      return;
+    }
+    if (this.isStopped) return;
+    const {
+      driver = frameloopDriver,
+      onPlay,
+    } = this.options;
+    if (!this.driver) {
+      this.driver = driver((timestamp) => this.tick(timestamp,));
+    }
+    onPlay && onPlay();
+    const now2 = this.driver.now();
+    if (this.holdTime !== null) {
+      this.startTime = now2 - this.holdTime;
+    } else if (!this.startTime || this.state === 'finished') {
+      this.startTime = now2;
+    }
+    if (this.state === 'finished') {
+      this.updateFinishedPromise();
+    }
+    this.cancelTime = this.startTime;
+    this.holdTime = null;
+    this.state = 'running';
+    this.driver.start();
+  }
+  pause() {
+    var _a;
+    if (!this._resolved) {
+      this.pendingPlayState = 'paused';
+      return;
+    }
+    this.state = 'paused';
+    this.holdTime = (_a = this.currentTime) !== null && _a !== void 0 ? _a : 0;
+  }
+  complete() {
+    if (this.state !== 'running') {
+      this.play();
+    }
+    this.pendingPlayState = this.state = 'finished';
+    this.holdTime = null;
+  }
+  finish() {
+    this.teardown();
+    this.state = 'finished';
+    const {
+      onComplete,
+    } = this.options;
+    onComplete && onComplete();
+  }
+  cancel() {
+    if (this.cancelTime !== null) {
+      this.tick(this.cancelTime,);
+    }
+    this.teardown();
+    this.updateFinishedPromise();
+  }
+  teardown() {
+    this.state = 'idle';
+    this.stopDriver();
+    this.resolveFinishedPromise();
+    this.updateFinishedPromise();
+    this.startTime = this.cancelTime = null;
+    this.resolver.cancel();
+  }
+  stopDriver() {
+    if (!this.driver) return;
+    this.driver.stop();
+    this.driver = void 0;
+  }
+  sample(time2,) {
+    this.startTime = 0;
+    return this.tick(time2, true,);
+  }
+};
+function animateValue(options,) {
+  return new MainThreadAnimation(options,);
 }
+var isZeroValueString = (v) => /^0[^.\s]+$/u.test(v,);
+function isNone(value,) {
+  if (typeof value === 'number') {
+    return value === 0;
+  } else if (value !== null) {
+    return value === 'none' || value === '0' || isZeroValueString(value,);
+  } else {
+    return true;
+  }
+}
+var isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
+var splitCSSVariableRegex =
+  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
+  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
+function parseCSSVariable(current,) {
+  const match = splitCSSVariableRegex.exec(current,);
+  if (!match) return [,];
+  const [, token1, token2, fallback,] = match;
+  return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback,];
+}
+var maxDepth = 4;
+function getVariableValue(current, element, depth = 1,) {
+  invariant(
+    depth <= maxDepth,
+    `Max CSS variable fallback depth detected in property "${current}". This may indicate a circular fallback dependency.`,
+  );
+  const [token, fallback,] = parseCSSVariable(current,);
+  if (!token) return;
+  const resolved = window.getComputedStyle(element,).getPropertyValue(token,);
+  if (resolved) {
+    const trimmed = resolved.trim();
+    return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
+  }
+  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
+}
+var testValueType = (v) => (type) => type.test(v,);
+var auto = {
+  test: (v) => v === 'auto',
+  parse: (v) => v,
+};
+var dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto,];
+var findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v,),);
+var maxDefaults = /* @__PURE__ */ new Set(['brightness', 'contrast', 'saturate', 'opacity',],);
+function applyDefaultFilter(v,) {
+  const [name, value,] = v.slice(0, -1,).split('(',);
+  if (name === 'drop-shadow') return v;
+  const [number2,] = value.match(floatRegex,) || [];
+  if (!number2) return v;
+  const unit = value.replace(number2, '',);
+  let defaultValue = maxDefaults.has(name,) ? 1 : 0;
+  if (number2 !== value) defaultValue *= 100;
+  return name + '(' + defaultValue + unit + ')';
+}
+var functionRegex = /\b([a-z-]*)\(.*?\)/gu;
+var filter = {
+  ...complex,
+  getAnimatableNone: (v) => {
+    const functions = v.match(functionRegex,);
+    return functions ? functions.map(applyDefaultFilter,).join(' ',) : v;
+  },
+};
+var int = {
+  ...number,
+  transform: Math.round,
+};
+var numberValueTypes = {
+  // Border props
+  borderWidth: px,
+  borderTopWidth: px,
+  borderRightWidth: px,
+  borderBottomWidth: px,
+  borderLeftWidth: px,
+  borderRadius: px,
+  radius: px,
+  borderTopLeftRadius: px,
+  borderTopRightRadius: px,
+  borderBottomRightRadius: px,
+  borderBottomLeftRadius: px,
+  // Positioning props
+  width: px,
+  maxWidth: px,
+  height: px,
+  maxHeight: px,
+  size: px,
+  top: px,
+  right: px,
+  bottom: px,
+  left: px,
+  // Spacing props
+  padding: px,
+  paddingTop: px,
+  paddingRight: px,
+  paddingBottom: px,
+  paddingLeft: px,
+  margin: px,
+  marginTop: px,
+  marginRight: px,
+  marginBottom: px,
+  marginLeft: px,
+  // Transform props
+  rotate: degrees,
+  rotateX: degrees,
+  rotateY: degrees,
+  rotateZ: degrees,
+  scale,
+  scaleX: scale,
+  scaleY: scale,
+  scaleZ: scale,
+  skew: degrees,
+  skewX: degrees,
+  skewY: degrees,
+  distance: px,
+  translateX: px,
+  translateY: px,
+  translateZ: px,
+  x: px,
+  y: px,
+  z: px,
+  perspective: px,
+  transformPerspective: px,
+  opacity: alpha,
+  originX: progressPercentage,
+  originY: progressPercentage,
+  originZ: px,
+  // Misc
+  zIndex: int,
+  backgroundPositionX: px,
+  backgroundPositionY: px,
+  // SVG
+  fillOpacity: alpha,
+  strokeOpacity: alpha,
+  numOctaves: int,
+};
+var defaultValueTypes = {
+  ...numberValueTypes,
+  // Color props
+  color,
+  backgroundColor: color,
+  outlineColor: color,
+  fill: color,
+  stroke: color,
+  // Border props
+  borderColor: color,
+  borderTopColor: color,
+  borderRightColor: color,
+  borderBottomColor: color,
+  borderLeftColor: color,
+  filter,
+  WebkitFilter: filter,
+};
+var getDefaultValueType = (key7) => defaultValueTypes[key7];
+function getAnimatableNone2(key7, value,) {
+  let defaultValueType = getDefaultValueType(key7,);
+  if (defaultValueType !== filter) defaultValueType = complex;
+  return defaultValueType.getAnimatableNone ? defaultValueType.getAnimatableNone(value,) : void 0;
+}
+var invalidTemplates = /* @__PURE__ */ new Set(['auto', 'none', '0',],);
+function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name,) {
+  let i = 0;
+  let animatableTemplate = void 0;
+  while (i < unresolvedKeyframes.length && !animatableTemplate) {
+    const keyframe = unresolvedKeyframes[i];
+    if (typeof keyframe === 'string' && !invalidTemplates.has(keyframe,)) {
+      animatableTemplate = unresolvedKeyframes[i];
+    }
+    i++;
+  }
+  if (animatableTemplate && name) {
+    for (const noneIndex of noneKeyframeIndexes) {
+      unresolvedKeyframes[noneIndex] = getAnimatableNone2(name, animatableTemplate,);
+    }
+  }
+}
+var DOMKeyframesResolver = class extends KeyframeResolver {
+  constructor(unresolvedKeyframes, onComplete, name, motionValue2,) {
+    super(
+      unresolvedKeyframes,
+      onComplete,
+      name,
+      motionValue2,
+      motionValue2 === null || motionValue2 === void 0 ? void 0 : motionValue2.owner,
+      true,
+    );
+  }
+  readKeyframes() {
+    const {
+      unresolvedKeyframes,
+      element,
+      name,
+    } = this;
+    if (!element.current) return;
+    super.readKeyframes();
+    for (let i = 0; i < unresolvedKeyframes.length; i++) {
+      const keyframe = unresolvedKeyframes[i];
+      if (typeof keyframe === 'string' && isCSSVariableToken(keyframe,)) {
+        const resolved = getVariableValue(keyframe, element.current,);
+        if (resolved !== void 0) {
+          unresolvedKeyframes[i] = resolved;
+        }
+        if (i === unresolvedKeyframes.length - 1) {
+          this.finalKeyframe = keyframe;
+        }
+      }
+    }
+    this.resolveNoneKeyframes();
+    if (!positionalKeys.has(name,) || unresolvedKeyframes.length !== 2) {
+      return;
+    }
+    const [origin, target,] = unresolvedKeyframes;
+    const originType = findDimensionValueType(origin,);
+    const targetType = findDimensionValueType(target,);
+    if (originType === targetType) return;
+    if (isNumOrPxType(originType,) && isNumOrPxType(targetType,)) {
+      for (let i = 0; i < unresolvedKeyframes.length; i++) {
+        const value = unresolvedKeyframes[i];
+        if (typeof value === 'string') {
+          unresolvedKeyframes[i] = parseFloat(value,);
+        }
+      }
+    } else {
+      this.needsMeasurement = true;
+    }
+  }
+  resolveNoneKeyframes() {
+    const {
+      unresolvedKeyframes,
+      name,
+    } = this;
+    const noneKeyframeIndexes = [];
+    for (let i = 0; i < unresolvedKeyframes.length; i++) {
+      if (isNone(unresolvedKeyframes[i],)) {
+        noneKeyframeIndexes.push(i,);
+      }
+    }
+    if (noneKeyframeIndexes.length) {
+      makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name,);
+    }
+  }
+  measureInitialState() {
+    const {
+      element,
+      unresolvedKeyframes,
+      name,
+    } = this;
+    if (!element.current) return;
+    if (name === 'height') {
+      this.suspendedScrollY = window.pageYOffset;
+    }
+    this.measuredOrigin = positionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current,),);
+    unresolvedKeyframes[0] = this.measuredOrigin;
+    const measureKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
+    if (measureKeyframe !== void 0) {
+      element.getValue(name, measureKeyframe,).jump(measureKeyframe, false,);
+    }
+  }
+  measureEndState() {
+    var _a;
+    const {
+      element,
+      name,
+      unresolvedKeyframes,
+    } = this;
+    if (!element.current) return;
+    const value = element.getValue(name,);
+    value && value.jump(this.measuredOrigin, false,);
+    const finalKeyframeIndex = unresolvedKeyframes.length - 1;
+    const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex];
+    unresolvedKeyframes[finalKeyframeIndex] = positionalValues[name](
+      element.measureViewportBox(),
+      window.getComputedStyle(element.current,),
+    );
+    if (finalKeyframe !== null && this.finalKeyframe === void 0) {
+      this.finalKeyframe = finalKeyframe;
+    }
+    if ((_a = this.removedTransforms) === null || _a === void 0 ? void 0 : _a.length) {
+      this.removedTransforms.forEach(([unsetTransformName, unsetTransformValue,],) => {
+        element.getValue(unsetTransformName,).set(unsetTransformValue,);
+      },);
+    }
+    this.resolveNoneKeyframes();
+  }
+};
+function memo(callback,) {
+  let result;
+  return () => {
+    if (result === void 0) result = callback();
+    return result;
+  };
+}
+var isBezierDefinition = (easing) => Array.isArray(easing,) && typeof easing[0] === 'number';
+function isWaapiSupportedEasing(easing,) {
+  return Boolean(
+    !easing || typeof easing === 'string' && easing in supportedWaapiEasing || isBezierDefinition(easing,) ||
+      Array.isArray(easing,) && easing.every(isWaapiSupportedEasing,),
+  );
+}
+var cubicBezierAsString = ([a, b, c, d,],) => `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
+var supportedWaapiEasing = {
+  linear: 'linear',
+  ease: 'ease',
+  easeIn: 'ease-in',
+  easeOut: 'ease-out',
+  easeInOut: 'ease-in-out',
+  circIn: cubicBezierAsString([0, 0.65, 0.55, 1,],),
+  circOut: cubicBezierAsString([0.55, 0, 1, 0.45,],),
+  backIn: cubicBezierAsString([0.31, 0.01, 0.66, -0.59,],),
+  backOut: cubicBezierAsString([0.33, 1.53, 0.69, 0.99,],),
+};
+function mapEasingToNativeEasingWithDefault(easing,) {
+  return mapEasingToNativeEasing(easing,) || supportedWaapiEasing.easeOut;
+}
+function mapEasingToNativeEasing(easing,) {
+  if (!easing) {
+    return void 0;
+  } else if (isBezierDefinition(easing,)) {
+    return cubicBezierAsString(easing,);
+  } else if (Array.isArray(easing,)) {
+    return easing.map(mapEasingToNativeEasingWithDefault,);
+  } else {
+    return supportedWaapiEasing[easing];
+  }
+}
+function animateStyle(element, valueName, keyframes2, {
+  delay: delay2 = 0,
+  duration = 300,
+  repeat = 0,
+  repeatType = 'loop',
+  ease: ease2,
+  times,
+} = {},) {
+  const keyframeOptions = {
+    [valueName]: keyframes2,
+  };
+  if (times) keyframeOptions.offset = times;
+  const easing = mapEasingToNativeEasing(ease2,);
+  if (Array.isArray(easing,)) keyframeOptions.easing = easing;
+  return element.animate(keyframeOptions, {
+    delay: delay2,
+    duration,
+    easing: !Array.isArray(easing,) ? easing : 'linear',
+    fill: 'both',
+    iterations: repeat + 1,
+    direction: repeatType === 'reverse' ? 'alternate' : 'normal',
+  },);
+}
+var supportsWaapi = memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
+var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
+  // or until we implement support for linear() easing.
+  // "background-color"
+],);
+var sampleDelta = 10;
+var maxDuration2 = 2e4;
+function requiresPregeneratedKeyframes(options,) {
+  return options.type === 'spring' || options.name === 'backgroundColor' || !isWaapiSupportedEasing(options.ease,);
+}
+function pregenerateKeyframes(keyframes2, options,) {
+  const sampleAnimation = new MainThreadAnimation({
+    ...options,
+    keyframes: keyframes2,
+    repeat: 0,
+    delay: 0,
+    isGenerator: true,
+  },);
+  let state = {
+    done: false,
+    value: keyframes2[0],
+  };
+  const pregeneratedKeyframes = [];
+  let t = 0;
+  while (!state.done && t < maxDuration2) {
+    state = sampleAnimation.sample(t,);
+    pregeneratedKeyframes.push(state.value,);
+    t += sampleDelta;
+  }
+  return {
+    times: void 0,
+    keyframes: pregeneratedKeyframes,
+    duration: t - sampleDelta,
+    ease: 'linear',
+  };
+}
+var AcceleratedAnimation = class extends BaseAnimation {
+  constructor(options,) {
+    super(options,);
+    const {
+      name,
+      motionValue: motionValue2,
+      keyframes: keyframes2,
+    } = this.options;
+    this.resolver = new DOMKeyframesResolver(
+      keyframes2,
+      (resolvedKeyframes, finalKeyframe,) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe,),
+      name,
+      motionValue2,
+    );
+    this.resolver.scheduleResolve();
+  }
+  initPlayback(keyframes2, finalKeyframe,) {
+    var _a;
+    let {
+      duration = 300,
+      times,
+      ease: ease2,
+      type,
+      motionValue: motionValue2,
+      name,
+    } = this.options;
+    if (!((_a = motionValue2.owner) === null || _a === void 0 ? void 0 : _a.current)) {
+      return false;
+    }
+    if (requiresPregeneratedKeyframes(this.options,)) {
+      const {
+        onComplete,
+        onUpdate,
+        motionValue: motionValue3,
+        ...options
+      } = this.options;
+      const pregeneratedAnimation = pregenerateKeyframes(keyframes2, options,);
+      keyframes2 = pregeneratedAnimation.keyframes;
+      if (keyframes2.length === 1) {
+        keyframes2[1] = keyframes2[0];
+      }
+      duration = pregeneratedAnimation.duration;
+      times = pregeneratedAnimation.times;
+      ease2 = pregeneratedAnimation.ease;
+      type = 'keyframes';
+    }
+    const animation = animateStyle(motionValue2.owner.current, name, keyframes2, {
+      ...this.options,
+      duration,
+      times,
+      ease: ease2,
+    },);
+    animation.startTime = time.now();
+    if (this.pendingTimeline) {
+      animation.timeline = this.pendingTimeline;
+      this.pendingTimeline = void 0;
+    } else {
+      animation.onfinish = () => {
+        const {
+          onComplete,
+        } = this.options;
+        motionValue2.set(getFinalKeyframe(keyframes2, this.options, finalKeyframe,),);
+        onComplete && onComplete();
+        this.cancel();
+        this.resolveFinishedPromise();
+      };
+    }
+    return {
+      animation,
+      duration,
+      times,
+      type,
+      ease: ease2,
+      keyframes: keyframes2,
+    };
+  }
+  get duration() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return 0;
+    const {
+      duration,
+    } = resolved;
+    return millisecondsToSeconds(duration,);
+  }
+  get time() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return 0;
+    const {
+      animation,
+    } = resolved;
+    return millisecondsToSeconds(animation.currentTime || 0,);
+  }
+  set time(newTime,) {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    const {
+      animation,
+    } = resolved;
+    animation.currentTime = secondsToMilliseconds(newTime,);
+  }
+  get speed() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return 1;
+    const {
+      animation,
+    } = resolved;
+    return animation.playbackRate;
+  }
+  set speed(newSpeed,) {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    const {
+      animation,
+    } = resolved;
+    animation.playbackRate = newSpeed;
+  }
+  get state() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return 'idle';
+    const {
+      animation,
+    } = resolved;
+    return animation.playState;
+  }
+  /**
+   * Replace the default DocumentTimeline with another AnimationTimeline.
+   * Currently used for scroll animations.
+   */
+  attachTimeline(timeline,) {
+    if (!this._resolved) {
+      this.pendingTimeline = timeline;
+    } else {
+      const {
+        resolved,
+      } = this;
+      if (!resolved) return noop;
+      const {
+        animation,
+      } = resolved;
+      animation.timeline = timeline;
+      animation.onfinish = null;
+    }
+    return noop;
+  }
+  play() {
+    if (this.isStopped) return;
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    const {
+      animation,
+    } = resolved;
+    if (animation.playState === 'finished') {
+      this.updateFinishedPromise();
+    }
+    animation.play();
+  }
+  pause() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    const {
+      animation,
+    } = resolved;
+    animation.pause();
+  }
+  stop() {
+    this.resolver.cancel();
+    this.isStopped = true;
+    if (this.state === 'idle') return;
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    const {
+      animation,
+      keyframes: keyframes2,
+      duration,
+      type,
+      ease: ease2,
+      times,
+    } = resolved;
+    if (animation.playState === 'idle' || animation.playState === 'finished') {
+      return;
+    }
+    if (this.time) {
+      const {
+        motionValue: motionValue2,
+        onUpdate,
+        onComplete,
+        ...options
+      } = this.options;
+      const sampleAnimation = new MainThreadAnimation({
+        ...options,
+        keyframes: keyframes2,
+        duration,
+        type,
+        ease: ease2,
+        times,
+        isGenerator: true,
+      },);
+      const sampleTime = secondsToMilliseconds(this.time,);
+      motionValue2.setWithVelocity(
+        sampleAnimation.sample(sampleTime - sampleDelta,).value,
+        sampleAnimation.sample(sampleTime,).value,
+        sampleDelta,
+      );
+    }
+    this.cancel();
+  }
+  complete() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    resolved.animation.finish();
+  }
+  cancel() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return;
+    resolved.animation.cancel();
+  }
+  static supports(options,) {
+    const {
+      motionValue: motionValue2,
+      name,
+      repeatDelay,
+      repeatType,
+      damping,
+      type,
+    } = options;
+    return supportsWaapi() && name && acceleratedValues.has(name,) && motionValue2 && motionValue2.owner &&
+      motionValue2.owner.current instanceof HTMLElement &&
+      /**
+       * If we're outputting values to onUpdate then we can't use WAAPI as there's
+       * no way to read the value from WAAPI every frame.
+       */
+      !motionValue2.owner.getProps().onUpdate && !repeatDelay && repeatType !== 'mirror' && damping !== 0 && type !== 'inertia';
+  }
+};
 function addUniqueItem(arr, item,) {
   if (arr.indexOf(item,) === -1) arr.push(item,);
 }
@@ -1922,7 +2989,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.0.11-sync.5';
+    this.version = '11.1.9';
     this.canTrackVelocity = false;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -2061,11 +3128,11 @@ var MotionValue = class {
    * Set the state of the `MotionValue`, stopping any active animations,
    * effects, and resets velocity to `0`.
    */
-  jump(v,) {
+  jump(v, endAnimation = true,) {
     this.updateAndNotify(v,);
     this.prev = v;
     this.prevUpdatedAt = this.prevFrameValue = void 0;
-    this.stop();
+    endAnimation && this.stop();
     if (this.stopPassiveEffect) this.stopPassiveEffect();
   }
   /**
@@ -2174,129 +3241,6 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
-var isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
-var isZeroValueString = (v) => /^0[^.\s]+$/u.test(v,);
-var maxDefaults = /* @__PURE__ */ new Set(['brightness', 'contrast', 'saturate', 'opacity',],);
-function applyDefaultFilter(v,) {
-  const [name, value,] = v.slice(0, -1,).split('(',);
-  if (name === 'drop-shadow') return v;
-  const [number2,] = value.match(floatRegex,) || [];
-  if (!number2) return v;
-  const unit = value.replace(number2, '',);
-  let defaultValue = maxDefaults.has(name,) ? 1 : 0;
-  if (number2 !== value) defaultValue *= 100;
-  return name + '(' + defaultValue + unit + ')';
-}
-var functionRegex = /\b([a-z-]*)\(.*?\)/gu;
-var filter = {
-  ...complex,
-  getAnimatableNone: (v) => {
-    const functions = v.match(functionRegex,);
-    return functions ? functions.map(applyDefaultFilter,).join(' ',) : v;
-  },
-};
-var int = {
-  ...number,
-  transform: Math.round,
-};
-var numberValueTypes = {
-  // Border props
-  borderWidth: px,
-  borderTopWidth: px,
-  borderRightWidth: px,
-  borderBottomWidth: px,
-  borderLeftWidth: px,
-  borderRadius: px,
-  radius: px,
-  borderTopLeftRadius: px,
-  borderTopRightRadius: px,
-  borderBottomRightRadius: px,
-  borderBottomLeftRadius: px,
-  // Positioning props
-  width: px,
-  maxWidth: px,
-  height: px,
-  maxHeight: px,
-  size: px,
-  top: px,
-  right: px,
-  bottom: px,
-  left: px,
-  // Spacing props
-  padding: px,
-  paddingTop: px,
-  paddingRight: px,
-  paddingBottom: px,
-  paddingLeft: px,
-  margin: px,
-  marginTop: px,
-  marginRight: px,
-  marginBottom: px,
-  marginLeft: px,
-  // Transform props
-  rotate: degrees,
-  rotateX: degrees,
-  rotateY: degrees,
-  rotateZ: degrees,
-  scale,
-  scaleX: scale,
-  scaleY: scale,
-  scaleZ: scale,
-  skew: degrees,
-  skewX: degrees,
-  skewY: degrees,
-  distance: px,
-  translateX: px,
-  translateY: px,
-  translateZ: px,
-  x: px,
-  y: px,
-  z: px,
-  perspective: px,
-  transformPerspective: px,
-  opacity: alpha,
-  originX: progressPercentage,
-  originY: progressPercentage,
-  originZ: px,
-  // Misc
-  zIndex: int,
-  // SVG
-  fillOpacity: alpha,
-  strokeOpacity: alpha,
-  numOctaves: int,
-};
-var defaultValueTypes = {
-  ...numberValueTypes,
-  // Color props
-  color,
-  backgroundColor: color,
-  outlineColor: color,
-  fill: color,
-  stroke: color,
-  // Border props
-  borderColor: color,
-  borderTopColor: color,
-  borderRightColor: color,
-  borderBottomColor: color,
-  borderLeftColor: color,
-  filter,
-  WebkitFilter: filter,
-};
-var getDefaultValueType = (key7) => defaultValueTypes[key7];
-function getAnimatableNone2(key7, value,) {
-  let defaultValueType = getDefaultValueType(key7,);
-  if (defaultValueType !== filter) defaultValueType = complex;
-  return defaultValueType.getAnimatableNone ? defaultValueType.getAnimatableNone(value,) : void 0;
-}
-var testValueType = (v) => (type) => type.test(v,);
-var auto = {
-  test: (v) => v === 'auto',
-  parse: (v) => v,
-};
-var dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto,];
-var findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v,),);
-var valueTypes = [...dimensionValueTypes, color, complex,];
-var findValueType = (v) => valueTypes.find(testValueType(v,),);
 function getCurrent(visualElement,) {
   const current = {};
   visualElement.values.forEach((value, key7,) => current[key7] = value.get());
@@ -2316,344 +3260,6 @@ function resolveVariant(visualElement, definition, custom,) {
     getCurrent(visualElement,),
     getVelocity(visualElement,),
   );
-}
-function setMotionValue(visualElement, key7, value,) {
-  if (visualElement.hasValue(key7,)) {
-    visualElement.getValue(key7,).set(value,);
-  } else {
-    visualElement.addValue(key7, motionValue(value,),);
-  }
-}
-function setTarget(visualElement, definition,) {
-  const resolved = resolveVariant(visualElement, definition,);
-  let {
-    transitionEnd = {},
-    transition = {},
-    ...target
-  } = resolved ? visualElement.makeTargetAnimatable(resolved, false,) : {};
-  target = {
-    ...target,
-    ...transitionEnd,
-  };
-  for (const key7 in target) {
-    const value = resolveFinalValueInKeyframes(target[key7],);
-    setMotionValue(visualElement, key7, value,);
-  }
-}
-function setVariants(visualElement, variantLabels,) {
-  const reversedLabels = [...variantLabels,].reverse();
-  reversedLabels.forEach((key7) => {
-    const variant = visualElement.getVariant(key7,);
-    variant && setTarget(visualElement, variant,);
-    if (visualElement.variantChildren) {
-      visualElement.variantChildren.forEach((child) => {
-        setVariants(child, variantLabels,);
-      },);
-    }
-  },);
-}
-function setValues(visualElement, definition,) {
-  if (Array.isArray(definition,)) {
-    return setVariants(visualElement, definition,);
-  } else if (typeof definition === 'string') {
-    return setVariants(visualElement, [definition,],);
-  } else {
-    setTarget(visualElement, definition,);
-  }
-}
-function checkTargetForNewValues(visualElement, target, origin,) {
-  var _a, _b;
-  const newValueKeys = Object.keys(target,).filter((key7) => !visualElement.hasValue(key7,));
-  const numNewValues = newValueKeys.length;
-  if (!numNewValues) return;
-  for (let i = 0; i < numNewValues; i++) {
-    const key7 = newValueKeys[i];
-    const targetValue = target[key7];
-    let value = null;
-    if (Array.isArray(targetValue,)) {
-      value = targetValue[0];
-    }
-    if (value === null) {
-      value = (_b = (_a = origin[key7]) !== null && _a !== void 0 ? _a : visualElement.readValue(key7,)) !== null && _b !== void 0
-        ? _b
-        : target[key7];
-    }
-    if (value === void 0 || value === null) continue;
-    if (typeof value === 'string' && (isNumericalString(value,) || isZeroValueString(value,))) {
-      value = parseFloat(value,);
-    } else if (!findValueType(value,) && complex.test(targetValue,)) {
-      value = getAnimatableNone2(key7, targetValue,);
-    }
-    visualElement.addValue(
-      key7,
-      motionValue(value, {
-        owner: visualElement,
-      },),
-    );
-    if (origin[key7] === void 0) {
-      origin[key7] = value;
-    }
-    if (value !== null) visualElement.setBaseTarget(key7, value,);
-  }
-}
-function getOriginFromTransition(key7, transition,) {
-  if (!transition) return;
-  const valueTransition = transition[key7] || transition['default'] || transition;
-  return valueTransition.from;
-}
-function getOrigin(target, transition, visualElement,) {
-  const origin = {};
-  for (const key7 in target) {
-    const transitionOrigin = getOriginFromTransition(key7, transition,);
-    if (transitionOrigin !== void 0) {
-      origin[key7] = transitionOrigin;
-    } else {
-      const value = visualElement.getValue(key7,);
-      if (value) {
-        origin[key7] = value.get();
-      }
-    }
-  }
-  return origin;
-}
-var instantAnimationState = {
-  current: false,
-};
-var isBezierDefinition = (easing) => Array.isArray(easing,) && typeof easing[0] === 'number';
-function isWaapiSupportedEasing(easing,) {
-  return Boolean(
-    !easing || typeof easing === 'string' && supportedWaapiEasing[easing] || isBezierDefinition(easing,) ||
-      Array.isArray(easing,) && easing.every(isWaapiSupportedEasing,),
-  );
-}
-var cubicBezierAsString = ([a, b, c, d,],) => `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
-var supportedWaapiEasing = {
-  linear: 'linear',
-  ease: 'ease',
-  easeIn: 'ease-in',
-  easeOut: 'ease-out',
-  easeInOut: 'ease-in-out',
-  circIn: cubicBezierAsString([0, 0.65, 0.55, 1,],),
-  circOut: cubicBezierAsString([0.55, 0, 1, 0.45,],),
-  backIn: cubicBezierAsString([0.31, 0.01, 0.66, -0.59,],),
-  backOut: cubicBezierAsString([0.33, 1.53, 0.69, 0.99,],),
-};
-function mapEasingToNativeEasing(easing,) {
-  if (!easing) return void 0;
-  return isBezierDefinition(easing,)
-    ? cubicBezierAsString(easing,)
-    : Array.isArray(easing,)
-    ? easing.map(mapEasingToNativeEasing,)
-    : supportedWaapiEasing[easing];
-}
-function animateStyle(element, valueName, keyframes2, {
-  delay: delay2 = 0,
-  duration,
-  repeat = 0,
-  repeatType = 'loop',
-  ease: ease2,
-  times,
-} = {},) {
-  const keyframeOptions = {
-    [valueName]: keyframes2,
-  };
-  if (times) keyframeOptions.offset = times;
-  const easing = mapEasingToNativeEasing(ease2,);
-  if (Array.isArray(easing,)) keyframeOptions.easing = easing;
-  return element.animate(keyframeOptions, {
-    delay: delay2,
-    duration,
-    easing: !Array.isArray(easing,) ? easing : 'linear',
-    fill: 'both',
-    iterations: repeat + 1,
-    direction: repeatType === 'reverse' ? 'alternate' : 'normal',
-  },);
-}
-function getFinalKeyframe(keyframes2, {
-  repeat,
-  repeatType = 'loop',
-},) {
-  const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : keyframes2.length - 1;
-  return keyframes2[index];
-}
-function memo(callback,) {
-  let result;
-  return () => {
-    if (result === void 0) result = callback();
-    return result;
-  };
-}
-var supportsWaapi = memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
-var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',],);
-var sampleDelta = 10;
-var maxDuration2 = 2e4;
-var requiresPregeneratedKeyframes = (valueName, options,) =>
-  options.type === 'spring' || valueName === 'backgroundColor' || !isWaapiSupportedEasing(options.ease,);
-function createAcceleratedAnimation(value, valueName, {
-  onUpdate,
-  onComplete,
-  ...options
-},) {
-  const canAccelerateAnimation = supportsWaapi() && acceleratedValues.has(valueName,) && !options.repeatDelay &&
-    options.repeatType !== 'mirror' && options.damping !== 0 && options.type !== 'inertia';
-  if (!canAccelerateAnimation) return false;
-  let hasStopped = false;
-  let resolveFinishedPromise;
-  let currentFinishedPromise;
-  let pendingCancel = false;
-  const updateFinishedPromise = () => {
-    currentFinishedPromise = new Promise((resolve) => {
-      resolveFinishedPromise = resolve;
-    },);
-  };
-  updateFinishedPromise();
-  let {
-    keyframes: keyframes2,
-    duration = 300,
-    ease: ease2,
-    times,
-  } = options;
-  if (requiresPregeneratedKeyframes(valueName, options,)) {
-    const sampleAnimation = animateValue({
-      ...options,
-      repeat: 0,
-      delay: 0,
-    },);
-    let state = {
-      done: false,
-      value: keyframes2[0],
-    };
-    const pregeneratedKeyframes = [];
-    let t = 0;
-    while (!state.done && t < maxDuration2) {
-      state = sampleAnimation.sample(t,);
-      pregeneratedKeyframes.push(state.value,);
-      t += sampleDelta;
-    }
-    times = void 0;
-    keyframes2 = pregeneratedKeyframes;
-    duration = t - sampleDelta;
-    ease2 = 'linear';
-  }
-  const animation = animateStyle(value.owner.current, valueName, keyframes2, {
-    ...options,
-    duration,
-    /**
-     * This function is currently not called if ease is provided
-     * as a function so the cast is safe.
-     *
-     * However it would be possible for a future refinement to port
-     * in easing pregeneration from Motion One for browsers that
-     * support the upcoming `linear()` easing function.
-     */
-    ease: ease2,
-    times,
-  },);
-  const cancelAnimation = () => {
-    pendingCancel = false;
-    animation.cancel();
-  };
-  const safeCancel = () => {
-    pendingCancel = true;
-    frame.update(cancelAnimation,);
-    resolveFinishedPromise();
-    updateFinishedPromise();
-  };
-  animation.onfinish = () => {
-    if (pendingCancel) return;
-    value.set(getFinalKeyframe(keyframes2, options,),);
-    onComplete && onComplete();
-    safeCancel();
-  };
-  const controls = {
-    then(resolve, reject,) {
-      return currentFinishedPromise.then(resolve, reject,);
-    },
-    attachTimeline(timeline,) {
-      animation.timeline = timeline;
-      animation.onfinish = null;
-      return noop;
-    },
-    get time() {
-      return millisecondsToSeconds(animation.currentTime || 0,);
-    },
-    set time(newTime,) {
-      animation.currentTime = secondsToMilliseconds(newTime,);
-    },
-    get speed() {
-      return animation.playbackRate;
-    },
-    set speed(newSpeed,) {
-      animation.playbackRate = newSpeed;
-    },
-    get duration() {
-      return millisecondsToSeconds(duration,);
-    },
-    play: () => {
-      if (hasStopped) return;
-      animation.play();
-      cancelFrame(cancelAnimation,);
-    },
-    pause: () => animation.pause(),
-    stop: () => {
-      hasStopped = true;
-      if (animation.playState === 'idle') return;
-      const {
-        currentTime,
-      } = animation;
-      if (currentTime) {
-        const sampleAnimation = animateValue({
-          ...options,
-          autoplay: false,
-        },);
-        value.setWithVelocity(
-          sampleAnimation.sample(currentTime - sampleDelta,).value,
-          sampleAnimation.sample(currentTime,).value,
-          sampleDelta,
-        );
-      }
-      safeCancel();
-    },
-    complete: () => {
-      if (pendingCancel) return;
-      animation.finish();
-    },
-    cancel: safeCancel,
-  };
-  return controls;
-}
-function createInstantAnimation({
-  keyframes: keyframes2,
-  delay: delay2,
-  onUpdate,
-  onComplete,
-},) {
-  const setValue = () => {
-    onUpdate && onUpdate(keyframes2[keyframes2.length - 1],);
-    onComplete && onComplete();
-    return {
-      time: 0,
-      speed: 1,
-      duration: 0,
-      play: noop,
-      pause: noop,
-      stop: noop,
-      then: (resolve) => {
-        resolve();
-        return Promise.resolve();
-      },
-      cancel: noop,
-      complete: noop,
-    };
-  };
-  return delay2
-    ? animateValue({
-      keyframes: [0, 1,],
-      duration: 0,
-      delay: delay2,
-      onComplete: setValue,
-    },)
-    : setValue();
 }
 var underDampedSpring = {
   type: 'spring',
@@ -2686,58 +3292,6 @@ var getDefaultTransition = (valueKey, {
   }
   return ease;
 };
-var isAnimatable = (key7, value,) => {
-  if (key7 === 'zIndex') return false;
-  if (typeof value === 'number' || Array.isArray(value,)) return true;
-  if (
-    typeof value === 'string' && (
-      // It's animatable if we have a string
-      complex.test(value,) || value === '0'
-    ) &&
-    // And it contains numbers and/or colors
-    !value.startsWith('url(',)
-  ) {
-    return true;
-  }
-  return false;
-};
-function isNone(value,) {
-  if (typeof value === 'number') {
-    return value === 0;
-  } else if (value !== null) {
-    return value === 'none' || value === '0' || isZeroValueString(value,);
-  }
-}
-function getKeyframes(value, valueName, target, transition,) {
-  const isTargetAnimatable = isAnimatable(valueName, target,);
-  let keyframes2;
-  if (Array.isArray(target,)) {
-    keyframes2 = [...target,];
-  } else {
-    keyframes2 = [null, target,];
-  }
-  const defaultOrigin = transition.from !== void 0 ? transition.from : value.get();
-  let animatableTemplateValue = void 0;
-  const noneKeyframeIndexes = [];
-  for (let i = 0; i < keyframes2.length; i++) {
-    if (keyframes2[i] === null) {
-      keyframes2[i] = i === 0 ? defaultOrigin : keyframes2[i - 1];
-    }
-    if (isNone(keyframes2[i],)) {
-      noneKeyframeIndexes.push(i,);
-    }
-    if (typeof keyframes2[i] === 'string' && keyframes2[i] !== 'none' && keyframes2[i] !== '0') {
-      animatableTemplateValue = keyframes2[i];
-    }
-  }
-  if (isTargetAnimatable && noneKeyframeIndexes.length && animatableTemplateValue) {
-    for (let i = 0; i < noneKeyframeIndexes.length; i++) {
-      const index = noneKeyframeIndexes[i];
-      keyframes2[index] = getAnimatableNone2(valueName, animatableTemplateValue,);
-    }
-  }
-  return keyframes2;
-}
 function isTransitionDefined({
   when,
   delay: _delay,
@@ -2756,84 +3310,99 @@ function isTransitionDefined({
 function getValueTransition(transition, key7,) {
   return transition[key7] || transition['default'] || transition;
 }
-var animateMotionValue = (valueName, value, target, transition = {},) => {
-  return (onComplete) => {
-    const valueTransition = getValueTransition(transition, valueName,) || {};
-    const delay2 = valueTransition.delay || transition.delay || 0;
-    let {
-      elapsed = 0,
-    } = transition;
-    elapsed = elapsed - secondsToMilliseconds(delay2,);
-    const keyframes2 = getKeyframes(value, valueName, target, valueTransition,);
-    const originKeyframe = keyframes2[0];
-    const targetKeyframe = keyframes2[keyframes2.length - 1];
-    const isOriginAnimatable = isAnimatable(valueName, originKeyframe,);
-    const isTargetAnimatable = isAnimatable(valueName, targetKeyframe,);
-    warning(
-      isOriginAnimatable === isTargetAnimatable,
-      `You are trying to animate ${valueName} from "${originKeyframe}" to "${targetKeyframe}". ${originKeyframe} is not an animatable value - to enable this animation set ${originKeyframe} to a value animatable to ${targetKeyframe} via the \`style\` property.`,
-    );
-    let options = {
-      keyframes: keyframes2,
-      velocity: value.getVelocity(),
-      ease: 'easeOut',
-      ...valueTransition,
-      delay: -elapsed,
-      onUpdate: (v) => {
-        value.set(v,);
-        valueTransition.onUpdate && valueTransition.onUpdate(v,);
-      },
-      onComplete: () => {
-        onComplete();
-        valueTransition.onComplete && valueTransition.onComplete();
-      },
-    };
-    if (!isTransitionDefined(valueTransition,)) {
-      options = {
-        ...options,
-        ...getDefaultTransition(valueName, options,),
-      };
-    }
-    if (options.duration) {
-      options.duration = secondsToMilliseconds(options.duration,);
-    }
-    if (options.repeatDelay) {
-      options.repeatDelay = secondsToMilliseconds(options.repeatDelay,);
-    }
-    if (
-      !isOriginAnimatable || !isTargetAnimatable || instantAnimationState.current || valueTransition.type === false ||
-      MotionGlobalConfig.skipAnimations
-    ) {
-      return createInstantAnimation(
-        instantAnimationState.current
-          ? {
-            ...options,
-            delay: 0,
-          }
-          : options,
-      );
-    }
-    if (
-      /**
-       * If this is a handoff animation, the optimised animation will be running via
-       * WAAPI. Therefore, this animation must be JS to ensure it runs "under" the
-       * optimised animation.
-       */
-      !transition.isHandoff && value.owner && value.owner.current instanceof HTMLElement &&
-      /**
-       * If we're outputting values to onUpdate then we can't use WAAPI as there's
-       * no way to read the value from WAAPI every frame.
-       */
-      !value.owner.getProps().onUpdate
-    ) {
-      const acceleratedAnimation = createAcceleratedAnimation(value, valueName, options,);
-      if (acceleratedAnimation) return acceleratedAnimation;
-    }
-    return animateValue(options,);
+var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete) => {
+  const valueTransition = getValueTransition(transition, name,) || {};
+  const delay2 = valueTransition.delay || transition.delay || 0;
+  let {
+    elapsed = 0,
+  } = transition;
+  elapsed = elapsed - secondsToMilliseconds(delay2,);
+  let options = {
+    keyframes: Array.isArray(target,) ? target : [null, target,],
+    ease: 'easeOut',
+    velocity: value.getVelocity(),
+    ...valueTransition,
+    delay: -elapsed,
+    onUpdate: (v) => {
+      value.set(v,);
+      valueTransition.onUpdate && valueTransition.onUpdate(v,);
+    },
+    onComplete: () => {
+      onComplete();
+      valueTransition.onComplete && valueTransition.onComplete();
+    },
+    name,
+    motionValue: value,
+    element: isHandoff ? void 0 : element,
   };
+  if (!isTransitionDefined(valueTransition,)) {
+    options = {
+      ...options,
+      ...getDefaultTransition(name, options,),
+    };
+  }
+  if (options.duration) {
+    options.duration = secondsToMilliseconds(options.duration,);
+  }
+  if (options.repeatDelay) {
+    options.repeatDelay = secondsToMilliseconds(options.repeatDelay,);
+  }
+  if (options.from !== void 0) {
+    options.keyframes[0] = options.from;
+  }
+  let shouldSkip = false;
+  if (options.type === false || options.duration === 0 && !options.repeatDelay) {
+    options.duration = 0;
+    if (options.delay === 0) {
+      shouldSkip = true;
+    }
+  }
+  if (instantAnimationState.current || MotionGlobalConfig.skipAnimations) {
+    shouldSkip = true;
+    options.duration = 0;
+    options.delay = 0;
+  }
+  if (shouldSkip && !isHandoff && value.get() !== void 0) {
+    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition,);
+    if (finalKeyframe !== void 0) {
+      frame.update(() => {
+        options.onUpdate(finalKeyframe,);
+        options.onComplete();
+      },);
+      return;
+    }
+  }
+  if (!isHandoff && AcceleratedAnimation.supports(options,)) {
+    return new AcceleratedAnimation(options,);
+  } else {
+    return new MainThreadAnimation(options,);
+  }
 };
 function isWillChangeMotionValue(value,) {
   return Boolean(isMotionValue(value,) && value.add,);
+}
+function setMotionValue(visualElement, key7, value,) {
+  if (visualElement.hasValue(key7,)) {
+    visualElement.getValue(key7,).set(value,);
+  } else {
+    visualElement.addValue(key7, motionValue(value,),);
+  }
+}
+function setTarget(visualElement, definition,) {
+  const resolved = resolveVariant(visualElement, definition,);
+  let {
+    transitionEnd = {},
+    transition = {},
+    ...target
+  } = resolved || {};
+  target = {
+    ...target,
+    ...transitionEnd,
+  };
+  for (const key7 in target) {
+    const value = resolveFinalValueInKeyframes(target[key7],);
+    setMotionValue(visualElement, key7, value,);
+  }
 }
 function shouldBlockAnimation({
   protectedKeys,
@@ -2843,34 +3412,25 @@ function shouldBlockAnimation({
   needsAnimating[key7] = false;
   return shouldBlock;
 }
-function hasKeyframesChanged(value, target,) {
-  const current = value.get();
-  if (Array.isArray(target,)) {
-    for (let i = 0; i < target.length; i++) {
-      if (target[i] !== current) return true;
-    }
-  } else {
-    return current !== target;
-  }
-}
-function animateTarget(visualElement, definition, {
+function animateTarget(visualElement, targetAndTransition, {
   delay: delay2 = 0,
   transitionOverride,
   type,
 } = {},) {
+  var _a;
   let {
     transition = visualElement.getDefaultTransition(),
     transitionEnd,
     ...target
-  } = visualElement.makeTargetAnimatable(definition,);
+  } = targetAndTransition;
   const willChange = visualElement.getValue('willChange',);
   if (transitionOverride) transition = transitionOverride;
   const animations2 = [];
   const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
   for (const key7 in target) {
-    const value = visualElement.getValue(key7,);
+    const value = visualElement.getValue(key7, (_a = visualElement.latestValues[key7]) !== null && _a !== void 0 ? _a : null,);
     const valueTarget = target[key7];
-    if (!value || valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key7,)) {
+    if (valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key7,)) {
       continue;
     }
     const valueTransition = {
@@ -2878,24 +3438,18 @@ function animateTarget(visualElement, definition, {
       elapsed: 0,
       ...getValueTransition(transition || {}, key7,),
     };
+    let isHandoff = false;
     if (window.HandoffAppearAnimations) {
-      const appearId = visualElement.getProps()[optimizedAppearDataAttribute];
+      const props = visualElement.getProps();
+      const appearId = props[optimizedAppearDataAttribute];
       if (appearId) {
-        const elapsed = window.HandoffAppearAnimations(appearId, key7, value, frame,);
+        const elapsed = window.HandoffAppearAnimations(appearId, key7,);
         if (elapsed !== null) {
           valueTransition.elapsed = elapsed;
-          valueTransition.isHandoff = true;
+          isHandoff = true;
         }
       }
     }
-    let canSkip = !valueTransition.isHandoff && !hasKeyframesChanged(value, valueTarget,);
-    if (valueTransition.type === 'spring' && (value.getVelocity() || valueTransition.velocity)) {
-      canSkip = false;
-    }
-    if (value.animation) {
-      canSkip = false;
-    }
-    if (canSkip) continue;
     value.start(animateMotionValue(
       key7,
       value,
@@ -2905,23 +3459,34 @@ function animateTarget(visualElement, definition, {
           type: false,
         }
         : valueTransition,
+      visualElement,
+      isHandoff,
     ),);
     const animation = value.animation;
-    if (isWillChangeMotionValue(willChange,)) {
-      willChange.add(key7,);
-      animation.then(() => willChange.remove(key7,));
+    if (animation) {
+      if (isWillChangeMotionValue(willChange,)) {
+        willChange.add(key7,);
+        animation.then(() => willChange.remove(key7,));
+      }
+      animations2.push(animation,);
     }
-    animations2.push(animation,);
   }
   if (transitionEnd) {
     Promise.all(animations2,).then(() => {
-      transitionEnd && setTarget(visualElement, transitionEnd,);
+      frame.update(() => {
+        transitionEnd && setTarget(visualElement, transitionEnd,);
+      },);
     },);
   }
   return animations2;
 }
 function animateVariant(visualElement, variant, options = {},) {
-  const resolved = resolveVariant(visualElement, variant, options.custom,);
+  var _a;
+  const resolved = resolveVariant(
+    visualElement,
+    variant,
+    options.type === 'exit' ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom : void 0,
+  );
   let {
     transition = visualElement.getDefaultTransition() || {},
   } = resolved || {};
@@ -2981,7 +3546,11 @@ function animateVisualElement(visualElement, definition, options = {},) {
     const resolvedDefinition = typeof definition === 'function' ? resolveVariant(visualElement, definition, options.custom,) : definition;
     animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options,),);
   }
-  return animation.then(() => visualElement.notify('AnimationComplete', definition,));
+  return animation.then(() => {
+    frame.postRender(() => {
+      visualElement.notify('AnimationComplete', definition,);
+    },);
+  },);
 }
 function shallowCompare(next, prev,) {
   if (!Array.isArray(prev,)) return false;
@@ -3005,8 +3574,13 @@ function createAnimationState(visualElement,) {
   let animate22 = animateList(visualElement,);
   const state = createState();
   let isInitialRender = true;
-  const buildResolvedTypeValues = (acc, definition,) => {
-    const resolved = resolveVariant(visualElement, definition,);
+  const buildResolvedTypeValues = (type) => (acc, definition,) => {
+    var _a;
+    const resolved = resolveVariant(
+      visualElement,
+      definition,
+      type === 'exit' ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom : void 0,
+    );
     if (resolved) {
       const {
         transition,
@@ -3024,7 +3598,7 @@ function createAnimationState(visualElement,) {
   function setAnimateFunction(makeAnimator,) {
     animate22 = makeAnimator(visualElement,);
   }
-  function animateChanges(options, changedActiveType,) {
+  function animateChanges(changedActiveType,) {
     const props = visualElement.getProps();
     const context = visualElement.getVariantContext(true,) || {};
     const animations2 = [];
@@ -3063,7 +3637,7 @@ function createAnimationState(visualElement,) {
         i > removedVariantIndex && propIsVariant;
       let handledRemovedValues = false;
       const definitionList = Array.isArray(prop,) ? prop : [prop,];
-      let resolvedValues = definitionList.reduce(buildResolvedTypeValues, {},);
+      let resolvedValues = definitionList.reduce(buildResolvedTypeValues(type,), {},);
       if (activeDelta === false) resolvedValues = {};
       const {
         prevResolvedValues = {},
@@ -3093,7 +3667,7 @@ function createAnimationState(visualElement,) {
           valueHasChanged = next !== prev;
         }
         if (valueHasChanged) {
-          if (next !== void 0) {
+          if (next !== void 0 && next !== null) {
             markToAnimate(key7,);
           } else {
             removedKeys.add(key7,);
@@ -3120,7 +3694,6 @@ function createAnimationState(visualElement,) {
           animation,
           options: {
             type,
-            ...options,
           },
         })),);
       }
@@ -3129,11 +3702,9 @@ function createAnimationState(visualElement,) {
       const fallbackAnimation = {};
       removedKeys.forEach((key7) => {
         const fallbackTarget = visualElement.getBaseTarget(key7,);
-        if (fallbackTarget !== void 0) {
-          fallbackAnimation[key7] = fallbackTarget;
-        }
         const motionValue2 = visualElement.getValue(key7,);
         if (motionValue2) motionValue2.liveStyle = true;
+        fallbackAnimation[key7] = fallbackTarget !== null && fallbackTarget !== void 0 ? fallbackTarget : null;
       },);
       animations2.push({
         animation: fallbackAnimation,
@@ -3146,7 +3717,7 @@ function createAnimationState(visualElement,) {
     isInitialRender = false;
     return shouldAnimate ? animate22(animations2,) : Promise.resolve();
   }
-  function setActive(type, isActive, options,) {
+  function setActive(type, isActive,) {
     var _a;
     if (state[type].isActive === isActive) return Promise.resolve();
     (_a = visualElement.variantChildren) === null || _a === void 0 ? void 0 : _a.forEach((child) => {
@@ -3154,7 +3725,7 @@ function createAnimationState(visualElement,) {
       return (_a2 = child.animationState) === null || _a2 === void 0 ? void 0 : _a2.setActive(type, isActive,);
     },);
     state[type].isActive = isActive;
-    const animations2 = animateChanges(options, type,);
+    const animations2 = animateChanges(type,);
     for (const key7 in state) {
       state[key7].protectedKeys = {};
     }
@@ -3250,7 +3821,6 @@ var ExitAnimationFeature = class extends Feature {
     const {
       isPresent: isPresent2,
       onExitComplete,
-      custom,
     } = this.node.presenceContext;
     const {
       isPresent: prevIsPresent,
@@ -3258,9 +3828,7 @@ var ExitAnimationFeature = class extends Feature {
     if (!this.node.animationState || isPresent2 === prevIsPresent) {
       return;
     }
-    const exitAnimation = this.node.animationState.setActive('exit', !isPresent2, {
-      custom: custom !== null && custom !== void 0 ? custom : this.node.getProps().custom,
-    },);
+    const exitAnimation = this.node.animationState.setActive('exit', !isPresent2,);
     if (onExitComplete && !isPresent2) {
       exitAnimation.then(() => onExitComplete(this.id,));
     }
@@ -3427,8 +3995,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.0.11-sync.5',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.0.11-sync.5 may not work as expected.`,
+          nextValue.version === '11.1.9',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.1.9 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -3465,12 +4033,10 @@ function updateMotionValuesFromProps(element, next, prev,) {
   }
   return next;
 }
+var valueTypes = [...dimensionValueTypes, color, complex,];
+var findValueType = (v) => valueTypes.find(testValueType(v,),);
 var featureNames = Object.keys(featureDefinitions,);
 var numFeatures = featureNames.length;
-function getClosestProjectingNode(visualElement,) {
-  if (!visualElement) return void 0;
-  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
-}
 var propEventHandlers = [
   'AnimationStart',
   'AnimationComplete',
@@ -3481,20 +4047,39 @@ var propEventHandlers = [
   'LayoutAnimationComplete',
 ];
 var numVariantProps = variantProps.length;
+function getClosestProjectingNode(visualElement,) {
+  if (!visualElement) return void 0;
+  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
+}
 var VisualElement = class {
+  /**
+   * This method takes React props and returns found MotionValues. For example, HTML
+   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
+   *
+   * This isn't an abstract method as it needs calling in the constructor, but it is
+   * intended to be one.
+   */
+  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
+    return {};
+  }
   constructor({
     parent,
     props,
     presenceContext,
     reducedMotionConfig,
+    blockInitialAnimation,
     visualState,
   }, options = {},) {
+    this.resolveKeyframes = (keyframes2, onComplete, name, value,) => {
+      return new this.KeyframeResolver(keyframes2, onComplete, name, value, this,);
+    };
     this.current = null;
     this.children = /* @__PURE__ */ new Set();
     this.isVariantNode = false;
     this.isControllingVariants = false;
     this.shouldReduceMotion = null;
     this.values = /* @__PURE__ */ new Map();
+    this.KeyframeResolver = KeyframeResolver;
     this.features = {};
     this.valueSubscriptions = /* @__PURE__ */ new Map();
     this.prevMotionValues = {};
@@ -3527,6 +4112,7 @@ var VisualElement = class {
     this.depth = parent ? parent.depth + 1 : 0;
     this.reducedMotionConfig = reducedMotionConfig;
     this.options = options;
+    this.blockInitialAnimation = Boolean(blockInitialAnimation,);
     this.isControllingVariants = isControllingVariants(props,);
     this.isVariantNode = isVariantNode(props,);
     if (this.isVariantNode) {
@@ -3546,16 +4132,6 @@ var VisualElement = class {
         }
       }
     }
-  }
-  /**
-   * This method takes React props and returns found MotionValues. For example, HTML
-   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
-   *
-   * This isn't an abstract method as it needs calling in the constructor, but it is
-   * intended to be one.
-   */
-  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
-    return {};
   }
   mount(instance,) {
     this.current = instance;
@@ -3582,6 +4158,7 @@ var VisualElement = class {
     this.update(this.props, this.presenceContext,);
   }
   unmount() {
+    var _a;
     visualElementStore.delete(this.current,);
     this.projection && this.projection.unmount();
     cancelFrame(this.notifyUpdate,);
@@ -3593,7 +4170,7 @@ var VisualElement = class {
       this.events[key7].clear();
     }
     for (const key7 in this.features) {
-      this.features[key7].unmount();
+      (_a = this.features[key7]) === null || _a === void 0 ? void 0 : _a.unmount();
     }
     this.current = null;
   }
@@ -3601,7 +4178,7 @@ var VisualElement = class {
     const valueIsTransform = transformProps.has(key7,);
     const removeOnChange = value.on('change', (latestValue) => {
       this.latestValues[key7] = latestValue;
-      this.props.onUpdate && frame.update(this.notifyUpdate, false, true,);
+      this.props.onUpdate && frame.preRender(this.notifyUpdate,);
       if (valueIsTransform && this.projection) {
         this.projection.isTransformDirty = true;
       }
@@ -3610,6 +4187,7 @@ var VisualElement = class {
     this.valueSubscriptions.set(key7, () => {
       removeOnChange();
       removeOnRenderRequest();
+      if (value.owner) value.stop();
     },);
   }
   sortNodePosition(other,) {
@@ -3711,16 +4289,6 @@ var VisualElement = class {
     this.latestValues[key7] = value;
   }
   /**
-   * Make a target animatable by Popmotion. For instance, if we're
-   * trying to animate width from 100px to 100vw we need to measure 100vw
-   * in pixels to determine what we really need to animate to. This is also
-   * pluggable to support Framer's custom value types like Color,
-   * and CSS variables.
-   */
-  makeTargetAnimatable(target, canMutate = true,) {
-    return this.makeTargetAnimatableFromInstance(target, canMutate,);
-  }
-  /**
    * Update the provided props. Ensure any newly-added motion values are
    * added to our map, old ones removed, and listeners updated.
    */
@@ -3738,7 +4306,8 @@ var VisualElement = class {
         this.propEventSubscriptions[key7]();
         delete this.propEventSubscriptions[key7];
       }
-      const listener = props['on' + key7];
+      const listenerName = 'on' + key7;
+      const listener = props[listenerName];
       if (listener) {
         this.propEventSubscriptions[key7] = this.on(key7, listener,);
       }
@@ -3808,12 +4377,13 @@ var VisualElement = class {
    * Add a motion value and bind it to this visual element.
    */
   addValue(key7, value,) {
-    if (value !== this.values.get(key7,)) {
-      this.removeValue(key7,);
+    const existingValue = this.values.get(key7,);
+    if (value !== existingValue) {
+      if (existingValue) this.removeValue(key7,);
       this.bindToMotionValue(key7, value,);
+      this.values.set(key7, value,);
+      this.latestValues[key7] = value.get();
     }
-    this.values.set(key7, value,);
-    this.latestValues[key7] = value.get();
   }
   /**
    * Remove a motion value and unbind any active subscriptions.
@@ -3840,7 +4410,7 @@ var VisualElement = class {
     }
     let value = this.values.get(key7,);
     if (value === void 0 && defaultValue !== void 0) {
-      value = motionValue(defaultValue, {
+      value = motionValue(defaultValue === null ? void 0 : defaultValue, {
         owner: this,
       },);
       this.addValue(key7, value,);
@@ -3852,13 +4422,22 @@ var VisualElement = class {
    * we need to check for it in our state and as a last resort read it
    * directly from the instance (which might have performance implications).
    */
-  readValue(key7,) {
+  readValue(key7, target,) {
     var _a;
-    return this.latestValues[key7] !== void 0 || !this.current
+    let value = this.latestValues[key7] !== void 0 || !this.current
       ? this.latestValues[key7]
       : (_a = this.getBaseTargetFromProps(this.props, key7,)) !== null && _a !== void 0
       ? _a
       : this.readValueFromInstance(this.current, key7, this.options,);
+    if (value !== void 0 && value !== null) {
+      if (typeof value === 'string' && (isNumericalString(value,) || isZeroValueString(value,))) {
+        value = parseFloat(value,);
+      } else if (!findValueType(value,) && complex.test(target,)) {
+        value = getAnimatableNone2(key7, target,);
+      }
+      this.setBaseTarget(key7, isMotionValue(value,) ? value.get() : value,);
+    }
+    return isMotionValue(value,) ? value.get() : value;
   }
   /**
    * Set the base target to later animate back to. This is currently
@@ -3876,9 +4455,17 @@ var VisualElement = class {
     const {
       initial,
     } = this.props;
-    const valueFromInitial = typeof initial === 'string' || typeof initial === 'object'
-      ? (_a = resolveVariantFromProps(this.props, initial,)) === null || _a === void 0 ? void 0 : _a[key7]
-      : void 0;
+    let valueFromInitial;
+    if (typeof initial === 'string' || typeof initial === 'object') {
+      const variant = resolveVariantFromProps(
+        this.props,
+        initial,
+        (_a = this.presenceContext) === null || _a === void 0 ? void 0 : _a.custom,
+      );
+      if (variant) {
+        valueFromInitial = variant[key7];
+      }
+    }
     if (initial && valueFromInitial !== void 0) {
       return valueFromInitial;
     }
@@ -3899,8 +4486,8 @@ var VisualElement = class {
   }
 };
 function createMotionProxy(createConfig,) {
-  function custom(Component23, customMotionComponentConfig = {},) {
-    return createMotionComponent(createConfig(Component23, customMotionComponentConfig,),);
+  function custom(Component33, customMotionComponentConfig = {},) {
+    return createMotionComponent(createConfig(Component33, customMotionComponentConfig,),);
   }
   if (typeof Proxy === 'undefined') {
     return custom;
@@ -3947,28 +4534,28 @@ var lowercaseSVGElements = [
   'use',
   'view',
 ];
-function isSVGComponent(Component23,) {
+function isSVGComponent(Component33,) {
   if (
     /**
      * If it's not a string, it's a custom React component. Currently we only support
      * HTML custom React components.
      */
-    typeof Component23 !== 'string' ||
+    typeof Component33 !== 'string' ||
     /**
      * If it contains a dash, the element is a custom HTML webcomponent.
      */
-    Component23.includes('-',)
+    Component33.includes('-',)
   ) {
     return false;
   } else if (
     /**
      * If it's in our list of lowercase SVG tags, it's an SVG component
      */
-    lowercaseSVGElements.indexOf(Component23,) > -1 ||
+    lowercaseSVGElements.indexOf(Component33,) > -1 ||
     /**
      * If it contains a capital letter, it's an SVG component
      */
-    /[A-Z]/u.test(Component23,)
+    /[A-Z]/u.test(Component33,)
   ) {
     return true;
   }
@@ -4079,8 +4666,8 @@ function useHTMLProps(props, visualState, isStatic,) {
   htmlProps.style = style;
   return htmlProps;
 }
-function calcOrigin(origin, offset, size2,) {
-  return typeof origin === 'string' ? origin : px.transform(offset + size2 * origin,);
+function calcOrigin(origin, offset, size,) {
+  return typeof origin === 'string' ? origin : px.transform(offset + size * origin,);
 }
 function calcSVGTransformOrigin(dimensions, originX, originY,) {
   const pxOriginX = calcOrigin(originX, dimensions.x, dimensions.width,);
@@ -4154,7 +4741,7 @@ var createSvgRenderState = () => ({
   attrs: {},
 });
 var isSVGTag = (tag) => typeof tag === 'string' && tag.toLowerCase() === 'svg';
-function useSVGProps(props, visualState, _isStatic, Component23,) {
+function useSVGProps(props, visualState, _isStatic, Component33,) {
   const visualProps = useMemo(() => {
     const state = createSvgRenderState();
     buildSVGAttrs(
@@ -4163,7 +4750,7 @@ function useSVGProps(props, visualState, _isStatic, Component23,) {
       {
         enableHardwareAcceleration: false,
       },
-      isSVGTag(Component23,),
+      isSVGTag(Component33,),
       props.transformTemplate,
     );
     return {
@@ -4184,13 +4771,13 @@ function useSVGProps(props, visualState, _isStatic, Component23,) {
   return visualProps;
 }
 function createUseRender(forwardMotionProps = false,) {
-  const useRender = (Component23, props, ref, {
+  const useRender = (Component33, props, ref, {
     latestValues,
   }, isStatic,) => {
-    const useVisualProps = isSVGComponent(Component23,) ? useSVGProps : useHTMLProps;
-    const visualProps = useVisualProps(props, latestValues, isStatic, Component23,);
-    const filteredProps2 = filterProps(props, typeof Component23 === 'string', forwardMotionProps,);
-    const elementProps = Component23 !== Fragment
+    const useVisualProps = isSVGComponent(Component33,) ? useSVGProps : useHTMLProps;
+    const visualProps = useVisualProps(props, latestValues, isStatic, Component33,);
+    const filteredProps2 = filterProps(props, typeof Component33 === 'string', forwardMotionProps,);
+    const elementProps = Component33 !== Fragment
       ? {
         ...filteredProps2,
         ...visualProps,
@@ -4201,7 +4788,7 @@ function createUseRender(forwardMotionProps = false,) {
       children,
     } = props;
     const renderedChildren = useMemo(() => isMotionValue(children,) ? children.get() : children, [children,],);
-    return createElement2(Component23, {
+    return createElement(Component33, {
       ...elementProps,
       children: renderedChildren,
     },);
@@ -4323,33 +4910,34 @@ var htmlMotionConfig = {
   },),
 };
 function createDomMotionConfig(
-  Component23,
+  Component33,
   {
     forwardMotionProps = false,
   },
   preloadedFeatures2,
   createVisualElement2,
 ) {
-  const baseConfig = isSVGComponent(Component23,) ? svgMotionConfig : htmlMotionConfig;
+  const baseConfig = isSVGComponent(Component33,) ? svgMotionConfig : htmlMotionConfig;
   return {
     ...baseConfig,
     preloadedFeatures: preloadedFeatures2,
     useRender: createUseRender(forwardMotionProps,),
     createVisualElement: createVisualElement2,
-    Component: Component23,
+    Component: Component33,
   };
 }
 function addHoverEvent(node, isActive,) {
-  const eventName = 'pointer' + (isActive ? 'enter' : 'leave');
-  const callbackName = 'onHover' + (isActive ? 'Start' : 'End');
+  const eventName = isActive ? 'pointerenter' : 'pointerleave';
+  const callbackName = isActive ? 'onHoverStart' : 'onHoverEnd';
   const handleEvent = (event, info,) => {
     if (event.pointerType === 'touch' || isDragActive()) return;
     const props = node.getProps();
     if (node.animationState && props.whileHover) {
       node.animationState.setActive('whileHover', isActive,);
     }
-    if (props[callbackName]) {
-      frame.update(() => props[callbackName](event, info,));
+    const callback = props[callbackName];
+    if (callback) {
+      frame.postRender(() => callback(event, info,));
     }
   };
   return addPointerEvent(node.current, eventName, handleEvent, {
@@ -4422,11 +5010,10 @@ var PressGesture = class extends Feature {
           onTapCancel,
           globalTapTarget,
         } = this.node.getProps();
-        frame.update(() => {
-          !globalTapTarget && !isNodeOrChild(this.node.current, endEvent.target,)
-            ? onTapCancel && onTapCancel(endEvent, endInfo,)
-            : onTap && onTap(endEvent, endInfo,);
-        },);
+        const handler = !globalTapTarget && !isNodeOrChild(this.node.current, endEvent.target,) ? onTapCancel : onTap;
+        if (handler) {
+          frame.update(() => handler(endEvent, endInfo,));
+        }
       };
       const removePointerUpListener = addPointerEvent(window, 'pointerup', endPointerPress, {
         passive: !(props.onTap || props['onPointerUp']),
@@ -4452,7 +5039,7 @@ var PressGesture = class extends Feature {
               onTap,
             } = this.node.getProps();
             if (onTap) {
-              frame.update(() => onTap(event, info,));
+              frame.postRender(() => onTap(event, info,));
             }
           },);
         };
@@ -4481,7 +5068,7 @@ var PressGesture = class extends Feature {
       this.node.animationState.setActive('whileTap', true,);
     }
     if (onTapStart) {
-      frame.update(() => onTapStart(event, info,));
+      frame.postRender(() => onTapStart(event, info,));
     }
   }
   checkPressEnd() {
@@ -4499,7 +5086,7 @@ var PressGesture = class extends Feature {
       onTapCancel,
     } = this.node.getProps();
     if (onTapCancel) {
-      frame.update(() => onTapCancel(event, info,));
+      frame.postRender(() => onTapCancel(event, info,));
     }
   }
   mount() {
@@ -4793,16 +5380,16 @@ function getVelocity2(history, timeDelta2,) {
       y: 0,
     };
   }
-  const time22 = millisecondsToSeconds(lastPoint.timestamp - timestampedPoint.timestamp,);
-  if (time22 === 0) {
+  const time2 = millisecondsToSeconds(lastPoint.timestamp - timestampedPoint.timestamp,);
+  if (time2 === 0) {
     return {
       x: 0,
       y: 0,
     };
   }
   const currentVelocity = {
-    x: (lastPoint.x - timestampedPoint.x) / time22,
-    y: (lastPoint.y - timestampedPoint.y) / time22,
+    x: (lastPoint.x - timestampedPoint.x) / time2,
+    y: (lastPoint.y - timestampedPoint.y) / time2,
   };
   if (currentVelocity.x === Infinity) {
     currentVelocity.x = 0;
@@ -5124,7 +5711,7 @@ var VisualElementDragControls = class {
         this.originPoint[axis] = current;
       },);
       if (onDragStart) {
-        frame.update(() => onDragStart(event, info,), false, true,);
+        frame.postRender(() => onDragStart(event, info,));
       }
       const {
         animationState,
@@ -5188,7 +5775,7 @@ var VisualElementDragControls = class {
       onDragEnd,
     } = this.getProps();
     if (onDragEnd) {
-      frame.update(() => onDragEnd(event, info,));
+      frame.postRender(() => onDragEnd(event, info,));
     }
   }
   cancel() {
@@ -5249,7 +5836,7 @@ var VisualElementDragControls = class {
     this.elastic = resolveDragElastic(dragElastic,);
     if (prevConstraints !== this.constraints && layout2 && this.constraints && !this.hasMutatedConstraints) {
       eachAxis((axis) => {
-        if (this.getAxisMotionValue(axis,)) {
+        if (this.constraints !== false && this.getAxisMotionValue(axis,)) {
           this.constraints[axis] = rebaseAxisConstraints(layout2.layoutBox[axis], this.constraints[axis],);
         }
       },);
@@ -5321,7 +5908,7 @@ var VisualElementDragControls = class {
   }
   startAxisValueAnimation(axis, transition,) {
     const axisValue = this.getAxisMotionValue(axis,);
-    return axisValue.start(animateMotionValue(axis, axisValue, 0, transition,),);
+    return axisValue.start(animateMotionValue(axis, axisValue, 0, transition, this.visualElement,),);
   }
   stopAnimation() {
     eachAxis((axis) => this.getAxisMotionValue(axis,).stop());
@@ -5343,7 +5930,7 @@ var VisualElementDragControls = class {
    * - Otherwise, we apply the delta to the x/y motion values.
    */
   getAxisMotionValue(axis,) {
-    const dragKey = '_drag' + axis.toUpperCase();
+    const dragKey = `_drag${axis.toUpperCase()}`;
     const props = this.visualElement.getProps();
     const externalMotionValue = props[dragKey];
     return externalMotionValue
@@ -5391,7 +5978,7 @@ var VisualElementDragControls = class {
     };
     eachAxis((axis) => {
       const axisValue = this.getAxisMotionValue(axis,);
-      if (axisValue) {
+      if (axisValue && this.constraints !== false) {
         const latest = axisValue.get();
         boxProgress[axis] = calcOrigin2({
           min: latest,
@@ -5522,7 +6109,7 @@ var DragGesture = class extends Feature {
 };
 var asyncHandler = (handler) => (event, info,) => {
   if (handler) {
-    frame.update(() => handler(event, info,));
+    frame.postRender(() => handler(event, info,));
   }
 };
 var PanGesture = class extends Feature {
@@ -5550,7 +6137,7 @@ var PanGesture = class extends Feature {
       onEnd: (event, info,) => {
         delete this.session;
         if (onPanEnd) {
-          frame.update(() => onPanEnd(event, info,));
+          frame.postRender(() => onPanEnd(event, info,));
         }
       },
     };
@@ -5617,7 +6204,7 @@ var correctBoxShadow = {
     return template(shadow,);
   },
 };
-var MeasureLayoutWithContext = class extends React__default.Component {
+var MeasureLayoutWithContext = class extends Component {
   /**
    * This only mounts projection nodes for components that
    * need measuring, we might want to do it for all components
@@ -5720,7 +6307,7 @@ var MeasureLayoutWithContext = class extends React__default.Component {
 function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
   const layoutGroup = useContext3(LayoutGroupContext,);
-  return React__default.createElement(MeasureLayoutWithContext, {
+  return jsx(MeasureLayoutWithContext, {
     ...props,
     layoutGroup,
     switchLayoutGroup: useContext3(SwitchLayoutGroupContext,),
@@ -5985,15 +6572,6 @@ var transformAxes = ['', 'X', 'Y', 'Z',];
 var hiddenVisibility = {
   visibility: 'hidden',
 };
-function resetDistortingTransform(key7, visualElement, values,) {
-  const {
-    latestValues,
-  } = visualElement;
-  if (latestValues[key7]) {
-    values[key7] = latestValues[key7];
-    visualElement.setStaticValue(key7, 0,);
-  }
-}
 var animationTarget = 1e3;
 var id2 = 0;
 var projectionFrameData = {
@@ -6002,6 +6580,18 @@ var projectionFrameData = {
   resolvedTargetDeltas: 0,
   recalculatedProjection: 0,
 };
+function resetDistortingTransform(key7, visualElement, values, sharedAnimationValues,) {
+  const {
+    latestValues,
+  } = visualElement;
+  if (latestValues[key7]) {
+    values[key7] = latestValues[key7];
+    visualElement.setStaticValue(key7, 0,);
+    if (sharedAnimationValues) {
+      sharedAnimationValues[key7] = 0;
+    }
+  }
+}
 function createProjectionNode({
   attachResizeListener,
   defaultParent,
@@ -6189,7 +6779,7 @@ function createProjectionNode({
     startUpdate() {
       if (this.isUpdateBlocked()) return;
       this.isUpdating = true;
-      this.nodes && this.nodes.forEach(resetRotation,);
+      this.nodes && this.nodes.forEach(resetSkewAndRotation,);
       this.animationId++;
     }
     getTransformTemplate() {
@@ -6789,12 +7379,12 @@ function createProjectionNode({
         return false;
       }
     }
-    resetRotation() {
+    resetSkewAndRotation() {
       const {
         visualElement,
       } = this.options;
       if (!visualElement) return;
-      let hasRotate = false;
+      let hasDistortingTransform = false;
       const {
         latestValues,
       } = visualElement;
@@ -6802,20 +7392,23 @@ function createProjectionNode({
         latestValues.z || latestValues.rotate || latestValues.rotateX || latestValues.rotateY || latestValues.rotateZ ||
         latestValues.skewX || latestValues.skewY
       ) {
-        hasRotate = true;
+        hasDistortingTransform = true;
       }
-      if (!hasRotate) return;
+      if (!hasDistortingTransform) return;
       const resetValues = {};
       if (latestValues.z) {
-        resetDistortingTransform('z', visualElement, resetValues,);
+        resetDistortingTransform('z', visualElement, resetValues, this.animationValues,);
       }
       for (let i = 0; i < transformAxes.length; i++) {
-        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues,);
-        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues,);
+        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues, this.animationValues,);
+        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues, this.animationValues,);
       }
       visualElement.render();
       for (const key7 in resetValues) {
         visualElement.setStaticValue(key7, resetValues[key7],);
+        if (this.animationValues) {
+          this.animationValues[key7] = resetValues[key7];
+        }
       }
       visualElement.scheduleRender();
     }
@@ -7039,8 +7632,8 @@ function resolveTargetDelta(node,) {
 function calcProjection(node,) {
   node.calcProjection();
 }
-function resetRotation(node,) {
-  node.resetRotation();
+function resetSkewAndRotation(node,) {
+  node.resetSkewAndRotation();
 }
 function removeLeadSnapshots(stack,) {
   stack.removeLeadSnapshot();
@@ -7082,7 +7675,7 @@ function shouldAnimatePositionOnly(animationType, snapshot, layout2,) {
     animationType === 'preserve-aspect' && !isNear(aspectRatio(snapshot,), aspectRatio(layout2,), 0.2,);
 }
 var DocumentProjectionNode = createProjectionNode({
-  attachResizeListener: (ref, notify22,) => addDomEvent(ref, 'resize', notify22,),
+  attachResizeListener: (ref, notify2,) => addDomEvent(ref, 'resize', notify2,),
   measureScroll: () => ({
     x: document.documentElement.scrollLeft || document.body.scrollLeft,
     y: document.documentElement.scrollTop || document.body.scrollTop,
@@ -7123,271 +7716,11 @@ var drag = {
     MeasureLayout,
   },
 };
-var splitCSSVariableRegex =
-  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
-  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
-function parseCSSVariable(current,) {
-  const match = splitCSSVariableRegex.exec(current,);
-  if (!match) return [,];
-  const [, token1, token2, fallback,] = match;
-  return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback,];
-}
-var maxDepth = 4;
-function getVariableValue(current, element, depth = 1,) {
-  invariant(
-    depth <= maxDepth,
-    `Max CSS variable fallback depth detected in property "${current}". This may indicate a circular fallback dependency.`,
-  );
-  const [token, fallback,] = parseCSSVariable(current,);
-  if (!token) return;
-  const resolved = window.getComputedStyle(element,).getPropertyValue(token,);
-  if (resolved) {
-    const trimmed = resolved.trim();
-    return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
-  }
-  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
-}
-function resolveCSSVariables(visualElement, {
-  ...target
-}, transitionEnd,) {
-  const element = visualElement.current;
-  if (!(element instanceof Element)) {
-    return {
-      target,
-      transitionEnd,
-    };
-  }
-  if (transitionEnd) {
-    transitionEnd = {
-      ...transitionEnd,
-    };
-  }
-  visualElement.values.forEach((value) => {
-    const current = value.get();
-    if (!isCSSVariableToken(current,)) return;
-    const resolved = getVariableValue(current, element,);
-    if (resolved) value.set(resolved,);
-  },);
-  for (const key7 in target) {
-    const current = target[key7];
-    if (!isCSSVariableToken(current,)) continue;
-    const resolved = getVariableValue(current, element,);
-    if (!resolved) continue;
-    target[key7] = resolved;
-    if (!transitionEnd) transitionEnd = {};
-    if (transitionEnd[key7] === void 0) {
-      transitionEnd[key7] = current;
-    }
-  }
-  return {
-    target,
-    transitionEnd,
-  };
-}
-var positionalKeys = /* @__PURE__ */ new Set(['width', 'height', 'top', 'left', 'right', 'bottom', 'x', 'y', 'translateX', 'translateY',],);
-var isPositionalKey = (key7) => positionalKeys.has(key7,);
-var hasPositionalKey = (target) => {
-  return Object.keys(target,).some(isPositionalKey,);
-};
-var isNumOrPxType = (v) => v === number || v === px;
-var getPosFromMatrix = (matrix, pos,) => parseFloat(matrix.split(', ',)[pos],);
-var getTranslateFromMatrix = (pos2, pos3,) =>
-(_bbox, {
-  transform: transform2,
-},) => {
-  if (transform2 === 'none' || !transform2) return 0;
-  const matrix3d = transform2.match(/^matrix3d\((.+)\)$/u,);
-  if (matrix3d) {
-    return getPosFromMatrix(matrix3d[1], pos3,);
-  } else {
-    const matrix = transform2.match(/^matrix\((.+)\)$/u,);
-    if (matrix) {
-      return getPosFromMatrix(matrix[1], pos2,);
-    } else {
-      return 0;
-    }
-  }
-};
-var transformKeys = /* @__PURE__ */ new Set(['x', 'y', 'z',],);
-var nonTranslationalTransformKeys = transformPropOrder.filter((key7) => !transformKeys.has(key7,));
-function removeNonTranslationalTransform(visualElement,) {
-  const removedTransforms = [];
-  nonTranslationalTransformKeys.forEach((key7) => {
-    const value = visualElement.getValue(key7,);
-    if (value !== void 0) {
-      removedTransforms.push([key7, value.get(),],);
-      value.set(key7.startsWith('scale',) ? 1 : 0,);
-    }
-  },);
-  if (removedTransforms.length) visualElement.render();
-  return removedTransforms;
-}
-var positionalValues = {
-  // Dimensions
-  width: ({
-    x,
-  }, {
-    paddingLeft = '0',
-    paddingRight = '0',
-  },) => x.max - x.min - parseFloat(paddingLeft,) - parseFloat(paddingRight,),
-  height: ({
-    y,
-  }, {
-    paddingTop = '0',
-    paddingBottom = '0',
-  },) => y.max - y.min - parseFloat(paddingTop,) - parseFloat(paddingBottom,),
-  top: (_bbox, {
-    top,
-  },) => parseFloat(top,),
-  left: (_bbox, {
-    left,
-  },) => parseFloat(left,),
-  bottom: ({
-    y,
-  }, {
-    top,
-  },) => parseFloat(top,) + (y.max - y.min),
-  right: ({
-    x,
-  }, {
-    left,
-  },) => parseFloat(left,) + (x.max - x.min),
-  // Transform
-  x: getTranslateFromMatrix(4, 13,),
-  y: getTranslateFromMatrix(5, 14,),
-};
-positionalValues.translateX = positionalValues.x;
-positionalValues.translateY = positionalValues.y;
-var convertChangedValueTypes = (target, visualElement, changedKeys,) => {
-  const originBbox = visualElement.measureViewportBox();
-  const element = visualElement.current;
-  const elementComputedStyle = getComputedStyle(element,);
-  const {
-    display,
-  } = elementComputedStyle;
-  const origin = {};
-  if (display === 'none') {
-    visualElement.setStaticValue('display', target.display || 'block',);
-  }
-  changedKeys.forEach((key7) => {
-    origin[key7] = positionalValues[key7](originBbox, elementComputedStyle,);
-  },);
-  visualElement.render();
-  const targetBbox = visualElement.measureViewportBox();
-  changedKeys.forEach((key7) => {
-    const value = visualElement.getValue(key7,);
-    value && value.jump(origin[key7],);
-    target[key7] = positionalValues[key7](targetBbox, elementComputedStyle,);
-  },);
-  return target;
-};
-var checkAndConvertChangedValueTypes = (visualElement, target, origin = {}, transitionEnd = {},) => {
-  target = {
-    ...target,
-  };
-  transitionEnd = {
-    ...transitionEnd,
-  };
-  const targetPositionalKeys = Object.keys(target,).filter(isPositionalKey,);
-  let removedTransformValues = [];
-  let hasAttemptedToRemoveTransformValues = false;
-  const changedValueTypeKeys = [];
-  targetPositionalKeys.forEach((key7) => {
-    const value = visualElement.getValue(key7,);
-    if (!visualElement.hasValue(key7,)) return;
-    let from = origin[key7];
-    let fromType = findDimensionValueType(from,);
-    const to = target[key7];
-    let toType;
-    if (isKeyframesTarget(to,)) {
-      const numKeyframes = to.length;
-      const fromIndex = to[0] === null ? 1 : 0;
-      from = to[fromIndex];
-      fromType = findDimensionValueType(from,);
-      for (let i = fromIndex; i < numKeyframes; i++) {
-        if (to[i] === null) break;
-        if (!toType) {
-          toType = findDimensionValueType(to[i],);
-          invariant(
-            toType === fromType || isNumOrPxType(fromType,) && isNumOrPxType(toType,),
-            'Keyframes must be of the same dimension as the current value',
-          );
-        } else {
-          invariant(findDimensionValueType(to[i],) === toType, 'All keyframes must be of the same type',);
-        }
-      }
-    } else {
-      toType = findDimensionValueType(to,);
-    }
-    if (fromType !== toType) {
-      if (isNumOrPxType(fromType,) && isNumOrPxType(toType,)) {
-        const current = value.get();
-        if (typeof current === 'string') {
-          value.set(parseFloat(current,),);
-        }
-        if (typeof to === 'string') {
-          target[key7] = parseFloat(to,);
-        } else if (Array.isArray(to,) && toType === px) {
-          target[key7] = to.map(parseFloat,);
-        }
-      } else if (
-        (fromType === null || fromType === void 0 ? void 0 : fromType.transform) &&
-        (toType === null || toType === void 0 ? void 0 : toType.transform) && (from === 0 || to === 0)
-      ) {
-        if (from === 0) {
-          value.set(toType.transform(from,),);
-        } else {
-          target[key7] = fromType.transform(to,);
-        }
-      } else {
-        if (!hasAttemptedToRemoveTransformValues) {
-          removedTransformValues = removeNonTranslationalTransform(visualElement,);
-          hasAttemptedToRemoveTransformValues = true;
-        }
-        changedValueTypeKeys.push(key7,);
-        transitionEnd[key7] = transitionEnd[key7] !== void 0 ? transitionEnd[key7] : target[key7];
-        value.jump(to,);
-      }
-    }
-  },);
-  if (changedValueTypeKeys.length) {
-    const scrollY = changedValueTypeKeys.indexOf('height',) >= 0 ? window.pageYOffset : null;
-    const convertedTarget = convertChangedValueTypes(target, visualElement, changedValueTypeKeys,);
-    if (removedTransformValues.length) {
-      removedTransformValues.forEach(([key7, value,],) => {
-        visualElement.getValue(key7,).set(value,);
-      },);
-    }
-    visualElement.render();
-    if (isBrowser && scrollY !== null) {
-      window.scrollTo({
-        top: scrollY,
-      },);
-    }
-    return {
-      target: convertedTarget,
-      transitionEnd,
-    };
-  } else {
-    return {
-      target,
-      transitionEnd,
-    };
-  }
-};
-function unitConversion(visualElement, target, origin, transitionEnd,) {
-  return hasPositionalKey(target,) ? checkAndConvertChangedValueTypes(visualElement, target, origin, transitionEnd,) : {
-    target,
-    transitionEnd,
-  };
-}
-var parseDomVariant = (visualElement, target, origin, transitionEnd,) => {
-  const resolved = resolveCSSVariables(visualElement, target, transitionEnd,);
-  target = resolved.target;
-  transitionEnd = resolved.transitionEnd;
-  return unitConversion(visualElement, target, origin, transitionEnd,);
-};
 var DOMVisualElement = class extends VisualElement {
+  constructor() {
+    super(...arguments,);
+    this.KeyframeResolver = DOMKeyframesResolver;
+  }
   sortInstanceNodePosition(a, b,) {
     return a.compareDocumentPosition(b,) & 2 ? 1 : -1;
   }
@@ -7400,24 +7733,6 @@ var DOMVisualElement = class extends VisualElement {
   },) {
     delete vars[key7];
     delete style[key7];
-  }
-  makeTargetAnimatableFromInstance({
-    transition,
-    transitionEnd,
-    ...target
-  }, isMounted,) {
-    const origin = getOrigin(target, transition || {}, this,);
-    if (isMounted) {
-      checkTargetForNewValues(this, target, origin,);
-      const parsed = parseDomVariant(this, target, origin, transitionEnd,);
-      transitionEnd = parsed.transitionEnd;
-      target = parsed.target;
-    }
-    return {
-      transition,
-      transitionEnd,
-      ...target,
-    };
   }
 };
 function getComputedStyle2(element,) {
@@ -7487,8 +7802,8 @@ var SVGVisualElement = class extends DOMVisualElement {
   measureInstanceViewportBox() {
     return createBox();
   }
-  scrapeMotionValuesFromProps(props, prevProps,) {
-    return scrapeMotionValuesFromProps2(props, prevProps, this,);
+  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
+    return scrapeMotionValuesFromProps2(props, prevProps, visualElement,);
   }
   build(renderState, latestValues, options, props,) {
     buildSVGAttrs(renderState, latestValues, options, this.isSVGTag, props.transformTemplate,);
@@ -7501,14 +7816,14 @@ var SVGVisualElement = class extends DOMVisualElement {
     super.mount(instance,);
   }
 };
-var createDomVisualElement = (Component23, options,) => {
-  return isSVGComponent(Component23,)
+var createDomVisualElement = (Component33, options,) => {
+  return isSVGComponent(Component33,)
     ? new SVGVisualElement(options, {
       enableHardwareAcceleration: false,
     },)
     : new HTMLVisualElement(options, {
+      allowProjection: Component33 !== Fragment,
       enableHardwareAcceleration: true,
-      allowProjection: Component23 !== React__default.Fragment,
     },);
 };
 var layout = {
@@ -7523,8 +7838,8 @@ var preloadedFeatures = {
   ...drag,
   ...layout,
 };
-var motion = /* @__PURE__ */ createMotionProxy((Component23, config,) =>
-  createDomMotionConfig(Component23, config, preloadedFeatures, createDomVisualElement,)
+var motion = /* @__PURE__ */ createMotionProxy((Component33, config,) =>
+  createDomMotionConfig(Component33, config, preloadedFeatures, createDomVisualElement,)
 );
 function createDomMotionComponent(key7,) {
   return createMotionComponent(createDomMotionConfig(
@@ -7559,15 +7874,15 @@ function useForceUpdate() {
 function useUnmountEffect(callback,) {
   return useEffect(() => () => callback(), [],);
 }
-var PopChildMeasure = class extends React.Component {
+var PopChildMeasure = class extends React2.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
-      const size2 = this.props.sizeRef.current;
-      size2.height = element.offsetHeight || 0;
-      size2.width = element.offsetWidth || 0;
-      size2.top = element.offsetTop;
-      size2.left = element.offsetLeft;
+      const size = this.props.sizeRef.current;
+      size.height = element.offsetHeight || 0;
+      size.width = element.offsetWidth || 0;
+      size.top = element.offsetTop;
+      size.left = element.offsetLeft;
     }
     return null;
   }
@@ -7585,7 +7900,7 @@ function PopChild({
 },) {
   const id4 = useId();
   const ref = useRef(null,);
-  const size2 = useRef({
+  const size = useRef({
     width: 0,
     height: 0,
     top: 0,
@@ -7600,7 +7915,7 @@ function PopChild({
       height,
       top,
       left,
-    } = size2.current;
+    } = size.current;
     if (isPresent2 || !ref.current || !width || !height) return;
     ref.current.dataset.motionPopId = id4;
     const style = document.createElement('style',);
@@ -7621,17 +7936,14 @@ function PopChild({
       document.head.removeChild(style,);
     };
   }, [isPresent2,],);
-  return React.createElement(
-    PopChildMeasure,
-    {
-      isPresent: isPresent2,
-      childRef: ref,
-      sizeRef: size2,
-    },
-    React.cloneElement(children, {
+  return jsx(PopChildMeasure, {
+    isPresent: isPresent2,
+    childRef: ref,
+    sizeRef: size,
+    children: React2.cloneElement(children, {
       ref,
     },),
-  );
+  },);
 }
 var PresenceChild = ({
   children,
@@ -7667,22 +7979,24 @@ var PresenceChild = ({
      * we want to make a new context value to ensure they get re-rendered
      * so they can detect that layout change.
      */
-    presenceAffectsLayout ? void 0 : [isPresent2,],
+    presenceAffectsLayout ? [Math.random(),] : [isPresent2,],
   );
   useMemo(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
   }, [isPresent2,],);
-  React.useEffect(() => {
+  React2.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
   if (mode === 'popLayout') {
-    children = React.createElement(PopChild, {
+    children = jsx(PopChild, {
       isPresent: isPresent2,
-    }, children,);
+      children,
+    },);
   }
-  return React.createElement(PresenceContext.Provider, {
+  return jsx(PresenceContext.Provider, {
     value: context,
-  }, children,);
+    children,
+  },);
 };
 function newChildrenMap() {
   return /* @__PURE__ */ new Map();
@@ -7730,19 +8044,17 @@ var AnimatePresence = ({
     exitingChildren.clear();
   },);
   if (isInitialRender.current) {
-    return React.createElement(
-      React.Fragment,
-      null,
-      childrenToRender.map((child) =>
-        React.createElement(PresenceChild, {
-          key: getChildKey(child,),
+    return jsx(Fragment, {
+      children: childrenToRender.map((child) =>
+        jsx(PresenceChild, {
           isPresent: true,
           initial: initial ? void 0 : false,
           presenceAffectsLayout,
           mode,
-        }, child,)
+          children: child,
+        }, getChildKey(child,),)
       ),
-    );
+    },);
   }
   childrenToRender = [...childrenToRender,];
   const presentKeys = presentChildren.current.map(getChildKey,);
@@ -7783,37 +8095,35 @@ var AnimatePresence = ({
           onExitComplete && onExitComplete();
         }
       };
-      exitingComponent = React.createElement(PresenceChild, {
-        key: getChildKey(child,),
+      exitingComponent = jsx(PresenceChild, {
         isPresent: false,
         onExitComplete: onExit,
         custom,
         presenceAffectsLayout,
         mode,
-      }, child,);
+        children: child,
+      }, getChildKey(child,),);
       exitingChildren.set(key7, exitingComponent,);
     }
     childrenToRender.splice(insertionIndex, 0, exitingComponent,);
   },);
   childrenToRender = childrenToRender.map((child) => {
     const key7 = child.key;
-    return exitingChildren.has(key7,) ? child : React.createElement(PresenceChild, {
-      key: getChildKey(child,),
+    return exitingChildren.has(key7,) ? child : jsx(PresenceChild, {
       isPresent: true,
       presenceAffectsLayout,
       mode,
-    }, child,);
+      children: child,
+    }, getChildKey(child,),);
   },);
   if (false) {
     console.warn(
       `You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`,
     );
   }
-  return React.createElement(
-    React.Fragment,
-    null,
-    exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement2(child,)),
-  );
+  return jsx(Fragment, {
+    children: exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement2(child,)),
+  },);
 };
 function MotionConfig({
   children,
@@ -7827,9 +8137,10 @@ function MotionConfig({
   };
   config.isStatic = useConstant(() => config.isStatic);
   const context = useMemo(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
-  return React.createElement(MotionConfigContext.Provider, {
+  return jsx(MotionConfigContext.Provider, {
     value: context,
-  }, children,);
+    children,
+  },);
 }
 function LazyMotion({
   children,
@@ -7858,12 +8169,13 @@ function LazyMotion({
       },);
     }
   }, [],);
-  return React.createElement(LazyContext.Provider, {
+  return jsx(LazyContext.Provider, {
     value: {
       renderer: loadedRenderer.current,
       strict,
     },
-  }, children,);
+    children,
+  },);
 }
 function isLazyBundle(features,) {
   return typeof features === 'function';
@@ -7916,9 +8228,10 @@ var LayoutGroup = ({
     ...context.current,
     forceRender,
   }), [key7,],);
-  return React.createElement(LayoutGroupContext.Provider, {
+  return jsx(LayoutGroupContext.Provider, {
     value: memoizedContext,
-  }, children,);
+    children,
+  },);
 };
 function useMotionValue(initial,) {
   const value = useConstant(() => motionValue(initial,));
@@ -7953,7 +8266,7 @@ function useCombineMotionValues(values, combineValues,) {
   const updateValue = () => value.set(combineValues(),);
   updateValue();
   useIsomorphicLayoutEffect(() => {
-    const scheduleUpdate = () => frame.update(updateValue, false, true,);
+    const scheduleUpdate = () => frame.preRender(updateValue, false, true,);
     const subscriptions = values.map((v) => v.on('change', scheduleUpdate,));
     return () => {
       subscriptions.forEach((unsubscribe) => unsubscribe());
@@ -8013,7 +8326,7 @@ function ReorderGroup({
   values,
   ...props
 }, externalRef,) {
-  const Component23 = useConstant(() => motion(as,));
+  const Component33 = useConstant(() => motion(as,));
   const order = [];
   const isReordering = useRef(false,);
   invariant(Boolean(values,), 'Reorder.Group must be provided a values prop',);
@@ -8043,17 +8356,15 @@ function ReorderGroup({
   useEffect(() => {
     isReordering.current = false;
   },);
-  return React.createElement(
-    Component23,
-    {
-      ...props,
-      ref: externalRef,
-      ignoreStrict: true,
-    },
-    React.createElement(ReorderContext.Provider, {
+  return jsx(Component33, {
+    ...props,
+    ref: externalRef,
+    ignoreStrict: true,
+    children: jsx(ReorderContext.Provider, {
       value: context,
-    }, children,),
-  );
+      children,
+    },),
+  },);
 }
 var Group = forwardRef(ReorderGroup,);
 function getValue(item,) {
@@ -8074,7 +8385,7 @@ function ReorderItem({
   layout: layout2 = true,
   ...props
 }, externalRef,) {
-  const Component23 = useConstant(() => motion(as,));
+  const Component33 = useConstant(() => motion(as,));
   const context = useContext3(ReorderContext,);
   const point2 = {
     x: useDefaultMotionValue(style.x,),
@@ -8087,7 +8398,7 @@ function ReorderItem({
     registerItem,
     updateOrder,
   } = context;
-  return React.createElement(Component23, {
+  return jsx(Component33, {
     drag: axis,
     ...props,
     dragSnapToOrigin: true,
@@ -8108,7 +8419,8 @@ function ReorderItem({
     onLayoutMeasure: (measured) => registerItem(value, measured,),
     ref: externalRef,
     ignoreStrict: true,
-  }, children,);
+    children,
+  },);
 }
 var Item = forwardRef(ReorderItem,);
 var Reorder = {
@@ -8282,14 +8594,14 @@ var windowCallbacks = /* @__PURE__ */ new Set();
 var windowResizeHandler;
 function createWindowResizeHandler() {
   windowResizeHandler = () => {
-    const size2 = {
+    const size = {
       width: window.innerWidth,
       height: window.innerHeight,
     };
     const info = {
       target: window,
-      size: size2,
-      contentSize: size2,
+      size,
+      contentSize: size,
     };
     windowCallbacks.forEach((callback) => callback(info,));
   };
@@ -8334,7 +8646,7 @@ var keys = {
     position: 'Top',
   },
 };
-function updateAxisInfo(element, axisName, info, time22,) {
+function updateAxisInfo(element, axisName, info, time2,) {
   const axis = info[axisName];
   const {
     length,
@@ -8342,19 +8654,19 @@ function updateAxisInfo(element, axisName, info, time22,) {
   } = keys[axisName];
   const prev = axis.current;
   const prevTime = info.time;
-  axis.current = element['scroll' + position];
-  axis.scrollLength = element['scroll' + length] - element['client' + length];
+  axis.current = element[`scroll${position}`];
+  axis.scrollLength = element[`scroll${length}`] - element[`client${length}`];
   axis.offset.length = 0;
   axis.offset[0] = 0;
   axis.offset[1] = axis.scrollLength;
   axis.progress = progress(0, axis.scrollLength, axis.current,);
-  const elapsed = time22 - prevTime;
+  const elapsed = time2 - prevTime;
   axis.velocity = elapsed > maxElapsed2 ? 0 : velocityPerSecond(axis.current - prev, elapsed,);
 }
-function updateScrollInfo(element, info, time22,) {
-  updateAxisInfo(element, 'x', info, time22,);
-  updateAxisInfo(element, 'y', info, time22,);
-  info.time = time22;
+function updateScrollInfo(element, info, time2,) {
+  updateAxisInfo(element, 'x', info, time2,);
+  updateAxisInfo(element, 'y', info, time2,);
+  info.time = time2;
 }
 function calcInset(element, container,) {
   const inset2 = {
@@ -8408,7 +8720,7 @@ var namedEdges = {
 };
 function resolveEdge(edge, length, inset2 = 0,) {
   let delta = 0;
-  if (namedEdges[edge] !== void 0) {
+  if (edge in namedEdges) {
     edge = namedEdges[edge];
   }
   if (typeof edge === 'string') {
@@ -8522,8 +8834,8 @@ function measure(container, target = container, info,) {
 function createOnScrollHandler(element, onScroll, info, options = {},) {
   return {
     measure: () => measure(element, options.target, info,),
-    update: (time22) => {
-      updateScrollInfo(element, info, time22,);
+    update: (time2) => {
+      updateScrollInfo(element, info, time2,);
       if (options.offset || options.target) {
         resolveOffsets(element, info, options,);
       }
@@ -8666,9 +8978,9 @@ function useAnimationFrame(callback,) {
   }, [callback,],);
 }
 function useTime() {
-  const time22 = useMotionValue(0,);
-  useAnimationFrame((t) => time22.set(t,));
-  return time22;
+  const time2 = useMotionValue(0,);
+  useAnimationFrame((t) => time2.set(t,));
+  return time2;
 }
 var WillChangeMotionValue = class extends MotionValue {
   constructor() {
@@ -8730,6 +9042,27 @@ function useReducedMotionConfig() {
 }
 function stopAnimation(visualElement,) {
   visualElement.values.forEach((value) => value.stop());
+}
+function setVariants(visualElement, variantLabels,) {
+  const reversedLabels = [...variantLabels,].reverse();
+  reversedLabels.forEach((key7) => {
+    const variant = visualElement.getVariant(key7,);
+    variant && setTarget(visualElement, variant,);
+    if (visualElement.variantChildren) {
+      visualElement.variantChildren.forEach((child) => {
+        setVariants(child, variantLabels,);
+      },);
+    }
+  },);
+}
+function setValues(visualElement, definition,) {
+  if (Array.isArray(definition,)) {
+    return setVariants(visualElement, definition,);
+  } else if (typeof definition === 'string') {
+    return setVariants(visualElement, [definition,],);
+  } else {
+    setTarget(visualElement, definition,);
+  }
 }
 function animationControls() {
   let hasMounted = false;
@@ -8836,8 +9169,8 @@ var GroupPlaybackControls = class {
   get time() {
     return this.getAll('time',);
   }
-  set time(time22,) {
-    this.setAll('time', time22,);
+  set time(time2,) {
+    this.setAll('time', time2,);
   }
   get speed() {
     return this.getAll('speed',);
@@ -9180,6 +9513,7 @@ var animate = createScopedAnimate();
 function useAnimate() {
   const scope = useConstant(() => ({
     current: null,
+    // Will be hydrated by React
     animations: [],
   }));
   const animate22 = useConstant(() => createScopedAnimate(scope,));
@@ -9353,7 +9687,7 @@ function disableInstantTransitions() {
   instantAnimationState.current = false;
 }
 function useResetProjection() {
-  const reset = React.useCallback(() => {
+  const reset = useCallback(() => {
     const root = rootProjectionNode.current;
     if (!root) return;
     root.resetTree();
@@ -9466,19 +9800,6 @@ var StateVisualElement = class extends VisualElement {
   }
   sortInstanceNodePosition() {
     return 0;
-  }
-  makeTargetAnimatableFromInstance({
-    transition,
-    transitionEnd,
-    ...target
-  },) {
-    const origin = getOrigin(target, transition || {}, this,);
-    checkTargetForNewValues(this, target, origin,);
-    return {
-      transition,
-      transitionEnd,
-      ...target,
-    };
   }
 };
 var useVisualState = makeUseVisualState({
@@ -9623,13 +9944,351 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.E5E3FQ23.js
-import { Component as Component2, } from 'react';
-import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
+// https :https://app.framerstatic.com/framer.O4RLPNHR.js
+
+import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
+var require_hsluv = __commonJS({
+  '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    exports.Hsluv = void 0;
+    var Hsluv2 = class {
+      constructor() {
+        this.hex = '#000000';
+        this.rgb_r = 0;
+        this.rgb_g = 0;
+        this.rgb_b = 0;
+        this.xyz_x = 0;
+        this.xyz_y = 0;
+        this.xyz_z = 0;
+        this.luv_l = 0;
+        this.luv_u = 0;
+        this.luv_v = 0;
+        this.lch_l = 0;
+        this.lch_c = 0;
+        this.lch_h = 0;
+        this.hsluv_h = 0;
+        this.hsluv_s = 0;
+        this.hsluv_l = 0;
+        this.hpluv_h = 0;
+        this.hpluv_p = 0;
+        this.hpluv_l = 0;
+        this.r0s = 0;
+        this.r0i = 0;
+        this.r1s = 0;
+        this.r1i = 0;
+        this.g0s = 0;
+        this.g0i = 0;
+        this.g1s = 0;
+        this.g1i = 0;
+        this.b0s = 0;
+        this.b0i = 0;
+        this.b1s = 0;
+        this.b1i = 0;
+      }
+      static fromLinear(c,) {
+        if (c <= 31308e-7) {
+          return 12.92 * c;
+        } else {
+          return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
+        }
+      }
+      static toLinear(c,) {
+        if (c > 0.04045) {
+          return Math.pow((c + 0.055) / 1.055, 2.4,);
+        } else {
+          return c / 12.92;
+        }
+      }
+      static yToL(Y,) {
+        if (Y <= Hsluv2.epsilon) {
+          return Y / Hsluv2.refY * Hsluv2.kappa;
+        } else {
+          return 116 * Math.pow(Y / Hsluv2.refY, 1 / 3,) - 16;
+        }
+      }
+      static lToY(L,) {
+        if (L <= 8) {
+          return Hsluv2.refY * L / Hsluv2.kappa;
+        } else {
+          return Hsluv2.refY * Math.pow((L + 16) / 116, 3,);
+        }
+      }
+      static rgbChannelToHex(chan,) {
+        const c = Math.round(chan * 255,);
+        const digit2 = c % 16;
+        const digit1 = (c - digit2) / 16 | 0;
+        return Hsluv2.hexChars.charAt(digit1,) + Hsluv2.hexChars.charAt(digit2,);
+      }
+      static hexToRgbChannel(hex2, offset,) {
+        const digit1 = Hsluv2.hexChars.indexOf(hex2.charAt(offset,),);
+        const digit2 = Hsluv2.hexChars.indexOf(hex2.charAt(offset + 1,),);
+        const n = digit1 * 16 + digit2;
+        return n / 255;
+      }
+      static distanceFromOriginAngle(slope, intercept, angle,) {
+        const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
+        if (d < 0) {
+          return Infinity;
+        } else {
+          return d;
+        }
+      }
+      static distanceFromOrigin(slope, intercept,) {
+        return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
+      }
+      static min6(f1, f2, f3, f4, f5, f6,) {
+        return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
+      }
+      rgbToHex() {
+        this.hex = '#';
+        this.hex += Hsluv2.rgbChannelToHex(this.rgb_r,);
+        this.hex += Hsluv2.rgbChannelToHex(this.rgb_g,);
+        this.hex += Hsluv2.rgbChannelToHex(this.rgb_b,);
+      }
+      hexToRgb() {
+        this.hex = this.hex.toLowerCase();
+        this.rgb_r = Hsluv2.hexToRgbChannel(this.hex, 1,);
+        this.rgb_g = Hsluv2.hexToRgbChannel(this.hex, 3,);
+        this.rgb_b = Hsluv2.hexToRgbChannel(this.hex, 5,);
+      }
+      xyzToRgb() {
+        this.rgb_r = Hsluv2.fromLinear(Hsluv2.m_r0 * this.xyz_x + Hsluv2.m_r1 * this.xyz_y + Hsluv2.m_r2 * this.xyz_z,);
+        this.rgb_g = Hsluv2.fromLinear(Hsluv2.m_g0 * this.xyz_x + Hsluv2.m_g1 * this.xyz_y + Hsluv2.m_g2 * this.xyz_z,);
+        this.rgb_b = Hsluv2.fromLinear(Hsluv2.m_b0 * this.xyz_x + Hsluv2.m_b1 * this.xyz_y + Hsluv2.m_b2 * this.xyz_z,);
+      }
+      rgbToXyz() {
+        const lr = Hsluv2.toLinear(this.rgb_r,);
+        const lg = Hsluv2.toLinear(this.rgb_g,);
+        const lb = Hsluv2.toLinear(this.rgb_b,);
+        this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
+        this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
+        this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
+      }
+      xyzToLuv() {
+        const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
+        let varU = 4 * this.xyz_x;
+        let varV = 9 * this.xyz_y;
+        if (divider !== 0) {
+          varU /= divider;
+          varV /= divider;
+        } else {
+          varU = NaN;
+          varV = NaN;
+        }
+        this.luv_l = Hsluv2.yToL(this.xyz_y,);
+        if (this.luv_l === 0) {
+          this.luv_u = 0;
+          this.luv_v = 0;
+        } else {
+          this.luv_u = 13 * this.luv_l * (varU - Hsluv2.refU);
+          this.luv_v = 13 * this.luv_l * (varV - Hsluv2.refV);
+        }
+      }
+      luvToXyz() {
+        if (this.luv_l === 0) {
+          this.xyz_x = 0;
+          this.xyz_y = 0;
+          this.xyz_z = 0;
+          return;
+        }
+        const varU = this.luv_u / (13 * this.luv_l) + Hsluv2.refU;
+        const varV = this.luv_v / (13 * this.luv_l) + Hsluv2.refV;
+        this.xyz_y = Hsluv2.lToY(this.luv_l,);
+        this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
+        this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
+      }
+      luvToLch() {
+        this.lch_l = this.luv_l;
+        this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
+        if (this.lch_c < 1e-8) {
+          this.lch_h = 0;
+        } else {
+          const hrad = Math.atan2(this.luv_v, this.luv_u,);
+          this.lch_h = hrad * 180 / Math.PI;
+          if (this.lch_h < 0) {
+            this.lch_h = 360 + this.lch_h;
+          }
+        }
+      }
+      lchToLuv() {
+        const hrad = this.lch_h / 180 * Math.PI;
+        this.luv_l = this.lch_l;
+        this.luv_u = Math.cos(hrad,) * this.lch_c;
+        this.luv_v = Math.sin(hrad,) * this.lch_c;
+      }
+      calculateBoundingLines(l,) {
+        const sub1 = Math.pow(l + 16, 3,) / 1560896;
+        const sub2 = sub1 > Hsluv2.epsilon ? sub1 : l / Hsluv2.kappa;
+        const s1r = sub2 * (284517 * Hsluv2.m_r0 - 94839 * Hsluv2.m_r2);
+        const s2r = sub2 * (838422 * Hsluv2.m_r2 + 769860 * Hsluv2.m_r1 + 731718 * Hsluv2.m_r0);
+        const s3r = sub2 * (632260 * Hsluv2.m_r2 - 126452 * Hsluv2.m_r1);
+        const s1g = sub2 * (284517 * Hsluv2.m_g0 - 94839 * Hsluv2.m_g2);
+        const s2g = sub2 * (838422 * Hsluv2.m_g2 + 769860 * Hsluv2.m_g1 + 731718 * Hsluv2.m_g0);
+        const s3g = sub2 * (632260 * Hsluv2.m_g2 - 126452 * Hsluv2.m_g1);
+        const s1b = sub2 * (284517 * Hsluv2.m_b0 - 94839 * Hsluv2.m_b2);
+        const s2b = sub2 * (838422 * Hsluv2.m_b2 + 769860 * Hsluv2.m_b1 + 731718 * Hsluv2.m_b0);
+        const s3b = sub2 * (632260 * Hsluv2.m_b2 - 126452 * Hsluv2.m_b1);
+        this.r0s = s1r / s3r;
+        this.r0i = s2r * l / s3r;
+        this.r1s = s1r / (s3r + 126452);
+        this.r1i = (s2r - 769860) * l / (s3r + 126452);
+        this.g0s = s1g / s3g;
+        this.g0i = s2g * l / s3g;
+        this.g1s = s1g / (s3g + 126452);
+        this.g1i = (s2g - 769860) * l / (s3g + 126452);
+        this.b0s = s1b / s3b;
+        this.b0i = s2b * l / s3b;
+        this.b1s = s1b / (s3b + 126452);
+        this.b1i = (s2b - 769860) * l / (s3b + 126452);
+      }
+      calcMaxChromaHpluv() {
+        const r0 = Hsluv2.distanceFromOrigin(this.r0s, this.r0i,);
+        const r1 = Hsluv2.distanceFromOrigin(this.r1s, this.r1i,);
+        const g0 = Hsluv2.distanceFromOrigin(this.g0s, this.g0i,);
+        const g1 = Hsluv2.distanceFromOrigin(this.g1s, this.g1i,);
+        const b0 = Hsluv2.distanceFromOrigin(this.b0s, this.b0i,);
+        const b1 = Hsluv2.distanceFromOrigin(this.b1s, this.b1i,);
+        return Hsluv2.min6(r0, r1, g0, g1, b0, b1,);
+      }
+      calcMaxChromaHsluv(h,) {
+        const hueRad = h / 360 * Math.PI * 2;
+        const r0 = Hsluv2.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
+        const r1 = Hsluv2.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
+        const g0 = Hsluv2.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
+        const g1 = Hsluv2.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
+        const b0 = Hsluv2.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
+        const b1 = Hsluv2.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
+        return Hsluv2.min6(r0, r1, g0, g1, b0, b1,);
+      }
+      hsluvToLch() {
+        if (this.hsluv_l > 99.9999999) {
+          this.lch_l = 100;
+          this.lch_c = 0;
+        } else if (this.hsluv_l < 1e-8) {
+          this.lch_l = 0;
+          this.lch_c = 0;
+        } else {
+          this.lch_l = this.hsluv_l;
+          this.calculateBoundingLines(this.hsluv_l,);
+          const max = this.calcMaxChromaHsluv(this.hsluv_h,);
+          this.lch_c = max / 100 * this.hsluv_s;
+        }
+        this.lch_h = this.hsluv_h;
+      }
+      lchToHsluv() {
+        if (this.lch_l > 99.9999999) {
+          this.hsluv_s = 0;
+          this.hsluv_l = 100;
+        } else if (this.lch_l < 1e-8) {
+          this.hsluv_s = 0;
+          this.hsluv_l = 0;
+        } else {
+          this.calculateBoundingLines(this.lch_l,);
+          const max = this.calcMaxChromaHsluv(this.lch_h,);
+          this.hsluv_s = this.lch_c / max * 100;
+          this.hsluv_l = this.lch_l;
+        }
+        this.hsluv_h = this.lch_h;
+      }
+      hpluvToLch() {
+        if (this.hpluv_l > 99.9999999) {
+          this.lch_l = 100;
+          this.lch_c = 0;
+        } else if (this.hpluv_l < 1e-8) {
+          this.lch_l = 0;
+          this.lch_c = 0;
+        } else {
+          this.lch_l = this.hpluv_l;
+          this.calculateBoundingLines(this.hpluv_l,);
+          const max = this.calcMaxChromaHpluv();
+          this.lch_c = max / 100 * this.hpluv_p;
+        }
+        this.lch_h = this.hpluv_h;
+      }
+      lchToHpluv() {
+        if (this.lch_l > 99.9999999) {
+          this.hpluv_p = 0;
+          this.hpluv_l = 100;
+        } else if (this.lch_l < 1e-8) {
+          this.hpluv_p = 0;
+          this.hpluv_l = 0;
+        } else {
+          this.calculateBoundingLines(this.lch_l,);
+          const max = this.calcMaxChromaHpluv();
+          this.hpluv_p = this.lch_c / max * 100;
+          this.hpluv_l = this.lch_l;
+        }
+        this.hpluv_h = this.lch_h;
+      }
+      hsluvToRgb() {
+        this.hsluvToLch();
+        this.lchToLuv();
+        this.luvToXyz();
+        this.xyzToRgb();
+      }
+      hpluvToRgb() {
+        this.hpluvToLch();
+        this.lchToLuv();
+        this.luvToXyz();
+        this.xyzToRgb();
+      }
+      hsluvToHex() {
+        this.hsluvToRgb();
+        this.rgbToHex();
+      }
+      hpluvToHex() {
+        this.hpluvToRgb();
+        this.rgbToHex();
+      }
+      rgbToHsluv() {
+        this.rgbToXyz();
+        this.xyzToLuv();
+        this.luvToLch();
+        this.lchToHpluv();
+        this.lchToHsluv();
+      }
+      rgbToHpluv() {
+        this.rgbToXyz();
+        this.xyzToLuv();
+        this.luvToLch();
+        this.lchToHpluv();
+        this.lchToHpluv();
+      }
+      hexToHsluv() {
+        this.hexToRgb();
+        this.rgbToHsluv();
+      }
+      hexToHpluv() {
+        this.hexToRgb();
+        this.rgbToHpluv();
+      }
+    };
+    exports.Hsluv = Hsluv2;
+    Hsluv2.hexChars = '0123456789abcdef';
+    Hsluv2.refY = 1;
+    Hsluv2.refU = 0.19783000664283;
+    Hsluv2.refV = 0.46831999493879;
+    Hsluv2.kappa = 903.2962962;
+    Hsluv2.epsilon = 0.0088564516;
+    Hsluv2.m_r0 = 3.240969941904521;
+    Hsluv2.m_r1 = -1.537383177570093;
+    Hsluv2.m_r2 = -0.498610760293;
+    Hsluv2.m_g0 = -0.96924363628087;
+    Hsluv2.m_g1 = 1.87596750150772;
+    Hsluv2.m_g2 = 0.041555057407175;
+    Hsluv2.m_b0 = 0.055630079696993;
+    Hsluv2.m_b1 = -0.20397695888897;
+    Hsluv2.m_b2 = 1.056971514242878;
+  },
+},);
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
@@ -9667,14 +10326,14 @@ var require_eventemitter3 = __commonJS({
     }
     EventEmitter2.prototype.eventNames = function eventNames() {
       var names = [],
-        events2,
+        events,
         name;
       if (this._eventsCount === 0) return names;
-      for (name in events2 = this._events) {
-        if (has.call(events2, name,)) names.push(prefix2 ? name.slice(1,) : name,);
+      for (name in events = this._events) {
+        if (has.call(events, name,)) names.push(prefix2 ? name.slice(1,) : name,);
       }
       if (Object.getOwnPropertySymbols) {
-        return names.concat(Object.getOwnPropertySymbols(events2,),);
+        return names.concat(Object.getOwnPropertySymbols(events,),);
       }
       return names;
     };
@@ -9771,12 +10430,12 @@ var require_eventemitter3 = __commonJS({
           clearEvent(this, evt,);
         }
       } else {
-        for (var i = 0, events2 = [], length = listeners.length; i < length; i++) {
+        for (var i = 0, events = [], length = listeners.length; i < length; i++) {
           if (listeners[i].fn !== fn || once && !listeners[i].once || context && listeners[i].context !== context) {
-            events2.push(listeners[i],);
+            events.push(listeners[i],);
           }
         }
-        if (events2.length) this._events[evt] = events2.length === 1 ? events2[0] : events2;
+        if (events.length) this._events[evt] = events.length === 1 ? events[0] : events;
         else clearEvent(this, evt,);
       }
       return this;
@@ -9803,7 +10462,7 @@ var require_eventemitter3 = __commonJS({
 },);
 var require_browser = __commonJS({
   '../../../node_modules/process/browser.js'(exports, module,) {
-    var process6 = module.exports = {};
+    var process5 = module.exports = {};
     var cachedSetTimeout;
     var cachedClearTimeout;
     function defaultSetTimout() {
@@ -9908,7 +10567,7 @@ var require_browser = __commonJS({
       draining = false;
       runClearTimeout(timeout,);
     }
-    process6.nextTick = function (fun,) {
+    process5.nextTick = function (fun,) {
       var args = new Array(arguments.length - 1,);
       if (arguments.length > 1) {
         for (var i = 1; i < arguments.length; i++) {
@@ -9927,37 +10586,603 @@ var require_browser = __commonJS({
     Item2.prototype.run = function () {
       this.fun.apply(null, this.array,);
     };
-    process6.title = 'browser';
-    process6.browser = true;
-    process6.env = {};
-    process6.argv = [];
-    process6.version = '';
-    process6.versions = {};
+    process5.title = 'browser';
+    process5.browser = true;
+    process5.env = {};
+    process5.argv = [];
+    process5.version = '';
+    process5.versions = {};
     function noop2() {}
-    process6.on = noop2;
-    process6.addListener = noop2;
-    process6.once = noop2;
-    process6.off = noop2;
-    process6.removeListener = noop2;
-    process6.removeAllListeners = noop2;
-    process6.emit = noop2;
-    process6.prependListener = noop2;
-    process6.prependOnceListener = noop2;
-    process6.listeners = function (name,) {
+    process5.on = noop2;
+    process5.addListener = noop2;
+    process5.once = noop2;
+    process5.off = noop2;
+    process5.removeListener = noop2;
+    process5.removeAllListeners = noop2;
+    process5.emit = noop2;
+    process5.prependListener = noop2;
+    process5.prependOnceListener = noop2;
+    process5.listeners = function (name,) {
       return [];
     };
-    process6.binding = function (name,) {
+    process5.binding = function (name,) {
       throw new Error('process.binding is not supported',);
     };
-    process6.cwd = function () {
+    process5.cwd = function () {
       return '/';
     };
-    process6.chdir = function (dir,) {
+    process5.chdir = function (dir,) {
       throw new Error('process.chdir is not supported',);
     };
-    process6.umask = function () {
+    process5.umask = function () {
       return 0;
     };
+  },
+},);
+var require_resize_observer_umd = __commonJS({
+  '../../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.umd.js'(exports, module,) {
+    (function (global, factory,) {
+      typeof exports === 'object' && typeof module !== 'undefined'
+        ? factory(exports,)
+        : typeof define === 'function' && define.amd
+        ? define(['exports',], factory,)
+        : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ResizeObserver = {},));
+    })(exports, function (exports2,) {
+      'use strict';
+
+      var resizeObservers = [];
+      var hasActiveObservations = function () {
+        return resizeObservers.some(function (ro,) {
+          return ro.activeTargets.length > 0;
+        },);
+      };
+      var hasSkippedObservations = function () {
+        return resizeObservers.some(function (ro,) {
+          return ro.skippedTargets.length > 0;
+        },);
+      };
+      var msg = 'ResizeObserver loop completed with undelivered notifications.';
+      var deliverResizeLoopError = function () {
+        var event;
+        if (typeof ErrorEvent === 'function') {
+          event = new ErrorEvent('error', {
+            message: msg,
+          },);
+        } else {
+          event = document.createEvent('Event',);
+          event.initEvent('error', false, false,);
+          event.message = msg;
+        }
+        window.dispatchEvent(event,);
+      };
+      var ResizeObserverBoxOptions;
+      (function (ResizeObserverBoxOptions2,) {
+        ResizeObserverBoxOptions2['BORDER_BOX'] = 'border-box';
+        ResizeObserverBoxOptions2['CONTENT_BOX'] = 'content-box';
+        ResizeObserverBoxOptions2['DEVICE_PIXEL_CONTENT_BOX'] = 'device-pixel-content-box';
+      })(ResizeObserverBoxOptions || (ResizeObserverBoxOptions = {}),);
+      var freeze = function (obj,) {
+        return Object.freeze(obj,);
+      };
+      var ResizeObserverSize = /* @__PURE__ */ function () {
+        function ResizeObserverSize2(inlineSize, blockSize,) {
+          this.inlineSize = inlineSize;
+          this.blockSize = blockSize;
+          freeze(this,);
+        }
+        return ResizeObserverSize2;
+      }();
+      var DOMRectReadOnly = function () {
+        function DOMRectReadOnly2(x, y, width, height,) {
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+          this.top = this.y;
+          this.left = this.x;
+          this.bottom = this.top + this.height;
+          this.right = this.left + this.width;
+          return freeze(this,);
+        }
+        DOMRectReadOnly2.prototype.toJSON = function () {
+          var _a = this,
+            x = _a.x,
+            y = _a.y,
+            top = _a.top,
+            right = _a.right,
+            bottom = _a.bottom,
+            left = _a.left,
+            width = _a.width,
+            height = _a.height;
+          return {
+            x,
+            y,
+            top,
+            right,
+            bottom,
+            left,
+            width,
+            height,
+          };
+        };
+        DOMRectReadOnly2.fromRect = function (rectangle,) {
+          return new DOMRectReadOnly2(rectangle.x, rectangle.y, rectangle.width, rectangle.height,);
+        };
+        return DOMRectReadOnly2;
+      }();
+      var isSVG = function (target,) {
+        return target instanceof SVGElement && 'getBBox' in target;
+      };
+      var isHidden = function (target,) {
+        if (isSVG(target,)) {
+          var _a = target.getBBox(),
+            width = _a.width,
+            height = _a.height;
+          return !width && !height;
+        }
+        var _b = target,
+          offsetWidth = _b.offsetWidth,
+          offsetHeight = _b.offsetHeight;
+        return !(offsetWidth || offsetHeight || target.getClientRects().length);
+      };
+      var isElement = function (obj,) {
+        var _a, _b;
+        if (obj instanceof Element) {
+          return true;
+        }
+        var scope = (_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.ownerDocument) === null || _b === void 0
+          ? void 0
+          : _b.defaultView;
+        return !!(scope && obj instanceof scope.Element);
+      };
+      var isReplacedElement = function (target,) {
+        switch (target.tagName) {
+          case 'INPUT':
+            if (target.type !== 'image') {
+              break;
+            }
+          case 'VIDEO':
+          case 'AUDIO':
+          case 'EMBED':
+          case 'OBJECT':
+          case 'CANVAS':
+          case 'IFRAME':
+          case 'IMG':
+            return true;
+        }
+        return false;
+      };
+      var global = typeof window !== 'undefined' ? window : {};
+      var cache2 = /* @__PURE__ */ new WeakMap();
+      var scrollRegexp = /auto|scroll/;
+      var verticalRegexp = /^tb|vertical/;
+      var IE = /msie|trident/i.test(global.navigator && global.navigator.userAgent,);
+      var parseDimension = function (pixel,) {
+        return parseFloat(pixel || '0',);
+      };
+      var size = function (inlineSize, blockSize, switchSizes,) {
+        if (inlineSize === void 0) {
+          inlineSize = 0;
+        }
+        if (blockSize === void 0) {
+          blockSize = 0;
+        }
+        if (switchSizes === void 0) {
+          switchSizes = false;
+        }
+        return new ResizeObserverSize((switchSizes ? blockSize : inlineSize) || 0, (switchSizes ? inlineSize : blockSize) || 0,);
+      };
+      var zeroBoxes = freeze({
+        devicePixelContentBoxSize: size(),
+        borderBoxSize: size(),
+        contentBoxSize: size(),
+        contentRect: new DOMRectReadOnly(0, 0, 0, 0,),
+      },);
+      var calculateBoxSizes = function (target, forceRecalculation,) {
+        if (forceRecalculation === void 0) {
+          forceRecalculation = false;
+        }
+        if (cache2.has(target,) && !forceRecalculation) {
+          return cache2.get(target,);
+        }
+        if (isHidden(target,)) {
+          cache2.set(target, zeroBoxes,);
+          return zeroBoxes;
+        }
+        var cs = getComputedStyle(target,);
+        var svg = isSVG(target,) && target.ownerSVGElement && target.getBBox();
+        var removePadding = !IE && cs.boxSizing === 'border-box';
+        var switchSizes = verticalRegexp.test(cs.writingMode || '',);
+        var canScrollVertically = !svg && scrollRegexp.test(cs.overflowY || '',);
+        var canScrollHorizontally = !svg && scrollRegexp.test(cs.overflowX || '',);
+        var paddingTop = svg ? 0 : parseDimension(cs.paddingTop,);
+        var paddingRight = svg ? 0 : parseDimension(cs.paddingRight,);
+        var paddingBottom = svg ? 0 : parseDimension(cs.paddingBottom,);
+        var paddingLeft = svg ? 0 : parseDimension(cs.paddingLeft,);
+        var borderTop = svg ? 0 : parseDimension(cs.borderTopWidth,);
+        var borderRight = svg ? 0 : parseDimension(cs.borderRightWidth,);
+        var borderBottom = svg ? 0 : parseDimension(cs.borderBottomWidth,);
+        var borderLeft = svg ? 0 : parseDimension(cs.borderLeftWidth,);
+        var horizontalPadding = paddingLeft + paddingRight;
+        var verticalPadding = paddingTop + paddingBottom;
+        var horizontalBorderArea = borderLeft + borderRight;
+        var verticalBorderArea = borderTop + borderBottom;
+        var horizontalScrollbarThickness = !canScrollHorizontally ? 0 : target.offsetHeight - verticalBorderArea - target.clientHeight;
+        var verticalScrollbarThickness = !canScrollVertically ? 0 : target.offsetWidth - horizontalBorderArea - target.clientWidth;
+        var widthReduction = removePadding ? horizontalPadding + horizontalBorderArea : 0;
+        var heightReduction = removePadding ? verticalPadding + verticalBorderArea : 0;
+        var contentWidth = svg ? svg.width : parseDimension(cs.width,) - widthReduction - verticalScrollbarThickness;
+        var contentHeight = svg ? svg.height : parseDimension(cs.height,) - heightReduction - horizontalScrollbarThickness;
+        var borderBoxWidth = contentWidth + horizontalPadding + verticalScrollbarThickness + horizontalBorderArea;
+        var borderBoxHeight = contentHeight + verticalPadding + horizontalScrollbarThickness + verticalBorderArea;
+        var boxes = freeze({
+          devicePixelContentBoxSize: size(
+            Math.round(contentWidth * devicePixelRatio,),
+            Math.round(contentHeight * devicePixelRatio,),
+            switchSizes,
+          ),
+          borderBoxSize: size(borderBoxWidth, borderBoxHeight, switchSizes,),
+          contentBoxSize: size(contentWidth, contentHeight, switchSizes,),
+          contentRect: new DOMRectReadOnly(paddingLeft, paddingTop, contentWidth, contentHeight,),
+        },);
+        cache2.set(target, boxes,);
+        return boxes;
+      };
+      var calculateBoxSize = function (target, observedBox, forceRecalculation,) {
+        var _a = calculateBoxSizes(target, forceRecalculation,),
+          borderBoxSize = _a.borderBoxSize,
+          contentBoxSize = _a.contentBoxSize,
+          devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
+        switch (observedBox) {
+          case ResizeObserverBoxOptions.DEVICE_PIXEL_CONTENT_BOX:
+            return devicePixelContentBoxSize;
+          case ResizeObserverBoxOptions.BORDER_BOX:
+            return borderBoxSize;
+          default:
+            return contentBoxSize;
+        }
+      };
+      var ResizeObserverEntry = /* @__PURE__ */ function () {
+        function ResizeObserverEntry2(target,) {
+          var boxes = calculateBoxSizes(target,);
+          this.target = target;
+          this.contentRect = boxes.contentRect;
+          this.borderBoxSize = freeze([boxes.borderBoxSize,],);
+          this.contentBoxSize = freeze([boxes.contentBoxSize,],);
+          this.devicePixelContentBoxSize = freeze([boxes.devicePixelContentBoxSize,],);
+        }
+        return ResizeObserverEntry2;
+      }();
+      var calculateDepthForNode = function (node,) {
+        if (isHidden(node,)) {
+          return Infinity;
+        }
+        var depth = 0;
+        var parent = node.parentNode;
+        while (parent) {
+          depth += 1;
+          parent = parent.parentNode;
+        }
+        return depth;
+      };
+      var broadcastActiveObservations = function () {
+        var shallowestDepth = Infinity;
+        var callbacks2 = [];
+        resizeObservers.forEach(function processObserver(ro,) {
+          if (ro.activeTargets.length === 0) {
+            return;
+          }
+          var entries = [];
+          ro.activeTargets.forEach(function processTarget(ot,) {
+            var entry = new ResizeObserverEntry(ot.target,);
+            var targetDepth = calculateDepthForNode(ot.target,);
+            entries.push(entry,);
+            ot.lastReportedSize = calculateBoxSize(ot.target, ot.observedBox,);
+            if (targetDepth < shallowestDepth) {
+              shallowestDepth = targetDepth;
+            }
+          },);
+          callbacks2.push(function resizeObserverCallback() {
+            ro.callback.call(ro.observer, entries, ro.observer,);
+          },);
+          ro.activeTargets.splice(0, ro.activeTargets.length,);
+        },);
+        for (var _i = 0, callbacks_1 = callbacks2; _i < callbacks_1.length; _i++) {
+          var callback = callbacks_1[_i];
+          callback();
+        }
+        return shallowestDepth;
+      };
+      var gatherActiveObservationsAtDepth = function (depth,) {
+        resizeObservers.forEach(function processObserver(ro,) {
+          ro.activeTargets.splice(0, ro.activeTargets.length,);
+          ro.skippedTargets.splice(0, ro.skippedTargets.length,);
+          ro.observationTargets.forEach(function processTarget(ot,) {
+            if (ot.isActive()) {
+              if (calculateDepthForNode(ot.target,) > depth) {
+                ro.activeTargets.push(ot,);
+              } else {
+                ro.skippedTargets.push(ot,);
+              }
+            }
+          },);
+        },);
+      };
+      var process5 = function () {
+        var depth = 0;
+        gatherActiveObservationsAtDepth(depth,);
+        while (hasActiveObservations()) {
+          depth = broadcastActiveObservations();
+          gatherActiveObservationsAtDepth(depth,);
+        }
+        if (hasSkippedObservations()) {
+          deliverResizeLoopError();
+        }
+        return depth > 0;
+      };
+      var trigger;
+      var callbacks = [];
+      var notify2 = function () {
+        return callbacks.splice(0,).forEach(function (cb,) {
+          return cb();
+        },);
+      };
+      var queueMicroTask = function (callback,) {
+        if (!trigger) {
+          var toggle_1 = 0;
+          var el_1 = document.createTextNode('',);
+          var config = {
+            characterData: true,
+          };
+          new MutationObserver(function () {
+            return notify2();
+          },).observe(el_1, config,);
+          trigger = function () {
+            el_1.textContent = '' + (toggle_1 ? toggle_1-- : toggle_1++);
+          };
+        }
+        callbacks.push(callback,);
+        trigger();
+      };
+      var queueResizeObserver = function (cb,) {
+        queueMicroTask(function ResizeObserver22() {
+          requestAnimationFrame(cb,);
+        },);
+      };
+      var watching = 0;
+      var isWatching = function () {
+        return !!watching;
+      };
+      var CATCH_PERIOD = 250;
+      var observerConfig = {
+        attributes: true,
+        characterData: true,
+        childList: true,
+        subtree: true,
+      };
+      var events = [
+        'resize',
+        'load',
+        'transitionend',
+        'animationend',
+        'animationstart',
+        'animationiteration',
+        'keyup',
+        'keydown',
+        'mouseup',
+        'mousedown',
+        'mouseover',
+        'mouseout',
+        'blur',
+        'focus',
+      ];
+      var time2 = function (timeout,) {
+        if (timeout === void 0) {
+          timeout = 0;
+        }
+        return Date.now() + timeout;
+      };
+      var scheduled = false;
+      var Scheduler = function () {
+        function Scheduler2() {
+          var _this = this;
+          this.stopped = true;
+          this.listener = function () {
+            return _this.schedule();
+          };
+        }
+        Scheduler2.prototype.run = function (timeout,) {
+          var _this = this;
+          if (timeout === void 0) {
+            timeout = CATCH_PERIOD;
+          }
+          if (scheduled) {
+            return;
+          }
+          scheduled = true;
+          var until = time2(timeout,);
+          queueResizeObserver(function () {
+            var elementsHaveResized = false;
+            try {
+              elementsHaveResized = process5();
+            } finally {
+              scheduled = false;
+              timeout = until - time2();
+              if (!isWatching()) {
+                return;
+              }
+              if (elementsHaveResized) {
+                _this.run(1e3,);
+              } else if (timeout > 0) {
+                _this.run(timeout,);
+              } else {
+                _this.start();
+              }
+            }
+          },);
+        };
+        Scheduler2.prototype.schedule = function () {
+          this.stop();
+          this.run();
+        };
+        Scheduler2.prototype.observe = function () {
+          var _this = this;
+          var cb = function () {
+            return _this.observer && _this.observer.observe(document.body, observerConfig,);
+          };
+          document.body ? cb() : global.addEventListener('DOMContentLoaded', cb,);
+        };
+        Scheduler2.prototype.start = function () {
+          var _this = this;
+          if (this.stopped) {
+            this.stopped = false;
+            this.observer = new MutationObserver(this.listener,);
+            this.observe();
+            events.forEach(function (name,) {
+              return global.addEventListener(name, _this.listener, true,);
+            },);
+          }
+        };
+        Scheduler2.prototype.stop = function () {
+          var _this = this;
+          if (!this.stopped) {
+            this.observer && this.observer.disconnect();
+            events.forEach(function (name,) {
+              return global.removeEventListener(name, _this.listener, true,);
+            },);
+            this.stopped = true;
+          }
+        };
+        return Scheduler2;
+      }();
+      var scheduler = new Scheduler();
+      var updateCount = function (n,) {
+        !watching && n > 0 && scheduler.start();
+        watching += n;
+        !watching && scheduler.stop();
+      };
+      var skipNotifyOnElement = function (target,) {
+        return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
+      };
+      var ResizeObservation = function () {
+        function ResizeObservation2(target, observedBox,) {
+          this.target = target;
+          this.observedBox = observedBox || ResizeObserverBoxOptions.CONTENT_BOX;
+          this.lastReportedSize = {
+            inlineSize: 0,
+            blockSize: 0,
+          };
+        }
+        ResizeObservation2.prototype.isActive = function () {
+          var size2 = calculateBoxSize(this.target, this.observedBox, true,);
+          if (skipNotifyOnElement(this.target,)) {
+            this.lastReportedSize = size2;
+          }
+          if (this.lastReportedSize.inlineSize !== size2.inlineSize || this.lastReportedSize.blockSize !== size2.blockSize) {
+            return true;
+          }
+          return false;
+        };
+        return ResizeObservation2;
+      }();
+      var ResizeObserverDetail = /* @__PURE__ */ function () {
+        function ResizeObserverDetail2(resizeObserver, callback,) {
+          this.activeTargets = [];
+          this.skippedTargets = [];
+          this.observationTargets = [];
+          this.observer = resizeObserver;
+          this.callback = callback;
+        }
+        return ResizeObserverDetail2;
+      }();
+      var observerMap = /* @__PURE__ */ new WeakMap();
+      var getObservationIndex = function (observationTargets, target,) {
+        for (var i = 0; i < observationTargets.length; i += 1) {
+          if (observationTargets[i].target === target) {
+            return i;
+          }
+        }
+        return -1;
+      };
+      var ResizeObserverController = function () {
+        function ResizeObserverController2() {}
+        ResizeObserverController2.connect = function (resizeObserver, callback,) {
+          var detail = new ResizeObserverDetail(resizeObserver, callback,);
+          observerMap.set(resizeObserver, detail,);
+        };
+        ResizeObserverController2.observe = function (resizeObserver, target, options,) {
+          var detail = observerMap.get(resizeObserver,);
+          var firstObservation = detail.observationTargets.length === 0;
+          if (getObservationIndex(detail.observationTargets, target,) < 0) {
+            firstObservation && resizeObservers.push(detail,);
+            detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
+            updateCount(1,);
+            scheduler.schedule();
+          }
+        };
+        ResizeObserverController2.unobserve = function (resizeObserver, target,) {
+          var detail = observerMap.get(resizeObserver,);
+          var index = getObservationIndex(detail.observationTargets, target,);
+          var lastObservation = detail.observationTargets.length === 1;
+          if (index >= 0) {
+            lastObservation && resizeObservers.splice(resizeObservers.indexOf(detail,), 1,);
+            detail.observationTargets.splice(index, 1,);
+            updateCount(-1,);
+          }
+        };
+        ResizeObserverController2.disconnect = function (resizeObserver,) {
+          var _this = this;
+          var detail = observerMap.get(resizeObserver,);
+          detail.observationTargets.slice().forEach(function (ot,) {
+            return _this.unobserve(resizeObserver, ot.target,);
+          },);
+          detail.activeTargets.splice(0, detail.activeTargets.length,);
+        };
+        return ResizeObserverController2;
+      }();
+      var ResizeObserver2 = function () {
+        function ResizeObserver22(callback,) {
+          if (arguments.length === 0) {
+            throw new TypeError('Failed to construct \'ResizeObserver\': 1 argument required, but only 0 present.',);
+          }
+          if (typeof callback !== 'function') {
+            throw new TypeError('Failed to construct \'ResizeObserver\': The callback provided as parameter 1 is not a function.',);
+          }
+          ResizeObserverController.connect(this, callback,);
+        }
+        ResizeObserver22.prototype.observe = function (target, options,) {
+          if (arguments.length === 0) {
+            throw new TypeError('Failed to execute \'observe\' on \'ResizeObserver\': 1 argument required, but only 0 present.',);
+          }
+          if (!isElement(target,)) {
+            throw new TypeError('Failed to execute \'observe\' on \'ResizeObserver\': parameter 1 is not of type \'Element',);
+          }
+          ResizeObserverController.observe(this, target, options,);
+        };
+        ResizeObserver22.prototype.unobserve = function (target,) {
+          if (arguments.length === 0) {
+            throw new TypeError('Failed to execute \'unobserve\' on \'ResizeObserver\': 1 argument required, but only 0 present.',);
+          }
+          if (!isElement(target,)) {
+            throw new TypeError('Failed to execute \'unobserve\' on \'ResizeObserver\': parameter 1 is not of type \'Element',);
+          }
+          ResizeObserverController.unobserve(this, target,);
+        };
+        ResizeObserver22.prototype.disconnect = function () {
+          ResizeObserverController.disconnect(this,);
+        };
+        ResizeObserver22.toString = function () {
+          return 'function ResizeObserver () { [polyfill code] }';
+        };
+        return ResizeObserver22;
+      }();
+      exports2.ResizeObserver = ResizeObserver2;
+      exports2.ResizeObserverEntry = ResizeObserverEntry;
+      exports2.ResizeObserverSize = ResizeObserverSize;
+      Object.defineProperty(exports2, '__esModule', {
+        value: true,
+      },);
+    },);
   },
 },);
 var require_react_is_production_min = __commonJS({
@@ -10407,11 +11632,11 @@ function renderPage(Page4, defaultPageStyle,) {
   const style = {
     style: defaultPageStyle,
   };
-  return React__default.isValidElement(Page4,) ? React__default.cloneElement(Page4, style,) : React__default.createElement(Page4, style,);
+  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
 }
 var NotFoundError = class extends Error {};
 var ErrorBoundaryCaughtError = class extends Error {};
-var ErrorBoundary = class extends Component2 {
+var ErrorBoundary = class extends Component {
   constructor(props,) {
     super(props,);
     this.state = {
@@ -10457,7 +11682,7 @@ var ErrorBoundary = class extends Component2 {
   }
 };
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = new RegExp(pathVariablesRegExpRaw, 'gi',);
+var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
   return path.replace(pathVariablesRegExp, (match, name,) => {
     const value = variables[name];
@@ -10621,15 +11846,15 @@ function isString2(value,) {
 }
 var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
-  return typeof componentType === 'object' && componentType !== null && !React__default.isValidElement(componentType,) &&
+  return typeof componentType === 'object' && componentType !== null && !React4.isValidElement(componentType,) &&
     preloadKey in componentType;
 }
 function lazy(factory,) {
-  const LazyComponent = React__default.lazy(factory,);
+  const LazyComponent = React4.lazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component14 = React__default.forwardRef(function LazyWithPreload(props, ref,) {
-    return React__default.createElement(
+  const Component15 = React4.forwardRef(function LazyWithPreload(props, ref,) {
+    return React4.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
       Object.assign(
         ref
@@ -10641,7 +11866,7 @@ function lazy(factory,) {
       ),
     );
   },);
-  Component14.preload = () => {
+  Component15.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
         LoadedComponent = module.default;
@@ -10650,7 +11875,7 @@ function lazy(factory,) {
     }
     return factoryPromise;
   };
-  return Component14;
+  return Component15;
 }
 function getRouteElementId(route, hash2,) {
   if (hash2 && route) {
@@ -10769,44 +11994,44 @@ async function getLocalizedNavigationPath({
   return result;
 }
 function getPageEffectForRoute(currentRouteId, nextRouteId, {
-  global: global2,
+  global,
   routes,
 },) {
   var _a;
-  return ((_a = routes[currentRouteId]) === null || _a === void 0 ? void 0 : _a[nextRouteId]) || global2;
+  return ((_a = routes[currentRouteId]) === null || _a === void 0 ? void 0 : _a[nextRouteId]) || global;
 }
 var defaultSitePageEffects = {
   global: void 0,
   routes: {},
 };
-var PageEffectsContext = React__default.createContext(defaultSitePageEffects,);
+var PageEffectsContext = /* @__PURE__ */ React4.createContext(defaultSitePageEffects,);
 function PageEffectsProvider({
   children,
   value,
 },) {
-  return _jsx5(PageEffectsContext.Provider, {
+  return jsx(PageEffectsContext.Provider, {
     value,
     children,
   },);
 }
 function usePageEffects() {
-  return React__default.useContext(PageEffectsContext,);
+  return React4.useContext(PageEffectsContext,);
 }
 var step = 10;
 var maxDuration3 = 1e4;
 function createLinearEasing(generator,) {
-  let time22 = step;
+  let time2 = step;
   let state = generator.next(0,);
   const keyframes2 = [state.value,];
-  while (!state.done && time22 < maxDuration3) {
-    state = generator.next(time22,);
+  while (!state.done && time2 < maxDuration3) {
+    state = generator.next(time2,);
     keyframes2.push(state.value,);
-    time22 += step;
+    time2 += step;
   }
   if (keyframes2.length === 1) keyframes2.push(state.value,);
   return {
     easing: `linear(${keyframes2.join(',',)})`,
-    duration: time22 - step,
+    duration: time2 - step,
   };
 }
 var cssVariable = (name) => `--view-transition-${name}`;
@@ -11204,7 +12429,7 @@ function useReplaceInitialState({
   initialPathVariables,
   initialLocaleId,
 },) {
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     if (disabled) return;
     replaceHistoryState({
       routeId,
@@ -11215,8 +12440,8 @@ function useReplaceInitialState({
 }
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
-  const viewTransitionReady = React__default.useRef(void 0,);
-  const popStateHandler = React__default.useCallback(({
+  const viewTransitionReady = React4.useRef(void 0,);
+  const popStateHandler = React4.useCallback(({
     state,
   },) => {
     var _a, _b, _c;
@@ -11261,7 +12486,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       scroll: 'after-transition',
     },);
   }, [],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     var _a;
     window.addEventListener('popstate', popStateHandler,);
     (_a = window.navigation) === null || _a === void 0 ? void 0 : _a.addEventListener('navigate', traversalHandler,);
@@ -11443,34 +12668,34 @@ function OnHydrationEnd({
   return null;
 }
 function useGetRouteCallback(routes,) {
-  return React__default.useCallback((routeId) => routes[routeId], [routes,],);
+  return React4.useCallback((routeId) => routes[routeId], [routes,],);
 }
-var RouterContext = React__default.createContext({},);
+var RouterContext = /* @__PURE__ */ (() => React4.createContext({},))();
 function RouterAPIProvider({
   api,
   children,
 },) {
-  return _jsx5(RouterContext.Provider, {
+  return jsx(RouterContext.Provider, {
     value: api,
     children,
   },);
 }
 function useRouter() {
-  return React__default.useContext(RouterContext,);
+  return React4.useContext(RouterContext,);
 }
 function RoutesProvider({
   routes,
   children,
 },) {
   const getRoute = useGetRouteCallback(routes,);
-  return _jsx5(RouterContext.Provider, {
+  return jsx(RouterContext.Provider, {
     value: {
       getRoute,
     },
     children,
   },);
 }
-var SuspenseErrorBoundary = class extends Component2 {
+var SuspenseErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     this.state = {
@@ -11496,12 +12721,12 @@ var SuspenseErrorBoundary = class extends Component2 {
     if (this.state.error instanceof ErrorBoundaryCaughtError) {
       throw this.state.error.cause;
     }
-    return _jsx5(Suspense2, {
+    return jsx(Suspense2, {
       children: this.props.fallbackChildren,
     },);
   }
 };
-var suspendPromise = typeof window !== 'undefined' ? new Promise(() => {},) : null;
+var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
   if (typeof window === 'undefined') return null;
   throw suspendPromise;
@@ -11509,10 +12734,10 @@ function Suspend() {
 function SuspenseThatPreservesDom({
   children,
 },) {
-  return _jsx5(SuspenseErrorBoundary, {
+  return jsx(SuspenseErrorBoundary, {
     fallbackChildren: children,
-    children: _jsx5(Suspense2, {
-      fallback: _jsx5(Suspend, {},),
+    children: jsx(Suspense2, {
+      fallback: jsx(Suspend, {},),
       children,
     },),
   },);
@@ -11524,13 +12749,13 @@ var defaultCollectionListPaginationInfo = {
   setPaginationInfo: noopAsync,
   loadMore: noopAsync,
 };
-var CollectionListPaginationInfoContext = /* @__PURE__ */ React__default.createContext(defaultCollectionListPaginationInfo,);
+var CollectionListPaginationInfoContext = /* @__PURE__ */ React4.createContext(defaultCollectionListPaginationInfo,);
 function useCollectionListPaginationInfo() {
-  return React__default.useContext(CollectionListPaginationInfoContext,);
+  return React4.useContext(CollectionListPaginationInfoContext,);
 }
 function useForceUpdate2() {
-  const [_, setForcedRenderCount,] = React__default.useState(0,);
-  return [_, React__default.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
+  const [_, setForcedRenderCount,] = React4.useState(0,);
+  return [_, React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
 var noopAsync2 = async () => {};
 var defaultLocaleInfo = {
@@ -11538,9 +12763,9 @@ var defaultLocaleInfo = {
   locales: [],
   setLocale: noopAsync2,
 };
-var LocaleInfoContext = /* @__PURE__ */ React__default.createContext(defaultLocaleInfo,);
+var LocaleInfoContext = /* @__PURE__ */ React4.createContext(defaultLocaleInfo,);
 function useLocaleInfo() {
-  return React__default.useContext(LocaleInfoContext,);
+  return React4.useContext(LocaleInfoContext,);
 }
 function useLocalizationInfo() {
   const {
@@ -11592,14 +12817,14 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   window.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
-  const actions = React__default.useRef([],);
-  React__default.useLayoutEffect(() => {
+  const actions = React4.useRef([],);
+  React4.useLayoutEffect(() => {
     var _a;
     if (!((_a = actions.current) === null || _a === void 0 ? void 0 : _a.length)) return;
     actions.current.forEach((action) => action());
     actions.current = [];
   }, [dep,],);
-  return React__default.useCallback((cb) => {
+  return React4.useCallback((cb) => {
     actions.current.push(cb,);
   }, [],);
 }
@@ -11626,11 +12851,11 @@ function Router({
   },);
   const startViewTransition2 = useViewTransition();
   const monitorNextRender = useMonitorNextRender('route-change',);
-  const currentRouteRef = React__default.useRef(initialRoute,);
-  const currentPathVariablesRef = React__default.useRef(initialPathVariables,);
-  const currentLocaleIdRef = React__default.useRef(initialLocaleId,);
+  const currentRouteRef = React4.useRef(initialRoute,);
+  const currentPathVariablesRef = React4.useRef(initialPathVariables,);
+  const currentLocaleIdRef = React4.useRef(initialLocaleId,);
   const currentLocaleId = currentLocaleIdRef.current;
-  const activeLocale = React__default.useMemo(() => {
+  const activeLocale = React4.useMemo(() => {
     var _a2;
     return (_a2 = locales.find(({
             id: id3,
@@ -11642,7 +12867,7 @@ function Router({
       : null;
   }, [currentLocaleId, locales,],);
   const [dep, forceUpdate,] = useForceUpdate2();
-  const [paginationInfo, setPaginationInfo,] = React__default.useState(
+  const [paginationInfo, setPaginationInfo,] = React4.useState(
     typeof window !== 'undefined'
       ? (_b = (_a = window === null || window === void 0 ? void 0 : window.history) === null || _a === void 0 ? void 0 : _a.state) ===
             null || _b === void 0
@@ -11650,7 +12875,7 @@ function Router({
         : _b.pagination
       : void 0,
   );
-  const collectionListPaginationInfo = React__default.useMemo(() => {
+  const collectionListPaginationInfo = React4.useMemo(() => {
     return {
       paginationInfo,
       setPaginationInfo: async (newPaginationInfo) => {
@@ -11671,7 +12896,7 @@ function Router({
       },
     };
   }, [paginationInfo,],);
-  const localeInfo = React__default.useMemo(() => {
+  const localeInfo = React4.useMemo(() => {
     return {
       activeLocale,
       locales,
@@ -11724,7 +12949,7 @@ function Router({
     startViewTransition2,
   ],);
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const setCurrentRouteId = React__default.useCallback(
+  const setCurrentRouteId = React4.useCallback(
     (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -11738,7 +12963,7 @@ function Router({
     [forceUpdate, monitorNextRender, scheduleSideEffect,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = React__default.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
+  const navigate = React4.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
     var _a2, _b2;
     const newRoute = routes[routeId];
     if (pathVariables) {
@@ -11799,7 +13024,7 @@ function Router({
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
-  const api = React__default.useMemo(() => ({
+  const api = React4.useMemo(() => ({
     navigate,
     getRoute,
     currentRouteId,
@@ -11817,25 +13042,25 @@ function Router({
     ? fillPathVariables(current.path, currentPathVariables,)
     : current.path;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  return _jsx5(RouterAPIProvider, {
+  return jsx(RouterAPIProvider, {
     api,
-    children: _jsx5(LocaleInfoContext.Provider, {
+    children: jsx(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: _jsx5(CollectionListPaginationInfoContext.Provider, {
+      children: jsx(CollectionListPaginationInfoContext.Provider, {
         value: collectionListPaginationInfo,
-        children: _jsxs(SuspenseThatPreservesDom, {
+        children: jsxs(SuspenseThatPreservesDom, {
           children: [
-            _jsx5(ErrorBoundary, {
+            jsx(ErrorBoundary, {
               notFoundPage,
               defaultPageStyle,
               forceUpdateKey: dep,
-              children: _jsx5(React__default.Fragment, {
+              children: jsx(React4.Fragment, {
                 children: pageExistsInCurrentLocale
                   ? renderPage(current.page, defaultPageStyle,)
                   : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
               }, remountKey,),
             },),
-            _jsx5(OnHydrationEnd, {
+            jsx(OnHydrationEnd, {
               addHydrationEndMarker: shouldMarkHydrationEnd,
               turnOffEventHandlerHack: enableImproveInpDuringHydration,
             },),
@@ -12007,7 +13232,7 @@ var key = 'page';
 function isRoute(route,) {
   return isObject(route,) && key in route && route.page !== void 0;
 }
-var CurrentRouteContext = React__default.createContext(void 0,);
+var CurrentRouteContext = /* @__PURE__ */ (() => React4.createContext(void 0,))();
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
@@ -12036,12 +13261,12 @@ function useRoute(routeId,) {
   if (!routeId) return void 0;
   return (_a = routerAPI.getRoute) === null || _a === void 0 ? void 0 : _a.call(routerAPI, routeId,);
 }
-var shouldPreloadBasedOnUA = typeof window !== 'undefined' && !isBot(navigator.userAgent,);
+var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(navigator.userAgent,))();
 function useRoutePreloader(routeIds, enabled = true,) {
   const {
     getRoute,
   } = useRouter();
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
       const route = getRoute(routeId,);
@@ -12069,19 +13294,19 @@ function useRouteAnchor(routeId, {
   const currentRoute = useRoute(currentRouteId !== null && currentRouteId !== void 0 ? currentRouteId : '',);
   useRoutePreloader([routeId,], true,);
   const hash2 = linkHash !== null && linkHash !== void 0 ? linkHash : elementId;
-  const href = React__default.useMemo(() =>
+  const href = React4.useMemo(() =>
     getPathForRoute(route, {
       currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
       currentPathVariables,
       hash: hash2,
       preserveQueryParams,
     },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],);
-  const navigateToRoute = React__default.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
+  const navigateToRoute = React4.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
     hash2,
     navigate,
     routeId,
   ],);
-  const onClick = React__default.useCallback((event) => {
+  const onClick = React4.useCallback((event) => {
     event.preventDefault();
     navigateToRoute();
   }, [navigateToRoute,],);
@@ -12094,7 +13319,7 @@ function useRouteElementId(id3, targetRouteId,) {
   var _a;
   const currentRoute = useCurrentRoute();
   const route = (_a = useRoute(targetRouteId,)) !== null && _a !== void 0 ? _a : currentRoute;
-  return React__default.useMemo(() => {
+  return React4.useMemo(() => {
     if (!route) return id3;
     return getRouteElementId(route, id3,);
   }, [id3, route,],);
@@ -12104,7 +13329,7 @@ function useRouteHandler(routeId, preload = false, elementId,) {
     navigate,
   } = useRouter();
   useRoutePreloader([routeId,], preload,);
-  const handler = React__default.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
+  const handler = React4.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
     navigate,
     elementId,
     routeId,
@@ -12644,7 +13869,7 @@ var NumberInterpolation = {
 var epsilon = 1e-3;
 var minDuration2 = 0.01;
 var maxDuration22 = 10;
-var minDamping2 = Number.MIN_VALUE;
+var minDamping2 = /* @__PURE__ */ (() => Number.MIN_VALUE)();
 var maxDamping2 = 1;
 function approximateRoot2(func, derivative, initialGuess, times = 12,) {
   let result = initialGuess;
@@ -12730,12 +13955,12 @@ var SpringCurveValueConverter = {
     return result;
   },
 };
-var SpringTensionFrictionDefaults = {
+var SpringTensionFrictionDefaults = /* @__PURE__ */ (() => ({
   tension: 500,
   friction: 10,
   tolerance: 1 / 1e4,
   velocity: 0,
-};
+}))();
 var SpringDampingDurationDefaults = {
   dampingRatio: 1,
   duration: 1,
@@ -13000,333 +14225,6 @@ var InertialScrollAnimator = class {
   //
   // Therefore, a real solution exists if 1 - (k * (x - x(0)) / v(0) > 0
 };
-var Hsluv = class {
-  constructor() {
-    this.hex = '#000000';
-    this.rgb_r = 0;
-    this.rgb_g = 0;
-    this.rgb_b = 0;
-    this.xyz_x = 0;
-    this.xyz_y = 0;
-    this.xyz_z = 0;
-    this.luv_l = 0;
-    this.luv_u = 0;
-    this.luv_v = 0;
-    this.lch_l = 0;
-    this.lch_c = 0;
-    this.lch_h = 0;
-    this.hsluv_h = 0;
-    this.hsluv_s = 0;
-    this.hsluv_l = 0;
-    this.hpluv_h = 0;
-    this.hpluv_p = 0;
-    this.hpluv_l = 0;
-    this.r0s = 0;
-    this.r0i = 0;
-    this.r1s = 0;
-    this.r1i = 0;
-    this.g0s = 0;
-    this.g0i = 0;
-    this.g1s = 0;
-    this.g1i = 0;
-    this.b0s = 0;
-    this.b0i = 0;
-    this.b1s = 0;
-    this.b1i = 0;
-  }
-  static fromLinear(c,) {
-    if (c <= 31308e-7) {
-      return 12.92 * c;
-    } else {
-      return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
-    }
-  }
-  static toLinear(c,) {
-    if (c > 0.04045) {
-      return Math.pow((c + 0.055) / 1.055, 2.4,);
-    } else {
-      return c / 12.92;
-    }
-  }
-  static yToL(Y,) {
-    if (Y <= Hsluv.epsilon) {
-      return Y / Hsluv.refY * Hsluv.kappa;
-    } else {
-      return 116 * Math.pow(Y / Hsluv.refY, 1 / 3,) - 16;
-    }
-  }
-  static lToY(L,) {
-    if (L <= 8) {
-      return Hsluv.refY * L / Hsluv.kappa;
-    } else {
-      return Hsluv.refY * Math.pow((L + 16) / 116, 3,);
-    }
-  }
-  static rgbChannelToHex(chan,) {
-    const c = Math.round(chan * 255,);
-    const digit2 = c % 16;
-    const digit1 = (c - digit2) / 16 | 0;
-    return Hsluv.hexChars.charAt(digit1,) + Hsluv.hexChars.charAt(digit2,);
-  }
-  static hexToRgbChannel(hex2, offset,) {
-    const digit1 = Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
-    const digit2 = Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
-    const n = digit1 * 16 + digit2;
-    return n / 255;
-  }
-  static distanceFromOriginAngle(slope, intercept, angle,) {
-    const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
-    if (d < 0) {
-      return Infinity;
-    } else {
-      return d;
-    }
-  }
-  static distanceFromOrigin(slope, intercept,) {
-    return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
-  }
-  static min6(f1, f2, f3, f4, f5, f6,) {
-    return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
-  }
-  rgbToHex() {
-    this.hex = '#';
-    this.hex += Hsluv.rgbChannelToHex(this.rgb_r,);
-    this.hex += Hsluv.rgbChannelToHex(this.rgb_g,);
-    this.hex += Hsluv.rgbChannelToHex(this.rgb_b,);
-  }
-  hexToRgb() {
-    this.hex = this.hex.toLowerCase();
-    this.rgb_r = Hsluv.hexToRgbChannel(this.hex, 1,);
-    this.rgb_g = Hsluv.hexToRgbChannel(this.hex, 3,);
-    this.rgb_b = Hsluv.hexToRgbChannel(this.hex, 5,);
-  }
-  xyzToRgb() {
-    this.rgb_r = Hsluv.fromLinear(Hsluv.m_r0 * this.xyz_x + Hsluv.m_r1 * this.xyz_y + Hsluv.m_r2 * this.xyz_z,);
-    this.rgb_g = Hsluv.fromLinear(Hsluv.m_g0 * this.xyz_x + Hsluv.m_g1 * this.xyz_y + Hsluv.m_g2 * this.xyz_z,);
-    this.rgb_b = Hsluv.fromLinear(Hsluv.m_b0 * this.xyz_x + Hsluv.m_b1 * this.xyz_y + Hsluv.m_b2 * this.xyz_z,);
-  }
-  rgbToXyz() {
-    const lr = Hsluv.toLinear(this.rgb_r,);
-    const lg = Hsluv.toLinear(this.rgb_g,);
-    const lb = Hsluv.toLinear(this.rgb_b,);
-    this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
-    this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
-    this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
-  }
-  xyzToLuv() {
-    const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
-    let varU = 4 * this.xyz_x;
-    let varV = 9 * this.xyz_y;
-    if (divider !== 0) {
-      varU /= divider;
-      varV /= divider;
-    } else {
-      varU = NaN;
-      varV = NaN;
-    }
-    this.luv_l = Hsluv.yToL(this.xyz_y,);
-    if (this.luv_l === 0) {
-      this.luv_u = 0;
-      this.luv_v = 0;
-    } else {
-      this.luv_u = 13 * this.luv_l * (varU - Hsluv.refU);
-      this.luv_v = 13 * this.luv_l * (varV - Hsluv.refV);
-    }
-  }
-  luvToXyz() {
-    if (this.luv_l === 0) {
-      this.xyz_x = 0;
-      this.xyz_y = 0;
-      this.xyz_z = 0;
-      return;
-    }
-    const varU = this.luv_u / (13 * this.luv_l) + Hsluv.refU;
-    const varV = this.luv_v / (13 * this.luv_l) + Hsluv.refV;
-    this.xyz_y = Hsluv.lToY(this.luv_l,);
-    this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
-    this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
-  }
-  luvToLch() {
-    this.lch_l = this.luv_l;
-    this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
-    if (this.lch_c < 1e-8) {
-      this.lch_h = 0;
-    } else {
-      const hrad = Math.atan2(this.luv_v, this.luv_u,);
-      this.lch_h = hrad * 180 / Math.PI;
-      if (this.lch_h < 0) {
-        this.lch_h = 360 + this.lch_h;
-      }
-    }
-  }
-  lchToLuv() {
-    const hrad = this.lch_h / 180 * Math.PI;
-    this.luv_l = this.lch_l;
-    this.luv_u = Math.cos(hrad,) * this.lch_c;
-    this.luv_v = Math.sin(hrad,) * this.lch_c;
-  }
-  calculateBoundingLines(l,) {
-    const sub1 = Math.pow(l + 16, 3,) / 1560896;
-    const sub2 = sub1 > Hsluv.epsilon ? sub1 : l / Hsluv.kappa;
-    const s1r = sub2 * (284517 * Hsluv.m_r0 - 94839 * Hsluv.m_r2);
-    const s2r = sub2 * (838422 * Hsluv.m_r2 + 769860 * Hsluv.m_r1 + 731718 * Hsluv.m_r0);
-    const s3r = sub2 * (632260 * Hsluv.m_r2 - 126452 * Hsluv.m_r1);
-    const s1g = sub2 * (284517 * Hsluv.m_g0 - 94839 * Hsluv.m_g2);
-    const s2g = sub2 * (838422 * Hsluv.m_g2 + 769860 * Hsluv.m_g1 + 731718 * Hsluv.m_g0);
-    const s3g = sub2 * (632260 * Hsluv.m_g2 - 126452 * Hsluv.m_g1);
-    const s1b = sub2 * (284517 * Hsluv.m_b0 - 94839 * Hsluv.m_b2);
-    const s2b = sub2 * (838422 * Hsluv.m_b2 + 769860 * Hsluv.m_b1 + 731718 * Hsluv.m_b0);
-    const s3b = sub2 * (632260 * Hsluv.m_b2 - 126452 * Hsluv.m_b1);
-    this.r0s = s1r / s3r;
-    this.r0i = s2r * l / s3r;
-    this.r1s = s1r / (s3r + 126452);
-    this.r1i = (s2r - 769860) * l / (s3r + 126452);
-    this.g0s = s1g / s3g;
-    this.g0i = s2g * l / s3g;
-    this.g1s = s1g / (s3g + 126452);
-    this.g1i = (s2g - 769860) * l / (s3g + 126452);
-    this.b0s = s1b / s3b;
-    this.b0i = s2b * l / s3b;
-    this.b1s = s1b / (s3b + 126452);
-    this.b1i = (s2b - 769860) * l / (s3b + 126452);
-  }
-  calcMaxChromaHpluv() {
-    const r0 = Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
-    const r1 = Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
-    const g0 = Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
-    const g1 = Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
-    const b0 = Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
-    const b1 = Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
-    return Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-  }
-  calcMaxChromaHsluv(h,) {
-    const hueRad = h / 360 * Math.PI * 2;
-    const r0 = Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
-    const r1 = Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
-    const g0 = Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
-    const g1 = Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
-    const b0 = Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
-    const b1 = Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
-    return Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-  }
-  hsluvToLch() {
-    if (this.hsluv_l > 99.9999999) {
-      this.lch_l = 100;
-      this.lch_c = 0;
-    } else if (this.hsluv_l < 1e-8) {
-      this.lch_l = 0;
-      this.lch_c = 0;
-    } else {
-      this.lch_l = this.hsluv_l;
-      this.calculateBoundingLines(this.hsluv_l,);
-      const max = this.calcMaxChromaHsluv(this.hsluv_h,);
-      this.lch_c = max / 100 * this.hsluv_s;
-    }
-    this.lch_h = this.hsluv_h;
-  }
-  lchToHsluv() {
-    if (this.lch_l > 99.9999999) {
-      this.hsluv_s = 0;
-      this.hsluv_l = 100;
-    } else if (this.lch_l < 1e-8) {
-      this.hsluv_s = 0;
-      this.hsluv_l = 0;
-    } else {
-      this.calculateBoundingLines(this.lch_l,);
-      const max = this.calcMaxChromaHsluv(this.lch_h,);
-      this.hsluv_s = this.lch_c / max * 100;
-      this.hsluv_l = this.lch_l;
-    }
-    this.hsluv_h = this.lch_h;
-  }
-  hpluvToLch() {
-    if (this.hpluv_l > 99.9999999) {
-      this.lch_l = 100;
-      this.lch_c = 0;
-    } else if (this.hpluv_l < 1e-8) {
-      this.lch_l = 0;
-      this.lch_c = 0;
-    } else {
-      this.lch_l = this.hpluv_l;
-      this.calculateBoundingLines(this.hpluv_l,);
-      const max = this.calcMaxChromaHpluv();
-      this.lch_c = max / 100 * this.hpluv_p;
-    }
-    this.lch_h = this.hpluv_h;
-  }
-  lchToHpluv() {
-    if (this.lch_l > 99.9999999) {
-      this.hpluv_p = 0;
-      this.hpluv_l = 100;
-    } else if (this.lch_l < 1e-8) {
-      this.hpluv_p = 0;
-      this.hpluv_l = 0;
-    } else {
-      this.calculateBoundingLines(this.lch_l,);
-      const max = this.calcMaxChromaHpluv();
-      this.hpluv_p = this.lch_c / max * 100;
-      this.hpluv_l = this.lch_l;
-    }
-    this.hpluv_h = this.lch_h;
-  }
-  hsluvToRgb() {
-    this.hsluvToLch();
-    this.lchToLuv();
-    this.luvToXyz();
-    this.xyzToRgb();
-  }
-  hpluvToRgb() {
-    this.hpluvToLch();
-    this.lchToLuv();
-    this.luvToXyz();
-    this.xyzToRgb();
-  }
-  hsluvToHex() {
-    this.hsluvToRgb();
-    this.rgbToHex();
-  }
-  hpluvToHex() {
-    this.hpluvToRgb();
-    this.rgbToHex();
-  }
-  rgbToHsluv() {
-    this.rgbToXyz();
-    this.xyzToLuv();
-    this.luvToLch();
-    this.lchToHpluv();
-    this.lchToHsluv();
-  }
-  rgbToHpluv() {
-    this.rgbToXyz();
-    this.xyzToLuv();
-    this.luvToLch();
-    this.lchToHpluv();
-    this.lchToHpluv();
-  }
-  hexToHsluv() {
-    this.hexToRgb();
-    this.rgbToHsluv();
-  }
-  hexToHpluv() {
-    this.hexToRgb();
-    this.rgbToHpluv();
-  }
-};
-Hsluv.hexChars = '0123456789abcdef';
-Hsluv.refY = 1;
-Hsluv.refU = 0.19783000664283;
-Hsluv.refV = 0.46831999493879;
-Hsluv.kappa = 903.2962962;
-Hsluv.epsilon = 0.0088564516;
-Hsluv.m_r0 = 3.240969941904521;
-Hsluv.m_r1 = -1.537383177570093;
-Hsluv.m_r2 = -0.498610760293;
-Hsluv.m_g0 = -0.96924363628087;
-Hsluv.m_g1 = 1.87596750150772;
-Hsluv.m_g2 = 0.041555057407175;
-Hsluv.m_b0 = 0.055630079696993;
-Hsluv.m_b1 = -0.20397695888897;
-Hsluv.m_b2 = 1.056971514242878;
 var cssNames = {
   aliceblue: 'f0f8ff',
   antiquewhite: 'faebd7',
@@ -13538,7 +14436,8 @@ function numberFromString(input,) {
   const match = /\d?\.?\d+/u.exec(input,);
   return match ? Number(match[0],) : void 0;
 }
-var hsluvConverter = new Hsluv();
+var Hsluv = /* @__PURE__ */ (() => require_hsluv().Hsluv)();
+var hsluvConverter = /* @__PURE__ */ new Hsluv();
 function rgbToHsluv(r, g, b,) {
   hsluvConverter.rgb_r = r / 255;
   hsluvConverter.rgb_g = g / 255;
@@ -13744,7 +14643,7 @@ function pad2(char,) {
     return '' + char;
   }
 }
-var matchers = (() => {
+var matchers = /* @__PURE__ */ (() => {
   const cssInteger = '[-\\+]?\\d+%?';
   const cssNumber = '[-\\+]?\\d*\\.\\d+%?';
   const cssUnit = '(?:' + cssNumber + ')|(?:' + cssInteger + ')';
@@ -14452,10 +15351,10 @@ var ValueInterpolation = class {
 };
 var AnyInterpolation = /* @__PURE__ */ new ValueInterpolation();
 var isMotionValue2 = (v) => v instanceof MotionValue;
-var Defaults2 = {
+var Defaults2 = /* @__PURE__ */ (() => ({
   delta: 1 / 60,
   maxValues: 1e4,
-};
+}))();
 var PrecalculatedAnimator = class {
   constructor(options,) {
     __publicField(this, 'animator',);
@@ -14490,11 +15389,11 @@ var PrecalculatedAnimator = class {
     }
     this.totalTime = this.values.length * delta;
   }
-  indexForTime(time22,) {
-    return Math.max(0, Math.min(this.values.length - 1, Math.round(this.values.length * (time22 / this.totalTime),) - 1,),);
+  indexForTime(time2,) {
+    return Math.max(0, Math.min(this.values.length - 1, Math.round(this.values.length * (time2 / this.totalTime),) - 1,),);
   }
-  valueForTime(time22,) {
-    const index = this.indexForTime(time22,);
+  valueForTime(time2,) {
+    const index = this.indexForTime(time2,);
     const value = this.values[index];
     return value;
   }
@@ -14522,10 +15421,7 @@ var PrecalculatedAnimator = class {
     return this.values.length > 0 ? value : this.animator.next(0,);
   }
 };
-var import_eventemitter3 = __toESM(require_eventemitter3(), 1,);
-var {
-  EventEmitter: EventEmitter3,
-} = import_eventemitter3.default;
+var EventEmitter3 = /* @__PURE__ */ (() => require_eventemitter3().EventEmitter)();
 var EventEmitter = class {
   constructor() {
     __publicField(this, '_emitter', new EventEmitter3(),);
@@ -14638,9 +15534,9 @@ var safeWindow = typeof window === 'undefined' ? mockWindow : window;
 var _raf = (f) => {
   setTimeout(f, 1 / 60,);
 };
-var __raf = safeWindow['requestAnimationFrame'] || _raf;
+var __raf = /* @__PURE__ */ (() => safeWindow['requestAnimationFrame'] || _raf)();
 var raf = (f) => __raf(f,);
-var LoopTimeStep = 1 / 60;
+var LoopTimeStep = /* @__PURE__ */ (() => 1 / 60)();
 var Loop = class extends EventEmitter {
   /**
    * @internal
@@ -14723,14 +15619,7 @@ var Loop = class extends EventEmitter {
     return this._frame * LoopTimeStep;
   }
 };
-var MainLoop = new Loop();
-var RenderTarget = /* @__PURE__ */ ((RenderTarget2) => {
-  RenderTarget2['canvas'] = 'CANVAS';
-  RenderTarget2['export'] = 'EXPORT';
-  RenderTarget2['thumbnail'] = 'THUMBNAIL';
-  RenderTarget2['preview'] = 'PREVIEW';
-  return RenderTarget2;
-})(RenderTarget || {},);
+var MainLoop = /* @__PURE__ */ new Loop();
 var RenderEnvironment = {
   target: 'PREVIEW',
   zoom: 1,
@@ -14758,19 +15647,103 @@ function useRenderEnvironment(target, zoom,) {
     willChangeElements,
   };
 }
-((RenderTarget2) => {
-  function current() {
-    return RenderEnvironment.target;
-  }
-  RenderTarget2.current = current;
-  function hasRestrictions() {
+var RenderTarget = {
+  /**
+   * The component is to be rendered for the Framer canvas.
+   *
+   * @remarks
+   * ```jsx
+   * function App() {
+   *   if (RenderTarget.current() === RenderTarget.canvas) {
+   *     return <CanvasComponent />
+   *   }
+   *   return <DefaultComponent />
+   * }
+   * ```
+   */
+  canvas: 'CANVAS',
+  /**
+   * The component is to be rendered for export.
+   *
+   * @remarks
+   * ```jsx
+   * function App() {
+   *   if (RenderTarget.current() === RenderTarget.export) {
+   *     return <ExportComponent />
+   *   }
+   *   return <DefaultComponent />
+   * }
+   * ```
+   */
+  export: 'EXPORT',
+  /**
+   * The component is to be rendered as a preview thumbnail, for example in the
+   * component panel.
+   *
+   * @remarks
+   * ```jsx
+   * function App() {
+   *   if (RenderTarget.current() === RenderTarget.thumbnail) {
+   *     return <Thumbnail />
+   *   }
+   *   return <DefaultComponent />
+   * }
+   * ```
+   */
+  thumbnail: 'THUMBNAIL',
+  /**
+   * The component is being rendered in the preview window.
+   *
+   * @remarks
+   * ```jsx
+   * function App() {
+   *   React.useEffect(() => {
+   *     if (RenderTarget.current() === RenderTarget.preview) {
+   *       // Do something in preview.
+   *     }
+   *   })
+   *   return <DefaultComponent />
+   * }
+   * ```
+   */
+  preview: 'PREVIEW',
+  /**
+   * Returns the current `RenderTarget` allowing components to apply
+   * different behaviors depending on the environment.
+   *
+   * @remarks
+   * ```jsx
+   * function App() {
+   *   if (RenderTarget.current() === RenderTarget.thumbnail) {
+   *     return <PreviewIcon />
+   *   }
+   *   return <Frame>...</Frame>
+   * }
+   * ```
+   */
+  current: () => RenderEnvironment.target,
+  /**
+   * Returns true if the current `RenderTarget` has performance restrictions.
+   * Use this to avoid doing heavy work in these contexts because they may
+   * bail on the rendering if the component takes too long.
+   *
+   * @remarks
+   * ```jsx
+   * function App() {
+   *   if (RenderTarget.hasRestrictions()) {
+   *     return <SomePlaceholder />
+   *   }
+   *   return <RichPreviewContent />
+   * }
+   * ```
+   */
+  hasRestrictions: () => {
     const target = RenderEnvironment.target;
     if (target === 'CANVAS') return true;
     if (target === 'EXPORT') return true;
     return false;
-  }
-  RenderTarget2.hasRestrictions = hasRestrictions;
-})(RenderTarget || (RenderTarget = {}),);
+  },
+};
 var AnimationDriver = class {
   constructor(animator, updateCallback, finishedCallback,) {
     this.animator = animator;
@@ -14799,7 +15772,7 @@ var AnimationDriver = class {
 };
 var MainLoopAnimationDriver = class extends AnimationDriver {
   play() {
-    if (RenderEnvironment.target !== 'PREVIEW') {
+    if (RenderEnvironment.target !== RenderTarget.preview) {
       this.finishedCallback && this.finishedCallback(false,);
       return;
     }
@@ -15068,7 +16041,7 @@ addScaleCorrector({
 function MotionSetup({
   children,
 },) {
-  return /* @__PURE__ */ _jsx5(Fragment, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children,
   },);
 }
@@ -15141,10 +16114,10 @@ var animate2 = /* @__PURE__ */ (() => {
   };
   return animate3;
 })();
-function assert(condition, ...msg2) {
+function assert(condition, ...msg) {
   var _a, _b;
   if (condition) return;
-  const e = Error('Assertion Error' + (msg2.length > 0 ? ': ' + msg2.join(' ',) : ''),);
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
   if (e.stack) {
     try {
       const lines = e.stack.split('\n',);
@@ -15162,7 +16135,7 @@ function assert(condition, ...msg2) {
 function assertNever(x, error,) {
   throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
 }
-var LayoutIdContext = React__default.createContext({
+var LayoutIdContext = /* @__PURE__ */ React4.createContext({
   getLayoutId: (args) => null,
   persistLayoutIdCache: () => {},
   top: false,
@@ -15173,11 +16146,11 @@ function LayoutIdProvider({
 },) {
   const context = useContext3(LayoutIdContext,);
   if (context.top) {
-    return /* @__PURE__ */ _jsx5(Fragment, {
+    return /* @__PURE__ */ jsx(Fragment, {
       children,
     },);
   }
-  const cache3 = useRef({
+  const cache2 = useRef({
     // When we provide a layoutId for a node based on it's first
     // duplicatedFrom id, we save it's layoutId mapped to it's actual id.
     // Future screen's nodes will check this cache first, to see if they've
@@ -15219,16 +16192,16 @@ function LayoutIdProvider({
   },) => {
     if (!id3) return null;
     const cacheKey = name ? 'byName' : 'byId';
-    const previousId = cache3.current[cacheKey][id3];
+    const previousId = cache2.current[cacheKey][id3];
     if (previousId) return previousId;
     const nodeIdentifier = name || id3;
     if (
       !duplicatedFrom && !usedIds.has(nodeIdentifier,) &&
-      (!cache3.current.byLayoutId[nodeIdentifier] || cache3.current.byLayoutId[nodeIdentifier] === nodeIdentifier)
+      (!cache2.current.byLayoutId[nodeIdentifier] || cache2.current.byLayoutId[nodeIdentifier] === nodeIdentifier)
     ) {
-      if (cache3.current.count[cacheKey][nodeIdentifier] === void 0) {
-        cache3.current.count[cacheKey][nodeIdentifier] = 0;
-        cache3.current.byLayoutId[nodeIdentifier] = nodeIdentifier;
+      if (cache2.current.count[cacheKey][nodeIdentifier] === void 0) {
+        cache2.current.count[cacheKey][nodeIdentifier] = 0;
+        cache2.current.byLayoutId[nodeIdentifier] = nodeIdentifier;
         screen.current[cacheKey][id3] = nodeIdentifier;
       }
       usedIds.add(nodeIdentifier,);
@@ -15239,16 +16212,16 @@ function LayoutIdProvider({
       for (let index = duplicatedFrom.length - 1; index >= 0; index--) {
         const duplicatedId = duplicatedFrom[index];
         assert(!!duplicatedId, `duplicatedId must be defined`,);
-        const match = cache3.current[cacheKey][duplicatedId];
-        const byLastIdMatch = cache3.current.byLastId[duplicatedId];
+        const match = cache2.current[cacheKey][duplicatedId];
+        const byLastIdMatch = cache2.current.byLastId[duplicatedId];
         if (byLastIdMatch && !possibleMatch) {
-          const matchedLayoutId = cache3.current.byLayoutId[byLastIdMatch];
+          const matchedLayoutId = cache2.current.byLayoutId[byLastIdMatch];
           const shouldUseNamedLastIdMatch = !matchedLayoutId || matchedLayoutId === name;
           if (byLastIdMatch && !usedIds.has(byLastIdMatch,) && (name ? shouldUseNamedLastIdMatch : true)) {
             possibleMatch = [byLastIdMatch, duplicatedId,];
           }
         }
-        const previousLayoutId = match ? cache3.current.byLayoutId[match] : void 0;
+        const previousLayoutId = match ? cache2.current.byLayoutId[match] : void 0;
         const shouldUseNamedMatch = !previousLayoutId || previousLayoutId === name;
         if (match && !usedIds.has(match,) && (name ? shouldUseNamedMatch : true)) {
           screen.current[cacheKey][id3] = match;
@@ -15258,7 +16231,7 @@ function LayoutIdProvider({
         }
       }
     }
-    const last = cache3.current.byLastId[id3];
+    const last = cache2.current.byLastId[id3];
     if (last && !usedIds.has(last,)) {
       usedIds.add(last,);
       screen.current.byId[id3] = last;
@@ -15271,7 +16244,7 @@ function LayoutIdProvider({
       usedIds.add(match,);
       return match;
     }
-    const possible = cache3.current.byPossibleId[id3];
+    const possible = cache2.current.byPossibleId[id3];
     if (possible && !usedIds.has(possible,)) {
       usedIds.add(possible,);
       screen.current.byId[id3] = possible;
@@ -15279,12 +16252,12 @@ function LayoutIdProvider({
     }
     const rootDuplicatedId = duplicatedFrom == null ? void 0 : duplicatedFrom[0];
     const identifier = name || rootDuplicatedId || id3;
-    const value = (cache3.current.count[cacheKey][identifier] ?? -1) + 1;
+    const value = (cache2.current.count[cacheKey][identifier] ?? -1) + 1;
     const {
       layoutId,
       value: nextValue,
     } = nextLayoutId(identifier, value, usedIds,);
-    cache3.current.count[cacheKey][identifier] = nextValue;
+    cache2.current.count[cacheKey][identifier] = nextValue;
     screen.current[cacheKey][id3] = layoutId;
     if (duplicatedFrom == null ? void 0 : duplicatedFrom.length) {
       if (!name) {
@@ -15308,29 +16281,29 @@ function LayoutIdProvider({
     return layoutId;
   }, [],);
   const persistLayoutIdCache = useCallback(() => {
-    cache3.current = {
+    cache2.current = {
       byId: {
-        ...cache3.current.byId,
+        ...cache2.current.byId,
         ...screen.current.byId,
       },
       byLastId: {
-        ...cache3.current.byLastId,
+        ...cache2.current.byLastId,
         ...screen.current.byLastId,
       },
       byPossibleId: {
-        ...cache3.current.byPossibleId,
+        ...cache2.current.byPossibleId,
         ...screen.current.byPossibleId,
       },
       byName: {
-        ...cache3.current.byName,
+        ...cache2.current.byName,
         ...screen.current.byName,
       },
       byLastName: {
-        ...cache3.current.byLastName,
+        ...cache2.current.byLastName,
         ...screen.current.byLastName,
       },
       byLayoutId: {
-        ...cache3.current.byLayoutId,
+        ...cache2.current.byLayoutId,
         ...screen.current.byLayoutId,
       },
       // Unlike the count.byId, we need to reset the count.byName because
@@ -15343,7 +16316,7 @@ function LayoutIdProvider({
       // the count so that the second named layer on a second screen is
       // always name-1 if it doesn't have any duplicatedFrom ids.
       count: {
-        ...cache3.current.count,
+        ...cache2.current.count,
         byName: {},
       },
     };
@@ -15363,7 +16336,7 @@ function LayoutIdProvider({
     top: true,
     enabled: true,
   },).current;
-  return /* @__PURE__ */ _jsx5(LayoutIdContext.Provider, {
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
     value: contextValue,
     children,
   },);
@@ -15391,7 +16364,7 @@ function AutomaticLayoutIds({
       enabled,
     };
   }, [enabled,],);
-  return /* @__PURE__ */ _jsx5(LayoutIdContext.Provider, {
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
     ...props,
     value: contextValue,
   },);
@@ -15416,14 +16389,14 @@ var baseStyle = {
   width: '100%',
   height: '100%',
 };
-var errorStyle = {
+var errorStyle = /* @__PURE__ */ (() => ({
   ...baseStyle,
   border: '1px solid rgba(149, 149, 149, 0.15)',
   borderRadius: 6,
   fontSize: '12px',
   backgroundColor: 'rgba(149, 149, 149, 0.1)',
   color: '#a5a5a5',
-};
+}))();
 var textStyle = {
   overflow: 'hidden',
   whiteSpace: 'nowrap',
@@ -15432,17 +16405,17 @@ var textStyle = {
   flexShrink: 0,
   padding: `0 10px`,
 };
-var titleStyle = {
+var titleStyle = /* @__PURE__ */ (() => ({
   ...textStyle,
   // TODO: Use Fresco tokens for this.
   fontWeight: 500,
-};
-var messageStyle = {
+}))();
+var messageStyle = /* @__PURE__ */ (() => ({
   ...textStyle,
   whiteSpace: 'pre',
   maxHeight: 'calc(50% - calc(20px * var(--framerInternalCanvas-canvasPlaceholderContentScaleFactor, 1)))',
   WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
-};
+}))();
 function ErrorPlaceholder(props,) {
   const {
     error,
@@ -15450,15 +16423,15 @@ function ErrorPlaceholder(props,) {
   } = props;
   const title = file ? `Error in ${stripSlash(file,)}` : 'Error';
   const message = error instanceof Error ? error.message : '' + error;
-  return /* @__PURE__ */ _jsxs('div', {
+  return /* @__PURE__ */ jsxs('div', {
     style: errorStyle,
     children: [
-      /* @__PURE__ */ _jsx5('div', {
+      /* @__PURE__ */ jsx('div', {
         className: 'text',
         style: titleStyle,
         children: title,
       },),
-      message && /* @__PURE__ */ _jsx5('div', {
+      message && /* @__PURE__ */ jsx('div', {
         className: 'text',
         style: messageStyle,
         children: message,
@@ -15511,7 +16484,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = class extends Component2 {
+var ErrorBoundary2 = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -15546,7 +16519,7 @@ var ErrorBoundary2 = class extends Component2 {
   }
   render() {
     if (this.state.lastError) {
-      return /* @__PURE__ */ _jsx5(ErrorPlaceholder, {
+      return /* @__PURE__ */ jsx(ErrorPlaceholder, {
         error: this.state.lastError.error.message,
         file: 'Prototype',
       },);
@@ -15557,17 +16530,17 @@ var ErrorBoundary2 = class extends Component2 {
 function Device({
   canResize = false,
   children,
-  ResizeObserver: ResizeObserver22 = safeWindow.ResizeObserver,
+  ResizeObserver: ResizeObserver2 = safeWindow.ResizeObserver,
   ...options
 },) {
   var _a, _b;
-  const optionsRef = React__default.useRef(void 0,);
+  const optionsRef = React4.useRef(void 0,);
   if (optionsRef.current === void 0) optionsRef.current = options;
   const deviceAppearance = (_a = options.deviceOptions) == null ? void 0 : _a.appearance.type;
-  const scaleDataRef = React__default.useRef();
-  const containerRef = React__default.useRef(null,);
-  const deviceRef = React__default.useRef(null,);
-  const screenRef = React__default.useRef(null,);
+  const scaleDataRef = React4.useRef();
+  const containerRef = React4.useRef(null,);
+  const deviceRef = React4.useRef(null,);
+  const screenRef = React4.useRef(null,);
   const updateImperativeScale = ({
     scale: scale2,
     screenScalePixelFix,
@@ -15580,7 +16553,7 @@ function Device({
     const scale2 = scaleDataRef.current = getScaleData(options.deviceOptions, options.scaleTo,);
     updateImperativeScale(scale2,);
   }
-  const invertScale2 = React__default.useCallback((point2) => {
+  const invertScale2 = React4.useCallback((point2) => {
     if (!scaleDataRef.current) return point2;
     const {
       scale: scale2 = 1,
@@ -15590,7 +16563,7 @@ function Device({
       y: point2.y / scale2,
     };
   }, [scaleDataRef,],);
-  const updateScale = React__default.useCallback(() => {
+  const updateScale = React4.useCallback(() => {
     const {
       deviceOptions,
       scaleTo,
@@ -15606,12 +16579,12 @@ function Device({
     updateImperativeScale(scaleData,);
   }, [],);
   const observer2 = useConstant2(() => {
-    if (!ResizeObserver22) {
+    if (!ResizeObserver2) {
       return;
     }
-    return new ResizeObserver22(() => updateScale());
+    return new ResizeObserver2(() => updateScale());
   },);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     optionsRef.current = {
       deviceOptions: options.deviceOptions,
       onScaleChange: options.onScaleChange,
@@ -15619,10 +16592,10 @@ function Device({
       scaleTo: options.scaleTo,
     };
   }, [options.deviceOptions, options.onScaleChange, options.overrideTheme, options.scaleTo,],);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     updateScale();
   }, [updateScale,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!observer2 || !containerRef.current) return;
     observer2.observe(containerRef.current,);
     return () => observer2.disconnect();
@@ -15643,39 +16616,39 @@ function Device({
     }
     : {};
   const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: {
       ...containerStyle,
       ...resizeStyles,
     },
     ref: containerRef,
-    children: /* @__PURE__ */ _jsxs('div', {
+    children: /* @__PURE__ */ jsxs('div', {
       style: {
         ...deviceStyle,
       },
       ref: deviceRef,
       children: [
-        handStyle && /* @__PURE__ */ _jsx5('div', {
+        handStyle && /* @__PURE__ */ jsx('div', {
           style: handStyle,
         },),
-        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ _jsx5('div', {
+        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
           style: deviceImageStyle,
         },),
-        /* @__PURE__ */ _jsx5('div', {
+        /* @__PURE__ */ jsx('div', {
           style: {
             ...screenStyle,
             pointerEvents: void 0,
             backgroundColor: children ? screenBackground : screenStyle.backgroundColor,
           },
           ref: screenRef,
-          children: /* @__PURE__ */ _jsx5(MotionConfig, {
+          children: /* @__PURE__ */ jsx(MotionConfig, {
             transformPagePoint: invertScale2,
-            children: /* @__PURE__ */ _jsx5(ErrorBoundary2, {
+            children: /* @__PURE__ */ jsx(ErrorBoundary2, {
               children,
             },),
           },),
         },),
-        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ _jsx5('div', {
+        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
           style: deviceImageStyle,
         },),
       ],
@@ -15687,7 +16660,7 @@ var HAND_IMG_WIDTH = 2400;
 var HAND_IMG_HEIGHT = 3740;
 var HAND_IMG_GAP_WIDTH = 859;
 var HAND_IMG_GAP_LEFT = 772;
-var HAND_IMG_GAP_BOTTOM = 992 - 5;
+var HAND_IMG_GAP_BOTTOM = /* @__PURE__ */ (() => 992 - 5)();
 var noDeviceSize = {
   componentWidth: 500,
   componentHeight: 500,
@@ -15735,7 +16708,6 @@ function getDeviceStyle({
     screenColor,
     shadow,
     background,
-    transparentBackground,
     hand,
   } = deviceOptions;
   const boxShadows = [];
@@ -15919,58 +16891,69 @@ var Line = /* @__PURE__ */ (() => {
   };
   return Line2;
 })();
-var Rect;
-((Rect2) => {
-  function equals(rect, other,) {
+var Rect = {
+  /**
+   * @param rect -
+   * @param other -
+   * @returns if the input rectangles are equal in size and position
+   * @public
+   */
+  equals: function (rect, other,) {
     if (rect === other) return true;
     if (!rect || !other) return false;
     return rect.x === other.x && rect.y === other.y && rect.width === other.width && rect.height === other.height;
-  }
-  Rect2.equals = equals;
-  Rect2.atOrigin = (size2) => {
+  },
+  /** @internal */
+  atOrigin: (size) => {
     return {
-      ...size2,
+      ...size,
       x: 0,
       y: 0,
     };
-  };
-  Rect2.fromTwoPoints = (a, b,) => {
+  },
+  /** @internal */
+  fromTwoPoints: (a, b,) => {
     return {
       x: Math.min(a.x, b.x,),
       y: Math.min(a.y, b.y,),
       width: Math.abs(a.x - b.x,),
       height: Math.abs(a.y - b.y,),
     };
-  };
-  Rect2.fromRect = (rect) => {
+  },
+  /** @internal */
+  fromRect: (rect) => {
     return {
       x: rect.left,
       y: rect.top,
       width: rect.right - rect.left,
       height: rect.bottom - rect.top,
     };
-  };
-  Rect2.multiply = (rect, n,) => {
+  },
+  /** @internal */
+  multiply: (rect, n,) => {
     return {
       x: rect.x * n,
       y: rect.y * n,
       width: rect.width * n,
       height: rect.height * n,
     };
-  };
-  Rect2.divide = (rect, n,) => {
-    return (0, Rect2.multiply)(rect, 1 / n,);
-  };
-  Rect2.offset = (rect, delta2,) => {
-    const xOffset = typeof delta2.x === 'number' ? delta2.x : 0;
-    const yOffset = typeof delta2.y === 'number' ? delta2.y : 0;
+  },
+  /** @internal */
+  divide: (rect, n,) => {
+    return Rect.multiply(rect, 1 / n,);
+  },
+  /** @internal */
+  offset: (rect, delta,) => {
+    const xOffset = typeof delta.x === 'number' ? delta.x : 0;
+    const yOffset = typeof delta.y === 'number' ? delta.y : 0;
     return {
       ...rect,
       x: rect.x + xOffset,
       y: rect.y + yOffset,
     };
-  };
-  function inflate(rect, value,) {
+  },
+  /** @internal */
+  inflate: (rect, value,) => {
     if (value === 0) return rect;
     const doubleValue = 2 * value;
     return {
@@ -15979,9 +16962,9 @@ var Rect;
       width: rect.width + doubleValue,
       height: rect.height + doubleValue,
     };
-  }
-  Rect2.inflate = inflate;
-  Rect2.pixelAligned = (rect) => {
+  },
+  /** @internal */
+  pixelAligned: (rect) => {
     const x = Math.round(rect.x,);
     const y = Math.round(rect.y,);
     const rectMaxX = Math.round(rect.x + rect.width,);
@@ -15994,8 +16977,9 @@ var Rect;
       width,
       height,
     };
-  };
-  Rect2.halfPixelAligned = (rect) => {
+  },
+  /** @internal */
+  halfPixelAligned: (rect) => {
     const x = Math.round(rect.x * 2,) / 2;
     const y = Math.round(rect.y * 2,) / 2;
     const rectMaxX = Math.round((rect.x + rect.width) * 2,) / 2;
@@ -16008,8 +16992,9 @@ var Rect;
       width,
       height,
     };
-  };
-  Rect2.round = (rect, decimals = 0,) => {
+  },
+  /** @internal */
+  round: (rect, decimals = 0,) => {
     const x = roundedNumber(rect.x, decimals,);
     const y = roundedNumber(rect.y, decimals,);
     const width = roundedNumber(rect.width, decimals,);
@@ -16020,8 +17005,9 @@ var Rect;
       width,
       height,
     };
-  };
-  Rect2.roundToOutside = (rect) => {
+  },
+  /** @internal */
+  roundToOutside: (rect) => {
     const x = Math.floor(rect.x,);
     const y = Math.floor(rect.y,);
     const rectMaxX = Math.ceil(rect.x + rect.width,);
@@ -16034,55 +17020,83 @@ var Rect;
       width,
       height,
     };
-  };
-  Rect2.minX = (rect) => {
+  },
+  /**
+   * @param rect -
+   * @internal
+   */
+  minX: (rect) => {
     return rect.x;
-  };
-  Rect2.maxX = (rect) => {
+  },
+  /**
+   * @param rect -
+   * @internal
+   */
+  maxX: (rect) => {
     return rect.x + rect.width;
-  };
-  Rect2.minY = (rect) => {
+  },
+  /**
+   * @param rect -
+   * @internal
+   */
+  minY: (rect) => {
     return rect.y;
-  };
-  Rect2.maxY = (rect) => {
+  },
+  /**
+   * @param rect -
+   * @internal
+   */
+  maxY: (rect) => {
     return rect.y + rect.height;
-  };
-  Rect2.positions = (rect) => {
+  },
+  /** @internal */
+  positions: (rect) => {
     return {
       minX: rect.x,
       midX: rect.x + rect.width / 2,
-      maxX: (0, Rect2.maxX)(rect,),
+      maxX: Rect.maxX(rect,),
       minY: rect.y,
       midY: rect.y + rect.height / 2,
-      maxY: (0, Rect2.maxY)(rect,),
+      maxY: Rect.maxY(rect,),
     };
-  };
-  Rect2.center = (rect) => {
+  },
+  /**
+   * @param rect -
+   * @internal
+   */
+  center: (rect) => {
     return {
       x: rect.x + rect.width / 2,
       y: rect.y + rect.height / 2,
     };
-  };
-  Rect2.boundingRectFromPoints = (ps) => {
-    let minX2 = Infinity;
-    let maxX2 = -Infinity;
-    let minY2 = Infinity;
-    let maxY2 = -Infinity;
+  },
+  /** @internal */
+  boundingRectFromPoints: (ps) => {
+    let minX = Infinity;
+    let maxX = -Infinity;
+    let minY = Infinity;
+    let maxY = -Infinity;
     for (let i = 0; i < ps.length; i++) {
       const point2 = ps[i];
-      minX2 = Math.min(minX2, point2.x,);
-      maxX2 = Math.max(maxX2, point2.x,);
-      minY2 = Math.min(minY2, point2.y,);
-      maxY2 = Math.max(maxY2, point2.y,);
+      minX = Math.min(minX, point2.x,);
+      maxX = Math.max(maxX, point2.x,);
+      minY = Math.min(minY, point2.y,);
+      maxY = Math.max(maxY, point2.y,);
     }
     return {
-      x: minX2,
-      y: minY2,
-      width: maxX2 - minX2,
-      height: maxY2 - minY2,
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY,
     };
-  };
-  Rect2.fromPoints = (ps) => {
+  },
+  /**
+   * Returns the precise box defined by the given points, starting from the top-left point. This produces the same
+   * Rect as Rect.boundingRectFromPoints *only* when the rect described by the points is not rotated.
+   *
+   * @internal
+   */
+  fromPoints: (ps) => {
     const [tl, tr, _, bl,] = ps;
     const {
       x,
@@ -16096,19 +17110,26 @@ var Rect;
       width,
       height,
     };
-  };
-  Rect2.merge = (...rect) => {
+  },
+  /**
+   * Returns a rect containing all input rects
+   * @param rect - a list of rectangles
+   * @returns A rectangle that fits exactly around the input rects
+   * @internal
+   */
+  merge: (...rect) => {
     const min = {
-      x: Math.min(...rect.map(Rect2.minX,),),
-      y: Math.min(...rect.map(Rect2.minY,),),
+      x: Math.min(...rect.map(Rect.minX,),),
+      y: Math.min(...rect.map(Rect.minY,),),
     };
     const max = {
-      x: Math.max(...rect.map(Rect2.maxX,),),
-      y: Math.max(...rect.map(Rect2.maxY,),),
+      x: Math.max(...rect.map(Rect.maxX,),),
+      y: Math.max(...rect.map(Rect.maxY,),),
     };
-    return (0, Rect2.fromTwoPoints)(min, max,);
-  };
-  Rect2.intersection = (rect1, rect2,) => {
+    return Rect.fromTwoPoints(min, max,);
+  },
+  /** @internal */
+  intersection: (rect1, rect2,) => {
     const x = Math.max(rect1.x, rect2.x,);
     const x2 = Math.min(rect1.x + rect1.width, rect2.x + rect2.width,);
     const y = Math.max(rect1.y, rect2.y,);
@@ -16119,23 +17140,32 @@ var Rect;
       width: x2 - x,
       height: y2 - y,
     };
-  };
-  Rect2.points = (rect) => {
+  },
+  /**
+   * Returns all the corner points for a rect
+   * @param rect -
+   * @internal
+   */
+  points: (rect) => {
     return [{
-      x: (0, Rect2.minX)(rect,),
-      y: (0, Rect2.minY)(rect,),
+      x: Rect.minX(rect,),
+      y: Rect.minY(rect,),
     }, {
-      x: (0, Rect2.minX)(rect,),
-      y: (0, Rect2.maxY)(rect,),
+      x: Rect.minX(rect,),
+      y: Rect.maxY(rect,),
     }, {
-      x: (0, Rect2.maxX)(rect,),
-      y: (0, Rect2.minY)(rect,),
+      x: Rect.maxX(rect,),
+      y: Rect.minY(rect,),
     }, {
-      x: (0, Rect2.maxX)(rect,),
-      y: (0, Rect2.maxY)(rect,),
+      x: Rect.maxX(rect,),
+      y: Rect.maxY(rect,),
     },];
-  };
-  Rect2.pointsAtOrigin = (rect) => {
+  },
+  /**
+   * Returns all the corner points for a rect at the origin.
+   * @internal
+   */
+  pointsAtOrigin: (rect) => {
     return [{
       x: 0,
       y: 0,
@@ -16149,8 +17179,14 @@ var Rect;
       x: 0,
       y: rect.height,
     },];
-  };
-  Rect2.transform = (rect, matrix,) => {
+  },
+  /** Takes a rect and transforms it by a matrix, resulting in the bounding rectangle of the
+   * rotated and/or translated original.
+   * @param rect - rectangle to transform
+   * @param matrix - matrix to transform by
+   * @returns The bounding rectangle of the rotated and/or translated rect.
+   */
+  transform: (rect, matrix,) => {
     const {
       x: x1,
       y: y1,
@@ -16189,18 +17225,25 @@ var Rect;
       width,
       height,
     };
-  };
-  Rect2.containsPoint = (rect, point2,) => {
-    if (point2.x < (0, Rect2.minX)(rect,)) {
+  },
+  /**
+   * Checks if a rectangle contains a point
+   * @param rect - The rectangle to check
+   * @param point - The point to check
+   * @returns true if the provided rectangle contains the provided point
+   * @internal
+   */
+  containsPoint: (rect, point2,) => {
+    if (point2.x < Rect.minX(rect,)) {
       return false;
     }
-    if (point2.x > (0, Rect2.maxX)(rect,)) {
+    if (point2.x > Rect.maxX(rect,)) {
       return false;
     }
-    if (point2.y < (0, Rect2.minY)(rect,)) {
+    if (point2.y < Rect.minY(rect,)) {
       return false;
     }
-    if (point2.y > (0, Rect2.maxY)(rect,)) {
+    if (point2.y > Rect.maxY(rect,)) {
       return false;
     }
     if (isNaN(rect.x,)) {
@@ -16210,54 +17253,77 @@ var Rect;
       return false;
     }
     return true;
-  };
-  Rect2.containsRect = (rectA, rectB,) => {
-    for (const point2 of (0, Rect2.points)(rectB,)) {
-      if (!(0, Rect2.containsPoint)(rectA, point2,)) {
+  },
+  /**
+   * Returns wether a rect contains another rect entirely
+   * @param rectA -
+   * @param rectB -
+   * @returns true if rectA contains rectB
+   */
+  containsRect: (rectA, rectB,) => {
+    for (const point2 of Rect.points(rectB,)) {
+      if (!Rect.containsPoint(rectA, point2,)) {
         return false;
       }
     }
     return true;
-  };
-  Rect2.toCSS = (rect) => {
+  },
+  /** @internal */
+  toCSS: (rect) => {
     return {
       display: 'block',
       transform: `translate(${rect.x}px, ${rect.y}px)`,
       width: `${rect.width}px`,
       height: `${rect.height}px`,
     };
-  };
-  Rect2.inset = (rect, n,) => {
+  },
+  /** @internal */
+  inset: (rect, n,) => {
     return {
       x: rect.x + n,
       y: rect.y + n,
       width: Math.max(0, rect.width - 2 * n,),
       height: Math.max(0, rect.height - 2 * n,),
     };
-  };
-  Rect2.intersects = (rectA, rectB,) => {
-    return !(rectB.x >= (0, Rect2.maxX)(rectA,) || (0, Rect2.maxX)(rectB,) <= rectA.x || rectB.y >= (0, Rect2.maxY)(rectA,) ||
-      (0, Rect2.maxY)(rectB,) <= rectA.y);
-  };
-  Rect2.overlapHorizontally = (rectA, rectB,) => {
-    const aMax = Rect2.maxX(rectA,);
-    const bMax = Rect2.maxX(rectB,);
+  },
+  /** @internal */
+  intersects: (rectA, rectB,) => {
+    return !(rectB.x >= Rect.maxX(rectA,) || Rect.maxX(rectB,) <= rectA.x || rectB.y >= Rect.maxY(rectA,) || Rect.maxY(rectB,) <= rectA.y);
+  },
+  /** @internal */
+  overlapHorizontally: (rectA, rectB,) => {
+    const aMax = Rect.maxX(rectA,);
+    const bMax = Rect.maxX(rectB,);
     return aMax > rectB.x && bMax > rectA.x;
-  };
-  Rect2.overlapVertically = (rectA, rectB,) => {
-    const aMax = Rect2.maxY(rectA,);
-    const bMax = Rect2.maxY(rectB,);
+  },
+  /** @internal */
+  overlapVertically: (rectA, rectB,) => {
+    const aMax = Rect.maxY(rectA,);
+    const bMax = Rect.maxY(rectB,);
     return aMax > rectB.y && bMax > rectA.y;
-  };
-  Rect2.doesNotIntersect = (rect, rects,) => {
+  },
+  /** @internal */
+  doesNotIntersect: (rect, rects,) => {
     return rects.find((comparingRect) => {
-      return Rect2.intersects(comparingRect, rect,);
+      return Rect.intersects(comparingRect, rect,);
     },) === void 0;
-  };
-  Rect2.isEqual = (rectA, rectB,) => {
-    return Rect2.equals(rectA, rectB,);
-  };
-  Rect2.cornerPoints = (rect) => {
+  },
+  /**
+   * @param rectA -
+   * @param rectB -
+   * @returns if the input rectangles are equal in size and position
+   * @public
+   * @deprecated: please use Rect.equals instead
+   */
+  isEqual: (rectA, rectB,) => {
+    return Rect.equals(rectA, rectB,);
+  },
+  // @TODO: duplicate of points()
+  /**
+   * @returns [tl, tr, br, bl]
+   * @internal
+   */
+  cornerPoints: (rect) => {
     const rectMinX = rect.x;
     const rectMaxX = rect.x + rect.width;
     const rectMinY = rect.y;
@@ -16279,8 +17345,9 @@ var Rect;
       y: rectMaxY,
     };
     return [corner1, corner2, corner3, corner4,];
-  };
-  Rect2.midPoints = (rect) => {
+  },
+  /** @internal */
+  midPoints: (rect) => {
     const rectMinX = rect.x;
     const rectMidX = rect.x + rect.width / 2;
     const rectMaxX = rect.x + rect.width;
@@ -16304,19 +17371,20 @@ var Rect;
       y: rectMidY,
     };
     return [top, right, bottom, left,];
-  };
-  Rect2.pointDistance = (rect, point2,) => {
+  },
+  /** @internal */
+  pointDistance: (rect, point2,) => {
     let x = 0;
     let y = 0;
     if (point2.x < rect.x) {
       x = rect.x - point2.x;
-    } else if (point2.x > Rect2.maxX(rect,)) {
-      x = point2.x - Rect2.maxX(rect,);
+    } else if (point2.x > Rect.maxX(rect,)) {
+      x = point2.x - Rect.maxX(rect,);
     }
     if (point2.y < rect.y) {
       y = rect.y - point2.y;
-    } else if (point2.y > Rect2.maxY(rect,)) {
-      y = point2.y - Rect2.maxY(rect,);
+    } else if (point2.y > Rect.maxY(rect,)) {
+      y = point2.y - Rect.maxY(rect,);
     }
     return Point.distance({
       x,
@@ -16325,36 +17393,37 @@ var Rect;
       x: 0,
       y: 0,
     },);
-  };
-  const fromAnyDefaults = {
+  },
+  /** @internal */
+  fromAny: (rect, defaults = {
     x: 0,
     y: 0,
     width: 0,
     height: 0,
-  };
-  Rect2.fromAny = (rect, defaults = fromAnyDefaults,) => {
+  },) => {
     return {
       x: rect.x || defaults.x,
       y: rect.y || defaults.y,
       width: rect.width || defaults.width,
       height: rect.height || defaults.height,
     };
-  };
-  Rect2.delta = (a, b,) => {
+  },
+  delta: (a, b,) => {
     const pointA = {
-      x: (0, Rect2.minX)(a,),
-      y: (0, Rect2.minY)(a,),
+      x: Rect.minX(a,),
+      y: Rect.minY(a,),
     };
     const pointB = {
-      x: (0, Rect2.minX)(b,),
-      y: (0, Rect2.minY)(b,),
+      x: Rect.minX(b,),
+      y: Rect.minY(b,),
     };
     return {
       x: pointA.x - pointB.x,
       y: pointA.y - pointB.y,
     };
-  };
-  Rect2.withMinSize = (rect, minSize,) => {
+  },
+  /** @internal */
+  withMinSize: (rect, minSize,) => {
     const {
       width: minWidth,
       height: minHeight,
@@ -16367,12 +17436,16 @@ var Rect;
       x: rect.width < minWidth ? rect.x + diffX / 2 : rect.x,
       y: rect.height < minHeight ? rect.y + diffY / 2 : rect.y,
     };
-  };
-  Rect2.anyPointsOutsideRect = (rect, ps,) => {
-    const rectMinX = (0, Rect2.minX)(rect,);
-    const rectMinY = (0, Rect2.minY)(rect,);
-    const rectMaxX = (0, Rect2.maxX)(rect,);
-    const rectMaxY = (0, Rect2.maxY)(rect,);
+  },
+  /**
+   * Return false if any point is not inside or on the provided rect.
+   * @internal
+   */
+  anyPointsOutsideRect: (rect, ps,) => {
+    const rectMinX = Rect.minX(rect,);
+    const rectMinY = Rect.minY(rect,);
+    const rectMaxX = Rect.maxX(rect,);
+    const rectMaxY = Rect.maxY(rect,);
     for (const point2 of ps) {
       if (point2.x < rectMinX || point2.x > rectMaxX) {
         return true;
@@ -16382,12 +17455,17 @@ var Rect;
       }
     }
     return false;
-  };
-  Rect2.edges = (rect) => {
-    const [tl, tr, br, bl,] = (0, Rect2.cornerPoints)(rect,);
+  },
+  /** @internal */
+  edges: (rect) => {
+    const [tl, tr, br, bl,] = Rect.cornerPoints(rect,);
     return [Line(tl, tr,), Line(tr, br,), Line(br, bl,), Line(bl, tl,),];
-  };
-  Rect2.rebaseRectOnto = (rect, anchorRect, direction, alignment,) => {
+  },
+  /**
+   * Return a new rect projected into a new position based on the anchor rect and the given direction/alignment.
+   * @internal
+   */
+  rebaseRectOnto: (rect, anchorRect, direction, alignment,) => {
     const rebasedRect = {
       ...rect,
     };
@@ -16444,8 +17522,8 @@ var Rect;
         assertNever(direction,);
     }
     return rebasedRect;
-  };
-})(Rect || (Rect = {}),);
+  },
+};
 var constraintDefaults = {
   left: null,
   right: null,
@@ -16472,9 +17550,10 @@ function isConstraintSupportingChild(child,) {
   }
   return true;
 }
-var ConstraintMask;
-((ConstraintMask2) => {
-  ConstraintMask2.quickfix = (constraints) => {
+var ConstraintMask = {
+  // Modifies the constraint mask to remove invalid (mutually exclusive) options and returns the original.
+  // TODO: this removes major inconsistencies but probably needs to be merged with ConstraintSolver.
+  quickfix: (constraints) => {
     if (constraints.widthType === 2 || constraints.heightType === 2) {
       constraints.aspectRatio = null;
     }
@@ -16505,8 +17584,8 @@ var ConstraintMask;
       constraints.heightType = 0;
     }
     return constraints;
-  };
-})(ConstraintMask || (ConstraintMask = {}),);
+  },
+};
 function valueToDimensionType(value,) {
   if (typeof value === 'string') {
     const trimmedValue = value.trim();
@@ -16517,9 +17596,9 @@ function valueToDimensionType(value,) {
   }
   return 0;
 }
-var ConstraintValues;
-((ConstraintValues2) => {
-  ConstraintValues2.fromProperties = (props) => {
+var ConstraintValues = {
+  // Returns concrete current values given some ConstraintProperties.
+  fromProperties: (props) => {
     const {
       left,
       right,
@@ -16595,8 +17674,8 @@ var ConstraintValues;
       centerAnchorX,
       centerAnchorY,
     };
-  };
-  ConstraintValues2.toSize = (values, parentSizeInfo, autoSize, freeSpace,) => {
+  },
+  toSize: (values, parentSizeInfo, autoSize, freeSpace,) => {
     let width = null;
     let height = null;
     const parentWidth = (parentSizeInfo == null ? void 0 : parentSizeInfo.sizing)
@@ -16659,14 +17738,15 @@ var ConstraintValues;
       height: parentHeight ?? 0,
       width: parentWidth ?? 0,
     }, parentSizeInfo == null ? void 0 : parentSizeInfo.viewport,);
-  };
-  ConstraintValues2.toRect = (values, parentSizeInfo = null, autoSize = null, pixelAlign = false, freeSpace = null,) => {
+  },
+  // Returns a parent-relative rect given concrete ConstraintValues.
+  toRect: (values, parentSizeInfo = null, autoSize = null, pixelAlign = false, freeSpace = null,) => {
     let x = values.left || 0;
     let y = values.top || 0;
     const {
       width,
       height,
-    } = ConstraintValues2.toSize(values, parentSizeInfo, autoSize, freeSpace,);
+    } = ConstraintValues.toSize(values, parentSizeInfo, autoSize, freeSpace,);
     const parentSizeForPositioning = (parentSizeInfo == null ? void 0 : parentSizeInfo.positioning) ?? null;
     const positioningParentWidth = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.width,) : null;
     const positioningParentHeight = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.height,) : null;
@@ -16694,8 +17774,8 @@ var ConstraintValues;
       return Rect.pixelAligned(f,);
     }
     return f;
-  };
-})(ConstraintValues || (ConstraintValues = {}),);
+  },
+};
 var defaultWidth = 200;
 var defaultHeight = 200;
 function getConstraintValue(constraint, value, parentSize, viewport,) {
@@ -16799,18 +17879,18 @@ function constraintsEnabled(props,) {
 }
 function sizeFromFiniteNumberProps(props,) {
   const {
-    size: size2,
+    size,
   } = props;
   let {
     width,
     height,
   } = props;
-  if (isFiniteNumber(size2,)) {
+  if (isFiniteNumber(size,)) {
     if (width === void 0) {
-      width = size2;
+      width = size;
     }
     if (height === void 0) {
-      height = size2;
+      height = size;
     }
   }
   if (isFiniteNumber(width,) && isFiniteNumber(height,)) {
@@ -16822,8 +17902,8 @@ function sizeFromFiniteNumberProps(props,) {
   return null;
 }
 function rectFromFiniteNumberProps(props,) {
-  const size2 = sizeFromFiniteNumberProps(props,);
-  if (size2 === null) {
+  const size = sizeFromFiniteNumberProps(props,);
+  if (size === null) {
     return null;
   }
   const {
@@ -16834,7 +17914,7 @@ function rectFromFiniteNumberProps(props,) {
     return {
       x: left,
       y: top,
-      ...size2,
+      ...size,
     };
   }
   return null;
@@ -16864,17 +17944,17 @@ function getConstraintValues(props,) {
     bottom,
     center,
     _constraints,
-    size: size2,
+    size,
   } = props;
   let {
     width,
     height,
   } = props;
   if (width === void 0) {
-    width = size2;
+    width = size;
   }
   if (height === void 0) {
-    height = size2;
+    height = size;
   }
   const {
     aspectRatio: aspectRatio2,
@@ -16963,7 +18043,7 @@ var ParentSizeState = /* @__PURE__ */ ((ParentSizeState2) => {
   ParentSizeState2[ParentSizeState2['DisabledForCurrentLevel'] = 2] = 'DisabledForCurrentLevel';
   return ParentSizeState2;
 })(ParentSizeState || {},);
-var ConstraintsContext = React__default.createContext({
+var ConstraintsContext = /* @__PURE__ */ React4.createContext({
   parentSize: 0,
   /* Unknown */
 },);
@@ -16974,7 +18054,7 @@ function deprecatedParentSize(parentSize,) {
   return parentSize;
 }
 function useParentSize() {
-  return React__default.useContext(ConstraintsContext,).parentSize;
+  return React4.useContext(ConstraintsContext,).parentSize;
 }
 function isSize(o,) {
   return typeof o === 'object';
@@ -16985,7 +18065,7 @@ var ProvideParentSize = (props) => {
     parentSize,
     children,
   } = props;
-  const value = React__default.useMemo(() => ({
+  const value = React4.useMemo(() => ({
     parentSize,
   }), // We are generating the memoKeys in runtime and react doesn't like it,
   // but it should be safe to ignore.
@@ -16993,12 +18073,12 @@ var ProvideParentSize = (props) => {
   [getParentWidth(parentSize,), getParentHeight(parentSize,),],);
   if (currentParentSize === 1) {
     return children
-      ? /* @__PURE__ */ _jsx5(Fragment, {
+      ? /* @__PURE__ */ jsx(Fragment, {
         children,
       },)
       : null;
   }
-  return /* @__PURE__ */ _jsx5(ConstraintsContext.Provider, {
+  return /* @__PURE__ */ jsx(ConstraintsContext.Provider, {
     value,
     children,
   },);
@@ -17009,9 +18089,8 @@ function getParentWidth(parentSize,) {
 function getParentHeight(parentSize,) {
   return isSize(parentSize,) ? parentSize.height : parentSize;
 }
-var ConsumeParentSize = ConstraintsContext.Consumer;
 function useProvideParentSize(node, parentSize,) {
-  return /* @__PURE__ */ _jsx5(ProvideParentSize, {
+  return /* @__PURE__ */ jsx(ProvideParentSize, {
     parentSize,
     children: node,
   },);
@@ -17585,9 +18664,9 @@ var richTextCSSRules = [
 ];
 var defaultCache = /* @__PURE__ */ new Set();
 var defaultSheet;
-function injectCSSRule(cssRule, sheet, cache3 = defaultCache,) {
-  if (!cssRule || cache3.has(cssRule,) || typeof document === 'undefined') return;
-  cache3.add(cssRule,);
+function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
+  if (!cssRule || cache2.has(cssRule,) || typeof document === 'undefined') return;
+  cache2.add(cssRule,);
   if (!sheet) {
     if (!defaultSheet) {
       const styleElement = document.createElement('style',);
@@ -17758,7 +18837,7 @@ var stackPositionRule = `
 :not([data-framer-generated]) > [data-framer-stack-content-wrapper] > [data-framer-legacy-stack-gap-enabled] > [data-framer-component-type] {
     position: relative;
 }`;
-var nativeStackGapRules = [
+var nativeStackGapRules = /* @__PURE__ */ (() => [
   `[data-framer-stack-content-wrapper][data-framer-stack-gap-enabled="true"] {
         row-gap: var(--stack-native-row-gap);
         column-gap: var(--stack-native-column-gap);
@@ -17767,16 +18846,16 @@ var nativeStackGapRules = [
         row-gap: unset;
         column-gap: unset;
     }`,
-];
-var stackGapRule = `
+])();
+var stackGapRule = /* @__PURE__ */ (() => `
 .${flexboxGapNotSupportedClass} [data-framer-legacy-stack-gap-enabled="true"] > *, [data-framer-legacy-stack-gap-enabled="true"][data-framer-stack-flexbox-gap="false"] {
     margin-top: calc(var(--stack-gap-y) / 2);
     margin-bottom: calc(var(--stack-gap-y) / 2);
     margin-right: calc(var(--stack-gap-x) / 2);
     margin-left: calc(var(--stack-gap-x) / 2);
 }
-`;
-var stackDirectionRuleVertical = `
+`)();
+var stackDirectionRuleVertical = /* @__PURE__ */ (() => `
 .${flexboxGapNotSupportedClass}
 [data-framer-stack-direction-reverse="false"]
 [data-framer-legacy-stack-gap-enabled="true"]
@@ -17793,8 +18872,8 @@ var stackDirectionRuleVertical = `
 > *:last-child {
     margin-top: 0;
     margin-left: 0;
-}`;
-var stackDirectionRuleHorizontal = `
+}`)();
+var stackDirectionRuleHorizontal = /* @__PURE__ */ (() => `
 .${flexboxGapNotSupportedClass}
 [data-framer-stack-direction-reverse="false"]
 [data-framer-legacy-stack-gap-enabled="true"]
@@ -17811,8 +18890,15 @@ var stackDirectionRuleHorizontal = `
 > *:first-child {
     margin-right: 0;
     margin-bottom: 0;
-}`;
-var stackCSSRules = [stackPositionRule, stackGapRule, ...nativeStackGapRules, stackDirectionRuleVertical, stackDirectionRuleHorizontal,];
+}`)();
+var stackCSSRules =
+  /* @__PURE__ */ (() => [
+    stackPositionRule,
+    stackGapRule,
+    ...nativeStackGapRules,
+    stackDirectionRuleVertical,
+    stackDirectionRuleHorizontal,
+  ])();
 var navigationCSSRules = [`
 NavigationContainer
 [data-framer-component-type="NavigationContainer"] > *,
@@ -17892,13 +18978,13 @@ var combineCSSRules =
     ...resetCSS,
     ...hideScrollbars,
   ];
-export var combinedCSSRules = combineCSSRules(false,);
-var combinedCSSRulesForPreview = combineCSSRules(true,);
+export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
+var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
 var didInject = false;
 function injectComponentCSSRules() {
   if (didInject) return;
   didInject = true;
-  const styles = RenderTarget.current() === 'PREVIEW' ? combinedCSSRulesForPreview : combinedCSSRules;
+  const styles = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
   for (const rule of styles) {
     injectCSSRule(rule, void 0, void 0,);
   }
@@ -18030,7 +19116,7 @@ function getPropertyControls(component,) {
   return component.propertyControls;
 }
 var defaultPresetId = 'iphone-12-pro';
-var presetsBase = {
+var presetsBase = /* @__PURE__ */ (() => ({
   iPhonePro: {
     // Screen mask takes care of the rounded screen corners for iPhones Pro,
     // and actually using a radius here produces visual artifacts in Chrome.
@@ -18067,8 +19153,8 @@ var presetsBase = {
     clayBezelBottom: 20,
     clayBezelRadius: 20,
   },
-};
-var devicePresets = [{
+}))();
+var devicePresets = /* @__PURE__ */ (() => [{
   id: 'iphone-12',
   title: 'iPhone 12',
   screenRadius: 0,
@@ -19217,7 +20303,7 @@ var devicePresets = [{
   ...presetsBase.desktop,
   screenWidth: 2160,
   screenHeight: 3840,
-},];
+},])();
 var deviceCodeComponentPresetIds = [
   'iphone-12',
   'iphone-12-mini',
@@ -19239,7 +20325,7 @@ var deviceCodeComponentPresetIds = [
   '1440p',
   '4k',
 ];
-var devicePresetsMap = devicePresets.reduce((map, preset,) => {
+var devicePresetsMap = /* @__PURE__ */ devicePresets.reduce((map, preset,) => {
   map[preset.id] = preset;
   return map;
 }, {},);
@@ -19431,7 +20517,7 @@ function applyMetaTag(name, props,) {
   }
 }
 function usePrototypingMetaTags() {
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     applyMetaTag('mobile-web-app-capable', {
       content: 'yes',
     },);
@@ -19454,31 +20540,31 @@ function DeviceCodeComponentInner({
   const deviceOptions = convertPropsToDeviceOptions(props, {
     forceOldClay: true,
   },);
-  React__default.useInsertionEffect(() => {
+  React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
-    return /* @__PURE__ */ _jsx5('div', {
+    return /* @__PURE__ */ jsx('div', {
       'data-framer-component-type': 'DeviceComponent',
       className: 'no-device',
       style: {
         width: '100%',
         height: '100%',
       },
-      children: /* @__PURE__ */ _jsx5(ProvideParentSize, {
+      children: /* @__PURE__ */ jsx(ProvideParentSize, {
         parentSize: 1,
         children,
       },),
     },);
   }
   const child = Array.isArray(children,) ? children[0] : children;
-  const resizedChild = child && React__default.isValidElement(child,)
-    ? React__default.cloneElement(child, {
+  const resizedChild = child && React4.isValidElement(child,)
+    ? React4.cloneElement(child, {
       width: deviceOptions.screenWidth,
       height: deviceOptions.screenHeight,
     },)
     : null;
-  return /* @__PURE__ */ _jsx5(Device, {
+  return /* @__PURE__ */ jsx(Device, {
     scaleTo: 'dynamic',
     deviceOptions,
     children: resizedChild,
@@ -19622,10 +20708,10 @@ function supportsThemes(presetId, skin,) {
 }
 var asRecord = (object) => object;
 function memoize(fn,) {
-  const cache3 = Object.create(Object.prototype,);
+  const cache2 = Object.create(Object.prototype,);
   return (arg) => {
-    if (cache3[arg] === void 0) cache3[arg] = fn(arg,);
-    return cache3[arg];
+    if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
+    return cache2[arg];
   };
 }
 var reactPropsRegex =
@@ -19634,10 +20720,10 @@ var isPropValid = /* @__PURE__ */ memoize((prop) =>
   reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
   /* Z+1 */
 );
-var LibraryFeaturesContext = /* @__PURE__ */ React__default.createContext(void 0,);
-var LibraryFeaturesProvider = LibraryFeaturesContext.Provider;
+var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
 var useLibraryFeatures = () => {
-  const context = React__default.useContext(LibraryFeaturesContext,);
+  const context = React4.useContext(LibraryFeaturesContext,);
   return context ?? {};
 };
 var import_process = __toESM(require_browser(), 1,);
@@ -19798,7 +20884,7 @@ var runtimeProxy = {
     return mockWithWarning(`${String(key7,)} is only available inside of Framer. https://www.framer.com/`,);
   },
 };
-var runtime = new Proxy(implementation, runtimeProxy,);
+var runtime = /* @__PURE__ */ new Proxy(implementation, runtimeProxy,);
 function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
@@ -19867,9 +20953,9 @@ function cssObjectPosition(positionX, positionY,) {
 }
 function cssImageRendering(image, containerSize,) {
   if (!containerSize) return 'auto';
-  const devicePixelRatio3 = RenderTarget.current() === 'CANVAS' ? safeWindow.devicePixelRatio : 1;
+  const devicePixelRatio3 = RenderTarget.current() === RenderTarget.canvas ? safeWindow.devicePixelRatio : 1;
   const minPixelatedZoom = minZoomForPixelatedImageRendering(image, containerSize, devicePixelRatio3,);
-  if (RenderTarget.current() === 'CANVAS') {
+  if (RenderTarget.current() === RenderTarget.canvas) {
     return imageRenderingForZoom(1, minPixelatedZoom,);
   } else {
     return imageRenderingForZoom(RenderEnvironment.zoom, minPixelatedZoom,);
@@ -19894,10 +20980,10 @@ function StaticImage({
 },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  const [measuredSizes, setMeasuredSizes,] = React__default.useState();
-  const imageRef = React__default.useRef(null,);
+  const [measuredSizes, setMeasuredSizes,] = React4.useState();
+  const imageRef = React4.useRef(null,);
   const libraryFeatures = useLibraryFeatures();
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!libraryFeatures.imgSizesWorkaroundEnabled) return;
     const imageElement = imageRef.current;
     if (!imageElement) return;
@@ -19918,7 +21004,7 @@ function StaticImage({
     }
     setMeasuredSizes(imageNodeWidth + 'px',);
   }, [image.sizes,],);
-  return /* @__PURE__ */ _jsx5('img', {
+  return /* @__PURE__ */ jsx('img', {
     ref: imageRef,
     decoding: 'async',
     loading: image.loading,
@@ -19934,10 +21020,10 @@ function CanvasImage({
   containerSize,
   nodeId,
 },) {
-  const wrapperRef = React__default.useRef(null,);
+  const wrapperRef = React4.useRef(null,);
   const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     wrapper.appendChild(imageElement,);
@@ -19946,7 +21032,7 @@ function CanvasImage({
     };
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     ref: wrapperRef,
     style: {
       display: 'contents',
@@ -19959,15 +21045,15 @@ function OptimizedCanvasImage({
   image,
   containerSize,
 },) {
-  const wrapperRef = React__default.useRef(null,);
+  const wrapperRef = React4.useRef(null,);
   const source = runtime.useImageSource(image, containerSize, nodeId,);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     const imageStyle = getImageStyle(image, containerSize,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source, containerSize,],);
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     ref: wrapperRef,
     style: {
       display: 'contents',
@@ -20004,24 +21090,24 @@ function BackgroundImageComponent({
       }
       fallbackWrapperStyles.border = 0;
       imageNode = null;
-    } else if (RenderTarget.current() !== 'CANVAS') {
-      imageNode = /* @__PURE__ */ _jsx5(StaticImage, {
+    } else if (RenderTarget.current() !== RenderTarget.canvas) {
+      imageNode = /* @__PURE__ */ jsx(StaticImage, {
         image,
         ...props,
       },);
     } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
-      imageNode = /* @__PURE__ */ _jsx5(OptimizedCanvasImage, {
+      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
         image,
         ...props,
       },);
     } else {
-      imageNode = /* @__PURE__ */ _jsx5(CanvasImage, {
+      imageNode = /* @__PURE__ */ jsx(CanvasImage, {
         image,
         ...props,
       },);
     }
   }
-  return /* @__PURE__ */ _jsx5(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     layoutId,
     style: imageNode ? wrapperStyle : fallbackWrapperStyles,
     'data-framer-background-image-wrapper': true,
@@ -20029,13 +21115,12 @@ function BackgroundImageComponent({
   },);
 }
 var key2 = 'src';
-var BackgroundImage;
-((BackgroundImage2) => {
-  BackgroundImage2.isImageObject = function (image,) {
+var BackgroundImage = {
+  isImageObject: function (image,) {
     if (!image || typeof image === 'string') return false;
     return key2 in image;
-  };
-})(BackgroundImage || (BackgroundImage = {}),);
+  },
+};
 function applyForwardOverrides(background, props,) {
   const {
     _forwardedOverrideId,
@@ -20129,24 +21214,24 @@ function Border(props,) {
   };
   if (props.border) {
     style.border = props.border;
-    return /* @__PURE__ */ _jsx5(motion.div, {
+    return /* @__PURE__ */ jsx(motion.div, {
       style,
     },);
   }
   collectBorderStyleForProps(props, style, false,);
-  return /* @__PURE__ */ _jsx5(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     'data-frame-border': true,
     style,
     layoutId,
   },);
 }
 function htmlElementAsMotionComponent(asElem,) {
-  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
+  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion(asElem,) : motion['div'];
 }
-var isChrome2 = isChrome();
+var isChrome2 = /* @__PURE__ */ isChrome();
 function layoutHintDataPropsForCenter(center,) {
   const props = {};
-  if (!isChrome2 || RenderTarget.current() !== 'CANVAS') {
+  if (!isChrome2 || RenderTarget.current() !== RenderTarget.canvas) {
     return props;
   }
   if (center === true || center === 'x') {
@@ -20201,9 +21286,9 @@ function processOverrideForwarding(props, children,) {
       children,
     };
   }
-  children = React__default.Children.map(children, (child) => {
-    if (!React__default.isValidElement(child,)) return child;
-    return React__default.cloneElement(child, {
+  children = React4.Children.map(children, (child) => {
+    if (!React4.isValidElement(child,)) return child;
+    return React4.cloneElement(child, {
       _forwardedOverrides,
     },);
   },);
@@ -20257,583 +21342,36 @@ function useLayoutId2(props, {
   }, [enabled,],);
 }
 var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect : useEffect;
-var ComponentContainerContext = React__default.createContext(false,);
-var resizeObservers = [];
-var hasActiveObservations = function () {
-  return resizeObservers.some(function (ro,) {
-    return ro.activeTargets.length > 0;
-  },);
-};
-var hasSkippedObservations = function () {
-  return resizeObservers.some(function (ro,) {
-    return ro.skippedTargets.length > 0;
-  },);
-};
-var msg = 'ResizeObserver loop completed with undelivered notifications.';
-var deliverResizeLoopError = function () {
-  var event;
-  if (typeof ErrorEvent === 'function') {
-    event = new ErrorEvent('error', {
-      message: msg,
-    },);
-  } else {
-    event = document.createEvent('Event',);
-    event.initEvent('error', false, false,);
-    event.message = msg;
-  }
-  window.dispatchEvent(event,);
-};
-var ResizeObserverBoxOptions;
-(function (ResizeObserverBoxOptions2,) {
-  ResizeObserverBoxOptions2['BORDER_BOX'] = 'border-box';
-  ResizeObserverBoxOptions2['CONTENT_BOX'] = 'content-box';
-  ResizeObserverBoxOptions2['DEVICE_PIXEL_CONTENT_BOX'] = 'device-pixel-content-box';
-})(ResizeObserverBoxOptions || (ResizeObserverBoxOptions = {}),);
-var freeze = function (obj,) {
-  return Object.freeze(obj,);
-};
-var ResizeObserverSize = /* @__PURE__ */ function () {
-  function ResizeObserverSize2(inlineSize, blockSize,) {
-    this.inlineSize = inlineSize;
-    this.blockSize = blockSize;
-    freeze(this,);
-  }
-  return ResizeObserverSize2;
-}();
-var DOMRectReadOnly = function () {
-  function DOMRectReadOnly2(x, y, width, height,) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.top = this.y;
-    this.left = this.x;
-    this.bottom = this.top + this.height;
-    this.right = this.left + this.width;
-    return freeze(this,);
-  }
-  DOMRectReadOnly2.prototype.toJSON = function () {
-    var _a = this,
-      x = _a.x,
-      y = _a.y,
-      top = _a.top,
-      right = _a.right,
-      bottom = _a.bottom,
-      left = _a.left,
-      width = _a.width,
-      height = _a.height;
-    return {
-      x,
-      y,
-      top,
-      right,
-      bottom,
-      left,
-      width,
-      height,
-    };
-  };
-  DOMRectReadOnly2.fromRect = function (rectangle,) {
-    return new DOMRectReadOnly2(rectangle.x, rectangle.y, rectangle.width, rectangle.height,);
-  };
-  return DOMRectReadOnly2;
-}();
-var isSVG = function (target,) {
-  return target instanceof SVGElement && 'getBBox' in target;
-};
-var isHidden = function (target,) {
-  if (isSVG(target,)) {
-    var _a = target.getBBox(),
-      width = _a.width,
-      height = _a.height;
-    return !width && !height;
-  }
-  var _b = target,
-    offsetWidth = _b.offsetWidth,
-    offsetHeight = _b.offsetHeight;
-  return !(offsetWidth || offsetHeight || target.getClientRects().length);
-};
-var isElement = function (obj,) {
-  var _a, _b;
-  if (obj instanceof Element) {
-    return true;
-  }
-  var scope = (_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.ownerDocument) === null || _b === void 0 ? void 0 : _b.defaultView;
-  return !!(scope && obj instanceof scope.Element);
-};
-var isReplacedElement = function (target,) {
-  switch (target.tagName) {
-    case 'INPUT':
-      if (target.type !== 'image') {
-        break;
-      }
-    case 'VIDEO':
-    case 'AUDIO':
-    case 'EMBED':
-    case 'OBJECT':
-    case 'CANVAS':
-    case 'IFRAME':
-    case 'IMG':
-      return true;
-  }
-  return false;
-};
-var global = typeof window !== 'undefined' ? window : {};
-var cache2 = /* @__PURE__ */ new WeakMap();
-var scrollRegexp = /auto|scroll/;
-var verticalRegexp = /^tb|vertical/;
-var IE = /msie|trident/i.test(global.navigator && global.navigator.userAgent,);
-var parseDimension = function (pixel,) {
-  return parseFloat(pixel || '0',);
-};
-var size = function (inlineSize, blockSize, switchSizes,) {
-  if (inlineSize === void 0) {
-    inlineSize = 0;
-  }
-  if (blockSize === void 0) {
-    blockSize = 0;
-  }
-  if (switchSizes === void 0) {
-    switchSizes = false;
-  }
-  return new ResizeObserverSize((switchSizes ? blockSize : inlineSize) || 0, (switchSizes ? inlineSize : blockSize) || 0,);
-};
-var zeroBoxes = freeze({
-  devicePixelContentBoxSize: size(),
-  borderBoxSize: size(),
-  contentBoxSize: size(),
-  contentRect: new DOMRectReadOnly(0, 0, 0, 0,),
-},);
-var calculateBoxSizes = function (target, forceRecalculation,) {
-  if (forceRecalculation === void 0) {
-    forceRecalculation = false;
-  }
-  if (cache2.has(target,) && !forceRecalculation) {
-    return cache2.get(target,);
-  }
-  if (isHidden(target,)) {
-    cache2.set(target, zeroBoxes,);
-    return zeroBoxes;
-  }
-  var cs = getComputedStyle(target,);
-  var svg = isSVG(target,) && target.ownerSVGElement && target.getBBox();
-  var removePadding = !IE && cs.boxSizing === 'border-box';
-  var switchSizes = verticalRegexp.test(cs.writingMode || '',);
-  var canScrollVertically = !svg && scrollRegexp.test(cs.overflowY || '',);
-  var canScrollHorizontally = !svg && scrollRegexp.test(cs.overflowX || '',);
-  var paddingTop = svg ? 0 : parseDimension(cs.paddingTop,);
-  var paddingRight = svg ? 0 : parseDimension(cs.paddingRight,);
-  var paddingBottom = svg ? 0 : parseDimension(cs.paddingBottom,);
-  var paddingLeft = svg ? 0 : parseDimension(cs.paddingLeft,);
-  var borderTop = svg ? 0 : parseDimension(cs.borderTopWidth,);
-  var borderRight = svg ? 0 : parseDimension(cs.borderRightWidth,);
-  var borderBottom = svg ? 0 : parseDimension(cs.borderBottomWidth,);
-  var borderLeft = svg ? 0 : parseDimension(cs.borderLeftWidth,);
-  var horizontalPadding = paddingLeft + paddingRight;
-  var verticalPadding = paddingTop + paddingBottom;
-  var horizontalBorderArea = borderLeft + borderRight;
-  var verticalBorderArea = borderTop + borderBottom;
-  var horizontalScrollbarThickness = !canScrollHorizontally ? 0 : target.offsetHeight - verticalBorderArea - target.clientHeight;
-  var verticalScrollbarThickness = !canScrollVertically ? 0 : target.offsetWidth - horizontalBorderArea - target.clientWidth;
-  var widthReduction = removePadding ? horizontalPadding + horizontalBorderArea : 0;
-  var heightReduction = removePadding ? verticalPadding + verticalBorderArea : 0;
-  var contentWidth = svg ? svg.width : parseDimension(cs.width,) - widthReduction - verticalScrollbarThickness;
-  var contentHeight = svg ? svg.height : parseDimension(cs.height,) - heightReduction - horizontalScrollbarThickness;
-  var borderBoxWidth = contentWidth + horizontalPadding + verticalScrollbarThickness + horizontalBorderArea;
-  var borderBoxHeight = contentHeight + verticalPadding + horizontalScrollbarThickness + verticalBorderArea;
-  var boxes = freeze({
-    devicePixelContentBoxSize: size(
-      Math.round(contentWidth * devicePixelRatio,),
-      Math.round(contentHeight * devicePixelRatio,),
-      switchSizes,
-    ),
-    borderBoxSize: size(borderBoxWidth, borderBoxHeight, switchSizes,),
-    contentBoxSize: size(contentWidth, contentHeight, switchSizes,),
-    contentRect: new DOMRectReadOnly(paddingLeft, paddingTop, contentWidth, contentHeight,),
-  },);
-  cache2.set(target, boxes,);
-  return boxes;
-};
-var calculateBoxSize = function (target, observedBox, forceRecalculation,) {
-  var _a = calculateBoxSizes(target, forceRecalculation,),
-    borderBoxSize = _a.borderBoxSize,
-    contentBoxSize = _a.contentBoxSize,
-    devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
-  switch (observedBox) {
-    case ResizeObserverBoxOptions.DEVICE_PIXEL_CONTENT_BOX:
-      return devicePixelContentBoxSize;
-    case ResizeObserverBoxOptions.BORDER_BOX:
-      return borderBoxSize;
-    default:
-      return contentBoxSize;
-  }
-};
-var ResizeObserverEntry = /* @__PURE__ */ function () {
-  function ResizeObserverEntry2(target,) {
-    var boxes = calculateBoxSizes(target,);
-    this.target = target;
-    this.contentRect = boxes.contentRect;
-    this.borderBoxSize = freeze([boxes.borderBoxSize,],);
-    this.contentBoxSize = freeze([boxes.contentBoxSize,],);
-    this.devicePixelContentBoxSize = freeze([boxes.devicePixelContentBoxSize,],);
-  }
-  return ResizeObserverEntry2;
-}();
-var calculateDepthForNode = function (node,) {
-  if (isHidden(node,)) {
-    return Infinity;
-  }
-  var depth = 0;
-  var parent = node.parentNode;
-  while (parent) {
-    depth += 1;
-    parent = parent.parentNode;
-  }
-  return depth;
-};
-var broadcastActiveObservations = function () {
-  var shallowestDepth = Infinity;
-  var callbacks2 = [];
-  resizeObservers.forEach(function processObserver(ro,) {
-    if (ro.activeTargets.length === 0) {
-      return;
-    }
-    var entries = [];
-    ro.activeTargets.forEach(function processTarget(ot,) {
-      var entry = new ResizeObserverEntry(ot.target,);
-      var targetDepth = calculateDepthForNode(ot.target,);
-      entries.push(entry,);
-      ot.lastReportedSize = calculateBoxSize(ot.target, ot.observedBox,);
-      if (targetDepth < shallowestDepth) {
-        shallowestDepth = targetDepth;
-      }
-    },);
-    callbacks2.push(function resizeObserverCallback() {
-      ro.callback.call(ro.observer, entries, ro.observer,);
-    },);
-    ro.activeTargets.splice(0, ro.activeTargets.length,);
-  },);
-  for (var _i = 0, callbacks_1 = callbacks2; _i < callbacks_1.length; _i++) {
-    var callback = callbacks_1[_i];
-    callback();
-  }
-  return shallowestDepth;
-};
-var gatherActiveObservationsAtDepth = function (depth,) {
-  resizeObservers.forEach(function processObserver(ro,) {
-    ro.activeTargets.splice(0, ro.activeTargets.length,);
-    ro.skippedTargets.splice(0, ro.skippedTargets.length,);
-    ro.observationTargets.forEach(function processTarget(ot,) {
-      if (ot.isActive()) {
-        if (calculateDepthForNode(ot.target,) > depth) {
-          ro.activeTargets.push(ot,);
-        } else {
-          ro.skippedTargets.push(ot,);
-        }
-      }
-    },);
-  },);
-};
-var process3 = function () {
-  var depth = 0;
-  gatherActiveObservationsAtDepth(depth,);
-  while (hasActiveObservations()) {
-    depth = broadcastActiveObservations();
-    gatherActiveObservationsAtDepth(depth,);
-  }
-  if (hasSkippedObservations()) {
-    deliverResizeLoopError();
-  }
-  return depth > 0;
-};
-var trigger;
-var callbacks = [];
-var notify2 = function () {
-  return callbacks.splice(0,).forEach(function (cb,) {
-    return cb();
-  },);
-};
-var queueMicroTask = function (callback,) {
-  if (!trigger) {
-    var toggle_1 = 0;
-    var el_1 = document.createTextNode('',);
-    var config = {
-      characterData: true,
-    };
-    new MutationObserver(function () {
-      return notify2();
-    },).observe(el_1, config,);
-    trigger = function () {
-      el_1.textContent = '' + (toggle_1 ? toggle_1-- : toggle_1++);
-    };
-  }
-  callbacks.push(callback,);
-  trigger();
-};
-var queueResizeObserver = function (cb,) {
-  queueMicroTask(function ResizeObserver22() {
-    requestAnimationFrame(cb,);
-  },);
-};
-var watching = 0;
-var isWatching = function () {
-  return !!watching;
-};
-var CATCH_PERIOD = 250;
-var observerConfig = {
-  attributes: true,
-  characterData: true,
-  childList: true,
-  subtree: true,
-};
-var events = [
-  'resize',
-  'load',
-  'transitionend',
-  'animationend',
-  'animationstart',
-  'animationiteration',
-  'keyup',
-  'keydown',
-  'mouseup',
-  'mousedown',
-  'mouseover',
-  'mouseout',
-  'blur',
-  'focus',
-];
-var time2 = function (timeout,) {
-  if (timeout === void 0) {
-    timeout = 0;
-  }
-  return Date.now() + timeout;
-};
-var scheduled = false;
-var Scheduler = function () {
-  function Scheduler2() {
-    var _this = this;
-    this.stopped = true;
-    this.listener = function () {
-      return _this.schedule();
-    };
-  }
-  Scheduler2.prototype.run = function (timeout,) {
-    var _this = this;
-    if (timeout === void 0) {
-      timeout = CATCH_PERIOD;
-    }
-    if (scheduled) {
-      return;
-    }
-    scheduled = true;
-    var until = time2(timeout,);
-    queueResizeObserver(function () {
-      var elementsHaveResized = false;
-      try {
-        elementsHaveResized = process3();
-      } finally {
-        scheduled = false;
-        timeout = until - time2();
-        if (!isWatching()) {
-          return;
-        }
-        if (elementsHaveResized) {
-          _this.run(1e3,);
-        } else if (timeout > 0) {
-          _this.run(timeout,);
-        } else {
-          _this.start();
-        }
-      }
-    },);
-  };
-  Scheduler2.prototype.schedule = function () {
-    this.stop();
-    this.run();
-  };
-  Scheduler2.prototype.observe = function () {
-    var _this = this;
-    var cb = function () {
-      return _this.observer && _this.observer.observe(document.body, observerConfig,);
-    };
-    document.body ? cb() : global.addEventListener('DOMContentLoaded', cb,);
-  };
-  Scheduler2.prototype.start = function () {
-    var _this = this;
-    if (this.stopped) {
-      this.stopped = false;
-      this.observer = new MutationObserver(this.listener,);
-      this.observe();
-      events.forEach(function (name,) {
-        return global.addEventListener(name, _this.listener, true,);
-      },);
-    }
-  };
-  Scheduler2.prototype.stop = function () {
-    var _this = this;
-    if (!this.stopped) {
-      this.observer && this.observer.disconnect();
-      events.forEach(function (name,) {
-        return global.removeEventListener(name, _this.listener, true,);
-      },);
-      this.stopped = true;
-    }
-  };
-  return Scheduler2;
-}();
-var scheduler = new Scheduler();
-var updateCount = function (n,) {
-  !watching && n > 0 && scheduler.start();
-  watching += n;
-  !watching && scheduler.stop();
-};
-var skipNotifyOnElement = function (target,) {
-  return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
-};
-var ResizeObservation = function () {
-  function ResizeObservation2(target, observedBox,) {
-    this.target = target;
-    this.observedBox = observedBox || ResizeObserverBoxOptions.CONTENT_BOX;
-    this.lastReportedSize = {
-      inlineSize: 0,
-      blockSize: 0,
-    };
-  }
-  ResizeObservation2.prototype.isActive = function () {
-    var size2 = calculateBoxSize(this.target, this.observedBox, true,);
-    if (skipNotifyOnElement(this.target,)) {
-      this.lastReportedSize = size2;
-    }
-    if (this.lastReportedSize.inlineSize !== size2.inlineSize || this.lastReportedSize.blockSize !== size2.blockSize) {
-      return true;
-    }
-    return false;
-  };
-  return ResizeObservation2;
-}();
-var ResizeObserverDetail = /* @__PURE__ */ function () {
-  function ResizeObserverDetail2(resizeObserver, callback,) {
-    this.activeTargets = [];
-    this.skippedTargets = [];
-    this.observationTargets = [];
-    this.observer = resizeObserver;
-    this.callback = callback;
-  }
-  return ResizeObserverDetail2;
-}();
-var observerMap = /* @__PURE__ */ new WeakMap();
-var getObservationIndex = function (observationTargets, target,) {
-  for (var i = 0; i < observationTargets.length; i += 1) {
-    if (observationTargets[i].target === target) {
-      return i;
-    }
-  }
-  return -1;
-};
-var ResizeObserverController = function () {
-  function ResizeObserverController2() {}
-  ResizeObserverController2.connect = function (resizeObserver, callback,) {
-    var detail = new ResizeObserverDetail(resizeObserver, callback,);
-    observerMap.set(resizeObserver, detail,);
-  };
-  ResizeObserverController2.observe = function (resizeObserver, target, options,) {
-    var detail = observerMap.get(resizeObserver,);
-    var firstObservation = detail.observationTargets.length === 0;
-    if (getObservationIndex(detail.observationTargets, target,) < 0) {
-      firstObservation && resizeObservers.push(detail,);
-      detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
-      updateCount(1,);
-      scheduler.schedule();
-    }
-  };
-  ResizeObserverController2.unobserve = function (resizeObserver, target,) {
-    var detail = observerMap.get(resizeObserver,);
-    var index = getObservationIndex(detail.observationTargets, target,);
-    var lastObservation = detail.observationTargets.length === 1;
-    if (index >= 0) {
-      lastObservation && resizeObservers.splice(resizeObservers.indexOf(detail,), 1,);
-      detail.observationTargets.splice(index, 1,);
-      updateCount(-1,);
-    }
-  };
-  ResizeObserverController2.disconnect = function (resizeObserver,) {
-    var _this = this;
-    var detail = observerMap.get(resizeObserver,);
-    detail.observationTargets.slice().forEach(function (ot,) {
-      return _this.unobserve(resizeObserver, ot.target,);
-    },);
-    detail.activeTargets.splice(0, detail.activeTargets.length,);
-  };
-  return ResizeObserverController2;
-}();
-var ResizeObserver2 = function () {
-  function ResizeObserver22(callback,) {
-    if (arguments.length === 0) {
-      throw new TypeError('Failed to construct \'ResizeObserver\': 1 argument required, but only 0 present.',);
-    }
-    if (typeof callback !== 'function') {
-      throw new TypeError('Failed to construct \'ResizeObserver\': The callback provided as parameter 1 is not a function.',);
-    }
-    ResizeObserverController.connect(this, callback,);
-  }
-  ResizeObserver22.prototype.observe = function (target, options,) {
-    if (arguments.length === 0) {
-      throw new TypeError('Failed to execute \'observe\' on \'ResizeObserver\': 1 argument required, but only 0 present.',);
-    }
-    if (!isElement(target,)) {
-      throw new TypeError('Failed to execute \'observe\' on \'ResizeObserver\': parameter 1 is not of type \'Element',);
-    }
-    ResizeObserverController.observe(this, target, options,);
-  };
-  ResizeObserver22.prototype.unobserve = function (target,) {
-    if (arguments.length === 0) {
-      throw new TypeError('Failed to execute \'unobserve\' on \'ResizeObserver\': 1 argument required, but only 0 present.',);
-    }
-    if (!isElement(target,)) {
-      throw new TypeError('Failed to execute \'unobserve\' on \'ResizeObserver\': parameter 1 is not of type \'Element',);
-    }
-    ResizeObserverController.unobserve(this, target,);
-  };
-  ResizeObserver22.prototype.disconnect = function () {
-    ResizeObserverController.disconnect(this,);
-  };
-  ResizeObserver22.toString = function () {
-    return 'function ResizeObserver () { [polyfill code] }';
-  };
-  return ResizeObserver22;
-}();
+var ComponentContainerContext = /* @__PURE__ */ React4.createContext(false,);
 function useForceUpdate3() {
-  const [_, setForcedRenderCount,] = React__default.useState(0,);
-  return React__default.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
+  const [_, setForcedRenderCount,] = React4.useState(0,);
+  return React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
 }
+var ResizeObserverPolyfill = /* @__PURE__ */ (() => require_resize_observer_umd().ResizeObserver)();
 var DEFAULT_SIZE = 200;
-var _sharedResizeObserver;
-var _callbacks;
 var SharedObserver = class {
   constructor() {
-    __privateAdd(this, _sharedResizeObserver, void 0,);
-    __privateAdd(this, _callbacks, /* @__PURE__ */ new WeakMap(),);
-    const ResizeObserver22 = safeWindow.ResizeObserver ?? ResizeObserver2;
-    __privateSet(this, _sharedResizeObserver, new ResizeObserver22(this.updateResizedElements.bind(this,),),);
+    __publicField(this, 'sharedResizeObserver',);
+    __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
+    const ResizeObserver2 = safeWindow.ResizeObserver ?? ResizeObserverPolyfill;
+    this.sharedResizeObserver = new ResizeObserver2(this.updateResizedElements.bind(this,),);
   }
   updateResizedElements(entries,) {
     for (const entry of entries) {
-      const callbackForElement = __privateGet(this, _callbacks,).get(entry.target,);
+      const callbackForElement = this.callbacks.get(entry.target,);
       if (callbackForElement) callbackForElement(entry.contentRect,);
     }
   }
   observeElementWithCallback(element, callback,) {
-    __privateGet(this, _sharedResizeObserver,).observe(element,);
-    __privateGet(this, _callbacks,).set(element, callback,);
+    this.sharedResizeObserver.observe(element,);
+    this.callbacks.set(element, callback,);
   }
   unobserve(element,) {
-    __privateGet(this, _sharedResizeObserver,).unobserve(element,);
-    __privateGet(this, _callbacks,).delete(element,);
+    this.sharedResizeObserver.unobserve(element,);
+    this.callbacks.delete(element,);
   }
 };
-_sharedResizeObserver = /* @__PURE__ */ new WeakMap();
-_callbacks = /* @__PURE__ */ new WeakMap();
-var sharedResizeObserver = isBrowser2() ? new SharedObserver() : void 0;
+var sharedResizeObserver = /* @__PURE__ */ (() => isBrowser2() ? new SharedObserver() : void 0)();
 function useRerenderOnResize(ref,) {
   const update = useForceUpdate3();
   useEffect(() => {
@@ -20847,11 +21385,11 @@ function useRerenderOnResize(ref,) {
 }
 function useMeasuredSize(ref,) {
   const forceUpdate = useForceUpdate3();
-  const size2 = React__default.useRef(null,);
+  const size = React4.useRef(null,);
   function updateSize(newSize,) {
     if (newSize.width === 0 && newSize.height === 0) return;
-    if (!size2.current || newSize.height !== size2.current.height || newSize.width !== size2.current.width) {
-      size2.current = {
+    if (!size.current || newSize.height !== size.current.height || newSize.width !== size.current.width) {
+      size.current = {
         width: newSize.width,
         height: newSize.height,
       };
@@ -20874,19 +21412,19 @@ function useMeasuredSize(ref,) {
       sharedResizeObserver.unobserve(ref.current,);
     };
   }, [],);
-  return size2.current;
+  return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component14) => (props) => {
-  const ref = React__default.useRef(null,);
-  const size2 = useMeasuredSize(ref,);
+var withMeasuredSize = (Component15) => (props) => {
+  const ref = React4.useRef(null,);
+  const size = useMeasuredSize(ref,);
   const dataProps = {
     [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true,
   };
-  const shouldRender = Boolean(size2,);
+  const shouldRender = Boolean(size,);
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: {
       width: '100%',
       height: '100%',
@@ -20894,10 +21432,10 @@ var withMeasuredSize = (Component14) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ _jsx5(Component14, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component15, {
       ...props,
-      width: (size2 == null ? void 0 : size2.width) ?? fallbackWidth,
-      height: (size2 == null ? void 0 : size2.height) ?? fallbackHeight,
+      width: (size == null ? void 0 : size.width) ?? fallbackWidth,
+      height: (size == null ? void 0 : size.height) ?? fallbackHeight,
     },),
   },);
 };
@@ -20937,7 +21475,7 @@ function useMeasureLayout(props, ref, getChildren = () => [], options = {},) {
     skipHook = false,
   } = options;
   const inCodeComponent = Boolean(useContext3(ComponentContainerContext,),);
-  const onCanvas = RenderTarget.current() === 'CANVAS';
+  const onCanvas = RenderTarget.current() === RenderTarget.canvas;
   useIsomorphicLayoutEffect2(() => {
     if (!onCanvas || inCodeComponent || skipHook) {
       return;
@@ -21097,11 +21635,11 @@ function isEqual(a, b, deep = true,) {
   }
 }
 var smallValue = '0.000001px';
-var translateZ = ` translateZ(${smallValue})`;
-var useTranslateZHack = isFramerX() || isSafari() || isTest();
+var translateZ = /* @__PURE__ */ (() => ` translateZ(${smallValue})`)();
+var useTranslateZHack = /* @__PURE__ */ (() => isFramerX() || isSafari() || isTest())();
 function forceLayerBackingWithMotionStyle(motionStyle,) {
   motionStyle.willChange = 'transform';
-  const onCanvas = RenderTarget.current() === 'CANVAS';
+  const onCanvas = RenderTarget.current() === RenderTarget.canvas;
   if (useTranslateZHack && onCanvas) {
     motionStyle.translateZ = smallValue;
   }
@@ -21111,7 +21649,7 @@ function forceLayerBackingWithCSSProperties(cssProperties,) {
   setTranslateZHack(cssProperties, true,);
 }
 function setTranslateZHack(style, enabled,) {
-  const onCanvas = RenderTarget.current() === 'CANVAS';
+  const onCanvas = RenderTarget.current() === RenderTarget.canvas;
   if (!useTranslateZHack || !onCanvas) {
     return;
   }
@@ -21141,50 +21679,53 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
     setTimeout(reset, 0,);
   }
 }
-var Layer = class extends Component2 {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'layerElement', null,);
-    __publicField(this, 'setLayerElement', (element) => {
-      this.layerElement = element;
-    },);
-  }
-  static applyWillChange(props, style, usingMotionStyle,) {
-    if (props.willChangeTransform) {
-      if (usingMotionStyle) {
-        forceLayerBackingWithMotionStyle(style,);
-      } else {
-        forceLayerBackingWithCSSProperties(style,);
+var Layer = /* @__PURE__ */ (() => {
+  class Layer2 extends Component {
+    constructor() {
+      super(...arguments,);
+      __publicField(this, 'layerElement', null,);
+      __publicField(this, 'setLayerElement', (element) => {
+        this.layerElement = element;
+      },);
+    }
+    static applyWillChange(props, style, usingMotionStyle,) {
+      if (props.willChangeTransform) {
+        if (usingMotionStyle) {
+          forceLayerBackingWithMotionStyle(style,);
+        } else {
+          forceLayerBackingWithCSSProperties(style,);
+        }
+      }
+    }
+    /** @internal */
+    shouldComponentUpdate(nextProps, nextState,) {
+      return nextProps._needsMeasure || this.state !== nextState || !isEqual(this.props, nextProps,);
+    }
+    /** @internal */
+    componentDidUpdate(prevProps,) {
+      if (asRecord(this.props,)['clip'] && asRecord(this.props,)['radius'] === 0 && asRecord(prevProps,)['radius'] !== 0) {
+        resetSetStyle(this.layerElement, 'overflow', 'hidden', false,);
       }
     }
   }
-  /** @internal */
-  shouldComponentUpdate(nextProps, nextState,) {
-    return nextProps._needsMeasure || this.state !== nextState || !isEqual(this.props, nextProps,);
-  }
-  /** @internal */
-  componentDidUpdate(prevProps,) {
-    if (asRecord(this.props,)['clip'] && asRecord(this.props,)['radius'] === 0 && asRecord(prevProps,)['radius'] !== 0) {
-      resetSetStyle(this.layerElement, 'overflow', 'hidden', false,);
-    }
-  }
-};
-__publicField(Layer, 'defaultProps', {},);
-function manageCache(cache3, maxEntries,) {
-  const size2 = cache3.size;
-  if (size2 < maxEntries) return;
+  __publicField(Layer2, 'defaultProps', {},);
+  return Layer2;
+})();
+function manageCache(cache2, maxEntries,) {
+  const size = cache2.size;
+  if (size < maxEntries) return;
   let i = Math.round(Math.random(),);
-  for (const key7 of cache3.keys()) {
+  for (const key7 of cache2.keys()) {
     if ((++i & 1) === 1) continue;
-    cache3.delete(key7,);
+    cache2.delete(key7,);
   }
 }
-function memoize2(maxEntries, cache3, key7, create,) {
-  const r = cache3.get(key7,);
+function memoize2(maxEntries, cache2, key7, create,) {
+  const r = cache2.get(key7,);
   if (r) return r;
-  manageCache(cache3, maxEntries,);
+  manageCache(cache2, maxEntries,);
   const g = create(key7,);
-  cache3.set(key7, g,);
+  cache2.set(key7, g,);
   return g;
 }
 var hash = (value) => {
@@ -21519,8 +22060,9 @@ var pointerEvents = [
   'onTouchDown',
   'onTouchUp',
 ];
-var pointerEventsSet = /* @__PURE__ */ new Set([...pointerEvents, ...pointerEvents.map((event) => `${event}Capture`),// Add capture event variants
-],);
+var pointerEventsSet = /* @__PURE__ */ (() =>
+  /* @__PURE__ */ new Set([...pointerEvents, ...pointerEvents.map((event) => `${event}Capture`),// Add capture event variants
+  ],))();
 function getCursorFromEvents(props,) {
   if (props.drag) {
     return 'grab';
@@ -21553,7 +22095,7 @@ function unwrapFrameProps(frameProps,) {
     height,
     center,
     _constraints,
-    size: size2,
+    size,
     widthType,
     heightType,
     positionFixed,
@@ -21570,7 +22112,7 @@ function unwrapFrameProps(frameProps,) {
     right: resolveMotionValue(right,),
     width: resolveMotionValue(width,),
     height: resolveMotionValue(height,),
-    size: resolveMotionValue(size2,),
+    size: resolveMotionValue(size,),
     center,
     _constraints,
     widthType,
@@ -21591,7 +22133,7 @@ var defaultFrameRect = {
   height: 200,
 };
 function useStyleAndRect(props,) {
-  React__default.useInsertionEffect(() => {
+  React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   const inCodeComponent = Boolean(useContext3(ComponentContainerContext,),);
@@ -21599,14 +22141,14 @@ function useStyleAndRect(props,) {
     style,
     _initialStyle,
     __fromCanvasComponent,
-    size: size2,
+    size,
   } = props;
   const unwrappedProps = unwrapFrameProps(props,);
   const constraintsRect = useConstraints(unwrappedProps,);
   const defaultStyle = {
     display: 'block',
     flex: (style == null ? void 0 : style.flex) ?? '0 0 auto',
-    userSelect: RenderTarget.current() !== 'PREVIEW' ? 'none' : void 0,
+    userSelect: RenderTarget.current() !== RenderTarget.preview ? 'none' : void 0,
   };
   if (!props.__fromCanvasComponent) {
     defaultStyle.backgroundColor = props.background === void 0 ? 'rgba(0, 170, 255, 0.3)' : void 0;
@@ -21616,10 +22158,9 @@ function useStyleAndRect(props,) {
   if (shouldDisablePointerEvents && safeToEditPointerEvents) {
     defaultStyle.pointerEvents = 'none';
   }
-  const addTextCentering = React__default.Children.count(props.children,) > 0 &&
-    React__default.Children.toArray(props.children,).every((child) => {
-      return typeof child === 'string' || typeof child === 'number';
-    },);
+  const addTextCentering = React4.Children.count(props.children,) > 0 && React4.Children.toArray(props.children,).every((child) => {
+    return typeof child === 'string' || typeof child === 'number';
+  },);
   const centerTextStyle = addTextCentering && {
     display: 'flex',
     alignItems: 'center',
@@ -21627,7 +22168,7 @@ function useStyleAndRect(props,) {
     textAlign: 'center',
   };
   const propsStyle = getStyleForFrameProps(props,);
-  if (size2 === void 0 && !__fromCanvasComponent) {
+  if (size === void 0 && !__fromCanvasComponent) {
     if (!hasLeftAndRight(propsStyle,)) {
       defaultStyle.width = defaultFrameRect.width;
     }
@@ -21669,7 +22210,7 @@ function useStyleAndRect(props,) {
       ...defaultStyle,
     };
   }
-  const onCanvas = RenderTarget.current() === 'CANVAS';
+  const onCanvas = RenderTarget.current() === RenderTarget.canvas;
   if (props.positionSticky) {
     if (!onCanvas || inCodeComponent) {
       resultStyle.position = 'sticky';
@@ -21772,10 +22313,10 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   const inCodeComponent = Boolean(useContext3(ComponentContainerContext,),);
   const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, inCodeComponent,);
   const wrappedContent = useProvideParentSize(
-    /* @__PURE__ */ _jsxs(Fragment, {
+    /* @__PURE__ */ jsxs(Fragment, {
       children: [
         backgroundImage
-          ? /* @__PURE__ */ _jsx5(BackgroundImageComponent, {
+          ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
             alt: props.alt ?? '',
             image: backgroundImage,
             containerSize: rect ?? void 0,
@@ -21784,7 +22325,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
           },)
           : null,
         children,
-        /* @__PURE__ */ _jsx5(Border, {
+        /* @__PURE__ */ jsx(Border, {
           ..._border,
           border,
           layoutId,
@@ -21795,17 +22336,17 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   );
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
   const {
-    size: size2,
+    size,
     radius,
     shadow,
   } = currentStyle;
-  if (size2 !== void 0) {
+  if (size !== void 0) {
     delete currentStyle.size;
     if (currentStyle.height === void 0) {
-      currentStyle.height = size2;
+      currentStyle.height = size;
     }
     if (currentStyle.width === void 0) {
-      currentStyle.width = size2;
+      currentStyle.width = size;
     }
   }
   if (radius !== void 0) {
@@ -21816,7 +22357,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     delete currentStyle.shadow;
     currentStyle.boxShadow = shadow;
   }
-  return /* @__PURE__ */ _jsxs(MotionComponent, {
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     ...dataProps,
     ...motionProps,
     layoutId,
@@ -21831,7 +22372,7 @@ var FrameWithMotion = /* @__PURE__ */ forwardRef(function FrameWithMotion2(props
     visible = true,
   } = props;
   if (!visible) return null;
-  return /* @__PURE__ */ _jsx5(VisibleFrame, {
+  return /* @__PURE__ */ jsx(VisibleFrame, {
     ...props,
     ref,
   },);
@@ -21879,7 +22420,7 @@ function EmptyState({
   title = '',
   description = 'Click and drag the connector to any frame on the canvas \u2192',
   children,
-  size: size2,
+  size,
   hide,
   insideUserCodeComponent = false,
   position = 'absolute',
@@ -21887,17 +22428,17 @@ function EmptyState({
   const {
     target,
   } = RenderEnvironment;
-  const childCount = React__default.Children.count(children,);
+  const childCount = React4.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
-    return /* @__PURE__ */ _jsx5(FrameWithMotion, {
-      ...size2,
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
+      ...size,
       'data-name': 'placeholder',
     },);
   }
-  if (target !== 'CANVAS') return null;
+  if (target !== RenderTarget.canvas) return null;
   if (hide) return null;
   if (childCount !== 0) return null;
-  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
     left: 0,
@@ -21905,9 +22446,9 @@ function EmptyState({
     right: 0,
     style: {
       position,
-      ...size2,
+      ...size,
     },
-    children: /* @__PURE__ */ _jsx5('div', {
+    children: /* @__PURE__ */ jsx('div', {
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -21915,7 +22456,7 @@ function EmptyState({
         height: '100%',
         width: '100%',
       },
-      children: /* @__PURE__ */ _jsxs('div', {
+      children: /* @__PURE__ */ jsxs('div', {
         style: {
           display: 'flex',
           alignItems: 'center',
@@ -21926,10 +22467,10 @@ function EmptyState({
           WebkitMaskImage: `linear-gradient(90deg, black, black calc(100% - 12px * ${scaleFactor}), transparent)`,
         },
         children: [
-          /* @__PURE__ */ _jsx5(Title, {
+          /* @__PURE__ */ jsx(Title, {
             children: title,
           },),
-          /* @__PURE__ */ _jsx5(Description, {
+          /* @__PURE__ */ jsx(Description, {
             children: description,
           },),
         ],
@@ -21941,7 +22482,7 @@ var scaleFactor = 'var(--framerInternalCanvas-canvasPlaceholderContentScaleFacto
 function Title({
   children,
 },) {
-  return /* @__PURE__ */ _jsx5('span', {
+  return /* @__PURE__ */ jsx('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -21957,7 +22498,7 @@ function Title({
 function Description({
   children,
 },) {
-  return /* @__PURE__ */ _jsx5('span', {
+  return /* @__PURE__ */ jsx('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -21971,12 +22512,12 @@ function Description({
   },);
 }
 var TREE_ROOT_ID = '__LAYOUT_TREE_ROOT';
-var SharedLayoutContext = /* @__PURE__ */ React__default.createContext({
+var SharedLayoutContext = /* @__PURE__ */ React4.createContext({
   schedulePromoteTree: () => {},
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
 },);
-var SharedLayoutRoot = class extends Component2 {
+var SharedLayoutRoot = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'shouldAnimate', false,);
@@ -22041,7 +22582,7 @@ var SharedLayoutRoot = class extends Component2 {
     }
   }
   render() {
-    return /* @__PURE__ */ _jsx5(SharedLayoutContext.Provider, {
+    return /* @__PURE__ */ jsx(SharedLayoutContext.Provider, {
       value: this.sharedLayoutContext,
       children: this.props.children,
     },);
@@ -22053,53 +22594,49 @@ var rootStyles = {
   backgroundColor: 'none',
 };
 function MagicMotionCrossfadeRoot(props,) {
-  return /* @__PURE__ */ _jsx5(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     layoutId: TREE_ROOT_ID,
     style: rootStyles,
     children: props.children,
   },);
 }
-var _sharedIntersectionObserver;
-var _callbacks2;
 var SharedIntersectionObserver = class {
   constructor(options,) {
-    __privateAdd(this, _sharedIntersectionObserver, void 0,);
-    __privateAdd(this, _callbacks2, /* @__PURE__ */ new WeakMap(),);
+    __publicField(this, 'sharedIntersectionObserver',);
+    __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
     if (!document) return;
-    __privateSet(this, _sharedIntersectionObserver, new IntersectionObserver(this.resizeObserverCallback.bind(this,), options,),);
+    this.sharedIntersectionObserver = new IntersectionObserver(this.resizeObserverCallback.bind(this,), options,);
   }
   resizeObserverCallback(entries, observer2,) {
     for (const entry of entries) {
-      const callbackForElement = __privateGet(this, _callbacks2,).get(entry.target,);
+      const callbackForElement = this.callbacks.get(entry.target,);
       if (callbackForElement) callbackForElement([entry,], observer2,);
     }
   }
   observeElementWithCallback(element, callback,) {
-    if (!__privateGet(this, _sharedIntersectionObserver,)) return;
-    __privateGet(this, _sharedIntersectionObserver,).observe(element,);
-    __privateGet(this, _callbacks2,).set(element, callback,);
+    if (!this.sharedIntersectionObserver) return;
+    this.sharedIntersectionObserver.observe(element,);
+    this.callbacks.set(element, callback,);
   }
   unobserve(element,) {
-    if (!__privateGet(this, _sharedIntersectionObserver,)) return;
-    __privateGet(this, _sharedIntersectionObserver,).unobserve(element,);
-    __privateGet(this, _callbacks2,).delete(element,);
+    if (!this.sharedIntersectionObserver) return;
+    this.sharedIntersectionObserver.unobserve(element,);
+    this.callbacks.delete(element,);
   }
   get root() {
     var _a;
-    return (_a = __privateGet(this, _sharedIntersectionObserver,)) == null ? void 0 : _a.root;
+    return (_a = this.sharedIntersectionObserver) == null ? void 0 : _a.root;
   }
 };
-_sharedIntersectionObserver = /* @__PURE__ */ new WeakMap();
-_callbacks2 = /* @__PURE__ */ new WeakMap();
-var SharedIntersectionObserverContext = /* @__PURE__ */ React__default.createContext(/* @__PURE__ */ new Map(),);
+var SharedIntersectionObserverContext = /* @__PURE__ */ React4.createContext(/* @__PURE__ */ new Map(),);
 function useSharedIntersectionObserver(ref, callback, options,) {
   if (typeof IntersectionObserver === 'undefined') return;
   const key7 = useConstant2(() => `${options.rootMargin}`);
-  const observers2 = React__default.useContext(SharedIntersectionObserverContext,);
+  const observers2 = React4.useContext(SharedIntersectionObserverContext,);
   const {
     enabled,
   } = options;
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     var _a;
     const element = ref.current;
     if (!enabled || !element) return;
@@ -22120,9 +22657,9 @@ function useSharedIntersectionObserver(ref, callback, options,) {
   }, [enabled,],);
 }
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
-var ViewportContext = /* @__PURE__ */ React__default.createContext(null,);
+var ViewportContext = /* @__PURE__ */ React4.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
-  const internalState = React__default.useRef({
+  const internalState = React4.useRef({
     isInView: false,
     hasAnimatedOnce: false,
   },);
@@ -22132,7 +22669,7 @@ function useAppearEffect(ref, appearCallback, options,) {
     threshold,
     rootMargin = `0px 0px 0px 0px`,
   } = options;
-  const callback = React__default.useCallback(([entry,],) => {
+  const callback = React4.useCallback(([entry,],) => {
     if (!entry) return;
     const {
       isInView,
@@ -22310,11 +22847,11 @@ var clamp2 = (value, a, b,) => {
   }
   return value;
 };
-var DraggingContext = React__default.createContext({
+var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
-function WithDragging(Component14,) {
-  const _WithDraggingHOC = class extends React__default.Component {
+function WithDragging(Component15,) {
+  const _WithDraggingHOC = class extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', {
@@ -22937,11 +23474,11 @@ function WithDragging(Component14,) {
       originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, onMouseWheelEnd,);
       originalProps.left = this.x;
       originalProps.top = this.y;
-      return /* @__PURE__ */ _jsx5(DraggingContext.Provider, {
+      return /* @__PURE__ */ jsx(DraggingContext.Provider, {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ _jsx5(Component14, {
+        children: /* @__PURE__ */ jsx(Component15, {
           ...originalProps,
         },),
       },);
@@ -22979,16 +23516,16 @@ function WithDragging(Component14,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component14.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component15.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics.default)(withDragging, Component14,);
+  (0, import_hoist_non_react_statics.default)(withDragging, Component15,);
   return withDragging;
 }
 var hoverProps = {
   onMouseEnter: 'mouseenter',
   onMouseLeave: 'mouseleave',
 };
-var hoverEventKeys = Object.keys(hoverProps,);
+var hoverEventKeys = /* @__PURE__ */ Object.keys(hoverProps,);
 var eventHandlerMapping = {
   panstart: ['onPanStart',],
   pan: ['onPan',],
@@ -23003,13 +23540,13 @@ var eventHandlerMapping = {
 var tapEventKeys = /* @__PURE__ */ new Set(['tapstart', 'tap', 'tapend',],);
 function WithEvents(BaseComponent,) {
   var _a;
-  const withEvents = (_a = class extends React__default.Component {
+  const withEvents = (_a = class extends React4.Component {
     constructor() {
       super(...arguments,);
       __publicField(this, 'shouldCancelTap', false,);
       __publicField(this, 'activeEventListeners', /* @__PURE__ */ new Map(),);
       __publicField(this, 'hasFramerEventListener', false,);
-      __publicField(this, 'component', React__default.createRef(),);
+      __publicField(this, 'component', React4.createRef(),);
     }
     get element() {
       return this.component.current && this.component.current.element;
@@ -23081,10 +23618,10 @@ function WithEvents(BaseComponent,) {
       },);
     }
     render() {
-      return /* @__PURE__ */ _jsx5(DraggingContext.Consumer, {
+      return /* @__PURE__ */ jsx(DraggingContext.Consumer, {
         children: (value) => {
           this.shouldCancelTap = value.dragging;
-          return /* @__PURE__ */ _jsx5(BaseComponent, {
+          return /* @__PURE__ */ jsx(BaseComponent, {
             ...this.props,
             ref: this.component,
           },);
@@ -23346,9 +23883,8 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
   const needsStrokeClip = false;
   const shadows = [];
   const insetShadows = [];
-  const boxShadowsCount = boxShadows.length;
   const svgShadowClass = 'svg-shadow';
-  const svgShadowProps = RenderTarget.current() === 'CANVAS'
+  const svgShadowProps = RenderTarget.current() === RenderTarget.canvas
     ? {
       className: svgShadowClass,
     }
@@ -23391,7 +23927,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     const filterY = shadowRect.y / height * 100;
     const filterWidth = shadowRect.width / width * 100;
     const filterHeight = shadowRect.height / height * 100;
-    definition.push(/* @__PURE__ */ _jsxs('filter', {
+    definition.push(/* @__PURE__ */ jsxs('filter', {
       id: outsideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -23402,16 +23938,16 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       children: [
         filterElements,
         shadows.length > 1
-          ? /* @__PURE__ */ _jsx5('feMerge', {
+          ? /* @__PURE__ */ jsx('feMerge', {
             children: mergeElements,
           },)
           : null,
       ],
     }, outsideShadowId.id,),);
-    outsetElement = /* @__PURE__ */ _jsx5('g', {
+    outsetElement = /* @__PURE__ */ jsx('g', {
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
-      children: /* @__PURE__ */ _jsx5('use', {
+      children: /* @__PURE__ */ jsx('use', {
         ...svgStrokeAttributes,
         fill: 'black',
         fillOpacity: fillAlpha <= 0 ? 0 : 1,
@@ -23451,7 +23987,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       filterElements.push(shadowElements.filterElements,);
       mergeElements.push(shadowElements.mergeElement,);
     }
-    definition.push(/* @__PURE__ */ _jsxs('filter', {
+    definition.push(/* @__PURE__ */ jsxs('filter', {
       id: insideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -23462,7 +23998,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       children: [
         filterElements,
         insetShadows.length > 1
-          ? /* @__PURE__ */ _jsx5('feMerge', {
+          ? /* @__PURE__ */ jsx('feMerge', {
             children: mergeElements,
           },)
           : null,
@@ -23472,7 +24008,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     if (needsStrokeClip) {
       clipPath = strokeClipId.urlLink;
     }
-    insetElement = /* @__PURE__ */ _jsx5('use', {
+    insetElement = /* @__PURE__ */ jsx('use', {
       fill: 'black',
       fillOpacity: '1',
       filter: insideShadowId.urlLink,
@@ -23493,13 +24029,13 @@ function outerShadowElements(shapeID, shadow, index,) {
   const offsetResultId = shadowKey.add('offset',).id;
   const blurResultId = shadowKey.add('blur',).id;
   const matrixResultId = shadowKey.add('matrix',).id;
-  const filterElements = /* @__PURE__ */ _jsx5(OuterShadowFilterElements, {
+  const filterElements = /* @__PURE__ */ jsx(OuterShadowFilterElements, {
     shadow,
     blurId: blurResultId,
     offsetId: offsetResultId,
     matrixId: matrixResultId,
   }, shadowKey.id + '-filters',);
-  const mergeElement = /* @__PURE__ */ _jsx5('feMergeNode', {
+  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', {
     in: matrixResultId,
   }, shadowKey.id + '-merge',);
   return {
@@ -23520,20 +24056,20 @@ var OuterShadowFilterElements = (props) => {
   const g = roundedNumberString(rgb.g / 255, 3,);
   const b = roundedNumberString(rgb.b / 255, 3,);
   const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
-  return /* @__PURE__ */ _jsxs(Fragment, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ _jsx5('feOffset', {
+      /* @__PURE__ */ jsx('feOffset', {
         dx: shadow.x,
         dy: shadow.y,
         in: 'SourceAlpha',
         result: offsetId,
       },),
-      /* @__PURE__ */ _jsx5('feGaussianBlur', {
+      /* @__PURE__ */ jsx('feGaussianBlur', {
         stdDeviation: shadow.blur / 2,
         in: offsetId,
         result: blurId,
       },),
-      /* @__PURE__ */ _jsx5('feColorMatrix', {
+      /* @__PURE__ */ jsx('feColorMatrix', {
         colorInterpolationFilters: 'sRGB',
         values: matrixValues,
         type: 'matrix',
@@ -23549,14 +24085,14 @@ function innerShadowElements(shapeID, shadow, index,) {
   const offsetId = shadowKey.add('offset',).id;
   const compositeId = shadowKey.add('composite',).id;
   const matrixId = shadowKey.add('matrix',).id;
-  const filterElements = /* @__PURE__ */ _jsx5(InnerShadowFilterElements, {
+  const filterElements = /* @__PURE__ */ jsx(InnerShadowFilterElements, {
     shadow,
     blurId,
     offsetId,
     compositeId,
     matrixId,
   }, shadowKey.id + '-filters',);
-  const mergeElement = /* @__PURE__ */ _jsx5('feMergeNode', {
+  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', {
     in: matrixId,
   }, shadowKey.id + '-merge',);
   return {
@@ -23578,20 +24114,20 @@ var InnerShadowFilterElements = (props) => {
   const g = rgb.g / 255;
   const b = rgb.b / 255;
   const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
-  return /* @__PURE__ */ _jsxs(Fragment, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ _jsx5('feGaussianBlur', {
+      /* @__PURE__ */ jsx('feGaussianBlur', {
         stdDeviation: shadow.blur / 2,
         in: 'SourceAlpha',
         result: blurId,
       },),
-      /* @__PURE__ */ _jsx5('feOffset', {
+      /* @__PURE__ */ jsx('feOffset', {
         dx: shadow.x,
         dy: shadow.y,
         in: blurId,
         result: offsetId,
       },),
-      /* @__PURE__ */ _jsx5('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         in: offsetId,
         in2: 'SourceAlpha',
         operator: 'arithmetic',
@@ -23599,7 +24135,7 @@ var InnerShadowFilterElements = (props) => {
         k3: '1',
         result: compositeId,
       },),
-      /* @__PURE__ */ _jsx5('feColorMatrix', {
+      /* @__PURE__ */ jsx('feColorMatrix', {
         colorInterpolationFilters: 'sRGB',
         values: matrixValues,
         type: 'matrix',
@@ -23616,14 +24152,14 @@ var maxSpread = 5;
 function calcRealisticShadowSpread(diffusion,) {
   return mix(-maxSpread, 0, diffusion,);
 }
-function localShadowFrame(shadow, frame2, isSVG2 = false,) {
-  if (!isSVG2 && asRecord(shadow,)['inset']) return null;
+function localShadowFrame(shadow, frame2, isSVG = false,) {
+  if (!isSVG && asRecord(shadow,)['inset']) return null;
   let growth = shadow.blur;
   let minX;
   let maxX;
   let minY;
   let maxY;
-  if (isSVG2) {
+  if (isSVG) {
     minX = -Math.abs(shadow.x,) - growth;
     maxX = Math.abs(shadow.x,) + frame2.width + growth;
     minY = -Math.abs(shadow.y,) - growth;
@@ -23714,9 +24250,7 @@ function collectVisualStyleFromProps(props, style, isTextNode = false,) {
     collectBoxShadowsForProps(props, style,);
   }
 }
-var {
-  getNumber,
-} = Animatable;
+var getNumber = /* @__PURE__ */ (() => Animatable.getNumber)();
 var transformDefaults = {
   z: 0,
   rotation: 0,
@@ -23757,7 +24291,7 @@ function collectTransformFromProps(props, rect, style,) {
   const skewX = getNumber(props.skewX,);
   const skewY = getNumber(props.skewY,);
   const rotation = getRotation(props.rotation, resolveMotionValue(motionStyle.rotate,),);
-  const force3d = RenderEnvironment.target === 'EXPORT';
+  const force3d = RenderEnvironment.target === RenderTarget.export;
   if (force3d || z !== 0 || scaleZ !== 1 || originZ !== 0 || rotationZ !== 0 || rotationX !== 0 || rotationY !== 0) {
     style.transform = `
             ${`translate3d(${x}, ${y}, ${z}px)`}
@@ -23783,8 +24317,8 @@ function collectTransformFromProps(props, rect, style,) {
   style.transformOrigin = transformOrigin;
   style.WebkitTransformOrigin = transformOrigin;
 }
-function cssBackgroundSize(size2,) {
-  switch (size2) {
+function cssBackgroundSize(size,) {
+  switch (size) {
     case 'fit':
       return 'contain';
     case 'stretch':
@@ -23863,7 +24397,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       return _DeprecatedFrameInner.rect(this.props,);
     }
     static getDerivedStateFromProps(nextProps, prevState,) {
-      const size2 = _DeprecatedFrameInner.updatedSize(nextProps, prevState,);
+      const size = _DeprecatedFrameInner.updatedSize(nextProps, prevState,);
       const {
         target,
       } = RenderEnvironment;
@@ -23872,24 +24406,24 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         : null;
       if (nextBackgroundImageSrc) {
         return {
-          size: size2,
+          size,
         };
       }
       if (prevState.size) {
-        if (target === 'PREVIEW') {
+        if (target === RenderTarget.preview) {
           return null;
         }
-        if (prevState.size.width === size2.width && prevState.size.height === size2.height) {
+        if (prevState.size.width === size.width && prevState.size.height === size.height) {
           return null;
         }
       }
       return {
-        size: size2,
+        size,
       };
     }
     static updatedSize(props, state,) {
       const rect = _DeprecatedFrameInner.rect(props,);
-      let size2 = state.size;
+      let size = state.size;
       const newSize = {
         width: rect.width,
         height: rect.height,
@@ -23897,21 +24431,21 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       const {
         target,
       } = RenderEnvironment;
-      if (!size2) {
-        if (target === 'PREVIEW') {
-          size2 = ObservableObject(newSize, true,);
+      if (!size) {
+        if (target === RenderTarget.preview) {
+          size = ObservableObject(newSize, true,);
         } else {
-          size2 = newSize;
+          size = newSize;
         }
       } else {
-        if (isAnimatable2(size2.width,) && isAnimatable2(size2.height,)) {
-          size2.width.set(newSize.width,);
-          size2.height.set(newSize.height,);
+        if (isAnimatable2(size.width,) && isAnimatable2(size.height,)) {
+          size.width.set(newSize.width,);
+          size.height.set(newSize.height,);
         } else {
-          size2 = newSize;
+          size = newSize;
         }
       }
-      return size2;
+      return size;
     }
     getStyle() {
       const rect = this.rect;
@@ -23996,7 +24530,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       const {
         target,
       } = RenderEnvironment;
-      if (target === 'PREVIEW') {
+      if (target === RenderTarget.preview) {
         this.propsObserver = ObservableObject(this.props, true,);
         this.propsObserverCancel = ObservableObject.addObserver(this.propsObserver, this.onPropsChange,);
         if (this.props.parentSize && isAnimatable2(this.props.parentSize.width,) && isAnimatable2(this.props.parentSize.height,)) {
@@ -24011,7 +24545,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       } = RenderEnvironment;
       this.propsObserverCancel && this.propsObserverCancel();
       this.sizeObserverCancel && this.sizeObserverCancel();
-      if (target === 'PREVIEW') {
+      if (target === RenderTarget.preview) {
         this.propsObserver = ObservableObject(this.props, true,);
         this.propsObserverCancel = ObservableObject.addObserver(this.propsObserver, this.onPropsChange,);
         if (this.props.parentSize && isAnimatable2(this.props.parentSize.width,) && isAnimatable2(this.props.parentSize.height,)) {
@@ -24042,17 +24576,17 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         width: rect.width,
         height: rect.height,
       };
-      return /* @__PURE__ */ _jsxs('div', {
+      return /* @__PURE__ */ jsxs('div', {
         id: id3,
         style,
         ref: this.setElement,
         className,
         children: [
-          /* @__PURE__ */ _jsx5(ProvideParentSize, {
+          /* @__PURE__ */ jsx(ProvideParentSize, {
             parentSize,
             children: this.layoutChildren(),
           },),
-          /* @__PURE__ */ _jsx5(Border, {
+          /* @__PURE__ */ jsx(Border, {
             ...this.props,
           },),
         ],
@@ -24072,14 +24606,14 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
           _forwardedOverrides = void 0;
         }
       }
-      let children = React__default.Children.map(this.props.children, (child) => {
+      let children = React4.Children.map(this.props.children, (child) => {
         if (isConstraintSupportingChild(child,)) {
-          return React__default.cloneElement(child, {
+          return React4.cloneElement(child, {
             parentSize: this.state.size,
             _forwardedOverrides,
           },);
         } else if (_forwardedOverrides && child) {
-          return React__default.cloneElement(child, {
+          return React4.cloneElement(child, {
             _forwardedOverrides,
           },);
         } else {
@@ -24087,7 +24621,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         }
       },);
       if (children && children.length === 1 && typeof children[0] === 'string') {
-        children = [/* @__PURE__ */ _jsx5(Center, {
+        children = [/* @__PURE__ */ jsx(Center, {
           children,
         }, '0',),];
       }
@@ -24121,7 +24655,7 @@ function Center(props,) {
     justifyContent: 'center',
     fontFamily: 'Helvetica',
   }, props.style || {},);
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     style,
     children: props.children,
   },);
@@ -24192,12 +24726,12 @@ var Frame = /* @__PURE__ */ (() => {
     const parentSize = useParentSize();
     if (isDeprecatedFrameProps(props,)) {
       const currentParentSize = props.parentSize || deprecatedParentSize(parentSize,);
-      return /* @__PURE__ */ _jsx5(DeprecatedFrameWithEvents, {
+      return /* @__PURE__ */ jsx(DeprecatedFrameWithEvents, {
         ...props,
         parentSize: currentParentSize,
       },);
     }
-    return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       ...props,
       ref,
     },);
@@ -24205,7 +24739,7 @@ var Frame = /* @__PURE__ */ (() => {
   FrameInner['displayName'] = 'Frame';
   return FrameInner;
 })();
-var LayoutTree = class extends Component2 {
+var LayoutTree = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layoutMaybeMutated',);
@@ -24276,20 +24810,20 @@ var LayoutTree = class extends Component2 {
     }
   }
   render() {
-    return /* @__PURE__ */ _jsx5(SwitchLayoutGroupContext.Provider, {
+    return /* @__PURE__ */ jsx(SwitchLayoutGroupContext.Provider, {
       value: this.switchLayoutGroupContext,
       children: this.props.children,
     },);
   }
 };
 var SharedLayoutTree = (props) => {
-  const sharedLayoutContext = React__default.useContext(SharedLayoutContext,);
-  return /* @__PURE__ */ _jsx5(LayoutTree, {
+  const sharedLayoutContext = React4.useContext(SharedLayoutContext,);
+  return /* @__PURE__ */ jsx(LayoutTree, {
     ...props,
     sharedLayoutContext,
   },);
 };
-var NavigationContainerContext = React__default.createContext(true,);
+var NavigationContainerContext = /* @__PURE__ */ React4.createContext(true,);
 function useIsInCurrentNavigationTarget() {
   const isInCurrentNavigationTarget = useContext3(NavigationContainerContext,);
   return isInCurrentNavigationTarget;
@@ -24309,40 +24843,40 @@ var NavigationTargetWrapper = ({
   isOverlayed,
   children,
 },) => {
-  const callbacks2 = useMap();
+  const callbacks = useMap();
   const register = useCallback((fn) => {
-    if (callbacks2.has(fn,)) {
+    if (callbacks.has(fn,)) {
       console.warn('NavigationTargetWrapper: already registered',);
       return;
     }
-    callbacks2.set(fn, void 0,);
-  }, [callbacks2,/* constant, so should never change */
+    callbacks.set(fn, void 0,);
+  }, [callbacks,/* constant, so should never change */
   ],);
   const deregister = useCallback((fn) => {
-    const cleanup = callbacks2.get(fn,);
+    const cleanup = callbacks.get(fn,);
     cleanup == null ? void 0 : cleanup();
-    callbacks2.delete(fn,);
-  }, [callbacks2,/* constant, so should never change */
+    callbacks.delete(fn,);
+  }, [callbacks,/* constant, so should never change */
   ],);
   const value = useRef({
     register,
     deregister,
   },).current;
   useEffect(() => {
-    callbacks2.forEach((_, cb,) => {
+    callbacks.forEach((_, cb,) => {
       const newCleanup = cb(isCurrent, isOverlayed,);
-      callbacks2.set(cb, isFunction(newCleanup,) ? newCleanup : void 0,);
+      callbacks.set(cb, isFunction(newCleanup,) ? newCleanup : void 0,);
     },);
     return () => {
-      callbacks2.forEach((cleanup, cb,) => {
+      callbacks.forEach((cleanup, cb,) => {
         if (!cleanup) return;
         cleanup();
-        callbacks2.set(cb, void 0,);
+        callbacks.set(cb, void 0,);
       },);
     };
-  }, [isCurrent, isOverlayed, callbacks2,/* constant, so should never change */
+  }, [isCurrent, isOverlayed, callbacks,/* constant, so should never change */
   ],);
-  return /* @__PURE__ */ _jsx5(NavigationTargetContext.Provider, {
+  return /* @__PURE__ */ jsx(NavigationTargetContext.Provider, {
     value,
     children,
   },);
@@ -24358,7 +24892,7 @@ function useOnCurrentTargetChange(callback, deps = [],) {
     return () => deregister(callback,);
   }, [register, deregister, ...deps,],);
 }
-var NavigationContainer = /* @__PURE__ */ React__default.memo(function NavigationContainer2({
+var NavigationContainer = /* @__PURE__ */ React4.memo(function NavigationContainer2({
   isLayeredContainer,
   isCurrent,
   isPrevious,
@@ -24503,7 +25037,7 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
   const isPresent2 = isBeingRemoved || areMagicMotionLayersPresent === false ? false : true;
   const isCurrentTarget = !!isCurrent && isPresent2;
   const forceOpacity = isCurrent && isInitial;
-  return /* @__PURE__ */ _jsxs(FrameWithMotion, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion, {
     'data-framer-component-type': 'NavigationContainerWrapper',
     width: '100%',
     height: '100%',
@@ -24521,7 +25055,7 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
       perspective,
     },
     children: [
-      isLayeredContainer && /* @__PURE__ */ _jsx5(FrameWithMotion, {
+      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion, {
         width: '100%',
         height: '100%',
         'data-framer-component-type': 'NavigationContainerBackdrop',
@@ -24538,7 +25072,7 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
         backgroundColor: backdropColor ? backdropColor : 'transparent',
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
-      /* @__PURE__ */ _jsx5(FrameWithMotion, {
+      /* @__PURE__ */ jsx(FrameWithMotion, {
         ...layout2,
         ...animations2,
         transition: {
@@ -24565,14 +25099,14 @@ var NavigationContainer = /* @__PURE__ */ React__default.memo(function Navigatio
         },
         'data-is-present': isPresent2 ? void 0 : false,
         ref: viewportRef,
-        children: /* @__PURE__ */ _jsx5(ViewportContext.Provider, {
+        children: /* @__PURE__ */ jsx(ViewportContext.Provider, {
           value: viewportRef,
-          children: /* @__PURE__ */ _jsx5(NavigationContainerContext.Provider, {
+          children: /* @__PURE__ */ jsx(NavigationContainerContext.Provider, {
             value: isCurrentTarget,
-            children: /* @__PURE__ */ _jsx5(NavigationTargetWrapper, {
+            children: /* @__PURE__ */ jsx(NavigationTargetWrapper, {
               isCurrent: isCurrentTarget,
               isOverlayed,
-              children: /* @__PURE__ */ _jsx5(SharedLayoutTree, {
+              children: /* @__PURE__ */ jsx(SharedLayoutTree, {
                 isLead: isCurrent,
                 animatesLayout: !!withMagicMotion,
                 transition,
@@ -24659,8 +25193,8 @@ var NavigatorMock = class {
     __publicField(this, 'magicMotion', () => this.warning(),);
   }
 };
-var navigatorMock = new NavigatorMock();
-var NavigationContext = createContext(navigatorMock,);
+var navigatorMock = /* @__PURE__ */ new NavigatorMock();
+var NavigationContext = /* @__PURE__ */ createContext(navigatorMock,);
 var TransitionDefaults = {
   Fade: {
     exit: {
@@ -25148,7 +25682,7 @@ function transitionForScreen(screenIndex, stackState,) {
     return sequence('exit', item == null ? void 0 : item.transition.enter, item == null ? void 0 : item.transition.animation,);
   }
 }
-var allAnimatableKeys = objectKeys(allAnimatableProperties,);
+var allAnimatableKeys = /* @__PURE__ */ objectKeys(allAnimatableProperties,);
 function sequence(direction, transition, animation,) {
   const value = {};
   const from = {};
@@ -25181,300 +25715,310 @@ function sequence(direction, transition, animation,) {
     },
   };
 }
-var NavigationConsumer = NavigationContext.Consumer;
-var NavigationCallbackContext = React__default.createContext(void 0,);
-var NavigationCallbackProvider = NavigationCallbackContext.Provider;
-var IsInitialNavigationContext = React__default.createContext(void 0,);
-var Navigation = class extends Component2 {
-  constructor(props,) {
-    var _a;
-    super(props,);
-    __publicField(this, 'lastEventTimeStamp', null,);
-    __publicField(this, 'state', defaultState(),);
-    __publicField(this, 'navigationAction', (action2) => {
-      if (!this.props.enabled && this.state.history.length > 0) return;
-      const newState2 = reduceNavigationStateForAction(this.state, action2,);
-      if (!newState2) return;
-      const {
-        skipLayoutAnimation,
-      } = this.props;
-      const historyItem = newState2.history[newState2.current];
-      const withMagicMotion = action2.type === 'add' && action2.transition.withMagicMotion ||
-        action2.type === 'forward' && (historyItem == null ? void 0 : historyItem.transition.withMagicMotion) ||
-        action2.type === 'remove' && !!newState2.previousTransition;
-      const updateState = () => {
-        var _a2;
-        this.setState(newState2,);
-        if (historyItem == null ? void 0 : historyItem.key) {
-          (_a2 = this.context) == null ? void 0 : _a2.call(this, historyItem.key,);
-        }
-      };
-      if (skipLayoutAnimation && !withMagicMotion) {
-        skipLayoutAnimation(updateState,);
-      } else {
-        updateState();
-      }
-    },);
-    __publicField(this, 'goBack', () => {
+var NavigationConsumer = /* @__PURE__ */ (() => NavigationContext.Consumer)();
+var NavigationCallbackContext = /* @__PURE__ */ React4.createContext(void 0,);
+var NavigationCallbackProvider = /* @__PURE__ */ (() => NavigationCallbackContext.Provider)();
+var IsInitialNavigationContext = /* @__PURE__ */ React4.createContext(void 0,);
+var Navigation = /* @__PURE__ */ (() => {
+  var _lastEventTimeStamp,
+    _a,
+    _getStackState,
+    getStackState_fn,
+    _isSameEventTransition,
+    isSameEventTransition_fn,
+    _navigationAction,
+    _transition,
+    transition_fn;
+  return _a = class extends Component {
+    constructor(props,) {
       var _a2;
-      if (this.isSameEventTransition()) return;
-      this.lastEventTimeStamp = ((_a2 = globalThis.event) == null ? void 0 : _a2.timeStamp) || null;
-      if (this.state.currentOverlay !== -1) {
-        return this.navigationAction({
-          type: 'removeOverlay',
+      super(props,);
+      __privateAdd(this, _getStackState,);
+      __privateAdd(this, _isSameEventTransition,);
+      __privateAdd(this, _transition,);
+      __privateAdd(this, _lastEventTimeStamp, null,);
+      __publicField(this, 'state', defaultState(),);
+      __privateAdd(this, _navigationAction, (action2) => {
+        if (!this.props.enabled && this.state.history.length > 0) return;
+        const newState2 = reduceNavigationStateForAction(this.state, action2,);
+        if (!newState2) return;
+        const {
+          skipLayoutAnimation,
+        } = this.props;
+        const historyItem = newState2.history[newState2.current];
+        const withMagicMotion = action2.type === 'add' && action2.transition.withMagicMotion ||
+          action2.type === 'forward' && (historyItem == null ? void 0 : historyItem.transition.withMagicMotion) ||
+          action2.type === 'remove' && !!newState2.previousTransition;
+        const updateState = () => {
+          var _a22;
+          this.setState(newState2,);
+          if (historyItem == null ? void 0 : historyItem.key) {
+            (_a22 = this.context) == null ? void 0 : _a22.call(this, historyItem.key,);
+          }
+        };
+        if (skipLayoutAnimation && !withMagicMotion) {
+          skipLayoutAnimation(updateState,);
+        } else {
+          updateState();
+        }
+      },);
+      __publicField(this, 'goBack', () => {
+        var _a22;
+        if (__privateMethod(this, _isSameEventTransition, isSameEventTransition_fn,).call(this,)) return;
+        __privateSet(this, _lastEventTimeStamp, ((_a22 = globalThis.event) == null ? void 0 : _a22.timeStamp) || null,);
+        if (this.state.currentOverlay !== -1) {
+          return __privateGet(this, _navigationAction,).call(this, {
+            type: 'removeOverlay',
+          },);
+        }
+        return __privateGet(this, _navigationAction,).call(this, {
+          type: 'remove',
         },);
-      }
-      return this.navigationAction({
-        type: 'remove',
       },);
-    },);
-    const component = this.props.children;
-    if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
-    const transition = {
-      ...TransitionDefaults.Instant,
-    };
-    const key7 = ((_a = component.key) == null ? void 0 : _a.toString()) || `stack-${this.state.historyItemId + 1}`;
-    const action = {
-      type: 'add',
-      key: key7,
-      transition,
-      component,
-    };
-    const newState = reduceNavigationStateForAction(this.state, action,);
-    if (!newState) return;
-    this.state = newState;
-  }
-  componentDidMount() {
-    var _a;
-    const historyItem = this.state.history[this.state.current];
-    if (!historyItem) return;
-    (_a = this.context) == null ? void 0 : _a.call(this, historyItem.key,);
-  }
-  UNSAFE_componentWillReceiveProps(props,) {
-    var _a;
-    const component = props['children'];
-    if (!isReactChild(component,) || !isReactElement(component,)) return;
-    const key7 = (_a = component.key) == null ? void 0 : _a.toString();
-    if (!key7) return;
-    if (this.state.history.length === 0) {
-      this.transition(component, TransitionDefaults.Instant,);
-    } else {
-      this.navigationAction({
-        type: 'update',
-        key: key7,
-        component,
-      },);
-    }
-  }
-  componentWillUnmount() {
-    var _a, _b;
-    (_b = (_a = this.props).resetProjection) == null ? void 0 : _b.call(_a,);
-  }
-  getStackState(options,) {
-    const {
-      current,
-      previous,
-      currentOverlay,
-      previousOverlay,
-    } = this.state;
-    if (options.overCurrentContext) {
-      return {
-        current: currentOverlay,
-        previous: previousOverlay,
-        history: this.state.overlayStack,
+      const component = this.props.children;
+      if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
+      const transition = {
+        ...TransitionDefaults.Instant,
       };
-    }
-    return {
-      current,
-      previous,
-      history: this.state.history,
-    };
-  }
-  /**
-   * To prevent bubbling events from triggering multiple transitions,
-   * we ensure that the current event has a different timestamp then the event that triggered the last transition.
-   * We use Window.event to ensure that even transitions invoked by code components - and may not pass a reference to the event - are caught.
-   * This works better than measuring the time of transition calls with performance.now()
-   * because the time between calls can get longer and longer as more screens are added to the stack,
-   * preventing a deterministic time between transitions to be used to determine if they were triggered at the same time or not.
-   */
-  isSameEventTransition() {
-    if (!globalThis.event) return false;
-    return this.lastEventTimeStamp === globalThis.event.timeStamp;
-  }
-  transition(component, transitionTraits, transitionOptions,) {
-    var _a, _b;
-    if (this.isSameEventTransition()) return;
-    this.lastEventTimeStamp = ((_a = globalThis.event) == null ? void 0 : _a.timeStamp) || null;
-    if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
-    const transition = {
-      ...transitionTraits,
-      ...transitionOptions,
-    };
-    const overCurrentContext = !!transition.overCurrentContext;
-    if (overCurrentContext) {
-      return this.navigationAction({
-        type: 'addOverlay',
+      const key7 = ((_a2 = component.key) == null ? void 0 : _a2.toString()) || `stack-${this.state.historyItemId + 1}`;
+      const action = {
+        type: 'add',
+        key: key7,
         transition,
         component,
+      };
+      const newState = reduceNavigationStateForAction(this.state, action,);
+      if (!newState) return;
+      this.state = newState;
+    }
+    componentDidMount() {
+      var _a2;
+      const historyItem = this.state.history[this.state.current];
+      if (!historyItem) return;
+      (_a2 = this.context) == null ? void 0 : _a2.call(this, historyItem.key,);
+    }
+    UNSAFE_componentWillReceiveProps(props,) {
+      var _a2;
+      const component = props['children'];
+      if (!isReactChild(component,) || !isReactElement(component,)) return;
+      const key7 = (_a2 = component.key) == null ? void 0 : _a2.toString();
+      if (!key7) return;
+      if (this.state.history.length === 0) {
+        __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Instant,);
+      } else {
+        __privateGet(this, _navigationAction,).call(this, {
+          type: 'update',
+          key: key7,
+          component,
+        },);
+      }
+    }
+    componentWillUnmount() {
+      var _a2, _b;
+      (_b = (_a2 = this.props).resetProjection) == null ? void 0 : _b.call(_a2,);
+    }
+    instant(component,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Instant, void 0,);
+    }
+    fade(component, options,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Fade, options,);
+    }
+    push(component, options,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, pushTransition(options,), options,);
+    }
+    modal(component, options,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Modal, options,);
+    }
+    overlay(component, options,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, overlayTransition(options,), options,);
+    }
+    flip(component, options,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, flipTransition(options,), options,);
+    }
+    magicMotion(component, options,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.MagicMotion, options,);
+    }
+    customTransition(component, transition,) {
+      __privateMethod(this, _transition, transition_fn,).call(this, component, transition,);
+    }
+    render() {
+      var _a2, _b, _c, _d, _e;
+      const stackState = __privateMethod(this, _getStackState, getStackState_fn,).call(this, {
+        overCurrentContext: false,
       },);
-    }
-    const key7 = ((_b = component.key) == null ? void 0 : _b.toString()) || `stack-${this.state.historyItemId + 1}`;
-    this.navigationAction({
-      type: 'add',
-      key: key7,
-      transition,
-      component,
-    },);
-  }
-  instant(component,) {
-    this.transition(component, TransitionDefaults.Instant, void 0,);
-  }
-  fade(component, options,) {
-    this.transition(component, TransitionDefaults.Fade, options,);
-  }
-  push(component, options,) {
-    this.transition(component, pushTransition(options,), options,);
-  }
-  modal(component, options,) {
-    this.transition(component, TransitionDefaults.Modal, options,);
-  }
-  overlay(component, options,) {
-    this.transition(component, overlayTransition(options,), options,);
-  }
-  flip(component, options,) {
-    this.transition(component, flipTransition(options,), options,);
-  }
-  magicMotion(component, options,) {
-    this.transition(component, TransitionDefaults.MagicMotion, options,);
-  }
-  customTransition(component, transition,) {
-    this.transition(component, transition,);
-  }
-  render() {
-    var _a, _b, _c, _d, _e;
-    const stackState = this.getStackState({
-      overCurrentContext: false,
-    },);
-    const overlayStackState = this.getStackState({
-      overCurrentContext: true,
-    },);
-    const activeOverlay = activeOverlayItem(overlayStackState,);
-    const isOverlayVisible = overlayStackState.current > -1;
-    const isInitial = this.state.history.length === 1;
-    const contentContainers = [];
-    for (const [key7, component,] of Object.entries(this.state.containers,)) {
-      const index = this.state.containerIndex[key7];
-      assert(index !== void 0, 'Container\'s index must be registered',);
-      const visualIndex = this.state.containerVisualIndex[key7];
-      assert(visualIndex !== void 0, 'Container\'s visual index must be registered',);
-      const removed = this.state.containerIsRemoved[key7];
-      const historyItem = this.state.history[index];
-      const transitionProps = this.state.transitionForContainer[key7];
-      const isCurrent = index === this.state.current;
-      const isPrevious = index === this.state.previous;
-      const areMagicMotionLayersPresent = isCurrent ? false : removed;
-      const withMagicMotion = ((_a = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a.withMagicMotion) ||
-        isCurrent && !!this.state.previousTransition;
-      contentContainers.push(/* @__PURE__ */ _jsx5(NavigationContainer, {
-        id: key7,
-        index: visualIndex,
-        isInitial,
-        isCurrent,
-        isPrevious,
-        isOverlayed: isOverlayVisible,
-        visible: isCurrent || isPrevious,
-        position: (_b = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _b.position,
-        instant: isInstantContainerTransition(index, stackState,),
-        transitionProps,
-        animation: animationPropsForContainer(index, stackState,),
-        backfaceVisible: getBackfaceVisibleForScreen(index, stackState,),
-        exitAnimation: (_c = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _c.animation,
-        exitBackfaceVisible: (_d = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _d.backfaceVisible,
-        exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
-        withMagicMotion,
-        areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
-        children: /* @__PURE__ */ _jsx5(MagicMotionCrossfadeRoot, {
-          children: containerContent({
-            component,
-            transition: historyItem == null ? void 0 : historyItem.transition,
+      const overlayStackState = __privateMethod(this, _getStackState, getStackState_fn,).call(this, {
+        overCurrentContext: true,
+      },);
+      const activeOverlay = activeOverlayItem(overlayStackState,);
+      const isOverlayVisible = overlayStackState.current > -1;
+      const isInitial = this.state.history.length === 1;
+      const contentContainers = [];
+      for (const [key7, component,] of Object.entries(this.state.containers,)) {
+        const index = this.state.containerIndex[key7];
+        assert(index !== void 0, 'Container\'s index must be registered',);
+        const visualIndex = this.state.containerVisualIndex[key7];
+        assert(visualIndex !== void 0, 'Container\'s visual index must be registered',);
+        const removed = this.state.containerIsRemoved[key7];
+        const historyItem = this.state.history[index];
+        const transitionProps = this.state.transitionForContainer[key7];
+        const isCurrent = index === this.state.current;
+        const isPrevious = index === this.state.previous;
+        const areMagicMotionLayersPresent = isCurrent ? false : removed;
+        const withMagicMotion = ((_a2 = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a2.withMagicMotion) ||
+          isCurrent && !!this.state.previousTransition;
+        contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
+          id: key7,
+          index: visualIndex,
+          isInitial,
+          isCurrent,
+          isPrevious,
+          isOverlayed: isOverlayVisible,
+          visible: isCurrent || isPrevious,
+          position: (_b = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _b.position,
+          instant: isInstantContainerTransition(index, stackState,),
+          transitionProps,
+          animation: animationPropsForContainer(index, stackState,),
+          backfaceVisible: getBackfaceVisibleForScreen(index, stackState,),
+          exitAnimation: (_c = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _c.animation,
+          exitBackfaceVisible: (_d = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _d.backfaceVisible,
+          exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
+          withMagicMotion,
+          areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
+          children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
+            children: containerContent({
+              component,
+              transition: historyItem == null ? void 0 : historyItem.transition,
+            },),
           },),
-        },),
-      }, key7,),);
-    }
-    const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
-      return /* @__PURE__ */ _jsx5(NavigationContainer, {
-        isLayeredContainer: true,
-        isCurrent: stackIndex === this.state.currentOverlay,
-        position: item.transition.position,
-        initialProps: initialPropsForOverlay(stackIndex, overlayStackState,),
-        transitionProps: transitionPropsForOverlay(stackIndex, overlayStackState,),
-        instant: isInstantContainerTransition(stackIndex, overlayStackState, true,),
-        animation: animationPropsForContainer(stackIndex, overlayStackState,),
-        exitProps: item.transition.enter,
-        visible: containerIsVisible(stackIndex, overlayStackState,),
-        backdropColor: backdropColorForTransition(item.transition,),
-        backfaceVisible: getBackfaceVisibleForOverlay(stackIndex, overlayStackState,),
-        onTapBackdrop: backdropTapAction(item.transition, this.goBack,),
-        index: this.state.current + 1 + stackIndex,
-        children: containerContent({
-          component: item.component,
-          transition: item.transition,
-        },),
-      }, item.key,);
-    },);
-    return /* @__PURE__ */ _jsx5(FrameWithMotion, {
-      'data-framer-component-type': 'NavigationRoot',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      position: 'relative',
-      style: {
-        overflow: 'hidden',
-        backgroundColor: 'unset',
-        pointerEvents: void 0,
-        ...this.props.style,
-      },
-      children: /* @__PURE__ */ _jsx5(NavigationContext.Provider, {
-        value: this,
-        children: /* @__PURE__ */ _jsxs(IsInitialNavigationContext.Provider, {
-          value: isInitial,
-          children: [
-            /* @__PURE__ */ _jsx5(NavigationContainer, {
-              isLayeredContainer: true,
-              position: void 0,
-              initialProps: {},
-              instant: false,
-              transitionProps: transitionPropsForStackWrapper(activeOverlay,),
-              animation: animationForStackWrapper(activeOverlay,),
-              backfaceVisible: backfaceVisibleForStackWrapper(activeOverlay,),
-              visible: true,
-              backdropColor: void 0,
-              onTapBackdrop: void 0,
-              index: 0,
-              children: /* @__PURE__ */ _jsx5(LayoutIdProvider, {
-                children: /* @__PURE__ */ _jsx5(SharedLayoutRoot, {
-                  children: /* @__PURE__ */ _jsx5(AnimatePresence, {
-                    presenceAffectsLayout: false,
-                    children: contentContainers,
+        }, key7,),);
+      }
+      const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
+        return /* @__PURE__ */ jsx(NavigationContainer, {
+          isLayeredContainer: true,
+          isCurrent: stackIndex === this.state.currentOverlay,
+          position: item.transition.position,
+          initialProps: initialPropsForOverlay(stackIndex, overlayStackState,),
+          transitionProps: transitionPropsForOverlay(stackIndex, overlayStackState,),
+          instant: isInstantContainerTransition(stackIndex, overlayStackState, true,),
+          animation: animationPropsForContainer(stackIndex, overlayStackState,),
+          exitProps: item.transition.enter,
+          visible: containerIsVisible(stackIndex, overlayStackState,),
+          backdropColor: backdropColorForTransition(item.transition,),
+          backfaceVisible: getBackfaceVisibleForOverlay(stackIndex, overlayStackState,),
+          onTapBackdrop: backdropTapAction(item.transition, this.goBack,),
+          index: this.state.current + 1 + stackIndex,
+          children: containerContent({
+            component: item.component,
+            transition: item.transition,
+          },),
+        }, item.key,);
+      },);
+      return /* @__PURE__ */ jsx(FrameWithMotion, {
+        'data-framer-component-type': 'NavigationRoot',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        style: {
+          overflow: 'hidden',
+          backgroundColor: 'unset',
+          pointerEvents: void 0,
+          ...this.props.style,
+        },
+        children: /* @__PURE__ */ jsx(NavigationContext.Provider, {
+          value: this,
+          children: /* @__PURE__ */ jsxs(IsInitialNavigationContext.Provider, {
+            value: isInitial,
+            children: [
+              /* @__PURE__ */ jsx(NavigationContainer, {
+                isLayeredContainer: true,
+                position: void 0,
+                initialProps: {},
+                instant: false,
+                transitionProps: transitionPropsForStackWrapper(activeOverlay,),
+                animation: animationForStackWrapper(activeOverlay,),
+                backfaceVisible: backfaceVisibleForStackWrapper(activeOverlay,),
+                visible: true,
+                backdropColor: void 0,
+                onTapBackdrop: void 0,
+                index: 0,
+                children: /* @__PURE__ */ jsx(LayoutIdProvider, {
+                  children: /* @__PURE__ */ jsx(SharedLayoutRoot, {
+                    children: /* @__PURE__ */ jsx(AnimatePresence, {
+                      presenceAffectsLayout: false,
+                      children: contentContainers,
+                    },),
                   },),
                 },),
               },),
-            },),
-            /* @__PURE__ */ _jsx5(AnimatePresence, {
-              children: overlayContainers,
-            },),
-          ],
+              /* @__PURE__ */ jsx(AnimatePresence, {
+                children: overlayContainers,
+              },),
+            ],
+          },),
         },),
-      },),
-    },);
-  }
-};
-__publicField(Navigation, 'defaultProps', {
-  enabled: true,
-},);
-__publicField(Navigation, 'contextType', NavigationCallbackContext,);
+      },);
+    }
+  },
+    _lastEventTimeStamp = /* @__PURE__ */ new WeakMap(),
+    _getStackState = /* @__PURE__ */ new WeakSet(),
+    getStackState_fn = function (options,) {
+      const {
+        current,
+        previous,
+        currentOverlay,
+        previousOverlay,
+      } = this.state;
+      if (options.overCurrentContext) {
+        return {
+          current: currentOverlay,
+          previous: previousOverlay,
+          history: this.state.overlayStack,
+        };
+      }
+      return {
+        current,
+        previous,
+        history: this.state.history,
+      };
+    },
+    _isSameEventTransition = /* @__PURE__ */ new WeakSet(),
+    isSameEventTransition_fn = function () {
+      if (!globalThis.event) return false;
+      return __privateGet(this, _lastEventTimeStamp,) === globalThis.event.timeStamp;
+    },
+    _navigationAction = /* @__PURE__ */ new WeakMap(),
+    _transition = /* @__PURE__ */ new WeakSet(),
+    transition_fn = function (component, transitionTraits, transitionOptions,) {
+      var _a2, _b;
+      if (__privateMethod(this, _isSameEventTransition, isSameEventTransition_fn,).call(this,)) return;
+      __privateSet(this, _lastEventTimeStamp, ((_a2 = globalThis.event) == null ? void 0 : _a2.timeStamp) || null,);
+      if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
+      const transition = {
+        ...transitionTraits,
+        ...transitionOptions,
+      };
+      const overCurrentContext = !!transition.overCurrentContext;
+      if (overCurrentContext) {return __privateGet(this, _navigationAction,).call(this, {
+          type: 'addOverlay',
+          transition,
+          component,
+        },);}
+      const key7 = ((_b = component.key) == null ? void 0 : _b.toString()) || `stack-${this.state.historyItemId + 1}`;
+      __privateGet(this, _navigationAction,).call(this, {
+        type: 'add',
+        key: key7,
+        transition,
+        component,
+      },);
+    },
+    __publicField(_a, 'defaultProps', {
+      enabled: true,
+    },),
+    __publicField(_a, 'contextType', NavigationCallbackContext,),
+    _a;
+})();
 var animationDefault = {
   stiffness: 500,
   damping: 50,
@@ -25629,7 +26173,7 @@ function containerIsVisible(containerIndex, stackState,) {
   return false;
 }
 function containerContent(item,) {
-  const content = React__default.Children.map(item.component, (child) => {
+  const content = React4.Children.map(item.component, (child) => {
     var _a;
     if (!isReactChild(child,) || !isReactElement(child,) || !child.props) {
       return child;
@@ -25651,7 +26195,7 @@ function containerContent(item,) {
       if (canStretchHeight) props.height = '100%';
       if (canStretchStyle) props.style.height = '100%';
     }
-    return React__default.cloneElement(child, props,);
+    return React4.cloneElement(child, props,);
   },);
   return content;
 }
@@ -25659,7 +26203,7 @@ function backdropTapAction(transition, goBackAction,) {
   if (transition.goBackOnTapOutside !== false) return goBackAction;
 }
 function NavigationStyleSheet() {
-  React__default.useInsertionEffect(() => {
+  React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -25667,11 +26211,11 @@ function NavigationStyleSheet() {
 function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  return /* @__PURE__ */ _jsxs(Navigation, {
+  return /* @__PURE__ */ jsxs(Navigation, {
     ...props,
     resetProjection,
     skipLayoutAnimation,
-    children: [props.children, /* @__PURE__ */ _jsx5(NavigationStyleSheet, {},),],
+    children: [props.children, /* @__PURE__ */ jsx(NavigationStyleSheet, {},),],
   },);
 }
 var import_hoist_non_react_statics3 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
@@ -25690,9 +26234,9 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
   return NavigationTransitionType2;
 })(NavigationTransitionType || {},);
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = class extends React__default.Component {
+  const InternalWithNavigator = class extends React4.Component {
     render() {
-      return /* @__PURE__ */ _jsx5(NavigationContext.Consumer, {
+      return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
         children: (navigation) => {
           const navigate = () => {
             if (navigationTransition === 'goBack') {
@@ -25745,7 +26289,7 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
           } else {
             props.onTap = navigate;
           }
-          return /* @__PURE__ */ _jsx5(BaseComponent, {
+          return /* @__PURE__ */ jsx(BaseComponent, {
             ...props,
           },);
         },
@@ -25769,12 +26313,12 @@ function transitionDirectionToSide(direction,) {
 }
 var AnimateSharedLayout = (props) => props.children;
 var Draggable = /* @__PURE__ */ WithDragging(DeprecatedFrameWithEvents,);
-var import_process3 = __toESM(require_browser(), 1,);
-function debounce(fn, time22,) {
+var import_process2 = __toESM(require_browser(), 1,);
+function debounce(fn, time2,) {
   let timeout;
   const debounced = (...args) => {
     safeWindow.clearTimeout(timeout,);
-    timeout = safeWindow.setTimeout(fn, time22, ...args,);
+    timeout = safeWindow.setTimeout(fn, time2, ...args,);
   };
   const cancel = () => {
     safeWindow.clearTimeout(timeout,);
@@ -25924,14 +26468,14 @@ function triggerStackReflow(element, display,) {
   void element.offsetHeight;
   element.style.display = display;
 }
-var requiresPolyfill = Boolean(isSafari() && safariVersion() < 15.4,);
+var requiresPolyfill = /* @__PURE__ */ (() => Boolean(isSafari() && safariVersion() < 15.4,))();
 function useSafariGapFix(gap, ref, display,) {
   if (!requiresPolyfill) return void 0;
-  const isInitialRender = React__default.useRef(true,);
-  const hasTriggeredReflow = React__default.useRef(false,);
-  const prevGapValue = React__default.useRef(gap,);
+  const isInitialRender = React4.useRef(true,);
+  const hasTriggeredReflow = React4.useRef(false,);
+  const prevGapValue = React4.useRef(gap,);
   hasTriggeredReflow.current = false;
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     prevGapValue.current = gap;
     if (isInitialRender.current) {
       isInitialRender.current = false;
@@ -25942,14 +26486,14 @@ function useSafariGapFix(gap, ref, display,) {
       hasTriggeredReflow.current = true;
     }
   }, [gap, ref, prevGapValue, display,],);
-  return React__default.useCallback(() => {
+  return React4.useCallback(() => {
     if (prevGapValue.current === gap) return;
     if (!hasTriggeredReflow.current) triggerStackReflow(ref.current, display,);
     hasTriggeredReflow.current = true;
   }, [gap, ref,],);
 }
 var Stack = /* @__PURE__ */ (() => {
-  const StackInner = React__default.forwardRef(function StackInner2(stackProps, forwardedRef,) {
+  const StackInner = React4.forwardRef(function StackInner2(stackProps, forwardedRef,) {
     const {
       as = 'div',
       direction = 'vertical',
@@ -25968,7 +26512,7 @@ var Stack = /* @__PURE__ */ (() => {
       ...containerProps
     } = stackProps;
     const useFlexboxGap = Boolean(externalUseFlexboxGap || wrap2,);
-    const stackRef = React__default.useRef(null,);
+    const stackRef = React4.useRef(null,);
     const onBeforeLayoutMeasure = useSafariGapFix(gap, stackRef, 'flex',);
     const flexDirection = toFlexDirection(direction,);
     const isReverse = isReverseDirection(flexDirection,);
@@ -26040,7 +26584,7 @@ var Stack = /* @__PURE__ */ (() => {
       if (styleProp == null ? void 0 : styleProp.width) contentWrapperStyle.width = styleProp == null ? void 0 : styleProp.width;
       if (styleProp == null ? void 0 : styleProp.height) contentWrapperStyle.height = styleProp == null ? void 0 : styleProp.height;
     }
-    return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       as,
       background: fromCanvasComponent ? void 0 : 'none',
       ...props,
@@ -26050,7 +26594,7 @@ var Stack = /* @__PURE__ */ (() => {
       style,
       className,
       layoutScroll: true,
-      children: /* @__PURE__ */ _jsx5(motion.div, {
+      children: /* @__PURE__ */ jsx(motion.div, {
         'data-framer-stack-content-wrapper': true,
         'data-framer-stack-direction-reverse': isReverse,
         'data-framer-stack-gap-enabled': gapEnabled,
@@ -26114,22 +26658,22 @@ function fraction(dimension,) {
   return isFiniteNumber(value,) ? value : 0;
 }
 function handleFraction(children, direction, widthType, heightType,) {
-  return React__default.Children.map(children, (child) => {
+  return React4.Children.map(children, (child) => {
     if (!isReactChild(child,) || !isReactElement(child,)) return;
     const isVertical = direction === 'vertical';
     const style = {};
     let hasFraction = false;
     const {
       style: propsStyle,
-      size: size2,
+      size,
     } = child.props;
     let {
       width,
       height,
     } = child.props;
-    if (size2 !== void 0) {
-      if (width === void 0) width = size2;
-      if (height === void 0) height = size2;
+    if (size !== void 0) {
+      if (width === void 0) width = size;
+      if (height === void 0) height = size;
     }
     let newWidth = width;
     let newHeight = height;
@@ -26171,7 +26715,7 @@ function handleFraction(children, direction, widthType, heightType,) {
       ...propsStyle,
       ...style,
     };
-    return React__default.cloneElement(child, {
+    return React4.cloneElement(child, {
       width: newWidth,
       height: newHeight,
       style: nextStyle,
@@ -26204,7 +26748,7 @@ function wrapInGapElementForLegacyGap(children, gap, direction, justifyContent, 
     asRecord(gapStyle,)['--stack-gap-x'] = `${isVertical ? 0 : gap}px`;
     asRecord(gapStyle,)['--stack-gap-y'] = `${isVertical ? gap : 0}px`;
   }
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     'data-framer-legacy-stack-gap-enabled': gapEnabled,
     'data-framer-stack-flexbox-gap': useFlexboxGap,
     style: gapStyle,
@@ -26282,7 +26826,7 @@ function PageContainer({
   const wrapperHeight = hasAutoHeight ? 'auto' : '100%';
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
-  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
     width: containerWidth,
@@ -26303,7 +26847,7 @@ function PageContainer({
       paddingRight: hasHorizontalGap ? gap : 0,
       paddingBottom: hasVerticalGap ? gap : 0,
     },
-    children: /* @__PURE__ */ _jsx5(FrameWithMotion, {
+    children: /* @__PURE__ */ jsx(FrameWithMotion, {
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
       width: wrapperWidth,
@@ -26321,7 +26865,7 @@ function PageContainer({
     }, effect ? Object.keys(effect,).join('',) : '',),
   },);
 }
-var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwardedRef,) {
+var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,) {
   var _a;
   const {
     direction = 'horizontal',
@@ -26331,14 +26875,14 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     currentPage = 0,
     animateCurrentPageUpdate = true,
     gap: gapValue = 10,
-    padding = 0,
+    padding: _padding = 0,
     momentum = false,
     dragEnabled = true,
-    defaultEffect = 'none',
+    defaultEffect: _defaultEffect = 'none',
     background = 'transparent',
     overflow = 'hidden',
     __fromCodeComponentNode,
-    effect,
+    effect: _effect,
     children,
     contentOffsetX,
     contentOffsetY,
@@ -26350,8 +26894,8 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     onDragEnd,
     directionLock,
     onScrollEnd,
-    onDirectionLock,
-    onUpdate,
+    onDirectionLock: _onDirectionLock,
+    onUpdate: _onUpdate,
     wheelEnabled = false,
     layoutId: specificLayoutId,
     ...rest
@@ -26364,7 +26908,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     ...rest,
     background,
   };
-  const hasMountedRef = React__default.useRef(false,);
+  const hasMountedRef = React4.useRef(false,);
   const hasFixedSize = RenderTarget.hasRestrictions() && props.__fromCodeComponentNode && isFiniteNumber(containerProps.width,) &&
     isFiniteNumber(containerProps.height,);
   if (!hasFixedSize && __fromCodeComponentNode && !containerProps.__fromCanvasComponent) {
@@ -26377,7 +26921,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
   const {
     initial,
     prev,
-  } = React__default.useRef({
+  } = React4.useRef({
     initial: {
       x: 0,
       y: 0,
@@ -26393,36 +26937,36 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     warnOnce2(`The 'gap' property of Page component can not be negative, but is ${gapValue}.`,);
     gap = 0;
   }
-  React__default.useInsertionEffect(() => {
+  React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const pageCount = React__default.Children.count(children,);
-  const maxOffsetRef = React__default.useRef(0,);
-  const constraints = React__default.useRef({
+  const pageCount = React4.Children.count(children,);
+  const maxOffsetRef = React4.useRef(0,);
+  const constraints = React4.useRef({
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
   },);
-  const fallbackContainerRef = React__default.useRef(null,);
+  const fallbackContainerRef = React4.useRef(null,);
   const containerRef = forwardedRef || fallbackContainerRef;
-  const scrollableRef = React__default.useRef(null,);
-  const pageEffectValuesRef = React__default.useRef([],);
-  const pageRectsRef = React__default.useRef([],);
+  const scrollableRef = React4.useRef(null,);
+  const pageEffectValuesRef = React4.useRef([],);
+  const pageRectsRef = React4.useRef([],);
   const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX ?? 0,);
   const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY ?? 0,);
-  const contentOffsetRef = React__default.useRef({
+  const contentOffsetRef = React4.useRef({
     x: isMotionValue2(contentOffsetX,) ? contentOffsetX : internalX,
     y: isMotionValue2(contentOffsetY,) ? contentOffsetY : internalY,
   },);
-  const currentContentPageRef = React__default.useRef(currentPage,);
-  const propsBoundedCurrentPageRef = React__default.useRef(currentPage,);
-  const latestPropsRef = React__default.useRef(props,);
+  const currentContentPageRef = React4.useRef(currentPage,);
+  const propsBoundedCurrentPageRef = React4.useRef(currentPage,);
+  const latestPropsRef = React4.useRef(props,);
   latestPropsRef.current = props;
-  const lastDirectionRef = React__default.useRef(props.direction,);
+  const lastDirectionRef = React4.useRef(props.direction,);
   const snapToPage = useSnapToPage(currentContentPageRef, contentOffsetRef, isHorizontal,);
-  const [_, setForceUpdateCount,] = React__default.useState(0,);
-  const containerSizeRef = React__default.useRef({
+  const [_, setForceUpdateCount,] = React4.useState(0,);
+  const containerSizeRef = React4.useRef({
     width: 200,
     height: 200,
   },);
@@ -26430,11 +26974,11 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     containerSizeRef.current.width = containerProps.width;
     containerSizeRef.current.height = containerProps.height;
   }
-  const updateOnResize = React__default.useCallback(() => {
+  const updateOnResize = React4.useCallback(() => {
     if (!hasFixedSize) setForceUpdateCount((v) => v + 1);
   }, [hasFixedSize,],);
-  React__default.useEffect(() => {
-    if (RenderTarget.current() !== 'PREVIEW') return;
+  React4.useEffect(() => {
+    if (RenderTarget.current() !== RenderTarget.preview) return;
     globalThis.addEventListener('resize', updateOnResize,);
     return () => {
       globalThis.removeEventListener('resize', updateOnResize,);
@@ -26460,7 +27004,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
       maxOffsetRef.current = newMaxOffset;
       constraints.current.top = -newMaxOffset;
       constraints.current.left = -newMaxOffset;
-      if (RenderTarget.current() === 'CANVAS') setForceUpdateCount((v) => v + 1);
+      if (RenderTarget.current() === RenderTarget.canvas) setForceUpdateCount((v) => v + 1);
     }
   };
   const measureContainerSize = () => {
@@ -26488,7 +27032,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
       updateCurrentPage(newBoundedCurrentPage, currentContentPageRef, !mount ? onChangePage : void 0,);
     }
     const offset = offsetForPage(newBoundedCurrentPage, pageCount, pageRectsRef, isHorizontal, maxOffsetRef,);
-    const animated = animateCurrentPageUpdate && RenderTarget.current() !== 'CANVAS' && !mount;
+    const animated = animateCurrentPageUpdate && RenderTarget.current() !== RenderTarget.canvas && !mount;
     snapToPage(newBoundedCurrentPage, offset, {
       animated,
     },);
@@ -26507,7 +27051,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
       updateAndSnapToPage(currentContentPageRef.current, true,);
     },);
   }, [],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (currentPage !== currentContentPageRef.current) updateAndSnapToPage(currentPage,);
   }, [currentPage,],);
   const handleMeasureLifecycle = () => {
@@ -26524,7 +27068,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     }
   };
   useIsomorphicLayoutEffect2(() => {
-    if (RenderTarget.current() !== 'CANVAS') return;
+    if (RenderTarget.current() !== RenderTarget.canvas) return;
     handleMeasureLifecycle();
   },);
   const onDragStartHandler = (event, info,) => {
@@ -26599,7 +27143,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     },);
   };
   pageEffectValuesRef.current = [];
-  const childComponents = React__default.Children.map(children, (child, index,) => {
+  const childComponents = React4.Children.map(children, (child, index,) => {
     if (!isReactChild(child,) || !isReactElement(child,)) {
       return child;
     }
@@ -26629,7 +27173,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
       }
     }
     pageEffectValuesRef.current.push(effectDictionary,);
-    return /* @__PURE__ */ _jsx5(PageContainer, {
+    return /* @__PURE__ */ jsx(PageContainer, {
       effect: effectDictionary,
       dragEnabled,
       direction,
@@ -26645,7 +27189,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
       onDrag: onDragHandler,
       onDragEnd: onDragEndHandler,
       layoutId: layoutId ? `${layoutId}-${index}` : void 0,
-      children: React__default.cloneElement(child, update,),
+      children: React4.cloneElement(child, update,),
     }, index,);
   },);
   useWheelScroll(scrollableRef, {
@@ -26660,7 +27204,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     onScroll,
     onScrollEnd,
   },);
-  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
     perspective: hasEffect(props,) ? 1200 : void 0,
@@ -26673,7 +27217,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
     layoutId,
     ref: containerRef,
     onLayoutMeasure: handleMeasureLifecycle,
-    children: /* @__PURE__ */ _jsxs(FrameWithMotion, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
       'data-framer-component-type': 'Page',
       ref: scrollableRef,
       background: null,
@@ -26691,7 +27235,7 @@ var Page = /* @__PURE__ */ React__default.forwardRef(function Page2(props, forwa
         pointerEvents: (_a = props.style) == null ? void 0 : _a.pointerEvents,
       },
       children: [
-        /* @__PURE__ */ _jsx5(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
           children,
@@ -26722,7 +27266,6 @@ function coverflowEffect(info,) {
   const {
     normalizedOffset,
     direction,
-    size: size2,
   } = info;
   const isHorizontal = direction === 'horizontal';
   return {
@@ -26743,13 +27286,13 @@ function pileEffect(info,) {
   const {
     normalizedOffset,
     direction,
-    size: size2,
+    size,
   } = info;
   const isHorizontal = direction === 'horizontal';
   const absoluteOffset = Math.abs(normalizedOffset,);
   return {
-    x: normalizedOffset < 0 && isHorizontal ? calcPileAxisOffset(absoluteOffset, size2.width,) : 0,
-    y: normalizedOffset < 0 && !isHorizontal ? calcPileAxisOffset(absoluteOffset, size2.height,) : 0,
+    x: normalizedOffset < 0 && isHorizontal ? calcPileAxisOffset(absoluteOffset, size.width,) : 0,
+    y: normalizedOffset < 0 && !isHorizontal ? calcPileAxisOffset(absoluteOffset, size.height,) : 0,
     scale: normalizedOffset < 0 ? 1 - absoluteOffset / 50 : 1,
   };
 }
@@ -26757,14 +27300,14 @@ function wheelEffect(info,) {
   const {
     normalizedOffset,
     direction,
-    size: size2,
+    size,
   } = info;
   const isHorizontal = direction === 'horizontal';
-  const originZ = (isHorizontal ? size2.width : size2.height) * 18 / (2 * Math.PI);
+  const originZ = (isHorizontal ? size.width : size.height) * 18 / (2 * Math.PI);
   const rotateX = isHorizontal ? 0 : normalizedOffset * -20;
   const rotateY = isHorizontal ? normalizedOffset * 20 : 0;
-  const y = isHorizontal ? 0 : normalizedOffset * -size2.height;
-  const x = isHorizontal ? normalizedOffset * -size2.width : 0;
+  const y = isHorizontal ? 0 : normalizedOffset * -size.height;
+  const x = isHorizontal ? normalizedOffset * -size.width : 0;
   return {
     opacity: 1 - Math.abs(normalizedOffset,) / 4,
     transform: `translate(${x}px, ${y}px) translateZ(-${originZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${originZ}px)`,
@@ -26826,7 +27369,7 @@ function getPageContentRects(containerRef, containerSize, direction, gap,) {
     if (contentWrapper instanceof HTMLElement && contentWrapper.firstChild instanceof HTMLElement) {
       let width = contentWrapper.firstChild.offsetWidth;
       let height = contentWrapper.firstChild.offsetHeight;
-      if (import_process3.default.env.NODE_ENV === 'test') {
+      if (import_process2.default.env.NODE_ENV === 'test') {
         width = 100;
         height = 100;
       }
@@ -26842,16 +27385,16 @@ function getPageContentRects(containerRef, containerSize, direction, gap,) {
   let maxY = 0;
   const isHorizontal = direction === 'horizontal';
   return sizes.map((queriedSize) => {
-    const size2 = queriedSize || containerSize;
+    const size = queriedSize || containerSize;
     const x = maxX;
     const y = maxY;
     if (isHorizontal) {
-      maxX += size2.width + gap;
+      maxX += size.width + gap;
     } else {
-      maxY += size2.height + gap;
+      maxY += size.height + gap;
     }
     return {
-      ...size2,
+      ...size,
       x,
       y,
     };
@@ -26932,14 +27475,14 @@ function effectValues(index, latestPropsRef, pageRectsRef, contentOffsetRef, max
     offset = Math.min(pageRect.y, maxScrollOffset,) + (contentOffset ? contentOffset.y.get() : 0);
     normalizedOffset = offset / (pageRect.height + latestGap);
   }
-  const size2 = {
+  const size = {
     width: pageRect.width,
     height: pageRect.height,
   };
   return effectFunction({
     offset,
     normalizedOffset,
-    size: size2,
+    size,
     index,
     direction: latestDirection,
     gap: latestGap,
@@ -27476,11 +28019,11 @@ var FramerEventSession = class {
         y: 0,
       };
     }
-    const events2 = this.events;
-    let i = events2.length - 1;
+    const events = this.events;
+    let i = events.length - 1;
     let event = null;
     while (i >= 0) {
-      event = events2[i] ?? null;
+      event = events[i] ?? null;
       if (!event || MainLoop.time - event.loopTime > t) {
         break;
       }
@@ -27492,23 +28035,23 @@ var FramerEventSession = class {
         y: 0,
       };
     }
-    const current = events2[events2.length - 1];
+    const current = events[events.length - 1];
     if (!current) {
       return {
         x: 0,
         y: 0,
       };
     }
-    const time22 = (MainLoop.time - event.loopTime) * 1e3;
-    if (time22 === 0) {
+    const time2 = (MainLoop.time - event.loopTime) * 1e3;
+    if (time2 === 0) {
       return {
         x: 0,
         y: 0,
       };
     }
     const velocity = {
-      x: (current.devicePoint.x - event.devicePoint.x) / time22,
-      y: (current.devicePoint.y - event.devicePoint.y) / time22,
+      x: (current.devicePoint.x - event.devicePoint.x) / time2,
+      y: (current.devicePoint.y - event.devicePoint.y) / time2,
     };
     if (velocity.x === Infinity) {
       velocity.x = 0;
@@ -27534,7 +28077,7 @@ var FramerEventSession = class {
     return subtract(event.devicePoint, this.startEvent.devicePoint,);
   }
 };
-var MouseEventListener = class extends Component2 {
+var MouseEventListener = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domMouseDown', (originalEvent) => {
@@ -27586,7 +28129,7 @@ var MouseEventListener = class extends Component2 {
     safeWindow.removeEventListener('wheel', this.domMouseWheel,);
   }
 };
-var TouchEventListener = class extends Component2 {
+var TouchEventListener = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domTouchStart', (originalEvent) => {
@@ -27642,7 +28185,7 @@ var useUpdateChildSize = ({
   fromCanvasComponent,
 },) => {
   return useMemo(() => {
-    return React__default.Children.map(children, (child) => {
+    return React4.Children.map(children, (child) => {
       if (child === null || typeof child !== 'object' || typeof child.type === 'string') {
         return child;
       }
@@ -27662,14 +28205,14 @@ var useUpdateChildSize = ({
           style: Object.assign({}, child.props.style, updatedSize,),
         }
         : updatedSize;
-      return React__default.cloneElement(child, update,);
+      return React4.cloneElement(child, update,);
     },);
   }, [dragDirection, children,],);
 };
 var numberFromOptionalMotionValue = (value) => {
   return typeof value === 'number' ? value : value.get();
 };
-var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
+var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     directionLock = false,
@@ -27696,7 +28239,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
     resetOffset,
     overdragEnabled = true,
     layoutId: specificLayoutId,
-    native,
+    native: _native,
     ...containerProps
   } = props;
   const layoutId = useLayoutId2(props, {
@@ -27733,7 +28276,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
       y: 0,
     },
   },).current;
-  const isPreview = RenderTarget.current() === 'PREVIEW';
+  const isPreview = RenderTarget.current() === RenderTarget.preview;
   const containerFallbackRef = useRef(null,);
   const containerRef = forwardedRef || containerFallbackRef;
   const contentRef = useRef(null,);
@@ -27775,14 +28318,14 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
     }
   }
   useIsomorphicLayoutEffect2(() => {
-    if (RenderTarget.current() !== 'CANVAS') return;
+    if (RenderTarget.current() !== RenderTarget.canvas) return;
     measureAndUpdateScrollOffset();
   },);
   useIsomorphicLayoutEffect2(() => {
-    if (RenderTarget.current() === 'CANVAS') return;
+    if (RenderTarget.current() === RenderTarget.canvas) return;
     measureAndUpdateScrollOffset();
   }, [],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (shouldResetScroll(isInTarget,)) measureAndUpdateScrollOffset();
     if (isInTarget === false) wasInTargetRef.current = false;
   }, [isInTarget,],);
@@ -27887,7 +28430,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
     if (currentY !== 0) setScrollY(currentY,);
     return y.on('change', setScrollY,);
   }, [y, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
-  const nativeOnScroll = React__default.useCallback(() => {
+  const nativeOnScroll = React4.useCallback(() => {
     const element = containerRef.current;
     if (!(element instanceof HTMLDivElement)) return;
     const xDelta = Math.abs(x.get() + element.scrollLeft,);
@@ -27895,20 +28438,20 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
     if (xDelta > 1) x.set(-element.scrollLeft,);
     if (yDelta > 1) y.set(-element.scrollTop,);
   }, [x, y,],);
-  const isEmpty2 = React__default.Children.count(children,) === 0;
+  const isEmpty2 = React4.Children.count(children,) === 0;
   const width = direction !== 'vertical' && !isEmpty2 ? 'auto' : '100%';
   const height = direction !== 'horizontal' && !isEmpty2 ? 'auto' : '100%';
-  const size2 = !containerProps.__fromCanvasComponent
+  const size = !containerProps.__fromCanvasComponent
     ? {
       width: containerProps.__fromCodeComponentNode ? '100%' : containerProps.width,
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     'data-framer-component-type': 'Scroll',
     background: 'none',
     ...containerProps,
-    ...size2,
+    ...size,
     style: {
       ...style,
       willChange: isPreview ? 'transform' : void 0,
@@ -27921,7 +28464,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
     layoutId,
     layoutScroll: true,
     onBeforeLayoutMeasure: measureAndUpdateScrollOffset,
-    children: /* @__PURE__ */ _jsxs(FrameWithMotion, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
       'data-framer-component-type': 'ScrollContentWrapper',
       animate: scrollAnimate,
       drag: dragEnabled && convertScrollDirectionToDrag(direction,),
@@ -27956,7 +28499,7 @@ var EmulatedScroll = /* @__PURE__ */ React__default.forwardRef(function Emulated
       },
       preserve3d: containerProps.preserve3d,
       children: [
-        /* @__PURE__ */ _jsx5(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           children,
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -28128,12 +28671,11 @@ function getPointerEvents(element,) {
   var _a;
   return (_a = element == null ? void 0 : element.style) == null ? void 0 : _a['pointerEvents'];
 }
-var emptyObject = {};
-Object.freeze(emptyObject,);
+var emptyObject = /* @__PURE__ */ Object.freeze({},);
 function useEmulateTouchScroll(ref, direction, enabled,) {
   if (isTouchDevice) return emptyObject;
-  if (RenderTarget.current() !== 'PREVIEW') return emptyObject;
-  const scrollAnimationControlsRef = React__default.useRef(null,);
+  if (RenderTarget.current() !== RenderTarget.preview) return emptyObject;
+  const scrollAnimationControlsRef = React4.useRef(null,);
   useEffect(() => {
     if (!ref.current) return;
     const element = ref.current;
@@ -28276,7 +28818,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
       (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
     };
   }, [ref, direction, enabled,],);
-  return React__default.useMemo(() => {
+  return React4.useMemo(() => {
     return {
       cancelEmulatedTouchScrollAnimation: () => {
         var _a;
@@ -28285,11 +28827,11 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
     };
   }, [],);
 }
-var timeDelta = 4 / 60 * 1e3;
-function getRecentEvents(events2,) {
+var timeDelta = /* @__PURE__ */ (() => 4 / 60 * 1e3)();
+function getRecentEvents(events,) {
   const currentTime = new CustomEvent('getTime',).timeStamp;
   const maxAge = currentTime - timeDelta;
-  return events2.filter((event) => event.timeStamp > maxAge);
+  return events.filter((event) => event.timeStamp > maxAge);
 }
 var zeroPoint = {
   x: 0,
@@ -28304,11 +28846,11 @@ function calculateVelocity({
   if (!oldestMouseMoveEvent) return zeroPoint;
   const deltaX = mouseUpEvent.clientX - oldestMouseMoveEvent.clientX;
   const deltaY = mouseUpEvent.clientY - oldestMouseMoveEvent.clientY;
-  const time22 = mouseUpEvent.timeStamp - oldestMouseMoveEvent.timeStamp;
-  if (time22 === 0) return zeroPoint;
+  const time2 = mouseUpEvent.timeStamp - oldestMouseMoveEvent.timeStamp;
+  if (time2 === 0) return zeroPoint;
   return {
-    x: deltaX / time22 * 1e3,
-    y: deltaY / time22 * 1e3,
+    x: deltaX / time2 * 1e3,
+    y: deltaY / time2 * 1e3,
   };
 }
 function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnimation,) {
@@ -28331,36 +28873,36 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
   // eslint-disable-next-line react-hooks/exhaustive-deps
   [offset,],);
 }
-var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScroll2(props, forwardedRef,) {
+var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     scrollBarVisible = false,
     dragEnabled = true,
     contentOffsetX = 0,
     contentOffsetY = 0,
-    contentWidth,
-    contentHeight,
+    contentWidth: _contentWidth,
+    contentHeight: _contentHeight,
     children,
     resetOffset,
     onScroll,
     className,
     // Not (yet) supported
-    directionLock = false,
-    wheelEnabled = true,
-    scrollAnimate,
-    dragTransition,
-    dragMomentum,
-    dragElastic,
-    overdragEnabled = true,
-    onScrollStart,
-    onScrollEnd,
-    onDragStart,
-    onDrag,
-    onDragEnd,
-    onUpdate,
-    onDirectionLock,
+    directionLock: _directionLock = false,
+    wheelEnabled: _wheelEnabled = true,
+    scrollAnimate: _scrollAnimate,
+    dragTransition: _dragTransition,
+    dragMomentum: _dragMomentum,
+    dragElastic: _dragElastic,
+    overdragEnabled: _overdragEnabled = true,
+    onScrollStart: _onScrollStart,
+    onScrollEnd: _onScrollEnd,
+    onDragStart: _onDragStart,
+    onDrag: _onDrag,
+    onDragEnd: _onDragEnd,
+    onUpdate: _onUpdate,
+    onDirectionLock: _onDirectionLock,
     layoutId: specificLayoutId,
-    native,
+    native: _native,
     // Rest
     ...containerProps
   } = props;
@@ -28368,7 +28910,7 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
     specificLayoutId,
     postfix: 'scroll',
   },);
-  const fallbackRef = React__default.useRef(null,);
+  const fallbackRef = React4.useRef(null,);
   const ref = forwardedRef || fallbackRef;
   const {
     cancelEmulatedTouchScrollAnimation,
@@ -28377,7 +28919,7 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
     injectComponentCSSRules();
   }, [],);
   const isInTarget = useIsInCurrentNavigationTarget();
-  const previousIsInTargetRef = React__default.useRef(isInTarget,);
+  const previousIsInTargetRef = React4.useRef(isInTarget,);
   const updateScrollOffsetHandler = () => {
     if (!resetOffset) return;
     const previousIsTarget = previousIsInTargetRef.current;
@@ -28398,25 +28940,25 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
   useIsomorphicLayoutEffect2(updateScrollOffsetHandler, [isInTarget,],);
   useUpdateScrollOffset(ref, 'scrollLeft', contentOffsetX, cancelEmulatedTouchScrollAnimation,);
   useUpdateScrollOffset(ref, 'scrollTop', contentOffsetY, cancelEmulatedTouchScrollAnimation,);
-  const size2 = !containerProps.__fromCanvasComponent
+  const size = !containerProps.__fromCanvasComponent
     ? {
       width: containerProps.__fromCodeComponentNode ? '100%' : containerProps.width,
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ _jsxs(FrameWithMotion, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion, {
     ref,
     'data-framer-component-type': 'NativeScroll',
     background: 'none',
     ...containerProps,
-    ...size2,
+    ...size,
     onScroll,
     layoutId,
     onBeforeLayoutMeasure: updateScrollOffsetHandler,
     layoutScroll: true,
     className: cx(className, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
-      /* @__PURE__ */ _jsx5(EmptyState, {
+      /* @__PURE__ */ jsx(EmptyState, {
         children,
         size: {
           width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -28431,14 +28973,14 @@ var NativeScroll = /* @__PURE__ */ React__default.forwardRef(function NativeScro
   },);
 },);
 var Scroll = /* @__PURE__ */ (() => {
-  const ScrollInner = React__default.forwardRef(function ScrollInner2(props, forwardedRef,) {
+  const ScrollInner = React4.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
-      return /* @__PURE__ */ _jsx5(NativeScroll, {
+      return /* @__PURE__ */ jsx(NativeScroll, {
         ref: forwardedRef,
         ...props,
       },);
     } else {
-      return /* @__PURE__ */ _jsx5(EmulatedScroll, {
+      return /* @__PURE__ */ jsx(EmulatedScroll, {
         ref: forwardedRef,
         ...props,
       },);
@@ -28627,14 +29169,14 @@ function createData(defaultState2, actions,) {
 var initialState = {
   update: 0,
 };
-var DataObserverContext = /* @__PURE__ */ React__default.createContext({
+var DataObserverContext = /* @__PURE__ */ React4.createContext({
   update: NaN,
 },);
 function useObserveData() {
-  const context = React__default.useContext(DataObserverContext,);
+  const context = React4.useContext(DataObserverContext,);
   return !isNaN(context.update,);
 }
-var DataObserver = class extends Component2 {
+var DataObserver = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'observers', [],);
@@ -28666,7 +29208,7 @@ var DataObserver = class extends Component2 {
       const observer2 = Data.addObserver(d, this.observer,);
       this.observers.push(observer2,);
     },);
-    return /* @__PURE__ */ _jsx5(DataObserverContext.Provider, {
+    return /* @__PURE__ */ jsx(DataObserverContext.Provider, {
       value: {
         ...this.state,
       },
@@ -28700,7 +29242,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component14, override,) {
+function WithOverride(Component15, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext3(DataObserverContext,);
@@ -28709,18 +29251,18 @@ function WithOverride(Component14, override,) {
       style,
       ...rest
     } = props;
-    return /* @__PURE__ */ _jsx5(Component14, {
+    return /* @__PURE__ */ jsx(Component15, {
       ...rest,
       ...overrideProps,
       _initialStyle: style,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component14,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component14.displayName || Component14.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component15,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component15.displayName || Component15.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
-var prefixLength = prefix.length;
+var prefixLength = /* @__PURE__ */ (() => prefix.length)();
 function extractPrefixedProps(props, keys3,) {
   const result = {};
   const rest = {};
@@ -28787,7 +29329,7 @@ function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({
     values: makeFXValues(enabled ? values : void 0,),
   }));
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (enabled) return;
     for (const key7 of effectValuesKeys) {
       const value = defaultFXValues[key7];
@@ -28823,7 +29365,7 @@ function useLoop({
   const effect = useConstant2(() => ({
     values: makeFXValues(),
   }));
-  const mirrorStateRef = React__default.useRef(false,);
+  const mirrorStateRef = React4.useRef(false,);
   const delay2 = useDelay();
   const animateValues = async () => {
     if (!loop) return;
@@ -28859,7 +29401,7 @@ function useLoop({
     },);
     mirrorStateRef.current = false;
   }, [effect,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (loopEffectEnabled && loop) {
       start();
     } else {
@@ -28883,14 +29425,14 @@ function useParallax(options, ref, visibilityStyle,) {
     adjustPosition = false,
     parallaxTransformEnabled,
   } = options;
-  const originalPosition = React__default.useRef(null,);
+  const originalPosition = React4.useRef(null,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const transform2 = React__default.useCallback((yValue) => {
+  const transform2 = React4.useCallback((yValue) => {
     if (originalPosition.current === null) return 0;
     if (speed === 100) return 0;
     return parallaxTransform(yValue, originalPosition.current, speed, offset, adjustPosition,);
   }, [originalPosition, speed, offset, adjustPosition,],);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     frame.read(() => {
       var _a, _b;
       originalPosition.current = ((_b = (_a = ref.current) == null ? void 0 : _a.getBoundingClientRect()) == null ? void 0 : _b.top) ?? 0;
@@ -29080,7 +29622,7 @@ function useScrollDirectionChange(scrollDirection, cb, options = {},) {
     repeat = true,
     enabled = true,
   } = options;
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!direction || !enabled) return;
     let lastOffset = void 0;
     let directionChangeOffset = 0;
@@ -29178,7 +29720,7 @@ function useAnimationVariants({
   animate: animateVariant2,
   ...defaultStyles
 },) {
-  return React__default.useMemo(() => ({
+  return React4.useMemo(() => ({
     initial: enter ?? makeStyle({
       ...defaultStyles,
       opacity: opacity ?? targetOpacity ?? 1,
@@ -29195,13 +29737,13 @@ function useStyleAppearEffect(options, ref,) {
   const variants = useAnimationVariants(options,);
   const enabled = options.styleAppearEffectEnabled;
   const effect = useFXValues(enabled ? variants.initial : variants.animate, enabled,);
-  const playState = React__default.useRef({
+  const playState = React4.useRef({
     isPlaying: false,
     scheduledAppearState: void 0,
     lastAppearState: !options.styleAppearEffectEnabled,
   },);
-  const animation = React__default.useRef();
-  const runAnimation = React__default.useCallback(async ({
+  const animation = React4.useRef();
+  const runAnimation = React4.useCallback(async ({
     transition,
     ...target
   }, fromInitial,) => {
@@ -29254,7 +29796,7 @@ function useStyleAppearEffect(options, ref,) {
     },
   },);
   const animateWithScrollInfo = options.targets && enabled && !options.scrollDirection;
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!animateWithScrollInfo) return;
     const playedState = {
       initial: true,
@@ -29318,8 +29860,8 @@ var defaultRanges2 = () => ({
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
-  const springs = React__default.useRef({},);
-  React__default.useEffect(() => {
+  const springs = React4.useRef({},);
+  React4.useEffect(() => {
     if (spring2 === void 0) return;
     for (const key7 of objectKeys(values,)) {
       const m2 = values[key7];
@@ -29386,7 +29928,7 @@ function useStyleTransform({
 }, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     if (!styleTransformEffectEnabled || !transformTargets) return;
     if (transformTrigger !== 'onScrollTarget') {
       const outputRange = createPageOutputRange(transformTargets,);
@@ -29494,10 +30036,10 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList(value,) {
   return isString22(value,) || Array.isArray(value,);
 }
-var withFX = (Component14) =>
-  React__default.forwardRef((props, forwardedRef,) => {
+var withFX = (Component15) =>
+  React4.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
-      return /* @__PURE__ */ _jsx5(Component14, {
+      return /* @__PURE__ */ jsx(Component15, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -29505,10 +30047,10 @@ var withFX = (Component14) =>
         ref: forwardedRef,
       },);
     }
-    if (RenderTarget.current() === 'CANVAS') {
+    if (RenderTarget.current() === RenderTarget.canvas) {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ _jsx5(Component14, {
+      return /* @__PURE__ */ jsx(Component15, {
         ...props,
         animate: animate4,
         initial: initial2,
@@ -29516,7 +30058,7 @@ var withFX = (Component14) =>
         ref: forwardedRef,
       },);
     }
-    const fallbackRef = React__default.useRef(null,);
+    const fallbackRef = React4.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const {
       parallax = {},
@@ -29548,7 +30090,7 @@ var withFX = (Component14) =>
     const {
       values: loopValues,
     } = useLoop(loop,);
-    const fxValues = React__default.useMemo(() => {
+    const fxValues = React4.useMemo(() => {
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
         opacity: [
@@ -29611,7 +30153,7 @@ var withFX = (Component14) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ _jsx5(Component14, {
+    return /* @__PURE__ */ jsx(Component15, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -29635,7 +30177,7 @@ function ComponentPresetsProvider({
   if (!isEqual(presets, lastPresets.current, false,)) {
     lastPresets.current = presets;
   }
-  return /* @__PURE__ */ _jsx5(Context.Provider, {
+  return /* @__PURE__ */ jsx(Context.Provider, {
     value: lastPresets.current,
     children,
   },);
@@ -29685,15 +30227,15 @@ function createHook(forwardedRef,) {
       );
     }
     preventNextCall = true;
-    if (React.Children.count(children,) > 1 && forwardedRef) {
+    if (React2.Children.count(children,) > 1 && forwardedRef) {
       if (false) {
         throw new ReferenceError('useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',);
       }
       state.forwardedRef = void 0;
       state.ref = state.childRef;
     }
-    return React.Children.map(children, (child) => {
-      if (React.isValidElement(child,)) {
+    return React2.Children.map(children, (child) => {
+      if (React2.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state.forwardedRef, ownRef,);
         const newProps = state.ref !== ownRef
@@ -29702,13 +30244,13 @@ function createHook(forwardedRef,) {
             ref: state.ref,
           }
           : props;
-        return React.cloneElement(child, newProps,);
+        return React2.cloneElement(child, newProps,);
       }
       return child;
     },);
   }
   const cloneAsElement = function cloneAsElement2(children, props,) {
-    return /* @__PURE__ */ _jsx5(Fragment, {
+    return /* @__PURE__ */ jsx(Fragment, {
       children: cloneChildrenWithPropsAndRef(children, props,),
     },);
   };
@@ -29747,30 +30289,30 @@ function setRef(ref, value,) {
 function isMutableRef(ref,) {
   return isObject2(ref,) && 'current' in ref;
 }
-var ComponentViewportContext = /* @__PURE__ */ React__default.createContext({},);
+var ComponentViewportContext = /* @__PURE__ */ React4.createContext({},);
 function useComponentViewport() {
-  return React__default.useContext(ComponentViewportContext,);
+  return React4.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = /* @__PURE__ */ React__default.forwardRef(({
+var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(({
   width,
   children,
   ...rest
 }, ref,) => {
-  const componentViewport = React__default.useMemo(() => {
+  const componentViewport = React4.useMemo(() => {
     return {
       width,
     };
   }, [width,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
-  return /* @__PURE__ */ _jsx5(ComponentViewportContext.Provider, {
+  return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
     value: componentViewport,
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component14) =>
-  React__default.forwardRef((props, ref,) => {
+var withGeneratedLayoutId = (Component15) =>
+  React4.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ _jsx5(Component14, {
+    return /* @__PURE__ */ jsx(Component15, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -29778,7 +30320,7 @@ var withGeneratedLayoutId = (Component14) =>
       ref,
     },);
   },);
-var ContainerErrorBoundary = class extends React__default.Component {
+var ContainerErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {
@@ -29801,27 +30343,27 @@ var ContainerErrorBoundary = class extends React__default.Component {
     return hasError ? null : children;
   }
 };
-var Providers = /* @__PURE__ */ React__default.forwardRef(({
+var Providers = /* @__PURE__ */ React4.forwardRef(({
   children,
   layoutId,
   ...props
 }, ref,) => {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
-  return /* @__PURE__ */ _jsx5(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     layoutId: outerLayoutId,
     ...props,
     ref,
-    children: /* @__PURE__ */ _jsx5(ComponentContainerContext.Provider, {
+    children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
       value: true,
-      children: /* @__PURE__ */ _jsx5(AutomaticLayoutIds, {
+      children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
         enabled: false,
-        children: /* @__PURE__ */ _jsx5(LayoutGroup, {
+        children: /* @__PURE__ */ jsx(LayoutGroup, {
           id: layoutId ?? '',
           inherit: 'id',
-          children: /* @__PURE__ */ _jsx5(ContainerErrorBoundary, {
-            children: React__default.Children.map(children, (child) => {
-              return React__default.isValidElement(child,)
-                ? React__default.cloneElement(child, {
+          children: /* @__PURE__ */ jsx(ContainerErrorBoundary, {
+            children: React4.Children.map(children, (child) => {
+              return React4.isValidElement(child,)
+                ? React4.cloneElement(child, {
                   layoutId,
                 },)
                 : child;
@@ -29833,12 +30375,7 @@ var Providers = /* @__PURE__ */ React__default.forwardRef(({
   },);
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(Providers,);
-var StyleSheetContext = /* @__PURE__ */ React__default.createContext(void 0,);
-if (isBrowser2()) {
-  for (const node of document.querySelectorAll('style[data-framer-css-ssr]',)) {
-    document.head.appendChild(node,);
-  }
-}
+var StyleSheetContext = /* @__PURE__ */ React4.createContext(void 0,);
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   var _a;
   if (!isBrowser2()) return /* @__PURE__ */ new Set();
@@ -29848,60 +30385,60 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
-var styleTagSSRMarker = {
-  'data-framer-css-ssr': true,
-};
-var withCSS = (Component14, escapedCSS, componentSerializationId,) =>
-  React__default.forwardRef((props, ref,) => {
+var framerCSSMarker = 'data-framer-css-ssr';
+var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
+  React4.forwardRef((props, ref,) => {
     const {
       sheet,
-      cache: cache3,
-    } = React__default.useContext(StyleSheetContext,) ?? {};
+      cache: cache2,
+    } = React4.useContext(StyleSheetContext,) ?? {};
     if (!isBrowser2()) {
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ _jsxs(Fragment, {
+      return /* @__PURE__ */ jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ _jsx5('style', {
-            ...styleTagSSRMarker,
+          /* @__PURE__ */ jsx('style', {
+            ...{
+              [framerCSSMarker]: true,
+            },
             'data-framer-component': componentSerializationId,
             dangerouslySetInnerHTML: {
               __html: concatenatedCSS,
             },
           },),
-          /* @__PURE__ */ _jsx5(Component14, {
+          /* @__PURE__ */ jsx(Component15, {
             ...props,
             ref,
           },),
         ],
       },);
     }
-    React__default.useInsertionEffect(() => {
+    React4.useInsertionEffect(() => {
       if (componentSerializationId && componentsWithServerRenderedStyles.has(componentSerializationId,)) return;
       const css = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
-      css.forEach((rule) => rule && injectCSSRule(rule, sheet, cache3,));
+      css.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ _jsx5(Component14, {
+    return /* @__PURE__ */ jsx(Component15, {
       ...props,
       ref,
     },);
   },);
-var CustomCursorContext = /* @__PURE__ */ React__default.createContext({
+var CustomCursorContext = /* @__PURE__ */ React4.createContext({
   onRegisterCursors: () => () => {},
   registerCursors: () => {},
 },);
 var replaceCursorClassName = 'framer-cursor-none';
 var cursorComponentClassName = 'framer-pointer-events-none';
-var CustomCursorContextProvider = /* @__PURE__ */ React__default.memo(function CustomCursorList({
+var CustomCursorContextProvider = /* @__PURE__ */ React4.memo(function CustomCursorList({
   children,
 },) {
   const value = useConstant2(() => {
-    const events2 = /* @__PURE__ */ new Set();
+    const events = /* @__PURE__ */ new Set();
     let allCursors = {};
     return {
       onRegisterCursors: (callback) => {
         callback(allCursors,);
-        events2.add(callback,);
-        return () => events2.delete(callback,);
+        events.add(callback,);
+        return () => events.delete(callback,);
       },
       registerCursors: (cursors) => {
         const nextCursors = {};
@@ -29910,28 +30447,30 @@ var CustomCursorContextProvider = /* @__PURE__ */ React__default.memo(function C
           if (cursor) nextCursors[key7] = cursor;
         }
         allCursors = nextCursors;
-        for (const callback of events2) callback(allCursors,);
+        for (const callback of events) callback(allCursors,);
       },
     };
   },);
   const shouldReduceMotion = useReducedMotionConfig();
-  return /* @__PURE__ */ _jsxs(CustomCursorContext.Provider, {
+  return /* @__PURE__ */ jsxs(CustomCursorContext.Provider, {
     value,
-    children: [children, !shouldReduceMotion && /* @__PURE__ */ _jsx5(CustomCursorComponent, {},),],
+    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {},),],
   },);
 },);
-var CustomCursorHost = /* @__PURE__ */ withCSS(CustomCursorContextProvider, [
-  `.${replaceCursorClassName}, .${replaceCursorClassName} * { cursor: none !important; }`,
-  `.${cursorComponentClassName}, .${cursorComponentClassName} * { pointer-events: none !important; }`,
-],);
-var staticCursorStyle = {
+var CustomCursorHost =
+  /* @__PURE__ */ (() =>
+    withCSS(CustomCursorContextProvider, [
+      `.${replaceCursorClassName}, .${replaceCursorClassName} * { cursor: none !important; }`,
+      `.${cursorComponentClassName}, .${cursorComponentClassName} * { pointer-events: none !important; }`,
+    ],))();
+var staticCursorStyle = /* @__PURE__ */ (() => ({
   position: 'fixed',
   top: 0,
   left: 0,
   zIndex: 12 + 1,
   // Max framer z-index + 1
   pointerEvents: 'none',
-};
+}))();
 function customCursorReplacesNativeCursor(cursor,) {
   if (!cursor) return false;
   if (cursor.placement || cursor.alignment) return false;
@@ -29984,21 +30523,21 @@ function isEmptyObject(object,) {
   for (const _ in object) return false;
   return true;
 }
-var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomCursorComponent2() {
+var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorComponent2() {
   const {
     onRegisterCursors,
   } = useContext3(CustomCursorContext,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
-  const cursorRef = React__default.useRef(null,);
-  const internalState = React__default.useRef({
+  const cursorRef = React4.useRef(null,);
+  const internalState = React4.useRef({
     cursors: {},
     cursorHash: void 0,
   },);
   const forceRender = useForceUpdate3();
   const hasCursors = !isEmptyObject(internalState.current.cursors,);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     let x2 = 0;
     let y2 = 0;
     function updateValues() {
@@ -30051,7 +30590,7 @@ var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomC
       cancelFrame(updateVariant,);
     };
   }, [opacity, pointerX, pointerY, hasCursors, forceRender,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     function hideCursor() {
       animate(opacity, 0, {
         type: 'tween',
@@ -30065,7 +30604,7 @@ var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomC
       safeWindow.removeEventListener('blur', hideCursor,);
     };
   }, [opacity,],);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
       internalState.current.cursorHash = getCursorHash(pointerX.get(), pointerY.get(),);
@@ -30083,7 +30622,7 @@ var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomC
   } = internalState.current;
   const cursor = cursorHash ? cursors[cursorHash] : null;
   const replaceNativeCursor = customCursorReplacesNativeCursor(cursor,);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor,],);
   const Cursor = cursor == null ? void 0 : cursor.component;
@@ -30102,12 +30641,12 @@ var CustomCursorComponent = /* @__PURE__ */ React__default.memo(function CustomC
   },);
   const alignment = cursor == null ? void 0 : cursor.alignment;
   const placement = cursor == null ? void 0 : cursor.placement;
-  const transformTemplate2 = React__default.useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
+  const transformTemplate2 = React4.useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
     alignment,
     placement,
   ],);
   if (!cursor || !Cursor) return null;
-  return /* @__PURE__ */ _jsx5(Cursor, {
+  return /* @__PURE__ */ jsx(Cursor, {
     transformTemplate: transformTemplate2,
     style: {
       ...staticCursorStyle,
@@ -30126,7 +30665,7 @@ function useCustomCursors(webPageCursors,) {
     registerCursors,
   } = useContext3(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     registerCursors(cursors,);
   }, [cursors, registerCursors,],);
 }
@@ -30281,8 +30820,8 @@ function invertPlacement(placement,) {
 function preferredOffset(point2, length, max, collisionDetectionPadding = 0,) {
   const min = Math.max(point2, collisionDetectionPadding,);
   if (point2 < min) return min;
-  const size2 = length + collisionDetectionPadding;
-  if (min + size2 > max) return max - size2;
+  const size = length + collisionDetectionPadding;
+  if (min + size > max) return max - size;
   return min;
 }
 function collisionAxis(placement, rect, windowSize,) {
@@ -30526,15 +31065,15 @@ function updatePosition(floatingPositionRef, position, rect,) {
     top: ((rect == null ? void 0 : rect.y) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
   },);
 }
-var FloatingStackingContext = /* @__PURE__ */ React__default.createContext(/* @__PURE__ */ new Set(),);
+var FloatingStackingContext = /* @__PURE__ */ React4.createContext(/* @__PURE__ */ new Set(),);
 function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
   safeArea,
   onDismiss,
 },) {
   const descendantStackingContext = useConstant2(() => /* @__PURE__ */ new Set());
-  const ancestorStackingContext = React__default.useContext(FloatingStackingContext,);
+  const ancestorStackingContext = React4.useContext(FloatingStackingContext,);
   const [isPresent2, safeToRemove,] = usePresence();
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (isPresent2) {
       if (!floatingPositionRef.current) return;
       floatingPositionRef.current.style.pointerEvents = '';
@@ -30546,7 +31085,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
       safeToRemove();
     }
   }, [isPresent2, floatingPositionRef, ancestorStackingContext,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!safeArea) {
       const handleEscape = (e) => {
         if (e.key !== 'Escape') return;
@@ -30623,7 +31162,7 @@ function childrenWithOrigin(child, {
     originX: x,
     originY: y,
   };
-  return React__default.cloneElement(child, {
+  return React4.cloneElement(child, {
     style,
   },);
 }
@@ -30643,11 +31182,11 @@ function Floating({
   onDismiss,
   ...rest
 },) {
-  const floatingPositionRef = React__default.useRef(null,);
-  const safeAreaRef = React__default.useRef(null,);
-  const contentRef = React__default.useRef(null,);
+  const floatingPositionRef = React4.useRef(null,);
+  const safeAreaRef = React4.useRef(null,);
+  const contentRef = React4.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
-  React__default.useLayoutEffect(() => {
+  React4.useLayoutEffect(() => {
     if (!isRef(anchorRef,) || !contentRef.current || !placement || !alignment) return;
     const {
       position,
@@ -30710,7 +31249,7 @@ function Floating({
     onDismiss,
   },);
   return ReactDOM.createPortal(
-    /* @__PURE__ */ _jsxs('div', {
+    /* @__PURE__ */ jsxs('div', {
       ref: floatingPositionRef,
       className,
       style: {
@@ -30725,14 +31264,14 @@ function Floating({
       ...rest,
       children: [
         safeArea
-          ? /* @__PURE__ */ _jsx5('div', {
+          ? /* @__PURE__ */ jsx('div', {
             ref: safeAreaRef,
             style: {
               position: 'absolute',
             },
             'data-safearea': true,
           },)
-          : /* @__PURE__ */ _jsx5('div', {
+          : /* @__PURE__ */ jsx('div', {
             style: {
               position: 'fixed',
               inset: 0,
@@ -30740,9 +31279,9 @@ function Floating({
             'aria-hidden': true,
             onMouseDown: onDismiss,
           },),
-        /* @__PURE__ */ _jsx5(FloatingStackingContext.Provider, {
+        /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
           value: descendantContext,
-          children: /* @__PURE__ */ _jsx5('div', {
+          children: /* @__PURE__ */ jsx('div', {
             ref: contentRef,
             children: childrenWithOrigin(children, origin,),
           },),
@@ -30752,7 +31291,7 @@ function Floating({
     document.querySelector(portalSelector,) ?? document.body,
   );
 }
-var GeneratedComponentContext = /* @__PURE__ */ React__default.createContext(void 0,);
+var GeneratedComponentContext = /* @__PURE__ */ React4.createContext(void 0,);
 var LazyValue = class {
   constructor(resolver,) {
     this.resolver = resolver;
@@ -30903,13 +31442,13 @@ var noLocale = {};
 var resolveSlugCache = /* @__PURE__ */ new WeakMap();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
   var _a, _b;
-  const cache3 =
+  const cache2 =
     (_b = (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get(activeLocale ?? noLocale,)) == null
         ? void 0
         : _a.get(unresolvedSlug.collectionId,)) == null
       ? void 0
       : _b.get(unresolvedSlug.collectionItemId,);
-  if (cache3) return cache3;
+  if (cache2) return cache2;
   const collectionCache = resolveSlugCache.get(activeLocale ?? noLocale,) ?? /* @__PURE__ */ new Map();
   resolveSlugCache.set(activeLocale ?? noLocale, collectionCache,);
   const collectionItemCache = collectionCache.get(unresolvedSlug.collectionId,) ?? /* @__PURE__ */ new Map();
@@ -30960,10 +31499,10 @@ function linkFromFramerPageLink(link,) {
   };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
-var PathVariablesContext = React__default.createContext(void 0,);
+var PathVariablesContext = /* @__PURE__ */ React4.createContext(void 0,);
 function useImplicitPathVariables() {
   var _a;
-  const contextPathVariables = React__default.useContext(PathVariablesContext,);
+  const contextPathVariables = React4.useContext(PathVariablesContext,);
   const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
@@ -30988,7 +31527,7 @@ function linkMatchesRoute(route, {
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = React__default.useContext(PathVariablesContext,);
+  const contextPathVariables = React4.useContext(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString22(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
@@ -31106,7 +31645,7 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
-var Link = /* @__PURE__ */ React__default.forwardRef(({
+var Link = /* @__PURE__ */ React4.forwardRef(({
   children,
   href,
   openInNewTab,
@@ -31120,7 +31659,7 @@ var Link = /* @__PURE__ */ React__default.forwardRef(({
     activeLocale,
   } = useLocaleInfo();
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  const props = React__default.useMemo(() => {
+  const props = React4.useMemo(() => {
     var _a;
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
@@ -31247,15 +31786,15 @@ function PageRoot({
   enableImproveInpDuringHydration,
   shouldMarkHydrationEnd = false,
 },) {
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ _jsx5(MotionConfig, {
+    return /* @__PURE__ */ jsx(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ _jsx5(CustomCursorHost, {
-        children: /* @__PURE__ */ _jsx5(Router, {
+      children: /* @__PURE__ */ jsx(CustomCursorHost, {
+        children: /* @__PURE__ */ jsx(Router, {
           initialRoute: routeId,
           initialPathVariables: pathVariables,
           initialLocaleId: localeId,
@@ -31274,12 +31813,12 @@ function PageRoot({
       },),
     },);
   } else {
-    const Wrapper = includeDataObserver ? DataObserver : React__default.Fragment;
-    return /* @__PURE__ */ _jsx5(Wrapper, {
-      children: /* @__PURE__ */ _jsx5(RoutesProvider, {
+    const Wrapper = includeDataObserver ? DataObserver : React4.Fragment;
+    return /* @__PURE__ */ jsx(Wrapper, {
+      children: /* @__PURE__ */ jsx(RoutesProvider, {
         routes,
-        children: /* @__PURE__ */ _jsx5(NavigationWrapper, {
-          children: React__default.isValidElement(RootComponent,) ? RootComponent : React__default.createElement(
+        children: /* @__PURE__ */ jsx(NavigationWrapper, {
+          children: React4.isValidElement(RootComponent,) ? RootComponent : React4.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
             RootComponent,
@@ -31293,18 +31832,18 @@ function PageRoot({
   }
 }
 function cloneChildrenWithProps(children, props, asNode,) {
-  const cloned = React.Children.map(children, (child) => {
-    if (React.isValidElement(child,)) {
-      return React.cloneElement(child, props,);
+  const cloned = React2.Children.map(children, (child) => {
+    if (React2.isValidElement(child,)) {
+      return React2.cloneElement(child, props,);
     }
     return child;
   },);
   if (asNode) return cloned;
-  return /* @__PURE__ */ _jsx5(Fragment, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children: cloned,
   },);
 }
-var SSRParentVariantsContext = /* @__PURE__ */ React__default.createContext(void 0,);
+var SSRParentVariantsContext = /* @__PURE__ */ React4.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function renderBranchedChildrenFromPropertyOverrides(
   overrides,
@@ -31316,9 +31855,9 @@ function renderBranchedChildrenFromPropertyOverrides(
   cloneChildren,
   activeVariantId,
 ) {
-  const childrenArray = React__default.Children.toArray(children,);
+  const childrenArray = React4.Children.toArray(children,);
   const child = childrenArray[0];
-  if (childrenArray.length !== 1 || !React__default.isValidElement(child,)) {
+  if (childrenArray.length !== 1 || !React4.isValidElement(child,)) {
     console.warn('PropertyOverrides: expected exactly one React element for a child', children,);
     return cloneChildren(children, props,);
   }
@@ -31364,7 +31903,7 @@ function renderBranchedChildrenFromPropertyOverrides(
       // comparing arrays, so it might not really be an optimization. And since it's just a context, it doesn't
       // affect the size of the generated HTML.
       /* @__PURE__ */
-      _jsx5(SSRParentVariantsContext.Provider, {
+      jsx(SSRParentVariantsContext.Provider, {
         value: new Set(variants,),
         children: cloneChildren(
           child,
@@ -31379,7 +31918,7 @@ function renderBranchedChildrenFromPropertyOverrides(
     const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
     if (hiddenClassNames.length) {
       assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-      element = /* @__PURE__ */ _jsx5('div', {
+      element = /* @__PURE__ */ jsx('div', {
         className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
         children: element,
       }, key7,);
@@ -31389,17 +31928,19 @@ function renderBranchedChildrenFromPropertyOverrides(
     renderedBranches.push(element,);
   }
   assert(!activeVariantId || renderedBranches.length === 1, 'Must render exactly one branch when activeVariantId is given',);
-  return /* @__PURE__ */ _jsxs(Fragment, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      !parentVariants && !isBrowser2() && /* @__PURE__ */ _jsx5('style', {
-        ...styleTagSSRMarker,
+      !parentVariants && !isBrowser2() && /* @__PURE__ */ jsx('style', {
+        ...{
+          [framerCSSMarker]: true,
+        },
         children: displayContents,
       },),
       renderedBranches,
     ],
   },);
 }
-var SSRVariants = /* @__PURE__ */ React__default.forwardRef(function SSRVariants2({
+var SSRVariants = /* @__PURE__ */ React4.forwardRef(function SSRVariants2({
   id: _nodeId,
   children,
   ...props
@@ -31442,15 +31983,15 @@ function propsForBreakpoint(variant, props, overrides,) {
 var noopSubscribe = () => () => {};
 var returnTrue = () => true;
 var returnFalse = () => false;
-var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(function PropertyOverrides2({
+var PropertyOverrides = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides2({
   breakpoint,
   overrides,
   children,
   ...props
 }, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  const parentVariants = React__default.useContext(SSRParentVariantsContext,);
-  const isHydrationOrSSR = React__default.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
+  const parentVariants = React4.useContext(SSRParentVariantsContext,);
+  const isHydrationOrSSR = React4.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
   const action = useConstant2(() => {
     if (isHydrationOrSSR) {
       if (isBrowser2()) {
@@ -31462,7 +32003,7 @@ var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(function Prope
       return 0;
     }
   },);
-  const generatedComponentContext = React__default.useContext(GeneratedComponentContext,);
+  const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
   if (!generatedComponentContext) {
     console.warn('PropertyOverrides is missing GeneratedComponentContext',);
     return cloneWithRefs(children, props,);
@@ -31505,7 +32046,7 @@ var PropertyOverrides = /* @__PURE__ */ React__default.forwardRef(function Prope
       assertNever(action,);
   }
 },);
-var ResolveLinks = /* @__PURE__ */ React.forwardRef(function ResolveLinksInner({
+var ResolveLinks = /* @__PURE__ */ React2.forwardRef(function ResolveLinksInner({
   links,
   children,
   ...rest
@@ -32954,8 +33495,8 @@ function getTypeCastType(expression,) {
       throw new Error(`Unsupported data type: ${expression.dataType}`,);
   }
 }
-function stringifyExecutionTime(self, total,) {
-  return `(self: ${self}ms${total ? `, total: ${total}ms` : ''})`;
+function stringifyExecutionTime(self2, total,) {
+  return `(self: ${self2}ms${total ? `, total: ${total}ms` : ''})`;
 }
 function stringifyItems(items,) {
   return `(items: ${items})`;
@@ -33394,7 +33935,7 @@ function stringifyQuery(query,) {
   }
   return autoIndentSql(queryString,);
 }
-var log = getLogger('query-engine',);
+var log = /* @__PURE__ */ getLogger('query-engine',);
 function getDatabaseCollection({
   data: data2,
 }, locale,) {
@@ -33723,13 +34264,13 @@ function useActiveVariantCallback(baseVariant,) {
   useOnCurrentTargetChange(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   },);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   }, [pendingPromises, pendingTimers,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     rejectPending(pendingTimers, pendingPromises,);
   }, [baseVariant, pendingPromises, pendingTimers,],);
-  return React__default.useRef({
+  return React4.useRef({
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */
@@ -33752,13 +34293,13 @@ function useActiveVariantCallback(baseVariant,) {
 }
 function useActiveTargetCallback() {
   const value = useActiveVariantCallback(void 0,);
-  return React__default.useRef({
+  return React4.useRef({
     activeTargetCallback: value.activeVariantCallback,
     delay: value.delay,
   },).current;
 }
 function useAddVariantProps(baseVariant, gestureVariant, variantProps2,) {
-  return React__default.useCallback((id3) => {
+  return React4.useCallback((id3) => {
     var _a, _b, _c;
     if (!variantProps2) return {};
     if (!baseVariant) return {};
@@ -33827,16 +34368,16 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
     setActiveVariantInstant(baseVariant.current,);
   }, [],);
   useEffect(() => {
-    const callbacks2 = [];
+    const callbacks = [];
     for (const [variant, query,] of Object.entries(mediaQueries,)) {
       const mql = safeWindow.matchMedia(query,);
       const callback = (event) => {
         if (event.matches) setActiveVariantInstant(variant,);
       };
       addMQLCallback(mql, callback,);
-      callbacks2.push([mql, callback,],);
+      callbacks.push([mql, callback,],);
     }
-    return () => callbacks2.forEach(([mql, callback,],) => removeMQLCallback(mql, callback,));
+    return () => callbacks.forEach(([mql, callback,],) => removeMQLCallback(mql, callback,));
   }, [mediaQueries, setActiveVariantInstant,],);
   return [baseVariant.current, basePropsVariant.current,];
 }
@@ -33894,7 +34435,7 @@ function useDataRecord(collection, variables,) {
 }
 function useDynamicRefs() {
   const map = useConstant2(() => /* @__PURE__ */ new Map());
-  return React__default.useCallback((key7) => {
+  return React4.useCallback((key7) => {
     const existing = map.get(key7,);
     if (existing) return existing;
     const ref = createRef();
@@ -33982,7 +34523,7 @@ function createGamepadPoller() {
   };
 }
 var gamepadPoller = /* @__PURE__ */ createGamepadPoller();
-var GamepadContext = /* @__PURE__ */ React__default.createContext(gamepadPoller,);
+var GamepadContext = /* @__PURE__ */ React4.createContext(gamepadPoller,);
 function getGamepadInputs() {
   let firstConnectedGamepad = null;
   const gamepads = navigator.getGamepads();
@@ -34028,16 +34569,16 @@ function useGamepad(input, callback, {
   mapping,
   on,
 } = {},) {
-  const context = React__default.useContext(GamepadContext,);
+  const context = React4.useContext(GamepadContext,);
   const settings = useConstant2(() => ({
     mapping: mapping ?? 'standard',
     on: on ?? 'keydown',
   }));
-  const stateRef = React__default.useRef({
+  const stateRef = React4.useRef({
     pressed: false,
     handler: callback,
   },);
-  const cb = React__default.useCallback((gamepad) => {
+  const cb = React4.useCallback((gamepad) => {
     const {
       pressed,
       handler,
@@ -34059,10 +34600,10 @@ function useGamepad(input, callback, {
     }
     return () => context.unregister(cb,);
   }, [],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     return () => context.unregister(cb,);
   }, [cb, context,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     stateRef.current.handler = callback;
   }, [callback,],);
 }
@@ -34087,26 +34628,26 @@ function createShortcutDefinition(shortcut,) {
   };
 }
 function useHotkey(shortcut, callback,) {
-  const inTarget = React__default.useRef(true,);
+  const inTarget = React4.useRef(true,);
   const shortcutDefinition = useConstant2(() => createShortcutDefinition(shortcut,));
   useOnCurrentTargetChange((isCurrentTarget, isOverlayed,) => {
     inTarget.current = isCurrentTarget && !isOverlayed;
     return () => inTarget.current = false;
   },);
-  const eventHandler = React__default.useCallback((event) => {
+  const eventHandler = React4.useCallback((event) => {
     if (!shortcutDefinition) return;
     if (!inTarget.current) return;
     if (!Object.keys(shortcutDefinition,).every((key7) => shortcutDefinition[key7] === asRecord(event,)[key7])) return;
     event.preventDefault();
     callback();
   }, [shortcutDefinition, callback,],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     document.addEventListener('keydown', eventHandler,);
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
 }
 function useIsOnFramerCanvas() {
-  return RenderTarget.current() === 'CANVAS';
+  return RenderTarget.current() === RenderTarget.canvas;
 }
 function useNavigate() {
   const {
@@ -34128,8 +34669,8 @@ function callbackForVariant(map, variant,) {
 function useOnVariantChange(variant, callbackMap,) {
   const isOnFramerCanvas = useIsOnFramerCanvas();
   if (isOnFramerCanvas) return;
-  const isActiveScreenRef = React__default.useRef(true,);
-  const callbackMapRef = React__default.useRef(callbackMap,);
+  const isActiveScreenRef = React4.useRef(true,);
+  const callbackMapRef = React4.useRef(callbackMap,);
   useOnCurrentTargetChange((isCurrent, isOverlayed,) => {
     const isActiveScreen = isCurrent && !isOverlayed;
     if (!isActiveScreenRef.current && isActiveScreen) {
@@ -34138,7 +34679,7 @@ function useOnVariantChange(variant, callbackMap,) {
     }
     isActiveScreenRef.current = isActiveScreen;
   }, [],);
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (isActiveScreenRef.current) {
       const callback = callbackForVariant(callbackMapRef.current, variant,);
       if (callback) callback();
@@ -34153,8 +34694,8 @@ function useOnAppear(callback,) {
 function useOverlayState({
   blockDocumentScrolling = true,
 } = {},) {
-  const [showOverlay, setShowOverlay,] = React__default.useState(false,);
-  const callback = React__default.useCallback((show) => {
+  const [showOverlay, setShowOverlay,] = React4.useState(false,);
+  const callback = React4.useCallback((show) => {
     setShowOverlay(show,);
     if (blockDocumentScrolling === false) return;
     if (show) {
@@ -34163,7 +34704,7 @@ function useOverlayState({
       document.documentElement.style.removeProperty('overflow',);
     }
   }, [blockDocumentScrolling,],);
-  React__default.useEffect(() => () => {
+  React4.useEffect(() => () => {
     if (blockDocumentScrolling === false) return;
     document.documentElement.style.removeProperty('overflow',);
   }, [blockDocumentScrolling,],);
@@ -34175,9 +34716,9 @@ async function componentForRoute(route,) {
     page: routeComponent,
   } = route;
   if (!routeComponent) return;
-  if (React__default.isValidElement(routeComponent,)) return routeComponent;
+  if (React4.isValidElement(routeComponent,)) return routeComponent;
   if (withPreload(routeComponent,)) await routeComponent.preload();
-  return React__default.createElement(routeComponent, {
+  return React4.createElement(routeComponent, {
     key: route.path,
   },);
 }
@@ -34193,7 +34734,7 @@ function usePrototypeNavigate({
     getRoute,
   } = useRouter();
   const onCanvas = useIsOnFramerCanvas();
-  React__default.useEffect(() => {
+  React4.useEffect(() => {
     if (!navigation || onCanvas) return;
     preload == null ? void 0 : preload.forEach((componentOrRoute) => {
       let component;
@@ -34215,12 +34756,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component14 = typeof target === 'string'
+    const Component15 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
-      : React__default.isValidElement(target,)
+      : React4.isValidElement(target,)
       ? target
       : null;
-    if (!Component14) return;
+    if (!Component15) return;
     const {
       appearsFrom,
       backdropColor,
@@ -34229,38 +34770,38 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component14,);
+        navigation.instant(Component15,);
         break;
       case 'fade':
-        navigation.fade(Component14, {
+        navigation.fade(Component15, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component14, {
+        navigation.push(Component15, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component14, {
+        navigation.flip(Component15, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component14, {
+        navigation.magicMotion(Component15, {
           animation,
         },);
         break;
       case 'modal':
-        navigation.modal(Component14, {
+        navigation.modal(Component15, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component14, {
+        navigation.overlay(Component15, {
           appearsFrom,
           backdropColor,
           animation,
@@ -34566,14 +35107,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component14, info,) {
+function withMappedReactProps(Component15, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ _jsx5(Component14, {
+    return /* @__PURE__ */ jsx(Component15, {
       ...props,
     },);
   };
@@ -34614,15 +35155,15 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component14) =>
-  React__default.forwardRef((props, forwardedRef,) => {
-    if (RenderTarget.current() === 'CANVAS') {
-      return /* @__PURE__ */ _jsx5(Component14, {
+var withVariantAppearEffect = (Component15) =>
+  React4.forwardRef((props, forwardedRef,) => {
+    if (RenderTarget.current() === RenderTarget.canvas) {
+      return /* @__PURE__ */ jsx(Component15, {
         ...props,
         ref: forwardedRef,
       },);
     }
-    const fallbackRef = React__default.useRef(null,);
+    const fallbackRef = React4.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const [options, rest,] = extractPrefixedProps(props, keys2,);
     const {
@@ -34635,8 +35176,8 @@ var withVariantAppearEffect = (Component14) =>
       exitTarget,
       scrollDirection,
     } = options;
-    const [activeVariant, setVariant,] = React__default.useState(obscuredVariantId,);
-    const animateState = React__default.useRef(false,);
+    const [activeVariant, setVariant,] = React4.useState(obscuredVariantId,);
+    const animateState = React4.useRef(false,);
     useAppearEffect(ref, (appears) => {
       if (options.targets) return;
       if (options.scrollDirection) return;
@@ -34655,7 +35196,7 @@ var withVariantAppearEffect = (Component14) =>
         y: threshold,
       },
     },);
-    React__default.useEffect(() => {
+    React4.useEffect(() => {
       if (scrollDirection) return;
       if (!targets) return;
       const playedState = {};
@@ -34684,19 +35225,19 @@ var withVariantAppearEffect = (Component14) =>
       repeat: !animateOnce,
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ _jsx5(Component14, {
+      return /* @__PURE__ */ jsx(Component15, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref,
       },);
     } else {
-      return /* @__PURE__ */ _jsx5(Component14, {
+      return /* @__PURE__ */ jsx(Component15, {
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component14) =>
-  React__default.forwardRef(({
+var withVariantFX = (Component15) =>
+  React4.forwardRef(({
     initial,
     animate: animate3,
     exit,
@@ -34712,7 +35253,7 @@ var withVariantFX = (Component14) =>
       forwardedRef ?? ref,
       true,
     );
-    return /* @__PURE__ */ _jsx5(Component14, {
+    return /* @__PURE__ */ jsx(Component15, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -34721,8 +35262,8 @@ var withVariantFX = (Component14) =>
       ref: forwardedRef ?? ref,
     },);
   },);
-var WindowContext = /* @__PURE__ */ React__default.createContext(void 0,);
-var useProvidedWindow = () => React__default.useContext(WindowContext,);
+var WindowContext = /* @__PURE__ */ React4.createContext(void 0,);
+var useProvidedWindow = () => React4.useContext(WindowContext,);
 function isDesignDefinition(d,) {
   return d.type === 'master';
 }
@@ -35466,7 +36007,7 @@ function createVariantName(weight, style,) {
   }
   return `${fontWeightNames[weight]}`;
 }
-var import_process4 = __toESM(require_browser(), 1,);
+var import_process3 = __toESM(require_browser(), 1,);
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
@@ -35640,8 +36181,8 @@ var weightNameToNumber = {
   heavy: 900,
   // Alternative name for "black".
 };
-var weightNames = Object.keys(weightNameToNumber,);
-var allowedVariantsRegex = new RegExp(`^(?:${[...weightNames, 'italic',].join('|',)})`, 'u',);
+var weightNames = /* @__PURE__ */ Object.keys(weightNameToNumber,);
+var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic',].join('|',)})`, 'u',))();
 var FontshareSource = class {
   constructor() {
     __publicField(this, 'name', 'fontshare',/* Fontshare */
@@ -36168,7 +36709,7 @@ var FontStore = class {
         this.loadedSelectors.add(font.selector,);
         return 1;
       case 'framer':
-        if (import_process4.default.env.NODE_ENV !== 'test') {
+        if (import_process3.default.env.NODE_ENV !== 'test') {
           await isFontReady(font.family.name, font.style, font.weight,);
         }
         this.loadedSelectors.add(font.selector,);
@@ -36270,7 +36811,7 @@ function CustomProperties({
   children,
   customProperties,
 },) {
-  return /* @__PURE__ */ _jsx5('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: customProperties,
     children,
   },);
@@ -36314,10 +36855,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
       const {
         RenderPlaceholder,
       } = runtime;
-      return /* @__PURE__ */ _jsx5(FrameWithMotion, {
+      return /* @__PURE__ */ jsx(FrameWithMotion, {
         ...this.props,
         background: null,
-        children: /* @__PURE__ */ _jsx5(RenderPlaceholder, {
+        children: /* @__PURE__ */ jsx(RenderPlaceholder, {
           error: {
             error,
             file,
@@ -36352,7 +36893,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
 
       (_b = (_a2 = asRecord(safeWindow,))['__checkComponentBudget__']) == null ? void 0 : _b.call(_a2,);
       let frameProps = this.props;
-      if (RenderTarget.current() !== 'CANVAS') {
+      if (RenderTarget.current() !== RenderTarget.canvas) {
         const {
           left,
           right,
@@ -36366,7 +36907,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
           width,
           height,
           rotation,
-          opacity,
+          opacity: _opacity,
           visible,
           _constraints,
           _initialStyle,
@@ -36385,21 +36926,21 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
           heightType,
           ...childProps
         } = frameProps;
-        children = React__default.Children.map(originalChildren, (child) => {
+        children = React4.Children.map(originalChildren, (child) => {
           if (!isReactChild(child,) || !isReactElement(child,)) {
             return child;
           }
           if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ _jsx5(LayoutGroup, {
+            return /* @__PURE__ */ jsx(LayoutGroup, {
               inherit: false,
               id: this.props.__layoutId,
-              children: /* @__PURE__ */ _jsx5(AutomaticLayoutIds, {
+              children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
                 enabled: false,
-                children: React__default.cloneElement(child, childProps,),
+                children: React4.cloneElement(child, childProps,),
               },),
             },);
           }
-          return React__default.cloneElement(child, childProps,);
+          return React4.cloneElement(child, childProps,);
         },);
         frameProps = {
           style,
@@ -36438,9 +36979,9 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
          * See the stackBackgroundTest.tsx integration test for an example of such a case
          */
         /* @__PURE__ */
-        _jsx5(ComponentContainerContext.Provider, {
+        jsx(ComponentContainerContext.Provider, {
           value: true,
-          children: /* @__PURE__ */ _jsx5(FrameWithMotion, {
+          children: /* @__PURE__ */ jsx(FrameWithMotion, {
             'data-framer-component-container': true,
             background: null,
             overflow: 'visible',
@@ -36471,37 +37012,6 @@ function isPageOrScroll(identifier,) {
   if (identifier === 'framer/Scroll') return true;
   return false;
 }
-var FormButton = /* @__PURE__ */ React__default.forwardRef(function FormButon({
-  type = 'submit',
-  value = 'Submit',
-  ...props
-}, ref,) {
-  const {
-    style: baseStyle2,
-  } = props;
-  const style = mergeWithDefaultStyle(baseStyle2 ?? {},);
-  return /* @__PURE__ */ _jsx5(motion.input, {
-    type,
-    ref,
-    style,
-    value,
-  },);
-},);
-function mergeWithDefaultStyle(style,) {
-  return {
-    display: 'block',
-    padding: '12px',
-    fontSize: '14px',
-    width: '100%',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    background: '#222',
-    color: '#fff',
-    borderRadius: '10px',
-    border: '1px solid rgba(0,0,0,0.05)',
-    ...style,
-  };
-}
 function formReducer(_state, {
   type,
 },) {
@@ -36529,7 +37039,7 @@ var FormContainer = ({
   children,
   ...props
 },) => {
-  const [state, dispatch,] = React__default.useReducer(formReducer, {
+  const [state, dispatch,] = React4.useReducer(formReducer, {
     state: disabled ? 'disabled' : void 0,
   },);
   const handleSubmit = async (event) => {
@@ -36556,7 +37066,7 @@ var FormContainer = ({
       },);
     }
   };
-  return /* @__PURE__ */ _jsx5(motion.form, {
+  return /* @__PURE__ */ jsx(motion.form, {
     ...props,
     'data-formid': formId,
     onSubmit: handleSubmit,
@@ -36581,7 +37091,7 @@ var inputClassName = 'framer-form-input';
 var labelClassName = 'framer-form-label';
 var focusedClassName = 'framer-form-input-focused';
 var inputWrapperClassName = 'framer-form-input-wrapper';
-var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlainTextInput(props, ref,) {
+var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput(props, ref,) {
   const {
     style,
     inputName,
@@ -36608,13 +37118,13 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
   };
   switch (type) {
     case 'hidden':
-      return /* @__PURE__ */ _jsx5(motion.input, {
+      return /* @__PURE__ */ jsx(motion.input, {
         type: 'hidden',
         name: inputName,
         value,
       },);
     case 'textarea':
-      return /* @__PURE__ */ _jsxs(motion.div, {
+      return /* @__PURE__ */ jsxs(motion.div, {
         ref,
         style: {
           ...baseWrapperStyle,
@@ -36622,7 +37132,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
         },
         ...rest,
         children: [
-          label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
+          label && !hideInputLabel && /* @__PURE__ */ jsx('label', {
             htmlFor: inputName,
             style: {
               ...labelStyles,
@@ -36630,10 +37140,10 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
             className: labelClassName,
             children: label,
           },),
-          /* @__PURE__ */ _jsxs('div', {
+          /* @__PURE__ */ jsxs('div', {
             className: inputWrapperClassName,
             children: [
-              /* @__PURE__ */ _jsx5(motion.textarea, {
+              /* @__PURE__ */ jsx(motion.textarea, {
                 id: inputName,
                 ...dataProps,
                 required,
@@ -36643,7 +37153,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
                 placeholder,
                 className: inputClassName,
               },),
-              /* @__PURE__ */ _jsx5('div', {
+              /* @__PURE__ */ jsx('div', {
                 className: focusedClassName,
               },),
             ],
@@ -36651,7 +37161,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
         ],
       },);
     default:
-      return /* @__PURE__ */ _jsxs(motion.div, {
+      return /* @__PURE__ */ jsxs(motion.div, {
         ref,
         style: {
           ...baseWrapperStyle,
@@ -36659,7 +37169,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
         },
         ...rest,
         children: [
-          label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
+          label && !hideInputLabel && /* @__PURE__ */ jsx('label', {
             htmlFor: inputName,
             style: {
               ...labelStyles,
@@ -36667,10 +37177,10 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
             className: labelClassName,
             children: label,
           },),
-          /* @__PURE__ */ _jsxs('div', {
+          /* @__PURE__ */ jsxs('div', {
             className: inputWrapperClassName,
             children: [
-              /* @__PURE__ */ _jsx5(motion.input, {
+              /* @__PURE__ */ jsx(motion.input, {
                 id: inputName,
                 ...dataProps,
                 type,
@@ -36681,7 +37191,7 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
                 placeholder,
                 className: inputClassName,
               },),
-              /* @__PURE__ */ _jsx5('div', {
+              /* @__PURE__ */ jsx('div', {
                 className: focusedClassName,
               },),
             ],
@@ -36690,79 +37200,80 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
       },);
   }
 },);
-var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, [
-  `.${inputClassName} {
-        padding: var(${'--framer-input-padding'});
-        border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
-        border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
-        border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
-        border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
-        border-color: var(${'--framer-input-border-color'});
-        border-top-width: var(${'--framer-input-border-top-width'});
-        border-right-width: var(${'--framer-input-border-right-width'});
-        border-bottom-width: var(${'--framer-input-border-bottom-width'});
-        border-left-width: var(${'--framer-input-border-left-width'});
-        border-style: var(${'--framer-input-border-style'});
-        background: var(${'--framer-input-background'});
-        font-family: var(${'--framer-input-font-family'});
-        font-weight: var(${'--framer-input-font-weight'});
-        font-size: var(${'--framer-input-font-size'});
-        color: var(${'--framer-input-font-color'});
-        box-shadow: var(${'--framer-input-box-shadow'});
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        z-index: var(${'--framer-input-z-index'});
-    }`,
-  `.${inputClassName}::placeholder {
-        color: var(${'--framer-input-placeholder-color'});
-    }`,
-  `textarea.${inputClassName} {
-        resize: var(${'--framer-textarea-resize'});
-        min-height: var(${'--framer-textarea-min-height'});
-    }`,
-  `.${inputClassName}:focus {
-        background: var(${'--framer-input-focused-background'}, var(${'--framer-input-background'}));
-        box-shadow: var(${'--framer-input-focused-box-shadow'}, var(${'--framer-input-box-shadow'}));
-    }`,
-  // We can't use normal CSS borders on focus, because different border widths between normal and
-  // focused states could cause the elements to jump (due to overall size constraints of
-  // the element changing). Instead we use a different element to display the focused border,
-  // which is absolutely positioned over the input, with all pointer events disabled.
-  // The result is that borders are applied like an inset box shadow so that the overall size of
-  // the input never changes, and doesn't cause any jumps.
-  // This approach is roughly analogous to how borders are implemented for frames.
-  `.${inputClassName}:focus + .${focusedClassName} {
-        border-color: var(${'--framer-input-focused-border-color'});
-        border-width: var(${'--framer-input-focused-border-width'});
-        border-style: var(${'--framer-input-focused-border-style'});
-        pointer-events: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
-        border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
-        border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
-        border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
-    }`,
-  `.${inputClassName}:focus-visible {
-        outline: none;
-    }`,
-  `.${labelClassName} {
-        font-family: var(${'--framer-input-label-font-family'});
-        font-weight: var(${'--framer-input-label-font-weight'});
-        font-size: var(${'--framer-input-label-font-size'});
-        color: var(${'--framer-input-label-font-color'});
-    }`,
-  `.${inputWrapperClassName} {
-        display: flex;
-        position: relative;
-        flex-grow: 1;
-    }`,
-],);
-var Image2 = /* @__PURE__ */ React__default.forwardRef(function Image3(props, ref,) {
+var FormPlainTextInput2 = /* @__PURE__ */ (() =>
+  withCSS(PlainTextInput, [
+    `.${inputClassName} {
+            padding: var(${'--framer-input-padding'});
+            border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
+            border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
+            border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
+            border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
+            border-color: var(${'--framer-input-border-color'});
+            border-top-width: var(${'--framer-input-border-top-width'});
+            border-right-width: var(${'--framer-input-border-right-width'});
+            border-bottom-width: var(${'--framer-input-border-bottom-width'});
+            border-left-width: var(${'--framer-input-border-left-width'});
+            border-style: var(${'--framer-input-border-style'});
+            background: var(${'--framer-input-background'});
+            font-family: var(${'--framer-input-font-family'});
+            font-weight: var(${'--framer-input-font-weight'});
+            font-size: var(${'--framer-input-font-size'});
+            color: var(${'--framer-input-font-color'});
+            box-shadow: var(${'--framer-input-box-shadow'});
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: var(${'--framer-input-z-index'});
+        }`,
+    `.${inputClassName}::placeholder {
+            color: var(${'--framer-input-placeholder-color'});
+        }`,
+    `textarea.${inputClassName} {
+            resize: var(${'--framer-textarea-resize'});
+            min-height: var(${'--framer-textarea-min-height'});
+        }`,
+    `.${inputClassName}:focus {
+            background: var(${'--framer-input-focused-background'}, var(${'--framer-input-background'}));
+            box-shadow: var(${'--framer-input-focused-box-shadow'}, var(${'--framer-input-box-shadow'}));
+        }`,
+    // We can't use normal CSS borders on focus, because different border widths between normal and
+    // focused states could cause the elements to jump (due to overall size constraints of
+    // the element changing). Instead we use a different element to display the focused border,
+    // which is absolutely positioned over the input, with all pointer events disabled.
+    // The result is that borders are applied like an inset box shadow so that the overall size of
+    // the input never changes, and doesn't cause any jumps.
+    // This approach is roughly analogous to how borders are implemented for frames.
+    `.${inputClassName}:focus + .${focusedClassName} {
+            border-color: var(${'--framer-input-focused-border-color'});
+            border-width: var(${'--framer-input-focused-border-width'});
+            border-style: var(${'--framer-input-focused-border-style'});
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
+            border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
+            border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
+            border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
+        }`,
+    `.${inputClassName}:focus-visible {
+            outline: none;
+        }`,
+    `.${labelClassName} {
+            font-family: var(${'--framer-input-label-font-family'});
+            font-weight: var(${'--framer-input-label-font-weight'});
+            font-size: var(${'--framer-input-label-font-size'});
+            color: var(${'--framer-input-label-font-color'});
+        }`,
+    `.${inputWrapperClassName} {
+            display: flex;
+            position: relative;
+            flex-grow: 1;
+        }`,
+  ],))();
+var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
   const {
     background,
     children,
@@ -36776,12 +37287,12 @@ var Image2 = /* @__PURE__ */ React__default.forwardRef(function Image3(props, re
     delete style.background;
   }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ _jsxs(MotionComponent, {
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     ...rest,
     style,
     ref,
     children: [
-      background && /* @__PURE__ */ _jsx5(BackgroundImageComponent, {
+      background && /* @__PURE__ */ jsx(BackgroundImageComponent, {
         image: background,
         alt,
       },),
@@ -36949,13 +37460,13 @@ var htmlEscapes = {
   '\'': '&#39;',
 };
 var reUnescapedHtml = /[&<>"']/gu;
-var reHasUnescapedHtml = RegExp(reUnescapedHtml.source,);
+var reHasUnescapedHtml = /* @__PURE__ */ (() => new RegExp(reUnescapedHtml.source,))();
 function escapeHTML2(str,) {
   return str && reHasUnescapedHtml.test(str,) ? str.replace(reUnescapedHtml, (chr) => htmlEscapes[chr] ?? '',) : str || '';
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, forwardedRef,) {
+var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, forwardedRef,) {
   const {
     id: id3,
     name,
@@ -36991,7 +37502,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
     _forwardedOverrideId,
     _forwardedOverrides,
     _usesDOMRect,
-    children,
+    children: _children,
     ...rest
   } = props;
   const parentSize = useParentSize();
@@ -37005,7 +37516,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
   const currentRoute = useCurrentRoute();
   useRoutePreloader(props.preload ?? [],);
   useMeasureLayout(props, layoutRef,);
-  const inCodeComponent = React.useContext(ComponentContainerContext,);
+  const inCodeComponent = React2.useContext(ComponentContainerContext,);
   const isOnCanvas = useIsOnFramerCanvas();
   let textOrOverride = text;
   const forwardedOverrideId = _forwardedOverrideId ?? id3;
@@ -37028,11 +37539,11 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
     innerHTML = htmlFromDesign;
   }
   const implicitPathVariables = useImplicitPathVariables();
-  const innerHTMLWithReplacedFramerPageLinks = React.useMemo(() => {
+  const innerHTMLWithReplacedFramerPageLinks = React2.useMemo(() => {
     if (isOnCanvas || !getRoute || !currentRoute) return innerHTML;
     return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-  React.useEffect(() => {
+  React2.useEffect(() => {
     const container = layoutRef.current;
     if (container === null) return;
     function interceptPageLinks(event,) {
@@ -37049,17 +37560,17 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
     };
   }, [navigate, implicitPathVariables,],);
   useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-  React.useInsertionEffect(() => {
+  React2.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!visible) return null;
-  const isHidden2 = isEditable && environment2() === 'CANVAS';
+  const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const style = {
     outline: 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: convertVerticalAlignment(verticalAlignment,),
-    opacity: isHidden2 ? 0 : opacity,
+    opacity: isHidden ? 0 : opacity,
     flexShrink: 0,
   };
   const restrictedRenderTarget = RenderTarget.hasRestrictions();
@@ -37103,7 +37614,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
     forceLayerBackingWithCSSProperties(style,);
   }
   Object.assign(style, props.style,);
-  return /* @__PURE__ */ _jsx5(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     id: id3,
     ref: layoutRef,
     ...rest,
@@ -37136,7 +37647,7 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
     void fontStore.loadFonts(fonts,).then(({
       newlyLoadedFontCount,
     },) => {
-      if (!fromCanvasComponent || !containerRef.current || RenderTarget.current() !== 'CANVAS') return;
+      if (!fromCanvasComponent || !containerRef.current || RenderTarget.current() !== RenderTarget.canvas) return;
       if (newlyLoadedFontCount > 0) {
         measureClosestComponentContainer(containerRef.current,);
       }
@@ -37149,11 +37660,11 @@ var FitText = /* @__PURE__ */ forwardRef(({
   children,
   ...props
 }, ref,) => {
-  return /* @__PURE__ */ _jsx5(motion.svg, {
+  return /* @__PURE__ */ jsx(motion.svg, {
     ref,
     ...props,
     viewBox,
-    children: /* @__PURE__ */ _jsx5(motion.foreignObject, {
+    children: /* @__PURE__ */ jsx(motion.foreignObject, {
       width: '100%',
       height: '100%',
       className: 'framer-fit-text',
@@ -37172,7 +37683,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     _forwardedOverrideId,
     _forwardedOverrides,
     _usesDOMRect,
-    as,
+    as: _as,
     bottom,
     center,
     children,
@@ -37216,13 +37727,13 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     injectComponentCSSRules();
   }, [],);
   if (!visible) return null;
-  const isHidden2 = isEditable && environment2() === 'CANVAS';
+  const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const containerStyle = {
     outline: 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: convertVerticalAlignment(verticalAlignment,),
-    opacity: isHidden2 ? 0 : opacity,
+    opacity: isHidden ? 0 : opacity,
     flexShrink: 0,
   };
   const restrictedRenderTarget = RenderTarget.hasRestrictions();
@@ -37270,10 +37781,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component14 = htmlElementAsMotionComponent(props.as,);
+  const Component15 = htmlElementAsMotionComponent(props.as,);
   if (isString22(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ _jsx5(Component14, {
+      return /* @__PURE__ */ jsx(Component15, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -37281,7 +37792,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
         transformTemplate: template,
         'data-framer-name': name,
         'data-framer-component-type': 'RichTextContainer',
-        children: /* @__PURE__ */ _jsx5(FitText, {
+        children: /* @__PURE__ */ jsx(FitText, {
           viewBox,
           viewBoxScale,
           style: {
@@ -37292,7 +37803,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
         },),
       },);
     } else {
-      return /* @__PURE__ */ _jsx5(FitText, {
+      return /* @__PURE__ */ jsx(FitText, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -37306,7 +37817,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
       },);
     }
   }
-  return /* @__PURE__ */ _jsx5(Component14, {
+  return /* @__PURE__ */ jsx(Component15, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -37357,7 +37868,7 @@ var RichText = /* @__PURE__ */ forwardRef(({
       // We need to use the original prop name.
       [isString22(html,) ? 'html' : 'htmlFromDesign']: content,
     };
-    return /* @__PURE__ */ _jsx5(DeprecatedRichText, {
+    return /* @__PURE__ */ jsx(DeprecatedRichText, {
       ...props,
       ...contentProp,
       ref,
@@ -37377,7 +37888,7 @@ var RichText = /* @__PURE__ */ forwardRef(({
       };
     }
   }
-  return /* @__PURE__ */ _jsx5(RichTextContainer, {
+  return /* @__PURE__ */ jsx(RichTextContainer, {
     ...props,
     ref,
     children: isValidElement(content,) ? content : void 0,
@@ -37543,7 +38054,7 @@ function imageUrlForAsset(asset, pixelSize,) {
   else if (pixelSize <= 1024) pixelSize = 1024;
   else if (pixelSize <= 2048) pixelSize = 2048;
   else pixelSize = 4096;
-  const isExport = RenderTarget.current() === 'EXPORT';
+  const isExport = RenderTarget.current() === RenderTarget.export;
   return runtime.assetResolver(asset, {
     pixelSize,
     isExport,
@@ -37560,7 +38071,7 @@ var ImagePatternElement = ({
   offsetY,
 },) => {
   const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ _jsx5('pattern', {
+  return /* @__PURE__ */ jsx('pattern', {
     id: id3,
     width: repeat ? width : '100%',
     height: repeat ? height : '100%',
@@ -37568,7 +38079,7 @@ var ImagePatternElement = ({
     patternUnits: repeat ? 'userSpaceOnUse' : void 0,
     x: repeat ? offsetX : void 0,
     y: repeat ? offsetY : void 0,
-    children: /* @__PURE__ */ _jsx5('image', {
+    children: /* @__PURE__ */ jsx('image', {
       width: repeat ? width : 1,
       height: repeat ? height : 1,
       href,
@@ -37579,7 +38090,7 @@ var ImagePatternElement = ({
     }, href,),
   },);
 };
-var useDOM = isBrowser2();
+var useDOM = /* @__PURE__ */ isBrowser2();
 var SharedSVGEntry = class {
   constructor(id3, svg, innerHTML, viewBox, count = 0,) {
     this.id = id3;
@@ -37654,7 +38165,7 @@ var SharedSVGManager = class {
       container == null ? void 0 : container.remove();
     }
   }
-  createDOMElementFor(svg, id3, size2,) {
+  createDOMElementFor(svg, id3, size,) {
     const containerId = 'container_' + id3;
     if (useDOM) {
       let svgTemplates = document.querySelector('#svg-templates',);
@@ -37679,7 +38190,7 @@ var SharedSVGManager = class {
         svgTemplates.appendChild(container,);
       }
     }
-    const box = size2 ? `0 0 ${size2.width} ${size2.height}` : void 0;
+    const box = size ? `0 0 ${size.width} ${size.height}` : void 0;
     const viewBox = box ? ` viewBox="${box}"` : '';
     const innerHTML =
       `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%"${viewBox}><use href="#${id3}"></use></svg>`;
@@ -37755,7 +38266,7 @@ function prefixId(el, prefix2,) {
     }
   },);
 }
-var unitsToPixels = {
+var unitsToPixels = /* @__PURE__ */ (() => ({
   cm: 96 / 2.54,
   mm: 96 / 2.54 / 10,
   Q: 96 / 2.54 / 40,
@@ -37768,11 +38279,11 @@ var unitsToPixels = {
   ex: 8,
   ch: 8,
   rem: 16,
-};
+}))();
 function parseLength(value,) {
   var _a;
   if (!value) return;
-  const m2 = /(-?[\d.]+)([a-z%]*)/.exec(value,);
+  const m2 = /(-?[\d.]+)([a-z%]*)/u.exec(value,);
   if ((m2 == null ? void 0 : m2[1]) === void 0 || (m2 == null ? void 0 : m2[2]) === void 0) return;
   if ((_a = m2[2]) == null ? void 0 : _a.startsWith('%',)) return;
   return Math.round(parseFloat(m2[1],) * (unitsToPixels[m2[2]] || 1),);
@@ -37790,10 +38301,10 @@ function getSVGSize(svg,) {
 function SVG(props,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const layoutRef = React__default.useRef(null,);
+  const layoutRef = React4.useRef(null,);
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ _jsx5(SVGComponent, {
+  return /* @__PURE__ */ jsx(SVGComponent, {
     ...props,
     innerRef: layoutRef,
     parentSize,
@@ -37851,7 +38362,7 @@ function sizeSVG(container, props,) {
   svg.setAttribute('height', '100%',);
 }
 function SVGStyleSheet() {
-  React__default.useInsertionEffect(() => {
+  React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -37861,7 +38372,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
   return _a = class extends Layer {
     constructor() {
       super(...arguments,);
-      __publicField(this, 'container', React__default.createRef(),);
+      __publicField(this, 'container', React4.createRef(),);
       __publicField(this, 'svgElement', null,);
       __publicField(this, 'setSVGElement', (element) => {
         this.svgElement = element;
@@ -37939,7 +38450,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           zoom,
           target,
         } = RenderEnvironment;
-        if (target === 'EXPORT') {
+        if (target === RenderTarget.export) {
           const zoomFactor = zoom > 1 ? zoom : 1;
           innerStyle.transform = `scale(${xFactor * zoomFactor}, ${yFactor * zoomFactor})`;
           innerStyle.zoom = 1 / zoomFactor;
@@ -37993,15 +38504,15 @@ var SVGComponent = /* @__PURE__ */ (() => {
         withExternalLayout,
         innerRef,
         svgContentId,
-        height,
-        opacity,
-        width,
+        height: _height,
+        opacity: _opacity,
+        width: _width,
         ...rest
       } = this.props;
       if (!withExternalLayout && (!visible || !id3)) return null;
       const identifier = id3 ?? layoutId ?? 'svg';
       const frame2 = this.frame;
-      const size2 = frame2 || {
+      const size = frame2 || {
         width: intrinsicWidth || 100,
         height: intrinsicHeight || 100,
       };
@@ -38031,7 +38542,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           y1,
           y2,
         } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ _jsx5('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
           xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
@@ -38039,14 +38550,14 @@ var SVGComponent = /* @__PURE__ */ (() => {
           style: {
             position: 'absolute',
           },
-          children: /* @__PURE__ */ _jsx5('linearGradient', {
+          children: /* @__PURE__ */ jsx('linearGradient', {
             id: gradientId,
             x1,
             x2,
             y1,
             y2,
             children: stops.map((stop, idx,) => {
-              return /* @__PURE__ */ _jsx5('stop', {
+              return /* @__PURE__ */ jsx('stop', {
                 offset: stop.position,
                 stopColor: stop.color,
                 stopOpacity: stop.alpha,
@@ -38059,7 +38570,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ _jsx5('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
           xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
@@ -38067,13 +38578,13 @@ var SVGComponent = /* @__PURE__ */ (() => {
           style: {
             position: 'absolute',
           },
-          children: /* @__PURE__ */ _jsx5('radialGradient', {
+          children: /* @__PURE__ */ jsx('radialGradient', {
             id: gradientId,
             cy: gradient.centerAnchorY,
             cx: gradient.centerAnchorX,
             r: gradient.widthFactor,
             children: elementProperties.stops.map((stop, idx,) => {
-              return /* @__PURE__ */ _jsx5('stop', {
+              return /* @__PURE__ */ jsx('stop', {
                 offset: stop.position,
                 stopColor: stop.color,
                 stopOpacity: stop.alpha,
@@ -38082,10 +38593,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
           },),
         },);
       } else if (BackgroundImage.isImageObject(fill,)) {
-        const imagePattern = imagePatternPropsForFill(fill, size2, identifier,);
+        const imagePattern = imagePatternPropsForFill(fill, size, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ _jsx5('svg', {
+          fillElement = /* @__PURE__ */ jsx('svg', {
             ref: this.setSVGElement,
             xmlns: 'http://www.w3.org/2000/svg',
             xmlnsXlink: 'http://www.w3.org/1999/xlink',
@@ -38094,8 +38605,8 @@ var SVGComponent = /* @__PURE__ */ (() => {
             style: {
               position: 'absolute',
             },
-            children: /* @__PURE__ */ _jsx5('defs', {
-              children: /* @__PURE__ */ _jsx5(ImagePatternElement, {
+            children: /* @__PURE__ */ jsx('defs', {
+              children: /* @__PURE__ */ jsx(ImagePatternElement, {
                 ...imagePattern,
               },),
             },),
@@ -38125,10 +38636,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
         if (hasBorderRadius(outerStyle,)) {
           outerStyle.overflow = 'hidden';
         }
-        content = /* @__PURE__ */ _jsxs(Fragment, {
+        content = /* @__PURE__ */ jsxs(Fragment, {
           children: [
             fillElement,
-            /* @__PURE__ */ _jsx5('div', {
+            /* @__PURE__ */ jsx('div', {
               className: 'svgContainer',
               style: innerStyle,
               ref: this.container,
@@ -38146,7 +38657,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         rel,
         onClick,
       } = this.props;
-      return /* @__PURE__ */ _jsxs(MotionComponent, {
+      return /* @__PURE__ */ jsxs(MotionComponent, {
         ...dataProps,
         ...rest,
         layoutId,
@@ -38166,7 +38677,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           rel,
           onClick,
         },
-        children: [content, /* @__PURE__ */ _jsx5(SVGStyleSheet, {},),],
+        children: [content, /* @__PURE__ */ jsx(SVGStyleSheet, {},),],
       },);
     }
   },
@@ -38195,8 +38706,8 @@ var SVGComponent = /* @__PURE__ */ (() => {
 })();
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s) => !fontStore.isSelectorLoaded(s,));
-  const [fontLoadStatus, setFontLoadStatus,] = React__default.useState(missingFontSelectors.length ? 'loading' : 'done',);
-  React__default.useEffect(() => {
+  const [fontLoadStatus, setFontLoadStatus,] = React4.useState(missingFontSelectors.length ? 'loading' : 'done',);
+  React4.useEffect(() => {
     if (!missingFontSelectors.length) return;
     setFontLoadStatus('loading',);
     const timer = setTimeout(() => {
@@ -38210,12 +38721,12 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   return fontLoadStatus;
 }
 function TextStyleSheet() {
-  React__default.useInsertionEffect(() => {
+  React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
 }
-var Text2 = /* @__PURE__ */ React__default.forwardRef(function Text3(props, forwardedRef,) {
+var Text2 = /* @__PURE__ */ React4.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
   const fallbackLayoutRef = useRef(null,);
@@ -38242,13 +38753,13 @@ var Text2 = /* @__PURE__ */ React__default.forwardRef(function Text3(props, forw
     void fontStore.loadFonts(fonts,).then(({
       newlyLoadedFontCount,
     },) => {
-      if (!__fromCanvasComponent || !layoutRef.current || RenderTarget.current() !== 'CANVAS') return;
+      if (!__fromCanvasComponent || !layoutRef.current || RenderTarget.current() !== RenderTarget.canvas) return;
       if (newlyLoadedFontCount === 0) return;
       measureClosestComponentContainer(layoutRef.current,);
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React__default.useCallback((event) => {
+  const interceptPageLinks = React4.useCallback((event) => {
     const anchorElement = findAnchorElement(event.target, layoutRef.current,);
     if (event.metaKey || !navigate || !anchorElement) return;
     const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
@@ -38262,11 +38773,11 @@ var Text2 = /* @__PURE__ */ React__default.forwardRef(function Text3(props, forw
     const ref = layoutRef.current;
     return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React__default.useMemo(() => {
+  const rawHTML = React4.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, onCanvas, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ _jsx5(TextComponent, {
+  return /* @__PURE__ */ jsx(TextComponent, {
     ...props,
     innerRef: layoutRef,
     layoutId,
@@ -38304,28 +38815,28 @@ var TextComponent = /* @__PURE__ */ (() => {
           name,
           __fromCanvasComponent,
           _initialStyle,
-          widthType,
-          heightType,
+          widthType: _widthType,
+          heightType: _heightType,
           _usesDOMRect,
           autoSize,
           style: styleProp,
           fontLoadStatus,
           matchesCurrentRoute,
-          preload,
+          preload: _preload,
           tabIndex,
           ...rest
         } = this.props;
         if (!visible) {
           return null;
         }
-        const isHidden2 = this.props.isEditable && this.props.environment() === 'CANVAS';
+        const isHidden = this.props.isEditable && this.props.environment() === RenderTarget.canvas;
         const justifyContent = convertVerticalAlignment2(this.props.verticalAlignment,);
         const style = {
           outline: 'none',
           display: 'flex',
           flexDirection: 'column',
           justifyContent,
-          opacity: isHidden2 ? 0 : opacity,
+          opacity: isHidden ? 0 : opacity,
           flexShrink: 0,
         };
         if (_initialStyle) {
@@ -38368,16 +38879,16 @@ var TextComponent = /* @__PURE__ */ (() => {
         if (rawHTML) {
           style.lineHeight = '1px';
           style.fontSize = '0px';
-          if (RenderTarget.current() === 'CANVAS' && fontLoadStatus === 'loading') {
+          if (RenderTarget.current() === RenderTarget.canvas && fontLoadStatus === 'loading') {
             style.visibility = 'hidden';
           }
-          if (RenderTarget.current() === 'CANVAS' && fontLoadStatus === 'timeout') {
+          if (RenderTarget.current() === RenderTarget.canvas && fontLoadStatus === 'timeout') {
             style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
           }
           Object.assign(style, styleProp,);
           if (alignment) asRecord(style,)['--framer-text-alignment'] = alignment;
           const tabIndexProps = getTabIndexProps(tabIndex,);
-          return /* @__PURE__ */ _jsx5(motion.div, {
+          return /* @__PURE__ */ jsx(motion.div, {
             layoutId,
             id: id3,
             ...tabIndexProps,
@@ -38415,12 +38926,12 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ _jsxs(Fragment, {
+      return /* @__PURE__ */ jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ _jsx5(ComponentContainerContext.Consumer, {
+          /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, {
             children: this.renderMain,
           },),
-          /* @__PURE__ */ _jsx5(TextStyleSheet, {},),
+          /* @__PURE__ */ jsx(TextStyleSheet, {},),
         ],
       },);
     }
@@ -38485,7 +38996,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           rotate,
         },);
       }
-      const onCanvas = RenderTarget.current() === 'CANVAS';
+      const onCanvas = RenderTarget.current() === RenderTarget.canvas;
       if (positionSticky) {
         if (!onCanvas || inCodeComponent) {
           style.position = 'sticky';
@@ -38550,13 +39061,15 @@ var blockTag = '<(?:div|span)[^>]*>';
 var blockClosingTag = '</(?:div|span)>';
 var inlineTag = '<[^>]+>';
 var inlineClosingTag = '</[^>]+>';
-var textContentRegex = new RegExp(
-  `^(${linkTag}${outerTag}${blockTag}${inlineTag}).*?(${inlineClosingTag}).*?(${blockClosingTag}${outerClosingTag}${linkClosingTag})$`,
-  //                                              ^^^ this is the content we want to replace
-  //                                                                      ^^^ this is the content we want to discard
-  's',
-  // let the "." also match newlines
-);
+var textContentRegex =
+  /* @__PURE__ */ (() =>
+    new RegExp(
+      `^(${linkTag}${outerTag}${blockTag}${inlineTag}).*?(${inlineClosingTag}).*?(${blockClosingTag}${outerClosingTag}${linkClosingTag})$`,
+      //                                              ^^^ this is the content we want to replace
+      //                                                                      ^^^ this is the content we want to discard
+      's',
+      // let the "." also match newlines
+    ))();
 function replaceDraftHTMLWithText(rawHTML, text,) {
   return rawHTML.replace(
     textContentRegex,
@@ -38610,71 +39123,71 @@ var InternalID = class {
     return res;
   }
 };
-var PathSegment = class {
-  constructor(value,) {
-    __publicField(this, '__class', 'PathSegment',);
-    __publicField(this, 'x', 0,);
-    __publicField(this, 'y', 0,);
-    __publicField(this, 'handleMirroring', 'straight',);
-    __publicField(this, 'handleOutX', 0,);
-    __publicField(this, 'handleOutY', 0,);
-    __publicField(this, 'handleInX', 0,);
-    __publicField(this, 'handleInY', 0,);
-    __publicField(this, 'radius', 0,);
-    if (value) {
-      Object.assign(this, value,);
+var PathSegmentOuter = /* @__PURE__ */ (() => {
+  const _PathSegment = class {
+    constructor(value,) {
+      __publicField(this, '__class', 'PathSegment',);
+      __publicField(this, 'x', 0,);
+      __publicField(this, 'y', 0,);
+      __publicField(this, 'handleMirroring', 'straight',);
+      __publicField(this, 'handleOutX', 0,);
+      __publicField(this, 'handleOutY', 0,);
+      __publicField(this, 'handleInX', 0,);
+      __publicField(this, 'handleInY', 0,);
+      __publicField(this, 'radius', 0,);
+      if (value) {
+        Object.assign(this, value,);
+      }
     }
-  }
-  merge(value,) {
-    return Object.assign(Object.create(Object.getPrototypeOf(this,),), this, value,);
-  }
-};
-__publicField(PathSegment, 'displayName', 'WithClassDiscriminatorMixin(PathSegment)',);
-PathSegment.prototype.__class = 'PathSegment';
-((PathSegment2) => {
-  PathSegment2.point = (pathSegment) => {
+    merge(value,) {
+      return Object.assign(Object.create(Object.getPrototypeOf(this,),), this, value,);
+    }
+  };
+  let PathSegment2 = _PathSegment;
+  __publicField(PathSegment2, 'displayName', 'WithClassDiscriminatorMixin(PathSegment)',);
+  __publicField(PathSegment2, 'point', (pathSegment) => {
     return {
       x: pathSegment.x,
       y: pathSegment.y,
     };
-  };
-  PathSegment2.handleOut = (pathSegment) => {
+  },);
+  __publicField(PathSegment2, 'handleOut', (pathSegment) => {
     return {
       x: pathSegment.handleOutX,
       y: pathSegment.handleOutY,
     };
-  };
-  PathSegment2.handleIn = (pathSegment) => {
+  },);
+  __publicField(PathSegment2, 'handleIn', (pathSegment) => {
     return {
       x: pathSegment.handleInX,
       y: pathSegment.handleInY,
     };
-  };
-  PathSegment2.calculatedHandleOut = (pathSegment) => {
+  },);
+  __publicField(PathSegment2, 'calculatedHandleOut', (pathSegment) => {
     switch (pathSegment.handleMirroring) {
       case 'symmetric':
       case 'disconnected':
       case 'asymmetric':
-        return Point.add((0, PathSegment2.point)(pathSegment,), (0, PathSegment2.handleOut)(pathSegment,),);
+        return Point.add(_PathSegment.point(pathSegment,), _PathSegment.handleOut(pathSegment,),);
       default:
         return {
           x: pathSegment.x,
           y: pathSegment.y,
         };
     }
-  };
-  PathSegment2.calculatedHandleIn = (pathSegment) => {
+  },);
+  __publicField(PathSegment2, 'calculatedHandleIn', (pathSegment) => {
     switch (pathSegment.handleMirroring) {
       case 'symmetric':
-        return Point.subtract((0, PathSegment2.point)(pathSegment,), (0, PathSegment2.handleOut)(pathSegment,),);
+        return Point.subtract(_PathSegment.point(pathSegment,), _PathSegment.handleOut(pathSegment,),);
       case 'disconnected':
       case 'asymmetric':
-        return Point.add((0, PathSegment2.point)(pathSegment,), (0, PathSegment2.handleIn)(pathSegment,),);
+        return Point.add(_PathSegment.point(pathSegment,), _PathSegment.handleIn(pathSegment,),);
       default:
-        return (0, PathSegment2.point)(pathSegment,);
+        return _PathSegment.point(pathSegment,);
     }
-  };
-  PathSegment2.curveDefault = (points, index,) => {
+  },);
+  __publicField(PathSegment2, 'curveDefault', (points, index,) => {
     if (points.length > 2) {
       let pointBefore;
       let pointAfter;
@@ -38690,7 +39203,7 @@ PathSegment.prototype.__class = 'PathSegment';
       }
       assert(pointBefore, 'pointBefore should be defined',);
       assert(pointAfter, 'pointAfter should be defined',);
-      const delta = Point.subtract((0, PathSegment2.point)(pointAfter,), (0, PathSegment2.point)(pointBefore,),);
+      const delta = Point.subtract(_PathSegment.point(pointAfter,), _PathSegment.point(pointBefore,),);
       return {
         x: delta.x / 4,
         y: delta.y / 4,
@@ -38700,8 +39213,12 @@ PathSegment.prototype.__class = 'PathSegment';
       x: 10,
       y: 10,
     };
-  };
-})(PathSegment || (PathSegment = {}),);
+  },);
+
+  PathSegment2.prototype.__class = 'PathSegment';
+  return PathSegment2;
+})();
+var PathSegment = PathSegmentOuter;
 var key5 = 'pathSegments';
 function withPath(target,) {
   return key5 in target;
@@ -38713,7 +39230,7 @@ var pathDefaults = {
 function toSVGPath(withPaths, translate = {
   x: 0,
   y: 0,
-}, canvasMode = 'CANVAS',) {
+}, canvasMode = RenderTarget.canvas,) {
   let pathElements = [];
   let paths = [];
   if (Array.isArray(withPaths,)) {
@@ -38765,7 +39282,7 @@ function toSVGPath(withPaths, translate = {
       }
     }
   },);
-  if (canvasMode === 'EXPORT' || canvasMode === 'PREVIEW') {
+  if (canvasMode === RenderTarget.export || canvasMode === RenderTarget.preview) {
     pathElements = pathElements.map((value) => isFiniteNumber(value,) ? roundedNumberString(value, 3,) : value);
   }
   return pathElements.join(' ',);
@@ -38862,7 +39379,7 @@ function transformString(transform2,) {
   }
   return result;
 }
-var LinearGradientElement = class extends Component2 {
+var LinearGradientElement = class extends Component {
   render() {
     const {
       id: id3,
@@ -38872,14 +39389,14 @@ var LinearGradientElement = class extends Component2 {
       y1,
       y2,
     } = this.props;
-    return /* @__PURE__ */ _jsx5('linearGradient', {
+    return /* @__PURE__ */ jsx('linearGradient', {
       id: id3,
       x1,
       x2,
       y1,
       y2,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ _jsx5('stop', {
+        return /* @__PURE__ */ jsx('stop', {
           offset: stop.position,
           stopColor: stop.color,
           stopOpacity: stop.alpha,
@@ -38888,7 +39405,7 @@ var LinearGradientElement = class extends Component2 {
     },);
   }
 };
-var RadialGradientElement = class extends Component2 {
+var RadialGradientElement = class extends Component {
   render() {
     const {
       centerAnchorX,
@@ -38898,7 +39415,7 @@ var RadialGradientElement = class extends Component2 {
       heightFactor,
       stops,
     } = this.props;
-    return /* @__PURE__ */ _jsx5('radialGradient', {
+    return /* @__PURE__ */ jsx('radialGradient', {
       id: id3,
       cy: centerAnchorY,
       cx: centerAnchorX,
@@ -38907,7 +39424,7 @@ var RadialGradientElement = class extends Component2 {
         heightFactor / widthFactor
       }) translate(-${centerAnchorX}, -${centerAnchorY})`,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ _jsx5('stop', {
+        return /* @__PURE__ */ jsx('stop', {
           offset: stop.position,
           stopColor: stop.color,
           stopOpacity: stop.alpha,
@@ -38916,7 +39433,7 @@ var RadialGradientElement = class extends Component2 {
     },);
   }
 };
-var SVGRoot = class extends Component2 {
+var SVGRoot = class extends Component {
   render() {
     const {
       children,
@@ -38938,7 +39455,7 @@ var SVGRoot = class extends Component2 {
       transform: `translate(${fx}px, ${fy}px)`,
     };
     Layer.applyWillChange(this.props, svgStyle, false,);
-    return /* @__PURE__ */ _jsx5('svg', {
+    return /* @__PURE__ */ jsx('svg', {
       width: '100%',
       height: '100%',
       xmlns: 'http://www.w3.org/2000/svg',
@@ -39030,7 +39547,7 @@ var Vector = /* @__PURE__ */ (() => {
       let strokeElement = null;
       let pathTranslate;
       let elementTransform;
-      const translatePaths = target === 'EXPORT';
+      const translatePaths = target === RenderTarget.export;
       if (transform2.rotation === 0 && translatePaths) {
         pathTranslate = transform2;
       } else {
@@ -39075,10 +39592,10 @@ var Vector = /* @__PURE__ */ (() => {
         internalStrokeClipId,
         svgStrokeAttributes,
       );
-      const currentName = target === 'PREVIEW' ? name || void 0 : void 0;
+      const currentName = target === RenderTarget.preview ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ _jsx5(motion.path, {
+        shapeReference = /* @__PURE__ */ jsx(motion.path, {
           ...{
             ...pathAttributes,
           },
@@ -39086,21 +39603,21 @@ var Vector = /* @__PURE__ */ (() => {
           transition,
         },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ _jsx5('clipPath', {
+          strokeClipPath = /* @__PURE__ */ jsx('clipPath', {
             id: internalStrokeClipId.id,
-            children: /* @__PURE__ */ _jsx5('use', {
+            children: /* @__PURE__ */ jsx('use', {
               xlinkHref: internalShapeId.link,
             },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ _jsx5('use', {
+          mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ _jsx5('use', {
+          strokeElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             clipPath: internalStrokeClipId.urlLink,
             fill: 'transparent',
@@ -39108,7 +39625,7 @@ var Vector = /* @__PURE__ */ (() => {
             strokeWidth,
           },);
         } else {
-          mainElement = /* @__PURE__ */ _jsx5('use', {
+          mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             clipPath: internalStrokeClipId.urlLink,
@@ -39119,7 +39636,7 @@ var Vector = /* @__PURE__ */ (() => {
         }
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ _jsx5(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           ...{
             ...pathAttributes,
             fill: vectorFill,
@@ -39131,30 +39648,30 @@ var Vector = /* @__PURE__ */ (() => {
         },);
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ _jsx5(ImagePatternElement, {
+        ? /* @__PURE__ */ jsx(ImagePatternElement, {
           ...imagePattern,
           repeat: BackgroundImage.isImageObject(fill,) && fill.fit === 'tile',
         },)
         : void 0;
       let gradient;
       if (linearGradient) {
-        gradient = /* @__PURE__ */ _jsx5(LinearGradientElement, {
+        gradient = /* @__PURE__ */ jsx(LinearGradientElement, {
           ...linearGradient,
         },);
       } else if (radialGradient) {
-        gradient = /* @__PURE__ */ _jsx5(RadialGradientElement, {
+        gradient = /* @__PURE__ */ jsx(RadialGradientElement, {
           ...radialGradient,
         },);
       }
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
-        defs = /* @__PURE__ */ _jsxs('defs', {
+        defs = /* @__PURE__ */ jsxs('defs', {
           children: [shapeReference, strokeClipPath, shadow.definition, gradient, imagePatternElement,],
         },);
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ _jsx5(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           ...{
             ...pathAttributes,
             fill: vectorFill,
@@ -39167,7 +39684,7 @@ var Vector = /* @__PURE__ */ (() => {
         },);
         return this.renderElement(mainElement,);
       }
-      return this.renderElement(/* @__PURE__ */ _jsxs(motion.g, {
+      return this.renderElement(/* @__PURE__ */ jsxs(motion.g, {
         opacity: opacityValue,
         variants,
         transition,
@@ -39191,7 +39708,7 @@ var Vector = /* @__PURE__ */ (() => {
       };
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ _jsx5(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         frame: frame2,
         width,
         height,
@@ -39278,7 +39795,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
         height,
       };
       const transform2 = transformValues(rect, rotation, isRootVectorNode, includeTransform,);
-      const addNames = target === 'PREVIEW';
+      const addNames = target === RenderTarget.preview;
       let name = void 0;
       if (addNames) {
         if (targetName) {
@@ -39289,7 +39806,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
           name = defaultName;
         }
       }
-      return this.renderElement(/* @__PURE__ */ _jsx5('g', {
+      return this.renderElement(/* @__PURE__ */ jsx('g', {
         transform: transformString(transform2,),
         ...{
           id: id3,
@@ -39310,7 +39827,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ _jsx5(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         frame: frame2,
         width,
         height,
@@ -39390,14 +39907,14 @@ var Size = /* @__PURE__ */ (() => {
     };
   };
   Size2.zero = Size2(0, 0,);
-  Size2.isZero = function (size2,) {
-    return size2 === Size2.zero || size2.width === 0 && size2.height === 0;
+  Size2.isZero = function (size,) {
+    return size === Size2.zero || size.width === 0 && size.height === 0;
   };
-  Size2.defaultIfZero = function (width, height, size2,) {
-    if (Size2.isZero(size2,)) {
+  Size2.defaultIfZero = function (width, height, size,) {
+    if (Size2.isZero(size,)) {
       return Size2(width, height,);
     }
-    return size2;
+    return size;
   };
   return Size2;
 })();
@@ -39507,7 +40024,7 @@ function gradientForShape(nodeId, node,) {
   }
   return void 0;
 }
-function throttle(fn, time22,) {
+function throttle(fn, time2,) {
   let previous = 0;
   let timeout;
   const later = (...args) => {
@@ -39517,8 +40034,8 @@ function throttle(fn, time22,) {
   };
   return (...args) => {
     const now2 = Date.now();
-    const remaining = time22 - (now2 - previous);
-    if (remaining <= 0 || remaining > time22) {
+    const remaining = time2 - (now2 - previous);
+    if (remaining <= 0 || remaining > time2) {
       if (timeout) {
         safeWindow.clearTimeout(timeout,);
         timeout = void 0;
@@ -39778,7 +40295,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.0.11-sync.5',
+    'framer-motion': '11.1.9',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -39800,9 +40317,7 @@ var package_default = {
     },],
   },
 };
-var {
-  version,
-} = package_default;
+var version = /* @__PURE__ */ (() => package_default.version)();
 MotionValue.prototype.addChild = function ({
   transformer = (v) => v,
 },) {
@@ -39815,6 +40330,7 @@ if (false) {
 }
 export {
   _injectRuntime,
+  AcceleratedAnimation,
   addActionControls,
   addFonts,
   addPointerEvent,
@@ -39847,7 +40363,6 @@ export {
   callEach,
   cancelFrame,
   cancelSync,
-  checkTargetForNewValues,
   circIn,
   circInOut,
   circOut,
@@ -39922,7 +40437,6 @@ export {
   FontSourceNames,
   fontStore,
   forceLayerBackingWithCSSProperties,
-  FormButton,
   FormContainer,
   FormPlainTextInput2 as FormPlainTextInput,
   fraction,
@@ -39936,6 +40450,7 @@ export {
   framerAppearEffects,
   framerAppearIdKey,
   framerAppearTransformTemplateToken,
+  framerCSSMarker,
   FramerEvent,
   FramerEventListener,
   FramerEventSession,
