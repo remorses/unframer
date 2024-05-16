@@ -135,7 +135,7 @@ export default function App() {
 
 ## Custom breakpoints for responsive variants
 
-You can change the breakpoints by passing a breakpoints in your `unframer.json` config
+You can change the breakpoints by passing an object in your `unframer.json` config
 
 ```json
 {
