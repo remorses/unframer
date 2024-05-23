@@ -9627,7 +9627,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.PFBELZLG.js
+// https :https://app.framerstatic.com/framer.6FOHDFZR.js
 import { Component as Component2, } from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { startTransition as startTransition2, } from 'react';
@@ -15212,6 +15212,7 @@ var mockWindow = {
   innerHeight: 0,
   innerWidth: 0,
   SVGSVGElement: {},
+  open: function (_url, _target, _features,) {},
 };
 var safeWindow = typeof window === 'undefined' ? mockWindow : window;
 var _raf = (f) => {
@@ -31299,6 +31300,28 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPat
   } catch {}
   return propsForLink(href, openInNewTab,);
 }
+async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
+  async function handleSlugs(unresolvedSlugs,) {
+    if (!unresolvedSlugs || !collectionUtils) return {};
+    const result = {};
+    for (const slugKey in unresolvedSlugs) {
+      const unresolvedSlug = unresolvedSlugs[slugKey];
+      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
+      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
+      await lazyValue.preload();
+      const value = lazyValue.read();
+      if (value) {
+        result[slugKey] = value;
+      }
+    }
+    return result;
+  }
+  const [pathResult, slugResult,] = await Promise.allSettled([handleSlugs(unresolvedPathSlugs,), handleSlugs(unresolvedHashSlugs,),],);
+  return {
+    path: pathResult.status === 'fulfilled' ? pathResult.value : void 0,
+    hash: slugResult.status === 'fulfilled' ? slugResult.value : void 0,
+  };
+}
 function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
   const promises = [];
   function handleSlugs(unresolvedSlugs,) {
@@ -31399,7 +31422,7 @@ var Link = /* @__PURE__ */ React__default.forwardRef(({
 function resolveLink(href, router, implicitPathVariables,) {
   return resolveLinkInternal(href, router, implicitPathVariables,);
 }
-function resolveLinkInternal(href, router, implicitPathVariables, resolveSlugs,) {
+function resolveLinkInternal(href, router, implicitPathVariables, resolveSlugs2,) {
   const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
   if (!isLinkToWebPage(pageLink,)) return isString22(href,) ? propsForLink(href,).href : void 0;
   if (!router.getRoute || !router.currentRouteId) return void 0;
@@ -31414,7 +31437,7 @@ function resolveLinkInternal(href, router, implicitPathVariables, resolveSlugs,)
   } = pageLink;
   const route = router.getRoute(webPageId,);
   const resolvedSlugs = unresolvedPathSlugs || unresolvedHashSlugs
-    ? resolveSlugs == null ? void 0 : resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs,)
+    ? resolveSlugs2 == null ? void 0 : resolveSlugs2(unresolvedPathSlugs, unresolvedHashSlugs,)
     : void 0;
   const combinedPathVariables = Object.assign(
     {},
@@ -36721,11 +36744,47 @@ var FormContainer = ({
   formId,
   disabled,
   children,
+  redirectUrl,
   ...props
 },) => {
   const [state, dispatch,] = React__default.useReducer(formReducer, {
     state: disabled ? 'disabled' : void 0,
   },);
+  const router = useRouter();
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  async function redirectTo(link,) {
+    var _a, _b;
+    if (isLinkToWebPage(link,)) {
+      if (!router) return;
+      const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, link.webPageId,);
+      if (!route) return;
+      const {
+        unresolvedHashSlugs,
+        unresolvedPathSlugs,
+      } = link;
+      const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+      const combinedPathVariables = Object.assign(
+        {},
+        router.currentPathVariables,
+        link.pathVariables,
+        resolvedSlugs == null ? void 0 : resolvedSlugs.path,
+      );
+      const combinedHashVariables = Object.assign(
+        {},
+        router.currentPathVariables,
+        link.pathVariables,
+        link.hashVariables,
+        resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
+      );
+      const element = getHashForRoute(link.hash, route, combinedHashVariables,);
+      (_b = router.navigate) == null ? void 0 : _b.call(router, link.webPageId, element, combinedPathVariables,);
+      return;
+    }
+    if (!safeWindow) return;
+    safeWindow.open(link, '_blank',);
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!action) return;
@@ -36737,13 +36796,13 @@ var FormContainer = ({
       dispatch({
         type: 'submit',
       },);
-      await fetch(action, {
-        body: data2,
-        method: 'POST',
-      },);
+      await submitForm(action, data2,);
       dispatch({
         type: 'success',
       },);
+      if (redirectUrl) {
+        await redirectTo(redirectUrl,);
+      }
     } catch (error) {
       dispatch({
         type: 'error',
@@ -36757,6 +36816,26 @@ var FormContainer = ({
     children: children(state,),
   },);
 };
+async function submitForm(action, data2,) {
+  const response = await fetch(action, {
+    body: data2,
+    method: 'POST',
+  },);
+  if (response.ok) {
+    return response;
+  } else {
+    const body = await response.json();
+    const error = 'Failed to submit form';
+    if (responseHasError(body,)) {
+      throw new Error(`${error} - ${body.error.message}`,);
+    }
+    throw new Error(error,);
+  }
+}
+function responseHasError(response,) {
+  return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
+    'message' in response.error && typeof response.error.message === 'string';
+}
 var passwordManagerIgnoreDataProps = {
   // 1Password
   'data-1p-ignore': true,
@@ -36766,39 +36845,22 @@ var passwordManagerIgnoreDataProps = {
 var sensibleInputDefaults = {
   autocomplete: 'off',
 };
-var labelStyles = {
-  display: 'flex',
-  flexDirection: 'column',
-  marginBottom: 8,
-};
 var inputClassName = 'framer-form-input';
-var labelClassName = 'framer-form-label';
-var focusedClassName = 'framer-form-input-focused';
 var inputWrapperClassName = 'framer-form-input-wrapper';
 var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlainTextInput(props, ref,) {
   const {
     style,
     inputName,
-    label,
     type,
     required,
     autoFocus,
     placeholder,
-    hideInputLabel,
     value,
     ...rest
   } = props;
   const dataProps = {
     ...sensibleInputDefaults,
     ...passwordManagerIgnoreDataProps,
-  };
-  const baseWrapperStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-  };
-  const baseStyle2 = {
-    width: '100%',
-    flexGrow: 1,
   };
   switch (type) {
     case 'hidden':
@@ -36808,79 +36870,37 @@ var PlainTextInput = /* @__PURE__ */ React__default.forwardRef(function FormPlai
         value,
       },);
     case 'textarea':
-      return /* @__PURE__ */ _jsxs(motion.div, {
+      return /* @__PURE__ */ _jsx5(motion.div, {
         ref,
-        style: {
-          ...baseWrapperStyle,
-          ...style,
-        },
+        style,
         ...rest,
-        children: [
-          label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
-            htmlFor: inputName,
-            style: {
-              ...labelStyles,
-            },
-            className: labelClassName,
-            children: label,
-          },),
-          /* @__PURE__ */ _jsxs('div', {
-            className: inputWrapperClassName,
-            children: [
-              /* @__PURE__ */ _jsx5(motion.textarea, {
-                id: inputName,
-                ...dataProps,
-                required,
-                autoFocus,
-                name: inputName,
-                style: baseStyle2,
-                placeholder,
-                className: inputClassName,
-              },),
-              /* @__PURE__ */ _jsx5('div', {
-                className: focusedClassName,
-              },),
-            ],
-          },),
-        ],
+        className: cx(inputWrapperClassName, props.className,),
+        children: /* @__PURE__ */ _jsx5(motion.textarea, {
+          id: inputName,
+          ...dataProps,
+          required,
+          autoFocus,
+          name: inputName,
+          placeholder,
+          className: inputClassName,
+        },),
       },);
     default:
-      return /* @__PURE__ */ _jsxs(motion.div, {
+      return /* @__PURE__ */ _jsx5(motion.div, {
         ref,
-        style: {
-          ...baseWrapperStyle,
-          ...style,
-        },
+        style,
         ...rest,
-        children: [
-          label && !hideInputLabel && /* @__PURE__ */ _jsx5('label', {
-            htmlFor: inputName,
-            style: {
-              ...labelStyles,
-            },
-            className: labelClassName,
-            children: label,
-          },),
-          /* @__PURE__ */ _jsxs('div', {
-            className: inputWrapperClassName,
-            children: [
-              /* @__PURE__ */ _jsx5(motion.input, {
-                id: inputName,
-                ...dataProps,
-                type,
-                required,
-                autoFocus,
-                name: inputName,
-                style: baseStyle2,
-                placeholder,
-                className: inputClassName,
-              },),
-              /* @__PURE__ */ _jsx5('div', {
-                className: focusedClassName,
-              },),
-            ],
-          },),
-        ],
+        className: cx(inputWrapperClassName, props.className,),
+        children: /* @__PURE__ */ _jsx5(motion.input, {
+          id: inputName,
+          ...dataProps,
+          type,
+          required,
+          autoFocus,
+          name: inputName,
+          placeholder,
+          className: inputClassName,
+        },),
       },);
   }
 },);
@@ -36907,18 +36927,26 @@ var FormPlainTextInput2 = /* @__PURE__ */ (() =>
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+            width: 100%;
+            height: 100%;
             z-index: var(${'--framer-input-z-index'});
+            letter-spacing: var(${'--framer-input-font-letter-spacing'});
+            text-align: var(${'--framer-input-font-text-alignment'});
+            line-height: var(${'--framer-input-font-line-height'});
         }`,
     `.${inputClassName}::placeholder {
             color: var(${'--framer-input-placeholder-color'});
         }`,
-    `textarea.${inputClassName} {
-            resize: var(${'--framer-textarea-resize'});
-            min-height: var(${'--framer-textarea-min-height'});
-        }`,
     `.${inputClassName}:focus {
             background: var(${'--framer-input-focused-background'}, var(${'--framer-input-background'}));
             box-shadow: var(${'--framer-input-focused-box-shadow'}, var(${'--framer-input-box-shadow'}));
+        }`,
+    `.${inputClassName}:focus-visible {
+            outline: none;
+        }`,
+    `textarea.${inputClassName} {
+            resize: var(${'--framer-textarea-resize'});
+            min-height: var(${'--framer-textarea-min-height'});
         }`,
     // We can't use normal CSS borders on focus, because different border widths between normal and
     // focused states could cause the elements to jump (due to overall size constraints of
@@ -36927,7 +36955,8 @@ var FormPlainTextInput2 = /* @__PURE__ */ (() =>
     // The result is that borders are applied like an inset box shadow so that the overall size of
     // the input never changes, and doesn't cause any jumps.
     // This approach is roughly analogous to how borders are implemented for frames.
-    `.${inputClassName}:focus + .${focusedClassName} {
+    `.${inputWrapperClassName}:focus-within::after {
+            content: "";
             border-color: var(${'--framer-input-focused-border-color'});
             border-width: var(${'--framer-input-focused-border-width'});
             border-style: var(${'--framer-input-focused-border-style'});
@@ -36941,20 +36970,6 @@ var FormPlainTextInput2 = /* @__PURE__ */ (() =>
             border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
             border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
             border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
-        }`,
-    `.${inputClassName}:focus-visible {
-            outline: none;
-        }`,
-    `.${labelClassName} {
-            font-family: var(${'--framer-input-label-font-family'});
-            font-weight: var(${'--framer-input-label-font-weight'});
-            font-size: var(${'--framer-input-label-font-size'});
-            color: var(${'--framer-input-label-font-color'});
-        }`,
-    `.${inputWrapperClassName} {
-            display: flex;
-            position: relative;
-            flex-grow: 1;
         }`,
   ],))();
 var Image2 = /* @__PURE__ */ React__default.forwardRef(function Image3(props, ref,) {
