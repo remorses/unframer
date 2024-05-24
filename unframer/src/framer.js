@@ -9627,7 +9627,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.6FOHDFZR.js
+// https :https://app.framerstatic.com/framer.ZBS3AOLH.js
 import { Component as Component2, } from 'react';
 import { jsx as _jsx5, jsxs as _jsxs, } from 'react/jsx-runtime';
 import { startTransition as startTransition2, } from 'react';
@@ -18079,6 +18079,8 @@ var richTextCSSRules = [
             text-decoration: var(--framer-text-decoration, none);
             line-height: var(--framer-line-height, 1.2em);
             text-align: var(--framer-text-alignment, start);
+            -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
+            -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
         }
     `, /* css */
   `
