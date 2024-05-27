@@ -31,10 +31,10 @@ importers:
         version: 5.4.2
       vite:
         specifier: ^5.2.8
-        version: 5.2.8(@types/node@20.12.8)
+        version: 5.2.8(@types/node@20.12.12)
       vitest:
         specifier: ^1.5.0
-        version: 1.5.0(@types/node@20.12.8)
+        version: 1.5.0(@types/node@20.12.12)
 
   nextjs-app:
     dependencies:
@@ -104,7 +104,7 @@ importers:
     devDependencies:
       '@remix-run/dev':
         specifier: ^2.9.1
-        version: 2.9.1(@remix-run/react@2.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.12.8)(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.8))
+        version: 2.9.1(@remix-run/react@2.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.12.12)(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.12))
       '@types/react':
         specifier: ^18.2.20
         version: 18.2.66
@@ -149,10 +149,10 @@ importers:
         version: 5.4.2
       vite:
         specifier: ^5.1.0
-        version: 5.2.8(@types/node@20.12.8)
+        version: 5.2.8(@types/node@20.12.12)
       vite-tsconfig-paths:
         specifier: ^4.2.1
-        version: 4.3.2(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.8))
+        version: 4.3.2(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.12))
 
   unframer:
     dependencies:
@@ -194,7 +194,7 @@ importers:
         version: 2.2.3
       native-fetch:
         specifier: ^4.0.2
-        version: 4.0.2(undici@6.15.0)
+        version: 4.0.2(undici@6.18.1)
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1397,6 +1397,9 @@ packages:
 
   '@types/node@18.19.31':
     resolution: {integrity: sha512-ArgCD39YpyyrtFKIqMDvjz79jto5fcI/SVUs2HwB+f0dAzq68yqOdyaSivLiLugSziTpNXLQrVb7RZFmdZzbhA==}
+
+  '@types/node@20.12.12':
+    resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
 
   '@types/node@20.12.8':
     resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
@@ -4703,6 +4706,10 @@ packages:
     resolution: {integrity: sha512-VviMt2tlMg1BvQ0FKXxrz1eJuyrcISrL2sPfBf7ZskX/FCEc/7LeThQaoygsMJpNqrATWQIsRVx+1Dpe4jaYuQ==}
     engines: {node: '>=18.17'}
 
+  undici@6.18.1:
+    resolution: {integrity: sha512-/0BWqR8rJNRysS5lqVmfc7eeOErcOP4tZpATVjJOojjHZ71gSYVAtFhEmadcIjwMIUehh5NFyKGsXCnXIajtbA==}
+    engines: {node: '>=18.17'}
+
   unified@10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
 
@@ -5953,7 +5960,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.12.8)(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.8))':
+  '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.12.12)(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.12))':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/generator': 7.24.5
@@ -5970,7 +5977,7 @@ snapshots:
       '@remix-run/router': 1.16.0
       '@remix-run/server-runtime': 2.9.1(typescript@5.4.2)
       '@types/mdx': 2.0.13
-      '@vanilla-extract/integration': 6.5.0(@types/node@20.12.8)
+      '@vanilla-extract/integration': 6.5.0(@types/node@20.12.12)
       arg: 5.0.2
       cacache: 17.1.4
       chalk: 4.1.2
@@ -6012,7 +6019,7 @@ snapshots:
     optionalDependencies:
       '@remix-run/serve': 2.9.1(typescript@5.4.2)
       typescript: 5.4.2
-      vite: 5.2.8(@types/node@20.12.8)
+      vite: 5.2.8(@types/node@20.12.12)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -6255,6 +6262,11 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
+  '@types/node@20.12.12':
+    dependencies:
+      undici-types: 5.26.5
+    optional: true
+
   '@types/node@20.12.8':
     dependencies:
       undici-types: 5.26.5
@@ -6399,7 +6411,7 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  '@vanilla-extract/integration@6.5.0(@types/node@20.12.8)':
+  '@vanilla-extract/integration@6.5.0(@types/node@20.12.12)':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.5)
@@ -6412,8 +6424,8 @@ snapshots:
       lodash: 4.17.21
       mlly: 1.6.1
       outdent: 0.8.0
-      vite: 5.2.8(@types/node@20.12.8)
-      vite-node: 1.5.0(@types/node@20.12.8)
+      vite: 5.2.8(@types/node@20.12.12)
+      vite-node: 1.5.0(@types/node@20.12.12)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -8968,9 +8980,9 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  native-fetch@4.0.2(undici@6.15.0):
+  native-fetch@4.0.2(undici@6.18.1):
     dependencies:
-      undici: 6.15.0
+      undici: 6.18.1
 
   natural-compare@1.4.0: {}
 
@@ -10264,6 +10276,8 @@ snapshots:
 
   undici@6.15.0: {}
 
+  undici@6.18.1: {}
+
   unified@10.1.2:
     dependencies:
       '@types/unist': 2.0.10
@@ -10386,13 +10400,13 @@ snapshots:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
-  vite-node@1.5.0(@types/node@20.12.8):
+  vite-node@1.5.0(@types/node@20.12.12):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.8(@types/node@20.12.8)
+      vite: 5.2.8(@types/node@20.12.12)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -10403,27 +10417,27 @@ snapshots:
       - supports-color
       - terser
 
-  vite-tsconfig-paths@4.3.2(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.8)):
+  vite-tsconfig-paths@4.3.2(typescript@5.4.2)(vite@5.2.8(@types/node@20.12.12)):
     dependencies:
       debug: 4.3.4
       globrex: 0.1.2
       tsconfck: 3.0.3(typescript@5.4.2)
     optionalDependencies:
-      vite: 5.2.8(@types/node@20.12.8)
+      vite: 5.2.8(@types/node@20.12.12)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@5.2.8(@types/node@20.12.8):
+  vite@5.2.8(@types/node@20.12.12):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.14.3
     optionalDependencies:
-      '@types/node': 20.12.8
+      '@types/node': 20.12.12
       fsevents: 2.3.3
 
-  vitest@1.5.0(@types/node@20.12.8):
+  vitest@1.5.0(@types/node@20.12.12):
     dependencies:
       '@vitest/expect': 1.5.0
       '@vitest/runner': 1.5.0
@@ -10442,11 +10456,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.7.0
       tinypool: 0.8.4
-      vite: 5.2.8(@types/node@20.12.8)
-      vite-node: 1.5.0(@types/node@20.12.8)
+      vite: 5.2.8(@types/node@20.12.12)
+      vite-node: 1.5.0(@types/node@20.12.12)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      '@types/node': 20.12.8
+      '@types/node': 20.12.12
     transitivePeerDependencies:
       - less
       - lightningcss

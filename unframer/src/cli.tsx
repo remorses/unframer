@@ -12,7 +12,7 @@ import { cac } from 'cac'
 import { logger } from './utils.js'
 import { BreakpointSizes } from './css.js'
 
-export const cli = cac()
+export const cli = cac('unframer')
 
 cli.command('', 'Run unframer')
     .option('--watch', 'Watch for Framer and unframer.config.json changes')
@@ -98,7 +98,9 @@ function fixOldUnframerPath() {
     const oldConfigPath = fs.existsSync('unframer.json')
     if (oldConfigPath) {
         fs.renameSync('unframer.json', 'unframer.config.json')
-        logger.green('legacy unframer.json config renamed to unframer.config.json')
+        logger.green(
+            'legacy unframer.json config renamed to unframer.config.json',
+        )
         return true
     }
     return false
@@ -116,7 +118,9 @@ cli.command('init', 'Init the unframer.config.json config').action(
     },
 )
 
-cli.help()
+const version = require('../package.json').version
+
+cli.version(version).help()
 
 function safeJsonParse(json: string) {
     try {
