@@ -1,5 +1,16 @@
 # unframer
 
+## 2.4.0
+
+### Minor Changes
+
+-   06c47a8: Use unframer.config.json instead of unframer.json because bundlers sometimes try to import from unframer.json when you do import x from 'unframer'
+
+### Patch Changes
+
+-   bc29d8e: Update framer to 2.4.1, update framer motion to 11.0.11-sync.5
+-   537db6e: Update framer to 2.4.1, update framer motion to 11.1.9
+
 ## 2.3.0
 
 ### Minor Changes

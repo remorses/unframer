@@ -8,7 +8,7 @@
 
 Download framer components as simple files
 
--   Works with any React framework (Next.js, Gatsby, Vite, etc)
+-   Works with any React framework (Next.js, Remix, Vite, etc)
 -   Includes all your components dependencies
 -   Has Typescript support, inferred from your component variables (like `variant`)
 
@@ -30,6 +30,7 @@ Download framer components as simple files
 
     ```json
     {
+        "$schema": "https://unframer-schema.vercel.app/schema.json",
         "outDir": "./framer",
         "components": {
             "logos": "https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav",
@@ -134,7 +135,7 @@ export default function App() {
 
 ## Custom breakpoints for responsive variants
 
-You can change the breakpoints by passing a breakpoints in your `unframer.config.json` config
+You can change the breakpoints by passing an object in your `unframer.config.json` config
 
 ```json
 {
@@ -158,7 +159,7 @@ You can change the breakpoints by passing a breakpoints in your `unframer.config
 -   Color, a string
 -   React component, created when you use a `component` variable in Framer, for example in the Ticker component
 
-Known limitations:
+## Known limitations:
 
 -   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
 
