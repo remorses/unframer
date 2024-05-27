@@ -1,5 +1,11 @@
 # unframer
 
+## 2.5.0
+
+### Minor Changes
+
+-   Add --version
+
 ## 2.4.0
 
 ### Minor Changes
