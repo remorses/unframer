@@ -33,6 +33,8 @@ jobs:
               uses: covbot/pnpm-install-with-cache@v1
             - run: pnpm --filter unframer build && pnpm unframer
               working-directory: nextjs-app
+            - run: pnpm unframer
+              working-directory: nextjs-app
             - run: pnpm build
               working-directory: nextjs-app
             - name: Create Release Pull Request or Publish to npm
