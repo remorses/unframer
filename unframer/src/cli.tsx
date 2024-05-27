@@ -6,8 +6,8 @@ import chokidar from 'chokidar'
 import fs from 'fs-extra'
 import findUp from 'find-up'
 import tmp from 'tmp'
-import path from 'path'
-const configName = 'unframer.json'
+import path, { basename } from 'path'
+const configNames = ['unframer.config.json', 'unframer.json']
 import { cac } from 'cac'
 import { logger } from './utils.js'
 import { BreakpointSizes } from './css.js'
@@ -15,26 +15,33 @@ import { BreakpointSizes } from './css.js'
 export const cli = cac()
 
 cli.command('', 'Run unframer')
-    .option('--watch', 'Watch for Framer and unframer.json changes')
+    .option('--watch', 'Watch for Framer and unframer.config.json changes')
     .action(async function main(options) {
+        fixOldUnframerPath()
         const cwd = process.cwd()
         const watch = process.argv.includes('--watch')
-        logger.log(`Looking for ${configName} in ${cwd}`)
-        const configPath = await findUp([configName], { cwd })
+        logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
+        const configPath = await findUp(configNames, { cwd })
         if (!configPath) {
-            logger.log(`No ${configName} found`)
+            logger.log(`No ${configNames.join(', ')} found`)
             return
         }
+        let configBasename = basename(configPath!)
         const configContent = fs.readFileSync(configPath, 'utf8')
         if (!configContent) {
-            logger.log(`No ${configName} contents found`)
+            logger.log(`No ${configBasename} contents found`)
             return
         }
         let config = JSON.parse(configContent)
 
         let controller = new AbortController()
         setMaxListeners(0, controller.signal)
-        processConfig({ config, watch, signal: controller.signal })
+        processConfig({
+            config,
+            watch,
+            signal: controller.signal,
+            configBasename,
+        })
         if (!watch) {
             return
         }
@@ -44,7 +51,7 @@ cli.command('', 'Run unframer')
         })
 
         watcher.on('change', async (path) => {
-            logger.log(`${configName} changed`)
+            logger.log(`${configBasename} changed`)
             console.log()
             controller.abort()
 
@@ -55,7 +62,7 @@ cli.command('', 'Run unframer')
                 fs.readFileSync(configPath!, 'utf8'),
             )
             if (!newConfig) {
-                logger.log(`Invalid ${configName} file`)
+                logger.log(`Invalid ${configBasename} file`)
                 return
             }
             const newNames = getNewNames(config, newConfig)
@@ -67,6 +74,7 @@ cli.command('', 'Run unframer')
                         components: pluck(newConfig.components, newNames),
                     },
                     watch,
+                    configBasename,
                     // signal: controller.signal,
                 })
             }
@@ -84,11 +92,29 @@ const defaultConfig = `{
 }
 `
 
-cli.command('init', 'Init the unframer.json config').action(async (options) => {
-    fs.writeFileSync(`unframer.json`, defaultConfig)
-    const p = path.resolve(process.cwd(), 'unframer.json')
-    console.log(`${p} file created`)
-})
+function fixOldUnframerPath() {
+    // if unframer.json exists, rename it to unframer.config.json
+
+    const oldConfigPath = fs.existsSync('unframer.json')
+    if (oldConfigPath) {
+        fs.renameSync('unframer.json', 'unframer.config.json')
+        logger.green('legacy unframer.json config renamed to unframer.config.json')
+        return true
+    }
+    return false
+}
+
+cli.command('init', 'Init the unframer.config.json config').action(
+    async (options) => {
+        let fixed = fixOldUnframerPath()
+        if (fixed) {
+            return
+        }
+        fs.writeFileSync(`unframer.config.json`, defaultConfig)
+        const p = path.resolve(process.cwd(), 'unframer.config.json')
+        console.log(`${p} file created`)
+    },
+)
 
 cli.help()
 
@@ -131,16 +157,18 @@ async function processConfig({
     config,
     watch,
     signal,
+    configBasename,
 }: {
     config: Config
     watch: boolean
+    configBasename: string
     signal?: AbortSignal
 }) {
     try {
         const { components, breakpoints, outDir } = config || {}
         const installDir = path.resolve(process.cwd(), outDir || 'framer')
         if (!components) {
-            logger.log(`No components found in ${configName}`)
+            logger.log(`No components found in ${configBasename}`)
             return
         }
 

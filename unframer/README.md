@@ -26,7 +26,7 @@ Download framer components as simple files
     npm install framer-motion@npm:unframer
     ```
 
-1. Create an `unframer.json` file like the following (the key will be used for the component folder inside `outDir`)
+1. Create an `unframer.config.json` file like the following (the key will be used for the component folder inside `outDir`)
 
     ```json
     {
@@ -134,7 +134,7 @@ export default function App() {
 
 ## Custom breakpoints for responsive variants
 
-You can change the breakpoints by passing a breakpoints in your `unframer.json` config
+You can change the breakpoints by passing a breakpoints in your `unframer.config.json` config
 
 ```json
 {
