@@ -9972,7 +9972,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.I6D5YTPZ.js
+// https :https://app.framerstatic.com/framer.TAAENX6Z.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -37199,10 +37199,24 @@ var FormContainer = ({
       },);
     }
   };
+  const handleKeyDown = (event) => {
+    const {
+      target: input,
+      currentTarget: form,
+      key: key7,
+    } = event;
+    const isTextArea = input instanceof HTMLTextAreaElement;
+    if (isTextArea) return;
+    if (key7 === 'Enter' && form.checkValidity()) {
+      event.preventDefault();
+      void handleSubmit(event,);
+    }
+  };
   return /* @__PURE__ */ jsx(motion.form, {
     ...props,
     'data-formid': formId,
     onSubmit: isSubmitEnabled ? handleSubmit : preventDefault,
+    onKeyDown: handleKeyDown,
     children: children(state,),
   },);
 };
@@ -40407,7 +40421,7 @@ var package_default = {
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.5.2',
-    typescript: '^5.3.3',
+    typescript: '^5.4.5',
     yargs: '^17.6.2',
   },
   peerDependencies: {
