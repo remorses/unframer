@@ -9972,7 +9972,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.TAAENX6Z.js
+// https :https://app.framerstatic.com/framer.W4GEXVYP.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -37248,6 +37248,110 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
+var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2) => {
+  FormInputStyleVariableNames2['Padding'] = '--framer-input-padding';
+  FormInputStyleVariableNames2['BorderRadiusTopLeft'] = '--framer-input-border-radius-top-left';
+  FormInputStyleVariableNames2['BorderRadiusTopRight'] = '--framer-input-border-radius-top-right';
+  FormInputStyleVariableNames2['BorderRadiusBottomRight'] = '--framer-input-border-radius-bottom-right';
+  FormInputStyleVariableNames2['BorderRadiusBottomLeft'] = '--framer-input-border-radius-bottom-left';
+  FormInputStyleVariableNames2['BorderColor'] = '--framer-input-border-color';
+  FormInputStyleVariableNames2['BorderTopWidth'] = '--framer-input-border-top-width';
+  FormInputStyleVariableNames2['BorderRightWidth'] = '--framer-input-border-right-width';
+  FormInputStyleVariableNames2['BorderBottomWidth'] = '--framer-input-border-bottom-width';
+  FormInputStyleVariableNames2['BorderLeftWidth'] = '--framer-input-border-left-width';
+  FormInputStyleVariableNames2['BorderStyle'] = '--framer-input-border-style';
+  FormInputStyleVariableNames2['Background'] = '--framer-input-background';
+  FormInputStyleVariableNames2['FontFamily'] = '--framer-input-font-family';
+  FormInputStyleVariableNames2['FontWeight'] = '--framer-input-font-weight';
+  FormInputStyleVariableNames2['FontSize'] = '--framer-input-font-size';
+  FormInputStyleVariableNames2['FontColor'] = '--framer-input-font-color';
+  FormInputStyleVariableNames2['FontLetterSpacing'] = '--framer-input-font-letter-spacing';
+  FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
+  FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
+  FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
+  FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
+  FormInputStyleVariableNames2['ZIndex'] = '--framer-input-z-index';
+  FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
+  FormInputStyleVariableNames2['FocusedBorderWidth'] = '--framer-input-focused-border-width';
+  FormInputStyleVariableNames2['FocusedBorderStyle'] = '--framer-input-focused-border-style';
+  FormInputStyleVariableNames2['FocusedBackground'] = '--framer-input-focused-background';
+  FormInputStyleVariableNames2['FocusedBoxShadow'] = '--framer-input-focused-box-shadow';
+  FormInputStyleVariableNames2['FocusedTransition'] = '--framer-input-focused-transition';
+  return FormInputStyleVariableNames2;
+})(FormInputStyleVariableNames || {},);
+var Var = FormInputStyleVariableNames;
+var inputClassName = 'framer-form-input';
+var inputWrapperClassName = 'framer-form-input-wrapper';
+function cssVar(a, b,) {
+  return `var(${a}, var(${b}))`;
+}
+var sharedInputCSS = [`.${inputClassName} {
+        padding: var(${Var.Padding});
+        background: var(${Var.Background});
+        font-family: var(${Var.FontFamily});
+        font-weight: var(${Var.FontWeight});
+        font-size: var(${Var.FontSize});
+        color: var(${Var.FontColor});
+        box-shadow: var(${Var.BoxShadow});
+        border: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: var(${Var.BorderRadiusTopLeft});
+        border-top-right-radius: var(${Var.BorderRadiusTopRight});
+        border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
+        border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
+        z-index: var(${Var.ZIndex});
+        letter-spacing: var(${Var.FontLetterSpacing});
+        text-align: var(${Var.FontTextAlignment});
+        line-height: var(${Var.FontLineHeight});
+        transition: var(${Var.FocusedTransition});
+        transition-property: background, box-shadow;
+    }`,];
+var focusInputCSS = [
+  `.${inputClassName}:focus-visible { outline: none; }`,
+  `.${inputClassName}:focus {
+        background: ${cssVar(Var.FocusedBackground, Var.Background,)};
+        box-shadow: ${cssVar(Var.FocusedBoxShadow, Var.BoxShadow,)};
+    }`,
+  `.${inputWrapperClassName}:focus-within::after {
+        border-color: ${cssVar(Var.FocusedBorderColor, Var.BorderColor,)};
+        border-style: ${cssVar(Var.FocusedBorderStyle, Var.BorderStyle,)};
+        border-top-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderTopWidth,)};
+        border-right-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderRightWidth,)};
+        border-bottom-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderBottomWidth,)};
+        border-left-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderLeftWidth,)};
+    }`,
+];
+var inputBorderCSS = [
+  `.${inputWrapperClassName} {
+        position: relative;
+    }`,
+  `.${inputWrapperClassName}:after {
+        content: "";
+        pointer-events: none;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: var(${Var.BorderRadiusTopLeft});
+        border-top-right-radius: var(${Var.BorderRadiusTopRight});
+        border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
+        border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
+        border-color: var(${Var.BorderColor});
+        border-top-width: var(${Var.BorderTopWidth});
+        border-right-width: var(${Var.BorderRightWidth});
+        border-bottom-width: var(${Var.BorderBottomWidth});
+        border-left-width: var(${Var.BorderLeftWidth});
+        border-style: var(${Var.BorderStyle});
+        transition: var(${Var.FocusedTransition});
+        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
+    }`,
+];
 var passwordManagerIgnoreDataProps = {
   // 1Password
   'data-1p-ignore': true,
@@ -37257,8 +37361,6 @@ var passwordManagerIgnoreDataProps = {
 var sensibleInputDefaults = {
   autocomplete: 'off',
 };
-var inputClassName = 'framer-form-input';
-var inputWrapperClassName = 'framer-form-input-wrapper';
 var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput(props, ref,) {
   const {
     style,
@@ -37324,83 +37426,82 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       },);
   }
 },);
-var FormPlainTextInput2 = /* @__PURE__ */ (() =>
-  withCSS(PlainTextInput, [
-    `.${inputClassName} {
-            padding: var(${'--framer-input-padding'});
-            background: var(${'--framer-input-background'});
-            font-family: var(${'--framer-input-font-family'});
-            font-weight: var(${'--framer-input-font-weight'});
-            font-size: var(${'--framer-input-font-size'});
-            color: var(${'--framer-input-font-color'});
-            box-shadow: var(${'--framer-input-box-shadow'});
-            border: none;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
-            border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
-            border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
-            border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
-            z-index: var(${'--framer-input-z-index'});
-            letter-spacing: var(${'--framer-input-font-letter-spacing'});
-            text-align: var(${'--framer-input-font-text-alignment'});
-            line-height: var(${'--framer-input-font-line-height'});
-            transition: var(${'--framer-input-focused-transition'});
-            transition-property: background, box-shadow;
-        }`,
-    `.${inputClassName}::placeholder {
+var FormPlainTextInput2 =
+  /* @__PURE__ */ (() =>
+    withCSS(PlainTextInput, [
+      ...sharedInputCSS,
+      ...focusInputCSS,
+      ...inputBorderCSS,
+      `.${inputClassName}::placeholder {
             color: var(${'--framer-input-placeholder-color'});
         }`,
-    `.${inputClassName}:focus {
-            background: var(${'--framer-input-focused-background'}, var(${'--framer-input-background'}));
-            box-shadow: var(${'--framer-input-focused-box-shadow'}, var(${'--framer-input-box-shadow'}));
-        }`,
-    `.${inputClassName}:focus-visible {
-            outline: none;
-        }`,
-    `textarea.${inputClassName} {
+      `textarea.${inputClassName} {
             resize: var(${'--framer-textarea-resize'});
             min-height: var(${'--framer-textarea-min-height'});
         }`,
-    // We can't use normal CSS borders on focus, because different border widths between normal and
-    // focused states could cause the elements to jump (due to overall size constraints of
-    // the element changing). Instead we use a different element to display the focused border,
-    // which is absolutely positioned over the input, with all pointer events disabled.
-    // The result is that borders are applied like an inset box shadow so that the overall size of
-    // the input never changes, and doesn't cause any jumps.
-    // This approach is roughly analogous to how borders are implemented for frames.
-    `.${inputWrapperClassName} {
-            position: relative;
+    ],))();
+var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRef,) {
+  const {
+    style,
+    inputName,
+    required,
+    autoFocus,
+    selectOptions,
+    selectDefaultValue,
+  } = props;
+  return /* @__PURE__ */ jsx(motion.div, {
+    ref: measureRef,
+    style,
+    className: cx(inputWrapperClassName, selectWrapperClassName, props.className,),
+    children: /* @__PURE__ */ jsx(motion.select, {
+      id: inputName,
+      name: inputName,
+      autoFocus,
+      required,
+      className: inputClassName,
+      defaultValue: selectDefaultValue,
+      children: selectOptions == null ? void 0 : selectOptions.map((option, index,) => {
+        switch (option.type) {
+          case 'divider':
+            return /* @__PURE__ */ jsx('hr', {}, index,);
+          case 'option':
+            return /* @__PURE__ */ jsx('option', {
+              value: option.value ?? option.title,
+              disabled: option.disabled,
+              children: option.title ?? option.value,
+            }, index,);
+        }
+      },),
+    }, selectDefaultValue,),
+  },);
+},);
+var selectWrapperClassName = 'framer-form-select-wrapper';
+var selectArrowSize = 16;
+var FormSelect = /* @__PURE__ */ (() =>
+  withCSS(Select, [
+    ...sharedInputCSS,
+    ...focusInputCSS,
+    ...inputBorderCSS,
+    `select.${inputClassName} {
+            appearance: none;
+            -webkit-appearance: none;
+            padding-right: calc(var(${'--framer-input-padding'}) * 2 + ${selectArrowSize}px);
         }`,
-    `.${inputWrapperClassName}:after {
+    `.${selectWrapperClassName}::before {
             content: "";
-            pointer-events: none;
-            box-sizing: border-box;
+            display: block;
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            right: 0;
             height: 100%;
-            border-top-left-radius: var(${'--framer-input-border-radius-top-left'});
-            border-top-right-radius: var(${'--framer-input-border-radius-top-right'});
-            border-bottom-right-radius: var(${'--framer-input-border-radius-bottom-right'});
-            border-bottom-left-radius: var(${'--framer-input-border-radius-bottom-left'});
-            border-color: var(${'--framer-input-border-color'});
-            border-top-width: var(${'--framer-input-border-top-width'});
-            border-right-width: var(${'--framer-input-border-right-width'});
-            border-bottom-width: var(${'--framer-input-border-bottom-width'});
-            border-left-width: var(${'--framer-input-border-left-width'});
-            border-style: var(${'--framer-input-border-style'});
-            transition: var(${'--framer-input-focused-transition'});
-            transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
-        }`,
-    `.${inputWrapperClassName}:focus-within::after {
-            border-color: var(${'--framer-input-focused-border-color'});
-            border-width: var(${'--framer-input-focused-border-width'});
-            border-style: var(${'--framer-input-focused-border-style'});
+            width: 16px;
+            box-sizing: content-box;
+            padding: 0 var(${'--framer-input-padding'});
+            position: absolute;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>');
+            background-repeat: no-repeat;
+            background-position: center center;
+            border: none;
         }`,
   ],))();
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
@@ -40569,6 +40670,7 @@ export {
   forceLayerBackingWithCSSProperties,
   FormContainer,
   FormPlainTextInput2 as FormPlainTextInput,
+  FormSelect,
   fraction,
   Frame,
   frame,
