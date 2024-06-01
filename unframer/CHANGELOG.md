@@ -1,5 +1,12 @@
 # unframer
 
+## 2.5.1
+
+### Patch Changes
+
+-   2bd75f7: Update framer to 2.4.1, update framer motion to 11.2.6
+-   Fix styles injection, Framer now assumes react is 19 so it no longer does it but leaves react to do it
+
 ## 2.5.0
 
 ### Minor Changes
