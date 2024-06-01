@@ -1,7 +1,12 @@
 'use client'
 
 import 'nextjs-app/src/framer/styles.css'
-import { AnimatePresence, MotionConfig, MotionConfigContext, PageRoot } from 'unframer'
+import {
+    AnimatePresence,
+    MotionConfig,
+    MotionConfigContext,
+    PageRoot,
+} from 'unframer'
 
 import Logos from 'nextjs-app/src/framer/logos'
 import Menus from 'nextjs-app/src/framer/menus'
@@ -14,9 +19,11 @@ import MenuOverlay from 'nextjs-app/src/framer/menu-overlay'
 import Collection from 'nextjs-app/src/framer/collection'
 import Card from 'nextjs-app/src/framer/card'
 
+
+
 export default function Home() {
     return (
-        < >
+        <>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
 
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
