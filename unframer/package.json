@@ -32,7 +32,6 @@
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "license": "",
     "peerDependencies": {
-        "@types/react": "*",
         "react": "*",
         "react-dom": "*"
     },
@@ -68,8 +67,8 @@
         "@xmorse/deployment-utils": "^0.1.0",
         "openai": "^4.40.2",
         "posthtml": "^0.16.6",
-        "react": "^18.3.0",
-        "react-dom": "^18.3.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
         "tiktoken": "^1.0.14"
     }
 }
