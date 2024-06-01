@@ -58,9 +58,7 @@ function b2(n, e2, t2, r, o,) {
   return c;
 }
 function l2(n, e2, t2, r,) {
-  if (n === e2 && t2 === r) {
-    return u;
-  }
+  if (n === e2 && t2 === r) return u;
   let o = (i2,) => b2(i2, 0, 1, n, t2,);
   return (i2,) => i2 === 0 || i2 === 1 ? i2 : s2(o(i2,), e2, r,);
 }
@@ -79,15 +77,9 @@ var F2 = {
 };
 var M = /\((.*?)\)/;
 function l3(i2,) {
-  if (I(i2,)) {
-    return i2;
-  }
-  if (A(i2,)) {
-    return l2(...i2,);
-  }
-  if (F2[i2]) {
-    return F2[i2];
-  }
+  if (I(i2,)) return i2;
+  if (A(i2,)) return l2(...i2,);
+  if (F2[i2]) return F2[i2];
   if (i2.startsWith('steps',)) {
     let t2 = M.exec(i2,);
     if (t2) {
@@ -217,9 +209,7 @@ var t = class {
 // https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs
 function S2(e2, t2,) {
   var n = {};
-  for (var r in e2) {
-    Object.prototype.hasOwnProperty.call(e2, r,) && t2.indexOf(r,) < 0 && (n[r] = e2[r]);
-  }
+  for (var r in e2) Object.prototype.hasOwnProperty.call(e2, r,) && t2.indexOf(r,) < 0 && (n[r] = e2[r]);
   if (e2 != null && typeof Object.getOwnPropertySymbols == 'function') {
     for (var i2 = 0, r = Object.getOwnPropertySymbols(e2,); i2 < r.length; i2++) {
       t2.indexOf(r[i2],) < 0 && Object.prototype.propertyIsEnumerable.call(e2, r[i2],) && (n[r[i2]] = e2[r[i2]]);
@@ -262,9 +252,7 @@ var V = (
   if (a2 < 1) {
     let i2 = m2 * Math.sqrt(1 - a2 * a2,);
     M3 = (f3,) => n - Math.exp(-a2 * m2 * f3,) * ((-u2 + a2 * m2 * p) / i2 * Math.sin(i2 * f3,) + p * Math.cos(i2 * f3,));
-  } else {
-    M3 = (i2,) => n - Math.exp(-m2 * i2,) * (p + (-u2 + m2 * p) * i2);
-  }
+  } else M3 = (i2,) => n - Math.exp(-m2 * i2,) * (p + (-u2 + m2 * p) * i2);
   return (i2,) => {
     c.current = M3(i2,);
     let f3 = i2 === 0 ? u2 : x2(M3, i2, c.current,), g2 = Math.abs(f3,) <= l4, y = Math.abs(n - c.current,) <= d3;
@@ -404,23 +392,17 @@ var It = {
 };
 var ut = {};
 var V2 = {};
-for (let t2 in It) {
-  V2[t2] = () => (ut[t2] === void 0 && (ut[t2] = It[t2]()), ut[t2]);
-}
+for (let t2 in It) V2[t2] = () => (ut[t2] === void 0 && (ut[t2] = It[t2]()), ut[t2]);
 var Te = 0.015;
 var Le = (t2, e2,) => {
   let n = '', r = Math.round(e2 / Te,);
-  for (let o = 0; o < r; o++) {
-    n += t2(f(0, r - 1, o,),) + ', ';
-  }
+  for (let o = 0; o < r; o++) n += t2(f(0, r - 1, o,),) + ', ';
   return n.substring(0, n.length - 2,);
 };
 var pt = (t2, e2,) => I(t2,) ? V2.linearEasing() ? `linear(${Le(t2, e2,)})` : b.easing : A(t2,) ? De(t2,) : t2;
 var De = ([t2, e2, n, r,],) => `cubic-bezier(${t2}, ${e2}, ${n}, ${r})`;
 function _t(t2, e2,) {
-  for (let n = 0; n < t2.length; n++) {
-    t2[n] === null && (t2[n] = n ? t2[n - 1] : e2());
-  }
+  for (let n = 0; n < t2.length; n++) t2[n] === null && (t2[n] = n ? t2[n - 1] : e2());
   return t2;
 }
 var J = (t2,) => Array.isArray(t2,) ? t2 : [t2,];
@@ -579,9 +561,7 @@ var _e = {
       case 'currentTime':
         n = N.ms(n,);
       case 'playbackRate':
-        for (let r = 0; r < t2.animations.length; r++) {
-          t2.animations[r][e2] = n;
-        }
+        for (let r = 0; r < t2.animations.length; r++) t2.animations[r][e2] = n;
         return true;
     }
     return false;
@@ -631,9 +611,8 @@ function nt(t2,) {
         if (l4) {
           m2 = tt(s3, a2 ? L2.get(W(a2,),) : void 0,);
           let x3 = s3[g2 - 1];
-          if (O2 = xt(x3,), g2 > 1 && s3[0] !== null) {
-            f3 = xt(s3[0],);
-          } else {
+          if (O2 = xt(x3,), g2 > 1 && s3[0] !== null) f3 = xt(s3[0],);
+          else {
             let A2 = c?.generator;
             if (A2) {
               let { animation: w2, generatorStartTime: T2, } = c,
@@ -641,9 +620,7 @@ function nt(t2,) {
                 b3 = w2?.currentTime || performance.now() - E2,
                 p = A2(b3,).current;
               f3 = p, S4 = x2((v2,) => A2(v2,).current, b3, p,);
-            } else {
-              u2 && (f3 = xt(u2(),));
-            }
+            } else u2 && (f3 = xt(u2(),));
           }
         }
         if (Gt(f3,) && Gt(O2,)) {
@@ -673,9 +650,7 @@ function wt(t2, e2, { root: n, margin: r, amount: o = 'any', } = {},) {
           if (c.isIntersecting) {
             let f3 = e2(c,);
             I(f3,) ? s3.set(c.target, f3,) : u2.unobserve(c.target,);
-          } else {
-            d3 && (d3(c,), s3.delete(c.target,));
-          }
+          } else d3 && (d3(c,), s3.delete(c.target,));
         }
       },);
     },
@@ -688,9 +663,7 @@ function En(t2, e2,) {
   if (e2) {
     let { inlineSize: n, blockSize: r, } = e2[0];
     return { width: n, height: r, };
-  } else {
-    return t2 instanceof SVGElement && 'getBBox' in t2 ? t2.getBBox() : { width: t2.offsetWidth, height: t2.offsetHeight, };
-  }
+  } else return t2 instanceof SVGElement && 'getBBox' in t2 ? t2.getBBox() : { width: t2.offsetWidth, height: t2.offsetHeight, };
 }
 function Sn({ target: t2, contentRect: e2, borderBoxSize: n, },) {
   var r;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use client';
 import { className, className2, className3, css, css2, css3, fonts, fonts2, fonts3, } from './chunk-L46B732H.js';
-import './chunk-6C3VEZWH.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js
 import { jsx as _jsx5, jsxs as _jsxs5, } from 'react/jsx-runtime';
@@ -489,9 +489,7 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
   },);
   const layoutDependency = createLayoutDependency3(props, variants,);
   const isDisplayed = () => {
-    if (baseVariant === 'fMLzDPiVJ') {
-      return RemVozjsi;
-    }
+    if (baseVariant === 'fMLzDPiVJ') return RemVozjsi;
     return true;
   };
   const defaultLayoutId = React3.useId();
@@ -793,9 +791,7 @@ var Component4 = /* @__PURE__ */ React4.forwardRef(function (props, ref,) {
     setGestureState({ isPressed: false, },);
     if (HihQ7sLzJ) {
       const res = await HihQ7sLzJ(...args,);
-      if (res === false) {
-        return false;
-      }
+      if (res === false) return false;
     }
   },);
   const ref1 = React4.useRef(null,);
@@ -1098,9 +1094,7 @@ var Component5 = /* @__PURE__ */ React5.forwardRef(function (props, ref,) {
   const tapsqqhvp = activeVariantCallback(async (...args) => {
     if (Gt9H5QhVm) {
       const res = await Gt9H5QhVm(...args,);
-      if (res === false) {
-        return false;
-      }
+      if (res === false) return false;
     }
   },);
   const ref1 = React5.useRef(null,);

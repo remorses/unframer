@@ -37,9 +37,7 @@ var defaultEvents = {
 var findByArray = (arr, search,) => arr.find((a,) => a.toLowerCase().includes(search,));
 function useIconSelection(iconKeys, selectByList, iconSearch = '', iconSelection, lowercaseIconKeyPairs,) {
   const iconSearchResult = useMemo(() => {
-    if (iconSearch == null || (iconSearch === null || iconSearch === void 0 ? void 0 : iconSearch.length) === 0) {
-      return null;
-    }
+    if (iconSearch == null || (iconSearch === null || iconSearch === void 0 ? void 0 : iconSearch.length) === 0) return null;
     const iconSearchTerm = iconSearch.toLowerCase().replace(/-|\s/g, '',);
     var _iconSearchTerm;
     const searchResult = (_iconSearchTerm = lowercaseIconKeyPairs[iconSearchTerm]) !== null && _iconSearchTerm !== void 0

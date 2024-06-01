@@ -1,6 +1,6 @@
 /* eslint-disable */
 'use client';
-import './chunk-6C3VEZWH.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/yP9cBABIddxlXhfvw3qN/yS_JadFF6.js
 import { Fragment as _Fragment, jsx as _jsx3, jsxs as _jsxs2, } from 'react/jsx-runtime';
@@ -203,9 +203,7 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
   const onMouseEnter1nzhzpa = activeVariantCallback(async (...args) => {
     if (PWSlWeqS6) {
       const res = await PWSlWeqS6(...args,);
-      if (res === false) {
-        return false;
-      }
+      if (res === false) return false;
     }
   },);
   const ref1 = React2.useRef(null,);
@@ -1414,15 +1412,11 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
     },);
   const ref1 = React3.useRef(null,);
   const isDisplayed = () => {
-    if (['QPRMNhp2_', 'hDjcIqUXB',].includes(baseVariant,)) {
-      return true;
-    }
+    if (['QPRMNhp2_', 'hDjcIqUXB',].includes(baseVariant,)) return true;
     return false;
   };
   const isDisplayed1 = () => {
-    if (['QPRMNhp2_', 'hDjcIqUXB',].includes(baseVariant,)) {
-      return false;
-    }
+    if (['QPRMNhp2_', 'hDjcIqUXB',].includes(baseVariant,)) return false;
     return true;
   };
   const ref2 = React3.useRef(null,);
@@ -1435,6 +1429,7 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
   const sharedStyleClassNames = [];
   const componentViewport = useComponentViewport();
   return /* @__PURE__ */ _jsx3(LayoutGroup3, {
+    suppressHydrationWarning: true,
     id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
     children: /* @__PURE__ */ _jsx3(Variants, {
       animate: variants,

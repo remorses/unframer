@@ -1,8 +1,8 @@
 /* eslint-disable */
 'use client';
-import { Icon, } from './chunk-NYGXGF5D.js';
-import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
-import './chunk-6C3VEZWH.js';
+import { Icon, } from './chunk-EZ4RZKH4.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-KA64PIU2.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js
 import { jsx as _jsx3, jsxs as _jsxs2, } from 'react/jsx-runtime';
@@ -1364,13 +1364,9 @@ function Icon2(props,) {
         /* webpackIgnore: true */
         iconModuleUrl
       );
-      if (isMounted.current) {
-        setSelectedIcon(module.default(React,),);
-      }
+      if (isMounted.current) setSelectedIcon(module.default(React,),);
     } catch (err) {
-      if (isMounted.current) {
-        setSelectedIcon(null,);
-      }
+      if (isMounted.current) setSelectedIcon(null,);
     }
   }
   useEffect(() => {

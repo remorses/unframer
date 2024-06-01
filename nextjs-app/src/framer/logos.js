@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use client';
-import { Et, } from './chunk-O2PC5PVC.js';
-import './chunk-6C3VEZWH.js';
+import { Et, } from './chunk-42HYK6HY.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js
 import { jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime';
@@ -204,9 +204,7 @@ function Ticker(props,) {
         xOrY.current += delta;
         xOrY.current = wrap(0, animateToValue, xOrY.current,);
         prevTime.current = t;
-        if (!isInView) {
-          return;
-        }
+        if (!isInView) return;
         offset.set(xOrY.current,);
       },);
     }

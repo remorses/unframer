@@ -16,8 +16,8 @@
         "@remix-run/serve": "^2.9.1",
         "isbot": "^4.1.0",
         "nextjs-app": "workspace:*",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
+        "react": "19.0.0-rc-6d3110b4d9-20240531",
+        "react-dom": "19.0.0-rc-6d3110b4d9-20240531",
         "unframer": "workspace:*"
     },
     "devDependencies": {
@@ -36,7 +36,7 @@
         "postcss": "8.4.24",
         "tailwindcss": "3.3.2",
         "typescript": "^5.1.6",
-        "vite": "^5.1.0",
+        "vite": "^5.2.12",
         "vite-tsconfig-paths": "^4.2.1"
     },
     "engines": {

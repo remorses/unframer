@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use client';
-import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
-import './chunk-6C3VEZWH.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-KA64PIU2.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js
 import { jsx as _jsx3, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -478,13 +478,9 @@ function Icon(props,) {
         /* webpackIgnore: true */
         iconModuleUrl
       );
-      if (isMounted.current) {
-        setSelectedIcon(module.default(React,),);
-      }
+      if (isMounted.current) setSelectedIcon(module.default(React,),);
     } catch {
-      if (isMounted.current) {
-        setSelectedIcon(null,);
-      }
+      if (isMounted.current) setSelectedIcon(null,);
     }
   }
   useEffect(() => {
@@ -1741,27 +1737,19 @@ var Component2 = /* @__PURE__ */ React3.forwardRef(
       setVariant('XKqaB2Aqx',);
     },);
     const isDisplayed = () => {
-      if (['SUKuEnEm3', 'q40bx8oO9',].includes(baseVariant,)) {
-        return false;
-      }
+      if (['SUKuEnEm3', 'q40bx8oO9',].includes(baseVariant,)) return false;
       return true;
     };
     const isDisplayed1 = () => {
-      if (['SUKuEnEm3', 'uKYMy2q_h', 'XKqaB2Aqx',].includes(baseVariant,)) {
-        return false;
-      }
+      if (['SUKuEnEm3', 'uKYMy2q_h', 'XKqaB2Aqx',].includes(baseVariant,)) return false;
       return true;
     };
     const isDisplayed2 = () => {
-      if (['uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',].includes(baseVariant,)) {
-        return false;
-      }
+      if (['uKYMy2q_h', 'q40bx8oO9', 'XKqaB2Aqx',].includes(baseVariant,)) return false;
       return true;
     };
     const isDisplayed3 = () => {
-      if (['SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9',].includes(baseVariant,)) {
-        return false;
-      }
+      if (['SUKuEnEm3', 'uKYMy2q_h', 'q40bx8oO9',].includes(baseVariant,)) return false;
       return true;
     };
     const defaultLayoutId = React3.useId();

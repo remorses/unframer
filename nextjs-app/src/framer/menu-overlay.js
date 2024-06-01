@@ -1,6 +1,6 @@
 /* eslint-disable */
 'use client';
-import './chunk-6C3VEZWH.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';

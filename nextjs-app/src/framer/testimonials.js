@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use client';
-import { Et, } from './chunk-O2PC5PVC.js';
-import './chunk-6C3VEZWH.js';
+import { Et, } from './chunk-42HYK6HY.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js
 import { jsx as _jsx3, jsxs as _jsxs3, } from 'react/jsx-runtime';
@@ -202,9 +202,7 @@ function Ticker(props,) {
         return () => animationRef.current.cancel();
       }, [hoverFactor, animateToValue, speed,],);
       useEffect(() => {
-        if (!animationRef.current) {
-          return;
-        }
+        if (!animationRef.current) return;
         if (isInView && animationRef.current.playState === 'paused') {
           animationRef.current.play();
         } else if (!isInView && animationRef.current.playState === 'running') {
@@ -228,9 +226,7 @@ function Ticker(props,) {
         xOrY.current += delta;
         xOrY.current = wrap(0, animateToValue, xOrY.current,);
         prevTime.current = t;
-        if (!isInView) {
-          return;
-        }
+        if (!isInView) return;
         offset.set(xOrY.current,);
       },);
     }
@@ -790,21 +786,15 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
   const layoutDependency = createLayoutDependency(props, variants,);
   const ref1 = React2.useRef(null,);
   const isDisplayed = () => {
-    if (baseVariant === 'dGbAdK8tT') {
-      return true;
-    }
+    if (baseVariant === 'dGbAdK8tT') return true;
     return false;
   };
   const isDisplayed1 = () => {
-    if (baseVariant === 'dGbAdK8tT') {
-      return false;
-    }
+    if (baseVariant === 'dGbAdK8tT') return false;
     return true;
   };
   const isDisplayed2 = () => {
-    if (['jbqU_7iL0', 'dGbAdK8tT',].includes(baseVariant,)) {
-      return false;
-    }
+    if (['jbqU_7iL0', 'dGbAdK8tT',].includes(baseVariant,)) return false;
     return true;
   };
   const defaultLayoutId = React2.useId();

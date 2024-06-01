@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { defaultEvents, NullState, useIconSelection, } from './chunk-KS6IWKVH.js';
+import { defaultEvents, NullState, useIconSelection, } from './chunk-KA64PIU2.js';
 
 // https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -1172,13 +1172,9 @@ function Icon(props,) {
         /* webpackIgnore: true */
         iconModuleUrl
       );
-      if (isMounted.current) {
-        setSelectedIcon(module.default(React,),);
-      }
+      if (isMounted.current) setSelectedIcon(module.default(React,),);
     } catch (err) {
-      if (isMounted.current) {
-        setSelectedIcon(null,);
-      }
+      if (isMounted.current) setSelectedIcon(null,);
     }
   }
   useEffect(() => {

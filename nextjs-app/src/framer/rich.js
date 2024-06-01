@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use client';
 import { className, className2, css, css2, fonts, fonts2, } from './chunk-7SJVVYGA.js';
-import './chunk-6C3VEZWH.js';
+import './chunk-MLKGABMK.js';
 
 // https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/60Z5GcubRS6ko9t0q7HK/inWBH4dIK.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
