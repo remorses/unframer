@@ -1,6 +1,6 @@
 /* eslint-disable */
 'use client';
-import { Et, } from './chunk-GZE2AZR4.js';
+import { Et, } from './chunk-O2PC5PVC.js';
 import './chunk-6C3VEZWH.js';
 
 // https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js

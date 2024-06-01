@@ -215,6 +215,8 @@
             text-decoration: var(--framer-text-decoration, none);
             line-height: var(--framer-line-height, 1.2em);
             text-align: var(--framer-text-alignment, start);
+            -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
+            -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
         }
     
 

@@ -2175,7 +2175,7 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
+    "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs": {
       "bytes": 1777,
       "imports": [
         {
@@ -2196,28 +2196,18 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
-      "bytes": 3031,
+    "https :https://esm.sh/v135/@motionone/easing@10.17.1/esnext/easing.mjs": {
+      "bytes": 826,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
@@ -2237,9 +2227,24 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
-      "bytes": 13811,
+    "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs": {
+      "bytes": 3686,
       "imports": [
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/easing@10.17.1/esnext/easing.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/easing@10.17.1/esnext/easing.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
           "kind": "import-statement",
@@ -2279,7 +2284,7 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
+    "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs": {
       "bytes": 237,
       "imports": [
         {
@@ -2300,18 +2305,49 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
-      "bytes": 826,
+    "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
+      "bytes": 13811,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "external": true
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "https :https://esm.sh/v135/@motionone/generators@10.17.1/esnext/generators.mjs": {
+      "bytes": 3031,
+      "imports": [
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
@@ -2331,49 +2367,13 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
-      "bytes": 3686,
-      "imports": [
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/easing@10.17.0/esnext/easing.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
-          "kind": "import-statement",
-          "external": true
-        },
-        {
-          "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
-          "kind": "import-statement",
-          "external": true
-        }
-      ],
-      "format": "esm"
-    },
-    "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
+    "https :https://esm.sh/v135/@motionone/dom@10.17.1/esnext/dom.mjs": {
       "bytes": 27680,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
+          "original": "/v135/@motionone/animation@10.17.1/esnext/animation.mjs"
         },
         {
           "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
@@ -2381,134 +2381,44 @@
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/types@10.17.0/esnext/types.mjs"
+          "original": "/v135/@motionone/types@10.17.1/esnext/types.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
-          "kind": "import-statement",
-          "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/animation@10.17.1/esnext/animation.mjs"
         },
         {
           "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
@@ -2521,14 +2431,54 @@
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/animation@10.17.1/esnext/animation.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.1/esnext/generators.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/generators@10.17.1/esnext/generators.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.1/esnext/generators.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/generators@10.17.1/esnext/generators.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.1/esnext/generators.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/generators@10.17.1/esnext/generators.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
           "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
@@ -2536,14 +2486,64 @@
           "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "kind": "import-statement",
+          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
+          "kind": "import-statement",
+          "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
+          "kind": "import-statement",
+          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/animation@10.17.1/esnext/animation.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
@@ -2567,19 +2567,9 @@
       "bytes": 411,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.17.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.17.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
+          "original": "/v135/@motionone/animation@10.17.1/esnext/animation.mjs"
         },
         {
           "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
@@ -2587,19 +2577,29 @@
           "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/types@10.17.0/esnext/types.mjs"
+          "original": "/v135/@motionone/types@10.17.1/esnext/types.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs",
+          "path": "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.17.0/esnext/animation.mjs"
+          "original": "/v135/@motionone/utils@10.17.1/esnext/utils.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs",
+          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/dom@10.17.0/esnext/dom.mjs"
+          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/generators@10.17.1/esnext/generators.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/generators@10.17.1/esnext/generators.mjs"
+        },
+        {
+          "path": "https :https://esm.sh/v135/@motionone/dom@10.17.1/esnext/dom.mjs",
+          "kind": "import-statement",
+          "original": "/v135/@motionone/dom@10.17.1/esnext/dom.mjs"
         },
         {
           "path": "/Users/morse/Documents/GitHub/installable-framer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.20.2/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
@@ -6012,7 +6012,7 @@
     "logos.js": {
       "imports": [
         {
-          "path": "chunk-GZE2AZR4.js",
+          "path": "chunk-O2PC5PVC.js",
           "kind": "import-statement"
         },
         {
@@ -6090,7 +6090,7 @@
     "testimonials.js": {
       "imports": [
         {
-          "path": "chunk-GZE2AZR4.js",
+          "path": "chunk-O2PC5PVC.js",
           "kind": "import-statement"
         },
         {
@@ -6196,34 +6196,34 @@
       },
       "bytes": 44921
     },
-    "chunk-GZE2AZR4.js": {
+    "chunk-O2PC5PVC.js": {
       "imports": [],
       "exports": [
         "Et"
       ],
       "inputs": {
-        "https :https://esm.sh/v135/@motionone/utils@10.17.0/esnext/utils.mjs": {
+        "https :https://esm.sh/v135/@motionone/utils@10.17.1/esnext/utils.mjs": {
           "bytesInOutput": 1325
         },
-        "https :https://esm.sh/v135/@motionone/easing@10.17.0/esnext/easing.mjs": {
+        "https :https://esm.sh/v135/@motionone/easing@10.17.1/esnext/easing.mjs": {
           "bytesInOutput": 680
         },
-        "https :https://esm.sh/v135/@motionone/animation@10.17.0/esnext/animation.mjs": {
+        "https :https://esm.sh/v135/@motionone/animation@10.17.1/esnext/animation.mjs": {
           "bytesInOutput": 3358
         },
         "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
           "bytesInOutput": 24
         },
-        "https :https://esm.sh/v135/@motionone/types@10.17.0/esnext/types.mjs": {
+        "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs": {
           "bytesInOutput": 209
         },
         "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
           "bytesInOutput": 421
         },
-        "https :https://esm.sh/v135/@motionone/generators@10.17.0/esnext/generators.mjs": {
+        "https :https://esm.sh/v135/@motionone/generators@10.17.1/esnext/generators.mjs": {
           "bytesInOutput": 2803
         },
-        "https :https://esm.sh/v135/@motionone/dom@10.17.0/esnext/dom.mjs": {
+        "https :https://esm.sh/v135/@motionone/dom@10.17.1/esnext/dom.mjs": {
           "bytesInOutput": 13071
         },
         "https :https://esm.sh/@motionone/dom": {
