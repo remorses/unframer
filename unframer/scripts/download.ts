@@ -122,7 +122,7 @@ export async function fixFramerCode({ resultFile }) {
         ],
         filename: '',
         compact: false,
-        
+
         sourceMaps: false,
     })
 
@@ -138,6 +138,18 @@ export async function fixFramerCode({ resultFile }) {
         'var combinedCSSRules =',
         'export var combinedCSSRules =',
     )
+    // this piece of code was removed in https://vercel.com/gang/unframer-nextjs-app/F8jbRtq2KZvmTYGBapgwbTVbsqyy
+    // https://github.com/remorses/unframer/commit/537db6e74858b01d97cef3caeb047569bd6d3ccf
+    // probably because new react version should append styles to head automatically but this does not happen now?
+    codeAfter += dedent`
+    if (typeof document !== 'undefined') {
+        for (const node of document.querySelectorAll(
+            'style[data-framer-css-ssr]',
+        )) {
+            document.head.appendChild(node)
+        }
+    }
+    `
 
     if (code === codeAfter) {
         throw new Error('Failed to export combinedCSSRules')
