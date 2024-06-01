@@ -55,16 +55,16 @@ importers:
         version: link:../unframer
       next:
         specifier: 14.2.3
-        version: 14.2.3(@opentelemetry/api@1.8.0)(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)
+        version: 14.2.3(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       postcss:
         specifier: 8.4.24
         version: 8.4.24
       react:
-        specifier: 19.0.0-rc-6d3110b4d9-20240531
-        version: 19.0.0-rc-6d3110b4d9-20240531
+        specifier: 18.3.1
+        version: 18.3.1
       react-dom:
-        specifier: 19.0.0-rc-6d3110b4d9-20240531
-        version: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
       tailwindcss:
         specifier: 3.3.2
         version: 3.3.2
@@ -82,7 +82,7 @@ importers:
         version: 2.9.1(typescript@5.4.2)
       '@remix-run/react':
         specifier: ^2.9.1
-        version: 2.9.1(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)(typescript@5.4.2)
+        version: 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.2)
       '@remix-run/serve':
         specifier: ^2.9.1
         version: 2.9.1(typescript@5.4.2)
@@ -93,18 +93,18 @@ importers:
         specifier: workspace:*
         version: link:../nextjs-app
       react:
-        specifier: 19.0.0-rc-6d3110b4d9-20240531
-        version: 19.0.0-rc-6d3110b4d9-20240531
+        specifier: 18.3.1
+        version: 18.3.1
       react-dom:
-        specifier: 19.0.0-rc-6d3110b4d9-20240531
-        version: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
       unframer:
         specifier: workspace:*
         version: link:../unframer
     devDependencies:
       '@remix-run/dev':
         specifier: ^2.9.1
-        version: 2.9.1(@remix-run/react@2.9.1(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.13.0)(typescript@5.4.2)(vite@5.2.12(@types/node@20.13.0))
+        version: 2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.13.0)(typescript@5.4.2)(vite@5.2.12(@types/node@20.13.0))
       '@types/react':
         specifier: ^18.2.20
         version: 18.2.66
@@ -197,7 +197,7 @@ importers:
         version: 1.0.0
       real-framer-motion:
         specifier: npm:framer-motion@11.1.7
-        version: framer-motion@11.1.7(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)
+        version: framer-motion@11.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tmp:
         specifier: ^0.2.1
         version: 0.2.1
@@ -248,11 +248,11 @@ importers:
         specifier: ^0.16.6
         version: 0.16.6
       react:
-        specifier: 19.0.0-rc-6d3110b4d9-20240531
-        version: 19.0.0-rc-6d3110b4d9-20240531
+        specifier: 18.3.1
+        version: 18.3.1
       react-dom:
-        specifier: 19.0.0-rc-6d3110b4d9-20240531
-        version: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
       tiktoken:
         specifier: ^1.0.14
         version: 1.0.14
@@ -4209,10 +4209,10 @@ packages:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
 
-  react-dom@19.0.0-rc-6d3110b4d9-20240531:
-    resolution: {integrity: sha512-+dPxMs8RKrvt+rqc+yXLxjUV8D4WyrsvhlKrIm+Sfcek3t+tQfp0L9nHqiFrYnWmr2QGUijAZr18JK6GMHkYAw==}
+  react-dom@18.3.1:
+    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
-      react: 19.0.0-rc-6d3110b4d9-20240531
+      react: ^18.3.1
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -4237,8 +4237,8 @@ packages:
     peerDependencies:
       react: '>=16.8'
 
-  react@19.0.0-rc-6d3110b4d9-20240531:
-    resolution: {integrity: sha512-PeNhsJDvPc12kjbohywr1Mgl3J53LzbUTTpE5A5uqQxlA/ZcXs2ErZvBndiYBT3jqqgnqCcGIdvvZ8A0r0FsAQ==}
+  react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -4396,8 +4396,8 @@ packages:
   sax@1.3.0:
     resolution: {integrity: sha512-0s+oAmw9zLl1V1cS9BtZN7JAd0cW5e0QH4W3LWEK6a4LaLEA2OTpGYWDY+6XasBLtz6wkm3u1xRw95mRuJ59WA==}
 
-  scheduler@0.25.0-rc-6d3110b4d9-20240531:
-    resolution: {integrity: sha512-DQp/XrKAuIFX153kxp1yVa8dLuGRcm/z8RAGLLEv97iEMrFlwyOXx+AIvPk3jLrX1Y68oDyNBfXh3Su7LDGcOg==}
+  scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
   semver@5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -6214,7 +6214,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.13.0)(typescript@5.4.2)(vite@5.2.12(@types/node@20.13.0))':
+  '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.2))(@remix-run/serve@2.9.1(typescript@5.4.2))(@types/node@20.13.0)(typescript@5.4.2)(vite@5.2.12(@types/node@20.13.0))':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/generator': 7.24.5
@@ -6227,7 +6227,7 @@ snapshots:
       '@mdx-js/mdx': 2.3.0
       '@npmcli/package-json': 4.0.1
       '@remix-run/node': 2.9.1(typescript@5.4.2)
-      '@remix-run/react': 2.9.1(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)(typescript@5.4.2)
+      '@remix-run/react': 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.2)
       '@remix-run/router': 1.16.0
       '@remix-run/server-runtime': 2.9.1(typescript@5.4.2)
       '@types/mdx': 2.0.13
@@ -6308,14 +6308,14 @@ snapshots:
     optionalDependencies:
       typescript: 5.4.2
 
-  '@remix-run/react@2.9.1(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)(typescript@5.4.2)':
+  '@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.2)':
     dependencies:
       '@remix-run/router': 1.16.0
       '@remix-run/server-runtime': 2.9.1(typescript@5.4.2)
-      react: 19.0.0-rc-6d3110b4d9-20240531
-      react-dom: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
-      react-router: 6.23.0(react@19.0.0-rc-6d3110b4d9-20240531)
-      react-router-dom: 6.23.0(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 6.23.0(react@18.3.1)
+      react-router-dom: 6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       turbo-stream: 2.0.1
     optionalDependencies:
       typescript: 5.4.2
@@ -8130,12 +8130,12 @@ snapshots:
 
   fraction.js@4.2.0: {}
 
-  framer-motion@11.1.7(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531):
+  framer-motion@11.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.6.2
     optionalDependencies:
-      react: 19.0.0-rc-6d3110b4d9-20240531
-      react-dom: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   fresh@0.5.2: {}
 
@@ -9299,7 +9299,7 @@ snapshots:
 
   negotiator@0.6.3: {}
 
-  next@14.2.3(@opentelemetry/api@1.8.0)(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531):
+  next@14.2.3(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.3
       '@swc/helpers': 0.5.5
@@ -9307,9 +9307,9 @@ snapshots:
       caniuse-lite: 1.0.30001625
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 19.0.0-rc-6d3110b4d9-20240531
-      react-dom: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
-      styled-jsx: 5.1.1(react@19.0.0-rc-6d3110b4d9-20240531)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.3
       '@next/swc-darwin-x64': 14.2.3
@@ -9806,10 +9806,11 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531):
+  react-dom@18.3.1(react@18.3.1):
     dependencies:
-      react: 19.0.0-rc-6d3110b4d9-20240531
-      scheduler: 0.25.0-rc-6d3110b4d9-20240531
+      loose-envify: 1.4.0
+      react: 18.3.1
+      scheduler: 0.23.2
 
   react-is@16.13.1: {}
 
@@ -9817,19 +9818,21 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-router-dom@6.23.0(react-dom@19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531))(react@19.0.0-rc-6d3110b4d9-20240531):
+  react-router-dom@6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@remix-run/router': 1.16.0
-      react: 19.0.0-rc-6d3110b4d9-20240531
-      react-dom: 19.0.0-rc-6d3110b4d9-20240531(react@19.0.0-rc-6d3110b4d9-20240531)
-      react-router: 6.23.0(react@19.0.0-rc-6d3110b4d9-20240531)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 6.23.0(react@18.3.1)
 
-  react-router@6.23.0(react@19.0.0-rc-6d3110b4d9-20240531):
+  react-router@6.23.0(react@18.3.1):
     dependencies:
       '@remix-run/router': 1.16.0
-      react: 19.0.0-rc-6d3110b4d9-20240531
+      react: 18.3.1
 
-  react@19.0.0-rc-6d3110b4d9-20240531: {}
+  react@18.3.1:
+    dependencies:
+      loose-envify: 1.4.0
 
   read-cache@1.0.0:
     dependencies:
@@ -10049,7 +10052,9 @@ snapshots:
 
   sax@1.3.0: {}
 
-  scheduler@0.25.0-rc-6d3110b4d9-20240531: {}
+  scheduler@0.23.2:
+    dependencies:
+      loose-envify: 1.4.0
 
   semver@5.7.1: {}
 
@@ -10317,10 +10322,10 @@ snapshots:
     dependencies:
       inline-style-parser: 0.1.1
 
-  styled-jsx@5.1.1(react@19.0.0-rc-6d3110b4d9-20240531):
+  styled-jsx@5.1.1(react@18.3.1):
     dependencies:
       client-only: 0.0.1
-      react: 19.0.0-rc-6d3110b4d9-20240531
+      react: 18.3.1
 
   sucrase@3.32.0:
     dependencies:
