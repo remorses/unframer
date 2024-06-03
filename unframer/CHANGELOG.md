@@ -1,5 +1,11 @@
 # unframer
 
+## 2.5.2
+
+### Patch Changes
+
+-   Only add style tags to head if in body
+
 ## 2.5.1
 
 ### Patch Changes

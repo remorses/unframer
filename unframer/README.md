@@ -176,6 +176,12 @@ You can change the breakpoints by passing an object in your `unframer.config.jso
 
 -   Internationalization is not supported
 
+## Future Compatibility
+
+Every Framer runtime change is upstreamed automatically via Github Actions to this [file](unframer/src/framer.js) and an example app is deployed [here](https://unframer-nextjs-app.vercel.app/). This means that if something breaks it's easy to bisect the specific change and fix it.
+
+For example in May 2024 Framer upgraded to React 19 and unframer broke, the reason was that framer runtime no longer injected ssr styles to `head` because react should do it automatically from version 19, this however broke unframer when using react 18, but i was able to quickly fix it by adding back the code to inject styles to `head` in unframer.
+
 ## Example
 
 Look at the [nextjs-app](./nextjs-app) folder for an example and the deployed example [here](https://unframer-nextjs-app.vercel.app/)
