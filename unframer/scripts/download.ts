@@ -144,7 +144,7 @@ export async function fixFramerCode({ resultFile }) {
     codeAfter += dedent`
     if (typeof document !== 'undefined') {
         for (const node of document.querySelectorAll(
-            'style[data-framer-css-ssr]',
+            'body style[data-framer-css-ssr]',
         )) {
             document.head.appendChild(node)
         }

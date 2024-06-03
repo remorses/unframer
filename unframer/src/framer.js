@@ -40972,7 +40972,7 @@ react-is/cjs/react-is.production.min.js:
 */
 if (typeof document !== 'undefined') {
     for (const node of document.querySelectorAll(
-        'style[data-framer-css-ssr]',
+        'body style[data-framer-css-ssr]',
     )) {
         document.head.appendChild(node)
     }
