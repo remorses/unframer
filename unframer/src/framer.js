@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-AJGVEDRA.js
+// https :https://app.framerstatic.com/chunk-DUHOOT7P.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -1305,6 +1305,9 @@ function hslaToRgba({
     alpha: alpha2,
   };
 }
+function mixImmediate(a, b,) {
+  return (p) => p > 0 ? b : a;
+}
 var mixLinearColor = (from, to, v,) => {
   const fromExpo = from * from;
   const expo = v * (to * to - fromExpo) + fromExpo;
@@ -1314,7 +1317,8 @@ var colorTypes = [hex, rgba, hsla,];
 var getColorType = (v) => colorTypes.find((type) => type.test(v,));
 function asRGBA(color2,) {
   const type = getColorType(color2,);
-  invariant(Boolean(type,), `'${color2}' is not an animatable color. Use the equivalent color code instead.`,);
+  warning(Boolean(type,), `'${color2}' is not an animatable color. Use the equivalent color code instead.`,);
+  if (!Boolean(type,)) return false;
   let model = type.parse(color2,);
   if (type === hsla) {
     model = hslaToRgba(model,);
@@ -1324,6 +1328,9 @@ function asRGBA(color2,) {
 var mixColor = (from, to,) => {
   const fromRGBA = asRGBA(from,);
   const toRGBA = asRGBA(to,);
+  if (!fromRGBA || !toRGBA) {
+    return mixImmediate(from, to,);
+  }
   const blended = {
     ...fromRGBA,
   };
@@ -1351,9 +1358,6 @@ function mixVisibility(origin, target,) {
   } else {
     return (p) => p >= 1 ? target : origin;
   }
-}
-function mixImmediate(a, b,) {
-  return (p) => p > 0 ? b : a;
 }
 function mixNumber2(a, b,) {
   return (p) => mixNumber(a, b, p,);
@@ -2507,14 +2511,17 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     if (!element.current) return;
     super.readKeyframes();
     for (let i = 0; i < unresolvedKeyframes.length; i++) {
-      const keyframe = unresolvedKeyframes[i];
-      if (typeof keyframe === 'string' && isCSSVariableToken(keyframe,)) {
-        const resolved = getVariableValue(keyframe, element.current,);
-        if (resolved !== void 0) {
-          unresolvedKeyframes[i] = resolved;
-        }
-        if (i === unresolvedKeyframes.length - 1) {
-          this.finalKeyframe = keyframe;
+      let keyframe = unresolvedKeyframes[i];
+      if (typeof keyframe === 'string') {
+        keyframe = keyframe.trim();
+        if (isCSSVariableToken(keyframe,)) {
+          const resolved = getVariableValue(keyframe, element.current,);
+          if (resolved !== void 0) {
+            unresolvedKeyframes[i] = resolved;
+          }
+          if (i === unresolvedKeyframes.length - 1) {
+            this.finalKeyframe = keyframe;
+          }
         }
       }
     }
@@ -3011,7 +3018,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.2.6';
+    this.version = '11.2.10';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3318,6 +3325,95 @@ function isTransitionDefined({
 function getValueTransition(transition, key7,) {
   return transition[key7] || transition['default'] || transition;
 }
+function observeTimeline(update, timeline,) {
+  let prevProgress;
+  const onFrame = () => {
+    const {
+      currentTime,
+    } = timeline;
+    const percentage = currentTime === null ? 0 : currentTime.value;
+    const progress2 = percentage / 100;
+    if (prevProgress !== progress2) {
+      update(progress2,);
+    }
+    prevProgress = progress2;
+  };
+  frame.update(onFrame, true,);
+  return () => cancelFrame(onFrame,);
+}
+var supportsScrollTimeline = memo(() => window.ScrollTimeline !== void 0);
+var GroupPlaybackControls = class {
+  constructor(animations2,) {
+    this.stop = () => this.runAll('stop',);
+    this.animations = animations2.filter(Boolean,);
+  }
+  then(onResolve, onReject,) {
+    return Promise.all(this.animations,).then(onResolve,).catch(onReject,);
+  }
+  /**
+   * TODO: Filter out cancelled or stopped animations before returning
+   */
+  getAll(propName,) {
+    return this.animations[0][propName];
+  }
+  setAll(propName, newValue,) {
+    for (let i = 0; i < this.animations.length; i++) {
+      this.animations[i][propName] = newValue;
+    }
+  }
+  attachTimeline(timeline,) {
+    const cancelAll = this.animations.map((animation) => {
+      if (supportsScrollTimeline() && animation.attachTimeline) {
+        animation.attachTimeline(timeline,);
+      } else {
+        animation.pause();
+        return observeTimeline((progress2) => {
+          animation.time = animation.duration * progress2;
+        }, timeline,);
+      }
+    },);
+    return () => {
+      cancelAll.forEach((cancelTimeline, i,) => {
+        if (cancelTimeline) cancelTimeline();
+        this.animations[i].stop();
+      },);
+    };
+  }
+  get time() {
+    return this.getAll('time',);
+  }
+  set time(time2,) {
+    this.setAll('time', time2,);
+  }
+  get speed() {
+    return this.getAll('speed',);
+  }
+  set speed(speed,) {
+    this.setAll('speed', speed,);
+  }
+  get duration() {
+    let max = 0;
+    for (let i = 0; i < this.animations.length; i++) {
+      max = Math.max(max, this.animations[i].duration,);
+    }
+    return max;
+  }
+  runAll(methodName,) {
+    this.animations.forEach((controls) => controls[methodName]());
+  }
+  play() {
+    this.runAll('play',);
+  }
+  pause() {
+    this.runAll('pause',);
+  }
+  cancel() {
+    this.runAll('cancel',);
+  }
+  complete() {
+    this.runAll('complete',);
+  }
+};
 var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete) => {
   const valueTransition = getValueTransition(transition, name,) || {};
   const delay2 = valueTransition.delay || transition.delay || 0;
@@ -3377,7 +3473,7 @@ var animateMotionValue = (name, value, target, transition = {}, element, isHando
         options.onUpdate(finalKeyframe,);
         options.onComplete();
       },);
-      return;
+      return new GroupPlaybackControls([],);
     }
   }
   if (!isHandoff && AcceleratedAnimation.supports(options,)) {
@@ -3411,6 +3507,9 @@ function setTarget(visualElement, definition,) {
     const value = resolveFinalValueInKeyframes(target[key7],);
     setMotionValue(visualElement, key7, value,);
   }
+}
+function getOptimisedAppearId(visualElement,) {
+  return visualElement.getProps()[optimizedAppearDataAttribute];
 }
 function shouldBlockAnimation({
   protectedKeys,
@@ -3448,8 +3547,7 @@ function animateTarget(visualElement, targetAndTransition, {
     };
     let isHandoff = false;
     if (window.HandoffAppearAnimations) {
-      const props = visualElement.getProps();
-      const appearId = props[optimizedAppearDataAttribute];
+      const appearId = getOptimisedAppearId(visualElement,);
       if (appearId) {
         const elapsed = window.HandoffAppearAnimations(appearId, key7, value, frame,);
         if (elapsed !== null) {
@@ -4003,8 +4101,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.2.6',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.6 may not work as expected.`,
+          nextValue.version === '11.2.10',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.10 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -6603,6 +6701,22 @@ function resetDistortingTransform(key7, visualElement, values, sharedAnimationVa
     }
   }
 }
+function isOptimisedAppearTree(projectionNode,) {
+  projectionNode.hasCheckedOptimisedAppear = true;
+  if (projectionNode.root === projectionNode) return false;
+  const {
+    visualElement,
+  } = projectionNode.options;
+  if (!visualElement) {
+    return false;
+  } else if (getOptimisedAppearId(visualElement,)) {
+    return true;
+  } else if (projectionNode.parent && !projectionNode.parent.hasCheckedOptimisedAppear) {
+    return isOptimisedAppearTree(projectionNode.parent,);
+  } else {
+    return false;
+  }
+}
 function createProjectionNode({
   attachResizeListener,
   defaultParent,
@@ -6628,6 +6742,7 @@ function createProjectionNode({
       this.isSVG = false;
       this.needsReset = false;
       this.shouldResetTransform = false;
+      this.hasCheckedOptimisedAppear = false;
       this.treeScale = {
         x: 1,
         y: 1,
@@ -6790,9 +6905,6 @@ function createProjectionNode({
     startUpdate() {
       if (this.isUpdateBlocked()) return;
       this.isUpdating = true;
-      if (window.HandoffCancelAllAnimations) {
-        window.HandoffCancelAllAnimations();
-      }
       this.nodes && this.nodes.forEach(resetSkewAndRotation,);
       this.animationId++;
     }
@@ -6807,6 +6919,9 @@ function createProjectionNode({
       if (this.root.isUpdateBlocked()) {
         this.options.onExitComplete && this.options.onExitComplete();
         return;
+      }
+      if (window.HandoffCancelAllAnimations && isOptimisedAppearTree(this,)) {
+        window.HandoffCancelAllAnimations();
       }
       !this.root.isUpdating && this.root.startUpdate();
       if (this.isLayoutDirty) return;
@@ -9131,97 +9246,6 @@ var wrap = (min, max, v,) => {
   const rangeSize = max - min;
   return ((v - min) % rangeSize + rangeSize) % rangeSize + min;
 };
-function observeTimeline(update, timeline,) {
-  let prevProgress;
-  const onFrame = () => {
-    const {
-      currentTime,
-    } = timeline;
-    const percentage = currentTime === null ? 0 : currentTime.value;
-    const progress2 = percentage / 100;
-    if (prevProgress !== progress2) {
-      update(progress2,);
-    }
-    prevProgress = progress2;
-  };
-  frame.update(onFrame, true,);
-  return () => cancelFrame(onFrame,);
-}
-var supportsScrollTimeline = memo(() => window.ScrollTimeline !== void 0);
-var GroupPlaybackControls = class {
-  constructor(animations2,) {
-    this.animations = animations2.filter(Boolean,);
-  }
-  then(onResolve, onReject,) {
-    return Promise.all(this.animations,).then(onResolve,).catch(onReject,);
-  }
-  /**
-   * TODO: Filter out cancelled or stopped animations before returning
-   */
-  getAll(propName,) {
-    return this.animations[0][propName];
-  }
-  setAll(propName, newValue,) {
-    for (let i = 0; i < this.animations.length; i++) {
-      this.animations[i][propName] = newValue;
-    }
-  }
-  attachTimeline(timeline,) {
-    const cancelAll = this.animations.map((animation) => {
-      if (supportsScrollTimeline() && animation.attachTimeline) {
-        animation.attachTimeline(timeline,);
-      } else {
-        animation.pause();
-        return observeTimeline((progress2) => {
-          animation.time = animation.duration * progress2;
-        }, timeline,);
-      }
-    },);
-    return () => {
-      cancelAll.forEach((cancelTimeline, i,) => {
-        if (cancelTimeline) cancelTimeline();
-        this.animations[i].stop();
-      },);
-    };
-  }
-  get time() {
-    return this.getAll('time',);
-  }
-  set time(time2,) {
-    this.setAll('time', time2,);
-  }
-  get speed() {
-    return this.getAll('speed',);
-  }
-  set speed(speed,) {
-    this.setAll('speed', speed,);
-  }
-  get duration() {
-    let max = 0;
-    for (let i = 0; i < this.animations.length; i++) {
-      max = Math.max(max, this.animations[i].duration,);
-    }
-    return max;
-  }
-  runAll(methodName,) {
-    this.animations.forEach((controls) => controls[methodName]());
-  }
-  play() {
-    this.runAll('play',);
-  }
-  pause() {
-    this.runAll('pause',);
-  }
-  stop() {
-    this.runAll('stop',);
-  }
-  cancel() {
-    this.runAll('cancel',);
-  }
-  complete() {
-    this.runAll('complete',);
-  }
-};
 function isDOMKeyframes(keyframes2,) {
   return typeof keyframes2 === 'object' && !Array.isArray(keyframes2,);
 }
@@ -9972,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.W4GEXVYP.js
+// https :https://app.framerstatic.com/framer.2BCQ2QSR.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -40526,7 +40550,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.2.6',
+    'framer-motion': '11.2.10',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
