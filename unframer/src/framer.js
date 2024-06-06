@@ -7544,16 +7544,16 @@ function createProjectionNode({
       if (!this.isVisible) {
         return hiddenVisibility;
       }
-      const styles = {
+      const styles2 = {
         visibility: '',
       };
       const transformTemplate2 = this.getTransformTemplate();
       if (this.needsReset) {
         this.needsReset = false;
-        styles.opacity = '';
-        styles.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents,) || '';
-        styles.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
-        return styles;
+        styles2.opacity = '';
+        styles2.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents,) || '';
+        styles2.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
+        return styles2;
       }
       const lead = this.getLead();
       if (!this.projectionDelta || !this.layout || !lead.target) {
@@ -7571,17 +7571,17 @@ function createProjectionNode({
       }
       const valuesToRender = lead.animationValues || lead.latestValues;
       this.applyTransformsToTarget();
-      styles.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender,);
+      styles2.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender,);
       if (transformTemplate2) {
-        styles.transform = transformTemplate2(valuesToRender, styles.transform,);
+        styles2.transform = transformTemplate2(valuesToRender, styles2.transform,);
       }
       const {
         x,
         y,
       } = this.projectionDelta;
-      styles.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
+      styles2.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
       if (lead.animationValues) {
-        styles.opacity = lead === this
+        styles2.opacity = lead === this
           ? (_b = (_a = valuesToRender.opacity) !== null && _a !== void 0 ? _a : this.latestValues.opacity) !== null && _b !== void 0
             ? _b
             : 1
@@ -7589,7 +7589,7 @@ function createProjectionNode({
           ? this.latestValues.opacity
           : valuesToRender.opacityExit;
       } else {
-        styles.opacity = lead === this
+        styles2.opacity = lead === this
           ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : ''
           : valuesToRender.opacityExit !== void 0
           ? valuesToRender.opacityExit
@@ -7601,22 +7601,22 @@ function createProjectionNode({
           correct,
           applyTo,
         } = scaleCorrectors[key7];
-        const corrected = styles.transform === 'none' ? valuesToRender[key7] : correct(valuesToRender[key7], lead,);
+        const corrected = styles2.transform === 'none' ? valuesToRender[key7] : correct(valuesToRender[key7], lead,);
         if (applyTo) {
           const num = applyTo.length;
           for (let i = 0; i < num; i++) {
-            styles[applyTo[i]] = corrected;
+            styles2[applyTo[i]] = corrected;
           }
         } else {
-          styles[key7] = corrected;
+          styles2[key7] = corrected;
         }
       }
       if (this.options.layoutId) {
-        styles.pointerEvents = lead === this
+        styles2.pointerEvents = lead === this
           ? resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents,) || ''
           : 'none';
       }
-      return styles;
+      return styles2;
     }
     clearSnapshot() {
       this.resumeFrom = this.snapshot = void 0;
@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.2BCQ2QSR.js
+// https :https://app.framerstatic.com/framer.ACFIZGCR.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11107,11 +11107,11 @@ var require_resize_observer_umd = __commonJS({
         };
         return Scheduler2;
       }();
-      var scheduler = new Scheduler();
+      var scheduler2 = new Scheduler();
       var updateCount = function (n,) {
-        !watching && n > 0 && scheduler.start();
+        !watching && n > 0 && scheduler2.start();
         watching += n;
-        !watching && scheduler.stop();
+        !watching && scheduler2.stop();
       };
       var skipNotifyOnElement = function (target,) {
         return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
@@ -11169,7 +11169,7 @@ var require_resize_observer_umd = __commonJS({
             firstObservation && resizeObservers.push(detail,);
             detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
             updateCount(1,);
-            scheduler.schedule();
+            scheduler2.schedule();
           }
         };
         ResizeObserverController2.unobserve = function (resizeObserver, target,) {
@@ -11908,14 +11908,12 @@ function lazy(factory,) {
   const Component15 = React4.forwardRef(function LazyWithPreload(props, ref,) {
     return React4.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
-      Object.assign(
-        ref
-          ? {
-            ref,
-          }
-          : {},
-        props,
-      ),
+      ref
+        ? {
+          ref,
+          ...props,
+        }
+        : props,
     );
   },);
   Component15.preload = () => {
@@ -11940,7 +11938,22 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 function isBot(userAgent,) {
-  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/i.test(userAgent,);
+  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/iu.test(userAgent,);
+}
+function yieldToMain(isHighPriority,) {
+  if ('scheduler' in window) {
+    const options = {
+      priority: isHighPriority ? 'user-blocking' : 'user-visible',
+    };
+    if ('yield' in scheduler) return scheduler.yield(options,);
+    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
+  }
+  if (isHighPriority) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    setTimeout(resolve, 0,);
+  },);
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
@@ -12624,18 +12637,22 @@ async function switchLocale(options,) {
       routeId: options.routeId,
       pathVariables: result.pathVariables,
       localeId: options.nextLocale.id,
-      paginationInfo: options.paginationInfo,
+      paginationInfo: window.history.state.paginationInfo,
     }, result.path,);
   } catch {}
   return result;
 }
-function pushLoadMoreHistory(paginationInfo,) {
+function pushLoadMoreHistory(hash2, paginationInfo,) {
   try {
     const currentHistoryState = window.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
+    const newPaginationInfo = {
+      ...currentHistoryState.paginationInfo,
+      [hash2]: paginationInfo,
+    };
     replaceHistoryState({
       ...currentHistoryState,
-      paginationInfo,
+      paginationInfo: newPaginationInfo,
     },);
   } catch {}
 }
@@ -12703,18 +12720,87 @@ function turnOnReactEventHandling() {
   eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
   eventsToStop = void 0;
 }
-var hydrated = false;
+function measureSafe(name, start, end,) {
+  try {
+    performance.measure(name, start, end,);
+  } catch (e) {
+    console.warn(`Could not measure ${name}`, e,);
+  }
+}
+var hydrationEffectHasRun = false;
+var hydrationInsertionEffectHasRun = false;
+var hydrationLayoutEffectHasRun = false;
 function OnHydrationEnd({
-  addHydrationEndMarker,
+  addHydrationMarkers,
   turnOffEventHandlerHack,
 },) {
+  const hydrationMarkPrefix = 'framer-hydration-';
+  const hydrationStart = `${hydrationMarkPrefix}start`;
+  const hydrationRenderEnd = `${hydrationMarkPrefix}render-end`;
+  const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
+  const hydrationEffectsEnd = `${hydrationMarkPrefix}effects-end`;
+  const hydrationFP = `${hydrationMarkPrefix}first-paint`;
+  useInsertionEffect(() => {
+    if (hydrationInsertionEffectHasRun) return;
+    hydrationInsertionEffectHasRun = true;
+    if (addHydrationMarkers) {
+      performance.mark(hydrationRenderEnd,);
+      measureSafe(`${hydrationMarkPrefix}render`, hydrationStart, hydrationRenderEnd,);
+    }
+  }, [],);
   useLayoutEffect(() => {
-    if (hydrated) return;
-    hydrated = true;
-    if (turnOffEventHandlerHack) turnOnReactEventHandling();
-    if (addHydrationEndMarker) {
-      performance.mark('framer-hydration-end',);
-      performance.measure('framer-hydration', 'framer-hydration-start', 'framer-hydration-end',);
+    if (hydrationLayoutEffectHasRun) return;
+    hydrationLayoutEffectHasRun = true;
+    if (addHydrationMarkers) {
+      performance.mark(hydrationLayoutEffectsEnd,);
+      measureSafe(`${hydrationMarkPrefix}layout-effects`, hydrationRenderEnd, hydrationLayoutEffectsEnd,);
+    }
+    requestAnimationFrame(() => {
+      var _a, _b, _c;
+      const browserRenderStart = `${hydrationMarkPrefix}browser-render-start`;
+      if (addHydrationMarkers) {
+        performance.mark(browserRenderStart,);
+        measureSafe(
+          `${hydrationMarkPrefix}uho`,
+          (_b = (_a = performance.getEntriesByName(hydrationEffectsEnd,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null &&
+            _b !== void 0
+            ? _b
+            : (_c = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) === null || _c === void 0
+            ? void 0
+            : _c.name,
+          browserRenderStart,
+        );
+      }
+      setTimeout(() => {
+        if (turnOffEventHandlerHack) {
+          turnOnReactEventHandling();
+        }
+        if (addHydrationMarkers) {
+          performance.mark(hydrationFP,);
+          measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
+          measureSafe(`${hydrationMarkPrefix}browser-render`, browserRenderStart, hydrationFP,);
+        }
+      }, 0,);
+    },);
+  }, [],);
+  useEffect(() => {
+    var _a, _b, _c;
+    if (hydrationEffectHasRun) return;
+    hydrationEffectHasRun = true;
+    if (turnOffEventHandlerHack) {
+      turnOnReactEventHandling();
+    }
+    if (addHydrationMarkers) {
+      performance.mark(hydrationEffectsEnd,);
+      measureSafe(
+        `${hydrationMarkPrefix}effects`,
+        (_b = (_a = performance.getEntriesByName(hydrationFP,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0
+          ? _b
+          : (_c = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) === null || _c === void 0
+          ? void 0
+          : _c.name,
+        hydrationEffectsEnd,
+      );
     }
   }, [],);
   return null;
@@ -12795,25 +12881,15 @@ function SuspenseThatPreservesDom({
   },);
 }
 var defaultLocaleId = 'default';
-var noopAsync = async () => {};
-var defaultCollectionListPaginationInfo = {
-  paginationInfo: void 0,
-  setPaginationInfo: noopAsync,
-  loadMore: noopAsync,
-};
-var CollectionListPaginationInfoContext = /* @__PURE__ */ React4.createContext(defaultCollectionListPaginationInfo,);
-function useCollectionListPaginationInfo() {
-  return React4.useContext(CollectionListPaginationInfoContext,);
-}
 function useForceUpdate2() {
   const [_, setForcedRenderCount,] = React4.useState(0,);
   return [_, React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
-var noopAsync2 = async () => {};
+var noopAsync = async () => {};
 var defaultLocaleInfo = {
   activeLocale: null,
   locales: [],
-  setLocale: noopAsync2,
+  setLocale: noopAsync,
 };
 var LocaleInfoContext = /* @__PURE__ */ React4.createContext(defaultLocaleInfo,);
 function useLocaleInfo() {
@@ -12892,9 +12968,8 @@ function Router({
   locales = [],
   preserveQueryParams = false,
   enableImproveInpDuringHydration = false,
-  shouldMarkHydrationEnd = false,
+  addHydrationMarkers = false,
 },) {
-  var _a, _b;
   useReplaceInitialState({
     disabled: disableHistory,
     routeId: initialRoute,
@@ -12908,46 +12983,17 @@ function Router({
   const currentLocaleIdRef = React4.useRef(initialLocaleId,);
   const currentLocaleId = currentLocaleIdRef.current;
   const activeLocale = React4.useMemo(() => {
-    var _a2;
-    return (_a2 = locales.find(({
+    var _a;
+    return (_a = locales.find(({
             id: id3,
           },) => {
             if (!currentLocaleId) return id3 === defaultLocaleId;
             return id3 === currentLocaleId;
-          },)) !== null && _a2 !== void 0
-      ? _a2
+          },)) !== null && _a !== void 0
+      ? _a
       : null;
   }, [currentLocaleId, locales,],);
   const [dep, forceUpdate,] = useForceUpdate2();
-  const [paginationInfo, setPaginationInfo,] = React4.useState(
-    typeof window !== 'undefined'
-      ? (_b = (_a = window === null || window === void 0 ? void 0 : window.history) === null || _a === void 0 ? void 0 : _a.state) ===
-            null || _b === void 0
-        ? void 0
-        : _b.pagination
-      : void 0,
-  );
-  const collectionListPaginationInfo = React4.useMemo(() => {
-    return {
-      paginationInfo,
-      setPaginationInfo: async (newPaginationInfo) => {
-        startTransition2(() => {
-          setPaginationInfo(newPaginationInfo,);
-        },);
-      },
-      loadMore: async () => {
-        if ((paginationInfo === null || paginationInfo === void 0 ? void 0 : paginationInfo.type) !== 'loadMore') return;
-        const newPaginationInfo = {
-          ...paginationInfo,
-          currentPage: paginationInfo.currentPage + 1,
-        };
-        pushLoadMoreHistory(newPaginationInfo,);
-        startTransition2(() => {
-          setPaginationInfo(newPaginationInfo,);
-        },);
-      },
-    };
-  }, [paginationInfo,],);
   const localeInfo = React4.useMemo(() => {
     return {
       activeLocale,
@@ -12979,7 +13025,6 @@ function Router({
             pathVariables: currentPathVariablesRef.current,
             collectionUtils,
             preserveQueryParams,
-            paginationInfo,
           },);
           if (!localeResult) return;
           currentPathVariablesRef.current = localeResult.pathVariables;
@@ -12989,17 +13034,7 @@ function Router({
         } catch {}
       },
     };
-  }, [
-    activeLocale,
-    collectionUtils,
-    forceUpdate,
-    locales,
-    monitorNextRender,
-    paginationInfo,
-    preserveQueryParams,
-    routes,
-    startViewTransition2,
-  ],);
+  }, [activeLocale, collectionUtils, forceUpdate, locales, monitorNextRender, preserveQueryParams, routes, startViewTransition2,],);
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const setCurrentRouteId = React4.useCallback(
     (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
@@ -13016,11 +13051,11 @@ function Router({
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = React4.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
-    var _a2, _b2;
+    var _a, _b;
     const newRoute = routes[routeId];
     if (pathVariables) {
       const inUse = /* @__PURE__ */ new Set();
-      const path = (_a2 = newRoute === null || newRoute === void 0 ? void 0 : newRoute.path) !== null && _a2 !== void 0 ? _a2 : '/';
+      const path = (_a = newRoute === null || newRoute === void 0 ? void 0 : newRoute.path) !== null && _a !== void 0 ? _a : '/';
       for (const match of path.matchAll(pathVariablesRegExp,)) {
         const usedVariable = match[1];
         if (usedVariable === void 0) {
@@ -13040,7 +13075,7 @@ function Router({
         pathVariables,
       },)
     ) {
-      if (((_b2 = window.history.state) === null || _b2 === void 0 ? void 0 : _b2.hash) !== hash2) {
+      if (((_b = window.history.state) === null || _b === void 0 ? void 0 : _b.hash) !== hash2) {
         if (!disableHistory) {
           const route = routes[routeId];
           if (route) {
@@ -13098,26 +13133,23 @@ function Router({
     api,
     children: jsx(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: jsx(CollectionListPaginationInfoContext.Provider, {
-        value: collectionListPaginationInfo,
-        children: jsxs(SuspenseThatPreservesDom, {
-          children: [
-            jsx(ErrorBoundary, {
-              notFoundPage,
-              defaultPageStyle,
-              forceUpdateKey: dep,
-              children: jsx(React4.Fragment, {
-                children: pageExistsInCurrentLocale
-                  ? renderPage(current.page, defaultPageStyle,)
-                  : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-              }, remountKey,),
-            },),
-            jsx(OnHydrationEnd, {
-              addHydrationEndMarker: shouldMarkHydrationEnd,
-              turnOffEventHandlerHack: enableImproveInpDuringHydration,
-            },),
-          ],
-        },),
+      children: jsxs(SuspenseThatPreservesDom, {
+        children: [
+          jsx(ErrorBoundary, {
+            notFoundPage,
+            defaultPageStyle,
+            forceUpdateKey: dep,
+            children: jsx(React4.Fragment, {
+              children: pageExistsInCurrentLocale
+                ? renderPage(current.page, defaultPageStyle,)
+                : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+            }, remountKey,),
+          },),
+          jsx(OnHydrationEnd, {
+            addHydrationMarkers,
+            turnOffEventHandlerHack: enableImproveInpDuringHydration,
+          },),
+        ],
       },),
     },),
   },);
@@ -13318,18 +13350,22 @@ function useRoutePreloader(routeIds, enabled = true,) {
   const {
     getRoute,
   } = useRouter();
-  React4.useEffect(() => {
+  useEffect(() => {
     if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
-      const route = getRoute(routeId,);
-      if (route === null || route === void 0 ? void 0 : route.page) preloadComponent(route.page,);
+      void preloadRoute(getRoute(routeId,),);
     }
   }, [routeIds, getRoute, enabled,],);
 }
-function preloadComponent(component,) {
-  if (!shouldPreloadBasedOnUA) return;
-  if (isLazyComponentType(component,)) {
-    void component.preload();
+async function preloadRoute(route,) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  await yieldToMain();
+  try {
+    await component.preload();
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
   }
 }
 function useRouteAnchor(routeId, {
@@ -19039,8 +19075,8 @@ var didInject = false;
 function injectComponentCSSRules() {
   if (didInject) return;
   didInject = true;
-  const styles = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
-  for (const rule of styles) {
+  const styles2 = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
+  for (const rule of styles2) {
     injectCSSRule(rule, void 0, void 0,);
   }
 }
@@ -21216,28 +21252,28 @@ function backgroundImageFromProps(props,) {
 }
 function collectBorderStyleForProps(props, style, collapseEqualBorders = true,) {
   const {
-    borderWidth,
+    borderWidth: borderWidth2,
     borderStyle,
     borderColor,
   } = props;
-  if (!borderWidth) {
+  if (!borderWidth2) {
     return;
   }
   let borderTop;
   let borderBottom;
   let borderLeft;
   let borderRight;
-  if (typeof borderWidth === 'number') {
+  if (typeof borderWidth2 === 'number') {
     borderTop =
       borderBottom =
       borderLeft =
       borderRight =
-        borderWidth;
+        borderWidth2;
   } else {
-    borderTop = borderWidth.top || 0;
-    borderBottom = borderWidth.bottom || 0;
-    borderLeft = borderWidth.left || 0;
-    borderRight = borderWidth.right || 0;
+    borderTop = borderWidth2.top || 0;
+    borderBottom = borderWidth2.bottom || 0;
+    borderLeft = borderWidth2.left || 0;
+    borderRight = borderWidth2.right || 0;
   }
   if (borderTop === 0 && borderBottom === 0 && borderLeft === 0 && borderRight === 0) {
     return;
@@ -24620,7 +24656,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       const {
         visible,
         id: id3,
-        className,
+        className: className2,
       } = this.props;
       if (!visible) {
         return null;
@@ -24635,7 +24671,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         id: id3,
         style,
         ref: this.setElement,
-        className,
+        className: className2,
         children: [
           /* @__PURE__ */ jsx(ProvideParentSize, {
             parentSize,
@@ -26257,20 +26293,17 @@ function containerContent(item,) {
 function backdropTapAction(transition, goBackAction,) {
   if (transition.goBackOnTapOutside !== false) return goBackAction;
 }
-function NavigationStyleSheet() {
-  React4.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
-  return null;
-}
 function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  return /* @__PURE__ */ jsxs(Navigation, {
+  React4.useInsertionEffect(() => {
+    injectComponentCSSRules();
+  }, [],);
+  return /* @__PURE__ */ jsx(Navigation, {
     ...props,
     resetProjection,
     skipLayoutAnimation,
-    children: [props.children, /* @__PURE__ */ jsx(NavigationStyleSheet, {},),],
+    children: props.children,
   },);
 }
 var import_hoist_non_react_statics3 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
@@ -26368,6 +26401,50 @@ function transitionDirectionToSide(direction,) {
 }
 var AnimateSharedLayout = (props) => props.children;
 var Draggable = /* @__PURE__ */ WithDragging(DeprecatedFrameWithEvents,);
+function useInfiniteScroll({
+  ref: elementRef,
+  loadMore,
+  rootMargin = '0px',
+  threshold,
+  paginationInfo,
+},) {
+  const callback = React4.useCallback((entries) => {
+    const entry = entries[0];
+    const isIntersecting = entry == null ? void 0 : entry.isIntersecting;
+    if (isIntersecting) loadMore();
+  }, [loadMore,],);
+  React4.useEffect(() => {
+    if (!elementRef.current) return;
+    const observer2 = new IntersectionObserver(callback, {
+      rootMargin,
+      threshold,
+    },);
+    observer2.observe(elementRef.current,);
+    return () => {
+      observer2.disconnect();
+    };
+  }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
+}
+function withInfiniteScroll(Component15,) {
+  return React4.forwardRef(({
+    __paginationInfo,
+    __loadMore,
+    ...props
+  }, ref,) => {
+    const backupRef = React4.useRef(null,);
+    const infiniteScrollRef = ref ?? backupRef;
+    useInfiniteScroll({
+      rootMargin: '500px',
+      loadMore: __loadMore,
+      ref: infiniteScrollRef,
+      paginationInfo: __paginationInfo,
+    },);
+    return /* @__PURE__ */ jsx(Component15, {
+      ...props,
+      ref: infiniteScrollRef,
+    },);
+  },);
+}
 var import_process2 = __toESM(require_browser(), 1,);
 function debounce(fn, time2,) {
   let timeout;
@@ -26559,7 +26636,7 @@ var Stack = /* @__PURE__ */ (() => {
       useFlexboxGap: externalUseFlexboxGap = true,
       children,
       style: styleProp,
-      className,
+      className: className2,
       willChangeTransform,
       __fromCodeComponentNode,
       parentSize,
@@ -26647,7 +26724,7 @@ var Stack = /* @__PURE__ */ (() => {
       ref: useForwardedRef(forwardedRef, stackRef,),
       ...attributes,
       style,
-      className,
+      className: className2,
       layoutScroll: true,
       children: /* @__PURE__ */ jsx(motion.div, {
         'data-framer-stack-content-wrapper': true,
@@ -28940,7 +29017,7 @@ var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(prop
     children,
     resetOffset,
     onScroll,
-    className,
+    className: className2,
     // Not (yet) supported
     directionLock: _directionLock = false,
     wheelEnabled: _wheelEnabled = true,
@@ -29011,7 +29088,7 @@ var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(prop
     layoutId,
     onBeforeLayoutMeasure: updateScrollOffsetHandler,
     layoutScroll: true,
-    className: cx(className, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
+    className: cx(className2, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
       /* @__PURE__ */ jsx(EmptyState, {
         children,
@@ -30245,6 +30322,30 @@ function ComponentPresetsConsumer({
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
+function setRef(ref, value,) {
+  if (isFunction(ref,)) {
+    ref(value,);
+  } else if (isMutableRef(ref,)) {
+    ref.current = value;
+  }
+}
+function isMutableRef(ref,) {
+  return isObject2(ref,) && 'current' in ref;
+}
+function createRefWithCallback(ref, callback,) {
+  return {
+    get current() {
+      return ref.current;
+    },
+    set current(value,) {
+      ref.current = value;
+      callback(value,);
+    },
+  };
+}
+function mergeRefs(...refs) {
+  return (value) => refs.forEach((ref) => setRef(ref, value,));
+}
 function useCloneChildrenWithPropsAndRef(forwardedRef,) {
   const hook = useConstant2(() => createHook(forwardedRef,));
   hook.useSetup(forwardedRef,);
@@ -30333,16 +30434,6 @@ function createRefFunction(state,) {
     setRef(prevChildRef, value,);
     setRef(prevForwardedRef, value,);
   };
-}
-function setRef(ref, value,) {
-  if (isFunction(ref,)) {
-    ref(value,);
-  } else if (isMutableRef(ref,)) {
-    ref.current = value;
-  }
-}
-function isMutableRef(ref,) {
-  return isObject2(ref,) && 'current' in ref;
 }
 var ComponentViewportContext = /* @__PURE__ */ React4.createContext({},);
 function useComponentViewport() {
@@ -30469,8 +30560,8 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
     }
     React4.useInsertionEffect(() => {
       if (componentSerializationId && componentsWithServerRenderedStyles.has(componentSerializationId,)) return;
-      const css = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
-      css.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
+      const css2 = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
+      css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
     return /* @__PURE__ */ jsx(Component15, {
       ...props,
@@ -31228,7 +31319,7 @@ function Floating({
   offsetX,
   offsetY,
   anchorRef,
-  className,
+  className: className2,
   children,
   portalSelector,
   zIndex,
@@ -31306,7 +31397,7 @@ function Floating({
   return ReactDOM.createPortal(
     /* @__PURE__ */ jsxs('div', {
       ref: floatingPositionRef,
-      className,
+      className: className2,
       style: {
         // Initially rendered as hidden, but the layout effect will set
         // to visible when the position is calculated.
@@ -31493,6 +31584,92 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
   return true;
 }
+var PRELOAD_AFTER_MS = 500;
+var OBSERVER_THRESHOLD = 0.9;
+var LOW_MEMORY_THRESHOLD = 1.7;
+var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
+var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
+var nodeToRoute = /* @__PURE__ */ new WeakMap();
+var preloadedRoutes = /* @__PURE__ */ new Set();
+var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function getObserveRouteForPreloadingFn() {
+  var _a;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+  const lowDeviceMemory = navigator.deviceMemory && navigator.deviceMemory > LOW_MEMORY_THRESHOLD;
+  let effectiveType, preloadDisabled, maxPreloadAmount;
+  function updateConnection() {
+    effectiveType = connection.effectiveType || '';
+    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
+    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
+      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
+      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
+  }
+  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
+  updateConnection();
+  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
+    threshold: OBSERVER_THRESHOLD,
+  },);
+  let activePreloadsAmount = 0;
+  async function preloadTimeout(route, target,) {
+    if (preloadDisabled) return;
+    const nodesInViewport = routeToNodesInViewport.get(route,);
+    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) return;
+    ++activePreloadsAmount;
+    preloadedRoutes.add(route,);
+    const preloadDone = preloadRoute(route,).catch(() => {
+      if (false) {
+        throw new Error(
+          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
+        );
+      }
+    },);
+    observer2.unobserve(target,);
+    nodeToRoute.delete(target,);
+    for (const node of nodesInViewport) {
+      observer2.unobserve(node,);
+      nodeToRoute.delete(node,);
+    }
+    nodesInViewport.clear();
+    routeToNodesInViewport.delete(route,);
+    await preloadDone;
+    --activePreloadsAmount;
+  }
+  function onPreloadIntersectionChange(entries,) {
+    var _a2;
+    for (const entry of entries) {
+      const target = entry.target;
+      const route = nodeToRoute.get(target,);
+      if (!route || preloadedRoutes.has(route,)) {
+        observer2.unobserve(target,);
+        nodeToRoute.delete(target,);
+        continue;
+      }
+      const nodes = routeToNodesInViewport.get(route,);
+      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
+      if (entry.isIntersecting) {
+        if (activePreloadsAmount >= maxPreloadAmount) continue;
+        if (nodes) nodes.add(target,);
+        else routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
+        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
+      } else {
+        if (nodes) nodes.delete(target,);
+        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(route,);
+      }
+    }
+  }
+  return (route, node,) => {
+    if (preloadedRoutes.has(route,)) return;
+    nodeToRoute.set(node, route,);
+    observer2.observe(node,);
+    return () => {
+      nodeToRoute.delete(node,);
+      observer2.unobserve(node,);
+    };
+  };
+}
+var observeRouteForPreloading =
+  // this also guards `window`
+  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 var noLocale = {};
 var resolveSlugCache = /* @__PURE__ */ new WeakMap();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -31554,10 +31731,10 @@ function linkFromFramerPageLink(link,) {
   };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
-var PathVariablesContext = /* @__PURE__ */ React4.createContext(void 0,);
+var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
 function useImplicitPathVariables() {
   var _a;
-  const contextPathVariables = React4.useContext(PathVariablesContext,);
+  const contextPathVariables = useContext3(PathVariablesContext,);
   const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
@@ -31582,7 +31759,7 @@ function linkMatchesRoute(route, {
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = React4.useContext(PathVariablesContext,);
+  const contextPathVariables = useContext3(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString22(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
@@ -31632,43 +31809,6 @@ function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariab
     }
     (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
-}
-function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
-  const isInternal = isInternalURL(href,);
-  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-    return propsForLink(href, openInNewTab,);
-  }
-  try {
-    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
-    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    assert(pathname !== void 0, 'A href must have a defined pathname.',);
-    const {
-      routeId,
-      pathVariables,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    const route = router.getRoute(routeId,);
-    if (route) {
-      preloadComponent(route.page,);
-      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
-      const path = getPathForRoute(route, {
-        currentRoutePath: currentRoute.path,
-        currentPathVariables: currentRoute.pathVariables,
-        // The hash value is already fully resolved so we don't need to
-        // provide any hashVariables.
-        hash: hash2 || void 0,
-        pathVariables: combinedPathVariables,
-        preserveQueryParams: router.preserveQueryParams,
-      },);
-      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-      return {
-        href: path,
-        target: anchorTarget,
-        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
-      };
-    }
-  } catch {}
-  return propsForLink(href, openInNewTab,);
 }
 async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
   async function handleSlugs(unresolvedSlugs,) {
@@ -31722,7 +31862,64 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
-var Link = /* @__PURE__ */ React4.forwardRef(({
+function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
+  const isInternal = isInternalURL(href,);
+  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+    return propsForLink(href, openInNewTab,);
+  }
+  try {
+    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
+    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const {
+      routeId,
+      pathVariables,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    const route = router.getRoute(routeId,);
+    if (route) {
+      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      const path = getPathForRoute(route, {
+        currentRoutePath: currentRoute.path,
+        currentPathVariables: currentRoute.pathVariables,
+        // The hash value is already fully resolved so we don't need to
+        // provide any hashVariables.
+        hash: hash2 || void 0,
+        pathVariables: combinedPathVariables,
+        preserveQueryParams: router.preserveQueryParams,
+      },);
+      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+      return {
+        href: path,
+        target: anchorTarget,
+        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
+      };
+    }
+  } catch {}
+  return propsForLink(href, openInNewTab,);
+}
+function getRouteFromPageLink(pageLink, router, currentRoute,) {
+  var _a;
+  if (isString22(pageLink,)) {
+    const isInternal = isInternalURL(pageLink,);
+    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+      return;
+    }
+    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
+    if (pathnameWithQueryParams === void 0) return;
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    if (pathname === void 0) return;
+    const {
+      routeId,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    return router.getRoute(routeId,);
+  }
+  const {
+    webPageId,
+  } = pageLink;
+  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
+}
+var Link = /* @__PURE__ */ forwardRef(({
   children,
   href,
   openInNewTab,
@@ -31735,8 +31932,29 @@ var Link = /* @__PURE__ */ React4.forwardRef(({
   const {
     activeLocale,
   } = useLocaleInfo();
+  const fallbackRef = useRef(null,);
+  const stableObserverChildRef = useMemo(() => {
+    let cleanupFn;
+    const observerCallback = (node) => {
+      var _a;
+      if (node === null) {
+        cleanupFn == null ? void 0 : cleanupFn();
+        cleanupFn = void 0;
+        return;
+      }
+      const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+      if (!pageLink) return;
+      const route = getRouteFromPageLink(pageLink, router, currentRoute,);
+      if (!route) return;
+      cleanupFn = (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
+    };
+    const hasRef = isValidElement(children,) && 'ref' in children;
+    if (hasRef && isMutableRef(children.ref,)) return createRefWithCallback(children.ref, observerCallback,);
+    if (hasRef && isFunction(children.ref,)) return mergeRefs(children.ref, observerCallback,);
+    return createRefWithCallback(fallbackRef, observerCallback,);
+  }, [href, router, currentRoute, children,],);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  const props = React4.useMemo(() => {
+  const props = useMemo(() => {
     var _a;
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
@@ -31752,22 +31970,19 @@ var Link = /* @__PURE__ */ React4.forwardRef(({
       unresolvedHashSlugs,
       unresolvedPathSlugs,
     } = pageLink;
-    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
     const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-    if (route) preloadComponent(route.page,);
-    const combinedPathVariable = Object.assign(
-      {},
-      implicitPathVariables,
-      pathVariables,
-      resolvedSlugs == null ? void 0 : resolvedSlugs.path,
-    );
-    const combinedHashVariable = Object.assign(
-      {},
-      implicitPathVariables,
-      hashVariables,
-      resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
-    );
+    const combinedPathVariable = {
+      ...implicitPathVariables,
+      ...pathVariables,
+      ...(resolvedSlugs == null ? void 0 : resolvedSlugs.path),
+    };
+    const combinedHashVariable = {
+      ...implicitPathVariables,
+      ...hashVariables,
+      ...(resolvedSlugs == null ? void 0 : resolvedSlugs.hash),
+    };
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
     const resolvedHref = getPathForRoute(route, {
       currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
       currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
@@ -31787,6 +32002,7 @@ var Link = /* @__PURE__ */ React4.forwardRef(({
   return clone(children, {
     ...restProps,
     ...props,
+    ref: stableObserverChildRef,
   },);
 },);
 function resolveLink(href, router, implicitPathVariables,) {
@@ -31861,7 +32077,7 @@ function PageRoot({
   locales,
   preserveQueryParams,
   enableImproveInpDuringHydration,
-  shouldMarkHydrationEnd = false,
+  addHydrationMarkers = false,
 },) {
   React4.useEffect(() => {
     if (isWebsite) return;
@@ -31885,7 +32101,7 @@ function PageRoot({
           },
           preserveQueryParams,
           enableImproveInpDuringHydration,
-          shouldMarkHydrationEnd,
+          addHydrationMarkers,
         },),
       },),
     },);
@@ -34934,7 +35150,11 @@ function useQueryData(query,) {
   return cached.read();
 }
 function useQueryCount(query,) {
-  const collection = useQueryData(query,);
+  const countQuery = {
+    ...query,
+    select: [],
+  };
+  const collection = useQueryData(countQuery,);
   return collection.length;
 }
 function getWhereExpressionFromPathVariables(pathVariables,) {
@@ -34973,28 +35193,29 @@ function getWhereExpressionFromPathVariables(pathVariables,) {
     right: expression,
   }));
 }
-function useLoadMorePaginatedQuery(query, pageSize,) {
-  const {
-    paginationInfo,
-    setPaginationInfo,
-  } = useCollectionListPaginationInfo();
+function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
   const count = useQueryCount(query,);
-  const initialPaginationInfo = useMemo(() => {
+  const [paginationInfo, setPaginationInfo,] = useState(() => {
+    var _a, _b, _c, _d;
     const totalPages = Math.ceil(count / pageSize,);
+    const currentPage = ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
+          ? void 0
+          : _b.paginationInfo) == null
+        ? void 0
+        : _c[hash2]) == null
+      ? void 0
+      : _d.currentPage) ?? 1;
     return {
-      currentPage: 1,
+      currentPage,
       totalPages,
-      type: 'loadMore',
+      isLoading: false,
     };
-  }, [count, pageSize,],);
+  },);
   useEffect(() => {
-    if (!paginationInfo) {
-      setPaginationInfo(initialPaginationInfo,);
-    }
-  }, [count, initialPaginationInfo, paginationInfo, setPaginationInfo,],);
+    pushLoadMoreHistory(hash2, paginationInfo,);
+  }, [hash2, paginationInfo,],);
   const paginatedQuery = useMemo(() => {
-    const currentPaginationInfo = paginationInfo ?? initialPaginationInfo;
-    let limit = pageSize * currentPaginationInfo.currentPage;
+    let limit = pageSize * paginationInfo.currentPage;
     if (query.limit) {
       if (query.limit.type !== 'LiteralValue' || typeof query.limit.value !== 'number') {
         throw new Error('Unexpected type for query limit',);
@@ -35008,8 +35229,28 @@ function useLoadMorePaginatedQuery(query, pageSize,) {
         value: limit,
       },
     };
-  }, [initialPaginationInfo, query, pageSize, paginationInfo,],);
-  return paginatedQuery;
+  }, [query, pageSize, paginationInfo,],);
+  const onCanvas = useIsOnFramerCanvas();
+  const loadMore = useCallback(() => {
+    if (onCanvas) return;
+    if (paginationInfo.currentPage >= paginationInfo.totalPages) return;
+    setPaginationInfo((info) => ({
+      ...info,
+      isLoading: true,
+    }));
+    requestAnimationFrame(() => {
+      setPaginationInfo((info) => ({
+        ...info,
+        currentPage: Math.min(info.currentPage + 1, info.totalPages,),
+        isLoading: false,
+      }));
+    },);
+  }, [onCanvas, paginationInfo.currentPage, paginationInfo.totalPages,],);
+  return {
+    paginatedQuery,
+    paginationInfo,
+    loadMore,
+  };
 }
 function createGestureVariant(variant, type,) {
   return `${variant}-${type}`;
@@ -35066,9 +35307,10 @@ function useVariantState({
 },) {
   const forceUpdate = useForceUpdate3();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
-  const internalState = useRef({
+  const internalState = React4.useRef({
     isHovered: false,
     isPressed: false,
+    hasPressedVariants: true,
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
     lastVariant: variant,
     gestureVariant: void 0,
@@ -35080,7 +35322,7 @@ function useVariantState({
     cycleOrder: externalCycleOrder,
     transitions: externalTransitions,
   },);
-  const resolveNextVariant = useCallback((targetBaseVariant) => {
+  const resolveNextVariant = React4.useCallback((targetBaseVariant) => {
     const {
       isHovered: isHovered2,
       isPressed: isPressed2,
@@ -35092,7 +35334,7 @@ function useVariantState({
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [validBaseVariants,],);
-  const setGestureState = useCallback(({
+  const setGestureState = React4.useCallback(({
     isHovered: isHovered2,
     isPressed: isPressed2,
   },) => {
@@ -35107,10 +35349,10 @@ function useVariantState({
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      startTransition2(forceUpdate,);
+      forceUpdate();
     }
   }, [resolveNextVariant, forceUpdate,],);
-  const setVariant = useCallback((proposedVariant) => {
+  const setVariant = React4.useCallback((proposedVariant) => {
     const {
       defaultVariant: defaultVariant2,
       cycleOrder,
@@ -35124,7 +35366,7 @@ function useVariantState({
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      startTransition2(forceUpdate,);
+      forceUpdate();
     }
   }, [resolveNextVariant, forceUpdate,],);
   if (variant !== internalState.current.lastVariant) {
@@ -35144,10 +35386,40 @@ function useVariantState({
     isPressed,
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
-  return useMemo(() => {
+  return React4.useMemo(() => {
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
     if (gestureVariant) variants.push(gestureVariant,);
+    const gestures = enabledGestures == null ? void 0 : enabledGestures[baseVariant];
+    const gestureHandlers = {};
+    if (gestures == null ? void 0 : gestures.hover) {
+      Object.assign(gestureHandlers, {
+        onMouseEnter: () =>
+          setGestureState({
+            isHovered: true,
+          },),
+        onMouseLeave: () =>
+          setGestureState({
+            isHovered: false,
+          },),
+      },);
+    }
+    if (gestures == null ? void 0 : gestures.pressed) {
+      Object.assign(gestureHandlers, {
+        onTapStart: () =>
+          setGestureState({
+            isPressed: true,
+          },),
+        onTapCancel: () =>
+          setGestureState({
+            isPressed: false,
+          },),
+        onTap: () =>
+          setGestureState({
+            isPressed: false,
+          },),
+      },);
+    }
     return {
       variants,
       baseVariant,
@@ -35156,10 +35428,8 @@ function useVariantState({
       setVariant,
       setGestureState,
       addVariantProps,
-      classNames: cx(
-        createVariantClassName(baseVariant, variantClassNames,),
-        getGesture(enabledGestures == null ? void 0 : enabledGestures[baseVariant], isHovered, isPressed,),
-      ),
+      gestureHandlers,
+      classNames: cx(createVariantClassName(baseVariant, variantClassNames,), getGesture(gestures, isHovered, isPressed,),),
     };
   }, [
     baseVariant,
@@ -36030,8 +36300,8 @@ var LocalFontSource = class {
     };
     const aliases = /* @__PURE__ */ new Map();
     const weights = [400, 100, 200, 300, 500, 600, 700, 800, 900,];
-    const styles = ['normal', 'italic',];
-    for (const style of styles) {
+    const styles2 = ['normal', 'italic',];
+    for (const style of styles2) {
       for (const weight of weights) {
         const variant = createVariantName(weight, style,);
         const alias = `__SystemDefault-${weight}-${style}__`;
@@ -36928,7 +37198,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
         },
       },);
     }
-    renderErrorPlaceholder(file, error,) {
+    renderErrorPlaceholder(error,) {
       const {
         RenderPlaceholder,
       } = runtime;
@@ -36936,10 +37206,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
         ...this.props,
         background: null,
         children: /* @__PURE__ */ jsx(RenderPlaceholder, {
-          error: {
-            error,
-            file,
-          },
+          error,
         },),
       },);
     }
@@ -36959,13 +37226,23 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
       if (noChildren) {
         const errorComponent = runtime.componentLoader.errorForIdentifier(componentIdentifier,);
         if (errorComponent) {
-          return this.renderErrorPlaceholder(errorComponent.file, errorComponent.error,);
+          const title = `Error in ${errorComponent.file}`;
+          const message = errorComponent.error;
+          return this.renderErrorPlaceholder({
+            title,
+            message,
+          },);
         }
       }
       if (error && error.children === children) {
         const component = runtime.componentLoader.componentForIdentifier(componentIdentifier,);
         const file = component ? component.file : '???';
-        return this.renderErrorPlaceholder(file, error.message,);
+        const title = `Error in ${file}`;
+        const message = error.message;
+        return this.renderErrorPlaceholder({
+          title,
+          message,
+        },);
       }
 
       (_b = (_a2 = asRecord(safeWindow,))['__checkComponentBudget__']) == null ? void 0 : _b.call(_a2,);
@@ -37152,14 +37429,16 @@ function formReducer(_state, {
 function preventDefault(e,) {
   e.preventDefault();
 }
-var FormContainer = ({
+var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   action,
   formId,
   disabled,
   children,
   redirectUrl,
+  onSuccess,
+  onError,
   ...props
-},) => {
+}, ref,) => {
   const [state, dispatch,] = React4.useReducer(formReducer, {
     state: disabled ? 'disabled' : void 0,
   },);
@@ -37214,6 +37493,7 @@ var FormContainer = ({
       dispatch({
         type: 'success',
       },);
+      onSuccess == null ? void 0 : onSuccess();
       if (redirectUrl) {
         await redirectTo(redirectUrl,);
       }
@@ -37221,6 +37501,7 @@ var FormContainer = ({
       dispatch({
         type: 'error',
       },);
+      onError == null ? void 0 : onError();
     }
   };
   const handleKeyDown = (event) => {
@@ -37241,9 +37522,10 @@ var FormContainer = ({
     'data-formid': formId,
     onSubmit: isSubmitEnabled ? handleSubmit : preventDefault,
     onKeyDown: handleKeyDown,
+    ref,
     children: children(state,),
   },);
-};
+},);
 async function submitForm(action, data2,) {
   const proofOfWork = await calculateProofOfWork();
   if (!proofOfWork) {
@@ -37294,21 +37576,49 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
   FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
   FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
-  FormInputStyleVariableNames2['ZIndex'] = '--framer-input-z-index';
   FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
   FormInputStyleVariableNames2['FocusedBorderWidth'] = '--framer-input-focused-border-width';
   FormInputStyleVariableNames2['FocusedBorderStyle'] = '--framer-input-focused-border-style';
   FormInputStyleVariableNames2['FocusedBackground'] = '--framer-input-focused-background';
   FormInputStyleVariableNames2['FocusedBoxShadow'] = '--framer-input-focused-box-shadow';
   FormInputStyleVariableNames2['FocusedTransition'] = '--framer-input-focused-transition';
+  FormInputStyleVariableNames2['BooleanCheckedIconURL'] = '--framer-input-boolean-icon';
+  FormInputStyleVariableNames2['BooleanCheckedBackground'] = '--framer-input-boolean-checked-background';
+  FormInputStyleVariableNames2['BooleanCheckedBorderColor'] = '--framer-input-boolean-checked-border-color';
+  FormInputStyleVariableNames2['BooleanCheckedBorderWidth'] = '--framer-input-boolean-checked-border-width';
+  FormInputStyleVariableNames2['BooleanCheckedBorderStyle'] = '--framer-input-boolean-checked-border-style';
+  FormInputStyleVariableNames2['BooleanCheckedBoxShadow'] = '--framer-input-boolean-checked-box-shadow';
+  FormInputStyleVariableNames2['BooleanCheckedTransition'] = '--framer-input-boolean-checked-transition';
   return FormInputStyleVariableNames2;
 })(FormInputStyleVariableNames || {},);
 var Var = FormInputStyleVariableNames;
 var inputClassName = 'framer-form-input';
 var inputWrapperClassName = 'framer-form-input-wrapper';
-function cssVar(a, b,) {
-  return `var(${a}, var(${b}))`;
+function cssValue(value,) {
+  if (typeof value === 'number') return value;
+  if (value.startsWith('--',)) return css.variable(value,);
+  if (value === '') return '""';
+  return value;
 }
+function css(selector, declaration,) {
+  let output = ' ';
+  for (const key7 in declaration) {
+    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(declaration[key7],)}; `;
+  }
+  return selector + ' {' + output + '}';
+}
+((css2) => {
+  function variable(...variables) {
+    const lastItem = variables[variables.length - 1];
+    let value = lastItem.startsWith('--',) ? `var(${lastItem})` : lastItem;
+    for (let index = variables.length - 2; index >= 0; index--) {
+      const element = variables[index];
+      value = `var(${element}, ${value})`;
+    }
+    return value;
+  }
+  css2.variable = variable;
+})(css || (css = {}),);
 var sharedInputCSS = [`.${inputClassName} {
         padding: var(${Var.Padding});
         background: var(${Var.Background});
@@ -37327,7 +37637,6 @@ var sharedInputCSS = [`.${inputClassName} {
         border-top-right-radius: var(${Var.BorderRadiusTopRight});
         border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
         border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
-        z-index: var(${Var.ZIndex});
         letter-spacing: var(${Var.FontLetterSpacing});
         text-align: var(${Var.FontTextAlignment});
         line-height: var(${Var.FontLineHeight});
@@ -37337,16 +37646,16 @@ var sharedInputCSS = [`.${inputClassName} {
 var focusInputCSS = [
   `.${inputClassName}:focus-visible { outline: none; }`,
   `.${inputClassName}:focus {
-        background: ${cssVar(Var.FocusedBackground, Var.Background,)};
-        box-shadow: ${cssVar(Var.FocusedBoxShadow, Var.BoxShadow,)};
+        background: ${css.variable(Var.FocusedBackground, Var.Background,)};
+        box-shadow: ${css.variable(Var.FocusedBoxShadow, Var.BoxShadow,)};
     }`,
   `.${inputWrapperClassName}:focus-within::after {
-        border-color: ${cssVar(Var.FocusedBorderColor, Var.BorderColor,)};
-        border-style: ${cssVar(Var.FocusedBorderStyle, Var.BorderStyle,)};
-        border-top-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderTopWidth,)};
-        border-right-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderRightWidth,)};
-        border-bottom-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderBottomWidth,)};
-        border-left-width: ${cssVar(Var.FocusedBorderWidth, Var.BorderLeftWidth,)};
+        border-color: ${css.variable(Var.FocusedBorderColor, Var.BorderColor,)};
+        border-style: ${css.variable(Var.FocusedBorderStyle, Var.BorderStyle,)};
+        border-top-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderTopWidth,)};
+        border-right-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderRightWidth,)};
+        border-bottom-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderBottomWidth,)};
+        border-left-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderLeftWidth,)};
     }`,
 ];
 var inputBorderCSS = [
@@ -37381,27 +37690,37 @@ var passwordManagerIgnoreDataProps = {
   'data-1p-ignore': true,
   // LastPass
   'data-lpignore': true,
-};
-var sensibleInputDefaults = {
+  // Dashlane
+  // https://support.dashlane.com/hc/en-us/articles/4420122792594-Optimize-your-web-forms-for-Dashlane-Autofill
+  'data-form-type': 'other',
+  // autocomplete="off" is a generic property that disables autofilling. It
+  // is not always respected by some browsers or password managers.
   autocomplete: 'off',
 };
 var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput(props, ref,) {
   const {
-    style,
-    inputName,
-    type,
-    required,
     autoFocus,
-    placeholder,
-    value,
-    min,
+    className: className2,
+    inputName,
     max,
+    min,
+    onBlur,
+    onFocus,
+    onInvalid,
+    placeholder,
+    required,
     step: step2,
+    style,
+    type,
+    value,
+    autofillEnabled,
     ...rest
   } = props;
-  const dataProps = {
-    ...sensibleInputDefaults,
-    ...passwordManagerIgnoreDataProps,
+  const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
+  const eventProps = {
+    onBlur,
+    onFocus,
+    onInvalid,
   };
   switch (type) {
     case 'hidden':
@@ -37414,11 +37733,12 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       return /* @__PURE__ */ jsx(motion.div, {
         ref,
         style,
+        className: cx(inputWrapperClassName, className2,),
         ...rest,
-        className: cx(inputWrapperClassName, props.className,),
         children: /* @__PURE__ */ jsx(motion.textarea, {
           id: inputName,
           ...dataProps,
+          ...eventProps,
           required,
           autoFocus,
           name: inputName,
@@ -37431,11 +37751,12 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       return /* @__PURE__ */ jsx(motion.div, {
         ref,
         style,
+        className: cx(inputWrapperClassName, className2,),
         ...rest,
-        className: cx(inputWrapperClassName, props.className,),
         children: /* @__PURE__ */ jsx(motion.input, {
           id: inputName,
           ...dataProps,
+          ...eventProps,
           type,
           required,
           autoFocus,
@@ -37464,19 +37785,152 @@ var FormPlainTextInput2 =
             min-height: var(${'--framer-textarea-min-height'});
         }`,
     ],))();
+var className = 'framer-form-boolean-input';
+var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput3(props, ref,) {
+  const {
+    inputName,
+    type = 'checkbox',
+    defaultChecked,
+    ...rest
+  } = props;
+  const isCanvas = useIsOnFramerCanvas();
+  const attributes = isCanvas
+    ? {
+      checked: defaultChecked,
+    }
+    : {
+      defaultChecked,
+    };
+  return /* @__PURE__ */ jsx(motion.input, {
+    ...rest,
+    ...attributes,
+    readOnly: isCanvas,
+    ref,
+    id: inputName,
+    type,
+    name: inputName,
+    className: cx(className, props.className,),
+  },);
+},);
+var defaultCheckedIcon =
+  `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M 4 8 L 6.5 10.5 L 11.5 5.5" fill="transparent" stroke-width="2" stroke="rgb(255, 255, 255)" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
+var borderWidth =
+  `var(${'--framer-input-border-top-width'}) var(${'--framer-input-border-right-width'}) var(${'--framer-input-border-bottom-width'}) var(${'--framer-input-border-left-width'})`;
+var borderRadius =
+  `var(${'--framer-input-border-radius-top-left'}) var(${'--framer-input-border-radius-top-right'}) var(${'--framer-input-border-radius-bottom-right'}) var(${'--framer-input-border-radius-bottom-left'})`;
+var styles = [
+  css(`.${className}`, {
+    '-webkit-appearance': 'none',
+    // background-color: #fff; fixes a bug on iOS where the checkbox shows
+    // through the appearance: none;
+    alignItems: 'center',
+    appearance: 'none',
+    background: '--framer-input-background',
+    backgroundColor: '#fff',
+    borderRadius,
+    boxShadow: '--framer-input-box-shadow',
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 0,
+    overflow: 'hidden',
+    position: 'relative',
+    transition: '--framer-input-boolean-checked-transition',
+    transitionProperty: 'box-shadow, background',
+  },),
+  // The after element styles the border of the checkbox to conform to
+  // framer's inset border model.
+  css(`.${className}::after`, {
+    background: 'transparent',
+    borderColor: css.variable('--framer-input-border-color', 'transparent',),
+    borderRadius,
+    borderStyle: '--framer-input-border-style',
+    borderWidth,
+    boxSizing: 'border-box',
+    content: '',
+    display: 'block',
+    inset: 0,
+    position: 'absolute',
+    transition: '--framer-input-boolean-checked-transition',
+    transitionProperty: 'border-color, border-width, border-style',
+  },),
+  // The before element is used to display the check mark icon. It is
+  // faded in when the input is checked.
+  css(`.${className}::before`, {
+    // Use the icon url if it's provided, falling back to a default check
+    // mark. Radio inputs will be code-generated with a "none" value for the
+    // variable if an image isn't provided which will prevent this fallback
+    // in those cases.
+    backgroundImage: css.variable('--framer-input-boolean-icon', `url('${defaultCheckedIcon}')`,),
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
+    content: '',
+    display: 'block',
+    height: '100%',
+    opacity: 0,
+    transition: '--framer-input-boolean-checked-transition',
+    transitionProperty: 'opacity',
+    width: '100%',
+  },),
+  css(`.${className}:checked`, {
+    // When not set, the styles when checked shouldn't clear the default
+    // styles.
+    backgroundColor: css.variable('--framer-input-boolean-checked-background', '--framer-input-background',/* Background */
+    ),
+    boxShadow: css.variable('--framer-input-boolean-checked-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
+    ),
+  },),
+  css(`.${className}:checked::before`, {
+    opacity: 1,
+  },),
+  css(`.${className}:checked::after`, {
+    // When not set, the styles when checked shouldn't clear the default
+    // styles.
+    borderColor: css.variable('--framer-input-boolean-checked-border-color', '--framer-input-border-color', 'transparent',),
+    borderStyle: css.variable('--framer-input-boolean-checked-border-style', '--framer-input-border-style', 'solid',),
+    borderWidth: css.variable('--framer-input-boolean-checked-border-width', borderWidth,),
+  },),
+  css(`.${className}:focus-visible`, {
+    outline: 'none',
+  },),
+  css(`.${className}:focus::after`, {
+    // When not set, the styles when focused shouldn't clear the checked
+    // styles.
+    borderColor: css.variable(
+      '--framer-input-focused-border-color',
+      '--framer-input-boolean-checked-border-color',
+      '--framer-input-border-color',
+      'transparent',
+    ),
+    borderStyle: css.variable(
+      '--framer-input-focused-border-style',
+      '--framer-input-boolean-checked-border-style',
+      '--framer-input-border-style',
+      'solid',
+    ),
+    borderWidth: css.variable('--framer-input-focused-border-width', '--framer-input-boolean-checked-border-width', borderWidth,),
+  },),
+];
+var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles,);
 var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRef,) {
   const {
-    style,
-    inputName,
-    required,
     autoFocus,
-    selectOptions,
+    className: className2,
+    inputName,
+    onBlur,
+    onFocus,
+    onInvalid,
+    required,
     selectDefaultValue,
+    selectOptions,
+    style,
+    ...rest
   } = props;
   return /* @__PURE__ */ jsx(motion.div, {
     ref: measureRef,
     style,
-    className: cx(inputWrapperClassName, selectWrapperClassName, props.className,),
+    className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
+    ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
       id: inputName,
       name: inputName,
@@ -37484,6 +37938,9 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
       required,
       className: inputClassName,
       defaultValue: selectDefaultValue,
+      onBlur,
+      onFocus,
+      onInvalid,
       children: selectOptions == null ? void 0 : selectOptions.map((option, index,) => {
         switch (option.type) {
           case 'divider':
@@ -37737,7 +38194,7 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
     top,
     bottom,
     center,
-    className,
+    className: className2,
     stylesPresetsClassName,
     visible = true,
     opacity,
@@ -37878,7 +38335,7 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
     'data-framer-name': name,
     'data-framer-component-type': 'DeprecatedRichText',
     'data-center': center,
-    className: cx(className, stylesPresetsClassName, richTextWrapperClassName,),
+    className: cx(className2, stylesPresetsClassName, richTextWrapperClassName,),
     transformTemplate: template,
     dangerouslySetInnerHTML: {
       __html: innerHTMLWithReplacedFramerPageLinks,
@@ -38754,7 +39211,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         title,
         description,
         layoutId,
-        className,
+        className: className2,
         variants,
         withExternalLayout,
         innerRef,
@@ -38920,7 +39377,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         id: id3,
         ref: innerRef,
         style: outerStyle,
-        className,
+        className: className2,
         variants,
         tabIndex: this.props.tabIndex,
         role: title || description ? 'img' : void 0,
@@ -39064,7 +39521,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           opacity,
           id: id3,
           layoutId,
-          className,
+          className: className2,
           transition,
           variants,
           name,
@@ -39155,7 +39612,7 @@ var TextComponent = /* @__PURE__ */ (() => {
               __html: rawHTML,
             },
             'data-center': this.props.center,
-            className: cx(className, matchesCurrentRoute && 'isCurrent',),
+            className: cx(className2, matchesCurrentRoute && 'isCurrent',),
             transition,
             variants,
             ref: this.setElement,
@@ -40383,7 +40840,7 @@ function loadJSON(url,) {
   },).then((res) => res.json());
 }
 function inspectObjectType(item,) {
-  let className;
+  let className2;
   if (
     (item.constructor !== null ? item.constructor.name : void 0) !== null &&
     (item.constructor !== null ? item.constructor.name : void 0) !== 'Object'
@@ -40402,15 +40859,15 @@ function inspectObjectType(item,) {
     return null;
   };
   if (item.toString) {
-    className = extract(item.toString(),);
-    if (className) {
-      return className;
+    className2 = extract(item.toString(),);
+    if (className2) {
+      return className2;
     }
   }
   if (item.constructor !== null ? item.constructor.toString : void 0) {
-    className = extract(item.constructor !== null ? item.constructor.toString() : void 0,);
-    if (className) {
-      return className.replace('Constructor', '',);
+    className2 = extract(item.constructor !== null ? item.constructor.toString() : void 0,);
+    if (className2) {
+      return className2.replace('Constructor', '',);
     }
   }
   return 'Object';
@@ -40692,6 +41149,7 @@ export {
   FontSourceNames,
   fontStore,
   forceLayerBackingWithCSSProperties,
+  FormBooleanInput,
   FormContainer,
   FormPlainTextInput2 as FormPlainTextInput,
   FormSelect,
@@ -40810,6 +41268,7 @@ export {
   PropertyOverrides,
   PropertyStore,
   propsForLink,
+  pushLoadMoreHistory,
   px,
   QueryEngine,
   RadialGradient,
@@ -40867,7 +41326,6 @@ export {
   useAnimationControls,
   useAnimationFrame,
   useBreakpointVariants,
-  useCollectionListPaginationInfo,
   useComponentViewport,
   useConstant2 as useConstant,
   useCurrentPathVariables,
@@ -40945,6 +41403,7 @@ export {
   withCSS,
   withFX,
   withGeneratedLayoutId,
+  withInfiniteScroll,
   withMappedReactProps,
   withMeasuredSize,
   WithNavigator,
