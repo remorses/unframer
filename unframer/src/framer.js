@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.ACFIZGCR.js
+// https :https://app.framerstatic.com/framer.6CCWDTJK.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -21317,7 +21317,7 @@ function Border(props,) {
   },);
 }
 function htmlElementAsMotionComponent(asElem,) {
-  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion(asElem,) : motion['div'];
+  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
 }
 var isChrome2 = /* @__PURE__ */ isChrome();
 function layoutHintDataPropsForCenter(center,) {
