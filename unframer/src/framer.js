@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.6CCWDTJK.js
+// https :https://app.framerstatic.com/framer.IBCXHSKM.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -21352,25 +21352,7 @@ function processOverrideForwarding(props, children,) {
       };
     }
   }
-  let _forwardedOverrides = props._forwardedOverrides;
-  const extractions = props._overrideForwardingDescription;
-  if (extractions) {
-    _forwardedOverrides = void 0;
-    for (const key7 in extractions) {
-      const propName = extractions[key7];
-      const value = props[propName];
-      if (value !== void 0) {
-        if (!_forwardedOverrides) {
-          _forwardedOverrides = {};
-          props = {
-            ...props,
-          };
-        }
-        _forwardedOverrides[key7] = props[propName];
-        delete props[propName];
-      }
-    }
-  }
+  const _forwardedOverrides = props._forwardedOverrides;
   if (!_forwardedOverrides) {
     return {
       props,
@@ -24684,19 +24666,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       },);
     }
     layoutChildren() {
-      let _forwardedOverrides = this.props._forwardedOverrides;
-      const extractions = this.props._overrideForwardingDescription;
-      if (extractions) {
-        let added = false;
-        _forwardedOverrides = {};
-        for (const [key7, value,] of Object.entries(extractions,)) {
-          added = true;
-          _forwardedOverrides[key7] = asRecord(this.props,)[value];
-        }
-        if (!added) {
-          _forwardedOverrides = void 0;
-        }
-      }
+      const _forwardedOverrides = this.props._forwardedOverrides;
       let children = React4.Children.map(this.props.children, (child) => {
         if (isConstraintSupportingChild(child,)) {
           return React4.cloneElement(child, {
@@ -37589,11 +37559,15 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['BooleanCheckedBorderStyle'] = '--framer-input-boolean-checked-border-style';
   FormInputStyleVariableNames2['BooleanCheckedBoxShadow'] = '--framer-input-boolean-checked-box-shadow';
   FormInputStyleVariableNames2['BooleanCheckedTransition'] = '--framer-input-boolean-checked-transition';
+  FormInputStyleVariableNames2['InvalidTextColor'] = '--framer-input-invalid-text-color';
   return FormInputStyleVariableNames2;
 })(FormInputStyleVariableNames || {},);
 var Var = FormInputStyleVariableNames;
-var inputClassName = 'framer-form-input';
-var inputWrapperClassName = 'framer-form-input-wrapper';
+var inputClassName = /* @__PURE__ */ (() => 'framer-form-input')();
+var inputWrapperClassName = /* @__PURE__ */ (() => 'framer-form-input-wrapper')();
+var emptyValueClassName = /* @__PURE__ */ (() => 'framer-form-input-empty')();
+var forcedFocusClassName = /* @__PURE__ */ (() => 'framer-form-input-forced-focus')();
+var forcedCheckedClassName = /* @__PURE__ */ (() => 'framer-form-input-forced-checked')();
 function cssValue(value,) {
   if (typeof value === 'number') return value;
   if (value.startsWith('--',)) return css.variable(value,);
@@ -37643,13 +37617,14 @@ var sharedInputCSS = [`.${inputClassName} {
         transition: var(${Var.FocusedTransition});
         transition-property: background, box-shadow;
     }`,];
-var focusInputCSS = [
-  `.${inputClassName}:focus-visible { outline: none; }`,
-  `.${inputClassName}:focus {
+var focusInputCSS =
+  /* @__PURE__ */ (() => [
+    `.${inputClassName}:focus-visible { outline: none; }`,
+    `.${inputClassName}:focus, .${inputClassName}.${forcedFocusClassName} {
         background: ${css.variable(Var.FocusedBackground, Var.Background,)};
         box-shadow: ${css.variable(Var.FocusedBoxShadow, Var.BoxShadow,)};
     }`,
-  `.${inputWrapperClassName}:focus-within::after {
+    `.${inputWrapperClassName}:focus-within::after, .${inputWrapperClassName}.${forcedFocusClassName}::after {
         border-color: ${css.variable(Var.FocusedBorderColor, Var.BorderColor,)};
         border-style: ${css.variable(Var.FocusedBorderStyle, Var.BorderStyle,)};
         border-top-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderTopWidth,)};
@@ -37657,7 +37632,7 @@ var focusInputCSS = [
         border-bottom-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderBottomWidth,)};
         border-left-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderLeftWidth,)};
     }`,
-];
+  ])();
 var inputBorderCSS = [
   `.${inputWrapperClassName} {
         position: relative;
@@ -37714,14 +37689,20 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
     type,
     value,
     autofillEnabled,
+    canvasPreviewClassName,
     ...rest
   } = props;
+  const [hasValue, setHasValue,] = React4.useState(!!value,);
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
   const eventProps = {
     onBlur,
     onFocus,
     onInvalid,
   };
+  const onChange = React4.useCallback((e) => {
+    const newValue = e.target.value;
+    setHasValue(!!newValue,);
+  }, [],);
   switch (type) {
     case 'hidden':
       return /* @__PURE__ */ jsx(motion.input, {
@@ -37733,7 +37714,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       return /* @__PURE__ */ jsx(motion.div, {
         ref,
         style,
-        className: cx(inputWrapperClassName, className2,),
+        className: cx(inputWrapperClassName, canvasPreviewClassName, className2,),
         ...rest,
         children: /* @__PURE__ */ jsx(motion.textarea, {
           id: inputName,
@@ -37743,7 +37724,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
           autoFocus,
           name: inputName,
           placeholder,
-          className: inputClassName,
+          className: cx(inputClassName, canvasPreviewClassName,),
           value,
         },),
       },);
@@ -37751,7 +37732,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       return /* @__PURE__ */ jsx(motion.div, {
         ref,
         style,
-        className: cx(inputWrapperClassName, className2,),
+        className: cx(inputWrapperClassName, canvasPreviewClassName, className2,),
         ...rest,
         children: /* @__PURE__ */ jsx(motion.input, {
           id: inputName,
@@ -37762,7 +37743,8 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
           autoFocus,
           name: inputName,
           placeholder,
-          className: inputClassName,
+          className: cx(inputClassName, canvasPreviewClassName, !hasValue && emptyValueClassName,),
+          onChange,
           value,
           min,
           max,
@@ -37771,6 +37753,14 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       },);
   }
 },);
+var iconSpacing = /* @__PURE__ */ (() => 10)();
+var iconSize = /* @__PURE__ */ (() => 14)();
+var defaultDateIcon =
+  /* @__PURE__ */ (() =>
+    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${iconSize}' height='${iconSize}'%3E%3Cpath d='M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H2Z' fill='currentColor' opacity='.3'/%3E%3Cpath d='M2.25 4.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM2 5.75h9.5' fill='transparent' stroke-width='1.5' stroke='currentColor'/%3E%3C/svg%3E`)();
+var defaultTimeIcon =
+  /* @__PURE__ */ (() =>
+    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${iconSize}' height='${iconSize}'%3E%3Cpath d='M1.5 7a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z' fill='transparent' stroke-width='1.5' stroke='currentColor'/%3E%3Cpath d='M6.75 7.25v-3m0 3h2' fill='transparent' stroke-width='1.5' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E`)();
 var FormPlainTextInput2 =
   /* @__PURE__ */ (() =>
     withCSS(PlainTextInput, [
@@ -37784,6 +37774,43 @@ var FormPlainTextInput2 =
             resize: var(${'--framer-textarea-resize'});
             min-height: var(${'--framer-textarea-min-height'});
         }`,
+      `.${inputClassName}.${emptyValueClassName}::-webkit-datetime-edit {
+            color:var(${'--framer-input-placeholder-color'});
+            -webkit-text-fill-color: var(${'--framer-input-placeholder-color'});
+        }`,
+      `.${inputClassName}[type="date"]::before, .${inputClassName}[type="time"]::before {
+            content: "";
+            display: block;
+            position: absolute;
+            padding: var(${'--framer-input-padding'});
+            padding-left: ${iconSpacing}px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: ${iconSize}px;
+            box-sizing: content-box;
+
+            pointer-events: none;
+            mask-repeat: no-repeat;
+            mask-position: ${iconSpacing}px center;
+            border: none;
+            background-color: #999;
+        }`,
+      `.${inputClassName}[type="date"]::before {
+            mask-image: url("${defaultDateIcon}");
+        }`,
+      `.${inputClassName}[type="time"]::before {
+            mask-image: url("${defaultTimeIcon}");
+        }`,
+      // Hide the native date picker icon, but still allow the user to click it.
+      `.${inputClassName}::-webkit-calendar-picker-indicator {
+            opacity: 0;
+            padding: var(${'--framer-input-padding'});
+            padding-right: 0;
+            padding-left: ${iconSpacing}px;
+            width: ${iconSize}px;
+            height: ${iconSize}px;
+        }`,
     ],))();
 var className = 'framer-form-boolean-input';
 var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput3(props, ref,) {
@@ -37791,6 +37818,7 @@ var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput
     inputName,
     type = 'checkbox',
     defaultChecked,
+    canvasPreviewClassName,
     ...rest
   } = props;
   const isCanvas = useIsOnFramerCanvas();
@@ -37809,7 +37837,7 @@ var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput
     id: inputName,
     type,
     name: inputName,
-    className: cx(className, props.className,),
+    className: cx(className, props.className, canvasPreviewClassName,),
   },);
 },);
 var defaultCheckedIcon =
@@ -37818,15 +37846,15 @@ var borderWidth =
   `var(${'--framer-input-border-top-width'}) var(${'--framer-input-border-right-width'}) var(${'--framer-input-border-bottom-width'}) var(${'--framer-input-border-left-width'})`;
 var borderRadius =
   `var(${'--framer-input-border-radius-top-left'}) var(${'--framer-input-border-radius-top-right'}) var(${'--framer-input-border-radius-bottom-right'}) var(${'--framer-input-border-radius-bottom-left'})`;
-var styles = [
+var styles = /* @__PURE__ */ (() => [
   css(`.${className}`, {
     '-webkit-appearance': 'none',
     // background-color: #fff; fixes a bug on iOS where the checkbox shows
     // through the appearance: none;
     alignItems: 'center',
     appearance: 'none',
-    background: '--framer-input-background',
     backgroundColor: '#fff',
+    background: '--framer-input-background',
     borderRadius,
     boxShadow: '--framer-input-box-shadow',
     display: 'flex',
@@ -37872,7 +37900,7 @@ var styles = [
     transitionProperty: 'opacity',
     width: '100%',
   },),
-  css(`.${className}:checked`, {
+  css(`.${className}:checked, .${className}.${forcedCheckedClassName}`, {
     // When not set, the styles when checked shouldn't clear the default
     // styles.
     backgroundColor: css.variable('--framer-input-boolean-checked-background', '--framer-input-background',/* Background */
@@ -37880,28 +37908,47 @@ var styles = [
     boxShadow: css.variable('--framer-input-boolean-checked-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
     ),
   },),
-  css(`.${className}:checked::before`, {
+  css(`.${className}:checked::before, .${className}.${forcedCheckedClassName}::before`, {
     opacity: 1,
   },),
-  css(`.${className}:checked::after`, {
+  css(`.${className}:checked::after, .${className}.${forcedCheckedClassName}::after`, {
     // When not set, the styles when checked shouldn't clear the default
     // styles.
     borderColor: css.variable('--framer-input-boolean-checked-border-color', '--framer-input-border-color', 'transparent',),
     borderStyle: css.variable('--framer-input-boolean-checked-border-style', '--framer-input-border-style', 'solid',),
     borderWidth: css.variable('--framer-input-boolean-checked-border-width', borderWidth,),
   },),
+  css(`.${className}:focus, .${className}.${forcedFocusClassName}`, {
+    backgroundColor: css.variable('--framer-input-focused-background', '--framer-input-background',/* Background */
+    ),
+    boxShadow: css.variable('--framer-input-focused-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
+    ),
+  },),
   css(`.${className}:focus-visible`, {
     outline: 'none',
   },),
-  css(`.${className}:focus::after`, {
+  css(`.${className}:focus::after, .${className}.${forcedFocusClassName}::after`, {
     // When not set, the styles when focused shouldn't clear the checked
     // styles.
-    borderColor: css.variable(
-      '--framer-input-focused-border-color',
-      '--framer-input-boolean-checked-border-color',
-      '--framer-input-border-color',
-      'transparent',
+    borderColor: css.variable('--framer-input-focused-border-color', '--framer-input-border-color', 'transparent',),
+    borderStyle: css.variable('--framer-input-focused-border-style', '--framer-input-border-style', 'solid',),
+    borderWidth: css.variable('--framer-input-focused-border-width', borderWidth,),
+  },),
+  css(`.${className}:focus:checked`, {
+    backgroundColor: css.variable(
+      '--framer-input-focused-background',
+      '--framer-input-boolean-checked-background',
+      '--framer-input-background',
+      /* Background */
     ),
+    boxShadow: css.variable(
+      '--framer-input-focused-box-shadow',
+      '--framer-input-boolean-checked-box-shadow',
+      '--framer-input-box-shadow',
+      /* BoxShadow */
+    ),
+  },),
+  css(`.${className}:focus:checked::after`, {
     borderStyle: css.variable(
       '--framer-input-focused-border-style',
       '--framer-input-boolean-checked-border-style',
@@ -37910,7 +37957,7 @@ var styles = [
     ),
     borderWidth: css.variable('--framer-input-focused-border-width', '--framer-input-boolean-checked-border-width', borderWidth,),
   },),
-];
+])();
 var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles,);
 var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRef,) {
   const {
@@ -37924,19 +37971,20 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
     selectDefaultValue,
     selectOptions,
     style,
+    canvasPreviewClassName,
     ...rest
   } = props;
   return /* @__PURE__ */ jsx(motion.div, {
     ref: measureRef,
     style,
-    className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
+    className: cx(inputWrapperClassName, selectWrapperClassName, canvasPreviewClassName, className2,),
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
       id: inputName,
       name: inputName,
       autoFocus,
       required,
-      className: inputClassName,
+      className: cx(inputClassName, canvasPreviewClassName,),
       defaultValue: selectDefaultValue,
       onBlur,
       onFocus,
@@ -37983,6 +38031,9 @@ var FormSelect = /* @__PURE__ */ (() =>
             background-repeat: no-repeat;
             background-position: center center;
             border: none;
+        }`,
+    `select.${inputClassName}:required:invalid {
+            color: var(${'--framer-input-invalid-text-color'});
         }`,
   ],))();
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
