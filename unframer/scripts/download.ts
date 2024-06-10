@@ -51,7 +51,11 @@ export async function main({ framerTypesUrl }) {
             'process.env.NODE_ENV': JSON.stringify('production'),
             // 'RenderEnvironment.target': JSON.stringify('PREVIEW'),
         },
-        plugins: [esbuildPluginBundleDependencies({})],
+        plugins: [
+            esbuildPluginBundleDependencies({
+                externalizeNpm: true,
+            }),
+        ],
         write: true,
         // inject: [path.resolve(__dirname, '../src/inject.ts')],
         // outfile: 'dist/example.js',

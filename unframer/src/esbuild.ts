@@ -12,6 +12,7 @@ export const externalPackages = [
 let redirectCache = new Map<string, Promise<string>>()
 export function esbuildPluginBundleDependencies({
     signal = undefined as AbortSignal | undefined,
+    externalizeNpm = false,
 }) {
     const codeCache = new Map()
 
@@ -70,6 +71,12 @@ export function esbuildPluginBundleDependencies({
                     return {
                         path: u,
                         namespace,
+                    }
+                }
+                if (externalizeNpm) {
+                    return {
+                        path: args.path,
+                        external: true,
                     }
                 }
 

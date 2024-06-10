@@ -4,6 +4,7 @@ import '@/framer/styles.css'
 import { AnimatePresence } from 'unframer'
 
 import Logos from '@/framer/logos'
+import Nav from '@/framer/framerNav'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
 import Comp from '@/framer/fylo'
@@ -17,8 +18,11 @@ export default function Home() {
     return (
         <div>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
-
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
+                <Nav.Responsive
+                    className='!w-full'
+                    variants={{ base: 'Phone', lg: 'Desktop' }}
+                />
                 <div className=' flex z-10 w-full absolute flex-col items-center'>
                     <Menus className=' mx-auto' />
                 </div>
