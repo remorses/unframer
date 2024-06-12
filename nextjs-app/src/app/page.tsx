@@ -1,7 +1,7 @@
 'use client'
 
 import '@/framer/styles.css'
-import { AnimatePresence } from 'unframer'
+import { AnimatePresence, PageRoot } from 'unframer'
 
 import Logos from '@/framer/logos'
 import Nav from '@/framer/framerNav'
@@ -14,11 +14,36 @@ import Hero from '@/framer/hero'
 import MenuOverlay from '@/framer/menu-overlay'
 import Collection from '@/framer/collection'
 import Card from '@/framer/card'
+import { use } from 'react'
 
-export default function Home() {
+const proxyThatLogsProps = (original) =>
+    new Proxy(original, {
+        get(target, prop, receiver) {
+            console.log('Getting prop', prop)
+            return original[prop]
+        },
+    })
+
+export default function Page() {
+    const siteId = use(sha256Encode('MOHUmEgItazhBLBtW6H0'))
+    return (
+        <PageRoot
+            framerSiteId={siteId}
+            routeId='index'
+            localeId='it-it'
+            routes={{
+                // _index: proxyThatLogsProps,
+                index: proxyThatLogsProps({ page: <Home />, path: '/' }),
+            }}
+            RootComponent={'div'}
+            isWebsite={true}
+        />
+    )
+}
+
+export function Home() {
     return (
         <div>
-            {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
                 <div className='relative w-full flex flex-col'>
                     <Nav.Responsive
@@ -57,9 +82,19 @@ export default function Home() {
 
                 <Collection />
                 <Card />
-                <Form  />
+                <Form />
                 <div className='pt-[200px]'></div>
             </div>
         </div>
     )
+}
+
+async function sha256Encode(text: string) {
+    const utf8 = new TextEncoder().encode(text)
+    const hashBuffer = await crypto.subtle.digest('SHA-256', utf8)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('')
+    return hashHex
 }
