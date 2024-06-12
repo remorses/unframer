@@ -1429,7 +1429,6 @@ var Component3 = /* @__PURE__ */ React3.forwardRef(function (props, ref,) {
   const sharedStyleClassNames = [];
   const componentViewport = useComponentViewport();
   return /* @__PURE__ */ _jsx3(LayoutGroup3, {
-    suppressHydrationWarning: true,
     id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
     children: /* @__PURE__ */ _jsx3(Variants, {
       animate: variants,

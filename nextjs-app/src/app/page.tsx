@@ -5,6 +5,7 @@ import { AnimatePresence } from 'unframer'
 
 import Logos from '@/framer/logos'
 import Nav from '@/framer/framerNav'
+import Form from '@/framer/form'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
 import Comp from '@/framer/fylo'
@@ -19,14 +20,16 @@ export default function Home() {
         <div>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
-                <Nav.Responsive
-                    className='!w-full'
-                    variants={{ base: 'Phone', lg: 'Desktop' }}
-                />
-                <div className=' flex z-10 w-full absolute flex-col items-center'>
+                <div className='relative w-full flex flex-col'>
+                    <Nav.Responsive
+                        className='!w-full'
+                        variants={{ base: 'Phone', lg: 'Desktop' }}
+                    />
+                </div>
+                <div className=' top-[200px] flex z-10 w-full absolute flex-col items-center'>
                     <Menus className=' mx-auto' />
                 </div>
-                <div className='pt-[200px]'></div>
+                <div className='pt-[300px]'></div>
                 <Hero.Responsive
                     variants={{ base: 'mobile', lg: 'Variant 1' }}
                     className='bg-gray-800 !p-14'
@@ -54,7 +57,7 @@ export default function Home() {
 
                 <Collection />
                 <Card />
-
+                <Form  />
                 <div className='pt-[200px]'></div>
             </div>
         </div>

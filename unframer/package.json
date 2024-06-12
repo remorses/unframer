@@ -49,7 +49,7 @@
         "json5": "^2.2.3",
         "native-fetch": "^4.0.2",
         "picocolors": "^1.0.0",
-        "real-framer-motion": "npm:framer-motion@11.1.7",
+        "real-framer-motion": "npm:framer-motion@11.2.10",
         "tmp": "^0.2.1"
     },
     "devDependencies": {
