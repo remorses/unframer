@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.IBCXHSKM.js
+// https :https://app.framerstatic.com/framer.D3PFHNM7.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -32033,10 +32033,203 @@ function resolvePageScope(pageLink, router,) {
     preserveQueryParams: false,
   },);
 }
+var salt = 'framer';
+var difficulty = 3;
+var tokenLength = 30;
+var maxTime = 3e3;
+async function calculateProofOfWork() {
+  const target = '0'.repeat(difficulty,);
+  const startTime = Date.now();
+  let processing = true;
+  while (processing) {
+    const timestamp = Date.now();
+    if (timestamp - startTime > maxTime) {
+      processing = false;
+      return;
+    }
+    const nonce = randomCharacters(tokenLength,);
+    const secret = `${timestamp}:${nonce}`;
+    const hash2 = await sha256(salt + secret,);
+    if (hash2.startsWith(target,)) {
+      return {
+        secret,
+        hash: hash2,
+      };
+    }
+  }
+  return;
+}
+async function sha256(text,) {
+  const buffer = new TextEncoder().encode(text,);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
+  return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
+}
+function randomCharacters(count,) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < count; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
+  }
+  return result;
+}
+function formReducer(_state, {
+  type,
+},) {
+  switch (type) {
+    case 'submit':
+      return {
+        state: 'pending',
+      };
+    case 'success':
+      return {
+        state: 'success',
+      };
+    case 'error':
+      return {
+        state: 'error',
+      };
+    default:
+      assertNever(type,);
+  }
+}
+function preventDefault(e,) {
+  e.preventDefault();
+}
+var FormContext = React4.createContext(void 0,);
+var FormContainer = /* @__PURE__ */ React4.forwardRef(({
+  action,
+  formId,
+  disabled,
+  children,
+  redirectUrl,
+  onSuccess,
+  onError,
+  ...props
+}, ref,) => {
+  const [state, dispatch,] = React4.useReducer(formReducer, {
+    state: disabled ? 'disabled' : void 0,
+  },);
+  const router = useRouter();
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const isSubmitEnabled = state.state === void 0;
+  const projectHash = useContext3(FormContext,);
+  async function redirectTo(link,) {
+    var _a, _b;
+    if (isLinkToWebPage(link,)) {
+      if (!router) return;
+      const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, link.webPageId,);
+      if (!route) return;
+      const {
+        unresolvedHashSlugs,
+        unresolvedPathSlugs,
+      } = link;
+      const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+      const combinedPathVariables = Object.assign(
+        {},
+        router.currentPathVariables,
+        link.pathVariables,
+        resolvedSlugs == null ? void 0 : resolvedSlugs.path,
+      );
+      const combinedHashVariables = Object.assign(
+        {},
+        router.currentPathVariables,
+        link.pathVariables,
+        link.hashVariables,
+        resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
+      );
+      const element = getHashForRoute(link.hash, route, combinedHashVariables,);
+      (_b = router.navigate) == null ? void 0 : _b.call(router, link.webPageId, element, combinedPathVariables,);
+      return;
+    }
+    if (!safeWindow) return;
+    safeWindow.open(link, '_blank',);
+  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!action || !projectHash) return;
+    const data2 = new FormData(event.currentTarget,);
+    for (const [key7, value,] of data2) {
+      if (value instanceof File) data2.delete(key7,);
+    }
+    try {
+      dispatch({
+        type: 'submit',
+      },);
+      await submitForm(action, data2, projectHash,);
+      dispatch({
+        type: 'success',
+      },);
+      onSuccess == null ? void 0 : onSuccess();
+      if (redirectUrl) {
+        await redirectTo(redirectUrl,);
+      }
+    } catch (error) {
+      dispatch({
+        type: 'error',
+      },);
+      onError == null ? void 0 : onError();
+    }
+  };
+  const handleKeyDown = (event) => {
+    const {
+      target: input,
+      currentTarget: form,
+      key: key7,
+    } = event;
+    const isTextArea = input instanceof HTMLTextAreaElement;
+    if (isTextArea) return;
+    if (key7 === 'Enter' && form.checkValidity()) {
+      event.preventDefault();
+      void handleSubmit(event,);
+    }
+  };
+  return /* @__PURE__ */ jsx(motion.form, {
+    ...props,
+    'data-formid': formId,
+    onSubmit: isSubmitEnabled ? handleSubmit : preventDefault,
+    onKeyDown: handleKeyDown,
+    ref,
+    children: children(state,),
+  },);
+},);
+async function submitForm(action, data2, projectHash,) {
+  const proofOfWork = await calculateProofOfWork();
+  if (!proofOfWork) {
+    throw new Error('Failed to calculate proof of work',);
+  }
+  const formFields = Array.from(data2.keys(),);
+  const response = await fetch(action, {
+    body: data2,
+    method: 'POST',
+    headers: {
+      'Framer-Site-Id': projectHash,
+      'Framer-POW': proofOfWork.secret,
+      'Framer-Form-Fields': formFields.join(',',),
+    },
+  },);
+  if (response.ok) {
+    return response;
+  } else {
+    const body = await response.json();
+    const error = 'Failed to submit form';
+    if (responseHasError(body,)) {
+      throw new Error(`${error} - ${body.error.message}`,);
+    }
+    throw new Error(error,);
+  }
+}
+function responseHasError(response,) {
+  return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
+    'message' in response.error && typeof response.error.message === 'string';
+}
 function PageRoot({
   RootComponent,
   isWebsite,
   routeId,
+  framerSiteId,
   pathVariables,
   routes,
   collectionUtils,
@@ -32057,21 +32250,24 @@ function PageRoot({
     return /* @__PURE__ */ jsx(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
       children: /* @__PURE__ */ jsx(CustomCursorHost, {
-        children: /* @__PURE__ */ jsx(Router, {
-          initialRoute: routeId,
-          initialPathVariables: pathVariables,
-          initialLocaleId: localeId,
-          routes,
-          collectionUtils,
-          notFoundPage,
-          locales,
-          defaultPageStyle: {
-            minHeight: '100vh',
-            width: 'auto',
-          },
-          preserveQueryParams,
-          enableImproveInpDuringHydration,
-          addHydrationMarkers,
+        children: /* @__PURE__ */ jsx(FormContext.Provider, {
+          value: framerSiteId,
+          children: /* @__PURE__ */ jsx(Router, {
+            initialRoute: routeId,
+            initialPathVariables: pathVariables,
+            initialLocaleId: localeId,
+            routes,
+            collectionUtils,
+            notFoundPage,
+            locales,
+            defaultPageStyle: {
+              minHeight: '100vh',
+              width: 'auto',
+            },
+            preserveQueryParams,
+            enableImproveInpDuringHydration,
+            addHydrationMarkers,
+          },),
         },),
       },),
     },);
@@ -37336,194 +37532,6 @@ function isPageOrScroll(identifier,) {
   if (identifier === 'framer/Scroll') return true;
   return false;
 }
-var salt = 'framer';
-var difficulty = 3;
-var tokenLength = 30;
-var maxTime = 3e3;
-async function calculateProofOfWork() {
-  const target = '0'.repeat(difficulty,);
-  const startTime = Date.now();
-  let processing = true;
-  while (processing) {
-    const timestamp = Date.now();
-    if (timestamp - startTime > maxTime) {
-      processing = false;
-      return;
-    }
-    const nonce = randomCharacters(tokenLength,);
-    const secret = `${timestamp}:${nonce}`;
-    const hash2 = await sha256(salt + secret,);
-    if (hash2.startsWith(target,)) {
-      return {
-        secret,
-        hash: hash2,
-      };
-    }
-  }
-  return;
-}
-async function sha256(text,) {
-  const buffer = new TextEncoder().encode(text,);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
-  return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
-}
-function randomCharacters(count,) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < count; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
-  }
-  return result;
-}
-function formReducer(_state, {
-  type,
-},) {
-  switch (type) {
-    case 'submit':
-      return {
-        state: 'pending',
-      };
-    case 'success':
-      return {
-        state: 'success',
-      };
-    case 'error':
-      return {
-        state: 'error',
-      };
-    default:
-      assertNever(type,);
-  }
-}
-function preventDefault(e,) {
-  e.preventDefault();
-}
-var FormContainer = /* @__PURE__ */ React4.forwardRef(({
-  action,
-  formId,
-  disabled,
-  children,
-  redirectUrl,
-  onSuccess,
-  onError,
-  ...props
-}, ref,) => {
-  const [state, dispatch,] = React4.useReducer(formReducer, {
-    state: disabled ? 'disabled' : void 0,
-  },);
-  const router = useRouter();
-  const {
-    activeLocale,
-  } = useLocaleInfo();
-  const isSubmitEnabled = state.state === void 0;
-  async function redirectTo(link,) {
-    var _a, _b;
-    if (isLinkToWebPage(link,)) {
-      if (!router) return;
-      const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, link.webPageId,);
-      if (!route) return;
-      const {
-        unresolvedHashSlugs,
-        unresolvedPathSlugs,
-      } = link;
-      const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-      const combinedPathVariables = Object.assign(
-        {},
-        router.currentPathVariables,
-        link.pathVariables,
-        resolvedSlugs == null ? void 0 : resolvedSlugs.path,
-      );
-      const combinedHashVariables = Object.assign(
-        {},
-        router.currentPathVariables,
-        link.pathVariables,
-        link.hashVariables,
-        resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
-      );
-      const element = getHashForRoute(link.hash, route, combinedHashVariables,);
-      (_b = router.navigate) == null ? void 0 : _b.call(router, link.webPageId, element, combinedPathVariables,);
-      return;
-    }
-    if (!safeWindow) return;
-    safeWindow.open(link, '_blank',);
-  }
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!action) return;
-    const data2 = new FormData(event.currentTarget,);
-    for (const [key7, value,] of data2) {
-      if (value instanceof File) data2.delete(key7,);
-    }
-    try {
-      dispatch({
-        type: 'submit',
-      },);
-      await submitForm(action, data2,);
-      dispatch({
-        type: 'success',
-      },);
-      onSuccess == null ? void 0 : onSuccess();
-      if (redirectUrl) {
-        await redirectTo(redirectUrl,);
-      }
-    } catch (error) {
-      dispatch({
-        type: 'error',
-      },);
-      onError == null ? void 0 : onError();
-    }
-  };
-  const handleKeyDown = (event) => {
-    const {
-      target: input,
-      currentTarget: form,
-      key: key7,
-    } = event;
-    const isTextArea = input instanceof HTMLTextAreaElement;
-    if (isTextArea) return;
-    if (key7 === 'Enter' && form.checkValidity()) {
-      event.preventDefault();
-      void handleSubmit(event,);
-    }
-  };
-  return /* @__PURE__ */ jsx(motion.form, {
-    ...props,
-    'data-formid': formId,
-    onSubmit: isSubmitEnabled ? handleSubmit : preventDefault,
-    onKeyDown: handleKeyDown,
-    ref,
-    children: children(state,),
-  },);
-},);
-async function submitForm(action, data2,) {
-  const proofOfWork = await calculateProofOfWork();
-  if (!proofOfWork) {
-    throw new Error('Failed to calculate proof of work',);
-  }
-  const response = await fetch(action, {
-    body: data2,
-    method: 'POST',
-    headers: {
-      'Framer-POW': proofOfWork.secret,
-      'Framer-POW-Enforce': 'true',
-    },
-  },);
-  if (response.ok) {
-    return response;
-  } else {
-    const body = await response.json();
-    const error = 'Failed to submit form';
-    if (responseHasError(body,)) {
-      throw new Error(`${error} - ${body.error.message}`,);
-    }
-    throw new Error(error,);
-  }
-}
-function responseHasError(response,) {
-  return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
-    'message' in response.error && typeof response.error.message === 'string';
-}
 var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2) => {
   FormInputStyleVariableNames2['Padding'] = '--framer-input-padding';
   FormInputStyleVariableNames2['BorderRadiusTopLeft'] = '--framer-input-border-radius-top-left';
@@ -37593,30 +37601,31 @@ function css(selector, declaration,) {
   }
   css2.variable = variable;
 })(css || (css = {}),);
-var sharedInputCSS = [`.${inputClassName} {
-        padding: var(${Var.Padding});
-        background: var(${Var.Background});
-        font-family: var(${Var.FontFamily});
-        font-weight: var(${Var.FontWeight});
-        font-size: var(${Var.FontSize});
-        color: var(${Var.FontColor});
-        box-shadow: var(${Var.BoxShadow});
-        border: none;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        border-top-left-radius: var(${Var.BorderRadiusTopLeft});
-        border-top-right-radius: var(${Var.BorderRadiusTopRight});
-        border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
-        border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
-        letter-spacing: var(${Var.FontLetterSpacing});
-        text-align: var(${Var.FontTextAlignment});
-        line-height: var(${Var.FontLineHeight});
-        transition: var(${Var.FocusedTransition});
-        transition-property: background, box-shadow;
-    }`,];
+var sharedInputCSS = [css(`.${inputClassName}`, {
+  padding: css.variable(Var.Padding,),
+  background: css.variable(Var.Background,),
+  fontFamily: css.variable(Var.FontFamily,),
+  fontWeight: css.variable(Var.FontWeight,),
+  fontSize: css.variable(Var.FontSize,),
+  color: css.variable(Var.FontColor,),
+  boxShadow: css.variable(Var.BoxShadow,),
+  border: 'none',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  width: '100%',
+  height: '100%',
+  borderTopLeftRadius: css.variable(Var.BorderRadiusTopLeft,),
+  borderTopRightRadius: css.variable(Var.BorderRadiusTopRight,),
+  borderBottomRightRadius: css.variable(Var.BorderRadiusBottomRight,),
+  borderBottomLeftRadius: css.variable(Var.BorderRadiusBottomLeft,),
+  letterSpacing: css.variable(Var.FontLetterSpacing,),
+  textAlign: css.variable(Var.FontTextAlignment,),
+  lineHeight: css.variable(Var.FontLineHeight,),
+  transition: css.variable(Var.FocusedTransition,),
+  transitionProperty: 'background, box-shadow',
+  flex: '0 0 auto',
+},),];
 var focusInputCSS =
   /* @__PURE__ */ (() => [
     `.${inputClassName}:focus-visible { outline: none; }`,
@@ -37770,6 +37779,14 @@ var FormPlainTextInput2 =
       `.${inputClassName}::placeholder {
             color: var(${'--framer-input-placeholder-color'});
         }`,
+      `.${inputClassName}[type="date"], .${inputClassName}[type="time"] {
+            -webkit-appearance: none;
+            appearance: none;
+        }`,
+      // iOS only fix for centered date & time inputs: https://github.com/tailwindlabs/tailwindcss-forms/pull/144
+      `.${inputClassName}::-webkit-date-and-time-value {
+            text-align: start;
+        }`,
       `textarea.${inputClassName} {
             resize: var(${'--framer-textarea-resize'});
             min-height: var(${'--framer-textarea-min-height'});
@@ -37864,6 +37881,7 @@ var styles = /* @__PURE__ */ (() => [
     position: 'relative',
     transition: '--framer-input-boolean-checked-transition',
     transitionProperty: 'box-shadow, background',
+    flex: '0 0 auto',
   },),
   // The after element styles the border of the checkbox to conform to
   // framer's inset border model.
