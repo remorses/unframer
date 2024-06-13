@@ -1,21 +1,23 @@
 /// <reference types="react" />
 
 import type { AnimationPlaybackControls } from 'framer-motion';
-import { Component } from 'react';
 import { ComponentType } from 'react';
 import { ForwardRefExoticComponent } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
+import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { DeprecatedLayoutGroupContext as LayoutGroupContext } from 'framer-motion';
 import { MotionProps } from 'framer-motion';
 import type { MotionStyle } from 'framer-motion';
 import type { MotionTransform } from 'framer-motion';
 import type { MotionValue } from 'framer-motion';
 import { PanInfo } from 'framer-motion';
+import type { PropsWithChildren } from 'react';
 import { PropsWithoutRef } from 'react';
 import { default as React_2 } from 'react';
 import type { ReactNode } from 'react';
 import { RefAttributes } from 'react';
 import type { SpringOptions as SpringOptions_2 } from 'framer-motion';
+import type { TapHandlers } from 'framer-motion';
 import type { TargetAndTransition } from 'framer-motion';
 import type { Transition } from 'framer-motion';
 import { useDeprecatedAnimatedState as useAnimatedState } from 'framer-motion';
@@ -111,8 +113,8 @@ export declare type AnimatableObject<T> = {
  * @deprecated Use the {@link MotionProps.animate} prop on {@link Frame} instead.
  */
 export declare const animate: {
-    <Value, Options>(from: DeprecatedAnimationTarget<Value>, to: Value, animator?: AnimatorClass<Value, Options> | undefined, options?: Partial<Options & DeprecatedAnimationOptions<Value>> | undefined): FramerAnimation<Value, Options>;
-    <V>(from: V | MotionValue<V>, to: V | V[], transition?: (Transition & AnimationPlaybackLifecycles<V>) | undefined): AnimationPlaybackControls;
+    <Value, Options>(from: DeprecatedAnimationTarget<Value>, to: Value, animator?: AnimatorClass<Value, Options>, options?: Partial<Options & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, Options>;
+    <V>(from: MotionValue<V> | V, to: V | V[], transition?: Transition & AnimationPlaybackLifecycles<V>): AnimationPlaybackControls;
     /**
      * Animate value with a spring curve
      * @remarks
@@ -295,7 +297,7 @@ export declare interface ArrayControlDescription<P = any> extends BaseControlDes
  * Array sub type
  * @public
  */
-export declare type ArrayItemControlDescription<P = any> = Omit<NumberControlDescription<P>, "hidden" | "description"> | Omit<EnumControlDescription<P>, "hidden" | "description"> | Omit<BooleanControlDescription<P>, "hidden" | "description"> | Omit<StringControlDescription<P>, "hidden" | "description"> | Omit<RichTextControlDescription<P>, "hidden" | "description"> | Omit<ColorControlDescription<P>, "hidden" | "description" | "optional"> | Omit<SegmentedEnumControlDescription<P>, "hidden" | "description"> | Omit<ImageControlDescription<P>, "hidden" | "description"> | Omit<ResponsiveImageControlDescription<P>, "hidden" | "description"> | Omit<FileControlDescription<P>, "hidden" | "description"> | Omit<ComponentInstanceDescription<P>, "hidden" | "description"> | Omit<TransitionControlDescription<P>, "hidden" | "description"> | Omit<LinkControlDescription<P>, "hidden" | "description"> | Omit<DateControlDescription<P>, "hidden" | "description"> | Omit<ObjectControlDescription<P>, "hidden" | "description" | "optional"> | Omit<ScrollSectionRefControlDescription<P>, "hidden" | "description" | "optional"> | Omit<CustomCursorControlDescription<P>, "hidden" | "description" | "optional">;
+export declare type ArrayItemControlDescription<P = any> = Omit<NumberControlDescription<P>, "hidden" | "description"> | Omit<EnumControlDescription<P>, "hidden" | "description"> | Omit<BooleanControlDescription<P>, "hidden" | "description"> | Omit<StringControlDescription<P>, "hidden" | "description"> | Omit<RichTextControlDescription<P>, "hidden" | "description"> | Omit<ColorControlDescription<P>, "hidden" | "description" | "optional"> | Omit<SegmentedEnumControlDescription<P>, "hidden" | "description"> | Omit<ImageControlDescription<P>, "hidden" | "description"> | Omit<ResponsiveImageControlDescription<P>, "hidden" | "description"> | Omit<FileControlDescription<P>, "hidden" | "description"> | Omit<ComponentInstanceDescription<P>, "hidden" | "description"> | Omit<TransitionControlDescription<P>, "hidden" | "description"> | Omit<LinkControlDescription<P>, "hidden" | "description"> | Omit<DateControlDescription<P>, "hidden" | "description"> | Omit<ObjectControlDescription<P>, "hidden" | "description" | "optional"> | Omit<ScrollSectionRefControlDescription<P>, "hidden" | "description"> | Omit<CustomCursorControlDescription<P>, "hidden" | "description"> | Omit<BorderControlDescription<P>, "hidden" | "description"> | Omit<CursorControlDescription<P>, "hidden" | "description">;
 
 /**
  * Enable or disable the automatic generation of layout ids for canvas layers.
@@ -316,7 +318,7 @@ export declare type ArrayItemControlDescription<P = any> = Omit<NumberControlDes
  */
 export declare function AutomaticLayoutIds({ enabled, ...props }: React_2.PropsWithChildren<{
     enabled?: boolean;
-}>): JSX.Element;
+}>): JSX_2.Element;
 
 /** @public */
 export declare type Background = Color | Gradient | BackgroundImage | MotionValue<string> | string;
@@ -344,9 +346,9 @@ export declare interface BackgroundImage {
 }
 
 /** @public */
-export declare namespace BackgroundImage {
-    const isImageObject: (image: any) => image is object & BackgroundImage;
-}
+export declare const BackgroundImage: {
+    isImageObject: (image: any) => image is object & BackgroundImage;
+};
 
 /** @public */
 declare interface BackgroundImageProps extends ImageAltProps {
@@ -411,7 +413,6 @@ export declare interface BaseFrameProps {
     name: string;
 
 
-
 }
 
 /**
@@ -454,6 +455,36 @@ export declare interface BooleanControlDescription<P = any> extends BaseControlD
     enabledTitle?: string;
 }
 
+/**
+ * @public
+ * Represents a border style.
+ * Either borderWidth or the equivalent per-side
+ * values (e.g borderTopWidth, borderLeftWidth, borderRightWidth, borderBottomWidth)
+ * will be provided.
+ */
+declare interface Border {
+    borderColor?: string;
+    borderStyle?: BorderStyle;
+    borderWidth?: number;
+    borderTopWidth?: number;
+    borderLeftWidth?: number;
+    borderRightWidth?: number;
+    borderBottomWidth?: number;
+}
+
+/**
+ * @public
+ */
+export declare interface BorderControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.Border;
+    defaultValue?: Border;
+}
+
+declare interface BorderRadiusControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.BorderRadius;
+    defaultValue?: string;
+}
+
 /** @public */
 export declare type BorderStyle = "solid" | "dashed" | "dotted" | "double";
 
@@ -475,6 +506,12 @@ export declare const BoxShadow: {
     is: (shadow: any) => shadow is BoxShadow;
     toCSS: (shadow: BoxShadow) => string;
 };
+
+/** @public */
+export declare interface BoxShadowControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.BoxShadow;
+    defaultValue?: string | readonly BoxShadow[];
+}
 
 /** @public */
 export declare interface BoxShadowProperties {
@@ -548,7 +585,7 @@ export declare interface Color {
  * @public
  */
 export declare const Color: {
-    (color: number | IncomingColor | Color, r?: number, g?: number, b?: number): Color;
+    (color: IncomingColor | Color | number, r?: number, g?: number, b?: number): Color;
     /**
      * Formats a Color object into a readable string for debugging.
      *
@@ -879,7 +916,7 @@ export declare const Color: {
      * @param colorB - The final color
      * @param model  - The model to use for the mix. One of {@link ColorMixModelType}
      */
-    interpolate(colorA: Color, colorB: Color, model?: ColorMixModelType): (progress: number) => Color;
+    interpolate(colorA: Color, colorB: Color, model?: ColorMixModelType): ((progress: number) => Color);
     /**
      * Create a function that will mix two colors together and output the result as an rgb string.
      *
@@ -1241,7 +1278,7 @@ declare const ConstraintsContext: React_2.Context<{
 }>;
 
 /** @public */
-export declare type ControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | FusedNumberControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | ComponentInstanceDescription<P> | ArrayControlDescription<P> | EventHandlerControlDescription<P> | TransitionControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ObjectControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P>;
+export declare type ControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | FusedNumberControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | ComponentInstanceDescription<P> | ArrayControlDescription<P> | EventHandlerControlDescription<P> | TransitionControlDescription<P> | BoxShadowControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ObjectControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P> | BorderControlDescription<P> | CursorControlDescription<P> | PaddingControlDescription<P> | BorderRadiusControlDescription<P>;
 
 declare type ControlPoints = [number, number, number, number];
 
@@ -1345,16 +1382,22 @@ export declare enum ControlType {
     String = "string",
 
     /**
-     * A control that can be used to take a single number or four distinct
-     * numeric input fields. The typical use case for this control is for visual
-     * properties like border, padding or margin. It will display an input field
-     * to accept a single value, alongside a segmented control allowing four
-     * distinct values to be provided.
+     * Deprecated, please use ControlType.Padding and ControlType.BorderRadius. You should be able
+     * to switch to the new control type without data loss. Be aware that these new controls only
+     * have a single value (e.g. `10px` or `10px 20px 30px 40px`).
      *
-     * You can also set the default value for each valueKey as well as the
-     * toggleKey by setting their values on `defaultProps`.
+     * A control that can be used to take a single number or four distinct numeric input fields. The
+     * typical use case for this control is for visual properties like border, padding or margin. It
+     * will display an input field to accept a single value, alongside a segmented control allowing
+     * four distinct values to be provided.
      *
+     * You can also set the default value for each valueKey as well as the toggleKey by setting
+     * their values on `defaultProps`.
      *
+     * @deprecated Please use {@link ControlType.Padding} and ${@link ControlType.BorderRadius}. You
+     * should be able to switch to the new control type without data loss. Be aware that these new controls only
+     * have a single value (e.g. `10px` or `10px 20px 30px 40px`).
+     * @remarks
      * ```javascript
      * export function MyComponent({
      *   radius = 50,
@@ -1656,6 +1699,22 @@ export declare enum ControlType {
      */
     Transition = "transition",
     /**
+     * A control that allows for exposing shadows. The value will be provided as
+     * a string with valid CSS box-shadow values.
+     *
+     * ```javascript
+     * export function MyComponent(props) {
+     *  return <motion.div style={{boxShadow: props.shadow}} />
+     * }
+     *
+     * addPropertyControls(MyComponent, {
+     *  shadow: {
+     *      type: ControlType.BoxShadow,
+     *  }
+     * })
+     */
+    BoxShadow = "boxshadow",
+    /**
      * A control that allows for exposing web links.
      *
      * ```javascript
@@ -1714,6 +1773,72 @@ export declare enum ControlType {
 
 
 
+    /**
+     * @public
+     * A control that represents a border.
+     *
+     * @remarks
+     * ```javascript
+     * function MyComponent(props) {
+     *   return <div style={props.border} />
+     * }
+     *
+     * addPropertyControls(MyComponent, {
+     *   border: {
+     *     type: ControlType.Border,
+     *     defaultValue: {
+     *       borderWidth: 1,
+     *       borderStyle: "solid",
+     *       borderColor: "rgba(0, 0, 0, 0.5)",
+     *     },
+     *   }
+     * })
+     * ```
+     */
+    Border = "border",
+    /**
+     * @public
+     * A control that allows specifying a web cursor that should be shown
+     * when mousing over the element assigned.
+     */
+    Cursor = "cursor",
+    /**
+     * @public
+     * A control that represents CSS padding.
+     *
+     * @remarks
+     * ```javascript
+     * function MyComponent({ padding }) {
+     *   return <div style={{ padding }} />
+     * }
+     *
+     * addPropertyControls(MyComponent, {
+     *   padding: {
+     *     type: ControlType.Padding,
+     *     defaultValue: "8px",
+     *   }
+     * })
+     */
+    Padding = "padding",
+    /**
+     * @public
+     * A control that represents CSS border radius.
+     *
+     * @remarks
+     * ```javascript
+     * function MyComponent({ borderRadius }) {
+     *   return <div style={{ borderRadius }} />
+     * }
+     *
+     * addPropertyControls(MyComponent, {
+     *   borderRadius: {
+     *     type: ControlType.BorderRadius,
+     *     defaultValue: "16px",
+     *     title: "Radius",
+     *   }
+     * })
+     */
+    BorderRadius = "borderradius"
 }
 
 /**
@@ -1876,6 +2001,14 @@ export declare interface CSSTransformProperties extends MotionTransform {
     perspective: number | string | MotionValue<number | string>;
 }
 
+/**
+ * @public
+ */
+declare interface CursorControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.Cursor;
+    defaultValue?: string;
+}
+
 declare type Curve = ControlPoints | Bezier;
 
 declare interface CustomConstraintProperties {
@@ -1929,7 +2062,7 @@ declare interface DampingDurationSpringOptions {
 }
 
 export declare const Data: {
-    <T extends object = object>(initial?: object | Partial<T>): T;
+    <T extends object = object>(initial?: Partial<T> | object): T;
 
 
 
@@ -2074,7 +2207,6 @@ export declare interface DeprecatedFrameProperties extends ConstraintProperties,
      * ```
      */
     className?: string;
-
 
 }
 
@@ -2221,7 +2353,7 @@ declare interface EffectStyleScrollTarget_2 extends EffectScrollTarget {
     target: Record<keyof FXValues, number>;
 }
 
-declare const effectValuesKeys: readonly ["opacity", "x", "y", "scale", "rotate", "rotateX", "rotateY", "transformPerspective"];
+declare const effectValuesKeys: readonly ["opacity", "x", "y", "scale", "rotate", "rotateX", "rotateY", "skewX", "skewY", "transformPerspective"];
 
 declare interface EffectVariantScrollTarget extends EffectScrollTarget {
     target: string;
@@ -2343,7 +2475,7 @@ declare interface FontControlDescription<P = any> extends BaseControlDescription
 }
 
 /** @public */
-declare type FontSourceName = "local" | "google" | "fontshare" | "custom";
+declare type FontSourceName = "local" | "google" | "framer" | "fontshare" | "custom";
 
 /** @public */
 export declare const Frame: React_2.ForwardRefExoticComponent<Partial<FrameProps> & React_2.RefAttributes<HTMLDivElement>>;
@@ -2492,6 +2624,7 @@ export declare interface FrameLayoutProperties extends PositionStickyProperties,
 
 /** @public */
 export declare interface FrameProps extends ImageAltProps, BackgroundProperties, VisualProperties, Omit<MotionDivProps, "color" | "children">, CSSTransformProperties, LayerProps, FrameLayoutProperties, ConstraintConfiguration, BaseFrameProps {
+    componentType?: string;
     as?: keyof HTMLElementTagNameMap;
 
 
@@ -2607,7 +2740,10 @@ export declare class FramerEvent {
 
 }
 
-/** @public */
+/**
+ * @deprecated Please use {@link ControlType.Padding} and {@link ControlType.BorderRadius}.
+ * @public
+ */
 export declare interface FusedNumberControlDescription<P = any> extends BaseControlDescription<P> {
     type: ControlType.FusedNumber;
     defaultValue?: number;
@@ -2631,6 +2767,8 @@ declare type FXProps = Partial<Prefixed<ParallaxTransformOptions & StyleAppearEf
  * shared interface that can be animated.
  */
 declare type FXValues = Record<(typeof effectValuesKeys)[number], MotionValue<number>>;
+
+declare type GestureHandlers = Pick<TapHandlers & React_2.DOMAttributes<HTMLDivElement>, "onTap" | "onTapStart" | "onTapCancel" | "onMouseEnter" | "onMouseLeave">;
 
 declare type GestureState = Partial<{
     isHovered: boolean;
@@ -2722,18 +2860,67 @@ declare interface InterpolationOptions {
 /** @public */
 export declare function isRelativeNumber(value: unknown): value is RelativeNumber;
 
-/**
- * @public
- */
-export declare class Layer<P extends Partial<LayerProps>, S> extends Component<P, S> {
-    static readonly defaultProps: LayerProps;
-    static applyWillChange(props: WillChangeTransformProp, style: MotionStyle, usingMotionStyle: boolean): void;
-    /** @private (Just using `private` breaks compilation unless using `stripInternal`) */
-    layerElement: HTMLElement | SVGElement | null;
-    setLayerElement: (element: HTMLElement | SVGElement | null) => void;
+/** @public */
+export declare type Layer = InstanceType<typeof Layer>;
+
+/** @public */
+export declare const Layer: {
+    new <P extends Partial<LayerProps>, S>(props: P): {
+        /** @private (Just using `private` breaks compilation unless using `stripInternal`) */
+        layerElement: HTMLElement | SVGElement | null;
+        setLayerElement: (element: HTMLElement | SVGElement | null) => void;
 
 
-}
+        context: unknown;
+        setState<K extends keyof S>(state: S | ((prevState: Readonly<S>, props: Readonly<P>) => S | Pick<S, K> | null) | Pick<S, K> | null, callback?: (() => void) | undefined): void;
+        forceUpdate(callback?: (() => void) | undefined): void;
+        render(): React_2.ReactNode;
+        readonly props: Readonly<P>;
+        state: Readonly<S>;
+        refs: {
+            [key: string]: React_2.ReactInstance;
+        };
+        componentDidMount?(): void;
+        componentWillUnmount?(): void;
+        componentDidCatch?(error: Error, errorInfo: React_2.ErrorInfo): void;
+        getSnapshotBeforeUpdate?(prevProps: Readonly<P>, prevState: Readonly<S>): any;
+        componentWillMount?(): void;
+        UNSAFE_componentWillMount?(): void;
+        componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
+        UNSAFE_componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
+        componentWillUpdate?(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): void;
+        UNSAFE_componentWillUpdate?(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): void;
+    };
+    new <P extends Partial<LayerProps>, S>(props: P, context: any): {
+        /** @private (Just using `private` breaks compilation unless using `stripInternal`) */
+        layerElement: HTMLElement | SVGElement | null;
+        setLayerElement: (element: HTMLElement | SVGElement | null) => void;
+
+
+        context: unknown;
+        setState<K extends keyof S>(state: S | ((prevState: Readonly<S>, props: Readonly<P>) => S | Pick<S, K> | null) | Pick<S, K> | null, callback?: (() => void) | undefined): void;
+        forceUpdate(callback?: (() => void) | undefined): void;
+        render(): React_2.ReactNode;
+        readonly props: Readonly<P>;
+        state: Readonly<S>;
+        refs: {
+            [key: string]: React_2.ReactInstance;
+        };
+        componentDidMount?(): void;
+        componentWillUnmount?(): void;
+        componentDidCatch?(error: Error, errorInfo: React_2.ErrorInfo): void;
+        getSnapshotBeforeUpdate?(prevProps: Readonly<P>, prevState: Readonly<S>): any;
+        componentWillMount?(): void;
+        UNSAFE_componentWillMount?(): void;
+        componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
+        UNSAFE_componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
+        componentWillUpdate?(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): void;
+        UNSAFE_componentWillUpdate?(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): void;
+    };
+    readonly defaultProps: LayerProps;
+    applyWillChange(props: WillChangeTransformProp, style: MotionStyle, usingMotionStyle: boolean): void;
+    contextType?: React_2.Context<any> | undefined;
+};
 
 /** @public */
 export declare interface LayerProps extends IdentityProps, WillChangeTransformProp, DOMLayoutProps {
@@ -2773,7 +2960,7 @@ export declare interface LinearGradientBase {
 }
 
 /** @public */
-export declare const Link: React_2.ForwardRefExoticComponent<Pick<Props, "key" | "children" | keyof LinkProps> & React_2.RefAttributes<unknown>>;
+export declare const Link: ForwardRefExoticComponent<Omit<Props, "ref"> & RefAttributes<unknown>>;
 
 /** @public */
 declare interface LinkControlDescription<P = any> extends BaseControlDescription<P> {
@@ -2850,7 +3037,7 @@ export declare interface ModalTransitionOptions extends NavigationTransitionAnim
 declare type MotionDivProps = HTMLMotionProps<"div">;
 
 /** @public */
-export declare function MotionSetup({ children }: Props_2): JSX.Element;
+export declare function MotionSetup({ children }: Props_2): JSX_2.Element;
 
 /**
  * @public
@@ -3062,7 +3249,7 @@ declare type ObjectControlIcon = "object" | "effect" | "color" | "interaction" |
  * Currently not supported: component instance, and event handler.
  * @public
  */
-export declare type ObjectPropertyControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | TransitionControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ArrayControlDescription<P> | ObjectControlDescription<P> | FusedNumberControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P>;
+export declare type ObjectPropertyControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | TransitionControlDescription<P> | BoxShadowControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ArrayControlDescription<P> | ObjectControlDescription<P> | FusedNumberControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P> | BorderControlDescription<P> | CursorControlDescription<P> | PaddingControlDescription<P> | BorderRadiusControlDescription<P>;
 
 /**
  * @public
@@ -3094,6 +3281,11 @@ export declare type OverrideFunction<P extends object = any> = (props: P) => Par
 
 /** @public */
 export declare type OverrideObject<T extends object = any> = Partial<T>;
+
+declare interface PaddingControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.Padding;
+    defaultValue?: string;
+}
 
 export declare const Page: ForwardRefExoticComponent<Partial<PageProps> & RefAttributes<HTMLDivElement>>;
 
@@ -3457,11 +3649,15 @@ export declare type PageProps = Partial<PageProperties> & Partial<Omit<FrameProp
  * Webkit issue: https://bugs.webkit.org/show_bug.cgi?id=240653
  * */
 /** @public */
-export declare function PageRoot({ RootComponent, isWebsite, routeId, pathVariables, routes, collectionUtils, notFoundPage, isReducedMotion, includeDataObserver, localeId, locales, preserveQueryParams, enableSuspenseThatPreservesDom, shouldMarkHydrationEnd, }: PageRootProps): JSX.Element;
+export declare function PageRoot({ RootComponent, isWebsite, routeId, framerSiteId, pathVariables, routes, collectionUtils, notFoundPage, isReducedMotion, includeDataObserver, localeId, locales, preserveQueryParams, enableImproveInpDuringHydration, addHydrationMarkers, }: PageRootProps): JSX_2.Element;
 
 declare interface PageRootProps {
     RootComponent: RouteComponent;
     isWebsite: boolean;
+    /**
+     * framerSiteId is used by forms to identify the source of the form.
+     */
+    framerSiteId: string;
     routeId: string;
     pathVariables?: Record<string, unknown>;
     routes: Routes;
@@ -3472,10 +3668,10 @@ declare interface PageRootProps {
     locales?: Locale[];
     localeId?: LocaleId;
     preserveQueryParams?: boolean;
-    /** Is `true` when the noWhiteFlashSuspense experiment is enabled. To be removed when the experiment is removed. */
-    enableSuspenseThatPreservesDom?: boolean;
+    /** Is `true` when the improveInpDuringHydration experiment is enabled. To be removed when the experiment is removed. */
+    enableImproveInpDuringHydration?: boolean;
     /** Is `true` when the page root is used at the live site and is being hydrated. */
-    shouldMarkHydrationEnd?: boolean;
+    addHydrationMarkers?: boolean;
 }
 
 export declare interface PageScopeControlDescription<P = any> extends BaseControlDescription<P> {
@@ -3517,8 +3713,10 @@ export declare namespace Point {
 
 
 
+
     /** @public */
     const isEqual: (a: Point, b: Point) => boolean;
+
 
 
 
@@ -3570,7 +3768,7 @@ export declare type PropertyControls<ComponentProps = any, ArrayTypes = any> = {
     [K in keyof ComponentProps]?: ControlDescription<Partial<ComponentProps>>;
 };
 
-declare type Props = React_2.PropsWithChildren<LinkProps> & React_2.RefAttributes<unknown>;
+declare type Props = PropsWithChildren<LinkProps> & RefAttributes<unknown>;
 
 declare interface Props_2 {
     children: React_2.ReactNode;
@@ -3634,7 +3832,7 @@ export declare interface Rect extends Point, Size {
 /**
  * @public
  */
-export declare namespace Rect {
+export declare const Rect: {
     /**
      *
      * @param rect -
@@ -3642,7 +3840,9 @@ export declare namespace Rect {
      * @returns if the input rectangles are equal in size and position
      * @public
      */
-    export function equals(rect: Rect | null, other: Rect | null): boolean;
+    equals: (rect: Rect | null, other: Rect | null) => boolean;
+
+
 
 
 
@@ -3670,7 +3870,7 @@ export declare namespace Rect {
      * @param matrix - matrix to transform by
      * @returns The bounding rectangle of the rotated and/or translated rect.
      */
-    const transform: (rect: Rect, matrix: DOMMatrixReadOnly) => Rect;
+    transform: (rect: Rect, matrix: DOMMatrixReadOnly) => Rect;
 
     /**
      * Returns wether a rect contains another rect entirely
@@ -3678,7 +3878,7 @@ export declare namespace Rect {
      * @param rectB -
      * @returns true if rectA contains rectB
      */
-    const containsRect: (rectA: Rect, rectB: Rect) => boolean;
+    containsRect: (rectA: Rect, rectB: Rect) => boolean;
 
 
 
@@ -3693,15 +3893,17 @@ export declare namespace Rect {
      * @public
      * @deprecated: please use Rect.equals instead
      */
-    const isEqual: (rectA: Rect | null, rectB: Rect | null) => boolean;
+    isEqual: (rectA: Rect | null, rectB: Rect | null) => boolean;
 
 
 
 
-    const delta: (a: Rect, b: Rect) => Point;
+    delta: (a: Rect, b: Rect) => Point;
 
 
-}
+
+
+};
 
 /** @public */
 export declare type RelativeNumber = `${number}%`;
@@ -3719,9 +3921,15 @@ export declare type RelativeNumber = `${number}%`;
  * with a placeholder. The `RenderTarget.hasRestrictions()` method can be used
  * to check explicitly for this case.
  *
+ * @privateRemarks
+ * This is a read-only equivalent of RenderEnvironment.target that is exposed
+ * to components for context-dependent rendering
+ *
  * @public
  */
-export declare enum RenderTarget {
+export declare type RenderTarget = RenderTargetName;
+
+export declare const RenderTarget: {
     /**
      * The component is to be rendered for the Framer canvas.
      *
@@ -3735,7 +3943,7 @@ export declare enum RenderTarget {
      * }
      * ```
      */
-    canvas = "CANVAS",
+    canvas: RenderTargetName;
     /**
      * The component is to be rendered for export.
      *
@@ -3749,7 +3957,7 @@ export declare enum RenderTarget {
      * }
      * ```
      */
-    export = "EXPORT",
+    export: RenderTargetName;
     /**
      * The component is to be rendered as a preview thumbnail, for example in the
      * component panel.
@@ -3764,7 +3972,7 @@ export declare enum RenderTarget {
      * }
      * ```
      */
-    thumbnail = "THUMBNAIL",
+    thumbnail: RenderTargetName;
     /**
      * The component is being rendered in the preview window.
      *
@@ -3780,16 +3988,7 @@ export declare enum RenderTarget {
      * }
      * ```
      */
-    preview = "PREVIEW"
-}
-
-/**
- * @privateRemarks
- * This is a read-only equivalent of RenderEnvironment.target that is exposed
- * to components for context-dependent rendering
- * @public
- */
-export declare namespace RenderTarget {
+    preview: RenderTargetName;
     /**
      * Returns the current `RenderTarget` allowing components to apply
      * different behaviors depending on the environment.
@@ -3804,7 +4003,7 @@ export declare namespace RenderTarget {
      * }
      * ```
      */
-    export function current(): RenderTarget;
+    current: () => RenderTargetName;
     /**
      * Returns true if the current `RenderTarget` has performance restrictions.
      * Use this to avoid doing heavy work in these contexts because they may
@@ -3820,7 +4019,14 @@ export declare namespace RenderTarget {
      * }
      * ```
      */
-    export function hasRestrictions(): boolean;
+    hasRestrictions: () => boolean;
+};
+
+declare enum RenderTargetName {
+    canvas = "CANVAS",
+    export = "EXPORT",
+    thumbnail = "THUMBNAIL",
+    preview = "PREVIEW"
 }
 
 /** @public */
@@ -4586,6 +4792,7 @@ declare interface VariantState {
     gestureVariant: string | undefined;
     classNames: string;
     transition: Partial<Transition> | undefined;
+    gestureHandlers: GestureHandlers;
     setVariant: (variant: string | typeof CycleVariantState) => void;
     setGestureState: (gestureState: GestureState) => void;
     addVariantProps?: (id: string) => Record<string, unknown>;
@@ -4748,7 +4955,7 @@ export declare const withFX: <T extends FXProps>(Component: React_2.ComponentTyp
  * immutable ids, and this remapped version of props can be consumed by all user
  * overrides.
  */
-export declare function withMappedReactProps<T extends object>(Component: React_2.ComponentType<T>, info: Record<string, unknown>): (rawProps: T) => JSX.Element;
+export declare function withMappedReactProps<T extends object>(Component: React_2.ComponentType<T>, info: Record<string, unknown>): (rawProps: T) => JSX_2.Element;
 
 declare interface WithMouseHandlers {
     onMouseDown: EventHandler;

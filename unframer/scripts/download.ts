@@ -179,15 +179,12 @@ export async function fixFramerCode({ resultFile }) {
 //         framerMotion: "https://app.framerstatic.com/framer-motion.5PJAF455.js",
 //     })
 // </script>
+// to find the types url: open framer app, load a code component, search in the network tab for a request to a .d.ts file
 main({
-    framerTypesUrl: 'https://app.framerstatic.com/framer-DT2GEHUE.dts',
+    framerTypesUrl: 'https://app.framerstatic.com/framer-ZLX3XBO5.dts',
     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
 })
-// fixFramerCode({ resultFile: path.resolve(__dirname, '../src/framer.js') })
 
-// function that extracts version from this code:
-// name: 'framer',
-// version: '2.4.1',
 function extractFramerVersion(code: string) {
     const match = code.match(/name: 'framer',\n\s*version: '([^']+)'/)
     if (!match) {
@@ -196,8 +193,6 @@ function extractFramerVersion(code: string) {
     return match[1]
 }
 
-// function that extracts framer motion version from this code:
-// this.version = '11.0.7';
 function extractFramerMotionVersion(code: string) {
     const match = code.match(/this.version = '([^']+)'/)
     if (!match) {
