@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.D3PFHNM7.js
+// https :https://app.framerstatic.com/framer.OVJLJIGP.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -37585,7 +37585,8 @@ function cssValue(value,) {
 function css(selector, declaration,) {
   let output = ' ';
   for (const key7 in declaration) {
-    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(declaration[key7],)}; `;
+    const value = declaration[key7];
+    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
   }
   return selector + ' {' + output + '}';
 }
@@ -37770,64 +37771,93 @@ var defaultDateIcon =
 var defaultTimeIcon =
   /* @__PURE__ */ (() =>
     `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${iconSize}' height='${iconSize}'%3E%3Cpath d='M1.5 7a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z' fill='transparent' stroke-width='1.5' stroke='currentColor'/%3E%3Cpath d='M6.75 7.25v-3m0 3h2' fill='transparent' stroke-width='1.5' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E`)();
+var defaultTextareaResizerIcon =
+  /* @__PURE__ */ (() =>
+    `"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14'><path d='m1.5 8 7-7M9 5.5l-3 3' stroke='%23999' stroke-width='1.5' stroke-linecap='round'></path></svg>"`)();
 var FormPlainTextInput2 =
   /* @__PURE__ */ (() =>
     withCSS(PlainTextInput, [
       ...sharedInputCSS,
       ...focusInputCSS,
       ...inputBorderCSS,
-      `.${inputClassName}::placeholder {
-            color: var(${'--framer-input-placeholder-color'});
-        }`,
-      `.${inputClassName}[type="date"], .${inputClassName}[type="time"] {
-            -webkit-appearance: none;
-            appearance: none;
-        }`,
+      css(`.${inputClassName}::placeholder`, {
+        color: css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+        ),
+      },),
+      css(`.${inputClassName}[type="date"], .${inputClassName}[type="time"]`, {
+        '-webkit-appearance': 'none',
+        appearance: 'none',
+      },),
       // iOS only fix for centered date & time inputs: https://github.com/tailwindlabs/tailwindcss-forms/pull/144
-      `.${inputClassName}::-webkit-date-and-time-value {
-            text-align: start;
-        }`,
-      `textarea.${inputClassName} {
-            resize: var(${'--framer-textarea-resize'});
-            min-height: var(${'--framer-textarea-min-height'});
-        }`,
-      `.${inputClassName}.${emptyValueClassName}::-webkit-datetime-edit {
-            color:var(${'--framer-input-placeholder-color'});
-            -webkit-text-fill-color: var(${'--framer-input-placeholder-color'});
-        }`,
-      `.${inputClassName}[type="date"]::before, .${inputClassName}[type="time"]::before {
-            content: "";
-            display: block;
-            position: absolute;
-            padding: var(${'--framer-input-padding'});
-            padding-left: ${iconSpacing}px;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: ${iconSize}px;
-            box-sizing: content-box;
-
-            pointer-events: none;
-            mask-repeat: no-repeat;
-            mask-position: ${iconSpacing}px center;
-            border: none;
-            background-color: #999;
-        }`,
-      `.${inputClassName}[type="date"]::before {
-            mask-image: url("${defaultDateIcon}");
-        }`,
-      `.${inputClassName}[type="time"]::before {
-            mask-image: url("${defaultTimeIcon}");
-        }`,
+      css(`.${inputClassName}::-webkit-date-and-time-value`, {
+        textAlign: 'start',
+      },),
+      css(`textarea.${inputClassName}`, {
+        display: 'flex',
+        resize: css.variable('--framer-textarea-resize',/* Resize */
+        ),
+        overflowY: 'scroll',
+        minHeight: 'inherit',
+        maxHeight: 'inherit',
+      },),
+      // This targets the resize handle in WebKit browsers. Unfortunately, it is not
+      // possible in CSS to target the resize handle in Firefox, so FF will always
+      // show the native resize handle.
+      css(`textarea.${inputClassName}::-webkit-resizer`, {
+        background: `no-repeat url(${defaultTextareaResizerIcon})`,
+      },),
+      css(`textarea.${inputClassName}::-webkit-scrollbar`, {
+        cursor: 'pointer',
+        background: 'transparent',
+      },),
+      css(`textarea.${inputClassName}::-webkit-scrollbar-thumb:window-inactive`, {
+        opacity: 0,
+      },),
+      css(`textarea.${inputClassName}::-webkit-scrollbar-corner`, {
+        background: 'none',
+        backgroundColor: 'transparent',
+        outline: 'none',
+      },),
+      css(`.${inputClassName}.${emptyValueClassName}::-webkit-datetime-edit`, {
+        color: css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+        ),
+        '-webkit-text-fill-color': css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+        ),
+      },),
+      css(`.${inputClassName}[type="date"]::before, .${inputClassName}[type="time"]::before`, {
+        content: '',
+        display: 'block',
+        position: 'absolute',
+        padding: css.variable('--framer-input-padding',/* Padding */
+        ),
+        paddingLeft: iconSpacing,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        width: iconSize,
+        boxSizing: 'content-box',
+        pointerEvents: 'none',
+        maskRepeat: 'no-repeat',
+        maskPosition: `${iconSpacing}px center`,
+        border: 'none',
+        backgroundColor: '#999',
+      },),
+      css(`.${inputClassName}[type="date"]::before`, {
+        maskImage: `url("${defaultDateIcon}")`,
+      },),
+      css(`.${inputClassName}[type="time"]::before`, {
+        maskImage: `url("${defaultTimeIcon}")`,
+      },),
       // Hide the native date picker icon, but still allow the user to click it.
-      `.${inputClassName}::-webkit-calendar-picker-indicator {
-            opacity: 0;
-            padding: var(${'--framer-input-padding'});
-            padding-right: 0;
-            padding-left: ${iconSpacing}px;
-            width: ${iconSize}px;
-            height: ${iconSize}px;
-        }`,
+      css(`.${inputClassName}::-webkit-calendar-picker-indicator`, {
+        opacity: 0,
+        padding: css.variable('--framer-input-padding',/* Padding */
+        ),
+        paddingRight: 0,
+        paddingLeft: iconSpacing,
+        width: iconSize,
+        height: iconSize,
+      },),
     ],))();
 var className = 'framer-form-boolean-input';
 var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput3(props, ref,) {
@@ -38024,36 +38054,41 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
 },);
 var selectWrapperClassName = 'framer-form-select-wrapper';
 var selectArrowSize = 16;
-var FormSelect = /* @__PURE__ */ (() =>
-  withCSS(Select, [
-    ...sharedInputCSS,
-    ...focusInputCSS,
-    ...inputBorderCSS,
-    `select.${inputClassName} {
-            appearance: none;
-            -webkit-appearance: none;
-            padding-right: calc(var(${'--framer-input-padding'}) * 2 + ${selectArrowSize}px);
+var FormSelect =
+  /* @__PURE__ */ (() =>
+    withCSS(Select, [
+      ...sharedInputCSS,
+      ...focusInputCSS,
+      ...inputBorderCSS,
+      css(`select.${inputClassName}`, {
+        appearance: 'none',
+        '-webkit-appearance': 'none',
+        paddingRight: `calc(var(${'--framer-input-padding'}) * 2 + ${selectArrowSize}px)`,
+      },),
+      css(`.${selectWrapperClassName}::before`, {
+        content: '',
+        display: 'block',
+        position: 'absolute',
+        right: 0,
+        height: '100%',
+        width: 16,
+        boxSizing: 'content-box',
+        padding: `0 ${
+          css.variable('--framer-input-padding',/* Padding */
+          )
         }`,
-    `.${selectWrapperClassName}::before {
-            content: "";
-            display: block;
-            position: absolute;
-            right: 0;
-            height: 100%;
-            width: 16px;
-            box-sizing: content-box;
-            padding: 0 var(${'--framer-input-padding'});
-            position: absolute;
-            pointer-events: none;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>');
-            background-repeat: no-repeat;
-            background-position: center center;
-            border: none;
-        }`,
-    `select.${inputClassName}:required:invalid {
-            color: var(${'--framer-input-invalid-text-color'});
-        }`,
-  ],))();
+        pointerEvents: 'none',
+        backgroundImage:
+          `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>')`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        border: 'none',
+      },),
+      css(`select.${inputClassName}:required:invalid`, {
+        color: css.variable('--framer-input-invalid-text-color',/* InvalidTextColor */
+        ),
+      },),
+    ],))();
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
   const {
     background,
