@@ -41,7 +41,7 @@ export default function Page() {
     )
 }
 
-export function Home() {
+function Home() {
     return (
         <div>
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>

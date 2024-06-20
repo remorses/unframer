@@ -3,7 +3,7 @@
 import { className, className2, css, css2, fonts, fonts2, } from './chunk-7SJVVYGA.js';
 import './chunk-MLKGABMK.js';
 
-// https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/r8XweDiO3hmjYWXbAUig/inWBH4dIK.js
+// https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -22,7 +22,7 @@ import {
 import { LayoutGroup, motion, MotionConfigContext, } from 'unframer';
 import * as React from 'react';
 
-// https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/rcLbXXZy59mCYFnu84YD/componentPresets.js
+// https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js
 var props = {
   dPCM_W_tA: {
     borderRadius: 15,
@@ -113,7 +113,7 @@ var fonts8 = [{ explicitInter: true, fonts: [], },];
 var css7 = ['.framer-TBaFf .framer-styles-preset-17jvnxz {  }',];
 var className7 = 'framer-TBaFf';
 
-// https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/r8XweDiO3hmjYWXbAUig/inWBH4dIK.js
+// https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js
 var _componentPresets_fonts;
 var _componentPresets_fonts1;
 var cycleOrder = ['d2jfXgaaM',];

@@ -2,7 +2,7 @@
 'use client';
 import './chunk-MLKGABMK.js';
 
-// https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/vFFXoOPorKx0B8tEBwAO/sbQWEtsSc.js
+// https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js
 import { Fragment as _Fragment, jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
   addFonts as addFonts2,
@@ -353,10 +353,10 @@ addFonts(FramerUOW9Q_5Hg, [{
   },],
 },], { supportsExplicitInterCodegen: true, },);
 
-// https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/vFFXoOPorKx0B8tEBwAO/sbQWEtsSc.js
+// https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js
 var ButtonFonts = getFonts(stdin_default,);
 var cycleOrder2 = ['LMA6fyqy7',];
-var serializationHash2 = 'framer-YTW7U';
+var serializationHash2 = 'framer-haOGX';
 var variantClassNames2 = { LMA6fyqy7: 'framer-v-1nwea80', };
 var transition12 = { damping: 60, delay: 0, mass: 1, stiffness: 500, type: 'spring', };
 var formVariants = (form, variants, currentVariant,) => {
@@ -413,11 +413,12 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
         children: /* @__PURE__ */ _jsx2(FormContainer, {
           ...restProps,
           ...gestureHandlers,
-          action: 'https://api.framer.com/forms/v1/forms/5d59a5ef-edc5-4d05-9517-d5a33c3a0284/submit',
+          action: 'https://api.framer.com/forms/v1/forms/0c68716e-c506-43ca-9e73-518b37205d23/submit',
           className: cx2(serializationHash2, ...sharedStyleClassNames, 'framer-1nwea80', className, classNames,),
           'data-framer-name': 'Variant 1',
           layoutDependency,
           layoutId: 'LMA6fyqy7',
+          redirectUrl: { webPageId: 'qoG9YIQaf', },
           ref: ref !== null && ref !== void 0 ? ref : ref1,
           style: { ...style, },
           children: (formState,) =>
@@ -612,15 +613,15 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
 },);
 var css2 = [
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
-  '.framer-YTW7U.framer-1u4l97x, .framer-YTW7U .framer-1u4l97x { display: block; }',
-  '.framer-YTW7U.framer-1nwea80 { align-content: flex-start; align-items: flex-start; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 20px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 20px; position: relative; width: 280px; }',
-  '.framer-YTW7U .framer-2mxqjr, .framer-YTW7U .framer-1hqwshr, .framer-YTW7U .framer-6g3n5v { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: flex-start; padding: 0px; position: relative; width: 100%; }',
-  '.framer-YTW7U .framer-1ozx58u, .framer-YTW7U .framer-xd5hky, .framer-YTW7U .framer-kx8c1e { flex: none; height: auto; position: relative; white-space: pre; width: auto; }',
-  '.framer-YTW7U .framer-14sl3bm, .framer-YTW7U .framer-1oy6h5g, .framer-YTW7U .framer-1ns02nb { --framer-input-focused-border-color: #0099ff; --framer-input-focused-border-style: solid; --framer-input-focused-border-width: 1px; --framer-input-font-family: "Inter"; --framer-input-font-letter-spacing: 0em; --framer-input-font-line-height: 1.2em; --framer-input-font-size: 14px; --framer-input-font-weight: 400px; --framer-input-padding: 12px; flex: none; height: 40px; position: relative; width: 100%; }',
-  '.framer-YTW7U .framer-1tpz3j7-container { flex: none; height: 40px; position: relative; width: 100%; }',
-  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-YTW7U.framer-1nwea80, .framer-YTW7U .framer-2mxqjr, .framer-YTW7U .framer-1hqwshr, .framer-YTW7U .framer-6g3n5v { gap: 0px; } .framer-YTW7U.framer-1nwea80 > * { margin: 0px; margin-bottom: calc(20px / 2); margin-top: calc(20px / 2); } .framer-YTW7U.framer-1nwea80 > :first-child, .framer-YTW7U .framer-2mxqjr > :first-child, .framer-YTW7U .framer-1hqwshr > :first-child, .framer-YTW7U .framer-6g3n5v > :first-child { margin-top: 0px; } .framer-YTW7U.framer-1nwea80 > :last-child, .framer-YTW7U .framer-2mxqjr > :last-child, .framer-YTW7U .framer-1hqwshr > :last-child, .framer-YTW7U .framer-6g3n5v > :last-child { margin-bottom: 0px; } .framer-YTW7U .framer-2mxqjr > *, .framer-YTW7U .framer-1hqwshr > *, .framer-YTW7U .framer-6g3n5v > * { margin: 0px; margin-bottom: calc(10px / 2); margin-top: calc(10px / 2); } }',
+  '.framer-haOGX.framer-1u4l97x, .framer-haOGX .framer-1u4l97x { display: block; }',
+  '.framer-haOGX.framer-1nwea80 { align-content: flex-start; align-items: flex-start; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 20px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 20px; position: relative; width: 280px; }',
+  '.framer-haOGX .framer-2mxqjr, .framer-haOGX .framer-1hqwshr, .framer-haOGX .framer-6g3n5v { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: flex-start; padding: 0px; position: relative; width: 100%; }',
+  '.framer-haOGX .framer-1ozx58u, .framer-haOGX .framer-xd5hky, .framer-haOGX .framer-kx8c1e { flex: none; height: auto; position: relative; white-space: pre; width: auto; }',
+  '.framer-haOGX .framer-14sl3bm, .framer-haOGX .framer-1oy6h5g, .framer-haOGX .framer-1ns02nb { --framer-input-focused-border-color: #0099ff; --framer-input-focused-border-style: solid; --framer-input-focused-border-width: 1px; --framer-input-font-family: "Inter"; --framer-input-font-letter-spacing: 0em; --framer-input-font-line-height: 1.2em; --framer-input-font-size: 14px; --framer-input-font-weight: 400px; --framer-input-padding: 12px; flex: none; height: 40px; position: relative; width: 100%; }',
+  '.framer-haOGX .framer-1tpz3j7-container { flex: none; height: 40px; position: relative; width: 100%; }',
+  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-haOGX.framer-1nwea80, .framer-haOGX .framer-2mxqjr, .framer-haOGX .framer-1hqwshr, .framer-haOGX .framer-6g3n5v { gap: 0px; } .framer-haOGX.framer-1nwea80 > * { margin: 0px; margin-bottom: calc(20px / 2); margin-top: calc(20px / 2); } .framer-haOGX.framer-1nwea80 > :first-child, .framer-haOGX .framer-2mxqjr > :first-child, .framer-haOGX .framer-1hqwshr > :first-child, .framer-haOGX .framer-6g3n5v > :first-child { margin-top: 0px; } .framer-haOGX.framer-1nwea80 > :last-child, .framer-haOGX .framer-2mxqjr > :last-child, .framer-haOGX .framer-1hqwshr > :last-child, .framer-haOGX .framer-6g3n5v > :last-child { margin-bottom: 0px; } .framer-haOGX .framer-2mxqjr > *, .framer-haOGX .framer-1hqwshr > *, .framer-haOGX .framer-6g3n5v > * { margin: 0px; margin-bottom: calc(10px / 2); margin-top: calc(10px / 2); } }',
 ];
-var FramersbQWEtsSc = withCSS2(Component2, css2, 'framer-YTW7U',);
+var FramersbQWEtsSc = withCSS2(Component2, css2, 'framer-haOGX',);
 var stdin_default2 = FramersbQWEtsSc;
 FramersbQWEtsSc.displayName = 'form test';
 FramersbQWEtsSc.defaultProps = { height: 333, width: 280, };
