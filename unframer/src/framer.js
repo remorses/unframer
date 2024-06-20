@@ -7544,16 +7544,16 @@ function createProjectionNode({
       if (!this.isVisible) {
         return hiddenVisibility;
       }
-      const styles2 = {
+      const styles4 = {
         visibility: '',
       };
       const transformTemplate2 = this.getTransformTemplate();
       if (this.needsReset) {
         this.needsReset = false;
-        styles2.opacity = '';
-        styles2.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents,) || '';
-        styles2.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
-        return styles2;
+        styles4.opacity = '';
+        styles4.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents,) || '';
+        styles4.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
+        return styles4;
       }
       const lead = this.getLead();
       if (!this.projectionDelta || !this.layout || !lead.target) {
@@ -7571,17 +7571,17 @@ function createProjectionNode({
       }
       const valuesToRender = lead.animationValues || lead.latestValues;
       this.applyTransformsToTarget();
-      styles2.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender,);
+      styles4.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender,);
       if (transformTemplate2) {
-        styles2.transform = transformTemplate2(valuesToRender, styles2.transform,);
+        styles4.transform = transformTemplate2(valuesToRender, styles4.transform,);
       }
       const {
         x,
         y,
       } = this.projectionDelta;
-      styles2.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
+      styles4.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
       if (lead.animationValues) {
-        styles2.opacity = lead === this
+        styles4.opacity = lead === this
           ? (_b = (_a = valuesToRender.opacity) !== null && _a !== void 0 ? _a : this.latestValues.opacity) !== null && _b !== void 0
             ? _b
             : 1
@@ -7589,7 +7589,7 @@ function createProjectionNode({
           ? this.latestValues.opacity
           : valuesToRender.opacityExit;
       } else {
-        styles2.opacity = lead === this
+        styles4.opacity = lead === this
           ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : ''
           : valuesToRender.opacityExit !== void 0
           ? valuesToRender.opacityExit
@@ -7601,22 +7601,22 @@ function createProjectionNode({
           correct,
           applyTo,
         } = scaleCorrectors[key7];
-        const corrected = styles2.transform === 'none' ? valuesToRender[key7] : correct(valuesToRender[key7], lead,);
+        const corrected = styles4.transform === 'none' ? valuesToRender[key7] : correct(valuesToRender[key7], lead,);
         if (applyTo) {
           const num = applyTo.length;
           for (let i = 0; i < num; i++) {
-            styles2[applyTo[i]] = corrected;
+            styles4[applyTo[i]] = corrected;
           }
         } else {
-          styles2[key7] = corrected;
+          styles4[key7] = corrected;
         }
       }
       if (this.options.layoutId) {
-        styles2.pointerEvents = lead === this
+        styles4.pointerEvents = lead === this
           ? resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents,) || ''
           : 'none';
       }
-      return styles2;
+      return styles4;
     }
     clearSnapshot() {
       this.resumeFrom = this.snapshot = void 0;
@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.OVJLJIGP.js
+// https :https://app.framerstatic.com/framer.XVXFQE6V.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18189,6 +18189,12 @@ function useConstraints(props,) {
   const calculatedRect = calculateRect(props, parentSize, true,);
   return calculatedRect;
 }
+function isAutoSized({
+  width,
+  height,
+},) {
+  return width === 'auto' || width === 'min-content' || height === 'auto' || height === 'min-content';
+}
 var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Boolean'] = 'boolean';
   ControlType2['Number'] = 'number';
@@ -19075,8 +19081,8 @@ var didInject = false;
 function injectComponentCSSRules() {
   if (didInject) return;
   didInject = true;
-  const styles2 = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
-  for (const rule of styles2) {
+  const styles4 = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
+  for (const rule of styles4) {
     injectCSSRule(rule, void 0, void 0,);
   }
 }
@@ -21252,28 +21258,28 @@ function backgroundImageFromProps(props,) {
 }
 function collectBorderStyleForProps(props, style, collapseEqualBorders = true,) {
   const {
-    borderWidth: borderWidth2,
+    borderWidth,
     borderStyle,
     borderColor,
   } = props;
-  if (!borderWidth2) {
+  if (!borderWidth) {
     return;
   }
   let borderTop;
   let borderBottom;
   let borderLeft;
   let borderRight;
-  if (typeof borderWidth2 === 'number') {
+  if (typeof borderWidth === 'number') {
     borderTop =
       borderBottom =
       borderLeft =
       borderRight =
-        borderWidth2;
+        borderWidth;
   } else {
-    borderTop = borderWidth2.top || 0;
-    borderBottom = borderWidth2.bottom || 0;
-    borderLeft = borderWidth2.left || 0;
-    borderRight = borderWidth2.right || 0;
+    borderTop = borderWidth.top || 0;
+    borderBottom = borderWidth.bottom || 0;
+    borderLeft = borderWidth.left || 0;
+    borderRight = borderWidth.right || 0;
   }
   if (borderTop === 0 && borderBottom === 0 && borderLeft === 0 && borderRight === 0) {
     return;
@@ -22482,12 +22488,6 @@ function resolveParentSize(props, unwrappedProps, rect, inCodeComponent,) {
     return 2;
   }
   return 0;
-}
-function isAutoSized({
-  width,
-  height,
-},) {
-  return width === 'auto' || width === 'min-content' || height === 'auto' || height === 'min-content';
 }
 function EmptyState({
   title = '',
@@ -32073,10 +32073,22 @@ function randomCharacters(count,) {
   }
   return result;
 }
-function formReducer(_state, {
+function formReducer({
+  state,
+}, {
   type,
 },) {
   switch (type) {
+    case 'complete':
+    case 'incomplete':
+      if (state === 'error') {
+        return {
+          state: 'error',
+        };
+      }
+      return {
+        state: type,
+      };
     case 'submit':
       return {
         state: 'pending',
@@ -32093,29 +32105,40 @@ function formReducer(_state, {
       assertNever(type,);
   }
 }
+function stateCanSubmitForm(state,) {
+  return state.state === 'incomplete' || state.state === 'complete';
+}
 function preventDefault(e,) {
   e.preventDefault();
 }
 var FormContext = React4.createContext(void 0,);
 var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   action,
-  formId,
-  disabled,
   children,
   redirectUrl,
   onSuccess,
   onError,
+  onLoading,
   ...props
 }, ref,) => {
-  const [state, dispatch,] = React4.useReducer(formReducer, {
-    state: disabled ? 'disabled' : void 0,
-  },);
   const router = useRouter();
+  const [state, dispatch,] = React4.useReducer(formReducer, {
+    state: 'incomplete',
+  },);
   const {
     activeLocale,
   } = useLocaleInfo();
-  const isSubmitEnabled = state.state === void 0;
   const projectHash = useContext3(FormContext,);
+  const callbacks = React4.useRef({
+    onSuccess,
+    onError,
+    onLoading,
+  },);
+  callbacks.current = {
+    onSuccess,
+    onError,
+    onLoading,
+  };
   async function redirectTo(link,) {
     var _a, _b;
     if (isLinkToWebPage(link,)) {
@@ -32148,6 +32171,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
     safeWindow.open(link, '_blank',);
   }
   const handleSubmit = async (event) => {
+    var _a, _b, _c, _d, _e, _f;
     event.preventDefault();
     if (!action || !projectHash) return;
     const data2 = new FormData(event.currentTarget,);
@@ -32158,11 +32182,12 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
       dispatch({
         type: 'submit',
       },);
+      (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
       await submitForm(action, data2, projectHash,);
       dispatch({
         type: 'success',
       },);
-      onSuccess == null ? void 0 : onSuccess();
+      (_d = (_c = callbacks.current).onSuccess) == null ? void 0 : _d.call(_c,);
       if (redirectUrl) {
         await redirectTo(redirectUrl,);
       }
@@ -32170,7 +32195,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
       dispatch({
         type: 'error',
       },);
-      onError == null ? void 0 : onError();
+      (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
     }
   };
   const handleKeyDown = (event) => {
@@ -32186,15 +32211,32 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
       void handleSubmit(event,);
     }
   };
+  const checkValidity = (e) => {
+    dispatch({
+      type: anyEmptyRequiredFields(e.currentTarget,) ? 'incomplete' : 'complete',
+    },);
+  };
   return /* @__PURE__ */ jsx(motion.form, {
     ...props,
-    'data-formid': formId,
-    onSubmit: isSubmitEnabled ? handleSubmit : preventDefault,
+    onSubmit: stateCanSubmitForm(state,) ? handleSubmit : preventDefault,
     onKeyDown: handleKeyDown,
+    onChange: checkValidity,
     ref,
     children: children(state,),
   },);
 },);
+function anyEmptyRequiredFields(element,) {
+  if (element.children.length === 0) return false;
+  for (const child of element.children) {
+    if (child instanceof HTMLInputElement || child instanceof HTMLTextAreaElement || child instanceof HTMLSelectElement) {
+      if (child.required && child.value === '') return true;
+    } else {
+      const result = anyEmptyRequiredFields(child,);
+      if (result) return true;
+    }
+  }
+  return false;
+}
 async function submitForm(action, data2, projectHash,) {
   const proofOfWork = await calculateProofOfWork();
   if (!proofOfWork) {
@@ -36466,8 +36508,8 @@ var LocalFontSource = class {
     };
     const aliases = /* @__PURE__ */ new Map();
     const weights = [400, 100, 200, 300, 500, 600, 700, 800, 900,];
-    const styles2 = ['normal', 'italic',];
-    for (const style of styles2) {
+    const styles4 = ['normal', 'italic',];
+    for (const style of styles4) {
       for (const weight of weights) {
         const variant = createVariantName(weight, style,);
         const alias = `__SystemDefault-${weight}-${style}__`;
@@ -37560,7 +37602,6 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['FocusedBackground'] = '--framer-input-focused-background';
   FormInputStyleVariableNames2['FocusedBoxShadow'] = '--framer-input-focused-box-shadow';
   FormInputStyleVariableNames2['FocusedTransition'] = '--framer-input-focused-transition';
-  FormInputStyleVariableNames2['BooleanCheckedIconURL'] = '--framer-input-boolean-icon';
   FormInputStyleVariableNames2['BooleanCheckedBackground'] = '--framer-input-boolean-checked-background';
   FormInputStyleVariableNames2['BooleanCheckedBorderColor'] = '--framer-input-boolean-checked-border-color';
   FormInputStyleVariableNames2['BooleanCheckedBorderWidth'] = '--framer-input-boolean-checked-border-width';
@@ -37568,14 +37609,17 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['BooleanCheckedBoxShadow'] = '--framer-input-boolean-checked-box-shadow';
   FormInputStyleVariableNames2['BooleanCheckedTransition'] = '--framer-input-boolean-checked-transition';
   FormInputStyleVariableNames2['InvalidTextColor'] = '--framer-input-invalid-text-color';
+  FormInputStyleVariableNames2['IconBackgroundImage'] = '--framer-input-icon-image';
+  FormInputStyleVariableNames2['IconMaskImage'] = '--framer-input-icon-mask-image';
+  FormInputStyleVariableNames2['IconColor'] = '--framer-input-icon-color';
   return FormInputStyleVariableNames2;
 })(FormInputStyleVariableNames || {},);
 var Var = FormInputStyleVariableNames;
-var inputClassName = /* @__PURE__ */ (() => 'framer-form-input')();
-var inputWrapperClassName = /* @__PURE__ */ (() => 'framer-form-input-wrapper')();
-var emptyValueClassName = /* @__PURE__ */ (() => 'framer-form-input-empty')();
-var forcedFocusClassName = /* @__PURE__ */ (() => 'framer-form-input-forced-focus')();
-var forcedCheckedClassName = /* @__PURE__ */ (() => 'framer-form-input-forced-checked')();
+var inputClassName = 'framer-form-input';
+var inputWrapperClassName = 'framer-form-input-wrapper';
+var emptyValueClassName = 'framer-form-input-empty';
+var forcedFocusClassName = 'framer-form-input-forced-focus';
+var forcedCheckedClassName = 'framer-form-input-forced-checked';
 function cssValue(value,) {
   if (typeof value === 'number') return value;
   if (value.startsWith('--',)) return css.variable(value,);
@@ -37602,52 +37646,34 @@ function css(selector, declaration,) {
   }
   css2.variable = variable;
 })(css || (css = {}),);
-var sharedInputCSS = [css(`.${inputClassName}`, {
-  padding: css.variable(Var.Padding,),
-  background: css.variable(Var.Background,),
-  fontFamily: css.variable(Var.FontFamily,),
-  fontWeight: css.variable(Var.FontWeight,),
-  fontSize: css.variable(Var.FontSize,),
-  color: css.variable(Var.FontColor,),
-  boxShadow: css.variable(Var.BoxShadow,),
-  border: 'none',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
+var sharedInputCSS = [
+  css(`.${inputClassName}`, {
+    padding: css.variable(Var.Padding,),
+    background: 'transparent',
+    fontFamily: css.variable(Var.FontFamily,),
+    fontWeight: css.variable(Var.FontWeight,),
+    fontSize: css.variable(Var.FontSize,),
+    color: css.variable(Var.FontColor,),
+    border: 'none',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
+    letterSpacing: css.variable(Var.FontLetterSpacing,),
+    textAlign: css.variable(Var.FontTextAlignment,),
+    lineHeight: css.variable(Var.FontLineHeight,),
+  },),
+  css(`.${inputClassName}:focus-visible`, {
+    outline: 'none',
+  },),
+];
+var inputWrapperCSS = /* @__PURE__ */ (() => [css(`.${inputWrapperClassName}`, {
   overflow: 'hidden',
-  width: '100%',
-  height: '100%',
-  borderTopLeftRadius: css.variable(Var.BorderRadiusTopLeft,),
-  borderTopRightRadius: css.variable(Var.BorderRadiusTopRight,),
-  borderBottomRightRadius: css.variable(Var.BorderRadiusBottomRight,),
-  borderBottomLeftRadius: css.variable(Var.BorderRadiusBottomLeft,),
-  letterSpacing: css.variable(Var.FontLetterSpacing,),
-  textAlign: css.variable(Var.FontTextAlignment,),
-  lineHeight: css.variable(Var.FontLineHeight,),
-  transition: css.variable(Var.FocusedTransition,),
-  transitionProperty: 'background, box-shadow',
-  flex: '0 0 auto',
-},),];
-var focusInputCSS =
-  /* @__PURE__ */ (() => [
-    `.${inputClassName}:focus-visible { outline: none; }`,
-    `.${inputClassName}:focus, .${inputClassName}.${forcedFocusClassName} {
-        background: ${css.variable(Var.FocusedBackground, Var.Background,)};
-        box-shadow: ${css.variable(Var.FocusedBoxShadow, Var.BoxShadow,)};
-    }`,
-    `.${inputWrapperClassName}:focus-within::after, .${inputWrapperClassName}.${forcedFocusClassName}::after {
-        border-color: ${css.variable(Var.FocusedBorderColor, Var.BorderColor,)};
-        border-style: ${css.variable(Var.FocusedBorderStyle, Var.BorderStyle,)};
-        border-top-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderTopWidth,)};
-        border-right-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderRightWidth,)};
-        border-bottom-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderBottomWidth,)};
-        border-left-width: ${css.variable(Var.FocusedBorderWidth, Var.BorderLeftWidth,)};
-    }`,
-  ])();
-var inputBorderCSS = [
-  `.${inputWrapperClassName} {
-        position: relative;
-    }`,
-  `.${inputWrapperClassName}:after {
+},),])();
+var inputBorderAllSides =
+  `var(${Var.BorderTopWidth}) var(${Var.BorderRightWidth}) var(${Var.BorderBottomWidth}) var(${Var.BorderLeftWidth})`;
+var inputBorderCSS = [`.${inputWrapperClassName}:after {
         content: "";
         pointer-events: none;
         box-sizing: border-box;
@@ -37668,8 +37694,84 @@ var inputBorderCSS = [
         border-style: var(${Var.BorderStyle});
         transition: var(${Var.FocusedTransition});
         transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
-    }`,
-];
+    }`,];
+var customValidityKey = 'customError';
+var validKey = 'valid';
+function isRelevantValidityStateKey(key7,) {
+  return key7 !== customValidityKey && key7 !== validKey;
+}
+function isInvalid(validity,) {
+  for (const key7 in validity) {
+    if (!isRelevantValidityStateKey(key7,)) continue;
+    if ((validity == null ? void 0 : validity[key7]) === true) return true;
+  }
+  return false;
+}
+function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
+  const isValidRef = React4.useRef(null,);
+  const handleInvalid = React4.useCallback((e) => {
+    if (!onInvalid) return;
+    if (isValidRef.current === false) return;
+    isValidRef.current = false;
+    e.currentTarget.setCustomValidity(' ',);
+    e.currentTarget.reportValidity();
+    onInvalid(e,);
+  }, [onInvalid,],);
+  const handleChange = React4.useCallback((e) => {
+    onChange == null ? void 0 : onChange(e,);
+    if (!onInvalid && !onValid) return;
+    const validity = e.target.validity;
+    if (isValidRef.current === false && !isInvalid(validity,)) {
+      e.currentTarget.setCustomValidity('',);
+      e.target.reportValidity();
+      isValidRef.current = true;
+      onValid == null ? void 0 : onValid();
+    }
+  }, [onInvalid, onValid, onChange,],);
+  const handleBlur = React4.useCallback((e) => {
+    if (!onInvalid) {
+      onBlur == null ? void 0 : onBlur(e,);
+      return;
+    }
+    if (isValidRef.current === false) return;
+    const validity = e.currentTarget.validity;
+    if (isInvalid(validity,)) {
+      handleInvalid(e,);
+      return;
+    }
+    onBlur == null ? void 0 : onBlur(e,);
+  }, [handleInvalid, onBlur, onInvalid,],);
+  return React4.useMemo(() => {
+    return {
+      onInvalid: handleInvalid,
+      onChange: handleChange,
+      onBlur: handleBlur,
+      onFocus,
+    };
+  }, [handleInvalid, handleChange, handleBlur, onFocus,],);
+}
+var iconSpacing = 10;
+var iconSize = 16;
+var inputIconCSSDeclaration = {
+  content: '',
+  display: 'block',
+  position: 'absolute',
+  right: 0,
+  top: 0,
+  bottom: 0,
+  width: `${iconSize}px`,
+  boxSizing: 'content-box',
+  // Offset the icon inwards by the padding.
+  margin: css.variable(Var.Padding,),
+  marginLeft: 0,
+  border: 'none',
+  pointerEvents: 'none',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: `${iconSize}px`,
+  maskRepeat: 'no-repeat',
+  maskSize: `${iconSize}px`,
+  backgroundColor: css.variable(Var.IconColor,),
+};
 var passwordManagerIgnoreDataProps = {
   // 1Password
   'data-1p-ignore': true,
@@ -37689,183 +37791,207 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
     inputName,
     max,
     min,
-    onBlur,
-    onFocus,
-    onInvalid,
     placeholder,
     required,
     step: step2,
     style,
     type,
-    value,
+    // We use a defaultValue instead of a value so that the input remains
+    // uncontrolled by React. This is important because we want the user
+    // to be able to provide an initial value in the property panel, and for
+    // the value to be editable by the user in the preview.
+    defaultValue,
     autofillEnabled,
-    canvasPreviewClassName,
+    onChange,
+    onBlur,
+    onInvalid,
+    onFocus,
+    onValid,
     ...rest
   } = props;
-  const [hasValue, setHasValue,] = React4.useState(!!value,);
-  const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
-  const eventProps = {
-    onBlur,
-    onFocus,
-    onInvalid,
-  };
-  const onChange = React4.useCallback((e) => {
+  const [hasValue, setHasValue,] = React4.useState(!!defaultValue,);
+  const handleChange = React4.useCallback((e) => {
     const newValue = e.target.value;
+    onChange == null ? void 0 : onChange(e,);
     setHasValue(!!newValue,);
-  }, [],);
-  switch (type) {
-    case 'hidden':
-      return /* @__PURE__ */ jsx(motion.input, {
-        type: 'hidden',
-        name: inputName,
-        value,
-      },);
-    case 'textarea':
-      return /* @__PURE__ */ jsx(motion.div, {
-        ref,
-        style,
-        className: cx(inputWrapperClassName, canvasPreviewClassName, className2,),
-        ...rest,
-        children: /* @__PURE__ */ jsx(motion.textarea, {
-          id: inputName,
-          ...dataProps,
-          ...eventProps,
-          required,
-          autoFocus,
-          name: inputName,
-          placeholder,
-          className: cx(inputClassName, canvasPreviewClassName,),
-          value,
-        },),
-      },);
-    default:
-      return /* @__PURE__ */ jsx(motion.div, {
-        ref,
-        style,
-        className: cx(inputWrapperClassName, canvasPreviewClassName, className2,),
-        ...rest,
-        children: /* @__PURE__ */ jsx(motion.input, {
-          id: inputName,
-          ...dataProps,
-          ...eventProps,
-          type,
-          required,
-          autoFocus,
-          name: inputName,
-          placeholder,
-          className: cx(inputClassName, canvasPreviewClassName, !hasValue && emptyValueClassName,),
-          onChange,
-          value,
-          min,
-          max,
-          step: step2,
-        },),
-      },);
+  }, [onChange,],);
+  const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
+  useEffect(() => {
+    setHasValue(!!defaultValue,);
+  }, [defaultValue,],);
+  const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
+  if (type === 'hidden') {
+    return /* @__PURE__ */ jsx(motion.input, {
+      type: 'hidden',
+      name: inputName,
+      defaultValue,
+    },);
   }
+  return /* @__PURE__ */ jsx(motion.div, {
+    ref,
+    style,
+    className: cx(textInputWrapperClassName, inputWrapperClassName, className2,),
+    ...rest,
+    children: type === 'textarea'
+      ? /* @__PURE__ */ createElement(motion.textarea, {
+        ...dataProps,
+        ...eventHandlers,
+        key: defaultValue,
+        required,
+        autoFocus,
+        name: inputName,
+        placeholder,
+        className: inputClassName,
+        defaultValue,
+      },)
+      : /* @__PURE__ */ createElement(motion.input, {
+        ...dataProps,
+        ...eventHandlers,
+        key: defaultValue,
+        type,
+        required,
+        autoFocus,
+        name: inputName,
+        placeholder,
+        className: cx(inputClassName, !hasValue && emptyValueClassName,),
+        defaultValue,
+        min,
+        max,
+        step: step2,
+      },),
+  },);
 },);
-var iconSpacing = /* @__PURE__ */ (() => 10)();
-var iconSize = /* @__PURE__ */ (() => 14)();
-var defaultDateIcon =
-  /* @__PURE__ */ (() =>
-    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${iconSize}' height='${iconSize}'%3E%3Cpath d='M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H2Z' fill='currentColor' opacity='.3'/%3E%3Cpath d='M2.25 4.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM2 5.75h9.5' fill='transparent' stroke-width='1.5' stroke='currentColor'/%3E%3C/svg%3E`)();
-var defaultTimeIcon =
-  /* @__PURE__ */ (() =>
-    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${iconSize}' height='${iconSize}'%3E%3Cpath d='M1.5 7a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z' fill='transparent' stroke-width='1.5' stroke='currentColor'/%3E%3Cpath d='M6.75 7.25v-3m0 3h2' fill='transparent' stroke-width='1.5' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E`)();
+var iconSize2 = 16;
+var textInputWrapperClassName = 'framer-form-text-input';
 var defaultTextareaResizerIcon =
   /* @__PURE__ */ (() =>
     `"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14'><path d='m1.5 8 7-7M9 5.5l-3 3' stroke='%23999' stroke-width='1.5' stroke-linecap='round'></path></svg>"`)();
-var FormPlainTextInput2 =
-  /* @__PURE__ */ (() =>
-    withCSS(PlainTextInput, [
-      ...sharedInputCSS,
-      ...focusInputCSS,
-      ...inputBorderCSS,
-      css(`.${inputClassName}::placeholder`, {
-        color: css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
-        ),
-      },),
-      css(`.${inputClassName}[type="date"], .${inputClassName}[type="time"]`, {
-        '-webkit-appearance': 'none',
-        appearance: 'none',
-      },),
-      // iOS only fix for centered date & time inputs: https://github.com/tailwindlabs/tailwindcss-forms/pull/144
-      css(`.${inputClassName}::-webkit-date-and-time-value`, {
-        textAlign: 'start',
-      },),
-      css(`textarea.${inputClassName}`, {
-        display: 'flex',
-        resize: css.variable('--framer-textarea-resize',/* Resize */
-        ),
-        overflowY: 'scroll',
-        minHeight: 'inherit',
-        maxHeight: 'inherit',
-      },),
-      // This targets the resize handle in WebKit browsers. Unfortunately, it is not
-      // possible in CSS to target the resize handle in Firefox, so FF will always
-      // show the native resize handle.
-      css(`textarea.${inputClassName}::-webkit-resizer`, {
-        background: `no-repeat url(${defaultTextareaResizerIcon})`,
-      },),
-      css(`textarea.${inputClassName}::-webkit-scrollbar`, {
-        cursor: 'pointer',
-        background: 'transparent',
-      },),
-      css(`textarea.${inputClassName}::-webkit-scrollbar-thumb:window-inactive`, {
-        opacity: 0,
-      },),
-      css(`textarea.${inputClassName}::-webkit-scrollbar-corner`, {
-        background: 'none',
-        backgroundColor: 'transparent',
-        outline: 'none',
-      },),
-      css(`.${inputClassName}.${emptyValueClassName}::-webkit-datetime-edit`, {
-        color: css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
-        ),
-        '-webkit-text-fill-color': css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
-        ),
-      },),
-      css(`.${inputClassName}[type="date"]::before, .${inputClassName}[type="time"]::before`, {
-        content: '',
-        display: 'block',
-        position: 'absolute',
-        padding: css.variable('--framer-input-padding',/* Padding */
-        ),
-        paddingLeft: iconSpacing,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        width: iconSize,
-        boxSizing: 'content-box',
-        pointerEvents: 'none',
-        maskRepeat: 'no-repeat',
-        maskPosition: `${iconSpacing}px center`,
-        border: 'none',
-        backgroundColor: '#999',
-      },),
-      css(`.${inputClassName}[type="date"]::before`, {
-        maskImage: `url("${defaultDateIcon}")`,
-      },),
-      css(`.${inputClassName}[type="time"]::before`, {
-        maskImage: `url("${defaultTimeIcon}")`,
-      },),
-      // Hide the native date picker icon, but still allow the user to click it.
-      css(`.${inputClassName}::-webkit-calendar-picker-indicator`, {
-        opacity: 0,
-        padding: css.variable('--framer-input-padding',/* Padding */
-        ),
-        paddingRight: 0,
-        paddingLeft: iconSpacing,
-        width: iconSize,
-        height: iconSize,
-      },),
-    ],))();
+var styles = /* @__PURE__ */ (() => [
+  ...sharedInputCSS,
+  ...inputBorderCSS,
+  ...inputWrapperCSS,
+  css(`.${inputWrapperClassName}`, {
+    boxShadow: css.variable('--framer-input-box-shadow',/* BoxShadow */
+    ),
+    borderTopLeftRadius: css.variable('--framer-input-border-radius-top-left',/* BorderRadiusTopLeft */
+    ),
+    borderTopRightRadius: css.variable('--framer-input-border-radius-top-right',/* BorderRadiusTopRight */
+    ),
+    borderBottomRightRadius: css.variable('--framer-input-border-radius-bottom-right',/* BorderRadiusBottomRight */
+    ),
+    borderBottomLeftRadius: css.variable('--framer-input-border-radius-bottom-left',/* BorderRadiusBottomLeft */
+    ),
+    background: css.variable('--framer-input-background',/* Background */
+    ),
+    transition: css.variable('--framer-input-focused-transition',/* FocusedTransition */
+    ),
+    transitionProperty: 'background, box-shadow',
+  },),
+  css(`.${textInputWrapperClassName} .${inputClassName}::placeholder`, {
+    color: css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+    ),
+  },),
+  css(`.${textInputWrapperClassName} .${inputClassName}[type="date"], .${textInputWrapperClassName} .${inputClassName}[type="time"]`, {
+    '-webkit-appearance': 'none',
+    appearance: 'none',
+  },),
+  // iOS only fix for centered date & time inputs: https://github.com/tailwindlabs/tailwindcss-forms/pull/144
+  css(`.${textInputWrapperClassName} .${inputClassName}::-webkit-date-and-time-value`, {
+    textAlign: 'start',
+  },),
+  css(`.${textInputWrapperClassName} textarea`, {
+    display: 'flex',
+    resize: css.variable('--framer-textarea-resize',/* Resize */
+    ),
+    overflowY: 'scroll',
+    minHeight: 'inherit',
+    maxHeight: 'inherit',
+    whiteSpace: 'break-spaces',
+  },),
+  // This targets the resize handle in WebKit browsers. Unfortunately, it is not
+  // possible in CSS to target the resize handle in Firefox, so FF will always
+  // show the native resize handle.
+  css(`.${textInputWrapperClassName} textarea::-webkit-resizer`, {
+    background: `no-repeat url(${defaultTextareaResizerIcon})`,
+  },),
+  css(`.${textInputWrapperClassName} textarea::-webkit-scrollbar`, {
+    cursor: 'pointer',
+    background: 'transparent',
+  },),
+  css(`.${textInputWrapperClassName} textarea::-webkit-scrollbar-thumb:window-inactive`, {
+    opacity: 0,
+  },),
+  css(`.${textInputWrapperClassName} textarea::-webkit-scrollbar-corner`, {
+    background: 'none',
+    backgroundColor: 'transparent',
+    outline: 'none',
+  },),
+  css(`.${textInputWrapperClassName} .${inputClassName}.${emptyValueClassName}::-webkit-datetime-edit`, {
+    color: css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+    ),
+    // This tells safari to use the color for the shadow dom elements.
+    '-webkit-text-fill-color': css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+    ),
+  },),
+  css(
+    `.${textInputWrapperClassName} .${inputClassName}[type="date"]::before, .${textInputWrapperClassName} .${inputClassName}[type="time"]::before`,
+    {
+      ...inputIconCSSDeclaration,
+      paddingLeft: `${iconSpacing}px`,
+      maskPosition: `${iconSpacing}px center`,
+      backgroundPosition: `${iconSpacing}px center`,
+    },
+  ),
+  css(`.${textInputWrapperClassName} .${inputClassName}[type="date"]::before`, {
+    maskImage: css.variable(
+      '--framer-input-icon-mask-image',
+      `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>')`,
+    ),
+    backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+  },),
+  css(`.${textInputWrapperClassName} .${inputClassName}[type="time"]::before`, {
+    maskImage: css.variable(
+      '--framer-input-icon-mask-image',
+      `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M2.5 8a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.75 8.25v-3m0 3h2"/></svg>')`,
+    ),
+    backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+  },),
+  // Hide the native date picker icon, but still allow the user to click it.
+  css(`.${textInputWrapperClassName} .${inputClassName}::-webkit-calendar-picker-indicator`, {
+    opacity: 0,
+    padding: css.variable('--framer-input-padding',/* Padding */
+    ),
+    paddingRight: 0,
+    paddingLeft: `${iconSpacing}px`,
+    width: `${iconSize2}px`,
+    height: `${iconSize2}px`,
+  },),
+  css(`.${textInputWrapperClassName}:focus-within, .${textInputWrapperClassName}.${forcedFocusClassName}`, {
+    boxShadow: css.variable('--framer-input-focused-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
+    ),
+  },),
+  css(`.${textInputWrapperClassName} .${inputClassName}:focus, .${textInputWrapperClassName}.${forcedFocusClassName} .${inputClassName}`, {
+    background: css.variable('--framer-input-focused-background', '--framer-input-background',/* Background */
+    ),
+  },),
+  css(`.${textInputWrapperClassName}:focus-within::after, .${textInputWrapperClassName}.${forcedFocusClassName}::after`, {
+    borderColor: css.variable('--framer-input-focused-border-color', '--framer-input-border-color',/* BorderColor */
+    ),
+    borderStyle: css.variable('--framer-input-focused-border-style', '--framer-input-border-style',/* BorderStyle */
+    ),
+    borderWidth: css.variable('--framer-input-focused-border-width', inputBorderAllSides,),
+  },),
+])();
+var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles,);
 var className = 'framer-form-boolean-input';
 var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput3(props, ref,) {
   const {
     inputName,
     type = 'checkbox',
     defaultChecked,
-    canvasPreviewClassName,
+    onValid,
     ...rest
   } = props;
   const isCanvas = useIsOnFramerCanvas();
@@ -37876,24 +38002,23 @@ var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput
     : {
       defaultChecked,
     };
+  const eventHandlers = useCustomValidity(onValid, props.onInvalid, props.onChange, props.onBlur, props.onFocus,);
   return /* @__PURE__ */ jsx(motion.input, {
     ...rest,
     ...attributes,
+    ...eventHandlers,
     readOnly: isCanvas,
     ref,
-    id: inputName,
     type,
     name: inputName,
-    className: cx(className, props.className, canvasPreviewClassName,),
+    className: cx(className, props.className,),
   },);
 },);
 var defaultCheckedIcon =
   `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M 4 8 L 6.5 10.5 L 11.5 5.5" fill="transparent" stroke-width="2" stroke="rgb(255, 255, 255)" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
-var borderWidth =
-  `var(${'--framer-input-border-top-width'}) var(${'--framer-input-border-right-width'}) var(${'--framer-input-border-bottom-width'}) var(${'--framer-input-border-left-width'})`;
 var borderRadius =
   `var(${'--framer-input-border-radius-top-left'}) var(${'--framer-input-border-radius-top-right'}) var(${'--framer-input-border-radius-bottom-right'}) var(${'--framer-input-border-radius-bottom-left'})`;
-var styles = /* @__PURE__ */ (() => [
+var styles2 = /* @__PURE__ */ (() => [
   css(`.${className}`, {
     '-webkit-appearance': 'none',
     // background-color: #fff; fixes a bug on iOS where the checkbox shows
@@ -37911,7 +38036,6 @@ var styles = /* @__PURE__ */ (() => [
     position: 'relative',
     transition: '--framer-input-boolean-checked-transition',
     transitionProperty: 'box-shadow, background',
-    flex: '0 0 auto',
   },),
   // The after element styles the border of the checkbox to conform to
   // framer's inset border model.
@@ -37920,7 +38044,7 @@ var styles = /* @__PURE__ */ (() => [
     borderColor: css.variable('--framer-input-border-color', 'transparent',),
     borderRadius,
     borderStyle: '--framer-input-border-style',
-    borderWidth,
+    borderWidth: inputBorderAllSides,
     boxSizing: 'border-box',
     content: '',
     display: 'block',
@@ -37932,21 +38056,30 @@ var styles = /* @__PURE__ */ (() => [
   // The before element is used to display the check mark icon. It is
   // faded in when the input is checked.
   css(`.${className}::before`, {
-    // Use the icon url if it's provided, falling back to a default check
-    // mark. Radio inputs will be code-generated with a "none" value for the
-    // variable if an image isn't provided which will prevent this fallback
-    // in those cases.
-    backgroundImage: css.variable('--framer-input-boolean-icon', `url('${defaultCheckedIcon}')`,),
+    ...inputIconCSSDeclaration,
     backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
     backgroundSize: 'contain',
-    content: '',
-    display: 'block',
+    maskPosition: 'center',
+    maskSize: 'contain',
     height: '100%',
     opacity: 0,
     transition: '--framer-input-boolean-checked-transition',
     transitionProperty: 'opacity',
     width: '100%',
+  },),
+  // The BooleanInput component shows an svg check mark icon whenever an
+  // image url isn't provided. That's not an intuitive system for radios
+  // however, where we never want to show the default check mark.
+  css(`.${className}[type="checkbox"]::before`, {
+    backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+    maskImage: css.variable('--framer-input-icon-mask-image', `url('${defaultCheckedIcon}')`,),
+  },),
+  css(`.${className}[type="radio"]::before`, {
+    backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+    maskImage: css.variable('--framer-input-icon-mask-image',/* IconMaskImage */
+    ),
   },),
   css(`.${className}:checked, .${className}.${forcedCheckedClassName}`, {
     // When not set, the styles when checked shouldn't clear the default
@@ -37964,7 +38097,7 @@ var styles = /* @__PURE__ */ (() => [
     // styles.
     borderColor: css.variable('--framer-input-boolean-checked-border-color', '--framer-input-border-color', 'transparent',),
     borderStyle: css.variable('--framer-input-boolean-checked-border-style', '--framer-input-border-style', 'solid',),
-    borderWidth: css.variable('--framer-input-boolean-checked-border-width', borderWidth,),
+    borderWidth: css.variable('--framer-input-boolean-checked-border-width', inputBorderAllSides,),
   },),
   css(`.${className}:focus, .${className}.${forcedFocusClassName}`, {
     backgroundColor: css.variable('--framer-input-focused-background', '--framer-input-background',/* Background */
@@ -37980,7 +38113,7 @@ var styles = /* @__PURE__ */ (() => [
     // styles.
     borderColor: css.variable('--framer-input-focused-border-color', '--framer-input-border-color', 'transparent',),
     borderStyle: css.variable('--framer-input-focused-border-style', '--framer-input-border-style', 'solid',),
-    borderWidth: css.variable('--framer-input-focused-border-width', borderWidth,),
+    borderWidth: css.variable('--framer-input-focused-border-width', inputBorderAllSides,),
   },),
   css(`.${className}:focus:checked`, {
     backgroundColor: css.variable(
@@ -38003,40 +38136,39 @@ var styles = /* @__PURE__ */ (() => [
       '--framer-input-border-style',
       'solid',
     ),
-    borderWidth: css.variable('--framer-input-focused-border-width', '--framer-input-boolean-checked-border-width', borderWidth,),
+    borderWidth: css.variable('--framer-input-focused-border-width', '--framer-input-boolean-checked-border-width', inputBorderAllSides,),
   },),
 ])();
-var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles,);
+var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles2,);
 var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRef,) {
   const {
     autoFocus,
     className: className2,
     inputName,
-    onBlur,
-    onFocus,
-    onInvalid,
     required,
-    selectDefaultValue,
+    defaultValue,
     selectOptions,
     style,
-    canvasPreviewClassName,
+    onValid,
+    onChange,
+    onBlur,
+    onInvalid,
+    onFocus,
     ...rest
   } = props;
+  const eventHandlers = useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,);
   return /* @__PURE__ */ jsx(motion.div, {
     ref: measureRef,
     style,
-    className: cx(inputWrapperClassName, selectWrapperClassName, canvasPreviewClassName, className2,),
+    className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
-      id: inputName,
       name: inputName,
       autoFocus,
       required,
-      className: cx(inputClassName, canvasPreviewClassName,),
-      defaultValue: selectDefaultValue,
-      onBlur,
-      onFocus,
-      onInvalid,
+      className: inputClassName,
+      defaultValue,
+      ...eventHandlers,
       children: selectOptions == null ? void 0 : selectOptions.map((option, index,) => {
         switch (option.type) {
           case 'divider':
@@ -38049,46 +38181,84 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
             }, index,);
         }
       },),
-    }, selectDefaultValue,),
+    }, defaultValue,),
   },);
 },);
 var selectWrapperClassName = 'framer-form-select-wrapper';
 var selectArrowSize = 16;
-var FormSelect =
-  /* @__PURE__ */ (() =>
-    withCSS(Select, [
-      ...sharedInputCSS,
-      ...focusInputCSS,
-      ...inputBorderCSS,
-      css(`select.${inputClassName}`, {
-        appearance: 'none',
-        '-webkit-appearance': 'none',
-        paddingRight: `calc(var(${'--framer-input-padding'}) * 2 + ${selectArrowSize}px)`,
-      },),
-      css(`.${selectWrapperClassName}::before`, {
-        content: '',
-        display: 'block',
-        position: 'absolute',
-        right: 0,
-        height: '100%',
-        width: 16,
-        boxSizing: 'content-box',
-        padding: `0 ${
-          css.variable('--framer-input-padding',/* Padding */
-          )
-        }`,
-        pointerEvents: 'none',
-        backgroundImage:
-          `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        border: 'none',
-      },),
-      css(`select.${inputClassName}:required:invalid`, {
-        color: css.variable('--framer-input-invalid-text-color',/* InvalidTextColor */
-        ),
-      },),
-    ],))();
+var styles3 = /* @__PURE__ */ (() => [
+  ...sharedInputCSS,
+  ...inputBorderCSS,
+  ...inputWrapperCSS,
+  css(`.${selectWrapperClassName}`, {
+    // First we use the complete padding string, which may be any valid
+    // padding string (10px, 10px 10px, 10px 10px 10px, or 10px 10px
+    // 10px 10px), and use it to set only the right padding. This pushes
+    // the actual select away from the arrow by 1x.
+    padding: css.variable('--framer-input-padding',/* Padding */
+    ),
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    background: css.variable('--framer-input-background',/* Background */
+    ),
+    borderTopLeftRadius: css.variable('--framer-input-border-radius-top-left',/* BorderRadiusTopLeft */
+    ),
+    borderTopRightRadius: css.variable('--framer-input-border-radius-top-right',/* BorderRadiusTopRight */
+    ),
+    borderBottomRightRadius: css.variable('--framer-input-border-radius-bottom-right',/* BorderRadiusBottomRight */
+    ),
+    borderBottomLeftRadius: css.variable('--framer-input-border-radius-bottom-left',/* BorderRadiusBottomLeft */
+    ),
+    boxShadow: css.variable('--framer-input-box-shadow',/* BoxShadow */
+    ),
+    transition: css.variable('--framer-input-focused-transition',/* FocusedTransition */
+    ),
+    transitionProperty: 'background, box-shadow',
+  },),
+  css(`.${selectWrapperClassName} select`, {
+    appearance: 'none',
+    '-webkit-appearance': 'none',
+    // Then we use the complete padding string again as the margin for
+    // the select. This moves the select 2x the padding right away from
+    // the arrow.
+    padding: css.variable('--framer-input-padding',/* Padding */
+    ),
+    // Overwrite the values inherited from .${inputClassName}. On a
+    // select, these values are on the wrapper.
+    background: 'transparent',
+  },),
+  css(`.${selectWrapperClassName}::before`, {
+    ...inputIconCSSDeclaration,
+    paddingLeft: `${iconSpacing}px`,
+    backgroundPosition: `${iconSpacing}px center`,
+    maskPosition: `${iconSpacing}px center`,
+    backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+    maskImage: css.variable(
+      '--framer-input-icon-mask-image',
+      `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>')`,
+    ),
+  },),
+  css(`.${selectWrapperClassName} select:required:invalid`, {
+    color: css.variable('--framer-input-invalid-text-color',/* InvalidTextColor */
+    ),
+  },),
+  css(`.${selectWrapperClassName}:focus-within, .${selectWrapperClassName}.${forcedFocusClassName}`, {
+    background: css.variable('--framer-input-focused-background', '--framer-input-background',/* Background */
+    ),
+    boxShadow: css.variable('--framer-input-focused-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
+    ),
+  },),
+  css(`.${selectWrapperClassName}:focus-within::after, .${selectWrapperClassName}.${forcedFocusClassName}::after`, {
+    borderColor: css.variable('--framer-input-focused-border-color', '--framer-input-border-color',/* BorderColor */
+    ),
+    borderStyle: css.variable('--framer-input-focused-border-style', '--framer-input-border-style',/* BorderStyle */
+    ),
+    borderWidth: css.variable('--framer-input-focused-border-width', inputBorderAllSides,),
+  },),
+])();
+var FormSelect = /* @__PURE__ */ withCSS(Select, styles3,);
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
   const {
     background,
