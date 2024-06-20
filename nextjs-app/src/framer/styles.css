@@ -910,13 +910,6 @@ NavigationContainer
     unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
 }
 
-@font-face {
-    font-family: 'Inter'; 
-    src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZ1rib2Bg-4.woff2);
-    font-style: normal;
-    font-weight: 400;
-}
-
 /* used by testimonials.js */
 
 @font-face {
@@ -990,6 +983,15 @@ NavigationContainer
     src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZ1rib2Bg-4.woff2);
     font-style: normal;
     font-weight: 500;
+}
+
+/* used by form.js, input.js */
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZ1rib2Bg-4.woff2);
+    font-style: normal;
+    font-weight: 400;
 }
 
 /* used by fylo.js */

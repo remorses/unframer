@@ -4766,6 +4766,83 @@
       ],
       "format": "esm"
     },
+    "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js": {
+      "bytes": 12535,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/unframer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.21.4/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/unframer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.21.4/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/unframer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.21.4/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "virtual:input": {
+      "bytes": 536,
+      "imports": [
+        {
+          "path": "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js"
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/unframer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.21.4/node_modules/esbuild-plugin-polyfill-node/polyfills/__dirname.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/unframer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.21.4/node_modules/esbuild-plugin-polyfill-node/polyfills/buffer.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "/Users/morse/Documents/GitHub/unframer/node_modules/.pnpm/esbuild-plugin-polyfill-node@0.3.0_esbuild@0.21.4/node_modules/esbuild-plugin-polyfill-node/polyfills/process.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
     "https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc-0.js": {
       "bytes": 125,
       "imports": [
@@ -5405,6 +5482,57 @@
         }
       },
       "bytes": 96175
+    },
+    "input.js": {
+      "imports": [
+        {
+          "path": "chunk-MLKGABMK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "virtual:input",
+      "inputs": {
+        "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js": {
+          "bytesInOutput": 11726
+        },
+        "virtual:input": {
+          "bytesInOutput": 262
+        }
+      },
+      "bytes": 12193
     },
     "form.js": {
       "imports": [

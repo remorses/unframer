@@ -4,6 +4,7 @@ import '@/framer/styles.css'
 import { AnimatePresence, PageRoot } from 'unframer'
 
 import Logos from '@/framer/logos'
+import InputFramerComponent from '@/framer/input'
 import Nav from '@/framer/framerNav'
 import Form from '@/framer/form'
 import Menus from '@/framer/menus'
@@ -25,6 +26,7 @@ const proxyThatLogsProps = (original) =>
     })
 
 export default function Page() {
+    return <Home />
     const siteId = use(sha256Encode('MOHUmEgItazhBLBtW6H0'))
     return (
         <PageRoot
@@ -83,6 +85,9 @@ function Home() {
                 <Collection />
                 <Card />
                 <Form />
+                <div>
+                    <InputFramerComponent inputName='something' className='' variant='Default' />
+                </div>
                 <div className='pt-[200px]'></div>
             </div>
         </div>
