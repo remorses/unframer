@@ -27,20 +27,20 @@ const proxyThatLogsProps = (original) =>
 
 export default function Page() {
     return <Home />
-    const siteId = use(sha256Encode('MOHUmEgItazhBLBtW6H0'))
-    return (
-        <PageRoot
-            framerSiteId={siteId}
-            routeId='index'
-            localeId='it-it'
-            routes={{
-                // _index: proxyThatLogsProps,
-                index: proxyThatLogsProps({ page: <Home />, path: '/' }),
-            }}
-            RootComponent={'div'}
-            isWebsite={true}
-        />
-    )
+    // const siteId = use(sha256Encode('MOHUmEgItazhBLBtW6H0'))
+    // return (
+    //     <PageRoot
+    //         framerSiteId={siteId}
+    //         routeId='index'
+    //         localeId='it-it'
+    //         routes={{
+    //             // _index: proxyThatLogsProps,
+    //             index: proxyThatLogsProps({ page: <Home />, path: '/' }),
+    //         }}
+    //         RootComponent={'div'}
+    //         isWebsite={true}
+    //     />
+    // )
 }
 
 function Home() {
@@ -86,7 +86,11 @@ function Home() {
                 <Card />
                 <Form />
                 <div>
-                    <InputFramerComponent inputName='something' className='' variant='Default' />
+                    <InputFramerComponent
+                        inputName='something'
+                        className=''
+                        variant='Default'
+                    />
                 </div>
                 <div className='pt-[200px]'></div>
             </div>
