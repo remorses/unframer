@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.XVXFQE6V.js
+// https :https://app.framerstatic.com/framer.DDH34LCB.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -37971,8 +37971,6 @@ var styles = /* @__PURE__ */ (() => [
   css(`.${textInputWrapperClassName}:focus-within, .${textInputWrapperClassName}.${forcedFocusClassName}`, {
     boxShadow: css.variable('--framer-input-focused-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
     ),
-  },),
-  css(`.${textInputWrapperClassName} .${inputClassName}:focus, .${textInputWrapperClassName}.${forcedFocusClassName} .${inputClassName}`, {
     background: css.variable('--framer-input-focused-background', '--framer-input-background',/* Background */
     ),
   },),
