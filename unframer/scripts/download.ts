@@ -1,10 +1,12 @@
 import dedent from 'dedent'
+import * as t from '@babel/types'
+
 import annotateAsPure from '@babel/helper-annotate-as-pure'
 
 import dprint from 'dprint-node'
 
 import { build } from 'esbuild'
-import { transform } from '@babel/core'
+import { PluginObj, transform } from '@babel/core'
 import fs from 'fs'
 import path from 'path'
 import { esbuildPluginBundleDependencies } from '../src/esbuild'
@@ -96,14 +98,27 @@ export async function main({ framerTypesUrl }) {
     }
 }
 
-const purePlugin = ({ types: t }) => ({
+const purePlugin = ({}: { types: typeof t }): PluginObj => ({
     visitor: {
+        ClassDeclaration(path) {
+            annotateAsPure(path)
+        },
+        ClassExpression(path) {
+            const { parent } = path
+
+            if (t.isVariableDeclarator(parent)) {
+                // only if at top level
+                // if (path.getFunctionParent()) return
+                annotateAsPure(path)
+            }
+        },
         CallExpression(path) {
             if (path.getFunctionParent()) return
             const { parent } = path
             if (
                 t.isVariableDeclarator(parent) ||
                 t.isAssignmentExpression(parent) ||
+                t.isObjectProperty(parent) ||
                 t.isObjectProperty(parent) ||
                 t.isArrayExpression(parent) ||
                 t.isCallExpression(parent)

@@ -88,7 +88,7 @@ var __privateMethod = (obj, member, method,) => {
   __accessCheck(obj, member, 'access private method',);
   return method;
 };
-var require_memoize_browser_cjs = __commonJS({
+var require_memoize_browser_cjs = /*#__PURE__*/ __commonJS({
   '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
     'use strict';
 
@@ -105,7 +105,7 @@ var require_memoize_browser_cjs = __commonJS({
     exports.default = memoize3;
   },
 },);
-var require_is_prop_valid_browser_cjs = __commonJS({
+var require_is_prop_valid_browser_cjs = /*#__PURE__*/ __commonJS({
   '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
     'use strict';
 
@@ -125,13 +125,13 @@ var require_is_prop_valid_browser_cjs = __commonJS({
     exports.default = index;
   },
 },);
-var MotionConfigContext = createContext({
+var MotionConfigContext = /*#__PURE__*/ createContext({
   transformPagePoint: (p) => p,
   isStatic: false,
   reducedMotion: 'never',
 },);
-var MotionContext = createContext({},);
-var PresenceContext = createContext(null,);
+var MotionContext = /*#__PURE__*/ createContext({},);
+var PresenceContext = /*#__PURE__*/ createContext(null,);
 var isBrowser = typeof document !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 var camelToDash = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
@@ -141,12 +141,12 @@ var MotionGlobalConfig = {
   skipAnimations: false,
   useManualTiming: false,
 };
-var LayoutGroupContext = createContext({},);
-var SwitchLayoutGroupContext = createContext({},);
-var LazyContext = createContext({
+var LayoutGroupContext = /*#__PURE__*/ createContext({},);
+var SwitchLayoutGroupContext = /*#__PURE__*/ createContext({},);
+var LazyContext = /*#__PURE__*/ createContext({
   strict: false,
 },);
-var Queue = class {
+var Queue = /*#__PURE__*/ class {
   constructor() {
     this.order = [];
     this.scheduled = /* @__PURE__ */ new Set();
@@ -297,7 +297,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
 var {
   schedule: microtask,
   cancel: cancelMicrotask,
-} = createRenderBatcher(queueMicrotask, false,);
+} = /*#__PURE__*/ createRenderBatcher(queueMicrotask, false,);
 function useVisualElement(Component33, visualState, props, createVisualElement2,) {
   const {
     visualElement: parent,
@@ -430,7 +430,7 @@ function loadFeatures(features,) {
     };
   }
 }
-var motionComponentSymbol = Symbol.for('motionComponentSymbol',);
+var motionComponentSymbol = /*#__PURE__*/ Symbol.for('motionComponentSymbol',);
 function createMotionComponent({
   preloadedFeatures: preloadedFeatures2,
   createVisualElement: createVisualElement2,
@@ -573,11 +573,11 @@ var createUnitType = (unit) => ({
   parse: parseFloat,
   transform: (v) => `${v}${unit}`,
 });
-var degrees = createUnitType('deg',);
-var percent = createUnitType('%',);
-var px = createUnitType('px',);
-var vh = createUnitType('vh',);
-var vw = createUnitType('vw',);
+var degrees = /*#__PURE__*/ createUnitType('deg',);
+var percent = /*#__PURE__*/ createUnitType('%',);
+var px = /*#__PURE__*/ createUnitType('px',);
+var vh = /*#__PURE__*/ createUnitType('vh',);
+var vw = /*#__PURE__*/ createUnitType('vw',);
 var progressPercentage = {
   ...percent,
   parse: (v) => percent.parse(v,) / 100,
@@ -758,7 +758,7 @@ var {
   cancel: cancelFrame,
   state: frameData,
   steps,
-} = createRenderBatcher(typeof requestAnimationFrame !== 'undefined' ? requestAnimationFrame : noop, true,);
+} = /*#__PURE__*/ createRenderBatcher(typeof requestAnimationFrame !== 'undefined' ? requestAnimationFrame : noop, true,);
 var isPrimaryPointer = (event) => {
   if (event.pointerType === 'mouse') {
     return typeof event.button !== 'number' || event.button <= 0;
@@ -801,8 +801,8 @@ function createLock(name,) {
     return false;
   };
 }
-var globalHorizontalLock = createLock('dragHorizontal',);
-var globalVerticalLock = createLock('dragVertical',);
+var globalHorizontalLock = /*#__PURE__*/ createLock('dragHorizontal',);
+var globalVerticalLock = /*#__PURE__*/ createLock('dragVertical',);
 function getGlobalLock(drag2,) {
   let lock = false;
   if (drag2 === 'y') {
@@ -878,8 +878,8 @@ var rgbUnit = {
   transform: (v) => Math.round(clampRgbUnit(v,),),
 };
 var rgba = {
-  test: isColorString('rgb', 'red',),
-  parse: splitColor('red', 'green', 'blue',),
+  test: /*#__PURE__*/ isColorString('rgb', 'red',),
+  parse: /*#__PURE__*/ splitColor('red', 'green', 'blue',),
   transform: ({
     red,
     green,
@@ -917,13 +917,13 @@ function parseHex(v,) {
   };
 }
 var hex = {
-  test: isColorString('#',),
+  test: /*#__PURE__*/ isColorString('#',),
   parse: parseHex,
   transform: rgba.transform,
 };
 var hsla = {
-  test: isColorString('hsl', 'hue',),
-  parse: splitColor('hue', 'saturation', 'lightness',),
+  test: /*#__PURE__*/ isColorString('hsl', 'hue',),
+  parse: /*#__PURE__*/ splitColor('hue', 'saturation', 'lightness',),
   transform: ({
     hue,
     saturation,
@@ -1250,17 +1250,17 @@ function cubicBezier(mX1, mY1, mX2, mY2,) {
   const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2,);
   return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t,), mY1, mY2,);
 }
-var easeIn = cubicBezier(0.42, 0, 1, 1,);
-var easeOut = cubicBezier(0, 0, 0.58, 1,);
-var easeInOut = cubicBezier(0.42, 0, 0.58, 1,);
+var easeIn = /*#__PURE__*/ cubicBezier(0.42, 0, 1, 1,);
+var easeOut = /*#__PURE__*/ cubicBezier(0, 0, 0.58, 1,);
+var easeInOut = /*#__PURE__*/ cubicBezier(0.42, 0, 0.58, 1,);
 var mirrorEasing = (easing) => (p) => p <= 0.5 ? easing(2 * p,) / 2 : (2 - easing(2 * (1 - p),)) / 2;
 var reverseEasing = (easing) => (p) => 1 - easing(1 - p,);
 var circIn = (p) => 1 - Math.sin(Math.acos(p,),);
-var circOut = reverseEasing(circIn,);
-var circInOut = mirrorEasing(circIn,);
-var backOut = cubicBezier(0.33, 1.53, 0.69, 0.99,);
-var backIn = reverseEasing(backOut,);
-var backInOut = mirrorEasing(backIn,);
+var circOut = /*#__PURE__*/ reverseEasing(circIn,);
+var circInOut = /*#__PURE__*/ mirrorEasing(circIn,);
+var backOut = /*#__PURE__*/ cubicBezier(0.33, 1.53, 0.69, 0.99,);
+var backIn = /*#__PURE__*/ reverseEasing(backOut,);
+var backInOut = /*#__PURE__*/ mirrorEasing(backIn,);
 var anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
 var progress = (from, to, value,) => {
   const toFromDifference = to - from;
@@ -1343,8 +1343,8 @@ var mixColor = (from, to,) => {
   };
 };
 var checkStringStartsWith = (token) => (key7) => typeof key7 === 'string' && key7.startsWith(token,);
-var isCSSVariableName = checkStringStartsWith('--',);
-var startsAsVariableToken = checkStringStartsWith('var(--',);
+var isCSSVariableName = /*#__PURE__*/ checkStringStartsWith('--',);
+var startsAsVariableToken = /*#__PURE__*/ checkStringStartsWith('var(--',);
 var isCSSVariableToken = (value) => {
   const startsWithToken = startsAsVariableToken(value,);
   if (!startsWithToken) return false;
@@ -1509,7 +1509,7 @@ var getTranslateFromMatrix = (pos2, pos3,) =>
   }
 };
 var transformKeys = /* @__PURE__ */ new Set(['x', 'y', 'z',],);
-var nonTranslationalTransformKeys = transformPropOrder.filter((key7) => !transformKeys.has(key7,));
+var nonTranslationalTransformKeys = /*#__PURE__*/ transformPropOrder.filter((key7) => !transformKeys.has(key7,));
 function removeNonTranslationalTransform(visualElement,) {
   const removedTransforms = [];
   nonTranslationalTransformKeys.forEach((key7) => {
@@ -1552,8 +1552,8 @@ var positionalValues = {
     left,
   },) => parseFloat(left,) + (x.max - x.min),
   // Transform
-  x: getTranslateFromMatrix(4, 13,),
-  y: getTranslateFromMatrix(5, 14,),
+  x: /*#__PURE__*/ getTranslateFromMatrix(4, 13,),
+  y: /*#__PURE__*/ getTranslateFromMatrix(5, 14,),
 };
 positionalValues.translateX = positionalValues.x;
 positionalValues.translateY = positionalValues.y;
@@ -1606,7 +1606,7 @@ function flushKeyframeResolvers() {
   readAllKeyframes();
   measureAllKeyframes();
 }
-var KeyframeResolver = class {
+var KeyframeResolver = /*#__PURE__*/ class {
   constructor(unresolvedKeyframes, onComplete, name, motionValue2, element, isAsync = false,) {
     this.isComplete = false;
     this.isAsync = false;
@@ -1878,7 +1878,7 @@ function getFinalKeyframe(keyframes2, {
   const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
   return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
 }
-var BaseAnimation = class {
+var BaseAnimation = /*#__PURE__*/ class {
   constructor({
     autoplay = true,
     delay: delay2 = 0,
@@ -2011,7 +2011,7 @@ var generators = {
   spring,
 };
 var percentToProgress = (percent2) => percent2 / 100;
-var MainThreadAnimation = class extends BaseAnimation {
+var MainThreadAnimation = /*#__PURE__*/ class extends BaseAnimation {
   constructor({
     KeyframeResolver: KeyframeResolver$1 = KeyframeResolver,
     ...options
@@ -2491,7 +2491,7 @@ function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, n
     }
   }
 }
-var DOMKeyframesResolver = class extends KeyframeResolver {
+var DOMKeyframesResolver = /*#__PURE__*/ class extends KeyframeResolver {
   constructor(unresolvedKeyframes, onComplete, name, motionValue2,) {
     super(
       unresolvedKeyframes,
@@ -2624,10 +2624,10 @@ var supportedWaapiEasing = {
   easeIn: 'ease-in',
   easeOut: 'ease-out',
   easeInOut: 'ease-in-out',
-  circIn: cubicBezierAsString([0, 0.65, 0.55, 1,],),
-  circOut: cubicBezierAsString([0.55, 0, 1, 0.45,],),
-  backIn: cubicBezierAsString([0.31, 0.01, 0.66, -0.59,],),
-  backOut: cubicBezierAsString([0.33, 1.53, 0.69, 0.99,],),
+  circIn: /*#__PURE__*/ cubicBezierAsString([0, 0.65, 0.55, 1,],),
+  circOut: /*#__PURE__*/ cubicBezierAsString([0.55, 0, 1, 0.45,],),
+  backIn: /*#__PURE__*/ cubicBezierAsString([0.31, 0.01, 0.66, -0.59,],),
+  backOut: /*#__PURE__*/ cubicBezierAsString([0.33, 1.53, 0.69, 0.99,],),
 };
 function mapEasingToNativeEasingWithDefault(easing,) {
   return mapEasingToNativeEasing(easing,) || supportedWaapiEasing.easeOut;
@@ -2666,7 +2666,7 @@ function animateStyle(element, valueName, keyframes2, {
     direction: repeatType === 'reverse' ? 'alternate' : 'normal',
   },);
 }
-var supportsWaapi = memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
+var supportsWaapi = /*#__PURE__*/ memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
 var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
   // or until we implement support for linear() easing.
   // "background-color"
@@ -2702,7 +2702,7 @@ function pregenerateKeyframes(keyframes2, options,) {
     ease: 'linear',
   };
 }
-var AcceleratedAnimation = class extends BaseAnimation {
+var AcceleratedAnimation = /*#__PURE__*/ class extends BaseAnimation {
   constructor(options,) {
     super(options,);
     const {
@@ -2974,7 +2974,7 @@ function moveItem([...arr], fromIndex, toIndex,) {
   }
   return arr;
 }
-var SubscriptionManager = class {
+var SubscriptionManager = /*#__PURE__*/ class {
   constructor() {
     this.subscriptions = [];
   }
@@ -3008,7 +3008,7 @@ var isFloat = (value) => {
 var collectMotionValues = {
   current: void 0,
 };
-var MotionValue = class {
+var MotionValue = /*#__PURE__*/ class {
   /**
    * @param init - The initiating value
    * @param config - Optional configuration options
@@ -3341,8 +3341,8 @@ function observeTimeline(update, timeline,) {
   frame.update(onFrame, true,);
   return () => cancelFrame(onFrame,);
 }
-var supportsScrollTimeline = memo(() => window.ScrollTimeline !== void 0);
-var GroupPlaybackControls = class {
+var supportsScrollTimeline = /*#__PURE__*/ memo(() => window.ScrollTimeline !== void 0);
+var GroupPlaybackControls = /*#__PURE__*/ class {
   constructor(animations2,) {
     this.stop = () => this.runAll('stop',);
     this.animations = animations2.filter(Boolean,);
@@ -3667,7 +3667,7 @@ function shallowCompare(next, prev,) {
   }
   return true;
 }
-var reversePriorityOrder = [...variantPriorityOrder,].reverse();
+var reversePriorityOrder = /*#__PURE__*/ [...variantPriorityOrder,].reverse();
 var numAnimationTypes = variantPriorityOrder.length;
 function animateList(visualElement,) {
   return (animations2) =>
@@ -3871,14 +3871,14 @@ function createState() {
     exit: createTypeState(),
   };
 }
-var Feature = class {
+var Feature = /*#__PURE__*/ class {
   constructor(node,) {
     this.isMounted = false;
     this.node = node;
   }
   update() {}
 };
-var AnimationFeature = class extends Feature {
+var AnimationFeature = /*#__PURE__*/ class extends Feature {
   /**
    * We dynamically generate the AnimationState manager as it contains a reference
    * to the underlying animation library. We only want to load that if we load this,
@@ -3917,7 +3917,7 @@ var AnimationFeature = class extends Feature {
   unmount() {}
 };
 var id = 0;
-var ExitAnimationFeature = class extends Feature {
+var ExitAnimationFeature = /*#__PURE__*/ class extends Feature {
   constructor() {
     super(...arguments,);
     this.id = id++;
@@ -4035,7 +4035,7 @@ function isPresent(context,) {
   return context === null ? true : context.isPresent;
 }
 var compareByDepth = (a, b,) => a.depth - b.depth;
-var FlatTree = class {
+var FlatTree = /*#__PURE__*/ class {
   constructor() {
     this.children = [];
     this.isDirty = false;
@@ -4141,7 +4141,7 @@ function updateMotionValuesFromProps(element, next, prev,) {
 }
 var valueTypes = [...dimensionValueTypes, color, complex,];
 var findValueType = (v) => valueTypes.find(testValueType(v,),);
-var featureNames = Object.keys(featureDefinitions,);
+var featureNames = /*#__PURE__*/ Object.keys(featureDefinitions,);
 var numFeatures = featureNames.length;
 var propEventHandlers = [
   'AnimationStart',
@@ -4157,7 +4157,7 @@ function getClosestProjectingNode(visualElement,) {
   if (!visualElement) return void 0;
   return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
 }
-var VisualElement = class {
+var VisualElement = /*#__PURE__*/ class {
   /**
    * This method takes React props and returns found MotionValues. For example, HTML
    * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
@@ -4978,7 +4978,7 @@ function scrapeMotionValuesFromProps2(props, prevProps, visualElement,) {
   return newValues;
 }
 var svgMotionConfig = {
-  useVisualState: makeUseVisualState({
+  useVisualState: /*#__PURE__*/ makeUseVisualState({
     scrapeMotionValuesFromProps: scrapeMotionValuesFromProps2,
     createRenderState: createSvgRenderState,
     onMount: (props, instance, {
@@ -5013,7 +5013,7 @@ var svgMotionConfig = {
   },),
 };
 var htmlMotionConfig = {
-  useVisualState: makeUseVisualState({
+  useVisualState: /*#__PURE__*/ makeUseVisualState({
     scrapeMotionValuesFromProps,
     createRenderState: createHtmlRenderState,
   },),
@@ -5053,13 +5053,13 @@ function addHoverEvent(node, isActive,) {
     passive: !node.getProps()[callbackName],
   },);
 }
-var HoverGesture = class extends Feature {
+var HoverGesture = /*#__PURE__*/ class extends Feature {
   mount() {
     this.unmount = pipe(addHoverEvent(this.node, true,), addHoverEvent(this.node, false,),);
   }
   unmount() {}
 };
-var FocusGesture = class extends Feature {
+var FocusGesture = /*#__PURE__*/ class extends Feature {
   constructor() {
     super(...arguments,);
     this.isActive = false;
@@ -5102,7 +5102,7 @@ function fireSyntheticPointerEvent(name, handler,) {
   const syntheticPointerEvent = new PointerEvent('pointer' + name,);
   handler(syntheticPointerEvent, extractEventInfo(syntheticPointerEvent,),);
 }
-var PressGesture = class extends Feature {
+var PressGesture = /*#__PURE__*/ class extends Feature {
   constructor() {
     super(...arguments,);
     this.removeStartListeners = noop;
@@ -5257,7 +5257,7 @@ var thresholdNames = {
   some: 0,
   all: 1,
 };
-var InViewFeature = class extends Feature {
+var InViewFeature = /*#__PURE__*/ class extends Feature {
   constructor() {
     super(...arguments,);
     this.hasEnteredView = false;
@@ -5339,7 +5339,7 @@ var gestureAnimations = {
     Feature: HoverGesture,
   },
 };
-var PanSession = class {
+var PanSession = /*#__PURE__*/ class {
   constructor(event, handlers, {
     transformPagePoint,
     contextWindow,
@@ -5755,7 +5755,7 @@ var getContextWindow = ({
   return current ? current.ownerDocument.defaultView : null;
 };
 var elementDragControls = /* @__PURE__ */ new WeakMap();
-var VisualElementDragControls = class {
+var VisualElementDragControls = /*#__PURE__*/ class {
   constructor(visualElement,) {
     this.openGlobalLock = null;
     this.isDragging = false;
@@ -6195,7 +6195,7 @@ function getCurrentDirection(offset, lockThreshold = 10,) {
   }
   return direction;
 }
-var DragGesture = class extends Feature {
+var DragGesture = /*#__PURE__*/ class extends Feature {
   constructor(node,) {
     super(node,);
     this.removeGroupControls = noop;
@@ -6221,7 +6221,7 @@ var asyncHandler = (handler) => (event, info,) => {
     frame.postRender(() => handler(event, info,));
   }
 };
-var PanGesture = class extends Feature {
+var PanGesture = /*#__PURE__*/ class extends Feature {
   constructor() {
     super(...arguments,);
     this.removePointerDownListener = noop;
@@ -6313,7 +6313,7 @@ var correctBoxShadow = {
     return template(shadow,);
   },
 };
-var MeasureLayoutWithContext = class extends Component {
+var MeasureLayoutWithContext = /*#__PURE__*/ class extends Component {
   /**
    * This only mounts projection nodes for components that
    * need measuring, we might want to do it for all components
@@ -6475,8 +6475,8 @@ function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOn
 function getRadius(values, radiusName,) {
   return values[radiusName] !== void 0 ? values[radiusName] : values.borderRadius;
 }
-var easeCrossfadeIn = compress(0, 0.5, circOut,);
-var easeCrossfadeOut = compress(0.5, 0.95, noop,);
+var easeCrossfadeIn = /*#__PURE__*/ compress(0, 0.5, circOut,);
+var easeCrossfadeOut = /*#__PURE__*/ compress(0.5, 0.95, noop,);
 function compress(min, max, easing,) {
   return (p) => {
     if (p < min) return 0;
@@ -6537,7 +6537,7 @@ function boxEqualsRounded(a, b,) {
 function aspectRatio(box,) {
   return calcLength(box.x,) / calcLength(box.y,);
 }
-var NodeStack = class {
+var NodeStack = /*#__PURE__*/ class {
   constructor() {
     this.members = [];
   }
@@ -7800,7 +7800,7 @@ function shouldAnimatePositionOnly(animationType, snapshot, layout2,) {
   return animationType === 'position' ||
     animationType === 'preserve-aspect' && !isNear(aspectRatio(snapshot,), aspectRatio(layout2,), 0.2,);
 }
-var DocumentProjectionNode = createProjectionNode({
+var DocumentProjectionNode = /*#__PURE__*/ createProjectionNode({
   attachResizeListener: (ref, notify2,) => addDomEvent(ref, 'resize', notify2,),
   measureScroll: () => ({
     x: document.documentElement.scrollLeft || document.body.scrollLeft,
@@ -7811,7 +7811,7 @@ var DocumentProjectionNode = createProjectionNode({
 var rootProjectionNode = {
   current: void 0,
 };
-var HTMLProjectionNode = createProjectionNode({
+var HTMLProjectionNode = /*#__PURE__*/ createProjectionNode({
   measureScroll: (instance) => ({
     x: instance.scrollLeft,
     y: instance.scrollTop,
@@ -7842,7 +7842,7 @@ var drag = {
     MeasureLayout,
   },
 };
-var DOMVisualElement = class extends VisualElement {
+var DOMVisualElement = /*#__PURE__*/ class extends VisualElement {
   constructor() {
     super(...arguments,);
     this.KeyframeResolver = DOMKeyframesResolver;
@@ -7864,7 +7864,7 @@ var DOMVisualElement = class extends VisualElement {
 function getComputedStyle2(element,) {
   return window.getComputedStyle(element,);
 }
-var HTMLVisualElement = class extends DOMVisualElement {
+var HTMLVisualElement = /*#__PURE__*/ class extends DOMVisualElement {
   constructor() {
     super(...arguments,);
     this.type = 'html';
@@ -7908,7 +7908,7 @@ var HTMLVisualElement = class extends DOMVisualElement {
     renderHTML(instance, renderState, styleProp, projection,);
   }
 };
-var SVGVisualElement = class extends DOMVisualElement {
+var SVGVisualElement = /*#__PURE__*/ class extends DOMVisualElement {
   constructor() {
     super(...arguments,);
     this.type = 'svg';
@@ -7977,7 +7977,7 @@ function createDomMotionComponent(key7,) {
     createDomVisualElement,
   ),);
 }
-var m = createMotionProxy(createDomMotionConfig,);
+var m = /*#__PURE__*/ createMotionProxy(createDomMotionConfig,);
 function useIsMounted() {
   const isMounted = useRef(false,);
   useIsomorphicLayoutEffect(() => {
@@ -8000,7 +8000,7 @@ function useForceUpdate() {
 function useUnmountEffect(callback,) {
   return useEffect(() => () => callback(), [],);
 }
-var PopChildMeasure = class extends React2.Component {
+var PopChildMeasure = /*#__PURE__*/ class extends React2.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
@@ -8306,7 +8306,7 @@ function LazyMotion({
 function isLazyBundle(features,) {
   return typeof features === 'function';
 }
-var DeprecatedLayoutGroupContext = createContext(null,);
+var DeprecatedLayoutGroupContext = /*#__PURE__*/ createContext(null,);
 var notify = (node) => !node.isLayoutDirty && node.willUpdate(false,);
 function nodeGroup() {
   const nodes = /* @__PURE__ */ new Set();
@@ -8428,7 +8428,7 @@ function useListTransform(values, transformer,) {
     return transformer(latest,);
   },);
 }
-var ReorderContext = createContext(null,);
+var ReorderContext = /*#__PURE__*/ createContext(null,);
 function checkReorder(order, value, offset, velocity,) {
   if (!velocity) return order;
   const index = order.findIndex((item2) => item2.value === value);
@@ -8492,7 +8492,7 @@ function ReorderGroup({
     },),
   },);
 }
-var Group = forwardRef(ReorderGroup,);
+var Group = /*#__PURE__*/ forwardRef(ReorderGroup,);
 function getValue(item,) {
   return item.value;
 }
@@ -8548,7 +8548,7 @@ function ReorderItem({
     children,
   },);
 }
-var Item = forwardRef(ReorderItem,);
+var Item = /*#__PURE__*/ forwardRef(ReorderItem,);
 var Reorder = {
   Group,
   Item,
@@ -9115,7 +9115,7 @@ function useTime() {
   useAnimationFrame((t) => time2.set(t,));
   return time2;
 }
-var WillChangeMotionValue = class extends MotionValue {
+var WillChangeMotionValue = /*#__PURE__*/ class extends MotionValue {
   constructor() {
     super(...arguments,);
     this.members = [];
@@ -9551,7 +9551,7 @@ var createScopedAnimate = (scope) => {
   }
   return scopedAnimate;
 };
-var animate = createScopedAnimate();
+var animate = /*#__PURE__*/ createScopedAnimate();
 function useAnimate() {
   const scope = useConstant(() => ({
     current: null,
@@ -9640,7 +9640,7 @@ function useInView(ref, {
   }, [root, ref, margin, once, amount,],);
   return isInView;
 }
-var DragControls = class {
+var DragControls = /*#__PURE__*/ class {
   constructor() {
     this.componentControls = /* @__PURE__ */ new Set();
   }
@@ -9832,7 +9832,7 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
   }
 }
 var createObject = () => ({});
-var StateVisualElement = class extends VisualElement {
+var StateVisualElement = /*#__PURE__*/ class extends VisualElement {
   build() {}
   measureInstanceViewportBox() {
     return createBox();
@@ -9854,7 +9854,7 @@ var StateVisualElement = class extends VisualElement {
     return 0;
   }
 };
-var useVisualState = makeUseVisualState({
+var useVisualState = /*#__PURE__*/ makeUseVisualState({
   scrapeMotionValuesFromProps: createObject,
   createRenderState: createObject,
 },);
@@ -9991,7 +9991,7 @@ function stagger(duration = 0.1, {
   };
 }
 var sync = frame;
-var cancelSync = stepsOrder.reduce((acc, key7,) => {
+var cancelSync = /*#__PURE__*/ stepsOrder.reduce((acc, key7,) => {
   acc[key7] = (process2) => cancelFrame(process2,);
   return acc;
 }, {},);
@@ -10003,7 +10003,7 @@ import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
-var require_hsluv = __commonJS({
+var require_hsluv = /*#__PURE__*/ __commonJS({
   '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
     'use strict';
 
@@ -10011,7 +10011,7 @@ var require_hsluv = __commonJS({
       value: true,
     },);
     exports.Hsluv = void 0;
-    var Hsluv2 = class {
+    var Hsluv2 = /*#__PURE__*/ class {
       constructor() {
         this.hex = '#000000';
         this.rgb_r = 0;
@@ -10341,7 +10341,7 @@ var require_hsluv = __commonJS({
     Hsluv2.m_b2 = 1.056971514242878;
   },
 },);
-var require_eventemitter3 = __commonJS({
+var require_eventemitter3 = /*#__PURE__*/ __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
 
@@ -10512,7 +10512,7 @@ var require_eventemitter3 = __commonJS({
     }
   },
 },);
-var require_browser = __commonJS({
+var require_browser = /*#__PURE__*/ __commonJS({
   '../../../node_modules/process/browser.js'(exports, module,) {
     var process5 = module.exports = {};
     var cachedSetTimeout;
@@ -10671,7 +10671,7 @@ var require_browser = __commonJS({
     };
   },
 },);
-var require_resize_observer_umd = __commonJS({
+var require_resize_observer_umd = /*#__PURE__*/ __commonJS({
   '../../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.umd.js'(exports, module,) {
     (function (global, factory,) {
       typeof exports === 'object' && typeof module !== 'undefined'
@@ -11237,7 +11237,7 @@ var require_resize_observer_umd = __commonJS({
     },);
   },
 },);
-var require_react_is_production_min = __commonJS({
+var require_react_is_production_min = /*#__PURE__*/ __commonJS({
   '../../../node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.production.min.js'(exports,) {
     'use strict';
 
@@ -11352,7 +11352,7 @@ var require_react_is_production_min = __commonJS({
     exports.typeOf = z;
   },
 },);
-var require_react_is = __commonJS({
+var require_react_is = /*#__PURE__*/ __commonJS({
   '../../../node_modules/hoist-non-react-statics/node_modules/react-is/index.js'(exports, module,) {
     'use strict';
 
@@ -11363,7 +11363,7 @@ var require_react_is = __commonJS({
     }
   },
 },);
-var require_hoist_non_react_statics_cjs = __commonJS({
+var require_hoist_non_react_statics_cjs = /*#__PURE__*/ __commonJS({
   '../../../node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js'(exports, module,) {
     'use strict';
 
@@ -11452,7 +11452,7 @@ var require_hoist_non_react_statics_cjs = __commonJS({
     module.exports = hoistNonReactStatics;
   },
 },);
-var require_archy = __commonJS({
+var require_archy = /*#__PURE__*/ __commonJS({
   '../../../node_modules/archy/index.js'(exports, module,) {
     module.exports = function archy2(obj, prefix2, opts,) {
       if (prefix2 === void 0) prefix2 = '';
@@ -11485,7 +11485,7 @@ var require_archy = __commonJS({
     };
   },
 },);
-var require_fontfaceobserver_standalone = __commonJS({
+var require_fontfaceobserver_standalone = /*#__PURE__*/ __commonJS({
   '../../../node_modules/fontfaceobserver/fontfaceobserver.standalone.js'(exports, module,) {
     (function () {
       function l(a, b,) {
@@ -11686,9 +11686,9 @@ function renderPage(Page4, defaultPageStyle,) {
   };
   return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
 }
-var NotFoundError = class extends Error {};
-var ErrorBoundaryCaughtError = class extends Error {};
-var ErrorBoundary = class extends Component {
+var NotFoundError = /*#__PURE__*/ class extends Error {};
+var ErrorBoundaryCaughtError = /*#__PURE__*/ class extends Error {};
+var ErrorBoundary = /*#__PURE__*/ class extends Component {
   constructor(props,) {
     super(props,);
     this.state = {
@@ -12833,7 +12833,7 @@ function RoutesProvider({
     children,
   },);
 }
-var SuspenseErrorBoundary = class extends Component {
+var SuspenseErrorBoundary = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     this.state = {
@@ -13435,7 +13435,7 @@ function deprecationWarning(removedItem, removalVersion, replacement,) {
   const warningText = `Deprecation warning: ${removedItem} will be removed in version ${removalVersion}${replacementText}.`;
   warnOnce2(warningText,);
 }
-var Observers = class {
+var Observers = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'observers', /* @__PURE__ */ new Set(),);
     __publicField(this, 'transactions', {},);
@@ -13555,7 +13555,7 @@ function animatableInterpolation(value, currentInterpolation,) {
     },
   };
 }
-var AnimatableValue = class {
+var AnimatableValue = /*#__PURE__*/ class {
   constructor(value,) {
     this.value = value;
     __publicField(this, 'observers', new Observers(),);
@@ -13747,7 +13747,7 @@ function controlPointsForCurve(curve,) {
       return [0.42, 0, 0.58, 1,];
   }
 }
-var BezierAnimator = class {
+var BezierAnimator = /*#__PURE__*/ class {
   constructor(options, interpolation,) {
     this.interpolation = interpolation;
     __publicField(this, 'unitBezier',);
@@ -13802,7 +13802,7 @@ var BezierAnimator = class {
     return 1 / (200 * duration);
   }
 };
-var UnitBezier = class {
+var UnitBezier = /*#__PURE__*/ class {
   constructor(point1, point2,) {
     __publicField(this, 'a',);
     __publicField(this, 'b',);
@@ -13848,7 +13848,7 @@ var UnitBezier = class {
     return t2;
   }
 };
-var Integrator = class {
+var Integrator = /*#__PURE__*/ class {
   constructor(accelerationFunction,) {
     __publicField(this, 'accelerationForState',);
     this.accelerationForState = accelerationFunction;
@@ -13883,7 +13883,7 @@ var Integrator = class {
     return output;
   }
 };
-var FrictionAnimator = class {
+var FrictionAnimator = /*#__PURE__*/ class {
   constructor(options,) {
     __publicField(this, 'options',);
     __publicField(this, 'state',);
@@ -14061,7 +14061,7 @@ function isDampingDurationSpringOptions(options,) {
   }
   return typeof options.dampingRatio === 'number' || typeof options.duration === 'number' || typeof options.mass === 'number';
 }
-var SpringAnimator = class {
+var SpringAnimator = /*#__PURE__*/ class {
   constructor(options, interpolation,) {
     this.interpolation = interpolation;
     __publicField(this, 'options',);
@@ -14148,7 +14148,7 @@ var Defaults = {
     tolerance: 1,
   },
 };
-var InertialScrollAnimator = class {
+var InertialScrollAnimator = /*#__PURE__*/ class {
   constructor(options,) {
     __publicField(this, 'options',);
     __publicField(this, 'current',);
@@ -15390,7 +15390,7 @@ var DefaultInterpolationOptions = {
   colorModel: 'husl',
   /* HUSL */
 };
-var ValueInterpolation = class {
+var ValueInterpolation = /*#__PURE__*/ class {
   /**
    * @internal
    */
@@ -15443,7 +15443,7 @@ var Defaults2 = /* @__PURE__ */ (() => ({
   delta: 1 / 60,
   maxValues: 1e4,
 }))();
-var PrecalculatedAnimator = class {
+var PrecalculatedAnimator = /*#__PURE__*/ class {
   constructor(options,) {
     __publicField(this, 'animator',);
     __publicField(this, 'values',);
@@ -15510,7 +15510,7 @@ var PrecalculatedAnimator = class {
   }
 };
 var EventEmitter3 = /* @__PURE__ */ (() => require_eventemitter3().EventEmitter)();
-var EventEmitter = class {
+var EventEmitter = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, '_emitter', new EventEmitter3(),);
   }
@@ -15626,7 +15626,7 @@ var _raf = (f) => {
 var __raf = /* @__PURE__ */ (() => safeWindow['requestAnimationFrame'] || _raf)();
 var raf = (f) => __raf(f,);
 var LoopTimeStep = /* @__PURE__ */ (() => 1 / 60)();
-var Loop = class extends EventEmitter {
+var Loop = /*#__PURE__*/ class extends EventEmitter {
   /**
    * @internal
    */
@@ -15833,7 +15833,7 @@ var RenderTarget = {
     return false;
   },
 };
-var AnimationDriver = class {
+var AnimationDriver = /*#__PURE__*/ class {
   constructor(animator, updateCallback, finishedCallback,) {
     this.animator = animator;
     this.updateCallback = updateCallback;
@@ -15859,7 +15859,7 @@ var AnimationDriver = class {
     return this.animator.isFinished();
   }
 };
-var MainLoopAnimationDriver = class extends AnimationDriver {
+var MainLoopAnimationDriver = /*#__PURE__*/ class extends AnimationDriver {
   play() {
     if (RenderEnvironment.target !== RenderTarget.preview) {
       this.finishedCallback && this.finishedCallback(false,);
@@ -15880,7 +15880,7 @@ var DefaultDeprecatedAnimationOptions = {
   colorModel: 'husl',
   /* HUSL */
 };
-var FramerAnimation = class {
+var FramerAnimation = /*#__PURE__*/ class {
   /**
    * @internal
    */
@@ -16122,10 +16122,10 @@ var correctBorderScale = (axis) => ({
   },
 });
 addScaleCorrector({
-  borderTopWidth: correctBorderScale('y',),
-  borderLeftWidth: correctBorderScale('x',),
-  borderRightWidth: correctBorderScale('x',),
-  borderBottomWidth: correctBorderScale('y',),
+  borderTopWidth: /*#__PURE__*/ correctBorderScale('y',),
+  borderLeftWidth: /*#__PURE__*/ correctBorderScale('x',),
+  borderRightWidth: /*#__PURE__*/ correctBorderScale('x',),
+  borderBottomWidth: /*#__PURE__*/ correctBorderScale('y',),
 },);
 function MotionSetup({
   children,
@@ -16573,7 +16573,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = class extends Component {
+var ErrorBoundary2 = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -20823,7 +20823,7 @@ var useLibraryFeatures = () => {
   const context = React4.useContext(LibraryFeaturesContext,);
   return context ?? {};
 };
-var import_process = __toESM(require_browser(), 1,);
+var import_process = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_browser(), 1,);
 var safeNavigator = typeof navigator !== 'undefined' ? navigator : void 0;
 var isBrowser2 = () => typeof document === 'object';
 var isWebKit = () => {
@@ -21428,7 +21428,7 @@ function useForceUpdate3() {
 }
 var ResizeObserverPolyfill = /* @__PURE__ */ (() => require_resize_observer_umd().ResizeObserver)();
 var DEFAULT_SIZE = 200;
-var SharedObserver = class {
+var SharedObserver = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'sharedResizeObserver',);
     __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
@@ -21759,6 +21759,7 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
   }
 }
 var Layer = /* @__PURE__ */ (() => {
+  /*#__PURE__*/
   class Layer2 extends Component {
     constructor() {
       super(...arguments,);
@@ -22590,7 +22591,7 @@ var SharedLayoutContext = /* @__PURE__ */ React4.createContext({
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
 },);
-var SharedLayoutRoot = class extends Component {
+var SharedLayoutRoot = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'shouldAnimate', false,);
@@ -22673,7 +22674,7 @@ function MagicMotionCrossfadeRoot(props,) {
     children: props.children,
   },);
 }
-var SharedIntersectionObserver = class {
+var SharedIntersectionObserver = /*#__PURE__*/ class {
   constructor(options,) {
     __publicField(this, 'sharedIntersectionObserver',);
     __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
@@ -22781,7 +22782,7 @@ function isIntersectingWithThreshold({
   if (boundingClientRect.height === 0) return isIntersecting;
   return isIntersecting && calculatedIntersection(intersectionRect, boundingClientRect,) >= threshold;
 }
-var import_hoist_non_react_statics2 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
+var import_hoist_non_react_statics2 = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_hoist_non_react_statics_cjs(), 1,);
 function pointForEvent(event, customTarget = null,) {
   let target;
   if (customTarget instanceof HTMLElement) {
@@ -22817,7 +22818,7 @@ function pointForEvent(event, customTarget = null,) {
   };
   return point2;
 }
-var FramerEvent = class {
+var FramerEvent = /*#__PURE__*/ class {
   /**
    * @internal
    */
@@ -22908,7 +22909,7 @@ var FramerEvent = class {
     return false;
   }
 };
-var import_hoist_non_react_statics = __toESM(require_hoist_non_react_statics_cjs(), 1,);
+var import_hoist_non_react_statics = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_hoist_non_react_statics_cjs(), 1,);
 var clamp2 = (value, a, b,) => {
   const min = Math.min(a, b,);
   const max = Math.max(a, b,);
@@ -22924,7 +22925,7 @@ var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
 function WithDragging(Component15,) {
-  const _WithDraggingHOC = class extends React4.Component {
+  const _WithDraggingHOC = /*#__PURE__*/ class extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', {
@@ -23743,7 +23744,7 @@ var ObservableObject = /* @__PURE__ */ (() => {
   };
   return ObservableObject2;
 })();
-var ObservableObjectProxyHandler = class {
+var ObservableObjectProxyHandler = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'set', (target, key7, value, receiver,) => {
       if (key7 === $private) {
@@ -24419,7 +24420,7 @@ function applyLayoutProp(style, props, key7,) {
   }
 }
 var DeprecatedFrame = /* @__PURE__ */ (() => {
-  const _DeprecatedFrameInner = class extends Layer {
+  const _DeprecatedFrameInner = /*#__PURE__*/ class extends Layer {
     constructor() {
       super(...arguments,);
       __publicField(this, 'element', null,);
@@ -24800,7 +24801,7 @@ var Frame = /* @__PURE__ */ (() => {
   FrameInner['displayName'] = 'Frame';
   return FrameInner;
 })();
-var LayoutTree = class extends Component {
+var LayoutTree = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layoutMaybeMutated',);
@@ -25238,7 +25239,7 @@ var allAnimatableProperties = {
   originZ: 0,
   opacity: 1,
 };
-var NavigatorMock = class {
+var NavigatorMock = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'warning', () => {
       warnOnce2('The Navigator API is only available inside of Framer: https://www.framer.com/',);
@@ -26276,7 +26277,7 @@ function NavigationWrapper(props,) {
     children: props.children,
   },);
 }
-var import_hoist_non_react_statics3 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
+var import_hoist_non_react_statics3 = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_hoist_non_react_statics_cjs(), 1,);
 var NavigateTo = /* @__PURE__ */ ((NavigateTo2) => {
   NavigateTo2['Previous'] = '@Previous';
   return NavigateTo2;
@@ -26292,7 +26293,7 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
   return NavigationTransitionType2;
 })(NavigationTransitionType || {},);
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = class extends React4.Component {
+  const InternalWithNavigator = /*#__PURE__*/ class extends React4.Component {
     render() {
       return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
         children: (navigation) => {
@@ -26415,7 +26416,7 @@ function withInfiniteScroll(Component15,) {
     },);
   },);
 }
-var import_process2 = __toESM(require_browser(), 1,);
+var import_process2 = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_browser(), 1,);
 function debounce(fn, time2,) {
   let timeout;
   const debounced = (...args) => {
@@ -27793,7 +27794,7 @@ function stateName(state,) {
 function containsBitmask(value, bitmask,) {
   return (value & bitmask) !== 0;
 }
-var GestureRecognizer = class {
+var GestureRecognizer = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, '_state', 2,/* Possible */
     );
@@ -27869,7 +27870,7 @@ var GestureRecognizer = class {
     }
   }
 };
-var MouseWheelGestureRecognizer = class extends GestureRecognizer {
+var MouseWheelGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
     __publicField(this, 'startEvent',);
@@ -27914,7 +27915,7 @@ var MouseWheelGestureRecognizer = class extends GestureRecognizer {
     this.onMouseWheelEnd(event,);
   }
 };
-var PanGestureRecognizer = class extends GestureRecognizer {
+var PanGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
     __publicField(this, 'startEvent',);
@@ -27989,7 +27990,7 @@ var PanGestureRecognizer = class extends GestureRecognizer {
     }
   }
 };
-var TapGestureRecognizer = class extends GestureRecognizer {
+var TapGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
     __publicField(this, 'eventType', 'tap',);
@@ -28019,7 +28020,7 @@ var TapGestureRecognizer = class extends GestureRecognizer {
     }
   }
 };
-var FramerEventSession = class {
+var FramerEventSession = /*#__PURE__*/ class {
   constructor(dispatcher, customOrigin,) {
     __publicField(this, 'events', [],);
     __publicField(this, 'recognizers', [],);
@@ -28179,7 +28180,7 @@ var FramerEventSession = class {
     return subtract(event.devicePoint, this.startEvent.devicePoint,);
   }
 };
-var MouseEventListener = class extends Component {
+var MouseEventListener = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domMouseDown', (originalEvent) => {
@@ -28231,7 +28232,7 @@ var MouseEventListener = class extends Component {
     safeWindow.removeEventListener('wheel', this.domMouseWheel,);
   }
 };
-var TouchEventListener = class extends Component {
+var TouchEventListener = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domTouchStart', (originalEvent) => {
@@ -29278,7 +29279,7 @@ function useObserveData() {
   const context = React4.useContext(DataObserverContext,);
   return !isNaN(context.update,);
 }
-var DataObserver = class extends Component {
+var DataObserver = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'observers', [],);
@@ -29318,7 +29319,7 @@ var DataObserver = class extends Component {
     },);
   }
 };
-var import_hoist_non_react_statics4 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
+var import_hoist_non_react_statics4 = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_hoist_non_react_statics_cjs(), 1,);
 function convertColorObject(prop,) {
   if (typeof prop === 'string' || isMotionValue2(prop,)) {
     return prop;
@@ -30436,7 +30437,7 @@ var withGeneratedLayoutId = (Component15) =>
       ref,
     },);
   },);
-var ContainerErrorBoundary = class extends Component {
+var ContainerErrorBoundary = /*#__PURE__*/ class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {
@@ -31408,7 +31409,7 @@ function Floating({
   );
 }
 var GeneratedComponentContext = /* @__PURE__ */ React4.createContext(void 0,);
-var LazyValue = class {
+var LazyValue = /*#__PURE__*/ class {
   constructor(resolver,) {
     this.resolver = resolver;
     __publicField(this, 'status',);
@@ -32111,7 +32112,7 @@ function stateCanSubmitForm(state,) {
 function preventDefault(e,) {
   e.preventDefault();
 }
-var FormContext = React4.createContext(void 0,);
+var FormContext = /*#__PURE__*/ React4.createContext(void 0,);
 var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   action,
   children,
@@ -32592,7 +32593,7 @@ var ResolveLinks = /* @__PURE__ */ React2.forwardRef(function ResolveLinksInner(
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
 },);
 var callEach = (...fns) => fns.forEach((fn) => fn && fn());
-var import_archy = __toESM(require_archy(), 1,);
+var import_archy = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_archy(), 1,);
 function getLogger(name,) {
   return {
     trace(...args) {
@@ -32639,7 +32640,7 @@ async function getCollection(collection, locale,) {
   }
   return collection;
 }
-var CompatibilityDatabaseCollection = class {
+var CompatibilityDatabaseCollection = /*#__PURE__*/ class {
   constructor(collection, locale,) {
     this.collection = collection;
     this.locale = locale;
@@ -32874,12 +32875,12 @@ function compare(left, right, collation,) {
   }
 }
 var INDEX_IDENTIFIER = 'index';
-var ScalarExpression = class {
+var ScalarExpression = /*#__PURE__*/ class {
   static from(expression, schema,) {
     return convertExpression(expression, schema, void 0,);
   }
 };
-var ScalarIdentifier = class extends ScalarExpression {
+var ScalarIdentifier = /*#__PURE__*/ class extends ScalarExpression {
   constructor(schema, name,) {
     super();
     this.schema = schema;
@@ -32911,7 +32912,7 @@ var ScalarIdentifier = class extends ScalarExpression {
     return false;
   }
 };
-var ScalarLiteralValue = class extends ScalarExpression {
+var ScalarLiteralValue = /*#__PURE__*/ class extends ScalarExpression {
   constructor(definition, value,) {
     super();
     this.definition = definition;
@@ -32993,7 +32994,7 @@ var ScalarLiteralValue = class extends ScalarExpression {
     return true;
   }
 };
-var ScalarFunctionCall = class extends ScalarExpression {
+var ScalarFunctionCall = /*#__PURE__*/ class extends ScalarExpression {
   constructor(argumentExpressions,) {
     super();
     this.argumentExpressions = argumentExpressions;
@@ -33019,7 +33020,7 @@ var ScalarFunctionCall = class extends ScalarExpression {
     },);
   }
 };
-var ScalarFunctionCallContains = class extends ScalarFunctionCall {
+var ScalarFunctionCallContains = /*#__PURE__*/ class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarFunctionCallContains.getDefinition(),);
@@ -33055,7 +33056,7 @@ var ScalarFunctionCallContains = class extends ScalarFunctionCall {
     };
   }
 };
-var ScalarFunctionCallStartsWith = class extends ScalarFunctionCall {
+var ScalarFunctionCallStartsWith = /*#__PURE__*/ class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarFunctionCallStartsWith.getDefinition(),);
@@ -33091,7 +33092,7 @@ var ScalarFunctionCallStartsWith = class extends ScalarFunctionCall {
     };
   }
 };
-var ScalarFunctionCallEndsWith = class extends ScalarFunctionCall {
+var ScalarFunctionCallEndsWith = /*#__PURE__*/ class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarFunctionCallEndsWith.getDefinition(),);
@@ -33127,7 +33128,7 @@ var ScalarFunctionCallEndsWith = class extends ScalarFunctionCall {
     };
   }
 };
-var ScalarCase = class extends ScalarExpression {
+var ScalarCase = /*#__PURE__*/ class extends ScalarExpression {
   constructor(valueExpression, conditions, elseExpression,) {
     super();
     this.valueExpression = valueExpression;
@@ -33223,13 +33224,13 @@ var ScalarCase = class extends ScalarExpression {
     },);
   }
 };
-var ScalarCaseCondition = class {
+var ScalarCaseCondition = /*#__PURE__*/ class {
   constructor(whenExpression, thenExpression,) {
     this.whenExpression = whenExpression;
     this.thenExpression = thenExpression;
   }
 };
-var ScalarUnaryOperation = class extends ScalarExpression {
+var ScalarUnaryOperation = /*#__PURE__*/ class extends ScalarExpression {
   constructor(valueExpression,) {
     super();
     this.valueExpression = valueExpression;
@@ -33242,7 +33243,7 @@ var ScalarUnaryOperation = class extends ScalarExpression {
     return this.valueExpression.canEvaluate();
   }
 };
-var ScalarUnaryOperationNot = class extends ScalarUnaryOperation {
+var ScalarUnaryOperationNot = /*#__PURE__*/ class extends ScalarUnaryOperation {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarUnaryOperationNot.getDefinition(),);
@@ -33264,7 +33265,7 @@ var ScalarUnaryOperationNot = class extends ScalarUnaryOperation {
     };
   }
 };
-var ScalarLogicalOperation = class extends ScalarExpression {
+var ScalarLogicalOperation = /*#__PURE__*/ class extends ScalarExpression {
   constructor(operandExpressions,) {
     super();
     this.operandExpressions = operandExpressions;
@@ -33289,7 +33290,7 @@ var ScalarLogicalOperation = class extends ScalarExpression {
     },);
   }
 };
-var ScalarLogicalOperationAnd = class extends ScalarLogicalOperation {
+var ScalarLogicalOperationAnd = /*#__PURE__*/ class extends ScalarLogicalOperation {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', 'AND',);
@@ -33305,7 +33306,7 @@ var ScalarLogicalOperationAnd = class extends ScalarLogicalOperation {
     };
   }
 };
-var ScalarLogicalOperationOr = class extends ScalarLogicalOperation {
+var ScalarLogicalOperationOr = /*#__PURE__*/ class extends ScalarLogicalOperation {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', 'OR',);
@@ -33321,7 +33322,7 @@ var ScalarLogicalOperationOr = class extends ScalarLogicalOperation {
     };
   }
 };
-var ScalarComparison = class extends ScalarExpression {
+var ScalarComparison = /*#__PURE__*/ class extends ScalarExpression {
   constructor(leftExpression, rightExpression,) {
     super();
     this.leftExpression = leftExpression;
@@ -33349,7 +33350,7 @@ var ScalarComparison = class extends ScalarExpression {
     return this.leftExpression.canEvaluate() && this.rightExpression.canEvaluate();
   }
 };
-var ScalarComparisonEquals = class extends ScalarComparison {
+var ScalarComparisonEquals = /*#__PURE__*/ class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '=',);
@@ -33363,7 +33364,7 @@ var ScalarComparisonEquals = class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonNotEquals = class extends ScalarComparison {
+var ScalarComparisonNotEquals = /*#__PURE__*/ class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '!=',);
@@ -33377,7 +33378,7 @@ var ScalarComparisonNotEquals = class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonLessThan = class extends ScalarComparison {
+var ScalarComparisonLessThan = /*#__PURE__*/ class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '<',);
@@ -33391,7 +33392,7 @@ var ScalarComparisonLessThan = class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonLessThanOrEqual = class extends ScalarComparison {
+var ScalarComparisonLessThanOrEqual = /*#__PURE__*/ class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '<=',);
@@ -33405,7 +33406,7 @@ var ScalarComparisonLessThanOrEqual = class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonGreaterThan = class extends ScalarComparison {
+var ScalarComparisonGreaterThan = /*#__PURE__*/ class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '>',);
@@ -33419,7 +33420,7 @@ var ScalarComparisonGreaterThan = class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonGreaterThanOrEqual = class extends ScalarComparison {
+var ScalarComparisonGreaterThanOrEqual = /*#__PURE__*/ class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '>=',);
@@ -33433,7 +33434,7 @@ var ScalarComparisonGreaterThanOrEqual = class extends ScalarComparison {
     };
   }
 };
-var ScalarTypeCast = class extends ScalarExpression {
+var ScalarTypeCast = /*#__PURE__*/ class extends ScalarExpression {
   constructor(valueExpression,) {
     super();
     this.valueExpression = valueExpression;
@@ -33449,7 +33450,7 @@ var ScalarTypeCast = class extends ScalarExpression {
     return this.valueExpression.canEvaluate();
   }
 };
-var ScalarTypeCastBoolean = class extends ScalarTypeCast {
+var ScalarTypeCastBoolean = /*#__PURE__*/ class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'BOOLEAN',);
@@ -33479,7 +33480,7 @@ function convertToBoolean(value,) {
   }
   return false;
 }
-var ScalarTypeCastDate = class extends ScalarTypeCast {
+var ScalarTypeCastDate = /*#__PURE__*/ class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'DATE',);
@@ -33517,7 +33518,7 @@ function convertToDate(value,) {
   }
   return null;
 }
-var ScalarTypeCastNumber = class extends ScalarTypeCast {
+var ScalarTypeCastNumber = /*#__PURE__*/ class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'NUMBER',);
@@ -33554,7 +33555,7 @@ function convertToNumber(value,) {
   }
   return null;
 }
-var ScalarTypeCastString = class extends ScalarTypeCast {
+var ScalarTypeCastString = /*#__PURE__*/ class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'STRING',);
@@ -34002,7 +34003,7 @@ function stringifyExecutionTime(self2, total,) {
 function stringifyItems(items,) {
   return `(items: ${items})`;
 }
-var QueryPlan = class {
+var QueryPlan = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'executionTime', 0,);
     __publicField(this, 'itemCount', 0,);
@@ -34015,7 +34016,7 @@ var QueryPlan = class {
     return result;
   }
 };
-var ScanCollectionPlan = class extends QueryPlan {
+var ScanCollectionPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(collection,) {
     super();
     this.collection = collection;
@@ -34029,7 +34030,7 @@ var ScanCollectionPlan = class extends QueryPlan {
     return this.collection.scanItems();
   }
 };
-var LookupIndexPlan = class extends QueryPlan {
+var LookupIndexPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(index, query,) {
     super();
     this.index = index;
@@ -34069,7 +34070,7 @@ var LookupIndexPlan = class extends QueryPlan {
     return this.index.lookupItems(this.query,);
   }
 };
-var UnionPlan = class extends QueryPlan {
+var UnionPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(childPlans,) {
     super();
     this.childPlans = childPlans;
@@ -34099,7 +34100,7 @@ var UnionPlan = class extends QueryPlan {
     return (result == null ? void 0 : result.items()) ?? [];
   }
 };
-var IntersectionPlan = class extends QueryPlan {
+var IntersectionPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(childPlans,) {
     super();
     this.childPlans = childPlans;
@@ -34129,7 +34130,7 @@ var IntersectionPlan = class extends QueryPlan {
     return (result == null ? void 0 : result.items()) ?? [];
   }
 };
-var ResolveItemsPlan = class extends QueryPlan {
+var ResolveItemsPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(childPlan, collection, richTextResolver, select,) {
     super();
     this.childPlan = childPlan;
@@ -34159,7 +34160,7 @@ var ResolveItemsPlan = class extends QueryPlan {
     return this.collection.resolveItems(childPointers,);
   }
 };
-var FilterItemsPlan = class extends QueryPlan {
+var FilterItemsPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(childPlan, filterExpression,) {
     super();
     this.childPlan = childPlan;
@@ -34181,7 +34182,7 @@ var FilterItemsPlan = class extends QueryPlan {
     },);
   }
 };
-var SortItemsPlan = class extends QueryPlan {
+var SortItemsPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(childPlan, orderExpressions, collection,) {
     super();
     this.childPlan = childPlan;
@@ -34230,14 +34231,14 @@ var SortItemsPlan = class extends QueryPlan {
     },);
   }
 };
-var ScalarOrderExpression = class {
+var ScalarOrderExpression = /*#__PURE__*/ class {
   constructor(expression, direction, collation,) {
     this.expression = expression;
     this.direction = direction;
     this.collation = collation;
   }
 };
-var SliceItemsPlan = class extends QueryPlan {
+var SliceItemsPlan = /*#__PURE__*/ class extends QueryPlan {
   constructor(childPlan, offsetExpression, limitExpression,) {
     super();
     this.childPlan = childPlan;
@@ -34274,7 +34275,7 @@ var SliceItemsPlan = class extends QueryPlan {
     return childItems.slice(offset, offset + limit,);
   }
 };
-var DatabaseItemMap = class extends Map {
+var DatabaseItemMap = /*#__PURE__*/ class extends Map {
   constructor(items = [],) {
     super();
     for (const item of items) {
@@ -34305,7 +34306,7 @@ var DatabaseItemMap = class extends Map {
     return [...values,];
   }
 };
-var RichTextResolver = class {
+var RichTextResolver = /*#__PURE__*/ class {
   constructor(collection,) {
     this.collection = collection;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
@@ -34456,7 +34457,7 @@ function getDatabaseCollection({
   }
   assertNever(data2, 'Unsupported collection type',);
 }
-var QueryEngine = class {
+var QueryEngine = /*#__PURE__*/ class {
   async query(query, locale,) {
     const collection = getDatabaseCollection(query.from, locale,);
     const richTextResolver = new RichTextResolver(collection,);
@@ -34687,7 +34688,7 @@ function createScanCollectionPlan(collection, expression,) {
   const plan = new ScanCollectionPlan(collection,);
   return new FilterItemsPlan(plan, expression,);
 }
-var AnimationCollector = class {
+var AnimationCollector = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
   }
@@ -35312,7 +35313,7 @@ function usePrototypeNavigate({
     return false;
   };
 }
-var QueryCache = class {
+var QueryCache = /*#__PURE__*/ class {
   constructor(queryEngine2,) {
     this.queryEngine = queryEngine2;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
@@ -36428,7 +36429,7 @@ var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2) => {
   return FontSourceNames2;
 })(FontSourceNames || {},);
 var systemFontFamilyName = 'System Default';
-var LocalFontSource = class {
+var LocalFontSource = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'name', 'local',/* Local */
     );
@@ -36562,7 +36563,7 @@ function createVariantName(weight, style,) {
   }
   return `${fontWeightNames[weight]}`;
 }
-var import_process3 = __toESM(require_browser(), 1,);
+var import_process3 = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_browser(), 1,);
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
@@ -36570,7 +36571,7 @@ function getCustomFontName(fileName, properties,) {
   const variant = properties.font.preferredSubFamily === '' ? properties.font.fontSubFamily : properties.font.preferredSubFamily;
   return `${fontFamily} ${variant}`;
 }
-var CustomFontSource = class {
+var CustomFontSource = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'name', 'custom',/* Custom */
     );
@@ -36738,7 +36739,7 @@ var weightNameToNumber = {
 };
 var weightNames = /* @__PURE__ */ Object.keys(weightNameToNumber,);
 var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic',].join('|',)})`, 'u',))();
-var FontshareSource = class {
+var FontshareSource = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'name', 'fontshare',/* Fontshare */
     );
@@ -36876,7 +36877,7 @@ var weightNameToNumber2 = {
   ExtraBold: 800,
   Black: 900,
 };
-var FramerFontSource = class {
+var FramerFontSource = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'name', 'framer',/* Framer */
     );
@@ -36937,7 +36938,7 @@ var FramerFontSource = class {
   }
 };
 var googleFontSelectorPrefix = 'GF;';
-var GoogleFontSource = class {
+var GoogleFontSource = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'name', 'google',/* Google */
     );
@@ -37041,10 +37042,10 @@ function mapToKnownCategory2(category,) {
   if (!category) return void 0;
   return categoryMapping[category];
 }
-var import_fontfaceobserver = __toESM(require_fontfaceobserver_standalone(), 1,);
+var import_fontfaceobserver = /*#__PURE__*/ __toESM(/*#__PURE__*/ require_fontfaceobserver_standalone(), 1,);
 var FONT_LOADING_TIMEOUT = 5e3;
 var MAX_RETRIES = 3;
-var FontLoadingError = class extends Error {
+var FontLoadingError = /*#__PURE__*/ class extends Error {
   constructor(message,) {
     super(message,);
     this.name = 'FontLoadingError';
@@ -37117,7 +37118,7 @@ async function isFontReady(family, style, weight,) {
     }`,);
   }
 }
-var FontStore = class {
+var FontStore = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'enabled', false,);
     __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
@@ -37647,24 +37648,24 @@ function css(selector, declaration,) {
   css2.variable = variable;
 })(css || (css = {}),);
 var sharedInputCSS = [
-  css(`.${inputClassName}`, {
-    padding: css.variable(Var.Padding,),
+  /*#__PURE__*/ css(`.${inputClassName}`, {
+    padding: /*#__PURE__*/ css.variable(Var.Padding,),
     background: 'transparent',
-    fontFamily: css.variable(Var.FontFamily,),
-    fontWeight: css.variable(Var.FontWeight,),
-    fontSize: css.variable(Var.FontSize,),
-    color: css.variable(Var.FontColor,),
+    fontFamily: /*#__PURE__*/ css.variable(Var.FontFamily,),
+    fontWeight: /*#__PURE__*/ css.variable(Var.FontWeight,),
+    fontSize: /*#__PURE__*/ css.variable(Var.FontSize,),
+    color: /*#__PURE__*/ css.variable(Var.FontColor,),
     border: 'none',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     width: '100%',
     height: '100%',
-    letterSpacing: css.variable(Var.FontLetterSpacing,),
-    textAlign: css.variable(Var.FontTextAlignment,),
-    lineHeight: css.variable(Var.FontLineHeight,),
+    letterSpacing: /*#__PURE__*/ css.variable(Var.FontLetterSpacing,),
+    textAlign: /*#__PURE__*/ css.variable(Var.FontTextAlignment,),
+    lineHeight: /*#__PURE__*/ css.variable(Var.FontLineHeight,),
   },),
-  css(`.${inputClassName}:focus-visible`, {
+  /*#__PURE__*/ css(`.${inputClassName}:focus-visible`, {
     outline: 'none',
   },),
 ];
@@ -37762,7 +37763,7 @@ var inputIconCSSDeclaration = {
   width: `${iconSize}px`,
   boxSizing: 'content-box',
   // Offset the icon inwards by the padding.
-  margin: css.variable(Var.Padding,),
+  margin: /*#__PURE__*/ css.variable(Var.Padding,),
   marginLeft: 0,
   border: 'none',
   pointerEvents: 'none',
@@ -37770,7 +37771,7 @@ var inputIconCSSDeclaration = {
   backgroundSize: `${iconSize}px`,
   maskRepeat: 'no-repeat',
   maskSize: `${iconSize}px`,
-  backgroundColor: css.variable(Var.IconColor,),
+  backgroundColor: /*#__PURE__*/ css.variable(Var.IconColor,),
 };
 var passwordManagerIgnoreDataProps = {
   // 1Password
@@ -38363,7 +38364,7 @@ function convertCodeComponentContainer(componentDefinitionProvider, node, conver
     ),
   ];
 }
-var CodeComponentPresentation = class {
+var CodeComponentPresentation = /*#__PURE__*/ class {
   constructor(id3, componentIdentifier, packageVersion, props, children, codeOverrideIdentifier,) {
     this.id = id3;
     this.componentIdentifier = componentIdentifier;
@@ -39075,7 +39076,7 @@ var ImagePatternElement = ({
   },);
 };
 var useDOM = /* @__PURE__ */ isBrowser2();
-var SharedSVGEntry = class {
+var SharedSVGEntry = /*#__PURE__*/ class {
   constructor(id3, svg, innerHTML, viewBox, count = 0,) {
     this.id = id3;
     this.svg = svg;
@@ -39084,7 +39085,7 @@ var SharedSVGEntry = class {
     this.count = count;
   }
 };
-var SharedSVGManager = class {
+var SharedSVGManager = /*#__PURE__*/ class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
   }
@@ -40077,7 +40078,7 @@ function getTabIndexProps(tabIndex,) {
   };
 }
 var keys22 = /* @__PURE__ */ new Map();
-var InternalID = class {
+var InternalID = /*#__PURE__*/ class {
   constructor(id3,) {
     this.id = id3;
     __publicField(this, '_link', null,);
@@ -40108,7 +40109,7 @@ var InternalID = class {
   }
 };
 var PathSegmentOuter = /* @__PURE__ */ (() => {
-  const _PathSegment = class {
+  const _PathSegment = /*#__PURE__*/ class {
     constructor(value,) {
       __publicField(this, '__class', 'PathSegment',);
       __publicField(this, 'x', 0,);
@@ -40363,7 +40364,7 @@ function transformString(transform2,) {
   }
   return result;
 }
-var LinearGradientElement = class extends Component {
+var LinearGradientElement = /*#__PURE__*/ class extends Component {
   render() {
     const {
       id: id3,
@@ -40389,7 +40390,7 @@ var LinearGradientElement = class extends Component {
     },);
   }
 };
-var RadialGradientElement = class extends Component {
+var RadialGradientElement = /*#__PURE__*/ class extends Component {
   render() {
     const {
       centerAnchorX,
@@ -40417,7 +40418,7 @@ var RadialGradientElement = class extends Component {
     },);
   }
 };
-var SVGRoot = class extends Component {
+var SVGRoot = /*#__PURE__*/ class extends Component {
   render() {
     const {
       children,

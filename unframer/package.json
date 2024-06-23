@@ -26,6 +26,9 @@
             "module": "./esm/index.js",
             "default": "./dist/index.js"
         },
+        "./src/framer.js": {
+            "default": "./src/framer.js"
+        },
         "./package.json": "./package.json"
     },
     "keywords": [],
