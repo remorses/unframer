@@ -112,20 +112,37 @@ const purePlugin = ({}: { types: typeof t }): PluginObj => ({
                 annotateAsPure(path)
             }
         },
-        CallExpression(path) {
-            if (path.getFunctionParent()) return
-            const { parent } = path
-            if (
-                t.isVariableDeclarator(parent) ||
-                t.isAssignmentExpression(parent) ||
-                t.isObjectProperty(parent) ||
-                t.isObjectProperty(parent) ||
-                t.isArrayExpression(parent) ||
-                t.isCallExpression(parent)
-            ) {
-                annotateAsPure(path)
-            }
-        },
+        // VariableDeclaration(path) {
+        //     if (path.getFunctionParent()) return
+        //     // if it is a function declaration, return
+        //     if (
+        //         path.node.declarations.some(
+        //             (d) =>
+        //                 t.isVariableDeclarator(d) &&
+        //                 d.init &&
+        //                 (t.isFunction(d.init) || t.isCallExpression(d.init)),
+        //         )
+        //     ) {
+        //         return
+        //     }
+
+        //     annotateAsPure(path.node)
+        // },
+
+    //     CallExpression(path) {
+    //         if (path.getFunctionParent()) return
+    //         const { parent } = path
+    //         if (
+    //             t.isVariableDeclarator(parent) ||
+    //             t.isAssignmentExpression(parent) ||
+    //             t.isObjectProperty(parent) ||
+    //             t.isObjectProperty(parent) ||
+    //             t.isArrayExpression(parent) ||
+    //             t.isCallExpression(parent)
+    //         ) {
+    //             annotateAsPure(path)
+    //         }
+    //     },
     },
 })
 
@@ -137,7 +154,7 @@ export async function fixFramerCode({ resultFile }) {
         plugins: [
             // '@babel/plugin-transform-react-pure-annotations',
             babelPluginDeduplicateImports,
-            // purePlugin,
+            purePlugin,
         ],
         filename: '',
         compact: false,
