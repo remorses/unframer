@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.DDH34LCB.js
+// https :https://app.framerstatic.com/framer.L5DJURT5.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -29623,7 +29623,6 @@ function usePresenceAnimation(
   const [isPresent2, safeToRemove,] = usePresence();
   const lastPresence = useRef(false,);
   const effect = useConstant2(() => {
-    var _a;
     const base = initial ?? style;
     if (!isObject2(base,)) {
       return {
@@ -29632,7 +29631,7 @@ function usePresenceAnimation(
     }
     const defaults = {};
     for (const key7 in base) {
-      const value = isObject2(base,) ? (_a = asRecord(base,)) == null ? void 0 : _a[key7] : void 0;
+      const value = isObject2(base,) ? base[key7] : void 0;
       if (!isNumber2(value,)) continue;
       defaults[key7] = value;
     }
@@ -29861,6 +29860,7 @@ function useStyleAppearEffect(options, ref,) {
       }
       return new Promise((resolve) => {
         if (shouldReduceMotion && key7 !== 'opacity') {
+          if (isNumber2(toValue,)) effect.values[key7].set(toValue,);
           resolve();
         } else {
           const opts = {
@@ -32074,6 +32074,9 @@ function randomCharacters(count,) {
   }
   return result;
 }
+function getEncodedFormFieldsHeader(data2,) {
+  return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
+}
 function formReducer({
   state,
 }, {
@@ -32197,6 +32200,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
         type: 'error',
       },);
       (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
+      console.error(error,);
     }
   };
   const handleKeyDown = (event) => {
@@ -32243,14 +32247,13 @@ async function submitForm(action, data2, projectHash,) {
   if (!proofOfWork) {
     throw new Error('Failed to calculate proof of work',);
   }
-  const formFields = Array.from(data2.keys(),);
   const response = await fetch(action, {
     body: data2,
     method: 'POST',
     headers: {
       'Framer-Site-Id': projectHash,
       'Framer-POW': proofOfWork.secret,
-      'Framer-Form-Fields': formFields.join(',',),
+      'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
     },
   },);
   if (response.ok) {
@@ -37865,8 +37868,11 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
 var iconSize2 = 16;
 var textInputWrapperClassName = 'framer-form-text-input';
 var defaultTextareaResizerIcon =
-  /* @__PURE__ */ (() =>
-    `"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14'><path d='m1.5 8 7-7M9 5.5l-3 3' stroke='%23999' stroke-width='1.5' stroke-linecap='round'></path></svg>"`)();
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>';
+var defaultDateIconMaskImage =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>';
+var defaultTimeIconMaskImage =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M2.5 8a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.75 8.25v-3m0 3h2"/></svg>';
 var styles = /* @__PURE__ */ (() => [
   ...sharedInputCSS,
   ...inputBorderCSS,
@@ -37913,7 +37919,7 @@ var styles = /* @__PURE__ */ (() => [
   // possible in CSS to target the resize handle in Firefox, so FF will always
   // show the native resize handle.
   css(`.${textInputWrapperClassName} textarea::-webkit-resizer`, {
-    background: `no-repeat url(${defaultTextareaResizerIcon})`,
+    background: `no-repeat url('${defaultTextareaResizerIcon}')`,
   },),
   css(`.${textInputWrapperClassName} textarea::-webkit-scrollbar`, {
     cursor: 'pointer',
@@ -37944,18 +37950,12 @@ var styles = /* @__PURE__ */ (() => [
     },
   ),
   css(`.${textInputWrapperClassName} .${inputClassName}[type="date"]::before`, {
-    maskImage: css.variable(
-      '--framer-input-icon-mask-image',
-      `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>')`,
-    ),
+    maskImage: css.variable('--framer-input-icon-mask-image', `url('${defaultDateIconMaskImage}')`,),
     backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
   css(`.${textInputWrapperClassName} .${inputClassName}[type="time"]::before`, {
-    maskImage: css.variable(
-      '--framer-input-icon-mask-image',
-      `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M2.5 8a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.75 8.25v-3m0 3h2"/></svg>')`,
-    ),
+    maskImage: css.variable('--framer-input-icon-mask-image', `url('${defaultTimeIconMaskImage}')`,),
     backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
@@ -38014,7 +38014,7 @@ var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput
   },);
 },);
 var defaultCheckedIcon =
-  `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M 4 8 L 6.5 10.5 L 11.5 5.5" fill="transparent" stroke-width="2" stroke="rgb(255, 255, 255)" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
+  'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M 4 8 L 6.5 10.5 L 11.5 5.5" fill="transparent" stroke-width="2" stroke="rgb(255, 255, 255)" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
 var borderRadius =
   `var(${'--framer-input-border-radius-top-left'}) var(${'--framer-input-border-radius-top-right'}) var(${'--framer-input-border-radius-bottom-right'}) var(${'--framer-input-border-radius-bottom-left'})`;
 var styles2 = /* @__PURE__ */ (() => [
@@ -38156,6 +38156,7 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
     ...rest
   } = props;
   const eventHandlers = useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,);
+  const key7 = Array.isArray(defaultValue,) ? defaultValue[0] : defaultValue;
   return /* @__PURE__ */ jsx(motion.div, {
     ref: measureRef,
     style,
@@ -38180,11 +38181,14 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
             }, index,);
         }
       },),
-    }, defaultValue,),
+    }, key7,),
   },);
 },);
 var selectWrapperClassName = 'framer-form-select-wrapper';
 var selectArrowSize = 16;
+var defaultSelectCaretMaskImage =
+  /* @__PURE__ */ (() =>
+    `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>`)();
 var styles3 = /* @__PURE__ */ (() => [
   ...sharedInputCSS,
   ...inputBorderCSS,
@@ -38234,10 +38238,7 @@ var styles3 = /* @__PURE__ */ (() => [
     maskPosition: `${iconSpacing}px center`,
     backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
-    maskImage: css.variable(
-      '--framer-input-icon-mask-image',
-      `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${selectArrowSize}" height="${selectArrowSize}"><path d="M 3.5 6 L 8 10.5 L 12.5 6" fill="transparent" stroke-width="1.5" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round"></path></svg>')`,
-    ),
+    maskImage: css.variable('--framer-input-icon-mask-image', `url('${defaultSelectCaretMaskImage}')`,),
   },),
   css(`.${selectWrapperClassName} select:required:invalid`, {
     color: css.variable('--framer-input-invalid-text-color',/* InvalidTextColor */
