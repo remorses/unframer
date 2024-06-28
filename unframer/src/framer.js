@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.L5DJURT5.js
+// https :https://app.framerstatic.com/framer.VEJ3JK5Y.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18223,6 +18223,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Cursor'] = 'cursor';
   ControlType2['Padding'] = 'padding';
   ControlType2['BorderRadius'] = 'borderradius';
+  ControlType2['CollectionReference'] = 'collectionreference';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -19128,6 +19129,7 @@ function getControlDefaultValue(control,) {
   try {
     switch (control.type) {
       case 'string':
+      case 'collectionreference':
       case 'color':
       case 'date':
       case 'link':
