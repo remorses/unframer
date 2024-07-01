@@ -238,6 +238,9 @@ importers:
       '@types/node':
         specifier: ^20.5.7
         version: 20.5.7
+      '@types/react':
+        specifier: ^18.3.3
+        version: 18.3.3
       '@xmorse/deployment-utils':
         specifier: ^0.1.0
         version: 0.1.0
