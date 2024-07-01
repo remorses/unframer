@@ -1,5 +1,12 @@
 # unframer
 
+## 2.6.1
+
+### Patch Changes
+
+-   24b07af: Update framer to 2.4.1, update framer motion to 11.2.10
+-   e0b0902: Remove pure comments, not supported by rollup
+
 ## 2.6.0
 
 ### Minor Changes
