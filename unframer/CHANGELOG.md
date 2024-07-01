@@ -1,5 +1,15 @@
 # unframer
 
+## 2.6.0
+
+### Minor Changes
+
+-   Add @vite-ignore comments where there are webpack ignore comments
+
+### Patch Changes
+
+-   0be4ff2: Update framer to 2.4.1, update framer motion to 11.2.10
+
 ## 2.5.3
 
 ### Patch Changes
