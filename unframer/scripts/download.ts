@@ -154,7 +154,7 @@ export async function fixFramerCode({ resultFile }) {
         plugins: [
             // '@babel/plugin-transform-react-pure-annotations',
             babelPluginDeduplicateImports,
-            purePlugin,
+            // purePlugin,
         ],
         filename: '',
         compact: false,

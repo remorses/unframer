@@ -146,7 +146,7 @@ var SwitchLayoutGroupContext = createContext({},);
 var LazyContext = createContext({
   strict: false,
 },);
-var Queue = /*#__PURE__*/ class {
+var Queue = class {
   constructor() {
     this.order = [];
     this.scheduled = /* @__PURE__ */ new Set();
@@ -1606,7 +1606,7 @@ function flushKeyframeResolvers() {
   readAllKeyframes();
   measureAllKeyframes();
 }
-var KeyframeResolver = /*#__PURE__*/ class {
+var KeyframeResolver = class {
   constructor(unresolvedKeyframes, onComplete, name, motionValue2, element, isAsync = false,) {
     this.isComplete = false;
     this.isAsync = false;
@@ -1878,7 +1878,7 @@ function getFinalKeyframe(keyframes2, {
   const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
   return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
 }
-var BaseAnimation = /*#__PURE__*/ class {
+var BaseAnimation = class {
   constructor({
     autoplay = true,
     delay: delay2 = 0,
@@ -2011,7 +2011,7 @@ var generators = {
   spring,
 };
 var percentToProgress = (percent2) => percent2 / 100;
-var MainThreadAnimation = /*#__PURE__*/ class extends BaseAnimation {
+var MainThreadAnimation = class extends BaseAnimation {
   constructor({
     KeyframeResolver: KeyframeResolver$1 = KeyframeResolver,
     ...options
@@ -2491,7 +2491,7 @@ function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, n
     }
   }
 }
-var DOMKeyframesResolver = /*#__PURE__*/ class extends KeyframeResolver {
+var DOMKeyframesResolver = class extends KeyframeResolver {
   constructor(unresolvedKeyframes, onComplete, name, motionValue2,) {
     super(
       unresolvedKeyframes,
@@ -2702,7 +2702,7 @@ function pregenerateKeyframes(keyframes2, options,) {
     ease: 'linear',
   };
 }
-var AcceleratedAnimation = /*#__PURE__*/ class extends BaseAnimation {
+var AcceleratedAnimation = class extends BaseAnimation {
   constructor(options,) {
     super(options,);
     const {
@@ -2974,7 +2974,7 @@ function moveItem([...arr], fromIndex, toIndex,) {
   }
   return arr;
 }
-var SubscriptionManager = /*#__PURE__*/ class {
+var SubscriptionManager = class {
   constructor() {
     this.subscriptions = [];
   }
@@ -3008,7 +3008,7 @@ var isFloat = (value) => {
 var collectMotionValues = {
   current: void 0,
 };
-var MotionValue = /*#__PURE__*/ class {
+var MotionValue = class {
   /**
    * @param init - The initiating value
    * @param config - Optional configuration options
@@ -3342,7 +3342,7 @@ function observeTimeline(update, timeline,) {
   return () => cancelFrame(onFrame,);
 }
 var supportsScrollTimeline = memo(() => window.ScrollTimeline !== void 0);
-var GroupPlaybackControls = /*#__PURE__*/ class {
+var GroupPlaybackControls = class {
   constructor(animations2,) {
     this.stop = () => this.runAll('stop',);
     this.animations = animations2.filter(Boolean,);
@@ -3871,14 +3871,14 @@ function createState() {
     exit: createTypeState(),
   };
 }
-var Feature = /*#__PURE__*/ class {
+var Feature = class {
   constructor(node,) {
     this.isMounted = false;
     this.node = node;
   }
   update() {}
 };
-var AnimationFeature = /*#__PURE__*/ class extends Feature {
+var AnimationFeature = class extends Feature {
   /**
    * We dynamically generate the AnimationState manager as it contains a reference
    * to the underlying animation library. We only want to load that if we load this,
@@ -3917,7 +3917,7 @@ var AnimationFeature = /*#__PURE__*/ class extends Feature {
   unmount() {}
 };
 var id = 0;
-var ExitAnimationFeature = /*#__PURE__*/ class extends Feature {
+var ExitAnimationFeature = class extends Feature {
   constructor() {
     super(...arguments,);
     this.id = id++;
@@ -4035,7 +4035,7 @@ function isPresent(context,) {
   return context === null ? true : context.isPresent;
 }
 var compareByDepth = (a, b,) => a.depth - b.depth;
-var FlatTree = /*#__PURE__*/ class {
+var FlatTree = class {
   constructor() {
     this.children = [];
     this.isDirty = false;
@@ -4157,7 +4157,7 @@ function getClosestProjectingNode(visualElement,) {
   if (!visualElement) return void 0;
   return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
 }
-var VisualElement = /*#__PURE__*/ class {
+var VisualElement = class {
   /**
    * This method takes React props and returns found MotionValues. For example, HTML
    * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
@@ -5053,13 +5053,13 @@ function addHoverEvent(node, isActive,) {
     passive: !node.getProps()[callbackName],
   },);
 }
-var HoverGesture = /*#__PURE__*/ class extends Feature {
+var HoverGesture = class extends Feature {
   mount() {
     this.unmount = pipe(addHoverEvent(this.node, true,), addHoverEvent(this.node, false,),);
   }
   unmount() {}
 };
-var FocusGesture = /*#__PURE__*/ class extends Feature {
+var FocusGesture = class extends Feature {
   constructor() {
     super(...arguments,);
     this.isActive = false;
@@ -5102,7 +5102,7 @@ function fireSyntheticPointerEvent(name, handler,) {
   const syntheticPointerEvent = new PointerEvent('pointer' + name,);
   handler(syntheticPointerEvent, extractEventInfo(syntheticPointerEvent,),);
 }
-var PressGesture = /*#__PURE__*/ class extends Feature {
+var PressGesture = class extends Feature {
   constructor() {
     super(...arguments,);
     this.removeStartListeners = noop;
@@ -5257,7 +5257,7 @@ var thresholdNames = {
   some: 0,
   all: 1,
 };
-var InViewFeature = /*#__PURE__*/ class extends Feature {
+var InViewFeature = class extends Feature {
   constructor() {
     super(...arguments,);
     this.hasEnteredView = false;
@@ -5339,7 +5339,7 @@ var gestureAnimations = {
     Feature: HoverGesture,
   },
 };
-var PanSession = /*#__PURE__*/ class {
+var PanSession = class {
   constructor(event, handlers, {
     transformPagePoint,
     contextWindow,
@@ -5755,7 +5755,7 @@ var getContextWindow = ({
   return current ? current.ownerDocument.defaultView : null;
 };
 var elementDragControls = /* @__PURE__ */ new WeakMap();
-var VisualElementDragControls = /*#__PURE__*/ class {
+var VisualElementDragControls = class {
   constructor(visualElement,) {
     this.openGlobalLock = null;
     this.isDragging = false;
@@ -6195,7 +6195,7 @@ function getCurrentDirection(offset, lockThreshold = 10,) {
   }
   return direction;
 }
-var DragGesture = /*#__PURE__*/ class extends Feature {
+var DragGesture = class extends Feature {
   constructor(node,) {
     super(node,);
     this.removeGroupControls = noop;
@@ -6221,7 +6221,7 @@ var asyncHandler = (handler) => (event, info,) => {
     frame.postRender(() => handler(event, info,));
   }
 };
-var PanGesture = /*#__PURE__*/ class extends Feature {
+var PanGesture = class extends Feature {
   constructor() {
     super(...arguments,);
     this.removePointerDownListener = noop;
@@ -6313,7 +6313,7 @@ var correctBoxShadow = {
     return template(shadow,);
   },
 };
-var MeasureLayoutWithContext = /*#__PURE__*/ class extends Component {
+var MeasureLayoutWithContext = class extends Component {
   /**
    * This only mounts projection nodes for components that
    * need measuring, we might want to do it for all components
@@ -6537,7 +6537,7 @@ function boxEqualsRounded(a, b,) {
 function aspectRatio(box,) {
   return calcLength(box.x,) / calcLength(box.y,);
 }
-var NodeStack = /*#__PURE__*/ class {
+var NodeStack = class {
   constructor() {
     this.members = [];
   }
@@ -7842,7 +7842,7 @@ var drag = {
     MeasureLayout,
   },
 };
-var DOMVisualElement = /*#__PURE__*/ class extends VisualElement {
+var DOMVisualElement = class extends VisualElement {
   constructor() {
     super(...arguments,);
     this.KeyframeResolver = DOMKeyframesResolver;
@@ -7864,7 +7864,7 @@ var DOMVisualElement = /*#__PURE__*/ class extends VisualElement {
 function getComputedStyle2(element,) {
   return window.getComputedStyle(element,);
 }
-var HTMLVisualElement = /*#__PURE__*/ class extends DOMVisualElement {
+var HTMLVisualElement = class extends DOMVisualElement {
   constructor() {
     super(...arguments,);
     this.type = 'html';
@@ -7908,7 +7908,7 @@ var HTMLVisualElement = /*#__PURE__*/ class extends DOMVisualElement {
     renderHTML(instance, renderState, styleProp, projection,);
   }
 };
-var SVGVisualElement = /*#__PURE__*/ class extends DOMVisualElement {
+var SVGVisualElement = class extends DOMVisualElement {
   constructor() {
     super(...arguments,);
     this.type = 'svg';
@@ -8000,7 +8000,7 @@ function useForceUpdate() {
 function useUnmountEffect(callback,) {
   return useEffect(() => () => callback(), [],);
 }
-var PopChildMeasure = /*#__PURE__*/ class extends React2.Component {
+var PopChildMeasure = class extends React2.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
@@ -9115,7 +9115,7 @@ function useTime() {
   useAnimationFrame((t) => time2.set(t,));
   return time2;
 }
-var WillChangeMotionValue = /*#__PURE__*/ class extends MotionValue {
+var WillChangeMotionValue = class extends MotionValue {
   constructor() {
     super(...arguments,);
     this.members = [];
@@ -9640,7 +9640,7 @@ function useInView(ref, {
   }, [root, ref, margin, once, amount,],);
   return isInView;
 }
-var DragControls = /*#__PURE__*/ class {
+var DragControls = class {
   constructor() {
     this.componentControls = /* @__PURE__ */ new Set();
   }
@@ -9832,7 +9832,7 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
   }
 }
 var createObject = () => ({});
-var StateVisualElement = /*#__PURE__*/ class extends VisualElement {
+var StateVisualElement = class extends VisualElement {
   build() {}
   measureInstanceViewportBox() {
     return createBox();
@@ -10011,7 +10011,7 @@ var require_hsluv = __commonJS({
       value: true,
     },);
     exports.Hsluv = void 0;
-    var Hsluv2 = /*#__PURE__*/ class {
+    var Hsluv2 = class {
       constructor() {
         this.hex = '#000000';
         this.rgb_r = 0;
@@ -11686,9 +11686,9 @@ function renderPage(Page4, defaultPageStyle,) {
   };
   return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
 }
-var NotFoundError = /*#__PURE__*/ class extends Error {};
-var ErrorBoundaryCaughtError = /*#__PURE__*/ class extends Error {};
-var ErrorBoundary = /*#__PURE__*/ class extends Component {
+var NotFoundError = class extends Error {};
+var ErrorBoundaryCaughtError = class extends Error {};
+var ErrorBoundary = class extends Component {
   constructor(props,) {
     super(props,);
     this.state = {
@@ -12833,7 +12833,7 @@ function RoutesProvider({
     children,
   },);
 }
-var SuspenseErrorBoundary = /*#__PURE__*/ class extends Component {
+var SuspenseErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     this.state = {
@@ -13435,7 +13435,7 @@ function deprecationWarning(removedItem, removalVersion, replacement,) {
   const warningText = `Deprecation warning: ${removedItem} will be removed in version ${removalVersion}${replacementText}.`;
   warnOnce2(warningText,);
 }
-var Observers = /*#__PURE__*/ class {
+var Observers = class {
   constructor() {
     __publicField(this, 'observers', /* @__PURE__ */ new Set(),);
     __publicField(this, 'transactions', {},);
@@ -13555,7 +13555,7 @@ function animatableInterpolation(value, currentInterpolation,) {
     },
   };
 }
-var AnimatableValue = /*#__PURE__*/ class {
+var AnimatableValue = class {
   constructor(value,) {
     this.value = value;
     __publicField(this, 'observers', new Observers(),);
@@ -13747,7 +13747,7 @@ function controlPointsForCurve(curve,) {
       return [0.42, 0, 0.58, 1,];
   }
 }
-var BezierAnimator = /*#__PURE__*/ class {
+var BezierAnimator = class {
   constructor(options, interpolation,) {
     this.interpolation = interpolation;
     __publicField(this, 'unitBezier',);
@@ -13802,7 +13802,7 @@ var BezierAnimator = /*#__PURE__*/ class {
     return 1 / (200 * duration);
   }
 };
-var UnitBezier = /*#__PURE__*/ class {
+var UnitBezier = class {
   constructor(point1, point2,) {
     __publicField(this, 'a',);
     __publicField(this, 'b',);
@@ -13848,7 +13848,7 @@ var UnitBezier = /*#__PURE__*/ class {
     return t2;
   }
 };
-var Integrator = /*#__PURE__*/ class {
+var Integrator = class {
   constructor(accelerationFunction,) {
     __publicField(this, 'accelerationForState',);
     this.accelerationForState = accelerationFunction;
@@ -13883,7 +13883,7 @@ var Integrator = /*#__PURE__*/ class {
     return output;
   }
 };
-var FrictionAnimator = /*#__PURE__*/ class {
+var FrictionAnimator = class {
   constructor(options,) {
     __publicField(this, 'options',);
     __publicField(this, 'state',);
@@ -14061,7 +14061,7 @@ function isDampingDurationSpringOptions(options,) {
   }
   return typeof options.dampingRatio === 'number' || typeof options.duration === 'number' || typeof options.mass === 'number';
 }
-var SpringAnimator = /*#__PURE__*/ class {
+var SpringAnimator = class {
   constructor(options, interpolation,) {
     this.interpolation = interpolation;
     __publicField(this, 'options',);
@@ -14148,7 +14148,7 @@ var Defaults = {
     tolerance: 1,
   },
 };
-var InertialScrollAnimator = /*#__PURE__*/ class {
+var InertialScrollAnimator = class {
   constructor(options,) {
     __publicField(this, 'options',);
     __publicField(this, 'current',);
@@ -15390,7 +15390,7 @@ var DefaultInterpolationOptions = {
   colorModel: 'husl',
   /* HUSL */
 };
-var ValueInterpolation = /*#__PURE__*/ class {
+var ValueInterpolation = class {
   /**
    * @internal
    */
@@ -15443,7 +15443,7 @@ var Defaults2 = /* @__PURE__ */ (() => ({
   delta: 1 / 60,
   maxValues: 1e4,
 }))();
-var PrecalculatedAnimator = /*#__PURE__*/ class {
+var PrecalculatedAnimator = class {
   constructor(options,) {
     __publicField(this, 'animator',);
     __publicField(this, 'values',);
@@ -15510,7 +15510,7 @@ var PrecalculatedAnimator = /*#__PURE__*/ class {
   }
 };
 var EventEmitter3 = /* @__PURE__ */ (() => require_eventemitter3().EventEmitter)();
-var EventEmitter = /*#__PURE__*/ class {
+var EventEmitter = class {
   constructor() {
     __publicField(this, '_emitter', new EventEmitter3(),);
   }
@@ -15626,7 +15626,7 @@ var _raf = (f) => {
 var __raf = /* @__PURE__ */ (() => safeWindow['requestAnimationFrame'] || _raf)();
 var raf = (f) => __raf(f,);
 var LoopTimeStep = /* @__PURE__ */ (() => 1 / 60)();
-var Loop = /*#__PURE__*/ class extends EventEmitter {
+var Loop = class extends EventEmitter {
   /**
    * @internal
    */
@@ -15833,7 +15833,7 @@ var RenderTarget = {
     return false;
   },
 };
-var AnimationDriver = /*#__PURE__*/ class {
+var AnimationDriver = class {
   constructor(animator, updateCallback, finishedCallback,) {
     this.animator = animator;
     this.updateCallback = updateCallback;
@@ -15859,7 +15859,7 @@ var AnimationDriver = /*#__PURE__*/ class {
     return this.animator.isFinished();
   }
 };
-var MainLoopAnimationDriver = /*#__PURE__*/ class extends AnimationDriver {
+var MainLoopAnimationDriver = class extends AnimationDriver {
   play() {
     if (RenderEnvironment.target !== RenderTarget.preview) {
       this.finishedCallback && this.finishedCallback(false,);
@@ -15880,7 +15880,7 @@ var DefaultDeprecatedAnimationOptions = {
   colorModel: 'husl',
   /* HUSL */
 };
-var FramerAnimation = /*#__PURE__*/ class {
+var FramerAnimation = class {
   /**
    * @internal
    */
@@ -16573,7 +16573,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = /*#__PURE__*/ class extends Component {
+var ErrorBoundary2 = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -21439,7 +21439,7 @@ function useForceUpdate3() {
 }
 var ResizeObserverPolyfill = /* @__PURE__ */ (() => require_resize_observer_umd().ResizeObserver)();
 var DEFAULT_SIZE = 200;
-var SharedObserver = /*#__PURE__*/ class {
+var SharedObserver = class {
   constructor() {
     __publicField(this, 'sharedResizeObserver',);
     __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
@@ -21770,7 +21770,6 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
   }
 }
 var Layer = /* @__PURE__ */ (() => {
-  /*#__PURE__*/
   class Layer2 extends Component {
     constructor() {
       super(...arguments,);
@@ -22602,7 +22601,7 @@ var SharedLayoutContext = /* @__PURE__ */ React4.createContext({
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
 },);
-var SharedLayoutRoot = /*#__PURE__*/ class extends Component {
+var SharedLayoutRoot = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'shouldAnimate', false,);
@@ -22685,7 +22684,7 @@ function MagicMotionCrossfadeRoot(props,) {
     children: props.children,
   },);
 }
-var SharedIntersectionObserver = /*#__PURE__*/ class {
+var SharedIntersectionObserver = class {
   constructor(options,) {
     __publicField(this, 'sharedIntersectionObserver',);
     __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
@@ -22829,7 +22828,7 @@ function pointForEvent(event, customTarget = null,) {
   };
   return point2;
 }
-var FramerEvent = /*#__PURE__*/ class {
+var FramerEvent = class {
   /**
    * @internal
    */
@@ -22936,7 +22935,7 @@ var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
 function WithDragging(Component15,) {
-  const _WithDraggingHOC = /*#__PURE__*/ class extends React4.Component {
+  const _WithDraggingHOC = class extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', {
@@ -23755,7 +23754,7 @@ var ObservableObject = /* @__PURE__ */ (() => {
   };
   return ObservableObject2;
 })();
-var ObservableObjectProxyHandler = /*#__PURE__*/ class {
+var ObservableObjectProxyHandler = class {
   constructor() {
     __publicField(this, 'set', (target, key7, value, receiver,) => {
       if (key7 === $private) {
@@ -24431,7 +24430,7 @@ function applyLayoutProp(style, props, key7,) {
   }
 }
 var DeprecatedFrame = /* @__PURE__ */ (() => {
-  const _DeprecatedFrameInner = /*#__PURE__*/ class extends Layer {
+  const _DeprecatedFrameInner = class extends Layer {
     constructor() {
       super(...arguments,);
       __publicField(this, 'element', null,);
@@ -24812,7 +24811,7 @@ var Frame = /* @__PURE__ */ (() => {
   FrameInner['displayName'] = 'Frame';
   return FrameInner;
 })();
-var LayoutTree = /*#__PURE__*/ class extends Component {
+var LayoutTree = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'layoutMaybeMutated',);
@@ -25250,7 +25249,7 @@ var allAnimatableProperties = {
   originZ: 0,
   opacity: 1,
 };
-var NavigatorMock = /*#__PURE__*/ class {
+var NavigatorMock = class {
   constructor() {
     __publicField(this, 'warning', () => {
       warnOnce2('The Navigator API is only available inside of Framer: https://www.framer.com/',);
@@ -26304,7 +26303,7 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
   return NavigationTransitionType2;
 })(NavigationTransitionType || {},);
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = /*#__PURE__*/ class extends React4.Component {
+  const InternalWithNavigator = class extends React4.Component {
     render() {
       return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
         children: (navigation) => {
@@ -27805,7 +27804,7 @@ function stateName(state,) {
 function containsBitmask(value, bitmask,) {
   return (value & bitmask) !== 0;
 }
-var GestureRecognizer = /*#__PURE__*/ class {
+var GestureRecognizer = class {
   constructor() {
     __publicField(this, '_state', 2,/* Possible */
     );
@@ -27881,7 +27880,7 @@ var GestureRecognizer = /*#__PURE__*/ class {
     }
   }
 };
-var MouseWheelGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
+var MouseWheelGestureRecognizer = class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
     __publicField(this, 'startEvent',);
@@ -27926,7 +27925,7 @@ var MouseWheelGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer 
     this.onMouseWheelEnd(event,);
   }
 };
-var PanGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
+var PanGestureRecognizer = class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
     __publicField(this, 'startEvent',);
@@ -28001,7 +28000,7 @@ var PanGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
     }
   }
 };
-var TapGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
+var TapGestureRecognizer = class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
     __publicField(this, 'eventType', 'tap',);
@@ -28031,7 +28030,7 @@ var TapGestureRecognizer = /*#__PURE__*/ class extends GestureRecognizer {
     }
   }
 };
-var FramerEventSession = /*#__PURE__*/ class {
+var FramerEventSession = class {
   constructor(dispatcher, customOrigin,) {
     __publicField(this, 'events', [],);
     __publicField(this, 'recognizers', [],);
@@ -28191,7 +28190,7 @@ var FramerEventSession = /*#__PURE__*/ class {
     return subtract(event.devicePoint, this.startEvent.devicePoint,);
   }
 };
-var MouseEventListener = /*#__PURE__*/ class extends Component {
+var MouseEventListener = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domMouseDown', (originalEvent) => {
@@ -28243,7 +28242,7 @@ var MouseEventListener = /*#__PURE__*/ class extends Component {
     safeWindow.removeEventListener('wheel', this.domMouseWheel,);
   }
 };
-var TouchEventListener = /*#__PURE__*/ class extends Component {
+var TouchEventListener = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'domTouchStart', (originalEvent) => {
@@ -29290,7 +29289,7 @@ function useObserveData() {
   const context = React4.useContext(DataObserverContext,);
   return !isNaN(context.update,);
 }
-var DataObserver = /*#__PURE__*/ class extends Component {
+var DataObserver = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'observers', [],);
@@ -30448,7 +30447,7 @@ var withGeneratedLayoutId = (Component15) =>
       ref,
     },);
   },);
-var ContainerErrorBoundary = /*#__PURE__*/ class extends Component {
+var ContainerErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {
@@ -31420,7 +31419,7 @@ function Floating({
   );
 }
 var GeneratedComponentContext = /* @__PURE__ */ React4.createContext(void 0,);
-var LazyValue = /*#__PURE__*/ class {
+var LazyValue = class {
   constructor(resolver,) {
     this.resolver = resolver;
     __publicField(this, 'status',);
@@ -32654,7 +32653,7 @@ async function getCollection(collection, locale,) {
   }
   return collection;
 }
-var CompatibilityDatabaseCollection = /*#__PURE__*/ class {
+var CompatibilityDatabaseCollection = class {
   constructor(collection, locale,) {
     this.collection = collection;
     this.locale = locale;
@@ -32889,12 +32888,12 @@ function compare(left, right, collation,) {
   }
 }
 var INDEX_IDENTIFIER = 'index';
-var ScalarExpression = /*#__PURE__*/ class {
+var ScalarExpression = class {
   static from(expression, schema,) {
     return convertExpression(expression, schema, void 0,);
   }
 };
-var ScalarIdentifier = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarIdentifier = class extends ScalarExpression {
   constructor(schema, name,) {
     super();
     this.schema = schema;
@@ -32926,7 +32925,7 @@ var ScalarIdentifier = /*#__PURE__*/ class extends ScalarExpression {
     return false;
   }
 };
-var ScalarLiteralValue = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarLiteralValue = class extends ScalarExpression {
   constructor(definition, value,) {
     super();
     this.definition = definition;
@@ -33008,7 +33007,7 @@ var ScalarLiteralValue = /*#__PURE__*/ class extends ScalarExpression {
     return true;
   }
 };
-var ScalarFunctionCall = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarFunctionCall = class extends ScalarExpression {
   constructor(argumentExpressions,) {
     super();
     this.argumentExpressions = argumentExpressions;
@@ -33034,7 +33033,7 @@ var ScalarFunctionCall = /*#__PURE__*/ class extends ScalarExpression {
     },);
   }
 };
-var ScalarFunctionCallContains = /*#__PURE__*/ class extends ScalarFunctionCall {
+var ScalarFunctionCallContains = class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarFunctionCallContains.getDefinition(),);
@@ -33070,7 +33069,7 @@ var ScalarFunctionCallContains = /*#__PURE__*/ class extends ScalarFunctionCall 
     };
   }
 };
-var ScalarFunctionCallStartsWith = /*#__PURE__*/ class extends ScalarFunctionCall {
+var ScalarFunctionCallStartsWith = class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarFunctionCallStartsWith.getDefinition(),);
@@ -33106,7 +33105,7 @@ var ScalarFunctionCallStartsWith = /*#__PURE__*/ class extends ScalarFunctionCal
     };
   }
 };
-var ScalarFunctionCallEndsWith = /*#__PURE__*/ class extends ScalarFunctionCall {
+var ScalarFunctionCallEndsWith = class extends ScalarFunctionCall {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarFunctionCallEndsWith.getDefinition(),);
@@ -33142,7 +33141,7 @@ var ScalarFunctionCallEndsWith = /*#__PURE__*/ class extends ScalarFunctionCall 
     };
   }
 };
-var ScalarCase = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarCase = class extends ScalarExpression {
   constructor(valueExpression, conditions, elseExpression,) {
     super();
     this.valueExpression = valueExpression;
@@ -33238,13 +33237,13 @@ var ScalarCase = /*#__PURE__*/ class extends ScalarExpression {
     },);
   }
 };
-var ScalarCaseCondition = /*#__PURE__*/ class {
+var ScalarCaseCondition = class {
   constructor(whenExpression, thenExpression,) {
     this.whenExpression = whenExpression;
     this.thenExpression = thenExpression;
   }
 };
-var ScalarUnaryOperation = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarUnaryOperation = class extends ScalarExpression {
   constructor(valueExpression,) {
     super();
     this.valueExpression = valueExpression;
@@ -33257,7 +33256,7 @@ var ScalarUnaryOperation = /*#__PURE__*/ class extends ScalarExpression {
     return this.valueExpression.canEvaluate();
   }
 };
-var ScalarUnaryOperationNot = /*#__PURE__*/ class extends ScalarUnaryOperation {
+var ScalarUnaryOperationNot = class extends ScalarUnaryOperation {
   constructor() {
     super(...arguments,);
     __publicField(this, 'definition', ScalarUnaryOperationNot.getDefinition(),);
@@ -33279,7 +33278,7 @@ var ScalarUnaryOperationNot = /*#__PURE__*/ class extends ScalarUnaryOperation {
     };
   }
 };
-var ScalarLogicalOperation = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarLogicalOperation = class extends ScalarExpression {
   constructor(operandExpressions,) {
     super();
     this.operandExpressions = operandExpressions;
@@ -33304,7 +33303,7 @@ var ScalarLogicalOperation = /*#__PURE__*/ class extends ScalarExpression {
     },);
   }
 };
-var ScalarLogicalOperationAnd = /*#__PURE__*/ class extends ScalarLogicalOperation {
+var ScalarLogicalOperationAnd = class extends ScalarLogicalOperation {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', 'AND',);
@@ -33320,7 +33319,7 @@ var ScalarLogicalOperationAnd = /*#__PURE__*/ class extends ScalarLogicalOperati
     };
   }
 };
-var ScalarLogicalOperationOr = /*#__PURE__*/ class extends ScalarLogicalOperation {
+var ScalarLogicalOperationOr = class extends ScalarLogicalOperation {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', 'OR',);
@@ -33336,7 +33335,7 @@ var ScalarLogicalOperationOr = /*#__PURE__*/ class extends ScalarLogicalOperatio
     };
   }
 };
-var ScalarComparison = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarComparison = class extends ScalarExpression {
   constructor(leftExpression, rightExpression,) {
     super();
     this.leftExpression = leftExpression;
@@ -33364,7 +33363,7 @@ var ScalarComparison = /*#__PURE__*/ class extends ScalarExpression {
     return this.leftExpression.canEvaluate() && this.rightExpression.canEvaluate();
   }
 };
-var ScalarComparisonEquals = /*#__PURE__*/ class extends ScalarComparison {
+var ScalarComparisonEquals = class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '=',);
@@ -33378,7 +33377,7 @@ var ScalarComparisonEquals = /*#__PURE__*/ class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonNotEquals = /*#__PURE__*/ class extends ScalarComparison {
+var ScalarComparisonNotEquals = class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '!=',);
@@ -33392,7 +33391,7 @@ var ScalarComparisonNotEquals = /*#__PURE__*/ class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonLessThan = /*#__PURE__*/ class extends ScalarComparison {
+var ScalarComparisonLessThan = class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '<',);
@@ -33406,7 +33405,7 @@ var ScalarComparisonLessThan = /*#__PURE__*/ class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonLessThanOrEqual = /*#__PURE__*/ class extends ScalarComparison {
+var ScalarComparisonLessThanOrEqual = class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '<=',);
@@ -33420,7 +33419,7 @@ var ScalarComparisonLessThanOrEqual = /*#__PURE__*/ class extends ScalarComparis
     };
   }
 };
-var ScalarComparisonGreaterThan = /*#__PURE__*/ class extends ScalarComparison {
+var ScalarComparisonGreaterThan = class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '>',);
@@ -33434,7 +33433,7 @@ var ScalarComparisonGreaterThan = /*#__PURE__*/ class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonGreaterThanOrEqual = /*#__PURE__*/ class extends ScalarComparison {
+var ScalarComparisonGreaterThanOrEqual = class extends ScalarComparison {
   constructor() {
     super(...arguments,);
     __publicField(this, 'operator', '>=',);
@@ -33448,7 +33447,7 @@ var ScalarComparisonGreaterThanOrEqual = /*#__PURE__*/ class extends ScalarCompa
     };
   }
 };
-var ScalarTypeCast = /*#__PURE__*/ class extends ScalarExpression {
+var ScalarTypeCast = class extends ScalarExpression {
   constructor(valueExpression,) {
     super();
     this.valueExpression = valueExpression;
@@ -33464,7 +33463,7 @@ var ScalarTypeCast = /*#__PURE__*/ class extends ScalarExpression {
     return this.valueExpression.canEvaluate();
   }
 };
-var ScalarTypeCastBoolean = /*#__PURE__*/ class extends ScalarTypeCast {
+var ScalarTypeCastBoolean = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'BOOLEAN',);
@@ -33494,7 +33493,7 @@ function convertToBoolean(value,) {
   }
   return false;
 }
-var ScalarTypeCastDate = /*#__PURE__*/ class extends ScalarTypeCast {
+var ScalarTypeCastDate = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'DATE',);
@@ -33532,7 +33531,7 @@ function convertToDate(value,) {
   }
   return null;
 }
-var ScalarTypeCastNumber = /*#__PURE__*/ class extends ScalarTypeCast {
+var ScalarTypeCastNumber = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'NUMBER',);
@@ -33569,7 +33568,7 @@ function convertToNumber(value,) {
   }
   return null;
 }
-var ScalarTypeCastString = /*#__PURE__*/ class extends ScalarTypeCast {
+var ScalarTypeCastString = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
     __publicField(this, 'dataType', 'STRING',);
@@ -34017,7 +34016,7 @@ function stringifyExecutionTime(self2, total,) {
 function stringifyItems(items,) {
   return `(items: ${items})`;
 }
-var QueryPlan = /*#__PURE__*/ class {
+var QueryPlan = class {
   constructor() {
     __publicField(this, 'executionTime', 0,);
     __publicField(this, 'itemCount', 0,);
@@ -34030,7 +34029,7 @@ var QueryPlan = /*#__PURE__*/ class {
     return result;
   }
 };
-var ScanCollectionPlan = /*#__PURE__*/ class extends QueryPlan {
+var ScanCollectionPlan = class extends QueryPlan {
   constructor(collection,) {
     super();
     this.collection = collection;
@@ -34044,7 +34043,7 @@ var ScanCollectionPlan = /*#__PURE__*/ class extends QueryPlan {
     return this.collection.scanItems();
   }
 };
-var LookupIndexPlan = /*#__PURE__*/ class extends QueryPlan {
+var LookupIndexPlan = class extends QueryPlan {
   constructor(index, query,) {
     super();
     this.index = index;
@@ -34084,7 +34083,7 @@ var LookupIndexPlan = /*#__PURE__*/ class extends QueryPlan {
     return this.index.lookupItems(this.query,);
   }
 };
-var UnionPlan = /*#__PURE__*/ class extends QueryPlan {
+var UnionPlan = class extends QueryPlan {
   constructor(childPlans,) {
     super();
     this.childPlans = childPlans;
@@ -34114,7 +34113,7 @@ var UnionPlan = /*#__PURE__*/ class extends QueryPlan {
     return (result == null ? void 0 : result.items()) ?? [];
   }
 };
-var IntersectionPlan = /*#__PURE__*/ class extends QueryPlan {
+var IntersectionPlan = class extends QueryPlan {
   constructor(childPlans,) {
     super();
     this.childPlans = childPlans;
@@ -34144,7 +34143,7 @@ var IntersectionPlan = /*#__PURE__*/ class extends QueryPlan {
     return (result == null ? void 0 : result.items()) ?? [];
   }
 };
-var ResolveItemsPlan = /*#__PURE__*/ class extends QueryPlan {
+var ResolveItemsPlan = class extends QueryPlan {
   constructor(childPlan, collection, richTextResolver, select,) {
     super();
     this.childPlan = childPlan;
@@ -34174,7 +34173,7 @@ var ResolveItemsPlan = /*#__PURE__*/ class extends QueryPlan {
     return this.collection.resolveItems(childPointers,);
   }
 };
-var FilterItemsPlan = /*#__PURE__*/ class extends QueryPlan {
+var FilterItemsPlan = class extends QueryPlan {
   constructor(childPlan, filterExpression,) {
     super();
     this.childPlan = childPlan;
@@ -34196,7 +34195,7 @@ var FilterItemsPlan = /*#__PURE__*/ class extends QueryPlan {
     },);
   }
 };
-var SortItemsPlan = /*#__PURE__*/ class extends QueryPlan {
+var SortItemsPlan = class extends QueryPlan {
   constructor(childPlan, orderExpressions, collection,) {
     super();
     this.childPlan = childPlan;
@@ -34245,14 +34244,14 @@ var SortItemsPlan = /*#__PURE__*/ class extends QueryPlan {
     },);
   }
 };
-var ScalarOrderExpression = /*#__PURE__*/ class {
+var ScalarOrderExpression = class {
   constructor(expression, direction, collation,) {
     this.expression = expression;
     this.direction = direction;
     this.collation = collation;
   }
 };
-var SliceItemsPlan = /*#__PURE__*/ class extends QueryPlan {
+var SliceItemsPlan = class extends QueryPlan {
   constructor(childPlan, offsetExpression, limitExpression,) {
     super();
     this.childPlan = childPlan;
@@ -34289,7 +34288,7 @@ var SliceItemsPlan = /*#__PURE__*/ class extends QueryPlan {
     return childItems.slice(offset, offset + limit,);
   }
 };
-var DatabaseItemMap = /*#__PURE__*/ class extends Map {
+var DatabaseItemMap = class extends Map {
   constructor(items = [],) {
     super();
     for (const item of items) {
@@ -34320,7 +34319,7 @@ var DatabaseItemMap = /*#__PURE__*/ class extends Map {
     return [...values,];
   }
 };
-var RichTextResolver = /*#__PURE__*/ class {
+var RichTextResolver = class {
   constructor(collection,) {
     this.collection = collection;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
@@ -34471,7 +34470,7 @@ function getDatabaseCollection({
   }
   assertNever(data2, 'Unsupported collection type',);
 }
-var QueryEngine = /*#__PURE__*/ class {
+var QueryEngine = class {
   async query(query, locale,) {
     const collection = getDatabaseCollection(query.from, locale,);
     const richTextResolver = new RichTextResolver(collection,);
@@ -34702,7 +34701,7 @@ function createScanCollectionPlan(collection, expression,) {
   const plan = new ScanCollectionPlan(collection,);
   return new FilterItemsPlan(plan, expression,);
 }
-var AnimationCollector = /*#__PURE__*/ class {
+var AnimationCollector = class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
   }
@@ -35327,7 +35326,7 @@ function usePrototypeNavigate({
     return false;
   };
 }
-var QueryCache = /*#__PURE__*/ class {
+var QueryCache = class {
   constructor(queryEngine2,) {
     this.queryEngine = queryEngine2;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
@@ -36440,7 +36439,7 @@ var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2) => {
   return FontSourceNames2;
 })(FontSourceNames || {},);
 var systemFontFamilyName = 'System Default';
-var LocalFontSource = /*#__PURE__*/ class {
+var LocalFontSource = class {
   constructor() {
     __publicField(this, 'name', 'local',/* Local */
     );
@@ -36582,7 +36581,7 @@ function getCustomFontName(fileName, properties,) {
   const variant = properties.font.preferredSubFamily === '' ? properties.font.fontSubFamily : properties.font.preferredSubFamily;
   return `${fontFamily} ${variant}`;
 }
-var CustomFontSource = /*#__PURE__*/ class {
+var CustomFontSource = class {
   constructor() {
     __publicField(this, 'name', 'custom',/* Custom */
     );
@@ -36750,7 +36749,7 @@ var weightNameToNumber = {
 };
 var weightNames = /* @__PURE__ */ Object.keys(weightNameToNumber,);
 var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic',].join('|',)})`, 'u',))();
-var FontshareSource = /*#__PURE__*/ class {
+var FontshareSource = class {
   constructor() {
     __publicField(this, 'name', 'fontshare',/* Fontshare */
     );
@@ -36888,7 +36887,7 @@ var weightNameToNumber2 = {
   ExtraBold: 800,
   Black: 900,
 };
-var FramerFontSource = /*#__PURE__*/ class {
+var FramerFontSource = class {
   constructor() {
     __publicField(this, 'name', 'framer',/* Framer */
     );
@@ -36949,7 +36948,7 @@ var FramerFontSource = /*#__PURE__*/ class {
   }
 };
 var googleFontSelectorPrefix = 'GF;';
-var GoogleFontSource = /*#__PURE__*/ class {
+var GoogleFontSource = class {
   constructor() {
     __publicField(this, 'name', 'google',/* Google */
     );
@@ -37056,7 +37055,7 @@ function mapToKnownCategory2(category,) {
 var import_fontfaceobserver = __toESM(require_fontfaceobserver_standalone(), 1,);
 var FONT_LOADING_TIMEOUT = 5e3;
 var MAX_RETRIES = 3;
-var FontLoadingError = /*#__PURE__*/ class extends Error {
+var FontLoadingError = class extends Error {
   constructor(message,) {
     super(message,);
     this.name = 'FontLoadingError';
@@ -37129,7 +37128,7 @@ async function isFontReady(family, style, weight,) {
     }`,);
   }
 }
-var FontStore = /*#__PURE__*/ class {
+var FontStore = class {
   constructor() {
     __publicField(this, 'enabled', false,);
     __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
@@ -38391,7 +38390,7 @@ function convertCodeComponentContainer(componentDefinitionProvider, node, conver
     ),
   ];
 }
-var CodeComponentPresentation = /*#__PURE__*/ class {
+var CodeComponentPresentation = class {
   constructor(id3, componentIdentifier, packageVersion, props, children, codeOverrideIdentifier,) {
     this.id = id3;
     this.componentIdentifier = componentIdentifier;
@@ -39154,7 +39153,7 @@ var ImagePatternElement = ({
   },);
 };
 var useDOM = /* @__PURE__ */ isBrowser2();
-var SharedSVGEntry = /*#__PURE__*/ class {
+var SharedSVGEntry = class {
   constructor(id3, svg, innerHTML, viewBox, count = 0,) {
     this.id = id3;
     this.svg = svg;
@@ -39163,7 +39162,7 @@ var SharedSVGEntry = /*#__PURE__*/ class {
     this.count = count;
   }
 };
-var SharedSVGManager = /*#__PURE__*/ class {
+var SharedSVGManager = class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
   }
@@ -40156,7 +40155,7 @@ function getTabIndexProps(tabIndex,) {
   };
 }
 var keys22 = /* @__PURE__ */ new Map();
-var InternalID = /*#__PURE__*/ class {
+var InternalID = class {
   constructor(id3,) {
     this.id = id3;
     __publicField(this, '_link', null,);
@@ -40187,7 +40186,7 @@ var InternalID = /*#__PURE__*/ class {
   }
 };
 var PathSegmentOuter = /* @__PURE__ */ (() => {
-  const _PathSegment = /*#__PURE__*/ class {
+  const _PathSegment = class {
     constructor(value,) {
       __publicField(this, '__class', 'PathSegment',);
       __publicField(this, 'x', 0,);
@@ -40442,7 +40441,7 @@ function transformString(transform2,) {
   }
   return result;
 }
-var LinearGradientElement = /*#__PURE__*/ class extends Component {
+var LinearGradientElement = class extends Component {
   render() {
     const {
       id: id3,
@@ -40468,7 +40467,7 @@ var LinearGradientElement = /*#__PURE__*/ class extends Component {
     },);
   }
 };
-var RadialGradientElement = /*#__PURE__*/ class extends Component {
+var RadialGradientElement = class extends Component {
   render() {
     const {
       centerAnchorX,
@@ -40496,7 +40495,7 @@ var RadialGradientElement = /*#__PURE__*/ class extends Component {
     },);
   }
 };
-var SVGRoot = /*#__PURE__*/ class extends Component {
+var SVGRoot = class extends Component {
   render() {
     const {
       children,
