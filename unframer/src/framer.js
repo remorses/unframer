@@ -9996,7 +9996,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.VEJ3JK5Y.js
+// https :https://app.framerstatic.com/framer.K4XHQ4DX.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18481,16 +18481,16 @@ var richTextCSSRules = [
         ol.framer-text,
         ul.framer-text,
         span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
-            font-style: var(--framer-font-style, normal);
-            font-weight: var(--framer-font-weight, 400);
-            color: var(--framer-text-color, #000);
-            font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
-            letter-spacing: var(--framer-letter-spacing, 0);
-            text-transform: var(--framer-text-transform, none);
-            text-decoration: var(--framer-text-decoration, none);
-            line-height: var(--framer-line-height, 1.2em);
-            text-align: var(--framer-text-alignment, start);
+            font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+            font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
+            color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+            text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
+            text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
+            line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
+            text-align: var(--framer-blockquote-text-alignment, var(--framer-text-alignment, start));
             -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
             -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
         }
@@ -18503,23 +18503,23 @@ var richTextCSSRules = [
     `, /* css */
   `
         strong.framer-text {
-            font-family: var(--framer-font-family-bold);
-            font-style: var(--framer-font-style-bold);
-            font-weight: var(--framer-font-weight-bold, bolder);
+            font-family: var(--framer-blockquote-font-family-bold, var(--framer-font-family-bold));
+            font-style: var(--framer-blockquote-font-style-bold, var(--framer-font-style-bold));
+            font-weight: var(--framer-blockquote-font-weight-bold, var(--framer-font-weight-bold, bolder));
         }
     `, /* css */
   `
         em.framer-text {
-            font-family: var(--framer-font-family-italic);
-            font-style: var(--framer-font-style-italic, italic);
-            font-weight: var(--framer-font-weight-italic);
+            font-family: var(--framer-blockquote-font-family-italic, var(--framer-font-family-italic));
+            font-style: var(--framer-blockquote-font-style-italic, var(--framer-font-style-italic, italic));
+            font-weight: var(--framer-blockquote-font-weight-italic, var(--framer-font-weight-italic));
         }
     `, /* css */
   `
         em.framer-text > strong.framer-text {
-            font-family: var(--framer-font-family-bold-italic);
-            font-style: var(--framer-font-style-bold-italic, italic);
-            font-weight: var(--framer-font-weight-bold-italic, bolder);
+            font-family: var(--framer-blockquote-font-family-bold-italic, var(--framer-font-family-bold-italic));
+            font-style: var(--framer-blockquote-font-style-bold-italic, var(--framer-font-style-bold-italic, italic));
+            font-weight: var(--framer-blockquote-font-weight-bold-italic, var(--framer-font-weight-bold-italic, bolder));
         }
     `, /* css */
   `
@@ -18534,7 +18534,7 @@ var richTextCSSRules = [
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
-            margin-top: var(--framer-paragraph-spacing, 0);
+            margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
     `,
   // The first child of a list item is a paragraph. If the second child is a
@@ -18563,8 +18563,8 @@ var richTextCSSRules = [
             -webkit-background-clip: text;
             /* make this a transparent color if you want to visualise the clipping  */
             -webkit-text-fill-color: transparent;
-            padding: max(0em, calc(calc(1.3em - var(--framer-line-height, 1.3em)) / 2));
-            margin: min(0em, calc(calc(1.3em - var(--framer-line-height, 1.3em)) / -2));
+            padding: max(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / 2));
+            margin: min(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / -2));
         }
     `, /* css */
   `
@@ -18577,6 +18577,15 @@ var richTextCSSRules = [
             font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-letter-spacing, 0);
             line-height: var(--framer-line-height, 1.2em);
+        }
+    `, /* css */
+  `
+        blockquote.framer-text {
+            margin-block-start: initial;
+            margin-block-end: initial;
+            margin-inline-start: initial;
+            margin-inline-end: initial;
+            unicode-bidi: initial;
         }
     `, /* css */
   `
@@ -31368,7 +31377,7 @@ function Floating({
     onDismiss,
   },);
   return ReactDOM.createPortal(
-    /* @__PURE__ */ jsxs('div', {
+    /* @__PURE__ */ jsxs(motion.div, {
       ref: floatingPositionRef,
       className: className2,
       style: {
@@ -35605,19 +35614,16 @@ function useVariantState({
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
     if (gestureVariant) variants.push(gestureVariant,);
     const gestures = enabledGestures == null ? void 0 : enabledGestures[baseVariant];
-    const gestureHandlers = {};
-    if (gestures == null ? void 0 : gestures.hover) {
-      Object.assign(gestureHandlers, {
-        onMouseEnter: () =>
-          setGestureState({
-            isHovered: true,
-          },),
-        onMouseLeave: () =>
-          setGestureState({
-            isHovered: false,
-          },),
-      },);
-    }
+    const gestureHandlers = {
+      onMouseEnter: () =>
+        setGestureState({
+          isHovered: true,
+        },),
+      onMouseLeave: () =>
+        setGestureState({
+          isHovered: false,
+        },),
+    };
     if (gestures == null ? void 0 : gestures.pressed) {
       Object.assign(gestureHandlers, {
         onTapStart: () =>
@@ -37199,6 +37205,7 @@ var FontStore = /*#__PURE__*/ class {
     return fontFamily;
   }
   getFontBySelector(selector, createFont = true,) {
+    if (!selector) return void 0;
     if (selector.startsWith(customFontSelectorPrefix,)) {
       return this.custom.getFontBySelector(selector, createFont,);
     }
@@ -37618,6 +37625,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['IconBackgroundImage'] = '--framer-input-icon-image';
   FormInputStyleVariableNames2['IconMaskImage'] = '--framer-input-icon-mask-image';
   FormInputStyleVariableNames2['IconColor'] = '--framer-input-icon-color';
+  FormInputStyleVariableNames2['WrapperHeight'] = '--framer-input-wrapper-height';
   return FormInputStyleVariableNames2;
 })(FormInputStyleVariableNames || {},);
 var Var = FormInputStyleVariableNames;
@@ -37665,7 +37673,7 @@ var sharedInputCSS = [
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     width: '100%',
-    height: '100%',
+    height: css.variable(Var.WrapperHeight, '100%',),
     letterSpacing: css.variable(Var.FontLetterSpacing,),
     textAlign: css.variable(Var.FontTextAlignment,),
     lineHeight: css.variable(Var.FontLineHeight,),
@@ -37767,9 +37775,7 @@ var inputIconCSSDeclaration = {
   bottom: 0,
   width: `${iconSize}px`,
   boxSizing: 'content-box',
-  // Offset the icon inwards by the padding.
-  margin: css.variable(Var.Padding,),
-  marginLeft: 0,
+  padding: css.variable(Var.Padding,),
   border: 'none',
   pointerEvents: 'none',
   backgroundRepeat: 'no-repeat',
@@ -37912,7 +37918,7 @@ var styles = /* @__PURE__ */ (() => [
     display: 'flex',
     resize: css.variable('--framer-textarea-resize',/* Resize */
     ),
-    overflowY: 'scroll',
+    overflowY: 'auto',
     minHeight: 'inherit',
     maxHeight: 'inherit',
     whiteSpace: 'break-spaces',
@@ -37941,6 +37947,10 @@ var styles = /* @__PURE__ */ (() => [
     // This tells safari to use the color for the shadow dom elements.
     '-webkit-text-fill-color': css.variable('--framer-input-placeholder-color',/* PlaceholderColor */
     ),
+    // Prevent browsers from improvising the date/time placeholder height.
+    height: css.variable('--framer-input-font-line-height',/* FontLineHeight */
+    ),
+    overflow: 'visible',
   },),
   css(
     `.${textInputWrapperClassName} .${inputClassName}[type="date"]::before, .${textInputWrapperClassName} .${inputClassName}[type="time"]::before`,
@@ -37961,15 +37971,21 @@ var styles = /* @__PURE__ */ (() => [
     backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
-  // Hide the native date picker icon, but still allow the user to click it.
+  // Hide the native date picker icon, but still align it with the custom icon, allowing user to click it to show the
+  // date/time picker.
   css(`.${textInputWrapperClassName} .${inputClassName}::-webkit-calendar-picker-indicator`, {
     opacity: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
     padding: css.variable('--framer-input-padding',/* Padding */
     ),
-    paddingRight: 0,
-    paddingLeft: `${iconSpacing}px`,
+    paddingTop: 0,
+    paddingBottom: 0,
     width: `${iconSize2}px`,
-    height: `${iconSize2}px`,
+    // Makes sure the icon hit target covers the entire height of the input.
+    height: '100%',
   },),
   css(`.${textInputWrapperClassName}:focus-within, .${textInputWrapperClassName}.${forcedFocusClassName}`, {
     boxShadow: css.variable('--framer-input-focused-box-shadow', '--framer-input-box-shadow',/* BoxShadow */
@@ -38147,6 +38163,7 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
     className: className2,
     inputName,
     required,
+    hidden,
     defaultValue,
     selectOptions,
     style,
@@ -38159,6 +38176,13 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
   } = props;
   const eventHandlers = useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,);
   const key7 = Array.isArray(defaultValue,) ? defaultValue[0] : defaultValue;
+  if (hidden) {
+    return /* @__PURE__ */ jsx(motion.input, {
+      type: 'hidden',
+      name: inputName,
+      defaultValue,
+    },);
+  }
   return /* @__PURE__ */ jsx(motion.div, {
     ref: measureRef,
     style,
@@ -38393,6 +38417,11 @@ var CodeComponentPresentation = /*#__PURE__*/ class {
     };
   }
 };
+var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
+var trimSlugRegExp = /^-+|-+$/gu;
+function slugify(value,) {
+  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
+}
 var htmlRegExp = /[&<>'"]/g;
 var escapeHTML = (str) =>
   str.replace(htmlRegExp, (tag) =>
@@ -38671,6 +38700,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     _forwardedOverrideId,
     _forwardedOverrides,
     _usesDOMRect,
+    anchorLinkOffsetY,
     as: _as,
     bottom,
     center,
@@ -38714,6 +38744,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
+  const processedChildren = useMemo(() => {
+    if (!children) return;
+    return processRichTextChildren(children, stylesPresetsClassNames, plainText, anchorLinkOffsetY,);
+  }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY,],);
   if (!visible) return null;
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const containerStyle = {
@@ -38787,7 +38821,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
             width: '100%',
             height: '100%',
           },
-          children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
+          children: processedChildren,
         },),
       },);
     } else {
@@ -38801,7 +38835,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
         transformTemplate: template,
         'data-framer-name': name,
         'data-framer-component-type': 'RichTextContainer',
-        children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
+        children: processedChildren,
       },);
     }
   }
@@ -38813,17 +38847,17 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     transformTemplate: template,
     'data-framer-name': name,
     'data-framer-component-type': 'RichTextContainer',
-    children: children && styleRichTextChildren(children, stylesPresetsClassNames, plainText,),
+    children: processedChildren,
   },);
 },);
-function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
+function processRichTextChildren(element, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters = {},) {
   let children = Children.toArray(element.props.children,);
   if (isString22(plainText,)) {
     children = children.slice(0, 1,);
   }
   children = children.map((child) => {
     if (isValidElement(child,)) {
-      return styleRichTextChildren(child, stylesPresetsClassNames, plainText,);
+      return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters,);
     }
     if (isString22(plainText,)) {
       return plainText;
@@ -38835,11 +38869,52 @@ function styleRichTextChildren(element, stylesPresetsClassNames, plainText,) {
     ...props
   } = element.props;
   if (isString22(element.type,) || isMotionComponent(element.type,)) {
-    const tag = dataPresetTag || unwrapMotionComponent(element.type,) || element.type;
+    const elementType = unwrapMotionComponent(element.type,) || element.type;
+    const tag = dataPresetTag || elementType;
     const stylesPresetClassName = isString22(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
     props.className = cx('framer-text', props.className, stylesPresetClassName,);
+    const isHeading = elementType === 'h1' || elementType === 'h2' || elementType === 'h3' || elementType === 'h4' ||
+      elementType === 'h5' || elementType === 'h6';
+    const anchorLinkStylePresetClassName = stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames['anchor'];
+    if (isHeading && anchorLinkStylePresetClassName) {
+      const slug = generateHeadingSlug(children, slugCounters,);
+      props.id = slug;
+      const className2 = cx('framer-text', anchorLinkStylePresetClassName,);
+      const anchorLink = /* @__PURE__ */ jsx('a', {
+        href: `#${slug}`,
+        className: className2,
+        children,
+      },);
+      props.style = {
+        ...(props.style ?? {}),
+        scrollMarginTop: anchorLinkOffsetY,
+      };
+      children = [anchorLink,];
+    }
   }
   return cloneElement2(element, props, ...children,);
+}
+function generateHeadingSlug(children, slugCounters,) {
+  const headingText = children.map(extractTextFromReactNode,).join('',);
+  let slug = slugify(headingText,);
+  const slugCounter = slugCounters[slug] ?? 0;
+  if (slugCounter > 0) {
+    slug += `-${slugCounter}`;
+  }
+  slugCounters[slug] = slugCounter + 1;
+  return slug;
+}
+function extractTextFromReactNode(node,) {
+  if (isString22(node,) || isNumber2(node,)) {
+    return node.toString();
+  }
+  if (isValidElement(node,)) {
+    return extractTextFromReactNode(node.props.children,);
+  }
+  if (Array.isArray(node,)) {
+    return node.map(extractTextFromReactNode,).join('',);
+  }
+  return '';
 }
 var RichText = /* @__PURE__ */ forwardRef(({
   children,
