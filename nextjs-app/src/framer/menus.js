@@ -476,6 +476,7 @@ function Icon(props,) {
       const iconModuleUrl = `${moduleBaseUrl}${iconKey}.js@0.0.27`;
       const module = await import(
         /* webpackIgnore: true */
+        /* @vite-ignore */
         iconModuleUrl
       );
       if (isMounted.current) setSelectedIcon(module.default(React,),);

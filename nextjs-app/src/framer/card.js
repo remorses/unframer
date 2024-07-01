@@ -1,6 +1,6 @@
 /* eslint-disable */
 'use client';
-import { Icon, } from './chunk-EZ4RZKH4.js';
+import { Icon, } from './chunk-W3OFBK3Q.js';
 import { defaultEvents, NullState, useIconSelection, } from './chunk-KA64PIU2.js';
 import './chunk-MLKGABMK.js';
 
@@ -1362,6 +1362,7 @@ function Icon2(props,) {
       const iconModuleUrl = `${moduleBaseUrl}${iconKey}.js@${version}`;
       const module = await import(
         /* webpackIgnore: true */
+        /* @vite-ignore */
         iconModuleUrl
       );
       if (isMounted.current) setSelectedIcon(module.default(React,),);

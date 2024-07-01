@@ -3139,7 +3139,7 @@
       "format": "esm"
     },
     "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
-      "bytes": 18954,
+      "bytes": 18981,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -4208,7 +4208,7 @@
       "format": "esm"
     },
     "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
-      "bytes": 21707,
+      "bytes": 21734,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -4521,7 +4521,7 @@
       "format": "esm"
     },
     "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
-      "bytes": 10205,
+      "bytes": 10232,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -4766,7 +4766,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js": {
+    "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
       "bytes": 12535,
       "imports": [
         {
@@ -4811,9 +4811,9 @@
       "bytes": 536,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js",
+          "path": "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js"
+          "original": "https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js"
         },
         {
           "path": "unframer",
@@ -5229,7 +5229,7 @@
     "card.js": {
       "imports": [
         {
-          "path": "chunk-EZ4RZKH4.js",
+          "path": "chunk-W3OFBK3Q.js",
           "kind": "import-statement"
         },
         {
@@ -5340,7 +5340,7 @@
           "bytesInOutput": 22248
         },
         "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
-          "bytesInOutput": 20932
+          "bytesInOutput": 20959
         },
         "https :https://framer.com/m/phosphor-icons/House.js@0.0.53": {
           "bytesInOutput": 3812
@@ -5361,7 +5361,7 @@
           "bytesInOutput": 264
         }
       },
-      "bytes": 66722
+      "bytes": 66749
     },
     "menus.js": {
       "imports": [
@@ -5463,7 +5463,7 @@
           "bytesInOutput": 57609
         },
         "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
-          "bytesInOutput": 9321
+          "bytesInOutput": 9348
         },
         "https :https://framer.com/m/hero-icons/Home.js@0.0.27": {
           "bytesInOutput": 460
@@ -5481,7 +5481,7 @@
           "bytesInOutput": 265
         }
       },
-      "bytes": 96175
+      "bytes": 96202
     },
     "input.js": {
       "imports": [
@@ -5525,7 +5525,7 @@
       ],
       "entryPoint": "virtual:input",
       "inputs": {
-        "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/HRMQzSgXTPfyT7PmZDYM/QyfcXvqQb.js": {
+        "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
           "bytesInOutput": 11726
         },
         "virtual:input": {
@@ -6702,7 +6702,7 @@
     "full-page.js": {
       "imports": [
         {
-          "path": "chunk-EZ4RZKH4.js",
+          "path": "chunk-W3OFBK3Q.js",
           "kind": "import-statement"
         },
         {
@@ -6758,7 +6758,7 @@
       },
       "bytes": 35435
     },
-    "chunk-EZ4RZKH4.js": {
+    "chunk-W3OFBK3Q.js": {
       "imports": [
         {
           "path": "chunk-KA64PIU2.js",
@@ -6795,13 +6795,13 @@
       ],
       "inputs": {
         "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
-          "bytesInOutput": 18170
+          "bytesInOutput": 18197
         },
         "https :https://framer.com/m/phosphor-icons/House.js@0.0.50": {
           "bytesInOutput": 3835
         }
       },
-      "bytes": 22382
+      "bytes": 22409
     },
     "chunk-KA64PIU2.js": {
       "imports": [

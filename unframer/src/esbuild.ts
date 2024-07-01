@@ -126,7 +126,14 @@ export function esbuildPluginBundleDependencies({
                         loader = 'json'
                         return await res.text()
                     }
-                    const text = await res.text()
+                    let text = await res.text()
+
+                    // when it finds a line with /* webpackIgnore: true */
+                    // it also adds /* @vite-ignore */
+                    text = text.replace(
+                        /(\/\* webpackIgnore: true \*\/)/g,
+                        '$1 /* @vite-ignore */',
+                    )
 
                     const transformed = await transform(text, {
                         define: {
