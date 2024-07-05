@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-DUHOOT7P.js
+// https :https://app.framerstatic.com/chunk-R2K2XF3S.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -141,8 +141,23 @@ var MotionGlobalConfig = {
   skipAnimations: false,
   useManualTiming: false,
 };
-var LayoutGroupContext = createContext({},);
 var SwitchLayoutGroupContext = createContext({},);
+var LayoutGroupContext = createContext({},);
+var noop = (any) => any;
+var warning = noop;
+var invariant = noop;
+if (false) {
+  warning = (check, message,) => {
+    if (!check && typeof console !== 'undefined') {
+      console.warn(message,);
+    }
+  };
+  invariant = (check, message,) => {
+    if (!check) {
+      throw new Error(message,);
+    }
+  };
+}
 var LazyContext = createContext({
   strict: false,
 },);
@@ -298,7 +313,11 @@ var {
   schedule: microtask,
   cancel: cancelMicrotask,
 } = createRenderBatcher(queueMicrotask, false,);
-function useVisualElement(Component33, visualState, props, createVisualElement2,) {
+function isRefObject(ref,) {
+  return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
+}
+var scheduleHandoffComplete = false;
+function useVisualElement(Component33, visualState, props, createVisualElement2, ProjectionNodeConstructor,) {
   const {
     visualElement: parent,
   } = useContext3(MotionContext,);
@@ -318,12 +337,20 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
     },);
   }
   const visualElement = visualElementRef.current;
+  const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
+  if (
+    visualElement && !visualElement.projection && ProjectionNodeConstructor &&
+    (visualElement.type === 'html' || visualElement.type === 'svg')
+  ) {
+    createProjectionNode(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig,);
+  }
   useInsertionEffect(() => {
     visualElement && visualElement.update(props, presenceContext,);
   },);
   const wantsHandoff = useRef(Boolean(props[optimizedAppearDataAttribute] && !window.HandoffComplete,),);
   useIsomorphicLayoutEffect(() => {
     if (!visualElement) return;
+    visualElement.updateFeatures();
     microtask.render(visualElement.render,);
     if (wantsHandoff.current && visualElement.animationState) {
       visualElement.animationState.animateChanges();
@@ -331,25 +358,66 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
   },);
   useEffect(() => {
     if (!visualElement) return;
-    visualElement.updateFeatures();
     if (!wantsHandoff.current && visualElement.animationState) {
       visualElement.animationState.animateChanges();
     }
     if (wantsHandoff.current) {
       wantsHandoff.current = false;
-      window.HandoffComplete = true;
+      if (!scheduleHandoffComplete) {
+        scheduleHandoffComplete = true;
+        queueMicrotask(completeHandoff,);
+      }
     }
   },);
   return visualElement;
 }
-function isRefObject(ref,) {
-  return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
+function completeHandoff() {
+  window.HandoffComplete = true;
+}
+function createProjectionNode(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig,) {
+  const {
+    layoutId,
+    layout: layout2,
+    drag: drag2,
+    dragConstraints,
+    layoutScroll,
+    layoutRoot,
+  } = props;
+  visualElement.projection = new ProjectionNodeConstructor(
+    visualElement.latestValues,
+    props['data-framer-portal-id'] ? void 0 : getClosestProjectingNode(visualElement.parent,),
+  );
+  visualElement.projection.setOptions({
+    layoutId,
+    layout: layout2,
+    alwaysMeasureLayout: Boolean(drag2,) || dragConstraints && isRefObject(dragConstraints,),
+    visualElement,
+    scheduleRender: () => visualElement.scheduleRender(),
+    /**
+     * TODO: Update options in an effect. This could be tricky as it'll be too late
+     * to update by the time layout animations run.
+     * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
+     * ensuring it gets called if there's no potential layout animations.
+     */
+    animationType: typeof layout2 === 'string' ? layout2 : 'both',
+    initialPromotionConfig,
+    layoutScroll,
+    layoutRoot,
+  },);
+}
+function getClosestProjectingNode(visualElement,) {
+  if (!visualElement) return void 0;
+  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
 }
 function useMotionRef(visualState, visualElement, externalRef,) {
   return useCallback((instance) => {
     instance && visualState.mount && visualState.mount(instance,);
     if (visualElement) {
-      instance ? visualElement.mount(instance,) : visualElement.unmount();
+      if (instance) {
+        visualElement.mount(instance,);
+      } else {
+        visualElement.unmount();
+      }
     }
     if (externalRef) {
       if (typeof externalRef === 'function') {
@@ -452,18 +520,16 @@ function createMotionComponent({
     const context = useCreateMotionContext(props,);
     const visualState = useVisualState2(props, isStatic,);
     if (!isStatic && isBrowser) {
-      context.visualElement = useVisualElement(Component33, visualState, configAndProps, createVisualElement2,);
-      const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
-      const isStrict = useContext3(LazyContext,).strict;
-      if (context.visualElement) {
-        MeasureLayout2 = context.visualElement.loadFeatures(
-          // Note: Pass the full new combined props to correctly re-render dynamic feature components.
-          configAndProps,
-          isStrict,
-          preloadedFeatures2,
-          initialLayoutGroupConfig,
-        );
-      }
+      useStrictMode(configAndProps, preloadedFeatures2,);
+      const layoutProjection = getProjectionFunctionality(configAndProps,);
+      MeasureLayout2 = layoutProjection.MeasureLayout;
+      context.visualElement = useVisualElement(
+        Component33,
+        visualState,
+        configAndProps,
+        createVisualElement2,
+        layoutProjection.ProjectionNode,
+      );
     }
     return jsxs(MotionContext.Provider, {
       value: context,
@@ -494,6 +560,33 @@ function useLayoutId({
 },) {
   const layoutGroupId = useContext3(LayoutGroupContext,).id;
   return layoutGroupId && layoutId !== void 0 ? layoutGroupId + '-' + layoutId : layoutId;
+}
+function useStrictMode(configAndProps, preloadedFeatures2,) {
+  const isStrict = useContext3(LazyContext,).strict;
+  if (false) {
+    const strictMessage =
+      'You have rendered a `motion` component within a `LazyMotion` component. This will break tree shaking. Import and render a `m` component instead.';
+    configAndProps.ignoreStrict ? warning(false, strictMessage,) : invariant(false, strictMessage,);
+  }
+}
+function getProjectionFunctionality(props,) {
+  const {
+    drag: drag2,
+    layout: layout2,
+  } = featureDefinitions;
+  if (!drag2 && !layout2) return {};
+  const combined = {
+    ...drag2,
+    ...layout2,
+  };
+  return {
+    MeasureLayout:
+      (drag2 === null || drag2 === void 0 ? void 0 : drag2.isEnabled(props,)) ||
+        (layout2 === null || layout2 === void 0 ? void 0 : layout2.isEnabled(props,))
+        ? combined.MeasureLayout
+        : void 0,
+    ProjectionNode: combined.ProjectionNode,
+  };
 }
 var scaleCorrectors = {};
 function addScaleCorrector(correctors,) {
@@ -752,7 +845,6 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) 
   }
   return values;
 }
-var noop = (any) => any;
 var {
   schedule: frame,
   cancel: cancelFrame,
@@ -829,20 +921,6 @@ function isDragActive() {
   if (!openGestureLock) return true;
   openGestureLock();
   return false;
-}
-var warning = noop;
-var invariant = noop;
-if (false) {
-  warning = (check, message,) => {
-    if (!check && typeof console !== 'undefined') {
-      console.warn(message,);
-    }
-  };
-  invariant = (check, message,) => {
-    if (!check) {
-      throw new Error(message,);
-    }
-  };
 }
 var number = {
   test: (v) => typeof v === 'number',
@@ -3018,7 +3096,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.2.10';
+    this.version = '11.2.12';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3678,7 +3756,7 @@ function animateList(visualElement,) {
 }
 function createAnimationState(visualElement,) {
   let animate22 = animateList(visualElement,);
-  const state = createState();
+  let state = createState();
   let isInitialRender = true;
   const buildResolvedTypeValues = (type) => (acc, definition,) => {
     var _a;
@@ -3842,6 +3920,10 @@ function createAnimationState(visualElement,) {
     setActive,
     setAnimateFunction,
     getState: () => state,
+    reset: () => {
+      state = createState();
+      isInitialRender = true;
+    },
   };
 }
 function checkVariantsDidChange(prev, next,) {
@@ -3892,9 +3974,8 @@ var AnimationFeature = class extends Feature {
     const {
       animate: animate22,
     } = this.node.getProps();
-    this.unmount();
     if (isAnimationControls(animate22,)) {
-      this.unmount = animate22.subscribe(this.node,);
+      this.unmountControls = animate22.subscribe(this.node,);
     }
   }
   /**
@@ -3914,7 +3995,11 @@ var AnimationFeature = class extends Feature {
       this.updateAnimationControlsSubscription();
     }
   }
-  unmount() {}
+  unmount() {
+    var _a;
+    this.node.animationState.reset();
+    (_a = this.unmountControls) === null || _a === void 0 ? void 0 : _a.call(this,);
+  }
 };
 var id = 0;
 var ExitAnimationFeature = class extends Feature {
@@ -4101,8 +4186,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.2.10',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.10 may not work as expected.`,
+          nextValue.version === '11.2.12',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.12 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -4141,8 +4226,6 @@ function updateMotionValuesFromProps(element, next, prev,) {
 }
 var valueTypes = [...dimensionValueTypes, color, complex,];
 var findValueType = (v) => valueTypes.find(testValueType(v,),);
-var featureNames = Object.keys(featureDefinitions,);
-var numFeatures = featureNames.length;
 var propEventHandlers = [
   'AnimationStart',
   'AnimationComplete',
@@ -4153,10 +4236,6 @@ var propEventHandlers = [
   'LayoutAnimationComplete',
 ];
 var numVariantProps = variantProps.length;
-function getClosestProjectingNode(visualElement,) {
-  if (!visualElement) return void 0;
-  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
-}
 var VisualElement = class {
   /**
    * This method takes React props and returns found MotionValues. For example, HTML
@@ -4264,7 +4343,6 @@ var VisualElement = class {
     this.update(this.props, this.presenceContext,);
   }
   unmount() {
-    var _a;
     visualElementStore.delete(this.current,);
     this.projection && this.projection.unmount();
     cancelFrame(this.notifyUpdate,);
@@ -4276,7 +4354,11 @@ var VisualElement = class {
       this.events[key7].clear();
     }
     for (const key7 in this.features) {
-      (_a = this.features[key7]) === null || _a === void 0 ? void 0 : _a.unmount();
+      const feature = this.features[key7];
+      if (feature) {
+        feature.unmount();
+        feature.isMounted = false;
+      }
     }
     this.current = null;
   }
@@ -4302,81 +4384,26 @@ var VisualElement = class {
     }
     return this.sortInstanceNodePosition(this.current, other.current,);
   }
-  loadFeatures(
-    {
-      children,
-      ...renderedProps
-    },
-    isStrict,
-    preloadedFeatures2,
-    initialLayoutGroupConfig,
-  ) {
-    let ProjectionNodeConstructor;
-    let MeasureLayout2;
-    if (false) {
-      const strictMessage =
-        'You have rendered a `motion` component within a `LazyMotion` component. This will break tree shaking. Import and render a `m` component instead.';
-      renderedProps.ignoreStrict ? warning(false, strictMessage,) : invariant(false, strictMessage,);
-    }
-    for (let i = 0; i < numFeatures; i++) {
-      const name = featureNames[i];
+  updateFeatures() {
+    let key7 = 'animation';
+    for (key7 in featureDefinitions) {
+      const featureDefinition = featureDefinitions[key7];
+      if (!featureDefinition) continue;
       const {
         isEnabled,
         Feature: FeatureConstructor,
-        ProjectionNode,
-        MeasureLayout: MeasureLayoutComponent,
-      } = featureDefinitions[name];
-      if (ProjectionNode) ProjectionNodeConstructor = ProjectionNode;
-      if (isEnabled(renderedProps,)) {
-        if (!this.features[name] && FeatureConstructor) {
-          this.features[name] = new FeatureConstructor(this,);
-        }
-        if (MeasureLayoutComponent) {
-          MeasureLayout2 = MeasureLayoutComponent;
-        }
+      } = featureDefinition;
+      if (!this.features[key7] && FeatureConstructor && isEnabled(this.props,)) {
+        this.features[key7] = new FeatureConstructor(this,);
       }
-    }
-    if ((this.type === 'html' || this.type === 'svg') && !this.projection && ProjectionNodeConstructor) {
-      const {
-        layoutId,
-        layout: layout2,
-        drag: drag2,
-        dragConstraints,
-        layoutScroll,
-        layoutRoot,
-      } = renderedProps;
-      this.projection = new ProjectionNodeConstructor(
-        this.latestValues,
-        renderedProps['data-framer-portal-id'] ? void 0 : getClosestProjectingNode(this.parent,),
-      );
-      this.projection.setOptions({
-        layoutId,
-        layout: layout2,
-        alwaysMeasureLayout: Boolean(drag2,) || dragConstraints && isRefObject(dragConstraints,),
-        visualElement: this,
-        scheduleRender: () => this.scheduleRender(),
-        /**
-         * TODO: Update options in an effect. This could be tricky as it'll be too late
-         * to update by the time layout animations run.
-         * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
-         * ensuring it gets called if there's no potential layout animations.
-         */
-        animationType: typeof layout2 === 'string' ? layout2 : 'both',
-        initialPromotionConfig: initialLayoutGroupConfig,
-        layoutScroll,
-        layoutRoot,
-      },);
-    }
-    return MeasureLayout2;
-  }
-  updateFeatures() {
-    for (const key7 in this.features) {
-      const feature = this.features[key7];
-      if (feature.isMounted) {
-        feature.update();
-      } else {
-        feature.mount();
-        feature.isMounted = true;
+      if (this.features[key7]) {
+        const feature = this.features[key7];
+        if (feature.isMounted) {
+          feature.update();
+        } else {
+          feature.mount();
+          feature.isMounted = true;
+        }
       }
     }
   }
@@ -6127,7 +6154,7 @@ var VisualElementDragControls = class {
       const {
         dragConstraints,
       } = this.getProps();
-      if (isRefObject(dragConstraints,)) {
+      if (isRefObject(dragConstraints,) && dragConstraints.current) {
         this.constraints = this.resolveRefConstraints();
       }
     };
@@ -6139,7 +6166,7 @@ var VisualElementDragControls = class {
       projection.root && projection.root.updateScroll();
       projection.updateLayout();
     }
-    measureDragConstraints();
+    frame.read(measureDragConstraints,);
     const stopResizeListener = addDomEvent(window, 'resize', () => this.scalePositionWithinConstraints(),);
     const stopLayoutUpdateListener = projection.addEventListener('didUpdate', ({
       delta,
@@ -6717,7 +6744,7 @@ function isOptimisedAppearTree(projectionNode,) {
     return false;
   }
 }
-function createProjectionNode({
+function createProjectionNode2({
   attachResizeListener,
   defaultParent,
   measureScroll,
@@ -6750,6 +6777,7 @@ function createProjectionNode({
       this.eventHandlers = /* @__PURE__ */ new Map();
       this.hasTreeAnimated = false;
       this.updateScheduled = false;
+      this.scheduleUpdate = () => this.update();
       this.projectionUpdateScheduled = false;
       this.checkUpdateFailed = () => {
         if (this.isUpdating) {
@@ -6973,7 +7001,7 @@ function createProjectionNode({
     didUpdate() {
       if (!this.updateScheduled) {
         this.updateScheduled = true;
-        microtask.read(() => this.update());
+        microtask.read(this.scheduleUpdate,);
       }
     }
     clearAllSnapshots() {
@@ -7041,7 +7069,7 @@ function createProjectionNode({
     }
     resetTransform() {
       if (!resetTransform) return;
-      const isResetRequested = this.isLayoutDirty || this.shouldResetTransform;
+      const isResetRequested = this.isLayoutDirty || this.shouldResetTransform || this.options.alwaysMeasureLayout;
       const hasProjection = this.projectionDelta && !isDeltaZero(this.projectionDelta,);
       const transformTemplate2 = this.getTransformTemplate();
       const transformTemplateValue = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : void 0;
@@ -7800,7 +7828,7 @@ function shouldAnimatePositionOnly(animationType, snapshot, layout2,) {
   return animationType === 'position' ||
     animationType === 'preserve-aspect' && !isNear(aspectRatio(snapshot,), aspectRatio(layout2,), 0.2,);
 }
-var DocumentProjectionNode = createProjectionNode({
+var DocumentProjectionNode = createProjectionNode2({
   attachResizeListener: (ref, notify2,) => addDomEvent(ref, 'resize', notify2,),
   measureScroll: () => ({
     x: document.documentElement.scrollLeft || document.body.scrollLeft,
@@ -7811,7 +7839,7 @@ var DocumentProjectionNode = createProjectionNode({
 var rootProjectionNode = {
   current: void 0,
 };
-var HTMLProjectionNode = createProjectionNode({
+var HTMLProjectionNode = createProjectionNode2({
   measureScroll: (instance) => ({
     x: instance.scrollLeft,
     y: instance.scrollTop,
@@ -9996,7 +10024,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.K4XHQ4DX.js
+// https :https://app.framerstatic.com/framer.7PXWPGAI.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11938,22 +11966,40 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 function isBot(userAgent,) {
-  return /bot|Mediapartners-Google|Google-PageRenderer|yandex|ia_archiver/iu.test(userAgent,);
+  return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
 }
-function yieldToMain(isHighPriority,) {
+function yieldToMain(options,) {
   if ('scheduler' in window) {
-    const options = {
-      priority: isHighPriority ? 'user-blocking' : 'user-visible',
-    };
     if ('yield' in scheduler) return scheduler.yield(options,);
     if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
   }
-  if (isHighPriority) {
+  if ((options === null || options === void 0 ? void 0 : options.priority) === 'user-blocking') {
     return Promise.resolve();
   }
   return new Promise((resolve) => {
-    setTimeout(resolve, 0,);
+    setTimeout(resolve,);
   },);
+}
+async function yieldBefore(fn, options,) {
+  await yieldToMain(options,);
+  return fn();
+}
+function interactionResponse(options, fallback = true,) {
+  return new Promise((resolve) => {
+    if (fallback) setTimeout(resolve, 100,);
+    requestAnimationFrame(() => {
+      void yieldBefore(resolve, options,);
+    },);
+  },);
+}
+function useAfterPaintEffect(fn, deps, options,) {
+  useLayoutEffect(() => {
+    const runAfterPaint = async () => {
+      await interactionResponse(options, false,);
+      fn();
+    };
+    void runAfterPaint();
+  }, deps,);
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
@@ -12496,6 +12542,7 @@ function useReplaceInitialState({
 },) {
   React4.useLayoutEffect(() => {
     if (disabled) return;
+    performance.mark('framer-history-set-initial-state',);
     replaceHistoryState({
       routeId,
       pathVariables: initialPathVariables,
@@ -12656,14 +12703,162 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
     },);
   } catch {}
 }
-function isSamePage(a, b,) {
-  if (a.routeId !== b.routeId) return false;
-  if (a.pathVariables === b.pathVariables) return true;
-  const aPathVariables = a.pathVariables || {};
-  const bPathVariables = b.pathVariables || {};
-  return aPathVariables.length === bPathVariables.length &&
-    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
+function measureSafe(name, start, end,) {
+  try {
+    performance.measure(name, start, end,);
+  } catch (e) {
+    console.warn(`Could not measure ${name}`, e,);
+  }
 }
+var shouldMark = false;
+function markHydrationStart() {
+  shouldMark = true;
+  performance.mark('framer-hydration-start',);
+}
+var routerHydrationInsertionEffectStartHasRun = false;
+var routerHydrationLayoutEffectStartHasRun = false;
+var routerHydrationEffectStartHasRun = false;
+function useMarkRouterEffects() {
+  const hydrationMarkPrefix = 'framer-hydration-router';
+  useInsertionEffect(() => {
+    if (routerHydrationInsertionEffectStartHasRun || !shouldMark) return;
+    routerHydrationInsertionEffectStartHasRun = true;
+    performance.mark(`${hydrationMarkPrefix}-insertion-effect`,);
+  }, [],);
+  useLayoutEffect(() => {
+    if (routerHydrationLayoutEffectStartHasRun || !shouldMark) return;
+    routerHydrationLayoutEffectStartHasRun = true;
+    performance.mark(`${hydrationMarkPrefix}-layout-effect`,);
+  }, [],);
+  useEffect(() => {
+    if (routerHydrationEffectStartHasRun || !shouldMark) return;
+    routerHydrationEffectStartHasRun = true;
+    performance.mark(`${hydrationMarkPrefix}-effect`,);
+  }, [],);
+}
+var hydrationInsertionEffectStartHasRun = false;
+var hydrationLayoutEffectStartHasRun = false;
+var hydrationEffectStartHasRun = false;
+function useMarkSuspenseEffectsStart() {
+  const hydrationMarkPrefix = 'framer-hydration-';
+  const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
+  const hydrationEffectsEnd = `${hydrationMarkPrefix}effects-end`;
+  const hydrationBrowserRenderStart = `${hydrationMarkPrefix}browser-render-start`;
+  const hydrationRenderEnd = `${hydrationMarkPrefix}render-end`;
+  useInsertionEffect(() => {
+    if (hydrationInsertionEffectStartHasRun || !shouldMark) return;
+    hydrationInsertionEffectStartHasRun = true;
+    performance.mark(hydrationRenderEnd,);
+    measureSafe(`${hydrationMarkPrefix}render`, `${hydrationMarkPrefix}start`, hydrationRenderEnd,);
+    performance.mark(`${hydrationMarkPrefix}insertion-effects-start`,);
+  }, [],);
+  useLayoutEffect(() => {
+    if (hydrationLayoutEffectStartHasRun || !shouldMark) return;
+    hydrationLayoutEffectStartHasRun = true;
+    performance.mark(`${hydrationMarkPrefix}layout-effects-start`,);
+    requestAnimationFrame(() => {
+      var _a, _b, _c;
+      performance.mark(hydrationBrowserRenderStart,);
+      measureSafe(
+        `${hydrationMarkPrefix}uho`,
+        (_b = (_a = performance.getEntriesByName(hydrationEffectsEnd,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null &&
+          _b !== void 0
+          ? _b
+          : (_c = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) === null || _c === void 0
+          ? void 0
+          : _c.name,
+        hydrationBrowserRenderStart,
+      );
+    },);
+  }, [],);
+  useEffect(() => {
+    var _a;
+    if (hydrationEffectStartHasRun || !shouldMark) return;
+    hydrationEffectStartHasRun = true;
+    const hydrationEffectsStart = `${hydrationMarkPrefix}effects-start`;
+    performance.mark(hydrationEffectsStart,);
+    const hasPaintStarted = (_a = performance.getEntriesByName(hydrationBrowserRenderStart,)[0]) === null || _a === void 0
+      ? void 0
+      : _a.name;
+    if (!hasPaintStarted) {
+      measureSafe(`${hydrationMarkPrefix}commit`, hydrationLayoutEffectsEnd, hydrationEffectsStart,);
+      performance.mark(`${hydrationMarkPrefix}effects-sync`,);
+    }
+  }, [],);
+  return null;
+}
+var hydrationInsertionEffectHasRun = false;
+var hydrationLayoutEffectHasRun = false;
+var hydrationEffectHasRun = false;
+var hydrationPaintEffectHasRun = false;
+function useMarkSuspenseEffectEnd() {
+  const hydrationMarkPrefix = 'framer-hydration-';
+  const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
+  const hydrationEffectsEnd = `${hydrationMarkPrefix}effects-end`;
+  const hydrationBrowserRenderStart = `${hydrationMarkPrefix}browser-render-start`;
+  const hydrationStart = `${hydrationMarkPrefix}start`;
+  const hydrationInsertionEffectsEnd = `${hydrationMarkPrefix}insertion-effects-end`;
+  const hydrationFP = `${hydrationMarkPrefix}first-paint`;
+  const hydrationAnimationFrameEnd = `${hydrationMarkPrefix}browser-raf-end`;
+  useInsertionEffect(() => {
+    if (hydrationInsertionEffectHasRun || !shouldMark) return;
+    hydrationInsertionEffectHasRun = true;
+    performance.mark(hydrationInsertionEffectsEnd,);
+    measureSafe(`${hydrationMarkPrefix}insertion-effects`, `${hydrationMarkPrefix}insertion-effects-start`, hydrationInsertionEffectsEnd,);
+  }, [],);
+  useLayoutEffect(() => {
+    if (hydrationLayoutEffectHasRun || !shouldMark) return;
+    hydrationLayoutEffectHasRun = true;
+    performance.mark(hydrationLayoutEffectsEnd,);
+    measureSafe(`${hydrationMarkPrefix}layout-effects`, `${hydrationMarkPrefix}layout-effects-start`, hydrationLayoutEffectsEnd,);
+    requestAnimationFrame(() => {
+      performance.mark(hydrationAnimationFrameEnd,);
+      measureSafe(`${hydrationMarkPrefix}raf`, hydrationBrowserRenderStart, hydrationAnimationFrameEnd,);
+    },);
+  }, [],);
+  useEffect(() => {
+    var _a, _b, _c;
+    if (hydrationEffectHasRun || !shouldMark) return;
+    hydrationEffectHasRun = true;
+    performance.mark(hydrationEffectsEnd,);
+    measureSafe(
+      `${hydrationMarkPrefix}effects`,
+      (_b = (_a = performance.getEntriesByName(hydrationFP,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0
+        ? _b
+        : (_c = performance.getEntriesByName(`${hydrationMarkPrefix}effects-start`,)[0]) === null || _c === void 0
+        ? void 0
+        : _c.name,
+      hydrationEffectsEnd,
+    );
+  }, [],);
+  useAfterPaintEffect(
+    () => {
+      if (hydrationPaintEffectHasRun || !shouldMark) return;
+      hydrationPaintEffectHasRun = true;
+      performance.mark(hydrationFP,);
+      measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
+      measureSafe(`${hydrationMarkPrefix}browser-render`, hydrationAnimationFrameEnd, hydrationFP,);
+    },
+    [],
+    // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
+    {
+      priority: 'user-blocking',
+    },
+  );
+  return null;
+}
+function MarkSuspenseEffectsStart() {
+  useMarkSuspenseEffectsStart();
+  return null;
+}
+function MarkSuspenseEffectsEnd() {
+  useMarkSuspenseEffectEnd();
+  return null;
+}
+var MarkSuspenseEffects = {
+  Start: MarkSuspenseEffectsStart,
+  End: MarkSuspenseEffectsEnd,
+};
 var eventsToStop = [
   'mousedown',
   'mouseup',
@@ -12702,108 +12897,42 @@ var stopFn = (event) => {
   event.stopPropagation();
   performance.mark('framer-react-event-handling-prevented',);
 };
-if (typeof window !== 'undefined') {
-  window.__FRAMER_TURN_OFF_REACT_EVENT_HANDLING__ = function () {
-    if (!eventsToStop) return;
-    const options = {
-      capture: true,
-    };
-    eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
-    window.__FRAMER_TURN_OFF_REACT_EVENT_HANDLING__ = void 0;
-  };
-}
-function turnOnReactEventHandling() {
+var shouldTurnOnEventHandling = false;
+function turnOffReactEventHandling() {
   if (!eventsToStop) return;
+  shouldTurnOnEventHandling = true;
+  performance.mark('framer-react-event-handling-start',);
   const options = {
     capture: true,
   };
-  eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
-  eventsToStop = void 0;
+  eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
 }
-function measureSafe(name, start, end,) {
-  try {
-    performance.measure(name, start, end,);
-  } catch (e) {
-    console.warn(`Could not measure ${name}`, e,);
-  }
-}
-var hydrationEffectHasRun = false;
-var hydrationInsertionEffectHasRun = false;
-var hydrationLayoutEffectHasRun = false;
-function OnHydrationEnd({
-  addHydrationMarkers,
-  turnOffEventHandlerHack,
-},) {
-  const hydrationMarkPrefix = 'framer-hydration-';
-  const hydrationStart = `${hydrationMarkPrefix}start`;
-  const hydrationRenderEnd = `${hydrationMarkPrefix}render-end`;
-  const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
-  const hydrationEffectsEnd = `${hydrationMarkPrefix}effects-end`;
-  const hydrationFP = `${hydrationMarkPrefix}first-paint`;
-  useInsertionEffect(() => {
-    if (hydrationInsertionEffectHasRun) return;
-    hydrationInsertionEffectHasRun = true;
-    if (addHydrationMarkers) {
-      performance.mark(hydrationRenderEnd,);
-      measureSafe(`${hydrationMarkPrefix}render`, hydrationStart, hydrationRenderEnd,);
-    }
-  }, [],);
-  useLayoutEffect(() => {
-    if (hydrationLayoutEffectHasRun) return;
-    hydrationLayoutEffectHasRun = true;
-    if (addHydrationMarkers) {
-      performance.mark(hydrationLayoutEffectsEnd,);
-      measureSafe(`${hydrationMarkPrefix}layout-effects`, hydrationRenderEnd, hydrationLayoutEffectsEnd,);
-    }
-    requestAnimationFrame(() => {
-      var _a, _b, _c;
-      const browserRenderStart = `${hydrationMarkPrefix}browser-render-start`;
-      if (addHydrationMarkers) {
-        performance.mark(browserRenderStart,);
-        measureSafe(
-          `${hydrationMarkPrefix}uho`,
-          (_b = (_a = performance.getEntriesByName(hydrationEffectsEnd,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null &&
-            _b !== void 0
-            ? _b
-            : (_c = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) === null || _c === void 0
-            ? void 0
-            : _c.name,
-          browserRenderStart,
-        );
-      }
-      setTimeout(() => {
-        if (turnOffEventHandlerHack) {
-          turnOnReactEventHandling();
-        }
-        if (addHydrationMarkers) {
-          performance.mark(hydrationFP,);
-          measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
-          measureSafe(`${hydrationMarkPrefix}browser-render`, browserRenderStart, hydrationFP,);
-        }
-      }, 0,);
-    },);
-  }, [],);
-  useEffect(() => {
-    var _a, _b, _c;
-    if (hydrationEffectHasRun) return;
-    hydrationEffectHasRun = true;
-    if (turnOffEventHandlerHack) {
-      turnOnReactEventHandling();
-    }
-    if (addHydrationMarkers) {
-      performance.mark(hydrationEffectsEnd,);
-      measureSafe(
-        `${hydrationMarkPrefix}effects`,
-        (_b = (_a = performance.getEntriesByName(hydrationFP,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0
-          ? _b
-          : (_c = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) === null || _c === void 0
-          ? void 0
-          : _c.name,
-        hydrationEffectsEnd,
-      );
-    }
-  }, [],);
+function TurnOnReactEventHandling() {
+  useAfterPaintEffect(
+    () => {
+      if (!shouldTurnOnEventHandling || !eventsToStop) return;
+      const options = {
+        capture: true,
+      };
+      eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
+      eventsToStop = void 0;
+      performance.mark('framer-react-event-handling-end',);
+    },
+    [],
+    // user-blocking ensures this runs right after the paint, so users can interact asap.
+    {
+      priority: 'user-blocking',
+    },
+  );
   return null;
+}
+function isSamePage(a, b,) {
+  if (a.routeId !== b.routeId) return false;
+  if (a.pathVariables === b.pathVariables) return true;
+  const aPathVariables = a.pathVariables || {};
+  const bPathVariables = b.pathVariables || {};
+  return aPathVariables.length === bPathVariables.length &&
+    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
 }
 function useGetRouteCallback(routes,) {
   return React4.useCallback((routeId) => routes[routeId], [routes,],);
@@ -12945,14 +13074,14 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   window.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
-  const actions = React4.useRef([],);
-  React4.useLayoutEffect(() => {
+  const actions = useRef([],);
+  useLayoutEffect(() => {
     var _a;
     if (!((_a = actions.current) === null || _a === void 0 ? void 0 : _a.length)) return;
     actions.current.forEach((action) => action());
     actions.current = [];
   }, [dep,],);
-  return React4.useCallback((cb) => {
+  return useCallback((cb) => {
     actions.current.push(cb,);
   }, [],);
 }
@@ -12967,9 +13096,8 @@ function Router({
   initialLocaleId,
   locales = [],
   preserveQueryParams = false,
-  enableImproveInpDuringHydration = false,
-  addHydrationMarkers = false,
 },) {
+  useMarkRouterEffects();
   useReplaceInitialState({
     disabled: disableHistory,
     routeId: initialRoute,
@@ -12978,11 +13106,11 @@ function Router({
   },);
   const startViewTransition2 = useViewTransition();
   const monitorNextRender = useMonitorNextRender('route-change',);
-  const currentRouteRef = React4.useRef(initialRoute,);
-  const currentPathVariablesRef = React4.useRef(initialPathVariables,);
-  const currentLocaleIdRef = React4.useRef(initialLocaleId,);
+  const currentRouteRef = useRef(initialRoute,);
+  const currentPathVariablesRef = useRef(initialPathVariables,);
+  const currentLocaleIdRef = useRef(initialLocaleId,);
   const currentLocaleId = currentLocaleIdRef.current;
-  const activeLocale = React4.useMemo(() => {
+  const activeLocale = useMemo(() => {
     var _a;
     return (_a = locales.find(({
             id: id3,
@@ -12994,7 +13122,7 @@ function Router({
       : null;
   }, [currentLocaleId, locales,],);
   const [dep, forceUpdate,] = useForceUpdate2();
-  const localeInfo = React4.useMemo(() => {
+  const localeInfo = useMemo(() => {
     return {
       activeLocale,
       locales,
@@ -13036,21 +13164,18 @@ function Router({
     };
   }, [activeLocale, collectionUtils, forceUpdate, locales, monitorNextRender, preserveQueryParams, routes, startViewTransition2,],);
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const setCurrentRouteId = React4.useCallback(
-    (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
-      currentRouteRef.current = routeId;
-      currentPathVariablesRef.current = pathVariables;
-      currentLocaleIdRef.current = localeId;
-      scheduleSideEffect(() => {
-        updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
-      },);
-      startTransition2(forceUpdate,);
-      monitorNextRender();
-    },
-    [forceUpdate, monitorNextRender, scheduleSideEffect,],
-  );
+  const setCurrentRouteId = useCallback((routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
+    currentRouteRef.current = routeId;
+    currentPathVariablesRef.current = pathVariables;
+    currentLocaleIdRef.current = localeId;
+    scheduleSideEffect(() => {
+      updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
+    },);
+    startTransition2(forceUpdate,);
+    monitorNextRender();
+  }, [forceUpdate, monitorNextRender, scheduleSideEffect,],);
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = React4.useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
+  const navigate = useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
     var _a, _b;
     const newRoute = routes[routeId];
     if (pathVariables) {
@@ -13111,7 +13236,7 @@ function Router({
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
-  const api = React4.useMemo(() => ({
+  const api = useMemo(() => ({
     navigate,
     getRoute,
     currentRouteId,
@@ -13139,16 +13264,17 @@ function Router({
             notFoundPage,
             defaultPageStyle,
             forceUpdateKey: dep,
-            children: jsx(React4.Fragment, {
-              children: pageExistsInCurrentLocale
-                ? renderPage(current.page, defaultPageStyle,)
-                : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+            children: jsxs(Fragment, {
+              children: [
+                jsx(MarkSuspenseEffects.Start, {},),
+                pageExistsInCurrentLocale
+                  ? renderPage(current.page, defaultPageStyle,)
+                  : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+              ],
             }, remountKey,),
           },),
-          jsx(OnHydrationEnd, {
-            addHydrationMarkers,
-            turnOffEventHandlerHack: enableImproveInpDuringHydration,
-          },),
+          jsx(TurnOnReactEventHandling, {},),
+          jsx(MarkSuspenseEffects.End, {},),
         ],
       },),
     },),
@@ -19121,7 +19247,7 @@ function isNull(value,) {
   return value === null;
 }
 function isNullish(value,) {
-  return isUndefined(value,) || isNull(value,);
+  return value == null;
 }
 function isValidDate(value,) {
   return value instanceof Date && !isNaN(value.getTime(),);
@@ -32295,8 +32421,6 @@ function PageRoot({
   localeId,
   locales,
   preserveQueryParams,
-  enableImproveInpDuringHydration,
-  addHydrationMarkers = false,
 },) {
   React4.useEffect(() => {
     if (isWebsite) return;
@@ -32321,8 +32445,6 @@ function PageRoot({
               width: 'auto',
             },
             preserveQueryParams,
-            enableImproveInpDuringHydration,
-            addHydrationMarkers,
           },),
         },),
       },),
@@ -41184,6 +41306,14 @@ function upgradeComponentFontV1(font,) {
     source,
   };
 }
+function withPerformanceMarks(prefix2, callback,) {
+  const markStart = `${prefix2}-start`;
+  performance.mark(markStart,);
+  callback();
+  const markEnd = `${prefix2}-end`;
+  performance.mark(markEnd,);
+  performance.measure(prefix2, markStart, markEnd,);
+}
 function loadJSON(url,) {
   return fetch(url, {
     mode: 'cors',
@@ -41357,7 +41487,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.2.10',
+    'framer-motion': '11.2.12',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -41578,6 +41708,7 @@ export {
   MainLoop,
   makePaddingString,
   makeUseVisualState,
+  markHydrationStart,
   memoize2 as memoize,
   mirrorEasing,
   mix,
@@ -41665,6 +41796,7 @@ export {
   transform,
   transformString,
   transformTemplate,
+  turnOffReactEventHandling,
   unwrapMotionComponent,
   useActiveTargetCallback,
   useActiveVariantCallback,
@@ -41761,6 +41893,7 @@ export {
   WithOverride,
   withParallaxTransform,
   withPath,
+  withPerformanceMarks,
   withShape,
   withStyleAppearEffect,
   withVariantAppearEffect,
