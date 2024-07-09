@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-R2K2XF3S.js
+// https :https://app.framerstatic.com/chunk-VBDYROES.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -661,6 +661,9 @@ var singleColorRegex =
 function isString(v,) {
   return typeof v === 'string';
 }
+function isNullish(v,) {
+  return v == null;
+}
 var createUnitType = (unit) => ({
   test: (v) => isString(v,) && v.endsWith(unit,) && v.split(' ',).length === 1,
   parse: parseFloat,
@@ -937,7 +940,8 @@ var scale = {
 };
 var isColorString = (type, testProp,) => (v) => {
   return Boolean(
-    isString(v,) && singleColorRegex.test(v,) && v.startsWith(type,) || testProp && Object.prototype.hasOwnProperty.call(v, testProp,),
+    isString(v,) && singleColorRegex.test(v,) && v.startsWith(type,) ||
+      testProp && !isNullish(v,) && Object.prototype.hasOwnProperty.call(v, testProp,),
   );
 };
 var splitColor = (aName, bName, cName,) => (v) => {
@@ -3096,7 +3100,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.2.12';
+    this.version = '11.2.13';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -4186,8 +4190,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       }
       if (false) {
         warnOnce(
-          nextValue.version === '11.2.12',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.12 may not work as expected.`,
+          nextValue.version === '11.2.13',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.13 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -10024,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.7PXWPGAI.js
+// https :https://app.framerstatic.com/framer.U7SV6PM7.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -10672,16 +10676,16 @@ var require_browser = __commonJS({
     process5.argv = [];
     process5.version = '';
     process5.versions = {};
-    function noop2() {}
-    process5.on = noop2;
-    process5.addListener = noop2;
-    process5.once = noop2;
-    process5.off = noop2;
-    process5.removeListener = noop2;
-    process5.removeAllListeners = noop2;
-    process5.emit = noop2;
-    process5.prependListener = noop2;
-    process5.prependOnceListener = noop2;
+    function noop22() {}
+    process5.on = noop22;
+    process5.addListener = noop22;
+    process5.once = noop22;
+    process5.off = noop22;
+    process5.removeListener = noop22;
+    process5.removeAllListeners = noop22;
+    process5.emit = noop22;
+    process5.prependListener = noop22;
+    process5.prependOnceListener = noop22;
     process5.listeners = function (name,) {
       return [];
     };
@@ -15505,8 +15509,8 @@ var ObjectInterpolation = (valueInterpolation) => {
     difference(from, to,) {
       let sum = 0;
       for (const key7 in from) {
-        const difference = valueInterpolation.difference(from[key7], to[key7],);
-        sum += Math.pow(difference, 2,);
+        const difference2 = valueInterpolation.difference(from[key7], to[key7],);
+        sum += Math.pow(difference2, 2,);
       }
       return Math.sqrt(sum,);
     },
@@ -19246,7 +19250,7 @@ function isUndefined(value,) {
 function isNull(value,) {
   return value === null;
 }
-function isNullish(value,) {
+function isNullish2(value,) {
   return value == null;
 }
 function isValidDate(value,) {
@@ -20954,131 +20958,6 @@ var isPropValid = /* @__PURE__ */ memoize((prop) =>
   reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
   /* Z+1 */
 );
-var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React4.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
-var import_process = __toESM(require_browser(), 1,);
-var safeNavigator = typeof navigator !== 'undefined' ? navigator : void 0;
-var isBrowser2 = () => typeof document === 'object';
-var isWebKit = () => {
-  var _a;
-  return ((_a = safeNavigator) == null ? void 0 : _a.userAgent.includes('AppleWebKit/',)) && !isChrome() && !isEdge();
-};
-var webkitVersion = () => {
-  let version2 = -1;
-  const regexp = /AppleWebKit\/([\d.]+)/;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var safariVersion = () => {
-  let version2 = -1;
-  const regexp = /Version\/([\d.]+)/;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var isChrome = () => safeNavigator && /Chrome/.test(safeNavigator.userAgent,) && /Google Inc/.test(safeNavigator.vendor,) && !isEdge();
-var isSafari = () => safeNavigator && /Safari/.test(safeNavigator.userAgent,) && /Apple Computer/.test(safeNavigator.vendor,);
-var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/.test(safeNavigator.userAgent,);
-var isFramerX = () => safeNavigator && /FramerX/.test(safeNavigator.userAgent,);
-var isEdge = () => safeNavigator && /Edg\//.test(safeNavigator.userAgent,);
-var isAndroid = () => safeNavigator && /android/i.test(safeNavigator.userAgent,);
-var isIOS = () => safeNavigator && /iPhone|iPod|iPad/i.test(safeNavigator.platform,);
-var isMacOS = () => safeNavigator && /Mac/.test(safeNavigator.platform,);
-var isWindows = () => safeNavigator && /Win/.test(safeNavigator.platform,);
-var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
-var isDesktop = () => deviceType() === 'desktop';
-var isPhone = () => deviceType() === 'phone';
-var isTablet = () => deviceType() === 'tablet';
-var isMobile = () => isPhone() || isTablet();
-var isFileUrl = (url) => url.startsWith('file://',);
-var isDataUrl = (url) => url.startsWith('data:',);
-var isTest = () => import_process.default.env.NODE_ENV === 'test';
-var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
-var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/.test(url,);
-var isLocalUrl = (url) => {
-  if (isFileUrl(url,)) return true;
-  if (isLocalServerUrl(url,)) return true;
-  return false;
-};
-var isLocalAssetUrl = (url, baseUrl,) => {
-  if (baseUrl === null) baseUrl = safeWindow.location.href;
-  if (isDataUrl(url,)) return false;
-  if (isLocalUrl(url,)) return true;
-  if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
-  return false;
-};
-var devicePixelRatio2 = () => safeWindow.devicePixelRatio;
-var isJP2Supported = function () {
-  if (isFirefox()) return false;
-  return isWebKit();
-};
-var isWebPSupported = () => isChrome();
-var deviceType = () => {
-  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
-  if (safeNavigator && /mobi/i.test(safeNavigator.userAgent,)) return 'phone';
-  return 'desktop';
-};
-var deviceOS = () => {
-  if (isMacOS()) return 'macos';
-  if (isIOS()) return 'ios';
-  if (isAndroid()) return 'android';
-  if (isWindows()) return 'windows';
-};
-var deviceFont = (os) => {
-  if (!os) {
-    os = deviceOS();
-  }
-  const fonts = {
-    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
-    google: 'Roboto, Helvetica Neue',
-    microsoft: 'Segoe UI, Helvetica Neue',
-  };
-  if (os === 'macos') return fonts.apple;
-  if (os === 'ios') return fonts.apple;
-  if (os === 'android') return fonts.google;
-  if (os === 'windows') return fonts.microsoft;
-  return fonts.apple;
-};
-var environment = {
-  isWebKit,
-  webkitVersion,
-  isChrome,
-  isSafari,
-  isFirefox,
-  isFramerX,
-  isEdge,
-  isAndroid,
-  isIOS,
-  isMacOS,
-  isWindows,
-  isTouch,
-  isDesktop,
-  isPhone,
-  isTablet,
-  isMobile,
-  isFileUrl,
-  isDataUrl,
-  isRelativeUrl,
-  isLocalServerUrl,
-  isLocalUrl,
-  isLocalAssetUrl,
-  devicePixelRatio: devicePixelRatio2,
-  isJP2Supported,
-  isWebPSupported,
-  deviceType,
-  deviceOS,
-  deviceFont,
-  safariVersion,
-};
 var mockWithWarning = (message) => {
   return () => {
     warnOnce2(message,);
@@ -21214,35 +21093,12 @@ function StaticImage({
 },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image, containerSize,);
-  const [measuredSizes, setMeasuredSizes,] = React4.useState();
   const imageRef = React4.useRef(null,);
-  const libraryFeatures = useLibraryFeatures();
-  React4.useEffect(() => {
-    if (!libraryFeatures.imgSizesWorkaroundEnabled) return;
-    const imageElement = imageRef.current;
-    if (!imageElement) return;
-    if (isTest()) return;
-    if (!image.sizes) return;
-    const smartComponentParent = imageElement.closest('[data-framer-name]',);
-    if (!smartComponentParent) return;
-    const imageNodeWidth = imageElement.clientWidth;
-    const currentSizes = Number(image.sizes.replace('px', '',),);
-    if (
-      // If we successfully parsed `sizes`, and...
-      !isNaN(currentSizes,) &&
-      // ...if the image node is smaller than the currently set `sizes`
-      // attribute,..
-      imageNodeWidth < currentSizes
-    ) {
-      return;
-    }
-    setMeasuredSizes(imageNodeWidth + 'px',);
-  }, [image.sizes,],);
   return /* @__PURE__ */ jsx('img', {
     ref: imageRef,
     decoding: 'async',
     loading: image.loading,
-    sizes: measuredSizes ?? image.sizes,
+    sizes: image.sizes,
     srcSet: image.srcSet,
     src: source,
     alt: alt ?? image.alt,
@@ -21462,6 +21318,125 @@ function Border(props,) {
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
 }
+var import_process = __toESM(require_browser(), 1,);
+var safeNavigator = typeof navigator !== 'undefined' ? navigator : void 0;
+var isBrowser2 = () => typeof document === 'object';
+var isWebKit = () => {
+  var _a;
+  return ((_a = safeNavigator) == null ? void 0 : _a.userAgent.includes('AppleWebKit/',)) && !isChrome() && !isEdge();
+};
+var webkitVersion = () => {
+  let version2 = -1;
+  const regexp = /AppleWebKit\/([\d.]+)/;
+  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
+  if (result && result[1]) {
+    version2 = parseFloat(result[1],);
+  }
+  return version2;
+};
+var safariVersion = () => {
+  let version2 = -1;
+  const regexp = /Version\/([\d.]+)/;
+  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
+  if (result && result[1]) {
+    version2 = parseFloat(result[1],);
+  }
+  return version2;
+};
+var isChrome = () => safeNavigator && /Chrome/.test(safeNavigator.userAgent,) && /Google Inc/.test(safeNavigator.vendor,) && !isEdge();
+var isSafari = () => safeNavigator && /Safari/.test(safeNavigator.userAgent,) && /Apple Computer/.test(safeNavigator.vendor,);
+var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/.test(safeNavigator.userAgent,);
+var isFramerX = () => safeNavigator && /FramerX/.test(safeNavigator.userAgent,);
+var isEdge = () => safeNavigator && /Edg\//.test(safeNavigator.userAgent,);
+var isAndroid = () => safeNavigator && /android/i.test(safeNavigator.userAgent,);
+var isIOS = () => safeNavigator && /iPhone|iPod|iPad/i.test(safeNavigator.platform,);
+var isMacOS = () => safeNavigator && /Mac/.test(safeNavigator.platform,);
+var isWindows = () => safeNavigator && /Win/.test(safeNavigator.platform,);
+var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
+var isDesktop = () => deviceType() === 'desktop';
+var isPhone = () => deviceType() === 'phone';
+var isTablet = () => deviceType() === 'tablet';
+var isMobile = () => isPhone() || isTablet();
+var isFileUrl = (url) => url.startsWith('file://',);
+var isDataUrl = (url) => url.startsWith('data:',);
+var isTest = () => import_process.default.env.NODE_ENV === 'test';
+var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
+var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/.test(url,);
+var isLocalUrl = (url) => {
+  if (isFileUrl(url,)) return true;
+  if (isLocalServerUrl(url,)) return true;
+  return false;
+};
+var isLocalAssetUrl = (url, baseUrl,) => {
+  if (baseUrl === null) baseUrl = safeWindow.location.href;
+  if (isDataUrl(url,)) return false;
+  if (isLocalUrl(url,)) return true;
+  if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
+  return false;
+};
+var devicePixelRatio2 = () => safeWindow.devicePixelRatio;
+var isJP2Supported = function () {
+  if (isFirefox()) return false;
+  return isWebKit();
+};
+var isWebPSupported = () => isChrome();
+var deviceType = () => {
+  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
+  if (safeNavigator && /mobi/i.test(safeNavigator.userAgent,)) return 'phone';
+  return 'desktop';
+};
+var deviceOS = () => {
+  if (isMacOS()) return 'macos';
+  if (isIOS()) return 'ios';
+  if (isAndroid()) return 'android';
+  if (isWindows()) return 'windows';
+};
+var deviceFont = (os) => {
+  if (!os) {
+    os = deviceOS();
+  }
+  const fonts = {
+    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
+    google: 'Roboto, Helvetica Neue',
+    microsoft: 'Segoe UI, Helvetica Neue',
+  };
+  if (os === 'macos') return fonts.apple;
+  if (os === 'ios') return fonts.apple;
+  if (os === 'android') return fonts.google;
+  if (os === 'windows') return fonts.microsoft;
+  return fonts.apple;
+};
+var environment = {
+  isWebKit,
+  webkitVersion,
+  isChrome,
+  isSafari,
+  isFirefox,
+  isFramerX,
+  isEdge,
+  isAndroid,
+  isIOS,
+  isMacOS,
+  isWindows,
+  isTouch,
+  isDesktop,
+  isPhone,
+  isTablet,
+  isMobile,
+  isFileUrl,
+  isDataUrl,
+  isRelativeUrl,
+  isLocalServerUrl,
+  isLocalUrl,
+  isLocalAssetUrl,
+  devicePixelRatio: devicePixelRatio2,
+  isJP2Supported,
+  isWebPSupported,
+  deviceType,
+  deviceOS,
+  deviceFont,
+  safariVersion,
+};
 var isChrome2 = /* @__PURE__ */ isChrome();
 function layoutHintDataPropsForCenter(center,) {
   const props = {};
@@ -31577,6 +31552,9 @@ var LazyValue = class {
     };
     return promise;
   }
+  waitFor() {
+    return this.resolver();
+  }
   /** Synchronously read the value after calling preload() before. */
   read() {
     const status = this.status;
@@ -31595,6 +31573,8 @@ var LazyValue = class {
     }
   }
 };
+var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -32407,6 +32387,307 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
+var loadingFetchResult = {
+  status: 'loading',
+  data: void 0,
+};
+function isValidURL2(href,) {
+  try {
+    const url = new URL(href,);
+    return Boolean(url.protocol,);
+  } catch {}
+}
+function isCacheExpired(insertionTimestamp, cacheDuration,) {
+  const cacheDurationMs = cacheDuration * 1e3;
+  const currentTimestamp = Date.now();
+  const expirationTimestamp = insertionTimestamp + cacheDurationMs;
+  return currentTimestamp >= expirationTimestamp;
+}
+var noop2 = () => {};
+var _responseValues;
+var _prehydratedCacheValues;
+var _subscribers;
+var _cacheDurations;
+var _cachedAt;
+var _staleQueriesInterval;
+var _FetchClient = class {
+  constructor() {
+    __privateAdd(this, _responseValues, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _prehydratedCacheValues, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _cacheDurations, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _cachedAt, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _staleQueriesInterval, void 0,);
+    __publicField(this, 'checkForStaleQueries', () => {
+      const activeURLS = __privateGet(this, _subscribers,).keys();
+      for (const url of activeURLS) {
+        const cachedAt = __privateGet(this, _cachedAt,).get(url,);
+        const cacheDuration = __privateGet(this, _cacheDurations,).get(url,);
+        if (!cacheDuration || !cachedAt) continue;
+        if (isCacheExpired(cachedAt, cacheDuration,)) {
+          void this.fetch(url,);
+        }
+      }
+    },);
+    __publicField(
+      this,
+      'persistCache',
+      debounce(() => {
+        const data2 = {};
+        for (const [url, responseValue,] of __privateGet(this, _responseValues,)) {
+          if (!responseValue) continue;
+          if (responseValue.status !== 'success') continue;
+          const cacheConfig = __privateGet(this, _cacheDurations,).get(url,);
+          if (!cacheConfig || cacheConfig === 0) continue;
+          const storedAt = __privateGet(this, _cachedAt,).get(url,);
+          if (!storedAt) continue;
+          if (storedAt && isCacheExpired(storedAt, cacheConfig,)) {
+            continue;
+          }
+          data2[url] = [storedAt, cacheConfig, responseValue.data,];
+        }
+        localStorage.setItem(_FetchClient.cacheKey, JSON.stringify(data2,),);
+      }, 500,),
+    );
+    this.hydrateCache();
+  }
+  hydrateCache() {
+    try {
+      const rawData = localStorage.getItem(_FetchClient.cacheKey,);
+      if (!rawData) return;
+      const data2 = JSON.parse(rawData,);
+      if (typeof data2 !== 'object') throw new Error('Invalid cache data',);
+      for (const url in data2) {
+        const cached = data2[url];
+        if (!Array.isArray(cached,) || cached.length !== 3) throw new Error('Invalid cache data',);
+        const [storedAt, cacheDuration, cachedData,] = cached;
+        if (isCacheExpired(storedAt, cacheDuration,)) continue;
+        __privateGet(this, _cachedAt,).set(url, storedAt,);
+        __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
+        __privateGet(this, _prehydratedCacheValues,).set(url, {
+          status: 'success',
+          data: cachedData,
+        },);
+      }
+    } catch (error) {
+      localStorage.removeItem(_FetchClient.cacheKey,);
+    }
+  }
+  // Fetches are only done Client-Side. Their Cache is also stored client side.
+  // When a fetch hook renders the first time it should not read the cache persisted in localStorage directly
+  // As this will lead to hydration errors. Instead, we set the value in the next render.
+  async hydrateCacheForUrl(url,) {
+    await Promise.resolve();
+    const prehydratedCacheValue = __privateGet(this, _prehydratedCacheValues,).get(url,);
+    if (!prehydratedCacheValue) return;
+    this.setResponseValue(url, prehydratedCacheValue,);
+    __privateGet(this, _prehydratedCacheValues,).delete(url,);
+  }
+  setResponseValue(url, value,) {
+    __privateGet(this, _responseValues,).set(url, value,);
+    this.persistCache();
+    const subscribers = __privateGet(this, _subscribers,).get(url,);
+    if (!subscribers) return;
+    for (const subscriber of subscribers) {
+      subscriber();
+    }
+  }
+  async prefetch(url, cacheDuration,) {
+    if (!isValidURL2(url,)) return;
+    const cachedAt = __privateGet(this, _cachedAt,).get(url,);
+    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
+    if (!__privateGet(this, _responseValues,).has(url,) || hasExpiredCache) {
+      return this.fetch(url,);
+    }
+    return;
+  }
+  async fetch(url,) {
+    try {
+      const currentValue = __privateGet(this, _responseValues,).get(url,);
+      if (!currentValue) {
+        this.setResponseValue(url, loadingFetchResult,);
+      }
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          // Default to JSON always or no?
+          'Content-Type': 'application/json',
+        },
+      },);
+      if (!response.ok) {
+        this.setResponseValue(url, {
+          status: 'error',
+          error: new Error('Invalid Response Status',),
+          data: void 0,
+        },);
+        return;
+      }
+      const value = await response.json();
+      this.setResponseValue(url, {
+        status: 'success',
+        data: value,
+      },);
+      __privateGet(this, _cachedAt,).set(url, Date.now(),);
+    } catch (error) {
+      this.setResponseValue(url, {
+        status: 'error',
+        error,
+        data: void 0,
+      },);
+    }
+  }
+  getValue(url,) {
+    return __privateGet(this, _responseValues,).get(url,);
+  }
+  subscribe(url, callback, cacheDuration,) {
+    if (!isValidURL2(url,)) return noop2;
+    const cacheDurationForUrl = __privateGet(this, _cacheDurations,).get(url,);
+    if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
+      __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
+    }
+    if (!__privateGet(this, _staleQueriesInterval,)) {
+      __privateSet(this, _staleQueriesInterval, safeWindow.setInterval(this.checkForStaleQueries, 5e3,),);
+    }
+    const cachedAt = __privateGet(this, _cachedAt,).get(url,);
+    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
+    if (!__privateGet(this, _responseValues,).has(url,) && __privateGet(this, _prehydratedCacheValues,).has(url,)) {
+      void this.hydrateCacheForUrl(url,);
+    } else if (!__privateGet(this, _responseValues,).has(url,) || hasExpiredCache) {
+      void this.fetch(url,);
+    }
+    const subscribers = __privateGet(this, _subscribers,).get(url,) ?? /* @__PURE__ */ new Set();
+    subscribers.add(callback,);
+    __privateGet(this, _subscribers,).set(url, subscribers,);
+    return () => {
+      const nextSubscribers = __privateGet(this, _subscribers,).get(url,);
+      if (!nextSubscribers) return;
+      nextSubscribers.delete(callback,);
+      if (nextSubscribers.size === 0) {
+        __privateGet(this, _subscribers,).delete(url,);
+      }
+      if (__privateGet(this, _subscribers,).size === 0) {
+        safeWindow.clearInterval(__privateGet(this, _staleQueriesInterval,),);
+        __privateSet(this, _staleQueriesInterval, void 0,);
+      }
+    };
+  }
+};
+var FetchClient = _FetchClient;
+_responseValues = /* @__PURE__ */ new WeakMap();
+_prehydratedCacheValues = /* @__PURE__ */ new WeakMap();
+_subscribers = /* @__PURE__ */ new WeakMap();
+_cacheDurations = /* @__PURE__ */ new WeakMap();
+_cachedAt = /* @__PURE__ */ new WeakMap();
+_staleQueriesInterval = /* @__PURE__ */ new WeakMap();
+__publicField(FetchClient, 'cacheKey', 'framer-fetch-cache',);
+var FetchClientContext = React2.createContext(void 0,);
+var FetchClientProvider = ({
+  children,
+},) => {
+  const [client,] = React2.useState(() => new FetchClient());
+  return /* @__PURE__ */ jsx(FetchClientContext.Provider, {
+    value: client,
+    children,
+  },);
+};
+function difference(array1, array2,) {
+  return array1.filter((x) => !array2.includes(x,));
+}
+var _subscriptions;
+var _subscribers2;
+var _cachedResults;
+var _queryResult;
+var RequestsObserver = class {
+  constructor(client, requests, disabled,) {
+    this.client = client;
+    __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
+    __privateAdd(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
+    __privateAdd(this, _queryResult, /* @__PURE__ */ new Map(),);
+    __publicField(this, 'onFetchResultUpdate', () => {
+      const results = /* @__PURE__ */ new Map();
+      let hasChange = false;
+      const subscribedUrls = __privateGet(this, _subscriptions,).keys();
+      for (const url of subscribedUrls) {
+        const result = this.client.getValue(url,);
+        if (!result) return;
+        results.set(url, result,);
+        if (!__privateGet(this, _cachedResults,).has(result,)) {
+          __privateGet(this, _cachedResults,).add(result,);
+          hasChange = true;
+        }
+      }
+      if (!hasChange) {
+        return;
+      }
+      __privateSet(this, _queryResult, results,);
+      for (const subscriber of __privateGet(this, _subscribers2,)) {
+        subscriber();
+      }
+    },);
+    __publicField(this, 'subscribe', (callback) => {
+      __privateGet(this, _subscribers2,).add(callback,);
+      return () => {
+        __privateGet(this, _subscribers2,).delete(callback,);
+      };
+    },);
+    __publicField(this, 'getResults', () => {
+      return __privateGet(this, _queryResult,);
+    },);
+    if (disabled) return;
+    this.setRequests(requests,);
+  }
+  setRequests(requests,) {
+    var _a;
+    const requestsByURL = new Map(requests.map((query) => [query.url, query,]),);
+    const nextSubscribedURLs = Array.from(requestsByURL.keys(),);
+    const hasSubscriptionChange = nextSubscribedURLs.some((url) => !__privateGet(this, _subscriptions,).has(url,));
+    if (nextSubscribedURLs.length !== __privateGet(this, _subscriptions,).size && !hasSubscriptionChange) {
+      return;
+    }
+    const currentSubscribedURLs = Array.from(__privateGet(this, _subscriptions,).keys(),);
+    const unsubscribeURLs = difference(currentSubscribedURLs, nextSubscribedURLs,);
+    for (const url of unsubscribeURLs) {
+      (_a = __privateGet(this, _subscriptions,).get(url,)) == null ? void 0 : _a();
+      __privateGet(this, _subscriptions,).delete(url,);
+    }
+    const toSubscribeURLs = difference(nextSubscribedURLs, currentSubscribedURLs,);
+    for (const url of toSubscribeURLs) {
+      const requestConfig = requestsByURL.get(url,);
+      const unsubscribe = this.client.subscribe(
+        url,
+        this.onFetchResultUpdate,
+        (requestConfig == null ? void 0 : requestConfig.cacheDuration) ?? 0,
+      );
+      __privateGet(this, _subscriptions,).set(url, unsubscribe,);
+    }
+    __privateSet(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
+    this.onFetchResultUpdate();
+  }
+};
+_subscriptions = /* @__PURE__ */ new WeakMap();
+_subscribers2 = /* @__PURE__ */ new WeakMap();
+_cachedResults = /* @__PURE__ */ new WeakMap();
+_queryResult = /* @__PURE__ */ new WeakMap();
+function useFetchRequests(requests, disabled,) {
+  const fetchClient = React2.useContext(FetchClientContext,);
+  if (!fetchClient) {
+    throw new Error('useFetchRequest must be used within a FetchClientProvider',);
+  }
+  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests, disabled,));
+  React2.useEffect(() => {
+    if (disabled) return;
+    observer2.setRequests(requests,);
+  }, [requests, observer2, disabled,],);
+  return React2.useSyncExternalStore(observer2.subscribe, observer2.getResults, observer2.getResults,);
+}
+function usePrefetch() {
+  const fetchClient = React2.useContext(FetchClientContext,);
+  if (!fetchClient) {
+    throw new Error('useFetchRequest must be used within a FetchClientProvider',);
+  }
+  return React2.useCallback((url, cacheDuration,) => fetchClient.prefetch(url, cacheDuration,), [fetchClient,],);
+}
 function PageRoot({
   RootComponent,
   isWebsite,
@@ -32432,19 +32713,21 @@ function PageRoot({
       children: /* @__PURE__ */ jsx(CustomCursorHost, {
         children: /* @__PURE__ */ jsx(FormContext.Provider, {
           value: framerSiteId,
-          children: /* @__PURE__ */ jsx(Router, {
-            initialRoute: routeId,
-            initialPathVariables: pathVariables,
-            initialLocaleId: localeId,
-            routes,
-            collectionUtils,
-            notFoundPage,
-            locales,
-            defaultPageStyle: {
-              minHeight: '100vh',
-              width: 'auto',
-            },
-            preserveQueryParams,
+          children: /* @__PURE__ */ jsx(FetchClientProvider, {
+            children: /* @__PURE__ */ jsx(Router, {
+              initialRoute: routeId,
+              initialPathVariables: pathVariables,
+              initialLocaleId: localeId,
+              routes,
+              collectionUtils,
+              notFoundPage,
+              locales,
+              defaultPageStyle: {
+                minHeight: '100vh',
+                width: 'auto',
+              },
+              preserveQueryParams,
+            },),
           },),
         },),
       },),
@@ -32727,6 +33010,83 @@ var ResolveLinks = /* @__PURE__ */ React2.forwardRef(function ResolveLinksInner(
   const childrenWithLinks = children(resolvedLinks,);
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
 },);
+function isObjectOrArray(value,) {
+  return typeof value === 'object' && value !== null;
+}
+function getPropertyByPath(input, keyPath,) {
+  if (keyPath === '') {
+    return input;
+  }
+  const keyParts = keyPath.split(/[.[\]]+/u,).filter((part) => part.length > 0);
+  let current = input;
+  for (const part of keyParts) {
+    if (!isObjectOrArray(current,)) {
+      return void 0;
+    }
+    current = current[part];
+  }
+  return current;
+}
+function resolveFetchDataValue(result, request,) {
+  if (result.status === 'loading') {
+    return request.fallbackValue;
+  }
+  if (result.status === 'error') {
+    return request.fallbackValue;
+  }
+  const resolvedValue = getPropertyByPath(result.data, request.resultKeyPath,);
+  switch (request.resultOutputType) {
+    case 'string':
+      return isString22(resolvedValue,) ? resolvedValue : request.fallbackValue;
+    case 'boolean':
+      return isBoolean(resolvedValue,) ? resolvedValue : request.fallbackValue;
+    case 'number':
+      return isNumber2(resolvedValue,) ? resolvedValue : request.fallbackValue;
+    default: {
+      const _ = request.resultOutputType;
+      return request.fallbackValue;
+    }
+  }
+}
+function useFetchDataValues(requests, disabled,) {
+  const fetchResults = useFetchRequests(requests, disabled,);
+  const data2 = React2.useMemo(() => {
+    return requests.map((request) => {
+      const fetchResult = fetchResults.get(request.url,);
+      if (!fetchResult) {
+        return request.fallbackValue;
+      }
+      return resolveFetchDataValue(fetchResult, request,);
+    },);
+  }, [fetchResults, requests, disabled,],);
+  const status = React2.useMemo(() => {
+    const statuses = /* @__PURE__ */ new Set();
+    for (const fetchResult of fetchResults.values()) {
+      statuses.add(fetchResult.status,);
+    }
+    if (statuses.has('error',)) return 'error';
+    if (statuses.has('loading',)) return 'loading';
+    return 'success';
+  }, [fetchResults,],);
+  return {
+    status,
+    data: data2,
+  };
+}
+var Fetcher = /* @__PURE__ */ React2.forwardRef(function Fetcher2({
+  requests,
+  disabled,
+  children,
+  ...rest
+}, ref,) {
+  const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
+  const {
+    data: data2,
+    status,
+  } = useFetchDataValues(requests, disabled,);
+  const childrenWithValues = children(data2, status,);
+  return cloneWithPropsAndRef(childrenWithValues, rest,);
+},);
 var callEach = (...fns) => fns.forEach((fn) => fn && fn());
 var import_archy = __toESM(require_archy(), 1,);
 function getLogger(name,) {
@@ -32803,7 +33163,7 @@ var CompatibilityDatabaseCollection = class {
     const data2 = {};
     for (const key7 in this.schema) {
       const value = item[key7];
-      if (isNullish(value,)) continue;
+      if (isNullish2(value,)) continue;
       const definition = this.schema[key7];
       if (isUndefined(definition,)) continue;
       data2[key7] = {
@@ -34354,10 +34714,10 @@ var SortItemsPlan = class extends QueryPlan {
         if (DatabaseValue.equal(left, right, collation,)) {
           continue;
         }
-        if (DatabaseValue.lessThan(left, right, collation,) || isNullish(left,)) {
+        if (DatabaseValue.lessThan(left, right, collation,) || isNullish2(left,)) {
           return isAscending ? -1 : 1;
         }
-        if (DatabaseValue.greaterThan(left, right, collation,) || isNullish(right,)) {
+        if (DatabaseValue.greaterThan(left, right, collation,) || isNullish2(right,)) {
           return isAscending ? 1 : -1;
         }
         throw new Error('Invalid comparison result.',);
@@ -34394,13 +34754,13 @@ var SliceItemsPlan = class extends QueryPlan {
   getOffset() {
     var _a;
     const value = (_a = this.offsetExpression) == null ? void 0 : _a.evaluate();
-    if (isNullish(value,) || value.type !== 'number') return;
+    if (isNullish2(value,) || value.type !== 'number') return;
     return value.value;
   }
   getLimit() {
     var _a;
     const value = (_a = this.limitExpression) == null ? void 0 : _a.evaluate();
-    if (isNullish(value,) || value.type !== 'number') return;
+    if (isNullish2(value,) || value.type !== 'number') return;
     return value.value;
   }
   async _execute() {
@@ -34660,7 +35020,7 @@ function getSelectKey(expression,) {
   throw new Error('Can\'t serialize expression',);
 }
 async function resolveValue(richTextResolver, value,) {
-  if (isNullish(value,)) {
+  if (isNullish2(value,)) {
     return null;
   }
   if (value.type === 'richtext') {
@@ -35501,6 +35861,14 @@ function useQueryCount(query,) {
   const collection = useQueryData(countQuery,);
   return collection.length;
 }
+function usePreloadQuery() {
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  return useCallback(async (query) => {
+    return queryCache.get(query, activeLocale,).waitFor();
+  }, [activeLocale,],);
+}
 function getWhereExpressionFromPathVariables(pathVariables,) {
   const entries = Object.entries(pathVariables,).filter(([, value,],) => {
     if (isUndefined(value,)) return false;
@@ -35621,11 +35989,13 @@ var VariantSelector = /* @__PURE__ */ ((VariantSelector2) => {
   VariantSelector2['Variant'] = 'v';
   return VariantSelector2;
 })(VariantSelector || {},);
-function getGesture(enabledGestures, isHovered, isPressed,) {
+function getGesture(enabledGestures, isHovered, isPressed, isLoading,) {
   const {
     hover,
     pressed,
+    loading,
   } = enabledGestures || {};
+  if (loading && isLoading) return 'loading';
   if (pressed && isPressed) return 'pressed';
   if (hover && isHovered) return 'hover';
 }
@@ -35650,6 +36020,7 @@ function useVariantState({
   variantClassNames = {},
 },) {
   const forceUpdate = useForceUpdate3();
+  const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   const internalState = React4.useRef({
     isHovered: false,
@@ -35658,6 +36029,7 @@ function useVariantState({
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
     lastVariant: variant,
     gestureVariant: void 0,
+    loadedBaseVariant: {},
     // When used in generated components, these are static values defined
     // outside of the component function that also need to not result in
     // memoized values being recalculated, so we dump them into the ref.
@@ -35674,13 +36046,14 @@ function useVariantState({
       defaultVariant: defaultVariant2,
     } = internalState.current;
     const nextBaseVariant = safeBaseVariant(targetBaseVariant, defaultVariant2, validBaseVariants,);
-    const gesture = getGesture(enabledGestures2 == null ? void 0 : enabledGestures2[nextBaseVariant], isHovered2, isPressed2,);
+    const gesture = getGesture(enabledGestures2 == null ? void 0 : enabledGestures2[nextBaseVariant], isHovered2, isPressed2, false,);
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [validBaseVariants,],);
   const setGestureState = React4.useCallback(({
     isHovered: isHovered2,
     isPressed: isPressed2,
+    isLoading,
   },) => {
     if (isHovered2 !== void 0) internalState.current.isHovered = isHovered2;
     if (isPressed2 !== void 0) internalState.current.isPressed = isPressed2;
@@ -35713,6 +36086,13 @@ function useVariantState({
       forceUpdate();
     }
   }, [resolveNextVariant, forceUpdate,],);
+  const clearLoadingGesture = React4.useCallback(() => {
+    const {
+      baseVariant: baseVariant2,
+    } = internalState.current;
+    internalState.current.loadedBaseVariant[baseVariant2] = true;
+    forceUpdate();
+  }, [forceUpdate,],);
   if (variant !== internalState.current.lastVariant) {
     const [nextBase, nextGesture,] = resolveNextVariant(variant,);
     internalState.current.lastVariant = nextBase;
@@ -35728,12 +36108,17 @@ function useVariantState({
     enabledGestures,
     isHovered,
     isPressed,
+    loadedBaseVariant,
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
   return React4.useMemo(() => {
+    var _a;
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
-    if (gestureVariant) variants.push(gestureVariant,);
+    const hasLoadingVariant = (_a = enabledGestures == null ? void 0 : enabledGestures[baseVariant]) == null ? void 0 : _a.loading;
+    const isLoading = !isCanvas && !!hasLoadingVariant && !loadedBaseVariant[baseVariant];
+    const gesture = isLoading ? createGestureVariant(baseVariant, 'loading',) : gestureVariant;
+    if (gesture) variants.push(gesture,);
     const gestures = enabledGestures == null ? void 0 : enabledGestures[baseVariant];
     const gestureHandlers = {
       onMouseEnter: () =>
@@ -35764,24 +36149,28 @@ function useVariantState({
     return {
       variants,
       baseVariant,
-      gestureVariant,
+      gestureVariant: gesture,
+      isLoading,
       transition: activeTransition(internalState.current.transitions, baseVariant,),
       setVariant,
       setGestureState,
+      clearLoadingGesture,
       addVariantProps,
       gestureHandlers,
-      classNames: cx(createVariantClassName(baseVariant, variantClassNames,), getGesture(gestures, isHovered, isPressed,),),
+      classNames: cx(createVariantClassName(baseVariant, variantClassNames,), getGesture(gestures, isHovered, isPressed, isLoading,),),
     };
   }, [
     baseVariant,
     gestureVariant,
     isHovered,
     isPressed,
+    loadedBaseVariant,
     addVariantProps,
     setVariant,
     defaultVariant,
     enabledGestures,
     setGestureState,
+    clearLoadingGesture,
     variantClassNames,
   ],);
 }
@@ -41487,7 +41876,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.2.12',
+    'framer-motion': '11.2.13',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -41622,6 +42011,7 @@ export {
   environment,
   ErrorPlaceholder,
   executeInRenderEnvironment,
+  Fetcher,
   filterProps,
   finiteNumber,
   FlatTree,
@@ -41850,6 +42240,8 @@ export {
   useOnVariantChange,
   useOverlayState,
   usePageEffects,
+  usePrefetch,
+  usePreloadQuery,
   usePresence,
   usePrototypeNavigate,
   useProvidedWindow,
