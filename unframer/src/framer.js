@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.U7SV6PM7.js
+// https :https://app.framerstatic.com/framer.E3XQPBSV.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -10676,16 +10676,16 @@ var require_browser = __commonJS({
     process5.argv = [];
     process5.version = '';
     process5.versions = {};
-    function noop22() {}
-    process5.on = noop22;
-    process5.addListener = noop22;
-    process5.once = noop22;
-    process5.off = noop22;
-    process5.removeListener = noop22;
-    process5.removeAllListeners = noop22;
-    process5.emit = noop22;
-    process5.prependListener = noop22;
-    process5.prependOnceListener = noop22;
+    function noop3() {}
+    process5.on = noop3;
+    process5.addListener = noop3;
+    process5.once = noop3;
+    process5.off = noop3;
+    process5.removeListener = noop3;
+    process5.removeAllListeners = noop3;
+    process5.emit = noop3;
+    process5.prependListener = noop3;
+    process5.prependOnceListener = noop3;
     process5.listeners = function (name,) {
       return [];
     };
@@ -12005,6 +12005,7 @@ function useAfterPaintEffect(fn, deps, options,) {
     void runAfterPaint();
   }, deps,);
 }
+var noop2 = () => {};
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
   let resultPath = path;
@@ -12444,23 +12445,46 @@ function createViewTransitionStylesheet({
   document.head.appendChild(styleElement,);
 }
 function removeViewTransitionStylesheet() {
-  frame.render(() => {
-    const element = document.getElementById(VIEW_TRANSITION_STYLES_ID,);
-    if (element) {
-      document.head.removeChild(element,);
-    }
+  requestIdleCallback(() => {
+    frame.render(() => {
+      performance.mark('framer-vt-remove',);
+      const element = document.getElementById(VIEW_TRANSITION_STYLES_ID,);
+      if (element) {
+        document.head.removeChild(element,);
+      }
+    },);
   },);
 }
 function supportsViewTransitions() {
   return Boolean(document.startViewTransition,);
 }
-function startViewTransition(updateView, effect,) {
+function addVTStylesheetAfterInRender(effect,) {
+  return new Promise((resolve) => {
+    frame.render(() => {
+      performance.mark('framer-vt-style',);
+      createViewTransitionStylesheet(effect,);
+      resolve();
+    },);
+  },);
+}
+async function startViewTransition(updateView, effect, signal,) {
   if (!supportsViewTransitions()) {
-    return void updateView();
+    void updateView();
+    return;
   }
-  createViewTransitionStylesheet(effect,);
-  const transition = document.startViewTransition(updateView,);
-  Promise.all([transition.ready, transition.finished,],).then(removeViewTransitionStylesheet,).catch(() => {},);
+  await addVTStylesheetAfterInRender(effect,);
+  if (signal === null || signal === void 0 ? void 0 : signal.aborted) return;
+  performance.mark('framer-vt',);
+  const transition = document.startViewTransition(() => {
+    performance.mark('framer-vt-freeze',);
+    if (signal === null || signal === void 0 ? void 0 : signal.aborted) return;
+    else signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', () => transition.skipTransition(),);
+    void updateView();
+  },);
+  Promise.all([transition.ready, transition.finished,],).then(() => {
+    performance.mark('framer-vt-unfreeze',);
+    removeViewTransitionStylesheet();
+  },).catch(() => {},);
   return transition;
 }
 function useViewTransition() {
@@ -12472,7 +12496,7 @@ function useViewTransition() {
       resolveHasPainted.current = void 0;
     }
   },);
-  return useCallback((currentRouteId, nextRouteId, update,) => {
+  return useCallback((currentRouteId, nextRouteId, update, yieldBeforeFreezePeriod, signal,) => {
     const pageEffect = getPageEffectForRoute(currentRouteId, nextRouteId, sitePageEffects,);
     if (pageEffect) {
       const hasPainted = new Promise((resolve) => {
@@ -12482,20 +12506,34 @@ function useViewTransition() {
         update();
         await hasPainted;
       };
+      const yieldBeforeViewTransition = async () => {
+        await interactionResponse({
+          priority: 'user-blocking',
+          signal,
+        }, false,).catch(noop2,);
+        return startViewTransition(asyncUpdate, pageEffect, signal,);
+      };
+      if (yieldBeforeFreezePeriod) return yieldBeforeViewTransition();
       return startViewTransition(asyncUpdate, pageEffect,);
     } else {
       return update();
     }
   }, [sitePageEffects,],);
 }
-function pushRouteState(routeId, route, {
-  currentRoutePath,
-  currentPathVariables,
-  hash: hash2,
-  pathVariables,
-  localeId,
-  preserveQueryParams,
-},) {
+async function pushRouteState(
+  routeId,
+  route,
+  {
+    currentRoutePath,
+    currentPathVariables,
+    hash: hash2,
+    pathVariables,
+    localeId,
+    preserveQueryParams,
+  },
+  enableAsyncURLUpdate = false,
+  ignorePushStateWrapper = false,
+) {
   const {
     path,
   } = route;
@@ -12508,12 +12546,18 @@ function pushRouteState(routeId, route, {
       pathVariables,
       preserveQueryParams,
     },);
-    pushHistoryState({
-      routeId,
-      hash: hash2,
-      pathVariables,
-      localeId,
-    }, newPath,);
+    const urlUpdatePromise = pushHistoryState(
+      {
+        routeId,
+        hash: hash2,
+        pathVariables,
+        localeId,
+      },
+      newPath,
+      enableAsyncURLUpdate,
+      ignorePushStateWrapper,
+    );
+    if (!enableAsyncURLUpdate) await urlUpdatePromise;
   } catch {}
 }
 function isHistoryState(data2,) {
@@ -12521,6 +12565,7 @@ function isHistoryState(data2,) {
   return isObject(data2,) && isString2(data2[routeIdKey],);
 }
 function replaceHistoryState(data2, url,) {
+  performance.mark('framer-history-replace',);
   window.history.replaceState(
     data2,
     // Second arg is unused and exists for historical purposes only
@@ -12529,8 +12574,16 @@ function replaceHistoryState(data2, url,) {
     url,
   );
 }
-function pushHistoryState(data2, url,) {
-  window.history.pushState(
+async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, ignorePushStateWrapper = false,) {
+  if (awaitPaintBeforeUpdate) {
+    await interactionResponse({
+      priority: 'user-blocking',
+    },);
+  }
+  performance.mark('framer-history-push',);
+  const pushState = ignorePushStateWrapper ? window.history.__proto__.pushState : window.history.pushState;
+  pushState.call(
+    window.history,
     data2,
     // Second arg is unused and exists for historical purposes only
     // https://developer.mozilla.org/en-US/docs/Web/API/History/pushState#unused
@@ -12544,7 +12597,7 @@ function useReplaceInitialState({
   initialPathVariables,
   initialLocaleId,
 },) {
-  React4.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (disabled) return;
     performance.mark('framer-history-set-initial-state',);
     replaceHistoryState({
@@ -12556,8 +12609,8 @@ function useReplaceInitialState({
 }
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
-  const viewTransitionReady = React4.useRef(void 0,);
-  const popStateHandler = React4.useCallback(({
+  const viewTransitionReady = useRef(void 0,);
+  const popStateHandler = useCallback(async ({
     state,
   },) => {
     var _a, _b, _c;
@@ -12579,7 +12632,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         true,
       );
     };
-    const transition = startViewTransition2(currentRouteId.current, routeId, changeRoute,);
+    const transition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
     if (transition) {
       void transition.updateCallbackDone.then((_a = viewTransitionReady.current) === null || _a === void 0 ? void 0 : _a.resolve,).catch(
         (_b = viewTransitionReady.current) === null || _b === void 0 ? void 0 : _b.reject,
@@ -12602,7 +12655,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       scroll: 'after-transition',
     },);
   }, [],);
-  React4.useEffect(() => {
+  useEffect(() => {
     var _a;
     window.addEventListener('popstate', popStateHandler,);
     (_a = window.navigation) === null || _a === void 0 ? void 0 : _a.addEventListener('navigate', traversalHandler,);
@@ -12675,21 +12728,15 @@ async function switchLocale(options,) {
   if (!result) return;
   try {
     localStorage.setItem('preferredLocale', options.nextLocale.code,);
-  } catch (error) {}
+  } catch {}
   try {
-    if (typeof result.path !== 'string') {
+    if (!isString2(result.path,)) {
       throw new Error('Expected result.path to be a string',);
     }
     if (result.isMissingInLocale) {
       const hasRedirect = await handleRedirectForMissingSlugs(options.route, result.pathVariables, options.nextLocale,);
       if (hasRedirect) return;
     }
-    pushHistoryState({
-      routeId: options.routeId,
-      pathVariables: result.pathVariables,
-      localeId: options.nextLocale.id,
-      paginationInfo: window.history.state.paginationInfo,
-    }, result.path,);
   } catch {}
   return result;
 }
@@ -12706,6 +12753,37 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
       paginationInfo: newPaginationInfo,
     },);
   } catch {}
+}
+function useNativeLoadingSpinner() {
+  const navigationPromise = useRef(Promise.resolve(),);
+  const navigationController = useRef();
+  const navigateListener = useCallback((navigateEvent) => {
+    if (
+      // we want to intercept non-user triggered replaceState and pushState while the navigation is on-going
+      // but we don't want to intercept e.g. 'traverse' (= browser back/forward) events, as we do this in the usePopStateHandler listener.
+      navigateEvent.userInitiated
+    ) return;
+    const controller = navigationController.current;
+    controller === null || controller === void 0 ? void 0 : controller.signal.addEventListener('abort', () => {
+      controller.abort('user aborted',);
+    },);
+    navigateEvent.intercept({
+      handler: () => navigationPromise.current,
+    },);
+  }, [],);
+  return useCallback((promise, updateURL, controller,) => {
+    if (!window.navigation) {
+      void updateURL();
+      return;
+    }
+    navigationPromise.current = promise;
+    navigationController.current = controller;
+    window.navigation.addEventListener('navigate', navigateListener,);
+    void updateURL(true,);
+    promise.catch(noop2,).finally(() => {
+      window.navigation.removeEventListener('navigate', navigateListener,);
+    },);
+  }, [navigateListener,],);
 }
 function measureSafe(name, start, end,) {
   try {
@@ -13047,25 +13125,34 @@ function useLocaleCode() {
 function useLocale() {
   return useLocaleCode();
 }
-function useMonitorNextRender(label,) {
+function useMonitorNextPaintAfterRender(label,) {
   const startLabel = `start-${label}`;
   const endLabel = `end-${label}`;
   const resolveHasPainted = useRef(void 0,);
-  useEffect(() => {
-    if (resolveHasPainted.current) {
-      resolveHasPainted.current();
-      resolveHasPainted.current = void 0;
-    }
-  },);
+  useAfterPaintEffect(
+    () => {
+      if (resolveHasPainted.current) {
+        resolveHasPainted.current();
+        resolveHasPainted.current = void 0;
+      }
+    },
+    void 0,
+    // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
+    {
+      priority: 'user-blocking',
+    },
+  );
   return useCallback(() => {
     const hasPainted = new Promise((resolve) => {
       resolveHasPainted.current = resolve;
     },);
     performance.mark(startLabel,);
-    hasPainted.then(() => {
+    return hasPainted.finally(() => {
       performance.mark(endLabel,);
       performance.measure(label, startLabel, endLabel,);
-    },).catch(() => {},);
+    },).catch((e) => {
+      console.error(e,);
+    },);
   }, [label, startLabel, endLabel,],);
 }
 function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
@@ -13089,6 +13176,51 @@ function useScheduleRenderSideEffects(dep,) {
     actions.current.push(cb,);
   }, [],);
 }
+function useNavigationTransition(enableAsyncURLUpdates,) {
+  const startNativeSpinner = useNativeLoadingSpinner();
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('route-change',);
+  const navigationController = useRef(void 0,);
+  return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
+    var _a;
+    if (!enableAsyncURLUpdates) {
+      await (updateURL === null || updateURL === void 0 ? void 0 : updateURL());
+      transitionFn();
+      void monitorNextPaintAfterRender();
+      return new Promise((resolve) => {
+        resolve();
+      },);
+    }
+    (_a = navigationController.current) === null || _a === void 0 ? void 0 : _a.abort();
+    const controller = isAbortable ? new AbortController() : void 0;
+    navigationController.current = controller;
+    const signal = controller === null || controller === void 0 ? void 0 : controller.signal;
+    const nextRender = monitorNextPaintAfterRender();
+    if (!updateURL) {
+      navigationController.current = void 0;
+      transitionFn(signal,);
+      return nextRender;
+    }
+    transitionFn(signal,);
+    await interactionResponse({
+      priority: 'user-visible',
+      signal,
+    },).catch(noop2,);
+    await interactionResponse({
+      priority: 'user-visible',
+      signal,
+    },).catch(noop2,);
+    let resolveNavigationPromise;
+    const navigationPromise = new Promise((resolve, reject,) => {
+      resolveNavigationPromise = resolve;
+      if (signal === null || signal === void 0 ? void 0 : signal.aborted) reject();
+      else signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', reject,);
+    },);
+    startNativeSpinner(navigationPromise, updateURL, controller,);
+    return nextRender.then(() => {
+      resolveNavigationPromise();
+    },);
+  }, [enableAsyncURLUpdates, monitorNextPaintAfterRender, startNativeSpinner,],);
+}
 function Router({
   defaultPageStyle,
   disableHistory,
@@ -13100,6 +13232,7 @@ function Router({
   initialLocaleId,
   locales = [],
   preserveQueryParams = false,
+  enableAsyncURLUpdates = false,
 },) {
   useMarkRouterEffects();
   useReplaceInitialState({
@@ -13109,7 +13242,9 @@ function Router({
     initialLocaleId,
   },);
   const startViewTransition2 = useViewTransition();
-  const monitorNextRender = useMonitorNextRender('route-change',);
+  const [dep, forceUpdate,] = useForceUpdate2();
+  const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
+  const startNavigation = useNavigationTransition(enableAsyncURLUpdates,);
   const currentRouteRef = useRef(initialRoute,);
   const currentPathVariablesRef = useRef(initialPathVariables,);
   const currentLocaleIdRef = useRef(initialLocaleId,);
@@ -13125,7 +13260,6 @@ function Router({
       ? _a
       : null;
   }, [currentLocaleId, locales,],);
-  const [dep, forceUpdate,] = useForceUpdate2();
   const localeInfo = useMemo(() => {
     return {
       activeLocale,
@@ -13159,27 +13293,65 @@ function Router({
             preserveQueryParams,
           },);
           if (!localeResult) return;
+          const currentPathVariables2 = currentPathVariablesRef.current;
+          const currentStatePaginationInfo = window.history.state.paginationInfo;
+          const currentPath = localeResult.path;
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
-          startViewTransition2(currentRouteRef.current, currentRouteId2, () => startTransition2(forceUpdate,),);
-          monitorNextRender();
+          const updateURL = async (ignorePushStateWrapper = false,) => {
+            if (!currentPath) return;
+            return pushHistoryState(
+              {
+                routeId: currentRouteId2,
+                pathVariables: currentPathVariables2,
+                localeId: nextLocale.id,
+                paginationInfo: currentStatePaginationInfo,
+              },
+              currentPath,
+              // we yield in startNavigation before updating the URL, so yielding again is not needed.
+              false,
+              ignorePushStateWrapper,
+            );
+          };
+          void startNavigation(
+            () => {
+              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), enableAsyncURLUpdates,// no signal here, because we update the refs above immediately
+              );
+            },
+            updateURL,
+            false,
+          );
         } catch {}
       },
     };
-  }, [activeLocale, collectionUtils, forceUpdate, locales, monitorNextRender, preserveQueryParams, routes, startViewTransition2,],);
-  const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const setCurrentRouteId = useCallback((routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false,) => {
-    currentRouteRef.current = routeId;
-    currentPathVariablesRef.current = pathVariables;
-    currentLocaleIdRef.current = localeId;
-    scheduleSideEffect(() => {
-      updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
-    },);
-    startTransition2(forceUpdate,);
-    monitorNextRender();
-  }, [forceUpdate, monitorNextRender, scheduleSideEffect,],);
+  }, [
+    activeLocale,
+    collectionUtils,
+    enableAsyncURLUpdates,
+    forceUpdate,
+    locales,
+    preserveQueryParams,
+    routes,
+    startNavigation,
+    startViewTransition2,
+  ],);
+  const setCurrentRouteId = useCallback(
+    (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false, updateURL,) => {
+      const currentRouteId2 = currentRouteRef.current;
+      currentRouteRef.current = routeId;
+      currentPathVariablesRef.current = pathVariables;
+      currentLocaleIdRef.current = localeId;
+      scheduleSideEffect(() => {
+        updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
+      },);
+      void startNavigation((signal) => {
+        void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), enableAsyncURLUpdates, signal,);
+      }, updateURL,);
+    },
+    [enableAsyncURLUpdates, forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
+  );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = useCallback((routeId, hash2, pathVariables, smoothScroll,) => {
+  const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll,) => {
     var _a, _b;
     const newRoute = routes[routeId];
     if (pathVariables) {
@@ -13195,48 +13367,65 @@ function Router({
       pathVariables = Object.fromEntries(Object.entries(pathVariables,).filter(([key7,],) => inUse.has(key7,)),);
     }
     const routeElementId = getRouteElementId(newRoute, hash2,);
+    const currentPathVariables2 = currentPathVariablesRef.current;
+    const currentRouteLocaleId = currentLocaleIdRef.current;
     if (
       isSamePage({
         routeId: currentRouteRef.current,
-        pathVariables: currentPathVariablesRef.current,
+        pathVariables: currentPathVariables2,
       }, {
         routeId,
         pathVariables,
       },)
     ) {
-      if (((_b = window.history.state) === null || _b === void 0 ? void 0 : _b.hash) !== hash2) {
-        if (!disableHistory) {
-          const route = routes[routeId];
-          if (route) {
-            pushRouteState(routeId, route, {
-              currentRoutePath: route.path,
-              currentPathVariables: currentPathVariablesRef.current,
-              pathVariables,
-              hash: hash2,
-              localeId: currentLocaleIdRef.current,
-              preserveQueryParams,
-            },);
-          }
-        }
-      }
       updateScrollPosition(routeElementId, smoothScroll, false,);
+      const route = routes[routeId];
+      if (((_b = window.history.state) === null || _b === void 0 ? void 0 : _b.hash) === hash2 || disableHistory || !route) return;
+      const updateURLPromise = pushRouteState(
+        routeId,
+        route,
+        {
+          currentRoutePath: route.path,
+          currentPathVariables: currentPathVariables2,
+          pathVariables,
+          hash: hash2,
+          localeId: currentRouteLocaleId,
+          preserveQueryParams,
+        },
+        // we want to yield as this is called synchronusly from an user interaction.
+        enableAsyncURLUpdates,
+      );
+      if (!enableAsyncURLUpdates) return await updateURLPromise;
       return;
     }
     if (!newRoute) return;
-    if (!disableHistory) {
-      const currentRoute = routes[currentRouteRef.current];
-      pushRouteState(routeId, newRoute, {
-        currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
-        currentPathVariables: currentPathVariablesRef.current,
-        hash: hash2,
-        pathVariables,
-        localeId: currentLocaleIdRef.current,
-        preserveQueryParams,
-      },);
-    }
-    const changeRoute = () => setCurrentRouteId(routeId, currentLocaleIdRef.current, routeElementId, pathVariables, smoothScroll, false,);
-    startViewTransition2(currentRouteRef.current, routeId, changeRoute,);
-  }, [routes, disableHistory, setCurrentRouteId, startViewTransition2, preserveQueryParams,],);
+    const currentRoute = routes[currentRouteRef.current];
+    const updateURL = async (ignorePushStateWrapper = false,) =>
+      pushRouteState(
+        routeId,
+        newRoute,
+        {
+          currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
+          currentPathVariables: currentPathVariables2,
+          hash: hash2,
+          pathVariables,
+          localeId: currentRouteLocaleId,
+          preserveQueryParams,
+        },
+        // we yield in startNavigation before updating the URL, so yielding again is not needed.
+        false,
+        ignorePushStateWrapper,
+      );
+    setCurrentRouteId(
+      routeId,
+      currentRouteLocaleId,
+      routeElementId,
+      pathVariables,
+      smoothScroll,
+      false,
+      disableHistory ? void 0 : updateURL,
+    );
+  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates,],);
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
@@ -18663,6 +18852,7 @@ var richTextCSSRules = [
         h6.framer-text:not(:first-child),
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
+        blockquote.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -18700,13 +18890,13 @@ var richTextCSSRules = [
   `
         code.framer-text,
         code.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-code-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
-            letter-spacing: var(--framer-letter-spacing, 0);
-            line-height: var(--framer-line-height, 1.2em);
+            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+            line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
         }
     `, /* css */
   `
@@ -18721,13 +18911,13 @@ var richTextCSSRules = [
   `
         a.framer-text,
         a.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-link-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-link-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-link-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
-            text-transform: var(--framer-link-text-transform, var(--framer-text-transform, none));
-            text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration, none));
+            font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            text-decoration: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
         }
@@ -18735,33 +18925,33 @@ var richTextCSSRules = [
   `
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
         a.framer-text:hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
-            font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
-            text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
-            text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
+            font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            text-decoration: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
     `, /* css */
   `
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -31575,6 +31765,10 @@ var LazyValue = class {
 };
 var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
 var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React4.useContext(LibraryFeaturesContext,);
+  return context ?? {};
+};
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -31892,7 +32086,7 @@ function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariab
     event.preventDefault();
     const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
     if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
-      await route.page.preload();
+      void route.page.preload();
     }
     (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
@@ -32403,9 +32597,8 @@ function isCacheExpired(insertionTimestamp, cacheDuration,) {
   const expirationTimestamp = insertionTimestamp + cacheDurationMs;
   return currentTimestamp >= expirationTimestamp;
 }
-var noop2 = () => {};
+var noop22 = () => {};
 var _responseValues;
-var _prehydratedCacheValues;
 var _subscribers;
 var _cacheDurations;
 var _cachedAt;
@@ -32413,7 +32606,6 @@ var _staleQueriesInterval;
 var _FetchClient = class {
   constructor() {
     __privateAdd(this, _responseValues, /* @__PURE__ */ new Map(),);
-    __privateAdd(this, _prehydratedCacheValues, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cacheDurations, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cachedAt, /* @__PURE__ */ new Map(),);
@@ -32424,9 +32616,7 @@ var _FetchClient = class {
         const cachedAt = __privateGet(this, _cachedAt,).get(url,);
         const cacheDuration = __privateGet(this, _cacheDurations,).get(url,);
         if (!cacheDuration || !cachedAt) continue;
-        if (isCacheExpired(cachedAt, cacheDuration,)) {
-          void this.fetch(url,);
-        }
+        void this.fetchWithCache(url, cacheDuration,);
       }
     },);
     __publicField(
@@ -32464,7 +32654,7 @@ var _FetchClient = class {
         if (isCacheExpired(storedAt, cacheDuration,)) continue;
         __privateGet(this, _cachedAt,).set(url, storedAt,);
         __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
-        __privateGet(this, _prehydratedCacheValues,).set(url, {
+        __privateGet(this, _responseValues,).set(url, {
           status: 'success',
           data: cachedData,
         },);
@@ -32472,16 +32662,6 @@ var _FetchClient = class {
     } catch (error) {
       localStorage.removeItem(_FetchClient.cacheKey,);
     }
-  }
-  // Fetches are only done Client-Side. Their Cache is also stored client side.
-  // When a fetch hook renders the first time it should not read the cache persisted in localStorage directly
-  // As this will lead to hydration errors. Instead, we set the value in the next render.
-  async hydrateCacheForUrl(url,) {
-    await Promise.resolve();
-    const prehydratedCacheValue = __privateGet(this, _prehydratedCacheValues,).get(url,);
-    if (!prehydratedCacheValue) return;
-    this.setResponseValue(url, prehydratedCacheValue,);
-    __privateGet(this, _prehydratedCacheValues,).delete(url,);
   }
   setResponseValue(url, value,) {
     __privateGet(this, _responseValues,).set(url, value,);
@@ -32494,15 +32674,15 @@ var _FetchClient = class {
   }
   async prefetch(url, cacheDuration,) {
     if (!isValidURL2(url,)) return;
-    const cachedAt = __privateGet(this, _cachedAt,).get(url,);
-    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
-    if (!__privateGet(this, _responseValues,).has(url,) || hasExpiredCache) {
-      return this.fetch(url,);
-    }
-    return;
+    return this.fetchWithCache(url, cacheDuration,);
   }
-  async fetch(url,) {
+  async fetchWithCache(url, cacheDuration,) {
     try {
+      const cachedAt = __privateGet(this, _cachedAt,).get(url,);
+      const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
+      if (__privateGet(this, _responseValues,).has(url,) && !hasExpiredCache) {
+        return;
+      }
       const currentValue = __privateGet(this, _responseValues,).get(url,);
       if (!currentValue) {
         this.setResponseValue(url, loadingFetchResult,);
@@ -32540,7 +32720,7 @@ var _FetchClient = class {
     return __privateGet(this, _responseValues,).get(url,);
   }
   subscribe(url, callback, cacheDuration,) {
-    if (!isValidURL2(url,)) return noop2;
+    if (!isValidURL2(url,)) return noop22;
     const cacheDurationForUrl = __privateGet(this, _cacheDurations,).get(url,);
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
       __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
@@ -32548,13 +32728,7 @@ var _FetchClient = class {
     if (!__privateGet(this, _staleQueriesInterval,)) {
       __privateSet(this, _staleQueriesInterval, safeWindow.setInterval(this.checkForStaleQueries, 5e3,),);
     }
-    const cachedAt = __privateGet(this, _cachedAt,).get(url,);
-    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
-    if (!__privateGet(this, _responseValues,).has(url,) && __privateGet(this, _prehydratedCacheValues,).has(url,)) {
-      void this.hydrateCacheForUrl(url,);
-    } else if (!__privateGet(this, _responseValues,).has(url,) || hasExpiredCache) {
-      void this.fetch(url,);
-    }
+    void this.fetchWithCache(url, cacheDuration,);
     const subscribers = __privateGet(this, _subscribers,).get(url,) ?? /* @__PURE__ */ new Set();
     subscribers.add(callback,);
     __privateGet(this, _subscribers,).set(url, subscribers,);
@@ -32574,7 +32748,6 @@ var _FetchClient = class {
 };
 var FetchClient = _FetchClient;
 _responseValues = /* @__PURE__ */ new WeakMap();
-_prehydratedCacheValues = /* @__PURE__ */ new WeakMap();
 _subscribers = /* @__PURE__ */ new WeakMap();
 _cacheDurations = /* @__PURE__ */ new WeakMap();
 _cachedAt = /* @__PURE__ */ new WeakMap();
@@ -32598,7 +32771,7 @@ var _subscribers2;
 var _cachedResults;
 var _queryResult;
 var RequestsObserver = class {
-  constructor(client, requests, disabled,) {
+  constructor(client,) {
     this.client = client;
     __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
@@ -32634,8 +32807,6 @@ var RequestsObserver = class {
     __publicField(this, 'getResults', () => {
       return __privateGet(this, _queryResult,);
     },);
-    if (disabled) return;
-    this.setRequests(requests,);
   }
   setRequests(requests,) {
     var _a;
@@ -32674,8 +32845,8 @@ function useFetchRequests(requests, disabled,) {
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests, disabled,));
-  React2.useEffect(() => {
+  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient,));
+  React2.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests,);
   }, [requests, observer2, disabled,],);
@@ -32703,6 +32874,9 @@ function PageRoot({
   locales,
   preserveQueryParams,
 },) {
+  const {
+    enableAsyncURLUpdates,
+  } = useLibraryFeatures();
   React4.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
@@ -32727,6 +32901,7 @@ function PageRoot({
                 width: 'auto',
               },
               preserveQueryParams,
+              enableAsyncURLUpdates,
             },),
           },),
         },),
@@ -33027,6 +33202,20 @@ function getPropertyByPath(input, keyPath,) {
   }
   return current;
 }
+function isValidFetchDataValueResult(type, value,) {
+  switch (type) {
+    case 'string':
+      return isString22(value,) || isNumber2(value,);
+    case 'boolean':
+      return isBoolean(value,);
+    case 'number':
+      return isNumber2(value,);
+    default: {
+      const _ = type;
+      return false;
+    }
+  }
+}
 function resolveFetchDataValue(result, request,) {
   if (result.status === 'loading') {
     return request.fallbackValue;
@@ -33035,18 +33224,10 @@ function resolveFetchDataValue(result, request,) {
     return request.fallbackValue;
   }
   const resolvedValue = getPropertyByPath(result.data, request.resultKeyPath,);
-  switch (request.resultOutputType) {
-    case 'string':
-      return isString22(resolvedValue,) ? resolvedValue : request.fallbackValue;
-    case 'boolean':
-      return isBoolean(resolvedValue,) ? resolvedValue : request.fallbackValue;
-    case 'number':
-      return isNumber2(resolvedValue,) ? resolvedValue : request.fallbackValue;
-    default: {
-      const _ = request.resultOutputType;
-      return request.fallbackValue;
-    }
+  if (!isValidFetchDataValueResult(request.resultOutputType, resolvedValue,)) {
+    return request.fallbackValue;
   }
+  return resolvedValue;
 }
 function useFetchDataValues(requests, disabled,) {
   const fetchResults = useFetchRequests(requests, disabled,);
@@ -33058,7 +33239,7 @@ function useFetchDataValues(requests, disabled,) {
       }
       return resolveFetchDataValue(fetchResult, request,);
     },);
-  }, [fetchResults, requests, disabled,],);
+  }, [fetchResults, requests,],);
   const status = React2.useMemo(() => {
     const statuses = /* @__PURE__ */ new Set();
     for (const fetchResult of fetchResults.values()) {
