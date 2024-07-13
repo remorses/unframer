@@ -1,5 +1,13 @@
 # unframer
 
+## 2.6.2
+
+### Patch Changes
+
+-   8710e3b: Update framer to 2.4.1, update framer motion to 11.2.12
+-   5ea52e2: Update framer to 2.4.1, update framer motion to 11.2.13
+-   Add @ts-nocheck
+
 ## 2.6.1
 
 ### Patch Changes
