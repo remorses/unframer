@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 'use client';
 import './chunk-MLKGABMK.js';

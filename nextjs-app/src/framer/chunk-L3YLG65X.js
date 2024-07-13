@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 // https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs
 function h(o, r,) {

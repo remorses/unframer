@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 'use client';
 import { className, className2, css, css2, fonts, fonts2, } from './chunk-7SJVVYGA.js';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 'use client';
 import { Et, } from './chunk-L3YLG65X.js';

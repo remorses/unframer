@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 import { defaultEvents, NullState, useIconSelection, } from './chunk-KA64PIU2.js';
 

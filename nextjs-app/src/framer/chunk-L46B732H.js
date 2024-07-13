@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 // https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js
 import { fontStore, } from 'unframer';

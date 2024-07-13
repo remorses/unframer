@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 // https :https://framer.com/m/framer/icon-nullstate.js@0.7.0
 import { jsx as _jsx, } from 'react/jsx-runtime';

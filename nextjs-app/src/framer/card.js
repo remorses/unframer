@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 'use client';
 import { Icon, } from './chunk-W3OFBK3Q.js';

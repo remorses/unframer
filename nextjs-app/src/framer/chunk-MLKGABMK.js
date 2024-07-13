@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 var __defProp = Object.defineProperty;
 var __export = (target, all,) => {

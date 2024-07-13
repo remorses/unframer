@@ -257,6 +257,7 @@
         h6.framer-text:not(:first-child),
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
+        blockquote.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -281,13 +282,13 @@
 
         code.framer-text,
         code.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-code-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
-            letter-spacing: var(--framer-letter-spacing, 0);
-            line-height: var(--framer-line-height, 1.2em);
+            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+            line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
         }
     
 
@@ -302,13 +303,13 @@
 
         a.framer-text,
         a.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-link-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-link-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-link-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
-            text-transform: var(--framer-link-text-transform, var(--framer-text-transform, none));
-            text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration, none));
+            font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            text-decoration: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
         }
@@ -316,33 +317,33 @@
 
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
         }
     
 
         a.framer-text:hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
-            font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
-            text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
-            text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
+            font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            text-decoration: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
     
 
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     
 
