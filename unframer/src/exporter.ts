@@ -141,6 +141,7 @@ export async function bundle({
                 .catch(() => null)
 
             let codeNew =
+                `// @ts-nocheck\n` +
                 `/* eslint-disable */\n` +
                 dprint.format(resultPathAbs, file.text, {
                     lineWidth: 140,

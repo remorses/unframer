@@ -205,16 +205,16 @@
         ol.framer-text,
         ul.framer-text,
         span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
-            font-style: var(--framer-font-style, normal);
-            font-weight: var(--framer-font-weight, 400);
-            color: var(--framer-text-color, #000);
-            font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
-            letter-spacing: var(--framer-letter-spacing, 0);
-            text-transform: var(--framer-text-transform, none);
-            text-decoration: var(--framer-text-decoration, none);
-            line-height: var(--framer-line-height, 1.2em);
-            text-align: var(--framer-text-alignment, start);
+            font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+            font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
+            color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+            text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
+            text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
+            line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
+            text-align: var(--framer-blockquote-text-alignment, var(--framer-text-alignment, start));
             -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
             -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
         }
@@ -227,23 +227,23 @@
     
 
         strong.framer-text {
-            font-family: var(--framer-font-family-bold);
-            font-style: var(--framer-font-style-bold);
-            font-weight: var(--framer-font-weight-bold, bolder);
+            font-family: var(--framer-blockquote-font-family-bold, var(--framer-font-family-bold));
+            font-style: var(--framer-blockquote-font-style-bold, var(--framer-font-style-bold));
+            font-weight: var(--framer-blockquote-font-weight-bold, var(--framer-font-weight-bold, bolder));
         }
     
 
         em.framer-text {
-            font-family: var(--framer-font-family-italic);
-            font-style: var(--framer-font-style-italic, italic);
-            font-weight: var(--framer-font-weight-italic);
+            font-family: var(--framer-blockquote-font-family-italic, var(--framer-font-family-italic));
+            font-style: var(--framer-blockquote-font-style-italic, var(--framer-font-style-italic, italic));
+            font-weight: var(--framer-blockquote-font-weight-italic, var(--framer-font-weight-italic));
         }
     
 
         em.framer-text > strong.framer-text {
-            font-family: var(--framer-font-family-bold-italic);
-            font-style: var(--framer-font-style-bold-italic, italic);
-            font-weight: var(--framer-font-weight-bold-italic, bolder);
+            font-family: var(--framer-blockquote-font-family-bold-italic, var(--framer-font-family-bold-italic));
+            font-style: var(--framer-blockquote-font-style-bold-italic, var(--framer-font-style-bold-italic, italic));
+            font-weight: var(--framer-blockquote-font-weight-bold-italic, var(--framer-font-weight-bold-italic, bolder));
         }
     
 
@@ -258,7 +258,7 @@
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
-            margin-top: var(--framer-paragraph-spacing, 0);
+            margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
     
 
@@ -274,8 +274,8 @@
             -webkit-background-clip: text;
             /* make this a transparent color if you want to visualise the clipping  */
             -webkit-text-fill-color: transparent;
-            padding: max(0em, calc(calc(1.3em - var(--framer-line-height, 1.3em)) / 2));
-            margin: min(0em, calc(calc(1.3em - var(--framer-line-height, 1.3em)) / -2));
+            padding: max(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / 2));
+            margin: min(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / -2));
         }
     
 
@@ -288,6 +288,15 @@
             font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-letter-spacing, 0);
             line-height: var(--framer-line-height, 1.2em);
+        }
+    
+
+        blockquote.framer-text {
+            margin-block-start: initial;
+            margin-block-end: initial;
+            margin-inline-start: initial;
+            margin-inline-end: initial;
+            unicode-bidi: initial;
         }
     
 
@@ -794,7 +803,7 @@ NavigationContainer
     unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
 }
 
-/* used by card.js, menu-overlay.js, rich.js */
+/* used by card.js, footer.js, menu-overlay.js, rich.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -969,7 +978,23 @@ NavigationContainer
     font-weight: 400;
 }
 
-/* used by full-page.js */
+/* used by footer.js */
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZ1rib2Bg-4.woff2);
+    font-style: normal;
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZ1rib2Bg-4.woff2);
+    font-style: normal;
+    font-weight: 700;
+}
+
+/* used by footer.js, full-page.js */
 
 @font-face {
     font-family: 'Inter'; 

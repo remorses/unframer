@@ -6,6 +6,11 @@
     --token-8c47652b-dea5-4767-a9f2-5d952dcce49a: rgb(255, 255, 255); 
     --token-58a904ff-197a-49b3-8356-adaa464e1642: rgba(255, 255, 255, 0.12); 
     --token-fae2c128-35fb-45de-a6c2-32169f920c68: rgb(13, 13, 13); 
+    /* Used by footer.js */
+    --token-33722da1-56ef-4815-82ed-442105eb06b1: #000000; /* Named as "Black" in Framer. Also seen as rgb(0, 0, 0). */
+    --token-3a259a41-0d00-4102-a2f3-6fc26ea1e8f1: #737373; /* Also seen as rgb(115, 115, 115). */
+    --token-479b6b4d-3d07-497b-97b0-0d6ab5f0ea7d: rgb(212, 212, 212); 
+    --token-6145797c-db14-4e39-8951-2131725399fb: rgb(163, 163, 163); 
     /* Used by fylo.js */
     --token-bb315df6-c2cd-4c31-805d-6d1891fd5658: #101942; /* Named as "Space" in Framer. Also seen as rgb(16, 25, 66). */
     --token-8bf6d357-6f97-4b36-9b48-c398e1a81f28: rgb(150, 55, 78); /* Named as "Amaranth" in Framer. */

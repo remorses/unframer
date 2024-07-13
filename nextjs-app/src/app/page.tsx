@@ -15,6 +15,7 @@ import Hero from '@/framer/hero'
 import MenuOverlay from '@/framer/menu-overlay'
 import Collection from '@/framer/collection'
 import Card from '@/framer/card'
+import Footer from '@/framer/footer'
 import { use } from 'react'
 
 const proxyThatLogsProps = (original) =>
@@ -93,6 +94,10 @@ function Home() {
                     />
                 </div>
                 <div className='pt-[200px]'></div>
+                <Footer.Responsive
+                    footerText={`© ${new Date().getFullYear()} unframer`}
+                    variants={{ base: 'Mobile', md: 'Tablet', lg: 'Desktop' }}
+                />
             </div>
         </div>
     )
