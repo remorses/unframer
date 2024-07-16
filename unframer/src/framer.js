@@ -629,24 +629,24 @@ function buildTransform(
   transformIsDefault,
   transformTemplate2,
 ) {
-  let transformString2 = '';
+  let transformString3 = '';
   for (let i = 0; i < numTransforms; i++) {
     const key7 = transformPropOrder[i];
     if (transform2[key7] !== void 0) {
       const transformName = translateAlias[key7] || key7;
-      transformString2 += `${transformName}(${transform2[key7]}) `;
+      transformString3 += `${transformName}(${transform2[key7]}) `;
     }
   }
   if (enableHardwareAcceleration && !transform2.z) {
-    transformString2 += 'translateZ(0)';
+    transformString3 += 'translateZ(0)';
   }
-  transformString2 = transformString2.trim();
+  transformString3 = transformString3.trim();
   if (transformTemplate2) {
-    transformString2 = transformTemplate2(transform2, transformIsDefault ? '' : transformString2,);
+    transformString3 = transformTemplate2(transform2, transformIsDefault ? '' : transformString3,);
   } else if (allowTransformNone && transformIsDefault) {
-    transformString2 = 'none';
+    transformString3 = 'none';
   }
-  return transformString2;
+  return transformString3;
 }
 var clamp = (min, max, v,) => {
   if (v > max) return max;
@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.E3XQPBSV.js
+// https :https://app.framerstatic.com/framer.DZNXQ5SD.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18543,6 +18543,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Padding'] = 'padding';
   ControlType2['BorderRadius'] = 'borderradius';
   ControlType2['CollectionReference'] = 'collectionreference';
+  ControlType2['MultiCollectionReference'] = 'multicollectionreference';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -19459,6 +19460,7 @@ function getControlDefaultValue(control,) {
     switch (control.type) {
       case 'string':
       case 'collectionreference':
+      case 'multicollectionreference':
       case 'color':
       case 'date':
       case 'link':
@@ -29919,10 +29921,13 @@ function usePresenceAnimation(
   const initial = presenceInitial ?? motionInitial;
   const animateConfig = presenceAnimate ?? motionAnimate;
   const exit = presenceExit ?? motionExit;
-  const hasMounted = useRef(false,);
-  const lastAnimate = useRef(animateConfig,);
   const [isPresent2, safeToRemove,] = usePresence();
-  const lastPresence = useRef(false,);
+  const internalState = useRef({
+    lastPresence: false,
+    lastAnimate: animateConfig,
+    hasMounted: false,
+    running: false,
+  },);
   const effect = useConstant2(() => {
     const base = initial ?? style;
     if (!isObject2(base,)) {
@@ -29941,10 +29946,15 @@ function usePresenceAnimation(
     };
   },);
   useLayoutEffect(() => {
-    if (hasMounted.current && animateConfig) return;
+    const {
+      hasMounted,
+    } = internalState.current;
+    if (hasMounted && animateConfig) return;
     const visualElement = visualElementStore.get(ref.current,);
     if (!visualElement) return;
-    hasMounted.current = true;
+    Object.assign(internalState.current, {
+      hasMounted: true,
+    },);
     for (const key7 in effect.values) {
       if (!isFXValuesKey(key7,)) continue;
       const value = style == null ? void 0 : style[key7];
@@ -29957,24 +29967,50 @@ function usePresenceAnimation(
       safeToRemove == null ? void 0 : safeToRemove();
       return;
     }
-    if (isPresent2 !== lastPresence.current) {
-      lastPresence.current = isPresent2;
+    if (isPresent2 !== internalState.current.lastPresence) {
+      Object.assign(internalState.current, {
+        lastPresence: isPresent2,
+      },);
       if (isPresent2) {
         if (initial && animateConfig) {
-          runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,);
+          Object.assign(internalState.current, {
+            running: true,
+          },);
+          void runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId,).then(() =>
+            Object.assign(internalState.current, {
+              running: false,
+            },)
+          );
         }
       } else {
         if (exit) {
-          runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() => safeToRemove());
+          Object.assign(internalState.current, {
+            running: true,
+          },);
+          void runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() =>
+            Object.assign(internalState.current, {
+              running: false,
+            },)
+          ).then(() => safeToRemove());
         } else {
           safeToRemove();
         }
       }
     } else {
-      const hasAnimateChanged = !isEqual(animateConfig, lastAnimate.current,);
+      const {
+        lastAnimate,
+        running,
+      } = internalState.current;
+      const hasAnimateChanged = !isEqual(animateConfig, lastAnimate,);
       if (!hasAnimateChanged || !animateConfig) return;
-      lastAnimate.current = animateConfig;
-      runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId, true,);
+      Object.assign(internalState.current, {
+        lastAnimate: animateConfig,
+      },);
+      void runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId, !running,).then(() =>
+        Object.assign(internalState.current, {
+          running: false,
+        },)
+      );
     }
   },);
   return effect;
@@ -32610,15 +32646,6 @@ var _FetchClient = class {
     __privateAdd(this, _cacheDurations, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cachedAt, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _staleQueriesInterval, void 0,);
-    __publicField(this, 'checkForStaleQueries', () => {
-      const activeURLS = __privateGet(this, _subscribers,).keys();
-      for (const url of activeURLS) {
-        const cachedAt = __privateGet(this, _cachedAt,).get(url,);
-        const cacheDuration = __privateGet(this, _cacheDurations,).get(url,);
-        if (!cacheDuration || !cachedAt) continue;
-        void this.fetchWithCache(url, cacheDuration,);
-      }
-    },);
     __publicField(
       this,
       'persistCache',
@@ -32640,6 +32667,35 @@ var _FetchClient = class {
       }, 500,),
     );
     this.hydrateCache();
+  }
+  unmount() {
+    this.stopQueryRefetching();
+  }
+  stopQueryRefetching() {
+    if (__privateGet(this, _staleQueriesInterval,)) {
+      clearInterval(__privateGet(this, _staleQueriesInterval,),);
+      __privateSet(this, _staleQueriesInterval, void 0,);
+    }
+  }
+  /**
+   * At an interval checks for subscriptions of all active queries and
+   * refetches those whose cache time has expired.
+   */
+  startQueryRefetching() {
+    if (__privateGet(this, _staleQueriesInterval,)) return;
+    __privateSet(
+      this,
+      _staleQueriesInterval,
+      safeWindow.setInterval(() => {
+        const activeURLS = __privateGet(this, _subscribers,).keys();
+        for (const url of activeURLS) {
+          const cachedAt = __privateGet(this, _cachedAt,).get(url,);
+          const cacheDuration = __privateGet(this, _cacheDurations,).get(url,);
+          if (!cacheDuration || !cachedAt) continue;
+          void this.fetchWithCache(url, cacheDuration,);
+        }
+      }, 5e3,),
+    );
   }
   hydrateCache() {
     try {
@@ -32725,9 +32781,7 @@ var _FetchClient = class {
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
       __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
     }
-    if (!__privateGet(this, _staleQueriesInterval,)) {
-      __privateSet(this, _staleQueriesInterval, safeWindow.setInterval(this.checkForStaleQueries, 5e3,),);
-    }
+    this.startQueryRefetching();
     void this.fetchWithCache(url, cacheDuration,);
     const subscribers = __privateGet(this, _subscribers,).get(url,) ?? /* @__PURE__ */ new Set();
     subscribers.add(callback,);
@@ -32740,8 +32794,7 @@ var _FetchClient = class {
         __privateGet(this, _subscribers,).delete(url,);
       }
       if (__privateGet(this, _subscribers,).size === 0) {
-        safeWindow.clearInterval(__privateGet(this, _staleQueriesInterval,),);
-        __privateSet(this, _staleQueriesInterval, void 0,);
+        this.stopQueryRefetching();
       }
     };
   }
@@ -32758,6 +32811,9 @@ var FetchClientProvider = ({
   children,
 },) => {
   const [client,] = React2.useState(() => new FetchClient());
+  React2.useEffect(() => {
+    return () => client.unmount();
+  }, [client,],);
   return /* @__PURE__ */ jsx(FetchClientContext.Provider, {
     value: client,
     children,
@@ -32835,6 +32891,14 @@ var RequestsObserver = class {
     __privateSet(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
     this.onFetchResultUpdate();
   }
+  unmount() {
+    for (const unsubscribe of __privateGet(this, _subscribers2,)) {
+      unsubscribe();
+    }
+    for (const unsubscribe of __privateGet(this, _subscriptions,).values()) {
+      unsubscribe();
+    }
+  }
 };
 _subscriptions = /* @__PURE__ */ new WeakMap();
 _subscribers2 = /* @__PURE__ */ new WeakMap();
@@ -32850,6 +32914,9 @@ function useFetchRequests(requests, disabled,) {
     if (disabled) return;
     observer2.setRequests(requests,);
   }, [requests, observer2, disabled,],);
+  React2.useEffect(() => {
+    return () => observer2.unmount();
+  }, [observer2,],);
   return React2.useSyncExternalStore(observer2.subscribe, observer2.getResults, observer2.getResults,);
 }
 function usePrefetch() {
@@ -33460,6 +33527,8 @@ var DatabaseValue = {
         return 'File';
       case 'link':
         return isString22(value.value,) ? `'${value.value}' /* Link */` : 'Link';
+      case 'multicollectionreference':
+        return `[${value.value.map((v) => `'${v}'`).join(', ',)}]`;
       default:
         assertNever(value,);
     }
@@ -33543,6 +33612,18 @@ function compare(left, right, collation,) {
       }
       if (leftValue < rightValue) return -1;
       if (leftValue > rightValue) return 1;
+      return 0;
+    }
+    case 'multicollectionreference': {
+      assert(left.type === right.type,);
+      for (let i = 0; i < Math.max(left.value.length, right.value.length,); i++) {
+        const leftItem = left.value[i];
+        const rightItem = right.value[i];
+        if (leftItem === void 0) return -1;
+        if (rightItem === void 0) return 1;
+        if (leftItem < rightItem) return -1;
+        if (leftItem > rightItem) return 1;
+      }
       return 0;
     }
     default: {
@@ -39362,6 +39443,321 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
     },);
   }
 }
+var defaultValues2 = {
+  opacity: 1,
+  y: 0,
+  x: 0,
+  scale: 1,
+  rotate: 0,
+  rotateX: 0,
+  rotateY: 0,
+  skewX: 0,
+  skewY: 0,
+  filter: 'none',
+};
+function isEffectKey(key7,) {
+  return key7 in defaultValues2;
+}
+function createKeyframes(effect,) {
+  const out = {};
+  for (const key7 in effect) {
+    if (!isEffectKey(key7,) || isUndefined(effect[key7],)) continue;
+    out[key7] = [effect[key7], defaultValues2[key7],];
+  }
+  return out;
+}
+var emojiSplitRe =
+  // eslint-disable-next-line redos-detector/no-unsafe-regex
+  /\p{Regional_Indicator}{2}|\p{Emoji}\p{Emoji_Modifier}?\p{Variation_Selector}?(?:\u{200d}\p{Emoji}\p{Emoji_Modifier}?\p{Variation_Selector}?)*|./gu;
+function tokenizeText(text, tokenization = 'character', elements, style,) {
+  switch (tokenization) {
+    case 'character':
+    case 'line': {
+      const words = text.split(' ',);
+      return words.map((word, wordIndex,) => {
+        var _a;
+        return /* @__PURE__ */ jsxs('span', {
+          children: [
+            (_a = word.match(emojiSplitRe,)) == null ? void 0 : _a.map((char, i,) => {
+              const ref = React2.createRef();
+              elements.add(ref,);
+              return /* @__PURE__ */ jsx('span', {
+                ref,
+                style,
+                children: char,
+              }, char + i,);
+            },),
+            ' ',
+          ],
+        }, word + wordIndex,);
+      },);
+    }
+    case 'word':
+      return text.split(' ',).map((char, i,) => {
+        const ref = React2.createRef();
+        elements.add(ref,);
+        return /* @__PURE__ */ jsxs(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx('span', {
+              ref,
+              style,
+              children: char,
+            }, char + i,),
+            ' ',
+          ],
+        },);
+      },);
+    case 'element':
+      return text.split('\n',).map((char, i,) => {
+        const ref = React2.createRef();
+        elements.add(ref,);
+        return /* @__PURE__ */ jsxs(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx('span', {
+              ref,
+              style,
+              children: char,
+            }, char + i,),
+            /* @__PURE__ */ jsx('br', {},),
+          ],
+        },);
+      },);
+    default:
+      return text;
+  }
+}
+function tokenizationForEffect(effect,) {
+  const type = effect.type;
+  switch (type) {
+    case 'appear':
+      return effect.tokenization ?? 'character';
+    default:
+      assertNever(type,);
+  }
+}
+function transformString(effect,) {
+  const transforms = [];
+  if (isNumber2(effect.x,)) transforms.push(`translateX(${effect.x}px)`,);
+  if (isNumber2(effect.y,)) transforms.push(`translateY(${effect.y}px)`,);
+  if (isNumber2(effect.scale,)) transforms.push(`scale(${effect.scale})`,);
+  if (isNumber2(effect.rotate,)) transforms.push(`rotate(${effect.rotate}deg)`,);
+  if (isNumber2(effect.rotateX,)) transforms.push(`rotateX(${effect.rotateX}deg)`,);
+  if (isNumber2(effect.rotateY,)) transforms.push(`rotateY(${effect.rotateY}deg)`,);
+  if (isNumber2(effect.skewX,)) transforms.push(`skewX(${effect.skewX}deg)`,);
+  if (isNumber2(effect.skewY,)) transforms.push(`skewY(${effect.skewY}deg)`,);
+  return transforms.join(' ',);
+}
+function getInitialEffectStyle(effect,) {
+  if (!effect) return void 0;
+  const type = effect.type;
+  switch (type) {
+    case 'appear':
+      if (!effect.effect) return void 0;
+      return {
+        display: 'inline-block',
+        opacity: effect.effect.opacity,
+        filter: effect.effect.filter,
+        transform: transformString(effect.effect,),
+      };
+    default:
+      assertNever(type,);
+  }
+}
+function useTextEffect(config, ref, preview,) {
+  const elements = useConstant2(() => /* @__PURE__ */ new Set());
+  const isOnCanvas = useIsOnFramerCanvas();
+  const canPlay = preview || !isOnCanvas;
+  const state = React2.useRef({
+    hasMounted: false,
+    hasAnimatedOnce: false,
+    isAnimating: false,
+    effect: config,
+  },);
+  state.current.effect = config;
+  const trigger = (config == null ? void 0 : config.trigger) ?? 'onMount';
+  const target = config == null ? void 0 : config.target;
+  const threshold = config == null ? void 0 : config.threshold;
+  React2.useEffect(() => {
+    if (!canPlay || preview) return;
+    state.current.hasMounted = true;
+    function play() {
+      const {
+        effect,
+      } = state.current;
+      if (!canPlay || !effect) return;
+      if ((effect == null ? void 0 : effect.repeat) !== true && state.current.hasAnimatedOnce) return;
+      if ((effect == null ? void 0 : effect.type) === 'appear' && state.current.isAnimating) return;
+      Object.assign(state.current, {
+        hasAnimatedOnce: true,
+        isAnimating: true,
+      },);
+      const type = effect.type;
+      switch (type) {
+        case 'appear': {
+          const {
+            transition,
+            startDelay,
+            repeat,
+            tokenization: tokenization2,
+          } = effect;
+          return runAppearEffect(tokenization2, effect.effect, elements, transition, startDelay, repeat, () => {
+            Object.assign(state.current, {
+              isAnimating: false,
+            },);
+          },);
+        }
+        default:
+          assertNever(type,);
+      }
+    }
+    switch (trigger) {
+      case 'onMount':
+        play();
+        return;
+      case 'onInView': {
+        const element = ref == null ? void 0 : ref.current;
+        if (!element) return;
+        return inView(element, play, {
+          amount: threshold ?? 0,
+        },);
+      }
+      case 'onScrollTarget': {
+        const element = target == null ? void 0 : target.ref.current;
+        if (!element) return;
+        return inView(element, play, {
+          amount: threshold ?? 0,
+          root: document,
+          margin: (target == null ? void 0 : target.offset) ? `${target.offset}px 0px 0px 0px` : void 0,
+        },);
+      }
+      default:
+        assertNever(trigger,);
+    }
+  }, [canPlay, elements, preview, ref, target, threshold, trigger,],);
+  const effectEnabled = !!config;
+  const tokenization = config ? tokenizationForEffect(config,) : void 0;
+  return React2.useMemo(() => ({
+    // The tokenizer is memoized such that it won't trigger RichText to
+    // be rerendered if the effect changes in a way that doesn't effect
+    // the tokenization.
+    getTokenizer: () => {
+      elements.clear();
+      if (!effectEnabled) return (text) => text;
+      const {
+        hasMounted,
+        hasAnimatedOnce,
+        effect,
+      } = state.current;
+      const mayAnimate = !(
+        // If either the component has mounted and the trigger is
+        // onMount, or if the component has run an animation to
+        // completion, the effect is not repeatable, and the trigger
+        // is one that is impacted by repeated effects, we don't
+        // need to set initial style again.
+        hasMounted && (effect == null ? void 0 : effect.trigger) === 'onMount' ||
+        hasAnimatedOnce && !(effect == null ? void 0 : effect.repeat) &&
+          ((effect == null ? void 0 : effect.trigger) === 'onInView' || (effect == null ? void 0 : effect.trigger) === 'onScrollTarget')
+      );
+      const effectStyle = preview || mayAnimate ? getInitialEffectStyle(state.current.effect,) : void 0;
+      return (text) => tokenizeText(text, tokenization, elements, effectStyle,);
+    },
+    play: () => {
+      const {
+        effect,
+      } = state.current;
+      if (!effect) return;
+      const type = effect.type;
+      switch (type) {
+        case 'appear': {
+          const {
+            transition,
+            startDelay,
+          } = effect;
+          void runAppearEffect(tokenization, effect.effect, elements, transition, startDelay,);
+          break;
+        }
+        default:
+          assertNever(type,);
+      }
+    },
+  }), [effectEnabled, elements, preview, tokenization,],);
+}
+function runAppearEffect(tokenization = 'character', effect, elements, transition, startDelay = 0, repeat = false, callback,) {
+  const enter = createKeyframes(effect,);
+  switch (tokenization) {
+    case 'character':
+    case 'element':
+    case 'word': {
+      const list = createElementList(elements,);
+      void animate(list, enter, {
+        ...transition,
+        restDelta: 1e-3,
+        delay: stagger((transition == null ? void 0 : transition.delay) ?? 0, {
+          startDelay,
+        },),
+      },).then(() => callback == null ? void 0 : callback());
+      if (!repeat) return;
+      return () =>
+        void animate(list, effect, {
+          ...transition,
+          restDelta: 1e-3,
+          delay: stagger((transition == null ? void 0 : transition.delay) ?? 0, {
+            startDelay,
+          },),
+        },);
+    }
+    case 'line': {
+      const list = createLineGroups(elements,);
+      const animations2 = list.map((group, i,) => {
+        return animate(group, enter, {
+          ...transition,
+          restDelta: 1e-3,
+          delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
+        },);
+      },);
+      void Promise.all(animations2,).then(() => callback == null ? void 0 : callback());
+      if (!repeat) return;
+      return () => {
+        list.forEach((group, i,) => {
+          void animate(group, effect, {
+            ...transition,
+            restDelta: 1e-3,
+            delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
+          },);
+        },);
+      };
+    }
+    default:
+      assertNever(tokenization,);
+  }
+}
+function createElementList(elements,) {
+  const list = [];
+  for (const element of elements) {
+    if (!element.current) continue;
+    list.push(element.current,);
+  }
+  return list;
+}
+function createLineGroups(elements,) {
+  var _a;
+  const groups2 = [];
+  let currentGroup = [];
+  let lastOffset = null;
+  for (const element of elements) {
+    if (!element.current) continue;
+    const top = (_a = element.current.getBoundingClientRect()) == null ? void 0 : _a.top;
+    if (!lastOffset || top === lastOffset) {
+      currentGroup.push(element.current,);
+    } else {
+      groups2.push(currentGroup,);
+      currentGroup = [element.current,];
+    }
+    lastOffset = top;
+  }
+  groups2.push(currentGroup,);
+  return groups2;
+}
 var FitText = /* @__PURE__ */ forwardRef(({
   viewBoxScale,
   viewBox,
@@ -39422,6 +39818,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     withExternalLayout = false,
     viewBox,
     viewBoxScale = 1,
+    effect,
     ...rest
   } = props;
   const parentSize = useParentSize();
@@ -39435,10 +39832,11 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
+  const textEffect = useTextEffect(effect, containerRef,);
   const processedChildren = useMemo(() => {
     if (!children) return;
-    return processRichTextChildren(children, stylesPresetsClassNames, plainText, anchorLinkOffsetY,);
-  }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY,],);
+    return processRichTextChildren(children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, void 0, textEffect.getTokenizer(),);
+  }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, textEffect,],);
   if (!visible) return null;
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const containerStyle = {
@@ -39541,18 +39939,27 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     children: processedChildren,
   },);
 },);
-function processRichTextChildren(element, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters = {},) {
+function processRichTextChildren(
+  element,
+  stylesPresetsClassNames,
+  plainText,
+  anchorLinkOffsetY,
+  slugCounters = {},
+  tokenizeRichTextChildren = (text) => text,
+) {
   let children = Children.toArray(element.props.children,);
   if (isString22(plainText,)) {
     children = children.slice(0, 1,);
   }
   children = children.map((child) => {
     if (isValidElement(child,)) {
-      return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters,);
+      return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizeRichTextChildren,);
     }
     if (isString22(plainText,)) {
+      if (tokenizeRichTextChildren) return tokenizeRichTextChildren(plainText,);
       return plainText;
     }
+    if (isString22(child,) && tokenizeRichTextChildren) return tokenizeRichTextChildren(child,);
     return child;
   },);
   const {
@@ -41109,7 +41516,7 @@ function transformValues(rect, rotation, isRootVectorNode, includeTransform,) {
   const transform2 = createTransformValues(baseTransform, transformMode,);
   return transform2;
 }
-function transformString(transform2,) {
+function transformString2(transform2,) {
   if (transform2 === void 0) {
     return void 0;
   }
@@ -41309,7 +41716,7 @@ var Vector = /* @__PURE__ */ (() => {
           x: 0,
           y: 0,
         };
-        elementTransform = transformString(transform2,);
+        elementTransform = transformString2(transform2,);
       }
       const pathAttributes = {
         d: d ?? toSVGPath(calculatedPath, pathTranslate, target,),
@@ -41561,7 +41968,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
         }
       }
       return this.renderElement(/* @__PURE__ */ jsx('g', {
-        transform: transformString(transform2,),
+        transform: transformString2(transform2,),
         ...{
           id: id3,
           name,
@@ -42365,7 +42772,7 @@ export {
   toJustifyOrAlignment,
   toSVGPath,
   transform,
-  transformString,
+  transformString2 as transformString,
   transformTemplate,
   turnOffReactEventHandling,
   unwrapMotionComponent,
