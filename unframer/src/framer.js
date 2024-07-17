@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.DZNXQ5SD.js
+// https :https://app.framerstatic.com/framer.KET6NTTD.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -39474,8 +39474,10 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
     case 'character':
     case 'line': {
       const words = text.split(' ',);
+      const lastWordIndex = words.length - 1;
       return words.map((word, wordIndex,) => {
         var _a;
+        const isLastWord = wordIndex === lastWordIndex;
         return /* @__PURE__ */ jsxs('span', {
           children: [
             (_a = word.match(emojiSplitRe,)) == null ? void 0 : _a.map((char, i,) => {
@@ -39487,13 +39489,16 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
                 children: char,
               }, char + i,);
             },),
-            ' ',
+            isLastWord ? null : ' ',
           ],
         }, word + wordIndex,);
       },);
     }
-    case 'word':
-      return text.split(' ',).map((char, i,) => {
+    case 'word': {
+      const words = text.split(' ',);
+      const lastWordIndex = words.length - 1;
+      return words.map((char, i,) => {
+        const isLastWord = i === lastWordIndex;
         const ref = React2.createRef();
         elements.add(ref,);
         return /* @__PURE__ */ jsxs(Fragment, {
@@ -39503,24 +39508,20 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
               style,
               children: char,
             }, char + i,),
-            ' ',
+            isLastWord ? null : ' ',
           ],
         },);
       },);
+    }
     case 'element':
       return text.split('\n',).map((char, i,) => {
         const ref = React2.createRef();
         elements.add(ref,);
-        return /* @__PURE__ */ jsxs(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx('span', {
-              ref,
-              style,
-              children: char,
-            }, char + i,),
-            /* @__PURE__ */ jsx('br', {},),
-          ],
-        },);
+        return /* @__PURE__ */ jsx('span', {
+          ref,
+          style,
+          children: char,
+        }, char + i,);
       },);
     default:
       return text;
@@ -39658,7 +39659,7 @@ function useTextEffect(config, ref, preview,) {
         hasAnimatedOnce && !(effect == null ? void 0 : effect.repeat) &&
           ((effect == null ? void 0 : effect.trigger) === 'onInView' || (effect == null ? void 0 : effect.trigger) === 'onScrollTarget')
       );
-      const effectStyle = preview || mayAnimate ? getInitialEffectStyle(state.current.effect,) : void 0;
+      const effectStyle = canPlay && (preview || mayAnimate) ? getInitialEffectStyle(state.current.effect,) : void 0;
       return (text) => tokenizeText(text, tokenization, elements, effectStyle,);
     },
     play: () => {
@@ -39680,7 +39681,7 @@ function useTextEffect(config, ref, preview,) {
           assertNever(type,);
       }
     },
-  }), [effectEnabled, elements, preview, tokenization,],);
+  }), [canPlay, effectEnabled, elements, preview, tokenization,],);
 }
 function runAppearEffect(tokenization = 'character', effect, elements, transition, startDelay = 0, repeat = false, callback,) {
   const enter = createKeyframes(effect,);
@@ -39740,20 +39741,20 @@ function createElementList(elements,) {
   return list;
 }
 function createLineGroups(elements,) {
-  var _a;
   const groups2 = [];
   let currentGroup = [];
   let lastOffset = null;
   for (const element of elements) {
     if (!element.current) continue;
-    const top = (_a = element.current.getBoundingClientRect()) == null ? void 0 : _a.top;
-    if (!lastOffset || top === lastOffset) {
+    const top = element.current.offsetTop;
+    const height = element.current.offsetHeight;
+    if (!height || lastOffset === null || top === lastOffset) {
       currentGroup.push(element.current,);
     } else {
       groups2.push(currentGroup,);
       currentGroup = [element.current,];
     }
-    lastOffset = top;
+    if (height) lastOffset = top;
   }
   groups2.push(currentGroup,);
   return groups2;
