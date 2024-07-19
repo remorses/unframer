@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.KET6NTTD.js
+// https :https://app.framerstatic.com/framer.5D3UYGRJ.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18715,6 +18715,7 @@ var richTextStylesPresetResetRule = `
     --framer-text-decoration: none;
     --framer-line-height: 1.2em;
     --framer-text-alignment: start;
+    --framer-font-open-type-features: normal;
 }
 `;
 var richTextStylesList = `
@@ -18813,6 +18814,9 @@ var richTextCSSRules = [
             text-align: var(--framer-blockquote-text-alignment, var(--framer-text-alignment, start));
             -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
             -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
+            -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
+            -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
+            font-feature-settings: var(--framer-font-open-type-features, initial);
         }
     `, /* css */
   `
@@ -19018,6 +19022,7 @@ var richTextCSSRules = [
             --framer-text-decoration: none;
             --framer-line-height: 1.2em;
             --framer-text-alignment: start;
+            --framer-font-open-type-features: normal;
         }
     `, /* css */
   `
@@ -32638,6 +32643,7 @@ var _responseValues;
 var _subscribers;
 var _cacheDurations;
 var _cachedAt;
+var _ongoingFetches;
 var _staleQueriesInterval;
 var _FetchClient = class {
   constructor() {
@@ -32645,6 +32651,7 @@ var _FetchClient = class {
     __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cacheDurations, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cachedAt, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _ongoingFetches, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _staleQueriesInterval, void 0,);
     __publicField(
       this,
@@ -32733,44 +32740,54 @@ var _FetchClient = class {
     return this.fetchWithCache(url, cacheDuration,);
   }
   async fetchWithCache(url, cacheDuration,) {
-    try {
-      const cachedAt = __privateGet(this, _cachedAt,).get(url,);
-      const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
-      if (__privateGet(this, _responseValues,).has(url,) && !hasExpiredCache) {
-        return;
-      }
-      const currentValue = __privateGet(this, _responseValues,).get(url,);
-      if (!currentValue) {
-        this.setResponseValue(url, loadingFetchResult,);
-      }
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          // Default to JSON always or no?
-          'Content-Type': 'application/json',
-        },
-      },);
-      if (!response.ok) {
+    const ongoingFetch = __privateGet(this, _ongoingFetches,).get(url,);
+    if (ongoingFetch) return ongoingFetch;
+    const cachedAt = __privateGet(this, _cachedAt,).get(url,);
+    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
+    if (__privateGet(this, _responseValues,).has(url,) && !hasExpiredCache) {
+      return;
+    }
+    const currentValue = __privateGet(this, _responseValues,).get(url,);
+    if (!currentValue) {
+      this.setResponseValue(url, loadingFetchResult,);
+    }
+    const doFetch = async () => {
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            // Default to JSON always or no?
+            'Content-Type': 'application/json',
+          },
+        },);
+        if (!response.ok) {
+          this.setResponseValue(url, {
+            status: 'error',
+            error: new Error('Invalid Response Status',),
+            data: void 0,
+          },);
+          return;
+        }
+        const value = await response.json();
+        this.setResponseValue(url, {
+          status: 'success',
+          data: value,
+        },);
+        __privateGet(this, _cachedAt,).set(url, Date.now(),);
+      } catch (error) {
         this.setResponseValue(url, {
           status: 'error',
-          error: new Error('Invalid Response Status',),
+          error,
           data: void 0,
         },);
-        return;
       }
-      const value = await response.json();
-      this.setResponseValue(url, {
-        status: 'success',
-        data: value,
-      },);
-      __privateGet(this, _cachedAt,).set(url, Date.now(),);
-    } catch (error) {
-      this.setResponseValue(url, {
-        status: 'error',
-        error,
-        data: void 0,
-      },);
-    }
+    };
+    const promise = doFetch();
+    __privateGet(this, _ongoingFetches,).set(url, promise,);
+    void promise.finally(() => {
+      __privateGet(this, _ongoingFetches,).delete(url,);
+    },);
+    return promise;
   }
   getValue(url,) {
     return __privateGet(this, _responseValues,).get(url,);
@@ -32804,6 +32821,7 @@ _responseValues = /* @__PURE__ */ new WeakMap();
 _subscribers = /* @__PURE__ */ new WeakMap();
 _cacheDurations = /* @__PURE__ */ new WeakMap();
 _cachedAt = /* @__PURE__ */ new WeakMap();
+_ongoingFetches = /* @__PURE__ */ new WeakMap();
 _staleQueriesInterval = /* @__PURE__ */ new WeakMap();
 __publicField(FetchClient, 'cacheKey', 'framer-fetch-cache',);
 var FetchClientContext = React2.createContext(void 0,);
@@ -33269,6 +33287,9 @@ function getPropertyByPath(input, keyPath,) {
   }
   return current;
 }
+function isNumberString(value,) {
+  return isString22(value,) && !isNaN(Number(value,),);
+}
 function isValidFetchDataValueResult(type, value,) {
   switch (type) {
     case 'string':
@@ -33276,7 +33297,7 @@ function isValidFetchDataValueResult(type, value,) {
     case 'boolean':
       return isBoolean(value,);
     case 'number':
-      return isNumber2(value,);
+      return isNumber2(value,) || isNumberString(value,);
     default: {
       const _ = type;
       return false;
@@ -34546,6 +34567,8 @@ function convertBinaryOperation(expression, schema,) {
       return getScalarComparisonGreaterThan(leftExpression, rightExpression,);
     case '>=':
       return getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
+    case 'in':
+      throw new Error(`Unsupported binary operator: ${expression.operator}`,);
     default:
       throw new Error(`Unsupported binary operator: ${expression.operator}`,);
   }
@@ -37363,7 +37386,7 @@ var CustomFontSource = class {
     __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
   }
   importFonts(assets,) {
-    var _a;
+    var _a, _b;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
@@ -37374,12 +37397,14 @@ var CustomFontSource = class {
       }
       const fontName = getCustomFontName(asset.name, asset.properties,);
       const fontFamily = this.createFontFamily(fontName,);
+      const openTypeData = (_a = asset.properties) == null ? void 0 : _a.font.openTypeData;
       const font = {
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
         variant: this.inferVariantName(fontName,),
-        postscriptName: (_a = asset.properties) == null ? void 0 : _a.font.postscriptName,
+        postscriptName: (_b = asset.properties) == null ? void 0 : _b.font.postscriptName,
         file: asset.url,
+        openTypeFeatures: this.validateOpenTypeData(openTypeData,),
       };
       fontFamily.fonts.push(font,);
       fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
@@ -37395,13 +37420,30 @@ var CustomFontSource = class {
     if (!asset.properties.font) return false;
     return 'fontFamily' in asset.properties.font;
   }
+  validateOpenTypeData(openTypeData,) {
+    if (!openTypeData) return;
+    if (!Array.isArray(openTypeData,)) return;
+    return openTypeData.map((feature) => {
+      if (!this.isOpenTypeFeature(feature,)) return;
+      return {
+        tag: feature.tag,
+        coverage: feature.coverage,
+      };
+    },);
+  }
+  isOpenTypeFeature(feature,) {
+    if (typeof feature !== 'object' || feature === null) return false;
+    if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
+    if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) return false;
+    return true;
+  }
   inferVariantName(family,) {
     const possibleValues = ['thin', 'ultra light', 'extra light', 'light', 'normal', 'medium', 'semi bold', 'bold', 'extra bold', 'black',];
     const possibleValuesWithItalics = [...possibleValues.map((value) => `${value} italic`), ...possibleValues,];
     const lowerCaseFamily = family.toLowerCase();
     const tokens = [...lowerCaseFamily.split(' ',), ...lowerCaseFamily.split('-',), ...lowerCaseFamily.split('_',),];
-    const foundToken = possibleValuesWithItalics.find((value) => tokens.includes(value,) || tokens.includes(value.replace(/\s+/g, '',),));
-    if (foundToken) return foundToken.replace(/^\w|\s\w/g, (char) => char.toUpperCase(),);
+    const foundToken = possibleValuesWithItalics.find((value) => tokens.includes(value,) || tokens.includes(value.replace(/\s+/gu, '',),));
+    if (foundToken) return foundToken.replace(/^\w|\s\w/gu, (char) => char.toUpperCase(),);
     return 'Regular';
   }
   createFontFamily(family,) {
@@ -37567,8 +37609,12 @@ var FontshareSource = class {
       source: this.name,
     };
   }
+  /**
+   * CAUTION: This method has to be exactly the same as the one in font-metrics-extractor tool. Because we are using the font selector to get open type features.
+   * https://github.com/framer/FramerStudio/blob/master/tools/font-metrics-extractor/src/utils/fontShare.ts
+   */
   static createSelector(family, variant,) {
-    return `${fontsharePrefix}${family}-${variant}`;
+    return `${fontsharePrefix}${family}-${variant.toLowerCase()}`;
   }
   addFontFamily(fontFamily,) {
     this.fontFamilies.push(fontFamily,);
@@ -37647,7 +37693,8 @@ function mapToKnownCategory(categoryString,) {
   const category = parseFontshareCategories(categoryString,)[0];
   return category && categoryMapping[category];
 }
-var framerFontPrefix = 'Inter';
+var framerInterFontPrefix = 'Inter';
+var framerFontPrefix = 'FR;';
 var weightNameToNumber2 = {
   Thin: 100,
   ExtraLight: 200,
@@ -37681,7 +37728,7 @@ var FramerFontSource = class {
     return fontFamily;
   }
   static getDraftFontPropertiesBySelector(selector,) {
-    if (!selector.startsWith(framerFontPrefix,)) return null;
+    if (!selector.startsWith(framerFontPrefix,) && !selector.startsWith(framerInterFontPrefix,)) return null;
     const tokens = selector.split('-',);
     const [family, weightAndStyleInfo = '',] = tokens;
     if (!family) return null;
@@ -39478,20 +39525,26 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
       return words.map((word, wordIndex,) => {
         var _a;
         const isLastWord = wordIndex === lastWordIndex;
-        return /* @__PURE__ */ jsxs('span', {
+        const short = word.length <= 12;
+        return /* @__PURE__ */ jsxs(Fragment, {
           children: [
-            (_a = word.match(emojiSplitRe,)) == null ? void 0 : _a.map((char, i,) => {
-              const ref = React2.createRef();
-              elements.add(ref,);
-              return /* @__PURE__ */ jsx('span', {
-                ref,
-                style,
-                children: char,
-              }, char + i,);
-            },),
+            /* @__PURE__ */ jsx('span', {
+              style: {
+                whiteSpace: short ? 'nowrap' : 'unset',
+              },
+              children: (_a = word.match(emojiSplitRe,)) == null ? void 0 : _a.map((char, i,) => {
+                const ref = React2.createRef();
+                elements.add(ref,);
+                return /* @__PURE__ */ jsx('span', {
+                  ref,
+                  style,
+                  children: char,
+                }, char + i,);
+              },),
+            }, word + wordIndex,),
             isLastWord ? null : ' ',
           ],
-        }, word + wordIndex,);
+        },);
       },);
     }
     case 'word': {
@@ -39514,15 +39567,6 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
       },);
     }
     case 'element':
-      return text.split('\n',).map((char, i,) => {
-        const ref = React2.createRef();
-        elements.add(ref,);
-        return /* @__PURE__ */ jsx('span', {
-          ref,
-          style,
-          children: char,
-        }, char + i,);
-      },);
     default:
       return text;
   }
@@ -39548,18 +39592,35 @@ function transformString(effect,) {
   if (isNumber2(effect.skewY,)) transforms.push(`skewY(${effect.skewY}deg)`,);
   return transforms.join(' ',);
 }
-function getInitialEffectStyle(effect,) {
-  if (!effect) return void 0;
+function getInitialEffectStyle(canPlay, canAnimate2, effect,) {
+  if (!effect || !effect.effect) return void 0;
   const type = effect.type;
   switch (type) {
     case 'appear':
-      if (!effect.effect) return void 0;
-      return {
-        display: 'inline-block',
-        opacity: effect.effect.opacity,
-        filter: effect.effect.filter,
-        transform: transformString(effect.effect,),
-      };
+      switch (effect.tokenization) {
+        case 'element':
+          if (!canPlay || !canAnimate2) return void 0;
+          return {
+            opacity: effect.effect.opacity,
+            filter: effect.effect.filter,
+            transform: transformString(effect.effect,),
+          };
+        case 'line':
+        case 'word':
+        case 'character':
+        default:
+          if (!canPlay || !canAnimate2) {
+            return {
+              display: 'inline-block',
+            };
+          }
+          return {
+            display: 'inline-block',
+            opacity: effect.effect.opacity,
+            filter: effect.effect.filter,
+            transform: transformString(effect.effect,),
+          };
+      }
     default:
       assertNever(type,);
   }
@@ -39643,24 +39704,32 @@ function useTextEffect(config, ref, preview,) {
     // the tokenization.
     getTokenizer: () => {
       elements.clear();
-      if (!effectEnabled) return (text) => text;
+      if (!effectEnabled) return void 0;
       const {
         hasMounted,
         hasAnimatedOnce,
         effect,
       } = state.current;
-      const mayAnimate = !(
-        // If either the component has mounted and the trigger is
-        // onMount, or if the component has run an animation to
-        // completion, the effect is not repeatable, and the trigger
-        // is one that is impacted by repeated effects, we don't
-        // need to set initial style again.
-        hasMounted && (effect == null ? void 0 : effect.trigger) === 'onMount' ||
-        hasAnimatedOnce && !(effect == null ? void 0 : effect.repeat) &&
-          ((effect == null ? void 0 : effect.trigger) === 'onInView' || (effect == null ? void 0 : effect.trigger) === 'onScrollTarget')
+      const effectStyle = getInitialEffectStyle(
+        canPlay,
+        preview || mayAnimate(hasMounted, hasAnimatedOnce, effect,),
+        state.current.effect,
       );
-      const effectStyle = canPlay && (preview || mayAnimate) ? getInitialEffectStyle(state.current.effect,) : void 0;
-      return (text) => tokenizeText(text, tokenization, elements, effectStyle,);
+      return {
+        text: (text) => tokenizeText(text, tokenization, elements, effectStyle,),
+        props: (style) => {
+          if ((effect == null ? void 0 : effect.tokenization) !== 'element') return void 0;
+          const r = React2.createRef();
+          elements.add(r,);
+          return {
+            ref: r,
+            style: {
+              ...style,
+              ...effectStyle,
+            },
+          };
+        },
+      };
     },
     play: () => {
       const {
@@ -39682,6 +39751,18 @@ function useTextEffect(config, ref, preview,) {
       }
     },
   }), [canPlay, effectEnabled, elements, preview, tokenization,],);
+}
+function mayAnimate(hasMounted, hasAnimatedOnce, effect,) {
+  return !(
+    // If either the component has mounted and the trigger is
+    // onMount, or if the component has run an animation to
+    // completion, the effect is not repeatable, and the trigger
+    // is one that is impacted by repeated effects, we don't
+    // need to set initial style again.
+    hasMounted && (effect == null ? void 0 : effect.trigger) === 'onMount' ||
+    hasAnimatedOnce && !(effect == null ? void 0 : effect.repeat) &&
+      ((effect == null ? void 0 : effect.trigger) === 'onInView' || (effect == null ? void 0 : effect.trigger) === 'onScrollTarget')
+  );
 }
 function runAppearEffect(tokenization = 'character', effect, elements, transition, startDelay = 0, repeat = false, callback,) {
   const enter = createKeyframes(effect,);
@@ -39708,17 +39789,28 @@ function runAppearEffect(tokenization = 'character', effect, elements, transitio
         },);
     }
     case 'line': {
-      const list = createLineGroups(elements,);
-      const animations2 = list.map((group, i,) => {
-        return animate(group, enter, {
-          ...transition,
-          restDelta: 1e-3,
-          delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
+      let list;
+      frame.read(() => {
+        list = createLineGroups(elements,);
+        if (list.length === 0) return;
+        frame.update(() => {
+          const animations2 = list.map((group, i,) => {
+            return animate(group, enter, {
+              ...transition,
+              restDelta: 1e-3,
+              // Since text tokenized into lines are groups of individual
+              // characters where each group is animated at once, we can't use
+              // motion's built in `stagger()` function, and have to manage the
+              // outer delay ourselves.
+              delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
+            },);
+          },);
+          void Promise.all(animations2,).then(() => callback == null ? void 0 : callback());
         },);
       },);
-      void Promise.all(animations2,).then(() => callback == null ? void 0 : callback());
       if (!repeat) return;
       return () => {
+        if (list.length === 0) return;
         list.forEach((group, i,) => {
           void animate(group, effect, {
             ...transition,
@@ -39940,28 +40032,33 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     children: processedChildren,
   },);
 },);
+function isFragment(element,) {
+  return element.type === Fragment;
+}
+function isLineBreak(element,) {
+  return element.type === 'br';
+}
 function processRichTextChildren(
   element,
   stylesPresetsClassNames,
   plainText,
   anchorLinkOffsetY,
   slugCounters = {},
-  tokenizeRichTextChildren = (text) => text,
+  tokenizer,
+  depth = isFragment(element,) ? -1 : 0,
 ) {
   let children = Children.toArray(element.props.children,);
   if (isString22(plainText,)) {
     children = children.slice(0, 1,);
   }
+  let onlyLineBreaks = true;
   children = children.map((child) => {
     if (isValidElement(child,)) {
-      return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizeRichTextChildren,);
+      if (!isLineBreak(child,)) onlyLineBreaks = false;
+      return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizer, depth + 1,);
     }
-    if (isString22(plainText,)) {
-      if (tokenizeRichTextChildren) return tokenizeRichTextChildren(plainText,);
-      return plainText;
-    }
-    if (isString22(child,) && tokenizeRichTextChildren) return tokenizeRichTextChildren(child,);
-    return child;
+    const text = isString22(plainText,) ? plainText : child;
+    return isString22(text,) && tokenizer ? tokenizer.text(text,) : text;
   },);
   const {
     ['data-preset-tag']: dataPresetTag,
@@ -39972,6 +40069,7 @@ function processRichTextChildren(
     const tag = dataPresetTag || elementType;
     const stylesPresetClassName = isString22(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
     props.className = cx('framer-text', props.className, stylesPresetClassName,);
+    if (tokenizer && depth === 0 && !onlyLineBreaks) Object.assign(props, tokenizer.props(props.style,),);
     const isHeading = elementType === 'h1' || elementType === 'h2' || elementType === 'h3' || elementType === 'h4' ||
       elementType === 'h5' || elementType === 'h6';
     const anchorLinkStylePresetClassName = stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames['anchor'];
