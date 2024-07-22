@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.5D3UYGRJ.js
+// https :https://app.framerstatic.com/framer.WVPGXERX.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -21240,10 +21240,12 @@ var wrapperStyle = {
   left: 0,
 };
 var placeholderStyle = {
-  backgroundSize: '16px 16px',
+  backgroundRepeat: 'repeat',
+  backgroundPosition: 'left top',
+  backgroundSize: '126px auto',
   backgroundImage:
-    'repeating-linear-gradient(45deg, rgba(180, 180, 180, 0.8) 0, rgba(180, 180, 180, 0.8) 1px, rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.2) 50%)',
-  border: '1px solid #c4c4c4',
+    'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEyNiI+PGRlZnM+PHBhdGggaWQ9ImEiIGQ9Ik0xMjYgMHYyMS41ODRMMjEuNTg0IDEyNkgwdi0xNy41ODVMMTA4LjQxNSAwSDEyNlptMCAxMDguNDE0VjEyNmgtMTcuNTg2TDEyNiAxMDguNDE0Wm0wLTg0djM5LjE3MUw2My41ODUgMTI2SDI0LjQxNEwxMjYgMjQuNDE0Wm0wIDQydjM5LjE3TDEwNS41ODQgMTI2aC0zOS4xN0wxMjYgNjYuNDE0Wk0xMDUuNTg2IDAgMCAxMDUuNTg2VjY2LjQxNUw2Ni40MTUgMGgzOS4xNzFabS00MiAwTDAgNjMuNTg2VjI0LjQxNUwyNC40MTUgMGgzOS4xNzFabS00MiAwTDAgMjEuNTg2VjBoMjEuNTg2WiIvPjwvZGVmcz48dXNlIHhsaW5rOmhyZWY9IiNhIiBmaWxsPSIjODg4IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=)',
+  opacity: 0.2,
 };
 function cssObjectFit(imageFit,) {
   switch (imageFit) {
@@ -32633,7 +32635,16 @@ function isValidURL2(href,) {
   } catch {}
 }
 function isCacheExpired(insertionTimestamp, cacheDuration,) {
-  const cacheDurationMs = cacheDuration * 1e3;
+  const cacheDurationMs = cacheDuration === 0
+    ? // When the cache is set to 0 seconds we set use a 500ms cache delay
+    // to avoid triggering refetching when a variant switches from
+    // preloading to rendering the component (and
+    // resubscribing to the fetch client). When another component
+    // relying on the same endpoint (eg another page) is mounted again
+    // and the cache time is set to 0, the the data will be fetched
+    // again.
+    500
+    : cacheDuration * 1e3;
   const currentTimestamp = Date.now();
   const expirationTimestamp = insertionTimestamp + cacheDurationMs;
   return currentTimestamp >= expirationTimestamp;
@@ -32737,7 +32748,8 @@ var _FetchClient = class {
   }
   async prefetch(url, cacheDuration,) {
     if (!isValidURL2(url,)) return;
-    return this.fetchWithCache(url, cacheDuration,);
+    await this.fetchWithCache(url, cacheDuration,);
+    return this.getValue(url,);
   }
   async fetchWithCache(url, cacheDuration,) {
     const ongoingFetch = __privateGet(this, _ongoingFetches,).get(url,);
@@ -42275,6 +42287,19 @@ var DOM = {
   convertToPagePoint,
   convertFromPagePoint,
 };
+function preloadImage(url,) {
+  return new Promise((resolve, reject,) => {
+    try {
+      new URL(url,);
+      const image = new Image();
+      image.onload = () => resolve();
+      image.onerror = reject;
+      image.src = url;
+    } catch (error) {
+      reject(error,);
+    }
+  },);
+}
 function gradientForShape(nodeId, node,) {
   if (LinearGradient.isLinearGradient(node.fill,)) {
     return elementPropertiesForLinearGradient(node.fill, nodeId,);
@@ -42820,6 +42845,7 @@ export {
   pipe,
   Point,
   Polygon,
+  preloadImage,
   PresenceContext,
   print,
   progress,
@@ -42835,6 +42861,7 @@ export {
   removeHiddenBreakpointLayersV2,
   RenderTarget,
   Reorder,
+  resolveFetchDataValue,
   resolveLink,
   ResolveLinks,
   resolveMotionValue,
