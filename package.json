@@ -9,13 +9,13 @@
         "release": "pnpm build && changeset"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.26.1",
+        "@changesets/cli": "^2.27.7",
         "c8": "^7.14.0",
-        "chokidar": "^3.5.3",
+        "chokidar": "^3.6.0",
         "prettier": "^2.8.8",
-        "tsx": "^4.7.1",
-        "typescript": "^5.4.2",
-        "vite": "^5.2.12",
+        "tsx": "^4.16.2",
+        "typescript": "^5.5.3",
+        "vite": "^5.3.4",
         "vitest": "^1.6.0"
     },
     "pnpm": {
