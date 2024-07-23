@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.WVPGXERX.js
+// https :https://app.framerstatic.com/framer.UCELIZWN.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -37622,8 +37622,8 @@ var FontshareSource = class {
     };
   }
   /**
-   * CAUTION: This method has to be exactly the same as the one in font-metrics-extractor tool. Because we are using the font selector to get open type features.
-   * https://github.com/framer/FramerStudio/blob/master/tools/font-metrics-extractor/src/utils/fontShare.ts
+   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool. Because we are using the font selector to get open type features.
+   * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/fontShare.ts
    */
   static createSelector(family, variant,) {
     return `${fontsharePrefix}${family}-${variant.toLowerCase()}`;
