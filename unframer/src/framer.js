@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.UCELIZWN.js
+// https :https://app.framerstatic.com/framer.BAQLRGH2.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -21374,10 +21374,9 @@ function BackgroundImageComponent({
       fallbackWrapperStyles.backgroundImage = `url(${imageSource})`;
       fallbackWrapperStyles.backgroundRepeat = 'repeat';
       fallbackWrapperStyles.backgroundPosition = cssObjectPosition(image.positionX, image.positionY,);
-      if (image.pixelWidth) {
-        fallbackWrapperStyles.backgroundSize = `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`;
-      }
+      fallbackWrapperStyles.opacity = void 0;
       fallbackWrapperStyles.border = 0;
+      fallbackWrapperStyles.backgroundSize = `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`;
       imageNode = null;
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
       imageNode = /* @__PURE__ */ jsx(StaticImage, {
