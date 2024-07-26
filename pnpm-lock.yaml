@@ -242,8 +242,8 @@ importers:
         specifier: ^18.3.3
         version: 18.3.3
       '@xmorse/deployment-utils':
-        specifier: ^0.2.3
-        version: 0.2.3
+        specifier: ^0.2.4
+        version: 0.2.4
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -1588,8 +1588,8 @@ packages:
   '@web3-storage/multipart-parser@1.0.0':
     resolution: {integrity: sha512-BEO6al7BYqcnfX15W2cnGR+Q566ACXAT9UQykORCWW80lmkpWsnEob6zJS1ZVBKsSJC8+7vJkHwlp+lXG1UCdw==}
 
-  '@xmorse/deployment-utils@0.2.3':
-    resolution: {integrity: sha512-YTm0Mebhjmd9BwX4t+1FrYUoeXS4tooPMXypt3puYVQ6EHzMcj7DssfQYE7yqrdERqrer3txSazhxLH+hEVijg==}
+  '@xmorse/deployment-utils@0.2.4':
+    resolution: {integrity: sha512-r80ldVZ/+d1vsyDEs8tYs7u+wHBWrQjP0gYXQYt03BGNZjaUmWPus82dhkWYXJHxG2R7nw3hNLoUjuUqpfsu2g==}
 
   '@zxing/text-encoding@0.9.0':
     resolution: {integrity: sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==}
@@ -6407,7 +6407,7 @@ snapshots:
 
   '@web3-storage/multipart-parser@1.0.0': {}
 
-  '@xmorse/deployment-utils@0.2.3':
+  '@xmorse/deployment-utils@0.2.4':
     dependencies:
       '@actions/cache': 3.2.4
       '@iarna/toml': 2.2.5

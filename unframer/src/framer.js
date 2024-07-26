@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.BAQLRGH2.js
+// https :https://app.framerstatic.com/framer.TEO56TII.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -39782,6 +39782,7 @@ function runAppearEffect(tokenization = 'character', effect, elements, transitio
     case 'element':
     case 'word': {
       const list = createElementList(elements,);
+      if (list.length === 0) return;
       void animate(list, enter, {
         ...transition,
         restDelta: 1e-3,
@@ -40064,8 +40065,8 @@ function processRichTextChildren(
   }
   let onlyLineBreaks = true;
   children = children.map((child) => {
+    if (!isValidElement(child,) || !isLineBreak(child,)) onlyLineBreaks = false;
     if (isValidElement(child,)) {
-      if (!isLineBreak(child,)) onlyLineBreaks = false;
       return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizer, depth + 1,);
     }
     const text = isString22(plainText,) ? plainText : child;
