@@ -10028,7 +10028,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.TEO56TII.js
+// https :https://app.framerstatic.com/framer.57BPNH2J.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -10676,16 +10676,16 @@ var require_browser = __commonJS({
     process5.argv = [];
     process5.version = '';
     process5.versions = {};
-    function noop3() {}
-    process5.on = noop3;
-    process5.addListener = noop3;
-    process5.once = noop3;
-    process5.off = noop3;
-    process5.removeListener = noop3;
-    process5.removeAllListeners = noop3;
-    process5.emit = noop3;
-    process5.prependListener = noop3;
-    process5.prependOnceListener = noop3;
+    function noop4() {}
+    process5.on = noop4;
+    process5.addListener = noop4;
+    process5.once = noop4;
+    process5.off = noop4;
+    process5.removeListener = noop4;
+    process5.removeAllListeners = noop4;
+    process5.emit = noop4;
+    process5.prependListener = noop4;
+    process5.prependOnceListener = noop4;
     process5.listeners = function (name,) {
       return [];
     };
@@ -11996,10 +11996,10 @@ function interactionResponse(options, fallback = true,) {
     },);
   },);
 }
-function useAfterPaintEffect(fn, deps, options,) {
+function useAfterPaintEffect(fn, deps, options, fallback = false,) {
   useLayoutEffect(() => {
     const runAfterPaint = async () => {
-      await interactionResponse(options, false,);
+      await interactionResponse(options, fallback,);
       fn();
     };
     void runAfterPaint();
@@ -12455,6 +12455,7 @@ function removeViewTransitionStylesheet() {
     },);
   },);
 }
+var noop22 = () => {};
 function supportsViewTransitions() {
   return Boolean(document.startViewTransition,);
 }
@@ -12475,16 +12476,19 @@ async function startViewTransition(updateView, effect, signal,) {
   await addVTStylesheetAfterInRender(effect,);
   if (signal === null || signal === void 0 ? void 0 : signal.aborted) return;
   performance.mark('framer-vt',);
-  const transition = document.startViewTransition(() => {
+  const transition = document.startViewTransition(async () => {
     performance.mark('framer-vt-freeze',);
     if (signal === null || signal === void 0 ? void 0 : signal.aborted) return;
     else signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', () => transition.skipTransition(),);
-    void updateView();
+    await updateView();
   },);
-  Promise.all([transition.ready, transition.finished,],).then(() => {
+  transition.updateCallbackDone.then(() => {
     performance.mark('framer-vt-unfreeze',);
+  },).catch(noop22,);
+  Promise.all([transition.ready, transition.finished,],).then(() => {
+    performance.mark('framer-vt-finished',);
     removeViewTransitionStylesheet();
-  },).catch(() => {},);
+  },).catch(noop22,);
   return transition;
 }
 function useViewTransition() {
@@ -12520,6 +12524,37 @@ function useViewTransition() {
     }
   }, [sitePageEffects,],);
 }
+function useMonitorNextPaintAfterRender(label, fallback = false,) {
+  const startLabel = `start-${label}`;
+  const endLabel = `end-${label}`;
+  const resolveHasPainted = useRef(void 0,);
+  useAfterPaintEffect(
+    () => {
+      if (resolveHasPainted.current) {
+        resolveHasPainted.current();
+        resolveHasPainted.current = void 0;
+      }
+    },
+    void 0,
+    // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
+    {
+      priority: 'user-blocking',
+    },
+    fallback,
+  );
+  return useCallback(() => {
+    const hasPainted = new Promise((resolve) => {
+      resolveHasPainted.current = resolve;
+    },);
+    performance.mark(startLabel,);
+    return hasPainted.finally(() => {
+      performance.mark(endLabel,);
+      performance.measure(label, startLabel, endLabel,);
+    },).catch((e) => {
+      console.error(e,);
+    },);
+  }, [label, startLabel, endLabel,],);
+}
 async function pushRouteState(
   routeId,
   route,
@@ -12532,7 +12567,7 @@ async function pushRouteState(
     preserveQueryParams,
   },
   enableAsyncURLUpdate = false,
-  ignorePushStateWrapper = false,
+  isNavigationTransition = false,
 ) {
   const {
     path,
@@ -12555,7 +12590,7 @@ async function pushRouteState(
       },
       newPath,
       enableAsyncURLUpdate,
-      ignorePushStateWrapper,
+      isNavigationTransition,
     );
     if (!enableAsyncURLUpdate) await urlUpdatePromise;
   } catch {}
@@ -12564,32 +12599,35 @@ function isHistoryState(data2,) {
   const routeIdKey = 'routeId';
   return isObject(data2,) && isString2(data2[routeIdKey],);
 }
-function replaceHistoryState(data2, url,) {
+function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   performance.mark('framer-history-replace',);
-  window.history.replaceState(
-    data2,
-    // Second arg is unused and exists for historical purposes only
-    // https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState#unused
-    '',
-    url,
-  );
+  const replaceState = ignoreReplaceStateWrapper ? window.history.__proto__.replaceState : window.history.replaceState;
+  replaceState.call(window.history, data2, '', url,);
 }
-async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, ignorePushStateWrapper = false,) {
+async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNavigationTransition = false,) {
   if (awaitPaintBeforeUpdate) {
     await interactionResponse({
       priority: 'user-blocking',
     },);
   }
   performance.mark('framer-history-push',);
-  const pushState = ignorePushStateWrapper ? window.history.__proto__.pushState : window.history.pushState;
-  pushState.call(
-    window.history,
-    data2,
-    // Second arg is unused and exists for historical purposes only
-    // https://developer.mozilla.org/en-US/docs/Web/API/History/pushState#unused
-    '',
-    url,
-  );
+  if (!isNavigationTransition) {
+    window.history.pushState(data2, '', url,);
+    return;
+  }
+  let popstateCalled = false;
+  const popstateListener = () => {
+    popstateCalled = true;
+  };
+  window.addEventListener('popstate', popstateListener, {
+    once: true,
+  },);
+  window.history.__proto__.pushState.call(window.history, data2, '', url,);
+  queueMicrotask(() => {
+    if (popstateCalled) return;
+    window.removeEventListener('popstate', popstateListener,);
+    window.history.replaceState(data2, '',);
+  },);
 }
 function useReplaceInitialState({
   disabled,
@@ -12600,20 +12638,31 @@ function useReplaceInitialState({
   useLayoutEffect(() => {
     if (disabled) return;
     performance.mark('framer-history-set-initial-state',);
-    replaceHistoryState({
-      routeId,
-      pathVariables: initialPathVariables,
-      localeId: initialLocaleId,
-    },);
+    replaceHistoryState(
+      {
+        routeId,
+        pathVariables: initialPathVariables,
+        localeId: initialLocaleId,
+      },
+      void 0,
+      true,
+    );
   }, [],);
 }
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('route-change-popstate',);
   const viewTransitionReady = useRef(void 0,);
   const popStateHandler = useCallback(async ({
     state,
   },) => {
-    var _a, _b, _c;
+    var _a, _b, _c, _d, _e, _f;
+    if (
+      ((_a = window.navigation) === null || _a === void 0 ? void 0 : _a.transition) &&
+      ((_c = (_b = window.navigation) === null || _b === void 0 ? void 0 : _b.transition) === null || _c === void 0
+          ? void 0
+          : _c.navigationType) !== 'traverse'
+    ) return;
     if (!isObject(state,)) return;
     const {
       routeId,
@@ -12622,6 +12671,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       localeId,
     } = state;
     if (!isString2(routeId,)) return;
+    void monitorNextPaintAfterRender();
     const changeRoute = () => {
       setCurrentRouteId(
         routeId,
@@ -12634,13 +12684,13 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     };
     const transition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
     if (transition) {
-      void transition.updateCallbackDone.then((_a = viewTransitionReady.current) === null || _a === void 0 ? void 0 : _a.resolve,).catch(
-        (_b = viewTransitionReady.current) === null || _b === void 0 ? void 0 : _b.reject,
+      void transition.updateCallbackDone.then((_d = viewTransitionReady.current) === null || _d === void 0 ? void 0 : _d.resolve,).catch(
+        (_e = viewTransitionReady.current) === null || _e === void 0 ? void 0 : _e.reject,
       );
     } else {
-      (_c = viewTransitionReady.current) === null || _c === void 0 ? void 0 : _c.resolve();
+      (_f = viewTransitionReady.current) === null || _f === void 0 ? void 0 : _f.resolve();
     }
-  }, [currentRouteId, setCurrentRouteId, startViewTransition2,],);
+  }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback((event) => {
     if (event.navigationType !== 'traverse') return;
     event.intercept({
@@ -12744,25 +12794,28 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
   try {
     const currentHistoryState = window.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
+    const isInitialLoad =
+      (currentHistoryState === null || currentHistoryState === void 0 ? void 0 : currentHistoryState.paginationInfo) === void 0 ||
+      currentHistoryState.paginationInfo[hash2] === void 0;
     const newPaginationInfo = {
       ...currentHistoryState.paginationInfo,
       [hash2]: paginationInfo,
     };
-    replaceHistoryState({
-      ...currentHistoryState,
-      paginationInfo: newPaginationInfo,
-    },);
+    replaceHistoryState(
+      {
+        ...currentHistoryState,
+        paginationInfo: newPaginationInfo,
+      },
+      void 0,
+      isInitialLoad,
+    );
   } catch {}
 }
 function useNativeLoadingSpinner() {
   const navigationPromise = useRef(Promise.resolve(),);
   const navigationController = useRef();
   const navigateListener = useCallback((navigateEvent) => {
-    if (
-      // we want to intercept non-user triggered replaceState and pushState while the navigation is on-going
-      // but we don't want to intercept e.g. 'traverse' (= browser back/forward) events, as we do this in the usePopStateHandler listener.
-      navigateEvent.userInitiated
-    ) return;
+    if (navigateEvent.navigationType === 'traverse') return;
     const controller = navigationController.current;
     controller === null || controller === void 0 ? void 0 : controller.signal.addEventListener('abort', () => {
       controller.abort('user aborted',);
@@ -13125,36 +13178,6 @@ function useLocaleCode() {
 function useLocale() {
   return useLocaleCode();
 }
-function useMonitorNextPaintAfterRender(label,) {
-  const startLabel = `start-${label}`;
-  const endLabel = `end-${label}`;
-  const resolveHasPainted = useRef(void 0,);
-  useAfterPaintEffect(
-    () => {
-      if (resolveHasPainted.current) {
-        resolveHasPainted.current();
-        resolveHasPainted.current = void 0;
-      }
-    },
-    void 0,
-    // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
-    {
-      priority: 'user-blocking',
-    },
-  );
-  return useCallback(() => {
-    const hasPainted = new Promise((resolve) => {
-      resolveHasPainted.current = resolve;
-    },);
-    performance.mark(startLabel,);
-    return hasPainted.finally(() => {
-      performance.mark(endLabel,);
-      performance.measure(label, startLabel, endLabel,);
-    },).catch((e) => {
-      console.error(e,);
-    },);
-  }, [label, startLabel, endLabel,],);
-}
 function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   const element = hash2 && document.getElementById(hash2,);
   if (element) {
@@ -13178,7 +13201,7 @@ function useScheduleRenderSideEffects(dep,) {
 }
 function useNavigationTransition(enableAsyncURLUpdates,) {
   const startNativeSpinner = useNativeLoadingSpinner();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('route-change',);
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('route-change', true,);
   const navigationController = useRef(void 0,);
   return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
     var _a;
@@ -13294,7 +13317,7 @@ function Router({
           },);
           if (!localeResult) return;
           const currentPathVariables2 = currentPathVariablesRef.current;
-          const currentStatePaginationInfo = window.history.state.paginationInfo;
+          const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
           const currentPath = localeResult.path;
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
@@ -13344,6 +13367,10 @@ function Router({
       scheduleSideEffect(() => {
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
+      if (isHistoryTransition) {
+        startTransition2(forceUpdate,);
+        return;
+      }
       void startNavigation((signal) => {
         void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), enableAsyncURLUpdates, signal,);
       }, updateURL,);
@@ -15913,6 +15940,9 @@ var mockWindow = {
   scrollY: 0,
   location: {
     href: '',
+  },
+  document: {
+    cookie: '',
   },
   setTimeout: () => 0,
   clearTimeout: () => {},
@@ -18533,6 +18563,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['BoxShadow'] = 'boxshadow';
   ControlType2['Link'] = 'link';
   ControlType2['Date'] = 'date';
+  ControlType2['DateTime'] = 'datetime';
   ControlType2['Object'] = 'object';
   ControlType2['Font'] = 'font';
   ControlType2['PageScope'] = 'pagescope';
@@ -18817,6 +18848,7 @@ var richTextCSSRules = [
             -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
             -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
             font-feature-settings: var(--framer-font-open-type-features, initial);
+            text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap));
         }
     `, /* css */
   `
@@ -19468,6 +19500,7 @@ function getControlDefaultValue(control,) {
       case 'multicollectionreference':
       case 'color':
       case 'date':
+      case 'datetime':
       case 'link':
       case 'boxshadow':
       case 'padding':
@@ -32429,6 +32462,18 @@ function randomCharacters(count,) {
 function getEncodedFormFieldsHeader(data2,) {
   return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
 }
+function addUTMTagsToFormData(data2, document2,) {
+  try {
+    const matches = document2.cookie.match('(^|;) ?framerFormsUTMTags=([^;]*)(;|$)',);
+    if (matches !== null && matches[2]) {
+      const parsed = JSON.parse(decodeURIComponent(matches[2],),);
+      if (!parsed || typeof parsed !== 'object') return;
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid',].forEach((key7) => {
+        if (typeof parsed[key7] === 'string') data2.append(key7, parsed[key7],);
+      },);
+    }
+  } catch (e) {}
+}
 function formReducer({
   state,
 }, {
@@ -32531,6 +32576,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
     event.preventDefault();
     if (!action || !projectHash) return;
     const data2 = new FormData(event.currentTarget,);
+    addUTMTagsToFormData(data2, safeWindow.document,);
     for (const [key7, value,] of data2) {
       if (value instanceof File) data2.delete(key7,);
     }
@@ -32648,7 +32694,7 @@ function isCacheExpired(insertionTimestamp, cacheDuration,) {
   const expirationTimestamp = insertionTimestamp + cacheDurationMs;
   return currentTimestamp >= expirationTimestamp;
 }
-var noop22 = () => {};
+var noop3 = () => {};
 var _responseValues;
 var _subscribers;
 var _cacheDurations;
@@ -32804,7 +32850,7 @@ var _FetchClient = class {
     return __privateGet(this, _responseValues,).get(url,);
   }
   subscribe(url, callback, cacheDuration,) {
-    if (!isValidURL2(url,)) return noop22;
+    if (!isValidURL2(url,)) return noop3;
     const cacheDurationForUrl = __privateGet(this, _cacheDurations,).get(url,);
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
       __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
@@ -33309,6 +33355,8 @@ function isValidFetchDataValueResult(type, value,) {
       return isBoolean(value,);
     case 'number':
       return isNumber2(value,) || isNumberString(value,);
+    case 'image':
+      return isString22(value,) && isValidURL2(value,);
     default: {
       const _ = type;
       return false;
@@ -33535,6 +33583,16 @@ var DatabaseValue = {
     }
     return compare(left, right, collation,) >= 0;
   },
+  /**
+   * Checks if the left value is in the right value.
+   * Returns false if the left value is not a string or the right value is
+   * not an array of strings.
+   */
+  in(left, right,) {
+    if ((left == null ? void 0 : left.type) !== 'string') return false;
+    if ((right == null ? void 0 : right.type) !== 'multicollectionreference') return false;
+    return right.value.includes(left.value,);
+  },
   stringify(value,) {
     if (value === null) {
       return 'null';
@@ -33551,6 +33609,8 @@ var DatabaseValue = {
         return `'${value.value}' /* Color */`;
       case 'date':
         return `'${value.value}' /* Date */`;
+      case 'datetime':
+        return `'${value.value}' /* DateTime */`;
       case 'richtext':
         return 'RichText';
       case 'responsiveimage':
@@ -33584,7 +33644,8 @@ function compare(left, right, collation,) {
       if (left.value > right.value) return 1;
       return 0;
     }
-    case 'date': {
+    case 'date':
+    case 'datetime': {
       assert(left.type === right.type,);
       const leftDate = new Date(left.value,);
       const rightDate = new Date(right.value,);
@@ -33769,6 +33830,18 @@ var ScalarLiteralValue = class extends ScalarExpression {
       },
       isNull(value,) ? null : {
         type: 'string',
+        value,
+      },
+    );
+  }
+  static fromMultiCollectionReference(value,) {
+    return new ScalarLiteralValue(
+      {
+        type: 'multicollectionreference',
+        isNullable: isNull(value,),
+      },
+      isNull(value,) ? null : {
+        type: 'multicollectionreference',
         value,
       },
     );
@@ -34223,6 +34296,20 @@ var ScalarComparisonGreaterThanOrEqual = class extends ScalarComparison {
     };
   }
 };
+var ScalarComparisonIn = class extends ScalarComparison {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'operator', 'in',);
+  }
+  evaluate(item,) {
+    const leftValue = this.leftExpression.evaluate(item,);
+    const rightValue = this.rightExpression.evaluate(item,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.in(leftValue, rightValue,),
+    };
+  }
+};
 var ScalarTypeCast = class extends ScalarExpression {
   constructor(valueExpression,) {
     super();
@@ -34410,7 +34497,7 @@ function convertIdentifier(expression, schema,) {
   return new ScalarIdentifier(schema, expression.name,);
 }
 function convertLiteralValue(expression, typeAffinity,) {
-  var _a;
+  var _a, _b;
   const scalarExpression = getScalarLiteralValue(expression.value,);
   switch (typeAffinity == null ? void 0 : typeAffinity.type) {
     case 'boolean': {
@@ -34435,6 +34522,11 @@ function convertLiteralValue(expression, typeAffinity,) {
       const value = convertToString(scalarExpression.value,);
       return ScalarLiteralValue.fromString(value,);
     }
+    case 'multicollectionreference': {
+      if (((_b = scalarExpression.value) == null ? void 0 : _b.type) === 'multicollectionreference') {
+        return ScalarLiteralValue.fromMultiCollectionReference(scalarExpression.value.value,);
+      }
+    }
   }
   return scalarExpression;
 }
@@ -34450,6 +34542,9 @@ function getScalarLiteralValue(value,) {
   }
   if (isString22(value,)) {
     return ScalarLiteralValue.fromString(value,);
+  }
+  if (isArray(value,) && value.every(isString22,)) {
+    return ScalarLiteralValue.fromMultiCollectionReference(value,);
   }
   return ScalarLiteralValue.fromNull();
 }
@@ -34555,10 +34650,14 @@ function getScalarUnaryOperationNot(valueExpression,) {
   }
   return new ScalarUnaryOperationNot(valueExpression,);
 }
+function getTypeAffinityForBinaryOperation(expression, schema,) {
+  if (expression.operator === 'in') return;
+  if (expression.operator !== 'and' && expression.operator !== 'or') {
+    return getExpressionType(expression.left, schema,) || getExpressionType(expression.right, schema,);
+  }
+}
 function convertBinaryOperation(expression, schema,) {
-  const typeAffinity = expression.operator !== 'and' && expression.operator !== 'or'
-    ? getExpressionType(expression.left, schema,) || getExpressionType(expression.right, schema,)
-    : void 0;
+  const typeAffinity = getTypeAffinityForBinaryOperation(expression, schema,);
   const leftExpression = convertExpression(expression.left, schema, typeAffinity,);
   const rightExpression = convertExpression(expression.right, schema, typeAffinity,);
   switch (expression.operator) {
@@ -34579,7 +34678,7 @@ function convertBinaryOperation(expression, schema,) {
     case '>=':
       return getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
     case 'in':
-      throw new Error(`Unsupported binary operator: ${expression.operator}`,);
+      return getScalarComparisonIn(leftExpression, rightExpression,);
     default:
       throw new Error(`Unsupported binary operator: ${expression.operator}`,);
   }
@@ -34659,6 +34758,9 @@ function getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,)
     return new ScalarComparisonLessThanOrEqual(rightExpression, leftExpression,);
   }
   return new ScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
+}
+function getScalarComparisonIn(leftExpression, rightExpression,) {
+  return new ScalarComparisonIn(leftExpression, rightExpression,);
 }
 function convertTypeCast(expression, schema,) {
   const valueExpression = convertExpression(expression.value, schema, void 0,);
