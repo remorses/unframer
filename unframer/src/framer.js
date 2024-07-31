@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-VBDYROES.js
+// https :https://app.framerstatic.com/chunk-HCJ5X5Q7.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -161,37 +161,24 @@ if (false) {
 var LazyContext = createContext({
   strict: false,
 },);
-var Queue = class {
-  constructor() {
-    this.order = [];
-    this.scheduled = /* @__PURE__ */ new Set();
-  }
-  add(process2,) {
-    if (!this.scheduled.has(process2,)) {
-      this.scheduled.add(process2,);
-      this.order.push(process2,);
-      return true;
-    }
-  }
-  remove(process2,) {
-    const index = this.order.indexOf(process2,);
-    if (index !== -1) {
-      this.order.splice(index, 1,);
-      this.scheduled.delete(process2,);
-    }
-  }
-  clear() {
-    this.order.length = 0;
-    this.scheduled.clear();
-  }
-};
 function createRenderStep(runNextFrame,) {
-  let thisFrame = new Queue();
-  let nextFrame = new Queue();
-  let numToRun = 0;
+  let thisFrame = /* @__PURE__ */ new Set();
+  let nextFrame = /* @__PURE__ */ new Set();
   let isProcessing = false;
   let flushNextFrame = false;
   const toKeepAlive = /* @__PURE__ */ new WeakSet();
+  let latestFrameData = {
+    delta: 0,
+    timestamp: 0,
+    isProcessing: false,
+  };
+  function triggerCallback(callback,) {
+    if (toKeepAlive.has(callback,)) {
+      step2.schedule(callback,);
+      runNextFrame();
+    }
+    callback(latestFrameData,);
+  }
   const step2 = {
     /**
      * Schedule a process to run on the next frame.
@@ -200,22 +187,21 @@ function createRenderStep(runNextFrame,) {
       const addToCurrentFrame = immediate && isProcessing;
       const queue = addToCurrentFrame ? thisFrame : nextFrame;
       if (keepAlive) toKeepAlive.add(callback,);
-      if (queue.add(callback,) && addToCurrentFrame && isProcessing) {
-        numToRun = thisFrame.order.length;
-      }
+      if (!queue.has(callback,)) queue.add(callback,);
       return callback;
     },
     /**
      * Cancel the provided callback from running on the next frame.
      */
     cancel: (callback) => {
-      nextFrame.remove(callback,);
+      nextFrame.delete(callback,);
       toKeepAlive.delete(callback,);
     },
     /**
      * Execute all schedule callbacks.
      */
     process: (frameData2) => {
+      latestFrameData = frameData2;
       if (isProcessing) {
         flushNextFrame = true;
         return;
@@ -223,17 +209,7 @@ function createRenderStep(runNextFrame,) {
       isProcessing = true;
       [thisFrame, nextFrame,] = [nextFrame, thisFrame,];
       nextFrame.clear();
-      numToRun = thisFrame.order.length;
-      if (numToRun) {
-        for (let i = 0; i < numToRun; i++) {
-          const callback = thisFrame.order[i];
-          if (toKeepAlive.has(callback,)) {
-            step2.schedule(callback,);
-            runNextFrame();
-          }
-          callback(frameData2,);
-        }
-      }
+      thisFrame.forEach(triggerCallback,);
       isProcessing = false;
       if (flushNextFrame) {
         flushNextFrame = false;
@@ -266,20 +242,31 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     timestamp: 0,
     isProcessing: false,
   };
+  const flagRunNextFrame = () => runNextFrame = true;
   const steps2 = stepsOrder.reduce((acc, key7,) => {
-    acc[key7] = createRenderStep(() => runNextFrame = true);
+    acc[key7] = createRenderStep(flagRunNextFrame,);
     return acc;
   }, {},);
-  const processStep = (stepId) => {
-    steps2[stepId].process(state,);
-  };
+  const {
+    read,
+    resolveKeyframes,
+    update,
+    preRender,
+    render,
+    postRender,
+  } = steps2;
   const processBatch = () => {
     const timestamp = MotionGlobalConfig.useManualTiming ? state.timestamp : performance.now();
     runNextFrame = false;
     state.delta = useDefaultElapsed ? 1e3 / 60 : Math.max(Math.min(timestamp - state.timestamp, maxElapsed,), 1,);
     state.timestamp = timestamp;
     state.isProcessing = true;
-    stepsOrder.forEach(processStep,);
+    read.process(state,);
+    resolveKeyframes.process(state,);
+    update.process(state,);
+    preRender.process(state,);
+    render.process(state,);
+    postRender.process(state,);
     state.isProcessing = false;
     if (runNextFrame && allowKeepAlive) {
       useDefaultElapsed = false;
@@ -301,7 +288,11 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     };
     return acc;
   }, {},);
-  const cancel = (process2) => stepsOrder.forEach((key7) => steps2[key7].cancel(process2,));
+  const cancel = (process2) => {
+    for (let i = 0; i < stepsOrder.length; i++) {
+      steps2[stepsOrder[i]].cancel(process2,);
+    }
+  };
   return {
     schedule,
     cancel,
@@ -392,7 +383,6 @@ function createProjectionNode(visualElement, props, ProjectionNodeConstructor, i
     layout: layout2,
     alwaysMeasureLayout: Boolean(drag2,) || dragConstraints && isRefObject(dragConstraints,),
     visualElement,
-    scheduleRender: () => visualElement.scheduleRender(),
     /**
      * TODO: Update options in an effect. This could be tricky as it'll be too late
      * to update by the time layout animations run.
@@ -620,15 +610,7 @@ var translateAlias = {
   transformPerspective: 'perspective',
 };
 var numTransforms = transformPropOrder.length;
-function buildTransform(
-  transform2,
-  {
-    enableHardwareAcceleration = true,
-    allowTransformNone = true,
-  },
-  transformIsDefault,
-  transformTemplate2,
-) {
+function buildTransform(transform2, transformIsDefault, transformTemplate2,) {
   let transformString3 = '';
   for (let i = 0; i < numTransforms; i++) {
     const key7 = transformPropOrder[i];
@@ -637,13 +619,10 @@ function buildTransform(
       transformString3 += `${transformName}(${transform2[key7]}) `;
     }
   }
-  if (enableHardwareAcceleration && !transform2.z) {
-    transformString3 += 'translateZ(0)';
-  }
   transformString3 = transformString3.trim();
   if (transformTemplate2) {
     transformString3 = transformTemplate2(transform2, transformIsDefault ? '' : transformString3,);
-  } else if (allowTransformNone && transformIsDefault) {
+  } else if (transformIsDefault) {
     transformString3 = 'none';
   }
   return transformString3;
@@ -779,8 +758,36 @@ function useConstant(init,) {
   }
   return ref.current;
 }
+var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
+  // or until we implement support for linear() easing.
+  // "background-color"
+],);
+function getWillChangeName(name,) {
+  if (transformProps.has(name,)) {
+    return 'transform';
+  } else if (acceleratedValues.has(name,)) {
+    return camelToDash(name,);
+  }
+}
+function addUniqueItem(arr, item,) {
+  if (arr.indexOf(item,) === -1) arr.push(item,);
+}
+function removeItem(arr, item,) {
+  const index = arr.indexOf(item,);
+  if (index > -1) arr.splice(index, 1,);
+}
+function moveItem([...arr], fromIndex, toIndex,) {
+  const startIndex = fromIndex < 0 ? arr.length + fromIndex : fromIndex;
+  if (startIndex >= 0 && startIndex < arr.length) {
+    const endIndex = toIndex < 0 ? arr.length + toIndex : toIndex;
+    const [item,] = arr.splice(fromIndex, 1,);
+    arr.splice(endIndex, 0, item,);
+  }
+  return arr;
+}
 function makeState(
   {
+    applyWillChange = false,
     scrapeMotionValuesFromProps: scrapeMotionValuesFromProps3,
     createRenderState,
     onMount,
@@ -788,9 +795,10 @@ function makeState(
   props,
   context,
   presenceContext,
+  isStatic,
 ) {
   const state = {
-    latestValues: makeLatestValues(props, context, presenceContext, scrapeMotionValuesFromProps3,),
+    latestValues: makeLatestValues(props, context, presenceContext, isStatic ? false : applyWillChange, scrapeMotionValuesFromProps3,),
     renderState: createRenderState(),
   };
   if (onMount) {
@@ -801,11 +809,34 @@ function makeState(
 var makeUseVisualState = (config) => (props, isStatic,) => {
   const context = useContext3(MotionContext,);
   const presenceContext = useContext3(PresenceContext,);
-  const make = () => makeState(config, props, context, presenceContext,);
+  const make = () => makeState(config, props, context, presenceContext, isStatic,);
   return isStatic ? make() : useConstant(make,);
 };
-function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) {
+function addWillChange(willChange, name,) {
+  const memberName = getWillChangeName(name,);
+  if (memberName) {
+    addUniqueItem(willChange, memberName,);
+  }
+}
+function forEachDefinition(props, definition, callback,) {
+  const list = Array.isArray(definition,) ? definition : [definition,];
+  for (let i = 0; i < list.length; i++) {
+    const resolved = resolveVariantFromProps(props, list[i],);
+    if (resolved) {
+      const {
+        transitionEnd,
+        transition,
+        ...target
+      } = resolved;
+      callback(target, transitionEnd,);
+    }
+  }
+}
+function makeLatestValues(props, context, presenceContext, shouldApplyWillChange, scrapeMotionValues,) {
+  var _a;
   const values = {};
+  const willChange = [];
+  const applyWillChange = shouldApplyWillChange && ((_a = props.style) === null || _a === void 0 ? void 0 : _a.willChange) === void 0;
   const motionValues = scrapeMotionValues(props, {},);
   for (const key7 in motionValues) {
     values[key7] = resolveMotionValue(motionValues[key7],);
@@ -824,15 +855,7 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) 
   isInitialAnimationBlocked = isInitialAnimationBlocked || initial === false;
   const variantToSet = isInitialAnimationBlocked ? animate22 : initial;
   if (variantToSet && typeof variantToSet !== 'boolean' && !isAnimationControls(variantToSet,)) {
-    const list = Array.isArray(variantToSet,) ? variantToSet : [variantToSet,];
-    list.forEach((definition) => {
-      const resolved = resolveVariantFromProps(props, definition,);
-      if (!resolved) return;
-      const {
-        transitionEnd,
-        transition,
-        ...target
-      } = resolved;
+    forEachDefinition(props, variantToSet, (target, transitionEnd,) => {
       for (const key7 in target) {
         let valueTarget = target[key7];
         if (Array.isArray(valueTarget,)) {
@@ -843,8 +866,22 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) 
           values[key7] = valueTarget;
         }
       }
-      for (const key7 in transitionEnd) values[key7] = transitionEnd[key7];
+      for (const key7 in transitionEnd) {
+        values[key7] = transitionEnd[key7];
+      }
     },);
+  }
+  if (applyWillChange) {
+    if (animate22 && initial !== false && !isAnimationControls(animate22,)) {
+      forEachDefinition(props, animate22, (target) => {
+        for (const key7 in target) {
+          addWillChange(willChange, key7,);
+        }
+      },);
+    }
+    if (willChange.length) {
+      values.willChange = willChange.join(',',);
+    }
   }
   return values;
 }
@@ -2749,14 +2786,10 @@ function animateStyle(element, valueName, keyframes2, {
   },);
 }
 var supportsWaapi = memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
-var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
-  // or until we implement support for linear() easing.
-  // "background-color"
-],);
 var sampleDelta = 10;
 var maxDuration2 = 2e4;
 function requiresPregeneratedKeyframes(options,) {
-  return options.type === 'spring' || options.name === 'backgroundColor' || !isWaapiSupportedEasing(options.ease,);
+  return options.type === 'spring' || !isWaapiSupportedEasing(options.ease,);
 }
 function pregenerateKeyframes(keyframes2, options,) {
   const sampleAnimation = new MainThreadAnimation({
@@ -3006,6 +3039,10 @@ var AcceleratedAnimation = class extends BaseAnimation {
         sampleDelta,
       );
     }
+    const {
+      onStop,
+    } = this.options;
+    onStop && onStop();
     this.cancel();
   }
   complete() {
@@ -3040,22 +3077,6 @@ var AcceleratedAnimation = class extends BaseAnimation {
       !motionValue2.owner.getProps().onUpdate && !repeatDelay && repeatType !== 'mirror' && damping !== 0 && type !== 'inertia';
   }
 };
-function addUniqueItem(arr, item,) {
-  if (arr.indexOf(item,) === -1) arr.push(item,);
-}
-function removeItem(arr, item,) {
-  const index = arr.indexOf(item,);
-  if (index > -1) arr.splice(index, 1,);
-}
-function moveItem([...arr], fromIndex, toIndex,) {
-  const startIndex = fromIndex < 0 ? arr.length + fromIndex : fromIndex;
-  if (startIndex >= 0 && startIndex < arr.length) {
-    const endIndex = toIndex < 0 ? arr.length + toIndex : toIndex;
-    const [item,] = arr.splice(fromIndex, 1,);
-    arr.splice(endIndex, 0, item,);
-  }
-  return arr;
-}
 var SubscriptionManager = class {
   constructor() {
     this.subscriptions = [];
@@ -3100,7 +3121,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.2.13';
+    this.version = '11.3.9';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3354,6 +3375,40 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
+var WillChangeMotionValue = class extends MotionValue {
+  constructor() {
+    super(...arguments,);
+    this.output = [];
+    this.counts = /* @__PURE__ */ new Map();
+  }
+  add(name,) {
+    const styleName = getWillChangeName(name,);
+    if (!styleName) return;
+    const prevCount = this.counts.get(styleName,) || 0;
+    this.counts.set(styleName, prevCount + 1,);
+    if (prevCount === 0) {
+      this.output.push(styleName,);
+      this.update();
+    }
+    let hasRemoved = false;
+    return () => {
+      if (hasRemoved) return;
+      hasRemoved = true;
+      const newCount = this.counts.get(styleName,) - 1;
+      this.counts.set(styleName, newCount,);
+      if (newCount === 0) {
+        removeItem(this.output, styleName,);
+        this.update();
+      }
+    };
+  }
+  update() {
+    this.set(this.output.length ? this.output.join(', ',) : 'auto',);
+  }
+};
+function useWillChange() {
+  return useConstant(() => new WillChangeMotionValue('auto',));
+}
 function resolveVariant(visualElement, definition, custom,) {
   const props = visualElement.getProps();
   return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement,);
@@ -3496,7 +3551,7 @@ var GroupPlaybackControls = class {
     this.runAll('complete',);
   }
 };
-var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete) => {
+var animateMotionValue = (name, value, target, transition = {}, element, isHandoff, onEnd,) => (onComplete) => {
   const valueTransition = getValueTransition(transition, name,) || {};
   const delay2 = valueTransition.delay || transition.delay || 0;
   let {
@@ -3516,7 +3571,9 @@ var animateMotionValue = (name, value, target, transition = {}, element, isHando
     onComplete: () => {
       onComplete();
       valueTransition.onComplete && valueTransition.onComplete();
+      onEnd && onEnd();
     },
+    onStop: onEnd,
     name,
     motionValue: value,
     element: isHandoff ? void 0 : element,
@@ -3564,9 +3621,6 @@ var animateMotionValue = (name, value, target, transition = {}, element, isHando
     return new MainThreadAnimation(options,);
   }
 };
-function isWillChangeMotionValue(value,) {
-  return Boolean(isMotionValue(value,) && value.add,);
-}
 function setMotionValue(visualElement, key7, value,) {
   if (visualElement.hasValue(key7,)) {
     visualElement.getValue(key7,).set(value,);
@@ -3593,6 +3647,21 @@ function setTarget(visualElement, definition,) {
 function getOptimisedAppearId(visualElement,) {
   return visualElement.getProps()[optimizedAppearDataAttribute];
 }
+function isWillChangeMotionValue(value,) {
+  return Boolean(isMotionValue(value,) && value.add,);
+}
+function addValueToWillChange(visualElement, key7,) {
+  var _a;
+  if (!visualElement.applyWillChange) return;
+  let willChange = visualElement.getValue('willChange',);
+  if (!willChange && !((_a = visualElement.props.style) === null || _a === void 0 ? void 0 : _a.willChange)) {
+    willChange = new WillChangeMotionValue('auto',);
+    visualElement.addValue('willChange', willChange,);
+  }
+  if (isWillChangeMotionValue(willChange,)) {
+    return willChange.add(key7,);
+  }
+}
 function shouldBlockAnimation({
   protectedKeys,
   needsAnimating,
@@ -3612,7 +3681,6 @@ function animateTarget(visualElement, targetAndTransition, {
     transitionEnd,
     ...target
   } = targetAndTransition;
-  const willChange = visualElement.getValue('willChange',);
   if (transitionOverride) transition = transitionOverride;
   const animations2 = [];
   const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
@@ -3649,13 +3717,10 @@ function animateTarget(visualElement, targetAndTransition, {
         : valueTransition,
       visualElement,
       isHandoff,
+      addValueToWillChange(visualElement, key7,),
     ),);
     const animation = value.animation;
     if (animation) {
-      if (isWillChangeMotionValue(willChange,)) {
-        willChange.add(key7,);
-        animation.then(() => willChange.remove(key7,));
-      }
       animations2.push(animation,);
     }
   }
@@ -4052,19 +4117,29 @@ function distance2D(a, b,) {
   const yDelta = distance(a.y, b.y,);
   return Math.sqrt(xDelta ** 2 + yDelta ** 2,);
 }
+var SCALE_PRECISION = 1e-4;
+var SCALE_MIN = 1 - SCALE_PRECISION;
+var SCALE_MAX = 1 + SCALE_PRECISION;
+var TRANSLATE_PRECISION = 0.01;
+var TRANSLATE_MIN = 0 - TRANSLATE_PRECISION;
+var TRANSLATE_MAX = 0 + TRANSLATE_PRECISION;
 function calcLength(axis,) {
   return axis.max - axis.min;
 }
-function isNear(value, target = 0, maxDistance = 0.01,) {
+function isNear(value, target, maxDistance,) {
   return Math.abs(value - target,) <= maxDistance;
 }
 function calcAxisDelta(delta, source, target, origin = 0.5,) {
   delta.origin = origin;
   delta.originPoint = mixNumber(source.min, source.max, delta.origin,);
   delta.scale = calcLength(target,) / calcLength(source,);
-  if (isNear(delta.scale, 1, 1e-4,) || isNaN(delta.scale,)) delta.scale = 1;
   delta.translate = mixNumber(target.min, target.max, delta.origin,) - delta.originPoint;
-  if (isNear(delta.translate,) || isNaN(delta.translate,)) delta.translate = 0;
+  if (delta.scale >= SCALE_MIN && delta.scale <= SCALE_MAX || isNaN(delta.scale,)) {
+    delta.scale = 1;
+  }
+  if (delta.translate >= TRANSLATE_MIN && delta.translate <= TRANSLATE_MAX || isNaN(delta.translate,)) {
+    delta.translate = 0;
+  }
 }
 function calcBoxDelta(delta, source, target, origin,) {
   calcAxisDelta(delta.x, source.x, target.x, origin ? origin.originX : void 0,);
@@ -4177,21 +4252,15 @@ function initPrefersReducedMotion() {
   }
 }
 function updateMotionValuesFromProps(element, next, prev,) {
-  const {
-    willChange,
-  } = next;
   for (const key7 in next) {
     const nextValue = next[key7];
     const prevValue = prev[key7];
     if (isMotionValue(nextValue,)) {
       element.addValue(key7, nextValue,);
-      if (isWillChangeMotionValue(willChange,)) {
-        willChange.add(key7,);
-      }
       if (false) {
         warnOnce(
-          nextValue.version === '11.2.13',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.2.13 may not work as expected.`,
+          nextValue.version === '11.3.9',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.9 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -4201,9 +4270,6 @@ function updateMotionValuesFromProps(element, next, prev,) {
           owner: element,
         },),
       );
-      if (isWillChangeMotionValue(willChange,)) {
-        willChange.remove(key7,);
-      }
     } else if (prevValue !== nextValue) {
       if (element.hasValue(key7,)) {
         const existingValue = element.getValue(key7,);
@@ -4259,6 +4325,7 @@ var VisualElement = class {
     blockInitialAnimation,
     visualState,
   }, options = {},) {
+    this.applyWillChange = false;
     this.resolveKeyframes = (keyframes2, onComplete, name, value,) => {
       return new this.KeyframeResolver(keyframes2, onComplete, name, value, this,);
     };
@@ -4276,11 +4343,18 @@ var VisualElement = class {
     this.propEventSubscriptions = {};
     this.notifyUpdate = () => this.notify('Update', this.latestValues,);
     this.render = () => {
+      this.isRenderScheduled = false;
       if (!this.current) return;
       this.triggerBuild();
       this.renderInstance(this.current, this.renderState, this.props.style, this.projection,);
     };
-    this.scheduleRender = () => frame.render(this.render, false, true,);
+    this.isRenderScheduled = false;
+    this.scheduleRender = () => {
+      if (!this.isRenderScheduled) {
+        this.isRenderScheduled = true;
+        frame.render(this.render, false, true,);
+      }
+    };
     const {
       latestValues,
       renderState,
@@ -4316,9 +4390,6 @@ var VisualElement = class {
       const value = initialMotionValues[key7];
       if (latestValues[key7] !== void 0 && isMotionValue(value,)) {
         value.set(latestValues[key7], false,);
-        if (isWillChangeMotionValue(willChange,)) {
-          willChange.add(key7,);
-        }
       }
     }
   }
@@ -4412,7 +4483,7 @@ var VisualElement = class {
     }
   }
   triggerBuild() {
-    this.build(this.renderState, this.latestValues, this.options, this.props,);
+    this.build(this.renderState, this.latestValues, this.props,);
   }
   /**
    * Measure the current viewport box with or without transforms.
@@ -4711,7 +4782,7 @@ function isForcedMotionValue(key7, {
 var getValueAsType = (value, type,) => {
   return type && typeof value === 'number' ? type.transform(value,) : value;
 };
-function buildHTMLStyles(state, latestValues, options, transformTemplate2,) {
+function buildHTMLStyles(state, latestValues, transformTemplate2,) {
   const {
     style,
     vars,
@@ -4743,7 +4814,7 @@ function buildHTMLStyles(state, latestValues, options, transformTemplate2,) {
   }
   if (!latestValues.transform) {
     if (hasTransform2 || transformTemplate2) {
-      style.transform = buildTransform(state.transform, options, transformIsNone, transformTemplate2,);
+      style.transform = buildTransform(state.transform, transformIsNone, transformTemplate2,);
     } else if (style.transform) {
       style.transform = 'none';
     }
@@ -4770,31 +4841,25 @@ function copyRawValuesOnly(target, source, props,) {
     }
   }
 }
-function useInitialMotionValues(
-  {
-    transformTemplate: transformTemplate2,
-  },
-  visualState,
-  isStatic,
-) {
+function useInitialMotionValues({
+  transformTemplate: transformTemplate2,
+}, visualState,) {
   return useMemo(() => {
     const state = createHtmlRenderState();
-    buildHTMLStyles(state, visualState, {
-      enableHardwareAcceleration: !isStatic,
-    }, transformTemplate2,);
+    buildHTMLStyles(state, visualState, transformTemplate2,);
     return Object.assign({}, state.vars, state.style,);
   }, [visualState,],);
 }
-function useStyle(props, visualState, isStatic,) {
+function useStyle(props, visualState,) {
   const styleProp = props.style || {};
   const style = {};
   copyRawValuesOnly(style, styleProp, props,);
-  Object.assign(style, useInitialMotionValues(props, visualState, isStatic,),);
+  Object.assign(style, useInitialMotionValues(props, visualState,),);
   return style;
 }
-function useHTMLProps(props, visualState, isStatic,) {
+function useHTMLProps(props, visualState,) {
   const htmlProps = {};
-  const style = useStyle(props, visualState, isStatic,);
+  const style = useStyle(props, visualState,);
   if (props.drag && props.dragListener !== false) {
     htmlProps.draggable = false;
     style.userSelect = style.WebkitUserSelect = style.WebkitTouchCallout = 'none';
@@ -4844,11 +4909,10 @@ function buildSVGAttrs(
     // This is object creation, which we try to avoid per-frame.
     ...latest
   },
-  options,
   isSVGTag2,
   transformTemplate2,
 ) {
-  buildHTMLStyles(state, latest, options, transformTemplate2,);
+  buildHTMLStyles(state, latest, transformTemplate2,);
   if (isSVGTag2) {
     if (state.style.viewBox) {
       state.attrs.viewBox = state.style.viewBox;
@@ -4884,15 +4948,7 @@ var isSVGTag = (tag) => typeof tag === 'string' && tag.toLowerCase() === 'svg';
 function useSVGProps(props, visualState, _isStatic, Component33,) {
   const visualProps = useMemo(() => {
     const state = createSvgRenderState();
-    buildSVGAttrs(
-      state,
-      visualState,
-      {
-        enableHardwareAcceleration: false,
-      },
-      isSVGTag(Component33,),
-      props.transformTemplate,
-    );
+    buildSVGAttrs(state, visualState, isSVGTag(Component33,), props.transformTemplate,);
     return {
       ...state.attrs,
       style: {
@@ -4996,6 +5052,9 @@ function scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
       newValues[key7] = style[key7];
     }
   }
+  if (visualElement && style && typeof style.willChange === 'string') {
+    visualElement.applyWillChange = false;
+  }
   return newValues;
 }
 function scrapeMotionValuesFromProps2(props, prevProps, visualElement,) {
@@ -5029,15 +5088,7 @@ var svgMotionConfig = {
         }
       },);
       frame.render(() => {
-        buildSVGAttrs(
-          renderState,
-          latestValues,
-          {
-            enableHardwareAcceleration: false,
-          },
-          isSVGTag(instance.tagName,),
-          props.transformTemplate,
-        );
+        buildSVGAttrs(renderState, latestValues, isSVGTag(instance.tagName,), props.transformTemplate,);
         renderSVG(instance, renderState,);
       },);
     },
@@ -5045,6 +5096,7 @@ var svgMotionConfig = {
 };
 var htmlMotionConfig = {
   useVisualState: makeUseVisualState({
+    applyWillChange: true,
     scrapeMotionValuesFromProps,
     createRenderState: createHtmlRenderState,
   },),
@@ -5716,6 +5768,8 @@ function applyBoxDelta(box, {
   applyAxisDelta(box.x, x.translate, x.scale, x.originPoint,);
   applyAxisDelta(box.y, y.translate, y.scale, y.originPoint,);
 }
+var TREE_SCALE_SNAP_MIN = 0.999999999999;
+var TREE_SCALE_SNAP_MAX = 1.0000000000001;
 function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false,) {
   const treeLength = treePath.length;
   if (!treeLength) return;
@@ -5725,8 +5779,10 @@ function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false,) 
   for (let i = 0; i < treeLength; i++) {
     node = treePath[i];
     delta = node.projectionDelta;
-    const instance = node.instance;
-    if (instance && instance.style && instance.style.display === 'contents') {
+    const {
+      visualElement,
+    } = node.options;
+    if (visualElement && visualElement.props.style && visualElement.props.style.display === 'contents') {
       continue;
     }
     if (isSharedTransition && node.options.layoutScroll && node.scroll && node !== node.root) {
@@ -5744,27 +5800,24 @@ function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false,) 
       transformBox(box, node.latestValues,);
     }
   }
-  treeScale.x = snapToDefault(treeScale.x,);
-  treeScale.y = snapToDefault(treeScale.y,);
-}
-function snapToDefault(scale2,) {
-  if (Number.isInteger(scale2,)) return scale2;
-  return scale2 > 1.0000000000001 || scale2 < 0.999999999999 ? scale2 : 1;
+  if (treeScale.x < TREE_SCALE_SNAP_MAX && treeScale.x > TREE_SCALE_SNAP_MIN) {
+    treeScale.x = 1;
+  }
+  if (treeScale.y < TREE_SCALE_SNAP_MAX && treeScale.y > TREE_SCALE_SNAP_MIN) {
+    treeScale.y = 1;
+  }
 }
 function translateAxis(axis, distance2,) {
   axis.min = axis.min + distance2;
   axis.max = axis.max + distance2;
 }
-function transformAxis(axis, transforms, [key7, scaleKey, originKey,],) {
-  const axisOrigin = transforms[originKey] !== void 0 ? transforms[originKey] : 0.5;
+function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = 0.5,) {
   const originPoint = mixNumber(axis.min, axis.max, axisOrigin,);
-  applyAxisDelta(axis, transforms[key7], transforms[scaleKey], originPoint, transforms.scale,);
+  applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale,);
 }
-var xKeys = ['x', 'scaleX', 'originX',];
-var yKeys = ['y', 'scaleY', 'originY',];
 function transformBox(box, transform2,) {
-  transformAxis(box.x, transform2, xKeys,);
-  transformAxis(box.y, transform2, yKeys,);
+  transformAxis(box.x, transform2.x, transform2.scaleX, transform2.scale, transform2.originX,);
+  transformAxis(box.y, transform2.y, transform2.scaleY, transform2.scale, transform2.originY,);
 }
 function measureViewportBox(instance, transformPoint2,) {
   return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint2,),);
@@ -5817,6 +5870,7 @@ var VisualElementDragControls = class {
       }
     };
     const onStart = (event, info,) => {
+      var _a;
       const {
         drag: drag2,
         dragPropagation,
@@ -5853,6 +5907,8 @@ var VisualElementDragControls = class {
       if (onDragStart) {
         frame.postRender(() => onDragStart(event, info,));
       }
+      (_a = this.removeWillChange) === null || _a === void 0 ? void 0 : _a.call(this,);
+      this.removeWillChange = addValueToWillChange(this.visualElement, 'transform',);
       const {
         animationState,
       } = this.visualElement;
@@ -5904,6 +5960,8 @@ var VisualElementDragControls = class {
     },);
   }
   stop(event, info,) {
+    var _a;
+    (_a = this.removeWillChange) === null || _a === void 0 ? void 0 : _a.call(this,);
     const isDragging = this.isDragging;
     this.cancel();
     if (!isDragging) return;
@@ -6048,7 +6106,9 @@ var VisualElementDragControls = class {
   }
   startAxisValueAnimation(axis, transition,) {
     const axisValue = this.getAxisMotionValue(axis,);
-    return axisValue.start(animateMotionValue(axis, axisValue, 0, transition, this.visualElement,),);
+    return axisValue.start(
+      animateMotionValue(axis, axisValue, 0, transition, this.visualElement, false, addValueToWillChange(this.visualElement, axis,),),
+    );
   }
   stopAnimation() {
     eachAxis((axis) => this.getAxisMotionValue(axis,).stop());
@@ -6523,6 +6583,12 @@ function copyBoxInto(box, originBox,) {
   copyAxisInto(box.x, originBox.x,);
   copyAxisInto(box.y, originBox.y,);
 }
+function copyAxisDeltaInto(delta, originDelta,) {
+  delta.translate = originDelta.translate;
+  delta.scale = originDelta.scale;
+  delta.originPoint = originDelta.originPoint;
+  delta.origin = originDelta.origin;
+}
 function removePointDelta(point2, translate, scale2, originPoint, boxScale,) {
   point2 -= translate;
   point2 = scalePoint(point2, 1 / scale2, originPoint,);
@@ -6546,11 +6612,11 @@ function removeAxisDelta(axis, translate = 0, scale2 = 1, origin = 0.5, boxScale
 function removeAxisTransforms(axis, transforms, [key7, scaleKey, originKey,], origin, sourceAxis,) {
   removeAxisDelta(axis, transforms[key7], transforms[scaleKey], transforms[originKey], transforms.scale, origin, sourceAxis,);
 }
-var xKeys2 = ['x', 'scaleX', 'originX',];
-var yKeys2 = ['y', 'scaleY', 'originY',];
+var xKeys = ['x', 'scaleX', 'originX',];
+var yKeys = ['y', 'scaleY', 'originY',];
 function removeBoxTransforms(box, transforms, originBox, sourceBox,) {
-  removeAxisTransforms(box.x, transforms, xKeys2, originBox ? originBox.x : void 0, sourceBox ? sourceBox.x : void 0,);
-  removeAxisTransforms(box.y, transforms, yKeys2, originBox ? originBox.y : void 0, sourceBox ? sourceBox.y : void 0,);
+  removeAxisTransforms(box.x, transforms, xKeys, originBox ? originBox.x : void 0, sourceBox ? sourceBox.x : void 0,);
+  removeAxisTransforms(box.y, transforms, yKeys, originBox ? originBox.y : void 0, sourceBox ? sourceBox.y : void 0,);
 }
 function isAxisDeltaZero(delta,) {
   return delta.translate === 0 && delta.scale === 1;
@@ -6558,15 +6624,23 @@ function isAxisDeltaZero(delta,) {
 function isDeltaZero(delta,) {
   return isAxisDeltaZero(delta.x,) && isAxisDeltaZero(delta.y,);
 }
+function axisEquals(a, b,) {
+  return a.min === b.min && a.max === b.max;
+}
 function boxEquals(a, b,) {
-  return a.x.min === b.x.min && a.x.max === b.x.max && a.y.min === b.y.min && a.y.max === b.y.max;
+  return axisEquals(a.x, b.x,) && axisEquals(a.y, b.y,);
+}
+function axisEqualsRounded(a, b,) {
+  return Math.round(a.min,) === Math.round(b.min,) && Math.round(a.max,) === Math.round(b.max,);
 }
 function boxEqualsRounded(a, b,) {
-  return Math.round(a.x.min,) === Math.round(b.x.min,) && Math.round(a.x.max,) === Math.round(b.x.max,) &&
-    Math.round(a.y.min,) === Math.round(b.y.min,) && Math.round(a.y.max,) === Math.round(b.y.max,);
+  return axisEqualsRounded(a.x, b.x,) && axisEqualsRounded(a.y, b.y,);
 }
 function aspectRatio(box,) {
   return calcLength(box.x,) / calcLength(box.y,);
+}
+function axisDeltaEquals(a, b,) {
+  return a.translate === b.translate && a.scale === b.scale && a.originPoint === b.originPoint;
 }
 var NodeStack = class {
   constructor() {
@@ -6695,11 +6769,6 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
   }
   return transform2 || 'none';
 }
-function record(data2,) {
-  if (window.MotionDebug) {
-    window.MotionDebug.record(data2,);
-  }
-}
 function isSVGElement(element,) {
   return element instanceof SVGElement && element.tagName !== 'svg';
 }
@@ -6708,18 +6777,19 @@ function animateSingleValue(value, keyframes2, options,) {
   motionValue$1.start(animateMotionValue('', motionValue$1, keyframes2, options,),);
   return motionValue$1.animation;
 }
+var metrics = {
+  type: 'projectionFrame',
+  totalNodes: 0,
+  resolvedTargetDeltas: 0,
+  recalculatedProjection: 0,
+};
+var isDebug = typeof window !== 'undefined' && window.MotionDebug !== void 0;
 var transformAxes = ['', 'X', 'Y', 'Z',];
 var hiddenVisibility = {
   visibility: 'hidden',
 };
 var animationTarget = 1e3;
 var id2 = 0;
-var projectionFrameData = {
-  type: 'projectionFrame',
-  totalNodes: 0,
-  resolvedTargetDeltas: 0,
-  recalculatedProjection: 0,
-};
 function resetDistortingTransform(key7, visualElement, values, sharedAnimationValues,) {
   const {
     latestValues,
@@ -6791,13 +6861,18 @@ function createProjectionNode2({
       };
       this.updateProjection = () => {
         this.projectionUpdateScheduled = false;
-        projectionFrameData.totalNodes = projectionFrameData.resolvedTargetDeltas = projectionFrameData.recalculatedProjection = 0;
+        if (isDebug) {
+          metrics.totalNodes = metrics.resolvedTargetDeltas = metrics.recalculatedProjection = 0;
+        }
         this.nodes.forEach(propagateDirtyNodes,);
         this.nodes.forEach(resolveTargetDelta,);
         this.nodes.forEach(calcProjection,);
         this.nodes.forEach(cleanDirtyNodes,);
-        record(projectionFrameData,);
+        if (isDebug) {
+          window.MotionDebug.record(metrics,);
+        }
       };
+      this.resolvedRelativeTargetAt = 0;
       this.hasProjected = false;
       this.isVisible = true;
       this.animationProgress = 0;
@@ -7213,7 +7288,8 @@ function createProjectionNode2({
       const isShared = Boolean(this.resumingFrom,) || this !== lead;
       const canSkip =
         !(forceRecalculation || isShared && this.isSharedProjectionDirty || this.isProjectionDirty ||
-          ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.isProjectionDirty) || this.attemptToResolveRelativeTarget);
+          ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.isProjectionDirty) || this.attemptToResolveRelativeTarget ||
+          this.root.updateBlockedByResize);
       if (canSkip) return;
       const {
         layout: layout2,
@@ -7269,7 +7345,9 @@ function createProjectionNode2({
           this.relativeParent = this.relativeTarget = void 0;
         }
       }
-      projectionFrameData.resolvedTargetDeltas++;
+      if (isDebug) {
+        metrics.resolvedTargetDeltas++;
+      }
     }
     getClosestProjectingParent() {
       if (!this.parent || hasScale(this.parent.latestValues,) || has2DTranslate(this.parent.latestValues,)) {
@@ -7320,28 +7398,31 @@ function createProjectionNode2({
         target,
       } = lead;
       if (!target) {
-        if (this.projectionTransform) {
-          this.projectionDelta = createDelta();
-          this.projectionTransform = 'none';
+        if (this.prevProjectionDelta) {
+          this.createProjectionDeltas();
           this.scheduleRender();
         }
         return;
       }
-      if (!this.projectionDelta) {
-        this.projectionDelta = createDelta();
-        this.projectionDeltaWithTransform = createDelta();
+      if (!this.projectionDelta || !this.prevProjectionDelta) {
+        this.createProjectionDeltas();
+      } else {
+        copyAxisDeltaInto(this.prevProjectionDelta.x, this.projectionDelta.x,);
+        copyAxisDeltaInto(this.prevProjectionDelta.y, this.projectionDelta.y,);
       }
-      const prevProjectionTransform = this.projectionTransform;
       calcBoxDelta(this.projectionDelta, this.layoutCorrected, target, this.latestValues,);
-      this.projectionTransform = buildProjectionTransform(this.projectionDelta, this.treeScale,);
       if (
-        this.projectionTransform !== prevProjectionTransform || this.treeScale.x !== prevTreeScaleX || this.treeScale.y !== prevTreeScaleY
+        this.treeScale.x !== prevTreeScaleX || this.treeScale.y !== prevTreeScaleY ||
+        !axisDeltaEquals(this.projectionDelta.x, this.prevProjectionDelta.x,) ||
+        !axisDeltaEquals(this.projectionDelta.y, this.prevProjectionDelta.y,)
       ) {
         this.hasProjected = true;
         this.scheduleRender();
         this.notifyListeners('projectionUpdate', target,);
       }
-      projectionFrameData.recalculatedProjection++;
+      if (isDebug) {
+        metrics.recalculatedProjection++;
+      }
     }
     hide() {
       this.isVisible = false;
@@ -7350,7 +7431,8 @@ function createProjectionNode2({
       this.isVisible = true;
     }
     scheduleRender(notifyAll2 = true,) {
-      this.options.scheduleRender && this.options.scheduleRender();
+      var _a;
+      (_a = this.options.visualElement) === null || _a === void 0 ? void 0 : _a.scheduleRender();
       if (notifyAll2) {
         const stack = this.getStack();
         stack && stack.scheduleRender();
@@ -7358,6 +7440,11 @@ function createProjectionNode2({
       if (this.resumingFrom && !this.resumingFrom.instance) {
         this.resumingFrom = void 0;
       }
+    }
+    createProjectionDeltas() {
+      this.prevProjectionDelta = createDelta();
+      this.projectionDelta = createDelta();
+      this.projectionDeltaWithTransform = createDelta();
     }
     setAnimationOrigin(delta, hasOnlyRelativeTargetChanged = false,) {
       const snapshot = this.snapshot;
@@ -7747,7 +7834,9 @@ function notifyLayoutUpdate(node,) {
   node.options.transition = void 0;
 }
 function propagateDirtyNodes(node,) {
-  projectionFrameData.totalNodes++;
+  if (isDebug) {
+    metrics.totalNodes++;
+  }
   if (!node.parent) return;
   if (!node.isProjecting()) {
     node.isProjectionDirty = node.parent.isProjectionDirty;
@@ -7900,6 +7989,8 @@ var HTMLVisualElement = class extends DOMVisualElement {
   constructor() {
     super(...arguments,);
     this.type = 'html';
+    this.applyWillChange = true;
+    this.renderInstance = renderHTML;
   }
   readValueFromInstance(instance, key7,) {
     if (transformProps.has(key7,)) {
@@ -7916,8 +8007,8 @@ var HTMLVisualElement = class extends DOMVisualElement {
   },) {
     return measureViewportBox(instance, transformPagePoint,);
   }
-  build(renderState, latestValues, options, props,) {
-    buildHTMLStyles(renderState, latestValues, options, props.transformTemplate,);
+  build(renderState, latestValues, props,) {
+    buildHTMLStyles(renderState, latestValues, props.transformTemplate,);
   }
   scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
     return scrapeMotionValuesFromProps(props, prevProps, visualElement,);
@@ -7936,15 +8027,13 @@ var HTMLVisualElement = class extends DOMVisualElement {
       },);
     }
   }
-  renderInstance(instance, renderState, styleProp, projection,) {
-    renderHTML(instance, renderState, styleProp, projection,);
-  }
 };
 var SVGVisualElement = class extends DOMVisualElement {
   constructor() {
     super(...arguments,);
     this.type = 'svg';
     this.isSVGTag = false;
+    this.measureInstanceViewportBox = createBox;
   }
   getBaseTargetFromProps(props, key7,) {
     return props[key7];
@@ -7957,14 +8046,11 @@ var SVGVisualElement = class extends DOMVisualElement {
     key7 = !camelCaseAttributes.has(key7,) ? camelToDash(key7,) : key7;
     return instance.getAttribute(key7,);
   }
-  measureInstanceViewportBox() {
-    return createBox();
-  }
   scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
     return scrapeMotionValuesFromProps2(props, prevProps, visualElement,);
   }
-  build(renderState, latestValues, options, props,) {
-    buildSVGAttrs(renderState, latestValues, options, this.isSVGTag, props.transformTemplate,);
+  build(renderState, latestValues, props,) {
+    buildSVGAttrs(renderState, latestValues, this.isSVGTag, props.transformTemplate,);
   }
   renderInstance(instance, renderState, styleProp, projection,) {
     renderSVG(instance, renderState, styleProp, projection,);
@@ -7975,14 +8061,9 @@ var SVGVisualElement = class extends DOMVisualElement {
   }
 };
 var createDomVisualElement = (Component33, options,) => {
-  return isSVGComponent(Component33,)
-    ? new SVGVisualElement(options, {
-      enableHardwareAcceleration: false,
-    },)
-    : new HTMLVisualElement(options, {
-      allowProjection: Component33 !== Fragment,
-      enableHardwareAcceleration: true,
-    },);
+  return isSVGComponent(Component33,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options, {
+    allowProjection: Component33 !== Fragment,
+  },);
 };
 var layout = {
   layout: {
@@ -9147,43 +9228,6 @@ function useTime() {
   useAnimationFrame((t) => time2.set(t,));
   return time2;
 }
-var WillChangeMotionValue = class extends MotionValue {
-  constructor() {
-    super(...arguments,);
-    this.members = [];
-    this.transforms = /* @__PURE__ */ new Set();
-  }
-  add(name,) {
-    let memberName;
-    if (transformProps.has(name,)) {
-      this.transforms.add(name,);
-      memberName = 'transform';
-    } else if (!name.startsWith('origin',) && !isCSSVariableName(name,) && name !== 'willChange') {
-      memberName = camelToDash(name,);
-    }
-    if (memberName) {
-      addUniqueItem(this.members, memberName,);
-      this.update();
-    }
-  }
-  remove(name,) {
-    if (transformProps.has(name,)) {
-      this.transforms.delete(name,);
-      if (!this.transforms.size) {
-        removeItem(this.members, 'transform',);
-      }
-    } else {
-      removeItem(this.members, camelToDash(name,),);
-    }
-    this.update();
-  }
-  update() {
-    this.set(this.members.length ? this.members.join(', ',) : 'auto',);
-  }
-};
-function useWillChange() {
-  return useConstant(() => new WillChangeMotionValue('auto',));
-}
 function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
   const [shouldReduceMotion,] = useState(prefersReducedMotion.current,);
@@ -9296,13 +9340,7 @@ function createVisualElement(element,) {
       latestValues: {},
     },
   };
-  const node = isSVGElement(element,)
-    ? new SVGVisualElement(options, {
-      enableHardwareAcceleration: false,
-    },)
-    : new HTMLVisualElement(options, {
-      enableHardwareAcceleration: true,
-    },);
+  const node = isSVGElement(element,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options,);
   node.mount(element,);
   visualElementStore.set(element, node,);
 }
@@ -9865,10 +9903,11 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
 }
 var createObject = () => ({});
 var StateVisualElement = class extends VisualElement {
-  build() {}
-  measureInstanceViewportBox() {
-    return createBox();
+  constructor() {
+    super(...arguments,);
+    this.measureInstanceViewportBox = createBox;
   }
+  build() {}
   resetTransform() {}
   restoreTransform() {}
   removeValueFromRenderState() {}
@@ -10028,7 +10067,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.57BPNH2J.js
+// https :https://app.framerstatic.com/framer.Q4UFZHCT.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13061,6 +13100,24 @@ function TurnOnReactEventHandling() {
   );
   return null;
 }
+function setInitialHydrationState() {
+  window.__framer_hydrated = false;
+}
+function SetGlobalHydrationState() {
+  useEffect(() => {
+    if (window.__framer_hydrated === false) {
+      window.__framer_hydrated = true;
+    }
+  }, [],);
+  return null;
+}
+function useIsHydrationOrSSR() {
+  const isHydrationOrSSR = useRef(typeof window === 'undefined' || window.__framer_hydrated === false,);
+  useEffect(() => {
+    isHydrationOrSSR.current = false;
+  }, [],);
+  return isHydrationOrSSR;
+}
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
   if (a.pathVariables === b.pathVariables) return true;
@@ -13105,18 +13162,29 @@ var SuspenseErrorBoundary = class extends Component {
     };
   }
   static getDerivedStateFromError(error,) {
-    console.error('Derived error in SuspenseErrorBoundary', error,);
+    if (!(error instanceof ErrorBoundaryCaughtError)) {
+      console.error('Derived error in SuspenseErrorBoundary', error,);
+    }
     return {
       error,
     };
   }
   componentDidCatch(error, errorInfo,) {
     var _a;
-    console.error('Caught error in SuspenseErrorBoundary', error, errorInfo,);
-    (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
-      message: String(error,),
-      componentStack: errorInfo === null || errorInfo === void 0 ? void 0 : errorInfo.componentStack,
-    },],);
+    if (error instanceof ErrorBoundaryCaughtError) {
+      return;
+    }
+    const componentStack = errorInfo === null || errorInfo === void 0 ? void 0 : errorInfo.componentStack;
+    console.error('Caught error in SuspenseErrorBoundary', error, componentStack,);
+    if (typeof window !== 'undefined') {
+      const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+      (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
+        message: String(error,),
+        stack,
+        // only log componentStack if we don't have a stack
+        componentStack: stack ? void 0 : componentStack,
+      },],);
+    }
   }
   render() {
     if (this.state.error === void 0) return this.props.children;
@@ -13493,6 +13561,7 @@ function Router({
               ],
             }, remountKey,),
           },),
+          jsx(SetGlobalHydrationState, {},),
           jsx(TurnOnReactEventHandling, {},),
           jsx(MarkSuspenseEffects.End, {},),
         ],
@@ -30788,14 +30857,18 @@ function useComponentViewport() {
 }
 var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(({
   width,
+  height,
+  y,
   children,
   ...rest
 }, ref,) => {
   const componentViewport = React4.useMemo(() => {
     return {
       width,
+      height,
+      y,
     };
-  }, [width,],);
+  }, [width, height, y,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
   return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
     value: componentViewport,
@@ -30820,11 +30893,27 @@ var ContainerErrorBoundary = class extends Component {
       hasError: false,
     },);
   }
-  static getDerivedStateFromError() {
-    console.error('Error in component (see previous error log). This component has been hidden.',);
-    return {
+  // We use `componentDidCatch` instead of `static getDerivedStateFromError()` because the latter could also catch hydration errors.
+  // Hydration errors are recoverable by React, so we don't want to hide the coponent in that case (since the tree will not unmount).
+  componentDidCatch(error, errorInfo,) {
+    var _a;
+    const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
+    console.error(
+      'Error in component (see previous log). This component has been hidden. Please check any custom code or code overrides to fix.',
+      componentStack,
+    );
+    this.setState({
       hasError: true,
-    };
+    },);
+    if (typeof window !== 'undefined' && Math.random() <= 0.01) {
+      const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+      (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
+        message: String(error,),
+        stack,
+        // only log componentStack if we don't have a stack
+        componentStack: stack ? void 0 : componentStack,
+      },],);
+    }
   }
   render() {
     const {
@@ -32669,10 +32758,78 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
+function preloadImage(url,) {
+  return new Promise((resolve, reject,) => {
+    try {
+      new URL(url,);
+      const image = new Image();
+      image.onload = () => resolve();
+      image.onerror = reject;
+      image.src = url;
+    } catch (error) {
+      reject(error,);
+    }
+  },);
+}
+function isObjectOrArray(value,) {
+  return typeof value === 'object' && value !== null;
+}
+function getPropertyByPath(input, keyPath,) {
+  if (keyPath === '') {
+    return input;
+  }
+  const keyParts = keyPath.split(/[.[\]]+/u,).filter((part) => part.length > 0);
+  let current = input;
+  for (const part of keyParts) {
+    if (!isObjectOrArray(current,)) {
+      return void 0;
+    }
+    current = current[part];
+  }
+  return current;
+}
+function getRequestCacheKey(value,) {
+  return `${value.credentials}:${value.url}`;
+}
 var loadingFetchResult = {
   status: 'loading',
   data: void 0,
 };
+function isNumberString(value,) {
+  return isString22(value,) && !isNaN(Number(value,),);
+}
+function isValidFetchDataValueResult(type, value,) {
+  switch (type) {
+    case 'string':
+      return isString22(value,) || isNumber2(value,);
+    case 'boolean':
+      return isBoolean(value,);
+    case 'number':
+      return isNumber2(value,) || isNumberString(value,);
+    case 'image':
+      return isString22(value,) && isValidURL2(value,);
+    default: {
+      const _ = type;
+      return false;
+    }
+  }
+}
+function resolveFetchDataValue(result, request,) {
+  if (result.status === 'loading') {
+    return request.fallbackValue;
+  }
+  if (result.status === 'error') {
+    throw result.error;
+  }
+  const resolvedValue = getPropertyByPath(result.data, request.resultKeyPath,);
+  if (isUndefined(resolvedValue,)) {
+    throw new Error(`Key '${request.resultKeyPath}' not found in response`,);
+  }
+  if (!isValidFetchDataValueResult(request.resultOutputType, resolvedValue,)) {
+    throw new Error(`Resolved value '${resolvedValue}' is not valid for type '${request.resultOutputType}'`,);
+  }
+  return resolvedValue;
+}
 function isValidURL2(href,) {
   try {
     const url = new URL(href,);
@@ -32680,6 +32837,9 @@ function isValidURL2(href,) {
   } catch {}
 }
 function isCacheExpired(insertionTimestamp, cacheDuration,) {
+  if (RenderTarget.current() === RenderTarget.canvas) {
+    return false;
+  }
   const cacheDurationMs = cacheDuration === 0
     ? // When the cache is set to 0 seconds we set use a 500ms cache delay
     // to avoid triggering refetching when a variant switches from
@@ -32695,29 +32855,28 @@ function isCacheExpired(insertionTimestamp, cacheDuration,) {
   return currentTimestamp >= expirationTimestamp;
 }
 var noop3 = () => {};
-var _responseValues;
 var _subscribers;
-var _cacheDurations;
+var _shortestCacheDurations;
 var _cachedAt;
 var _ongoingFetches;
 var _staleQueriesInterval;
 var _FetchClient = class {
   constructor() {
-    __privateAdd(this, _responseValues, /* @__PURE__ */ new Map(),);
+    __publicField(this, 'responseValues', /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
-    __privateAdd(this, _cacheDurations, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _shortestCacheDurations, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cachedAt, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _ongoingFetches, /* @__PURE__ */ new Map(),);
-    __privateAdd(this, _staleQueriesInterval, void 0,);
+    __privateAdd(this, _staleQueriesInterval, /* @__PURE__ */ new Map(),);
     __publicField(
       this,
       'persistCache',
       debounce(() => {
         const data2 = {};
-        for (const [url, responseValue,] of __privateGet(this, _responseValues,)) {
+        for (const [url, responseValue,] of this.responseValues) {
           if (!responseValue) continue;
           if (responseValue.status !== 'success') continue;
-          const cacheConfig = __privateGet(this, _cacheDurations,).get(url,);
+          const cacheConfig = __privateGet(this, _shortestCacheDurations,).get(url,);
           if (!cacheConfig || cacheConfig === 0) continue;
           const storedAt = __privateGet(this, _cachedAt,).get(url,);
           if (!storedAt) continue;
@@ -32732,33 +32891,38 @@ var _FetchClient = class {
     this.hydrateCache();
   }
   unmount() {
-    this.stopQueryRefetching();
+    for (const [key7, interval,] of __privateGet(this, _staleQueriesInterval,)) {
+      clearInterval(interval,);
+      __privateGet(this, _staleQueriesInterval,).delete(key7,);
+    }
   }
-  stopQueryRefetching() {
-    if (__privateGet(this, _staleQueriesInterval,)) {
-      clearInterval(__privateGet(this, _staleQueriesInterval,),);
-      __privateSet(this, _staleQueriesInterval, void 0,);
+  stopQueryRefetching(request,) {
+    const cacheKey = getRequestCacheKey(request,);
+    const interval = __privateGet(this, _staleQueriesInterval,).get(cacheKey,);
+    if (interval) {
+      clearInterval(interval,);
+      __privateGet(this, _staleQueriesInterval,).delete(cacheKey,);
     }
   }
   /**
-   * At an interval checks for subscriptions of all active queries and
-   * refetches those whose cache time has expired.
+   * Start an interval for the given request to refresh the value
+   * depending on the shortest configured cache duration for that request.
    */
-  startQueryRefetching() {
-    if (__privateGet(this, _staleQueriesInterval,)) return;
-    __privateSet(
-      this,
-      _staleQueriesInterval,
-      safeWindow.setInterval(() => {
-        const activeURLS = __privateGet(this, _subscribers,).keys();
-        for (const url of activeURLS) {
-          const cachedAt = __privateGet(this, _cachedAt,).get(url,);
-          const cacheDuration = __privateGet(this, _cacheDurations,).get(url,);
-          if (!cacheDuration || !cachedAt) continue;
-          void this.fetchWithCache(url, cacheDuration,);
-        }
-      }, 5e3,),
-    );
+  startQueryRefetching(request,) {
+    const cacheKey = getRequestCacheKey(request,);
+    const currentIntervalForRequest = __privateGet(this, _staleQueriesInterval,).get(cacheKey,);
+    const shortestCacheDuration = __privateGet(this, _shortestCacheDurations,).get(cacheKey,);
+    if (currentIntervalForRequest) return;
+    if (!shortestCacheDuration) return;
+    const interval = safeWindow.setInterval(() => {
+      const cachedAt = __privateGet(this, _cachedAt,).get(cacheKey,);
+      if (!shortestCacheDuration || !cachedAt) return;
+      void this.fetchWithCache({
+        ...request,
+        cacheDuration: shortestCacheDuration,
+      },);
+    }, shortestCacheDuration,);
+    __privateGet(this, _staleQueriesInterval,).set(cacheKey, interval,);
   }
   hydrateCache() {
     try {
@@ -32766,14 +32930,14 @@ var _FetchClient = class {
       if (!rawData) return;
       const data2 = JSON.parse(rawData,);
       if (typeof data2 !== 'object') throw new Error('Invalid cache data',);
-      for (const url in data2) {
-        const cached = data2[url];
+      for (const cacheKey in data2) {
+        const cached = data2[cacheKey];
         if (!Array.isArray(cached,) || cached.length !== 3) throw new Error('Invalid cache data',);
         const [storedAt, cacheDuration, cachedData,] = cached;
         if (isCacheExpired(storedAt, cacheDuration,)) continue;
-        __privateGet(this, _cachedAt,).set(url, storedAt,);
-        __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
-        __privateGet(this, _responseValues,).set(url, {
+        __privateGet(this, _cachedAt,).set(cacheKey, storedAt,);
+        __privateGet(this, _shortestCacheDurations,).set(cacheKey, cacheDuration,);
+        this.responseValues.set(cacheKey, {
           status: 'success',
           data: cachedData,
         },);
@@ -32782,43 +32946,58 @@ var _FetchClient = class {
       localStorage.removeItem(_FetchClient.cacheKey,);
     }
   }
-  setResponseValue(url, value,) {
-    __privateGet(this, _responseValues,).set(url, value,);
+  setResponseValue(cacheKey, value,) {
+    this.responseValues.set(cacheKey, value,);
     this.persistCache();
-    const subscribers = __privateGet(this, _subscribers,).get(url,);
+    const subscribers = __privateGet(this, _subscribers,).get(cacheKey,);
     if (!subscribers) return;
     for (const subscriber of subscribers) {
       subscriber();
     }
   }
-  async prefetch(url, cacheDuration,) {
-    if (!isValidURL2(url,)) return;
-    await this.fetchWithCache(url, cacheDuration,);
-    return this.getValue(url,);
+  async prefetch(request,) {
+    if (!isValidURL2(request.url,)) return;
+    await this.fetchWithCache(request,);
+    const cacheKey = getRequestCacheKey(request,);
+    const result = this.getValue(cacheKey,);
+    if (!result || result.status === 'loading') {
+      throw new Error('Unexpected result status for prefetch',);
+    }
+    try {
+      const resolvedValue = resolveFetchDataValue(result, request,);
+      if (request.resultOutputType === 'image' && isString22(resolvedValue,)) {
+        await preloadImage(resolvedValue,).catch(noop3,);
+      }
+      return resolvedValue;
+    } catch (error) {
+      console.error('Fetch Failed: ' + error,);
+      throw error;
+    }
   }
-  async fetchWithCache(url, cacheDuration,) {
-    const ongoingFetch = __privateGet(this, _ongoingFetches,).get(url,);
+  async fetchWithCache(request,) {
+    const cacheKey = getRequestCacheKey(request,);
+    const ongoingFetch = __privateGet(this, _ongoingFetches,).get(cacheKey,);
     if (ongoingFetch) return ongoingFetch;
-    const cachedAt = __privateGet(this, _cachedAt,).get(url,);
-    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, cacheDuration,);
-    if (__privateGet(this, _responseValues,).has(url,) && !hasExpiredCache) {
+    const cachedAt = __privateGet(this, _cachedAt,).get(cacheKey,);
+    const hasExpiredCache = cachedAt && isCacheExpired(cachedAt, request.cacheDuration,);
+    if (this.responseValues.has(cacheKey,) && !hasExpiredCache) {
       return;
     }
-    const currentValue = __privateGet(this, _responseValues,).get(url,);
+    const currentValue = this.responseValues.get(cacheKey,);
     if (!currentValue) {
-      this.setResponseValue(url, loadingFetchResult,);
+      this.setResponseValue(cacheKey, loadingFetchResult,);
     }
     const doFetch = async () => {
       try {
-        const response = await fetch(url, {
+        const response = await fetch(request.url, {
           method: 'GET',
           headers: {
-            // Default to JSON always or no?
             'Content-Type': 'application/json',
           },
+          credentials: request.credentials,
         },);
         if (!response.ok) {
-          this.setResponseValue(url, {
+          this.setResponseValue(cacheKey, {
             status: 'error',
             error: new Error('Invalid Response Status',),
             data: void 0,
@@ -32826,13 +33005,13 @@ var _FetchClient = class {
           return;
         }
         const value = await response.json();
-        this.setResponseValue(url, {
+        this.setResponseValue(cacheKey, {
           status: 'success',
           data: value,
         },);
-        __privateGet(this, _cachedAt,).set(url, Date.now(),);
+        __privateGet(this, _cachedAt,).set(cacheKey, Date.now(),);
       } catch (error) {
-        this.setResponseValue(url, {
+        this.setResponseValue(cacheKey, {
           status: 'error',
           error,
           data: void 0,
@@ -32840,47 +33019,51 @@ var _FetchClient = class {
       }
     };
     const promise = doFetch();
-    __privateGet(this, _ongoingFetches,).set(url, promise,);
+    __privateGet(this, _ongoingFetches,).set(cacheKey, promise,);
     void promise.finally(() => {
-      __privateGet(this, _ongoingFetches,).delete(url,);
+      __privateGet(this, _ongoingFetches,).delete(cacheKey,);
     },);
     return promise;
   }
-  getValue(url,) {
-    return __privateGet(this, _responseValues,).get(url,);
+  getValue(cacheKey,) {
+    return this.responseValues.get(cacheKey,);
   }
-  subscribe(url, callback, cacheDuration,) {
+  subscribe(request, callback,) {
+    const {
+      url,
+      cacheDuration,
+    } = request;
     if (!isValidURL2(url,)) return noop3;
-    const cacheDurationForUrl = __privateGet(this, _cacheDurations,).get(url,);
+    const cacheKey = getRequestCacheKey(request,);
+    const cacheDurationForUrl = __privateGet(this, _shortestCacheDurations,).get(cacheKey,);
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
-      __privateGet(this, _cacheDurations,).set(url, cacheDuration,);
+      __privateGet(this, _shortestCacheDurations,).set(cacheKey, cacheDuration,);
     }
-    this.startQueryRefetching();
-    void this.fetchWithCache(url, cacheDuration,);
-    const subscribers = __privateGet(this, _subscribers,).get(url,) ?? /* @__PURE__ */ new Set();
+    this.startQueryRefetching(request,);
+    void this.fetchWithCache(request,);
+    const subscribers = __privateGet(this, _subscribers,).get(cacheKey,) ?? /* @__PURE__ */ new Set();
     subscribers.add(callback,);
-    __privateGet(this, _subscribers,).set(url, subscribers,);
+    __privateGet(this, _subscribers,).set(cacheKey, subscribers,);
     return () => {
-      const nextSubscribers = __privateGet(this, _subscribers,).get(url,);
+      const nextSubscribers = __privateGet(this, _subscribers,).get(cacheKey,);
       if (!nextSubscribers) return;
       nextSubscribers.delete(callback,);
       if (nextSubscribers.size === 0) {
-        __privateGet(this, _subscribers,).delete(url,);
+        __privateGet(this, _subscribers,).delete(cacheKey,);
       }
       if (__privateGet(this, _subscribers,).size === 0) {
-        this.stopQueryRefetching();
+        this.stopQueryRefetching(request,);
       }
     };
   }
 };
 var FetchClient = _FetchClient;
-_responseValues = /* @__PURE__ */ new WeakMap();
 _subscribers = /* @__PURE__ */ new WeakMap();
-_cacheDurations = /* @__PURE__ */ new WeakMap();
+_shortestCacheDurations = /* @__PURE__ */ new WeakMap();
 _cachedAt = /* @__PURE__ */ new WeakMap();
 _ongoingFetches = /* @__PURE__ */ new WeakMap();
 _staleQueriesInterval = /* @__PURE__ */ new WeakMap();
-__publicField(FetchClient, 'cacheKey', 'framer-fetch-cache',);
+__publicField(FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
 var FetchClientContext = React2.createContext(void 0,);
 var FetchClientProvider = ({
   children,
@@ -32911,8 +33094,8 @@ var RequestsObserver = class {
     __publicField(this, 'onFetchResultUpdate', () => {
       const results = /* @__PURE__ */ new Map();
       let hasChange = false;
-      const subscribedUrls = __privateGet(this, _subscriptions,).keys();
-      for (const url of subscribedUrls) {
+      const subscribedKeys = __privateGet(this, _subscriptions,).keys();
+      for (const url of subscribedKeys) {
         const result = this.client.getValue(url,);
         if (!result) return;
         results.set(url, result,);
@@ -32941,27 +33124,24 @@ var RequestsObserver = class {
   }
   setRequests(requests,) {
     var _a;
-    const requestsByURL = new Map(requests.map((query) => [query.url, query,]),);
-    const nextSubscribedURLs = Array.from(requestsByURL.keys(),);
-    const hasSubscriptionChange = nextSubscribedURLs.some((url) => !__privateGet(this, _subscriptions,).has(url,));
-    if (nextSubscribedURLs.length !== __privateGet(this, _subscriptions,).size && !hasSubscriptionChange) {
+    const requestsByCacheKey = new Map(requests.map((request) => [getRequestCacheKey(request,), request,]),);
+    const nextSubscribedKeys = Array.from(requestsByCacheKey.keys(),);
+    const hasSubscriptionChange = nextSubscribedKeys.some((url) => !__privateGet(this, _subscriptions,).has(url,));
+    if (nextSubscribedKeys.length !== __privateGet(this, _subscriptions,).size && !hasSubscriptionChange) {
       return;
     }
-    const currentSubscribedURLs = Array.from(__privateGet(this, _subscriptions,).keys(),);
-    const unsubscribeURLs = difference(currentSubscribedURLs, nextSubscribedURLs,);
-    for (const url of unsubscribeURLs) {
+    const currentSubscribedKeys = Array.from(__privateGet(this, _subscriptions,).keys(),);
+    const unsubscribeKeys = difference(currentSubscribedKeys, nextSubscribedKeys,);
+    for (const url of unsubscribeKeys) {
       (_a = __privateGet(this, _subscriptions,).get(url,)) == null ? void 0 : _a();
       __privateGet(this, _subscriptions,).delete(url,);
     }
-    const toSubscribeURLs = difference(nextSubscribedURLs, currentSubscribedURLs,);
-    for (const url of toSubscribeURLs) {
-      const requestConfig = requestsByURL.get(url,);
-      const unsubscribe = this.client.subscribe(
-        url,
-        this.onFetchResultUpdate,
-        (requestConfig == null ? void 0 : requestConfig.cacheDuration) ?? 0,
-      );
-      __privateGet(this, _subscriptions,).set(url, unsubscribe,);
+    const toSubscribeKeys = difference(nextSubscribedKeys, currentSubscribedKeys,);
+    for (const cacheKey of toSubscribeKeys) {
+      const requestConfig = requestsByCacheKey.get(cacheKey,);
+      if (!requestConfig) continue;
+      const unsubscribe = this.client.subscribe(requestConfig, this.onFetchResultUpdate,);
+      __privateGet(this, _subscriptions,).set(cacheKey, unsubscribe,);
     }
     __privateSet(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
     this.onFetchResultUpdate();
@@ -32999,7 +33179,7 @@ function usePrefetch() {
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  return React2.useCallback((url, cacheDuration,) => fetchClient.prefetch(url, cacheDuration,), [fetchClient,],);
+  return React2.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
 function PageRoot({
   RootComponent,
@@ -33188,13 +33368,15 @@ var SSRVariants = /* @__PURE__ */ React4.forwardRef(function SSRVariants2({
   }
   throw new Error('SSRVariants is no longer supported outside canvas and preview',);
 },);
+function variantHashFromClassName(className2,) {
+  return className2.split('-',)[2];
+}
 function generateHiddenClassNames(showOnlyInVariantIds, parentVariants, variantClassNames,) {
   const classNames = [];
   for (const [variantId, variantClassName,] of Object.entries(variantClassNames,)) {
     const alreadyHiddenInParent = parentVariants && !parentVariants.has(variantId,);
     if (showOnlyInVariantIds.includes(variantId,) || alreadyHiddenInParent) continue;
-    const variantHash = variantClassName.split('-',)[2];
-    classNames.push(`hidden-${variantHash}`,);
+    classNames.push(`hidden-${variantHashFromClassName(variantClassName,)}`,);
   }
   return classNames;
 }
@@ -33217,9 +33399,6 @@ function propsForBreakpoint(variant, props, overrides,) {
     ...overrides[variant],
   };
 }
-var noopSubscribe = () => () => {};
-var returnTrue = () => true;
-var returnFalse = () => false;
 var PropertyOverrides = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides2({
   breakpoint,
   overrides,
@@ -33228,9 +33407,9 @@ var PropertyOverrides = /* @__PURE__ */ React4.forwardRef(function PropertyOverr
 }, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
   const parentVariants = React4.useContext(SSRParentVariantsContext,);
-  const isHydrationOrSSR = React4.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
+  const isHydrationOrSSR = useIsHydrationOrSSR();
   const action = useConstant2(() => {
-    if (isHydrationOrSSR) {
+    if (isHydrationOrSSR.current) {
       if (isBrowser2()) {
         return 1;
       } else {
@@ -33327,64 +33506,20 @@ var ResolveLinks = /* @__PURE__ */ React2.forwardRef(function ResolveLinksInner(
   const childrenWithLinks = children(resolvedLinks,);
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
 },);
-function isObjectOrArray(value,) {
-  return typeof value === 'object' && value !== null;
-}
-function getPropertyByPath(input, keyPath,) {
-  if (keyPath === '') {
-    return input;
-  }
-  const keyParts = keyPath.split(/[.[\]]+/u,).filter((part) => part.length > 0);
-  let current = input;
-  for (const part of keyParts) {
-    if (!isObjectOrArray(current,)) {
-      return void 0;
-    }
-    current = current[part];
-  }
-  return current;
-}
-function isNumberString(value,) {
-  return isString22(value,) && !isNaN(Number(value,),);
-}
-function isValidFetchDataValueResult(type, value,) {
-  switch (type) {
-    case 'string':
-      return isString22(value,) || isNumber2(value,);
-    case 'boolean':
-      return isBoolean(value,);
-    case 'number':
-      return isNumber2(value,) || isNumberString(value,);
-    case 'image':
-      return isString22(value,) && isValidURL2(value,);
-    default: {
-      const _ = type;
-      return false;
-    }
-  }
-}
-function resolveFetchDataValue(result, request,) {
-  if (result.status === 'loading') {
-    return request.fallbackValue;
-  }
-  if (result.status === 'error') {
-    return request.fallbackValue;
-  }
-  const resolvedValue = getPropertyByPath(result.data, request.resultKeyPath,);
-  if (!isValidFetchDataValueResult(request.resultOutputType, resolvedValue,)) {
-    return request.fallbackValue;
-  }
-  return resolvedValue;
-}
 function useFetchDataValues(requests, disabled,) {
   const fetchResults = useFetchRequests(requests, disabled,);
   const data2 = React2.useMemo(() => {
     return requests.map((request) => {
-      const fetchResult = fetchResults.get(request.url,);
+      const fetchResult = fetchResults.get(getRequestCacheKey(request,),);
       if (!fetchResult) {
         return request.fallbackValue;
       }
-      return resolveFetchDataValue(fetchResult, request,);
+      try {
+        return resolveFetchDataValue(fetchResult, request,);
+      } catch (error) {
+        console.error('Fetch Failed: ' + error,);
+        return !isUndefined(request.errorFallbackValue,) ? request.errorFallbackValue : request.fallbackValue;
+      }
     },);
   }, [fetchResults, requests,],);
   const status = React2.useMemo(() => {
@@ -35581,43 +35716,85 @@ function createScanCollectionPlan(collection, expression,) {
   const plan = new ScanCollectionPlan(collection,);
   return new FilterItemsPlan(plan, expression,);
 }
+function ChildrenCanSuspend({
+  children,
+},) {
+  const {
+    useGranularSuspense,
+  } = useLibraryFeatures();
+  if (!useGranularSuspense) return children;
+  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
+    children,
+  },);
+}
+var defaultVariantKey = 'default';
+var defaultVariants = /* @__PURE__ */ new Set([defaultVariantKey,],);
+var _variantHashes;
 var AnimationCollector = class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _variantHashes, {},);
   }
+  /** @deprecated */
   set(nodeId, prop, value, variantHash,) {
-    const nodeEntry = this.entries.get(nodeId,);
     switch (prop) {
       case 'transformTemplate': {
         assert(typeof value === 'string', `transformTemplate must be a string, received: ${value}`,);
-        if (nodeEntry) {
-          nodeEntry.transformTemplate = value;
-        } else {
-          this.entries.set(nodeId, {
-            transformTemplate: value,
-          },);
-        }
+        this.setHash(nodeId, variantHash, {
+          transformTemplate: value,
+          legacy: true,
+        },);
         break;
       }
       case 'initial':
       case 'animate': {
         assert(typeof value === 'object', `${prop} must be a valid object, received: ${value}`,);
-        if (nodeEntry) {
-          nodeEntry[prop] = value;
-          if (!nodeEntry.variantHash) {
-            nodeEntry.variantHash = variantHash;
-          }
-        } else {
-          this.entries.set(nodeId, {
-            [prop]: value,
-            variantHash,
-          },);
-        }
+        this.setHash(nodeId, variantHash, {
+          [prop]: value,
+          legacy: true,
+        },);
         break;
       }
       default:
         break;
     }
+  }
+  setHash(id3, variantHash = defaultVariantKey, value,) {
+    const existing = this.entries.get(id3,) ?? {};
+    const existingValue = existing[variantHash] ?? {};
+    existing[variantHash] = value === null ? null : {
+      ...existingValue,
+      ...value,
+    };
+    this.entries.set(id3, existing,);
+  }
+  variantHash(variantId, info,) {
+    if (variantId === (info == null ? void 0 : info.primaryVariantId)) return defaultVariantKey;
+    const existing = __privateGet(this, _variantHashes,)[variantId];
+    if (existing) return existing;
+    const className2 = info == null ? void 0 : info.variantClassNames[variantId];
+    if (!className2) return defaultVariantKey;
+    return __privateGet(this, _variantHashes,)[variantId] = variantHashFromClassName(className2,);
+  }
+  setAll(id3, variants = defaultVariants, props, info,) {
+    var _a;
+    if (props === null) {
+      for (const variantId of variants) {
+        this.setHash(id3, this.variantHash(variantId, info,), null,);
+      }
+      return;
+    }
+    const transformTemplate2 = isFunction(props.transformTemplate,)
+      ? (_a = props.transformTemplate) == null ? void 0 : _a.call(props, {}, framerAppearTransformTemplateToken,)
+      : void 0;
+    const initial = props.__framer__presenceInitial ?? props.initial;
+    const animate3 = props.__framer__presenceAnimate ?? props.animate;
+    const config = {
+      initial: isObject2(initial,) ? initial : void 0,
+      animate: isObject2(animate3,) ? animate3 : void 0,
+      transformTemplate: isString22(transformTemplate2,) ? transformTemplate2 : void 0,
+    };
+    for (const variantId of variants) this.setHash(id3, this.variantHash(variantId, info,), config,);
   }
   clear() {
     this.entries.clear();
@@ -35626,7 +35803,35 @@ var AnimationCollector = class {
     return Object.fromEntries(this.entries,);
   }
 };
+_variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
+function withOptimizedAppearEffect(Component15,) {
+  return React4.forwardRef(({
+    optimized,
+    ...props
+  }, ref,) => {
+    const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
+    const variants = React4.useContext(SSRParentVariantsContext,);
+    const id3 = props[framerAppearIdKey];
+    if (id3 && !isBrowser2()) {
+      framerAppearEffects.setAll(
+        id3,
+        variants,
+        // A layer may have an optimization id, and an `animate` prop,
+        // but not require optimization. For example in the case of a
+        // layer where one variant has an appear effect, and another
+        // variant has a scroll appear effect, the scroll appear effect
+        // should not be optimized.
+        optimized ? props : null,
+        generatedComponentContext,
+      );
+    }
+    return /* @__PURE__ */ jsx(Component15, {
+      ref,
+      ...props,
+    },);
+  },);
+}
 var optimizeAppear = (prop, id3, animateTargetAndTransition, variantHash,) => {
   if (!isBrowser2()) {
     framerAppearEffects.set(id3, prop, animateTargetAndTransition, variantHash,);
@@ -35816,9 +36021,9 @@ function useDataRecord(collection, variables,) {
     if (!variables) {
       return null;
     }
-    const pageRecord = collection.find((record2) => {
+    const pageRecord = collection.find((record) => {
       return Object.entries(variables,).every(([key7, value,],) => {
-        const recordValue = record2[key7];
+        const recordValue = record[key7];
         if (value === void 0 || recordValue === void 0 || isObject2(value,) || isObject2(recordValue,)) {
           return false;
         }
@@ -36387,12 +36592,14 @@ var VariantSelector = /* @__PURE__ */ ((VariantSelector2) => {
   VariantSelector2['Variant'] = 'v';
   return VariantSelector2;
 })(VariantSelector || {},);
-function getGesture(enabledGestures, isHovered, isPressed, isLoading,) {
+function getGesture(enabledGestures, isHovered, isPressed, isLoading, isError,) {
   const {
     hover,
     pressed,
     loading,
+    error,
   } = enabledGestures || {};
+  if (error && isError) return 'error';
   if (loading && isLoading) return 'loading';
   if (pressed && isPressed) return 'pressed';
   if (hover && isHovered) return 'hover';
@@ -36423,6 +36630,7 @@ function useVariantState({
   const internalState = React4.useRef({
     isHovered: false,
     isPressed: false,
+    isError: false,
     hasPressedVariants: true,
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
     lastVariant: variant,
@@ -36440,21 +36648,29 @@ function useVariantState({
     const {
       isHovered: isHovered2,
       isPressed: isPressed2,
+      isError: isError2,
       enabledGestures: enabledGestures2,
       defaultVariant: defaultVariant2,
     } = internalState.current;
     const nextBaseVariant = safeBaseVariant(targetBaseVariant, defaultVariant2, validBaseVariants,);
-    const gesture = getGesture(enabledGestures2 == null ? void 0 : enabledGestures2[nextBaseVariant], isHovered2, isPressed2, false,);
+    const gesture = getGesture(
+      enabledGestures2 == null ? void 0 : enabledGestures2[nextBaseVariant],
+      isHovered2,
+      isPressed2,
+      false,
+      isError2,
+    );
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [validBaseVariants,],);
   const setGestureState = React4.useCallback(({
     isHovered: isHovered2,
     isPressed: isPressed2,
-    isLoading,
+    isError: isError2,
   },) => {
     if (isHovered2 !== void 0) internalState.current.isHovered = isHovered2;
     if (isPressed2 !== void 0) internalState.current.isPressed = isPressed2;
+    if (isError2 !== void 0) internalState.current.isError = isError2;
     const {
       baseVariant: baseVariant2,
       gestureVariant: gestureVariant2,
@@ -36479,6 +36695,7 @@ function useVariantState({
       : proposedVariant;
     const [nextBase, nextGesture,] = resolveNextVariant(nextBaseVariant,);
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
+      internalState.current.isError = false;
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
       forceUpdate();
@@ -36506,6 +36723,7 @@ function useVariantState({
     enabledGestures,
     isHovered,
     isPressed,
+    isError,
     loadedBaseVariant,
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
@@ -36514,7 +36732,7 @@ function useVariantState({
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
     const hasLoadingVariant = (_a = enabledGestures == null ? void 0 : enabledGestures[baseVariant]) == null ? void 0 : _a.loading;
-    const isLoading = !isCanvas && !!hasLoadingVariant && !loadedBaseVariant[baseVariant];
+    const isLoading = !isError && !isCanvas && !!hasLoadingVariant && !loadedBaseVariant[baseVariant];
     const gesture = isLoading ? createGestureVariant(baseVariant, 'loading',) : gestureVariant;
     if (gesture) variants.push(gesture,);
     const gestures = enabledGestures == null ? void 0 : enabledGestures[baseVariant];
@@ -36555,7 +36773,10 @@ function useVariantState({
       clearLoadingGesture,
       addVariantProps,
       gestureHandlers,
-      classNames: cx(createVariantClassName(baseVariant, variantClassNames,), getGesture(gestures, isHovered, isPressed, isLoading,),),
+      classNames: cx(
+        createVariantClassName(baseVariant, variantClassNames,),
+        getGesture(gestures, isHovered, isPressed, isLoading, isError,),
+      ),
     };
   }, [
     baseVariant,
@@ -38068,7 +38289,6 @@ var FontStore = class {
     __publicField(this, 'getGoogleFontsListPromise',);
     __publicField(this, 'getFontshareFontsListPromise',);
     __publicField(this, 'loadedSelectors', /* @__PURE__ */ new Set(),);
-    __publicField(this, 'googleFamilyNames', /* @__PURE__ */ new Set(),);
     __publicField(this, 'local',);
     __publicField(this, 'google',);
     __publicField(this, 'fontshare',);
@@ -38099,7 +38319,6 @@ var FontStore = class {
       this.getGoogleFontsListPromise = runtime.fetchGoogleFontsList();
       const googleFonts = await this.getGoogleFontsListPromise;
       for (const font of this.google.importFonts(googleFonts,)) {
-        this.googleFamilyNames.add(font.family.name.toLowerCase(),);
         this.addFont(font,);
       }
     }
@@ -38110,9 +38329,7 @@ var FontStore = class {
       this.getFontshareFontsListPromise = runtime.fetchFontshareFontsList();
       const fontshareFonts = await this.getFontshareFontsListPromise;
       for (const font of this.fontshare.importFonts(fontshareFonts,)) {
-        if (!this.googleFamilyNames.has(font.family.name.toLowerCase(),)) {
-          this.addFont(font,);
-        }
+        this.addFont(font,);
       }
     }
     return this.getFontshareFontsListPromise;
@@ -38238,14 +38455,14 @@ var FontStore = class {
     const fontshareFontsRequested = selectors.some((selector) => selector.startsWith(fontsharePrefix,));
     if (googleFontsRequested || fontshareFontsRequested) {
       try {
-        await this.importGoogleFonts();
-      } catch (error) {
-        warnOnce2('Failed to load Google fonts:', error,);
-      }
-      try {
         await this.importFontshareFonts();
       } catch (error) {
         warnOnce2('Failed to load Fontshare fonts:', error,);
+      }
+      try {
+        await this.importGoogleFonts();
+      } catch (error) {
+        warnOnce2('Failed to load Google fonts:', error,);
       }
     }
     const fonts = selectors.map((s) => this.bySelector.get(s,)).filter((f) => !!f);
@@ -42389,18 +42606,9 @@ var DOM = {
   convertToPagePoint,
   convertFromPagePoint,
 };
-function preloadImage(url,) {
-  return new Promise((resolve, reject,) => {
-    try {
-      new URL(url,);
-      const image = new Image();
-      image.onload = () => resolve();
-      image.onerror = reject;
-      image.src = url;
-    } catch (error) {
-      reject(error,);
-    }
-  },);
+var LOADING_LAZY_THRESHOLD = 1e3;
+function getLoadingLazyAtYPosition(offset,) {
+  return offset > LOADING_LAZY_THRESHOLD ? 'lazy' : void 0;
 }
 function gradientForShape(nodeId, node,) {
   if (LinearGradient.isLinearGradient(node.fill,)) {
@@ -42690,7 +42898,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.2.13',
+    'framer-motion': '11.3.9',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -42758,6 +42966,7 @@ export {
   callEach,
   cancelFrame,
   cancelSync,
+  ChildrenCanSuspend,
   circIn,
   circInOut,
   circOut,
@@ -42860,6 +43069,7 @@ export {
   getFonts,
   getFontsFromComponentPreset,
   getFontsFromSharedStyle,
+  getLoadingLazyAtYPosition,
   getMeasurableCodeComponentChildren,
   getMergedConstraintsProps,
   getPropertyControls,
@@ -42963,7 +43173,6 @@ export {
   removeHiddenBreakpointLayersV2,
   RenderTarget,
   Reorder,
-  resolveFetchDataValue,
   resolveLink,
   ResolveLinks,
   resolveMotionValue,
@@ -42977,6 +43186,7 @@ export {
   scroll,
   scrollInfo,
   setGlobalRenderEnvironment,
+  setInitialHydrationState,
   Shadow,
   sharedSVGManager,
   shouldOpenLinkInNewTab,
@@ -43098,6 +43308,7 @@ export {
   withMeasuredSize,
   WithNavigator,
   withOpacity,
+  withOptimizedAppearEffect,
   WithOverride,
   withParallaxTransform,
   withPath,
