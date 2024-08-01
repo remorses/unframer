@@ -10067,7 +10067,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.Q4UFZHCT.js
+// https :https://app.framerstatic.com/framer.LIC22G2B.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18632,7 +18632,6 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['BoxShadow'] = 'boxshadow';
   ControlType2['Link'] = 'link';
   ControlType2['Date'] = 'date';
-  ControlType2['DateTime'] = 'datetime';
   ControlType2['Object'] = 'object';
   ControlType2['Font'] = 'font';
   ControlType2['PageScope'] = 'pagescope';
@@ -19569,7 +19568,6 @@ function getControlDefaultValue(control,) {
       case 'multicollectionreference':
       case 'color':
       case 'date':
-      case 'datetime':
       case 'link':
       case 'boxshadow':
       case 'padding':
@@ -33576,6 +33574,9 @@ function getLogger(name,) {
     },
   };
 }
+function isAnyCollection(value,) {
+  return isAnyLegacyCollection(value,) || isAnyDatabaseCollection(value,);
+}
 function isLegacyCollection(value,) {
   return isArray(value,) && value.every(isObject2,);
 }
@@ -33591,7 +33592,10 @@ function isDatabaseCollection(value,) {
 function isLocalizedDatabaseCollection(value,) {
   return isObject2(value,) && isObject2(value.collectionByLocaleId,);
 }
-async function getCollection(collection, locale,) {
+function isAnyDatabaseCollection(value,) {
+  return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
+}
+async function getCollectionItems(collection, locale,) {
   if (isLegacyLocalizedCollection(collection,)) {
     await collection.preload(locale,);
     return collection.read(locale,);
@@ -33648,17 +33652,17 @@ var CompatibilityDatabaseCollection = class {
     return pointer;
   }
   async scanItems() {
-    const collection = await getCollection(this.collection, this.locale,);
-    return collection.map((item, index,) => {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    return items.map((item, index,) => {
       const pointer = String(index,);
       return this.getDatabaseItem(item, pointer,);
     },);
   }
   async resolveItems(pointers,) {
-    const collection = await getCollection(this.collection, this.locale,);
+    const items = await getCollectionItems(this.collection, this.locale,);
     return pointers.map((pointer) => {
       const index = Number(pointer,);
-      const item = collection[index];
+      const item = items[index];
       assert(item, 'Can\'t find collection item',);
       return this.getDatabaseItem(item, pointer,);
     },);
@@ -33744,8 +33748,6 @@ var DatabaseValue = {
         return `'${value.value}' /* Color */`;
       case 'date':
         return `'${value.value}' /* Date */`;
-      case 'datetime':
-        return `'${value.value}' /* DateTime */`;
       case 'richtext':
         return 'RichText';
       case 'responsiveimage':
@@ -33779,8 +33781,7 @@ function compare(left, right, collation,) {
       if (left.value > right.value) return 1;
       return 0;
     }
-    case 'date':
-    case 'datetime': {
+    case 'date': {
       assert(left.type === right.type,);
       const leftDate = new Date(left.value,);
       const rightDate = new Date(right.value,);
@@ -33866,10 +33867,11 @@ var ScalarExpression = class {
   }
 };
 var ScalarIdentifier = class extends ScalarExpression {
-  constructor(schema, name,) {
+  constructor(schema, name, collection,) {
     super();
     this.schema = schema;
     this.name = name;
+    this.collection = collection;
     __publicField(this, 'definition',);
     if (name === INDEX_IDENTIFIER) {
       this.definition = {
@@ -33884,12 +33886,17 @@ var ScalarIdentifier = class extends ScalarExpression {
     return this.name;
   }
   equals(other,) {
-    return other instanceof ScalarIdentifier && isEqual(this.definition, other.definition,) && isEqual(other.name, this.name,);
+    return other instanceof ScalarIdentifier && isEqual(this.definition, other.definition,) && isEqual(other.name, this.name,) &&
+      isEqual(other.collection, this.collection,);
   }
   evaluate(item,) {
     const name = this.name;
     if (isUndefined(item,) || name === INDEX_IDENTIFIER) {
       throw new Error(`Can't evaluate identifier: ${name}`,);
+    }
+    if (this.collection) {
+      const scopedName = `${this.collection}_${name}`;
+      return item.data[scopedName] ?? item.data[name] ?? null;
     }
     return item.data[name] ?? null;
   }
@@ -34629,7 +34636,7 @@ function getScalarExpression(expression, schema, typeAffinity,) {
   }
 }
 function convertIdentifier(expression, schema,) {
-  return new ScalarIdentifier(schema, expression.name,);
+  return new ScalarIdentifier(schema, expression.name, expression.collection,);
 }
 function convertLiteralValue(expression, typeAffinity,) {
   var _a, _b;
@@ -35045,9 +35052,10 @@ var QueryPlan = class {
   }
 };
 var ScanCollectionPlan = class extends QueryPlan {
-  constructor(collection,) {
+  constructor(collection, alias,) {
     super();
     this.collection = collection;
+    this.alias = alias;
   }
   inspect() {
     return {
@@ -35055,7 +35063,64 @@ var ScanCollectionPlan = class extends QueryPlan {
     };
   }
   async _execute() {
-    return this.collection.scanItems();
+    const items = await this.collection.scanItems();
+    if (isUndefined(this.alias,)) return items;
+    return items.map((item) => {
+      const data2 = {
+        ...item.data,
+      };
+      const dataEntries = Object.entries(data2,);
+      for (const [key7, value,] of dataEntries) {
+        data2[`${this.alias}_${key7}`] = value;
+      }
+      return {
+        pointer: item.pointer,
+        data: data2,
+      };
+    },);
+  }
+};
+var LeftJoinPlan = class extends QueryPlan {
+  constructor(leftPlan, rightPlan, constraint,) {
+    super();
+    this.leftPlan = leftPlan;
+    this.rightPlan = rightPlan;
+    this.constraint = constraint;
+  }
+  inspect() {
+    const childPlansTime = Math.max(this.leftPlan.executionTime ?? 0, this.rightPlan.executionTime ?? 0,);
+    return {
+      label: `LeftJoinPlan ${stringifyExecutionTime(this.executionTime - childPlansTime, this.executionTime,)} ${
+        stringifyItems(this.itemCount,)
+      }`,
+      nodes: [this.leftPlan.inspect(), this.rightPlan.inspect(),],
+    };
+  }
+  async _execute() {
+    var _a;
+    const leftItems = await this.leftPlan.execute();
+    const rightItems = await this.rightPlan.execute();
+    const result = [];
+    for (const leftItem of leftItems) {
+      let hasMatch = false;
+      for (const rightItem of rightItems) {
+        const combinedItem = {
+          pointer: leftItem.pointer,
+          data: {
+            ...leftItem.data,
+            ...rightItem.data,
+          },
+        };
+        if ((_a = this.constraint.evaluate(combinedItem,)) == null ? void 0 : _a.value) {
+          result.push(combinedItem,);
+          hasMatch = true;
+        }
+      }
+      if (!hasMatch) {
+        result.push(leftItem,);
+      }
+    }
+    return result;
   }
 };
 var LookupIndexPlan = class extends QueryPlan {
@@ -35182,7 +35247,7 @@ var ResolveItemsPlan = class extends QueryPlan {
         if (expression.type !== 'Identifier') continue;
         const value = item.data[expression.name];
         if ((value == null ? void 0 : value.type) !== 'richtext') continue;
-        void this.richTextResolver.resolve(value.value,);
+        void this.richTextResolver.resolve(expression.name, value.value,);
       }
     }
     return this.collection.resolveItems(childPointers,);
@@ -35335,25 +35400,26 @@ var DatabaseItemMap = class extends Map {
   }
 };
 var RichTextResolver = class {
-  constructor(collection,) {
-    this.collection = collection;
+  constructor(collections,) {
+    this.collections = collections;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
   }
-  resolve(pointer,) {
-    const cachedPromise = this.cache.get(pointer,);
+  resolve(key7, pointer,) {
+    const scopedCache = this.cache.get(key7,) ?? /* @__PURE__ */ new Map();
+    this.cache.set(key7, scopedCache,);
+    const cachedPromise = scopedCache.get(pointer,);
     if (cachedPromise) return cachedPromise;
-    const promise = this.collection.resolveRichText(pointer,);
-    this.cache.set(pointer, promise,);
-    return promise;
+    for (const collection of this.collections) {
+      if (key7 in collection.schema) {
+        const promise = collection.resolveRichText(pointer,);
+        scopedCache.set(pointer, promise,);
+        return promise;
+      }
+    }
+    throw new Error(`Rich text field not found: ${key7}`,);
   }
 };
-function stringifyIdentifier(data2, expression,) {
-  var _a;
-  if (isLocalizedDatabaseCollection(data2,)) {
-    const propertyControls = getPropertyControls(data2,);
-    const title = (_a = propertyControls == null ? void 0 : propertyControls[expression.name]) == null ? void 0 : _a.title;
-    if (title) return `"${expression.name}" /* ${title} */`;
-  }
+function stringifyIdentifier(expression,) {
   return `"${expression.name}"`;
 }
 function stringifyLiteralValue(expression,) {
@@ -35362,16 +35428,16 @@ function stringifyLiteralValue(expression,) {
   }
   return expression.value;
 }
-function stringifyFunctionCall(data2, expression,) {
-  return `${expression.functionName}(${expression.arguments.map((argument) => stringifyExpression(data2, argument,)).join(', ',)})`;
+function stringifyFunctionCall(expression,) {
+  return `${expression.functionName}(${expression.arguments.map((argument) => stringifyExpression(argument,)).join(', ',)})`;
 }
-function stringifyCaseExpression(data2, expression,) {
+function stringifyCaseExpression(expression,) {
   let caseString = 'CASE';
   if (expression.value) {
-    caseString += ` ${stringifyExpression(data2, expression.value,)}`;
+    caseString += ` ${stringifyExpression(expression.value,)}`;
   }
   for (const condition of expression.conditions) {
-    caseString += ` WHEN ${stringifyExpression(data2, condition.when,)} THEN ${stringifyExpression(data2, condition.then,)}`;
+    caseString += ` WHEN ${stringifyExpression(condition.when,)} THEN ${stringifyExpression(condition.then,)}`;
   }
   if (expression.else) {
     caseString += ` ELSE ${expression.else}`;
@@ -35379,39 +35445,62 @@ function stringifyCaseExpression(data2, expression,) {
   caseString += ' END';
   return caseString;
 }
-function stringifyUnaryOperation(data2, expression,) {
-  const value = stringifyExpression(data2, expression.value,);
+function stringifyUnaryOperation(expression,) {
+  const value = stringifyExpression(expression.value,);
   const operator = expression.operator.toUpperCase();
   return `${operator} ${value}`;
 }
-function stringifyBinaryOperation(data2, expression,) {
-  const left = stringifyExpression(data2, expression.left,);
-  const right = stringifyExpression(data2, expression.right,);
+function stringifyBinaryOperation(expression,) {
+  const left = stringifyExpression(expression.left,);
+  const right = stringifyExpression(expression.right,);
   const operator = expression.operator.toUpperCase();
   return `${left} ${operator} ${right}`;
 }
-function stringifyTypeCast(data2, expression,) {
-  return `CAST(${stringifyExpression(data2, expression.value,)} as ${expression.dataType})`;
+function stringifyTypeCast(expression,) {
+  return `CAST(${stringifyExpression(expression.value,)} as ${expression.dataType})`;
 }
-function stringifyExpression(data2, expression,) {
+function stringifyExpression(expression,) {
   switch (expression.type) {
     case 'Identifier':
-      return stringifyIdentifier(data2, expression,);
+      return stringifyIdentifier(expression,);
     case 'LiteralValue':
       return stringifyLiteralValue(expression,);
     case 'FunctionCall':
-      return stringifyFunctionCall(data2, expression,);
+      return stringifyFunctionCall(expression,);
     case 'Case':
-      return stringifyCaseExpression(data2, expression,);
+      return stringifyCaseExpression(expression,);
     case 'UnaryOperation':
-      return stringifyUnaryOperation(data2, expression,);
+      return stringifyUnaryOperation(expression,);
     case 'BinaryOperation':
-      return stringifyBinaryOperation(data2, expression,);
+      return stringifyBinaryOperation(expression,);
     case 'TypeCast':
-      return stringifyTypeCast(data2, expression,);
+      return stringifyTypeCast(expression,);
     default: {
       assertNever(expression,);
     }
+  }
+}
+function stringifyCollection(collection,) {
+  if (isDatabaseCollection(collection.data,)) {
+    return 'Collection';
+  }
+  return collection.data.displayName;
+}
+function stringifyJoin(join,) {
+  let result = `${stringifyFrom(join.left,)} LEFT JOIN ${stringifyFrom(join.right,)}`;
+  if (join.constraint) {
+    result += ` ON ${stringifyExpression(join.constraint,)}`;
+  }
+  return result;
+}
+function stringifyFrom(from,) {
+  switch (from.type) {
+    case 'Collection':
+      return stringifyCollection(from,);
+    case 'LeftJoin':
+      return stringifyJoin(from,);
+    default:
+      assertNever(from,);
   }
 }
 function autoIndentSql(sql,) {
@@ -35435,33 +35524,29 @@ function stringifyQuery(query,) {
   let queryString = '';
   queryString += `SELECT ${
     query.select.map((selectExpression) => {
-      const expressionString = stringifyExpression(query.from.data, selectExpression,);
+      const expressionString = stringifyExpression(selectExpression,);
       if (selectExpression.alias) {
         return `${expressionString} AS ${selectExpression.alias}`;
       }
       return expressionString;
     },).join(', ',)
   }`;
-  if (isLocalizedDatabaseCollection(query.from.data,)) {
-    queryString += ` FROM ${query.from.data.displayName}`;
-  } else {
-    queryString += ` FROM ${query.from.data.displayName}`;
-  }
+  queryString += ` FROM ${stringifyFrom(query.from,)}`;
   if (query.where) {
-    queryString += ` WHERE ${stringifyExpression(query.from.data, query.where,)}`;
+    queryString += ` WHERE ${stringifyExpression(query.where,)}`;
   }
   if (query.orderBy) {
     queryString += ` ORDER BY ${
       query.orderBy.map((orderExpression) => {
-        return `${stringifyExpression(query.from.data, orderExpression,)} ${orderExpression.direction ?? 'asc'}`;
+        return `${stringifyExpression(orderExpression,)} ${orderExpression.direction ?? 'asc'}`;
       },).join(', ',)
     }`;
   }
   if (query.limit) {
-    queryString += ` LIMIT ${stringifyExpression(query.from.data, query.limit,)}`;
+    queryString += ` LIMIT ${stringifyExpression(query.limit,)}`;
   }
   if (query.offset) {
-    queryString += ` OFFSET ${stringifyExpression(query.from.data, query.offset,)}`;
+    queryString += ` OFFSET ${stringifyExpression(query.offset,)}`;
   }
   return autoIndentSql(queryString,);
 }
@@ -35487,57 +35572,82 @@ function getDatabaseCollection({
 }
 var QueryEngine = class {
   async query(query, locale,) {
-    const collection = getDatabaseCollection(query.from, locale,);
-    const richTextResolver = new RichTextResolver(collection,);
-    const plan = this.createQueryPlan(collection, richTextResolver, query,);
-    const items = await this.executeQueryPlan(collection, richTextResolver, query, plan,);
+    const [plan, schema, richTextResolver,] = this.createQueryPlan(query, locale,);
+    const items = await this.executeQueryPlan(schema, richTextResolver, query, plan,);
     log.debug(`Query:
 ${stringifyQuery(query,)}
 
 ${(0, import_archy.default)(plan.inspect(),)}`,);
     return items;
   }
-  createQueryPlan(collection, richTextResolver, query,) {
+  buildFrom(from, schema, collections, locale,) {
+    switch (from.type) {
+      case 'Collection': {
+        const collection = getDatabaseCollection(from, locale,);
+        collections.push(collection,);
+        Object.assign(schema, collection.schema,);
+        return new ScanCollectionPlan(collection, from.alias,);
+      }
+      case 'LeftJoin': {
+        const left = this.buildFrom(from.left, schema, collections, locale,);
+        const right = this.buildFrom(from.right, schema, collections, locale,);
+        const constraint = ScalarExpression.from(from.constraint, schema,);
+        return new LeftJoinPlan(left, right, constraint,);
+      }
+      default:
+        assertNever(from, 'Unsupported data source',);
+    }
+  }
+  createQueryPlan(query, locale,) {
     var _a;
-    let plan = new ScanCollectionPlan(collection,);
+    const schema = {};
+    const collections = [];
+    let plan = this.buildFrom(query.from, schema, collections, locale,);
+    const [firstCollection,] = collections;
+    assert(firstCollection, 'At least one collection must exist',);
+    const richTextResolver = new RichTextResolver(collections,);
     if (query.where) {
-      const filterExpression = ScalarExpression.from(query.where, collection.schema,);
-      plan = createPlanForWhereClause(collection, filterExpression,);
+      const filterExpression = ScalarExpression.from(query.where, schema,);
+      if (collections.length === 1) {
+        plan = createPlanForWhereClause(firstCollection, filterExpression,);
+      } else {
+        plan = new FilterItemsPlan(plan, filterExpression,);
+      }
     }
     const sortExpressions = (_a = query.orderBy) == null
       ? void 0
       : _a.map((expression) =>
-        new ScalarOrderExpression(ScalarExpression.from(expression, collection.schema,), expression.direction ?? 'asc', {
+        new ScalarOrderExpression(ScalarExpression.from(expression, schema,), expression.direction ?? 'asc', {
           type: 0,
           /* CaseInsensitive */
         },)
       );
-    plan = new SortItemsPlan(plan, sortExpressions ?? [], collection,);
+    plan = new SortItemsPlan(plan, sortExpressions ?? [], firstCollection,);
     let offsetExpression;
     if (query.offset) {
-      offsetExpression = ScalarExpression.from(query.offset, collection.schema,);
+      offsetExpression = ScalarExpression.from(query.offset, schema,);
     }
     let limitExpression;
     if (query.limit) {
-      limitExpression = ScalarExpression.from(query.limit, collection.schema,);
+      limitExpression = ScalarExpression.from(query.limit, schema,);
     }
     if (offsetExpression || limitExpression) {
       plan = new SliceItemsPlan(plan, offsetExpression, limitExpression,);
     }
-    if (query.select.length > 0) {
-      plan = new ResolveItemsPlan(plan, collection, richTextResolver, query.select,);
+    if (query.select.length > 0 && collections.length === 1) {
+      plan = new ResolveItemsPlan(plan, firstCollection, richTextResolver, query.select,);
     }
-    return plan;
+    return [plan, schema, richTextResolver,];
   }
-  async executeQueryPlan(collection, richTextResolver, query, plan,) {
+  async executeQueryPlan(schema, richTextResolver, query, plan,) {
     const items = await plan.execute();
     return Promise.all(items.map(async (item) => {
       const data2 = {};
       for (const expression of query.select) {
-        const scalarExpression = ScalarExpression.from(expression, collection.schema,);
+        const scalarExpression = ScalarExpression.from(expression, schema,);
         const key7 = getSelectKey(expression,);
         const value = scalarExpression.evaluate(item,);
-        data2[key7] = await resolveValue(richTextResolver, value,);
+        data2[key7] = await resolveValue(richTextResolver, expression.type === 'Identifier' ? expression.name : void 0, value,);
       }
       return data2;
     },),);
@@ -35552,12 +35662,13 @@ function getSelectKey(expression,) {
   }
   throw new Error('Can\'t serialize expression',);
 }
-async function resolveValue(richTextResolver, value,) {
+async function resolveValue(richTextResolver, key7, value,) {
   if (isNullish2(value,)) {
     return null;
   }
   if (value.type === 'richtext') {
-    return richTextResolver.resolve(value.value,);
+    assert(isString22(key7,), 'Rich text field must be a string',);
+    return richTextResolver.resolve(key7, value.value,);
   }
   return value.value;
 }
@@ -35713,7 +35824,7 @@ function findLookupIndexPlanForFunctionCall(collection, expression,) {
   }
 }
 function createScanCollectionPlan(collection, expression,) {
-  const plan = new ScanCollectionPlan(collection,);
+  const plan = new ScanCollectionPlan(collection, void 0,);
   return new FilterItemsPlan(plan, expression,);
 }
 function ChildrenCanSuspend({
@@ -36434,13 +36545,15 @@ function getCollectionId(collection,) {
   collectionIds.set(collection, id3,);
   return id3;
 }
-function getCacheKey({
-  from,
-  ...query
-}, locale,) {
-  const fromId = getCollectionId(from.data,);
+function replaceCollection(_, value,) {
+  if (isObject2(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
+    return getCollectionId(value.data,);
+  }
+  return value;
+}
+function getCacheKey(query, locale,) {
   const localeId = (locale == null ? void 0 : locale.id) ?? 'default';
-  return fromId + JSON.stringify(query,) + localeId;
+  return JSON.stringify(query, replaceCollection,) + localeId;
 }
 function use(promise,) {
   throw promise;
@@ -38753,6 +38866,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['FontWeight'] = '--framer-input-font-weight';
   FormInputStyleVariableNames2['FontSize'] = '--framer-input-font-size';
   FormInputStyleVariableNames2['FontColor'] = '--framer-input-font-color';
+  FormInputStyleVariableNames2['FontStyle'] = '--framer-input-font-style';
   FormInputStyleVariableNames2['FontLetterSpacing'] = '--framer-input-font-letter-spacing';
   FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
   FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
@@ -38816,6 +38930,7 @@ var sharedInputCSS = [
     fontFamily: css.variable(Var.FontFamily,),
     fontWeight: css.variable(Var.FontWeight,),
     fontSize: css.variable(Var.FontSize,),
+    fontStyle: css.variable(Var.FontStyle,),
     color: css.variable(Var.FontColor,),
     border: 'none',
     textOverflow: 'ellipsis',
