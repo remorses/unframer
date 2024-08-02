@@ -10067,7 +10067,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.LIC22G2B.js
+// https :https://app.framerstatic.com/framer.EOGRDOZU.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -31943,6 +31943,27 @@ function findAnchorElement(target, withinElement,) {
   }
   return null;
 }
+function ChildrenCanSuspend({
+  children,
+},) {
+  const {
+    useGranularSuspense,
+  } = useLibraryFeatures();
+  if (!useGranularSuspense) return children;
+  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
+    children,
+  },);
+}
+function withChildrenCanSuspend(Component15,) {
+  return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
+    return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
+      children: /* @__PURE__ */ jsx(Component15, {
+        ...props,
+        ref,
+      },),
+    },);
+  },);
+}
 var elementKey = 'element';
 var collectionKey = 'collection';
 var collectionItemIdKey = 'collectionItemId';
@@ -32362,7 +32383,7 @@ function getRouteFromPageLink(pageLink, router, currentRoute,) {
   } = pageLink;
   return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
 }
-var Link = /* @__PURE__ */ forwardRef(({
+var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
   children,
   href,
   openInNewTab,
@@ -32447,7 +32468,7 @@ var Link = /* @__PURE__ */ forwardRef(({
     ...props,
     ref: stableObserverChildRef,
   },);
-},);
+},),);
 function resolveLink(href, router, implicitPathVariables,) {
   return resolveLinkInternal(href, router, implicitPathVariables,);
 }
@@ -33460,7 +33481,7 @@ var PropertyOverrides = /* @__PURE__ */ React4.forwardRef(function PropertyOverr
       assertNever(action,);
   }
 },);
-var ResolveLinks = /* @__PURE__ */ React2.forwardRef(function ResolveLinksInner({
+var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function ResolveLinksInner({
   links,
   children,
   ...rest
@@ -33503,7 +33524,7 @@ var ResolveLinks = /* @__PURE__ */ React2.forwardRef(function ResolveLinksInner(
   }
   const childrenWithLinks = children(resolvedLinks,);
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
-},);
+},),);
 function useFetchDataValues(requests, disabled,) {
   const fetchResults = useFetchRequests(requests, disabled,);
   const data2 = React2.useMemo(() => {
@@ -35826,17 +35847,6 @@ function findLookupIndexPlanForFunctionCall(collection, expression,) {
 function createScanCollectionPlan(collection, expression,) {
   const plan = new ScanCollectionPlan(collection, void 0,);
   return new FilterItemsPlan(plan, expression,);
-}
-function ChildrenCanSuspend({
-  children,
-},) {
-  const {
-    useGranularSuspense,
-  } = useLibraryFeatures();
-  if (!useGranularSuspense) return children;
-  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
-    children,
-  },);
 }
 var defaultVariantKey = 'default';
 var defaultVariants = /* @__PURE__ */ new Set([defaultVariantKey,],);
