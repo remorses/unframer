@@ -10067,7 +10067,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.EOGRDOZU.js
+// https :https://app.framerstatic.com/framer.2O6EWLJH.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13100,19 +13100,15 @@ function TurnOnReactEventHandling() {
   );
   return null;
 }
+var hydrationRunning = false;
 function setInitialHydrationState() {
-  window.__framer_hydrated = false;
+  hydrationRunning = true;
 }
-function SetGlobalHydrationState() {
-  useEffect(() => {
-    if (window.__framer_hydrated === false) {
-      window.__framer_hydrated = true;
-    }
-  }, [],);
-  return null;
+function setHydrationDone() {
+  hydrationRunning = false;
 }
 function useIsHydrationOrSSR() {
-  const isHydrationOrSSR = useRef(typeof window === 'undefined' || window.__framer_hydrated === false,);
+  const isHydrationOrSSR = useRef(typeof window === 'undefined' || hydrationRunning,);
   useEffect(() => {
     isHydrationOrSSR.current = false;
   }, [],);
@@ -13273,6 +13269,7 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
   const navigationController = useRef(void 0,);
   return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
     var _a;
+    setHydrationDone();
     if (!enableAsyncURLUpdates) {
       await (updateURL === null || updateURL === void 0 ? void 0 : updateURL());
       transitionFn();
@@ -13561,7 +13558,6 @@ function Router({
               ],
             }, remountKey,),
           },),
-          jsx(SetGlobalHydrationState, {},),
           jsx(TurnOnReactEventHandling, {},),
           jsx(MarkSuspenseEffects.End, {},),
         ],
@@ -15794,8 +15790,8 @@ var ObjectInterpolation = (valueInterpolation) => {
     difference(from, to,) {
       let sum = 0;
       for (const key7 in from) {
-        const difference2 = valueInterpolation.difference(from[key7], to[key7],);
-        sum += Math.pow(difference2, 2,);
+        const difference = valueInterpolation.difference(from[key7], to[key7],);
+        sum += Math.pow(difference, 2,);
       }
       return Math.sqrt(sum,);
     },
@@ -30926,10 +30922,12 @@ var ContainerErrorBoundary = class extends Component {
 var Providers = /* @__PURE__ */ React4.forwardRef(({
   children,
   layoutId,
+  as,
   ...props
 }, ref,) => {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
-  return /* @__PURE__ */ jsx(motion.div, {
+  const MotionComponent = htmlElementAsMotionComponent(as,);
+  return /* @__PURE__ */ jsx(MotionComponent, {
     layoutId: outerLayoutId,
     ...props,
     ref,
@@ -32326,13 +32324,46 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, coll
   }
   return result;
 }
-function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
-  const isInternal = isInternalURL(href,);
-  if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-    return propsForLink(href, openInNewTab,);
+function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,) {
+  var _a;
+  const combinedPathVariables = {
+    ...implicitPathVariables,
+    ...pathVariables,
+    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.path),
+  };
+  const combinedHashVariables = {
+    ...implicitPathVariables,
+    ...hashVariables,
+    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.hash),
+  };
+  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
+  const resolvedHref = getPathForRoute(route, {
+    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
+    hash: hash2,
+    pathVariables: combinedPathVariables,
+    hashVariables: combinedHashVariables,
+    preserveQueryParams: router.preserveQueryParams,
+  },);
+  const resolvedHash = resolvedHref.split('#', 2,)[1];
+  return {
+    routeId,
+    route,
+    href: resolvedHref,
+    elementId: resolvedHash,
+    pathVariables: combinedPathVariables,
+  };
+}
+function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVariables,) {
+  if (!router.routes || !router.getRoute) {
+    return;
+  }
+  const isInternal = isInternalURL(path,);
+  if (!isInternal) {
+    return;
   }
   try {
-    const [pathnameWithQueryParams, hash2,] = href.split('#', 2,);
+    const [pathnameWithQueryParams, hash2,] = path.split('#', 2,);
     assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
     const [pathname,] = pathnameWithQueryParams.split('?', 2,);
     assert(pathname !== void 0, 'A href must have a defined pathname.',);
@@ -32343,24 +32374,69 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPat
     const route = router.getRoute(routeId,);
     if (route) {
       const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
-      const path = getPathForRoute(route, {
-        currentRoutePath: currentRoute.path,
-        currentPathVariables: currentRoute.pathVariables,
-        // The hash value is already fully resolved so we don't need to
-        // provide any hashVariables.
-        hash: hash2 || void 0,
-        pathVariables: combinedPathVariables,
-        preserveQueryParams: router.preserveQueryParams,
-      },);
-      const anchorTarget = getTargetAttrValue(openInNewTab, true,);
       return {
+        routeId,
+        route,
         href: path,
-        target: anchorTarget,
-        onClick: createOnClickLinkHandler(router, routeId, hash2 || void 0, combinedPathVariables, smoothScroll,),
+        // If the link is resolved (in ResolveLink), we trust that the hash is also resolved. Otherwise, it
+        // should be resolved by getHashForRoute.
+        elementId: hash2,
+        pathVariables: combinedPathVariables,
       };
     }
   } catch {}
-  return propsForLink(href, openInNewTab,);
+}
+async function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
+  const {
+    webPageId,
+    hash: hash2,
+    pathVariables,
+    hashVariables,
+    unresolvedHashSlugs,
+    unresolvedPathSlugs,
+  } = pageLink;
+  const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
+}
+function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
+  const {
+    webPageId,
+    hash: hash2,
+    pathVariables,
+    hashVariables,
+    unresolvedHashSlugs,
+    unresolvedPathSlugs,
+  } = pageLink;
+  const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
+}
+function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
+  if (!currentRoute) return propsForLink(href, openInNewTab,);
+  const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
+  if (!matchedRoute) return propsForLink(href, openInNewTab,);
+  const {
+    routeId,
+    route,
+    elementId,
+    pathVariables,
+  } = matchedRoute;
+  if (!route) return propsForLink(href, openInNewTab,);
+  const path = getPathForRoute(route, {
+    // If the link is resolved, we trust that the slugs are resolved.
+    currentRoutePath: currentRoute.path,
+    currentPathVariables: currentRoute.pathVariables,
+    // The hash value is already fully resolved so we don't need to
+    // provide any hashVariables.
+    hash: elementId,
+    pathVariables,
+    preserveQueryParams: router.preserveQueryParams,
+  },);
+  const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+  return {
+    href: path,
+    target: anchorTarget,
+    onClick: createOnClickLinkHandler(router, routeId, elementId, pathVariables, smoothScroll,),
+  };
 }
 function getRouteFromPageLink(pageLink, router, currentRoute,) {
   var _a;
@@ -32419,7 +32495,6 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
   }, [href, router, currentRoute, children,],);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const props = useMemo(() => {
-    var _a;
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
@@ -32427,39 +32502,16 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
       return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,);
     }
     const {
-      webPageId,
-      hash: hash2,
+      routeId,
+      href: resolvedHref,
+      elementId,
       pathVariables,
-      hashVariables,
-      unresolvedHashSlugs,
-      unresolvedPathSlugs,
-    } = pageLink;
-    const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-    const combinedPathVariable = {
-      ...implicitPathVariables,
-      ...pathVariables,
-      ...(resolvedSlugs == null ? void 0 : resolvedSlugs.path),
-    };
-    const combinedHashVariable = {
-      ...implicitPathVariables,
-      ...hashVariables,
-      ...(resolvedSlugs == null ? void 0 : resolvedSlugs.hash),
-    };
+    } = findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,);
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
-    const resolvedHref = getPathForRoute(route, {
-      currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-      currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
-      hash: hash2,
-      pathVariables: combinedPathVariable,
-      hashVariables: combinedHashVariable,
-      preserveQueryParams: router.preserveQueryParams,
-    },);
-    const resolvedHash = resolvedHref.split('#', 2,)[1];
     return {
       href: resolvedHref,
       target: anchorTarget,
-      onClick: createOnClickLinkHandler(router, webPageId, resolvedHash, combinedPathVariable, smoothScroll,),
+      onClick: createOnClickLinkHandler(router, routeId, elementId, pathVariables, smoothScroll,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
   }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll,],);
@@ -32620,6 +32672,11 @@ function stateCanSubmitForm(state,) {
 function preventDefault(e,) {
   e.preventDefault();
 }
+function openExternalLink(link,) {
+  if (!safeWindow) return;
+  const href = isValidURL(link, false,) ? link : `https://${link}`;
+  safeWindow.open(href, '_blank',);
+}
 var FormContext = React4.createContext(void 0,);
 var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   action,
@@ -32631,6 +32688,8 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   ...props
 }, ref,) => {
   const router = useRouter();
+  const currentRoute = useCurrentRoute();
+  const implicitPathVariables = useImplicitPathVariables();
   const [state, dispatch,] = React4.useReducer(formReducer, {
     state: 'incomplete',
   },);
@@ -32650,34 +32709,28 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   };
   async function redirectTo(link,) {
     var _a, _b;
-    if (isLinkToWebPage(link,)) {
-      if (!router) return;
-      const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, link.webPageId,);
-      if (!route) return;
+    if (isString22(link,)) {
+      const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables,);
+      if (!matchingRoute2) {
+        openExternalLink(link,);
+        return;
+      }
       const {
-        unresolvedHashSlugs,
-        unresolvedPathSlugs,
-      } = link;
-      const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-      const combinedPathVariables = Object.assign(
-        {},
-        router.currentPathVariables,
-        link.pathVariables,
-        resolvedSlugs == null ? void 0 : resolvedSlugs.path,
-      );
-      const combinedHashVariables = Object.assign(
-        {},
-        router.currentPathVariables,
-        link.pathVariables,
-        link.hashVariables,
-        resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
-      );
-      const element = getHashForRoute(link.hash, route, combinedHashVariables,);
-      (_b = router.navigate) == null ? void 0 : _b.call(router, link.webPageId, element, combinedPathVariables,);
+        routeId: routeId2,
+        elementId: elementId2,
+        pathVariables: pathVariables2,
+      } = matchingRoute2;
+      (_a = router.navigate) == null ? void 0 : _a.call(router, routeId2, elementId2, pathVariables2,);
       return;
     }
-    if (!safeWindow) return;
-    safeWindow.open(link, '_blank',);
+    assert(isLinkToWebPage(link,), 'Expected link to be either a LinkToWebPage or a string', link,);
+    const matchingRoute = await findMatchingRouteAttributesForWebPageLink(router, currentRoute, link, activeLocale, implicitPathVariables,);
+    const {
+      routeId,
+      elementId,
+      pathVariables,
+    } = matchingRoute;
+    (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, pathVariables,);
   }
   const handleSubmit = async (event) => {
     var _a, _b, _c, _d, _e, _f;
@@ -32875,14 +32928,17 @@ function isCacheExpired(insertionTimestamp, cacheDuration,) {
 }
 var noop3 = () => {};
 var _subscribers;
+var _preloadedRequests;
 var _shortestCacheDurations;
 var _cachedAt;
 var _ongoingFetches;
 var _staleQueriesInterval;
 var _FetchClient = class {
-  constructor() {
+  constructor(storage = localStorage,) {
+    this.storage = storage;
     __publicField(this, 'responseValues', /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _preloadedRequests, /* @__PURE__ */ new Set(),);
     __privateAdd(this, _shortestCacheDurations, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _cachedAt, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _ongoingFetches, /* @__PURE__ */ new Map(),);
@@ -32904,7 +32960,7 @@ var _FetchClient = class {
           }
           data2[url] = [storedAt, cacheConfig, responseValue.data,];
         }
-        localStorage.setItem(_FetchClient.cacheKey, JSON.stringify(data2,),);
+        this.storage.setItem(_FetchClient.cacheKey, JSON.stringify(data2,),);
       }, 500,),
     );
     this.hydrateCache();
@@ -32945,7 +33001,7 @@ var _FetchClient = class {
   }
   hydrateCache() {
     try {
-      const rawData = localStorage.getItem(_FetchClient.cacheKey,);
+      const rawData = this.storage.getItem(_FetchClient.cacheKey,);
       if (!rawData) return;
       const data2 = JSON.parse(rawData,);
       if (typeof data2 !== 'object') throw new Error('Invalid cache data',);
@@ -32962,7 +33018,7 @@ var _FetchClient = class {
         },);
       }
     } catch (error) {
-      localStorage.removeItem(_FetchClient.cacheKey,);
+      this.storage.removeItem(_FetchClient.cacheKey,);
     }
   }
   setResponseValue(cacheKey, value,) {
@@ -32976,11 +33032,16 @@ var _FetchClient = class {
   }
   async prefetch(request,) {
     if (!isValidURL2(request.url,)) return;
-    await this.fetchWithCache(request,);
     const cacheKey = getRequestCacheKey(request,);
+    __privateGet(this, _preloadedRequests,).add(cacheKey,);
+    await this.fetchWithCache(request,);
     const result = this.getValue(cacheKey,);
     if (!result || result.status === 'loading') {
       throw new Error('Unexpected result status for prefetch',);
+    }
+    const subscribers = __privateGet(this, _subscribers,).get(cacheKey,);
+    for (const subscriber of subscribers ?? []) {
+      subscriber();
     }
     try {
       const resolvedValue = resolveFetchDataValue(result, request,);
@@ -33044,10 +33105,11 @@ var _FetchClient = class {
     },);
     return promise;
   }
-  getValue(cacheKey,) {
+  getValue(cacheKey, onlyPrefetched = false,) {
+    if (onlyPrefetched && !__privateGet(this, _preloadedRequests,).has(cacheKey,)) return void 0;
     return this.responseValues.get(cacheKey,);
   }
-  subscribe(request, callback,) {
+  subscribe(request, callback, onlyPrefetched = false,) {
     const {
       url,
       cacheDuration,
@@ -33058,8 +33120,10 @@ var _FetchClient = class {
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
       __privateGet(this, _shortestCacheDurations,).set(cacheKey, cacheDuration,);
     }
-    this.startQueryRefetching(request,);
-    void this.fetchWithCache(request,);
+    if (!onlyPrefetched) {
+      this.startQueryRefetching(request,);
+      void this.fetchWithCache(request,);
+    }
     const subscribers = __privateGet(this, _subscribers,).get(cacheKey,) ?? /* @__PURE__ */ new Set();
     subscribers.add(callback,);
     __privateGet(this, _subscribers,).set(cacheKey, subscribers,);
@@ -33078,6 +33142,7 @@ var _FetchClient = class {
 };
 var FetchClient = _FetchClient;
 _subscribers = /* @__PURE__ */ new WeakMap();
+_preloadedRequests = /* @__PURE__ */ new WeakMap();
 _shortestCacheDurations = /* @__PURE__ */ new WeakMap();
 _cachedAt = /* @__PURE__ */ new WeakMap();
 _ongoingFetches = /* @__PURE__ */ new WeakMap();
@@ -33086,8 +33151,9 @@ __publicField(FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
 var FetchClientContext = React2.createContext(void 0,);
 var FetchClientProvider = ({
   children,
+  client: initialClient,
 },) => {
-  const [client,] = React2.useState(() => new FetchClient());
+  const [client,] = React2.useState(() => initialClient ?? new FetchClient());
   React2.useEffect(() => {
     return () => client.unmount();
   }, [client,],);
@@ -33096,26 +33162,25 @@ var FetchClientProvider = ({
     children,
   },);
 };
-function difference(array1, array2,) {
-  return array1.filter((x) => !array2.includes(x,));
-}
 var _subscriptions;
 var _subscribers2;
 var _cachedResults;
 var _queryResult;
+var _onlyPrefetched;
 var RequestsObserver = class {
-  constructor(client,) {
+  constructor(client, requests,) {
     this.client = client;
     __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
     __privateAdd(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
     __privateAdd(this, _queryResult, /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _onlyPrefetched, true,);
     __publicField(this, 'onFetchResultUpdate', () => {
       const results = /* @__PURE__ */ new Map();
       let hasChange = false;
       const subscribedKeys = __privateGet(this, _subscriptions,).keys();
       for (const url of subscribedKeys) {
-        const result = this.client.getValue(url,);
+        const result = this.client.getValue(url, __privateGet(this, _onlyPrefetched,),);
         if (!result) return;
         results.set(url, result,);
         if (!__privateGet(this, _cachedResults,).has(result,)) {
@@ -33140,26 +33205,31 @@ var RequestsObserver = class {
     __publicField(this, 'getResults', () => {
       return __privateGet(this, _queryResult,);
     },);
+    this.setRequests(requests, {
+      onlyPrefetched: true,
+    },);
   }
-  setRequests(requests,) {
+  setRequests(requests, {
+    onlyPrefetched = false,
+  } = {},) {
     var _a;
     const requestsByCacheKey = new Map(requests.map((request) => [getRequestCacheKey(request,), request,]),);
     const nextSubscribedKeys = Array.from(requestsByCacheKey.keys(),);
-    const hasSubscriptionChange = nextSubscribedKeys.some((url) => !__privateGet(this, _subscriptions,).has(url,));
-    if (nextSubscribedKeys.length !== __privateGet(this, _subscriptions,).size && !hasSubscriptionChange) {
+    const hasOnlyPrefetchedChange = __privateGet(this, _onlyPrefetched,) !== onlyPrefetched;
+    if (!onlyPrefetched) __privateSet(this, _onlyPrefetched, false,);
+    const hasSubscriptionChange = nextSubscribedKeys.length !== __privateGet(this, _subscriptions,).size ||
+      nextSubscribedKeys.some((url) => !__privateGet(this, _subscriptions,).has(url,));
+    if (!hasSubscriptionChange && !hasOnlyPrefetchedChange) {
       return;
     }
-    const currentSubscribedKeys = Array.from(__privateGet(this, _subscriptions,).keys(),);
-    const unsubscribeKeys = difference(currentSubscribedKeys, nextSubscribedKeys,);
-    for (const url of unsubscribeKeys) {
+    for (const url of __privateGet(this, _subscriptions,).keys()) {
       (_a = __privateGet(this, _subscriptions,).get(url,)) == null ? void 0 : _a();
       __privateGet(this, _subscriptions,).delete(url,);
     }
-    const toSubscribeKeys = difference(nextSubscribedKeys, currentSubscribedKeys,);
-    for (const cacheKey of toSubscribeKeys) {
+    for (const cacheKey of nextSubscribedKeys) {
       const requestConfig = requestsByCacheKey.get(cacheKey,);
       if (!requestConfig) continue;
-      const unsubscribe = this.client.subscribe(requestConfig, this.onFetchResultUpdate,);
+      const unsubscribe = this.client.subscribe(requestConfig, this.onFetchResultUpdate, onlyPrefetched,);
       __privateGet(this, _subscriptions,).set(cacheKey, unsubscribe,);
     }
     __privateSet(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
@@ -33178,12 +33248,13 @@ _subscriptions = /* @__PURE__ */ new WeakMap();
 _subscribers2 = /* @__PURE__ */ new WeakMap();
 _cachedResults = /* @__PURE__ */ new WeakMap();
 _queryResult = /* @__PURE__ */ new WeakMap();
+_onlyPrefetched = /* @__PURE__ */ new WeakMap();
 function useFetchRequests(requests, disabled,) {
   const fetchClient = React2.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient,));
+  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
   React2.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests,);
@@ -36412,22 +36483,28 @@ function useOnAppear(callback,) {
     default: callback,
   },);
 }
+async function setOverflow(blockDocumentScrolling, show, yieldBefore2 = true,) {
+  if (blockDocumentScrolling === false) return;
+  if (yieldBefore2) await interactionResponse();
+  frame.render(() => {
+    const htmlStyle = document.documentElement.style;
+    if (show) {
+      htmlStyle.setProperty('overflow', 'hidden',);
+    } else {
+      htmlStyle.removeProperty('overflow',);
+    }
+  },);
+}
 function useOverlayState({
   blockDocumentScrolling = true,
 } = {},) {
   const [showOverlay, setShowOverlay,] = React4.useState(false,);
   const callback = React4.useCallback((show) => {
     setShowOverlay(show,);
-    if (blockDocumentScrolling === false) return;
-    if (show) {
-      document.documentElement.style.setProperty('overflow', 'hidden',);
-    } else {
-      document.documentElement.style.removeProperty('overflow',);
-    }
+    void setOverflow(blockDocumentScrolling, show,);
   }, [blockDocumentScrolling,],);
   React4.useEffect(() => () => {
-    if (blockDocumentScrolling === false) return;
-    document.documentElement.style.removeProperty('overflow',);
+    void setOverflow(blockDocumentScrolling, false, false,);
   }, [blockDocumentScrolling,],);
   return [showOverlay, callback,];
 }
