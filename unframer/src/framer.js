@@ -10067,7 +10067,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.2O6EWLJH.js
+// https :https://app.framerstatic.com/framer.V4LTAYQT.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -32934,8 +32934,7 @@ var _cachedAt;
 var _ongoingFetches;
 var _staleQueriesInterval;
 var _FetchClient = class {
-  constructor(storage = localStorage,) {
-    this.storage = storage;
+  constructor() {
     __publicField(this, 'responseValues', /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _preloadedRequests, /* @__PURE__ */ new Set(),);
@@ -32960,10 +32959,11 @@ var _FetchClient = class {
           }
           data2[url] = [storedAt, cacheConfig, responseValue.data,];
         }
-        this.storage.setItem(_FetchClient.cacheKey, JSON.stringify(data2,),);
+        try {
+          localStorage.setItem(_FetchClient.cacheKey, JSON.stringify(data2,),);
+        } catch {}
       }, 500,),
     );
-    this.hydrateCache();
   }
   unmount() {
     for (const [key7, interval,] of __privateGet(this, _staleQueriesInterval,)) {
@@ -33001,7 +33001,7 @@ var _FetchClient = class {
   }
   hydrateCache() {
     try {
-      const rawData = this.storage.getItem(_FetchClient.cacheKey,);
+      const rawData = localStorage.getItem(_FetchClient.cacheKey,);
       if (!rawData) return;
       const data2 = JSON.parse(rawData,);
       if (typeof data2 !== 'object') throw new Error('Invalid cache data',);
@@ -33018,7 +33018,9 @@ var _FetchClient = class {
         },);
       }
     } catch (error) {
-      this.storage.removeItem(_FetchClient.cacheKey,);
+      try {
+        localStorage.removeItem(_FetchClient.cacheKey,);
+      } catch {}
     }
   }
   setResponseValue(cacheKey, value,) {
@@ -33043,16 +33045,11 @@ var _FetchClient = class {
     for (const subscriber of subscribers ?? []) {
       subscriber();
     }
-    try {
-      const resolvedValue = resolveFetchDataValue(result, request,);
-      if (request.resultOutputType === 'image' && isString22(resolvedValue,)) {
-        await preloadImage(resolvedValue,).catch(noop3,);
-      }
-      return resolvedValue;
-    } catch (error) {
-      console.error('Fetch Failed: ' + error,);
-      throw error;
+    const resolvedValue = resolveFetchDataValue(result, request,);
+    if (request.resultOutputType === 'image' && isString22(resolvedValue,)) {
+      await preloadImage(resolvedValue,).catch(noop3,);
     }
+    return resolvedValue;
   }
   async fetchWithCache(request,) {
     const cacheKey = getRequestCacheKey(request,);
@@ -33105,11 +33102,10 @@ var _FetchClient = class {
     },);
     return promise;
   }
-  getValue(cacheKey, onlyPrefetched = false,) {
-    if (onlyPrefetched && !__privateGet(this, _preloadedRequests,).has(cacheKey,)) return void 0;
+  getValue(cacheKey,) {
     return this.responseValues.get(cacheKey,);
   }
-  subscribe(request, callback, onlyPrefetched = false,) {
+  subscribe(request, callback,) {
     const {
       url,
       cacheDuration,
@@ -33120,10 +33116,8 @@ var _FetchClient = class {
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
       __privateGet(this, _shortestCacheDurations,).set(cacheKey, cacheDuration,);
     }
-    if (!onlyPrefetched) {
-      this.startQueryRefetching(request,);
-      void this.fetchWithCache(request,);
-    }
+    this.startQueryRefetching(request,);
+    void this.fetchWithCache(request,);
     const subscribers = __privateGet(this, _subscribers,).get(cacheKey,) ?? /* @__PURE__ */ new Set();
     subscribers.add(callback,);
     __privateGet(this, _subscribers,).set(cacheKey, subscribers,);
@@ -33148,78 +33142,98 @@ _cachedAt = /* @__PURE__ */ new WeakMap();
 _ongoingFetches = /* @__PURE__ */ new WeakMap();
 _staleQueriesInterval = /* @__PURE__ */ new WeakMap();
 __publicField(FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
-var FetchClientContext = React2.createContext(void 0,);
+var FetchClientContext = /* @__PURE__ */ React2.createContext(void 0,);
+var IsRestoringCacheContext = /* @__PURE__ */ React2.createContext(true,);
 var FetchClientProvider = ({
   children,
   client: initialClient,
 },) => {
   const [client,] = React2.useState(() => initialClient ?? new FetchClient());
+  const [isRestoring, setIsRestoring,] = React2.useState(true,);
   React2.useEffect(() => {
+    client.hydrateCache();
+    setIsRestoring(false,);
     return () => client.unmount();
   }, [client,],);
-  return /* @__PURE__ */ jsx(FetchClientContext.Provider, {
-    value: client,
-    children,
+  return /* @__PURE__ */ jsx(IsRestoringCacheContext.Provider, {
+    value: isRestoring,
+    children: /* @__PURE__ */ jsx(FetchClientContext.Provider, {
+      value: client,
+      children,
+    },),
   },);
 };
 var _subscriptions;
 var _subscribers2;
-var _cachedResults;
-var _queryResult;
-var _onlyPrefetched;
+var _results;
 var RequestsObserver = class {
   constructor(client, requests,) {
     this.client = client;
+    this.requests = requests;
     __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
-    __privateAdd(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
-    __privateAdd(this, _queryResult, /* @__PURE__ */ new Map(),);
-    __privateAdd(this, _onlyPrefetched, true,);
-    __publicField(this, 'onFetchResultUpdate', () => {
-      const results = /* @__PURE__ */ new Map();
-      let hasChange = false;
-      const subscribedKeys = __privateGet(this, _subscriptions,).keys();
-      for (const url of subscribedKeys) {
-        const result = this.client.getValue(url, __privateGet(this, _onlyPrefetched,),);
-        if (!result) return;
-        results.set(url, result,);
-        if (!__privateGet(this, _cachedResults,).has(result,)) {
-          __privateGet(this, _cachedResults,).add(result,);
-          hasChange = true;
+    __privateAdd(this, _results, void 0,);
+    __publicField(this, 'updateResults', () => {
+      const data2 = [];
+      const statuses = /* @__PURE__ */ new Set();
+      const errors = [];
+      for (const request of this.requests) {
+        const cachekey = getRequestCacheKey(request,);
+        const value = this.client.getValue(cachekey,);
+        if (!value) {
+          statuses.add('loading',);
+          data2.push(request.fallbackValue,);
+          continue;
+        }
+        statuses.add(value.status,);
+        try {
+          const resolvedValue = resolveFetchDataValue(value, request,);
+          data2.push(resolvedValue,);
+        } catch (error) {
+          data2.push(!isUndefined(request.errorFallbackValue,) ? request.errorFallbackValue : request.fallbackValue,);
+          errors.push(error,);
         }
       }
-      if (!hasChange) {
+      const status = statuses.has('error',) ? 'error' : statuses.has('loading',) ? 'loading' : 'success';
+      const result = {
+        status,
+        data: data2,
+      };
+      if (isEqual(result, __privateGet(this, _results,),)) {
         return;
       }
-      __privateSet(this, _queryResult, results,);
+      __privateSet(this, _results, result,);
+      if (errors.length > 0 && !statuses.has('loading',)) {
+        console.error('Fetch failed: ' + errors.join('\n',),);
+      }
       for (const subscriber of __privateGet(this, _subscribers2,)) {
         subscriber();
       }
     },);
     __publicField(this, 'subscribe', (callback) => {
       __privateGet(this, _subscribers2,).add(callback,);
+      this.updateResults();
       return () => {
         __privateGet(this, _subscribers2,).delete(callback,);
       };
     },);
     __publicField(this, 'getResults', () => {
-      return __privateGet(this, _queryResult,);
+      return __privateGet(this, _results,);
     },);
-    this.setRequests(requests, {
-      onlyPrefetched: true,
+    this.setRequests(requests,);
+    __privateSet(this, _results, {
+      status: 'loading',
+      data: requests.map((request) => request.fallbackValue),
     },);
   }
-  setRequests(requests, {
-    onlyPrefetched = false,
-  } = {},) {
+  setRequests(requests,) {
     var _a;
+    this.requests = requests;
     const requestsByCacheKey = new Map(requests.map((request) => [getRequestCacheKey(request,), request,]),);
     const nextSubscribedKeys = Array.from(requestsByCacheKey.keys(),);
-    const hasOnlyPrefetchedChange = __privateGet(this, _onlyPrefetched,) !== onlyPrefetched;
-    if (!onlyPrefetched) __privateSet(this, _onlyPrefetched, false,);
     const hasSubscriptionChange = nextSubscribedKeys.length !== __privateGet(this, _subscriptions,).size ||
       nextSubscribedKeys.some((url) => !__privateGet(this, _subscriptions,).has(url,));
-    if (!hasSubscriptionChange && !hasOnlyPrefetchedChange) {
+    if (!hasSubscriptionChange) {
       return;
     }
     for (const url of __privateGet(this, _subscriptions,).keys()) {
@@ -33229,11 +33243,11 @@ var RequestsObserver = class {
     for (const cacheKey of nextSubscribedKeys) {
       const requestConfig = requestsByCacheKey.get(cacheKey,);
       if (!requestConfig) continue;
-      const unsubscribe = this.client.subscribe(requestConfig, this.onFetchResultUpdate, onlyPrefetched,);
+      const unsubscribe = this.client.subscribe(requestConfig, this.updateResults,);
       __privateGet(this, _subscriptions,).set(cacheKey, unsubscribe,);
     }
-    __privateSet(this, _cachedResults, /* @__PURE__ */ new WeakSet(),);
-    this.onFetchResultUpdate();
+    if (__privateGet(this, _subscribers2,).size === 0) return;
+    this.updateResults();
   }
   unmount() {
     for (const unsubscribe of __privateGet(this, _subscribers2,)) {
@@ -33246,23 +33260,22 @@ var RequestsObserver = class {
 };
 _subscriptions = /* @__PURE__ */ new WeakMap();
 _subscribers2 = /* @__PURE__ */ new WeakMap();
-_cachedResults = /* @__PURE__ */ new WeakMap();
-_queryResult = /* @__PURE__ */ new WeakMap();
-_onlyPrefetched = /* @__PURE__ */ new WeakMap();
+_results = /* @__PURE__ */ new WeakMap();
 function useFetchRequests(requests, disabled,) {
   const fetchClient = React2.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
+  const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
-  React2.useLayoutEffect(() => {
-    if (disabled) return;
-    observer2.setRequests(requests,);
-  }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
     return () => observer2.unmount();
   }, [observer2,],);
-  return React2.useSyncExternalStore(observer2.subscribe, observer2.getResults, observer2.getResults,);
+  const subscribe = React2.useCallback((onChange) => {
+    if (isRestoringCache || disabled) return noop3;
+    return observer2.subscribe(onChange,);
+  }, [disabled, isRestoringCache, observer2,],);
+  return React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getResults,);
 }
 function usePrefetch() {
   const fetchClient = React2.useContext(FetchClientContext,);
@@ -33596,36 +33609,6 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
   const childrenWithLinks = children(resolvedLinks,);
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
 },),);
-function useFetchDataValues(requests, disabled,) {
-  const fetchResults = useFetchRequests(requests, disabled,);
-  const data2 = React2.useMemo(() => {
-    return requests.map((request) => {
-      const fetchResult = fetchResults.get(getRequestCacheKey(request,),);
-      if (!fetchResult) {
-        return request.fallbackValue;
-      }
-      try {
-        return resolveFetchDataValue(fetchResult, request,);
-      } catch (error) {
-        console.error('Fetch Failed: ' + error,);
-        return !isUndefined(request.errorFallbackValue,) ? request.errorFallbackValue : request.fallbackValue;
-      }
-    },);
-  }, [fetchResults, requests,],);
-  const status = React2.useMemo(() => {
-    const statuses = /* @__PURE__ */ new Set();
-    for (const fetchResult of fetchResults.values()) {
-      statuses.add(fetchResult.status,);
-    }
-    if (statuses.has('error',)) return 'error';
-    if (statuses.has('loading',)) return 'loading';
-    return 'success';
-  }, [fetchResults,],);
-  return {
-    status,
-    data: data2,
-  };
-}
 var Fetcher = /* @__PURE__ */ React2.forwardRef(function Fetcher2({
   requests,
   disabled,
@@ -33636,7 +33619,7 @@ var Fetcher = /* @__PURE__ */ React2.forwardRef(function Fetcher2({
   const {
     data: data2,
     status,
-  } = useFetchDataValues(requests, disabled,);
+  } = useFetchRequests(requests, disabled,);
   const childrenWithValues = children(data2, status,);
   return cloneWithPropsAndRef(childrenWithValues, rest,);
 },);
