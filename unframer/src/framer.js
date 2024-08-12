@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-HCJ5X5Q7.js
+// https :https://app.framerstatic.com/chunk-VMMGJNOV.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -10,8 +10,8 @@ import { useId, } from 'react';
 import { createElement, Fragment, } from 'react';
 import { Component, } from 'react';
 import { useState, } from 'react';
-import { Children, cloneElement as cloneElement2, isValidElement, } from 'react';
 import * as React2 from 'react';
+import { Children, isValidElement, } from 'react';
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -132,7 +132,7 @@ var MotionConfigContext = createContext({
 },);
 var MotionContext = createContext({},);
 var PresenceContext = createContext(null,);
-var isBrowser = typeof document !== 'undefined';
+var isBrowser = typeof window !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 var camelToDash = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
 var optimizedAppearDataId = 'framerAppearId';
@@ -309,6 +309,7 @@ function isRefObject(ref,) {
 }
 var scheduleHandoffComplete = false;
 function useVisualElement(Component33, visualState, props, createVisualElement2, ProjectionNodeConstructor,) {
+  var _a;
   const {
     visualElement: parent,
   } = useContext3(MotionContext,);
@@ -338,7 +339,11 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
   useInsertionEffect(() => {
     visualElement && visualElement.update(props, presenceContext,);
   },);
-  const wantsHandoff = useRef(Boolean(props[optimizedAppearDataAttribute] && !window.HandoffComplete,),);
+  const optimisedAppearId = props[optimizedAppearDataAttribute];
+  const wantsHandoff = useRef(
+    Boolean(optimisedAppearId,) && !window.MotionHandoffIsComplete &&
+      ((_a = window.MotionHasOptimisedAnimation) === null || _a === void 0 ? void 0 : _a.call(window, optimisedAppearId,)),
+  );
   useIsomorphicLayoutEffect(() => {
     if (!visualElement) return;
     visualElement.updateFeatures();
@@ -352,18 +357,16 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
     if (!wantsHandoff.current && visualElement.animationState) {
       visualElement.animationState.animateChanges();
     }
-    if (wantsHandoff.current) {
-      wantsHandoff.current = false;
-      if (!scheduleHandoffComplete) {
-        scheduleHandoffComplete = true;
-        queueMicrotask(completeHandoff,);
-      }
+    wantsHandoff.current = false;
+    if (!scheduleHandoffComplete) {
+      scheduleHandoffComplete = true;
+      queueMicrotask(completeHandoff,);
     }
   },);
   return visualElement;
 }
 function completeHandoff() {
-  window.HandoffComplete = true;
+  window.MotionHandoffIsComplete = true;
 }
 function createProjectionNode(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig,) {
   const {
@@ -583,50 +586,6 @@ function addScaleCorrector(correctors,) {
   Object.assign(scaleCorrectors, correctors,);
 }
 var isMotionValue = (value) => Boolean(value && value.getVelocity,);
-var transformPropOrder = [
-  'transformPerspective',
-  'x',
-  'y',
-  'z',
-  'translateX',
-  'translateY',
-  'translateZ',
-  'scale',
-  'scaleX',
-  'scaleY',
-  'rotate',
-  'rotateX',
-  'rotateY',
-  'rotateZ',
-  'skew',
-  'skewX',
-  'skewY',
-];
-var transformProps = new Set(transformPropOrder,);
-var translateAlias = {
-  x: 'translateX',
-  y: 'translateY',
-  z: 'translateZ',
-  transformPerspective: 'perspective',
-};
-var numTransforms = transformPropOrder.length;
-function buildTransform(transform2, transformIsDefault, transformTemplate2,) {
-  let transformString3 = '';
-  for (let i = 0; i < numTransforms; i++) {
-    const key7 = transformPropOrder[i];
-    if (transform2[key7] !== void 0) {
-      const transformName = translateAlias[key7] || key7;
-      transformString3 += `${transformName}(${transform2[key7]}) `;
-    }
-  }
-  transformString3 = transformString3.trim();
-  if (transformTemplate2) {
-    transformString3 = transformTemplate2(transform2, transformIsDefault ? '' : transformString3,);
-  } else if (transformIsDefault) {
-    transformString3 = 'none';
-  }
-  return transformString3;
-}
 var clamp = (min, max, v,) => {
   if (v > max) return max;
   if (v < min) return min;
@@ -658,6 +617,154 @@ var progressPercentage = {
   parse: (v) => percent.parse(v,) / 100,
   transform: (v) => percent.transform(v * 100,),
 };
+var transformPropOrder = [
+  'transformPerspective',
+  'x',
+  'y',
+  'z',
+  'translateX',
+  'translateY',
+  'translateZ',
+  'scale',
+  'scaleX',
+  'scaleY',
+  'rotate',
+  'rotateX',
+  'rotateY',
+  'rotateZ',
+  'skew',
+  'skewX',
+  'skewY',
+];
+var transformProps = new Set(transformPropOrder,);
+var getValueAsType = (value, type,) => {
+  return type && typeof value === 'number' ? type.transform(value,) : value;
+};
+var number = {
+  test: (v) => typeof v === 'number',
+  parse: parseFloat,
+  transform: (v) => v,
+};
+var alpha = {
+  ...number,
+  transform: (v) => clamp(0, 1, v,),
+};
+var scale = {
+  ...number,
+  default: 1,
+};
+var int = {
+  ...number,
+  transform: Math.round,
+};
+var numberValueTypes = {
+  // Border props
+  borderWidth: px,
+  borderTopWidth: px,
+  borderRightWidth: px,
+  borderBottomWidth: px,
+  borderLeftWidth: px,
+  borderRadius: px,
+  radius: px,
+  borderTopLeftRadius: px,
+  borderTopRightRadius: px,
+  borderBottomRightRadius: px,
+  borderBottomLeftRadius: px,
+  // Positioning props
+  width: px,
+  maxWidth: px,
+  height: px,
+  maxHeight: px,
+  size: px,
+  top: px,
+  right: px,
+  bottom: px,
+  left: px,
+  // Spacing props
+  padding: px,
+  paddingTop: px,
+  paddingRight: px,
+  paddingBottom: px,
+  paddingLeft: px,
+  margin: px,
+  marginTop: px,
+  marginRight: px,
+  marginBottom: px,
+  marginLeft: px,
+  // Transform props
+  rotate: degrees,
+  rotateX: degrees,
+  rotateY: degrees,
+  rotateZ: degrees,
+  scale,
+  scaleX: scale,
+  scaleY: scale,
+  scaleZ: scale,
+  skew: degrees,
+  skewX: degrees,
+  skewY: degrees,
+  distance: px,
+  translateX: px,
+  translateY: px,
+  translateZ: px,
+  x: px,
+  y: px,
+  z: px,
+  perspective: px,
+  transformPerspective: px,
+  opacity: alpha,
+  originX: progressPercentage,
+  originY: progressPercentage,
+  originZ: px,
+  // Misc
+  zIndex: int,
+  backgroundPositionX: px,
+  backgroundPositionY: px,
+  // SVG
+  fillOpacity: alpha,
+  strokeOpacity: alpha,
+  numOctaves: int,
+};
+var translateAlias = {
+  x: 'translateX',
+  y: 'translateY',
+  z: 'translateZ',
+  transformPerspective: 'perspective',
+};
+var numTransforms = transformPropOrder.length;
+function buildTransform(latestValues, transform2, transformTemplate2,) {
+  let transformString3 = '';
+  let transformIsDefault = true;
+  for (let i = 0; i < numTransforms; i++) {
+    const key7 = transformPropOrder[i];
+    const value = latestValues[key7];
+    if (value === void 0) continue;
+    let valueIsDefault = true;
+    if (typeof value === 'number') {
+      valueIsDefault = value === (key7.startsWith('scale',) ? 1 : 0);
+    } else {
+      valueIsDefault = parseFloat(value,) === 0;
+    }
+    if (!valueIsDefault || transformTemplate2) {
+      const valueAsType = getValueAsType(value, numberValueTypes[key7],);
+      if (!valueIsDefault) {
+        transformIsDefault = false;
+        const transformName = translateAlias[key7] || key7;
+        transformString3 += `${transformName}(${valueAsType}) `;
+      }
+      if (transformTemplate2) {
+        transform2[key7] = valueAsType;
+      }
+    }
+  }
+  transformString3 = transformString3.trim();
+  if (transformTemplate2) {
+    transformString3 = transformTemplate2(transform2, transformIsDefault ? '' : transformString3,);
+  } else if (transformIsDefault) {
+    transformString3 = 'none';
+  }
+  return transformString3;
+}
 var validMotionProps = /* @__PURE__ */ new Set([
   'animate',
   'exit',
@@ -962,19 +1069,6 @@ function isDragActive() {
   openGestureLock();
   return false;
 }
-var number = {
-  test: (v) => typeof v === 'number',
-  parse: parseFloat,
-  transform: (v) => v,
-};
-var alpha = {
-  ...number,
-  transform: (v) => clamp(0, 1, v,),
-};
-var scale = {
-  ...number,
-  default: 1,
-};
 var isColorString = (type, testProp,) => (v) => {
   return Boolean(
     isString(v,) && singleColorRegex.test(v,) && v.startsWith(type,) ||
@@ -1327,13 +1421,9 @@ function spring({
     next: (t) => {
       const current = resolveSpring(t,);
       if (!isResolvedFromDuration) {
-        let currentVelocity = initialVelocity;
-        if (t !== 0) {
-          if (dampingRatio < 1) {
-            currentVelocity = calcGeneratorVelocity(resolveSpring, t, current,);
-          } else {
-            currentVelocity = 0;
-          }
+        let currentVelocity = 0;
+        if (dampingRatio < 1) {
+          currentVelocity = t === 0 ? secondsToMilliseconds(initialVelocity,) : calcGeneratorVelocity(resolveSpring, t, current,);
         }
         const isBelowVelocityThreshold = Math.abs(currentVelocity,) <= restSpeed;
         const isBelowDisplacementThreshold = Math.abs(target - current,) <= restDelta;
@@ -2498,78 +2588,6 @@ var filter = {
     return functions ? functions.map(applyDefaultFilter,).join(' ',) : v;
   },
 };
-var int = {
-  ...number,
-  transform: Math.round,
-};
-var numberValueTypes = {
-  // Border props
-  borderWidth: px,
-  borderTopWidth: px,
-  borderRightWidth: px,
-  borderBottomWidth: px,
-  borderLeftWidth: px,
-  borderRadius: px,
-  radius: px,
-  borderTopLeftRadius: px,
-  borderTopRightRadius: px,
-  borderBottomRightRadius: px,
-  borderBottomLeftRadius: px,
-  // Positioning props
-  width: px,
-  maxWidth: px,
-  height: px,
-  maxHeight: px,
-  size: px,
-  top: px,
-  right: px,
-  bottom: px,
-  left: px,
-  // Spacing props
-  padding: px,
-  paddingTop: px,
-  paddingRight: px,
-  paddingBottom: px,
-  paddingLeft: px,
-  margin: px,
-  marginTop: px,
-  marginRight: px,
-  marginBottom: px,
-  marginLeft: px,
-  // Transform props
-  rotate: degrees,
-  rotateX: degrees,
-  rotateY: degrees,
-  rotateZ: degrees,
-  scale,
-  scaleX: scale,
-  scaleY: scale,
-  scaleZ: scale,
-  skew: degrees,
-  skewX: degrees,
-  skewY: degrees,
-  distance: px,
-  translateX: px,
-  translateY: px,
-  translateZ: px,
-  x: px,
-  y: px,
-  z: px,
-  perspective: px,
-  transformPerspective: px,
-  opacity: alpha,
-  originX: progressPercentage,
-  originY: progressPercentage,
-  originZ: px,
-  // Misc
-  zIndex: int,
-  backgroundPositionX: px,
-  backgroundPositionY: px,
-  // SVG
-  fillOpacity: alpha,
-  strokeOpacity: alpha,
-  numOctaves: int,
-};
 var defaultValueTypes = {
   ...numberValueTypes,
   // Color props
@@ -3001,6 +3019,8 @@ var AcceleratedAnimation = class extends BaseAnimation {
     this.resolver.cancel();
     this.isStopped = true;
     if (this.state === 'idle') return;
+    this.resolveFinishedPromise();
+    this.updateFinishedPromise();
     const {
       resolved,
     } = this;
@@ -3121,7 +3141,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.3.9';
+    this.version = '11.3.23';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3375,40 +3395,6 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
-var WillChangeMotionValue = class extends MotionValue {
-  constructor() {
-    super(...arguments,);
-    this.output = [];
-    this.counts = /* @__PURE__ */ new Map();
-  }
-  add(name,) {
-    const styleName = getWillChangeName(name,);
-    if (!styleName) return;
-    const prevCount = this.counts.get(styleName,) || 0;
-    this.counts.set(styleName, prevCount + 1,);
-    if (prevCount === 0) {
-      this.output.push(styleName,);
-      this.update();
-    }
-    let hasRemoved = false;
-    return () => {
-      if (hasRemoved) return;
-      hasRemoved = true;
-      const newCount = this.counts.get(styleName,) - 1;
-      this.counts.set(styleName, newCount,);
-      if (newCount === 0) {
-        removeItem(this.output, styleName,);
-        this.update();
-      }
-    };
-  }
-  update() {
-    this.set(this.output.length ? this.output.join(', ',) : 'auto',);
-  }
-};
-function useWillChange() {
-  return useConstant(() => new WillChangeMotionValue('auto',));
-}
 function resolveVariant(visualElement, definition, custom,) {
   const props = visualElement.getProps();
   return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement,);
@@ -3647,6 +3633,37 @@ function setTarget(visualElement, definition,) {
 function getOptimisedAppearId(visualElement,) {
   return visualElement.getProps()[optimizedAppearDataAttribute];
 }
+var WillChangeMotionValue = class extends MotionValue {
+  constructor() {
+    super(...arguments,);
+    this.output = [];
+    this.counts = /* @__PURE__ */ new Map();
+  }
+  add(name,) {
+    const styleName = getWillChangeName(name,);
+    if (!styleName) return;
+    const prevCount = this.counts.get(styleName,) || 0;
+    this.counts.set(styleName, prevCount + 1,);
+    if (prevCount === 0) {
+      this.output.push(styleName,);
+      this.update();
+    }
+    let hasRemoved = false;
+    return () => {
+      if (hasRemoved) return;
+      hasRemoved = true;
+      const newCount = this.counts.get(styleName,) - 1;
+      this.counts.set(styleName, newCount,);
+      if (newCount === 0) {
+        removeItem(this.output, styleName,);
+        this.update();
+      }
+    };
+  }
+  update() {
+    this.set(this.output.length ? this.output.join(', ',) : 'auto',);
+  }
+};
 function isWillChangeMotionValue(value,) {
   return Boolean(isMotionValue(value,) && value.add,);
 }
@@ -3696,10 +3713,10 @@ function animateTarget(visualElement, targetAndTransition, {
       ...getValueTransition(transition || {}, key7,),
     };
     let isHandoff = false;
-    if (window.HandoffAppearAnimations) {
+    if (window.MotionHandoffAnimation) {
       const appearId = getOptimisedAppearId(visualElement,);
       if (appearId) {
-        const elapsed = window.HandoffAppearAnimations(appearId, key7, value, frame,);
+        const elapsed = window.MotionHandoffAnimation(appearId, key7, frame,);
         if (elapsed !== null) {
           valueTransition.elapsed = elapsed;
           isHandoff = true;
@@ -3800,9 +3817,7 @@ function animateVisualElement(visualElement, definition, options = {},) {
     animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options,),);
   }
   return animation.then(() => {
-    frame.postRender(() => {
-      visualElement.notify('AnimationComplete', definition,);
-    },);
+    visualElement.notify('AnimationComplete', definition,);
   },);
 }
 function shallowCompare(next, prev,) {
@@ -4189,7 +4204,7 @@ function usePresence() {
   } = context;
   const id4 = useId();
   useEffect(() => register(id4,), [],);
-  const safeToRemove = () => onExitComplete && onExitComplete(id4,);
+  const safeToRemove = useCallback(() => onExitComplete && onExitComplete(id4,), [id4, onExitComplete,],);
   return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
 }
 function useIsPresent() {
@@ -4259,8 +4274,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       element.addValue(key7, nextValue,);
       if (false) {
         warnOnce(
-          nextValue.version === '11.3.9',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.9 may not work as expected.`,
+          nextValue.version === '11.3.23',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.23 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -4779,42 +4794,35 @@ function isForcedMotionValue(key7, {
   return transformProps.has(key7,) || key7.startsWith('origin',) ||
     (layout2 || layoutId !== void 0) && (!!scaleCorrectors[key7] || key7 === 'opacity');
 }
-var getValueAsType = (value, type,) => {
-  return type && typeof value === 'number' ? type.transform(value,) : value;
-};
 function buildHTMLStyles(state, latestValues, transformTemplate2,) {
   const {
     style,
     vars,
-    transform: transform2,
     transformOrigin,
   } = state;
   let hasTransform2 = false;
   let hasTransformOrigin = false;
-  let transformIsNone = true;
   for (const key7 in latestValues) {
     const value = latestValues[key7];
-    if (isCSSVariableName(key7,)) {
-      vars[key7] = value;
-      continue;
-    }
-    const valueType = numberValueTypes[key7];
-    const valueAsType = getValueAsType(value, valueType,);
     if (transformProps.has(key7,)) {
       hasTransform2 = true;
-      transform2[key7] = valueAsType;
-      if (!transformIsNone) continue;
-      if (value !== (valueType.default || 0)) transformIsNone = false;
-    } else if (key7.startsWith('origin',)) {
-      hasTransformOrigin = true;
-      transformOrigin[key7] = valueAsType;
+      continue;
+    } else if (isCSSVariableName(key7,)) {
+      vars[key7] = value;
+      continue;
     } else {
-      style[key7] = valueAsType;
+      const valueAsType = getValueAsType(value, numberValueTypes[key7],);
+      if (key7.startsWith('origin',)) {
+        hasTransformOrigin = true;
+        transformOrigin[key7] = valueAsType;
+      } else {
+        style[key7] = valueAsType;
+      }
     }
   }
   if (!latestValues.transform) {
     if (hasTransform2 || transformTemplate2) {
-      style.transform = buildTransform(state.transform, transformIsNone, transformTemplate2,);
+      style.transform = buildTransform(latestValues, state.transform, transformTemplate2,);
     } else if (style.transform) {
       style.transform = 'none';
     }
@@ -6802,7 +6810,7 @@ function resetDistortingTransform(key7, visualElement, values, sharedAnimationVa
     }
   }
 }
-function isOptimisedAppearTree(projectionNode,) {
+function isOptimisedTransformAnimationInTree(projectionNode,) {
   projectionNode.hasCheckedOptimisedAppear = true;
   if (projectionNode.root === projectionNode) return false;
   const {
@@ -6810,10 +6818,10 @@ function isOptimisedAppearTree(projectionNode,) {
   } = projectionNode.options;
   if (!visualElement) {
     return false;
-  } else if (getOptimisedAppearId(visualElement,)) {
+  } else if (window.MotionHasOptimisedTransformAnimation(getOptimisedAppearId(visualElement,),)) {
     return true;
   } else if (projectionNode.parent && !projectionNode.parent.hasCheckedOptimisedAppear) {
-    return isOptimisedAppearTree(projectionNode.parent,);
+    return isOptimisedTransformAnimationInTree(projectionNode.parent,);
   } else {
     return false;
   }
@@ -7027,8 +7035,8 @@ function createProjectionNode2({
         this.options.onExitComplete && this.options.onExitComplete();
         return;
       }
-      if (window.HandoffCancelAllAnimations && isOptimisedAppearTree(this,)) {
-        window.HandoffCancelAllAnimations();
+      if (window.MotionHandoffCancelAll && isOptimisedTransformAnimationInTree(this,)) {
+        window.MotionHandoffCancelAll();
       }
       !this.root.isUpdating && this.root.startUpdate();
       if (this.isLayoutDirty) return;
@@ -7138,11 +7146,13 @@ function createProjectionNode2({
         needsMeasurement = false;
       }
       if (needsMeasurement) {
+        const isRoot = checkIsScrollRoot(this.instance,);
         this.scroll = {
           animationId: this.root.animationId,
           phase,
-          isRoot: checkIsScrollRoot(this.instance,),
+          isRoot,
           offset: measureScroll(this.instance,),
+          wasRoot: this.scroll ? this.scroll.isRoot : isRoot,
         };
       }
     }
@@ -7175,23 +7185,32 @@ function createProjectionNode2({
       };
     }
     measurePageBox() {
+      var _a;
       const {
         visualElement,
       } = this.options;
       if (!visualElement) return createBox();
       const box = visualElement.measureViewportBox();
-      const {
-        scroll: scroll2,
-      } = this.root;
-      if (scroll2) {
-        translateAxis(box.x, scroll2.offset.x,);
-        translateAxis(box.y, scroll2.offset.y,);
+      const wasInScrollRoot = ((_a = this.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot) ||
+        this.path.some(checkNodeWasScrollRoot,);
+      if (!wasInScrollRoot) {
+        const {
+          scroll: scroll2,
+        } = this.root;
+        if (scroll2) {
+          translateAxis(box.x, scroll2.offset.x,);
+          translateAxis(box.y, scroll2.offset.y,);
+        }
       }
       return box;
     }
     removeElementScroll(box,) {
+      var _a;
       const boxWithoutScroll = createBox();
       copyBoxInto(boxWithoutScroll, box,);
+      if ((_a = this.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot) {
+        return boxWithoutScroll;
+      }
       for (let i = 0; i < this.path.length; i++) {
         const node = this.path[i];
         const {
@@ -7199,15 +7218,8 @@ function createProjectionNode2({
           options,
         } = node;
         if (node !== this.root && scroll2 && options.layoutScroll) {
-          if (scroll2.isRoot) {
+          if (scroll2.wasRoot) {
             copyBoxInto(boxWithoutScroll, box,);
-            const {
-              scroll: rootScroll,
-            } = this.root;
-            if (rootScroll) {
-              translateAxis(boxWithoutScroll.x, -rootScroll.offset.x,);
-              translateAxis(boxWithoutScroll.y, -rootScroll.offset.y,);
-            }
           }
           translateAxis(boxWithoutScroll.x, scroll2.offset.x,);
           translateAxis(boxWithoutScroll.y, scroll2.offset.y,);
@@ -7921,6 +7933,10 @@ function shouldAnimatePositionOnly(animationType, snapshot, layout2,) {
   return animationType === 'position' ||
     animationType === 'preserve-aspect' && !isNear(aspectRatio(snapshot,), aspectRatio(layout2,), 0.2,);
 }
+function checkNodeWasScrollRoot(node,) {
+  var _a;
+  return node !== node.root && ((_a = node.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot);
+}
 var DocumentProjectionNode = createProjectionNode2({
   attachResizeListener: (ref, notify2,) => addDomEvent(ref, 'resize', notify2,),
   measureScroll: () => ({
@@ -8091,28 +8107,6 @@ function createDomMotionComponent(key7,) {
   ),);
 }
 var m = createMotionProxy(createDomMotionConfig,);
-function useIsMounted() {
-  const isMounted = useRef(false,);
-  useIsomorphicLayoutEffect(() => {
-    isMounted.current = true;
-    return () => {
-      isMounted.current = false;
-    };
-  }, [],);
-  return isMounted;
-}
-function useForceUpdate() {
-  const isMounted = useIsMounted();
-  const [forcedRenderCount, setForcedRenderCount,] = useState(0,);
-  const forceRender = useCallback(() => {
-    isMounted.current && setForcedRenderCount(forcedRenderCount + 1,);
-  }, [forcedRenderCount,],);
-  const deferredForceRender = useCallback(() => frame.postRender(forceRender,), [forceRender,],);
-  return [deferredForceRender, forcedRenderCount,];
-}
-function useUnmountEffect(callback,) {
-  return useEffect(() => () => callback(), [],);
-}
 var PopChildMeasure = class extends React2.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
@@ -8241,12 +8235,6 @@ function newChildrenMap() {
   return /* @__PURE__ */ new Map();
 }
 var getChildKey = (child) => child.key || '';
-function updateChildLookup(children, allChildren,) {
-  children.forEach((child) => {
-    const key7 = getChildKey(child,);
-    allChildren.set(key7, child,);
-  },);
-}
 function onlyElements(children,) {
   const filtered = [];
   Children.forEach(children, (child) => {
@@ -8256,112 +8244,91 @@ function onlyElements(children,) {
 }
 var AnimatePresence = ({
   children,
+  exitBeforeEnter,
   custom,
   initial = true,
   onExitComplete,
-  exitBeforeEnter,
   presenceAffectsLayout = true,
   mode = 'sync',
 },) => {
   invariant(!exitBeforeEnter, 'Replace exitBeforeEnter with mode=\'wait\'',);
-  const forceRender = useContext3(LayoutGroupContext,).forceRender || useForceUpdate()[0];
-  const isMounted = useIsMounted();
-  const filteredChildren = onlyElements(children,);
-  let childrenToRender = filteredChildren;
-  const exitingChildren = useRef(/* @__PURE__ */ new Map(),).current;
-  const presentChildren = useRef(childrenToRender,);
-  const allChildren = useRef(/* @__PURE__ */ new Map(),).current;
+  const presentChildren = useMemo(() => onlyElements(children,), [children,],);
+  const presentKeys = presentChildren.map(getChildKey,);
   const isInitialRender = useRef(true,);
+  const pendingPresentChildren = useRef(presentChildren,);
+  const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
+  const [diffedChildren, setDiffedChildren,] = useState(presentChildren,);
+  const [renderedChildren, setRenderedChildren,] = useState(presentChildren,);
   useIsomorphicLayoutEffect(() => {
     isInitialRender.current = false;
-    updateChildLookup(filteredChildren, allChildren,);
-    presentChildren.current = childrenToRender;
-  },);
-  useUnmountEffect(() => {
-    isInitialRender.current = true;
-    allChildren.clear();
-    exitingChildren.clear();
-  },);
-  if (isInitialRender.current) {
-    return jsx(Fragment, {
-      children: childrenToRender.map((child) =>
-        jsx(PresenceChild, {
-          isPresent: true,
-          initial: initial ? void 0 : false,
-          presenceAffectsLayout,
-          mode,
-          children: child,
-        }, getChildKey(child,),)
-      ),
-    },);
-  }
-  childrenToRender = [...childrenToRender,];
-  const presentKeys = presentChildren.current.map(getChildKey,);
-  const targetKeys = filteredChildren.map(getChildKey,);
-  const numPresent = presentKeys.length;
-  for (let i = 0; i < numPresent; i++) {
-    const key7 = presentKeys[i];
-    if (targetKeys.indexOf(key7,) === -1 && !exitingChildren.has(key7,)) {
-      exitingChildren.set(key7, void 0,);
-    }
-  }
-  if (mode === 'wait' && exitingChildren.size) {
-    childrenToRender = [];
-  }
-  exitingChildren.forEach((component, key7,) => {
-    if (targetKeys.indexOf(key7,) !== -1) return;
-    const child = allChildren.get(key7,);
-    if (!child) return;
-    const insertionIndex = presentKeys.indexOf(key7,);
-    let exitingComponent = component;
-    if (!exitingComponent) {
-      const onExit = () => {
-        exitingChildren.delete(key7,);
-        const leftOverKeys = Array.from(allChildren.keys(),).filter((childKey) => !targetKeys.includes(childKey,));
-        leftOverKeys.forEach((leftOverKey) => allChildren.delete(leftOverKey,));
-        presentChildren.current = filteredChildren.filter((presentChild) => {
-          const presentChildKey = getChildKey(presentChild,);
-          return (
-            // filter out the node exiting
-            presentChildKey === key7 ||
-            // filter out the leftover children
-            leftOverKeys.includes(presentChildKey,)
-          );
-        },);
-        if (!exitingChildren.size) {
-          if (isMounted.current === false) return;
-          forceRender();
-          onExitComplete && onExitComplete();
+    pendingPresentChildren.current = presentChildren;
+    for (let i = 0; i < renderedChildren.length; i++) {
+      const key7 = getChildKey(renderedChildren[i],);
+      if (!presentKeys.includes(key7,)) {
+        if (exitComplete.get(key7,) !== true) {
+          exitComplete.set(key7, false,);
         }
-      };
-      exitingComponent = jsx(PresenceChild, {
-        isPresent: false,
-        onExitComplete: onExit,
-        custom,
-        presenceAffectsLayout,
-        mode,
-        children: child,
-      }, getChildKey(child,),);
-      exitingChildren.set(key7, exitingComponent,);
+      } else {
+        exitComplete.delete(key7,);
+      }
     }
-    childrenToRender.splice(insertionIndex, 0, exitingComponent,);
-  },);
-  childrenToRender = childrenToRender.map((child) => {
-    const key7 = child.key;
-    return exitingChildren.has(key7,) ? child : jsx(PresenceChild, {
-      isPresent: true,
-      presenceAffectsLayout,
-      mode,
-      children: child,
-    }, getChildKey(child,),);
-  },);
+  }, [renderedChildren, presentKeys.length, presentKeys.join('-',),],);
+  const exitingChildren = [];
+  if (presentChildren !== diffedChildren) {
+    let nextChildren = [...presentChildren,];
+    for (let i = 0; i < renderedChildren.length; i++) {
+      const child = renderedChildren[i];
+      const key7 = getChildKey(child,);
+      if (!presentKeys.includes(key7,)) {
+        nextChildren.splice(i, 0, child,);
+        exitingChildren.push(child,);
+      }
+    }
+    if (mode === 'wait' && exitingChildren.length) {
+      nextChildren = exitingChildren;
+    }
+    setRenderedChildren(onlyElements(nextChildren,),);
+    setDiffedChildren(presentChildren,);
+    return;
+  }
   if (false) {
     console.warn(
       `You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`,
     );
   }
+  const {
+    forceRender,
+  } = useContext3(LayoutGroupContext,);
   return jsx(Fragment, {
-    children: exitingChildren.size ? childrenToRender : childrenToRender.map((child) => cloneElement2(child,)),
+    children: renderedChildren.map((child) => {
+      const key7 = getChildKey(child,);
+      const isPresent2 = presentChildren === renderedChildren || presentKeys.includes(key7,);
+      const onExit = () => {
+        if (exitComplete.has(key7,)) {
+          exitComplete.set(key7, true,);
+        } else {
+          return;
+        }
+        let isEveryExitComplete = true;
+        exitComplete.forEach((isExitComplete) => {
+          if (!isExitComplete) isEveryExitComplete = false;
+        },);
+        if (isEveryExitComplete) {
+          forceRender === null || forceRender === void 0 ? void 0 : forceRender();
+          setRenderedChildren(pendingPresentChildren.current,);
+          onExitComplete && onExitComplete();
+        }
+      };
+      return jsx(PresenceChild, {
+        isPresent: isPresent2,
+        initial: !isInitialRender.current || initial ? void 0 : false,
+        custom: isPresent2 ? void 0 : custom,
+        presenceAffectsLayout,
+        mode,
+        onExitComplete: isPresent2 ? void 0 : onExit,
+        children: child,
+      }, key7,);
+    },),
   },);
 };
 function MotionConfig({
@@ -8420,6 +8387,25 @@ function isLazyBundle(features,) {
   return typeof features === 'function';
 }
 var DeprecatedLayoutGroupContext = createContext(null,);
+function useIsMounted() {
+  const isMounted = useRef(false,);
+  useIsomorphicLayoutEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, [],);
+  return isMounted;
+}
+function useForceUpdate() {
+  const isMounted = useIsMounted();
+  const [forcedRenderCount, setForcedRenderCount,] = useState(0,);
+  const forceRender = useCallback(() => {
+    isMounted.current && setForcedRenderCount(forcedRenderCount + 1,);
+  }, [forcedRenderCount,],);
+  const deferredForceRender = useCallback(() => frame.postRender(forceRender,), [forceRender,],);
+  return [deferredForceRender, forcedRenderCount,];
+}
 var notify = (node) => !node.isLayoutDirty && node.willUpdate(false,);
 function nodeGroup() {
   const nodes = /* @__PURE__ */ new Set();
@@ -8666,6 +8652,10 @@ var Reorder = {
   Group,
   Item,
 };
+var domMin = {
+  renderer: createDomVisualElement,
+  ...animations,
+};
 var domAnimation = {
   renderer: createDomVisualElement,
   ...animations,
@@ -8691,12 +8681,16 @@ function useMotionTemplate(fragments, ...values) {
   }
   return useCombineMotionValues(values.filter(isMotionValue,), buildValue,);
 }
+function toNumber(v,) {
+  if (typeof v === 'number') return v;
+  return parseFloat(v,);
+}
 function useSpring(source, config = {},) {
   const {
     isStatic,
   } = useContext3(MotionConfigContext,);
   const activeSpringAnimation = useRef(null,);
-  const value = useMotionValue(isMotionValue(source,) ? source.get() : source,);
+  const value = useMotionValue(isMotionValue(source,) ? toNumber(source.get(),) : source,);
   const latestValue = useRef(value.get(),);
   const latestSetter = useRef(() => {},);
   const startAnimation2 = () => {
@@ -8731,7 +8725,7 @@ function useSpring(source, config = {},) {
   }, [JSON.stringify(config,),],);
   useIsomorphicLayoutEffect(() => {
     if (isMotionValue(source,)) {
-      return source.on('change', (v) => value.set(parseFloat(v,),),);
+      return source.on('change', (v) => value.set(toNumber(v,),),);
     }
   }, [value,],);
   return value;
@@ -9228,6 +9222,9 @@ function useTime() {
   useAnimationFrame((t) => time2.set(t,));
   return time2;
 }
+function useWillChange() {
+  return useConstant(() => new WillChangeMotionValue('auto',));
+}
 function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
   const [shouldReduceMotion,] = useState(prefersReducedMotion.current,);
@@ -9317,6 +9314,9 @@ function animationControls() {
     },
   };
   return controls;
+}
+function useUnmountEffect(callback,) {
+  return useEffect(() => () => callback(), [],);
 }
 var wrap = (min, max, v,) => {
   const rangeSize = max - min;
@@ -9808,8 +9808,9 @@ function useResetProjection() {
 }
 var appearStoreId = (id4, value,) => `${id4}: ${value}`;
 var appearAnimationStore = /* @__PURE__ */ new Map();
+var elementsWithAppearAnimations = /* @__PURE__ */ new Set();
 var handoffFrameTime;
-function handoffOptimizedAppearAnimation(elementId, valueName, _value, frame2,) {
+function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
   const optimisedValueName = transformProps.has(valueName,) ? 'transform' : valueName;
   const storeId = appearStoreId(elementId, optimisedValueName,);
   const optimisedAnimation = appearAnimationStore.get(storeId,);
@@ -9820,24 +9821,15 @@ function handoffOptimizedAppearAnimation(elementId, valueName, _value, frame2,) 
     animation,
     startTime,
   } = optimisedAnimation;
-  const cancelAnimation = () => {
+  if (startTime === null || window.MotionHandoffIsComplete) {
     appearAnimationStore.delete(storeId,);
-    if (frame2) {
-      frame2.render(() =>
-        frame2.render(() => {
-          try {
-            animation.cancel();
-          } catch (error) {}
-        },)
-      );
-    } else {
-      try {
-        animation.cancel();
-      } catch (error) {}
-    }
-  };
-  if (startTime === null || window.HandoffComplete) {
-    cancelAnimation();
+    frame2.render(() =>
+      frame2.render(() => {
+        try {
+          animation.cancel();
+        } catch (error) {}
+      },)
+    );
     return null;
   } else {
     if (handoffFrameTime === void 0) {
@@ -9849,13 +9841,13 @@ function handoffOptimizedAppearAnimation(elementId, valueName, _value, frame2,) 
 var startFrameTime;
 var readyAnimation;
 function startOptimizedAppearAnimation(element, name, keyframes2, options, onReady,) {
-  if (window.HandoffComplete) {
-    window.HandoffAppearAnimations = void 0;
+  if (window.MotionHandoffIsComplete) {
+    window.MotionHandoffAnimation = void 0;
     return;
   }
   const id4 = element.dataset[optimizedAppearDataId];
   if (!id4) return;
-  window.HandoffAppearAnimations = handoffOptimizedAppearAnimation;
+  window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
   const storeId = appearStoreId(id4, name,);
   if (!readyAnimation) {
     readyAnimation = animateStyle(element, name, [keyframes2[0], keyframes2[0],], /**
@@ -9870,17 +9862,21 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       animation: readyAnimation,
       startTime: null,
     },);
-    if (!window.HandoffCancelAllAnimations) {
-      window.HandoffCancelAllAnimations = () => {
-        appearAnimationStore.forEach(({
-          animation,
-        },) => {
+    window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
+    window.MotionHandoffCancelAll = () => {
+      appearAnimationStore.forEach(({
+        animation,
+      }, animationId,) => {
+        if (animationId.endsWith('transform',)) {
           animation.cancel();
-        },);
-        appearAnimationStore.clear();
-        window.HandoffCancelAllAnimations = void 0;
-      };
-    }
+          appearAnimationStore.delete(animationId,);
+        }
+      },);
+      window.MotionHandoffCancelAll = void 0;
+    };
+    window.MotionHasOptimisedAnimation = (elementId) => Boolean(elementId && elementsWithAppearAnimations.has(elementId,),);
+    window.MotionHasOptimisedTransformAnimation = (elementId) =>
+      Boolean(elementId && appearAnimationStore.has(appearStoreId(elementId, 'transform',),),);
   }
   const startAnimation2 = () => {
     readyAnimation.cancel();
@@ -9895,6 +9891,7 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
     },);
     if (onReady) onReady(appearAnimation,);
   };
+  elementsWithAppearAnimations.add(id4,);
   if (readyAnimation.ready) {
     readyAnimation.ready.then(startAnimation2,).catch(noop,);
   } else {
@@ -10067,13 +10064,14 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.V4LTAYQT.js
+// https :https://app.framerstatic.com/framer.LMS2FZ32.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
+import { cloneElement as cloneElement32, } from 'react';
 var require_hsluv = __commonJS({
   '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
     'use strict';
@@ -29986,9 +29984,9 @@ async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appea
       const visualElement = visualElementStore.get(ref.current,);
       if (visualElement) visualElement.setBaseTarget(key7, value,);
       const handoff =
-        isString22(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.HandoffAppearAnimations
+        isString22(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.MotionHandoffAnimation
           ? {
-            elapsed: safeWindow.HandoffAppearAnimations(appearId, key7, motionValue2, frame,),
+            elapsed: safeWindow.MotionHandoffAnimation(appearId, key7, frame,),
           }
           : void 0;
       if (instant) {
@@ -32672,10 +32670,16 @@ function stateCanSubmitForm(state,) {
 function preventDefault(e,) {
   e.preventDefault();
 }
-function openExternalLink(link,) {
-  if (!safeWindow) return;
+function openExternalLinkInCurrentTab(link, formRef,) {
   const href = isValidURL(link, false,) ? link : `https://${link}`;
-  safeWindow.open(href, '_blank',);
+  const linkElement = document.createElement('a',);
+  linkElement.href = href;
+  linkElement.target = '_self';
+  linkElement.style.display = 'none';
+  if (!('current' in formRef && formRef.current)) return;
+  formRef.current.appendChild(linkElement,);
+  linkElement.click();
+  linkElement.remove();
 }
 var FormContext = React4.createContext(void 0,);
 var FormContainer = /* @__PURE__ */ React4.forwardRef(({
@@ -32686,7 +32690,9 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   onError,
   onLoading,
   ...props
-}, ref,) => {
+}, forwardedRef,) => {
+  const fallbackRef = React4.useRef(null,);
+  const ref = forwardedRef ?? fallbackRef;
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
@@ -32712,7 +32718,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
     if (isString22(link,)) {
       const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables,);
       if (!matchingRoute2) {
-        openExternalLink(link,);
+        openExternalLinkInCurrentTab(link, ref,);
         return;
       }
       const {
@@ -40605,7 +40611,7 @@ function processRichTextChildren(
       children = [anchorLink,];
     }
   }
-  return cloneElement2(element, props, ...children,);
+  return cloneElement32(element, props, ...children,);
 }
 function generateHeadingSlug(children, slugCounters,) {
   const headingText = children.map(extractTextFromReactNode,).join('',);
@@ -43083,7 +43089,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.3.9',
+    'framer-motion': '11.3.23',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -43210,6 +43216,7 @@ export {
   DOM,
   domAnimation,
   domMax,
+  domMin,
   DragControls,
   Draggable,
   easeIn,
