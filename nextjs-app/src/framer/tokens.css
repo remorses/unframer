@@ -6,6 +6,9 @@
     --token-8c47652b-dea5-4767-a9f2-5d952dcce49a: rgb(255, 255, 255); 
     --token-58a904ff-197a-49b3-8356-adaa464e1642: rgba(255, 255, 255, 0.12); 
     --token-fae2c128-35fb-45de-a6c2-32169f920c68: rgb(13, 13, 13); 
+    /* Used by GrowthSpaceMenu.js */
+    --token-1ad6363d-c005-48a9-9ce6-23ed24e0178e: rgb(24, 23, 23); 
+    --token-aa36031d-f65f-4636-8896-254cc08330fb: rgb(245, 243, 240); 
     /* Used by footer.js */
     --token-33722da1-56ef-4815-82ed-442105eb06b1: #000000; /* Named as "Black" in Framer. Also seen as rgb(0, 0, 0). */
     --token-3a259a41-0d00-4102-a2f3-6fc26ea1e8f1: #737373; /* Also seen as rgb(115, 115, 115). */

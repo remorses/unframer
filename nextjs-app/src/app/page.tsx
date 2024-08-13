@@ -15,6 +15,7 @@ import Hero from '@/framer/hero'
 import MenuOverlay from '@/framer/menu-overlay'
 import Collection from '@/framer/collection'
 import Card from '@/framer/card'
+import GrowthSpaceMenu from '@/framer/GrowthSpaceMenu'
 import Footer from '@/framer/footer'
 import { use } from 'react'
 
@@ -54,6 +55,7 @@ function Home() {
                         variants={{ base: 'Phone', lg: 'Desktop' }}
                     />
                 </div>
+                <GrowthSpaceMenu  variant='Rani' />
                 <div className=' top-[200px] flex z-10 w-full absolute flex-col items-center'>
                     <Menus className=' mx-auto' />
                 </div>
