@@ -55,7 +55,7 @@ function Home() {
                         variants={{ base: 'Phone', lg: 'Desktop' }}
                     />
                 </div>
-                <GrowthSpaceMenu  variant='Rani' />
+                
                 <div className=' top-[200px] flex z-10 w-full absolute flex-col items-center'>
                     <Menus className=' mx-auto' />
                 </div>
@@ -95,6 +95,8 @@ function Home() {
                         variant='Default'
                     />
                 </div>
+                <div className='pt-[200px]'></div>
+                <GrowthSpaceMenu  variant='2' />
                 <div className='pt-[200px]'></div>
                 <Footer.Responsive
                     footerText={`© ${new Date().getFullYear()} unframer`}
