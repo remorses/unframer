@@ -10064,7 +10064,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.LMS2FZ32.js
+// https :https://app.framerstatic.com/framer.3JDV5ZUP.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -32880,10 +32880,13 @@ function isValidFetchDataValueResult(type, value,) {
   switch (type) {
     case 'string':
       return isString22(value,) || isNumber2(value,);
+    case 'color':
+      return isString22(value,);
     case 'boolean':
       return isBoolean(value,);
     case 'number':
       return isNumber2(value,) || isNumberString(value,);
+    case 'link':
     case 'image':
       return isString22(value,) && isValidURL2(value,);
     default: {
@@ -32996,6 +32999,7 @@ var _FetchClient = class {
     if (currentIntervalForRequest) return;
     if (!shortestCacheDuration) return;
     const interval = safeWindow.setInterval(() => {
+      if (document.visibilityState === 'hidden') return;
       const cachedAt = __privateGet(this, _cachedAt,).get(cacheKey,);
       if (!shortestCacheDuration || !cachedAt) return;
       void this.fetchWithCache({
@@ -35376,6 +35380,14 @@ var SortItemsPlan = class extends QueryPlan {
   async _execute() {
     const childItems = await this.childPlan.execute();
     return childItems.sort((leftItem, rightItem,) => {
+      const leftSortItem = {
+        ...leftItem,
+        data: {},
+      };
+      const rightSortItem = {
+        ...rightItem,
+        data: {},
+      };
       for (
         const {
           expression,
@@ -35385,7 +35397,7 @@ var SortItemsPlan = class extends QueryPlan {
       ) {
         const isAscending = direction === 'asc';
         if (expression instanceof ScalarIdentifier && expression.name === INDEX_IDENTIFIER) {
-          const order = this.collection.compareItems(leftItem, rightItem,);
+          const order = this.collection.compareItems(leftSortItem, rightSortItem,);
           return isAscending ? order : -order;
         }
         const left = expression.evaluate(leftItem,);
@@ -35401,7 +35413,7 @@ var SortItemsPlan = class extends QueryPlan {
         }
         throw new Error('Invalid comparison result.',);
       }
-      return this.collection.compareItems(leftItem, rightItem,);
+      return this.collection.compareItems(leftSortItem, rightSortItem,);
     },);
   }
 };
@@ -35501,6 +35513,9 @@ var RichTextResolver = class {
   }
 };
 function stringifyIdentifier(expression,) {
+  if (expression.collection) {
+    return `"${expression.collection}"."${expression.name}"`;
+  }
   return `"${expression.name}"`;
 }
 function stringifyLiteralValue(expression,) {
@@ -35565,7 +35580,10 @@ function stringifyCollection(collection,) {
   if (isDatabaseCollection(collection.data,)) {
     return 'Collection';
   }
-  return collection.data.displayName;
+  if (collection.alias) {
+    return `"${collection.data.displayName}" AS "${collection.alias}"`;
+  }
+  return `"${collection.data.displayName}"`;
 }
 function stringifyJoin(join,) {
   let result = `${stringifyFrom(join.left,)} LEFT JOIN ${stringifyFrom(join.right,)}`;
@@ -35607,7 +35625,7 @@ function stringifyQuery(query,) {
     query.select.map((selectExpression) => {
       const expressionString = stringifyExpression(selectExpression,);
       if (selectExpression.alias) {
-        return `${expressionString} AS ${selectExpression.alias}`;
+        return `${expressionString} AS "${selectExpression.alias}"`;
       }
       return expressionString;
     },).join(', ',)
