@@ -10064,7 +10064,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.3JDV5ZUP.js
+// https :https://app.framerstatic.com/framer.QWTCGE4Y.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -19482,12 +19482,23 @@ var hideScrollbars = [
   `[data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }`,
   `[data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }`,
 ];
+var willChangeOverrideCSSVariable = '--framer-will-change-override';
+var anySafariVersion = '(background: -webkit-named-image(i))';
+var safari16OrGreater = '(grid-template-rows: subgrid)';
+var willChangeTransformRules = (isPreview) =>
+  isPreview
+    ? [
+      `body { ${willChangeOverrideCSSVariable}: none; }`,
+      `@supports ${anySafariVersion} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`,
+    ]
+    : [`body { ${willChangeOverrideCSSVariable}: none; }`,];
 var frameCSSRules = (isPreview) => {
   return isPreview ? frameCSS : [];
 };
 var svgCSSRules = [`.svgContainer svg { display: block; }`,];
 var combineCSSRules =
   (isPreview) => [
+    ...willChangeTransformRules(isPreview,),
     ...componentCSSRules,
     ...textCSSRules,
     ...richTextCSSRules,
@@ -33043,6 +33054,7 @@ var _FetchClient = class {
     }
   }
   async prefetch(request,) {
+    if (!isBrowser2()) return;
     if (!isValidURL2(request.url,)) return;
     const cacheKey = getRequestCacheKey(request,);
     __privateGet(this, _preloadedRequests,).add(cacheKey,);
@@ -33062,6 +33074,7 @@ var _FetchClient = class {
     return resolvedValue;
   }
   async fetchWithCache(request,) {
+    if (!isBrowser2()) return;
     const cacheKey = getRequestCacheKey(request,);
     const ongoingFetch = __privateGet(this, _ongoingFetches,).get(cacheKey,);
     if (ongoingFetch) return ongoingFetch;
@@ -35671,6 +35684,9 @@ function getDatabaseCollection({
 }
 var QueryEngine = class {
   async query(query, locale,) {
+    return this.queryOld(query, locale,);
+  }
+  async queryOld(query, locale,) {
     const [plan, schema, richTextResolver,] = this.createQueryPlan(query, locale,);
     const items = await this.executeQueryPlan(schema, richTextResolver, query, plan,);
     log.debug(`Query:
