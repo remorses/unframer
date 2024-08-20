@@ -253,6 +253,9 @@ importers:
       tiktoken:
         specifier: ^1.0.15
         version: 1.0.15
+      typescript:
+        specifier: ^5.5.4
+        version: 5.5.4
 
 packages:
 
