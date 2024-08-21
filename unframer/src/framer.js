@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-VMMGJNOV.js
+// https :https://app.framerstatic.com/chunk-DZJOS6SY.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -2037,6 +2037,22 @@ function keyframes({
     },
   };
 }
+var now;
+function clearTime() {
+  now = void 0;
+}
+var time = {
+  now: () => {
+    if (now === void 0) {
+      time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming ? frameData.timestamp : performance.now(),);
+    }
+    return now;
+  },
+  set: (newTime) => {
+    now = newTime;
+    queueMicrotask(clearTime,);
+  },
+};
 var instantAnimationState = {
   current: false,
 };
@@ -2087,6 +2103,7 @@ function getFinalKeyframe(keyframes2, {
   const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
   return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
 }
+var MAX_RESOLVE_DELAY = 40;
 var BaseAnimation = class {
   constructor({
     autoplay = true,
@@ -2099,6 +2116,7 @@ var BaseAnimation = class {
   },) {
     this.isStopped = false;
     this.hasAttemptedResolve = false;
+    this.createdAt = time.now();
     this.options = {
       autoplay,
       delay: delay2,
@@ -2109,6 +2127,20 @@ var BaseAnimation = class {
       ...options,
     };
     this.updateFinishedPromise();
+  }
+  /**
+   * This method uses the createdAt and resolvedAt to calculate the
+   * animation startTime. *Ideally*, we would use the createdAt time as t=0
+   * as the following frame would then be the first frame of the animation in
+   * progress, which would feel snappier.
+   *
+   * However, if there's a delay (main thread work) between the creation of
+   * the animation and the first commited frame, we prefer to use resolvedAt
+   * to avoid a sudden jump into the animation.
+   */
+  calcStartTime() {
+    if (!this.resolvedAt) return this.createdAt;
+    return this.resolvedAt - this.createdAt > MAX_RESOLVE_DELAY ? this.resolvedAt : this.createdAt;
   }
   /**
    * A getter for resolved data. If keyframes are not yet resolved, accessing
@@ -2127,6 +2159,7 @@ var BaseAnimation = class {
    * Otherwise, it will call initPlayback on the implementing class.
    */
   onKeyframesResolved(keyframes2, finalKeyframe,) {
+    this.resolvedAt = time.now();
     this.hasAttemptedResolve = true;
     const {
       name,
@@ -2182,22 +2215,6 @@ function calcGeneratorDuration(generator,) {
   }
   return duration >= maxGeneratorDuration ? Infinity : duration;
 }
-var now;
-function clearTime() {
-  now = void 0;
-}
-var time = {
-  now: () => {
-    if (now === void 0) {
-      time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming ? frameData.timestamp : performance.now(),);
-    }
-    return now;
-  },
-  set: (newTime) => {
-    now = newTime;
-    queueMicrotask(clearTime,);
-  },
-};
 var frameloopDriver = (update) => {
   const passTimestamp = ({
     timestamp,
@@ -2221,17 +2238,14 @@ var generators = {
 };
 var percentToProgress = (percent2) => percent2 / 100;
 var MainThreadAnimation = class extends BaseAnimation {
-  constructor({
-    KeyframeResolver: KeyframeResolver$1 = KeyframeResolver,
-    ...options
-  },) {
+  constructor(options,) {
     super(options,);
     this.holdTime = null;
-    this.startTime = null;
     this.cancelTime = null;
     this.currentTime = 0;
     this.playbackSpeed = 1;
     this.pendingPlayState = 'running';
+    this.startTime = null;
     this.state = 'idle';
     this.stop = () => {
       this.resolver.cancel();
@@ -2246,14 +2260,12 @@ var MainThreadAnimation = class extends BaseAnimation {
     const {
       name,
       motionValue: motionValue2,
+      element,
       keyframes: keyframes2,
     } = this.options;
+    const KeyframeResolver$1 = (element === null || element === void 0 ? void 0 : element.KeyframeResolver) || KeyframeResolver;
     const onResolved = (resolvedKeyframes, finalKeyframe,) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe,);
-    if (name && motionValue2 && motionValue2.owner) {
-      this.resolver = motionValue2.owner.resolveKeyframes(keyframes2, onResolved, name, motionValue2,);
-    } else {
-      this.resolver = new KeyframeResolver$1(keyframes2, onResolved, name, motionValue2,);
-    }
+    this.resolver = new KeyframeResolver$1(keyframes2, onResolved, name, motionValue2, element,);
     this.resolver.scheduleResolve();
   }
   initPlayback(keyframes$1,) {
@@ -2456,6 +2468,7 @@ var MainThreadAnimation = class extends BaseAnimation {
     const {
       driver = frameloopDriver,
       onPlay,
+      startTime,
     } = this.options;
     if (!this.driver) {
       this.driver = driver((timestamp) => this.tick(timestamp,));
@@ -2464,7 +2477,9 @@ var MainThreadAnimation = class extends BaseAnimation {
     const now2 = this.driver.now();
     if (this.holdTime !== null) {
       this.startTime = now2 - this.holdTime;
-    } else if (!this.startTime || this.state === 'finished') {
+    } else if (!this.startTime) {
+      this.startTime = startTime !== null && startTime !== void 0 ? startTime : this.calcStartTime();
+    } else if (this.state === 'finished') {
       this.startTime = now2;
     }
     if (this.state === 'finished') {
@@ -2629,15 +2644,8 @@ function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, n
   }
 }
 var DOMKeyframesResolver = class extends KeyframeResolver {
-  constructor(unresolvedKeyframes, onComplete, name, motionValue2,) {
-    super(
-      unresolvedKeyframes,
-      onComplete,
-      name,
-      motionValue2,
-      motionValue2 === null || motionValue2 === void 0 ? void 0 : motionValue2.owner,
-      true,
-    );
+  constructor(unresolvedKeyframes, onComplete, name, motionValue2, element,) {
+    super(unresolvedKeyframes, onComplete, name, motionValue2, element, true,);
   }
   readKeyframes() {
     const {
@@ -2645,7 +2653,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
       element,
       name,
     } = this;
-    if (!element.current) return;
+    if (!element || !element.current) return;
     super.readKeyframes();
     for (let i = 0; i < unresolvedKeyframes.length; i++) {
       let keyframe = unresolvedKeyframes[i];
@@ -2702,7 +2710,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
       unresolvedKeyframes,
       name,
     } = this;
-    if (!element.current) return;
+    if (!element || !element.current) return;
     if (name === 'height') {
       this.suspendedScrollY = window.pageYOffset;
     }
@@ -2720,7 +2728,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
       name,
       unresolvedKeyframes,
     } = this;
-    if (!element.current) return;
+    if (!element || !element.current) return;
     const value = element.getValue(name,);
     value && value.jump(this.measuredOrigin, false,);
     const finalKeyframeIndex = unresolvedKeyframes.length - 1;
@@ -2841,6 +2849,7 @@ var AcceleratedAnimation = class extends BaseAnimation {
     const {
       name,
       motionValue: motionValue2,
+      element,
       keyframes: keyframes2,
     } = this.options;
     this.resolver = new DOMKeyframesResolver(
@@ -2848,6 +2857,7 @@ var AcceleratedAnimation = class extends BaseAnimation {
       (resolvedKeyframes, finalKeyframe,) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe,),
       name,
       motionValue2,
+      element,
     );
     this.resolver.scheduleResolve();
   }
@@ -2860,6 +2870,7 @@ var AcceleratedAnimation = class extends BaseAnimation {
       type,
       motionValue: motionValue2,
       name,
+      startTime,
     } = this.options;
     if (!((_a = motionValue2.owner) === null || _a === void 0 ? void 0 : _a.current)) {
       return false;
@@ -2869,6 +2880,7 @@ var AcceleratedAnimation = class extends BaseAnimation {
         onComplete,
         onUpdate,
         motionValue: motionValue3,
+        element,
         ...options
       } = this.options;
       const pregeneratedAnimation = pregenerateKeyframes(keyframes2, options,);
@@ -2887,7 +2899,7 @@ var AcceleratedAnimation = class extends BaseAnimation {
       times,
       ease: ease2,
     },);
-    animation.startTime = time.now();
+    animation.startTime = startTime !== null && startTime !== void 0 ? startTime : this.calcStartTime();
     if (this.pendingTimeline) {
       animation.timeline = this.pendingTimeline;
       this.pendingTimeline = void 0;
@@ -2971,6 +2983,16 @@ var AcceleratedAnimation = class extends BaseAnimation {
     } = resolved;
     return animation.playState;
   }
+  get startTime() {
+    const {
+      resolved,
+    } = this;
+    if (!resolved) return null;
+    const {
+      animation,
+    } = resolved;
+    return animation.startTime;
+  }
   /**
    * Replace the default DocumentTimeline with another AnimationTimeline.
    * Currently used for scroll animations.
@@ -3041,6 +3063,7 @@ var AcceleratedAnimation = class extends BaseAnimation {
         motionValue: motionValue2,
         onUpdate,
         onComplete,
+        element,
         ...options
       } = this.options;
       const sampleAnimation = new MainThreadAnimation({
@@ -3141,7 +3164,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.3.23';
+    this.version = '11.3.28';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3514,6 +3537,9 @@ var GroupPlaybackControls = class {
   set speed(speed,) {
     this.setAll('speed', speed,);
   }
+  get startTime() {
+    return this.getAll('startTime',);
+  }
   get duration() {
     let max = 0;
     for (let i = 0; i < this.animations.length; i++) {
@@ -3709,16 +3735,15 @@ function animateTarget(visualElement, targetAndTransition, {
     }
     const valueTransition = {
       delay: delay2,
-      elapsed: 0,
       ...getValueTransition(transition || {}, key7,),
     };
     let isHandoff = false;
     if (window.MotionHandoffAnimation) {
       const appearId = getOptimisedAppearId(visualElement,);
       if (appearId) {
-        const elapsed = window.MotionHandoffAnimation(appearId, key7, frame,);
-        if (elapsed !== null) {
-          valueTransition.elapsed = elapsed;
+        const startTime = window.MotionHandoffAnimation(appearId, key7, frame,);
+        if (startTime !== null) {
+          valueTransition.startTime = startTime;
           isHandoff = true;
         }
       }
@@ -4274,8 +4299,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       element.addValue(key7, nextValue,);
       if (false) {
         warnOnce(
-          nextValue.version === '11.3.23',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.23 may not work as expected.`,
+          nextValue.version === '11.3.28',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.28 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -4341,9 +4366,6 @@ var VisualElement = class {
     visualState,
   }, options = {},) {
     this.applyWillChange = false;
-    this.resolveKeyframes = (keyframes2, onComplete, name, value,) => {
-      return new this.KeyframeResolver(keyframes2, onComplete, name, value, this,);
-    };
     this.current = null;
     this.children = /* @__PURE__ */ new Set();
     this.isVariantNode = false;
@@ -9809,7 +9831,6 @@ function useResetProjection() {
 var appearStoreId = (id4, value,) => `${id4}: ${value}`;
 var appearAnimationStore = /* @__PURE__ */ new Map();
 var elementsWithAppearAnimations = /* @__PURE__ */ new Set();
-var handoffFrameTime;
 function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
   const optimisedValueName = transformProps.has(valueName,) ? 'transform' : valueName;
   const storeId = appearStoreId(elementId, optimisedValueName,);
@@ -9832,10 +9853,7 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
     );
     return null;
   } else {
-    if (handoffFrameTime === void 0) {
-      handoffFrameTime = performance.now();
-    }
-    return handoffFrameTime - startTime || 0;
+    return startTime;
   }
 }
 var startFrameTime;
@@ -10064,7 +10082,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.QWTCGE4Y.js
+// https :https://app.framerstatic.com/framer.AK6B77ND.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -29994,20 +30012,20 @@ async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appea
       if (!isNumber2(value,)) return resolve();
       const visualElement = visualElementStore.get(ref.current,);
       if (visualElement) visualElement.setBaseTarget(key7, value,);
-      const handoff =
-        isString22(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.MotionHandoffAnimation
-          ? {
-            elapsed: safeWindow.MotionHandoffAnimation(appearId, key7, frame,),
-          }
-          : void 0;
+      let startTime;
+      if (isString22(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.MotionHandoffAnimation) {
+        const handoffAnimationStartTime = safeWindow.MotionHandoffAnimation(appearId, key7, frame,);
+        if (handoffAnimationStartTime) {
+          startTime = handoffAnimationStartTime;
+        }
+      }
       if (instant) {
         motionValue2.set(value,);
       } else {
         animate(motionValue2, value, {
           ...transition,
           velocity: 0,
-          elapsed: 0,
-          ...handoff,
+          startTime,
           onComplete: () => resolve(),
         },);
       }
@@ -33175,7 +33193,9 @@ var FetchClientProvider = ({
   const [isRestoring, setIsRestoring,] = React2.useState(true,);
   React2.useEffect(() => {
     client.hydrateCache();
-    setIsRestoring(false,);
+    React2.startTransition(() => {
+      setIsRestoring(false,);
+    },);
     return () => client.unmount();
   }, [client,],);
   return /* @__PURE__ */ jsx(IsRestoringCacheContext.Provider, {
@@ -33429,7 +33449,6 @@ function renderBranchedChildrenFromPropertyOverrides(
       variants: effectiveRemainingVariants,
     },);
   }
-  const displayContents = `.${SSRVariantClassName} { display: contents }`;
   const renderedBranches = [];
   for (
     const {
@@ -33471,17 +33490,7 @@ function renderBranchedChildrenFromPropertyOverrides(
     renderedBranches.push(element,);
   }
   assert(!activeVariantId || renderedBranches.length === 1, 'Must render exactly one branch when activeVariantId is given',);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [
-      !parentVariants && !isBrowser2() && /* @__PURE__ */ jsx('style', {
-        ...{
-          [framerCSSMarker]: true,
-        },
-        children: displayContents,
-      },),
-      renderedBranches,
-    ],
-  },);
+  return renderedBranches;
 }
 var SSRVariants = /* @__PURE__ */ React4.forwardRef(function SSRVariants2({
   id: _nodeId,
@@ -33525,7 +33534,7 @@ function propsForBreakpoint(variant, props, overrides,) {
     ...overrides[variant],
   };
 }
-var PropertyOverrides = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides2({
+var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides({
   breakpoint,
   overrides,
   children,
@@ -33588,6 +33597,8 @@ var PropertyOverrides = /* @__PURE__ */ React4.forwardRef(function PropertyOverr
       assertNever(action,);
   }
 },);
+var PropertyOverrides2 =
+  /* @__PURE__ */ (() => withCSS(PropertyOverridesWithoutCSS, `.${SSRVariantClassName} { display: contents }`, 'PropertyOverrides',))();
 var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function ResolveLinksInner({
   links,
   children,
@@ -43123,7 +43134,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.3.23',
+    'framer-motion': '11.3.28',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -43387,7 +43398,7 @@ export {
   PresenceContext,
   print,
   progress,
-  PropertyOverrides,
+  PropertyOverrides2 as PropertyOverrides,
   PropertyStore,
   propsForLink,
   pushLoadMoreHistory,
