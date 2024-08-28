@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-DZJOS6SY.js
+// https :https://app.framerstatic.com/chunk-LT23UL7F.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -3164,7 +3164,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.3.28';
+    this.version = '11.3.29';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -4299,8 +4299,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       element.addValue(key7, nextValue,);
       if (false) {
         warnOnce(
-          nextValue.version === '11.3.28',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.28 may not work as expected.`,
+          nextValue.version === '11.3.29',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.29 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -6832,20 +6832,22 @@ function resetDistortingTransform(key7, visualElement, values, sharedAnimationVa
     }
   }
 }
-function isOptimisedTransformAnimationInTree(projectionNode,) {
+function cancelTreeOptimisedTransformAnimations(projectionNode,) {
   projectionNode.hasCheckedOptimisedAppear = true;
-  if (projectionNode.root === projectionNode) return false;
+  if (projectionNode.root === projectionNode) return;
   const {
     visualElement,
   } = projectionNode.options;
-  if (!visualElement) {
-    return false;
-  } else if (window.MotionHasOptimisedTransformAnimation(getOptimisedAppearId(visualElement,),)) {
-    return true;
-  } else if (projectionNode.parent && !projectionNode.parent.hasCheckedOptimisedAppear) {
-    return isOptimisedTransformAnimationInTree(projectionNode.parent,);
-  } else {
-    return false;
+  if (!visualElement) return;
+  const appearId = getOptimisedAppearId(visualElement,);
+  if (window.MotionHasOptimisedTransformAnimation(appearId,)) {
+    window.MotionCancelOptimisedTransform(appearId,);
+  }
+  const {
+    parent,
+  } = projectionNode;
+  if (parent && !parent.hasCheckedOptimisedAppear) {
+    cancelTreeOptimisedTransformAnimations(parent,);
   }
 }
 function createProjectionNode2({
@@ -7057,8 +7059,8 @@ function createProjectionNode2({
         this.options.onExitComplete && this.options.onExitComplete();
         return;
       }
-      if (window.MotionHandoffCancelAll && isOptimisedTransformAnimationInTree(this,)) {
-        window.MotionHandoffCancelAll();
+      if (window.MotionCancelOptimisedTransform && !this.hasCheckedOptimisedAppear) {
+        cancelTreeOptimisedTransformAnimations(this,);
       }
       !this.root.isUpdating && this.root.startUpdate();
       if (this.isLayoutDirty) return;
@@ -9881,20 +9883,20 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       startTime: null,
     },);
     window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
-    window.MotionHandoffCancelAll = () => {
-      appearAnimationStore.forEach(({
-        animation,
-      }, animationId,) => {
-        if (animationId.endsWith('transform',)) {
-          animation.cancel();
-          appearAnimationStore.delete(animationId,);
-        }
-      },);
-      window.MotionHandoffCancelAll = void 0;
+    window.MotionHasOptimisedTransformAnimation = (elementId) => {
+      if (!elementId) return false;
+      const animationId = appearStoreId(elementId, 'transform',);
+      return Boolean(appearAnimationStore.get(animationId,),);
+    };
+    window.MotionCancelOptimisedTransform = (elementId) => {
+      const animationId = appearStoreId(elementId, 'transform',);
+      const data2 = appearAnimationStore.get(animationId,);
+      if (data2) {
+        data2.animation.cancel();
+        appearAnimationStore.delete(animationId,);
+      }
     };
     window.MotionHasOptimisedAnimation = (elementId) => Boolean(elementId && elementsWithAppearAnimations.has(elementId,),);
-    window.MotionHasOptimisedTransformAnimation = (elementId) =>
-      Boolean(elementId && appearAnimationStore.has(appearStoreId(elementId, 'transform',),),);
   }
   const startAnimation2 = () => {
     readyAnimation.cancel();
@@ -10082,7 +10084,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.AK6B77ND.js
+// https :https://app.framerstatic.com/framer.NYIVPCAJ.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -33742,6 +33744,7 @@ var CompatibilityDatabaseCollection = class {
       if (isNullish2(value,)) continue;
       const definition = this.schema[key7];
       if (isUndefined(definition,)) continue;
+      assert(definition.type !== 'unknown', 'Invalid definition type',);
       data2[key7] = {
         type: definition.type,
         value,
@@ -33780,56 +33783,277 @@ var CompatibilityDatabaseCollection = class {
     return Number(left.pointer,) - Number(right.pointer,);
   }
 };
+function convertToBoolean(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'boolean': {
+      return value.value;
+    }
+    case 'number':
+    case 'string': {
+      return Boolean(value.value,);
+    }
+  }
+  return false;
+}
+function convertToColor(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'color': {
+      return value.value;
+    }
+  }
+  return null;
+}
+function convertToDate(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'date': {
+      return value.value;
+    }
+    case 'number':
+    case 'string': {
+      const date = new Date(value.value,);
+      if (isValidDate(date,)) {
+        return date.toISOString();
+      }
+      return null;
+    }
+  }
+  return null;
+}
+function convertToEnum(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'enum':
+    case 'string': {
+      return value.value;
+    }
+  }
+  return null;
+}
+function convertToFile(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'file': {
+      return value.value;
+    }
+  }
+  return null;
+}
+function convertToResponsiveImage(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'responsiveimage': {
+      return value.value;
+    }
+  }
+  return null;
+}
+function convertToLink(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'link': {
+      return value.value;
+    }
+    case 'string': {
+      try {
+        const {
+          protocol,
+        } = new URL(value.value,);
+        if (protocol === 'http:' || protocol === 'https:') {
+          return value.value;
+        }
+        return null;
+      } catch {
+        return null;
+      }
+    }
+  }
+  return null;
+}
+function convertToNumber(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'number':
+    case 'string': {
+      const number2 = Number(value.value,);
+      if (Number.isFinite(number2,)) {
+        return number2;
+      }
+      return null;
+    }
+  }
+  return null;
+}
+function convertToRichText(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'richtext': {
+      return value.value;
+    }
+  }
+  return null;
+}
+function convertToString(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'string':
+    case 'number': {
+      return String(value.value,);
+    }
+  }
+  return null;
+}
+function convertToMultiCollectionReference(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'multicollectionreference': {
+      return value.value;
+    }
+  }
+  return null;
+}
 var DatabaseValue = {
+  /**
+   * Casts a value to a different type.
+   */
+  cast(value, definition,) {
+    switch (definition.type) {
+      case 'boolean': {
+        const result = convertToBoolean(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'boolean',
+          value: result,
+        };
+      }
+      case 'color': {
+        const result = convertToColor(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'color',
+          value: result,
+        };
+      }
+      case 'date': {
+        const result = convertToDate(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'date',
+          value: result,
+        };
+      }
+      case 'enum': {
+        const result = convertToEnum(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'enum',
+          value: result,
+        };
+      }
+      case 'file': {
+        const result = convertToFile(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'file',
+          value: result,
+        };
+      }
+      case 'link': {
+        const result = convertToLink(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'link',
+          value: result,
+        };
+      }
+      case 'number': {
+        const result = convertToNumber(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'number',
+          value: result,
+        };
+      }
+      case 'responsiveimage': {
+        const result = convertToResponsiveImage(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'responsiveimage',
+          value: result,
+        };
+      }
+      case 'richtext': {
+        const result = convertToRichText(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'richtext',
+          value: result,
+        };
+      }
+      case 'string': {
+        const result = convertToString(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'string',
+          value: result,
+        };
+      }
+      case 'multicollectionreference': {
+        const result = convertToMultiCollectionReference(value,);
+        if (isNull(result,)) return null;
+        return {
+          type: 'multicollectionreference',
+          value: result,
+        };
+      }
+      case 'unknown': {
+        return value;
+      }
+      default: {
+        assertNever(definition, 'Unsupported cast',);
+      }
+    }
+  },
   /**
    * Checks if the left value is equal to the right value. Returns false if
    * the values are not of the same type.
    */
-  equal(left, right, collation,) {
+  equal(left, right, collation4,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation,) === 0;
+    return compare(left, right, collation4,) === 0;
   },
   /**
    * Checks if the left value is less than the right value. Returns false if
    * the values are not of the same type.
    */
-  lessThan(left, right, collation,) {
+  lessThan(left, right, collation4,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation,) < 0;
+    return compare(left, right, collation4,) < 0;
   },
   /**
    * Checks if the left value is less than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  lessThanOrEqual(left, right, collation,) {
+  lessThanOrEqual(left, right, collation4,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation,) <= 0;
+    return compare(left, right, collation4,) <= 0;
   },
   /**
    * Checks if the left value is greater than the right value. Returns false
    * if the values are not of the same type.
    */
-  greaterThan(left, right, collation,) {
+  greaterThan(left, right, collation4,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation,) > 0;
+    return compare(left, right, collation4,) > 0;
   },
   /**
    * Checks if the left value is greater than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  greaterThanOrEqual(left, right, collation,) {
+  greaterThanOrEqual(left, right, collation4,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation,) >= 0;
+    return compare(left, right, collation4,) >= 0;
   },
   /**
    * Checks if the left value is in the right value.
@@ -33872,7 +34096,7 @@ var DatabaseValue = {
     }
   },
 };
-function compare(left, right, collation,) {
+function compare(left, right, collation4,) {
   if (isNull(left,) || isNull(right,)) {
     assert(left === right,);
     return 0;
@@ -33944,7 +34168,7 @@ function compare(left, right, collation,) {
       assert(left.type === right.type,);
       let leftValue = left.value;
       let rightValue = right.value;
-      if (collation.type === 0) {
+      if (collation4.type === 0) {
         leftValue = left.value.toLowerCase();
         rightValue = right.value.toLowerCase();
       }
@@ -34045,7 +34269,7 @@ var ScalarLiteralValue = class extends ScalarExpression {
       },
       isNull(value,) ? null : {
         type: 'date',
-        value: value.toISOString(),
+        value,
       },
     );
   }
@@ -34597,16 +34821,6 @@ var ScalarTypeCastBoolean = class extends ScalarTypeCast {
     };
   }
 };
-function convertToBoolean(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'boolean':
-    case 'number':
-    case 'string': {
-      return Boolean(value.value,);
-    }
-  }
-  return false;
-}
 var ScalarTypeCastDate = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
@@ -34627,24 +34841,10 @@ var ScalarTypeCastDate = class extends ScalarTypeCast {
     }
     return {
       type: 'date',
-      value: date.toISOString(),
+      value: date,
     };
   }
 };
-function convertToDate(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'date':
-    case 'number':
-    case 'string': {
-      const date = new Date(value.value,);
-      if (isValidDate(date,)) {
-        return date;
-      }
-      return null;
-    }
-  }
-  return null;
-}
 var ScalarTypeCastNumber = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
@@ -34669,19 +34869,6 @@ var ScalarTypeCastNumber = class extends ScalarTypeCast {
     };
   }
 };
-function convertToNumber(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'number':
-    case 'string': {
-      const number2 = Number(value.value,);
-      if (Number.isFinite(number2,)) {
-        return number2;
-      }
-      return null;
-    }
-  }
-  return null;
-}
 var ScalarTypeCastString = class extends ScalarTypeCast {
   constructor() {
     super(...arguments,);
@@ -34706,15 +34893,6 @@ var ScalarTypeCastString = class extends ScalarTypeCast {
     };
   }
 };
-function convertToString(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'string':
-    case 'number': {
-      return String(value.value,);
-    }
-  }
-  return null;
-}
 function convertExpression(expression, schema, typeAffinity,) {
   const scalarExpression = getScalarExpression(expression, schema, typeAffinity,);
   const isLiteralValue = scalarExpression instanceof ScalarLiteralValue;
@@ -34786,7 +34964,8 @@ function getScalarLiteralValue(value,) {
     return ScalarLiteralValue.fromBoolean(value,);
   }
   if (isValidDate(value,)) {
-    return ScalarLiteralValue.fromDate(value,);
+    const string = value.toISOString();
+    return ScalarLiteralValue.fromDate(string,);
   }
   if (isNumber2(value,)) {
     return ScalarLiteralValue.fromNumber(value,);
@@ -35416,7 +35595,7 @@ var SortItemsPlan = class extends QueryPlan {
         const {
           expression,
           direction,
-          collation,
+          collation: collation4,
         } of this.orderExpressions
       ) {
         const isAscending = direction === 'asc';
@@ -35426,13 +35605,13 @@ var SortItemsPlan = class extends QueryPlan {
         }
         const left = expression.evaluate(leftItem,);
         const right = expression.evaluate(rightItem,);
-        if (DatabaseValue.equal(left, right, collation,)) {
+        if (DatabaseValue.equal(left, right, collation4,)) {
           continue;
         }
-        if (DatabaseValue.lessThan(left, right, collation,) || isNullish2(left,)) {
+        if (DatabaseValue.lessThan(left, right, collation4,) || isNullish2(left,)) {
           return isAscending ? -1 : 1;
         }
-        if (DatabaseValue.greaterThan(left, right, collation,) || isNullish2(right,)) {
+        if (DatabaseValue.greaterThan(left, right, collation4,) || isNullish2(right,)) {
           return isAscending ? 1 : -1;
         }
         throw new Error('Invalid comparison result.',);
@@ -35442,10 +35621,10 @@ var SortItemsPlan = class extends QueryPlan {
   }
 };
 var ScalarOrderExpression = class {
-  constructor(expression, direction, collation,) {
+  constructor(expression, direction, collation4,) {
     this.expression = expression;
     this.direction = direction;
-    this.collation = collation;
+    this.collation = collation4;
   }
 };
 var SliceItemsPlan = class extends QueryPlan {
@@ -35536,6 +35715,2684 @@ var RichTextResolver = class {
     throw new Error(`Rich text field not found: ${key7}`,);
   }
 };
+function Hash(value,) {
+  return value;
+}
+function isHashable(value,) {
+  return isObject2(value,) && isFunction(value.getHash,);
+}
+function calculateHash(name, ...values) {
+  const hashes = values.map((value) => {
+    if (isHashable(value,)) {
+      return value.getHash();
+    }
+    return JSON.stringify(value,);
+  },);
+  return Hash(`${name}(${hashes.join(', ',)})`,);
+}
+var RichText = class {
+  constructor(data2, pointer,) {
+    this.data = data2;
+    this.pointer = pointer;
+    __publicField(this, 'cached',);
+  }
+  resolve() {
+    this.cached ?? (this.cached = this.data.resolveRichText(this.pointer,));
+    return this.cached;
+  }
+};
+var VIRTUAL_INDEX_FIELD = 'index';
+var Metadata = class extends Set {
+  merge(other,) {
+    for (const item of other) {
+      this.add(item,);
+    }
+  }
+  equals(other,) {
+    if (this === other) return true;
+    if (this.size !== other.size) return false;
+    for (const item of this) {
+      if (!other.has(item,)) return false;
+    }
+    return true;
+  }
+  subsetOf(other,) {
+    if (this === other) return true;
+    if (this.size > other.size) return false;
+    for (const item of this) {
+      if (!other.has(item,)) return false;
+    }
+    return true;
+  }
+  getHash() {
+    const ids = [];
+    for (const item of this) {
+      ids.push(item.id,);
+    }
+    ids.sort((a, b,) => a - b);
+    return calculateHash(this.name, ...ids,);
+  }
+};
+function CollectionId(id3,) {
+  return id3;
+}
+var CollectionMetadata = class {
+  constructor(id3, name, data2,) {
+    this.id = id3;
+    this.name = name;
+    this.data = data2;
+    __publicField(this, 'indexes', new Indexes(),);
+    __publicField(this, 'fields', new Fields(),);
+  }
+};
+function IndexId(id3,) {
+  return id3;
+}
+var IndexMetadata = class {
+  constructor(id3, data2, collection, lookupNodes, constraint, ordering,) {
+    this.id = id3;
+    this.data = data2;
+    this.collection = collection;
+    this.lookupNodes = lookupNodes;
+    this.constraint = constraint;
+    this.ordering = ordering;
+    __publicField(this, 'resolvedFields', new Fields(),);
+    for (const fieldName in data2.schema) {
+      for (const field of collection.fields) {
+        if (field.name === fieldName) {
+          this.resolvedFields.add(field,);
+        }
+      }
+    }
+  }
+};
+var Indexes = class extends Metadata {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'name', 'Indexes',);
+  }
+};
+function FieldId(id3,) {
+  return id3;
+}
+var FieldMetadata = class {
+  constructor(id3, name, definition, collection,) {
+    this.id = id3;
+    this.name = name;
+    this.definition = definition;
+    this.collection = collection;
+  }
+  getValue(item,) {
+    const value = item.data[this.name];
+    if ((value == null ? void 0 : value.type) === 'richtext') {
+      assert(this.collection, 'Rich text field must have a collection',);
+      return {
+        type: 'richtext',
+        value: new RichText(this.collection.data, value.value,),
+      };
+    }
+    return value ?? null;
+  }
+};
+var Fields = class extends Metadata {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'name', 'Fields',);
+  }
+};
+var AbstractNode = class {};
+var collation = {
+  type: 0,
+  /* CaseInsensitive */
+};
+var ScalarNode = class extends AbstractNode {
+  constructor(referencedFields,) {
+    super();
+    this.referencedFields = referencedFields;
+  }
+};
+var collation2 = {
+  type: 0,
+  /* CaseInsensitive */
+};
+var CaseCondition = class {
+  constructor(when, then,) {
+    this.when = when;
+    this.then = then;
+  }
+  getHash() {
+    return calculateHash('CaseCondition', this.when, this.then,);
+  }
+};
+var ScalarCase2 = class extends ScalarNode {
+  constructor(input, conditions, otherwise,) {
+    const referencedFields = new Fields();
+    if (input) {
+      referencedFields.merge(input.referencedFields,);
+    }
+    for (const condition of conditions) {
+      referencedFields.merge(condition.when.referencedFields,);
+      referencedFields.merge(condition.then.referencedFields,);
+    }
+    if (otherwise) {
+      referencedFields.merge(otherwise.referencedFields,);
+    }
+    super(referencedFields,);
+    this.input = input;
+    this.conditions = conditions;
+    this.otherwise = otherwise;
+    __publicField(this, 'definition', {
+      type: 'unknown',
+      isNullable: true,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarCase', this.input, ...this.conditions, this.otherwise,);
+  }
+  toString() {
+    let result = 'CASE';
+    if (this.input) {
+      result = `${result} ${this.input}`;
+    }
+    for (
+      const {
+        when,
+        then,
+      } of this.conditions
+    ) {
+      result = `${result} WHEN ${when} THEN ${then}`;
+    }
+    if (this.otherwise) {
+      result = `${result} ELSE ${this.otherwise}`;
+    }
+    return `${result} END`;
+  }
+  evaluate(tuple,) {
+    var _a, _b;
+    const input = ((_a = this.input) == null ? void 0 : _a.evaluate(tuple,)) ?? null;
+    for (const condition of this.conditions) {
+      const when = condition.when.evaluate(tuple,);
+      if (this.input ? DatabaseValue.equal(input, when, collation2,) : convertToBoolean(when,)) {
+        return condition.then.evaluate(tuple,);
+      }
+    }
+    return ((_b = this.otherwise) == null ? void 0 : _b.evaluate(tuple,)) ?? null;
+  }
+};
+var OrderingField = class {
+  constructor(field, direction = 'asc',) {
+    this.field = field;
+    this.direction = direction;
+  }
+  getHash() {
+    return calculateHash('OrderingField', this.field.id, this.direction,);
+  }
+};
+var Ordering = class {
+  constructor(ordering,) {
+    this.ordering = ordering;
+    __publicField(this, 'fields', [],);
+    if (ordering) {
+      this.fields.push(...ordering.fields,);
+    }
+  }
+  get length() {
+    return this.fields.length;
+  }
+  getHash() {
+    return calculateHash('Ordering', ...this.fields,);
+  }
+  push(field,) {
+    this.fields.push(field,);
+  }
+  equals(other,) {
+    if (this === other) return true;
+    if (this.length !== other.length) return false;
+    return this.getHash() === other.getHash();
+  }
+};
+var RequiredProps = class {
+  constructor(ordering, resolvedFields,) {
+    this.ordering = ordering;
+    this.resolvedFields = resolvedFields;
+  }
+  getHash() {
+    return calculateHash('RequiredProps', this.ordering, this.resolvedFields,);
+  }
+  /**
+   * Required props with no ordering and no resolved fields are considered
+   * minimal. Every node can provide them.
+   */
+  get isMinimal() {
+    return this.ordering.length === 0 && this.resolvedFields.size === 0;
+  }
+  /**
+   * Checks if the node can provide the required props. If it can't, we need
+   * to add enforcers that provides them.
+   *
+   * Some nodes don't provide the required props directly, but can pass them
+   * through to their children. E.g. a `RelationalFilter` returns the relation
+   * in the same order and with the same resolved fields as its input. These
+   * nodes should return `true` and pass the required props to their children.
+   */
+  canProvide(node,) {
+    return this.canProvideOrdering(node,) && this.canProvideResolvedFields(node,);
+  }
+  /**
+   * Checks if the given node can provide the required ordering. If it can't,
+   * we need to add an `EnforcerSort` node that provides it.
+   */
+  canProvideOrdering(node,) {
+    if (this.ordering.length === 0) return true;
+    return node.canProvideOrdering(this.ordering,);
+  }
+  /**
+   * Checks if the given node can provide the required resolved fields. If it
+   * can't, we need to add an `EnforcerResolve` node that provides it.
+   */
+  canProvideResolvedFields(node,) {
+    if (this.resolvedFields.size === 0) return true;
+    return node.canProvideResolvedFields(this.resolvedFields,);
+  }
+};
+var Scope = class {
+  constructor(parent,) {
+    this.parent = parent;
+    __publicField(this, 'node',);
+    __publicField(this, 'defaultOrdering', new Ordering(),);
+    __publicField(this, 'ordering',);
+    __publicField(this, 'fields', [],);
+    this.defaultOrdering = new Ordering(parent == null ? void 0 : parent.defaultOrdering,);
+  }
+  /**
+   * Returns the last node built in the scope and removes it from the scope.
+   * Throws an error if no node was built in the scope yet.
+   */
+  takeNode() {
+    const node = this.node;
+    assert(node, 'Node is missing',);
+    this.node = void 0;
+    return node;
+  }
+  /**
+   * Sets the last node built in the scope. Throws an error if there is
+   * already a node in the scope.
+   */
+  setNode(node,) {
+    assert(!this.node, 'Node already set',);
+    this.node = node;
+  }
+  setOrdering(ordering,) {
+    this.ordering = ordering;
+  }
+  /**
+   * Create a new scope with the this scope as its parent.
+   */
+  push() {
+    return new Scope(this,);
+  }
+  /**
+   * Creates a new scope with the parent of the this scope as its parent.
+   */
+  replace() {
+    return new Scope(this.parent,);
+  }
+  /**
+   * Adds a field to this scope. Any fields that are added will be available
+   * in the this scope and all of its children.
+   */
+  addField(scopeField,) {
+    this.fields.push(scopeField,);
+    if (scopeField.field.name === VIRTUAL_INDEX_FIELD) {
+      const orderingField = new OrderingField(scopeField.field,);
+      this.defaultOrdering.push(orderingField,);
+    }
+  }
+  /**
+   * Merges all fields from the given scope into the this scope.
+   */
+  addFieldsFromScope(scope,) {
+    for (const scopeField of scope.fields) {
+      this.addField(scopeField,);
+    }
+  }
+  /**
+   * Resolves a field from this scope. If the field is not found, the parent
+   * scope is checked. If the name of a field is ambiguous, an error is
+   * thrown.
+   */
+  resolveField(name, collection,) {
+    var _a;
+    const candidates = [];
+    for (const field of this.fields) {
+      if (field.name !== name) continue;
+      if (collection && field.collectionName !== collection) continue;
+      candidates.push(field,);
+    }
+    if (candidates.length === 1) {
+      return candidates[0];
+    }
+    if (candidates.length > 1) {
+      throw new Error('Ambiguous fields',);
+    }
+    return (_a = this.parent) == null ? void 0 : _a.resolveField(name, collection,);
+  }
+  /**
+   * Returns the required ordering for the scope.
+   */
+  getRequiredOrdering() {
+    const ordering = new Ordering(this.ordering,);
+    for (const field of this.defaultOrdering.fields) {
+      ordering.push(field,);
+    }
+    return ordering;
+  }
+  /**
+   * Returns the required resolved fields for the scope.
+   */
+  getRequiredResolvedFields() {
+    const resolvedFields = new Fields();
+    for (
+      const {
+        field,
+      } of this.fields
+    ) {
+      if (field.collection) {
+        resolvedFields.add(field,);
+      }
+    }
+    return resolvedFields;
+  }
+  /**
+   * Returns the set of required physical props for this scope. This is used
+   * to create the required props for the root node in the optimizer.
+   */
+  getRequiredProps() {
+    const ordering = this.getRequiredOrdering();
+    const resolvedFields = this.getRequiredResolvedFields();
+    return new RequiredProps(ordering, resolvedFields,);
+  }
+  /**
+   * Returns a map of the fields in this scope, with their scope names as
+   * keys. This is used to create the final `QueryResult` with the correct
+   * field names.
+   */
+  getNamedFields() {
+    const namedFields = /* @__PURE__ */ new Map();
+    for (
+      const {
+        name,
+        field,
+      } of this.fields
+    ) {
+      namedFields.set(name, field,);
+    }
+    return namedFields;
+  }
+};
+var Builder = class {
+  constructor(normalizer, query, locale,) {
+    this.normalizer = normalizer;
+    this.query = query;
+    this.locale = locale;
+    __publicField(this, 'collectionId', 0,);
+    __publicField(this, 'indexId', 0,);
+    __publicField(this, 'fieldId', 0,);
+  }
+  build() {
+    const inScope = new Scope();
+    return this.buildQuery(inScope, this.query,);
+  }
+  buildQuery(inScope, query,) {
+    const select = {
+      type: 'Select',
+      ...query,
+    };
+    return this.buildSelect(inScope, select,);
+  }
+  buildSelect(inScope, select,) {
+    const fromScope = this.buildFrom(inScope, select.from,);
+    if (select.where) {
+      const input = fromScope.takeNode();
+      const predicate = this.buildExpression(fromScope, select.where,);
+      const node = this.normalizer.newRelationalFilter(input, predicate,);
+      fromScope.setNode(node,);
+    }
+    const projectionScope = this.buildSelectList(fromScope, select.select,);
+    if (select.orderBy) {
+      const ordering2 = new Ordering();
+      for (const order of select.orderBy) {
+        assert(order.type === 'Identifier', 'Unsupported order type',);
+        const scopeField = fromScope.resolveField(order.name, order.collection,);
+        if (isUndefined(scopeField,)) continue;
+        const orderingField = new OrderingField(scopeField.field, order.direction,);
+        ordering2.push(orderingField,);
+      }
+      projectionScope.setOrdering(ordering2,);
+    }
+    const ordering = projectionScope.getRequiredOrdering();
+    if (select.offset) {
+      const input = projectionScope.takeNode();
+      const offset = this.buildExpression(inScope, select.offset,);
+      const node = this.normalizer.newRelationalOffset(input, offset, ordering,);
+      projectionScope.setNode(node,);
+    }
+    if (select.limit) {
+      const input = projectionScope.takeNode();
+      const limit = this.buildExpression(inScope, select.limit,);
+      const node = this.normalizer.newRelationalLimit(input, limit, ordering,);
+      projectionScope.setNode(node,);
+    }
+    return projectionScope;
+  }
+  buildSelectList(inScope, selects,) {
+    const outScope = inScope.push();
+    const passthrough = new Fields();
+    for (const select of selects) {
+      assert(select.type === 'Identifier', 'Unsupported select type',);
+      const scopeField = inScope.resolveField(select.name, select.collection,);
+      if (isUndefined(scopeField,)) continue;
+      passthrough.add(scopeField.field,);
+      outScope.addField({
+        ...scopeField,
+        name: select.alias ?? scopeField.name,
+      },);
+    }
+    const input = inScope.takeNode();
+    const node = this.normalizer.newRelationalProject(input, [], passthrough,);
+    outScope.setNode(node,);
+    return outScope;
+  }
+  buildFrom(inScope, from,) {
+    switch (from.type) {
+      case 'Collection':
+        return this.buildCollection(inScope, from,);
+      case 'LeftJoin':
+        return this.buildJoin(inScope, from,);
+      default:
+        assertNever(from, 'Unsupported from type',);
+    }
+  }
+  buildCollection(inScope, from,) {
+    const outScope = inScope.push();
+    const collectionData = getCollection(from.data, this.locale,);
+    const collectionName = from.alias;
+    const collectionId = CollectionId(this.collectionId++,);
+    const collection = new CollectionMetadata(collectionId, collectionName, collectionData,);
+    for (const [fieldName, definition,] of Object.entries(collectionData.schema,)) {
+      const fieldId = FieldId(this.fieldId++,);
+      const field = new FieldMetadata(fieldId, fieldName, definition, collection,);
+      outScope.addField({
+        field,
+        name: fieldName,
+        collectionName,
+      },);
+      collection.fields.add(field,);
+    }
+    {
+      const definition = {
+        type: 'number',
+        isNullable: false,
+      };
+      const fieldId = FieldId(this.fieldId++,);
+      const field = new FieldMetadata(fieldId, VIRTUAL_INDEX_FIELD, definition, collection,);
+      outScope.addField({
+        field,
+        name: VIRTUAL_INDEX_FIELD,
+        collectionName,
+      },);
+    }
+    for (const indexData of collectionData.indexes) {
+      const lookupNodes = [];
+      for (const expression of indexData.fields) {
+        const node2 = this.buildExpression(outScope, expression,);
+        lookupNodes.push(node2,);
+      }
+      let constraint;
+      if (indexData.where) {
+        constraint = this.buildExpression(outScope, indexData.where,);
+      }
+      const ordering = new Ordering();
+      const indexId = IndexId(this.indexId++,);
+      const index = new IndexMetadata(indexId, indexData, collection, lookupNodes, constraint, ordering,);
+      collection.indexes.add(index,);
+    }
+    const node = this.normalizer.newRelationalScan(collection,);
+    outScope.setNode(node,);
+    return outScope;
+  }
+  buildJoin(inScope, from,) {
+    const leftScope = this.buildFrom(inScope, from.left,);
+    const rightScope = this.buildFrom(inScope, from.right,);
+    const outScope = inScope.push();
+    outScope.addFieldsFromScope(leftScope,);
+    outScope.addFieldsFromScope(rightScope,);
+    const constraint = this.buildExpression(outScope, from.constraint,);
+    const left = leftScope.takeNode();
+    const right = rightScope.takeNode();
+    let node;
+    switch (from.type) {
+      case 'LeftJoin':
+        node = this.normalizer.newRelationalLeftJoin(left, right, constraint,);
+        break;
+      default:
+        assertNever(from.type, 'Unsupported join type',);
+    }
+    outScope.setNode(node,);
+    return outScope;
+  }
+  buildExpression(inScope, expression,) {
+    switch (expression.type) {
+      case 'Identifier':
+        return this.buildIdentifier(inScope, expression,);
+      case 'LiteralValue':
+        return this.buildLiteralValue(inScope, expression,);
+      case 'FunctionCall':
+        return this.buildFunctionCall(inScope, expression,);
+      case 'Case':
+        return this.buildCase(inScope, expression,);
+      case 'UnaryOperation':
+        return this.buildUnaryOperation(inScope, expression,);
+      case 'BinaryOperation':
+        return this.buildBinaryOperation(inScope, expression,);
+      case 'TypeCast':
+        return this.buildTypeCast(inScope, expression,);
+      default:
+        assertNever(expression, 'Unsupported expression',);
+    }
+  }
+  buildIdentifier(inScope, expression,) {
+    const scopeField = inScope.resolveField(expression.name, expression.collection,);
+    if (scopeField) return this.normalizer.newScalarVariable(scopeField.field,);
+    const definition = {
+      type: 'unknown',
+      isNullable: true,
+    };
+    return this.normalizer.newScalarConstant(definition, null,);
+  }
+  buildLiteralValue(inScope, expression,) {
+    const value = getDatabaseValue(expression.value,);
+    const definition = {
+      type: 'unknown',
+      isNullable: true,
+    };
+    return this.normalizer.newScalarConstant(definition, value,);
+  }
+  buildFunctionCall(inScope, expression,) {
+    const sourceExpression = expression.arguments[0];
+    assert(sourceExpression, 'Invalid arguments',);
+    const source = this.buildExpression(inScope, sourceExpression,);
+    const targetExpression = expression.arguments[1];
+    assert(targetExpression, 'Invalid arguments',);
+    const target = this.buildExpression(inScope, targetExpression,);
+    switch (expression.functionName) {
+      case 'CONTAINS':
+        return this.normalizer.newScalarContains(source, target,);
+      case 'STARTS_WITH':
+        return this.normalizer.newScalarStartsWith(source, target,);
+      case 'ENDS_WITH':
+        return this.normalizer.newScalarEndsWith(source, target,);
+      default:
+        throw new Error('Unsupported function name',);
+    }
+  }
+  buildCase(inScope, expression,) {
+    let input;
+    if (expression.value) {
+      input = this.buildExpression(inScope, expression.value,);
+    }
+    const conditions = expression.conditions.map((condition) => {
+      const when = this.buildExpression(inScope, condition.when,);
+      const then = this.buildExpression(inScope, condition.then,);
+      return new CaseCondition(when, then,);
+    },);
+    let otherwise;
+    if (expression.else) {
+      otherwise = this.buildExpression(inScope, expression.else,);
+    }
+    return this.normalizer.newScalarCase(input, conditions, otherwise,);
+  }
+  buildUnaryOperation(inScope, expression,) {
+    const input = this.buildExpression(inScope, expression.value,);
+    switch (expression.operator) {
+      case 'not':
+        return this.normalizer.newScalarNot(input,);
+      default:
+        assertNever(expression.operator, 'Unsupported unary operator',);
+    }
+  }
+  buildBinaryOperation(inScope, expression,) {
+    const left = this.buildExpression(inScope, expression.left,);
+    const right = this.buildExpression(inScope, expression.right,);
+    switch (expression.operator) {
+      case 'and':
+        return this.normalizer.newScalarAnd(left, right,);
+      case 'or':
+        return this.normalizer.newScalarOr(left, right,);
+      case '==':
+        return this.normalizer.newScalarEquals(left, right,);
+      case '!=':
+        return this.normalizer.newScalarNotEquals(left, right,);
+      case '<':
+        return this.normalizer.newScalarLessThan(left, right,);
+      case '<=':
+        return this.normalizer.newScalarLessThanOrEqual(left, right,);
+      case '>':
+        return this.normalizer.newScalarGreaterThan(left, right,);
+      case '>=':
+        return this.normalizer.newScalarGreaterThanOrEqual(left, right,);
+      case 'in':
+        return this.normalizer.newScalarIn(left, right,);
+      default:
+        assertNever(expression.operator, 'Unsupported binary operator',);
+    }
+  }
+  buildTypeCast(inScope, expression,) {
+    const input = this.buildExpression(inScope, expression.value,);
+    switch (expression.dataType) {
+      case 'BOOLEAN': {
+        const definition = {
+          type: 'boolean',
+          isNullable: true,
+        };
+        return this.normalizer.newScalarCast(input, definition,);
+      }
+      case 'DATE': {
+        const definition = {
+          type: 'date',
+          isNullable: true,
+        };
+        return this.normalizer.newScalarCast(input, definition,);
+      }
+      case 'NUMBER': {
+        const definition = {
+          type: 'number',
+          isNullable: true,
+        };
+        return this.normalizer.newScalarCast(input, definition,);
+      }
+      case 'STRING': {
+        const definition = {
+          type: 'string',
+          isNullable: true,
+        };
+        return this.normalizer.newScalarCast(input, definition,);
+      }
+      default:
+        throw new Error('Unsupported data type',);
+    }
+  }
+};
+function getCollection(data2, locale,) {
+  if (isAnyLegacyCollection(data2,)) {
+    return new CompatibilityDatabaseCollection(data2, locale,);
+  }
+  if (isDatabaseCollection(data2,)) {
+    return data2;
+  }
+  if (isLocalizedDatabaseCollection(data2,)) {
+    while (locale) {
+      const collection = data2.collectionByLocaleId[locale.id];
+      if (collection) return collection;
+      locale = locale.fallback;
+    }
+    return data2.collectionByLocaleId.default;
+  }
+  assertNever(data2, 'Unsupported collection type',);
+}
+function getDatabaseValue(value,) {
+  if (isBoolean(value,)) {
+    return {
+      type: 'boolean',
+      value,
+    };
+  }
+  if (isValidDate(value,)) {
+    return {
+      type: 'date',
+      value: value.toISOString(),
+    };
+  }
+  if (isNumber2(value,)) {
+    return {
+      type: 'number',
+      value,
+    };
+  }
+  if (isString22(value,)) {
+    return {
+      type: 'string',
+      value,
+    };
+  }
+  if (isArray(value,) && value.every(isString22,)) {
+    return {
+      type: 'multicollectionreference',
+      value,
+    };
+  }
+  return null;
+}
+function getNetworkLatency() {
+  return 25;
+}
+function getNetworkSpeed() {
+  return 100 * 125;
+}
+var KB = 1e3;
+var Cost = class {
+  constructor(network,) {
+    this.network = network;
+  }
+  static estimate(totalRequests, transferredBytes,) {
+    const latency = getNetworkLatency();
+    const speed = getNetworkSpeed();
+    const network = totalRequests * latency + transferredBytes / speed;
+    return new Cost(network,);
+  }
+  static max(left, right,) {
+    const network = Math.max(left.network, right.network,);
+    return new Cost(network,);
+  }
+  static compare(left, right,) {
+    if (left.network < right.network) return -1;
+    if (left.network > right.network) return 1;
+    return 0;
+  }
+  add(cost,) {
+    this.network += cost.network;
+    return this;
+  }
+  toString() {
+    return `${this.network}ms`;
+  }
+};
+var RelationalNode = class extends AbstractNode {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'group',);
+  }
+  /**
+   * Returns the group that the node belongs to. Throws an error if the node
+   * is not in a group. This should only happen in the constructor because
+   * every node is added to a group right after creation.
+   */
+  getGroup() {
+    assert(this.group, 'Node must be in a group',);
+    return this.group;
+  }
+  /**
+   * Adds the node to the given group. Throws an error if the node is already
+   * in a group.
+   */
+  setGroup(group,) {
+    assert(!this.group, 'Node is already in a group',);
+    this.group = group;
+  }
+};
+var RelationalFilter = class extends RelationalNode {
+  constructor(input, predicate,) {
+    super();
+    this.input = input;
+    this.predicate = predicate;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalFilter', this.inputGroup.id, this.predicate,);
+  }
+  getOutputFields() {
+    return this.inputGroup.relational.outputFields;
+  }
+  canProvideOrdering() {
+    return true;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields(required.resolvedFields,);
+    resolvedFields.merge(this.predicate.referencedFields,);
+    return new RequiredProps(required.ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new RelationalFilter(input, this.predicate,);
+  }
+  async execute() {
+    const input = await this.input.execute();
+    return input.filter((tuple) => {
+      const result = this.predicate.evaluate(tuple,);
+      return convertToBoolean(result,);
+    },);
+  }
+};
+var Tuple = class {
+  constructor() {
+    __publicField(this, 'pointers', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'values', /* @__PURE__ */ new Map(),);
+  }
+  getKey() {
+    const pointers = this.pointers.values();
+    return Array.from(pointers,).join('-',);
+  }
+  addValue(field, value,) {
+    this.values.set(field, value,);
+  }
+  getValue(field,) {
+    return this.values.get(field,) ?? null;
+  }
+  mergeValues(tuple,) {
+    for (const [field, value,] of tuple.values) {
+      this.addValue(field, value,);
+    }
+  }
+  addPointer(collection, pointer,) {
+    this.pointers.set(collection, pointer,);
+  }
+  getPointer(collection,) {
+    return this.pointers.get(collection,);
+  }
+  mergePointers(tuple,) {
+    for (const [collection, pointer,] of tuple.pointers) {
+      this.addPointer(collection, pointer,);
+    }
+  }
+  merge(tuple,) {
+    this.mergeValues(tuple,);
+    this.mergePointers(tuple,);
+  }
+};
+var Relation = class {
+  constructor(fields, tuples = [],) {
+    this.fields = fields;
+    this.tuples = tuples;
+  }
+  push(tuple,) {
+    this.tuples.push(tuple,);
+  }
+  filter(predicate,) {
+    const tuples = this.tuples.filter(predicate,);
+    return new Relation(this.fields, tuples,);
+  }
+  map(fields, callback,) {
+    const tuples = this.tuples.map(callback,);
+    return new Relation(fields, tuples,);
+  }
+  sort(callback,) {
+    const tuples = Array.from(this.tuples,).sort(callback,);
+    return new Relation(this.fields, tuples,);
+  }
+  slice(start, end,) {
+    const tuples = this.tuples.slice(start, end,);
+    return new Relation(this.fields, tuples,);
+  }
+  union(other,) {
+    const fields = new Fields();
+    for (const field of this.fields) {
+      if (other.fields.has(field,)) {
+        fields.add(field,);
+      }
+    }
+    const keys3 = /* @__PURE__ */ new Set();
+    const result = new Relation(fields,);
+    for (const tuple of this.tuples) {
+      const key7 = tuple.getKey();
+      keys3.add(key7,);
+      result.push(tuple,);
+    }
+    for (const tuple of other.tuples) {
+      const key7 = tuple.getKey();
+      if (keys3.has(key7,)) continue;
+      result.push(tuple,);
+    }
+    return result;
+  }
+  intersection(other,) {
+    const fields = new Fields();
+    for (const field of this.fields) {
+      if (other.fields.has(field,)) {
+        fields.add(field,);
+      }
+    }
+    const keys3 = /* @__PURE__ */ new Set();
+    const result = new Relation(fields,);
+    for (const tuple of this.tuples) {
+      const key7 = tuple.getKey();
+      keys3.add(key7,);
+    }
+    for (const tuple of other.tuples) {
+      const key7 = tuple.getKey();
+      if (!keys3.has(key7,)) continue;
+      result.push(tuple,);
+    }
+    return result;
+  }
+};
+var RelationalIndexLookup = class extends RelationalNode {
+  constructor(index, query,) {
+    super();
+    this.index = index;
+    this.query = query;
+  }
+  getHash() {
+    return calculateHash('RelationalIndexLookup', this.index.id, ...this.query,);
+  }
+  getOutputFields() {
+    return this.index.collection.fields;
+  }
+  canProvideOrdering(ordering,) {
+    return ordering.equals(this.index.ordering,);
+  }
+  canProvideResolvedFields(resolvedFields,) {
+    return resolvedFields.subsetOf(this.index.resolvedFields,);
+  }
+  optimize() {
+    const isFullScan = this.query.every((lookup) => lookup.type === 'All'/* All */
+    );
+    return Cost.estimate(1, isFullScan ? 100 * KB : 50 * KB,);
+  }
+  getOptimized() {
+    return new RelationalIndexLookup(this.index, this.query,);
+  }
+  async execute() {
+    const index = this.index;
+    const collection = index.collection;
+    const outputFields = this.getOutputFields();
+    const items = await index.data.lookupItems(this.query,);
+    const tuples = items.map((item) => {
+      const tuple = new Tuple();
+      for (const field of index.resolvedFields) {
+        const value = field.getValue(item,);
+        tuple.addPointer(collection, item.pointer,);
+        tuple.addValue(field, value,);
+      }
+      return tuple;
+    },);
+    return new Relation(outputFields, tuples,);
+  }
+};
+var RelationalIntersection = class extends RelationalNode {
+  constructor(left, right,) {
+    super();
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'leftGroup', this.left.getGroup(),);
+    __publicField(this, 'rightGroup', this.right.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalIntersection', this.leftGroup.id, this.rightGroup.id,);
+  }
+  getOutputFields() {
+    const outputFields = new Fields();
+    const leftOutputFields = this.leftGroup.relational.outputFields;
+    const rightOutputFields = this.rightGroup.relational.outputFields;
+    for (const field of leftOutputFields) {
+      if (rightOutputFields.has(field,)) {
+        outputFields.add(field,);
+      }
+    }
+    return outputFields;
+  }
+  canProvideOrdering() {
+    return false;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getChildRequiredProps(required,) {
+    const ordering = new Ordering();
+    return new RequiredProps(ordering, required.resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const leftRequired = this.getChildRequiredProps(required,);
+    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
+    const rightRequired = this.getChildRequiredProps(required,);
+    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized(required,) {
+    const leftRequired = this.getChildRequiredProps(required,);
+    const left = this.leftGroup.getOptimized(leftRequired,);
+    const rightRequired = this.getChildRequiredProps(required,);
+    const right = this.rightGroup.getOptimized(rightRequired,);
+    return new RelationalIntersection(left, right,);
+  }
+  async execute() {
+    const left = await this.left.execute();
+    const right = await this.right.execute();
+    return left.intersection(right,);
+  }
+};
+var RelationalLeftJoin = class extends RelationalNode {
+  constructor(left, right, constraint,) {
+    super();
+    this.left = left;
+    this.right = right;
+    this.constraint = constraint;
+    __publicField(this, 'leftGroup', this.left.getGroup(),);
+    __publicField(this, 'rightGroup', this.right.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalLeftJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
+  }
+  getOutputFields() {
+    const outputFields = new Fields();
+    outputFields.merge(this.leftGroup.relational.outputFields,);
+    outputFields.merge(this.rightGroup.relational.outputFields,);
+    return outputFields;
+  }
+  canProvideOrdering() {
+    return false;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getChildRequiredProps(group, required,) {
+    const resolvedFields = new Fields();
+    const outputFields = group.relational.outputFields;
+    for (const field of required.resolvedFields) {
+      if (outputFields.has(field,)) {
+        resolvedFields.add(field,);
+      }
+    }
+    for (const field of this.constraint.referencedFields) {
+      if (outputFields.has(field,)) {
+        resolvedFields.add(field,);
+      }
+    }
+    const ordering = new Ordering();
+    return new RequiredProps(ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
+    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
+    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
+    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized(required,) {
+    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
+    const left = this.leftGroup.getOptimized(leftRequired,);
+    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
+    const right = this.rightGroup.getOptimized(rightRequired,);
+    return new RelationalLeftJoin(left, right, this.constraint,);
+  }
+  async execute() {
+    const left = await this.left.execute();
+    const right = await this.right.execute();
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
+    for (const leftTuple of left.tuples) {
+      let hasMatch = false;
+      for (const rightTuple of right.tuples) {
+        const tuple = new Tuple();
+        tuple.merge(leftTuple,);
+        tuple.merge(rightTuple,);
+        const value = this.constraint.evaluate(tuple,);
+        if (convertToBoolean(value,)) {
+          result.push(tuple,);
+          hasMatch = true;
+        }
+      }
+      if (!hasMatch) {
+        result.push(leftTuple,);
+      }
+    }
+    return result;
+  }
+};
+var RelationalRightJoin = class extends RelationalNode {
+  constructor(left, right, constraint,) {
+    super();
+    this.left = left;
+    this.right = right;
+    this.constraint = constraint;
+    __publicField(this, 'leftGroup', this.left.getGroup(),);
+    __publicField(this, 'rightGroup', this.right.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalRightJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
+  }
+  getOutputFields() {
+    const outputFields = new Fields();
+    outputFields.merge(this.leftGroup.relational.outputFields,);
+    outputFields.merge(this.rightGroup.relational.outputFields,);
+    return outputFields;
+  }
+  canProvideOrdering() {
+    return false;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getChildRequiredProps(group, required,) {
+    const resolvedFields = new Fields();
+    const outputFields = group.relational.outputFields;
+    for (const field of required.resolvedFields) {
+      if (outputFields.has(field,)) {
+        resolvedFields.add(field,);
+      }
+    }
+    for (const field of this.constraint.referencedFields) {
+      if (outputFields.has(field,)) {
+        resolvedFields.add(field,);
+      }
+    }
+    const ordering = new Ordering();
+    return new RequiredProps(ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
+    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
+    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
+    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
+    const childCost = Cost.max(leftCost, rightCost,);
+    return new Cost(0,).add(childCost,);
+  }
+  getOptimized(required,) {
+    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
+    const left = this.leftGroup.getOptimized(leftRequired,);
+    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
+    const right = this.rightGroup.getOptimized(rightRequired,);
+    return new RelationalRightJoin(left, right, this.constraint,);
+  }
+  async execute() {
+    const left = await this.left.execute();
+    const right = await this.right.execute();
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
+    for (const rightTuple of right.tuples) {
+      let hasMatch = false;
+      for (const leftTuple of left.tuples) {
+        const tuple = new Tuple();
+        tuple.merge(rightTuple,);
+        tuple.merge(leftTuple,);
+        const value = this.constraint.evaluate(tuple,);
+        if (convertToBoolean(value,)) {
+          result.push(tuple,);
+          hasMatch = true;
+        }
+      }
+      if (!hasMatch) {
+        result.push(rightTuple,);
+      }
+    }
+    return result;
+  }
+};
+var RelationalScan = class extends RelationalNode {
+  constructor(collection,) {
+    super();
+    this.collection = collection;
+  }
+  getHash() {
+    return calculateHash('RelationalScan', this.collection.id,);
+  }
+  getOutputFields() {
+    return this.collection.fields;
+  }
+  canProvideOrdering() {
+    return false;
+  }
+  canProvideResolvedFields(resolvedFields,) {
+    return resolvedFields.subsetOf(this.collection.fields,);
+  }
+  optimize() {
+    return Cost.estimate(1, 200 * KB,);
+  }
+  getOptimized() {
+    return new RelationalScan(this.collection,);
+  }
+  async execute() {
+    const collection = this.collection;
+    const outputFields = this.getOutputFields();
+    const items = await collection.data.scanItems();
+    const tuples = items.map((item) => {
+      const tuple = new Tuple();
+      for (const field of outputFields) {
+        const value = field.getValue(item,);
+        tuple.addPointer(collection, item.pointer,);
+        tuple.addValue(field, value,);
+      }
+      return tuple;
+    },);
+    return new Relation(outputFields, tuples,);
+  }
+};
+var RelationalUnion = class extends RelationalNode {
+  constructor(left, right,) {
+    super();
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'leftGroup', this.left.getGroup(),);
+    __publicField(this, 'rightGroup', this.right.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalUnion', this.leftGroup.id, this.rightGroup.id,);
+  }
+  getOutputFields() {
+    const outputFields = new Fields();
+    const leftOutputFields = this.leftGroup.relational.outputFields;
+    const rightOutputFields = this.rightGroup.relational.outputFields;
+    for (const field of leftOutputFields) {
+      if (rightOutputFields.has(field,)) {
+        outputFields.add(field,);
+      }
+    }
+    return outputFields;
+  }
+  canProvideOrdering() {
+    return false;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getChildRequiredProps(required,) {
+    const ordering = new Ordering();
+    return new RequiredProps(ordering, required.resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const leftRequired = this.getChildRequiredProps(required,);
+    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
+    const rightRequired = this.getChildRequiredProps(required,);
+    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized(required,) {
+    const leftRequired = this.getChildRequiredProps(required,);
+    const left = this.leftGroup.getOptimized(leftRequired,);
+    const rightRequired = this.getChildRequiredProps(required,);
+    const right = this.rightGroup.getOptimized(rightRequired,);
+    return new RelationalUnion(left, right,);
+  }
+  async execute() {
+    const left = await this.left.execute();
+    const right = await this.right.execute();
+    return left.union(right,);
+  }
+};
+var ScalarAnd = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarAnd', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} && ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: convertToBoolean(left,) && convertToBoolean(right,),
+    };
+  }
+};
+var ScalarConstant = class extends ScalarNode {
+  constructor(definition, value,) {
+    const referencedFields = new Fields();
+    super(referencedFields,);
+    this.definition = definition;
+    this.value = value;
+  }
+  getHash() {
+    return calculateHash('ScalarConstant', this.definition, this.value,);
+  }
+  toString() {
+    return DatabaseValue.stringify(this.value,);
+  }
+  evaluate() {
+    return this.value;
+  }
+};
+var ScalarContains = class extends ScalarNode {
+  constructor(source, target,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(source.referencedFields,);
+    referencedFields.merge(target.referencedFields,);
+    super(referencedFields,);
+    this.source = source;
+    this.target = target;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarContains', this.source, this.target,);
+  }
+  toString() {
+    return `CONTAINS(${this.source}, ${this.target})`;
+  }
+  getValue(source, target,) {
+    const sourceValue = convertToString(source,);
+    const targetValue = convertToString(target,);
+    if (isNull(sourceValue,)) return false;
+    if (isNull(targetValue,)) return false;
+    const lowerSource = sourceValue.toLowerCase();
+    const lowerTarget = targetValue.toLowerCase();
+    return lowerSource.includes(lowerTarget,);
+  }
+  evaluate(tuple,) {
+    const source = this.source.evaluate(tuple,);
+    const target = this.target.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: this.getValue(source, target,),
+    };
+  }
+};
+var ScalarEndsWith = class extends ScalarNode {
+  constructor(source, target,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(source.referencedFields,);
+    referencedFields.merge(target.referencedFields,);
+    super(referencedFields,);
+    this.source = source;
+    this.target = target;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarEndsWith', this.source, this.target,);
+  }
+  toString() {
+    return `ENDS_WITH(${this.source}, ${this.target})`;
+  }
+  getValue(source, target,) {
+    const sourceValue = convertToString(source,);
+    const targetValue = convertToString(target,);
+    if (isNull(sourceValue,)) return false;
+    if (isNull(targetValue,)) return false;
+    const lowerSource = sourceValue.toLowerCase();
+    const lowerTarget = targetValue.toLowerCase();
+    return lowerSource.endsWith(lowerTarget,);
+  }
+  evaluate(tuple,) {
+    const source = this.source.evaluate(tuple,);
+    const target = this.target.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: this.getValue(source, target,),
+    };
+  }
+};
+var ScalarEquals = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarEquals', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} == ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.equal(left, right, collation,),
+    };
+  }
+};
+var ScalarGreaterThan = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarGreaterThan', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} > ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.greaterThan(left, right, collation,),
+    };
+  }
+};
+var ScalarGreaterThanOrEqual = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarGreaterThanOrEqual', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} >= ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.greaterThanOrEqual(left, right, collation,),
+    };
+  }
+};
+var ScalarLessThan = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarLessThan', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} < ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.lessThan(left, right, collation,),
+    };
+  }
+};
+var ScalarLessThanOrEqual = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarLessThanOrEqual', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} <= ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.lessThanOrEqual(left, right, collation,),
+    };
+  }
+};
+var ScalarNotEquals = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarNotEquals', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} != ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: !DatabaseValue.equal(left, right, collation,),
+    };
+  }
+};
+var ScalarOr = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarOr', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} || ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: convertToBoolean(left,) || convertToBoolean(right,),
+    };
+  }
+};
+var ScalarStartsWith = class extends ScalarNode {
+  constructor(source, target,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(source.referencedFields,);
+    referencedFields.merge(target.referencedFields,);
+    super(referencedFields,);
+    this.source = source;
+    this.target = target;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarStartsWith', this.source, this.target,);
+  }
+  toString() {
+    return `STARTS_WITH(${this.source}, ${this.target})`;
+  }
+  getValue(source, target,) {
+    const sourceValue = convertToString(source,);
+    const targetValue = convertToString(target,);
+    if (isNull(sourceValue,)) return false;
+    if (isNull(targetValue,)) return false;
+    const lowerSource = sourceValue.toLowerCase();
+    const lowerTarget = targetValue.toLowerCase();
+    return lowerSource.startsWith(lowerTarget,);
+  }
+  evaluate(tuple,) {
+    const source = this.source.evaluate(tuple,);
+    const target = this.target.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: this.getValue(source, target,),
+    };
+  }
+};
+var Explorer = class {
+  constructor(normalizer,) {
+    this.normalizer = normalizer;
+    __publicField(this, 'memo', this.normalizer.memo,);
+  }
+  explore(before,) {
+    const group = before.getGroup();
+    if (before instanceof RelationalLeftJoin) {
+      const after = new RelationalRightJoin(before.left, before.right, before.constraint,);
+      this.memo.addRelational(after, group,);
+    }
+    if (before instanceof RelationalFilter) {
+      if (before.predicate instanceof ScalarAnd) {
+        const left = this.normalizer.newRelationalFilter(before.input, before.predicate.left,);
+        const right = this.normalizer.newRelationalFilter(before.input, before.predicate.right,);
+        const after = new RelationalIntersection(left, right,);
+        this.memo.addRelational(after, group,);
+      }
+      if (before.predicate instanceof ScalarOr) {
+        const left = this.normalizer.newRelationalFilter(before.input, before.predicate.left,);
+        const right = this.normalizer.newRelationalFilter(before.input, before.predicate.right,);
+        const after = new RelationalUnion(left, right,);
+        this.memo.addRelational(after, group,);
+      }
+    }
+    if (before instanceof RelationalScan) {
+      for (const index of before.collection.indexes) {
+        if (index.constraint) continue;
+        const query = createIndexQueryAll(index.lookupNodes.length,);
+        const after = new RelationalIndexLookup(index, query,);
+        this.memo.addRelational(after, group,);
+      }
+    }
+    if (before instanceof RelationalFilter) {
+      for (const input of before.inputGroup.nodes) {
+        if (input instanceof RelationalScan) {
+          for (const index of input.collection.indexes) {
+            if (
+              before.predicate instanceof ScalarEquals && before.predicate.left === index.lookupNodes[0] &&
+              before.predicate.right instanceof ScalarConstant && index.data.supportedLookupTypes.includes('Equals',/* Equals */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'Equals',
+                value: before.predicate.right.value,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarNotEquals && before.predicate.left === index.lookupNodes[0] &&
+              before.predicate.right instanceof ScalarConstant && index.data.supportedLookupTypes.includes('NotEquals',/* NotEquals */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'NotEquals',
+                value: before.predicate.right.value,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarLessThan && before.predicate.left === index.lookupNodes[0] &&
+              before.predicate.right instanceof ScalarConstant && index.data.supportedLookupTypes.includes('LessThan',/* LessThan */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'LessThan',
+                value: before.predicate.right.value,
+                inclusive: false,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarLessThanOrEqual && before.predicate.left === index.lookupNodes[0] &&
+              before.predicate.right instanceof ScalarConstant && index.data.supportedLookupTypes.includes('LessThan',/* LessThan */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'LessThan',
+                value: before.predicate.right.value,
+                inclusive: true,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarGreaterThan && before.predicate.left === index.lookupNodes[0] &&
+              before.predicate.right instanceof ScalarConstant && index.data.supportedLookupTypes.includes('GreaterThan',/* GreaterThan */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'GreaterThan',
+                value: before.predicate.right.value,
+                inclusive: false,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarGreaterThanOrEqual && before.predicate.left === index.lookupNodes[0] &&
+              before.predicate.right instanceof ScalarConstant && index.data.supportedLookupTypes.includes('GreaterThan',/* GreaterThan */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'GreaterThan',
+                value: before.predicate.right.value,
+                inclusive: true,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarContains && before.predicate.source === index.lookupNodes[0] &&
+              before.predicate.target instanceof ScalarConstant && index.data.supportedLookupTypes.includes('Contains',/* Contains */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'Contains',
+                value: before.predicate.target.value,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarStartsWith && before.predicate.source === index.lookupNodes[0] &&
+              before.predicate.target instanceof ScalarConstant && index.data.supportedLookupTypes.includes('StartsWith',/* StartsWith */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'StartsWith',
+                value: before.predicate.target.value,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+            if (
+              before.predicate instanceof ScalarEndsWith && before.predicate.source === index.lookupNodes[0] &&
+              before.predicate.target instanceof ScalarConstant && index.data.supportedLookupTypes.includes('EndsWith',/* EndsWith */
+              )
+            ) {
+              const query = createIndexQueryAll(index.lookupNodes.length,);
+              query[0] = {
+                type: 'EndsWith',
+                value: before.predicate.target.value,
+              };
+              const after = new RelationalIndexLookup(index, query,);
+              this.memo.addRelational(after, group,);
+            }
+          }
+        }
+      }
+    }
+  }
+};
+function createIndexQueryAll(length,) {
+  const lookup = {
+    type: 'All',
+    /* All */
+  };
+  return new Array(length,).fill(lookup,);
+}
+function GroupId(id3,) {
+  return id3;
+}
+var Group2 = class {
+  constructor(id3, relational,) {
+    this.id = id3;
+    this.relational = relational;
+    __publicField(this, 'nodes', [],);
+    __publicField(this, 'winners', /* @__PURE__ */ new Map(),);
+  }
+  /**
+   * Adds a node to the group. Throws an error if the node is already in a
+   * group.
+   */
+  addNode(node,) {
+    this.nodes.push(node,);
+    node.setGroup(this,);
+  }
+  /**
+   * Returns the winner for the given required physical props. The winner
+   * stores the best node and its cost. This is used to find the best node in
+   * the group.
+   */
+  getWinner(required,) {
+    const hash2 = required.getHash();
+    const existing = this.winners.get(hash2,);
+    if (existing) return existing;
+    const winner = new Winner();
+    this.winners.set(hash2, winner,);
+    return winner;
+  }
+  /**
+   * Returns the optimized version of the node. The optimized version is the
+   * node with the lowest cost with all children replaced with their optimized
+   * versions. This is used to create the final optimized query plan.
+   */
+  getOptimized(required,) {
+    const winner = this.getWinner(required,);
+    assert(winner.node, 'Group not optimized',);
+    const optimizer = winner.node.getOptimized(required,);
+    optimizer.setGroup(this,);
+    return optimizer;
+  }
+};
+var Winner = class {
+  constructor() {
+    __publicField(this, 'node',);
+    __publicField(this, 'cost', new Cost(Infinity,),);
+  }
+  update(node, cost,) {
+    if (Cost.compare(cost, this.cost,) < 0) {
+      this.node = node;
+      this.cost = cost;
+    }
+  }
+};
+var RelationalProps = class {
+  constructor(outputFields,) {
+    this.outputFields = outputFields;
+  }
+  /**
+   * Checks if the given relational properties are compatible with this.
+   */
+  isCompatible(other,) {
+    return this.outputFields.equals(other.outputFields,);
+  }
+};
+var Memo = class {
+  constructor() {
+    __publicField(this, 'nodes', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'groups', [],);
+  }
+  /**
+   * Adds a new group with the given relational props to the memo. All nodes
+   * in the group must have the same props. It's expected that the normalized
+   * node is immediately added to the group after creating it.
+   */
+  addGroup(relationalProps,) {
+    const id3 = GroupId(this.groups.length,);
+    const group = new Group2(id3, relationalProps,);
+    this.groups.push(group,);
+    return group;
+  }
+  /**
+   * Adds a relational node to the memo and the group. If the node is already
+   * in the memo, it returns the existing node. If no group is given, it
+   * creates a new group with the given relational props of the node.
+   */
+  addRelational(node, group,) {
+    const hash2 = node.getHash();
+    const existing = this.nodes.get(hash2,);
+    if (existing) return existing;
+    this.nodes.set(hash2, node,);
+    const outputFields = node.getOutputFields();
+    const relational = new RelationalProps(outputFields,);
+    group ?? (group = this.addGroup(relational,));
+    group.addNode(node,);
+    assert(relational.isCompatible(group.relational,), 'Group has inconsistent relational props',);
+    return node;
+  }
+  /**
+   * Adds a scalar node to the memo. If the node is already in the memo, it
+   * returns the existing node.
+   */
+  addScalar(node,) {
+    const hash2 = node.getHash();
+    const existing = this.nodes.get(hash2,);
+    if (existing) return existing;
+    this.nodes.set(hash2, node,);
+    return node;
+  }
+};
+var EnforcerNode = class extends RelationalNode {};
+var EnforcerResolve = class extends EnforcerNode {
+  constructor(input, fields,) {
+    super();
+    this.input = input;
+    this.fields = fields;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('EnforcerResolve', this.inputGroup.id, this.fields,);
+  }
+  getOutputFields() {
+    return this.inputGroup.relational.outputFields;
+  }
+  canProvideOrdering() {
+    return true;
+  }
+  canProvideResolvedFields(resolvedFields,) {
+    return resolvedFields.subsetOf(this.fields,);
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields();
+    return new RequiredProps(required.ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return Cost.estimate(0, 100 * KB,).add(inputCost,);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new EnforcerResolve(input, this.fields,);
+  }
+  async execute() {
+    const input = await this.input.execute();
+    assert(this.fields.subsetOf(input.fields,), 'Fields can\'t be resolved',);
+    const collections = /* @__PURE__ */ new Set();
+    for (const field of this.fields) {
+      assert(field.collection, 'Collection required to resolve field',);
+      collections.add(field.collection,);
+    }
+    for (const tuple of input.tuples) {
+      for (const field of this.fields) {
+        const value = tuple.getValue(field,);
+        if ((value == null ? void 0 : value.type) !== 'richtext') continue;
+        assert(value instanceof RichText, 'Pointer must be wrapped',);
+        void value.resolve();
+      }
+    }
+    const collectionItems = await Promise.all(
+      Array.from(collections,).map(async (collection) => {
+        const pointers = input.tuples.map((tuple) => {
+          const pointer = tuple.getPointer(collection,);
+          assert(pointer, 'Pointer required to resolve field',);
+          return pointer;
+        },);
+        const items = await collection.data.resolveItems(pointers,);
+        assert(items.length === pointers.length, 'Invalid number of items',);
+        return [collection, items,];
+      },),
+    );
+    return input.map(input.fields, (tuple, index,) => {
+      const result = new Tuple();
+      result.merge(tuple,);
+      for (const [collection, items,] of collectionItems) {
+        const item = items[index];
+        assert(item, 'Item not found',);
+        const pointer = tuple.getPointer(collection,);
+        assert(item.pointer === pointer, 'Pointer mismatch',);
+        for (const field of collection.fields) {
+          const value = field.getValue(item,);
+          result.addValue(field, value,);
+        }
+      }
+      return result;
+    },);
+  }
+};
+var collation3 = {
+  type: 0,
+  /* CaseInsensitive */
+};
+var EnforcerSort = class extends EnforcerNode {
+  constructor(input, ordering,) {
+    super();
+    this.input = input;
+    this.ordering = ordering;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('EnforcerSort', this.inputGroup.id, this.ordering,);
+  }
+  getOutputFields() {
+    return this.inputGroup.relational.outputFields;
+  }
+  canProvideOrdering(ordering,) {
+    return ordering.equals(this.ordering,);
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields(required.resolvedFields,);
+    for (
+      const {
+        field,
+      } of this.ordering.fields
+    ) {
+      if (field.name !== VIRTUAL_INDEX_FIELD) {
+        resolvedFields.add(field,);
+      }
+    }
+    const ordering = new Ordering();
+    return new RequiredProps(ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new EnforcerSort(input, this.ordering,);
+  }
+  async execute() {
+    const input = await this.input.execute();
+    return input.sort((leftTuple, rightTuple,) => {
+      for (
+        const {
+          field,
+          direction,
+        } of this.ordering.fields
+      ) {
+        const isAscending = direction === 'asc';
+        if (field.name === VIRTUAL_INDEX_FIELD) {
+          const collection = field.collection;
+          assert(collection, 'Collection required for sorting',);
+          const leftPointer = leftTuple.getPointer(collection,);
+          assert(leftPointer, 'Pointer required for sorting',);
+          const leftItem = {
+            pointer: leftPointer,
+            data: {},
+          };
+          const rightPointer = rightTuple.getPointer(collection,);
+          assert(rightPointer, 'Pointer required for sorting',);
+          const rightItem = {
+            pointer: rightPointer,
+            data: {},
+          };
+          const order = collection.data.compareItems(leftItem, rightItem,);
+          return isAscending ? order : -order;
+        }
+        const leftValue = leftTuple.getValue(field,);
+        const rightValue = rightTuple.getValue(field,);
+        if (DatabaseValue.equal(leftValue, rightValue, collation3,)) {
+          continue;
+        }
+        if (isNull(leftValue,) || DatabaseValue.lessThan(leftValue, rightValue, collation3,)) {
+          return isAscending ? -1 : 1;
+        }
+        if (isNull(rightValue,) || DatabaseValue.greaterThan(leftValue, rightValue, collation3,)) {
+          return isAscending ? 1 : -1;
+        }
+        throw new Error('Invalid comparison',);
+      }
+      return 0;
+    },);
+  }
+};
+var RelationalLimit = class extends RelationalNode {
+  constructor(input, limit, ordering,) {
+    super();
+    this.input = input;
+    this.limit = limit;
+    this.ordering = ordering;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalLimit', this.inputGroup.id, this.limit,);
+  }
+  getOutputFields() {
+    return this.inputGroup.relational.outputFields;
+  }
+  canProvideOrdering(ordering,) {
+    return ordering.equals(this.ordering,);
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields(required.resolvedFields,);
+    resolvedFields.merge(this.limit.referencedFields,);
+    return new RequiredProps(this.ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new RelationalLimit(input, this.limit, this.ordering,);
+  }
+  async execute() {
+    const input = await this.input.execute();
+    const limit = this.limit.evaluate();
+    const value = convertToNumber(limit,) ?? Infinity;
+    if (value === Infinity) return input;
+    return input.slice(0, value,);
+  }
+};
+var RelationalOffset = class extends RelationalNode {
+  constructor(input, offset, ordering,) {
+    super();
+    this.input = input;
+    this.offset = offset;
+    this.ordering = ordering;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalOffset', this.inputGroup.id, this.offset,);
+  }
+  getOutputFields() {
+    return this.inputGroup.relational.outputFields;
+  }
+  canProvideOrdering(ordering,) {
+    return ordering.equals(this.ordering,);
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields(required.resolvedFields,);
+    resolvedFields.merge(this.offset.referencedFields,);
+    return new RequiredProps(this.ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new RelationalOffset(input, this.offset, this.ordering,);
+  }
+  async execute() {
+    const input = await this.input.execute();
+    const offset = this.offset.evaluate();
+    const value = convertToNumber(offset,) ?? 0;
+    if (value === 0) return input;
+    return input.slice(value,);
+  }
+};
+var RelationalProject = class extends RelationalNode {
+  constructor(input, projections, passthrough,) {
+    super();
+    this.input = input;
+    this.projections = projections;
+    this.passthrough = passthrough;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalProject', this.inputGroup.id, ...this.projections, this.passthrough,);
+  }
+  getOutputFields() {
+    const fields = new Fields();
+    fields.merge(this.passthrough,);
+    for (const projection of this.projections) {
+      fields.add(projection.field,);
+    }
+    return fields;
+  }
+  canProvideOrdering() {
+    return true;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields(required.resolvedFields,);
+    for (const projection of this.projections) {
+      resolvedFields.merge(projection.input.referencedFields,);
+    }
+    return new RequiredProps(required.ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new RelationalProject(input, this.projections, this.passthrough,);
+  }
+  async execute() {
+    const outputFields = this.getOutputFields();
+    const input = await this.input.execute();
+    return input.map(outputFields, (tuple) => {
+      const result = new Tuple();
+      result.mergePointers(tuple,);
+      for (const field of this.passthrough) {
+        const value = tuple.getValue(field,);
+        result.addValue(field, value,);
+      }
+      for (const projection of this.projections) {
+        const value = projection.input.evaluate(tuple,);
+        result.addValue(projection.field, value,);
+      }
+      return result;
+    },);
+  }
+};
+var ScalarCast = class extends ScalarNode {
+  constructor(input, definition,) {
+    super(input.referencedFields,);
+    this.input = input;
+    this.definition = definition;
+    assert(definition.isNullable, 'Unsupported non-nullable cast',);
+  }
+  getHash() {
+    return calculateHash('ScalarCast', this.input, this.definition,);
+  }
+  toString() {
+    return `CAST(${this.input} AS ${this.definition.type.toUpperCase()})`;
+  }
+  evaluate(tuple,) {
+    const input = this.input.evaluate(tuple,);
+    return DatabaseValue.cast(input, this.definition,);
+  }
+};
+var ScalarIn = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarIn', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} IN ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.in(left, right,),
+    };
+  }
+};
+var ScalarNot = class extends ScalarNode {
+  constructor(input,) {
+    super(input.referencedFields,);
+    this.input = input;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarNot', this.input,);
+  }
+  toString() {
+    return `NOT ${this.input}`;
+  }
+  evaluate(tuple,) {
+    const input = this.input.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: !convertToBoolean(input,),
+    };
+  }
+};
+var ScalarNotIn = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    super(referencedFields,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarNotIn', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} NOT IN ${this.right}`;
+  }
+  evaluate(tuple,) {
+    const left = this.left.evaluate(tuple,);
+    const right = this.right.evaluate(tuple,);
+    return {
+      type: 'boolean',
+      value: !DatabaseValue.in(left, right,),
+    };
+  }
+};
+var ScalarVariable = class extends ScalarNode {
+  constructor(field,) {
+    assert(field.name !== VIRTUAL_INDEX_FIELD, 'Invalid field name',);
+    const referencedFields = new Fields();
+    referencedFields.add(field,);
+    super(referencedFields,);
+    this.field = field;
+    __publicField(this, 'definition', this.field.definition,);
+  }
+  getHash() {
+    return calculateHash('ScalarVariable', this.field.id,);
+  }
+  toString() {
+    return `"${this.field.name}" /* ${this.field.id} */`;
+  }
+  evaluate(tuple,) {
+    assert(tuple, 'Tuple must be provided',);
+    return tuple.getValue(this.field,);
+  }
+};
+var Normalizer = class {
+  constructor(memo2,) {
+    this.memo = memo2;
+  }
+  finishRelational(node,) {
+    return this.memo.addRelational(node,);
+  }
+  newRelationalScan(collection,) {
+    const node = new RelationalScan(collection,);
+    return this.finishRelational(node,);
+  }
+  newRelationalIndexLookup(index, query,) {
+    const node = new RelationalIndexLookup(index, query,);
+    return this.finishRelational(node,);
+  }
+  newRelationalLeftJoin(left, right, constraint,) {
+    const node = new RelationalLeftJoin(left, right, constraint,);
+    return this.finishRelational(node,);
+  }
+  newRelationalRightJoin(left, right, constraint,) {
+    return this.newRelationalLeftJoin(right, left, constraint,);
+  }
+  newRelationalFilter(input, predicate,) {
+    if (input instanceof RelationalLeftJoin && predicate.referencedFields.subsetOf(input.leftGroup.relational.outputFields,)) {
+      const left = this.newRelationalFilter(input.left, predicate,);
+      return this.newRelationalLeftJoin(left, input.right, input.constraint,);
+    }
+    if (input instanceof RelationalRightJoin && predicate.referencedFields.subsetOf(input.rightGroup.relational.outputFields,)) {
+      const right = this.newRelationalFilter(input.right, predicate,);
+      return this.newRelationalLeftJoin(input.left, right, input.constraint,);
+    }
+    const node = new RelationalFilter(input, predicate,);
+    return this.finishRelational(node,);
+  }
+  newRelationalProject(input, projections, passthrough,) {
+    const node = new RelationalProject(input, projections, passthrough,);
+    return this.finishRelational(node,);
+  }
+  newRelationalLimit(input, limit, ordering,) {
+    const node = new RelationalLimit(input, limit, ordering,);
+    return this.finishRelational(node,);
+  }
+  newRelationalOffset(input, offset, ordering,) {
+    const node = new RelationalOffset(input, offset, ordering,);
+    return this.finishRelational(node,);
+  }
+  finishScalar(node,) {
+    const isConstant = node instanceof ScalarConstant;
+    if (node.referencedFields.size === 0 && !isConstant) {
+      const value = node.evaluate();
+      return this.newScalarConstant(node.definition, value,);
+    }
+    return this.memo.addScalar(node,);
+  }
+  /**
+   * When we create `ScalarConstant` nodes, we always give them an unknown
+   * type definition. Before we compare them to other nodes, we need to cast
+   * them to a specific type.
+   *
+   * For example, in the following query:
+   * ```
+   * SELECT id FROM cars WHERE type = "coupe"
+   * ```
+   *
+   * If the `type` field is an enum, and we parse the `"coupe"` constant as a
+   * string, the where clause will always be false because an enum can't be
+   * equal to a string. But if we cast the string to an enum type first, the
+   * where clause will work as expected.
+   */
+  removeUnknown(node, definition,) {
+    if (node.definition.type !== 'unknown') return node;
+    if (definition.type === 'unknown') return node;
+    const nullableDefinition = {
+      ...definition,
+      isNullable: true,
+    };
+    return this.newScalarCast(node, nullableDefinition,);
+  }
+  newScalarVariable(field,) {
+    const node = new ScalarVariable(field,);
+    return this.finishScalar(node,);
+  }
+  newScalarConstant(definition, value,) {
+    const node = new ScalarConstant(definition, value,);
+    return this.finishScalar(node,);
+  }
+  newScalarNot(input,) {
+    if (input instanceof ScalarNot) {
+      if (input.input.definition.type === 'boolean') {
+        return input.input;
+      }
+      const definition = {
+        type: 'boolean',
+        isNullable: true,
+      };
+      return this.newScalarCast(input.input, definition,);
+    }
+    if (input instanceof ScalarEquals) {
+      return this.newScalarNotEquals(input.left, input.right,);
+    }
+    if (input instanceof ScalarNotEquals) {
+      return this.newScalarEquals(input.left, input.right,);
+    }
+    if (input instanceof ScalarLessThan) {
+      return this.newScalarGreaterThanOrEqual(input.left, input.right,);
+    }
+    if (input instanceof ScalarLessThanOrEqual) {
+      return this.newScalarGreaterThan(input.left, input.right,);
+    }
+    if (input instanceof ScalarGreaterThan) {
+      return this.newScalarLessThanOrEqual(input.left, input.right,);
+    }
+    if (input instanceof ScalarGreaterThanOrEqual) {
+      return this.newScalarLessThan(input.left, input.right,);
+    }
+    if (input instanceof ScalarAnd) {
+      const left = this.newScalarNot(input.left,);
+      const right = this.newScalarNot(input.right,);
+      return this.newScalarOr(left, right,);
+    }
+    if (input instanceof ScalarOr) {
+      const left = this.newScalarNot(input.left,);
+      const right = this.newScalarNot(input.right,);
+      return this.newScalarAnd(left, right,);
+    }
+    const node = new ScalarNot(input,);
+    return this.finishScalar(node,);
+  }
+  // TODO: Normalize `$1 AND true` to `$1`
+  // TODO: Normalize `true AND $1` to `$1`
+  // TODO: Normalize `$1 AND false` to `false`
+  // TODO: Normalize `false AND $1` to `false`
+  // TODO: Normalize `$1 AND ($2 AND $c)` to `($1 AND $2) AND $c`
+  newScalarAnd(left, right,) {
+    const node = new ScalarAnd(left, right,);
+    return this.finishScalar(node,);
+  }
+  // TODO: Normalize `$1 OR true` to `$1`
+  // TODO: Normalize `true OR $1` to `$1`
+  // TODO: Normalize `$1 OR false` to `$1`
+  // TODO: Normalize `false OR $1` to `false`
+  // TODO: Normalize `$1 OR ($2 OR $c)` to `($1 OR $2) OR $c`
+  newScalarOr(left, right,) {
+    const node = new ScalarOr(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarEquals(left, right,) {
+    const isLeftVariable = left instanceof ScalarVariable;
+    const isRightVariable = right instanceof ScalarVariable;
+    if (isRightVariable && !isLeftVariable) {
+      return this.newScalarEquals(right, left,);
+    }
+    left = this.removeUnknown(left, right.definition,);
+    right = this.removeUnknown(right, left.definition,);
+    const node = new ScalarEquals(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarNotEquals(left, right,) {
+    const isLeftVariable = left instanceof ScalarVariable;
+    const isRightVariable = right instanceof ScalarVariable;
+    if (isRightVariable && !isLeftVariable) {
+      return this.newScalarNotEquals(right, left,);
+    }
+    left = this.removeUnknown(left, right.definition,);
+    right = this.removeUnknown(right, left.definition,);
+    const node = new ScalarNotEquals(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarLessThan(left, right,) {
+    const isLeftVariable = left instanceof ScalarVariable;
+    const isRightVariable = right instanceof ScalarVariable;
+    if (isRightVariable && !isLeftVariable) {
+      return this.newScalarGreaterThan(right, left,);
+    }
+    left = this.removeUnknown(left, right.definition,);
+    right = this.removeUnknown(right, left.definition,);
+    const node = new ScalarLessThan(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarLessThanOrEqual(left, right,) {
+    const isLeftVariable = left instanceof ScalarVariable;
+    const isRightVariable = right instanceof ScalarVariable;
+    if (isRightVariable && !isLeftVariable) {
+      return this.newScalarGreaterThanOrEqual(right, left,);
+    }
+    left = this.removeUnknown(left, right.definition,);
+    right = this.removeUnknown(right, left.definition,);
+    const node = new ScalarLessThanOrEqual(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarGreaterThan(left, right,) {
+    const isLeftVariable = left instanceof ScalarVariable;
+    const isRightVariable = right instanceof ScalarVariable;
+    if (isRightVariable && !isLeftVariable) {
+      return this.newScalarLessThan(right, left,);
+    }
+    left = this.removeUnknown(left, right.definition,);
+    right = this.removeUnknown(right, left.definition,);
+    const node = new ScalarGreaterThan(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarGreaterThanOrEqual(left, right,) {
+    const isLeftVariable = left instanceof ScalarVariable;
+    const isRightVariable = right instanceof ScalarVariable;
+    if (isRightVariable && !isLeftVariable) {
+      return this.newScalarLessThanOrEqual(right, left,);
+    }
+    left = this.removeUnknown(left, right.definition,);
+    right = this.removeUnknown(right, left.definition,);
+    const node = new ScalarGreaterThanOrEqual(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarIn(left, right,) {
+    const node = new ScalarIn(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarNotIn(left, right,) {
+    const node = new ScalarNotIn(left, right,);
+    return this.finishScalar(node,);
+  }
+  newScalarCase(input, conditions, otherwise,) {
+    if (input) {
+      const castConditions = [];
+      for (
+        const {
+          when,
+          then,
+        } of conditions
+      ) {
+        const castWhen = this.removeUnknown(when, input.definition,);
+        const castCondition = new CaseCondition(castWhen, then,);
+        castConditions.push(castCondition,);
+      }
+      conditions = castConditions;
+    }
+    const node = new ScalarCase2(input, conditions, otherwise,);
+    return this.finishScalar(node,);
+  }
+  newScalarContains(source, target,) {
+    const node = new ScalarContains(source, target,);
+    return this.finishScalar(node,);
+  }
+  newScalarStartsWith(source, target,) {
+    const node = new ScalarStartsWith(source, target,);
+    return this.finishScalar(node,);
+  }
+  newScalarEndsWith(source, target,) {
+    const node = new ScalarEndsWith(source, target,);
+    return this.finishScalar(node,);
+  }
+  newScalarCast(input, definition,) {
+    if (input.definition.type === definition.type) {
+      return input;
+    }
+    const node = new ScalarCast(input, definition,);
+    return this.finishScalar(node,);
+  }
+};
+var Optimizer = class {
+  constructor(query, locale,) {
+    this.query = query;
+    this.locale = locale;
+    __publicField(this, 'memo', new Memo(),);
+    __publicField(this, 'normalizer', new Normalizer(this.memo,),);
+    __publicField(this, 'explorer', new Explorer(this.normalizer,),);
+  }
+  optimize() {
+    const builder = new Builder(this.normalizer, this.query, this.locale,);
+    const outScope = builder.build();
+    const root = outScope.takeNode();
+    const group = root.getGroup();
+    const required = outScope.getRequiredProps();
+    this.optimizeGroup(group, required,);
+    const optimized = group.getOptimized(required,);
+    const namedFields = outScope.getNamedFields();
+    return [optimized, namedFields,];
+  }
+  optimizeGroup(group, required,) {
+    const winner = group.getWinner(required,);
+    if (winner.node) return winner.cost;
+    const normalized = group.nodes[0];
+    assert(normalized, 'Normalized node not found',);
+    this.createEnforcer(winner, normalized, required,);
+    for (const node of group.nodes) {
+      if (required.canProvide(node,)) {
+        const cost = node.optimize(this, required,);
+        winner.update(node, cost,);
+      }
+      if (required.isMinimal) {
+        this.explorer.explore(node,);
+      }
+    }
+    return winner.cost;
+  }
+  createEnforcer(winner, node, required,) {
+    if (required.resolvedFields.size > 0) {
+      const enforcer = new EnforcerResolve(node, required.resolvedFields,);
+      const cost = enforcer.optimize(this, required,);
+      winner.update(enforcer, cost,);
+    }
+    if (required.ordering.length > 0) {
+      const enforcer = new EnforcerSort(node, required.ordering,);
+      const cost = enforcer.optimize(this, required,);
+      winner.update(enforcer, cost,);
+    }
+  }
+};
 function stringifyIdentifier(expression,) {
   if (expression.collection) {
     return `"${expression.collection}"."${expression.name}"`;
@@ -35560,7 +38417,7 @@ function stringifyCaseExpression(expression,) {
     caseString += ` WHEN ${stringifyExpression(condition.when,)} THEN ${stringifyExpression(condition.then,)}`;
   }
   if (expression.else) {
-    caseString += ` ELSE ${expression.else}`;
+    caseString += ` ELSE ${stringifyExpression(expression.else,)}`;
   }
   caseString += ' END';
   return caseString;
@@ -35695,7 +38552,31 @@ function getDatabaseCollection({
 }
 var QueryEngine = class {
   async query(query, locale,) {
-    return this.queryOld(query, locale,);
+    if (query.from.type === 'Collection') {
+      return this.queryOld(query, locale,);
+    }
+    return this.queryNew(query, locale,);
+  }
+  async queryNew(query, locale,) {
+    const optimizer = new Optimizer(query, locale,);
+    const [root, namedFields,] = optimizer.optimize();
+    const relation = await root.execute();
+    const result = await Promise.all(relation.tuples.map(async (tuple) => {
+      const item = {};
+      for (const [fieldName, field,] of namedFields) {
+        const value = tuple.getValue(field,);
+        item[fieldName] = await this.resolveValue(value,);
+      }
+      return item;
+    },),);
+    return result;
+  }
+  async resolveValue(value,) {
+    if ((value == null ? void 0 : value.type) === 'richtext') {
+      assert(value.value instanceof RichText, 'Pointer must be wrapped',);
+      return value.value.resolve();
+    }
+    return (value == null ? void 0 : value.value) ?? null;
   }
   async queryOld(query, locale,) {
     const [plan, schema, richTextResolver,] = this.createQueryPlan(query, locale,);
@@ -40680,7 +43561,7 @@ function extractTextFromReactNode(node,) {
   }
   return '';
 }
-var RichText = /* @__PURE__ */ forwardRef(({
+var RichText2 = /* @__PURE__ */ forwardRef(({
   children,
   html,
   htmlFromDesign,
@@ -40917,6 +43798,101 @@ var ImagePatternElement = ({
     }, href,),
   },);
 };
+var frameFromElement = (element) => {
+  const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
+  frame2.x = frame2.x + safeWindow.scrollX;
+  frame2.y = frame2.y + safeWindow.scrollY;
+  return frame2;
+};
+var frameFromElements = (elements) => {
+  return Rect.merge(...elements.map(frameFromElement,),);
+};
+var convertToPageFrame = (frame2, element,) => {
+  const point2 = convertToPagePoint(frame2, element,);
+  return {
+    x: point2.x,
+    y: point2.y,
+    width: frame2.width,
+    height: frame2.height,
+  };
+};
+var convertFromPageFrame = (frame2, element,) => {
+  const point2 = convertFromPagePoint(frame2, element,);
+  return {
+    x: point2.x,
+    y: point2.y,
+    width: frame2.width,
+    height: frame2.height,
+  };
+};
+var getPageFrame = (element) => {
+  const rect = element.getBoundingClientRect();
+  return {
+    x: rect.left + safeWindow.scrollX,
+    y: rect.top + safeWindow.scrollY,
+    width: rect.width,
+    height: rect.height,
+  };
+};
+var fromEventForPage = (event) => {
+  return {
+    x: event.pageX,
+    y: event.pageY,
+  };
+};
+var fromEventForClient = (event) => {
+  return {
+    x: event.clientX,
+    y: event.clientY,
+  };
+};
+var convertToPagePoint = (point2, element,) => {
+  const frame2 = getPageFrame(element,);
+  return {
+    x: point2.x + frame2.x,
+    y: point2.y + frame2.y,
+  };
+};
+var convertFromPagePoint = (point2, element,) => {
+  const frame2 = getPageFrame(element,);
+  return {
+    x: point2.x - frame2.x,
+    y: point2.y - frame2.y,
+  };
+};
+var dispatchKeyDownEvent = (keyCode, options = {},) => {
+  const keyboardEvent = new KeyboardEvent('keydown', {
+    bubbles: true,
+    keyCode,
+    ...options,
+  },);
+  const activeElement = document.activeElement;
+  if (activeElement) {
+    activeElement.dispatchEvent(keyboardEvent,);
+  }
+};
+var DOM = {
+  frameFromElement,
+  frameFromElements,
+  convertToPageFrame,
+  convertFromPageFrame,
+  getPageFrame,
+  fromEventForPage,
+  fromEventForClient,
+  convertToPagePoint,
+  convertFromPagePoint,
+};
+var parser;
+var supportsNativeParseHTML = /* @__PURE__ */ (() =>
+  // Firefox has rare-random issues with the native parser: https://framer-team.slack.com/archives/C01B14R6E22/p1724159313153969
+  !isFirefox() && typeof Document !== 'undefined' &&
+  // @ts-expect-error -- FIXME: TS 5.4 does not know about it yet.
+  typeof Document.parseHTMLUnsafe === 'function')();
+function domParser(html, type,) {
+  if (supportsNativeParseHTML && !type) return Document.parseHTMLUnsafe(html,);
+  parser ?? (parser = new DOMParser());
+  return parser.parseFromString(html, type ?? 'text/html',);
+}
 var useDOM = /* @__PURE__ */ isBrowser2();
 var SharedSVGEntry = class {
   constructor(id3, svg, innerHTML, viewBox, count = 0,) {
@@ -40927,6 +43903,7 @@ var SharedSVGEntry = class {
     this.count = count;
   }
 };
+var visuallyHiddenStyle = 'position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict';
 var SharedSVGManager = class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
@@ -40943,7 +43920,7 @@ var SharedSVGManager = class {
     let entry = this.entries.get(svg,);
     if (!entry) {
       if (!contentId) {
-        contentId = 'svg' + String(hash(svg,),) + '_' + String(svg.length,);
+        contentId = `svg${String(hash(svg,),)}_${String(svg.length,)}`;
       }
       let uniqueSVG = svg;
       let svgSize;
@@ -40954,6 +43931,9 @@ var SharedSVGManager = class {
         }
         svgDom.id = contentId;
         svgSize = getSVGSize(svgDom,);
+        svgDom.removeAttribute('xmlns',);
+        svgDom.removeAttribute('xlink',);
+        svgDom.removeAttribute('xmlns:xlink',);
         uniqueSVG = svgDom.outerHTML;
       }
       entry = this.createDOMElementFor(uniqueSVG, contentId, svgSize,);
@@ -40986,41 +43966,33 @@ var SharedSVGManager = class {
     this.removeDOMElement(entry,);
   }
   removeDOMElement(entry,) {
-    const containerId = 'container_' + entry.id;
     if (useDOM) {
-      const container = document == null ? void 0 : document.querySelector('#' + containerId,);
+      const container = document == null ? void 0 : document.getElementById(entry.id,);
       container == null ? void 0 : container.remove();
     }
   }
   createDOMElementFor(svg, id3, size,) {
-    const containerId = 'container_' + id3;
     if (useDOM) {
-      let svgTemplates = document.querySelector('#svg-templates',);
+      let svgTemplates = document.getElementById('svg-templates',);
       if (!svgTemplates) {
         svgTemplates = document.createElement('div',);
         svgTemplates.id = 'svg-templates';
-        svgTemplates.style.position = 'absolute';
-        svgTemplates.style.top = '0';
-        svgTemplates.style.left = '0';
-        svgTemplates.style.width = '0';
-        svgTemplates.style.height = '0';
-        svgTemplates.style.overflow = 'hidden';
+        svgTemplates.style.cssText = visuallyHiddenStyle;
         document.body.appendChild(svgTemplates,);
       }
-      if (!document.querySelector('#' + containerId,)) {
+      if (!document.getElementById(id3,)) {
         const container = document.createElement('div',);
-        container.id = containerId;
         container.innerHTML = svg;
-        if (container.firstElementChild) {
-          container.firstElementChild.id = id3;
+        const svgElement = container.firstElementChild;
+        if (svgElement) {
+          svgElement.id = id3;
+          svgTemplates.appendChild(svgElement,);
         }
-        svgTemplates.appendChild(container,);
       }
     }
     const box = size ? `0 0 ${size.width} ${size.height}` : void 0;
     const viewBox = box ? ` viewBox="${box}"` : '';
-    const innerHTML =
-      `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%"${viewBox}><use href="#${id3}"></use></svg>`;
+    const innerHTML = `<svg style="width:100%;height:100%"${viewBox}><use href="#${id3}"/></svg>`;
     return new SharedSVGEntry(id3, svg, innerHTML, box,);
   }
   clear() {
@@ -41030,27 +44002,16 @@ var SharedSVGManager = class {
    * used after running `ReactDOMServer.renderToString()` */
   generateTemplates() {
     const output = [];
-    const style = 'position: absolute; overflow: hidden; top: 0; left: 0; width: 0; height: 0';
-    output.push(`<div id="svg-templates" style="${style}">`,);
-    for (const value of this.entries.values()) {
-      const containerId = 'container_' + value.id;
-      output.push(`  <div id="${containerId}">`,);
-      output.push(`    ${value.svg}`,);
-      output.push('  </div>',);
-    }
+    output.push(`<div id="svg-templates" style="${visuallyHiddenStyle}">`,);
+    this.entries.forEach((value) => output.push(value.svg,));
     output.push('</div>',);
     return output.join('\n',);
   }
 };
 var sharedSVGManager = /* @__PURE__ */ new SharedSVGManager();
 function parseSVG(svg,) {
-  if (typeof DOMParser === 'undefined') {
-    console.warn('unable to find DOMParser',);
-    return;
-  }
   try {
-    const domParser = new DOMParser();
-    const doc = domParser.parseFromString(svg, 'text/html',);
+    const doc = domParser(svg,);
     const node = doc.getElementsByTagName('svg',)[0];
     if (!node) throw Error('no svg element found',);
     return node;
@@ -41221,7 +44182,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const {
           svgContentId,
         } = this.props;
-        const contentid = svgContentId ? 'svg' + svgContentId : null;
+        const contentid = svgContentId ? `svg${svgContentId}` : null;
         sharedSVGManager.subscribe(this.unmountedSVG, !svgContentId, contentid,);
         this.previouslyRenderedSVG = this.unmountedSVG;
       }
@@ -41288,30 +44249,30 @@ var SVGComponent = /* @__PURE__ */ (() => {
           innerStyle.width = intrinsicWidth;
           innerStyle.height = intrinsicHeight;
         }
-      } else {
-        const {
-          left,
-          right,
-          top,
-          bottom,
-        } = this.props;
-        Object.assign(style, {
-          left,
-          right,
-          top,
-          bottom,
-          width,
-          height,
-          rotate,
-        },);
-        Object.assign(innerStyle, {
-          left: 0,
-          top: 0,
-          bottom: 0,
-          right: 0,
-          position: 'absolute',
-        },);
+        return;
       }
+      const {
+        left,
+        right,
+        top,
+        bottom,
+      } = this.props;
+      Object.assign(style, {
+        left,
+        right,
+        top,
+        bottom,
+        width,
+        height,
+        rotate,
+      },);
+      Object.assign(innerStyle, {
+        left: 0,
+        top: 0,
+        bottom: 0,
+        right: 0,
+        position: 'absolute',
+      },);
     }
     render() {
       countNodeRender();
@@ -41371,7 +44332,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
         } = elementPropertiesForLinearGradient(gradient, identifier,);
         fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
-          xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
           height: '100%',
           style: {
@@ -41399,7 +44359,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
         fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
-          xmlns: 'http://www.w3.org/2000/svg',
           width: '100%',
           height: '100%',
           style: {
@@ -41425,8 +44384,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
           outerStyle.fill = `url(#${imagePattern.id})`;
           fillElement = /* @__PURE__ */ jsx('svg', {
             ref: this.setSVGElement,
-            xmlns: 'http://www.w3.org/2000/svg',
-            xmlnsXlink: 'http://www.w3.org/1999/xlink',
             width: '100%',
             height: '100%',
             style: {
@@ -41456,7 +44413,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = '';
       } else {
-        const contentid = svgContentId ? 'svg' + svgContentId : null;
+        const contentid = svgContentId ? `svg${svgContentId}` : null;
         const __html = sharedSVGManager.subscribe(svg, !svgContentId, contentid,);
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = svg;
@@ -42285,8 +45242,6 @@ var SVGRoot = class extends Component {
     return /* @__PURE__ */ jsx('svg', {
       width: '100%',
       height: '100%',
-      xmlns: 'http://www.w3.org/2000/svg',
-      xmlnsXlink: 'http://www.w3.org/1999/xlink',
       style: svgStyle,
       ref: innerRef,
       children,
@@ -42758,90 +45713,6 @@ function annotateTypeOnStringify(ctor, typeName,) {
 function isOfAnnotatedType(object, typeName,) {
   return object && object.__type__ && object.__type__ === typeName;
 }
-var frameFromElement = (element) => {
-  const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
-  frame2.x = frame2.x + safeWindow.scrollX;
-  frame2.y = frame2.y + safeWindow.scrollY;
-  return frame2;
-};
-var frameFromElements = (elements) => {
-  return Rect.merge(...elements.map(frameFromElement,),);
-};
-var convertToPageFrame = (frame2, element,) => {
-  const point2 = convertToPagePoint(frame2, element,);
-  return {
-    x: point2.x,
-    y: point2.y,
-    width: frame2.width,
-    height: frame2.height,
-  };
-};
-var convertFromPageFrame = (frame2, element,) => {
-  const point2 = convertFromPagePoint(frame2, element,);
-  return {
-    x: point2.x,
-    y: point2.y,
-    width: frame2.width,
-    height: frame2.height,
-  };
-};
-var getPageFrame = (element) => {
-  const rect = element.getBoundingClientRect();
-  return {
-    x: rect.left + safeWindow.scrollX,
-    y: rect.top + safeWindow.scrollY,
-    width: rect.width,
-    height: rect.height,
-  };
-};
-var fromEventForPage = (event) => {
-  return {
-    x: event.pageX,
-    y: event.pageY,
-  };
-};
-var fromEventForClient = (event) => {
-  return {
-    x: event.clientX,
-    y: event.clientY,
-  };
-};
-var convertToPagePoint = (point2, element,) => {
-  const frame2 = getPageFrame(element,);
-  return {
-    x: point2.x + frame2.x,
-    y: point2.y + frame2.y,
-  };
-};
-var convertFromPagePoint = (point2, element,) => {
-  const frame2 = getPageFrame(element,);
-  return {
-    x: point2.x - frame2.x,
-    y: point2.y - frame2.y,
-  };
-};
-var dispatchKeyDownEvent = (keyCode, options = {},) => {
-  const keyboardEvent = new KeyboardEvent('keydown', {
-    bubbles: true,
-    keyCode,
-    ...options,
-  },);
-  const activeElement = document.activeElement;
-  if (activeElement) {
-    activeElement.dispatchEvent(keyboardEvent,);
-  }
-};
-var DOM = {
-  frameFromElement,
-  frameFromElements,
-  convertToPageFrame,
-  convertFromPageFrame,
-  getPageFrame,
-  fromEventForPage,
-  fromEventForClient,
-  convertToPagePoint,
-  convertFromPagePoint,
-};
 var LOADING_LAZY_THRESHOLD = 1e3;
 function getLoadingLazyAtYPosition(offset,) {
   return offset > LOADING_LAZY_THRESHOLD ? 'lazy' : void 0;
@@ -43134,7 +46005,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.3.28',
+    'framer-motion': '11.3.29',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -43415,7 +46286,7 @@ export {
   resolveMotionValue,
   resolvePageScope,
   reverseEasing,
-  RichText,
+  RichText2 as RichText,
   roundedNumber,
   roundedNumberString,
   roundWithOffset,
