@@ -10084,7 +10084,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.NYIVPCAJ.js
+// https :https://app.framerstatic.com/framer.6MXOFEQA.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12582,8 +12582,8 @@ function useViewTransition() {
   }, [sitePageEffects,],);
 }
 function useMonitorNextPaintAfterRender(label, fallback = false,) {
-  const startLabel = `start-${label}`;
-  const endLabel = `end-${label}`;
+  const startLabel = `${label}-start`;
+  const endLabel = `${label}-end`;
   const resolveHasPainted = useRef(void 0,);
   useAfterPaintEffect(
     () => {
@@ -12708,7 +12708,7 @@ function useReplaceInitialState({
 }
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('route-change-popstate',);
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change-popstate',);
   const viewTransitionReady = useRef(void 0,);
   const popStateHandler = useCallback(async ({
     state,
@@ -13283,7 +13283,7 @@ function useScheduleRenderSideEffects(dep,) {
 }
 function useNavigationTransition(enableAsyncURLUpdates,) {
   const startNativeSpinner = useNativeLoadingSpinner();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('route-change', true,);
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change', true,);
   const navigationController = useRef(void 0,);
   return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
     var _a;
@@ -26899,20 +26899,24 @@ function useWheelScroll(ref, {
   }, [],);
   let handler;
   if (enabled) {
-    let clampX = function (v,) {
+    let clampX2 = function (v,) {
         return constraints.current === null ? v : clamp2(v, constraints.current.left, constraints.current.right,);
       },
-      clampY = function (v,) {
+      clampY2 = function (v,) {
         return constraints.current === null ? v : clamp2(v, constraints.current.top, constraints.current.bottom,);
       },
-      updateX = function (delta,) {
+      updateX2 = function (delta,) {
         offsetX.stop();
-        offsetX.set(clampX(offsetX.get() - delta,),);
+        offsetX.set(clampX2(offsetX.get() - delta,),);
       },
-      updateY = function (delta,) {
+      updateY2 = function (delta,) {
         offsetY.stop();
-        offsetY.set(clampY(offsetY.get() - delta,),);
+        offsetY.set(clampY2(offsetY.get() - delta,),);
       };
+    var clampX = clampX2,
+      clampY = clampY2,
+      updateX = updateX2,
+      updateY = updateY2;
     const debouncedOnScrollEnd = debounce(() => {
       onScrollEnd && onScrollEnd(getPointData(),);
       isWheelScrollActive.current = false;
@@ -26931,14 +26935,14 @@ function useWheelScroll(ref, {
       }
       switch (direction) {
         case 'horizontal':
-          updateX(e.deltaX,);
+          updateX2(e.deltaX,);
           break;
         case 'vertical':
-          updateY(e.deltaY,);
+          updateY2(e.deltaY,);
           break;
         default:
-          updateX(e.deltaX,);
-          updateY(e.deltaY,);
+          updateX2(e.deltaX,);
+          updateY2(e.deltaY,);
       }
       onScroll && onScroll(getPointData(),);
       debouncedOnScrollEnd();
@@ -29696,7 +29700,9 @@ function createData(defaultState2, actions,) {
     const storeValueAtHookCallTime = useMemo(() => store.get(), [store,],);
     useEffect(() => {
       const unsubscribe = store.subscribe(notifyUpdates,);
-      if (storeValueAtHookCallTime !== store.get()) notifyUpdates(store.getVersion(),);
+      if (storeValueAtHookCallTime !== store.get()) {
+        notifyUpdates(store.getVersion(),);
+      }
       return unsubscribe;
     }, [store, storeValueAtHookCallTime,],);
     return [store.get(), store.getActions(),];
@@ -33273,12 +33279,16 @@ var RequestsObserver = class {
   }
   setRequests(requests,) {
     var _a;
+    const lastRequests = this.requests;
     this.requests = requests;
     const requestsByCacheKey = new Map(requests.map((request) => [getRequestCacheKey(request,), request,]),);
     const nextSubscribedKeys = Array.from(requestsByCacheKey.keys(),);
     const hasSubscriptionChange = nextSubscribedKeys.length !== __privateGet(this, _subscriptions,).size ||
       nextSubscribedKeys.some((url) => !__privateGet(this, _subscriptions,).has(url,));
     if (!hasSubscriptionChange) {
+      if (!isEqual(lastRequests, requests,)) {
+        this.updateResults();
+      }
       return;
     }
     for (const url of __privateGet(this, _subscriptions,).keys()) {
@@ -33313,6 +33323,10 @@ function useFetchRequests(requests, disabled,) {
   }
   const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
+  React2.useLayoutEffect(() => {
+    if (disabled) return;
+    observer2.setRequests(requests,);
+  }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
     return () => observer2.unmount();
   }, [observer2,],);
@@ -38551,11 +38565,14 @@ function getDatabaseCollection({
   assertNever(data2, 'Unsupported collection type',);
 }
 var QueryEngine = class {
+  constructor() {
+    __publicField(this, 'useNewOptimizer', false,);
+  }
   async query(query, locale,) {
-    if (query.from.type === 'Collection') {
-      return this.queryOld(query, locale,);
+    if (this.useNewOptimizer || query.from.type !== 'Collection') {
+      return this.queryNew(query, locale,);
     }
-    return this.queryNew(query, locale,);
+    return this.queryOld(query, locale,);
   }
   async queryNew(query, locale,) {
     const optimizer = new Optimizer(query, locale,);
@@ -43885,9 +43902,7 @@ var DOM = {
 var parser;
 var supportsNativeParseHTML = /* @__PURE__ */ (() =>
   // Firefox has rare-random issues with the native parser: https://framer-team.slack.com/archives/C01B14R6E22/p1724159313153969
-  !isFirefox() && typeof Document !== 'undefined' &&
-  // @ts-expect-error -- FIXME: TS 5.4 does not know about it yet.
-  typeof Document.parseHTMLUnsafe === 'function')();
+  !isFirefox() && typeof Document !== 'undefined' && typeof Document.parseHTMLUnsafe === 'function')();
 function domParser(html, type,) {
   if (supportsNativeParseHTML && !type) return Document.parseHTMLUnsafe(html,);
   parser ?? (parser = new DOMParser());
@@ -45964,7 +45979,8 @@ var package_default = {
   scripts: {
     prepublishOnly: 'make build',
     coverage: 'yarn :jest --coverage',
-    lint: 'yarn format-check:ts && yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet',
+    lint: 'yarn format-check:ts && yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
+    'lint:ci': 'yarn format-check:ts && yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache --cache-strategy content',
     'format:ts': 'yarn :format "src/**/*.{ts,tsx}"',
     'format-check:ts': 'yarn :format-check "src/**/*.{ts,tsx}"',
     'lint:fix': 'yarn lint --fix --cache',
@@ -45991,17 +46007,18 @@ var package_default = {
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.19',
-    '@typescript-eslint/eslint-plugin': '^6.16.0',
-    '@typescript-eslint/parser': '^6.16.0',
+    '@typescript-eslint/eslint-plugin': '^8.2.0',
+    '@typescript-eslint/parser': '^8.2.0',
     chalk: '^4.1.2',
     eslint: '^8.56.0',
+    'eslint-plugin-framer-studio': 'workspace:*',
     immutable: '^3.8.2',
     'jest-diff': '^29.3.1',
     'jest-junit': '^15.0.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.5.2',
-    typescript: '^5.4.5',
+    typescript: '^5.5.4',
     yargs: '^17.6.2',
   },
   peerDependencies: {
