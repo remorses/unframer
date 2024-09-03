@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-LT23UL7F.js
+// https :https://app.framerstatic.com/chunk-4EGGB5TS.js
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { jsx, jsxs, } from 'react/jsx-runtime';
@@ -2168,9 +2168,9 @@ var BaseAnimation = class {
       delay: delay2,
       onComplete,
       onUpdate,
-      isGenerator,
+      isGenerator: isGenerator2,
     } = this.options;
-    if (!isGenerator && !canAnimate(keyframes2, name, type, velocity,)) {
+    if (!isGenerator2 && !canAnimate(keyframes2, name, type, velocity,)) {
       if (instantAnimationState.current || !delay2) {
         onUpdate === null || onUpdate === void 0 ? void 0 : onUpdate(getFinalKeyframe(keyframes2, this.options, finalKeyframe,),);
         onComplete === null || onComplete === void 0 ? void 0 : onComplete();
@@ -3164,7 +3164,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.3.29';
+    this.version = '11.3.31';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -3657,7 +3657,7 @@ function setTarget(visualElement, definition,) {
   }
 }
 function getOptimisedAppearId(visualElement,) {
-  return visualElement.getProps()[optimizedAppearDataAttribute];
+  return visualElement.props[optimizedAppearDataAttribute];
 }
 var WillChangeMotionValue = class extends MotionValue {
   constructor() {
@@ -4299,8 +4299,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       element.addValue(key7, nextValue,);
       if (false) {
         warnOnce(
-          nextValue.version === '11.3.29',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.29 may not work as expected.`,
+          nextValue.version === '11.3.31',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.3.31 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -4460,6 +4460,7 @@ var VisualElement = class {
     cancelFrame(this.notifyUpdate,);
     cancelFrame(this.render,);
     this.valueSubscriptions.forEach((remove2) => remove2());
+    this.valueSubscriptions.clear();
     this.removeFromVariantTree && this.removeFromVariantTree();
     this.parent && this.parent.children.delete(this,);
     for (const key7 in this.events) {
@@ -4475,6 +4476,9 @@ var VisualElement = class {
     this.current = null;
   }
   bindToMotionValue(key7, value,) {
+    if (this.valueSubscriptions.has(key7,)) {
+      this.valueSubscriptions.get(key7,)();
+    }
     const valueIsTransform = transformProps.has(key7,);
     const removeOnChange = value.on('change', (latestValue) => {
       this.latestValues[key7] = latestValue;
@@ -4484,9 +4488,14 @@ var VisualElement = class {
       }
     },);
     const removeOnRenderRequest = value.on('renderRequest', this.scheduleRender,);
+    let removeSyncCheck;
+    if (window.MotionCheckAppearSync) {
+      removeSyncCheck = window.MotionCheckAppearSync(this, key7, value,);
+    }
     this.valueSubscriptions.set(key7, () => {
       removeOnChange();
       removeOnRenderRequest();
+      if (removeSyncCheck) removeSyncCheck();
       if (value.owner) value.stop();
     },);
   }
@@ -6840,8 +6849,12 @@ function cancelTreeOptimisedTransformAnimations(projectionNode,) {
   } = projectionNode.options;
   if (!visualElement) return;
   const appearId = getOptimisedAppearId(visualElement,);
-  if (window.MotionHasOptimisedTransformAnimation(appearId,)) {
-    window.MotionCancelOptimisedTransform(appearId,);
+  if (window.MotionHasOptimisedAnimation(appearId, 'transform',)) {
+    const {
+      layout: layout2,
+      layoutId,
+    } = projectionNode.options;
+    window.MotionCancelOptimisedAnimation(appearId, 'transform', frame, !(layout2 || layoutId),);
   }
   const {
     parent,
@@ -7059,7 +7072,7 @@ function createProjectionNode2({
         this.options.onExitComplete && this.options.onExitComplete();
         return;
       }
-      if (window.MotionCancelOptimisedTransform && !this.hasCheckedOptimisedAppear) {
+      if (window.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
         cancelTreeOptimisedTransformAnimations(this,);
       }
       !this.root.isUpdating && this.root.startUpdate();
@@ -9830,12 +9843,14 @@ function useResetProjection() {
   }, [],);
   return reset;
 }
-var appearStoreId = (id4, value,) => `${id4}: ${value}`;
+var appearStoreId = (elementId, valueName,) => {
+  const key7 = transformProps.has(valueName,) ? 'transform' : valueName;
+  return `${elementId}: ${key7}`;
+};
 var appearAnimationStore = /* @__PURE__ */ new Map();
 var elementsWithAppearAnimations = /* @__PURE__ */ new Set();
 function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
-  const optimisedValueName = transformProps.has(valueName,) ? 'transform' : valueName;
-  const storeId = appearStoreId(elementId, optimisedValueName,);
+  const storeId = appearStoreId(elementId, valueName,);
   const optimisedAnimation = appearAnimationStore.get(storeId,);
   if (!optimisedAnimation) {
     return null;
@@ -9844,15 +9859,13 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
     animation,
     startTime,
   } = optimisedAnimation;
+  function cancelAnimation() {
+    var _a;
+    (_a = window.MotionCancelOptimisedAnimation) === null || _a === void 0 ? void 0 : _a.call(window, elementId, valueName, frame2,);
+  }
+  animation.onfinish = cancelAnimation;
   if (startTime === null || window.MotionHandoffIsComplete) {
-    appearAnimationStore.delete(storeId,);
-    frame2.render(() =>
-      frame2.render(() => {
-        try {
-          animation.cancel();
-        } catch (error) {}
-      },)
-    );
+    cancelAnimation();
     return null;
   } else {
     return startTime;
@@ -9860,6 +9873,14 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
 }
 var startFrameTime;
 var readyAnimation;
+var suspendedAnimations = /* @__PURE__ */ new Set();
+function resumeSuspendedAnimations() {
+  suspendedAnimations.forEach((data2) => {
+    data2.animation.play();
+    data2.animation.startTime = data2.startTime;
+  },);
+  suspendedAnimations.clear();
+}
 function startOptimizedAppearAnimation(element, name, keyframes2, options, onReady,) {
   if (window.MotionHandoffIsComplete) {
     window.MotionHandoffAnimation = void 0;
@@ -9883,20 +9904,55 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       startTime: null,
     },);
     window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
-    window.MotionHasOptimisedTransformAnimation = (elementId) => {
+    window.MotionHasOptimisedAnimation = (elementId, valueName,) => {
       if (!elementId) return false;
-      const animationId = appearStoreId(elementId, 'transform',);
+      if (!valueName) {
+        return elementsWithAppearAnimations.has(elementId,);
+      }
+      const animationId = appearStoreId(elementId, valueName,);
       return Boolean(appearAnimationStore.get(animationId,),);
     };
-    window.MotionCancelOptimisedTransform = (elementId) => {
-      const animationId = appearStoreId(elementId, 'transform',);
+    window.MotionCancelOptimisedAnimation = (elementId, valueName, frame2, canResume,) => {
+      const animationId = appearStoreId(elementId, valueName,);
       const data2 = appearAnimationStore.get(animationId,);
-      if (data2) {
+      if (!data2) return;
+      if (frame2 && canResume === void 0) {
+        frame2.postRender(() => {
+          frame2.postRender(() => {
+            data2.animation.cancel();
+          },);
+        },);
+      } else {
         data2.animation.cancel();
+      }
+      if (frame2 && canResume) {
+        suspendedAnimations.add(data2,);
+        frame2.render(resumeSuspendedAnimations,);
+      } else {
         appearAnimationStore.delete(animationId,);
+        if (!appearAnimationStore.size) {
+          window.MotionCancelOptimisedAnimation = void 0;
+        }
       }
     };
-    window.MotionHasOptimisedAnimation = (elementId) => Boolean(elementId && elementsWithAppearAnimations.has(elementId,),);
+    window.MotionCheckAppearSync = (visualElement, valueName, value,) => {
+      var _a, _b;
+      const appearId = getOptimisedAppearId(visualElement,);
+      if (!appearId) return;
+      const valueIsOptimised = (_a = window.MotionHasOptimisedAnimation) === null || _a === void 0
+        ? void 0
+        : _a.call(window, appearId, valueName,);
+      const externalAnimationValue = (_b = visualElement.props.values) === null || _b === void 0 ? void 0 : _b[valueName];
+      if (!valueIsOptimised || !externalAnimationValue) return;
+      const removeSyncCheck = value.on('change', (latestValue) => {
+        var _a2;
+        if (externalAnimationValue.get() !== latestValue) {
+          (_a2 = window.MotionCancelOptimisedAnimation) === null || _a2 === void 0 ? void 0 : _a2.call(window, appearId, valueName,);
+          removeSyncCheck();
+        }
+      },);
+      return removeSyncCheck;
+    };
   }
   const startAnimation2 = () => {
     readyAnimation.cancel();
@@ -9951,26 +10007,23 @@ function useAnimatedState(initialState2,) {
   const visualState = useVisualState({}, false,);
   const element = useConstant(() => {
     return new StateVisualElement({
-      props: {},
+      props: {
+        onUpdate: (v) => {
+          setAnimationState({
+            ...v,
+          },);
+        },
+      },
       visualState,
       presenceContext: null,
     }, {
       initialState: initialState2,
     },);
   },);
-  useEffect(() => {
+  useLayoutEffect(() => {
     element.mount({},);
     return () => element.unmount();
   }, [element,],);
-  useEffect(() => {
-    element.update({
-      onUpdate: (v) => {
-        setAnimationState({
-          ...v,
-        },);
-      },
-    }, null,);
-  }, [setAnimationState, element,],);
   const startAnimation2 = useConstant(() => (animationDefinition) => {
     return animateVisualElement(element, animationDefinition,);
   });
@@ -10084,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.6MXOFEQA.js
+// https :https://app.framerstatic.com/framer.L6W5BZYU.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -19577,6 +19630,9 @@ function isNullish2(value,) {
 function isValidDate(value,) {
   return value instanceof Date && !isNaN(value.getTime(),);
 }
+function isGenerator(value,) {
+  return isObject2(value,) && isFunction(value.return,);
+}
 function isReactComponent(component,) {
   return isObject2(component,) || isFunction(component,);
 }
@@ -23136,15 +23192,15 @@ var SharedIntersectionObserver = class {
     return (_a = this.sharedIntersectionObserver) == null ? void 0 : _a.root;
   }
 };
-var SharedIntersectionObserverContext = /* @__PURE__ */ React4.createContext(/* @__PURE__ */ new Map(),);
+var SharedIntersectionObserverContext = /* @__PURE__ */ createContext(/* @__PURE__ */ new Map(),);
 function useSharedIntersectionObserver(ref, callback, options,) {
   if (typeof IntersectionObserver === 'undefined') return;
   const key7 = useConstant2(() => `${options.rootMargin}`);
-  const observers2 = React4.useContext(SharedIntersectionObserverContext,);
+  const observers2 = useContext3(SharedIntersectionObserverContext,);
   const {
     enabled,
   } = options;
-  React4.useEffect(() => {
+  useEffect(() => {
     var _a;
     const element = ref.current;
     if (!enabled || !element) return;
@@ -33744,8 +33800,11 @@ var CompatibilityDatabaseCollection = class {
     const controlEntries = Object.entries(propertyControls,);
     for (const [key7, controlDescription,] of controlEntries) {
       if (!controlDescription) continue;
+      const type = controlDescription.type;
+      assert(type !== 'array', 'Array properties are not supported',);
+      assert(type !== 'object', 'Object properties are not supported',);
       schema[key7] = {
-        type: controlDescription.type,
+        type,
         isNullable: true,
       };
     }
@@ -34011,6 +34070,12 @@ var DatabaseValue = {
           value: result,
         };
       }
+      case 'array': {
+        throw new Error('Array cast not implemented',);
+      }
+      case 'object': {
+        throw new Error('Array cast not implemented',);
+      }
       case 'unknown': {
         return value;
       }
@@ -34105,6 +34170,14 @@ var DatabaseValue = {
         return isString22(value.value,) ? `'${value.value}' /* Link */` : 'Link';
       case 'multicollectionreference':
         return `[${value.value.map((v) => `'${v}'`).join(', ',)}]`;
+      case 'array':
+        return `[${value.value.map((v) => DatabaseValue.stringify(v,)).join(', ',)}]`;
+      case 'object':
+        return `{${
+          Object.entries(value.value,).map(([objectKey, objectValue,],) => `${objectKey}: ${DatabaseValue.stringify(objectValue,)}`).join(
+            ', ',
+          )
+        }}`;
       default:
         assertNever(value,);
     }
@@ -34201,6 +34274,12 @@ function compare(left, right, collation4,) {
         if (leftItem > rightItem) return 1;
       }
       return 0;
+    }
+    case 'array': {
+      throw new Error('Array comparison not implemented',);
+    }
+    case 'object': {
+      throw new Error('Object comparison not implemented',);
     }
     default: {
       assertNever(left,);
@@ -34515,7 +34594,7 @@ var ScalarCase = class extends ScalarExpression {
     }
     return result
       ? {
-        type: result.type,
+        ...result,
         isNullable,
       }
       : null;
@@ -35854,117 +35933,104 @@ var Fields = class extends Metadata {
     __publicField(this, 'name', 'Fields',);
   }
 };
-var AbstractNode = class {};
-var collation = {
-  type: 0,
-  /* CaseInsensitive */
-};
-var ScalarNode = class extends AbstractNode {
-  constructor(referencedFields,) {
-    super();
-    this.referencedFields = referencedFields;
+function getNetworkLatency() {
+  return 25;
+}
+function getNetworkSpeed() {
+  return 100 * 125;
+}
+var KB = 1e3;
+var Cost = class {
+  constructor(network,) {
+    this.network = network;
   }
-};
-var collation2 = {
-  type: 0,
-  /* CaseInsensitive */
-};
-var CaseCondition = class {
-  constructor(when, then,) {
-    this.when = when;
-    this.then = then;
+  static estimate(totalRequests, transferredBytes,) {
+    const latency = getNetworkLatency();
+    const speed = getNetworkSpeed();
+    const network = totalRequests * latency + transferredBytes / speed;
+    return new Cost(network,);
   }
-  getHash() {
-    return calculateHash('CaseCondition', this.when, this.then,);
+  static max(left, right,) {
+    const network = Math.max(left.network, right.network,);
+    return new Cost(network,);
   }
-};
-var ScalarCase2 = class extends ScalarNode {
-  constructor(input, conditions, otherwise,) {
-    const referencedFields = new Fields();
-    if (input) {
-      referencedFields.merge(input.referencedFields,);
-    }
-    for (const condition of conditions) {
-      referencedFields.merge(condition.when.referencedFields,);
-      referencedFields.merge(condition.then.referencedFields,);
-    }
-    if (otherwise) {
-      referencedFields.merge(otherwise.referencedFields,);
-    }
-    super(referencedFields,);
-    this.input = input;
-    this.conditions = conditions;
-    this.otherwise = otherwise;
-    __publicField(this, 'definition', {
-      type: 'unknown',
-      isNullable: true,
-    },);
+  static compare(left, right,) {
+    if (left.network < right.network) return -1;
+    if (left.network > right.network) return 1;
+    return 0;
   }
-  getHash() {
-    return calculateHash('ScalarCase', this.input, ...this.conditions, this.otherwise,);
+  add(cost,) {
+    this.network += cost.network;
+    return this;
   }
   toString() {
-    let result = 'CASE';
-    if (this.input) {
-      result = `${result} ${this.input}`;
-    }
-    for (
-      const {
-        when,
-        then,
-      } of this.conditions
-    ) {
-      result = `${result} WHEN ${when} THEN ${then}`;
-    }
-    if (this.otherwise) {
-      result = `${result} ELSE ${this.otherwise}`;
-    }
-    return `${result} END`;
+    return `${this.network}ms`;
   }
-  evaluate(tuple,) {
-    var _a, _b;
-    const input = ((_a = this.input) == null ? void 0 : _a.evaluate(tuple,)) ?? null;
-    for (const condition of this.conditions) {
-      const when = condition.when.evaluate(tuple,);
-      if (this.input ? DatabaseValue.equal(input, when, collation2,) : convertToBoolean(when,)) {
-        return condition.then.evaluate(tuple,);
+};
+function evaluateSync(generator,) {
+  const state = generator.next();
+  assert(state.done, 'Generator must not yield',);
+  return state.value;
+}
+async function evaluateAsync(generator, state = generator.next(),) {
+  while (!state.done) {
+    const value = await state.value;
+    state = generator.next(value,);
+  }
+  return state.value;
+}
+function* evaluateObject(values,) {
+  const result = {};
+  const keys3 = Object.keys(values,);
+  const promises = [];
+  for (const key7 of keys3) {
+    const generator = values[key7];
+    if (isGenerator(generator,)) {
+      const state = generator.next();
+      if (state.done) {
+        result[key7] = state.value;
+      } else {
+        promises.push(
+          evaluateAsync(generator, state,).then((value) => {
+            result[key7] = value;
+          },),
+        );
       }
-    }
-    return ((_b = this.otherwise) == null ? void 0 : _b.evaluate(tuple,)) ?? null;
-  }
-};
-var OrderingField = class {
-  constructor(field, direction = 'asc',) {
-    this.field = field;
-    this.direction = direction;
-  }
-  getHash() {
-    return calculateHash('OrderingField', this.field.id, this.direction,);
-  }
-};
-var Ordering = class {
-  constructor(ordering,) {
-    this.ordering = ordering;
-    __publicField(this, 'fields', [],);
-    if (ordering) {
-      this.fields.push(...ordering.fields,);
+    } else {
+      result[key7] = generator;
     }
   }
-  get length() {
-    return this.fields.length;
+  if (promises.length > 0) {
+    yield Promise.all(promises,);
   }
-  getHash() {
-    return calculateHash('Ordering', ...this.fields,);
+  return result;
+}
+function* evaluateArray(values,) {
+  const result = [];
+  const keys3 = values.keys();
+  const promises = [];
+  for (const key7 of keys3) {
+    const generator = values[key7];
+    if (isGenerator(generator,)) {
+      const state = generator.next();
+      if (state.done) {
+        result[key7] = state.value;
+      } else {
+        promises.push(
+          evaluateAsync(generator, state,).then((value) => {
+            result[key7] = value;
+          },),
+        );
+      }
+    } else {
+      result[key7] = generator;
+    }
   }
-  push(field,) {
-    this.fields.push(field,);
+  if (promises.length > 0) {
+    yield Promise.all(promises,);
   }
-  equals(other,) {
-    if (this === other) return true;
-    if (this.length !== other.length) return false;
-    return this.getHash() === other.getHash();
-  }
-};
+  return result;
+}
 var RequiredProps = class {
   constructor(ordering, resolvedFields,) {
     this.ordering = ordering;
@@ -36009,14 +36075,446 @@ var RequiredProps = class {
     return node.canProvideResolvedFields(this.resolvedFields,);
   }
 };
+var Tuple = class {
+  constructor() {
+    __publicField(this, 'pointers', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'values', /* @__PURE__ */ new Map(),);
+  }
+  getKey() {
+    const pointers = this.pointers.values();
+    return Array.from(pointers,).join('-',);
+  }
+  addValue(field, value,) {
+    this.values.set(field, value,);
+  }
+  getValue(field,) {
+    return this.values.get(field,) ?? null;
+  }
+  mergeValues(tuple,) {
+    for (const [field, value,] of tuple.values) {
+      this.addValue(field, value,);
+    }
+  }
+  addPointer(collection, pointer,) {
+    this.pointers.set(collection, pointer,);
+  }
+  getPointer(collection,) {
+    return this.pointers.get(collection,);
+  }
+  mergePointers(tuple,) {
+    for (const [collection, pointer,] of tuple.pointers) {
+      this.addPointer(collection, pointer,);
+    }
+  }
+  merge(tuple,) {
+    this.mergeValues(tuple,);
+    this.mergePointers(tuple,);
+  }
+};
+var Relation = class {
+  constructor(fields, tuples = [],) {
+    this.fields = fields;
+    this.tuples = tuples;
+  }
+  push(tuple,) {
+    this.tuples.push(tuple,);
+  }
+  filter(predicate,) {
+    const tuples = this.tuples.filter(predicate,);
+    return new Relation(this.fields, tuples,);
+  }
+  map(fields, callback,) {
+    const tuples = this.tuples.map(callback,);
+    return new Relation(fields, tuples,);
+  }
+  sort(callback,) {
+    const tuples = Array.from(this.tuples,).sort(callback,);
+    return new Relation(this.fields, tuples,);
+  }
+  slice(start, end,) {
+    const tuples = this.tuples.slice(start, end,);
+    return new Relation(this.fields, tuples,);
+  }
+  union(other,) {
+    const fields = new Fields();
+    for (const field of this.fields) {
+      if (other.fields.has(field,)) {
+        fields.add(field,);
+      }
+    }
+    const keys3 = /* @__PURE__ */ new Set();
+    const result = new Relation(fields,);
+    for (const tuple of this.tuples) {
+      const key7 = tuple.getKey();
+      keys3.add(key7,);
+      result.push(tuple,);
+    }
+    for (const tuple of other.tuples) {
+      const key7 = tuple.getKey();
+      if (keys3.has(key7,)) continue;
+      result.push(tuple,);
+    }
+    return result;
+  }
+  intersection(other,) {
+    const fields = new Fields();
+    for (const field of this.fields) {
+      if (other.fields.has(field,)) {
+        fields.add(field,);
+      }
+    }
+    const keys3 = /* @__PURE__ */ new Set();
+    const result = new Relation(fields,);
+    for (const tuple of this.tuples) {
+      const key7 = tuple.getKey();
+      keys3.add(key7,);
+    }
+    for (const tuple of other.tuples) {
+      const key7 = tuple.getKey();
+      if (!keys3.has(key7,)) continue;
+      result.push(tuple,);
+    }
+    return result;
+  }
+};
+var AbstractNode = class {
+  constructor(isSynchronous,) {
+    this.isSynchronous = isSynchronous;
+  }
+};
+var RelationalNode = class extends AbstractNode {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'group',);
+  }
+  /**
+   * Returns the group that the node belongs to. Throws an error if the node
+   * is not in a group. This should only happen in the constructor because
+   * every node is added to a group right after creation.
+   */
+  getGroup() {
+    assert(this.group, 'Node must be in a group',);
+    return this.group;
+  }
+  /**
+   * Adds the node to the given group. Throws an error if the node is already
+   * in a group.
+   */
+  setGroup(group,) {
+    assert(!this.group, 'Node is already in a group',);
+    this.group = group;
+  }
+  /**
+   * Evaluates the node and all children synchronously. Throws an error if the
+   * node is not synchronous.
+   */
+  evaluateSync(context,) {
+    const generator = this.evaluate(context,);
+    return evaluateSync(generator,);
+  }
+  /**
+   * Evaluates the node and all children asynchronously.
+   */
+  evaluateAsync(context,) {
+    const generator = this.evaluate(context,);
+    return evaluateAsync(generator,);
+  }
+};
+var ProjectionField = class {
+  constructor(input, field,) {
+    this.input = input;
+    this.field = field;
+  }
+  getHash() {
+    return calculateHash('ProjectionField', this.input, this.field.id,);
+  }
+};
+var RelationalProject = class extends RelationalNode {
+  constructor(input, projections, passthrough,) {
+    let isSynchronous = input.isSynchronous;
+    for (const projection of projections) {
+      isSynchronous && (isSynchronous = projection.input.isSynchronous);
+    }
+    super(isSynchronous,);
+    this.input = input;
+    this.projections = projections;
+    this.passthrough = passthrough;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+  }
+  getHash() {
+    return calculateHash('RelationalProject', this.inputGroup.id, ...this.projections, this.passthrough,);
+  }
+  getOutputFields() {
+    const fields = new Fields();
+    fields.merge(this.passthrough,);
+    for (const projection of this.projections) {
+      fields.add(projection.field,);
+    }
+    return fields;
+  }
+  canProvideOrdering() {
+    return true;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getInputRequiredProps(required,) {
+    const resolvedFields = new Fields(required.resolvedFields,);
+    for (const projection of this.projections) {
+      resolvedFields.merge(projection.input.referencedFields,);
+      resolvedFields.delete(projection.field,);
+    }
+    return new RequiredProps(required.ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    let projectionsCost = new Cost(0,);
+    for (const projection of this.projections) {
+      const projectionCost = projection.input.optimize(optimizer,);
+      projectionsCost = Cost.max(projectionsCost, projectionCost,);
+    }
+    return new Cost(0,).add(Cost.max(inputCost, projectionsCost,),);
+  }
+  getOptimized(required,) {
+    const inputRequired = this.getInputRequiredProps(required,);
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    const projections = this.projections.map((projection) => {
+      const projectionInput = projection.input.getOptimized();
+      return new ProjectionField(projectionInput, projection.field,);
+    },);
+    return new RelationalProject(input, projections, this.passthrough,);
+  }
+  *evaluate(context,) {
+    const outputFields = this.getOutputFields();
+    const input = yield* this.input.evaluate(context,);
+    const projectedValues = yield* evaluateArray(
+      input.tuples.map((tuple) =>
+        evaluateArray(this.projections.map((projection) =>
+          evaluateObject({
+            field: projection.field,
+            value: projection.input.evaluate(context, tuple,),
+          },)
+        ),)
+      ),
+    );
+    return input.map(outputFields, (tuple, index,) => {
+      const result = new Tuple();
+      result.mergePointers(tuple,);
+      for (const field of this.passthrough) {
+        const value = tuple.getValue(field,);
+        result.addValue(field, value,);
+      }
+      const projections = projectedValues[index];
+      assert(projections, 'Projections must exist',);
+      for (
+        const {
+          field,
+          value,
+        } of projections
+      ) {
+        result.addValue(field, value,);
+      }
+      return result;
+    },);
+  }
+};
+var collation = {
+  type: 0,
+  /* CaseInsensitive */
+};
+var ScalarNode = class extends AbstractNode {
+  constructor(referencedFields, isSynchronous,) {
+    super(isSynchronous,);
+    this.referencedFields = referencedFields;
+    this.isSynchronous = isSynchronous;
+  }
+  /**
+   * Evaluates the node and all children synchronously. Throws an error if the
+   * node is not synchronous.
+   */
+  evaluateSync(context, tuple,) {
+    const generator = this.evaluate(context, tuple,);
+    return evaluateSync(generator,);
+  }
+  /**
+   * Evaluates the node and all children asynchronously.
+   */
+  evaluateAsync(context, tuple,) {
+    const generator = this.evaluate(context, tuple,);
+    return evaluateAsync(generator,);
+  }
+};
+var collation2 = {
+  type: 0,
+  /* CaseInsensitive */
+};
+var CaseCondition = class {
+  constructor(when, then,) {
+    this.when = when;
+    this.then = then;
+  }
+  getHash() {
+    return calculateHash('CaseCondition', this.when, this.then,);
+  }
+};
+var ScalarCase2 = class extends ScalarNode {
+  constructor(input, conditions, otherwise,) {
+    const referencedFields = new Fields();
+    let isSynchronous = true;
+    if (input) {
+      referencedFields.merge(input.referencedFields,);
+      isSynchronous && (isSynchronous = input.isSynchronous);
+    }
+    for (
+      const {
+        when,
+        then,
+      } of conditions
+    ) {
+      referencedFields.merge(when.referencedFields,);
+      isSynchronous && (isSynchronous = when.isSynchronous);
+      referencedFields.merge(then.referencedFields,);
+      isSynchronous && (isSynchronous = then.isSynchronous);
+    }
+    if (otherwise) {
+      referencedFields.merge(otherwise.referencedFields,);
+      isSynchronous && (isSynchronous = otherwise.isSynchronous);
+    }
+    super(referencedFields, isSynchronous,);
+    this.input = input;
+    this.conditions = conditions;
+    this.otherwise = otherwise;
+    __publicField(this, 'definition', {
+      type: 'unknown',
+      isNullable: true,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarCase', this.input, ...this.conditions, this.otherwise,);
+  }
+  toString() {
+    let result = 'CASE';
+    if (this.input) {
+      result = `${result} ${this.input}`;
+    }
+    for (
+      const {
+        when,
+        then,
+      } of this.conditions
+    ) {
+      result = `${result} WHEN ${when} THEN ${then}`;
+    }
+    if (this.otherwise) {
+      result = `${result} ELSE ${this.otherwise}`;
+    }
+    return `${result} END`;
+  }
+  optimize(optimizer,) {
+    var _a, _b;
+    (_a = this.input) == null ? void 0 : _a.optimize(optimizer,);
+    for (const condition of this.conditions) {
+      condition.when.optimize(optimizer,);
+      condition.then.optimize(optimizer,);
+    }
+    (_b = this.otherwise) == null ? void 0 : _b.optimize(optimizer,);
+    return new Cost(0,);
+  }
+  getOptimized() {
+    var _a, _b;
+    const input = (_a = this.input) == null ? void 0 : _a.getOptimized();
+    const conditions = this.conditions.map((condition) => {
+      const when = condition.when.getOptimized();
+      const then = condition.then.getOptimized();
+      return new CaseCondition(when, then,);
+    },);
+    const otherwise = (_b = this.otherwise) == null ? void 0 : _b.getOptimized();
+    return new ScalarCase2(input, conditions, otherwise,);
+  }
+  *evaluate(context, tuple,) {
+    var _a, _b;
+    const {
+      input,
+      conditions,
+      otherwise,
+    } = yield* evaluateObject({
+      input: ((_a = this.input) == null ? void 0 : _a.evaluate(context, tuple,)) ?? null,
+      conditions: evaluateArray(this.conditions.map((condition) =>
+        evaluateObject({
+          when: condition.when.evaluate(context, tuple,),
+          then: condition.then.evaluate(context, tuple,),
+        },)
+      ),),
+      otherwise: ((_b = this.otherwise) == null ? void 0 : _b.evaluate(context, tuple,)) ?? null,
+    },);
+    if (this.input) {
+      for (
+        const {
+          when,
+          then,
+        } of conditions
+      ) {
+        if (DatabaseValue.equal(input, when, collation2,)) {
+          return then;
+        }
+      }
+    } else {
+      for (
+        const {
+          when,
+          then,
+        } of conditions
+      ) {
+        if (convertToBoolean(when,)) {
+          return then;
+        }
+      }
+    }
+    return otherwise;
+  }
+};
+var OrderingField = class {
+  constructor(field, direction = 'asc',) {
+    this.field = field;
+    this.direction = direction;
+  }
+  getHash() {
+    return calculateHash('OrderingField', this.field.id, this.direction,);
+  }
+};
+var Ordering = class {
+  constructor(ordering,) {
+    this.ordering = ordering;
+    __publicField(this, 'fields', [],);
+    if (ordering) {
+      this.merge(ordering,);
+    }
+  }
+  get length() {
+    return this.fields.length;
+  }
+  getHash() {
+    return calculateHash('Ordering', ...this.fields,);
+  }
+  push(field,) {
+    this.fields.push(field,);
+  }
+  merge(ordering,) {
+    this.fields.push(...ordering.fields,);
+  }
+  equals(other,) {
+    if (this === other) return true;
+    if (this.length !== other.length) return false;
+    return this.getHash() === other.getHash();
+  }
+};
 var Scope = class {
   constructor(parent,) {
     this.parent = parent;
     __publicField(this, 'node',);
-    __publicField(this, 'defaultOrdering', new Ordering(),);
     __publicField(this, 'ordering',);
     __publicField(this, 'fields', [],);
-    this.defaultOrdering = new Ordering(parent == null ? void 0 : parent.defaultOrdering,);
   }
   /**
    * Returns the last node built in the scope and removes it from the scope.
@@ -36057,10 +36555,6 @@ var Scope = class {
    */
   addField(scopeField,) {
     this.fields.push(scopeField,);
-    if (scopeField.field.name === VIRTUAL_INDEX_FIELD) {
-      const orderingField = new OrderingField(scopeField.field,);
-      this.defaultOrdering.push(orderingField,);
-    }
   }
   /**
    * Merges all fields from the given scope into the this scope.
@@ -36092,14 +36586,20 @@ var Scope = class {
     return (_a = this.parent) == null ? void 0 : _a.resolveField(name, collection,);
   }
   /**
+   * Checks if the scope or any parent scope has the given scope field.
+   */
+  has(scopeField,) {
+    var _a;
+    if (this.fields.includes(scopeField,)) {
+      return true;
+    }
+    return ((_a = this.parent) == null ? void 0 : _a.has(scopeField,)) ?? false;
+  }
+  /**
    * Returns the required ordering for the scope.
    */
   getRequiredOrdering() {
-    const ordering = new Ordering(this.ordering,);
-    for (const field of this.defaultOrdering.fields) {
-      ordering.push(field,);
-    }
-    return ordering;
+    return this.ordering ?? new Ordering();
   }
   /**
    * Returns the required resolved fields for the scope.
@@ -36132,14 +36632,14 @@ var Scope = class {
    * field names.
    */
   getNamedFields() {
-    const namedFields = /* @__PURE__ */ new Map();
+    const namedFields = {};
     for (
       const {
         name,
         field,
       } of this.fields
     ) {
-      namedFields.set(name, field,);
+      namedFields[name] = field;
     }
     return namedFields;
   }
@@ -36152,6 +36652,7 @@ var Builder = class {
     __publicField(this, 'collectionId', 0,);
     __publicField(this, 'indexId', 0,);
     __publicField(this, 'fieldId', 0,);
+    __publicField(this, 'subquery',);
   }
   build() {
     const inScope = new Scope();
@@ -36166,6 +36667,7 @@ var Builder = class {
   }
   buildSelect(inScope, select,) {
     const fromScope = this.buildFrom(inScope, select.from,);
+    const defaultOrdering = fromScope.getRequiredOrdering();
     if (select.where) {
       const input = fromScope.takeNode();
       const predicate = this.buildExpression(fromScope, select.where,);
@@ -36182,7 +36684,10 @@ var Builder = class {
         const orderingField = new OrderingField(scopeField.field, order.direction,);
         ordering2.push(orderingField,);
       }
+      ordering2.merge(defaultOrdering,);
       projectionScope.setOrdering(ordering2,);
+    } else {
+      projectionScope.setOrdering(defaultOrdering,);
     }
     const ordering = projectionScope.getRequiredOrdering();
     if (select.offset) {
@@ -36202,18 +36707,32 @@ var Builder = class {
   buildSelectList(inScope, selects,) {
     const outScope = inScope.push();
     const passthrough = new Fields();
+    const projections = [];
     for (const select of selects) {
-      assert(select.type === 'Identifier', 'Unsupported select type',);
-      const scopeField = inScope.resolveField(select.name, select.collection,);
-      if (isUndefined(scopeField,)) continue;
-      passthrough.add(scopeField.field,);
-      outScope.addField({
-        ...scopeField,
-        name: select.alias ?? scopeField.name,
-      },);
+      if (select.type === 'Identifier') {
+        const scopeField = inScope.resolveField(select.name, select.collection,);
+        if (isUndefined(scopeField,)) continue;
+        passthrough.add(scopeField.field,);
+        outScope.addField({
+          ...scopeField,
+          name: select.alias ?? scopeField.name,
+        },);
+      } else {
+        const expression = this.buildExpression(inScope, select,);
+        assert(select.alias, 'Subqueries should have an alias',);
+        const fieldId = FieldId(this.fieldId++,);
+        const fieldName = select.alias;
+        const field = new FieldMetadata(fieldId, fieldName, expression.definition, void 0,);
+        const projection = new ProjectionField(expression, field,);
+        projections.push(projection,);
+        outScope.addField({
+          field,
+          name: fieldName,
+        },);
+      }
     }
     const input = inScope.takeNode();
-    const node = this.normalizer.newRelationalProject(input, [], passthrough,);
+    const node = this.normalizer.newRelationalProject(input, projections, passthrough,);
     outScope.setNode(node,);
     return outScope;
   }
@@ -36255,6 +36774,10 @@ var Builder = class {
         name: VIRTUAL_INDEX_FIELD,
         collectionName,
       },);
+      const ordering = new Ordering();
+      const orderingField = new OrderingField(field,);
+      ordering.push(orderingField,);
+      outScope.setOrdering(ordering,);
     }
     for (const indexData of collectionData.indexes) {
       const lookupNodes = [];
@@ -36278,9 +36801,15 @@ var Builder = class {
   buildJoin(inScope, from,) {
     const leftScope = this.buildFrom(inScope, from.left,);
     const rightScope = this.buildFrom(inScope, from.right,);
+    const ordering = new Ordering();
+    const leftOrdering = leftScope.getRequiredOrdering();
+    ordering.merge(leftOrdering,);
+    const rightOrdering = rightScope.getRequiredOrdering();
+    ordering.merge(rightOrdering,);
     const outScope = inScope.push();
     outScope.addFieldsFromScope(leftScope,);
     outScope.addFieldsFromScope(rightScope,);
+    outScope.setOrdering(ordering,);
     const constraint = this.buildExpression(outScope, from.constraint,);
     const left = leftScope.takeNode();
     const right = rightScope.takeNode();
@@ -36300,7 +36829,7 @@ var Builder = class {
       case 'Identifier':
         return this.buildIdentifier(inScope, expression,);
       case 'LiteralValue':
-        return this.buildLiteralValue(inScope, expression,);
+        return this.buildLiteralValue(expression,);
       case 'FunctionCall':
         return this.buildFunctionCall(inScope, expression,);
       case 'Case':
@@ -36311,20 +36840,30 @@ var Builder = class {
         return this.buildBinaryOperation(inScope, expression,);
       case 'TypeCast':
         return this.buildTypeCast(inScope, expression,);
+      case 'Select':
+        throw new Error('Subqueries are only supported inside subquery function calls',);
       default:
         assertNever(expression, 'Unsupported expression',);
     }
   }
   buildIdentifier(inScope, expression,) {
+    var _a;
     const scopeField = inScope.resolveField(expression.name, expression.collection,);
-    if (scopeField) return this.normalizer.newScalarVariable(scopeField.field,);
+    if (scopeField) {
+      const isOuterField = ((_a = this.subquery) == null ? void 0 : _a.inScope.has(scopeField,)) ?? false;
+      if (isOuterField) {
+        assert(this.subquery, 'Subquery must exist',);
+        this.subquery.outerFields.add(scopeField.field,);
+      }
+      return this.normalizer.newScalarVariable(scopeField.field, isOuterField,);
+    }
     const definition = {
       type: 'unknown',
       isNullable: true,
     };
     return this.normalizer.newScalarConstant(definition, null,);
   }
-  buildLiteralValue(inScope, expression,) {
+  buildLiteralValue(expression,) {
     const value = getDatabaseValue(expression.value,);
     const definition = {
       type: 'unknown',
@@ -36333,19 +36872,44 @@ var Builder = class {
     return this.normalizer.newScalarConstant(definition, value,);
   }
   buildFunctionCall(inScope, expression,) {
-    const sourceExpression = expression.arguments[0];
-    assert(sourceExpression, 'Invalid arguments',);
-    const source = this.buildExpression(inScope, sourceExpression,);
-    const targetExpression = expression.arguments[1];
-    assert(targetExpression, 'Invalid arguments',);
-    const target = this.buildExpression(inScope, targetExpression,);
+    const getArgument = (index) => {
+      const argument = expression.arguments[index];
+      assert(argument, 'Missing argument',);
+      return this.buildExpression(inScope, argument,);
+    };
     switch (expression.functionName) {
-      case 'CONTAINS':
+      case 'CONTAINS': {
+        const source = getArgument(0,);
+        const target = getArgument(1,);
         return this.normalizer.newScalarContains(source, target,);
-      case 'STARTS_WITH':
+      }
+      case 'STARTS_WITH': {
+        const source = getArgument(0,);
+        const target = getArgument(1,);
         return this.normalizer.newScalarStartsWith(source, target,);
-      case 'ENDS_WITH':
+      }
+      case 'ENDS_WITH': {
+        const source = getArgument(0,);
+        const target = getArgument(1,);
         return this.normalizer.newScalarEndsWith(source, target,);
+      }
+      case 'ARRAY': {
+        const subqueryExpression = expression.arguments[0];
+        assert(subqueryExpression, 'Missing argument',);
+        assert(subqueryExpression.type === 'Select', 'Subqueries require a select expression',);
+        const previousSubquery = this.subquery;
+        try {
+          this.subquery = new Subquery(inScope,);
+          const outScope = this.buildSelect(inScope, subqueryExpression,);
+          const input = outScope.takeNode();
+          const namedFields = outScope.getNamedFields();
+          const ordering = outScope.getRequiredOrdering();
+          const outerFields = this.subquery.outerFields;
+          return this.normalizer.newScalarSubquery(input, namedFields, ordering, outerFields,);
+        } finally {
+          this.subquery = previousSubquery;
+        }
+      }
       default:
         throw new Error('Unsupported function name',);
     }
@@ -36487,66 +37051,15 @@ function getDatabaseValue(value,) {
   }
   return null;
 }
-function getNetworkLatency() {
-  return 25;
-}
-function getNetworkSpeed() {
-  return 100 * 125;
-}
-var KB = 1e3;
-var Cost = class {
-  constructor(network,) {
-    this.network = network;
-  }
-  static estimate(totalRequests, transferredBytes,) {
-    const latency = getNetworkLatency();
-    const speed = getNetworkSpeed();
-    const network = totalRequests * latency + transferredBytes / speed;
-    return new Cost(network,);
-  }
-  static max(left, right,) {
-    const network = Math.max(left.network, right.network,);
-    return new Cost(network,);
-  }
-  static compare(left, right,) {
-    if (left.network < right.network) return -1;
-    if (left.network > right.network) return 1;
-    return 0;
-  }
-  add(cost,) {
-    this.network += cost.network;
-    return this;
-  }
-  toString() {
-    return `${this.network}ms`;
-  }
-};
-var RelationalNode = class extends AbstractNode {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'group',);
-  }
-  /**
-   * Returns the group that the node belongs to. Throws an error if the node
-   * is not in a group. This should only happen in the constructor because
-   * every node is added to a group right after creation.
-   */
-  getGroup() {
-    assert(this.group, 'Node must be in a group',);
-    return this.group;
-  }
-  /**
-   * Adds the node to the given group. Throws an error if the node is already
-   * in a group.
-   */
-  setGroup(group,) {
-    assert(!this.group, 'Node is already in a group',);
-    this.group = group;
+var Subquery = class {
+  constructor(inScope,) {
+    this.inScope = inScope;
+    __publicField(this, 'outerFields', new Fields(),);
   }
 };
 var RelationalFilter = class extends RelationalNode {
   constructor(input, predicate,) {
-    super();
+    super(input.isSynchronous && predicate.isSynchronous,);
     this.input = input;
     this.predicate = predicate;
     __publicField(this, 'inputGroup', this.input.getGroup(),);
@@ -36571,126 +37084,29 @@ var RelationalFilter = class extends RelationalNode {
   optimize(optimizer, required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
-    return new Cost(0,).add(inputCost,);
+    const predicateCost = this.predicate.optimize(optimizer,);
+    return new Cost(0,).add(Cost.max(inputCost, predicateCost,),);
   }
   getOptimized(required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new RelationalFilter(input, this.predicate,);
+    const predicate = this.predicate.getOptimized();
+    return new RelationalFilter(input, predicate,);
   }
-  async execute() {
-    const input = await this.input.execute();
-    return input.filter((tuple) => {
-      const result = this.predicate.evaluate(tuple,);
-      return convertToBoolean(result,);
+  *evaluate(context,) {
+    const input = yield* this.input.evaluate(context,);
+    const predicates = yield* evaluateArray(input.tuples.map((tuple) => {
+      return this.predicate.evaluate(context, tuple,);
+    },),);
+    return input.filter((_, index,) => {
+      const predicate = predicates[index] ?? null;
+      return convertToBoolean(predicate,);
     },);
-  }
-};
-var Tuple = class {
-  constructor() {
-    __publicField(this, 'pointers', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'values', /* @__PURE__ */ new Map(),);
-  }
-  getKey() {
-    const pointers = this.pointers.values();
-    return Array.from(pointers,).join('-',);
-  }
-  addValue(field, value,) {
-    this.values.set(field, value,);
-  }
-  getValue(field,) {
-    return this.values.get(field,) ?? null;
-  }
-  mergeValues(tuple,) {
-    for (const [field, value,] of tuple.values) {
-      this.addValue(field, value,);
-    }
-  }
-  addPointer(collection, pointer,) {
-    this.pointers.set(collection, pointer,);
-  }
-  getPointer(collection,) {
-    return this.pointers.get(collection,);
-  }
-  mergePointers(tuple,) {
-    for (const [collection, pointer,] of tuple.pointers) {
-      this.addPointer(collection, pointer,);
-    }
-  }
-  merge(tuple,) {
-    this.mergeValues(tuple,);
-    this.mergePointers(tuple,);
-  }
-};
-var Relation = class {
-  constructor(fields, tuples = [],) {
-    this.fields = fields;
-    this.tuples = tuples;
-  }
-  push(tuple,) {
-    this.tuples.push(tuple,);
-  }
-  filter(predicate,) {
-    const tuples = this.tuples.filter(predicate,);
-    return new Relation(this.fields, tuples,);
-  }
-  map(fields, callback,) {
-    const tuples = this.tuples.map(callback,);
-    return new Relation(fields, tuples,);
-  }
-  sort(callback,) {
-    const tuples = Array.from(this.tuples,).sort(callback,);
-    return new Relation(this.fields, tuples,);
-  }
-  slice(start, end,) {
-    const tuples = this.tuples.slice(start, end,);
-    return new Relation(this.fields, tuples,);
-  }
-  union(other,) {
-    const fields = new Fields();
-    for (const field of this.fields) {
-      if (other.fields.has(field,)) {
-        fields.add(field,);
-      }
-    }
-    const keys3 = /* @__PURE__ */ new Set();
-    const result = new Relation(fields,);
-    for (const tuple of this.tuples) {
-      const key7 = tuple.getKey();
-      keys3.add(key7,);
-      result.push(tuple,);
-    }
-    for (const tuple of other.tuples) {
-      const key7 = tuple.getKey();
-      if (keys3.has(key7,)) continue;
-      result.push(tuple,);
-    }
-    return result;
-  }
-  intersection(other,) {
-    const fields = new Fields();
-    for (const field of this.fields) {
-      if (other.fields.has(field,)) {
-        fields.add(field,);
-      }
-    }
-    const keys3 = /* @__PURE__ */ new Set();
-    const result = new Relation(fields,);
-    for (const tuple of this.tuples) {
-      const key7 = tuple.getKey();
-      keys3.add(key7,);
-    }
-    for (const tuple of other.tuples) {
-      const key7 = tuple.getKey();
-      if (!keys3.has(key7,)) continue;
-      result.push(tuple,);
-    }
-    return result;
   }
 };
 var RelationalIndexLookup = class extends RelationalNode {
   constructor(index, query,) {
-    super();
+    super(false,);
     this.index = index;
     this.query = query;
   }
@@ -36714,11 +37130,11 @@ var RelationalIndexLookup = class extends RelationalNode {
   getOptimized() {
     return new RelationalIndexLookup(this.index, this.query,);
   }
-  async execute() {
+  *evaluate() {
     const index = this.index;
     const collection = index.collection;
     const outputFields = this.getOutputFields();
-    const items = await index.data.lookupItems(this.query,);
+    const items = yield index.data.lookupItems(this.query,);
     const tuples = items.map((item) => {
       const tuple = new Tuple();
       for (const field of index.resolvedFields) {
@@ -36733,7 +37149,7 @@ var RelationalIndexLookup = class extends RelationalNode {
 };
 var RelationalIntersection = class extends RelationalNode {
   constructor(left, right,) {
-    super();
+    super(left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'leftGroup', this.left.getGroup(),);
@@ -36777,15 +37193,20 @@ var RelationalIntersection = class extends RelationalNode {
     const right = this.rightGroup.getOptimized(rightRequired,);
     return new RelationalIntersection(left, right,);
   }
-  async execute() {
-    const left = await this.left.execute();
-    const right = await this.right.execute();
+  *evaluate(context,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
     return left.intersection(right,);
   }
 };
 var RelationalLeftJoin = class extends RelationalNode {
   constructor(left, right, constraint,) {
-    super();
+    super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
     this.left = left;
     this.right = right;
     this.constraint = constraint;
@@ -36828,27 +37249,34 @@ var RelationalLeftJoin = class extends RelationalNode {
     const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
     const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
     const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
-    return Cost.max(leftCost, rightCost,);
+    const constraintCost = this.constraint.optimize(optimizer,);
+    return Cost.max(Cost.max(leftCost, rightCost,), constraintCost,);
   }
   getOptimized(required,) {
     const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
     const left = this.leftGroup.getOptimized(leftRequired,);
     const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
     const right = this.rightGroup.getOptimized(rightRequired,);
-    return new RelationalLeftJoin(left, right, this.constraint,);
+    const constraint = this.constraint.getOptimized();
+    return new RelationalLeftJoin(left, right, constraint,);
   }
-  async execute() {
-    const left = await this.left.execute();
-    const right = await this.right.execute();
+  *evaluate(context,) {
     const outputFields = this.getOutputFields();
     const result = new Relation(outputFields,);
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
     for (const leftTuple of left.tuples) {
       let hasMatch = false;
       for (const rightTuple of right.tuples) {
         const tuple = new Tuple();
         tuple.merge(leftTuple,);
         tuple.merge(rightTuple,);
-        const value = this.constraint.evaluate(tuple,);
+        const value = yield* this.constraint.evaluate(context, tuple,);
         if (convertToBoolean(value,)) {
           result.push(tuple,);
           hasMatch = true;
@@ -36863,7 +37291,7 @@ var RelationalLeftJoin = class extends RelationalNode {
 };
 var RelationalRightJoin = class extends RelationalNode {
   constructor(left, right, constraint,) {
-    super();
+    super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
     this.left = left;
     this.right = right;
     this.constraint = constraint;
@@ -36906,28 +37334,34 @@ var RelationalRightJoin = class extends RelationalNode {
     const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
     const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
     const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
-    const childCost = Cost.max(leftCost, rightCost,);
-    return new Cost(0,).add(childCost,);
+    const constraintCost = this.constraint.optimize(optimizer,);
+    return Cost.max(Cost.max(leftCost, rightCost,), constraintCost,);
   }
   getOptimized(required,) {
     const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
     const left = this.leftGroup.getOptimized(leftRequired,);
     const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
     const right = this.rightGroup.getOptimized(rightRequired,);
-    return new RelationalRightJoin(left, right, this.constraint,);
+    const constraint = this.constraint.getOptimized();
+    return new RelationalRightJoin(left, right, constraint,);
   }
-  async execute() {
-    const left = await this.left.execute();
-    const right = await this.right.execute();
+  *evaluate(context,) {
     const outputFields = this.getOutputFields();
     const result = new Relation(outputFields,);
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
     for (const rightTuple of right.tuples) {
       let hasMatch = false;
       for (const leftTuple of left.tuples) {
         const tuple = new Tuple();
         tuple.merge(rightTuple,);
         tuple.merge(leftTuple,);
-        const value = this.constraint.evaluate(tuple,);
+        const value = yield* this.constraint.evaluate(context, tuple,);
         if (convertToBoolean(value,)) {
           result.push(tuple,);
           hasMatch = true;
@@ -36942,7 +37376,7 @@ var RelationalRightJoin = class extends RelationalNode {
 };
 var RelationalScan = class extends RelationalNode {
   constructor(collection,) {
-    super();
+    super(false,);
     this.collection = collection;
   }
   getHash() {
@@ -36963,10 +37397,10 @@ var RelationalScan = class extends RelationalNode {
   getOptimized() {
     return new RelationalScan(this.collection,);
   }
-  async execute() {
+  *evaluate() {
     const collection = this.collection;
     const outputFields = this.getOutputFields();
-    const items = await collection.data.scanItems();
+    const items = yield collection.data.scanItems();
     const tuples = items.map((item) => {
       const tuple = new Tuple();
       for (const field of outputFields) {
@@ -36981,7 +37415,7 @@ var RelationalScan = class extends RelationalNode {
 };
 var RelationalUnion = class extends RelationalNode {
   constructor(left, right,) {
-    super();
+    super(left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'leftGroup', this.left.getGroup(),);
@@ -37025,9 +37459,14 @@ var RelationalUnion = class extends RelationalNode {
     const right = this.rightGroup.getOptimized(rightRequired,);
     return new RelationalUnion(left, right,);
   }
-  async execute() {
-    const left = await this.left.execute();
-    const right = await this.right.execute();
+  *evaluate(context,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
     return left.union(right,);
   }
 };
@@ -37036,7 +37475,7 @@ var ScalarAnd = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37050,9 +37489,24 @@ var ScalarAnd = class extends ScalarNode {
   toString() {
     return `${this.left} && ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarAnd(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: convertToBoolean(left,) && convertToBoolean(right,),
@@ -37062,7 +37516,7 @@ var ScalarAnd = class extends ScalarNode {
 var ScalarConstant = class extends ScalarNode {
   constructor(definition, value,) {
     const referencedFields = new Fields();
-    super(referencedFields,);
+    super(referencedFields, true,);
     this.definition = definition;
     this.value = value;
   }
@@ -37072,7 +37526,14 @@ var ScalarConstant = class extends ScalarNode {
   toString() {
     return DatabaseValue.stringify(this.value,);
   }
-  evaluate() {
+  optimize() {
+    return new Cost(0,);
+  }
+  getOptimized() {
+    return this;
+  }
+  // eslint-disable-next-line require-yield
+  *evaluate() {
     return this.value;
   }
 };
@@ -37081,7 +37542,7 @@ var ScalarContains = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
     referencedFields.merge(target.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, source.isSynchronous && target.isSynchronous,);
     this.source = source;
     this.target = target;
     __publicField(this, 'definition', {
@@ -37095,6 +37556,16 @@ var ScalarContains = class extends ScalarNode {
   toString() {
     return `CONTAINS(${this.source}, ${this.target})`;
   }
+  optimize(optimizer,) {
+    const sourceCost = this.source.optimize(optimizer,);
+    const targetCost = this.target.optimize(optimizer,);
+    return Cost.max(sourceCost, targetCost,);
+  }
+  getOptimized() {
+    const source = this.source.getOptimized();
+    const target = this.target.getOptimized();
+    return new ScalarContains(source, target,);
+  }
   getValue(source, target,) {
     const sourceValue = convertToString(source,);
     const targetValue = convertToString(target,);
@@ -37104,9 +37575,14 @@ var ScalarContains = class extends ScalarNode {
     const lowerTarget = targetValue.toLowerCase();
     return lowerSource.includes(lowerTarget,);
   }
-  evaluate(tuple,) {
-    const source = this.source.evaluate(tuple,);
-    const target = this.target.evaluate(tuple,);
+  *evaluate(context, tuple,) {
+    const {
+      source,
+      target,
+    } = yield* evaluateObject({
+      source: this.source.evaluate(context, tuple,),
+      target: this.target.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: this.getValue(source, target,),
@@ -37118,7 +37594,7 @@ var ScalarEndsWith = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
     referencedFields.merge(target.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, source.isSynchronous && target.isSynchronous,);
     this.source = source;
     this.target = target;
     __publicField(this, 'definition', {
@@ -37132,6 +37608,16 @@ var ScalarEndsWith = class extends ScalarNode {
   toString() {
     return `ENDS_WITH(${this.source}, ${this.target})`;
   }
+  optimize(optimizer,) {
+    const sourceCost = this.source.optimize(optimizer,);
+    const targetCost = this.target.optimize(optimizer,);
+    return Cost.max(sourceCost, targetCost,);
+  }
+  getOptimized() {
+    const source = this.source.getOptimized();
+    const target = this.target.getOptimized();
+    return new ScalarEndsWith(source, target,);
+  }
   getValue(source, target,) {
     const sourceValue = convertToString(source,);
     const targetValue = convertToString(target,);
@@ -37141,9 +37627,14 @@ var ScalarEndsWith = class extends ScalarNode {
     const lowerTarget = targetValue.toLowerCase();
     return lowerSource.endsWith(lowerTarget,);
   }
-  evaluate(tuple,) {
-    const source = this.source.evaluate(tuple,);
-    const target = this.target.evaluate(tuple,);
+  *evaluate(context, tuple,) {
+    const {
+      source,
+      target,
+    } = yield* evaluateObject({
+      source: this.source.evaluate(context, tuple,),
+      target: this.target.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: this.getValue(source, target,),
@@ -37155,7 +37646,7 @@ var ScalarEquals = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37169,9 +37660,24 @@ var ScalarEquals = class extends ScalarNode {
   toString() {
     return `${this.left} == ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarEquals(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: DatabaseValue.equal(left, right, collation,),
@@ -37183,7 +37689,7 @@ var ScalarGreaterThan = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37197,9 +37703,24 @@ var ScalarGreaterThan = class extends ScalarNode {
   toString() {
     return `${this.left} > ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarGreaterThan(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: DatabaseValue.greaterThan(left, right, collation,),
@@ -37211,7 +37732,7 @@ var ScalarGreaterThanOrEqual = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37225,9 +37746,24 @@ var ScalarGreaterThanOrEqual = class extends ScalarNode {
   toString() {
     return `${this.left} >= ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarGreaterThanOrEqual(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: DatabaseValue.greaterThanOrEqual(left, right, collation,),
@@ -37239,7 +37775,7 @@ var ScalarLessThan = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37253,9 +37789,24 @@ var ScalarLessThan = class extends ScalarNode {
   toString() {
     return `${this.left} < ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarLessThan(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: DatabaseValue.lessThan(left, right, collation,),
@@ -37267,7 +37818,7 @@ var ScalarLessThanOrEqual = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37281,9 +37832,24 @@ var ScalarLessThanOrEqual = class extends ScalarNode {
   toString() {
     return `${this.left} <= ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarLessThanOrEqual(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: DatabaseValue.lessThanOrEqual(left, right, collation,),
@@ -37295,7 +37861,7 @@ var ScalarNotEquals = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37309,9 +37875,24 @@ var ScalarNotEquals = class extends ScalarNode {
   toString() {
     return `${this.left} != ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarNotEquals(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: !DatabaseValue.equal(left, right, collation,),
@@ -37323,7 +37904,7 @@ var ScalarOr = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37337,9 +37918,24 @@ var ScalarOr = class extends ScalarNode {
   toString() {
     return `${this.left} || ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarOr(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: convertToBoolean(left,) || convertToBoolean(right,),
@@ -37351,7 +37947,7 @@ var ScalarStartsWith = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
     referencedFields.merge(target.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, source.isSynchronous && target.isSynchronous,);
     this.source = source;
     this.target = target;
     __publicField(this, 'definition', {
@@ -37365,6 +37961,16 @@ var ScalarStartsWith = class extends ScalarNode {
   toString() {
     return `STARTS_WITH(${this.source}, ${this.target})`;
   }
+  optimize(optimizer,) {
+    const sourceCost = this.source.optimize(optimizer,);
+    const targetCost = this.target.optimize(optimizer,);
+    return Cost.max(sourceCost, targetCost,);
+  }
+  getOptimized() {
+    const source = this.source.getOptimized();
+    const target = this.target.getOptimized();
+    return new ScalarStartsWith(source, target,);
+  }
   getValue(source, target,) {
     const sourceValue = convertToString(source,);
     const targetValue = convertToString(target,);
@@ -37374,9 +37980,14 @@ var ScalarStartsWith = class extends ScalarNode {
     const lowerTarget = targetValue.toLowerCase();
     return lowerSource.startsWith(lowerTarget,);
   }
-  evaluate(tuple,) {
-    const source = this.source.evaluate(tuple,);
-    const target = this.target.evaluate(tuple,);
+  *evaluate(context, tuple,) {
+    const {
+      source,
+      target,
+    } = yield* evaluateObject({
+      source: this.source.evaluate(context, tuple,),
+      target: this.target.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: this.getValue(source, target,),
@@ -37669,7 +38280,7 @@ var Memo = class {
 var EnforcerNode = class extends RelationalNode {};
 var EnforcerResolve = class extends EnforcerNode {
   constructor(input, fields,) {
-    super();
+    super(false,);
     this.input = input;
     this.fields = fields;
     __publicField(this, 'inputGroup', this.input.getGroup(),);
@@ -37700,8 +38311,8 @@ var EnforcerResolve = class extends EnforcerNode {
     const input = this.inputGroup.getOptimized(inputRequired,);
     return new EnforcerResolve(input, this.fields,);
   }
-  async execute() {
-    const input = await this.input.execute();
+  *evaluate(context,) {
+    const input = yield* this.input.evaluate(context,);
     assert(this.fields.subsetOf(input.fields,), 'Fields can\'t be resolved',);
     const collections = /* @__PURE__ */ new Set();
     for (const field of this.fields) {
@@ -37712,11 +38323,11 @@ var EnforcerResolve = class extends EnforcerNode {
       for (const field of this.fields) {
         const value = tuple.getValue(field,);
         if ((value == null ? void 0 : value.type) !== 'richtext') continue;
-        assert(value instanceof RichText, 'Pointer must be wrapped',);
-        void value.resolve();
+        assert(value.value instanceof RichText, 'Pointer must be wrapped',);
+        void value.value.resolve();
       }
     }
-    const collectionItems = await Promise.all(
+    const collectionItems = yield Promise.all(
       Array.from(collections,).map(async (collection) => {
         const pointers = input.tuples.map((tuple) => {
           const pointer = tuple.getPointer(collection,);
@@ -37751,7 +38362,7 @@ var collation3 = {
 };
 var EnforcerSort = class extends EnforcerNode {
   constructor(input, ordering,) {
-    super();
+    super(input.isSynchronous,);
     this.input = input;
     this.ordering = ordering;
     __publicField(this, 'inputGroup', this.input.getGroup(),);
@@ -37792,8 +38403,8 @@ var EnforcerSort = class extends EnforcerNode {
     const input = this.inputGroup.getOptimized(inputRequired,);
     return new EnforcerSort(input, this.ordering,);
   }
-  async execute() {
-    const input = await this.input.execute();
+  *evaluate(context,) {
+    const input = yield* this.input.evaluate(context,);
     return input.sort((leftTuple, rightTuple,) => {
       for (
         const {
@@ -37839,7 +38450,7 @@ var EnforcerSort = class extends EnforcerNode {
 };
 var RelationalLimit = class extends RelationalNode {
   constructor(input, limit, ordering,) {
-    super();
+    super(input.isSynchronous && limit.isSynchronous,);
     this.input = input;
     this.limit = limit;
     this.ordering = ordering;
@@ -37865,16 +38476,24 @@ var RelationalLimit = class extends RelationalNode {
   optimize(optimizer, required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
-    return new Cost(0,).add(inputCost,);
+    const limitCost = this.limit.optimize(optimizer,);
+    return new Cost(0,).add(Cost.max(inputCost, limitCost,),);
   }
   getOptimized(required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new RelationalLimit(input, this.limit, this.ordering,);
+    const limit = this.limit.getOptimized();
+    return new RelationalLimit(input, limit, this.ordering,);
   }
-  async execute() {
-    const input = await this.input.execute();
-    const limit = this.limit.evaluate();
+  *evaluate(context,) {
+    const tuple = new Tuple();
+    const {
+      input,
+      limit,
+    } = yield* evaluateObject({
+      input: this.input.evaluate(context,),
+      limit: this.limit.evaluate(context, tuple,),
+    },);
     const value = convertToNumber(limit,) ?? Infinity;
     if (value === Infinity) return input;
     return input.slice(0, value,);
@@ -37882,7 +38501,7 @@ var RelationalLimit = class extends RelationalNode {
 };
 var RelationalOffset = class extends RelationalNode {
   constructor(input, offset, ordering,) {
-    super();
+    super(input.isSynchronous && offset.isSynchronous,);
     this.input = input;
     this.offset = offset;
     this.ordering = ordering;
@@ -37908,84 +38527,32 @@ var RelationalOffset = class extends RelationalNode {
   optimize(optimizer, required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
-    return new Cost(0,).add(inputCost,);
+    const offsetCost = this.offset.optimize(optimizer,);
+    return new Cost(0,).add(Cost.max(inputCost, offsetCost,),);
   }
   getOptimized(required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new RelationalOffset(input, this.offset, this.ordering,);
+    const offset = this.offset.getOptimized();
+    return new RelationalOffset(input, offset, this.ordering,);
   }
-  async execute() {
-    const input = await this.input.execute();
-    const offset = this.offset.evaluate();
+  *evaluate(context,) {
+    const tuple = new Tuple();
+    const {
+      input,
+      offset,
+    } = yield* evaluateObject({
+      input: this.input.evaluate(context,),
+      offset: this.offset.evaluate(context, tuple,),
+    },);
     const value = convertToNumber(offset,) ?? 0;
     if (value === 0) return input;
     return input.slice(value,);
   }
 };
-var RelationalProject = class extends RelationalNode {
-  constructor(input, projections, passthrough,) {
-    super();
-    this.input = input;
-    this.projections = projections;
-    this.passthrough = passthrough;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
-  }
-  getHash() {
-    return calculateHash('RelationalProject', this.inputGroup.id, ...this.projections, this.passthrough,);
-  }
-  getOutputFields() {
-    const fields = new Fields();
-    fields.merge(this.passthrough,);
-    for (const projection of this.projections) {
-      fields.add(projection.field,);
-    }
-    return fields;
-  }
-  canProvideOrdering() {
-    return true;
-  }
-  canProvideResolvedFields() {
-    return true;
-  }
-  getInputRequiredProps(required,) {
-    const resolvedFields = new Fields(required.resolvedFields,);
-    for (const projection of this.projections) {
-      resolvedFields.merge(projection.input.referencedFields,);
-    }
-    return new RequiredProps(required.ordering, resolvedFields,);
-  }
-  optimize(optimizer, required,) {
-    const inputRequired = this.getInputRequiredProps(required,);
-    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
-    return new Cost(0,).add(inputCost,);
-  }
-  getOptimized(required,) {
-    const inputRequired = this.getInputRequiredProps(required,);
-    const input = this.inputGroup.getOptimized(inputRequired,);
-    return new RelationalProject(input, this.projections, this.passthrough,);
-  }
-  async execute() {
-    const outputFields = this.getOutputFields();
-    const input = await this.input.execute();
-    return input.map(outputFields, (tuple) => {
-      const result = new Tuple();
-      result.mergePointers(tuple,);
-      for (const field of this.passthrough) {
-        const value = tuple.getValue(field,);
-        result.addValue(field, value,);
-      }
-      for (const projection of this.projections) {
-        const value = projection.input.evaluate(tuple,);
-        result.addValue(projection.field, value,);
-      }
-      return result;
-    },);
-  }
-};
 var ScalarCast = class extends ScalarNode {
   constructor(input, definition,) {
-    super(input.referencedFields,);
+    super(input.referencedFields, input.isSynchronous,);
     this.input = input;
     this.definition = definition;
     assert(definition.isNullable, 'Unsupported non-nullable cast',);
@@ -37996,8 +38563,15 @@ var ScalarCast = class extends ScalarNode {
   toString() {
     return `CAST(${this.input} AS ${this.definition.type.toUpperCase()})`;
   }
-  evaluate(tuple,) {
-    const input = this.input.evaluate(tuple,);
+  optimize(optimizer,) {
+    return this.input.optimize(optimizer,);
+  }
+  getOptimized() {
+    const input = this.input.getOptimized();
+    return new ScalarCast(input, this.definition,);
+  }
+  *evaluate(context, tuple,) {
+    const input = yield* this.input.evaluate(context, tuple,);
     return DatabaseValue.cast(input, this.definition,);
   }
 };
@@ -38006,7 +38580,7 @@ var ScalarIn = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -38020,9 +38594,24 @@ var ScalarIn = class extends ScalarNode {
   toString() {
     return `${this.left} IN ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarIn(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: DatabaseValue.in(left, right,),
@@ -38031,7 +38620,7 @@ var ScalarIn = class extends ScalarNode {
 };
 var ScalarNot = class extends ScalarNode {
   constructor(input,) {
-    super(input.referencedFields,);
+    super(input.referencedFields, input.isSynchronous,);
     this.input = input;
     __publicField(this, 'definition', {
       type: 'boolean',
@@ -38044,8 +38633,15 @@ var ScalarNot = class extends ScalarNode {
   toString() {
     return `NOT ${this.input}`;
   }
-  evaluate(tuple,) {
-    const input = this.input.evaluate(tuple,);
+  optimize(optimizer,) {
+    return this.input.optimize(optimizer,);
+  }
+  getOptimized() {
+    const input = this.input.getOptimized();
+    return new ScalarNot(input,);
+  }
+  *evaluate(context, tuple,) {
+    const input = yield* this.input.evaluate(context, tuple,);
     return {
       type: 'boolean',
       value: !convertToBoolean(input,),
@@ -38057,7 +38653,7 @@ var ScalarNotIn = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields,);
+    super(referencedFields, left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -38071,32 +38667,133 @@ var ScalarNotIn = class extends ScalarNode {
   toString() {
     return `${this.left} NOT IN ${this.right}`;
   }
-  evaluate(tuple,) {
-    const left = this.left.evaluate(tuple,);
-    const right = this.right.evaluate(tuple,);
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarNotIn(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
     return {
       type: 'boolean',
       value: !DatabaseValue.in(left, right,),
     };
   }
 };
+var ScalarSubquery = class extends ScalarNode {
+  constructor(input, namedFields, ordering, outerFields,) {
+    super(outerFields, input.isSynchronous,);
+    this.input = input;
+    this.namedFields = namedFields;
+    this.ordering = ordering;
+    this.outerFields = outerFields;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'definition',);
+    const itemDefinitions = {};
+    const namedFieldEntries = Object.entries(namedFields,);
+    for (const [name, field,] of namedFieldEntries) {
+      itemDefinitions[name] = field.definition;
+    }
+    this.definition = {
+      type: 'array',
+      isNullable: false,
+      definition: {
+        type: 'object',
+        isNullable: false,
+        definitions: itemDefinitions,
+      },
+    };
+  }
+  getHash() {
+    const namedFieldIds = {};
+    const namedFieldEntries = Object.entries(this.namedFields,);
+    for (const [name, field,] of namedFieldEntries) {
+      namedFieldIds[name] = field.id;
+    }
+    return calculateHash('ScalarSubquery', this.inputGroup.id, namedFieldIds, this.ordering, this.outerFields,);
+  }
+  toString() {
+    return `SUBQUERY(${this.inputGroup.id})`;
+  }
+  getInputRequiredProps() {
+    const resolvedFields = new Fields();
+    const fields = Object.values(this.namedFields,);
+    for (const field of fields) {
+      resolvedFields.add(field,);
+    }
+    return new RequiredProps(this.ordering, resolvedFields,);
+  }
+  optimize(optimizer,) {
+    const inputRequired = this.getInputRequiredProps();
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized() {
+    const inputRequired = this.getInputRequiredProps();
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new ScalarSubquery(input, this.namedFields, this.ordering, this.outerFields,);
+  }
+  *evaluate(context, tuple,) {
+    const inputContext = new Tuple();
+    inputContext.merge(context,);
+    inputContext.merge(tuple,);
+    const relation = yield* this.input.evaluate(inputContext,);
+    const namedFieldEntries = Object.entries(this.namedFields,);
+    return {
+      type: 'array',
+      value: relation.tuples.map((relationTuple) => {
+        const value = {};
+        for (const [name, field,] of namedFieldEntries) {
+          value[name] = relationTuple.getValue(field,);
+        }
+        return {
+          type: 'object',
+          value,
+        };
+      },),
+    };
+  }
+};
 var ScalarVariable = class extends ScalarNode {
-  constructor(field,) {
+  constructor(field, isOuterField,) {
     assert(field.name !== VIRTUAL_INDEX_FIELD, 'Invalid field name',);
     const referencedFields = new Fields();
-    referencedFields.add(field,);
-    super(referencedFields,);
+    if (!isOuterField) {
+      referencedFields.add(field,);
+    }
+    super(referencedFields, true,);
     this.field = field;
+    this.isOuterField = isOuterField;
     __publicField(this, 'definition', this.field.definition,);
   }
   getHash() {
-    return calculateHash('ScalarVariable', this.field.id,);
+    return calculateHash('ScalarVariable', this.field.id, this.isOuterField,);
   }
   toString() {
     return `"${this.field.name}" /* ${this.field.id} */`;
   }
-  evaluate(tuple,) {
-    assert(tuple, 'Tuple must be provided',);
+  optimize() {
+    return new Cost(0,);
+  }
+  getOptimized() {
+    return this;
+  }
+  // eslint-disable-next-line require-yield
+  *evaluate(context, tuple,) {
+    if (this.isOuterField) {
+      return context.getValue(this.field,);
+    }
     return tuple.getValue(this.field,);
   }
 };
@@ -38148,8 +38845,9 @@ var Normalizer = class {
   }
   finishScalar(node,) {
     const isConstant = node instanceof ScalarConstant;
-    if (node.referencedFields.size === 0 && !isConstant) {
-      const value = node.evaluate();
+    if (node.isSynchronous && node.referencedFields.size === 0 && !isConstant) {
+      const tuple = new Tuple();
+      const value = node.evaluateSync(tuple, tuple,);
       return this.newScalarConstant(node.definition, value,);
     }
     return this.memo.addScalar(node,);
@@ -38178,8 +38876,8 @@ var Normalizer = class {
     };
     return this.newScalarCast(node, nullableDefinition,);
   }
-  newScalarVariable(field,) {
-    const node = new ScalarVariable(field,);
+  newScalarVariable(field, isOuterField,) {
+    const node = new ScalarVariable(field, isOuterField,);
     return this.finishScalar(node,);
   }
   newScalarConstant(definition, value,) {
@@ -38350,6 +39048,10 @@ var Normalizer = class {
     const node = new ScalarEndsWith(source, target,);
     return this.finishScalar(node,);
   }
+  newScalarSubquery(input, namedFields, ordering, outerFields,) {
+    const node = new ScalarSubquery(input, namedFields, ordering, outerFields,);
+    return this.finishScalar(node,);
+  }
   newScalarCast(input, definition,) {
     if (input.definition.type === definition.type) {
       return input;
@@ -38466,6 +39168,8 @@ function stringifyExpression(expression,) {
       return stringifyBinaryOperation(expression,);
     case 'TypeCast':
       return stringifyTypeCast(expression,);
+    case 'Select':
+      return `${stringifyQuery(expression,)}`;
     default: {
       assertNever(expression,);
     }
@@ -38569,7 +39273,8 @@ var QueryEngine = class {
     __publicField(this, 'useNewOptimizer', false,);
   }
   async query(query, locale,) {
-    if (this.useNewOptimizer || query.from.type !== 'Collection') {
+    const containsSubquery = query.select.some((expression) => expression.type !== 'Identifier');
+    if (this.useNewOptimizer || query.from.type !== 'Collection' || containsSubquery) {
       return this.queryNew(query, locale,);
     }
     return this.queryOld(query, locale,);
@@ -38577,14 +39282,16 @@ var QueryEngine = class {
   async queryNew(query, locale,) {
     const optimizer = new Optimizer(query, locale,);
     const [root, namedFields,] = optimizer.optimize();
-    const relation = await root.execute();
+    const context = new Tuple();
+    const relation = await root.evaluateAsync(context,);
+    const namedFieldEntries = Object.entries(namedFields,);
     const result = await Promise.all(relation.tuples.map(async (tuple) => {
-      const item = {};
-      for (const [fieldName, field,] of namedFields) {
+      const resolvedFields = await Promise.all(namedFieldEntries.map(async ([name, field,],) => {
         const value = tuple.getValue(field,);
-        item[fieldName] = await this.resolveValue(value,);
-      }
-      return item;
+        const resolved = await this.resolveValue(value,);
+        return [name, resolved,];
+      },),);
+      return Object.fromEntries(resolvedFields,);
     },),);
     return result;
   }
@@ -38592,6 +39299,19 @@ var QueryEngine = class {
     if ((value == null ? void 0 : value.type) === 'richtext') {
       assert(value.value instanceof RichText, 'Pointer must be wrapped',);
       return value.value.resolve();
+    }
+    if ((value == null ? void 0 : value.type) === 'array') {
+      return Promise.all(value.value.map(async (item) => {
+        return this.resolveValue(item,);
+      },),);
+    }
+    if ((value == null ? void 0 : value.type) === 'object') {
+      const entries = Object.entries(value.value,);
+      const resolvedEntries = await Promise.all(entries.map(async ([key7, item,],) => {
+        const resolved = await this.resolveValue(item,);
+        return [key7, resolved,];
+      },),);
+      return Object.fromEntries(resolvedEntries,);
     }
     return (value == null ? void 0 : value.value) ?? null;
   }
@@ -46022,7 +46742,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.3.29',
+    'framer-motion': '11.3.31',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
