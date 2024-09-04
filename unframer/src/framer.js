@@ -19300,6 +19300,8 @@ function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
       styleElement.setAttribute('data-framer-css', 'true',);
       if (!document.head) {
         console.warn('not injecting CSS: the document is missing a <head> element',);
+        // const headElement = document.createElement('head');
+        // document.appendChild(headElement);
         return;
       }
       document.head.appendChild(styleElement,);
@@ -47227,3 +47229,13 @@ react-is/cjs/react-is.production.min.js:
    * LICENSE file in the root directory of this source tree.
    *)
 */
+if (typeof document !== 'undefined') {
+    const fragment = new DocumentFragment();
+    for (const node of document.querySelectorAll('body style[data-framer-css-ssr]')) {
+        let copy = node.cloneNode(true)
+        // copy.removeAttribute('data-framer-css-ssr')
+        fragment.appendChild(node);
+        node.remove()
+    }
+    document.head.appendChild(fragment);
+}

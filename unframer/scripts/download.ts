@@ -129,20 +129,20 @@ const purePlugin = ({}: { types: typeof t }): PluginObj => ({
         //     annotateAsPure(path.node)
         // },
 
-    //     CallExpression(path) {
-    //         if (path.getFunctionParent()) return
-    //         const { parent } = path
-    //         if (
-    //             t.isVariableDeclarator(parent) ||
-    //             t.isAssignmentExpression(parent) ||
-    //             t.isObjectProperty(parent) ||
-    //             t.isObjectProperty(parent) ||
-    //             t.isArrayExpression(parent) ||
-    //             t.isCallExpression(parent)
-    //         ) {
-    //             annotateAsPure(path)
-    //         }
-    //     },
+        //     CallExpression(path) {
+        //         if (path.getFunctionParent()) return
+        //         const { parent } = path
+        //         if (
+        //             t.isVariableDeclarator(parent) ||
+        //             t.isAssignmentExpression(parent) ||
+        //             t.isObjectProperty(parent) ||
+        //             t.isObjectProperty(parent) ||
+        //             t.isArrayExpression(parent) ||
+        //             t.isCallExpression(parent)
+        //         ) {
+        //             annotateAsPure(path)
+        //         }
+        //     },
     },
 })
 
@@ -184,6 +184,7 @@ export async function fixFramerCode({ resultFile }) {
             let copy = node.cloneNode(true)
             // copy.removeAttribute('data-framer-css-ssr')
             fragment.appendChild(node);
+            // node.remove()
         }
         document.head.appendChild(fragment);
     }
