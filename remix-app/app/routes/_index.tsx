@@ -18,8 +18,14 @@ import Hero from 'nextjs-app/src/framer/hero'
 import MenuOverlay from 'nextjs-app/src/framer/menu-overlay'
 import Collection from 'nextjs-app/src/framer/collection'
 import Card from 'nextjs-app/src/framer/card'
+import { useLoaderData } from '@remix-run/react'
+
+export function loader() {
+    return {}
+}
 
 export default function Home() {
+    const {} = useLoaderData() as any
     return (
         <>
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
