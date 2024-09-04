@@ -19,8 +19,6 @@ import MenuOverlay from 'nextjs-app/src/framer/menu-overlay'
 import Collection from 'nextjs-app/src/framer/collection'
 import Card from 'nextjs-app/src/framer/card'
 
-
-
 export default function Home() {
     return (
         <>

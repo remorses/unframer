@@ -1,3 +1,5 @@
+import { HydrationOverlay } from "@builder.io/react-hydration-overlay";
+
 import {
     Links,
     Meta,
@@ -12,6 +14,7 @@ import 'tailwindcss/tailwind.css'
 export default function App() {
     return (
         <html lang='en'>
+            
             <head>
                 <meta charSet='utf-8' />
                 <meta

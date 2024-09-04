@@ -179,11 +179,13 @@ export async function fixFramerCode({ resultFile }) {
     // probably because new react version should append styles to head automatically but this does not happen now?
     codeAfter += dedent`
     if (typeof document !== 'undefined') {
-        for (const node of document.querySelectorAll(
-            'body style[data-framer-css-ssr]',
-        )) {
-            document.head.appendChild(node)
+        const fragment = new DocumentFragment();
+        for (const node of document.querySelectorAll('body style[data-framer-css-ssr]')) {
+            let copy = node.cloneNode(true)
+            // copy.removeAttribute('data-framer-css-ssr')
+            fragment.appendChild(node);
         }
+        document.head.appendChild(fragment);
     }
     `
 

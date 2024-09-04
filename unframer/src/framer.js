@@ -47227,10 +47227,3 @@ react-is/cjs/react-is.production.min.js:
    * LICENSE file in the root directory of this source tree.
    *)
 */
-if (typeof document !== 'undefined') {
-    for (const node of document.querySelectorAll(
-        'body style[data-framer-css-ssr]',
-    )) {
-        document.head.appendChild(node)
-    }
-}

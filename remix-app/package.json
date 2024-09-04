@@ -11,6 +11,7 @@
         "typecheck": "tsc"
     },
     "dependencies": {
+        "@builder.io/react-hydration-overlay": "^0.1.0",
         "@remix-run/node": "^2.11.2",
         "@remix-run/react": "^2.11.2",
         "@remix-run/serve": "^2.11.2",
