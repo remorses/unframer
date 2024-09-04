@@ -19300,8 +19300,6 @@ function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
       styleElement.setAttribute('data-framer-css', 'true',);
       if (!document.head) {
         console.warn('not injecting CSS: the document is missing a <head> element',);
-        // const headElement = document.createElement('head');
-        // document.appendChild(headElement);
         return;
       }
       document.head.appendChild(styleElement,);
@@ -47235,7 +47233,7 @@ if (typeof document !== 'undefined') {
         let copy = node.cloneNode(true)
         // copy.removeAttribute('data-framer-css-ssr')
         fragment.appendChild(node);
-        node.remove()
+        // node.remove()
     }
     document.head.appendChild(fragment);
 }
