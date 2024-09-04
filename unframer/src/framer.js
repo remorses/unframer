@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.L6W5BZYU.js
+// https :https://app.framerstatic.com/framer.7S3HWH6D.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12714,6 +12714,14 @@ function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   const replaceState = ignoreReplaceStateWrapper ? window.history.__proto__.replaceState : window.history.replaceState;
   replaceState.call(window.history, data2, '', url,);
 }
+var maybeHasPopstateBug = true;
+var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
+  if (typeof navigator === 'undefined') return false;
+  const userAgent = navigator.userAgent;
+  const chromePos = userAgent.indexOf('Chrome/',);
+  const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
+  return chromiumVersion > 101 && chromiumVersion < 128;
+})();
 async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNavigationTransition = false,) {
   if (awaitPaintBeforeUpdate) {
     await interactionResponse({
@@ -12725,19 +12733,37 @@ async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNa
     window.history.pushState(data2, '', url,);
     return;
   }
-  let popstateCalled = false;
-  const popstateListener = () => {
-    popstateCalled = true;
-  };
-  window.addEventListener('popstate', popstateListener, {
-    once: true,
-  },);
-  window.history.__proto__.pushState.call(window.history, data2, '', url,);
-  queueMicrotask(() => {
-    if (popstateCalled) return;
-    window.removeEventListener('popstate', popstateListener,);
-    window.history.replaceState(data2, '',);
-  },);
+  let popstateCalled = false,
+    popstateListener;
+  if (maybeHasPopstateBug) {
+    popstateListener = () => {
+      var _a;
+      popstateCalled = true;
+      if (isImpactedPopstateBugChromiumVersion) return;
+      const msg = 'Popstate called after intercept(). Please report this to the Framer team.';
+      console.error(msg,);
+      (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
+        message: msg,
+        userAgent: navigator.userAgent,
+      },],);
+    };
+    window.addEventListener('popstate', popstateListener, {
+      once: true,
+    },);
+  }
+  if (isImpactedPopstateBugChromiumVersion && maybeHasPopstateBug) {
+    window.history.__proto__.pushState.call(window.history, data2, '', url,);
+  } else {
+    window.history.pushState(data2, '', url,);
+  }
+  if (maybeHasPopstateBug) {
+    queueMicrotask(() => {
+      if (popstateCalled) return;
+      maybeHasPopstateBug = false;
+      window.removeEventListener('popstate', popstateListener,);
+      return;
+    },);
+  }
 }
 function useReplaceInitialState({
   disabled,
@@ -33281,6 +33307,7 @@ var RequestsObserver = class {
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
     __privateAdd(this, _results, void 0,);
     __publicField(this, 'updateResults', () => {
+      if (__privateGet(this, _subscribers2,).size === 0) return;
       const data2 = [];
       const statuses = /* @__PURE__ */ new Set();
       const errors = [];
