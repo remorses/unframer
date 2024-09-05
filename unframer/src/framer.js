@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.7S3HWH6D.js
+// https :https://app.framerstatic.com/framer.PC4CCYRO.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12098,18 +12098,18 @@ async function yieldBefore(fn, options,) {
   await yieldToMain(options,);
   return fn();
 }
-function interactionResponse(options, fallback = true,) {
+function interactionResponse(options,) {
   return new Promise((resolve) => {
-    if (fallback) setTimeout(resolve, 100,);
+    setTimeout(resolve, 100,);
     requestAnimationFrame(() => {
       void yieldBefore(resolve, options,);
     },);
   },);
 }
-function useAfterPaintEffect(fn, deps, options, fallback = false,) {
+function useAfterPaintEffect(fn, deps, options,) {
   useLayoutEffect(() => {
     const runAfterPaint = async () => {
-      await interactionResponse(options, fallback,);
+      await interactionResponse(options,);
       fn();
     };
     void runAfterPaint();
@@ -12624,7 +12624,7 @@ function useViewTransition() {
         await interactionResponse({
           priority: 'user-blocking',
           signal,
-        }, false,).catch(noop2,);
+        },).catch(noop2,);
         return startViewTransition(asyncUpdate, pageEffect, signal,);
       };
       if (yieldBeforeFreezePeriod) return yieldBeforeViewTransition();
@@ -12634,7 +12634,7 @@ function useViewTransition() {
     }
   }, [sitePageEffects,],);
 }
-function useMonitorNextPaintAfterRender(label, fallback = false,) {
+function useMonitorNextPaintAfterRender(label,) {
   const startLabel = `${label}-start`;
   const endLabel = `${label}-end`;
   const resolveHasPainted = useRef(void 0,);
@@ -12650,7 +12650,6 @@ function useMonitorNextPaintAfterRender(label, fallback = false,) {
     {
       priority: 'user-blocking',
     },
-    fallback,
   );
   return useCallback(() => {
     const hasPainted = new Promise((resolve) => {
@@ -13179,22 +13178,15 @@ function turnOffReactEventHandling() {
   eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
 }
 function TurnOnReactEventHandling() {
-  useAfterPaintEffect(
-    () => {
-      if (!shouldTurnOnEventHandling || !eventsToStop) return;
-      const options = {
-        capture: true,
-      };
-      eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
-      eventsToStop = void 0;
-      performance.mark('framer-react-event-handling-end',);
-    },
-    [],
-    // user-blocking ensures this runs right after the paint, so users can interact asap.
-    {
-      priority: 'user-blocking',
-    },
-  );
+  useEffect(() => {
+    if (!shouldTurnOnEventHandling || !eventsToStop) return;
+    const options = {
+      capture: true,
+    };
+    eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
+    eventsToStop = void 0;
+    performance.mark('framer-react-event-handling-end',);
+  }, [],);
   return null;
 }
 var hydrationRunning = false;
@@ -13362,7 +13354,7 @@ function useScheduleRenderSideEffects(dep,) {
 }
 function useNavigationTransition(enableAsyncURLUpdates,) {
   const startNativeSpinner = useNativeLoadingSpinner();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change', true,);
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
   const navigationController = useRef(void 0,);
   return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
     var _a;
@@ -33883,71 +33875,96 @@ var CompatibilityDatabaseCollection = class {
     return Number(left.pointer,) - Number(right.pointer,);
   }
 };
-function convertToBoolean(value,) {
+function castArray(value, definition,) {
   switch (value == null ? void 0 : value.type) {
-    case 'boolean': {
-      return value.value;
-    }
-    case 'number':
-    case 'string': {
-      return Boolean(value.value,);
-    }
-  }
-  return false;
-}
-function convertToColor(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'color': {
-      return value.value;
+    case 'array': {
+      const result = value.value.map((item) => {
+        return DatabaseValue.cast(item, definition.definition,);
+      },);
+      return {
+        type: 'array',
+        value: result,
+      };
     }
   }
   return null;
 }
-function convertToDate(value,) {
+function castBoolean(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'boolean': {
+      return value;
+    }
+    case 'number':
+    case 'string': {
+      return {
+        type: 'boolean',
+        value: Boolean(value.value,),
+      };
+    }
+  }
+  return null;
+}
+function toBoolean(value,) {
+  const cast = castBoolean(value,);
+  return (cast == null ? void 0 : cast.value) ?? false;
+}
+function castColor(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'color': {
+      return value;
+    }
+  }
+  return null;
+}
+function castDate(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'date': {
-      return value.value;
+      return value;
     }
     case 'number':
     case 'string': {
       const date = new Date(value.value,);
       if (isValidDate(date,)) {
-        return date.toISOString();
+        return {
+          type: 'date',
+          value: date.toISOString(),
+        };
       }
       return null;
     }
   }
   return null;
 }
-function convertToEnum(value,) {
+function toDate(value,) {
+  const cast = castDate(value,);
+  return (cast == null ? void 0 : cast.value) ?? null;
+}
+function castEnum(value,) {
   switch (value == null ? void 0 : value.type) {
-    case 'enum':
+    case 'enum': {
+      return value;
+    }
     case 'string': {
-      return value.value;
+      return {
+        type: 'enum',
+        value: value.value,
+      };
     }
   }
   return null;
 }
-function convertToFile(value,) {
+function castFile(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'file': {
-      return value.value;
+      return value;
     }
   }
   return null;
 }
-function convertToResponsiveImage(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'responsiveimage': {
-      return value.value;
-    }
-  }
-  return null;
-}
-function convertToLink(value,) {
+function castLink(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'link': {
-      return value.value;
+      return value;
     }
     case 'string': {
       try {
@@ -33955,7 +33972,10 @@ function convertToLink(value,) {
           protocol,
         } = new URL(value.value,);
         if (protocol === 'http:' || protocol === 'https:') {
-          return value.value;
+          return {
+            type: 'link',
+            value: value.value,
+          };
         }
         return null;
       } catch {
@@ -33965,40 +33985,81 @@ function convertToLink(value,) {
   }
   return null;
 }
-function convertToNumber(value,) {
+function castNumber(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'number':
     case 'string': {
       const number2 = Number(value.value,);
       if (Number.isFinite(number2,)) {
-        return number2;
+        return {
+          type: 'number',
+          value: number2,
+        };
       }
       return null;
     }
   }
   return null;
 }
-function convertToRichText(value,) {
+function toNumber2(value,) {
+  const cast = castNumber(value,);
+  return (cast == null ? void 0 : cast.value) ?? null;
+}
+function castObject(value, definition,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'object': {
+      const result = {};
+      const definitionEntries = Object.entries(definition.definitions,);
+      for (const [key7, itemDefinition,] of definitionEntries) {
+        const item = value.value[key7] ?? null;
+        result[key7] = DatabaseValue.cast(item, itemDefinition,);
+      }
+      return {
+        type: 'object',
+        value: result,
+      };
+    }
+  }
+  return null;
+}
+function castResponsiveImage(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'responsiveimage': {
+      return value;
+    }
+  }
+  return null;
+}
+function castRichText(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'richtext': {
-      return value.value;
+      return value;
     }
   }
   return null;
 }
-function convertToString(value,) {
+function castString(value,) {
   switch (value == null ? void 0 : value.type) {
-    case 'string':
+    case 'string': {
+      return value;
+    }
     case 'number': {
-      return String(value.value,);
+      return {
+        type: 'string',
+        value: String(value.value,),
+      };
     }
   }
   return null;
 }
-function convertToMultiCollectionReference(value,) {
+function toString(value,) {
+  const cast = castString(value,);
+  return (cast == null ? void 0 : cast.value) ?? null;
+}
+function castMultiCollectionReference(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'multicollectionreference': {
-      return value.value;
+      return value;
     }
   }
   return null;
@@ -34009,107 +34070,73 @@ var DatabaseValue = {
    */
   cast(value, definition,) {
     switch (definition.type) {
-      case 'boolean': {
-        const result = convertToBoolean(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'boolean',
-          value: result,
-        };
-      }
-      case 'color': {
-        const result = convertToColor(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'color',
-          value: result,
-        };
-      }
-      case 'date': {
-        const result = convertToDate(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'date',
-          value: result,
-        };
-      }
-      case 'enum': {
-        const result = convertToEnum(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'enum',
-          value: result,
-        };
-      }
-      case 'file': {
-        const result = convertToFile(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'file',
-          value: result,
-        };
-      }
-      case 'link': {
-        const result = convertToLink(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'link',
-          value: result,
-        };
-      }
-      case 'number': {
-        const result = convertToNumber(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'number',
-          value: result,
-        };
-      }
-      case 'responsiveimage': {
-        const result = convertToResponsiveImage(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'responsiveimage',
-          value: result,
-        };
-      }
-      case 'richtext': {
-        const result = convertToRichText(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'richtext',
-          value: result,
-        };
-      }
-      case 'string': {
-        const result = convertToString(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'string',
-          value: result,
-        };
-      }
-      case 'multicollectionreference': {
-        const result = convertToMultiCollectionReference(value,);
-        if (isNull(result,)) return null;
-        return {
-          type: 'multicollectionreference',
-          value: result,
-        };
-      }
-      case 'array': {
-        throw new Error('Array cast not implemented',);
-      }
-      case 'object': {
-        throw new Error('Array cast not implemented',);
-      }
-      case 'unknown': {
+      case 'array':
+        return castArray(value, definition,);
+      case 'boolean':
+        return castBoolean(value,);
+      case 'color':
+        return castColor(value,);
+      case 'date':
+        return castDate(value,);
+      case 'enum':
+        return castEnum(value,);
+      case 'file':
+        return castFile(value,);
+      case 'link':
+        return castLink(value,);
+      case 'number':
+        return castNumber(value,);
+      case 'object':
+        return castObject(value, definition,);
+      case 'responsiveimage':
+        return castResponsiveImage(value,);
+      case 'richtext':
+        return castRichText(value,);
+      case 'string':
+        return castString(value,);
+      case 'multicollectionreference':
+        return castMultiCollectionReference(value,);
+      case 'unknown':
         return value;
-      }
-      default: {
+      default:
         assertNever(definition, 'Unsupported cast',);
-      }
     }
+  },
+  /**
+   * Parses a JavaScript variable into a DatabaseValue.
+   */
+  parse(value,) {
+    if (isBoolean(value,)) {
+      return {
+        type: 'boolean',
+        value,
+      };
+    }
+    if (isValidDate(value,)) {
+      return {
+        type: 'date',
+        value: value.toISOString(),
+      };
+    }
+    if (isNumber2(value,)) {
+      return {
+        type: 'number',
+        value,
+      };
+    }
+    if (isString22(value,)) {
+      return {
+        type: 'string',
+        value,
+      };
+    }
+    if (isArray(value,) && value.every(isString22,)) {
+      return {
+        type: 'multicollectionreference',
+        value,
+      };
+    }
+    return null;
   },
   /**
    * Checks if the left value is equal to the right value. Returns false if
@@ -34429,18 +34456,6 @@ var ScalarLiteralValue = class extends ScalarExpression {
       },
     );
   }
-  static fromMultiCollectionReference(value,) {
-    return new ScalarLiteralValue(
-      {
-        type: 'multicollectionreference',
-        isNullable: isNull(value,),
-      },
-      isNull(value,) ? null : {
-        type: 'multicollectionreference',
-        value,
-      },
-    );
-  }
   equals(other,) {
     return other instanceof ScalarLiteralValue && isEqual(this.definition, other.definition,) && isEqual(other.value, this.value,);
   }
@@ -34659,7 +34674,7 @@ var ScalarCase = class extends ScalarExpression {
       } of this.conditions
     ) {
       const when = whenExpression.evaluate(item,);
-      const isMatching = this.valueExpression ? DatabaseValue.equal(when, value, this.collation,) : convertToBoolean(when,);
+      const isMatching = this.valueExpression ? DatabaseValue.equal(when, value, this.collation,) : toBoolean(when,);
       if (isMatching) return thenExpression.evaluate(item,);
     }
     return ((_b = this.elseExpression) == null ? void 0 : _b.evaluate(item,)) ?? null;
@@ -34718,7 +34733,7 @@ var ScalarUnaryOperationNot = class extends ScalarUnaryOperation {
     const value = this.valueExpression.evaluate(item,);
     return {
       type: 'boolean',
-      value: !convertToBoolean(value,),
+      value: !toBoolean(value,),
     };
   }
 };
@@ -34755,7 +34770,7 @@ var ScalarLogicalOperationAnd = class extends ScalarLogicalOperation {
   evaluate(item,) {
     const result = this.operandExpressions.every((expression) => {
       const value = expression.evaluate(item,);
-      return convertToBoolean(value,);
+      return toBoolean(value,);
     },);
     return {
       type: 'boolean',
@@ -34771,7 +34786,7 @@ var ScalarLogicalOperationOr = class extends ScalarLogicalOperation {
   evaluate(item,) {
     const result = this.operandExpressions.some((expression) => {
       const value = expression.evaluate(item,);
-      return convertToBoolean(value,);
+      return toBoolean(value,);
     },);
     return {
       type: 'boolean',
@@ -34891,20 +34906,6 @@ var ScalarComparisonGreaterThanOrEqual = class extends ScalarComparison {
     };
   }
 };
-var ScalarComparisonIn = class extends ScalarComparison {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'operator', 'in',);
-  }
-  evaluate(item,) {
-    const leftValue = this.leftExpression.evaluate(item,);
-    const rightValue = this.rightExpression.evaluate(item,);
-    return {
-      type: 'boolean',
-      value: DatabaseValue.in(leftValue, rightValue,),
-    };
-  }
-};
 var ScalarTypeCast = class extends ScalarExpression {
   constructor(valueExpression,) {
     super();
@@ -34930,15 +34931,12 @@ var ScalarTypeCastBoolean = class extends ScalarTypeCast {
   static getDefinition() {
     return {
       type: 'boolean',
-      isNullable: false,
+      isNullable: true,
     };
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
-    return {
-      type: 'boolean',
-      value: convertToBoolean(value,),
-    };
+    return DatabaseValue.cast(value, this.definition,);
   }
 };
 var ScalarTypeCastDate = class extends ScalarTypeCast {
@@ -34955,14 +34953,7 @@ var ScalarTypeCastDate = class extends ScalarTypeCast {
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
-    const date = convertToDate(value,);
-    if (isNull(date,)) {
-      return null;
-    }
-    return {
-      type: 'date',
-      value: date,
-    };
+    return DatabaseValue.cast(value, this.definition,);
   }
 };
 var ScalarTypeCastNumber = class extends ScalarTypeCast {
@@ -34979,14 +34970,7 @@ var ScalarTypeCastNumber = class extends ScalarTypeCast {
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
-    const number2 = convertToNumber(value,);
-    if (isNull(number2,)) {
-      return null;
-    }
-    return {
-      type: 'number',
-      value: number2,
-    };
+    return DatabaseValue.cast(value, this.definition,);
   }
 };
 var ScalarTypeCastString = class extends ScalarTypeCast {
@@ -35003,14 +34987,7 @@ var ScalarTypeCastString = class extends ScalarTypeCast {
   }
   evaluate(item,) {
     const value = this.valueExpression.evaluate(item,);
-    const string = convertToString(value,);
-    if (isNull(string,)) {
-      return null;
-    }
-    return {
-      type: 'string',
-      value: string,
-    };
+    return DatabaseValue.cast(value, this.definition,);
   }
 };
 function convertExpression(expression, schema, typeAffinity,) {
@@ -35046,15 +35023,15 @@ function convertIdentifier(expression, schema,) {
   return new ScalarIdentifier(schema, expression.name, expression.collection,);
 }
 function convertLiteralValue(expression, typeAffinity,) {
-  var _a, _b;
+  var _a;
   const scalarExpression = getScalarLiteralValue(expression.value,);
   switch (typeAffinity == null ? void 0 : typeAffinity.type) {
     case 'boolean': {
-      const value = convertToBoolean(scalarExpression.value,);
+      const value = toBoolean(scalarExpression.value,);
       return ScalarLiteralValue.fromBoolean(value,);
     }
     case 'date': {
-      const value = convertToDate(scalarExpression.value,);
+      const value = toDate(scalarExpression.value,);
       return ScalarLiteralValue.fromDate(value,);
     }
     case 'enum': {
@@ -35064,17 +35041,12 @@ function convertLiteralValue(expression, typeAffinity,) {
       return scalarExpression;
     }
     case 'number': {
-      const value = convertToNumber(scalarExpression.value,);
+      const value = toNumber2(scalarExpression.value,);
       return ScalarLiteralValue.fromNumber(value,);
     }
     case 'string': {
-      const value = convertToString(scalarExpression.value,);
+      const value = toString(scalarExpression.value,);
       return ScalarLiteralValue.fromString(value,);
-    }
-    case 'multicollectionreference': {
-      if (((_b = scalarExpression.value) == null ? void 0 : _b.type) === 'multicollectionreference') {
-        return ScalarLiteralValue.fromMultiCollectionReference(scalarExpression.value.value,);
-      }
     }
   }
   return scalarExpression;
@@ -35092,9 +35064,6 @@ function getScalarLiteralValue(value,) {
   }
   if (isString22(value,)) {
     return ScalarLiteralValue.fromString(value,);
-  }
-  if (isArray(value,) && value.every(isString22,)) {
-    return ScalarLiteralValue.fromMultiCollectionReference(value,);
   }
   return ScalarLiteralValue.fromNull();
 }
@@ -35201,7 +35170,6 @@ function getScalarUnaryOperationNot(valueExpression,) {
   return new ScalarUnaryOperationNot(valueExpression,);
 }
 function getTypeAffinityForBinaryOperation(expression, schema,) {
-  if (expression.operator === 'in') return;
   if (expression.operator !== 'and' && expression.operator !== 'or') {
     return getExpressionType(expression.left, schema,) || getExpressionType(expression.right, schema,);
   }
@@ -35227,8 +35195,6 @@ function convertBinaryOperation(expression, schema,) {
       return getScalarComparisonGreaterThan(leftExpression, rightExpression,);
     case '>=':
       return getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
-    case 'in':
-      return getScalarComparisonIn(leftExpression, rightExpression,);
     default:
       throw new Error(`Unsupported binary operator: ${expression.operator}`,);
   }
@@ -35308,9 +35274,6 @@ function getScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,)
     return new ScalarComparisonLessThanOrEqual(rightExpression, leftExpression,);
   }
   return new ScalarComparisonGreaterThanOrEqual(leftExpression, rightExpression,);
-}
-function getScalarComparisonIn(leftExpression, rightExpression,) {
-  return new ScalarComparisonIn(leftExpression, rightExpression,);
 }
 function convertTypeCast(expression, schema,) {
   const valueExpression = convertExpression(expression.value, schema, void 0,);
@@ -35679,7 +35642,7 @@ var FilterItemsPlan = class extends QueryPlan {
     const childItems = await this.childPlan.execute();
     return childItems.filter((item) => {
       const result = this.filterExpression.evaluate(item,);
-      return convertToBoolean(result,);
+      return toBoolean(result,);
     },);
   }
 };
@@ -35834,6 +35797,10 @@ var RichTextResolver = class {
     }
     throw new Error(`Rich text field not found: ${key7}`,);
   }
+};
+var unknownDefinition = {
+  type: 'unknown',
+  isNullable: true,
 };
 function Hash(value,) {
   return value;
@@ -36235,15 +36202,15 @@ var RelationalNode = class extends AbstractNode {
    * Evaluates the node and all children synchronously. Throws an error if the
    * node is not synchronous.
    */
-  evaluateSync(context,) {
-    const generator = this.evaluate(context,);
+  evaluateSync() {
+    const generator = this.evaluate(void 0,);
     return evaluateSync(generator,);
   }
   /**
    * Evaluates the node and all children asynchronously.
    */
-  evaluateAsync(context,) {
-    const generator = this.evaluate(context,);
+  evaluateAsync() {
+    const generator = this.evaluate(void 0,);
     return evaluateAsync(generator,);
   }
 };
@@ -36360,15 +36327,15 @@ var ScalarNode = class extends AbstractNode {
    * Evaluates the node and all children synchronously. Throws an error if the
    * node is not synchronous.
    */
-  evaluateSync(context, tuple,) {
-    const generator = this.evaluate(context, tuple,);
+  evaluateSync() {
+    const generator = this.evaluate(void 0, void 0,);
     return evaluateSync(generator,);
   }
   /**
    * Evaluates the node and all children asynchronously.
    */
-  evaluateAsync(context, tuple,) {
-    const generator = this.evaluate(context, tuple,);
+  evaluateAsync() {
+    const generator = this.evaluate(void 0, void 0,);
     return evaluateAsync(generator,);
   }
 };
@@ -36493,7 +36460,7 @@ var ScalarCase2 = class extends ScalarNode {
           then,
         } of conditions
       ) {
-        if (convertToBoolean(when,)) {
+        if (toBoolean(when,)) {
           return then;
         }
       }
@@ -36884,19 +36851,11 @@ var Builder = class {
       }
       return this.normalizer.newScalarVariable(scopeField.field, isOuterField,);
     }
-    const definition = {
-      type: 'unknown',
-      isNullable: true,
-    };
-    return this.normalizer.newScalarConstant(definition, null,);
+    return this.normalizer.newScalarConstant(unknownDefinition, null,);
   }
   buildLiteralValue(expression,) {
-    const value = getDatabaseValue(expression.value,);
-    const definition = {
-      type: 'unknown',
-      isNullable: true,
-    };
-    return this.normalizer.newScalarConstant(definition, value,);
+    const value = DatabaseValue.parse(expression.value,);
+    return this.normalizer.newScalarConstant(unknownDefinition, value,);
   }
   buildFunctionCall(inScope, expression,) {
     const getArgument = (index) => {
@@ -37045,39 +37004,6 @@ function getCollection(data2, locale,) {
   }
   assertNever(data2, 'Unsupported collection type',);
 }
-function getDatabaseValue(value,) {
-  if (isBoolean(value,)) {
-    return {
-      type: 'boolean',
-      value,
-    };
-  }
-  if (isValidDate(value,)) {
-    return {
-      type: 'date',
-      value: value.toISOString(),
-    };
-  }
-  if (isNumber2(value,)) {
-    return {
-      type: 'number',
-      value,
-    };
-  }
-  if (isString22(value,)) {
-    return {
-      type: 'string',
-      value,
-    };
-  }
-  if (isArray(value,) && value.every(isString22,)) {
-    return {
-      type: 'multicollectionreference',
-      value,
-    };
-  }
-  return null;
-}
 var Subquery = class {
   constructor(inScope,) {
     this.inScope = inScope;
@@ -37127,7 +37053,7 @@ var RelationalFilter = class extends RelationalNode {
     },),);
     return input.filter((_, index,) => {
       const predicate = predicates[index] ?? null;
-      return convertToBoolean(predicate,);
+      return toBoolean(predicate,);
     },);
   }
 };
@@ -37304,7 +37230,7 @@ var RelationalLeftJoin = class extends RelationalNode {
         tuple.merge(leftTuple,);
         tuple.merge(rightTuple,);
         const value = yield* this.constraint.evaluate(context, tuple,);
-        if (convertToBoolean(value,)) {
+        if (toBoolean(value,)) {
           result.push(tuple,);
           hasMatch = true;
         }
@@ -37389,7 +37315,7 @@ var RelationalRightJoin = class extends RelationalNode {
         tuple.merge(rightTuple,);
         tuple.merge(leftTuple,);
         const value = yield* this.constraint.evaluate(context, tuple,);
-        if (convertToBoolean(value,)) {
+        if (toBoolean(value,)) {
           result.push(tuple,);
           hasMatch = true;
         }
@@ -37536,7 +37462,7 @@ var ScalarAnd = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: convertToBoolean(left,) && convertToBoolean(right,),
+      value: toBoolean(left,) && toBoolean(right,),
     };
   }
 };
@@ -37594,8 +37520,8 @@ var ScalarContains = class extends ScalarNode {
     return new ScalarContains(source, target,);
   }
   getValue(source, target,) {
-    const sourceValue = convertToString(source,);
-    const targetValue = convertToString(target,);
+    const sourceValue = toString(source,);
+    const targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
     const lowerSource = sourceValue.toLowerCase();
@@ -37646,8 +37572,8 @@ var ScalarEndsWith = class extends ScalarNode {
     return new ScalarEndsWith(source, target,);
   }
   getValue(source, target,) {
-    const sourceValue = convertToString(source,);
-    const targetValue = convertToString(target,);
+    const sourceValue = toString(source,);
+    const targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
     const lowerSource = sourceValue.toLowerCase();
@@ -37965,7 +37891,7 @@ var ScalarOr = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: convertToBoolean(left,) || convertToBoolean(right,),
+      value: toBoolean(left,) || toBoolean(right,),
     };
   }
 };
@@ -37999,8 +37925,8 @@ var ScalarStartsWith = class extends ScalarNode {
     return new ScalarStartsWith(source, target,);
   }
   getValue(source, target,) {
-    const sourceValue = convertToString(source,);
-    const targetValue = convertToString(target,);
+    const sourceValue = toString(source,);
+    const targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
     const lowerSource = sourceValue.toLowerCase();
@@ -38513,15 +38439,14 @@ var RelationalLimit = class extends RelationalNode {
     return new RelationalLimit(input, limit, this.ordering,);
   }
   *evaluate(context,) {
-    const tuple = new Tuple();
     const {
       input,
       limit,
     } = yield* evaluateObject({
       input: this.input.evaluate(context,),
-      limit: this.limit.evaluate(context, tuple,),
+      limit: this.limit.evaluate(context, void 0,),
     },);
-    const value = convertToNumber(limit,) ?? Infinity;
+    const value = toNumber2(limit,) ?? Infinity;
     if (value === Infinity) return input;
     return input.slice(0, value,);
   }
@@ -38564,15 +38489,14 @@ var RelationalOffset = class extends RelationalNode {
     return new RelationalOffset(input, offset, this.ordering,);
   }
   *evaluate(context,) {
-    const tuple = new Tuple();
     const {
       input,
       offset,
     } = yield* evaluateObject({
       input: this.input.evaluate(context,),
-      offset: this.offset.evaluate(context, tuple,),
+      offset: this.offset.evaluate(context, void 0,),
     },);
-    const value = convertToNumber(offset,) ?? 0;
+    const value = toNumber2(offset,) ?? 0;
     if (value === 0) return input;
     return input.slice(value,);
   }
@@ -38671,7 +38595,7 @@ var ScalarNot = class extends ScalarNode {
     const input = yield* this.input.evaluate(context, tuple,);
     return {
       type: 'boolean',
-      value: !convertToBoolean(input,),
+      value: !toBoolean(input,),
     };
   }
 };
@@ -38773,8 +38697,8 @@ var ScalarSubquery = class extends ScalarNode {
   }
   *evaluate(context, tuple,) {
     const inputContext = new Tuple();
-    inputContext.merge(context,);
-    inputContext.merge(tuple,);
+    if (context) inputContext.merge(context,);
+    if (tuple) inputContext.merge(tuple,);
     const relation = yield* this.input.evaluate(inputContext,);
     const namedFieldEntries = Object.entries(this.namedFields,);
     return {
@@ -38819,8 +38743,10 @@ var ScalarVariable = class extends ScalarNode {
   // eslint-disable-next-line require-yield
   *evaluate(context, tuple,) {
     if (this.isOuterField) {
+      assert(context, 'Context must exist',);
       return context.getValue(this.field,);
     }
+    assert(tuple, 'Tuple must exist',);
     return tuple.getValue(this.field,);
   }
 };
@@ -38873,8 +38799,7 @@ var Normalizer = class {
   finishScalar(node,) {
     const isConstant = node instanceof ScalarConstant;
     if (node.isSynchronous && node.referencedFields.size === 0 && !isConstant) {
-      const tuple = new Tuple();
-      const value = node.evaluateSync(tuple, tuple,);
+      const value = node.evaluateSync();
       return this.newScalarConstant(node.definition, value,);
     }
     return this.memo.addScalar(node,);
@@ -39309,8 +39234,7 @@ var QueryEngine = class {
   async queryNew(query, locale,) {
     const optimizer = new Optimizer(query, locale,);
     const [root, namedFields,] = optimizer.optimize();
-    const context = new Tuple();
-    const relation = await root.evaluateAsync(context,);
+    const relation = await root.evaluateAsync();
     const namedFieldEntries = Object.entries(namedFields,);
     const result = await Promise.all(relation.tuples.map(async (tuple) => {
       const resolvedFields = await Promise.all(namedFieldEntries.map(async ([name, field,],) => {
