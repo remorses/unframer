@@ -27,7 +27,12 @@
             "default": "./dist/index.js"
         },
         "./src/framer.js": {
+            "types": "./dist/framer.d.ts",
             "default": "./src/framer.js"
+        },
+        "./dist/exporter": {
+            "types": "./dist/exporter.d.ts",
+            "default": "./dist/exporter.js"
         },
         "./package.json": "./package.json"
     },
