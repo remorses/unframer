@@ -1,5 +1,5 @@
 import '@/framer/styles.css'
-import '@/globals.css'
+import '@/app/globals.css'
 import '@/framer/tokens.css'
 
 import Page from '../app/page'
