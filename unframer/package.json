@@ -32,6 +32,7 @@
         },
         "./dist/exporter": {
             "types": "./dist/exporter.d.ts",
+            "module": "./esm/exporter.js",
             "default": "./dist/exporter.js"
         },
         "./package.json": "./package.json"

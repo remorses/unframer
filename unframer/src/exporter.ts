@@ -176,50 +176,45 @@ export async function bundle({
             JSON.stringify({ type: 'module' }),
             'utf-8',
         )
-        try {
-            await Promise.all(
-                result.outputFiles.map(async (file) => {
-                    try {
-                        await sema.acquire()
-                        const name = path
-                            .basename(file.path)
-                            .replace(/\.js$/, '')
-                        const resultPathAbs = path.resolve(out, file.path)
-                        if (!components[name]) {
-                            return
-                        }
-                        logger.log(`extracting types for ${name}`)
-                        const { propertyControls, fonts } =
-                            await extractPropControlsUnsafe(resultPathAbs, name)
-                        if (!propertyControls) {
-                            logger.log(`no property controls found for ${name}`)
-                        }
 
-                        allFonts.push(
-                            ...(fonts || []).map((x) => ({
-                                ...x,
-                                fileName: path.basename(file.path),
-                            })),
-                        )
-                        const types = propControlsToType(
-                            propertyControls!,
-                            name,
-                        )
-                        // name = 'framer-' + name
-                        // logger.log('name', name)
-
-                        fs.writeFileSync(
-                            path.resolve(out, `${name}.d.ts`),
-                            types,
-                        )
-                    } finally {
-                        sema.release()
+        const propControlsData = await Promise.all(
+            result.outputFiles.map(async (file) => {
+                try {
+                    await sema.acquire()
+                    const name = path.basename(file.path).replace(/\.js$/, '')
+                    const resultPathAbs = path.resolve(out, file.path)
+                    if (!components[name]) {
+                        return
                     }
-                }),
-            )
-        } finally {
-            fs.rmSync(packageJson)
-        }
+                    logger.log(`extracting types for ${name}`)
+                    const { propertyControls, fonts } =
+                        await extractPropControlsUnsafe(resultPathAbs, name)
+                    if (!propertyControls) {
+                        logger.log(`no property controls found for ${name}`)
+                    }
+
+                    allFonts.push(
+                        ...(fonts || []).map((x) => ({
+                            ...x,
+                            fileName: path.basename(file.path),
+                        })),
+                    )
+                    const types = propControlsToType(propertyControls!, name)
+                    // name = 'framer-' + name
+                    // logger.log('name', name)
+
+                    fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+                    return {
+                        propertyControls,
+                        fonts,
+                        name,
+                        // componentPath: file.path,
+                    }
+                } finally {
+                    sema.release()
+                }
+            }),
+        ).finally(() => fs.rmSync(packageJson))
 
         const cssString =
             '/* This css file has all the necessary styles to run all your components */\n' +
@@ -274,12 +269,28 @@ export async function bundle({
             '/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n' +
             getTokensCss({ out, result })
         fs.writeFileSync(path.resolve(out, 'tokens.css'), tokensCss, 'utf-8')
+        const res = {
+            components: Object.entries(components).map(([name, v]) => {
+                const propControls = propControlsData.find(
+                    (x) => x?.name === name,
+                )
+
+                return {
+                    path: name,
+                    url: v,
+                    name,
+                    componentName: componentCamelCase(name),
+                    propertyControls: propControls?.propertyControls,
+                }
+            }),
+        }
+        return res
     }
 
     if (!watch) {
-        await rebuild()
+        const result = await rebuild()
         await buildContext.dispose()
-        return
+        return result
     }
 
     // when user press ctrl+c dispose
@@ -296,7 +307,7 @@ export async function bundle({
         buildContext.dispose()
     })
 
-    await rebuild()
+    const res = await rebuild()
 
     /**
      * Get resolved URLs for all components and also wait for 1 second if it took less time than that
@@ -326,6 +337,7 @@ export async function bundle({
         prevUrls = urls
         await rebuild()
     }
+    return res
 }
 
 function decapitalize(str: string) {
@@ -588,7 +600,7 @@ export function propControlsToType(controls: PropertyControls, fileName) {
             .filter(Boolean)
             .join('\n')
 
-        const componentName = componentCamelCase(fileName?.replace(/\.js$/, ''))
+        const componentName = componentCamelCase(fileName)
 
         const defaultPropsTypes =
             [
@@ -733,6 +745,7 @@ function splitOnce(str: string, separator: string) {
 }
 
 export function componentCamelCase(str: string) {
+    str = str?.replace(/\.js$/, '')
     if (!str) {
         return 'FramerComponent'
     }
