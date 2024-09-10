@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.PC4CCYRO.js
+// https :https://app.framerstatic.com/framer.N4QZ4L2N.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -33225,10 +33225,11 @@ var _FetchClient = class {
     },);
     return promise;
   }
-  getValue(cacheKey,) {
+  getValue(cacheKey, onlyIfPrefetched = false,) {
+    if (onlyIfPrefetched && !__privateGet(this, _preloadedRequests,).has(cacheKey,)) return void 0;
     return this.responseValues.get(cacheKey,);
   }
-  subscribe(request, callback,) {
+  subscribe(request, callback, skipFetchRequest = false,) {
     const {
       url,
       cacheDuration,
@@ -33239,8 +33240,10 @@ var _FetchClient = class {
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
       __privateGet(this, _shortestCacheDurations,).set(cacheKey, cacheDuration,);
     }
-    this.startQueryRefetching(request,);
-    void this.fetchWithCache(request,);
+    if (!skipFetchRequest) {
+      this.startQueryRefetching(request,);
+      void this.fetchWithCache(request,);
+    }
     const subscribers = __privateGet(this, _subscribers,).get(cacheKey,) ?? /* @__PURE__ */ new Set();
     subscribers.add(callback,);
     __privateGet(this, _subscribers,).set(cacheKey, subscribers,);
@@ -33291,6 +33294,8 @@ var FetchClientProvider = ({
 var _subscriptions;
 var _subscribers2;
 var _results;
+var _SSRResults;
+var _onlyPrefetched;
 var RequestsObserver = class {
   constructor(client, requests,) {
     this.client = client;
@@ -33298,14 +33303,15 @@ var RequestsObserver = class {
     __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
     __privateAdd(this, _results, void 0,);
+    __privateAdd(this, _SSRResults, void 0,);
+    __privateAdd(this, _onlyPrefetched, true,);
     __publicField(this, 'updateResults', () => {
-      if (__privateGet(this, _subscribers2,).size === 0) return;
       const data2 = [];
       const statuses = /* @__PURE__ */ new Set();
       const errors = [];
       for (const request of this.requests) {
         const cachekey = getRequestCacheKey(request,);
-        const value = this.client.getValue(cachekey,);
+        const value = this.client.getValue(cachekey, __privateGet(this, _onlyPrefetched,),);
         if (!value) {
           statuses.add('loading',);
           data2.push(request.fallbackValue,);
@@ -33329,7 +33335,7 @@ var RequestsObserver = class {
         return;
       }
       __privateSet(this, _results, result,);
-      if (errors.length > 0 && !statuses.has('loading',)) {
+      if (errors.length > 0 && !statuses.has('loading',) && __privateGet(this, _subscribers2,).size > 0) {
         console.error('Fetch failed: ' + errors.join('\n',),);
       }
       for (const subscriber of __privateGet(this, _subscribers2,)) {
@@ -33343,24 +33349,34 @@ var RequestsObserver = class {
         __privateGet(this, _subscribers2,).delete(callback,);
       };
     },);
+    __publicField(this, 'getServerResults', () => {
+      return __privateGet(this, _SSRResults,);
+    },);
     __publicField(this, 'getResults', () => {
       return __privateGet(this, _results,);
     },);
-    this.setRequests(requests,);
-    __privateSet(this, _results, {
+    this.setRequests(requests, {
+      onlyPrefetched: true,
+    },);
+    __privateSet(this, _SSRResults, {
       status: 'loading',
       data: requests.map((request) => request.fallbackValue),
     },);
+    __privateSet(this, _results, __privateGet(this, _SSRResults,),);
   }
-  setRequests(requests,) {
+  setRequests(requests, {
+    onlyPrefetched = false,
+  },) {
     var _a;
     const lastRequests = this.requests;
     this.requests = requests;
     const requestsByCacheKey = new Map(requests.map((request) => [getRequestCacheKey(request,), request,]),);
     const nextSubscribedKeys = Array.from(requestsByCacheKey.keys(),);
+    const hasOnlyPrefetchedChange = __privateGet(this, _onlyPrefetched,) !== onlyPrefetched;
+    if (!onlyPrefetched) __privateSet(this, _onlyPrefetched, false,);
     const hasSubscriptionChange = nextSubscribedKeys.length !== __privateGet(this, _subscriptions,).size ||
       nextSubscribedKeys.some((url) => !__privateGet(this, _subscriptions,).has(url,));
-    if (!hasSubscriptionChange) {
+    if (!hasSubscriptionChange && !hasOnlyPrefetchedChange) {
       if (!isEqual(lastRequests, requests,)) {
         this.updateResults();
       }
@@ -33373,7 +33389,7 @@ var RequestsObserver = class {
     for (const cacheKey of nextSubscribedKeys) {
       const requestConfig = requestsByCacheKey.get(cacheKey,);
       if (!requestConfig) continue;
-      const unsubscribe = this.client.subscribe(requestConfig, this.updateResults,);
+      const unsubscribe = this.client.subscribe(requestConfig, this.updateResults, onlyPrefetched,);
       __privateGet(this, _subscriptions,).set(cacheKey, unsubscribe,);
     }
     if (__privateGet(this, _subscribers2,).size === 0) return;
@@ -33391,6 +33407,8 @@ var RequestsObserver = class {
 _subscriptions = /* @__PURE__ */ new WeakMap();
 _subscribers2 = /* @__PURE__ */ new WeakMap();
 _results = /* @__PURE__ */ new WeakMap();
+_SSRResults = /* @__PURE__ */ new WeakMap();
+_onlyPrefetched = /* @__PURE__ */ new WeakMap();
 function useFetchRequests(requests, disabled,) {
   const fetchClient = React2.useContext(FetchClientContext,);
   if (!fetchClient) {
@@ -33400,7 +33418,9 @@ function useFetchRequests(requests, disabled,) {
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
   React2.useLayoutEffect(() => {
     if (disabled) return;
-    observer2.setRequests(requests,);
+    observer2.setRequests(requests, {
+      onlyPrefetched: false,
+    },);
   }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
     return () => observer2.unmount();
@@ -33408,8 +33428,8 @@ function useFetchRequests(requests, disabled,) {
   const subscribe = React2.useCallback((onChange) => {
     if (isRestoringCache || disabled) return noop3;
     return observer2.subscribe(onChange,);
-  }, [disabled, isRestoringCache, observer2,],);
-  return React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getResults,);
+  }, [disabled, observer2, isRestoringCache,],);
+  return React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
 }
 function usePrefetch() {
   const fetchClient = React2.useContext(FetchClientContext,);
@@ -34056,14 +34076,6 @@ function toString(value,) {
   const cast = castString(value,);
   return (cast == null ? void 0 : cast.value) ?? null;
 }
-function castMultiCollectionReference(value,) {
-  switch (value == null ? void 0 : value.type) {
-    case 'multicollectionreference': {
-      return value;
-    }
-  }
-  return null;
-}
 var DatabaseValue = {
   /**
    * Casts a value to a different type.
@@ -34094,8 +34106,6 @@ var DatabaseValue = {
         return castRichText(value,);
       case 'string':
         return castString(value,);
-      case 'multicollectionreference':
-        return castMultiCollectionReference(value,);
       case 'unknown':
         return value;
       default:
@@ -34130,10 +34140,10 @@ var DatabaseValue = {
         value,
       };
     }
-    if (isArray(value,) && value.every(isString22,)) {
+    if (isArray(value,)) {
       return {
-        type: 'multicollectionreference',
-        value,
+        type: 'array',
+        value: value.map(DatabaseValue.parse,),
       };
     }
     return null;
@@ -34142,67 +34152,102 @@ var DatabaseValue = {
    * Checks if the left value is equal to the right value. Returns false if
    * the values are not of the same type.
    */
-  equal(left, right, collation4,) {
+  equal(left, right, collation9,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation4,) === 0;
+    return compare(left, right, collation9,) === 0;
   },
   /**
    * Checks if the left value is less than the right value. Returns false if
    * the values are not of the same type.
    */
-  lessThan(left, right, collation4,) {
+  lessThan(left, right, collation9,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation4,) < 0;
+    return compare(left, right, collation9,) < 0;
   },
   /**
    * Checks if the left value is less than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  lessThanOrEqual(left, right, collation4,) {
+  lessThanOrEqual(left, right, collation9,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation4,) <= 0;
+    return compare(left, right, collation9,) <= 0;
   },
   /**
    * Checks if the left value is greater than the right value. Returns false
    * if the values are not of the same type.
    */
-  greaterThan(left, right, collation4,) {
+  greaterThan(left, right, collation9,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation4,) > 0;
+    return compare(left, right, collation9,) > 0;
   },
   /**
    * Checks if the left value is greater than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  greaterThanOrEqual(left, right, collation4,) {
+  greaterThanOrEqual(left, right, collation9,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation4,) >= 0;
+    return compare(left, right, collation9,) >= 0;
   },
   /**
-   * Checks if the left value is in the right value.
-   * Returns false if the left value is not a string or the right value is
-   * not an array of strings.
+   * Checks if the left value is in the right value. Returns false if the
+   * right value is not an array.
    */
-  in(left, right,) {
-    if ((left == null ? void 0 : left.type) !== 'string') return false;
-    if ((right == null ? void 0 : right.type) !== 'multicollectionreference') return false;
-    return right.value.includes(left.value,);
+  in(left, right, collation9,) {
+    if ((right == null ? void 0 : right.type) !== 'array') return false;
+    return right.value.some((item) => {
+      return DatabaseValue.equal(item, left, collation9,);
+    },);
+  },
+  contains(source, target, collation9,) {
+    let sourceValue = toString(source,);
+    let targetValue = toString(target,);
+    if (isNull(sourceValue,)) return false;
+    if (isNull(targetValue,)) return false;
+    if (collation9.type === 0) {
+      sourceValue = sourceValue.toLowerCase();
+      targetValue = targetValue.toLowerCase();
+    }
+    return sourceValue.includes(targetValue,);
+  },
+  startsWith(source, target, collation9,) {
+    let sourceValue = toString(source,);
+    let targetValue = toString(target,);
+    if (isNull(sourceValue,)) return false;
+    if (isNull(targetValue,)) return false;
+    if (collation9.type === 0) {
+      sourceValue = sourceValue.toLowerCase();
+      targetValue = targetValue.toLowerCase();
+    }
+    return sourceValue.startsWith(targetValue,);
+  },
+  endsWith(source, target, collation9,) {
+    let sourceValue = toString(source,);
+    let targetValue = toString(target,);
+    if (isNull(sourceValue,)) return false;
+    if (isNull(targetValue,)) return false;
+    if (collation9.type === 0) {
+      sourceValue = sourceValue.toLowerCase();
+      targetValue = targetValue.toLowerCase();
+    }
+    return sourceValue.endsWith(targetValue,);
   },
   stringify(value,) {
     if (value === null) {
       return 'null';
     }
     switch (value.type) {
+      case 'array':
+        return `[${value.value.map(DatabaseValue.stringify,).join(', ',)}]`;
       case 'boolean':
       case 'number':
         return String(value.value,);
@@ -34222,27 +34267,35 @@ var DatabaseValue = {
         return 'File';
       case 'link':
         return isString22(value.value,) ? `'${value.value}' /* Link */` : 'Link';
-      case 'multicollectionreference':
-        return `[${value.value.map((v) => `'${v}'`).join(', ',)}]`;
-      case 'array':
-        return `[${value.value.map((v) => DatabaseValue.stringify(v,)).join(', ',)}]`;
       case 'object':
-        return `{${
-          Object.entries(value.value,).map(([objectKey, objectValue,],) => `${objectKey}: ${DatabaseValue.stringify(objectValue,)}`).join(
-            ', ',
-          )
-        }}`;
+        return 'Object';
       default:
         assertNever(value,);
     }
   },
 };
-function compare(left, right, collation4,) {
+function compare(left, right, collation9,) {
   if (isNull(left,) || isNull(right,)) {
     assert(left === right,);
     return 0;
   }
   switch (left.type) {
+    case 'array': {
+      assert(left.type === right.type,);
+      const leftLength = left.value.length;
+      const rightLength = right.value.length;
+      if (leftLength < rightLength) return -1;
+      if (leftLength > rightLength) return 1;
+      for (let i = 0; i < leftLength; i++) {
+        const leftItem = left.value[i];
+        const rightItem = right.value[i];
+        assert(!isUndefined(leftItem,), 'Left item must exist',);
+        assert(!isUndefined(rightItem,), 'Right item must exist',);
+        const result = compare(leftItem, rightItem, collation9,);
+        if (result !== 0) return result;
+      }
+      return 0;
+    }
     case 'boolean': {
       assert(left.type === right.type,);
       if (left.value < right.value) return -1;
@@ -34275,14 +34328,6 @@ function compare(left, right, collation4,) {
       if (left.value > right.value) return 1;
       return 0;
     }
-    case 'responsiveimage': {
-      assert(left.type === right.type,);
-      const leftEncoded = JSON.stringify(left.value,);
-      const rightEncoded = JSON.stringify(right.value,);
-      if (leftEncoded < rightEncoded) return -1;
-      if (leftEncoded > rightEncoded) return 1;
-      return 0;
-    }
     case 'link': {
       assert(left.type === right.type,);
       const leftEncoded = JSON.stringify(left.value,);
@@ -34297,6 +34342,36 @@ function compare(left, right, collation4,) {
       if (left.value > right.value) return 1;
       return 0;
     }
+    case 'object': {
+      assert(left.type === right.type,);
+      const leftKeys = Object.keys(left.value,).sort();
+      const rightKeys = Object.keys(right.value,).sort();
+      if (leftKeys.length < rightKeys.length) return -1;
+      if (leftKeys.length > rightKeys.length) return 1;
+      for (let i = 0; i < leftKeys.length; i++) {
+        const leftKey = leftKeys[i];
+        const rightKey = rightKeys[i];
+        assert(!isUndefined(leftKey,), 'Left key must exist',);
+        assert(!isUndefined(rightKey,), 'Left key must exist',);
+        if (leftKey < rightKey) return -1;
+        if (leftKey > rightKey) return 1;
+        const leftValue = left.value[leftKey];
+        const rightValue = right.value[rightKey];
+        assert(!isUndefined(leftValue,), 'Left value must exist',);
+        assert(!isUndefined(rightValue,), 'Right value must exist',);
+        const result = compare(leftValue, rightValue, collation9,);
+        if (result !== 0) return result;
+      }
+      return 0;
+    }
+    case 'responsiveimage': {
+      assert(left.type === right.type,);
+      const leftEncoded = JSON.stringify(left.value,);
+      const rightEncoded = JSON.stringify(right.value,);
+      if (leftEncoded < rightEncoded) return -1;
+      if (leftEncoded > rightEncoded) return 1;
+      return 0;
+    }
     case 'richtext': {
       assert(left.type === right.type,);
       const leftValue = left.value;
@@ -34309,31 +34384,13 @@ function compare(left, right, collation4,) {
       assert(left.type === right.type,);
       let leftValue = left.value;
       let rightValue = right.value;
-      if (collation4.type === 0) {
+      if (collation9.type === 0) {
         leftValue = left.value.toLowerCase();
         rightValue = right.value.toLowerCase();
       }
       if (leftValue < rightValue) return -1;
       if (leftValue > rightValue) return 1;
       return 0;
-    }
-    case 'multicollectionreference': {
-      assert(left.type === right.type,);
-      for (let i = 0; i < Math.max(left.value.length, right.value.length,); i++) {
-        const leftItem = left.value[i];
-        const rightItem = right.value[i];
-        if (leftItem === void 0) return -1;
-        if (rightItem === void 0) return 1;
-        if (leftItem < rightItem) return -1;
-        if (leftItem > rightItem) return 1;
-      }
-      return 0;
-    }
-    case 'array': {
-      throw new Error('Array comparison not implemented',);
-    }
-    case 'object': {
-      throw new Error('Object comparison not implemented',);
     }
     default: {
       assertNever(left,);
@@ -35678,7 +35735,7 @@ var SortItemsPlan = class extends QueryPlan {
         const {
           expression,
           direction,
-          collation: collation4,
+          collation: collation9,
         } of this.orderExpressions
       ) {
         const isAscending = direction === 'asc';
@@ -35688,13 +35745,13 @@ var SortItemsPlan = class extends QueryPlan {
         }
         const left = expression.evaluate(leftItem,);
         const right = expression.evaluate(rightItem,);
-        if (DatabaseValue.equal(left, right, collation4,)) {
+        if (DatabaseValue.equal(left, right, collation9,)) {
           continue;
         }
-        if (DatabaseValue.lessThan(left, right, collation4,) || isNullish2(left,)) {
+        if (DatabaseValue.lessThan(left, right, collation9,) || isNullish2(left,)) {
           return isAscending ? -1 : 1;
         }
-        if (DatabaseValue.greaterThan(left, right, collation4,) || isNullish2(right,)) {
+        if (DatabaseValue.greaterThan(left, right, collation9,) || isNullish2(right,)) {
           return isAscending ? 1 : -1;
         }
         throw new Error('Invalid comparison result.',);
@@ -35704,10 +35761,10 @@ var SortItemsPlan = class extends QueryPlan {
   }
 };
 var ScalarOrderExpression = class {
-  constructor(expression, direction, collation4,) {
+  constructor(expression, direction, collation9,) {
     this.expression = expression;
     this.direction = direction;
-    this.collation = collation4;
+    this.collation = collation9;
   }
 };
 var SliceItemsPlan = class extends QueryPlan {
@@ -37490,6 +37547,10 @@ var ScalarConstant = class extends ScalarNode {
     return this.value;
   }
 };
+var collation3 = {
+  type: 0,
+  /* CaseInsensitive */
+};
 var ScalarContains = class extends ScalarNode {
   constructor(source, target,) {
     const referencedFields = new Fields();
@@ -37519,15 +37580,6 @@ var ScalarContains = class extends ScalarNode {
     const target = this.target.getOptimized();
     return new ScalarContains(source, target,);
   }
-  getValue(source, target,) {
-    const sourceValue = toString(source,);
-    const targetValue = toString(target,);
-    if (isNull(sourceValue,)) return false;
-    if (isNull(targetValue,)) return false;
-    const lowerSource = sourceValue.toLowerCase();
-    const lowerTarget = targetValue.toLowerCase();
-    return lowerSource.includes(lowerTarget,);
-  }
   *evaluate(context, tuple,) {
     const {
       source,
@@ -37538,9 +37590,13 @@ var ScalarContains = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: this.getValue(source, target,),
+      value: DatabaseValue.contains(source, target, collation3,),
     };
   }
+};
+var collation4 = {
+  type: 0,
+  /* CaseInsensitive */
 };
 var ScalarEndsWith = class extends ScalarNode {
   constructor(source, target,) {
@@ -37571,15 +37627,6 @@ var ScalarEndsWith = class extends ScalarNode {
     const target = this.target.getOptimized();
     return new ScalarEndsWith(source, target,);
   }
-  getValue(source, target,) {
-    const sourceValue = toString(source,);
-    const targetValue = toString(target,);
-    if (isNull(sourceValue,)) return false;
-    if (isNull(targetValue,)) return false;
-    const lowerSource = sourceValue.toLowerCase();
-    const lowerTarget = targetValue.toLowerCase();
-    return lowerSource.endsWith(lowerTarget,);
-  }
   *evaluate(context, tuple,) {
     const {
       source,
@@ -37590,7 +37637,7 @@ var ScalarEndsWith = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: this.getValue(source, target,),
+      value: DatabaseValue.endsWith(source, target, collation4,),
     };
   }
 };
@@ -37895,6 +37942,10 @@ var ScalarOr = class extends ScalarNode {
     };
   }
 };
+var collation5 = {
+  type: 0,
+  /* CaseInsensitive */
+};
 var ScalarStartsWith = class extends ScalarNode {
   constructor(source, target,) {
     const referencedFields = new Fields();
@@ -37924,15 +37975,6 @@ var ScalarStartsWith = class extends ScalarNode {
     const target = this.target.getOptimized();
     return new ScalarStartsWith(source, target,);
   }
-  getValue(source, target,) {
-    const sourceValue = toString(source,);
-    const targetValue = toString(target,);
-    if (isNull(sourceValue,)) return false;
-    if (isNull(targetValue,)) return false;
-    const lowerSource = sourceValue.toLowerCase();
-    const lowerTarget = targetValue.toLowerCase();
-    return lowerSource.startsWith(lowerTarget,);
-  }
   *evaluate(context, tuple,) {
     const {
       source,
@@ -37943,7 +37985,7 @@ var ScalarStartsWith = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: this.getValue(source, target,),
+      value: DatabaseValue.startsWith(source, target, collation5,),
     };
   }
 };
@@ -38309,7 +38351,7 @@ var EnforcerResolve = class extends EnforcerNode {
     },);
   }
 };
-var collation3 = {
+var collation6 = {
   type: 0,
   /* CaseInsensitive */
 };
@@ -38386,13 +38428,13 @@ var EnforcerSort = class extends EnforcerNode {
         }
         const leftValue = leftTuple.getValue(field,);
         const rightValue = rightTuple.getValue(field,);
-        if (DatabaseValue.equal(leftValue, rightValue, collation3,)) {
+        if (DatabaseValue.equal(leftValue, rightValue, collation6,)) {
           continue;
         }
-        if (isNull(leftValue,) || DatabaseValue.lessThan(leftValue, rightValue, collation3,)) {
+        if (isNull(leftValue,) || DatabaseValue.lessThan(leftValue, rightValue, collation6,)) {
           return isAscending ? -1 : 1;
         }
-        if (isNull(rightValue,) || DatabaseValue.greaterThan(leftValue, rightValue, collation3,)) {
+        if (isNull(rightValue,) || DatabaseValue.greaterThan(leftValue, rightValue, collation6,)) {
           return isAscending ? 1 : -1;
         }
         throw new Error('Invalid comparison',);
@@ -38526,6 +38568,10 @@ var ScalarCast = class extends ScalarNode {
     return DatabaseValue.cast(input, this.definition,);
   }
 };
+var collation7 = {
+  type: 0,
+  /* CaseInsensitive */
+};
 var ScalarIn = class extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
@@ -38565,7 +38611,7 @@ var ScalarIn = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: DatabaseValue.in(left, right,),
+      value: DatabaseValue.in(left, right, collation7,),
     };
   }
 };
@@ -38598,6 +38644,10 @@ var ScalarNot = class extends ScalarNode {
       value: !toBoolean(input,),
     };
   }
+};
+var collation8 = {
+  type: 0,
+  /* CaseInsensitive */
 };
 var ScalarNotIn = class extends ScalarNode {
   constructor(left, right,) {
@@ -38638,7 +38688,7 @@ var ScalarNotIn = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: !DatabaseValue.in(left, right,),
+      value: !DatabaseValue.in(left, right, collation8,),
     };
   }
 };
@@ -38963,10 +39013,28 @@ var Normalizer = class {
     return this.finishScalar(node,);
   }
   newScalarIn(left, right,) {
+    if (right.definition.type === 'array') {
+      left = this.removeUnknown(left, right.definition.definition,);
+    }
+    const arrayDefinition = {
+      type: 'array',
+      isNullable: true,
+      definition: left.definition,
+    };
+    right = this.removeUnknown(right, arrayDefinition,);
     const node = new ScalarIn(left, right,);
     return this.finishScalar(node,);
   }
   newScalarNotIn(left, right,) {
+    if (right.definition.type === 'array') {
+      left = this.removeUnknown(left, right.definition.definition,);
+    }
+    const arrayDefinition = {
+      type: 'array',
+      isNullable: true,
+      definition: left.definition,
+    };
+    right = this.removeUnknown(right, arrayDefinition,);
     const node = new ScalarNotIn(left, right,);
     return this.finishScalar(node,);
   }
@@ -39225,8 +39293,7 @@ var QueryEngine = class {
     __publicField(this, 'useNewOptimizer', false,);
   }
   async query(query, locale,) {
-    const containsSubquery = query.select.some((expression) => expression.type !== 'Identifier');
-    if (this.useNewOptimizer || query.from.type !== 'Collection' || containsSubquery) {
+    if (this.useNewOptimizer || needsNewQueryOptimizer(query,)) {
       return this.queryNew(query, locale,);
     }
     return this.queryOld(query, locale,);
@@ -39521,6 +39588,29 @@ function findLookupIndexPlanForFunctionCall(collection, expression,) {
 function createScanCollectionPlan(collection, expression,) {
   const plan = new ScanCollectionPlan(collection, void 0,);
   return new FilterItemsPlan(plan, expression,);
+}
+function needsNewQueryOptimizer(query,) {
+  if (query.from.type !== 'Collection') return true;
+  for (const expression of query.select) {
+    if (expression.type === 'Identifier') return true;
+  }
+  if (query.where) return hasScalarIn(query.where,);
+  return false;
+}
+function hasScalarIn(expression,) {
+  switch (expression.type) {
+    case 'UnaryOperation': {
+      return hasScalarIn(expression.value,);
+    }
+    case 'BinaryOperation': {
+      if (expression.operator === 'in') {
+        return true;
+      }
+      return hasScalarIn(expression.left,) || hasScalarIn(expression.right,);
+    }
+    default:
+      return false;
+  }
 }
 var defaultVariantKey = 'default';
 var defaultVariants = /* @__PURE__ */ new Set([defaultVariantKey,],);
@@ -40483,7 +40573,13 @@ function useVariantState({
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      forceUpdate();
+      if (isError2) {
+        React4.startTransition(() => {
+          forceUpdate();
+        },);
+      } else {
+        forceUpdate();
+      }
     }
   }, [resolveNextVariant, forceUpdate,],);
   const setVariant = React4.useCallback((proposedVariant) => {
@@ -40509,7 +40605,9 @@ function useVariantState({
       baseVariant: baseVariant2,
     } = internalState.current;
     internalState.current.loadedBaseVariant[baseVariant2] = true;
-    forceUpdate();
+    React4.startTransition(() => {
+      forceUpdate();
+    },);
   }, [forceUpdate,],);
   if (variant !== internalState.current.lastVariant) {
     const [nextBase, nextGesture,] = resolveNextVariant(variant,);
