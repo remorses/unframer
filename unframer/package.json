@@ -74,7 +74,7 @@
         "@types/bun": "^1.1.6",
         "@types/fs-extra": "^11.0.4",
         "@types/node": "^20.14.10",
-        "@types/react": "^18.3.3",
+        "@types/react": "^18.3.5",
         "@xmorse/deployment-utils": "^0.2.11",
         "concurrently": "^8.2.2",
         "openai": "^4.52.7",
