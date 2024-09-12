@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.N4QZ4L2N.js
+// https :https://app.framerstatic.com/framer.LJTB5L76.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12436,15 +12436,13 @@ function createPageTransitionRules(page, {
   if (transition.type === 'tween') {
     settings.duration = transition.duration + 's';
     settings.easing = `cubic-bezier(${transition.ease.join(',',)})`;
-  } else if (transition.type === 'spring') {
+  } else if (isSpringTransition(transition,)) {
     const {
       easing,
       duration,
     } = createLinearEasing(spring({
       keyframes: [0, 1,],
-      stiffness: transition.stiffness,
-      damping: transition.damping,
-      mass: transition.mass,
+      ...getSpringOptions2(transition,),
       restDelta: 1e-3,
       restSpeed: 1e-4,
     },),);
@@ -12497,6 +12495,22 @@ function createPageTransitionRules(page, {
   }
         }
     `;
+}
+function isSpringTransition(transition,) {
+  return transition.type === 'spring';
+}
+function getSpringOptions2(transition,) {
+  if (transition.durationBasedSpring) {
+    return {
+      duration: transition.duration,
+      bounce: transition.bounce,
+    };
+  }
+  return {
+    stiffness: transition.stiffness,
+    damping: transition.damping,
+    mass: transition.mass,
+  };
 }
 var VIEW_TRANSITION_STYLES_ID = 'view-transition-styles';
 var defaultPageTransition = {
@@ -12554,8 +12568,11 @@ function createViewTransitionStylesheet({
   styleElement.textContent = styleContent;
   document.head.appendChild(styleElement,);
 }
+var _requestIdleCallback = /* @__PURE__ */ (() => {
+  return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
+})();
 function removeViewTransitionStylesheet() {
-  requestIdleCallback(() => {
+  _requestIdleCallback(() => {
     frame.render(() => {
       performance.mark('framer-vt-remove',);
       const element = document.getElementById(VIEW_TRANSITION_STYLES_ID,);
@@ -33463,10 +33480,10 @@ function PageRoot({
   if (isWebsite) {
     return /* @__PURE__ */ jsx(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx(CustomCursorHost, {
-        children: /* @__PURE__ */ jsx(FormContext.Provider, {
-          value: framerSiteId,
-          children: /* @__PURE__ */ jsx(FetchClientProvider, {
+      children: /* @__PURE__ */ jsx(FetchClientProvider, {
+        children: /* @__PURE__ */ jsx(CustomCursorHost, {
+          children: /* @__PURE__ */ jsx(FormContext.Provider, {
+            value: framerSiteId,
             children: /* @__PURE__ */ jsx(Router, {
               initialRoute: routeId,
               initialPathVariables: pathVariables,
@@ -36375,9 +36392,10 @@ var collation = {
   /* CaseInsensitive */
 };
 var ScalarNode = class extends AbstractNode {
-  constructor(referencedFields, isSynchronous,) {
+  constructor(referencedFields, referencedOuterFields, isSynchronous,) {
     super(isSynchronous,);
     this.referencedFields = referencedFields;
+    this.referencedOuterFields = referencedOuterFields;
     this.isSynchronous = isSynchronous;
   }
   /**
@@ -36412,9 +36430,11 @@ var CaseCondition = class {
 var ScalarCase2 = class extends ScalarNode {
   constructor(input, conditions, otherwise,) {
     const referencedFields = new Fields();
+    const referencedOuterFields = new Fields();
     let isSynchronous = true;
     if (input) {
       referencedFields.merge(input.referencedFields,);
+      referencedOuterFields.merge(input.referencedOuterFields,);
       isSynchronous && (isSynchronous = input.isSynchronous);
     }
     for (
@@ -36424,15 +36444,18 @@ var ScalarCase2 = class extends ScalarNode {
       } of conditions
     ) {
       referencedFields.merge(when.referencedFields,);
+      referencedOuterFields.merge(when.referencedOuterFields,);
       isSynchronous && (isSynchronous = when.isSynchronous);
       referencedFields.merge(then.referencedFields,);
+      referencedOuterFields.merge(then.referencedOuterFields,);
       isSynchronous && (isSynchronous = then.isSynchronous);
     }
     if (otherwise) {
       referencedFields.merge(otherwise.referencedFields,);
+      referencedOuterFields.merge(otherwise.referencedOuterFields,);
       isSynchronous && (isSynchronous = otherwise.isSynchronous);
     }
-    super(referencedFields, isSynchronous,);
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.input = input;
     this.conditions = conditions;
     this.otherwise = otherwise;
@@ -36703,7 +36726,7 @@ var Builder = class {
     __publicField(this, 'collectionId', 0,);
     __publicField(this, 'indexId', 0,);
     __publicField(this, 'fieldId', 0,);
-    __publicField(this, 'subquery',);
+    __publicField(this, 'subqueries', [],);
   }
   build() {
     const inScope = new Scope();
@@ -36898,13 +36921,18 @@ var Builder = class {
     }
   }
   buildIdentifier(inScope, expression,) {
-    var _a;
     const scopeField = inScope.resolveField(expression.name, expression.collection,);
     if (scopeField) {
-      const isOuterField = ((_a = this.subquery) == null ? void 0 : _a.inScope.has(scopeField,)) ?? false;
-      if (isOuterField) {
-        assert(this.subquery, 'Subquery must exist',);
-        this.subquery.outerFields.add(scopeField.field,);
+      let isOuterField = false;
+      for (const subquery of this.subqueries) {
+        if (isOuterField) {
+          subquery.referencedOuterFields.add(scopeField.field,);
+        } else {
+          isOuterField = subquery.inScope.has(scopeField,);
+          if (isOuterField) {
+            subquery.referencedFields.add(scopeField.field,);
+          }
+        }
       }
       return this.normalizer.newScalarVariable(scopeField.field, isOuterField,);
     }
@@ -36937,24 +36965,28 @@ var Builder = class {
         return this.normalizer.newScalarEndsWith(source, target,);
       }
       case 'ARRAY': {
-        const subqueryExpression = expression.arguments[0];
-        assert(subqueryExpression, 'Missing argument',);
-        assert(subqueryExpression.type === 'Select', 'Subqueries require a select expression',);
-        const previousSubquery = this.subquery;
-        try {
-          this.subquery = new Subquery(inScope,);
-          const outScope = this.buildSelect(inScope, subqueryExpression,);
-          const input = outScope.takeNode();
-          const namedFields = outScope.getNamedFields();
-          const ordering = outScope.getRequiredOrdering();
-          const outerFields = this.subquery.outerFields;
-          return this.normalizer.newScalarSubquery(input, namedFields, ordering, outerFields,);
-        } finally {
-          this.subquery = previousSubquery;
-        }
+        const subquery = expression.arguments[0];
+        assert(subquery, 'Missing argument',);
+        assert(subquery.type === 'Select', 'Subqueries require a select expression',);
+        return this.buildSubqueryArray(inScope, subquery,);
       }
       default:
         throw new Error('Unsupported function name',);
+    }
+  }
+  buildSubqueryArray(inScope, expression,) {
+    try {
+      const subquery = new Subquery(inScope,);
+      this.subqueries.push(subquery,);
+      const outScope = this.buildSelect(inScope, expression,);
+      const input = outScope.takeNode();
+      const namedFields = outScope.getNamedFields();
+      const ordering = outScope.getRequiredOrdering();
+      const referencedFields = subquery.referencedFields;
+      const referencedOuterFields = subquery.referencedOuterFields;
+      return this.normalizer.newScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,);
+    } finally {
+      this.subqueries.pop();
     }
   }
   buildCase(inScope, expression,) {
@@ -37064,7 +37096,8 @@ function getCollection(data2, locale,) {
 var Subquery = class {
   constructor(inScope,) {
     this.inScope = inScope;
-    __publicField(this, 'outerFields', new Fields(),);
+    __publicField(this, 'referencedFields', new Fields(),);
+    __publicField(this, 'referencedOuterFields', new Fields(),);
   }
 };
 var RelationalFilter = class extends RelationalNode {
@@ -37485,7 +37518,11 @@ var ScalarAnd = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37526,7 +37563,8 @@ var ScalarAnd = class extends ScalarNode {
 var ScalarConstant = class extends ScalarNode {
   constructor(definition, value,) {
     const referencedFields = new Fields();
-    super(referencedFields, true,);
+    const referencedOuterFields = new Fields();
+    super(referencedFields, referencedOuterFields, true,);
     this.definition = definition;
     this.value = value;
   }
@@ -37556,7 +37594,11 @@ var ScalarContains = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
     referencedFields.merge(target.referencedFields,);
-    super(referencedFields, source.isSynchronous && target.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(source.referencedOuterFields,);
+    referencedOuterFields.merge(target.referencedOuterFields,);
+    const isSynchronous = source.isSynchronous && target.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.source = source;
     this.target = target;
     __publicField(this, 'definition', {
@@ -37603,7 +37645,11 @@ var ScalarEndsWith = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
     referencedFields.merge(target.referencedFields,);
-    super(referencedFields, source.isSynchronous && target.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(source.referencedOuterFields,);
+    referencedOuterFields.merge(target.referencedOuterFields,);
+    const isSynchronous = source.isSynchronous && target.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.source = source;
     this.target = target;
     __publicField(this, 'definition', {
@@ -37646,7 +37692,11 @@ var ScalarEquals = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37689,7 +37739,11 @@ var ScalarGreaterThan = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37732,7 +37786,11 @@ var ScalarGreaterThanOrEqual = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37775,7 +37833,11 @@ var ScalarLessThan = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37818,7 +37880,11 @@ var ScalarLessThanOrEqual = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37861,7 +37927,11 @@ var ScalarNotEquals = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37904,7 +37974,11 @@ var ScalarOr = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -37951,7 +38025,11 @@ var ScalarStartsWith = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
     referencedFields.merge(target.referencedFields,);
-    super(referencedFields, source.isSynchronous && target.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(source.referencedOuterFields,);
+    referencedOuterFields.merge(target.referencedOuterFields,);
+    const isSynchronous = source.isSynchronous && target.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.source = source;
     this.target = target;
     __publicField(this, 'definition', {
@@ -38545,7 +38623,7 @@ var RelationalOffset = class extends RelationalNode {
 };
 var ScalarCast = class extends ScalarNode {
   constructor(input, definition,) {
-    super(input.referencedFields, input.isSynchronous,);
+    super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
     this.input = input;
     this.definition = definition;
     assert(definition.isNullable, 'Unsupported non-nullable cast',);
@@ -38577,7 +38655,11 @@ var ScalarIn = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -38617,7 +38699,7 @@ var ScalarIn = class extends ScalarNode {
 };
 var ScalarNot = class extends ScalarNode {
   constructor(input,) {
-    super(input.referencedFields, input.isSynchronous,);
+    super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
     this.input = input;
     __publicField(this, 'definition', {
       type: 'boolean',
@@ -38654,7 +38736,11 @@ var ScalarNotIn = class extends ScalarNode {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
     referencedFields.merge(right.referencedFields,);
-    super(referencedFields, left.isSynchronous && right.isSynchronous,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
     this.left = left;
     this.right = right;
     __publicField(this, 'definition', {
@@ -38693,12 +38779,13 @@ var ScalarNotIn = class extends ScalarNode {
   }
 };
 var ScalarSubquery = class extends ScalarNode {
-  constructor(input, namedFields, ordering, outerFields,) {
-    super(outerFields, input.isSynchronous,);
+  constructor(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
+    super(referencedFields, referencedOuterFields, input.isSynchronous,);
     this.input = input;
     this.namedFields = namedFields;
     this.ordering = ordering;
-    this.outerFields = outerFields;
+    this.referencedFields = referencedFields;
+    this.referencedOuterFields = referencedOuterFields;
     __publicField(this, 'inputGroup', this.input.getGroup(),);
     __publicField(this, 'definition',);
     const itemDefinitions = {};
@@ -38722,7 +38809,14 @@ var ScalarSubquery = class extends ScalarNode {
     for (const [name, field,] of namedFieldEntries) {
       namedFieldIds[name] = field.id;
     }
-    return calculateHash('ScalarSubquery', this.inputGroup.id, namedFieldIds, this.ordering, this.outerFields,);
+    return calculateHash(
+      'ScalarSubquery',
+      this.inputGroup.id,
+      namedFieldIds,
+      this.ordering,
+      this.referencedFields,
+      this.referencedOuterFields,
+    );
   }
   toString() {
     return `SUBQUERY(${this.inputGroup.id})`;
@@ -38743,7 +38837,7 @@ var ScalarSubquery = class extends ScalarNode {
   getOptimized() {
     const inputRequired = this.getInputRequiredProps();
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new ScalarSubquery(input, this.namedFields, this.ordering, this.outerFields,);
+    return new ScalarSubquery(input, this.namedFields, this.ordering, this.referencedFields, this.referencedOuterFields,);
   }
   *evaluate(context, tuple,) {
     const inputContext = new Tuple();
@@ -38770,10 +38864,13 @@ var ScalarVariable = class extends ScalarNode {
   constructor(field, isOuterField,) {
     assert(field.name !== VIRTUAL_INDEX_FIELD, 'Invalid field name',);
     const referencedFields = new Fields();
-    if (!isOuterField) {
+    const referencedOuterFields = new Fields();
+    if (isOuterField) {
+      referencedOuterFields.add(field,);
+    } else {
       referencedFields.add(field,);
     }
-    super(referencedFields, true,);
+    super(referencedFields, referencedOuterFields, true,);
     this.field = field;
     this.isOuterField = isOuterField;
     __publicField(this, 'definition', this.field.definition,);
@@ -38848,7 +38945,7 @@ var Normalizer = class {
   }
   finishScalar(node,) {
     const isConstant = node instanceof ScalarConstant;
-    if (node.isSynchronous && node.referencedFields.size === 0 && !isConstant) {
+    if (!isConstant && node.isSynchronous && node.referencedFields.size === 0 && node.referencedOuterFields.size === 0) {
       const value = node.evaluateSync();
       return this.newScalarConstant(node.definition, value,);
     }
@@ -39068,8 +39165,8 @@ var Normalizer = class {
     const node = new ScalarEndsWith(source, target,);
     return this.finishScalar(node,);
   }
-  newScalarSubquery(input, namedFields, ordering, outerFields,) {
-    const node = new ScalarSubquery(input, namedFields, ordering, outerFields,);
+  newScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
+    const node = new ScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,);
     return this.finishScalar(node,);
   }
   newScalarCast(input, definition,) {
@@ -46779,7 +46876,7 @@ var package_default = {
     '@typescript-eslint/eslint-plugin': '^8.2.0',
     '@typescript-eslint/parser': '^8.2.0',
     chalk: '^4.1.2',
-    eslint: '^8.56.0',
+    eslint: '^8.57.0',
     'eslint-plugin-framer-studio': 'workspace:*',
     immutable: '^3.8.2',
     'jest-diff': '^29.3.1',
@@ -46812,6 +46909,7 @@ var package_default = {
       name: 'Page',
     },],
   },
+  browserslist: ['extends @framer/browserslist-config/sites',],
 };
 var version = /* @__PURE__ */ (() => package_default.version)();
 MotionValue.prototype.addChild = function ({
