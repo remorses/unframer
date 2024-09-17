@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.LJTB5L76.js
+// https :https://app.framerstatic.com/framer.CFVGXWQG.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -22100,8 +22100,10 @@ var objectKeys = Object.keys;
 function hasProp(o, prop,) {
   return Object.prototype.hasOwnProperty.call(o, prop,);
 }
+var equalsKey = 'equals';
 function withEquals(o,) {
-  if (!hasProp(o, 'equals',)) return false;
+  if (o === null) return false;
+  if (!(equalsKey in o)) return false;
   return typeof o.equals === 'function';
 }
 function valueEqual(a, b,) {
@@ -32276,7 +32278,9 @@ function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
   const lazyValue = new LazyValue(async () => {
     try {
       const getUtils = utilsByCollectionId[unresolvedSlug.collectionId];
-      if (!getUtils) throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}`,);
+      if (!getUtils) {
+        throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}`,);
+      }
       const utils = await getUtils();
       if (!utils) throw new Error('Collection does not contain utility functions',);
       const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
@@ -32615,7 +32619,9 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
       cleanupFn = (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
     };
     const hasRef = isValidElement(children,) && 'ref' in children;
-    if (hasRef && isMutableRef(children.ref,)) return createRefWithCallback(children.ref, observerCallback,);
+    if (hasRef && isMutableRef(children.ref,)) {
+      return createRefWithCallback(children.ref, observerCallback,);
+    }
     if (hasRef && isFunction(children.ref,)) return mergeRefs(children.ref, observerCallback,);
     return createRefWithCallback(fallbackRef, observerCallback,);
   }, [href, router, currentRoute, children,],);
@@ -41766,7 +41772,9 @@ var CustomFontSource = class {
   isOpenTypeFeature(feature,) {
     if (typeof feature !== 'object' || feature === null) return false;
     if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
-    if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) return false;
+    if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
+      return false;
+    }
     return true;
   }
   inferVariantName(family,) {
@@ -43714,7 +43722,9 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
     if (container === null) return;
     function interceptPageLinks(event,) {
       const anchorElement = findAnchorElement(event.target, layoutRef.current,);
-      if (event.metaKey || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
+      if (event.metaKey || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
+        return;
+      }
       const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
       if (didNavigate) {
         event.preventDefault();
@@ -46869,12 +46879,12 @@ var package_default = {
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
     '@types/google.fonts': '1.0.3',
-    '@types/node': '^18.17.15',
+    '@types/node': '^20.16.5',
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.19',
     '@typescript-eslint/eslint-plugin': '^8.2.0',
-    '@typescript-eslint/parser': '^8.2.0',
+    '@typescript-eslint/parser': '^8.5.0',
     chalk: '^4.1.2',
     eslint: '^8.57.0',
     'eslint-plugin-framer-studio': 'workspace:*',
@@ -46884,7 +46894,7 @@ var package_default = {
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.5.2',
-    typescript: '^5.5.4',
+    typescript: '^5.6.2',
     yargs: '^17.6.2',
   },
   peerDependencies: {
