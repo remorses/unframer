@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.CFVGXWQG.js
+// https :https://app.framerstatic.com/framer.WGNZJ5CB.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -16121,6 +16121,7 @@ var mockWindow = {
   clearInterval: () => {},
   requestAnimationFrame: () => 0,
   cancelAnimationFrame: () => {},
+  requestIdleCallback: () => 0,
   getSelection: () => null,
   matchMedia: (query) => {
     return {
@@ -21415,38 +21416,6 @@ function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
 }
-function minZoomForPixelatedImageRendering(image, containerSize, devicePixelRatio3 = 1,) {
-  let {
-    width: frameWidth,
-    height: frameHeight,
-  } = containerSize;
-  const imageWidth = image.pixelWidth ?? image.intrinsicWidth ?? 0;
-  const imageHeight = image.pixelHeight ?? image.intrinsicHeight ?? 0;
-  if (frameWidth < 1 || frameHeight < 1 || imageWidth < 1 || imageHeight < 1) {
-    return void 0;
-  }
-  frameWidth *= devicePixelRatio3;
-  frameHeight *= devicePixelRatio3;
-  const frameAspectRatio = frameWidth / frameHeight;
-  const imageAspectRatio = imageWidth / imageHeight;
-  switch (image.fit) {
-    case 'fill':
-      if (imageAspectRatio > frameAspectRatio) {
-        return imageHeight / frameHeight;
-      } else {
-        return imageWidth / frameWidth;
-      }
-    case 'fit':
-    case 'stretch':
-      return Math.max(imageWidth / frameWidth, imageHeight / frameHeight,);
-  }
-}
-function imageRenderingForZoom(zoom, minPixelatedZoom,) {
-  if (minPixelatedZoom && Math.max(1, zoom,) > minPixelatedZoom) {
-    return 'pixelated';
-  }
-  return 'auto';
-}
 var wrapperStyle = {
   position: 'absolute',
   borderRadius: 'inherit',
@@ -21479,17 +21448,7 @@ function cssObjectPosition(positionX, positionY,) {
   if (x === 'center' && y === 'center') return 'center';
   return x + ' ' + y;
 }
-function cssImageRendering(image, containerSize,) {
-  if (!containerSize) return 'auto';
-  const devicePixelRatio3 = RenderTarget.current() === RenderTarget.canvas ? safeWindow.devicePixelRatio : 1;
-  const minPixelatedZoom = minZoomForPixelatedImageRendering(image, containerSize, devicePixelRatio3,);
-  if (RenderTarget.current() === RenderTarget.canvas) {
-    return imageRenderingForZoom(1, minPixelatedZoom,);
-  } else {
-    return imageRenderingForZoom(RenderEnvironment.zoom, minPixelatedZoom,);
-  }
-}
-function getImageStyle(image, containerSize,) {
+function getImageStyle(image,) {
   return {
     display: 'block',
     width: '100%',
@@ -21497,7 +21456,6 @@ function getImageStyle(image, containerSize,) {
     borderRadius: 'inherit',
     objectPosition: cssObjectPosition(image.positionX, image.positionY,),
     objectFit: cssObjectFit(image.fit,),
-    imageRendering: cssImageRendering(image, containerSize,),
   };
 }
 function StaticImage({
@@ -21507,7 +21465,7 @@ function StaticImage({
   alt,
 },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
-  const imageStyle = getImageStyle(image, containerSize,);
+  const imageStyle = getImageStyle(image,);
   const imageRef = React4.useRef(null,);
   return /* @__PURE__ */ jsx('img', {
     ref: imageRef,
@@ -21516,7 +21474,7 @@ function StaticImage({
     sizes: image.sizes,
     srcSet: image.srcSet,
     src: source,
-    alt: alt ?? image.alt,
+    alt: alt ?? image.alt ?? '',
     style: imageStyle,
   },);
 }
@@ -21527,7 +21485,7 @@ function CanvasImage({
 },) {
   const wrapperRef = React4.useRef(null,);
   const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
-  const imageStyle = getImageStyle(image, containerSize,);
+  const imageStyle = getImageStyle(image,);
   React4.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
@@ -21555,7 +21513,7 @@ function OptimizedCanvasImage({
   React4.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
-    const imageStyle = getImageStyle(image, containerSize,);
+    const imageStyle = getImageStyle(image,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source, containerSize,],);
   return /* @__PURE__ */ jsx('div', {
@@ -29998,9 +29956,7 @@ function useLoop({
   loop,
 },) {
   const shouldReduceMotion = useReducedMotionConfig();
-  const effect = useConstant2(() => ({
-    values: makeFXValues(),
-  }));
+  const values = useConstant2(makeFXValues,);
   const mirrorStateRef = React4.useRef(false,);
   const delay2 = useDelay();
   const animateValues = async () => {
@@ -30012,13 +29968,13 @@ function useLoop({
     mirrorStateRef.current = !mirrorStateRef.current;
     return Promise.all(effectValuesKeys.map((key7) => {
       if (shouldReduceMotion && key7 !== 'opacity') return;
-      effect.values[key7].set(from[key7] ?? defaultFXValues[key7],);
+      values[key7].set(from[key7] ?? defaultFXValues[key7],);
       return new Promise((resolve) => {
         const opts = {
           ...transition,
           onComplete: () => resolve(),
         };
-        animate(effect.values[key7], to[key7] ?? from[key7], opts,);
+        animate(values[key7], to[key7] ?? from[key7], opts,);
       },);
     },),);
   };
@@ -30030,13 +29986,13 @@ function useLoop({
   };
   const stop = useCallback(() => {
     effectValuesKeys.forEach((key7) => {
-      effect.values[key7].stop();
+      values[key7].stop();
     },);
     effectValuesKeys.forEach((key7) => {
-      effect.values[key7].set(defaultFXValues[key7],);
+      values[key7].set(defaultFXValues[key7],);
     },);
     mirrorStateRef.current = false;
-  }, [effect,],);
+  }, [values,],);
   React4.useEffect(() => {
     if (loopEffectEnabled && loop) {
       start();
@@ -30045,7 +30001,16 @@ function useLoop({
     }
     return () => stop();
   }, [loopEffectEnabled,],);
-  return effect;
+  return React4.useMemo(() => {
+    return {
+      values,
+      style: loopEffectEnabled
+        ? {
+          willChange: 'transform, opacity',
+        }
+        : {},
+    };
+  }, [values, loopEffectEnabled,],);
 }
 function parallaxTransform(scrollY, originalPosition, speed, offset, adjustPosition,) {
   const speedFactor = speed / 100 - 1;
@@ -30759,6 +30724,7 @@ var withFX = (Component15) =>
     } = useStyleAppearEffect(styleAppear, ref,);
     const {
       values: loopValues,
+      style: loopStyle,
     } = useLoop(loop,);
     const fxValues = React4.useMemo(() => {
       return {
@@ -30830,6 +30796,7 @@ var withFX = (Component15) =>
       style: {
         ...props.style,
         ...parallaxStyle,
+        ...loopStyle,
         ...motionValueStyle,
       },
       values: presenceEffectValues,
@@ -31082,10 +31049,11 @@ var Providers = /* @__PURE__ */ React4.forwardRef(({
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(Providers,);
 var StyleSheetContext = /* @__PURE__ */ React4.createContext(void 0,);
+var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   var _a;
   if (!isBrowser2()) return /* @__PURE__ */ new Set();
-  const componentsWithSSRStylesAttr = (_a = document.querySelector('style[data-framer-css-ssr-minified]',)) == null
+  const componentsWithSSRStylesAttr = (_a = document.querySelector(framerPostSSRCSSSelector,)) == null
     ? void 0
     : _a.getAttribute('data-framer-components',);
   if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
@@ -39989,6 +39957,10 @@ function useBreakpointVariants(initial, _width, breakpoints,) {
   return initialVariant;
 }
 function removeHiddenBreakpointLayers(_initial, _mediaQueries, _variantClassNames,) {}
+var framerBreakpointCSSSelector = 'style[data-framer-breakpoint-css]';
+function requestIdleCallbackFallback(callback,) {
+  setTimeout(callback, 1,);
+}
 function removeHiddenBreakpointLayersV2(breakpoints,) {
   var _a, _b;
   const activeBreakpointHash = activeBreakpointHashFromWindow(breakpoints,);
@@ -39997,6 +39969,11 @@ function removeHiddenBreakpointLayersV2(breakpoints,) {
       (_a = hiddenLayer.parentNode) == null ? void 0 : _a.removeChild(hiddenLayer,);
     }
   }
+  const requestIdleCallback = safeWindow.requestIdleCallback ?? requestIdleCallbackFallback;
+  requestIdleCallback(() => {
+    var _a2;
+    (_a2 = document.querySelector(framerBreakpointCSSSelector,)) == null ? void 0 : _a2.remove();
+  },);
   for (const ssrVariant of document.querySelectorAll('.ssr-variant:empty',)) {
     (_b = ssrVariant.parentNode) == null ? void 0 : _b.removeChild(ssrVariant,);
   }
@@ -44868,6 +44845,7 @@ var SharedSVGManager = class {
       if (!svgTemplates) {
         svgTemplates = document.createElement('div',);
         svgTemplates.id = 'svg-templates';
+        svgTemplates.ariaHidden = 'true';
         svgTemplates.style.cssText = visuallyHiddenStyle;
         document.body.appendChild(svgTemplates,);
       }
@@ -44893,7 +44871,7 @@ var SharedSVGManager = class {
    * used after running `ReactDOMServer.renderToString()` */
   generateTemplates() {
     const output = [];
-    output.push(`<div id="svg-templates" style="${visuallyHiddenStyle}">`,);
+    output.push(`<div id="svg-templates" style="${visuallyHiddenStyle}" aria-hidden="true">`,);
     this.entries.forEach((value) => output.push(value.svg,));
     output.push('</div>',);
     return output.join('\n',);
@@ -45332,6 +45310,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         rel,
         onClick,
       } = this.props;
+      const hasTitleOrDescription = title || description;
       return /* @__PURE__ */ jsxs(MotionComponent, {
         ...dataProps,
         ...rest,
@@ -45343,9 +45322,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
         className: className2,
         variants,
         tabIndex: this.props.tabIndex,
-        role: title || description ? 'img' : void 0,
+        role: hasTitleOrDescription ? 'img' : void 0,
         'aria-label': title,
         'aria-description': description,
+        'aria-hidden': hasTitleOrDescription ? void 0 : 'true',
         ...{
           href,
           target,
