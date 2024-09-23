@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.WGNZJ5CB.js
+// https :https://app.framerstatic.com/framer.KOYBXIKS.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -30058,6 +30058,7 @@ function useParallax(options, ref, visibilityStyle,) {
     style: parallaxTransformEnabled
       ? {
         visibility,
+        willChange: 'transform, opacity',
       }
       : void 0,
   };
@@ -30605,7 +30606,16 @@ function useStyleTransform({
     }
   }, [shouldReduceMotion, transformTrigger, ref, transformViewportThreshold, styleTransformEffectEnabled, effect, transformTargets,],);
   useAttachOptionalSpring(effect.values, spring2,);
-  return effect;
+  return React4.useMemo(() => {
+    return {
+      values: effect.values,
+      style: styleTransformEffectEnabled
+        ? {
+          willChange: 'transform, opacity',
+        }
+        : {},
+    };
+  }, [effect, styleTransformEffectEnabled,],);
 }
 var groups = {
   parallax: parallaxOptionsKeys,
@@ -30718,6 +30728,7 @@ var withFX = (Component15) =>
     } = useParallax(parallax, ref,);
     const {
       values: transformValues2,
+      style: scrollStyle,
     } = useStyleTransform(styleTransform, ref,);
     const {
       values: appearEffectValues,
@@ -30796,7 +30807,8 @@ var withFX = (Component15) =>
       style: {
         ...props.style,
         ...parallaxStyle,
-        ...loopStyle,
+        // ...scrollStyle,
+        // ...loopStyle,
         ...motionValueStyle,
       },
       values: presenceEffectValues,

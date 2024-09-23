@@ -52,16 +52,16 @@ importers:
         version: link:../unframer
       next:
         specifier: 14.2.4
-        version: 14.2.4(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)
       postcss:
         specifier: 8.4.24
         version: 8.4.24
       react:
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.0.0-rc-e4953922-20240919
+        version: 19.0.0-rc-e4953922-20240919
       react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@18.3.1)
+        specifier: 19.0.0-rc-e4953922-20240919
+        version: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
       tailwindcss:
         specifier: 3.3.2
         version: 3.3.2
@@ -73,13 +73,13 @@ importers:
     dependencies:
       '@builder.io/react-hydration-overlay':
         specifier: ^0.1.0
-        version: 0.1.0(@spotlightjs/spotlight@2.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(webpack@5.94.0(esbuild@0.17.6))
+        version: 0.1.0(@spotlightjs/spotlight@2.3.2)(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(webpack@5.94.0(esbuild@0.17.6))
       '@remix-run/node':
         specifier: ^2.11.2
         version: 2.11.2(typescript@5.6.2)
       '@remix-run/react':
         specifier: ^2.11.2
-        version: 2.11.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2)
+        version: 2.11.2(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(typescript@5.6.2)
       '@remix-run/serve':
         specifier: ^2.11.2
         version: 2.11.2(typescript@5.6.2)
@@ -90,18 +90,18 @@ importers:
         specifier: workspace:*
         version: link:../nextjs-app
       react:
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.0.0-rc-e4953922-20240919
+        version: 19.0.0-rc-e4953922-20240919
       react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@18.3.1)
+        specifier: 19.0.0-rc-e4953922-20240919
+        version: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
       unframer:
         specifier: workspace:*
         version: link:../unframer
     devDependencies:
       '@remix-run/dev':
         specifier: 2.11.2
-        version: 2.11.2(@remix-run/react@2.11.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/serve@2.11.2(typescript@5.6.2))(@types/node@22.5.3)(terser@5.31.6)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.3)(terser@5.31.6))
+        version: 2.11.2(@remix-run/react@2.11.2(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(typescript@5.6.2))(@remix-run/serve@2.11.2(typescript@5.6.2))(@types/node@22.5.3)(terser@5.31.6)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.3)(terser@5.31.6))
       '@types/react':
         specifier: ^18.3.5
         version: 18.3.5
@@ -191,7 +191,7 @@ importers:
         version: 1.0.1
       real-framer-motion:
         specifier: npm:framer-motion@11.2.10
-        version: framer-motion@11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: framer-motion@11.2.10(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)
       tmp:
         specifier: ^0.2.3
         version: 0.2.3
@@ -248,11 +248,11 @@ importers:
         specifier: ^0.16.6
         version: 0.16.6
       react:
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.0.0-rc-e4953922-20240919
+        version: 19.0.0-rc-e4953922-20240919
       react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@18.3.1)
+        specifier: 19.0.0-rc-e4953922-20240919
+        version: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
       tiktoken:
         specifier: ^1.0.15
         version: 1.0.15
@@ -4137,10 +4137,10 @@ packages:
       react: ^15.3.0 || ^16.0.0
       react-dom: ^15.3.0 || ^16.0.0
 
-  react-dom@18.3.1:
-    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+  react-dom@19.0.0-rc-e4953922-20240919:
+    resolution: {integrity: sha512-E8jZqdTPvWQ4SRH29nKwwMUmlnyYdx1YPWDBXfeEC5LL92Tq7qQC1Tjh75Zr1zgNsxp1c5YpyWyQTYmpeIdXQg==}
     peerDependencies:
-      react: ^18.3.1
+      react: 19.0.0-rc-e4953922-20240919
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -4165,8 +4165,8 @@ packages:
     peerDependencies:
       react: '>=16.8'
 
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+  react@19.0.0-rc-e4953922-20240919:
+    resolution: {integrity: sha512-4CkSUGAHyU1WJ5w90eDna6fAMDwv2irJCLl3dne3DjuxWgdPgtBjdUpSNn4mb1FZUyiJBh7RiNB57G4YjPkDkQ==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -4295,8 +4295,8 @@ packages:
   sax@1.4.1:
     resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
 
-  scheduler@0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
+  scheduler@0.25.0-rc-e4953922-20240919:
+    resolution: {integrity: sha512-6l7cfQOmb5n350VJp8/CIejjEqB/1niPiwsooAHcH81ia/rMbZrzLChl14FOS6tJr0H+9P9rvgnAA6/pFHj2Mg==}
 
   schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
@@ -5609,13 +5609,13 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@builder.io/react-hydration-overlay@0.1.0(@spotlightjs/spotlight@2.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(webpack@5.94.0(esbuild@0.17.6))':
+  '@builder.io/react-hydration-overlay@0.1.0(@spotlightjs/spotlight@2.3.2)(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(webpack@5.94.0(esbuild@0.17.6))':
     dependencies:
       '@spotlightjs/spotlight': 2.3.2
       beautify: 0.0.8
-      react: 18.3.1
-      react-diff-viewer: 3.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-e4953922-20240919
+      react-diff-viewer: 3.1.1(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)
+      react-dom: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
       webpack: 5.94.0(esbuild@0.17.6)
     transitivePeerDependencies:
       - supports-color
@@ -6140,7 +6140,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@remix-run/dev@2.11.2(@remix-run/react@2.11.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/serve@2.11.2(typescript@5.6.2))(@types/node@22.5.3)(terser@5.31.6)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.3)(terser@5.31.6))':
+  '@remix-run/dev@2.11.2(@remix-run/react@2.11.2(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(typescript@5.6.2))(@remix-run/serve@2.11.2(typescript@5.6.2))(@types/node@22.5.3)(terser@5.31.6)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.3)(terser@5.31.6))':
     dependencies:
       '@babel/core': 7.25.2
       '@babel/generator': 7.25.6
@@ -6153,7 +6153,7 @@ snapshots:
       '@mdx-js/mdx': 2.3.0
       '@npmcli/package-json': 4.0.1
       '@remix-run/node': 2.11.2(typescript@5.6.2)
-      '@remix-run/react': 2.11.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2)
+      '@remix-run/react': 2.11.2(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(typescript@5.6.2)
       '@remix-run/router': 1.19.1
       '@remix-run/server-runtime': 2.11.2(typescript@5.6.2)
       '@types/mdx': 2.0.13
@@ -6235,14 +6235,14 @@ snapshots:
     optionalDependencies:
       typescript: 5.6.2
 
-  '@remix-run/react@2.11.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2)':
+  '@remix-run/react@2.11.2(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)(typescript@5.6.2)':
     dependencies:
       '@remix-run/router': 1.19.1
       '@remix-run/server-runtime': 2.11.2(typescript@5.6.2)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.26.1(react@18.3.1)
-      react-router-dom: 6.26.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 19.0.0-rc-e4953922-20240919
+      react-dom: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
+      react-router: 6.26.1(react@19.0.0-rc-e4953922-20240919)
+      react-router-dom: 6.26.1(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919)
       turbo-stream: 2.3.0
     optionalDependencies:
       typescript: 5.6.2
@@ -8173,12 +8173,12 @@ snapshots:
 
   fraction.js@4.2.0: {}
 
-  framer-motion@11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.2.10(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919):
     dependencies:
       tslib: 2.6.3
     optionalDependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-e4953922-20240919
+      react-dom: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
 
   fresh@0.5.2: {}
 
@@ -9311,7 +9311,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next@14.2.4(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@14.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919):
     dependencies:
       '@next/env': 14.2.4
       '@swc/helpers': 0.5.5
@@ -9319,9 +9319,9 @@ snapshots:
       caniuse-lite: 1.0.30001655
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      styled-jsx: 5.1.1(react@18.3.1)
+      react: 19.0.0-rc-e4953922-20240919
+      react-dom: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
+      styled-jsx: 5.1.1(react@19.0.0-rc-e4953922-20240919)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.4
       '@next/swc-darwin-x64': 14.2.4
@@ -9825,7 +9825,7 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-diff-viewer@3.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-diff-viewer@3.1.1(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919):
     dependencies:
       classnames: 2.5.1
       create-emotion: 10.0.27
@@ -9833,16 +9833,15 @@ snapshots:
       emotion: 10.0.27
       memoize-one: 5.2.1
       prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-e4953922-20240919
+      react-dom: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
     transitivePeerDependencies:
       - supports-color
 
-  react-dom@18.3.1(react@18.3.1):
+  react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919):
     dependencies:
-      loose-envify: 1.4.0
-      react: 18.3.1
-      scheduler: 0.23.2
+      react: 19.0.0-rc-e4953922-20240919
+      scheduler: 0.25.0-rc-e4953922-20240919
 
   react-is@16.13.1: {}
 
@@ -9850,21 +9849,19 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-router-dom@6.26.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-router-dom@6.26.1(react-dom@19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919))(react@19.0.0-rc-e4953922-20240919):
     dependencies:
       '@remix-run/router': 1.19.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.26.1(react@18.3.1)
+      react: 19.0.0-rc-e4953922-20240919
+      react-dom: 19.0.0-rc-e4953922-20240919(react@19.0.0-rc-e4953922-20240919)
+      react-router: 6.26.1(react@19.0.0-rc-e4953922-20240919)
 
-  react-router@6.26.1(react@18.3.1):
+  react-router@6.26.1(react@19.0.0-rc-e4953922-20240919):
     dependencies:
       '@remix-run/router': 1.19.1
-      react: 18.3.1
+      react: 19.0.0-rc-e4953922-20240919
 
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
+  react@19.0.0-rc-e4953922-20240919: {}
 
   read-cache@1.0.0:
     dependencies:
@@ -10044,9 +10041,7 @@ snapshots:
 
   sax@1.4.1: {}
 
-  scheduler@0.23.2:
-    dependencies:
-      loose-envify: 1.4.0
+  scheduler@0.25.0-rc-e4953922-20240919: {}
 
   schema-utils@3.3.0:
     dependencies:
@@ -10297,10 +10292,10 @@ snapshots:
     dependencies:
       inline-style-parser: 0.1.1
 
-  styled-jsx@5.1.1(react@18.3.1):
+  styled-jsx@5.1.1(react@19.0.0-rc-e4953922-20240919):
     dependencies:
       client-only: 0.0.1
-      react: 18.3.1
+      react: 19.0.0-rc-e4953922-20240919
 
   sucrase@3.32.0:
     dependencies:
