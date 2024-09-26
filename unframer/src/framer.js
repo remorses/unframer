@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.KOYBXIKS.js
+// https :https://app.framerstatic.com/framer.MCBG4JOG.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -31897,23 +31897,32 @@ function Floating({
       collisionDetectionPadding,
     },);
     const [initialSafePlacement, initialCalculatedRect,] = getSafePlacementRect(initialAnchorRect, elementRect,);
+    frame.update(() => {
+      updateOrigin(initialSafePlacement,);
+    },);
     frame.render(() => {
       if (!floatingPositionRef.current) return;
       updatePosition(floatingPositionRef, position, initialCalculatedRect,);
-      updateOrigin(initialSafePlacement,);
     },);
     const updateSafeArea = createUpdateSafeArea(safeAreaRef,);
     let anchorRect = initialAnchorRect;
+    let safePlacement;
+    let calculatedRect;
     let latestEvent;
-    const onRender = () => {
-      const [safePlacement, calculatedRect,] = getSafePlacementRect(anchorRect, elementRect,);
-      updatePosition(floatingPositionRef, position, calculatedRect,);
+    const onUpdate = () => {
       updateOrigin(safePlacement,);
+    };
+    const onRender = () => {
+      updatePosition(floatingPositionRef, position, calculatedRect,);
       if (safeArea) updateSafeArea(anchorRect, calculatedRect, safePlacement, latestEvent,);
       latestEvent = void 0;
     };
     const onRead = () => {
       anchorRect = anchorRef.current.getBoundingClientRect();
+      const safePlacementAndRect = getSafePlacementRect(anchorRect, elementRect,);
+      safePlacement = safePlacementAndRect[0];
+      calculatedRect = safePlacementAndRect[1];
+      frame.update(onUpdate,);
       frame.render(onRender,);
     };
     const [loop, cancelAnimationFrameLoop,] = createAnimationFrameLoop(onRead,);
@@ -34243,6 +34252,13 @@ var DatabaseValue = {
       targetValue = targetValue.toLowerCase();
     }
     return sourceValue.endsWith(targetValue,);
+  },
+  length(value,) {
+    switch (value == null ? void 0 : value.type) {
+      case 'array':
+        return value.value.length;
+    }
+    return 0;
   },
   stringify(value,) {
     if (value === null) {
@@ -36956,6 +36972,10 @@ var Builder = class {
         assert(subquery.type === 'Select', 'Subqueries require a select expression',);
         return this.buildSubqueryArray(inScope, subquery,);
       }
+      case 'LENGTH': {
+        const array = getArgument(0,);
+        return this.normalizer.newScalarLength(array,);
+      }
       default:
         throw new Error('Unsupported function name',);
     }
@@ -38683,6 +38703,36 @@ var ScalarIn = class extends ScalarNode {
     };
   }
 };
+var ScalarLength = class extends ScalarNode {
+  constructor(input,) {
+    super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
+    this.input = input;
+    __publicField(this, 'definition', {
+      type: 'number',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarLength', this.input,);
+  }
+  toString() {
+    return `LENGTH(${this.input})`;
+  }
+  optimize(optimizer,) {
+    return this.input.optimize(optimizer,);
+  }
+  getOptimized() {
+    const input = this.input.getOptimized();
+    return new ScalarLength(input,);
+  }
+  *evaluate(context, tuple,) {
+    const input = yield* this.input.evaluate(context, tuple,);
+    return {
+      type: 'number',
+      value: DatabaseValue.length(input,),
+    };
+  }
+};
 var ScalarNot = class extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
@@ -39149,6 +39199,10 @@ var Normalizer = class {
   }
   newScalarEndsWith(source, target,) {
     const node = new ScalarEndsWith(source, target,);
+    return this.finishScalar(node,);
+  }
+  newScalarLength(array,) {
+    const node = new ScalarLength(array,);
     return this.finishScalar(node,);
   }
   newScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
