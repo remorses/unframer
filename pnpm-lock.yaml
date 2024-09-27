@@ -236,8 +236,8 @@ importers:
         specifier: ^18.3.5
         version: 18.3.5
       '@xmorse/deployment-utils':
-        specifier: ^0.2.11
-        version: 0.2.11(@types/node@20.14.12)(terser@5.31.6)
+        specifier: ^0.2.12
+        version: 0.2.12(@types/node@20.14.12)(terser@5.31.6)
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -1529,8 +1529,8 @@ packages:
   '@webassemblyjs/wast-printer@1.12.1':
     resolution: {integrity: sha512-+X4WAlOisVWQMikjbcvY2e0rwPsKQ9F688lksZhBcPycBBuii3O7m8FACbDMWDojpAqvjIncrG8J0XHKyQfVeA==}
 
-  '@xmorse/deployment-utils@0.2.11':
-    resolution: {integrity: sha512-QkVl0VznHeBhyp2jThsi2tKb3SxJJ1HKOgkPz0lox2skF5VTgzddL1Dpg3d8y6zw6Z5gFyxdRLmCkaHoU1MCCQ==}
+  '@xmorse/deployment-utils@0.2.12':
+    resolution: {integrity: sha512-hjzLIFIX/A9j0HbfFmgdxJy4l7jiFi1g52fczid+5OZVGVNofYyycFRuK0nDqXimhMJSFVvEZbSpCw37rCqh1A==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -6737,7 +6737,7 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
 
-  '@xmorse/deployment-utils@0.2.11(@types/node@20.14.12)(terser@5.31.6)':
+  '@xmorse/deployment-utils@0.2.12(@types/node@20.14.12)(terser@5.31.6)':
     dependencies:
       '@actions/cache': 3.2.4
       '@iarna/toml': 2.2.5
