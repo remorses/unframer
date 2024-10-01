@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.MCBG4JOG.js
+// https :https://app.framerstatic.com/framer.B2WOYKYJ.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -36719,6 +36719,16 @@ var Scope = class {
     }
     return namedFields;
   }
+  /**
+   * Returns the single field from this scope if it only contains one field.
+   * Throws an error if there are more than one fields.
+   */
+  getSingleField() {
+    assert(this.fields.length === 1, 'Scope must contain exactly one field',);
+    const scopeField = this.fields[0];
+    assert(scopeField, 'Field must exist',);
+    return scopeField.field;
+  }
 };
 var Builder = class {
   constructor(normalizer, query, locale,) {
@@ -36966,15 +36976,21 @@ var Builder = class {
         const target = getArgument(1,);
         return this.normalizer.newScalarEndsWith(source, target,);
       }
+      case 'LENGTH': {
+        const array = getArgument(0,);
+        return this.normalizer.newScalarLength(array,);
+      }
       case 'ARRAY': {
         const subquery = expression.arguments[0];
         assert(subquery, 'Missing argument',);
         assert(subquery.type === 'Select', 'Subqueries require a select expression',);
         return this.buildSubqueryArray(inScope, subquery,);
       }
-      case 'LENGTH': {
-        const array = getArgument(0,);
-        return this.normalizer.newScalarLength(array,);
+      case 'FLAT_ARRAY': {
+        const subquery = expression.arguments[0];
+        assert(subquery, 'Missing argument',);
+        assert(subquery.type === 'Select', 'Subqueries require a select expression',);
+        return this.buildSubqueryFlatArray(inScope, subquery,);
       }
       default:
         throw new Error('Unsupported function name',);
@@ -36990,7 +37006,22 @@ var Builder = class {
       const ordering = outScope.getRequiredOrdering();
       const referencedFields = subquery.referencedFields;
       const referencedOuterFields = subquery.referencedOuterFields;
-      return this.normalizer.newScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,);
+      return this.normalizer.newScalarArray(input, namedFields, ordering, referencedFields, referencedOuterFields,);
+    } finally {
+      this.subqueries.pop();
+    }
+  }
+  buildSubqueryFlatArray(inScope, expression,) {
+    try {
+      const subquery = new Subquery(inScope,);
+      this.subqueries.push(subquery,);
+      const outScope = this.buildSelect(inScope, expression,);
+      const input = outScope.takeNode();
+      const field = outScope.getSingleField();
+      const ordering = outScope.getRequiredOrdering();
+      const referencedFields = subquery.referencedFields;
+      const referencedOuterFields = subquery.referencedOuterFields;
+      return this.normalizer.newScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,);
     } finally {
       this.subqueries.pop();
     }
@@ -38627,6 +38658,88 @@ var RelationalOffset = class extends RelationalNode {
     return input.slice(value,);
   }
 };
+var ScalarArray = class extends ScalarNode {
+  constructor(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
+    super(referencedFields, referencedOuterFields, input.isSynchronous,);
+    this.input = input;
+    this.namedFields = namedFields;
+    this.ordering = ordering;
+    this.referencedFields = referencedFields;
+    this.referencedOuterFields = referencedOuterFields;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'definition',);
+    const itemDefinitions = {};
+    const namedFieldEntries = Object.entries(namedFields,);
+    for (const [name, field,] of namedFieldEntries) {
+      itemDefinitions[name] = field.definition;
+    }
+    this.definition = {
+      type: 'array',
+      isNullable: false,
+      definition: {
+        type: 'object',
+        isNullable: false,
+        definitions: itemDefinitions,
+      },
+    };
+  }
+  getHash() {
+    const namedFieldIds = {};
+    const namedFieldEntries = Object.entries(this.namedFields,);
+    for (const [name, field,] of namedFieldEntries) {
+      namedFieldIds[name] = field.id;
+    }
+    return calculateHash(
+      'ScalarArray',
+      this.inputGroup.id,
+      namedFieldIds,
+      this.ordering,
+      this.referencedFields,
+      this.referencedOuterFields,
+    );
+  }
+  toString() {
+    return `ARRAY(${this.inputGroup.id})`;
+  }
+  getInputRequiredProps() {
+    const resolvedFields = new Fields();
+    const fields = Object.values(this.namedFields,);
+    for (const field of fields) {
+      resolvedFields.add(field,);
+    }
+    return new RequiredProps(this.ordering, resolvedFields,);
+  }
+  optimize(optimizer,) {
+    const inputRequired = this.getInputRequiredProps();
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized() {
+    const inputRequired = this.getInputRequiredProps();
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new ScalarArray(input, this.namedFields, this.ordering, this.referencedFields, this.referencedOuterFields,);
+  }
+  *evaluate(context, tuple,) {
+    const inputContext = new Tuple();
+    if (context) inputContext.merge(context,);
+    if (tuple) inputContext.merge(tuple,);
+    const relation = yield* this.input.evaluate(inputContext,);
+    const namedFieldEntries = Object.entries(this.namedFields,);
+    return {
+      type: 'array',
+      value: relation.tuples.map((relationTuple) => {
+        const value = {};
+        for (const [name, field,] of namedFieldEntries) {
+          value[name] = relationTuple.getValue(field,);
+        }
+        return {
+          type: 'object',
+          value,
+        };
+      },),
+    };
+  }
+};
 var ScalarCast = class extends ScalarNode {
   constructor(input, definition,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
@@ -38650,6 +38763,63 @@ var ScalarCast = class extends ScalarNode {
   *evaluate(context, tuple,) {
     const input = yield* this.input.evaluate(context, tuple,);
     return DatabaseValue.cast(input, this.definition,);
+  }
+};
+var ScalarFlatArray = class extends ScalarNode {
+  constructor(input, field, ordering, referencedFields, referencedOuterFields,) {
+    super(referencedFields, referencedOuterFields, input.isSynchronous,);
+    this.input = input;
+    this.field = field;
+    this.ordering = ordering;
+    this.referencedFields = referencedFields;
+    this.referencedOuterFields = referencedOuterFields;
+    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'definition',);
+    this.definition = {
+      type: 'array',
+      isNullable: false,
+      definition: this.field.definition,
+    };
+  }
+  getHash() {
+    return calculateHash(
+      'ScalarFlatArray',
+      this.inputGroup.id,
+      this.field.id,
+      this.ordering,
+      this.referencedFields,
+      this.referencedOuterFields,
+    );
+  }
+  toString() {
+    return `FLAT_ARRAY(${this.inputGroup.id})`;
+  }
+  getInputRequiredProps() {
+    const resolvedFields = new Fields();
+    resolvedFields.add(this.field,);
+    return new RequiredProps(this.ordering, resolvedFields,);
+  }
+  optimize(optimizer,) {
+    const inputRequired = this.getInputRequiredProps();
+    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
+    return new Cost(0,).add(inputCost,);
+  }
+  getOptimized() {
+    const inputRequired = this.getInputRequiredProps();
+    const input = this.inputGroup.getOptimized(inputRequired,);
+    return new ScalarFlatArray(input, this.field, this.ordering, this.referencedFields, this.referencedOuterFields,);
+  }
+  *evaluate(context, tuple,) {
+    const inputContext = new Tuple();
+    if (context) inputContext.merge(context,);
+    if (tuple) inputContext.merge(tuple,);
+    const relation = yield* this.input.evaluate(inputContext,);
+    return {
+      type: 'array',
+      value: relation.tuples.map((relationTuple) => {
+        return relationTuple.getValue(this.field,);
+      },),
+    };
   }
 };
 var collation7 = {
@@ -38811,88 +38981,6 @@ var ScalarNotIn = class extends ScalarNode {
     return {
       type: 'boolean',
       value: !DatabaseValue.in(left, right, collation8,),
-    };
-  }
-};
-var ScalarSubquery = class extends ScalarNode {
-  constructor(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
-    super(referencedFields, referencedOuterFields, input.isSynchronous,);
-    this.input = input;
-    this.namedFields = namedFields;
-    this.ordering = ordering;
-    this.referencedFields = referencedFields;
-    this.referencedOuterFields = referencedOuterFields;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
-    __publicField(this, 'definition',);
-    const itemDefinitions = {};
-    const namedFieldEntries = Object.entries(namedFields,);
-    for (const [name, field,] of namedFieldEntries) {
-      itemDefinitions[name] = field.definition;
-    }
-    this.definition = {
-      type: 'array',
-      isNullable: false,
-      definition: {
-        type: 'object',
-        isNullable: false,
-        definitions: itemDefinitions,
-      },
-    };
-  }
-  getHash() {
-    const namedFieldIds = {};
-    const namedFieldEntries = Object.entries(this.namedFields,);
-    for (const [name, field,] of namedFieldEntries) {
-      namedFieldIds[name] = field.id;
-    }
-    return calculateHash(
-      'ScalarSubquery',
-      this.inputGroup.id,
-      namedFieldIds,
-      this.ordering,
-      this.referencedFields,
-      this.referencedOuterFields,
-    );
-  }
-  toString() {
-    return `SUBQUERY(${this.inputGroup.id})`;
-  }
-  getInputRequiredProps() {
-    const resolvedFields = new Fields();
-    const fields = Object.values(this.namedFields,);
-    for (const field of fields) {
-      resolvedFields.add(field,);
-    }
-    return new RequiredProps(this.ordering, resolvedFields,);
-  }
-  optimize(optimizer,) {
-    const inputRequired = this.getInputRequiredProps();
-    const inputCost = optimizer.optimizeGroup(this.inputGroup, inputRequired,);
-    return new Cost(0,).add(inputCost,);
-  }
-  getOptimized() {
-    const inputRequired = this.getInputRequiredProps();
-    const input = this.inputGroup.getOptimized(inputRequired,);
-    return new ScalarSubquery(input, this.namedFields, this.ordering, this.referencedFields, this.referencedOuterFields,);
-  }
-  *evaluate(context, tuple,) {
-    const inputContext = new Tuple();
-    if (context) inputContext.merge(context,);
-    if (tuple) inputContext.merge(tuple,);
-    const relation = yield* this.input.evaluate(inputContext,);
-    const namedFieldEntries = Object.entries(this.namedFields,);
-    return {
-      type: 'array',
-      value: relation.tuples.map((relationTuple) => {
-        const value = {};
-        for (const [name, field,] of namedFieldEntries) {
-          value[name] = relationTuple.getValue(field,);
-        }
-        return {
-          type: 'object',
-          value,
-        };
-      },),
     };
   }
 };
@@ -39205,8 +39293,12 @@ var Normalizer = class {
     const node = new ScalarLength(array,);
     return this.finishScalar(node,);
   }
-  newScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
-    const node = new ScalarSubquery(input, namedFields, ordering, referencedFields, referencedOuterFields,);
+  newScalarArray(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
+    const node = new ScalarArray(input, namedFields, ordering, referencedFields, referencedOuterFields,);
+    return this.finishScalar(node,);
+  }
+  newScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,) {
+    const node = new ScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,);
     return this.finishScalar(node,);
   }
   newScalarCast(input, definition,) {
