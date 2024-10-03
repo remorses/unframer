@@ -10137,7 +10137,7 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   return acc;
 }, {},);
 
-// https :https://app.framerstatic.com/framer.B2WOYKYJ.js
+// https :https://app.framerstatic.com/framer.HW4CVSGX.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -32249,19 +32249,21 @@ function getObserveRouteForPreloadingFn() {
 var observeRouteForPreloading =
   // this also guards `window`
   !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
-var noLocale = {};
-var resolveSlugCache = /* @__PURE__ */ new WeakMap();
+var noLocale = Symbol('noLocale',);
+var resolveSlugCache = /* @__PURE__ */ new Map();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
   var _a, _b;
   const cache2 =
-    (_b = (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get(activeLocale ?? noLocale,)) == null
-        ? void 0
-        : _a.get(unresolvedSlug.collectionId,)) == null
+    (_b =
+        (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,)) ==
+            null
+          ? void 0
+          : _a.get(unresolvedSlug.collectionId,)) == null
       ? void 0
       : _b.get(unresolvedSlug.collectionItemId,);
   if (cache2) return cache2;
-  const collectionCache = resolveSlugCache.get(activeLocale ?? noLocale,) ?? /* @__PURE__ */ new Map();
-  resolveSlugCache.set(activeLocale ?? noLocale, collectionCache,);
+  const collectionCache = resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,) ?? /* @__PURE__ */ new Map();
+  resolveSlugCache.set((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale, collectionCache,);
   const collectionItemCache = collectionCache.get(unresolvedSlug.collectionId,) ?? /* @__PURE__ */ new Map();
   collectionCache.set(unresolvedSlug.collectionId, collectionItemCache,);
   const lazyValue = new LazyValue(async () => {
@@ -32372,7 +32374,7 @@ function propsForLink(href, openInNewTab = void 0,) {
   const isInternal = isInternalURL(href,);
   const anchorTarget = getTargetAttrValue(openInNewTab, isInternal,);
   return {
-    href: isValidURL(href, isInternal,) ? href : `https://${href}`,
+    href: href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`,
     target: anchorTarget,
     rel: !isInternal ? 'noopener' : void 0,
   };
@@ -40603,7 +40605,7 @@ function usePreloadQuery() {
     return queryCache.get(query, activeLocale,).waitFor();
   }, [activeLocale,],);
 }
-function getWhereExpressionFromPathVariables(pathVariables,) {
+function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   const entries = Object.entries(pathVariables,).filter(([, value,],) => {
     if (isUndefined(value,)) return false;
     if (isObject2(value,)) return false;
@@ -40617,6 +40619,7 @@ function getWhereExpressionFromPathVariables(pathVariables,) {
       value: {
         type: 'Identifier',
         name,
+        collection,
       },
       dataType: 'STRING',
       /* String */
@@ -43100,6 +43103,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
     step: step2,
     style,
     type,
+    maxLength,
     // We use a defaultValue instead of a value so that the input remains
     // uncontrolled by React. This is important because we want the user
     // to be able to provide an initial value in the property panel, and for
@@ -43147,6 +43151,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
         placeholder,
         className: inputClassName,
         defaultValue,
+        maxLength,
       },)
       : /* @__PURE__ */ createElement(motion.input, {
         ...dataProps,
@@ -43162,6 +43167,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
         min,
         max,
         step: step2,
+        maxLength,
       },),
   },);
 },);
