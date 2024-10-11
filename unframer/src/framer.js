@@ -10418,7 +10418,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.WWTJQINV.js
+// https :https://app.framerstatic.com/framer.33MQKLIW.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -34449,90 +34449,101 @@ var DatabaseValue = {
    * Checks if the left value is equal to the right value. Returns false if
    * the values are not of the same type.
    */
-  equal(left, right, collation9,) {
+  equal(left, right, collation10,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation9,) === 0;
+    return compare(left, right, collation10,) === 0;
   },
   /**
    * Checks if the left value is less than the right value. Returns false if
    * the values are not of the same type.
    */
-  lessThan(left, right, collation9,) {
+  lessThan(left, right, collation10,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation9,) < 0;
+    return compare(left, right, collation10,) < 0;
   },
   /**
    * Checks if the left value is less than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  lessThanOrEqual(left, right, collation9,) {
+  lessThanOrEqual(left, right, collation10,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation9,) <= 0;
+    return compare(left, right, collation10,) <= 0;
   },
   /**
    * Checks if the left value is greater than the right value. Returns false
    * if the values are not of the same type.
    */
-  greaterThan(left, right, collation9,) {
+  greaterThan(left, right, collation10,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation9,) > 0;
+    return compare(left, right, collation10,) > 0;
   },
   /**
    * Checks if the left value is greater than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  greaterThanOrEqual(left, right, collation9,) {
+  greaterThanOrEqual(left, right, collation10,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation9,) >= 0;
+    return compare(left, right, collation10,) >= 0;
   },
   /**
    * Checks if the left value is in the right value. Returns false if the
    * right value is not an array.
    */
-  in(left, right, collation9,) {
+  in(left, right, collation10,) {
     if ((right == null ? void 0 : right.type) !== 'array') return false;
     return right.value.some((item) => {
-      return DatabaseValue.equal(item, left, collation9,);
+      return DatabaseValue.equal(item, left, collation10,);
     },);
   },
-  contains(source, target, collation9,) {
+  /**
+   * Get the index of the first occurrence of `target` in `source`.
+   *
+   * If source has duplicates, the index of the first occurrence is always returned.
+   */
+  indexOf(source, target, collation10,) {
+    if ((source == null ? void 0 : source.type) !== 'array') return -1;
+    return source.value.findIndex((item) => {
+      return DatabaseValue.equal(item, target, collation10,);
+    },);
+  },
+  contains(source, target, collation10,) {
     let sourceValue = toString(source,);
     let targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
-    if (collation9.type === 0) {
+    if (collation10.type === 0) {
       sourceValue = sourceValue.toLowerCase();
       targetValue = targetValue.toLowerCase();
     }
     return sourceValue.includes(targetValue,);
   },
-  startsWith(source, target, collation9,) {
+  startsWith(source, target, collation10,) {
     let sourceValue = toString(source,);
     let targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
-    if (collation9.type === 0) {
+    if (collation10.type === 0) {
       sourceValue = sourceValue.toLowerCase();
       targetValue = targetValue.toLowerCase();
     }
     return sourceValue.startsWith(targetValue,);
   },
-  endsWith(source, target, collation9,) {
+  endsWith(source, target, collation10,) {
     let sourceValue = toString(source,);
     let targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
-    if (collation9.type === 0) {
+    if (collation10.type === 0) {
       sourceValue = sourceValue.toLowerCase();
       targetValue = targetValue.toLowerCase();
     }
@@ -34578,7 +34589,7 @@ var DatabaseValue = {
     }
   },
 };
-function compare(left, right, collation9,) {
+function compare(left, right, collation10,) {
   if (isNull(left,) || isNull(right,)) {
     assert(left === right,);
     return 0;
@@ -34595,7 +34606,7 @@ function compare(left, right, collation9,) {
         const rightItem = right.value[i];
         assert(!isUndefined(leftItem,), 'Left item must exist',);
         assert(!isUndefined(rightItem,), 'Right item must exist',);
-        const result = compare(leftItem, rightItem, collation9,);
+        const result = compare(leftItem, rightItem, collation10,);
         if (result !== 0) return result;
       }
       return 0;
@@ -34663,7 +34674,7 @@ function compare(left, right, collation9,) {
         const rightValue = right.value[rightKey];
         assert(!isUndefined(leftValue,), 'Left value must exist',);
         assert(!isUndefined(rightValue,), 'Right value must exist',);
-        const result = compare(leftValue, rightValue, collation9,);
+        const result = compare(leftValue, rightValue, collation10,);
         if (result !== 0) return result;
       }
       return 0;
@@ -34688,7 +34699,7 @@ function compare(left, right, collation9,) {
       assert(left.type === right.type,);
       let leftValue = left.value;
       let rightValue = right.value;
-      if (collation9.type === 0) {
+      if (collation10.type === 0) {
         leftValue = left.value.toLowerCase();
         rightValue = right.value.toLowerCase();
       }
@@ -36039,7 +36050,7 @@ var SortItemsPlan = class extends QueryPlan {
         const {
           expression,
           direction,
-          collation: collation9,
+          collation: collation10,
         } of this.orderExpressions
       ) {
         const isAscending = direction === 'asc';
@@ -36049,13 +36060,13 @@ var SortItemsPlan = class extends QueryPlan {
         }
         const left = expression.evaluate(leftItem,);
         const right = expression.evaluate(rightItem,);
-        if (DatabaseValue.equal(left, right, collation9,)) {
+        if (DatabaseValue.equal(left, right, collation10,)) {
           continue;
         }
-        if (DatabaseValue.lessThan(left, right, collation9,) || isNullish2(left,)) {
+        if (DatabaseValue.lessThan(left, right, collation10,) || isNullish2(left,)) {
           return isAscending ? -1 : 1;
         }
-        if (DatabaseValue.greaterThan(left, right, collation9,) || isNullish2(right,)) {
+        if (DatabaseValue.greaterThan(left, right, collation10,) || isNullish2(right,)) {
           return isAscending ? 1 : -1;
         }
         throw new Error('Invalid comparison result.',);
@@ -36065,10 +36076,10 @@ var SortItemsPlan = class extends QueryPlan {
   }
 };
 var ScalarOrderExpression = class {
-  constructor(expression, direction, collation9,) {
+  constructor(expression, direction, collation10,) {
     this.expression = expression;
     this.direction = direction;
-    this.collation = collation9;
+    this.collation = collation10;
   }
 };
 var SliceItemsPlan = class extends QueryPlan {
@@ -36271,6 +36282,7 @@ var FieldMetadata = class {
     this.collection = collection;
   }
   getValue(item,) {
+    assert(this.name, 'Can only get value of field with a name',);
     const value = item.data[this.name];
     if ((value == null ? void 0 : value.type) === 'richtext') {
       assert(this.collection, 'Rich text field must have a collection',);
@@ -36846,7 +36858,6 @@ var OrderingField = class {
 };
 var Ordering = class {
   constructor(ordering,) {
-    this.ordering = ordering;
     __publicField(this, 'fields', [],);
     if (ordering) {
       this.merge(ordering,);
@@ -37045,22 +37056,32 @@ var Builder = class {
       const node = this.normalizer.newRelationalFilter(input, predicate,);
       fromScope.setNode(node,);
     }
-    const projectionScope = this.buildSelectList(fromScope, select.select,);
+    const orderProjections = [];
+    let ordering;
     if (select.orderBy) {
-      const ordering2 = new Ordering();
+      ordering = new Ordering();
       for (const order of select.orderBy) {
-        assert(order.type === 'Identifier', 'Unsupported order type',);
-        const scopeField = fromScope.resolveField(order.name, order.collection,);
-        if (isUndefined(scopeField,)) continue;
-        const orderingField = new OrderingField(scopeField.field, order.direction,);
-        ordering2.push(orderingField,);
+        if (order.type === 'Identifier') {
+          const scopeField = fromScope.resolveField(order.name, order.collection,);
+          if (isUndefined(scopeField,)) continue;
+          const orderingField = new OrderingField(scopeField.field, order.direction,);
+          ordering.push(orderingField,);
+        } else {
+          const expression = this.buildExpression(fromScope, order,);
+          const fieldId = FieldId(this.fieldId++,);
+          const field = new FieldMetadata(fieldId, void 0, expression.definition, void 0,);
+          const projection = new ProjectionField(expression, field,);
+          orderProjections.push(projection,);
+          const orderingField = new OrderingField(field, order.direction,);
+          ordering.push(orderingField,);
+        }
       }
-      ordering2.merge(defaultOrdering,);
-      projectionScope.setOrdering(ordering2,);
+      ordering.merge(defaultOrdering,);
     } else {
-      projectionScope.setOrdering(defaultOrdering,);
+      ordering = defaultOrdering;
     }
-    const ordering = projectionScope.getRequiredOrdering();
+    const projectionScope = this.buildSelectList(fromScope, select.select, orderProjections,);
+    projectionScope.setOrdering(ordering,);
     if (select.offset) {
       const input = projectionScope.takeNode();
       const offset = this.buildExpression(inScope, select.offset,);
@@ -37075,10 +37096,10 @@ var Builder = class {
     }
     return projectionScope;
   }
-  buildSelectList(inScope, selects,) {
+  buildSelectList(inScope, selects, orderProjections,) {
     const outScope = inScope.push();
     const passthrough = new Fields();
-    const projections = [];
+    const projections = [...orderProjections,];
     for (const select of selects) {
       if (select.type === 'Identifier') {
         const scopeField = inScope.resolveField(select.name, select.collection,);
@@ -37264,6 +37285,11 @@ var Builder = class {
       case 'LENGTH': {
         const array = getArgument(0,);
         return this.normalizer.newScalarLength(array,);
+      }
+      case 'INDEX_OF': {
+        const source = getArgument(0,);
+        const target = getArgument(1,);
+        return this.normalizer.newScalarIndexOf(source, target,);
       }
       case 'ARRAY': {
         const subquery = expression.arguments[0];
@@ -39158,6 +39184,57 @@ var ScalarIn = class extends ScalarNode {
     };
   }
 };
+var collation8 = {
+  type: 1,
+  /* CaseSensitive */
+};
+var ScalarIndexOf = class extends ScalarNode {
+  constructor(source, target,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(source.referencedFields,);
+    referencedFields.merge(target.referencedFields,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(source.referencedOuterFields,);
+    referencedOuterFields.merge(target.referencedOuterFields,);
+    const isSynchronous = source.isSynchronous && target.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
+    this.source = source;
+    this.target = target;
+    __publicField(this, 'definition', {
+      type: 'number',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarIndexOf', this.source, this.target,);
+  }
+  toString() {
+    return `INDEX_OF(${this.source}, ${this.target})`;
+  }
+  optimize(optimizer,) {
+    const sourceCost = this.source.optimize(optimizer,);
+    const targetCost = this.target.optimize(optimizer,);
+    return Cost.max(sourceCost, targetCost,);
+  }
+  getOptimized() {
+    const source = this.source.getOptimized();
+    const target = this.target.getOptimized();
+    return new ScalarIndexOf(source, target,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      source,
+      target,
+    } = yield* evaluateObject({
+      source: this.source.evaluate(context, tuple,),
+      target: this.target.evaluate(context, tuple,),
+    },);
+    return {
+      type: 'number',
+      value: DatabaseValue.indexOf(source, target, collation8,),
+    };
+  }
+};
 var ScalarLength = class extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
@@ -39218,7 +39295,7 @@ var ScalarNot = class extends ScalarNode {
     };
   }
 };
-var collation8 = {
+var collation9 = {
   type: 0,
   /* CaseInsensitive */
 };
@@ -39265,7 +39342,7 @@ var ScalarNotIn = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: !DatabaseValue.in(left, right, collation8,),
+      value: !DatabaseValue.in(left, right, collation9,),
     };
   }
 };
@@ -39576,6 +39653,10 @@ var Normalizer = class {
   }
   newScalarLength(array,) {
     const node = new ScalarLength(array,);
+    return this.finishScalar(node,);
+  }
+  newScalarIndexOf(source, target,) {
+    const node = new ScalarIndexOf(source, target,);
     return this.finishScalar(node,);
   }
   newScalarArray(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
