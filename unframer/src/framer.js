@@ -1,4 +1,4 @@
-// https :https://app.framerstatic.com/chunk-ET3TAFPQ.js
+// https :https://app.framerstatic.com/chunk-4UHJZEF4.js
 import { createContext, } from 'react';
 import { useCallback, useContext, useEffect, useId, } from 'react';
 import { useLayoutEffect, } from 'react';
@@ -1040,6 +1040,7 @@ function interpolate(input, output, {
 var isEasingArray = (ease2) => {
   return Array.isArray(ease2,) && typeof ease2[0] !== 'number';
 };
+var isBezierDefinition = (easing) => Array.isArray(easing,) && typeof easing[0] === 'number';
 var easingLookup = {
   linear: noop,
   easeIn,
@@ -1054,7 +1055,7 @@ var easingLookup = {
   anticipate,
 };
 var easingDefinitionToFunction = (definition) => {
-  if (Array.isArray(definition,)) {
+  if (isBezierDefinition(definition,)) {
     invariant(definition.length === 4, `Cubic bezier arrays must contain four numerical values.`,);
     const [x1, y1, x2, y2,] = definition;
     return cubicBezier(x1, y1, x2, y2,);
@@ -2122,7 +2123,6 @@ var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter'
   // or until we implement support for linear() easing.
   // "background-color"
 ],);
-var isBezierDefinition = (easing) => Array.isArray(easing,) && typeof easing[0] === 'number';
 var resolution = 10;
 var generateLinearEasing = (easing, duration,) => {
   let points = '';
@@ -2599,7 +2599,7 @@ var MotionValue = class {
    * @internal
    */
   constructor(init, options = {},) {
-    this.version = '11.10.0';
+    this.version = '11.11.7';
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v, render = true,) => {
@@ -2915,7 +2915,7 @@ var getDefaultTransition = (valueKey, {
   return ease;
 };
 function getValueTransition(transition, key7,) {
-  return transition[key7] || transition['default'] || transition;
+  return transition ? transition[key7] || transition['default'] || transition : void 0;
 }
 var supportsScrollTimeline = memo(() => window.ScrollTimeline !== void 0);
 var GroupPlaybackControls = class {
@@ -3825,9 +3825,8 @@ var {
 function isRefObject(ref,) {
   return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
 }
-var scheduleHandoffComplete = false;
-function useVisualElement(Component33, visualState, props, createVisualElement2, ProjectionNodeConstructor,) {
-  var _a;
+function useVisualElement(Component33, visualState, props, createVisualElement, ProjectionNodeConstructor,) {
+  var _a, _b;
   const {
     visualElement: parent,
   } = useContext(MotionContext,);
@@ -3835,9 +3834,9 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
   const presenceContext = useContext(PresenceContext,);
   const reducedMotionConfig = useContext(MotionConfigContext,).reducedMotion;
   const visualElementRef = useRef();
-  createVisualElement2 = createVisualElement2 || lazyContext.renderer;
-  if (!visualElementRef.current && createVisualElement2) {
-    visualElementRef.current = createVisualElement2(Component33, {
+  createVisualElement = createVisualElement || lazyContext.renderer;
+  if (!visualElementRef.current && createVisualElement) {
+    visualElementRef.current = createVisualElement(Component33, {
       visualState,
       parent,
       props,
@@ -3859,11 +3858,13 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
   const wantsHandoff = useRef(
-    Boolean(optimisedAppearId,) && !window.MotionHandoffIsComplete &&
-      ((_a = window.MotionHasOptimisedAnimation) === null || _a === void 0 ? void 0 : _a.call(window, optimisedAppearId,)),
+    Boolean(optimisedAppearId,) &&
+      !((_a = window.MotionHandoffIsComplete) === null || _a === void 0 ? void 0 : _a.call(window, optimisedAppearId,)) &&
+      ((_b = window.MotionHasOptimisedAnimation) === null || _b === void 0 ? void 0 : _b.call(window, optimisedAppearId,)),
   );
   useIsomorphicLayoutEffect(() => {
     if (!visualElement) return;
+    window.MotionIsMounted = true;
     visualElement.updateFeatures();
     microtask.render(visualElement.render,);
     if (wantsHandoff.current && visualElement.animationState) {
@@ -3875,16 +3876,15 @@ function useVisualElement(Component33, visualState, props, createVisualElement2,
     if (!wantsHandoff.current && visualElement.animationState) {
       visualElement.animationState.animateChanges();
     }
-    wantsHandoff.current = false;
-    if (!scheduleHandoffComplete) {
-      scheduleHandoffComplete = true;
-      queueMicrotask(completeHandoff,);
+    if (wantsHandoff.current) {
+      queueMicrotask(() => {
+        var _a2;
+        (_a2 = window.MotionHandoffMarkAsComplete) === null || _a2 === void 0 ? void 0 : _a2.call(window, optimisedAppearId,);
+      },);
+      wantsHandoff.current = false;
     }
   },);
   return visualElement;
-}
-function completeHandoff() {
-  window.MotionHandoffIsComplete = true;
 }
 function createProjectionNode(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig,) {
   const {
@@ -4004,7 +4004,7 @@ function loadFeatures(features,) {
 var motionComponentSymbol = Symbol.for('motionComponentSymbol',);
 function createRendererMotionComponent({
   preloadedFeatures,
-  createVisualElement: createVisualElement2,
+  createVisualElement,
   useRender,
   useVisualState: useVisualState2,
   Component: Component33,
@@ -4030,7 +4030,7 @@ function createRendererMotionComponent({
         Component33,
         visualState,
         configAndProps,
-        createVisualElement2,
+        createVisualElement,
         layoutProjection.ProjectionNode,
       );
     }
@@ -4320,8 +4320,8 @@ function updateMotionValuesFromProps(element, next, prev,) {
       element.addValue(key7, nextValue,);
       if (false) {
         warnOnce(
-          nextValue.version === '11.10.0',
-          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.10.0 may not work as expected.`,
+          nextValue.version === '11.11.7',
+          `Attempting to mix Framer Motion versions ${nextValue.version} with 11.11.7 may not work as expected.`,
         );
       }
     } else if (isMotionValue(prevValue,)) {
@@ -8003,7 +8003,7 @@ function createUseRender(forwardMotionProps = false,) {
   };
   return useRender;
 }
-function createMotionComponentFactory(preloadedFeatures, createVisualElement2,) {
+function createMotionComponentFactory(preloadedFeatures, createVisualElement,) {
   return function createMotionComponent2(Component33, {
     forwardMotionProps,
   } = {
@@ -8014,7 +8014,7 @@ function createMotionComponentFactory(preloadedFeatures, createVisualElement2,) 
       ...baseConfig,
       preloadedFeatures,
       useRender: createUseRender(forwardMotionProps,),
-      createVisualElement: createVisualElement2,
+      createVisualElement,
       Component: Component33,
     };
     return createRendererMotionComponent(config,);
@@ -8213,19 +8213,20 @@ var PresenceChild = ({
 },) => {
   const presenceChildren = useConstant(newChildrenMap,);
   const id4 = useId();
+  const memoizedOnExitComplete = useCallback((childId) => {
+    presenceChildren.set(childId, true,);
+    for (const isComplete of presenceChildren.values()) {
+      if (!isComplete) return;
+    }
+    onExitComplete && onExitComplete();
+  }, [presenceChildren, onExitComplete,],);
   const context = useMemo(
     () => ({
       id: id4,
       initial,
       isPresent: isPresent2,
       custom,
-      onExitComplete: (childId) => {
-        presenceChildren.set(childId, true,);
-        for (const isComplete of presenceChildren.values()) {
-          if (!isComplete) return;
-        }
-        onExitComplete && onExitComplete();
-      },
+      onExitComplete: memoizedOnExitComplete,
       register: (childId) => {
         presenceChildren.set(childId, false,);
         return () => presenceChildren.delete(childId,);
@@ -8236,7 +8237,7 @@ var PresenceChild = ({
      * we want to make a new context value to ensure they get re-rendered
      * so they can detect that layout change.
      */
-    presenceAffectsLayout ? [Math.random(),] : [isPresent2,],
+    presenceAffectsLayout ? [Math.random(), memoizedOnExitComplete,] : [isPresent2, memoizedOnExitComplete,],
   );
   useMemo(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
@@ -9338,28 +9339,6 @@ var wrap = (min, max, v,) => {
   const rangeSize = max - min;
   return ((v - min) % rangeSize + rangeSize) % rangeSize + min;
 };
-function isDOMKeyframes(keyframes2,) {
-  return typeof keyframes2 === 'object' && !Array.isArray(keyframes2,);
-}
-function createVisualElement(element,) {
-  const options = {
-    presenceContext: null,
-    props: {},
-    visualState: {
-      renderState: {
-        transform: {},
-        transformOrigin: {},
-        style: {},
-        vars: {},
-        attrs: {},
-      },
-      latestValues: {},
-    },
-  };
-  const node = isSVGElement(element,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options,);
-  node.mount(element,);
-  visualElementStore.set(element, node,);
-}
 function createGeneratorEasing(options, scale2 = 100, createGenerator,) {
   const generator = createGenerator({
     ...options,
@@ -9371,6 +9350,20 @@ function createGeneratorEasing(options, scale2 = 100, createGenerator,) {
     ease: (progress2) => generator.next(duration * progress2,).value / scale2,
     duration: millisecondsToSeconds(duration,),
   };
+}
+function isDOMKeyframes(keyframes2,) {
+  return typeof keyframes2 === 'object' && !Array.isArray(keyframes2,);
+}
+function resolveSubjects(subject, keyframes2, scope, selectorCache,) {
+  if (typeof subject === 'string' && isDOMKeyframes(keyframes2,)) {
+    return resolveElements(subject, scope, selectorCache,);
+  } else if (subject instanceof NodeList) {
+    return Array.from(subject,);
+  } else if (Array.isArray(subject,)) {
+    return subject;
+  } else {
+    return [subject,];
+  }
 }
 function calcNextTime(current, next, prev, labels,) {
   var _a;
@@ -9447,7 +9440,7 @@ function createAnimationsFromSequence(
       currentTime = calcNextTime(currentTime, transition.at, prevTime, timeLabels,);
     }
     let maxDuration32 = 0;
-    const resolveValueSequence = (valueKeyframes, valueTransition, valueSequence, elementIndex = 0, numElements = 0,) => {
+    const resolveValueSequence = (valueKeyframes, valueTransition, valueSequence, elementIndex = 0, numSubjects = 0,) => {
       const valueKeyframesAsList = keyframesAsList(valueKeyframes,);
       const {
         delay: delay2 = 0,
@@ -9459,7 +9452,7 @@ function createAnimationsFromSequence(
         ease: ease2 = defaultTransition.ease || 'easeOut',
         duration,
       } = valueTransition;
-      const calculatedDelay = typeof delay2 === 'function' ? delay2(elementIndex, numElements,) : delay2;
+      const calculatedDelay = typeof delay2 === 'function' ? delay2(elementIndex, numSubjects,) : delay2;
       const numKeyframes = valueKeyframesAsList.length;
       const createGenerator = isGenerator(type,) ? type : generators2 === null || generators2 === void 0 ? void 0 : generators2[type];
       if (numKeyframes <= 2 && createGenerator) {
@@ -9495,20 +9488,20 @@ function createAnimationsFromSequence(
       const subjectSequence = getSubjectSequence(subject, sequences,);
       resolveValueSequence(keyframes2, transition, getValueSequence('default', subjectSequence,),);
     } else {
-      const elements = resolveElements(subject, scope, elementCache,);
-      const numElements = elements.length;
-      for (let elementIndex = 0; elementIndex < numElements; elementIndex++) {
+      const subjects = resolveSubjects(subject, keyframes2, scope, elementCache,);
+      const numSubjects = subjects.length;
+      for (let subjectIndex = 0; subjectIndex < numSubjects; subjectIndex++) {
         keyframes2 = keyframes2;
         transition = transition;
-        const element = elements[elementIndex];
-        const subjectSequence = getSubjectSequence(element, sequences,);
+        const thisSubject = subjects[subjectIndex];
+        const subjectSequence = getSubjectSequence(thisSubject, sequences,);
         for (const key7 in keyframes2) {
           resolveValueSequence(
             keyframes2[key7],
             getValueTransition2(transition, key7,),
             getValueSequence(key7, subjectSequence,),
-            elementIndex,
-            numElements,
+            subjectIndex,
+            numSubjects,
           );
         }
       }
@@ -9573,7 +9566,7 @@ function keyframesAsList(keyframes2,) {
   return Array.isArray(keyframes2,) ? keyframes2 : [keyframes2,];
 }
 function getValueTransition2(transition, key7,) {
-  return transition[key7]
+  return transition && transition[key7]
     ? {
       ...transition,
       ...transition[key7],
@@ -9584,31 +9577,116 @@ function getValueTransition2(transition, key7,) {
 }
 var isNumber = (keyframe) => typeof keyframe === 'number';
 var isNumberKeyframesArray = (keyframes2) => keyframes2.every(isNumber,);
-function animateElements(elementOrSelector, keyframes2, options, scope,) {
-  const elements = resolveElements(elementOrSelector, scope,);
-  const numElements = elements.length;
-  invariant(Boolean(numElements,), 'No valid element provided.',);
-  const animations2 = [];
-  for (let i = 0; i < numElements; i++) {
-    const element = elements[i];
-    if (!visualElementStore.has(element,)) {
-      createVisualElement(element,);
-    }
-    const visualElement = visualElementStore.get(element,);
-    const transition = {
-      ...options,
-    };
-    if (typeof transition.delay === 'function') {
-      transition.delay = transition.delay(i, numElements,);
-    }
-    animations2.push(...animateTarget(visualElement, {
-      ...keyframes2,
-      transition,
-    }, {},),);
-  }
-  return new GroupPlaybackControls(animations2,);
+function isObjectKey(key7, object,) {
+  return key7 in object;
 }
-var isSequence = (value) => Array.isArray(value,) && Array.isArray(value[0],);
+var ObjectVisualElement = class extends VisualElement {
+  constructor() {
+    super(...arguments,);
+    this.type = 'object';
+  }
+  readValueFromInstance(instance, key7,) {
+    if (isObjectKey(key7, instance,)) {
+      const value = instance[key7];
+      if (typeof value === 'string' || typeof value === 'number') {
+        return value;
+      }
+    }
+    return void 0;
+  }
+  getBaseTargetFromProps() {
+    return void 0;
+  }
+  removeValueFromRenderState(key7, renderState,) {
+    delete renderState.output[key7];
+  }
+  measureInstanceViewportBox() {
+    return createBox();
+  }
+  build(renderState, latestValues,) {
+    Object.assign(renderState.output, latestValues,);
+  }
+  renderInstance(instance, {
+    output,
+  },) {
+    Object.assign(instance, output,);
+  }
+  sortInstanceNodePosition() {
+    return 0;
+  }
+};
+function createDOMVisualElement(element,) {
+  const options = {
+    presenceContext: null,
+    props: {},
+    visualState: {
+      renderState: {
+        transform: {},
+        transformOrigin: {},
+        style: {},
+        vars: {},
+        attrs: {},
+      },
+      latestValues: {},
+    },
+  };
+  const node = isSVGElement(element,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options,);
+  node.mount(element,);
+  visualElementStore.set(element, node,);
+}
+function createObjectVisualElement(subject,) {
+  const options = {
+    presenceContext: null,
+    props: {},
+    visualState: {
+      renderState: {
+        output: {},
+      },
+      latestValues: {},
+    },
+  };
+  const node = new ObjectVisualElement(options,);
+  node.mount(subject,);
+  visualElementStore.set(subject, node,);
+}
+function isSingleValue(subject, keyframes2,) {
+  return isMotionValue(subject,) || typeof subject === 'number' || typeof subject === 'string' && !isDOMKeyframes(keyframes2,);
+}
+function animateSubject(subject, keyframes2, options, scope,) {
+  const animations2 = [];
+  if (isSingleValue(subject, keyframes2,)) {
+    animations2.push(
+      animateSingleValue(
+        subject,
+        isDOMKeyframes(keyframes2,) ? keyframes2.default || keyframes2 : keyframes2,
+        options ? options.default || options : options,
+      ),
+    );
+  } else {
+    const subjects = resolveSubjects(subject, keyframes2, scope,);
+    const numSubjects = subjects.length;
+    invariant(Boolean(numSubjects,), 'No valid elements provided.',);
+    for (let i = 0; i < numSubjects; i++) {
+      const thisSubject = subjects[i];
+      const createVisualElement = thisSubject instanceof Element ? createDOMVisualElement : createObjectVisualElement;
+      if (!visualElementStore.has(thisSubject,)) {
+        createVisualElement(thisSubject,);
+      }
+      const visualElement = visualElementStore.get(thisSubject,);
+      const transition = {
+        ...options,
+      };
+      if ('delay' in transition && typeof transition.delay === 'function') {
+        transition.delay = transition.delay(i, numSubjects,);
+      }
+      animations2.push(...animateTarget(visualElement, {
+        ...keyframes2,
+        transition,
+      }, {},),);
+    }
+  }
+  return animations2;
+}
 function animateSequence(sequence2, options, scope,) {
   const animations2 = [];
   const animationDefinitions = createAnimationsFromSequence(sequence2, options, scope, {
@@ -9618,33 +9696,29 @@ function animateSequence(sequence2, options, scope,) {
     keyframes: keyframes2,
     transition,
   }, subject,) => {
-    let animation;
-    if (isMotionValue(subject,)) {
-      animation = animateSingleValue(subject, keyframes2.default, transition.default,);
-    } else {
-      animation = animateElements(subject, keyframes2, transition,);
-    }
-    animations2.push(animation,);
+    animations2.push(...animateSubject(subject, keyframes2, transition,),);
   },);
-  return new GroupPlaybackControls(animations2,);
+  return animations2;
 }
-var createScopedAnimate = (scope) => {
-  function scopedAnimate(valueOrElementOrSequence, keyframes2, options,) {
-    let animation;
-    if (isSequence(valueOrElementOrSequence,)) {
-      animation = animateSequence(valueOrElementOrSequence, keyframes2, scope,);
-    } else if (isDOMKeyframes(keyframes2,)) {
-      animation = animateElements(valueOrElementOrSequence, keyframes2, options, scope,);
+function isSequence(value,) {
+  return Array.isArray(value,) && Array.isArray(value[0],);
+}
+function createScopedAnimate(scope,) {
+  function scopedAnimate(subjectOrSequence, optionsOrKeyframes, options,) {
+    let animations2 = [];
+    if (isSequence(subjectOrSequence,)) {
+      animations2 = animateSequence(subjectOrSequence, optionsOrKeyframes, scope,);
     } else {
-      animation = animateSingleValue(valueOrElementOrSequence, keyframes2, options,);
+      animations2 = animateSubject(subjectOrSequence, optionsOrKeyframes, options, scope,);
     }
+    const animation = new GroupPlaybackControls(animations2,);
     if (scope) {
       scope.animations.push(animation,);
     }
     return animation;
   }
   return scopedAnimate;
-};
+}
 var animate = createScopedAnimate();
 function useAnimate() {
   const scope = useConstant(() => ({
@@ -9822,7 +9896,7 @@ var NativeAnimation = class {
     return noop;
   }
 };
-function animateElements2(elementOrSelector, keyframes2, options, scope,) {
+function animateElements(elementOrSelector, keyframes2, options, scope,) {
   const elements = resolveElements(elementOrSelector, scope,);
   const numElements = elements.length;
   invariant(Boolean(numElements,), 'No valid element provided.',);
@@ -9849,7 +9923,7 @@ function animateElements2(elementOrSelector, keyframes2, options, scope,) {
 }
 var createScopedWaapiAnimate = (scope) => {
   function scopedAnimate(elementOrSelector, keyframes2, options,) {
-    return new GroupPlaybackControls(animateElements2(elementOrSelector, keyframes2, options, scope,),);
+    return new GroupPlaybackControls(animateElements(elementOrSelector, keyframes2, options, scope,),);
   }
   return scopedAnimate;
 };
@@ -10043,8 +10117,9 @@ var appearStoreId = (elementId, valueName,) => {
   return `${elementId}: ${key7}`;
 };
 var appearAnimationStore = /* @__PURE__ */ new Map();
-var elementsWithAppearAnimations = /* @__PURE__ */ new Set();
+var appearComplete = /* @__PURE__ */ new Map();
 function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
+  var _a;
   const storeId = appearStoreId(elementId, valueName,);
   const optimisedAnimation = appearAnimationStore.get(storeId,);
   if (!optimisedAnimation) {
@@ -10055,11 +10130,11 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
     startTime,
   } = optimisedAnimation;
   function cancelAnimation() {
-    var _a;
-    (_a = window.MotionCancelOptimisedAnimation) === null || _a === void 0 ? void 0 : _a.call(window, elementId, valueName, frame2,);
+    var _a2;
+    (_a2 = window.MotionCancelOptimisedAnimation) === null || _a2 === void 0 ? void 0 : _a2.call(window, elementId, valueName, frame2,);
   }
   animation.onfinish = cancelAnimation;
-  if (startTime === null || window.MotionHandoffIsComplete) {
+  if (startTime === null || ((_a = window.MotionHandoffIsComplete) === null || _a === void 0 ? void 0 : _a.call(window, elementId,))) {
     cancelAnimation();
     return null;
   } else {
@@ -10077,8 +10152,7 @@ function resumeSuspendedAnimations() {
   suspendedAnimations.clear();
 }
 function startOptimizedAppearAnimation(element, name, keyframes2, options, onReady,) {
-  if (window.MotionHandoffIsComplete) {
-    window.MotionHandoffAnimation = void 0;
+  if (window.MotionIsMounted) {
     return;
   }
   const id4 = element.dataset[optimizedAppearDataId];
@@ -10102,10 +10176,18 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
     window.MotionHasOptimisedAnimation = (elementId, valueName,) => {
       if (!elementId) return false;
       if (!valueName) {
-        return elementsWithAppearAnimations.has(elementId,);
+        return appearComplete.has(elementId,);
       }
       const animationId = appearStoreId(elementId, valueName,);
       return Boolean(appearAnimationStore.get(animationId,),);
+    };
+    window.MotionHandoffMarkAsComplete = (elementId) => {
+      if (appearComplete.has(elementId,)) {
+        appearComplete.set(elementId, true,);
+      }
+    };
+    window.MotionHandoffIsComplete = (elementId) => {
+      return appearComplete.get(elementId,) === true;
     };
     window.MotionCancelOptimisedAnimation = (elementId, valueName, frame2, canResume,) => {
       const animationId = appearStoreId(elementId, valueName,);
@@ -10162,7 +10244,7 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
     },);
     if (onReady) onReady(appearAnimation,);
   };
-  elementsWithAppearAnimations.add(id4,);
+  appearComplete.set(id4, false,);
   if (readyAnimation.ready) {
     readyAnimation.ready.then(startAnimation2,).catch(noop,);
   } else {
@@ -10418,7 +10500,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.33MQKLIW.js
+// https :https://app.framerstatic.com/framer.7LTCXNJW.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -30257,7 +30339,10 @@ function useLoop({
           ...transition,
           onComplete: () => resolve(),
         };
-        animate(values[key7], to[key7] ?? from[key7], opts,);
+        const target = to[key7] ?? from[key7];
+        if (typeof target === 'number') {
+          animate(values[key7], target, opts,);
+        }
       },);
     },),);
   };
@@ -30684,7 +30769,9 @@ function useStyleAppearEffect(options, ref,) {
             ...transitionWithFallback,
             onComplete: () => resolve(),
           };
-          animate(effect.values[key7], toValue, opts,);
+          if (typeof toValue === 'number') {
+            animate(effect.values[key7], toValue, opts,);
+          }
         }
       },);
     },),);
@@ -47408,7 +47495,7 @@ var package_default = {
     yargs: '^17.6.2',
   },
   peerDependencies: {
-    'framer-motion': '11.10.0',
+    'framer-motion': '11.11.7',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
