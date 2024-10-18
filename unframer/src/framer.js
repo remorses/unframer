@@ -10500,7 +10500,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.7LTCXNJW.js
+// https :https://app.framerstatic.com/framer.72PAIOGJ.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -31449,6 +31449,7 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
       cache: cache2,
     } = React4.useContext(StyleSheetContext,) ?? {};
     if (!isBrowser2()) {
+      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
       return /* @__PURE__ */ jsxs(Fragment, {
         children: [
@@ -31470,7 +31471,11 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
     }
     React4.useInsertionEffect(() => {
       if (componentSerializationId && componentsWithServerRenderedStyles.has(componentSerializationId,)) return;
-      const css2 = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
+      const css2 = isFunction(escapedCSS,)
+        ? escapedCSS(RenderTarget.current(),)
+        : Array.isArray(escapedCSS,)
+        ? escapedCSS
+        : escapedCSS.split('\n',);
       css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
     return /* @__PURE__ */ jsx(Component15, {
@@ -38837,23 +38842,24 @@ var EnforcerResolve = class extends EnforcerNode {
     }
     const collectionItems = yield Promise.all(
       Array.from(collections,).map(async (collection) => {
-        const pointers = input.tuples.map((tuple) => {
+        const pointers = [];
+        for (const tuple of input.tuples) {
           const pointer = tuple.getPointer(collection,);
-          assert(pointer, 'Pointer required to resolve field',);
-          return pointer;
-        },);
+          if (pointer) pointers.push(pointer,);
+        }
         const items = await collection.data.resolveItems(pointers,);
         assert(items.length === pointers.length, 'Invalid number of items',);
         return [collection, items,];
       },),
     );
-    return input.map(input.fields, (tuple, index,) => {
+    return input.map(input.fields, (tuple) => {
       const result = new Tuple();
       result.merge(tuple,);
       for (const [collection, items,] of collectionItems) {
-        const item = items[index];
-        assert(item, 'Item not found',);
         const pointer = tuple.getPointer(collection,);
+        if (!pointer) continue;
+        const item = items.shift();
+        assert(item, 'Item not found',);
         assert(item.pointer === pointer, 'Pointer mismatch',);
         for (const field of collection.fields) {
           const value = field.getValue(item,);
@@ -42735,6 +42741,8 @@ var GoogleFontSource = class {
       source: this.name,
     };
   }
+  //  CAUTION: This method has to be exactly the same as the one in fontStore. Because we are using the font selector to get open type features.
+  // https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/googleFonts.ts
   static createSelector(family, variant,) {
     return `${googleFontSelectorPrefix}${family}-${variant}`;
   }
