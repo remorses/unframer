@@ -1,5 +1,16 @@
 # unframer
 
+## 2.6.5
+
+### Patch Changes
+
+-   8aa502c: Update framer to 2.4.1, update framer motion to 11.10.0
+-   8d88cb3: Update framer to 2.4.1, update framer motion to 11.11.7
+-   e47cb83: Update framer to 2.4.1, update framer motion to 11.3.23
+-   731c490: Update framer to 2.4.1, update framer motion to 11.3.28
+-   d303a7f: Update framer to 2.4.1, update framer motion to 11.3.29
+-   d565496: Update framer to 2.4.1, update framer motion to 11.3.31
+
 ## 2.6.4
 
 ### Patch Changes
