@@ -10500,7 +10500,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.72PAIOGJ.js
+// https :https://app.framerstatic.com/framer.4VQIUXMH.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13656,6 +13656,7 @@ var SuspenseErrorBoundary = class extends Component {
     if (this.state.error instanceof ErrorBoundaryCaughtError) {
       throw this.state.error.cause;
     }
+    window.__framer_STPD_OPT_OUT__ = true;
     return jsx(Suspense2, {
       children: this.props.fallbackChildren,
     },);
@@ -13663,7 +13664,7 @@ var SuspenseErrorBoundary = class extends Component {
 };
 var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined' || window.__framer_STPD_OPT_OUT__) return null;
   throw suspendPromise;
 }
 function SuspenseThatPreservesDom({
