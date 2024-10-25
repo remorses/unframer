@@ -10500,7 +10500,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.4VQIUXMH.js
+// https :https://app.framerstatic.com/framer.ZTFS4ASG.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12479,6 +12479,7 @@ function useAfterPaintEffect(fn, deps, options,) {
   }, deps,);
 }
 var noop2 = () => {};
+var EMPTY_ARRAY = [];
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
   let resultPath = path;
@@ -13788,7 +13789,7 @@ function Router({
   collectionUtils,
   routes,
   initialLocaleId,
-  locales = [],
+  locales = EMPTY_ARRAY,
   preserveQueryParams = false,
   enableAsyncURLUpdates = false,
 },) {
@@ -19462,7 +19463,7 @@ var richTextCSSRules = [
   `
         code.framer-text,
         code.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
@@ -19497,7 +19498,7 @@ var richTextCSSRules = [
   `
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
@@ -19519,7 +19520,7 @@ var richTextCSSRules = [
   `
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
@@ -21731,7 +21732,7 @@ function memoize(fn,) {
   };
 }
 var reactPropsRegex =
-  /^(?:children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|[dkrxyz]|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y1|y2|yChannelSelector|zoomAndPan|for|class|autofocus|(?:[Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*)$/;
+  /^(?:children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|[dkrxyz]|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y1|y2|yChannelSelector|zoomAndPan|for|class|autofocus|(?:[Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*)$/u;
 var isPropValid = /* @__PURE__ */ memoize((prop) =>
   reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
   /* Z+1 */
@@ -21835,6 +21836,7 @@ function StaticImage({
   return /* @__PURE__ */ jsx('img', {
     ref: imageRef,
     decoding: 'async',
+    fetchpriority: image.fetchPriority,
     loading: image.loading,
     sizes: image.sizes,
     srcSet: image.srcSet,
@@ -22065,7 +22067,7 @@ var isWebKit = () => {
 };
 var webkitVersion = () => {
   let version2 = -1;
-  const regexp = /AppleWebKit\/([\d.]+)/;
+  const regexp = /AppleWebKit\/([\d.]+)/u;
   const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
   if (result && result[1]) {
     version2 = parseFloat(result[1],);
@@ -22074,22 +22076,22 @@ var webkitVersion = () => {
 };
 var safariVersion = () => {
   let version2 = -1;
-  const regexp = /Version\/([\d.]+)/;
+  const regexp = /Version\/([\d.]+)/u;
   const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
   if (result && result[1]) {
     version2 = parseFloat(result[1],);
   }
   return version2;
 };
-var isChrome = () => safeNavigator && /Chrome/.test(safeNavigator.userAgent,) && /Google Inc/.test(safeNavigator.vendor,) && !isEdge();
-var isSafari = () => safeNavigator && /Safari/.test(safeNavigator.userAgent,) && /Apple Computer/.test(safeNavigator.vendor,);
-var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/.test(safeNavigator.userAgent,);
-var isFramerX = () => safeNavigator && /FramerX/.test(safeNavigator.userAgent,);
-var isEdge = () => safeNavigator && /Edg\//.test(safeNavigator.userAgent,);
-var isAndroid = () => safeNavigator && /android/i.test(safeNavigator.userAgent,);
-var isIOS = () => safeNavigator && /iPhone|iPod|iPad/i.test(safeNavigator.platform,);
-var isMacOS = () => safeNavigator && /Mac/.test(safeNavigator.platform,);
-var isWindows = () => safeNavigator && /Win/.test(safeNavigator.platform,);
+var isChrome = () => safeNavigator && /Chrome/u.test(safeNavigator.userAgent,) && /Google Inc/u.test(safeNavigator.vendor,) && !isEdge();
+var isSafari = () => safeNavigator && /Safari/u.test(safeNavigator.userAgent,) && /Apple Computer/u.test(safeNavigator.vendor,);
+var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/u.test(safeNavigator.userAgent,);
+var isFramerX = () => safeNavigator && /FramerX/u.test(safeNavigator.userAgent,);
+var isEdge = () => safeNavigator && /Edg\//u.test(safeNavigator.userAgent,);
+var isAndroid = () => safeNavigator && /android/iu.test(safeNavigator.userAgent,);
+var isIOS = () => safeNavigator && /iPhone|iPod|iPad/iu.test(safeNavigator.platform,);
+var isMacOS = () => safeNavigator && /Mac/u.test(safeNavigator.platform,);
+var isWindows = () => safeNavigator && /Win/u.test(safeNavigator.platform,);
 var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
 var isDesktop = () => deviceType() === 'desktop';
 var isPhone = () => deviceType() === 'phone';
@@ -22099,7 +22101,7 @@ var isFileUrl = (url) => url.startsWith('file://',);
 var isDataUrl = (url) => url.startsWith('data:',);
 var isTest = () => import_process.default.env.NODE_ENV === 'test';
 var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
-var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/.test(url,);
+var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/u.test(url,);
 var isLocalUrl = (url) => {
   if (isFileUrl(url,)) return true;
   if (isLocalServerUrl(url,)) return true;
@@ -22120,7 +22122,7 @@ var isJP2Supported = function () {
 var isWebPSupported = () => isChrome();
 var deviceType = () => {
   if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
-  if (safeNavigator && /mobi/i.test(safeNavigator.userAgent,)) return 'phone';
+  if (safeNavigator && /mobi/iu.test(safeNavigator.userAgent,)) return 'phone';
   return 'desktop';
 };
 var deviceOS = () => {
@@ -22190,7 +22192,7 @@ function layoutHintDataPropsForCenter(center,) {
   return props;
 }
 function nodeIdFromString(str,) {
-  return str.replace(/^id_/, '',).replace(/\\/g, '',);
+  return str.replace(/^id_/u, '',).replace(/\\/gu, '',);
 }
 function countNodeRender() {
   if (true) return;
@@ -22755,7 +22757,7 @@ var ConvertColor = {
     return color2.a !== 1 ? Color.toRgbString(color2,) : Color.toHexString(color2,);
   },
 };
-var CSSVariableRegExp = /var\(.+\)/;
+var CSSVariableRegExp = /var\(.+\)/u;
 var colorCache = /* @__PURE__ */ new Map();
 function cachedMultiplyAlpha(s, a,) {
   const key7 = [s, a,];
@@ -33081,7 +33083,7 @@ function resolvePageScope(pageLink, router,) {
 var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
-var maxTime = 3e3;
+var maxTime = 1e4;
 async function calculateProofOfWork() {
   const target = '0'.repeat(difficulty,);
   const startTime = Date.now();
@@ -33133,6 +33135,21 @@ function addUTMTagsToFormData(data2, document2,) {
     }
   } catch (e) {}
 }
+var pendingState = {
+  state: 'pending',
+};
+var successState = {
+  state: 'success',
+};
+var incompleteState = {
+  state: 'incomplete',
+};
+var completeState = {
+  state: 'complete',
+};
+var errorState = {
+  state: 'error',
+};
 function formReducer({
   state: state2,
 }, {
@@ -33140,33 +33157,25 @@ function formReducer({
 },) {
   switch (type) {
     case 'complete':
+      if (state2 === 'error') return errorState;
+      return completeState;
     case 'incomplete':
-      if (state2 === 'error') {
-        return {
-          state: 'error',
-        };
-      }
-      return {
-        state: type,
-      };
+      if (state2 === 'error') return errorState;
+      return incompleteState;
     case 'submit':
-      return {
-        state: 'pending',
-      };
+      return pendingState;
     case 'success':
-      return {
-        state: 'success',
-      };
+      return successState;
     case 'error':
-      return {
-        state: 'error',
-      };
+      return errorState;
     default:
       assertNever(type,);
   }
 }
-function stateCanSubmitForm(state2,) {
-  return state2.state === 'incomplete' || state2.state === 'complete';
+function stateCanSubmitForm({
+  state: state2,
+},) {
+  return state2 === 'incomplete' || state2 === 'complete';
 }
 function preventDefault(e,) {
   e.preventDefault();
@@ -33183,7 +33192,7 @@ function openExternalLinkInCurrentTab(link, formRef,) {
   linkElement.remove();
 }
 var FormContext = React4.createContext(void 0,);
-var FormContainer = /* @__PURE__ */ React4.forwardRef(({
+var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
   action,
   children,
   redirectUrl,
@@ -33191,15 +33200,13 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(({
   onError,
   onLoading,
   ...props
-}, forwardedRef,) => {
+}, forwardedRef,) {
   const fallbackRef = React4.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
-  const [state2, dispatch,] = React4.useReducer(formReducer, {
-    state: 'incomplete',
-  },);
+  const [state2, dispatch,] = React4.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
   } = useLocaleInfo();
@@ -41064,7 +41071,7 @@ function usePreloadQuery() {
   }, [activeLocale,],);
 }
 function getWhereExpressionFromPathVariables(pathVariables, collection,) {
-  const entries = Object.entries(pathVariables,).filter(([, value,],) => {
+  const entries = Object.entries(pathVariables ?? {},).filter(([, value,],) => {
     if (isUndefined(value,)) return false;
     if (isObject2(value,)) return false;
     return true;
@@ -42721,7 +42728,7 @@ var GoogleFontSource = class {
         weight: 400,
       };
     }
-    const match = /(\d*)(normal|italic)?/.exec(variant,);
+    const match = /(\d*)(normal|italic)?/u.exec(variant,);
     if (!match) return null;
     const weight = parseInt(match[1] || '400',);
     const style = match[2] === 'italic' ? 'italic' : 'normal';
@@ -43361,6 +43368,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['FontLetterSpacing'] = '--framer-input-font-letter-spacing';
   FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
   FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
+  FormInputStyleVariableNames2['FontOpenType'] = '--framer-input-font-open-type-features';
   FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
   FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
   FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
@@ -43423,6 +43431,7 @@ var sharedInputCSS = [
     fontSize: css.variable(Var.FontSize,),
     fontStyle: css.variable(Var.FontStyle,),
     color: css.variable(Var.FontColor,),
+    fontFeatureSettings: css.variable(Var.FontOpenType,),
     border: 'none',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
@@ -44182,7 +44191,7 @@ var trimSlugRegExp = /^-+|-+$/gu;
 function slugify(value,) {
   return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
 }
-var htmlRegExp = /[&<>'"]/g;
+var htmlRegExp = /[&<>'"]/gu;
 var escapeHTML = (str) =>
   str.replace(htmlRegExp, (tag) =>
     ({
@@ -44199,7 +44208,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
     var _a, _b;
     if (tag.toLowerCase() !== 'a') return original;
     const href = value1 || value2;
-    const pageLink = parseFramerPageLink(href.replace(/&amp;/g, '&',),);
+    const pageLink = parseFramerPageLink(href.replace(/&amp;/gu, '&',),);
     if (!pageLink || !pageLink.target) return original;
     const targetRoute = getRoute(pageLink.target,);
     if (!isRoute(targetRoute,) || !isRoute(currentRoute,)) return original;
@@ -44469,7 +44478,7 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
         var _a;
         const isLastWord = wordIndex === lastWordIndex;
         const short = word.length <= 12;
-        return /* @__PURE__ */ jsxs(Fragment, {
+        return /* @__PURE__ */ jsxs(React2.Fragment, {
           children: [
             /* @__PURE__ */ jsx('span', {
               style: {
@@ -44484,10 +44493,10 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
                   children: char,
                 }, char + i,);
               },),
-            }, word + wordIndex,),
+            },),
             isLastWord ? null : ' ',
           ],
-        },);
+        }, word + wordIndex + isLastWord,);
       },);
     }
     case 'word': {
@@ -44497,16 +44506,16 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
         const isLastWord = i === lastWordIndex;
         const ref = React2.createRef();
         elements.add(ref,);
-        return /* @__PURE__ */ jsxs(Fragment, {
+        return /* @__PURE__ */ jsxs(React2.Fragment, {
           children: [
             /* @__PURE__ */ jsx('span', {
               ref,
               style,
               children: char,
-            }, char + i,),
+            },),
             isLastWord ? null : ' ',
           ],
-        },);
+        }, char + i + isLastWord,);
       },);
     }
     case 'element':
@@ -45252,7 +45261,7 @@ function isAssetReference(value,) {
   return value.startsWith(`data:${mediaType2}`,);
 }
 function imageUrlForAsset(asset, pixelSize,) {
-  if (/^\w+:/.test(asset,) && !isAssetReference(asset,)) return asset;
+  if (/^\w+:/u.test(asset,) && !isAssetReference(asset,)) return asset;
   if (typeof pixelSize !== 'number') pixelSize = void 0;
   else if (pixelSize <= 512) pixelSize = 512;
   else if (pixelSize <= 1024) pixelSize = 1024;
@@ -47346,7 +47355,7 @@ function inspectObjectType(item,) {
     if (!str) {
       return null;
     }
-    const regex2 = /\[object (\w+)\]/;
+    const regex2 = /\[object (\w+)\]/u;
     const match = regex2.exec(str,);
     if (match) {
       return match[1];
@@ -47390,7 +47399,7 @@ function inspect(item, max, l,) {
     return `${item}`;
   }
   if (isFunction(item,)) {
-    let code = item.toString().slice('function '.length,).replace(/\n/g, '',).replace(/\s+/g, ' ',);
+    let code = item.toString().slice('function '.length,).replace(/\n/gu, '',).replace(/\s+/gu, ' ',);
     const limit = 50;
     if (code.length > limit && l > 0) {
       code = `${code.slice(0, +limit + 1 || void 0,).trim()}\u2026 }`;
@@ -47406,7 +47415,7 @@ function inspect(item, max, l,) {
   if (isObject2(item,)) {
     let objectInfo;
     const objectType = inspectObjectType(item,);
-    if (/HTML\w+?Element/.test(objectType,)) {
+    if (/HTML\w+?Element/u.test(objectType,)) {
       return `<${objectType}>`;
     }
     if (l > max) {
@@ -47490,7 +47499,7 @@ var package_default = {
     '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.19',
     '@typescript-eslint/eslint-plugin': '^8.2.0',
-    '@typescript-eslint/parser': '^8.5.0',
+    '@typescript-eslint/parser': '^8.8.0',
     chalk: '^4.1.2',
     eslint: '^8.57.0',
     'eslint-plugin-framer-studio': 'workspace:*',
