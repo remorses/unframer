@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev  --port 5543",
+        "gen": "pnpm --filter unframer build && pnpm unframer",
         "build": "pnpm --filter unframer build && next build",
         "start": "next start",
         "lint": "next lint"
