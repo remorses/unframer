@@ -17,6 +17,7 @@ import Collection from '@/framer/collection'
 import Card from '@/framer/card'
 import GrowthSpaceMenu from '@/framer/GrowthSpaceMenu'
 import Footer from '@/framer/footer'
+import Issue17FramerComponent from '@/framer/issue-17'
 import { use } from 'react'
 
 const proxyThatLogsProps = (original) =>
@@ -55,7 +56,7 @@ function Home() {
                         variants={{ base: 'Phone', lg: 'Desktop' }}
                     />
                 </div>
-                
+
                 <div className=' top-[200px] flex z-10 w-full absolute flex-col items-center'>
                     <Menus className=' mx-auto' />
                 </div>
@@ -96,7 +97,8 @@ function Home() {
                     />
                 </div>
                 <div className='pt-[200px]'></div>
-                <GrowthSpaceMenu  variant='2' />
+                <GrowthSpaceMenu variant='2' />
+                {/* <Issue17FramerComponent /> */}
                 <div className='pt-[200px]'></div>
                 <Footer.Responsive
                     footerText={`© ${new Date().getFullYear()} unframer`}

@@ -287,7 +287,7 @@ body { --framer-will-change-override: none; }
 
         code.framer-text,
         code.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
@@ -322,7 +322,7 @@ body { --framer-will-change-override: none; }
 
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
@@ -344,7 +344,7 @@ body { --framer-will-change-override: none; }
 
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
