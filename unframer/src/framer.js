@@ -10500,7 +10500,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.ZTFS4ASG.js
+// https :https://app.framerstatic.com/framer.4TN5JEGV.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -33250,15 +33250,18 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     var _a, _b, _c, _d, _e, _f;
     event.preventDefault();
     if (!action || !projectHash) return;
+    dispatch({
+      type: 'submit',
+    },);
     const data2 = new FormData(event.currentTarget,);
+    await interactionResponse({
+      priority: 'user-blocking',
+    },);
     addUTMTagsToFormData(data2, safeWindow.document,);
     for (const [key7, value,] of data2) {
       if (value instanceof File) data2.delete(key7,);
     }
     try {
-      dispatch({
-        type: 'submit',
-      },);
       (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
       await submitForm(action, data2, projectHash,);
       dispatch({
@@ -33289,10 +33292,15 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
       void handleSubmit(event,);
     }
   };
-  const checkValidity = (e) => {
-    dispatch({
-      type: anyEmptyRequiredFields(e.currentTarget,) ? 'incomplete' : 'complete',
+  const checkValidity = async (e) => {
+    await interactionResponse({
+      priority: 'background',
     },);
+    startTransition2(() =>
+      dispatch({
+        type: anyEmptyRequiredFields(e.currentTarget,) ? 'incomplete' : 'complete',
+      },)
+    );
   };
   return /* @__PURE__ */ jsx(motion.form, {
     ...props,
@@ -37695,6 +37703,53 @@ var RelationalIntersection = class extends RelationalNode {
     return left.intersection(right,);
   }
 };
+var ScalarEquals = class extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarEquals', this.left, this.right,);
+  }
+  toString() {
+    return `${this.left} == ${this.right}`;
+  }
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new ScalarEquals(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.equal(left, right, collation,),
+    };
+  }
+};
 var RelationalLeftJoin = class extends RelationalNode {
   constructor(left, right, constraint,) {
     super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
@@ -37751,9 +37806,47 @@ var RelationalLeftJoin = class extends RelationalNode {
     const constraint = this.constraint.getOptimized();
     return new RelationalLeftJoin(left, right, constraint,);
   }
+  /** Optimized path for equality constraints that runs in O(n + m) time. */
+  *evaluateScalarEquals(result, constraint, context,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
+    const joinKeyMap = /* @__PURE__ */ new Map();
+    for (const rightTuple of right.tuples) {
+      const rightValue = yield* constraint.right.evaluate(context, rightTuple,);
+      const key7 = JSON.stringify((rightValue == null ? void 0 : rightValue.value) ?? null,);
+      const tuplesForKey = joinKeyMap.get(key7,) ?? [];
+      tuplesForKey.push(rightTuple,);
+      joinKeyMap.set(key7, tuplesForKey,);
+    }
+    for (const leftTuple of left.tuples) {
+      const leftValue = yield* constraint.left.evaluate(context, leftTuple,);
+      const key7 = JSON.stringify((leftValue == null ? void 0 : leftValue.value) ?? null,);
+      const matches = joinKeyMap.get(key7,) ?? [];
+      if (matches.length === 0) {
+        result.push(leftTuple,);
+      } else {
+        for (const rightTuple of matches) {
+          const joinedTuple = new Tuple();
+          joinedTuple.merge(leftTuple,);
+          joinedTuple.merge(rightTuple,);
+          result.push(joinedTuple,);
+        }
+      }
+    }
+    return result;
+  }
   *evaluate(context,) {
     const outputFields = this.getOutputFields();
     const result = new Relation(outputFields,);
+    if (this.constraint instanceof ScalarEquals) {
+      yield* this.evaluateScalarEquals(result.tuples, this.constraint, context,);
+      return result;
+    }
     const {
       left,
       right,
@@ -37836,9 +37929,47 @@ var RelationalRightJoin = class extends RelationalNode {
     const constraint = this.constraint.getOptimized();
     return new RelationalRightJoin(left, right, constraint,);
   }
+  /** Optimized path for equality constraints that runs in O(n + m) time. */
+  *evaluateScalarEquals(result, constraint, context,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
+    const joinKeyMap = /* @__PURE__ */ new Map();
+    for (const leftTuple of left.tuples) {
+      const leftValue = yield* constraint.left.evaluate(context, leftTuple,);
+      const key7 = JSON.stringify((leftValue == null ? void 0 : leftValue.value) ?? null,);
+      const tuplesForKey = joinKeyMap.get(key7,) ?? [];
+      tuplesForKey.push(leftTuple,);
+      joinKeyMap.set(key7, tuplesForKey,);
+    }
+    for (const rightTuple of right.tuples) {
+      const rightValue = yield* constraint.right.evaluate(context, rightTuple,);
+      const key7 = JSON.stringify((rightValue == null ? void 0 : rightValue.value) ?? null,);
+      const matches = joinKeyMap.get(key7,) ?? [];
+      if (matches.length === 0) {
+        result.push(rightTuple,);
+      } else {
+        for (const leftTuple of matches) {
+          const joinedTuple = new Tuple();
+          joinedTuple.merge(rightTuple,);
+          joinedTuple.merge(leftTuple,);
+          result.push(joinedTuple,);
+        }
+      }
+    }
+    return result;
+  }
   *evaluate(context,) {
     const outputFields = this.getOutputFields();
     const result = new Relation(outputFields,);
+    if (this.constraint instanceof ScalarEquals) {
+      yield* this.evaluateScalarEquals(result.tuples, this.constraint, context,);
+      return result;
+    }
     const {
       left,
       right,
@@ -38132,53 +38263,6 @@ var ScalarEndsWith = class extends ScalarNode {
     return {
       type: 'boolean',
       value: DatabaseValue.endsWith(source, target, collation4,),
-    };
-  }
-};
-var ScalarEquals = class extends ScalarNode {
-  constructor(left, right,) {
-    const referencedFields = new Fields();
-    referencedFields.merge(left.referencedFields,);
-    referencedFields.merge(right.referencedFields,);
-    const referencedOuterFields = new Fields();
-    referencedOuterFields.merge(left.referencedOuterFields,);
-    referencedOuterFields.merge(right.referencedOuterFields,);
-    const isSynchronous = left.isSynchronous && right.isSynchronous;
-    super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
-    __publicField(this, 'definition', {
-      type: 'boolean',
-      isNullable: false,
-    },);
-  }
-  getHash() {
-    return calculateHash('ScalarEquals', this.left, this.right,);
-  }
-  toString() {
-    return `${this.left} == ${this.right}`;
-  }
-  optimize(optimizer,) {
-    const leftCost = this.left.optimize(optimizer,);
-    const rightCost = this.right.optimize(optimizer,);
-    return Cost.max(leftCost, rightCost,);
-  }
-  getOptimized() {
-    const left = this.left.getOptimized();
-    const right = this.right.getOptimized();
-    return new ScalarEquals(left, right,);
-  }
-  *evaluate(context, tuple,) {
-    const {
-      left,
-      right,
-    } = yield* evaluateObject({
-      left: this.left.evaluate(context, tuple,),
-      right: this.right.evaluate(context, tuple,),
-    },);
-    return {
-      type: 'boolean',
-      value: DatabaseValue.equal(left, right, collation,),
     };
   }
 };
@@ -39995,6 +40079,8 @@ var QueryEngine = class {
     return this.queryOld(query, locale,);
   }
   async queryNew(query, locale,) {
+    log.debug(`Query:
+${stringifyQuery(query,)}`,);
     const optimizer = new Optimizer(query, locale,);
     const [root, namedFields,] = optimizer.optimize();
     const relation = await root.evaluateAsync();
@@ -41226,6 +41312,9 @@ function useVariantState({
   const forceUpdate = useForceUpdate3();
   const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
+  const {
+    wrapUpdatesInTransitions,
+  } = useLibraryFeatures();
   const internalState = React4.useRef({
     isHovered: false,
     isPressed: false,
@@ -41279,7 +41368,7 @@ function useVariantState({
     if (nextBase !== baseVariant2 || nextGesture !== gestureVariant2) {
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      if (isError2) {
+      if (isError2 || wrapUpdatesInTransitions) {
         React4.startTransition(() => {
           forceUpdate();
         },);
@@ -41287,7 +41376,7 @@ function useVariantState({
         forceUpdate();
       }
     }
-  }, [resolveNextVariant, forceUpdate,],);
+  }, [resolveNextVariant, forceUpdate, wrapUpdatesInTransitions,],);
   const setVariant = React4.useCallback((proposedVariant) => {
     const {
       defaultVariant: defaultVariant2,
@@ -41303,9 +41392,15 @@ function useVariantState({
       internalState.current.isError = false;
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      forceUpdate();
+      if (wrapUpdatesInTransitions) {
+        React4.startTransition(() => {
+          forceUpdate();
+        },);
+      } else {
+        forceUpdate();
+      }
     }
-  }, [resolveNextVariant, forceUpdate,],);
+  }, [resolveNextVariant, wrapUpdatesInTransitions, forceUpdate,],);
   const clearLoadingGesture = React4.useCallback(() => {
     const {
       baseVariant: baseVariant2,
@@ -41466,6 +41561,9 @@ var withVariantAppearEffect = (Component15) =>
         ref: forwardedRef,
       },);
     }
+    const {
+      wrapUpdatesInTransitions,
+    } = useLibraryFeatures();
     const fallbackRef = React4.useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const [options, rest,] = extractPrefixedProps(props, keys2,);
@@ -41488,9 +41586,21 @@ var withVariantAppearEffect = (Component15) =>
       if (animateState.current === appears) return;
       animateState.current = appears;
       if (appears) {
-        setVariant(visibleVariantId,);
+        if (wrapUpdatesInTransitions) {
+          React4.startTransition(() => {
+            setVariant(visibleVariantId,);
+          },);
+        } else {
+          setVariant(visibleVariantId,);
+        }
       } else {
-        setVariant(obscuredVariantId,);
+        if (wrapUpdatesInTransitions) {
+          React4.startTransition(() => {
+            setVariant(obscuredVariantId,);
+          },);
+        } else {
+          setVariant(obscuredVariantId,);
+        }
       }
     }, {
       enabled: variantAppearEffectEnabled,
@@ -41520,9 +41630,15 @@ var withVariantAppearEffect = (Component15) =>
         const variant = ((_a = targets[index]) == null ? void 0 : _a.target) ?? void 0;
         if (variant === currentVariant) return;
         currentVariant = variant;
-        setVariant(variant,);
+        if (wrapUpdatesInTransitions) {
+          React4.startTransition(() => {
+            setVariant(variant,);
+          },);
+        } else {
+          setVariant(variant,);
+        }
       },);
-    }, [animateOnce, threshold, targets, props.variant,],);
+    }, [animateOnce, threshold, targets, props.variant, scrollDirection, exitTarget, wrapUpdatesInTransitions,],);
     useScrollDirectionChange(scrollDirection, setVariant, {
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
@@ -43560,7 +43676,7 @@ var passwordManagerIgnoreDataProps = {
   // is not always respected by some browsers or password managers.
   autocomplete: 'off',
 };
-var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput(props, ref,) {
+var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(props, ref,) {
   const {
     autoFocus,
     className: className2,
@@ -43586,17 +43702,19 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
     onValid,
     ...rest
   } = props;
-  const [hasValue, setHasValue,] = React4.useState(!!defaultValue,);
-  const handleChange = React4.useCallback((e) => {
+  const [hasValue, setHasValue,] = useState(!!defaultValue,);
+  const [prevDefaultValue, setPrevDefaultValue,] = useState();
+  if (defaultValue !== prevDefaultValue) {
+    setHasValue(!!defaultValue,);
+    setPrevDefaultValue(defaultValue,);
+  }
+  const handleChange = useCallback(async (e) => {
+    await interactionResponse();
     const newValue = e.target.value;
     onChange == null ? void 0 : onChange(e,);
-    setHasValue(!!newValue,);
+    startTransition2(() => setHasValue(!!newValue,));
   }, [onChange,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
-  useEffect(() => {
-    setHasValue(!!defaultValue,);
-  }, [defaultValue,],);
-  const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
       type: 'hidden',
@@ -43604,6 +43722,7 @@ var PlainTextInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInp
       defaultValue,
     },);
   }
+  const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
   return /* @__PURE__ */ jsx(motion.div, {
     ref,
     style,
