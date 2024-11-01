@@ -10500,7 +10500,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.4TN5JEGV.js
+// https :https://app.framerstatic.com/framer.E4SLPEXE.js
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -33293,12 +33293,13 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     }
   };
   const checkValidity = async (e) => {
+    const target = e.currentTarget;
     await interactionResponse({
       priority: 'background',
     },);
     startTransition2(() =>
       dispatch({
-        type: anyEmptyRequiredFields(e.currentTarget,) ? 'incomplete' : 'complete',
+        type: anyEmptyRequiredFields(target,) ? 'incomplete' : 'complete',
       },)
     );
   };
