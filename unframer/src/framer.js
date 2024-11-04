@@ -1,4 +1,4836 @@
-// https :https://app.framerstatic.com/chunk-4UHJZEF4.js
+var __defProp = Object.defineProperty;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __esm = (fn, res,) =>
+  function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn,)[0]])(fn = 0,)), res;
+  };
+var __export = (target, all,) => {
+  for (var name in all) {
+    __defProp(target, name, {
+      get: all[name],
+      enumerable: true,
+    },);
+  }
+};
+
+// https :https://app.framerstatic.com/chunk-4RACSZOF.js
+var __create,
+  __defProp2,
+  __getOwnPropDesc,
+  __getOwnPropNames2,
+  __getProtoOf,
+  __hasOwnProp,
+  __defNormalProp,
+  __commonJS,
+  __export2,
+  __copyProps,
+  __toESM,
+  __publicField,
+  __accessCheck,
+  __privateGet,
+  __privateAdd,
+  __privateSet,
+  __privateMethod;
+var init_chunk_4RACSZOF = __esm({
+  'https :https://app.framerstatic.com/chunk-4RACSZOF.js'() {
+    __create = Object.create;
+    __defProp2 = Object.defineProperty;
+    __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+    __getOwnPropNames2 = Object.getOwnPropertyNames;
+    __getProtoOf = Object.getPrototypeOf;
+    __hasOwnProp = Object.prototype.hasOwnProperty;
+    __defNormalProp = (obj, key7, value,) =>
+      key7 in obj
+        ? __defProp2(obj, key7, {
+          enumerable: true,
+          configurable: true,
+          writable: true,
+          value,
+        },)
+        : obj[key7] = value;
+    __commonJS = (cb, mod,) =>
+      function __require() {
+        return mod || (0, cb[__getOwnPropNames2(cb,)[0]])(
+          (mod = {
+            exports: {},
+          }).exports,
+          mod,
+        ),
+          mod.exports;
+      };
+    __export2 = (target, all,) => {
+      for (var name in all) {
+        __defProp2(target, name, {
+          get: all[name],
+          enumerable: true,
+        },);
+      }
+    };
+    __copyProps = (to, from, except, desc,) => {
+      if (from && typeof from === 'object' || typeof from === 'function') {
+        for (let key7 of __getOwnPropNames2(from,)) {
+          if (!__hasOwnProp.call(to, key7,) && key7 !== except) {
+            __defProp2(to, key7, {
+              get: () => from[key7],
+              enumerable: !(desc = __getOwnPropDesc(from, key7,)) || desc.enumerable,
+            },);
+          }
+        }
+      }
+      return to;
+    };
+    __toESM = (mod, isNodeMode, target,) => (target = mod != null ? __create(__getProtoOf(mod,),) : {},
+      __copyProps(
+        // If the importer is in node compatibility mode or this is not an ESM
+        // file that has been converted to a CommonJS file using a Babel-
+        // compatible transform (i.e. "__esModule" has not been set), then set
+        // "default" to the CommonJS "module.exports" for node compatibility.
+        isNodeMode || !mod || !mod.__esModule
+          ? __defProp2(target, 'default', {
+            value: mod,
+            enumerable: true,
+          },)
+          : target,
+        mod,
+      ));
+    __publicField = (obj, key7, value,) => {
+      __defNormalProp(obj, typeof key7 !== 'symbol' ? key7 + '' : key7, value,);
+      return value;
+    };
+    __accessCheck = (obj, member, msg,) => {
+      if (!member.has(obj,)) throw TypeError('Cannot ' + msg,);
+    };
+    __privateGet = (obj, member, getter,) => {
+      __accessCheck(obj, member, 'read from private field',);
+      return getter ? getter.call(obj,) : member.get(obj,);
+    };
+    __privateAdd = (obj, member, value,) => {
+      if (member.has(obj,)) throw TypeError('Cannot add the same private member more than once',);
+      member instanceof WeakSet ? member.add(obj,) : member.set(obj, value,);
+    };
+    __privateSet = (obj, member, value, setter,) => {
+      __accessCheck(obj, member, 'write to private field',);
+      setter ? setter.call(obj, value,) : member.set(obj, value,);
+      return value;
+    };
+    __privateMethod = (obj, member, method,) => {
+      __accessCheck(obj, member, 'access private method',);
+      return method;
+    };
+  },
+},);
+
+// https :https://app.framerstatic.com/google-36EP2W3I.js
+var google_36EP2W3I_exports = {};
+__export(google_36EP2W3I_exports, {
+  default: () => google_default,
+},);
+var google_default;
+var init_google_36EP2W3I = __esm({
+  'https :https://app.framerstatic.com/google-36EP2W3I.js'() {
+    init_chunk_4RACSZOF();
+    google_default = {
+      'GF;AR One Sans': [{
+        tag: 'ARRR',
+        minValue: 10,
+        maxValue: 60,
+        defaultValue: 10,
+        name: 'AR Retinal Resolution',
+      }, {
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Advent Pro': [{
+        tag: 'wdth',
+        minValue: 100,
+        maxValue: 200,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Afacad': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Afacad Flux': [{
+        tag: 'slnt',
+        minValue: -14,
+        maxValue: 14,
+        defaultValue: 0,
+        name: 'Slant',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Akshar': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Albert Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Alegreya': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Aleo': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Alexandria': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Alkatra': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Alumni Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Anaheim': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Andada Pro': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 840,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Anek Bangla': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Devanagari': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Gujarati': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Gurmukhi': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Kannada': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Latin': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Malayalam': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Odia': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Tamil': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Anek Telugu': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Antonio': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Anuphan': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Anybody': [{
+        tag: 'wdth',
+        minValue: 50,
+        maxValue: 150,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Archivo': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 600,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Archivo Narrow': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Arima': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Arimo': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Asap': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Assistant': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Azeret Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Ballet': [{
+        tag: 'opsz',
+        minValue: 16,
+        maxValue: 72,
+        defaultValue: 16,
+        name: 'Optical size',
+      },],
+      'GF;Baloo 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Bhai 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Bhaijaan 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Bhaina 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Chettan 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Da 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Paaji 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Tamma 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Tammudu 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Baloo Thambi 2': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Beiruti': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Besley': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Big Shoulders Display': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Big Shoulders Inline Display': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Big Shoulders Inline Text': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Big Shoulders Stencil Display': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Big Shoulders Stencil Text': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Big Shoulders Text': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;BioRhyme': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 100,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Bitter': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Bodoni Moda': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 6,
+        maxValue: 96,
+        defaultValue: 11,
+        name: 'Optical size',
+      },],
+      'GF;Bodoni Moda SC': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 6,
+        maxValue: 96,
+        defaultValue: 11,
+        name: 'Optical size',
+      },],
+      'GF;Bricolage Grotesque': [{
+        tag: 'opsz',
+        minValue: 12,
+        maxValue: 96,
+        defaultValue: 96,
+        name: 'Optical size',
+      }, {
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Brygada 1918': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Cabin': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Cairo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'slnt',
+        minValue: -11,
+        maxValue: 11,
+        defaultValue: 0,
+        name: 'Slant',
+      },],
+      'GF;Cairo Play': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'slnt',
+        minValue: -11,
+        maxValue: 11,
+        defaultValue: 0,
+        name: 'Slant',
+      },],
+      'GF;Catamaran': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Caveat': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Changa': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Chivo': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 500,
+        name: 'Weight',
+      },],
+      'GF;Chivo Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 500,
+        name: 'Weight',
+      },],
+      'GF;Cinzel': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Climate Crisis': [{
+        tag: 'YEAR',
+        minValue: 1979,
+        maxValue: 2050,
+        defaultValue: 1979,
+        name: 'Year',
+      },],
+      'GF;Comfortaa': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Comme': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Commissioner': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'slnt',
+        minValue: -12,
+        maxValue: 0,
+        defaultValue: 0,
+        name: 'Slant',
+      }, {
+        tag: 'FLAR',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Flare',
+      }, {
+        tag: 'VOLM',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Volume',
+      },],
+      'GF;Cormorant': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Crimson Pro': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Cuprum': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;DM Sans': [{
+        tag: 'opsz',
+        minValue: 9,
+        maxValue: 40,
+        defaultValue: 9,
+        name: 'Optical size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Dancing Script': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Danfo': [{
+        tag: 'ELSH',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Element Shape',
+      },],
+      'GF;Darker Grotesque': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Domine': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Dosis': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;DynaPuff': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;EB Garamond': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Eczar': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Edu AU VIC WA NT Dots': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu AU VIC WA NT Guides': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu AU VIC WA NT Hand': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu NSW ACT Foundation': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu QLD Beginner': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu SA Beginner': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu TAS Beginner': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu VIC WA NT Beginner': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;El Messiri': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Encode Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 75,
+        name: 'Width',
+      },],
+      'GF;Encode Sans SC': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 75,
+        name: 'Width',
+      },],
+      'GF;Epilogue': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Exo': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Exo 2': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Expletus Sans': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Familjen Grotesk': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Faustina': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Figtree': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Finlandica': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Fira Code': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Foldit': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Frank Ruhl Libre': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Fraunces': [{
+        tag: 'opsz',
+        minValue: 9,
+        maxValue: 144,
+        defaultValue: 9,
+        name: 'Optical Size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      }, {
+        tag: 'SOFT',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Softness',
+      }, {
+        tag: 'WONK',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 1,
+        name: 'Wonky',
+      },],
+      'GF;Fredoka': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Fustat': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Gabarito': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Gantari': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Gelasio': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Gemunu Libre': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Genos': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Geologica': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'CRSV',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0,
+        name: 'Cursive',
+      }, {
+        tag: 'SHRP',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Sharpness',
+      }, {
+        tag: 'slnt',
+        minValue: -12,
+        maxValue: 0,
+        defaultValue: 0,
+        name: 'Slant',
+      },],
+      'GF;Georama': [{
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 150,
+        defaultValue: 62.5,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Glory': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Gluten': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'slnt',
+        minValue: -13,
+        maxValue: 13,
+        defaultValue: 0,
+        name: 'Slant',
+      },],
+      'GF;Golos Text': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Grandstander': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Grenze Gotisch': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Hahmlet': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Handjet': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'ELGR',
+        minValue: 1,
+        maxValue: 2,
+        defaultValue: 1,
+        name: 'Element Grid',
+      }, {
+        tag: 'ELSH',
+        minValue: 0,
+        maxValue: 16,
+        defaultValue: 2,
+        name: 'Element Shape',
+      },],
+      'GF;Hanken Grotesk': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Hedvig Letters Serif': [{
+        tag: 'opsz',
+        minValue: 12,
+        maxValue: 24,
+        defaultValue: 24,
+        name: 'Optical size',
+      },],
+      'GF;Heebo': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Hepta Slab': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Honk': [{
+        tag: 'MORF',
+        minValue: 0,
+        maxValue: 45,
+        defaultValue: 15,
+        name: 'Morph',
+      }, {
+        tag: 'SHLN',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Shadow',
+      },],
+      'GF;Ibarra Real Nova': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Imbue': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 10,
+        maxValue: 100,
+        defaultValue: 10,
+        name: 'Optical size',
+      },],
+      'GF;Inconsolata': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 50,
+        maxValue: 200,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Instrument Sans': [{
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Inter': [{
+        tag: 'opsz',
+        minValue: 14,
+        maxValue: 32,
+        defaultValue: 14,
+        name: 'Optical size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Inter Tight': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Jaro': [{
+        tag: 'opsz',
+        minValue: 6,
+        maxValue: 72,
+        defaultValue: 14,
+        name: 'Optical size',
+      },],
+      'GF;JetBrains Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Josefin Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Josefin Slab': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Jost': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Jura': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Kablammo': [{
+        tag: 'MORF',
+        minValue: 0,
+        maxValue: 60,
+        defaultValue: 0,
+        name: 'Morph',
+      },],
+      'GF;Kalnia': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 100,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Kalnia Glaze': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 100,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Kameron': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Kantumruy Pro': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Karla': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Kode Mono': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Kreon': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Kufam': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Kumbh Sans': [{
+        tag: 'YOPQ',
+        minValue: 40,
+        maxValue: 300,
+        defaultValue: 300,
+        name: 'Thin Stroke',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Labrada': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;League Gothic': [{
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;League Spartan': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Lemonada': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Deca': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Exa': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Giga': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Mega': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Peta': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Tera': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lexend Zetta': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Libre Bodoni': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Libre Franklin': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Linefont': [{
+        tag: 'wdth',
+        minValue: 25,
+        maxValue: 200,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 4,
+        maxValue: 1e3,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Literata': [{
+        tag: 'opsz',
+        minValue: 7,
+        maxValue: 72,
+        defaultValue: 12,
+        name: 'Optical size',
+      }, {
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Lora': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;M PLUS 1': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;M PLUS 1 Code': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;M PLUS 2': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;M PLUS Code Latin': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 100,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Mada': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Manrope': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Manuale': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Marhey': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Markazi Text': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Martian Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 112.5,
+        defaultValue: 112.5,
+        name: 'Width',
+      },],
+      'GF;Material Symbols Outlined': [{
+        tag: 'FILL',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0,
+        name: 'Fill',
+      }, {
+        tag: 'GRAD',
+        minValue: -50,
+        maxValue: 200,
+        defaultValue: 0,
+        name: 'Grade',
+      }, {
+        tag: 'opsz',
+        minValue: 20,
+        maxValue: 48,
+        defaultValue: 24,
+        name: 'Optical Size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Material Symbols Rounded': [{
+        tag: 'FILL',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0,
+        name: 'Fill',
+      }, {
+        tag: 'GRAD',
+        minValue: -50,
+        maxValue: 200,
+        defaultValue: 0,
+        name: 'Grade',
+      }, {
+        tag: 'opsz',
+        minValue: 20,
+        maxValue: 48,
+        defaultValue: 24,
+        name: 'Optical Size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Material Symbols Sharp': [{
+        tag: 'FILL',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0,
+        name: 'Fill',
+      }, {
+        tag: 'GRAD',
+        minValue: -50,
+        maxValue: 200,
+        defaultValue: 0,
+        name: 'Grade',
+      }, {
+        tag: 'opsz',
+        minValue: 20,
+        maxValue: 48,
+        defaultValue: 24,
+        name: 'Optical Size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Maven Pro': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Merienda': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Merriweather Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Moderustic': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Mohave': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Monda': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Montagu Slab': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 16,
+        maxValue: 144,
+        defaultValue: 144,
+        name: 'Optical size',
+      },],
+      'GF;Montserrat': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Mulish': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Murecho': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;MuseoModerno': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Nabla': [{
+        tag: 'EDPT',
+        minValue: 0,
+        maxValue: 200,
+        defaultValue: 100,
+        name: 'Extrusion Depth',
+      }, {
+        tag: 'EHLT',
+        minValue: 0,
+        maxValue: 24,
+        defaultValue: 12,
+        name: 'Edge Highlight',
+      },],
+      'GF;Newsreader': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 6,
+        maxValue: 72,
+        defaultValue: 18,
+        name: 'Optical Size',
+      },],
+      'GF;Noto Emoji': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Kufi Arabic': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Naskh Arabic': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Nastaliq Urdu': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Rashi Hebrew': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Adlam': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Adlam Unjoined': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Arabic': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Armenian': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Balinese': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Bamum': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Bassa Vah': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Bengali': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Canadian Aboriginal': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Cham': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Cherokee': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Devanagari': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Display': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Ethiopic': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Georgian': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Gujarati': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Gunjala Gondi': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Gurmukhi': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans HK': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Hanifi Rohingya': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Hebrew': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans JP': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Javanese': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans KR': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Kannada': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Kawi': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Kayah Li': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Khmer': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Lao': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Lao Looped': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Lisu': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Malayalam': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Medefaidrin': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Meetei Mayek': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans NKo Unjoined': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Nag Mundari': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans New Tai Lue': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Ol Chiki': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Oriya': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans SC': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Sinhala': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Sora Sompeng': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Sundanese': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Symbols': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Syriac': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Syriac Eastern': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans TC': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Tai Tham': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Tamil': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Tangsa': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Telugu': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Thaana': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Sans Thai': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Sans Vithkuqi': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Armenian': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Bengali': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Devanagari': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Display': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Ethiopic': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Georgian': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Gujarati': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Gurmukhi': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif HK': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Hebrew': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif JP': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif KR': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Kannada': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Khmer': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Khojki': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Lao': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Malayalam': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif NP Hmong': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Oriya': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif SC': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Sinhala': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif TC': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Tamil': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Telugu': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Thai': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 62.5,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Noto Serif Tibetan': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Toto': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Vithkuqi': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Serif Yezidi': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Noto Traditional Nushu': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Nunito': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Nunito Sans': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 200,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'opsz',
+        minValue: 6,
+        maxValue: 12,
+        defaultValue: 12,
+        name: 'Optical size',
+      }, {
+        tag: 'YTLC',
+        minValue: 440,
+        maxValue: 540,
+        defaultValue: 500,
+        name: 'YTLC',
+      },],
+      'GF;Ojuju': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Onest': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Open Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Orbitron': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Oswald': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Outfit': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Overpass': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Overpass Mono': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Oxanium': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Pathway Extreme': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'opsz',
+        minValue: 8,
+        maxValue: 144,
+        defaultValue: 8,
+        name: 'Optical Size',
+      },],
+      'GF;Petrona': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Phudu': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Piazzolla': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 8,
+        maxValue: 30,
+        defaultValue: 30,
+        name: 'Optical size',
+      },],
+      'GF;Pixelify Sans': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Platypi': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Playfair': [{
+        tag: 'opsz',
+        minValue: 5,
+        maxValue: 1200,
+        defaultValue: 5,
+        name: 'Optical size',
+      }, {
+        tag: 'wdth',
+        minValue: 87.5,
+        maxValue: 112.5,
+        defaultValue: 112.5,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Playfair Display': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playpen Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AR': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AT': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AU NSW': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AU QLD': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AU SA': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AU TAS': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite AU VIC': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite BE VLG': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite BE WAL': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite BR': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite CA': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite CL': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite CO': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite CU': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite CZ': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite DE Grund': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite DE LA': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite DE SAS': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite DE VA': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite DK Loopet': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite DK Uloopet': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite ES': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite ES Deco': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite FR Moderne': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite FR Trad': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite GB J': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite GB S': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite HR': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite HR Lijeva': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite HU': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite ID': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite IE': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite IN': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite IS': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite IT Moderna': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite IT Trad': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite MX': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite NG Modern': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite NL': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite NO': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite NZ': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite PE': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite PL': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite PT': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite RO': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite SK': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite TZ': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite US Modern': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite US Trad': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite VN': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Playwrite ZA': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 400,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Plus Jakarta Sans': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Podkova': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Poltawski Nowy': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Pontano Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Public Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Quicksand': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;REM': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 500,
+        name: 'Weight',
+      },],
+      'GF;Radio Canada': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Radio Canada Big': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Raleway': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Rasa': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Readex Pro': [{
+        tag: 'wght',
+        minValue: 160,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'HEXP',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Hyper Expansion',
+      },],
+      'GF;Recursive': [{
+        tag: 'MONO',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0,
+        name: 'Monospace',
+      }, {
+        tag: 'CASL',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0,
+        name: 'Casual',
+      }, {
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 1e3,
+        defaultValue: 300,
+        name: 'Weight',
+      }, {
+        tag: 'slnt',
+        minValue: -15,
+        maxValue: 0,
+        defaultValue: 0,
+        name: 'Slant',
+      }, {
+        tag: 'CRSV',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 0.5,
+        name: 'Cursive',
+      },],
+      'GF;Red Hat Display': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Red Hat Mono': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Red Hat Text': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Red Rose': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Reddit Mono': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Reddit Sans': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Reddit Sans Condensed': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Reem Kufi': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Reem Kufi Fun': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Rethink Sans': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Roboto Condensed': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Roboto Flex': [{
+        tag: 'opsz',
+        minValue: 8,
+        maxValue: 144,
+        defaultValue: 14,
+        name: 'Optical Size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'GRAD',
+        minValue: -200,
+        maxValue: 150,
+        defaultValue: 0,
+        name: 'Grade',
+      }, {
+        tag: 'wdth',
+        minValue: 25,
+        maxValue: 151,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'slnt',
+        minValue: -10,
+        maxValue: 0,
+        defaultValue: 0,
+        name: 'Slant',
+      }, {
+        tag: 'XOPQ',
+        minValue: 27,
+        maxValue: 175,
+        defaultValue: 96,
+        name: 'Parametric Thick Stroke',
+      }, {
+        tag: 'YOPQ',
+        minValue: 25,
+        maxValue: 135,
+        defaultValue: 79,
+        name: 'Parametric Thin Stroke',
+      }, {
+        tag: 'XTRA',
+        minValue: 323,
+        maxValue: 603,
+        defaultValue: 468,
+        name: 'Parametric Counter Width',
+      }, {
+        tag: 'YTUC',
+        minValue: 528,
+        maxValue: 760,
+        defaultValue: 712,
+        name: 'Parametric Uppercase Height',
+      }, {
+        tag: 'YTLC',
+        minValue: 416,
+        maxValue: 570,
+        defaultValue: 514,
+        name: 'Parametric Lowercase Height',
+      }, {
+        tag: 'YTAS',
+        minValue: 649,
+        maxValue: 854,
+        defaultValue: 750,
+        name: 'Parametric Ascender Height',
+      }, {
+        tag: 'YTDE',
+        minValue: -305,
+        maxValue: -98,
+        defaultValue: -203,
+        name: 'Parametric Descender Depth',
+      }, {
+        tag: 'YTFI',
+        minValue: 560,
+        maxValue: 788,
+        defaultValue: 738,
+        name: 'Parametric Figure Height',
+      },],
+      'GF;Roboto Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Roboto Serif': [{
+        tag: 'wdth',
+        minValue: 50,
+        maxValue: 150,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'opsz',
+        minValue: 8,
+        maxValue: 144,
+        defaultValue: 20,
+        name: 'Optical Size',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'GRAD',
+        minValue: -50,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Grade',
+      },],
+      'GF;Roboto Slab': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Rokkitt': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 600,
+        name: 'Weight',
+      },],
+      'GF;Rosario': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Rubik': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Ruda': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;STIX Two Text': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;SUSE': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Saira': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 50,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Sansita Swashed': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Schibsted Grotesk': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sen': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Shantell Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      }, {
+        tag: 'INFM',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Informality',
+      }, {
+        tag: 'BNCE',
+        minValue: -100,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Bounce',
+      }, {
+        tag: 'SPAC',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Spacing',
+      },],
+      'GF;Signika': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      }, {
+        tag: 'GRAD',
+        minValue: -30,
+        maxValue: 0,
+        defaultValue: 0,
+        name: 'GRAD',
+      },],
+      'GF;Signika Negative': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Sixtyfour': [{
+        tag: 'SCAN',
+        minValue: -53,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Scanlines',
+      }, {
+        tag: 'BLED',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Bleed',
+      },],
+      'GF;Sixtyfour Convergence': [{
+        tag: 'SCAN',
+        minValue: -53,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Scanlines',
+      }, {
+        tag: 'BLED',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Bleed',
+      }, {
+        tag: 'XELA',
+        minValue: -100,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Horizontal Element Alignment',
+      }, {
+        tag: 'YELA',
+        minValue: -100,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Vertical Element Alignment',
+      },],
+      'GF;Smooch Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Sofia Sans': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sofia Sans Condensed': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sofia Sans Extra Condensed': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sofia Sans Semi Condensed': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sometype Mono': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sono': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      }, {
+        tag: 'MONO',
+        minValue: 0,
+        maxValue: 1,
+        defaultValue: 1,
+        name: 'Monospace',
+      },],
+      'GF;Sora': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Source Code Pro': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Source Sans 3': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Source Serif 4': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 8,
+        maxValue: 60,
+        defaultValue: 20,
+        name: 'Optical Size',
+      },],
+      'GF;Space Grotesk': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Spline Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Spline Sans Mono': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Stick No Bills': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Syne': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Teachers': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Teko': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Tektur': [{
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Texturina': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 500,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 12,
+        maxValue: 72,
+        defaultValue: 12,
+        name: 'Optical size',
+      },],
+      'GF;Tilt Neon': [{
+        tag: 'XROT',
+        minValue: -45,
+        maxValue: 45,
+        defaultValue: 0,
+        name: 'Rotation in X',
+      }, {
+        tag: 'YROT',
+        minValue: -45,
+        maxValue: 45,
+        defaultValue: 0,
+        name: 'Rotation in Y',
+      },],
+      'GF;Tilt Prism': [{
+        tag: 'XROT',
+        minValue: -45,
+        maxValue: 45,
+        defaultValue: 0,
+        name: 'Rotation in X',
+      }, {
+        tag: 'YROT',
+        minValue: -45,
+        maxValue: 45,
+        defaultValue: 0,
+        name: 'Rotation in Y',
+      },],
+      'GF;Tilt Warp': [{
+        tag: 'XROT',
+        minValue: -45,
+        maxValue: 45,
+        defaultValue: 0,
+        name: 'Rotation in X',
+      }, {
+        tag: 'YROT',
+        minValue: -45,
+        maxValue: 45,
+        defaultValue: 0,
+        name: 'Rotation in Y',
+      },],
+      'GF;Tourney': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Trispace': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 100,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      },],
+      'GF;Truculenta': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'opsz',
+        minValue: 12,
+        maxValue: 72,
+        defaultValue: 12,
+        name: 'Optical size',
+      },],
+      'GF;Ubuntu Sans': [{
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Ubuntu Sans Mono': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Unbounded': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Urbanist': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Varta': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Vazirmatn': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Victor Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Vollkorn': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Wavefont': [{
+        tag: 'ROND',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Roundness',
+      }, {
+        tag: 'YELA',
+        minValue: -100,
+        maxValue: 100,
+        defaultValue: -100,
+        name: 'Vertical Element Alignment',
+      }, {
+        tag: 'wght',
+        minValue: 4,
+        maxValue: 1e3,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'GF;Wittgenstein': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Wix Madefor Display': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Wix Madefor Text': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Work Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Workbench': [{
+        tag: 'SCAN',
+        minValue: -53,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Scanlines',
+      }, {
+        tag: 'BLED',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Bleed',
+      },],
+      'GF;Yaldevi': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Yanone Kaffeesatz': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'GF;Yrsa': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Ysabeau': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'GF;Ysabeau Infant': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'GF;Ysabeau Office': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'GF;Ysabeau SC': [{
+        tag: 'wght',
+        minValue: 1,
+        maxValue: 1e3,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+    };
+  },
+},);
+
+// https :https://app.framerstatic.com/fontshare-SD5DEEGS.js
+var fontshare_SD5DEEGS_exports = {};
+__export(fontshare_SD5DEEGS_exports, {
+  default: () => fontshare_default,
+},);
+var fontshare_default;
+var init_fontshare_SD5DEEGS = __esm({
+  'https :https://app.framerstatic.com/fontshare-SD5DEEGS.js'() {
+    init_chunk_4RACSZOF();
+    fontshare_default = {
+      'FS;Familjen Grotesk': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Author': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Excon': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Rajdhani': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Archivo': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 600,
+        name: 'Weight',
+      },],
+      'FS;Kalam': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Nunito': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Red Hat Display': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Cabinet Grotesk': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Dancing Script': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Pramukh Rounded': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Stencil': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Outfit': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Karma': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Space Grotesk': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Trench Slab': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Sharpie': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Public Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Azeret Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Be Vietnam Pro': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Melodrama': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Montserrat': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Britney': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Poppins': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Styro': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Rowan': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Expose': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Alpino': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Chubbo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;JetBrains Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Sora': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Serif': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Synonym': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Merriweather Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Slab': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Switzer': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Quicksand': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Teko': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Plein': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Supreme': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Khand': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Clash Display': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Bonny': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Pally': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Clash Grotesk': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Manrope': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Asap': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Spline Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Work Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Technor': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Fira Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Panchang': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Plus Jakarta Sans': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Boska': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Hoover': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Recia': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Roundo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Nippo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Hind': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Pilcrow Rounded': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Neco': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Lora': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Chillax': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Telma': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Amulya': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Sentient': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Bevellier': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Zodiak': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;General Sans': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Satoshi': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Erode': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Karla': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Syne': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Tillana': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Literata': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      }, {
+        tag: 'opsz',
+        minValue: 7,
+        maxValue: 72,
+        defaultValue: 7,
+        name: 'Optical Size',
+      },],
+      'FS;Raleway': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Crimson Pro': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Quilon': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Tabular': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Oswald': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Laila': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;New Title': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Stick No Bills': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Halant': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Ranade': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Gambetta': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Urbanist': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Epilogue': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Paquito': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+    };
+  },
+},);
+
+// https :https://app.framerstatic.com/chunk-75PIAIKN.js
+init_chunk_4RACSZOF();
 import { createContext, } from 'react';
 import { useCallback, useContext, useEffect, useId, } from 'react';
 import { useLayoutEffect, } from 'react';
@@ -11,90 +4843,6 @@ import { createElement, Fragment, } from 'react';
 import { useState, } from 'react';
 import * as React2 from 'react';
 import { Children, isValidElement, } from 'react';
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __defNormalProp = (obj, key7, value,) =>
-  key7 in obj
-    ? __defProp(obj, key7, {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value,
-    },)
-    : obj[key7] = value;
-var __commonJS = (cb, mod,) =>
-  function __require() {
-    return mod || (0, cb[__getOwnPropNames(cb,)[0]])(
-      (mod = {
-        exports: {},
-      }).exports,
-      mod,
-    ),
-      mod.exports;
-  };
-var __export = (target, all,) => {
-  for (var name in all) {
-    __defProp(target, name, {
-      get: all[name],
-      enumerable: true,
-    },);
-  }
-};
-var __copyProps = (to, from, except, desc,) => {
-  if (from && typeof from === 'object' || typeof from === 'function') {
-    for (let key7 of __getOwnPropNames(from,)) {
-      if (!__hasOwnProp.call(to, key7,) && key7 !== except) {
-        __defProp(to, key7, {
-          get: () => from[key7],
-          enumerable: !(desc = __getOwnPropDesc(from, key7,)) || desc.enumerable,
-        },);
-      }
-    }
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target,) => (target = mod != null ? __create(__getProtoOf(mod,),) : {},
-  __copyProps(
-    // If the importer is in node compatibility mode or this is not an ESM
-    // file that has been converted to a CommonJS file using a Babel-
-    // compatible transform (i.e. "__esModule" has not been set), then set
-    // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule
-      ? __defProp(target, 'default', {
-        value: mod,
-        enumerable: true,
-      },)
-      : target,
-    mod,
-  ));
-var __publicField = (obj, key7, value,) => {
-  __defNormalProp(obj, typeof key7 !== 'symbol' ? key7 + '' : key7, value,);
-  return value;
-};
-var __accessCheck = (obj, member, msg,) => {
-  if (!member.has(obj,)) throw TypeError('Cannot ' + msg,);
-};
-var __privateGet = (obj, member, getter,) => {
-  __accessCheck(obj, member, 'read from private field',);
-  return getter ? getter.call(obj,) : member.get(obj,);
-};
-var __privateAdd = (obj, member, value,) => {
-  if (member.has(obj,)) throw TypeError('Cannot add the same private member more than once',);
-  member instanceof WeakSet ? member.add(obj,) : member.set(obj, value,);
-};
-var __privateSet = (obj, member, value, setter,) => {
-  __accessCheck(obj, member, 'write to private field',);
-  setter ? setter.call(obj, value,) : member.set(obj, value,);
-  return value;
-};
-var __privateMethod = (obj, member, method,) => {
-  __accessCheck(obj, member, 'access private method',);
-  return method;
-};
 var require_memoize_browser_cjs = __commonJS({
   '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
     'use strict';
@@ -10336,7 +15084,7 @@ function useInvertedScale(scale2,) {
   };
 }
 var namespace_exports = {};
-__export(namespace_exports, {
+__export2(namespace_exports, {
   Group: () => ReorderGroup,
   Item: () => ReorderItem,
 },);
@@ -10500,8 +15248,8 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.E4SLPEXE.js
-
+// https :https://app.framerstatic.com/framer.IO4SIASU.js
+init_chunk_4RACSZOF();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
@@ -19218,7 +23966,7 @@ var richTextLinkHoverStylesRule = `
 `;
 var richTextLinkCurrentStylesRule = `
 a[data-framer-page-link-current],
-a[data-framer-page-link-current] span:not([data-text-fill]) {
+a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-link]) {
     font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
     font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
     font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
@@ -19230,7 +23978,7 @@ a[data-framer-page-link-current] span:not([data-text-fill]) {
 `;
 var richTextLinkCurrentHoverStylesRule = `
 a[data-framer-page-link-current]:hover,
-a[data-framer-page-link-current]:hover span:not([data-text-fill]) {
+a[data-framer-page-link-current]:hover span:not([data-text-fill]):not([data-nested-link]) {
     font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
     font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
     font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
@@ -19283,6 +24031,7 @@ var richTextStylesPresetResetRule = `
     --framer-line-height: 1.2em;
     --framer-text-alignment: start;
     --framer-font-open-type-features: normal;
+    --font-variation-settings: normal;
 }
 `;
 var richTextStylesList = `
@@ -19384,6 +24133,7 @@ var richTextCSSRules = [
             -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
             -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
             font-feature-settings: var(--framer-font-open-type-features, initial);
+            font-variation-settings: var(--framer-font-variation-axes, normal);
             text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap));
         }
     `, /* css */
@@ -19483,7 +24233,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         a.framer-text,
-        a.framer-text span.framer-text:not([data-text-fill]) {
+        a.framer-text span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link],
+        span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
@@ -19497,7 +24249,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         code.framer-text a.framer-text,
-        code.framer-text a.framer-text span.framer-text:not([data-text-fill]) {
+        code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-nested-link],
+        code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
@@ -19507,7 +24261,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         a.framer-text:hover,
-        a.framer-text:hover span.framer-text:not([data-text-fill]) {
+        a.framer-text:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link]:hover,
+        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
             font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
@@ -19519,7 +24275,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         code.framer-text a.framer-text:hover,
-        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]) {
+        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-nested-link]:hover,
+        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
             font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
@@ -19529,7 +24287,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         a.framer-text[data-framer-page-link-current],
-        a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+        a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+        span.framer-text[data-framer-page-link-current],
+        span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
@@ -19541,7 +24301,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         code.framer-text a.framer-text[data-framer-page-link-current],
-        code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+        code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-framer-page-link-current],
+        code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
@@ -19551,7 +24313,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         a.framer-text[data-framer-page-link-current]:hover,
-        a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+        a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-framer-page-link-current]:hover,
+        span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
             font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
@@ -19563,7 +24327,9 @@ var richTextCSSRules = [
     `, /* css */
   `
         code.framer-text a.framer-text[data-framer-page-link-current]:hover,
-        code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+        code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+        code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
@@ -32541,6 +37307,28 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
   return true;
 }
+var NestedLinksCollector = class {
+  constructor() {
+    __publicField(this, 'links', /* @__PURE__ */ new Map(),);
+  }
+  clear() {
+    this.links.clear();
+  }
+  getLinks() {
+    return [...this.links.values(),];
+  }
+  addLink(parentLink, linkData,) {
+    if (!this.links.has(parentLink.nodeId,)) {
+      this.links.set(parentLink.nodeId, {
+        parent: parentLink,
+        links: [],
+      },);
+    }
+    const entry = this.links.get(parentLink.nodeId,);
+    entry.links.push(linkData,);
+  }
+};
+var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
 var PRELOAD_AFTER_MS = 500;
 var OBSERVER_THRESHOLD = 0.9;
 var LOW_MEMORY_THRESHOLD = 1.7;
@@ -32662,6 +37450,9 @@ function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
   collectionItemCache.set(unresolvedSlug.collectionItemId, lazyValue,);
   return lazyValue;
 }
+function useIsOnFramerCanvas() {
+  return RenderTarget.current() === RenderTarget.canvas;
+}
 var linkKey = 'webPageId';
 function isLinkToWebPage(link,) {
   return Boolean(link && typeof link === 'object' && linkKey in link,);
@@ -32757,19 +37548,35 @@ function propsForLink(href, openInNewTab = void 0,) {
     rel: !isInternal ? 'noopener' : void 0,
   };
 }
+function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
+  var _a, _b;
+  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
+  if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
+    void route.page.preload();
+  }
+  (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+}
 function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
-    var _a, _b;
     if (event.metaKey) return;
     const anchorElement = findAnchorElement(event.target,);
     if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
     event.preventDefault();
-    const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
-    if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
-      void route.page.preload();
-    }
-    (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+    performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
+}
+function openExternalLink(href, rel, target,) {
+  const link = document.createElement('a',);
+  link.href = href;
+  if (rel) {
+    link.rel = rel;
+  }
+  if (target) {
+    link.target = target;
+  }
+  document.body.appendChild(link,);
+  link.click();
+  link.remove();
 }
 async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
   async function handleSlugs(unresolvedSlugs,) {
@@ -32935,6 +37742,8 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPat
     href: path,
     target: anchorTarget,
     onClick: createOnClickLinkHandler(router, routeId, elementId, pathVariables, smoothScroll,),
+    navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
+    'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
   };
 }
 function getRouteFromPageLink(pageLink, router, currentRoute,) {
@@ -32958,11 +37767,32 @@ function getRouteFromPageLink(pageLink, router, currentRoute,) {
   } = pageLink;
   return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
 }
+function useStableChildRefWithCleanup(children, callback,) {
+  const fallbackRef = useRef(null,);
+  return useMemo(() => {
+    let cleanupFn;
+    const refCallback = (node) => {
+      if (node === null) {
+        cleanupFn == null ? void 0 : cleanupFn();
+        cleanupFn = void 0;
+        return;
+      }
+      cleanupFn = callback(node,);
+    };
+    const hasRef = isValidElement(children,) && 'ref' in children;
+    if (hasRef && isMutableRef(children.ref,)) {
+      return createRefWithCallback(children.ref, refCallback,);
+    }
+    if (hasRef && isFunction(children.ref,)) return mergeRefs(children.ref, refCallback,);
+    return createRefWithCallback(fallbackRef, refCallback,);
+  }, [children, callback,],);
+}
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
   children,
   href,
   openInNewTab,
   smoothScroll,
+  nodeId,
   ...restProps
 }, forwardedRef,) => {
   const router = useRouter();
@@ -32971,29 +37801,6 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
   const {
     activeLocale,
   } = useLocaleInfo();
-  const fallbackRef = useRef(null,);
-  const stableObserverChildRef = useMemo(() => {
-    let cleanupFn;
-    const observerCallback = (node) => {
-      var _a;
-      if (node === null) {
-        cleanupFn == null ? void 0 : cleanupFn();
-        cleanupFn = void 0;
-        return;
-      }
-      const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-      if (!pageLink) return;
-      const route = getRouteFromPageLink(pageLink, router, currentRoute,);
-      if (!route) return;
-      cleanupFn = (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
-    };
-    const hasRef = isValidElement(children,) && 'ref' in children;
-    if (hasRef && isMutableRef(children.ref,)) {
-      return createRefWithCallback(children.ref, observerCallback,);
-    }
-    if (hasRef && isFunction(children.ref,)) return mergeRefs(children.ref, observerCallback,);
-    return createRefWithCallback(fallbackRef, observerCallback,);
-  }, [href, router, currentRoute, children,],);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const props = useMemo(() => {
     if (!href) return {};
@@ -33013,15 +37820,152 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
       href: resolvedHref,
       target: anchorTarget,
       onClick: createOnClickLinkHandler(router, routeId, elementId, pathVariables, smoothScroll,),
+      navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
   }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll,],);
-  return clone(children, {
-    ...restProps,
-    ...props,
-    ref: stableObserverChildRef,
-  },);
+  const [getChildren, replaceNestedLinksRefCallback,] = useReplaceNestedLinks(nodeId, href, props,);
+  const observerCallback = useCallback((node) => {
+    var _a;
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    const route = getRouteFromPageLink(pageLink, router, currentRoute,);
+    if (!route) return;
+    return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
+  }, [currentRoute, href, router,],);
+  const combinedCallbacks = useCallback((node) => {
+    replaceNestedLinksRefCallback(node,);
+    return observerCallback(node,);
+  }, [observerCallback, replaceNestedLinksRefCallback,],);
+  const stableChildRef = useStableChildRefWithCleanup(children, combinedCallbacks,);
+  const el = useMemo(() => {
+    const {
+      navigate: _,
+      ...linkProps
+    } = props;
+    return clone.cloneAsArray(children, {
+      ...restProps,
+      ...linkProps,
+      ref: stableChildRef,
+    },);
+  }, [props, clone, children, restProps, stableChildRef,],);
+  return getChildren(el,);
 },),);
+var ParentLinkContext = /* @__PURE__ */ createContext(null,);
+function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
+  const parentLink = useContext(ParentLinkContext,);
+  const isOnFramerCanvas = useIsOnFramerCanvas();
+  const router = useRouter();
+  const currentRoute = useCurrentRoute();
+  const route = useMemo(() => {
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    return getRouteFromPageLink(pageLink, router, currentRoute,);
+  }, [currentRoute, href, router,],);
+  const linkData = useMemo(() => {
+    if (!nodeId || !href) return null;
+    if (isLinkToWebPage(href,)) {
+      return {
+        nodeId,
+        targetNodeId: href.webPageId,
+        href: propsAddedByLink.href,
+      };
+    }
+    if (route && href.startsWith('#',)) {
+      const routeNodeId = Object.keys(route.elements ?? {},)[0];
+      if (routeNodeId) {
+        return {
+          nodeId,
+          targetNodeId: routeNodeId,
+          href,
+        };
+      }
+    }
+    return {
+      nodeId,
+      href,
+    };
+  }, [href, nodeId, propsAddedByLink, route,],);
+  const isValidLink = Object.keys(propsAddedByLink,).length > 0;
+  const shouldReplaceLink = Boolean(!isOnFramerCanvas && (parentLink || !isValidLink),);
+  const onClick = useCallback((event) => {
+    var _a;
+    if (!propsAddedByLink.href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(navigator.userAgent,);
+    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
+      openExternalLink(propsAddedByLink.href, '', '_blank',);
+      return;
+    }
+    if (route) {
+      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+    } else {
+      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
+    }
+  }, [propsAddedByLink, route,],);
+  const onAuxClick = useCallback((event) => {
+    if (!propsAddedByLink.href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openExternalLink(propsAddedByLink.href, '', '_blank',);
+  }, [propsAddedByLink,],);
+  const onKeyDown = useCallback((event) => {
+    var _a;
+    if (!propsAddedByLink.href) return;
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (route) {
+      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+    } else {
+      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
+    }
+  }, [propsAddedByLink, route,],);
+  const getChildren = useCallback((children) => {
+    const nestedLinkProps = {
+      'data-nested-link': true,
+      // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
+      role: 'link',
+      tabIndex: 0,
+      onClick,
+      onAuxClick,
+      onKeyDown,
+    };
+    const replacedChildren = !shouldReplaceLink ? children : Children.map(children, (child) => {
+      if (!isValidElement(child,)) return child;
+      const tag = isMotionComponent(child.type,) ? motion.span : 'span';
+      const {
+        children: childChildren,
+        ...childProps
+      } = child.props;
+      const props = isValidLink
+        ? {
+          ...childProps,
+          ...nestedLinkProps,
+        }
+        : childProps;
+      const ref = 'ref' in child ? child.ref : void 0;
+      return createElement(tag, // We need to pass the ref here again, otherwise it will be lost
+      {
+        ...props,
+        ref,
+      }, childChildren,);
+    },);
+    return /* @__PURE__ */ jsx(ParentLinkContext.Provider, {
+      value: linkData,
+      children: replacedChildren,
+    },);
+  }, [isValidLink, linkData, onAuxClick, onClick, onKeyDown, shouldReplaceLink,],);
+  const refCallback = useCallback((node) => {
+    if (isOnFramerCanvas || !shouldReplaceLink || !isValidLink) return;
+    node.dataset.hydrated = 'true';
+  }, [isOnFramerCanvas, isValidLink, shouldReplaceLink,],);
+  if ((typeof window === 'undefined' || false) && parentLink && linkData) {
+    nestedLinksCollector.addLink(parentLink, linkData,);
+  }
+  return [getChildren, refCallback,];
+}
 function resolveLink(href, router, implicitPathVariables,) {
   return resolveLinkInternal(href, router, implicitPathVariables,);
 }
@@ -40923,9 +45867,6 @@ function useHotkey(shortcut, callback,) {
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
 }
-function useIsOnFramerCanvas() {
-  return RenderTarget.current() === RenderTarget.canvas;
-}
 function useNavigate() {
   const {
     navigate,
@@ -42292,6 +47233,9 @@ var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2) => {
   FontSourceNames2['Custom'] = 'custom';
   return FontSourceNames2;
 })(FontSourceNames || {},);
+function isSuccessfullyParsedFontVariant(variant,) {
+  return variant.weight !== void 0 && variant.style !== void 0;
+}
 var systemFontFamilyName = 'System Default';
 var LocalFontSource = class {
   constructor() {
@@ -42428,11 +47372,19 @@ function createVariantName(weight, style,) {
   return `${fontWeightNames[weight]}`;
 }
 var import_process3 = __toESM(require_browser(), 1,);
+function isVariableFont(font,) {
+  return Boolean(font.variationAxes,);
+}
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
-  const fontFamily = properties.font.preferredFamily === '' ? properties.font.fontFamily : properties.font.preferredFamily;
-  const variant = properties.font.preferredSubFamily === '' ? properties.font.fontSubFamily : properties.font.preferredSubFamily;
+  const {
+    font,
+  } = properties;
+  const fontFamily = font.preferredFamily || font.fontFamily;
+  const isAssetVariableFont = Array.isArray(font.variationAxes,);
+  if (isAssetVariableFont && fontFamily.toLowerCase().includes('variable',)) return fontFamily;
+  const variant = isAssetVariableFont ? 'Variable' : font.preferredSubFamily || font.fontSubFamily;
   return `${fontFamily} ${variant}`;
 }
 var CustomFontSource = class {
@@ -42444,7 +47396,7 @@ var CustomFontSource = class {
     __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
   }
   importFonts(assets,) {
-    var _a, _b;
+    var _a, _b, _c;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
@@ -42453,16 +47405,20 @@ var CustomFontSource = class {
       if (!this.isValidCustomFontAsset(asset,)) {
         continue;
       }
+      const variationAxesData = (_a = asset.properties) == null ? void 0 : _a.font.variationAxes;
+      const isVariableFont2 = Array.isArray(variationAxesData,);
       const fontName = getCustomFontName(asset.name, asset.properties,);
       const fontFamily = this.createFontFamily(fontName,);
-      const openTypeData = (_a = asset.properties) == null ? void 0 : _a.font.openTypeData;
+      const openTypeData = (_b = asset.properties) == null ? void 0 : _b.font.openTypeData;
+      const variant = isVariableFont2 ? 'variable' : this.inferVariantName(fontName,);
       const font = {
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
-        variant: this.inferVariantName(fontName,),
-        postscriptName: (_b = asset.properties) == null ? void 0 : _b.font.postscriptName,
+        variant,
+        postscriptName: (_c = asset.properties) == null ? void 0 : _c.font.postscriptName,
         file: asset.url,
         openTypeFeatures: this.validateOpenTypeData(openTypeData,),
+        variationAxes: this.validateVariationAxes(variationAxesData,),
       };
       fontFamily.fonts.push(font,);
       fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
@@ -42489,10 +47445,37 @@ var CustomFontSource = class {
       };
     },);
   }
+  validateVariationAxes(variationAxesData,) {
+    if (!variationAxesData) return;
+    if (!Array.isArray(variationAxesData,)) return;
+    const variationAxes = [];
+    for (const axis of variationAxesData) {
+      if (!this.isVariationAxis(axis,)) continue;
+      variationAxes.push({
+        tag: axis.tag,
+        name: axis.name,
+        minValue: axis.minValue,
+        maxValue: axis.maxValue,
+        defaultValue: axis.defaultValue,
+      },);
+    }
+    return variationAxes;
+  }
   isOpenTypeFeature(feature,) {
     if (typeof feature !== 'object' || feature === null) return false;
     if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
     if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
+      return false;
+    }
+    return true;
+  }
+  isVariationAxis(axis,) {
+    if (typeof axis !== 'object' || axis === null) return false;
+    if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
+    if (!('name' in axis) || typeof axis.name !== 'string') return false;
+    if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
+    if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
+    if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
       return false;
     }
     return true;
@@ -42558,43 +47541,71 @@ var CustomFontSource = class {
     return fontFamily;
   }
 };
-function getFontVariants(currentVariant, variants, parseVariant,) {
-  if (variants.length === 0) return {};
-  const currentVariantInfo = parseVariant(currentVariant,);
-  if (!currentVariantInfo) return {};
+function getRelatedFontVariants(currentVariant, availableVariants,) {
+  return {
+    ...pickBoldItalicVariants(currentVariant, availableVariants,),
+    ...pickVariableVariants(currentVariant, availableVariants,),
+  };
+}
+function pickBoldItalicVariants(currentVariant, availableVariants,) {
+  if (availableVariants.length === 0) {
+    return {
+      variantBold: void 0,
+      variantBoldItalic: void 0,
+      variantItalic: void 0,
+    };
+  }
   const {
     weight: currentWeight,
     style: currentStyle,
-  } = currentVariantInfo;
+  } = currentVariant;
   const variantByWeightAndStyle = /* @__PURE__ */ new Map();
   const boldVariantByStyle = /* @__PURE__ */ new Map();
-  variants.forEach((variant) => {
-    const variantName = isString2(variant,) ? variant : variant.name.toLocaleLowerCase();
-    const variantInfo = parseVariant(variantName,);
-    if (!variantInfo) return;
-    variantByWeightAndStyle.set(`${variantInfo.weight}-${variantInfo.style}`, variantName,);
-    if (variantInfo.weight <= currentWeight) return;
-    if (!boldVariantByStyle.has(variantInfo.style,)) {
-      boldVariantByStyle.set(variantInfo.style, variantName,);
+  for (const variant of availableVariants) {
+    if (variant.isVariable !== currentVariant.isVariable) continue;
+    variantByWeightAndStyle.set(`${variant.weight}-${variant.style}`, variant,);
+    if (variant.weight <= currentWeight) continue;
+    if (!boldVariantByStyle.has(variant.style,)) {
+      boldVariantByStyle.set(variant.style, variant,);
     }
-  },);
+  }
   let variantBold = boldVariantByStyle.get(currentStyle,);
-  let variantBoldItalic = boldVariantByStyle.get('italic',) ?? boldVariantByStyle.get('oblique',);
-  if (currentVariantInfo.weight <= 300) {
+  let variantBoldItalic = boldVariantByStyle.get('italic',);
+  const currentVariantWeight = currentVariant.weight;
+  if (currentVariantWeight <= 300) {
     variantBold = variantByWeightAndStyle.get(`400-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('400-italic',) ?? variantByWeightAndStyle.get('400-oblique',) ?? variantBoldItalic;
-  } else if (currentVariantInfo.weight <= 500) {
+    variantBoldItalic = variantByWeightAndStyle.get('400-italic',) ?? variantBoldItalic;
+  } else if (currentVariantWeight <= 500) {
     variantBold = variantByWeightAndStyle.get(`700-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('700-italic',) ?? variantByWeightAndStyle.get('700-oblique',) ?? variantBoldItalic;
+    variantBoldItalic = variantByWeightAndStyle.get('700-italic',) ?? variantBoldItalic;
   } else {
     variantBold = variantByWeightAndStyle.get(`900-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('900-italic',) ?? variantByWeightAndStyle.get('900-oblique',) ?? variantBoldItalic;
+    variantBoldItalic = variantByWeightAndStyle.get('900-italic',) ?? variantBoldItalic;
   }
-  const variantItalic = variantByWeightAndStyle.get(`${currentWeight}-italic`,) ?? variantByWeightAndStyle.get(`${currentWeight}-oblique`,);
+  const variantItalic = variantByWeightAndStyle.get(`${currentWeight}-italic`,);
   return {
     variantBold,
     variantItalic,
     variantBoldItalic,
+  };
+}
+function pickVariableVariants(currentVariant, availableVariants,) {
+  if (availableVariants.length === 0) {
+    return {
+      variantVariable: void 0,
+      variantVariableItalic: void 0,
+    };
+  }
+  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
+  for (const variant of availableVariants) {
+    if (!variant.isVariable) continue;
+    variantByWeightAndStyle.set(`${variant.weight}-${variant.style}`, variant,);
+  }
+  return {
+    variantVariable: variantByWeightAndStyle.get(`${currentVariant.weight}-normal`,) ?? variantByWeightAndStyle.get(`400-normal`,) ??
+      void 0,
+    variantVariableItalic: variantByWeightAndStyle.get(`${currentVariant.weight}-italic`,) ?? variantByWeightAndStyle.get(`400-italic`,) ??
+      void 0,
   };
 }
 var knownFontshareCategories = ['display', 'sans', 'serif', 'slab', 'handwritten', 'script',];
@@ -42623,7 +47634,7 @@ var weightNameToNumber = {
   // Alternative name for "black".
 };
 var weightNames = /* @__PURE__ */ Object.keys(weightNameToNumber,);
-var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic',].join('|',)})`, 'u',))();
+var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic', 'variable',].join('|',)})`, 'u',))();
 var FontshareSource = class {
   constructor() {
     __publicField(this, 'name', 'fontshare',/* Fontshare */
@@ -42640,16 +47651,17 @@ var FontshareSource = class {
    * present in the variant string.
    *
    * E.g:
-   *   - `"bold"` becomes `{ weight: 700, style: "normal" }`
-   *   - `"bold italic"` becomes `{ weight: 700, style: "italic" }`
-   *   - `"italic"` becomes `{ weight: 400, style: "italic" }`
+   *   - `"Bold"` becomes `{ weight: 700, style: "normal" }`
+   *   - `"Bold Italic"` becomes `{ weight: 700, style: "italic" }`
+   *   - `"Italic"` becomes `{ weight: 400, style: "italic" }`
+   *   - `"Variable Italic"` becomes `{ weight: 400, style: "italic" }`
    */
   static parseVariant(variant,) {
-    const variantSplit = variant.split(' ',);
+    const variantSplit = variant.toLowerCase().split(' ',);
     const weightName = weightNames.find((weightName2) => {
       return variantSplit.includes(weightName2,);
     },);
-    const styleName = variant.includes('italic',) ? 'italic' : 'normal';
+    const styleName = variant.toLowerCase().includes('italic',) ? 'italic' : 'normal';
     const weight = weightName && weightNameToNumber[weightName] || 400;
     const style = styleName === 'italic' ? styleName : 'normal';
     return {
@@ -42667,6 +47679,7 @@ var FontshareSource = class {
       name: family.replace(fontsharePrefix, '',),
       variant,
       source: this.name,
+      isVariable: variant.toLowerCase().includes('variable',),
     };
   }
   /**
@@ -42676,11 +47689,18 @@ var FontshareSource = class {
   static createSelector(family, variant,) {
     return `${fontsharePrefix}${family}-${variant.toLowerCase()}`;
   }
+  /**
+   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool. Because we are using the font selector to get variable fontsvariation axes.
+   * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/fontShare.ts
+   */
+  static createVariationAxesSelector(family,) {
+    return `${fontsharePrefix}${family}`;
+  }
   addFontFamily(fontFamily,) {
     this.fontFamilies.push(fontFamily,);
     this.byFamilyName.set(fontFamily.name, fontFamily,);
   }
-  importFonts(fontshareFonts,) {
+  importFonts(fontshareFonts, variationAxesData,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     const fonts = [];
@@ -42688,50 +47708,55 @@ var FontshareSource = class {
       const fontStyles = fontshareFont.font_styles.filter((fontStyle) => {
         const variant = fontStyle.name.toLowerCase();
         const allowedVariantMatch = allowedVariantsRegex.exec(variant,);
-        if (!allowedVariantMatch || variant.endsWith('wide',)) {
+        if (!allowedVariantMatch || variant.split(' ',).includes('wide',)) {
           return false;
         }
         return true;
       },);
-      for (const fontStyle of fontStyles) {
-        const {
-          name: family,
-        } = fontshareFont;
-        const variant = fontStyle.name.toLowerCase();
-        let fontFamily = this.getFontFamilyByName(family,);
-        if (!fontFamily) {
-          fontFamily = {
-            name: family,
-            fonts: [],
-            source: this.name,
-          };
-          this.addFontFamily(fontFamily,);
-        }
-        const selector = FontshareSource.createSelector(family, variant,);
-        const variantInfo = FontshareSource.parseVariant(variant,) || {
-          weight: void 0,
-          style: void 0,
+      const fontVariants = fontStyles.map((fontStyle) => {
+        const variantInfo = FontshareSource.parseVariant(fontStyle.name,);
+        return {
+          ...variantInfo,
+          selector: FontshareSource.createSelector(fontshareFont.name, fontStyle.name,),
+          isVariable: fontStyle.is_variable,
+          fontshareVariantName: fontStyle.name,
+          file: fontStyle.file,
         };
-        const {
-          weight,
-          style,
-        } = variantInfo;
+      },);
+      const key7 = FontshareSource.createVariationAxesSelector(fontshareFont.name,);
+      const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
+      const familyName = fontshareFont.name;
+      let fontFamily = this.getFontFamilyByName(familyName,);
+      if (!fontFamily) {
+        fontFamily = {
+          name: familyName,
+          fonts: [],
+          source: this.name,
+        };
+        this.addFontFamily(fontFamily,);
+      }
+      for (const fontVariant of fontVariants) {
         const {
           variantBold,
           variantBoldItalic,
           variantItalic,
-        } = getFontVariants(variant, fontStyles, FontshareSource.parseVariant,);
+          variantVariable,
+          variantVariableItalic,
+        } = getRelatedFontVariants(fontVariant, fontVariants,);
         const font = {
           family: fontFamily,
-          variant,
-          selector,
-          selectorBold: variantBold ? FontshareSource.createSelector(family, variantBold,) : void 0,
-          selectorBoldItalic: variantBoldItalic ? FontshareSource.createSelector(family, variantBoldItalic,) : void 0,
-          selectorItalic: variantItalic ? FontshareSource.createSelector(family, variantItalic,) : void 0,
-          weight,
-          style,
-          file: fontStyle.file,
+          variant: fontVariant.fontshareVariantName.toLowerCase(),
+          selector: fontVariant.selector,
+          selectorBold: variantBold == null ? void 0 : variantBold.selector,
+          selectorBoldItalic: variantBoldItalic == null ? void 0 : variantBoldItalic.selector,
+          selectorItalic: variantItalic == null ? void 0 : variantItalic.selector,
+          selectorVariable: variantVariable == null ? void 0 : variantVariable.selector,
+          selectorVariableItalic: variantVariableItalic == null ? void 0 : variantVariableItalic.selector,
+          weight: fontVariant.weight,
+          style: fontVariant.style,
+          file: fontVariant.file,
           category: mapToKnownCategory(fontshareFont.category,),
+          variationAxes: fontVariant.isVariable ? variationAxes : void 0,
         };
         fontFamily.fonts.push(font,);
         fonts.push(font,);
@@ -42804,7 +47829,10 @@ var FramerFontSource = class {
       category: 'sans-serif',
     };
   }
-  importFonts(framerFonts,) {
+  static createVariationAxesKey(font,) {
+    return font.familyName;
+  }
+  importFonts(framerFonts, variationAxesData,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     const fonts = [];
@@ -42813,6 +47841,8 @@ var FramerFontSource = class {
         familyName,
         ...rest
       } = framerFont;
+      const key7 = FramerFontSource.createVariationAxesKey(framerFont,);
+      const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
       let fontFamily = this.getFontFamilyByName(familyName,);
       if (!fontFamily) {
         fontFamily = this.addFontFamily(familyName,);
@@ -42820,6 +47850,7 @@ var FramerFontSource = class {
       const font = {
         ...rest,
         family: fontFamily,
+        variationAxes,
       };
       fontFamily.fonts.push(font,);
       fonts.push(font,);
@@ -42846,7 +47877,7 @@ var GoogleFontSource = class {
       };
     }
     const match = /(\d*)(normal|italic)?/u.exec(variant,);
-    if (!match) return null;
+    if (!match) return {};
     const weight = parseInt(match[1] || '400',);
     const style = match[2] === 'italic' ? 'italic' : 'normal';
     return {
@@ -42856,7 +47887,8 @@ var GoogleFontSource = class {
   }
   parseSelector(selector,) {
     if (!selector.startsWith(googleFontSelectorPrefix,)) return null;
-    const tokens = selector.split('-',);
+    const isVariable = selector.includes('-variable-',);
+    const tokens = isVariable ? selector.split('-variable-',) : selector.split('-',);
     if (tokens.length !== 2) return null;
     const [family, variant,] = tokens;
     if (!family || !variant) return null;
@@ -42864,12 +47896,18 @@ var GoogleFontSource = class {
       name: family.replace(googleFontSelectorPrefix, '',),
       variant,
       source: this.name,
+      isVariable,
     };
   }
-  //  CAUTION: This method has to be exactly the same as the one in fontStore. Because we are using the font selector to get open type features.
-  // https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/googleFonts.ts
-  static createSelector(family, variant,) {
-    return `${googleFontSelectorPrefix}${family}-${variant}`;
+  static createSelector(family, variant, isVariableFont2,) {
+    return `${googleFontSelectorPrefix}${family}-${isVariableFont2 ? 'variable-' : ''}${variant}`;
+  }
+  /**
+   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool. Because we are using the font selector to get variable fonts variation axes.
+   * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/googleFonts.ts
+   */
+  static createVariationAxesSelector(family,) {
+    return `${googleFontSelectorPrefix}${family}`;
   }
   addFontFamily(family,) {
     const fontFamily = {
@@ -42881,45 +47919,84 @@ var GoogleFontSource = class {
     this.byFamilyName.set(fontFamily.name, fontFamily,);
     return fontFamily;
   }
-  importFonts(webFonts,) {
+  importFonts(webFonts, webFontsWithAxes, fontsToVariationAxes,) {
+    var _a;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     const fonts = [];
-    webFonts.forEach((webFont) => {
-      webFont.variants.forEach((variant) => {
-        var _a;
-        const family = webFont.family;
-        let fontFamily = this.getFontFamilyByName(family,);
-        if (!fontFamily) {
-          fontFamily = this.addFontFamily(family,);
-        }
-        const variantInfo = GoogleFontSource.parseVariant(variant,) ?? {};
+    const webFontsMap = mapBy(webFonts, (webFont) => webFont.family,);
+    const webFontsWithAxesMap = mapBy(webFontsWithAxes, (webFont) => webFont.family,);
+    for (const webFontName in webFontsMap) {
+      const webFont = webFontsMap[webFontName];
+      if (!webFont) continue;
+      let fontFamily = this.getFontFamilyByName(webFont.family,);
+      if (!fontFamily) {
+        fontFamily = this.addFontFamily(webFont.family,);
+      }
+      const rawStaticVariants = webFont.variants;
+      const staticVariants = rawStaticVariants.map((variantName) => {
+        const parsedVariant = GoogleFontSource.parseVariant(variantName,);
+        return {
+          ...parsedVariant,
+          googleFontsVariantName: variantName,
+          selector: GoogleFontSource.createSelector(webFontName, variantName, false,),
+          isVariable: false,
+          file: webFont.files[variantName],
+        };
+      },);
+      const variableFont = webFontsWithAxesMap[webFontName];
+      const variableVariants = (variableFont == null ? void 0 : variableFont.axes)
+        ? variableFont.variants.map((variantName) => {
+          const parsedVariant = GoogleFontSource.parseVariant(variantName,);
+          return {
+            ...parsedVariant,
+            googleFontsVariantName: variantName,
+            selector: GoogleFontSource.createSelector(webFontName, variantName, true,),
+            isVariable: true,
+            file: variableFont.files[variantName],
+          };
+        },)
+        : [];
+      const key7 = GoogleFontSource.createVariationAxesSelector(webFont.family,);
+      const variationAxes = fontsToVariationAxes == null ? void 0 : fontsToVariationAxes[key7];
+      const allVariants = [...staticVariants, ...variableVariants,];
+      const allSuccessfullyParsedVariants = allVariants.filter(isSuccessfullyParsedFontVariant,);
+      for (const variant of allVariants) {
         const {
           weight,
           style,
-        } = variantInfo;
-        const selector = GoogleFontSource.createSelector(family, variant,);
+          selector,
+          googleFontsVariantName,
+        } = variant;
+        const linkedVariants = isSuccessfullyParsedFontVariant(variant,)
+          ? getRelatedFontVariants(variant, allSuccessfullyParsedVariants,)
+          : void 0;
         const {
           variantBold,
           variantItalic,
           variantBoldItalic,
-        } = getFontVariants(variant, webFont.variants, GoogleFontSource.parseVariant,);
+          variantVariable,
+          variantVariableItalic,
+        } = linkedVariants ?? {};
         const font = {
           family: fontFamily,
-          variant,
+          variant: googleFontsVariantName,
           selector,
-          selectorBold: variantBold ? GoogleFontSource.createSelector(family, variantBold,) : void 0,
-          selectorBoldItalic: variantBoldItalic ? GoogleFontSource.createSelector(family, variantBoldItalic,) : void 0,
-          selectorItalic: variantItalic ? GoogleFontSource.createSelector(family, variantItalic,) : void 0,
+          selectorBold: variantBold == null ? void 0 : variantBold.selector,
+          selectorBoldItalic: variantBoldItalic == null ? void 0 : variantBoldItalic.selector,
+          selectorItalic: variantItalic == null ? void 0 : variantItalic.selector,
+          selectorVariable: variantVariable == null ? void 0 : variantVariable.selector,
+          selectorVariableItalic: variantVariableItalic == null ? void 0 : variantVariableItalic.selector,
           weight,
           style,
           category: mapToKnownCategory2(webFont.category,),
-          file: (_a = webFont.files[variant]) == null ? void 0 : _a.replace('http://', 'https://',),
+          file: (_a = variant.file) == null ? void 0 : _a.replace('http://', 'https://',),
+          variationAxes: variant.isVariable ? variationAxes : void 0,
         };
         fontFamily.fonts.push(font,);
         fonts.push(font,);
-      },);
-    },);
+      }
+    }
     return fonts;
   }
 };
@@ -42933,6 +48010,12 @@ function mapToKnownCategory2(category,) {
   };
   if (!category) return void 0;
   return categoryMapping[category];
+}
+function mapBy(array, keyFn,) {
+  return array.reduce((acc, item,) => {
+    acc[keyFn(item,)] = item;
+    return acc;
+  }, {},);
 }
 var import_fontfaceobserver = __toESM(require_fontfaceobserver_standalone(), 1,);
 var FONT_LOADING_TIMEOUT = 5e3;
@@ -42952,10 +48035,11 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
     url,
     stretch,
     unicodeRange,
+    isVariableFont: isVariableFont2,
   } = data2;
-  const weight = data2.weight || 500;
+  const weight = isVariableFont2 ? data2.weight : data2.weight || 500;
   const style = data2.style || 'normal';
-  const requestId = `${family}-${style}-${weight}-${url}`;
+  const requestId = isVariableFont2 ? `${family}-${style}-${weight}-${url}-variable` : `${family}-${style}-${weight}-${url}`;
   if (!fontRequests.has(requestId,) || attempt > 0) {
     const fontFace = new FontFace(family, `url(${url})`, {
       weight: isString2(weight,) ? weight : weight == null ? void 0 : weight.toString(),
@@ -43010,6 +48094,56 @@ async function isFontReady(family, style, weight,) {
     }`,);
   }
 }
+var framer_default = {
+  Inter: [{
+    tag: 'opsz',
+    minValue: 14,
+    maxValue: 32,
+    defaultValue: 14,
+    name: 'Optical size',
+  }, {
+    tag: 'wght',
+    minValue: 100,
+    maxValue: 900,
+    defaultValue: 400,
+    name: 'Weight',
+  },],
+};
+function loadVariationAxes(source,) {
+  try {
+    if (source === 'framer') {
+      if (!isValidVariationAxesData(framer_default,)) return void 0;
+      return framer_default;
+    } else {
+      const axes = (async () => {
+        switch (source) {
+          case 'google': {
+            return (await Promise.resolve().then(() => (init_google_36EP2W3I(), google_36EP2W3I_exports))).default;
+          }
+          case 'fontshare': {
+            return (await Promise.resolve().then(() => (init_fontshare_SD5DEEGS(), fontshare_SD5DEEGS_exports))).default;
+          }
+          default:
+            assertNever(source,);
+        }
+      })();
+      if (!isValidVariationAxesData(axes,)) return void 0;
+      return axes;
+    }
+  } catch (error) {
+    console.error(error,);
+    return void 0;
+  }
+}
+function isValidVariationAxesData(data2,) {
+  return isObject2(data2,) && Object.values(data2,).every(isValidVariationAxes,);
+}
+function isVariationAxis(data2,) {
+  return isObject2(data2,) && isString2(data2.tag,);
+}
+function isValidVariationAxes(data2,) {
+  return Array.isArray(data2,) && data2.every(isVariationAxis,);
+}
 var FontStore = class {
   constructor() {
     __publicField(this, 'enabled', false,);
@@ -43044,11 +48178,21 @@ var FontStore = class {
   }
   async importGoogleFonts() {
     if (!this.getGoogleFontsListPromise) {
-      this.getGoogleFontsListPromise = runtime.fetchGoogleFontsList();
-      const googleFonts = await this.getGoogleFontsListPromise;
-      for (const font of this.google.importFonts(googleFonts,)) {
-        this.addFont(font,);
-      }
+      this.getGoogleFontsListPromise = Promise.resolve().then(async () => {
+        const {
+          staticFonts,
+          variableFonts,
+        } = await runtime.fetchGoogleFontsList();
+        const axesData = await loadVariationAxes('google',/* Google */
+        );
+        for (const font of this.google.importFonts(staticFonts, variableFonts, axesData,)) {
+          this.addFont(font,);
+        }
+        return {
+          staticFonts,
+          variableFonts,
+        };
+      },);
     }
     return this.getGoogleFontsListPromise;
   }
@@ -43056,14 +48200,18 @@ var FontStore = class {
     if (!this.getFontshareFontsListPromise) {
       this.getFontshareFontsListPromise = runtime.fetchFontshareFontsList();
       const fontshareFonts = await this.getFontshareFontsListPromise;
-      for (const font of this.fontshare.importFonts(fontshareFonts,)) {
+      const axesData = await loadVariationAxes('fontshare',/* Fontshare */
+      );
+      for (const font of this.fontshare.importFonts(fontshareFonts, axesData,)) {
         this.addFont(font,);
       }
     }
     return this.getFontshareFontsListPromise;
   }
   importFramerFonts(fonts,) {
-    this.framer.importFonts(fonts,).forEach((font) => {
+    const axesData = loadVariationAxes('framer',/* Framer */
+    );
+    this.framer.importFonts(fonts, axesData,).forEach((font) => {
       this.addFont(font,);
     },);
   }
@@ -43107,7 +48255,7 @@ var FontStore = class {
     const googleLocator = this.google.parseSelector(selector,);
     if (googleLocator) {
       const fontVariant = GoogleFontSource.parseVariant(googleLocator.variant,);
-      if (fontVariant) {
+      if (isSuccessfullyParsedFontVariant(fontVariant,)) {
         return {
           style: fontVariant.style,
           weight: fontVariant.weight,
@@ -43121,7 +48269,7 @@ var FontStore = class {
     const fontshareLocator = this.fontshare.parseSelector(selector,);
     if (fontshareLocator) {
       const fontVariant = FontshareSource.parseVariant(fontshareLocator.variant,);
-      if (fontVariant) {
+      if (isSuccessfullyParsedFontVariant(fontVariant,)) {
         return {
           style: fontVariant.style,
           weight: fontVariant.weight,
@@ -43157,6 +48305,18 @@ var FontStore = class {
         if (import_process3.default.env.NODE_ENV !== 'test') {
           await isFontReady(font.family.name, font.style, font.weight,);
         }
+        if (isVariableFont(font,)) {
+          if (!font.file) {
+            return Promise.reject(`Unable to load font: ${font.selector}`,);
+          }
+          await loadFont({
+            family: font.family.name,
+            url: font.file,
+            weight: font.weight,
+            style: font.style,
+            isVariableFont: isVariableFont(font,),
+          }, document,);
+        }
         this.loadedSelectors.add(font.selector,);
         return 1;
       case 'google':
@@ -43170,6 +48330,7 @@ var FontStore = class {
           url: font.file,
           weight: font.weight,
           style: font.style,
+          isVariableFont: isVariableFont(font,),
         }, document,);
         this.loadedSelectors.add(font.selector,);
         return 1;
@@ -44169,6 +49330,16 @@ var styles3 = /* @__PURE__ */ (() => [
     borderStyle: css.variable('--framer-input-focused-border-style', '--framer-input-border-style',/* BorderStyle */
     ),
     borderWidth: css.variable('--framer-input-focused-border-width', inputBorderAllSides,),
+  },),
+  // Enforcing a color on the native select options. On windows, browsers select options
+  // inherit some style properties like color but not others so they might end up in a weird
+  // state in which we can't read the options until we hover.
+  // These are ignored on mac
+  css(`.${selectWrapperClassName} select option`, {
+    color: '#000',
+  },),
+  css(`.${selectWrapperClassName} select option:disabled`, {
+    color: 'rgba(0, 0, 0, 0.4)',
   },),
 ])();
 var FormSelect = /* @__PURE__ */ withCSS(Select, styles3,);
@@ -47613,7 +52784,7 @@ var package_default = {
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
-    '@types/google.fonts': '1.0.3',
+    '@types/google.fonts': '^1.0.5',
     '@types/node': '^20.16.5',
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
@@ -47882,6 +53053,7 @@ export {
   NavigationConsumer,
   NavigationTransitionType,
   NavigationWrapper as Navigation,
+  nestedLinksCollector,
   NotFoundError,
   ObservableObject,
   optimizeAppear,
