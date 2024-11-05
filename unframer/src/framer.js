@@ -15248,7 +15248,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.IO4SIASU.js
+// https :https://app.framerstatic.com/framer.MMR3BPLL.js
 init_chunk_4RACSZOF();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -37933,8 +37933,11 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
       onKeyDown,
     };
     const replacedChildren = !shouldReplaceLink ? children : Children.map(children, (child) => {
-      if (!isValidElement(child,)) return child;
-      const tag = isMotionComponent(child.type,) ? motion.span : 'span';
+      if (!isChildReplaceable(child,)) return child;
+      if ((typeof window === 'undefined' || false) && parentLink && linkData) {
+        nestedLinksCollector.addLink(parentLink, linkData,);
+      }
+      const tag = maybeReplaceAnchorWithSpan(child.type,);
       const {
         children: childChildren,
         ...childProps
@@ -37943,6 +37946,7 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
         ? {
           ...childProps,
           ...nestedLinkProps,
+          as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
         }
         : childProps;
       const ref = 'ref' in child ? child.ref : void 0;
@@ -37956,14 +37960,11 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
       value: linkData,
       children: replacedChildren,
     },);
-  }, [isValidLink, linkData, onAuxClick, onClick, onKeyDown, shouldReplaceLink,],);
+  }, [isValidLink, linkData, onAuxClick, onClick, onKeyDown, shouldReplaceLink, parentLink,],);
   const refCallback = useCallback((node) => {
     if (isOnFramerCanvas || !shouldReplaceLink || !isValidLink) return;
     node.dataset.hydrated = 'true';
   }, [isOnFramerCanvas, isValidLink, shouldReplaceLink,],);
-  if ((typeof window === 'undefined' || false) && parentLink && linkData) {
-    nestedLinksCollector.addLink(parentLink, linkData,);
-  }
   return [getChildren, refCallback,];
 }
 function resolveLink(href, router, implicitPathVariables,) {
@@ -38023,6 +38024,15 @@ function resolvePageScope(pageLink, router,) {
     relative: false,
     preserveQueryParams: false,
   },);
+}
+function isChildReplaceable(child,) {
+  return isValidElement(child,) &&
+    (maybeReplaceAnchorWithSpan(child.type,) !== child.type || maybeReplaceAnchorWithSpan(child.props.as,) !== child.props.as);
+}
+function maybeReplaceAnchorWithSpan(component,) {
+  if (component === 'a') return 'span';
+  if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
+  return component;
 }
 var salt = 'framer';
 var difficulty = 3;
