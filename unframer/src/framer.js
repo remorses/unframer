@@ -15248,7 +15248,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.MMR3BPLL.js
+// https :https://app.framerstatic.com/framer.TMZI2SCE.js
 init_chunk_4RACSZOF();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18236,7 +18236,9 @@ function useMarkSuspenseEffectEnd() {
       hydrationPaintEffectHasRun = true;
       performance.mark(hydrationFP,);
       measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
-      measureSafe(`${hydrationMarkPrefix}browser-render`, hydrationAnimationFrameEnd, hydrationFP,);
+      queueMicrotask(() => {
+        measureSafe(`${hydrationMarkPrefix}browser-render`, hydrationAnimationFrameEnd, hydrationFP,);
+      },);
     },
     [],
     // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
@@ -36366,7 +36368,6 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
     cursorHash: void 0,
   },);
   const forceRender = useForceUpdate3();
-  const hasCursors = !isEmptyObject(internalState.current.cursors,);
   React4.useEffect(() => {
     let x2 = 0;
     let y2 = 0;
@@ -36385,7 +36386,7 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
       frame.update(updateValues,);
     }
     const updateVariant = () => {
-      if (!hasCursors) return;
+      if (isEmptyObject(internalState.current.cursors,)) return;
       const hash2 = getCursorHash(x2, y2,);
       if (hash2 !== internalState.current.cursorHash) {
         internalState.current.cursorHash = hash2;
@@ -36419,7 +36420,7 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
       document.removeEventListener('pointerup', fireEventToTarget,);
       cancelFrame(updateVariant,);
     };
-  }, [opacity, pointerX, pointerY, hasCursors, forceRender,],);
+  }, [opacity, pointerX, pointerY, forceRender,],);
   React4.useEffect(() => {
     function hideCursor() {
       animate(opacity, 0, {
@@ -36437,7 +36438,7 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
   React4.useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
-      internalState.current.cursorHash = getCursorHash(pointerX.get(), pointerY.get(),);
+      internalState.current.cursorHash = !isEmptyObject(newCursors,) ? getCursorHash(pointerX.get(), pointerY.get(),) : null;
       forceRender();
     }
     const unregister = onRegisterCursors(updateCursors,);
