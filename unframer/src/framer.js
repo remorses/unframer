@@ -15248,7 +15248,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.TMZI2SCE.js
+// https :https://app.framerstatic.com/framer.SVZ65Y3E.js
 init_chunk_4RACSZOF();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -24150,6 +24150,7 @@ var richTextCSSRules = [
             font-family: var(--framer-blockquote-font-family-bold, var(--framer-font-family-bold));
             font-style: var(--framer-blockquote-font-style-bold, var(--framer-font-style-bold));
             font-weight: var(--framer-blockquote-font-weight-bold, var(--framer-font-weight-bold, bolder));
+            font-variation-settings: var(--framer-blockquote-font-variation-axes-bold, var(--framer-font-variation-axes-bold));
         }
     `, /* css */
   `
@@ -24157,6 +24158,7 @@ var richTextCSSRules = [
             font-family: var(--framer-blockquote-font-family-italic, var(--framer-font-family-italic));
             font-style: var(--framer-blockquote-font-style-italic, var(--framer-font-style-italic, italic));
             font-weight: var(--framer-blockquote-font-weight-italic, var(--framer-font-weight-italic));
+            font-variation-settings: var(--framer-blockquote-font-variation-axes-italic, var(--framer-font-variation-axes-italic));
         }
     `, /* css */
   `
@@ -24164,6 +24166,7 @@ var richTextCSSRules = [
             font-family: var(--framer-blockquote-font-family-bold-italic, var(--framer-font-family-bold-italic));
             font-style: var(--framer-blockquote-font-style-bold-italic, var(--framer-font-style-bold-italic, italic));
             font-weight: var(--framer-blockquote-font-weight-bold-italic, var(--framer-font-weight-bold-italic, bolder));
+            font-variation-settings: var(--framer-blockquote-font-variation-axes-bold-italic, var(--framer-font-variation-axes-bold-italic));
         }
     `, /* css */
   `
@@ -47386,6 +47389,15 @@ var import_process3 = __toESM(require_browser(), 1,);
 function isVariableFont(font,) {
   return Boolean(font.variationAxes,);
 }
+function createFontFamilyName(font,) {
+  if (isVariableFont(font,) && font.family.source !== 'custom') {
+    return suffixFamilyName(font.family.name,);
+  }
+  return font.family.name;
+}
+function suffixFamilyName(familyName,) {
+  return `${familyName} Variable`;
+}
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
@@ -47858,10 +47870,11 @@ var FramerFontSource = class {
       if (!fontFamily) {
         fontFamily = this.addFontFamily(familyName,);
       }
+      const isVariable = framerFont.selector === framerFont.selectorVariable || framerFont.selector === framerFont.selectorVariableItalic;
       const font = {
         ...rest,
         family: fontFamily,
-        variationAxes,
+        variationAxes: isVariable ? variationAxes : void 0,
       };
       fontFamily.fonts.push(font,);
       fonts.push(font,);
@@ -48050,7 +48063,7 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
   } = data2;
   const weight = isVariableFont2 ? data2.weight : data2.weight || 500;
   const style = data2.style || 'normal';
-  const requestId = isVariableFont2 ? `${family}-${style}-${weight}-${url}-variable` : `${family}-${style}-${weight}-${url}`;
+  const requestId = `${family}-${style}-${weight}-${url}`;
   if (!fontRequests.has(requestId,) || attempt > 0) {
     const fontFace = new FontFace(family, `url(${url})`, {
       weight: isString2(weight,) ? weight : weight == null ? void 0 : weight.toString(),
@@ -48258,7 +48271,7 @@ var FontStore = class {
         style: font.style,
         weight: font.weight,
         variant: font.variant,
-        family: font.family.name,
+        family: createFontFamilyName(font,),
         source: font.family.source,
         category: font.category,
       };
@@ -48308,6 +48321,7 @@ var FontStore = class {
       return 0;
     }
     const source = font.family.source;
+    const fontIsVariable = isVariableFont(font,);
     switch (source) {
       case 'local':
         this.loadedSelectors.add(font.selector,);
@@ -48316,16 +48330,16 @@ var FontStore = class {
         if (import_process3.default.env.NODE_ENV !== 'test') {
           await isFontReady(font.family.name, font.style, font.weight,);
         }
-        if (isVariableFont(font,)) {
+        if (fontIsVariable) {
           if (!font.file) {
             return Promise.reject(`Unable to load font: ${font.selector}`,);
           }
           await loadFont({
-            family: font.family.name,
+            family: createFontFamilyName(font,),
             url: font.file,
             weight: font.weight,
             style: font.style,
-            isVariableFont: isVariableFont(font,),
+            isVariableFont: fontIsVariable,
           }, document,);
         }
         this.loadedSelectors.add(font.selector,);
@@ -48337,11 +48351,11 @@ var FontStore = class {
           return Promise.reject(`Unable to load font: ${font.selector}`,);
         }
         await loadFont({
-          family: font.family.name,
+          family: createFontFamilyName(font,),
           url: font.file,
           weight: font.weight,
           style: font.style,
-          isVariableFont: isVariableFont(font,),
+          isVariableFont: fontIsVariable,
         }, document,);
         this.loadedSelectors.add(font.selector,);
         return 1;
