@@ -13,7 +13,7 @@ var __export = (target, all,) => {
   }
 };
 
-// https :https://app.framerstatic.com/chunk-4RACSZOF.js
+// https :https://app.framerstatic.com/chunk-QLPHEVXG.mjs
 var __create,
   __defProp2,
   __getOwnPropDesc,
@@ -31,8 +31,8 @@ var __create,
   __privateAdd,
   __privateSet,
   __privateMethod;
-var init_chunk_4RACSZOF = __esm({
-  'https :https://app.framerstatic.com/chunk-4RACSZOF.js'() {
+var init_chunk_QLPHEVXG = __esm({
+  'https :https://app.framerstatic.com/chunk-QLPHEVXG.mjs'() {
     __create = Object.create;
     __defProp2 = Object.defineProperty;
     __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -120,15 +120,15 @@ var init_chunk_4RACSZOF = __esm({
   },
 },);
 
-// https :https://app.framerstatic.com/google-36EP2W3I.js
-var google_36EP2W3I_exports = {};
-__export(google_36EP2W3I_exports, {
+// https :https://app.framerstatic.com/google-VUTJSVWB.mjs
+var google_VUTJSVWB_exports = {};
+__export(google_VUTJSVWB_exports, {
   default: () => google_default,
 },);
 var google_default;
-var init_google_36EP2W3I = __esm({
-  'https :https://app.framerstatic.com/google-36EP2W3I.js'() {
-    init_chunk_4RACSZOF();
+var init_google_VUTJSVWB = __esm({
+  'https :https://app.framerstatic.com/google-VUTJSVWB.mjs'() {
+    init_chunk_QLPHEVXG();
     google_default = {
       'GF;AR One Sans': [{
         tag: 'ARRR',
@@ -4179,15 +4179,15 @@ var init_google_36EP2W3I = __esm({
   },
 },);
 
-// https :https://app.framerstatic.com/fontshare-SD5DEEGS.js
-var fontshare_SD5DEEGS_exports = {};
-__export(fontshare_SD5DEEGS_exports, {
+// https :https://app.framerstatic.com/fontshare-XR4PZDC4.mjs
+var fontshare_XR4PZDC4_exports = {};
+__export(fontshare_XR4PZDC4_exports, {
   default: () => fontshare_default,
 },);
 var fontshare_default;
-var init_fontshare_SD5DEEGS = __esm({
-  'https :https://app.framerstatic.com/fontshare-SD5DEEGS.js'() {
-    init_chunk_4RACSZOF();
+var init_fontshare_XR4PZDC4 = __esm({
+  'https :https://app.framerstatic.com/fontshare-XR4PZDC4.mjs'() {
+    init_chunk_QLPHEVXG();
     fontshare_default = {
       'FS;Familjen Grotesk': [{
         tag: 'wght',
@@ -4829,8 +4829,8 @@ var init_fontshare_SD5DEEGS = __esm({
   },
 },);
 
-// https :https://app.framerstatic.com/chunk-75PIAIKN.js
-init_chunk_4RACSZOF();
+// https :https://app.framerstatic.com/chunk-4Z6NVKPU.mjs
+init_chunk_QLPHEVXG();
 import { createContext, } from 'react';
 import { useCallback, useContext, useEffect, useId, } from 'react';
 import { useLayoutEffect, } from 'react';
@@ -15248,8 +15248,8 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.SVZ65Y3E.js
-init_chunk_4RACSZOF();
+// https :https://app.framerstatic.com/framer.PXU7IY7A.mjs
+init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
@@ -37322,6 +37322,9 @@ var NestedLinksCollector = class {
     return [...this.links.values(),];
   }
   addLink(parentLink, linkData,) {
+    if (typeof window !== 'undefined' && true || !parentLink || !linkData) {
+      return;
+    }
     if (!this.links.has(parentLink.nodeId,)) {
       this.links.set(parentLink.nodeId, {
         parent: parentLink,
@@ -37861,6 +37864,9 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
   const isOnFramerCanvas = useIsOnFramerCanvas();
   const router = useRouter();
   const currentRoute = useCurrentRoute();
+  const {
+    replaceNestedLinks,
+  } = useLibraryFeatures();
   const route = useMemo(() => {
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
@@ -37891,7 +37897,7 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
     };
   }, [href, nodeId, propsAddedByLink, route,],);
   const isValidLink = Object.keys(propsAddedByLink,).length > 0;
-  const shouldReplaceLink = Boolean(!isOnFramerCanvas && (parentLink || !isValidLink),);
+  const shouldReplaceLink = Boolean(replaceNestedLinks && !isOnFramerCanvas && (parentLink || !isValidLink),);
   const onClick = useCallback((event) => {
     var _a;
     if (!propsAddedByLink.href) return;
@@ -37938,9 +37944,7 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
     };
     const replacedChildren = !shouldReplaceLink ? children : Children.map(children, (child) => {
       if (!isChildReplaceable(child,)) return child;
-      if ((typeof window === 'undefined' || false) && parentLink && linkData) {
-        nestedLinksCollector.addLink(parentLink, linkData,);
-      }
+      nestedLinksCollector.addLink(parentLink, linkData,);
       const tag = maybeReplaceAnchorWithSpan(child.type,);
       const {
         children: childChildren,
@@ -48142,10 +48146,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await Promise.resolve().then(() => (init_google_36EP2W3I(), google_36EP2W3I_exports))).default;
+            return (await Promise.resolve().then(() => (init_google_VUTJSVWB(), google_VUTJSVWB_exports))).default;
           }
           case 'fontshare': {
-            return (await Promise.resolve().then(() => (init_fontshare_SD5DEEGS(), fontshare_SD5DEEGS_exports))).default;
+            return (await Promise.resolve().then(() => (init_fontshare_XR4PZDC4(), fontshare_XR4PZDC4_exports))).default;
           }
           default:
             assertNever(source,);
