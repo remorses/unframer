@@ -120,14 +120,14 @@ var init_chunk_QLPHEVXG = __esm({
   },
 },);
 
-// https :https://app.framerstatic.com/google-VUTJSVWB.mjs
-var google_VUTJSVWB_exports = {};
-__export(google_VUTJSVWB_exports, {
+// https :https://app.framerstatic.com/google-5Y2W5CAB.mjs
+var google_5Y2W5CAB_exports = {};
+__export(google_5Y2W5CAB_exports, {
   default: () => google_default,
 },);
 var google_default;
-var init_google_VUTJSVWB = __esm({
-  'https :https://app.framerstatic.com/google-VUTJSVWB.mjs'() {
+var init_google_5Y2W5CAB = __esm({
+  'https :https://app.framerstatic.com/google-5Y2W5CAB.mjs'() {
     init_chunk_QLPHEVXG();
     google_default = {
       'GF;AR One Sans': [{
@@ -858,6 +858,19 @@ var init_google_VUTJSVWB = __esm({
         defaultValue: 200,
         name: 'Weight',
       },],
+      'GF;Doto': [{
+        tag: 'ROND',
+        minValue: 0,
+        maxValue: 100,
+        defaultValue: 0,
+        name: 'Roundness',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
       'GF;DynaPuff': [{
         tag: 'wght',
         minValue: 400,
@@ -900,6 +913,13 @@ var init_google_VUTJSVWB = __esm({
         name: 'wght',
       },],
       'GF;Edu AU VIC WA NT Hand': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
+      },],
+      'GF;Edu AU VIC WA NT Pre': [{
         tag: 'wght',
         minValue: 400,
         maxValue: 700,
@@ -1089,6 +1109,20 @@ var init_google_VUTJSVWB = __esm({
         defaultValue: 100,
         name: 'Width',
       },],
+      'GF;Funnel Display': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Funnel Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
       'GF;Fustat': [{
         tag: 'wght',
         minValue: 200,
@@ -1104,6 +1138,20 @@ var init_google_VUTJSVWB = __esm({
         name: 'Weight',
       },],
       'GF;Gantari': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Geist': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Geist Mono': [{
         tag: 'wght',
         minValue: 100,
         maxValue: 900,
@@ -1276,6 +1324,26 @@ var init_google_VUTJSVWB = __esm({
         maxValue: 100,
         defaultValue: 0,
         name: 'Shadow',
+      },],
+      'GF;Host Grotesk': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Hubot Sans': [{
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 75,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
       },],
       'GF;Ibarra Real Nova': [{
         tag: 'wght',
@@ -1782,6 +1850,13 @@ var init_google_VUTJSVWB = __esm({
         defaultValue: 400,
         name: 'Weight',
       },],
+      'GF;Miriam Libre': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
       'GF;Moderustic': [{
         tag: 'wght',
         minValue: 300,
@@ -1794,6 +1869,19 @@ var init_google_VUTJSVWB = __esm({
         minValue: 300,
         maxValue: 700,
         defaultValue: 300,
+        name: 'Weight',
+      },],
+      'GF;Mona Sans': [{
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
         name: 'Weight',
       },],
       'GF;Monda': [{
@@ -3816,6 +3904,19 @@ var init_google_VUTJSVWB = __esm({
         minValue: 100,
         maxValue: 800,
         defaultValue: 400,
+        name: 'Weight',
+      },],
+      'GF;Sour Gummy': [{
+        tag: 'wdth',
+        minValue: 100,
+        maxValue: 125,
+        defaultValue: 100,
+        name: 'Width',
+      }, {
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
         name: 'Weight',
       },],
       'GF;Source Code Pro': [{
@@ -15248,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.PXU7IY7A.mjs
+// https :https://app.framerstatic.com/framer.CGL726TF.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -48146,7 +48247,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await Promise.resolve().then(() => (init_google_VUTJSVWB(), google_VUTJSVWB_exports))).default;
+            return (await Promise.resolve().then(() => (init_google_5Y2W5CAB(), google_5Y2W5CAB_exports))).default;
           }
           case 'fontshare': {
             return (await Promise.resolve().then(() => (init_fontshare_XR4PZDC4(), fontshare_XR4PZDC4_exports))).default;
