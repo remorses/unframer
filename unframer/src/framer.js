@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.CGL726TF.mjs
+// https :https://app.framerstatic.com/framer.WBWNDTAM.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17318,13 +17318,20 @@ function interactionResponse(options,) {
     },);
   },);
 }
-function useAfterPaintEffect(fn, deps, options,) {
-  useLayoutEffect(() => {
-    const runAfterPaint = async () => {
-      await interactionResponse(options,);
-      fn();
+function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect,) {
+  useEffectFn(() => {
+    const runAfterPaint = async (fn) => {
+      await interactionResponse(opts,);
+      return fn();
     };
-    void runAfterPaint();
+    const runPromise = runAfterPaint(effectFn,);
+    return () => {
+      void (async () => {
+        const cleanup = await runPromise;
+        if (!cleanup) return;
+        void runAfterPaint(cleanup,);
+      })();
+    };
   }, deps,);
 }
 var noop2 = () => {};

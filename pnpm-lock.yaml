@@ -233,11 +233,11 @@ importers:
         specifier: ^22.7.4
         version: 22.7.4
       '@types/react':
-        specifier: ^18.3.5
-        version: 18.3.5
+        specifier: ^18.3.12
+        version: 18.3.12
       '@xmorse/deployment-utils':
-        specifier: ^0.2.14
-        version: 0.2.14(@types/node@22.7.4)(terser@5.31.6)
+        specifier: ^0.2.17
+        version: 0.2.17(@types/node@22.7.4)(terser@5.31.6)
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -1371,6 +1371,9 @@ packages:
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
+  '@types/react@18.3.12':
+    resolution: {integrity: sha512-D2wOSq/d6Agt28q7rSI3jhU7G6aiuzljDGZ2hTZHIkrTLUI+AF3WMeKkEZ9nN2fkBAlcktT6vcZjDFiIhMYEQw==}
+
   '@types/react@18.3.5':
     resolution: {integrity: sha512-WeqMfGJLGuLCqHGYRGHxnKrXcTitc6L/nBUWfWPcTarG3t9PsquqUMuVeXZeca+mglY4Vo5GZjCi0A3Or2lnxA==}
 
@@ -1519,8 +1522,8 @@ packages:
   '@webassemblyjs/wast-printer@1.12.1':
     resolution: {integrity: sha512-+X4WAlOisVWQMikjbcvY2e0rwPsKQ9F688lksZhBcPycBBuii3O7m8FACbDMWDojpAqvjIncrG8J0XHKyQfVeA==}
 
-  '@xmorse/deployment-utils@0.2.14':
-    resolution: {integrity: sha512-UDF45Dyo7NVWiuVcUJmL1u5rYvhu8Sb+wM688ALiU21uKCdKh5mpso/poLRvS7hcGPQUDFlS8ID909TWUBCTzA==}
+  '@xmorse/deployment-utils@0.2.17':
+    resolution: {integrity: sha512-HwTJjbkrQH6PWDeH1UEss0Xya2/luPwZM6pxm0j5J90RiHLfy00bb5yev+fzCy0sNq/uCShAb2Uvm+eZeZsKug==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -6417,6 +6420,11 @@ snapshots:
     dependencies:
       '@types/react': 18.3.5
 
+  '@types/react@18.3.12':
+    dependencies:
+      '@types/prop-types': 15.7.12
+      csstype: 3.1.3
+
   '@types/react@18.3.5':
     dependencies:
       '@types/prop-types': 15.7.12
@@ -6677,7 +6685,7 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
 
-  '@xmorse/deployment-utils@0.2.14(@types/node@22.7.4)(terser@5.31.6)':
+  '@xmorse/deployment-utils@0.2.17(@types/node@22.7.4)(terser@5.31.6)':
     dependencies:
       '@actions/cache': 3.2.4
       '@iarna/toml': 2.2.5
