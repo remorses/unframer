@@ -15349,11 +15349,12 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.WBWNDTAM.mjs
+// https :https://app.framerstatic.com/framer.REWUBG6L.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
+import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
@@ -36365,13 +36366,13 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
       ref,
     },);
   },);
-var CustomCursorContext = /* @__PURE__ */ React4.createContext({
+var CustomCursorContext = /* @__PURE__ */ createContext({
   onRegisterCursors: () => () => {},
   registerCursors: () => {},
 },);
 var replaceCursorClassName = 'framer-cursor-none';
 var cursorComponentClassName = 'framer-pointer-events-none';
-var CustomCursorContextProvider = /* @__PURE__ */ React4.memo(function CustomCursorList({
+var CustomCursorContextProvider = /* @__PURE__ */ memo2(function CustomCursorList({
   children,
 },) {
   const value = useConstant2(() => {
@@ -36466,20 +36467,39 @@ function isEmptyObject(object,) {
   for (const _ in object) return false;
   return true;
 }
-var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorComponent2() {
+var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent2() {
   const {
     onRegisterCursors,
   } = useContext(CustomCursorContext,);
+  const [hasHoverCapability, setHasHoverCapability,] = useState(false,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
-  const cursorRef = React4.useRef(null,);
-  const internalState = React4.useRef({
+  const cursorRef = useRef(null,);
+  const internalState = useRef({
     cursors: {},
     cursorHash: void 0,
   },);
   const forceRender = useForceUpdate3();
-  React4.useEffect(() => {
+  useLayoutEffect(() => {
+    const noHoverMQ = safeWindow.matchMedia('(any-hover: none)',);
+    function updateRender(e,) {
+      if (e.matches) {
+        startTransition2(() => setHasHoverCapability(false,));
+      } else {
+        setHasHoverCapability(true,);
+      }
+    }
+    noHoverMQ.addEventListener('change', updateRender,);
+    if (!noHoverMQ.matches) {
+      setHasHoverCapability(true,);
+    }
+    return () => {
+      noHoverMQ.removeEventListener('change', updateRender,);
+    };
+  }, [],);
+  useEffect(() => {
+    if (!hasHoverCapability) return;
     let x2 = 0;
     let y2 = 0;
     function updateValues() {
@@ -36490,12 +36510,6 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
         duration: 0.2,
       },);
     }
-    function updateCursor(e,) {
-      if (e.pointerType === 'touch') return;
-      x2 = e.clientX;
-      y2 = e.clientY;
-      frame.update(updateValues,);
-    }
     const updateVariant = () => {
       if (isEmptyObject(internalState.current.cursors,)) return;
       const hash2 = getCursorHash(x2, y2,);
@@ -36504,7 +36518,16 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
         frame.update(() => forceRender());
       }
     };
-    frame.read(updateVariant, true,);
+    function updateCursor(e,) {
+      if (e.pointerType === 'touch') {
+        cancelFrame(updateVariant,);
+        return;
+      }
+      frame.read(updateVariant, true,);
+      x2 = e.clientX;
+      y2 = e.clientY;
+      frame.update(updateValues,);
+    }
     function fireEventToTarget(e,) {
       if (e.target === cursorRef.current || !cursorRef.current) return;
       const event = new PointerEvent(e.type, {
@@ -36525,16 +36548,18 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
     safeWindow.addEventListener('pointermove', updateCursor,);
     document.addEventListener('pointerdown', fireEventToTarget,);
     document.addEventListener('pointerup', fireEventToTarget,);
+    frame.read(updateVariant, true,);
     return () => {
       safeWindow.removeEventListener('pointermove', updateCursor,);
       document.removeEventListener('pointerdown', fireEventToTarget,);
       document.removeEventListener('pointerup', fireEventToTarget,);
       cancelFrame(updateVariant,);
     };
-  }, [opacity, pointerX, pointerY, forceRender,],);
-  React4.useEffect(() => {
+  }, [opacity, pointerX, pointerY, forceRender, hasHoverCapability,],);
+  useEffect(() => {
+    if (!hasHoverCapability) return;
     function hideCursor() {
-      animate(opacity, 0, {
+      void animate(opacity, 0, {
         type: 'tween',
         duration: 0.2,
       },);
@@ -36545,8 +36570,8 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
       document.removeEventListener('mouseleave', hideCursor,);
       safeWindow.removeEventListener('blur', hideCursor,);
     };
-  }, [opacity,],);
-  React4.useLayoutEffect(() => {
+  }, [opacity, hasHoverCapability,],);
+  useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
       internalState.current.cursorHash = !isEmptyObject(newCursors,) ? getCursorHash(pointerX.get(), pointerY.get(),) : null;
@@ -36564,9 +36589,10 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
   } = internalState.current;
   const cursor = cursorHash ? cursors[cursorHash] : null;
   const replaceNativeCursor = customCursorReplacesNativeCursor(cursor,);
-  React4.useLayoutEffect(() => {
+  useLayoutEffect(() => {
+    if (!hasHoverCapability) return;
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
-  }, [replaceNativeCursor,],);
+  }, [replaceNativeCursor, hasHoverCapability,],);
   const Cursor = cursor == null ? void 0 : cursor.component;
   const spring2 = (cursor == null ? void 0 : cursor.transition) ?? {
     duration: 0,
@@ -36583,11 +36609,11 @@ var CustomCursorComponent = /* @__PURE__ */ React4.memo(function CustomCursorCom
   },);
   const alignment = cursor == null ? void 0 : cursor.alignment;
   const placement = cursor == null ? void 0 : cursor.placement;
-  const transformTemplate2 = React4.useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
+  const transformTemplate2 = useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
     alignment,
     placement,
   ],);
-  if (!cursor || !Cursor) return null;
+  if (!hasHoverCapability || !cursor || !Cursor) return null;
   return /* @__PURE__ */ jsx(Cursor, {
     transformTemplate: transformTemplate2,
     style: {
@@ -36607,7 +36633,7 @@ function useCustomCursors(webPageCursors,) {
     registerCursors,
   } = useContext(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
-  React4.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     registerCursors(cursors,);
   }, [cursors, registerCursors,],);
 }
@@ -44640,8 +44666,8 @@ var ScalarVariable = class extends ScalarNode {
   }
 };
 var Normalizer = class {
-  constructor(memo2,) {
-    this.memo = memo2;
+  constructor(memo22,) {
+    this.memo = memo22;
   }
   finishRelational(node,) {
     return this.memo.addRelational(node,);
