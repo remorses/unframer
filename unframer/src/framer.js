@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.REWUBG6L.mjs
+// https :https://app.framerstatic.com/framer.T2DJE5NA.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -52926,8 +52926,8 @@ var package_default = {
     coverage: 'yarn :jest --coverage',
     lint: 'yarn format-check:ts && yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
     'lint:ci': 'yarn format-check:ts && yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache --cache-strategy content',
-    'format:ts': 'yarn :format "src/**/*.{ts,tsx}"',
-    'format-check:ts': 'yarn :format-check "src/**/*.{ts,tsx}"',
+    'format:ts': 'yarn :format',
+    'format-check:ts': 'yarn :format-check',
     'lint:fix': 'yarn lint --fix --cache',
     test: 'yarn :jest',
     watch: 'yarn :jest --watch',
