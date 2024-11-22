@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.T2DJE5NA.mjs
+// https :https://app.framerstatic.com/framer.JSB4D3YV.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -28407,6 +28407,90 @@ function MagicMotionCrossfadeRoot(props,) {
     children: props.children,
   },);
 }
+function setRef(ref, value,) {
+  if (isFunction(ref,)) {
+    ref(value,);
+  } else if (isMutableRef(ref,)) {
+    ref.current = value;
+  }
+}
+function isMutableRef(ref,) {
+  return isObject2(ref,) && 'current' in ref;
+}
+function refHasValue(ref,) {
+  return isMutableRef(ref,) && ref.current !== null;
+}
+function useStableRefWithObserver() {
+  const callbacks = useConstant2(() => /* @__PURE__ */ new Set());
+  const cleanups = useConstant2(() => /* @__PURE__ */ new Map());
+  return useConstant2(() => (ref, refCallback,) => {
+    return {
+      get current() {
+        return ref.current;
+      },
+      set current(value,) {
+        if (refCallback) refCallback(value,);
+        ref.current = value;
+        const needsCleanup = value === null;
+        callbacks.forEach((callback) => {
+          if (needsCleanup && cleanups.has(callback,)) return;
+          const cleanup = callback(value,);
+          if (cleanup) cleanups.set(callback, cleanup,);
+        },);
+        if (needsCleanup) {
+          cleanups.forEach((cleanup) => cleanup());
+          cleanups.clear();
+        }
+      },
+      observe(fn, skipCall = false,) {
+        if (callbacks.has(fn,)) return;
+        callbacks.add(fn,);
+        if (!skipCall && ref.current) fn(ref.current,);
+      },
+      unobserve(fn,) {
+        if (fn) callbacks.delete(fn,);
+      },
+      cleanup(fn,) {
+        var _a;
+        if (!fn || !cleanups.has(fn,)) return false;
+        (_a = cleanups.get(fn,)) == null ? void 0 : _a();
+        return true;
+      },
+    };
+  });
+}
+function useObserverRef(forwardedRef,) {
+  const fallbackRef = useRef(null,);
+  const createStableRefWithObserver = useStableRefWithObserver();
+  return useConstant2(() => {
+    if (isMutableRef(forwardedRef,)) return createStableRefWithObserver(forwardedRef,);
+    if (isFunction(forwardedRef,)) return createStableRefWithObserver(fallbackRef, forwardedRef,);
+    return createStableRefWithObserver(fallbackRef,);
+  },);
+}
+function useRefEffect(ref, effect, deps,) {
+  var _a;
+  const effectRef = useRef();
+  const depsChangedRef = useRef();
+  useMemo(() => {
+    if (depsChangedRef.current !== void 0) depsChangedRef.current = true;
+  }, [deps,],);
+  if (!ref) return;
+  const depsChanged = depsChangedRef.current;
+  if (depsChanged) {
+    depsChangedRef.current = false;
+    if (!ref.cleanup(effectRef.current,)) {
+      (_a = effectRef.current) == null ? void 0 : _a.call(effectRef, null,);
+    }
+    const value = ref.current;
+    if (value) effect == null ? void 0 : effect(value,);
+  }
+  if (effectRef.current === effect) return;
+  ref.unobserve(effectRef.current,);
+  effectRef.current = effect;
+  ref.observe(effect, depsChanged,);
+  if (depsChangedRef.current === void 0) depsChangedRef.current = false;
+}
 var SharedIntersectionObserver = class {
   constructor(options,) {
     __publicField(this, 'sharedIntersectionObserver',);
@@ -28443,10 +28527,10 @@ function useSharedIntersectionObserver(ref, callback, options,) {
   const {
     enabled,
   } = options;
-  useEffect(() => {
+  useRefEffect(ref, (element) => {
     var _a;
-    const element = ref.current;
-    if (!enabled || !element) return;
+    if (!enabled) return;
+    if (element === null) return;
     let observer2 = observers2.get(key7,);
     if (!observer2 || observer2.root !== ((_a = options.root) == null ? void 0 : _a.current)) {
       const {
@@ -28460,7 +28544,9 @@ function useSharedIntersectionObserver(ref, callback, options,) {
       observers2.set(key7, observer2,);
     }
     observer2.observeElementWithCallback(element, callback,);
-    return () => observer2 == null ? void 0 : observer2.unobserve(element,);
+    return () => {
+      observer2 == null ? void 0 : observer2.unobserve(element,);
+    };
   }, [enabled,],);
 }
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
@@ -35284,10 +35370,17 @@ function useParallax(options, ref, visibilityStyle,) {
     if (speed === 100) return 0;
     return parallaxTransform(yValue, originalPosition.current, speed, offset, adjustPosition,);
   }, [originalPosition, speed, offset, adjustPosition,],);
-  React4.useLayoutEffect(() => {
+  const {
+    scrollY,
+  } = useScroll();
+  const parallaxY = useTransform(scrollY, transform2,);
+  const visibility = useMotionValue(adjustPosition && originalPosition.current === null ? 'hidden' : visibilityStyle,);
+  const defaultValue = useMotionValue(0,);
+  useRefEffect(ref, (element) => {
+    if (element === null) return;
     frame.read(() => {
-      var _a, _b;
-      originalPosition.current = ((_b = (_a = ref.current) == null ? void 0 : _a.getBoundingClientRect()) == null ? void 0 : _b.top) ?? 0;
+      var _a;
+      originalPosition.current = ((_a = element.getBoundingClientRect()) == null ? void 0 : _a.top) ?? 0;
     },);
     frame.update(() => {
       parallaxY.set(transform2(scrollY.get(),),);
@@ -35295,13 +35388,8 @@ function useParallax(options, ref, visibilityStyle,) {
         visibility.set(visibilityStyle ?? 'initial',);
       }
     },);
-  }, [ref, originalPosition, adjustPosition,],);
-  const {
-    scrollY,
-  } = useScroll();
-  const parallaxY = useTransform(scrollY, transform2,);
-  const visibility = useMotionValue(adjustPosition && originalPosition.current === null ? 'hidden' : visibilityStyle,);
-  const defaultValue = useMotionValue(0,);
+  }, [adjustPosition,],// when adjustPosition changes, call the effect again
+  );
   return {
     values: {
       y: shouldReduceMotion || !parallaxTransformEnabled ? defaultValue : parallaxY,
@@ -35318,7 +35406,7 @@ function getTransition(value,) {
   if (isString2(value,) || !isObject2(value,)) return void 0;
   return value == null ? void 0 : value.transition;
 }
-async function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
+function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
   const transition = getTransition(target,);
   return Promise.all(effectValuesKeys.map((key7) => {
     return new Promise((resolve) => {
@@ -35392,12 +35480,12 @@ function usePresenceAnimation(
       values: makeFXValues(defaults,),
     };
   },);
-  useLayoutEffect(() => {
+  useRefEffect(ref, (element) => {
     const {
       hasMounted,
     } = internalState.current;
     if (hasMounted && animateConfig) return;
-    const visualElement = visualElementStore.get(ref.current,);
+    const visualElement = visualElementStore.get(element,);
     if (!visualElement) return;
     Object.assign(internalState.current, {
       hasMounted: true,
@@ -35407,13 +35495,15 @@ function usePresenceAnimation(
       const value = style == null ? void 0 : style[key7];
       visualElement.setBaseTarget(key7, isNumber2(value,) ? value : defaultFXValues[key7],);
     }
-  }, [animateConfig,],);
+  }, [animateConfig,],// This hook must only run on mount and when the animateConfig changes.
+  );
   const shouldReduceMotion = useReducedMotionConfig();
-  useLayoutEffect(() => {
+  useRefEffect(ref, (element) => {
     if (!enabled) {
       safeToRemove == null ? void 0 : safeToRemove();
       return;
     }
+    if (element === null) return;
     if (isPresent2 !== internalState.current.lastPresence) {
       Object.assign(internalState.current, {
         lastPresence: isPresent2,
@@ -35429,36 +35519,34 @@ function usePresenceAnimation(
             },)
           );
         }
-      } else {
-        if (exit) {
-          Object.assign(internalState.current, {
-            running: true,
-          },);
-          void runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() =>
-            Object.assign(internalState.current, {
-              running: false,
-            },)
-          ).then(() => safeToRemove());
-        } else {
-          safeToRemove();
-        }
-      }
-    } else {
-      const {
-        lastAnimate,
-        running,
-      } = internalState.current;
-      const hasAnimateChanged = !isEqual(animateConfig, lastAnimate,);
-      if (!hasAnimateChanged || !animateConfig) return;
-      Object.assign(internalState.current, {
-        lastAnimate: animateConfig,
-      },);
-      void runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId, !running,).then(() =>
+      } else if (exit) {
         Object.assign(internalState.current, {
-          running: false,
-        },)
-      );
+          running: true,
+        },);
+        void runEffectAnimation(exit, effect, shouldReduceMotion, ref, appearId,).then(() =>
+          Object.assign(internalState.current, {
+            running: false,
+          },)
+        ).then(() => safeToRemove());
+      } else {
+        safeToRemove();
+      }
+      return;
     }
+    const {
+      lastAnimate,
+      running,
+    } = internalState.current;
+    const hasAnimateChanged = !isEqual(animateConfig, lastAnimate,);
+    if (!hasAnimateChanged || !animateConfig) return;
+    Object.assign(internalState.current, {
+      lastAnimate: animateConfig,
+    },);
+    void runEffectAnimation(animateConfig, effect, shouldReduceMotion, ref, appearId, !running,).then(() =>
+      Object.assign(internalState.current, {
+        running: false,
+      },)
+    );
   },);
   return effect;
 }
@@ -35817,47 +35905,53 @@ function useStyleTransform({
 }, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
-  React4.useLayoutEffect(() => {
-    if (!styleTransformEffectEnabled || !transformTargets) return;
-    if (transformTrigger !== 'onScrollTarget') {
-      const outputRange = createPageOutputRange(transformTargets,);
-      return scrollInfo(
-        ({
-          y: scrollY,
-        },) => {
-          for (const key7 of effectValuesKeys) {
-            if (shouldReduceMotion && key7 !== 'opacity') continue;
-            if (pageInputRange.length !== outputRange[key7].length) continue;
-            if (outputRange[key7][0] === void 0) continue;
-            effect.values[key7].set(transform(scrollY.progress, pageInputRange, outputRange[key7],),);
-          }
-        },
-        transformTrigger === 'onInView'
-          ? {
-            target: ref.current ?? void 0,
-            offset: [`start end`, `end end`,],
-          }
-          : void 0,
-      );
-    } else {
-      return scrollInfo(({
+  const effectDisabled = !styleTransformEffectEnabled || !transformTargets;
+  const triggerOnScroll = transformTrigger === 'onScrollTarget';
+  useLayoutEffect(() => {
+    if (effectDisabled || !triggerOnScroll) return;
+    return scrollInfo(({
+      y: scrollY,
+    },) => {
+      if (!transformTargets[0] || transformTargets[0].ref && !transformTargets[0].ref.current) {
+        return;
+      }
+      const {
+        inputRange: scrollYInputRange,
+        effectKeyOutputRange,
+      } = createInputOutputRanges(transformTargets, transformViewportThreshold * scrollY.containerLength,);
+      if (scrollYInputRange.length === 0) return;
+      for (const key7 of effectValuesKeys) {
+        if (shouldReduceMotion && key7 !== 'opacity') continue;
+        if (scrollYInputRange.length !== effectKeyOutputRange[key7].length) continue;
+        if (effectKeyOutputRange[key7][0] === void 0) continue;
+        effect.values[key7].set(transform(scrollY.current, scrollYInputRange, effectKeyOutputRange[key7],),);
+      }
+    },);
+  }, [shouldReduceMotion, triggerOnScroll, transformViewportThreshold, effect, transformTargets, effectDisabled,],);
+  useRefEffect(ref, (element) => {
+    if (effectDisabled || triggerOnScroll || element === null) {
+      return;
+    }
+    const outputRange = createPageOutputRange(transformTargets,);
+    return scrollInfo(
+      ({
         y: scrollY,
       },) => {
-        if (!transformTargets[0] || transformTargets[0].ref && !transformTargets[0].ref.current) return;
-        const {
-          inputRange: scrollYInputRange,
-          effectKeyOutputRange,
-        } = createInputOutputRanges(transformTargets, transformViewportThreshold * scrollY.containerLength,);
-        if (scrollYInputRange.length === 0) return;
         for (const key7 of effectValuesKeys) {
           if (shouldReduceMotion && key7 !== 'opacity') continue;
-          if (scrollYInputRange.length !== effectKeyOutputRange[key7].length) continue;
-          if (effectKeyOutputRange[key7][0] === void 0) continue;
-          effect.values[key7].set(transform(scrollY.current, scrollYInputRange, effectKeyOutputRange[key7],),);
+          if (pageInputRange.length !== outputRange[key7].length) continue;
+          if (outputRange[key7][0] === void 0) continue;
+          effect.values[key7].set(transform(scrollY.progress, pageInputRange, outputRange[key7],),);
         }
-      },);
-    }
-  }, [shouldReduceMotion, transformTrigger, ref, transformViewportThreshold, styleTransformEffectEnabled, effect, transformTargets,],);
+      },
+      transformTrigger === 'onInView'
+        ? {
+          target: element ?? void 0,
+          offset: ['start end', 'end end',],
+        }
+        : void 0,
+    );
+  }, [shouldReduceMotion, transformTrigger, triggerOnScroll, effect, transformTargets, effectDisabled,],);
   useAttachOptionalSpring(effect.values, spring2,);
   return React4.useMemo(() => {
     return {
@@ -35936,6 +36030,7 @@ function isVariantOrVariantList(value,) {
 }
 var withFX = (Component15) =>
   React4.forwardRef((props, forwardedRef,) => {
+    var _a;
     if (props.__withFX) {
       return /* @__PURE__ */ jsx(Component15, {
         ...props,
@@ -35956,8 +36051,6 @@ var withFX = (Component15) =>
         ref: forwardedRef,
       },);
     }
-    const fallbackRef = React4.useRef(null,);
-    const ref = forwardedRef ?? fallbackRef;
     const {
       parallax = {},
       styleAppear = {},
@@ -35972,20 +36065,21 @@ var withFX = (Component15) =>
       __smartComponentFX: inSmartComponent = false,
     } = props;
     const targetOpacity = useMotionValue(targetOpacityValue ?? 1,);
+    const observerRef = useObserverRef(forwardedRef,);
     const {
       values: presenceEffectValues,
-    } = usePresenceAnimation(presence, ref, inSmartComponent, props.style, props[optimizedAppearDataAttribute],);
+    } = usePresenceAnimation(presence, observerRef, inSmartComponent, props.style, props[optimizedAppearDataAttribute],);
     const {
       values: parallaxValues,
       style: parallaxStyle,
-    } = useParallax(parallax, ref,);
+    } = useParallax(parallax, observerRef, (_a = props.style) == null ? void 0 : _a.visibility,);
     const {
       values: transformValues2,
       style: scrollStyle,
-    } = useStyleTransform(styleTransform, ref,);
+    } = useStyleTransform(styleTransform, observerRef,);
     const {
       values: appearEffectValues,
-    } = useStyleAppearEffect(styleAppear, ref,);
+    } = useStyleAppearEffect(styleAppear, observerRef,);
     const {
       values: loopValues,
       style: loopStyle,
@@ -36065,7 +36159,7 @@ var withFX = (Component15) =>
         ...motionValueStyle,
       },
       values: presenceEffectValues,
-      ref,
+      ref: observerRef,
     },);
   },);
 var withParallaxTransform = withFX;
@@ -36091,30 +36185,6 @@ function ComponentPresetsConsumer({
   const componentPresets = useContext(Context,);
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
-}
-function setRef(ref, value,) {
-  if (isFunction(ref,)) {
-    ref(value,);
-  } else if (isMutableRef(ref,)) {
-    ref.current = value;
-  }
-}
-function isMutableRef(ref,) {
-  return isObject2(ref,) && 'current' in ref;
-}
-function createRefWithCallback(ref, callback,) {
-  return {
-    get current() {
-      return ref.current;
-    },
-    set current(value,) {
-      ref.current = value;
-      callback(value,);
-    },
-  };
-}
-function mergeRefs(...refs) {
-  return (value) => refs.forEach((ref) => setRef(ref, value,));
 }
 function useCloneChildrenWithPropsAndRef(forwardedRef,) {
   const hook = useConstant2(() => createHook(forwardedRef,));
@@ -36988,9 +37058,6 @@ function motionOriginFromFloatingPosition(placement = 'bottom', alignment = 'cen
       assertNever(placement,);
   }
 }
-function isRef(value,) {
-  return isObject2(value,) && 'current' in value;
-}
 function getAncestorInfo(anchorRef,) {
   var _a;
   let el = anchorRef.current;
@@ -37155,7 +37222,7 @@ function Floating({
   const contentRef = React4.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
   React4.useLayoutEffect(() => {
-    if (!isRef(anchorRef,) || !contentRef.current || !placement || !alignment) return;
+    if (!refHasValue(anchorRef,) || !contentRef.current || !placement || !alignment) return;
     const {
       position,
       scrolls,
@@ -37908,26 +37975,6 @@ function getRouteFromPageLink(pageLink, router, currentRoute,) {
   } = pageLink;
   return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
 }
-function useStableChildRefWithCleanup(children, callback,) {
-  const fallbackRef = useRef(null,);
-  return useMemo(() => {
-    let cleanupFn;
-    const refCallback = (node) => {
-      if (node === null) {
-        cleanupFn == null ? void 0 : cleanupFn();
-        cleanupFn = void 0;
-        return;
-      }
-      cleanupFn = callback(node,);
-    };
-    const hasRef = isValidElement(children,) && 'ref' in children;
-    if (hasRef && isMutableRef(children.ref,)) {
-      return createRefWithCallback(children.ref, refCallback,);
-    }
-    if (hasRef && isFunction(children.ref,)) return mergeRefs(children.ref, refCallback,);
-    return createRefWithCallback(fallbackRef, refCallback,);
-  }, [children, callback,],);
-}
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
   children,
   href,
@@ -37974,11 +38021,16 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
     if (!route) return;
     return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
   }, [currentRoute, href, router,],);
-  const combinedCallbacks = useCallback((node) => {
+  const hasRef = isValidElement(children,) && 'ref' in children;
+  const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
+  useRefEffect(observerRef, (node) => {
+    if (node === null) return;
     replaceNestedLinksRefCallback(node,);
+  }, [replaceNestedLinksRefCallback,],);
+  useRefEffect(observerRef, (node) => {
+    if (node === null) return;
     return observerCallback(node,);
-  }, [observerCallback, replaceNestedLinksRefCallback,],);
-  const stableChildRef = useStableChildRefWithCleanup(children, combinedCallbacks,);
+  }, [observerCallback,],);
   const el = useMemo(() => {
     const {
       navigate: _,
@@ -37987,9 +38039,9 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
     return clone.cloneAsArray(children, {
       ...restProps,
       ...linkProps,
-      ref: stableChildRef,
+      ref: observerRef,
     },);
-  }, [props, clone, children, restProps, stableChildRef,],);
+  }, [props, clone, children, restProps, observerRef,],);
   return getChildren(el,);
 },),);
 var ParentLinkContext = /* @__PURE__ */ createContext(null,);
@@ -46658,8 +46710,6 @@ var withVariantAppearEffect = (Component15) =>
     const {
       wrapUpdatesInTransitions,
     } = useLibraryFeatures();
-    const fallbackRef = React4.useRef(null,);
-    const ref = forwardedRef ?? fallbackRef;
     const [options, rest,] = extractPrefixedProps(props, keys2,);
     const {
       visibleVariantId,
@@ -46673,7 +46723,8 @@ var withVariantAppearEffect = (Component15) =>
     } = options;
     const [activeVariant, setVariant,] = React4.useState(obscuredVariantId,);
     const animateState = React4.useRef(false,);
-    useAppearEffect(ref, (appears) => {
+    const observerRef = useObserverRef(forwardedRef,);
+    useAppearEffect(observerRef, (appears) => {
       if (options.targets) return;
       if (options.scrollDirection) return;
       if (animateOnce && animateState.current === true) return;
@@ -46741,7 +46792,7 @@ var withVariantAppearEffect = (Component15) =>
       return /* @__PURE__ */ jsx(Component15, {
         ...rest,
         variant: activeVariant ?? props.variant,
-        ref,
+        ref: observerRef,
       },);
     } else {
       return /* @__PURE__ */ jsx(Component15, {
@@ -46756,14 +46807,14 @@ var withVariantFX = (Component15) =>
     exit,
     ...props
   }, forwardedRef,) => {
-    const ref = useRef();
+    const observerRef = useObserverRef(forwardedRef,);
     const effect = usePresenceAnimation(
       {
         initial,
         animate: animate3,
         exit,
       },
-      forwardedRef ?? ref,
+      observerRef,
       true,
     );
     return /* @__PURE__ */ jsx(Component15, {
@@ -46772,7 +46823,7 @@ var withVariantFX = (Component15) =>
         ...(props == null ? void 0 : props.style),
         ...effect.values,
       },
-      ref: forwardedRef ?? ref,
+      ref: observerRef,
     },);
   },);
 var WindowContext = /* @__PURE__ */ React4.createContext(void 0,);
@@ -49896,6 +49947,35 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
     },);
   }
 }
+function newOverrideableRef() {
+  return {
+    current: null,
+  };
+}
+async function patchAndWaitForChild(ref, controller,) {
+  let current = ref.current;
+  if (current) return current;
+  let refCallbackResolve;
+  const refCallbackPromise = new Promise((resolve, reject,) => {
+    refCallbackResolve = resolve;
+    controller.signal.addEventListener('abort', () => reject(),);
+  },);
+  Object.defineProperty(ref, 'current', {
+    get() {
+      return current;
+    },
+    set(element,) {
+      current = element;
+      if (element === null) {
+        controller.abort();
+        return;
+      }
+      refCallbackResolve(element,);
+    },
+    configurable: true,
+  },);
+  return refCallbackPromise;
+}
 var defaultValues2 = {
   opacity: 1,
   y: 0,
@@ -49939,7 +50019,7 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
                 whiteSpace: short ? 'nowrap' : 'unset',
               },
               children: (_a = word.match(emojiSplitRe,)) == null ? void 0 : _a.map((char, i,) => {
-                const ref = React2.createRef();
+                const ref = newOverrideableRef();
                 elements.add(ref,);
                 return /* @__PURE__ */ jsx('span', {
                   ref,
@@ -49958,7 +50038,7 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
       const lastWordIndex = words.length - 1;
       return words.map((char, i,) => {
         const isLastWord = i === lastWordIndex;
-        const ref = React2.createRef();
+        const ref = newOverrideableRef();
         elements.add(ref,);
         return /* @__PURE__ */ jsxs(React2.Fragment, {
           children: [
@@ -50068,11 +50148,18 @@ function useTextEffect(config, ref, preview,) {
             repeat,
             tokenization: tokenization2,
           } = effect;
-          return runAppearEffect(tokenization2, effect.effect, elements, transition, startDelay, repeat, () => {
+          const cleanupRef = {
+            current: void 0,
+          };
+          void runAppearEffect(tokenization2, effect.effect, elements, transition, startDelay, repeat, () => {
             Object.assign(state2.current, {
               isAnimating: false,
             },);
-          },);
+          }, cleanupRef,);
+          return () => {
+            var _a;
+            return (_a = cleanupRef.current) == null ? void 0 : _a.call(cleanupRef,);
+          };
         }
         default:
           assertNever(type,);
@@ -50125,7 +50212,7 @@ function useTextEffect(config, ref, preview,) {
         text: (text) => tokenizeText(text, tokenization, elements, effectStyle,),
         props: (style) => {
           if ((effect == null ? void 0 : effect.tokenization) !== 'element') return void 0;
-          const r = React2.createRef();
+          const r = newOverrideableRef();
           elements.add(r,);
           return {
             ref: r,
@@ -50170,14 +50257,25 @@ function mayAnimate(hasMounted, hasAnimatedOnce, effect,) {
       ((effect == null ? void 0 : effect.trigger) === 'onInView' || (effect == null ? void 0 : effect.trigger) === 'onScrollTarget')
   );
 }
-function runAppearEffect(tokenization = 'character', effect, elements, transition, startDelay = 0, repeat = false, callback,) {
+async function runAppearEffect(
+  tokenization = 'character',
+  effect,
+  elements,
+  transition,
+  startDelay = 0,
+  repeat = false,
+  callback,
+  cleanupRef,
+) {
   const enter = createKeyframes(effect,);
+  const controller = new AbortController();
+  if (cleanupRef) cleanupRef.current = () => controller.abort();
   switch (tokenization) {
     case 'character':
     case 'element':
     case 'word': {
-      const list = createElementList(elements,);
-      if (list.length === 0) return;
+      const list = await createElementList(elements, controller,);
+      if (list === null) return;
       void animate(list, enter, {
         ...transition,
         restDelta: 1e-3,
@@ -50185,8 +50283,8 @@ function runAppearEffect(tokenization = 'character', effect, elements, transitio
           startDelay,
         },),
       },).then(() => callback == null ? void 0 : callback());
-      if (!repeat) return;
-      return () =>
+      if (!repeat || !cleanupRef) return;
+      cleanupRef.current = () =>
         void animate(list, effect, {
           ...transition,
           restDelta: 1e-3,
@@ -50194,8 +50292,16 @@ function runAppearEffect(tokenization = 'character', effect, elements, transitio
             startDelay,
           },),
         },);
+      return;
     }
     case 'line': {
+      try {
+        for (const element of elements) {
+          await patchAndWaitForChild(element, controller,);
+        }
+      } catch {
+        return;
+      }
       let list;
       frame.read(() => {
         list = createLineGroups(elements,);
@@ -50215,8 +50321,8 @@ function runAppearEffect(tokenization = 'character', effect, elements, transitio
           void Promise.all(animations2,).then(() => callback == null ? void 0 : callback());
         },);
       },);
-      if (!repeat) return;
-      return () => {
+      if (!repeat || !cleanupRef) return;
+      cleanupRef.current = () => {
         if (list.length === 0) return;
         list.forEach((group, i,) => {
           void animate(group, effect, {
@@ -50226,16 +50332,22 @@ function runAppearEffect(tokenization = 'character', effect, elements, transitio
           },);
         },);
       };
+      return;
     }
     default:
       assertNever(tokenization,);
   }
 }
-function createElementList(elements,) {
+async function createElementList(elements, controller,) {
+  if (elements.size === 0) return null;
   const list = [];
   for (const element of elements) {
-    if (!element.current) continue;
-    list.push(element.current,);
+    try {
+      const node = await patchAndWaitForChild(element, controller,);
+      if (node) list.push(node,);
+    } catch {
+      return null;
+    }
   }
   return list;
 }
