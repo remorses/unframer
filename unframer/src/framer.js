@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.VJPRGGD5.mjs
+// https :https://app.framerstatic.com/framer.6FL7N7HE.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -42137,6 +42137,18 @@ var Ordering = class {
     if (this.length !== other.length) return false;
     return this.getHash() === other.getHash();
   }
+  providedByFields(fields,) {
+    for (
+      const {
+        field,
+      } of this.fields
+    ) {
+      if (fields.has(field,)) continue;
+      if (field.name === VIRTUAL_INDEX_FIELD) continue;
+      return false;
+    }
+    return true;
+  }
 };
 var Scope = class {
   constructor(parent,) {
@@ -44740,13 +44752,21 @@ var Normalizer = class {
     return this.newRelationalLeftJoin(right, left, constraint,);
   }
   newRelationalFilter(input, predicate,) {
-    if (input instanceof RelationalLeftJoin && predicate.referencedFields.subsetOf(input.leftGroup.relational.outputFields,)) {
-      const left = this.newRelationalFilter(input.left, predicate,);
-      return this.newRelationalLeftJoin(left, input.right, input.constraint,);
+    if (
+      input instanceof RelationalLeftJoin &&
+      // Check that the predicate doesn't depend on any joined field.
+      predicate.referencedFields.subsetOf(input.leftGroup.relational.outputFields,)
+    ) {
+      const pushedFilter = this.newRelationalFilter(input.left, predicate,);
+      return this.newRelationalLeftJoin(pushedFilter, input.right, input.constraint,);
     }
-    if (input instanceof RelationalRightJoin && predicate.referencedFields.subsetOf(input.rightGroup.relational.outputFields,)) {
-      const right = this.newRelationalFilter(input.right, predicate,);
-      return this.newRelationalLeftJoin(input.left, right, input.constraint,);
+    if (
+      input instanceof RelationalRightJoin &&
+      // Check that the predicate doesn't depend on any joined field.
+      predicate.referencedFields.subsetOf(input.rightGroup.relational.outputFields,)
+    ) {
+      const pushedFilter = this.newRelationalFilter(input.right, predicate,);
+      return this.newRelationalLeftJoin(input.left, pushedFilter, input.constraint,);
     }
     const node = new RelationalFilter(input, predicate,);
     return this.finishRelational(node,);
@@ -44756,6 +44776,16 @@ var Normalizer = class {
     return this.finishRelational(node,);
   }
   newRelationalLimit(input, limit, ordering,) {
+    if (
+      input instanceof RelationalProject &&
+      // Check that the limit doesn't depend on any projected field.
+      limit.referencedFields.subsetOf(input.inputGroup.relational.outputFields,) &&
+      // Check that the ordering doesn't depend on any projected field.
+      ordering.providedByFields(input.inputGroup.relational.outputFields,)
+    ) {
+      const pushedLimit = this.newRelationalLimit(input.input, limit, ordering,);
+      return this.newRelationalProject(pushedLimit, input.projections, input.passthrough,);
+    }
     const node = new RelationalLimit(input, limit, ordering,);
     return this.finishRelational(node,);
   }
