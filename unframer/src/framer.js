@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.6FL7N7HE.mjs
+// https :https://app.framerstatic.com/framer.TBQ2FHZ5.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -53103,7 +53103,7 @@ var package_default = {
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.5.2',
-    typescript: '^5.6.2',
+    typescript: '^5.7.2',
     yargs: '^17.6.2',
   },
   peerDependencies: {
