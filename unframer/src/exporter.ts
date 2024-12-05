@@ -185,9 +185,12 @@ export async function bundle({
             JSON.stringify({ type: 'module' }),
             'utf-8',
         )
+        if (!result?.outputFiles) {
+            throw new Error('Failed to generate result')
+        }
 
         const propControlsData = await Promise.all(
-            result.outputFiles.map(async (file) => {
+            result?.outputFiles.map(async (file) => {
                 try {
                     await sema.acquire()
                     const name = path.basename(file.path).replace(/\.js$/, '')
