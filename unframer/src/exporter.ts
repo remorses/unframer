@@ -226,15 +226,14 @@ export async function bundle({
 
         const cssString =
             '/* This css file has all the necessary styles to run all your components */\n' +
+            '\n' +
+            getStyleTokensCss(tokens) +
             breakpointsStyles(breakpoints) +
             '\n\n' +
             combinedCSSRules
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
                 .join('\n') +
-            getFontsStyles(allFonts) +
-            '\n' +
-            getStyleTokensCss(tokens)
-
+            getFontsStyles(allFonts)
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
 
         logFontsUsage(allFonts)
