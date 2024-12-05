@@ -370,7 +370,7 @@ export function getDarkModeSelector(opts: {
             '}'
         )
     }
-    return '.dark {\n' + content + '\n' + '}'
+    return '.dark:root {\n' + content + '\n' + '}'
 }
 
 export function getStyleTokensCss(

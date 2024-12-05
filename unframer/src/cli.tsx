@@ -188,6 +188,7 @@ async function processConfig({
             breakpoints,
             cwd: installDir,
             watch,
+            tokens: config.tokens,
             signal,
         })
     } catch (e: any) {
