@@ -27,7 +27,7 @@ import {
     logFontsUsage,
 } from './css.js'
 import dedent from 'dedent'
-import { logger } from './utils.js'
+import { logger, terminalMarkdown } from './utils.js'
 import {
     esbuildPluginBundleDependencies,
     resolveRedirect,
@@ -96,7 +96,7 @@ export async function bundle({
             esbuildPluginBundleDependencies({
                 signal,
             }),
-            polyfillNode({}),
+            polyfillNode({}) as any,
             {
                 name: 'virtual loader',
                 setup(build) {
@@ -309,54 +309,107 @@ export async function bundle({
     if (!watch) {
         const result = await rebuild()
         await buildContext.dispose()
+        console.log(
+            terminalMarkdown(dedent`
+        # How to use the Framer components
+
+        The components are exported to the \`framer\` directory (or the directory you specified in the config).
+        Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
+        The breakpoints are:
+        - base: 0-319px
+        - sm: 320-767px  
+        - md: 768-959px
+        - lg: 960-1199px
+        - xl: 1200-1535px
+        - 2xl: 1536px+
+
+        You can import the components like this:
+
+        \`\`\`tsx
+        import './framer/styles.css'
+        import Logos from './framer/logos'
+        
+        export default function App() {
+            return (
+                <div>
+                    <Logos.Responsive
+                        variants={{
+                            lg: 'Desktop',
+                            md: 'Tablet',
+                            base: 'Mobile',
+                        }}
+                    />
+                </div>
+            );
+        };
+        \`\`\`
+
+        It's very important to import the \`styles.css\` file to include the necessary styles for the components.
+
+        You can also use the components without the responsive wrapper:
+
+        \`\`\`tsx
+        import './framer/styles.css'
+        import Logos from './framer/logos'
+        
+        export default function App() {
+            return (
+                <div>
+                    <Logos variant="Desktop" />
+                </div>
+            );
+        };
+        \`\`\`
+        `),
+        )
         return result
     }
 
-    // when user press ctrl+c dispose
-    process.on('SIGINT', async () => {
-        await buildContext.cancel()
-        buildContext.dispose()
-    })
-    process.on('SIGABRT', async () => {
-        await buildContext.cancel()
-        buildContext.dispose()
-    })
-    signal?.addEventListener('abort', async () => {
-        await buildContext.cancel()
-        buildContext.dispose()
-    })
+    // // when user press ctrl+c dispose
+    // process.on('SIGINT', async () => {
+    //     await buildContext.cancel()
+    //     buildContext.dispose()
+    // })
+    // process.on('SIGABRT', async () => {
+    //     await buildContext.cancel()
+    //     buildContext.dispose()
+    // })
+    // signal?.addEventListener('abort', async () => {
+    //     await buildContext.cancel()
+    //     buildContext.dispose()
+    // })
 
-    const res = await rebuild()
+    // const res = await rebuild()
 
-    /**
-     * Get resolved URLs for all components and also wait for 1 second if it took less time than that
-     */
-    const getResolvedUrls = () =>
-        Promise.all([
-            ...Object.values(components).map((u) => {
-                const url = new URL(u)
-                url.searchParams.set('ts', Date.now().toString())
-                return resolveRedirect({ url: url.toString(), signal })
-            }),
-            new Promise((res) => setTimeout(res, 5000)),
-        ])
-    let prevUrls = await getResolvedUrls()
-    while (!signal?.aborted) {
-        const urls = await getResolvedUrls()
-        const changed = urls
-            .map((x, i) => (x !== prevUrls[i] ? i : null))
-            .filter(Boolean)
-        if (!changed?.length) {
-            continue
-        }
-        const changedNames = Object.keys(components).filter((_, i) =>
-            changed.includes(i),
-        )
-        logger.log(`found new component URLs for ${changedNames.join(', ')}`)
-        prevUrls = urls
-        await rebuild()
-    }
-    return res
+    // /**
+    //  * Get resolved URLs for all components and also wait for 1 second if it took less time than that
+    //  */
+    // const getResolvedUrls = () =>
+    //     Promise.all([
+    //         ...Object.values(components).map((u) => {
+    //             const url = new URL(u)
+    //             url.searchParams.set('ts', Date.now().toString())
+    //             return resolveRedirect({ url: url.toString(), signal })
+    //         }),
+    //         new Promise((res) => setTimeout(res, 5000)),
+    //     ])
+    // let prevUrls = await getResolvedUrls()
+    // while (!signal?.aborted) {
+    //     const urls = await getResolvedUrls()
+    //     const changed = urls
+    //         .map((x, i) => (x !== prevUrls[i] ? i : null))
+    //         .filter(Boolean)
+    //     if (!changed?.length) {
+    //         continue
+    //     }
+    //     const changedNames = Object.keys(components).filter((_, i) =>
+    //         changed.includes(i),
+    //     )
+    //     logger.log(`found new component URLs for ${changedNames.join(', ')}`)
+    //     prevUrls = urls
+    //     await rebuild()
+    // }
+    // return res
 }
 
 export function getDarkModeSelector(opts: {

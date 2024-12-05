@@ -1,5 +1,14 @@
 import pico from 'picocolors'
 
+import { marked } from 'marked'
+import { markedTerminal } from 'marked-terminal'
+
+marked.use(markedTerminal())
+
+export function terminalMarkdown(markdown: string) {
+    return marked(markdown)
+}
+
 const prefix = '[unframer]'
 export const logger = {
     log(...args) {
