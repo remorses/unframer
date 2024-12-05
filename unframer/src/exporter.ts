@@ -42,10 +42,18 @@ function validateUrl(url: string) {
     }
 }
 
+export type StyleToken = {
+    id: string
+    name?: string
+    lightColor: string
+    darkColor: string
+}
+
 export async function bundle({
     cwd: out = '',
     watch = false,
     components = {} as Record<string, string>,
+    tokens = [] as StyleToken[],
     breakpoints = {} as BreakpointSizes,
     signal = undefined as AbortSignal | undefined,
 }) {
@@ -223,7 +231,9 @@ export async function bundle({
             combinedCSSRules
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
                 .join('\n') +
-            getFontsStyles(allFonts)
+            getFontsStyles(allFonts) +
+            '\n' +
+            getStyleTokensCss(tokens)
 
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
 
@@ -263,12 +273,17 @@ export async function bundle({
         if (watch) {
             logger.log('waiting for components or config changes')
         }
-
-        const tokensCss =
-            "/* This css file contains your color variables, sometimes these get desynced when updated in Framer so it's good that you copy and paste this snippet into your app css */\n" +
-            '/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n' +
-            getTokensCss({ out, result })
-        fs.writeFileSync(path.resolve(out, 'tokens.css'), tokensCss, 'utf-8')
+        if (!tokens?.length) {
+            const tokensCss =
+                "/* This css file contains your color variables, sometimes these get desynced when updated in Framer so it's good that you copy and paste this snippet into your app css */\n" +
+                '/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n' +
+                getTokensCss({ out, result })
+            fs.writeFileSync(
+                path.resolve(out, 'tokens.css'),
+                tokensCss,
+                'utf-8',
+            )
+        }
         const res = {
             components: Object.entries(components).map(([name, v]) => {
                 const propControls = propControlsData.find(
@@ -338,6 +353,57 @@ export async function bundle({
         await rebuild()
     }
     return res
+}
+
+export function getDarkModeSelector(opts: {
+    darkModeType?: 'class' | 'media'
+    content: string
+}) {
+    const { darkModeType = 'class', content } = opts
+    if (darkModeType === 'media') {
+        return (
+            '@media (prefers-color-scheme: dark) {\n' +
+            '    :root {\n' +
+            content +
+            '\n' +
+            '    }\n' +
+            '}'
+        )
+    }
+    return '.dark {\n' + content + '\n' + '}'
+}
+
+export function getStyleTokensCss(
+    tokens: StyleToken[],
+    darkModeType: 'class' | 'media' = 'class',
+) {
+    if (!tokens?.length) {
+        return ''
+    }
+
+    const lightTokens = tokens
+        .map(
+            (token) =>
+                '    --token-' + token.id + ': ' + token.lightColor + ';',
+        )
+        .join('\n')
+
+    const darkTokens = tokens
+        .map(
+            (token) => '    --token-' + token.id + ': ' + token.darkColor + ';',
+        )
+        .join('\n')
+
+    return (
+        ':root {\n' +
+        lightTokens +
+        '\n' +
+        '}\n\n' +
+        getDarkModeSelector({
+            darkModeType,
+            content: darkTokens,
+        })
+    )
 }
 
 function decapitalize(str: string) {
@@ -669,17 +735,17 @@ export function parsePropertyControls(code: string) {
     return propControls.slice(realStart + 1, -1)
 }
 
-type TokenInfo = {
+type ExtractedTokenInfo = {
     tokenName: string
     metadata?: Record<string, any>
 
     defaultValue: string
 }
 
-export function extractTokenInfo(code: string): TokenInfo[] {
+export function extractTokenInfo(code: string): ExtractedTokenInfo[] {
     const lines = code.split('\n')
     const tokenLines = lines.filter((line) => line.includes('var(--token'))
-    const tokens: TokenInfo[] = []
+    const tokens: ExtractedTokenInfo[] = []
 
     for (const line of tokenLines) {
         let startIndex = 0

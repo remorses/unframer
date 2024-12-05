@@ -1,4 +1,4 @@
-import { bundle } from './exporter.js'
+import { bundle, StyleToken } from './exporter.js'
 import JSON from 'json5'
 import events, { EventEmitter, setMaxListeners } from 'events'
 
@@ -31,10 +31,14 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         if (projectId) {
             logger.log(`Fetching config for project ${projectId}`)
             const response = await fetch(
-                `https://unframer.co/api/plugins/reactExportPlugin/project/${projectId}`,
+                new URL(
+                    `/api/plugins/reactExportPlugin/project/${projectId}`,
+                    process.env.UNFRAMER_SERVER_URL || 'https://unframer.co',
+                ).toString(),
             )
             if (!response.ok) {
-                logger.log(`Failed to fetch config for project ${projectId}`)
+                console.error(`Failed to fetch Framer config`)
+                logger.error('Response: ' + (await response.text()))
                 return
             }
             const data = await response.json()
@@ -47,8 +51,10 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                             c.url,
                         ]),
                     ),
+                    tokens: data.colorStyles,
                 },
                 watch: false,
+
                 configBasename: 'remote config',
                 signal: new AbortController().signal,
             })
@@ -155,6 +161,7 @@ type Config = {
         [name: string]: string
     }
     breakpoints?: BreakpointSizes
+    tokens?: StyleToken[]
     outDir?: string
 }
 async function processConfig({
