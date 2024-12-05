@@ -14,71 +14,72 @@ import { BreakpointSizes } from './css.js'
 
 export const cli = cac('unframer')
 
-cli.command('', 'Run unframer')
-    .option('--watch', 'Watch for Framer and unframer.config.json changes')
-    .action(async function main(options) {
+let defaultOutDir = 'framer'
+
+function nameToFolder(name: string) {
+    return name
+        .replace(/[^a-zA-Z0-9]/g, '-') // Replace non-alphanumeric with dash
+        .replace(/-+/g, '-') // Replace multiple dashes with single dash
+        .replace(/^-|-$/g, '') // Remove leading/trailing dashes
+        .toLowerCase()
+}
+
+cli.command('[projectId]', 'Run unframer with optional project ID')
+    .option('--outDir <dir>', 'Output directory', { default: defaultOutDir })
+    .action(async function main(projectId, options) {
+        const outDir = options.outDir
+        if (projectId) {
+            logger.log(`Fetching config for project ${projectId}`)
+            const response = await fetch(
+                `https://unframer.co/api/plugins/reactExportPlugin/project/${projectId}`,
+            )
+            if (!response.ok) {
+                logger.log(`Failed to fetch config for project ${projectId}`)
+                return
+            }
+            const data = await response.json()
+            return processConfig({
+                config: {
+                    outDir,
+                    components: Object.fromEntries(
+                        data.components.map((c) => [
+                            nameToFolder(c.name),
+                            c.url,
+                        ]),
+                    ),
+                },
+                watch: false,
+                configBasename: 'remote config',
+                signal: new AbortController().signal,
+            })
+        }
+
         fixOldUnframerPath()
         const cwd = process.cwd()
-        const watch = process.argv.includes('--watch')
         logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
         const configPath = await findUp(configNames, { cwd })
         if (!configPath) {
             logger.log(`No ${configNames.join(', ')} found`)
             return
         }
-        let configBasename = basename(configPath!)
+        const configBasename = basename(configPath!)
         const configContent = fs.readFileSync(configPath, 'utf8')
         if (!configContent) {
             logger.log(`No ${configBasename} contents found`)
             return
         }
-        let config = JSON.parse(configContent)
+        const config = JSON.parse(configContent)
+        if (outDir !== defaultOutDir) {
+            config.outDir = outDir
+        }
 
         let controller = new AbortController()
         setMaxListeners(0, controller.signal)
         processConfig({
             config,
-            watch,
+            watch: false,
             signal: controller.signal,
             configBasename,
-        })
-        if (!watch) {
-            return
-        }
-
-        const watcher = chokidar.watch(configPath!, {
-            persistent: true,
-        })
-
-        watcher.on('change', async (path) => {
-            logger.log(`${configBasename} changed`)
-            console.log()
-            controller.abort()
-
-            controller = new AbortController()
-            setMaxListeners(0, controller.signal)
-
-            const newConfig = safeJsonParse(
-                fs.readFileSync(configPath!, 'utf8'),
-            )
-            if (!newConfig) {
-                logger.log(`Invalid ${configBasename} file`)
-                return
-            }
-            const newNames = getNewNames(config, newConfig)
-            if (newNames.length) {
-                logger.log(`New components found: ${newNames.join(', ')}`)
-                await processConfig({
-                    config: {
-                        ...newConfig,
-                        components: pluck(newConfig.components, newNames),
-                    },
-                    watch,
-                    configBasename,
-                    // signal: controller.signal,
-                })
-            }
-            config = newConfig
         })
     })
 
@@ -105,6 +106,9 @@ function fixOldUnframerPath() {
     }
     return false
 }
+const version = require('../package.json').version
+
+cli.version(version).help()
 
 cli.command('init', 'Init the unframer.config.json config').action(
     async (options) => {
@@ -117,10 +121,6 @@ cli.command('init', 'Init the unframer.config.json config').action(
         console.log(`${p} file created`)
     },
 )
-
-const version = require('../package.json').version
-
-cli.version(version).help()
 
 function safeJsonParse(json: string) {
     try {
