@@ -9,9 +9,14 @@ export function terminalMarkdown(markdown: string) {
     return marked(markdown)
 }
 
+const shouldDebugUnframer = !!process.env.DEBUG_UNFRAMER
+
 const prefix = '[unframer]'
 export const logger = {
     log(...args) {
+        if (!shouldDebugUnframer) {
+            return
+        }
         console.log(prefix, ...args)
     },
     green(...args) {

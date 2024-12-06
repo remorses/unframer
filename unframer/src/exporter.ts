@@ -198,7 +198,7 @@ export async function bundle({
                     if (!components[name]) {
                         return
                     }
-                    logger.log(`extracting types for ${name}`)
+                    logger.green(`extracting types for ${name}`)
                     const { propertyControls, fonts } =
                         await extractPropControlsUnsafe(resultPathAbs, name)
                     if (!propertyControls) {
@@ -243,7 +243,7 @@ export async function bundle({
 
         logFontsUsage(allFonts)
             .split('\n')
-            .forEach((x) => logger.log(x))
+            .forEach((x) => logger.green(x))
 
         const outFiles = result.outputFiles
             .map((x) => path.resolve(out, x.path))
@@ -306,6 +306,8 @@ export async function bundle({
         return res
     }
 
+    
+
     if (!watch) {
         const result = await rebuild()
         await buildContext.dispose()
@@ -315,14 +317,7 @@ export async function bundle({
 
         The components are exported to the \`framer\` directory (or the directory you specified in the config).
         Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
-        The breakpoints are:
-        - base: 0-319px
-        - sm: 320-767px  
-        - md: 768-959px
-        - lg: 960-1199px
-        - xl: 1200-1535px
-        - 2xl: 1536px+
-
+        
         You can import the components like this:
 
         \`\`\`tsx

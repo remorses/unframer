@@ -20,18 +20,11 @@ Download framer components as simple files
     npm install unframer
     ```
 
-1. Map `framer-motion` to `unframer`. This is required because the Framer runtime ships its own version of `framer-motion`, this will prevent you from having multiple instances of `framer-motion` in your project.
+1. Install the `React Export` Framer plugin, open it and select which components you want to export.
 
-    ```sh
-    npm install framer-motion@npm:unframer
-    ```
+1. Run the command `npx unframer {projectId} --outDir ./src/framer` to download the components and their types in the `outDir` directory, the command will be shown in the Framer plugin too. Run this command each time you update your Framer project and want to update the components.
 
-1. Copy your framer component url and add it to your config (remove the part after `@` to always use the latest version)
-
-    ![url import](./assets/framer-url-import.png)
-
-1. Run the command `npx unframer` to download the components and their types in the `outDir` directory
-1. Import the component inside your `jsx` files, for example
+1. Import the component inside your `jsx` files together with the `styles.css` file, for example
 
 ```tsx
 import './framer/styles.css' // load base Framer styles
@@ -120,19 +113,6 @@ export default function App() {
 }
 ```
 
-## Custom breakpoints for responsive variants
-
-You can change the breakpoints by passing an object in your `unframer.config.json` config
-
-```json
-{
-    "$schema": "https://unframer-schema.vercel.app/schema.json",
-    "outDir": "./src/framer",
-    "breakpoints": { "sm": 300, "md": 760 },
-    "components": {}
-}
-```
-
 ## Supported component props
 
 `unframer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:
@@ -148,20 +128,16 @@ You can change the breakpoints by passing an object in your `unframer.config.jso
 
 ## Known limitations:
 
--   Color styles (also known as tokens) can get out of sync with your Framer project, if this happen you will have to find the corresponding css variable (in the form of `--token-xxxx`) in the component code and define it in your CSS, for example:
-
-```css
-:root {
-    --token-64603892-5c8b-477a-82d6-e795e75dd5dc: #0b5c96;
-}
-```
-
--   Links to Framer pages won't work, this is because links to Framer pages are encoded with opaque ids. Instead you should
+-   Links to Framer internal pages won't work for now, this is because links to Framer pages are encoded with opaque ids. Instead you should
 
     1. use link variables
     1. absolute links (starting with https://, not links to other Framer pages).
 
--   Internationalization is not supported
+-   Internationalization is not supported now
+
+-   You may face React warnings like:
+    -   `Accessing element.ref was removed in React 19.` This warning appears because Framer still uses the old `element.ref` API which was removed in React 19. This warning is harmless and will be fixed when Framer updates their codebase to use the new React 19 APIs.
+    -   `A tree hydrated but some attributes of the server rendered HTML didn't match the client properties.` This warning sometimes appears when using SWV icons, it should be harmless, it only happens in development mode.
 
 ## Future Compatibility
 

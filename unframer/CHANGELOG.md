@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.0
+
+### Minor Changes
+
+-   Added support for Framer plugin to get the components instead of the json config.
+
 ## 2.6.6
 
 ### Patch Changes
