@@ -405,7 +405,7 @@ export async function bundle({
 
         To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
-        Read more on GitHub: https://github.com/remorses/unframed
+        Read more on GitHub: https://github.com/remorses/unframer
         `),
         )
         return result
