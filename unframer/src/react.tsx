@@ -1,5 +1,5 @@
 'use client'
-import { combinedCSSRules, LayoutGroup } from './framer'
+import { combinedCSSRules, LayoutGroup } from './framer.js'
 
 import {
     ComponentPropsWithoutRef,

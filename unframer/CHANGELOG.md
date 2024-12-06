@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.4
+
+### Patch Changes
+
+-   Fix types gen even if unframer is not installed
+
 ## 2.7.3
 
 ### Patch Changes

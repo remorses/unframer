@@ -28,7 +28,7 @@ import {
     ControlType,
     PropertyControls,
     combinedCSSRules,
-} from './framer'
+} from './framer.js'
 import { logger, spinner, terminalMarkdown } from './utils.js'
 
 function validateUrl(url: string) {
@@ -661,6 +661,10 @@ function getTokensCss({
 
 const nodePath = process.argv[0] || 'node'
 
+let UNFRAMER_RUNTIME_PATH = url.pathToFileURL(
+    require.resolve('../esm/index.js'),
+).href
+
 export async function extractPropControlsUnsafe(
     filename,
     name,
@@ -683,7 +687,15 @@ export async function extractPropControlsUnsafe(
         let childProcess = exec(
             `${JSON.stringify(
                 nodePath,
-            )} --input-type=module -e ${JSON.stringify(code)}`,
+            )} --input-type=module --loader ${require.resolve(
+                '../dist/unframer-loader.js',
+            )} -e ${JSON.stringify(code)}`,
+            {
+                env: {
+                    // ...process.env,
+                    UNFRAMER_RUNTIME_PATH,
+                },
+            },
             (err, stdout) => {
                 clearTimeout(timer)
                 if (err) {
