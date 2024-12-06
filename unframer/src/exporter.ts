@@ -309,6 +309,7 @@ export async function bundle({
                 }
             }),
         }
+
         return res
     }
 
@@ -317,28 +318,83 @@ export async function bundle({
         await buildContext.dispose()
         console.log()
         console.log()
+
+        let exampleComponent = result?.components?.find((x) => {
+            if (!x.propertyControls) return false
+            const variants = getVariantsFromPropControls(x.propertyControls)
+            return variants?.breakpoints.length >= 2
+        })
+        if (!exampleComponent) {
+            logger.log(
+                `No example component found with breakpoints, using random example`,
+            )
+            // Create an example component if none found with breakpoints
+            exampleComponent = {
+                path: 'hero',
+                componentName: 'HeroFramerComponent',
+                propertyControls: {
+                    variant: {
+                        type: ControlType.Enum,
+                        options: ['Desktop', 'Tablet', 'Mobile'],
+                        optionTitles: ['Desktop', 'Tablet', 'Mobile'],
+                    },
+                } as any,
+                name: 'Hero',
+                url: '',
+            }
+            if (!exampleComponent) {
+                return
+            }
+        }
+        const variants = getVariantsFromPropControls(
+            exampleComponent?.propertyControls,
+        )
+        const breakpoints = variants?.breakpoints
+        if (!breakpoints) {
+            return
+        }
+        logger.log(
+            'exampleComponent?.propertyControls',
+            exampleComponent?.propertyControls,
+        )
+        const variantsExample = {
+            lg: breakpoints[1],
+            base: breakpoints[0],
+        }
+        let prop =
+            findExampleProperty(exampleComponent?.propertyControls) ||
+            'exampleFramerVariable'
+        const outDir = path.posix.relative(process.cwd(), out)
         console.log(
             terminalMarkdown(dedent`
         # How to use the Framer components
 
-        The components are exported to \`${path.relative(process.cwd(), out)}\`.
+        Your components are exported to \`${outDir}\` folder. Now please install the \`unframer\` runtime dependency:
+
+        \`\`\`sh
+        npm install unframer
+        \`\`\`
+
         Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
         
-        You can import the components like this:
+        You can use the components like this (try copy pasting the code below into your React app):
 
-        \`\`\`tsx
-        import './framer/styles.css'
-        import Logos from './framer/logos'
+        \`\`\`jsx
+        import './${outDir}/styles.css'
+        import ${exampleComponent?.componentName} from './${outDir}/${
+                exampleComponent?.path
+            }'
         
         export default function App() {
             return (
                 <div>
-                    <Logos.Responsive
-                        variants={{
-                            lg: 'Desktop',
-                            md: 'Tablet',
-                            base: 'Mobile',
-                        }}
+                    <${exampleComponent?.componentName}
+                        ${prop}='example'
+                        style={{ width: '100%' }}
+                    />
+                    <${exampleComponent?.componentName}.Responsive
+                        ${prop}='example'
+                        variants={${JSON.stringify(variantsExample || {})}}
                     />
                 </div>
             );
@@ -347,20 +403,9 @@ export async function bundle({
 
         It's very important to import the \`styles.css\` file to include the necessary styles for the components.
 
-        You can also use the components without the responsive wrapper:
+        To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
-        \`\`\`tsx
-        import './framer/styles.css'
-        import Logos from './framer/logos'
-        
-        export default function App() {
-            return (
-                <div>
-                    <Logos variant="Desktop" />
-                </div>
-            );
-        };
-        \`\`\`
+        Read more on GitHub: https://github.com/remorses/unframed
         `),
         )
         return result
@@ -879,4 +924,43 @@ export function componentCamelCase(str: string) {
     str = str[0].toUpperCase() + str.slice(1)
     str = str + 'FramerComponent'
     return str
+}
+
+const breakpointVariants = ['mobile', 'tablet', 'desktop']
+
+function getVariantsFromPropControls(propControls?: PropertyControls) {
+    if (!propControls?.variant) {
+        return null
+    }
+
+    let variants =
+        propControls.variant?.['optionTitles'] ||
+        propControls.variant?.['options'] ||
+        []
+    // Sort breakpoint-related variants first
+    return {
+        variants: variants,
+        breakpoints: variants.filter((v) =>
+            breakpointVariants.some((device) =>
+                v.toLowerCase().includes(device),
+            ),
+        ),
+    }
+}
+
+function findExampleProperty(propertyControls?: PropertyControls) {
+    if (!propertyControls) {
+        return null
+    }
+
+    const stringProp = Object.entries(propertyControls).find(([_, control]) => {
+        // console.log('control', _, control)
+        return control?.type === ControlType.String
+    })
+
+    if (!stringProp) {
+        return null
+    }
+
+    return stringProp[0]
 }

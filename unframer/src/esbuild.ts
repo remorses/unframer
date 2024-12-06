@@ -96,9 +96,7 @@ export function esbuildPluginBundleDependencies({
             build.onEnd(() => {
                 spinner.stop()
             })
-            build.onDispose(() => {
-                spinner.stop()
-            })
+            
             build.onLoad({ filter: /.*/, namespace }, async (args) => {
                 if (signal?.aborted) {
                     throw new Error('aborted')
