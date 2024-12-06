@@ -1,4 +1,6 @@
 import { logger } from './utils'
+import { createSpinner } from 'nanospinner'
+
 import { Plugin, transform } from 'esbuild'
 
 export const externalPackages = [
@@ -15,7 +17,8 @@ export function esbuildPluginBundleDependencies({
     externalizeNpm = false,
 }) {
     const codeCache = new Map()
-
+    const spinner = createSpinner('Fetching Framer Components Modules')
+    spinner.start()
     const plugin: Plugin = {
         name: 'esbuild-plugin',
         setup(build) {
@@ -90,6 +93,12 @@ export function esbuildPluginBundleDependencies({
             }
             // build.onResolve({ filter: /^\w/ }, resolveDep)
             build.onResolve({ filter: /.*/, namespace }, resolveDep)
+            build.onEnd(() => {
+                spinner.stop()
+            })
+            build.onDispose(() => {
+                spinner.stop()
+            })
             build.onLoad({ filter: /.*/, namespace }, async (args) => {
                 if (signal?.aborted) {
                     throw new Error('aborted')
@@ -111,6 +120,8 @@ export function esbuildPluginBundleDependencies({
                 let loader = 'jsx' as any
                 const promise = Promise.resolve().then(async () => {
                     logger.log('fetching', url.replace(/https?:\/\//, ''))
+                    spinner.update(`Fetching ${url.replace(/https?:\/\//, '')}`)
+                    
                     const res = await fetchWithRetry(resolved, { signal })
                     if (!res.ok) {
                         throw new Error(

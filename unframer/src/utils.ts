@@ -2,6 +2,9 @@ import pico from 'picocolors'
 
 import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
+import { createSpinner } from 'nanospinner'
+
+export const spinner = createSpinner('Downloading Framer Components') as any
 
 marked.use(markedTerminal())
 
