@@ -36243,9 +36243,7 @@ function createHook(forwardedRef,) {
   let preventNextCall = false;
   function cloneChildrenWithPropsAndRef(children, props,) {
     if (preventNextCall) {
-      throw new ReferenceError(
-        'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle.',
-      );
+      ;
     }
     preventNextCall = true;
     if (React2.Children.count(children,) > 1 && forwardedRef) {

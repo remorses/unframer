@@ -190,6 +190,14 @@ export async function fixFramerCode({ resultFile }) {
     }
     `
 
+    // TODO this code does not work in react strict mode, bug in framer
+    let toRemove = /throw new ReferenceError\(\s*'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle\.',\s*\)/;
+    // Check if the string exists in the code before trying to remove it
+    if (!codeAfter.match(toRemove)) {
+        throw new Error('Could not find expected ReferenceError string in bundle')
+    }
+    codeAfter = codeAfter.replace(toRemove, '')
+
     if (code === codeAfter) {
         throw new Error('Failed to export combinedCSSRules')
     }
