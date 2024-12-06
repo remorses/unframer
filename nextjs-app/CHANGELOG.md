@@ -1,5 +1,13 @@
 # nextjs-app
 
+## 0.1.34
+
+### Patch Changes
+
+-   Updated dependencies [c2893b0]
+-   Updated dependencies
+    -   unframer@2.7.1
+
 ## 0.1.33
 
 ### Patch Changes

@@ -113,6 +113,14 @@ export default function App() {
 }
 ```
 
+## Troubleshooting
+
+If you find any errors rendering your components:
+
+-   Check you have the latest version of `unframer` installed
+-   Try downloading new versions of the components by running again `npx unframer {projectId}`, Framer may already have fixed the problem.
+-   Try disabling React strict mode, this can cause many issues in Framer components.
+
 ## Supported component props
 
 `unframer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:

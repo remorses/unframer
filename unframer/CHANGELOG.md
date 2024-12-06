@@ -1,5 +1,12 @@
 # unframer
 
+## 2.7.1
+
+### Patch Changes
+
+-   c2893b0: much better readme
+-   Nicer logs
+
 ## 2.7.0
 
 ### Minor Changes
