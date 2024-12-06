@@ -323,12 +323,9 @@ export async function bundle({
             return variants?.breakpoints.length >= 2
         })
         withBreakpoints = withBreakpoints?.sort((a, b) => {
-            const aVariants = getVariantsFromPropControls(a.propertyControls)
-            const bVariants = getVariantsFromPropControls(b.propertyControls)
-            return (
-                (bVariants?.breakpoints?.length || 0) -
-                (aVariants?.breakpoints?.length || 0)
-            )
+            const aProp = findExampleProperty(a.propertyControls)
+            const bProp = findExampleProperty(b.propertyControls)
+            return (bProp ? 1 : 0) - (aProp ? 1 : 0)
         })
         let exampleComponent = withBreakpoints?.[0]
         if (!exampleComponent) {
@@ -514,10 +511,6 @@ export function getStyleTokensCss(
             content: darkTokens,
         })
     )
-}
-
-function decapitalize(str: string) {
-    return str.charAt(0).toLowerCase() + str.slice(1)
 }
 
 export function findRelativeLinks(text: string) {
@@ -797,7 +790,7 @@ export function propControlsToType(controls: PropertyControls, fileName) {
                             return 'Function'
                     }
                 }
-                let name = decapitalize(value.title || key || '')
+                let name = propCamelCase(value.title || key || '')
                 if (!name) {
                     return ''
                 }
@@ -999,5 +992,20 @@ function findExampleProperty(propertyControls?: PropertyControls) {
         return null
     }
 
-    return stringProp[0]
+    return propCamelCase(stringProp[1]?.title || '')
+}
+
+export function propCamelCase(str: string) {
+    if (!str) {
+        return ''
+    }
+    // Convert dashes to camelCase (e.g. foo-bar -> fooBar)
+    str = str.replace(/-([\w])/g, (g) => g[1].toUpperCase())
+    // Convert underscores to camelCase (e.g. foo_bar -> fooBar)
+    str = str.replace(/_([a-z])/g, (g) => g[1].toUpperCase())
+    // Remove spaces (e.g. "Foo Bar" -> "fooBar")
+    str = str.replace(/\s+(.)/g, (_, c) => c.toUpperCase())
+    // Ensure first character is lowercase
+    str = str[0].toLowerCase() + str.slice(1)
+    return str
 }

@@ -153,9 +153,6 @@ importers:
       cac:
         specifier: ^6.7.14
         version: 6.7.14
-      chokidar:
-        specifier: ^3.6.0
-        version: 3.6.0
       dedent:
         specifier: ^1.5.3
         version: 1.5.3
@@ -198,12 +195,6 @@ importers:
       real-framer-motion:
         specifier: npm:framer-motion@11.2.10
         version: framer-motion@11.2.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      sema4:
-        specifier: ^0.1.3
-        version: 0.1.3
-      tmp:
-        specifier: ^0.2.3
-        version: 0.2.3
     devDependencies:
       '@babel/core':
         specifier: ^7.24.9
@@ -4657,9 +4648,6 @@ packages:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
     engines: {node: '>= 10.13.0'}
 
-  sema4@0.1.3:
-    resolution: {integrity: sha512-WtStUNIhgXLlg8+cRb0qAfpbVePuefUxSHMHE1JhnWO3BJ3e/LrM9JJRESbGRB1Qv3SF5wnb5M1nGED0Uk06vQ==}
-
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -5025,10 +5013,6 @@ packages:
   tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
     engines: {node: '>=0.6.0'}
-
-  tmp@0.2.3:
-    resolution: {integrity: sha512-nZD7m9iCPC5g0pYmcaxogYKggSfLsdxl8of3Q/oIbqCqLLIO9IAF0GWjX1z9NZRHPiXv8Wex4yDCaZsgEw0Y8w==}
-    engines: {node: '>=14.14'}
 
   to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
@@ -10689,8 +10673,6 @@ snapshots:
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
 
-  sema4@0.1.3: {}
-
   semver@6.3.1: {}
 
   semver@7.6.0:
@@ -11121,8 +11103,6 @@ snapshots:
   tmp@0.0.33:
     dependencies:
       os-tmpdir: 1.0.2
-
-  tmp@0.2.3: {}
 
   to-fast-properties@2.0.0: {}
 
