@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.2
+
+### Patch Changes
+
+-   Add timeout for types extraction
+
 ## 2.7.1
 
 ### Patch Changes

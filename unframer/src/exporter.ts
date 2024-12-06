@@ -1,23 +1,15 @@
-import { Plugin, build, transform, context, BuildResult } from 'esbuild'
+import { BuildResult, context } from 'esbuild'
 import url from 'url'
 
 import { Sema } from 'async-sema'
 import dprint from 'dprint-node'
-import tmp from 'tmp'
 
 import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 
-import {
-    ComponentFont,
-    ControlDescription,
-    ControlType,
-    PropertyControls,
-    combinedCSSRules,
-} from './framer'
-import { fetch as _fetch } from 'native-fetch'
+import { exec } from 'child_process'
+import dedent from 'dedent'
 import fs from 'fs'
 import path from 'path'
-import { exec, execSync } from 'child_process'
 import {
     BreakpointSizes,
     ComponentFontBundle,
@@ -26,13 +18,18 @@ import {
     groupBy,
     logFontsUsage,
 } from './css.js'
-import dedent from 'dedent'
-import { logger, spinner, terminalMarkdown } from './utils.js'
 import {
     esbuildPluginBundleDependencies,
-    resolveRedirect,
     externalPackages,
+    resolveRedirect,
 } from './esbuild'
+import {
+    ControlDescription,
+    ControlType,
+    PropertyControls,
+    combinedCSSRules
+} from './framer'
+import { logger, spinner, terminalMarkdown } from './utils.js'
 
 function validateUrl(url: string) {
     try {
@@ -181,7 +178,7 @@ export async function bundle({
         spinner.stop()
 
         let allFonts = [] as ComponentFontBundle[]
-        const sema = new Sema(10)
+        
         const packageJson = path.resolve(out, 'package.json')
         fs.writeFileSync(
             packageJson,
@@ -191,7 +188,7 @@ export async function bundle({
         if (!result?.outputFiles) {
             throw new Error('Failed to generate result')
         }
-
+        const sema = new Sema(6)
         spinner.start('Extracting types')
         const propControlsData = await Promise.all(
             result?.outputFiles.map(async (file) => {
@@ -660,7 +657,6 @@ function getTokensCss({
     const tokensCss = `:root {\n${cssStrings}\n}`
     return tokensCss
 }
-
 export async function extractPropControlsUnsafe(
     filename,
     name,
@@ -677,19 +673,35 @@ export async function extractPropControlsUnsafe(
     )}).then(x => { console.log(${JSON.stringify(
         delimiter,
     )}); console.log(${propCode}) })`
-    let stdout = await new Promise<string>((res, rej) =>
-        exec(
+
+    const TIMEOUT = 2 * 1000
+    let stdout = await new Promise<string>((res, rej) => {
+        let childProcess = exec(
             `${JSON.stringify(
                 nodePath,
             )} --input-type=module -e ${JSON.stringify(code)}`,
             (err, stdout) => {
+                clearTimeout(timer)
                 if (err) {
                     return rej(err)
                 }
                 res(stdout)
             },
-        ),
-    )
+        )
+
+        const timer = setTimeout(() => {
+            childProcess.kill()
+            rej(
+                new Error(
+                    `Timed out after ${TIMEOUT}ms while extracting types for ${name}`,
+                ),
+            )
+        }, TIMEOUT)
+    }).catch((e) => {
+        logger.error(`error extracting types for ${name}`)
+        logger.log(e.stack)
+        throw e
+    })
 
     stdout = stdout.split(delimiter)[1]
     // console.log(stdout)
