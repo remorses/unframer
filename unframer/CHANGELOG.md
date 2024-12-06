@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.5
+
+### Patch Changes
+
+-   Fix missing .js for node, fix gen even if unframer is not installed
+
 ## 2.7.4
 
 ### Patch Changes
