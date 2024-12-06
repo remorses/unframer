@@ -317,11 +317,20 @@ export async function bundle({
         console.log()
         console.log()
 
-        let exampleComponent = result?.components?.find((x) => {
+        let withBreakpoints = result?.components?.filter((x) => {
             if (!x.propertyControls) return false
             const variants = getVariantsFromPropControls(x.propertyControls)
             return variants?.breakpoints.length >= 2
         })
+        withBreakpoints = withBreakpoints?.sort((a, b) => {
+            const aVariants = getVariantsFromPropControls(a.propertyControls)
+            const bVariants = getVariantsFromPropControls(b.propertyControls)
+            return (
+                (bVariants?.breakpoints?.length || 0) -
+                (aVariants?.breakpoints?.length || 0)
+            )
+        })
+        let exampleComponent = withBreakpoints?.[0]
         if (!exampleComponent) {
             logger.log(
                 `No example component found with breakpoints, using random example`,
