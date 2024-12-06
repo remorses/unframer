@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.TBQ2FHZ5.mjs
+// https :https://app.framerstatic.com/framer.7SGKTLCE.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18651,6 +18651,7 @@ function Router({
   locales = EMPTY_ARRAY,
   preserveQueryParams = false,
   enableAsyncURLUpdates = false,
+  LayoutTemplate,
 },) {
   useMarkRouterEffects();
   useReplaceInitialState({
@@ -18879,20 +18880,44 @@ function Router({
             notFoundPage,
             defaultPageStyle,
             forceUpdateKey: dep,
-            children: jsxs(Fragment, {
-              children: [
-                jsx(MarkSuspenseEffects.Start, {},),
-                pageExistsInCurrentLocale
-                  ? renderPage(current.page, defaultPageStyle,)
-                  : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-              ],
-            }, remountKey,),
+            children: jsx(WithLayoutTemplate, {
+              LayoutTemplate,
+              routeId: currentRouteId,
+              children: jsxs(Fragment, {
+                children: [
+                  jsx(MarkSuspenseEffects.Start, {},),
+                  pageExistsInCurrentLocale
+                    ? renderPage(
+                      current.page,
+                      LayoutTemplate
+                        ? {
+                          ...defaultPageStyle,
+                          display: 'content',
+                        }
+                        : defaultPageStyle,
+                    )
+                    : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                    notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                ],
+              }, remountKey,),
+            },),
           },),
           jsx(TurnOnReactEventHandling, {},),
           jsx(MarkSuspenseEffects.End, {},),
         ],
       },),
     },),
+  },);
+}
+function WithLayoutTemplate({
+  LayoutTemplate,
+  routeId,
+  children,
+},) {
+  if (!LayoutTemplate) return children;
+  return jsx(LayoutTemplate, {
+    routeId,
+    children,
   },);
 }
 function scrollElementIntoView(element, smoothScroll,) {
