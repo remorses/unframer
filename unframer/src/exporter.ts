@@ -4,7 +4,7 @@ import url from 'url'
 import { Sema } from 'async-sema'
 import dprint from 'dprint-node'
 
-import { polyfillNode } from 'esbuild-plugin-polyfill-node'
+import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill'
 
 import { exec } from 'child_process'
 import dedent from 'dedent'
@@ -27,7 +27,7 @@ import {
     ControlDescription,
     ControlType,
     PropertyControls,
-    combinedCSSRules
+    combinedCSSRules,
 } from './framer'
 import { logger, spinner, terminalMarkdown } from './utils.js'
 
@@ -94,7 +94,7 @@ export async function bundle({
             esbuildPluginBundleDependencies({
                 signal,
             }),
-            polyfillNode({}) as any,
+            nodeModulesPolyfillPlugin({}),
             {
                 name: 'virtual loader',
                 setup(build) {
@@ -178,7 +178,7 @@ export async function bundle({
         spinner.stop()
 
         let allFonts = [] as ComponentFontBundle[]
-        
+
         const packageJson = path.resolve(out, 'package.json')
         fs.writeFileSync(
             packageJson,
@@ -188,8 +188,9 @@ export async function bundle({
         if (!result?.outputFiles) {
             throw new Error('Failed to generate result')
         }
-        const sema = new Sema(6)
+        const sema = new Sema(5)
         spinner.start('Extracting types')
+        logger.log(`using node path`, nodePath)
         const propControlsData = await Promise.all(
             result?.outputFiles.map(async (file) => {
                 try {
@@ -657,6 +658,9 @@ function getTokensCss({
     const tokensCss = `:root {\n${cssStrings}\n}`
     return tokensCss
 }
+
+const nodePath = process.argv[0] || 'node'
+
 export async function extractPropControlsUnsafe(
     filename,
     name,
@@ -666,7 +670,7 @@ export async function extractPropControlsUnsafe(
 }> {
     const delimiter = '__delimiter__'
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
-    const nodePath = process.execPath || 'node'
+
     const fileUrl = url.pathToFileURL(filename).href
     const code = `import(${JSON.stringify(
         fileUrl,
@@ -674,7 +678,7 @@ export async function extractPropControlsUnsafe(
         delimiter,
     )}); console.log(${propCode}) })`
 
-    const TIMEOUT = 2 * 1000
+    const TIMEOUT = 5 * 1000
     let stdout = await new Promise<string>((res, rej) => {
         let childProcess = exec(
             `${JSON.stringify(
@@ -698,7 +702,7 @@ export async function extractPropControlsUnsafe(
             )
         }, TIMEOUT)
     }).catch((e) => {
-        logger.error(`error extracting types for ${name}`)
+        spinner.error(`error extracting types for ${name}`)
         logger.log(e.stack)
         throw e
     })

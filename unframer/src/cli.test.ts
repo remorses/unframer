@@ -1,11 +1,8 @@
-import tmp from 'tmp'
-import path from 'path'
-import { test, expect } from 'vitest'
+import { expect, test } from 'vitest'
 import {
-    bundle,
-    componentCamelCase,
-    extractTokenInfo,
-    findRelativeLinks,
+  componentCamelCase,
+  extractTokenInfo,
+  findRelativeLinks
 } from './exporter.js'
 
 test('componentCamelCase', () => {

@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.3
+
+### Patch Changes
+
+-   Fix node path
+
 ## 2.7.2
 
 ### Patch Changes
