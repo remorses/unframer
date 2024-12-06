@@ -26,19 +26,6 @@ Download framer components as simple files
     npm install framer-motion@npm:unframer
     ```
 
-1. Create an `unframer.config.json` file like the following (the key will be used for the component folder inside `outDir`)
-
-    ```json
-    {
-        "$schema": "https://unframer-schema.vercel.app/schema.json",
-        "outDir": "./framer",
-        "components": {
-            "logos": "https://framer.com/m/Logo-Ticker-1CEq.js@YtVlixDzOkypVBs3Dpav",
-            "menus": "https://framer.com/m/Mega-Menu-2wT3.js@W0zNsrcZ2WAwVuzt0BCl"
-        }
-    }
-    ```
-
 1. Copy your framer component url and add it to your config (remove the part after `@` to always use the latest version)
 
     ![url import](./assets/framer-url-import.png)

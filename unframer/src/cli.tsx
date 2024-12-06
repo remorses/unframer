@@ -1,16 +1,14 @@
-import { bundle, StyleToken } from './exporter.js'
+import { setMaxListeners } from 'events'
 import JSON from 'json5'
-import events, { EventEmitter, setMaxListeners } from 'events'
+import { bundle, StyleToken } from './exporter.js'
 
-import chokidar from 'chokidar'
-import fs from 'fs-extra'
-import findUp from 'find-up'
-import tmp from 'tmp'
-import path, { basename } from 'path'
-const configNames = ['unframer.config.json', 'unframer.json']
 import { cac } from 'cac'
-import { logger } from './utils.js'
+import findUp from 'find-up'
+import fs from 'fs-extra'
+import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
+import { logger } from './utils.js'
+const configNames = ['unframer.config.json', 'unframer.json']
 
 export const cli = cac('unframer')
 

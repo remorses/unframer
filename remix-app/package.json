@@ -17,8 +17,8 @@
         "@remix-run/serve": "^2.15.0",
         "isbot": "^4.4.0",
         "nextjs-app": "workspace:*",
-        "react": "19.0.0-rc-e4953922-20240919",
-        "react-dom": "19.0.0-rc-e4953922-20240919",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "unframer": "workspace:*"
     },
     "devDependencies": {

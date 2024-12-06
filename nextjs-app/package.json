@@ -14,11 +14,10 @@
         "@types/react": "18.3.5",
         "@types/react-dom": "18.3.0",
         "autoprefixer": "10.4.14",
-        "framer-motion": "link:../unframer",
-        "next": "15.0.3",
+        "next": "15.0.4",
         "postcss": "8.4.24",
-        "react": "19.0.0-rc-e4953922-20240919",
-        "react-dom": "19.0.0-rc-e4953922-20240919",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "tailwindcss": "3.3.2",
         "unframer": "workspace:*"
     }

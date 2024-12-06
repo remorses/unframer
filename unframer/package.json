@@ -81,8 +81,8 @@
         "concurrently": "^8.2.2",
         "openai": "^4.52.7",
         "posthtml": "^0.16.6",
-        "react": "19.0.0-rc-e4953922-20240919",
-        "react-dom": "19.0.0-rc-e4953922-20240919",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "tiktoken": "^1.0.15",
         "typescript": "^5.6.2"
     }
