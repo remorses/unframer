@@ -994,18 +994,21 @@ function findExampleProperty(propertyControls?: PropertyControls) {
 
     return propCamelCase(stringProp[1]?.title || '')
 }
-
 export function propCamelCase(str: string) {
     if (!str) {
         return ''
     }
     // Convert dashes to camelCase (e.g. foo-bar -> fooBar)
     str = str.replace(/-([\w])/g, (g) => g[1].toUpperCase())
-    // Convert underscores to camelCase (e.g. foo_bar -> fooBar)
+    // Convert underscores to camelCase (e.g. foo_bar -> fooBar) 
     str = str.replace(/_([a-z])/g, (g) => g[1].toUpperCase())
     // Remove spaces (e.g. "Foo Bar" -> "fooBar")
     str = str.replace(/\s+(.)/g, (_, c) => c.toUpperCase())
     // Ensure first character is lowercase
     str = str[0].toLowerCase() + str.slice(1)
+    // Add underscore prefix if starts with number
+    if (/^\d/.test(str)) {
+        str = '_' + str
+    }
     return str
 }
