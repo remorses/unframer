@@ -136,11 +136,6 @@ If you find any errors rendering your components:
 
 ## Known limitations:
 
--   Links to Framer internal pages won't work for now, this is because links to Framer pages are encoded with opaque ids. Instead you should
-
-    1. use link variables
-    1. absolute links (starting with https://, not links to other Framer pages).
-
 -   Internationalization is not supported now
 
 -   You may face React warnings like:
