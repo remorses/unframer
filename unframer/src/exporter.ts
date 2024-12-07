@@ -694,9 +694,7 @@ export async function extractPropControlsUnsafe(
 
     const TIMEOUT = 5 * 1000
     const UNFRAMER_MAP_PACKAGES = JSON.stringify({
-        unframer: url.pathToFileURL(
-            require.resolve('../esm/index.js'),
-        ).href,
+        unframer: url.pathToFileURL(require.resolve('../esm/index.js')).href,
         react: url.pathToFileURL(require.resolve('react')).href,
         'react-dom': url.pathToFileURL(require.resolve('react-dom')).href,
     })
@@ -713,11 +711,14 @@ export async function extractPropControlsUnsafe(
                     UNFRAMER_MAP_PACKAGES,
                 },
             },
-            (err, stdout) => {
+            (err, stdout, stderr) => {
                 clearTimeout(timer)
                 if (err) {
+                    spinner.error(`error extracting types for ${name}`)
+                    spinner.error(stderr)
                     return rej(err)
                 }
+
                 res(stdout)
             },
         )
@@ -731,12 +732,15 @@ export async function extractPropControlsUnsafe(
             )
         }, TIMEOUT)
     }).catch((e) => {
-        spinner.error(`error extracting types for ${name}`)
         logger.log(e.stack)
-        throw e
+        return ''
     })
 
-    stdout = stdout.split(delimiter)[1]
+    stdout = stdout.split(delimiter)[1] || ''
+    if (!stdout) {
+        return {}
+    }
+
     // console.log(stdout)
     return safeJsonParse(stdout)
 }
