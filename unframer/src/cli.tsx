@@ -40,7 +40,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 return
             }
             const data = await response.json()
-            return processConfig({
+            let cwd = path.resolve(process.cwd(), outDir || 'framer')
+            return await bundle({
                 config: {
                     outDir,
                     components: Object.fromEntries(
@@ -50,10 +51,11 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                         ]),
                     ),
                     tokens: data.colorStyles,
+                    framerWebPages: data.framerWebPages,
                 },
                 watch: false,
 
-                configBasename: 'remote config',
+                cwd,
                 signal: new AbortController().signal,
             })
         }
@@ -79,11 +81,11 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
 
         let controller = new AbortController()
         setMaxListeners(0, controller.signal)
-        processConfig({
+        await bundle({
             config,
             watch: false,
             signal: controller.signal,
-            configBasename,
+            cwd: path.resolve(process.cwd(), outDir || 'framer'),
         })
     })
 
@@ -154,46 +156,12 @@ function getNewNames(oldConfig: Config, newConfig: Config) {
     return newNames
 }
 
-type Config = {
+export type Config = {
     components: {
         [name: string]: string
     }
+    framerWebPages?: { webPageId: string; path: string }[]
     breakpoints?: BreakpointSizes
     tokens?: StyleToken[]
     outDir?: string
-}
-async function processConfig({
-    config,
-    watch,
-    signal,
-    configBasename,
-}: {
-    config: Config
-    watch: boolean
-    configBasename: string
-    signal?: AbortSignal
-}) {
-    try {
-        const { components, breakpoints, outDir } = config || {}
-        const installDir = path.resolve(process.cwd(), outDir || 'framer')
-        if (!components) {
-            logger.log(`No components found in ${configBasename}`)
-            return
-        }
-
-        await bundle({
-            components,
-            breakpoints,
-            cwd: installDir,
-            watch,
-            tokens: config.tokens,
-            signal,
-        })
-    } catch (e: any) {
-        if (signal) {
-            logger.log('Error processing config', e.stack)
-            return
-        }
-        throw e
-    }
 }

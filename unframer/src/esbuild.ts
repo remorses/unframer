@@ -12,6 +12,28 @@ export const externalPackages = [
 ]
 
 let redirectCache = new Map<string, Promise<string>>()
+
+export const replaceWebPageIds = ({
+    elements,
+    code,
+}: {
+    elements: { webPageId: string; path: string }[]
+    code: string
+}) => {
+    const pattern = new RegExp(
+        `^\\s*{\\s*webPageId\\s*:\\s*['"](?:${elements
+            .map((e) => e.webPageId)
+            .join('|')})['"]\\s*}\\s*$`,
+        'gm',
+    )
+    return code.replace(pattern, (match) => {
+        const id = match.match(/['"]([^'"]+)['"]/)?.[1]
+        const path = elements.find((e) => e.webPageId === id)?.path
+        logger.log(`Replacing relative link to ${id} with fixed path: ${path}`)
+        return path ? `'${path}'` : match
+    })
+}
+
 export function esbuildPluginBundleDependencies({
     signal = undefined as AbortSignal | undefined,
     externalizeNpm = false,
@@ -96,7 +118,7 @@ export function esbuildPluginBundleDependencies({
             build.onEnd(() => {
                 spinner.stop()
             })
-            
+
             build.onLoad({ filter: /.*/, namespace }, async (args) => {
                 if (signal?.aborted) {
                     throw new Error('aborted')
@@ -119,7 +141,7 @@ export function esbuildPluginBundleDependencies({
                 const promise = Promise.resolve().then(async () => {
                     logger.log('fetching', url.replace(/https?:\/\//, ''))
                     spinner.update(`Fetching ${url.replace(/https?:\/\//, '')}`)
-                    
+
                     const res = await fetchWithRetry(resolved, { signal })
                     if (!res.ok) {
                         throw new Error(
