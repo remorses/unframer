@@ -20,17 +20,17 @@ export const replaceWebPageIds = ({
     elements: { webPageId: string; path: string }[]
     code: string
 }) => {
-    const pattern = new RegExp(
-        `^\\s*{\\s*webPageId\\s*:\\s*['"](?:${elements
-            .map((e) => e.webPageId)
-            .join('|')})['"]\\s*}\\s*$`,
-        'gm',
-    )
-    return code.replace(pattern, (match) => {
-        const id = match.match(/['"]([^'"]+)['"]/)?.[1]
+    // Match exact pattern { webPageId: 'id' } with flexible whitespace and quotes
+    const pattern = /{[\s\n]*webPageId[\s\n]*:[\s\n]*(['"])(.*?)\1[\s\n]*}/g
+
+    return code.replace(pattern, (match, quote, id) => {
         const path = elements.find((e) => e.webPageId === id)?.path
+        if (!path) {
+            return match
+        }
+
         logger.log(`Replacing relative link to ${id} with fixed path: ${path}`)
-        return path ? `'${path}'` : match
+        return `'${path}'`
     })
 }
 
