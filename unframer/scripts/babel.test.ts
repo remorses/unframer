@@ -47,7 +47,7 @@ describe('babelPluginRenameExports', () => {
           "const something = 9;
           export { something as oldName, };
           export { something as renamedSomething, };
-          export function oldName1() {}
+          export function newName1() {}
           export default defaultExport;
           "
         `)

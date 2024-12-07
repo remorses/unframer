@@ -227,7 +227,6 @@ export function babelPluginDeduplicateImports({
         },
     }
 }
-
 export function babelPluginRenameExports({
     map,
 }: {
@@ -237,7 +236,8 @@ export function babelPluginRenameExports({
         name: 'rename-exports',
         visitor: {
             ExportNamedDeclaration(path) {
-                const { specifiers } = path.node
+                const { specifiers, declaration } = path.node
+                // Handle export specifiers like: export { something as oldName }
                 for (const specifier of specifiers) {
                     if (!BabelTypes.isExportSpecifier(specifier)) continue
                     const exported = specifier.exported
@@ -246,6 +246,16 @@ export function babelPluginRenameExports({
                     const newName = map.get(oldName)
                     if (newName) {
                         exported.name = newName
+                    }
+                }
+                // Handle function declarations like: export function oldName1() {}
+                if (BabelTypes.isFunctionDeclaration(declaration)) {
+                    const oldName = declaration.id?.name
+                    if (oldName) {
+                        const newName = map.get(oldName)
+                        if (newName && declaration?.id) {
+                            declaration.id.name = newName
+                        }
                     }
                 }
             },
