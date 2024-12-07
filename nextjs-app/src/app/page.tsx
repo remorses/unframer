@@ -1,7 +1,7 @@
 'use client'
 
 import '@/framer/styles.css'
-import { AnimatePresence, PageRoot } from 'unframer'
+import { AnimatePresence, PageRoot,  } from 'unframer'
 
 import Logos from '@/framer/logos'
 import InputFramerComponent from '@/framer/input'

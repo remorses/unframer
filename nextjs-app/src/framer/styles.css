@@ -776,7 +776,7 @@ NavigationContainer
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
 
-/* used by form.js, framerNav.js, menu-overlay.js */
+/* used by form.js, menu-overlay.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1375,7 +1375,7 @@ NavigationContainer
     unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
-/* used by GrowthSpaceMenu.js, issue-17.js */
+/* used by GrowthSpaceMenu.js, framerNav.js, issue-17.js */
 
 @font-face {
     font-family: 'Inter'; 

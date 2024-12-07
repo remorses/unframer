@@ -16,9 +16,9 @@ export interface Props {
     "on1"?: Function
     "on3"?: Function
     "title"?: string
-    "platform Name 1"?: string
-    "platform Name 2"?: string
-    "platform Name 3"?: string
+    "platformName1"?: string
+    "platformName2"?: string
+    "platformName3"?: string
 }
 
 const GrowthSpaceMenuFramerComponent = (props: Props) => any
