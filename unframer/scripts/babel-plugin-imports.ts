@@ -228,6 +228,41 @@ export function babelPluginDeduplicateImports({
     }
 }
 
+export function babelPluginRenameExports({
+    map,
+}: {
+    map: Map<string, string>
+}) {
+    return {
+        name: 'rename-exports',
+        visitor: {
+            ExportNamedDeclaration(path) {
+                const { specifiers } = path.node
+                for (const specifier of specifiers) {
+                    if (!BabelTypes.isExportSpecifier(specifier)) continue
+                    const exported = specifier.exported
+                    if (!BabelTypes.isIdentifier(exported)) continue
+                    const oldName = exported.name
+                    const newName = map.get(oldName)
+                    if (newName) {
+                        exported.name = newName
+                    }
+                }
+            },
+            ExportDefaultDeclaration(path) {
+                const { declaration } = path.node
+                if (BabelTypes.isIdentifier(declaration)) {
+                    const oldName = declaration.name
+                    const newName = map.get(oldName)
+                    if (newName) {
+                        declaration.name = newName
+                    }
+                }
+            },
+        },
+    }
+}
+
 function jsonStringifyWithMaps(map) {
     return JSON.stringify(
         [...map],

@@ -3,12 +3,11 @@ import dprint from 'dprint-node'
 import dedent from 'dedent'
 import { babelPluginDeduplicateImports } from './babel-plugin-imports'
 import { transform } from '@babel/core'
-
-function trans(code: string) {
+function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
     const res = transform(code || '', {
         babelrc: false,
         sourceType: 'module',
-        plugins: [babelPluginDeduplicateImports],
+        plugins,
         filename: 'x.js',
         compact: true,
         sourceMaps: false,
@@ -23,6 +22,37 @@ function trans(code: string) {
     })
     return formatted
 }
+
+import { babelPluginRenameExports } from './babel-plugin-imports'
+
+describe('babelPluginRenameExports', () => {
+    test('renames exports', () => {
+        const map = new Map([
+            ['oldName0', 'newName0'],
+            ['oldName1', 'newName1'],
+            ['something', 'renamedSomething'],
+        ])
+        expect(
+            trans(
+                dedent`
+                const something = 9
+                export { something as oldName };
+                export {something}
+                export function oldName1() {}
+                export default defaultExport;
+            `,
+                [babelPluginRenameExports({ map })],
+            ),
+        ).toMatchInlineSnapshot(`
+          "const something = 9;
+          export { something as oldName, };
+          export { something as renamedSomething, };
+          export function oldName1() {}
+          export default defaultExport;
+          "
+        `)
+    })
+})
 
 describe('babelPluginDeduplicateImports', () => {
     test('simple', () => {
