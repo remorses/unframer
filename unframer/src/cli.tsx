@@ -52,7 +52,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                         ]),
                     ),
                     tokens: data.colorStyles,
-                    framerWebPages: data.framerWebPages,
+                    framerWebPages: data.framerWebPages || [],
                 },
                 watch: false,
 

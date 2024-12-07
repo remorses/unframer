@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.7
+
+### Patch Changes
+
+-   Add support for relative links handling from Framer
+
 ## 2.7.6
 
 ### Patch Changes
