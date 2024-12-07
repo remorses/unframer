@@ -8,7 +8,7 @@ import dprint from 'dprint-node'
 import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill'
 
 import { exec } from 'child_process'
-import dedent from 'dedent'
+import dedent from 'string-dedent'
 import fs from 'fs'
 import path from 'path'
 import {
@@ -329,17 +329,21 @@ export async function bundle({
         console.log()
         console.log()
 
-        let withBreakpoints = result?.components?.filter((x) => {
-            if (!x.propertyControls) return false
-            const variants = getVariantsFromPropControls(x.propertyControls)
-            return variants?.breakpoints.length >= 2
-        })
-        withBreakpoints = withBreakpoints?.sort((a, b) => {
+        let exampleComponent = result?.components?.sort((a, b) => {
+            const aVariants = getVariantsFromPropControls(a.propertyControls)
+            const bVariants = getVariantsFromPropControls(b.propertyControls)
+            const aHasBreakpoints = (aVariants?.breakpoints?.length || 0) >= 2
+            const bHasBreakpoints = (bVariants?.breakpoints?.length || 0) >= 2
+            
+            // Sort components with breakpoints first
+            if (aHasBreakpoints && !bHasBreakpoints) return -1
+            if (!aHasBreakpoints && bHasBreakpoints) return 1
+
+            // Within each group, prefer components with example properties
             const aProp = findExampleProperty(a.propertyControls)
             const bProp = findExampleProperty(b.propertyControls)
             return (bProp ? 1 : 0) - (aProp ? 1 : 0)
-        })
-        let exampleComponent = withBreakpoints?.[0]
+        })?.[0]
         if (!exampleComponent) {
             logger.log(
                 `No example component found with breakpoints, using random example`,
@@ -365,22 +369,31 @@ export async function bundle({
         const variants = getVariantsFromPropControls(
             exampleComponent?.propertyControls,
         )
-        const breakpoints = variants?.breakpoints
-        if (!breakpoints) {
-            return
-        }
+        const outDir = path.posix.relative(process.cwd(), out)
         logger.log(
             'exampleComponent?.propertyControls',
             exampleComponent?.propertyControls,
         )
-        const variantsExample = {
-            lg: breakpoints[1],
-            base: breakpoints[0],
-        }
-        let prop =
+        const prop =
             findExampleProperty(exampleComponent?.propertyControls) ||
             'exampleFramerVariable'
-        const outDir = path.posix.relative(process.cwd(), out)
+        const responsiveComponent = (() => {
+            const breakpoints = variants?.breakpoints
+            if (!breakpoints?.length) {
+                return ''
+            }
+            const variantsExample = {
+                lg: breakpoints[1],
+                base: breakpoints[0],
+            }
+
+            return dedent`
+            <${exampleComponent?.componentName}.Responsive
+                ${prop}='example'
+                variants={${JSON.stringify(variantsExample || {})}}
+            />
+            `
+        })()
         console.log(
             terminalMarkdown(dedent`
         # How to use the Framer components
@@ -397,9 +410,7 @@ export async function bundle({
 
         \`\`\`jsx
         import './${outDir}/styles.css'
-        import ${exampleComponent?.componentName} from './${outDir}/${
-                exampleComponent?.path
-            }'
+        import ${exampleComponent?.componentName} from './${outDir}/${exampleComponent?.path}'
         
         export default function App() {
             return (
@@ -408,10 +419,7 @@ export async function bundle({
                         ${prop}='example'
                         style={{ width: '100%' }}
                     />
-                    <${exampleComponent?.componentName}.Responsive
-                        ${prop}='example'
-                        variants={${JSON.stringify(variantsExample || {})}}
-                    />
+                   ${responsiveComponent}
                 </div>
             );
         };
@@ -422,6 +430,7 @@ export async function bundle({
         To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
         Read more on GitHub: https://github.com/remorses/unframer
+        
         `),
         )
         return result

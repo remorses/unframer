@@ -1,0 +1,100 @@
+{
+  "inputs": {
+    "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js": {
+      "bytes": 24036,
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "virtual:plugin-component-test": {
+      "bytes": 536,
+      "imports": [
+        {
+          "path": "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js",
+          "kind": "import-statement",
+          "original": "https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js"
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "plugin-component-test.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "default"
+      ],
+      "entryPoint": "virtual:plugin-component-test",
+      "inputs": {
+        "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js": {
+          "bytesInOutput": 23101
+        },
+        "virtual:plugin-component-test": {
+          "bytesInOutput": 278
+        }
+      },
+      "bytes": 23586
+    }
+  }
+}

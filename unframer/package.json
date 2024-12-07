@@ -48,7 +48,6 @@
     "dependencies": {
         "async-sema": "^3.1.1",
         "cac": "^6.7.14",
-        "dedent": "^1.5.3",
         "dprint-node": "^1.0.8",
         "esbuild": "^0.24.0",
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
@@ -56,12 +55,14 @@
         "find-up": "^5.0.0",
         "fs-extra": "^11.2.0",
         "json5": "^2.2.3",
+        "just-kebab-case": "^4.2.0",
         "marked": "^15.0.3",
         "marked-terminal": "^7.2.1",
         "nanospinner": "^1.2.0",
         "native-fetch": "^4.0.2",
         "picocolors": "^1.0.1",
-        "real-framer-motion": "npm:framer-motion@11.2.10"
+        "real-framer-motion": "npm:framer-motion@11.2.10",
+        "string-dedent": "^3.0.1"
     },
     "devDependencies": {
         "@babel/core": "^7.24.9",

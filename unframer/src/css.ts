@@ -1,4 +1,4 @@
-import dedent from 'dedent'
+import dedent from 'string-dedent'
 import { ComponentFont } from './framer.js'
 
 function deduplicateByKey<T>(arr: T[], key: (k: T) => string): T[] {
@@ -92,7 +92,8 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
                     str += dedent`
                     @font-face {
                         font-family: '${x.family}'; 
-                        src: url('${x.url}');\n`
+                        src: url('${x.url}');\n
+                    `
                     if (x.style) {
                         str += `    font-style: ${x.style};\n`
                     }

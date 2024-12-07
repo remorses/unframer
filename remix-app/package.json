@@ -6,6 +6,7 @@
     "scripts": {
         "build": "pnpm --filter unframer build && pnpm remix vite:build",
         "dev": "remix vite:dev",
+        "framer-test-canvas-pages": "pnpm unframer 1a22b140dd1bd637 --outDir framer-canvas-pages",
         "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
         "start": "PORT=5173 remix-serve ./build/server/index.js",
         "typecheck": "tsc"

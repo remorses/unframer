@@ -19,6 +19,7 @@ import MenuOverlay from 'nextjs-app/src/framer/menu-overlay'
 import Collection from 'nextjs-app/src/framer/collection'
 import Card from 'nextjs-app/src/framer/card'
 import { useLoaderData } from '@remix-run/react'
+import PluginComponentTestFramerComponent from '../../framer-canvas-pages/plugin-component-test'
 
 export function loader() {
     return {}
@@ -31,8 +32,9 @@ export default function Home() {
             {/* <PageRoot routeId='sdf' localeId='it-it' RootComponent='div' /> */}
 
             <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'>
+                <PluginComponentTestFramerComponent />
                 <div className=' flex z-10 w-full absolute flex-col items-center'>
-                    {/* <Menus  className=' mx-auto' /> */}
+                    <Menus  className=' mx-auto' />
                 </div>
                 <FramerNav className='!w-full' />
                 <div className='pt-[200px]'></div>

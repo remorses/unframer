@@ -9,18 +9,11 @@ import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
 import { logger } from './utils.js'
 const configNames = ['unframer.config.json', 'unframer.json']
+import kebabCase from 'just-kebab-case'
 
 export const cli = cac('unframer')
 
 let defaultOutDir = 'framer'
-
-function nameToFolder(name: string) {
-    return name
-        .replace(/[^a-zA-Z0-9]/g, '-') // Replace non-alphanumeric with dash
-        .replace(/-+/g, '-') // Replace multiple dashes with single dash
-        .replace(/^-|-$/g, '') // Remove leading/trailing dashes
-        .toLowerCase()
-}
 
 cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--outDir <dir>', 'Output directory', { default: defaultOutDir })
@@ -46,10 +39,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 config: {
                     outDir,
                     components: Object.fromEntries(
-                        data.components.map((c) => [
-                            nameToFolder(c.name),
-                            c.url,
-                        ]),
+                        data.components.map((c) => [kebabCase(c.name), c.url]),
                     ),
                     tokens: data.colorStyles,
                     framerWebPages: data.framerWebPages || [],

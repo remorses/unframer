@@ -153,9 +153,6 @@ importers:
       cac:
         specifier: ^6.7.14
         version: 6.7.14
-      dedent:
-        specifier: ^1.5.3
-        version: 1.5.3
       dprint-node:
         specifier: ^1.0.8
         version: 1.0.8
@@ -177,6 +174,9 @@ importers:
       json5:
         specifier: ^2.2.3
         version: 2.2.3
+      just-kebab-case:
+        specifier: ^4.2.0
+        version: 4.2.0
       marked:
         specifier: ^15.0.3
         version: 15.0.3
@@ -3540,6 +3540,9 @@ packages:
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
+
+  just-kebab-case@4.2.0:
+    resolution: {integrity: sha512-p2BdO7o4BI+pMun3J+dhaOfYan5JsZrw9wjshRjkWY9+p+u+kKSMhNWYnot2yHDR9CSahZ9iT3dcqJ+V72qHMw==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -9347,6 +9350,8 @@ snapshots:
       array.prototype.flat: 1.3.2
       object.assign: 4.1.5
       object.values: 1.2.0
+
+  just-kebab-case@4.2.0: {}
 
   keyv@4.5.4:
     dependencies:
