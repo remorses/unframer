@@ -40,6 +40,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 return
             }
             const data = await response.json()
+            logger.log('unframer data', data)
             let cwd = path.resolve(process.cwd(), outDir || 'framer')
             return await bundle({
                 config: {

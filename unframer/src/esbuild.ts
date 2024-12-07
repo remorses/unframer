@@ -20,8 +20,8 @@ export const replaceWebPageIds = ({
     elements: { webPageId: string; path: string }[]
     code: string
 }) => {
-    // Match exact pattern { webPageId: 'id' } with flexible whitespace and quotes
-    const pattern = /{[\s\n]*webPageId[\s\n]*:[\s\n]*(['"])(.*?)\1[\s\n]*}/g
+    // Match webPageId pattern with optional trailing comma
+    const pattern = /{[\s\n]*webPageId[\s\n]*:[\s\n]*(['"])(.*?)\1[\s\n]*,?[\s\n]*}/g
 
     return code.replace(pattern, (match, quote, id) => {
         const path = elements.find((e) => e.webPageId === id)?.path
