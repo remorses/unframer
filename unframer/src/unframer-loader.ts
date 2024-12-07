@@ -1,10 +1,14 @@
+const mapPackages = JSON.parse(process.env.UNFRAMER_MAP_PACKAGES || '{}')
+
 export async function resolve(specifier, context, defaultResolve) {
-    if (specifier === 'unframer') {
+    if (mapPackages[specifier]) {
         return {
-            url: process.env.UNFRAMER_RUNTIME_PATH,
-            format: 'module', // Specify that unframer is an ES module
+            url: mapPackages[specifier],
+            // format: 'module', // Specify that unframer is an ES module
             shortCircuit: true, // Signal that we're intentionally not calling next hook
         }
     }
+
+
     return defaultResolve(specifier, context, defaultResolve)
 }

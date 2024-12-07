@@ -675,10 +675,6 @@ function getTokensCss({
 
 const nodePath = process.argv[0] || 'node'
 
-let UNFRAMER_RUNTIME_PATH = url.pathToFileURL(
-    require.resolve('../esm/index.js'),
-).href
-
 export async function extractPropControlsUnsafe(
     filename,
     name,
@@ -697,6 +693,13 @@ export async function extractPropControlsUnsafe(
     )}); console.log(${propCode}) })`
 
     const TIMEOUT = 5 * 1000
+    const UNFRAMER_MAP_PACKAGES = JSON.stringify({
+        unframer: url.pathToFileURL(
+            require.resolve('../esm/index.js'),
+        ).href,
+        react: url.pathToFileURL(require.resolve('react')).href,
+        'react-dom': url.pathToFileURL(require.resolve('react-dom')).href,
+    })
     let stdout = await new Promise<string>((res, rej) => {
         let childProcess = exec(
             `${JSON.stringify(
@@ -707,7 +710,7 @@ export async function extractPropControlsUnsafe(
             {
                 env: {
                     // ...process.env,
-                    UNFRAMER_RUNTIME_PATH,
+                    UNFRAMER_MAP_PACKAGES,
                 },
             },
             (err, stdout) => {
