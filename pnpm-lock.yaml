@@ -195,6 +195,9 @@ importers:
       real-framer-motion:
         specifier: npm:framer-motion@11.2.10
         version: framer-motion@11.2.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      string-dedent:
+        specifier: ^3.0.1
+        version: 3.0.1
     devDependencies:
       '@babel/core':
         specifier: ^7.24.9
@@ -4816,6 +4819,10 @@ packages:
   streamsearch@1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
+
+  string-dedent@3.0.1:
+    resolution: {integrity: sha512-A2zCXSgpPrpFi1lDJlDwIPYakBWeDtQZ8ZBKssB8M/WbtNEKTzsl1yCDRmHx55jSB27xZDQ6NOtRYekESWx6fw==}
+    engines: {node: '>=0.12.0'}
 
   string-hash@1.1.3:
     resolution: {integrity: sha512-kJUvRUFK49aub+a7T1nNE66EJbZBMnBgoC1UbCZ5n6bsZKBRga4KgBRTMn/pFkeCZSYtNeSyMxPDM0AXWELk2A==}
@@ -10863,6 +10870,8 @@ snapshots:
   stream-slice@0.1.2: {}
 
   streamsearch@1.1.0: {}
+
+  string-dedent@3.0.1: {}
 
   string-hash@1.1.3: {}
 
