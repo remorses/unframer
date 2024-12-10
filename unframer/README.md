@@ -20,7 +20,11 @@ Download framer components as simple files
     npm install unframer
     ```
 
-1. Install the `React Export` Framer plugin, open it and select which components you want to export.
+1. Install the [`React Export` Framer plugin](https://www.framer.com/marketplace/plugins/react-export/), open it and select which components you want to export.
+
+<div align="center">
+    <img src="./assets/select-components.jpeg" width="600" />
+</div>
 
 1. Run the command `npx unframer {projectId} --outDir ./src/framer` to download the components and their types in the `outDir` directory, the command will be shown in the Framer plugin too. Run this command each time you update your Framer project and want to update the components.
 
