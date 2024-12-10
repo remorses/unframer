@@ -11,7 +11,7 @@ import fs from 'fs'
 import path from 'path'
 import { esbuildPluginBundleDependencies } from '../src/esbuild'
 import { logger } from '../src/utils'
-import { babelPluginDeduplicateImports } from './babel-plugin-imports'
+import { babelPluginDeduplicateImports } from '../src/babel-plugin-imports'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 

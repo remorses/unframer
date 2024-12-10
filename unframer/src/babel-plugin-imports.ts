@@ -2,7 +2,7 @@ import * as BabelTypes from '@babel/types'
 
 import { PluginObj } from '@babel/core'
 import { ImportDeclaration, ImportSpecifier, Identifier } from '@babel/types'
-import BatchRenamer from './renamer'
+import BatchRenamer from '../scripts/renamer'
 
 export function babelPluginDeduplicateImports({
     types: t,
@@ -311,11 +311,11 @@ export function babelPluginJsxTransform() {
                         },
                         attributes: [],
                         selfClosing: !propsArg.properties.find(
-                            (p) => p.key.name === 'children',
+                            (p) => p.key?.name === 'children',
                         ),
                     },
                     closingElement: propsArg.properties.find(
-                        (p) => p.key.name === 'children',
+                        (p) => p.key?.name === 'children',
                     )
                         ? {
                               type: 'JSXClosingElement',
@@ -331,28 +331,32 @@ export function babelPluginJsxTransform() {
                 // Add attributes
                 if (propsArg && propsArg.properties) {
                     propsArg.properties.forEach((prop) => {
-                        if (prop.key.name === 'children') {
+                        if (prop.key?.name === 'children') {
                             if (prop.value.type === 'ArrayExpression') {
-                                jsxElement.children = prop.value.elements.map(element => ({
-                                    type: 'JSXExpressionContainer',
-                                    expression: element
-                                }))
+                                jsxElement.children = prop.value.elements.map(
+                                    (element) => ({
+                                        type: 'JSXExpressionContainer',
+                                        expression: element,
+                                    }),
+                                )
                             } else {
-                                jsxElement.children = [{
-                                    type: 'JSXExpressionContainer',
-                                    expression: prop.value
-                                }]
+                                jsxElement.children = [
+                                    {
+                                        type: 'JSXExpressionContainer',
+                                        expression: prop.value,
+                                    },
+                                ]
                             }
                         } else {
                             jsxElement.openingElement.attributes.push({
                                 type: 'JSXAttribute',
                                 name: {
                                     type: 'JSXIdentifier',
-                                    name: prop.key.name,
+                                    name: prop.key?.name,
                                 },
                                 value: {
                                     type: 'JSXExpressionContainer',
-                                    expression: prop.value
+                                    expression: prop.value,
                                 },
                             })
                         }

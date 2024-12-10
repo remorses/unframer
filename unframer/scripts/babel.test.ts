@@ -1,7 +1,7 @@
 import { test, expect, describe } from 'vitest'
 import dprint from 'dprint-node'
 import dedent from 'string-dedent'
-import { babelPluginDeduplicateImports, babelPluginJsxTransform } from './babel-plugin-imports'
+import { babelPluginDeduplicateImports, babelPluginJsxTransform } from '../src/babel-plugin-imports'
 import { transform } from '@babel/core'
 function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
     const res = transform(code || '', {
@@ -23,7 +23,7 @@ function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
     return formatted
 }
 
-import { babelPluginRenameExports } from './babel-plugin-imports'
+import { babelPluginRenameExports } from '../src/babel-plugin-imports'
 
 describe('babelPluginRenameExports', () => {
     test('renames exports', () => {
