@@ -278,7 +278,7 @@ export function babelPluginRenameExports({
 const noContainerTypes = new Set([
     'JSXElement',
     // 'StringLiteral',
-    'NumericLiteral'
+    'NumericLiteral',
 ])
 
 export function babelPluginJsxTransform() {
@@ -358,8 +358,14 @@ export function babelPluginJsxTransform() {
                                 jsxElement.children = prop.value.elements.map(
                                     (element) => {
                                         if (
-                                            noContainerTypes.has(element.type) ||
-                                            (element.type === 'CallExpression' && element.callee?.name?.startsWith('_jsx'))
+                                            noContainerTypes.has(
+                                                element.type,
+                                            ) ||
+                                            (element.type ===
+                                                'CallExpression' &&
+                                                element.callee?.name?.startsWith(
+                                                    '_jsx',
+                                                ))
                                         ) {
                                             return element
                                         }
@@ -370,8 +376,13 @@ export function babelPluginJsxTransform() {
                                     },
                                 )
                             } else {
-                                if (noContainerTypes.has(prop.value.type) ||
-                                    (prop.value.type === 'CallExpression' && prop.value.callee?.name?.startsWith('_jsx'))) {
+                                if (
+                                    noContainerTypes.has(prop.value.type) ||
+                                    (prop.value.type === 'CallExpression' &&
+                                        prop.value.callee?.name?.startsWith(
+                                            '_jsx',
+                                        ))
+                                ) {
                                     jsxElement.children = [prop.value]
                                 } else {
                                     jsxElement.children = [
@@ -399,19 +410,16 @@ export function babelPluginJsxTransform() {
                                 return
                             }
 
-                            // Always wrap attribute values in expression container
-                            const attrValue = {
-                                type: 'JSXExpressionContainer',
-                                expression: prop.value
-                            }
-
                             jsxElement.openingElement.attributes.push({
                                 type: 'JSXAttribute',
                                 name: {
                                     type: 'JSXIdentifier',
                                     name: attrName,
                                 },
-                                value: attrValue,
+                                value: {
+                                    type: 'JSXExpressionContainer',
+                                    expression: prop.value,
+                                },
                             })
                         }
                     })
