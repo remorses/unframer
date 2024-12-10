@@ -428,7 +428,9 @@ export async function bundle({
 
         \`\`\`jsx
         import './${outDir}/styles.css'
-        import ${exampleComponent?.componentName} from './${outDir}/${exampleComponent?.path}'
+        import ${exampleComponent?.componentName} from './${outDir}/${
+                exampleComponent?.path
+            }'
         
         export default function App() {
             return (
@@ -437,7 +439,12 @@ export async function bundle({
                         ${prop}='example'
                         style={{ width: '100%' }}
                     />
-                    ${responsiveComponent.split('\n').map(line => '                    ' + line).join('\n')}
+                    ${responsiveComponent
+                        .split('\n')
+                        .map((line, i) =>
+                            !i ? line : '            ' + line,
+                        )
+                        .join('\n')}
                 </div>
             );
         };
