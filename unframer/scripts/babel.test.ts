@@ -1,7 +1,7 @@
 import { test, expect, describe } from 'vitest'
 import dprint from 'dprint-node'
-import dedent from 'dedent'
-import { babelPluginDeduplicateImports } from './babel-plugin-imports'
+import dedent from 'string-dedent'
+import { babelPluginDeduplicateImports, babelPluginJsxTransform } from './babel-plugin-imports'
 import { transform } from '@babel/core'
 function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
     const res = transform(code || '', {
@@ -13,8 +13,8 @@ function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
         sourceMaps: false,
     })
     let out = res!.code!
-    let formatted = dprint.format('x', out, {
-        lineWidth: 140,
+    let formatted = dprint.format('x.jsx', out, {
+        lineWidth: 80,
         quoteStyle: 'alwaysSingle',
 
         trailingCommas: 'always',
@@ -53,6 +53,68 @@ describe('babelPluginRenameExports', () => {
         `)
     })
 })
+
+describe('babelPluginJsxTransform', () => {
+    test('transforms _jsx and _jsxs calls to JSX', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+                
+                const element = _jsx("div", {
+                    className: "container",
+                    children: _jsxs("span", {
+                        style: { color: "red" },
+                        children: [
+                            _jsx("strong", {
+                                children: "Hello"
+                            }),
+                            " world"
+                        ]
+                    })
+                });
+                `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+          const element = (
+            <div className={'container'}>
+              {
+                <span style={{ color: 'red', }}>
+                  {<strong>{'Hello'}</strong>}
+                  {' world'}
+                </span>
+              }
+            </div>
+          );
+          "
+        `)
+    })
+
+    test('handles member expressions', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                
+                const element = _jsx(Components.Button, {
+                    onClick: () => 'Hello',
+                    children: "Click me"
+                });
+                `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const element = (
+            <Components.Button onClick={() => 'Hello'}>{'Click me'}</Components.Button>
+          );
+          "
+        `)
+    })
+})
+
 
 describe('babelPluginDeduplicateImports', () => {
     test('simple', () => {

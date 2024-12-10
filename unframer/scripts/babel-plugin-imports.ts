@@ -227,6 +227,7 @@ export function babelPluginDeduplicateImports({
         },
     }
 }
+
 export function babelPluginRenameExports({
     map,
 }: {
@@ -268,6 +269,97 @@ export function babelPluginRenameExports({
                         declaration.name = newName
                     }
                 }
+            },
+        },
+    }
+}
+
+export function babelPluginJsxTransform() {
+    return {
+        name: 'jsx-transform',
+        visitor: {
+            CallExpression(path) {
+                // Check if it's a _jsx or _jsxs call
+                if (
+                    !path.node.callee ||
+                    !['_jsx', '_jsxs', '_jsx4', '_jsxs4'].includes(
+                        path.node.callee.name,
+                    )
+                ) {
+                    return
+                }
+
+                const [elementArg, propsArg] = path.node.arguments
+
+                // Get the element type
+                let elementType = elementArg
+                if (elementArg.type === 'MemberExpression') {
+                    elementType = {
+                        type: 'StringLiteral',
+                        value: `${elementArg.object.name}.${elementArg.property.name}`,
+                    }
+                }
+
+                // Convert to JSX element
+                const jsxElement: BabelTypes.JSXElement = {
+                    type: 'JSXElement',
+                    openingElement: {
+                        type: 'JSXOpeningElement',
+                        name: {
+                            type: 'JSXIdentifier',
+                            name: elementType.value || elementType.name,
+                        },
+                        attributes: [],
+                        selfClosing: !propsArg.properties.find(
+                            (p) => p.key.name === 'children',
+                        ),
+                    },
+                    closingElement: propsArg.properties.find(
+                        (p) => p.key.name === 'children',
+                    )
+                        ? {
+                              type: 'JSXClosingElement',
+                              name: {
+                                  type: 'JSXIdentifier',
+                                  name: elementType.value || elementType.name,
+                              },
+                          }
+                        : null,
+                    children: [],
+                }
+
+                // Add attributes
+                if (propsArg && propsArg.properties) {
+                    propsArg.properties.forEach((prop) => {
+                        if (prop.key.name === 'children') {
+                            if (prop.value.type === 'ArrayExpression') {
+                                jsxElement.children = prop.value.elements.map(element => ({
+                                    type: 'JSXExpressionContainer',
+                                    expression: element
+                                }))
+                            } else {
+                                jsxElement.children = [{
+                                    type: 'JSXExpressionContainer',
+                                    expression: prop.value
+                                }]
+                            }
+                        } else {
+                            jsxElement.openingElement.attributes.push({
+                                type: 'JSXAttribute',
+                                name: {
+                                    type: 'JSXIdentifier',
+                                    name: prop.key.name,
+                                },
+                                value: {
+                                    type: 'JSXExpressionContainer',
+                                    expression: prop.value
+                                },
+                            })
+                        }
+                    })
+                }
+
+                path.replaceWith(jsxElement)
             },
         },
     }
