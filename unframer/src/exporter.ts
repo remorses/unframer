@@ -437,7 +437,7 @@ export async function bundle({
                         ${prop}='example'
                         style={{ width: '100%' }}
                     />
-                   ${responsiveComponent}
+                    ${responsiveComponent.split('\n').map(line => '                    ' + line).join('\n')}
                 </div>
             );
         };
