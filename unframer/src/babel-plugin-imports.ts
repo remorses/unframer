@@ -273,6 +273,14 @@ export function babelPluginRenameExports({
         },
     }
 }
+
+// Set of types that don't need expression containers
+const noContainerTypes = new Set([
+    'JSXElement',
+    // 'StringLiteral',
+    'NumericLiteral'
+])
+
 export function babelPluginJsxTransform() {
     return {
         name: 'jsx-transform',
@@ -284,6 +292,14 @@ export function babelPluginJsxTransform() {
                     !path.node.callee.name?.startsWith('_jsx')
                 ) {
                     return
+                }
+
+                // Remove /* @__PURE__ */ comments
+                if (path.node.leadingComments) {
+                    path.node.leadingComments =
+                        path.node.leadingComments.filter(
+                            (comment) => !comment.value.includes('@__PURE__'),
+                        )
                 }
 
                 const [elementArg, propsArg] = path.node.arguments
@@ -340,38 +356,62 @@ export function babelPluginJsxTransform() {
                         } else if (prop.key?.name === 'children') {
                             if (prop.value.type === 'ArrayExpression') {
                                 jsxElement.children = prop.value.elements.map(
-                                    (element) => ({
-                                        type: 'JSXExpressionContainer',
-                                        expression: element,
-                                    }),
+                                    (element) => {
+                                        if (
+                                            noContainerTypes.has(element.type) ||
+                                            (element.type === 'CallExpression' && element.callee?.name?.startsWith('_jsx'))
+                                        ) {
+                                            return element
+                                        }
+                                        return {
+                                            type: 'JSXExpressionContainer',
+                                            expression: element,
+                                        }
+                                    },
                                 )
                             } else {
-                                jsxElement.children = [
-                                    {
-                                        type: 'JSXExpressionContainer',
-                                        expression: prop.value,
-                                    },
-                                ]
+                                if (noContainerTypes.has(prop.value.type) ||
+                                    (prop.value.type === 'CallExpression' && prop.value.callee?.name?.startsWith('_jsx'))) {
+                                    jsxElement.children = [prop.value]
+                                } else {
+                                    jsxElement.children = [
+                                        {
+                                            type: 'JSXExpressionContainer',
+                                            expression: prop.value,
+                                        },
+                                    ]
+                                }
                             }
                         } else {
                             let attrName = prop.key?.name
-                            if (!attrName && prop.key?.type === 'StringLiteral') {
+                            if (
+                                !attrName &&
+                                prop.key?.type === 'StringLiteral'
+                            ) {
                                 attrName = prop.key.value
                             }
                             if (!attrName) {
-                                console.log(`no prop.key?.name for ${JSON.stringify(prop)}`)
+                                console.log(
+                                    `no prop.key?.name for ${JSON.stringify(
+                                        prop,
+                                    )}`,
+                                )
                                 return
                             }
+
+                            // Always wrap attribute values in expression container
+                            const attrValue = {
+                                type: 'JSXExpressionContainer',
+                                expression: prop.value
+                            }
+
                             jsxElement.openingElement.attributes.push({
                                 type: 'JSXAttribute',
                                 name: {
                                     type: 'JSXIdentifier',
                                     name: attrName,
                                 },
-                                value: {
-                                    type: 'JSXExpressionContainer',
-                                    expression: prop.value,
-                                },
+                                value: attrValue,
                             })
                         }
                     })

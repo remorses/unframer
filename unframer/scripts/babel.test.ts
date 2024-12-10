@@ -23,7 +23,7 @@ function trans(
         sourceMaps: false,
     })
     let out = res!.code!
-    let formatted = dprint.format('x.jsx', out, {
+    let formatted = dprint.format(filename, out, {
         lineWidth: 80,
         quoteStyle: 'alwaysSingle',
         trailingCommas: 'always',
@@ -62,52 +62,65 @@ describe('babelPluginRenameExports', () => {
         `)
     })
 })
+describe('babelPluginJsxTransform transforms files in nextjs-app/src/framer to JSX', () => {
+    async function getAllFiles(dir) {
+        const entries = await fs.promises.readdir(dir, {
+            withFileTypes: true,
+        })
 
-test(
-    'babelPluginJsxTransform, transforms files in nextjs-app/src/framer to JSX',
-    async () => {
-        async function getAllFiles(dir) {
-            const entries = await fs.promises.readdir(dir, {
-                withFileTypes: true,
-            })
+        const files = await Promise.all(
+            entries.map(async (entry) => {
+                const fullPath = path.join(dir, entry.name)
+                if (entry.isDirectory()) {
+                    return getAllFiles(fullPath)
+                } else if (entry.name.endsWith('.js')) {
+                    return [fullPath]
+                }
+                return []
+            }),
+        )
 
-            const files = await Promise.all(
-                entries.map(async (entry) => {
-                    const fullPath = path.join(dir, entry.name)
-                    if (entry.isDirectory()) {
-                        return getAllFiles(fullPath)
-                    } else if (entry.name.endsWith('.js')) {
-                        return [fullPath]
-                    }
-                    return []
-                }),
-            )
+        return files.flat()
+    }
 
-            return files.flat()
-        }
+    const baseDir = path.resolve(__dirname, '../../nextjs-app/src/framer')
 
-        const baseDir = path.resolve(__dirname, '../../nextjs-app/src/framer')
+    test('gets list of files to transform', async () => {
         const files = await getAllFiles(baseDir)
+        expect(files.length).toBeGreaterThan(0)
+        expect(files[0]).toMatch(/\.js$/)
+    })
 
-        for (const file of files) {
-            // console.log(file)
-            const code = await fs.promises.readFile(file, 'utf8')
-            const outPath = file
-                .replace('/framer/', '/framer-jsx/')
-                .replace('.js', '.jsx')
+    test(
+        'transforms each file to JSX',
+        async () => {
+            const files = await getAllFiles(baseDir)
 
-            // Create output directory if it doesn't exist
-            await fs.promises.mkdir(path.dirname(outPath), { recursive: true })
-            console.log(outPath)
+            for (const file of files) {
+                const code = await fs.promises.readFile(file, 'utf8')
+                const outPath = file
+                    .replace('/framer/', '/framer-jsx/')
+                    .replace('.js', '.jsx')
 
-            // Transform and write JSX file
-            const transformed = trans(code, [babelPluginJsxTransform()], file)
-            await fs.promises.writeFile(outPath, transformed)
-        }
-    },
-    1000 * 20,
-)
+                await fs.promises.mkdir(path.dirname(outPath), {
+                    recursive: true,
+                })
 
+                const transformed = trans(
+                    code,
+                    [babelPluginJsxTransform()],
+                    outPath,
+                )
+                await fs.promises.writeFile(outPath, transformed)
+                console.log(outPath)
+
+                expect(transformed).toBeTruthy()
+                // expect(transformed).toContain('jsx')
+            }
+        },
+        1000 * 20,
+    )
+})
 describe('babelPluginJsxTransform', () => {
     test('transforms _jsx and _jsxs calls to JSX', () => {
         expect(
@@ -134,12 +147,10 @@ describe('babelPluginJsxTransform', () => {
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
           const element = (
             <div className={'container'}>
-              {
-                <span style={{ color: 'red', }}>
-                  {<strong>{'Hello'}</strong>}
-                  {' world'}
-                </span>
-              }
+              <span style={{ color: 'red', }}>
+                <strong>{'Hello'}</strong>
+                {' world'}
+              </span>
             </div>
           );
           "
@@ -163,6 +174,57 @@ describe('babelPluginJsxTransform', () => {
           "import { jsx as _jsx, } from 'react/jsx-runtime';
           const element = (
             <Components.Button onClick={() => 'Hello'}>{'Click me'}</Components.Button>
+          );
+          "
+        `)
+    })
+
+    test('handles cloneElement with complex props', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                import { cloneElement } from 'react';
+                
+                const element = _jsx("li", {
+                    ref: ref,
+                    style: size2,
+                    children: cloneElement(
+                        child,
+                        {
+                            style: {
+                                ...(child.props?.style),
+                                ...size2,
+                                flexShrink: 0,
+                                ...childrenStyles,
+                            },
+                            layoutId: child.props.layoutId 
+                                ? child.props.layoutId + '-original-' + index
+                                : undefined,
+                        },
+                        child.props?.children
+                    )
+                });
+                `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          import { cloneElement, } from 'react';
+          const element = (
+            <li ref={ref} style={size2}>
+              {cloneElement(child, {
+                style: {
+                  ...child.props?.style,
+                  ...size2,
+                  flexShrink: 0,
+                  ...childrenStyles,
+                },
+                layoutId: child.props.layoutId
+                  ? child.props.layoutId + '-original-' + index
+                  : undefined,
+              }, child.props?.children,)}
+            </li>
           );
           "
         `)
