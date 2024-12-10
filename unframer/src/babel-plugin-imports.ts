@@ -281,9 +281,7 @@ export function babelPluginJsxTransform() {
                 // Check if it's a _jsx or _jsxs call
                 if (
                     !path.node.callee ||
-                    !['_jsx', '_jsxs', '_jsx4', '_jsxs4'].includes(
-                        path.node.callee.name,
-                    )
+                    !path.node.callee.name?.startsWith('_jsx')
                 ) {
                     return
                 }
@@ -356,7 +354,11 @@ export function babelPluginJsxTransform() {
                                 ]
                             }
                         } else {
-                            if (!prop.key?.name) {
+                            let attrName = prop.key?.name
+                            if (!attrName && prop.key?.type === 'StringLiteral') {
+                                attrName = prop.key.value
+                            }
+                            if (!attrName) {
                                 console.log(`no prop.key?.name for ${JSON.stringify(prop)}`)
                                 return
                             }
@@ -364,7 +366,7 @@ export function babelPluginJsxTransform() {
                                 type: 'JSXAttribute',
                                 name: {
                                     type: 'JSXIdentifier',
-                                    name: prop.key?.name,
+                                    name: attrName,
                                 },
                                 value: {
                                     type: 'JSXExpressionContainer',

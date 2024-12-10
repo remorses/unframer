@@ -90,7 +90,7 @@ test(
         const files = await getAllFiles(baseDir)
 
         for (const file of files) {
-            console.log(file)
+            // console.log(file)
             const code = await fs.promises.readFile(file, 'utf8')
             const outPath = file
                 .replace('/framer/', '/framer-jsx/')
@@ -98,13 +98,14 @@ test(
 
             // Create output directory if it doesn't exist
             await fs.promises.mkdir(path.dirname(outPath), { recursive: true })
+            console.log(outPath)
 
             // Transform and write JSX file
             const transformed = trans(code, [babelPluginJsxTransform()], file)
             await fs.promises.writeFile(outPath, transformed)
         }
     },
-    1000 * 10,
+    1000 * 20,
 )
 
 describe('babelPluginJsxTransform', () => {

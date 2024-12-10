@@ -161,7 +161,11 @@ export async function bundle({
             let res = transform(file.text || '', {
                 babelrc: false,
                 sourceType: 'module',
-                plugins: [babelPluginJsxTransform()],
+                plugins: [
+                    // babelPluginDeduplicateImports,
+
+                    babelPluginJsxTransform(),
+                ],
                 filename: 'x.js',
                 compact: true,
                 sourceMaps: false,
