@@ -1,7 +1,7 @@
 {
   "inputs": {
-    "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js": {
-      "bytes": 24036,
+    "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/0ee20MKx1TNwsJIYIvlS/TZfDXx9RE.js": {
+      "bytes": 25269,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -30,9 +30,9 @@
       "bytes": 536,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js",
+          "path": "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/0ee20MKx1TNwsJIYIvlS/TZfDXx9RE.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js"
+          "original": "https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/0ee20MKx1TNwsJIYIvlS/TZfDXx9RE.js"
         },
         {
           "path": "unframer",
@@ -87,14 +87,14 @@
       ],
       "entryPoint": "virtual:plugin-component-test",
       "inputs": {
-        "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/6KW2XHs0A7m0ipuW2jt6/TZfDXx9RE.js": {
-          "bytesInOutput": 23101
+        "https :https://framerusercontent.com/modules/xzcyW5yHLopdiihSpUog/0ee20MKx1TNwsJIYIvlS/TZfDXx9RE.js": {
+          "bytesInOutput": 24334
         },
         "virtual:plugin-component-test": {
           "bytesInOutput": 278
         }
       },
-      "bytes": 23586
+      "bytes": 24819
     }
   }
 }
