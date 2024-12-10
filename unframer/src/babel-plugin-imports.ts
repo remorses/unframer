@@ -2,7 +2,7 @@ import * as BabelTypes from '@babel/types'
 
 import { PluginObj } from '@babel/core'
 import { ImportDeclaration, ImportSpecifier, Identifier } from '@babel/types'
-import BatchRenamer from '../scripts/renamer'
+import BatchRenamer from './renamer'
 
 export function babelPluginDeduplicateImports({
     types: t,

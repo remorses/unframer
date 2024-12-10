@@ -1,4 +1,4 @@
-import dedent from 'dedent'
+import dedent from 'string-dedent'
 import * as t from '@babel/types'
 
 import annotateAsPure from '@babel/helper-annotate-as-pure'
