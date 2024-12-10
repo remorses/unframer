@@ -162,7 +162,7 @@ export async function bundle({
                 babelrc: false,
                 sourceType: 'module',
                 plugins: [
-                    // babelPluginDeduplicateImports,
+                    babelPluginDeduplicateImports,
 
                     babelPluginJsxTransform(),
                 ],

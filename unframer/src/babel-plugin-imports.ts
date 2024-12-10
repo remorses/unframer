@@ -3,6 +3,7 @@ import * as BabelTypes from '@babel/types'
 import { PluginObj } from '@babel/core'
 import { ImportDeclaration, ImportSpecifier, Identifier } from '@babel/types'
 import BatchRenamer from './renamer'
+import { logger } from './utils'
 
 export function babelPluginDeduplicateImports({
     types: t,
@@ -119,7 +120,7 @@ export function babelPluginDeduplicateImports({
                     for (const [source, modMap] of importAliasMap) {
                         // rename import names to consolidated names
                         for (let [local, { consolidated, path: p }] of modMap) {
-                            console.log(
+                            logger.log(
                                 `renaming ${local} to ${consolidated}...`,
                             )
                         }

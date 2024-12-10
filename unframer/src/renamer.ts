@@ -8,6 +8,7 @@ import * as t from '@babel/types'
 
 import { NodePath, Visitor } from '@babel/core'
 import type { Identifier } from '@babel/types'
+import { logger } from './utils'
 
 const renameVisitor: Visitor<BatchRenamer> = {
     ReferencedIdentifier({ node }, state) {
@@ -130,6 +131,9 @@ export default class BatchRenamer {
         for (let binding of [...map.keys()].map((name) =>
             scope.getBinding(name),
         )) {
+            if (!binding) {
+                continue
+            }
             const path = binding!.path
             const parentDeclar = path.find(
                 (path) =>
@@ -172,7 +176,7 @@ export default class BatchRenamer {
                     binding.identifier.name = newName
                     scope.bindings[newName] = binding
                 } else {
-                    console.log(`binding not found for ${oldName}`)
+                    logger.log(`binding not found for ${oldName}`)
                 }
             }
         }
