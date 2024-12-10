@@ -273,7 +273,6 @@ export function babelPluginRenameExports({
         },
     }
 }
-
 export function babelPluginJsxTransform() {
     return {
         name: 'jsx-transform',
@@ -291,13 +290,17 @@ export function babelPluginJsxTransform() {
 
                 const [elementArg, propsArg] = path.node.arguments
 
-                // Get the element type
-                let elementType = elementArg
+                // Get the element type name
+                let elementName = ''
                 if (elementArg.type === 'MemberExpression') {
-                    elementType = {
-                        type: 'StringLiteral',
-                        value: `${elementArg.object.name}.${elementArg.property.name}`,
-                    }
+                    elementName = `${elementArg.object.name}.${elementArg.property.name}`
+                } else if (elementArg.type === 'StringLiteral') {
+                    elementName = elementArg.value
+                } else if (elementArg.type === 'Identifier') {
+                    elementName = elementArg.name
+                } else {
+                    // Skip if we can't determine element name
+                    return
                 }
 
                 // Convert to JSX element
@@ -307,7 +310,7 @@ export function babelPluginJsxTransform() {
                         type: 'JSXOpeningElement',
                         name: {
                             type: 'JSXIdentifier',
-                            name: elementType.value || elementType.name,
+                            name: elementName,
                         },
                         attributes: [],
                         selfClosing: !propsArg.properties.find(
@@ -321,7 +324,7 @@ export function babelPluginJsxTransform() {
                               type: 'JSXClosingElement',
                               name: {
                                   type: 'JSXIdentifier',
-                                  name: elementType.value || elementType.name,
+                                  name: elementName,
                               },
                           }
                         : null,
@@ -331,7 +334,12 @@ export function babelPluginJsxTransform() {
                 // Add attributes
                 if (propsArg && propsArg.properties) {
                     propsArg.properties.forEach((prop) => {
-                        if (prop.key?.name === 'children') {
+                        if (prop.type === 'SpreadElement') {
+                            jsxElement.openingElement.attributes.push({
+                                type: 'JSXSpreadAttribute',
+                                argument: prop.argument,
+                            })
+                        } else if (prop.key?.name === 'children') {
                             if (prop.value.type === 'ArrayExpression') {
                                 jsxElement.children = prop.value.elements.map(
                                     (element) => ({
@@ -348,6 +356,10 @@ export function babelPluginJsxTransform() {
                                 ]
                             }
                         } else {
+                            if (!prop.key?.name) {
+                                console.log(`no prop.key?.name for ${JSON.stringify(prop)}`)
+                                return
+                            }
                             jsxElement.openingElement.attributes.push({
                                 type: 'JSXAttribute',
                                 name: {

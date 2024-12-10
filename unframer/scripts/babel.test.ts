@@ -1,14 +1,24 @@
 import { test, expect, describe } from 'vitest'
+import fs from 'fs'
+import path from 'path'
 import dprint from 'dprint-node'
 import dedent from 'string-dedent'
-import { babelPluginDeduplicateImports, babelPluginJsxTransform } from '../src/babel-plugin-imports'
+import {
+    babelPluginDeduplicateImports,
+    babelPluginJsxTransform,
+} from '../src/babel-plugin-imports'
 import { transform } from '@babel/core'
-function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
+
+function trans(
+    code: string,
+    plugins: any[] = [babelPluginDeduplicateImports],
+    filename: string = 'x.js',
+) {
     const res = transform(code || '', {
         babelrc: false,
         sourceType: 'module',
         plugins,
-        filename: 'x.js',
+        filename,
         compact: true,
         sourceMaps: false,
     })
@@ -16,7 +26,6 @@ function trans(code: string, plugins: any[] = [babelPluginDeduplicateImports]) {
     let formatted = dprint.format('x.jsx', out, {
         lineWidth: 80,
         quoteStyle: 'alwaysSingle',
-
         trailingCommas: 'always',
         semiColons: 'always',
     })
@@ -53,6 +62,50 @@ describe('babelPluginRenameExports', () => {
         `)
     })
 })
+
+test(
+    'babelPluginJsxTransform, transforms files in nextjs-app/src/framer to JSX',
+    async () => {
+        async function getAllFiles(dir) {
+            const entries = await fs.promises.readdir(dir, {
+                withFileTypes: true,
+            })
+
+            const files = await Promise.all(
+                entries.map(async (entry) => {
+                    const fullPath = path.join(dir, entry.name)
+                    if (entry.isDirectory()) {
+                        return getAllFiles(fullPath)
+                    } else if (entry.name.endsWith('.js')) {
+                        return [fullPath]
+                    }
+                    return []
+                }),
+            )
+
+            return files.flat()
+        }
+
+        const baseDir = path.resolve(__dirname, '../../nextjs-app/src/framer')
+        const files = await getAllFiles(baseDir)
+
+        for (const file of files) {
+            console.log(file)
+            const code = await fs.promises.readFile(file, 'utf8')
+            const outPath = file
+                .replace('/framer/', '/framer-jsx/')
+                .replace('.js', '.jsx')
+
+            // Create output directory if it doesn't exist
+            await fs.promises.mkdir(path.dirname(outPath), { recursive: true })
+
+            // Transform and write JSX file
+            const transformed = trans(code, [babelPluginJsxTransform()], file)
+            await fs.promises.writeFile(outPath, transformed)
+        }
+    },
+    1000 * 10,
+)
 
 describe('babelPluginJsxTransform', () => {
     test('transforms _jsx and _jsxs calls to JSX', () => {
@@ -114,7 +167,6 @@ describe('babelPluginJsxTransform', () => {
         `)
     })
 })
-
 
 describe('babelPluginDeduplicateImports', () => {
     test('simple', () => {
