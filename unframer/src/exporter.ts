@@ -441,9 +441,7 @@ export async function bundle({
                     />
                     ${responsiveComponent
                         .split('\n')
-                        .map((line, i) =>
-                            !i ? line : '            ' + line,
-                        )
+                        .map((line, i) => (!i ? line : '            ' + line))
                         .join('\n')}
                 </div>
             );
@@ -731,12 +729,15 @@ export async function extractPropControlsUnsafe(
         unframer: url.pathToFileURL(require.resolve('../esm/index.js')).href,
         react: url.pathToFileURL(require.resolve('react')).href,
         'react-dom': url.pathToFileURL(require.resolve('react-dom')).href,
+        'react/jsx-runtime': url.pathToFileURL(
+            require.resolve('react/jsx-runtime'),
+        ).href,
     })
     let stdout = await new Promise<string>((res, rej) => {
         let childProcess = exec(
             `${JSON.stringify(
                 nodePath,
-            )} --input-type=module --loader ${require.resolve(
+            )} --no-warnings --input-type=module --loader ${require.resolve(
                 '../dist/unframer-loader.js',
             )} -e ${JSON.stringify(code)}`,
             {
