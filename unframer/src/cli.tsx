@@ -42,6 +42,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             return await bundle({
                 config: {
                     outDir,
+                    projectId: data?.project?.id,
+                    projectName,
                     components: Object.fromEntries(
                         data.components.map((c) => [kebabCase(c.name), c.url]),
                     ),
@@ -155,6 +157,8 @@ export type Config = {
     components: {
         [name: string]: string
     }
+    projectId?: string
+    projectName?: string
     framerWebPages?: { webPageId: string; path: string }[]
     breakpoints?: BreakpointSizes
     tokens?: StyleToken[]

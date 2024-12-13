@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.11
+
+### Patch Changes
+
+-   add border box styling
+
 ## 2.7.10
 
 ### Patch Changes
