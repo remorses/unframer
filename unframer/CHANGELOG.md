@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.10
+
+### Patch Changes
+
+-   log project name
+
 ## 2.7.9
 
 ### Patch Changes
