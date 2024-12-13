@@ -611,8 +611,8 @@ body { --framer-will-change-override: none; }
 }
 
 
-a[data-framer-page-link-current],
-a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-link]) {
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current],
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-link]) {
     font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
     font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
     font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
@@ -623,8 +623,8 @@ a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-lin
 }
 
 
-a[data-framer-page-link-current]:hover,
-a[data-framer-page-link-current]:hover span:not([data-text-fill]):not([data-nested-link]) {
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current]:hover,
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current]:hover span:not([data-text-fill]):not([data-nested-link]) {
     font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
     font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
     font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));

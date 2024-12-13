@@ -7,7 +7,7 @@ import findUp from 'find-up'
 import fs from 'fs-extra'
 import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
-import { logger } from './utils.js'
+import { logger, spinner } from './utils.js'
 const configNames = ['unframer.config.json', 'unframer.json']
 import kebabCase from 'just-kebab-case'
 
@@ -34,6 +34,10 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             }
             const data = await response.json()
             logger.log('unframer data', data)
+            const projectName = data?.project?.projectName ||''
+            if (projectName) {
+                spinner.info(`Using project: ${projectName}`)
+            }
             let cwd = path.resolve(process.cwd(), outDir || 'framer')
             return await bundle({
                 config: {

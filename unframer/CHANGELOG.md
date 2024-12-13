@@ -1,5 +1,11 @@
 # unframer
 
+## 2.7.9
+
+### Patch Changes
+
+-   Add react export in loader, handle react/js
+
 ## 2.7.8
 
 ### Patch Changes
