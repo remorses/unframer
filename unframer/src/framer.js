@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.NFOIY3CW.mjs
+// https :https://app.framerstatic.com/framer.ZONHQAMM.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18214,6 +18214,7 @@ function useMarkRouterEffects() {
 var hydrationInsertionEffectStartHasRun = false;
 var hydrationLayoutEffectStartHasRun = false;
 var hydrationEffectStartHasRun = false;
+var wasInBackground = false;
 function useMarkSuspenseEffectsStart() {
   const hydrationMarkPrefix = 'framer-hydration-';
   const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
@@ -18231,6 +18232,10 @@ function useMarkSuspenseEffectsStart() {
     if (hydrationLayoutEffectStartHasRun || !shouldMark) return;
     hydrationLayoutEffectStartHasRun = true;
     performance.mark(`${hydrationMarkPrefix}layout-effects-start`,);
+    if (document.visibilityState !== 'visible') {
+      wasInBackground = true;
+      return;
+    }
     requestAnimationFrame(() => {
       var _a, _b, _c;
       performance.mark(hydrationBrowserRenderStart,);
@@ -18265,7 +18270,6 @@ function useMarkSuspenseEffectsStart() {
 var hydrationInsertionEffectHasRun = false;
 var hydrationLayoutEffectHasRun = false;
 var hydrationEffectHasRun = false;
-var hydrationPaintEffectHasRun = false;
 function useMarkSuspenseEffectEnd() {
   const hydrationMarkPrefix = 'framer-hydration-';
   const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
@@ -18286,9 +18290,15 @@ function useMarkSuspenseEffectEnd() {
     hydrationLayoutEffectHasRun = true;
     performance.mark(hydrationLayoutEffectsEnd,);
     measureSafe(`${hydrationMarkPrefix}layout-effects`, `${hydrationMarkPrefix}layout-effects-start`, hydrationLayoutEffectsEnd,);
+    if (wasInBackground || document.visibilityState !== 'visible') return;
     requestAnimationFrame(() => {
       performance.mark(hydrationAnimationFrameEnd,);
       measureSafe(`${hydrationMarkPrefix}raf`, hydrationBrowserRenderStart, hydrationAnimationFrameEnd,);
+      void yieldBefore(() => {
+        performance.mark(hydrationFP,);
+        measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
+        measureSafe(`${hydrationMarkPrefix}browser-render`, hydrationAnimationFrameEnd, hydrationFP,);
+      },);
     },);
   }, [],);
   useEffect(() => {
@@ -18306,22 +18316,6 @@ function useMarkSuspenseEffectEnd() {
       hydrationEffectsEnd,
     );
   }, [],);
-  useAfterPaintEffect(
-    () => {
-      if (hydrationPaintEffectHasRun || !shouldMark) return;
-      hydrationPaintEffectHasRun = true;
-      performance.mark(hydrationFP,);
-      measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
-      queueMicrotask(() => {
-        measureSafe(`${hydrationMarkPrefix}browser-render`, hydrationAnimationFrameEnd, hydrationFP,);
-      },);
-    },
-    [],
-    // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
-    {
-      priority: 'user-blocking',
-    },
-  );
   return null;
 }
 function MarkSuspenseEffectsStart() {
@@ -37511,20 +37505,17 @@ var NestedLinksCollector = class {
     this.links.clear();
   }
   getLinks() {
-    return [...this.links.values(),];
+    return this.links;
   }
-  addLink(parentLink, linkData,) {
-    if (typeof window !== 'undefined' && true || !parentLink || !linkData) {
+  addLink(parentLinkNodeId, linkNodeId,) {
+    if (typeof window !== 'undefined' && true || !parentLinkNodeId || !linkNodeId) {
       return;
     }
-    if (!this.links.has(parentLink.nodeId,)) {
-      this.links.set(parentLink.nodeId, {
-        parent: parentLink,
-        links: [],
-      },);
+    if (!this.links.has(parentLinkNodeId,)) {
+      this.links.set(parentLinkNodeId, /* @__PURE__ */ new Set(),);
     }
-    const entry = this.links.get(parentLink.nodeId,);
-    entry.links.push(linkData,);
+    const entry = this.links.get(parentLinkNodeId,);
+    entry.add(linkNodeId,);
   }
 };
 var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
@@ -38022,20 +38013,18 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
     if (node === null) return;
     return observerCallback(node,);
   }, [observerCallback,],);
-  const el = useMemo(() => {
-    const {
-      navigate: _,
-      ...linkProps
-    } = props;
-    return clone.cloneAsArray(children, {
-      ...restProps,
-      ...linkProps,
-      ref: observerRef,
-    },);
-  }, [props, clone, children, restProps, observerRef,],);
+  const {
+    navigate: _,
+    ...linkProps
+  } = props;
+  const el = clone.cloneAsArray(children, {
+    ...restProps,
+    ...linkProps,
+    ref: observerRef,
+  },);
   return getChildren(el,);
 },),);
-var ParentLinkContext = /* @__PURE__ */ createContext(null,);
+var ParentLinkContext = /* @__PURE__ */ createContext(void 0,);
 function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
   const parentLink = useContext(ParentLinkContext,);
   const isOnFramerCanvas = useIsOnFramerCanvas();
@@ -38049,30 +38038,6 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
     if (!pageLink) return;
     return getRouteFromPageLink(pageLink, router, currentRoute,);
   }, [currentRoute, href, router,],);
-  const linkData = useMemo(() => {
-    if (!nodeId || !href) return null;
-    if (isLinkToWebPage(href,)) {
-      return {
-        nodeId,
-        targetNodeId: href.webPageId,
-        href: propsAddedByLink.href,
-      };
-    }
-    if (route && href.startsWith('#',)) {
-      const routeNodeId = Object.keys(route.elements ?? {},)[0];
-      if (routeNodeId) {
-        return {
-          nodeId,
-          targetNodeId: routeNodeId,
-          href,
-        };
-      }
-    }
-    return {
-      nodeId,
-      href,
-    };
-  }, [href, nodeId, propsAddedByLink, route,],);
   const isValidLink = Object.keys(propsAddedByLink,).length > 0;
   const shouldReplaceLink = Boolean(replaceNestedLinks && !isOnFramerCanvas && (parentLink || !isValidLink),);
   const onClick = useCallback((event) => {
@@ -38121,7 +38086,7 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
     };
     const replacedChildren = !shouldReplaceLink ? children : Children.map(children, (child) => {
       if (!isChildReplaceable(child,)) return child;
-      nestedLinksCollector.addLink(parentLink, linkData,);
+      nestedLinksCollector.addLink(parentLink, nodeId,);
       const tag = maybeReplaceAnchorWithSpan(child.type,);
       const {
         children: childChildren,
@@ -38142,10 +38107,10 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
       }, childChildren,);
     },);
     return /* @__PURE__ */ jsx(ParentLinkContext.Provider, {
-      value: linkData,
+      value: nodeId,
       children: replacedChildren,
     },);
-  }, [isValidLink, linkData, onAuxClick, onClick, onKeyDown, shouldReplaceLink, parentLink,],);
+  }, [isValidLink, nodeId, onAuxClick, onClick, onKeyDown, shouldReplaceLink, parentLink,],);
   const refCallback = useCallback((node) => {
     if (isOnFramerCanvas || !shouldReplaceLink || !isValidLink) return;
     node.dataset.hydrated = 'true';
@@ -40854,6 +40819,7 @@ var Builder = class {
       fromScope.setNode(node,);
     }
     const orderProjections = [];
+    const orderFields = new Fields();
     let ordering;
     if (select.orderBy) {
       ordering = new Ordering();
@@ -40861,6 +40827,7 @@ var Builder = class {
         if (order.type === 'Identifier') {
           const scopeField = fromScope.resolveField(order.name, order.collection,);
           if (isUndefined(scopeField,)) continue;
+          orderFields.add(scopeField.field,);
           const orderingField = new OrderingField(scopeField.field, order.direction,);
           ordering.push(orderingField,);
         } else {
@@ -40877,7 +40844,7 @@ var Builder = class {
     } else {
       ordering = defaultOrdering;
     }
-    const projectionScope = this.buildSelectList(fromScope, select.select, orderProjections,);
+    const projectionScope = this.buildSelectList(fromScope, select.select, orderFields, orderProjections,);
     projectionScope.setOrdering(ordering,);
     if (select.offset) {
       const input = projectionScope.takeNode();
@@ -40893,9 +40860,9 @@ var Builder = class {
     }
     return projectionScope;
   }
-  buildSelectList(inScope, selects, orderProjections,) {
+  buildSelectList(inScope, selects, orderFields, orderProjections,) {
     const outScope = inScope.push();
-    const passthrough = new Fields();
+    const passthrough = new Fields(orderFields,);
     const projections = [...orderProjections,];
     for (const select of selects) {
       if (select.type === 'Identifier') {
