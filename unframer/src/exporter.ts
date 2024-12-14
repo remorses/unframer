@@ -1072,7 +1072,6 @@ export function propCamelCase(str: string) {
 }
 
 const resetCssStyles = `
-
 :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1084,7 +1083,5 @@ const resetCssStyles = `
 h1, h2, h3, h4, h5, h6, p, figure {
     margin: 0;
 }
-/ * body, input, textarea, select, button { font-size: 12px; font-family: sans-serif; } */
-
         
 `

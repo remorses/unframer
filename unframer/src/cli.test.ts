@@ -1,9 +1,24 @@
 import { expect, test } from 'vitest'
 import {
-  componentCamelCase,
-  extractTokenInfo,
-  findRelativeLinks
+    componentCamelCase,
+    extractTokenInfo,
+    findRelativeLinks,
 } from './exporter.js'
+
+import { componentNameToPath } from './utils.js'
+
+test('componentNameToPath', () => {
+    expect(componentNameToPath('LogoTicker')).toMatchInlineSnapshot(
+        `"logo-ticker"`,
+    )
+    expect(componentNameToPath('NavBar')).toMatchInlineSnapshot(`"nav-bar"`)
+    expect(componentNameToPath('components/HeroSection')).toMatchInlineSnapshot(
+        `"components/hero-section"`,
+    )
+    expect(componentNameToPath('shared/nav/framerNav')).toMatchInlineSnapshot(
+        `"shared/nav/framer-nav"`,
+    )
+})
 
 test('componentCamelCase', () => {
     expect(componentCamelCase('logo-ticker')).toMatchInlineSnapshot(

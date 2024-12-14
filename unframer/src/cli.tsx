@@ -7,7 +7,7 @@ import findUp from 'find-up'
 import fs from 'fs-extra'
 import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
-import { logger, spinner } from './utils.js'
+import { componentNameToPath, logger, spinner } from './utils.js'
 const configNames = ['unframer.config.json', 'unframer.json']
 import kebabCase from 'just-kebab-case'
 
@@ -34,7 +34,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             }
             const data = await response.json()
             logger.log('unframer data', data)
-            const projectName = data?.project?.projectName ||''
+            const projectName = data?.project?.projectName || ''
             if (projectName) {
                 spinner.info(`Using project: ${projectName}`)
             }
@@ -45,7 +45,10 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     projectId: data?.project?.id,
                     projectName,
                     components: Object.fromEntries(
-                        data.components.map((c) => [kebabCase(c.name), c.url]),
+                        data.components.map((c) => [
+                            componentNameToPath(c.name),
+                            c.url,
+                        ]),
                     ),
                     tokens: data.colorStyles,
                     framerWebPages: data.framerWebPages || [],
