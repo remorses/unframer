@@ -1,5 +1,11 @@
 # unframer
 
+## 2.8.0
+
+### Minor Changes
+
+-   Handle Framer components with folders, create folders in the filesystem too
+
 ## 2.7.11
 
 ### Patch Changes
