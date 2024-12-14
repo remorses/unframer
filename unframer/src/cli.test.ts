@@ -19,7 +19,6 @@ test('componentNameToPath', () => {
         `"shared/nav/framer-nav"`,
     )
 })
-
 test('componentCamelCase', () => {
     expect(componentCamelCase('logo-ticker')).toMatchInlineSnapshot(
         `"LogoTickerFramerComponent"`,
@@ -34,6 +33,9 @@ test('componentCamelCase', () => {
         `"NavFramerComponent"`,
     )
     expect(componentCamelCase('framer_nav')).toMatchInlineSnapshot(
+        `"FramerNavFramerComponent"`,
+    )
+    expect(componentCamelCase('shared/nav/framer-nav')).toMatchInlineSnapshot(
         `"FramerNavFramerComponent"`,
     )
 })

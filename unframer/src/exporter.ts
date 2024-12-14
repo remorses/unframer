@@ -152,7 +152,7 @@ export async function bundle({
         config.projectId || ''
     } "${config.projectName}", do not edit manually */\n`
     async function rebuild() {
-        const prevFiles = fs.readdirSync(out).map((x) => path.resolve(out, x))
+        const prevFiles = recursiveReaddir(out)
         const result = await buildContext.rebuild()
 
         for (let file of result.outputFiles!) {
@@ -229,7 +229,9 @@ export async function bundle({
             result?.outputFiles.map(async (file) => {
                 try {
                     await sema.acquire()
-                    const name = path.basename(file.path).replace(/\.js$/, '')
+                    const name = path
+                        .relative(out, file.path)
+                        .replace(/\.js$/, '')
                     const resultPathAbs = path.resolve(out, file.path)
                     if (!components[name]) {
                         return
@@ -251,7 +253,7 @@ export async function bundle({
                     const types = propControlsToType(propertyControls!, name)
                     // name = 'framer-' + name
                     // logger.log('name', name)
-
+                    fs.mkdirSync(out, { recursive: true })
                     fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
                     return {
                         propertyControls,
@@ -1008,6 +1010,8 @@ export function componentCamelCase(str: string) {
     if (!str) {
         return 'FramerComponent'
     }
+    // Take last part after slashes
+    str = str.split('/').filter(Boolean).pop() || ''
     str = str.replace(/-([\w])/g, (g) => g[1].toUpperCase())
     str = str.replace(/_([a-z])/g, (g) => g[1].toUpperCase())
     str = str[0].toUpperCase() + str.slice(1)
@@ -1086,3 +1090,12 @@ h1, h2, h3, h4, h5, h6, p, figure {
 }
         
 `
+
+function recursiveReaddir(dir: string) {
+    const dirents = fs.readdirSync(dir, { withFileTypes: true })
+    const files = dirents.map((dirent) => {
+        const res = path.resolve(dir, dirent.name)
+        return dirent.isDirectory() ? recursiveReaddir(res) : res
+    })
+    return files.flat()
+}
