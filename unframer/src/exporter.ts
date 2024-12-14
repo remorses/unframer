@@ -206,6 +206,7 @@ export async function bundle({
                 continue
             }
             logger.log(`writing`, path.relative(out, file.path))
+            fs.mkdirSync(path.dirname(resultPathAbs), { recursive: true })
             fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
         }
         spinner.stop()
