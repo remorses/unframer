@@ -5,11 +5,11 @@
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
-        "build": "rm -rf dist && concurrently 'pnpm tsc -m esnext --outDir esm' 'pnpm tsc' && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
+        "build": "rm -rf dist && pnpm concurrently 'pnpm tsc -m esnext --outDir esm' 'pnpm tsc' && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
         "test": "vitest",
         "prepublishOnly": "pnpm build",
         "download-framer": "tsx scripts/download.ts",
-        "watch": "rm -rf dist esm && concurrently 'pnpm tsc -w' 'pnpm tsc -m esnext -w --outDir esm'"
+        "watch": "rm -rf dist esm && pnpm concurrently 'pnpm tsc -w' 'pnpm tsc -m esnext -w --outDir esm'"
     },
     "bin": "bin.js",
     "files": [
