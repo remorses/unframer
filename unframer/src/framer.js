@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.ZONHQAMM.mjs
+// https :https://app.framerstatic.com/framer.I26KWT3E.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17227,7 +17227,7 @@ function lazy(factory,) {
   const LazyComponent = React4.lazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component15 = React4.forwardRef(function LazyWithPreload(props, ref,) {
+  const Component16 = React4.forwardRef(function LazyWithPreload(props, ref,) {
     return React4.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
       ref
@@ -17238,7 +17238,7 @@ function lazy(factory,) {
         : props,
     );
   },);
-  Component15.preload = () => {
+  Component16.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
         LoadedComponent = module.default;
@@ -17247,7 +17247,7 @@ function lazy(factory,) {
     }
     return factoryPromise;
   };
-  return Component15;
+  return Component16;
 }
 function getRouteElementId(route, hash2,) {
   if (hash2 && route) {
@@ -18041,6 +18041,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
             reject,
           };
         },);
+        viewTransitionReady.current = void 0;
       },
       scroll: 'after-transition',
     },);
@@ -18579,21 +18580,17 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
       transitionFn(signal,);
       return nextRender;
     }
-    transitionFn(signal,);
-    await interactionResponse({
-      priority: 'user-visible',
-      signal,
-    },).catch(noop2,);
-    await interactionResponse({
-      priority: 'user-visible',
-      signal,
-    },).catch(noop2,);
     let resolveNavigationPromise;
     const navigationPromise = new Promise((resolve, reject,) => {
       resolveNavigationPromise = resolve;
       if (signal === null || signal === void 0 ? void 0 : signal.aborted) reject();
       else signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', reject,);
     },);
+    await interactionResponse({
+      priority: 'user-blocking',
+      signal,
+    },).catch(noop2,);
+    transitionFn(signal,);
     startNativeSpinner(navigationPromise, updateURL, controller,);
     return nextRender.then(() => {
       resolveNavigationPromise();
@@ -18613,6 +18610,7 @@ function Router({
   preserveQueryParams = false,
   enableAsyncURLUpdates = false,
   LayoutTemplate,
+  editorBar,
 },) {
   useMarkRouterEffects();
   useReplaceInitialState({
@@ -18865,6 +18863,7 @@ function Router({
           },),
           jsx(TurnOnReactEventHandling, {},),
           jsx(MarkSuspenseEffects.End, {},),
+          editorBar,
         ],
       },),
     },),
@@ -19763,7 +19762,7 @@ var SpringCurveValueConverter = {
     };
     const initialGuess = 5 / duration;
     const undampedFrequency = approximateRoot2(envelope, derivative, initialGuess,);
-    if (!isNaN(undampedFrequency,)) {
+    if (!Number.isNaN(undampedFrequency,)) {
       result.tension = Math.pow(undampedFrequency, 2,) * mass;
       result.friction = dampingRatio * 2 * Math.sqrt(mass * result.tension,);
     }
@@ -20235,7 +20234,7 @@ function modulate(value, rangeA, rangeB, limit = false,) {
   return result;
 }
 function isNumeric(value,) {
-  return !isNaN(value,) && isFinite(value,);
+  return !Number.isNaN(value,) && Number.isFinite(value,);
 }
 function percentToFraction(val,) {
   const digits = numberFromString(val,);
@@ -21052,7 +21051,7 @@ function correctAlpha(alphaValue,) {
   if (alphaValue < 0) {
     alphaValue = 0;
   }
-  if (isNaN(alphaValue,) || alphaValue > 1) {
+  if (Number.isNaN(alphaValue,) || alphaValue > 1) {
     alphaValue = 1;
   }
   return alphaValue;
@@ -22618,7 +22617,7 @@ function getDeviceStyle({
   };
 }
 function isFiniteNumber(value,) {
-  return typeof value === 'number' && isFinite(value,);
+  return Number.isFinite(value,);
 }
 function finiteNumber(value,) {
   return isFiniteNumber(value,) ? value : void 0;
@@ -23066,10 +23065,10 @@ var Rect = {
     if (point2.y > Rect.maxY(rect,)) {
       return false;
     }
-    if (isNaN(rect.x,)) {
+    if (Number.isNaN(rect.x,)) {
       return false;
     }
-    if (isNaN(rect.y,)) {
+    if (Number.isNaN(rect.y,)) {
       return false;
     }
     return true;
@@ -24896,7 +24895,7 @@ function isNullish2(value,) {
   return value == null;
 }
 function isValidDate(value,) {
-  return value instanceof Date && !isNaN(value.getTime(),);
+  return value instanceof Date && !Number.isNaN(value.getTime(),);
 }
 function isGenerator2(value,) {
   return isObject2(value,) && isFunction(value.return,);
@@ -27213,7 +27212,7 @@ function useMeasuredSize(ref,) {
   return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component15) => (props) => {
+var withMeasuredSize = (Component16) => (props) => {
   const ref = React4.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
@@ -27230,7 +27229,7 @@ var withMeasuredSize = (Component15) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx(Component15, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component16, {
       ...props,
       width: (size == null ? void 0 : size.width) ?? fallbackWidth,
       height: (size == null ? void 0 : size.height) ?? fallbackHeight,
@@ -28730,7 +28729,7 @@ var clamp2 = (value, a, b,) => {
 var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
-function WithDragging(Component15,) {
+function WithDragging(Component16,) {
   const _WithDraggingHOC = class extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
@@ -29358,7 +29357,7 @@ function WithDragging(Component15,) {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx(Component15, {
+        children: /* @__PURE__ */ jsx(Component16, {
           ...originalProps,
         },),
       },);
@@ -29396,9 +29395,9 @@ function WithDragging(Component15,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component15.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component16.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics.default)(withDragging, Component15,);
+  (0, import_hoist_non_react_statics.default)(withDragging, Component16,);
   return withDragging;
 }
 var hoverProps = {
@@ -29669,7 +29668,7 @@ function hasRadius(props,) {
 }
 function getRadiusValue(value,) {
   let num = Number(value,);
-  if (typeof value === 'string' && isNaN(num,)) {
+  if (typeof value === 'string' && Number.isNaN(Number(num,),)) {
     return value;
   } else if (isAnimatable2(value,)) {
     num = Animatable.getNumber(value,);
@@ -32202,7 +32201,7 @@ function useInfiniteScroll({
     };
   }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
 }
-function withInfiniteScroll(Component15,) {
+function withInfiniteScroll(Component16,) {
   return React4.forwardRef(({
     __paginationInfo,
     __loadMore,
@@ -32216,7 +32215,7 @@ function withInfiniteScroll(Component15,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -35089,7 +35088,7 @@ var DataObserverContext = /* @__PURE__ */ React4.createContext({
 },);
 function useObserveData() {
   const context = React4.useContext(DataObserverContext,);
-  return !isNaN(context.update,);
+  return !Number.isNaN(context.update,);
 }
 var DataObserver = class extends Component {
   constructor() {
@@ -35157,7 +35156,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component15, override,) {
+function WithOverride(Component16, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext(DataObserverContext,);
@@ -35166,14 +35165,14 @@ function WithOverride(Component15, override,) {
       style,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ...rest,
       ...overrideProps,
       _initialStyle: style,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component15,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component15.displayName || Component15.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component16,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component16.displayName || Component16.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -36015,11 +36014,11 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList(value,) {
   return isString2(value,) || Array.isArray(value,);
 }
-var withFX = (Component15) =>
+var withFX = (Component16) =>
   React4.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx(Component15, {
+      return /* @__PURE__ */ jsx(Component16, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -36030,7 +36029,7 @@ var withFX = (Component15) =>
     if (RenderTarget.current() === RenderTarget.canvas) {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ jsx(Component15, {
+      return /* @__PURE__ */ jsx(Component16, {
         ...props,
         animate: animate4,
         initial: initial2,
@@ -36134,7 +36133,7 @@ var withFX = (Component15) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -36284,10 +36283,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(({
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component15) =>
+var withGeneratedLayoutId = (Component16) =>
   React4.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -36380,7 +36379,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component16, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
       sheet,
@@ -36400,7 +36399,7 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
               __html: concatenatedCSS,
             },
           },),
-          /* @__PURE__ */ jsx(Component15, {
+          /* @__PURE__ */ jsx(Component16, {
             ...props,
             ref,
           },),
@@ -36416,7 +36415,7 @@ var withCSS = (Component15, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ...props,
       ref,
     },);
@@ -37403,10 +37402,10 @@ function ChildrenCanSuspend({
     children,
   },);
 }
-function withChildrenCanSuspend(Component15,) {
+function withChildrenCanSuspend(Component16,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx(Component15, {
+      children: /* @__PURE__ */ jsx(Component16, {
         ...props,
         ref,
       },),
@@ -38184,6 +38183,23 @@ function maybeReplaceAnchorWithSpan(component,) {
   if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
   return component;
 }
+var IgnoreErrors = class extends Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      error: void 0,
+    },);
+  }
+  static getDerivedStateFromError(error,) {
+    return {
+      error,
+    };
+  }
+  render() {
+    if (this.state.error) return null;
+    return this.props.children;
+  }
+};
 var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
@@ -38368,17 +38384,21 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     try {
       (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
       await submitForm(action, data2, projectHash,);
-      dispatch({
-        type: 'success',
-      },);
+      startTransition2(() =>
+        dispatch({
+          type: 'success',
+        },)
+      );
       (_d = (_c = callbacks.current).onSuccess) == null ? void 0 : _d.call(_c,);
       if (redirectUrl) {
         await redirectTo(redirectUrl,);
       }
     } catch (error) {
-      dispatch({
-        type: 'error',
-      },);
+      startTransition2(() =>
+        dispatch({
+          type: 'error',
+        },)
+      );
       (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
       console.error(error,);
     }
@@ -38495,7 +38515,7 @@ var loadingFetchResult = {
   data: void 0,
 };
 function isNumberString(value,) {
-  return isString2(value,) && !isNaN(Number(value,),);
+  return isString2(value,) && !Number.isNaN(Number(value,),);
 }
 function isValidFetchDataValueResult(type, value,) {
   switch (type) {
@@ -38962,6 +38982,7 @@ function PageRoot({
   localeId,
   locales,
   preserveQueryParams,
+  EditorBar,
 },) {
   const {
     enableAsyncURLUpdates,
@@ -38991,6 +39012,13 @@ function PageRoot({
               },
               preserveQueryParams,
               enableAsyncURLUpdates,
+              editorBar: EditorBar && framerSiteId && /* @__PURE__ */ jsx(IgnoreErrors, {
+                children: /* @__PURE__ */ jsx(Suspense2, {
+                  children: /* @__PURE__ */ jsx(EditorBar, {
+                    framerSiteId,
+                  },),
+                },),
+              },),
             },),
           },),
         },),
@@ -43840,7 +43868,7 @@ var AnimationCollector = class {
 };
 _variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component15,) {
+function withOptimizedAppearEffect(Component16,) {
   return React4.forwardRef(({
     optimized,
     ...props
@@ -43861,7 +43889,7 @@ function withOptimizedAppearEffect(Component15,) {
         generatedComponentContext,
       );
     }
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ref,
       ...props,
     },);
@@ -44403,12 +44431,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component15 = typeof target === 'string'
+    const Component16 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
       : React4.isValidElement(target,)
       ? target
       : null;
-    if (!Component15) return;
+    if (!Component16) return;
     const {
       appearsFrom,
       backdropColor,
@@ -44417,38 +44445,38 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component15,);
+        navigation.instant(Component16,);
         break;
       case 'fade':
-        navigation.fade(Component15, {
+        navigation.fade(Component16, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component15, {
+        navigation.push(Component16, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component15, {
+        navigation.flip(Component16, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component15, {
+        navigation.magicMotion(Component16, {
           animation,
         },);
         break;
       case 'modal':
-        navigation.modal(Component15, {
+        navigation.modal(Component16, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component15, {
+        navigation.overlay(Component16, {
           appearsFrom,
           backdropColor,
           animation,
@@ -44870,14 +44898,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component15, info,) {
+function withMappedReactProps(Component16, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ...props,
     },);
   };
@@ -44918,10 +44946,10 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component15) =>
+var withVariantAppearEffect = (Component16) =>
   React4.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx(Component15, {
+      return /* @__PURE__ */ jsx(Component16, {
         ...props,
         ref: forwardedRef,
       },);
@@ -45008,18 +45036,18 @@ var withVariantAppearEffect = (Component15) =>
       repeat: !animateOnce,
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx(Component15, {
+      return /* @__PURE__ */ jsx(Component16, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx(Component15, {
+      return /* @__PURE__ */ jsx(Component16, {
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component15) =>
+var withVariantFX = (Component16) =>
   React4.forwardRef(({
     initial,
     animate: animate3,
@@ -45036,7 +45064,7 @@ var withVariantFX = (Component15) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx(Component15, {
+    return /* @__PURE__ */ jsx(Component16, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -48723,10 +48751,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component15 = htmlElementAsMotionComponent(props.as,);
+  const Component16 = htmlElementAsMotionComponent(props.as,);
   if (isString2(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx(Component15, {
+      return /* @__PURE__ */ jsx(Component16, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -48759,7 +48787,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
       },);
     }
   }
-  return /* @__PURE__ */ jsx(Component15, {
+  return /* @__PURE__ */ jsx(Component16, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -51632,6 +51660,7 @@ export {
   useComponentViewport,
   useConstant2 as useConstant,
   useCurrentPathVariables,
+  useCurrentRoute,
   useCurrentRouteId,
   useCustomCursors,
   useCycle,
