@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.I26KWT3E.mjs
+// https :https://app.framerstatic.com/framer.K3G2LCX5.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17906,7 +17906,7 @@ async function pushRouteState(
       enableAsyncURLUpdate,
       isNavigationTransition,
     );
-    if (!enableAsyncURLUpdate) await urlUpdatePromise;
+    return await urlUpdatePromise;
   } catch {}
 }
 function isHistoryState(data2,) {
@@ -18760,24 +18760,24 @@ function Router({
         pathVariables,
       },)
     ) {
-      updateScrollPosition(routeElementId, smoothScroll, false,);
       const route = routes[routeId];
-      if (((_b = window.history.state) === null || _b === void 0 ? void 0 : _b.hash) === hash2 || disableHistory || !route) return;
-      const updateURLPromise = pushRouteState(
-        routeId,
-        route,
-        {
-          currentRoutePath: route.path,
-          currentPathVariables: currentPathVariables2,
-          pathVariables,
-          hash: hash2,
-          localeId: currentRouteLocaleId,
-          preserveQueryParams,
-        },
-        // we want to yield as this is called synchronusly from an user interaction.
-        enableAsyncURLUpdates,
-      );
-      if (!enableAsyncURLUpdates) return await updateURLPromise;
+      if (((_b = window.history.state) === null || _b === void 0 ? void 0 : _b.hash) !== hash2 && !disableHistory && route) {
+        await pushRouteState(
+          routeId,
+          route,
+          {
+            currentRoutePath: route.path,
+            currentPathVariables: currentPathVariables2,
+            pathVariables,
+            hash: hash2,
+            localeId: currentRouteLocaleId,
+            preserveQueryParams,
+          },
+          // we want to yield as this is called synchronusly from an user interaction.
+          enableAsyncURLUpdates,
+        );
+      }
+      updateScrollPosition(routeElementId, smoothScroll, false,);
       return;
     }
     if (!newRoute) return;
