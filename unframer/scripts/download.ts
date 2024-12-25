@@ -189,6 +189,7 @@ export async function fixFramerCode({ resultFile }) {
         document.head.appendChild(fragment);
     }
     `
+    
 
     // TODO this code does not work in react strict mode, bug in framer
     let toRemove = /throw new ReferenceError\(\s*'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle\.',\s*\)/;
@@ -196,6 +197,9 @@ export async function fixFramerCode({ resultFile }) {
     if (!codeAfter.match(toRemove)) {
         throw new Error('Could not find expected ReferenceError string in bundle')
     }
+    codeAfter += dedent`
+    export { Router, FetchClientProvider, FormContext }
+    `
     codeAfter = codeAfter.replace(toRemove, '')
 
     if (code === codeAfter) {
