@@ -85,7 +85,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             config,
             watch: false,
             signal: controller.signal,
-            cwd: path.resolve(process.cwd(), outDir || 'framer'),
+            cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
         })
     })
 
