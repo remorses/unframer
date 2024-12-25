@@ -44,6 +44,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     outDir,
                     projectId: data?.project?.id,
                     projectName,
+                    fullFramerProjectId: data?.project?.fullFramerProjectId,
+                    locales: data?.locales,
                     components: Object.fromEntries(
                         data.components.map((c) => [
                             componentNameToPath(c.name),
