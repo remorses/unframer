@@ -127,7 +127,7 @@ export async function bundle({
                                 contents: /** js **/ `
                                 'use client'
                                 import { Fragment } from 'react'
-                                import { PageRoot } from 'unframer'
+                                import { ContextProviders } from 'unframer'
                                 import Component from '${await resolveRedirect({
                                     url,
                                     signal,
@@ -136,8 +136,7 @@ export async function bundle({
 
                                 function WithRoot({ children, locale }) {
                                     return (
-                                        <PageRoot
-                                            isWebsite={true}
+                                        <ContextProviders
                                             routeId="x"
                                             routes={{
                                                 x: {
@@ -146,16 +145,12 @@ export async function bundle({
                                                     path: '/',
                                                 },
                                             }}
-                                            enableImproveInpDuringHydration={true}
                                             framerSiteId={${JSON.stringify(
                                                 config.fullFramerProjectId,
                                             )}}
-                                            notFoundPage="div"
-                                            isReducedMotion={undefined}
-                                            localeId={locales?.find(l => l.slug === locale || l.code === locale || l.id === locale)?.id}
+                                            locale={locale}
                                             locales={locales}
-                                            preserveQueryParams={true}
-                                            RootComponent={Fragment}
+                                            children={children}
                                         />
                                     )
                                 }

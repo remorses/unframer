@@ -1,5 +1,5 @@
 'use client'
-import { combinedCSSRules, LayoutGroup } from './framer.js'
+import { combinedCSSRules, LayoutGroup, MotionConfig } from './framer.js'
 
 import {
     ComponentPropsWithoutRef,
@@ -191,4 +191,49 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
 const onResize = (callback) => {
     window.addEventListener('resize', callback)
     return () => window.removeEventListener('resize', callback)
+}
+
+import {
+    // @ts-ignore
+    CustomCursorHost,
+    // @ts-ignore
+    FetchClientProvider,
+    // @ts-ignore
+    FormContext,
+    // @ts-ignore
+    Router,
+} from './framer.js'
+
+export function ContextProviders({
+    locale,
+    children,
+    framerSiteId,
+    routes,
+    routeId,
+    pathVariables,
+    collectionUtils,
+    locales,
+}) {
+    const localeId = locales?.find(
+        (l) => l.slug === locale || l.code === locale || l.id === locale,
+    )?.id
+    return (
+        <FetchClientProvider>
+            <CustomCursorHost>
+                <FormContext.Provider value={framerSiteId}>
+                    <Router
+                        initialRoute={routeId}
+                        initialPathVariables={pathVariables}
+                        initialLocaleId={localeId}
+                        enableImproveInpDuringHydration={true}
+                        routes={routes}
+                        collectionUtils={collectionUtils}
+                        locales={locales}
+                    >
+                        {children}
+                    </Router>
+                </FormContext.Provider>
+            </CustomCursorHost>
+        </FetchClientProvider>
+    )
 }

@@ -37628,7 +37628,6 @@ function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
         throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}`,);
       }
       const utils = await getUtils();
-      // console.log('collectionUtils', utils);
       if (!utils) throw new Error('Collection does not contain utility functions',);
       const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
       return slug;
@@ -51799,4 +51798,4 @@ if (typeof document !== 'undefined') {
         // node.remove()
     }
     document.head.appendChild(fragment);
-}
+}export { Router, FetchClientProvider, FormContext }
