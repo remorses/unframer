@@ -124,7 +124,8 @@ export async function bundle({
                             const url = components[name]
 
                             return {
-                                contents: /** js */ `'use client'
+                                contents: /** js **/ `
+                                'use client'
                                 import Component from '${await resolveRedirect({
                                     url,
                                     signal,

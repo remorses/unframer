@@ -31,41 +31,36 @@ export default function Home() {
             <div className=' dark:bg-gray-900 '>
                 <PageRoot
                     {...{
-                        ...{
-                            isWebsite: true,
-                            routeId: 'x',
-                            routes: {
-                                x: {
-                                    elements: {},
-                                    page: <Hero />,
-                                    path: '/',
-                                },
-                            },
-                            enableImproveInpDuringHydration: true,
-
-                            framerSiteId:
-                                'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
-                            notFoundPage: 'div',
-                            isReducedMotion: true,
-                            localeId: 'M_lnJlsvf',
-                            locales: [
-                                {
-                                    code: 'en',
-                                    id: 'default',
-                                    name: 'English',
-                                    slug: 'en',
-                                },
-                                {
-                                    code: 'it-IT',
-                                    id: 'M_lnJlsvf',
-                                    name: 'Italian',
-                                    slug: 'it',
-                                },
-                            ],
-                            preserveQueryParams: true,
-                        },
+                        isWebsite: true,
                         routeId: 'x',
-
+                        routes: {
+                            x: {
+                                elements: {},
+                                page: <Hero />,
+                                path: '/',
+                            },
+                        },
+                        enableImproveInpDuringHydration: true,
+                        framerSiteId:
+                            'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
+                        notFoundPage: 'div',
+                        isReducedMotion: true,
+                        localeId: 'M_lnJlsvf',
+                        locales: [
+                            {
+                                code: 'en',
+                                id: 'default',
+                                name: 'English',
+                                slug: 'en',
+                            },
+                            {
+                                code: 'it-IT',
+                                id: 'M_lnJlsvf',
+                                name: 'Italian',
+                                slug: 'it',
+                            },
+                        ],
+                        preserveQueryParams: true,
                         RootComponent: 'div' as any,
                     }}
                 >
