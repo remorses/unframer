@@ -1,5 +1,16 @@
 # unframer
 
+## 2.9.0
+
+### Minor Changes
+
+-   97890f3: - Wrap components with Framer root context, adds support for - fetch - form submission - internationalization via `locale` prop
+    -   Fix .dark class only valid if on root html. Now you can wrap with dark class on any parent element.
+
+### Patch Changes
+
+-   41e96d4: Update framer to 2.4.1, update framer motion to 11.11.7
+
 ## 2.8.0
 
 ### Minor Changes
