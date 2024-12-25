@@ -817,7 +817,7 @@ NavigationContainer
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
 
-/* used by customer-stories.js, hero-section.js */
+/* used by customer-stories.js, hero-section.js, navigation.js */
 
 @font-face {
     font-family: 'Figtree'; 
@@ -840,7 +840,7 @@ NavigationContainer
     font-weight: 700;
 }
 
-/* used by contact-sales-form.js, customer-stories.js, sign-up-button.js, tag.js */
+/* used by contact-sales-form.js, customer-stories.js, navigation.js, sign-up-button.js, tag.js */
 
 @font-face {
     font-family: 'Figtree'; 
@@ -865,7 +865,7 @@ NavigationContainer
     font-weight: 900;
 }
 
-/* used by contact-sales-form.js, customer-stories.js, hero-section.js, sign-up-button.js, stats-card.js, tag.js, testimonial-card.js */
+/* used by contact-sales-form.js, customer-stories.js, hero-section.js, navigation.js, sign-up-button.js, stats-card.js, tag.js, testimonial-card.js */
 
 @font-face {
     font-family: 'Figtree'; 
@@ -874,7 +874,7 @@ NavigationContainer
     font-weight: 400;
 }
 
-/* used by contact-sales-form.js, customer-stories.js, sign-up-button.js, tag.js, testimonial-card.js */
+/* used by contact-sales-form.js, customer-stories.js, navigation.js, sign-up-button.js, tag.js, testimonial-card.js */
 
 @font-face {
     font-family: 'Figtree'; 
@@ -883,7 +883,7 @@ NavigationContainer
     font-weight: 500;
 }
 
-/* used by code-snippets.js, contact-sales-form.js, copy-snippet.js, customer-stories.js, hero-section.js, primary.js, stats-card.js, testimonial-card.js */
+/* used by code-snippets.js, contact-sales-form.js, copy-snippet.js, customer-stories.js, hero-section.js, navigation.js, primary.js, stats-card.js, testimonial-card.js */
 
 @font-face {
     font-family: 'Figtree'; 
@@ -1004,7 +1004,7 @@ NavigationContainer
     unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* used by logo.js */
+/* used by logo.js, navigation.js */
 
 @font-face {
     font-family: 'Figtree'; 
@@ -1146,7 +1146,7 @@ NavigationContainer
     unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
-/* used by hero-section.js, primary.js, testimonial-card.js */
+/* used by hero-section.js, navigation.js, primary.js, testimonial-card.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1156,7 +1156,7 @@ NavigationContainer
     unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
-/* used by code-snippets.js, contact-sales-form.js, copy-snippet.js, customer-stories.js, hero-section.js, primary.js, sign-up-button.js, stats-card.js, tag.js, testimonial-card.js */
+/* used by code-snippets.js, contact-sales-form.js, copy-snippet.js, customer-stories.js, hero-section.js, navigation.js, primary.js, sign-up-button.js, stats-card.js, tag.js, testimonial-card.js */
 
 @font-face {
     font-family: 'Inter'; 

@@ -3,6 +3,7 @@
 import '../../framer-intl/styles.css'
 import { PageRoot } from 'unframer'
 import Hero from '../../framer-intl/hero-section'
+import Navigation from '../../framer-intl/docs/navigation'
 
 import { useLoaderData } from '@remix-run/react'
 import { Component, Fragment } from 'react'
@@ -65,7 +66,8 @@ export default function Home() {
                         RootComponent: Fragment,
                     }}
                 />
-                <Hero locale='it' />
+                <Hero locale='it-IT' />
+                <Navigation locale='it-IT' />
                 {/* <Component locale='it' /> */}
             </div>
         </div>
