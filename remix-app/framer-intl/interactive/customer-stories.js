@@ -5,6 +5,10 @@
 import { className, css, fonts, } from '../chunk-AAIGJDIS.js';
 import '../chunk-MLKGABMK.js';
 
+// virtual:interactive/customer-stories
+import { Fragment as Fragment4, } from 'react';
+import { PageRoot, } from 'unframer';
+
 // https :https://framerusercontent.com/modules/2xq58OZNQr3P9I0sin28/SqpjQrRww6Pgnhqso8gH/h45_XDIZO.js
 import { jsx as _jsx5, jsxs as _jsxs4, } from 'react/jsx-runtime';
 import {
@@ -1779,8 +1783,36 @@ addFonts3(Framerh45_XDIZO, [{ explicitInter: true, fonts: [], }, ...TabsFonts, .
 // virtual:interactive/customer-stories
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment4,
+    },
+  );
+}
+var locales = [];
 stdin_default3.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default3, ...props, },);
+  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var customer_stories_default = stdin_default3;
-export { customer_stories_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default3, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default3,);
+export { ComponentWithRoot as default, };

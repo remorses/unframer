@@ -4,6 +4,10 @@
 'use client';
 import '../chunk-MLKGABMK.js';
 
+// virtual:navigation/logo
+import { Fragment as Fragment2, } from 'react';
+import { PageRoot, } from 'unframer';
+
 // https :https://framerusercontent.com/modules/2Gv0mcyfnQqk5SqGnsec/qLw9JfQ9UOv66aw4GNMu/Lt4N_hC_q.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
@@ -178,8 +182,36 @@ addFonts(FramerLt4N_hC_q, [{
 // virtual:navigation/logo
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment2,
+    },
+  );
+}
+var locales = [];
 stdin_default.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props, },);
+  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var logo_default = stdin_default;
-export { logo_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default,);
+export { ComponentWithRoot as default, };

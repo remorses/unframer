@@ -5,6 +5,10 @@
 import { className, css, fonts, } from '../chunk-AAIGJDIS.js';
 import '../chunk-MLKGABMK.js';
 
+// virtual:buttons/sign-up-button
+import { Fragment as Fragment2, } from 'react';
+import { PageRoot, } from 'unframer';
+
 // https :https://framerusercontent.com/modules/q2WWbMl6IvN86b61e028/WrKQU6xBnJBNgHiziHgx/ye4VQiBUG.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 import {
@@ -276,8 +280,36 @@ addFonts(Framerye4VQiBUG, [{
 // virtual:buttons/sign-up-button
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment2,
+    },
+  );
+}
+var locales = [];
 stdin_default.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props, },);
+  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var sign_up_button_default = stdin_default;
-export { sign_up_button_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default,);
+export { ComponentWithRoot as default, };

@@ -46,6 +46,10 @@ import { Gspz7IPpm_exports, stdin_default, } from '../chunk-D5BIDOF2.js';
 import '../chunk-4RCNKCM2.js';
 import '../chunk-MLKGABMK.js';
 
+// virtual:interactive/code-snippets
+import { Fragment as Fragment4, } from 'react';
+import { PageRoot, } from 'unframer';
+
 // https :https://framerusercontent.com/modules/wG0KtvJcQMy9NAtSa7Ol/qJ64L0ldngSBRaGrgCX5/uE1pD4Yl_.js
 import { jsx as _jsx3, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
@@ -14654,11 +14658,39 @@ addFonts(FrameruE1pD4Yl_, [
 // virtual:interactive/code-snippets
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx as jsx2, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx2(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l2,) => l2.slug === locale || l2.code === locale || l2.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment4,
+    },
+  );
+}
+var locales = [];
 stdin_default3.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx2(WithFramerBreakpoints, { Component: stdin_default3, ...props, },);
+  return /* @__PURE__ */ jsx2(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var code_snippets_default = stdin_default3;
-export { code_snippets_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx2(WithRoot, { locale, children: /* @__PURE__ */ jsx2(stdin_default3, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default3,);
+export { ComponentWithRoot as default, };
 /*! Bundled license information:
 
 static-browser-server/out/lib/main.js:

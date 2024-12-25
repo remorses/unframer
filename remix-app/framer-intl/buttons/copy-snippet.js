@@ -7,10 +7,40 @@ import '../chunk-4RCNKCM2.js';
 import '../chunk-MLKGABMK.js';
 
 // virtual:buttons/copy-snippet
+import { Fragment, } from 'react';
+import { PageRoot, } from 'unframer';
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment,
+    },
+  );
+}
+var locales = [];
 stdin_default.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default, ...props, },);
+  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var copy_snippet_default = stdin_default;
-export { copy_snippet_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default,);
+export { ComponentWithRoot as default, };

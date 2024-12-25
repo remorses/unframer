@@ -5,6 +5,7 @@ import { PageRoot } from 'unframer'
 import Hero from '../../framer-intl/hero-section'
 
 import { useLoaderData } from '@remix-run/react'
+import { Component, Fragment } from 'react'
 
 export function loader() {
     return {}
@@ -41,31 +42,31 @@ export default function Home() {
                             },
                         },
                         enableImproveInpDuringHydration: true,
-                        framerSiteId:
-                            'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
+                        // framerSiteId:
+                        //     'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
                         notFoundPage: 'div',
-                        isReducedMotion: true,
+                        // isReducedMotion: true,
                         localeId: 'M_lnJlsvf',
-                        locales: [
-                            {
-                                code: 'en',
-                                id: 'default',
-                                name: 'English',
-                                slug: 'en',
-                            },
-                            {
-                                code: 'it-IT',
-                                id: 'M_lnJlsvf',
-                                name: 'Italian',
-                                slug: 'it',
-                            },
-                        ],
+                        // locales: [
+                        //     {
+                        //         code: 'en',
+                        //         id: 'default',
+                        //         name: 'English',
+                        //         slug: 'en',
+                        //     },
+                        //     {
+                        //         code: 'it-IT',
+                        //         id: 'M_lnJlsvf',
+                        //         name: 'Italian',
+                        //         slug: 'it',
+                        //     },
+                        // ],
                         preserveQueryParams: true,
-                        RootComponent: 'div' as any,
+                        RootComponent: Fragment,
                     }}
-                >
-                    <div className='bg-gray-100 text-gray-800 flex flex-col items-center p-10'></div>
-                </PageRoot>
+                />
+                <Hero />
+                {/* <Component locale='it' /> */}
             </div>
         </div>
     )

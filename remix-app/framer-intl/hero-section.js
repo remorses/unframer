@@ -6,6 +6,10 @@ import { stdin_default, } from './chunk-YVFVXZAR.js';
 import './chunk-ZRDVOIMG.js';
 import { __export, } from './chunk-MLKGABMK.js';
 
+// virtual:hero-section
+import { Fragment as Fragment3, } from 'react';
+import { PageRoot, } from 'unframer';
+
 // https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/I2Qv7FAeAKh4ZcQPEAjr/mmEURJmx_.js
 import { jsx as _jsx2, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
@@ -544,8 +548,36 @@ addFonts(FramermmEURJmx_, [
 // virtual:hero-section
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment3,
+    },
+  );
+}
+var locales = [];
 stdin_default2.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default2, ...props, },);
+  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var hero_section_default = stdin_default2;
-export { hero_section_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default2,);
+export { ComponentWithRoot as default, };

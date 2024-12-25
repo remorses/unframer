@@ -43,8 +43,18 @@
       "format": "esm"
     },
     "virtual:buttons/copy-snippet": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/kcBOvKAs8scMl79S93pz/KzhgcoO5kCJFAdHirFY4/Gspz7IPpm.js",
           "kind": "import-statement",
@@ -138,8 +148,18 @@
       "format": "esm"
     },
     "virtual:cards/testimonial-card": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/8SvTfjg3wtGBYHnVhhfs/BuD2NP0IUp0tXkGn5gBJ/IlmXaohIz.js",
           "kind": "import-statement",
@@ -185,8 +205,18 @@
       "format": "esm"
     },
     "virtual:navigation/logo": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/2Gv0mcyfnQqk5SqGnsec/qLw9JfQ9UOv66aw4GNMu/Lt4N_hC_q.js",
           "kind": "import-statement",
@@ -237,8 +267,18 @@
       "format": "esm"
     },
     "virtual:buttons/primary": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/xNJHB4VDGWwK02iJRZDV/YerWl7N0k2AfHNaWL4bu/P7B5yL40j.js",
           "kind": "import-statement",
@@ -357,8 +397,18 @@
       "format": "esm"
     },
     "virtual:forms/contact-sales-form": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/e0fS2fEvURCR3yvODXIf/6uXticNFw41T8k44jXSW/SCqt8AAg3.js",
           "kind": "import-statement",
@@ -404,8 +454,18 @@
       "format": "esm"
     },
     "virtual:integrations": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/j1MgkVDyyGp8B8WV9EDj/NK5XbOwG4d17ktMY3GBq/aBo53UoLa.js",
           "kind": "import-statement",
@@ -618,8 +678,18 @@
       "format": "esm"
     },
     "virtual:interactive/customer-stories": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/2xq58OZNQr3P9I0sin28/SqpjQrRww6Pgnhqso8gH/h45_XDIZO.js",
           "kind": "import-statement",
@@ -739,8 +809,18 @@
       "format": "esm"
     },
     "virtual:hero-section": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/I2Qv7FAeAKh4ZcQPEAjr/mmEURJmx_.js",
           "kind": "import-statement",
@@ -791,8 +871,18 @@
       "format": "esm"
     },
     "virtual:tag": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/xm0mRXui1tr1B9VL3CmQ/8KCaWdDtrsoNwuZmKhgv/on7AAz7Qe.js",
           "kind": "import-statement",
@@ -1324,8 +1414,18 @@
       "format": "esm"
     },
     "virtual:buttons/sound-on-tap": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/eU3zxBKFoHQhYFiXuCB7/e05UICsEGRW8sSt9hrO3/roUNcvo3k.js",
           "kind": "import-statement",
@@ -2395,8 +2495,18 @@
       "format": "esm"
     },
     "virtual:interactive/code-snippets": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/wG0KtvJcQMy9NAtSa7Ol/qJ64L0ldngSBRaGrgCX5/uE1pD4Yl_.js",
           "kind": "import-statement",
@@ -2447,8 +2557,18 @@
       "format": "esm"
     },
     "virtual:buttons/sign-up-button": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/q2WWbMl6IvN86b61e028/WrKQU6xBnJBNgHiziHgx/ye4VQiBUG.js",
           "kind": "import-statement",
@@ -2504,8 +2624,18 @@
       "format": "esm"
     },
     "virtual:cards/stats-card": {
-      "bytes": 536,
+      "bytes": 2614,
       "imports": [
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
         {
           "path": "https :https://framerusercontent.com/modules/wGmB620zPQ6SELIv24lD/QtizSWx33OfMYHUHmZiy/zTGad3icV.js",
           "kind": "import-statement",
@@ -2984,6 +3114,16 @@
           "kind": "import-statement"
         },
         {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -3019,20 +3159,30 @@
       ],
       "entryPoint": "virtual:tag",
       "inputs": {
+        "virtual:tag": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/xm0mRXui1tr1B9VL3CmQ/8KCaWdDtrsoNwuZmKhgv/on7AAz7Qe.js": {
           "bytesInOutput": 8846
-        },
-        "virtual:tag": {
-          "bytesInOutput": 260
         }
       },
-      "bytes": 9374
+      "bytes": 10258
     },
     "buttons/sound-on-tap.js": {
       "imports": [
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -3260,6 +3410,9 @@
       ],
       "entryPoint": "virtual:buttons/sound-on-tap",
       "inputs": {
+        "virtual:buttons/sound-on-tap": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/eU3zxBKFoHQhYFiXuCB7/e05UICsEGRW8sSt9hrO3/roUNcvo3k.js": {
           "bytesInOutput": 9764
         },
@@ -3331,12 +3484,9 @@
         },
         "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
           "bytesInOutput": 1160
-        },
-        "virtual:buttons/sound-on-tap": {
-          "bytesInOutput": 269
         }
       },
-      "bytes": 72713
+      "bytes": 73596
     },
     "interactive/code-snippets.js": {
       "imports": [
@@ -3363,6 +3513,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -3555,6 +3715,9 @@
       ],
       "entryPoint": "virtual:interactive/code-snippets",
       "inputs": {
+        "virtual:interactive/code-snippets": {
+          "bytesInOutput": 1141
+        },
         "https :https://framerusercontent.com/modules/wG0KtvJcQMy9NAtSa7Ol/qJ64L0ldngSBRaGrgCX5/uE1pD4Yl_.js": {
           "bytesInOutput": 40961
         },
@@ -3596,12 +3759,9 @@
         },
         "https :https://framerusercontent.com/modules/ssllMinBPZ1hyxSqnPnz/i5ft1ej0eBKoZXchb1Nj/Copy_clipboard.js": {
           "bytesInOutput": 7586
-        },
-        "virtual:interactive/code-snippets": {
-          "bytesInOutput": 282
         }
       },
-      "bytes": 608363
+      "bytes": 609256
     },
     "buttons/sign-up-button.js": {
       "imports": [
@@ -3612,6 +3772,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -3649,14 +3819,14 @@
       ],
       "entryPoint": "virtual:buttons/sign-up-button",
       "inputs": {
+        "virtual:buttons/sign-up-button": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/q2WWbMl6IvN86b61e028/WrKQU6xBnJBNgHiziHgx/ye4VQiBUG.js": {
           "bytesInOutput": 10057
-        },
-        "virtual:buttons/sign-up-button": {
-          "bytesInOutput": 271
         }
       },
-      "bytes": 10628
+      "bytes": 11509
     },
     "cards/stats-card.js": {
       "imports": [
@@ -3671,6 +3841,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -3708,14 +3888,14 @@
       ],
       "entryPoint": "virtual:cards/stats-card",
       "inputs": {
+        "virtual:cards/stats-card": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/wGmB620zPQ6SELIv24lD/QtizSWx33OfMYHUHmZiy/zTGad3icV.js": {
           "bytesInOutput": 7520
-        },
-        "virtual:cards/stats-card": {
-          "bytesInOutput": 267
         }
       },
-      "bytes": 8177
+      "bytes": 9060
     },
     "codemirror_lang_angular-V72PTATA.js": {
       "imports": [
@@ -3978,6 +4158,16 @@
           "kind": "import-statement"
         },
         {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "unframer",
           "kind": "import-statement",
           "external": true
@@ -3994,10 +4184,10 @@
       "entryPoint": "virtual:buttons/copy-snippet",
       "inputs": {
         "virtual:buttons/copy-snippet": {
-          "bytesInOutput": 269
+          "bytesInOutput": 1108
         }
       },
-      "bytes": 480
+      "bytes": 1316
     },
     "chunk-D5BIDOF2.js": {
       "imports": [
@@ -4052,6 +4242,16 @@
           "kind": "import-statement"
         },
         {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -4097,6 +4297,9 @@
       ],
       "entryPoint": "virtual:cards/testimonial-card",
       "inputs": {
+        "virtual:cards/testimonial-card": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/8SvTfjg3wtGBYHnVhhfs/BuD2NP0IUp0tXkGn5gBJ/IlmXaohIz.js": {
           "bytesInOutput": 18613
         },
@@ -4105,18 +4308,25 @@
         },
         "https :https://framerusercontent.com/modules/uasQaa4IZ5gEvV1gnhyN/jokgRq5ITqg5LdtySdP1/n4VV4jzz6.js": {
           "bytesInOutput": 7371
-        },
-        "virtual:cards/testimonial-card": {
-          "bytesInOutput": 273
         }
       },
-      "bytes": 35711
+      "bytes": 36588
     },
     "navigation/logo.js": {
       "imports": [
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -4154,14 +4364,14 @@
       ],
       "entryPoint": "virtual:navigation/logo",
       "inputs": {
+        "virtual:navigation/logo": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/2Gv0mcyfnQqk5SqGnsec/qLw9JfQ9UOv66aw4GNMu/Lt4N_hC_q.js": {
           "bytesInOutput": 9417
-        },
-        "virtual:navigation/logo": {
-          "bytesInOutput": 261
         }
       },
-      "bytes": 9893
+      "bytes": 10787
     },
     "buttons/primary.js": {
       "imports": [
@@ -4176,6 +4386,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "unframer",
@@ -4194,10 +4414,10 @@
       "entryPoint": "virtual:buttons/primary",
       "inputs": {
         "virtual:buttons/primary": {
-          "bytesInOutput": 264
+          "bytesInOutput": 1108
         }
       },
-      "bytes": 465
+      "bytes": 1311
     },
     "forms/contact-sales-form.js": {
       "imports": [
@@ -4216,6 +4436,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -4273,17 +4503,17 @@
       ],
       "entryPoint": "virtual:forms/contact-sales-form",
       "inputs": {
+        "virtual:forms/contact-sales-form": {
+          "bytesInOutput": 1125
+        },
         "https :https://framerusercontent.com/modules/e0fS2fEvURCR3yvODXIf/6uXticNFw41T8k44jXSW/SCqt8AAg3.js": {
           "bytesInOutput": 34985
         },
         "https :https://framerusercontent.com/modules/wM02gR5pCHZCWYEpfa7j/jWVbD0NCwbrkzZRwLgwo/KDmSZoPnz.js": {
           "bytesInOutput": 12387
-        },
-        "virtual:forms/contact-sales-form": {
-          "bytesInOutput": 278
         }
       },
-      "bytes": 48364
+      "bytes": 49239
     },
     "chunk-67SBWQKR.js": {
       "imports": [
@@ -4332,6 +4562,16 @@
           "kind": "import-statement"
         },
         {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -4367,14 +4607,14 @@
       ],
       "entryPoint": "virtual:integrations",
       "inputs": {
+        "virtual:integrations": {
+          "bytesInOutput": 1122
+        },
         "https :https://framerusercontent.com/modules/j1MgkVDyyGp8B8WV9EDj/NK5XbOwG4d17ktMY3GBq/aBo53UoLa.js": {
           "bytesInOutput": 32156
-        },
-        "virtual:integrations": {
-          "bytesInOutput": 269
         }
       },
-      "bytes": 32644
+      "bytes": 33519
     },
     "interactive/customer-stories.js": {
       "imports": [
@@ -4385,6 +4625,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -4502,6 +4752,9 @@
       ],
       "entryPoint": "virtual:interactive/customer-stories",
       "inputs": {
+        "virtual:interactive/customer-stories": {
+          "bytesInOutput": 1125
+        },
         "https :https://framerusercontent.com/modules/2xq58OZNQr3P9I0sin28/SqpjQrRww6Pgnhqso8gH/h45_XDIZO.js": {
           "bytesInOutput": 23315
         },
@@ -4525,12 +4778,9 @@
         },
         "https :https://framerusercontent.com/modules/xC5er4vnJmbc2XnY8pgo/Ibkt1alLjiQxQkKQRMxr/vSuRg5Prj.js": {
           "bytesInOutput": 4420
-        },
-        "virtual:interactive/customer-stories": {
-          "bytesInOutput": 276
         }
       },
-      "bytes": 83282
+      "bytes": 84165
     },
     "chunk-AAIGJDIS.js": {
       "imports": [
@@ -4565,6 +4815,16 @@
         {
           "path": "chunk-MLKGABMK.js",
           "kind": "import-statement"
+        },
+        {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "unframer",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "react/jsx-runtime",
@@ -4627,6 +4887,9 @@
       ],
       "entryPoint": "virtual:hero-section",
       "inputs": {
+        "virtual:hero-section": {
+          "bytesInOutput": 1125
+        },
         "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/I2Qv7FAeAKh4ZcQPEAjr/mmEURJmx_.js": {
           "bytesInOutput": 16913
         },
@@ -4641,12 +4904,9 @@
         },
         "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/38X4xndeY8RGpNnj6Dvu/mmEURJmx_.js": {
           "bytesInOutput": 291
-        },
-        "virtual:hero-section": {
-          "bytesInOutput": 272
         }
       },
-      "bytes": 27677
+      "bytes": 28552
     },
     "chunk-YVFVXZAR.js": {
       "imports": [

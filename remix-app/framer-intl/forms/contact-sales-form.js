@@ -7,6 +7,10 @@ import { className, css, fonts, } from '../chunk-4RCNKCM2.js';
 import { className as className3, css as css3, fonts as fonts3, } from '../chunk-AAIGJDIS.js';
 import '../chunk-MLKGABMK.js';
 
+// virtual:forms/contact-sales-form
+import { Fragment as Fragment3, } from 'react';
+import { PageRoot, } from 'unframer';
+
 // https :https://framerusercontent.com/modules/e0fS2fEvURCR3yvODXIf/6uXticNFw41T8k44jXSW/SCqt8AAg3.js
 import { Fragment as _Fragment, jsx as _jsx2, jsxs as _jsxs2, } from 'react/jsx-runtime';
 import {
@@ -1155,8 +1159,36 @@ addFonts2(FramerSCqt8AAg3, [
 // virtual:forms/contact-sales-form
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
+function WithRoot({ children, locale, },) {
+  return /* @__PURE__ */ jsx(
+    PageRoot,
+    {
+      isWebsite: true,
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: children,
+          path: '/',
+        },
+      },
+      enableImproveInpDuringHydration: true,
+      framerSiteId: void 0,
+      notFoundPage: 'div',
+      isReducedMotion: void 0,
+      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locales,
+      preserveQueryParams: true,
+      RootComponent: Fragment3,
+    },
+  );
+}
+var locales = [];
 stdin_default2.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: stdin_default2, ...props, },);
+  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
 };
-var contact_sales_form_default = stdin_default2;
-export { contact_sales_form_default as default, };
+function ComponentWithRoot({ locale, ...rest },) {
+  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },), },);
+}
+Object.assign(ComponentWithRoot, stdin_default2,);
+export { ComponentWithRoot as default, };
