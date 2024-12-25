@@ -164,8 +164,15 @@ export async function bundle({
                                     JSON.stringify(config.locales) || '[]'
                                 }
 
-                                Component.Responsive = (props) => {
-                                    return <WithFramerBreakpoints Component={ComponentWithRoot} {...props} />
+                                Component.Responsive = ({ locale, ...props }) => {
+                                    return (
+                                        <WithRoot locale={locale}>
+                                            <WithFramerBreakpoints
+                                                Component={Component}
+                                                {...props}
+                                            />
+                                        </WithRoot>
+                                    )
                                 }
 
                                 export default function ComponentWithRoot({ locale, ...rest }) {
@@ -936,9 +943,7 @@ export function propControlsToType({
         t += 'import { UnframerBreakpoint } from "unframer"\n\n'
         t += `type Locale = ${
             config.locales?.length
-                ? config.locales
-                      .map((l) => `'${l.code}' | '${l.slug}'`)
-                      .join(' | ')
+                ? config.locales.map((l) => `'${l.code}'`).join(' | ')
                 : 'string'
         }\n`
         t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n\n`

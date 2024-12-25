@@ -3,7 +3,7 @@ import * as React from "react"
 
 import { UnframerBreakpoint } from "unframer"
 
-type Locale = string
+type Locale = 'it-IT'
 export interface Props {
     children?: React.ReactNode
     locale?: Locale

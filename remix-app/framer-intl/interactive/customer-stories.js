@@ -1797,7 +1797,7 @@ function WithRoot({ children, locale, },) {
         },
       },
       enableImproveInpDuringHydration: true,
-      framerSiteId: void 0,
+      framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
       notFoundPage: 'div',
       isReducedMotion: void 0,
       localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
@@ -1807,9 +1807,18 @@ function WithRoot({ children, locale, },) {
     },
   );
 }
-var locales = [];
-stdin_default3.Responsive = (props,) => {
-  return /* @__PURE__ */ jsx(WithFramerBreakpoints, { Component: ComponentWithRoot, ...props, },);
+var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+stdin_default3.Responsive = ({ locale, ...props },) => {
+  return /* @__PURE__ */ jsx(WithRoot, {
+    locale,
+    children: /* @__PURE__ */ jsx(
+      WithFramerBreakpoints,
+      {
+        Component: stdin_default3,
+        ...props,
+      },
+    ),
+  },);
 };
 function ComponentWithRoot({ locale, ...rest },) {
   return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default3, { ...rest, },), },);

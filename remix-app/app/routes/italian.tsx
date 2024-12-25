@@ -65,7 +65,7 @@ export default function Home() {
                         RootComponent: Fragment,
                     }}
                 />
-                <Hero />
+                <Hero locale='it' />
                 {/* <Component locale='it' /> */}
             </div>
         </div>
