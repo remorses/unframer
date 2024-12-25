@@ -161,8 +161,19 @@ export type Config = {
         [name: string]: string
     }
     projectId?: string
+    fullFramerProjectId?: string
     projectName?: string
-    framerWebPages?: { webPageId: string; path: string }[]
+    framerWebPages?: {
+        webPageId: string
+        components?: string[]
+        path: string
+    }[]
+    locales?: {
+        code: string
+        id: string
+        name: string
+        slug: string
+    }[]
     breakpoints?: BreakpointSizes
     tokens?: StyleToken[]
     outDir?: string

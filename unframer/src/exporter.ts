@@ -126,15 +126,44 @@ export async function bundle({
                             return {
                                 contents: /** js **/ `
                                 'use client'
+                                import { Fragment } from 'react'
+                                import { PageRoot } from 'unframer'
                                 import Component from '${await resolveRedirect({
                                     url,
                                     signal,
                                 })}'
                                 import { WithFramerBreakpoints } from 'unframer'
                                 Component.Responsive = (props) => {
-                                    return <WithFramerBreakpoints Component={Component} {...props} />
+                                    return <WithFramerBreakpoints Component={ComponentWithRoot} {...props} />
                                 }
-                                export default Component
+                                const locales = ${
+                                    JSON.stringify(config.locales) || '[]'
+                                }
+                                export default function ComponentWithRoot({ locale, ...rest }) {
+                                    return (
+                                        <PageRoot
+                                            isWebsite={true}
+                                            routeId="x"
+                                            routes={{
+                                                x: {
+                                                    elements: {},
+                                                    page: <Component {...rest} />,
+                                                    path: '/',
+                                                },
+                                            }}
+                                            enableImproveInpDuringHydration={true}
+                                            framerSiteId={${JSON.stringify(
+                                                config.fullFramerProjectId,
+                                            )}}
+                                            notFoundPage="div"
+                                            isReducedMotion={undefined}
+                                            localeId={locales?.find(l => l.slug === locale || l.code === locale || l.id === locale)?.id}
+                                            locales={locales}
+                                            preserveQueryParams={true}
+                                            RootComponent={Fragment}
+                                        />
+                                    )
+                                }
                                 `,
                                 loader: 'jsx',
                             }
@@ -529,7 +558,7 @@ export function getDarkModeSelector(opts: {
             '}'
         )
     }
-    return '.dark:root {\n' + content + '\n' + '}'
+    return '.dark {\n' + content + '\n' + '}'
 }
 
 export function getStyleTokensCss(
