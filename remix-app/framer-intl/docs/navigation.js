@@ -10,7 +10,7 @@ import { __export, } from '../chunk-MLKGABMK.js';
 
 // virtual:docs/navigation
 import { Fragment as Fragment6, } from 'react';
-import { PageRoot, } from 'unframer';
+import { ContextProviders, } from 'unframer';
 
 // https :https://framerusercontent.com/modules/5exKH8X0djOcoCxmab7W/6wRz6eIWY2O1tDWCdoFY/MlPzuwAVd.js
 import { Fragment as _Fragment, jsx as _jsx9, jsxs as _jsxs3, } from 'react/jsx-runtime';
@@ -4929,9 +4929,8 @@ import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 function WithRoot({ children, locale, },) {
   return /* @__PURE__ */ jsx(
-    PageRoot,
+    ContextProviders,
     {
-      isWebsite: true,
       routeId: 'x',
       routes: {
         x: {
@@ -4940,14 +4939,10 @@ function WithRoot({ children, locale, },) {
           path: '/',
         },
       },
-      enableImproveInpDuringHydration: true,
       framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
-      notFoundPage: 'div',
-      isReducedMotion: void 0,
-      localeId: locales?.find((l3,) => l3.slug === locale || l3.code === locale || l3.id === locale)?.id,
+      locale,
       locales,
-      preserveQueryParams: true,
-      RootComponent: Fragment6,
+      children,
     },
   );
 }

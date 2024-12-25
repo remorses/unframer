@@ -7,7 +7,7 @@ import '../chunk-MLKGABMK.js';
 
 // virtual:cards/testimonial-card
 import { Fragment as Fragment2, } from 'react';
-import { PageRoot, } from 'unframer';
+import { ContextProviders, } from 'unframer';
 
 // https :https://framerusercontent.com/modules/8SvTfjg3wtGBYHnVhhfs/BuD2NP0IUp0tXkGn5gBJ/IlmXaohIz.js
 import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -745,9 +745,8 @@ import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 function WithRoot({ children, locale, },) {
   return /* @__PURE__ */ jsx(
-    PageRoot,
+    ContextProviders,
     {
-      isWebsite: true,
       routeId: 'x',
       routes: {
         x: {
@@ -756,14 +755,10 @@ function WithRoot({ children, locale, },) {
           path: '/',
         },
       },
-      enableImproveInpDuringHydration: true,
       framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
-      notFoundPage: 'div',
-      isReducedMotion: void 0,
-      localeId: locales?.find((l,) => l.slug === locale || l.code === locale || l.id === locale)?.id,
+      locale,
       locales,
-      preserveQueryParams: true,
-      RootComponent: Fragment2,
+      children,
     },
   );
 }
