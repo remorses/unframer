@@ -117,6 +117,23 @@ export default function App() {
 }
 ```
 
+## Changing locale
+
+You can change locale of your component by passing `locale` prop to the component. The locale must be one of the country codes configured in your Framer project.
+
+```tsx
+import './framer/styles.css'
+import Logos from './framer/logos'
+
+export default function App() {
+    return (
+        <div>
+            <Logos locale='it-IT' />
+        </div>
+    )
+}
+```
+
 ## Troubleshooting
 
 If you find any errors rendering your components:
