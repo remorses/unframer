@@ -137,7 +137,14 @@ export default function App() {
 
 ## Dark Mode
 
-Unframer supports dark mode, you can add a `dark` class to any parent element of your component to enable it. Adding the `dark` class will switch your color styles CSS variables to the ones for dark mode defined in Framer.
+Unframer supports dark mode through CSS classes:
+
+1. Add the `dark` class to any parent element of your component
+2. This will automatically switch all color style variables to use the dark mode values defined in Framer
+
+That's all you need to enable dark mode for your Framer components!
+
+> This is also how Tailwind's dark mode works - when you add the `dark` class to a parent element, any Tailwind dark mode classes (like `dark:bg-gray-900`) within that element will be activated. So you can seamlessly combine Framer and Tailwind dark mode by using the same `dark` class:
 
 ```tsx
 import './framer/styles.css'
