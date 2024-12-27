@@ -17,8 +17,9 @@ const shouldDebugUnframer = !!process.env.DEBUG_UNFRAMER
 
 const prefix = '[unframer]'
 export const logger = {
+    debug: shouldDebugUnframer,
     log(...args) {
-        if (!shouldDebugUnframer) {
+        if (!logger.debug) {
             return
         }
         console.log(prefix, ...args)

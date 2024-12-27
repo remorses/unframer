@@ -17,7 +17,11 @@ let defaultOutDir = 'framer'
 
 cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--outDir <dir>', 'Output directory', { default: defaultOutDir })
+    .option('--debug', 'Enable debug logging', { default: false })
     .action(async function main(projectId, options) {
+        if (options.debug) {
+            logger.debug = true
+        }
         const outDir = options.outDir
         if (projectId) {
             logger.log(`Fetching config for project ${projectId}`)
