@@ -11,7 +11,7 @@ import { __export, } from './chunk-MLKGABMK.js';
 import { Fragment as Fragment3, } from 'react';
 import { ContextProviders, } from 'unframer';
 
-// https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/I2Qv7FAeAKh4ZcQPEAjr/mmEURJmx_.js
+// https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aSoKamKKfwCmE14riig8/mmEURJmx_.js
 import { jsx as _jsx2, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -73,7 +73,7 @@ var css2 = [
 ];
 var className2 = 'framer-au0vF';
 
-// https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/38X4xndeY8RGpNnj6Dvu/mmEURJmx_-0.js
+// https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/H5v2Mf2bzdRxYa85TzHt/mmEURJmx_-0.js
 var mmEURJmx_0_exports = {};
 __export(mmEURJmx_0_exports, {
   __FramerMetadata__: () => __FramerMetadata__,
@@ -96,7 +96,7 @@ var __FramerMetadata__ = {
   },
 };
 
-// https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/38X4xndeY8RGpNnj6Dvu/mmEURJmx_.js
+// https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/H5v2Mf2bzdRxYa85TzHt/mmEURJmx_.js
 var valuesByLocaleId = { M_lnJlsvf: mmEURJmx_0_exports, };
 function getLocalizedValue(key, locale,) {
   while (locale) {
@@ -109,10 +109,10 @@ function getLocalizedValue(key, locale,) {
   }
 }
 
-// https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/I2Qv7FAeAKh4ZcQPEAjr/mmEURJmx_.js
+// https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aSoKamKKfwCmE14riig8/mmEURJmx_.js
 var ButtonsPrimaryFonts = getFonts(stdin_default,);
 var cycleOrder = ['irmdDvW3M', 'k0WNJFkxG', 'AT8wrmErb',];
-var serializationHash = 'framer-N4WK0';
+var serializationHash = 'framer-Pk90n';
 var variantClassNames = { AT8wrmErb: 'framer-v-1v3ajj8', irmdDvW3M: 'framer-v-1tm8u0e', k0WNJFkxG: 'framer-v-139ufs9', };
 function addPropertyOverrides(overrides, ...variants) {
   const nextOverrides = {};
@@ -419,24 +419,24 @@ var Component = /* @__PURE__ */ React2.forwardRef(function (props, ref,) {
 },);
 var css3 = [
   '@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }',
-  '.framer-N4WK0.framer-wvqohw, .framer-N4WK0 .framer-wvqohw { display: block; }',
-  '.framer-N4WK0.framer-1tm8u0e { align-content: center; align-items: center; display: flex; flex-direction: row; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: hidden; padding: 0px 20px 0px 20px; position: relative; width: 1440px; }',
-  '.framer-N4WK0 .framer-wwjp8a { align-content: center; align-items: center; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; max-width: 1200px; overflow: hidden; padding: 200px 40px 200px 40px; position: relative; width: 1px; }',
-  '.framer-N4WK0 .framer-779yo8 { bottom: 0px; flex: none; left: 0px; overflow: hidden; position: absolute; right: 0px; top: 0px; z-index: 0; }',
-  '.framer-N4WK0 .framer-h6rytd { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; max-width: 600px; overflow: hidden; padding: 0px; position: relative; width: 100%; }',
-  '.framer-N4WK0 .framer-geefo3 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 20px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }',
-  '.framer-N4WK0 .framer-qiuusm, .framer-N4WK0 .framer-w3ea6e, .framer-N4WK0 .framer-nta2qk { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }',
-  '.framer-N4WK0 .framer-1tmomy5 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: wrap; gap: 16px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }',
-  '.framer-N4WK0 .framer-xkdxln-container, .framer-N4WK0 .framer-19f5vcq-container { flex: none; height: auto; position: relative; width: auto; }',
-  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-N4WK0.framer-1tm8u0e, .framer-N4WK0 .framer-wwjp8a, .framer-N4WK0 .framer-h6rytd, .framer-N4WK0 .framer-geefo3, .framer-N4WK0 .framer-1tmomy5 { gap: 0px; } .framer-N4WK0.framer-1tm8u0e > * { margin: 0px; margin-left: calc(32px / 2); margin-right: calc(32px / 2); } .framer-N4WK0.framer-1tm8u0e > :first-child, .framer-N4WK0 .framer-1tmomy5 > :first-child { margin-left: 0px; } .framer-N4WK0.framer-1tm8u0e > :last-child, .framer-N4WK0 .framer-1tmomy5 > :last-child { margin-right: 0px; } .framer-N4WK0 .framer-wwjp8a > *, .framer-N4WK0 .framer-h6rytd > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-N4WK0 .framer-wwjp8a > :first-child, .framer-N4WK0 .framer-h6rytd > :first-child, .framer-N4WK0 .framer-geefo3 > :first-child { margin-top: 0px; } .framer-N4WK0 .framer-wwjp8a > :last-child, .framer-N4WK0 .framer-h6rytd > :last-child, .framer-N4WK0 .framer-geefo3 > :last-child { margin-bottom: 0px; } .framer-N4WK0 .framer-geefo3 > * { margin: 0px; margin-bottom: calc(20px / 2); margin-top: calc(20px / 2); } .framer-N4WK0 .framer-1tmomy5 > * { margin: 0px; margin-left: calc(16px / 2); margin-right: calc(16px / 2); } }',
-  '.framer-N4WK0.framer-v-139ufs9.framer-1tm8u0e { width: 810px; }',
-  '.framer-N4WK0.framer-v-1v3ajj8.framer-1tm8u0e { padding: 0px 12px 0px 12px; width: 390px; }',
-  '.framer-N4WK0.framer-v-1v3ajj8 .framer-wwjp8a { padding: 160px 20px 160px 20px; }',
+  '.framer-Pk90n.framer-wvqohw, .framer-Pk90n .framer-wvqohw { display: block; }',
+  '.framer-Pk90n.framer-1tm8u0e { align-content: center; align-items: center; cursor: pointer; display: flex; flex-direction: row; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: hidden; padding: 0px 20px 0px 20px; position: relative; width: 1440px; }',
+  '.framer-Pk90n .framer-wwjp8a { align-content: center; align-items: center; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; max-width: 1200px; overflow: hidden; padding: 200px 40px 200px 40px; position: relative; width: 1px; }',
+  '.framer-Pk90n .framer-779yo8 { bottom: 0px; flex: none; left: 0px; overflow: hidden; position: absolute; right: 0px; top: 0px; z-index: 0; }',
+  '.framer-Pk90n .framer-h6rytd { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; max-width: 600px; overflow: hidden; padding: 0px; position: relative; width: 100%; }',
+  '.framer-Pk90n .framer-geefo3 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 20px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }',
+  '.framer-Pk90n .framer-qiuusm, .framer-Pk90n .framer-w3ea6e, .framer-Pk90n .framer-nta2qk { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }',
+  '.framer-Pk90n .framer-1tmomy5 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: wrap; gap: 16px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }',
+  '.framer-Pk90n .framer-xkdxln-container, .framer-Pk90n .framer-19f5vcq-container { flex: none; height: auto; position: relative; width: auto; }',
+  '@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-Pk90n.framer-1tm8u0e, .framer-Pk90n .framer-wwjp8a, .framer-Pk90n .framer-h6rytd, .framer-Pk90n .framer-geefo3, .framer-Pk90n .framer-1tmomy5 { gap: 0px; } .framer-Pk90n.framer-1tm8u0e > * { margin: 0px; margin-left: calc(32px / 2); margin-right: calc(32px / 2); } .framer-Pk90n.framer-1tm8u0e > :first-child, .framer-Pk90n .framer-1tmomy5 > :first-child { margin-left: 0px; } .framer-Pk90n.framer-1tm8u0e > :last-child, .framer-Pk90n .framer-1tmomy5 > :last-child { margin-right: 0px; } .framer-Pk90n .framer-wwjp8a > *, .framer-Pk90n .framer-h6rytd > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-Pk90n .framer-wwjp8a > :first-child, .framer-Pk90n .framer-h6rytd > :first-child, .framer-Pk90n .framer-geefo3 > :first-child { margin-top: 0px; } .framer-Pk90n .framer-wwjp8a > :last-child, .framer-Pk90n .framer-h6rytd > :last-child, .framer-Pk90n .framer-geefo3 > :last-child { margin-bottom: 0px; } .framer-Pk90n .framer-geefo3 > * { margin: 0px; margin-bottom: calc(20px / 2); margin-top: calc(20px / 2); } .framer-Pk90n .framer-1tmomy5 > * { margin: 0px; margin-left: calc(16px / 2); margin-right: calc(16px / 2); } }',
+  '.framer-Pk90n.framer-v-139ufs9.framer-1tm8u0e { width: 810px; }',
+  '.framer-Pk90n.framer-v-1v3ajj8.framer-1tm8u0e { padding: 0px 12px 0px 12px; width: 390px; }',
+  '.framer-Pk90n.framer-v-1v3ajj8 .framer-wwjp8a { padding: 160px 20px 160px 20px; }',
   ...css2,
   ...css,
-  '.framer-N4WK0[data-border="true"]::after, .framer-N4WK0 [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
+  '.framer-Pk90n[data-border="true"]::after, .framer-Pk90n [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
-var FramermmEURJmx_ = withCSS(Component, css3, 'framer-N4WK0',);
+var FramermmEURJmx_ = withCSS(Component, css3, 'framer-Pk90n',);
 var stdin_default2 = FramermmEURJmx_;
 FramermmEURJmx_.displayName = 'HeroSection';
 FramermmEURJmx_.defaultProps = { height: 720, width: 1440, };
@@ -511,7 +511,8 @@ addFonts(FramermmEURJmx_, [
 // virtual:hero-section
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-function WithRoot({ children, locale, },) {
+var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+stdin_default2.Responsive = ({ locale, ...props },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
@@ -519,32 +520,39 @@ function WithRoot({ children, locale, },) {
       routes: {
         x: {
           elements: {},
-          page: children,
+          page: /* @__PURE__ */ jsx(
+            WithFramerBreakpoints,
+            {
+              Component: stdin_default2,
+              ...props,
+            },
+          ),
           path: '/',
         },
       },
       framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
       locale,
       locales,
-      children,
     },
   );
-}
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
-stdin_default2.Responsive = ({ locale, ...props },) => {
-  return /* @__PURE__ */ jsx(WithRoot, {
-    locale,
-    children: /* @__PURE__ */ jsx(
-      WithFramerBreakpoints,
-      {
-        Component: stdin_default2,
-        ...props,
-      },
-    ),
-  },);
 };
 function ComponentWithRoot({ locale, ...rest },) {
-  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },), },);
+  return /* @__PURE__ */ jsx(
+    ContextProviders,
+    {
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },),
+          path: '/',
+        },
+      },
+      framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
+      locale,
+      locales,
+    },
+  );
 }
 Object.assign(ComponentWithRoot, stdin_default2,);
 export { ComponentWithRoot as default, };

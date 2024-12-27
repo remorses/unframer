@@ -11,7 +11,8 @@ import { Fragment, } from 'react';
 import { ContextProviders, } from 'unframer';
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-function WithRoot({ children, locale, },) {
+var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+stdin_default.Responsive = ({ locale, ...props },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
@@ -19,32 +20,39 @@ function WithRoot({ children, locale, },) {
       routes: {
         x: {
           elements: {},
-          page: children,
+          page: /* @__PURE__ */ jsx(
+            WithFramerBreakpoints,
+            {
+              Component: stdin_default,
+              ...props,
+            },
+          ),
           path: '/',
         },
       },
       framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
       locale,
       locales,
-      children,
     },
   );
-}
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
-stdin_default.Responsive = ({ locale, ...props },) => {
-  return /* @__PURE__ */ jsx(WithRoot, {
-    locale,
-    children: /* @__PURE__ */ jsx(
-      WithFramerBreakpoints,
-      {
-        Component: stdin_default,
-        ...props,
-      },
-    ),
-  },);
 };
 function ComponentWithRoot({ locale, ...rest },) {
-  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default, { ...rest, },), },);
+  return /* @__PURE__ */ jsx(
+    ContextProviders,
+    {
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: /* @__PURE__ */ jsx(stdin_default, { ...rest, },),
+          path: '/',
+        },
+      },
+      framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
+      locale,
+      locales,
+    },
+  );
 }
 Object.assign(ComponentWithRoot, stdin_default,);
 export { ComponentWithRoot as default, };
