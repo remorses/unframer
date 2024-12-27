@@ -142,61 +142,60 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             return ''
         },
     )
-
-    const parts = useMemo(() => {
-        const allBreakpoints = fillBreakpoints(_breakpointsMap)
-        const variants = new Map<
-            string,
-            { className: string; variant: string; breakpoints: string[] }
-        >()
-        for (let breakpointName of Object.keys(allBreakpoints)) {
-            const realVariant = allBreakpoints[breakpointName]
-            if (!realVariant) {
-                continue
-            }
-
-            const existingVariant = variants.get(realVariant)
-            if (existingVariant) {
-                existingVariant.breakpoints.push(breakpointName)
-                existingVariant.className = classNames(
-                    existingVariant.className,
-                    `unframer-${breakpointName}`,
-                )
-            } else {
-                variants.set(realVariant, {
-                    className: classNames('unframer-hidden', `unframer-${breakpointName}`),
-                    variant: realVariant,
-                    breakpoints: [breakpointName],
-                })
-            }
+    const allBreakpoints = fillBreakpoints(_breakpointsMap)
+    const variants = new Map<
+        string,
+        { className: string; variant: string; breakpoints: string[] }
+    >()
+    for (let breakpointName of Object.keys(allBreakpoints)) {
+        const realVariant = allBreakpoints[breakpointName]
+        if (!realVariant) {
+            continue
         }
-        return [...variants.values()].map(
-            ({ className, breakpoints, variant }) => {
-                const shouldShow =
-                    !currentBreakpoint ||
-                    breakpoints.includes(currentBreakpoint)
-                if (!shouldShow) {
-                    return null
-                }
-                return (
-                    <div key={variant} className={className}>
-                        {/* @ts-ignore */}
-                        <Component
-                            ref={ref}
-                            key={variant}
-                            // LayoutGroup is used internally
-                            layoutId={id + variant}
-                            // layoutDependency={id}
-                            // layoutId={id + variant}
-                            // layoutId={breakpointName}
-                            {...rest}
-                            variant={variant as any}
-                        />
-                    </div>
-                )
-            },
-        )
-    }, [currentBreakpoint, rest, _breakpointsMap])
+
+        const existingVariant = variants.get(realVariant)
+        if (existingVariant) {
+            existingVariant.breakpoints.push(breakpointName)
+            existingVariant.className = classNames(
+                existingVariant.className,
+                `unframer-${breakpointName}`,
+            )
+        } else {
+            variants.set(realVariant, {
+                className: classNames(
+                    'unframer-hidden',
+                    `unframer-${breakpointName}`,
+                ),
+                variant: realVariant,
+                breakpoints: [breakpointName],
+            })
+        }
+    }
+    const parts = [...variants.values()].map(
+        ({ className, breakpoints, variant }) => {
+            const shouldShow =
+                !currentBreakpoint || breakpoints.includes(currentBreakpoint)
+            if (!shouldShow) {
+                return null
+            }
+            return (
+                <div key={variant} className={className}>
+                    {/* @ts-ignore */}
+                    <Component
+                        ref={ref}
+                        key={variant}
+                        // LayoutGroup is used internally
+                        layoutId={id + variant}
+                        // layoutDependency={id}
+                        // layoutId={id + variant}
+                        // layoutId={breakpointName}
+                        {...rest}
+                        variant={variant as any}
+                    />
+                </div>
+            )
+        },
+    )
 
     return parts
 })
