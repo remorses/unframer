@@ -156,17 +156,19 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             }
 
             const existingVariant = variants.get(realVariant)
-            let className = classNames(
-                existingVariant?.className || 'unframer-hidden',
-                `unframer-${breakpointName}`,
-            )
-            variants.set(realVariant, {
-                className,
-                variant: realVariant,
-                breakpoints: existingVariant
-                    ? [...existingVariant.breakpoints, breakpointName]
-                    : [breakpointName],
-            })
+            if (existingVariant) {
+                existingVariant.breakpoints.push(breakpointName)
+                existingVariant.className = classNames(
+                    existingVariant.className,
+                    `unframer-${breakpointName}`,
+                )
+            } else {
+                variants.set(realVariant, {
+                    className: classNames('unframer-hidden', `unframer-${breakpointName}`),
+                    variant: realVariant,
+                    breakpoints: [breakpointName],
+                })
+            }
         }
         return [...variants.values()].map(
             ({ className, breakpoints, variant }) => {
