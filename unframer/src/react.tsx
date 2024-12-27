@@ -205,6 +205,21 @@ const onResize = (callback) => {
     return () => window.removeEventListener('resize', callback)
 }
 
+const onResizeWithDebounce = (callback) => {
+    let timeoutId
+    const debouncedCallback = () => {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+            callback()
+        }, 16)
+    }
+    window.addEventListener('resize', debouncedCallback)
+    return () => {
+        clearTimeout(timeoutId)
+        window.removeEventListener('resize', debouncedCallback)
+    }
+}
+
 import {
     // @ts-ignore
     CustomCursorHost,
