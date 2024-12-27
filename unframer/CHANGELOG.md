@@ -1,5 +1,11 @@
 # unframer
 
+## 2.10.0
+
+### Minor Changes
+
+-   Add --debug option, increase esbuild reliability
+
 ## 2.9.2
 
 ### Patch Changes
