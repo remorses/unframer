@@ -1,5 +1,11 @@
 # unframer
 
+## 2.9.2
+
+### Patch Changes
+
+-   Update esbuild
+
 ## 2.9.1
 
 ### Patch Changes

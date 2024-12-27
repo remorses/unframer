@@ -10,6 +10,7 @@ Download framer components as simple files
 
 -   Works with any React framework (Next.js, Remix, Vite, etc)
 -   Includes all your components dependencies
+-   Works with Framer locales, fetch, Framer Forms, color styles, dark mode (via `dark` class), etc
 -   Has Typescript support, inferred from your component variables (like `variant`)
 
 ## Usage
@@ -134,6 +135,30 @@ export default function App() {
 }
 ```
 
+## Dark Mode
+
+Unframer supports dark mode through CSS classes:
+
+1. Add the `dark` class to any parent element of your component
+2. This will automatically switch all color style variables to use the dark mode values defined in Framer
+
+That's all you need to enable dark mode for your Framer components!
+
+> This is also how Tailwind's dark mode works - when you add the `dark` class to a parent element, any Tailwind dark mode classes (like `dark:bg-gray-900`) within that element will be activated. So you can seamlessly combine Framer and Tailwind dark mode by using the same `dark` class:
+
+```tsx
+import './framer/styles.css'
+import Logos from './framer/logos'
+
+export default function App() {
+    return (
+        <div className='dark'>
+            <Logos />
+        </div>
+    )
+}
+```
+
 ## Troubleshooting
 
 If you find any errors rendering your components:
@@ -172,3 +197,7 @@ For example in May 2024 Framer upgraded to React 19 and unframer broke, the reas
 ## Example
 
 Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
+
+```
+
+```
