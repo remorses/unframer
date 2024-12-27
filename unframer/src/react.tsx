@@ -145,44 +145,55 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
 
     const parts = useMemo(() => {
         const allBreakpoints = fillBreakpoints(_breakpointsMap)
-        const variants = {} as Record<
+        const variants = new Map<
             string,
-            { className: string; variant: string }
-        >
+            { className: string; variant: string; breakpoints: string[] }
+        >()
         for (let breakpointName of Object.keys(allBreakpoints)) {
             const realVariant = allBreakpoints[breakpointName]
             if (!realVariant) {
                 continue
             }
-            if (currentBreakpoint && currentBreakpoint !== breakpointName) {
-                continue
-            }
 
+            const existingVariant = variants.get(realVariant)
             let className = classNames(
-                variants[realVariant]?.className || 'unframer-hidden',
+                existingVariant?.className || 'unframer-hidden',
                 `unframer-${breakpointName}`,
             )
-            variants[realVariant] = { className, variant: realVariant }
+            variants.set(realVariant, {
+                className,
+                variant: realVariant,
+                breakpoints: existingVariant
+                    ? [...existingVariant.breakpoints, breakpointName]
+                    : [breakpointName],
+            })
         }
-
-        return Object.values(variants).map(({ className, variant }) => {
-            return (
-                <div key={variant} className={className}>
-                    {/* @ts-ignore */}
-                    <Component
-                        ref={ref}
-                        key={variant}
-                        // LayoutGroup is used internally
-                        layoutId={id + variant}
-                        // layoutDependency={id}
-                        // layoutId={id + variant}
-                        // layoutId={breakpointName}
-                        {...rest}
-                        variant={variant as any}
-                    />
-                </div>
-            )
-        })
+        return [...variants.values()].map(
+            ({ className, breakpoints, variant }) => {
+                const shouldShow =
+                    !currentBreakpoint ||
+                    breakpoints.includes(currentBreakpoint)
+                if (!shouldShow) {
+                    return null
+                }
+                return (
+                    <div key={variant} className={className}>
+                        {/* @ts-ignore */}
+                        <Component
+                            ref={ref}
+                            key={variant}
+                            // LayoutGroup is used internally
+                            layoutId={id + variant}
+                            // layoutDependency={id}
+                            // layoutId={id + variant}
+                            // layoutId={breakpointName}
+                            {...rest}
+                            variant={variant as any}
+                        />
+                    </div>
+                )
+            },
+        )
     }, [currentBreakpoint, rest, _breakpointsMap])
 
     return parts
