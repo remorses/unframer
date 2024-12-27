@@ -133,15 +133,21 @@ export async function bundle({
                                     signal,
                                 })}'
                                 import { WithFramerBreakpoints } from 'unframer'
+                                const locales = ${
+                                    JSON.stringify(config.locales) || '[]'
+                                }
 
-                                function WithRoot({ children, locale }) {
+                                Component.Responsive = ({ locale, ...props }) => {
                                     return (
                                         <ContextProviders
                                             routeId="x"
                                             routes={{
                                                 x: {
                                                     elements: {},
-                                                    page: children,
+                                                    page: <WithFramerBreakpoints
+                                                        Component={Component}
+                                                        {...props}
+                                                    />,
                                                     path: '/',
                                                 },
                                             }}
@@ -150,31 +156,27 @@ export async function bundle({
                                             )}}
                                             locale={locale}
                                             locales={locales}
-                                            children={children}
                                         />
-                                    )
-                                }
-
-                                const locales = ${
-                                    JSON.stringify(config.locales) || '[]'
-                                }
-
-                                Component.Responsive = ({ locale, ...props }) => {
-                                    return (
-                                        <WithRoot locale={locale}>
-                                            <WithFramerBreakpoints
-                                                Component={Component}
-                                                {...props}
-                                            />
-                                        </WithRoot>
                                     )
                                 }
 
                                 export default function ComponentWithRoot({ locale, ...rest }) {
                                     return (
-                                        <WithRoot locale={locale}>
-                                            <Component {...rest} />
-                                        </WithRoot>
+                                        <ContextProviders
+                                            routeId="x"
+                                            routes={{
+                                                x: {
+                                                    elements: {},
+                                                    page: <Component {...rest} />,
+                                                    path: '/',
+                                                },
+                                            }}
+                                            framerSiteId={${JSON.stringify(
+                                                config.fullFramerProjectId,
+                                            )}}
+                                            locale={locale}
+                                            locales={locales}
+                                        />
                                     )
                                 }
                                 Object.assign(ComponentWithRoot, Component)

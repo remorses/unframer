@@ -308,7 +308,8 @@ addFonts(FramerinWBH4dIK, [
 // virtual:rich
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-function WithRoot({ children, locale, },) {
+var locales = [];
+stdin_default.Responsive = ({ locale, ...props2 },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
@@ -316,32 +317,39 @@ function WithRoot({ children, locale, },) {
       routes: {
         x: {
           elements: {},
-          page: children,
+          page: /* @__PURE__ */ jsx(
+            WithFramerBreakpoints,
+            {
+              Component: stdin_default,
+              ...props2,
+            },
+          ),
           path: '/',
         },
       },
       framerSiteId: void 0,
       locale,
       locales,
-      children,
     },
   );
-}
-var locales = [];
-stdin_default.Responsive = ({ locale, ...props2 },) => {
-  return /* @__PURE__ */ jsx(WithRoot, {
-    locale,
-    children: /* @__PURE__ */ jsx(
-      WithFramerBreakpoints,
-      {
-        Component: stdin_default,
-        ...props2,
-      },
-    ),
-  },);
 };
 function ComponentWithRoot({ locale, ...rest },) {
-  return /* @__PURE__ */ jsx(WithRoot, { locale, children: /* @__PURE__ */ jsx(stdin_default, { ...rest, },), },);
+  return /* @__PURE__ */ jsx(
+    ContextProviders,
+    {
+      routeId: 'x',
+      routes: {
+        x: {
+          elements: {},
+          page: /* @__PURE__ */ jsx(stdin_default, { ...rest, },),
+          path: '/',
+        },
+      },
+      framerSiteId: void 0,
+      locale,
+      locales,
+    },
+  );
 }
 Object.assign(ComponentWithRoot, stdin_default,);
 export { ComponentWithRoot as default, };
