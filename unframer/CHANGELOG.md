@@ -1,5 +1,11 @@
 # unframer
 
+## 2.9.1
+
+### Patch Changes
+
+-   Fix breakpoint selection if not all breakpoints variants are defined
+
 ## 2.9.0
 
 ### Minor Changes

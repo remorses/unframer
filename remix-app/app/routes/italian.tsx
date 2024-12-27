@@ -31,7 +31,7 @@ export default function Home() {
     return (
         <div className='dark'>
             <div className=' dark:bg-gray-900 '>
-                <PageRoot
+                {/* <PageRoot
                     {...{
                         isWebsite: true,
                         routeId: 'x',
@@ -65,7 +65,7 @@ export default function Home() {
                         preserveQueryParams: true,
                         RootComponent: Fragment,
                     }}
-                />
+                /> */}
                 <Hero locale='it-IT' />
                 <Navigation locale='it-IT' />
                 {/* <Component locale='it' /> */}

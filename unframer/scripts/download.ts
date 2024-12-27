@@ -197,6 +197,7 @@ export async function fixFramerCode({ resultFile }) {
     if (!codeAfter.match(toRemove)) {
         throw new Error('Could not find expected ReferenceError string in bundle')
     }
+    codeAfter +=  '\n\n'
     codeAfter += dedent`
     export { Router, FetchClientProvider, FormContext }
     `
