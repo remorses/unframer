@@ -10,3 +10,4 @@ next.lock
 .next
 
 example-framer-site
+isolate-*.log
