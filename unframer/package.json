@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "2.10.0",
+    "version": "2.10.1",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
@@ -62,7 +62,6 @@
         "marked": "^15.0.3",
         "marked-terminal": "^7.2.1",
         "nanospinner": "^1.2.0",
-        "native-fetch": "^4.0.2",
         "picocolors": "^1.0.1",
         "real-framer-motion": "npm:framer-motion@11.2.10",
         "string-dedent": "^3.0.1"

@@ -1,5 +1,11 @@
 # unframer
 
+## 2.10.1
+
+### Patch Changes
+
+-   Do not format files that are too big, fix hanging
+
 ## 2.10.0
 
 ### Minor Changes

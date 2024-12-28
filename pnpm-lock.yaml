@@ -186,9 +186,6 @@ importers:
       nanospinner:
         specifier: ^1.2.0
         version: 1.2.0
-      native-fetch:
-        specifier: ^4.0.2
-        version: 4.0.2(undici@6.19.8)
       picocolors:
         specifier: ^1.0.1
         version: 1.0.1
@@ -4143,11 +4140,6 @@ packages:
 
   nanospinner@1.2.0:
     resolution: {integrity: sha512-dGxYcEj8YhuxjVO3PYmnj1nBhtwUkvuwYbLl/MduBPmQUPy3xBtG/ScJgqZgntQkX44UQaCSlFeW4rS5fUR/Sw==}
-
-  native-fetch@4.0.2:
-    resolution: {integrity: sha512-4QcVlKFtv2EYVS5MBgsGX5+NWKtbDbIECdUXDBGDMAZXq3Jkv9zf+y8iS7Ub8fEdga3GpYeazp9gauNqXHJOCg==}
-    peerDependencies:
-      undici: '*'
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -10284,10 +10276,6 @@ snapshots:
   nanospinner@1.2.0:
     dependencies:
       picocolors: 1.1.1
-
-  native-fetch@4.0.2(undici@6.19.8):
-    dependencies:
-      undici: 6.19.8
 
   natural-compare@1.4.0: {}
 
