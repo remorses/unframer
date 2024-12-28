@@ -206,18 +206,30 @@ export async function bundle({
             // })
             // let inputCode = res!.code!
 
-            let inputCode = file.text
+            const twoMb = 2 * 1024 * 1024
 
-            let codeNew =
-                `// @ts-nocheck\n` +
-                `/* eslint-disable */\n` +
-                doNotEditComment +
-                dprint.format('file.jsx', inputCode, {
+            let formatted = file.text
+            if (file.text.length < twoMb) {
+                formatted = dprint.format('file.jsx', file.text, {
                     lineWidth: 140,
                     quoteStyle: 'alwaysSingle',
                     trailingCommas: 'always',
                     semiColons: 'always',
                 })
+            } else {
+                spinner.info(
+                    `skipping formatting for ${path.relative(
+                        out,
+                        file.path,
+                    )}, too big`,
+                )
+            }
+
+            let codeNew =
+                `// @ts-nocheck\n` +
+                `/* eslint-disable */\n` +
+                doNotEditComment +
+                formatted
             if (framerWebPages?.length) {
                 codeNew = replaceWebPageIds({
                     code: codeNew,
