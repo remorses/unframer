@@ -206,10 +206,10 @@ export async function bundle({
             // })
             // let inputCode = res!.code!
 
-            const twoMb = 2 * 1024 * 1024
+            const tooBig = 1 * 1024 * 1024
 
             let formatted = file.text
-            if (file.text.length < twoMb) {
+            if (file.text.length < tooBig) {
                 formatted = dprint.format('file.jsx', file.text, {
                     lineWidth: 140,
                     quoteStyle: 'alwaysSingle',
