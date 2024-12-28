@@ -218,7 +218,7 @@ export async function bundle({
                 })
             } else {
                 spinner.info(
-                    `skipping formatting for ${path.relative(
+                    `skipping formatting ${path.relative(
                         out,
                         file.path,
                     )}, too big`,
