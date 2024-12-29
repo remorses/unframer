@@ -2,10 +2,10 @@
     "extends": "../tsconfig.base.json",
     "compilerOptions": {
         "rootDir": "src",
-        "target": "ES2015",
+        "target": "ESNext",
         "esModuleInterop": true,
         "lib": ["dom"],
-        "moduleResolution": "Node",
+        "moduleResolution": "node16",
         "module": "CommonJS",
         "noEmit": false,
         "skipLibCheck": true,

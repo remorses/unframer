@@ -43,7 +43,7 @@ function validateUrl(url: string) {
 
 export type StyleToken = {
     id: string
-    name?: string
+    name?: string | null
     lightColor: string
     darkColor: string
 }

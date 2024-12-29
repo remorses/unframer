@@ -1,15 +1,15 @@
 import { setMaxListeners } from 'events'
 import JSON from 'json5'
 import { bundle, StyleToken } from './exporter.js'
+import { createClient } from './generated/api-client.js'
 
 import { cac } from 'cac'
 import findUp from 'find-up'
-import fs from 'fs-extra'
+import fs from 'fs'
 import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
 import { componentNameToPath, logger, spinner } from './utils.js'
 const configNames = ['unframer.config.json', 'unframer.json']
-import kebabCase from 'just-kebab-case'
 
 export const cli = cac('unframer')
 
@@ -25,18 +25,15 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         const outDir = options.outDir
         if (projectId) {
             logger.log(`Fetching config for project ${projectId}`)
-            const response = await fetch(
-                new URL(
-                    `/api/plugins/reactExportPlugin/project/${projectId}`,
-                    process.env.UNFRAMER_SERVER_URL || 'https://unframer.co',
-                ).toString(),
-            )
-            if (!response.ok) {
-                console.error(`Failed to fetch Framer config`)
-                logger.error('Response: ' + (await response.text()))
-                return
+            const client = createClient({
+                url: process.env.UNFRAMER_SERVER_URL || 'https://unframer.co',
+            })
+            const { data, error } = await client.api.plugins.reactExportPlugin
+                .project({ projectId })
+                .get()
+            if (error) {
+                throw error
             }
-            const data = await response.json()
             logger.log('unframer data', data)
             const projectName = data?.project?.projectName || ''
             if (projectName) {
@@ -46,9 +43,9 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             return await bundle({
                 config: {
                     outDir,
-                    projectId: data?.project?.id,
+                    projectId: data?.project?.projectId,
                     projectName,
-                    fullFramerProjectId: data?.project?.fullFramerProjectId,
+                    fullFramerProjectId: data?.project?.fullFramerProjectId!,
                     locales: data?.locales,
                     components: Object.fromEntries(
                         data.components.map((c) => [
