@@ -1,5 +1,4 @@
 import { createSpiceflowClient } from 'spiceflow/client';
-import { env } from 'website/src/lib/env';
 export function createClient({ url }) {
     const client = createSpiceflowClient(url, {
         // async fetch(input, requestInit) {
@@ -23,5 +22,5 @@ export function createClient({ url }) {
     });
     return client;
 }
-export const websiteApiClient = createClient({ url: env.PUBLIC_URL });
+export const websiteApiClient = createClient({ url: process.env.PUBLIC_URL });
 //# sourceMappingURL=api-client.js.map

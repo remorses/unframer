@@ -17,52 +17,88 @@ let defaultOutDir = 'framer'
 
 cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--outDir <dir>', 'Output directory', { default: defaultOutDir })
+    .option('--watch', 'Watch for changes and rebuild', { default: false })
     .option('--debug', 'Enable debug logging', { default: false })
     .action(async function main(projectId, options) {
         if (options.debug) {
             logger.debug = true
         }
         const outDir = options.outDir
+        const controller = new AbortController()
+        const signal = controller.signal
         if (projectId) {
             logger.log(`Fetching config for project ${projectId}`)
             const client = createClient({
                 url: process.env.UNFRAMER_SERVER_URL || 'https://unframer.co',
             })
-            const { data, error } = await client.api.plugins.reactExportPlugin
-                .project({ projectId })
-                .get()
+            const { data: stream, error } =
+                await client.api.plugins.reactExportPlugin
+                    .project({ projectId })
+                    .subscribe.get({ fetch: { signal } })
             if (error) {
                 throw error
             }
-            logger.log('unframer data', data)
-            const projectName = data?.project?.projectName || ''
-            if (projectName) {
-                spinner.info(`Using project: ${projectName}`)
-            }
-            let cwd = path.resolve(process.cwd(), outDir || 'framer')
-            return await bundle({
-                config: {
-                    outDir,
-                    projectId: data?.project?.projectId,
-                    projectName,
-                    fullFramerProjectId: data?.project?.fullFramerProjectId!,
-                    locales: data?.locales,
-                    components: Object.fromEntries(
-                        data.components.map((c) => [
-                            componentNameToPath(c.name),
-                            c.url,
-                        ]),
-                    ),
-                    tokens: data.colorStyles,
-                    framerWebPages: data.framerWebPages || [],
-                },
-                watch: false,
+            let rebuild: any
+            let building = false
+            for await (const data of stream) {
+                if (data.type === 'project') {
+                    logger.log('unframer data', data)
+                    const projectName = data?.project?.projectName || ''
+                    if (projectName) {
+                        spinner.info(`Using project: ${projectName}`)
+                    }
+                    let cwd = path.resolve(process.cwd(), outDir || 'framer')
+                    const res = await bundle({
+                        config: {
+                            outDir,
+                            projectId: data?.project?.projectId,
+                            projectName,
+                            fullFramerProjectId:
+                                data?.project?.fullFramerProjectId!,
+                            locales: data?.locales,
+                            components: Object.fromEntries(
+                                data.components.map((c) => [
+                                    componentNameToPath(c.name),
+                                    c.url?.split('@')[0],
+                                ]),
+                            ),
+                            tokens: data.colorStyles,
+                            framerWebPages: data.framerWebPages || [],
+                        },
+                        watch: false,
 
-                cwd,
-                signal: new AbortController().signal,
-            })
+                        cwd,
+                        signal,
+                    })
+                    if (!options.watch) {
+                        controller.abort()
+                        return
+                    }
+                    spinner.start(
+                        `Waiting for Framer changes, try editing a component...`,
+                    )
+                    // spinner.update()
+                    rebuild = res?.rebuild
+                } else if (data.type === 'change') {
+                    if (building) {
+                        continue
+                    }
+                    logger.log('unframer publish data', data)
+                    spinner.info(`Detected change in Framer, rebuilding...`)
+                    if (!rebuild) {
+                        throw new Error('No rebuild function found')
+                    }
+                    building = true
+                    rebuild?.().finally(() => {
+                        building = false
+                    })
+                } else {
+                    // console.log({ data })
+                }
+            }
         }
 
+        // legacy behavior without Framer plugin
         fixOldUnframerPath()
         const cwd = process.cwd()
         logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
@@ -82,7 +118,6 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             config.outDir = outDir
         }
 
-        let controller = new AbortController()
         setMaxListeners(0, controller.signal)
         await bundle({
             config,

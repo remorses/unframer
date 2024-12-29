@@ -34,9 +34,9 @@ export declare function createClient({ url }: {
                 };
                 rephrase: {
                     post: (body: {
-                        url: string;
                         oldText: import("./rewrite").OldTextTree;
                         sourceHtml: string | null;
+                        url: string;
                         description?: string | null | undefined;
                         projectName?: string | undefined;
                         pagePath?: string | undefined;
@@ -157,8 +157,8 @@ export declare function createClient({ url }: {
                 };
                 syncsThisMonth: {
                     post: (body: {
-                        projectId?: string | undefined;
                         projectName?: string | undefined;
+                        projectId?: string | undefined;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -177,40 +177,40 @@ export declare function createClient({ url }: {
                     }) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             subs: ({
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null;
                             freeSyncs: number;
                             manageSubUrl: string | undefined;
@@ -219,10 +219,10 @@ export declare function createClient({ url }: {
                 };
                 frontmatter: {
                     post: (body: {
-                        owner: string;
-                        repo: string;
                         basePath: string;
                         githubAccountLogin: string;
+                        owner: string;
+                        repo: string;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -238,12 +238,12 @@ export declare function createClient({ url }: {
                 };
                 syncGithub: {
                     post: (body: {
-                        projectId: string;
-                        owner: string;
-                        projectName: string;
-                        repo: string;
                         basePath: string;
+                        projectName: string;
                         githubAccountLogin: string;
+                        owner: string;
+                        projectId: string;
+                        repo: string;
                         itemIds?: string[] | undefined;
                         mapFieldsConfig?: import("framer-plugin").CollectionField[] | undefined;
                         onlyGetFrontmatter?: boolean | undefined;
@@ -274,10 +274,10 @@ export declare function createClient({ url }: {
                 };
                 checkBasePath: {
                     post: (body: {
-                        owner: string;
-                        repo: string;
                         basePath: string;
                         githubAccountLogin: string;
+                        owner: string;
+                        repo: string;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -311,38 +311,101 @@ export declare function createClient({ url }: {
                         200: {
                             project: {
                                 orgId: string;
-                                projectId: string;
                                 projectName: string | null;
                                 createdAt: Date;
+                                projectId: string;
                                 fullFramerProjectId: string | null;
                             };
                             components: {
                                 url: string;
+                                id: string;
                                 name: string;
                                 projectId: string;
-                                id: string;
                                 componentIdentifier: string | null;
                             }[];
                             framerWebPages: {
-                                projectId: string;
                                 path: string;
+                                projectId: string;
                                 webPageId: string;
                             }[];
                             colorStyles: {
+                                id: string;
                                 name: string | null;
                                 projectId: string;
-                                id: string;
                                 lightColor: string;
                                 darkColor: string;
                             }[];
                             locales: {
-                                name: string;
-                                id: string;
                                 code: string;
+                                id: string;
+                                name: string;
                                 slug: string;
                             }[];
                         };
                     }>>;
+                    publish: {
+                        post: (body: {
+                            components: {
+                                url: string;
+                                id: string;
+                                name: string;
+                                projectId: string;
+                                componentIdentifier: string | null;
+                            }[];
+                        }, options?: {
+                            headers?: Record<string, unknown> | undefined;
+                            query?: Record<string, unknown> | undefined;
+                            fetch?: RequestInit | undefined;
+                        } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                            200: string;
+                        }>>;
+                    };
+                    subscribe: {
+                        get: (options?: {
+                            headers?: Record<string, unknown> | undefined;
+                            query?: Record<string, unknown> | undefined;
+                            fetch?: RequestInit | undefined;
+                        } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                            200: AsyncGenerator<{
+                                type: "change";
+                                components: import("@prisma/client").ReactExportComponent[];
+                            } | {
+                                project: {
+                                    orgId: string;
+                                    projectName: string | null;
+                                    createdAt: Date;
+                                    projectId: string;
+                                    fullFramerProjectId: string | null;
+                                };
+                                components: {
+                                    url: string;
+                                    id: string;
+                                    name: string;
+                                    projectId: string;
+                                    componentIdentifier: string | null;
+                                }[];
+                                framerWebPages: {
+                                    path: string;
+                                    projectId: string;
+                                    webPageId: string;
+                                }[];
+                                colorStyles: {
+                                    id: string;
+                                    name: string | null;
+                                    projectId: string;
+                                    lightColor: string;
+                                    darkColor: string;
+                                }[];
+                                locales: {
+                                    code: string;
+                                    id: string;
+                                    name: string;
+                                    slug: string;
+                                }[];
+                                type: "project";
+                            }, void, unknown>;
+                        }>>;
+                    };
                 }) & {};
                 subscriptions: {
                     get: (options: {
@@ -355,40 +418,40 @@ export declare function createClient({ url }: {
                         200: {
                             freeComponents: number;
                             subs: ({
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null;
                             manageSubUrl: string | undefined;
                         };
@@ -396,33 +459,33 @@ export declare function createClient({ url }: {
                 };
                 upsertProject: {
                     post: (body: {
-                        projectId: string;
                         components: {
-                            name: string;
                             url: string;
-                            projectId: string;
                             id: string;
+                            name: string;
+                            projectId: string;
                             componentIdentifier: string | null;
                         }[];
+                        projectId: string;
                         colorStyles: {
+                            id: string;
                             name: string | null;
                             projectId: string;
-                            id: string;
                             lightColor: string;
                             darkColor: string;
                         }[];
                         projectName?: string | null | undefined;
                         fullFramerProjectId?: string | undefined;
                         pages?: {
-                            projectId: string;
                             path: string;
+                            projectId: string;
                             webPageId: string;
                         }[] | undefined;
                         locales?: {
+                            code: string;
+                            id: string;
                             name: string;
                             projectId: string;
-                            id: string;
-                            code: string;
                             slug: string;
                         }[] | undefined;
                     }, options?: {
@@ -542,9 +605,9 @@ export declare const websiteApiClient: {
                 };
                 rephrase: {
                     post: (body: {
-                        url: string;
                         oldText: import("./rewrite").OldTextTree;
                         sourceHtml: string | null;
+                        url: string;
                         description?: string | null | undefined;
                         projectName?: string | undefined;
                         pagePath?: string | undefined;
@@ -665,8 +728,8 @@ export declare const websiteApiClient: {
                 };
                 syncsThisMonth: {
                     post: (body: {
-                        projectId?: string | undefined;
                         projectName?: string | undefined;
+                        projectId?: string | undefined;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -685,40 +748,40 @@ export declare const websiteApiClient: {
                     }) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             subs: ({
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null;
                             freeSyncs: number;
                             manageSubUrl: string | undefined;
@@ -727,10 +790,10 @@ export declare const websiteApiClient: {
                 };
                 frontmatter: {
                     post: (body: {
-                        owner: string;
-                        repo: string;
                         basePath: string;
                         githubAccountLogin: string;
+                        owner: string;
+                        repo: string;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -746,12 +809,12 @@ export declare const websiteApiClient: {
                 };
                 syncGithub: {
                     post: (body: {
-                        projectId: string;
-                        owner: string;
-                        projectName: string;
-                        repo: string;
                         basePath: string;
+                        projectName: string;
                         githubAccountLogin: string;
+                        owner: string;
+                        projectId: string;
+                        repo: string;
                         itemIds?: string[] | undefined;
                         mapFieldsConfig?: import("framer-plugin").CollectionField[] | undefined;
                         onlyGetFrontmatter?: boolean | undefined;
@@ -782,10 +845,10 @@ export declare const websiteApiClient: {
                 };
                 checkBasePath: {
                     post: (body: {
-                        owner: string;
-                        repo: string;
                         basePath: string;
                         githubAccountLogin: string;
+                        owner: string;
+                        repo: string;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -819,38 +882,101 @@ export declare const websiteApiClient: {
                         200: {
                             project: {
                                 orgId: string;
-                                projectId: string;
                                 projectName: string | null;
                                 createdAt: Date;
+                                projectId: string;
                                 fullFramerProjectId: string | null;
                             };
                             components: {
                                 url: string;
+                                id: string;
                                 name: string;
                                 projectId: string;
-                                id: string;
                                 componentIdentifier: string | null;
                             }[];
                             framerWebPages: {
-                                projectId: string;
                                 path: string;
+                                projectId: string;
                                 webPageId: string;
                             }[];
                             colorStyles: {
+                                id: string;
                                 name: string | null;
                                 projectId: string;
-                                id: string;
                                 lightColor: string;
                                 darkColor: string;
                             }[];
                             locales: {
-                                name: string;
-                                id: string;
                                 code: string;
+                                id: string;
+                                name: string;
                                 slug: string;
                             }[];
                         };
                     }>>;
+                    publish: {
+                        post: (body: {
+                            components: {
+                                url: string;
+                                id: string;
+                                name: string;
+                                projectId: string;
+                                componentIdentifier: string | null;
+                            }[];
+                        }, options?: {
+                            headers?: Record<string, unknown> | undefined;
+                            query?: Record<string, unknown> | undefined;
+                            fetch?: RequestInit | undefined;
+                        } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                            200: string;
+                        }>>;
+                    };
+                    subscribe: {
+                        get: (options?: {
+                            headers?: Record<string, unknown> | undefined;
+                            query?: Record<string, unknown> | undefined;
+                            fetch?: RequestInit | undefined;
+                        } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                            200: AsyncGenerator<{
+                                type: "change";
+                                components: import("@prisma/client").ReactExportComponent[];
+                            } | {
+                                project: {
+                                    orgId: string;
+                                    projectName: string | null;
+                                    createdAt: Date;
+                                    projectId: string;
+                                    fullFramerProjectId: string | null;
+                                };
+                                components: {
+                                    url: string;
+                                    id: string;
+                                    name: string;
+                                    projectId: string;
+                                    componentIdentifier: string | null;
+                                }[];
+                                framerWebPages: {
+                                    path: string;
+                                    projectId: string;
+                                    webPageId: string;
+                                }[];
+                                colorStyles: {
+                                    id: string;
+                                    name: string | null;
+                                    projectId: string;
+                                    lightColor: string;
+                                    darkColor: string;
+                                }[];
+                                locales: {
+                                    code: string;
+                                    id: string;
+                                    name: string;
+                                    slug: string;
+                                }[];
+                                type: "project";
+                            }, void, unknown>;
+                        }>>;
+                    };
                 }) & {};
                 subscriptions: {
                     get: (options: {
@@ -863,40 +989,40 @@ export declare const websiteApiClient: {
                         200: {
                             freeComponents: number;
                             subs: ({
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 orgId: string;
-                                email: string | null;
-                                pluginName: import("@prisma/client").$Enums.PluginName;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
                                 createdAt: Date;
-                                subscriptionId: string;
                                 orderId: string | null;
-                                itemId: string | null;
                                 variantId: string;
                                 productId: string;
                                 variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
                                 quantity: number;
                                 endsAt: Date | null;
-                                customerId: string | null;
                             } | null;
                             manageSubUrl: string | undefined;
                         };
@@ -904,33 +1030,33 @@ export declare const websiteApiClient: {
                 };
                 upsertProject: {
                     post: (body: {
-                        projectId: string;
                         components: {
-                            name: string;
                             url: string;
-                            projectId: string;
                             id: string;
+                            name: string;
+                            projectId: string;
                             componentIdentifier: string | null;
                         }[];
+                        projectId: string;
                         colorStyles: {
+                            id: string;
                             name: string | null;
                             projectId: string;
-                            id: string;
                             lightColor: string;
                             darkColor: string;
                         }[];
                         projectName?: string | null | undefined;
                         fullFramerProjectId?: string | undefined;
                         pages?: {
-                            projectId: string;
                             path: string;
+                            projectId: string;
                             webPageId: string;
                         }[] | undefined;
                         locales?: {
+                            code: string;
+                            id: string;
                             name: string;
                             projectId: string;
-                            id: string;
-                            code: string;
                             slug: string;
                         }[] | undefined;
                     }, options?: {
