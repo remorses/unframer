@@ -4792,7 +4792,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_-0.js": {
+    "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_-0.js": {
       "bytes": 593,
       "imports": [
         {
@@ -4813,19 +4813,19 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_.js": {
+    "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_.js": {
       "bytes": 584,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_-0.js",
+          "path": "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_-0.js",
           "kind": "import-statement",
           "original": "./mmEURJmx_-0.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/2hnmCRwCQ9ZatJG2Lai8/mmEURJmx_.js": {
-      "bytes": 18282,
+    "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/gHBnGIt4ghmpxhmnV5ep/mmEURJmx_.js": {
+      "bytes": 18296,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -4858,9 +4858,9 @@
           "original": "https://framerusercontent.com/modules/8IYidfgMFotzn7J2ypiV/lLu6KWOGMlfoDCRDvp5M/vSuRg5Prj.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_.js",
+          "path": "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_.js"
+          "original": "https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_.js"
         },
         {
           "path": "https :https://framerusercontent.com/modules/xNJHB4VDGWwK02iJRZDV/YerWl7N0k2AfHNaWL4bu/P7B5yL40j.js",
@@ -4884,9 +4884,9 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/2hnmCRwCQ9ZatJG2Lai8/mmEURJmx_.js",
+          "path": "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/gHBnGIt4ghmpxhmnV5ep/mmEURJmx_.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/2hnmCRwCQ9ZatJG2Lai8/mmEURJmx_.js"
+          "original": "https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/gHBnGIt4ghmpxhmnV5ep/mmEURJmx_.js"
         },
         {
           "path": "unframer",
@@ -5779,20 +5779,20 @@
         "virtual:hero-section": {
           "bytesInOutput": 1278
         },
-        "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/2hnmCRwCQ9ZatJG2Lai8/mmEURJmx_.js": {
-          "bytesInOutput": 17007
+        "https :https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/gHBnGIt4ghmpxhmnV5ep/mmEURJmx_.js": {
+          "bytesInOutput": 17021
         },
         "https :https://framerusercontent.com/modules/pnIdNrlXd11onazB8Qcd/MRN0W4QLxACax2b7xROJ/BJ5jKpx2K.js": {
           "bytesInOutput": 4266
         },
-        "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_-0.js": {
+        "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_-0.js": {
           "bytesInOutput": 672
         },
-        "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/BNXqjLGq4cy8celjJBOH/mmEURJmx_.js": {
+        "https :https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vVCb74zeJ6UsSuQGXtnq/mmEURJmx_.js": {
           "bytesInOutput": 291
         }
       },
-      "bytes": 24345
+      "bytes": 24359
     },
     "codemirror_lang_angular-V72PTATA.js": {
       "imports": [

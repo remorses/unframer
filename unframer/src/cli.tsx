@@ -31,71 +31,39 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             const client = createClient({
                 url: process.env.UNFRAMER_SERVER_URL || 'https://unframer.co',
             })
-            const { data: stream, error } =
-                await client.api.plugins.reactExportPlugin
-                    .project({ projectId })
-                    .subscribe.get({ fetch: { signal } })
+            const { data, error } = await client.api.plugins.reactExportPlugin
+                .project({ projectId })
+                .get()
             if (error) {
                 throw error
             }
-            let rebuild: any
-            let building = false
-            for await (const data of stream) {
-                if (data.type === 'project') {
-                    logger.log('unframer data', data)
-                    const projectName = data?.project?.projectName || ''
-                    if (projectName) {
-                        spinner.info(`Using project: ${projectName}`)
-                    }
-                    let cwd = path.resolve(process.cwd(), outDir || 'framer')
-                    const res = await bundle({
-                        config: {
-                            outDir,
-                            projectId: data?.project?.projectId,
-                            projectName,
-                            fullFramerProjectId:
-                                data?.project?.fullFramerProjectId!,
-                            locales: data?.locales,
-                            components: Object.fromEntries(
-                                data.components.map((c) => [
-                                    componentNameToPath(c.name),
-                                    c.url?.split('@')[0],
-                                ]),
-                            ),
-                            tokens: data.colorStyles,
-                            framerWebPages: data.framerWebPages || [],
-                        },
-                        watch: false,
-
-                        cwd,
-                        signal,
-                    })
-                    if (!options.watch) {
-                        controller.abort()
-                        return
-                    }
-                    spinner.start(
-                        `Waiting for Framer changes, try editing a component...`,
-                    )
-                    // spinner.update()
-                    rebuild = res?.rebuild
-                } else if (data.type === 'change') {
-                    if (building) {
-                        continue
-                    }
-                    logger.log('unframer publish data', data)
-                    spinner.info(`Detected change in Framer, rebuilding...`)
-                    if (!rebuild) {
-                        throw new Error('No rebuild function found')
-                    }
-                    building = true
-                    rebuild?.().finally(() => {
-                        building = false
-                    })
-                } else {
-                    // console.log({ data })
-                }
+            logger.log('unframer data', data)
+            const projectName = data?.project?.projectName || ''
+            if (projectName) {
+                spinner.info(`Using project: ${projectName}`)
             }
+            let cwd = path.resolve(process.cwd(), outDir || 'framer')
+            return await bundle({
+                config: {
+                    outDir,
+                    projectId: data?.project?.projectId,
+                    projectName,
+                    fullFramerProjectId: data?.project?.fullFramerProjectId!,
+                    locales: data?.locales,
+                    components: Object.fromEntries(
+                        data.components.map((c) => [
+                            componentNameToPath(c.name),
+                            c.url,
+                        ]),
+                    ),
+                    tokens: data.colorStyles,
+                    framerWebPages: data.framerWebPages || [],
+                },
+                watch: false,
+
+                cwd,
+                signal,
+            })
         }
 
         // legacy behavior without Framer plugin
