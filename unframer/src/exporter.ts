@@ -70,8 +70,8 @@ export async function bundle({
     const buildResult = await build({
         absWorkingDir: out,
         entryPoints: Object.keys(components).map((name) => {
-            const url = components[name]
-            validateUrl(url)
+            // const url = components[name]
+            // validateUrl(url)
 
             return {
                 in: `virtual:${name}`,

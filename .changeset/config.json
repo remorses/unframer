@@ -1,10 +1,11 @@
 {
     "$schema": "https://unpkg.com/@changesets/config@1.4.0/schema.json",
     "changelog": "@changesets/cli/changelog",
-    "commit": false,
+    "commit": true,
     "linked": [],
     "access": "public",
     "baseBranch": "main",
+    "githubRelease": true,
     "updateInternalDependencies": "patch",
     "ignore": ["nextjs-app", "remix-app"]
 }

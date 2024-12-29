@@ -47,6 +47,9 @@ importers:
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
+      concurrently-ui:
+        specifier: ^1.2.0
+        version: 1.2.0
       next:
         specifier: 15.0.4
         version: 15.0.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1412,6 +1415,34 @@ packages:
   '@jspm/core@2.1.0':
     resolution: {integrity: sha512-3sRl+pkyFY/kLmHl0cgHiFp2xEqErA8N3ECjMs7serSUBmoJ70lBa0PG5t0IM6WJgdZNyyI0R8YFfi5wM8+mzg==}
 
+  '@lydell/node-pty-darwin-arm64@1.0.3':
+    resolution: {integrity: sha512-cpLatXzGHds9fU6KSA+5jB4CRKqqK1ITerYlbucyhfsE0uksMVpzD6Ti6jMeEq7YM0N+c61q6EURl/pIwNYSqA==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@lydell/node-pty-darwin-x64@1.0.3':
+    resolution: {integrity: sha512-IuEf8TXwo+wzoUEhqv+LtznwW94gMm4V9XVFMisFh+oRz0TNtnWHtgTCdWCVn4Dm3dpEDAjiAlTLx0ayC5uMVA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@lydell/node-pty-linux-x64@1.0.3':
+    resolution: {integrity: sha512-tfj6Zg9F5KkyCQQ2wCUXUW/1lcNgdWAVJNtt6gQH3X+fUueSrRl+R7xoWTcl5NGcfn2l7QWgUrjZcVKP3/ljTg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@lydell/node-pty-win32-arm64@1.0.3':
+    resolution: {integrity: sha512-5MTd7hbrvmO/de/B2MDhxjh3E109i5bSds6JtIcVR1M6+uCvWJrON5ibbvWIAqTHpFup20IyDv0cQJxVv9o9nA==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@lydell/node-pty-win32-x64@1.0.3':
+    resolution: {integrity: sha512-XMANgXpBYGtKa5q+czro+TaJAyv3njbT7R81Pky+p7e4GwNdWtSUNBxtQm+O4ZLV0VJ1rNiMEHMyGOq8T9i4FA==}
+    cpu: [x64]
+    os: [win32]
+
+  '@lydell/node-pty@1.0.3':
+    resolution: {integrity: sha512-nLTNwJXEPi1oMyzxRwqsLB4jCmhDrltQS/kAYhV05qbPo5NOIKpw2tb+Iok/yhd9zP9+E5Lu7sWDGD+G4fdKbQ==}
+
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
 
@@ -2201,6 +2232,11 @@ packages:
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
 
+  blessed@0.1.81:
+    resolution: {integrity: sha512-LoF5gae+hlmfORcG1M5+5XZi4LBmvlXTzwJWzUlPryN/SJdSflZvROM2TwkT0GMpq7oqT48NRd4GS7BiVBc5OQ==}
+    engines: {node: '>= 0.8.0'}
+    hasBin: true
+
   body-parser@1.20.3:
     resolution: {integrity: sha512-7rAxByjUMqQ3/bHJy7D6OGXvx/MMc4IqBn/X0fcM1QUcAItpZrBEYhWGem+tzXH90c+G01ypMcYJBO9Y30203g==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
@@ -2445,6 +2481,10 @@ packages:
   concat-stream@1.6.2:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
     engines: {'0': node >= 0.8}
+
+  concurrently-ui@1.2.0:
+    resolution: {integrity: sha512-PlCh/Alu8js/yGrWUYqJll0lR2w5HEsDpPN2V+ledPM1xaxQ4TafLX0AT62PeErJRRTajcdYxzFenZxmOLfm7A==}
+    hasBin: true
 
   concurrently@8.2.2:
     resolution: {integrity: sha512-1dP4gpXFhei8IOtlXRE/T/4H88ElHgTiUzh71YUmtjTEHMSRS2Z/fgOxHSxxusGHogsRfxNq1vyAwxSC+EVyDg==}
@@ -2800,6 +2840,9 @@ packages:
 
   es-module-lexer@1.5.4:
     resolution: {integrity: sha512-MVNK56NiMrOwitFB7cqDwq0CQutbw+0BvLshJSse0MUNU+y1FC3bUS/AQg7oUng+/wKrrki7JfmwtVHkVfPLlw==}
+
+  es-module-lexer@1.6.0:
+    resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
 
   es-object-atoms@1.0.0:
     resolution: {integrity: sha512-MZ4iQ6JwHOBQjahnjwaC1ZtIBH+2ohjamzAO3oaHcXYup7qxjF2fixyH+Q71voWHeOkI2q/TnJao/KfXYIZWbw==}
@@ -6846,6 +6889,29 @@ snapshots:
 
   '@jspm/core@2.1.0': {}
 
+  '@lydell/node-pty-darwin-arm64@1.0.3':
+    optional: true
+
+  '@lydell/node-pty-darwin-x64@1.0.3':
+    optional: true
+
+  '@lydell/node-pty-linux-x64@1.0.3':
+    optional: true
+
+  '@lydell/node-pty-win32-arm64@1.0.3':
+    optional: true
+
+  '@lydell/node-pty-win32-x64@1.0.3':
+    optional: true
+
+  '@lydell/node-pty@1.0.3':
+    optionalDependencies:
+      '@lydell/node-pty-darwin-arm64': 1.0.3
+      '@lydell/node-pty-darwin-x64': 1.0.3
+      '@lydell/node-pty-linux-x64': 1.0.3
+      '@lydell/node-pty-win32-arm64': 1.0.3
+      '@lydell/node-pty-win32-x64': 1.0.3
+
   '@manypkg/find-root@1.1.0':
     dependencies:
       '@babel/runtime': 7.25.6
@@ -7864,6 +7930,8 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 3.6.2
 
+  blessed@0.1.81: {}
+
   body-parser@1.20.3:
     dependencies:
       bytes: 3.1.2
@@ -8165,6 +8233,13 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 2.3.8
       typedarray: 0.0.6
+
+  concurrently-ui@1.2.0:
+    dependencies:
+      '@lydell/node-pty': 1.0.3
+      blessed: 0.1.81
+      cac: 6.7.14
+      picocolors: 1.1.1
 
   concurrently@8.2.2:
     dependencies:
@@ -8556,6 +8631,8 @@ snapshots:
       safe-array-concat: 1.1.2
 
   es-module-lexer@1.5.4: {}
+
+  es-module-lexer@1.6.0: {}
 
   es-object-atoms@1.0.0:
     dependencies:
@@ -11849,7 +11926,7 @@ snapshots:
       browserslist: 4.24.3
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.0
-      es-module-lexer: 1.5.4
+      es-module-lexer: 1.6.0
       eslint-scope: 5.1.1
       events: 3.3.0
       glob-to-regexp: 0.4.1
