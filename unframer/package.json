@@ -62,7 +62,7 @@
         "nanospinner": "^1.2.0",
         "picocolors": "^1.0.1",
         "real-framer-motion": "npm:framer-motion@11.2.10",
-        "spiceflow": "workspace:*",
+        "spiceflow": "^1.4.1",
         "string-dedent": "^3.0.1"
     },
     "devDependencies": {

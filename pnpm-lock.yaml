@@ -190,8 +190,8 @@ importers:
         specifier: npm:framer-motion@11.2.10
         version: framer-motion@11.2.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       spiceflow:
-        specifier: ^1.4.0
-        version: 1.4.0
+        specifier: ^1.4.1
+        version: 1.4.1
       string-dedent:
         specifier: ^3.0.1
         version: 3.0.1
@@ -5052,8 +5052,8 @@ packages:
   spdx-license-ids@3.0.20:
     resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
 
-  spiceflow@1.4.0:
-    resolution: {integrity: sha512-e1/d1j4Wo5gFyBRdzgIuoW4D+AV+VCIT5+mk+X/5d/nHdlllmTP0mZLokMy+g3/TKWnJPjRn3O0ZEp9Xf+E6DA==}
+  spiceflow@1.4.1:
+    resolution: {integrity: sha512-DAVYRxYiHzuT3GoPbHiSj6c/5JR4WyMXwJmGzBcs8jEWsGorsUuqxAVqUsHPV3yWGyNS47PYt7eMRuV/hfxsgA==}
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
@@ -11329,7 +11329,7 @@ snapshots:
 
   spdx-license-ids@3.0.20: {}
 
-  spiceflow@1.4.0:
+  spiceflow@1.4.1:
     dependencies:
       '@medley/router': 0.2.1
       '@modelcontextprotocol/sdk': 1.0.4
