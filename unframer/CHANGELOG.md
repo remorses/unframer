@@ -1,5 +1,11 @@
 # unframer
 
+## 2.11.0
+
+### Minor Changes
+
+-   c362e9f: Add --watch, to rebuild the files on Framer website publish changes, fix commonjs issues
+
 ## 2.10.2
 
 ### Patch Changes
