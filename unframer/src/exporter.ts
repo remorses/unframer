@@ -307,7 +307,13 @@ export async function bundle({
                     sema.release()
                 }
             }),
-        ).finally(() => fs.rmSync(packageJson))
+        ).finally(() => {
+            try {
+                fs.rmSync(packageJson)
+            } catch (error) {
+                // Ignore error if file doesn't exist or can't be deleted
+            }
+        })
         // spinner.stop()
 
         const cssString =
@@ -343,7 +349,11 @@ export async function bundle({
         const filesToDelete = prevFiles.filter((x) => !outFiles.includes(x))
         for (let file of filesToDelete) {
             logger.log('deleting', path.relative(out, file))
-            fs.rmSync(file)
+            try {
+                fs.rmSync(file)
+            } catch (error) {
+                // Ignore error if file doesn't exist or can't be deleted
+            }
         }
 
         fs.writeFileSync(
@@ -444,7 +454,7 @@ export async function bundle({
             url: '',
         }
         if (!exampleComponent) {
-            return { rebuild }
+            return { rebuild, buildContext }
         }
     }
     const variants = getVariantsFromPropControls(
@@ -519,7 +529,7 @@ export async function bundle({
         
         `),
     )
-    return { result, rebuild }
+    return { result, rebuild, buildContext }
 
     // // when user press ctrl+c dispose
     // process.on('SIGINT', async () => {

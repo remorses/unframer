@@ -52,7 +52,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 }
                 let cwd = path.resolve(process.cwd(), outDir || 'framer')
                 logger.log('bundling', cwd)
-                const { rebuild } = await bundle({
+                const { rebuild, buildContext } = await bundle({
                     config: {
                         outDir,
                         projectId: data?.project?.projectId,
@@ -76,35 +76,38 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     cwd,
                     signal,
                 })
-                if (websiteUrl && options.watch) {
-                    spinner.start(
-                        `Waiting for changes, try editing a Framer component and publishing...`,
-                    )
-                    let lastEtag: string | null = null
-                    const startTime = Date.now()
-                    while (Date.now() - startTime < 30 * 60 * 1000) {
-                        const etag = await fetch(websiteUrl, {
-                            method: 'HEAD',
+                console.log('buildContext', buildContext)
+                if (!websiteUrl || !options.watch) {
+                    await buildContext?.dispose?.()
+                    return
+                }
+                spinner.start(
+                    `Waiting for changes, try editing a Framer component and publishing...`,
+                )
+                let lastEtag: string | null = null
+                const startTime = Date.now()
+                while (Date.now() - startTime < 30 * 60 * 1000) {
+                    const etag = await fetch(websiteUrl, {
+                        method: 'HEAD',
+                    })
+                        .then((response) => response.headers.get('etag'))
+                        .catch((error) => {
+                            logger.error('Error fetching etag:', error)
+                            return null
                         })
-                            .then((response) => response.headers.get('etag'))
-                            .catch((error) => {
-                                logger.error('Error fetching etag:', error)
-                                return null
-                            })
-                        logger.log('etag', etag)
-                        if (etag && lastEtag && etag !== lastEtag) {
-                            spinner.start(
-                                `Detected Framer website change, rebuilding...`,
-                            )
-                            lastEtag = etag
-                            await rebuild()
-                        }
-                        if (etag) {
-                            lastEtag = etag
-                        }
-
-                        await sleep(1000 * 1)
+                    logger.log('etag', etag)
+                    if (etag && lastEtag && etag !== lastEtag) {
+                        spinner.start(
+                            `Detected Framer website change, rebuilding...`,
+                        )
+                        lastEtag = etag
+                        await rebuild()
                     }
+                    if (etag) {
+                        lastEtag = etag
+                    }
+
+                    await sleep(1000 * 1)
                 }
             }
 
@@ -129,12 +132,13 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             }
 
             setMaxListeners(0, controller.signal)
-            await bundle({
+            const { buildContext } = await bundle({
                 config,
                 watch: false,
                 signal: controller.signal,
                 cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
             })
+            await buildContext.dispose?.()
         } catch (error) {
             logger.error('Error in main:', error)
             throw error
