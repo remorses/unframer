@@ -444,7 +444,7 @@ export async function bundle({
             url: '',
         }
         if (!exampleComponent) {
-            return
+            return { rebuild }
         }
     }
     const variants = getVariantsFromPropControls(

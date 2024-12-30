@@ -5,8 +5,9 @@
         "target": "ESNext",
         "esModuleInterop": true,
         "lib": ["dom"],
-        "moduleResolution": "node16",
-        "module": "CommonJS",
+        "moduleResolution": "Node16",
+        "module": "Node16",
+
         "noEmit": false,
         "skipLibCheck": true,
         "jsx": "react-jsx",

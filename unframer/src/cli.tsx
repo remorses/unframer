@@ -8,7 +8,7 @@ import findUp from 'find-up'
 import fs from 'fs'
 import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
-import { componentNameToPath, logger, spinner } from './utils.js'
+import { componentNameToPath, logger, sleep, spinner } from './utils.js'
 const configNames = ['unframer.config.json', 'unframer.json']
 
 export const cli = cac('unframer')
@@ -20,79 +20,125 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--watch', 'Watch for changes and rebuild', { default: false })
     .option('--debug', 'Enable debug logging', { default: false })
     .action(async function main(projectId, options) {
-        if (options.debug) {
-            logger.debug = true
-        }
-        const outDir = options.outDir
-        const controller = new AbortController()
-        const signal = controller.signal
-        if (projectId) {
-            logger.log(`Fetching config for project ${projectId}`)
-            const client = createClient({
-                url: process.env.UNFRAMER_SERVER_URL || 'https://unframer.co',
-            })
-            const { data, error } = await client.api.plugins.reactExportPlugin
-                .project({ projectId })
-                .get()
-            if (error) {
-                throw error
+        try {
+            if (options.debug) {
+                logger.debug = true
             }
-            logger.log('unframer data', data)
-            const projectName = data?.project?.projectName || ''
-            if (projectName) {
-                spinner.info(`Using project: ${projectName}`)
+            const outDir = options.outDir
+            const controller = new AbortController()
+            const signal = controller.signal
+            if (projectId) {
+                logger.log(`Fetching config for project ${projectId}`)
+
+                const client = await createClient({
+                    url:
+                        process.env.UNFRAMER_SERVER_URL ||
+                        'https://unframer.co',
+                })
+
+                const { data, error } =
+                    await client.api.plugins.reactExportPlugin
+                        .project({ projectId })
+                        .get()
+                if (error) {
+                    logger.error('Error fetching project data:', error)
+                    throw error
+                }
+                const websiteUrl = data?.project?.websiteUrl
+                logger.log('unframer data', data)
+                const projectName = data?.project?.projectName || ''
+                if (projectName) {
+                    spinner.info(`Using project: ${projectName}`)
+                }
+                let cwd = path.resolve(process.cwd(), outDir || 'framer')
+                logger.log('bundling', cwd)
+                const { rebuild } = await bundle({
+                    config: {
+                        outDir,
+                        projectId: data?.project?.projectId,
+                        projectName,
+                        fullFramerProjectId:
+                            data?.project?.fullFramerProjectId!,
+                        locales: data?.locales,
+                        components: Object.fromEntries(
+                            await Promise.all(
+                                data.components.map(async (c) => [
+                                    await componentNameToPath(c.name),
+                                    c.url,
+                                ]),
+                            ),
+                        ),
+                        tokens: data.colorStyles,
+                        framerWebPages: data.framerWebPages || [],
+                    },
+                    watch: false,
+
+                    cwd,
+                    signal,
+                })
+                if (websiteUrl && options.watch) {
+                    spinner.start(
+                        `Waiting for changes, try editing a Framer component and publishing...`,
+                    )
+                    let lastEtag: string | null = null
+                    const startTime = Date.now()
+                    while (Date.now() - startTime < 30 * 60 * 1000) {
+                        const etag = await fetch(websiteUrl, {
+                            method: 'HEAD',
+                        })
+                            .then((response) => response.headers.get('etag'))
+                            .catch((error) => {
+                                logger.error('Error fetching etag:', error)
+                                return null
+                            })
+                        logger.log('etag', etag)
+                        if (etag && lastEtag && etag !== lastEtag) {
+                            spinner.start(
+                                `Detected Framer website change, rebuilding...`,
+                            )
+                            lastEtag = etag
+                            await rebuild()
+                        }
+                        if (etag) {
+                            lastEtag = etag
+                        }
+
+                        await sleep(1000 * 1)
+                    }
+                }
             }
-            let cwd = path.resolve(process.cwd(), outDir || 'framer')
-            return await bundle({
-                config: {
-                    outDir,
-                    projectId: data?.project?.projectId,
-                    projectName,
-                    fullFramerProjectId: data?.project?.fullFramerProjectId!,
-                    locales: data?.locales,
-                    components: Object.fromEntries(
-                        data.components.map((c) => [
-                            componentNameToPath(c.name),
-                            c.url,
-                        ]),
-                    ),
-                    tokens: data.colorStyles,
-                    framerWebPages: data.framerWebPages || [],
-                },
+
+            // legacy behavior without Framer plugin
+            fixOldUnframerPath()
+            const cwd = process.cwd()
+            logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
+            const configPath = await findUp(configNames, { cwd })
+            if (!configPath) {
+                logger.log(`No ${configNames.join(', ')} found`)
+                return
+            }
+            const configBasename = basename(configPath!)
+            const configContent = fs.readFileSync(configPath, 'utf8')
+            if (!configContent) {
+                logger.log(`No ${configBasename} contents found`)
+                return
+            }
+            const config = JSON.parse(configContent)
+            if (outDir !== defaultOutDir) {
+                config.outDir = outDir
+            }
+
+            setMaxListeners(0, controller.signal)
+            await bundle({
+                config,
                 watch: false,
-
-                cwd,
-                signal,
+                signal: controller.signal,
+                cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
             })
+        } catch (error) {
+            logger.error('Error in main:', error)
+            throw error
         }
-
-        // legacy behavior without Framer plugin
-        fixOldUnframerPath()
-        const cwd = process.cwd()
-        logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
-        const configPath = await findUp(configNames, { cwd })
-        if (!configPath) {
-            logger.log(`No ${configNames.join(', ')} found`)
-            return
-        }
-        const configBasename = basename(configPath!)
-        const configContent = fs.readFileSync(configPath, 'utf8')
-        if (!configContent) {
-            logger.log(`No ${configBasename} contents found`)
-            return
-        }
-        const config = JSON.parse(configContent)
-        if (outDir !== defaultOutDir) {
-            config.outDir = outDir
-        }
-
-        setMaxListeners(0, controller.signal)
-        await bundle({
-            config,
-            watch: false,
-            signal: controller.signal,
-            cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
-        })
     })
 
 const defaultConfig = `{

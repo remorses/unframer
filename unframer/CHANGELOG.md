@@ -1,5 +1,12 @@
 # unframer
 
+## 2.10.2
+
+### Patch Changes
+
+-   Updated dependencies [ef7eae5]
+    -   spiceflow@1.4.1
+
 ## 2.10.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "2.10.1",
+    "version": "2.10.2",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
@@ -9,7 +9,7 @@
         "test": "vitest",
         "prepublishOnly": "pnpm build",
         "download-framer": "tsx scripts/download.ts",
-        "watch": "rm -rf dist esm && pnpm concurrently 'pnpm tsc -w' 'pnpm tsc -m esnext -w --outDir esm'"
+        "watch": "rm -rf dist esm && pnpm concurrently 'pnpm tsc -w' 'pnpm tsc -m esnext --moduleResolution node --outDir esm --watch'"
     },
     "bin": "bin.js",
     "files": [
@@ -62,7 +62,7 @@
         "nanospinner": "^1.2.0",
         "picocolors": "^1.0.1",
         "real-framer-motion": "npm:framer-motion@11.2.10",
-        "spiceflow": "^1.3.0",
+        "spiceflow": "workspace:*",
         "string-dedent": "^3.0.1"
     },
     "devDependencies": {

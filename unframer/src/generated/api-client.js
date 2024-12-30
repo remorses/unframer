@@ -1,5 +1,6 @@
-import { createSpiceflowClient } from 'spiceflow/client';
-export function createClient({ url }) {
+export async function createClient({ url }) {
+    const { createSpiceflowClient } = await import('spiceflow/client')
+
     const client = createSpiceflowClient(url, {
         // async fetch(input, requestInit) {
         //     const res = await fetch(input, requestInit)
@@ -16,11 +17,11 @@ export function createClient({ url }) {
         // },
         headers() {
             return {
-            // Cookie: `sb-${supabaseRef}-auth-token=${encodeURIComponent(JSON.stringify(session))}`,
-            };
+                // Cookie: `sb-${supabaseRef}-auth-token=${encodeURIComponent(JSON.stringify(session))}`,
+            }
         },
-    });
-    return client;
+    })
+    return client
 }
-export const websiteApiClient = createClient({ url: process.env.PUBLIC_URL });
+// export const websiteApiClient = createClient({ url: process.env.PUBLIC_URL! })
 //# sourceMappingURL=api-client.js.map

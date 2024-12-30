@@ -3,7 +3,6 @@ import pico from 'picocolors'
 import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
 import { createSpinner } from 'nanospinner'
-import kebabCase from 'just-kebab-case'
 
 export const spinner = createSpinner('Downloading Framer Components') as any
 
@@ -32,10 +31,15 @@ export const logger = {
     },
 }
 
-export function componentNameToPath(name: string) {
+export async function componentNameToPath(name: string) {
+    const { default: kebabCase } = await import('just-kebab-case')
     return name
         .split('/')
         .filter(Boolean)
         .map((part) => kebabCase(part))
         .join('/')
+}
+
+export function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
 }
