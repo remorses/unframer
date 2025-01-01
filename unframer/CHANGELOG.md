@@ -1,5 +1,11 @@
 # unframer
 
+## 2.11.1
+
+### Patch Changes
+
+-   524e5c4: update spiceflow dep
+
 ## 2.11.0
 
 ### Minor Changes
