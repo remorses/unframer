@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.K3G2LCX5.mjs
+// https :https://app.framerstatic.com/framer.IVNDIC27.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17227,7 +17227,7 @@ function lazy(factory,) {
   const LazyComponent = React4.lazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component16 = React4.forwardRef(function LazyWithPreload(props, ref,) {
+  const Component17 = React4.forwardRef(function LazyWithPreload(props, ref,) {
     return React4.createElement(
       LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
       ref
@@ -17238,7 +17238,7 @@ function lazy(factory,) {
         : props,
     );
   },);
-  Component16.preload = () => {
+  Component17.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
         LoadedComponent = module.default;
@@ -17247,7 +17247,7 @@ function lazy(factory,) {
     }
     return factoryPromise;
   };
-  return Component16;
+  return Component17;
 }
 function getRouteElementId(route, hash2,) {
   if (hash2 && route) {
@@ -21320,6 +21320,7 @@ var mockWindow = {
   scrollY: 0,
   location: {
     href: '',
+    pathname: '',
   },
   document: {
     cookie: '',
@@ -21348,6 +21349,7 @@ var mockWindow = {
   innerWidth: 0,
   SVGSVGElement: {},
   open: function (_url, _target, _features,) {},
+  __framer_events: [],
 };
 var safeWindow = typeof window === 'undefined' ? mockWindow : window;
 var _raf = (f) => {
@@ -27212,7 +27214,7 @@ function useMeasuredSize(ref,) {
   return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component16) => (props) => {
+var withMeasuredSize = (Component17) => (props) => {
   const ref = React4.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
@@ -27229,7 +27231,7 @@ var withMeasuredSize = (Component16) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx(Component16, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component17, {
       ...props,
       width: (size == null ? void 0 : size.width) ?? fallbackWidth,
       height: (size == null ? void 0 : size.height) ?? fallbackHeight,
@@ -28729,7 +28731,7 @@ var clamp2 = (value, a, b,) => {
 var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
-function WithDragging(Component16,) {
+function WithDragging(Component17,) {
   const _WithDraggingHOC = class extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
@@ -29357,7 +29359,7 @@ function WithDragging(Component16,) {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx(Component16, {
+        children: /* @__PURE__ */ jsx(Component17, {
           ...originalProps,
         },),
       },);
@@ -29395,9 +29397,9 @@ function WithDragging(Component16,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component16.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component17.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics.default)(withDragging, Component16,);
+  (0, import_hoist_non_react_statics.default)(withDragging, Component17,);
   return withDragging;
 }
 var hoverProps = {
@@ -32201,7 +32203,7 @@ function useInfiniteScroll({
     };
   }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
 }
-function withInfiniteScroll(Component16,) {
+function withInfiniteScroll(Component17,) {
   return React4.forwardRef(({
     __paginationInfo,
     __loadMore,
@@ -32215,7 +32217,7 @@ function withInfiniteScroll(Component16,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -35156,7 +35158,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component16, override,) {
+function WithOverride(Component17, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext(DataObserverContext,);
@@ -35165,14 +35167,14 @@ function WithOverride(Component16, override,) {
       style,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...rest,
       ...overrideProps,
       _initialStyle: style,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component16,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component16.displayName || Component16.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component17,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component17.displayName || Component17.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -36014,11 +36016,11 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList(value,) {
   return isString2(value,) || Array.isArray(value,);
 }
-var withFX = (Component16) =>
+var withFX = (Component17) =>
   React4.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx(Component16, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -36029,7 +36031,7 @@ var withFX = (Component16) =>
     if (RenderTarget.current() === RenderTarget.canvas) {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ jsx(Component16, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...props,
         animate: animate4,
         initial: initial2,
@@ -36133,7 +36135,7 @@ var withFX = (Component16) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -36263,13 +36265,13 @@ var ComponentViewportContext = /* @__PURE__ */ React4.createContext({},);
 function useComponentViewport() {
   return React4.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(({
+var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(function ComponentViewportProvider2({
   width,
   height,
   y,
   children,
   ...rest
-}, ref,) => {
+}, ref,) {
   const componentViewport = React4.useMemo(() => {
     return {
       width,
@@ -36283,10 +36285,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(({
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component16) =>
+var withGeneratedLayoutId = (Component17) =>
   React4.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -36294,7 +36296,93 @@ var withGeneratedLayoutId = (Component16) =>
       ref,
     },);
   },);
-var ContainerErrorBoundary = class extends Component {
+function collectErrorToAnalytics(error, errorInfo,) {
+  var _a;
+  if (typeof window === 'undefined') return;
+  if (Math.random() > 0.01) return;
+  const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+  const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
+  (_a = safeWindow.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
+    message: String(error,),
+    stack,
+    // only log componentStack if we don't have a stack
+    componentStack: stack ? void 0 : componentStack,
+  },],);
+}
+function logError(...args) {
+  if (false) return;
+  console.error(...args,);
+}
+function shouldEnableCodeBoundaries() {
+  return RenderTarget.current() !== RenderTarget.canvas;
+}
+function CodeComponentBoundary({
+  errorMessage,
+  fallback,
+  children,
+},) {
+  if (!shouldEnableCodeBoundaries()) {
+    return children;
+  }
+  return /* @__PURE__ */ jsx(ClientSideErrorBoundary, {
+    fallback,
+    errorMessage,
+    children: /* @__PURE__ */ jsx(ServerSideErrorBoundary, {
+      fallback,
+      children,
+    },),
+  },);
+}
+var ClientSideErrorBoundary = class extends Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      hasError: false,
+    },);
+  }
+  static getDerivedStateFromError() {
+    return {
+      hasError: true,
+    };
+  }
+  componentDidCatch(error, errorInfo,) {
+    logError(this.props.errorMessage, errorInfo == null ? void 0 : errorInfo.componentStack,);
+    collectErrorToAnalytics(error, errorInfo,);
+  }
+  render() {
+    const {
+      children,
+      fallback = null,
+    } = this.props;
+    const {
+      hasError,
+    } = this.state;
+    return hasError ? fallback : children;
+  }
+};
+function ServerSideErrorBoundary({
+  children,
+  fallback = null,
+},) {
+  return typeof window === 'undefined'
+    ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
+    // and render the actual error fallback if Suspense activates.
+    /* @__PURE__ */
+    jsx(Suspense2, {
+      fallback,
+      children,
+    },)
+    : // On the client, Suspense fallback is activated by data fetching. So we use SuspenseThatPreservesDom,
+    // because we don’t want to render a fallback if the boundary gets inadvertently activated.
+    //
+    // “Why won’t you just render plain children without Suspense?” Because that would cause a hydration mismatch
+    // (the server has Suspense, the client doesn’t).
+    /* @__PURE__ */
+    jsx(SuspenseThatPreservesDom, {
+      children,
+    },);
+}
+var DeprecatedContainerErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {
@@ -36304,7 +36392,6 @@ var ContainerErrorBoundary = class extends Component {
   // We use `componentDidCatch` instead of `static getDerivedStateFromError()` because the latter could also catch hydration errors.
   // Hydration errors are recoverable by React, so we don't want to hide the coponent in that case (since the tree will not unmount).
   componentDidCatch(error, errorInfo,) {
-    var _a;
     const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
     console.error(
       'Error in component (see previous log). This component has been hidden. Please check any custom code or code overrides to fix.',
@@ -36313,15 +36400,7 @@ var ContainerErrorBoundary = class extends Component {
     this.setState({
       hasError: true,
     },);
-    if (typeof window !== 'undefined' && Math.random() <= 0.01) {
-      const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-      (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
-        message: String(error,),
-        stack,
-        // only log componentStack if we don't have a stack
-        componentStack: stack ? void 0 : componentStack,
-      },],);
-    }
+    collectErrorToAnalytics(error, errorInfo,);
   }
   render() {
     const {
@@ -36333,14 +36412,84 @@ var ContainerErrorBoundary = class extends Component {
     return hasError ? null : children;
   }
 };
-var Providers = /* @__PURE__ */ React4.forwardRef(({
+var CRASH_ERROR_MESSAGE_PREFIX = 'code-crash:';
+function formatCodeCrashLocationFromSourceNode(scopeId, nodeId,) {
+  return `${CRASH_ERROR_MESSAGE_PREFIX}${scopeId}:${nodeId}`;
+}
+function getErrorMessageForComponent(scopeId, nodeId,) {
+  return getErrorMessageFor('component', scopeId, nodeId,);
+}
+function getErrorMessageForOverride(scopeId, nodeId,) {
+  return getErrorMessageFor('override', scopeId, nodeId,);
+}
+function getErrorMessageFor(element, scopeId, nodeId,) {
+  return `A code ${element} crashed while rendering due to the error above. To find and fix it, open the project in the editor \u2192 open Quick Actions (press Cmd+K or Ctrl+K) \u2192 paste this: ${
+    formatCodeCrashLocationFromSourceNode(scopeId, nodeId,)
+  } \u2192 click \u201CShow Layer\u201D.`;
+}
+var IsInExternalComponentContext = /* @__PURE__ */ (() => React4.createContext(0,))();
+function useExternalComponentNestingLevel() {
+  return React4.useContext(IsInExternalComponentContext,);
+}
+function IsExternalComponent({
+  children,
+},) {
+  const count = React4.useContext(IsInExternalComponentContext,);
+  return /* @__PURE__ */ jsx(IsInExternalComponentContext.Provider, {
+    value: count + 1,
+    children,
+  },);
+}
+function shouldWrapComponentWithBoundary(externalModuleNestingLevel, isAuthoredByUser, isExternalComponent, inComponentSlot,) {
+  const isLocalComponentInstance =
+    // We know a component instance is local when it’s not nested inside any external component...
+    externalModuleNestingLevel === 0 ||
+    // ...or – “Ticker edge case” – when it’s nested inside an external component during React rendering,
+    // but is actually defined in a slot that’s passed into the component. (This is the “Ticker edge case”:
+    // if a site has a Ticker (or any other component with slots), and something in a Ticker’s slot crashes,
+    // we want to disable that something, not the whole ticker.)
+    externalModuleNestingLevel === 1 && inComponentSlot;
+  return (isAuthoredByUser || isExternalComponent) && isLocalComponentInstance;
+}
+function shouldWrapOverrideWithBoundary(externalModuleNestingLevel, inComponentSlot,) {
+  const isWrappingFrameLocalToProject =
+    // We know a frame is local when it’s not nested inside any external component...
+    externalModuleNestingLevel === 0 ||
+    // ...or – “Ticker edge case” – when it’s nested inside an external component during React rendering,
+    // but is actually defined in a slot that’s passed into the component. (This is the “Ticker edge case”:
+    // if a site has a Ticker (or any other component with slots), and an override in a Ticker’s slot crashes,
+    // we want to disable that override, not the whole ticker.)
+    externalModuleNestingLevel === 1 && inComponentSlot;
+  return isWrappingFrameLocalToProject;
+}
+var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
   children,
   layoutId,
   as,
+  scopeId,
+  nodeId,
+  isAuthoredByUser,
+  isModuleExternal,
+  inComponentSlot,
   ...props
 }, ref,) => {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
+  const clonedChildren = React4.Children.map(children, (child) => {
+    return React4.isValidElement(child,)
+      ? React4.cloneElement(child, {
+        layoutId,
+      },)
+      : child;
+  },);
+  const childrenWithCodeBoundary = useWrapWithCodeBoundary(
+    clonedChildren,
+    scopeId,
+    nodeId,
+    isAuthoredByUser,
+    isModuleExternal,
+    inComponentSlot,
+  );
   return /* @__PURE__ */ jsx(MotionComponent, {
     layoutId: outerLayoutId,
     ...props,
@@ -36352,21 +36501,79 @@ var Providers = /* @__PURE__ */ React4.forwardRef(({
         children: /* @__PURE__ */ jsx(LayoutGroup, {
           id: layoutId ?? '',
           inherit: 'id',
-          children: /* @__PURE__ */ jsx(ContainerErrorBoundary, {
-            children: React4.Children.map(children, (child) => {
-              return React4.isValidElement(child,)
-                ? React4.cloneElement(child, {
-                  layoutId,
-                },)
-                : child;
-            },),
-          },),
+          children: childrenWithCodeBoundary,
         },),
       },),
     },),
   },);
 },);
-var Container = /* @__PURE__ */ withGeneratedLayoutId(Providers,);
+var Container = /* @__PURE__ */ withGeneratedLayoutId(ContainerInner,);
+var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, ref,) => {
+  const {
+    as,
+    layoutId,
+    scopeId,
+    nodeId,
+    isAuthoredByUser,
+    rendersWithMotion,
+    isModuleExternal,
+    inComponentSlot,
+    style,
+    children,
+    ...renderableProps
+  } = props;
+  const childrenWithCodeBoundary = useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,);
+  const tagName = props.as ?? 'div';
+  if (props.rendersWithMotion) {
+    const Component17 = htmlElementAsMotionComponent(tagName,);
+    return /* @__PURE__ */ jsx(Component17, {
+      ref,
+      style: props.style,
+      ...renderableProps,
+      children: childrenWithCodeBoundary,
+    },);
+  } else {
+    const Component17 = tagName;
+    return /* @__PURE__ */ jsx(Component17, {
+      ref,
+      style: props.style,
+      ...renderableProps,
+      children: childrenWithCodeBoundary,
+    },);
+  }
+},);
+function useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isExternalComponent, inComponentSlot,) {
+  const externalModuleNestingLevel = useExternalComponentNestingLevel();
+  if (
+    // Those props will either be all undefined, which means the Container wasn’t codegenned yet,
+    // and we should use the old ContainerErrorBoundary –
+    // or all defined, which means we have enough information to use the new boundary.
+    isUndefined(scopeId,) || isUndefined(nodeId,)
+  ) {
+    return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
+      children,
+    },);
+  }
+  const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
+    externalModuleNestingLevel,
+    isAuthoredByUser ?? false,
+    isExternalComponent ?? false,
+    inComponentSlot ?? false,
+  );
+  if (shouldWrapWithBoundary) {
+    children = /* @__PURE__ */ jsx(CodeComponentBoundary, {
+      errorMessage: getErrorMessageForComponent(scopeId, nodeId,),
+      fallback: null,
+      children,
+    },);
+  }
+  if (isExternalComponent) {
+    children = /* @__PURE__ */ jsx(IsExternalComponent, {
+      children,
+    },);
+  }
+  return children;
+}
 var StyleSheetContext = /* @__PURE__ */ React4.createContext(void 0,);
 var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
@@ -36379,7 +36586,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component16, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
       sheet,
@@ -36399,7 +36606,7 @@ var withCSS = (Component16, escapedCSS, componentSerializationId,) =>
               __html: concatenatedCSS,
             },
           },),
-          /* @__PURE__ */ jsx(Component16, {
+          /* @__PURE__ */ jsx(Component17, {
             ...props,
             ref,
           },),
@@ -36415,7 +36622,7 @@ var withCSS = (Component16, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
       ref,
     },);
@@ -37402,10 +37609,10 @@ function ChildrenCanSuspend({
     children,
   },);
 }
-function withChildrenCanSuspend(Component16,) {
+function withChildrenCanSuspend(Component17,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx(Component16, {
+      children: /* @__PURE__ */ jsx(Component17, {
         ...props,
         ref,
       },),
@@ -37956,14 +38163,14 @@ function getRouteFromPageLink(pageLink, router, currentRoute,) {
   } = pageLink;
   return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
 }
-var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(({
+var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
   children,
   href,
   openInNewTab,
   smoothScroll,
   nodeId,
   ...restProps
-}, forwardedRef,) => {
+}, forwardedRef,) {
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
@@ -39012,12 +39219,8 @@ function PageRoot({
               },
               preserveQueryParams,
               enableAsyncURLUpdates,
-              editorBar: EditorBar && framerSiteId && /* @__PURE__ */ jsx(IgnoreErrors, {
-                children: /* @__PURE__ */ jsx(Suspense2, {
-                  children: /* @__PURE__ */ jsx(EditorBar, {
-                    framerSiteId,
-                  },),
-                },),
+              editorBar: /* @__PURE__ */ jsx(EditorBarLauncher, {
+                EditorBar,
               },),
             },),
           },),
@@ -39042,6 +39245,25 @@ function PageRoot({
       },),
     },);
   }
+}
+function EditorBarLauncher({
+  EditorBar,
+},) {
+  const [mounted, setMounted,] = useState(false,);
+  const framerSiteId = useContext(FormContext,);
+  useEffect(() => {
+    startTransition2(() => {
+      setMounted(true,);
+    },);
+  }, [],);
+  if (!EditorBar || !framerSiteId || !mounted) return null;
+  return /* @__PURE__ */ jsx(IgnoreErrors, {
+    children: /* @__PURE__ */ jsx(Suspense2, {
+      children: /* @__PURE__ */ jsx(EditorBar, {
+        framerSiteId,
+      },),
+    },),
+  },);
 }
 function cloneChildrenWithProps(children, props, asNode,) {
   const cloned = React2.Children.map(children, (child) => {
@@ -39685,60 +39907,60 @@ var DatabaseValue = {
    * Checks if the left value is equal to the right value. Returns false if
    * the values are not of the same type.
    */
-  equal(left, right, collation10,) {
+  equal(left, right, collation11,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation10,) === 0;
+    return compare(left, right, collation11,) === 0;
   },
   /**
    * Checks if the left value is less than the right value. Returns false if
    * the values are not of the same type.
    */
-  lessThan(left, right, collation10,) {
+  lessThan(left, right, collation11,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation10,) < 0;
+    return compare(left, right, collation11,) < 0;
   },
   /**
    * Checks if the left value is less than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  lessThanOrEqual(left, right, collation10,) {
+  lessThanOrEqual(left, right, collation11,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation10,) <= 0;
+    return compare(left, right, collation11,) <= 0;
   },
   /**
    * Checks if the left value is greater than the right value. Returns false
    * if the values are not of the same type.
    */
-  greaterThan(left, right, collation10,) {
+  greaterThan(left, right, collation11,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation10,) > 0;
+    return compare(left, right, collation11,) > 0;
   },
   /**
    * Checks if the left value is greater than or equal to the right value.
    * Returns false if the values are not of the same type.
    */
-  greaterThanOrEqual(left, right, collation10,) {
+  greaterThanOrEqual(left, right, collation11,) {
     if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
       return false;
     }
-    return compare(left, right, collation10,) >= 0;
+    return compare(left, right, collation11,) >= 0;
   },
   /**
    * Checks if the left value is in the right value. Returns false if the
    * right value is not an array.
    */
-  in(left, right, collation10,) {
+  in(left, right, collation11,) {
     if ((right == null ? void 0 : right.type) !== 'array') return false;
     return right.value.some((item) => {
-      return DatabaseValue.equal(item, left, collation10,);
+      return DatabaseValue.equal(item, left, collation11,);
     },);
   },
   /**
@@ -39746,40 +39968,40 @@ var DatabaseValue = {
    *
    * If source has duplicates, the index of the first occurrence is always returned.
    */
-  indexOf(source, target, collation10,) {
+  indexOf(source, target, collation11,) {
     if ((source == null ? void 0 : source.type) !== 'array') return -1;
     return source.value.findIndex((item) => {
-      return DatabaseValue.equal(item, target, collation10,);
+      return DatabaseValue.equal(item, target, collation11,);
     },);
   },
-  contains(source, target, collation10,) {
+  contains(source, target, collation11,) {
     let sourceValue = toString(source,);
     let targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
-    if (collation10.type === 0) {
+    if (collation11.type === 0) {
       sourceValue = sourceValue.toLowerCase();
       targetValue = targetValue.toLowerCase();
     }
     return sourceValue.includes(targetValue,);
   },
-  startsWith(source, target, collation10,) {
+  startsWith(source, target, collation11,) {
     let sourceValue = toString(source,);
     let targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
-    if (collation10.type === 0) {
+    if (collation11.type === 0) {
       sourceValue = sourceValue.toLowerCase();
       targetValue = targetValue.toLowerCase();
     }
     return sourceValue.startsWith(targetValue,);
   },
-  endsWith(source, target, collation10,) {
+  endsWith(source, target, collation11,) {
     let sourceValue = toString(source,);
     let targetValue = toString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
-    if (collation10.type === 0) {
+    if (collation11.type === 0) {
       sourceValue = sourceValue.toLowerCase();
       targetValue = targetValue.toLowerCase();
     }
@@ -39825,7 +40047,7 @@ var DatabaseValue = {
     }
   },
 };
-function compare(left, right, collation10,) {
+function compare(left, right, collation11,) {
   if (isNull(left,) || isNull(right,)) {
     assert(left === right,);
     return 0;
@@ -39842,7 +40064,7 @@ function compare(left, right, collation10,) {
         const rightItem = right.value[i];
         assert(!isUndefined(leftItem,), 'Left item must exist',);
         assert(!isUndefined(rightItem,), 'Right item must exist',);
-        const result = compare(leftItem, rightItem, collation10,);
+        const result = compare(leftItem, rightItem, collation11,);
         if (result !== 0) return result;
       }
       return 0;
@@ -39910,7 +40132,7 @@ function compare(left, right, collation10,) {
         const rightValue = right.value[rightKey];
         assert(!isUndefined(leftValue,), 'Left value must exist',);
         assert(!isUndefined(rightValue,), 'Right value must exist',);
-        const result = compare(leftValue, rightValue, collation10,);
+        const result = compare(leftValue, rightValue, collation11,);
         if (result !== 0) return result;
       }
       return 0;
@@ -39935,7 +40157,7 @@ function compare(left, right, collation10,) {
       assert(left.type === right.type,);
       let leftValue = left.value;
       let rightValue = right.value;
-      if (collation10.type === 0) {
+      if (collation11.type === 0) {
         leftValue = left.value.toLowerCase();
         rightValue = right.value.toLowerCase();
       }
@@ -39952,6 +40174,205 @@ var unknownDefinition = {
   type: 'unknown',
   isNullable: true,
 };
+function getNetworkLatency() {
+  return 25;
+}
+function getNetworkSpeed() {
+  return 100 * 125;
+}
+var KB = 1e3;
+var Cost = class {
+  constructor(network,) {
+    this.network = network;
+  }
+  static estimate(totalRequests, transferredBytes,) {
+    const latency = getNetworkLatency();
+    const speed = getNetworkSpeed();
+    const network = totalRequests * latency + transferredBytes / speed;
+    return new Cost(network,);
+  }
+  static max(left, right,) {
+    const network = Math.max(left.network, right.network,);
+    return new Cost(network,);
+  }
+  static compare(left, right,) {
+    if (left.network < right.network) return -1;
+    if (left.network > right.network) return 1;
+    return 0;
+  }
+  add(cost,) {
+    this.network += cost.network;
+    return this;
+  }
+  toString() {
+    return `${this.network}ms`;
+  }
+};
+function GroupId(id3,) {
+  return id3;
+}
+var Group = class {
+  constructor(id3, relational,) {
+    this.id = id3;
+    this.relational = relational;
+    __publicField(this, 'nodes', [],);
+    __publicField(this, 'winners', /* @__PURE__ */ new Map(),);
+  }
+  /**
+   * Adds a node to the group. Throws an error if the node is already in a
+   * group.
+   */
+  addNode(node,) {
+    this.nodes.push(node,);
+    node.setGroup(this,);
+  }
+  /**
+   * Returns the winner for the given required physical props. The winner
+   * stores the best node and its cost. This is used to find the best node in
+   * the group.
+   */
+  getWinner(required,) {
+    const hash2 = required.getHash();
+    const existing = this.winners.get(hash2,);
+    if (existing) return existing;
+    const winner = new Winner();
+    this.winners.set(hash2, winner,);
+    return winner;
+  }
+  /**
+   * Returns the optimized version of the node. The optimized version is the
+   * node with the lowest cost with all children replaced with their optimized
+   * versions. This is used to create the final optimized query plan.
+   */
+  getOptimized(required,) {
+    const winner = this.getWinner(required,);
+    assert(winner.node, 'Group not optimized',);
+    const optimizer = winner.node.getOptimized(required,);
+    optimizer.setGroup(this,);
+    return optimizer;
+  }
+};
+var Winner = class {
+  constructor() {
+    __publicField(this, 'node',);
+    __publicField(this, 'cost', new Cost(Infinity,),);
+    __publicField(this, 'nodes', [],);
+  }
+  update(node, cost,) {
+    this.nodes.push(node,);
+    if (Cost.compare(cost, this.cost,) < 0) {
+      this.node = node;
+      this.cost = cost;
+    }
+  }
+};
+function evaluateSync(generator,) {
+  const state2 = generator.next();
+  assert(state2.done, 'Generator must not yield',);
+  return state2.value;
+}
+async function evaluateAsync(generator, state2 = generator.next(),) {
+  while (!state2.done) {
+    const value = await state2.value;
+    state2 = generator.next(value,);
+  }
+  return state2.value;
+}
+function* evaluateObject(values,) {
+  const result = {};
+  const keys3 = Object.keys(values,);
+  const promises = [];
+  for (const key7 of keys3) {
+    const generator = values[key7];
+    if (isGenerator2(generator,)) {
+      const state2 = generator.next();
+      if (state2.done) {
+        result[key7] = state2.value;
+      } else {
+        promises.push(
+          evaluateAsync(generator, state2,).then((value) => {
+            result[key7] = value;
+          },),
+        );
+      }
+    } else {
+      result[key7] = generator;
+    }
+  }
+  if (promises.length > 0) {
+    yield Promise.all(promises,);
+  }
+  return result;
+}
+function* evaluateArray(values,) {
+  const result = [];
+  const keys3 = values.keys();
+  const promises = [];
+  for (const key7 of keys3) {
+    const generator = values[key7];
+    if (isGenerator2(generator,)) {
+      const state2 = generator.next();
+      if (state2.done) {
+        result[key7] = state2.value;
+      } else {
+        promises.push(
+          evaluateAsync(generator, state2,).then((value) => {
+            result[key7] = value;
+          },),
+        );
+      }
+    } else {
+      result[key7] = generator;
+    }
+  }
+  if (promises.length > 0) {
+    yield Promise.all(promises,);
+  }
+  return result;
+}
+var AbstractNode = class {
+  constructor(isSynchronous,) {
+    this.isSynchronous = isSynchronous;
+  }
+};
+var RelationalNode = class extends AbstractNode {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'group',);
+  }
+  /**
+   * Returns the group that the node belongs to. Throws an error if the node
+   * is not in a group. This should only happen in the constructor because
+   * every node is added to a group right after creation.
+   */
+  getGroup() {
+    assert(this.group, 'Node must be in a group',);
+    return this.group;
+  }
+  /**
+   * Adds the node to the given group. Throws an error if the node is already
+   * in a group.
+   */
+  setGroup(group,) {
+    assert(!this.group, 'Node is already in a group',);
+    this.group = group;
+  }
+  /**
+   * Evaluates the node and all children synchronously. Throws an error if the
+   * node is not synchronous.
+   */
+  evaluateSync() {
+    const generator = this.evaluate(void 0,);
+    return evaluateSync(generator,);
+  }
+  /**
+   * Evaluates the node and all children asynchronously.
+   */
+  evaluateAsync() {
+    const generator = this.evaluate(void 0,);
+    return evaluateAsync(generator,);
+  }
+};
 function Hash(value,) {
   return value;
 }
@@ -39960,6 +40381,16 @@ function isHashable(value,) {
 }
 function calculateHash(name, ...values) {
   const hashes = values.map((value) => {
+    const isCollectionMetadata = value instanceof CollectionMetadata;
+    assert(!isCollectionMetadata, 'Pass CollectionMetadata.id instead',);
+    const isFieldMetadata = value instanceof FieldMetadata;
+    assert(!isFieldMetadata, 'Pass FieldMetadata.id instead',);
+    const isIndexMetadata = value instanceof IndexMetadata;
+    assert(!isIndexMetadata, 'Pass IndexMetadata.id instead',);
+    const isRelationalNode = value instanceof RelationalNode;
+    assert(!isRelationalNode, 'Pass RelationalNode.group.id instead',);
+    const isGroup = value instanceof Group;
+    assert(!isGroup, 'Pass Group.id instead',);
     if (isHashable(value,)) {
       return value.getHash();
     }
@@ -40078,104 +40509,6 @@ var Fields = class extends Metadata {
     __publicField(this, 'name', 'Fields',);
   }
 };
-function getNetworkLatency() {
-  return 25;
-}
-function getNetworkSpeed() {
-  return 100 * 125;
-}
-var KB = 1e3;
-var Cost = class {
-  constructor(network,) {
-    this.network = network;
-  }
-  static estimate(totalRequests, transferredBytes,) {
-    const latency = getNetworkLatency();
-    const speed = getNetworkSpeed();
-    const network = totalRequests * latency + transferredBytes / speed;
-    return new Cost(network,);
-  }
-  static max(left, right,) {
-    const network = Math.max(left.network, right.network,);
-    return new Cost(network,);
-  }
-  static compare(left, right,) {
-    if (left.network < right.network) return -1;
-    if (left.network > right.network) return 1;
-    return 0;
-  }
-  add(cost,) {
-    this.network += cost.network;
-    return this;
-  }
-  toString() {
-    return `${this.network}ms`;
-  }
-};
-function evaluateSync(generator,) {
-  const state2 = generator.next();
-  assert(state2.done, 'Generator must not yield',);
-  return state2.value;
-}
-async function evaluateAsync(generator, state2 = generator.next(),) {
-  while (!state2.done) {
-    const value = await state2.value;
-    state2 = generator.next(value,);
-  }
-  return state2.value;
-}
-function* evaluateObject(values,) {
-  const result = {};
-  const keys3 = Object.keys(values,);
-  const promises = [];
-  for (const key7 of keys3) {
-    const generator = values[key7];
-    if (isGenerator2(generator,)) {
-      const state2 = generator.next();
-      if (state2.done) {
-        result[key7] = state2.value;
-      } else {
-        promises.push(
-          evaluateAsync(generator, state2,).then((value) => {
-            result[key7] = value;
-          },),
-        );
-      }
-    } else {
-      result[key7] = generator;
-    }
-  }
-  if (promises.length > 0) {
-    yield Promise.all(promises,);
-  }
-  return result;
-}
-function* evaluateArray(values,) {
-  const result = [];
-  const keys3 = values.keys();
-  const promises = [];
-  for (const key7 of keys3) {
-    const generator = values[key7];
-    if (isGenerator2(generator,)) {
-      const state2 = generator.next();
-      if (state2.done) {
-        result[key7] = state2.value;
-      } else {
-        promises.push(
-          evaluateAsync(generator, state2,).then((value) => {
-            result[key7] = value;
-          },),
-        );
-      }
-    } else {
-      result[key7] = generator;
-    }
-  }
-  if (promises.length > 0) {
-    yield Promise.all(promises,);
-  }
-  return result;
-}
 var RequiredProps = class {
   constructor(ordering, resolvedFields,) {
     this.ordering = ordering;
@@ -40226,8 +40559,11 @@ var Tuple = class {
     __publicField(this, 'values', /* @__PURE__ */ new Map(),);
   }
   getKey() {
-    const pointers = this.pointers.values();
-    return Array.from(pointers,).join('-',);
+    const result = [];
+    for (const [collection, pointer,] of this.pointers) {
+      result.push(`${collection.id}-${pointer}`,);
+    }
+    return result.sort().join('-',);
   }
   addValue(field, value,) {
     this.values.set(field, value,);
@@ -40322,49 +40658,6 @@ var Relation = class {
     return result;
   }
 };
-var AbstractNode = class {
-  constructor(isSynchronous,) {
-    this.isSynchronous = isSynchronous;
-  }
-};
-var RelationalNode = class extends AbstractNode {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'group',);
-  }
-  /**
-   * Returns the group that the node belongs to. Throws an error if the node
-   * is not in a group. This should only happen in the constructor because
-   * every node is added to a group right after creation.
-   */
-  getGroup() {
-    assert(this.group, 'Node must be in a group',);
-    return this.group;
-  }
-  /**
-   * Adds the node to the given group. Throws an error if the node is already
-   * in a group.
-   */
-  setGroup(group,) {
-    assert(!this.group, 'Node is already in a group',);
-    this.group = group;
-  }
-  /**
-   * Evaluates the node and all children synchronously. Throws an error if the
-   * node is not synchronous.
-   */
-  evaluateSync() {
-    const generator = this.evaluate(void 0,);
-    return evaluateSync(generator,);
-  }
-  /**
-   * Evaluates the node and all children asynchronously.
-   */
-  evaluateAsync() {
-    const generator = this.evaluate(void 0,);
-    return evaluateAsync(generator,);
-  }
-};
 var ProjectionField = class {
   constructor(input, field,) {
     this.input = input;
@@ -40397,7 +40690,20 @@ var RelationalProject = class extends RelationalNode {
     }
     return fields;
   }
-  canProvideOrdering() {
+  canProvideOrdering(ordering,) {
+    const projectionFields = new Fields();
+    for (const projection of this.projections) {
+      projectionFields.add(projection.field,);
+    }
+    for (
+      const {
+        field,
+      } of ordering.fields
+    ) {
+      if (projectionFields.has(field,)) {
+        return false;
+      }
+    }
     return true;
   }
   canProvideResolvedFields() {
@@ -41491,24 +41797,19 @@ var RelationalLeftJoin = class extends RelationalNode {
     return new RelationalLeftJoin(left, right, constraint,);
   }
   /** Optimized path for equality constraints that runs in O(n + m) time. */
-  *evaluateScalarEquals(result, constraint, context,) {
-    const {
-      left,
-      right,
-    } = yield* evaluateObject({
-      left: this.left.evaluate(context,),
-      right: this.right.evaluate(context,),
-    },);
+  *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
     const joinKeyMap = /* @__PURE__ */ new Map();
     for (const rightTuple of right.tuples) {
-      const rightValue = yield* constraint.right.evaluate(context, rightTuple,);
+      const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
       const key7 = JSON.stringify((rightValue == null ? void 0 : rightValue.value) ?? null,);
       const tuplesForKey = joinKeyMap.get(key7,) ?? [];
       tuplesForKey.push(rightTuple,);
       joinKeyMap.set(key7, tuplesForKey,);
     }
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
     for (const leftTuple of left.tuples) {
-      const leftValue = yield* constraint.left.evaluate(context, leftTuple,);
+      const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
       const key7 = JSON.stringify((leftValue == null ? void 0 : leftValue.value) ?? null,);
       const matches = joinKeyMap.get(key7,) ?? [];
       if (matches.length === 0) {
@@ -41525,12 +41826,6 @@ var RelationalLeftJoin = class extends RelationalNode {
     return result;
   }
   *evaluate(context,) {
-    const outputFields = this.getOutputFields();
-    const result = new Relation(outputFields,);
-    if (this.constraint instanceof ScalarEquals) {
-      yield* this.evaluateScalarEquals(result.tuples, this.constraint, context,);
-      return result;
-    }
     const {
       left,
       right,
@@ -41538,6 +41833,22 @@ var RelationalLeftJoin = class extends RelationalNode {
       left: this.left.evaluate(context,),
       right: this.right.evaluate(context,),
     },);
+    if (this.constraint instanceof ScalarEquals) {
+      if (
+        this.constraint.left.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
+        this.constraint.right.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
+      ) {
+        return yield* this.evaluateScalarEquals(left, right, this.constraint.left, this.constraint.right, context,);
+      }
+      if (
+        this.constraint.right.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
+        this.constraint.left.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
+      ) {
+        return yield* this.evaluateScalarEquals(left, right, this.constraint.right, this.constraint.left, context,);
+      }
+    }
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
     for (const leftTuple of left.tuples) {
       let hasMatch = false;
       for (const rightTuple of right.tuples) {
@@ -41614,24 +41925,19 @@ var RelationalRightJoin = class extends RelationalNode {
     return new RelationalRightJoin(left, right, constraint,);
   }
   /** Optimized path for equality constraints that runs in O(n + m) time. */
-  *evaluateScalarEquals(result, constraint, context,) {
-    const {
-      left,
-      right,
-    } = yield* evaluateObject({
-      left: this.left.evaluate(context,),
-      right: this.right.evaluate(context,),
-    },);
+  *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
     const joinKeyMap = /* @__PURE__ */ new Map();
     for (const leftTuple of left.tuples) {
-      const leftValue = yield* constraint.left.evaluate(context, leftTuple,);
+      const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
       const key7 = JSON.stringify((leftValue == null ? void 0 : leftValue.value) ?? null,);
       const tuplesForKey = joinKeyMap.get(key7,) ?? [];
       tuplesForKey.push(leftTuple,);
       joinKeyMap.set(key7, tuplesForKey,);
     }
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
     for (const rightTuple of right.tuples) {
-      const rightValue = yield* constraint.right.evaluate(context, rightTuple,);
+      const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
       const key7 = JSON.stringify((rightValue == null ? void 0 : rightValue.value) ?? null,);
       const matches = joinKeyMap.get(key7,) ?? [];
       if (matches.length === 0) {
@@ -41648,12 +41954,6 @@ var RelationalRightJoin = class extends RelationalNode {
     return result;
   }
   *evaluate(context,) {
-    const outputFields = this.getOutputFields();
-    const result = new Relation(outputFields,);
-    if (this.constraint instanceof ScalarEquals) {
-      yield* this.evaluateScalarEquals(result.tuples, this.constraint, context,);
-      return result;
-    }
     const {
       left,
       right,
@@ -41661,6 +41961,22 @@ var RelationalRightJoin = class extends RelationalNode {
       left: this.left.evaluate(context,),
       right: this.right.evaluate(context,),
     },);
+    if (this.constraint instanceof ScalarEquals) {
+      if (
+        this.constraint.left.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
+        this.constraint.right.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
+      ) {
+        return yield* this.evaluateScalarEquals(left, right, this.constraint.left, this.constraint.right, context,);
+      }
+      if (
+        this.constraint.right.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
+        this.constraint.left.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
+      ) {
+        return yield* this.evaluateScalarEquals(left, right, this.constraint.right, this.constraint.left, context,);
+      }
+    }
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
     for (const rightTuple of right.tuples) {
       let hasMatch = false;
       for (const leftTuple of left.tuples) {
@@ -42291,7 +42607,7 @@ var Explorer = class {
   explore(before,) {
     const group = before.getGroup();
     if (before instanceof RelationalLeftJoin) {
-      const after = new RelationalRightJoin(before.left, before.right, before.constraint,);
+      const after = new RelationalRightJoin(before.right, before.left, before.constraint,);
       this.memo.addRelational(after, group,);
     }
     if (before instanceof RelationalFilter) {
@@ -42454,62 +42770,6 @@ function createIndexQueryAll(length,) {
   };
   return new Array(length,).fill(lookup,);
 }
-function GroupId(id3,) {
-  return id3;
-}
-var Group = class {
-  constructor(id3, relational,) {
-    this.id = id3;
-    this.relational = relational;
-    __publicField(this, 'nodes', [],);
-    __publicField(this, 'winners', /* @__PURE__ */ new Map(),);
-  }
-  /**
-   * Adds a node to the group. Throws an error if the node is already in a
-   * group.
-   */
-  addNode(node,) {
-    this.nodes.push(node,);
-    node.setGroup(this,);
-  }
-  /**
-   * Returns the winner for the given required physical props. The winner
-   * stores the best node and its cost. This is used to find the best node in
-   * the group.
-   */
-  getWinner(required,) {
-    const hash2 = required.getHash();
-    const existing = this.winners.get(hash2,);
-    if (existing) return existing;
-    const winner = new Winner();
-    this.winners.set(hash2, winner,);
-    return winner;
-  }
-  /**
-   * Returns the optimized version of the node. The optimized version is the
-   * node with the lowest cost with all children replaced with their optimized
-   * versions. This is used to create the final optimized query plan.
-   */
-  getOptimized(required,) {
-    const winner = this.getWinner(required,);
-    assert(winner.node, 'Group not optimized',);
-    const optimizer = winner.node.getOptimized(required,);
-    optimizer.setGroup(this,);
-    return optimizer;
-  }
-};
-var Winner = class {
-  constructor() {
-    __publicField(this, 'node',);
-    __publicField(this, 'cost', new Cost(Infinity,),);
-  }
-  update(node, cost,) {
-    if (Cost.compare(cost, this.cost,) < 0) {
-      this.node = node;
-      this.cost = cost;
-    }
-  }
-};
 var RelationalProps = class {
   constructor(outputFields,) {
     this.outputFields = outputFields;
@@ -42676,9 +42936,9 @@ var EnforcerSort = class extends EnforcerNode {
         field,
       } of this.ordering.fields
     ) {
-      if (field.name !== VIRTUAL_INDEX_FIELD) {
-        resolvedFields.add(field,);
-      }
+      if (field.name === VIRTUAL_INDEX_FIELD) continue;
+      if (isUndefined(field.collection,)) continue;
+      resolvedFields.add(field,);
     }
     const ordering = new Ordering();
     return new RequiredProps(ordering, resolvedFields,);
@@ -42885,6 +43145,7 @@ var ScalarArray = class extends ScalarNode {
     const resolvedFields = new Fields();
     const fields = Object.values(this.namedFields,);
     for (const field of fields) {
+      if (isUndefined(field.collection,)) continue;
       resolvedFields.add(field,);
     }
     return new RequiredProps(this.ordering, resolvedFields,);
@@ -42976,7 +43237,9 @@ var ScalarFlatArray = class extends ScalarNode {
   }
   getInputRequiredProps() {
     const resolvedFields = new Fields();
-    resolvedFields.add(this.field,);
+    if (!isUndefined(this.field.collection,)) {
+      resolvedFields.add(this.field,);
+    }
     return new RequiredProps(this.ordering, resolvedFields,);
   }
   optimize(optimizer,) {
@@ -43002,7 +43265,7 @@ var ScalarFlatArray = class extends ScalarNode {
     };
   }
 };
-var collation7 = {
+var collation8 = {
   type: 0,
   /* CaseInsensitive */
 };
@@ -43049,11 +43312,11 @@ var ScalarIn = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: DatabaseValue.in(left, right, collation7,),
+      value: DatabaseValue.in(left, right, collation8,),
     };
   }
 };
-var collation8 = {
+var collation9 = {
   type: 1,
   /* CaseSensitive */
 };
@@ -43100,7 +43363,7 @@ var ScalarIndexOf = class extends ScalarNode {
     },);
     return {
       type: 'number',
-      value: DatabaseValue.indexOf(source, target, collation8,),
+      value: DatabaseValue.indexOf(source, target, collation9,),
     };
   }
 };
@@ -43164,7 +43427,7 @@ var ScalarNot = class extends ScalarNode {
     };
   }
 };
-var collation9 = {
+var collation10 = {
   type: 0,
   /* CaseInsensitive */
 };
@@ -43211,7 +43474,7 @@ var ScalarNotIn = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: !DatabaseValue.in(left, right, collation9,),
+      value: !DatabaseValue.in(left, right, collation10,),
     };
   }
 };
@@ -43596,6 +43859,11 @@ var Optimizer = class {
         this.explorer.explore(node,);
       }
     }
+    if (false) {
+      assert(winner.node, 'Group not optimized',);
+      const cache2 = /* @__PURE__ */ new Map();
+      winner.node = new RelationalAssert(winner.node, required, cache2,);
+    }
     return winner.cost;
   }
   createEnforcer(winner, node, required,) {
@@ -43868,7 +44136,7 @@ var AnimationCollector = class {
 };
 _variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component16,) {
+function withOptimizedAppearEffect(Component17,) {
   return React4.forwardRef(({
     optimized,
     ...props
@@ -43889,7 +44157,7 @@ function withOptimizedAppearEffect(Component16,) {
         generatedComponentContext,
       );
     }
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ref,
       ...props,
     },);
@@ -44431,12 +44699,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component16 = typeof target === 'string'
+    const Component17 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
       : React4.isValidElement(target,)
       ? target
       : null;
-    if (!Component16) return;
+    if (!Component17) return;
     const {
       appearsFrom,
       backdropColor,
@@ -44445,38 +44713,38 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component16,);
+        navigation.instant(Component17,);
         break;
       case 'fade':
-        navigation.fade(Component16, {
+        navigation.fade(Component17, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component16, {
+        navigation.push(Component17, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component16, {
+        navigation.flip(Component17, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component16, {
+        navigation.magicMotion(Component17, {
           animation,
         },);
         break;
       case 'modal':
-        navigation.modal(Component16, {
+        navigation.modal(Component17, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component16, {
+        navigation.overlay(Component17, {
           appearsFrom,
           backdropColor,
           animation,
@@ -44888,6 +45156,72 @@ function useVariantState({
     variantClassNames,
   ],);
 }
+function withCodeBoundaryForOverrides(Component17, {
+  scopeId,
+  nodeId,
+  override,
+  inComponentSlot,
+},) {
+  if (!shouldEnableCodeBoundaries()) {
+    return override(Component17,);
+  }
+  const appliedOverride = tryToApplyOverride(Component17, override,);
+  let hasErrorBeenLogged = false;
+  function CodeBoundaryForOverrides(props, ref,) {
+    const externalComponentNestingLevel = useExternalComponentNestingLevel();
+    const shouldWrapWithBoundary = shouldWrapOverrideWithBoundary(externalComponentNestingLevel, inComponentSlot ?? false,);
+    if (shouldWrapWithBoundary) {
+      if (appliedOverride.status === 'success') {
+        return /* @__PURE__ */ jsx(CodeComponentBoundary, {
+          errorMessage: getErrorMessageForOverride(scopeId, nodeId,),
+          fallback: /* @__PURE__ */ jsx(Component17, {
+            ...props,
+            ref,
+          },),
+          children: /* @__PURE__ */ jsx(appliedOverride.Component, {
+            ...props,
+            ref,
+          },),
+        },);
+      } else {
+        if (!hasErrorBeenLogged) {
+          logError(appliedOverride.error,);
+          logError(getErrorMessageForOverride(scopeId, nodeId,),);
+          collectErrorToAnalytics(appliedOverride.error,);
+          hasErrorBeenLogged = true;
+        }
+        return /* @__PURE__ */ jsx(Component17, {
+          ...props,
+          ref,
+        },);
+      }
+    } else {
+      if (appliedOverride.status === 'success') {
+        return /* @__PURE__ */ jsx(appliedOverride.Component, {
+          ...props,
+          ref,
+        },);
+      } else {
+        throw appliedOverride.error;
+      }
+    }
+  }
+  return React4.forwardRef(CodeBoundaryForOverrides,);
+}
+function tryToApplyOverride(Component17, override,) {
+  try {
+    const ComponentWithOverrides = override(Component17,);
+    return {
+      status: 'success',
+      Component: ComponentWithOverrides,
+    };
+  } catch (error) {
+    return {
+      status: 'error',
+      error,
+    };
+  }
+}
 function extractMappingFromInfo(info,) {
   var _a;
   const json = (_a = info.__FramerMetadata__.exports.default.annotations) == null ? void 0 : _a.framerVariables;
@@ -44898,14 +45232,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component16, info,) {
+function withMappedReactProps(Component17, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
     },);
   };
@@ -44946,10 +45280,10 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component16) =>
+var withVariantAppearEffect = (Component17) =>
   React4.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx(Component16, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...props,
         ref: forwardedRef,
       },);
@@ -45036,18 +45370,18 @@ var withVariantAppearEffect = (Component16) =>
       repeat: !animateOnce,
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx(Component16, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx(Component16, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component16) =>
+var withVariantFX = (Component17) =>
   React4.forwardRef(({
     initial,
     animate: animate3,
@@ -45064,7 +45398,7 @@ var withVariantFX = (Component16) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx(Component16, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -48751,10 +49085,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component16 = htmlElementAsMotionComponent(props.as,);
+  const Component17 = htmlElementAsMotionComponent(props.as,);
   if (isString2(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx(Component16, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -48787,7 +49121,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
       },);
     }
   }
-  return /* @__PURE__ */ jsx(Component16, {
+  return /* @__PURE__ */ jsx(Component17, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -51623,6 +51957,7 @@ export {
   sharedSVGManager,
   shouldOpenLinkInNewTab,
   Size,
+  SmartComponentScopedContainer,
   spring,
   SpringAnimator,
   SSRVariants,
@@ -51734,6 +52069,7 @@ export {
   visualElementStore,
   warning,
   WindowContext,
+  withCodeBoundaryForOverrides,
   withCSS,
   withFX,
   withGeneratedLayoutId,
