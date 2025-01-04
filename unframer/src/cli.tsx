@@ -76,7 +76,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     cwd,
                     signal,
                 })
-                console.log('buildContext', buildContext)
+                // console.log('buildContext', buildContext)
                 if (!websiteUrl || !options.watch) {
                     await buildContext?.dispose?.()
                     return
