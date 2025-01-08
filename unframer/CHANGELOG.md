@@ -1,5 +1,12 @@
 # unframer
 
+## 2.12.1
+
+### Patch Changes
+
+-   d80361a: Update framer to 2.4.1, update framer motion to 11.11.7
+-   eaab0ce: Do not render a tags twice
+
 ## 2.12.0
 
 ### Minor Changes
