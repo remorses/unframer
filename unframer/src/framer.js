@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.W2IMDDH5.mjs
+// https :https://app.framerstatic.com/framer.K777Q2AQ.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17147,6 +17147,9 @@ function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect
 }
 var noop2 = () => {};
 var EMPTY_ARRAY = [];
+var requestIdleCallback = /* @__PURE__ */ (() => {
+  return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
+})();
 var ErrorBoundaryCaughtError = class extends NotFoundErrorBoundaryCaughtError {
   constructor() {
     super(...arguments,);
@@ -17815,11 +17818,8 @@ function createViewTransitionStylesheet({
   styleElement.textContent = styleContent;
   document.head.appendChild(styleElement,);
 }
-var _requestIdleCallback = /* @__PURE__ */ (() => {
-  return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
-})();
 function removeViewTransitionStylesheet() {
-  _requestIdleCallback(() => {
+  requestIdleCallback(() => {
     frame.render(() => {
       performance.mark('framer-vt-remove',);
       const element = document.getElementById(VIEW_TRANSITION_STYLES_ID,);
@@ -17946,14 +17946,15 @@ async function pushRouteState(
     path,
   } = route;
   if (!path) return;
+  const newPath = getPathForRoute(route, {
+    currentRoutePath,
+    currentPathVariables,
+    hash: hash2,
+    pathVariables,
+    preserveQueryParams,
+  },);
+  const currentUrl = window.location.href;
   try {
-    const newPath = getPathForRoute(route, {
-      currentRoutePath,
-      currentPathVariables,
-      hash: hash2,
-      pathVariables,
-      preserveQueryParams,
-    },);
     const urlUpdatePromise = pushHistoryState(
       {
         routeId,
@@ -17967,6 +17968,15 @@ async function pushRouteState(
     );
     return await urlUpdatePromise;
   } catch {}
+}
+function updateCanonicalURL(url, prevUrl,) {
+  requestIdleCallback(() => {
+    const canonical = document.querySelector('link[rel=\'canonical\']',);
+    if (!canonical) return;
+    const newURL = new URL(url, prevUrl,);
+    newURL.search = '';
+    canonical.setAttribute('href', newURL.toString(),);
+  },);
 }
 function isHistoryState(data2,) {
   const routeIdKey = 'routeId';
@@ -17992,6 +18002,7 @@ async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNa
     },);
   }
   performance.mark('framer-history-push',);
+  updateCanonicalURL(url, window.location.href,);
   if (!isNavigationTransition) {
     window.history.pushState(data2, '', url,);
     return;
@@ -18077,10 +18088,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         isString(localeId,) ? localeId : void 0,
         isString(hash2,) ? hash2 : void 0,
         isObject(pathVariables,) ? pathVariables : void 0,
-        false,
         true,
+        false,
       );
     };
+    updateCanonicalURL(window.location.href,);
     const transition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
     if (transition) {
       void transition.updateCallbackDone.then((_d = viewTransitionReady.current) === null || _d === void 0 ? void 0 : _d.resolve,).catch(
@@ -18620,8 +18632,9 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
   return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
     var _a;
     setHydrationDone();
+    const hasUpdateURL = updateURL !== void 0;
     if (!enableAsyncURLUpdates) {
-      await (updateURL === null || updateURL === void 0 ? void 0 : updateURL());
+      if (hasUpdateURL) await updateURL();
       transitionFn();
       void monitorNextPaintAfterRender();
       return new Promise((resolve) => {
@@ -18633,7 +18646,7 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
     navigationController.current = controller;
     const signal = controller === null || controller === void 0 ? void 0 : controller.signal;
     const nextRender = monitorNextPaintAfterRender();
-    if (!updateURL) {
+    if (!hasUpdateURL) {
       navigationController.current = void 0;
       transitionFn(signal,);
       return nextRender;
@@ -18772,7 +18785,7 @@ function Router({
     startViewTransition2,
   ],);
   const setCurrentRouteId = useCallback(
-    (routeId, localeId, hash2, pathVariables, smoothScroll = false, isHistoryTransition = false, updateURL,) => {
+    (routeId, localeId, hash2, pathVariables, isHistoryTransition, smoothScroll = false, updateURL,) => {
       const currentRouteId2 = currentRouteRef.current;
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -18861,8 +18874,8 @@ function Router({
       currentRouteLocaleId,
       routeElementId,
       pathVariables,
-      smoothScroll,
       false,
+      smoothScroll,
       disableHistory ? void 0 : updateURL,
     );
   }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates,],);
@@ -44340,7 +44353,9 @@ function activeBreakpointHashFromWindow(breakpoints,) {
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext(IsInitialNavigationContext,);
-  const baseVariant = useRef(isBrowser2() ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const onCanvas = useIsOnFramerCanvas();
+  const usesMediaQueries = !onCanvas && isBrowser2();
+  const baseVariant = useRef(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
   const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate3();
   const instantTransition = useInstantTransition();
@@ -44404,8 +44419,8 @@ function removeHiddenBreakpointLayersV2(breakpoints,) {
       (_a = hiddenLayer.parentNode) == null ? void 0 : _a.removeChild(hiddenLayer,);
     }
   }
-  const requestIdleCallback = safeWindow.requestIdleCallback ?? requestIdleCallbackFallback;
-  requestIdleCallback(() => {
+  const requestIdleCallback2 = safeWindow.requestIdleCallback ?? requestIdleCallbackFallback;
+  requestIdleCallback2(() => {
     var _a2;
     (_a2 = document.querySelector(framerBreakpointCSSSelector,)) == null ? void 0 : _a2.remove();
   },);
