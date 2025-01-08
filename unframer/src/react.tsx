@@ -277,9 +277,10 @@ export function AdaptedLink({
     const webPageId = href?.webPageId as string
     const pathVariables = href?.pathVariables as Record<string, string>
     const route = routes?.[webPageId]
+    const target = openInNewTab ? '_blank' : undefined
     // console.log({ href, pathVariables, path: route?.path, ...rest })
     if (href?.startsWith && href.startsWith('/')) {
-        return <a href={href} {...rest} />
+        return <a href={href} target={target} {...rest} />
     }
     if (!webPageId) {
         return <Link href={href} {...rest} {...onlyForFramer} />
@@ -293,7 +294,7 @@ export function AdaptedLink({
         path = replacePathParams(path, pathVariables)
     }
     if (path?.startsWith?.('/')) {
-        return <a href={path} {...rest} />
+        return <a href={path} target={target} {...rest} />
     }
 
     return <Link href={path} {...rest} {...onlyForFramer} />
