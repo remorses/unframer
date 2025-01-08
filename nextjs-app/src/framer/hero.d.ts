@@ -13,7 +13,9 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: 'Variant 1' | 'mobile'
+    "news"?: string
+    "heading"?: string
 }
 
 const HeroFramerComponent = (props: Props) => any

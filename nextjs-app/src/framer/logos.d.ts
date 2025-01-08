@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: 'Logo Ticker' | 'Logo Ticker - M'
 }
 
 const LogosFramerComponent = (props: Props) => any

@@ -3,8 +3,10 @@ import * as React from "react"
 
 import { UnframerBreakpoint } from "unframer"
 
+type Locale = string
 export interface Props {
     children?: React.ReactNode
+    locale?: Locale
     style?: React.CSSProperties
     className?: string
     id?: string

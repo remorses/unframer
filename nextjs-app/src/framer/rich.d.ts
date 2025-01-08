@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "content"?: undefined
 }
 
 const RichFramerComponent = (props: Props) => any

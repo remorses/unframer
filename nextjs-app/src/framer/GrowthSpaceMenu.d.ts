@@ -13,7 +13,14 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: '1' | '2' | 'Rani' | 'RaniHistory' | '3'
+    "on2"?: Function
+    "on1"?: Function
+    "on3"?: Function
+    "title"?: string
+    "platformName1"?: string
+    "platformName2"?: string
+    "platformName3"?: string
 }
 
 const GrowthSpaceMenuFramerComponent = (props: Props) => any
