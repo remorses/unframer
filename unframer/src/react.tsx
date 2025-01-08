@@ -270,9 +270,11 @@ export function AdaptedLink({
     nodeId,
     openInNewTab,
     smoothScroll,
+    children,
     ...rest
 }) {
-    const onlyForFramer = { nodeId, openInNewTab, smoothScroll }
+    
+    const onlyForFramer = { children, nodeId, openInNewTab, smoothScroll }
     const routes = React.useContext(routesContext)
     const webPageId = href?.webPageId as string
     const pathVariables = href?.pathVariables as Record<string, string>
@@ -280,7 +282,7 @@ export function AdaptedLink({
     const target = openInNewTab ? '_blank' : undefined
     // console.log({ href, pathVariables, path: route?.path, ...rest })
     if (href?.startsWith && href.startsWith('/')) {
-        return <a href={href} target={target} {...rest} />
+        return React.cloneElement(children, { ...rest, href, target })
     }
     if (!webPageId) {
         return <Link href={href} {...rest} {...onlyForFramer} />
@@ -294,7 +296,11 @@ export function AdaptedLink({
         path = replacePathParams(path, pathVariables)
     }
     if (path?.startsWith?.('/')) {
-        return <a href={path} target={target} {...rest} />
+        return React.cloneElement(children, {
+            ...rest,
+            href: path,
+            target,
+        })
     }
 
     return <Link href={path} {...rest} {...onlyForFramer} />
