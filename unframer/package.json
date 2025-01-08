@@ -59,7 +59,7 @@
         "just-kebab-case": "^4.2.0",
         "marked": "^15.0.3",
         "marked-terminal": "^7.2.1",
-        "nanospinner": "^1.2.0",
+        "nanospinner": "^1.2.2",
         "picocolors": "^1.0.1",
         "real-framer-motion": "npm:framer-motion@11.2.10",
         "spiceflow": "^1.4.1",

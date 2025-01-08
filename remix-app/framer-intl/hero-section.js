@@ -568,6 +568,7 @@ function ComponentWithRoot({ locale, ...rest },) {
         },
         'cvVskSlKE': {
           'path': '/sign-up',
+          'page': null,
         },
         'dqRVpj9Kn': {
           'path': '/docs/:slug',

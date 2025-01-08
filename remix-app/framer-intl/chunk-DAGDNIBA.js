@@ -124,7 +124,7 @@ function withSingleToggle(Component3,) {
             }
           }
         } catch (e) {
-          console.warn('Cannot access stylesheet:', sheet.href,);
+          console.warn('Cannot access stylesheet:',e, sheet.href,);
         }
       }
       let styleElement = document.createElement('style',);
@@ -215,7 +215,7 @@ function withSingleToggle2(Component3,) {
             }
           }
         } catch (e) {
-          console.warn('Cannot access stylesheet:', sheet.href,);
+          console.warn('Cannot access stylesheet:', e,sheet.href,);
         }
       }
       let styleElement = document.createElement('style',);

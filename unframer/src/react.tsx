@@ -229,36 +229,117 @@ import {
     FormContext,
     // @ts-ignore
     Router,
+    // @ts-ignore
+    LocaleInfoContext,
+    // @ts-ignore
+    FramerLink as Link,
 } from './framer.js'
+import React from 'react'
+
+type Routes = Record<string, { path: string }>
+
+const routesContext = React.createContext<Routes>({})
+
+function replacePathParams(path: string, params: Record<string, string>) {
+    const paramRegex = /:[a-zA-Z]+/g
+    const matches = path.match(paramRegex)
+
+    // If there is only one match
+    if (matches?.length === 1) {
+        const paramValue = Object.values(params)[0]
+
+        let res = path.replace(paramRegex, paramValue)
+        // console.log({ matches, params, paramValue, res })
+
+        return res
+    }
+
+    return path.replace(paramRegex, (match) => {
+        const param = match.slice(1) // Remove the : prefix
+        return params[param] || match // Replace with param value or keep original if not found
+    })
+}
+
+export function ResolveLinksAdapted({ links, children }) {
+    // TODO add ref
+    return children(links.map((x) => x.href))
+}
+
+export function AdaptedLink({
+    href,
+    nodeId,
+    openInNewTab,
+    smoothScroll,
+    ...rest
+}) {
+    const onlyForFramer = { nodeId, openInNewTab, smoothScroll }
+    const routes = React.useContext(routesContext)
+    const webPageId = href?.webPageId as string
+    const pathVariables = href?.pathVariables as Record<string, string>
+    const route = routes?.[webPageId]
+    // console.log({ href, pathVariables, path: route?.path, ...rest })
+    if (href?.startsWith && href.startsWith('/')) {
+        return <a href={href} {...rest} />
+    }
+    if (!webPageId) {
+        return <Link href={href} {...rest} {...onlyForFramer} />
+    }
+
+    if (!route || !route.path) {
+        return <Link href={href} {...rest} {...onlyForFramer} />
+    }
+    let path = route.path
+    if (pathVariables) {
+        path = replacePathParams(path, pathVariables)
+    }
+    if (path?.startsWith?.('/')) {
+        return <a href={path} {...rest} />
+    }
+
+    return <Link href={path} {...rest} {...onlyForFramer} />
+}
 
 export function ContextProviders({
     locale,
     children,
     framerSiteId,
     routes,
-    routeId,
-    pathVariables,
-    collectionUtils,
+    // collectionUtils,
     locales,
 }) {
-    const localeId = locales?.find(
+    const activeLocale = locales?.find(
         (l) => l.slug === locale || l.code === locale || l.id === locale,
-    )?.id
+    )
+
+    const localeInfo = useMemo(() => {
+        return {
+            activeLocale,
+            locales,
+            setLocale: async (localeOrLocaleId) => {
+                console.log('setLocale', localeOrLocaleId)
+            },
+        }
+    }, [activeLocale, locales])
     return (
         <FetchClientProvider>
             <CustomCursorHost>
                 <FormContext.Provider value={framerSiteId}>
-                    <Router
-                        initialRoute={routeId}
-                        initialPathVariables={pathVariables}
-                        initialLocaleId={localeId}
-                        enableImproveInpDuringHydration={true}
-                        routes={routes}
-                        collectionUtils={collectionUtils}
-                        locales={locales}
-                    >
-                        {children}
-                    </Router>
+                    <LocaleInfoContext value={localeInfo}>
+                        <routesContext.Provider value={routes}>
+                            {/* <Router
+                                initialRoute='x'
+                                routes={{
+                                    x: { page: children, path: '/' },
+                                    ...routes,
+                                }}
+                                locales={locales}
+                                initialLocaleId={activeLocale?.id}
+                            >
+                                {children}
+                            </Router> */}
+                            {children}
+                        </routesContext.Provider>
+                    </LocaleInfoContext>
                 </FormContext.Provider>
             </CustomCursorHost>
         </FetchClientProvider>

@@ -4,7 +4,7 @@ import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
 import { createSpinner } from 'nanospinner'
 
-export const spinner = createSpinner('Downloading Framer Components') as any
+export const spinner = createSpinner('Downloading Framer Components')
 
 marked.use(markedTerminal())
 

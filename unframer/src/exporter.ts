@@ -68,6 +68,12 @@ export async function bundle({
 
     spinner.start()
 
+    const otherRoutes = Object.fromEntries(
+        (config.framerWebPages || []).map((page) => [
+            page.webPageId,
+            { path: page.path, page: null },
+        ]),
+    )
     const buildContext = await context({
         absWorkingDir: out,
         entryPoints: Object.keys(components).map((name) => {
@@ -121,20 +127,17 @@ export async function bundle({
                                     JSON.stringify(config.locales) || '[]'
                                 }
 
-                                Component.Responsive = ({ locale, ...props }) => {
+                                Component.Responsive = ({ locale, ...rest }) => {
                                     return (
                                         <ContextProviders
                                             routeId="x"
-                                            routes={{
-                                                x: {
-                                                    elements: {},
-                                                    page: <WithFramerBreakpoints
+                                            routes={${JSON.stringify(
+                                                otherRoutes,
+                                            )}}
+                                            children={<WithFramerBreakpoints
                                                         Component={Component}
-                                                        {...props}
-                                                    />,
-                                                    path: '/',
-                                                },
-                                            }}
+                                                        {...rest}
+                                                    />}
                                             framerSiteId={${JSON.stringify(
                                                 config.fullFramerProjectId,
                                             )}}
@@ -148,13 +151,12 @@ export async function bundle({
                                     return (
                                         <ContextProviders
                                             routeId="x"
-                                            routes={{
-                                                x: {
-                                                    elements: {},
-                                                    page: <Component {...rest} />,
-                                                    path: '/',
-                                                },
-                                            }}
+                                            routes={${JSON.stringify(
+                                                otherRoutes,
+                                                null,
+                                                2,
+                                            )}}
+                                            children={<Component {...rest} />}
                                             framerSiteId={${JSON.stringify(
                                                 config.fullFramerProjectId,
                                             )}}
@@ -227,21 +229,21 @@ export async function bundle({
                 `/* eslint-disable */\n` +
                 doNotEditComment +
                 formatted
-            if (framerWebPages?.length) {
-                codeNew = replaceWebPageIds({
-                    code: codeNew,
-                    elements: framerWebPages,
-                })
-            }
-            const lines = findRelativeLinks(codeNew)
-            if (lines.length) {
-                spinner.error(
-                    `found broken links for ${path.relative(out, file.path)}`,
-                )
-                lines.forEach((line) => {
-                    logger.log(`${path.resolve(out, file.path)}:${line + 1}`)
-                })
-            }
+            // if (framerWebPages?.length) {
+            //     codeNew = replaceWebPageIds({
+            //         code: codeNew,
+            //         elements: framerWebPages,
+            //     })
+            // }
+            // const lines = findRelativeLinks(codeNew)
+            // if (lines.length) {
+            //     spinner.error(
+            //         `found broken links for ${path.relative(out, file.path)}`,
+            //     )
+            //     lines.forEach((line) => {
+            //         logger.log(`${path.resolve(out, file.path)}:${line + 1}`)
+            //     })
+            // }
 
             if (existing === codeNew) {
                 continue
@@ -402,11 +404,15 @@ export async function bundle({
 
     // when user press ctrl+c dispose
     process.on('SIGINT', async () => {
+        spinner.stop()
+        console.log()
         await buildContext.cancel()
         buildContext.dispose()
         process.exit(0) // Ensure process exits
     })
     process.on('SIGABRT', async () => {
+        spinner.stop()
+        console.log()
         await buildContext.cancel()
         buildContext.dispose()
         process.exit(0) // Ensure process exits

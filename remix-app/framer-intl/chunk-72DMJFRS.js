@@ -62,7 +62,7 @@ function withSingleToggle(Component,) {
             }
           }
         } catch (e) {
-          console.warn('Cannot access stylesheet:', sheet.href,);
+          console.warn('Cannot access stylesheet:',e, sheet.href,);
         }
       }
       let styleElement = document.createElement('style',);
