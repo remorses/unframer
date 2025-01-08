@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.IVNDIC27.mjs
+// https :https://app.framerstatic.com/framer.W2IMDDH5.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17009,8 +17009,8 @@ function renderPage(Page4, defaultPageStyle,) {
   return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
 }
 var NotFoundError = class extends Error {};
-var ErrorBoundaryCaughtError = class extends Error {};
-var ErrorBoundary = class extends Component {
+var NotFoundErrorBoundaryCaughtError = class extends Error {};
+var NotFoundErrorBoundary = class extends Component {
   constructor(props,) {
     super(props,);
     this.state = {
@@ -17041,7 +17041,7 @@ var ErrorBoundary = class extends Component {
       return this.props.children;
     }
     if (!(this.state.error instanceof NotFoundError)) {
-      const error = new ErrorBoundaryCaughtError();
+      const error = new NotFoundErrorBoundaryCaughtError();
       error.cause = this.state.error;
       throw error;
     }
@@ -17053,6 +17053,157 @@ var ErrorBoundary = class extends Component {
       throw this.state.error;
     }
     return renderPage(notFoundPage, defaultPageStyle,);
+  }
+};
+function isObject(value,) {
+  return typeof value === 'object' && value !== null && !Array.isArray(value,);
+}
+function isString(value,) {
+  return typeof value === 'string';
+}
+var preloadKey = 'preload';
+function isLazyComponentType(componentType,) {
+  return typeof componentType === 'object' && componentType !== null && !React4.isValidElement(componentType,) &&
+    preloadKey in componentType;
+}
+function lazy(factory,) {
+  const LazyComponent = React4.lazy(factory,);
+  let factoryPromise;
+  let LoadedComponent;
+  const Component18 = React4.forwardRef(function LazyWithPreload(props, ref,) {
+    return React4.createElement(
+      LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
+      ref
+        ? {
+          ref,
+          ...props,
+        }
+        : props,
+    );
+  },);
+  Component18.preload = () => {
+    if (!factoryPromise) {
+      factoryPromise = factory().then((module) => {
+        LoadedComponent = module.default;
+        return LoadedComponent;
+      },);
+    }
+    return factoryPromise;
+  };
+  return Component18;
+}
+function getRouteElementId(route, hash2,) {
+  if (hash2 && route) {
+    if (route.elements && hash2 in route.elements) {
+      return route.elements[hash2];
+    } else {
+      return hash2;
+    }
+  }
+  return void 0;
+}
+function isBot(userAgent,) {
+  return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
+}
+function yieldToMain(options,) {
+  if ('scheduler' in window) {
+    if ('yield' in scheduler) return scheduler.yield(options,);
+    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
+  }
+  if ((options === null || options === void 0 ? void 0 : options.priority) === 'user-blocking') {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    setTimeout(resolve,);
+  },);
+}
+async function yieldBefore(fn, options,) {
+  await yieldToMain(options,);
+  return fn();
+}
+function interactionResponse(options,) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100,);
+    requestAnimationFrame(() => {
+      void yieldBefore(resolve, options,);
+    },);
+  },);
+}
+function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect,) {
+  useEffectFn(() => {
+    const runAfterPaint = async (fn) => {
+      await interactionResponse(opts,);
+      return fn();
+    };
+    const runPromise = runAfterPaint(effectFn,);
+    return () => {
+      void (async () => {
+        const cleanup = await runPromise;
+        if (!cleanup) return;
+        void runAfterPaint(cleanup,);
+      })();
+    };
+  }, deps,);
+}
+var noop2 = () => {};
+var EMPTY_ARRAY = [];
+var ErrorBoundaryCaughtError = class extends NotFoundErrorBoundaryCaughtError {
+  constructor() {
+    super(...arguments,);
+    this.caught = true;
+  }
+};
+var GracefullyDegradingErrorBoundary = class extends Component {
+  constructor() {
+    super(...arguments,);
+    this.state = {
+      error: void 0,
+    };
+    this.message = 'Made UI non-interactive due to the error above. We\'ve logged it, but also please report this to the Framer team.';
+  }
+  static getDerivedStateFromError(error,) {
+    return {
+      error,
+    };
+  }
+  componentDidCatch(error,) {
+    var _a;
+    if ('cause' in error) {
+      error = error.cause;
+    }
+    console.error(this.message,);
+    if (Math.random() > 0.01) return;
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+    (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_error', {
+      message: String(error,),
+      stack,
+    },],);
+  }
+  render() {
+    var _a;
+    const error = this.state.error;
+    if (!error) return this.props.children;
+    if (!isBot(navigator.userAgent,)) {
+      const fatalError = new ErrorBoundaryCaughtError();
+      fatalError.cause = 'cause' in error ? error.cause : error;
+      console.error(this.message, fatalError.cause,);
+      throw fatalError;
+    }
+    return (
+      // This has the caveat that we will slightly modify the DOM, but it appears to be fine in this case.
+      // The alternative would be to queue a new task that runs after and then set the innerHTML (= avoids the dummy-div), but that means we'll have DOM -> no DOM -> DOM transitions. With the div, we have DOM -> DOM and remove possible race-conditions.
+      jsx('div', {
+        style: {
+          display: 'contents',
+        },
+        suppressHydrationWarning: true,
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: React would unmount the root on errors, but we must ensure that bots can still read the SSR'd content.
+        dangerouslySetInnerHTML: {
+          __html: '<!-- DOM replaced by GracefullyDegradingErrorBoundary -->' +
+            (((_a = document.getElementById('main',)) === null || _a === void 0 ? void 0 : _a.innerHTML) || ''),
+        },
+      },)
+    );
   }
 };
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
@@ -17212,98 +17363,6 @@ function forwardQueryParams(queryParamsString, href,) {
   }
   return hrefWithoutHash.substring(0, startOfSearch + 1,) + newSearchParams.toString() + hash2;
 }
-function isObject(value,) {
-  return typeof value === 'object' && value !== null && !Array.isArray(value,);
-}
-function isString(value,) {
-  return typeof value === 'string';
-}
-var preloadKey = 'preload';
-function isLazyComponentType(componentType,) {
-  return typeof componentType === 'object' && componentType !== null && !React4.isValidElement(componentType,) &&
-    preloadKey in componentType;
-}
-function lazy(factory,) {
-  const LazyComponent = React4.lazy(factory,);
-  let factoryPromise;
-  let LoadedComponent;
-  const Component17 = React4.forwardRef(function LazyWithPreload(props, ref,) {
-    return React4.createElement(
-      LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
-      ref
-        ? {
-          ref,
-          ...props,
-        }
-        : props,
-    );
-  },);
-  Component17.preload = () => {
-    if (!factoryPromise) {
-      factoryPromise = factory().then((module) => {
-        LoadedComponent = module.default;
-        return LoadedComponent;
-      },);
-    }
-    return factoryPromise;
-  };
-  return Component17;
-}
-function getRouteElementId(route, hash2,) {
-  if (hash2 && route) {
-    if (route.elements && hash2 in route.elements) {
-      return route.elements[hash2];
-    } else {
-      return hash2;
-    }
-  }
-  return void 0;
-}
-function isBot(userAgent,) {
-  return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
-}
-function yieldToMain(options,) {
-  if ('scheduler' in window) {
-    if ('yield' in scheduler) return scheduler.yield(options,);
-    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
-  }
-  if ((options === null || options === void 0 ? void 0 : options.priority) === 'user-blocking') {
-    return Promise.resolve();
-  }
-  return new Promise((resolve) => {
-    setTimeout(resolve,);
-  },);
-}
-async function yieldBefore(fn, options,) {
-  await yieldToMain(options,);
-  return fn();
-}
-function interactionResponse(options,) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 100,);
-    requestAnimationFrame(() => {
-      void yieldBefore(resolve, options,);
-    },);
-  },);
-}
-function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect,) {
-  useEffectFn(() => {
-    const runAfterPaint = async (fn) => {
-      await interactionResponse(opts,);
-      return fn();
-    };
-    const runPromise = runAfterPaint(effectFn,);
-    return () => {
-      void (async () => {
-        const cleanup = await runPromise;
-        if (!cleanup) return;
-        void runAfterPaint(cleanup,);
-      })();
-    };
-  }, deps,);
-}
-var noop2 = () => {};
-var EMPTY_ARRAY = [];
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a, _b, _c;
   let resultPath = path;
@@ -18449,8 +18508,8 @@ var SuspenseErrorBoundary = class extends Component {
     };
   }
   static getDerivedStateFromError(error,) {
-    if (!(error instanceof ErrorBoundaryCaughtError)) {
-      console.error('Derived error in SuspenseErrorBoundary', error,);
+    if (!(error instanceof NotFoundErrorBoundaryCaughtError)) {
+      console.error('Derived error in SuspenseErrorBoundary:\n', error,);
     }
     return {
       error,
@@ -18458,25 +18517,24 @@ var SuspenseErrorBoundary = class extends Component {
   }
   componentDidCatch(error, errorInfo,) {
     var _a;
-    if (error instanceof ErrorBoundaryCaughtError) {
+    if (error instanceof NotFoundErrorBoundaryCaughtError) {
       return;
     }
     const componentStack = errorInfo === null || errorInfo === void 0 ? void 0 : errorInfo.componentStack;
-    console.error('Caught error in SuspenseErrorBoundary', error, componentStack,);
-    if (typeof window !== 'undefined') {
-      const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-      (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
-        message: String(error,),
-        stack,
-        // only log componentStack if we don't have a stack
-        componentStack: stack ? void 0 : componentStack,
-      },],);
-    }
+    console.error('Caught error in SuspenseErrorBoundary:\n', error, componentStack,);
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+    (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
+      message: String(error,),
+      stack,
+      // only log componentStack if we don't have a stack
+      componentStack: stack ? void 0 : componentStack,
+    },],);
   }
   render() {
-    if (this.state.error === void 0) return this.props.children;
-    if (this.state.error instanceof ErrorBoundaryCaughtError) {
-      throw this.state.error.cause;
+    const error = this.state.error;
+    if (error === void 0) return this.props.children;
+    if (error instanceof NotFoundErrorBoundaryCaughtError) {
+      throw error.cause;
     }
     window.__framer_STPD_OPT_OUT__ = true;
     return jsx(Suspense2, {
@@ -18829,42 +18887,44 @@ function Router({
     ? fillPathVariables(current.path, currentPathVariables,)
     : current.path;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  return jsx(RouterAPIProvider, {
-    api,
-    children: jsx(LocaleInfoContext.Provider, {
-      value: localeInfo,
-      children: jsxs(SuspenseThatPreservesDom, {
-        children: [
-          jsx(ErrorBoundary, {
-            notFoundPage,
-            defaultPageStyle,
-            forceUpdateKey: dep,
-            children: jsx(WithLayoutTemplate, {
-              LayoutTemplate,
-              routeId: currentRouteId,
-              children: jsxs(Fragment, {
-                children: [
-                  jsx(MarkSuspenseEffects.Start, {},),
-                  pageExistsInCurrentLocale
-                    ? renderPage(
-                      current.page,
-                      LayoutTemplate
-                        ? {
-                          ...defaultPageStyle,
-                          display: 'content',
-                        }
-                        : defaultPageStyle,
-                    )
-                    : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                    notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                ],
-              }, remountKey,),
+  return jsx(GracefullyDegradingErrorBoundary, {
+    children: jsx(RouterAPIProvider, {
+      api,
+      children: jsx(LocaleInfoContext.Provider, {
+        value: localeInfo,
+        children: jsxs(SuspenseThatPreservesDom, {
+          children: [
+            jsx(NotFoundErrorBoundary, {
+              notFoundPage,
+              defaultPageStyle,
+              forceUpdateKey: dep,
+              children: jsx(WithLayoutTemplate, {
+                LayoutTemplate,
+                routeId: currentRouteId,
+                children: jsxs(Fragment, {
+                  children: [
+                    jsx(MarkSuspenseEffects.Start, {},),
+                    pageExistsInCurrentLocale
+                      ? renderPage(
+                        current.page,
+                        LayoutTemplate
+                          ? {
+                            ...defaultPageStyle,
+                            display: 'content',
+                          }
+                          : defaultPageStyle,
+                      )
+                      : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                      notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                  ],
+                }, remountKey,),
+              },),
             },),
-          },),
-          jsx(TurnOnReactEventHandling, {},),
-          jsx(MarkSuspenseEffects.End, {},),
-          editorBar,
-        ],
+            jsx(TurnOnReactEventHandling, {},),
+            jsx(MarkSuspenseEffects.End, {},),
+            editorBar,
+          ],
+        },),
       },),
     },),
   },);
@@ -22305,7 +22365,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary2 = class extends Component {
+var ErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {},);
@@ -22464,7 +22524,7 @@ function Device({
           ref: screenRef,
           children: /* @__PURE__ */ jsx(MotionConfig, {
             transformPagePoint: invertScale2,
-            children: /* @__PURE__ */ jsx(ErrorBoundary2, {
+            children: /* @__PURE__ */ jsx(ErrorBoundary, {
               children,
             },),
           },),
@@ -27214,7 +27274,7 @@ function useMeasuredSize(ref,) {
   return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component17) => (props) => {
+var withMeasuredSize = (Component18) => (props) => {
   const ref = React4.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
@@ -27231,7 +27291,7 @@ var withMeasuredSize = (Component17) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx(Component17, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component18, {
       ...props,
       width: (size == null ? void 0 : size.width) ?? fallbackWidth,
       height: (size == null ? void 0 : size.height) ?? fallbackHeight,
@@ -28731,7 +28791,7 @@ var clamp2 = (value, a, b,) => {
 var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
-function WithDragging(Component17,) {
+function WithDragging(Component18,) {
   const _WithDraggingHOC = class extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
@@ -29359,7 +29419,7 @@ function WithDragging(Component17,) {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx(Component17, {
+        children: /* @__PURE__ */ jsx(Component18, {
           ...originalProps,
         },),
       },);
@@ -29397,9 +29457,9 @@ function WithDragging(Component17,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component17.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component18.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics.default)(withDragging, Component17,);
+  (0, import_hoist_non_react_statics.default)(withDragging, Component18,);
   return withDragging;
 }
 var hoverProps = {
@@ -32203,7 +32263,7 @@ function useInfiniteScroll({
     };
   }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
 }
-function withInfiniteScroll(Component17,) {
+function withInfiniteScroll(Component18,) {
   return React4.forwardRef(({
     __paginationInfo,
     __loadMore,
@@ -32217,7 +32277,7 @@ function withInfiniteScroll(Component17,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -35158,7 +35218,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component17, override,) {
+function WithOverride(Component18, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext(DataObserverContext,);
@@ -35167,14 +35227,14 @@ function WithOverride(Component17, override,) {
       style,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...rest,
       ...overrideProps,
       _initialStyle: style,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component17,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component17.displayName || Component17.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component18,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component18.displayName || Component18.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -36016,11 +36076,11 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList(value,) {
   return isString2(value,) || Array.isArray(value,);
 }
-var withFX = (Component17) =>
+var withFX = (Component18) =>
   React4.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx(Component17, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -36031,7 +36091,7 @@ var withFX = (Component17) =>
     if (RenderTarget.current() === RenderTarget.canvas) {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-      return /* @__PURE__ */ jsx(Component17, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...props,
         animate: animate4,
         initial: initial2,
@@ -36135,7 +36195,7 @@ var withFX = (Component17) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -36285,10 +36345,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(function Compo
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component17) =>
+var withGeneratedLayoutId = (Component18) =>
   React4.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -36525,16 +36585,16 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
   const childrenWithCodeBoundary = useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,);
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
-    const Component17 = htmlElementAsMotionComponent(tagName,);
-    return /* @__PURE__ */ jsx(Component17, {
+    const Component18 = htmlElementAsMotionComponent(tagName,);
+    return /* @__PURE__ */ jsx(Component18, {
       ref,
       style: props.style,
       ...renderableProps,
       children: childrenWithCodeBoundary,
     },);
   } else {
-    const Component17 = tagName;
-    return /* @__PURE__ */ jsx(Component17, {
+    const Component18 = tagName;
+    return /* @__PURE__ */ jsx(Component18, {
       ref,
       style: props.style,
       ...renderableProps,
@@ -36586,7 +36646,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
       sheet,
@@ -36606,7 +36666,7 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
               __html: concatenatedCSS,
             },
           },),
-          /* @__PURE__ */ jsx(Component17, {
+          /* @__PURE__ */ jsx(Component18, {
             ...props,
             ref,
           },),
@@ -36622,7 +36682,7 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
       ref,
     },);
@@ -37609,10 +37669,10 @@ function ChildrenCanSuspend({
     children,
   },);
 }
-function withChildrenCanSuspend(Component17,) {
+function withChildrenCanSuspend(Component18,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx(Component17, {
+      children: /* @__PURE__ */ jsx(Component18, {
         ...props,
         ref,
       },),
@@ -44136,7 +44196,7 @@ var AnimationCollector = class {
 };
 _variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component17,) {
+function withOptimizedAppearEffect(Component18,) {
   return React4.forwardRef(({
     optimized,
     ...props
@@ -44157,7 +44217,7 @@ function withOptimizedAppearEffect(Component17,) {
         generatedComponentContext,
       );
     }
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ref,
       ...props,
     },);
@@ -44699,12 +44759,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component17 = typeof target === 'string'
+    const Component18 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
       : React4.isValidElement(target,)
       ? target
       : null;
-    if (!Component17) return;
+    if (!Component18) return;
     const {
       appearsFrom,
       backdropColor,
@@ -44713,38 +44773,38 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component17,);
+        navigation.instant(Component18,);
         break;
       case 'fade':
-        navigation.fade(Component17, {
+        navigation.fade(Component18, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component17, {
+        navigation.push(Component18, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component17, {
+        navigation.flip(Component18, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component17, {
+        navigation.magicMotion(Component18, {
           animation,
         },);
         break;
       case 'modal':
-        navigation.modal(Component17, {
+        navigation.modal(Component18, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component17, {
+        navigation.overlay(Component18, {
           appearsFrom,
           backdropColor,
           animation,
@@ -45156,16 +45216,16 @@ function useVariantState({
     variantClassNames,
   ],);
 }
-function withCodeBoundaryForOverrides(Component17, {
+function withCodeBoundaryForOverrides(Component18, {
   scopeId,
   nodeId,
   override,
   inComponentSlot,
 },) {
   if (!shouldEnableCodeBoundaries()) {
-    return override(Component17,);
+    return override(Component18,);
   }
-  const appliedOverride = tryToApplyOverride(Component17, override,);
+  const appliedOverride = tryToApplyOverride(Component18, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
     const externalComponentNestingLevel = useExternalComponentNestingLevel();
@@ -45174,7 +45234,7 @@ function withCodeBoundaryForOverrides(Component17, {
       if (appliedOverride.status === 'success') {
         return /* @__PURE__ */ jsx(CodeComponentBoundary, {
           errorMessage: getErrorMessageForOverride(scopeId, nodeId,),
-          fallback: /* @__PURE__ */ jsx(Component17, {
+          fallback: /* @__PURE__ */ jsx(Component18, {
             ...props,
             ref,
           },),
@@ -45190,7 +45250,7 @@ function withCodeBoundaryForOverrides(Component17, {
           collectErrorToAnalytics(appliedOverride.error,);
           hasErrorBeenLogged = true;
         }
-        return /* @__PURE__ */ jsx(Component17, {
+        return /* @__PURE__ */ jsx(Component18, {
           ...props,
           ref,
         },);
@@ -45208,9 +45268,9 @@ function withCodeBoundaryForOverrides(Component17, {
   }
   return React4.forwardRef(CodeBoundaryForOverrides,);
 }
-function tryToApplyOverride(Component17, override,) {
+function tryToApplyOverride(Component18, override,) {
   try {
-    const ComponentWithOverrides = override(Component17,);
+    const ComponentWithOverrides = override(Component18,);
     return {
       status: 'success',
       Component: ComponentWithOverrides,
@@ -45232,14 +45292,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component17, info,) {
+function withMappedReactProps(Component18, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
     },);
   };
@@ -45280,10 +45340,10 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component17) =>
+var withVariantAppearEffect = (Component18) =>
   React4.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx(Component17, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...props,
         ref: forwardedRef,
       },);
@@ -45370,18 +45430,18 @@ var withVariantAppearEffect = (Component17) =>
       repeat: !animateOnce,
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx(Component17, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx(Component17, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component17) =>
+var withVariantFX = (Component18) =>
   React4.forwardRef(({
     initial,
     animate: animate3,
@@ -45398,7 +45458,7 @@ var withVariantFX = (Component17) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx(Component17, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -49085,10 +49145,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component17 = htmlElementAsMotionComponent(props.as,);
+  const Component18 = htmlElementAsMotionComponent(props.as,);
   if (isString2(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx(Component17, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -49121,7 +49181,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
       },);
     }
   }
-  return /* @__PURE__ */ jsx(Component17, {
+  return /* @__PURE__ */ jsx(Component18, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
