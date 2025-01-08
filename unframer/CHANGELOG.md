@@ -1,5 +1,15 @@
 # unframer
 
+## 2.12.0
+
+### Minor Changes
+
+-   9c26943: Make links work in Unframer, by overriding Framer Router component and context
+
+### Patch Changes
+
+-   de3e355: Update framer to 2.4.1, update framer motion to 11.11.7
+
 ## 2.11.2
 
 ### Patch Changes
