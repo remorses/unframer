@@ -309,24 +309,19 @@ addFonts(FramerinWBH4dIK, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
-stdin_default.Responsive = ({ locale, ...props2 },) => {
+stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
       routeId: 'x',
-      routes: {
-        x: {
-          elements: {},
-          page: /* @__PURE__ */ jsx(
-            WithFramerBreakpoints,
-            {
-              Component: stdin_default,
-              ...props2,
-            },
-          ),
-          path: '/',
+      routes: {},
+      children: /* @__PURE__ */ jsx(
+        WithFramerBreakpoints,
+        {
+          Component: stdin_default,
+          ...rest,
         },
-      },
+      ),
       framerSiteId: void 0,
       locale,
       locales,
@@ -338,13 +333,8 @@ function ComponentWithRoot({ locale, ...rest },) {
     ContextProviders,
     {
       routeId: 'x',
-      routes: {
-        x: {
-          elements: {},
-          page: /* @__PURE__ */ jsx(stdin_default, { ...rest, },),
-          path: '/',
-        },
-      },
+      routes: {},
+      children: /* @__PURE__ */ jsx(stdin_default, { ...rest, },),
       framerSiteId: void 0,
       locale,
       locales,

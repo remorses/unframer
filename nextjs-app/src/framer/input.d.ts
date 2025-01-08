@@ -13,8 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Default' | 'Focus' | 'Blur'
-    "inputName"?: string
+
 }
 
 const InputFramerComponent = (props: Props) => any

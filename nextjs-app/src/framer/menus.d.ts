@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Normal' | 'Feature' | 'Learn' | 'Why us' | 'Our team'
+
 }
 
 const MenusFramerComponent = (props: Props) => any

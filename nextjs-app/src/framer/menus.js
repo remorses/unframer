@@ -3271,24 +3271,19 @@ addFonts2(FramerrXuKNGhVw, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
-stdin_default2.Responsive = ({ locale, ...props },) => {
+stdin_default2.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
       routeId: 'x',
-      routes: {
-        x: {
-          elements: {},
-          page: /* @__PURE__ */ jsx(
-            WithFramerBreakpoints,
-            {
-              Component: stdin_default2,
-              ...props,
-            },
-          ),
-          path: '/',
+      routes: {},
+      children: /* @__PURE__ */ jsx(
+        WithFramerBreakpoints,
+        {
+          Component: stdin_default2,
+          ...rest,
         },
-      },
+      ),
       framerSiteId: void 0,
       locale,
       locales,
@@ -3300,13 +3295,8 @@ function ComponentWithRoot({ locale, ...rest },) {
     ContextProviders,
     {
       routeId: 'x',
-      routes: {
-        x: {
-          elements: {},
-          page: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },),
-          path: '/',
-        },
-      },
+      routes: {},
+      children: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },),
       framerSiteId: void 0,
       locale,
       locales,

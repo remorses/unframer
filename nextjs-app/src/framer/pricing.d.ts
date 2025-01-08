@@ -13,8 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Desktop 1' | 'Tablet 1' | 'Mobile 1' | 'Mobile 2'
-    "buyEvent"?: Function
+
 }
 
 const PricingFramerComponent = (props: Props) => any

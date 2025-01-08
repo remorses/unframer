@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Desktop' | 'Phone' | 'Phone Open'
+
 }
 
 const FramerNavFramerComponent = (props: Props) => any
