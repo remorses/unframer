@@ -2399,24 +2399,33 @@ addFonts(FramerwvuAi9wiC, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
-stdin_default2.Responsive = ({ locale, ...props },) => {
+stdin_default2.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
       routeId: 'x',
       routes: {
-        x: {
-          elements: {},
-          page: /* @__PURE__ */ jsx(
-            WithFramerBreakpoints,
-            {
-              Component: stdin_default2,
-              ...props,
-            },
-          ),
-          path: '/',
-        },
+        'I0Vjsk230': { 'path': '/pricing', },
+        'If1LKvdh8': { 'path': '/blog/:slug', },
+        'MYlLV6Tip': { 'path': '/docs', },
+        'NSnQ_g8yw': { 'path': '/:slug', },
+        'augiA20Il': { 'path': '/', },
+        'cvVskSlKE': { 'path': '/sign-up', },
+        'dqRVpj9Kn': { 'path': '/docs/:slug', },
+        'iUM2Wrnwp': { 'path': '/contact-sales-2', },
+        'j_IHQLq_9': { 'path': '/sign-in', },
+        'lreH5keWI': { 'path': '/support', },
+        'qNb6QfkBq': { 'path': '/contact-sales', },
+        'so7P3QBWY': { 'path': '/404', },
+        'tBghjsyop': { 'path': '/blog', },
       },
+      children: /* @__PURE__ */ jsx(
+        WithFramerBreakpoints,
+        {
+          Component: stdin_default2,
+          ...rest,
+        },
+      ),
       framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
       locale,
       locales,
@@ -2429,12 +2438,47 @@ function ComponentWithRoot({ locale, ...rest },) {
     {
       routeId: 'x',
       routes: {
-        x: {
-          elements: {},
-          page: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },),
-          path: '/',
+        'I0Vjsk230': {
+          'path': '/pricing',
+        },
+        'If1LKvdh8': {
+          'path': '/blog/:slug',
+        },
+        'MYlLV6Tip': {
+          'path': '/docs',
+        },
+        'NSnQ_g8yw': {
+          'path': '/:slug',
+        },
+        'augiA20Il': {
+          'path': '/',
+        },
+        'cvVskSlKE': {
+          'path': '/sign-up',
+        },
+        'dqRVpj9Kn': {
+          'path': '/docs/:slug',
+        },
+        'iUM2Wrnwp': {
+          'path': '/contact-sales-2',
+        },
+        'j_IHQLq_9': {
+          'path': '/sign-in',
+        },
+        'lreH5keWI': {
+          'path': '/support',
+        },
+        'qNb6QfkBq': {
+          'path': '/contact-sales',
+        },
+        'so7P3QBWY': {
+          'path': '/404',
+        },
+        'tBghjsyop': {
+          'path': '/blog',
         },
       },
+      children: /* @__PURE__ */ jsx(stdin_default2, { ...rest, },),
       framerSiteId: 'f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405',
       locale,
       locales,
