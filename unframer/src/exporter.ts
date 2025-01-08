@@ -1,4 +1,5 @@
 import { build, BuildResult, context } from 'esbuild'
+import packageJson from '../package.json'
 
 import url from 'url'
 import { Config } from './cli'
@@ -8,7 +9,7 @@ import dprint from 'dprint-node'
 
 import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill'
 
-import { exec } from 'child_process'
+import { exec, execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import dedent from 'string-dedent'
@@ -71,7 +72,7 @@ export async function bundle({
     const otherRoutes = Object.fromEntries(
         (config.framerWebPages || []).map((page) => [
             page.webPageId,
-            { path: page.path, page: null },
+            { path: page.path },
         ]),
     )
     const buildContext = await context({
@@ -535,6 +536,8 @@ export async function bundle({
         
         `),
     )
+    checkUnframerVersion({ cwd: out })
+    console.log()
     return { result, rebuild, buildContext }
 
     // // when user press ctrl+c dispose
@@ -582,6 +585,32 @@ export async function bundle({
     //     await rebuild()
     // }
     // return res
+}
+
+export function checkUnframerVersion({ cwd }) {
+    const currentVersion = packageJson.version
+    try {
+        const code = `import('unframer/package.json', { with: { type: 'json' } }).then(pkg => console.log(pkg.version || pkg.default?.version));`
+
+        const command = [nodePath, '-e', JSON.stringify(code)].join(' ')
+        const installedVersion = execSync(command, {
+            stdio: ['pipe', 'pipe', 'pipe'],
+            cwd,
+        })
+            .toString()
+            .trim()
+
+        if (installedVersion !== currentVersion) {
+            spinner.error(
+                `Unframer version mismatch. Please run: npm update unframer@latest`,
+            )
+        }
+    } catch (e: any) {
+        // console.error(e.stderr.toString())
+        spinner.error(
+            'Unframer is not installed in your project. Please run: npm install unframer',
+        )
+    }
 }
 
 export function getDarkModeSelector(opts: {

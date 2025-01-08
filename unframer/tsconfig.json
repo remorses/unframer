@@ -3,6 +3,7 @@
     "compilerOptions": {
         "rootDir": "src",
         "target": "ESNext",
+        "resolveJsonModule": true,
         "esModuleInterop": true,
         "lib": ["dom"],
         "moduleResolution": "Node16",

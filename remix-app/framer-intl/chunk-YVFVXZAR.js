@@ -104,7 +104,6 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
   const defaultLayoutId = React.useId();
   const sharedStyleClassNames = [className,];
   const componentViewport = useComponentViewport();
-  console.log({Link})
   return /* @__PURE__ */ _jsx(LayoutGroup, {
     id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId,
     children: /* @__PURE__ */ _jsx(Variants, {
