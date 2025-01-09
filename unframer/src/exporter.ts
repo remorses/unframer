@@ -641,7 +641,7 @@ export function getStyleTokensCss(
     const lightTokens = tokens
         .flatMap((token) => [
             '    --token-' + token.id + ': ' + token.lightColor + ';',
-            '    --framer-' +
+            '    --unframer-' +
                 kebabCase(token.name || token.id) +
                 ': ' +
                 token.lightColor +
@@ -652,7 +652,7 @@ export function getStyleTokensCss(
     const darkTokens = tokens
         .flatMap((token) => [
             '    --token-' + token.id + ': ' + token.darkColor + ';',
-            '    --framer-' +
+            '    --unframer-' +
                 kebabCase(token.name || token.id) +
                 ': ' +
                 token.darkColor +
