@@ -131,7 +131,6 @@ export async function bundle({
                                 Component.Responsive = ({ locale, ...rest }) => {
                                     return (
                                         <ContextProviders
-                                            routeId="x"
                                             routes={${JSON.stringify(
                                                 otherRoutes,
                                             )}}
@@ -151,7 +150,6 @@ export async function bundle({
                                 export default function ComponentWithRoot({ locale, ...rest }) {
                                     return (
                                         <ContextProviders
-                                            routeId="x"
                                             routes={${JSON.stringify(
                                                 otherRoutes,
                                                 null,
