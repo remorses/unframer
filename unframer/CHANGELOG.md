@@ -1,5 +1,11 @@
 # unframer
 
+## 2.13.0
+
+### Minor Changes
+
+-   84392a2: Add --unframer prefixed CSS variables, to be reused with Tawilwind
+
 ## 2.12.1
 
 ### Patch Changes
