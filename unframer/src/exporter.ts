@@ -608,7 +608,7 @@ export function checkUnframerVersion({ cwd }) {
             )
         }
     } catch (e: any) {
-        // console.error(e.stderr.toString())
+        logger.log(e.stderr.toString())
         spinner.error(
             'Unframer is not installed in your project. Please run: npm install unframer',
         )
