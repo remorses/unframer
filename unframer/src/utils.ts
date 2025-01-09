@@ -31,8 +31,7 @@ export const logger = {
     },
 }
 
-export async function componentNameToPath(name: string) {
-    const { default: kebabCase } = await import('just-kebab-case')
+export function componentNameToPath(name: string) {
     return name
         .split('/')
         .filter(Boolean)
@@ -42,4 +41,32 @@ export async function componentNameToPath(name: string) {
 
 export function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+// https://www.npmjs.com/package/just-kebab-case?activeTab=readme
+// any combination of spaces and punctuation characters
+// thanks to http://stackoverflow.com/a/25575009
+var wordSeparators =
+    /[\s\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+/
+var capital_plus_lower = /[A-ZÀ-Ý\u00C0-\u00D6\u00D9-\u00DD][a-zà-ÿ]/g
+var capitals = /[A-ZÀ-Ý\u00C0-\u00D6\u00D9-\u00DD]+/g
+
+export function kebabCase(str: string) {
+    // replace word starts with space + lower case equivalent for later parsing
+    // 1) treat cap + lower as start of new word
+    str = str.replace(capital_plus_lower, function (match) {
+        // match is one caps followed by one non-cap
+        return ' ' + (match[0].toLowerCase() || match[0]) + match[1]
+    })
+    // 2) treat all remaining capitals as words
+    str = str.replace(capitals, function (match) {
+        // match is a series of caps
+        return ' ' + match.toLowerCase()
+    })
+    return str
+        .trim()
+        .split(wordSeparators)
+        .join('-')
+        .replace(/^-/, '')
+        .replace(/-\s*$/, '')
 }

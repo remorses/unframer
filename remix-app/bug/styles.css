@@ -16,14 +16,20 @@ h1, h2, h3, h4, h5, h6, p, figure {
         
 :root {
     --token-030321aa-7e48-4686-99eb-7725618aa992: rgb(120, 120, 120);
+    --framer-side-menu-text-colour: rgb(120, 120, 120);
     --token-7e1afdaf-d292-4673-a95e-cd1e9e0cbb00: rgb(51, 204, 51);
+    --framer-green-glow: rgb(51, 204, 51);
     --token-bf931655-aeff-447c-8549-49094aee08b9: rgb(17, 19, 19);
+    --framer-background: rgb(17, 19, 19);
 }
 
 .dark {
     --token-030321aa-7e48-4686-99eb-7725618aa992: rgb(120, 120, 120);
+    --framer-side-menu-text-colour: rgb(120, 120, 120);
     --token-7e1afdaf-d292-4673-a95e-cd1e9e0cbb00: rgb(51, 204, 51);
+    --framer-green-glow: rgb(51, 204, 51);
     --token-bf931655-aeff-447c-8549-49094aee08b9: rgb(17, 19, 19);
+    --framer-background: rgb(17, 19, 19);
 }
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {

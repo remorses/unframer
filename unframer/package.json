@@ -56,7 +56,6 @@
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
         "find-up": "^5.0.0",
         "json5": "^2.2.3",
-        "just-kebab-case": "^4.2.0",
         "marked": "^15.0.3",
         "marked-terminal": "^7.2.1",
         "nanospinner": "^1.2.2",

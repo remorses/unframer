@@ -32,7 +32,7 @@ import {
     PropertyControls,
     combinedCSSRules,
 } from './framer.js'
-import { logger, spinner, terminalMarkdown } from './utils.js'
+import { kebabCase, logger, spinner, terminalMarkdown } from './utils.js'
 
 function validateUrl(url: string) {
     try {
@@ -630,7 +630,6 @@ export function getDarkModeSelector(opts: {
     }
     return '.dark {\n' + content + '\n' + '}'
 }
-
 export function getStyleTokensCss(
     tokens: StyleToken[],
     darkModeType: 'class' | 'media' = 'class',
@@ -640,16 +639,25 @@ export function getStyleTokensCss(
     }
 
     const lightTokens = tokens
-        .map(
-            (token) =>
-                '    --token-' + token.id + ': ' + token.lightColor + ';',
-        )
+        .flatMap((token) => [
+            '    --token-' + token.id + ': ' + token.lightColor + ';',
+            '    --framer-' +
+                kebabCase(token.name || token.id) +
+                ': ' +
+                token.lightColor +
+                ';',
+        ])
         .join('\n')
 
     const darkTokens = tokens
-        .map(
-            (token) => '    --token-' + token.id + ': ' + token.darkColor + ';',
-        )
+        .flatMap((token) => [
+            '    --token-' + token.id + ': ' + token.darkColor + ';',
+            '    --framer-' +
+                kebabCase(token.name || token.id) +
+                ': ' +
+                token.darkColor +
+                ';',
+        ])
         .join('\n')
 
     return (
