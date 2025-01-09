@@ -590,7 +590,11 @@ export function checkUnframerVersion({ cwd }) {
     try {
         const code = `import('unframer/package.json', { with: { type: 'json' } }).then(pkg => console.log(pkg.version || pkg.default?.version));`
 
-        const command = [nodePath, '-e', JSON.stringify(code)].join(' ')
+        const command = [
+            JSON.stringify(nodePath),
+            '-e',
+            JSON.stringify(code),
+        ].join(' ')
         const installedVersion = execSync(command, {
             stdio: ['pipe', 'pipe', 'pipe'],
             cwd,
