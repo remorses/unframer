@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.K777Q2AQ.mjs
+// https :https://app.framerstatic.com/framer.ON3VCEEP.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -39263,6 +39263,7 @@ function PageRoot({
   locales,
   preserveQueryParams,
   EditorBar,
+  LayoutTemplate,
 },) {
   const {
     enableAsyncURLUpdates,
@@ -39295,6 +39296,7 @@ function PageRoot({
               editorBar: /* @__PURE__ */ jsx(EditorBarLauncher, {
                 EditorBar,
               },),
+              LayoutTemplate,
             },),
           },),
         },),
@@ -44337,8 +44339,9 @@ function activeMediaQueryFromWindow(mediaQueries,) {
     if (mql.matches) return variant;
   }
 }
-function activeBreakpointHashFromWindow(breakpoints,) {
+function activeBreakpointHashesFromWindow(breakpoints,) {
   var _a;
+  const matches = [];
   for (
     const {
       hash: hash2,
@@ -44347,9 +44350,12 @@ function activeBreakpointHashFromWindow(breakpoints,) {
   ) {
     if (!mediaQuery) continue;
     const mql = safeWindow.matchMedia(mediaQuery,);
-    if (mql.matches) return hash2;
+    if (mql.matches) matches.push(hash2,);
   }
-  return (_a = breakpoints[0]) == null ? void 0 : _a.hash;
+  if (matches.length > 0) return matches;
+  const defaultHash = (_a = breakpoints[0]) == null ? void 0 : _a.hash;
+  if (!defaultHash) return void 0;
+  return [defaultHash,];
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext(IsInitialNavigationContext,);
@@ -44412,11 +44418,17 @@ function requestIdleCallbackFallback(callback,) {
   setTimeout(callback, 1,);
 }
 function removeHiddenBreakpointLayersV2(breakpoints,) {
-  var _a, _b;
-  const activeBreakpointHash = activeBreakpointHashFromWindow(breakpoints,);
-  if (activeBreakpointHash) {
-    for (const hiddenLayer of document.querySelectorAll('.hidden-' + activeBreakpointHash,)) {
-      (_a = hiddenLayer.parentNode) == null ? void 0 : _a.removeChild(hiddenLayer,);
+  var _a, _b, _c, _d;
+  const suspenseBoundaries = /* @__PURE__ */ new Set();
+  const activeBreakpointHashes = activeBreakpointHashesFromWindow(breakpoints,);
+  if (activeBreakpointHashes) {
+    for (const hash2 of activeBreakpointHashes) {
+      for (const hiddenLayer of document.querySelectorAll('.hidden-' + hash2,)) {
+        if (isSuspenseBoundaryStart(hiddenLayer.previousSibling,)) {
+          suspenseBoundaries.add(hiddenLayer.previousSibling,);
+        }
+        (_a = hiddenLayer.parentNode) == null ? void 0 : _a.removeChild(hiddenLayer,);
+      }
     }
   }
   const requestIdleCallback2 = safeWindow.requestIdleCallback ?? requestIdleCallbackFallback;
@@ -44425,8 +44437,23 @@ function removeHiddenBreakpointLayersV2(breakpoints,) {
     (_a2 = document.querySelector(framerBreakpointCSSSelector,)) == null ? void 0 : _a2.remove();
   },);
   for (const ssrVariant of document.querySelectorAll('.ssr-variant:empty',)) {
+    if (isSuspenseBoundaryStart(ssrVariant.previousSibling,)) {
+      suspenseBoundaries.add(ssrVariant.previousSibling,);
+    }
     (_b = ssrVariant.parentNode) == null ? void 0 : _b.removeChild(ssrVariant,);
   }
+  for (const suspenseBoundary of suspenseBoundaries) {
+    if (isSuspenseBoundaryEnd(suspenseBoundary.nextSibling,)) {
+      (_c = suspenseBoundary.parentNode) == null ? void 0 : _c.removeChild(suspenseBoundary.nextSibling,);
+      (_d = suspenseBoundary.parentNode) == null ? void 0 : _d.removeChild(suspenseBoundary,);
+    }
+  }
+}
+function isSuspenseBoundaryStart(node,) {
+  return (node == null ? void 0 : node.nodeType) === Node.COMMENT_NODE && node.textContent === '$';
+}
+function isSuspenseBoundaryEnd(node,) {
+  return (node == null ? void 0 : node.nodeType) === Node.COMMENT_NODE && node.textContent === '/$';
 }
 function useDataRecord(collection, variables,) {
   return useMemo(() => {
@@ -44929,11 +44956,10 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
     right: expression,
   }));
 }
-function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
-  const count = useQueryCount(query,);
+function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
+  const totalPages = Math.ceil(totalSize / pageSize,);
   const [paginationInfo, setPaginationInfo,] = useState(() => {
     var _a, _b, _c, _d;
-    const totalPages = Math.ceil(count / pageSize,);
     const currentPage = ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
           ? void 0
           : _b.paginationInfo) == null
@@ -44948,8 +44974,56 @@ function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
     };
   },);
   useEffect(() => {
+    startTransition2(() => {
+      setPaginationInfo((current) => {
+        if (current.totalPages === totalPages) return current;
+        return {
+          ...current,
+          totalPages,
+        };
+      },);
+    },);
+  }, [totalPages,],);
+  useEffect(() => {
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
+  const onCanvas = useIsOnFramerCanvas();
+  const loadMore = useCallback(() => {
+    if (onCanvas) return;
+    if (paginationInfo.currentPage >= paginationInfo.totalPages) return;
+    if (!paginateWithSuspendedLoadingState) {
+      startTransition2(() => {
+        setPaginationInfo((info) => ({
+          ...info,
+          currentPage: Math.min(info.currentPage + 1, info.totalPages,),
+          isLoading: false,
+        }));
+      },);
+      return;
+    }
+    setPaginationInfo((info) => ({
+      ...info,
+      isLoading: true,
+    }));
+    requestAnimationFrame(() => {
+      setPaginationInfo((info) => ({
+        ...info,
+        currentPage: Math.min(info.currentPage + 1, info.totalPages,),
+        isLoading: false,
+      }));
+    },);
+  }, [onCanvas, paginationInfo.currentPage, paginationInfo.totalPages, paginateWithSuspendedLoadingState,],);
+  return {
+    paginationInfo,
+    loadMore,
+  };
+}
+function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
+  const count = useQueryCount(query,);
+  const {
+    paginationInfo,
+    loadMore,
+  } = useLoadMorePagination(count, pageSize, hash2, true,);
   const paginatedQuery = useMemo(() => {
     let limit = pageSize * paginationInfo.currentPage;
     if (query.limit) {
@@ -44966,22 +45040,6 @@ function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
       },
     };
   }, [query, pageSize, paginationInfo,],);
-  const onCanvas = useIsOnFramerCanvas();
-  const loadMore = useCallback(() => {
-    if (onCanvas) return;
-    if (paginationInfo.currentPage >= paginationInfo.totalPages) return;
-    setPaginationInfo((info) => ({
-      ...info,
-      isLoading: true,
-    }));
-    requestAnimationFrame(() => {
-      setPaginationInfo((info) => ({
-        ...info,
-        currentPage: Math.min(info.currentPage + 1, info.totalPages,),
-        isLoading: false,
-      }));
-    },);
-  }, [onCanvas, paginationInfo.currentPage, paginationInfo.totalPages,],);
   return {
     paginatedQuery,
     paginationInfo,
@@ -52094,6 +52152,7 @@ export {
   useIsOnFramerCanvas,
   useIsPresent,
   useLoadMorePaginatedQuery,
+  useLoadMorePagination,
   useLocale,
   useLocaleCode,
   useLocaleInfo,
