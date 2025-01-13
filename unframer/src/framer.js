@@ -15349,7 +15349,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.ON3VCEEP.mjs
+// https :https://app.framerstatic.com/framer.CMG6G5OF.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -26770,22 +26770,27 @@ function StaticImage({
   nodeId,
   alt,
   draggable,
+  syncDecoding,
 },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image,);
   const imageRef = React4.useRef(null,);
-  return /* @__PURE__ */ jsx('img', {
-    ref: imageRef,
-    decoding: 'async',
-    fetchpriority: image.fetchPriority,
-    loading: image.loading,
-    sizes: image.sizes,
-    srcSet: image.srcSet,
-    src: source,
-    alt: alt ?? image.alt ?? '',
-    style: imageStyle,
-    draggable,
-  },);
+  return (
+    // eslint-disable-next-line framer-studio/require-async-decoding
+    /* @__PURE__ */
+    jsx('img', {
+      ref: imageRef,
+      decoding: syncDecoding ? 'sync' : 'async',
+      fetchpriority: image.fetchPriority,
+      loading: image.loading,
+      sizes: image.sizes,
+      srcSet: image.srcSet,
+      src: source,
+      alt: alt ?? image.alt ?? '',
+      style: imageStyle,
+      draggable,
+    },)
+  );
 }
 function CanvasImage({
   image,
@@ -26824,7 +26829,7 @@ function OptimizedCanvasImage({
     if (wrapper === null) return;
     const imageStyle = getImageStyle(image,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
-  }, [nodeId, image, source, containerSize,],);
+  }, [nodeId, image, source,],);
   return /* @__PURE__ */ jsx('div', {
     ref: wrapperRef,
     style: {
@@ -26864,6 +26869,7 @@ function BackgroundImageComponent({
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
       imageNode = /* @__PURE__ */ jsx(StaticImage, {
         image,
+        syncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
       },);
     } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
