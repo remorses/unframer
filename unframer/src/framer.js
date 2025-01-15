@@ -120,14 +120,14 @@ var init_chunk_QLPHEVXG = __esm({
   },
 },);
 
-// https :https://app.framerstatic.com/google-5Y2W5CAB.mjs
-var google_5Y2W5CAB_exports = {};
-__export(google_5Y2W5CAB_exports, {
+// https :https://app.framerstatic.com/google-POQYIODP.mjs
+var google_POQYIODP_exports = {};
+__export(google_POQYIODP_exports, {
   default: () => google_default,
 },);
 var google_default;
-var init_google_5Y2W5CAB = __esm({
-  'https :https://app.framerstatic.com/google-5Y2W5CAB.mjs'() {
+var init_google_POQYIODP = __esm({
+  'https :https://app.framerstatic.com/google-POQYIODP.mjs'() {
     init_chunk_QLPHEVXG();
     google_default = {
       'GF;AR One Sans': [{
@@ -175,6 +175,13 @@ var init_google_5Y2W5CAB = __esm({
         maxValue: 1e3,
         defaultValue: 400,
         name: 'Weight',
+      },],
+      'GF;Agu Display': [{
+        tag: 'MORF',
+        minValue: 0,
+        maxValue: 60,
+        defaultValue: 0,
+        name: 'Morph',
       },],
       'GF;Akshar': [{
         tag: 'wght',
@@ -897,6 +904,13 @@ var init_google_5Y2W5CAB = __esm({
         maxValue: 800,
         defaultValue: 400,
         name: 'Weight',
+      },],
+      'GF;Edu AU VIC WA NT Arrows': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'wght',
       },],
       'GF;Edu AU VIC WA NT Dots': [{
         tag: 'wght',
@@ -1911,6 +1925,13 @@ var init_google_5Y2W5CAB = __esm({
         defaultValue: 100,
         name: 'Weight',
       },],
+      'GF;Montserrat Underline': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
       'GF;Mulish': [{
         tag: 'wght',
         minValue: 200,
@@ -2913,6 +2934,13 @@ var init_google_5Y2W5CAB = __esm({
         defaultValue: 200,
         name: 'Weight',
       },],
+      'GF;Parkinsans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
       'GF;Pathway Extreme': [{
         tag: 'wght',
         minValue: 100,
@@ -3494,21 +3522,21 @@ var init_google_5Y2W5CAB = __esm({
         tag: 'wght',
         minValue: 300,
         maxValue: 900,
-        defaultValue: 300,
+        defaultValue: 400,
         name: 'Weight',
       },],
       'GF;Red Hat Mono': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
-        defaultValue: 300,
+        defaultValue: 400,
         name: 'Weight',
       },],
       'GF;Red Hat Text': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
-        defaultValue: 300,
+        defaultValue: 400,
         name: 'Weight',
       },],
       'GF;Red Rose': [{
@@ -3559,6 +3587,19 @@ var init_google_5Y2W5CAB = __esm({
         maxValue: 800,
         defaultValue: 400,
         name: 'Weight',
+      },],
+      'GF;Roboto': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      }, {
+        tag: 'wdth',
+        minValue: 75,
+        maxValue: 100,
+        defaultValue: 100,
+        name: 'Width',
       },],
       'GF;Roboto Condensed': [{
         tag: 'wght',
@@ -4280,16 +4321,23 @@ var init_google_5Y2W5CAB = __esm({
   },
 },);
 
-// https :https://app.framerstatic.com/fontshare-XR4PZDC4.mjs
-var fontshare_XR4PZDC4_exports = {};
-__export(fontshare_XR4PZDC4_exports, {
+// https :https://app.framerstatic.com/fontshare-GJKVH4LZ.mjs
+var fontshare_GJKVH4LZ_exports = {};
+__export(fontshare_GJKVH4LZ_exports, {
   default: () => fontshare_default,
 },);
 var fontshare_default;
-var init_fontshare_XR4PZDC4 = __esm({
-  'https :https://app.framerstatic.com/fontshare-XR4PZDC4.mjs'() {
+var init_fontshare_GJKVH4LZ = __esm({
+  'https :https://app.framerstatic.com/fontshare-GJKVH4LZ.mjs'() {
     init_chunk_QLPHEVXG();
     fontshare_default = {
+      'FS;Spline Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
       'FS;Familjen Grotesk': [{
         tag: 'wght',
         minValue: 400,
@@ -4297,25 +4345,25 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 400,
         name: 'Weight',
       },],
-      'FS;Author': [{
+      'FS;Public Sans': [{
         tag: 'wght',
-        minValue: 200,
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Trench Slab': [{
+        tag: 'wght',
+        minValue: 300,
         maxValue: 700,
         defaultValue: 700,
         name: 'Weight',
       },],
-      'FS;Excon': [{
+      'FS;Be Vietnam Pro': [{
         tag: 'wght',
         minValue: 100,
         maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Rajdhani': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
+        defaultValue: 100,
         name: 'Weight',
       },],
       'FS;Archivo': [{
@@ -4325,6 +4373,216 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 600,
         name: 'Weight',
       },],
+      'FS;Work Sans': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Pally': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Amulya': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Excon': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Azeret Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Asap': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Styro': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Chubbo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Hind': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Synonym': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Author': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Plein': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Lora': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 700,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Zodiak': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Technor': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Roundo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Pilcrow Rounded': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Bevellier': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Space Grotesk': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Outfit': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 100,
+        name: 'Weight',
+      },],
+      'FS;Chillax': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Supreme': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Neco': [{
+        tag: 'wght',
+        minValue: 400,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Sentient': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Clash Grotesk': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Nippo': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Khand': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Manrope': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Switzer': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Panchang': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
       'FS;Kalam': [{
         tag: 'wght',
         minValue: 300,
@@ -4332,11 +4590,67 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 300,
         name: 'Weight',
       },],
-      'FS;Nunito': [{
+      'FS;Hoover': [{
         tag: 'wght',
         minValue: 200,
-        maxValue: 1e3,
+        maxValue: 700,
         defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Merriweather Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Alpino': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Boska': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 900,
+        defaultValue: 200,
+        name: 'Weight',
+      },],
+      'FS;Telma': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 900,
+        defaultValue: 900,
+        name: 'Weight',
+      },],
+      'FS;Karma': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 700,
+        defaultValue: 300,
+        name: 'Weight',
+      },],
+      'FS;Plus Jakarta Sans': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Slab': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 800,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Sans': [{
+        tag: 'wght',
+        minValue: 300,
+        maxValue: 800,
+        defaultValue: 800,
         name: 'Weight',
       },],
       'FS;Red Hat Display': [{
@@ -4353,84 +4667,42 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 900,
         name: 'Weight',
       },],
-      'FS;Dancing Script': [{
+      'FS;Expose': [{
         tag: 'wght',
         minValue: 400,
-        maxValue: 700,
+        maxValue: 900,
         defaultValue: 400,
         name: 'Weight',
       },],
-      'FS;Pramukh Rounded': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Bespoke Stencil': [{
+      'FS;Bespoke Serif': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 800,
-        defaultValue: 800,
+        defaultValue: 300,
         name: 'Weight',
       },],
-      'FS;Outfit': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 100,
-        name: 'Weight',
-      },],
-      'FS;Karma': [{
+      'FS;Rajdhani': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
         defaultValue: 300,
         name: 'Weight',
       },],
-      'FS;Space Grotesk': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Trench Slab': [{
+      'FS;Rowan': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
         defaultValue: 700,
         name: 'Weight',
       },],
-      'FS;Sharpie': [{
+      'FS;Clash Display': [{
         tag: 'wght',
-        minValue: 300,
-        maxValue: 900,
-        defaultValue: 900,
+        minValue: 200,
+        maxValue: 700,
+        defaultValue: 700,
         name: 'Weight',
       },],
-      'FS;Public Sans': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 100,
-        name: 'Weight',
-      },],
-      'FS;Azeret Mono': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 100,
-        name: 'Weight',
-      },],
-      'FS;Be Vietnam Pro': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 100,
-        name: 'Weight',
-      },],
-      'FS;Melodrama': [{
+      'FS;Teko': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
@@ -4444,60 +4716,18 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 100,
         name: 'Weight',
       },],
-      'FS;Britney': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Poppins': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 100,
-        name: 'Weight',
-      },],
-      'FS;Styro': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Rowan': [{
+      'FS;Quicksand': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
-        defaultValue: 700,
+        defaultValue: 300,
         name: 'Weight',
       },],
-      'FS;Expose': [{
+      'FS;Recia': [{
         tag: 'wght',
-        minValue: 400,
-        maxValue: 900,
-        defaultValue: 400,
-        name: 'Weight',
-      },],
-      'FS;Alpino': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Chubbo': [{
-        tag: 'wght',
-        minValue: 200,
+        minValue: 300,
         maxValue: 700,
-        defaultValue: 400,
-        name: 'Weight',
-      },],
-      'FS;JetBrains Mono': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 800,
-        defaultValue: 400,
+        defaultValue: 300,
         name: 'Weight',
       },],
       'FS;Sora': [{
@@ -4507,135 +4737,44 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 400,
         name: 'Weight',
       },],
-      'FS;Bespoke Serif': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 800,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Synonym': [{
+      'FS;Pramukh Rounded': [{
         tag: 'wght',
         minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Merriweather Sans': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 800,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Bespoke Slab': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 800,
-        defaultValue: 800,
-        name: 'Weight',
-      },],
-      'FS;Switzer': [{
-        tag: 'wght',
-        minValue: 100,
         maxValue: 900,
-        defaultValue: 400,
+        defaultValue: 900,
         name: 'Weight',
       },],
-      'FS;Quicksand': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Teko': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Plein': [{
+      'FS;Britney': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 900,
         defaultValue: 900,
         name: 'Weight',
       },],
-      'FS;Supreme': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 800,
-        defaultValue: 800,
-        name: 'Weight',
-      },],
-      'FS;Khand': [{
+      'FS;Melodrama': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 700,
         defaultValue: 300,
         name: 'Weight',
       },],
-      'FS;Clash Display': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Bonny': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Pally': [{
-        tag: 'wght',
-        minValue: 400,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Clash Grotesk': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Manrope': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 800,
-        defaultValue: 200,
-        name: 'Weight',
-      },],
-      'FS;Asap': [{
+      'FS;Dancing Script': [{
         tag: 'wght',
         minValue: 400,
         maxValue: 700,
         defaultValue: 400,
         name: 'Weight',
       },],
-      'FS;Spline Sans': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 400,
-        name: 'Weight',
-      },],
-      'FS;Work Sans': [{
+      'FS;Poppins': [{
         tag: 'wght',
         minValue: 100,
         maxValue: 900,
-        defaultValue: 400,
+        defaultValue: 100,
         name: 'Weight',
       },],
-      'FS;Technor': [{
+      'FS;Sharpie': [{
         tag: 'wght',
-        minValue: 200,
+        minValue: 300,
         maxValue: 900,
         defaultValue: 900,
         name: 'Weight',
@@ -4647,130 +4786,32 @@ var init_fontshare_XR4PZDC4 = __esm({
         defaultValue: 400,
         name: 'Weight',
       },],
-      'FS;Bespoke Sans': [{
+      'FS;Nunito': [{
+        tag: 'wght',
+        minValue: 200,
+        maxValue: 1e3,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;JetBrains Mono': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 800,
+        defaultValue: 400,
+        name: 'Weight',
+      },],
+      'FS;Bonny': [{
+        tag: 'wght',
+        minValue: 100,
+        maxValue: 700,
+        defaultValue: 700,
+        name: 'Weight',
+      },],
+      'FS;Bespoke Stencil': [{
         tag: 'wght',
         minValue: 300,
         maxValue: 800,
         defaultValue: 800,
-        name: 'Weight',
-      },],
-      'FS;Panchang': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 800,
-        defaultValue: 800,
-        name: 'Weight',
-      },],
-      'FS;Plus Jakarta Sans': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 800,
-        defaultValue: 400,
-        name: 'Weight',
-      },],
-      'FS;Boska': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 900,
-        defaultValue: 200,
-        name: 'Weight',
-      },],
-      'FS;Hoover': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Recia': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Roundo': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 200,
-        name: 'Weight',
-      },],
-      'FS;Nippo': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Hind': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Pilcrow Rounded': [{
-        tag: 'wght',
-        minValue: 400,
-        maxValue: 900,
-        defaultValue: 400,
-        name: 'Weight',
-      },],
-      'FS;Neco': [{
-        tag: 'wght',
-        minValue: 400,
-        maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Lora': [{
-        tag: 'wght',
-        minValue: 400,
-        maxValue: 700,
-        defaultValue: 400,
-        name: 'Weight',
-      },],
-      'FS;Chillax': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Telma': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 900,
-        defaultValue: 900,
-        name: 'Weight',
-      },],
-      'FS;Amulya': [{
-        tag: 'wght',
-        minValue: 300,
-        maxValue: 700,
-        defaultValue: 300,
-        name: 'Weight',
-      },],
-      'FS;Sentient': [{
-        tag: 'wght',
-        minValue: 200,
-        maxValue: 700,
-        defaultValue: 700,
-        name: 'Weight',
-      },],
-      'FS;Bevellier': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 100,
-        name: 'Weight',
-      },],
-      'FS;Zodiak': [{
-        tag: 'wght',
-        minValue: 100,
-        maxValue: 900,
-        defaultValue: 900,
         name: 'Weight',
       },],
       'FS;General Sans': [{
@@ -15349,12 +15390,11 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.CMG6G5OF.mjs
+// https :https://app.framerstatic.com/framer.LECBVQGK.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
-import { startTransition as startTransition2, } from 'react';
-import { Suspense as Suspense2, } from 'react';
-import { memo as memo2, } from 'react';
+import { Suspense as Suspense3, } from 'react';
+import { memo as memo2, startTransition as startTransition2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
@@ -17002,65 +17042,6 @@ var require_fontfaceobserver_standalone = __commonJS({
     })();
   },
 },);
-function renderPage(Page4, defaultPageStyle,) {
-  const style = {
-    style: defaultPageStyle,
-  };
-  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
-}
-var NotFoundError = class extends Error {};
-var NotFoundErrorBoundaryCaughtError = class extends Error {};
-var NotFoundErrorBoundary = class extends Component {
-  constructor(props,) {
-    super(props,);
-    this.state = {
-      error: void 0,
-      forceUpdateKey: props.forceUpdateKey,
-    };
-  }
-  static getDerivedStateFromError(error,) {
-    return {
-      error,
-    };
-  }
-  /** Resets the error when forceUpdateKey gets bumped. */
-  static getDerivedStateFromProps(nextProps, prevState,) {
-    if (nextProps.forceUpdateKey !== prevState.forceUpdateKey) {
-      const newState = {
-        forceUpdateKey: nextProps.forceUpdateKey,
-      };
-      if (prevState.error) {
-        newState.error = void 0;
-      }
-      return newState;
-    }
-    return null;
-  }
-  render() {
-    if (this.state.error === void 0) {
-      return this.props.children;
-    }
-    if (!(this.state.error instanceof NotFoundError)) {
-      const error = new NotFoundErrorBoundaryCaughtError();
-      error.cause = this.state.error;
-      throw error;
-    }
-    const {
-      notFoundPage,
-      defaultPageStyle,
-    } = this.props;
-    if (!notFoundPage) {
-      throw this.state.error;
-    }
-    return renderPage(notFoundPage, defaultPageStyle,);
-  }
-};
-function isObject(value,) {
-  return typeof value === 'object' && value !== null && !Array.isArray(value,);
-}
-function isString(value,) {
-  return typeof value === 'string';
-}
 var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
   return typeof componentType === 'object' && componentType !== null && !React4.isValidElement(componentType,) &&
@@ -17072,7 +17053,7 @@ function lazy(factory,) {
   let LoadedComponent;
   const Component18 = React4.forwardRef(function LazyWithPreload(props, ref,) {
     return React4.createElement(
-      LoadedComponent !== null && LoadedComponent !== void 0 ? LoadedComponent : LazyComponent,
+      LoadedComponent ?? LazyComponent,
       ref
         ? {
           ref,
@@ -17110,7 +17091,7 @@ function yieldToMain(options,) {
     if ('yield' in scheduler) return scheduler.yield(options,);
     if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
   }
-  if ((options === null || options === void 0 ? void 0 : options.priority) === 'user-blocking') {
+  if ((options == null ? void 0 : options.priority) === 'user-blocking') {
     return Promise.resolve();
   }
   return new Promise((resolve) => {
@@ -17150,73 +17131,134 @@ var EMPTY_ARRAY = [];
 var requestIdleCallback = /* @__PURE__ */ (() => {
   return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
 })();
-var ErrorBoundaryCaughtError = class extends NotFoundErrorBoundaryCaughtError {
-  constructor() {
-    super(...arguments,);
-    this.caught = true;
-  }
-};
-var GracefullyDegradingErrorBoundary = class extends Component {
-  constructor() {
-    super(...arguments,);
-    this.state = {
-      error: void 0,
-    };
-    this.message = 'Made UI non-interactive due to the error above. We\'ve logged it, but also please report this to the Framer team.';
-  }
-  static getDerivedStateFromError(error,) {
-    return {
-      error,
-    };
-  }
-  componentDidCatch(error,) {
-    var _a;
-    if ('cause' in error) {
-      error = error.cause;
-    }
-    console.error(this.message,);
-    if (Math.random() > 0.01) return;
-    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-    (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_error', {
-      message: String(error,),
-      stack,
-    },],);
-  }
-  render() {
-    var _a;
-    const error = this.state.error;
-    if (!error) return this.props.children;
-    if (!isBot(navigator.userAgent,)) {
-      const fatalError = new ErrorBoundaryCaughtError();
-      fatalError.cause = 'cause' in error ? error.cause : error;
-      console.error(this.message, fatalError.cause,);
-      throw fatalError;
-    }
-    return (
-      // This has the caveat that we will slightly modify the DOM, but it appears to be fine in this case.
-      // The alternative would be to queue a new task that runs after and then set the innerHTML (= avoids the dummy-div), but that means we'll have DOM -> no DOM -> DOM transitions. With the div, we have DOM -> DOM and remove possible race-conditions.
-      jsx('div', {
-        style: {
-          display: 'contents',
-        },
-        suppressHydrationWarning: true,
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: React would unmount the root on errors, but we must ensure that bots can still read the SSR'd content.
-        dangerouslySetInnerHTML: {
-          __html: '<!-- DOM replaced by GracefullyDegradingErrorBoundary -->' +
-            (((_a = document.getElementById('main',)) === null || _a === void 0 ? void 0 : _a.innerHTML) || ''),
-        },
-      },)
-    );
-  }
-};
-var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
-function fillPathVariables(path, variables,) {
-  return path.replace(pathVariablesRegExp, (match, name,) => {
-    const value = variables[name];
-    if (typeof value !== 'string' || value.length === 0) return match;
-    return encodeURIComponent(value,);
+function useGetRouteCallback(routes,) {
+  return React4.useCallback((routeId) => routes[routeId], [routes,],);
+}
+var RouterContext = /* @__PURE__ */ (() => React4.createContext({},))();
+function RouterAPIProvider({
+  api,
+  children,
+},) {
+  return /* @__PURE__ */ jsx(RouterContext.Provider, {
+    value: api,
+    children,
   },);
+}
+function useRouter() {
+  return React4.useContext(RouterContext,);
+}
+function RoutesProvider({
+  routes,
+  children,
+},) {
+  const getRoute = useGetRouteCallback(routes,);
+  return /* @__PURE__ */ jsx(RouterContext.Provider, {
+    value: {
+      getRoute,
+    },
+    children,
+  },);
+}
+var CurrentRouteContext = /* @__PURE__ */ (() => React4.createContext(void 0,))();
+function useCurrentRoute() {
+  var _a;
+  const router = useRouter();
+  const override = useContext(CurrentRouteContext,);
+  const id3 = override ?? router.currentRouteId;
+  if (!id3) return void 0;
+  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, id3,);
+  if (!route) return void 0;
+  return {
+    ...route,
+    id: id3,
+    pathVariables: override ? void 0 : router.currentPathVariables,
+  };
+}
+function useCurrentRouteId() {
+  var _a;
+  return (_a = useCurrentRoute()) == null ? void 0 : _a.id;
+}
+function useRoute(routeId,) {
+  var _a;
+  const routerAPI = useRouter();
+  if (!routeId) return void 0;
+  return (_a = routerAPI.getRoute) == null ? void 0 : _a.call(routerAPI, routeId,);
+}
+function useRouteElementId(id3, targetRouteId,) {
+  const currentRoute = useCurrentRoute();
+  const route = useRoute(targetRouteId,) ?? currentRoute;
+  return React4.useMemo(() => {
+    if (!route) return id3;
+    return getRouteElementId(route, id3,);
+  }, [id3, route,],);
+}
+function useCurrentPathVariables() {
+  var _a;
+  return (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
+}
+var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(navigator.userAgent,))();
+function useRoutePreloader(routeIds, enabled = true,) {
+  const {
+    getRoute,
+  } = useRouter();
+  useEffect(() => {
+    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
+    for (const routeId of routeIds) {
+      void preloadRoute(getRoute(routeId,),);
+    }
+  }, [routeIds, getRoute, enabled,],);
+}
+async function preloadRoute(route,) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  await yieldToMain();
+  try {
+    await component.preload();
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
+  }
+}
+function useRouteHandler(routeId, preload = false, elementId,) {
+  const {
+    navigate,
+  } = useRouter();
+  useRoutePreloader([routeId,], preload,);
+  const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
+  return handler;
+}
+function isFunction(value,) {
+  return typeof value === 'function';
+}
+function isBoolean(value,) {
+  return typeof value === 'boolean';
+}
+function isString(value,) {
+  return typeof value === 'string';
+}
+function isNumber2(value,) {
+  return Number.isFinite(value,);
+}
+function isArray(value,) {
+  return Array.isArray(value,);
+}
+function isObject(value,) {
+  return value !== null && typeof value === 'object' && !isArray(value,);
+}
+function isUndefined(value,) {
+  return typeof value === 'undefined';
+}
+function isNull(value,) {
+  return value === null;
+}
+function isNullish2(value,) {
+  return value == null;
+}
+function isValidDate(value,) {
+  return value instanceof Date && !Number.isNaN(value.getTime(),);
+}
+function isGenerator2(value,) {
+  return isObject(value,) && isFunction(value.return,);
 }
 function computeRelativePath(from, to,) {
   if (!from.startsWith('/',) || !to.startsWith('/',)) {
@@ -17341,6 +17383,15 @@ function normalizeString(path,) {
   }
   return res;
 }
+var pathVariablesRegExpRaw = ':([a-z]\\w*)';
+var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
+function fillPathVariables(path, variables,) {
+  return path.replace(pathVariablesRegExp, (match, name,) => {
+    const value = variables[name];
+    if (typeof value !== 'string' || value.length === 0) return match;
+    return encodeURIComponent(value,);
+  },);
+}
 function forwardCurrentQueryParams(href,) {
   const queryParamsString = typeof window !== 'undefined' ? window.location.search : '';
   if (!queryParamsString) {
@@ -17367,7 +17418,7 @@ function forwardQueryParams(queryParamsString, href,) {
   return hrefWithoutHash.substring(0, startOfSearch + 1,) + newSearchParams.toString() + hash2;
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
-  var _a, _b, _c;
+  var _a;
   let resultPath = path;
   let isMissingInLocale = false;
   const resultPathVariables = {
@@ -17376,8 +17427,8 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
   const matches = Array.from(resultPath.matchAll(pathVariablesRegExp,),);
   const replacements = await Promise.all(matches.map(async (match) => {
     var _a2;
-    const pathVariableWithDelimiter = match === null || match === void 0 ? void 0 : match[0];
-    const pathVariableValue = match === null || match === void 0 ? void 0 : match[1];
+    const pathVariableWithDelimiter = match == null ? void 0 : match[0];
+    const pathVariableValue = match == null ? void 0 : match[1];
     if (!pathVariableWithDelimiter || !pathVariableValue) {
       throw new Error('Failed to replace path variables: unexpected regex match group',);
     }
@@ -17386,10 +17437,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
       throw new Error(`No slug found for path variable ${pathVariableValue}`,);
     }
     const utils =
-      await ((_a2 = collectionUtils === null || collectionUtils === void 0 ? void 0 : collectionUtils[collectionId]) === null ||
-          _a2 === void 0
-        ? void 0
-        : _a2.call(collectionUtils,));
+      await ((_a2 = collectionUtils == null ? void 0 : collectionUtils[collectionId]) == null ? void 0 : _a2.call(collectionUtils,));
     if (!utils || !currentLocale) {
       return currentSlug;
     }
@@ -17402,7 +17450,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
       if (defaultLocaleSlug) {
         resultPathVariables[pathVariableValue] = defaultLocaleSlug;
       }
-      return defaultLocaleSlug !== null && defaultLocaleSlug !== void 0 ? defaultLocaleSlug : currentSlug;
+      return defaultLocaleSlug ?? currentSlug;
     }
     resultPathVariables[pathVariableValue] = nextSlug;
     return nextSlug;
@@ -17415,8 +17463,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
     const replacement = replacements[i];
     if (!match || !replacement) continue;
     replacedPath += resultPath.substring(lastIndex, match.index,);
-    lastIndex = ((_a = match.index) !== null && _a !== void 0 ? _a : 0) +
-      ((_c = (_b = match[0]) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0);
+    lastIndex = (match.index ?? 0) + (((_a = match[0]) == null ? void 0 : _a.length) ?? 0);
     replacedPath += replacements[i];
     hasMatch = true;
   }
@@ -17474,7 +17521,7 @@ function getPageEffectForRoute(currentRouteId, nextRouteId, {
   routes,
 },) {
   var _a;
-  return ((_a = routes[currentRouteId]) === null || _a === void 0 ? void 0 : _a[nextRouteId]) || global;
+  return ((_a = routes[currentRouteId]) == null ? void 0 : _a[nextRouteId]) || global;
 }
 var defaultSitePageEffects = {
   global: void 0,
@@ -17485,7 +17532,7 @@ function PageEffectsProvider({
   children,
   value,
 },) {
-  return jsx(PageEffectsContext.Provider, {
+  return /* @__PURE__ */ jsx(PageEffectsContext.Provider, {
     value,
     children,
   },);
@@ -17664,7 +17711,7 @@ function valuesToCSSKeyframes(values, progress2, page, maskGenerator,) {
       transform: translate(${values.x}, ${values.y}) scale(${values.scale}) rotateX(${values.rotateX}deg) rotateY(${values.rotateY}deg) rotateZ(${values.rotate}deg);
     `;
   if (values.mask) {
-    keyframes2 += ((_a = maskGenerator === null || maskGenerator === void 0 ? void 0 : maskGenerator.makeKeyframe) === null || _a === void 0
+    keyframes2 += ((_a = maskGenerator == null ? void 0 : maskGenerator.makeKeyframe) == null
       ? void 0
       : _a.call(maskGenerator, values.mask, progress2, page,)) || '';
   }
@@ -17699,9 +17746,7 @@ function createPageTransitionRules(page, {
     settings.duration = duration + 'ms';
     settings.easing = easing;
   }
-  const maskGenerator = getMaskGenerator(
-    (_a = values === null || values === void 0 ? void 0 : values.mask) === null || _a === void 0 ? void 0 : _a.type,
-  );
+  const maskGenerator = getMaskGenerator((_a = values == null ? void 0 : values.mask) == null ? void 0 : _a.type,);
   let startKeyframes = valuesToCSSKeyframes(values, 'start', page, maskGenerator,);
   let endKeyframes = valuesToCSSKeyframes(
     {
@@ -17717,9 +17762,7 @@ function createPageTransitionRules(page, {
   }
   return `
         ${
-    values.mask && (maskGenerator === null || maskGenerator === void 0 ? void 0 : maskGenerator.makePropertyRules)
-      ? maskGenerator.makePropertyRules(values.mask,)
-      : ''
+    values.mask && (maskGenerator == null ? void 0 : maskGenerator.makePropertyRules) ? maskGenerator.makePropertyRules(values.mask,) : ''
   }
 
         @keyframes ${name} {
@@ -17739,9 +17782,7 @@ function createPageTransitionRules(page, {
             animation-timing-function: ${settings.easing};
             animation-fill-mode: both;
             ${
-    values.mask && (maskGenerator === null || maskGenerator === void 0 ? void 0 : maskGenerator.makeStyles)
-      ? maskGenerator.makeStyles(values.mask, page,)
-      : ''
+    values.mask && (maskGenerator == null ? void 0 : maskGenerator.makeStyles) ? maskGenerator.makeStyles(values.mask, page,) : ''
   }
         }
     `;
@@ -17848,12 +17889,12 @@ async function startViewTransition(updateView, effect, signal,) {
     return;
   }
   await addVTStylesheetAfterInRender(effect,);
-  if (signal === null || signal === void 0 ? void 0 : signal.aborted) return;
+  if (signal == null ? void 0 : signal.aborted) return;
   performance.mark('framer-vt',);
   const transition = document.startViewTransition(async () => {
     performance.mark('framer-vt-freeze',);
-    if (signal === null || signal === void 0 ? void 0 : signal.aborted) return;
-    else signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', () => transition.skipTransition(),);
+    if (signal == null ? void 0 : signal.aborted) return;
+    else signal == null ? void 0 : signal.addEventListener('abort', () => transition.skipTransition(),);
     await updateView();
   },);
   transition.updateCallbackDone.then(() => {
@@ -17893,9 +17934,8 @@ function useViewTransition() {
       };
       if (yieldBeforeFreezePeriod) return yieldBeforeViewTransition();
       return startViewTransition(asyncUpdate, pageEffect,);
-    } else {
-      return update();
     }
+    update();
   }, [sitePageEffects,],);
 }
 function useMonitorNextPaintAfterRender(label,) {
@@ -18016,7 +18056,7 @@ async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNa
       if (isImpactedPopstateBugChromiumVersion) return;
       const msg = 'Popstate called after intercept(). Please report this to the Framer team.';
       console.error(msg,);
-      (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
+      (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
         message: msg,
         userAgent: navigator.userAgent,
       },],);
@@ -18068,10 +18108,8 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   },) => {
     var _a, _b, _c, _d, _e, _f;
     if (
-      ((_a = window.navigation) === null || _a === void 0 ? void 0 : _a.transition) &&
-      ((_c = (_b = window.navigation) === null || _b === void 0 ? void 0 : _b.transition) === null || _c === void 0
-          ? void 0
-          : _c.navigationType) !== 'traverse'
+      ((_a = window.navigation) == null ? void 0 : _a.transition) &&
+      ((_c = (_b = window.navigation) == null ? void 0 : _b.transition) == null ? void 0 : _c.navigationType) !== 'traverse'
     ) return;
     if (!isObject(state2,)) return;
     const {
@@ -18095,11 +18133,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     updateCanonicalURL(window.location.href,);
     const transition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
     if (transition) {
-      void transition.updateCallbackDone.then((_d = viewTransitionReady.current) === null || _d === void 0 ? void 0 : _d.resolve,).catch(
-        (_e = viewTransitionReady.current) === null || _e === void 0 ? void 0 : _e.reject,
+      void transition.updateCallbackDone.then((_d = viewTransitionReady.current) == null ? void 0 : _d.resolve,).catch(
+        (_e = viewTransitionReady.current) == null ? void 0 : _e.reject,
       );
     } else {
-      (_f = viewTransitionReady.current) === null || _f === void 0 ? void 0 : _f.resolve();
+      (_f = viewTransitionReady.current) == null ? void 0 : _f.resolve();
     }
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback((event) => {
@@ -18120,22 +18158,19 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   useEffect(() => {
     var _a;
     window.addEventListener('popstate', popStateHandler,);
-    (_a = window.navigation) === null || _a === void 0 ? void 0 : _a.addEventListener('navigate', traversalHandler,);
+    (_a = window.navigation) == null ? void 0 : _a.addEventListener('navigate', traversalHandler,);
     return () => {
       var _a2;
       window.removeEventListener('popstate', popStateHandler,);
-      (_a2 = window.navigation) === null || _a2 === void 0 ? void 0 : _a2.removeEventListener('navigate', traversalHandler,);
+      (_a2 = window.navigation) == null ? void 0 : _a2.removeEventListener('navigate', traversalHandler,);
     };
   }, [popStateHandler, traversalHandler,],);
 }
 function getHashForRoute(hash2, route, hashVariables,) {
   const resolvedHash = getRouteElementId(route, hash2,);
   if (!resolvedHash) return void 0;
-  const variables = Object.assign({}, route === null || route === void 0 ? void 0 : route.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => {
-    var _a;
-    return String((_a = variables[p1]) !== null && _a !== void 0 ? _a : m2,);
-  },);
+  const variables = Object.assign({}, route == null ? void 0 : route.elements, hashVariables,);
+  return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => String(variables[p1] ?? m2,),);
 }
 function getPathForRoute(route, {
   currentRoutePath,
@@ -18146,12 +18181,11 @@ function getPathForRoute(route, {
   relative: relative2 = true,
   preserveQueryParams,
 },) {
-  var _a;
-  let currentPath = currentRoutePath !== null && currentRoutePath !== void 0 ? currentRoutePath : '/';
+  let currentPath = currentRoutePath ?? '/';
   if (currentPathVariables) {
     currentPath = currentPath.replace(pathVariablesRegExp, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
   }
-  const targetPath = (_a = route === null || route === void 0 ? void 0 : route.path) !== null && _a !== void 0 ? _a : '/';
+  const targetPath = (route == null ? void 0 : route.path) ?? '/';
   let path = targetPath;
   if (pathVariables) {
     path = path.replace(pathVariablesRegExp, (m2, p1,) => String(pathVariables[p1] || m2,),);
@@ -18206,8 +18240,7 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
   try {
     const currentHistoryState = window.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
-    const isInitialLoad =
-      (currentHistoryState === null || currentHistoryState === void 0 ? void 0 : currentHistoryState.paginationInfo) === void 0 ||
+    const isInitialLoad = (currentHistoryState == null ? void 0 : currentHistoryState.paginationInfo) === void 0 ||
       currentHistoryState.paginationInfo[hash2] === void 0;
     const newPaginationInfo = {
       ...currentHistoryState.paginationInfo,
@@ -18229,7 +18262,7 @@ function useNativeLoadingSpinner() {
   const navigateListener = useCallback((navigateEvent) => {
     if (navigateEvent.navigationType === 'traverse') return;
     const controller = navigationController.current;
-    controller === null || controller === void 0 ? void 0 : controller.signal.addEventListener('abort', () => {
+    controller == null ? void 0 : controller.signal.addEventListener('abort', () => {
       controller.abort('user aborted',);
     },);
     navigateEvent.intercept({
@@ -18249,6 +18282,138 @@ function useNativeLoadingSpinner() {
       window.navigation.removeEventListener('navigate', navigateListener,);
     },);
   }, [navigateListener,],);
+}
+function useRouteAnchor(routeId, {
+  elementId,
+  hash: linkHash,
+} = {},) {
+  const {
+    navigate,
+    currentPathVariables,
+    preserveQueryParams,
+  } = useRouter();
+  const route = useRoute(routeId,);
+  const currentRouteId = useCurrentRouteId();
+  const currentRoute = useRoute(currentRouteId ?? '',);
+  useRoutePreloader([routeId,], true,);
+  const hash2 = linkHash ?? elementId;
+  const href = React4.useMemo(() =>
+    getPathForRoute(route, {
+      currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+      currentPathVariables,
+      hash: hash2,
+      preserveQueryParams,
+    },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],);
+  const navigateToRoute = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
+  const onClick = React4.useCallback((event) => {
+    event.preventDefault();
+    navigateToRoute();
+  }, [navigateToRoute,],);
+  return {
+    onClick,
+    href,
+  };
+}
+var noopAsync = async () => {};
+var defaultLocaleInfo = {
+  activeLocale: null,
+  locales: [],
+  setLocale: noopAsync,
+};
+var LocaleInfoContext = /* @__PURE__ */ React4.createContext(defaultLocaleInfo,);
+function useLocaleInfo() {
+  return React4.useContext(LocaleInfoContext,);
+}
+function useLocalizationInfo() {
+  const {
+    activeLocale,
+    locales,
+    setLocale,
+  } = useLocaleInfo();
+  return {
+    activeLocalization: activeLocale,
+    localizations: locales,
+    setLocalization: setLocale,
+  };
+}
+function useLocaleCode() {
+  var _a;
+  return ((_a = useLocaleInfo().activeLocale) == null ? void 0 : _a.code) ?? 'en-US';
+}
+function useLocale() {
+  return useLocaleCode();
+}
+var eventsToStop = [
+  'mousedown',
+  'mouseup',
+  'touchcancel',
+  'touchend',
+  'touchstart',
+  'auxclick',
+  'dblclick',
+  'pointercancel',
+  'pointerdown',
+  'pointerup',
+  'dragend',
+  'dragstart',
+  'drop',
+  'compositionend',
+  'compositionstart',
+  'keydown',
+  'keypress',
+  'keyup',
+  'input',
+  'textInput',
+  // Intentionally camelCase
+  'copy',
+  'cut',
+  'paste',
+  'click',
+  'change',
+  'contextmenu',
+  'reset',
+];
+var stopFn = (event) => {
+  var _a, _b;
+  if (!((_b = (_a = event.target) == null ? void 0 : _a.closest) == null ? void 0 : _b.call(_a, '#main',))) return;
+  event.stopPropagation();
+  performance.mark('framer-react-event-handling-prevented',);
+};
+var shouldTurnOnEventHandling = false;
+function turnOffReactEventHandling() {
+  if (!eventsToStop) return;
+  shouldTurnOnEventHandling = true;
+  performance.mark('framer-react-event-handling-start',);
+  const options = {
+    capture: true,
+  };
+  eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
+}
+function TurnOnReactEventHandling() {
+  useEffect(() => {
+    if (!shouldTurnOnEventHandling || !eventsToStop) return;
+    const options = {
+      capture: true,
+    };
+    eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
+    eventsToStop = void 0;
+    performance.mark('framer-react-event-handling-end',);
+  }, [],);
+  return null;
+}
+var hydrationRunning = false;
+function setInitialHydrationState() {
+  hydrationRunning = true;
+}
+function setHydrationDone() {
+  hydrationRunning = false;
+}
+function useIsHydrationOrSSR() {
+  const isHydrationOrSSR = useRef(typeof window === 'undefined' || hydrationRunning,);
+  useEffect(() => {
+    isHydrationOrSSR.current = false;
+  }, [],);
+  return isHydrationOrSSR;
 }
 function measureSafe(name, start, end,) {
   try {
@@ -18309,16 +18474,12 @@ function useMarkSuspenseEffectsStart() {
       return;
     }
     requestAnimationFrame(() => {
-      var _a, _b, _c;
+      var _a, _b;
       performance.mark(hydrationBrowserRenderStart,);
       measureSafe(
         `${hydrationMarkPrefix}uho`,
-        (_b = (_a = performance.getEntriesByName(hydrationEffectsEnd,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null &&
-          _b !== void 0
-          ? _b
-          : (_c = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) === null || _c === void 0
-          ? void 0
-          : _c.name,
+        ((_a = performance.getEntriesByName(hydrationEffectsEnd,)[0]) == null ? void 0 : _a.name) ??
+          ((_b = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) == null ? void 0 : _b.name),
         hydrationBrowserRenderStart,
       );
     },);
@@ -18329,9 +18490,7 @@ function useMarkSuspenseEffectsStart() {
     hydrationEffectStartHasRun = true;
     const hydrationEffectsStart = `${hydrationMarkPrefix}effects-start`;
     performance.mark(hydrationEffectsStart,);
-    const hasPaintStarted = (_a = performance.getEntriesByName(hydrationBrowserRenderStart,)[0]) === null || _a === void 0
-      ? void 0
-      : _a.name;
+    const hasPaintStarted = (_a = performance.getEntriesByName(hydrationBrowserRenderStart,)[0]) == null ? void 0 : _a.name;
     if (!hasPaintStarted) {
       measureSafe(`${hydrationMarkPrefix}commit`, hydrationLayoutEffectsEnd, hydrationEffectsStart,);
       performance.mark(`${hydrationMarkPrefix}effects-sync`,);
@@ -18374,17 +18533,14 @@ function useMarkSuspenseEffectEnd() {
     },);
   }, [],);
   useEffect(() => {
-    var _a, _b, _c;
+    var _a, _b;
     if (hydrationEffectHasRun || !shouldMark) return;
     hydrationEffectHasRun = true;
     performance.mark(hydrationEffectsEnd,);
     measureSafe(
       `${hydrationMarkPrefix}effects`,
-      (_b = (_a = performance.getEntriesByName(hydrationFP,)[0]) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0
-        ? _b
-        : (_c = performance.getEntriesByName(`${hydrationMarkPrefix}effects-start`,)[0]) === null || _c === void 0
-        ? void 0
-        : _c.name,
+      ((_a = performance.getEntriesByName(hydrationFP,)[0]) == null ? void 0 : _a.name) ??
+        ((_b = performance.getEntriesByName(`${hydrationMarkPrefix}effects-start`,)[0]) == null ? void 0 : _b.name),
       hydrationEffectsEnd,
     );
   }, [],);
@@ -18402,567 +18558,64 @@ var MarkSuspenseEffects = {
   Start: MarkSuspenseEffectsStart,
   End: MarkSuspenseEffectsEnd,
 };
-var eventsToStop = [
-  'mousedown',
-  'mouseup',
-  'touchcancel',
-  'touchend',
-  'touchstart',
-  'auxclick',
-  'dblclick',
-  'pointercancel',
-  'pointerdown',
-  'pointerup',
-  'dragend',
-  'dragstart',
-  'drop',
-  'compositionend',
-  'compositionstart',
-  'keydown',
-  'keypress',
-  'keyup',
-  'input',
-  'textInput',
-  // Intentionally camelCase
-  'copy',
-  'cut',
-  'paste',
-  'click',
-  'change',
-  'contextmenu',
-  'reset',
-];
-var stopFn = (event) => {
-  var _a, _b;
-  if (
-    !((_b = (_a = event.target) === null || _a === void 0 ? void 0 : _a.closest) === null || _b === void 0 ? void 0 : _b.call(_a, '#main',))
-  ) return;
-  event.stopPropagation();
-  performance.mark('framer-react-event-handling-prevented',);
-};
-var shouldTurnOnEventHandling = false;
-function turnOffReactEventHandling() {
-  if (!eventsToStop) return;
-  shouldTurnOnEventHandling = true;
-  performance.mark('framer-react-event-handling-start',);
-  const options = {
-    capture: true,
+function renderPage(Page4, defaultPageStyle,) {
+  const style = {
+    style: defaultPageStyle,
   };
-  eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
+  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, style,) : React4.createElement(Page4, style,);
 }
-function TurnOnReactEventHandling() {
-  useEffect(() => {
-    if (!shouldTurnOnEventHandling || !eventsToStop) return;
-    const options = {
-      capture: true,
-    };
-    eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
-    eventsToStop = void 0;
-    performance.mark('framer-react-event-handling-end',);
-  }, [],);
-  return null;
-}
-var hydrationRunning = false;
-function setInitialHydrationState() {
-  hydrationRunning = true;
-}
-function setHydrationDone() {
-  hydrationRunning = false;
-}
-function useIsHydrationOrSSR() {
-  const isHydrationOrSSR = useRef(typeof window === 'undefined' || hydrationRunning,);
-  useEffect(() => {
-    isHydrationOrSSR.current = false;
-  }, [],);
-  return isHydrationOrSSR;
-}
-function isSamePage(a, b,) {
-  if (a.routeId !== b.routeId) return false;
-  if (a.pathVariables === b.pathVariables) return true;
-  const aPathVariables = a.pathVariables || {};
-  const bPathVariables = b.pathVariables || {};
-  return aPathVariables.length === bPathVariables.length &&
-    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
-}
-function useGetRouteCallback(routes,) {
-  return React4.useCallback((routeId) => routes[routeId], [routes,],);
-}
-var RouterContext = /* @__PURE__ */ (() => React4.createContext({},))();
-function RouterAPIProvider({
-  api,
-  children,
-},) {
-  return jsx(RouterContext.Provider, {
-    value: api,
-    children,
-  },);
-}
-function useRouter() {
-  return React4.useContext(RouterContext,);
-}
-function RoutesProvider({
-  routes,
-  children,
-},) {
-  const getRoute = useGetRouteCallback(routes,);
-  return jsx(RouterContext.Provider, {
-    value: {
-      getRoute,
-    },
-    children,
-  },);
-}
-var SuspenseErrorBoundary = class extends Component {
+var NotFoundError = class extends Error {};
+var NotFoundErrorBoundaryCaughtError = class extends Error {
   constructor() {
     super(...arguments,);
+    __publicField(this, 'cause',);
+  }
+};
+var NotFoundErrorBoundary = class extends Component {
+  constructor(props,) {
+    super(props,);
     this.state = {
       error: void 0,
+      forceUpdateKey: props.forceUpdateKey,
     };
   }
   static getDerivedStateFromError(error,) {
-    if (!(error instanceof NotFoundErrorBoundaryCaughtError)) {
-      console.error('Derived error in SuspenseErrorBoundary:\n', error,);
-    }
     return {
       error,
     };
   }
-  componentDidCatch(error, errorInfo,) {
-    var _a;
-    if (error instanceof NotFoundErrorBoundaryCaughtError) {
-      return;
+  /** Resets the error when forceUpdateKey gets bumped. */
+  static getDerivedStateFromProps(nextProps, prevState,) {
+    if (nextProps.forceUpdateKey !== prevState.forceUpdateKey) {
+      const newState = {
+        forceUpdateKey: nextProps.forceUpdateKey,
+      };
+      if (prevState.error) {
+        newState.error = void 0;
+      }
+      return newState;
     }
-    const componentStack = errorInfo === null || errorInfo === void 0 ? void 0 : errorInfo.componentStack;
-    console.error('Caught error in SuspenseErrorBoundary:\n', error, componentStack,);
-    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-    (_a = window.__framer_events) === null || _a === void 0 ? void 0 : _a.push(['published_site_load_recoverable_error', {
-      message: String(error,),
-      stack,
-      // only log componentStack if we don't have a stack
-      componentStack: stack ? void 0 : componentStack,
-    },],);
+    return null;
   }
   render() {
-    const error = this.state.error;
-    if (error === void 0) return this.props.children;
-    if (error instanceof NotFoundErrorBoundaryCaughtError) {
-      throw error.cause;
+    if (this.state.error === void 0) {
+      return this.props.children;
     }
-    window.__framer_STPD_OPT_OUT__ = true;
-    return jsx(Suspense2, {
-      children: this.props.fallbackChildren,
-    },);
+    if (!(this.state.error instanceof NotFoundError)) {
+      const error = new NotFoundErrorBoundaryCaughtError();
+      error.cause = this.state.error;
+      throw error;
+    }
+    const {
+      notFoundPage,
+      defaultPageStyle,
+    } = this.props;
+    if (!notFoundPage) {
+      throw this.state.error;
+    }
+    return renderPage(notFoundPage, defaultPageStyle,);
   }
 };
-var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
-function Suspend() {
-  if (typeof window === 'undefined' || window.__framer_STPD_OPT_OUT__) return null;
-  throw suspendPromise;
-}
-function SuspenseThatPreservesDom({
-  children,
-},) {
-  return jsx(SuspenseErrorBoundary, {
-    fallbackChildren: children,
-    children: jsx(Suspense2, {
-      fallback: jsx(Suspend, {},),
-      children,
-    },),
-  },);
-}
-var defaultLocaleId = 'default';
-function useForceUpdate2() {
-  const [_, setForcedRenderCount,] = React4.useState(0,);
-  return [_, React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
-}
-var noopAsync = async () => {};
-var defaultLocaleInfo = {
-  activeLocale: null,
-  locales: [],
-  setLocale: noopAsync,
-};
-var LocaleInfoContext = /* @__PURE__ */ React4.createContext(defaultLocaleInfo,);
-function useLocaleInfo() {
-  return React4.useContext(LocaleInfoContext,);
-}
-function useLocalizationInfo() {
-  const {
-    activeLocale,
-    locales,
-    setLocale,
-  } = useLocaleInfo();
-  return {
-    activeLocalization: activeLocale,
-    localizations: locales,
-    setLocalization: setLocale,
-  };
-}
-function useLocaleCode() {
-  var _a, _b;
-  return (_b = (_a = useLocaleInfo().activeLocale) === null || _a === void 0 ? void 0 : _a.code) !== null && _b !== void 0 ? _b : 'en-US';
-}
-function useLocale() {
-  return useLocaleCode();
-}
-function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
-  const element = hash2 && document.getElementById(hash2,);
-  if (element) {
-    scrollElementIntoView(element, smoothScroll,);
-    return;
-  }
-  if (isHistoryTransition) return;
-  window.scrollTo(0, 0,);
-}
-function useScheduleRenderSideEffects(dep,) {
-  const actions = useRef([],);
-  useLayoutEffect(() => {
-    var _a;
-    if (!((_a = actions.current) === null || _a === void 0 ? void 0 : _a.length)) return;
-    actions.current.forEach((action) => action());
-    actions.current = [];
-  }, [dep,],);
-  return useCallback((cb) => {
-    actions.current.push(cb,);
-  }, [],);
-}
-function useNavigationTransition(enableAsyncURLUpdates,) {
-  const startNativeSpinner = useNativeLoadingSpinner();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
-  const navigationController = useRef(void 0,);
-  return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
-    var _a;
-    setHydrationDone();
-    const hasUpdateURL = updateURL !== void 0;
-    if (!enableAsyncURLUpdates) {
-      if (hasUpdateURL) await updateURL();
-      transitionFn();
-      void monitorNextPaintAfterRender();
-      return new Promise((resolve) => {
-        resolve();
-      },);
-    }
-    (_a = navigationController.current) === null || _a === void 0 ? void 0 : _a.abort();
-    const controller = isAbortable ? new AbortController() : void 0;
-    navigationController.current = controller;
-    const signal = controller === null || controller === void 0 ? void 0 : controller.signal;
-    const nextRender = monitorNextPaintAfterRender();
-    if (!hasUpdateURL) {
-      navigationController.current = void 0;
-      transitionFn(signal,);
-      return nextRender;
-    }
-    let resolveNavigationPromise;
-    const navigationPromise = new Promise((resolve, reject,) => {
-      resolveNavigationPromise = resolve;
-      if (signal === null || signal === void 0 ? void 0 : signal.aborted) reject();
-      else signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', reject,);
-    },);
-    await interactionResponse({
-      priority: 'user-blocking',
-      signal,
-    },).catch(noop2,);
-    transitionFn(signal,);
-    startNativeSpinner(navigationPromise, updateURL, controller,);
-    return nextRender.then(() => {
-      resolveNavigationPromise();
-    },);
-  }, [enableAsyncURLUpdates, monitorNextPaintAfterRender, startNativeSpinner,],);
-}
-function Router({
-  defaultPageStyle,
-  disableHistory,
-  initialPathVariables,
-  initialRoute,
-  notFoundPage,
-  collectionUtils,
-  routes,
-  initialLocaleId,
-  locales = EMPTY_ARRAY,
-  preserveQueryParams = false,
-  enableAsyncURLUpdates = false,
-  LayoutTemplate,
-  editorBar,
-},) {
-  useMarkRouterEffects();
-  useReplaceInitialState({
-    disabled: disableHistory,
-    routeId: initialRoute,
-    initialPathVariables,
-    initialLocaleId,
-  },);
-  const startViewTransition2 = useViewTransition();
-  const [dep, forceUpdate,] = useForceUpdate2();
-  const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const startNavigation = useNavigationTransition(enableAsyncURLUpdates,);
-  const currentRouteRef = useRef(initialRoute,);
-  const currentPathVariablesRef = useRef(initialPathVariables,);
-  const currentLocaleIdRef = useRef(initialLocaleId,);
-  const currentLocaleId = currentLocaleIdRef.current;
-  const activeLocale = useMemo(() => {
-    var _a;
-    return (_a = locales.find(({
-            id: id3,
-          },) => {
-            if (!currentLocaleId) return id3 === defaultLocaleId;
-            return id3 === currentLocaleId;
-          },)) !== null && _a !== void 0
-      ? _a
-      : null;
-  }, [currentLocaleId, locales,],);
-  const localeInfo = useMemo(() => {
-    return {
-      activeLocale,
-      locales,
-      setLocale: async (localeOrLocaleId) => {
-        let localeId;
-        if (isString(localeOrLocaleId,)) {
-          localeId = localeOrLocaleId;
-        } else if (isObject(localeOrLocaleId,)) {
-          localeId = localeOrLocaleId.id;
-        }
-        const defaultLocale = locales.find(({
-          id: id3,
-        },) => id3 === defaultLocaleId);
-        const nextLocale = locales.find(({
-          id: id3,
-        },) => id3 === localeId);
-        if (!nextLocale) return;
-        const currentRouteId2 = currentRouteRef.current;
-        const currentRoute = routes[currentRouteId2];
-        if (!currentRoute) return;
-        try {
-          const localeResult = await switchLocale({
-            currentLocale: activeLocale,
-            nextLocale,
-            route: currentRoute,
-            routeId: currentRouteId2,
-            defaultLocale,
-            pathVariables: currentPathVariablesRef.current,
-            collectionUtils,
-            preserveQueryParams,
-          },);
-          if (!localeResult) return;
-          const currentPathVariables2 = currentPathVariablesRef.current;
-          const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
-          const currentPath = localeResult.path;
-          currentPathVariablesRef.current = localeResult.pathVariables;
-          currentLocaleIdRef.current = nextLocale.id;
-          const updateURL = async (ignorePushStateWrapper = false,) => {
-            if (!currentPath) return;
-            return pushHistoryState(
-              {
-                routeId: currentRouteId2,
-                pathVariables: currentPathVariables2,
-                localeId: nextLocale.id,
-                paginationInfo: currentStatePaginationInfo,
-              },
-              currentPath,
-              // we yield in startNavigation before updating the URL, so yielding again is not needed.
-              false,
-              ignorePushStateWrapper,
-            );
-          };
-          void startNavigation(
-            () => {
-              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), enableAsyncURLUpdates,// no signal here, because we update the refs above immediately
-              );
-            },
-            updateURL,
-            false,
-          );
-        } catch {}
-      },
-    };
-  }, [
-    activeLocale,
-    collectionUtils,
-    enableAsyncURLUpdates,
-    forceUpdate,
-    locales,
-    preserveQueryParams,
-    routes,
-    startNavigation,
-    startViewTransition2,
-  ],);
-  const setCurrentRouteId = useCallback(
-    (routeId, localeId, hash2, pathVariables, isHistoryTransition, smoothScroll = false, updateURL,) => {
-      const currentRouteId2 = currentRouteRef.current;
-      currentRouteRef.current = routeId;
-      currentPathVariablesRef.current = pathVariables;
-      currentLocaleIdRef.current = localeId;
-      scheduleSideEffect(() => {
-        updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
-      },);
-      if (isHistoryTransition) {
-        startTransition2(forceUpdate,);
-        return;
-      }
-      void startNavigation((signal) => {
-        void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), enableAsyncURLUpdates, signal,);
-      }, updateURL,);
-    },
-    [enableAsyncURLUpdates, forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
-  );
-  usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll,) => {
-    var _a, _b;
-    const newRoute = routes[routeId];
-    if (pathVariables) {
-      const inUse = /* @__PURE__ */ new Set();
-      const path = (_a = newRoute === null || newRoute === void 0 ? void 0 : newRoute.path) !== null && _a !== void 0 ? _a : '/';
-      for (const match of path.matchAll(pathVariablesRegExp,)) {
-        const usedVariable = match[1];
-        if (usedVariable === void 0) {
-          throw new Error('A matching path variable should not be undefined',);
-        }
-        inUse.add(usedVariable,);
-      }
-      pathVariables = Object.fromEntries(Object.entries(pathVariables,).filter(([key7,],) => inUse.has(key7,)),);
-    }
-    const routeElementId = getRouteElementId(newRoute, hash2,);
-    const currentPathVariables2 = currentPathVariablesRef.current;
-    const currentRouteLocaleId = currentLocaleIdRef.current;
-    if (
-      isSamePage({
-        routeId: currentRouteRef.current,
-        pathVariables: currentPathVariables2,
-      }, {
-        routeId,
-        pathVariables,
-      },)
-    ) {
-      const route = routes[routeId];
-      if (((_b = window.history.state) === null || _b === void 0 ? void 0 : _b.hash) !== hash2 && !disableHistory && route) {
-        await pushRouteState(
-          routeId,
-          route,
-          {
-            currentRoutePath: route.path,
-            currentPathVariables: currentPathVariables2,
-            pathVariables,
-            hash: hash2,
-            localeId: currentRouteLocaleId,
-            preserveQueryParams,
-          },
-          // we want to yield as this is called synchronusly from an user interaction.
-          enableAsyncURLUpdates,
-        );
-      }
-      updateScrollPosition(routeElementId, smoothScroll, false,);
-      return;
-    }
-    if (!newRoute) return;
-    const currentRoute = routes[currentRouteRef.current];
-    const updateURL = async (ignorePushStateWrapper = false,) =>
-      pushRouteState(
-        routeId,
-        newRoute,
-        {
-          currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
-          currentPathVariables: currentPathVariables2,
-          hash: hash2,
-          pathVariables,
-          localeId: currentRouteLocaleId,
-          preserveQueryParams,
-        },
-        // we yield in startNavigation before updating the URL, so yielding again is not needed.
-        false,
-        ignorePushStateWrapper,
-      );
-    setCurrentRouteId(
-      routeId,
-      currentRouteLocaleId,
-      routeElementId,
-      pathVariables,
-      false,
-      smoothScroll,
-      disableHistory ? void 0 : updateURL,
-    );
-  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates,],);
-  const getRoute = useGetRouteCallback(routes,);
-  const currentRouteId = currentRouteRef.current;
-  const currentPathVariables = currentPathVariablesRef.current;
-  const api = useMemo(() => ({
-    navigate,
-    getRoute,
-    currentRouteId,
-    currentPathVariables,
-    routes,
-    collectionUtils,
-    preserveQueryParams,
-  }), [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams,],);
-  const current = routes[currentRouteRef.current];
-  if (!current) {
-    throw new Error(`Router cannot find route for ${currentRouteRef.current}`,);
-  }
-  const pageExistsInCurrentLocale = !activeLocale || !current.includedLocales || current.includedLocales.includes(activeLocale.id,);
-  const pathWithFilledVariables = current.path && currentPathVariables
-    ? fillPathVariables(current.path, currentPathVariables,)
-    : current.path;
-  const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  return jsx(GracefullyDegradingErrorBoundary, {
-    children: jsx(RouterAPIProvider, {
-      api,
-      children: jsx(LocaleInfoContext.Provider, {
-        value: localeInfo,
-        children: jsxs(SuspenseThatPreservesDom, {
-          children: [
-            jsx(NotFoundErrorBoundary, {
-              notFoundPage,
-              defaultPageStyle,
-              forceUpdateKey: dep,
-              children: jsx(WithLayoutTemplate, {
-                LayoutTemplate,
-                routeId: currentRouteId,
-                children: jsxs(Fragment, {
-                  children: [
-                    jsx(MarkSuspenseEffects.Start, {},),
-                    pageExistsInCurrentLocale
-                      ? renderPage(
-                        current.page,
-                        LayoutTemplate
-                          ? {
-                            ...defaultPageStyle,
-                            display: 'content',
-                          }
-                          : defaultPageStyle,
-                      )
-                      : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                      notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                  ],
-                }, remountKey,),
-              },),
-            },),
-            jsx(TurnOnReactEventHandling, {},),
-            jsx(MarkSuspenseEffects.End, {},),
-            editorBar,
-          ],
-        },),
-      },),
-    },),
-  },);
-}
-function WithLayoutTemplate({
-  LayoutTemplate,
-  routeId,
-  children,
-},) {
-  if (!LayoutTemplate) return children;
-  return jsx(LayoutTemplate, {
-    routeId,
-    children,
-  },);
-}
-function scrollElementIntoView(element, smoothScroll,) {
-  const scrollIntoViewOptions = smoothScroll
-    ? {
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
-    }
-    : void 0;
-  element.scrollIntoView(scrollIntoViewOptions,);
-}
 var memoPathRoutes;
 var memoPaths;
 var lastRoutes;
@@ -19110,118 +18763,6 @@ function matchPath(path, routePath,) {
 }
 function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
-}
-var key = 'page';
-function isRoute(route,) {
-  return isObject(route,) && key in route && route.page !== void 0;
-}
-var CurrentRouteContext = /* @__PURE__ */ (() => React4.createContext(void 0,))();
-function useCurrentRoute() {
-  var _a;
-  const router = useRouter();
-  const override = useContext(CurrentRouteContext,);
-  const id3 = override !== null && override !== void 0 ? override : router.currentRouteId;
-  if (!id3) return void 0;
-  const route = (_a = router.getRoute) === null || _a === void 0 ? void 0 : _a.call(router, id3,);
-  if (!route) return void 0;
-  return {
-    ...route,
-    id: id3,
-    pathVariables: override ? void 0 : router.currentPathVariables,
-  };
-}
-function useCurrentRouteId() {
-  var _a;
-  return (_a = useCurrentRoute()) === null || _a === void 0 ? void 0 : _a.id;
-}
-function useCurrentPathVariables() {
-  var _a;
-  return (_a = useCurrentRoute()) === null || _a === void 0 ? void 0 : _a.pathVariables;
-}
-function useRoute(routeId,) {
-  var _a;
-  const routerAPI = useRouter();
-  if (!routeId) return void 0;
-  return (_a = routerAPI.getRoute) === null || _a === void 0 ? void 0 : _a.call(routerAPI, routeId,);
-}
-var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(navigator.userAgent,))();
-function useRoutePreloader(routeIds, enabled = true,) {
-  const {
-    getRoute,
-  } = useRouter();
-  useEffect(() => {
-    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
-    for (const routeId of routeIds) {
-      void preloadRoute(getRoute(routeId,),);
-    }
-  }, [routeIds, getRoute, enabled,],);
-}
-async function preloadRoute(route,) {
-  if (!shouldPreloadBasedOnUA || !route) return;
-  const component = route.page;
-  if (!component || !isLazyComponentType(component,)) return;
-  await yieldToMain();
-  try {
-    await component.preload();
-  } catch (e) {
-    if (false) console.warn('Preload failed', route, e,);
-  }
-}
-function useRouteAnchor(routeId, {
-  elementId,
-  hash: linkHash,
-} = {},) {
-  const {
-    navigate,
-    currentPathVariables,
-    preserveQueryParams,
-  } = useRouter();
-  const route = useRoute(routeId,);
-  const currentRouteId = useCurrentRouteId();
-  const currentRoute = useRoute(currentRouteId !== null && currentRouteId !== void 0 ? currentRouteId : '',);
-  useRoutePreloader([routeId,], true,);
-  const hash2 = linkHash !== null && linkHash !== void 0 ? linkHash : elementId;
-  const href = React4.useMemo(() =>
-    getPathForRoute(route, {
-      currentRoutePath: currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.path,
-      currentPathVariables,
-      hash: hash2,
-      preserveQueryParams,
-    },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],);
-  const navigateToRoute = React4.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, hash2,), [
-    hash2,
-    navigate,
-    routeId,
-  ],);
-  const onClick = React4.useCallback((event) => {
-    event.preventDefault();
-    navigateToRoute();
-  }, [navigateToRoute,],);
-  return {
-    onClick,
-    href,
-  };
-}
-function useRouteElementId(id3, targetRouteId,) {
-  var _a;
-  const currentRoute = useCurrentRoute();
-  const route = (_a = useRoute(targetRouteId,)) !== null && _a !== void 0 ? _a : currentRoute;
-  return React4.useMemo(() => {
-    if (!route) return id3;
-    return getRouteElementId(route, id3,);
-  }, [id3, route,],);
-}
-function useRouteHandler(routeId, preload = false, elementId,) {
-  const {
-    navigate,
-  } = useRouter();
-  useRoutePreloader([routeId,], preload,);
-  const handler = React4.useCallback(() => navigate === null || navigate === void 0 ? void 0 : navigate(routeId, elementId,), [
-    navigate,
-    elementId,
-    routeId,
-  ],);
-  return handler;
 }
 var warningMessages = /* @__PURE__ */ new Set();
 function warnOnce2(keyMessage, ...rest) {
@@ -24942,41 +24483,8 @@ function injectComponentCSSRules() {
     injectCSSRule(rule, void 0, void 0,);
   }
 }
-function isFunction(value,) {
-  return typeof value === 'function';
-}
-function isBoolean(value,) {
-  return typeof value === 'boolean';
-}
-function isString2(value,) {
-  return typeof value === 'string';
-}
-function isNumber2(value,) {
-  return Number.isFinite(value,);
-}
-function isArray(value,) {
-  return Array.isArray(value,);
-}
-function isObject2(value,) {
-  return value !== null && typeof value === 'object' && !isArray(value,);
-}
-function isUndefined(value,) {
-  return typeof value === 'undefined';
-}
-function isNull(value,) {
-  return value === null;
-}
-function isNullish2(value,) {
-  return value == null;
-}
-function isValidDate(value,) {
-  return value instanceof Date && !Number.isNaN(value.getTime(),);
-}
-function isGenerator2(value,) {
-  return isObject2(value,) && isFunction(value.return,);
-}
 function isReactComponent(component,) {
-  return isObject2(component,) || isFunction(component,);
+  return isObject(component,) || isFunction(component,);
 }
 var optionalKey = 'optional';
 function controlIsOptional(control,) {
@@ -24995,7 +24503,7 @@ function getControlDefaultValue(control,) {
       case 'boxshadow':
       case 'padding':
       case 'borderradius':
-        return isString2(control.defaultValue,) ? control.defaultValue : void 0;
+        return isString(control.defaultValue,) ? control.defaultValue : void 0;
       case 'boolean':
         return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
       case 'enum':
@@ -25005,14 +24513,14 @@ function getControlDefaultValue(control,) {
       case 'number':
         return isNumber2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'transition':
-        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+        return isObject(control.defaultValue,) ? control.defaultValue : void 0;
       case 'border':
-        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+        return isObject(control.defaultValue,) ? control.defaultValue : void 0;
       case 'font':
-        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+        return isObject(control.defaultValue,) ? control.defaultValue : void 0;
       case 'object': {
-        const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
-        if (isObject2(control.controls,)) {
+        const value = isObject(control.defaultValue,) ? control.defaultValue : {};
+        if (isObject(control.controls,)) {
           applyControlDefaultsToDefaultProps(value, control.controls,);
         }
         return value;
@@ -25052,7 +24560,7 @@ function applyControlDefaultsToDefaultProps(defaultProps, controls,) {
   }
 }
 function getDefaultProps(component,) {
-  if (isObject2(component.defaultProps,)) {
+  if (isObject(component.defaultProps,)) {
     return component.defaultProps;
   }
   const defaultProps = {};
@@ -26851,7 +26359,7 @@ function BackgroundImageComponent({
     ...placeholderStyle,
   };
   let imageNode = null;
-  if (isString2(image.src,)) {
+  if (isString(image.src,)) {
     if (image.fit === 'tile' && image.pixelWidth && image.pixelHeight) {
       const backgroundSize = isNumber2(image.backgroundSize,) ? image.backgroundSize : 1;
       const tileSize = {
@@ -26891,11 +26399,11 @@ function BackgroundImageComponent({
     children: imageNode,
   },);
 }
-var key2 = 'src';
+var key = 'src';
 var BackgroundImage = {
   isImageObject: function (image,) {
     if (!image || typeof image === 'string') return false;
-    return key2 in image;
+    return key in image;
   },
 };
 function applyForwardOverrides(background, props,) {
@@ -26923,7 +26431,7 @@ function backgroundImageFromProps(props,) {
     return;
   }
   let backgroundImage = null;
-  if (isString2(image,)) {
+  if (isString(image,)) {
     backgroundImage = {
       alt: '',
       src: image,
@@ -27221,7 +26729,7 @@ function useLayoutId2(props, {
 }
 var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect : useEffect;
 var ComponentContainerContext = /* @__PURE__ */ React4.createContext(false,);
-function useForceUpdate3() {
+function useForceUpdate2() {
   const [_, setForcedRenderCount,] = React4.useState(0,);
   return React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
 }
@@ -27251,7 +26759,7 @@ var SharedObserver = class {
 };
 var sharedResizeObserver = /* @__PURE__ */ (() => isBrowser2() ? new SharedObserver() : void 0)();
 function useRerenderOnResize(ref,) {
-  const update = useForceUpdate3();
+  const update = useForceUpdate2();
   useEffect(() => {
     const element = ref == null ? void 0 : ref.current;
     if (!element) return;
@@ -27262,7 +26770,7 @@ function useRerenderOnResize(ref,) {
   }, [ref, update,],);
 }
 function useMeasuredSize(ref,) {
-  const forceUpdate = useForceUpdate3();
+  const forceUpdate = useForceUpdate2();
   const size = React4.useRef(null,);
   function updateSize(newSize,) {
     if (newSize.width === 0 && newSize.height === 0) return;
@@ -27533,7 +27041,7 @@ function setTranslateZHack(style, enabled,) {
   if (!useTranslateZHack || !onCanvas) {
     return;
   }
-  const transform2 = isString2(style.transform,) ? style.transform || '' : '';
+  const transform2 = isString(style.transform,) ? style.transform || '' : '';
   if (enabled) {
     const hasTranslateZ = transform2.includes(translateZ,);
     if (!hasTranslateZ) {
@@ -28482,7 +27990,7 @@ function setRef(ref, value,) {
   }
 }
 function isMutableRef(ref,) {
-  return isObject2(ref,) && 'current' in ref;
+  return isObject(ref,) && 'current' in ref;
 }
 function refHasValue(ref,) {
   return isMutableRef(ref,) && ref.current !== null;
@@ -29728,9 +29236,9 @@ function collectBlendingFromProps(node, style,) {
   if (!node.blendingMode || node.blendingMode === 'normal') return;
   style.mixBlendMode = node.blendingMode;
 }
-var key3 = 'opacity';
+var key2 = 'opacity';
 function withOpacity(target,) {
-  return key3 in target;
+  return key2 in target;
 }
 function collectOpacityFromProps(props, style,) {
   if (!withOpacity(props,)) return;
@@ -29743,9 +29251,9 @@ function collectOverflowFromProps(props, style,) {
     style.overflow = props.overflow;
   }
 }
-var key4 = 'radius';
+var key3 = 'radius';
 function hasRadius(props,) {
-  return key4 in props;
+  return key3 in props;
 }
 function getRadiusValue(value,) {
   let num = Number(value,);
@@ -32132,7 +31640,7 @@ function containerContent(item,) {
     const position = (_a = item == null ? void 0 : item.transition) == null ? void 0 : _a.position;
     const shouldStretchWidth = !position || position.left !== void 0 && position.right !== void 0;
     const shouldStretchHeight = !position || position.top !== void 0 && position.bottom !== void 0;
-    const canStretchStyle = 'style' in child.props ? isObject2(child.props.style,) : true;
+    const canStretchStyle = 'style' in child.props ? isObject(child.props.style,) : true;
     if (shouldStretchWidth) {
       const canStretchWidth = 'width' in child.props;
       if (canStretchWidth) props.width = '100%';
@@ -35470,7 +34978,7 @@ function useParallax(options, ref, visibilityStyle,) {
   };
 }
 function getTransition(value,) {
-  if (isString2(value,) || !isObject2(value,)) return void 0;
+  if (isString(value,) || !isObject(value,)) return void 0;
   return value == null ? void 0 : value.transition;
 }
 function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
@@ -35480,13 +34988,13 @@ function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, i
       if (shouldReduceMotion && key7 !== 'opacity') return resolve();
       const motionValue2 = effect.values[key7];
       motionValue2.stop();
-      let value = !isObject2(target,) ? defaultFXValues[key7] : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
+      let value = !isObject(target,) ? defaultFXValues[key7] : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
       if (isMotionValue(value,)) value = value.get();
       if (!isNumber2(value,)) return resolve();
       const visualElement = visualElementStore.get(ref.current,);
       if (visualElement) visualElement.setBaseTarget(key7, value,);
       let startTime;
-      if (isString2(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.MotionHandoffAnimation) {
+      if (isString(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.MotionHandoffAnimation) {
         const handoffAnimationStartTime = safeWindow.MotionHandoffAnimation(appearId, key7, frame,);
         if (handoffAnimationStartTime) {
           startTime = handoffAnimationStartTime;
@@ -35532,14 +35040,14 @@ function usePresenceAnimation(
   },);
   const effect = useConstant2(() => {
     const base = initial ?? style;
-    if (!isObject2(base,)) {
+    if (!isObject(base,)) {
       return {
         values: makeFXValues(),
       };
     }
     const defaults = {};
     for (const key7 in base) {
-      const value = isObject2(base,) ? base[key7] : void 0;
+      const value = isObject(base,) ? base[key7] : void 0;
       if (!isNumber2(value,)) continue;
       defaults[key7] = value;
     }
@@ -36081,10 +35589,10 @@ var add2 = (values) => values.reduce((sum, value,) => sum += value, 0,);
 var multiply = (values) => values.reduce((sum, value,) => sum = sum * value, 1,);
 var reactRefObjectKey = 'current';
 function isReactRefObject(value,) {
-  return isObject2(value,) && reactRefObjectKey in value;
+  return isObject(value,) && reactRefObjectKey in value;
 }
 function addMotionValueStyle(style, values,) {
-  if (!style || !isObject2(style,)) return values;
+  if (!style || !isObject(style,)) return values;
   for (const key7 in style) {
     const value = style[key7];
     if (!isMotionValue(value,) || !isFXValuesKey(key7,)) continue;
@@ -36093,7 +35601,7 @@ function addMotionValueStyle(style, values,) {
   }
 }
 function isVariantOrVariantList(value,) {
-  return isString2(value,) || Array.isArray(value,);
+  return isString(value,) || Array.isArray(value,);
 }
 var withFX = (Component18) =>
   React4.forwardRef((props, forwardedRef,) => {
@@ -36375,6 +35883,64 @@ var withGeneratedLayoutId = (Component18) =>
       ref,
     },);
   },);
+var SuspenseErrorBoundary = class extends Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      error: void 0,
+    },);
+  }
+  static getDerivedStateFromError(error,) {
+    if (!(error instanceof NotFoundErrorBoundaryCaughtError)) {
+      console.error('Derived error in SuspenseErrorBoundary:\n', error,);
+    }
+    return {
+      error,
+    };
+  }
+  componentDidCatch(error, errorInfo,) {
+    var _a;
+    if (error instanceof NotFoundErrorBoundaryCaughtError) {
+      return;
+    }
+    const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
+    console.error('Caught error in SuspenseErrorBoundary:\n', error, componentStack,);
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+    (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
+      message: String(error,),
+      stack,
+      // only log componentStack if we don't have a stack
+      componentStack: stack ? void 0 : componentStack,
+    },],);
+  }
+  render() {
+    const error = this.state.error;
+    if (error === void 0) return this.props.children;
+    if (error instanceof NotFoundErrorBoundaryCaughtError) {
+      throw error.cause;
+    }
+    window.__framer_STPD_OPT_OUT__ = true;
+    return /* @__PURE__ */ jsx(Suspense3, {
+      children: this.props.fallbackChildren,
+    },);
+  }
+};
+var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
+function Suspend() {
+  if (typeof window === 'undefined' || window.__framer_STPD_OPT_OUT__) return null;
+  throw suspendPromise;
+}
+function SuspenseThatPreservesDom({
+  children,
+},) {
+  return /* @__PURE__ */ jsx(SuspenseErrorBoundary, {
+    fallbackChildren: children,
+    children: /* @__PURE__ */ jsx(Suspense3, {
+      fallback: /* @__PURE__ */ jsx(Suspend, {},),
+      children,
+    },),
+  },);
+}
 function collectErrorToAnalytics(error, errorInfo,) {
   var _a;
   if (typeof window === 'undefined') return;
@@ -36447,7 +36013,7 @@ function ServerSideErrorBoundary({
     ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
     // and render the actual error fallback if Suspense activates.
     /* @__PURE__ */
-    jsx(Suspense2, {
+    jsx(Suspense3, {
       fallback,
       children,
     },)
@@ -36671,6 +36237,7 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
       sheet,
       cache: cache2,
     } = React4.useContext(StyleSheetContext,) ?? {};
+    const id3 = componentSerializationId;
     if (!isBrowser2()) {
       if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
@@ -36680,7 +36247,7 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
             ...{
               [framerCSSMarker]: true,
             },
-            'data-framer-component': componentSerializationId,
+            'data-framer-component': id3,
             dangerouslySetInnerHTML: {
               __html: concatenatedCSS,
             },
@@ -36692,8 +36259,8 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
         ],
       },);
     }
-    React4.useInsertionEffect(() => {
-      if (componentSerializationId && componentsWithServerRenderedStyles.has(componentSerializationId,)) return;
+    useInsertionEffect(() => {
+      if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
       const css2 = isFunction(escapedCSS,)
         ? escapedCSS(RenderTarget.current(),)
         : Array.isArray(escapedCSS,)
@@ -36746,7 +36313,7 @@ var CustomCursorHost =
     withCSS(CustomCursorContextProvider, [
       `.${replaceCursorClassName}, .${replaceCursorClassName} * { cursor: none !important; }`,
       `.${cursorComponentClassName}, .${cursorComponentClassName} * { pointer-events: none !important; }`,
-    ],))();
+    ], 'framer-lib-cursors-host',))();
 var staticCursorStyle = /* @__PURE__ */ (() => ({
   position: 'fixed',
   top: 0,
@@ -36820,7 +36387,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     cursors: {},
     cursorHash: void 0,
   },);
-  const forceRender = useForceUpdate3();
+  const forceRender = useForceUpdate2();
   useLayoutEffect(() => {
     const noHoverMQ = safeWindow.matchMedia('(any-hover: none)',);
     function updateRender(e,) {
@@ -36975,7 +36542,7 @@ function useCustomCursors(webPageCursors,) {
   const cursors = useConstant2(() => webPageCursors);
   useLayoutEffect(() => {
     registerCursors(cursors,);
-  }, [cursors, registerCursors,],);
+  }, [registerCursors,],);
 }
 var Polygon = {
   /**
@@ -37461,7 +37028,7 @@ function childrenWithOrigin(child, {
   y,
 },) {
   if (!child || !isReactChild(child,) || !isReactElement(child,)) return null;
-  if (!isObject2(child.props.style,) && !isUndefined(child.props.style,)) return null;
+  if (!isObject(child.props.style,) && !isUndefined(child.props.style,)) return null;
   const style = {
     ...child.props.style,
     originX: x,
@@ -37704,7 +37271,7 @@ var collectionItemIdKey = 'collectionItemId';
 var pathVariablesKey = 'pathVariables';
 var mediaType = 'framer/page-link,';
 function isFramerPageLink(value,) {
-  return isString2(value,) && value.startsWith(`data:${mediaType}`,);
+  return isString(value,) && value.startsWith(`data:${mediaType}`,);
 }
 function createFramerPageLink(targetId = null, options = {},) {
   const target = targetId ? targetId : 'none';
@@ -37988,7 +37555,7 @@ function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
   const contextPathVariables = useContext(PathVariablesContext,);
   if (!route) return false;
-  const pageLink = isString2(link,) ? linkFromFramerPageLink(link,) : link;
+  const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
 function isInternalURL(href,) {
@@ -38223,7 +37790,7 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPat
 }
 function getRouteFromPageLink(pageLink, router, currentRoute,) {
   var _a;
-  if (isString2(pageLink,)) {
+  if (isString(pageLink,)) {
     const isInternal = isInternalURL(pageLink,);
     if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
       return;
@@ -38261,7 +37828,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
-    if (isString2(pageLink,)) {
+    if (isString(pageLink,)) {
       return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,);
     }
     const {
@@ -38407,7 +37974,7 @@ function resolveLink(href, router, implicitPathVariables,) {
 }
 function resolveLinkInternal(href, router, implicitPathVariables, resolveSlugs2,) {
   const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-  if (!isLinkToWebPage(pageLink,)) return isString2(href,) ? propsForLink(href,).href : void 0;
+  if (!isLinkToWebPage(pageLink,)) return isString(href,) ? propsForLink(href,).href : void 0;
   if (!router.getRoute || !router.currentRouteId) return void 0;
   const currentRoute = router.getRoute(router.currentRouteId,);
   const {
@@ -38629,7 +38196,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
   };
   async function redirectTo(link,) {
     var _a, _b;
-    if (isString2(link,)) {
+    if (isString(link,)) {
       const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables,);
       if (!matchingRoute2) {
         openExternalLinkInCurrentTab(link, ref,);
@@ -38760,8 +38327,440 @@ async function submitForm(action, data2, projectHash,) {
   }
 }
 function responseHasError(response,) {
-  return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
+  return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
+}
+var ErrorBoundaryCaughtError = class extends NotFoundErrorBoundaryCaughtError {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'caught', true,);
+  }
+};
+var GracefullyDegradingErrorBoundary = class extends Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      error: void 0,
+    },);
+    __publicField(
+      this,
+      'message',
+      'Made UI non-interactive due to the error above. We\'ve logged it, but also please report this to the Framer team.',
+    );
+  }
+  static getDerivedStateFromError(error,) {
+    return {
+      error,
+    };
+  }
+  componentDidCatch(error,) {
+    var _a;
+    if ('cause' in error) {
+      error = error.cause;
+    }
+    console.error(this.message,);
+    if (Math.random() > 0.01) return;
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+    (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_error', {
+      message: String(error,),
+      stack,
+    },],);
+  }
+  render() {
+    var _a;
+    const error = this.state.error;
+    if (!error) return this.props.children;
+    if (!isBot(navigator.userAgent,)) {
+      const fatalError = new ErrorBoundaryCaughtError();
+      fatalError.cause = 'cause' in error ? error.cause : error;
+      console.error(this.message, fatalError.cause,);
+      throw fatalError;
+    }
+    return (
+      // This has the caveat that we will slightly modify the DOM, but it appears to be fine in this case.
+      // The alternative would be to queue a new task that runs after and then set the innerHTML (= avoids the dummy-div), but that means we'll have DOM -> no DOM -> DOM transitions. With the div, we have DOM -> DOM and remove possible race-conditions.
+      /* @__PURE__ */
+      jsx('div', {
+        style: {
+          display: 'contents',
+        },
+        suppressHydrationWarning: true,
+        dangerouslySetInnerHTML: {
+          __html: '<!-- DOM replaced by GracefullyDegradingErrorBoundary -->' +
+            (((_a = document.getElementById('main',)) == null ? void 0 : _a.innerHTML) || ''),
+        },
+      },)
+    );
+  }
+};
+function isSamePage(a, b,) {
+  if (a.routeId !== b.routeId) return false;
+  if (a.pathVariables === b.pathVariables) return true;
+  const aPathVariables = a.pathVariables || {};
+  const bPathVariables = b.pathVariables || {};
+  return aPathVariables.length === bPathVariables.length &&
+    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
+}
+var defaultLocaleId = 'default';
+function useForceUpdate3() {
+  const [_, setForcedRenderCount,] = React4.useState(0,);
+  return [_, React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
+}
+function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
+  const element = hash2 && document.getElementById(hash2,);
+  if (element) {
+    scrollElementIntoView(element, smoothScroll,);
+    return;
+  }
+  if (isHistoryTransition) return;
+  window.scrollTo(0, 0,);
+}
+function useScheduleRenderSideEffects(dep,) {
+  const actions = useRef([],);
+  useLayoutEffect(() => {
+    var _a;
+    if (!((_a = actions.current) == null ? void 0 : _a.length)) return;
+    actions.current.forEach((action) => action());
+    actions.current = [];
+  }, [dep,],);
+  return useCallback((cb) => {
+    actions.current.push(cb,);
+  }, [],);
+}
+function useNavigationTransition(enableAsyncURLUpdates,) {
+  const startNativeSpinner = useNativeLoadingSpinner();
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
+  const navigationController = useRef(void 0,);
+  return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
+    var _a;
+    setHydrationDone();
+    const hasUpdateURL = updateURL !== void 0;
+    if (!enableAsyncURLUpdates) {
+      if (hasUpdateURL) await updateURL();
+      transitionFn();
+      void monitorNextPaintAfterRender();
+      return new Promise((resolve) => {
+        resolve();
+      },);
+    }
+    (_a = navigationController.current) == null ? void 0 : _a.abort();
+    const controller = isAbortable ? new AbortController() : void 0;
+    navigationController.current = controller;
+    const signal = controller == null ? void 0 : controller.signal;
+    const nextRender = monitorNextPaintAfterRender();
+    if (!hasUpdateURL) {
+      navigationController.current = void 0;
+      transitionFn(signal,);
+      return nextRender;
+    }
+    let resolveNavigationPromise;
+    const navigationPromise = new Promise((resolve, reject,) => {
+      resolveNavigationPromise = resolve;
+      if (signal == null ? void 0 : signal.aborted) reject();
+      else signal == null ? void 0 : signal.addEventListener('abort', reject,);
+    },);
+    await interactionResponse({
+      priority: 'user-blocking',
+      signal,
+    },).catch(noop2,);
+    transitionFn(signal,);
+    startNativeSpinner(navigationPromise, updateURL, controller,);
+    return nextRender.then(() => {
+      resolveNavigationPromise();
+    },);
+  }, [enableAsyncURLUpdates, monitorNextPaintAfterRender, startNativeSpinner,],);
+}
+function Router({
+  defaultPageStyle,
+  disableHistory,
+  initialPathVariables,
+  initialRoute,
+  notFoundPage,
+  collectionUtils,
+  routes,
+  initialLocaleId,
+  locales = EMPTY_ARRAY,
+  preserveQueryParams = false,
+  enableAsyncURLUpdates = false,
+  LayoutTemplate,
+  editorBar,
+},) {
+  useMarkRouterEffects();
+  useReplaceInitialState({
+    disabled: disableHistory,
+    routeId: initialRoute,
+    initialPathVariables,
+    initialLocaleId,
+  },);
+  const startViewTransition2 = useViewTransition();
+  const [dep, forceUpdate,] = useForceUpdate3();
+  const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
+  const startNavigation = useNavigationTransition(enableAsyncURLUpdates,);
+  const currentRouteRef = useRef(initialRoute,);
+  const currentPathVariablesRef = useRef(initialPathVariables,);
+  const currentLocaleIdRef = useRef(initialLocaleId,);
+  const currentLocaleId = currentLocaleIdRef.current;
+  const activeLocale = useMemo(() => {
+    return locales.find(({
+      id: id3,
+    },) => {
+      if (!currentLocaleId) return id3 === defaultLocaleId;
+      return id3 === currentLocaleId;
+    },) ?? null;
+  }, [currentLocaleId, locales,],);
+  const localeInfo = useMemo(() => {
+    return {
+      activeLocale,
+      locales,
+      setLocale: async (localeOrLocaleId) => {
+        let localeId;
+        if (isString(localeOrLocaleId,)) {
+          localeId = localeOrLocaleId;
+        } else if (isObject(localeOrLocaleId,)) {
+          localeId = localeOrLocaleId.id;
+        }
+        const defaultLocale = locales.find(({
+          id: id3,
+        },) => id3 === defaultLocaleId);
+        const nextLocale = locales.find(({
+          id: id3,
+        },) => id3 === localeId);
+        if (!nextLocale) return;
+        const currentRouteId2 = currentRouteRef.current;
+        const currentRoute = routes[currentRouteId2];
+        if (!currentRoute) return;
+        try {
+          const localeResult = await switchLocale({
+            currentLocale: activeLocale,
+            nextLocale,
+            route: currentRoute,
+            routeId: currentRouteId2,
+            defaultLocale,
+            pathVariables: currentPathVariablesRef.current,
+            collectionUtils,
+            preserveQueryParams,
+          },);
+          if (!localeResult) return;
+          const currentPathVariables2 = currentPathVariablesRef.current;
+          const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
+          const currentPath = localeResult.path;
+          currentPathVariablesRef.current = localeResult.pathVariables;
+          currentLocaleIdRef.current = nextLocale.id;
+          const updateURL = async (ignorePushStateWrapper = false,) => {
+            if (!currentPath) return;
+            return pushHistoryState(
+              {
+                routeId: currentRouteId2,
+                pathVariables: currentPathVariables2,
+                localeId: nextLocale.id,
+                paginationInfo: currentStatePaginationInfo,
+              },
+              currentPath,
+              // we yield in startNavigation before updating the URL, so yielding again is not needed.
+              false,
+              ignorePushStateWrapper,
+            );
+          };
+          void startNavigation(
+            () => {
+              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), enableAsyncURLUpdates,// no signal here, because we update the refs above immediately
+              );
+            },
+            updateURL,
+            false,
+          );
+        } catch {}
+      },
+    };
+  }, [
+    activeLocale,
+    collectionUtils,
+    enableAsyncURLUpdates,
+    forceUpdate,
+    locales,
+    preserveQueryParams,
+    routes,
+    startNavigation,
+    startViewTransition2,
+  ],);
+  const setCurrentRouteId = useCallback(
+    (routeId, localeId, hash2, pathVariables, isHistoryTransition, smoothScroll = false, updateURL,) => {
+      const currentRouteId2 = currentRouteRef.current;
+      currentRouteRef.current = routeId;
+      currentPathVariablesRef.current = pathVariables;
+      currentLocaleIdRef.current = localeId;
+      scheduleSideEffect(() => {
+        updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
+      },);
+      if (isHistoryTransition) {
+        startTransition2(forceUpdate,);
+        return;
+      }
+      void startNavigation((signal) => {
+        void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), enableAsyncURLUpdates, signal,);
+      }, updateURL,);
+    },
+    [enableAsyncURLUpdates, forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
+  );
+  usePopStateHandler(currentRouteRef, setCurrentRouteId,);
+  const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll,) => {
+    var _a;
+    const newRoute = routes[routeId];
+    if (pathVariables) {
+      const inUse = /* @__PURE__ */ new Set();
+      const path = (newRoute == null ? void 0 : newRoute.path) ?? '/';
+      for (const match of path.matchAll(pathVariablesRegExp,)) {
+        const usedVariable = match[1];
+        if (usedVariable === void 0) {
+          throw new Error('A matching path variable should not be undefined',);
+        }
+        inUse.add(usedVariable,);
+      }
+      pathVariables = Object.fromEntries(Object.entries(pathVariables,).filter(([key7,],) => inUse.has(key7,)),);
+    }
+    const routeElementId = getRouteElementId(newRoute, hash2,);
+    const currentPathVariables2 = currentPathVariablesRef.current;
+    const currentRouteLocaleId = currentLocaleIdRef.current;
+    if (
+      isSamePage({
+        routeId: currentRouteRef.current,
+        pathVariables: currentPathVariables2,
+      }, {
+        routeId,
+        pathVariables,
+      },)
+    ) {
+      const route = routes[routeId];
+      if (((_a = window.history.state) == null ? void 0 : _a.hash) !== hash2 && !disableHistory && route) {
+        await pushRouteState(
+          routeId,
+          route,
+          {
+            currentRoutePath: route.path,
+            currentPathVariables: currentPathVariables2,
+            pathVariables,
+            hash: hash2,
+            localeId: currentRouteLocaleId,
+            preserveQueryParams,
+          },
+          // we want to yield as this is called synchronusly from an user interaction.
+          enableAsyncURLUpdates,
+        );
+      }
+      updateScrollPosition(routeElementId, smoothScroll, false,);
+      return;
+    }
+    if (!newRoute) return;
+    const currentRoute = routes[currentRouteRef.current];
+    const updateURL = async (ignorePushStateWrapper = false,) =>
+      pushRouteState(
+        routeId,
+        newRoute,
+        {
+          currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+          currentPathVariables: currentPathVariables2,
+          hash: hash2,
+          pathVariables,
+          localeId: currentRouteLocaleId,
+          preserveQueryParams,
+        },
+        // we yield in startNavigation before updating the URL, so yielding again is not needed.
+        false,
+        ignorePushStateWrapper,
+      );
+    setCurrentRouteId(
+      routeId,
+      currentRouteLocaleId,
+      routeElementId,
+      pathVariables,
+      false,
+      smoothScroll,
+      disableHistory ? void 0 : updateURL,
+    );
+  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates,],);
+  const getRoute = useGetRouteCallback(routes,);
+  const currentRouteId = currentRouteRef.current;
+  const currentPathVariables = currentPathVariablesRef.current;
+  const api = useMemo(() => ({
+    navigate,
+    getRoute,
+    currentRouteId,
+    currentPathVariables,
+    routes,
+    collectionUtils,
+    preserveQueryParams,
+  }), [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams,],);
+  const current = routes[currentRouteRef.current];
+  if (!current) {
+    throw new Error(`Router cannot find route for ${currentRouteRef.current}`,);
+  }
+  const pageExistsInCurrentLocale = !activeLocale || !current.includedLocales || current.includedLocales.includes(activeLocale.id,);
+  const pathWithFilledVariables = current.path && currentPathVariables
+    ? fillPathVariables(current.path, currentPathVariables,)
+    : current.path;
+  const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
+  return /* @__PURE__ */ jsx(GracefullyDegradingErrorBoundary, {
+    children: /* @__PURE__ */ jsx(RouterAPIProvider, {
+      api,
+      children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
+        value: localeInfo,
+        children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+          children: [
+            /* @__PURE__ */ jsx(NotFoundErrorBoundary, {
+              notFoundPage,
+              defaultPageStyle,
+              forceUpdateKey: dep,
+              children: /* @__PURE__ */ jsx(WithLayoutTemplate, {
+                LayoutTemplate,
+                routeId: currentRouteId,
+                children: /* @__PURE__ */ jsxs(Fragment, {
+                  children: [
+                    /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+                    pageExistsInCurrentLocale
+                      ? renderPage(
+                        current.page,
+                        LayoutTemplate
+                          ? {
+                            ...defaultPageStyle,
+                            display: 'content',
+                          }
+                          : defaultPageStyle,
+                      )
+                      : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                      notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                  ],
+                }, remountKey,),
+              },),
+            },),
+            /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+            /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
+            editorBar,
+          ],
+        },),
+      },),
+    },),
+  },);
+}
+function WithLayoutTemplate({
+  LayoutTemplate,
+  routeId,
+  children,
+},) {
+  if (!LayoutTemplate) return children;
+  return /* @__PURE__ */ jsx(LayoutTemplate, {
+    routeId,
+    children,
+  },);
+}
+function scrollElementIntoView(element, smoothScroll,) {
+  const scrollIntoViewOptions = smoothScroll
+    ? {
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    }
+    : void 0;
+  element.scrollIntoView(scrollIntoViewOptions,);
 }
 function preloadImage(url,) {
   return new Promise((resolve, reject,) => {
@@ -38801,21 +38800,21 @@ var loadingFetchResult = {
   data: void 0,
 };
 function isNumberString(value,) {
-  return isString2(value,) && !Number.isNaN(Number(value,),);
+  return isString(value,) && !Number.isNaN(Number(value,),);
 }
 function isValidFetchDataValueResult(type, value,) {
   switch (type) {
     case 'string':
-      return isString2(value,) || isNumber2(value,);
+      return isString(value,) || isNumber2(value,);
     case 'color':
-      return isString2(value,);
+      return isString(value,);
     case 'boolean':
       return isBoolean(value,);
     case 'number':
       return isNumber2(value,) || isNumberString(value,);
     case 'link':
     case 'image':
-      return isString2(value,) && isValidURL2(value,);
+      return isString(value,) && isValidURL2(value,);
     default: {
       const _ = type;
       return false;
@@ -38984,7 +38983,7 @@ var _FetchClient = class {
       subscriber();
     }
     const resolvedValue = resolveFetchDataValue(result, request,);
-    if (request.resultOutputType === 'image' && isString2(resolvedValue,)) {
+    if (request.resultOutputType === 'image' && isString(resolvedValue,)) {
       await preloadImage(resolvedValue,).catch(noop3,);
     }
     return resolvedValue;
@@ -39339,7 +39338,7 @@ function EditorBarLauncher({
   }, [],);
   if (!EditorBar || !framerSiteId || !mounted) return null;
   return /* @__PURE__ */ jsx(IgnoreErrors, {
-    children: /* @__PURE__ */ jsx(Suspense2, {
+    children: /* @__PURE__ */ jsx(Suspense3, {
       children: /* @__PURE__ */ jsx(EditorBar, {
         framerSiteId,
       },),
@@ -39638,19 +39637,19 @@ function isAnyCollection(value,) {
   return isAnyLegacyCollection(value,) || isAnyDatabaseCollection(value,);
 }
 function isLegacyCollection(value,) {
-  return isArray(value,) && value.every(isObject2,);
+  return isArray(value,) && value.every(isObject,);
 }
 function isLegacyLocalizedCollection(value,) {
-  return isObject2(value,) && isFunction(value.read,) && isFunction(value.preload,);
+  return isObject(value,) && isFunction(value.read,) && isFunction(value.preload,);
 }
 function isAnyLegacyCollection(value,) {
   return isLegacyCollection(value,) || isLegacyLocalizedCollection(value,);
 }
 function isDatabaseCollection(value,) {
-  return isObject2(value,) && isObject2(value.schema,);
+  return isObject(value,) && isObject(value.schema,);
 }
 function isLocalizedDatabaseCollection(value,) {
-  return isObject2(value,) && isObject2(value.collectionByLocaleId,);
+  return isObject(value,) && isObject(value.collectionByLocaleId,);
 }
 function isAnyDatabaseCollection(value,) {
   return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
@@ -39970,7 +39969,7 @@ var DatabaseValue = {
         value,
       };
     }
-    if (isString2(value,)) {
+    if (isString(value,)) {
       return {
         type: 'string',
         value,
@@ -40120,7 +40119,7 @@ var DatabaseValue = {
       case 'file':
         return 'File';
       case 'link':
-        return isString2(value.value,) ? `'${value.value}' /* Link */` : 'Link';
+        return isString(value.value,) ? `'${value.value}' /* Link */` : 'Link';
       case 'object':
         return 'Object';
       default:
@@ -40458,7 +40457,7 @@ function Hash(value,) {
   return value;
 }
 function isHashable(value,) {
-  return isObject2(value,) && isFunction(value.getHash,);
+  return isObject(value,) && isFunction(value.getHash,);
 }
 function calculateHash(name, ...values) {
   const hashes = values.map((value) => {
@@ -44202,9 +44201,9 @@ var AnimationCollector = class {
     const initial = props.__framer__presenceInitial ?? props.initial;
     const animate3 = props.__framer__presenceAnimate ?? props.animate;
     const config = {
-      initial: isObject2(initial,) ? initial : void 0,
-      animate: isObject2(animate3,) ? animate3 : void 0,
-      transformTemplate: isString2(transformTemplate2,) ? transformTemplate2 : void 0,
+      initial: isObject(initial,) ? initial : void 0,
+      animate: isObject(animate3,) ? animate3 : void 0,
+      transformTemplate: isString(transformTemplate2,) ? transformTemplate2 : void 0,
     };
     for (const variantId of variants) this.setHash(id3, this.variantHash(variantId, info,), config,);
   }
@@ -44369,7 +44368,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
   const usesMediaQueries = !onCanvas && isBrowser2();
   const baseVariant = useRef(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
   const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
-  const forceUpdate = useForceUpdate3();
+  const forceUpdate = useForceUpdate2();
   const instantTransition = useInstantTransition();
   const setActiveVariantInstant = useCallback((variant) => {
     if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
@@ -44472,7 +44471,7 @@ function useDataRecord(collection, variables,) {
     const pageRecord = collection.find((record) => {
       return Object.entries(variables,).every(([key7, value,],) => {
         const recordValue = record[key7];
-        if (value === void 0 || recordValue === void 0 || isObject2(value,) || isObject2(recordValue,)) {
+        if (value === void 0 || recordValue === void 0 || isObject(value,) || isObject(recordValue,)) {
           return false;
         }
         return String(value,) === String(recordValue,);
@@ -44492,7 +44491,7 @@ function useDynamicRefs() {
   }, [map,],);
 }
 function isFramerGamepadKeydownData(value,) {
-  return isObject2(value,) && value.mapping !== void 0;
+  return isObject(value,) && value.mapping !== void 0;
 }
 function gamepadInputsHaveChanged(previous, current,) {
   if (previous.length !== current.length) return true;
@@ -44761,6 +44760,10 @@ function useOverlayState({
   }, [blockDocumentScrolling,],);
   return [showOverlay, callback,];
 }
+var key4 = 'page';
+function isRoute(route,) {
+  return isObject(route,) && key4 in route && route.page !== void 0;
+}
 async function componentForRoute(route,) {
   if (!isRoute(route,)) return;
   const {
@@ -44775,7 +44778,7 @@ async function componentForRoute(route,) {
 }
 var preloadKey2 = 'preload';
 function withPreload(component,) {
-  return !!component && isObject2(component,) && preloadKey2 in component;
+  return !!component && isObject(component,) && preloadKey2 in component;
 }
 function usePrototypeNavigate({
   preload,
@@ -44789,7 +44792,7 @@ function usePrototypeNavigate({
     if (!navigation || onCanvas) return;
     preload == null ? void 0 : preload.forEach((componentOrRoute) => {
       let component;
-      if (isString2(componentOrRoute,)) {
+      if (isString(componentOrRoute,)) {
         const route = getRoute == null ? void 0 : getRoute(componentOrRoute,);
         if (isRoute(route,)) {
           component = route.page;
@@ -44886,7 +44889,7 @@ function getCollectionId(collection,) {
   return id3;
 }
 function replaceCollection(_, value,) {
-  if (isObject2(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
+  if (isObject(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
     return getCollectionId(value.data,);
   }
   return value;
@@ -44928,7 +44931,7 @@ function usePreloadQuery() {
 function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   const entries = Object.entries(pathVariables ?? {},).filter(([, value,],) => {
     if (isUndefined(value,)) return false;
-    if (isObject2(value,)) return false;
+    if (isObject(value,)) return false;
     return true;
   },);
   const expressions = entries.map(([name, value,],) => ({
@@ -45109,7 +45112,7 @@ function useVariantState({
   variantProps: variantProps2 = {},
   variantClassNames = {},
 },) {
-  const forceUpdate = useForceUpdate3();
+  const forceUpdate = useForceUpdate2();
   const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   const {
@@ -46975,7 +46978,7 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
   const requestId = `${family}-${style}-${weight}-${url}`;
   if (!fontRequests.has(requestId,) || attempt > 0) {
     const fontFace = new FontFace(family, `url(${url})`, {
-      weight: isString2(weight,) ? weight : weight == null ? void 0 : weight.toString(),
+      weight: isString(weight,) ? weight : weight == null ? void 0 : weight.toString(),
       style,
       stretch,
       unicodeRange,
@@ -47051,10 +47054,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await Promise.resolve().then(() => (init_google_5Y2W5CAB(), google_5Y2W5CAB_exports))).default;
+            return (await Promise.resolve().then(() => (init_google_POQYIODP(), google_POQYIODP_exports))).default;
           }
           case 'fontshare': {
-            return (await Promise.resolve().then(() => (init_fontshare_XR4PZDC4(), fontshare_XR4PZDC4_exports))).default;
+            return (await Promise.resolve().then(() => (init_fontshare_GJKVH4LZ(), fontshare_GJKVH4LZ_exports))).default;
           }
           default:
             assertNever(source,);
@@ -47069,10 +47072,10 @@ function loadVariationAxes(source,) {
   }
 }
 function isValidVariationAxesData(data2,) {
-  return isObject2(data2,) && Object.values(data2,).every(isValidVariationAxes,);
+  return isObject(data2,) && Object.values(data2,).every(isValidVariationAxes,);
 }
 function isVariationAxis(data2,) {
-  return isObject2(data2,) && isString2(data2.tag,);
+  return isObject(data2,) && isString(data2.tag,);
 }
 function isValidVariationAxes(data2,) {
   return Array.isArray(data2,) && data2.every(isVariationAxis,);
@@ -47983,7 +47986,7 @@ var styles = /* @__PURE__ */ (() => [
     borderWidth: css.variable('--framer-input-focused-border-width', inputBorderAllSides,),
   },),
 ])();
-var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles,);
+var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
 var className = 'framer-form-boolean-input';
 var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput3(props, ref,) {
   const {
@@ -48138,7 +48141,7 @@ var styles2 = /* @__PURE__ */ (() => [
     borderWidth: css.variable('--framer-input-focused-border-width', '--framer-input-boolean-checked-border-width', inputBorderAllSides,),
   },),
 ])();
-var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles2,);
+var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles2, 'framer-lib-form-boolean-input',);
 var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRef,) {
   const {
     autoFocus,
@@ -48182,11 +48185,15 @@ var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRe
           case 'divider':
             return /* @__PURE__ */ jsx('hr', {}, index,);
           case 'option':
-            return /* @__PURE__ */ jsx('option', {
-              value: option.value ?? option.title,
-              disabled: option.disabled,
-              children: option.title ?? option.value,
-            }, index,);
+            return (
+              // biome-ignore lint/suspicious/noArrayIndexKey: Values can be duplicated, so we could only use UUIDs here (but that isn't really better)
+              /* @__PURE__ */
+              jsx('option', {
+                value: option.value ?? option.title,
+                disabled: option.disabled,
+                children: option.title ?? option.value,
+              }, index,)
+            );
         }
       },),
     }, key7,),
@@ -48276,7 +48283,7 @@ var styles3 = /* @__PURE__ */ (() => [
     color: 'rgba(0, 0, 0, 0.4)',
   },),
 ])();
-var FormSelect = /* @__PURE__ */ withCSS(Select, styles3,);
+var FormSelect = /* @__PURE__ */ withCSS(Select, styles3, 'framer-lib-form-select',);
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
   const {
     background,
@@ -48446,7 +48453,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
       attributes += ` ${'data-framer-page-link-element'}="${pageLink.element}"`;
     }
     const link = linkFromFramerPageLink(href,);
-    if (!link || isString2(link,)) return original;
+    if (!link || isString(link,)) return original;
     if (linkMatchesRoute(currentRoute, link, implicitPathVariables,)) {
       attributes += ` ${'data-framer-page-link-current'}`;
     }
@@ -49225,7 +49232,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     rest.layout = 'preserve-aspect';
   }
   const Component18 = htmlElementAsMotionComponent(props.as,);
-  if (isString2(props.viewBox,)) {
+  if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
       return /* @__PURE__ */ jsx(Component18, {
         ...rest,
@@ -49287,7 +49294,7 @@ function processRichTextChildren(
   depth = isFragment(element,) ? -1 : 0,
 ) {
   let children = Children.toArray(element.props.children,);
-  if (isString2(plainText,)) {
+  if (isString(plainText,)) {
     children = children.slice(0, 1,);
   }
   let onlyLineBreaks = true;
@@ -49296,17 +49303,17 @@ function processRichTextChildren(
     if (isValidElement(child,)) {
       return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizer, depth + 1,);
     }
-    const text = isString2(plainText,) ? plainText : child;
-    return isString2(text,) && tokenizer ? tokenizer.text(text,) : text;
+    const text = isString(plainText,) ? plainText : child;
+    return isString(text,) && tokenizer ? tokenizer.text(text,) : text;
   },);
   const {
     ['data-preset-tag']: dataPresetTag,
     ...props
   } = element.props;
-  if (isString2(element.type,) || isMotionComponent(element.type,)) {
+  if (isString(element.type,) || isMotionComponent(element.type,)) {
     const elementType = unwrapMotionComponent(element.type,) || element.type;
     const tag = dataPresetTag || elementType;
-    const stylesPresetClassName = isString2(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
+    const stylesPresetClassName = isString(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
     props.className = cx('framer-text', props.className, stylesPresetClassName,);
     if (tokenizer && depth === 0 && !onlyLineBreaks) Object.assign(props, tokenizer.props(props.style,),);
     const isHeading = elementType === 'h1' || elementType === 'h2' || elementType === 'h3' || elementType === 'h4' ||
@@ -49341,7 +49348,7 @@ function generateHeadingSlug(children, slugCounters,) {
   return slug;
 }
 function extractTextFromReactNode(node,) {
-  if (isString2(node,) || isNumber2(node,)) {
+  if (isString(node,) || isNumber2(node,)) {
     return node.toString();
   }
   if (isValidElement(node,)) {
@@ -49359,13 +49366,13 @@ var RichText2 = /* @__PURE__ */ forwardRef(({
   ...props
 }, ref,) => {
   const content = html || children || htmlFromDesign;
-  if (isString2(content,)) {
-    if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
+  if (isString(content,)) {
+    if (!props.stylesPresetsClassName && isObject(props.stylesPresetsClassNames,)) {
       props.stylesPresetsClassName = Object.values(props.stylesPresetsClassNames,).join(' ',);
     }
     const contentProp = {
       // We need to use the original prop name.
-      [isString2(html,) ? 'html' : 'htmlFromDesign']: content,
+      [isString(html,) ? 'html' : 'htmlFromDesign']: content,
     };
     return /* @__PURE__ */ jsx(DeprecatedRichText, {
       ...props,
@@ -49373,7 +49380,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(({
       ref,
     },);
   }
-  if (!props.stylesPresetsClassNames && isString2(props.stylesPresetsClassName,)) {
+  if (!props.stylesPresetsClassNames && isString(props.stylesPresetsClassName,)) {
     const [h1, h2, h3, p, a,] = props.stylesPresetsClassName.split(' ',);
     if (h1 === void 0 || h2 === void 0 || h3 === void 0 || p === void 0 || a === void 0) {
       console.warn(`Encountered invalid stylesPresetsClassNames: ${props.stylesPresetsClassNames}`,);
@@ -49459,7 +49466,7 @@ function elementPropertiesForRadialGradient(gradient, id3,) {
   };
 }
 function isRelativeNumber(value,) {
-  if (!isString2(value,)) return false;
+  if (!isString(value,)) return false;
   const lastChar = value.charAt(value.length - 1,);
   if (lastChar !== '%') return false;
   const withoutLastChar = value.slice(0, -1,);
@@ -50344,10 +50351,10 @@ var Text2 = /* @__PURE__ */ React4.forwardRef(function Text3(props, forwardedRef
     }
   }, [navigate, implicitPathVariables,],);
   useEffect(() => {
-    var _a;
-    (_a = layoutRef.current) == null ? void 0 : _a.addEventListener('click', interceptPageLinks,);
     const ref = layoutRef.current;
-    return () => ref == null ? void 0 : ref.removeEventListener('click', interceptPageLinks,);
+    if (!ref) return;
+    ref.addEventListener('click', interceptPageLinks,);
+    return () => ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
   const rawHTML = React4.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
@@ -50440,7 +50447,7 @@ var TextComponent = /* @__PURE__ */ (() => {
         }
         let rawHTML = this.props.rawHTML;
         const text = this.getOverrideText() || this.props.text;
-        if (isString2(text,)) {
+        if (isString(text,)) {
           if (rawHTML) {
             rawHTML = replaceDraftHTMLWithText(rawHTML, text,);
           } else {
@@ -50496,7 +50503,7 @@ var TextComponent = /* @__PURE__ */ (() => {
       const forwardedOverrideId = _forwardedOverrideId ?? id3;
       if (forwardedOverrideId && _forwardedOverrides) {
         const text = _forwardedOverrides[forwardedOverrideId];
-        if (isString2(text,)) {
+        if (isString(text,)) {
           return text;
         }
       }
@@ -50587,6 +50594,7 @@ var TextComponent = /* @__PURE__ */ (() => {
         style.position = 'absolute';
       }
     }
+    // biome-ignore lint/suspicious/useGetterReturn: legacy text component
     get transformTemplate() {
       const {
         _usesDOMRect,
@@ -50643,7 +50651,7 @@ var textContentRegex =
       `^(${linkTag}${outerTag}${blockTag}${inlineTag}).*?(${inlineClosingTag}).*?(${blockClosingTag}${outerClosingTag}${linkClosingTag})$`,
       //                                              ^^^ this is the content we want to replace
       //                                                                      ^^^ this is the content we want to discard
-      's',
+      'su',
       // let the "." also match newlines
     ))();
 function replaceDraftHTMLWithText(rawHTML, text,) {
@@ -51084,7 +51092,7 @@ var Vector = /* @__PURE__ */ (() => {
       let imagePattern;
       let linearGradient;
       let radialGradient;
-      if (isString2(fill,) || Color.isColorObject(fill,)) {
+      if (isString(fill,) || Color.isColorObject(fill,)) {
         const fillColor = Color.isColorObject(fill,) ? fill.initialValue || Color.toRgbString(fill,) : fill;
         if (fillColor !== 'transparent') {
           vectorFill = fillColor;
@@ -51675,10 +51683,10 @@ function inspect(item, max, l,) {
   if (item === void 0) {
     return 'undefined';
   }
-  if (isObject2(item,) && isFunction(item.toInspect,)) {
+  if (isObject(item,) && isFunction(item.toInspect,)) {
     return item.toInspect();
   }
-  if (isString2(item,)) {
+  if (isString(item,)) {
     return `"${item}"`;
   }
   if (isNumber2(item,)) {
@@ -51698,7 +51706,7 @@ function inspect(item, max, l,) {
     }
     return `[${item.map((i) => inspect(i, max, (l || 0) + 1,)).join(', ',)}]`;
   }
-  if (isObject2(item,)) {
+  if (isObject(item,)) {
     let objectInfo;
     const objectType = inspectObjectType(item,);
     if (/HTML\w+?Element/u.test(objectType,)) {
@@ -51764,7 +51772,6 @@ var package_default = {
     postinstall: 'node postinstall.cjs',
   },
   dependencies: {
-    '@framerjs/router': 'workspace:*',
     '@juggle/resize-observer': '^3.3.1',
     eventemitter3: '^3.1.0',
     fontfaceobserver: '^2.1.0',
@@ -51777,6 +51784,7 @@ var package_default = {
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
+    '@types/dom-navigation': '^1.0.3',
     '@types/google.fonts': '^1.0.5',
     '@types/node': '^20.16.5',
     '@types/react': '^18.2.67',
@@ -51789,6 +51797,8 @@ var package_default = {
     'eslint-plugin-framer-studio': 'workspace:*',
     immutable: '^3.8.2',
     'jest-diff': '^29.3.1',
+    'jest-environment-jsdom': '^29.3.1',
+    'jest-environment-jsdom-global': '^4.0.0',
     'jest-junit': '^15.0.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
