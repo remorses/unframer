@@ -15390,7 +15390,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// https :https://app.framerstatic.com/framer.LECBVQGK.mjs
+// https :https://app.framerstatic.com/framer.5PDJT2TC.mjs
 init_chunk_QLPHEVXG();
 import React4 from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -17083,9 +17083,6 @@ function getRouteElementId(route, hash2,) {
   }
   return void 0;
 }
-function isBot(userAgent,) {
-  return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
-}
 function yieldToMain(options,) {
   if ('scheduler' in window) {
     if ('yield' in scheduler) return scheduler.yield(options,);
@@ -17196,37 +17193,6 @@ function useCurrentPathVariables() {
   var _a;
   return (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
 }
-var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(navigator.userAgent,))();
-function useRoutePreloader(routeIds, enabled = true,) {
-  const {
-    getRoute,
-  } = useRouter();
-  useEffect(() => {
-    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
-    for (const routeId of routeIds) {
-      void preloadRoute(getRoute(routeId,),);
-    }
-  }, [routeIds, getRoute, enabled,],);
-}
-async function preloadRoute(route,) {
-  if (!shouldPreloadBasedOnUA || !route) return;
-  const component = route.page;
-  if (!component || !isLazyComponentType(component,)) return;
-  await yieldToMain();
-  try {
-    await component.preload();
-  } catch (e) {
-    if (false) console.warn('Preload failed', route, e,);
-  }
-}
-function useRouteHandler(routeId, preload = false, elementId,) {
-  const {
-    navigate,
-  } = useRouter();
-  useRoutePreloader([routeId,], preload,);
-  const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
-  return handler;
-}
 function isFunction(value,) {
   return typeof value === 'function';
 }
@@ -17259,6 +17225,40 @@ function isValidDate(value,) {
 }
 function isGenerator2(value,) {
   return isObject(value,) && isFunction(value.return,);
+}
+function isBot(userAgent,) {
+  return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
+}
+var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(navigator.userAgent,))();
+function useRoutePreloader(routeIds, enabled = true,) {
+  const {
+    getRoute,
+  } = useRouter();
+  useEffect(() => {
+    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
+    for (const routeId of routeIds) {
+      void preloadRoute(getRoute(routeId,),);
+    }
+  }, [routeIds, getRoute, enabled,],);
+}
+async function preloadRoute(route,) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  await yieldToMain();
+  try {
+    await component.preload();
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
+  }
+}
+function useRouteHandler(routeId, preload = false, elementId,) {
+  const {
+    navigate,
+  } = useRouter();
+  useRoutePreloader([routeId,], preload,);
+  const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
+  return handler;
 }
 function computeRelativePath(from, to,) {
   if (!from.startsWith('/',) || !to.startsWith('/',)) {
@@ -38330,69 +38330,6 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
-var ErrorBoundaryCaughtError = class extends NotFoundErrorBoundaryCaughtError {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'caught', true,);
-  }
-};
-var GracefullyDegradingErrorBoundary = class extends Component {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'state', {
-      error: void 0,
-    },);
-    __publicField(
-      this,
-      'message',
-      'Made UI non-interactive due to the error above. We\'ve logged it, but also please report this to the Framer team.',
-    );
-  }
-  static getDerivedStateFromError(error,) {
-    return {
-      error,
-    };
-  }
-  componentDidCatch(error,) {
-    var _a;
-    if ('cause' in error) {
-      error = error.cause;
-    }
-    console.error(this.message,);
-    if (Math.random() > 0.01) return;
-    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-    (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_error', {
-      message: String(error,),
-      stack,
-    },],);
-  }
-  render() {
-    var _a;
-    const error = this.state.error;
-    if (!error) return this.props.children;
-    if (!isBot(navigator.userAgent,)) {
-      const fatalError = new ErrorBoundaryCaughtError();
-      fatalError.cause = 'cause' in error ? error.cause : error;
-      console.error(this.message, fatalError.cause,);
-      throw fatalError;
-    }
-    return (
-      // This has the caveat that we will slightly modify the DOM, but it appears to be fine in this case.
-      // The alternative would be to queue a new task that runs after and then set the innerHTML (= avoids the dummy-div), but that means we'll have DOM -> no DOM -> DOM transitions. With the div, we have DOM -> DOM and remove possible race-conditions.
-      /* @__PURE__ */
-      jsx('div', {
-        style: {
-          display: 'contents',
-        },
-        suppressHydrationWarning: true,
-        dangerouslySetInnerHTML: {
-          __html: '<!-- DOM replaced by GracefullyDegradingErrorBoundary -->' +
-            (((_a = document.getElementById('main',)) == null ? void 0 : _a.innerHTML) || ''),
-        },
-      },)
-    );
-  }
-};
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
   if (a.pathVariables === b.pathVariables) return true;
@@ -38699,44 +38636,42 @@ function Router({
     ? fillPathVariables(current.path, currentPathVariables,)
     : current.path;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
-  return /* @__PURE__ */ jsx(GracefullyDegradingErrorBoundary, {
-    children: /* @__PURE__ */ jsx(RouterAPIProvider, {
-      api,
-      children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
-        value: localeInfo,
-        children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-          children: [
-            /* @__PURE__ */ jsx(NotFoundErrorBoundary, {
-              notFoundPage,
-              defaultPageStyle,
-              forceUpdateKey: dep,
-              children: /* @__PURE__ */ jsx(WithLayoutTemplate, {
-                LayoutTemplate,
-                routeId: currentRouteId,
-                children: /* @__PURE__ */ jsxs(Fragment, {
-                  children: [
-                    /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
-                    pageExistsInCurrentLocale
-                      ? renderPage(
-                        current.page,
-                        LayoutTemplate
-                          ? {
-                            ...defaultPageStyle,
-                            display: 'content',
-                          }
-                          : defaultPageStyle,
-                      )
-                      : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                      notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                  ],
-                }, remountKey,),
-              },),
+  return /* @__PURE__ */ jsx(RouterAPIProvider, {
+    api,
+    children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
+      value: localeInfo,
+      children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+        children: [
+          /* @__PURE__ */ jsx(NotFoundErrorBoundary, {
+            notFoundPage,
+            defaultPageStyle,
+            forceUpdateKey: dep,
+            children: /* @__PURE__ */ jsx(WithLayoutTemplate, {
+              LayoutTemplate,
+              routeId: currentRouteId,
+              children: /* @__PURE__ */ jsxs(Fragment, {
+                children: [
+                  /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+                  pageExistsInCurrentLocale
+                    ? renderPage(
+                      current.page,
+                      LayoutTemplate
+                        ? {
+                          ...defaultPageStyle,
+                          display: 'content',
+                        }
+                        : defaultPageStyle,
+                    )
+                    : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                    notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                ],
+              }, remountKey,),
             },),
-            /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
-            /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
-            editorBar,
-          ],
-        },),
+          },),
+          /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+          /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
+          editorBar,
+        ],
       },),
     },),
   },);
@@ -39253,6 +39188,75 @@ function usePrefetch() {
   }
   return React2.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
+var GracefullyDegradingErrorBoundary = class extends Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      error: void 0,
+    },);
+    __publicField(this, 'message', 'Made UI non-interactive due to an error',);
+    __publicField(
+      this,
+      'messageReport',
+      'If you are the author of this website, please report this issue to the Framer team via https://www.framer.community/',
+    );
+  }
+  static getDerivedStateFromError(error,) {
+    return {
+      error,
+    };
+  }
+  componentDidCatch(error,) {
+    var _a, _b;
+    window.__framer_hadFatalError = true;
+    if ('cause' in error) {
+      error = error.cause;
+    }
+    console.error(`${this.message} (see above). ${this.messageReport}.`,);
+    const sampleRate = Math.random();
+    if (!((_a = this.context) == null ? void 0 : _a.codeBoundaries) && sampleRate > 0.01) return;
+    if (sampleRate > 0.25) return;
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+    (_b = window.__framer_events) == null ? void 0 : _b.push(['published_site_load_error', {
+      message: String(error,),
+      stack,
+    },],);
+  }
+  render() {
+    var _a, _b;
+    const error = this.state.error;
+    if (!error) return this.props.children;
+    const unwrappedError = 'cause' in error ? error.cause : error;
+    const closingHTMLComment = /-->/gu;
+    const closingHTMLCommentReplacement = '--!>';
+    const dom = isBot(navigator.userAgent,) ? ((_a = document.getElementById('main',)) == null ? void 0 : _a.innerHTML) || '' : // @FIXME: We should have a UI for fatal error recovery.
+    // We don't have a UI for fatal error recovery currently, so we just render nothing for regular users. If we were to throw, React would unmount too.
+    // We do render instead of throwing, so that:
+    // - `componentDidCatch` runs (if we throw here, it does not)
+    // - we can skip logging `Recoverable error during hydration`, because we know it was fatal.
+    '';
+    return (
+      // This has the caveat that we will slightly modify the DOM, but it appears to be fine in this case.
+      // The alternative would be to queue a new task that runs after and then set the innerHTML (= avoids the dummy-div), but that means we'll have DOM -> no DOM -> DOM transitions. With the div, we have DOM -> DOM and remove possible race-conditions.
+      /* @__PURE__ */
+      jsx('div', {
+        style: {
+          display: 'contents',
+        },
+        suppressHydrationWarning: true,
+        dangerouslySetInnerHTML: {
+          __html:
+            `<!-- DOM replaced by GracefullyDegradingErrorBoundary due to "${
+              unwrappedError.message.replace(closingHTMLComment, closingHTMLCommentReplacement,)
+            }". ${this.messageReport}: --><!-- Stack: ${
+              (_b = error.stack) == null ? void 0 : _b.replace(closingHTMLComment, '--!>',)
+            } -->` + dom,
+        },
+      },)
+    );
+  }
+};
+__publicField(GracefullyDegradingErrorBoundary, 'contextType', LibraryFeaturesContext,);
 function PageRoot({
   RootComponent,
   isWebsite,
@@ -39278,30 +39282,32 @@ function PageRoot({
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx(MotionConfig, {
-      reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx(FetchClientProvider, {
-        children: /* @__PURE__ */ jsx(CustomCursorHost, {
-          children: /* @__PURE__ */ jsx(FormContext.Provider, {
-            value: framerSiteId,
-            children: /* @__PURE__ */ jsx(Router, {
-              initialRoute: routeId,
-              initialPathVariables: pathVariables,
-              initialLocaleId: localeId,
-              routes,
-              collectionUtils,
-              notFoundPage,
-              locales,
-              defaultPageStyle: {
-                minHeight: '100vh',
-                width: 'auto',
-              },
-              preserveQueryParams,
-              enableAsyncURLUpdates,
-              editorBar: /* @__PURE__ */ jsx(EditorBarLauncher, {
-                EditorBar,
+    return /* @__PURE__ */ jsx(GracefullyDegradingErrorBoundary, {
+      children: /* @__PURE__ */ jsx(MotionConfig, {
+        reducedMotion: isReducedMotion ? 'user' : 'never',
+        children: /* @__PURE__ */ jsx(FetchClientProvider, {
+          children: /* @__PURE__ */ jsx(CustomCursorHost, {
+            children: /* @__PURE__ */ jsx(FormContext.Provider, {
+              value: framerSiteId,
+              children: /* @__PURE__ */ jsx(Router, {
+                initialRoute: routeId,
+                initialPathVariables: pathVariables,
+                initialLocaleId: localeId,
+                routes,
+                collectionUtils,
+                notFoundPage,
+                locales,
+                defaultPageStyle: {
+                  minHeight: '100vh',
+                  width: 'auto',
+                },
+                preserveQueryParams,
+                enableAsyncURLUpdates,
+                editorBar: /* @__PURE__ */ jsx(EditorBarLauncher, {
+                  EditorBar,
+                },),
+                LayoutTemplate,
               },),
-              LayoutTemplate,
             },),
           },),
         },),
@@ -44372,14 +44378,26 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
   const instantTransition = useInstantTransition();
   const setActiveVariantInstant = useCallback((variant) => {
     if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
-      instantTransition(() => {
+      let updateStateAndRerender2 = function () {
         baseVariant.current = basePropsVariant.current = variant;
         startTransition2(() => {
           forceUpdate();
         },);
-      },);
+      };
+      var updateStateAndRerender = updateStateAndRerender2;
+      if (onCanvas) {
+        updateStateAndRerender2();
+      } else {
+        instantTransition(() => {
+          updateStateAndRerender2();
+        },);
+      }
     }
-  }, [instantTransition, forceUpdate,],);
+  }, [instantTransition, forceUpdate, onCanvas,],);
+  useIsomorphicLayoutEffect2(() => {
+    if (!onCanvas) return;
+    setActiveVariantInstant(initial,);
+  }, [onCanvas, initial, setActiveVariantInstant,],);
   useIsomorphicLayoutEffect2(() => {
     if (!hydratedWithInitial || isInitialNavigation !== true) return;
     setActiveVariantInstant(baseVariant.current,);
@@ -46617,18 +46635,15 @@ var FontshareSource = class {
       isVariable: variant.toLowerCase().includes('variable',),
     };
   }
-  /**
-   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool. Because we are using the font selector to get open type features.
-   * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/fontShare.ts
-   */
   static createSelector(family, variant,) {
     return `${fontsharePrefix}${family}-${variant.toLowerCase()}`;
   }
   /**
-   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool. Because we are using the font selector to get variable fontsvariation axes.
+   * We are using this selector to get Open Type features and variable fonts variation axes.
+   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool.
    * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/fontShare.ts
    */
-  static createVariationAxesSelector(family,) {
+  static createMetadataSelector(family,) {
     return `${fontsharePrefix}${family}`;
   }
   addFontFamily(fontFamily,) {
@@ -46658,7 +46673,7 @@ var FontshareSource = class {
           file: fontStyle.file,
         };
       },);
-      const key7 = FontshareSource.createVariationAxesSelector(fontshareFont.name,);
+      const key7 = FontshareSource.createMetadataSelector(fontshareFont.name,);
       const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
       const familyName = fontshareFont.name;
       let fontFamily = this.getFontFamilyByName(familyName,);
@@ -46764,8 +46779,8 @@ var FramerFontSource = class {
       category: 'sans-serif',
     };
   }
-  static createVariationAxesKey(font,) {
-    return font.familyName;
+  static createMetadataSelector(family,) {
+    return `${framerFontPrefix}${family}`;
   }
   importFonts(framerFonts, variationAxesData,) {
     this.fontFamilies.length = 0;
@@ -46776,7 +46791,7 @@ var FramerFontSource = class {
         familyName,
         ...rest
       } = framerFont;
-      const key7 = FramerFontSource.createVariationAxesKey(framerFont,);
+      const key7 = FramerFontSource.createMetadataSelector(framerFont.familyName,);
       const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
       let fontFamily = this.getFontFamilyByName(familyName,);
       if (!fontFamily) {
@@ -46839,10 +46854,11 @@ var GoogleFontSource = class {
     return `${googleFontSelectorPrefix}${family}-${isVariableFont2 ? 'variable-' : ''}${variant}`;
   }
   /**
-   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool. Because we are using the font selector to get variable fonts variation axes.
+   * We are using this selector to get Open Type features and variable fonts variation axes.
+   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool.
    * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/googleFonts.ts
    */
-  static createVariationAxesSelector(family,) {
+  static createMetadataSelector(family,) {
     return `${googleFontSelectorPrefix}${family}`;
   }
   addFontFamily(family,) {
@@ -46893,7 +46909,7 @@ var GoogleFontSource = class {
           };
         },)
         : [];
-      const key7 = GoogleFontSource.createVariationAxesSelector(webFont.family,);
+      const key7 = GoogleFontSource.createMetadataSelector(webFont.family,);
       const variationAxes = fontsToVariationAxes == null ? void 0 : fontsToVariationAxes[key7];
       const allVariants = [...staticVariants, ...variableVariants,];
       const allSuccessfullyParsedVariants = allVariants.filter(isSuccessfullyParsedFontVariant,);
@@ -47031,7 +47047,7 @@ async function isFontReady(family, style, weight,) {
   }
 }
 var framer_default = {
-  Inter: [{
+  'FR;Inter': [{
     tag: 'opsz',
     minValue: 14,
     maxValue: 32,
