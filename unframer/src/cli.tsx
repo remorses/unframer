@@ -123,7 +123,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                         lastEtag = etag
                     }
 
-                    await sleep(1000 * 1)
+                    await sleep(1000 * 2)
                 }
             }
 
