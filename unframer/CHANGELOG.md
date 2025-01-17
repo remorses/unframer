@@ -1,5 +1,11 @@
 # unframer
 
+## 2.14.0
+
+### Minor Changes
+
+-   f71d9db: Added --external arg to externalize npm packages
+
 ## 2.13.0
 
 ### Minor Changes
