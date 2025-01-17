@@ -1,9 +1,11 @@
 import { logger } from './utils'
 import { createSpinner } from 'nanospinner'
 
-import { Plugin, transform } from 'esbuild'
+import { Plugin, transform, type OnResolveArgs } from 'esbuild'
+import { cwd } from 'process'
+import { resolvePackage } from './exporter'
 
-export const externalPackages = [
+export const defaultExternalPackages = [
     'react',
     'react-dom',
     'framer',
@@ -21,7 +23,8 @@ export const replaceWebPageIds = ({
     code: string
 }) => {
     // Match webPageId pattern with optional trailing comma
-    const pattern = /{[\s\n]*webPageId[\s\n]*:[\s\n]*(['"])(.*?)\1[\s\n]*,?[\s\n]*}/g
+    const pattern =
+        /{[\s\n]*webPageId[\s\n]*:[\s\n]*(['"])(.*?)\1[\s\n]*,?[\s\n]*}/g
 
     return code.replace(pattern, (match, quote, id) => {
         const path = elements.find((e) => e.webPageId === id)?.path
@@ -36,15 +39,20 @@ export const replaceWebPageIds = ({
 
 export function esbuildPluginBundleDependencies({
     signal = undefined as AbortSignal | undefined,
+    externalPackages = [] as string[],
     externalizeNpm = false,
+    outDir,
 }) {
+    externalPackages = [...defaultExternalPackages, ...externalPackages]
+    // console.log(externalPackages)
     const codeCache = new Map()
     const spinner = createSpinner('Fetching Framer Components Modules')
     spinner.start()
+
     const plugin: Plugin = {
         name: 'esbuild-plugin',
         setup(build) {
-            const namespace = 'https '
+            const namespace = '/'
             build.onResolve({ filter: /^https?:\/\// }, (args) => {
                 const url = new URL(args.path)
                 return {
@@ -54,7 +62,7 @@ export function esbuildPluginBundleDependencies({
                     namespace,
                 }
             })
-            const resolveDep = (args) => {
+            const resolveDep = async (args: OnResolveArgs) => {
                 if (signal?.aborted) {
                     throw new Error('aborted')
                 }
@@ -83,6 +91,16 @@ export function esbuildPluginBundleDependencies({
                         (x) => x === args.path || args.path.startsWith(x + '/'),
                     )
                 ) {
+                    const pkg = getPackageName(args.path)
+                    const installedVersion = await resolvePackage({
+                        cwd: outDir,
+                        pkg,
+                    }).catch(() => '')
+                    if (!installedVersion) {
+                        spinner.error(
+                            `${pkg} not found: install it with \`npm i ${pkg}\``,
+                        )
+                    }
                     return {
                         path: args.path,
                         external: true,
@@ -99,6 +117,16 @@ export function esbuildPluginBundleDependencies({
                     }
                 }
                 if (externalizeNpm) {
+                    const pkg = getPackageName(args.path)
+                    const installedVersion = await resolvePackage({
+                        cwd: outDir,
+                        pkg,
+                    }).catch(() => '')
+                    if (!installedVersion) {
+                        spinner.error(
+                            `${pkg} not found: install it with \`npm i ${pkg}\``,
+                        )
+                    }
                     return {
                         path: args.path,
                         external: true,
@@ -262,4 +290,15 @@ export function retryTwice<F extends Function>(fn: Function): Function {
             return await fn(...args)
         }
     }
+}
+
+export function getPackageName(importPath: string): string {
+    // Handle scoped packages
+    if (importPath.startsWith('@')) {
+        const [scope, rest] = importPath.split('/')
+        if (!rest) return importPath
+        return `${scope}/${rest.split('/')[0]}`
+    }
+    // Handle regular packages
+    return importPath.split('/')[0]
 }

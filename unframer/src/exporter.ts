@@ -22,7 +22,7 @@ import {
 } from './css.js'
 import {
     esbuildPluginBundleDependencies,
-    externalPackages,
+    defaultExternalPackages,
     replaceWebPageIds,
     resolveRedirect,
 } from './esbuild'
@@ -33,14 +33,6 @@ import {
     combinedCSSRules,
 } from './framer.js'
 import { kebabCase, logger, spinner, terminalMarkdown } from './utils.js'
-
-function validateUrl(url: string) {
-    try {
-        const u = new URL(url)
-    } catch (e) {
-        throw new Error(`Invalid URL: ${url}`)
-    }
-}
 
 export type StyleToken = {
     id: string
@@ -77,6 +69,7 @@ export async function bundle({
     )
     const buildContext = await context({
         absWorkingDir: out,
+
         entryPoints: Object.keys(components).map((name) => {
             return {
                 in: `virtual:${name}`,
@@ -93,10 +86,14 @@ export async function bundle({
         splitting: true,
         logLevel: 'error',
         pure: ['addPropertyControls'],
-        external: externalPackages,
+        external: defaultExternalPackages,
+        chunkNames: 'chunks/[name]-[hash]',
         plugins: [
             esbuildPluginBundleDependencies({
                 signal,
+                externalPackages: config.externalPackages,
+                externalizeNpm: config.allExternal,
+                outDir: config.outDir,
             }),
             nodeModulesPolyfillPlugin({}),
             {
@@ -108,6 +105,7 @@ export async function bundle({
                             namespace: 'virtual',
                         }
                     })
+
                     build.onLoad(
                         { filter: /.*/, namespace: 'virtual' },
                         async (args) => {
@@ -183,7 +181,18 @@ export async function bundle({
 
     async function rebuild() {
         const prevFiles = recursiveReaddir(out)
-        const buildResult = await buildContext.rebuild()
+        const buildResult = await buildContext.rebuild().catch((e) => {
+            if (e.message.includes('No matching export ')) {
+                spinner.error(
+                    `esbuild failed to import from an external package, this usually means that the npm package version in Framer is older than the latest.`,
+                )
+                spinner.error(
+                    `Use --external to make all npm packagess external, then install the right version`,
+                )
+                process.exit(1)
+            }
+            throw e
+        })
 
         for (let file of buildResult.outputFiles!) {
             const resultPathAbs = path.resolve(out, file.path)
@@ -584,31 +593,45 @@ export async function bundle({
     // }
     // return res
 }
-
-export function checkUnframerVersion({ cwd }) {
-    const currentVersion = packageJson.version
-    try {
-        const code = `import('unframer/package.json', { with: { type: 'json' } }).then(pkg => console.log(pkg.version || pkg.default?.version));`
+export function resolvePackage({ cwd, pkg }) {
+    return new Promise<string>((resolve, reject) => {
+        const code = `import('${pkg}/package.json', { with: { type: 'json' } }).then(pkg => console.log(pkg.version || pkg.default?.version));`
 
         const command = [
             JSON.stringify(nodePath),
             '-e',
             JSON.stringify(code),
         ].join(' ')
-        const installedVersion = execSync(command, {
-            stdio: ['pipe', 'pipe', 'pipe'],
-            cwd,
-        })
-            .toString()
-            .trim()
 
+        exec(
+            command,
+            {
+                cwd,
+            },
+            (error, stdout, stderr) => {
+                if (error) {
+                    logger.log(stderr)
+                    reject(
+                        new Error('Unframer is not installed in your project'),
+                    )
+                    return
+                }
+                resolve(stdout.trim())
+            },
+        )
+    })
+}
+
+export async function checkUnframerVersion({ cwd }: { cwd: string }) {
+    const currentVersion = packageJson.version
+    try {
+        const installedVersion = await resolvePackage({ cwd, pkg: 'unframer' })
         if (installedVersion !== currentVersion) {
             spinner.error(
                 `Unframer version mismatch. Please run: npm update unframer@latest`,
             )
         }
-    } catch (e: any) {
-        logger.log(e.stderr.toString())
+    } catch (e) {
         spinner.error(
             'Unframer is not installed in your project. Please run: npm install unframer',
         )
@@ -867,7 +890,7 @@ export async function extractPropControlsUnsafe(
                 clearTimeout(timer)
                 if (err) {
                     spinner.error(`error extracting types for ${name}`)
-                    spinner.error(stderr)
+                    console.error(stderr)
                     return rej(err)
                 }
 

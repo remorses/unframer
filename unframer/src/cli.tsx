@@ -17,9 +17,23 @@ let defaultOutDir = 'framer'
 
 cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--outDir <dir>', 'Output directory', { default: defaultOutDir })
+    .option(
+        '--external [package]',
+        'Make some package external, do not pass a package name to make all packages external',
+        {
+            default: false,
+        },
+    )
     .option('--watch', 'Watch for changes and rebuild', { default: false })
     .option('--debug', 'Enable debug logging', { default: false })
     .action(async function main(projectId, options) {
+        const external_ = options.external
+        const allExternal = external_ === true
+        const externalPackages: string[] = Array.isArray(external_)
+            ? external_.filter((x) => x.trim())
+            : typeof external_ === 'string'
+            ? [external_]
+            : []
         try {
             if (options.debug) {
                 logger.debug = true
@@ -55,6 +69,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 const { rebuild, buildContext } = await bundle({
                     config: {
                         outDir,
+                        externalPackages,
+                        allExternal,
                         projectId: data?.project?.projectId,
                         projectName,
                         fullFramerProjectId:
@@ -133,7 +149,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
 
             setMaxListeners(0, controller.signal)
             const { buildContext } = await bundle({
-                config,
+                config: { ...config, externalPackages, allExternal },
                 watch: false,
                 signal: controller.signal,
                 cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
@@ -216,6 +232,8 @@ export type Config = {
     components: {
         [name: string]: string
     }
+    externalPackages?: string[]
+    allExternal?: boolean
     projectId?: string
     fullFramerProjectId?: string
     projectName?: string
