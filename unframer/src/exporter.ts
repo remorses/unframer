@@ -543,7 +543,7 @@ export async function bundle({
         
         `),
     )
-    checkUnframerVersion({ cwd: out })
+    await checkUnframerVersion({ cwd: out })
     console.log()
     return { result, rebuild, buildContext }
 
