@@ -1,6 +1,6 @@
 {
   "inputs": {
-    "https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
+    "/:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
       "bytes": 6122,
       "imports": [
         {
@@ -26,70 +26,75 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/stable/react@18.3.1/esnext/react.mjs": {
-      "bytes": 12159,
+    "/:https://esm.sh/node/process.mjs": {
+      "bytes": 8601,
       "imports": [],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/node_events.js": {
-      "bytes": 8063,
+    "/:https://esm.sh/react@18.3.1/es2022/react.mjs": {
+      "bytes": 11067,
       "imports": [],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/node_process.js": {
-      "bytes": 2288,
+    "/:https://esm.sh/react@^18.3.1?target=es2022": {
+      "bytes": 152,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/node_events.js",
+          "path": "/:https://esm.sh/react@18.3.1/es2022/react.mjs",
           "kind": "import-statement",
-          "original": "./node_events.js"
+          "original": "/react@18.3.1/es2022/react.mjs"
+        },
+        {
+          "path": "/:https://esm.sh/react@18.3.1/es2022/react.mjs",
+          "kind": "import-statement",
+          "original": "/react@18.3.1/es2022/react.mjs"
         }
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs": {
-      "bytes": 12101,
-      "imports": [],
-      "format": "esm"
-    },
-    "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
-      "bytes": 47163,
+    "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs": {
+      "bytes": 46939,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/node_process.js",
+          "path": "/:https://esm.sh/node/process.mjs",
           "kind": "import-statement",
-          "original": "/v135/node_process.js"
+          "original": "/node/process.mjs"
         },
         {
-          "path": "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs",
+          "path": "/:https://esm.sh/react@^18.3.1?target=es2022",
           "kind": "import-statement",
-          "original": "/stable/react@18.2.0/esnext/react.mjs"
+          "original": "/react@^18.3.1?target=es2022"
         }
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/typewriter-effect": {
-      "bytes": 258,
+    "/:https://esm.sh/typewriter-effect": {
+      "bytes": 267,
       "imports": [
         {
-          "path": "https :https://esm.sh/stable/react@18.3.1/esnext/react.mjs",
+          "path": "/:https://esm.sh/node/process.mjs",
           "kind": "import-statement",
-          "original": "/stable/react@18.3.1/esnext/react.mjs"
+          "original": "/node/process.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs",
+          "path": "/:https://esm.sh/react@^18.3.1?target=es2022",
           "kind": "import-statement",
-          "original": "/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs"
+          "original": "/react@^18.3.1?target=es2022"
         },
         {
-          "path": "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs",
+          "path": "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs",
           "kind": "import-statement",
-          "original": "/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs"
+          "original": "/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs"
+        },
+        {
+          "path": "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs",
+          "kind": "import-statement",
+          "original": "/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
+    "/:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
       "bytes": 6596,
       "imports": [
         {
@@ -103,14 +108,14 @@
           "external": true
         },
         {
-          "path": "https :https://esm.sh/typewriter-effect",
+          "path": "/:https://esm.sh/typewriter-effect",
           "kind": "import-statement",
           "original": "typewriter-effect"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
+    "/:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
       "bytes": 7061,
       "imports": [
         {
@@ -121,7 +126,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
+    "/:https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
       "bytes": 799,
       "imports": [
         {
@@ -137,7 +142,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
+    "/:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
       "bytes": 355,
       "imports": [
         {
@@ -148,7 +153,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
+    "/:https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
       "bytes": 570,
       "imports": [
         {
@@ -159,7 +164,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
+    "/:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
       "bytes": 279,
       "imports": [
         {
@@ -170,7 +175,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
+    "/:https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
       "bytes": 877,
       "imports": [
         {
@@ -181,7 +186,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
+    "/:https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
       "bytes": 1491,
       "imports": [
         {
@@ -192,7 +197,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
+    "/:https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
       "bytes": 766,
       "imports": [
         {
@@ -203,7 +208,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
+    "/:https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
       "bytes": 989,
       "imports": [
         {
@@ -212,19 +217,19 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
+          "path": "/:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js": {
+    "/:https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js": {
       "bytes": 672,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
+    "/:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
       "bytes": 2090,
       "imports": [
         {
@@ -238,19 +243,19 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
+          "path": "/:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
+          "path": "/:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
+    "/:https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
       "bytes": 1301,
       "imports": [
         {
@@ -264,14 +269,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
+          "path": "/:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
+    "/:https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
       "bytes": 920,
       "imports": [
         {
@@ -287,7 +292,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
+    "/:https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
       "bytes": 448,
       "imports": [
         {
@@ -298,7 +303,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
+    "/:https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
       "bytes": 2497,
       "imports": [
         {
@@ -314,103 +319,103 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js": {
+    "/:https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js": {
       "bytes": 464,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framer.com/m/framer/default-utils.js@^0.45.0": {
+    "/:https://framer.com/m/framer/default-utils.js@^0.45.0": {
       "bytes": 5937,
       "imports": [
         {
-          "path": "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
+          "path": "/:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js",
+          "path": "/:https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
+          "path": "/:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js",
+          "path": "/:https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
+          "path": "/:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js",
+          "path": "/:https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js",
+          "path": "/:https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js",
+          "path": "/:https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js",
+          "path": "/:https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js",
+          "path": "/:https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/4zHZnO5JojN1PrIbu2jm/revv9QCWpkh8lPzi2jje/time.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js",
+          "path": "/:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js",
+          "path": "/:https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js",
+          "path": "/:https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js",
+          "path": "/:https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js",
+          "path": "/:https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js",
+          "path": "/:https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/8CkHAZatUz1UR8jNTcfD/HwbnIAZlUmQ2oTpcLkaH/detectAutoSizingAxis.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/framer/lodash.js@0.3.0": {
+    "/:https://framer.com/m/framer/lodash.js@0.3.0": {
       "bytes": 4435,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
+    "/:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
       "bytes": 8420,
       "imports": [
         {
@@ -434,19 +439,19 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/default-utils.js@^0.45.0",
+          "path": "/:https://framer.com/m/framer/default-utils.js@^0.45.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/default-utils.js@^0.45.0"
         },
         {
-          "path": "https :https://framer.com/m/framer/lodash.js@0.3.0",
+          "path": "/:https://framer.com/m/framer/lodash.js@0.3.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/lodash.js@0.3.0"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
+    "/:https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
       "bytes": 1271,
       "imports": [
         {
@@ -457,7 +462,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
+    "/:https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
       "bytes": 10408,
       "imports": [
         {
@@ -483,7 +488,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
+    "/:https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
       "bytes": 10771,
       "imports": [
         {
@@ -509,7 +514,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
+    "/:https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
       "bytes": 10045,
       "imports": [
         {
@@ -535,7 +540,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
+    "/:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
       "bytes": 55486,
       "imports": [
         {
@@ -559,39 +564,39 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
+          "path": "/:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js",
+          "path": "/:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js",
+          "path": "/:https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js",
+          "path": "/:https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js",
+          "path": "/:https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js",
+          "path": "/:https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
+    "/:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
       "bytes": 21241,
       "imports": [
         {
@@ -615,14 +620,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
+          "path": "/:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
+    "/:https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
       "bytes": 111041,
       "imports": [
         {
@@ -646,24 +651,24 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
+          "path": "/:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js",
+          "path": "/:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
+          "path": "/:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
+    "/:https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
       "bytes": 45154,
       "imports": [
         {
@@ -687,14 +692,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
+          "path": "/:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
+    "/:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
       "bytes": 182331,
       "imports": [
         {
@@ -718,17 +723,17 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js",
+          "path": "/:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js",
+          "path": "/:https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js",
+          "path": "/:https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js"
         }
@@ -736,7 +741,7 @@
       "format": "esm"
     },
     "virtual:fylo": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -749,7 +754,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js",
+          "path": "/:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js"
         },
@@ -766,7 +771,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
+    "/:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
       "bytes": 5912,
       "imports": [
         {
@@ -787,7 +792,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
+    "/:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
       "bytes": 5912,
       "imports": [
         {
@@ -808,7 +813,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
+    "/:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
       "bytes": 1483,
       "imports": [
         {
@@ -819,7 +824,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
+    "/:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
       "bytes": 1479,
       "imports": [
         {
@@ -830,7 +835,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
+    "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
       "bytes": 1456,
       "imports": [
         {
@@ -841,7 +846,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
+    "/:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
       "bytes": 2711,
       "imports": [
         {
@@ -852,7 +857,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
+    "/:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
       "bytes": 1485,
       "imports": [
         {
@@ -863,8 +868,8 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
-      "bytes": 6147,
+    "/:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/AAht9RaiBTkTNpjDlg11/jijvTv89r.js": {
+      "bytes": 5544,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -889,7 +894,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
+    "/:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/aKRCBXOamkbIpS9DeYqR/fAeI1HtaF.js": {
       "bytes": 7798,
       "imports": [
         {
@@ -913,19 +918,19 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
+          "path": "/:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js",
+          "path": "/:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/AAht9RaiBTkTNpjDlg11/jijvTv89r.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js"
+          "original": "https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/AAht9RaiBTkTNpjDlg11/jijvTv89r.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
+    "/:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
       "bytes": 11536,
       "imports": [
         {
@@ -949,14 +954,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
+    "/:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
       "bytes": 4421,
       "imports": [
         {
@@ -982,7 +987,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
+    "/:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/SKXreSGrLeB8pMA2T5nf/eaL2rwfV9.js": {
       "bytes": 24590,
       "imports": [
         {
@@ -1006,47 +1011,47 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js",
+          "path": "/:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js",
+          "path": "/:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
+          "path": "/:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js",
+          "path": "/:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js",
+          "path": "/:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js",
+          "path": "/:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/aKRCBXOamkbIpS9DeYqR/fAeI1HtaF.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js"
+          "original": "https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/aKRCBXOamkbIpS9DeYqR/fAeI1HtaF.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js",
+          "path": "/:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js",
+          "path": "/:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js"
         }
@@ -1054,7 +1059,7 @@
       "format": "esm"
     },
     "virtual:hero": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -1067,9 +1072,9 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js",
+          "path": "/:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/SKXreSGrLeB8pMA2T5nf/eaL2rwfV9.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js"
+          "original": "https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/SKXreSGrLeB8pMA2T5nf/eaL2rwfV9.js"
         },
         {
           "path": "unframer",
@@ -1084,7 +1089,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js": {
+    "/:https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js": {
       "bytes": 5992,
       "imports": [
         {
@@ -1110,7 +1115,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js": {
+    "/:https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js": {
       "bytes": 7971,
       "imports": [
         {
@@ -1134,14 +1139,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js",
+          "path": "/:https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js": {
+    "/:https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js": {
       "bytes": 14238,
       "imports": [
         {
@@ -1167,7 +1172,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js": {
+    "/:https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js": {
       "bytes": 15900,
       "imports": [
         {
@@ -1193,7 +1198,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js": {
+    "/:https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js": {
       "bytes": 13581,
       "imports": [
         {
@@ -1219,7 +1224,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js": {
+    "/:https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js": {
       "bytes": 35742,
       "imports": [
         {
@@ -1243,22 +1248,22 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js",
+          "path": "/:https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js",
+          "path": "/:https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js",
+          "path": "/:https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js",
+          "path": "/:https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js"
         }
@@ -1266,7 +1271,7 @@
       "format": "esm"
     },
     "virtual:framerNav": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -1279,7 +1284,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js",
+          "path": "/:https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js"
         },
@@ -1296,317 +1301,414 @@
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs": {
+    "/:https://esm.sh/@motionone/utils@10.18.0/es2022/utils.mjs": {
       "bytes": 1771,
       "imports": [],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/easing@10.18.0/esnext/easing.mjs": {
-      "bytes": 822,
+    "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022": {
+      "bytes": 60,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
+          "path": "/:https://esm.sh/@motionone/utils@10.18.0/es2022/utils.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
+          "original": "/@motionone/utils@10.18.0/es2022/utils.mjs"
         }
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs": {
-      "bytes": 3684,
+    "/:https://esm.sh/@motionone/easing@10.18.0/es2022/easing.mjs": {
+      "bytes": 808,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/easing@10.18.0/esnext/easing.mjs",
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
           "kind": "import-statement",
-          "original": "/v135/@motionone/easing@10.18.0/esnext/easing.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
         }
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/generators@10.18.0/esnext/generators.mjs": {
-      "bytes": 3023,
+    "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022": {
+      "bytes": 113,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
+          "path": "/:https://esm.sh/@motionone/easing@10.18.0/es2022/easing.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
+          "original": "/@motionone/easing@10.18.0/es2022/easing.mjs"
         }
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
-      "bytes": 89,
-      "imports": [],
+    "/:https://esm.sh/@motionone/animation@10.18.0/es2022/animation.mjs": {
+      "bytes": 3662,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/easing@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        }
+      ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/tslib@2.8.1/esnext/tslib.mjs": {
-      "bytes": 14667,
-      "imports": [],
+    "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022": {
+      "bytes": 171,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/easing@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/animation@10.18.0/es2022/animation.mjs",
+          "kind": "import-statement",
+          "original": "/@motionone/animation@10.18.0/es2022/animation.mjs"
+        }
+      ],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs": {
+    "/:https://esm.sh/@motionone/generators@10.18.0/es2022/generators.mjs": {
+      "bytes": 2995,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022": {
+      "bytes": 121,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/generators@10.18.0/es2022/generators.mjs",
+          "kind": "import-statement",
+          "original": "/@motionone/generators@10.18.0/es2022/generators.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/@motionone/types@10.17.1/es2022/types.mjs": {
       "bytes": 237,
       "imports": [],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
-      "bytes": 13435,
+    "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022": {
+      "bytes": 60,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/types@10.17.1/es2022/types.mjs",
+          "kind": "import-statement",
+          "original": "/@motionone/types@10.17.1/es2022/types.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/hey-listen@1.0.8/es2022/hey-listen.mjs": {
+      "bytes": 89,
       "imports": [],
       "format": "esm"
     },
-    "https :https://esm.sh/v135/@motionone/dom@10.18.0/esnext/dom.mjs": {
-      "bytes": 27428,
+    "/:https://esm.sh/hey-listen@^1.0.8?target=es2022": {
+      "bytes": 57,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs",
+          "path": "/:https://esm.sh/hey-listen@1.0.8/es2022/hey-listen.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.18.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
-          "kind": "import-statement",
-          "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/types@10.17.1/esnext/types.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.18.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
-          "kind": "import-statement",
-          "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.18.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.18.0/esnext/generators.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.18.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.18.0/esnext/generators.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.18.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.18.0/esnext/generators.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.18.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
-          "kind": "import-statement",
-          "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.6.2/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.18.0/esnext/animation.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
+          "original": "/hey-listen@1.0.8/es2022/hey-listen.mjs"
         }
       ],
       "format": "esm"
     },
-    "https :https://esm.sh/@motionone/dom": {
-      "bytes": 411,
+    "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs": {
+      "bytes": 14667,
+      "imports": [],
+      "format": "esm"
+    },
+    "/:https://esm.sh/tslib@^2.3.1?target=es2022": {
+      "bytes": 150,
       "imports": [
         {
-          "path": "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs",
+          "path": "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/animation@10.18.0/esnext/animation.mjs"
+          "original": "/tslib@2.8.1/es2022/tslib.mjs"
         },
         {
-          "path": "https :https://esm.sh/v135/@motionone/generators@10.18.0/esnext/generators.mjs",
+          "path": "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs",
           "kind": "import-statement",
-          "original": "/v135/@motionone/generators@10.18.0/esnext/generators.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs",
-          "kind": "import-statement",
-          "original": "/v135/hey-listen@1.0.8/esnext/hey-listen.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/tslib@2.8.1/esnext/tslib.mjs",
-          "kind": "import-statement",
-          "original": "/v135/tslib@2.8.1/esnext/tslib.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/utils@10.18.0/esnext/utils.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/types@10.17.1/esnext/types.mjs"
-        },
-        {
-          "path": "https :https://esm.sh/v135/@motionone/dom@10.18.0/esnext/dom.mjs",
-          "kind": "import-statement",
-          "original": "/v135/@motionone/dom@10.18.0/esnext/dom.mjs"
+          "original": "/tslib@2.8.1/es2022/tslib.mjs"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
+    "/:https://esm.sh/@motionone/dom@10.18.0/es2022/dom.mjs": {
+      "bytes": 27137,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/animation@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
+          "kind": "import-statement",
+          "original": "/hey-listen@^1.0.8?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/types@^10.17.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/animation@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/tslib@^2.3.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
+          "kind": "import-statement",
+          "original": "/hey-listen@^1.0.8?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/animation@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/generators@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/generators@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/generators@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/tslib@^2.3.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/tslib@^2.3.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
+          "kind": "import-statement",
+          "original": "/hey-listen@^1.0.8?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/tslib@^2.3.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/animation@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/@motionone/dom": {
+      "bytes": 350,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/animation@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/generators@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/types@^10.17.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "kind": "import-statement",
+          "original": "/@motionone/utils@^10.18.0?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
+          "kind": "import-statement",
+          "original": "/hey-listen@^1.0.8?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
+          "kind": "import-statement",
+          "original": "/tslib@^2.3.1?target=es2022"
+        },
+        {
+          "path": "/:https://esm.sh/@motionone/dom@10.18.0/es2022/dom.mjs",
+          "kind": "import-statement",
+          "original": "/@motionone/dom@10.18.0/es2022/dom.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
       "bytes": 12964,
       "imports": [
         {
@@ -1630,14 +1732,14 @@
           "external": true
         },
         {
-          "path": "https :https://esm.sh/@motionone/dom",
+          "path": "/:https://esm.sh/@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
+    "/:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
       "bytes": 11218,
       "imports": [
         {
@@ -1661,7 +1763,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js",
+          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js"
         }
@@ -1669,7 +1771,7 @@
       "format": "esm"
     },
     "virtual:logos": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -1682,7 +1784,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js",
+          "path": "/:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js"
         },
@@ -1699,7 +1801,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
+    "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
       "bytes": 14026,
       "imports": [
         {
@@ -1723,14 +1825,14 @@
           "external": true
         },
         {
-          "path": "https :https://esm.sh/@motionone/dom",
+          "path": "/:https://esm.sh/@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
+    "/:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
       "bytes": 1456,
       "imports": [
         {
@@ -1741,7 +1843,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
+    "/:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
       "bytes": 12461,
       "imports": [
         {
@@ -1765,14 +1867,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js",
+          "path": "/:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
+    "/:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
       "bytes": 18211,
       "imports": [
         {
@@ -1796,12 +1898,12 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js",
+          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js",
+          "path": "/:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js"
         }
@@ -1809,7 +1911,7 @@
       "format": "esm"
     },
     "virtual:testimonials": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -1822,7 +1924,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js",
+          "path": "/:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js"
         },
@@ -1839,12 +1941,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js": {
+    "/:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
+    "/:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
       "bytes": 28116,
       "imports": [
         {
@@ -1868,7 +1970,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js",
+          "path": "/:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_-0.js",
           "kind": "import-statement",
           "original": "./vitO4v4o_-0.js"
         }
@@ -1876,7 +1978,7 @@
       "format": "esm"
     },
     "virtual:menu-overlay": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -1889,7 +1991,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js",
+          "path": "/:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js"
         },
@@ -1906,7 +2008,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
+    "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
       "bytes": 1003,
       "imports": [
         {
@@ -1922,12 +2024,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/phosphor-icons/House.js@0.0.50": {
+    "/:https://framer.com/m/phosphor-icons/House.js@0.0.50": {
       "bytes": 4087,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
+    "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
       "bytes": 2388,
       "imports": [
         {
@@ -1943,7 +2045,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
+    "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
       "bytes": 18981,
       "imports": [
         {
@@ -1972,29 +2074,29 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0",
+          "path": "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/icon-nullstate.js@0.7.0"
         },
         {
-          "path": "https :https://framer.com/m/phosphor-icons/House.js@0.0.50",
+          "path": "/:https://framer.com/m/phosphor-icons/House.js@0.0.50",
           "kind": "import-statement",
           "original": "https://framer.com/m/phosphor-icons/House.js@0.0.50"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
+          "path": "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3-0.js": {
+    "/:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js": {
+    "/:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js": {
       "bytes": 36124,
       "imports": [
         {
@@ -2018,12 +2120,12 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js",
+          "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3-0.js",
+          "path": "/:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3-0.js",
           "kind": "import-statement",
           "original": "./q64yDrOL3-0.js"
         }
@@ -2031,7 +2133,7 @@
       "format": "esm"
     },
     "virtual:full-page": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -2044,7 +2146,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js",
+          "path": "/:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js"
         },
@@ -2061,7 +2163,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
+    "/:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
       "bytes": 2708,
       "imports": [
         {
@@ -2072,7 +2174,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
+    "/:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
       "bytes": 8290,
       "imports": [
         {
@@ -2096,14 +2198,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
+          "path": "/:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
+    "/:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
       "bytes": 7630,
       "imports": [
         {
@@ -2127,14 +2229,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
+    "/:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
       "bytes": 12693,
       "imports": [
         {
@@ -2158,24 +2260,24 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
+          "path": "/:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
+          "path": "/:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js",
+          "path": "/:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
+    "/:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
       "bytes": 1345,
       "imports": [
         {
@@ -2186,7 +2288,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
+    "/:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
       "bytes": 14920,
       "imports": [
         {
@@ -2210,19 +2312,19 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js",
+          "path": "/:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
+    "/:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
       "bytes": 35383,
       "imports": [
         {
@@ -2246,27 +2348,27 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
+          "path": "/:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
+          "path": "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js",
+          "path": "/:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js",
+          "path": "/:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js",
+          "path": "/:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js"
         }
@@ -2274,7 +2376,7 @@
       "format": "esm"
     },
     "virtual:pricing": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -2287,7 +2389,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js",
+          "path": "/:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js"
         },
@@ -2304,12 +2406,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js": {
+    "/:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js": {
       "bytes": 1059,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
+    "/:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
       "bytes": 1566,
       "imports": [
         {
@@ -2320,7 +2422,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
+    "/:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
       "bytes": 921,
       "imports": [
         {
@@ -2331,7 +2433,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
+    "/:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
       "bytes": 1545,
       "imports": [
         {
@@ -2342,7 +2444,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
+    "/:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
       "bytes": 1210,
       "imports": [
         {
@@ -2353,7 +2455,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
+    "/:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
       "bytes": 1560,
       "imports": [
         {
@@ -2364,7 +2466,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
+    "/:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
       "bytes": 1562,
       "imports": [
         {
@@ -2375,7 +2477,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js": {
+    "/:https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js": {
       "bytes": 615,
       "imports": [
         {
@@ -2386,12 +2488,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK-0.js": {
+    "/:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js": {
+    "/:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js": {
       "bytes": 9865,
       "imports": [
         {
@@ -2415,47 +2517,47 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js",
+          "path": "/:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js",
+          "path": "/:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js",
+          "path": "/:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
+          "path": "/:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js",
+          "path": "/:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
+          "path": "/:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js",
+          "path": "/:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js",
+          "path": "/:https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK-0.js",
+          "path": "/:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK-0.js",
           "kind": "import-statement",
           "original": "./inWBH4dIK-0.js"
         }
@@ -2463,7 +2565,7 @@
       "format": "esm"
     },
     "virtual:rich": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -2476,7 +2578,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js",
+          "path": "/:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js"
         },
@@ -2493,12 +2595,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
+    "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
+    "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
       "bytes": 23634,
       "imports": [
         {
@@ -2517,19 +2619,19 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
+          "path": "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
           "kind": "dynamic-import",
           "original": "./b9ZvTRprK-0.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js": {
+    "/:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
+    "/:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
       "bytes": 11571,
       "imports": [
         {
@@ -2553,22 +2655,22 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js",
+          "path": "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
+          "path": "/:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
+          "path": "/:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js",
+          "path": "/:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU-0.js",
           "kind": "import-statement",
           "original": "./bhAfNR9wU-0.js"
         }
@@ -2576,7 +2678,7 @@
       "format": "esm"
     },
     "virtual:collection": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -2589,7 +2691,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js",
+          "path": "/:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js"
         },
@@ -2606,12 +2708,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/phosphor-icons/House.js@0.0.53": {
+    "/:https://framer.com/m/phosphor-icons/House.js@0.0.53": {
       "bytes": 4064,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
+    "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
       "bytes": 21734,
       "imports": [
         {
@@ -2640,24 +2742,24 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0",
+          "path": "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/icon-nullstate.js@0.7.0"
         },
         {
-          "path": "https :https://framer.com/m/phosphor-icons/House.js@0.0.53",
+          "path": "/:https://framer.com/m/phosphor-icons/House.js@0.0.53",
           "kind": "import-statement",
           "original": "https://framer.com/m/phosphor-icons/House.js@0.0.53"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
+          "path": "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js": {
+    "/:https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js": {
       "bytes": 4501,
       "imports": [
         {
@@ -2668,7 +2770,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
+    "/:https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
       "bytes": 2568,
       "imports": [
         {
@@ -2679,7 +2781,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js": {
+    "/:https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js": {
       "bytes": 881,
       "imports": [
         {
@@ -2690,7 +2792,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
+    "/:https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
       "bytes": 12524,
       "imports": [
         {
@@ -2714,14 +2816,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js",
+          "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
+    "/:https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
       "bytes": 23938,
       "imports": [
         {
@@ -2745,32 +2847,32 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js",
+          "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js",
+          "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js",
+          "path": "/:https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js",
+          "path": "/:https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js",
+          "path": "/:https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js",
+          "path": "/:https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js"
         }
@@ -2778,7 +2880,7 @@
       "format": "esm"
     },
     "virtual:card": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -2791,7 +2893,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js",
+          "path": "/:https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js"
         },
@@ -2808,12 +2910,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/hero-icons/Home.js@0.0.27": {
+    "/:https://framer.com/m/hero-icons/Home.js@0.0.27": {
       "bytes": 487,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
+    "/:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
       "bytes": 10232,
       "imports": [
         {
@@ -2842,24 +2944,24 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0",
+          "path": "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/icon-nullstate.js@0.7.0"
         },
         {
-          "path": "https :https://framer.com/m/hero-icons/Home.js@0.0.27",
+          "path": "/:https://framer.com/m/hero-icons/Home.js@0.0.27",
           "kind": "import-statement",
           "original": "https://framer.com/m/hero-icons/Home.js@0.0.27"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
+          "path": "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/framer/useConstant.js@^1.0.0": {
+    "/:https://framer.com/m/framer/useConstant.js@^1.0.0": {
       "bytes": 355,
       "imports": [
         {
@@ -2870,18 +2972,18 @@
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/framer/randomID.js@^2.0.0": {
+    "/:https://framer.com/m/framer/randomID.js@^2.0.0": {
       "bytes": 1354,
       "imports": [
         {
-          "path": "https :https://framer.com/m/framer/useConstant.js@^1.0.0",
+          "path": "/:https://framer.com/m/framer/useConstant.js@^1.0.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/useConstant.js@^1.0.0"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
+    "/:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
       "bytes": 29202,
       "imports": [
         {
@@ -2905,14 +3007,14 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/randomID.js@^2.0.0",
+          "path": "/:https://framer.com/m/framer/randomID.js@^2.0.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/randomID.js@^2.0.0"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
+    "/:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
       "bytes": 58165,
       "imports": [
         {
@@ -2936,12 +3038,12 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js",
+          "path": "/:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js",
+          "path": "/:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js"
         }
@@ -2949,7 +3051,7 @@
       "format": "esm"
     },
     "virtual:menus": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -2962,7 +3064,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js",
+          "path": "/:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js"
         },
@@ -2979,7 +3081,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
+    "/:https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
       "bytes": 12535,
       "imports": [
         {
@@ -3006,7 +3108,7 @@
       "format": "esm"
     },
     "virtual:input": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -3019,7 +3121,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js",
+          "path": "/:https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js"
         },
@@ -3036,17 +3138,17 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc-0.js": {
+    "/:https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg-0.js": {
+    "/:https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg-0.js": {
       "bytes": 125,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js": {
+    "/:https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js": {
       "bytes": 13183,
       "imports": [
         {
@@ -3070,14 +3172,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg-0.js",
+          "path": "/:https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg-0.js",
           "kind": "import-statement",
           "original": "./UOW9Q_5Hg-0.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js": {
+    "/:https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js": {
       "bytes": 15165,
       "imports": [
         {
@@ -3101,12 +3203,12 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc-0.js",
+          "path": "/:https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc-0.js",
           "kind": "import-statement",
           "original": "./sbQWEtsSc-0.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js",
+          "path": "/:https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js"
         }
@@ -3114,7 +3216,7 @@
       "format": "esm"
     },
     "virtual:form": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -3127,7 +3229,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js",
+          "path": "/:https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js"
         },
@@ -3144,7 +3246,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js": {
+    "/:https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js": {
       "bytes": 13785,
       "imports": [
         {
@@ -3170,7 +3272,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js": {
+    "/:https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js": {
       "bytes": 34297,
       "imports": [
         {
@@ -3194,7 +3296,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js",
+          "path": "/:https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js"
         }
@@ -3202,7 +3304,7 @@
       "format": "esm"
     },
     "virtual:GrowthSpaceMenu": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -3215,7 +3317,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js",
+          "path": "/:https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js"
         },
@@ -3232,7 +3334,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
+    "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
       "bytes": 14113,
       "imports": [
         {
@@ -3256,14 +3358,14 @@
           "external": true
         },
         {
-          "path": "https :https://esm.sh/@motionone/dom",
+          "path": "/:https://esm.sh/@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         }
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/framer/store.js@^1.0.0": {
+    "/:https://framer.com/m/framer/store.js@^1.0.0": {
       "bytes": 1443,
       "imports": [
         {
@@ -3279,7 +3381,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js": {
+    "/:https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js": {
       "bytes": 2091,
       "imports": [
         {
@@ -3288,7 +3390,7 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/store.js@^1.0.0",
+          "path": "/:https://framer.com/m/framer/store.js@^1.0.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/store.js@^1.0.0"
         },
@@ -3300,7 +3402,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js": {
+    "/:https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js": {
       "bytes": 4460,
       "imports": [
         {
@@ -3311,7 +3413,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js": {
+    "/:https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js": {
       "bytes": 4367,
       "imports": [
         {
@@ -3322,7 +3424,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js": {
+    "/:https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js": {
       "bytes": 10809,
       "imports": [
         {
@@ -3333,7 +3435,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js": {
+    "/:https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js": {
       "bytes": 4373,
       "imports": [
         {
@@ -3344,7 +3446,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js": {
+    "/:https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js": {
       "bytes": 4367,
       "imports": [
         {
@@ -3355,7 +3457,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js": {
+    "/:https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js": {
       "bytes": 10827,
       "imports": [
         {
@@ -3366,7 +3468,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js": {
+    "/:https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js": {
       "bytes": 10793,
       "imports": [
         {
@@ -3377,7 +3479,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js": {
+    "/:https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js": {
       "bytes": 1152,
       "imports": [
         {
@@ -3388,7 +3490,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js": {
+    "/:https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js": {
       "bytes": 10718,
       "imports": [
         {
@@ -3399,7 +3501,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js": {
+    "/:https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js": {
       "bytes": 6833,
       "imports": [
         {
@@ -3425,12 +3527,12 @@
       ],
       "format": "esm"
     },
-    "https :https://framer.com/m/phosphor-icons/House.js@0.0.57": {
+    "/:https://framer.com/m/phosphor-icons/House.js@0.0.57": {
       "bytes": 3354,
       "imports": [],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js": {
+    "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js": {
       "bytes": 25439,
       "imports": [
         {
@@ -3459,24 +3561,24 @@
           "external": true
         },
         {
-          "path": "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0",
+          "path": "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0",
           "kind": "import-statement",
           "original": "https://framer.com/m/framer/icon-nullstate.js@0.7.0"
         },
         {
-          "path": "https :https://framer.com/m/phosphor-icons/House.js@0.0.57",
+          "path": "/:https://framer.com/m/phosphor-icons/House.js@0.0.57",
           "kind": "import-statement",
           "original": "https://framer.com/m/phosphor-icons/House.js@0.0.57"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
+          "path": "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js": {
+    "/:https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js": {
       "bytes": 21331,
       "imports": [
         {
@@ -3500,14 +3602,14 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js",
+          "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js": {
+    "/:https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js": {
       "bytes": 30609,
       "imports": [
         {
@@ -3531,29 +3633,29 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js",
+          "path": "/:https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js",
+          "path": "/:https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
+          "path": "/:https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js",
+          "path": "/:https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js": {
+    "/:https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js": {
       "bytes": 14597,
       "imports": [
         {
@@ -3577,19 +3679,19 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
+          "path": "/:https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js",
+          "path": "/:https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js": {
+    "/:https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js": {
       "bytes": 24382,
       "imports": [
         {
@@ -3613,29 +3715,29 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js",
+          "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
+          "path": "/:https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js",
+          "path": "/:https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js",
+          "path": "/:https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js"
         }
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js": {
+    "/:https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js": {
       "bytes": 183249,
       "imports": [
         {
@@ -3659,82 +3761,82 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js",
+          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js",
+          "path": "/:https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js",
+          "path": "/:https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js",
+          "path": "/:https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js",
+          "path": "/:https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js",
+          "path": "/:https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
+          "path": "/:https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js",
+          "path": "/:https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js",
+          "path": "/:https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js",
+          "path": "/:https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js",
+          "path": "/:https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js",
+          "path": "/:https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js",
+          "path": "/:https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js",
+          "path": "/:https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js",
+          "path": "/:https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js",
+          "path": "/:https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js"
         }
@@ -3742,7 +3844,7 @@
       "format": "esm"
     },
     "virtual:issue-17": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -3755,7 +3857,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js",
+          "path": "/:https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js"
         },
@@ -3772,7 +3874,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js": {
+    "/:https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js": {
       "bytes": 1556,
       "imports": [
         {
@@ -3783,7 +3885,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js": {
+    "/:https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js": {
       "bytes": 3062,
       "imports": [
         {
@@ -3794,7 +3896,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js": {
+    "/:https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js": {
       "bytes": 3059,
       "imports": [
         {
@@ -3805,7 +3907,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js": {
+    "/:https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js": {
       "bytes": 1168,
       "imports": [
         {
@@ -3816,7 +3918,7 @@
       ],
       "format": "esm"
     },
-    "https :https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js": {
+    "/:https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js": {
       "bytes": 46082,
       "imports": [
         {
@@ -3840,22 +3942,22 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js",
+          "path": "/:https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js",
+          "path": "/:https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js",
+          "path": "/:https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js"
         },
         {
-          "path": "https :https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js",
+          "path": "/:https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js"
         }
@@ -3863,7 +3965,7 @@
       "format": "esm"
     },
     "virtual:footer": {
-      "bytes": 2155,
+      "bytes": 2043,
       "imports": [
         {
           "path": "react",
@@ -3876,7 +3978,7 @@
           "external": true
         },
         {
-          "path": "https :https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js",
+          "path": "/:https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js",
           "kind": "import-statement",
           "original": "https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js"
         },
@@ -3898,7 +4000,7 @@
     "footer.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -3968,52 +4070,52 @@
       "entryPoint": "virtual:footer",
       "inputs": {
         "virtual:footer": {
-          "bytesInOutput": 901
+          "bytesInOutput": 861
         },
-        "https :https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js": {
+        "/:https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js": {
           "bytesInOutput": 44631
         },
-        "https :https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js": {
+        "/:https://framerusercontent.com/modules/eNnQ1ZdHUmzsHk1aAI7N/mHTG6Ne7cOnjVjw9xku4/dSHL72ao3.js": {
           "bytesInOutput": 1150
         },
-        "https :https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js": {
+        "/:https://framerusercontent.com/modules/bGOTCzIGxoWJr3Wuz4mh/tHLMvDlvPZRc4dqzFgO2/i59KN99_1.js": {
           "bytesInOutput": 2674
         },
-        "https :https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js": {
+        "/:https://framerusercontent.com/modules/irLlCycN2tZvFl2yRxLv/ot6jspJ2FWpXQbiTXl7S/LlxBF921R.js": {
           "bytesInOutput": 2671
         },
-        "https :https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js": {
+        "/:https://framerusercontent.com/modules/qHuLL7qth8TBDlkenpIl/NYA6mK3mY403YCz2vOvv/stylesPresetLink.js": {
           "bytesInOutput": 780
         }
       },
-      "bytes": 53563
+      "bytes": 53500
     },
-    "b9ZvTRprK-0-5ND3UNUE.js": {
+    "chunks/b9ZvTRprK-0-XD4Y45G2.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         }
       ],
       "exports": [
         "__FramerMetadata__"
       ],
-      "entryPoint": "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
+      "entryPoint": "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js",
       "inputs": {
-        "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
+        "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK-0.js": {
           "bytesInOutput": 90
         }
       },
-      "bytes": 259
+      "bytes": 254
     },
     "rich.js": {
       "imports": [
         {
-          "path": "chunk-PMCOLWXI.js",
+          "path": "chunks/chunk-SB5JQL4S.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4088,40 +4190,40 @@
       "entryPoint": "virtual:rich",
       "inputs": {
         "virtual:rich": {
-          "bytesInOutput": 901
+          "bytesInOutput": 861
         },
-        "https :https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js": {
+        "/:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js": {
           "bytesInOutput": 7224
         },
-        "https :https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js": {
+        "/:https://framerusercontent.com/modules/wi21TArjvX6nkzQEaAmf/Y5NZWwXVsjJSElcszTtu/componentPresets.js": {
           "bytesInOutput": 749
         },
-        "https :https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
+        "/:https://framerusercontent.com/modules/n1EjexoroiRcSGDufAiT/Ttu4BpFjUW7CyDA8u2eH/AUU0Jib9Q.js": {
           "bytesInOutput": 1163
         },
-        "https :https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
+        "/:https://framerusercontent.com/modules/pmCNWk02kBSFqYDoAcuS/zew4HsX3PJlNJQ8MIXMH/bEBzAVPVC.js": {
           "bytesInOutput": 533
         },
-        "https :https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
+        "/:https://framerusercontent.com/modules/ocbgsYtfVWyZS17mEUPC/5jdPjc5Q3wqYVWnCQ5SG/ItPlz8w6C.js": {
           "bytesInOutput": 822
         },
-        "https :https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
+        "/:https://framerusercontent.com/modules/TmvBe3ERT2Bi6kDXXr4e/jSMrrcO8AmL0LZPUvsLB/XFgI73CRg.js": {
           "bytesInOutput": 1174
         },
-        "https :https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js": {
+        "/:https://framerusercontent.com/modules/BOiZ9PHgH0ptXwEl9DVh/6VfL7xjVPXpQgbV9fFyB/ZpET7_TPl.js": {
           "bytesInOutput": 227
         }
       },
-      "bytes": 13852
+      "bytes": 13786
     },
     "collection.js": {
       "imports": [
         {
-          "path": "chunk-PMCOLWXI.js",
+          "path": "chunks/chunk-SB5JQL4S.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4170,7 +4272,7 @@
           "external": true
         },
         {
-          "path": "b9ZvTRprK-0-5ND3UNUE.js",
+          "path": "chunks/b9ZvTRprK-0-XD4Y45G2.js",
           "kind": "dynamic-import"
         },
         {
@@ -4190,18 +4292,18 @@
       "entryPoint": "virtual:collection",
       "inputs": {
         "virtual:collection": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
+        "/:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
           "bytesInOutput": 9854
         },
-        "https :https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
-          "bytesInOutput": 22363
+        "/:https://framerusercontent.com/modules/j5I5MZy6GVRn5AhwxyWI/FnPiEZbiYzrlknMJFJCT/b9ZvTRprK.js": {
+          "bytesInOutput": 22370
         }
       },
-      "bytes": 33666
+      "bytes": 33632
     },
-    "chunk-PMCOLWXI.js": {
+    "chunks/chunk-SB5JQL4S.js": {
       "imports": [
         {
           "path": "unframer",
@@ -4223,27 +4325,27 @@
         "fonts2"
       ],
       "inputs": {
-        "https :https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
+        "/:https://framerusercontent.com/modules/af038j8XECC6IBYzEX5J/G0Kt61LEjzVwpOoI7bpD/cEDqdLdxL.js": {
           "bytesInOutput": 1139
         },
-        "https :https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
+        "/:https://framerusercontent.com/modules/dOJqproc6PnOu6ucPIUP/zYif9BNLbymY3JiePYyD/oeabGUH1U.js": {
           "bytesInOutput": 1172
         }
       },
-      "bytes": 2591
+      "bytes": 2581
     },
     "card.js": {
       "imports": [
         {
-          "path": "chunk-5NOLNI3O.js",
+          "path": "chunks/chunk-ZMVLPDAF.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-DPO7TK4A.js",
+          "path": "chunks/chunk-S42N6QHZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4353,40 +4455,40 @@
       "entryPoint": "virtual:card",
       "inputs": {
         "virtual:card": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
+        "/:https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
           "bytesInOutput": 22248
         },
-        "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
+        "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/CAjjxbTJBxHwH1MagCef/Phosphor.js": {
           "bytesInOutput": 20959
         },
-        "https :https://framer.com/m/phosphor-icons/House.js@0.0.53": {
+        "/:https://framer.com/m/phosphor-icons/House.js@0.0.53": {
           "bytesInOutput": 3812
         },
-        "https :https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js": {
+        "/:https://framerusercontent.com/modules/5eRz6tq1Npk5vmhePrXU/n3ElTPIomZl8KvIAfB6e/GPDKd6Ic6.js": {
           "bytesInOutput": 4095
         },
-        "https :https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
+        "/:https://framerusercontent.com/modules/gCvR1QYSauSuqLNl6iXN/qhRKJCOtHZtL8Fc6ZC8o/PWn1k_MD2.js": {
           "bytesInOutput": 2180
         },
-        "https :https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js": {
+        "/:https://framerusercontent.com/modules/2kAzXUriLe8jCJ21lwbH/U3fVOCM1YhAggVQivs7o/ygZFiHa3w.js": {
           "bytesInOutput": 493
         },
-        "https :https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
+        "/:https://framerusercontent.com/modules/AO0ropceTgrkWLzadaTB/66aD3wpUPVI4b9ZsqDI2/FLXzApIyg.js": {
           "bytesInOutput": 11572
         }
       },
-      "bytes": 67412
+      "bytes": 67348
     },
     "menus.js": {
       "imports": [
         {
-          "path": "chunk-DPO7TK4A.js",
+          "path": "chunks/chunk-S42N6QHZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4486,33 +4588,33 @@
       "entryPoint": "virtual:menus",
       "inputs": {
         "virtual:menus": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
+        "/:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
           "bytesInOutput": 57609
         },
-        "https :https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
+        "/:https://framerusercontent.com/modules/hKjtTuWGYB451ckw6eTN/rQJeCcsGr1fSnWO0FT2G/Hero.js": {
           "bytesInOutput": 9348
         },
-        "https :https://framer.com/m/hero-icons/Home.js@0.0.27": {
+        "/:https://framer.com/m/hero-icons/Home.js@0.0.27": {
           "bytesInOutput": 460
         },
-        "https :https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
+        "/:https://framerusercontent.com/modules/PLP5SWQpFPuFrn7tLf3t/suo2OcdmUu5xmjtBXZ7I/dkRfXNUhM.js": {
           "bytesInOutput": 27041
         },
-        "https :https://framer.com/m/framer/useConstant.js@^1.0.0": {
+        "/:https://framer.com/m/framer/useConstant.js@^1.0.0": {
           "bytesInOutput": 185
         },
-        "https :https://framer.com/m/framer/randomID.js@^2.0.0": {
+        "/:https://framer.com/m/framer/randomID.js@^2.0.0": {
           "bytesInOutput": 314
         }
       },
-      "bytes": 96864
+      "bytes": 96793
     },
     "input.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4562,18 +4664,18 @@
       "entryPoint": "virtual:input",
       "inputs": {
         "virtual:input": {
-          "bytesInOutput": 901
+          "bytesInOutput": 861
         },
-        "https :https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
+        "/:https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
           "bytesInOutput": 11726
         }
       },
-      "bytes": 12854
+      "bytes": 12816
     },
     "form.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4643,21 +4745,21 @@
       "entryPoint": "virtual:form",
       "inputs": {
         "virtual:form": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js": {
+        "/:https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js": {
           "bytesInOutput": 14026
         },
-        "https :https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js": {
+        "/:https://framerusercontent.com/modules/QI6PpxG0dTiaDxkWq7Al/YsOwzCba5epdncMnAbzH/UOW9Q_5Hg.js": {
           "bytesInOutput": 11880
         }
       },
-      "bytes": 27244
+      "bytes": 27196
     },
     "GrowthSpaceMenu.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -4727,29 +4829,29 @@
       "entryPoint": "virtual:GrowthSpaceMenu",
       "inputs": {
         "virtual:GrowthSpaceMenu": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js": {
+        "/:https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js": {
           "bytesInOutput": 33537
         },
-        "https :https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js": {
+        "/:https://framerusercontent.com/modules/yArWs6ex5QhDFP1vVzzG/nWZxWlOxGK4ctlz9WBMq/QRM7kvT9O.js": {
           "bytesInOutput": 12980
         }
       },
-      "bytes": 47877
+      "bytes": 47829
     },
     "issue-17.js": {
       "imports": [
         {
-          "path": "chunk-4RAAXAHX.js",
+          "path": "chunks/chunk-ZTDKAIX2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-DPO7TK4A.js",
+          "path": "chunks/chunk-S42N6QHZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -5009,75 +5111,75 @@
       "entryPoint": "virtual:issue-17",
       "inputs": {
         "virtual:issue-17": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js": {
+        "/:https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js": {
           "bytesInOutput": 180023
         },
-        "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
+        "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
           "bytesInOutput": 13608
         },
-        "https :https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js": {
+        "/:https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js": {
           "bytesInOutput": 324
         },
-        "https :https://framer.com/m/framer/store.js@^1.0.0": {
+        "/:https://framer.com/m/framer/store.js@^1.0.0": {
           "bytesInOutput": 1248
         },
-        "https :https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js": {
+        "/:https://framerusercontent.com/modules/43EmfvHH62m3lOy74mVg/zGg3MMFAUCpGbz8MxyUM/C4qLxw6HR.js": {
           "bytesInOutput": 4054
         },
-        "https :https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js": {
+        "/:https://framerusercontent.com/modules/p06q8NLZ0RePOqSxQ1GN/cdpQcYJb0b1wCveI9qK5/D9zAP56xH.js": {
           "bytesInOutput": 3979
         },
-        "https :https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js": {
+        "/:https://framerusercontent.com/modules/215PQYBT2gfBzVYVILbI/J1Uyre2wsoMTfQJy7nl5/KvesxXs63.js": {
           "bytesInOutput": 10421
         },
-        "https :https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js": {
+        "/:https://framerusercontent.com/modules/pSmvJELnKkrF5WSbpZIa/LXvfSP0h5noyZVQ13o7W/n0u86onJX.js": {
           "bytesInOutput": 3985
         },
-        "https :https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js": {
+        "/:https://framerusercontent.com/modules/fSjr0qJHpUe5CdsI6Lg2/QO655dd1q8kNTGTH75xT/NM8opoDhC.js": {
           "bytesInOutput": 3979
         },
-        "https :https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js": {
+        "/:https://framerusercontent.com/modules/oW4xUsDvku8XpWeUG8ff/KL8MPBgsBn0O2eWaKGDl/ob0AYC2e3.js": {
           "bytesInOutput": 10439
         },
-        "https :https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js": {
+        "/:https://framerusercontent.com/modules/kFp95mNYELgEVqKkw1Dv/CwOS425h2HXmoJUMcYjF/Otvos4bwu.js": {
           "bytesInOutput": 10405
         },
-        "https :https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js": {
+        "/:https://framerusercontent.com/modules/xkXIRppwC3dqPoVD9iB9/CdSZMVq76shfRAIta3Ao/uR_FUI8ZK.js": {
           "bytesInOutput": 764
         },
-        "https :https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js": {
+        "/:https://framerusercontent.com/modules/oP5kmsHlQbFfgjnbmAKR/STmC6fU0ZoEgVFZgLoTk/vS6MrDfuH.js": {
           "bytesInOutput": 10330
         },
-        "https :https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js": {
+        "/:https://framerusercontent.com/modules/9mGnKOZ7G7r9HueAPUgw/qTHe9va2asvhgq5kPXkp/Dfod75fml.js": {
           "bytesInOutput": 6208
         },
-        "https :https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js": {
+        "/:https://framerusercontent.com/modules/25VHiYFb6kH7eGYZ5C4T/K9gBezzy7DbOB05tuo32/DgNoyF9cS.js": {
           "bytesInOutput": 29164
         },
-        "https :https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js": {
+        "/:https://framerusercontent.com/modules/scY2fc6SlmvxLBxWYpSm/IdJRu7l6cEpLDdf78tPv/peihCD8_0.js": {
           "bytesInOutput": 21558
         },
-        "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js": {
+        "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js": {
           "bytesInOutput": 24791
         },
-        "https :https://framer.com/m/phosphor-icons/House.js@0.0.57": {
+        "/:https://framer.com/m/phosphor-icons/House.js@0.0.57": {
           "bytesInOutput": 3106
         },
-        "https :https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js": {
+        "/:https://framerusercontent.com/modules/QTfzFG5Ts2y5bqrHMzZM/aTuekoDcel91KUGxmNoa/dJKGcPX7V.js": {
           "bytesInOutput": 13843
         },
-        "https :https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js": {
+        "/:https://framerusercontent.com/modules/ymf53fLxcd2My2TRmM1D/dAYHePdALqRHRqrWhxnx/g4XOQYV2T.js": {
           "bytesInOutput": 23199
         }
       },
-      "bytes": 379131
+      "bytes": 378987
     },
     "fylo.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -5417,118 +5519,115 @@
       "entryPoint": "virtual:fylo",
       "inputs": {
         "virtual:fylo": {
-          "bytesInOutput": 905
-        },
-        "https :https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
-          "bytesInOutput": 181021
-        },
-        "https :https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
-          "bytesInOutput": 5678
-        },
-        "https :https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
-          "bytesInOutput": 109707
-        },
-        "https :https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
-          "bytesInOutput": 6190
-        },
-        "https :https://esm.sh/stable/react@18.3.1/esnext/react.mjs": {
-          "bytesInOutput": 11631
-        },
-        "https :https://esm.sh/v135/node_events.js": {
-          "bytesInOutput": 7072
-        },
-        "https :https://esm.sh/v135/node_process.js": {
-          "bytesInOutput": 2271
-        },
-        "https :https://esm.sh/stable/react@18.2.0/esnext/react.mjs": {
-          "bytesInOutput": 12710
-        },
-        "https :https://esm.sh/v135/typewriter-effect@2.21.0/esnext/typewriter-effect.mjs": {
-          "bytesInOutput": 49810
-        },
-        "https :https://esm.sh/typewriter-effect": {
-          "bytesInOutput": 0
-        },
-        "https :https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
-          "bytesInOutput": 20684
-        },
-        "https :https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
-          "bytesInOutput": 54029
-        },
-        "https :https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
-          "bytesInOutput": 7944
-        },
-        "https :https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
-          "bytesInOutput": 1425
-        },
-        "https :https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
-          "bytesInOutput": 94
-        },
-        "https :https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
-          "bytesInOutput": 173
-        },
-        "https :https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
-          "bytesInOutput": 34
-        },
-        "https :https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
-          "bytesInOutput": 95
-        },
-        "https :https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
-          "bytesInOutput": 32
-        },
-        "https :https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
-          "bytesInOutput": 56
-        },
-        "https :https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
-          "bytesInOutput": 33
-        },
-        "https :https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
-          "bytesInOutput": 251
-        },
-        "https :https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
-          "bytesInOutput": 1694
-        },
-        "https :https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
-          "bytesInOutput": 87
-        },
-        "https :https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
-          "bytesInOutput": 103
-        },
-        "https :https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
-          "bytesInOutput": 33
-        },
-        "https :https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
-          "bytesInOutput": 917
-        },
-        "https :https://framer.com/m/framer/lodash.js@0.3.0": {
-          "bytesInOutput": 4081
-        },
-        "https :https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
           "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
+        "/:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
+          "bytesInOutput": 181021
+        },
+        "/:https://framerusercontent.com/modules/gh5xmpM9GHT9MXnnMpPc/yx3Yu3CvNlklDmNPtEF9/Animator.js": {
+          "bytesInOutput": 5678
+        },
+        "/:https://framerusercontent.com/modules/Oud72c2V1Mr3Jz9fGInx/PMc2ZIa5dlMK1YzuFBmG/C_odUWZqr.js": {
+          "bytesInOutput": 109707
+        },
+        "/:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
+          "bytesInOutput": 6190
+        },
+        "/:https://esm.sh/node/process.mjs": {
+          "bytesInOutput": 7240
+        },
+        "/:https://esm.sh/react@^18.3.1?target=es2022": {
+          "bytesInOutput": 1048
+        },
+        "/:https://esm.sh/react@18.3.1/es2022/react.mjs": {
+          "bytesInOutput": 10615
+        },
+        "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs": {
+          "bytesInOutput": 49742
+        },
+        "/:https://esm.sh/typewriter-effect": {
+          "bytesInOutput": 0
+        },
+        "/:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
+          "bytesInOutput": 20684
+        },
+        "/:https://framerusercontent.com/modules/GuWa1Ud162ubWf1k1mKH/kGi9lI9nvgupW4e2VxtJ/FpOKcRGFb.js": {
+          "bytesInOutput": 54029
+        },
+        "/:https://framerusercontent.com/modules/TjsuAE5glU2n7MoNSdHk/uk4tNJP8azIVk1aBSiz4/Slider_1.js": {
+          "bytesInOutput": 7944
+        },
+        "/:https://framerusercontent.com/modules/VTUDdizacRHpwbkOamr7/AykinQJbgwl92LvMGZwu/constants.js": {
+          "bytesInOutput": 1425
+        },
+        "/:https://framerusercontent.com/modules/D4TWeLfcxT6Tysr2BlYg/iZjmqdxVx1EOiM3k1FaW/useOnNavigationTargetChange.js": {
+          "bytesInOutput": 94
+        },
+        "/:https://framerusercontent.com/modules/ExNgrA7EJTKUPpH6vIlN/eiOrSJ2Ab5M9jPCvVwUz/useConstant.js": {
+          "bytesInOutput": 173
+        },
+        "/:https://framerusercontent.com/modules/D2Lz5CmnNVPZFFiZXalt/QaCzPbriZBfXWZIIycFI/colorFromToken.js": {
+          "bytesInOutput": 34
+        },
+        "/:https://framerusercontent.com/modules/3mKFSGQqKHV82uOV1eBc/5fbRLvOpxZC0JOXugvwm/isMotionValue.js": {
+          "bytesInOutput": 95
+        },
+        "/:https://framerusercontent.com/modules/xDiQsqBGXzmMsv7AlEVy/uhunpMiNsbXxzjlXsg1y/useUniqueClassName.js": {
+          "bytesInOutput": 32
+        },
+        "/:https://framerusercontent.com/modules/ETACN5BJyFTSo0VVDJfu/NHRqowOiXkF9UwOzczF7/variantUtils.js": {
+          "bytesInOutput": 56
+        },
+        "/:https://framerusercontent.com/modules/eMBrwoqQK7h6mEeGQUH8/GuplvPJVjmxpk9zqOTcb/isBrowser.js": {
+          "bytesInOutput": 33
+        },
+        "/:https://framerusercontent.com/modules/v9AWX2URmiYsHf7GbctE/XxKAZ9KlhWqf5x1JMyyF/useOnChange.js": {
+          "bytesInOutput": 251
+        },
+        "/:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/fSIr3AOAYbGlfSPgXpYu/useAutoMotionValue.js": {
+          "bytesInOutput": 1694
+        },
+        "/:https://framerusercontent.com/modules/cuQH4dmpDnV8YK1mSgQX/KqRXqunFjE6ufhpc7ZRu/useFontControls.js": {
+          "bytesInOutput": 87
+        },
+        "/:https://framerusercontent.com/modules/afBE9Yx1W6bY5q32qPxe/m3q7puE2tbo1S2C0s0CT/useRenderTarget.js": {
+          "bytesInOutput": 103
+        },
+        "/:https://framerusercontent.com/modules/zGkoP8tPDCkoBzMdt5uq/0zFSjxIYliHxrQQnryFX/useControlledState.js": {
+          "bytesInOutput": 33
+        },
+        "/:https://framerusercontent.com/modules/5SM58HxZHxjjv7aLMOgQ/WXz9i6mVki0bBCrKdqB3/propUtils.js": {
+          "bytesInOutput": 917
+        },
+        "/:https://framer.com/m/framer/lodash.js@0.3.0": {
+          "bytesInOutput": 4081
+        },
+        "/:https://framerusercontent.com/modules/VFd7g4pPpeQfOVRIoRr0/wzMpOw8WySsXu5Z3mOOv/ydC9w7qn8.js": {
+          "bytesInOutput": 865
+        },
+        "/:https://framerusercontent.com/modules/DT1hIxOdb4kno6gt2cr8/UCSXqWITtmuGmi2ZERWH/gGsg8DxuX.js": {
           "bytesInOutput": 9715
         },
-        "https :https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
-          "bytesInOutput": 10183
+        "/:https://framerusercontent.com/modules/XVtd2bf3UBXWeoE8atnJ/p0XqgJqJRcMVAc0XLYkI/O3yRlw71i.js": {
+          "bytesInOutput": 10214
         },
-        "https :https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
-          "bytesInOutput": 9473
+        "/:https://framerusercontent.com/modules/2hkg5XCE2rQboltCwgjw/PVmOOsL0Kqg5DoBKyDp4/vvRGywRFH.js": {
+          "bytesInOutput": 9489
         },
-        "https :https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
+        "/:https://framerusercontent.com/modules/dL0m3LArmiMN513smqCL/g2gwXdf8nbTcUnai1QUm/pSxPslti_.js": {
           "bytesInOutput": 44580
         }
       },
-      "bytes": 557803
+      "bytes": 542712
     },
     "hero.js": {
       "imports": [
         {
-          "path": "chunk-CQOEOO4E.js",
+          "path": "chunks/chunk-PORUKG3Q.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -5698,42 +5797,42 @@
       "entryPoint": "virtual:hero",
       "inputs": {
         "virtual:hero": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/1NkKyZrVuYXGqc3W1LCy/eaL2rwfV9.js": {
+        "/:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/SKXreSGrLeB8pMA2T5nf/eaL2rwfV9.js": {
           "bytesInOutput": 23108
         },
-        "https :https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
+        "/:https://framerusercontent.com/modules/wG3YWBlnMEy1hKfcXuby/HUpR1XxEarbMnFEDoFym/Test_2.js": {
           "bytesInOutput": 554
         },
-        "https :https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
+        "/:https://framerusercontent.com/modules/jcPFAQWGaONPqPbVInRU/ohk9CNdxjpIgzk7Nh895/Test.js": {
           "bytesInOutput": 597
         },
-        "https :https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
+        "/:https://framerusercontent.com/modules/jPZc4kIpXwA3A0T4XadM/zTYWUK52YjkLFCk3XxRD/jRlNrjZfR.js": {
           "bytesInOutput": 1076
         },
-        "https :https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
+        "/:https://framerusercontent.com/modules/cxD5eSzAs0tNpvGdn2nJ/2vsxoaX4sNoSzJsJfeTQ/ZSzgV3xdi.js": {
           "bytesInOutput": 2323
         },
-        "https :https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/y79djn5m3Ew9gwLCM6TB/fAeI1HtaF.js": {
-          "bytesInOutput": 6999
+        "/:https://framerusercontent.com/modules/ItFJpuMfOPOPAWALwRev/aKRCBXOamkbIpS9DeYqR/fAeI1HtaF.js": {
+          "bytesInOutput": 6970
         },
-        "https :https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/KhLdgeGrg37XOtd0N0JU/jijvTv89r.js": {
-          "bytesInOutput": 5248
+        "/:https://framerusercontent.com/modules/q5rmi04DimeC8RWfs9r1/AAht9RaiBTkTNpjDlg11/jijvTv89r.js": {
+          "bytesInOutput": 4647
         },
-        "https :https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
+        "/:https://framerusercontent.com/modules/smGVHfsuFu9f45Y8rp5v/si7ZQVFuLRmrxXAnzpGg/r20S5u2K1.js": {
           "bytesInOutput": 10715
         },
-        "https :https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
+        "/:https://framerusercontent.com/modules/8bzLzi9bMy6c8MKTcSp9/UU2W4i5bMHnFcddSjhiU/rWpbaXaRc.js": {
           "bytesInOutput": 3764
         }
       },
-      "bytes": 56677
+      "bytes": 55966
     },
     "framerNav.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -5883,37 +5982,37 @@
       "entryPoint": "virtual:framerNav",
       "inputs": {
         "virtual:framerNav": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js": {
+        "/:https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js": {
           "bytesInOutput": 34870
         },
-        "https :https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js": {
+        "/:https://framerusercontent.com/modules/euDwFeSwaU80taen07uo/UqqCE8F1R2yB2rNl3AyN/Vh4Yb6ijq.js": {
           "bytesInOutput": 7423
         },
-        "https :https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js": {
+        "/:https://framerusercontent.com/modules/0scrOn7O2aLVlhVMWhXF/iFNoOwTuNwQRqVlVVYed/Vv7lXSsrv.js": {
           "bytesInOutput": 5309
         },
-        "https :https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js": {
+        "/:https://framerusercontent.com/modules/h5NWUr2zThL8mxTuFoiD/NNhehG9sR9GaEUzPOHVB/jjuFZlrlF.js": {
           "bytesInOutput": 13722
         },
-        "https :https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js": {
+        "/:https://framerusercontent.com/modules/hP7GepOZhiRUVDuSMzGA/KSmZYjJTpixl4bS9QqHk/pPmogNY6m.js": {
           "bytesInOutput": 15465
         },
-        "https :https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js": {
+        "/:https://framerusercontent.com/modules/JQRKwZv6rgdZ4OfkcuSU/45PpCkD31n6caHb3DNDn/dQcuWx460.js": {
           "bytesInOutput": 13143
         }
       },
-      "bytes": 91800
+      "bytes": 91727
     },
     "logos.js": {
       "imports": [
         {
-          "path": "chunk-4RAAXAHX.js",
+          "path": "chunks/chunk-ZTDKAIX2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -5983,25 +6082,25 @@
       "entryPoint": "virtual:logos",
       "inputs": {
         "virtual:logos": {
-          "bytesInOutput": 901
+          "bytesInOutput": 861
         },
-        "https :https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
+        "/:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
           "bytesInOutput": 10596
         },
-        "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
+        "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/nFAy8p4fOASsyhPbo192/Ticker.js": {
           "bytesInOutput": 12459
         }
       },
-      "bytes": 24432
+      "bytes": 24391
     },
     "testimonials.js": {
       "imports": [
         {
-          "path": "chunk-4RAAXAHX.js",
+          "path": "chunks/chunk-ZTDKAIX2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -6096,63 +6195,84 @@
       "entryPoint": "virtual:testimonials",
       "inputs": {
         "virtual:testimonials": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
+        "/:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
           "bytesInOutput": 17563
         },
-        "https :https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
+        "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/72O11ApITvgaMZRvyQex/Ticker.js": {
           "bytesInOutput": 13521
         },
-        "https :https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
+        "/:https://framerusercontent.com/modules/obSJiemEnZB4VW3LOEb1/q6mJKqrhWJCzNTVQNqoI/rbf1DFpj4.js": {
           "bytesInOutput": 11697
         },
-        "https :https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
+        "/:https://framerusercontent.com/modules/k65C5CM4vrnU7z86tm3U/WVmDSbkqq8n5dyKIIdDR/Q4kC2bTJ2.js": {
           "bytesInOutput": 1050
         }
       },
-      "bytes": 45538
+      "bytes": 45482
     },
-    "chunk-4RAAXAHX.js": {
+    "chunks/chunk-ZTDKAIX2.js": {
       "imports": [],
       "exports": [
         "Et"
       ],
       "inputs": {
-        "https :https://esm.sh/v135/@motionone/utils@10.18.0/esnext/utils.mjs": {
+        "/:https://esm.sh/@motionone/utils@10.18.0/es2022/utils.mjs": {
           "bytesInOutput": 1319
         },
-        "https :https://esm.sh/v135/@motionone/easing@10.18.0/esnext/easing.mjs": {
+        "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/@motionone/easing@10.18.0/es2022/easing.mjs": {
           "bytesInOutput": 676
         },
-        "https :https://esm.sh/v135/@motionone/animation@10.18.0/esnext/animation.mjs": {
+        "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/@motionone/animation@10.18.0/es2022/animation.mjs": {
           "bytesInOutput": 3357
         },
-        "https :https://esm.sh/v135/hey-listen@1.0.8/esnext/hey-listen.mjs": {
+        "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/hey-listen@1.0.8/es2022/hey-listen.mjs": {
           "bytesInOutput": 24
         },
-        "https :https://esm.sh/v135/@motionone/types@10.17.1/esnext/types.mjs": {
+        "/:https://esm.sh/hey-listen@^1.0.8?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/@motionone/types@10.17.1/es2022/types.mjs": {
           "bytesInOutput": 209
         },
-        "https :https://esm.sh/v135/tslib@2.6.2/esnext/tslib.mjs": {
+        "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs": {
           "bytesInOutput": 407
         },
-        "https :https://esm.sh/v135/@motionone/generators@10.18.0/esnext/generators.mjs": {
+        "/:https://esm.sh/tslib@^2.3.1?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/@motionone/generators@10.18.0/es2022/generators.mjs": {
           "bytesInOutput": 2797
         },
-        "https :https://esm.sh/v135/@motionone/dom@10.18.0/esnext/dom.mjs": {
+        "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022": {
+          "bytesInOutput": 0
+        },
+        "/:https://esm.sh/@motionone/dom@10.18.0/es2022/dom.mjs": {
           "bytesInOutput": 12968
         },
-        "https :https://esm.sh/@motionone/dom": {
+        "/:https://esm.sh/@motionone/dom": {
           "bytesInOutput": 0
         }
       },
-      "bytes": 22358
+      "bytes": 22278
     },
     "menu-overlay.js": {
       "imports": [
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -6202,26 +6322,26 @@
       "entryPoint": "virtual:menu-overlay",
       "inputs": {
         "virtual:menu-overlay": {
-          "bytesInOutput": 901
+          "bytesInOutput": 861
         },
-        "https :https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
+        "/:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
           "bytesInOutput": 26801
         }
       },
-      "bytes": 27943
+      "bytes": 27905
     },
     "full-page.js": {
       "imports": [
         {
-          "path": "chunk-5NOLNI3O.js",
+          "path": "chunks/chunk-ZMVLPDAF.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-DPO7TK4A.js",
+          "path": "chunks/chunk-S42N6QHZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -6271,18 +6391,18 @@
       "entryPoint": "virtual:full-page",
       "inputs": {
         "virtual:full-page": {
-          "bytesInOutput": 901
+          "bytesInOutput": 861
         },
-        "https :https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js": {
+        "/:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js": {
           "bytesInOutput": 34880
         }
       },
-      "bytes": 36092
+      "bytes": 36068
     },
-    "chunk-5NOLNI3O.js": {
+    "chunks/chunk-ZMVLPDAF.js": {
       "imports": [
         {
-          "path": "chunk-DPO7TK4A.js",
+          "path": "chunks/chunk-S42N6QHZ.js",
           "kind": "import-statement"
         },
         {
@@ -6315,16 +6435,16 @@
         "Icon"
       ],
       "inputs": {
-        "https :https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
+        "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js": {
           "bytesInOutput": 18197
         },
-        "https :https://framer.com/m/phosphor-icons/House.js@0.0.50": {
+        "/:https://framer.com/m/phosphor-icons/House.js@0.0.50": {
           "bytesInOutput": 3835
         }
       },
-      "bytes": 22409
+      "bytes": 22394
     },
-    "chunk-DPO7TK4A.js": {
+    "chunks/chunk-S42N6QHZ.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -6353,23 +6473,23 @@
         "useIconSelection"
       ],
       "inputs": {
-        "https :https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
+        "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
           "bytesInOutput": 567
         },
-        "https :https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
+        "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
           "bytesInOutput": 1121
         }
       },
-      "bytes": 1912
+      "bytes": 1902
     },
     "pricing.js": {
       "imports": [
         {
-          "path": "chunk-CQOEOO4E.js",
+          "path": "chunks/chunk-PORUKG3Q.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunk-MLKGABMK.js",
+          "path": "chunks/chunk-WSFCRVEQ.js",
           "kind": "import-statement"
         },
         {
@@ -6509,33 +6629,33 @@
       "entryPoint": "virtual:pricing",
       "inputs": {
         "virtual:pricing": {
-          "bytesInOutput": 905
+          "bytesInOutput": 865
         },
-        "https :https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
+        "/:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
           "bytesInOutput": 34354
         },
-        "https :https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
+        "/:https://framerusercontent.com/modules/lag7sUsQW69DzJd7WTvQ/FqKg8FgbkD1HBi1tn2Bb/cRmkgGutV.js": {
           "bytesInOutput": 2305
         },
-        "https :https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
+        "/:https://framerusercontent.com/modules/naa0ugoTqrGMOULkYjia/aWdZ67n3P4gE06sKrUnR/cwMgH3g_H.js": {
           "bytesInOutput": 7475
         },
-        "https :https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
+        "/:https://framerusercontent.com/modules/fxMtDUxtbGhI6E06HMtO/xMwiIRCNzFyeeNmnJcMg/imqCP4fEz.js": {
           "bytesInOutput": 11795
         },
-        "https :https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
+        "/:https://framerusercontent.com/modules/xbEU1ZG7Y68ZIKffZz4a/cchwKlqxLlZvcck6NCmM/N3BIRIlrO.js": {
           "bytesInOutput": 6884
         },
-        "https :https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
+        "/:https://framerusercontent.com/modules/1gobdaiETEZYApPHkFW8/RAQ43YyjZfCUTli605Pd/j1CXYH1vu.js": {
           "bytesInOutput": 13860
         },
-        "https :https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
+        "/:https://framerusercontent.com/modules/irtADPc9MsWpaOZ5xWct/Cqtyndb7HgebXowgH7mP/tr0U97vbW.js": {
           "bytesInOutput": 957
         }
       },
-      "bytes": 79833
+      "bytes": 79757
     },
-    "chunk-CQOEOO4E.js": {
+    "chunks/chunk-PORUKG3Q.js": {
       "imports": [
         {
           "path": "unframer",
@@ -6565,19 +6685,19 @@
         "fonts3"
       ],
       "inputs": {
-        "https :https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
+        "/:https://framerusercontent.com/modules/dO0XaNyepaB8zJrTob4r/zcGv9PIZQV10xz8UC52a/aLfVqe1FC.js": {
           "bytesInOutput": 1077
         },
-        "https :https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
+        "/:https://framerusercontent.com/modules/isE4jHYyF7A7RdFya7TS/K3FFIef17dyAez6QnFto/Q4kC2bTJ2.js": {
           "bytesInOutput": 1068
         },
-        "https :https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
+        "/:https://framerusercontent.com/modules/rSbiLfsnHLTrF3vDy2qI/wwPZkJ3NWmc60aYUIYo1/eshFTHo2K.js": {
           "bytesInOutput": 1097
         }
       },
-      "bytes": 3658
+      "bytes": 3643
     },
-    "chunk-MLKGABMK.js": {
+    "chunks/chunk-WSFCRVEQ.js": {
       "imports": [],
       "exports": [
         "__export"
