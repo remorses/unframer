@@ -14,10 +14,10 @@ export interface Props {
     height?: any
     layoutId?: string
     "variant"?: 'Desktop-icon' | 'Mobile-icon' | 'Desktop' | 'Mobile'
-    "sVGCode"?: string
+    "svgcode"?: string
     "title"?: string
     "link"?: string
-    "exampleVariableDashesEtcXXSomething11"?: number
+    "exampleVariableDashesEtcXxsomething11"?: number
 }
 
 const MenuLinkFramerComponent = (props: Props) => any

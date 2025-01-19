@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "sVGCode"?: string
+    "svgcode"?: string
     "title"?: string
     "text"?: string
 }

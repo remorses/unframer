@@ -16,32 +16,56 @@ h1, h2, h3, h4, h5, h6, p, figure {
         
 :root {
     --token-0b0f3c36-e8dc-44cb-9980-3edcd9f78cf2: rgb(72, 86, 150);
+    --unframer-chambray: rgb(72, 86, 150);
     --token-1691cb44-c002-4542-9545-8a0801f91af2: rgb(231, 231, 231);
+    --unframer-gray: rgb(231, 231, 231);
     --token-36bb1a2d-632b-41b6-8e08-ee48dcf29873: rgb(16, 16, 16);
+    --unframer-off-black: rgb(16, 16, 16);
     --token-4a18edb7-e149-464f-8c02-aa015661ab43: rgb(255, 160, 122);
+    --unframer-300: rgb(255, 160, 122);
     --token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d: rgb(252, 62, 19);
+    --unframer-500: rgb(252, 62, 19);
     --token-944d416b-60ec-406a-99c8-94ca89212156: rgb(169, 169, 169);
+    --unframer-dark-gray: rgb(169, 169, 169);
     --token-98bc5b6f-7a2c-4386-9864-434ca3560bb1: rgb(254, 102, 57);
+    --unframer-400: rgb(254, 102, 57);
     --token-b76070f4-229c-451f-b7dc-36315a56d1c6: rgb(255, 227, 212);
+    --unframer-100: rgb(255, 227, 212);
     --token-d0fee7ae-ecfd-4d64-b3d9-f38b79d987d7: rgb(255, 243, 237);
+    --unframer-50: rgb(255, 243, 237);
     --token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2: rgb(255, 252, 250);
+    --unframer-25: rgb(255, 252, 250);
     --token-f1edbbf0-4dde-4043-88fc-e447b2e4f208: rgb(255, 255, 255);
+    --unframer-white: rgb(255, 255, 255);
     --token-f5909a4b-54e7-4c08-b63f-44713b4eba16: rgb(231, 34, 8);
+    --unframer-primary: rgb(231, 34, 8);
 }
 
 .dark {
     --token-0b0f3c36-e8dc-44cb-9980-3edcd9f78cf2: rgb(161, 180, 255);
+    --unframer-chambray: rgb(161, 180, 255);
     --token-1691cb44-c002-4542-9545-8a0801f91af2: rgb(42, 42, 42);
+    --unframer-gray: rgb(42, 42, 42);
     --token-36bb1a2d-632b-41b6-8e08-ee48dcf29873: rgb(255, 255, 255);
+    --unframer-off-black: rgb(255, 255, 255);
     --token-4a18edb7-e149-464f-8c02-aa015661ab43: rgb(255, 160, 122);
+    --unframer-300: rgb(255, 160, 122);
     --token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d: rgb(252, 62, 19);
+    --unframer-500: rgb(252, 62, 19);
     --token-944d416b-60ec-406a-99c8-94ca89212156: rgb(176, 176, 176);
+    --unframer-dark-gray: rgb(176, 176, 176);
     --token-98bc5b6f-7a2c-4386-9864-434ca3560bb1: rgb(254, 102, 57);
+    --unframer-400: rgb(254, 102, 57);
     --token-b76070f4-229c-451f-b7dc-36315a56d1c6: rgb(58, 58, 58);
+    --unframer-100: rgb(58, 58, 58);
     --token-d0fee7ae-ecfd-4d64-b3d9-f38b79d987d7: rgb(40, 40, 40);
+    --unframer-50: rgb(40, 40, 40);
     --token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2: rgb(30, 30, 30);
+    --unframer-25: rgb(30, 30, 30);
     --token-f1edbbf0-4dde-4043-88fc-e447b2e4f208: rgb(16, 16, 16);
+    --unframer-white: rgb(16, 16, 16);
     --token-f5909a4b-54e7-4c08-b63f-44713b4eba16: rgb(231, 34, 8);
+    --unframer-primary: rgb(231, 34, 8);
 }
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
@@ -817,183 +841,6 @@ NavigationContainer
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
 
-/* used by footer.js, twitter-profile-preview.js */
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.cyrillic-ext-G3OTPKE4.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.cyrillic-JO7ZJTP6.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.greek-5GVUXSXZ.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+0370-03FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.greek-ext-N63XCCK3.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.latin-EKF76FXR.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.latin-ext-RREJIMQ3.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Light.vietnamese-GVC2UOFS.woff2');
-    font-style: normal;
-    font-weight: 300;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.cyrillic-ext-M4WHNGTS.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.cyrillic-JVU2PANX.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.greek-DPOQGN7L.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0370-03FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.greek-ext-4KCQBEIZ.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.latin-ext-J4DBSW7F.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.latin-Y3IVPL46.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Medium.vietnamese-PJV76O4P.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.cyrillic-ext-CFTLRB35.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.cyrillic-KKLZBALH.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.greek-ext-ULEBLIFV.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.greek-IRHSNFQB.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0370-03FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.latin-ext-VZDUGU3Q.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.latin-JLQMKCHE.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.vietnamese-QK7VSWXK.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Mulish'; 
-    src: url('https://fonts.gstatic.com/s/mulish/v13/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNRwaWlGrw-PTY.woff2');
-    font-style: normal;
-    font-weight: 400;
-}
-
 /* used by remove-button.js */
 
 @font-face {
@@ -1094,6 +941,127 @@ NavigationContainer
     src: url('https://fonts.gstatic.com/s/firamono/v14/N0bX2SlFPv1weGeLZDtQJPTTkdbJYA.woff2');
     font-style: normal;
     font-weight: 400;
+}
+
+/* used by footer.js, twitter-profile-preview.js */
+
+@font-face {
+    font-family: 'Mulish'; 
+    src: url('https://fonts.gstatic.com/s/mulish/v13/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNRwaWlGrw-PTY.woff2');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/5A3Ce6C9YYmCjpQx9M4inSaKU.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/6mJuEAguuIuMog10gGvH5d3cl8.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+1F00-1FFF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/BkDpl4ghaqvMi1btKFyG2tdbec.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/d3tHnaQIAeqiE5hGcRw4mmgWYU.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/DolVirEGb34pEXEp8t8FQBSK4.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/H4TfENUY1rh8R9UaSD6vngjJP3M.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/IETjvc5qzUaRoaruDpPSwCUM8.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+1F00-1FFF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/oLCoaT3ioA0fHdJnWR9W6k7NY.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+0370-03FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/otTaNuNpVK4RbdlT7zDDdKvQBA.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/Qx95Xyt0Ka3SGhinnbXIGpEIyP4.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/Sj0PCHQSBjFmEp6NBWg6FNaKc.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/v2q8JTTTs7McDMSEhnxAIBqd0.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/xYYWaj7wCU5zSQH0eXvSaS19wo.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0370-03FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/zAMK70AQRFSShJgUiaR5IiIhgzk.woff2');
+    font-style: normal;
+    font-weight: 300;
+    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
 /* used by customer-stories.js, use-cases-cards.js, use-cases.js */
@@ -1326,7 +1294,7 @@ NavigationContainer
     unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* used by card.js, code-snippets.js, contact-sales-form.js, contact-support-form.js, copy-snippet.js, customer-stories.js, fa-qs.js, faq-card.js, feature-bullet-point.js, footer.js, nav-bar.js, search-bar.js, sign-in.js, sign-up-button.js, sign-up.js, stats-card.js, submit-button.js, tabs.js, tag.js, use-cases-cards.js, use-cases.js */
+/* used by card.js, contact-sales-form.js, contact-support-form.js, feature-bullet-point.js, nav-bar.js, search-bar.js, sign-in.js, sign-up-button.js, sign-up.js, submit-button.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1336,7 +1304,7 @@ NavigationContainer
     unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
-/* used by blog-card.js, hero-section.js, menu-link.js, nav-bar.js, navigation.js, previous-next-buttons.js, primary.js, testimonial-card.js */
+/* used by blog-card.js, code-snippets.js, copy-snippet.js, customer-stories.js, fa-qs.js, faq-card.js, footer.js, hero-section.js, menu-link.js, nav-bar.js, navigation.js, previous-next-buttons.js, primary.js, stats-card.js, tabs.js, tag.js, testimonial-card.js, twitter-profile-preview.js, use-cases-cards.js, use-cases.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1404,7 +1372,7 @@ NavigationContainer
     unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* used by blog-card.js, card.js, code-snippets.js, contact-sales-form.js, contact-support-form.js, copy-snippet.js, customer-stories.js, fa-qs.js, faq-card.js, feature-bullet-point.js, footer.js, hero-section.js, menu-link.js, nav-bar.js, navigation.js, previous-next-buttons.js, primary.js, search-bar.js, sign-in.js, sign-up-button.js, sign-up.js, stats-card.js, submit-button.js, tabs.js, tag.js, testimonial-card.js, use-cases-cards.js, use-cases.js */
+/* used by blog-card.js, card.js, code-snippets.js, contact-sales-form.js, contact-support-form.js, copy-snippet.js, customer-stories.js, fa-qs.js, faq-card.js, feature-bullet-point.js, footer.js, hero-section.js, menu-link.js, nav-bar.js, navigation.js, previous-next-buttons.js, primary.js, search-bar.js, sign-in.js, sign-up-button.js, sign-up.js, stats-card.js, submit-button.js, tabs.js, tag.js, testimonial-card.js, twitter-profile-preview.js, use-cases-cards.js, use-cases.js */
 
 @font-face {
     font-family: 'Inter'; 

@@ -14,7 +14,7 @@ export interface Props {
     height?: any
     layoutId?: string
     "variant"?: 'Variant 1' | 'Variant 2'
-    "sVGCode"?: string
+    "svgcode"?: string
     "title"?: string
     "description"?: string
     "link"?: string
