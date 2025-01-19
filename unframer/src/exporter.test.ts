@@ -74,9 +74,9 @@ describe('replaceWebPageIds', () => {
 
 describe('propCamelCase', () => {
     test('converts dashes to camelCase', () => {
-        expect(propCamelCase('foo-bar')).toMatchInlineSnapshot('"fooBar"')
+        expect(propCamelCase('foo-bar')).toMatchInlineSnapshot(`"fooBar"`)
         expect(propCamelCase('foo-bar-baz')).toMatchInlineSnapshot(
-            '"fooBarBaz"',
+            `"fooBarBaz"`,
         )
     })
     test('converts example-variable_dashes etc XX something 11 to camelCase', () => {
@@ -91,22 +91,22 @@ describe('propCamelCase', () => {
     })
 
     test('converts underscores to camelCase', () => {
-        expect(propCamelCase('foo_bar')).toMatchInlineSnapshot('"fooBar"')
+        expect(propCamelCase('foo_bar')).toMatchInlineSnapshot(`"fooBar"`)
         expect(propCamelCase('foo_bar_baz')).toMatchInlineSnapshot(
-            '"fooBarBaz"',
+            `"fooBarBaz"`,
         )
     })
 
     test('removes spaces and camelCases', () => {
-        expect(propCamelCase('Foo Bar')).toMatchInlineSnapshot('"fooBar"')
+        expect(propCamelCase('Foo Bar')).toMatchInlineSnapshot(`"fooBar"`)
         expect(propCamelCase('Foo Bar Baz')).toMatchInlineSnapshot(
-            '"fooBarBaz"',
+            `"fooBarBaz"`,
         )
     })
 
     test('ensures first character is lowercase', () => {
-        expect(propCamelCase('FooBar')).toMatchInlineSnapshot('"fooBar"')
-        expect(propCamelCase('Foo')).toMatchInlineSnapshot('"foo"')
+        expect(propCamelCase('FooBar')).toMatchInlineSnapshot(`"fooBar"`)
+        expect(propCamelCase('Foo')).toMatchInlineSnapshot(`"foo"`)
     })
 
     test('handles empty string', () => {
@@ -117,5 +117,8 @@ describe('propCamelCase', () => {
         expect(propCamelCase('Foo-Bar_Baz Test')).toMatchInlineSnapshot(
             `"fooBar_BazTest"`,
         )
+    })
+    test('converts APITableData to apiTableData', () => {
+        expect(propCamelCase('Settings APITableData')).toBe(`settingsAPITAbleData`)
     })
 })
