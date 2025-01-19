@@ -252,3 +252,6 @@ export type Config = {
     tokens?: StyleToken[]
     outDir?: string
 }
+
+
+export { configNames, defaultOutDir, defaultConfig, fixOldUnframerPath, version, safeJsonParse, pluck, getNewNames };
