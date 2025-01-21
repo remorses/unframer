@@ -339,6 +339,11 @@ export async function bundle({
                 .join('\n') +
             getFontsStyles(allFonts)
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
+        fs.writeFileSync(
+            path.resolve(out, '.cursorignore'),
+            `**/*.js\nchunks\n`,
+            'utf-8',
+        )
 
         logFontsUsage(allFonts)
             .split('\n')
