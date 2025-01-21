@@ -133,7 +133,7 @@ export function esbuildPluginBundleDependencies({
                     }
                 }
 
-                const url = `https://esm.sh/${args.path}`
+                const url = `https://esm.sh/*${args.path}`
 
                 return {
                     path: url,
