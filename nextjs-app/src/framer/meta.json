@@ -31,29 +31,8 @@
       "imports": [],
       "format": "esm"
     },
-    "/:https://esm.sh/react@18.3.1/es2022/react.mjs": {
-      "bytes": 11067,
-      "imports": [],
-      "format": "esm"
-    },
-    "/:https://esm.sh/react@^18.3.1?target=es2022": {
-      "bytes": 152,
-      "imports": [
-        {
-          "path": "/:https://esm.sh/react@18.3.1/es2022/react.mjs",
-          "kind": "import-statement",
-          "original": "/react@18.3.1/es2022/react.mjs"
-        },
-        {
-          "path": "/:https://esm.sh/react@18.3.1/es2022/react.mjs",
-          "kind": "import-statement",
-          "original": "/react@18.3.1/es2022/react.mjs"
-        }
-      ],
-      "format": "esm"
-    },
-    "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs": {
-      "bytes": 46939,
+    "/:https://esm.sh/*typewriter-effect@2.21.0/es2022/typewriter-effect.mjs": {
+      "bytes": 46916,
       "imports": [
         {
           "path": "/:https://esm.sh/node/process.mjs",
@@ -61,15 +40,15 @@
           "original": "/node/process.mjs"
         },
         {
-          "path": "/:https://esm.sh/react@^18.3.1?target=es2022",
+          "path": "react",
           "kind": "import-statement",
-          "original": "/react@^18.3.1?target=es2022"
+          "external": true
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/typewriter-effect": {
-      "bytes": 267,
+    "/:https://esm.sh/*typewriter-effect": {
+      "bytes": 230,
       "imports": [
         {
           "path": "/:https://esm.sh/node/process.mjs",
@@ -77,19 +56,14 @@
           "original": "/node/process.mjs"
         },
         {
-          "path": "/:https://esm.sh/react@^18.3.1?target=es2022",
+          "path": "/:https://esm.sh/*typewriter-effect@2.21.0/es2022/typewriter-effect.mjs",
           "kind": "import-statement",
-          "original": "/react@^18.3.1?target=es2022"
+          "original": "/*typewriter-effect@2.21.0/es2022/typewriter-effect.mjs"
         },
         {
-          "path": "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs",
+          "path": "/:https://esm.sh/*typewriter-effect@2.21.0/es2022/typewriter-effect.mjs",
           "kind": "import-statement",
-          "original": "/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs"
-        },
-        {
-          "path": "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs",
-          "kind": "import-statement",
-          "original": "/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs"
+          "original": "/*typewriter-effect@2.21.0/es2022/typewriter-effect.mjs"
         }
       ],
       "format": "esm"
@@ -108,7 +82,7 @@
           "external": true
         },
         {
-          "path": "/:https://esm.sh/typewriter-effect",
+          "path": "/:https://esm.sh/*typewriter-effect",
           "kind": "import-statement",
           "original": "typewriter-effect"
         }
@@ -1301,409 +1275,359 @@
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/utils@10.18.0/es2022/utils.mjs": {
+    "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs": {
       "bytes": 1771,
       "imports": [],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022": {
-      "bytes": 60,
+    "/:https://esm.sh/*@motionone/utils": {
+      "bytes": 61,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/utils@10.18.0/es2022/utils.mjs",
+          "path": "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs",
           "kind": "import-statement",
-          "original": "/@motionone/utils@10.18.0/es2022/utils.mjs"
+          "original": "/*@motionone/utils@10.18.0/es2022/utils.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/easing@10.18.0/es2022/easing.mjs": {
-      "bytes": 808,
+    "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs": {
+      "bytes": 760,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022": {
-      "bytes": 113,
+    "/:https://esm.sh/*@motionone/easing": {
+      "bytes": 63,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/easing@10.18.0/es2022/easing.mjs",
-          "kind": "import-statement",
-          "original": "/@motionone/easing@10.18.0/es2022/easing.mjs"
+          "original": "/*@motionone/easing@10.18.0/es2022/easing.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/animation@10.18.0/es2022/animation.mjs": {
-      "bytes": 3662,
+    "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs": {
+      "bytes": 3590,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/easing",
           "kind": "import-statement",
-          "original": "/@motionone/easing@^10.18.0?target=es2022"
+          "original": "@motionone/easing"
         },
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022": {
-      "bytes": 171,
+    "/:https://esm.sh/*@motionone/animation": {
+      "bytes": 69,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs",
           "kind": "import-statement",
-          "original": "/@motionone/easing@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/animation@10.18.0/es2022/animation.mjs",
-          "kind": "import-statement",
-          "original": "/@motionone/animation@10.18.0/es2022/animation.mjs"
+          "original": "/*@motionone/animation@10.18.0/es2022/animation.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/generators@10.18.0/es2022/generators.mjs": {
-      "bytes": 2995,
-      "imports": [
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        }
-      ],
-      "format": "esm"
-    },
-    "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022": {
-      "bytes": 121,
-      "imports": [
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/generators@10.18.0/es2022/generators.mjs",
-          "kind": "import-statement",
-          "original": "/@motionone/generators@10.18.0/es2022/generators.mjs"
-        }
-      ],
-      "format": "esm"
-    },
-    "/:https://esm.sh/@motionone/types@10.17.1/es2022/types.mjs": {
-      "bytes": 237,
-      "imports": [],
-      "format": "esm"
-    },
-    "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022": {
-      "bytes": 60,
-      "imports": [
-        {
-          "path": "/:https://esm.sh/@motionone/types@10.17.1/es2022/types.mjs",
-          "kind": "import-statement",
-          "original": "/@motionone/types@10.17.1/es2022/types.mjs"
-        }
-      ],
-      "format": "esm"
-    },
-    "/:https://esm.sh/hey-listen@1.0.8/es2022/hey-listen.mjs": {
+    "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs": {
       "bytes": 89,
       "imports": [],
       "format": "esm"
     },
-    "/:https://esm.sh/hey-listen@^1.0.8?target=es2022": {
-      "bytes": 57,
+    "/:https://esm.sh/*hey-listen": {
+      "bytes": 58,
       "imports": [
         {
-          "path": "/:https://esm.sh/hey-listen@1.0.8/es2022/hey-listen.mjs",
+          "path": "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs",
           "kind": "import-statement",
-          "original": "/hey-listen@1.0.8/es2022/hey-listen.mjs"
+          "original": "/*hey-listen@1.0.8/es2022/hey-listen.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs": {
+    "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs": {
+      "bytes": 237,
+      "imports": [],
+      "format": "esm"
+    },
+    "/:https://esm.sh/*@motionone/types": {
+      "bytes": 61,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs",
+          "kind": "import-statement",
+          "original": "/*@motionone/types@10.17.1/es2022/types.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs": {
       "bytes": 14667,
       "imports": [],
       "format": "esm"
     },
-    "/:https://esm.sh/tslib@^2.3.1?target=es2022": {
-      "bytes": 150,
+    "/:https://esm.sh/*tslib": {
+      "bytes": 152,
       "imports": [
         {
-          "path": "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs",
+          "path": "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs",
           "kind": "import-statement",
-          "original": "/tslib@2.8.1/es2022/tslib.mjs"
+          "original": "/*tslib@2.8.1/es2022/tslib.mjs"
         },
         {
-          "path": "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs",
+          "path": "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs",
           "kind": "import-statement",
-          "original": "/tslib@2.8.1/es2022/tslib.mjs"
+          "original": "/*tslib@2.8.1/es2022/tslib.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/dom@10.18.0/es2022/dom.mjs": {
-      "bytes": 27137,
+    "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs": {
+      "bytes": 2899,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/animation@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/hey-listen@^1.0.8?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/types@^10.17.1?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/animation@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
-          "kind": "import-statement",
-          "original": "/tslib@^2.3.1?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
-          "kind": "import-statement",
-          "original": "/hey-listen@^1.0.8?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/animation@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/generators@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/generators@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/generators@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
-          "kind": "import-statement",
-          "original": "/tslib@^2.3.1?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
-          "kind": "import-statement",
-          "original": "/tslib@^2.3.1?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
-          "kind": "import-statement",
-          "original": "/hey-listen@^1.0.8?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
-          "kind": "import-statement",
-          "original": "/tslib@^2.3.1?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/animation@^10.18.0?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
-          "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/@motionone/dom": {
-      "bytes": 350,
+    "/:https://esm.sh/*@motionone/generators": {
+      "bytes": 71,
       "imports": [
         {
-          "path": "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs",
           "kind": "import-statement",
-          "original": "/@motionone/animation@^10.18.0?target=es2022"
+          "original": "/*@motionone/generators@10.18.0/es2022/generators.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs": {
+      "bytes": 26311,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/*@motionone/animation",
+          "kind": "import-statement",
+          "original": "@motionone/animation"
         },
         {
-          "path": "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*hey-listen",
           "kind": "import-statement",
-          "original": "/@motionone/generators@^10.18.0?target=es2022"
+          "original": "hey-listen"
         },
         {
-          "path": "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/types",
           "kind": "import-statement",
-          "original": "/@motionone/types@^10.17.1?target=es2022"
+          "original": "@motionone/types"
         },
         {
-          "path": "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/utils@^10.18.0?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/hey-listen@^1.0.8?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/hey-listen@^1.0.8?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/tslib@^2.3.1?target=es2022",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/tslib@^2.3.1?target=es2022"
+          "original": "@motionone/utils"
         },
         {
-          "path": "/:https://esm.sh/@motionone/dom@10.18.0/es2022/dom.mjs",
+          "path": "/:https://esm.sh/*@motionone/utils",
           "kind": "import-statement",
-          "original": "/@motionone/dom@10.18.0/es2022/dom.mjs"
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/animation",
+          "kind": "import-statement",
+          "original": "@motionone/animation"
+        },
+        {
+          "path": "/:https://esm.sh/*tslib",
+          "kind": "import-statement",
+          "original": "tslib"
+        },
+        {
+          "path": "/:https://esm.sh/*hey-listen",
+          "kind": "import-statement",
+          "original": "hey-listen"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/animation",
+          "kind": "import-statement",
+          "original": "@motionone/animation"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/generators",
+          "kind": "import-statement",
+          "original": "@motionone/generators"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/generators",
+          "kind": "import-statement",
+          "original": "@motionone/generators"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/generators",
+          "kind": "import-statement",
+          "original": "@motionone/generators"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*tslib",
+          "kind": "import-statement",
+          "original": "tslib"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*tslib",
+          "kind": "import-statement",
+          "original": "tslib"
+        },
+        {
+          "path": "/:https://esm.sh/*hey-listen",
+          "kind": "import-statement",
+          "original": "hey-listen"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        },
+        {
+          "path": "/:https://esm.sh/*tslib",
+          "kind": "import-statement",
+          "original": "tslib"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/animation",
+          "kind": "import-statement",
+          "original": "@motionone/animation"
+        },
+        {
+          "path": "/:https://esm.sh/*@motionone/utils",
+          "kind": "import-statement",
+          "original": "@motionone/utils"
+        }
+      ],
+      "format": "esm"
+    },
+    "/:https://esm.sh/*@motionone/dom": {
+      "bytes": 57,
+      "imports": [
+        {
+          "path": "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs",
+          "kind": "import-statement",
+          "original": "/*@motionone/dom@10.18.0/es2022/dom.mjs"
         }
       ],
       "format": "esm"
@@ -1732,7 +1656,7 @@
           "external": true
         },
         {
-          "path": "/:https://esm.sh/@motionone/dom",
+          "path": "/:https://esm.sh/*@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         }
@@ -1825,7 +1749,7 @@
           "external": true
         },
         {
-          "path": "/:https://esm.sh/@motionone/dom",
+          "path": "/:https://esm.sh/*@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         }
@@ -3358,7 +3282,7 @@
           "external": true
         },
         {
-          "path": "/:https://esm.sh/@motionone/dom",
+          "path": "/:https://esm.sh/*@motionone/dom",
           "kind": "import-statement",
           "original": "@motionone/dom"
         }
@@ -4843,7 +4767,7 @@
     "issue-17.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZTDKAIX2.js",
+          "path": "chunks/chunk-HHMN2FVZ.js",
           "kind": "import-statement"
         },
         {
@@ -5263,6 +5187,11 @@
           "external": true
         },
         {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -5536,16 +5465,10 @@
         "/:https://esm.sh/node/process.mjs": {
           "bytesInOutput": 7240
         },
-        "/:https://esm.sh/react@^18.3.1?target=es2022": {
-          "bytesInOutput": 1048
+        "/:https://esm.sh/*typewriter-effect@2.21.0/es2022/typewriter-effect.mjs": {
+          "bytesInOutput": 49759
         },
-        "/:https://esm.sh/react@18.3.1/es2022/react.mjs": {
-          "bytesInOutput": 10615
-        },
-        "/:https://esm.sh/typewriter-effect@2.21.0/es2022/typewriter-effect.mjs": {
-          "bytesInOutput": 49742
-        },
-        "/:https://esm.sh/typewriter-effect": {
+        "/:https://esm.sh/*typewriter-effect": {
           "bytesInOutput": 0
         },
         "/:https://framerusercontent.com/modules/dts3KkzoHO6kQWh7b5Ug/B1Gsx1bsoWgEcHZ6ixdx/A4GdXWFMj.js": {
@@ -5618,7 +5541,7 @@
           "bytesInOutput": 44580
         }
       },
-      "bytes": 542712
+      "bytes": 530620
     },
     "hero.js": {
       "imports": [
@@ -6008,7 +5931,7 @@
     "logos.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZTDKAIX2.js",
+          "path": "chunks/chunk-HHMN2FVZ.js",
           "kind": "import-statement"
         },
         {
@@ -6096,7 +6019,7 @@
     "testimonials.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZTDKAIX2.js",
+          "path": "chunks/chunk-HHMN2FVZ.js",
           "kind": "import-statement"
         },
         {
@@ -6212,62 +6135,62 @@
       },
       "bytes": 45482
     },
-    "chunks/chunk-ZTDKAIX2.js": {
+    "chunks/chunk-HHMN2FVZ.js": {
       "imports": [],
       "exports": [
         "Et"
       ],
       "inputs": {
-        "/:https://esm.sh/@motionone/utils@10.18.0/es2022/utils.mjs": {
+        "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs": {
           "bytesInOutput": 1319
         },
-        "/:https://esm.sh/@motionone/utils@^10.18.0?target=es2022": {
+        "/:https://esm.sh/*@motionone/utils": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/@motionone/easing@10.18.0/es2022/easing.mjs": {
+        "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs": {
           "bytesInOutput": 676
         },
-        "/:https://esm.sh/@motionone/easing@^10.18.0?target=es2022": {
+        "/:https://esm.sh/*@motionone/easing": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/@motionone/animation@10.18.0/es2022/animation.mjs": {
+        "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs": {
           "bytesInOutput": 3357
         },
-        "/:https://esm.sh/@motionone/animation@^10.18.0?target=es2022": {
+        "/:https://esm.sh/*@motionone/animation": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/hey-listen@1.0.8/es2022/hey-listen.mjs": {
+        "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs": {
           "bytesInOutput": 24
         },
-        "/:https://esm.sh/hey-listen@^1.0.8?target=es2022": {
+        "/:https://esm.sh/*hey-listen": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/@motionone/types@10.17.1/es2022/types.mjs": {
+        "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs": {
           "bytesInOutput": 209
         },
-        "/:https://esm.sh/@motionone/types@^10.17.1?target=es2022": {
+        "/:https://esm.sh/*@motionone/types": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/tslib@2.8.1/es2022/tslib.mjs": {
+        "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs": {
           "bytesInOutput": 407
         },
-        "/:https://esm.sh/tslib@^2.3.1?target=es2022": {
+        "/:https://esm.sh/*tslib": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/@motionone/generators@10.18.0/es2022/generators.mjs": {
+        "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs": {
           "bytesInOutput": 2797
         },
-        "/:https://esm.sh/@motionone/generators@^10.18.0?target=es2022": {
+        "/:https://esm.sh/*@motionone/generators": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/@motionone/dom@10.18.0/es2022/dom.mjs": {
+        "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs": {
           "bytesInOutput": 12968
         },
-        "/:https://esm.sh/@motionone/dom": {
+        "/:https://esm.sh/*@motionone/dom": {
           "bytesInOutput": 0
         }
       },
-      "bytes": 22278
+      "bytes": 22286
     },
     "menu-overlay.js": {
       "imports": [

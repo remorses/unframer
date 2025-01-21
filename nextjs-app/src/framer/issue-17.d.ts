@@ -14,8 +14,8 @@ export interface Props {
     height?: any
     layoutId?: string
     "variant"?: 'Desktop' | 'Tablet' | 'Mobile'
-    "primaryCTAText"?: string
-    "primaryCTALink"?: string
+    "primaryCTATExt"?: string
+    "primaryCTALInk"?: string
     "heroPreHeadingText"?: string
     "heroTitle"?: string
     "heroDescription"?: string
