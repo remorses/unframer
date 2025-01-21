@@ -1,5 +1,16 @@
 # unframer
 
+## 2.15.0
+
+### Minor Changes
+
+-   5fcb81e: Add .cursorrules file to ignore js fiels
+
+### Patch Changes
+
+-   7c13502: Update framer to 2.4.1, update framer motion to 11.11.7
+-   ad85276: Mark all esm.sh dependencies as externals to prevent duplicating react
+
 ## 2.14.0
 
 ### Minor Changes
