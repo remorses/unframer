@@ -15,7 +15,7 @@ export interface Props {
     layoutId?: string
     "variant"?: 'Variant 1' | 'Variant 2'
     "feature"?: string
-    "svgcode"?: string
+    "sVGCode"?: string
 }
 
 const FeatureBulletPointFramerComponent = (props: Props) => any

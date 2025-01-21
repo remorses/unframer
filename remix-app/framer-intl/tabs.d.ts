@@ -14,7 +14,7 @@ export interface Props {
     height?: any
     layoutId?: string
     "variant"?: 'Active' | 'Inactive' | 'Active - Progress bar'
-    "svgcode"?: string
+    "sVGCode"?: string
     "title"?: string
     "click"?: Function
 }

@@ -4745,81 +4745,29 @@
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/react@19.0.0/es2022/jsx-runtime.mjs": {
-      "bytes": 1675,
-      "imports": [],
-      "format": "esm"
-    },
-    "/:https://esm.sh/react@%3E=16.8.1/jsx-runtime?target=es2022": {
-      "bytes": 164,
+    "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
+      "bytes": 9386,
       "imports": [
         {
-          "path": "/:https://esm.sh/react@19.0.0/es2022/jsx-runtime.mjs",
+          "path": "react",
           "kind": "import-statement",
-          "original": "/react@19.0.0/es2022/jsx-runtime.mjs"
+          "external": true
         },
         {
-          "path": "/:https://esm.sh/react@19.0.0/es2022/jsx-runtime.mjs",
+          "path": "react/jsx-runtime",
           "kind": "import-statement",
-          "original": "/react@19.0.0/es2022/jsx-runtime.mjs"
+          "external": true
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/react@19.0.0/es2022/react.mjs": {
-      "bytes": 12620,
-      "imports": [],
-      "format": "esm"
-    },
-    "/:https://esm.sh/react@%3E=16.8.1?target=es2022": {
-      "bytes": 152,
+    "/:https://esm.sh/*react-hotkeys-hook": {
+      "bytes": 74,
       "imports": [
         {
-          "path": "/:https://esm.sh/react@19.0.0/es2022/react.mjs",
+          "path": "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs",
           "kind": "import-statement",
-          "original": "/react@19.0.0/es2022/react.mjs"
-        },
-        {
-          "path": "/:https://esm.sh/react@19.0.0/es2022/react.mjs",
-          "kind": "import-statement",
-          "original": "/react@19.0.0/es2022/react.mjs"
-        }
-      ],
-      "format": "esm"
-    },
-    "/:https://esm.sh/react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
-      "bytes": 9434,
-      "imports": [
-        {
-          "path": "/:https://esm.sh/react@%3E=16.8.1?target=es2022",
-          "kind": "import-statement",
-          "original": "/react@>=16.8.1?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/react@%3E=16.8.1/jsx-runtime?target=es2022",
-          "kind": "import-statement",
-          "original": "/react@>=16.8.1/jsx-runtime?target=es2022"
-        }
-      ],
-      "format": "esm"
-    },
-    "/:https://esm.sh/react-hotkeys-hook": {
-      "bytes": 165,
-      "imports": [
-        {
-          "path": "/:https://esm.sh/react@%3E=16.8.1/jsx-runtime?target=es2022",
-          "kind": "import-statement",
-          "original": "/react@>=16.8.1/jsx-runtime?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/react@%3E=16.8.1?target=es2022",
-          "kind": "import-statement",
-          "original": "/react@>=16.8.1?target=es2022"
-        },
-        {
-          "path": "/:https://esm.sh/react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs",
-          "kind": "import-statement",
-          "original": "/react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs"
+          "original": "/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs"
         }
       ],
       "format": "esm"
@@ -4833,7 +4781,7 @@
           "external": true
         },
         {
-          "path": "/:https://esm.sh/react-hotkeys-hook",
+          "path": "/:https://esm.sh/*react-hotkeys-hook",
           "kind": "import-statement",
           "original": "react-hotkeys-hook"
         }
@@ -5810,6 +5758,16 @@
           "external": true
         },
         {
+          "path": "react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
           "path": "unframer",
           "kind": "import-statement",
           "external": true
@@ -5854,22 +5812,10 @@
         "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js": {
           "bytesInOutput": 588
         },
-        "/:https://esm.sh/react@19.0.0/es2022/jsx-runtime.mjs": {
-          "bytesInOutput": 1277
+        "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
+          "bytesInOutput": 7205
         },
-        "/:https://esm.sh/react@%3E=16.8.1/jsx-runtime?target=es2022": {
-          "bytesInOutput": 0
-        },
-        "/:https://esm.sh/react@19.0.0/es2022/react.mjs": {
-          "bytesInOutput": 11626
-        },
-        "/:https://esm.sh/react@%3E=16.8.1?target=es2022": {
-          "bytesInOutput": 0
-        },
-        "/:https://esm.sh/react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
-          "bytesInOutput": 7200
-        },
-        "/:https://esm.sh/react-hotkeys-hook": {
+        "/:https://esm.sh/*react-hotkeys-hook": {
           "bytesInOutput": 0
         },
         "/:https://framerusercontent.com/modules/pnIdNrlXd11onazB8Qcd/MRN0W4QLxACax2b7xROJ/BJ5jKpx2K.js": {
@@ -5882,7 +5828,7 @@
           "bytesInOutput": 291
         }
       },
-      "bytes": 48886
+      "bytes": 35215
     },
     "chunks/codemirror_lang_angular-5HJJBD5F.js": {
       "imports": [
