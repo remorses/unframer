@@ -166,6 +166,8 @@ If you find any errors rendering your components:
 -   Check you have the latest version of `unframer` installed
 -   Try downloading new versions of the components by running again `npx unframer {projectId}`, Framer may already have fixed the problem.
 -   Try disabling React strict mode, this can cause many issues in Framer components.
+-   If the export fails because Esbuild cannot find an export from a package (like `No matching export in "/:https://esm.sh/zustand" for import "default"`) you can use the `--external` option to externalie npm packages used by Framer, then install them manually with the right version with `npm install`.
+    Framer sometimes uses legacy versions of npm packages in their components, for example with Zustand which is usually still in version 3.x. This happens because Framer packages must be the same in the whole project and their versions are fixed at the time the npm package is used in a code component or override.
 
 ## Supported component props
 
