@@ -13,9 +13,9 @@
     },
     "dependencies": {
         "@builder.io/react-hydration-overlay": "^0.1.0",
-        "@remix-run/node": "^2.15.0",
-        "@remix-run/react": "^2.15.0",
-        "@remix-run/serve": "^2.15.0",
+        "@remix-run/node": "^2.15.2",
+        "@remix-run/react": "^2.15.2",
+        "@remix-run/serve": "^2.15.2",
         "isbot": "^4.4.0",
         "nextjs-app": "workspace:*",
         "react": "19.0.0",
@@ -23,7 +23,7 @@
         "unframer": "workspace:*"
     },
     "devDependencies": {
-        "@remix-run/dev": "2.15.0",
+        "@remix-run/dev": "2.15.2",
         "@types/react": "^18.3.5",
         "@types/react-dom": "^18.3.0",
         "@typescript-eslint/eslint-plugin": "^6.21.0",

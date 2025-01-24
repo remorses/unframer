@@ -344,6 +344,7 @@ export async function bundle({
             `**/*.js\nchunks\n`,
             'utf-8',
         )
+        
 
         logFontsUsage(allFonts)
             .split('\n')
