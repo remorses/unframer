@@ -1,5 +1,12 @@
 # unframer
 
+## 2.15.1
+
+### Patch Changes
+
+-   3c954b6: Update framer to 2.4.1, update framer motion to 11.11.7
+-   4416809: Fix types generation on windows, requires using file://
+
 ## 2.15.0
 
 ### Minor Changes
