@@ -11,7 +11,7 @@ import { __export, } from './chunks/chunk-WSFCRVEQ.js';
 import { Fragment as Fragment3, } from 'react';
 import { ContextProviders, } from 'unframer';
 
-// /:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aZniMfIMmlFR6hZCO1Jb/mmEURJmx_.js
+// /:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js
 import { jsx as _jsx3, jsxs as _jsxs, } from 'react/jsx-runtime';
 import {
   addFonts,
@@ -35,7 +35,7 @@ import {
 import { LayoutGroup, motion as motion2, MotionConfigContext, } from 'unframer';
 import * as React2 from 'react';
 
-// /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js
+// /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 
 // /:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs
@@ -301,7 +301,7 @@ function ve(e, t, n, o,) {
     l;
 }
 
-// /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js
+// /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js
 function createWrappedComponent(Component2, key, props,) {
   ve(key, (event,) => {
     event.preventDefault();
@@ -391,7 +391,7 @@ function getLocalizedValue(key, locale,) {
   }
 }
 
-// /:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aZniMfIMmlFR6hZCO1Jb/mmEURJmx_.js
+// /:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js
 var RichTextWithHotkeyCommandK = withHotkeyCommandK(RichText,);
 var ButtonsPrimaryFonts = getFonts(stdin_default,);
 var cycleOrder = ['irmdDvW3M', 'k0WNJFkxG', 'AT8wrmErb',];

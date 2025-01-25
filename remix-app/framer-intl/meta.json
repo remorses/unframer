@@ -4772,7 +4772,7 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js": {
+    "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js": {
       "bytes": 1887,
       "imports": [
         {
@@ -4831,7 +4831,7 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aZniMfIMmlFR6hZCO1Jb/mmEURJmx_.js": {
+    "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js": {
       "bytes": 20208,
       "imports": [
         {
@@ -4855,9 +4855,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js",
+          "path": "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js"
+          "original": "https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js"
         },
         {
           "path": "/:https://framerusercontent.com/modules/pnIdNrlXd11onazB8Qcd/MRN0W4QLxACax2b7xROJ/BJ5jKpx2K.js",
@@ -4896,9 +4896,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aZniMfIMmlFR6hZCO1Jb/mmEURJmx_.js",
+          "path": "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aZniMfIMmlFR6hZCO1Jb/mmEURJmx_.js"
+          "original": "https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js"
         },
         {
           "path": "unframer",
@@ -5806,10 +5806,10 @@
         "virtual:hero-section": {
           "bytesInOutput": 2372
         },
-        "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/aZniMfIMmlFR6hZCO1Jb/mmEURJmx_.js": {
+        "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js": {
           "bytesInOutput": 18715
         },
-        "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/MG6sc2LssYnFbcQl583J/Broken.js": {
+        "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js": {
           "bytesInOutput": 588
         },
         "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {

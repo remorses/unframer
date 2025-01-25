@@ -599,13 +599,20 @@ export async function bundle({
     // }
     // return res
 }
+
+const packageVersionCache = new Map<string, string>()
+
 export function resolvePackage({ cwd, pkg }) {
+    if (packageVersionCache.has(pkg)) {
+        return Promise.resolve(packageVersionCache.get(pkg))
+    }
+
     return new Promise<string>((resolve, reject) => {
         const code = `import('${pkg}/package.json', { with: { type: 'json' } }).then(pkg => console.log(pkg.version || pkg.default?.version));`
 
         const command = [
             JSON.stringify(nodePath),
-            '-e',
+            '-e', 
             JSON.stringify(code),
         ].join(' ')
 
@@ -622,7 +629,9 @@ export function resolvePackage({ cwd, pkg }) {
                     )
                     return
                 }
-                resolve(stdout.trim())
+                const version = stdout.trim()
+                packageVersionCache.set(pkg, version)
+                resolve(version)
             },
         )
     })
@@ -864,11 +873,7 @@ export async function extractPropControlsUnsafe(
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
 
     const fileUrl = url.pathToFileURL(filename).href
-    const code = `import(${JSON.stringify(
-        fileUrl,
-    )}).then(x => { console.log(${JSON.stringify(
-        delimiter,
-    )}); console.log(${propCode}) })`
+    const code = `import("${url.fileURLToPath(fileUrl)}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
 
     const TIMEOUT = 5 * 1000
     const UNFRAMER_MAP_PACKAGES = JSON.stringify({
