@@ -218,7 +218,3 @@ For example in May 2024 Framer upgraded to React 19 and unframer broke, the reas
 ## Example
 
 Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
-
-```
-
-```
