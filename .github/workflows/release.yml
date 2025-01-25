@@ -11,7 +11,10 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
     release:
         name: Release
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest]
+        runs-on: ${{ matrix.os }}
         timeout-minutes: 10
         permissions:
             # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
@@ -37,11 +40,11 @@ jobs:
               working-directory: nextjs-app
             - run: pnpm build
               working-directory: nextjs-app
-            - name: Create Release Pull Request or Publish to npm
-              id: changesets
-              uses: changesets/action@v1
-              with:
-                  publish: pnpm changeset publish
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            # - name: Create Release Pull Request or Publish to npm
+            #   id: changesets
+            #   uses: changesets/action@v1
+            #   with:
+            #       publish: pnpm changeset publish
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
