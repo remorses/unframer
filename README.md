@@ -159,6 +159,15 @@ export default function App() {
 }
 ```
 
+## Watching for changes
+
+You can use the `--watch` flag to automatically re-export components when they change in Framer: notice that you will need to click the Publish button in Framer to trigger the cli, Framer only updates the JavaScript modules when you publish your website.
+
+<details>
+<summary>How it works</summary>
+Unframer cli will poll your website url every 2 seconds with a HEAD request, when the `etag` header changes it will re-export the components. This means that the --watch flag may not work if your components are not used in your main page of your Framer website.
+</details>
+
 ## Troubleshooting
 
 If you find any errors rendering your components:
