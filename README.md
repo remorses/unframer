@@ -168,6 +168,18 @@ You can use the `--watch` flag to automatically re-export components when they c
 Unframer cli will poll your website url every 2 seconds with a HEAD request, when the `etag` header changes it will re-export the components. This means that the --watch flag may not work if your components are not used in your main page of your Framer website.
 </details>
 
+## How does unframer cli work?
+
+The Framer React Export plugin saves your Framer components JavaScript url in the Unframer database. When you run the Unframer cli the components urls are fetched and bundled with esbuild. The bundler will also resolve npm dependencies in your Framer overrides and code components using the latest version.
+
+You can customize the npm dependencies versions using the `--external` flag and installing them manually with `npm install`.
+
+Unframer will also create a `styles.css` file with the Framer global styles and the fonts used in your components.
+
+To generate TypeScript types for your components Unframer runs your downloaded components with Node.js and extracts the TypeScript types from the component `propertyControls` field, which is used to populate the Framer right bar controls.
+
+The Responsive component renders your components for each different breakpoint and only shows the current breakpoint via a CSS media query. The unused breakpoints are removed before hydration thanks to React [`useSyncExternalStore`](https://react.dev/reference/react/useSyncExternalStore).
+
 ## Troubleshooting
 
 If you find any errors rendering your components:
