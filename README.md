@@ -205,8 +205,6 @@ If you find any errors rendering your components:
 
 ## Known limitations:
 
--   Internationalization is not supported now
-
 -   You may face React warnings like:
     -   `Accessing element.ref was removed in React 19.` This warning appears because Framer still uses the old `element.ref` API which was removed in React 19. This warning is harmless and will be fixed when Framer updates their codebase to use the new React 19 APIs.
     -   `A tree hydrated but some attributes of the server rendered HTML didn't match the client properties.` This warning sometimes appears when using SWV icons, it should be harmless, it only happens in development mode.
