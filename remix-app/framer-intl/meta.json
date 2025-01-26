@@ -43,7 +43,7 @@
       "format": "esm"
     },
     "virtual:buttons/primary": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -173,7 +173,7 @@
       "format": "esm"
     },
     "virtual:buttons/sign-up-button": {
-      "bytes": 3386,
+      "bytes": 3365,
       "imports": [
         {
           "path": "react",
@@ -235,7 +235,7 @@
       "format": "esm"
     },
     "virtual:buttons/copy-snippet": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -1316,7 +1316,7 @@
       "format": "esm"
     },
     "virtual:interactive/code-snippets": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -1483,7 +1483,7 @@
       "format": "esm"
     },
     "virtual:tag": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -2093,7 +2093,7 @@
       "format": "esm"
     },
     "virtual:buttons/sound-on-tap": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -2233,7 +2233,7 @@
       "format": "esm"
     },
     "virtual:pricing/feature-bullet-point": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -2717,7 +2717,7 @@
       "format": "esm"
     },
     "virtual:docs/navigation": {
-      "bytes": 3386,
+      "bytes": 3365,
       "imports": [
         {
           "path": "react",
@@ -3048,7 +3048,7 @@
       "format": "esm"
     },
     "virtual:docs/search-bar": {
-      "bytes": 3386,
+      "bytes": 3365,
       "imports": [
         {
           "path": "react",
@@ -3141,7 +3141,7 @@
       "format": "esm"
     },
     "virtual:docs/previous-next-buttons": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3224,7 +3224,7 @@
       "format": "esm"
     },
     "virtual:docs/card": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3317,7 +3317,7 @@
       "format": "esm"
     },
     "virtual:tabs": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3467,7 +3467,7 @@
       "format": "esm"
     },
     "virtual:interactive/use-cases": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3540,7 +3540,7 @@
       "format": "esm"
     },
     "virtual:buttons/submit-button": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3659,7 +3659,7 @@
       "format": "esm"
     },
     "virtual:forms/contact-support-form": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3736,7 +3736,7 @@
       "format": "esm"
     },
     "virtual:forms/contact-sales-form": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3849,7 +3849,7 @@
       "format": "esm"
     },
     "virtual:interactive/customer-stories": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -3880,7 +3880,7 @@
       "format": "esm"
     },
     "virtual:cards/customer-stories": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -4045,7 +4045,7 @@
       "format": "esm"
     },
     "virtual:forms/sign-up": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -4122,7 +4122,7 @@
       "format": "esm"
     },
     "virtual:forms/sign-in": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -4189,7 +4189,7 @@
       "format": "esm"
     },
     "virtual:cards/faq-card": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -4298,7 +4298,7 @@
       "format": "esm"
     },
     "virtual:interactive/fa-qs": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -4411,7 +4411,7 @@
       "format": "esm"
     },
     "virtual:navigation/footer": {
-      "bytes": 3407,
+      "bytes": 3386,
       "imports": [
         {
           "path": "react",
@@ -4503,7 +4503,7 @@
       "format": "esm"
     },
     "virtual:navigation/nav-bar": {
-      "bytes": 3386,
+      "bytes": 3365,
       "imports": [
         {
           "path": "react",
@@ -4534,7 +4534,7 @@
       "format": "esm"
     },
     "virtual:navigation/twitter-profile-preview": {
-      "bytes": 3365,
+      "bytes": 3344,
       "imports": [
         {
           "path": "react",
@@ -4883,7 +4883,7 @@
       "format": "esm"
     },
     "virtual:hero-section": {
-      "bytes": 3407,
+      "bytes": 3386,
       "imports": [
         {
           "path": "react",
@@ -5804,7 +5804,7 @@
       "entryPoint": "virtual:hero-section",
       "inputs": {
         "virtual:hero-section": {
-          "bytesInOutput": 2462
+          "bytesInOutput": 2441
         },
         "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js": {
           "bytesInOutput": 18715
@@ -5828,7 +5828,7 @@
           "bytesInOutput": 291
         }
       },
-      "bytes": 35305
+      "bytes": 35284
     },
     "chunks/codemirror_lang_angular-5HJJBD5F.js": {
       "imports": [
@@ -6059,7 +6059,7 @@
       "entryPoint": "virtual:forms/sign-up",
       "inputs": {
         "virtual:forms/sign-up": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/2oKMpgdbGMN452HBu43B/TDI0doXjBihjrZvF7LxJ/LG_K_Gwhe.js": {
           "bytesInOutput": 28243
@@ -6068,7 +6068,7 @@
           "bytesInOutput": 603
         }
       },
-      "bytes": 32016
+      "bytes": 31995
     },
     "forms/sign-in.js": {
       "imports": [
@@ -6135,13 +6135,13 @@
       "entryPoint": "virtual:forms/sign-in",
       "inputs": {
         "virtual:forms/sign-in": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/3SpzSsgouKI4HCPIntXg/u3LwVyssk9bGQz51sXlz/M4qYARdEB.js": {
           "bytesInOutput": 22534
         }
       },
-      "bytes": 25506
+      "bytes": 25485
     },
     "cards/faq-card.js": {
       "imports": [
@@ -6188,10 +6188,10 @@
       "entryPoint": "virtual:cards/faq-card",
       "inputs": {
         "virtual:cards/faq-card": {
-          "bytesInOutput": 2403
+          "bytesInOutput": 2382
         }
       },
-      "bytes": 2664
+      "bytes": 2643
     },
     "interactive/fa-qs.js": {
       "imports": [
@@ -6273,7 +6273,7 @@
       "entryPoint": "virtual:interactive/fa-qs",
       "inputs": {
         "virtual:interactive/fa-qs": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/6GKhy2l5gakg4Kc5NkIr/vvarOump2Om0DJMYiwE4/tOUeA1GYC.js": {
           "bytesInOutput": 8892
@@ -6288,7 +6288,7 @@
           "bytesInOutput": 102
         }
       },
-      "bytes": 121699
+      "bytes": 121678
     },
     "chunks/chunk-XGNHDYUG.js": {
       "imports": [
@@ -6404,13 +6404,13 @@
       "entryPoint": "virtual:navigation/footer",
       "inputs": {
         "virtual:navigation/footer": {
-          "bytesInOutput": 2462
+          "bytesInOutput": 2441
         },
         "/:https://framerusercontent.com/modules/ofbCvsLY8W21BXW0aU73/js0iOvT3nnMpznFN6T5C/EmVwbqUHg.js": {
           "bytesInOutput": 52154
         }
       },
-      "bytes": 55303
+      "bytes": 55282
     },
     "navigation/nav-bar.js": {
       "imports": [
@@ -6501,13 +6501,13 @@
       "entryPoint": "virtual:navigation/nav-bar",
       "inputs": {
         "virtual:navigation/nav-bar": {
-          "bytesInOutput": 2441
+          "bytesInOutput": 2420
         },
         "/:https://framerusercontent.com/modules/cVCKBc0U9GgwRNGyXKgv/Py5RuA1kQE1RZFpSxNfp/jBzjFrEWY.js": {
           "bytesInOutput": 34915
         }
       },
-      "bytes": 38289
+      "bytes": 38268
     },
     "navigation/twitter-profile-preview.js": {
       "imports": [
@@ -6550,10 +6550,10 @@
       "entryPoint": "virtual:navigation/twitter-profile-preview",
       "inputs": {
         "virtual:navigation/twitter-profile-preview": {
-          "bytesInOutput": 2403
+          "bytesInOutput": 2382
         }
       },
-      "bytes": 2646
+      "bytes": 2625
     },
     "chunks/chunk-BP573UWY.js": {
       "imports": [
@@ -6637,10 +6637,10 @@
       "entryPoint": "virtual:tabs",
       "inputs": {
         "virtual:tabs": {
-          "bytesInOutput": 2403
+          "bytesInOutput": 2382
         }
       },
-      "bytes": 2650
+      "bytes": 2629
     },
     "cards/use-cases-cards.js": {
       "imports": [
@@ -6769,13 +6769,13 @@
       "entryPoint": "virtual:interactive/use-cases",
       "inputs": {
         "virtual:interactive/use-cases": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/h1A05QuVbcdR1vRzyjxd/0D6MJbMdQgsYux6HEjJj/jFmI6rPh4.js": {
           "bytesInOutput": 34342
         }
       },
-      "bytes": 37282
+      "bytes": 37261
     },
     "chunks/chunk-OBVE4NLE.js": {
       "imports": [
@@ -6879,13 +6879,13 @@
       "entryPoint": "virtual:buttons/submit-button",
       "inputs": {
         "virtual:buttons/submit-button": {
-          "bytesInOutput": 2416
+          "bytesInOutput": 2395
         },
         "/:https://framerusercontent.com/modules/gKNc7qEM28AltXyssJPP/1KviJCXajXXNsqEzF8PK/KDmSZoPnz.js": {
           "bytesInOutput": 12387
         }
       },
-      "bytes": 15140
+      "bytes": 15119
     },
     "forms/contact-support-form.js": {
       "imports": [
@@ -6952,13 +6952,13 @@
       "entryPoint": "virtual:forms/contact-support-form",
       "inputs": {
         "virtual:forms/contact-support-form": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/jXfMoRxpDoxYwaF3Dd2j/bAMJOJMTZRKQwwLz9Huh/eR9jPdTJn.js": {
           "bytesInOutput": 29781
         }
       },
-      "bytes": 32779
+      "bytes": 32758
     },
     "forms/contact-sales-form.js": {
       "imports": [
@@ -7025,13 +7025,13 @@
       "entryPoint": "virtual:forms/contact-sales-form",
       "inputs": {
         "virtual:forms/contact-sales-form": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/e0fS2fEvURCR3yvODXIf/6uXticNFw41T8k44jXSW/SCqt8AAg3.js": {
           "bytesInOutput": 34557
         }
       },
-      "bytes": 37551
+      "bytes": 37530
     },
     "chunks/chunk-EICQ3AWA.js": {
       "imports": [
@@ -7182,13 +7182,13 @@
       "entryPoint": "virtual:interactive/customer-stories",
       "inputs": {
         "virtual:interactive/customer-stories": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/2xq58OZNQr3P9I0sin28/MFJtbsRqPvjCErXF4raO/h45_XDIZO.js": {
           "bytesInOutput": 22765
         }
       },
-      "bytes": 25795
+      "bytes": 25774
     },
     "chunks/chunk-7PER57VO.js": {
       "imports": [
@@ -7302,10 +7302,10 @@
       "entryPoint": "virtual:cards/customer-stories",
       "inputs": {
         "virtual:cards/customer-stories": {
-          "bytesInOutput": 2403
+          "bytesInOutput": 2382
         }
       },
-      "bytes": 2748
+      "bytes": 2727
     },
     "chunks/chunk-OXRYNDCN.js": {
       "imports": [
@@ -7578,7 +7578,7 @@
       "entryPoint": "virtual:buttons/sound-on-tap",
       "inputs": {
         "virtual:buttons/sound-on-tap": {
-          "bytesInOutput": 2416
+          "bytesInOutput": 2395
         },
         "/:https://framerusercontent.com/modules/eU3zxBKFoHQhYFiXuCB7/e05UICsEGRW8sSt9hrO3/roUNcvo3k.js": {
           "bytesInOutput": 9760
@@ -7641,7 +7641,7 @@
           "bytesInOutput": 4081
         }
       },
-      "bytes": 44771
+      "bytes": 44750
     },
     "integrations.js": {
       "imports": [
@@ -7765,13 +7765,13 @@
       "entryPoint": "virtual:pricing/feature-bullet-point",
       "inputs": {
         "virtual:pricing/feature-bullet-point": {
-          "bytesInOutput": 2416
+          "bytesInOutput": 2395
         },
         "/:https://framerusercontent.com/modules/dnjLxrXjfnyVqoMVmwKg/jfhyZkFK3vvVeUMWwmXV/qykyim1qH.js": {
           "bytesInOutput": 10726
         }
       },
-      "bytes": 13553
+      "bytes": 13532
     },
     "docs/navigation.js": {
       "imports": [
@@ -7893,7 +7893,7 @@
       "entryPoint": "virtual:docs/navigation",
       "inputs": {
         "virtual:docs/navigation": {
-          "bytesInOutput": 2441
+          "bytesInOutput": 2420
         },
         "/:https://framerusercontent.com/modules/5exKH8X0djOcoCxmab7W/QW763tLWFbHS7fpN1BCJ/MlPzuwAVd.js": {
           "bytesInOutput": 55326
@@ -7911,7 +7911,7 @@
           "bytesInOutput": 469
         }
       },
-      "bytes": 132884
+      "bytes": 132863
     },
     "chunks/chunk-SBUJUFGA.js": {
       "imports": [
@@ -8282,7 +8282,7 @@
       "entryPoint": "virtual:docs/search-bar",
       "inputs": {
         "virtual:docs/search-bar": {
-          "bytesInOutput": 2441
+          "bytesInOutput": 2420
         },
         "/:https://framerusercontent.com/modules/9UAJj0iki6gynMc1A5PF/2i8ASklCIYeLLw5dtUs9/wvuAi9wiC.js": {
           "bytesInOutput": 15192
@@ -8330,7 +8330,7 @@
           "bytesInOutput": 639
         }
       },
-      "bytes": 82501
+      "bytes": 82480
     },
     "docs/menu-link.js": {
       "imports": [
@@ -8559,13 +8559,13 @@
       "entryPoint": "virtual:docs/previous-next-buttons",
       "inputs": {
         "virtual:docs/previous-next-buttons": {
-          "bytesInOutput": 2416
+          "bytesInOutput": 2395
         },
         "/:https://framerusercontent.com/modules/oUhtxBviOfyjLv3YiCmp/rhLjcN16RqezB1wh1WW1/vE9o8P6TL.js": {
           "bytesInOutput": 13933
         }
       },
-      "bytes": 16696
+      "bytes": 16675
     },
     "docs/card.js": {
       "imports": [
@@ -8633,7 +8633,7 @@
       "entryPoint": "virtual:docs/card",
       "inputs": {
         "virtual:docs/card": {
-          "bytesInOutput": 2416
+          "bytesInOutput": 2395
         },
         "/:https://framerusercontent.com/modules/2aB0YkIxSGRY7QjiJEB4/OvIJALwZnw5aiMQvPwR5/iNgYt8PIo.js": {
           "bytesInOutput": 12567
@@ -8642,7 +8642,7 @@
           "bytesInOutput": 7356
         }
       },
-      "bytes": 22910
+      "bytes": 22889
     },
     "chunks/chunk-DEREOTPY.js": {
       "imports": [
@@ -8728,10 +8728,10 @@
       "entryPoint": "virtual:buttons/primary",
       "inputs": {
         "virtual:buttons/primary": {
-          "bytesInOutput": 2403
+          "bytesInOutput": 2382
         }
       },
-      "bytes": 2627
+      "bytes": 2606
     },
     "chunks/chunk-WPN7HWX3.js": {
       "imports": [
@@ -8886,10 +8886,10 @@
       "entryPoint": "virtual:buttons/sign-up-button",
       "inputs": {
         "virtual:buttons/sign-up-button": {
-          "bytesInOutput": 2424
+          "bytesInOutput": 2403
         }
       },
-      "bytes": 2655
+      "bytes": 2634
     },
     "chunks/chunk-HZDQIPER.js": {
       "imports": [
@@ -8989,10 +8989,10 @@
       "entryPoint": "virtual:buttons/copy-snippet",
       "inputs": {
         "virtual:buttons/copy-snippet": {
-          "bytesInOutput": 2403
+          "bytesInOutput": 2382
         }
       },
-      "bytes": 2632
+      "bytes": 2611
     },
     "interactive/code-snippets.js": {
       "imports": [
@@ -9076,7 +9076,7 @@
       "entryPoint": "virtual:interactive/code-snippets",
       "inputs": {
         "virtual:interactive/code-snippets": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2399
         },
         "/:https://framerusercontent.com/modules/wG0KtvJcQMy9NAtSa7Ol/sVXMQHT5vfprZLNOBMZM/uE1pD4Yl_.js": {
           "bytesInOutput": 40845
@@ -9085,7 +9085,7 @@
           "bytesInOutput": 7579
         }
       },
-      "bytes": 51634
+      "bytes": 51613
     },
     "chunks/chunk-E5FUI76T.js": {
       "imports": [
@@ -9647,13 +9647,13 @@
       "entryPoint": "virtual:tag",
       "inputs": {
         "virtual:tag": {
-          "bytesInOutput": 2416
+          "bytesInOutput": 2395
         },
         "/:https://framerusercontent.com/modules/xm0mRXui1tr1B9VL3CmQ/sNW2gn1d6ZNs7NvIJsgK/on7AAz7Qe.js": {
           "bytesInOutput": 8858
         }
       },
-      "bytes": 11573
+      "bytes": 11552
     },
     "chunks/chunk-X6RUM57F.js": {
       "imports": [

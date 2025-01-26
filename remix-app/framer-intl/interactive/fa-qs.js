@@ -11382,7 +11382,6 @@ import { jsx, } from 'react/jsx-runtime';
 var locales = [];
 var defaultResponsiveVariants = {
   'base': 'ZQ8oV6EzC',
-  'xl': 'W7eBOvVqA',
 };
 stdin_default3.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
