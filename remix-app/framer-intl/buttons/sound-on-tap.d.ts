@@ -3,7 +3,7 @@ import * as React from "react"
 
 import { UnframerBreakpoint } from "unframer"
 
-type Locale = 'it-IT'
+type Locale = string
 export interface Props {
     children?: React.ReactNode
     locale?: Locale
@@ -21,7 +21,7 @@ const SoundOnTapFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-SoundOnTapFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+SoundOnTapFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default SoundOnTapFramerComponent
 

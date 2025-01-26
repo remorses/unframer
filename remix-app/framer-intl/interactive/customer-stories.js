@@ -538,7 +538,10 @@ addFonts(Framerh45_XDIZO, [{ explicitInter: true, fonts: [], }, ...TabsFonts, ..
 // virtual:interactive/customer-stories
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+var locales = [];
+var defaultResponsiveVariants = {
+  '2xl': 'ZDH19H5O5',
+};
 stdin_default3.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -562,6 +565,7 @@ stdin_default3.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default3,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),

@@ -3,7 +3,7 @@ import * as React from "react"
 
 import { UnframerBreakpoint } from "unframer"
 
-type Locale = 'it-IT'
+type Locale = string
 export interface Props {
     children?: React.ReactNode
     locale?: Locale
@@ -20,7 +20,7 @@ const SignInFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-SignInFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+SignInFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default SignInFramerComponent
 

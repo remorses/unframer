@@ -3,7 +3,7 @@ import * as React from "react"
 
 import { UnframerBreakpoint } from "unframer"
 
-type Locale = 'it-IT'
+type Locale = string
 export interface Props {
     children?: React.ReactNode
     locale?: Locale
@@ -20,7 +20,7 @@ const RemoveButtonFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-RemoveButtonFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+RemoveButtonFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default RemoveButtonFramerComponent
 

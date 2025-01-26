@@ -10,7 +10,11 @@ import { Fragment, } from 'react';
 import { ContextProviders, } from 'unframer';
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+var locales = [];
+var defaultResponsiveVariants = {
+  '2xl': 'ff4XVgcyk',
+  'sm': 'f64gXesMC',
+};
 stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -34,6 +38,7 @@ stdin_default.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),

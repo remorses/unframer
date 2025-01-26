@@ -271,7 +271,10 @@ addFonts(Framerqykyim1qH, [
 // virtual:pricing/feature-bullet-point
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+var locales = [];
+var defaultResponsiveVariants = {
+  '2xl': 'VQyi9C9if',
+};
 stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -295,6 +298,7 @@ stdin_default.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),

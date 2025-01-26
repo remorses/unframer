@@ -11379,7 +11379,11 @@ addFonts(FramertOUeA1GYC, [{ explicitInter: true, fonts: [], }, ...CardsFAQCardF
 // virtual:interactive/fa-qs
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+var locales = [];
+var defaultResponsiveVariants = {
+  '2xl': 'u4G7Oc5d1',
+  'xl': 'W7eBOvVqA',
+};
 stdin_default3.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -11403,6 +11407,7 @@ stdin_default3.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default3,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),

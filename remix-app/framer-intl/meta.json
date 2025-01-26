@@ -43,7 +43,7 @@
       "format": "esm"
     },
     "virtual:buttons/primary": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -100,7 +100,7 @@
       "format": "esm"
     },
     "virtual:navigation/logo": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -173,7 +173,7 @@
       "format": "esm"
     },
     "virtual:buttons/sign-up-button": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -235,7 +235,7 @@
       "format": "esm"
     },
     "virtual:buttons/copy-snippet": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -1316,7 +1316,7 @@
       "format": "esm"
     },
     "virtual:interactive/code-snippets": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -1410,7 +1410,7 @@
       "format": "esm"
     },
     "virtual:cards/testimonial-card": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -1483,7 +1483,7 @@
       "format": "esm"
     },
     "virtual:tag": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -1550,7 +1550,7 @@
       "format": "esm"
     },
     "virtual:cards/stats-card": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -2093,7 +2093,7 @@
       "format": "esm"
     },
     "virtual:buttons/sound-on-tap": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -2150,7 +2150,7 @@
       "format": "esm"
     },
     "virtual:integrations": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -2233,7 +2233,7 @@
       "format": "esm"
     },
     "virtual:pricing/feature-bullet-point": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -2717,7 +2717,7 @@
       "format": "esm"
     },
     "virtual:docs/navigation": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -3048,7 +3048,7 @@
       "format": "esm"
     },
     "virtual:docs/search-bar": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -3079,7 +3079,7 @@
       "format": "esm"
     },
     "virtual:docs/menu-link": {
-      "bytes": 3229,
+      "bytes": 3363,
       "imports": [
         {
           "path": "react",
@@ -3141,7 +3141,7 @@
       "format": "esm"
     },
     "virtual:docs/previous-next-buttons": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -3224,7 +3224,7 @@
       "format": "esm"
     },
     "virtual:docs/card": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -3317,7 +3317,7 @@
       "format": "esm"
     },
     "virtual:tabs": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -3400,7 +3400,7 @@
       "format": "esm"
     },
     "virtual:cards/use-cases-cards": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -3467,7 +3467,7 @@
       "format": "esm"
     },
     "virtual:interactive/use-cases": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -3540,7 +3540,7 @@
       "format": "esm"
     },
     "virtual:buttons/submit-button": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -3659,7 +3659,7 @@
       "format": "esm"
     },
     "virtual:forms/contact-support-form": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -3736,7 +3736,7 @@
       "format": "esm"
     },
     "virtual:forms/contact-sales-form": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -3849,7 +3849,7 @@
       "format": "esm"
     },
     "virtual:interactive/customer-stories": {
-      "bytes": 3229,
+      "bytes": 3343,
       "imports": [
         {
           "path": "react",
@@ -3880,7 +3880,7 @@
       "format": "esm"
     },
     "virtual:cards/customer-stories": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -3952,7 +3952,7 @@
       "format": "esm"
     },
     "virtual:cards/blog-card": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -4045,7 +4045,7 @@
       "format": "esm"
     },
     "virtual:forms/sign-up": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -4122,7 +4122,7 @@
       "format": "esm"
     },
     "virtual:forms/sign-in": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -4189,7 +4189,7 @@
       "format": "esm"
     },
     "virtual:cards/faq-card": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -4298,7 +4298,7 @@
       "format": "esm"
     },
     "virtual:interactive/fa-qs": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -4411,7 +4411,7 @@
       "format": "esm"
     },
     "virtual:navigation/footer": {
-      "bytes": 3229,
+      "bytes": 3385,
       "imports": [
         {
           "path": "react",
@@ -4503,7 +4503,7 @@
       "format": "esm"
     },
     "virtual:navigation/nav-bar": {
-      "bytes": 3229,
+      "bytes": 3364,
       "imports": [
         {
           "path": "react",
@@ -4534,7 +4534,7 @@
       "format": "esm"
     },
     "virtual:navigation/twitter-profile-preview": {
-      "bytes": 3229,
+      "bytes": 3342,
       "imports": [
         {
           "path": "react",
@@ -4565,7 +4565,7 @@
       "format": "esm"
     },
     "virtual:navigation/icon": {
-      "bytes": 3229,
+      "bytes": 3363,
       "imports": [
         {
           "path": "react",
@@ -4596,7 +4596,7 @@
       "format": "esm"
     },
     "virtual:navigation/single-toggle": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -4658,7 +4658,7 @@
       "format": "esm"
     },
     "virtual:navigation/single": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -4715,7 +4715,7 @@
       "format": "esm"
     },
     "virtual:remove-button": {
-      "bytes": 3229,
+      "bytes": 3321,
       "imports": [
         {
           "path": "react",
@@ -4883,7 +4883,7 @@
       "format": "esm"
     },
     "virtual:hero-section": {
-      "bytes": 3229,
+      "bytes": 3385,
       "imports": [
         {
           "path": "react",
@@ -5527,10 +5527,10 @@
       "entryPoint": "virtual:navigation/icon",
       "inputs": {
         "virtual:navigation/icon": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2401
         }
       },
-      "bytes": 2541
+      "bytes": 2587
     },
     "navigation/single-toggle.js": {
       "imports": [
@@ -5573,10 +5573,10 @@
       "entryPoint": "virtual:navigation/single-toggle",
       "inputs": {
         "virtual:navigation/single-toggle": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2359
         }
       },
-      "bytes": 2588
+      "bytes": 2592
     },
     "navigation/single.js": {
       "imports": [
@@ -5635,13 +5635,13 @@
       "entryPoint": "virtual:navigation/single",
       "inputs": {
         "virtual:navigation/single": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2372
         },
         "/:https://framerusercontent.com/modules/zX6Lk4oRipsUAK8TEDa8/JFWQVVK5FplwVl7I6u3c/QUeqHSmx1.js": {
           "bytesInOutput": 7256
         }
       },
-      "bytes": 9932
+      "bytes": 9936
     },
     "remove-button.js": {
       "imports": [
@@ -5696,13 +5696,13 @@
       "entryPoint": "virtual:remove-button",
       "inputs": {
         "virtual:remove-button": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2372
         },
         "/:https://framerusercontent.com/modules/qPmAxYl9w3ip7Mb7ykUn/wMawL7Qx1Xs30nz6vw16/la1trdZ8I.js": {
           "bytesInOutput": 6952
         }
       },
-      "bytes": 9565
+      "bytes": 9569
     },
     "hero-section.js": {
       "imports": [
@@ -5804,7 +5804,7 @@
       "entryPoint": "virtual:hero-section",
       "inputs": {
         "virtual:hero-section": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2440
         },
         "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js": {
           "bytesInOutput": 18715
@@ -5828,7 +5828,7 @@
           "bytesInOutput": 291
         }
       },
-      "bytes": 35215
+      "bytes": 35283
     },
     "chunks/codemirror_lang_angular-5HJJBD5F.js": {
       "imports": [
@@ -5981,13 +5981,13 @@
       "entryPoint": "virtual:cards/blog-card",
       "inputs": {
         "virtual:cards/blog-card": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2372
         },
         "/:https://framerusercontent.com/modules/jbkTuDiyVcx21mUBJ19B/S9wNFyzREEeRvvjaroYn/QK36RbJuJ.js": {
           "bytesInOutput": 14841
         }
       },
-      "bytes": 17748
+      "bytes": 17752
     },
     "forms/sign-up.js": {
       "imports": [
@@ -6059,7 +6059,7 @@
       "entryPoint": "virtual:forms/sign-up",
       "inputs": {
         "virtual:forms/sign-up": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2397
         },
         "/:https://framerusercontent.com/modules/2oKMpgdbGMN452HBu43B/TDI0doXjBihjrZvF7LxJ/LG_K_Gwhe.js": {
           "bytesInOutput": 28243
@@ -6068,7 +6068,7 @@
           "bytesInOutput": 603
         }
       },
-      "bytes": 31968
+      "bytes": 31993
     },
     "forms/sign-in.js": {
       "imports": [
@@ -6135,13 +6135,13 @@
       "entryPoint": "virtual:forms/sign-in",
       "inputs": {
         "virtual:forms/sign-in": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2397
         },
         "/:https://framerusercontent.com/modules/3SpzSsgouKI4HCPIntXg/u3LwVyssk9bGQz51sXlz/M4qYARdEB.js": {
           "bytesInOutput": 22534
         }
       },
-      "bytes": 25458
+      "bytes": 25483
     },
     "cards/faq-card.js": {
       "imports": [
@@ -6188,10 +6188,10 @@
       "entryPoint": "virtual:cards/faq-card",
       "inputs": {
         "virtual:cards/faq-card": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2380
         }
       },
-      "bytes": 2616
+      "bytes": 2641
     },
     "interactive/fa-qs.js": {
       "imports": [
@@ -6273,7 +6273,7 @@
       "entryPoint": "virtual:interactive/fa-qs",
       "inputs": {
         "virtual:interactive/fa-qs": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2419
         },
         "/:https://framerusercontent.com/modules/6GKhy2l5gakg4Kc5NkIr/vvarOump2Om0DJMYiwE4/tOUeA1GYC.js": {
           "bytesInOutput": 8892
@@ -6288,7 +6288,7 @@
           "bytesInOutput": 102
         }
       },
-      "bytes": 121651
+      "bytes": 121698
     },
     "chunks/chunk-XGNHDYUG.js": {
       "imports": [
@@ -6404,13 +6404,13 @@
       "entryPoint": "virtual:navigation/footer",
       "inputs": {
         "virtual:navigation/footer": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2440
         },
         "/:https://framerusercontent.com/modules/ofbCvsLY8W21BXW0aU73/js0iOvT3nnMpznFN6T5C/EmVwbqUHg.js": {
           "bytesInOutput": 52154
         }
       },
-      "bytes": 55213
+      "bytes": 55281
     },
     "navigation/nav-bar.js": {
       "imports": [
@@ -6501,13 +6501,13 @@
       "entryPoint": "virtual:navigation/nav-bar",
       "inputs": {
         "virtual:navigation/nav-bar": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2419
         },
         "/:https://framerusercontent.com/modules/cVCKBc0U9GgwRNGyXKgv/Py5RuA1kQE1RZFpSxNfp/jBzjFrEWY.js": {
           "bytesInOutput": 34915
         }
       },
-      "bytes": 38220
+      "bytes": 38267
     },
     "navigation/twitter-profile-preview.js": {
       "imports": [
@@ -6550,10 +6550,10 @@
       "entryPoint": "virtual:navigation/twitter-profile-preview",
       "inputs": {
         "virtual:navigation/twitter-profile-preview": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2380
         }
       },
-      "bytes": 2598
+      "bytes": 2623
     },
     "chunks/chunk-BP573UWY.js": {
       "imports": [
@@ -6637,10 +6637,10 @@
       "entryPoint": "virtual:tabs",
       "inputs": {
         "virtual:tabs": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2380
         }
       },
-      "bytes": 2602
+      "bytes": 2627
     },
     "cards/use-cases-cards.js": {
       "imports": [
@@ -6691,10 +6691,10 @@
       "entryPoint": "virtual:cards/use-cases-cards",
       "inputs": {
         "virtual:cards/use-cases-cards": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2359
         }
       },
-      "bytes": 2661
+      "bytes": 2665
     },
     "interactive/use-cases.js": {
       "imports": [
@@ -6769,13 +6769,13 @@
       "entryPoint": "virtual:interactive/use-cases",
       "inputs": {
         "virtual:interactive/use-cases": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2398
         },
         "/:https://framerusercontent.com/modules/h1A05QuVbcdR1vRzyjxd/0D6MJbMdQgsYux6HEjJj/jFmI6rPh4.js": {
           "bytesInOutput": 34342
         }
       },
-      "bytes": 37234
+      "bytes": 37260
     },
     "chunks/chunk-OBVE4NLE.js": {
       "imports": [
@@ -6879,13 +6879,13 @@
       "entryPoint": "virtual:buttons/submit-button",
       "inputs": {
         "virtual:buttons/submit-button": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2393
         },
         "/:https://framerusercontent.com/modules/gKNc7qEM28AltXyssJPP/1KviJCXajXXNsqEzF8PK/KDmSZoPnz.js": {
           "bytesInOutput": 12387
         }
       },
-      "bytes": 15092
+      "bytes": 15117
     },
     "forms/contact-support-form.js": {
       "imports": [
@@ -6952,13 +6952,13 @@
       "entryPoint": "virtual:forms/contact-support-form",
       "inputs": {
         "virtual:forms/contact-support-form": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2397
         },
         "/:https://framerusercontent.com/modules/jXfMoRxpDoxYwaF3Dd2j/bAMJOJMTZRKQwwLz9Huh/eR9jPdTJn.js": {
           "bytesInOutput": 29781
         }
       },
-      "bytes": 32731
+      "bytes": 32756
     },
     "forms/contact-sales-form.js": {
       "imports": [
@@ -7025,13 +7025,13 @@
       "entryPoint": "virtual:forms/contact-sales-form",
       "inputs": {
         "virtual:forms/contact-sales-form": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2397
         },
         "/:https://framerusercontent.com/modules/e0fS2fEvURCR3yvODXIf/6uXticNFw41T8k44jXSW/SCqt8AAg3.js": {
           "bytesInOutput": 34557
         }
       },
-      "bytes": 37503
+      "bytes": 37528
     },
     "chunks/chunk-EICQ3AWA.js": {
       "imports": [
@@ -7182,13 +7182,13 @@
       "entryPoint": "virtual:interactive/customer-stories",
       "inputs": {
         "virtual:interactive/customer-stories": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2398
         },
         "/:https://framerusercontent.com/modules/2xq58OZNQr3P9I0sin28/MFJtbsRqPvjCErXF4raO/h45_XDIZO.js": {
           "bytesInOutput": 22765
         }
       },
-      "bytes": 25747
+      "bytes": 25773
     },
     "chunks/chunk-7PER57VO.js": {
       "imports": [
@@ -7302,10 +7302,10 @@
       "entryPoint": "virtual:cards/customer-stories",
       "inputs": {
         "virtual:cards/customer-stories": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2380
         }
       },
-      "bytes": 2700
+      "bytes": 2725
     },
     "chunks/chunk-OXRYNDCN.js": {
       "imports": [
@@ -7578,7 +7578,7 @@
       "entryPoint": "virtual:buttons/sound-on-tap",
       "inputs": {
         "virtual:buttons/sound-on-tap": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2394
         },
         "/:https://framerusercontent.com/modules/eU3zxBKFoHQhYFiXuCB7/e05UICsEGRW8sSt9hrO3/roUNcvo3k.js": {
           "bytesInOutput": 9760
@@ -7641,7 +7641,7 @@
           "bytesInOutput": 4081
         }
       },
-      "bytes": 44723
+      "bytes": 44749
     },
     "integrations.js": {
       "imports": [
@@ -7696,13 +7696,13 @@
       "entryPoint": "virtual:integrations",
       "inputs": {
         "virtual:integrations": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2372
         },
         "/:https://framerusercontent.com/modules/j1MgkVDyyGp8B8WV9EDj/NK5XbOwG4d17ktMY3GBq/aBo53UoLa.js": {
           "bytesInOutput": 32156
         }
       },
-      "bytes": 34767
+      "bytes": 34771
     },
     "pricing/feature-bullet-point.js": {
       "imports": [
@@ -7765,13 +7765,13 @@
       "entryPoint": "virtual:pricing/feature-bullet-point",
       "inputs": {
         "virtual:pricing/feature-bullet-point": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2394
         },
         "/:https://framerusercontent.com/modules/dnjLxrXjfnyVqoMVmwKg/jfhyZkFK3vvVeUMWwmXV/qykyim1qH.js": {
           "bytesInOutput": 10726
         }
       },
-      "bytes": 13505
+      "bytes": 13531
     },
     "docs/navigation.js": {
       "imports": [
@@ -7893,7 +7893,7 @@
       "entryPoint": "virtual:docs/navigation",
       "inputs": {
         "virtual:docs/navigation": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2419
         },
         "/:https://framerusercontent.com/modules/5exKH8X0djOcoCxmab7W/QW763tLWFbHS7fpN1BCJ/MlPzuwAVd.js": {
           "bytesInOutput": 55326
@@ -7911,7 +7911,7 @@
           "bytesInOutput": 469
         }
       },
-      "bytes": 132815
+      "bytes": 132862
     },
     "chunks/chunk-SBUJUFGA.js": {
       "imports": [
@@ -8282,7 +8282,7 @@
       "entryPoint": "virtual:docs/search-bar",
       "inputs": {
         "virtual:docs/search-bar": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2419
         },
         "/:https://framerusercontent.com/modules/9UAJj0iki6gynMc1A5PF/2i8ASklCIYeLLw5dtUs9/wvuAi9wiC.js": {
           "bytesInOutput": 15192
@@ -8330,7 +8330,7 @@
           "bytesInOutput": 639
         }
       },
-      "bytes": 82432
+      "bytes": 82479
     },
     "docs/menu-link.js": {
       "imports": [
@@ -8385,10 +8385,10 @@
       "entryPoint": "virtual:docs/menu-link",
       "inputs": {
         "virtual:docs/menu-link": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2401
         }
       },
-      "bytes": 2692
+      "bytes": 2738
     },
     "chunks/chunk-7JBAJ2SE.js": {
       "imports": [
@@ -8559,13 +8559,13 @@
       "entryPoint": "virtual:docs/previous-next-buttons",
       "inputs": {
         "virtual:docs/previous-next-buttons": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2393
         },
         "/:https://framerusercontent.com/modules/oUhtxBviOfyjLv3YiCmp/rhLjcN16RqezB1wh1WW1/vE9o8P6TL.js": {
           "bytesInOutput": 13933
         }
       },
-      "bytes": 16648
+      "bytes": 16673
     },
     "docs/card.js": {
       "imports": [
@@ -8633,7 +8633,7 @@
       "entryPoint": "virtual:docs/card",
       "inputs": {
         "virtual:docs/card": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2415
         },
         "/:https://framerusercontent.com/modules/2aB0YkIxSGRY7QjiJEB4/OvIJALwZnw5aiMQvPwR5/iNgYt8PIo.js": {
           "bytesInOutput": 12567
@@ -8642,7 +8642,7 @@
           "bytesInOutput": 7356
         }
       },
-      "bytes": 22862
+      "bytes": 22909
     },
     "chunks/chunk-DEREOTPY.js": {
       "imports": [
@@ -8728,10 +8728,10 @@
       "entryPoint": "virtual:buttons/primary",
       "inputs": {
         "virtual:buttons/primary": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2381
         }
       },
-      "bytes": 2579
+      "bytes": 2605
     },
     "chunks/chunk-WPN7HWX3.js": {
       "imports": [
@@ -8807,10 +8807,10 @@
       "entryPoint": "virtual:navigation/logo",
       "inputs": {
         "virtual:navigation/logo": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2402
         }
       },
-      "bytes": 2541
+      "bytes": 2588
     },
     "chunks/chunk-Q4YW5TUB.js": {
       "imports": [
@@ -8886,10 +8886,10 @@
       "entryPoint": "virtual:buttons/sign-up-button",
       "inputs": {
         "virtual:buttons/sign-up-button": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2402
         }
       },
-      "bytes": 2586
+      "bytes": 2633
     },
     "chunks/chunk-HZDQIPER.js": {
       "imports": [
@@ -8989,10 +8989,10 @@
       "entryPoint": "virtual:buttons/copy-snippet",
       "inputs": {
         "virtual:buttons/copy-snippet": {
-          "bytesInOutput": 2355
+          "bytesInOutput": 2380
         }
       },
-      "bytes": 2584
+      "bytes": 2609
     },
     "interactive/code-snippets.js": {
       "imports": [
@@ -9076,7 +9076,7 @@
       "entryPoint": "virtual:interactive/code-snippets",
       "inputs": {
         "virtual:interactive/code-snippets": {
-          "bytesInOutput": 2372
+          "bytesInOutput": 2398
         },
         "/:https://framerusercontent.com/modules/wG0KtvJcQMy9NAtSa7Ol/sVXMQHT5vfprZLNOBMZM/uE1pD4Yl_.js": {
           "bytesInOutput": 40845
@@ -9085,7 +9085,7 @@
           "bytesInOutput": 7579
         }
       },
-      "bytes": 51586
+      "bytes": 51612
     },
     "chunks/chunk-E5FUI76T.js": {
       "imports": [
@@ -9562,13 +9562,13 @@
       "entryPoint": "virtual:cards/testimonial-card",
       "inputs": {
         "virtual:cards/testimonial-card": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2372
         },
         "/:https://framerusercontent.com/modules/8SvTfjg3wtGBYHnVhhfs/TV916z0u6NMPFGMOATTZ/IlmXaohIz.js": {
           "bytesInOutput": 18538
         }
       },
-      "bytes": 21459
+      "bytes": 21463
     },
     "chunks/chunk-WQKND6O4.js": {
       "imports": [
@@ -9647,13 +9647,13 @@
       "entryPoint": "virtual:tag",
       "inputs": {
         "virtual:tag": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2394
         },
         "/:https://framerusercontent.com/modules/xm0mRXui1tr1B9VL3CmQ/sNW2gn1d6ZNs7NvIJsgK/on7AAz7Qe.js": {
           "bytesInOutput": 8858
         }
       },
-      "bytes": 11525
+      "bytes": 11551
     },
     "chunks/chunk-X6RUM57F.js": {
       "imports": [
@@ -9736,13 +9736,13 @@
       "entryPoint": "virtual:cards/stats-card",
       "inputs": {
         "virtual:cards/stats-card": {
-          "bytesInOutput": 2368
+          "bytesInOutput": 2372
         },
         "/:https://framerusercontent.com/modules/wGmB620zPQ6SELIv24lD/IbaBivOwUqFEn0C4HzMI/zTGad3icV.js": {
           "bytesInOutput": 7469
         }
       },
-      "bytes": 10271
+      "bytes": 10275
     },
     "chunks/chunk-WJEXVHCL.js": {
       "imports": [

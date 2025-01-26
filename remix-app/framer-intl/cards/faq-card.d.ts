@@ -3,7 +3,7 @@ import * as React from "react"
 
 import { UnframerBreakpoint } from "unframer"
 
-type Locale = 'it-IT'
+type Locale = string
 export interface Props {
     children?: React.ReactNode
     locale?: Locale
@@ -22,7 +22,7 @@ const FaqCardFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-FaqCardFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+FaqCardFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default FaqCardFramerComponent
 

@@ -911,7 +911,11 @@ addFonts(FramerjBzjFrEWY, [
 // virtual:navigation/nav-bar
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
-var locales = [{ 'id': 'M_lnJlsvf', 'name': 'Italian (Italy)', 'slug': 'it', 'code': 'it-IT', },];
+var locales = [];
+var defaultResponsiveVariants = {
+  '2xl': 'atzuKDLl2',
+  'md': 'TD3BSWKBy',
+};
 stdin_default4.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -935,6 +939,7 @@ stdin_default4.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default4,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),
