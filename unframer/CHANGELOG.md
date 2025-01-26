@@ -1,5 +1,11 @@
 # unframer
 
+## 2.16.0
+
+### Minor Changes
+
+-   55ed540: Make variants prop in Responsive component optional, guess the variants breakpoints thanks to the plugin
+
 ## 2.15.1
 
 ### Patch Changes
