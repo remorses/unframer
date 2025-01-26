@@ -16,7 +16,8 @@ import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
 var defaultResponsiveVariants = {
-  'xl': 'aDTDT_hty',
+  'base': 'aDTDT_hty',
+  'lg': 'aDTDT_hty',
 };
 stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(

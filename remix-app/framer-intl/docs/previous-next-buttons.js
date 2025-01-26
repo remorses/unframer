@@ -320,6 +320,7 @@ import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
 var defaultResponsiveVariants = {
+  'base': 'aGb86lapo',
   'xl': 'OCRcNBsU7',
 };
 stdin_default.Responsive = ({ locale, ...rest },) => {
