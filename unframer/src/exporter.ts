@@ -121,31 +121,33 @@ export async function bundle({
                                     (x) => x.componentName === name,
                                 ) || []
 
-                            const brk = componentBreakpoints.map((x) => {
-                                // Find the breakpoint where the component width fits between current and next size
-                                const breakpointName = breakpointSizes.find(
-                                    ([name, width], index) => {
-                                        const nextWidth =
-                                            breakpointSizes[index + 1]?.[1] ??
-                                            Infinity
-                                        return (
-                                            x.width >= width &&
-                                            x.width < nextWidth
+                            const brk = breakpointSizes
+                                .map(([name, width], index) => {
+                                    const nextWidth =
+                                        breakpointSizes[index + 1]?.[1] ??
+                                        Infinity
+                                    const matchingBreakpoint =
+                                        componentBreakpoints.find(
+                                            (x) =>
+                                                x.width >= width &&
+                                                x.width < nextWidth,
                                         )
-                                    },
-                                )?.[0]
-                                if (!breakpointName) {
-                                    return []
-                                }
-                                return [breakpointName, x.variantId]
-                            })
-                            const firstVariantId =
-                                componentBreakpoints[0]?.variantId
+                                    if (!matchingBreakpoint) {
+                                        return []
+                                    }
+                                    return [name, matchingBreakpoint.variantId]
+                                })
+                                .filter((x) => x.length)
+                            const firstVariantId = brk.find(
+                                (x) => x.length,
+                            )?.[1]
                             const responsiveVariants: Record<string, string> =
-                                Object.fromEntries([
-                                    ['base', firstVariantId],
-                                    ...brk,
-                                ])
+                                firstVariantId
+                                    ? Object.fromEntries([
+                                          ['base', firstVariantId],
+                                          ...brk.slice(1),
+                                      ])
+                                    : {}
 
                             return {
                                 contents: /** js **/ `
