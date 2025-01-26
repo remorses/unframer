@@ -8,7 +8,13 @@ import findUp from 'find-up'
 import fs from 'fs'
 import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
-import { componentNameToPath, logger, sleep, spinner } from './utils.js'
+import {
+    componentNameToPath,
+    isTruthy,
+    logger,
+    sleep,
+    spinner,
+} from './utils.js'
 const configNames = ['unframer.config.json', 'unframer.json']
 
 export const cli = cac('unframer')
@@ -79,11 +85,28 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                         components: Object.fromEntries(
                             await Promise.all(
                                 data.components.map(async (c) => [
-                                    await componentNameToPath(c.name),
+                                    componentNameToPath(c.name),
                                     c.url,
                                 ]),
                             ),
                         ),
+                        componentBreakpoints:
+                            data.breakpoints
+                                ?.map((b) => {
+                                    const c = data.components.find(
+                                        (c) => c.id === b.componentId,
+                                    )
+                                    if (!c) {
+                                        return
+                                    }
+                                    return {
+                                        ...b,
+                                        componentName: componentNameToPath(
+                                            c.name,
+                                        ),
+                                    }
+                                })
+                                .filter(isTruthy) || [],
                         tokens: data.colorStyles,
                         framerWebPages: data.framerWebPages || [],
                     },
@@ -232,6 +255,13 @@ export type Config = {
     components: {
         [name: string]: string
     }
+    componentBreakpoints?: {
+        variantId: string
+        componentId: string
+        componentName: string
+        breakpointName: string
+        width: number
+    }[]
     externalPackages?: string[]
     allExternal?: boolean
     projectId?: string
@@ -242,6 +272,7 @@ export type Config = {
         components?: string[]
         path: string
     }[]
+
     locales?: {
         code: string
         id: string

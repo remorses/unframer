@@ -16,6 +16,7 @@ import dedent from 'string-dedent'
 import {
     ComponentFontBundle,
     breakpointsStyles,
+    defaultBreakpointSizes,
     getFontsStyles,
     groupBy,
     logFontsUsage,
@@ -67,6 +68,10 @@ export async function bundle({
             { path: page.path },
         ]),
     )
+
+    const breakpointSizes = Object.entries(
+        config.breakpoints || defaultBreakpointSizes,
+    ).sort(([, a], [, b]) => a - b)
     const buildContext = await context({
         absWorkingDir: out,
 
@@ -111,6 +116,36 @@ export async function bundle({
                         async (args) => {
                             const name = args.path
                             const url = components[name]
+                            const componentBreakpoints =
+                                config.componentBreakpoints?.filter(
+                                    (x) => x.componentName === name,
+                                ) || []
+
+                            const brk = componentBreakpoints.map((x) => {
+                                // Find the breakpoint where the component width fits between current and next size
+                                const breakpointName = breakpointSizes.find(
+                                    ([name, width], index) => {
+                                        const nextWidth =
+                                            breakpointSizes[index + 1]?.[1] ??
+                                            Infinity
+                                        return (
+                                            x.width >= width &&
+                                            x.width < nextWidth
+                                        )
+                                    },
+                                )?.[0]
+                                if (!breakpointName) {
+                                    return []
+                                }
+                                return [breakpointName, x.variantId]
+                            })
+                            const firstVariantId =
+                                componentBreakpoints[0]?.variantId
+                            const responsiveVariants: Record<string, string> =
+                                Object.fromEntries([
+                                    ['base', firstVariantId],
+                                    ...brk,
+                                ])
 
                             return {
                                 contents: /** js **/ `
@@ -125,6 +160,11 @@ export async function bundle({
                                 const locales = ${
                                     JSON.stringify(config.locales) || '[]'
                                 }
+                                const defaultResponsiveVariants = ${JSON.stringify(
+                                    responsiveVariants,
+                                    null,
+                                    2,
+                                )}
 
                                 Component.Responsive = ({ locale, ...rest }) => {
                                     return (
@@ -134,6 +174,7 @@ export async function bundle({
                                             )}}
                                             children={<WithFramerBreakpoints
                                                         Component={Component}
+                                                        variants={defaultResponsiveVariants}
                                                         {...rest}
                                                     />}
                                             framerSiteId={${JSON.stringify(
@@ -344,7 +385,6 @@ export async function bundle({
             `**/*.js\nchunks\n`,
             'utf-8',
         )
-        
 
         logFontsUsage(allFonts)
             .split('\n')
@@ -612,7 +652,7 @@ export function resolvePackage({ cwd, pkg }) {
 
         const command = [
             JSON.stringify(nodePath),
-            '-e', 
+            '-e',
             JSON.stringify(code),
         ].join(' ')
 
@@ -873,7 +913,9 @@ export async function extractPropControlsUnsafe(
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
 
     const fileUrl = url.pathToFileURL(filename).href
-    const code = `import("${url.fileURLToPath(fileUrl)}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
+    const code = `import("${url.fileURLToPath(
+        fileUrl,
+    )}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
 
     const TIMEOUT = 5 * 1000
     const UNFRAMER_MAP_PACKAGES = JSON.stringify({
@@ -1040,7 +1082,7 @@ export function propControlsToType({
         t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n\n`
         t += `const ${componentName} = (props: Props) => any\n\n`
         t += `type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }\n\n`
-        t += `${componentName}.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any\n\n`
+        t += `${componentName}.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any\n\n`
         t += `export default ${componentName}\n\n`
 
         return t

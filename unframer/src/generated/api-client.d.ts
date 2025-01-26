@@ -34,36 +34,34 @@ export declare function createClient({ url }: {
                 };
                 rephrase: {
                     post: (body: {
+                        url: string;
                         oldText: import("./rewrite").OldTextTree;
                         sourceHtml: string | null;
-                        url: string;
                         description?: string | null | undefined;
-                        projectName?: string | undefined;
                         pagePath?: string | undefined;
+                        projectName?: string | undefined;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
                         fetch?: RequestInit | undefined;
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: AsyncGenerator<{
-                            partialItem: Partial<{
-                                nodeId?: string | undefined;
-                                reasoning?: string | undefined;
-                                newContent?: string | undefined;
-                            }>;
-                            completeObj: undefined;
-                            finalObject?: undefined;
                             type: "chunk";
+                            partialItem: Partial<import("./xml").NewExtractedNode> | null;
+                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode> | null;
+                            fullItem: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode>;
                             generationId?: undefined;
                         } | {
-                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<{
-                                nodeId?: string | undefined;
-                                reasoning?: string | undefined;
-                                newContent?: string | undefined;
-                            }>;
-                            finalObject: undefined;
-                            partialItem?: undefined;
                             type: "chunk";
+                            partialItem: Partial<import("./xml").NewExtractedNode> | null;
+                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode> | null;
+                            fullItem: undefined;
+                            generationId?: undefined;
+                        } | {
+                            type: "chunk";
+                            partialItem: Partial<import("./xml").NewExtractedNode> | null;
+                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode> | null;
+                            fullXml: string;
                             generationId?: undefined;
                         } | {
                             type: "generation";
@@ -157,8 +155,8 @@ export declare function createClient({ url }: {
                 };
                 syncsThisMonth: {
                     post: (body: {
-                        projectName?: string | undefined;
                         projectId?: string | undefined;
+                        projectName?: string | undefined;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -239,10 +237,10 @@ export declare function createClient({ url }: {
                 syncGithub: {
                     post: (body: {
                         basePath: string;
+                        projectId: string;
                         projectName: string;
                         githubAccountLogin: string;
                         owner: string;
-                        projectId: string;
                         repo: string;
                         itemIds?: string[] | undefined;
                         mapFieldsConfig?: import("framer-plugin").CollectionField[] | undefined;
@@ -311,9 +309,9 @@ export declare function createClient({ url }: {
                         200: {
                             project: {
                                 orgId: string;
-                                projectName: string | null;
                                 createdAt: Date;
                                 projectId: string;
+                                projectName: string | null;
                                 fullFramerProjectId: string | null;
                                 websiteUrl: string | null;
                             };
@@ -342,15 +340,21 @@ export declare function createClient({ url }: {
                                 name: string;
                                 slug: string;
                             }[];
+                            breakpoints: {
+                                variantId: string;
+                                componentId: string;
+                                width: number;
+                                breakpointName: string;
+                            }[];
                         };
                     }>>;
                     publish: {
                         post: (body: {
                             components: {
-                                url: string;
                                 id: string;
                                 name: string;
                                 projectId: string;
+                                url: string;
                                 componentIdentifier: string | null;
                             }[];
                         }, options?: {
@@ -373,9 +377,9 @@ export declare function createClient({ url }: {
                             } | {
                                 project: {
                                     orgId: string;
-                                    projectName: string | null;
                                     createdAt: Date;
                                     projectId: string;
+                                    projectName: string | null;
                                     fullFramerProjectId: string | null;
                                     websiteUrl: string | null;
                                 };
@@ -403,6 +407,12 @@ export declare function createClient({ url }: {
                                     id: string;
                                     name: string;
                                     slug: string;
+                                }[];
+                                breakpoints: {
+                                    variantId: string;
+                                    componentId: string;
+                                    width: number;
+                                    breakpointName: string;
                                 }[];
                                 type: "project";
                             }, void, unknown>;
@@ -461,20 +471,27 @@ export declare function createClient({ url }: {
                 };
                 upsertProject: {
                     post: (body: {
+                        projectId: string;
                         components: {
-                            url: string;
                             id: string;
                             name: string;
                             projectId: string;
+                            url: string;
                             componentIdentifier: string | null;
                         }[];
-                        projectId: string;
                         colorStyles: {
                             id: string;
                             name: string | null;
                             projectId: string;
                             lightColor: string;
                             darkColor: string;
+                        }[];
+                        breakpoints: {
+                            variantId: string;
+                            projectId: string;
+                            componentId: string;
+                            width: number;
+                            breakpointName: string;
                         }[];
                         projectName?: string | null | undefined;
                         fullFramerProjectId?: string | undefined;
@@ -498,6 +515,138 @@ export declare function createClient({ url }: {
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             projectId: string;
+                        };
+                    }>>;
+                };
+            };
+            llm: {
+                health: {
+                    get: (options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: string;
+                    }>>;
+                };
+                submitReview: {
+                    post: (body: {
+                        stars: number;
+                        generationId: number;
+                    }, options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: {
+                            success: boolean;
+                            error?: undefined;
+                        } | {
+                            success: boolean;
+                            error: string;
+                        };
+                    }>>;
+                };
+                publish: {
+                    post: (body: {
+                        randomId: string;
+                        callId: string;
+                        tree: import("./rewrite").OldTextTree;
+                    }, options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: string;
+                    }>>;
+                };
+                getCredits: {
+                    post: (body?: unknown, options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: import("./credits").RemainingCredits;
+                    }>>;
+                };
+                generate: {
+                    post: (body: {
+                        randomId: string;
+                        tree: import("./rewrite").OldTextTree;
+                        description: string;
+                        projectId?: string | undefined;
+                    }, options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: AsyncGenerator<{
+                            fullItem: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode>;
+                            type: "fullItem";
+                            partialItem: undefined;
+                            nodeId: string;
+                        } | {
+                            fullItem: undefined;
+                            type: "partialItem";
+                            partialItem: Partial<import("./xml").NewExtractedNode>;
+                            nodeId: string;
+                        } | {
+                            nodeIds: string[];
+                            type: "tool-call";
+                            id: string;
+                            toolName: "duplicate" | "delete";
+                            callId: string;
+                        }, {
+                            fullXml: string;
+                        }, unknown>;
+                    }>>;
+                };
+                subscriptions: {
+                    get: (options: {
+                        headers?: Record<string, unknown> | undefined;
+                        query: {
+                            projectId: string;
+                        };
+                        fetch?: RequestInit | undefined;
+                    }) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: {
+                            subs: ({
+                                orgId: string;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
+                                createdAt: Date;
+                                orderId: string | null;
+                                variantId: string;
+                                productId: string;
+                                variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
+                                quantity: number;
+                                endsAt: Date | null;
+                            } | null)[];
+                            activeSub: {
+                                orgId: string;
+                                status: import("@prisma/client").$Enums.SubscriptionStatus;
+                                createdAt: Date;
+                                orderId: string | null;
+                                variantId: string;
+                                productId: string;
+                                variantName: string | null;
+                                email: string | null;
+                                subscriptionId: string;
+                                pluginName: import("@prisma/client").$Enums.PluginName;
+                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
+                                provider: import("@prisma/client").$Enums.PaymentProvider;
+                                customerId: string | null;
+                                itemId: string | null;
+                                quantity: number;
+                                endsAt: Date | null;
+                            } | null;
+                            manageSubUrl: string | undefined;
                         };
                     }>>;
                 };
