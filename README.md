@@ -44,6 +44,8 @@ export default function App() {
 }
 ```
 
+1. To make sure everything works correctly install React 19 (latest version) and disable React Strict Mode in your app. Strict mode renders your components twice and this can cause issues with Framer animations.
+
 ## Using responsive variants
 
 ```tsx
@@ -185,6 +187,7 @@ The Responsive component renders your components for each different breakpoint a
 If you find any errors rendering your components:
 
 -   Check you have the latest version of `unframer` installed
+-   If an animation is now working as expected try disabled React strict mode and updating to React 19.
 -   Try downloading new versions of the components by running again `npx unframer {projectId}`, Framer may already have fixed the problem.
 -   Try disabling React strict mode, this can cause many issues in Framer components.
 -   If the export fails because Esbuild cannot find an export from a package (like `No matching export in "/:https://esm.sh/zustand" for import "default"`) you can use the `--external` option to externalie npm packages used by Framer, then install them manually with the right version with `npm install`.
