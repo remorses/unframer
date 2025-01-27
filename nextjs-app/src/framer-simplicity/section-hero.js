@@ -205,7 +205,7 @@ var className2 = 'framer-a3inn';
 
 // /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/MEgFpTddklVVfqQ1ss5q/aKlzorVQO.js
 var ElementsBadgeFonts = getFonts(stdin_default,);
-var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(withFX(motion.div,),);
+var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(withFX(motion.div,));
 var ButtonsButtonFonts = getFonts(stdin_default2,);
 var cycleOrder = ['L_pX4uUkR', 'Gbz9maQw1', 'K1iE6Mz7N',];
 var serializationHash = 'framer-VjguY';
@@ -351,7 +351,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
                       ),
                       children: /* @__PURE__ */ _jsx(MotionDivWithFXWithOptimizedAppearEffect, {
                         __perspectiveFX: false,
-                        __smartComponentFX: true,
+                        // __smartComponentFX: true,
                         __targetOpacity: 1,
                         animate: animation,
                         className: 'framer-pz5jso-container',
@@ -359,7 +359,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref,) {
                         initial: animation1,
                         layoutDependency,
                         layoutId: 'EBGIPu010-container',
-                        optimized: true,
+                        // optimized: true,
                         children: /* @__PURE__ */ _jsx(stdin_default, {
                           D_QyhowU2: 'Export Framer Components to React',
                           height: '100%',

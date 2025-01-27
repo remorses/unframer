@@ -172,20 +172,19 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
         }
     }
     const parts = [...variants.values()].map(
-        ({ className, breakpoints, variant }) => {
+        ({ className, breakpoints, variant }, i) => {
             const shouldShow =
                 !currentBreakpoint || breakpoints.includes(currentBreakpoint)
             if (!shouldShow) {
                 return null
             }
             return (
-                <div key={variant} className={className}>
+                <div key={i} className={className}>
                     {/* @ts-ignore */}
                     <Component
                         ref={ref}
-                        key={variant}
                         // LayoutGroup is used internally
-                        layoutId={id + variant}
+                        layoutId={variant}
                         // layoutDependency={id}
                         // layoutId={id + variant}
                         // layoutId={breakpointName}
@@ -273,7 +272,6 @@ export function AdaptedLink({
     children,
     ...rest
 }) {
-    
     const onlyForFramer = { children, nodeId, openInNewTab, smoothScroll }
     const routes = React.useContext(routesContext)
     const webPageId = href?.webPageId as string
