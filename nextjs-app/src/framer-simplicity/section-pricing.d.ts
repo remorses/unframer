@@ -14,7 +14,6 @@ export interface Props {
     height?: any
     layoutId?: string
     "variant"?: 'Desktop' | 'Tablet' | 'Phone'
-    "click"?: Function
 }
 
 const SectionPricingFramerComponent = (props: Props) => any

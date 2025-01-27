@@ -20,7 +20,7 @@ export default function Page() {
 
 export function Home() {
     return (
-        <div className='bg-black flex flex-col items-center p-10'>
+        <div className='bg-black flex flex-col items-center'>
             <NavigationFramerComponent.Responsive />
 
             <SectionHeroFramerComponent.Responsive />

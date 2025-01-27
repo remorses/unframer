@@ -825,7 +825,7 @@ NavigationContainer
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
 
-/* used by section-call-to-action.js, section-frequently-asked-questions.js, section-hero.js, section-large-testimonial.js, section-pricing.js, section-testimonials.js */
+/* used by section-frequently-asked-questions.js, section-hero.js, section-pricing.js */
 
 @font-face {
     font-family: 'Instrument Serif'; 
