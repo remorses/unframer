@@ -915,9 +915,9 @@ export async function extractPropControlsUnsafe(
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
 
     const fileUrl = url.pathToFileURL(filename).href
-    const code = `import("${url.fileURLToPath(
-        fileUrl,
-    )}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
+    const code = `import("${url
+        .pathToFileURL(fileUrl)
+        .toString()}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
 
     const TIMEOUT = 5 * 1000
     const UNFRAMER_MAP_PACKAGES = JSON.stringify({
