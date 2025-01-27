@@ -1,5 +1,11 @@
 # unframer
 
+## 2.16.2
+
+### Patch Changes
+
+-   b0e3932: Fix types generation in windows because of --loader abs path
+
 ## 2.16.1
 
 ### Patch Changes
