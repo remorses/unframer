@@ -397,6 +397,7 @@ export async function bundle({
             .concat([
                 path.resolve(out, 'meta.json'),
                 path.resolve(out, 'tokens.css'),
+                path.resolve(out, '.cursorignore'),
                 path.resolve(out, 'styles.css'),
             ])
             .concat(
