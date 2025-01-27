@@ -98,7 +98,7 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installedVersion) {
                         spinner.error(
-                            `${pkg} not found: install it with \`npm i ${pkg}\``,
+                            `${pkg} not found: install it with \`npm i ${pkg}\` then run \`unframer\` again to generate the types`,
                         )
                     }
                     return {
@@ -124,7 +124,7 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installedVersion) {
                         spinner.error(
-                            `${pkg} not found: install it with \`npm i ${pkg}\``,
+                            `${pkg} not found: install it with \`npm i ${pkg}\` then run \`unframer\` again to generate the types`,
                         )
                     }
                     return {
