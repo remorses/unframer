@@ -930,9 +930,10 @@ export async function extractPropControlsUnsafe(
         let childProcess = exec(
             `${JSON.stringify(
                 nodePath,
-            )} --no-warnings --input-type=module --loader ${require.resolve(
-                '../dist/unframer-loader.js',
-            )} -e ${JSON.stringify(code)}`,
+            )} --no-warnings --input-type=module --loader ${
+                url.pathToFileURL(require.resolve('../dist/unframer-loader.js'))
+                    .href
+            } -e ${JSON.stringify(code)}`,
             {
                 env: {
                     // ...process.env,
