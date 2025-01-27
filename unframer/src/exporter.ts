@@ -304,21 +304,26 @@ export async function bundle({
             fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
         }
         spinner.stop()
+        fs.writeFileSync(
+            path.resolve(out, '.cursorignore'),
+            `**/*.js\nchunks\n`,
+            'utf-8',
+        )
 
-        let allFonts = [] as ComponentFontBundle[]
-
+        if (!buildResult?.outputFiles) {
+            throw new Error('Failed to generate result')
+        }
         const packageJson = path.resolve(out, 'package.json')
         fs.writeFileSync(
             packageJson,
             JSON.stringify({ type: 'module' }),
             'utf-8',
         )
-        if (!buildResult?.outputFiles) {
-            throw new Error('Failed to generate result')
-        }
+
         const sema = new Sema(10)
         spinner.start('Extracting types')
         logger.log(`using node path`, nodePath)
+        let allFonts = [] as ComponentFontBundle[]
         const propControlsData = await Promise.all(
             buildResult?.outputFiles.map(async (file) => {
                 try {
@@ -382,11 +387,6 @@ export async function bundle({
                 .join('\n') +
             getFontsStyles(allFonts)
         fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
-        fs.writeFileSync(
-            path.resolve(out, '.cursorignore'),
-            `**/*.js\nchunks\n`,
-            'utf-8',
-        )
 
         logFontsUsage(allFonts)
             .split('\n')
