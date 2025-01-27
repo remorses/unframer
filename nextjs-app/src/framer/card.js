@@ -2344,6 +2344,7 @@ addFonts2(FramerWk_vueg3a, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
+var defaultResponsiveVariants = {};
 stdin_default2.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -2353,6 +2354,7 @@ stdin_default2.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default2,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),

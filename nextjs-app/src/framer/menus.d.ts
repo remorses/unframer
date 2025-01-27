@@ -20,7 +20,7 @@ const MenusFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-MenusFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+MenusFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default MenusFramerComponent
 

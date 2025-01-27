@@ -20,7 +20,7 @@ const CollectionFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-CollectionFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+CollectionFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default CollectionFramerComponent
 

@@ -715,7 +715,7 @@
       "format": "esm"
     },
     "virtual:fylo": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -1033,7 +1033,7 @@
       "format": "esm"
     },
     "virtual:hero": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -1245,7 +1245,7 @@
       "format": "esm"
     },
     "virtual:framerNav": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -1695,7 +1695,7 @@
       "format": "esm"
     },
     "virtual:logos": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -1835,7 +1835,7 @@
       "format": "esm"
     },
     "virtual:testimonials": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -1902,7 +1902,7 @@
       "format": "esm"
     },
     "virtual:menu-overlay": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -2057,7 +2057,7 @@
       "format": "esm"
     },
     "virtual:full-page": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -2300,7 +2300,7 @@
       "format": "esm"
     },
     "virtual:pricing": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -2489,7 +2489,7 @@
       "format": "esm"
     },
     "virtual:rich": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -2602,7 +2602,7 @@
       "format": "esm"
     },
     "virtual:collection": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -2804,7 +2804,7 @@
       "format": "esm"
     },
     "virtual:card": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -2975,7 +2975,7 @@
       "format": "esm"
     },
     "virtual:menus": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -3032,7 +3032,7 @@
       "format": "esm"
     },
     "virtual:input": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -3140,7 +3140,7 @@
       "format": "esm"
     },
     "virtual:form": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -3228,7 +3228,7 @@
       "format": "esm"
     },
     "virtual:GrowthSpaceMenu": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -3768,7 +3768,7 @@
       "format": "esm"
     },
     "virtual:issue-17": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -3889,7 +3889,7 @@
       "format": "esm"
     },
     "virtual:footer": {
-      "bytes": 2043,
+      "bytes": 2205,
       "imports": [
         {
           "path": "react",
@@ -3994,7 +3994,7 @@
       "entryPoint": "virtual:footer",
       "inputs": {
         "virtual:footer": {
-          "bytesInOutput": 861
+          "bytesInOutput": 944
         },
         "/:https://framerusercontent.com/modules/8jFow9biiJtXxZV7jt8c/eTl2AFkuvwMOeyuZjJjg/zOCvedWwi.js": {
           "bytesInOutput": 44631
@@ -4012,7 +4012,7 @@
           "bytesInOutput": 780
         }
       },
-      "bytes": 53500
+      "bytes": 53583
     },
     "chunks/b9ZvTRprK-0-XD4Y45G2.js": {
       "imports": [
@@ -4114,7 +4114,7 @@
       "entryPoint": "virtual:rich",
       "inputs": {
         "virtual:rich": {
-          "bytesInOutput": 861
+          "bytesInOutput": 944
         },
         "/:https://framerusercontent.com/modules/2eMbojq9S0Nc1TgktUQd/up4ztOG6JDG0ytgfaNzT/inWBH4dIK.js": {
           "bytesInOutput": 7224
@@ -4138,7 +4138,7 @@
           "bytesInOutput": 227
         }
       },
-      "bytes": 13786
+      "bytes": 13869
     },
     "collection.js": {
       "imports": [
@@ -4216,7 +4216,7 @@
       "entryPoint": "virtual:collection",
       "inputs": {
         "virtual:collection": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/bO5cJ5jTnaAnvIoqHZgr/xv5fLb6VaLFomRlvFnCl/bhAfNR9wU.js": {
           "bytesInOutput": 9854
@@ -4225,7 +4225,7 @@
           "bytesInOutput": 22370
         }
       },
-      "bytes": 33632
+      "bytes": 33715
     },
     "chunks/chunk-SB5JQL4S.js": {
       "imports": [
@@ -4379,7 +4379,7 @@
       "entryPoint": "virtual:card",
       "inputs": {
         "virtual:card": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/5RKlpLgYNk7duxXcZDXd/6Z8wlYy6uR0TX0tUNvYW/Wk_vueg3a.js": {
           "bytesInOutput": 22248
@@ -4403,7 +4403,7 @@
           "bytesInOutput": 11572
         }
       },
-      "bytes": 67348
+      "bytes": 67431
     },
     "menus.js": {
       "imports": [
@@ -4512,7 +4512,7 @@
       "entryPoint": "virtual:menus",
       "inputs": {
         "virtual:menus": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/3EDzgSpTqmQsBFxpXycJ/W0zNsrcZ2WAwVuzt0BCl/rXuKNGhVw.js": {
           "bytesInOutput": 57609
@@ -4533,7 +4533,7 @@
           "bytesInOutput": 314
         }
       },
-      "bytes": 96793
+      "bytes": 96876
     },
     "input.js": {
       "imports": [
@@ -4588,13 +4588,13 @@
       "entryPoint": "virtual:input",
       "inputs": {
         "virtual:input": {
-          "bytesInOutput": 861
+          "bytesInOutput": 944
         },
         "/:https://framerusercontent.com/modules/2As9QaXWbefma9cgsUwa/KKxLw6MT9WlqJHt4qSZb/QyfcXvqQb.js": {
           "bytesInOutput": 11726
         }
       },
-      "bytes": 12816
+      "bytes": 12899
     },
     "form.js": {
       "imports": [
@@ -4669,7 +4669,7 @@
       "entryPoint": "virtual:form",
       "inputs": {
         "virtual:form": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/YivtqU53m4zcm4ZOaTY9/SunOJy9Ew9wajOWbP6Rh/sbQWEtsSc.js": {
           "bytesInOutput": 14026
@@ -4678,7 +4678,7 @@
           "bytesInOutput": 11880
         }
       },
-      "bytes": 27196
+      "bytes": 27279
     },
     "GrowthSpaceMenu.js": {
       "imports": [
@@ -4753,7 +4753,7 @@
       "entryPoint": "virtual:GrowthSpaceMenu",
       "inputs": {
         "virtual:GrowthSpaceMenu": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/nIcBXu5ePDUqJReWJpHL/LFZxN3zosUdSy6rmmLm7/S9kYpxRJ7.js": {
           "bytesInOutput": 33537
@@ -4762,7 +4762,7 @@
           "bytesInOutput": 12980
         }
       },
-      "bytes": 47829
+      "bytes": 47912
     },
     "issue-17.js": {
       "imports": [
@@ -5035,7 +5035,7 @@
       "entryPoint": "virtual:issue-17",
       "inputs": {
         "virtual:issue-17": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/VI2Y7Tu6FqocuVZxMcMX/TOIKCNpdKF03XIWPSvks/TIYDx3GRA.js": {
           "bytesInOutput": 180023
@@ -5098,7 +5098,7 @@
           "bytesInOutput": 23199
         }
       },
-      "bytes": 378987
+      "bytes": 379070
     },
     "fylo.js": {
       "imports": [
@@ -5448,7 +5448,7 @@
       "entryPoint": "virtual:fylo",
       "inputs": {
         "virtual:fylo": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/waKcvjbslSC7rFQ1SrGC/SvdQ0E7jGkV2jj2lbCzd/C6ZYtBmll.js": {
           "bytesInOutput": 181021
@@ -5541,7 +5541,7 @@
           "bytesInOutput": 44580
         }
       },
-      "bytes": 530620
+      "bytes": 530703
     },
     "hero.js": {
       "imports": [
@@ -5720,7 +5720,7 @@
       "entryPoint": "virtual:hero",
       "inputs": {
         "virtual:hero": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/3pXrWBKq12hHUtkesa7O/SKXreSGrLeB8pMA2T5nf/eaL2rwfV9.js": {
           "bytesInOutput": 23108
@@ -5750,7 +5750,7 @@
           "bytesInOutput": 3764
         }
       },
-      "bytes": 55966
+      "bytes": 56049
     },
     "framerNav.js": {
       "imports": [
@@ -5905,7 +5905,7 @@
       "entryPoint": "virtual:framerNav",
       "inputs": {
         "virtual:framerNav": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/xtnjNhwUCFkZEnWMUsa6/Yxb08WatzU3lnJuYQrTo/yS_JadFF6.js": {
           "bytesInOutput": 34870
@@ -5926,7 +5926,7 @@
           "bytesInOutput": 13143
         }
       },
-      "bytes": 91727
+      "bytes": 91810
     },
     "logos.js": {
       "imports": [
@@ -6005,7 +6005,7 @@
       "entryPoint": "virtual:logos",
       "inputs": {
         "virtual:logos": {
-          "bytesInOutput": 861
+          "bytesInOutput": 944
         },
         "/:https://framerusercontent.com/modules/r0GBH7SiUQiS6ZBqAeSA/knRmyHsV6t1ykfHFuFk9/F1yUSD211.js": {
           "bytesInOutput": 10596
@@ -6014,7 +6014,7 @@
           "bytesInOutput": 12459
         }
       },
-      "bytes": 24391
+      "bytes": 24474
     },
     "testimonials.js": {
       "imports": [
@@ -6118,7 +6118,7 @@
       "entryPoint": "virtual:testimonials",
       "inputs": {
         "virtual:testimonials": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/x8WfR2mmsYC4TzrEQxEJ/pFHJcXf7QsonfQGgrFdg/LnQMzmpqJ.js": {
           "bytesInOutput": 17563
@@ -6133,7 +6133,7 @@
           "bytesInOutput": 1050
         }
       },
-      "bytes": 45482
+      "bytes": 45565
     },
     "chunks/chunk-HHMN2FVZ.js": {
       "imports": [],
@@ -6245,13 +6245,13 @@
       "entryPoint": "virtual:menu-overlay",
       "inputs": {
         "virtual:menu-overlay": {
-          "bytesInOutput": 861
+          "bytesInOutput": 944
         },
         "/:https://framerusercontent.com/modules/j9cpR8yXlU3UtAPcguLJ/MOVIkZrqA7DXUiHZgPfL/vitO4v4o_.js": {
           "bytesInOutput": 26801
         }
       },
-      "bytes": 27905
+      "bytes": 27988
     },
     "full-page.js": {
       "imports": [
@@ -6314,13 +6314,13 @@
       "entryPoint": "virtual:full-page",
       "inputs": {
         "virtual:full-page": {
-          "bytesInOutput": 861
+          "bytesInOutput": 944
         },
         "/:https://framerusercontent.com/modules/YPPQaawwYaqGsNWuaEiH/bjGpOeNuzVXmYIpuCUbJ/q64yDrOL3.js": {
           "bytesInOutput": 34880
         }
       },
-      "bytes": 36068
+      "bytes": 36151
     },
     "chunks/chunk-ZMVLPDAF.js": {
       "imports": [
@@ -6552,7 +6552,7 @@
       "entryPoint": "virtual:pricing",
       "inputs": {
         "virtual:pricing": {
-          "bytesInOutput": 865
+          "bytesInOutput": 948
         },
         "/:https://framerusercontent.com/modules/voblns21QvjoNLKdf1Tl/MAdFJXRr0B8qd1VFJisP/eaYqW6xw3.js": {
           "bytesInOutput": 34354
@@ -6576,7 +6576,7 @@
           "bytesInOutput": 957
         }
       },
-      "bytes": 79757
+      "bytes": 79840
     },
     "chunks/chunk-PORUKG3Q.js": {
       "imports": [

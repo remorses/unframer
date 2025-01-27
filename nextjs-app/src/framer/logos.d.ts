@@ -20,7 +20,7 @@ const LogosFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-LogosFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+LogosFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default LogosFramerComponent
 

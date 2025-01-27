@@ -61,7 +61,7 @@ const Issue17FramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-Issue17FramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+Issue17FramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default Issue17FramerComponent
 

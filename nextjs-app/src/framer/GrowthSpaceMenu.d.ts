@@ -27,7 +27,7 @@ const GrowthSpaceMenuFramerComponent = (props: Props) => any
 
 type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }
 
-GrowthSpaceMenuFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants: VariantsMap}) => any
+GrowthSpaceMenuFramerComponent.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any
 
 export default GrowthSpaceMenuFramerComponent
 

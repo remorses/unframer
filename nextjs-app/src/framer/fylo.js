@@ -13194,6 +13194,7 @@ addFonts6(FramerC6ZYtBmll, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
+var defaultResponsiveVariants = {};
 stdin_default8.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -13203,6 +13204,7 @@ stdin_default8.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default8,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),

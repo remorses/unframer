@@ -309,6 +309,7 @@ addFonts(FramerinWBH4dIK, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
+var defaultResponsiveVariants = {};
 stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
@@ -318,6 +319,7 @@ stdin_default.Responsive = ({ locale, ...rest },) => {
         WithFramerBreakpoints,
         {
           Component: stdin_default,
+          variants: defaultResponsiveVariants,
           ...rest,
         },
       ),
