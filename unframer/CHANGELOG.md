@@ -1,5 +1,11 @@
 # unframer
 
+## 2.16.1
+
+### Patch Changes
+
+-   c3b66cc: Fix windows types generation
+
 ## 2.16.0
 
 ### Minor Changes
