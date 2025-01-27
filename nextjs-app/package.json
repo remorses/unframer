@@ -16,7 +16,7 @@
         "@types/react-dom": "18.3.0",
         "autoprefixer": "10.4.14",
         "concurrently-ui": "^1.2.0",
-        "next": "15.0.4",
+        "next": "15.1.6",
         "postcss": "8.4.24",
         "react": "19.0.0",
         "react-dom": "19.0.0",
