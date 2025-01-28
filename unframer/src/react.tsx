@@ -264,6 +264,12 @@ export function ResolveLinksAdapted({ links, children }) {
     return children(links.map((x) => x.href))
 }
 
+function isRelativeLink(url) {
+    if (!url) {
+        return false
+    }
+    return url.startsWith('/') || url.startsWith('#')
+}
 export function AdaptedLink({
     href,
     nodeId,
@@ -279,7 +285,7 @@ export function AdaptedLink({
     const route = routes?.[webPageId]
     const target = openInNewTab ? '_blank' : undefined
     // console.log({ href, pathVariables, path: route?.path, ...rest })
-    if (href?.startsWith && href.startsWith('/')) {
+    if (isRelativeLink(href)) {
         return React.cloneElement(children, { ...rest, href, target })
     }
     if (!webPageId) {
@@ -293,7 +299,7 @@ export function AdaptedLink({
     if (pathVariables) {
         path = replacePathParams(path, pathVariables)
     }
-    if (path?.startsWith?.('/')) {
+    if (isRelativeLink(path)) {
         return React.cloneElement(children, {
             ...rest,
             href: path,
