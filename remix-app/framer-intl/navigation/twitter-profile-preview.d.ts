@@ -13,7 +13,14 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: 'Closed' | 'Open' | 'Preview - Mobile'
+    "linkText"?: string
+    "link"?: string
+    "name"?: string
+    "username"?: string
+    "verified"?: boolean
+    "profilePicture"?: {src: string, srcSet?: string, alt?: string}
+    "bioPlain"?: string
 }
 
 const TwitterProfilePreviewFramerComponent = (props: Props) => any

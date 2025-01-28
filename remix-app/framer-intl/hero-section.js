@@ -37,7 +37,7 @@ import * as React3 from 'react';
 // /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js
 import { jsx as _jsx, } from 'react/jsx-runtime';
 
-// /:https://esm.sh/*react-hotkeys-hook@4.6.1/node/react-hotkeys-hook.mjs
+// /:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs
 import {
   createContext as W,
   useCallback as h,

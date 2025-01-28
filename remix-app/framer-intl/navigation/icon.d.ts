@@ -13,7 +13,8 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: 'Menu' | 'Close'
+    "tap"?: Function
 }
 
 const IconFramerComponent = (props: Props) => any

@@ -13,7 +13,10 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "image"?: {src: string, srcSet?: string, alt?: string}
+    "name"?: string
+    "positionAndCompany"?: string
+    "testimonial"?: string
 }
 
 const TestimonialCardFramerComponent = (props: Props) => any

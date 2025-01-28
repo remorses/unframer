@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: 'Desktop' | 'Mobile' | 'Mobile Open'
 }
 
 const NavigationFramerComponent = (props: Props) => any

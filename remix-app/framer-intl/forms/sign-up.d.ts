@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "variant"?: 'Variant 1' | 'Loading' | 'Success'
 }
 
 const SignUpFramerComponent = (props: Props) => any

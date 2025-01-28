@@ -13,7 +13,8 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-
+    "title"?: string
+    "description"?: string
 }
 
 const StatsCardFramerComponent = (props: Props) => any

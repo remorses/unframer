@@ -3051,7 +3051,7 @@
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*react-hotkeys-hook@4.6.1/node/react-hotkeys-hook.mjs": {
+    "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
       "bytes": 9386,
       "imports": [
         {
@@ -3068,12 +3068,12 @@
       "format": "esm"
     },
     "/:https://esm.sh/*react-hotkeys-hook": {
-      "bytes": 72,
+      "bytes": 74,
       "imports": [
         {
-          "path": "/:https://esm.sh/*react-hotkeys-hook@4.6.1/node/react-hotkeys-hook.mjs",
+          "path": "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs",
           "kind": "import-statement",
-          "original": "/*react-hotkeys-hook@4.6.1/node/react-hotkeys-hook.mjs"
+          "original": "/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs"
         }
       ],
       "format": "esm"
@@ -5471,7 +5471,7 @@
         "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js": {
           "bytesInOutput": 588
         },
-        "/:https://esm.sh/*react-hotkeys-hook@4.6.1/node/react-hotkeys-hook.mjs": {
+        "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
           "bytesInOutput": 7205
         },
         "/:https://esm.sh/*react-hotkeys-hook": {
@@ -5490,7 +5490,7 @@
           "bytesInOutput": 15557
         }
       },
-      "bytes": 51179
+      "bytes": 51181
     },
     "tag.js": {
       "imports": [
