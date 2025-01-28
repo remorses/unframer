@@ -198,6 +198,8 @@ Unframer will export your color styles as CSS variables, for example:
 }
 ```
 
+> you can use them in your own code, for example in tailwind with `<div className='bg-(--unframer-white)' />` 
+
 ## Watching for changes
 
 You can use the `--watch` flag to automatically re-export components when they change in Framer: notice that you will need to click the Publish button in Framer to trigger the cli, Framer only updates the JavaScript modules when you publish your website.
