@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "iconColor"?: string
+
 }
 
 const SingleToggleFramerComponent = (props: Props) => any

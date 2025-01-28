@@ -2399,10 +2399,7 @@ addFonts(FramerwvuAi9wiC, [
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
-var defaultResponsiveVariants = {
-  'base': 'lBkI6MWTM',
-  'xl': 'jsVKEKG4s',
-};
+var defaultResponsiveVariants = {};
 stdin_default2.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,

@@ -13,12 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'First' | 'Second' | 'Third' | 'Fourth'
-    "click"?: Function
-    "click2"?: Function
-    "click3"?: Function
-    "click4"?: Function
-    "variant"?: 'Desktop' | 'Mobile'
+
 }
 
 const CustomerStoriesFramerComponent = (props: Props) => any

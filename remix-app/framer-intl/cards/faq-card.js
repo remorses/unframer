@@ -13,9 +13,7 @@ import { ContextProviders, } from 'unframer';
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
-var defaultResponsiveVariants = {
-  'base': 'Gb01L_14E',
-};
+var defaultResponsiveVariants = {};
 stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,

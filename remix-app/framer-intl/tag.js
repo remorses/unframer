@@ -251,9 +251,7 @@ addFonts(Frameron7AAz7Qe, [{
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
-var defaultResponsiveVariants = {
-  'base': 'HgnGA8QKl',
-};
+var defaultResponsiveVariants = {};
 stdin_default.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,

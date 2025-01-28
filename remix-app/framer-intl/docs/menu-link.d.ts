@@ -13,11 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Desktop-icon' | 'Mobile-icon' | 'Desktop' | 'Mobile'
-    "sVGCode"?: string
-    "title"?: string
-    "link"?: string
-    "exampleVariableDashesEtcXXSomething11"?: number
+
 }
 
 const MenuLinkFramerComponent = (props: Props) => any

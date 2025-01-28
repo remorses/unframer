@@ -13,9 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Answers' | 'Question'
-    "question"?: string
-    "answer"?: string
+
 }
 
 const FaqCardFramerComponent = (props: Props) => any

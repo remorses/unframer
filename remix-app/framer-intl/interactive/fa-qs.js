@@ -11380,9 +11380,7 @@ addFonts(FramertOUeA1GYC, [{ explicitInter: true, fonts: [], }, ...CardsFAQCardF
 import { WithFramerBreakpoints, } from 'unframer';
 import { jsx, } from 'react/jsx-runtime';
 var locales = [];
-var defaultResponsiveVariants = {
-  'base': 'ZQ8oV6EzC',
-};
+var defaultResponsiveVariants = {};
 stdin_default3.Responsive = ({ locale, ...rest },) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,

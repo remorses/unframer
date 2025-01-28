@@ -13,13 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Desktop' | 'Mobile'
-    "logo"?: {src: string, srcSet?: string, alt?: string}
-    "title"?: string
-    "description"?: string
-    "testimonial"?: string
-    "name"?: string
-    "positionAtCompany"?: string
+
 }
 
 const CustomerStoriesFramerComponent = (props: Props) => any

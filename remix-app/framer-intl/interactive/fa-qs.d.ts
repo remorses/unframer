@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Homepage' | 'Pricing' | 'Sales' | 'Support'
+
 }
 
 const FaQsFramerComponent = (props: Props) => any

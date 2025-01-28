@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "link"?: string
+
 }
 
 const RemoveButtonFramerComponent = (props: Props) => any

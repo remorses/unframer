@@ -13,9 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Desktop' | 'Tablet' | 'Phone'
-    "settingsAPITAbleData"?: string
-    "settingsThisIsATAbleData"?: string
+
 }
 
 const HeroSectionFramerComponent = (props: Props) => any

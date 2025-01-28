@@ -13,12 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "image"?: {src: string, srcSet?: string, alt?: string}
-    "title"?: string
-    "description"?: string
-    "date"?: string
-    "link"?: string
-    "click"?: Function
+
 }
 
 const BlogCardFramerComponent = (props: Props) => any

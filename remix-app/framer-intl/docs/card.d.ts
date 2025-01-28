@@ -13,11 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'Variant 1' | 'Variant 2'
-    "sVGCode"?: string
-    "title"?: string
-    "description"?: string
-    "link"?: string
+
 }
 
 const CardFramerComponent = (props: Props) => any

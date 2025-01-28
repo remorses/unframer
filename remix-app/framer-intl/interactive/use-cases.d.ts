@@ -13,7 +13,7 @@ export interface Props {
     width?: any
     height?: any
     layoutId?: string
-    "variant"?: 'First use-case' | 'Second use-case' | 'Third use-case'
+
 }
 
 const UseCasesFramerComponent = (props: Props) => any
