@@ -57,7 +57,7 @@ export async function bundle({
     out ||= path.resolve(process.cwd(), 'example')
     out = path.resolve(out)
     try {
-        fs.mkdirSync(out, { recursive: true })
+        await fs.promises.mkdir(out, { recursive: true })
     } catch (e) {}
 
     spinner.start()
@@ -233,7 +233,7 @@ export async function bundle({
     } "${config.projectName}", do not edit manually */\n`
 
     async function rebuild() {
-        const prevFiles = recursiveReaddir(out)
+        const prevFiles = await recursiveReaddir(out)
         const buildResult = await buildContext.rebuild().catch((e) => {
             if (e.message.includes('No matching export ')) {
                 spinner.error(
@@ -310,11 +310,13 @@ export async function bundle({
                 continue
             }
             logger.log(`writing`, path.relative(out, file.path))
-            fs.mkdirSync(path.dirname(resultPathAbs), { recursive: true })
-            fs.writeFileSync(resultPathAbs, codeNew, 'utf-8')
+            await fs.promises.mkdir(path.dirname(resultPathAbs), {
+                recursive: true,
+            })
+            await fs.promises.writeFile(resultPathAbs, codeNew, 'utf-8')
         }
         spinner.stop()
-        fs.writeFileSync(
+        await fs.promises.writeFile(
             path.resolve(out, '.cursorignore'),
             `**/*.js\nchunks\n`,
             'utf-8',
@@ -324,7 +326,7 @@ export async function bundle({
             throw new Error('Failed to generate result')
         }
         const packageJson = path.resolve(out, 'package.json')
-        fs.writeFileSync(
+        await fs.promises.writeFile(
             packageJson,
             JSON.stringify({ type: 'module' }),
             'utf-8',
@@ -364,8 +366,11 @@ export async function bundle({
                         fileName: name,
                         config,
                     })
-                    fs.mkdirSync(out, { recursive: true })
-                    fs.writeFileSync(path.resolve(out, `${name}.d.ts`), types)
+                    await fs.promises.mkdir(out, { recursive: true })
+                    await fs.promises.writeFile(
+                        path.resolve(out, `${name}.d.ts`),
+                        types,
+                    )
                     return {
                         propertyControls,
                         fonts,
@@ -375,9 +380,9 @@ export async function bundle({
                     sema.release()
                 }
             }),
-        ).finally(() => {
+        ).finally(async () => {
             try {
-                fs.rmSync(packageJson)
+                await fs.promises.rm(packageJson)
             } catch (error) {
                 // Ignore error if file doesn't exist or can't be deleted
             }
@@ -396,7 +401,11 @@ export async function bundle({
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
                 .join('\n') +
             getFontsStyles(allFonts)
-        fs.writeFileSync(path.resolve(out, 'styles.css'), cssString, 'utf-8')
+        await fs.promises.writeFile(
+            path.resolve(out, 'styles.css'),
+            cssString,
+            'utf-8',
+        )
 
         logFontsUsage(allFonts)
             .split('\n')
@@ -419,13 +428,13 @@ export async function bundle({
         for (let file of filesToDelete) {
             logger.log('deleting', path.relative(out, file))
             try {
-                fs.rmSync(file)
+                await fs.promises.rm(file)
             } catch (error) {
                 // Ignore error if file doesn't exist or can't be deleted
             }
         }
 
-        fs.writeFileSync(
+        await fs.promises.writeFile(
             path.resolve(out, 'meta.json'),
             JSON.stringify(buildResult.metafile, null, 2),
             'utf-8',
@@ -443,7 +452,7 @@ export async function bundle({
                 "/* This css file contains your color variables, sometimes these get desynced when updated in Framer so it's good that you copy and paste this snippet into your app css */\n" +
                 '/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n' +
                 getTokensCss({ out, result: buildResult })
-            fs.writeFileSync(
+            await fs.promises.writeFile(
                 path.resolve(out, 'tokens.css'),
                 tokensCss,
                 'utf-8',
@@ -1263,11 +1272,13 @@ h1, h2, h3, h4, h5, h6, p, figure {
         
 `
 
-function recursiveReaddir(dir: string) {
-    const dirents = fs.readdirSync(dir, { withFileTypes: true })
-    const files = dirents.map((dirent) => {
-        const res = path.resolve(dir, dirent.name)
-        return dirent.isDirectory() ? recursiveReaddir(res) : res
-    })
+async function recursiveReaddir(dir: string): Promise<string[]> {
+    const dirents = await fs.promises.readdir(dir, { withFileTypes: true })
+    const files = await Promise.all(
+        dirents.map((dirent) => {
+            const res = path.resolve(dir, dirent.name)
+            return dirent.isDirectory() ? recursiveReaddir(res) : res
+        }),
+    )
     return files.flat()
 }
