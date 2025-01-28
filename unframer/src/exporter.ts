@@ -681,6 +681,7 @@ export function getDarkModeSelector(opts: {
     }
     return '.dark {\n' + content + '\n' + '}'
 }
+
 export function getStyleTokensCss(
     tokens: StyleToken[],
     darkModeType: 'class' | 'media' = 'class',
@@ -689,40 +690,50 @@ export function getStyleTokensCss(
         return ''
     }
 
-    const lightTokens = tokens
-        .flatMap((token) => [
-            '    --token-' + token.id + ': ' + token.lightColor + ';',
+    const lightUnframerTokens = tokens
+        .map((token) => 
             '    --unframer-' +
-                kebabCase(token.name || token.id) +
-                ': ' +
-                token.lightColor +
-                ';',
-        ])
+            kebabCase(token.name || token.id) +
+            ': ' +
+            token.lightColor +
+            ';'
+        )
+        .join('\n')
+
+    const lightTokens = tokens
+        .map((token) =>
+            '    --token-' + token.id + ': ' + token.lightColor + ';'
+        )
+        .join('\n')
+
+    const darkUnframerTokens = tokens
+        .map((token) =>
+            '    --unframer-' +
+            kebabCase(token.name || token.id) +
+            ': ' +
+            token.darkColor +
+            ';'
+        )
         .join('\n')
 
     const darkTokens = tokens
-        .flatMap((token) => [
-            '    --token-' + token.id + ': ' + token.darkColor + ';',
-            '    --unframer-' +
-                kebabCase(token.name || token.id) +
-                ': ' +
-                token.darkColor +
-                ';',
-        ])
+        .map((token) =>
+            '    --token-' + token.id + ': ' + token.darkColor + ';'
+        )
         .join('\n')
 
     return (
         ':root {\n' +
+        lightUnframerTokens + '\n\n' +
         lightTokens +
         '\n' +
         '}\n\n' +
         getDarkModeSelector({
             darkModeType,
-            content: darkTokens,
+            content: darkUnframerTokens + '\n\n' + darkTokens,
         })
     )
 }
-
 export function findRelativeLinks(text: string) {
     const regex = /webPageId:\s+/g
     const lines = text.split('\n')
