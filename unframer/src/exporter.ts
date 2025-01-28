@@ -110,7 +110,7 @@ export async function bundle({
                 externalizeNpm: config.allExternal,
                 outDir: config.outDir,
             }),
-            // nodeModulesPolyfillPlugin({}),
+            nodeModulesPolyfillPlugin({}),
             {
                 name: 'virtual loader',
                 setup(build) {
@@ -907,13 +907,14 @@ export async function extractPropControlsUnsafe(
         ).href,
     })
     let stdout = await new Promise<string>((res, rej) => {
+        const cmd = `"${
+            nodePath
+        }" --no-warnings --input-type=module --loader ${require.resolve(
+            '../dist/unframer-loader.js',
+        )} -e ${JSON.stringify(code)}`
+
         let childProcess = exec(
-            `${JSON.stringify(
-                nodePath,
-            )} --no-warnings --input-type=module --loader ${
-                url.pathToFileURL(require.resolve('../dist/unframer-loader.js'))
-                    .href
-            } -e ${JSON.stringify(code)}`,
+            cmd,
             {
                 env: {
                     // ...process.env,
