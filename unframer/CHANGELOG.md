@@ -1,5 +1,11 @@
 # unframer
 
+## 2.17.1
+
+### Patch Changes
+
+- 48aa28f: add node polyfill plugin
+
 ## 2.17.0
 
 ### Minor Changes
