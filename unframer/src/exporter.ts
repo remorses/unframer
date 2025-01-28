@@ -545,9 +545,7 @@ export async function bundle({
             return { rebuild, buildContext }
         }
     }
-    const variants = getVariantsFromPropControls(
-        exampleComponent?.propertyControls,
-    )
+
     const outDirNice = path.posix.relative(process.cwd(), out)
     logger.log(
         'exampleComponent?.propertyControls',
@@ -557,19 +555,10 @@ export async function bundle({
         findExampleProperty(exampleComponent?.propertyControls) ||
         'exampleFramerVariable'
     const responsiveComponent = (() => {
-        const breakpoints = variants?.breakpoints
-        if (!breakpoints?.length) {
-            return ''
-        }
-        const variantsExample = {
-            lg: breakpoints[1],
-            base: breakpoints[0],
-        }
-
         return dedent`
+            // use .Responsive for components with breakpoints
             <${exampleComponent?.componentName}.Responsive
-                ${prop}='example'
-                variants={${JSON.stringify(variantsExample || {})}}
+                ${prop}='example' 
             />
             `
     })()
