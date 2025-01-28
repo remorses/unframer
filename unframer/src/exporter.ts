@@ -110,7 +110,7 @@ export async function bundle({
                 externalizeNpm: config.allExternal,
                 outDir: config.outDir,
             }),
-            nodeModulesPolyfillPlugin({}),
+            // nodeModulesPolyfillPlugin({}),
             {
                 name: 'virtual loader',
                 setup(build) {
@@ -247,6 +247,8 @@ export async function bundle({
             throw e
         })
 
+        spinner.update('Finished build')
+
         for (let file of buildResult.outputFiles!) {
             const resultPathAbs = path.resolve(out, file.path)
             const existing = await fs.promises
@@ -266,24 +268,28 @@ export async function bundle({
             // })
             // let inputCode = res!.code!
 
-            const tooBig = 1 * 1024 * 1024
+            const tooBigSize = 1 * 1024 * 1024
 
             let formatted = file.text
-            if (file.text.length < tooBig) {
-                formatted = dprint.format('file.jsx', file.text, {
-                    lineWidth: 140,
-                    quoteStyle: 'alwaysSingle',
-                    trailingCommas: 'always',
-                    semiColons: 'always',
-                })
-            } else {
-                spinner.info(
-                    `skipping formatting ${path.relative(
-                        out,
-                        file.path,
-                    )}, too big`,
-                )
-            }
+            // let tooBig = file.text.length >= tooBigSize
+            // let shouldFormat = !tooBig && !file.path.includes('chunks')
+            // if (shouldFormat) {
+            //     spinner.update(`Formatting ${path.relative(out, file.path)}`)
+            //     formatted = dprint.format('file.jsx', file.text, {
+            //         lineWidth: 140,
+            //         quoteStyle: 'alwaysSingle',
+            //         trailingCommas: 'always',
+            //         semiColons: 'always',
+            //     })
+            // }
+            // if (tooBig) {
+            //     spinner.info(
+            //         `skipping formatting ${path.relative(
+            //             out,
+            //             file.path,
+            //         )}, too big`,
+            //     )
+            // }
 
             let codeNew =
                 `// @ts-nocheck\n` +
@@ -333,7 +339,7 @@ export async function bundle({
         )
 
         const sema = new Sema(10)
-        spinner.start('Extracting types')
+        spinner.update('Extracting types')
         logger.log(`using node path`, nodePath)
         let allFonts = [] as ComponentFontBundle[]
         const propControlsData = await Promise.all(

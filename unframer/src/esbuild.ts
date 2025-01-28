@@ -193,6 +193,9 @@ export function esbuildPluginBundleDependencies({
                         /(\/\* webpackIgnore: true \*\/)/g,
                         '$1 /* @vite-ignore */',
                     )
+                    // if (!text.includes('import.meta.url')) {
+                    //     return text
+                    // }
 
                     const transformed = await transform(text, {
                         define: {
