@@ -4,7 +4,7 @@ import { bundle, StyleToken } from './exporter.js'
 import { createClient } from './generated/api-client.js'
 
 import { cac } from 'cac'
-import findUp from 'find-up'
+
 import fs from 'fs'
 import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
@@ -38,8 +38,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         const externalPackages: string[] = Array.isArray(external_)
             ? external_.filter((x) => x.trim())
             : typeof external_ === 'string'
-            ? [external_]
-            : []
+              ? [external_]
+              : []
         try {
             if (options.debug) {
                 logger.debug = true
@@ -47,6 +47,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             const outDir = options.outDir
             const controller = new AbortController()
             const signal = controller.signal
+            const watch = options.watch
             if (projectId) {
                 logger.log(`Fetching config for project ${projectId}`)
 
@@ -110,7 +111,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                         tokens: data.colorStyles,
                         framerWebPages: data.framerWebPages || [],
                     },
-                    watch: false,
+                    watch,
 
                     cwd,
                     signal,
@@ -154,6 +155,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             fixOldUnframerPath()
             const cwd = process.cwd()
             logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
+            const { findUp } = await import('find-up')
             const configPath = await findUp(configNames, { cwd })
             if (!configPath) {
                 logger.log(`No ${configNames.join(', ')} found`)
@@ -173,7 +175,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             setMaxListeners(0, controller.signal)
             const { buildContext } = await bundle({
                 config: { ...config, externalPackages, allExternal },
-                watch: false,
+                watch,
                 signal: controller.signal,
                 cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
             })

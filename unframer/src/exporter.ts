@@ -1,4 +1,4 @@
-import { build, BuildResult, context } from 'esbuild'
+import { build, BuildResult, context, type BuildOptions } from 'esbuild'
 import packageJson from '../package.json'
 
 import url from 'url'
@@ -72,7 +72,17 @@ export async function bundle({
     const breakpointSizes = Object.entries(
         config.breakpoints || defaultBreakpointSizes,
     ).sort(([, a], [, b]) => a - b)
-    const buildContext = await context({
+    function fakeContext(args: BuildOptions) {
+        return {
+            rebuild() {
+                return build(args)
+            },
+            cancel() {},
+            dispose() {},
+        }
+    }
+    const fn = watch ? context : fakeContext
+    const buildContext = await fn({
         absWorkingDir: out,
 
         entryPoints: Object.keys(components).map((name) => {
@@ -595,52 +605,6 @@ export async function bundle({
     await checkUnframerVersion({ cwd: out })
     console.log()
     return { result, rebuild, buildContext }
-
-    // // when user press ctrl+c dispose
-    // process.on('SIGINT', async () => {
-    //     await buildContext.cancel()
-    //     buildContext.dispose()
-    // })
-    // process.on('SIGABRT', async () => {
-    //     await buildContext.cancel()
-    //     buildContext.dispose()
-    // })
-    // signal?.addEventListener('abort', async () => {
-    //     await buildContext.cancel()
-    //     buildContext.dispose()
-    // })
-
-    // const res = await rebuild()
-
-    // /**
-    //  * Get resolved URLs for all components and also wait for 1 second if it took less time than that
-    //  */
-    // const getResolvedUrls = () =>
-    //     Promise.all([
-    //         ...Object.values(components).map((u) => {
-    //             const url = new URL(u)
-    //             url.searchParams.set('ts', Date.now().toString())
-    //             return resolveRedirect({ url: url.toString(), signal })
-    //         }),
-    //         new Promise((res) => setTimeout(res, 5000)),
-    //     ])
-    // let prevUrls = await getResolvedUrls()
-    // while (!signal?.aborted) {
-    //     const urls = await getResolvedUrls()
-    //     const changed = urls
-    //         .map((x, i) => (x !== prevUrls[i] ? i : null))
-    //         .filter(Boolean)
-    //     if (!changed?.length) {
-    //         continue
-    //     }
-    //     const changedNames = Object.keys(components).filter((_, i) =>
-    //         changed.includes(i),
-    //     )
-    //     logger.log(`found new component URLs for ${changedNames.join(', ')}`)
-    //     prevUrls = urls
-    //     await rebuild()
-    // }
-    // return res
 }
 
 const packageVersionCache = new Map<string, string>()
@@ -769,7 +733,7 @@ export function findRelativeLinks(text: string) {
     return [...lineNumbers]
 }
 
-export async function extractPropControlsSafe(text, name) {
+async function extractPropControlsSafe(text, name) {
     try {
         const propControlsCode = await parsePropertyControls(text)
         // console.log('propControlsCode', propControlsCode)
@@ -779,17 +743,17 @@ export async function extractPropControlsSafe(text, name) {
                 const ivm = require('isolated-vm')
                 const vm = new ivm.Isolate({ memoryLimit: 128 })
 
-                const context = vm.createContextSync()
+                const vmContext = vm.createContextSync()
 
-                const jail = context.global
+                const jail = vmContext.global
 
                 let result = undefined
-                context.global.setSync('__return', (x) => {
+                vmContext.global.setSync('__return', (x) => {
                     result = x
                 })
 
                 const mod = vm.compileModuleSync(`${text}`)
-                await mod.instantiateSync(context, (spec, mod) => {
+                await mod.instantiateSync(vmContext, (spec, mod) => {
                     // TODO instantiate framer, react, framer-motion etc
                     return
                 })
