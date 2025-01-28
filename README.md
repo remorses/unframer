@@ -166,7 +166,6 @@ export default function App() {
 Unframer will export your color styles as CSS variables, for example:
 
 ```css
-        
 :root {
     --unframer-chambray: rgb(72, 86, 150);
     --unframer-gray: rgb(231, 231, 231);
@@ -198,7 +197,20 @@ Unframer will export your color styles as CSS variables, for example:
 }
 ```
 
-> you can use them in your own code, for example in tailwind with `<div className='bg-(--unframer-white)' />` 
+> you can use them in your own code, for example in tailwind with `<div className='bg-(--unframer-white)' />`
+
+## When should I run the plugin again?
+
+You can just run the `unframer` cli to get changes from the existing components.
+
+The Framer plugin should be reopened when:
+
+- When you add a new component
+- When changing color styles
+- When adding new pages (this is necessary to make relative links to those pages work)
+- When adding new locales
+- When changing breakpoints
+- When changing breakpoints
 
 ## Watching for changes
 
@@ -220,7 +232,6 @@ Unframer will also create a `styles.css` file with the Framer global styles and 
 To generate TypeScript types for your components Unframer runs your downloaded components with Node.js and extracts the TypeScript types from the component `propertyControls` field, which is used to populate the Framer right bar controls.
 
 The Responsive component renders your components for each different breakpoint and only shows the current breakpoint via a CSS media query. The unused breakpoints are removed before hydration thanks to React [`useSyncExternalStore`](https://react.dev/reference/react/useSyncExternalStore).
-
 
 ## Troubleshooting
 
