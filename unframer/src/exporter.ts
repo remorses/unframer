@@ -556,7 +556,7 @@ export async function bundle({
         'exampleFramerVariable'
     const responsiveComponent = (() => {
         return dedent`
-            // use .Responsive for components with breakpoints
+            {/* use .Responsive for components with breakpoints */}
             <${exampleComponent?.componentName}.Responsive
                 ${prop}='example' 
             />
