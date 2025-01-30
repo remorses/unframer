@@ -200,7 +200,10 @@ export function esbuildPluginBundleDependencies({
                     const transformed = await transform(text, {
                         define: {
                             'import.meta.url': JSON.stringify(resolved),
+                            navigator: '__unframerNavigator',
                         },
+                        // Fix lottie: https://github.com/airbnb/lottie-web/issues/3047
+                        banner: `let __unframerNavigator = typeof window !== 'undefined' ? navigator : undefined;`,
                         minify: false,
                         format: 'esm',
                         jsx: 'transform',
