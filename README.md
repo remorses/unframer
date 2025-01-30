@@ -23,10 +23,6 @@ Download framer components as simple files
 
 1. Install the [`React Export` Framer plugin](https://www.framer.com/marketplace/plugins/react-export/), open it and select which components you want to export.
 
-<div align="center">
-    <img src="./assets/select-components.jpeg" width="600" />
-</div>
-
 1. Run the command `npx unframer {projectId} --outDir ./src/framer` to download the components and their types in the `outDir` directory, the command will be shown in the Framer plugin too. Run this command each time you update your Framer project and want to update the components.
 
 1. Import the component inside your `jsx` files together with the `styles.css` file, for example
@@ -167,6 +163,8 @@ export default function App() {
 
 Unframer will export your color styles as CSS variables, for example:
 
+> You can use Framer CSS variables in your own code, for example in tailwind with `<div className='bg-(--unframer-white)' />`
+
 ```css
 :root {
     --unframer-chambray: rgb(72, 86, 150);
@@ -198,8 +196,6 @@ Unframer will export your color styles as CSS variables, for example:
     --unframer-primary: rgb(231, 34, 8);
 }
 ```
-
-> you can use them in your own code, for example in tailwind with `<div className='bg-(--unframer-white)' />`
 
 ## When should I run the plugin again?
 
