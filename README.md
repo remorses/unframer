@@ -7,8 +7,7 @@
     <br/>
 </div>
 
-Unframer exports your Framer components as simple .js files
-
+- Unframer exports your Framer components as simple .js files
 - Works with any React framework (Next.js, Remix, Vite, Astro, etc)
 - Includes all your components dependencies
 - Works with breakpoints, Framer fetch, Forms, color styles, dark mode (via `dark` class), etc
