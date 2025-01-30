@@ -124,7 +124,8 @@ export const defaultBreakpointSizes = {
 
 export type BreakpointSizes = typeof defaultBreakpointSizes
 
-export const breakpointsStyles = (breakpointSizes?: BreakpointSizes) => {
+// @deprecated TODO remove this in future releases
+export const breakpointsStylesLegacy = (breakpointSizes?: BreakpointSizes) => {
     breakpointSizes = { ...defaultBreakpointSizes, ...breakpointSizes }
     return /* css */ `
 /* Base */
@@ -181,6 +182,52 @@ export const breakpointsStyles = (breakpointSizes?: BreakpointSizes) => {
 
 .unframer-hidden {
     display: none;
+}
+`
+}
+export const breakpointsStyles = (breakpointSizes?: BreakpointSizes) => {
+    breakpointSizes = { ...defaultBreakpointSizes, ...breakpointSizes }
+    return /* css */ `
+/* Base */
+@media (min-width: ${breakpointSizes.base}px) and (max-width: ${breakpointSizes.sm - 1}px) {
+    .unframer:not(.unframer-base) { 
+        display: none !important;
+    }
+}
+
+/* Small */
+@media (min-width: ${breakpointSizes.sm}px) and (max-width: ${breakpointSizes.md - 1}px) {
+    .unframer:not(.unframer-sm) { 
+        display: none !important;
+    }
+}
+
+/* Medium */
+@media (min-width: ${breakpointSizes.md}px) and (max-width: ${breakpointSizes.lg - 1}px) {
+    .unframer:not(.unframer-md) { 
+        display: none !important;
+    }
+}
+
+/* Large */
+@media (min-width: ${breakpointSizes.lg}px) and (max-width: ${breakpointSizes.xl - 1}px) {
+    .unframer:not(.unframer-lg) { 
+        display: none !important;
+    }
+}
+
+/* Extra Large */
+@media (min-width: ${breakpointSizes.xl}px) and (max-width: ${breakpointSizes['2xl'] - 1}px) {
+    .unframer:not(.unframer-xl) { 
+        display: none !important;
+    }
+}
+
+/* 2 Extra Large */
+@media (min-width: ${breakpointSizes['2xl']}px) {
+    .unframer:not(.unframer-2xl) { 
+        display: none !important;
+    }
 }
 `
 }

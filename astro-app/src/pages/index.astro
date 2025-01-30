@@ -19,15 +19,15 @@ import Layout from '../layouts/Layout.astro'
 
 <Layout>
     <div class='bg-black flex flex-col items-center'>
-        <NavigationFramerComponent.Responsive server:defer />
+        <NavigationFramerComponent.Responsive client:visible />
 
         <SectionHeroFramerComponent.Responsive client:load />
 
         <SectionLogosFramerComponent.Responsive client:load />
-        <SectionHowItWorksFramerComponent.Responsive client:visible/>
-        <SectionLargeTestimonialFramerComponent.Responsive client:visible/>
-        <SectionFeaturesFramerComponent.Responsive client:visible/>
-        <SectionPricingFramerComponent.Responsive client:visible/>
+        <SectionHowItWorksFramerComponent.Responsive client:visible />
+        <SectionLargeTestimonialFramerComponent.Responsive client:visible />
+        <SectionFeaturesFramerComponent.Responsive client:visible />
+        <SectionPricingFramerComponent.Responsive client:visible />
         <SectionTestimonialsFramerComponent.Responsive client:visible />
         <SectionFrequentlyAskedQuestionsFramerComponent.Responsive
             client:visible

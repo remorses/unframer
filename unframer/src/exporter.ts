@@ -16,6 +16,7 @@ import dedent from 'string-dedent'
 import {
     ComponentFontBundle,
     breakpointsStyles,
+    breakpointsStylesLegacy,
     defaultBreakpointSizes,
     getFontsStyles,
     groupBy,
@@ -402,6 +403,7 @@ export async function bundle({
             resetCssStyles +
             getStyleTokensCss(tokens || []) +
             breakpointsStyles(breakpoints) +
+            breakpointsStylesLegacy(breakpoints) +
             '\n\n' +
             combinedCSSRules
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
@@ -691,40 +693,44 @@ export function getStyleTokensCss(
     }
 
     const lightUnframerTokens = tokens
-        .map((token) => 
-            '    --unframer-' +
-            kebabCase(token.name || token.id) +
-            ': ' +
-            token.lightColor +
-            ';'
+        .map(
+            (token) =>
+                '    --unframer-' +
+                kebabCase(token.name || token.id) +
+                ': ' +
+                token.lightColor +
+                ';',
         )
         .join('\n')
 
     const lightTokens = tokens
-        .map((token) =>
-            '    --token-' + token.id + ': ' + token.lightColor + ';'
+        .map(
+            (token) =>
+                '    --token-' + token.id + ': ' + token.lightColor + ';',
         )
         .join('\n')
 
     const darkUnframerTokens = tokens
-        .map((token) =>
-            '    --unframer-' +
-            kebabCase(token.name || token.id) +
-            ': ' +
-            token.darkColor +
-            ';'
+        .map(
+            (token) =>
+                '    --unframer-' +
+                kebabCase(token.name || token.id) +
+                ': ' +
+                token.darkColor +
+                ';',
         )
         .join('\n')
 
     const darkTokens = tokens
-        .map((token) =>
-            '    --token-' + token.id + ': ' + token.darkColor + ';'
+        .map(
+            (token) => '    --token-' + token.id + ': ' + token.darkColor + ';',
         )
         .join('\n')
 
     return (
         ':root {\n' +
-        lightUnframerTokens + '\n\n' +
+        lightUnframerTokens +
+        '\n\n' +
         lightTokens +
         '\n' +
         '}\n\n' +

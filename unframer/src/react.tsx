@@ -11,6 +11,7 @@ import {
 } from 'react'
 import {
     breakpointsStyles,
+    breakpointsStylesLegacy,
     defaultBreakpointSizes,
     getFontsStyles,
 } from './css.js'
@@ -66,7 +67,7 @@ export function FramerStyles({ Components = [] as any[] }): any {
     const breakpoints = (
         <style
             dangerouslySetInnerHTML={{
-                __html: breakpointsStyles(defaultBreakpointSizes),
+                __html: breakpointsStylesLegacy(defaultBreakpointSizes),
             }}
             key='breakpointsStyles'
             suppressHydrationWarning
@@ -126,7 +127,6 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
     } & Omit<ComponentPropsWithoutRef<T>, 'variant'>,
     ref,
 ): any {
-    const id = useId()
     const currentBreakpoint = useSyncExternalStore(
         onResize,
         () => {
@@ -162,10 +162,7 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             )
         } else {
             variants.set(realVariant, {
-                className: classNames(
-                    'unframer-hidden',
-                    `unframer-${breakpointName}`,
-                ),
+                className: classNames('unframer unframer-hidden', `unframer-${breakpointName}`),
                 variant: realVariant,
                 breakpoints: [breakpointName],
             })
@@ -178,20 +175,21 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             if (!shouldShow) {
                 return null
             }
+            const c = classNames(className, rest.className)
+
             return (
-                <div key={i} className={className}>
-                    {/* @ts-ignore */}
-                    <Component
-                        ref={ref}
-                        // LayoutGroup is used internally
-                        layoutId={variant}
-                        // layoutDependency={id}
-                        // layoutId={id + variant}
-                        // layoutId={breakpointName}
-                        {...rest}
-                        variant={variant as any}
-                    />
-                </div>
+                // @ts-ignore
+                <Component
+                    ref={ref}
+                    // LayoutGroup is used internally
+                    layoutId={variant}
+                    // layoutDependency={id}
+                    // layoutId={id + variant}
+                    // layoutId={breakpointName}
+                    {...rest}
+                    className={c}
+                    variant={variant as any}
+                />
             )
         },
     )
