@@ -1,11 +1,38 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import 'nextjs-app/src/framer-simplicity/styles.css'
+import NavigationFramerComponent from '../../../nextjs-app/src/framer-simplicity/navigation/navigation'
+import SectionCallToActionFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-call-to-action'
+import SectionFeaturesFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-features'
+import SectionFooterFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-footer'
+import SectionFrequentlyAskedQuestionsFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-frequently-asked-questions'
+import SectionHeroFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-hero'
+import SectionHowItWorksFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-how-it-works'
+import SectionLargeTestimonialFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-large-testimonial'
+import SectionLogosFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-logos'
+import SectionPricingFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-pricing'
+import SectionTestimonialsFramerComponent from '../../../nextjs-app/src/framer-simplicity/section-testimonials'
+import Layout from '../layouts/Layout.astro'
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+    <div class='bg-black flex flex-col items-center'>
+        <NavigationFramerComponent.Responsive server:defer />
+
+        <SectionHeroFramerComponent.Responsive client:load />
+
+        <SectionLogosFramerComponent.Responsive client:load />
+        <SectionHowItWorksFramerComponent.Responsive client:visible/>
+        <SectionLargeTestimonialFramerComponent.Responsive client:visible/>
+        <SectionFeaturesFramerComponent.Responsive client:visible/>
+        <SectionPricingFramerComponent.Responsive client:visible/>
+        <SectionTestimonialsFramerComponent.Responsive client:visible />
+        <SectionFrequentlyAskedQuestionsFramerComponent.Responsive
+            client:visible
+        />
+        <SectionCallToActionFramerComponent.Responsive client:visible />
+        <SectionFooterFramerComponent.Responsive client:visible />
+    </div>
 </Layout>
