@@ -277,6 +277,8 @@ Unframer renders your components with server side rendering, giving your good pe
 
 Here is the below landing page Lighthouse score when using Astro:
 
+> **Important**: For best performance in development, disable React strict mode. Strict mode causes components to mount and unmount twice, which can cause issues with Framer animations and state management.
+
 ![lighthouse score](./assets/astro-performance.png)
 
 ## Example
