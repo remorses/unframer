@@ -2,7 +2,7 @@
     <br/>
     <br/>
     <h3>unframer</h3>
-    <p>design in Framer, ship in production</p>
+    <p>design in Framer, ship in React</p>
     <br/>
     <br/>
 </div>
