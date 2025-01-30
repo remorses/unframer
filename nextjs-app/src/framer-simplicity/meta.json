@@ -1016,8 +1016,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/CMndpHLP0qQCPsOfPh9L/MPskWHg5T.js": {
-      "bytes": 46437,
+    "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js": {
+      "bytes": 50975,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1066,9 +1066,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/CMndpHLP0qQCPsOfPh9L/MPskWHg5T.js",
+          "path": "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/CMndpHLP0qQCPsOfPh9L/MPskWHg5T.js"
+          "original": "https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js"
         },
         {
           "path": "unframer",
@@ -3184,11 +3184,11 @@
         "virtual:section-logos": {
           "bytesInOutput": 1313
         },
-        "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/CMndpHLP0qQCPsOfPh9L/MPskWHg5T.js": {
-          "bytesInOutput": 45406
+        "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js": {
+          "bytesInOutput": 49944
         }
       },
-      "bytes": 47056
+      "bytes": 51594
     },
     "chunks/chunk-M2YQDPJS.js": {
       "imports": [
