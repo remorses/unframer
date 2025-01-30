@@ -62,6 +62,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
+      unframer:
+        specifier: workspace:*
+        version: link:../unframer
 
   nextjs-app:
     dependencies:
