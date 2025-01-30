@@ -7,12 +7,12 @@
     <br/>
 </div>
 
-Download framer components as simple files
+Unframer exports your Framer components as simple .js files
 
-- Works with any React framework (Next.js, Remix, Vite, etc)
+- Works with any React framework (Next.js, Remix, Vite, Astro, etc)
 - Includes all your components dependencies
-- Works with Framer locales, fetch, Framer Forms, color styles, dark mode (via `dark` class), etc
-- Has Typescript support, inferred from your component variables (like `variant`)
+- Works with breakpoints, Framer fetch, Forms, color styles, dark mode (via `dark` class), etc
+- Full Typescript support, inferred from your component variables (like `variant`)
 
 ## Usage
 
