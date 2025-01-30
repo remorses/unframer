@@ -2,8 +2,8 @@
     <br/>
     <br/>
     <h3>unframer</h3>
+    <p>design in Framer, ship in production</p>
     <br/>
-    <p>Design in Framer, ship in production</p>
     <br/>
 </div>
 
