@@ -8,10 +8,10 @@
 
 Download framer components as simple files
 
--   Works with any React framework (Next.js, Remix, Vite, etc)
--   Includes all your components dependencies
--   Works with Framer locales, fetch, Framer Forms, color styles, dark mode (via `dark` class), etc
--   Has Typescript support, inferred from your component variables (like `variant`)
+- Works with any React framework (Next.js, Remix, Vite, etc)
+- Includes all your components dependencies
+- Works with Framer locales, fetch, Framer Forms, color styles, dark mode (via `dark` class), etc
+- Has Typescript support, inferred from your component variables (like `variant`)
 
 ## Usage
 
@@ -161,6 +161,57 @@ export default function App() {
 }
 ```
 
+## Using the Framer color styles as CSS variables
+
+Unframer will export your color styles as CSS variables, for example:
+
+```css
+:root {
+    --unframer-chambray: rgb(72, 86, 150);
+    --unframer-gray: rgb(231, 231, 231);
+    --unframer-off-black: rgb(16, 16, 16);
+    --unframer-300: rgb(255, 160, 122);
+    --unframer-500: rgb(252, 62, 19);
+    --unframer-dark-gray: rgb(169, 169, 169);
+    --unframer-400: rgb(254, 102, 57);
+    --unframer-100: rgb(255, 227, 212);
+    --unframer-50: rgb(255, 243, 237);
+    --unframer-25: rgb(255, 252, 250);
+    --unframer-white: rgb(255, 255, 255);
+    --unframer-primary: rgb(231, 34, 8);
+}
+
+.dark {
+    --unframer-chambray: rgb(161, 180, 255);
+    --unframer-gray: rgb(42, 42, 42);
+    --unframer-off-black: rgb(255, 255, 255);
+    --unframer-300: rgb(255, 160, 122);
+    --unframer-500: rgb(252, 62, 19);
+    --unframer-dark-gray: rgb(176, 176, 176);
+    --unframer-400: rgb(254, 102, 57);
+    --unframer-100: rgb(58, 58, 58);
+    --unframer-50: rgb(40, 40, 40);
+    --unframer-25: rgb(30, 30, 30);
+    --unframer-white: rgb(16, 16, 16);
+    --unframer-primary: rgb(231, 34, 8);
+}
+```
+
+> you can use them in your own code, for example in tailwind with `<div className='bg-(--unframer-white)' />`
+
+## When should I run the plugin again?
+
+You can just run the `unframer` cli to get changes from the existing components.
+
+The Framer plugin should be reopened when:
+
+- When you add a new component
+- When changing color styles
+- When adding new pages (this is necessary to make relative links to those pages work)
+- When adding new locales
+- When changing breakpoints
+- When changing breakpoints
+
 ## Watching for changes
 
 You can use the `--watch` flag to automatically re-export components when they change in Framer: notice that you will need to click the Publish button in Framer to trigger the cli, Framer only updates the JavaScript modules when you publish your website.
@@ -186,31 +237,31 @@ The Responsive component renders your components for each different breakpoint a
 
 If you find any errors rendering your components:
 
--   Check you have the latest version of `unframer` installed
--   If an animation is now working as expected try disabled React strict mode and updating to React 19.
--   Try downloading new versions of the components by running again `npx unframer {projectId}`, Framer may already have fixed the problem.
--   Try disabling React strict mode, this can cause many issues in Framer components.
--   If the export fails because Esbuild cannot find an export from a package (like `No matching export in "/:https://esm.sh/zustand" for import "default"`) you can use the `--external` option to externalie npm packages used by Framer, then install them manually with the right version with `npm install`.
-    Framer sometimes uses legacy versions of npm packages in their components, for example with Zustand which is usually still in version 3.x. This happens because Framer packages must be the same in the whole project and their versions are fixed at the time the npm package is used in a code component or override.
+- Check you have the latest version of `unframer` installed
+- If an animation is now working as expected try disabled React strict mode and updating to React 19.
+- Try downloading new versions of the components by running again `npx unframer {projectId}`, Framer may already have fixed the problem.
+- Try disabling React strict mode, this can cause many issues in Framer components.
+- If the export fails because Esbuild cannot find an export from a package (like `No matching export in "/:https://esm.sh/zustand" for import "default"`) you can use the `--external` option to externalie npm packages used by Framer, then install them manually with the right version with `npm install`.
+  Framer sometimes uses legacy versions of npm packages in their components, for example with Zustand which is usually still in version 3.x. This happens because Framer packages must be the same in the whole project and their versions are fixed at the time the npm package is used in a code component or override.
 
 ## Supported component props
 
 `unframer` will add TypeScript definitions for your Framer components props and variables, some example variables you can use are:
 
--   `variant`, created when you use variants in Framer
--   functions, created when you use an `event` variable in Framer
--   Any scalar variable like String, Number, Boolean, Date, etc
--   Image variables (object with `src`, `srcSet` and `alt`), created when you use an `image` variable in Framer
--   Link strings, created when you make a link a variable in Framer
--   Rich text, created when you use a `richText` variable in Framer
--   Color, a string
--   React component, created when you use a `component` variable in Framer, for example in the Ticker component
+- `variant`, created when you use variants in Framer
+- functions, created when you use an `event` variable in Framer
+- Any scalar variable like String, Number, Boolean, Date, etc
+- Image variables (object with `src`, `srcSet` and `alt`), created when you use an `image` variable in Framer
+- Link strings, created when you make a link a variable in Framer
+- Rich text, created when you use a `richText` variable in Framer
+- Color, a string
+- React component, created when you use a `component` variable in Framer, for example in the Ticker component
 
 ## Known limitations:
 
--   You may face React warnings like:
-    -   `Accessing element.ref was removed in React 19.` This warning appears because Framer still uses the old `element.ref` API which was removed in React 19. This warning is harmless and will be fixed when Framer updates their codebase to use the new React 19 APIs.
-    -   `A tree hydrated but some attributes of the server rendered HTML didn't match the client properties.` This warning sometimes appears when using SWV icons, it should be harmless, it only happens in development mode.
+- You may face React warnings like:
+    - `Accessing element.ref was removed in React 19.` This warning appears because Framer still uses the old `element.ref` API which was removed in React 19. This warning is harmless and will be fixed when Framer updates their codebase to use the new React 19 APIs.
+    - `A tree hydrated but some attributes of the server rendered HTML didn't match the client properties.` This warning sometimes appears when using SWV icons, it should be harmless, it only happens in development mode.
 
 ## Future Compatibility
 

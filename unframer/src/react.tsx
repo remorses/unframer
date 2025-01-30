@@ -268,7 +268,7 @@ function isRelativeLink(url) {
     if (!url) {
         return false
     }
-    return url.startsWith('/') || url.startsWith('#')
+    return url?.startsWith?.('/') || url?.startsWith?.('#')
 }
 export function AdaptedLink({
     href,
