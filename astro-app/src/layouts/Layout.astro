@@ -1,3 +1,9 @@
+---
+import 'nextjs-app/src/framer-simplicity/styles.css'
+
+import { ClientRouter } from 'astro:transitions';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -7,6 +13,7 @@
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="Learn the basics of Astro with this starter template. Explore components, routing, and more." />
 		<title>Astro Basics</title>
+		<ClientRouter />
 	</head>
 	<body >
 		<slot />

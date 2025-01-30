@@ -162,7 +162,10 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             )
         } else {
             variants.set(realVariant, {
-                className: classNames('unframer unframer-hidden', `unframer-${breakpointName}`),
+                className: classNames(
+                    'unframer unframer-hidden',
+                    `unframer-${breakpointName}`,
+                ),
                 variant: realVariant,
                 breakpoints: [breakpointName],
             })
@@ -232,6 +235,7 @@ import {
     FramerLink as Link,
 } from './framer.js'
 import React from 'react'
+import { style } from 'real-framer-motion/client'
 
 type Routes = Record<string, { path: string }>
 
@@ -354,3 +358,34 @@ export function ContextProviders({
         </FetchClientProvider>
     )
 }
+
+const isFunction = (value: any): value is Function => {
+    return typeof value === 'function'
+}
+
+var framerCSSMarker = 'data-framer-css-ssr'
+
+// overrides the default withCSS which does not work with Astro because it does not simply renders style tags
+export const withCSS = (Component, escapedCSS, componentSerializationId) =>
+    forwardRef((props, ref) => {
+        const id3 = componentSerializationId
+
+        if (isFunction(escapedCSS)) escapedCSS = escapedCSS('PREVIEW')
+        const concatenatedCSS = Array.isArray(escapedCSS)
+            ? escapedCSS.join('\n')
+            : escapedCSS
+        return (
+            <>
+                <style
+                    {...{
+                        [framerCSSMarker]: true,
+                    }}
+                    data-framer-component={id3}
+                    dangerouslySetInnerHTML={{
+                        __html: concatenatedCSS,
+                    }}
+                />
+                <Component {...props} ref={ref} />
+            </>
+        )
+    })
