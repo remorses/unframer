@@ -915,8 +915,8 @@ export async function extractPropControlsUnsafe(
     let stdout = await new Promise<string>((res, rej) => {
         const cmd = `"${
             nodePath
-        }" --no-warnings --input-type=module --loader ${require.resolve(
-            '../dist/unframer-loader.js',
+        }" --no-warnings --input-type=module --loader ${url.pathToFileURL(
+            require.resolve('../dist/unframer-loader.js'),
         )} -e ${JSON.stringify(code)}`
 
         let childProcess = exec(
