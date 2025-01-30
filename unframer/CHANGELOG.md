@@ -1,5 +1,15 @@
 # unframer
 
+## 2.18.0
+
+### Minor Changes
+
+- 4150d97: Add support for Astro client:visible, previously was not working because Responsive components rendered display: contents children
+
+### Patch Changes
+
+- 578cf67: Restore windows support for type generation
+
 ## 2.17.1
 
 ### Patch Changes
