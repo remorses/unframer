@@ -269,6 +269,14 @@ Every Framer runtime change is upstreamed automatically via Github Actions to th
 
 For example in May 2024 Framer upgraded to React 19 and unframer broke, the reason was that framer runtime no longer injected ssr styles to `head` because react should do it automatically from version 19, this however broke unframer when using react 18, but i was able to quickly fix it by adding back the code to inject styles to `head` in unframer.
 
+## Performance
+
+Unframer renders your components with server side rendering, giving your good performance and SEO, in pair with the Framer deployed websites.
+
+Here is the below landing page Lighthouse score when using Astro:
+
+![lighthouse score](./assets/astro-performance.png)
+
 ## Example
 
 Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
