@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro'
 
 <Layout>
     <div class='bg-black flex flex-col items-center'>
-        <NavigationFramerComponent.Responsive client:load />
+        <NavigationFramerComponent.Responsive transition:persist client:load />
 
         <SectionHeroFramerComponent.Responsive client:load />
 
