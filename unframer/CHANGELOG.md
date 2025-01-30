@@ -1,5 +1,12 @@
 # unframer
 
+## 2.18.1
+
+### Patch Changes
+
+- b7f1411: Update framer to 2.4.1, update framer motion to 11.11.7
+- f715183: Add patch to make Framer navigator work with Node 22
+
 ## 2.18.0
 
 ### Minor Changes
