@@ -3,6 +3,7 @@
     <br/>
     <h3>unframer</h3>
     <br/>
+    <p>Design in Framer, ship in production</p>
     <br/>
 </div>
 
@@ -15,17 +16,18 @@ Download framer components as simple files
 
 ## Usage
 
-1. Install the package
+1. Install unframer and update react to 19
 
     ```sh
-    npm install unframer
+    npm install unframer react@19 react-dom@19
     ```
 
 1. Install the [`React Export` Framer plugin](https://www.framer.com/marketplace/plugins/react-export/), open it and select which components you want to export.
 
-1. Run the command `npx unframer {projectId} --outDir ./src/framer` to download the components and their types in the `outDir` directory, the command will be shown in the Framer plugin too. Run this command each time you update your Framer project and want to update the components.
+1. Run the command `npx unframer {projectId} --outDir ./src/framer` to download the components and their types in the `outDir` directory.
+   Run this command every time you add a new Framer component.
 
-1. Import the component inside your `jsx` files together with the `styles.css` file, for example
+1. Import the components inside your `jsx` files together with `styles.css`, for example
 
 ```tsx
 import './framer/styles.css' // load base Framer styles
