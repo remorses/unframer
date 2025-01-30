@@ -13,6 +13,7 @@
         "@astrojs/tailwind": "^5.1.5",
         "@types/react": "^19.0.8",
         "nextjs-app": "workspace:*",
+        "unframer": "workspace:*",
         "@types/react-dom": "^19.0.3",
         "astro": "^5.1.10",
         "react": "^19.0.0",
