@@ -1,5 +1,11 @@
 # unframer
 
+## 2.18.4
+
+### Patch Changes
+
+- 76cd8e6: Disable custom withCSS
+
 ## 2.18.3
 
 ### Patch Changes
