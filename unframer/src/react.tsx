@@ -9,6 +9,7 @@ import {
     useMemo,
     useSyncExternalStore,
 } from 'react'
+import { version } from './version.js'
 import {
     breakpointsStyles,
     breakpointsStylesLegacy,
@@ -196,6 +197,7 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             )
         },
     )
+    parts.push(<DebugUnframerVersion />)
 
     return parts
 })
@@ -364,6 +366,21 @@ const isFunction = (value: any): value is Function => {
 }
 
 var framerCSSMarker = 'data-framer-css-ssr'
+
+/**
+ * Add Unframer debug information to debug websites using Unframer
+ */
+function DebugUnframerVersion() {
+    return (
+        <details style={{ display: 'none' }}>
+            Using{' '}
+            <a href='https://unframer.co' className=''>
+                Framer React Export
+            </a>{' '}
+            version {version}
+        </details>
+    )
+}
 
 // overrides the default withCSS which does not work with Astro because it does not simply renders style tags
 export const withCSS = (Component, escapedCSS, componentSerializationId) =>
