@@ -2,10 +2,10 @@
     "name": "nextjs-app",
     "private": true,
     "scripts": {
-        "dev:ui": "concurrently-ui 'next dev  --port 5543' 'pnpm unframer'",
+        "dev:ui": "next dev  --port 5543",
         "dev": "next dev  --port 5543",
         "gen": "pnpm --filter unframer build && pnpm unframer",
-        "build": "pnpm --filter unframer build && framer-simplicity && next build",
+        "build": "pnpm --filter unframer build && pnpm framer-simplicity && next build",
         "framer-simplicity": "pnpm unframer 080b0b6d577bdc21 --outDir ./src/framer-simplicity",
         "start": "next start",
         "lint": "next lint"
