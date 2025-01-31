@@ -1,5 +1,11 @@
 # unframer
 
+## 2.18.3
+
+### Patch Changes
+
+- d32e80d: Fix SVG elements not showing up because of withCSS change
+
 ## 2.18.2
 
 ### Patch Changes
