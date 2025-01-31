@@ -5,8 +5,8 @@
         "dev:ui": "concurrently-ui 'next dev  --port 5543' 'pnpm unframer'",
         "dev": "next dev  --port 5543",
         "gen": "pnpm --filter unframer build && pnpm unframer",
-        "build": "pnpm --filter unframer build && next build",
-        "framer-simplicity": "pnpm unframer 080b0b6d577bdc21 --watch --outDir ./src/framer-simplicity",
+        "build": "pnpm --filter unframer build && framer-simplicity && next build",
+        "framer-simplicity": "pnpm unframer 080b0b6d577bdc21 --outDir ./src/framer-simplicity",
         "start": "next start",
         "lint": "next lint"
     },
