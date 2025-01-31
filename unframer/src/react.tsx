@@ -1,5 +1,6 @@
 'use client'
-import { combinedCSSRules, LayoutGroup, MotionConfig } from './framer.js'
+import { combinedCSSRules, LayoutGroup } from './framer.js'
+import { withCSS as originalWithCSS } from './framer.js'
 
 import {
     ComponentPropsWithoutRef,
@@ -383,8 +384,19 @@ function DebugUnframerVersion() {
 }
 
 // overrides the default withCSS which does not work with Astro because it does not simply renders style tags
-export const withCSS = (Component, escapedCSS, componentSerializationId) =>
-    forwardRef((props, ref) => {
+export const withCSS = (Component, escapedCSS, componentSerializationId) => {
+    // Try original withCSS first
+    const OriginalComponent = originalWithCSS(
+        Component,
+        escapedCSS,
+        componentSerializationId,
+    )
+
+    if (typeof window === 'undefined') {
+        return OriginalComponent
+    }
+
+    return forwardRef((props, ref) => {
         const id3 = componentSerializationId
 
         if (isFunction(escapedCSS)) escapedCSS = escapedCSS('PREVIEW')
@@ -402,7 +414,8 @@ export const withCSS = (Component, escapedCSS, componentSerializationId) =>
                         __html: concatenatedCSS,
                     }}
                 />
-                <Component {...props} ref={ref} />
+                <OriginalComponent {...props} ref={ref} />
             </>
         )
     })
+}

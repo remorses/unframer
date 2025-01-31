@@ -9,7 +9,7 @@ export {
     WithFramerBreakpoints,
     ContextProviders,
     AdaptedLink,
-    // withCSS, TODO this breaks SVGs for some reason
+    withCSS,
 } from './react.js'
 
 export { Link, ResolveLinks }
