@@ -1,5 +1,15 @@
 # unframer
 
+## 2.19.0
+
+### Minor Changes
+
+- c4fed97: Add support for Astro client router, reset global Framer state on client navigations
+
+### Patch Changes
+
+- 12218a8: Update framer to 2.4.1, update framer motion to 11.11.7
+
 ## 2.18.5
 
 ### Patch Changes
