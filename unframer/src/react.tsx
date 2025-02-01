@@ -373,7 +373,7 @@ var framerCSSMarker = 'data-framer-css-ssr'
  */
 function DebugUnframerVersion() {
     return (
-        <details style={{ display: 'none' }}>
+        <details style={{ display: 'none !important' }}>
             Using{' '}
             <a href='https://unframer.co' className=''>
                 Framer React Export
