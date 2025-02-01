@@ -1,5 +1,11 @@
 # unframer
 
+## 2.18.5
+
+### Patch Changes
+
+- e6a05bb: Make unframer work with Node 18, fix --loader bugs
+
 ## 2.18.4
 
 ### Patch Changes
