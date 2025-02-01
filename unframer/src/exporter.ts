@@ -656,12 +656,12 @@ export async function checkUnframerVersion({ cwd }: { cwd: string }) {
         const installedVersion = await resolvePackage({ cwd, pkg: 'unframer' })
         if (installedVersion !== currentVersion) {
             spinner.error(
-                `Unframer version mismatch. Please run: npm update unframer@latest`,
+                `IMPORTANT: Unframer version mismatch. Please run: npm update unframer@latest`,
             )
         }
     } catch (e) {
         spinner.error(
-            'Unframer is not installed in your project. Please run: npm install unframer',
+            'IMPORTANT: Unframer is not installed in your project. Please run: npm install unframer',
         )
     }
 }
