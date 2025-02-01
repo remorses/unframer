@@ -904,27 +904,35 @@ export async function extractPropControlsUnsafe(
     const code = `import("${fileUrl}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
 
     const TIMEOUT = 5 * 1000
-    const UNFRAMER_MAP_PACKAGES = JSON.stringify({
+    const UNFRAMER_MAP_PACKAGES = {
         unframer: url.pathToFileURL(require.resolve('../esm/index.js')).href,
         react: url.pathToFileURL(require.resolve('react')).href,
         'react-dom': url.pathToFileURL(require.resolve('react-dom')).href,
         'react/jsx-runtime': url.pathToFileURL(
             require.resolve('react/jsx-runtime'),
         ).href,
-    })
+    }
+    let loaderOption = `--loader ${url.pathToFileURL(
+        require.resolve('../dist/unframer-loader.js'),
+    )}`
+    try {
+        require.resolve('unframer/package.json')
+
+        UNFRAMER_MAP_PACKAGES.unframer = ''
+    } catch {}
     let stdout = await new Promise<string>((res, rej) => {
         const cmd = `"${
             nodePath
-        }" --no-warnings --input-type=module --loader ${url.pathToFileURL(
-            require.resolve('../dist/unframer-loader.js'),
-        )} -e ${JSON.stringify(code)}`
+        }" --no-warnings --input-type=module ${loaderOption} -e ${JSON.stringify(code)}`
 
         let childProcess = exec(
             cmd,
             {
                 env: {
                     // ...process.env,
-                    UNFRAMER_MAP_PACKAGES,
+                    UNFRAMER_MAP_PACKAGES: JSON.stringify(
+                        UNFRAMER_MAP_PACKAGES,
+                    ),
                 },
             },
             (err, stdout, stderr) => {
