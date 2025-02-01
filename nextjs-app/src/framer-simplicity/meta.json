@@ -1,7 +1,7 @@
 {
   "inputs": {
     "/:https://framerusercontent.com/modules/thqKCB5MUvyhxiBCARGQ/h0W8F6ucZnYQLUZnAEvk/wHLHeTMJ0.js": {
-      "bytes": 9513,
+      "bytes": 9594,
       "imports": [
         {
           "path": "unframer",
@@ -12,7 +12,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/vdqdaRWtVuOD4asXHbPM/n5OCkjkhKskW2oOCuRgo/LQUaUeoup.js": {
-      "bytes": 9834,
+      "bytes": 9915,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -38,7 +38,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/poJXVkxAZX90rPfIcBZ9/VBE0W7QUjom1wkOmRCOj/CWRpkcDNO.js": {
-      "bytes": 9514,
+      "bytes": 9595,
       "imports": [
         {
           "path": "unframer",
@@ -49,7 +49,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/05Wa4oyBZ7TjI1kMwh1y/EkSddwRVYYngMkEH0UN9/TQvmJK7UB.js": {
-      "bytes": 5323,
+      "bytes": 5404,
       "imports": [
         {
           "path": "unframer",
@@ -60,7 +60,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/0KOYfzC786WfQkXK6a6W/dvAkZo14JFRnq1gY6R6I/RoWBcrG5r.js": {
-      "bytes": 24526,
+      "bytes": 24607,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -86,7 +86,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/qomj0V2Sfq0dhfjajgfb/HXma3XfdldsItnxsyxMK/zMU4gIN24.js": {
-      "bytes": 5582,
+      "bytes": 5663,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -112,7 +112,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/bEgPA2T1DFozTyF2pviq/xIDTG0mV9dWPlAJUl2d8/zR6Y6pEd6.js": {
-      "bytes": 15699,
+      "bytes": 15780,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -158,7 +158,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/8yWQJevMrmbyJU3TjtDM/zS5vjLQEM0Om9WjVuslz/BLpQs2pt2.js": {
-      "bytes": 31932,
+      "bytes": 32013,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -230,7 +230,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ew1cLyOGdKmPjGhDla2c/XoCRNhql3Kae6lIcThRM/TQvmJK7UB.js": {
-      "bytes": 5323,
+      "bytes": 5404,
       "imports": [
         {
           "path": "unframer",
@@ -241,7 +241,7 @@
       "format": "esm"
     },
     "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
-      "bytes": 1003,
+      "bytes": 1084,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -257,12 +257,12 @@
       "format": "esm"
     },
     "/:https://framer.com/m/phosphor-icons/House.js@0.0.57": {
-      "bytes": 3354,
+      "bytes": 3435,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
-      "bytes": 2388,
+      "bytes": 2469,
       "imports": [
         {
           "path": "react",
@@ -278,7 +278,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js": {
-      "bytes": 25439,
+      "bytes": 25520,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -324,7 +324,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/5VaxOsYcoLOwQJQY1CoK/CbmX9mqwrzP6TecxBGHX/Qfqe3ZuD6.js": {
-      "bytes": 23968,
+      "bytes": 24049,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -355,7 +355,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/y1HUnr2njqcQXKEp2acO/Rnu0jYgaRQbPcofxjZtQ/t27IKw22u.js": {
-      "bytes": 7988,
+      "bytes": 8069,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -386,7 +386,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/yAJEVha6UtPrvSmlazA2/a5K4r7vjdWnw27X83LO4/FPyYEebr2.js": {
-      "bytes": 42747,
+      "bytes": 42828,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -463,12 +463,12 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs": {
-      "bytes": 1771,
+      "bytes": 1852,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/utils": {
-      "bytes": 61,
+      "bytes": 142,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs",
@@ -479,7 +479,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs": {
-      "bytes": 760,
+      "bytes": 841,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/utils",
@@ -495,7 +495,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/easing": {
-      "bytes": 63,
+      "bytes": 144,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs",
@@ -506,7 +506,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs": {
-      "bytes": 3590,
+      "bytes": 3671,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/utils",
@@ -527,7 +527,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/animation": {
-      "bytes": 69,
+      "bytes": 150,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs",
@@ -538,12 +538,12 @@
       "format": "esm"
     },
     "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs": {
-      "bytes": 89,
+      "bytes": 170,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*hey-listen": {
-      "bytes": 58,
+      "bytes": 139,
       "imports": [
         {
           "path": "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs",
@@ -554,12 +554,12 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs": {
-      "bytes": 237,
+      "bytes": 318,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/types": {
-      "bytes": 61,
+      "bytes": 142,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs",
@@ -570,12 +570,12 @@
       "format": "esm"
     },
     "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs": {
-      "bytes": 14667,
+      "bytes": 14748,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*tslib": {
-      "bytes": 152,
+      "bytes": 233,
       "imports": [
         {
           "path": "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs",
@@ -591,7 +591,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs": {
-      "bytes": 2899,
+      "bytes": 2980,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/utils",
@@ -617,7 +617,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/generators": {
-      "bytes": 71,
+      "bytes": 152,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs",
@@ -628,7 +628,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs": {
-      "bytes": 26311,
+      "bytes": 26392,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/animation",
@@ -809,7 +809,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/dom": {
-      "bytes": 57,
+      "bytes": 138,
       "imports": [
         {
           "path": "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs",
@@ -820,7 +820,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
-      "bytes": 14113,
+      "bytes": 14194,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -851,7 +851,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/6oEKB71z02RSDbojsfvF/kzeEsDf8zO1EvIeAUjtp/CWRpkcDNO.js": {
-      "bytes": 9514,
+      "bytes": 9595,
       "imports": [
         {
           "path": "unframer",
@@ -862,7 +862,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/vD7YjEvykiBucDgea85g/2SbipxndcKUIlcnprtXJ/YdlE6s2va.js": {
-      "bytes": 5185,
+      "bytes": 5266,
       "imports": [
         {
           "path": "unframer",
@@ -872,8 +872,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/AvnaiXUrSSWeJ4Q3NLBp/HOWKuDHCy.js": {
-      "bytes": 53958,
+    "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js": {
+      "bytes": 53637,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -932,9 +932,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/AvnaiXUrSSWeJ4Q3NLBp/HOWKuDHCy.js",
+          "path": "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/AvnaiXUrSSWeJ4Q3NLBp/HOWKuDHCy.js"
+          "original": "https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js"
         },
         {
           "path": "unframer",
@@ -950,7 +950,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/vZHcUtXg2Gy3CW0UYnss/1zHPAND2ybcM9iawLN6Y/HiujzNyFs.js": {
-      "bytes": 11248,
+      "bytes": 11329,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1017,7 +1017,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js": {
-      "bytes": 50975,
+      "bytes": 51056,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1084,7 +1084,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/7kTD0oR8h7oUaQlogSbj/i4tHTxOuTGk3xhGb7giW/TU_QSVgmz.js": {
-      "bytes": 65762,
+      "bytes": 65843,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1110,7 +1110,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/eoaCQKqCIt0UgkYP6l8j/uCO0sseL4q2dJ1oKpCNP/gjV8lF9g8.js": {
-      "bytes": 28267,
+      "bytes": 28348,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1146,7 +1146,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/jVQGemd6yn35sShs6D7P/1pRGuRnLG3t4AOU3dtBF/SpenI5W7L.js": {
-      "bytes": 7950,
+      "bytes": 8031,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1208,7 +1208,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ilKlUCpmIocoR6yhN8w4/qvDIQ0VsD2rLsNJh1EHt/v6szLN4kE.js": {
-      "bytes": 9514,
+      "bytes": 9595,
       "imports": [
         {
           "path": "unframer",
@@ -1219,7 +1219,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/sa8zVXMWkXY0aWzV57or/jRlUq2XWA29F5k5Mwzfa/SrEfHh8IE.js": {
-      "bytes": 40634,
+      "bytes": 40715,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1327,7 +1327,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/vBPIHY51XZE5TET5oqaA/TR1Tybb7OwGudUA68mtk/pGqsrn12V.js": {
-      "bytes": 52985,
+      "bytes": 53066,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1358,7 +1358,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/0sOq5bNEE1qVy6IyqIHh/WirOdcJBs.js": {
-      "bytes": 18523,
+      "bytes": 18604,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1430,7 +1430,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/2dgi2DlUClY4qBbVakOw/0jnC5BbjXLdwysUvlueD/kpcp5QUWe.js": {
-      "bytes": 9508,
+      "bytes": 9589,
       "imports": [
         {
           "path": "unframer",
@@ -1441,7 +1441,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/XmVo67kR0s5kKjhDrTS8/aKlzorVQO.js": {
-      "bytes": 19170,
+      "bytes": 19251,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1549,7 +1549,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/oWVHHLIj4Q7woeIlKzbt/Jo2d4bKbCdbbg0oiZ0LB/Input.js": {
-      "bytes": 19761,
+      "bytes": 19842,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1575,7 +1575,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/7huRV9yM58McdmZvBs30/fRle3ltkVjd5JzW6LeBZ/QqbrxlqQv.js": {
-      "bytes": 1106,
+      "bytes": 1187,
       "imports": [
         {
           "path": "unframer",
@@ -1586,7 +1586,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/cLjgVb9OxADgFEHXebBf/1vSOnCJv931Sq1hopNuq/RKoVavP5G.js": {
-      "bytes": 4929,
+      "bytes": 5010,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1612,7 +1612,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/AcXscJ604rrBc7i1JGd6/m5keEQA6U.js": {
-      "bytes": 37190,
+      "bytes": 37271,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1699,7 +1699,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Znl9Gi26xTfU17mHETUh/RbcdAcVC45S0KWuBNU1n/u898_CyTd.js": {
-      "bytes": 16770,
+      "bytes": 16851,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1771,7 +1771,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Qi5b7QPu9c3NjXeCuWjP/5dr614GYVaBi685jdwpF/wqLJMyDAb.js": {
-      "bytes": 17577,
+      "bytes": 17658,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1843,7 +1843,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ca72rHKxAUpyjO83Ja5s/rowkjuJU49EqJhwWv3CL/kUDFfX57O.js": {
-      "bytes": 7612,
+      "bytes": 7693,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1869,7 +1869,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/i2Kbb6L8ypMTOu0nc9OS/Y2nkxdMK3gmv1x5wEWKt/voPlJ06tR.js": {
-      "bytes": 10273,
+      "bytes": 10354,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1894,8 +1894,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/ZFS8K9vkwGhjAgQLdWBT/z5xRU1d9T.js": {
-      "bytes": 30160,
+    "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/t23MObJyprsKWWB6SqUI/z5xRU1d9T.js": {
+      "bytes": 27872,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1954,9 +1954,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/ZFS8K9vkwGhjAgQLdWBT/z5xRU1d9T.js",
+          "path": "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/t23MObJyprsKWWB6SqUI/z5xRU1d9T.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/ZFS8K9vkwGhjAgQLdWBT/z5xRU1d9T.js"
+          "original": "https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/t23MObJyprsKWWB6SqUI/z5xRU1d9T.js"
         },
         {
           "path": "unframer",
@@ -1976,15 +1976,15 @@
     "section-frequently-asked-questions.js": {
       "imports": [
         {
-          "path": "chunks/chunk-BYYEIETE.js",
+          "path": "chunks/chunk-U2BTSRYM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -2068,19 +2068,19 @@
     "section-hero.js": {
       "imports": [
         {
-          "path": "chunks/chunk-DWSQJGLU.js",
+          "path": "chunks/chunk-D4IPCJGN.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-BYYEIETE.js",
+          "path": "chunks/chunk-U2BTSRYM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
@@ -2149,23 +2149,23 @@
     "sections/features-container.js": {
       "imports": [
         {
-          "path": "chunks/chunk-TIVPDKB2.js",
+          "path": "chunks/chunk-W7Z4VVDG.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3DB3CVRB.js",
+          "path": "chunks/chunk-H3WDA3QT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-F6GS5ZYC.js",
+          "path": "chunks/chunk-HHDHZ6TZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ZZVOOQP2.js",
+          "path": "chunks/chunk-BPH5BCDR.js",
           "kind": "import-statement"
         },
         {
@@ -2203,19 +2203,19 @@
     "section-footer.js": {
       "imports": [
         {
-          "path": "chunks/chunk-HNM4IRHR.js",
+          "path": "chunks/chunk-WTNHL2WX.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-M7SRK247.js",
+          "path": "chunks/chunk-N2K3P4T2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -2307,19 +2307,19 @@
     "section-call-to-action.js": {
       "imports": [
         {
-          "path": "chunks/chunk-HNM4IRHR.js",
+          "path": "chunks/chunk-WTNHL2WX.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DWSQJGLU.js",
+          "path": "chunks/chunk-D4IPCJGN.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
@@ -2380,27 +2380,27 @@
     "section-pricing.js": {
       "imports": [
         {
-          "path": "chunks/chunk-6QWJV3UC.js",
+          "path": "chunks/chunk-D7Q37PCA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-M7SRK247.js",
+          "path": "chunks/chunk-N2K3P4T2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DWSQJGLU.js",
+          "path": "chunks/chunk-D4IPCJGN.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-BYYEIETE.js",
+          "path": "chunks/chunk-U2BTSRYM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
@@ -2461,15 +2461,15 @@
     "navigation/navigation.js": {
       "imports": [
         {
-          "path": "chunks/chunk-HNM4IRHR.js",
+          "path": "chunks/chunk-WTNHL2WX.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DWSQJGLU.js",
+          "path": "chunks/chunk-D4IPCJGN.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
@@ -2561,8 +2561,8 @@
         "virtual:navigation/navigation": {
           "bytesInOutput": 1296
         },
-        "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/ZFS8K9vkwGhjAgQLdWBT/z5xRU1d9T.js": {
-          "bytesInOutput": 29292
+        "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/t23MObJyprsKWWB6SqUI/z5xRU1d9T.js": {
+          "bytesInOutput": 26923
         },
         "/:https://framerusercontent.com/modules/ca72rHKxAUpyjO83Ja5s/rowkjuJU49EqJhwWv3CL/kUDFfX57O.js": {
           "bytesInOutput": 6849
@@ -2571,9 +2571,9 @@
           "bytesInOutput": 9667
         }
       },
-      "bytes": 47807
+      "bytes": 45438
     },
-    "chunks/chunk-HNM4IRHR.js": {
+    "chunks/chunk-WTNHL2WX.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2609,11 +2609,11 @@
     "section-testimonials.js": {
       "imports": [
         {
-          "path": "chunks/chunk-BYYEIETE.js",
+          "path": "chunks/chunk-U2BTSRYM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
@@ -2759,23 +2759,23 @@
     "sections/pricing.js": {
       "imports": [
         {
-          "path": "chunks/chunk-6QWJV3UC.js",
+          "path": "chunks/chunk-D7Q37PCA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-M7SRK247.js",
+          "path": "chunks/chunk-N2K3P4T2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DWSQJGLU.js",
+          "path": "chunks/chunk-D4IPCJGN.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
@@ -2810,22 +2810,22 @@
       },
       "bytes": 1580
     },
-    "chunks/chunk-6QWJV3UC.js": {
+    "chunks/chunk-D7Q37PCA.js": {
       "imports": [
         {
-          "path": "chunks/chunk-M7SRK247.js",
+          "path": "chunks/chunk-N2K3P4T2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DWSQJGLU.js",
+          "path": "chunks/chunk-D4IPCJGN.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
@@ -2882,7 +2882,7 @@
       },
       "bytes": 49360
     },
-    "chunks/chunk-M7SRK247.js": {
+    "chunks/chunk-N2K3P4T2.js": {
       "imports": [
         {
           "path": "unframer",
@@ -2902,10 +2902,10 @@
       },
       "bytes": 5056
     },
-    "chunks/chunk-DWSQJGLU.js": {
+    "chunks/chunk-D4IPCJGN.js": {
       "imports": [
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
@@ -2942,19 +2942,19 @@
     "section-large-testimonial.js": {
       "imports": [
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-M2YQDPJS.js",
+          "path": "chunks/chunk-EX3VWTPV.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-F6GS5ZYC.js",
+          "path": "chunks/chunk-HHDHZ6TZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -3006,13 +3006,13 @@
         "virtual:section-large-testimonial": {
           "bytesInOutput": 1313
         },
-        "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/AvnaiXUrSSWeJ4Q3NLBp/HOWKuDHCy.js": {
-          "bytesInOutput": 52611
+        "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js": {
+          "bytesInOutput": 52209
         }
       },
-      "bytes": 54444
+      "bytes": 54042
     },
-    "chunks/chunk-7PROOCBE.js": {
+    "chunks/chunk-BTSBQWPZ.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3082,15 +3082,15 @@
     "sections/feature.js": {
       "imports": [
         {
-          "path": "chunks/chunk-3DB3CVRB.js",
+          "path": "chunks/chunk-H3WDA3QT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-F6GS5ZYC.js",
+          "path": "chunks/chunk-HHDHZ6TZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -3128,11 +3128,11 @@
     "section-logos.js": {
       "imports": [
         {
-          "path": "chunks/chunk-M2YQDPJS.js",
+          "path": "chunks/chunk-EX3VWTPV.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -3190,7 +3190,7 @@
       },
       "bytes": 51594
     },
-    "chunks/chunk-M2YQDPJS.js": {
+    "chunks/chunk-EX3VWTPV.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3274,23 +3274,23 @@
     "section-features.js": {
       "imports": [
         {
-          "path": "chunks/chunk-TIVPDKB2.js",
+          "path": "chunks/chunk-W7Z4VVDG.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3DB3CVRB.js",
+          "path": "chunks/chunk-H3WDA3QT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-F6GS5ZYC.js",
+          "path": "chunks/chunk-HHDHZ6TZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ZZVOOQP2.js",
+          "path": "chunks/chunk-BPH5BCDR.js",
           "kind": "import-statement"
         },
         {
@@ -3348,14 +3348,14 @@
       },
       "bytes": 8769
     },
-    "chunks/chunk-TIVPDKB2.js": {
+    "chunks/chunk-W7Z4VVDG.js": {
       "imports": [
         {
-          "path": "chunks/chunk-3DB3CVRB.js",
+          "path": "chunks/chunk-H3WDA3QT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ZZVOOQP2.js",
+          "path": "chunks/chunk-BPH5BCDR.js",
           "kind": "import-statement"
         },
         {
@@ -3389,14 +3389,14 @@
       },
       "bytes": 27367
     },
-    "chunks/chunk-3DB3CVRB.js": {
+    "chunks/chunk-H3WDA3QT.js": {
       "imports": [
         {
-          "path": "chunks/chunk-F6GS5ZYC.js",
+          "path": "chunks/chunk-HHDHZ6TZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -3430,7 +3430,7 @@
       },
       "bytes": 10347
     },
-    "chunks/chunk-F6GS5ZYC.js": {
+    "chunks/chunk-HHDHZ6TZ.js": {
       "imports": [
         {
           "path": "unframer",
@@ -3453,15 +3453,15 @@
     "section-how-it-works.js": {
       "imports": [
         {
-          "path": "chunks/chunk-BYYEIETE.js",
+          "path": "chunks/chunk-U2BTSRYM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBITTX3M.js",
+          "path": "chunks/chunk-DIIHDSYZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-3IJ3R4UZ.js",
+          "path": "chunks/chunk-SFTTTBUM.js",
           "kind": "import-statement"
         },
         {
@@ -3527,7 +3527,7 @@
       },
       "bytes": 50366
     },
-    "chunks/chunk-BYYEIETE.js": {
+    "chunks/chunk-U2BTSRYM.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3560,7 +3560,7 @@
       },
       "bytes": 9196
     },
-    "chunks/chunk-SBITTX3M.js": {
+    "chunks/chunk-DIIHDSYZ.js": {
       "imports": [
         {
           "path": "unframer",
@@ -3580,7 +3580,7 @@
       },
       "bytes": 9246
     },
-    "chunks/chunk-3IJ3R4UZ.js": {
+    "chunks/chunk-SFTTTBUM.js": {
       "imports": [
         {
           "path": "unframer",
@@ -3603,7 +3603,7 @@
     "sections/features-animation.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZZVOOQP2.js",
+          "path": "chunks/chunk-BPH5BCDR.js",
           "kind": "import-statement"
         },
         {
@@ -3638,7 +3638,7 @@
       },
       "bytes": 1429
     },
-    "chunks/chunk-ZZVOOQP2.js": {
+    "chunks/chunk-BPH5BCDR.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",

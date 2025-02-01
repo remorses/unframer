@@ -4,12 +4,12 @@
 "use client";
 import {
   Ticker
-} from "./chunks/chunk-M2YQDPJS.js";
+} from "./chunks/chunk-EX3VWTPV.js";
 import {
   className,
   css,
   fonts
-} from "./chunks/chunk-3IJ3R4UZ.js";
+} from "./chunks/chunk-SFTTTBUM.js";
 
 // virtual:section-logos
 import { Fragment as Fragment2 } from "react";

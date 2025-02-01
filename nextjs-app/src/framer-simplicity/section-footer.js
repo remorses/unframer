@@ -4,22 +4,22 @@
 "use client";
 import {
   stdin_default
-} from "./chunks/chunk-HNM4IRHR.js";
+} from "./chunks/chunk-WTNHL2WX.js";
 import {
   className as className2,
   css as css2,
   fonts as fonts2
-} from "./chunks/chunk-M7SRK247.js";
+} from "./chunks/chunk-N2K3P4T2.js";
 import {
   className,
   css,
   fonts
-} from "./chunks/chunk-SBITTX3M.js";
+} from "./chunks/chunk-DIIHDSYZ.js";
 import {
   className as className3,
   css as css3,
   fonts as fonts3
-} from "./chunks/chunk-3IJ3R4UZ.js";
+} from "./chunks/chunk-SFTTTBUM.js";
 
 // virtual:section-footer
 import { Fragment as Fragment2 } from "react";

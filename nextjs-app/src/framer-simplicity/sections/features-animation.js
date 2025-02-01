@@ -4,7 +4,7 @@
 "use client";
 import {
   stdin_default
-} from "../chunks/chunk-ZZVOOQP2.js";
+} from "../chunks/chunk-BPH5BCDR.js";
 
 // virtual:sections/features-animation
 import { Fragment } from "react";
