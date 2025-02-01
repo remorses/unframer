@@ -188,16 +188,28 @@ export async function fixFramerCode({ resultFile }) {
         }
         document.head.appendChild(fragment);
     }
+
+    if (typeof document !== 'undefined'){
+        const clearCaches = () => {
+            defaultSheet = undefined
+            componentsWithServerRenderedStyles.clear()
+            defaultCache.clear()
+        };
+        document.addEventListener('astro:before-preparation', clearCaches);
+        document.addEventListener('astro:before-swap', clearCaches);
+    }
     `
-    
 
     // TODO this code does not work in react strict mode, bug in framer
-    let toRemove = /throw new ReferenceError\(\s*'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle\.',\s*\)/;
+    let toRemove =
+        /throw new ReferenceError\(\s*'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle\.',\s*\)/
     // Check if the string exists in the code before trying to remove it
     if (!codeAfter.match(toRemove)) {
-        throw new Error('Could not find expected ReferenceError string in bundle')
+        throw new Error(
+            'Could not find expected ReferenceError string in bundle',
+        )
     }
-    codeAfter +=  '\n\n'
+    codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }
     export { Router, FetchClientProvider, FormContext, LocaleInfoContext }
