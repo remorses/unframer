@@ -1,5 +1,15 @@
 # unframer
 
+## 2.20.0
+
+### Minor Changes
+
+- 2004dee: Decrease runtime bundle size, split dynamic imports into submodules, giant files for fonts are no longer embedded in the runtime
+
+### Patch Changes
+
+- 8268b5f: Update framer to 2.4.1, update framer motion to 11.11.7
+
 ## 2.19.0
 
 ### Minor Changes
