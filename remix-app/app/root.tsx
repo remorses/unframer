@@ -1,11 +1,13 @@
-import { HydrationOverlay } from "@builder.io/react-hydration-overlay";
+import { HydrationOverlay } from '@builder.io/react-hydration-overlay'
 
 import {
+    isRouteErrorResponse,
     Links,
     Meta,
     Outlet,
     Scripts,
     ScrollRestoration,
+    useRouteError,
 } from '@remix-run/react'
 
 import 'nextjs-app/src/framer/styles.css'
@@ -14,7 +16,6 @@ import 'tailwindcss/tailwind.css'
 export default function App() {
     return (
         <html lang='en'>
-            
             <head>
                 <meta charSet='utf-8' />
                 <meta
