@@ -176,7 +176,7 @@ export default class BatchRenamer {
                     binding.identifier.name = newName
                     scope.bindings[newName] = binding
                 } else {
-                    logger.log(`binding not found for ${oldName}`)
+                    // logger.log(`binding not found for ${oldName}`)
                 }
             }
         }

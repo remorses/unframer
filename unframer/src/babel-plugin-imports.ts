@@ -120,9 +120,9 @@ export function babelPluginDeduplicateImports({
                     for (const [source, modMap] of importAliasMap) {
                         // rename import names to consolidated names
                         for (let [local, { consolidated, path: p }] of modMap) {
-                            logger.log(
-                                `renaming ${local} to ${consolidated}...`,
-                            )
+                            // logger.log(
+                            //     `renaming ${local} to ${consolidated}...`,
+                            // )
                         }
                     }
 
@@ -187,9 +187,9 @@ export function babelPluginDeduplicateImports({
 
                             if (definedImports.has(importKey)) {
                                 later.push(() => {
-                                    console.log(
-                                        `removing ${importKey} from ${source}...`,
-                                    )
+                                    // console.log(
+                                    //     `removing ${importKey} from ${source}...`,
+                                    // )
 
                                     importDec.specifiers =
                                         importDec.specifiers.filter(

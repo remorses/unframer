@@ -167,7 +167,7 @@ export function esbuildPluginBundleDependencies({
                 }
                 let loader = 'jsx' as any
                 const promise = Promise.resolve().then(async () => {
-                    logger.log('fetching', url.replace(/https?:\/\//, ''))
+                    logger.log('fetching', url, 'because of', args.path)
                     spinner.update(`Fetching ${url.replace(/https?:\/\//, '')}`)
 
                     const res = await fetchWithRetry(resolved, { signal })

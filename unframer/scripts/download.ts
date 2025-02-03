@@ -35,10 +35,10 @@ export async function main({ framerTypesUrl }) {
 
     const resultFile = path.resolve(out, `framer.js`)
     const result = await build({
-        entryPoints: [framerUrl],
-
+        entryPoints: { framer: framerUrl },
+        chunkNames: 'framer-chunks/[name]-[hash]',
         jsx: 'automatic',
-
+        splitting: true,
         bundle: true,
         platform: 'browser',
         format: 'esm',
@@ -56,13 +56,14 @@ export async function main({ framerTypesUrl }) {
         plugins: [
             esbuildPluginBundleDependencies({
                 externalizeNpm: true,
+
                 outDir: path.dirname(resultFile),
             }),
         ],
         write: true,
         // inject: [path.resolve(__dirname, '../src/inject.ts')],
         // outfile: 'dist/example.js',
-        outfile: resultFile,
+        outdir: path.dirname(resultFile),
     })
     // logger.log('result', result)
     let types = await fetch(framerTypesUrl).then((x) => x.text())
