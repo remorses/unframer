@@ -83,6 +83,7 @@ export async function bundle({
         }
     }
     const fn = watch ? context : fakeContext
+    let foundError = false
     const buildContext = await fn({
         absWorkingDir: out,
 
@@ -110,6 +111,9 @@ export async function bundle({
                 externalPackages: config.externalPackages,
                 externalizeNpm: config.allExternal,
                 outDir: config.outDir,
+                onMissingPackage: (e) => {
+                    foundError = true
+                },
             }),
             nodeModulesPolyfillPlugin({}),
             {
@@ -237,6 +241,7 @@ export async function bundle({
         const prevFiles = await recursiveReaddir(out)
         const buildResult = await buildContext.rebuild().catch((e) => {
             if (e.message.includes('No matching export ')) {
+                foundError = true
                 spinner.error(
                     `esbuild failed to import from an external package, this usually means that the npm package version in Framer is older than the latest.`,
                 )
@@ -564,8 +569,9 @@ export async function bundle({
             />
             `
     })()
-    console.log(
-        terminalMarkdown(dedent`
+    if (!foundError) {
+        console.log(
+            terminalMarkdown(dedent`
         # How to use the Framer components
 
         Your components are exported to \`${outDirNice}\` folder. Now please install the \`unframer\` runtime dependency:
@@ -607,7 +613,8 @@ export async function bundle({
         Read more on GitHub: https://github.com/remorses/unframer
         
         `),
-    )
+        )
+    }
     await checkUnframerVersion({ cwd: out })
     console.log()
     return { result, rebuild, buildContext }
