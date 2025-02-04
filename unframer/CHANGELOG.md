@@ -1,5 +1,12 @@
 # unframer
 
+## 2.20.2
+
+### Patch Changes
+
+- 6274dc9: Update framer to 2.4.1, update framer motion to 11.11.7
+- ac6751b: fix lightningcss bug on double var(), fix Nextjs turbopack https://github.com/parcel-bundler/lightningcss/issues/897
+
 ## 2.20.1
 
 ### Patch Changes
