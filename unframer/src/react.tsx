@@ -188,6 +188,7 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
                     ref={ref}
                     // LayoutGroup is used internally
                     layoutId={variant}
+                    key={variant}
                     // layoutDependency={id}
                     // layoutId={id + variant}
                     // layoutId={breakpointName}
@@ -198,7 +199,7 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             )
         },
     )
-    parts.push(<DebugUnframerVersion />)
+    parts.push(<DebugUnframerVersion key='debug-unframer-version' />)
 
     return parts
 })
@@ -373,7 +374,7 @@ var framerCSSMarker = 'data-framer-css-ssr'
  */
 function DebugUnframerVersion() {
     return (
-        <details style={{ display: 'none !important' }}>
+        <details style={{ display: 'none' }}>
             Using{' '}
             <a href='https://unframer.co' className=''>
                 Framer React Export
