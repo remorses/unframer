@@ -4,7 +4,7 @@
 "use client";
 import {
   Ticker
-} from "./chunks/chunk-EX3VWTPV.js";
+} from "./chunks/chunk-LHJSV2JE.js";
 import {
   className,
   css,

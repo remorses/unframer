@@ -7,7 +7,7 @@ import {
 } from "./chunks/chunk-BTSBQWPZ.js";
 import {
   Ticker
-} from "./chunks/chunk-EX3VWTPV.js";
+} from "./chunks/chunk-LHJSV2JE.js";
 import {
   className as className2,
   css as css2,

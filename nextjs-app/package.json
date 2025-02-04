@@ -6,11 +6,12 @@
         "dev": "next dev  --port 5543",
         "gen": "pnpm --filter unframer build && pnpm unframer",
         "build": "pnpm --filter unframer build && pnpm framer-simplicity && next build",
-        "framer-simplicity": "pnpm unframer 080b0b6d577bdc21 --outDir ./src/framer-simplicity",
+        "framer-simplicity": "pnpm unframer 080b0b6d577bdc21 --external --outDir ./src/framer-simplicity",
         "start": "next start",
         "lint": "next lint"
     },
     "dependencies": {
+        "@motionone/dom": "^10.18.0",
         "@types/node": "22.12.0",
         "@types/react": "19.0.8",
         "@types/react-dom": "19.0.3",
