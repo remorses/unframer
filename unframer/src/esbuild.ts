@@ -42,7 +42,7 @@ export function esbuildPluginBundleDependencies({
     externalPackages = [] as string[],
     externalizeNpm = false,
     outDir,
-    onMissingPackage,
+    onMissingPackage = (pkg: string) => {},
 }) {
     externalPackages = [...defaultExternalPackages, ...externalPackages]
     // console.log(externalPackages)
@@ -98,7 +98,7 @@ export function esbuildPluginBundleDependencies({
                         pkg,
                     }).catch(() => '')
                     if (!installedVersion) {
-                        onMissingPackage?.()
+                        onMissingPackage?.(pkg)
                         spinner.error(
                             `${pkg} not found: install it with \`npm i ${pkg}\` then run \`unframer\` again to generate the types`,
                         )
@@ -125,7 +125,7 @@ export function esbuildPluginBundleDependencies({
                         pkg,
                     }).catch(() => '')
                     if (!installedVersion) {
-                        onMissingPackage?.()
+                        onMissingPackage?.(pkg)
                         spinner.error(
                             `${pkg} not found: install it with \`npm i ${pkg}\` then run \`unframer\` again to generate the types`,
                         )
