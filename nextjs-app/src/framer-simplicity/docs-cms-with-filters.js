@@ -7,7 +7,7 @@
 import { Fragment as Fragment3 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/fZtk3mJZsrTHlzFv2mTj/CbipD0V6iySiZ7xyIqk1/s1GzfynKW.js
+// /:https://framerusercontent.com/modules/fZtk3mJZsrTHlzFv2mTj/5sFOBNk0amSIK4p6Blwj/s1GzfynKW.js
 import { jsx as _jsx2, jsxs as _jsxs2, Fragment as _Fragment } from "react/jsx-runtime";
 import { addFonts as addFonts2, ChildrenCanSuspend, ComponentViewportProvider, cx as cx2, getFonts, PathVariablesContext, ResolveLinks, RichText as RichText2, useComponentViewport, useLocaleInfo, useQueryData, useRouter, useVariantState as useVariantState2, withCSS as withCSS2 } from "unframer";
 import { LayoutGroup as LayoutGroup2, motion as motion2, MotionConfigContext } from "unframer";
@@ -45,10 +45,10 @@ FramerdNTrkrbrf.defaultProps = { height: 36, width: 300 };
 addPropertyControls(FramerdNTrkrbrf, { variant: { options: ["CLlJuYFnH", "f6ook9Uik"], optionTitles: ["Normal", "With Arrow"], title: "Variant", type: ControlType.Enum }, mUC7kTFpM: { defaultValue: "\u{1F48E}", displayTextArea: false, placeholder: "Emoji", title: "Emoji", type: ControlType.String }, PYwdVc_ws: { defaultValue: "Title", title: "Title", type: ControlType.String }, D5b3p9lV8: { title: "Link", type: ControlType.Link } });
 addFonts(FramerdNTrkrbrf, [{ family: "Syne", moduleAsset: { localModuleIdentifier: "local-module:canvasComponent/dNTrkrbrf:default", url: "https://fonts.gstatic.com/s/syne/v16/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6kR47NCV5Z.ttf" }, style: "normal", url: "https://fonts.gstatic.com/s/syne/v16/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6kR47NCV5Z.ttf", weight: "700" }, { family: "Manrope", moduleAsset: { localModuleIdentifier: "local-module:canvasComponent/dNTrkrbrf:default", url: "https://fonts.gstatic.com/s/manrope/v14/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F87jxeN7B.ttf" }, style: "normal", url: "https://fonts.gstatic.com/s/manrope/v14/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F87jxeN7B.ttf", weight: "500" }]);
 
-// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ohsK7M8iUjSbDc3WqvtF/wUEEgftCv.js
+// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ltyPNRkPDYYIyaiM9dWs/wUEEgftCv.js
 import { addPropertyControls as e3, ControlType as t11, QueryEngine as l2 } from "unframer";
 
-// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ohsK7M8iUjSbDc3WqvtF/wUEEgftCv-0.js
+// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ltyPNRkPDYYIyaiM9dWs/wUEEgftCv-0.js
 import { ControlType as _ } from "unframer";
 import { ControlType as tA } from "unframer";
 var t;
@@ -1930,19 +1930,19 @@ var eh = class {
   }
 };
 
-// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ohsK7M8iUjSbDc3WqvtF/wUEEgftCv-1.js
+// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ltyPNRkPDYYIyaiM9dWs/wUEEgftCv-1.js
 var t10 = (t22, e22) => async () => {
   let r22 = await t22();
   return r22[e22];
 };
-var e2 = () => import("./chunks/wUEEgftCv-2-EZRYSVDO.js");
+var e2 = () => import("./chunks/wUEEgftCv-2-S2LBLRZH.js");
 var r2 = [t10(e2, "richText"), t10(e2, "richText1")];
 async function resolveRichText(t22) {
   let e22 = r2[t22];
   if (e22) return await e22();
 }
 
-// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ohsK7M8iUjSbDc3WqvtF/wUEEgftCv.js
+// /:https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ltyPNRkPDYYIyaiM9dWs/wUEEgftCv.js
 var r3 = { BlGAjU98O: { isNullable: true, type: t11.String }, CAxxj7zn6: { isNullable: true, type: t11.String }, HhV1lFMd5: { isNullable: true, type: t11.Boolean }, HV1m26qvO: { isNullable: true, type: t11.RichText }, id: { isNullable: false, type: t11.String }, nextItemId: { isNullable: true, type: t11.String }, OsCKtdxJS: { isNullable: true, type: t11.String }, previousItemId: { isNullable: true, type: t11.String }, SwFrHya0n: { isNullable: true, type: t11.String }, ZdeX3vaEc: { isNullable: true, type: t11.String } };
 var n2 = new l2();
 var o2 = {
@@ -1951,12 +1951,12 @@ var o2 = {
             chunks: [
                 new URL(
                     './wUEEgftCv-chunk-default-0.framercms',
-                    'https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ohsK7M8iUjSbDc3WqvtF/wUEEgftCv.js',
+                    'https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ltyPNRkPDYYIyaiM9dWs/wUEEgftCv.js',
                 ).href,
             ],
             compressionDictionary: new URL(
                 './wUEEgftCv-chunk-default-dict.framercms',
-                'https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ohsK7M8iUjSbDc3WqvtF/wUEEgftCv.js',
+                'https://framerusercontent.com/modules/poHikjn0VhlmASg9Eo1R/ltyPNRkPDYYIyaiM9dWs/wUEEgftCv.js',
             ).href,
             indexes: [],
             resolveRichText,
@@ -1968,7 +1968,7 @@ var o2 = {
 var stdin_default2 = o2;
 e3(o2, { SwFrHya0n: { defaultValue: "", title: "Title", type: t11.String }, OsCKtdxJS: { defaultValue: "\u2B50\uFE0F", displayTextArea: false, placeholder: "Emoji\u2026", title: "Emoji", type: t11.String }, CAxxj7zn6: { title: "Slug", type: t11.String }, ZdeX3vaEc: { defaultValue: "Get Started", placeholder: "Category", title: "Category", type: t11.String }, HV1m26qvO: { defaultValue: "", title: "Content", type: t11.RichText }, HhV1lFMd5: { defaultValue: false, title: "Has Video", type: t11.Boolean }, BlGAjU98O: { defaultValue: "", placeholder: "https://youtu.be/smPos0mJvh8", title: "Video Link", type: t11.String }, previousItemId: { dataIdentifier: "local-module:collection/wUEEgftCv:default", title: "Previous", type: t11.CollectionReference }, nextItemId: { dataIdentifier: "local-module:collection/wUEEgftCv:default", title: "Next", type: t11.CollectionReference } });
 
-// /:https://framerusercontent.com/modules/fZtk3mJZsrTHlzFv2mTj/CbipD0V6iySiZ7xyIqk1/s1GzfynKW.js
+// /:https://framerusercontent.com/modules/fZtk3mJZsrTHlzFv2mTj/5sFOBNk0amSIK4p6Blwj/s1GzfynKW.js
 var PostLinkFonts = getFonts(stdin_default);
 var serializationHash = "framer-x1AF6";
 var variantClassNames2 = { frnDzG4i6: "framer-v-1pf8tip" };
