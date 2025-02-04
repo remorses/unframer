@@ -1,5 +1,11 @@
 # unframer
 
+## 2.20.1
+
+### Patch Changes
+
+- 004d437: Fix debug framer version showing up, fix missing key in .map
+
 ## 2.20.0
 
 ### Minor Changes
