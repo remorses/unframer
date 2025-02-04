@@ -211,6 +211,12 @@ export async function fixFramerCode({ resultFile }) {
             'Could not find expected ReferenceError string in bundle',
         )
     }
+
+    // fix lightningcss bug on double var(), fix Nextjs turbopack https://github.com/parcel-bundler/lightningcss/issues/897
+    codeAfter = codeAfter.replace(
+        `font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))`,
+        `font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))`,
+    )
     codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }
