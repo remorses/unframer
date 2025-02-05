@@ -908,7 +908,7 @@ export async function extractPropControlsUnsafe(
     let propCode = `JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)`
 
     const fileUrl = url.pathToFileURL(filename).href
-    const code = `import("${fileUrl}").then(x => { console.log("${delimiter}"); console.log(${propCode}) })`
+    const code = `import('${fileUrl}').then(x => { console.log('${delimiter}'); console.log(${propCode}) })`
 
     const TIMEOUT = 5 * 1000
     const UNFRAMER_MAP_PACKAGES = {
@@ -919,9 +919,9 @@ export async function extractPropControlsUnsafe(
             require.resolve('react/jsx-runtime'),
         ).href,
     }
-    let loaderOption = `--loader ${url.pathToFileURL(
+    let loaderOption = `--loader "${url.pathToFileURL(
         require.resolve('../dist/unframer-loader.js'),
-    )}`
+    )}"`
     try {
         require.resolve('unframer/package.json')
 
@@ -930,7 +930,7 @@ export async function extractPropControlsUnsafe(
     let stdout = await new Promise<string>((res, rej) => {
         const cmd = `"${
             nodePath
-        }" --no-warnings --input-type=module ${loaderOption} -e ${JSON.stringify(code)}`
+        }" --no-warnings --input-type=module ${loaderOption} -e "${code}"`
 
         let childProcess = exec(
             cmd,
