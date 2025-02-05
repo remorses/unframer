@@ -573,13 +573,14 @@ export async function bundle({
     })()
     const exampleCode = dedent`
     import './${outDirForExample}/styles.css'
+    // this file imported below is generated when you run \`npm run framer\`
     import ${exampleComponent?.componentName} from './${outDirForExample}/${
         exampleComponent?.path
     }'
     
     export default function App() {
         return (
-            <div>
+            <div className='flex flex-col'>
                 <${exampleComponent?.componentName}
                     ${prop}='example'
                     style={{ width: '100%' }}
@@ -592,6 +593,12 @@ export async function bundle({
         );
     };
     `
+    const demoExample = process.env.STACKBLITZ_DEMO_EXAMPLE
+    if (demoExample) {
+        logger.log(`Inside Stackblitz demo, writing App.tsx`)
+        await fs.promises.mkdir(path.dirname(demoExample), { recursive: true })
+        await fs.promises.writeFile(demoExample, exampleCode)
+    }
     if (!foundError) {
         console.log(
             terminalMarkdown(dedent`
