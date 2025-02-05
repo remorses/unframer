@@ -19037,7 +19037,7 @@ var richTextCSSRules = [
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link]:hover,
         code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
