@@ -553,7 +553,9 @@ export async function bundle({
         }
     }
 
-    const outDirNice = path.posix.relative(process.cwd(), out)
+    const outDirForExample = path.posix
+        .relative(process.cwd(), out)
+        .replace(/^src\//, '') // remove src so file works inside src
     logger.log(
         'exampleComponent?.propertyControls',
         exampleComponent?.propertyControls,
@@ -569,12 +571,33 @@ export async function bundle({
             />
             `
     })()
+    const exampleCode = dedent`
+    import './${outDirForExample}/styles.css'
+    import ${exampleComponent?.componentName} from './${outDirForExample}/${
+        exampleComponent?.path
+    }'
+    
+    export default function App() {
+        return (
+            <div>
+                <${exampleComponent?.componentName}
+                    ${prop}='example'
+                    style={{ width: '100%' }}
+                />
+                ${responsiveComponent
+                    .split('\n')
+                    .map((line, i) => (!i ? line : '            ' + line))
+                    .join('\n')}
+            </div>
+        );
+    };
+    `
     if (!foundError) {
         console.log(
             terminalMarkdown(dedent`
         # How to use the Framer components
 
-        Your components are exported to \`${outDirNice}\` folder. Now please install the \`unframer\` runtime dependency:
+        Your components are exported to \`${outDirForExample}\` folder. Now please install the \`unframer\` runtime dependency:
 
         \`\`\`sh
         npm install unframer
@@ -585,25 +608,7 @@ export async function bundle({
         You can use the components like this (try copy pasting the code below into your React app):
 
         \`\`\`jsx
-        import './${outDirNice}/styles.css'
-        import ${exampleComponent?.componentName} from './${outDirNice}/${
-            exampleComponent?.path
-        }'
-        
-        export default function App() {
-            return (
-                <div>
-                    <${exampleComponent?.componentName}
-                        ${prop}='example'
-                        style={{ width: '100%' }}
-                    />
-                    ${responsiveComponent
-                        .split('\n')
-                        .map((line, i) => (!i ? line : '            ' + line))
-                        .join('\n')}
-                </div>
-            );
-        };
+        ${exampleCode}
         \`\`\`
 
         It's very important to import the \`styles.css\` file to include the necessary styles for the components.

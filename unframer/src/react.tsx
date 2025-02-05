@@ -1,22 +1,19 @@
 'use client'
-import { combinedCSSRules, LayoutGroup } from './framer.js'
-import { withCSS as originalWithCSS } from './framer.js'
+import { combinedCSSRules, withCSS as originalWithCSS } from './framer.js'
 
 import {
     ComponentPropsWithoutRef,
     ComponentType,
     forwardRef,
-    useId,
     useMemo,
     useSyncExternalStore,
 } from 'react'
-import { version } from './version.js'
 import {
-    breakpointsStyles,
     breakpointsStylesLegacy,
     defaultBreakpointSizes,
     getFontsStyles,
 } from './css.js'
+import { version } from './version.js'
 
 function classNames(...args) {
     return args.filter(Boolean).join(' ')
@@ -113,22 +110,16 @@ export function FramerStyles({ Components = [] as any[] }): any {
     )
 }
 
-export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
+export const WithFramerBreakpoints = <
     T extends ComponentType<{ variant?: any; className?: string }>,
->(
-    {
-        Component,
-        variants: _breakpointsMap,
-        ...rest
-    }: {
-        Component: T
-        variants: Record<
-            UnframerBreakpoint,
-            ComponentPropsWithoutRef<T>['variant']
-        >
-    } & Omit<ComponentPropsWithoutRef<T>, 'variant'>,
-    ref,
-): any {
+>({
+    Component,
+    variants: _breakpointsMap,
+    ...rest
+}: {
+    Component: T
+    variants: Record<UnframerBreakpoint, ComponentPropsWithoutRef<T>['variant']>
+} & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any => {
     const currentBreakpoint = useSyncExternalStore(
         onResize,
         () => {
@@ -144,6 +135,10 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             return ''
         },
     )
+    if (isEmpty(_breakpointsMap)) {
+        // @ts-ignore
+        return <Component {...rest} />
+    }
     const allBreakpoints = fillBreakpoints(_breakpointsMap)
     const variants = new Map<
         string,
@@ -185,7 +180,6 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
             return (
                 // @ts-ignore
                 <Component
-                    ref={ref}
                     // LayoutGroup is used internally
                     layoutId={variant}
                     key={variant}
@@ -202,7 +196,7 @@ export const WithFramerBreakpoints = forwardRef(function WithFramerBreakpoints<
     parts.push(<DebugUnframerVersion key='debug-unframer-version' />)
 
     return parts
-})
+}
 
 const onResize = (callback) => {
     window.addEventListener('resize', callback)
@@ -224,6 +218,7 @@ const onResizeWithDebounce = (callback) => {
     }
 }
 
+import React from 'react'
 import {
     // @ts-ignore
     CustomCursorHost,
@@ -232,14 +227,10 @@ import {
     // @ts-ignore
     FormContext,
     // @ts-ignore
-    Router,
+    FramerLink as Link,
     // @ts-ignore
     LocaleInfoContext,
-    // @ts-ignore
-    FramerLink as Link,
 } from './framer.js'
-import React from 'react'
-import { style } from 'real-framer-motion/client'
 
 type Routes = Record<string, { path: string }>
 
@@ -383,40 +374,11 @@ function DebugUnframerVersion() {
         </details>
     )
 }
-
-// overrides the default withCSS which does not work with Astro because it does not simply renders style tags
-export const withCSS = (Component, escapedCSS, componentSerializationId) => {
-    // Try original withCSS first
-    const OriginalComponent = originalWithCSS(
-        Component,
-        escapedCSS,
-        componentSerializationId,
-    )
-
-    if (typeof window === 'undefined') {
-        return OriginalComponent
+function isEmpty(obj: Record<any, any>) {
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            return false
+        }
     }
-
-    return forwardRef((props, ref) => {
-        const id3 = componentSerializationId
-
-        if (isFunction(escapedCSS)) escapedCSS = escapedCSS('PREVIEW')
-        const concatenatedCSS = Array.isArray(escapedCSS)
-            ? escapedCSS.join('\n')
-            : escapedCSS
-        return (
-            <>
-                <style
-                    {...{
-                        [framerCSSMarker]: true,
-                    }}
-                    data-framer-component={id3}
-                    dangerouslySetInnerHTML={{
-                        __html: concatenatedCSS,
-                    }}
-                />
-                <OriginalComponent {...props} ref={ref} />
-            </>
-        )
-    })
+    return true
 }
