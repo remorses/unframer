@@ -24,7 +24,7 @@ import {
 import {
     defaultExternalPackages,
     esbuildPluginBundleDependencies,
-    resolveRedirect
+    resolveRedirect,
 } from './esbuild'
 import {
     ControlDescription,
@@ -32,7 +32,13 @@ import {
     PropertyControls,
     combinedCSSRules,
 } from './framer.js'
-import { kebabCase, logger, spinner, terminalMarkdown } from './utils.js'
+import {
+    stackblitzDemoExample,
+    kebabCase,
+    logger,
+    spinner,
+    terminalMarkdown,
+} from './utils.js'
 
 export type StyleToken = {
     id: string
@@ -342,7 +348,7 @@ export async function bundle({
             'utf-8',
         )
 
-        const sema = new Sema(10)
+        const sema = new Sema(stackblitzDemoExample ? 5 : 10)
         spinner.update('Extracting types')
         logger.log(`using node path`, nodePath)
         let allFonts = [] as ComponentFontBundle[]
@@ -591,11 +597,13 @@ export async function bundle({
         );
     };
     `
-    const demoExample = process.env.STACKBLITZ_DEMO_EXAMPLE
-    if (demoExample) {
+
+    if (stackblitzDemoExample) {
         logger.log(`Inside Stackblitz demo, writing App.tsx`)
-        await fs.promises.mkdir(path.dirname(demoExample), { recursive: true })
-        await fs.promises.writeFile(demoExample, exampleCode)
+        await fs.promises.mkdir(path.dirname(stackblitzDemoExample), {
+            recursive: true,
+        })
+        await fs.promises.writeFile(stackblitzDemoExample, exampleCode)
     }
     if (!foundError) {
         console.log(

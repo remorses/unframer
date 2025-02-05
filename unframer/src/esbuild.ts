@@ -155,7 +155,7 @@ export function esbuildPluginBundleDependencies({
                     throw new Error('aborted')
                 }
                 const url = args.path
-                const u = new URL(url)
+
                 const resolved = await resolveRedirect({
                     url,
                     redirectCache,
@@ -200,6 +200,7 @@ export function esbuildPluginBundleDependencies({
                     //     return text
                     // }
 
+                    logger.log('transforming', url)
                     const transformed = await transform(text, {
                         define: {
                             'import.meta.url': JSON.stringify(resolved),
@@ -277,7 +278,7 @@ export async function recursiveResolveRedirect(
     })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
-        // logger.log('redirect', loc)
+        logger.log('following redirect', loc)
         return recursiveResolveRedirect(res.headers.get('location') || '')
     }
 

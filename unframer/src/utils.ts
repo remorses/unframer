@@ -74,3 +74,5 @@ export function kebabCase(str: string) {
 export function isTruthy<T>(x: T | null | undefined | false | 0 | ''): x is T {
     return Boolean(x)
 }
+
+export const stackblitzDemoExample = process.env.STACKBLITZ_DEMO_EXAMPLE
