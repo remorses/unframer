@@ -256,6 +256,16 @@ If you find any errors rendering your components:
 - Color, a string
 - React component, created when you use a `component` variable in Framer, for example in the Ticker component
 
+## What should I use Unframer for?
+
+While having the ability to export Framer components to React is a powerful feature, you should try not to put any business logic in Framer if you want to use the React export feature.
+
+This of Framer as a stateless UI design tool, you can design components in Framer and export them to React, passing any kind of scalar value as a prop.
+
+If you find yourself writing custom code components and overrides in Framer, you would find it much easier to write custom code in your React codebase instead.
+
+You can basically do anything you want by designing components in Framer and rendering them in your app.
+
 ## Known limitations:
 
 - You may face React warnings like:
