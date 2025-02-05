@@ -1,5 +1,11 @@
 # unframer
 
+## 2.21.0
+
+### Minor Changes
+
+- 71649cb: Added Stackblitz support, fixing \" bug in Stackblitz
+
 ## 2.20.2
 
 ### Patch Changes
