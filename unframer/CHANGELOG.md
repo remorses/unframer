@@ -1,5 +1,11 @@
 # unframer
 
+## 2.21.1
+
+### Patch Changes
+
+- ec46c36: More logs, debugging stackblitz
+
 ## 2.21.0
 
 ### Minor Changes
