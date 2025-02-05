@@ -1,15 +1,14 @@
-import { build, BuildResult, context, type BuildOptions } from 'esbuild'
+import { BuildResult, build, context, type BuildOptions } from 'esbuild'
 import packageJson from '../package.json'
 
 import url from 'url'
 import { Config } from './cli'
 
 import { Sema } from 'async-sema'
-import dprint from 'dprint-node'
 
 import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill'
 
-import { exec, execSync } from 'child_process'
+import { exec } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import dedent from 'string-dedent'
@@ -23,10 +22,9 @@ import {
     logFontsUsage,
 } from './css.js'
 import {
-    esbuildPluginBundleDependencies,
     defaultExternalPackages,
-    replaceWebPageIds,
-    resolveRedirect,
+    esbuildPluginBundleDependencies,
+    resolveRedirect
 } from './esbuild'
 import {
     ControlDescription,
