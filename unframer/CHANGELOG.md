@@ -1,5 +1,11 @@
 # unframer
 
+## 2.22.0
+
+### Minor Changes
+
+- d84d7d5: Use node-fetch instead of native fetch, fix Stackblitz usage, a bit faster too
+
 ## 2.21.1
 
 ### Patch Changes
