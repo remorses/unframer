@@ -1,8 +1,8 @@
-import { logger } from './utils'
 import { createSpinner } from 'nanospinner'
+import fetch from 'node-fetch-commonjs'
+import { logger } from './utils'
 
 import { Plugin, transform, type OnResolveArgs } from 'esbuild'
-import { cwd } from 'process'
 import { resolvePackage } from './exporter'
 
 export const defaultExternalPackages = [

@@ -58,13 +58,13 @@
         "marked": "^15.0.6",
         "marked-terminal": "^7.2.1",
         "nanospinner": "^1.2.2",
+        "node-fetch-commonjs": "^3.3.2",
         "picocolors": "^1.1.1",
         "real-framer-motion": "npm:framer-motion@12.0.6",
         "spiceflow": "^1.5.1",
         "string-dedent": "^3.0.1"
     },
     "devDependencies": {
-        "dprint-node": "^1.0.8",
         "@babel/core": "^7.26.7",
         "@babel/helper-annotate-as-pure": "^7.25.9",
         "@babel/helper-environment-visitor": "^7.24.7",
@@ -79,6 +79,7 @@
         "@types/react": "^19.0.8",
         "@xmorse/deployment-utils": "^0.2.19",
         "concurrently": "^9.1.2",
+        "dprint-node": "^1.0.8",
         "openai": "^4.80.1",
         "posthtml": "^0.16.6",
         "react": "19.0.0",
