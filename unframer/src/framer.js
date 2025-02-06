@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.WEKEHMWW.mjs
+// /:https://app.framerstatic.com/framer.UUF5WFFI.mjs
 import React4 from 'react';
 import { Suspense as Suspense3, } from 'react';
 import { memo as memo2, startTransition as startTransition2, } from 'react';
@@ -31364,26 +31364,36 @@ var CustomCursorContext = /* @__PURE__ */ createContext({
 },);
 var replaceCursorClassName = 'framer-cursor-none';
 var cursorComponentClassName = 'framer-pointer-events-none';
+function getActiveDefinitions(map2, previousDefinitions, newDefinitions,) {
+  const allCursors = {};
+  for (const [, hashes,] of map2) {
+    for (const hash2 of hashes) {
+      const value = allCursors[hash2] ?? previousDefinitions[hash2] ?? newDefinitions[hash2];
+      if (value) allCursors[hash2] = value;
+    }
+  }
+  return allCursors;
+}
 var CustomCursorContextProvider = /* @__PURE__ */ memo2(function CustomCursorList({
   children,
 },) {
   const value = useConstant2(() => {
     const events = /* @__PURE__ */ new Set();
     let allCursors = {};
+    const byCaller = /* @__PURE__ */ new Map();
     return {
       onRegisterCursors: (callback) => {
         callback(allCursors,);
         events.add(callback,);
         return () => events.delete(callback,);
       },
-      registerCursors: (cursors) => {
-        const nextCursors = {};
-        for (const key7 in cursors) {
-          const cursor = allCursors[key7] ?? cursors[key7];
-          if (cursor) nextCursors[key7] = cursor;
-        }
-        allCursors = nextCursors;
+      registerCursors: (cursors, id3,) => {
+        byCaller.set(id3, Object.keys(cursors,),);
+        allCursors = getActiveDefinitions(byCaller, allCursors, cursors,);
         for (const callback of events) callback(allCursors,);
+        return () => {
+          byCaller.delete(id3,);
+        };
       },
     };
   },);
@@ -31625,9 +31635,10 @@ function useCustomCursors(webPageCursors,) {
     registerCursors,
   } = useContext(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
+  const id3 = useId();
   useLayoutEffect(() => {
-    registerCursors(cursors,);
-  }, [registerCursors,],);
+    return registerCursors(cursors, id3,);
+  }, [registerCursors, id3,],);
 }
 var Polygon = {
   /**
@@ -36059,7 +36070,8 @@ var RelationalProject = class extends RelationalNode {
     this.input = input;
     this.projections = projections;
     this.passthrough = passthrough;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
+    this.inputGroup = input.getGroup();
   }
   getHash() {
     return calculateHash('RelationalProject', this.inputGroup.id, ...this.projections, this.passthrough,);
@@ -36232,24 +36244,6 @@ var ScalarCase = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarCase', this.input, ...this.conditions, this.otherwise,);
   }
-  toString() {
-    let result = 'CASE';
-    if (this.input) {
-      result = `${result} ${this.input}`;
-    }
-    for (
-      const {
-        when,
-        then,
-      } of this.conditions
-    ) {
-      result = `${result} WHEN ${when} THEN ${then}`;
-    }
-    if (this.otherwise) {
-      result = `${result} ELSE ${this.otherwise}`;
-    }
-    return `${result} END`;
-  }
   optimize(optimizer,) {
     var _a, _b;
     (_a = this.input) == null ? void 0 : _a.optimize(optimizer,);
@@ -36282,6 +36276,7 @@ var ScalarCase = class extends ScalarNode {
       conditions: evaluateArray(this.conditions.map((condition) =>
         evaluateObject({
           when: condition.when.evaluate(context, tuple,),
+          // biome-ignore lint/suspicious/noThenProperty: Existing name.
           then: condition.then.evaluate(context, tuple,),
         },)
       ),),
@@ -36742,7 +36737,8 @@ var RelationalFilter = class extends RelationalNode {
     super(input.isSynchronous && predicate.isSynchronous,);
     this.input = input;
     this.predicate = predicate;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
+    this.inputGroup = input.getGroup();
   }
   getHash() {
     return calculateHash('RelationalFilter', this.inputGroup.id, this.predicate,);
@@ -36832,8 +36828,10 @@ var RelationalIntersection = class extends RelationalNode {
     super(left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
-    __publicField(this, 'leftGroup', this.left.getGroup(),);
-    __publicField(this, 'rightGroup', this.right.getGroup(),);
+    __publicField(this, 'leftGroup',);
+    __publicField(this, 'rightGroup',);
+    this.leftGroup = left.getGroup();
+    this.rightGroup = right.getGroup();
   }
   getHash() {
     return calculateHash('RelationalIntersection', this.leftGroup.id, this.rightGroup.id,);
@@ -36904,9 +36902,6 @@ var ScalarEquals = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarEquals', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} == ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -36937,8 +36932,10 @@ var RelationalLeftJoin = class extends RelationalNode {
     this.left = left;
     this.right = right;
     this.constraint = constraint;
-    __publicField(this, 'leftGroup', this.left.getGroup(),);
-    __publicField(this, 'rightGroup', this.right.getGroup(),);
+    __publicField(this, 'leftGroup',);
+    __publicField(this, 'rightGroup',);
+    this.leftGroup = left.getGroup();
+    this.rightGroup = right.getGroup();
   }
   getHash() {
     return calculateHash('RelationalLeftJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
@@ -37065,8 +37062,10 @@ var RelationalRightJoin = class extends RelationalNode {
     this.left = left;
     this.right = right;
     this.constraint = constraint;
-    __publicField(this, 'leftGroup', this.left.getGroup(),);
-    __publicField(this, 'rightGroup', this.right.getGroup(),);
+    __publicField(this, 'leftGroup',);
+    __publicField(this, 'rightGroup',);
+    this.leftGroup = left.getGroup();
+    this.rightGroup = right.getGroup();
   }
   getHash() {
     return calculateHash('RelationalRightJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
@@ -37231,8 +37230,10 @@ var RelationalUnion = class extends RelationalNode {
     super(left.isSynchronous && right.isSynchronous,);
     this.left = left;
     this.right = right;
-    __publicField(this, 'leftGroup', this.left.getGroup(),);
-    __publicField(this, 'rightGroup', this.right.getGroup(),);
+    __publicField(this, 'leftGroup',);
+    __publicField(this, 'rightGroup',);
+    this.leftGroup = left.getGroup();
+    this.rightGroup = right.getGroup();
   }
   getHash() {
     return calculateHash('RelationalUnion', this.leftGroup.id, this.rightGroup.id,);
@@ -37303,9 +37304,6 @@ var ScalarAnd = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarAnd', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} && ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -37341,16 +37339,13 @@ var ScalarConstant = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarConstant', this.definition, this.value,);
   }
-  toString() {
-    return DatabaseValue.stringify(this.value,);
-  }
   optimize() {
     return new Cost(0,);
   }
   getOptimized() {
     return this;
   }
-  // eslint-disable-next-line require-yield
+  // biome-ignore lint/correctness/useYield: Required by the super class.
   *evaluate() {
     return this.value;
   }
@@ -37378,9 +37373,6 @@ var ScalarContains = class extends ScalarNode {
   }
   getHash() {
     return calculateHash('ScalarContains', this.source, this.target,);
-  }
-  toString() {
-    return `CONTAINS(${this.source}, ${this.target})`;
   }
   optimize(optimizer,) {
     const sourceCost = this.source.optimize(optimizer,);
@@ -37430,9 +37422,6 @@ var ScalarEndsWith = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarEndsWith', this.source, this.target,);
   }
-  toString() {
-    return `ENDS_WITH(${this.source}, ${this.target})`;
-  }
   optimize(optimizer,) {
     const sourceCost = this.source.optimize(optimizer,);
     const targetCost = this.target.optimize(optimizer,);
@@ -37476,9 +37465,6 @@ var ScalarGreaterThan = class extends ScalarNode {
   }
   getHash() {
     return calculateHash('ScalarGreaterThan', this.left, this.right,);
-  }
-  toString() {
-    return `${this.left} > ${this.right}`;
   }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
@@ -37524,9 +37510,6 @@ var ScalarGreaterThanOrEqual = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarGreaterThanOrEqual', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} >= ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -37570,9 +37553,6 @@ var ScalarLessThan = class extends ScalarNode {
   }
   getHash() {
     return calculateHash('ScalarLessThan', this.left, this.right,);
-  }
-  toString() {
-    return `${this.left} < ${this.right}`;
   }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
@@ -37618,9 +37598,6 @@ var ScalarLessThanOrEqual = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarLessThanOrEqual', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} <= ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -37665,9 +37642,6 @@ var ScalarNotEquals = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarNotEquals', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} != ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -37711,9 +37685,6 @@ var ScalarOr = class extends ScalarNode {
   }
   getHash() {
     return calculateHash('ScalarOr', this.left, this.right,);
-  }
-  toString() {
-    return `${this.left} || ${this.right}`;
   }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
@@ -37763,9 +37734,6 @@ var ScalarStartsWith = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarStartsWith', this.source, this.target,);
   }
-  toString() {
-    return `STARTS_WITH(${this.source}, ${this.target})`;
-  }
   optimize(optimizer,) {
     const sourceCost = this.source.optimize(optimizer,);
     const targetCost = this.target.optimize(optimizer,);
@@ -37793,7 +37761,8 @@ var ScalarStartsWith = class extends ScalarNode {
 var Explorer = class {
   constructor(normalizer,) {
     this.normalizer = normalizer;
-    __publicField(this, 'memo', this.normalizer.memo,);
+    __publicField(this, 'memo',);
+    this.memo = normalizer.memo;
   }
   explore(before,) {
     const group = before.getGroup();
@@ -38023,7 +37992,8 @@ var RelationalLimit = class extends RelationalNode {
     this.input = input;
     this.limit = limit;
     this.ordering = ordering;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
+    this.inputGroup = input.getGroup();
   }
   getHash() {
     return calculateHash('RelationalLimit', this.inputGroup.id, this.limit,);
@@ -38073,7 +38043,8 @@ var RelationalOffset = class extends RelationalNode {
     this.input = input;
     this.offset = offset;
     this.ordering = ordering;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
+    this.inputGroup = input.getGroup();
   }
   getHash() {
     return calculateHash('RelationalOffset', this.inputGroup.id, this.offset,);
@@ -38125,8 +38096,9 @@ var ScalarArray = class extends ScalarNode {
     this.ordering = ordering;
     this.referencedFields = referencedFields;
     this.referencedOuterFields = referencedOuterFields;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
     __publicField(this, 'definition',);
+    this.inputGroup = input.getGroup();
     const itemDefinitions = {};
     const namedFieldEntries = Object.entries(namedFields,);
     for (const [name, field,] of namedFieldEntries) {
@@ -38156,9 +38128,6 @@ var ScalarArray = class extends ScalarNode {
       this.referencedFields,
       this.referencedOuterFields,
     );
-  }
-  toString() {
-    return `ARRAY(${this.inputGroup.id})`;
   }
   getInputRequiredProps() {
     const resolvedFields = new Fields();
@@ -38210,9 +38179,6 @@ var ScalarCast = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarCast', this.input, this.definition,);
   }
-  toString() {
-    return `CAST(${this.input} AS ${this.definition.type.toUpperCase()})`;
-  }
   optimize(optimizer,) {
     return this.input.optimize(optimizer,);
   }
@@ -38233,12 +38199,13 @@ var ScalarFlatArray = class extends ScalarNode {
     this.ordering = ordering;
     this.referencedFields = referencedFields;
     this.referencedOuterFields = referencedOuterFields;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
     __publicField(this, 'definition',);
+    this.inputGroup = input.getGroup();
     this.definition = {
       type: 'array',
       isNullable: false,
-      definition: this.field.definition,
+      definition: field.definition,
     };
   }
   getHash() {
@@ -38250,9 +38217,6 @@ var ScalarFlatArray = class extends ScalarNode {
       this.referencedFields,
       this.referencedOuterFields,
     );
-  }
-  toString() {
-    return `FLAT_ARRAY(${this.inputGroup.id})`;
   }
   getInputRequiredProps() {
     const resolvedFields = new Fields();
@@ -38308,9 +38272,6 @@ var ScalarIn = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarIn', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} IN ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -38359,9 +38320,6 @@ var ScalarIndexOf = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarIndexOf', this.source, this.target,);
   }
-  toString() {
-    return `INDEX_OF(${this.source}, ${this.target})`;
-  }
   optimize(optimizer,) {
     const sourceCost = this.source.optimize(optimizer,);
     const targetCost = this.target.optimize(optimizer,);
@@ -38398,9 +38356,6 @@ var ScalarLength = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarLength', this.input,);
   }
-  toString() {
-    return `LENGTH(${this.input})`;
-  }
   optimize(optimizer,) {
     return this.input.optimize(optimizer,);
   }
@@ -38427,9 +38382,6 @@ var ScalarNot = class extends ScalarNode {
   }
   getHash() {
     return calculateHash('ScalarNot', this.input,);
-  }
-  toString() {
-    return `NOT ${this.input}`;
   }
   optimize(optimizer,) {
     return this.input.optimize(optimizer,);
@@ -38470,9 +38422,6 @@ var ScalarNotIn = class extends ScalarNode {
   getHash() {
     return calculateHash('ScalarNotIn', this.left, this.right,);
   }
-  toString() {
-    return `${this.left} NOT IN ${this.right}`;
-  }
   optimize(optimizer,) {
     const leftCost = this.left.optimize(optimizer,);
     const rightCost = this.right.optimize(optimizer,);
@@ -38510,13 +38459,11 @@ var ScalarVariable = class extends ScalarNode {
     super(referencedFields, referencedOuterFields, true,);
     this.field = field;
     this.isOuterField = isOuterField;
-    __publicField(this, 'definition', this.field.definition,);
+    __publicField(this, 'definition',);
+    this.definition = field.definition;
   }
   getHash() {
     return calculateHash('ScalarVariable', this.field.id, this.isOuterField,);
-  }
-  toString() {
-    return `"${this.field.name}" /* ${this.field.id} */`;
   }
   optimize() {
     return new Cost(0,);
@@ -38524,7 +38471,7 @@ var ScalarVariable = class extends ScalarNode {
   getOptimized() {
     return this;
   }
-  // eslint-disable-next-line require-yield
+  // biome-ignore lint/correctness/useYield: Required by the super class.
   *evaluate(context, tuple,) {
     if (this.isOuterField) {
       assert(context, 'Context must exist',);
@@ -38850,7 +38797,8 @@ var EnforcerResolve = class extends EnforcerNode {
     super(false,);
     this.input = input;
     this.fields = fields;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
+    this.inputGroup = input.getGroup();
   }
   getHash() {
     return calculateHash('EnforcerResolve', this.inputGroup.id, this.fields,);
@@ -38933,7 +38881,8 @@ var EnforcerSort = class extends EnforcerNode {
     super(input.isSynchronous,);
     this.input = input;
     this.ordering = ordering;
-    __publicField(this, 'inputGroup', this.input.getGroup(),);
+    __publicField(this, 'inputGroup',);
+    this.inputGroup = input.getGroup();
   }
   getHash() {
     return calculateHash('EnforcerSort', this.inputGroup.id, this.ordering,);
