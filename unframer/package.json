@@ -61,7 +61,7 @@
         "node-fetch-commonjs": "^3.3.2",
         "picocolors": "^1.1.1",
         "real-framer-motion": "npm:framer-motion@12.0.6",
-        "spiceflow": "^1.5.1",
+        "spiceflow": "^1.6.1",
         "string-dedent": "^3.0.1"
     },
     "devDependencies": {
