@@ -1,5 +1,6 @@
 'use client'
 
+import LogosFramerComponent from '@/framer-unchatgpt/logos'
 import NavigationFramerComponent from '../framer-simplicity/navigation/navigation'
 import SectionCallToActionFramerComponent from '../framer-simplicity/section-call-to-action'
 import SectionFeaturesFramerComponent from '../framer-simplicity/section-features'
@@ -32,6 +33,7 @@ function Home() {
             <SectionTestimonialsFramerComponent.Responsive />
             <SectionFrequentlyAskedQuestionsFramerComponent.Responsive />
             <SectionCallToActionFramerComponent.Responsive />
+            <LogosFramerComponent.Responsive />
             <SectionFooterFramerComponent.Responsive />
         </div>
     )
