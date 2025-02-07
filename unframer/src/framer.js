@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.UUF5WFFI.mjs
+// /:https://app.framerstatic.com/framer.VDKYGJXW.mjs
 import React4 from 'react';
 import { Suspense as Suspense3, } from 'react';
 import { memo as memo2, startTransition as startTransition2, } from 'react';
@@ -13602,7 +13602,7 @@ var MarkSuspenseEffects = {
 function renderPage(Page4, defaultPageStyle,) {
   const props = {
     style: defaultPageStyle,
-    'data-framer-root': true,
+    'data-framer-root': '',
   };
   return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, props,) : React4.createElement(Page4, props,);
 }
@@ -34856,6 +34856,19 @@ var CompatibilityDatabaseCollection = class {
     return Number(left.pointer,) - Number(right.pointer,);
   }
 };
+function compareArray(left, right, collation11,) {
+  const leftLength = left.value.length;
+  const rightLength = right.value.length;
+  if (leftLength < rightLength) return -1;
+  if (leftLength > rightLength) return 1;
+  for (let i = 0; i < leftLength; i++) {
+    const leftItem = left.value[i];
+    const rightItem = right.value[i];
+    const result = compare(leftItem, rightItem, collation11,);
+    if (result !== 0) return result;
+  }
+  return 0;
+}
 function castArray(value, definition,) {
   switch (value == null ? void 0 : value.type) {
     case 'array': {
@@ -34869,6 +34882,11 @@ function castArray(value, definition,) {
     }
   }
   return null;
+}
+function compareBoolean(left, right,) {
+  if (left.value < right.value) return -1;
+  if (left.value > right.value) return 1;
+  return 0;
 }
 function castBoolean(value,) {
   switch (value == null ? void 0 : value.type) {
@@ -34885,9 +34903,14 @@ function castBoolean(value,) {
   }
   return null;
 }
-function toBoolean(value,) {
+function valueToBoolean(value,) {
   const cast = castBoolean(value,);
   return (cast == null ? void 0 : cast.value) ?? false;
+}
+function compareColor(left, right,) {
+  if (left.value < right.value) return -1;
+  if (left.value > right.value) return 1;
+  return 0;
 }
 function castColor(value,) {
   switch (value == null ? void 0 : value.type) {
@@ -34896,6 +34919,13 @@ function castColor(value,) {
     }
   }
   return null;
+}
+function compareDate(left, right,) {
+  const leftDate = new Date(left.value,);
+  const rightDate = new Date(right.value,);
+  if (leftDate < rightDate) return -1;
+  if (leftDate > rightDate) return 1;
+  return 0;
 }
 function castDate(value,) {
   switch (value == null ? void 0 : value.type) {
@@ -34916,6 +34946,11 @@ function castDate(value,) {
   }
   return null;
 }
+function compareEnum(left, right,) {
+  if (left.value < right.value) return -1;
+  if (left.value > right.value) return 1;
+  return 0;
+}
 function castEnum(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'enum': {
@@ -34930,6 +34965,11 @@ function castEnum(value,) {
   }
   return null;
 }
+function compareFile(left, right,) {
+  if (left.value < right.value) return -1;
+  if (left.value > right.value) return 1;
+  return 0;
+}
 function castFile(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'file': {
@@ -34937,6 +34977,13 @@ function castFile(value,) {
     }
   }
   return null;
+}
+function compareLink(left, right,) {
+  const leftEncoded = JSON.stringify(left.value,);
+  const rightEncoded = JSON.stringify(right.value,);
+  if (leftEncoded < rightEncoded) return -1;
+  if (leftEncoded > rightEncoded) return 1;
+  return 0;
 }
 function castLink(value,) {
   switch (value == null ? void 0 : value.type) {
@@ -34962,6 +35009,11 @@ function castLink(value,) {
   }
   return null;
 }
+function compareNumber(left, right,) {
+  if (left.value < right.value) return -1;
+  if (left.value > right.value) return 1;
+  return 0;
+}
 function castNumber(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'number':
@@ -34978,9 +35030,26 @@ function castNumber(value,) {
   }
   return null;
 }
-function toNumber2(value,) {
+function valueToNumber(value,) {
   const cast = castNumber(value,);
   return (cast == null ? void 0 : cast.value) ?? null;
+}
+function compareObject(left, right, collation11,) {
+  const leftKeys = Object.keys(left.value,).sort();
+  const rightKeys = Object.keys(right.value,).sort();
+  if (leftKeys.length < rightKeys.length) return -1;
+  if (leftKeys.length > rightKeys.length) return 1;
+  for (let i = 0; i < leftKeys.length; i++) {
+    const leftKey = leftKeys[i];
+    const rightKey = rightKeys[i];
+    if (leftKey < rightKey) return -1;
+    if (leftKey > rightKey) return 1;
+    const leftValue = left.value[leftKey] ?? null;
+    const rightValue = right.value[rightKey] ?? null;
+    const result = compare(leftValue, rightValue, collation11,);
+    if (result !== 0) return result;
+  }
+  return 0;
 }
 function castObject(value, definition,) {
   switch (value == null ? void 0 : value.type) {
@@ -34999,6 +35068,13 @@ function castObject(value, definition,) {
   }
   return null;
 }
+function compareResponsiveImage(left, right,) {
+  const leftEncoded = JSON.stringify(left.value,);
+  const rightEncoded = JSON.stringify(right.value,);
+  if (leftEncoded < rightEncoded) return -1;
+  if (leftEncoded > rightEncoded) return 1;
+  return 0;
+}
 function castResponsiveImage(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'responsiveimage': {
@@ -35007,6 +35083,13 @@ function castResponsiveImage(value,) {
   }
   return null;
 }
+function compareRichText(left, right,) {
+  const leftValue = left.value;
+  const rightValue = right.value;
+  if (leftValue < rightValue) return -1;
+  if (leftValue > rightValue) return 1;
+  return 0;
+}
 function castRichText(value,) {
   switch (value == null ? void 0 : value.type) {
     case 'richtext': {
@@ -35014,6 +35097,17 @@ function castRichText(value,) {
     }
   }
   return null;
+}
+function compareString(left, right, collation11,) {
+  let leftValue = left.value;
+  let rightValue = right.value;
+  if (collation11.type === 0) {
+    leftValue = left.value.toLowerCase();
+    rightValue = right.value.toLowerCase();
+  }
+  if (leftValue < rightValue) return -1;
+  if (leftValue > rightValue) return 1;
+  return 0;
 }
 function castString(value,) {
   switch (value == null ? void 0 : value.type) {
@@ -35029,7 +35123,7 @@ function castString(value,) {
   }
   return null;
 }
-function toString(value,) {
+function valueToString(value,) {
   const cast = castString(value,);
   return (cast == null ? void 0 : cast.value) ?? null;
 }
@@ -35177,8 +35271,8 @@ var DatabaseValue = {
     },);
   },
   contains(source, target, collation11,) {
-    let sourceValue = toString(source,);
-    let targetValue = toString(target,);
+    let sourceValue = valueToString(source,);
+    let targetValue = valueToString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
     if (collation11.type === 0) {
@@ -35188,8 +35282,8 @@ var DatabaseValue = {
     return sourceValue.includes(targetValue,);
   },
   startsWith(source, target, collation11,) {
-    let sourceValue = toString(source,);
-    let targetValue = toString(target,);
+    let sourceValue = valueToString(source,);
+    let targetValue = valueToString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
     if (collation11.type === 0) {
@@ -35199,8 +35293,8 @@ var DatabaseValue = {
     return sourceValue.startsWith(targetValue,);
   },
   endsWith(source, target, collation11,) {
-    let sourceValue = toString(source,);
-    let targetValue = toString(target,);
+    let sourceValue = valueToString(source,);
+    let targetValue = valueToString(target,);
     if (isNull(sourceValue,)) return false;
     if (isNull(targetValue,)) return false;
     if (collation11.type === 0) {
@@ -35257,115 +35351,51 @@ function compare(left, right, collation11,) {
   switch (left.type) {
     case 'array': {
       assert(left.type === right.type,);
-      const leftLength = left.value.length;
-      const rightLength = right.value.length;
-      if (leftLength < rightLength) return -1;
-      if (leftLength > rightLength) return 1;
-      for (let i = 0; i < leftLength; i++) {
-        const leftItem = left.value[i];
-        const rightItem = right.value[i];
-        assert(!isUndefined(leftItem,), 'Left item must exist',);
-        assert(!isUndefined(rightItem,), 'Right item must exist',);
-        const result = compare(leftItem, rightItem, collation11,);
-        if (result !== 0) return result;
-      }
-      return 0;
+      return compareArray(left, right, collation11,);
     }
     case 'boolean': {
       assert(left.type === right.type,);
-      if (left.value < right.value) return -1;
-      if (left.value > right.value) return 1;
-      return 0;
+      return compareBoolean(left, right,);
     }
     case 'color': {
       assert(left.type === right.type,);
-      if (left.value < right.value) return -1;
-      if (left.value > right.value) return 1;
-      return 0;
+      return compareColor(left, right,);
     }
     case 'date': {
       assert(left.type === right.type,);
-      const leftDate = new Date(left.value,);
-      const rightDate = new Date(right.value,);
-      if (leftDate < rightDate) return -1;
-      if (leftDate > rightDate) return 1;
-      return 0;
+      return compareDate(left, right,);
     }
     case 'enum': {
       assert(left.type === right.type,);
-      if (left.value < right.value) return -1;
-      if (left.value > right.value) return 1;
-      return 0;
+      return compareEnum(left, right,);
     }
     case 'file': {
       assert(left.type === right.type,);
-      if (left.value < right.value) return -1;
-      if (left.value > right.value) return 1;
-      return 0;
+      return compareFile(left, right,);
     }
     case 'link': {
       assert(left.type === right.type,);
-      const leftEncoded = JSON.stringify(left.value,);
-      const rightEncoded = JSON.stringify(right.value,);
-      if (leftEncoded < rightEncoded) return -1;
-      if (leftEncoded > rightEncoded) return 1;
-      return 0;
+      return compareLink(left, right,);
     }
     case 'number': {
       assert(left.type === right.type,);
-      if (left.value < right.value) return -1;
-      if (left.value > right.value) return 1;
-      return 0;
+      return compareNumber(left, right,);
     }
     case 'object': {
       assert(left.type === right.type,);
-      const leftKeys = Object.keys(left.value,).sort();
-      const rightKeys = Object.keys(right.value,).sort();
-      if (leftKeys.length < rightKeys.length) return -1;
-      if (leftKeys.length > rightKeys.length) return 1;
-      for (let i = 0; i < leftKeys.length; i++) {
-        const leftKey = leftKeys[i];
-        const rightKey = rightKeys[i];
-        assert(!isUndefined(leftKey,), 'Left key must exist',);
-        assert(!isUndefined(rightKey,), 'Left key must exist',);
-        if (leftKey < rightKey) return -1;
-        if (leftKey > rightKey) return 1;
-        const leftValue = left.value[leftKey];
-        const rightValue = right.value[rightKey];
-        assert(!isUndefined(leftValue,), 'Left value must exist',);
-        assert(!isUndefined(rightValue,), 'Right value must exist',);
-        const result = compare(leftValue, rightValue, collation11,);
-        if (result !== 0) return result;
-      }
-      return 0;
+      return compareObject(left, right, collation11,);
     }
     case 'responsiveimage': {
       assert(left.type === right.type,);
-      const leftEncoded = JSON.stringify(left.value,);
-      const rightEncoded = JSON.stringify(right.value,);
-      if (leftEncoded < rightEncoded) return -1;
-      if (leftEncoded > rightEncoded) return 1;
-      return 0;
+      return compareResponsiveImage(left, right,);
     }
     case 'richtext': {
       assert(left.type === right.type,);
-      const leftValue = left.value;
-      const rightValue = right.value;
-      if (leftValue < rightValue) return -1;
-      if (leftValue > rightValue) return 1;
-      return 0;
+      return compareRichText(left, right,);
     }
     case 'string': {
       assert(left.type === right.type,);
-      let leftValue = left.value;
-      let rightValue = right.value;
-      if (collation11.type === 0) {
-        leftValue = left.value.toLowerCase();
-        rightValue = right.value.toLowerCase();
-      }
-      if (leftValue < rightValue) return -1;
-      if (leftValue > rightValue) return 1;
-      return 0;
+      return compareString(left, right, collation11,);
     }
     default: {
       assertNever(left,);
@@ -36300,7 +36330,7 @@ var ScalarCase = class extends ScalarNode {
           then,
         } of conditions
       ) {
-        if (toBoolean(when,)) {
+        if (valueToBoolean(when,)) {
           return then;
         }
       }
@@ -36776,7 +36806,7 @@ var RelationalFilter = class extends RelationalNode {
     },),);
     return input.filter((_, index,) => {
       const predicate = predicates[index] ?? null;
-      return toBoolean(predicate,);
+      return valueToBoolean(predicate,);
     },);
   }
 };
@@ -37044,7 +37074,7 @@ var RelationalLeftJoin = class extends RelationalNode {
         tuple.merge(leftTuple,);
         tuple.merge(rightTuple,);
         const value = yield* this.constraint.evaluate(context, tuple,);
-        if (toBoolean(value,)) {
+        if (valueToBoolean(value,)) {
           result.push(tuple,);
           hasMatch = true;
         }
@@ -37174,7 +37204,7 @@ var RelationalRightJoin = class extends RelationalNode {
         tuple.merge(rightTuple,);
         tuple.merge(leftTuple,);
         const value = yield* this.constraint.evaluate(context, tuple,);
-        if (toBoolean(value,)) {
+        if (valueToBoolean(value,)) {
           result.push(tuple,);
           hasMatch = true;
         }
@@ -37324,7 +37354,7 @@ var ScalarAnd = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: toBoolean(left,) && toBoolean(right,),
+      value: valueToBoolean(left,) && valueToBoolean(right,),
     };
   }
 };
@@ -37706,7 +37736,7 @@ var ScalarOr = class extends ScalarNode {
     },);
     return {
       type: 'boolean',
-      value: toBoolean(left,) || toBoolean(right,),
+      value: valueToBoolean(left,) || valueToBoolean(right,),
     };
   }
 };
@@ -38032,7 +38062,7 @@ var RelationalLimit = class extends RelationalNode {
       input: this.input.evaluate(context,),
       limit: this.limit.evaluate(context, void 0,),
     },);
-    const value = toNumber2(limit,) ?? Infinity;
+    const value = valueToNumber(limit,) ?? Infinity;
     if (value === Infinity) return input;
     return input.slice(0, value,);
   }
@@ -38083,7 +38113,7 @@ var RelationalOffset = class extends RelationalNode {
       input: this.input.evaluate(context,),
       offset: this.offset.evaluate(context, void 0,),
     },);
-    const value = toNumber2(offset,) ?? 0;
+    const value = valueToNumber(offset,) ?? 0;
     if (value === 0) return input;
     return input.slice(value,);
   }
@@ -38394,7 +38424,7 @@ var ScalarNot = class extends ScalarNode {
     const input = yield* this.input.evaluate(context, tuple,);
     return {
       type: 'boolean',
-      value: !toBoolean(input,),
+      value: !valueToBoolean(input,),
     };
   }
 };
