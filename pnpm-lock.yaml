@@ -199,8 +199,8 @@ importers:
         specifier: npm:framer-motion@12.0.6
         version: framer-motion@12.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       spiceflow:
-        specifier: ^1.5.1
-        version: 1.5.1(@modelcontextprotocol/sdk@1.0.4)
+        specifier: ^1.6.1
+        version: 1.6.1(@modelcontextprotocol/sdk@1.0.4)
       string-dedent:
         specifier: ^3.0.1
         version: 3.0.1
@@ -1788,8 +1788,8 @@ packages:
   '@shikijs/vscode-textmate@10.0.1':
     resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
 
-  '@sinclair/typebox@0.33.22':
-    resolution: {integrity: sha512-auUj4k+f4pyrIVf4GW5UKquSZFHJWri06QgARy9C0t9ZTjJLIuNIrr1yl9bWcJWJ1Gz1vOvYN1D+QPaIlNMVkQ==}
+  '@sinclair/typebox@0.34.16':
+    resolution: {integrity: sha512-rIljj8VPYAfn26ANY+5pCNVBPiv6hSufuKGe46y65cJZpvx8vHvPXlU0Q/Le4OGtlNaL8Jg2FuhtvQX18lSIqA==}
 
   '@sindresorhus/is@4.6.0':
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
@@ -4967,8 +4967,8 @@ packages:
   spdx-license-ids@3.0.20:
     resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
 
-  spiceflow@1.5.1:
-    resolution: {integrity: sha512-Jmxllw4q0C1XgvfY8tq+FAlgSNgV0jhIoG4n9iu8MhpvYeLBMUNMTEACmfVuT92RLvi0pZgRVAdv9HmZ8Ba9qw==}
+  spiceflow@1.6.1:
+    resolution: {integrity: sha512-PBJ4QC/RjBIoNKVBALDAQZkTF7KG94xV7rmSil9HXi0kXh4k+akaI7pFG15pTMPfX7EZPQRo/3kml9tSEeJ9gw==}
     peerDependencies:
       '@modelcontextprotocol/sdk': ^1.0.4
     peerDependenciesMeta:
@@ -7430,7 +7430,7 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.1': {}
 
-  '@sinclair/typebox@0.33.22': {}
+  '@sinclair/typebox@0.34.16': {}
 
   '@sindresorhus/is@4.6.0': {}
 
@@ -11396,10 +11396,10 @@ snapshots:
 
   spdx-license-ids@3.0.20: {}
 
-  spiceflow@1.5.1(@modelcontextprotocol/sdk@1.0.4):
+  spiceflow@1.6.1(@modelcontextprotocol/sdk@1.0.4):
     dependencies:
       '@medley/router': 0.2.1
-      '@sinclair/typebox': 0.33.22
+      '@sinclair/typebox': 0.34.16
       ajv: 8.17.1
       ajv-formats: 3.0.1(ajv@8.17.1)
       eventsource-parser: 3.0.0
