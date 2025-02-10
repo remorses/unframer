@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.VDKYGJXW.mjs
+// /:https://app.framerstatic.com/framer.NH77T3NR.mjs
 import React4 from 'react';
 import { Suspense as Suspense3, } from 'react';
 import { memo as memo2, startTransition as startTransition2, } from 'react';
@@ -33828,6 +33828,7 @@ function Router({
             children: /* @__PURE__ */ jsx(WithLayoutTemplate, {
               LayoutTemplate,
               routeId: currentRouteId,
+              style: defaultPageStyle,
               children: (inLayoutTemplate) => {
                 return /* @__PURE__ */ jsxs(Fragment, {
                   children: [
@@ -33850,11 +33851,13 @@ function Router({
 function WithLayoutTemplate({
   LayoutTemplate,
   routeId,
+  style,
   children,
 },) {
   if (!LayoutTemplate) return children(false,);
   return /* @__PURE__ */ jsx(LayoutTemplate, {
     routeId,
+    style,
     children,
   },);
 }
