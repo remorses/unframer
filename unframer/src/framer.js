@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.NH77T3NR.mjs
+// /:https://app.framerstatic.com/framer.GVYBXT3Y.mjs
 import React4 from 'react';
 import { Suspense as Suspense3, } from 'react';
 import { memo as memo2, startTransition as startTransition2, } from 'react';
@@ -32631,6 +32631,94 @@ function getObserveRouteForPreloadingFn() {
 var observeRouteForPreloading =
   // this also guards `window`
   !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
+var isPressing = /* @__PURE__ */ new WeakSet();
+function filterEvents(callback,) {
+  return (event) => {
+    if (event.key !== 'Enter') return;
+    callback(event,);
+  };
+}
+function firePointerEvent(target, type,) {
+  target.dispatchEvent(
+    new PointerEvent('pointer' + type, {
+      isPrimary: true,
+      bubbles: true,
+    },),
+  );
+}
+var enableKeyboardPress = (focusEvent, eventOptions,) => {
+  const element = focusEvent.currentTarget;
+  if (!element) return;
+  const handleKeydown = filterEvents(() => {
+    if (isPressing.has(element,)) return;
+    firePointerEvent(element, 'down',);
+    const handleKeyup = filterEvents(() => {
+      firePointerEvent(element, 'up',);
+    },);
+    const handleBlur = () => firePointerEvent(element, 'cancel',);
+    element.addEventListener('keyup', handleKeyup, eventOptions,);
+    element.addEventListener('blur', handleBlur, eventOptions,);
+  },);
+  element.addEventListener('keydown', handleKeydown, eventOptions,);
+  element.addEventListener('blur', () => element.removeEventListener('keydown', handleKeydown,), eventOptions,);
+};
+function isPointerEvent(event,) {
+  return 'pointerId' in event;
+}
+var isPrimaryPointer2 = (event) => {
+  if (event.pointerType === 'mouse') {
+    return typeof event.button !== 'number' || event.button <= 0;
+  } else {
+    return event.isPrimary !== false;
+  }
+};
+function isValidPressEvent(event,) {
+  return isPointerEvent(event,) && isPrimaryPointer2(event,);
+}
+var isNodeOrChild2 = (parent, child,) => {
+  if (!child) {
+    return false;
+  } else if (parent === child) {
+    return true;
+  } else {
+    return isNodeOrChild2(parent, child.parentElement,);
+  }
+};
+function press(element, onPressEnd,) {
+  const gestureAbortController = new AbortController();
+  const cancel = () => gestureAbortController.abort();
+  const eventOptions = {
+    passive: true,
+    signal: gestureAbortController.signal,
+  };
+  const startPress = (startEvent) => {
+    const target = startEvent.currentTarget;
+    if (!isValidPressEvent(startEvent,) || isPressing.has(target,)) return;
+    isPressing.add(target,);
+    const onPointerEnd = (endEvent, success,) => {
+      window.removeEventListener('pointerup', onPointerUp,);
+      window.removeEventListener('pointercancel', onPointerCancel,);
+      if (!isValidPressEvent(endEvent,) || !isPressing.has(target,)) {
+        return;
+      }
+      isPressing.delete(target,);
+      if (success && typeof onPressEnd === 'function') {
+        onPressEnd(endEvent,);
+      }
+    };
+    const onPointerUp = (upEvent) => {
+      onPointerEnd(upEvent, isNodeOrChild2(target, upEvent.target,),);
+    };
+    const onPointerCancel = (cancelEvent) => {
+      onPointerEnd(cancelEvent, false,);
+    };
+    window.addEventListener('pointerup', onPointerUp, eventOptions,);
+    window.addEventListener('pointercancel', onPointerCancel, eventOptions,);
+  };
+  element.addEventListener('pointerdown', startPress, eventOptions,);
+  element.addEventListener('focus', (event) => enableKeyboardPress(event, eventOptions,), eventOptions,);
+  return cancel;
+}
 var noLocale = Symbol('noLocale',);
 var resolveSlugCache = /* @__PURE__ */ new Map();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -33041,15 +33129,28 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   }, [observerCallback,],);
   const {
     navigate: _,
+    onClick,
     ...linkProps
   } = props;
+  const shouldReplaceClickWithPress = Boolean(isIOS() && onClick,);
+  useRefEffect(observerRef, (node) => {
+    if (!shouldReplaceClickWithPress) return;
+    if (node === null) return;
+    return press(node, onClick,);
+  }, [shouldReplaceClickWithPress, onClick,],);
   const el = clone.cloneAsArray(children, {
     ...restProps,
     ...linkProps,
+    // If we've replaced the click handler with press, make onClick noop so we don't try to
+    // respond to the pointer event twice.
+    onClick: shouldReplaceClickWithPress ? noopOnClick : onClick,
     ref: observerRef,
   },);
   return getChildren(el,);
 },),);
+function noopOnClick(event,) {
+  event.preventDefault();
+}
 var ParentLinkContext = /* @__PURE__ */ createContext(void 0,);
 function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
   const parentLink = useContext(ParentLinkContext,);
@@ -45116,20 +45217,21 @@ function getSVGSize(svg,) {
     height,
   };
 }
-function SVG(props,) {
+var SVG = /* @__PURE__ */ forwardRef(function SVG2(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
   const layoutRef = React4.useRef(null,);
+  const ref = forwardedRef ?? layoutRef;
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
   return /* @__PURE__ */ jsx(SVGComponent, {
     ...props,
-    innerRef: layoutRef,
+    innerRef: ref,
     parentSize,
     layoutId,
     providedWindow,
   },);
-}
+},);
 var MAX_BACKGROUND_SVG_TEXT_LENGTH = 5e4;
 function containsImageReference(svg,) {
   return svg.indexOf('image',) >= 0;
@@ -45367,6 +45469,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           style: {
             position: 'absolute',
           },
+          role: 'presentation',
           children: /* @__PURE__ */ jsx('linearGradient', {
             id: gradientId,
             x1,
@@ -45394,6 +45497,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           style: {
             position: 'absolute',
           },
+          role: 'presentation',
           children: /* @__PURE__ */ jsx('radialGradient', {
             id: gradientId,
             cy: gradient.centerAnchorY,
@@ -45419,6 +45523,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
             style: {
               position: 'absolute',
             },
+            role: 'presentation',
             children: /* @__PURE__ */ jsx('defs', {
               children: /* @__PURE__ */ jsx(ImagePatternElement, {
                 ...imagePattern,
