@@ -199,7 +199,7 @@
       "format": "esm"
     },
     "virtual:section-testimonials": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -432,7 +432,7 @@
       "format": "esm"
     },
     "virtual:sections/pricing": {
-      "bytes": 2640,
+      "bytes": 2790,
       "imports": [
         {
           "path": "react",
@@ -562,7 +562,7 @@
       "format": "esm"
     },
     "virtual:section-large-testimonial": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -629,7 +629,7 @@
       "format": "esm"
     },
     "virtual:sections/feature": {
-      "bytes": 2619,
+      "bytes": 2769,
       "imports": [
         {
           "path": "react",
@@ -696,7 +696,7 @@
       "format": "esm"
     },
     "virtual:section-logos": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -820,7 +820,7 @@
       "format": "esm"
     },
     "virtual:section-features": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -908,7 +908,7 @@
       "format": "esm"
     },
     "virtual:section-how-it-works": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -939,7 +939,7 @@
       "format": "esm"
     },
     "virtual:sections/features-animation": {
-      "bytes": 2630,
+      "bytes": 2780,
       "imports": [
         {
           "path": "react",
@@ -1042,7 +1042,7 @@
       "format": "esm"
     },
     "virtual:section-frequently-asked-questions": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -1130,7 +1130,7 @@
       "format": "esm"
     },
     "virtual:section-hero": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -1351,7 +1351,7 @@
       "format": "esm"
     },
     "virtual:blog-articles-collection": {
-      "bytes": 2596,
+      "bytes": 2746,
       "imports": [
         {
           "path": "react",
@@ -1382,7 +1382,7 @@
       "format": "esm"
     },
     "virtual:sections/features-container": {
-      "bytes": 2640,
+      "bytes": 2790,
       "imports": [
         {
           "path": "react",
@@ -1475,8 +1475,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/AcXscJ604rrBc7i1JGd6/m5keEQA6U.js": {
-      "bytes": 37271,
+    "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/wvzv6iAS6Bjw6GvndtCz/m5keEQA6U.js": {
+      "bytes": 35805,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1532,7 +1532,7 @@
       "format": "esm"
     },
     "virtual:section-footer": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -1545,9 +1545,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/AcXscJ604rrBc7i1JGd6/m5keEQA6U.js",
+          "path": "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/wvzv6iAS6Bjw6GvndtCz/m5keEQA6U.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/AcXscJ604rrBc7i1JGd6/m5keEQA6U.js"
+          "original": "https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/wvzv6iAS6Bjw6GvndtCz/m5keEQA6U.js"
         },
         {
           "path": "unframer",
@@ -1694,7 +1694,7 @@
       "format": "esm"
     },
     "virtual:docs-cms-with-filters": {
-      "bytes": 2596,
+      "bytes": 2746,
       "imports": [
         {
           "path": "react",
@@ -1766,7 +1766,7 @@
       "format": "esm"
     },
     "virtual:section-call-to-action": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -1838,7 +1838,7 @@
       "format": "esm"
     },
     "virtual:section-pricing": {
-      "bytes": 2661,
+      "bytes": 2811,
       "imports": [
         {
           "path": "react",
@@ -1967,7 +1967,7 @@
       "format": "esm"
     },
     "virtual:navigation/navigation": {
-      "bytes": 2640,
+      "bytes": 2790,
       "imports": [
         {
           "path": "react",
@@ -2100,7 +2100,7 @@
       "entryPoint": "virtual:navigation/navigation",
       "inputs": {
         "virtual:navigation/navigation": {
-          "bytesInOutput": 1488
+          "bytesInOutput": 1684
         },
         "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/t23MObJyprsKWWB6SqUI/z5xRU1d9T.js": {
           "bytesInOutput": 26923
@@ -2112,7 +2112,7 @@
           "bytesInOutput": 9667
         }
       },
-      "bytes": 45630
+      "bytes": 45826
     },
     "chunks/pRkZD_P47-2-PCEJG23U.js": {
       "imports": [
@@ -2255,7 +2255,7 @@
       "entryPoint": "virtual:section-frequently-asked-questions",
       "inputs": {
         "virtual:section-frequently-asked-questions": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/0sOq5bNEE1qVy6IyqIHh/WirOdcJBs.js": {
           "bytesInOutput": 17725
@@ -2264,7 +2264,7 @@
           "bytesInOutput": 51340
         }
       },
-      "bytes": 71264
+      "bytes": 71460
     },
     "section-hero.js": {
       "imports": [
@@ -2336,7 +2336,7 @@
       "entryPoint": "virtual:section-hero",
       "inputs": {
         "virtual:section-hero": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/XmVo67kR0s5kKjhDrTS8/aKlzorVQO.js": {
           "bytesInOutput": 17838
@@ -2345,7 +2345,7 @@
           "bytesInOutput": 9105
         }
       },
-      "bytes": 29109
+      "bytes": 29305
     },
     "blog-articles-collection.js": {
       "imports": [
@@ -2445,7 +2445,7 @@
       "entryPoint": "virtual:blog-articles-collection",
       "inputs": {
         "virtual:blog-articles-collection": {
-          "bytesInOutput": 1444
+          "bytesInOutput": 1640
         },
         "/:https://framerusercontent.com/modules/WBpWuqb66GFTXogRd8eX/87dVRhay4mjMKot1xo6J/aNGNl9ehf.js": {
           "bytesInOutput": 16126
@@ -2478,7 +2478,7 @@
           "bytesInOutput": 10423
         }
       },
-      "bytes": 202150
+      "bytes": 202346
     },
     "sections/features-container.js": {
       "imports": [
@@ -2529,10 +2529,10 @@
       "entryPoint": "virtual:sections/features-container",
       "inputs": {
         "virtual:sections/features-container": {
-          "bytesInOutput": 1471
+          "bytesInOutput": 1667
         }
       },
-      "bytes": 1783
+      "bytes": 1979
     },
     "section-footer.js": {
       "imports": [
@@ -2624,10 +2624,10 @@
       "entryPoint": "virtual:section-footer",
       "inputs": {
         "virtual:section-footer": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
-        "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/AcXscJ604rrBc7i1JGd6/m5keEQA6U.js": {
-          "bytesInOutput": 35773
+        "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/wvzv6iAS6Bjw6GvndtCz/m5keEQA6U.js": {
+          "bytesInOutput": 34305
         },
         "/:https://framerusercontent.com/modules/oWVHHLIj4Q7woeIlKzbt/Jo2d4bKbCdbbg0oiZ0LB/Input.js": {
           "bytesInOutput": 19301
@@ -2636,7 +2636,7 @@
           "bytesInOutput": 703
         }
       },
-      "bytes": 58137
+      "bytes": 56865
     },
     "docs-cms-with-filters.js": {
       "imports": [
@@ -2726,7 +2726,7 @@
       "entryPoint": "virtual:docs-cms-with-filters",
       "inputs": {
         "virtual:docs-cms-with-filters": {
-          "bytesInOutput": 1444
+          "bytesInOutput": 1640
         },
         "/:https://framerusercontent.com/modules/fZtk3mJZsrTHlzFv2mTj/Z4zoRwpawYvBRBcXd6Nq/s1GzfynKW.js": {
           "bytesInOutput": 21304
@@ -2744,7 +2744,7 @@
           "bytesInOutput": 290
         }
       },
-      "bytes": 109516
+      "bytes": 109712
     },
     "section-call-to-action.js": {
       "imports": [
@@ -2811,13 +2811,13 @@
       "entryPoint": "virtual:section-call-to-action",
       "inputs": {
         "virtual:section-call-to-action": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/Znl9Gi26xTfU17mHETUh/RbcdAcVC45S0KWuBNU1n/u898_CyTd.js": {
           "bytesInOutput": 15619
         }
       },
-      "bytes": 17607
+      "bytes": 17803
     },
     "chunks/chunk-WTNHL2WX.js": {
       "imports": [
@@ -2925,13 +2925,13 @@
       "entryPoint": "virtual:section-pricing",
       "inputs": {
         "virtual:section-pricing": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/Qi5b7QPu9c3NjXeCuWjP/5dr614GYVaBi685jdwpF/wqLJMyDAb.js": {
           "bytesInOutput": 16416
         }
       },
-      "bytes": 18464
+      "bytes": 18660
     },
     "section-testimonials.js": {
       "imports": [
@@ -3060,7 +3060,7 @@
       "entryPoint": "virtual:section-testimonials",
       "inputs": {
         "virtual:section-testimonials": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/8yWQJevMrmbyJU3TjtDM/zS5vjLQEM0Om9WjVuslz/BLpQs2pt2.js": {
           "bytesInOutput": 31217
@@ -3081,7 +3081,7 @@
           "bytesInOutput": 4864
         }
       },
-      "bytes": 90815
+      "bytes": 91011
     },
     "sections/pricing.js": {
       "imports": [
@@ -3132,10 +3132,10 @@
       "entryPoint": "virtual:sections/pricing",
       "inputs": {
         "virtual:sections/pricing": {
-          "bytesInOutput": 1471
+          "bytesInOutput": 1667
         }
       },
-      "bytes": 1772
+      "bytes": 1968
     },
     "chunks/chunk-D7Q37PCA.js": {
       "imports": [
@@ -3331,13 +3331,13 @@
       "entryPoint": "virtual:section-large-testimonial",
       "inputs": {
         "virtual:section-large-testimonial": {
-          "bytesInOutput": 1505
+          "bytesInOutput": 1701
         },
         "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js": {
           "bytesInOutput": 52209
         }
       },
-      "bytes": 54234
+      "bytes": 54430
     },
     "chunks/chunk-BTSBQWPZ.js": {
       "imports": [
@@ -3447,10 +3447,10 @@
       "entryPoint": "virtual:sections/feature",
       "inputs": {
         "virtual:sections/feature": {
-          "bytesInOutput": 1450
+          "bytesInOutput": 1646
         }
       },
-      "bytes": 1675
+      "bytes": 1871
     },
     "section-logos.js": {
       "imports": [
@@ -3509,13 +3509,13 @@
       "entryPoint": "virtual:section-logos",
       "inputs": {
         "virtual:section-logos": {
-          "bytesInOutput": 1505
+          "bytesInOutput": 1701
         },
         "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js": {
           "bytesInOutput": 49944
         }
       },
-      "bytes": 51786
+      "bytes": 51982
     },
     "chunks/chunk-LHJSV2JE.js": {
       "imports": [
@@ -3624,13 +3624,13 @@
       "entryPoint": "virtual:section-features",
       "inputs": {
         "virtual:section-features": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/jVQGemd6yn35sShs6D7P/1pRGuRnLG3t4AOU3dtBF/SpenI5W7L.js": {
           "bytesInOutput": 7028
         }
       },
-      "bytes": 8961
+      "bytes": 9157
     },
     "chunks/chunk-W7Z4VVDG.js": {
       "imports": [
@@ -3800,7 +3800,7 @@
       "entryPoint": "virtual:section-how-it-works",
       "inputs": {
         "virtual:section-how-it-works": {
-          "bytesInOutput": 1509
+          "bytesInOutput": 1705
         },
         "/:https://framerusercontent.com/modules/sa8zVXMWkXY0aWzV57or/jRlUq2XWA29F5k5Mwzfa/SrEfHh8IE.js": {
           "bytesInOutput": 39276
@@ -3809,7 +3809,7 @@
           "bytesInOutput": 9111
         }
       },
-      "bytes": 50558
+      "bytes": 50754
     },
     "chunks/chunk-U2BTSRYM.js": {
       "imports": [
@@ -3917,10 +3917,10 @@
       "entryPoint": "virtual:sections/features-animation",
       "inputs": {
         "virtual:sections/features-animation": {
-          "bytesInOutput": 1461
+          "bytesInOutput": 1657
         }
       },
-      "bytes": 1621
+      "bytes": 1817
     },
     "chunks/chunk-BPH5BCDR.js": {
       "imports": [

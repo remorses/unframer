@@ -215,7 +215,7 @@ stdin_default5.Responsive = ({ locale, ...rest }) => {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
-      routes: { "E9iSo0Hog": { "path": "/docs" }, "TdQ_ISe7W": { "path": "/404" }, "augiA20Il": { "path": "/" }, "rHzp0yyuW": { "path": "/blog-3" } },
+      routes: { "E9iSo0Hog": { "path": "/docs" }, "TdQ_ISe7W": { "path": "/404" }, "YC1NE44pE": { "path": "/terms" }, "augiA20Il": { "path": "/" }, "jg9o0Jk8V": { "path": "/privacy" }, "rHzp0yyuW": { "path": "/blog-3" } },
       children: /* @__PURE__ */ jsx(
         WithFramerBreakpoints,
         {
@@ -241,8 +241,14 @@ function ComponentWithRoot({ locale, ...rest }) {
         "TdQ_ISe7W": {
           "path": "/404"
         },
+        "YC1NE44pE": {
+          "path": "/terms"
+        },
         "augiA20Il": {
           "path": "/"
+        },
+        "jg9o0Jk8V": {
+          "path": "/privacy"
         },
         "rHzp0yyuW": {
           "path": "/blog-3"
