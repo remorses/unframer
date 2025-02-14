@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.GVYBXT3Y.mjs
+// /:https://app.framerstatic.com/framer.SVERHOXE.mjs
 import React4 from 'react';
 import { Suspense as Suspense3, } from 'react';
 import { memo as memo2, startTransition as startTransition2, } from 'react';
@@ -21215,9 +21215,13 @@ function supportsThemes(presetId, skin,) {
   }
   return false;
 }
-function useIsStaticRenderer() {
+function isStaticRenderer() {
   const currentTarget = RenderTarget.current();
   return currentTarget === RenderTarget.canvas || currentTarget === RenderTarget.export;
+}
+function useIsStaticRenderer() {
+  const [isStatic,] = useState(() => isStaticRenderer());
+  return isStatic;
 }
 var asRecord = (object) => object;
 function memoize(fn,) {
@@ -22644,7 +22648,7 @@ function useStyleAndRect(props,) {
       ...defaultStyle,
     };
   }
-  const isRenderingStaticContent = useIsStaticRenderer();
+  const isRenderingStaticContent = isStaticRenderer();
   if (props.positionSticky) {
     if (!isRenderingStaticContent || inCodeComponent) {
       resultStyle.position = 'sticky';
@@ -23095,7 +23099,7 @@ function useRefEffect(ref, effect, deps,) {
   const depsChangedRef = useRef();
   useMemo(() => {
     if (depsChangedRef.current !== void 0) depsChangedRef.current = true;
-  }, [deps,],);
+  }, deps ?? [{},],);
   if (!ref) return;
   const depsChanged = depsChangedRef.current;
   if (depsChanged) {
@@ -30657,7 +30661,7 @@ var withFX = (Component18) =>
         ref: forwardedRef,
       },);
     }
-    const isRenderingStaticContent = useIsStaticRenderer();
+    const isRenderingStaticContent = isStaticRenderer();
     if (isRenderingStaticContent) {
       const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
       const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
@@ -33136,14 +33140,22 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   useRefEffect(observerRef, (node) => {
     if (!shouldReplaceClickWithPress) return;
     if (node === null) return;
-    return press(node, onClick,);
+    const cancel = press(node, onClick,);
+    return () => {
+      if (!observerRef.current) cancel();
+    };
   }, [shouldReplaceClickWithPress, onClick,],);
+  const onClickProp = onClick
+    ? {
+      // If we've replaced the click handler with press, make onClick noop so we don't try to
+      // respond to the pointer event twice.
+      onClick: shouldReplaceClickWithPress ? noopOnClick : onClick,
+    }
+    : {};
   const el = clone.cloneAsArray(children, {
     ...restProps,
     ...linkProps,
-    // If we've replaced the click handler with press, make onClick noop so we don't try to
-    // respond to the pointer event twice.
-    onClick: shouldReplaceClickWithPress ? noopOnClick : onClick,
+    ...onClickProp,
     ref: observerRef,
   },);
   return getChildren(el,);
@@ -33922,24 +33934,26 @@ function Router({
       value: localeInfo,
       children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
         children: [
-          /* @__PURE__ */ jsx(NotFoundErrorBoundary, {
+          /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
             notFoundPage,
             defaultPageStyle,
             forceUpdateKey: dep,
-            children: /* @__PURE__ */ jsx(WithLayoutTemplate, {
-              LayoutTemplate,
-              routeId: currentRouteId,
-              style: defaultPageStyle,
-              children: (inLayoutTemplate) => {
-                return /* @__PURE__ */ jsxs(Fragment, {
-                  children: [
-                    /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
-                    pageExistsInCurrentLocale ? renderPage(current.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,) : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                    notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                  ],
-                }, remountKey,);
-              },
-            },),
+            children: [
+              /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+              /* @__PURE__ */ jsx(WithLayoutTemplate, {
+                LayoutTemplate,
+                routeId: currentRouteId,
+                style: defaultPageStyle,
+                children: (inLayoutTemplate) => {
+                  return /* @__PURE__ */ jsx(Fragment, {
+                    children: pageExistsInCurrentLocale
+                      ? renderPage(current.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                      : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                      notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                  }, remountKey,);
+                },
+              },),
+            ],
           },),
           /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
           /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
@@ -39937,7 +39951,7 @@ function callbackForVariant(map2, variant,) {
   return map2.default;
 }
 function useOnVariantChange(variant, callbackMap,) {
-  const isRenderingStaticContent = useIsStaticRenderer();
+  const isRenderingStaticContent = isStaticRenderer();
   if (isRenderingStaticContent) return;
   const isActiveScreenRef = React4.useRef(true,);
   const callbackMapRef = React4.useRef(callbackMap,);
@@ -44170,7 +44184,7 @@ function getInitialEffectStyle(canPlay, canAnimate2, effect,) {
 }
 function useTextEffect(config, ref, preview,) {
   const elements = useConstant2(() => /* @__PURE__ */ new Set());
-  const isRenderingStaticContent = useIsStaticRenderer();
+  const isRenderingStaticContent = isStaticRenderer();
   const canPlay = preview || !isRenderingStaticContent;
   const state2 = React2.useRef({
     hasMounted: false,
@@ -47332,6 +47346,7 @@ export {
   isReactDefinition,
   isRelativeNumber,
   isShallowEqualArray,
+  isStaticRenderer,
   isStraightCurve,
   isValidMotionProp,
   keyframes,
