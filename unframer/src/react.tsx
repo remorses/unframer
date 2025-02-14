@@ -4,7 +4,9 @@ import { combinedCSSRules, withCSS as originalWithCSS } from './framer.js'
 import {
     ComponentPropsWithoutRef,
     ComponentType,
+    createContext,
     forwardRef,
+    useContext,
     useMemo,
     useSyncExternalStore,
 } from 'react'
@@ -275,6 +277,18 @@ export function AdaptedLink({
     children,
     ...rest
 }) {
+    const context = useContext(unframerContext)
+    let onClick =
+        context.navigate && !openInNewTab
+            ? (e) => {
+                  if (!context.navigate) return
+                  const href = e.currentTarget?.getAttribute('href')
+                  if (!href) return
+                  e.preventDefault()
+                  if (rest.onClick) rest.onClick(e)
+                  context.navigate(href)
+              }
+            : null
     const onlyForFramer = { children, nodeId, openInNewTab, smoothScroll }
     const routes = React.useContext(routesContext)
     const webPageId = href?.webPageId as string
@@ -283,7 +297,7 @@ export function AdaptedLink({
     const target = openInNewTab ? '_blank' : undefined
     // console.log({ href, pathVariables, path: route?.path, ...rest })
     if (isRelativeLink(href)) {
-        return React.cloneElement(children, { ...rest, href, target })
+        return React.cloneElement(children, { ...rest, onClick, href, target })
     }
     if (!webPageId) {
         return <Link href={href} {...rest} {...onlyForFramer} />
@@ -299,6 +313,7 @@ export function AdaptedLink({
     if (isRelativeLink(path)) {
         return React.cloneElement(children, {
             ...rest,
+            onClick,
             href: path,
             target,
         })
@@ -381,4 +396,21 @@ function isEmpty(obj: Record<any, any>) {
         }
     }
     return true
+}
+
+type UnframerProviderProps = {
+    navigate?: (url: string) => void
+    children: React.ReactNode
+}
+
+const unframerContext = createContext<Partial<UnframerProviderProps>>({
+    navigate: undefined,
+})
+
+export function UnframerProvider(props: UnframerProviderProps) {
+    return (
+        <unframerContext.Provider value={props}>
+            {props.children}
+        </unframerContext.Provider>
+    )
 }

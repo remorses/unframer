@@ -9,6 +9,7 @@ export {
     WithFramerBreakpoints,
     ContextProviders,
     AdaptedLink,
+    UnframerProvider,
     // withCSS,
 } from './react.js'
 

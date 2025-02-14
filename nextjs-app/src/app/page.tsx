@@ -1,5 +1,5 @@
 'use client'
-
+import { useRouter } from 'next/navigation'
 import LogosFramerComponent from '@/framer-unchatgpt/logos'
 import NavigationFramerComponent from '../framer-simplicity/navigation/navigation'
 import SectionCallToActionFramerComponent from '../framer-simplicity/section-call-to-action'
@@ -13,28 +13,37 @@ import SectionLogosFramerComponent from '../framer-simplicity/section-logos'
 import SectionPricingFramerComponent from '../framer-simplicity/section-pricing'
 import SectionTestimonialsFramerComponent from '../framer-simplicity/section-testimonials'
 import '../framer-simplicity/styles.css'
+import { UnframerProvider } from 'unframer'
 
 export default function Page() {
     return <Home />
 }
 
 function Home() {
+    const router = useRouter()
     return (
-        <div className='bg-black flex flex-col items-center'>
-            <NavigationFramerComponent.Responsive />
+        <UnframerProvider
+            navigate={(x) => {
+                console.log(`using client navigation for`, x)
+                router.push(x)
+            }}
+        >
+            <div className='bg-black flex flex-col items-center'>
+                <NavigationFramerComponent.Responsive />
 
-            <SectionHeroFramerComponent.Responsive />
+                <SectionHeroFramerComponent.Responsive />
 
-            <SectionLogosFramerComponent.Responsive />
-            <SectionHowItWorksFramerComponent.Responsive />
-            <SectionLargeTestimonialFramerComponent.Responsive />
-            <SectionFeaturesFramerComponent.Responsive />
-            <SectionPricingFramerComponent.Responsive />
-            <SectionTestimonialsFramerComponent.Responsive />
-            <SectionFrequentlyAskedQuestionsFramerComponent.Responsive />
-            <SectionCallToActionFramerComponent.Responsive />
-            <LogosFramerComponent.Responsive />
-            <SectionFooterFramerComponent.Responsive />
-        </div>
+                <SectionLogosFramerComponent.Responsive />
+                <SectionHowItWorksFramerComponent.Responsive />
+                <SectionLargeTestimonialFramerComponent.Responsive />
+                <SectionFeaturesFramerComponent.Responsive />
+                <SectionPricingFramerComponent.Responsive />
+                <SectionTestimonialsFramerComponent.Responsive />
+                <SectionFrequentlyAskedQuestionsFramerComponent.Responsive />
+                <SectionCallToActionFramerComponent.Responsive />
+                <LogosFramerComponent.Responsive />
+                <SectionFooterFramerComponent.Responsive />
+            </div>
+        </UnframerProvider>
     )
 }
