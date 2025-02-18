@@ -11,13 +11,13 @@
     "dependencies": {
         "@astrojs/react": "^4.2.0",
         "@astrojs/tailwind": "^5.1.5",
-        "@types/react": "^19.0.8",
-        "nextjs-app": "workspace:*",
-        "unframer": "workspace:*",
-        "@types/react-dom": "^19.0.3",
+        "@types/react": "^19.0.10",
+        "@types/react-dom": "^19.0.4",
         "astro": "^5.1.10",
+        "nextjs-app": "workspace:*",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "tailwindcss": "^3.4.17"
+        "tailwindcss": "^3.4.17",
+        "unframer": "workspace:*"
     }
 }
