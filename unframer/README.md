@@ -220,6 +220,25 @@ You can use the `--watch` flag to automatically re-export components when they c
 Unframer cli will poll your website url every 2 seconds with a HEAD request, when the `etag` header changes it will re-export the components. This means that the --watch flag may not work if your components are not used in your main page of your Framer website.
 </details>
 
+## Using client navigation for links
+
+If you use a framework like Next.js or react-router you can pass a navigate function to let Unframer use client navigation instead of full page refreshes for relative links.
+
+All Unframer components below will use this navigate function to go to the new page.
+
+```tsx
+import { useRouter } from 'next/navigation'
+import { UnframerProvider } from 'unframer'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+    const router = useRouter()
+
+    return (
+        <UnframerProvider navigate={router.push}>{children}</UnframerProvider>
+    )
+}
+```
+
 ## How does unframer cli work?
 
 The Framer React Export plugin saves your Framer components JavaScript url in the Unframer database. When you run the Unframer cli the components urls are fetched and bundled with esbuild. The bundler will also resolve npm dependencies in your Framer overrides and code components using the latest version.
@@ -291,3 +310,7 @@ Here is the below landing page Lighthouse score when using Astro:
 ## Example
 
 Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
+
+```
+
+```
