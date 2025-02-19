@@ -10429,10 +10429,11 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.H2TWMMQC.mjs
+// /:https://app.framerstatic.com/framer.5OTHFUFR.mjs
 import React4 from 'react';
+import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
-import { memo as memo2, startTransition as startTransition2, } from 'react';
+import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
@@ -12162,7 +12163,6 @@ function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect
     };
   }, deps,);
 }
-var noop2 = () => {};
 var EMPTY_ARRAY = [];
 var requestIdleCallback = /* @__PURE__ */ (() => {
   return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
@@ -12268,6 +12268,7 @@ function isGenerator2(value,) {
 function isBot(userAgent,) {
   return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
 }
+var noop2 = () => {};
 var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(__unframerNavigator2.userAgent,))();
 function useRoutePreloader(routeIds, enabled = true,) {
   const {
@@ -13355,6 +13356,52 @@ function useRouteAnchor(routeId, {
     href,
   };
 }
+async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  if (!currentRoute) return locales;
+  if (currentRoute.collectionId) {
+    return localesForCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,);
+  }
+  return localesForPage(activeLocale, locales, currentRoute,);
+}
+async function localesForCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  var _a;
+  if (!pathVariables || !currentRoute.collectionId || !activeLocale) return locales;
+  const {
+    path,
+  } = currentRoute;
+  if (!path) return locales;
+  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
+  const lastMatch = matches.pop();
+  if (!lastMatch) return locales;
+  const pathVariableWithDelimiter = lastMatch == null ? void 0 : lastMatch[0];
+  const pathVariableValue = lastMatch == null ? void 0 : lastMatch[1];
+  if (!pathVariableWithDelimiter || !pathVariableValue) {
+    throw new Error('Failed to replace path variables: unexpected regex match group',);
+  }
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!currentSlug || !isString(currentSlug,)) {
+    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
+  }
+  const utils =
+    await ((_a = collectionUtils == null ? void 0 : collectionUtils[currentRoute.collectionId]) == null
+      ? void 0
+      : _a.call(collectionUtils,));
+  if (!utils) return locales;
+  const recordId = await utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  if (!recordId) return locales;
+  const filteredLocalesWithEmpties = await Promise.all(locales.map(async (locale) => {
+    const slug = await utils.getSlugByRecordId(recordId, locale,);
+    return slug ? locale : void 0;
+  },),);
+  const filteredLocales = filteredLocalesWithEmpties.filter((locale) => !isUndefined(locale,));
+  return filteredLocales;
+}
+function localesForPage(activeLocale, locales, currentRoute,) {
+  if (!activeLocale) return locales;
+  const includedLocales = currentRoute.includedLocales;
+  if (!includedLocales) return locales;
+  return locales.filter((locale) => includedLocales.includes(locale.id,));
+}
 var noopAsync = async () => {};
 var defaultLocaleInfo = {
   activeLocale: null,
@@ -13364,6 +13411,37 @@ var defaultLocaleInfo = {
 var LocaleInfoContext = /* @__PURE__ */ React4.createContext(defaultLocaleInfo,);
 function useLocaleInfo() {
   return React4.useContext(LocaleInfoContext,);
+}
+function useLocalesForCurrentRoute() {
+  const {
+    currentRouteId,
+    routes,
+    collectionUtils,
+    currentPathVariables,
+  } = useRouter();
+  const {
+    activeLocale,
+    locales,
+  } = useLocaleInfo();
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React4.useState(() => activeLocale ? [activeLocale,] : []);
+  const currentRoute = currentRouteId ? routes == null ? void 0 : routes[currentRouteId] : void 0;
+  React4.useEffect(() => {
+    let active = true;
+    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
+      if (!active) return;
+      React4.startTransition(() => {
+        if (localesSubset) {
+          setLocalesForCurrentRoute(localesSubset,);
+        } else {
+          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
+        }
+      },);
+    },).catch(() => {},);
+    return () => {
+      active = false;
+    };
+  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
+  return localesForCurrentRoute;
 }
 function useLocalizationInfo() {
   const {
@@ -18615,6 +18693,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['BorderRadius'] = 'borderradius';
   ControlType2['CollectionReference'] = 'collectionreference';
   ControlType2['MultiCollectionReference'] = 'multicollectionreference';
+  ControlType2['TrackingId'] = 'trackingid';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -19581,6 +19660,7 @@ function getControlDefaultValue(control,) {
       case 'scrollsectionref':
       case 'customcursor':
       case 'cursor':
+      case 'trackingid':
         return void 0;
       default:
         shouldBeNever(control,);
@@ -23120,13 +23200,12 @@ var SharedIntersectionObserver = class {
   constructor(options,) {
     __publicField(this, 'sharedIntersectionObserver',);
     __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
-    if (!document) return;
-    this.sharedIntersectionObserver = new IntersectionObserver(this.resizeObserverCallback.bind(this,), options,);
+    this.sharedIntersectionObserver = new IntersectionObserver(this.intersectionObserverCallback.bind(this,), options,);
   }
-  resizeObserverCallback(entries, observer2,) {
+  intersectionObserverCallback(entries, observer2,) {
     for (const entry of entries) {
       const callbackForElement = this.callbacks.get(entry.target,);
-      if (callbackForElement) callbackForElement([entry,], observer2,);
+      if (callbackForElement) callbackForElement(entry, observer2,);
     }
   }
   observeElementWithCallback(element, callback,) {
@@ -23145,25 +23224,24 @@ var SharedIntersectionObserver = class {
   }
 };
 var SharedIntersectionObserverContext = /* @__PURE__ */ createContext(/* @__PURE__ */ new Map(),);
-function useSharedIntersectionObserver(ref, callback, options,) {
+function _useSharedIntersectionObserver(ref, callback, options,) {
   const key7 = useConstant2(() => `${options.rootMargin}`);
   const observers2 = useContext(SharedIntersectionObserverContext,);
   const {
     enabled,
+    root,
+    rootMargin,
+    threshold,
   } = options;
   useRefEffect(ref, (element) => {
-    var _a;
     if (!enabled) return;
     if (element === null) return;
     let observer2 = observers2.get(key7,);
-    if (!observer2 || observer2.root !== ((_a = options.root) == null ? void 0 : _a.current)) {
-      const {
-        root,
-        ...rest
-      } = options;
+    if (!observer2 || observer2.root !== (root == null ? void 0 : root.current)) {
       observer2 = new SharedIntersectionObserver({
-        ...rest,
         root: root == null ? void 0 : root.current,
+        rootMargin,
+        threshold,
       },);
       observers2.set(key7, observer2,);
     }
@@ -23171,8 +23249,9 @@ function useSharedIntersectionObserver(ref, callback, options,) {
     return () => {
       observer2 == null ? void 0 : observer2.unobserve(element,);
     };
-  }, [enabled,],);
+  }, [enabled, callback, root, rootMargin, threshold,],);
 }
+var useSharedIntersectionObserver = typeof IntersectionObserver === 'undefined' ? noop2 : _useSharedIntersectionObserver;
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
 var ViewportContext = /* @__PURE__ */ React4.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
@@ -23186,8 +23265,7 @@ function useAppearEffect(ref, appearCallback, options,) {
     threshold,
     rootMargin = `0px 0px 0px 0px`,
   } = options;
-  const callback = React4.useCallback(([entry,],) => {
-    if (!entry) return;
+  const callback = React4.useCallback((entry) => {
     const {
       isInView,
       hasAnimatedOnce,
@@ -29889,7 +29967,14 @@ function useFXValues(values, enabled,) {
   }, [effect, enabled,],);
   return effect;
 }
-var loopOptionsKeys = /* @__PURE__ */ new Set(['loopEffectEnabled', 'loopTransition', 'loop', 'loopRepeatType', 'loopRepeatDelay',],);
+var loopOptionsKeys = /* @__PURE__ */ new Set([
+  'loopEffectEnabled',
+  'loopTransition',
+  'loop',
+  'loopRepeatType',
+  'loopRepeatDelay',
+  'loopPauseOffscreen',
+],);
 var useDelay = () => {
   const timeoutRef = useRef();
   useEffect(() => {
@@ -29910,12 +29995,13 @@ function useLoop({
   loopTransition,
   loopRepeatType,
   loop,
-},) {
+  loopPauseOffscreen,
+}, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const values = useConstant2(makeFXValues,);
-  const mirrorStateRef = React4.useRef(false,);
+  const mirrorStateRef = useRef(false,);
   const delay2 = useDelay();
-  const animateValues = async () => {
+  const animateValues = useCallback(async () => {
     if (!loop) return;
     const transition = loopTransition || void 0;
     const mirror = mirrorStateRef.current && loopRepeatType === 'mirror';
@@ -29936,14 +30022,22 @@ function useLoop({
         }
       },);
     },),);
-  };
-  const start = async () => {
-    if (!loopEffectEnabled) return;
+  }, [loop, loopRepeatType, loopTransition, shouldReduceMotion,],);
+  const [isRunning, setIsRunning,] = useState(false,);
+  const shouldRunRef = useRef(false,);
+  const animateLoop = useCallback(async () => {
+    if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues();
     await delay2(loopRepeatDelay ?? 0,);
-    await start();
-  };
-  const stop = useCallback(() => {
+    await animateLoop();
+  }, [animateValues, delay2, loopEffectEnabled, loopRepeatDelay,],);
+  const start = useCallback(() => {
+    if (shouldRunRef.current) return;
+    shouldRunRef.current = true;
+    startTransition2(() => setIsRunning(true,));
+    void animateLoop();
+  }, [animateLoop,],);
+  const stop = useCallback((overrideRunRef = true,) => {
     effectValuesKeys.forEach((key7) => {
       values[key7].stop();
     },);
@@ -29951,25 +30045,59 @@ function useLoop({
       values[key7].set(defaultFXValues[key7],);
     },);
     mirrorStateRef.current = false;
-  }, [values,],);
-  React4.useEffect(() => {
-    if (loopEffectEnabled && loop) {
+    if (overrideRunRef) {
+      shouldRunRef.current = false;
+      startTransition2(() => setIsRunning(false,));
+    }
+  }, [],);
+  const hasLoop = loopEffectEnabled && loop;
+  const startStopTabVisibilityListener = useCallback(() => {
+    if (document.hidden) {
+      stop(false,);
+    } else if (shouldRunRef.current) {
+      shouldRunRef.current = false;
+      start();
+    }
+  }, [start, stop,],);
+  useEffect(() => {
+    if (!hasLoop) return;
+    document.addEventListener('visibilitychange', startStopTabVisibilityListener,);
+    return () => {
+      document.removeEventListener('visibilitychange', startStopTabVisibilityListener,);
+    };
+  }, [hasLoop, startStopTabVisibilityListener,],);
+  useEffect(() => {
+    if (hasLoop && loopPauseOffscreen) return;
+    if (hasLoop) {
       start();
     } else {
       stop();
     }
+  }, [start, stop, loopPauseOffscreen, hasLoop,],);
+  useEffect(() => {
     return () => stop();
-  }, [loopEffectEnabled,],);
-  return React4.useMemo(() => {
+  }, [],);
+  const startAndStopBasedOnIntersection = useCallback((entry) => {
+    if (entry.isIntersecting) {
+      start();
+    } else {
+      stop();
+    }
+  }, [start, stop,],);
+  useSharedIntersectionObserver(ref, startAndStopBasedOnIntersection, {
+    enabled: hasLoop && loopPauseOffscreen,
+  },);
+  const addWillChange = isRunning || !loopPauseOffscreen;
+  return useMemo(() => {
     return {
       values,
-      style: loopEffectEnabled
+      style: hasLoop && addWillChange
         ? {
           willChange: 'transform',
         }
         : {},
     };
-  }, [values, loopEffectEnabled,],);
+  }, [hasLoop, addWillChange,],);
 }
 function parallaxTransform(scrollY, originalPosition, speed, offset, adjustPosition,) {
   const speedFactor = speed / 100 - 1;
@@ -30705,7 +30833,7 @@ var withFX = (Component18) =>
     const {
       values: loopValues,
       style: loopStyle,
-    } = useLoop(loop,);
+    } = useLoop(loop, observerRef,);
     const fxValues = React4.useMemo(() => {
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
@@ -30854,13 +30982,16 @@ function createHook(forwardedRef,) {
       if (React2.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state2.forwardedRef, ownRef,);
-        const newProps = state2.ref !== ownRef
-          ? {
-            ...props,
-            ref: state2.ref,
-          }
-          : props;
-        return React2.cloneElement(child, newProps,);
+        const newProps = isFunction(props,) ? props(child.props,) : props;
+        return React2.cloneElement(
+          child,
+          state2.ref !== ownRef
+            ? {
+              ...newProps,
+              ref: state2.ref,
+            }
+            : newProps,
+        );
       }
       return child;
     },);
@@ -32635,94 +32766,6 @@ function getObserveRouteForPreloadingFn() {
 var observeRouteForPreloading =
   // this also guards `window`
   !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
-var isPressing = /* @__PURE__ */ new WeakSet();
-function filterEvents(callback,) {
-  return (event) => {
-    if (event.key !== 'Enter') return;
-    callback(event,);
-  };
-}
-function firePointerEvent(target, type,) {
-  target.dispatchEvent(
-    new PointerEvent('pointer' + type, {
-      isPrimary: true,
-      bubbles: true,
-    },),
-  );
-}
-var enableKeyboardPress = (focusEvent, eventOptions,) => {
-  const element = focusEvent.currentTarget;
-  if (!element) return;
-  const handleKeydown = filterEvents(() => {
-    if (isPressing.has(element,)) return;
-    firePointerEvent(element, 'down',);
-    const handleKeyup = filterEvents(() => {
-      firePointerEvent(element, 'up',);
-    },);
-    const handleBlur = () => firePointerEvent(element, 'cancel',);
-    element.addEventListener('keyup', handleKeyup, eventOptions,);
-    element.addEventListener('blur', handleBlur, eventOptions,);
-  },);
-  element.addEventListener('keydown', handleKeydown, eventOptions,);
-  element.addEventListener('blur', () => element.removeEventListener('keydown', handleKeydown,), eventOptions,);
-};
-function isPointerEvent(event,) {
-  return 'pointerId' in event;
-}
-var isPrimaryPointer2 = (event) => {
-  if (event.pointerType === 'mouse') {
-    return typeof event.button !== 'number' || event.button <= 0;
-  } else {
-    return event.isPrimary !== false;
-  }
-};
-function isValidPressEvent(event,) {
-  return isPointerEvent(event,) && isPrimaryPointer2(event,);
-}
-var isNodeOrChild2 = (parent, child,) => {
-  if (!child) {
-    return false;
-  } else if (parent === child) {
-    return true;
-  } else {
-    return isNodeOrChild2(parent, child.parentElement,);
-  }
-};
-function press(element, onPressEnd,) {
-  const gestureAbortController = new AbortController();
-  const cancel = () => gestureAbortController.abort();
-  const eventOptions = {
-    passive: true,
-    signal: gestureAbortController.signal,
-  };
-  const startPress = (startEvent) => {
-    const target = startEvent.currentTarget;
-    if (!isValidPressEvent(startEvent,) || isPressing.has(target,)) return;
-    isPressing.add(target,);
-    const onPointerEnd = (endEvent, success,) => {
-      window.removeEventListener('pointerup', onPointerUp,);
-      window.removeEventListener('pointercancel', onPointerCancel,);
-      if (!isValidPressEvent(endEvent,) || !isPressing.has(target,)) {
-        return;
-      }
-      isPressing.delete(target,);
-      if (success && typeof onPressEnd === 'function') {
-        onPressEnd(endEvent,);
-      }
-    };
-    const onPointerUp = (upEvent) => {
-      onPointerEnd(upEvent, isNodeOrChild2(target, upEvent.target,),);
-    };
-    const onPointerCancel = (cancelEvent) => {
-      onPointerEnd(cancelEvent, false,);
-    };
-    window.addEventListener('pointerup', onPointerUp, eventOptions,);
-    window.addEventListener('pointercancel', onPointerCancel, eventOptions,);
-  };
-  element.addEventListener('pointerdown', startPress, eventOptions,);
-  element.addEventListener('focus', (event) => enableKeyboardPress(event, eventOptions,), eventOptions,);
-  return cancel;
-}
 var noLocale = Symbol('noLocale',);
 var resolveSlugCache = /* @__PURE__ */ new Map();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -33080,7 +33123,9 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   href,
   openInNewTab,
   smoothScroll,
+  clickTrackingId,
   nodeId,
+  motionChild,
   ...restProps
 }, forwardedRef,) {
   const router = useRouter();
@@ -33133,34 +33178,70 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   }, [observerCallback,],);
   const {
     navigate: _,
-    onClick,
     ...linkProps
   } = props;
-  const shouldReplaceClickWithPress = Boolean(isIOS() && onClick,);
-  useRefEffect(observerRef, (node) => {
-    if (!shouldReplaceClickWithPress) return;
-    if (node === null) return;
-    const cancel = press(node, onClick,);
-    return () => {
-      if (!observerRef.current) cancel();
-    };
-  }, [shouldReplaceClickWithPress, onClick,],);
-  const onClickProp = onClick
-    ? {
-      // If we've replaced the click handler with press, make onClick noop so we don't try to
-      // respond to the pointer event twice.
-      onClick: shouldReplaceClickWithPress ? noopOnClick : onClick,
-    }
-    : {};
-  const el = clone.cloneAsArray(children, {
-    ...restProps,
-    ...linkProps,
-    ...onClickProp,
-    ref: observerRef,
-  },);
+  const el = clone.cloneAsArray(children, (childProps) =>
+    cloneChildPropsWithAggregatedEvents(childProps, {
+      ...restProps,
+      ...rebindEventHandlersIfNeeded(linkProps, motionChild,),
+    }, observerRef,),);
   return getChildren(el,);
 },),);
-function noopOnClick(event,) {
+function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,) {
+  const aggregatedProps = {
+    ...childProps,
+    ...linkProps,
+    ref: observerRef,
+  };
+  const {
+    onTap,
+    onClick,
+  } = linkProps;
+  if (!onTap && !onClick) {
+    return aggregatedProps;
+  }
+  const {
+    onClick: childOnClick,
+    onTap: childOnTap,
+  } = childProps;
+  return {
+    ...aggregatedProps,
+    onClick: onClick || childOnClick
+      ? (event) => {
+        if (isFunction(childOnClick,)) {
+          childOnClick == null ? void 0 : childOnClick(event,);
+        }
+        onClick == null ? void 0 : onClick(event,);
+      }
+      : void 0,
+    onTap: onTap || childOnTap
+      ? (event, info,) => {
+        if (isFunction(childOnTap,)) {
+          childOnTap == null ? void 0 : childOnTap(event, info,);
+        }
+        onTap == null ? void 0 : onTap(event, info,);
+      }
+      : void 0,
+  };
+}
+function rebindEventHandlersIfNeeded(linkProps, motionChild,) {
+  const shouldReplaceClickWithTap = Boolean(motionChild && isIOS(),);
+  if (!shouldReplaceClickWithTap) return linkProps;
+  const {
+    onClick: navigationHandler,
+  } = linkProps;
+  if (!navigationHandler) return linkProps;
+  return {
+    ...linkProps,
+    onTap: navigationHandler,
+    // If we're already routing via onTap, prevent default onClick so that we don't trigger a
+    // native anchor link navigation.
+    onClick: preventClickOnNativeAnchorLink,
+  };
+}
+function preventClickOnNativeAnchorLink(event,) {
+  const anchorElement = findAnchorElement(event.target,);
+  if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
   event.preventDefault();
 }
 var ParentLinkContext = /* @__PURE__ */ createContext(void 0,);
@@ -44534,6 +44615,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     opacity: isHidden ? 0 : opacity,
     flexShrink: 0,
   };
+  const positionStyle = {};
   const restrictedRenderTarget = RenderTarget.hasRestrictions();
   const frame2 = calculateRect(props, parentSize || 0, false,);
   const isAutoSized2 = _usesDOMRect && (width === 'auto' || height === 'auto');
@@ -44541,8 +44623,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
   if (!withExternalLayout) {
     if (frame2 && restrictedRenderTarget && !isAutoSized2) {
-      containerStyle.x = frame2.x;
-      containerStyle.y = frame2.y;
+      positionStyle.x = frame2.x + (isNumber2(style == null ? void 0 : style.x,) ? style.x : 0);
+      positionStyle.y = frame2.y + (isNumber2(style == null ? void 0 : style.y,) ? style.y : 0);
       containerStyle.rotate = Animatable.getNumber(rotation,);
       containerStyle.width = frame2.width;
       containerStyle.minWidth = frame2.width;
@@ -44575,7 +44657,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   if (willChangeTransform) {
     forceLayerBackingWithCSSProperties(containerStyle,);
   }
-  Object.assign(containerStyle, _initialStyle, style,);
+  Object.assign(containerStyle, _initialStyle, style, positionStyle,);
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
@@ -45589,6 +45671,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         target,
         rel,
         onClick,
+        onTap,
       } = this.props;
       const hasTitleOrDescription = title || description;
       return /* @__PURE__ */ jsxs(MotionComponent, {
@@ -45606,11 +45689,12 @@ var SVGComponent = /* @__PURE__ */ (() => {
         'aria-label': title,
         'aria-description': description,
         'aria-hidden': hasTitleOrDescription ? void 0 : 'true',
+        onTap,
+        onClick,
         ...{
           href,
           target,
           rel,
-          onClick,
         },
         children: [content, /* @__PURE__ */ jsx(SVGStyleSheet, {},),],
       },);
@@ -47506,6 +47590,7 @@ export {
   useLocale,
   useLocaleCode,
   useLocaleInfo,
+  useLocalesForCurrentRoute,
   useLocalizationInfo,
   useMeasureLayout,
   useMotionTemplate,
