@@ -323,13 +323,15 @@ export function AdaptedLink({
 }
 
 export function ContextProviders({
-    locale,
+    locale: locale_,
     children,
     framerSiteId,
     routes,
     // collectionUtils,
     locales,
 }) {
+    const context = useContext(unframerContext)
+    const locale = locale_ || context?.locale
     const activeLocale = locales?.find(
         (l) => l.slug === locale || l.code === locale || l.id === locale,
     )
@@ -349,17 +351,6 @@ export function ContextProviders({
                 <FormContext.Provider value={framerSiteId}>
                     <LocaleInfoContext value={localeInfo}>
                         <routesContext.Provider value={routes}>
-                            {/* <Router
-                                initialRoute='x'
-                                routes={{
-                                    x: { page: children, path: '/' },
-                                    ...routes,
-                                }}
-                                locales={locales}
-                                initialLocaleId={activeLocale?.id}
-                            >
-                                {children}
-                            </Router> */}
                             {children}
                         </routesContext.Provider>
                     </LocaleInfoContext>
@@ -368,12 +359,6 @@ export function ContextProviders({
         </FetchClientProvider>
     )
 }
-
-const isFunction = (value: any): value is Function => {
-    return typeof value === 'function'
-}
-
-var framerCSSMarker = 'data-framer-css-ssr'
 
 /**
  * Add Unframer debug information to debug websites using Unframer
@@ -400,6 +385,7 @@ function isEmpty(obj: Record<any, any>) {
 
 type UnframerProviderProps = {
     navigate?: (url: string) => void
+    locale?: string
     children: React.ReactNode
 }
 
