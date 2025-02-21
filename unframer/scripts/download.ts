@@ -217,6 +217,16 @@ export async function fixFramerCode({ resultFile }) {
         `font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))`,
         `font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))`,
     )
+    // Fix fetchpriority -> fetchPriority casing
+    codeAfter = codeAfter.replace(
+        /fetchpriority: image\.fetchPriority,/g,
+        'fetchPriority: image.fetchPriority,',
+    )
+    // Add suppressHydrationWarning prop to svgContainer elements
+    codeAfter = codeAfter.replace(
+        /className: 'svgContainer',/g,
+        'className: \'svgContainer\', suppressHydrationWarning: true,'
+    )
     codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }

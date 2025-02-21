@@ -564,17 +564,18 @@ export async function bundle({
         'exampleComponent?.propertyControls',
         exampleComponent?.propertyControls,
     )
-    const prop =
-        findExampleProperty(exampleComponent?.propertyControls) ||
-        'exampleFramerVariable'
-    const responsiveComponent = (() => {
-        return dedent`
-            {/* use .Responsive for components with breakpoints */}
-            <${exampleComponent?.componentName}.Responsive
-                ${prop}='example' 
-            />
-            `
-    })()
+    const prop = findExampleProperty(exampleComponent?.propertyControls)
+    const propStr = prop ? ` ${prop}='example'` : ''
+    const responsiveComponent = dedent`
+    {/* use .Responsive for components with breakpoints, remove it if you want to pass a specific variant */}
+    <${exampleComponent?.componentName}.Responsive${propStr} />
+    `
+    const nonResponsiveComponent = dedent`
+    <${exampleComponent?.componentName}
+        ${prop}='example'
+        style={{ width: '100%' }}
+    />
+    `
     const exampleCode = dedent`
     import './${outDirForExample}/styles.css'
     // this file imported below is generated when you run \`npm run framer\`
@@ -585,10 +586,6 @@ export async function bundle({
     export default function App() {
         return (
             <div className='flex flex-col'>
-                <${exampleComponent?.componentName}
-                    ${prop}='example'
-                    style={{ width: '100%' }}
-                />
                 ${responsiveComponent
                     .split('\n')
                     .map((line, i) => (!i ? line : '            ' + line))
