@@ -14,7 +14,7 @@ import {
   className,
   css,
   fonts
-} from "./chunks/chunk-DIIHDSYZ.js";
+} from "./chunks/chunk-PGXTBGNK.js";
 import {
   className as className3,
   css as css3,
@@ -25,7 +25,7 @@ import {
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/wvzv6iAS6Bjw6GvndtCz/m5keEQA6U.js
+// /:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/FgpMz097ScdmqPPCKXSD/m5keEQA6U.js
 import { jsx as _jsx2, jsxs as _jsxs2 } from "react/jsx-runtime";
 import { addFonts, addPropertyControls as addPropertyControls2, ComponentViewportProvider, ControlType as ControlType2, cx, getFonts, getFontsFromSharedStyle, getLoadingLazyAtYPosition, Image, Link, ResolveLinks, RichText, SmartComponentScopedContainer, useComponentViewport, useLocaleInfo, useRouter as useRouter2, useVariantState, withCSS as withCSS2 } from "unframer";
 import { LayoutGroup, motion as motion2, MotionConfigContext } from "unframer";
@@ -256,7 +256,7 @@ var fonts4 = [{ explicitInter: true, fonts: [] }];
 var css4 = ['.framer-NXUh0 .framer-styles-preset-1fr0mxk:not(.rich-text-wrapper), .framer-NXUh0 .framer-styles-preset-1fr0mxk.rich-text-wrapper a { --framer-link-current-text-decoration: none; --framer-link-hover-text-color: var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, #ffffff) /* {"name":"Heading"} */; --framer-link-hover-text-decoration: none; --framer-link-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-link-text-decoration: none; transition: color 0.4s cubic-bezier(0.44, 0, 0.56, 1) 0s; }'];
 var className4 = "framer-NXUh0";
 
-// /:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/wvzv6iAS6Bjw6GvndtCz/m5keEQA6U.js
+// /:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/FgpMz097ScdmqPPCKXSD/m5keEQA6U.js
 var ElementsLogoFonts = getFonts(stdin_default);
 var InputFonts = getFonts(stdin_default2);
 var cycleOrder = ["ByvYcqeqt", "kdbCtkU1X", "Gz1rE_I8V"];

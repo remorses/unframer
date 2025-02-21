@@ -14,6 +14,9 @@ export interface Props {
     height?: any
     layoutId?: string
     "variant"?: 'Desktop' | 'Tablet' | 'Phone'
+    "ctaLink"?: string
+    "subheading"?: string
+    "onClick"?: Function
 }
 
 const SectionHeroFramerComponent = (props: Props) => any

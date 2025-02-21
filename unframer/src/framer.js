@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.5OTHFUFR.mjs
+// /:https://app.framerstatic.com/framer.2CFFWP7W.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -13358,21 +13358,42 @@ function useRouteAnchor(routeId, {
 }
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
-  if (currentRoute.collectionId) {
-    return localesForCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,);
+  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
+    activeLocale,
+    locales,
+    currentRoute,
+    pathVariables,
+    collectionUtils,
+  );
+  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
+  const localesForCurrentRoute = [];
+  for (const locale of locales) {
+    if (includedLocalesForCurrentRoute) {
+      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
+    }
+    if (slugByLocaleIfCollectionPage) {
+      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
+      if (!hasSlug) continue;
+    }
+    localesForCurrentRoute.push(locale,);
   }
-  return localesForPage(activeLocale, locales, currentRoute,);
+  return localesForCurrentRoute;
 }
-async function localesForCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   var _a;
-  if (!pathVariables || !currentRoute.collectionId || !activeLocale) return locales;
+  const {
+    collectionId,
+  } = currentRoute;
+  if (!collectionId) return null;
+  if (!activeLocale) return null;
+  if (!pathVariables) return null;
   const {
     path,
   } = currentRoute;
-  if (!path) return locales;
+  if (!path) return null;
   const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
   const lastMatch = matches.pop();
-  if (!lastMatch) return locales;
+  if (!lastMatch) return null;
   const pathVariableWithDelimiter = lastMatch == null ? void 0 : lastMatch[0];
   const pathVariableValue = lastMatch == null ? void 0 : lastMatch[1];
   if (!pathVariableWithDelimiter || !pathVariableValue) {
@@ -13383,24 +13404,17 @@ async function localesForCollectionPage(activeLocale, locales, currentRoute, pat
     throw new Error(`No slug found for path variable ${pathVariableValue}`,);
   }
   const utils =
-    await ((_a = collectionUtils == null ? void 0 : collectionUtils[currentRoute.collectionId]) == null
-      ? void 0
-      : _a.call(collectionUtils,));
-  if (!utils) return locales;
+    await ((_a = collectionUtils == null ? void 0 : collectionUtils[collectionId]) == null ? void 0 : _a.call(collectionUtils,));
+  if (!utils) return null;
   const recordId = await utils.getRecordIdBySlug(currentSlug, activeLocale,);
-  if (!recordId) return locales;
-  const filteredLocalesWithEmpties = await Promise.all(locales.map(async (locale) => {
+  if (!recordId) return null;
+  const slugById = /* @__PURE__ */ new Map();
+  await Promise.all(locales.map(async (locale) => {
     const slug = await utils.getSlugByRecordId(recordId, locale,);
-    return slug ? locale : void 0;
+    if (!slug) return;
+    slugById.set(locale.id, slug,);
   },),);
-  const filteredLocales = filteredLocalesWithEmpties.filter((locale) => !isUndefined(locale,));
-  return filteredLocales;
-}
-function localesForPage(activeLocale, locales, currentRoute,) {
-  if (!activeLocale) return locales;
-  const includedLocales = currentRoute.includedLocales;
-  if (!includedLocales) return locales;
-  return locales.filter((locale) => includedLocales.includes(locale.id,));
+  return slugById;
 }
 var noopAsync = async () => {};
 var defaultLocaleInfo = {
@@ -21420,7 +21434,7 @@ function StaticImage({
     jsx('img', {
       ref: imageRef,
       decoding: syncDecoding ? 'sync' : 'async',
-      fetchpriority: image.fetchPriority,
+      fetchPriority: image.fetchPriority,
       loading: image.loading,
       sizes: image.sizes,
       srcSet: image.srcSet,
@@ -31373,35 +31387,45 @@ var Container = /* @__PURE__ */ withGeneratedLayoutId(ContainerInner,);
 var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, ref,) => {
   const {
     as,
-    layoutId,
+    children,
+    // Code boundary-specific props
     scopeId,
     nodeId,
     isAuthoredByUser,
     rendersWithMotion,
     isModuleExternal,
     inComponentSlot,
-    style,
-    children,
-    ...renderableProps
+    // Other props, including some possibly used-passed ones
+    ...otherProps
   } = props;
   const childrenWithCodeBoundary = useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,);
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
     const Component18 = htmlElementAsMotionComponent(tagName,);
     return /* @__PURE__ */ jsx(Component18, {
+      ...otherProps,
       ref,
       style: props.style,
-      ...renderableProps,
       children: childrenWithCodeBoundary,
     },);
   } else {
     const Component18 = tagName;
-    return /* @__PURE__ */ jsx(Component18, {
-      ref,
-      style: props.style,
-      ...renderableProps,
-      children: childrenWithCodeBoundary,
-    },);
+    const {
+      layoutId,
+      layoutDependency,
+      ...plainHTMLRenderableProps
+    } = otherProps;
+    return (
+      // Passing `props.style` explicitly to allow TypeScript to narrow the type of `props.style` according
+      // to the value of `props.rendersWithMotion`.
+      /* @__PURE__ */
+      jsx(Component18, {
+        ...plainHTMLRenderableProps,
+        ref,
+        style: props.style,
+        children: childrenWithCodeBoundary,
+      },)
+    );
   }
 },);
 function useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isExternalComponent, inComponentSlot,) {
@@ -34311,9 +34335,6 @@ var _FetchClient = class {
       try {
         const response = await fetch(request.url, {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
           credentials: request.credentials,
         },);
         if (!response.ok) {
@@ -45655,7 +45676,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           children: [
             fillElement,
             /* @__PURE__ */ jsx('div', {
-              className: 'svgContainer',
+              className: 'svgContainer', suppressHydrationWarning: true,
               style: innerStyle,
               ref: this.container,
               dangerouslySetInnerHTML: {

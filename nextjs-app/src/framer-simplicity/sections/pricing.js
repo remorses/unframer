@@ -4,11 +4,11 @@
 "use client";
 import {
   stdin_default
-} from "../chunks/chunk-D7Q37PCA.js";
+} from "../chunks/chunk-57ITGDZQ.js";
 import "../chunks/chunk-N2K3P4T2.js";
 import "../chunks/chunk-D4IPCJGN.js";
 import "../chunks/chunk-BTSBQWPZ.js";
-import "../chunks/chunk-DIIHDSYZ.js";
+import "../chunks/chunk-PGXTBGNK.js";
 
 // virtual:sections/pricing
 import { Fragment } from "react";
