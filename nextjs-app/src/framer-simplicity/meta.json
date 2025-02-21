@@ -462,8 +462,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
-      "bytes": 14194,
+    "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/LHz3bw67SqHRmnCKTlE6/Ticker.js": {
+      "bytes": 12733,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -515,8 +515,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js": {
-      "bytes": 53637,
+    "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/WWEquI82OywT67jASbI1/HOWKuDHCy.js": {
+      "bytes": 54478,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -539,9 +539,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js",
+          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/LHz3bw67SqHRmnCKTlE6/Ticker.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js"
+          "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/LHz3bw67SqHRmnCKTlE6/Ticker.js"
         },
         {
           "path": "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js",
@@ -575,9 +575,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js",
+          "path": "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/WWEquI82OywT67jASbI1/HOWKuDHCy.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js"
+          "original": "https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/WWEquI82OywT67jASbI1/HOWKuDHCy.js"
         },
         {
           "path": "unframer",
@@ -659,8 +659,8 @@
       ],
       "format": "esm"
     },
-    "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js": {
-      "bytes": 51056,
+    "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/HCclcTJUJiLOReYO6QPL/MPskWHg5T.js": {
+      "bytes": 50821,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -683,9 +683,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js",
+          "path": "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/LHz3bw67SqHRmnCKTlE6/Ticker.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js"
+          "original": "https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/LHz3bw67SqHRmnCKTlE6/Ticker.js"
         },
         {
           "path": "/:https://framerusercontent.com/modules/6oEKB71z02RSDbojsfvF/kzeEsDf8zO1EvIeAUjtp/CWRpkcDNO.js",
@@ -709,9 +709,9 @@
           "external": true
         },
         {
-          "path": "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js",
+          "path": "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/HCclcTJUJiLOReYO6QPL/MPskWHg5T.js",
           "kind": "import-statement",
-          "original": "https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js"
+          "original": "https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/HCclcTJUJiLOReYO6QPL/MPskWHg5T.js"
         },
         {
           "path": "unframer",
@@ -3273,7 +3273,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-LHJSV2JE.js",
+          "path": "chunks/chunk-IH7WK4VG.js",
           "kind": "import-statement"
         },
         {
@@ -3333,11 +3333,11 @@
         "virtual:section-large-testimonial": {
           "bytesInOutput": 1701
         },
-        "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/8XuZGU19PJfYx8f5IU0x/HOWKuDHCy.js": {
-          "bytesInOutput": 52209
+        "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/WWEquI82OywT67jASbI1/HOWKuDHCy.js": {
+          "bytesInOutput": 53050
         }
       },
-      "bytes": 54430
+      "bytes": 55271
     },
     "chunks/chunk-BTSBQWPZ.js": {
       "imports": [
@@ -3455,7 +3455,7 @@
     "section-logos.js": {
       "imports": [
         {
-          "path": "chunks/chunk-LHJSV2JE.js",
+          "path": "chunks/chunk-IH7WK4VG.js",
           "kind": "import-statement"
         },
         {
@@ -3511,13 +3511,13 @@
         "virtual:section-logos": {
           "bytesInOutput": 1701
         },
-        "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/fc9BlW2pbIjh8ldqGVcS/MPskWHg5T.js": {
-          "bytesInOutput": 49944
+        "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/HCclcTJUJiLOReYO6QPL/MPskWHg5T.js": {
+          "bytesInOutput": 49709
         }
       },
-      "bytes": 51982
+      "bytes": 51747
     },
-    "chunks/chunk-LHJSV2JE.js": {
+    "chunks/chunk-IH7WK4VG.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3549,11 +3549,11 @@
         "Ticker"
       ],
       "inputs": {
-        "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/XVUmpmPn1EPL0dzocT35/Ticker.js": {
-          "bytesInOutput": 13653
+        "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/LHz3bw67SqHRmnCKTlE6/Ticker.js": {
+          "bytesInOutput": 12194
         }
       },
-      "bytes": 13770
+      "bytes": 12311
     },
     "section-features.js": {
       "imports": [
