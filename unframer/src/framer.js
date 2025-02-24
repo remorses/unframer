@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.2CFFWP7W.mjs
+// /:https://app.framerstatic.com/framer.S75FMW2W.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -16071,10 +16071,15 @@ var mockWindow = {
   scrollX: 0,
   scrollY: 0,
   location: {
+    hash: '',
+    hostname: '',
     href: '',
+    origin: '',
     pathname: '',
+    search: '',
   },
   document: {
+    baseURI: '',
     cookie: '',
   },
   setTimeout: () => 0,
@@ -19028,6 +19033,7 @@ var richTextCSSRules = [
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
         blockquote.framer-text:not(:first-child),
+        table.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -32565,6 +32571,283 @@ var LazyValue = class {
     }
   }
 };
+var salt = 'framer';
+var difficulty = 3;
+var tokenLength = 30;
+var maxTime = 1e4;
+async function calculateProofOfWork() {
+  const target = '0'.repeat(difficulty,);
+  const startTime = Date.now();
+  let processing = true;
+  while (processing) {
+    const timestamp = Date.now();
+    if (timestamp - startTime > maxTime) {
+      processing = false;
+      return;
+    }
+    const nonce = randomCharacters(tokenLength,);
+    const secret = `${timestamp}:${nonce}`;
+    const hash2 = await sha256(salt + secret,);
+    if (hash2.startsWith(target,)) {
+      return {
+        secret,
+        hash: hash2,
+      };
+    }
+  }
+  return;
+}
+async function sha256(text,) {
+  const buffer = new TextEncoder().encode(text,);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
+  return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
+}
+function randomCharacters(count,) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < count; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
+  }
+  return result;
+}
+function getEncodedFormFieldsHeader(data2,) {
+  return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
+}
+function addUTMTagsToFormData(data2, document2,) {
+  try {
+    const matches = document2.cookie.match('(^|;) ?framerFormsUTMTags=([^;]*)(;|$)',);
+    if (matches !== null && matches[2]) {
+      const parsed = JSON.parse(decodeURIComponent(matches[2],),);
+      if (!parsed || typeof parsed !== 'object') return;
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid',].forEach((key7) => {
+        if (typeof parsed[key7] === 'string') data2.append(key7, parsed[key7],);
+      },);
+    }
+  } catch (e) {}
+}
+var pendingState = {
+  state: 'pending',
+};
+var successState = {
+  state: 'success',
+};
+var incompleteState = {
+  state: 'incomplete',
+};
+var completeState = {
+  state: 'complete',
+};
+var errorState = {
+  state: 'error',
+};
+function formReducer({
+  state: state2,
+}, {
+  type,
+},) {
+  switch (type) {
+    case 'complete':
+      if (state2 === 'error') return errorState;
+      return completeState;
+    case 'incomplete':
+      if (state2 === 'error') return errorState;
+      return incompleteState;
+    case 'submit':
+      return pendingState;
+    case 'success':
+      return successState;
+    case 'error':
+      return errorState;
+    default:
+      assertNever(type,);
+  }
+}
+function stateCanSubmitForm({
+  state: state2,
+},) {
+  return state2 === 'incomplete' || state2 === 'complete';
+}
+function preventDefault(e,) {
+  e.preventDefault();
+}
+function openExternalLinkInCurrentTab(link, formRef,) {
+  const href = isValidURL(link, false,) ? link : `https://${link}`;
+  const linkElement = document.createElement('a',);
+  linkElement.href = href;
+  linkElement.target = '_self';
+  linkElement.style.display = 'none';
+  if (!('current' in formRef && formRef.current)) return;
+  formRef.current.appendChild(linkElement,);
+  linkElement.click();
+  linkElement.remove();
+}
+var FormContext = React4.createContext(void 0,);
+var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
+  action,
+  children,
+  redirectUrl,
+  onSuccess,
+  onError,
+  onLoading,
+  ...props
+}, forwardedRef,) {
+  const fallbackRef = React4.useRef(null,);
+  const ref = forwardedRef ?? fallbackRef;
+  const router = useRouter();
+  const currentRoute = useCurrentRoute();
+  const implicitPathVariables = useImplicitPathVariables();
+  const [state2, dispatch,] = React4.useReducer(formReducer, incompleteState,);
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const projectHash = useContext(FormContext,);
+  const callbacks = React4.useRef({
+    onSuccess,
+    onError,
+    onLoading,
+  },);
+  callbacks.current = {
+    onSuccess,
+    onError,
+    onLoading,
+  };
+  async function redirectTo(link,) {
+    var _a, _b;
+    if (isString(link,)) {
+      const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables,);
+      if (!matchingRoute2) {
+        openExternalLinkInCurrentTab(link, ref,);
+        return;
+      }
+      const {
+        routeId: routeId2,
+        elementId: elementId2,
+        pathVariables: pathVariables2,
+      } = matchingRoute2;
+      (_a = router.navigate) == null ? void 0 : _a.call(router, routeId2, elementId2, pathVariables2,);
+      return;
+    }
+    assert(isLinkToWebPage(link,), 'Expected link to be either a LinkToWebPage or a string', link,);
+    const matchingRoute = await findMatchingRouteAttributesForWebPageLink(router, currentRoute, link, activeLocale, implicitPathVariables,);
+    const {
+      routeId,
+      elementId,
+      pathVariables,
+    } = matchingRoute;
+    (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, pathVariables,);
+  }
+  const handleSubmit = async (event) => {
+    var _a, _b, _c, _d, _e, _f;
+    event.preventDefault();
+    if (!action || !projectHash) return;
+    dispatch({
+      type: 'submit',
+    },);
+    const data2 = new FormData(event.currentTarget,);
+    await interactionResponse({
+      priority: 'user-blocking',
+    },);
+    addUTMTagsToFormData(data2, safeWindow.document,);
+    for (const [key7, value,] of data2) {
+      if (value instanceof File) data2.delete(key7,);
+    }
+    try {
+      (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
+      await submitForm(action, data2, projectHash,);
+      startTransition2(() =>
+        dispatch({
+          type: 'success',
+        },)
+      );
+      (_d = (_c = callbacks.current).onSuccess) == null ? void 0 : _d.call(_c,);
+      if (redirectUrl) {
+        await redirectTo(redirectUrl,);
+      }
+    } catch (error) {
+      startTransition2(() =>
+        dispatch({
+          type: 'error',
+        },)
+      );
+      (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
+      console.error(error,);
+    }
+  };
+  const handleKeyDown = (event) => {
+    const {
+      target: input,
+      currentTarget: form,
+      key: key7,
+    } = event;
+    const isTextArea = input instanceof HTMLTextAreaElement;
+    if (isTextArea) return;
+    if (key7 === 'Enter' && form.checkValidity()) {
+      event.preventDefault();
+      void handleSubmit(event,);
+    }
+  };
+  const checkValidity = async (e) => {
+    const target = e.currentTarget;
+    await interactionResponse({
+      priority: 'background',
+    },);
+    startTransition2(() =>
+      dispatch({
+        type: anyEmptyRequiredFields(target,) ? 'incomplete' : 'complete',
+      },)
+    );
+  };
+  return /* @__PURE__ */ jsx(motion.form, {
+    ...props,
+    onSubmit: stateCanSubmitForm(state2,) ? handleSubmit : preventDefault,
+    onKeyDown: handleKeyDown,
+    onChange: checkValidity,
+    ref,
+    children: children(state2,),
+  },);
+},);
+function anyEmptyRequiredFields(element,) {
+  if (element.children.length === 0) return false;
+  for (const child of element.children) {
+    if (child instanceof HTMLInputElement || child instanceof HTMLTextAreaElement || child instanceof HTMLSelectElement) {
+      if (child.required && child.value === '') return true;
+    } else {
+      const result = anyEmptyRequiredFields(child,);
+      if (result) return true;
+    }
+  }
+  return false;
+}
+async function submitForm(action, data2, projectHash,) {
+  const proofOfWork = await calculateProofOfWork();
+  if (!proofOfWork) {
+    throw new Error('Failed to calculate proof of work',);
+  }
+  const response = await fetch(action, {
+    body: data2,
+    method: 'POST',
+    headers: {
+      'Framer-Site-Id': projectHash,
+      'Framer-POW': proofOfWork.secret,
+      'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
+    },
+  },);
+  if (response.ok) {
+    return response;
+  } else {
+    const body = await response.json();
+    const error = 'Failed to submit form';
+    if (responseHasError(body,)) {
+      throw new Error(`${error} - ${body.error.message}`,);
+    }
+    throw new Error(error,);
+  }
+}
+function responseHasError(response,) {
+  return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
+    'message' in response.error && typeof response.error.message === 'string';
+}
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -32576,6 +32859,32 @@ function findAnchorElement(target, withinElement,) {
     return findAnchorElement(target.parentElement, withinElement,);
   }
   return null;
+}
+var timezone;
+var visitorLocale;
+function setTimezoneAndLocaleForTracking() {
+  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
+  timezone = resolvedDateTimeOptions.timeZone;
+  visitorLocale = resolvedDateTimeOptions.locale;
+}
+requestIdleCallback(setTimezoneAndLocaleForTracking,);
+function sendTrackingEvent(eventType, eventData,) {
+  if (!safeWindow.__framer_events) return;
+  if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
+  safeWindow.__framer_events.push([eventType, {
+    // Same base properties as in published_site_pageview
+    // from FramerPageviewTrackingScript
+    referrer: null,
+    url: safeWindow.location.href,
+    hostname: safeWindow.location.hostname || null,
+    pathname: safeWindow.location.pathname || null,
+    hash: safeWindow.location.hash || null,
+    search: safeWindow.location.search || null,
+    timezone,
+    locale: visitorLocale,
+    // Additional properties specific to custom events
+    ...eventData,
+  },],);
 }
 function ChildrenCanSuspend({
   children,
@@ -32914,14 +33223,28 @@ function getTargetAttrValue(openInNewTab, isInternal,) {
   }
   return isInternal ? void 0 : '_blank';
 }
-function propsForLink(href, openInNewTab = void 0,) {
+function propsForLink(href, openInNewTab = void 0, trackingData,) {
   const isInternal = isInternalURL(href,);
-  const anchorTarget = getTargetAttrValue(openInNewTab, isInternal,);
-  return {
-    href: href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`,
-    target: anchorTarget,
-    rel: !isInternal ? 'noopener' : void 0,
-  };
+  const target = getTargetAttrValue(openInNewTab, isInternal,);
+  const rel = !isInternal ? 'noopener' : void 0;
+  href = href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`;
+  return trackingData
+    ? {
+      href,
+      target,
+      rel,
+      onClick() {
+        sendTrackingEvent('published_site_click', {
+          href: makeUrlAbsolute(href,),
+          ...trackingData,
+        },);
+      },
+    }
+    : {
+      href,
+      target,
+      rel,
+    };
 }
 function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
   var _a, _b;
@@ -32931,8 +33254,22 @@ function performNavigation(router, routeId, elementId, combinedPathVariables, sm
   }
   (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
 }
-function createOnClickLinkHandler(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
+function makeUrlAbsolute(href,) {
+  try {
+    const url = new URL(href, safeWindow.document.baseURI,);
+    return url.origin === safeWindow.location.origin ? url.pathname + url.search + url.hash : url.href;
+  } catch {
+    return href;
+  }
+}
+function createOnClickLinkHandler(router, routeId, href, trackingData, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
+    if (trackingData) {
+      sendTrackingEvent('published_site_click', {
+        href: makeUrlAbsolute(href,),
+        ...trackingData,
+      },);
+    }
     if (event.metaKey) return;
     const anchorElement = findAnchorElement(event.target,);
     if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
@@ -33091,17 +33428,17 @@ function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRo
   const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
   return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
 }
-function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,) {
-  if (!currentRoute) return propsForLink(href, openInNewTab,);
+function propsForRoutePath(href, openInNewTab, router, currentRoute, trackingData, implicitPathVariables, smoothScroll,) {
+  if (!currentRoute) return propsForLink(href, openInNewTab, trackingData,);
   const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
-  if (!matchedRoute) return propsForLink(href, openInNewTab,);
+  if (!matchedRoute) return propsForLink(href, openInNewTab, trackingData,);
   const {
     routeId,
     route,
     elementId,
     pathVariables,
   } = matchedRoute;
-  if (!route) return propsForLink(href, openInNewTab,);
+  if (!route) return propsForLink(href, openInNewTab, trackingData,);
   const path = getPathForRoute(route, {
     // If the link is resolved, we trust that the slugs are resolved.
     currentRoutePath: currentRoute.path,
@@ -33116,7 +33453,7 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, implicitPat
   return {
     href: path,
     target: anchorTarget,
-    onClick: createOnClickLinkHandler(router, routeId, elementId, pathVariables, smoothScroll,),
+    onClick: createOnClickLinkHandler(router, routeId, path, trackingData, elementId, pathVariables, smoothScroll,),
     navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
     'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
   };
@@ -33158,13 +33495,25 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const {
     activeLocale,
   } = useLocaleInfo();
+  const framerSiteId = useContext(FormContext,);
+  const {
+    showAdvancedAnalytics,
+  } = useLibraryFeatures();
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
+  const trackingData = useMemo(() => {
+    if (!showAdvancedAnalytics) return null;
+    return {
+      framerSiteId: framerSiteId ?? null,
+      nodeId: nodeId ?? null,
+      trackingId: clickTrackingId ?? null,
+    };
+  }, [showAdvancedAnalytics, framerSiteId, nodeId, clickTrackingId,],);
   const props = useMemo(() => {
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
     if (isString(pageLink,)) {
-      return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, implicitPathVariables, smoothScroll,);
+      return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, trackingData, implicitPathVariables, smoothScroll,);
     }
     const {
       routeId,
@@ -33176,11 +33525,11 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     return {
       href: resolvedHref,
       target: anchorTarget,
-      onClick: createOnClickLinkHandler(router, routeId, elementId, pathVariables, smoothScroll,),
+      onClick: createOnClickLinkHandler(router, routeId, resolvedHref, trackingData, elementId, pathVariables, smoothScroll,),
       navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
-  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll,],);
+  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackingData,],);
   const [getChildren, replaceNestedLinksRefCallback,] = useReplaceNestedLinks(nodeId, href, props,);
   const observerCallback = useCallback((node) => {
     var _a;
@@ -33201,13 +33550,14 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     return observerCallback(node,);
   }, [observerCallback,],);
   const {
-    navigate: _,
+    navigate,
     ...linkProps
   } = props;
+  const isInternalNavigation = Boolean(navigate,);
   const el = clone.cloneAsArray(children, (childProps) =>
     cloneChildPropsWithAggregatedEvents(childProps, {
       ...restProps,
-      ...rebindEventHandlersIfNeeded(linkProps, motionChild,),
+      ...rebindEventHandlersIfNeeded(linkProps, motionChild, isInternalNavigation,),
     }, observerRef,),);
   return getChildren(el,);
 },),);
@@ -33248,19 +33598,26 @@ function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,
       : void 0,
   };
 }
-function rebindEventHandlersIfNeeded(linkProps, motionChild,) {
+function rebindEventHandlersIfNeeded(linkProps, motionChild, isInternalNavigation,) {
   const shouldReplaceClickWithTap = Boolean(motionChild && isIOS(),);
   if (!shouldReplaceClickWithTap) return linkProps;
   const {
-    onClick: navigationHandler,
+    onClick,
+    ...restProps
   } = linkProps;
-  if (!navigationHandler) return linkProps;
+  if (!onClick) return linkProps;
+  if (isInternalNavigation) {
+    return {
+      ...restProps,
+      onTap: onClick,
+      // When the link is an internal link, we're already doing SPA routing in onClick
+      // prevent the default click behavior so that we don't trigger a native anchor link navigation again.
+      onClick: preventClickOnNativeAnchorLink,
+    };
+  }
   return {
-    ...linkProps,
-    onTap: navigationHandler,
-    // If we're already routing via onTap, prevent default onClick so that we don't trigger a
-    // native anchor link navigation.
-    onClick: preventClickOnNativeAnchorLink,
+    ...restProps,
+    onTap: onClick,
   };
 }
 function preventClickOnNativeAnchorLink(event,) {
@@ -33446,283 +33803,6 @@ var IgnoreErrors = class extends Component {
     return this.props.children;
   }
 };
-var salt = 'framer';
-var difficulty = 3;
-var tokenLength = 30;
-var maxTime = 1e4;
-async function calculateProofOfWork() {
-  const target = '0'.repeat(difficulty,);
-  const startTime = Date.now();
-  let processing = true;
-  while (processing) {
-    const timestamp = Date.now();
-    if (timestamp - startTime > maxTime) {
-      processing = false;
-      return;
-    }
-    const nonce = randomCharacters(tokenLength,);
-    const secret = `${timestamp}:${nonce}`;
-    const hash2 = await sha256(salt + secret,);
-    if (hash2.startsWith(target,)) {
-      return {
-        secret,
-        hash: hash2,
-      };
-    }
-  }
-  return;
-}
-async function sha256(text,) {
-  const buffer = new TextEncoder().encode(text,);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
-  return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
-}
-function randomCharacters(count,) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < count; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
-  }
-  return result;
-}
-function getEncodedFormFieldsHeader(data2,) {
-  return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
-}
-function addUTMTagsToFormData(data2, document2,) {
-  try {
-    const matches = document2.cookie.match('(^|;) ?framerFormsUTMTags=([^;]*)(;|$)',);
-    if (matches !== null && matches[2]) {
-      const parsed = JSON.parse(decodeURIComponent(matches[2],),);
-      if (!parsed || typeof parsed !== 'object') return;
-      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid',].forEach((key7) => {
-        if (typeof parsed[key7] === 'string') data2.append(key7, parsed[key7],);
-      },);
-    }
-  } catch (e) {}
-}
-var pendingState = {
-  state: 'pending',
-};
-var successState = {
-  state: 'success',
-};
-var incompleteState = {
-  state: 'incomplete',
-};
-var completeState = {
-  state: 'complete',
-};
-var errorState = {
-  state: 'error',
-};
-function formReducer({
-  state: state2,
-}, {
-  type,
-},) {
-  switch (type) {
-    case 'complete':
-      if (state2 === 'error') return errorState;
-      return completeState;
-    case 'incomplete':
-      if (state2 === 'error') return errorState;
-      return incompleteState;
-    case 'submit':
-      return pendingState;
-    case 'success':
-      return successState;
-    case 'error':
-      return errorState;
-    default:
-      assertNever(type,);
-  }
-}
-function stateCanSubmitForm({
-  state: state2,
-},) {
-  return state2 === 'incomplete' || state2 === 'complete';
-}
-function preventDefault(e,) {
-  e.preventDefault();
-}
-function openExternalLinkInCurrentTab(link, formRef,) {
-  const href = isValidURL(link, false,) ? link : `https://${link}`;
-  const linkElement = document.createElement('a',);
-  linkElement.href = href;
-  linkElement.target = '_self';
-  linkElement.style.display = 'none';
-  if (!('current' in formRef && formRef.current)) return;
-  formRef.current.appendChild(linkElement,);
-  linkElement.click();
-  linkElement.remove();
-}
-var FormContext = React4.createContext(void 0,);
-var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
-  action,
-  children,
-  redirectUrl,
-  onSuccess,
-  onError,
-  onLoading,
-  ...props
-}, forwardedRef,) {
-  const fallbackRef = React4.useRef(null,);
-  const ref = forwardedRef ?? fallbackRef;
-  const router = useRouter();
-  const currentRoute = useCurrentRoute();
-  const implicitPathVariables = useImplicitPathVariables();
-  const [state2, dispatch,] = React4.useReducer(formReducer, incompleteState,);
-  const {
-    activeLocale,
-  } = useLocaleInfo();
-  const projectHash = useContext(FormContext,);
-  const callbacks = React4.useRef({
-    onSuccess,
-    onError,
-    onLoading,
-  },);
-  callbacks.current = {
-    onSuccess,
-    onError,
-    onLoading,
-  };
-  async function redirectTo(link,) {
-    var _a, _b;
-    if (isString(link,)) {
-      const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables,);
-      if (!matchingRoute2) {
-        openExternalLinkInCurrentTab(link, ref,);
-        return;
-      }
-      const {
-        routeId: routeId2,
-        elementId: elementId2,
-        pathVariables: pathVariables2,
-      } = matchingRoute2;
-      (_a = router.navigate) == null ? void 0 : _a.call(router, routeId2, elementId2, pathVariables2,);
-      return;
-    }
-    assert(isLinkToWebPage(link,), 'Expected link to be either a LinkToWebPage or a string', link,);
-    const matchingRoute = await findMatchingRouteAttributesForWebPageLink(router, currentRoute, link, activeLocale, implicitPathVariables,);
-    const {
-      routeId,
-      elementId,
-      pathVariables,
-    } = matchingRoute;
-    (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, pathVariables,);
-  }
-  const handleSubmit = async (event) => {
-    var _a, _b, _c, _d, _e, _f;
-    event.preventDefault();
-    if (!action || !projectHash) return;
-    dispatch({
-      type: 'submit',
-    },);
-    const data2 = new FormData(event.currentTarget,);
-    await interactionResponse({
-      priority: 'user-blocking',
-    },);
-    addUTMTagsToFormData(data2, safeWindow.document,);
-    for (const [key7, value,] of data2) {
-      if (value instanceof File) data2.delete(key7,);
-    }
-    try {
-      (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
-      await submitForm(action, data2, projectHash,);
-      startTransition2(() =>
-        dispatch({
-          type: 'success',
-        },)
-      );
-      (_d = (_c = callbacks.current).onSuccess) == null ? void 0 : _d.call(_c,);
-      if (redirectUrl) {
-        await redirectTo(redirectUrl,);
-      }
-    } catch (error) {
-      startTransition2(() =>
-        dispatch({
-          type: 'error',
-        },)
-      );
-      (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
-      console.error(error,);
-    }
-  };
-  const handleKeyDown = (event) => {
-    const {
-      target: input,
-      currentTarget: form,
-      key: key7,
-    } = event;
-    const isTextArea = input instanceof HTMLTextAreaElement;
-    if (isTextArea) return;
-    if (key7 === 'Enter' && form.checkValidity()) {
-      event.preventDefault();
-      void handleSubmit(event,);
-    }
-  };
-  const checkValidity = async (e) => {
-    const target = e.currentTarget;
-    await interactionResponse({
-      priority: 'background',
-    },);
-    startTransition2(() =>
-      dispatch({
-        type: anyEmptyRequiredFields(target,) ? 'incomplete' : 'complete',
-      },)
-    );
-  };
-  return /* @__PURE__ */ jsx(motion.form, {
-    ...props,
-    onSubmit: stateCanSubmitForm(state2,) ? handleSubmit : preventDefault,
-    onKeyDown: handleKeyDown,
-    onChange: checkValidity,
-    ref,
-    children: children(state2,),
-  },);
-},);
-function anyEmptyRequiredFields(element,) {
-  if (element.children.length === 0) return false;
-  for (const child of element.children) {
-    if (child instanceof HTMLInputElement || child instanceof HTMLTextAreaElement || child instanceof HTMLSelectElement) {
-      if (child.required && child.value === '') return true;
-    } else {
-      const result = anyEmptyRequiredFields(child,);
-      if (result) return true;
-    }
-  }
-  return false;
-}
-async function submitForm(action, data2, projectHash,) {
-  const proofOfWork = await calculateProofOfWork();
-  if (!proofOfWork) {
-    throw new Error('Failed to calculate proof of work',);
-  }
-  const response = await fetch(action, {
-    body: data2,
-    method: 'POST',
-    headers: {
-      'Framer-Site-Id': projectHash,
-      'Framer-POW': proofOfWork.secret,
-      'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
-    },
-  },);
-  if (response.ok) {
-    return response;
-  } else {
-    const body = await response.json();
-    const error = 'Failed to submit form';
-    if (responseHasError(body,)) {
-      throw new Error(`${error} - ${body.error.message}`,);
-    }
-    throw new Error(error,);
-  }
-}
-function responseHasError(response,) {
-  return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
-    'message' in response.error && typeof response.error.message === 'string';
-}
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
   if (a.pathVariables === b.pathVariables) return true;
@@ -34557,6 +34637,7 @@ function useFetchRequests(requests, disabled,) {
   }
   const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
+  const [result, setResult,] = React2.useState(() => observer2.getServerResults());
   React2.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
@@ -34564,13 +34645,18 @@ function useFetchRequests(requests, disabled,) {
     },);
   }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
-    return () => observer2.unmount();
-  }, [observer2,],);
-  const subscribe = React2.useCallback((onChange) => {
-    if (isRestoringCache || disabled) return noop3;
-    return observer2.subscribe(onChange,);
-  }, [disabled, observer2, isRestoringCache,],);
-  return React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
+    if (isRestoringCache || disabled) return;
+    const unsubscribe = observer2.subscribe(() => {
+      React2.startTransition(() => {
+        setResult(observer2.getResults(),);
+      },);
+    },);
+    return () => {
+      unsubscribe();
+      observer2.unmount();
+    };
+  }, [observer2, disabled, isRestoringCache,],);
+  return result;
 }
 function usePrefetch() {
   const fetchClient = React2.useContext(FetchClientContext,);
@@ -39674,8 +39760,8 @@ function activeBreakpointHashesFromWindow(breakpoints,) {
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext(IsInitialNavigationContext,);
-  const onCanvas = useIsOnFramerCanvas();
-  const usesMediaQueries = !onCanvas && isBrowser2();
+  const isStaticRenderer2 = useIsStaticRenderer();
+  const usesMediaQueries = !isStaticRenderer2 && isBrowser2();
   const baseVariant = useRef(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
   const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate2();
@@ -39689,7 +39775,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
         },);
       };
       var updateStateAndRerender = updateStateAndRerender2;
-      if (onCanvas) {
+      if (isStaticRenderer2) {
         updateStateAndRerender2();
       } else {
         instantTransition(() => {
@@ -39697,11 +39783,11 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
         },);
       }
     }
-  }, [instantTransition, forceUpdate,],);
+  }, [instantTransition, forceUpdate, isStaticRenderer2,],);
   useIsomorphicLayoutEffect2(() => {
-    if (!onCanvas) return;
+    if (!isStaticRenderer2) return;
     setActiveVariantInstant(initial,);
-  }, [initial, setActiveVariantInstant,],);
+  }, [initial, isStaticRenderer2, setActiveVariantInstant,],);
   useIsomorphicLayoutEffect2(() => {
     if (!hydratedWithInitial || isInitialNavigation !== true) return;
     setActiveVariantInstant(baseVariant.current,);
