@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.S75FMW2W.mjs
+// /:https://app.framerstatic.com/framer.N4OAX2AK.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -12265,11 +12265,11 @@ function isValidDate(value,) {
 function isGenerator2(value,) {
   return isObject(value,) && isFunction(value.return,);
 }
-function isBot(userAgent,) {
-  return /bot|-google|google-|yandex|ia_archiver/iu.test(userAgent,);
-}
 var noop2 = () => {};
-var shouldPreloadBasedOnUA = /* @__PURE__ */ (() => typeof window !== 'undefined' && !isBot(__unframerNavigator2.userAgent,))();
+var isBot = /* @__PURE__ */ (() => {
+  return typeof window !== 'undefined' && /bot|-google|google-|yandex|ia_archiver/iu.test(__unframerNavigator2.userAgent,);
+})();
+var shouldPreloadBasedOnUA = isBot;
 function useRoutePreloader(routeIds, enabled = true,) {
   const {
     getRoute,
@@ -26921,9 +26921,13 @@ function useInfiniteScroll({
   paginationInfo,
 },) {
   const callback = React4.useCallback((entries) => {
-    const entry = entries[0];
-    const isIntersecting = entry == null ? void 0 : entry.isIntersecting;
-    if (isIntersecting) loadMore();
+    for (let i = 0; i < entries.length; ++i) {
+      const entry = entries[i];
+      if (entry.isIntersecting) {
+        loadMore();
+        return;
+      }
+    }
   }, [loadMore,],);
   React4.useEffect(() => {
     if (!elementRef.current) return;
@@ -30265,8 +30269,7 @@ function usePresenceAnimation(
       const value = style == null ? void 0 : style[key7];
       visualElement.setBaseTarget(key7, isNumber2(value,) ? value : defaultFXValues[key7],);
     }
-  }, [animateConfig,],// This hook must only run on mount and when the animateConfig changes.
-  );
+  }, [animateConfig,],);
   const shouldReduceMotion = useReducedMotionConfig();
   useRefEffect(ref, (element) => {
     if (!enabled) {
@@ -30494,10 +30497,10 @@ function useStyleAppearEffect(options, ref,) {
   }, fromInitial,) => {
     const transitionWithFallback = transition ?? variants.animate.transition ?? options.transition;
     await animation.current;
+    const visualElement = visualElementStore.get(ref.current,);
     animation.current = Promise.all(effectValuesKeys.map((key7) => {
       if (fromInitial) effect.values[key7].set(variants.initial[key7] ?? defaultFXValues[key7],);
       const toValue = target[key7] ?? defaultFXValues[key7];
-      const visualElement = visualElementStore.get(ref.current,);
       if (visualElement && typeof toValue !== 'object') {
         visualElement.setBaseTarget(key7, toValue,);
       }
@@ -31262,23 +31265,34 @@ var DeprecatedContainerErrorBoundary = class extends Component {
     return hasError ? null : children;
   }
 };
-var ExternalComponentContext = /* @__PURE__ */ (() =>
-  React4.createContext({
-    level: 0,
-    scopeId: void 0,
-  },))();
+var ExternalComponentContext = /* @__PURE__ */ (() => React4.createContext(void 0,))();
 function useNearestExternalComponent() {
   return React4.useContext(ExternalComponentContext,);
+}
+function useFurthestExternalComponent() {
+  const nearestExternalComponent = useNearestExternalComponent();
+  const furthestExternalComponent = React4.useMemo(() => {
+    if (!nearestExternalComponent) return void 0;
+    let item = nearestExternalComponent;
+    while (item.parent && item.parent.level > 0) {
+      item = item.parent;
+    }
+    return item;
+  }, [nearestExternalComponent,],);
+  return furthestExternalComponent;
 }
 function IsExternalComponent({
   children,
   scopeId,
+  nodeId,
 },) {
-  const level = React4.useContext(ExternalComponentContext,).level;
+  const parent = useNearestExternalComponent();
   const newValue = React4.useMemo(() => ({
-    level: level + 1,
+    level: ((parent == null ? void 0 : parent.level) ?? 0) + 1,
     scopeId,
-  }), [level, scopeId,],);
+    nodeId,
+    parent,
+  }), [scopeId, nodeId, parent,],);
   return /* @__PURE__ */ jsx(ExternalComponentContext.Provider, {
     value: newValue,
     children,
@@ -31329,7 +31343,7 @@ function shouldWrapOverrideWithBoundary(
   return isNodeLocalToProject(scopeIdOfNodeWithOverride, scopeIdOfNearestExternalComponent, externalComponentLevel, inComponentSlot,);
 }
 function isNodeLocalToProject(scopeIdOfThisNode, scopeIdOfNearestExternalComponent, externalComponentLevel, inComponentSlot,) {
-  if (externalComponentLevel === 0) return true;
+  if (isUndefined(externalComponentLevel,)) return true;
   const nodeIsDefinedInSameScopeAsExternalComponent = scopeIdOfThisNode === scopeIdOfNearestExternalComponent;
   if (
     // We know a component instance is local when it’s nested inside one external component,
@@ -31448,8 +31462,8 @@ function useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, is
   }
   const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
     scopeId,
-    nearestExternalComponent.scopeId,
-    nearestExternalComponent.level,
+    nearestExternalComponent == null ? void 0 : nearestExternalComponent.scopeId,
+    nearestExternalComponent == null ? void 0 : nearestExternalComponent.level,
     isAuthoredByUser ?? false,
     isExternalComponent ?? false,
     inComponentSlot ?? false,
@@ -31464,6 +31478,7 @@ function useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, is
   if (isExternalComponent) {
     children = /* @__PURE__ */ jsx(IsExternalComponent, {
       scopeId,
+      nodeId,
       children,
     },);
   }
@@ -32470,7 +32485,7 @@ var GracefullyDegradingErrorBoundary = class extends Component {
       error = error.cause;
     }
     console.error(
-      `${isBot(__unframerNavigator2.userAgent,) ? this.message : this.messageFatal} (see above). ${
+      `${isBot ? this.message : this.messageFatal} (see above). ${
         ((_a = this.context) == null ? void 0 : _a.codeBoundaries) ? this.messageUser : this.messageReport
       }.`,
     );
@@ -32490,7 +32505,7 @@ var GracefullyDegradingErrorBoundary = class extends Component {
     const unwrappedError = 'cause' in error ? error.cause : error;
     const closingHTMLComment = /-->/gu;
     const closingHTMLCommentReplacement = '--!>';
-    const dom = isBot(__unframerNavigator2.userAgent,) ? ((_a = document.getElementById('main',)) == null ? void 0 : _a.innerHTML) || '' : // @FIXME: We should have a UI for fatal error recovery.
+    const dom = isBot ? ((_a = document.getElementById('main',)) == null ? void 0 : _a.innerHTML) || '' : // @FIXME: We should have a UI for fatal error recovery.
     // We don't have a UI for fatal error recovery currently, so we just render nothing for regular users. If we were to throw, React would unmount too.
     // We do render instead of throwing, so that:
     // - `componentDidCatch` runs (if we throw here, it does not)
@@ -32907,25 +32922,49 @@ function withChildrenCanSuspend(Component18,) {
     },);
   },);
 }
+function linkInfoKey(link,) {
+  var _a, _b;
+  return `${link.scopeId}:${link.nodeId}:${(_a = link.furthestExternalComponent) == null ? void 0 : _a.scopeId}:${
+    (_b = link.furthestExternalComponent) == null ? void 0 : _b.nodeId
+  }`;
+}
 var NestedLinksCollector = class {
   constructor() {
-    __publicField(this, 'links', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'collectedLinks', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'nestingInfo', /* @__PURE__ */ new Map(),);
   }
   clear() {
-    this.links.clear();
+    this.collectedLinks.clear();
+    this.nestingInfo.clear();
   }
+  /**
+   * Returns a Map of outer links to their inner links.
+   *
+   * NOTE: This function is called in the SSG renderer sandbox (<root>/src/ssg/src/ssg-sandbox-renderer/sandbox/worker/renderer.ts)
+   */
   getLinks() {
-    return this.links;
+    const result = /* @__PURE__ */ new Map();
+    for (const [outerLinkKey, innerLinkKeys,] of this.nestingInfo) {
+      const outerLinkInfo = this.collectedLinks.get(outerLinkKey,);
+      assert(outerLinkInfo, `Outer link not found: ${outerLinkKey}`,);
+      const links = Array.from(innerLinkKeys,).map((innerLinkKey) => {
+        const innerLinkInfo = this.collectedLinks.get(innerLinkKey,);
+        assert(innerLinkInfo, `Inner link not found: ${innerLinkKey}`,);
+        return innerLinkInfo;
+      },);
+      result.set(outerLinkInfo, links,);
+    }
+    return result;
   }
-  addLink(parentLinkNodeId, linkNodeId,) {
-    if (typeof window !== 'undefined' && true || !parentLinkNodeId || !linkNodeId) {
+  collectNestedLink(outerLink, innerLink,) {
+    if (typeof window !== 'undefined' && true || !outerLink.nodeId || !innerLink.nodeId) {
       return;
     }
-    if (!this.links.has(parentLinkNodeId,)) {
-      this.links.set(parentLinkNodeId, /* @__PURE__ */ new Set(),);
-    }
-    const entry = this.links.get(parentLinkNodeId,);
-    entry.add(linkNodeId,);
+    this.collectedLinks.set(linkInfoKey(outerLink,), outerLink,);
+    this.collectedLinks.set(linkInfoKey(innerLink,), innerLink,);
+    const outerLinkNestingInfo = this.nestingInfo.get(linkInfoKey(outerLink,),) ?? /* @__PURE__ */ new Set();
+    outerLinkNestingInfo.add(linkInfoKey(innerLink,),);
+    this.nestingInfo.set(linkInfoKey(outerLink,), outerLinkNestingInfo,);
   }
 };
 var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
@@ -33486,6 +33525,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   smoothScroll,
   clickTrackingId,
   nodeId,
+  scopeId,
   motionChild,
   ...restProps
 }, forwardedRef,) {
@@ -33499,7 +33539,6 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const {
     showAdvancedAnalytics,
   } = useLibraryFeatures();
-  const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const trackingData = useMemo(() => {
     if (!showAdvancedAnalytics) return null;
     return {
@@ -33508,7 +33547,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       trackingId: clickTrackingId ?? null,
     };
   }, [showAdvancedAnalytics, framerSiteId, nodeId, clickTrackingId,],);
-  const props = useMemo(() => {
+  const propsAddedByLink = useMemo(() => {
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
@@ -33530,36 +33569,31 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
   }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackingData,],);
-  const [getChildren, replaceNestedLinksRefCallback,] = useReplaceNestedLinks(nodeId, href, props,);
-  const observerCallback = useCallback((node) => {
+  const hasRef = isValidElement(children,) && 'ref' in children;
+  const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
+  useRefEffect(observerRef, (node) => {
     var _a;
+    if (node === null) return;
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
     const route = getRouteFromPageLink(pageLink, router, currentRoute,);
     if (!route) return;
     return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
   }, [currentRoute, href, router,],);
-  const hasRef = isValidElement(children,) && 'ref' in children;
-  const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
-  useRefEffect(observerRef, (node) => {
-    if (node === null) return;
-    replaceNestedLinksRefCallback(node,);
-  }, [replaceNestedLinksRefCallback,],);
-  useRefEffect(observerRef, (node) => {
-    if (node === null) return;
-    return observerCallback(node,);
-  }, [observerCallback,],);
+  let replacedChildren = children;
   const {
     navigate,
-    ...linkProps
-  } = props;
+    ...propsAddedByLinkExceptNavigate
+  } = propsAddedByLink;
   const isInternalNavigation = Boolean(navigate,);
-  const el = clone.cloneAsArray(children, (childProps) =>
+  const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
+  replacedChildren = clone.cloneAsArray(replacedChildren, (childProps) =>
     cloneChildPropsWithAggregatedEvents(childProps, {
       ...restProps,
-      ...rebindEventHandlersIfNeeded(linkProps, motionChild, isInternalNavigation,),
+      ...rebindEventHandlersIfNeeded(propsAddedByLinkExceptNavigate, motionChild, isInternalNavigation,),
     }, observerRef,),);
-  return getChildren(el,);
+  replacedChildren = useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
+  return replacedChildren;
 },),);
 function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,) {
   const aggregatedProps = {
@@ -33625,22 +33659,29 @@ function preventClickOnNativeAnchorLink(event,) {
   if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
   event.preventDefault();
 }
-var ParentLinkContext = /* @__PURE__ */ createContext(void 0,);
-function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
-  const parentLink = useContext(ParentLinkContext,);
-  const isOnFramerCanvas = useIsOnFramerCanvas();
+var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
+function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
+  const outerLink = useContext(OuterLinkContext,);
+  const furthestExternalComponent = useFurthestExternalComponent();
+  const innerLink = useMemo(() => ({
+    scopeId,
+    nodeId,
+    furthestExternalComponent,
+  }), [scopeId, nodeId, furthestExternalComponent,],);
   const router = useRouter();
   const currentRoute = useCurrentRoute();
-  const {
-    replaceNestedLinks,
-  } = useLibraryFeatures();
   const route = useMemo(() => {
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
     return getRouteFromPageLink(pageLink, router, currentRoute,);
   }, [currentRoute, href, router,],);
-  const isValidLink = Object.keys(propsAddedByLink,).length > 0;
-  const shouldReplaceLink = Boolean(replaceNestedLinks && !isOnFramerCanvas && (parentLink || !isValidLink),);
+  const {
+    replaceNestedLinks,
+  } = useLibraryFeatures();
+  const isOnFramerCanvas = useIsOnFramerCanvas();
+  const shouldReplaceLink = Boolean(
+    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
+  );
   const onClick = useCallback((event) => {
     var _a;
     if (!propsAddedByLink.href) return;
@@ -33675,31 +33716,43 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
   }, [propsAddedByLink, route,],);
-  const getChildren = useCallback((children) => {
-    const nestedLinkProps = {
-      'data-nested-link': true,
-      // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
-      role: 'link',
-      tabIndex: 0,
-      onClick,
-      onAuxClick,
-      onKeyDown,
-    };
-    const replacedChildren = !shouldReplaceLink ? children : Children.map(children, (child) => {
+  useRefEffect(observerRef, (node) => {
+    if (node === null) return;
+    if (!shouldReplaceLink) return;
+    node.dataset.hydrated = 'true';
+  }, [shouldReplaceLink,],);
+  let replacedChildren = children;
+  if (shouldReplaceLink) {
+    Children.forEach(children, (child) => {
+      if (!isChildReplaceable(child,)) return;
+      assert(
+        linkInfoIsCollectable(outerLink,),
+        'outerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
+      );
+      assert(
+        linkInfoIsCollectable(innerLink,),
+        'innerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
+      );
+      nestedLinksCollector.collectNestedLink(outerLink, innerLink,);
+    },);
+    replacedChildren = Children.map(children, (child) => {
       if (!isChildReplaceable(child,)) return child;
-      nestedLinksCollector.addLink(parentLink, nodeId,);
       const tag = maybeReplaceAnchorWithSpan(child.type,);
       const {
         children: childChildren,
         ...childProps
       } = child.props;
-      const props = isValidLink
-        ? {
-          ...childProps,
-          ...nestedLinkProps,
-          as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
-        }
-        : childProps;
+      const props = {
+        ...childProps,
+        // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
+        'data-nested-link': true,
+        role: 'link',
+        tabIndex: 0,
+        onClick,
+        onAuxClick,
+        onKeyDown,
+        as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
+      };
       const ref = 'ref' in child ? child.ref : void 0;
       return createElement(tag, // We need to pass the ref here again, otherwise it will be lost
       {
@@ -33707,16 +33760,14 @@ function useReplaceNestedLinks(nodeId, href, propsAddedByLink,) {
         ref,
       }, childChildren,);
     },);
-    return /* @__PURE__ */ jsx(ParentLinkContext.Provider, {
-      value: nodeId,
-      children: replacedChildren,
-    },);
-  }, [isValidLink, nodeId, onAuxClick, onClick, onKeyDown, shouldReplaceLink, parentLink,],);
-  const refCallback = useCallback((node) => {
-    if (isOnFramerCanvas || !shouldReplaceLink || !isValidLink) return;
-    node.dataset.hydrated = 'true';
-  }, [isValidLink, shouldReplaceLink,],);
-  return [getChildren, refCallback,];
+  }
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
+    value: innerLink,
+    children: replacedChildren,
+  },);
+}
+function linkInfoIsCollectable(linkInfo,) {
+  return !isUndefined(linkInfo == null ? void 0 : linkInfo.nodeId,);
 }
 function resolveLink(href, router, implicitPathVariables,) {
   return resolveLinkInternal(href, router, implicitPathVariables,);
@@ -34637,7 +34688,6 @@ function useFetchRequests(requests, disabled,) {
   }
   const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
-  const [result, setResult,] = React2.useState(() => observer2.getServerResults());
   React2.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
@@ -34645,18 +34695,13 @@ function useFetchRequests(requests, disabled,) {
     },);
   }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
-    if (isRestoringCache || disabled) return;
-    const unsubscribe = observer2.subscribe(() => {
-      React2.startTransition(() => {
-        setResult(observer2.getResults(),);
-      },);
-    },);
-    return () => {
-      unsubscribe();
-      observer2.unmount();
-    };
-  }, [observer2, disabled, isRestoringCache,],);
-  return result;
+    return () => observer2.unmount();
+  }, [observer2,],);
+  const subscribe = React2.useCallback((onChange) => {
+    if (isRestoringCache || disabled) return noop3;
+    return observer2.subscribe(onChange,);
+  }, [disabled, observer2, isRestoringCache,],);
+  return React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
 }
 function usePrefetch() {
   const fetchClient = React2.useContext(FetchClientContext,);
@@ -39659,7 +39704,7 @@ var framerAppearAnimationScriptKey = 'data-framer-appear-animation';
 function rejectPending(pendingTimers, pendingPromises,) {
   pendingTimers.forEach((t) => clearTimeout(t,));
   pendingTimers.clear();
-  pendingPromises.forEach((reject) => reject && reject('Callback cancelled by variant change',));
+  pendingPromises.forEach((reject) => reject == null ? void 0 : reject('Callback cancelled by variant change',));
   pendingPromises.clear();
 }
 function createSet() {
@@ -39671,20 +39716,20 @@ function useActiveVariantCallback(baseVariant,) {
   useOnCurrentTargetChange(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   },);
-  React4.useEffect(() => {
+  useEffect(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
-  }, [pendingPromises, pendingTimers,],);
-  React4.useEffect(() => {
+  }, [],);
+  useEffect(() => {
     rejectPending(pendingTimers, pendingPromises,);
-  }, [baseVariant, pendingPromises, pendingTimers,],);
-  return React4.useRef({
+  }, [baseVariant,],);
+  return useRef({
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */
-    activeVariantCallback: (callback) => (...args) => {
+    activeVariantCallback: (callback) => async (...args) => {
       return new Promise((resolve, reject,) => {
         pendingPromises.add(reject,);
-        callback(...args,).then(resolve,);
+        void callback(...args,).then(resolve,);
       },).catch(() => {},);
     },
     /**
@@ -39693,14 +39738,16 @@ function useActiveVariantCallback(baseVariant,) {
      * cancelled.
      */
     delay: async (callback, msDelay,) => {
-      await new Promise((resolve) => pendingTimers.add(globalThis.setTimeout(() => resolve(true,), msDelay,),));
+      await new Promise((resolve) => {
+        pendingTimers.add(globalThis.setTimeout(() => resolve(true,), msDelay,),);
+      },);
       callback();
     },
   },).current;
 }
 function useActiveTargetCallback() {
   const value = useActiveVariantCallback(void 0,);
-  return React4.useRef({
+  return useRef({
     activeTargetCallback: value.activeVariantCallback,
     delay: value.delay,
   },).current;
@@ -40563,6 +40610,52 @@ function useRunCallbackIfPageIsVisible() {
     document.addEventListener('visibilitychange', listenerFn,);
   }, [clean,],);
 }
+function useRunCallbackIfElementIsInView() {
+  const observerRef = useRef(null,);
+  const isInViewRef = useRef(false,);
+  const callbackRef = useRef();
+  useEffect(() => {
+    return () => {
+      var _a;
+      (_a = observerRef.current) == null ? void 0 : _a.disconnect();
+      callbackRef.current = void 0;
+      observerRef.current = null;
+    };
+  }, [],);
+  return useCallback((callback, ref,) => {
+    if (!(ref == null ? void 0 : ref.current) || isInViewRef.current) {
+      callback();
+      return;
+    }
+    callbackRef.current = callback;
+    if (observerRef.current) return;
+    const observer2 = new IntersectionObserver((entries) => {
+      var _a;
+      let isIntersecting = false;
+      for (let i = 0; i < entries.length; ++i) {
+        const entry = entries[i];
+        isIntersecting = entry.isIntersecting;
+      }
+      isInViewRef.current = isIntersecting;
+      if (!isIntersecting) return;
+      (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
+    },);
+    observerRef.current = observer2;
+    observer2.observe(ref.current,);
+  }, [],);
+}
+function useUpdateIfVisible(ref,) {
+  const runUpdateIfPageIsVisible = useRunCallbackIfPageIsVisible();
+  const runUpdateIfElementIsInView = useRunCallbackIfElementIsInView();
+  return useCallback((callback, checkViewport = false,) => {
+    if (isBot) {
+      callback();
+      return;
+    }
+    const runUpdate = checkViewport && ref ? () => runUpdateIfElementIsInView(callback, ref,) : callback;
+    runUpdateIfPageIsVisible(runUpdate,);
+  }, [runUpdateIfPageIsVisible, runUpdateIfElementIsInView, ref,],);
+}
 function useVariantState({
   variant,
   defaultVariant: externalDefaultVariant,
@@ -40571,12 +40664,14 @@ function useVariantState({
   cycleOrder: externalCycleOrder = [],
   variantProps: variantProps2 = {},
   variantClassNames = {},
+  ref,
 },) {
   const forceUpdate = useForceUpdate2();
   const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   const {
     wrapUpdatesInTransitions,
+    pauseOffscreen: pauseOffscreenFeatureOn,
   } = useLibraryFeatures();
   const update = useCallback((useTransition) => {
     if (useTransition) {
@@ -40585,7 +40680,7 @@ function useVariantState({
     }
     forceUpdate();
   }, [forceUpdate,],);
-  const runUpdateIfPageIsVisible = useRunCallbackIfPageIsVisible();
+  const runUpdateIfVisible = useUpdateIfVisible(ref,);
   const internalState = useRef({
     isHovered: false,
     isPressed: false,
@@ -40623,15 +40718,24 @@ function useVariantState({
     return [nextBaseVariant, nextGestureVariant,];
   }, [],);
   const updateIfNeeded = useCallback(
-    (baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, isError2 = false, clearError = false,) => {
+    (
+      baseVariant2,
+      gestureVariant2,
+      defaultVariant2,
+      nextBaseVariant,
+      isError2 = false,
+      checkViewport = false,
+      highPriority = false,
+      clearError = false,
+    ) => {
       const [nextBase, nextGesture,] = resolveNextVariant(nextBaseVariant,);
       if (nextBase === baseVariant2 && nextGesture === gestureVariant2) return;
       if (clearError) internalState.current.isError = false;
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      runUpdateIfPageIsVisible(() => update(wrapUpdatesInTransitions || isError2,));
+      runUpdateIfVisible(() => update(wrapUpdatesInTransitions && !highPriority || isError2,), pauseOffscreenFeatureOn && checkViewport,);
     },
-    [resolveNextVariant, runUpdateIfPageIsVisible, wrapUpdatesInTransitions, update,],
+    [resolveNextVariant, wrapUpdatesInTransitions, update, runUpdateIfVisible, pauseOffscreenFeatureOn,],
   );
   const setGestureState = useCallback(({
     isHovered: isHovered2,
@@ -40646,9 +40750,11 @@ function useVariantState({
       gestureVariant: gestureVariant2,
       defaultVariant: defaultVariant2,
     } = internalState.current;
-    updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, isError2,);
+    const visibleUserInteraction = isPressed2 || isHovered2;
+    updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, isError2, !visibleUserInteraction, isHovered2,// a hover needs instant response for a smooth UX; while we optimize for INP for clicks
+    );
   }, [updateIfNeeded,],);
-  const setVariant = useCallback((proposedVariant) => {
+  const setVariant = useCallback((proposedVariant, pauseOffscreen = false,) => {
     const {
       defaultVariant: defaultVariant2,
       cycleOrder,
@@ -40658,15 +40764,15 @@ function useVariantState({
     const nextBaseVariant = proposedVariant === CycleVariantState
       ? nextVariant(cycleOrder || [], baseVariant2 || defaultVariant2,)
       : proposedVariant;
-    updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, false, true,);
+    updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, false, pauseOffscreen, false, true,);
   }, [updateIfNeeded,],);
   const clearLoadingGesture = useCallback(() => {
     const {
       baseVariant: baseVariant2,
     } = internalState.current;
     internalState.current.loadedBaseVariant[baseVariant2] = true;
-    runUpdateIfPageIsVisible(() => update(true,));
-  }, [runUpdateIfPageIsVisible, update,],);
+    runUpdateIfVisible(() => update(true,), true,);
+  }, [update, runUpdateIfVisible,],);
   if (variant !== internalState.current.lastVariant) {
     const [nextBase, nextGesture,] = resolveNextVariant(variant,);
     internalState.current.lastVariant = nextBase;
@@ -40773,8 +40879,8 @@ function withCodeBoundaryForOverrides(Component18, {
     const nearestExternalComponent = useNearestExternalComponent();
     const shouldWrapWithBoundary = shouldWrapOverrideWithBoundary(
       scopeId,
-      nearestExternalComponent.scopeId,
-      nearestExternalComponent.level,
+      nearestExternalComponent == null ? void 0 : nearestExternalComponent.scopeId,
+      nearestExternalComponent == null ? void 0 : nearestExternalComponent.level,
       inComponentSlot ?? false,
     );
     if (shouldWrapWithBoundary) {
