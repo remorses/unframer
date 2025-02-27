@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.N4OAX2AK.mjs
+// /:https://app.framerstatic.com/framer.AQLUCHFJ.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -19579,6 +19579,7 @@ var resetCSS = [`[data-reset="button"] {
 var hideScrollbars = [
   `[data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }`,
   `[data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }`,
+  `[data-hide-scrollbars="true"] { scrollbar-width: none; }`,
 ];
 var willChangeOverrideCSSVariable = '--framer-will-change-override';
 var anySafariVersion = '(background: -webkit-named-image(i))';
@@ -41728,6 +41729,7 @@ var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2) => {
   FontSourceNames2['Framer'] = 'framer';
   FontSourceNames2['Local'] = 'local';
   FontSourceNames2['Custom'] = 'custom';
+  FontSourceNames2['BuiltIn'] = 'builtIn';
   return FontSourceNames2;
 })(FontSourceNames || {},);
 function isSuccessfullyParsedFontVariant(variant,) {
@@ -41881,6 +41883,198 @@ function createFontFamilyName(font,) {
 function createVariableFontFamilyName(familyName,) {
   return `${familyName} Variable`;
 }
+function supportsOpenType(openTypeData,) {
+  return Boolean(openTypeData && Array.isArray(openTypeData,),);
+}
+function validateVariationAxes(variationAxesData,) {
+  if (!variationAxesData) return;
+  if (!Array.isArray(variationAxesData,)) return;
+  const variationAxes = [];
+  for (const axis of variationAxesData) {
+    if (!isVariationAxis(axis,)) continue;
+    variationAxes.push({
+      tag: axis.tag,
+      name: axis.name,
+      minValue: axis.minValue,
+      maxValue: axis.maxValue,
+      defaultValue: axis.defaultValue,
+    },);
+  }
+  return variationAxes;
+}
+function isOpenTypeFeature(feature,) {
+  if (typeof feature !== 'object' || feature === null) return false;
+  if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
+  if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
+    return false;
+  }
+  return true;
+}
+function isVariationAxis(axis,) {
+  if (typeof axis !== 'object' || axis === null) return false;
+  if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
+  if ('name' in axis && typeof axis.name !== 'string') return false;
+  if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
+  if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
+  if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
+    return false;
+  }
+  return true;
+}
+var builtInFontSelectorPrefix = 'BI;';
+var BuiltInFontSource = class {
+  constructor() {
+    __publicField(this, 'name', 'builtIn',/* BuiltIn */
+    );
+    __publicField(this, 'fontFamilies', [],);
+    __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
+  }
+  importFonts(assets,) {
+    this.fontFamilies.length = 0;
+    this.byFamilyName.clear();
+    this.assetsByFamily.clear();
+    const fonts = [];
+    for (const asset of assets) {
+      if (!this.isValidBuiltInFont(asset,)) continue;
+      const {
+        properties,
+      } = asset;
+      const fontName = properties.font.preferredFamily || properties.font.fontFamily;
+      const fontFamily = this.createFontFamily(fontName, properties.font.foundryName,);
+      const openTypeData = properties.font.openTypeData;
+      const variationAxesData = properties.font.variationAxes;
+      const isVariableFont2 = Array.isArray(variationAxesData,);
+      const variant = isVariableFont2 ? 'variable' : properties.font.preferredSubFamily || properties.font.fontSubFamily || 'regular';
+      const font = {
+        family: fontFamily,
+        selector: this.createSelector(fontName, variant, properties.font.fontVersion,),
+        variant,
+        file: asset.url,
+        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
+        variationAxes: validateVariationAxes(variationAxesData,),
+        category: properties.font.fontCategory,
+      };
+      fontFamily.fonts.push(font,);
+      this.assetsByFamily.set(fontName, asset,);
+      fonts.push(font,);
+    }
+    for (const fontFamily of this.fontFamilies) {
+      fontFamily.fonts.sort((a, b,) => {
+        const weightA = variantNameToWeight(a.variant,);
+        const weightB = variantNameToWeight(b.variant,);
+        if (!weightA || !weightB) return 1;
+        return weightA - weightB;
+      },);
+    }
+    return fonts;
+  }
+  getFontBySelector(selector, createFont = true,) {
+    const locator = this.parseSelector(selector,);
+    if (!locator) return;
+    if (!createFont && !this.byFamilyName.get(locator.name,)) return;
+    const fontFamily = this.getFontFamilyByName(locator.name,);
+    if (!fontFamily) return;
+    return fontFamily.fonts.find((f) => f.selector === selector);
+  }
+  getFontFamilyByName(family,) {
+    return this.byFamilyName.get(family,) ?? null;
+  }
+  createFontFamily(family, foundryName,) {
+    const existingFontFamily = this.byFamilyName.get(family,);
+    if (existingFontFamily) return existingFontFamily;
+    const fontFamily = {
+      source: this.name,
+      name: family,
+      fonts: [],
+      foundryName,
+    };
+    this.addFontFamily(fontFamily,);
+    return fontFamily;
+  }
+  getOpenTypeFeatures(family,) {
+    var _a, _b;
+    const assets = this.assetsByFamily.get(family,);
+    const openTypeData = (_b = (_a = assets == null ? void 0 : assets.properties) == null ? void 0 : _a.font) == null
+      ? void 0
+      : _b.openTypeData;
+    if (!supportsOpenType(openTypeData,)) return [];
+    return openTypeData == null ? void 0 : openTypeData.map((feature) => {
+      if (!isOpenTypeFeature(feature,)) return;
+      return {
+        tag: feature.tag,
+        coverage: feature.coverage,
+      };
+    },);
+  }
+  isValidBuiltInFont(asset,) {
+    var _a;
+    if (!asset.mimeType.startsWith('font/',)) return false;
+    if (((_a = asset.properties) == null ? void 0 : _a.kind) !== 'font') return false;
+    if (!asset.properties.font) return false;
+    if (!asset.properties.font.fontVersion) return false;
+    if (!asset.properties.font.fontFamily) return false;
+    return 'fontFamily' in asset.properties.font;
+  }
+  createSelector(family, variant, version2,) {
+    return `${builtInFontSelectorPrefix}${family}/${variant}/${version2}`;
+  }
+  parseSelector(selector,) {
+    if (!selector.startsWith(builtInFontSelectorPrefix,)) return null;
+    const tokens = selector.split(builtInFontSelectorPrefix,);
+    if (tokens[1] === void 0) return null;
+    const locator = {
+      source: 'builtIn',
+      name: tokens[1],
+    };
+    return locator;
+  }
+  addFontFamily(fontFamily,) {
+    this.fontFamilies.push(fontFamily,);
+    this.byFamilyName.set(fontFamily.name, fontFamily,);
+  }
+};
+var variantsNameToWeight = {
+  thin: 200,
+  'thin-italic': 200,
+  light: 300,
+  'light-italic': 300,
+  regular: 400,
+  'regular-slanted': 400,
+  italic: 400,
+  oblique: 400,
+  demi: 400,
+  brukt: 400,
+  book: 400,
+  'book-italic': 400,
+  medium: 500,
+  'medium-oblique': 500,
+  'medium-italic': 500,
+  mittel: 500,
+  semibold: 600,
+  'semibold-italic': 600,
+  bold: 700,
+  'bold-italic': 700,
+  'bold-oblique': 700,
+  fett: 700,
+  satt: 700,
+  black: 900,
+  'black-italic': 900,
+  'extra-italic': 900,
+  'extra-italic-bold': 900,
+  heavy: 900,
+  'heavy-italic': 900,
+  // we want to put variable fonts last
+  variable: 1e3,
+  'variable-italic': 1e3,
+};
+function variantNameToWeight(variant,) {
+  const kebabCaseVariant = variantToKebabCase(variant,);
+  return variantsNameToWeight[kebabCaseVariant];
+}
+function variantToKebabCase(variant,) {
+  return variant.toLowerCase().replace(/\s+/gu, '-',);
+}
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
@@ -41924,8 +42118,8 @@ var CustomFontSource = class {
         variant,
         postscriptName: (_c = asset.properties) == null ? void 0 : _c.font.postscriptName,
         file: asset.url,
-        hasOpenTypeFeatures: this.supportsOpenType(openTypeData,),
-        variationAxes: this.validateVariationAxes(variationAxesData,),
+        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
+        variationAxes: validateVariationAxes(variationAxesData,),
       };
       fontFamily.fonts.push(font,);
       fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
@@ -41941,58 +42135,20 @@ var CustomFontSource = class {
     if (!asset.properties.font) return false;
     return 'fontFamily' in asset.properties.font;
   }
-  supportsOpenType(openTypeData,) {
-    return Boolean(openTypeData && Array.isArray(openTypeData,),);
-  }
-  validateVariationAxes(variationAxesData,) {
-    if (!variationAxesData) return;
-    if (!Array.isArray(variationAxesData,)) return;
-    const variationAxes = [];
-    for (const axis of variationAxesData) {
-      if (!this.isVariationAxis(axis,)) continue;
-      variationAxes.push({
-        tag: axis.tag,
-        name: axis.name,
-        minValue: axis.minValue,
-        maxValue: axis.maxValue,
-        defaultValue: axis.defaultValue,
-      },);
-    }
-    return variationAxes;
-  }
   getOpenTypeFeatures(family,) {
     var _a, _b;
     const assets = this.assetsByFamily.get(family,);
     const openTypeData = (_b = (_a = assets == null ? void 0 : assets.properties) == null ? void 0 : _a.font) == null
       ? void 0
       : _b.openTypeData;
-    if (!this.supportsOpenType(openTypeData,)) return [];
+    if (!supportsOpenType(openTypeData,)) return [];
     return openTypeData == null ? void 0 : openTypeData.map((feature) => {
-      if (!this.isOpenTypeFeature(feature,)) return;
+      if (!isOpenTypeFeature(feature,)) return;
       return {
         tag: feature.tag,
         coverage: feature.coverage,
       };
     },);
-  }
-  isOpenTypeFeature(feature,) {
-    if (typeof feature !== 'object' || feature === null) return false;
-    if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
-    if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
-      return false;
-    }
-    return true;
-  }
-  isVariationAxis(axis,) {
-    if (typeof axis !== 'object' || axis === null) return false;
-    if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
-    if (!('name' in axis) || typeof axis.name !== 'string') return false;
-    if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
-    if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
-    if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
-      return false;
-    }
-    return true;
   }
   inferVariantName(family,) {
     const possibleValues = ['thin', 'ultra light', 'extra light', 'light', 'normal', 'medium', 'semi bold', 'bold', 'extra bold', 'black',];
@@ -42711,11 +42867,11 @@ function loadVariationAxes(source,) {
 function isValidVariationAxesData(data2,) {
   return isObject(data2,) && Object.values(data2,).every(isValidVariationAxes,);
 }
-function isVariationAxis(data2,) {
+function isVariationAxis2(data2,) {
   return isObject(data2,) && isString(data2.tag,);
 }
 function isValidVariationAxes(data2,) {
-  return Array.isArray(data2,) && data2.every(isVariationAxis,);
+  return Array.isArray(data2,) && data2.every(isVariationAxis2,);
 }
 var FontStore = class {
   constructor() {
@@ -42723,10 +42879,12 @@ var FontStore = class {
     __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
     __publicField(this, 'getGoogleFontsListPromise',);
     __publicField(this, 'getFontshareFontsListPromise',);
+    __publicField(this, 'getBuiltInFontsListPromise',);
     __publicField(this, 'loadedSelectors', /* @__PURE__ */ new Set(),);
     __publicField(this, 'local',);
     __publicField(this, 'google',);
     __publicField(this, 'fontshare',);
+    __publicField(this, 'builtIn',);
     __publicField(this, 'framer',);
     __publicField(this, 'custom',);
     this.local = new LocalFontSource();
@@ -42734,6 +42892,7 @@ var FontStore = class {
     this.fontshare = new FontshareSource();
     this.framer = new FramerFontSource();
     this.custom = new CustomFontSource();
+    this.builtIn = new BuiltInFontSource();
     this.bySelector = /* @__PURE__ */ new Map();
     this.importLocalFonts();
   }
@@ -42780,6 +42939,16 @@ var FontStore = class {
       }
     }
     return this.getFontshareFontsListPromise;
+  }
+  async importBuiltInFonts() {
+    if (!this.getBuiltInFontsListPromise) {
+      this.getBuiltInFontsListPromise = runtime.fetchBuiltInFontsList();
+      const builtInFonts = await this.getBuiltInFontsListPromise;
+      for (const font of await this.builtIn.importFonts(builtInFonts,)) {
+        this.addFont(font,);
+      }
+    }
+    return this.getBuiltInFontsListPromise;
   }
   importFramerFonts(fonts,) {
     const axesData = loadVariationAxes('framer',/* Framer */
@@ -42897,6 +43066,7 @@ var FontStore = class {
         return 1;
       case 'google':
       case 'fontshare':
+      case 'builtIn':
       case 'custom':
         if (!font.file) {
           return Promise.reject(`Unable to load font: ${font.selector}`,);
@@ -42918,7 +43088,8 @@ var FontStore = class {
     if (!this.enabled) return [];
     const googleFontsRequested = selectors.some((selector) => selector.startsWith(googleFontSelectorPrefix,));
     const fontshareFontsRequested = selectors.some((selector) => selector.startsWith(fontsharePrefix,));
-    if (googleFontsRequested || fontshareFontsRequested) {
+    const builtInFontsRequested = selectors.some((selector) => selector.startsWith(builtInFontSelectorPrefix,));
+    if (googleFontsRequested || fontshareFontsRequested || builtInFontsRequested) {
       try {
         await this.importFontshareFonts();
       } catch (error) {
@@ -42928,6 +43099,11 @@ var FontStore = class {
         await this.importGoogleFonts();
       } catch (error) {
         warnOnce2('Failed to load Google fonts:', error,);
+      }
+      try {
+        await this.importBuiltInFonts();
+      } catch (error) {
+        warnOnce2('Failed to load built=in fonts:', error,);
       }
     }
     const fonts = selectors.map((s) => this.bySelector.get(s,)).filter((f) => !!f);
