@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.AQLUCHFJ.mjs
+// /:https://app.framerstatic.com/framer.FGVXATZ3.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -12167,6 +12167,151 @@ var EMPTY_ARRAY = [];
 var requestIdleCallback = /* @__PURE__ */ (() => {
   return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
 })();
+var objectKeys = Object.keys;
+function hasProp(o, prop,) {
+  return Object.prototype.hasOwnProperty.call(o, prop,);
+}
+var equalsKey = 'equals';
+function withEquals(o,) {
+  if (o === null) return false;
+  if (!(equalsKey in o)) return false;
+  return typeof o.equals === 'function';
+}
+function valueEqual(a, b,) {
+  if (a === b) return true;
+  return a !== a && b !== b;
+}
+function arrayShallowEqual(a, b,) {
+  const length = a.length;
+  if (length !== b.length) return false;
+  for (let i = length; i-- !== 0;) {
+    if (!valueEqual(a[i], b[i],)) return false;
+  }
+  return true;
+}
+function arrayDeepEqual(a, b,) {
+  const length = a.length;
+  if (length !== b.length) return false;
+  for (let i = length; i-- !== 0;) {
+    if (!equal(a[i], b[i], true,)) return false;
+  }
+  return true;
+}
+function mapShallowEqual(a, b,) {
+  if (a.size !== b.size) return false;
+  for (const [key7, aValue,] of a.entries()) {
+    if (!valueEqual(aValue, b.get(key7,),)) return false;
+  }
+  return true;
+}
+function mapDeepEqual(a, b,) {
+  if (a.size !== b.size) return false;
+  for (const [key7, aValue,] of a.entries()) {
+    if (!equal(aValue, b.get(key7,), true,)) return false;
+  }
+  return true;
+}
+function setEqual(a, b,) {
+  if (a.size !== b.size) return false;
+  for (const aValue of a.keys()) {
+    if (!b.has(aValue,)) return false;
+  }
+  return true;
+}
+function objectShallowEqual(a, b,) {
+  const keys3 = objectKeys(a,);
+  if (keys3.length !== objectKeys(b,).length) return false;
+  for (const key7 of keys3) {
+    if (!hasProp(b, key7,)) return false;
+    if (key7 === '_owner' && hasProp(a, '$$typeof',) && a.$$typeof) {
+      continue;
+    }
+    if (!valueEqual(a[key7], b[key7],)) return false;
+  }
+  return true;
+}
+function objectDeepEqual(a, b,) {
+  const keys3 = objectKeys(a,);
+  if (keys3.length !== objectKeys(b,).length) return false;
+  for (const key7 of keys3) {
+    if (!hasProp(b, key7,)) return false;
+    if (key7 === '_owner' && hasProp(a, '$$typeof',) && a.$$typeof) {
+      continue;
+    }
+    if (!equal(a[key7], b[key7], true,)) return false;
+  }
+  return true;
+}
+function equal(a, b, deep,) {
+  if (a === b) return true;
+  if (!a || !b) return a !== a && b !== b;
+  const typeA = typeof a;
+  const typeB = typeof b;
+  if (typeA !== typeB) return false;
+  if (typeA !== 'object') return false;
+  const aIsArray = Array.isArray(a,);
+  const bIsArray = Array.isArray(b,);
+  if (aIsArray && bIsArray) {
+    if (deep) {
+      return arrayDeepEqual(a, b,);
+    } else {
+      return arrayShallowEqual(a, b,);
+    }
+  } else if (aIsArray !== bIsArray) {
+    return false;
+  }
+  const aIsMap = a instanceof Map;
+  const bIsMap = b instanceof Map;
+  if (aIsMap && bIsMap) {
+    if (deep) {
+      return mapDeepEqual(a, b,);
+    } else {
+      return mapShallowEqual(a, b,);
+    }
+  } else if (aIsMap !== bIsMap) {
+    return false;
+  }
+  const aIsSet = a instanceof Set;
+  const bIsSet = b instanceof Set;
+  if (aIsSet && bIsSet) {
+    return setEqual(a, b,);
+  } else if (aIsSet !== bIsSet) {
+    return false;
+  }
+  const dateA = a instanceof Date;
+  const dateB = b instanceof Date;
+  if (dateA && dateB) {
+    return a.getTime() === b.getTime();
+  } else if (dateA !== dateB) {
+    return false;
+  }
+  const regexpA = a instanceof RegExp;
+  const regexpB = b instanceof RegExp;
+  if (regexpA && regexpB) {
+    return a.toString() === b.toString();
+  } else if (regexpA !== regexpB) {
+    return false;
+  }
+  if (withEquals(a,) && withEquals(b,)) {
+    return a.equals(b,);
+  }
+  if (deep) {
+    return objectDeepEqual(a, b,);
+  } else {
+    return objectShallowEqual(a, b,);
+  }
+}
+function isEqual(a, b, deep = true,) {
+  try {
+    return equal(a, b, deep,);
+  } catch (error) {
+    if (error instanceof Error && /stack|recursion/iu.exec(error.message,)) {
+      console.warn('Warning: isEqual does not handle circular references.', error.name, error.message,);
+      return false;
+    }
+    throw error;
+  }
+}
 function useGetRouteCallback(routes,) {
   return React4.useCallback((routeId) => routes[routeId], [routes,],);
 }
@@ -12210,9 +12355,21 @@ function useCurrentRoute() {
     pathVariables: override ? void 0 : router.currentPathVariables,
   };
 }
+function useCurrentRouteKey() {
+  const currentRoute = useCurrentRoute();
+  if (!currentRoute) return void 0;
+  return `${currentRoute.id}-${JSON.stringify(currentRoute.pathVariables,)}`;
+}
 function useCurrentRouteId() {
   var _a;
   return (_a = useCurrentRoute()) == null ? void 0 : _a.id;
+}
+function useOnRouteChange(cb,) {
+  const currentRoute = useCurrentRoute();
+  const [lastRoute, setLastRoute,] = React4.useState(currentRoute,);
+  if (isEqual(lastRoute, currentRoute,) || !currentRoute) return;
+  setLastRoute(currentRoute,);
+  cb(currentRoute,);
 }
 function useRoute(routeId,) {
   var _a;
@@ -12269,7 +12426,7 @@ var noop2 = () => {};
 var isBot = /* @__PURE__ */ (() => {
   return typeof window !== 'undefined' && /bot|-google|google-|yandex|ia_archiver/iu.test(__unframerNavigator2.userAgent,);
 })();
-var shouldPreloadBasedOnUA = isBot;
+var shouldPreloadBasedOnUA = !isBot;
 function useRoutePreloader(routeIds, enabled = true,) {
   const {
     getRoute,
@@ -19582,6 +19739,7 @@ var hideScrollbars = [
   `[data-hide-scrollbars="true"] { scrollbar-width: none; }`,
 ];
 var willChangeOverrideCSSVariable = '--framer-will-change-override';
+var willChangeEffectOverrideCSSVariable = '--framer-will-change-effect-override';
 var anySafariVersion = '(background: -webkit-named-image(i))';
 var safari16OrGreater = '(grid-template-rows: subgrid)';
 var willChangeTransformRules = (isPreview) =>
@@ -19590,7 +19748,7 @@ var willChangeTransformRules = (isPreview) =>
       `body { ${willChangeOverrideCSSVariable}: none; }`,
       `@supports ${anySafariVersion} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`,
     ]
-    : [`body { ${willChangeOverrideCSSVariable}: none; }`,];
+    : [`body { ${willChangeOverrideCSSVariable}: none; ${willChangeEffectOverrideCSSVariable}: none; }`,];
 var frameCSSRules = (isPreview) => {
   return isPreview ? frameCSS : [];
 };
@@ -22027,151 +22185,6 @@ function measureClosestComponentContainer(element,) {
   const container = element.closest('[data-framer-component-container]',);
   if (!container) return;
   runtime.queueMeasureRequest(nodeIdFromString(container.id,), container, getMeasurableCodeComponentChildren(container,),);
-}
-var objectKeys = Object.keys;
-function hasProp(o, prop,) {
-  return Object.prototype.hasOwnProperty.call(o, prop,);
-}
-var equalsKey = 'equals';
-function withEquals(o,) {
-  if (o === null) return false;
-  if (!(equalsKey in o)) return false;
-  return typeof o.equals === 'function';
-}
-function valueEqual(a, b,) {
-  if (a === b) return true;
-  return a !== a && b !== b;
-}
-function arrayShallowEqual(a, b,) {
-  const length = a.length;
-  if (length !== b.length) return false;
-  for (let i = length; i-- !== 0;) {
-    if (!valueEqual(a[i], b[i],)) return false;
-  }
-  return true;
-}
-function arrayDeepEqual(a, b,) {
-  const length = a.length;
-  if (length !== b.length) return false;
-  for (let i = length; i-- !== 0;) {
-    if (!equal(a[i], b[i], true,)) return false;
-  }
-  return true;
-}
-function mapShallowEqual(a, b,) {
-  if (a.size !== b.size) return false;
-  for (const [key7, aValue,] of a.entries()) {
-    if (!valueEqual(aValue, b.get(key7,),)) return false;
-  }
-  return true;
-}
-function mapDeepEqual(a, b,) {
-  if (a.size !== b.size) return false;
-  for (const [key7, aValue,] of a.entries()) {
-    if (!equal(aValue, b.get(key7,), true,)) return false;
-  }
-  return true;
-}
-function setEqual(a, b,) {
-  if (a.size !== b.size) return false;
-  for (const aValue of a.keys()) {
-    if (!b.has(aValue,)) return false;
-  }
-  return true;
-}
-function objectShallowEqual(a, b,) {
-  const keys3 = objectKeys(a,);
-  if (keys3.length !== objectKeys(b,).length) return false;
-  for (const key7 of keys3) {
-    if (!hasProp(b, key7,)) return false;
-    if (key7 === '_owner' && hasProp(a, '$$typeof',) && a.$$typeof) {
-      continue;
-    }
-    if (!valueEqual(a[key7], b[key7],)) return false;
-  }
-  return true;
-}
-function objectDeepEqual(a, b,) {
-  const keys3 = objectKeys(a,);
-  if (keys3.length !== objectKeys(b,).length) return false;
-  for (const key7 of keys3) {
-    if (!hasProp(b, key7,)) return false;
-    if (key7 === '_owner' && hasProp(a, '$$typeof',) && a.$$typeof) {
-      continue;
-    }
-    if (!equal(a[key7], b[key7], true,)) return false;
-  }
-  return true;
-}
-function equal(a, b, deep,) {
-  if (a === b) return true;
-  if (!a || !b) return a !== a && b !== b;
-  const typeA = typeof a;
-  const typeB = typeof b;
-  if (typeA !== typeB) return false;
-  if (typeA !== 'object') return false;
-  const aIsArray = Array.isArray(a,);
-  const bIsArray = Array.isArray(b,);
-  if (aIsArray && bIsArray) {
-    if (deep) {
-      return arrayDeepEqual(a, b,);
-    } else {
-      return arrayShallowEqual(a, b,);
-    }
-  } else if (aIsArray !== bIsArray) {
-    return false;
-  }
-  const aIsMap = a instanceof Map;
-  const bIsMap = b instanceof Map;
-  if (aIsMap && bIsMap) {
-    if (deep) {
-      return mapDeepEqual(a, b,);
-    } else {
-      return mapShallowEqual(a, b,);
-    }
-  } else if (aIsMap !== bIsMap) {
-    return false;
-  }
-  const aIsSet = a instanceof Set;
-  const bIsSet = b instanceof Set;
-  if (aIsSet && bIsSet) {
-    return setEqual(a, b,);
-  } else if (aIsSet !== bIsSet) {
-    return false;
-  }
-  const dateA = a instanceof Date;
-  const dateB = b instanceof Date;
-  if (dateA && dateB) {
-    return a.getTime() === b.getTime();
-  } else if (dateA !== dateB) {
-    return false;
-  }
-  const regexpA = a instanceof RegExp;
-  const regexpB = b instanceof RegExp;
-  if (regexpA && regexpB) {
-    return a.toString() === b.toString();
-  } else if (regexpA !== regexpB) {
-    return false;
-  }
-  if (withEquals(a,) && withEquals(b,)) {
-    return a.equals(b,);
-  }
-  if (deep) {
-    return objectDeepEqual(a, b,);
-  } else {
-    return objectShallowEqual(a, b,);
-  }
-}
-function isEqual(a, b, deep = true,) {
-  try {
-    return equal(a, b, deep,);
-  } catch (error) {
-    if (error instanceof Error && /stack|recursion/iu.exec(error.message,)) {
-      console.warn('Warning: isEqual does not handle circular references.', error.name, error.message,);
-      return false;
-    }
-    throw error;
-  }
 }
 var smallValue = '0.000001px';
 var translateZ = /* @__PURE__ */ (() => ` translateZ(${smallValue})`)();
@@ -29978,6 +29991,12 @@ var defaultFXValues = {
 function isFXValuesKey(key7,) {
   return key7 in defaultFXValues;
 }
+var effectEnabledStyle = {
+  willChange: 'transform',
+};
+Object.freeze(effectEnabledStyle,);
+var effectDisabledStyle = {};
+Object.freeze(effectDisabledStyle,);
 function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({
     values: makeFXValues(enabled ? values : void 0,),
@@ -29989,7 +30008,7 @@ function useFXValues(values, enabled,) {
       if (isUndefined(value,)) continue;
       effect.values[key7].set(value,);
     }
-  }, [effect, enabled,],);
+  }, [enabled,],);
   return effect;
 }
 var loopOptionsKeys = /* @__PURE__ */ new Set([
@@ -30116,11 +30135,7 @@ function useLoop({
   return useMemo(() => {
     return {
       values,
-      style: hasLoop && addWillChange
-        ? {
-          willChange: 'transform',
-        }
-        : {},
+      style: hasLoop && addWillChange ? effectEnabledStyle : effectDisabledStyle,
     };
   }, [hasLoop, addWillChange,],);
 }
@@ -30144,7 +30159,7 @@ function useParallax(options, ref, visibilityStyle,) {
     if (originalPosition.current === null) return 0;
     if (speed === 100) return 0;
     return parallaxTransform(yValue, originalPosition.current, speed, offset, adjustPosition,);
-  }, [originalPosition, speed, offset, adjustPosition,],);
+  }, [speed, offset, adjustPosition,],);
   const {
     scrollY,
   } = useScroll();
@@ -30163,18 +30178,18 @@ function useParallax(options, ref, visibilityStyle,) {
         visibility.set(visibilityStyle ?? 'initial',);
       }
     },);
-  }, [adjustPosition,],// when adjustPosition changes, call the effect again
-  );
+  }, [adjustPosition,],);
+  useOnRouteChange(() => parallaxY.set(0,));
   return {
     values: {
       y: shouldReduceMotion || !parallaxTransformEnabled ? defaultValue : parallaxY,
     },
     style: parallaxTransformEnabled
       ? {
+        ...effectEnabledStyle,
         visibility,
-        willChange: 'transform',
       }
-      : void 0,
+      : effectDisabledStyle,
   };
 }
 function getTransition(value,) {
@@ -30322,7 +30337,13 @@ function usePresenceAnimation(
       },)
     );
   },);
-  return effect;
+  const effectEnabled = enabled && animateConfig;
+  return useMemo(() => {
+    return {
+      values: effect.values,
+      style: effectEnabled ? effectEnabledStyle : effectDisabledStyle,
+    };
+  }, [effectEnabled,],);
 }
 function calcOffsetTop(element, container,) {
   let top = 0;
@@ -30370,8 +30391,10 @@ function useScrollDirectionChange(scrollDirection, cb, options = {},) {
     repeat = true,
     enabled = true,
   } = options;
+  const currentRouteKey = useCurrentRouteKey();
   React4.useEffect(() => {
     if (!direction || !enabled) return;
+    const _ = currentRouteKey;
     let lastOffset = void 0;
     let directionChangeOffset = 0;
     let lastDirection = void 0;
@@ -30396,7 +30419,7 @@ function useScrollDirectionChange(scrollDirection, cb, options = {},) {
         currentTarget = nextTarget;
       }
     },);
-  }, [direction, repeat, target, enabled, cb,],);
+  }, [currentRouteKey, direction, repeat, target, enabled, cb,],);
 }
 var styleAppearOptionsKeys = /* @__PURE__ */ new Set([
   'threshold',
@@ -30491,6 +30514,7 @@ function useStyleAppearEffect(options, ref,) {
     scheduledAppearState: void 0,
     lastAppearState: !options.styleAppearEffectEnabled,
   },);
+  const currentRouteKey = useCurrentRouteKey();
   const animation = React4.useRef();
   const runAnimation = React4.useCallback(async ({
     transition,
@@ -30551,6 +30575,7 @@ function useStyleAppearEffect(options, ref,) {
     const playedState = {
       initial: true,
     };
+    const _ = currentRouteKey;
     let lastVariant = 'initial';
     return scrollInfo(({
       y: scrollY,
@@ -30574,12 +30599,25 @@ function useStyleAppearEffect(options, ref,) {
       if (!variantAnimation) return;
       runAnimation(variantAnimation,);
     },);
-  }, [animateWithScrollInfo,],);
+  }, [currentRouteKey, animateWithScrollInfo,],);
   useScrollDirectionChange(options.scrollDirection, (target) => runAnimation(target ?? variants.animate,), {
     enabled,
     repeat: !options.animateOnce,
   },);
-  return effect;
+  useOnRouteChange(() => {
+    var _a;
+    if (!enabled) return;
+    if (!options.targets && !options.scrollDirection) return;
+    for (const key7 of effectValuesKeys) {
+      effect.values[key7].set(((_a = variants.initial) == null ? void 0 : _a[key7]) ?? defaultFXValues[key7],);
+    }
+  },);
+  return useMemo(() => {
+    return {
+      values: effect.values,
+      style: enabled ? effectEnabledStyle : effectDisabledStyle,
+    };
+  }, [enabled,],);
 }
 var styleTransformOptionsKeys = /* @__PURE__ */ new Set([
   'transformViewportThreshold',
@@ -30680,6 +30718,7 @@ function useStyleTransform({
   const effect = useFXValues(defaultValues(transformTargets, shouldReduceMotion,), styleTransformEffectEnabled,);
   const effectDisabled = !styleTransformEffectEnabled || !transformTargets;
   const triggerOnScroll = transformTrigger === 'onScrollTarget';
+  const currentRouteKey = useCurrentRouteKey();
   useLayoutEffect(() => {
     if (effectDisabled || !triggerOnScroll) return;
     return scrollInfo(({
@@ -30700,11 +30739,12 @@ function useStyleTransform({
         effect.values[key7].set(transform(scrollY.current, scrollYInputRange, effectKeyOutputRange[key7],),);
       }
     },);
-  }, [shouldReduceMotion, triggerOnScroll, transformViewportThreshold, effect, transformTargets, effectDisabled,],);
+  }, [shouldReduceMotion, triggerOnScroll, transformViewportThreshold, transformTargets, effectDisabled,],);
   useRefEffect(ref, (element) => {
     if (effectDisabled || triggerOnScroll || element === null) {
       return;
     }
+    const _ = currentRouteKey;
     const outputRange = createPageOutputRange(transformTargets,);
     return scrollInfo(
       ({
@@ -30724,18 +30764,21 @@ function useStyleTransform({
         }
         : void 0,
     );
-  }, [shouldReduceMotion, transformTrigger, triggerOnScroll, effect, transformTargets, effectDisabled,],);
+  }, [currentRouteKey, shouldReduceMotion, transformTrigger, triggerOnScroll, transformTargets, effectDisabled,],);
   useAttachOptionalSpring(effect.values, spring2,);
+  useOnRouteChange(() => {
+    if (effectDisabled) return;
+    const values = defaultValues(transformTargets, shouldReduceMotion,);
+    for (const key7 of effectValuesKeys) {
+      effect.values[key7].set((values == null ? void 0 : values[key7]) ?? defaultFXValues[key7],);
+    }
+  },);
   return React4.useMemo(() => {
     return {
       values: effect.values,
-      style: styleTransformEffectEnabled
-        ? {
-          willChange: 'transform',
-        }
-        : {},
+      style: styleTransformEffectEnabled ? effectEnabledStyle : effectDisabledStyle,
     };
-  }, [effect, styleTransformEffectEnabled,],);
+  }, [styleTransformEffectEnabled,],);
 }
 var groups = {
   parallax: parallaxOptionsKeys,
@@ -30842,6 +30885,7 @@ var withFX = (Component18) =>
     const observerRef = useObserverRef(forwardedRef,);
     const {
       values: presenceEffectValues,
+      style: presenceEffectStyle,
     } = usePresenceAnimation(presence, observerRef, inSmartComponent, props.style, props[optimizedAppearDataAttribute],);
     const {
       values: parallaxValues,
@@ -30853,6 +30897,7 @@ var withFX = (Component18) =>
     } = useStyleTransform(styleTransform, observerRef,);
     const {
       values: appearEffectValues,
+      style: scrollAppearStyle,
     } = useStyleAppearEffect(styleAppear, observerRef,);
     const {
       values: loopValues,
@@ -30931,6 +30976,8 @@ var withFX = (Component18) =>
         ...scrollStyle,
         ...loopStyle,
         ...motionValueStyle,
+        ...scrollAppearStyle,
+        ...presenceEffectStyle,
       },
       values: presenceEffectValues,
       ref: observerRef,
@@ -34604,12 +34651,11 @@ var RequestsObserver = class {
         status,
         data: data2,
       };
-      if (isEqual(result, __privateGet(this, _results,),)) {
-        return;
-      }
-      __privateSet(this, _results, result,);
-      if (errors.length > 0 && !statuses.has('loading',) && __privateGet(this, _subscribers2,).size > 0) {
-        console.error('Fetch failed: ' + errors.join('\n',),);
+      if (!isEqual(result, __privateGet(this, _results,),)) {
+        __privateSet(this, _results, result,);
+        if (errors.length > 0 && !statuses.has('loading',) && __privateGet(this, _subscribers2,).size > 0) {
+          console.error('Fetch failed: ' + errors.join('\n',),);
+        }
       }
       for (const subscriber of __privateGet(this, _subscribers2,)) {
         subscriber();
@@ -34689,6 +34735,7 @@ function useFetchRequests(requests, disabled,) {
   }
   const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
+  const [result, setResult,] = React2.useState(() => observer2.getServerResults());
   React2.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
@@ -34696,13 +34743,18 @@ function useFetchRequests(requests, disabled,) {
     },);
   }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
-    return () => observer2.unmount();
-  }, [observer2,],);
-  const subscribe = React2.useCallback((onChange) => {
-    if (isRestoringCache || disabled) return noop3;
-    return observer2.subscribe(onChange,);
-  }, [disabled, observer2, isRestoringCache,],);
-  return React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
+    if (isRestoringCache || disabled) return;
+    const unsubscribe = observer2.subscribe(() => {
+      React2.startTransition(() => {
+        setResult(observer2.getResults(),);
+      },);
+    },);
+    return () => {
+      unsubscribe();
+      observer2.unmount();
+    };
+  }, [observer2, disabled, isRestoringCache,],);
+  return result;
 }
 function usePrefetch() {
   const fetchClient = React2.useContext(FetchClientContext,);
@@ -39958,6 +40010,7 @@ function useSiteRefs() {
     },);
   }, [route,],);
   return React4.useCallback((key7) => {
+    if (!key7) return;
     const computedKey = `${path}-${key7}`;
     const existing = map.get(computedKey,);
     if (existing) return existing;
@@ -41083,6 +41136,16 @@ var withVariantAppearEffect = (Component18) =>
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
     },);
+    useOnRouteChange(() => {
+      if (!variantAppearEffectEnabled) return;
+      const useObscuredVariant = !options.targets && !options.scrollDirection;
+      const target = useObscuredVariant ? options.obscuredVariantId : void 0;
+      if (wrapUpdatesInTransitions) {
+        React4.startTransition(() => setVariant(target,));
+        return;
+      }
+      setVariant(target,);
+    },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
       return /* @__PURE__ */ jsx(Component18, {
         ...rest,
@@ -41954,6 +42017,8 @@ var BuiltInFontSource = class {
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes(variationAxesData,),
         category: properties.font.fontCategory,
+        weight: variantNameToWeight(variant,),
+        style: getFontStyle(variant,),
       };
       fontFamily.fonts.push(font,);
       this.assetsByFamily.set(fontName, asset,);
@@ -42035,33 +42100,51 @@ var BuiltInFontSource = class {
   }
 };
 var variantsNameToWeight = {
+  ultralight: 100,
+  'ultralight-italic': 100,
   thin: 200,
   'thin-italic': 200,
   light: 300,
   'light-italic': 300,
+  'dense-light': 300,
+  'solid-light': 300,
   regular: 400,
   'regular-slanted': 400,
   italic: 400,
   oblique: 400,
   demi: 400,
-  brukt: 400,
+  brukt: 300,
   book: 400,
   'book-italic': 400,
+  text: 400,
+  'text-italic': 400,
+  'dense-regular': 400,
+  'solid-regular': 400,
+  dense: 400,
+  solid: 400,
+  expanded: 400,
+  gothique: 400,
+  school: 400,
+  serif: 400,
   medium: 500,
   'medium-oblique': 500,
   'medium-italic': 500,
   mittel: 500,
+  'dense-medium': 500,
+  'solid-medium': 500,
   semibold: 600,
   'semibold-italic': 600,
   bold: 700,
   'bold-italic': 700,
   'bold-oblique': 700,
   fett: 700,
-  satt: 700,
+  'dense-bold': 700,
+  'solid-bold': 700,
   black: 900,
   'black-italic': 900,
   'extra-italic': 900,
   'extra-italic-bold': 900,
+  satt: 900,
   heavy: 900,
   'heavy-italic': 900,
   // we want to put variable fonts last
@@ -42074,6 +42157,10 @@ function variantNameToWeight(variant,) {
 }
 function variantToKebabCase(variant,) {
   return variant.toLowerCase().replace(/\s+/gu, '-',);
+}
+function getFontStyle(variant,) {
+  if (variant.includes('italic',) || variant.includes('oblique',) || variant.includes('slanted',)) return 'italic';
+  return 'normal';
 }
 var customFontSelectorPrefix = 'CUSTOM;';
 function getCustomFontName(fileName, properties,) {
