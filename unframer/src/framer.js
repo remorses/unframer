@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.FGVXATZ3.mjs
+// /:https://app.framerstatic.com/framer.63TL3T73.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -34239,9 +34239,9 @@ function Router({
               },),
             ],
           },),
+          editorBar,
           /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
           /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
-          editorBar,
         ],
       },),
     },),
