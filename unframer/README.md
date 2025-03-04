@@ -15,6 +15,8 @@
 
 ## Usage
 
+You can watch a [Video Tutorial on YouTube here](https://www.youtube.com/watch?v=RL2BWqNSPhU) to see an overview of the process.
+
 1. Install unframer and update react to 19
 
     ```sh
