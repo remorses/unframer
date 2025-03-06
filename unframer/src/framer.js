@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.63TL3T73.mjs
+// /:https://app.framerstatic.com/framer.NRTEP3C4.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -19104,6 +19104,7 @@ var richTextCSSRules = [
   `
         p.framer-text,
         div.framer-text,
+        figure.framer-text,
         h1.framer-text,
         h2.framer-text,
         h3.framer-text,
@@ -19191,6 +19192,7 @@ var richTextCSSRules = [
         ul.framer-text:not(:first-child),
         blockquote.framer-text:not(:first-child),
         table.framer-text:not(:first-child),
+        figure.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -19410,6 +19412,21 @@ var richTextCSSRules = [
             box-sizing: border-box;
             padding-inline-end: 0.75ch;
             content: "\u2022";
+        }
+    `, /* css */
+  `
+        .framer-table-wrapper {
+            overflow-x: auto;
+        }
+    `, /* css */
+  `
+        table.framer-text,
+        .framer-table-wrapper table {
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: auto;
+            white-space: nowrap;
+            width: 100%;
         }
     `, /* css */
   `
@@ -32634,6 +32651,204 @@ var LazyValue = class {
     }
   }
 };
+var noLocale = Symbol('noLocale',);
+var resolveSlugCache = /* @__PURE__ */ new Map();
+function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
+  var _a, _b;
+  const cache2 =
+    (_b =
+        (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,)) ==
+            null
+          ? void 0
+          : _a.get(unresolvedSlug.collectionId,)) == null
+      ? void 0
+      : _b.get(unresolvedSlug.collectionItemId,);
+  if (cache2) return cache2;
+  const collectionCache = resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,) ?? /* @__PURE__ */ new Map();
+  resolveSlugCache.set((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale, collectionCache,);
+  const collectionItemCache = collectionCache.get(unresolvedSlug.collectionId,) ?? /* @__PURE__ */ new Map();
+  collectionCache.set(unresolvedSlug.collectionId, collectionItemCache,);
+  const lazyValue = new LazyValue(async () => {
+    try {
+      const getUtils = utilsByCollectionId[unresolvedSlug.collectionId];
+      if (!getUtils) {
+        throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}`,);
+      }
+      const utils = await getUtils();
+      if (!utils) throw new Error('Collection does not contain utility functions',);
+      const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
+      return slug;
+    } catch (error) {
+      console.warn(`Failed to resolve slug: ${error instanceof Error ? error.message : 'Unknown error'}`,);
+      return void 0;
+    }
+  },);
+  collectionItemCache.set(unresolvedSlug.collectionItemId, lazyValue,);
+  return lazyValue;
+}
+async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
+  async function handleSlugs(unresolvedSlugs,) {
+    if (!unresolvedSlugs || !collectionUtils) return {};
+    const result = {};
+    for (const slugKey in unresolvedSlugs) {
+      const unresolvedSlug = unresolvedSlugs[slugKey];
+      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
+      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
+      await lazyValue.preload();
+      const value = lazyValue.read();
+      if (value) {
+        result[slugKey] = value;
+      }
+    }
+    return result;
+  }
+  const [pathResult, slugResult,] = await Promise.allSettled([handleSlugs(unresolvedPathSlugs,), handleSlugs(unresolvedHashSlugs,),],);
+  return {
+    path: pathResult.status === 'fulfilled' ? pathResult.value : void 0,
+    hash: slugResult.status === 'fulfilled' ? slugResult.value : void 0,
+  };
+}
+function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
+  const promises = [];
+  function handleSlugs(unresolvedSlugs,) {
+    if (!unresolvedSlugs || !collectionUtils) return void 0;
+    const result2 = {};
+    for (const slugKey in unresolvedSlugs) {
+      const unresolvedSlug = unresolvedSlugs[slugKey];
+      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
+      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
+      const promise = lazyValue.preload();
+      if (promise) {
+        promises.push(promise,);
+      } else {
+        const value = lazyValue.read();
+        if (value) {
+          result2[slugKey] = value;
+        }
+      }
+    }
+    return result2;
+  }
+  const result = {
+    path: handleSlugs(unresolvedPathSlugs,),
+    hash: handleSlugs(unresolvedHashSlugs,),
+  };
+  if (promises.length) {
+    throw Promise.allSettled(promises,);
+  }
+  return result;
+}
+function isInternalURL(href,) {
+  if (href === void 0) return false;
+  if (href.startsWith('#',) || href.startsWith('/',) || href.startsWith('.',)) return true;
+  return false;
+}
+function isValidURL(href, isInternal,) {
+  try {
+    const url = new URL(href,);
+    return Boolean(url.protocol,);
+  } catch {}
+  return isInternal;
+}
+async function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
+  const {
+    webPageId,
+    hash: hash2,
+    pathVariables,
+    hashVariables,
+    unresolvedHashSlugs,
+    unresolvedPathSlugs,
+  } = pageLink;
+  const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
+}
+function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
+  const {
+    webPageId,
+    hash: hash2,
+    pathVariables,
+    hashVariables,
+    unresolvedHashSlugs,
+    unresolvedPathSlugs,
+  } = pageLink;
+  const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
+  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
+}
+function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVariables,) {
+  if (!router.routes || !router.getRoute) {
+    return;
+  }
+  const isInternal = isInternalURL(path,);
+  if (!isInternal) {
+    return;
+  }
+  try {
+    const [pathnameWithQueryParams, hash2,] = path.split('#', 2,);
+    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const {
+      routeId,
+      pathVariables,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    const route = router.getRoute(routeId,);
+    if (route) {
+      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      return {
+        routeId,
+        route,
+        href: path,
+        // If the link is resolved (in ResolveLink), we trust that the hash is also resolved. Otherwise, it
+        // should be resolved by getHashForRoute.
+        elementId: hash2,
+        pathVariables: combinedPathVariables,
+      };
+    }
+  } catch {}
+}
+function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,) {
+  var _a;
+  const combinedPathVariables = {
+    ...implicitPathVariables,
+    ...pathVariables,
+    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.path),
+  };
+  const combinedHashVariables = {
+    ...implicitPathVariables,
+    ...hashVariables,
+    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.hash),
+  };
+  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
+  const resolvedHref = getPathForRoute(route, {
+    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
+    hash: hash2,
+    pathVariables: combinedPathVariables,
+    hashVariables: combinedHashVariables,
+    preserveQueryParams: router.preserveQueryParams,
+  },);
+  const resolvedHash = resolvedHref.split('#', 2,)[1];
+  return {
+    routeId,
+    route,
+    href: resolvedHref,
+    elementId: resolvedHash,
+    pathVariables: combinedPathVariables,
+  };
+}
+var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
+var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
+function useImplicitPathVariables() {
+  var _a;
+  const contextPathVariables = useContext(PathVariablesContext,);
+  const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
+  const pathVariables = contextPathVariables || currentPathVariables;
+  return pathVariables;
+}
+var linkKey = 'webPageId';
+function isLinkToWebPage(link,) {
+  return Boolean(link && typeof link === 'object' && linkKey in link,);
+}
 var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
@@ -32970,136 +33185,6 @@ function withChildrenCanSuspend(Component18,) {
     },);
   },);
 }
-function linkInfoKey(link,) {
-  var _a, _b;
-  return `${link.scopeId}:${link.nodeId}:${(_a = link.furthestExternalComponent) == null ? void 0 : _a.scopeId}:${
-    (_b = link.furthestExternalComponent) == null ? void 0 : _b.nodeId
-  }`;
-}
-var NestedLinksCollector = class {
-  constructor() {
-    __publicField(this, 'collectedLinks', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'nestingInfo', /* @__PURE__ */ new Map(),);
-  }
-  clear() {
-    this.collectedLinks.clear();
-    this.nestingInfo.clear();
-  }
-  /**
-   * Returns a Map of outer links to their inner links.
-   *
-   * NOTE: This function is called in the SSG renderer sandbox (<root>/src/ssg/src/ssg-sandbox-renderer/sandbox/worker/renderer.ts)
-   */
-  getLinks() {
-    const result = /* @__PURE__ */ new Map();
-    for (const [outerLinkKey, innerLinkKeys,] of this.nestingInfo) {
-      const outerLinkInfo = this.collectedLinks.get(outerLinkKey,);
-      assert(outerLinkInfo, `Outer link not found: ${outerLinkKey}`,);
-      const links = Array.from(innerLinkKeys,).map((innerLinkKey) => {
-        const innerLinkInfo = this.collectedLinks.get(innerLinkKey,);
-        assert(innerLinkInfo, `Inner link not found: ${innerLinkKey}`,);
-        return innerLinkInfo;
-      },);
-      result.set(outerLinkInfo, links,);
-    }
-    return result;
-  }
-  collectNestedLink(outerLink, innerLink,) {
-    if (typeof window !== 'undefined' && true || !outerLink.nodeId || !innerLink.nodeId) {
-      return;
-    }
-    this.collectedLinks.set(linkInfoKey(outerLink,), outerLink,);
-    this.collectedLinks.set(linkInfoKey(innerLink,), innerLink,);
-    const outerLinkNestingInfo = this.nestingInfo.get(linkInfoKey(outerLink,),) ?? /* @__PURE__ */ new Set();
-    outerLinkNestingInfo.add(linkInfoKey(innerLink,),);
-    this.nestingInfo.set(linkInfoKey(outerLink,), outerLinkNestingInfo,);
-  }
-};
-var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
-var elementKey = 'element';
-var collectionKey = 'collection';
-var collectionItemIdKey = 'collectionItemId';
-var pathVariablesKey = 'pathVariables';
-var mediaType = 'framer/page-link,';
-function isFramerPageLink(value,) {
-  return isString(value,) && value.startsWith(`data:${mediaType}`,);
-}
-function createFramerPageLink(targetId = null, options = {},) {
-  const target = targetId ? targetId : 'none';
-  const link = new URL(`data:${mediaType}${target}`,);
-  if (options.element) {
-    link.searchParams.append(elementKey, options.element,);
-  }
-  if (options.collectionItem) {
-    link.searchParams.append(collectionKey, options.collectionItem.collection,);
-    link.searchParams.append(collectionItemIdKey, options.collectionItem.collectionItemId,);
-    link.searchParams.append(pathVariablesKey, new URLSearchParams(options.collectionItem.pathVariables,).toString(),);
-  }
-  return link.href;
-}
-function parseFramerPageLink(link,) {
-  if (!isFramerPageLink(link,)) return;
-  try {
-    const url = new URL(link,);
-    const target = url.pathname.substring(mediaType.length,);
-    const searchParams = url.searchParams;
-    const element = searchParams.has(elementKey,) ? searchParams.get(elementKey,) : void 0;
-    let collectionItem;
-    const collection = searchParams.get(collectionKey,);
-    const collectionItemId = searchParams.get(collectionItemIdKey,);
-    const pathVariablesValue = searchParams.get(pathVariablesKey,);
-    if (collection && collectionItemId && pathVariablesValue) {
-      const pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesValue,).entries(),);
-      collectionItem = {
-        collection,
-        collectionItemId,
-        pathVariables,
-      };
-    }
-    return {
-      target: target === 'none' ? null : target,
-      /**
-       * For historical reason we used to set "element=none" into the
-       * datalink, we no longer do that today, but we still keep this code
-       * so we could parse legacy links correctly.
-       */
-      element: element === 'none' ? void 0 : element,
-      collectionItem,
-    };
-  } catch {
-    return;
-  }
-}
-function shouldOpenLinkInNewTab(link,) {
-  return !isFramerPageLink(link,);
-}
-function navigateFromAttributes(navigate, element, implicitPathVariables,) {
-  var _a;
-  let routeId = element.getAttribute('data-framer-page-link-target',/* Page */
-  );
-  let elementId;
-  let pathVariables;
-  if (routeId) {
-    elementId = element.getAttribute('data-framer-page-link-element',/* Element */
-    ) ?? void 0;
-    const pathVariablesRaw = element.getAttribute('data-framer-page-link-path-variables',/* PathVariables */
-    );
-    if (pathVariablesRaw) {
-      pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesRaw,).entries(),);
-    }
-  } else {
-    const href = element.getAttribute('href',);
-    if (!href) return false;
-    const link = parseFramerPageLink(href,);
-    if (!link || !link.target) return false;
-    routeId = link.target;
-    elementId = link.element ?? void 0;
-    pathVariables = (_a = link.collectionItem) == null ? void 0 : _a.pathVariables;
-  }
-  const smoothScroll = elementId ? element.dataset.framerSmoothScroll !== void 0 : void 0;
-  navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
-  return true;
-}
 var PRELOAD_AFTER_MS = 500;
 var OBSERVER_THRESHOLD = 0.9;
 var LOW_MEMORY_THRESHOLD = 1.7;
@@ -33186,56 +33271,110 @@ function getObserveRouteForPreloadingFn() {
 var observeRouteForPreloading =
   // this also guards `window`
   !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
-var noLocale = Symbol('noLocale',);
-var resolveSlugCache = /* @__PURE__ */ new Map();
-function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
-  var _a, _b;
-  const cache2 =
-    (_b =
-        (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,)) ==
-            null
-          ? void 0
-          : _a.get(unresolvedSlug.collectionId,)) == null
-      ? void 0
-      : _b.get(unresolvedSlug.collectionItemId,);
-  if (cache2) return cache2;
-  const collectionCache = resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,) ?? /* @__PURE__ */ new Map();
-  resolveSlugCache.set((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale, collectionCache,);
-  const collectionItemCache = collectionCache.get(unresolvedSlug.collectionId,) ?? /* @__PURE__ */ new Map();
-  collectionCache.set(unresolvedSlug.collectionId, collectionItemCache,);
-  const lazyValue = new LazyValue(async () => {
-    try {
-      const getUtils = utilsByCollectionId[unresolvedSlug.collectionId];
-      if (!getUtils) {
-        throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}`,);
-      }
-      const utils = await getUtils();
-      if (!utils) throw new Error('Collection does not contain utility functions',);
-      const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
-      return slug;
-    } catch (error) {
-      console.warn(`Failed to resolve slug: ${error instanceof Error ? error.message : 'Unknown error'}`,);
-      return void 0;
+function getRouteFromPageLink(pageLink, router, currentRoute,) {
+  var _a;
+  if (isString(pageLink,)) {
+    const isInternal = isInternalURL(pageLink,);
+    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+      return;
     }
-  },);
-  collectionItemCache.set(unresolvedSlug.collectionItemId, lazyValue,);
-  return lazyValue;
-}
-function useIsOnFramerCanvas() {
-  return RenderTarget.current() === RenderTarget.canvas;
-}
-var linkKey = 'webPageId';
-function isLinkToWebPage(link,) {
-  return Boolean(link && typeof link === 'object' && linkKey in link,);
-}
-function createVariablesFromPageLinkCollectionItem(collectionItem,) {
-  if (!collectionItem) return void 0;
-  const variables = {};
-  for (const pathVariablesKey2 in collectionItem.pathVariables) {
-    const value = collectionItem.pathVariables[pathVariablesKey2];
-    if (value) variables[pathVariablesKey2] = value;
+    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
+    if (pathnameWithQueryParams === void 0) return;
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    if (pathname === void 0) return;
+    const {
+      routeId,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    return router.getRoute(routeId,);
   }
-  return variables;
+  const {
+    webPageId,
+  } = pageLink;
+  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
+}
+var elementKey = 'element';
+var collectionKey = 'collection';
+var collectionItemIdKey = 'collectionItemId';
+var pathVariablesKey = 'pathVariables';
+var mediaType = 'framer/page-link,';
+function isFramerPageLink(value,) {
+  return isString(value,) && value.startsWith(`data:${mediaType}`,);
+}
+function createFramerPageLink(targetId = null, options = {},) {
+  const target = targetId ? targetId : 'none';
+  const link = new URL(`data:${mediaType}${target}`,);
+  if (options.element) {
+    link.searchParams.append(elementKey, options.element,);
+  }
+  if (options.collectionItem) {
+    link.searchParams.append(collectionKey, options.collectionItem.collection,);
+    link.searchParams.append(collectionItemIdKey, options.collectionItem.collectionItemId,);
+    link.searchParams.append(pathVariablesKey, new URLSearchParams(options.collectionItem.pathVariables,).toString(),);
+  }
+  return link.href;
+}
+function parseFramerPageLink(link,) {
+  if (!isFramerPageLink(link,)) return;
+  try {
+    const url = new URL(link,);
+    const target = url.pathname.substring(mediaType.length,);
+    const searchParams = url.searchParams;
+    const element = searchParams.has(elementKey,) ? searchParams.get(elementKey,) : void 0;
+    let collectionItem;
+    const collection = searchParams.get(collectionKey,);
+    const collectionItemId = searchParams.get(collectionItemIdKey,);
+    const pathVariablesValue = searchParams.get(pathVariablesKey,);
+    if (collection && collectionItemId && pathVariablesValue) {
+      const pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesValue,).entries(),);
+      collectionItem = {
+        collection,
+        collectionItemId,
+        pathVariables,
+      };
+    }
+    return {
+      target: target === 'none' ? null : target,
+      /**
+       * For historical reason we used to set "element=none" into the
+       * datalink, we no longer do that today, but we still keep this code
+       * so we could parse legacy links correctly.
+       */
+      element: element === 'none' ? void 0 : element,
+      collectionItem,
+    };
+  } catch {
+    return;
+  }
+}
+function shouldOpenLinkInNewTab(link,) {
+  return !isFramerPageLink(link,);
+}
+function navigateFromAttributes(navigate, element, implicitPathVariables,) {
+  var _a;
+  let routeId = element.getAttribute('data-framer-page-link-target',/* Page */
+  );
+  let elementId;
+  let pathVariables;
+  if (routeId) {
+    elementId = element.getAttribute('data-framer-page-link-element',/* Element */
+    ) ?? void 0;
+    const pathVariablesRaw = element.getAttribute('data-framer-page-link-path-variables',/* PathVariables */
+    );
+    if (pathVariablesRaw) {
+      pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesRaw,).entries(),);
+    }
+  } else {
+    const href = element.getAttribute('href',);
+    if (!href) return false;
+    const link = parseFramerPageLink(href,);
+    if (!link || !link.target) return false;
+    routeId = link.target;
+    elementId = link.element ?? void 0;
+    pathVariables = (_a = link.collectionItem) == null ? void 0 : _a.pathVariables;
+  }
+  const smoothScroll = elementId ? element.dataset.framerSmoothScroll !== void 0 : void 0;
+  navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
+  return true;
 }
 function linkFromFramerPageLink(link,) {
   if (!isFramerPageLink(link,)) return link;
@@ -33253,14 +33392,14 @@ function linkFromFramerPageLink(link,) {
     pathVariables: createVariablesFromPageLinkCollectionItem(collectionItem,),
   };
 }
-var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
-var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
-function useImplicitPathVariables() {
-  var _a;
-  const contextPathVariables = useContext(PathVariablesContext,);
-  const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
-  const pathVariables = contextPathVariables || currentPathVariables;
-  return pathVariables;
+function createVariablesFromPageLinkCollectionItem(collectionItem,) {
+  if (!collectionItem) return void 0;
+  const variables = {};
+  for (const pathVariablesKey2 in collectionItem.pathVariables) {
+    const value = collectionItem.pathVariables[pathVariablesKey2];
+    if (value) variables[pathVariablesKey2] = value;
+  }
+  return variables;
 }
 function linkMatchesRoute(route, {
   webPageId,
@@ -33287,29 +33426,19 @@ function useLinkMatchesRoute(link,) {
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
-function isInternalURL(href,) {
-  if (href === void 0) return false;
-  if (href.startsWith('#',) || href.startsWith('/',) || href.startsWith('.',)) return true;
-  return false;
-}
-function isValidURL(href, isInternal,) {
+function makeUrlAbsolute(href,) {
   try {
-    const url = new URL(href,);
-    return Boolean(url.protocol,);
-  } catch {}
-  return isInternal;
+    const url = new URL(href, safeWindow.document.baseURI,);
+    return url.origin === safeWindow.location.origin ? url.pathname + url.search + url.hash : url.href;
+  } catch {
+    return href;
+  }
 }
 var AnchorLinkTarget = /* @__PURE__ */ ((AnchorLinkTarget2) => {
   AnchorLinkTarget2['_blank'] = '_blank';
   AnchorLinkTarget2['_self'] = '_self';
   return AnchorLinkTarget2;
 })(AnchorLinkTarget || {},);
-function getTargetAttrValue(openInNewTab, isInternal,) {
-  if (openInNewTab !== void 0) {
-    return openInNewTab ? '_blank' : void 0;
-  }
-  return isInternal ? void 0 : '_blank';
-}
 function propsForLink(href, openInNewTab = void 0, trackingData,) {
   const isInternal = isInternalURL(href,);
   const target = getTargetAttrValue(openInNewTab, isInternal,);
@@ -33333,6 +33462,193 @@ function propsForLink(href, openInNewTab = void 0, trackingData,) {
       rel,
     };
 }
+function getTargetAttrValue(openInNewTab, isInternal,) {
+  if (openInNewTab !== void 0) {
+    return openInNewTab ? '_blank' : void 0;
+  }
+  return isInternal ? void 0 : '_blank';
+}
+function linkInfoKey(link,) {
+  var _a, _b;
+  return `${link.scopeId}:${link.nodeId}:${(_a = link.furthestExternalComponent) == null ? void 0 : _a.scopeId}:${
+    (_b = link.furthestExternalComponent) == null ? void 0 : _b.nodeId
+  }`;
+}
+var NestedLinksCollector = class {
+  constructor() {
+    __publicField(this, 'collectedLinks', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'nestingInfo', /* @__PURE__ */ new Map(),);
+  }
+  clear() {
+    this.collectedLinks.clear();
+    this.nestingInfo.clear();
+  }
+  /**
+   * Returns a Map of outer links to their inner links.
+   *
+   * NOTE: This function is called in the SSG renderer sandbox (<root>/src/ssg/src/ssg-sandbox-renderer/sandbox/worker/renderer.ts)
+   */
+  getLinks() {
+    const result = /* @__PURE__ */ new Map();
+    for (const [outerLinkKey, innerLinkKeys,] of this.nestingInfo) {
+      const outerLinkInfo = this.collectedLinks.get(outerLinkKey,);
+      assert(outerLinkInfo, `Outer link not found: ${outerLinkKey}`,);
+      const links = Array.from(innerLinkKeys,).map((innerLinkKey) => {
+        const innerLinkInfo = this.collectedLinks.get(innerLinkKey,);
+        assert(innerLinkInfo, `Inner link not found: ${innerLinkKey}`,);
+        return innerLinkInfo;
+      },);
+      result.set(outerLinkInfo, links,);
+    }
+    return result;
+  }
+  collectNestedLink(outerLink, innerLink,) {
+    if (typeof window !== 'undefined' && true || !outerLink.nodeId || !innerLink.nodeId) {
+      return;
+    }
+    this.collectedLinks.set(linkInfoKey(outerLink,), outerLink,);
+    this.collectedLinks.set(linkInfoKey(innerLink,), innerLink,);
+    const outerLinkNestingInfo = this.nestingInfo.get(linkInfoKey(outerLink,),) ?? /* @__PURE__ */ new Set();
+    outerLinkNestingInfo.add(linkInfoKey(innerLink,),);
+    this.nestingInfo.set(linkInfoKey(outerLink,), outerLinkNestingInfo,);
+  }
+};
+var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
+function useIsOnFramerCanvas() {
+  return RenderTarget.current() === RenderTarget.canvas;
+}
+var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
+function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
+  const outerLink = useContext(OuterLinkContext,);
+  const furthestExternalComponent = useFurthestExternalComponent();
+  const innerLink = useMemo(() => ({
+    scopeId,
+    nodeId,
+    furthestExternalComponent,
+  }), [scopeId, nodeId, furthestExternalComponent,],);
+  const router = useRouter();
+  const currentRoute = useCurrentRoute();
+  const route = useMemo(() => {
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    return getRouteFromPageLink(pageLink, router, currentRoute,);
+  }, [currentRoute, href, router,],);
+  const {
+    replaceNestedLinks,
+  } = useLibraryFeatures();
+  const isOnFramerCanvas = useIsOnFramerCanvas();
+  const shouldReplaceLink = Boolean(
+    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
+  );
+  const onClick = useCallback((event) => {
+    var _a;
+    if (!propsAddedByLink.href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(__unframerNavigator2.userAgent,);
+    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
+      openExternalLink(propsAddedByLink.href, '', '_blank',);
+      return;
+    }
+    if (route) {
+      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+    } else {
+      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
+    }
+  }, [propsAddedByLink, route,],);
+  const onAuxClick = useCallback((event) => {
+    if (!propsAddedByLink.href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openExternalLink(propsAddedByLink.href, '', '_blank',);
+  }, [propsAddedByLink,],);
+  const onKeyDown = useCallback((event) => {
+    var _a;
+    if (!propsAddedByLink.href) return;
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (route) {
+      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+    } else {
+      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
+    }
+  }, [propsAddedByLink, route,],);
+  useRefEffect(observerRef, (node) => {
+    if (node === null) return;
+    if (!shouldReplaceLink) return;
+    node.dataset.hydrated = 'true';
+  }, [shouldReplaceLink,],);
+  let replacedChildren = children;
+  if (shouldReplaceLink) {
+    Children.forEach(children, (child) => {
+      if (!isChildReplaceable(child,)) return;
+      assert(
+        linkInfoIsCollectable(outerLink,),
+        'outerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
+      );
+      assert(
+        linkInfoIsCollectable(innerLink,),
+        'innerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
+      );
+      nestedLinksCollector.collectNestedLink(outerLink, innerLink,);
+    },);
+    replacedChildren = Children.map(children, (child) => {
+      if (!isChildReplaceable(child,)) return child;
+      const tag = maybeReplaceAnchorWithSpan(child.type,);
+      const {
+        children: childChildren,
+        ...childProps
+      } = child.props;
+      const props = {
+        ...childProps,
+        // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
+        'data-nested-link': true,
+        role: 'link',
+        tabIndex: 0,
+        onClick,
+        onAuxClick,
+        onKeyDown,
+        as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
+      };
+      const ref = 'ref' in child ? child.ref : void 0;
+      return createElement(tag, // We need to pass the ref here again, otherwise it will be lost
+      {
+        ...props,
+        ref,
+      }, childChildren,);
+    },);
+  }
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
+    value: innerLink,
+    children: replacedChildren,
+  },);
+}
+function linkInfoIsCollectable(linkInfo,) {
+  return !isUndefined(linkInfo == null ? void 0 : linkInfo.nodeId,);
+}
+function isChildReplaceable(child,) {
+  return isValidElement(child,) &&
+    (maybeReplaceAnchorWithSpan(child.type,) !== child.type || maybeReplaceAnchorWithSpan(child.props.as,) !== child.props.as);
+}
+function openExternalLink(href, rel, target,) {
+  const link = document.createElement('a',);
+  link.href = href;
+  if (rel) {
+    link.rel = rel;
+  }
+  if (target) {
+    link.target = target;
+  }
+  document.body.appendChild(link,);
+  link.click();
+  link.remove();
+}
+function maybeReplaceAnchorWithSpan(component,) {
+  if (component === 'a') return 'span';
+  if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
+  return component;
+}
 function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
   var _a, _b;
   const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
@@ -33340,14 +33656,6 @@ function performNavigation(router, routeId, elementId, combinedPathVariables, sm
     void route.page.preload();
   }
   (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
-}
-function makeUrlAbsolute(href,) {
-  try {
-    const url = new URL(href, safeWindow.document.baseURI,);
-    return url.origin === safeWindow.location.origin ? url.pathname + url.search + url.hash : url.href;
-  } catch {
-    return href;
-  }
 }
 function createOnClickLinkHandler(router, routeId, href, trackingData, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
@@ -33363,157 +33671,6 @@ function createOnClickLinkHandler(router, routeId, href, trackingData, elementId
     event.preventDefault();
     performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
   };
-}
-function openExternalLink(href, rel, target,) {
-  const link = document.createElement('a',);
-  link.href = href;
-  if (rel) {
-    link.rel = rel;
-  }
-  if (target) {
-    link.target = target;
-  }
-  document.body.appendChild(link,);
-  link.click();
-  link.remove();
-}
-async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
-  async function handleSlugs(unresolvedSlugs,) {
-    if (!unresolvedSlugs || !collectionUtils) return {};
-    const result = {};
-    for (const slugKey in unresolvedSlugs) {
-      const unresolvedSlug = unresolvedSlugs[slugKey];
-      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
-      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
-      await lazyValue.preload();
-      const value = lazyValue.read();
-      if (value) {
-        result[slugKey] = value;
-      }
-    }
-    return result;
-  }
-  const [pathResult, slugResult,] = await Promise.allSettled([handleSlugs(unresolvedPathSlugs,), handleSlugs(unresolvedHashSlugs,),],);
-  return {
-    path: pathResult.status === 'fulfilled' ? pathResult.value : void 0,
-    hash: slugResult.status === 'fulfilled' ? slugResult.value : void 0,
-  };
-}
-function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
-  const promises = [];
-  function handleSlugs(unresolvedSlugs,) {
-    if (!unresolvedSlugs || !collectionUtils) return void 0;
-    const result2 = {};
-    for (const slugKey in unresolvedSlugs) {
-      const unresolvedSlug = unresolvedSlugs[slugKey];
-      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
-      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
-      const promise = lazyValue.preload();
-      if (promise) {
-        promises.push(promise,);
-      } else {
-        const value = lazyValue.read();
-        if (value) {
-          result2[slugKey] = value;
-        }
-      }
-    }
-    return result2;
-  }
-  const result = {
-    path: handleSlugs(unresolvedPathSlugs,),
-    hash: handleSlugs(unresolvedHashSlugs,),
-  };
-  if (promises.length) {
-    throw Promise.allSettled(promises,);
-  }
-  return result;
-}
-function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,) {
-  var _a;
-  const combinedPathVariables = {
-    ...implicitPathVariables,
-    ...pathVariables,
-    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.path),
-  };
-  const combinedHashVariables = {
-    ...implicitPathVariables,
-    ...hashVariables,
-    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.hash),
-  };
-  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
-  const resolvedHref = getPathForRoute(route, {
-    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-    currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
-    hash: hash2,
-    pathVariables: combinedPathVariables,
-    hashVariables: combinedHashVariables,
-    preserveQueryParams: router.preserveQueryParams,
-  },);
-  const resolvedHash = resolvedHref.split('#', 2,)[1];
-  return {
-    routeId,
-    route,
-    href: resolvedHref,
-    elementId: resolvedHash,
-    pathVariables: combinedPathVariables,
-  };
-}
-function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVariables,) {
-  if (!router.routes || !router.getRoute) {
-    return;
-  }
-  const isInternal = isInternalURL(path,);
-  if (!isInternal) {
-    return;
-  }
-  try {
-    const [pathnameWithQueryParams, hash2,] = path.split('#', 2,);
-    assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    assert(pathname !== void 0, 'A href must have a defined pathname.',);
-    const {
-      routeId,
-      pathVariables,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    const route = router.getRoute(routeId,);
-    if (route) {
-      const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
-      return {
-        routeId,
-        route,
-        href: path,
-        // If the link is resolved (in ResolveLink), we trust that the hash is also resolved. Otherwise, it
-        // should be resolved by getHashForRoute.
-        elementId: hash2,
-        pathVariables: combinedPathVariables,
-      };
-    }
-  } catch {}
-}
-async function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
-  const {
-    webPageId,
-    hash: hash2,
-    pathVariables,
-    hashVariables,
-    unresolvedHashSlugs,
-    unresolvedPathSlugs,
-  } = pageLink;
-  const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
-}
-function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
-  const {
-    webPageId,
-    hash: hash2,
-    pathVariables,
-    hashVariables,
-    unresolvedHashSlugs,
-    unresolvedPathSlugs,
-  } = pageLink;
-  const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
 }
 function propsForRoutePath(href, openInNewTab, router, currentRoute, trackingData, implicitPathVariables, smoothScroll,) {
   if (!currentRoute) return propsForLink(href, openInNewTab, trackingData,);
@@ -33544,27 +33701,6 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, trackingDat
     navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
     'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
   };
-}
-function getRouteFromPageLink(pageLink, router, currentRoute,) {
-  var _a;
-  if (isString(pageLink,)) {
-    const isInternal = isInternalURL(pageLink,);
-    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-      return;
-    }
-    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
-    if (pathnameWithQueryParams === void 0) return;
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    if (pathname === void 0) return;
-    const {
-      routeId,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    return router.getRoute(routeId,);
-  }
-  const {
-    webPageId,
-  } = pageLink;
-  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
   children,
@@ -33707,116 +33843,6 @@ function preventClickOnNativeAnchorLink(event,) {
   if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
   event.preventDefault();
 }
-var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
-function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
-  const outerLink = useContext(OuterLinkContext,);
-  const furthestExternalComponent = useFurthestExternalComponent();
-  const innerLink = useMemo(() => ({
-    scopeId,
-    nodeId,
-    furthestExternalComponent,
-  }), [scopeId, nodeId, furthestExternalComponent,],);
-  const router = useRouter();
-  const currentRoute = useCurrentRoute();
-  const route = useMemo(() => {
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    return getRouteFromPageLink(pageLink, router, currentRoute,);
-  }, [currentRoute, href, router,],);
-  const {
-    replaceNestedLinks,
-  } = useLibraryFeatures();
-  const isOnFramerCanvas = useIsOnFramerCanvas();
-  const shouldReplaceLink = Boolean(
-    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
-  );
-  const onClick = useCallback((event) => {
-    var _a;
-    if (!propsAddedByLink.href) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(__unframerNavigator2.userAgent,);
-    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
-      openExternalLink(propsAddedByLink.href, '', '_blank',);
-      return;
-    }
-    if (route) {
-      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
-    } else {
-      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
-    }
-  }, [propsAddedByLink, route,],);
-  const onAuxClick = useCallback((event) => {
-    if (!propsAddedByLink.href) return;
-    event.preventDefault();
-    event.stopPropagation();
-    openExternalLink(propsAddedByLink.href, '', '_blank',);
-  }, [propsAddedByLink,],);
-  const onKeyDown = useCallback((event) => {
-    var _a;
-    if (!propsAddedByLink.href) return;
-    if (event.key !== 'Enter') return;
-    event.preventDefault();
-    event.stopPropagation();
-    if (route) {
-      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
-    } else {
-      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
-    }
-  }, [propsAddedByLink, route,],);
-  useRefEffect(observerRef, (node) => {
-    if (node === null) return;
-    if (!shouldReplaceLink) return;
-    node.dataset.hydrated = 'true';
-  }, [shouldReplaceLink,],);
-  let replacedChildren = children;
-  if (shouldReplaceLink) {
-    Children.forEach(children, (child) => {
-      if (!isChildReplaceable(child,)) return;
-      assert(
-        linkInfoIsCollectable(outerLink,),
-        'outerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
-      );
-      assert(
-        linkInfoIsCollectable(innerLink,),
-        'innerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
-      );
-      nestedLinksCollector.collectNestedLink(outerLink, innerLink,);
-    },);
-    replacedChildren = Children.map(children, (child) => {
-      if (!isChildReplaceable(child,)) return child;
-      const tag = maybeReplaceAnchorWithSpan(child.type,);
-      const {
-        children: childChildren,
-        ...childProps
-      } = child.props;
-      const props = {
-        ...childProps,
-        // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
-        'data-nested-link': true,
-        role: 'link',
-        tabIndex: 0,
-        onClick,
-        onAuxClick,
-        onKeyDown,
-        as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
-      };
-      const ref = 'ref' in child ? child.ref : void 0;
-      return createElement(tag, // We need to pass the ref here again, otherwise it will be lost
-      {
-        ...props,
-        ref,
-      }, childChildren,);
-    },);
-  }
-  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
-    value: innerLink,
-    children: replacedChildren,
-  },);
-}
-function linkInfoIsCollectable(linkInfo,) {
-  return !isUndefined(linkInfo == null ? void 0 : linkInfo.nodeId,);
-}
 function resolveLink(href, router, implicitPathVariables,) {
   return resolveLinkInternal(href, router, implicitPathVariables,);
 }
@@ -33875,15 +33901,6 @@ function resolvePageScope(pageLink, router,) {
     relative: false,
     preserveQueryParams: false,
   },);
-}
-function isChildReplaceable(child,) {
-  return isValidElement(child,) &&
-    (maybeReplaceAnchorWithSpan(child.type,) !== child.type || maybeReplaceAnchorWithSpan(child.props.as,) !== child.props.as);
-}
-function maybeReplaceAnchorWithSpan(component,) {
-  if (component === 'a') return 'span';
-  if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
-  return component;
 }
 var IgnoreErrors = class extends Component {
   constructor() {
@@ -42004,7 +42021,7 @@ var BuiltInFontSource = class {
         properties,
       } = asset;
       const fontName = properties.font.preferredFamily || properties.font.fontFamily;
-      const fontFamily = this.createFontFamily(fontName, properties.font.foundryName,);
+      const fontFamily = this.createFontFamily(fontName, properties.font.foundryName, properties.font.fontVersion,);
       const openTypeData = properties.font.openTypeData;
       const variationAxesData = properties.font.variationAxes;
       const isVariableFont2 = Array.isArray(variationAxesData,);
@@ -42045,7 +42062,7 @@ var BuiltInFontSource = class {
   getFontFamilyByName(family,) {
     return this.byFamilyName.get(family,) ?? null;
   }
-  createFontFamily(family, foundryName,) {
+  createFontFamily(family, foundryName, version2,) {
     const existingFontFamily = this.byFamilyName.get(family,);
     if (existingFontFamily) return existingFontFamily;
     const fontFamily = {
@@ -42053,6 +42070,7 @@ var BuiltInFontSource = class {
       name: family,
       fonts: [],
       foundryName,
+      version: version2,
     };
     this.addFontFamily(fontFamily,);
     return fontFamily;
@@ -44454,7 +44472,7 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
   const innerHTMLWithReplacedFramerPageLinks = React2.useMemo(() => {
     if (isOnCanvas || !getRoute || !currentRoute) return innerHTML;
     return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
-  }, [isOnCanvas, innerHTML, getRoute, currentRoute, implicitPathVariables,],);
+  }, [innerHTML, getRoute, currentRoute, implicitPathVariables,],);
   React2.useEffect(() => {
     const container = layoutRef.current;
     if (container === null) return;
@@ -46271,7 +46289,7 @@ var Text2 = /* @__PURE__ */ React4.forwardRef(function Text3(props, forwardedRef
   const rawHTML = React4.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
-  }, [props.rawHTML, getRoute, onCanvas, currentRoute, implicitPathVariables,],);
+  }, [props.rawHTML, getRoute, currentRoute, implicitPathVariables,],);
   return /* @__PURE__ */ jsx(TextComponent, {
     ...props,
     innerRef: layoutRef,
