@@ -277,21 +277,11 @@ If you find any errors rendering your components:
 - Color, a string
 - React component, created when you use a `component` variable in Framer, for example in the Ticker component
 
-## What should I use Unframer for?
-
-While having the ability to export Framer components to React is a powerful feature, you should try not to put any business logic in Framer if you want to use the React export feature.
-
-This of Framer as a stateless UI design tool, you can design components in Framer and export them to React, passing any kind of scalar value as a prop.
-
-If you find yourself writing custom code components and overrides in Framer, you would find it much easier to write custom code in your React codebase instead.
-
-You can basically do anything you want by designing components in Framer and rendering them in your app.
-
 ## Known limitations:
 
 - You may face React warnings like:
     - `Accessing element.ref was removed in React 19.` This warning appears because Framer still uses the old `element.ref` API which was removed in React 19. This warning is harmless and will be fixed when Framer updates their codebase to use the new React 19 APIs.
-    - `A tree hydrated but some attributes of the server rendered HTML didn't match the client properties.` This warning sometimes appears when using SWV icons, it should be harmless, it only happens in development mode.
+    - `A tree hydrated but some attributes of the server rendered HTML didn't match the client properties.` This warning sometimes appears when using SVG icons, it should be harmless, it only happens in development mode.
 
 ## Future Compatibility
 
