@@ -302,7 +302,3 @@ Here is the below landing page Lighthouse score when using Astro:
 ## Example
 
 Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
-
-```
-
-```
