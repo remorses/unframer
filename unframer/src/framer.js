@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.NRTEP3C4.mjs
+// /:https://app.framerstatic.com/framer.L4WLAZ5C.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -16238,6 +16238,7 @@ var mockWindow = {
   document: {
     baseURI: '',
     cookie: '',
+    referrer: null,
   },
   setTimeout: () => 0,
   clearTimeout: () => {},
@@ -24526,6 +24527,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
   const definition = [];
   let outsetElement = null;
   let insetElement = null;
+  let maskElement = null;
   const needsStrokeClip = false;
   const shadows = [];
   const insetShadows = [];
@@ -24573,13 +24575,16 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     const filterY = shadowRect.y / height * 100;
     const filterWidth = shadowRect.width / width * 100;
     const filterHeight = shadowRect.height / height * 100;
-    definition.push(/* @__PURE__ */ jsxs('filter', {
-      id: outsideShadowId.id,
+    const svgRect = {
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
       width: `${filterWidth.toFixed(1,)}%`,
       height: `${filterHeight.toFixed(1,)}%`,
+    };
+    definition.push(/* @__PURE__ */ jsxs('filter', {
+      id: outsideShadowId.id,
       filterUnits: 'objectBoundingBox',
+      ...svgRect,
       ...svgShadowProps,
       children: [
         filterElements,
@@ -24590,9 +24595,25 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
           : null,
       ],
     }, outsideShadowId.id,),);
+    const maskId = shapeId.add('mask',);
+    maskElement = /* @__PURE__ */ jsxs('mask', {
+      id: maskId.id,
+      ...svgRect,
+      children: [
+        /* @__PURE__ */ jsx('rect', {
+          ...svgRect,
+          fill: 'white',
+        },),
+        /* @__PURE__ */ jsx('use', {
+          href: shapeId.link,
+          fill: 'black',
+        },),
+      ],
+    },);
     outsetElement = /* @__PURE__ */ jsx('g', {
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
+      mask: maskId.urlLink,
       children: /* @__PURE__ */ jsx('use', {
         ...svgStrokeAttributes,
         fill: 'black',
@@ -24668,6 +24689,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     outsetElement,
     insetElement,
     needsStrokeClip,
+    maskElement,
   };
 }
 function outerShadowElements(shapeID, shadow, index,) {
@@ -32651,6 +32673,129 @@ var LazyValue = class {
     }
   }
 };
+function findAnchorElement(target, withinElement,) {
+  if (target instanceof HTMLAnchorElement) {
+    return target;
+  }
+  if (target instanceof Element) {
+    if (target === withinElement) {
+      return null;
+    }
+    return findAnchorElement(target.parentElement, withinElement,);
+  }
+  return null;
+}
+function ChildrenCanSuspend({
+  children,
+},) {
+  const {
+    useGranularSuspense,
+  } = useLibraryFeatures();
+  if (!useGranularSuspense) return children;
+  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
+    children,
+  },);
+}
+function withChildrenCanSuspend(Component18,) {
+  return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
+    return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
+      children: /* @__PURE__ */ jsx(Component18, {
+        ...props,
+        ref,
+      },),
+    },);
+  },);
+}
+var linkKey = 'webPageId';
+function isLinkToWebPage(link,) {
+  return Boolean(link && typeof link === 'object' && linkKey in link,);
+}
+var PRELOAD_AFTER_MS = 500;
+var OBSERVER_THRESHOLD = 0.9;
+var LOW_MEMORY_THRESHOLD = 1.7;
+var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
+var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
+var nodeToRoute = /* @__PURE__ */ new WeakMap();
+var preloadedRoutes = /* @__PURE__ */ new Set();
+var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function getObserveRouteForPreloadingFn() {
+  var _a;
+  const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
+  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
+  let effectiveType, preloadDisabled, maxPreloadAmount;
+  function updateConnection() {
+    effectiveType = connection.effectiveType || '';
+    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
+    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
+      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
+      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
+  }
+  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
+  updateConnection();
+  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
+    threshold: OBSERVER_THRESHOLD,
+  },);
+  let activePreloadsAmount = 0;
+  async function preloadTimeout(route, target,) {
+    if (preloadDisabled) return;
+    const nodesInViewport = routeToNodesInViewport.get(route,);
+    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) return;
+    ++activePreloadsAmount;
+    preloadedRoutes.add(route,);
+    const preloadDone = preloadRoute(route,).catch(() => {
+      if (false) {
+        throw new Error(
+          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
+        );
+      }
+    },);
+    observer2.unobserve(target,);
+    nodeToRoute.delete(target,);
+    for (const node of nodesInViewport) {
+      observer2.unobserve(node,);
+      nodeToRoute.delete(node,);
+    }
+    nodesInViewport.clear();
+    routeToNodesInViewport.delete(route,);
+    await preloadDone;
+    --activePreloadsAmount;
+  }
+  function onPreloadIntersectionChange(entries,) {
+    var _a2;
+    for (const entry of entries) {
+      const target = entry.target;
+      const route = nodeToRoute.get(target,);
+      if (!route || preloadedRoutes.has(route,)) {
+        observer2.unobserve(target,);
+        nodeToRoute.delete(target,);
+        continue;
+      }
+      const nodes = routeToNodesInViewport.get(route,);
+      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
+      if (entry.isIntersecting) {
+        if (activePreloadsAmount >= maxPreloadAmount) continue;
+        if (nodes) nodes.add(target,);
+        else routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
+        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
+      } else {
+        if (nodes) nodes.delete(target,);
+        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(route,);
+      }
+    }
+  }
+  return (route, node,) => {
+    if (preloadedRoutes.has(route,)) return;
+    nodeToRoute.set(node, route,);
+    observer2.observe(node,);
+    return () => {
+      nodeToRoute.delete(node,);
+      observer2.unobserve(node,);
+    };
+  };
+}
+var observeRouteForPreloading =
+  // this also guards `window`
+  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 var noLocale = Symbol('noLocale',);
 var resolveSlugCache = /* @__PURE__ */ new Map();
 function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
@@ -32836,6 +32981,136 @@ function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVa
     pathVariables: combinedPathVariables,
   };
 }
+function getRouteFromPageLink(pageLink, router, currentRoute,) {
+  var _a;
+  if (isString(pageLink,)) {
+    const isInternal = isInternalURL(pageLink,);
+    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
+      return;
+    }
+    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
+    if (pathnameWithQueryParams === void 0) return;
+    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
+    if (pathname === void 0) return;
+    const {
+      routeId,
+    } = inferInitialRouteFromPath(router.routes, pathname,);
+    return router.getRoute(routeId,);
+  }
+  const {
+    webPageId,
+  } = pageLink;
+  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
+}
+var elementKey = 'element';
+var collectionKey = 'collection';
+var collectionItemIdKey = 'collectionItemId';
+var pathVariablesKey = 'pathVariables';
+var mediaType = 'framer/page-link,';
+function isFramerPageLink(value,) {
+  return isString(value,) && value.startsWith(`data:${mediaType}`,);
+}
+function createFramerPageLink(targetId = null, options = {},) {
+  const target = targetId ? targetId : 'none';
+  const link = new URL(`data:${mediaType}${target}`,);
+  if (options.element) {
+    link.searchParams.append(elementKey, options.element,);
+  }
+  if (options.collectionItem) {
+    link.searchParams.append(collectionKey, options.collectionItem.collection,);
+    link.searchParams.append(collectionItemIdKey, options.collectionItem.collectionItemId,);
+    link.searchParams.append(pathVariablesKey, new URLSearchParams(options.collectionItem.pathVariables,).toString(),);
+  }
+  return link.href;
+}
+function parseFramerPageLink(link,) {
+  if (!isFramerPageLink(link,)) return;
+  try {
+    const url = new URL(link,);
+    const target = url.pathname.substring(mediaType.length,);
+    const searchParams = url.searchParams;
+    const element = searchParams.has(elementKey,) ? searchParams.get(elementKey,) : void 0;
+    let collectionItem;
+    const collection = searchParams.get(collectionKey,);
+    const collectionItemId = searchParams.get(collectionItemIdKey,);
+    const pathVariablesValue = searchParams.get(pathVariablesKey,);
+    if (collection && collectionItemId && pathVariablesValue) {
+      const pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesValue,).entries(),);
+      collectionItem = {
+        collection,
+        collectionItemId,
+        pathVariables,
+      };
+    }
+    return {
+      target: target === 'none' ? null : target,
+      /**
+       * For historical reason we used to set "element=none" into the
+       * datalink, we no longer do that today, but we still keep this code
+       * so we could parse legacy links correctly.
+       */
+      element: element === 'none' ? void 0 : element,
+      collectionItem,
+    };
+  } catch {
+    return;
+  }
+}
+function shouldOpenLinkInNewTab(link,) {
+  return !isFramerPageLink(link,);
+}
+function navigateFromAttributes(navigate, element, implicitPathVariables,) {
+  var _a;
+  let routeId = element.getAttribute('data-framer-page-link-target',/* Page */
+  );
+  let elementId;
+  let pathVariables;
+  if (routeId) {
+    elementId = element.getAttribute('data-framer-page-link-element',/* Element */
+    ) ?? void 0;
+    const pathVariablesRaw = element.getAttribute('data-framer-page-link-path-variables',/* PathVariables */
+    );
+    if (pathVariablesRaw) {
+      pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesRaw,).entries(),);
+    }
+  } else {
+    const href = element.getAttribute('href',);
+    if (!href) return false;
+    const link = parseFramerPageLink(href,);
+    if (!link || !link.target) return false;
+    routeId = link.target;
+    elementId = link.element ?? void 0;
+    pathVariables = (_a = link.collectionItem) == null ? void 0 : _a.pathVariables;
+  }
+  const smoothScroll = elementId ? element.dataset.framerSmoothScroll !== void 0 : void 0;
+  navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
+  return true;
+}
+function linkFromFramerPageLink(link,) {
+  if (!isFramerPageLink(link,)) return link;
+  const parsed = parseFramerPageLink(link,);
+  if (!parsed) return void 0;
+  const {
+    target,
+    element,
+    collectionItem,
+  } = parsed;
+  if (!target) return void 0;
+  return {
+    webPageId: target,
+    hash: element ?? void 0,
+    pathVariables: createVariablesFromPageLinkCollectionItem(collectionItem,),
+  };
+}
+function createVariablesFromPageLinkCollectionItem(collectionItem,) {
+  if (!collectionItem) return void 0;
+  const variables = {};
+  for (const pathVariablesKey2 in collectionItem.pathVariables) {
+    const value = collectionItem.pathVariables[pathVariablesKey2];
+    if (value) variables[pathVariablesKey2] = value;
+  }
+  return variables;
+}
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
 var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
 function useImplicitPathVariables() {
@@ -32845,10 +33120,593 @@ function useImplicitPathVariables() {
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
 }
-var linkKey = 'webPageId';
-function isLinkToWebPage(link,) {
-  return Boolean(link && typeof link === 'object' && linkKey in link,);
+function linkMatchesRoute(route, {
+  webPageId,
+  hash: hash2,
+  pathVariables,
+}, implicitPathVariables,) {
+  if (webPageId !== route.id) return false;
+  if (hash2) return false;
+  if (route.path && route.pathVariables) {
+    const combinedPathVariable = Object.assign({}, implicitPathVariables, pathVariables,);
+    for (const [, key7,] of route.path.matchAll(pathVariablesRegExp2,)) {
+      if (!key7) return false;
+      if (route.pathVariables[key7] !== combinedPathVariable[key7]) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
+function useLinkMatchesRoute(link,) {
+  const route = useCurrentRoute();
+  const contextPathVariables = useContext(PathVariablesContext,);
+  if (!route) return false;
+  const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
+  return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
+}
+var AnchorLinkTarget = /* @__PURE__ */ ((AnchorLinkTarget2) => {
+  AnchorLinkTarget2['_blank'] = '_blank';
+  AnchorLinkTarget2['_self'] = '_self';
+  return AnchorLinkTarget2;
+})(AnchorLinkTarget || {},);
+function propsForLink(href, openInNewTab = void 0, trackLinkClick,) {
+  const isInternal = isInternalURL(href,);
+  const target = getTargetAttrValue(openInNewTab, isInternal,);
+  const rel = !isInternal ? 'noopener' : void 0;
+  href = href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`;
+  return trackLinkClick
+    ? {
+      href,
+      target,
+      rel,
+      onClick() {
+        void trackLinkClick(href,);
+      },
+    }
+    : {
+      href,
+      target,
+      rel,
+    };
+}
+function getTargetAttrValue(openInNewTab, isInternal,) {
+  if (openInNewTab !== void 0) {
+    return openInNewTab ? '_blank' : void 0;
+  }
+  return isInternal ? void 0 : '_blank';
+}
+function linkInfoKey(link,) {
+  var _a, _b;
+  return `${link.scopeId}:${link.nodeId}:${(_a = link.furthestExternalComponent) == null ? void 0 : _a.scopeId}:${
+    (_b = link.furthestExternalComponent) == null ? void 0 : _b.nodeId
+  }`;
+}
+var NestedLinksCollector = class {
+  constructor() {
+    __publicField(this, 'collectedLinks', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'nestingInfo', /* @__PURE__ */ new Map(),);
+  }
+  clear() {
+    this.collectedLinks.clear();
+    this.nestingInfo.clear();
+  }
+  /**
+   * Returns a Map of outer links to their inner links.
+   *
+   * NOTE: This function is called in the SSG renderer sandbox (<root>/src/ssg/src/ssg-sandbox-renderer/sandbox/worker/renderer.ts)
+   */
+  getLinks() {
+    const result = /* @__PURE__ */ new Map();
+    for (const [outerLinkKey, innerLinkKeys,] of this.nestingInfo) {
+      const outerLinkInfo = this.collectedLinks.get(outerLinkKey,);
+      assert(outerLinkInfo, `Outer link not found: ${outerLinkKey}`,);
+      const links = Array.from(innerLinkKeys,).map((innerLinkKey) => {
+        const innerLinkInfo = this.collectedLinks.get(innerLinkKey,);
+        assert(innerLinkInfo, `Inner link not found: ${innerLinkKey}`,);
+        return innerLinkInfo;
+      },);
+      result.set(outerLinkInfo, links,);
+    }
+    return result;
+  }
+  collectNestedLink(outerLink, innerLink,) {
+    if (typeof window !== 'undefined' && true || !outerLink.nodeId || !innerLink.nodeId) {
+      return;
+    }
+    this.collectedLinks.set(linkInfoKey(outerLink,), outerLink,);
+    this.collectedLinks.set(linkInfoKey(innerLink,), innerLink,);
+    const outerLinkNestingInfo = this.nestingInfo.get(linkInfoKey(outerLink,),) ?? /* @__PURE__ */ new Set();
+    outerLinkNestingInfo.add(linkInfoKey(innerLink,),);
+    this.nestingInfo.set(linkInfoKey(outerLink,), outerLinkNestingInfo,);
+  }
+};
+var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
+function useIsOnFramerCanvas() {
+  return RenderTarget.current() === RenderTarget.canvas;
+}
+var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
+function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
+  const outerLink = useContext(OuterLinkContext,);
+  const furthestExternalComponent = useFurthestExternalComponent();
+  const innerLink = useMemo(() => ({
+    scopeId,
+    nodeId,
+    furthestExternalComponent,
+  }), [scopeId, nodeId, furthestExternalComponent,],);
+  const router = useRouter();
+  const currentRoute = useCurrentRoute();
+  const route = useMemo(() => {
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    return getRouteFromPageLink(pageLink, router, currentRoute,);
+  }, [currentRoute, href, router,],);
+  const {
+    replaceNestedLinks,
+  } = useLibraryFeatures();
+  const isOnFramerCanvas = useIsOnFramerCanvas();
+  const shouldReplaceLink = Boolean(
+    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
+  );
+  const onClick = useCallback((event) => {
+    var _a;
+    if (!propsAddedByLink.href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(__unframerNavigator2.userAgent,);
+    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
+      openExternalLink(propsAddedByLink.href, '', '_blank',);
+      return;
+    }
+    if (route) {
+      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+    } else {
+      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
+    }
+  }, [propsAddedByLink, route,],);
+  const onAuxClick = useCallback((event) => {
+    if (!propsAddedByLink.href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openExternalLink(propsAddedByLink.href, '', '_blank',);
+  }, [propsAddedByLink,],);
+  const onKeyDown = useCallback((event) => {
+    var _a;
+    if (!propsAddedByLink.href) return;
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (route) {
+      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+    } else {
+      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
+    }
+  }, [propsAddedByLink, route,],);
+  useRefEffect(observerRef, (node) => {
+    if (node === null) return;
+    if (!shouldReplaceLink) return;
+    node.dataset.hydrated = 'true';
+  }, [shouldReplaceLink,],);
+  let replacedChildren = children;
+  if (shouldReplaceLink) {
+    Children.forEach(children, (child) => {
+      if (!isChildReplaceable(child,)) return;
+      assert(
+        linkInfoIsCollectable(outerLink,),
+        'outerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
+      );
+      assert(
+        linkInfoIsCollectable(innerLink,),
+        'innerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
+      );
+      nestedLinksCollector.collectNestedLink(outerLink, innerLink,);
+    },);
+    replacedChildren = Children.map(children, (child) => {
+      if (!isChildReplaceable(child,)) return child;
+      const tag = maybeReplaceAnchorWithSpan(child.type,);
+      const {
+        children: childChildren,
+        ...childProps
+      } = child.props;
+      const props = {
+        ...childProps,
+        // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
+        'data-nested-link': true,
+        role: 'link',
+        tabIndex: 0,
+        onClick,
+        onAuxClick,
+        onKeyDown,
+        as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
+      };
+      const ref = 'ref' in child ? child.ref : void 0;
+      return createElement(tag, // We need to pass the ref here again, otherwise it will be lost
+      {
+        ...props,
+        ref,
+      }, childChildren,);
+    },);
+  }
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
+    value: innerLink,
+    children: replacedChildren,
+  },);
+}
+function linkInfoIsCollectable(linkInfo,) {
+  return !isUndefined(linkInfo == null ? void 0 : linkInfo.nodeId,);
+}
+function isChildReplaceable(child,) {
+  return isValidElement(child,) &&
+    (maybeReplaceAnchorWithSpan(child.type,) !== child.type || maybeReplaceAnchorWithSpan(child.props.as,) !== child.props.as);
+}
+function openExternalLink(href, rel, target,) {
+  const link = document.createElement('a',);
+  link.href = href;
+  if (rel) {
+    link.rel = rel;
+  }
+  if (target) {
+    link.target = target;
+  }
+  document.body.appendChild(link,);
+  link.click();
+  link.remove();
+}
+function maybeReplaceAnchorWithSpan(component,) {
+  if (component === 'a') return 'span';
+  if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
+  return component;
+}
+var timezone;
+var visitorLocale;
+var isFirstPageview = true;
+function setTimezoneAndLocaleForTracking() {
+  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
+  timezone = resolvedDateTimeOptions.timeZone;
+  visitorLocale = resolvedDateTimeOptions.locale;
+}
+requestIdleCallback(setTimezoneAndLocaleForTracking,);
+function sendTrackingEvent(eventType, eventData,) {
+  if (!safeWindow.__framer_events) return;
+  if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
+  if (eventType === 'published_site_pageview' && isFirstPageview) {
+    isFirstPageview = false;
+  }
+  safeWindow.__framer_events.push([eventType, {
+    // Base properties common to all events
+    referrer: isFirstPageview ? safeWindow.document.referrer : null,
+    url: safeWindow.location.href,
+    hostname: safeWindow.location.hostname || null,
+    pathname: safeWindow.location.pathname || null,
+    hash: safeWindow.location.hash || null,
+    search: safeWindow.location.search || null,
+    timezone,
+    locale: visitorLocale,
+    // Additional properties specific to custom events
+    ...eventData,
+  },],);
+}
+function useTrackLinkClick({
+  showAdvancedAnalytics,
+  nodeId,
+  clickTrackingId,
+  router,
+  href,
+  activeLocale,
+},) {
+  return useCallback(async (hrefAttribute) => {
+    var _a, _b, _c, _d, _e;
+    if (!showAdvancedAnalytics || !((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    const pageviewEventData = router.pageviewEventData.current;
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!isLinkToWebPage(pageLink,)) {
+      return sendTrackingEvent('published_site_click', {
+        ...pageviewEventData,
+        href: hrefAttribute ? makeUrlAbsolute(hrefAttribute,) : null,
+        nodeId: nodeId ?? null,
+        trackingId: clickTrackingId ?? null,
+        targetRoutePath: null,
+        targetWebPageId: null,
+        targetCollectionItemId: null,
+      },);
+    }
+    const targetWebPageId = pageLink.webPageId;
+    const targetRoute = (_b = router == null ? void 0 : router.getRoute) == null ? void 0 : _b.call(router, targetWebPageId,);
+    const targetRoutePath = (targetRoute == null ? void 0 : targetRoute.path) ?? null;
+    let targetCollectionItemId = null;
+    if (
+      (targetRoute == null ? void 0 : targetRoute.collectionId) && pageLink.pathVariables &&
+      ((_c = router.collectionUtils) == null ? void 0 : _c[targetRoute.collectionId])
+    ) {
+      const utils = await ((_e = (_d = router.collectionUtils)[targetRoute.collectionId]) == null ? void 0 : _e.call(_d,));
+      const [slug,] = Object.values(pageLink.pathVariables,);
+      if (utils && typeof slug === 'string') {
+        targetCollectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
+      }
+    }
+    return sendTrackingEvent('published_site_click', {
+      ...pageviewEventData,
+      href: hrefAttribute ? makeUrlAbsolute(hrefAttribute,) : null,
+      nodeId: nodeId ?? null,
+      trackingId: clickTrackingId ?? null,
+      targetRoutePath,
+      targetWebPageId,
+      targetCollectionItemId,
+    },);
+  }, [showAdvancedAnalytics, nodeId, clickTrackingId, router, href, activeLocale,],);
+}
+function makeUrlAbsolute(href,) {
+  try {
+    const url = new URL(href, safeWindow.document.baseURI,);
+    return url.origin === safeWindow.location.origin ? url.pathname + url.search + url.hash : url.href;
+  } catch {
+    return href;
+  }
+}
+function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
+  var _a, _b;
+  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
+  if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
+    void route.page.preload();
+  }
+  (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+}
+function createOnClickLinkHandler(router, routeId, href, trackLinkClick, elementId, combinedPathVariables, smoothScroll,) {
+  return async (event) => {
+    void trackLinkClick(href,);
+    if (event.metaKey) return;
+    const anchorElement = findAnchorElement(event.target,);
+    if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
+    event.preventDefault();
+    performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+  };
+}
+function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkClick, implicitPathVariables, smoothScroll,) {
+  if (!currentRoute) return propsForLink(href, openInNewTab, trackLinkClick,);
+  const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
+  if (!matchedRoute) return propsForLink(href, openInNewTab, trackLinkClick,);
+  const {
+    routeId,
+    route,
+    elementId,
+    pathVariables,
+  } = matchedRoute;
+  if (!route) return propsForLink(href, openInNewTab, trackLinkClick,);
+  const path = getPathForRoute(route, {
+    // If the link is resolved, we trust that the slugs are resolved.
+    currentRoutePath: currentRoute.path,
+    currentPathVariables: currentRoute.pathVariables,
+    // The hash value is already fully resolved so we don't need to
+    // provide any hashVariables.
+    hash: elementId,
+    pathVariables,
+    preserveQueryParams: router.preserveQueryParams,
+  },);
+  const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+  return {
+    href: path,
+    target: anchorTarget,
+    onClick: createOnClickLinkHandler(router, routeId, path, trackLinkClick, elementId, pathVariables, smoothScroll,),
+    navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
+    'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
+  };
+}
+var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
+  children,
+  href,
+  openInNewTab,
+  smoothScroll,
+  clickTrackingId,
+  nodeId,
+  scopeId,
+  motionChild,
+  ...restProps
+}, forwardedRef,) {
+  const router = useRouter();
+  const currentRoute = useCurrentRoute();
+  const implicitPathVariables = useImplicitPathVariables();
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const {
+    showAdvancedAnalytics,
+  } = useLibraryFeatures();
+  const trackLinkClick = useTrackLinkClick({
+    showAdvancedAnalytics,
+    nodeId,
+    clickTrackingId,
+    router,
+    href,
+    activeLocale,
+  },);
+  const propsAddedByLink = useMemo(() => {
+    if (!href) return {};
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return {};
+    if (isString(pageLink,)) {
+      return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, trackLinkClick, implicitPathVariables, smoothScroll,);
+    }
+    const {
+      routeId,
+      href: resolvedHref,
+      elementId,
+      pathVariables,
+    } = findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,);
+    const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+    return {
+      href: resolvedHref,
+      target: anchorTarget,
+      onClick: createOnClickLinkHandler(router, routeId, resolvedHref, trackLinkClick, elementId, pathVariables, smoothScroll,),
+      navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
+      'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
+    };
+  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackLinkClick,],);
+  const hasRef = isValidElement(children,) && 'ref' in children;
+  const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
+  useRefEffect(observerRef, (node) => {
+    var _a;
+    if (node === null) return;
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    const route = getRouteFromPageLink(pageLink, router, currentRoute,);
+    if (!route) return;
+    return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
+  }, [currentRoute, href, router,],);
+  let replacedChildren = children;
+  const {
+    navigate,
+    ...propsAddedByLinkExceptNavigate
+  } = propsAddedByLink;
+  const isInternalNavigation = Boolean(navigate,);
+  const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
+  replacedChildren = clone.cloneAsArray(replacedChildren, (childProps) =>
+    cloneChildPropsWithAggregatedEvents(childProps, {
+      ...restProps,
+      ...rebindEventHandlersIfNeeded(propsAddedByLinkExceptNavigate, motionChild, isInternalNavigation,),
+    }, observerRef,),);
+  replacedChildren = useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
+  return replacedChildren;
+},),);
+function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,) {
+  const aggregatedProps = {
+    ...childProps,
+    ...linkProps,
+    ref: observerRef,
+  };
+  const {
+    onTap,
+    onClick,
+  } = linkProps;
+  if (!onTap && !onClick) {
+    return aggregatedProps;
+  }
+  const {
+    onClick: childOnClick,
+    onTap: childOnTap,
+  } = childProps;
+  return {
+    ...aggregatedProps,
+    onClick: onClick || childOnClick
+      ? (event) => {
+        if (isFunction(childOnClick,)) {
+          childOnClick == null ? void 0 : childOnClick(event,);
+        }
+        onClick == null ? void 0 : onClick(event,);
+      }
+      : void 0,
+    onTap: onTap || childOnTap
+      ? (event, info,) => {
+        if (isFunction(childOnTap,)) {
+          childOnTap == null ? void 0 : childOnTap(event, info,);
+        }
+        onTap == null ? void 0 : onTap(event, info,);
+      }
+      : void 0,
+  };
+}
+function rebindEventHandlersIfNeeded(linkProps, motionChild, isInternalNavigation,) {
+  const shouldReplaceClickWithTap = Boolean(motionChild && isIOS(),);
+  if (!shouldReplaceClickWithTap) return linkProps;
+  const {
+    onClick,
+    ...restProps
+  } = linkProps;
+  if (!onClick) return linkProps;
+  if (isInternalNavigation) {
+    return {
+      ...restProps,
+      onTap: onClick,
+      // When the link is an internal link, we're already doing SPA routing in onClick
+      // prevent the default click behavior so that we don't trigger a native anchor link navigation again.
+      onClick: preventClickOnNativeAnchorLink,
+    };
+  }
+  return {
+    ...restProps,
+    onTap: onClick,
+  };
+}
+function preventClickOnNativeAnchorLink(event,) {
+  const anchorElement = findAnchorElement(event.target,);
+  if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
+  event.preventDefault();
+}
+function resolveLink(href, router, implicitPathVariables,) {
+  return resolveLinkInternal(href, router, implicitPathVariables,);
+}
+function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, resolveSlugs2,) {
+  const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+  if (!isLinkToWebPage(pageLink,)) return isString(href,) ? propsForLink(href,).href : void 0;
+  if (!router.getRoute || !router.currentRouteId) return void 0;
+  const currentRoute = router.getRoute(router.currentRouteId,);
+  const {
+    webPageId,
+    hash: hash2,
+    pathVariables,
+    hashVariables,
+    unresolvedHashSlugs,
+    unresolvedPathSlugs,
+  } = pageLink;
+  const route = router.getRoute(webPageId,);
+  const resolvedSlugs = unresolvedPathSlugs || unresolvedHashSlugs
+    ? resolveSlugs2 == null ? void 0 : resolveSlugs2(unresolvedPathSlugs, unresolvedHashSlugs,)
+    : void 0;
+  const combinedPathVariables = Object.assign(
+    {},
+    router.currentPathVariables,
+    implicitPathVariables,
+    pathVariables,
+    resolvedSlugs == null ? void 0 : resolvedSlugs.path,
+  );
+  const combinedHashVariables = Object.assign(
+    {},
+    router.currentPathVariables,
+    implicitPathVariables,
+    hashVariables,
+    resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
+  );
+  return getPathForRoute(route, {
+    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentPathVariables: router.currentPathVariables,
+    hash: hash2,
+    pathVariables: combinedPathVariables,
+    hashVariables: combinedHashVariables,
+    relative: false,
+    preserveQueryParams: router.preserveQueryParams,
+    onlyHash,
+  },);
+}
+function resolvePageScope(pageLink, router,) {
+  if (!router.getRoute || !router.currentRouteId) return void 0;
+  const currentRoute = router.getRoute(router.currentRouteId,);
+  const {
+    webPageId,
+  } = pageLink;
+  const route = router.getRoute(webPageId,);
+  return getPathForRoute(route, {
+    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentPathVariables: router.currentPathVariables,
+    relative: false,
+    preserveQueryParams: false,
+  },);
+}
+var IgnoreErrors = class extends Component {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      error: void 0,
+    },);
+  }
+  static getDerivedStateFromError(error,) {
+    return {
+      error,
+    };
+  }
+  render() {
+    if (this.state.error) return null;
+    return this.props.children;
+  }
+};
 var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
@@ -33126,799 +33984,21 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
-function findAnchorElement(target, withinElement,) {
-  if (target instanceof HTMLAnchorElement) {
-    return target;
-  }
-  if (target instanceof Element) {
-    if (target === withinElement) {
-      return null;
-    }
-    return findAnchorElement(target.parentElement, withinElement,);
-  }
-  return null;
-}
-var timezone;
-var visitorLocale;
-function setTimezoneAndLocaleForTracking() {
-  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
-  timezone = resolvedDateTimeOptions.timeZone;
-  visitorLocale = resolvedDateTimeOptions.locale;
-}
-requestIdleCallback(setTimezoneAndLocaleForTracking,);
-function sendTrackingEvent(eventType, eventData,) {
-  if (!safeWindow.__framer_events) return;
-  if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
-  safeWindow.__framer_events.push([eventType, {
-    // Same base properties as in published_site_pageview
-    // from FramerPageviewTrackingScript
-    referrer: null,
-    url: safeWindow.location.href,
-    hostname: safeWindow.location.hostname || null,
-    pathname: safeWindow.location.pathname || null,
-    hash: safeWindow.location.hash || null,
-    search: safeWindow.location.search || null,
-    timezone,
-    locale: visitorLocale,
-    // Additional properties specific to custom events
-    ...eventData,
-  },],);
-}
-function ChildrenCanSuspend({
-  children,
+function getPageviewEventData({
+  framerSiteId,
+  routeId,
+  routePath,
+  collectionItemId,
+  localeCode,
 },) {
-  const {
-    useGranularSuspense,
-  } = useLibraryFeatures();
-  if (!useGranularSuspense) return children;
-  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
-    children,
-  },);
-}
-function withChildrenCanSuspend(Component18,) {
-  return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
-    return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx(Component18, {
-        ...props,
-        ref,
-      },),
-    },);
-  },);
-}
-var PRELOAD_AFTER_MS = 500;
-var OBSERVER_THRESHOLD = 0.9;
-var LOW_MEMORY_THRESHOLD = 1.7;
-var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
-var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
-var nodeToRoute = /* @__PURE__ */ new WeakMap();
-var preloadedRoutes = /* @__PURE__ */ new Set();
-var routeToNodesInViewport = /* @__PURE__ */ new Map();
-function getObserveRouteForPreloadingFn() {
-  var _a;
-  const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
-  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
-  let effectiveType, preloadDisabled, maxPreloadAmount;
-  function updateConnection() {
-    effectiveType = connection.effectiveType || '';
-    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
-    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
-      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
-      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
-  }
-  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
-  updateConnection();
-  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
-    threshold: OBSERVER_THRESHOLD,
-  },);
-  let activePreloadsAmount = 0;
-  async function preloadTimeout(route, target,) {
-    if (preloadDisabled) return;
-    const nodesInViewport = routeToNodesInViewport.get(route,);
-    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) return;
-    ++activePreloadsAmount;
-    preloadedRoutes.add(route,);
-    const preloadDone = preloadRoute(route,).catch(() => {
-      if (false) {
-        throw new Error(
-          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
-        );
-      }
-    },);
-    observer2.unobserve(target,);
-    nodeToRoute.delete(target,);
-    for (const node of nodesInViewport) {
-      observer2.unobserve(node,);
-      nodeToRoute.delete(node,);
-    }
-    nodesInViewport.clear();
-    routeToNodesInViewport.delete(route,);
-    await preloadDone;
-    --activePreloadsAmount;
-  }
-  function onPreloadIntersectionChange(entries,) {
-    var _a2;
-    for (const entry of entries) {
-      const target = entry.target;
-      const route = nodeToRoute.get(target,);
-      if (!route || preloadedRoutes.has(route,)) {
-        observer2.unobserve(target,);
-        nodeToRoute.delete(target,);
-        continue;
-      }
-      const nodes = routeToNodesInViewport.get(route,);
-      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
-      if (entry.isIntersecting) {
-        if (activePreloadsAmount >= maxPreloadAmount) continue;
-        if (nodes) nodes.add(target,);
-        else routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
-        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
-      } else {
-        if (nodes) nodes.delete(target,);
-        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(route,);
-      }
-    }
-  }
-  return (route, node,) => {
-    if (preloadedRoutes.has(route,)) return;
-    nodeToRoute.set(node, route,);
-    observer2.observe(node,);
-    return () => {
-      nodeToRoute.delete(node,);
-      observer2.unobserve(node,);
-    };
-  };
-}
-var observeRouteForPreloading =
-  // this also guards `window`
-  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
-function getRouteFromPageLink(pageLink, router, currentRoute,) {
-  var _a;
-  if (isString(pageLink,)) {
-    const isInternal = isInternalURL(pageLink,);
-    if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
-      return;
-    }
-    const [pathnameWithQueryParams,] = pageLink.split('#', 2,);
-    if (pathnameWithQueryParams === void 0) return;
-    const [pathname,] = pathnameWithQueryParams.split('?', 2,);
-    if (pathname === void 0) return;
-    const {
-      routeId,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
-    return router.getRoute(routeId,);
-  }
-  const {
-    webPageId,
-  } = pageLink;
-  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
-}
-var elementKey = 'element';
-var collectionKey = 'collection';
-var collectionItemIdKey = 'collectionItemId';
-var pathVariablesKey = 'pathVariables';
-var mediaType = 'framer/page-link,';
-function isFramerPageLink(value,) {
-  return isString(value,) && value.startsWith(`data:${mediaType}`,);
-}
-function createFramerPageLink(targetId = null, options = {},) {
-  const target = targetId ? targetId : 'none';
-  const link = new URL(`data:${mediaType}${target}`,);
-  if (options.element) {
-    link.searchParams.append(elementKey, options.element,);
-  }
-  if (options.collectionItem) {
-    link.searchParams.append(collectionKey, options.collectionItem.collection,);
-    link.searchParams.append(collectionItemIdKey, options.collectionItem.collectionItemId,);
-    link.searchParams.append(pathVariablesKey, new URLSearchParams(options.collectionItem.pathVariables,).toString(),);
-  }
-  return link.href;
-}
-function parseFramerPageLink(link,) {
-  if (!isFramerPageLink(link,)) return;
-  try {
-    const url = new URL(link,);
-    const target = url.pathname.substring(mediaType.length,);
-    const searchParams = url.searchParams;
-    const element = searchParams.has(elementKey,) ? searchParams.get(elementKey,) : void 0;
-    let collectionItem;
-    const collection = searchParams.get(collectionKey,);
-    const collectionItemId = searchParams.get(collectionItemIdKey,);
-    const pathVariablesValue = searchParams.get(pathVariablesKey,);
-    if (collection && collectionItemId && pathVariablesValue) {
-      const pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesValue,).entries(),);
-      collectionItem = {
-        collection,
-        collectionItemId,
-        pathVariables,
-      };
-    }
-    return {
-      target: target === 'none' ? null : target,
-      /**
-       * For historical reason we used to set "element=none" into the
-       * datalink, we no longer do that today, but we still keep this code
-       * so we could parse legacy links correctly.
-       */
-      element: element === 'none' ? void 0 : element,
-      collectionItem,
-    };
-  } catch {
-    return;
-  }
-}
-function shouldOpenLinkInNewTab(link,) {
-  return !isFramerPageLink(link,);
-}
-function navigateFromAttributes(navigate, element, implicitPathVariables,) {
-  var _a;
-  let routeId = element.getAttribute('data-framer-page-link-target',/* Page */
-  );
-  let elementId;
-  let pathVariables;
-  if (routeId) {
-    elementId = element.getAttribute('data-framer-page-link-element',/* Element */
-    ) ?? void 0;
-    const pathVariablesRaw = element.getAttribute('data-framer-page-link-path-variables',/* PathVariables */
-    );
-    if (pathVariablesRaw) {
-      pathVariables = Object.fromEntries(new URLSearchParams(pathVariablesRaw,).entries(),);
-    }
-  } else {
-    const href = element.getAttribute('href',);
-    if (!href) return false;
-    const link = parseFramerPageLink(href,);
-    if (!link || !link.target) return false;
-    routeId = link.target;
-    elementId = link.element ?? void 0;
-    pathVariables = (_a = link.collectionItem) == null ? void 0 : _a.pathVariables;
-  }
-  const smoothScroll = elementId ? element.dataset.framerSmoothScroll !== void 0 : void 0;
-  navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
-  return true;
-}
-function linkFromFramerPageLink(link,) {
-  if (!isFramerPageLink(link,)) return link;
-  const parsed = parseFramerPageLink(link,);
-  if (!parsed) return void 0;
-  const {
-    target,
-    element,
-    collectionItem,
-  } = parsed;
-  if (!target) return void 0;
   return {
-    webPageId: target,
-    hash: element ?? void 0,
-    pathVariables: createVariablesFromPageLinkCollectionItem(collectionItem,),
+    framerSiteId,
+    routePath: routePath || '/',
+    collectionItemId,
+    framerLocale: localeCode,
+    webPageId: routeId,
   };
 }
-function createVariablesFromPageLinkCollectionItem(collectionItem,) {
-  if (!collectionItem) return void 0;
-  const variables = {};
-  for (const pathVariablesKey2 in collectionItem.pathVariables) {
-    const value = collectionItem.pathVariables[pathVariablesKey2];
-    if (value) variables[pathVariablesKey2] = value;
-  }
-  return variables;
-}
-function linkMatchesRoute(route, {
-  webPageId,
-  hash: hash2,
-  pathVariables,
-}, implicitPathVariables,) {
-  if (webPageId !== route.id) return false;
-  if (hash2) return false;
-  if (route.path && route.pathVariables) {
-    const combinedPathVariable = Object.assign({}, implicitPathVariables, pathVariables,);
-    for (const [, key7,] of route.path.matchAll(pathVariablesRegExp2,)) {
-      if (!key7) return false;
-      if (route.pathVariables[key7] !== combinedPathVariable[key7]) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-function useLinkMatchesRoute(link,) {
-  const route = useCurrentRoute();
-  const contextPathVariables = useContext(PathVariablesContext,);
-  if (!route) return false;
-  const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
-  return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
-}
-function makeUrlAbsolute(href,) {
-  try {
-    const url = new URL(href, safeWindow.document.baseURI,);
-    return url.origin === safeWindow.location.origin ? url.pathname + url.search + url.hash : url.href;
-  } catch {
-    return href;
-  }
-}
-var AnchorLinkTarget = /* @__PURE__ */ ((AnchorLinkTarget2) => {
-  AnchorLinkTarget2['_blank'] = '_blank';
-  AnchorLinkTarget2['_self'] = '_self';
-  return AnchorLinkTarget2;
-})(AnchorLinkTarget || {},);
-function propsForLink(href, openInNewTab = void 0, trackingData,) {
-  const isInternal = isInternalURL(href,);
-  const target = getTargetAttrValue(openInNewTab, isInternal,);
-  const rel = !isInternal ? 'noopener' : void 0;
-  href = href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`;
-  return trackingData
-    ? {
-      href,
-      target,
-      rel,
-      onClick() {
-        sendTrackingEvent('published_site_click', {
-          href: makeUrlAbsolute(href,),
-          ...trackingData,
-        },);
-      },
-    }
-    : {
-      href,
-      target,
-      rel,
-    };
-}
-function getTargetAttrValue(openInNewTab, isInternal,) {
-  if (openInNewTab !== void 0) {
-    return openInNewTab ? '_blank' : void 0;
-  }
-  return isInternal ? void 0 : '_blank';
-}
-function linkInfoKey(link,) {
-  var _a, _b;
-  return `${link.scopeId}:${link.nodeId}:${(_a = link.furthestExternalComponent) == null ? void 0 : _a.scopeId}:${
-    (_b = link.furthestExternalComponent) == null ? void 0 : _b.nodeId
-  }`;
-}
-var NestedLinksCollector = class {
-  constructor() {
-    __publicField(this, 'collectedLinks', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'nestingInfo', /* @__PURE__ */ new Map(),);
-  }
-  clear() {
-    this.collectedLinks.clear();
-    this.nestingInfo.clear();
-  }
-  /**
-   * Returns a Map of outer links to their inner links.
-   *
-   * NOTE: This function is called in the SSG renderer sandbox (<root>/src/ssg/src/ssg-sandbox-renderer/sandbox/worker/renderer.ts)
-   */
-  getLinks() {
-    const result = /* @__PURE__ */ new Map();
-    for (const [outerLinkKey, innerLinkKeys,] of this.nestingInfo) {
-      const outerLinkInfo = this.collectedLinks.get(outerLinkKey,);
-      assert(outerLinkInfo, `Outer link not found: ${outerLinkKey}`,);
-      const links = Array.from(innerLinkKeys,).map((innerLinkKey) => {
-        const innerLinkInfo = this.collectedLinks.get(innerLinkKey,);
-        assert(innerLinkInfo, `Inner link not found: ${innerLinkKey}`,);
-        return innerLinkInfo;
-      },);
-      result.set(outerLinkInfo, links,);
-    }
-    return result;
-  }
-  collectNestedLink(outerLink, innerLink,) {
-    if (typeof window !== 'undefined' && true || !outerLink.nodeId || !innerLink.nodeId) {
-      return;
-    }
-    this.collectedLinks.set(linkInfoKey(outerLink,), outerLink,);
-    this.collectedLinks.set(linkInfoKey(innerLink,), innerLink,);
-    const outerLinkNestingInfo = this.nestingInfo.get(linkInfoKey(outerLink,),) ?? /* @__PURE__ */ new Set();
-    outerLinkNestingInfo.add(linkInfoKey(innerLink,),);
-    this.nestingInfo.set(linkInfoKey(outerLink,), outerLinkNestingInfo,);
-  }
-};
-var nestedLinksCollector = /* @__PURE__ */ new NestedLinksCollector();
-function useIsOnFramerCanvas() {
-  return RenderTarget.current() === RenderTarget.canvas;
-}
-var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
-function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
-  const outerLink = useContext(OuterLinkContext,);
-  const furthestExternalComponent = useFurthestExternalComponent();
-  const innerLink = useMemo(() => ({
-    scopeId,
-    nodeId,
-    furthestExternalComponent,
-  }), [scopeId, nodeId, furthestExternalComponent,],);
-  const router = useRouter();
-  const currentRoute = useCurrentRoute();
-  const route = useMemo(() => {
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    return getRouteFromPageLink(pageLink, router, currentRoute,);
-  }, [currentRoute, href, router,],);
-  const {
-    replaceNestedLinks,
-  } = useLibraryFeatures();
-  const isOnFramerCanvas = useIsOnFramerCanvas();
-  const shouldReplaceLink = Boolean(
-    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
-  );
-  const onClick = useCallback((event) => {
-    var _a;
-    if (!propsAddedByLink.href) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(__unframerNavigator2.userAgent,);
-    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
-      openExternalLink(propsAddedByLink.href, '', '_blank',);
-      return;
-    }
-    if (route) {
-      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
-    } else {
-      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
-    }
-  }, [propsAddedByLink, route,],);
-  const onAuxClick = useCallback((event) => {
-    if (!propsAddedByLink.href) return;
-    event.preventDefault();
-    event.stopPropagation();
-    openExternalLink(propsAddedByLink.href, '', '_blank',);
-  }, [propsAddedByLink,],);
-  const onKeyDown = useCallback((event) => {
-    var _a;
-    if (!propsAddedByLink.href) return;
-    if (event.key !== 'Enter') return;
-    event.preventDefault();
-    event.stopPropagation();
-    if (route) {
-      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
-    } else {
-      openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
-    }
-  }, [propsAddedByLink, route,],);
-  useRefEffect(observerRef, (node) => {
-    if (node === null) return;
-    if (!shouldReplaceLink) return;
-    node.dataset.hydrated = 'true';
-  }, [shouldReplaceLink,],);
-  let replacedChildren = children;
-  if (shouldReplaceLink) {
-    Children.forEach(children, (child) => {
-      if (!isChildReplaceable(child,)) return;
-      assert(
-        linkInfoIsCollectable(outerLink,),
-        'outerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
-      );
-      assert(
-        linkInfoIsCollectable(innerLink,),
-        'innerLink must have nodeId defined at this point; this was verified with `shouldReplaceLink` above',
-      );
-      nestedLinksCollector.collectNestedLink(outerLink, innerLink,);
-    },);
-    replacedChildren = Children.map(children, (child) => {
-      if (!isChildReplaceable(child,)) return child;
-      const tag = maybeReplaceAnchorWithSpan(child.type,);
-      const {
-        children: childChildren,
-        ...childProps
-      } = child.props;
-      const props = {
-        ...childProps,
-        // This attribute is used in `ssg/src/ssg-sandbox-renderer/worker/nestedLinks.ts` to handle the nested links clicks
-        'data-nested-link': true,
-        role: 'link',
-        tabIndex: 0,
-        onClick,
-        onAuxClick,
-        onKeyDown,
-        as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
-      };
-      const ref = 'ref' in child ? child.ref : void 0;
-      return createElement(tag, // We need to pass the ref here again, otherwise it will be lost
-      {
-        ...props,
-        ref,
-      }, childChildren,);
-    },);
-  }
-  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
-    value: innerLink,
-    children: replacedChildren,
-  },);
-}
-function linkInfoIsCollectable(linkInfo,) {
-  return !isUndefined(linkInfo == null ? void 0 : linkInfo.nodeId,);
-}
-function isChildReplaceable(child,) {
-  return isValidElement(child,) &&
-    (maybeReplaceAnchorWithSpan(child.type,) !== child.type || maybeReplaceAnchorWithSpan(child.props.as,) !== child.props.as);
-}
-function openExternalLink(href, rel, target,) {
-  const link = document.createElement('a',);
-  link.href = href;
-  if (rel) {
-    link.rel = rel;
-  }
-  if (target) {
-    link.target = target;
-  }
-  document.body.appendChild(link,);
-  link.click();
-  link.remove();
-}
-function maybeReplaceAnchorWithSpan(component,) {
-  if (component === 'a') return 'span';
-  if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
-  return component;
-}
-function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
-  var _a, _b;
-  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
-  if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
-    void route.page.preload();
-  }
-  (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
-}
-function createOnClickLinkHandler(router, routeId, href, trackingData, elementId, combinedPathVariables, smoothScroll,) {
-  return async (event) => {
-    if (trackingData) {
-      sendTrackingEvent('published_site_click', {
-        href: makeUrlAbsolute(href,),
-        ...trackingData,
-      },);
-    }
-    if (event.metaKey) return;
-    const anchorElement = findAnchorElement(event.target,);
-    if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
-    event.preventDefault();
-    performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
-  };
-}
-function propsForRoutePath(href, openInNewTab, router, currentRoute, trackingData, implicitPathVariables, smoothScroll,) {
-  if (!currentRoute) return propsForLink(href, openInNewTab, trackingData,);
-  const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
-  if (!matchedRoute) return propsForLink(href, openInNewTab, trackingData,);
-  const {
-    routeId,
-    route,
-    elementId,
-    pathVariables,
-  } = matchedRoute;
-  if (!route) return propsForLink(href, openInNewTab, trackingData,);
-  const path = getPathForRoute(route, {
-    // If the link is resolved, we trust that the slugs are resolved.
-    currentRoutePath: currentRoute.path,
-    currentPathVariables: currentRoute.pathVariables,
-    // The hash value is already fully resolved so we don't need to
-    // provide any hashVariables.
-    hash: elementId,
-    pathVariables,
-    preserveQueryParams: router.preserveQueryParams,
-  },);
-  const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-  return {
-    href: path,
-    target: anchorTarget,
-    onClick: createOnClickLinkHandler(router, routeId, path, trackingData, elementId, pathVariables, smoothScroll,),
-    navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
-    'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
-  };
-}
-var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
-  children,
-  href,
-  openInNewTab,
-  smoothScroll,
-  clickTrackingId,
-  nodeId,
-  scopeId,
-  motionChild,
-  ...restProps
-}, forwardedRef,) {
-  const router = useRouter();
-  const currentRoute = useCurrentRoute();
-  const implicitPathVariables = useImplicitPathVariables();
-  const {
-    activeLocale,
-  } = useLocaleInfo();
-  const framerSiteId = useContext(FormContext,);
-  const {
-    showAdvancedAnalytics,
-  } = useLibraryFeatures();
-  const trackingData = useMemo(() => {
-    if (!showAdvancedAnalytics) return null;
-    return {
-      framerSiteId: framerSiteId ?? null,
-      nodeId: nodeId ?? null,
-      trackingId: clickTrackingId ?? null,
-    };
-  }, [showAdvancedAnalytics, framerSiteId, nodeId, clickTrackingId,],);
-  const propsAddedByLink = useMemo(() => {
-    if (!href) return {};
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return {};
-    if (isString(pageLink,)) {
-      return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, trackingData, implicitPathVariables, smoothScroll,);
-    }
-    const {
-      routeId,
-      href: resolvedHref,
-      elementId,
-      pathVariables,
-    } = findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,);
-    const anchorTarget = getTargetAttrValue(openInNewTab, true,);
-    return {
-      href: resolvedHref,
-      target: anchorTarget,
-      onClick: createOnClickLinkHandler(router, routeId, resolvedHref, trackingData, elementId, pathVariables, smoothScroll,),
-      navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
-      'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
-    };
-  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackingData,],);
-  const hasRef = isValidElement(children,) && 'ref' in children;
-  const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
-  useRefEffect(observerRef, (node) => {
-    var _a;
-    if (node === null) return;
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    const route = getRouteFromPageLink(pageLink, router, currentRoute,);
-    if (!route) return;
-    return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
-  }, [currentRoute, href, router,],);
-  let replacedChildren = children;
-  const {
-    navigate,
-    ...propsAddedByLinkExceptNavigate
-  } = propsAddedByLink;
-  const isInternalNavigation = Boolean(navigate,);
-  const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  replacedChildren = clone.cloneAsArray(replacedChildren, (childProps) =>
-    cloneChildPropsWithAggregatedEvents(childProps, {
-      ...restProps,
-      ...rebindEventHandlersIfNeeded(propsAddedByLinkExceptNavigate, motionChild, isInternalNavigation,),
-    }, observerRef,),);
-  replacedChildren = useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
-  return replacedChildren;
-},),);
-function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,) {
-  const aggregatedProps = {
-    ...childProps,
-    ...linkProps,
-    ref: observerRef,
-  };
-  const {
-    onTap,
-    onClick,
-  } = linkProps;
-  if (!onTap && !onClick) {
-    return aggregatedProps;
-  }
-  const {
-    onClick: childOnClick,
-    onTap: childOnTap,
-  } = childProps;
-  return {
-    ...aggregatedProps,
-    onClick: onClick || childOnClick
-      ? (event) => {
-        if (isFunction(childOnClick,)) {
-          childOnClick == null ? void 0 : childOnClick(event,);
-        }
-        onClick == null ? void 0 : onClick(event,);
-      }
-      : void 0,
-    onTap: onTap || childOnTap
-      ? (event, info,) => {
-        if (isFunction(childOnTap,)) {
-          childOnTap == null ? void 0 : childOnTap(event, info,);
-        }
-        onTap == null ? void 0 : onTap(event, info,);
-      }
-      : void 0,
-  };
-}
-function rebindEventHandlersIfNeeded(linkProps, motionChild, isInternalNavigation,) {
-  const shouldReplaceClickWithTap = Boolean(motionChild && isIOS(),);
-  if (!shouldReplaceClickWithTap) return linkProps;
-  const {
-    onClick,
-    ...restProps
-  } = linkProps;
-  if (!onClick) return linkProps;
-  if (isInternalNavigation) {
-    return {
-      ...restProps,
-      onTap: onClick,
-      // When the link is an internal link, we're already doing SPA routing in onClick
-      // prevent the default click behavior so that we don't trigger a native anchor link navigation again.
-      onClick: preventClickOnNativeAnchorLink,
-    };
-  }
-  return {
-    ...restProps,
-    onTap: onClick,
-  };
-}
-function preventClickOnNativeAnchorLink(event,) {
-  const anchorElement = findAnchorElement(event.target,);
-  if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
-  event.preventDefault();
-}
-function resolveLink(href, router, implicitPathVariables,) {
-  return resolveLinkInternal(href, router, implicitPathVariables,);
-}
-function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, resolveSlugs2,) {
-  const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-  if (!isLinkToWebPage(pageLink,)) return isString(href,) ? propsForLink(href,).href : void 0;
-  if (!router.getRoute || !router.currentRouteId) return void 0;
-  const currentRoute = router.getRoute(router.currentRouteId,);
-  const {
-    webPageId,
-    hash: hash2,
-    pathVariables,
-    hashVariables,
-    unresolvedHashSlugs,
-    unresolvedPathSlugs,
-  } = pageLink;
-  const route = router.getRoute(webPageId,);
-  const resolvedSlugs = unresolvedPathSlugs || unresolvedHashSlugs
-    ? resolveSlugs2 == null ? void 0 : resolveSlugs2(unresolvedPathSlugs, unresolvedHashSlugs,)
-    : void 0;
-  const combinedPathVariables = Object.assign(
-    {},
-    router.currentPathVariables,
-    implicitPathVariables,
-    pathVariables,
-    resolvedSlugs == null ? void 0 : resolvedSlugs.path,
-  );
-  const combinedHashVariables = Object.assign(
-    {},
-    router.currentPathVariables,
-    implicitPathVariables,
-    hashVariables,
-    resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
-  );
-  return getPathForRoute(route, {
-    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-    currentPathVariables: router.currentPathVariables,
-    hash: hash2,
-    pathVariables: combinedPathVariables,
-    hashVariables: combinedHashVariables,
-    relative: false,
-    preserveQueryParams: router.preserveQueryParams,
-    onlyHash,
-  },);
-}
-function resolvePageScope(pageLink, router,) {
-  if (!router.getRoute || !router.currentRouteId) return void 0;
-  const currentRoute = router.getRoute(router.currentRouteId,);
-  const {
-    webPageId,
-  } = pageLink;
-  const route = router.getRoute(webPageId,);
-  return getPathForRoute(route, {
-    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-    currentPathVariables: router.currentPathVariables,
-    relative: false,
-    preserveQueryParams: false,
-  },);
-}
-var IgnoreErrors = class extends Component {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'state', {
-      error: void 0,
-    },);
-  }
-  static getDerivedStateFromError(error,) {
-    return {
-      error,
-    };
-  }
-  render() {
-    if (this.state.error) return null;
-    return this.props.children;
-  }
-};
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
   if (a.pathVariables === b.pathVariables) return true;
@@ -34053,13 +34133,13 @@ function Router({
         },) => id3 === localeId);
         if (!nextLocale) return;
         const currentRouteId2 = currentRouteRef.current;
-        const currentRoute = routes[currentRouteId2];
-        if (!currentRoute) return;
+        const currentRoute2 = routes[currentRouteId2];
+        if (!currentRoute2) return;
         try {
           const localeResult = await switchLocale({
             currentLocale: activeLocale,
             nextLocale,
-            route: currentRoute,
+            route: currentRoute2,
             routeId: currentRouteId2,
             defaultLocale,
             pathVariables: currentPathVariablesRef.current,
@@ -34177,13 +34257,13 @@ function Router({
       return;
     }
     if (!newRoute) return;
-    const currentRoute = routes[currentRouteRef.current];
+    const currentRoute2 = routes[currentRouteRef.current];
     const updateURL = async (ignorePushStateWrapper = false,) =>
       pushRouteState(
         routeId,
         newRoute,
         {
-          currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+          currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
           currentPathVariables: currentPathVariables2,
           hash: hash2,
           pathVariables,
@@ -34207,6 +34287,37 @@ function Router({
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
+  const currentRoute = routes[currentRouteId];
+  const currentRoutePath = currentRoute == null ? void 0 : currentRoute.path;
+  const framerSiteId = useContext(FormContext,);
+  const pageviewEventData = useRef();
+  const {
+    showAdvancedAnalytics,
+  } = useLibraryFeatures();
+  useEffect(() => {
+    if (!showAdvancedAnalytics) return;
+    void (async () => {
+      var _a;
+      let collectionItemId = null;
+      if ((currentRoute == null ? void 0 : currentRoute.collectionId) && collectionUtils && currentPathVariables) {
+        const utils = await ((_a = collectionUtils[currentRoute.collectionId]) == null ? void 0 : _a.call(collectionUtils,));
+        const [slug,] = Object.values(currentPathVariables,);
+        if (utils && typeof slug === 'string') {
+          collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
+        }
+      }
+      sendTrackingEvent(
+        'published_site_pageview',
+        pageviewEventData.current = getPageviewEventData({
+          framerSiteId: framerSiteId ?? null,
+          routeId: currentRouteId,
+          routePath: currentRoute == null ? void 0 : currentRoute.path,
+          collectionItemId,
+          localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
+        },),
+      );
+    })();
+  }, [showAdvancedAnalytics, framerSiteId, currentRouteId, currentRoute, activeLocale, currentPathVariables, collectionUtils,],);
   const api = useMemo(() => ({
     navigate,
     getRoute,
@@ -34215,15 +34326,16 @@ function Router({
     routes,
     collectionUtils,
     preserveQueryParams,
+    pageviewEventData,
   }), [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams,],);
-  const current = routes[currentRouteRef.current];
-  if (!current) {
-    throw new Error(`Router cannot find route for ${currentRouteRef.current}`,);
+  if (!currentRoute) {
+    throw new Error(`Router cannot find route for ${currentRouteId}`,);
   }
-  const pageExistsInCurrentLocale = !activeLocale || !current.includedLocales || current.includedLocales.includes(activeLocale.id,);
-  const pathWithFilledVariables = current.path && currentPathVariables
-    ? fillPathVariables(current.path, currentPathVariables,)
-    : current.path;
+  const pageExistsInCurrentLocale = !activeLocale || !currentRoute.includedLocales ||
+    currentRoute.includedLocales.includes(activeLocale.id,);
+  const pathWithFilledVariables = currentRoutePath && currentPathVariables
+    ? fillPathVariables(currentRoutePath, currentPathVariables,)
+    : currentRoutePath;
   const remountKey = String(currentLocaleId,) + pathWithFilledVariables;
   const templatePageStyle = useConstant2(() => ({
     ...defaultPageStyle,
@@ -34248,7 +34360,7 @@ function Router({
                 children: (inLayoutTemplate) => {
                   return /* @__PURE__ */ jsx(Fragment, {
                     children: pageExistsInCurrentLocale
-                      ? renderPage(current.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                      ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
                       : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
                       notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
                   }, remountKey,);
@@ -42124,40 +42236,29 @@ var variantsNameToWeight = {
   'thin-italic': 200,
   light: 300,
   'light-italic': 300,
-  'dense-light': 300,
-  'solid-light': 300,
+  base: 400,
   regular: 400,
   'regular-slanted': 400,
   italic: 400,
   oblique: 400,
   demi: 400,
+  dense: 400,
   brukt: 300,
   book: 400,
   'book-italic': 400,
   text: 400,
   'text-italic': 400,
-  'dense-regular': 400,
-  'solid-regular': 400,
-  dense: 400,
-  solid: 400,
-  expanded: 400,
-  gothique: 400,
-  school: 400,
-  serif: 400,
   medium: 500,
+  solid: 500,
   'medium-oblique': 500,
   'medium-italic': 500,
   mittel: 500,
-  'dense-medium': 500,
-  'solid-medium': 500,
   semibold: 600,
   'semibold-italic': 600,
   bold: 700,
   'bold-italic': 700,
   'bold-oblique': 700,
   fett: 700,
-  'dense-bold': 700,
-  'solid-bold': 700,
   black: 900,
   'black-italic': 900,
   'extra-italic': 900,
@@ -42165,6 +42266,23 @@ var variantsNameToWeight = {
   satt: 900,
   heavy: 900,
   'heavy-italic': 900,
+  // The following variants are only used in the FT88 font. These are not really weights, but more font styles (gothique, cursive, etc.).
+  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
+  serif: 100,
+  school: 200,
+  expanded: 300,
+  gothique: 500,
+  // The following variants are only used in the ARK_ES font.
+  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
+  // The order is important because we want to group all the light together and solid together.
+  'dense-light': 200,
+  'dense-regular': 300,
+  'dense-medium': 400,
+  'dense-bold': 500,
+  'solid-light': 600,
+  'solid-regular': 700,
+  'solid-medium': 800,
+  'solid-bold': 900,
   // we want to put variable fonts last
   variable: 1e3,
   'variable-italic': 1e3,
@@ -42177,6 +42295,7 @@ function variantToKebabCase(variant,) {
   return variant.toLowerCase().replace(/\s+/gu, '-',);
 }
 function getFontStyle(variant,) {
+  variant = variant.toLowerCase();
   if (variant.includes('italic',) || variant.includes('oblique',) || variant.includes('slanted',)) return 'italic';
   return 'normal';
 }
@@ -46934,9 +47053,7 @@ var RadialGradientElement = class extends Component {
       cy: centerAnchorY,
       cx: centerAnchorX,
       r: widthFactor,
-      gradientTransform: `translate(${centerAnchorX}, ${centerAnchorY}) scale(1 ${
-        heightFactor / widthFactor
-      }) translate(-${centerAnchorX}, -${centerAnchorY})`,
+      gradientTransform: getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, centerAnchorY,),
       children: stops.map((stop, idx,) => {
         return /* @__PURE__ */ jsx('stop', {
           offset: stop.position,
@@ -46947,6 +47064,10 @@ var RadialGradientElement = class extends Component {
     },);
   }
 };
+function getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, centerAnchorY,) {
+  const scaleWidth = widthFactor ? heightFactor / widthFactor : 1e3;
+  return `translate(${centerAnchorX}, ${centerAnchorY}) scale(1 ${scaleWidth}) translate(-${centerAnchorX}, -${centerAnchorY})`;
+}
 var SVGRoot = class extends Component {
   render() {
     const {
@@ -47200,7 +47321,7 @@ var Vector = /* @__PURE__ */ (() => {
         opacity: opacityValue,
         variants,
         transition,
-        children: [defs, shadow.outsetElement, mainElement, shadow.insetElement, strokeElement,],
+        children: [defs, shadow.maskElement, shadow.outsetElement, mainElement, shadow.insetElement, strokeElement,],
       },),);
     }
     renderElement(element,) {
