@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.L4WLAZ5C.mjs
+// /:https://app.framerstatic.com/framer.YONDMN62.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -42176,7 +42176,7 @@ var BuiltInFontSource = class {
   }
   createFontFamily(family, foundryName, version2,) {
     const existingFontFamily = this.byFamilyName.get(family,);
-    if (existingFontFamily) return existingFontFamily;
+    if (existingFontFamily && existingFontFamily.version === version2) return existingFontFamily;
     const fontFamily = {
       source: this.name,
       name: family,
