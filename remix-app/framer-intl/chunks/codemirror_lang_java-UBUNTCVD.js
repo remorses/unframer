@@ -13,7 +13,7 @@ import {
   indentNodeProp,
   styleTags,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 import "./chunk-WSFCRVEQ.js";
 
 // /:https://framerusercontent.com/modules/eRdUKzu14cF8QTQ2zxBM/rCwfi0LHRiKnedBIrnGW/lezer_java.js

@@ -4,7 +4,7 @@
 "use client";
 import {
   stdin_default
-} from "../chunks/chunk-SBUJUFGA.js";
+} from "../chunks/chunk-ZCPWFOW3.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:navigation/icon

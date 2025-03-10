@@ -4,7 +4,7 @@
 import {
   completeFromList,
   ifNotIn
-} from "./chunk-CCACG67X.js";
+} from "./chunk-2AF7GCVT.js";
 import {
   ExternalTokenizer,
   LRLanguage,
@@ -16,7 +16,7 @@ import {
   styleTags,
   syntaxTree,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 import "./chunk-WSFCRVEQ.js";
 
 // /:https://framerusercontent.com/modules/ErpiHuOpMsJgQursm47q/uyWXpN0RN41fZeXKclFO/codemirror_lang_sql.js

@@ -6,7 +6,7 @@ import {
   className,
   css,
   fonts
-} from "./chunks/chunk-X6RUM57F.js";
+} from "./chunks/chunk-3IMWMF2U.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
 // virtual:tag

@@ -2993,6 +2993,7 @@ function findColumn(string2, col, tabSize, strict) {
 }
 
 // /:https://framerusercontent.com/modules/wKCR2JyUW8wZdYweJrou/EndxaPZLF2o4GndkIvF9/codemirror_view.js
+var __unframerNavigator = typeof window !== "undefined" ? navigator : void 0;
 var C = "\u037C";
 var COUNT = typeof Symbol == "undefined" ? "__" + C : Symbol.for(C);
 var SET = typeof Symbol == "undefined" ? "__styleSet" + Math.floor(Math.random() * 1e8) : Symbol("styleSet");
@@ -3107,8 +3108,8 @@ var StyleSet = class {
 };
 var base = { 8: "Backspace", 9: "Tab", 10: "Enter", 12: "NumLock", 13: "Enter", 16: "Shift", 17: "Control", 18: "Alt", 20: "CapsLock", 27: "Escape", 32: " ", 33: "PageUp", 34: "PageDown", 35: "End", 36: "Home", 37: "ArrowLeft", 38: "ArrowUp", 39: "ArrowRight", 40: "ArrowDown", 44: "PrintScreen", 45: "Insert", 46: "Delete", 59: ";", 61: "=", 91: "Meta", 92: "Meta", 106: "*", 107: "+", 108: ",", 109: "-", 110: ".", 111: "/", 144: "NumLock", 145: "ScrollLock", 160: "Shift", 161: "Shift", 162: "Control", 163: "Control", 164: "Alt", 165: "Alt", 173: "-", 186: ";", 187: "=", 188: ",", 189: "-", 190: ".", 191: "/", 192: "`", 219: "[", 220: "\\", 221: "]", 222: "'" };
 var shift = { 48: ")", 49: "!", 50: "@", 51: "#", 52: "$", 53: "%", 54: "^", 55: "&", 56: "*", 57: "(", 59: ":", 61: "+", 173: "_", 186: ":", 187: "+", 188: "<", 189: "_", 190: ">", 191: "?", 192: "~", 219: "{", 220: "|", 221: "}", 222: '"' };
-var mac = typeof navigator != "undefined" && /Mac/.test(navigator.platform);
-var ie = typeof navigator != "undefined" && /MSIE \d|Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(navigator.userAgent);
+var mac = typeof __unframerNavigator != "undefined" && /Mac/.test(__unframerNavigator.platform);
+var ie = typeof __unframerNavigator != "undefined" && /MSIE \d|Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(__unframerNavigator.userAgent);
 for (i = 0; i < 10; i++) base[48 + i] = base[96 + i] = String(i);
 var i;
 for (i = 1; i <= 24; i++) base[i + 111] = "F" + i;
@@ -3666,7 +3667,7 @@ function mergeChildrenInto(parent, from, to, insert2, openStart, openEnd) {
   parent.length += dLen;
   replaceRange(parent, fromI, fromOff, toI, toOff, insert2, 0, openStart, openEnd);
 }
-var nav = typeof navigator != "undefined" ? navigator : { userAgent: "", vendor: "", platform: "" };
+var nav = typeof __unframerNavigator != "undefined" ? __unframerNavigator : { userAgent: "", vendor: "", platform: "" };
 var doc = typeof document != "undefined" ? document : { documentElement: { style: {} } };
 var ie_edge = /* @__PURE__ */ /Edge\/(\d+)/.exec(nav.userAgent);
 var ie_upto10 = /* @__PURE__ */ /MSIE \d/.test(nav.userAgent);
@@ -3677,7 +3678,7 @@ var chrome = !ie2 && /* @__PURE__ */ /Chrome\/(\d+)/.exec(nav.userAgent);
 var webkit = "webkitFontSmoothing" in doc.documentElement.style;
 var safari = !ie2 && /* @__PURE__ */ /Apple Computer/.test(nav.vendor);
 var ios = safari && (/Mobile\/\w+/.test(nav.userAgent) || nav.maxTouchPoints > 2);
-var browser = { mac: ios || /* @__PURE__ */ /Mac/.test(nav.platform), windows: /* @__PURE__ */ /Win/.test(nav.platform), linux: /* @__PURE__ */ /Linux|X11/.test(nav.platform), ie: ie2, ie_version: ie_upto10 ? doc.documentMode || 6 : ie_11up ? +ie_11up[1] : ie_edge ? +ie_edge[1] : 0, gecko, gecko_version: gecko ? +(/Firefox\/(\d+)/.exec(nav.userAgent) || [0, 0])[1] : 0, chrome: !!chrome, chrome_version: chrome ? +chrome[1] : 0, ios, android: /* @__PURE__ */ /Android\b/.test(nav.userAgent), webkit, safari, webkit_version: webkit ? +(/\bAppleWebKit\/(\d+)/.exec(navigator.userAgent) || [0, 0])[1] : 0, tabSize: doc.documentElement.style.tabSize != null ? "tab-size" : "-moz-tab-size" };
+var browser = { mac: ios || /* @__PURE__ */ /Mac/.test(nav.platform), windows: /* @__PURE__ */ /Win/.test(nav.platform), linux: /* @__PURE__ */ /Linux|X11/.test(nav.platform), ie: ie2, ie_version: ie_upto10 ? doc.documentMode || 6 : ie_11up ? +ie_11up[1] : ie_edge ? +ie_edge[1] : 0, gecko, gecko_version: gecko ? +(/Firefox\/(\d+)/.exec(nav.userAgent) || [0, 0])[1] : 0, chrome: !!chrome, chrome_version: chrome ? +chrome[1] : 0, ios, android: /* @__PURE__ */ /Android\b/.test(nav.userAgent), webkit, safari, webkit_version: webkit ? +(/\bAppleWebKit\/(\d+)/.exec(__unframerNavigator.userAgent) || [0, 0])[1] : 0, tabSize: doc.documentElement.style.tabSize != null ? "tab-size" : "-moz-tab-size" };
 var MaxJoinLen = 256;
 var TextView = class extends ContentView {
   get length() {
@@ -11809,6 +11810,7 @@ var tags = {
 var classHighlighter = tagHighlighter([{ tag: tags.link, class: "tok-link" }, { tag: tags.heading, class: "tok-heading" }, { tag: tags.emphasis, class: "tok-emphasis" }, { tag: tags.strong, class: "tok-strong" }, { tag: tags.keyword, class: "tok-keyword" }, { tag: tags.atom, class: "tok-atom" }, { tag: tags.bool, class: "tok-bool" }, { tag: tags.url, class: "tok-url" }, { tag: tags.labelName, class: "tok-labelName" }, { tag: tags.inserted, class: "tok-inserted" }, { tag: tags.deleted, class: "tok-deleted" }, { tag: tags.literal, class: "tok-literal" }, { tag: tags.string, class: "tok-string" }, { tag: tags.number, class: "tok-number" }, { tag: [tags.regexp, tags.escape, tags.special(tags.string)], class: "tok-string2" }, { tag: tags.variableName, class: "tok-variableName" }, { tag: tags.local(tags.variableName), class: "tok-variableName tok-local" }, { tag: tags.definition(tags.variableName), class: "tok-variableName tok-definition" }, { tag: tags.special(tags.variableName), class: "tok-variableName2" }, { tag: tags.definition(tags.propertyName), class: "tok-propertyName tok-definition" }, { tag: tags.typeName, class: "tok-typeName" }, { tag: tags.namespace, class: "tok-namespace" }, { tag: tags.className, class: "tok-className" }, { tag: tags.macroName, class: "tok-macroName" }, { tag: tags.propertyName, class: "tok-propertyName" }, { tag: tags.operator, class: "tok-operator" }, { tag: tags.comment, class: "tok-comment" }, { tag: tags.meta, class: "tok-meta" }, { tag: tags.invalid, class: "tok-invalid" }, { tag: tags.punctuation, class: "tok-punctuation" }]);
 
 // /:https://framerusercontent.com/modules/aJsTBlWNkIaM900KNIXT/TeoF57xeGMuVMjiI2ooR/codemirror_language.js
+var __unframerNavigator2 = typeof window !== "undefined" ? navigator : void 0;
 var C2 = "\u037C";
 var COUNT2 = typeof Symbol == "undefined" ? "__" + C2 : Symbol.for(C2);
 var SET2 = typeof Symbol == "undefined" ? "__styleSet" + Math.floor(Math.random() * 1e8) : Symbol("styleSet");
@@ -12293,7 +12295,7 @@ if (typeof requestIdleCallback != "undefined") requestIdle = (callback) => {
   }, 100);
   return () => idle < 0 ? clearTimeout(timeout) : cancelIdleCallback(idle);
 };
-var isInputPending = typeof navigator != "undefined" && ((_a = navigator.scheduling) === null || _a === void 0 ? void 0 : _a.isInputPending) ? () => navigator.scheduling.isInputPending() : null;
+var isInputPending = typeof __unframerNavigator2 != "undefined" && ((_a = __unframerNavigator2.scheduling) === null || _a === void 0 ? void 0 : _a.isInputPending) ? () => __unframerNavigator2.scheduling.isInputPending() : null;
 var parseWorker = /* @__PURE__ */ ViewPlugin.fromClass(class ParseWorker {
   update(update) {
     let cx = this.view.state.field(Language.state).context;

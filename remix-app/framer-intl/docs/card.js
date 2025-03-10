@@ -4,12 +4,12 @@
 "use client";
 import {
   SVGDisplay
-} from "../chunks/chunk-DEREOTPY.js";
+} from "../chunks/chunk-65CNVRS2.js";
 import {
   className,
   css,
   fonts
-} from "../chunks/chunk-MHK5HXGT.js";
+} from "../chunks/chunk-34MGUY3G.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:docs/card

@@ -158,7 +158,7 @@ h1, h2, h3, h4, h5, h6, p, figure {
 }
 
 
-body { --framer-will-change-override: none; }
+body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }
@@ -292,6 +292,7 @@ body { --framer-will-change-override: none; }
 
         p.framer-text,
         div.framer-text,
+        figure.framer-text,
         h1.framer-text,
         h2.framer-text,
         h3.framer-text,
@@ -378,6 +379,8 @@ body { --framer-will-change-override: none; }
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
         blockquote.framer-text:not(:first-child),
+        table.framer-text:not(:first-child),
+        figure.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -467,7 +470,7 @@ body { --framer-will-change-override: none; }
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link]:hover,
         code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
@@ -584,6 +587,21 @@ body { --framer-will-change-override: none; }
             box-sizing: border-box;
             padding-inline-end: 0.75ch;
             content: "•";
+        }
+    
+
+        .framer-table-wrapper {
+            overflow-x: auto;
+        }
+    
+
+        table.framer-text,
+        .framer-table-wrapper table {
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: auto;
+            white-space: nowrap;
+            width: 100%;
         }
     
 
@@ -884,6 +902,7 @@ NavigationContainer
 }
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
+[data-hide-scrollbars="true"] { scrollbar-width: none; }
 
 /* used by remove-button.js */
 

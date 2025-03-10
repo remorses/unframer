@@ -14,7 +14,7 @@ import {
   indentNodeProp,
   styleTags,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 import "./chunk-WSFCRVEQ.js";
 
 // /:https://framerusercontent.com/modules/FdnI703sJ5RkMwPE8nsF/xdEljITV5B597lLT4M5w/lezer_cpp.js

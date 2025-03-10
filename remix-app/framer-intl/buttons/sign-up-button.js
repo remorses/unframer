@@ -4,8 +4,8 @@
 "use client";
 import {
   stdin_default
-} from "../chunks/chunk-HZDQIPER.js";
-import "../chunks/chunk-YCUU6ZIW.js";
+} from "../chunks/chunk-JD57ZKNM.js";
+import "../chunks/chunk-VMS457YC.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:buttons/sign-up-button

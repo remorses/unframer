@@ -12,7 +12,7 @@ import {
   indentNodeProp,
   styleTags,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 import "./chunk-WSFCRVEQ.js";
 
 // /:https://framerusercontent.com/modules/GdpLl5650m5agtwGYbcm/u0ymKxBWk1TGPUzdCCmO/lezer_rust.js

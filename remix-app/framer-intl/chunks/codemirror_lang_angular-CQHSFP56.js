@@ -4,8 +4,8 @@
 import {
   htmlLanguage,
   javascriptLanguage
-} from "./chunk-ZBRL5O4H.js";
-import "./chunk-CCACG67X.js";
+} from "./chunk-MNUETJFT.js";
+import "./chunk-2AF7GCVT.js";
 import {
   ExternalTokenizer,
   LRLanguage,
@@ -14,7 +14,7 @@ import {
   parseMixed,
   styleTags,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 import "./chunk-WSFCRVEQ.js";
 
 // /:https://framerusercontent.com/modules/EjHwngjQOz6g9296RZMV/ZwhROYAZtNtuFNcAlekE/codemirror_lang_angular.js

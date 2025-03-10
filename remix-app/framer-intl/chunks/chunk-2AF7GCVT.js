@@ -22,9 +22,10 @@ import {
   indentUnit,
   keymap,
   syntaxTree
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 
 // /:https://framerusercontent.com/modules/iHAg5NNDzB38uLRZmObL/AYYlaW5ad8TRAyLHn07o/codemirror_autocomplete.js
+var __unframerNavigator = typeof window !== "undefined" ? navigator : void 0;
 function toSet(chars) {
   let flat = Object.keys(chars).join("");
   let words = /\w/.test(flat);
@@ -258,7 +259,7 @@ function closing(ch) {
 function config(state, pos) {
   return state.languageDataAt("closeBrackets", pos)[0] || defaults;
 }
-var android = typeof navigator == "object" && /* @__PURE__ */ /Android\b/.test(navigator.userAgent);
+var android = typeof __unframerNavigator == "object" && /* @__PURE__ */ /Android\b/.test(__unframerNavigator.userAgent);
 var inputHandler = /* @__PURE__ */ EditorView.inputHandler.of((view, from, to, insert) => {
   if ((android ? view.composing : view.compositionStarted) || view.state.readOnly) return false;
   let sel = view.state.selection.main;

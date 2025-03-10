@@ -5,11 +5,11 @@ import {
   css,
   html,
   javascript
-} from "./chunk-ZBRL5O4H.js";
+} from "./chunk-MNUETJFT.js";
 import {
   closeBrackets,
   closeBracketsKeymap
-} from "./chunk-CCACG67X.js";
+} from "./chunk-2AF7GCVT.js";
 import {
   Annotation,
   ChangeDesc,
@@ -47,7 +47,7 @@ import {
   syntaxHighlighting,
   syntaxTree,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 
 // /:https://framerusercontent.com/modules/pVk4QsoHxASnVtUBp6jr/TbhpORLndv1iOkZzyo83/CodeBlock.js
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
@@ -7086,16 +7086,17 @@ var rtlLayoutClassName = css2({ flexDirection: "row-reverse", "@media screen and
 import { addPropertyControls, ControlType, withCSS } from "unframer";
 
 // /:https://framerusercontent.com/modules/wOI0XDWuPNeaYuatKp4b/ezOdeUpHBrE7fwL9evTL/browser.js
+var __unframerNavigator = typeof window !== "undefined" ? navigator : void 0;
 var Browser;
 (function(Browser2) {
   var isBrowser = Browser2.isBrowser = () => typeof window === "object";
-  var isTouch = Browser2.isTouch = () => "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  var isChrome = Browser2.isChrome = () => navigator.userAgent.toLowerCase().includes("chrome/");
-  var isWebKit = Browser2.isWebKit = () => navigator.userAgent.toLowerCase().includes("applewebkit/");
+  var isTouch = Browser2.isTouch = () => "ontouchstart" in window || __unframerNavigator.maxTouchPoints > 0;
+  var isChrome = Browser2.isChrome = () => __unframerNavigator.userAgent.toLowerCase().includes("chrome/");
+  var isWebKit = Browser2.isWebKit = () => __unframerNavigator.userAgent.toLowerCase().includes("applewebkit/");
   var isSafari = Browser2.isSafari = () => isWebKit() && !isChrome();
   var isSafariDesktop = Browser2.isSafariDesktop = () => isSafari() && !isTouch();
-  var isWindows = Browser2.isWindows = () => /Win/.test(navigator.platform);
-  var isMacOS = Browser2.isMacOS = () => /Mac/.test(navigator.platform);
+  var isWindows = Browser2.isWindows = () => /Win/.test(__unframerNavigator.platform);
+  var isMacOS = Browser2.isMacOS = () => /Mac/.test(__unframerNavigator.platform);
 })(Browser || (Browser = {}));
 
 // /:https://framerusercontent.com/modules/19BkzxjVBT3VP0Ykl3DY/Ca7pJ6oGfAIcZSScMdTx/types.js
@@ -7286,103 +7287,103 @@ function isDarkColor2(color2) {
 
 // /:https://framerusercontent.com/modules/DyzTKdNCsRH8nvz08sNT/dJhQ3yTSKg9tQmEoIrL8/useLanguageAsync.js
 var angular = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_angular-5HJJBD5F.js");
+  const language = await import("./codemirror_lang_angular-CQHSFP56.js");
   return language.angular();
 });
 var cpp = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_cpp-GLU77ENO.js");
+  const language = await import("./codemirror_lang_cpp-D4GVD2PB.js");
   return language.cpp();
 });
 var java = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_java-4AXXWJMV.js");
+  const language = await import("./codemirror_lang_java-UBUNTCVD.js");
   return language.java();
 });
 var markdown = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_markdown-COM7JENQ.js");
+  const language = await import("./codemirror_lang_markdown-FKSSEYIC.js");
   return language.markdown();
 });
 var php = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_php-5OH3WBFY.js");
+  const language = await import("./codemirror_lang_php-XEATKGSI.js");
   return language.php();
 });
 var python = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_python-T45YAYKM.js");
+  const language = await import("./codemirror_lang_python-B2DPADYS.js");
   return language.python();
 });
 var rust = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_rust-7P6ABYDD.js");
+  const language = await import("./codemirror_lang_rust-5I6M5T3N.js");
   return language.rust();
 });
 var sql = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_sql-43SMYUAC.js");
+  const language = await import("./codemirror_lang_sql-3LQYA5DH.js");
   return language.sql();
 });
 var vue = new SuspenseValue(async () => {
-  const language = await import("./codemirror_lang_vue-3WWJXNA3.js");
+  const language = await import("./codemirror_lang_vue-SZ77RWVV.js");
   return language.vue();
 });
 var scala = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_clike-C3A443MN.js");
+  const language = await import("./codemirror_legacy_modes_mode_clike-CDGMMVW2.js");
   return new LanguageSupport(StreamLanguage.define(language.scala));
 });
 var c2 = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_clike-C3A443MN.js");
+  const language = await import("./codemirror_legacy_modes_mode_clike-CDGMMVW2.js");
   return new LanguageSupport(StreamLanguage.define(language.c));
 });
 var csharp = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_clike-C3A443MN.js");
+  const language = await import("./codemirror_legacy_modes_mode_clike-CDGMMVW2.js");
   return new LanguageSupport(StreamLanguage.define(language.csharp));
 });
 var kotlin = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_clike-C3A443MN.js");
+  const language = await import("./codemirror_legacy_modes_mode_clike-CDGMMVW2.js");
   return new LanguageSupport(StreamLanguage.define(language.kotlin));
 });
 var objectiveC = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_clike-C3A443MN.js");
+  const language = await import("./codemirror_legacy_modes_mode_clike-CDGMMVW2.js");
   return new LanguageSupport(StreamLanguage.define(language.objectiveC));
 });
 var go = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_go-7C5H7UES.js");
+  const language = await import("./codemirror_legacy_modes_mode_go-XJ5AICND.js");
   return new LanguageSupport(StreamLanguage.define(language.go));
 });
 var haskell = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_haskell-DNMLCPCC.js");
+  const language = await import("./codemirror_legacy_modes_mode_haskell-B5G6PDQT.js");
   return new LanguageSupport(StreamLanguage.define(language.haskell));
 });
 var julia = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_julia-3GI5F4R7.js");
+  const language = await import("./codemirror_legacy_modes_mode_julia-FBVGXRGW.js");
   return new LanguageSupport(StreamLanguage.define(language.julia));
 });
 var lua = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_lua-ZOHIURQQ.js");
+  const language = await import("./codemirror_legacy_modes_mode_lua-AFH2GOJQ.js");
   return new LanguageSupport(StreamLanguage.define(language.lua));
 });
 var nginx = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_nginx-5SMNXV7O.js");
+  const language = await import("./codemirror_legacy_modes_mode_nginx-TYEP3YRR.js");
   return new LanguageSupport(StreamLanguage.define(language.nginx));
 });
 var octave = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_octave-BUKRLIGE.js");
+  const language = await import("./codemirror_legacy_modes_mode_octave-MTTR7NNF.js");
   return new LanguageSupport(StreamLanguage.define(language.octave));
 });
 var perl = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_perl-QMEZ7PMO.js");
+  const language = await import("./codemirror_legacy_modes_mode_perl-XQOUBKBQ.js");
   return new LanguageSupport(StreamLanguage.define(language.perl));
 });
 var ruby = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_ruby-YITGF2RX.js");
+  const language = await import("./codemirror_legacy_modes_mode_ruby-HYFPBJAP.js");
   return new LanguageSupport(StreamLanguage.define(language.ruby));
 });
 var shell = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_shell-ZXPB7EZA.js");
+  const language = await import("./codemirror_legacy_modes_mode_shell-PW2EY77M.js");
   return new LanguageSupport(StreamLanguage.define(language.shell));
 });
 var swift = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_swift-RMXNIVZX.js");
+  const language = await import("./codemirror_legacy_modes_mode_swift-4DLJOMLV.js");
   return new LanguageSupport(StreamLanguage.define(language.swift));
 });
 var yaml = new SuspenseValue(async () => {
-  const language = await import("./codemirror_legacy_modes_mode_yaml-6Q3CG5ZY.js");
+  const language = await import("./codemirror_legacy_modes_mode_yaml-6NHNVJH5.js");
   return new LanguageSupport(StreamLanguage.define(language.yaml));
 });
 function useLanguageAsync(name) {

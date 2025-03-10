@@ -6,7 +6,7 @@ import {
   className,
   css,
   fonts
-} from "../chunks/chunk-MHK5HXGT.js";
+} from "../chunks/chunk-34MGUY3G.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:docs/search-bar
@@ -595,15 +595,16 @@ function getSearchIndexURL(baseURL, localeId) {
 import React, { useEffect as useEffect2, useState as useState2, useMemo as useMemo2, forwardRef, useRef as useRef2, useDeferredValue, useLayoutEffect, useCallback as useCallback2, useImperativeHandle } from "react";
 
 // /:https://framerusercontent.com/modules/PJVBcBLmDteTEAZh3J9Z/keXJyjyE9VnzUcDMayjg/browser.js
+var __unframerNavigator = typeof window !== "undefined" ? navigator : void 0;
 var Browser;
 (function(Browser2) {
-  var isTouch = Browser2.isTouch = () => "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  var isChrome = Browser2.isChrome = () => navigator.userAgent.toLowerCase().includes("chrome/");
-  var isWebKit = Browser2.isWebKit = () => navigator.userAgent.toLowerCase().includes("applewebkit/");
+  var isTouch = Browser2.isTouch = () => "ontouchstart" in window || __unframerNavigator.maxTouchPoints > 0;
+  var isChrome = Browser2.isChrome = () => __unframerNavigator.userAgent.toLowerCase().includes("chrome/");
+  var isWebKit = Browser2.isWebKit = () => __unframerNavigator.userAgent.toLowerCase().includes("applewebkit/");
   var isSafari = Browser2.isSafari = () => isWebKit() && !isChrome();
   var isSafariDesktop = Browser2.isSafariDesktop = () => isSafari() && !isTouch();
-  var isWindows = Browser2.isWindows = () => /Win/.test(navigator.platform);
-  var isMacOS = Browser2.isMacOS = () => /Mac/.test(navigator.platform);
+  var isWindows = Browser2.isWindows = () => /Win/.test(__unframerNavigator.platform);
+  var isMacOS = Browser2.isMacOS = () => /Mac/.test(__unframerNavigator.platform);
 })(Browser || (Browser = {}));
 
 // /:https://framerusercontent.com/modules/tV9haTHllpHHc9Fjue2H/Xy775u0FJg3K1GQc1Cd9/SearchModal.js

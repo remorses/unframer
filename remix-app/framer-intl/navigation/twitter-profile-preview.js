@@ -4,8 +4,8 @@
 "use client";
 import {
   stdin_default
-} from "../chunks/chunk-BP573UWY.js";
-import "../chunks/chunk-X6RUM57F.js";
+} from "../chunks/chunk-DHCVI6LL.js";
+import "../chunks/chunk-3IMWMF2U.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:navigation/twitter-profile-preview

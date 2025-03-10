@@ -5,7 +5,7 @@ import {
   completeFromList,
   ifNotIn,
   snippetCompletion
-} from "./chunk-CCACG67X.js";
+} from "./chunk-2AF7GCVT.js";
 import {
   ContextTracker,
   ExternalTokenizer,
@@ -21,7 +21,7 @@ import {
   styleTags,
   syntaxTree,
   tags
-} from "./chunk-2EI5GVGJ.js";
+} from "./chunk-IFQTTQVA.js";
 import "./chunk-WSFCRVEQ.js";
 
 // /:https://framerusercontent.com/modules/EjGlVHogpfm3jPPe6dpv/ksfEYmQRgZtQxtsxsQOu/lezer_python.js

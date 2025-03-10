@@ -4,12 +4,12 @@
 "use client";
 import {
   SVGDisplay
-} from "../chunks/chunk-DEREOTPY.js";
+} from "../chunks/chunk-65CNVRS2.js";
 import {
   className,
   css,
   fonts
-} from "../chunks/chunk-YCUU6ZIW.js";
+} from "../chunks/chunk-VMS457YC.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:pricing/feature-bullet-point

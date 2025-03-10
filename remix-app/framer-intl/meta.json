@@ -1,7 +1,7 @@
 {
   "inputs": {
     "/:https://framerusercontent.com/modules/zEYkqdU9R5tV5FFKTmjD/hbgkTcllgyH4sDn72sWu/TeHXylmO7.js": {
-      "bytes": 6285,
+      "bytes": 6366,
       "imports": [
         {
           "path": "unframer",
@@ -12,7 +12,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/pIqPzvEpOTPapo1Kn5mC/oslBiAnBLtf9UzhKZ8XH/AlVxEJVet.js": {
-      "bytes": 33856,
+      "bytes": 33937,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -74,7 +74,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/uasQaa4IZ5gEvV1gnhyN/jokgRq5ITqg5LdtySdP1/n4VV4jzz6.js": {
-      "bytes": 7759,
+      "bytes": 7840,
       "imports": [
         {
           "path": "unframer",
@@ -85,7 +85,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/oBaFRAsxHiVAKNW4Kskn/XtyjpjjAjoMk6XBpzpdk/XWZdRWLkO.js": {
-      "bytes": 920,
+      "bytes": 1001,
       "imports": [
         {
           "path": "unframer",
@@ -96,7 +96,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/2Gv0mcyfnQqk5SqGnsec/qr22ktzVqBoqPlalEges/Lt4N_hC_q.js": {
-      "bytes": 10135,
+      "bytes": 10216,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -122,7 +122,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ofbCvsLY8W21BXW0aU73/js0iOvT3nnMpznFN6T5C/EmVwbqUHg.js": {
-      "bytes": 53689,
+      "bytes": 53770,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -204,7 +204,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/yirxmVb3t9WkDw307PEK/W91zu16PDWr4a8cfZvju/gj4zreqLr.js": {
-      "bytes": 9243,
+      "bytes": 9324,
       "imports": [
         {
           "path": "unframer",
@@ -215,7 +215,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/9sm7OpJL026ZQPDYEbpi/U0eapdsKT0DXhpZ3eAwZ/x1n9RoGI8.js": {
-      "bytes": 6912,
+      "bytes": 6993,
       "imports": [
         {
           "path": "unframer",
@@ -226,7 +226,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/8SvTfjg3wtGBYHnVhhfs/TV916z0u6NMPFGMOATTZ/IlmXaohIz.js": {
-      "bytes": 20078,
+      "bytes": 20159,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -298,7 +298,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/jjG89I69wrjAMyXUhZp5/aE22nfo5NdYpWqqBN600/gj4zreqLr.js": {
-      "bytes": 9243,
+      "bytes": 9324,
       "imports": [
         {
           "path": "unframer",
@@ -309,7 +309,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/P2eSwcYkE2a0000K4Y9n/MWZkNgl5KxOvQSfkfCv7/TeHXylmO7.js": {
-      "bytes": 6285,
+      "bytes": 6366,
       "imports": [
         {
           "path": "unframer",
@@ -320,7 +320,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/y3MUs3Kxfw0kLqM5y5mb/HnibTa0eFG6tE753Vcml/x1n9RoGI8.js": {
-      "bytes": 6912,
+      "bytes": 6993,
       "imports": [
         {
           "path": "unframer",
@@ -331,7 +331,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/OjoxXpR8ujr5jQS3hzGq/xGCJygXT8FQvdxS4mXD4/ylMc1mH5G.js": {
-      "bytes": 1006,
+      "bytes": 1087,
       "imports": [
         {
           "path": "unframer",
@@ -342,7 +342,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/wM02gR5pCHZCWYEpfa7j/jWVbD0NCwbrkzZRwLgwo/KDmSZoPnz.js": {
-      "bytes": 13520,
+      "bytes": 13601,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -373,7 +373,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/2oKMpgdbGMN452HBu43B/TDI0doXjBihjrZvF7LxJ/LG_K_Gwhe.js": {
-      "bytes": 29798,
+      "bytes": 29879,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -455,7 +455,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/3SpzSsgouKI4HCPIntXg/u3LwVyssk9bGQz51sXlz/M4qYARdEB.js": {
-      "bytes": 23927,
+      "bytes": 24008,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -532,7 +532,7 @@
       "format": "esm"
     },
     "/:https://framer.com/m/framer/store.js@^1.0.0": {
-      "bytes": 1443,
+      "bytes": 1524,
       "imports": [
         {
           "path": "react",
@@ -548,7 +548,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ry9N7lTOKGZrBHcWBuZC/uV6Loz3nF9DVbHDWldqM/Theme_Switcher.js": {
-      "bytes": 4195,
+      "bytes": 4276,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -569,7 +569,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-0.js": {
-      "bytes": 74368,
+      "bytes": 74449,
       "imports": [
         {
           "path": "unframer",
@@ -585,12 +585,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/aYGJCvSFoantRUzfEvdJ/R3HzaXN99zpIst2zJwMZ/codesandbox_nodebox.js": {
-      "bytes": 37901,
+      "bytes": 37982,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fn2r53K2SixLM3ktuGOw/eTuqjtAw0LFZDyNdTgHv/codesandbox_sandpack_client.js": {
-      "bytes": 248031,
+      "bytes": 248112,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/aYGJCvSFoantRUzfEvdJ/R3HzaXN99zpIst2zJwMZ/codesandbox_nodebox.js",
@@ -601,12 +601,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/wFkXxZqfKOPeEQtsYrsa/Xcw7qvncyogRPQtf9aNn/codemirror_state.js": {
-      "bytes": 111921,
+      "bytes": 112002,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/wKCR2JyUW8wZdYweJrou/EndxaPZLF2o4GndkIvF9/codemirror_view.js": {
-      "bytes": 320833,
+      "bytes": 320984,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/wFkXxZqfKOPeEQtsYrsa/Xcw7qvncyogRPQtf9aNn/codemirror_state.js",
@@ -617,12 +617,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/CO9ruPlVDRTCLVInyri7/dIK6ma4pzS0qSHWtJ4s1/lezer_common.js": {
-      "bytes": 58892,
+      "bytes": 58973,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/rOWwbZHN39cczduPnzmw/OTf12FftmvJsuTNsZb3G/lezer_highlight.js": {
-      "bytes": 19503,
+      "bytes": 19584,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/CO9ruPlVDRTCLVInyri7/dIK6ma4pzS0qSHWtJ4s1/lezer_common.js",
@@ -633,7 +633,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/aJsTBlWNkIaM900KNIXT/TeoF57xeGMuVMjiI2ooR/codemirror_language.js": {
-      "bytes": 78329,
+      "bytes": 78440,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/CO9ruPlVDRTCLVInyri7/dIK6ma4pzS0qSHWtJ4s1/lezer_common.js",
@@ -659,7 +659,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/iHAg5NNDzB38uLRZmObL/AYYlaW5ad8TRAyLHn07o/codemirror_autocomplete.js": {
-      "bytes": 65638,
+      "bytes": 65739,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/wFkXxZqfKOPeEQtsYrsa/Xcw7qvncyogRPQtf9aNn/codemirror_state.js",
@@ -680,7 +680,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/peSgSa05KnLqaA8FHu9n/D7eZPbfsEH95yDKH1UTM/codemirror_commands.js": {
-      "bytes": 58670,
+      "bytes": 58751,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/wFkXxZqfKOPeEQtsYrsa/Xcw7qvncyogRPQtf9aNn/codemirror_state.js",
@@ -706,7 +706,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js": {
-      "bytes": 52597,
+      "bytes": 52678,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/CO9ruPlVDRTCLVInyri7/dIK6ma4pzS0qSHWtJ4s1/lezer_common.js",
@@ -717,7 +717,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/baxvQBtmpZ5GFXZ1GP2Q/aAUh2G8ZOS1DqssCE8EA/lezer_css.js": {
-      "bytes": 13331,
+      "bytes": 13412,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -733,7 +733,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Gg5hLFaRxQ2EaXSWb101/kXQVFiwPVLfGsrUiA5zE/codemirror_lang_css.js": {
-      "bytes": 14641,
+      "bytes": 14722,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/baxvQBtmpZ5GFXZ1GP2Q/aAUh2G8ZOS1DqssCE8EA/lezer_css.js",
@@ -754,7 +754,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/GrkjcC7Ol5LkBvrp44De/VLPQBO2akjkDhtOMowLI/lezer_html.js": {
-      "bytes": 23075,
+      "bytes": 23156,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -775,7 +775,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/2B1yVjX9TEUbuHzHLnih/cJ6ep86gpD35atdtaety/lezer_javascript.js": {
-      "bytes": 70836,
+      "bytes": 70917,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -791,7 +791,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/YrJiUSsP9WZPvnJAGTTV/qYWVNl0YKyBbL8cTq65j/codemirror_lang_javascript.js": {
-      "bytes": 16067,
+      "bytes": 16168,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/2B1yVjX9TEUbuHzHLnih/cJ6ep86gpD35atdtaety/lezer_javascript.js",
@@ -827,7 +827,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ju8TqAduufCaScL3E39X/3zUBDnN91MxwGUPcS8Lv/codemirror_lang_html.js": {
-      "bytes": 22263,
+      "bytes": 22344,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/GrkjcC7Ol5LkBvrp44De/VLPQBO2akjkDhtOMowLI/lezer_html.js",
@@ -863,7 +863,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/SWAtenub3goqbKHfvwGg/SGdoMClxnsCb2h0GRQ48/codesandbox_sandpack_react.js": {
-      "bytes": 293019,
+      "bytes": 293100,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -944,22 +944,22 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/wOI0XDWuPNeaYuatKp4b/ezOdeUpHBrE7fwL9evTL/browser.js": {
-      "bytes": 878,
+      "bytes": 1009,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/19BkzxjVBT3VP0Ykl3DY/Ca7pJ6oGfAIcZSScMdTx/types.js": {
-      "bytes": 1259,
+      "bytes": 1340,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/HpmklHRFex5a5HMDftQo/5VVfjnRHGJM1T33zb1N5/SuspenseValue.js": {
-      "bytes": 1128,
+      "bytes": 1209,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/IdMJ4CymCWCh4cOBkZlb/RXSqswLIbuViBOVW1keE/utils.js": {
-      "bytes": 5549,
+      "bytes": 5630,
       "imports": [
         {
           "path": "unframer",
@@ -975,7 +975,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/EjHwngjQOz6g9296RZMV/ZwhROYAZtNtuFNcAlekE/codemirror_lang_angular.js": {
-      "bytes": 7394,
+      "bytes": 7475,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/aJsTBlWNkIaM900KNIXT/TeoF57xeGMuVMjiI2ooR/codemirror_language.js",
@@ -1011,7 +1011,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/FdnI703sJ5RkMwPE8nsF/xdEljITV5B597lLT4M5w/lezer_cpp.js": {
-      "bytes": 103328,
+      "bytes": 103409,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -1027,7 +1027,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/BmbosINQMuOqhkQ16mGN/aCQLnkkoRKr1dakaf9ci/codemirror_lang_cpp.js": {
-      "bytes": 1739,
+      "bytes": 1820,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/FdnI703sJ5RkMwPE8nsF/xdEljITV5B597lLT4M5w/lezer_cpp.js",
@@ -1043,7 +1043,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/eRdUKzu14cF8QTQ2zxBM/rCwfi0LHRiKnedBIrnGW/lezer_java.js": {
-      "bytes": 40027,
+      "bytes": 40108,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -1059,7 +1059,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/gKhuDW5jnY59NdDGV8D8/xP36aHuTsvUU4Wi5UoVw/codemirror_lang_java.js": {
-      "bytes": 1849,
+      "bytes": 1930,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/eRdUKzu14cF8QTQ2zxBM/rCwfi0LHRiKnedBIrnGW/lezer_java.js",
@@ -1075,7 +1075,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ucIqmdXFlkfhojY0CsdL/fH5TW8VYLZR7eKa8JOHL/lezer_markdown.js": {
-      "bytes": 63196,
+      "bytes": 63277,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/CO9ruPlVDRTCLVInyri7/dIK6ma4pzS0qSHWtJ4s1/lezer_common.js",
@@ -1091,7 +1091,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ew2kgXFUVzaNY5ZWXtC5/G0go5tjEUs1iWpGXELvD/codemirror_lang_markdown.js": {
-      "bytes": 13786,
+      "bytes": 13867,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/wFkXxZqfKOPeEQtsYrsa/Xcw7qvncyogRPQtf9aNn/codemirror_state.js",
@@ -1127,7 +1127,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/7nM7sPiPTDaKQMUxaz81/Iwc7PYoSZP20f9jhvDMx/lezer_php.js": {
-      "bytes": 97810,
+      "bytes": 97891,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -1143,7 +1143,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/oZkhtejNW32Gkw1jb5tm/EgGL6KPr2VABA0JaSWSs/codemirror_lang_php.js": {
-      "bytes": 2867,
+      "bytes": 2948,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/7nM7sPiPTDaKQMUxaz81/Iwc7PYoSZP20f9jhvDMx/lezer_php.js",
@@ -1169,7 +1169,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/EjGlVHogpfm3jPPe6dpv/ksfEYmQRgZtQxtsxsQOu/lezer_python.js": {
-      "bytes": 52738,
+      "bytes": 52819,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -1185,7 +1185,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/NlaGw745MKw3pDtavCDw/bJdmzV5wKmaoaOZ34lWV/codemirror_lang_python.js": {
-      "bytes": 10633,
+      "bytes": 10714,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/EjGlVHogpfm3jPPe6dpv/ksfEYmQRgZtQxtsxsQOu/lezer_python.js",
@@ -1211,7 +1211,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/GdpLl5650m5agtwGYbcm/u0ymKxBWk1TGPUzdCCmO/lezer_rust.js": {
-      "bytes": 70226,
+      "bytes": 70307,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js",
@@ -1227,7 +1227,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ToHwV7PbhPbIOp4qfWxL/yUpS78MJ5G2NAMZdDmZU/codemirror_lang_rust.js": {
-      "bytes": 1486,
+      "bytes": 1567,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/GdpLl5650m5agtwGYbcm/u0ymKxBWk1TGPUzdCCmO/lezer_rust.js",
@@ -1243,7 +1243,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ErpiHuOpMsJgQursm47q/uyWXpN0RN41fZeXKclFO/codemirror_lang_sql.js": {
-      "bytes": 35737,
+      "bytes": 35818,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/aJsTBlWNkIaM900KNIXT/TeoF57xeGMuVMjiI2ooR/codemirror_language.js",
@@ -1269,7 +1269,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/zxOuMCcDOAkYkK9doUT1/6kqevs4DXgJyXyFc94KJ/codemirror_lang_vue.js": {
-      "bytes": 4926,
+      "bytes": 5007,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/aJsTBlWNkIaM900KNIXT/TeoF57xeGMuVMjiI2ooR/codemirror_language.js",
@@ -1305,67 +1305,67 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/mVgptLxlny3aCNt13jWX/UBsF1xq4TdJtf65SHBJZ/codemirror_legacy_modes_mode_clike.js": {
-      "bytes": 34673,
+      "bytes": 34754,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/y3YRN1y6zNRmexh3PcEl/zN53cccFHXcjwLmc9vJl/codemirror_legacy_modes_mode_go.js": {
-      "bytes": 5089,
+      "bytes": 5170,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/1BelllWa9nL0PC5ISobo/XJm3JYCfTLyG5h6NGU7o/codemirror_legacy_modes_mode_haskell.js": {
-      "bytes": 6654,
+      "bytes": 6735,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/DDnoTDvZCXOaJOFVfFFi/KOuVfpSFKjYje6OF3kMC/codemirror_legacy_modes_mode_julia.js": {
-      "bytes": 9501,
+      "bytes": 9582,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/NVeCwUV1KXDrrAYWeKhB/Z4WZ3aIbRCPlevgl3i6W/codemirror_legacy_modes_mode_lua.js": {
-      "bytes": 5019,
+      "bytes": 5100,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/9UW4h57ce20E1oUtlyTx/lupIQZcWqQ6fcU1q4rnT/codemirror_legacy_modes_mode_nginx.js": {
-      "bytes": 9390,
+      "bytes": 9471,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Z9MPy0NcAcvCrfQ6GdLk/mTdjuyFPRLBs2CftgxdU/codemirror_legacy_modes_mode_octave.js": {
-      "bytes": 3832,
+      "bytes": 3913,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/l6yIFqJiKpzgjIjYLDe8/RiUbeIOTACkJXyxf1sof/codemirror_legacy_modes_mode_perl.js": {
-      "bytes": 28135,
+      "bytes": 28216,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/d2aTgp8BCfENcg4lzz2o/8OKauOTqnlpG0hQSheQZ/codemirror_legacy_modes_mode_ruby.js": {
-      "bytes": 9397,
+      "bytes": 9478,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/5zoYeQMBj7mQSJHBwKwK/MOEKdidQOTSu9WoSLOvt/codemirror_legacy_modes_mode_shell.js": {
-      "bytes": 4591,
+      "bytes": 4672,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/U1yN0J68cl89oK5n38AY/nNkcgGLa2JSAO9aE88Ts/codemirror_legacy_modes_mode_swift.js": {
-      "bytes": 6633,
+      "bytes": 6714,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/iCfs5CDON3pnZuWWFlKm/WvFxfUbTKcGBzC0BmpkU/codemirror_legacy_modes_mode_yaml.js": {
-      "bytes": 2705,
+      "bytes": 2786,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/DyzTKdNCsRH8nvz08sNT/dJhQ3yTSKg9tQmEoIrL8/useLanguageAsync.js": {
-      "bytes": 9769,
+      "bytes": 9850,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/HpmklHRFex5a5HMDftQo/5VVfjnRHGJM1T33zb1N5/SuspenseValue.js",
@@ -1511,12 +1511,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/c4BjG1nmVImY1EzTuV13/OqRStXQUJv4l4u3XtQrx/codesandbox_sandpack_themes.js": {
-      "bytes": 14154,
+      "bytes": 14235,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/HdJmYu90NFzknVhsFw9C/MDI6YFyMfuxuxcY2EeV6/theming.js": {
-      "bytes": 11784,
+      "bytes": 11865,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/c4BjG1nmVImY1EzTuV13/OqRStXQUJv4l4u3XtQrx/codesandbox_sandpack_themes.js",
@@ -1532,7 +1532,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/pVk4QsoHxASnVtUBp6jr/TbhpORLndv1iOkZzyo83/CodeBlock.js": {
-      "bytes": 8527,
+      "bytes": 8608,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1583,7 +1583,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-2.js": {
-      "bytes": 53922,
+      "bytes": 54003,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1614,7 +1614,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-1.js": {
-      "bytes": 632,
+      "bytes": 713,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-2.js",
@@ -1625,7 +1625,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-4.js": {
-      "bytes": 54139,
+      "bytes": 54220,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1656,7 +1656,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-3.js": {
-      "bytes": 638,
+      "bytes": 719,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-4.js",
@@ -1667,7 +1667,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js": {
-      "bytes": 4167,
+      "bytes": 4248,
       "imports": [
         {
           "path": "unframer",
@@ -1693,7 +1693,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/sqiyjjpoFLBIm3JcVniQ/GHbXImA3hlJtcgZft1c8/hSfHJ545d.js": {
-      "bytes": 6898,
+      "bytes": 6979,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1719,7 +1719,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ObopNXk6Tf3gVopUx5hc/TD8yA77kcQf9Uoiisgy6/SingleToggle.js": {
-      "bytes": 4193,
+      "bytes": 4274,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1740,7 +1740,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/G5tIJGpmeZHQJprL3Tba/rk14lUp70JkiQCLCLdyY/Theme_Switcher.js": {
-      "bytes": 4195,
+      "bytes": 4276,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1761,7 +1761,7 @@
       "format": "esm"
     },
     "/:https://framer.com/m/framer/icon-nullstate.js@0.7.0": {
-      "bytes": 1003,
+      "bytes": 1084,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1777,12 +1777,12 @@
       "format": "esm"
     },
     "/:https://framer.com/m/phosphor-icons/House.js@0.0.57": {
-      "bytes": 3354,
+      "bytes": 3435,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js": {
-      "bytes": 2388,
+      "bytes": 2469,
       "imports": [
         {
           "path": "react",
@@ -1798,7 +1798,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js": {
-      "bytes": 25439,
+      "bytes": 25520,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1844,7 +1844,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/SkKN2hCFVsFJKaSL1T3z/FiuDngBH1FwL3nQTJqt6/QUeqHSmx1.js": {
-      "bytes": 8240,
+      "bytes": 8321,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1875,7 +1875,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/u38iMiezf1Itt55PdpAU/8oBS9xxnqCi97bTAdZbo/j0G74AxCR.js": {
-      "bytes": 6455,
+      "bytes": 6536,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1916,7 +1916,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/hYTteP9q00pvseenmDb0/ZTR0atS2ptyhHked8DXa/SVG_Component.js": {
-      "bytes": 1863,
+      "bytes": 1944,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1932,7 +1932,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/8IYidfgMFotzn7J2ypiV/lLu6KWOGMlfoDCRDvp5M/vSuRg5Prj.js": {
-      "bytes": 4808,
+      "bytes": 4889,
       "imports": [
         {
           "path": "unframer",
@@ -1943,7 +1943,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/7FPy89FU4vvS6flYjASJ/CENOxQ7aeefIUjJPbZtG/Tg84Y7suf.js": {
-      "bytes": 12958,
+      "bytes": 13039,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -1989,7 +1989,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/5exKH8X0djOcoCxmab7W/QW763tLWFbHS7fpN1BCJ/MlPzuwAVd.js": {
-      "bytes": 59528,
+      "bytes": 59609,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2086,7 +2086,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/jbkTuDiyVcx21mUBJ19B/S9wNFyzREEeRvvjaroYn/QK36RbJuJ.js": {
-      "bytes": 16181,
+      "bytes": 16262,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2158,7 +2158,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/hoK9ctf5VIkHKkmzGpj1/WvAgeewFHV2nXwLsFU4R/V_9DXRxzH.js": {
-      "bytes": 9114,
+      "bytes": 9195,
       "imports": [
         {
           "path": "unframer",
@@ -2169,7 +2169,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/qwB8OzvbA4AGFPM8cgE4/d1bJ0hm3Whj1Xhlsnr1P/QUI91uorF.js": {
-      "bytes": 24118,
+      "bytes": 24199,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2246,7 +2246,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/zX6Lk4oRipsUAK8TEDa8/JFWQVVK5FplwVl7I6u3c/QUeqHSmx1.js": {
-      "bytes": 8240,
+      "bytes": 8321,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2339,7 +2339,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/j1MgkVDyyGp8B8WV9EDj/NK5XbOwG4d17ktMY3GBq/aBo53UoLa.js": {
-      "bytes": 33101,
+      "bytes": 33182,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2396,7 +2396,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/nyNf89v4wnG87j6ZYU43/uiDFWa85sMoL9XGLZINt/fk_AXJ0dh.js": {
-      "bytes": 12853,
+      "bytes": 12934,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2463,7 +2463,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/ruhvDrg8mUrRrZHrKuEJ/gQf2kVLMf1UuxrxSOz1l/ProgressAnimation.js": {
-      "bytes": 1812,
+      "bytes": 1893,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2484,7 +2484,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/iqcQczauWSSevBvRS63r/7Az0a6ecdCHWjAiN5nKu/ISnviw8q2.js": {
-      "bytes": 12858,
+      "bytes": 12939,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2525,7 +2525,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/2xq58OZNQr3P9I0sin28/MFJtbsRqPvjCErXF4raO/h45_XDIZO.js": {
-      "bytes": 23948,
+      "bytes": 24029,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2623,7 +2623,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/DHMVzHVY3b85dQgDmvqE/AJh2dJfpdvFhes1AoGbX/SVG_Component.js": {
-      "bytes": 1863,
+      "bytes": 1944,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2639,7 +2639,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/kiRkQtJeTMpLA3MAdID9/3uwRdda5oY1q4qrEAKf8/n4VV4jzz6.js": {
-      "bytes": 7759,
+      "bytes": 7840,
       "imports": [
         {
           "path": "unframer",
@@ -2650,7 +2650,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/xC5er4vnJmbc2XnY8pgo/Ibkt1alLjiQxQkKQRMxr/vSuRg5Prj.js": {
-      "bytes": 4808,
+      "bytes": 4889,
       "imports": [
         {
           "path": "unframer",
@@ -2661,7 +2661,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/2aB0YkIxSGRY7QjiJEB4/OvIJALwZnw5aiMQvPwR5/iNgYt8PIo.js": {
-      "bytes": 13919,
+      "bytes": 14000,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2764,7 +2764,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/q2WWbMl6IvN86b61e028/WrKQU6xBnJBNgHiziHgx/ye4VQiBUG.js": {
-      "bytes": 11031,
+      "bytes": 11112,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2795,7 +2795,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/cVCKBc0U9GgwRNGyXKgv/Py5RuA1kQE1RZFpSxNfp/jBzjFrEWY.js": {
-      "bytes": 36746,
+      "bytes": 36827,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2887,7 +2887,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/r6eXigyi3PpRY4VUgr9K/Zddryp4G1GpnHeggWqIQ/I2Bh_kYHJ.js": {
-      "bytes": 11651,
+      "bytes": 11732,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2928,7 +2928,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/h1A05QuVbcdR1vRzyjxd/0D6MJbMdQgsYux6HEjJj/jFmI6rPh4.js": {
-      "bytes": 35396,
+      "bytes": 35477,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -2995,7 +2995,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/qPmAxYl9w3ip7Mb7ykUn/wMawL7Qx1Xs30nz6vw16/la1trdZ8I.js": {
-      "bytes": 7929,
+      "bytes": 8010,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3052,7 +3052,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs": {
-      "bytes": 9386,
+      "bytes": 9467,
       "imports": [
         {
           "path": "react",
@@ -3068,7 +3068,7 @@
       "format": "esm"
     },
     "/:https://esm.sh/*react-hotkeys-hook": {
-      "bytes": 74,
+      "bytes": 155,
       "imports": [
         {
           "path": "/:https://esm.sh/*react-hotkeys-hook@4.6.1/es2022/react-hotkeys-hook.mjs",
@@ -3079,7 +3079,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js": {
-      "bytes": 1887,
+      "bytes": 1968,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3095,7 +3095,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/pnIdNrlXd11onazB8Qcd/MRN0W4QLxACax2b7xROJ/BJ5jKpx2K.js": {
-      "bytes": 4669,
+      "bytes": 4750,
       "imports": [
         {
           "path": "unframer",
@@ -3106,7 +3106,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vWtsY4EkSo3VJ03CalPx/mmEURJmx_-0.js": {
-      "bytes": 593,
+      "bytes": 674,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3127,7 +3127,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vWtsY4EkSo3VJ03CalPx/mmEURJmx_.js": {
-      "bytes": 584,
+      "bytes": 665,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/NYqByIddwkb43oJEKuud/vWtsY4EkSo3VJ03CalPx/mmEURJmx_-0.js",
@@ -3138,7 +3138,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/xNJHB4VDGWwK02iJRZDV/YerWl7N0k2AfHNaWL4bu/P7B5yL40j.js": {
-      "bytes": 16751,
+      "bytes": 16832,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3169,7 +3169,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/qHaw2xAHkcqTjalNJGQ0/6GxV69R6jhjg8q1lulHN/mmEURJmx_.js": {
-      "bytes": 20208,
+      "bytes": 20289,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3251,7 +3251,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/xm0mRXui1tr1B9VL3CmQ/sNW2gn1d6ZNs7NvIJsgK/on7AAz7Qe.js": {
-      "bytes": 9809,
+      "bytes": 9890,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3313,7 +3313,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/dnjLxrXjfnyVqoMVmwKg/jfhyZkFK3vvVeUMWwmXV/qykyim1qH.js": {
-      "bytes": 11790,
+      "bytes": 11871,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3380,7 +3380,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fazkeHEM6pdbWdNiD6t1/oDxjJYtqXbLIPyiIlqvP/UAuNJVk60-0.js": {
-      "bytes": 73742,
+      "bytes": 73823,
       "imports": [
         {
           "path": "unframer",
@@ -3396,12 +3396,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fazkeHEM6pdbWdNiD6t1/oDxjJYtqXbLIPyiIlqvP/UAuNJVk60-1.js": {
-      "bytes": 329,
+      "bytes": 410,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/fazkeHEM6pdbWdNiD6t1/oDxjJYtqXbLIPyiIlqvP/UAuNJVk60.js": {
-      "bytes": 42736,
+      "bytes": 42817,
       "imports": [
         {
           "path": "unframer",
@@ -3422,7 +3422,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/6GKhy2l5gakg4Kc5NkIr/vvarOump2Om0DJMYiwE4/tOUeA1GYC.js": {
-      "bytes": 9888,
+      "bytes": 9969,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3489,7 +3489,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/LV9trClbmNwd5PVj9l8y/L4rFqMGNzGSwRZpGTGF3/Icons.js": {
-      "bytes": 2253,
+      "bytes": 2334,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3505,12 +3505,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/3Xi2AslpcDRhfyCVPmx3/d0Oobr5BHnVqZJQyMdGn/storage.js": {
-      "bytes": 1343,
+      "bytes": 1424,
       "imports": [],
       "format": "esm"
     },
     "/:https://framer.com/m/cache-YMiL.js@b9aplVZjN51x28yfNK16": {
-      "bytes": 2027,
+      "bytes": 2108,
       "imports": [
         {
           "path": "/:https://framerusercontent.com/modules/3Xi2AslpcDRhfyCVPmx3/d0Oobr5BHnVqZJQyMdGn/storage.js",
@@ -3521,7 +3521,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/uU1mtMKXsrVAg8N5hW7w/PCK1x1QLNluYNoEoapwx/cachedIndex.js": {
-      "bytes": 1515,
+      "bytes": 1596,
       "imports": [
         {
           "path": "/:https://framer.com/m/cache-YMiL.js@b9aplVZjN51x28yfNK16",
@@ -3532,22 +3532,22 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/K9JZRwJcE6slDAf8rUmh/mJ54py1Ecnn1RoC4N1m4/fakeResults.js": {
-      "bytes": 961,
+      "bytes": 1042,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/TwRgbWuhHeB95MPifel4/YW8Hlm59FG3PajbrVsaR/fuzzySearch.js": {
-      "bytes": 3510,
+      "bytes": 3591,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/MWsEnYfRnoOQq31DN4ql/C71JVnvNwV2CrPvApXBB/utils.js": {
-      "bytes": 4364,
+      "bytes": 4445,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/MyBp84Z0p9nUcMimVMnY/y5F4AGWJ6syeuoB7ebKM/useSearch.js": {
-      "bytes": 9583,
+      "bytes": 9664,
       "imports": [
         {
           "path": "unframer",
@@ -3593,12 +3593,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/PJVBcBLmDteTEAZh3J9Z/keXJyjyE9VnzUcDMayjg/browser.js": {
-      "bytes": 805,
+      "bytes": 936,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/Gzef0nFihI9m9vZG45th/lIUxbZcreiDm2GzUkt3y/useCallbackOnMouseMove.js": {
-      "bytes": 1092,
+      "bytes": 1173,
       "imports": [
         {
           "path": "react",
@@ -3614,12 +3614,12 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/eAnjm75CdfYT1Zz4BIaz/7KDSfnnyD1T3Ap75L4m8/scrollIntoView.js": {
-      "bytes": 1111,
+      "bytes": 1192,
       "imports": [],
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/tV9haTHllpHHc9Fjue2H/Xy775u0FJg3K1GQc1Cd9/SearchModal.js": {
-      "bytes": 25130,
+      "bytes": 25211,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3675,7 +3675,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/hqEf5wXaAewP8VPuaZ98/5A0QGVeEr2cwheQpIuEG/useViewportSizeState.js": {
-      "bytes": 856,
+      "bytes": 937,
       "imports": [
         {
           "path": "react",
@@ -3686,7 +3686,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/6wAE2eMb2Tl3zrU7u4UL/HPzg2Uk7mwtBmDzvGbWF/Search.js": {
-      "bytes": 19378,
+      "bytes": 19459,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3742,7 +3742,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/9UAJj0iki6gynMc1A5PF/2i8ASklCIYeLLw5dtUs9/wvuAi9wiC.js": {
-      "bytes": 16047,
+      "bytes": 16128,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3840,7 +3840,7 @@
       "format": "esm"
     },
     "/:https://framerusercontent.com/modules/wGmB620zPQ6SELIv24lD/IbaBivOwUqFEn0C4HzMI/zTGad3icV.js": {
-      "bytes": 8781,
+      "bytes": 8862,
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -3908,22 +3908,22 @@
     }
   },
   "outputs": {
-    "chunks/YjSYmMwoo-4-ZVT554EY.js": {
+    "chunks/YjSYmMwoo-4-2COQSL5N.js": {
       "imports": [
         {
-          "path": "chunks/chunk-3BM5IRTS.js",
+          "path": "chunks/chunk-STRIPQKB.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -3972,7 +3972,7 @@
       },
       "bytes": 54496
     },
-    "chunks/codemirror_legacy_modes_mode_nginx-5SMNXV7O.js": {
+    "chunks/codemirror_legacy_modes_mode_nginx-TYEP3YRR.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -3991,7 +3991,7 @@
       },
       "bytes": 9542
     },
-    "chunks/codemirror_legacy_modes_mode_octave-BUKRLIGE.js": {
+    "chunks/codemirror_legacy_modes_mode_octave-MTTR7NNF.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4010,7 +4010,7 @@
       },
       "bytes": 3985
     },
-    "chunks/codemirror_legacy_modes_mode_perl-QMEZ7PMO.js": {
+    "chunks/codemirror_legacy_modes_mode_perl-XQOUBKBQ.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4029,7 +4029,7 @@
       },
       "bytes": 28286
     },
-    "chunks/codemirror_legacy_modes_mode_ruby-YITGF2RX.js": {
+    "chunks/codemirror_legacy_modes_mode_ruby-HYFPBJAP.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4048,7 +4048,7 @@
       },
       "bytes": 9548
     },
-    "chunks/codemirror_legacy_modes_mode_shell-ZXPB7EZA.js": {
+    "chunks/codemirror_legacy_modes_mode_shell-PW2EY77M.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4067,7 +4067,7 @@
       },
       "bytes": 4743
     },
-    "chunks/codemirror_legacy_modes_mode_swift-RMXNIVZX.js": {
+    "chunks/codemirror_legacy_modes_mode_swift-4DLJOMLV.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4086,7 +4086,7 @@
       },
       "bytes": 6785
     },
-    "chunks/codemirror_legacy_modes_mode_yaml-6Q3CG5ZY.js": {
+    "chunks/codemirror_legacy_modes_mode_yaml-6NHNVJH5.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4105,22 +4105,22 @@
       },
       "bytes": 2856
     },
-    "chunks/YjSYmMwoo-2-HNS2IRTS.js": {
+    "chunks/YjSYmMwoo-2-TEQ76CEY.js": {
       "imports": [
         {
-          "path": "chunks/chunk-3BM5IRTS.js",
+          "path": "chunks/chunk-STRIPQKB.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4169,18 +4169,18 @@
       },
       "bytes": 54279
     },
-    "chunks/chunk-3BM5IRTS.js": {
+    "chunks/chunk-STRIPQKB.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4234,103 +4234,103 @@
           "external": true
         },
         {
-          "path": "chunks/codemirror_lang_angular-5HJJBD5F.js",
+          "path": "chunks/codemirror_lang_angular-CQHSFP56.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_cpp-GLU77ENO.js",
+          "path": "chunks/codemirror_lang_cpp-D4GVD2PB.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_java-4AXXWJMV.js",
+          "path": "chunks/codemirror_lang_java-UBUNTCVD.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_markdown-COM7JENQ.js",
+          "path": "chunks/codemirror_lang_markdown-FKSSEYIC.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_php-5OH3WBFY.js",
+          "path": "chunks/codemirror_lang_php-XEATKGSI.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_python-T45YAYKM.js",
+          "path": "chunks/codemirror_lang_python-B2DPADYS.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_rust-7P6ABYDD.js",
+          "path": "chunks/codemirror_lang_rust-5I6M5T3N.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_sql-43SMYUAC.js",
+          "path": "chunks/codemirror_lang_sql-3LQYA5DH.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_lang_vue-3WWJXNA3.js",
+          "path": "chunks/codemirror_lang_vue-SZ77RWVV.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_clike-C3A443MN.js",
+          "path": "chunks/codemirror_legacy_modes_mode_clike-CDGMMVW2.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_clike-C3A443MN.js",
+          "path": "chunks/codemirror_legacy_modes_mode_clike-CDGMMVW2.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_clike-C3A443MN.js",
+          "path": "chunks/codemirror_legacy_modes_mode_clike-CDGMMVW2.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_clike-C3A443MN.js",
+          "path": "chunks/codemirror_legacy_modes_mode_clike-CDGMMVW2.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_clike-C3A443MN.js",
+          "path": "chunks/codemirror_legacy_modes_mode_clike-CDGMMVW2.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_go-7C5H7UES.js",
+          "path": "chunks/codemirror_legacy_modes_mode_go-XJ5AICND.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_haskell-DNMLCPCC.js",
+          "path": "chunks/codemirror_legacy_modes_mode_haskell-B5G6PDQT.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_julia-3GI5F4R7.js",
+          "path": "chunks/codemirror_legacy_modes_mode_julia-FBVGXRGW.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_lua-ZOHIURQQ.js",
+          "path": "chunks/codemirror_legacy_modes_mode_lua-AFH2GOJQ.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_nginx-5SMNXV7O.js",
+          "path": "chunks/codemirror_legacy_modes_mode_nginx-TYEP3YRR.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_octave-BUKRLIGE.js",
+          "path": "chunks/codemirror_legacy_modes_mode_octave-MTTR7NNF.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_perl-QMEZ7PMO.js",
+          "path": "chunks/codemirror_legacy_modes_mode_perl-XQOUBKBQ.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_ruby-YITGF2RX.js",
+          "path": "chunks/codemirror_legacy_modes_mode_ruby-HYFPBJAP.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_shell-ZXPB7EZA.js",
+          "path": "chunks/codemirror_legacy_modes_mode_shell-PW2EY77M.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_swift-RMXNIVZX.js",
+          "path": "chunks/codemirror_legacy_modes_mode_swift-4DLJOMLV.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/codemirror_legacy_modes_mode_yaml-6Q3CG5ZY.js",
+          "path": "chunks/codemirror_legacy_modes_mode_yaml-6NHNVJH5.js",
           "kind": "dynamic-import"
         }
       ],
@@ -4354,7 +4354,7 @@
           "bytesInOutput": 42895
         },
         "/:https://framerusercontent.com/modules/wOI0XDWuPNeaYuatKp4b/ezOdeUpHBrE7fwL9evTL/browser.js": {
-          "bytesInOutput": 742
+          "bytesInOutput": 870
         },
         "/:https://framerusercontent.com/modules/19BkzxjVBT3VP0Ykl3DY/Ca7pJ6oGfAIcZSScMdTx/types.js": {
           "bytesInOutput": 316
@@ -4375,12 +4375,12 @@
           "bytesInOutput": 10492
         }
       },
-      "bytes": 558901
+      "bytes": 559029
     },
-    "chunks/codemirror_lang_rust-7P6ABYDD.js": {
+    "chunks/codemirror_lang_rust-5I6M5T3N.js": {
       "imports": [
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4404,14 +4404,14 @@
       },
       "bytes": 71322
     },
-    "chunks/codemirror_lang_sql-43SMYUAC.js": {
+    "chunks/codemirror_lang_sql-3LQYA5DH.js": {
       "imports": [
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4444,18 +4444,18 @@
       },
       "bytes": 35501
     },
-    "chunks/codemirror_lang_vue-3WWJXNA3.js": {
+    "chunks/codemirror_lang_vue-SZ77RWVV.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4476,7 +4476,7 @@
       },
       "bytes": 4475
     },
-    "chunks/codemirror_legacy_modes_mode_clike-C3A443MN.js": {
+    "chunks/codemirror_legacy_modes_mode_clike-CDGMMVW2.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4508,7 +4508,7 @@
       },
       "bytes": 34825
     },
-    "chunks/codemirror_legacy_modes_mode_go-7C5H7UES.js": {
+    "chunks/codemirror_legacy_modes_mode_go-XJ5AICND.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4527,7 +4527,7 @@
       },
       "bytes": 5238
     },
-    "chunks/codemirror_legacy_modes_mode_haskell-DNMLCPCC.js": {
+    "chunks/codemirror_legacy_modes_mode_haskell-B5G6PDQT.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4546,7 +4546,7 @@
       },
       "bytes": 6808
     },
-    "chunks/codemirror_legacy_modes_mode_julia-3GI5F4R7.js": {
+    "chunks/codemirror_legacy_modes_mode_julia-FBVGXRGW.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4565,7 +4565,7 @@
       },
       "bytes": 9653
     },
-    "chunks/codemirror_legacy_modes_mode_lua-ZOHIURQQ.js": {
+    "chunks/codemirror_legacy_modes_mode_lua-AFH2GOJQ.js": {
       "imports": [
         {
           "path": "chunks/chunk-WSFCRVEQ.js",
@@ -4587,11 +4587,11 @@
     "buttons/sign-up-button.js": {
       "imports": [
         {
-          "path": "chunks/chunk-HZDQIPER.js",
+          "path": "chunks/chunk-JD57ZKNM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-YCUU6ZIW.js",
+          "path": "chunks/chunk-VMS457YC.js",
           "kind": "import-statement"
         },
         {
@@ -4633,11 +4633,11 @@
     "cards/stats-card.js": {
       "imports": [
         {
-          "path": "chunks/chunk-WJEXVHCL.js",
+          "path": "chunks/chunk-BGIPDOUO.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CET7AX33.js",
+          "path": "chunks/chunk-YFLJ3AFA.js",
           "kind": "import-statement"
         },
         {
@@ -4699,18 +4699,18 @@
       },
       "bytes": 10275
     },
-    "chunks/codemirror_lang_angular-5HJJBD5F.js": {
+    "chunks/codemirror_lang_angular-CQHSFP56.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4731,10 +4731,10 @@
       },
       "bytes": 6947
     },
-    "chunks/codemirror_lang_cpp-GLU77ENO.js": {
+    "chunks/codemirror_lang_cpp-D4GVD2PB.js": {
       "imports": [
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4758,10 +4758,10 @@
       },
       "bytes": 104680
     },
-    "chunks/codemirror_lang_java-4AXXWJMV.js": {
+    "chunks/codemirror_lang_java-UBUNTCVD.js": {
       "imports": [
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4785,18 +4785,18 @@
       },
       "bytes": 41488
     },
-    "chunks/codemirror_lang_markdown-COM7JENQ.js": {
+    "chunks/codemirror_lang_markdown-FKSSEYIC.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4824,18 +4824,18 @@
       },
       "bytes": 74764
     },
-    "chunks/codemirror_lang_php-5OH3WBFY.js": {
+    "chunks/codemirror_lang_php-XEATKGSI.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ZBRL5O4H.js",
+          "path": "chunks/chunk-MNUETJFT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4859,14 +4859,14 @@
       },
       "bytes": 100124
     },
-    "chunks/chunk-ZBRL5O4H.js": {
+    "chunks/chunk-MNUETJFT.js": {
       "imports": [
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         }
       ],
@@ -4882,7 +4882,7 @@
           "bytesInOutput": 70312
         },
         "/:https://framerusercontent.com/modules/YrJiUSsP9WZPvnJAGTTV/qYWVNl0YKyBbL8cTq65j/codemirror_lang_javascript.js": {
-          "bytesInOutput": 9566
+          "bytesInOutput": 9664
         },
         "/:https://framerusercontent.com/modules/GrkjcC7Ol5LkBvrp44De/VLPQBO2akjkDhtOMowLI/lezer_html.js": {
           "bytesInOutput": 22338
@@ -4897,16 +4897,16 @@
           "bytesInOutput": 20446
         }
       },
-      "bytes": 150356
+      "bytes": 150454
     },
-    "chunks/codemirror_lang_python-T45YAYKM.js": {
+    "chunks/codemirror_lang_python-B2DPADYS.js": {
       "imports": [
         {
-          "path": "chunks/chunk-CCACG67X.js",
+          "path": "chunks/chunk-2AF7GCVT.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         },
         {
@@ -4932,10 +4932,10 @@
       },
       "bytes": 62796
     },
-    "chunks/chunk-CCACG67X.js": {
+    "chunks/chunk-2AF7GCVT.js": {
       "imports": [
         {
-          "path": "chunks/chunk-2EI5GVGJ.js",
+          "path": "chunks/chunk-IFQTTQVA.js",
           "kind": "import-statement"
         }
       ],
@@ -4948,12 +4948,12 @@
       ],
       "inputs": {
         "/:https://framerusercontent.com/modules/iHAg5NNDzB38uLRZmObL/AYYlaW5ad8TRAyLHn07o/codemirror_autocomplete.js": {
-          "bytesInOutput": 20134
+          "bytesInOutput": 20232
         }
       },
-      "bytes": 20658
+      "bytes": 20756
     },
-    "chunks/chunk-2EI5GVGJ.js": {
+    "chunks/chunk-IFQTTQVA.js": {
       "imports": [],
       "exports": [
         "Annotation",
@@ -5035,7 +5035,7 @@
           "bytesInOutput": 109232
         },
         "/:https://framerusercontent.com/modules/wKCR2JyUW8wZdYweJrou/EndxaPZLF2o4GndkIvF9/codemirror_view.js": {
-          "bytesInOutput": 272578
+          "bytesInOutput": 272726
         },
         "/:https://framerusercontent.com/modules/CO9ruPlVDRTCLVInyri7/dIK6ma4pzS0qSHWtJ4s1/lezer_common.js": {
           "bytesInOutput": 57692
@@ -5044,50 +5044,50 @@
           "bytesInOutput": 18567
         },
         "/:https://framerusercontent.com/modules/aJsTBlWNkIaM900KNIXT/TeoF57xeGMuVMjiI2ooR/codemirror_language.js": {
-          "bytesInOutput": 58019
+          "bytesInOutput": 58131
         },
         "/:https://framerusercontent.com/modules/MiFWyNBz6FaRwOOEYJ4H/RMT2Q4ScDAUq3xYhahWs/lezer_lr.js": {
           "bytesInOutput": 51828
         }
       },
-      "bytes": 569677
+      "bytes": 569937
     },
     "navigation/nav-bar.js": {
       "imports": [
         {
-          "path": "chunks/chunk-HZDQIPER.js",
+          "path": "chunks/chunk-JD57ZKNM.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-YCUU6ZIW.js",
+          "path": "chunks/chunk-VMS457YC.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-H74K52SH.js",
+          "path": "chunks/chunk-VB6YERXI.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DPGBLU5Z.js",
+          "path": "chunks/chunk-ABL6Y7OR.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-Q4YW5TUB.js",
+          "path": "chunks/chunk-SWCWDBAC.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-G7DSZYQU.js",
+          "path": "chunks/chunk-M37TDJZ6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -5149,10 +5149,10 @@
       },
       "bytes": 38224
     },
-    "chunks/chunk-HZDQIPER.js": {
+    "chunks/chunk-JD57ZKNM.js": {
       "imports": [
         {
-          "path": "chunks/chunk-YCUU6ZIW.js",
+          "path": "chunks/chunk-VMS457YC.js",
           "kind": "import-statement"
         },
         {
@@ -5189,19 +5189,19 @@
     "interactive/use-cases.js": {
       "imports": [
         {
-          "path": "chunks/chunk-7PER57VO.js",
+          "path": "chunks/chunk-BKYYEYRA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ALFYM4FG.js",
+          "path": "chunks/chunk-YVFI7H4N.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-6O6E37QU.js",
+          "path": "chunks/chunk-5WKTYKZI.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
@@ -5350,11 +5350,11 @@
     "hero-section.js": {
       "imports": [
         {
-          "path": "chunks/chunk-CET7AX33.js",
+          "path": "chunks/chunk-YFLJ3AFA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
@@ -5495,7 +5495,7 @@
     "tag.js": {
       "imports": [
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -5560,11 +5560,11 @@
     "pricing/feature-bullet-point.js": {
       "imports": [
         {
-          "path": "chunks/chunk-DEREOTPY.js",
+          "path": "chunks/chunk-65CNVRS2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-YCUU6ZIW.js",
+          "path": "chunks/chunk-VMS457YC.js",
           "kind": "import-statement"
         },
         {
@@ -5629,15 +5629,15 @@
     "interactive/fa-qs.js": {
       "imports": [
         {
-          "path": "chunks/chunk-XGNHDYUG.js",
+          "path": "chunks/chunk-LISO3GG6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -5726,7 +5726,7 @@
     "docs/search-bar.js": {
       "imports": [
         {
-          "path": "chunks/chunk-MHK5HXGT.js",
+          "path": "chunks/chunk-34MGUY3G.js",
           "kind": "import-statement"
         },
         {
@@ -5896,7 +5896,7 @@
           "bytesInOutput": 2806
         },
         "/:https://framerusercontent.com/modules/PJVBcBLmDteTEAZh3J9Z/keXJyjyE9VnzUcDMayjg/browser.js": {
-          "bytesInOutput": 669
+          "bytesInOutput": 797
         },
         "/:https://framerusercontent.com/modules/Gzef0nFihI9m9vZG45th/lIUxbZcreiDm2GzUkt3y/useCallbackOnMouseMove.js": {
           "bytesInOutput": 642
@@ -5908,12 +5908,12 @@
           "bytesInOutput": 639
         }
       },
-      "bytes": 82436
+      "bytes": 82564
     },
     "navigation/single.js": {
       "imports": [
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
@@ -5978,23 +5978,23 @@
     "docs/menu-link.js": {
       "imports": [
         {
-          "path": "chunks/chunk-KGO4SCOM.js",
+          "path": "chunks/chunk-H5IRQOZL.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ALFYM4FG.js",
+          "path": "chunks/chunk-YVFI7H4N.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-G7DSZYQU.js",
+          "path": "chunks/chunk-M37TDJZ6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6097,15 +6097,15 @@
     "cards/faq-card.js": {
       "imports": [
         {
-          "path": "chunks/chunk-XGNHDYUG.js",
+          "path": "chunks/chunk-LISO3GG6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6144,14 +6144,14 @@
       },
       "bytes": 2620
     },
-    "chunks/chunk-XGNHDYUG.js": {
+    "chunks/chunk-LISO3GG6.js": {
       "imports": [
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6188,31 +6188,31 @@
     "interactive/customer-stories.js": {
       "imports": [
         {
-          "path": "chunks/chunk-7PER57VO.js",
+          "path": "chunks/chunk-BKYYEYRA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ALFYM4FG.js",
+          "path": "chunks/chunk-YVFI7H4N.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-QQOROZYA.js",
+          "path": "chunks/chunk-KU7YF6ZS.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-6O6E37QU.js",
+          "path": "chunks/chunk-5WKTYKZI.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6274,14 +6274,14 @@
       },
       "bytes": 25750
     },
-    "chunks/chunk-7PER57VO.js": {
+    "chunks/chunk-BKYYEYRA.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ALFYM4FG.js",
+          "path": "chunks/chunk-YVFI7H4N.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
@@ -6336,7 +6336,7 @@
     "navigation/icon.js": {
       "imports": [
         {
-          "path": "chunks/chunk-SBUJUFGA.js",
+          "path": "chunks/chunk-ZCPWFOW3.js",
           "kind": "import-statement"
         },
         {
@@ -6378,11 +6378,11 @@
     "docs/card.js": {
       "imports": [
         {
-          "path": "chunks/chunk-DEREOTPY.js",
+          "path": "chunks/chunk-65CNVRS2.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-MHK5HXGT.js",
+          "path": "chunks/chunk-34MGUY3G.js",
           "kind": "import-statement"
         },
         {
@@ -6452,7 +6452,7 @@
       },
       "bytes": 22866
     },
-    "chunks/chunk-DEREOTPY.js": {
+    "chunks/chunk-65CNVRS2.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -6475,7 +6475,7 @@
       },
       "bytes": 1726
     },
-    "chunks/chunk-MHK5HXGT.js": {
+    "chunks/chunk-34MGUY3G.js": {
       "imports": [
         {
           "path": "unframer",
@@ -6498,11 +6498,11 @@
     "navigation/single-toggle.js": {
       "imports": [
         {
-          "path": "chunks/chunk-DPGBLU5Z.js",
+          "path": "chunks/chunk-ABL6Y7OR.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
@@ -6544,11 +6544,11 @@
     "navigation/twitter-profile-preview.js": {
       "imports": [
         {
-          "path": "chunks/chunk-BP573UWY.js",
+          "path": "chunks/chunk-DHCVI6LL.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6590,23 +6590,23 @@
     "navigation/footer.js": {
       "imports": [
         {
-          "path": "chunks/chunk-BP573UWY.js",
+          "path": "chunks/chunk-DHCVI6LL.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-Q4YW5TUB.js",
+          "path": "chunks/chunk-SWCWDBAC.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-G7DSZYQU.js",
+          "path": "chunks/chunk-M37TDJZ6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6668,10 +6668,10 @@
       },
       "bytes": 55217
     },
-    "chunks/chunk-BP573UWY.js": {
+    "chunks/chunk-DHCVI6LL.js": {
       "imports": [
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -6708,15 +6708,15 @@
     "cards/testimonial-card.js": {
       "imports": [
         {
-          "path": "chunks/chunk-WJEXVHCL.js",
+          "path": "chunks/chunk-BGIPDOUO.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CET7AX33.js",
+          "path": "chunks/chunk-YFLJ3AFA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
@@ -6781,11 +6781,11 @@
     "forms/sign-up.js": {
       "imports": [
         {
-          "path": "chunks/chunk-MKSKLUE4.js",
+          "path": "chunks/chunk-UVS3W5EU.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-YCUU6ZIW.js",
+          "path": "chunks/chunk-VMS457YC.js",
           "kind": "import-statement"
         },
         {
@@ -6858,11 +6858,11 @@
     "forms/sign-in.js": {
       "imports": [
         {
-          "path": "chunks/chunk-MKSKLUE4.js",
+          "path": "chunks/chunk-UVS3W5EU.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-YCUU6ZIW.js",
+          "path": "chunks/chunk-VMS457YC.js",
           "kind": "import-statement"
         },
         {
@@ -6924,7 +6924,7 @@
       },
       "bytes": 25419
     },
-    "chunks/chunk-MKSKLUE4.js": {
+    "chunks/chunk-UVS3W5EU.js": {
       "imports": [
         {
           "path": "unframer",
@@ -6979,7 +6979,7 @@
       },
       "bytes": 28137
     },
-    "chunks/chunk-YCUU6ZIW.js": {
+    "chunks/chunk-VMS457YC.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7002,47 +7002,47 @@
     "docs/navigation.js": {
       "imports": [
         {
-          "path": "chunks/chunk-H74K52SH.js",
+          "path": "chunks/chunk-VB6YERXI.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-KGO4SCOM.js",
+          "path": "chunks/chunk-H5IRQOZL.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-ALFYM4FG.js",
+          "path": "chunks/chunk-YVFI7H4N.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-SBUJUFGA.js",
+          "path": "chunks/chunk-ZCPWFOW3.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DPGBLU5Z.js",
+          "path": "chunks/chunk-ABL6Y7OR.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-Q4YW5TUB.js",
+          "path": "chunks/chunk-SWCWDBAC.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-G7DSZYQU.js",
+          "path": "chunks/chunk-M37TDJZ6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CET7AX33.js",
+          "path": "chunks/chunk-YFLJ3AFA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -7095,11 +7095,11 @@
           "external": true
         },
         {
-          "path": "chunks/YjSYmMwoo-2-HNS2IRTS.js",
+          "path": "chunks/YjSYmMwoo-2-TEQ76CEY.js",
           "kind": "dynamic-import"
         },
         {
-          "path": "chunks/YjSYmMwoo-4-ZVT554EY.js",
+          "path": "chunks/YjSYmMwoo-4-2COQSL5N.js",
           "kind": "dynamic-import"
         },
         {
@@ -7139,10 +7139,10 @@
       },
       "bytes": 132819
     },
-    "chunks/chunk-H74K52SH.js": {
+    "chunks/chunk-VB6YERXI.js": {
       "imports": [
         {
-          "path": "chunks/chunk-DPGBLU5Z.js",
+          "path": "chunks/chunk-ABL6Y7OR.js",
           "kind": "import-statement"
         },
         {
@@ -7166,22 +7166,22 @@
       },
       "bytes": 4039
     },
-    "chunks/chunk-KGO4SCOM.js": {
+    "chunks/chunk-H5IRQOZL.js": {
       "imports": [
         {
-          "path": "chunks/chunk-ALFYM4FG.js",
+          "path": "chunks/chunk-YVFI7H4N.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-G7DSZYQU.js",
+          "path": "chunks/chunk-M37TDJZ6.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -7215,7 +7215,7 @@
       },
       "bytes": 11864
     },
-    "chunks/chunk-ALFYM4FG.js": {
+    "chunks/chunk-YVFI7H4N.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -7238,7 +7238,7 @@
       },
       "bytes": 1726
     },
-    "chunks/chunk-SBUJUFGA.js": {
+    "chunks/chunk-ZCPWFOW3.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -7271,10 +7271,10 @@
       },
       "bytes": 6261
     },
-    "chunks/chunk-DPGBLU5Z.js": {
+    "chunks/chunk-ABL6Y7OR.js": {
       "imports": [
         {
-          "path": "chunks/chunk-7PROOCBE.js",
+          "path": "chunks/chunk-BTSBQWPZ.js",
           "kind": "import-statement"
         },
         {
@@ -7376,7 +7376,7 @@
       },
       "bytes": 24060
     },
-    "chunks/chunk-7PROOCBE.js": {
+    "chunks/chunk-BTSBQWPZ.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -7443,7 +7443,7 @@
       },
       "bytes": 29923
     },
-    "chunks/chunk-Q4YW5TUB.js": {
+    "chunks/chunk-SWCWDBAC.js": {
       "imports": [
         {
           "path": "react/jsx-runtime",
@@ -7476,7 +7476,7 @@
       },
       "bytes": 9544
     },
-    "chunks/chunk-G7DSZYQU.js": {
+    "chunks/chunk-M37TDJZ6.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7499,15 +7499,15 @@
     "cards/blog-card.js": {
       "imports": [
         {
-          "path": "chunks/chunk-WJEXVHCL.js",
+          "path": "chunks/chunk-BGIPDOUO.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-CET7AX33.js",
+          "path": "chunks/chunk-YFLJ3AFA.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -7569,7 +7569,7 @@
       },
       "bytes": 17752
     },
-    "chunks/chunk-WJEXVHCL.js": {
+    "chunks/chunk-BGIPDOUO.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7589,7 +7589,7 @@
       },
       "bytes": 8976
     },
-    "chunks/chunk-CET7AX33.js": {
+    "chunks/chunk-YFLJ3AFA.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7612,23 +7612,23 @@
     "cards/customer-stories.js": {
       "imports": [
         {
-          "path": "chunks/chunk-QQOROZYA.js",
+          "path": "chunks/chunk-KU7YF6ZS.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-6O6E37QU.js",
+          "path": "chunks/chunk-5WKTYKZI.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -7667,22 +7667,22 @@
       },
       "bytes": 2704
     },
-    "chunks/chunk-QQOROZYA.js": {
+    "chunks/chunk-KU7YF6ZS.js": {
       "imports": [
         {
-          "path": "chunks/chunk-6O6E37QU.js",
+          "path": "chunks/chunk-5WKTYKZI.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-WQKND6O4.js",
+          "path": "chunks/chunk-ZYGL2A5H.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-DL2RGO2L.js",
+          "path": "chunks/chunk-2YSYJRDE.js",
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-X6RUM57F.js",
+          "path": "chunks/chunk-3IMWMF2U.js",
           "kind": "import-statement"
         },
         {
@@ -7716,7 +7716,7 @@
       },
       "bytes": 23078
     },
-    "chunks/chunk-6O6E37QU.js": {
+    "chunks/chunk-5WKTYKZI.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7736,7 +7736,7 @@
       },
       "bytes": 8847
     },
-    "chunks/chunk-WQKND6O4.js": {
+    "chunks/chunk-ZYGL2A5H.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7756,7 +7756,7 @@
       },
       "bytes": 7492
     },
-    "chunks/chunk-DL2RGO2L.js": {
+    "chunks/chunk-2YSYJRDE.js": {
       "imports": [
         {
           "path": "unframer",
@@ -7776,7 +7776,7 @@
       },
       "bytes": 4541
     },
-    "chunks/chunk-X6RUM57F.js": {
+    "chunks/chunk-3IMWMF2U.js": {
       "imports": [
         {
           "path": "unframer",

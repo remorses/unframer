@@ -4,7 +4,7 @@
 "use client";
 import {
   Icon
-} from "../chunks/chunk-7PROOCBE.js";
+} from "../chunks/chunk-BTSBQWPZ.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:navigation/single

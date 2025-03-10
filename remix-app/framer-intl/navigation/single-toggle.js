@@ -4,8 +4,8 @@
 "use client";
 import {
   stdin_default
-} from "../chunks/chunk-DPGBLU5Z.js";
-import "../chunks/chunk-7PROOCBE.js";
+} from "../chunks/chunk-ABL6Y7OR.js";
+import "../chunks/chunk-BTSBQWPZ.js";
 import "../chunks/chunk-WSFCRVEQ.js";
 
 // virtual:navigation/single-toggle

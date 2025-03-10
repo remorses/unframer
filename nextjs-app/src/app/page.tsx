@@ -20,13 +20,13 @@ export default function Page() {
 }
 
 function Home() {
-    const router = useRouter()
+    
     return (
         <UnframerProvider
-            navigate={(x) => {
-                console.log(`using client navigation for`, x)
-                router.push(x)
-            }}
+            // navigate={(x) => {
+            //     console.log(`using client navigation for`, x)
+            //     // router.push(x)
+            // }}
         >
             <div className='bg-black flex flex-col items-center'>
                 <NavigationFramerComponent.Responsive />
