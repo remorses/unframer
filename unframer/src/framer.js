@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.YONDMN62.mjs
+// /:https://app.framerstatic.com/framer.GOJ3TDK2.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -32817,7 +32817,7 @@ function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
     try {
       const getUtils = utilsByCollectionId[unresolvedSlug.collectionId];
       if (!getUtils) {
-        throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}`,);
+        throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}"`,);
       }
       const utils = await getUtils();
       if (!utils) throw new Error('Collection does not contain utility functions',);
@@ -42236,6 +42236,7 @@ var variantsNameToWeight = {
   'thin-italic': 200,
   light: 300,
   'light-italic': 300,
+  normal: 350,
   base: 400,
   regular: 400,
   'regular-slanted': 400,
@@ -42263,6 +42264,8 @@ var variantsNameToWeight = {
   'black-italic': 900,
   'extra-italic': 900,
   'extra-italic-bold': 900,
+  ultrabold: 900,
+  'ultrabold-italic': 900,
   satt: 900,
   heavy: 900,
   'heavy-italic': 900,
@@ -47498,6 +47501,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
 })();
 var key6 = 'calculatedPaths';
 function withShape(target,) {
+  if (!isObject(target,)) return false;
   return key6 in target;
 }
 var Size = /* @__PURE__ */ (() => {
