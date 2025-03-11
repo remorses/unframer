@@ -1,5 +1,17 @@
 # unframer
 
+## 2.24.0
+
+### Minor Changes
+
+- 50dc9be: Allow passing locale in unframer provider, easier than passing it to each component as a locale prop
+
+### Patch Changes
+
+- 4892ee3: Update framer to 2.4.1, update framer motion to 11.11.7
+- 923c160: Remove hydration warnings for SVGs and fetchpriority attribute
+- 923c160: Simpify generated example after generation
+
 ## 2.23.0
 
 ### Minor Changes
@@ -11,7 +23,7 @@
 - f21f5d1: Update framer to 2.4.1, update framer motion to 11.11.7
 
 ## 2.22.1
- 
+
 ### Patch Changes
 
 - 5ffce9f: Update framer to 2.4.1, update framer motion to 11.11.7
