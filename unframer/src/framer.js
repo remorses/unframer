@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.GOJ3TDK2.mjs
+// /:https://app.framerstatic.com/framer.4G3YO5CW.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -32652,9 +32652,6 @@ var LazyValue = class {
     };
     return promise;
   }
-  waitFor() {
-    return this.resolver();
-  }
   /** Synchronously read the value after calling preload() before. */
   read() {
     const status = this.status;
@@ -32671,6 +32668,11 @@ var LazyValue = class {
       default:
         assertNever(status,);
     }
+  }
+  async readAsync() {
+    const promise = this.preload();
+    if (promise) await promise;
+    return this.read();
   }
 };
 function findAnchorElement(target, withinElement,) {
@@ -34451,7 +34453,7 @@ function isValidFetchDataValueResult(type, value,) {
       return isNumber2(value,) || isNumberString(value,);
     case 'link':
     case 'image':
-      return isString(value,) && isValidURL2(value,);
+      return isString(value,) && isValidURL(value, false,);
     default: {
       const _ = type;
       return false;
@@ -34473,12 +34475,6 @@ function resolveFetchDataValue(result, request,) {
     throw new Error(`Resolved value '${resolvedValue}' is not valid for type '${request.resultOutputType}'`,);
   }
   return resolvedValue;
-}
-function isValidURL2(href,) {
-  try {
-    const url = new URL(href,);
-    return Boolean(url.protocol,);
-  } catch {}
 }
 function isCacheExpired(insertionTimestamp, cacheDuration,) {
   if (RenderTarget.current() === RenderTarget.canvas) {
@@ -34607,7 +34603,7 @@ var _FetchClient = class {
   }
   async prefetch(request,) {
     if (!isBrowser2()) return;
-    if (!isValidURL2(request.url,)) return;
+    if (!isValidURL(request.url, false,)) return;
     const cacheKey = getRequestCacheKey(request,);
     __privateGet(this, _preloadedRequests,).add(cacheKey,);
     await this.fetchWithCache(request,);
@@ -34683,7 +34679,7 @@ var _FetchClient = class {
       url,
       cacheDuration,
     } = request;
-    if (!isValidURL2(url,)) return noop3;
+    if (!isValidURL(url, false,)) return noop3;
     const cacheKey = getRequestCacheKey(request,);
     const cacheDurationForUrl = __privateGet(this, _shortestCacheDurations,).get(cacheKey,);
     if (!cacheDurationForUrl || cacheDuration < cacheDurationForUrl) {
@@ -39761,6 +39757,39 @@ ${stringifyQuery(query,)}`,);
     return (value == null ? void 0 : value.value) ?? null;
   }
 };
+var QueryCache = class {
+  constructor(queryEngine2,) {
+    this.queryEngine = queryEngine2;
+    __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
+  }
+  get(query, locale,) {
+    const key7 = getCacheKey(query, locale,);
+    const existing = this.cache.get(key7,);
+    if (existing) return existing;
+    const resolver = () => this.queryEngine.query(query, locale,);
+    const value = new LazyValue(resolver,);
+    this.cache.set(key7, value,);
+    return value;
+  }
+};
+var collectionIds = /* @__PURE__ */ new WeakMap();
+function getCollectionId(collection,) {
+  const existing = collectionIds.get(collection,);
+  if (existing) return existing;
+  const id3 = Math.random().toString(16,).slice(2,);
+  collectionIds.set(collection, id3,);
+  return id3;
+}
+function replaceCollection(_, value,) {
+  if (isObject(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
+    return getCollectionId(value.data,);
+  }
+  return value;
+}
+function getCacheKey(query, locale,) {
+  const localeId = (locale == null ? void 0 : locale.id) ?? 'default';
+  return JSON.stringify(query, replaceCollection,) + localeId;
+}
 var defaultVariantKey = 'default';
 var defaultVariants = /* @__PURE__ */ new Set([defaultVariantKey,],);
 var _variantHashes;
@@ -40523,39 +40552,6 @@ function usePrototypeNavigate({
     return false;
   };
 }
-var QueryCache = class {
-  constructor(queryEngine2,) {
-    this.queryEngine = queryEngine2;
-    __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
-  }
-  get(query, locale,) {
-    const key7 = getCacheKey(query, locale,);
-    const existing = this.cache.get(key7,);
-    if (existing) return existing;
-    const resolver = () => this.queryEngine.query(query, locale,);
-    const value = new LazyValue(resolver,);
-    this.cache.set(key7, value,);
-    return value;
-  }
-};
-var collectionIds = /* @__PURE__ */ new WeakMap();
-function getCollectionId(collection,) {
-  const existing = collectionIds.get(collection,);
-  if (existing) return existing;
-  const id3 = Math.random().toString(16,).slice(2,);
-  collectionIds.set(collection, id3,);
-  return id3;
-}
-function replaceCollection(_, value,) {
-  if (isObject(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
-    return getCollectionId(value.data,);
-  }
-  return value;
-}
-function getCacheKey(query, locale,) {
-  const localeId = (locale == null ? void 0 : locale.id) ?? 'default';
-  return JSON.stringify(query, replaceCollection,) + localeId;
-}
 function use(promise,) {
   throw promise;
 }
@@ -40583,7 +40579,7 @@ function usePreloadQuery() {
     activeLocale,
   } = useLocaleInfo();
   return useCallback(async (query) => {
-    return queryCache.get(query, activeLocale,).waitFor();
+    return queryCache.get(query, activeLocale,).readAsync();
   }, [activeLocale,],);
 }
 function getWhereExpressionFromPathVariables(pathVariables, collection,) {
@@ -42234,6 +42230,7 @@ var variantsNameToWeight = {
   'ultralight-italic': 100,
   thin: 200,
   'thin-italic': 200,
+  demi: 200,
   light: 300,
   'light-italic': 300,
   normal: 350,
@@ -42242,7 +42239,6 @@ var variantsNameToWeight = {
   'regular-slanted': 400,
   italic: 400,
   oblique: 400,
-  demi: 400,
   dense: 400,
   brukt: 300,
   book: 400,
@@ -48117,6 +48113,7 @@ export {
   propsForLink,
   pushLoadMoreHistory,
   px,
+  QueryCache,
   QueryEngine,
   RadialGradient,
   Rect,
