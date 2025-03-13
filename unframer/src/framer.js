@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4G3YO5CW.mjs
+// /:https://app.framerstatic.com/framer.5OZSLRFC.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -12457,6 +12457,92 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
+var mockWindow = {
+  addEventListener: () => {},
+  removeEventListener: () => {},
+  dispatchEvent: () => false,
+  ResizeObserver: void 0,
+  onpointerdown: false,
+  onpointermove: false,
+  onpointerup: false,
+  ontouchstart: false,
+  ontouchmove: false,
+  ontouchend: false,
+  onmousedown: false,
+  onmousemove: false,
+  onmouseup: false,
+  devicePixelRatio: 1,
+  scrollX: 0,
+  scrollY: 0,
+  location: {
+    hash: '',
+    hostname: '',
+    href: '',
+    origin: '',
+    pathname: '',
+    search: '',
+  },
+  document: {
+    baseURI: '',
+    cookie: '',
+    referrer: null,
+  },
+  setTimeout: () => 0,
+  clearTimeout: () => {},
+  setInterval: () => 0,
+  clearInterval: () => {},
+  requestAnimationFrame: () => 0,
+  cancelAnimationFrame: () => {},
+  requestIdleCallback: () => 0,
+  getSelection: () => null,
+  matchMedia: (query) => {
+    return {
+      matches: false,
+      media: query,
+      onchange: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      addListener: () => {},
+      removeListener: () => {},
+      dispatchEvent: () => false,
+    };
+  },
+  innerHeight: 0,
+  innerWidth: 0,
+  SVGSVGElement: {},
+  open: function (_url, _target, _features,) {},
+  __framer_events: [],
+};
+var safeWindow = typeof window === 'undefined' ? mockWindow : window;
+var timezone;
+var visitorLocale;
+var isFirstPageview = true;
+function setTimezoneAndLocaleForTracking() {
+  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
+  timezone = resolvedDateTimeOptions.timeZone;
+  visitorLocale = resolvedDateTimeOptions.locale;
+}
+requestIdleCallback(setTimezoneAndLocaleForTracking,);
+function sendTrackingEvent(eventType, eventData,) {
+  if (!safeWindow.__framer_events) return;
+  if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
+  if (eventType === 'published_site_pageview' && isFirstPageview) {
+    isFirstPageview = false;
+  }
+  safeWindow.__framer_events.push([eventType, {
+    // Base properties common to all events
+    referrer: isFirstPageview ? safeWindow.document.referrer : null,
+    url: safeWindow.location.href,
+    hostname: safeWindow.location.hostname || null,
+    pathname: safeWindow.location.pathname || null,
+    hash: safeWindow.location.hash || null,
+    search: safeWindow.location.search || null,
+    timezone,
+    locale: visitorLocale,
+    // Additional properties specific to custom events
+    ...eventData,
+  },],);
+}
 function computeRelativePath(from, to,) {
   if (!from.startsWith('/',) || !to.startsWith('/',)) {
     throw new Error('from/to paths are expected to be absolute',);
@@ -13248,15 +13334,13 @@ async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNa
     popstateListener;
   if (maybeHasPopstateBug) {
     popstateListener = () => {
-      var _a;
       popstateCalled = true;
       if (isImpactedPopstateBugChromiumVersion) return;
       const msg = 'Popstate called after intercept(). Please report this to the Framer team.';
       console.error(msg,);
-      (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
+      sendTrackingEvent('published_site_load_recoverable_error', {
         message: msg,
-        userAgent: __unframerNavigator2.userAgent,
-      },],);
+      },);
     };
     window.addEventListener('popstate', popstateListener, {
       once: true,
@@ -16210,63 +16294,6 @@ var EventEmitter = class {
     this._emitter.emit(eventName, ...args,);
   }
 };
-var mockWindow = {
-  addEventListener: () => {},
-  removeEventListener: () => {},
-  dispatchEvent: () => false,
-  ResizeObserver: void 0,
-  onpointerdown: false,
-  onpointermove: false,
-  onpointerup: false,
-  ontouchstart: false,
-  ontouchmove: false,
-  ontouchend: false,
-  onmousedown: false,
-  onmousemove: false,
-  onmouseup: false,
-  devicePixelRatio: 1,
-  scrollX: 0,
-  scrollY: 0,
-  location: {
-    hash: '',
-    hostname: '',
-    href: '',
-    origin: '',
-    pathname: '',
-    search: '',
-  },
-  document: {
-    baseURI: '',
-    cookie: '',
-    referrer: null,
-  },
-  setTimeout: () => 0,
-  clearTimeout: () => {},
-  setInterval: () => 0,
-  clearInterval: () => {},
-  requestAnimationFrame: () => 0,
-  cancelAnimationFrame: () => {},
-  requestIdleCallback: () => 0,
-  getSelection: () => null,
-  matchMedia: (query) => {
-    return {
-      matches: false,
-      media: query,
-      onchange: () => {},
-      addEventListener: () => {},
-      removeEventListener: () => {},
-      addListener: () => {},
-      removeListener: () => {},
-      dispatchEvent: () => false,
-    };
-  },
-  innerHeight: 0,
-  innerWidth: 0,
-  SVGSVGElement: {},
-  open: function (_url, _target, _features,) {},
-  __framer_events: [],
-};
-var safeWindow = typeof window === 'undefined' ? mockWindow : window;
 var _raf = (f) => {
   setTimeout(f, 1 / 60,);
 };
@@ -29987,6 +30014,492 @@ function stripPrefixFromPrefixedKey(key7,) {
   }
   return void 0;
 }
+var GeneratedComponentContext = /* @__PURE__ */ React4.createContext(void 0,);
+function cloneChildrenWithProps(children, props, asNode,) {
+  const cloned = React2.Children.map(children, (child) => {
+    if (React2.isValidElement(child,)) {
+      return React2.cloneElement(child, props,);
+    }
+    return child;
+  },);
+  if (asNode) return cloned;
+  return /* @__PURE__ */ jsx(Fragment, {
+    children: cloned,
+  },);
+}
+function useCloneChildrenWithPropsAndRef(forwardedRef,) {
+  const hook = useConstant2(() => createHook(forwardedRef,));
+  hook.useSetup(forwardedRef,);
+  return hook.cloneAsElement;
+}
+function createHook(forwardedRef,) {
+  const state2 = {
+    forwardedRef,
+    childRef: null,
+    ref: null,
+  };
+  state2.ref = createRefFunction(state2,);
+  const updateIfNeeded = (nextForwardedRef, ref,) => {
+    if (!state2.forwardedRef && state2.forwardedRef === nextForwardedRef) {
+      state2.ref = ref;
+      return;
+    }
+    let shouldUpdate = false;
+    if (state2.childRef !== ref) {
+      state2.childRef = ref;
+      shouldUpdate = true;
+    }
+    if (state2.forwardedRef !== nextForwardedRef) {
+      state2.forwardedRef = nextForwardedRef;
+      shouldUpdate = true;
+    }
+    if (!shouldUpdate) return;
+    state2.ref = createRefFunction(state2,);
+  };
+  let preventNextCall = false;
+  function cloneChildrenWithPropsAndRef(children, props,) {
+    if (preventNextCall) {
+      ;
+    }
+    preventNextCall = true;
+    if (React2.Children.count(children,) > 1 && forwardedRef) {
+      if (false) {
+        throw new ReferenceError('useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',);
+      }
+      state2.forwardedRef = void 0;
+      state2.ref = state2.childRef;
+    }
+    return React2.Children.map(children, (child) => {
+      if (React2.isValidElement(child,)) {
+        const ownRef = 'ref' in child ? child.ref : void 0;
+        updateIfNeeded(state2.forwardedRef, ownRef,);
+        const newProps = isFunction(props,) ? props(child.props,) : props;
+        return React2.cloneElement(
+          child,
+          state2.ref !== ownRef
+            ? {
+              ...newProps,
+              ref: state2.ref,
+            }
+            : newProps,
+        );
+      }
+      return child;
+    },);
+  }
+  const cloneAsElement = function cloneAsElement2(children, props,) {
+    return /* @__PURE__ */ jsx(Fragment, {
+      children: cloneChildrenWithPropsAndRef(children, props,),
+    },);
+  };
+  cloneAsElement.cloneAsArray = cloneChildrenWithPropsAndRef;
+  return {
+    // used during render phase to sync props with state
+    useSetup: (newRef) => {
+      preventNextCall = false;
+      updateIfNeeded(newRef, state2.childRef,);
+    },
+    /**
+     * Clones children and adds props and refs and returns them as a JSX.Element
+     * Making it easier to use as it wraps them in a Fragment.
+     */
+    cloneAsElement,
+  };
+}
+function createRefFunction(state2,) {
+  if (!state2.forwardedRef) return state2.childRef;
+  const {
+    forwardedRef: prevForwardedRef,
+    childRef: prevChildRef,
+  } = state2;
+  return (value) => {
+    setRef(prevChildRef, value,);
+    setRef(prevForwardedRef, value,);
+  };
+}
+var StyleSheetContext = /* @__PURE__ */ React4.createContext(void 0,);
+var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
+var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
+  var _a;
+  if (!isBrowser2()) return /* @__PURE__ */ new Set();
+  const componentsWithSSRStylesAttr = (_a = document.querySelector(framerPostSSRCSSSelector,)) == null
+    ? void 0
+    : _a.getAttribute('data-framer-components',);
+  if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
+  return new Set(componentsWithSSRStylesAttr.split(' ',),);
+})();
+var framerCSSMarker = 'data-framer-css-ssr';
+var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
+  React4.forwardRef((props, ref,) => {
+    const {
+      sheet,
+      cache: cache2,
+    } = React4.useContext(StyleSheetContext,) ?? {};
+    const id3 = componentSerializationId;
+    if (!isBrowser2()) {
+      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
+      const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
+      return /* @__PURE__ */ jsxs(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx('style', {
+            ...{
+              [framerCSSMarker]: true,
+            },
+            'data-framer-component': id3,
+            dangerouslySetInnerHTML: {
+              __html: concatenatedCSS,
+            },
+          },),
+          /* @__PURE__ */ jsx(Component18, {
+            ...props,
+            ref,
+          },),
+        ],
+      },);
+    }
+    useInsertionEffect(() => {
+      if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
+      const css2 = isFunction(escapedCSS,)
+        ? escapedCSS(RenderTarget.current(),)
+        : Array.isArray(escapedCSS,)
+        ? escapedCSS
+        : escapedCSS.split('\n',);
+      css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
+    }, [],);
+    return /* @__PURE__ */ jsx(Component18, {
+      ...props,
+      ref,
+    },);
+  },);
+var SSRParentVariantsContext = /* @__PURE__ */ React4.createContext(void 0,);
+var SSRVariantClassName = 'ssr-variant';
+function renderBranchedChildrenFromPropertyOverrides(
+  overrides,
+  children,
+  props,
+  variantClassNames,
+  primaryVariantId,
+  parentVariants,
+  cloneChildren,
+  activeVariantId,
+) {
+  const childrenArray = React4.Children.toArray(children,);
+  const child = childrenArray[0];
+  if (childrenArray.length !== 1 || !React4.isValidElement(child,)) {
+    console.warn('PropertyOverrides: expected exactly one React element for a child', children,);
+    return cloneChildren(children, props,);
+  }
+  const branches = [];
+  const nonOverriddenVariants = [];
+  for (const [variantId,] of Object.entries(variantClassNames,)) {
+    if (variantId === primaryVariantId) continue;
+    const propOverrides = overrides[variantId];
+    if (!propOverrides || !arePropOverridesEffectivelyDifferent(child.props, propOverrides,)) {
+      nonOverriddenVariants.push(variantId,);
+      continue;
+    }
+    const effectiveVariants = intersection([variantId,], parentVariants,);
+    if (effectiveVariants.length) {
+      branches.push({
+        variants: effectiveVariants,
+        propOverrides,
+      },);
+    }
+  }
+  if (branches.length === 0) return cloneChildren(child, props,);
+  const remainingVariants = [primaryVariantId, ...nonOverriddenVariants,];
+  const effectiveRemainingVariants = intersection(remainingVariants, parentVariants,);
+  if (effectiveRemainingVariants.length) {
+    branches.unshift({
+      variants: effectiveRemainingVariants,
+    },);
+  }
+  const renderedBranches = [];
+  for (
+    const {
+      variants,
+      propOverrides,
+    } of branches
+  ) {
+    if (activeVariantId && !variants.includes(activeVariantId,)) {
+      continue;
+    }
+    const key7 = variants.join('+',);
+    let element =
+      // We could omit the SSRParentVariantsContext if variants is the same as parentVariants, but that'd require
+      // comparing arrays, so it might not really be an optimization. And since it's just a context, it doesn't
+      // affect the size of the generated HTML.
+      /* @__PURE__ */
+      jsx(SSRParentVariantsContext.Provider, {
+        value: new Set(variants,),
+        children: cloneChildren(
+          child,
+          propOverrides
+            ? {
+              ...props,
+              ...propOverrides,
+            }
+            : props,
+        ),
+      }, key7,);
+    const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
+    if (hiddenClassNames.length) {
+      assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
+      element = /* @__PURE__ */ jsx('div', {
+        className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
+        children: element,
+      }, key7,);
+    } else {
+      assert(branches.length === 1, 'Cannot branch out when hiddenClassNames is empty',);
+    }
+    renderedBranches.push(element,);
+  }
+  assert(!activeVariantId || renderedBranches.length === 1, 'Must render exactly one branch when activeVariantId is given',);
+  return renderedBranches;
+}
+var SSRVariants = /* @__PURE__ */ React4.forwardRef(function SSRVariants2({
+  id: _nodeId,
+  children,
+  ...props
+}, ref,) {
+  const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
+  if (isBrowser2()) {
+    return cloneWithRefs(children, props,);
+  }
+  throw new Error('SSRVariants is no longer supported outside canvas and preview',);
+},);
+function variantHashFromClassName(className2,) {
+  return className2.split('-',)[2];
+}
+function generateHiddenClassNames(showOnlyInVariantIds, parentVariants, variantClassNames,) {
+  const classNames = [];
+  for (const [variantId, variantClassName,] of Object.entries(variantClassNames,)) {
+    const alreadyHiddenInParent = parentVariants && !parentVariants.has(variantId,);
+    if (showOnlyInVariantIds.includes(variantId,) || alreadyHiddenInParent) continue;
+    classNames.push(`hidden-${variantHashFromClassName(variantClassName,)}`,);
+  }
+  return classNames;
+}
+function intersection(variants, parentVariants,) {
+  if (!parentVariants) return variants;
+  return variants.filter((variant) => parentVariants.has(variant,));
+}
+function arePropOverridesEffectivelyDifferent(props, propOverrides,) {
+  for (const key7 of Object.keys(propOverrides,)) {
+    if (!isEqual(props[key7], propOverrides[key7], true,)) {
+      return true;
+    }
+  }
+  return false;
+}
+function propsForBreakpoint(variant, props, overrides,) {
+  if (!overrides || !variant) return props;
+  return {
+    ...props,
+    ...overrides[variant],
+  };
+}
+var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides({
+  breakpoint,
+  overrides,
+  children,
+  ...props
+}, ref,) {
+  const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
+  const parentVariants = React4.useContext(SSRParentVariantsContext,);
+  const isHydrationOrSSR = useIsHydrationOrSSR();
+  const action = useConstant2(() => {
+    if (isHydrationOrSSR.current) {
+      if (isBrowser2()) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } else {
+      return 0;
+    }
+  },);
+  const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
+  if (!generatedComponentContext) {
+    console.warn('PropertyOverrides is missing GeneratedComponentContext',);
+    return cloneWithRefs(children, props,);
+  }
+  const {
+    primaryVariantId,
+    variantClassNames,
+  } = generatedComponentContext;
+  switch (action) {
+    case 0:
+      return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
+    case 1:
+      return renderBranchedChildrenFromPropertyOverrides(
+        overrides,
+        children,
+        props,
+        variantClassNames,
+        primaryVariantId,
+        parentVariants,
+        cloneWithRefs,
+        breakpoint,
+        // only render the single, active branch
+      );
+    case 2:
+      return renderBranchedChildrenFromPropertyOverrides(
+        overrides,
+        children,
+        props,
+        variantClassNames,
+        primaryVariantId,
+        parentVariants,
+        // On the server, we use plain cloneChildrenWithProps instead of useCloneChildrenWithPropsAndRef,
+        // because we can't clone one ref to multiple branched-out elements (useCloneChildrenWithPropsAndRef
+        // even guards against it), but luckily, refs mean nothing on the server anyway.
+        cloneChildrenWithProps,
+        void 0,
+        // render all branches
+      );
+    default:
+      assertNever(action,);
+  }
+},);
+var PropertyOverrides2 =
+  /* @__PURE__ */ (() => withCSS(PropertyOverridesWithoutCSS, `.${SSRVariantClassName} { display: contents }`, 'PropertyOverrides',))();
+var defaultVariantKey = 'default';
+var defaultVariants = /* @__PURE__ */ new Set([defaultVariantKey,],);
+var _variantHashes;
+var AnimationCollector = class {
+  constructor() {
+    __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
+    __privateAdd(this, _variantHashes, {},);
+  }
+  /** @deprecated */
+  set(nodeId, prop, value, variantHash,) {
+    switch (prop) {
+      case 'transformTemplate': {
+        assert(typeof value === 'string', `transformTemplate must be a string, received: ${value}`,);
+        this.setHash(nodeId, variantHash, {
+          transformTemplate: value,
+          legacy: true,
+        },);
+        break;
+      }
+      case 'initial':
+      case 'animate': {
+        assert(typeof value === 'object', `${prop} must be a valid object, received: ${value}`,);
+        this.setHash(nodeId, variantHash, {
+          [prop]: value,
+          legacy: true,
+        },);
+        break;
+      }
+      default:
+        break;
+    }
+  }
+  setHash(id3, variantHash = defaultVariantKey, value,) {
+    const existing = this.entries.get(id3,) ?? {};
+    const existingValue = existing[variantHash] ?? {};
+    existing[variantHash] = value === null ? null : {
+      ...existingValue,
+      ...value,
+    };
+    this.entries.set(id3, existing,);
+  }
+  variantHash(variantId, info,) {
+    if (variantId === (info == null ? void 0 : info.primaryVariantId)) return defaultVariantKey;
+    const existing = __privateGet(this, _variantHashes,)[variantId];
+    if (existing) return existing;
+    const className2 = info == null ? void 0 : info.variantClassNames[variantId];
+    if (!className2) return defaultVariantKey;
+    return __privateGet(this, _variantHashes,)[variantId] = variantHashFromClassName(className2,);
+  }
+  setAll(id3, variants = defaultVariants, props, info,) {
+    var _a;
+    if (props === null) {
+      for (const variantId of variants) {
+        this.setHash(id3, this.variantHash(variantId, info,), null,);
+      }
+      return;
+    }
+    const transformTemplate2 = isFunction(props.transformTemplate,)
+      ? (_a = props.transformTemplate) == null ? void 0 : _a.call(props, {}, framerAppearTransformTemplateToken,)
+      : void 0;
+    const initial = props.__framer__presenceInitial ?? props.initial;
+    const animate3 = props.__framer__presenceAnimate ?? props.animate;
+    const config = {
+      initial: isObject(initial,) ? initial : void 0,
+      animate: isObject(animate3,) ? animate3 : void 0,
+      transformTemplate: isString(transformTemplate2,) ? transformTemplate2 : void 0,
+    };
+    for (const variantId of variants) this.setHash(id3, this.variantHash(variantId, info,), config,);
+  }
+  clear() {
+    this.entries.clear();
+  }
+  toObject() {
+    return Object.fromEntries(this.entries,);
+  }
+};
+_variantHashes = /* @__PURE__ */ new WeakMap();
+var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
+function withOptimizedAppearEffect(Component18,) {
+  return React4.forwardRef(({
+    optimized,
+    ...props
+  }, ref,) => {
+    const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
+    const variants = React4.useContext(SSRParentVariantsContext,);
+    const id3 = props[framerAppearIdKey];
+    if (id3 && !isBrowser2()) {
+      framerAppearEffects.setAll(
+        id3,
+        variants,
+        // A layer may have an optimization id, and an `animate` prop,
+        // but not require optimization. For example in the case of a
+        // layer where one variant has an appear effect, and another
+        // variant has a scroll appear effect, the scroll appear effect
+        // should not be optimized.
+        optimized ? props : null,
+        generatedComponentContext,
+      );
+    }
+    const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
+    return /* @__PURE__ */ jsx(Component18, {
+      ref,
+      ...props,
+      ...disabledProps,
+    },);
+  },);
+}
+var optimizeAppear = (prop, id3, animateTargetAndTransition, variantHash,) => {
+  if (!isBrowser2()) {
+    framerAppearEffects.set(id3, prop, animateTargetAndTransition, variantHash,);
+  }
+  return animateTargetAndTransition;
+};
+var framerAppearTransformTemplateToken = '__Appear_Animation_Transform__';
+var optimizeAppearTransformTemplate = (id3, fn,) => {
+  if (!isBrowser2()) {
+    const template = fn == null ? void 0 : fn({}, framerAppearTransformTemplateToken,);
+    if (template === void 0) return fn;
+    framerAppearEffects.set(id3, 'transformTemplate', template,);
+  }
+  return fn;
+};
+var framerAppearIdKey = 'data-framer-appear-id';
+var framerAppearAnimationScriptKey = 'data-framer-appear-animation';
+var getDisabledFXPropsInStaticRenderer = (props) => {
+  const isRenderingStaticContent = isStaticRenderer();
+  if (!isRenderingStaticContent) return void 0;
+  return {
+    animate: isVariantOrVariantList(props.animate,) ? props.animate : void 0,
+    initial: isVariantOrVariantList(props.initial,) ? props.initial : void 0,
+    exit: void 0,
+  };
+};
+function isVariantOrVariantList(value,) {
+  return isString(value,) || Array.isArray(value,);
+}
 var effectValuesKeys = [
   'opacity',
   'x',
@@ -30880,7 +31393,7 @@ function addMotionValueStyle(style, values,) {
     values[key7].push(value,);
   }
 }
-function isVariantOrVariantList(value,) {
+function isVariantOrVariantList2(value,) {
   return isString(value,) || Array.isArray(value,);
 }
 var withFX = (Component18) =>
@@ -30895,15 +31408,11 @@ var withFX = (Component18) =>
         ref: forwardedRef,
       },);
     }
-    const isRenderingStaticContent = isStaticRenderer();
-    if (isRenderingStaticContent) {
-      const animate4 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
-      const initial2 = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
+    const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
+    if (disabledProps) {
       return /* @__PURE__ */ jsx(Component18, {
         ...props,
-        animate: animate4,
-        initial: initial2,
-        exit: void 0,
+        ...disabledProps,
         ref: forwardedRef,
       },);
     }
@@ -30995,9 +31504,9 @@ var withFX = (Component18) =>
       skewY,
     };
     if (isUndefined(withPerspective,)) motionValueStyle.transformPerspective = transformPerspective;
-    const animate3 = isVariantOrVariantList(props.animate,) ? props.animate : void 0;
-    const initial = isVariantOrVariantList(props.initial,) ? props.initial : void 0;
-    const exit = isVariantOrVariantList(props.exit,) ? props.exit : void 0;
+    const animate3 = isVariantOrVariantList2(props.animate,) ? props.animate : void 0;
+    const initial = isVariantOrVariantList2(props.initial,) ? props.initial : void 0;
+    const exit = isVariantOrVariantList2(props.exit,) ? props.exit : void 0;
     const motionGestures = inSmartComponent && !presence.presenceInitial
       ? {
         initial,
@@ -31046,96 +31555,6 @@ function ComponentPresetsConsumer({
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
-function useCloneChildrenWithPropsAndRef(forwardedRef,) {
-  const hook = useConstant2(() => createHook(forwardedRef,));
-  hook.useSetup(forwardedRef,);
-  return hook.cloneAsElement;
-}
-function createHook(forwardedRef,) {
-  const state2 = {
-    forwardedRef,
-    childRef: null,
-    ref: null,
-  };
-  state2.ref = createRefFunction(state2,);
-  const updateIfNeeded = (nextForwardedRef, ref,) => {
-    if (!state2.forwardedRef && state2.forwardedRef === nextForwardedRef) {
-      state2.ref = ref;
-      return;
-    }
-    let shouldUpdate = false;
-    if (state2.childRef !== ref) {
-      state2.childRef = ref;
-      shouldUpdate = true;
-    }
-    if (state2.forwardedRef !== nextForwardedRef) {
-      state2.forwardedRef = nextForwardedRef;
-      shouldUpdate = true;
-    }
-    if (!shouldUpdate) return;
-    state2.ref = createRefFunction(state2,);
-  };
-  let preventNextCall = false;
-  function cloneChildrenWithPropsAndRef(children, props,) {
-    if (preventNextCall) {
-      ;
-    }
-    preventNextCall = true;
-    if (React2.Children.count(children,) > 1 && forwardedRef) {
-      if (false) {
-        throw new ReferenceError('useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',);
-      }
-      state2.forwardedRef = void 0;
-      state2.ref = state2.childRef;
-    }
-    return React2.Children.map(children, (child) => {
-      if (React2.isValidElement(child,)) {
-        const ownRef = 'ref' in child ? child.ref : void 0;
-        updateIfNeeded(state2.forwardedRef, ownRef,);
-        const newProps = isFunction(props,) ? props(child.props,) : props;
-        return React2.cloneElement(
-          child,
-          state2.ref !== ownRef
-            ? {
-              ...newProps,
-              ref: state2.ref,
-            }
-            : newProps,
-        );
-      }
-      return child;
-    },);
-  }
-  const cloneAsElement = function cloneAsElement2(children, props,) {
-    return /* @__PURE__ */ jsx(Fragment, {
-      children: cloneChildrenWithPropsAndRef(children, props,),
-    },);
-  };
-  cloneAsElement.cloneAsArray = cloneChildrenWithPropsAndRef;
-  return {
-    // used during render phase to sync props with state
-    useSetup: (newRef) => {
-      preventNextCall = false;
-      updateIfNeeded(newRef, state2.childRef,);
-    },
-    /**
-     * Clones children and adds props and refs and returns them as a JSX.Element
-     * Making it easier to use as it wraps them in a Fragment.
-     */
-    cloneAsElement,
-  };
-}
-function createRefFunction(state2,) {
-  if (!state2.forwardedRef) return state2.childRef;
-  const {
-    forwardedRef: prevForwardedRef,
-    childRef: prevChildRef,
-  } = state2;
-  return (value) => {
-    setRef(prevChildRef, value,);
-    setRef(prevForwardedRef, value,);
-  };
-}
 var ComponentViewportContext = /* @__PURE__ */ React4.createContext({},);
 function useComponentViewport() {
   return React4.useContext(ComponentViewportContext,);
@@ -31179,27 +31598,20 @@ var SuspenseErrorBoundary = class extends Component {
     },);
   }
   static getDerivedStateFromError(error,) {
-    if (!(error instanceof NotFoundErrorBoundaryCaughtError)) {
-      console.error('Derived error in SuspenseErrorBoundary:\n', error,);
-    }
     return {
       error,
     };
   }
   componentDidCatch(error, errorInfo,) {
-    var _a;
-    if (error instanceof NotFoundErrorBoundaryCaughtError) {
-      return;
-    }
     const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
     console.error('Caught error in SuspenseErrorBoundary:\n', error, componentStack,);
-    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-    (_a = window.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : void 0;
+    sendTrackingEvent('published_site_load_recoverable_error', {
       message: String(error,),
       stack,
       // only log componentStack if we don't have a stack
       componentStack: stack ? void 0 : componentStack,
-    },],);
+    },);
   }
   render() {
     const error = this.state.error;
@@ -31236,18 +31648,26 @@ function SuspenseThatPreservesDom({
     },),
   },);
 }
+function NullFallback() {
+  return /* @__PURE__ */ jsx('div', {
+    hidden: true,
+    dangerouslySetInnerHTML: {
+      __html: '<!-- Code boundary fallback rendered -->',
+    },
+  },);
+}
+var nullFallback = /* @__PURE__ */ jsx(NullFallback, {},);
 function collectErrorToAnalytics(error, errorInfo,) {
-  var _a;
   if (typeof window === 'undefined') return;
   if (Math.random() > 0.01) return;
   const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
   const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
-  (_a = safeWindow.__framer_events) == null ? void 0 : _a.push(['published_site_load_recoverable_error', {
+  sendTrackingEvent('published_site_load_recoverable_error', {
     message: String(error,),
     stack,
     // only log componentStack if we don't have a stack
     componentStack: stack ? void 0 : componentStack,
-  },],);
+  },);
 }
 function logError(...args) {
   if (false) return;
@@ -31264,11 +31684,11 @@ function CodeComponentBoundary({
   if (!shouldEnableCodeBoundaries()) {
     return children;
   }
-  return /* @__PURE__ */ jsx(ClientSideErrorBoundary, {
+  return /* @__PURE__ */ jsx(ServerSideErrorBoundary, {
     fallback,
-    errorMessage,
-    children: /* @__PURE__ */ jsx(ServerSideErrorBoundary, {
+    children: /* @__PURE__ */ jsx(ClientSideErrorBoundary, {
       fallback,
+      errorMessage,
       children,
     },),
   },);
@@ -31292,7 +31712,7 @@ var ClientSideErrorBoundary = class extends Component {
   render() {
     const {
       children,
-      fallback = null,
+      fallback = nullFallback,
     } = this.props;
     const {
       hasError,
@@ -31302,7 +31722,7 @@ var ClientSideErrorBoundary = class extends Component {
 };
 function ServerSideErrorBoundary({
   children,
-  fallback = null,
+  fallback = nullFallback,
 },) {
   return typeof window === 'undefined'
     ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
@@ -31445,6 +31865,43 @@ function isNodeLocalToProject(scopeIdOfThisNode, scopeIdOfNearestExternalCompone
   }
   return false;
 }
+function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,) {
+  const nearestExternalComponent = useNearestExternalComponent();
+  if (
+    // Those props will either be all undefined, which means the Container hasn’t yet been
+    // re-serialized since we introduced code boundaries, and we should use the old
+    // ContainerErrorBoundary – or all defined, which means we have enough information to use
+    // the new boundary.
+    isUndefined(scopeId,) || isUndefined(nodeId,)
+  ) {
+    return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
+      children,
+    },);
+  }
+  const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
+    scopeId,
+    nearestExternalComponent == null ? void 0 : nearestExternalComponent.scopeId,
+    nearestExternalComponent == null ? void 0 : nearestExternalComponent.level,
+    isAuthoredByUser ?? false,
+    isModuleExternal ?? false,
+    inComponentSlot ?? false,
+  );
+  if (shouldWrapWithBoundary) {
+    children = /* @__PURE__ */ jsx(CodeComponentBoundary, {
+      errorMessage: getErrorMessageForComponent(scopeId, nodeId,),
+      fallback: null,
+      children,
+    },);
+  }
+  if (isModuleExternal) {
+    children = /* @__PURE__ */ jsx(IsExternalComponent, {
+      scopeId,
+      nodeId,
+      children,
+    },);
+  }
+  return children;
+}
 var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
   children,
   layoutId,
@@ -31465,7 +31922,7 @@ var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
       },)
       : child;
   },);
-  const childrenWithCodeBoundary = useWrapWithCodeBoundary(
+  const childrenWithCodeBoundary = useMaybeWrapComponentWithCodeBoundary(
     clonedChildren,
     scopeId,
     nodeId,
@@ -31505,7 +31962,14 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
     // Other props, including some possibly used-passed ones
     ...otherProps
   } = props;
-  const childrenWithCodeBoundary = useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,);
+  const childrenWithCodeBoundary = useMaybeWrapComponentWithCodeBoundary(
+    children,
+    scopeId,
+    nodeId,
+    isAuthoredByUser,
+    isModuleExternal,
+    inComponentSlot,
+  );
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
     const Component18 = htmlElementAsMotionComponent(tagName,);
@@ -31535,96 +31999,6 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
     );
   }
 },);
-function useWrapWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isExternalComponent, inComponentSlot,) {
-  const nearestExternalComponent = useNearestExternalComponent();
-  if (
-    // Those props will either be all undefined, which means the Container wasn’t codegenned yet,
-    // and we should use the old ContainerErrorBoundary –
-    // or all defined, which means we have enough information to use the new boundary.
-    isUndefined(scopeId,) || isUndefined(nodeId,)
-  ) {
-    return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
-      children,
-    },);
-  }
-  const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
-    scopeId,
-    nearestExternalComponent == null ? void 0 : nearestExternalComponent.scopeId,
-    nearestExternalComponent == null ? void 0 : nearestExternalComponent.level,
-    isAuthoredByUser ?? false,
-    isExternalComponent ?? false,
-    inComponentSlot ?? false,
-  );
-  if (shouldWrapWithBoundary) {
-    children = /* @__PURE__ */ jsx(CodeComponentBoundary, {
-      errorMessage: getErrorMessageForComponent(scopeId, nodeId,),
-      fallback: null,
-      children,
-    },);
-  }
-  if (isExternalComponent) {
-    children = /* @__PURE__ */ jsx(IsExternalComponent, {
-      scopeId,
-      nodeId,
-      children,
-    },);
-  }
-  return children;
-}
-var StyleSheetContext = /* @__PURE__ */ React4.createContext(void 0,);
-var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
-var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
-  var _a;
-  if (!isBrowser2()) return /* @__PURE__ */ new Set();
-  const componentsWithSSRStylesAttr = (_a = document.querySelector(framerPostSSRCSSSelector,)) == null
-    ? void 0
-    : _a.getAttribute('data-framer-components',);
-  if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
-  return new Set(componentsWithSSRStylesAttr.split(' ',),);
-})();
-var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
-  React4.forwardRef((props, ref,) => {
-    const {
-      sheet,
-      cache: cache2,
-    } = React4.useContext(StyleSheetContext,) ?? {};
-    const id3 = componentSerializationId;
-    if (!isBrowser2()) {
-      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
-      const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx('style', {
-            ...{
-              [framerCSSMarker]: true,
-            },
-            'data-framer-component': id3,
-            dangerouslySetInnerHTML: {
-              __html: concatenatedCSS,
-            },
-          },),
-          /* @__PURE__ */ jsx(Component18, {
-            ...props,
-            ref,
-          },),
-        ],
-      },);
-    }
-    useInsertionEffect(() => {
-      if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
-      const css2 = isFunction(escapedCSS,)
-        ? escapedCSS(RenderTarget.current(),)
-        : Array.isArray(escapedCSS,)
-        ? escapedCSS
-        : escapedCSS.split('\n',);
-      css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
-    }, [],);
-    return /* @__PURE__ */ jsx(Component18, {
-      ...props,
-      ref,
-    },);
-  },);
 var CustomCursorContext = /* @__PURE__ */ createContext({
   onRegisterCursors: () => () => {},
   registerCursors: () => {},
@@ -32518,13 +32892,15 @@ function Floating({
             },
             'data-safearea': true,
           },)
-          : /* @__PURE__ */ jsx('div', {
+          : // biome-ignore lint/a11y/useKeyWithClickEvents: overlays don't support key events yet.
+          /* @__PURE__ */
+          jsx('div', {
             style: {
               position: 'fixed',
               inset: 0,
             },
             'aria-hidden': true,
-            onMouseDown: onDismiss,
+            onClick: onDismiss,
           },),
         /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
           value: descendantContext,
@@ -32538,13 +32914,6 @@ function Floating({
     getPortalContainer(portalSelector, inComponent,),
   );
 }
-var GeneratedComponentContext = /* @__PURE__ */ React4.createContext(void 0,);
-var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React4.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
 var GracefullyDegradingErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
@@ -32553,7 +32922,6 @@ var GracefullyDegradingErrorBoundary = class extends Component {
     },);
     __publicField(this, 'message', 'Made UI non-interactive due to an error',);
     __publicField(this, 'messageFatal', 'Fatal error',);
-    __publicField(this, 'messageUser', 'Please check any custom code or code overrides',);
     __publicField(
       this,
       'messageReport',
@@ -32566,24 +32934,18 @@ var GracefullyDegradingErrorBoundary = class extends Component {
     };
   }
   componentDidCatch(error,) {
-    var _a, _b, _c;
     window.__framer_hadFatalError = true;
     if ('cause' in error) {
       error = error.cause;
     }
-    console.error(
-      `${isBot ? this.message : this.messageFatal} (see above). ${
-        ((_a = this.context) == null ? void 0 : _a.codeBoundaries) ? this.messageUser : this.messageReport
-      }.`,
-    );
+    console.error(`${isBot ? this.message : this.messageFatal} (see above). ${this.messageReport}.`,);
     const sampleRate = Math.random();
-    if (!((_b = this.context) == null ? void 0 : _b.codeBoundaries) && sampleRate > 0.01) return;
     if (sampleRate > 0.25) return;
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-    (_c = window.__framer_events) == null ? void 0 : _c.push(['published_site_load_error', {
+    sendTrackingEvent('published_site_load_error', {
       message: String(error,),
       stack,
-    },],);
+    },);
   }
   render() {
     var _a, _b;
@@ -32619,7 +32981,6 @@ var GracefullyDegradingErrorBoundary = class extends Component {
     );
   }
 };
-__publicField(GracefullyDegradingErrorBoundary, 'contextType', LibraryFeaturesContext,);
 var LazyValue = class {
   constructor(resolver,) {
     this.resolver = resolver;
@@ -32674,6 +33035,12 @@ var LazyValue = class {
     if (promise) await promise;
     return this.read();
   }
+};
+var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React4.useContext(LibraryFeaturesContext,);
+  return context ?? {};
 };
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
@@ -33358,35 +33725,6 @@ function maybeReplaceAnchorWithSpan(component,) {
   if (component === 'a') return 'span';
   if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
   return component;
-}
-var timezone;
-var visitorLocale;
-var isFirstPageview = true;
-function setTimezoneAndLocaleForTracking() {
-  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
-  timezone = resolvedDateTimeOptions.timeZone;
-  visitorLocale = resolvedDateTimeOptions.locale;
-}
-requestIdleCallback(setTimezoneAndLocaleForTracking,);
-function sendTrackingEvent(eventType, eventData,) {
-  if (!safeWindow.__framer_events) return;
-  if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
-  if (eventType === 'published_site_pageview' && isFirstPageview) {
-    isFirstPageview = false;
-  }
-  safeWindow.__framer_events.push([eventType, {
-    // Base properties common to all events
-    referrer: isFirstPageview ? safeWindow.document.referrer : null,
-    url: safeWindow.location.href,
-    hostname: safeWindow.location.hostname || null,
-    pathname: safeWindow.location.pathname || null,
-    hash: safeWindow.location.hash || null,
-    search: safeWindow.location.search || null,
-    timezone,
-    locale: visitorLocale,
-    // Additional properties specific to custom events
-    ...eventData,
-  },],);
 }
 function useTrackLinkClick({
   showAdvancedAnalytics,
@@ -34995,211 +35333,6 @@ function EditorBarLauncher({
     },),
   },);
 }
-function cloneChildrenWithProps(children, props, asNode,) {
-  const cloned = React2.Children.map(children, (child) => {
-    if (React2.isValidElement(child,)) {
-      return React2.cloneElement(child, props,);
-    }
-    return child;
-  },);
-  if (asNode) return cloned;
-  return /* @__PURE__ */ jsx(Fragment, {
-    children: cloned,
-  },);
-}
-var SSRParentVariantsContext = /* @__PURE__ */ React4.createContext(void 0,);
-var SSRVariantClassName = 'ssr-variant';
-function renderBranchedChildrenFromPropertyOverrides(
-  overrides,
-  children,
-  props,
-  variantClassNames,
-  primaryVariantId,
-  parentVariants,
-  cloneChildren,
-  activeVariantId,
-) {
-  const childrenArray = React4.Children.toArray(children,);
-  const child = childrenArray[0];
-  if (childrenArray.length !== 1 || !React4.isValidElement(child,)) {
-    console.warn('PropertyOverrides: expected exactly one React element for a child', children,);
-    return cloneChildren(children, props,);
-  }
-  const branches = [];
-  const nonOverriddenVariants = [];
-  for (const [variantId,] of Object.entries(variantClassNames,)) {
-    if (variantId === primaryVariantId) continue;
-    const propOverrides = overrides[variantId];
-    if (!propOverrides || !arePropOverridesEffectivelyDifferent(child.props, propOverrides,)) {
-      nonOverriddenVariants.push(variantId,);
-      continue;
-    }
-    const effectiveVariants = intersection([variantId,], parentVariants,);
-    if (effectiveVariants.length) {
-      branches.push({
-        variants: effectiveVariants,
-        propOverrides,
-      },);
-    }
-  }
-  if (branches.length === 0) return cloneChildren(child, props,);
-  const remainingVariants = [primaryVariantId, ...nonOverriddenVariants,];
-  const effectiveRemainingVariants = intersection(remainingVariants, parentVariants,);
-  if (effectiveRemainingVariants.length) {
-    branches.unshift({
-      variants: effectiveRemainingVariants,
-    },);
-  }
-  const renderedBranches = [];
-  for (
-    const {
-      variants,
-      propOverrides,
-    } of branches
-  ) {
-    if (activeVariantId && !variants.includes(activeVariantId,)) {
-      continue;
-    }
-    const key7 = variants.join('+',);
-    let element =
-      // We could omit the SSRParentVariantsContext if variants is the same as parentVariants, but that'd require
-      // comparing arrays, so it might not really be an optimization. And since it's just a context, it doesn't
-      // affect the size of the generated HTML.
-      /* @__PURE__ */
-      jsx(SSRParentVariantsContext.Provider, {
-        value: new Set(variants,),
-        children: cloneChildren(
-          child,
-          propOverrides
-            ? {
-              ...props,
-              ...propOverrides,
-            }
-            : props,
-        ),
-      }, key7,);
-    const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
-    if (hiddenClassNames.length) {
-      assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-      element = /* @__PURE__ */ jsx('div', {
-        className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
-        children: element,
-      }, key7,);
-    } else {
-      assert(branches.length === 1, 'Cannot branch out when hiddenClassNames is empty',);
-    }
-    renderedBranches.push(element,);
-  }
-  assert(!activeVariantId || renderedBranches.length === 1, 'Must render exactly one branch when activeVariantId is given',);
-  return renderedBranches;
-}
-var SSRVariants = /* @__PURE__ */ React4.forwardRef(function SSRVariants2({
-  id: _nodeId,
-  children,
-  ...props
-}, ref,) {
-  const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  if (isBrowser2()) {
-    return cloneWithRefs(children, props,);
-  }
-  throw new Error('SSRVariants is no longer supported outside canvas and preview',);
-},);
-function variantHashFromClassName(className2,) {
-  return className2.split('-',)[2];
-}
-function generateHiddenClassNames(showOnlyInVariantIds, parentVariants, variantClassNames,) {
-  const classNames = [];
-  for (const [variantId, variantClassName,] of Object.entries(variantClassNames,)) {
-    const alreadyHiddenInParent = parentVariants && !parentVariants.has(variantId,);
-    if (showOnlyInVariantIds.includes(variantId,) || alreadyHiddenInParent) continue;
-    classNames.push(`hidden-${variantHashFromClassName(variantClassName,)}`,);
-  }
-  return classNames;
-}
-function intersection(variants, parentVariants,) {
-  if (!parentVariants) return variants;
-  return variants.filter((variant) => parentVariants.has(variant,));
-}
-function arePropOverridesEffectivelyDifferent(props, propOverrides,) {
-  for (const key7 of Object.keys(propOverrides,)) {
-    if (!isEqual(props[key7], propOverrides[key7], true,)) {
-      return true;
-    }
-  }
-  return false;
-}
-function propsForBreakpoint(variant, props, overrides,) {
-  if (!overrides || !variant) return props;
-  return {
-    ...props,
-    ...overrides[variant],
-  };
-}
-var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides({
-  breakpoint,
-  overrides,
-  children,
-  ...props
-}, ref,) {
-  const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  const parentVariants = React4.useContext(SSRParentVariantsContext,);
-  const isHydrationOrSSR = useIsHydrationOrSSR();
-  const action = useConstant2(() => {
-    if (isHydrationOrSSR.current) {
-      if (isBrowser2()) {
-        return 1;
-      } else {
-        return 2;
-      }
-    } else {
-      return 0;
-    }
-  },);
-  const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
-  if (!generatedComponentContext) {
-    console.warn('PropertyOverrides is missing GeneratedComponentContext',);
-    return cloneWithRefs(children, props,);
-  }
-  const {
-    primaryVariantId,
-    variantClassNames,
-  } = generatedComponentContext;
-  switch (action) {
-    case 0:
-      return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
-    case 1:
-      return renderBranchedChildrenFromPropertyOverrides(
-        overrides,
-        children,
-        props,
-        variantClassNames,
-        primaryVariantId,
-        parentVariants,
-        cloneWithRefs,
-        breakpoint,
-        // only render the single, active branch
-      );
-    case 2:
-      return renderBranchedChildrenFromPropertyOverrides(
-        overrides,
-        children,
-        props,
-        variantClassNames,
-        primaryVariantId,
-        parentVariants,
-        // On the server, we use plain cloneChildrenWithProps instead of useCloneChildrenWithPropsAndRef,
-        // because we can't clone one ref to multiple branched-out elements (useCloneChildrenWithPropsAndRef
-        // even guards against it), but luckily, refs mean nothing on the server anyway.
-        cloneChildrenWithProps,
-        void 0,
-        // render all branches
-      );
-    default:
-      assertNever(action,);
-  }
-},);
-var PropertyOverrides2 =
-  /* @__PURE__ */ (() => withCSS(PropertyOverridesWithoutCSS, `.${SSRVariantClassName} { display: contents }`, 'PropertyOverrides',))();
 var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function ResolveLinksInner({
   links,
   children,
@@ -39790,128 +39923,6 @@ function getCacheKey(query, locale,) {
   const localeId = (locale == null ? void 0 : locale.id) ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
-var defaultVariantKey = 'default';
-var defaultVariants = /* @__PURE__ */ new Set([defaultVariantKey,],);
-var _variantHashes;
-var AnimationCollector = class {
-  constructor() {
-    __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
-    __privateAdd(this, _variantHashes, {},);
-  }
-  /** @deprecated */
-  set(nodeId, prop, value, variantHash,) {
-    switch (prop) {
-      case 'transformTemplate': {
-        assert(typeof value === 'string', `transformTemplate must be a string, received: ${value}`,);
-        this.setHash(nodeId, variantHash, {
-          transformTemplate: value,
-          legacy: true,
-        },);
-        break;
-      }
-      case 'initial':
-      case 'animate': {
-        assert(typeof value === 'object', `${prop} must be a valid object, received: ${value}`,);
-        this.setHash(nodeId, variantHash, {
-          [prop]: value,
-          legacy: true,
-        },);
-        break;
-      }
-      default:
-        break;
-    }
-  }
-  setHash(id3, variantHash = defaultVariantKey, value,) {
-    const existing = this.entries.get(id3,) ?? {};
-    const existingValue = existing[variantHash] ?? {};
-    existing[variantHash] = value === null ? null : {
-      ...existingValue,
-      ...value,
-    };
-    this.entries.set(id3, existing,);
-  }
-  variantHash(variantId, info,) {
-    if (variantId === (info == null ? void 0 : info.primaryVariantId)) return defaultVariantKey;
-    const existing = __privateGet(this, _variantHashes,)[variantId];
-    if (existing) return existing;
-    const className2 = info == null ? void 0 : info.variantClassNames[variantId];
-    if (!className2) return defaultVariantKey;
-    return __privateGet(this, _variantHashes,)[variantId] = variantHashFromClassName(className2,);
-  }
-  setAll(id3, variants = defaultVariants, props, info,) {
-    var _a;
-    if (props === null) {
-      for (const variantId of variants) {
-        this.setHash(id3, this.variantHash(variantId, info,), null,);
-      }
-      return;
-    }
-    const transformTemplate2 = isFunction(props.transformTemplate,)
-      ? (_a = props.transformTemplate) == null ? void 0 : _a.call(props, {}, framerAppearTransformTemplateToken,)
-      : void 0;
-    const initial = props.__framer__presenceInitial ?? props.initial;
-    const animate3 = props.__framer__presenceAnimate ?? props.animate;
-    const config = {
-      initial: isObject(initial,) ? initial : void 0,
-      animate: isObject(animate3,) ? animate3 : void 0,
-      transformTemplate: isString(transformTemplate2,) ? transformTemplate2 : void 0,
-    };
-    for (const variantId of variants) this.setHash(id3, this.variantHash(variantId, info,), config,);
-  }
-  clear() {
-    this.entries.clear();
-  }
-  toObject() {
-    return Object.fromEntries(this.entries,);
-  }
-};
-_variantHashes = /* @__PURE__ */ new WeakMap();
-var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component18,) {
-  return React4.forwardRef(({
-    optimized,
-    ...props
-  }, ref,) => {
-    const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
-    const variants = React4.useContext(SSRParentVariantsContext,);
-    const id3 = props[framerAppearIdKey];
-    if (id3 && !isBrowser2()) {
-      framerAppearEffects.setAll(
-        id3,
-        variants,
-        // A layer may have an optimization id, and an `animate` prop,
-        // but not require optimization. For example in the case of a
-        // layer where one variant has an appear effect, and another
-        // variant has a scroll appear effect, the scroll appear effect
-        // should not be optimized.
-        optimized ? props : null,
-        generatedComponentContext,
-      );
-    }
-    return /* @__PURE__ */ jsx(Component18, {
-      ref,
-      ...props,
-    },);
-  },);
-}
-var optimizeAppear = (prop, id3, animateTargetAndTransition, variantHash,) => {
-  if (!isBrowser2()) {
-    framerAppearEffects.set(id3, prop, animateTargetAndTransition, variantHash,);
-  }
-  return animateTargetAndTransition;
-};
-var framerAppearTransformTemplateToken = '__Appear_Animation_Transform__';
-var optimizeAppearTransformTemplate = (id3, fn,) => {
-  if (!isBrowser2()) {
-    const template = fn == null ? void 0 : fn({}, framerAppearTransformTemplateToken,);
-    if (template === void 0) return fn;
-    framerAppearEffects.set(id3, 'transformTemplate', template,);
-  }
-  return fn;
-};
-var framerAppearIdKey = 'data-framer-appear-id';
-var framerAppearAnimationScriptKey = 'data-framer-appear-animation';
 function rejectPending(pendingTimers, pendingPromises,) {
   pendingTimers.forEach((t) => clearTimeout(t,));
   pendingTimers.clear();
@@ -42159,6 +42170,15 @@ var BuiltInFontSource = class {
     }
     return fonts;
   }
+  static parseVariant(variant,) {
+    const kebabCaseVariant = variantToKebabCase(variant,);
+    const weight = variantsNameToWeight[kebabCaseVariant];
+    const style = getFontStyle(variant,);
+    return {
+      weight,
+      style,
+    };
+  }
   getFontBySelector(selector, createFont = true,) {
     const locator = this.parseSelector(selector,);
     if (!locator) return;
@@ -42212,13 +42232,16 @@ var BuiltInFontSource = class {
   }
   parseSelector(selector,) {
     if (!selector.startsWith(builtInFontSelectorPrefix,)) return null;
-    const tokens = selector.split(builtInFontSelectorPrefix,);
-    if (tokens[1] === void 0) return null;
-    const locator = {
-      source: 'builtIn',
-      name: tokens[1],
+    const [_, selectorWithoutPrefix,] = selector.split(builtInFontSelectorPrefix,);
+    if (selectorWithoutPrefix === void 0) return null;
+    const [name, variant, version2,] = selectorWithoutPrefix.split('/',);
+    if (!name || !variant || !version2) return null;
+    return {
+      name,
+      variant,
+      source: this.name,
+      isVariable: variant.toLowerCase().includes('variable',),
     };
-    return locator;
   }
   addFontFamily(fontFamily,) {
     this.fontFamilies.push(fontFamily,);
@@ -42236,6 +42259,7 @@ var variantsNameToWeight = {
   normal: 350,
   base: 400,
   regular: 400,
+  classic: 400,
   'regular-slanted': 400,
   italic: 400,
   oblique: 400,
@@ -42256,12 +42280,12 @@ var variantsNameToWeight = {
   'bold-italic': 700,
   'bold-oblique': 700,
   fett: 700,
+  ultrabold: 800,
+  'ultrabold-italic': 800,
   black: 900,
   'black-italic': 900,
   'extra-italic': 900,
   'extra-italic-bold': 900,
-  ultrabold: 900,
-  'ultrabold-italic': 900,
   satt: 900,
   heavy: 900,
   'heavy-italic': 900,
@@ -43243,6 +43267,20 @@ var FontStore = class {
           variant: fontshareLocator.variant,
           family,
           source: 'fontshare',
+          category: void 0,
+        };
+      }
+    }
+    const builtInFontLocator = this.builtIn.parseSelector(selector,);
+    if (builtInFontLocator) {
+      const fontVariant = BuiltInFontSource.parseVariant(builtInFontLocator.variant,);
+      if (isSuccessfullyParsedFontVariant(fontVariant,)) {
+        return {
+          style: fontVariant.style,
+          weight: fontVariant.weight,
+          variant: builtInFontLocator.variant,
+          family: builtInFontLocator.name,
+          source: 'builtIn',
           category: void 0,
         };
       }
@@ -47130,6 +47168,7 @@ var Vector = /* @__PURE__ */ (() => {
         fill,
         variants,
         transition,
+        fillOpacity,
       } = this.props;
       if (!id3 || !shapeId || !strokeClipId) return null;
       const rotate = this.props.rotate ?? rotation ?? 0;
@@ -47246,6 +47285,7 @@ var Vector = /* @__PURE__ */ (() => {
           mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
+            fillOpacity,
             strokeOpacity: '0',
             name: currentName,
           },);
@@ -47260,6 +47300,7 @@ var Vector = /* @__PURE__ */ (() => {
           mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
+            fillOpacity,
             clipPath: internalStrokeClipId.urlLink,
             ...svgStrokeAttributes,
             strokeWidth,
@@ -47275,6 +47316,7 @@ var Vector = /* @__PURE__ */ (() => {
             ...svgStrokeAttributes,
           },
           name: currentName,
+          fillOpacity,
           variants,
           transition,
         },);
@@ -47309,6 +47351,7 @@ var Vector = /* @__PURE__ */ (() => {
             fill: vectorFill,
             ...svgStrokeAttributes,
           },
+          fillOpacity,
           opacity: opacityValue,
           variants,
           transition,
