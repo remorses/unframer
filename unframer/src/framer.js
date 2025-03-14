@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.5OZSLRFC.mjs
+// /:https://app.framerstatic.com/framer.Y3T44MZC.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -18898,6 +18898,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['CollectionReference'] = 'collectionreference';
   ControlType2['MultiCollectionReference'] = 'multicollectionreference';
   ControlType2['TrackingId'] = 'trackingid';
+  ControlType2['VectorSetItem'] = 'vectorsetitem';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -19885,6 +19886,7 @@ function getControlDefaultValue(control,) {
       case 'customcursor':
       case 'cursor':
       case 'trackingid':
+      case 'vectorsetitem':
         return void 0;
       default:
         shouldBeNever(control,);
