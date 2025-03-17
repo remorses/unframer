@@ -241,6 +241,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
 }
 ```
 
+## Passing locale prop to all components with `UnframerProvider`
+
+You can change the locale of all components under the provider passing locale prop to UnframerProvider.
+
+```tsx
+import { UnframerProvider } from 'unframer'
+
+export function Providers({ children }) {
+    return <UnframerProvider locale='de'>{children}</UnframerProvider>
+}
+```
+
 ## How does unframer cli work?
 
 The Framer React Export plugin saves your Framer components JavaScript url in the Unframer database. When you run the Unframer cli the components urls are fetched and bundled with esbuild. The bundler will also resolve npm dependencies in your Framer overrides and code components using the latest version.
