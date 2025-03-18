@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.Y3T44MZC.mjs
+// /:https://app.framerstatic.com/framer.M2P37E7V.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -34104,6 +34104,22 @@ function addUTMTagsToFormData(data2, document2,) {
     }
   } catch (e) {}
 }
+function trackFormSubmit({
+  showAdvancedAnalytics,
+  router,
+  nodeId,
+  submitTrackingId,
+},) {
+  var _a;
+  if (!showAdvancedAnalytics || !((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
+  const pageviewEventData = router.pageviewEventData.current;
+  const eventData = {
+    ...pageviewEventData,
+    nodeId: nodeId ?? null,
+    trackingId: submitTrackingId ?? null,
+  };
+  return sendTrackingEvent('published_site_form_submit', eventData,);
+}
 var pendingState = {
   state: 'pending',
 };
@@ -34168,6 +34184,8 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
   onSuccess,
   onError,
   onLoading,
+  submitTrackingId,
+  nodeId,
   ...props
 }, forwardedRef,) {
   const fallbackRef = React4.useRef(null,);
@@ -34190,6 +34208,9 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     onError,
     onLoading,
   };
+  const {
+    showAdvancedAnalytics,
+  } = useLibraryFeatures();
   async function redirectTo(link,) {
     var _a, _b;
     if (isString(link,)) {
@@ -34232,6 +34253,13 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     }
     try {
       (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
+      trackFormSubmit({
+        showAdvancedAnalytics,
+        router,
+        nodeId,
+        submitTrackingId,
+        activeLocale,
+      },);
       await submitForm(action, data2, projectHash,);
       startTransition2(() =>
         dispatch({
