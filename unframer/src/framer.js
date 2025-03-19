@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.M2P37E7V.mjs
+// /:https://app.framerstatic.com/framer.R4S3ZVEV.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -12666,6 +12666,7 @@ function normalizeString(path,) {
   }
   return res;
 }
+var customNotFoundPagePaths = /* @__PURE__ */ new Set(['/404.html', '/404', '/404/',],);
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
 var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
@@ -12798,6 +12799,17 @@ async function getLocalizedNavigationPath({
     result.path = forwardCurrentQueryParams(result.path,);
   }
   return result;
+}
+function getSitePrefix(siteCanonicalURL,) {
+  if (!siteCanonicalURL) return '';
+  let url;
+  try {
+    url = new URL(siteCanonicalURL,);
+  } catch {
+    return '';
+  }
+  if (url.pathname === '/' || window.location.origin !== url.origin) return '';
+  return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
 }
 var defaultSitePageEffects = {
   global: void 0,
@@ -13261,6 +13273,7 @@ async function pushRouteState(
     pathVariables,
     localeId,
     preserveQueryParams,
+    siteCanonicalURL,
   },
   enableAsyncURLUpdate = false,
   isNavigationTransition = false,
@@ -13275,8 +13288,8 @@ async function pushRouteState(
     hash: hash2,
     pathVariables,
     preserveQueryParams,
+    siteCanonicalURL,
   },);
-  const currentUrl = window.location.href;
   try {
     const urlUpdatePromise = pushHistoryState(
       {
@@ -13462,6 +13475,7 @@ function getPathForRoute(route, {
   relative: relative2 = true,
   preserveQueryParams,
   onlyHash = false,
+  siteCanonicalURL,
 },) {
   const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
   if (onlyHash) return resolvedHash ?? '';
@@ -13476,7 +13490,12 @@ function getPathForRoute(route, {
   }
   const isSamePageHashNavigation = currentPath === path && resolvedHash;
   if (relative2) {
-    path = computeRelativePath(currentPath, path,);
+    if (customNotFoundPagePaths.has(currentPath,) && typeof window !== 'undefined') {
+      const sitePrefix = getSitePrefix(siteCanonicalURL,);
+      path = computeRelativePath(window.location.pathname, sitePrefix + path,);
+    } else {
+      path = computeRelativePath(currentPath, path,);
+    }
   }
   if (preserveQueryParams || isSamePageHashNavigation) {
     path = forwardCurrentQueryParams(path,);
@@ -13574,6 +13593,7 @@ function useRouteAnchor(routeId, {
     navigate,
     currentPathVariables,
     preserveQueryParams,
+    siteCanonicalURL,
   } = useRouter();
   const route = useRoute(routeId,);
   const currentRouteId = useCurrentRouteId();
@@ -13586,7 +13606,8 @@ function useRouteAnchor(routeId, {
       currentPathVariables,
       hash: hash2,
       preserveQueryParams,
-    },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route,],);
+      siteCanonicalURL,
+    },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route, siteCanonicalURL,],);
   const navigateToRoute = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
   const onClick = React4.useCallback((event) => {
     event.preventDefault();
@@ -22353,6 +22374,12 @@ var ConvertColor = {
   multiplyAlpha: (color2, alpha2,) => {
     return Color.toRgbString(Color.multiplyAlpha(Color(color2,), alpha2,),);
   },
+  /**
+   * @internal
+   */
+  toHexValue: (color2) => {
+    return Color.toHex(Color(color2,),).toUpperCase();
+  },
   toHex: (color2) => {
     return Color.toHexString(Color(color2,),).toUpperCase();
   },
@@ -22377,6 +22404,12 @@ var ConvertColor = {
   hsvToHSLString: (hsv) => {
     return Color.toHslString(Color(hsvToStr(hsv.h, hsv.s, hsv.v, hsv.a,),),);
   },
+  /**
+   * @internal
+   */
+  hsvToHexValue: (hsv) => {
+    return Color.toHex(Color(hsvToStr(hsv.h, hsv.s, hsv.v, hsv.a,),),).toUpperCase();
+  },
   hsvToHex: (hsv) => {
     return Color.toHexString(Color(hsvToStr(hsv.h, hsv.s, hsv.v, hsv.a,),),).toUpperCase();
   },
@@ -22388,6 +22421,12 @@ var ConvertColor = {
   },
   rgbaToString: (color2) => {
     return Color.toRgbString(Color(color2,),);
+  },
+  /**
+   * @internal
+   */
+  rgbToHexValue: (color2) => {
+    return Color.toHex(Color(color2,),);
   },
   rgbToHexString: (color2) => {
     return Color.toHexString(Color(color2,),);
@@ -33342,6 +33381,7 @@ function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVa
     pathVariables: combinedPathVariables,
     hashVariables: combinedHashVariables,
     preserveQueryParams: router.preserveQueryParams,
+    siteCanonicalURL: router.siteCanonicalURL,
   },);
   const resolvedHash = resolvedHref.split('#', 2,)[1];
   return {
@@ -33823,6 +33863,7 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkCl
     hash: elementId,
     pathVariables,
     preserveQueryParams: router.preserveQueryParams,
+    siteCanonicalURL: router.siteCanonicalURL,
   },);
   const anchorTarget = getTargetAttrValue(openInNewTab, true,);
   return {
@@ -34016,6 +34057,7 @@ function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, reso
     relative: false,
     preserveQueryParams: router.preserveQueryParams,
     onlyHash,
+    siteCanonicalURL: router.siteCanonicalURL,
   },);
 }
 function resolvePageScope(pageLink, router,) {
@@ -34030,6 +34072,7 @@ function resolvePageScope(pageLink, router,) {
     currentPathVariables: router.currentPathVariables,
     relative: false,
     preserveQueryParams: false,
+    siteCanonicalURL: void 0,
   },);
 }
 var IgnoreErrors = class extends Component {
@@ -34460,6 +34503,7 @@ function Router({
   enableAsyncURLUpdates = false,
   LayoutTemplate,
   editorBar,
+  siteCanonicalURL,
 },) {
   useMarkRouterEffects();
   useReplaceInitialState({
@@ -34618,6 +34662,7 @@ function Router({
             hash: hash2,
             localeId: currentRouteLocaleId,
             preserveQueryParams,
+            siteCanonicalURL,
           },
           // we want to yield as this is called synchronusly from an user interaction.
           enableAsyncURLUpdates,
@@ -34639,6 +34684,7 @@ function Router({
           pathVariables,
           localeId: currentRouteLocaleId,
           preserveQueryParams,
+          siteCanonicalURL,
         },
         // we yield in startNavigation before updating the URL, so yielding again is not needed.
         false,
@@ -34653,7 +34699,7 @@ function Router({
       smoothScroll,
       disableHistory ? void 0 : updateURL,
     );
-  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates,],);
+  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates, siteCanonicalURL,],);
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
@@ -34697,7 +34743,8 @@ function Router({
     collectionUtils,
     preserveQueryParams,
     pageviewEventData,
-  }), [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams,],);
+    siteCanonicalURL,
+  }), [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams, siteCanonicalURL,],);
   if (!currentRoute) {
     throw new Error(`Router cannot find route for ${currentRouteId}`,);
   }
@@ -35274,6 +35321,7 @@ function PageRoot({
   defaultPageStyle,
   disableHistory,
   LayoutTemplate,
+  siteCanonicalURL,
 },) {
   const {
     enableAsyncURLUpdates,
@@ -35308,6 +35356,7 @@ function PageRoot({
               },),
               disableHistory,
               LayoutTemplate,
+              siteCanonicalURL,
             },),
           },),
         },),
@@ -40206,6 +40255,7 @@ function useSiteRefs() {
       currentPathVariables: route == null ? void 0 : route.pathVariables,
       preserveQueryParams: false,
       relative: false,
+      siteCanonicalURL: void 0,
     },);
   }, [route,],);
   return React4.useCallback((key7) => {
@@ -42312,6 +42362,8 @@ var variantsNameToWeight = {
   fett: 700,
   ultrabold: 800,
   'ultrabold-italic': 800,
+  extrabold: 800,
+  'extrabold-italic': 800,
   black: 900,
   'black-italic': 900,
   'extra-italic': 900,
