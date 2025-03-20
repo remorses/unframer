@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.R4S3ZVEV.mjs
+// /:https://app.framerstatic.com/framer.4HEODI2H.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -12516,7 +12516,6 @@ var mockWindow = {
 var safeWindow = typeof window === 'undefined' ? mockWindow : window;
 var timezone;
 var visitorLocale;
-var isFirstPageview = true;
 function setTimezoneAndLocaleForTracking() {
   const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
   timezone = resolvedDateTimeOptions.timeZone;
@@ -12526,12 +12525,10 @@ requestIdleCallback(setTimezoneAndLocaleForTracking,);
 function sendTrackingEvent(eventType, eventData,) {
   if (!safeWindow.__framer_events) return;
   if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
-  if (eventType === 'published_site_pageview' && isFirstPageview) {
-    isFirstPageview = false;
-  }
   safeWindow.__framer_events.push([eventType, {
     // Base properties common to all events
-    referrer: isFirstPageview ? safeWindow.document.referrer : null,
+    referrer: null,
+    // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
     url: safeWindow.location.href,
     hostname: safeWindow.location.hostname || null,
     pathname: safeWindow.location.pathname || null,
@@ -33769,7 +33766,7 @@ function maybeReplaceAnchorWithSpan(component,) {
   return component;
 }
 function useTrackLinkClick({
-  showAdvancedAnalytics,
+  newTrackingEventsEnabled,
   nodeId,
   clickTrackingId,
   router,
@@ -33778,7 +33775,7 @@ function useTrackLinkClick({
 },) {
   return useCallback(async (hrefAttribute) => {
     var _a, _b, _c, _d, _e;
-    if (!showAdvancedAnalytics || !((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    if (!newTrackingEventsEnabled || !((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
     const pageviewEventData = router.pageviewEventData.current;
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!isLinkToWebPage(pageLink,)) {
@@ -33815,7 +33812,7 @@ function useTrackLinkClick({
       targetWebPageId,
       targetCollectionItemId,
     },);
-  }, [showAdvancedAnalytics, nodeId, clickTrackingId, router, href, activeLocale,],);
+  }, [newTrackingEventsEnabled, nodeId, clickTrackingId, router, href, activeLocale,],);
 }
 function makeUrlAbsolute(href,) {
   try {
@@ -33892,10 +33889,10 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     activeLocale,
   } = useLocaleInfo();
   const {
-    showAdvancedAnalytics,
+    newTrackingEvents,
   } = useLibraryFeatures();
   const trackLinkClick = useTrackLinkClick({
-    showAdvancedAnalytics,
+    newTrackingEventsEnabled: newTrackingEvents,
     nodeId,
     clickTrackingId,
     router,
@@ -34148,13 +34145,13 @@ function addUTMTagsToFormData(data2, document2,) {
   } catch (e) {}
 }
 function trackFormSubmit({
-  showAdvancedAnalytics,
+  newTrackingEventsEnabled,
   router,
   nodeId,
   submitTrackingId,
 },) {
   var _a;
-  if (!showAdvancedAnalytics || !((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
+  if (!newTrackingEventsEnabled || !((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
   const pageviewEventData = router.pageviewEventData.current;
   const eventData = {
     ...pageviewEventData,
@@ -34252,7 +34249,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     onLoading,
   };
   const {
-    showAdvancedAnalytics,
+    newTrackingEvents,
   } = useLibraryFeatures();
   async function redirectTo(link,) {
     var _a, _b;
@@ -34297,7 +34294,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     try {
       (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
       trackFormSubmit({
-        showAdvancedAnalytics,
+        newTrackingEventsEnabled: newTrackingEvents,
         router,
         nodeId,
         submitTrackingId,
@@ -34516,6 +34513,7 @@ function Router({
   const [dep, forceUpdate,] = useForceUpdate3();
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const startNavigation = useNavigationTransition(enableAsyncURLUpdates,);
+  const skipFirstPageView = useRef(true,);
   const currentRouteRef = useRef(initialRoute,);
   const currentPathVariablesRef = useRef(initialPathVariables,);
   const currentLocaleIdRef = useRef(initialLocaleId,);
@@ -34708,10 +34706,10 @@ function Router({
   const framerSiteId = useContext(FormContext,);
   const pageviewEventData = useRef();
   const {
-    showAdvancedAnalytics,
+    newTrackingEvents,
   } = useLibraryFeatures();
   useEffect(() => {
-    if (!showAdvancedAnalytics) return;
+    if (!newTrackingEvents) return;
     void (async () => {
       var _a;
       let collectionItemId = null;
@@ -34722,18 +34720,20 @@ function Router({
           collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
         }
       }
-      sendTrackingEvent(
-        'published_site_pageview',
-        pageviewEventData.current = getPageviewEventData({
-          framerSiteId: framerSiteId ?? null,
-          routeId: currentRouteId,
-          routePath: currentRoute == null ? void 0 : currentRoute.path,
-          collectionItemId,
-          localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
-        },),
-      );
+      pageviewEventData.current = getPageviewEventData({
+        framerSiteId: framerSiteId ?? null,
+        routeId: currentRouteId,
+        routePath: currentRoute == null ? void 0 : currentRoute.path,
+        collectionItemId,
+        localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
+      },);
+      if (skipFirstPageView.current) {
+        skipFirstPageView.current = false;
+        return;
+      }
+      sendTrackingEvent('published_site_pageview', pageviewEventData.current,);
     })();
-  }, [showAdvancedAnalytics, framerSiteId, currentRouteId, currentRoute, activeLocale, currentPathVariables, collectionUtils,],);
+  }, [newTrackingEvents, framerSiteId, currentRouteId, currentRoute, activeLocale, currentPathVariables, collectionUtils,],);
   const api = useMemo(() => ({
     navigate,
     getRoute,
