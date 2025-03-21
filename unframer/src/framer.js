@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4HEODI2H.mjs
+// /:https://app.framerstatic.com/framer.XJ5BRUQR.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -24898,7 +24898,9 @@ function localShadowFrame(shadow, frame2, isSVG = false,) {
     minY = -Math.abs(shadow.y,) - growth;
     maxY = Math.abs(shadow.y,) + frame2.height + growth;
   } else if (BoxShadow.is(shadow,) && shadow.type === 'realistic') {
-    growth = calcMaxRealisticShadowBlur(distance(shadow.x, shadow.y,), shadow.focus,) + calcRealisticShadowSpread(shadow.diffusion,);
+    growth = 'focus' in shadow && 'diffusion' in shadow
+      ? calcMaxRealisticShadowBlur(distance(shadow.x, shadow.y,), shadow.focus,) + calcRealisticShadowSpread(shadow.diffusion,)
+      : 0;
     if (shadow.x >= 0) {
       minX = 0 - growth;
       maxX = shadow.x + frame2.width + growth;
@@ -24914,7 +24916,9 @@ function localShadowFrame(shadow, frame2, isSVG = false,) {
       maxY = frame2.height + growth;
     }
   } else {
-    growth += shadow.spread;
+    if ('spread' in shadow) {
+      growth += shadow.spread;
+    }
     minX = shadow.x - growth;
     maxX = shadow.x + frame2.width + growth;
     minY = shadow.y - growth;
@@ -35425,6 +35429,7 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
   const promises = [];
   const resolvedLinks = links.map((link) => {
     if (!link) return void 0;
+    if (isString(link,)) return resolveLinkInternal(link, router,);
     return resolveLinkInternal(link.href, router, link.implicitPathVariables, link.refKey, (unresolvedPathSlugs, unresolvedHashSlugs,) => {
       function handleSlugs(slugs,) {
         const result = {};
