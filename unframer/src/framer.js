@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.XJ5BRUQR.mjs
+// /:https://app.framerstatic.com/framer.73H42MHI.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -19468,12 +19468,19 @@ var richTextCSSRules = [
     `, /* css */
   `
         table.framer-text,
-        .framer-table-wrapper table {
+        .framer-table-wrapper table.framer-text {
             border-collapse: separate;
             border-spacing: 0;
             table-layout: auto;
-            white-space: nowrap;
+            word-break: normal;
             width: 100%;
+        }
+    `, /* css */
+  `
+        td.framer-text,
+        th.framer-text {
+            min-width: 16ch;
+            vertical-align: top;
         }
     `, /* css */
   `
