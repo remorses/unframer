@@ -7,9 +7,9 @@ import {
   __privateSet,
   __publicField,
   __toESM,
-} from './framer-chunks/chunk-H7SXYDQJ.js';
+} from './framer-chunks/chunk-2JNOE5PX.js';
 
-// /:https://app.framerstatic.com/chunk-4Z6NVKPU.mjs
+// /:https://app.framerstatic.com/chunk-RKC6CDUL.mjs
 import { createContext, } from 'react';
 import { useCallback, useContext, useEffect, useId, } from 'react';
 import { useLayoutEffect, } from 'react';
@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.73H42MHI.mjs
+// /:https://app.framerstatic.com/framer.VXACZ4AY.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -10446,7 +10446,7 @@ var require_hsluv = __commonJS({
       value: true,
     },);
     exports.Hsluv = void 0;
-    var Hsluv2 = class {
+    var Hsluv2 = class _Hsluv {
       constructor() {
         this.hex = '#000000';
         this.rgb_r = 0;
@@ -10495,28 +10495,28 @@ var require_hsluv = __commonJS({
         }
       }
       static yToL(Y,) {
-        if (Y <= Hsluv2.epsilon) {
-          return Y / Hsluv2.refY * Hsluv2.kappa;
+        if (Y <= _Hsluv.epsilon) {
+          return Y / _Hsluv.refY * _Hsluv.kappa;
         } else {
-          return 116 * Math.pow(Y / Hsluv2.refY, 1 / 3,) - 16;
+          return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
         }
       }
       static lToY(L,) {
         if (L <= 8) {
-          return Hsluv2.refY * L / Hsluv2.kappa;
+          return _Hsluv.refY * L / _Hsluv.kappa;
         } else {
-          return Hsluv2.refY * Math.pow((L + 16) / 116, 3,);
+          return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
         }
       }
       static rgbChannelToHex(chan,) {
         const c = Math.round(chan * 255,);
         const digit2 = c % 16;
         const digit1 = (c - digit2) / 16 | 0;
-        return Hsluv2.hexChars.charAt(digit1,) + Hsluv2.hexChars.charAt(digit2,);
+        return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
       }
       static hexToRgbChannel(hex2, offset,) {
-        const digit1 = Hsluv2.hexChars.indexOf(hex2.charAt(offset,),);
-        const digit2 = Hsluv2.hexChars.indexOf(hex2.charAt(offset + 1,),);
+        const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
+        const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
         const n = digit1 * 16 + digit2;
         return n / 255;
       }
@@ -10536,25 +10536,25 @@ var require_hsluv = __commonJS({
       }
       rgbToHex() {
         this.hex = '#';
-        this.hex += Hsluv2.rgbChannelToHex(this.rgb_r,);
-        this.hex += Hsluv2.rgbChannelToHex(this.rgb_g,);
-        this.hex += Hsluv2.rgbChannelToHex(this.rgb_b,);
+        this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
+        this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
+        this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
       }
       hexToRgb() {
         this.hex = this.hex.toLowerCase();
-        this.rgb_r = Hsluv2.hexToRgbChannel(this.hex, 1,);
-        this.rgb_g = Hsluv2.hexToRgbChannel(this.hex, 3,);
-        this.rgb_b = Hsluv2.hexToRgbChannel(this.hex, 5,);
+        this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
+        this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
+        this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
       }
       xyzToRgb() {
-        this.rgb_r = Hsluv2.fromLinear(Hsluv2.m_r0 * this.xyz_x + Hsluv2.m_r1 * this.xyz_y + Hsluv2.m_r2 * this.xyz_z,);
-        this.rgb_g = Hsluv2.fromLinear(Hsluv2.m_g0 * this.xyz_x + Hsluv2.m_g1 * this.xyz_y + Hsluv2.m_g2 * this.xyz_z,);
-        this.rgb_b = Hsluv2.fromLinear(Hsluv2.m_b0 * this.xyz_x + Hsluv2.m_b1 * this.xyz_y + Hsluv2.m_b2 * this.xyz_z,);
+        this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
+        this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
+        this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
       }
       rgbToXyz() {
-        const lr = Hsluv2.toLinear(this.rgb_r,);
-        const lg = Hsluv2.toLinear(this.rgb_g,);
-        const lb = Hsluv2.toLinear(this.rgb_b,);
+        const lr = _Hsluv.toLinear(this.rgb_r,);
+        const lg = _Hsluv.toLinear(this.rgb_g,);
+        const lb = _Hsluv.toLinear(this.rgb_b,);
         this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
         this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
         this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
@@ -10570,13 +10570,13 @@ var require_hsluv = __commonJS({
           varU = NaN;
           varV = NaN;
         }
-        this.luv_l = Hsluv2.yToL(this.xyz_y,);
+        this.luv_l = _Hsluv.yToL(this.xyz_y,);
         if (this.luv_l === 0) {
           this.luv_u = 0;
           this.luv_v = 0;
         } else {
-          this.luv_u = 13 * this.luv_l * (varU - Hsluv2.refU);
-          this.luv_v = 13 * this.luv_l * (varV - Hsluv2.refV);
+          this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
+          this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
         }
       }
       luvToXyz() {
@@ -10586,9 +10586,9 @@ var require_hsluv = __commonJS({
           this.xyz_z = 0;
           return;
         }
-        const varU = this.luv_u / (13 * this.luv_l) + Hsluv2.refU;
-        const varV = this.luv_v / (13 * this.luv_l) + Hsluv2.refV;
-        this.xyz_y = Hsluv2.lToY(this.luv_l,);
+        const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
+        const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
+        this.xyz_y = _Hsluv.lToY(this.luv_l,);
         this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
         this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
       }
@@ -10613,16 +10613,16 @@ var require_hsluv = __commonJS({
       }
       calculateBoundingLines(l,) {
         const sub1 = Math.pow(l + 16, 3,) / 1560896;
-        const sub2 = sub1 > Hsluv2.epsilon ? sub1 : l / Hsluv2.kappa;
-        const s1r = sub2 * (284517 * Hsluv2.m_r0 - 94839 * Hsluv2.m_r2);
-        const s2r = sub2 * (838422 * Hsluv2.m_r2 + 769860 * Hsluv2.m_r1 + 731718 * Hsluv2.m_r0);
-        const s3r = sub2 * (632260 * Hsluv2.m_r2 - 126452 * Hsluv2.m_r1);
-        const s1g = sub2 * (284517 * Hsluv2.m_g0 - 94839 * Hsluv2.m_g2);
-        const s2g = sub2 * (838422 * Hsluv2.m_g2 + 769860 * Hsluv2.m_g1 + 731718 * Hsluv2.m_g0);
-        const s3g = sub2 * (632260 * Hsluv2.m_g2 - 126452 * Hsluv2.m_g1);
-        const s1b = sub2 * (284517 * Hsluv2.m_b0 - 94839 * Hsluv2.m_b2);
-        const s2b = sub2 * (838422 * Hsluv2.m_b2 + 769860 * Hsluv2.m_b1 + 731718 * Hsluv2.m_b0);
-        const s3b = sub2 * (632260 * Hsluv2.m_b2 - 126452 * Hsluv2.m_b1);
+        const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l / _Hsluv.kappa;
+        const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
+        const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
+        const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
+        const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
+        const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
+        const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
+        const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
+        const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
+        const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
         this.r0s = s1r / s3r;
         this.r0i = s2r * l / s3r;
         this.r1s = s1r / (s3r + 126452);
@@ -10637,23 +10637,23 @@ var require_hsluv = __commonJS({
         this.b1i = (s2b - 769860) * l / (s3b + 126452);
       }
       calcMaxChromaHpluv() {
-        const r0 = Hsluv2.distanceFromOrigin(this.r0s, this.r0i,);
-        const r1 = Hsluv2.distanceFromOrigin(this.r1s, this.r1i,);
-        const g0 = Hsluv2.distanceFromOrigin(this.g0s, this.g0i,);
-        const g1 = Hsluv2.distanceFromOrigin(this.g1s, this.g1i,);
-        const b0 = Hsluv2.distanceFromOrigin(this.b0s, this.b0i,);
-        const b1 = Hsluv2.distanceFromOrigin(this.b1s, this.b1i,);
-        return Hsluv2.min6(r0, r1, g0, g1, b0, b1,);
+        const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
+        const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
+        const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
+        const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
+        const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
+        const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
+        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
       }
       calcMaxChromaHsluv(h,) {
         const hueRad = h / 360 * Math.PI * 2;
-        const r0 = Hsluv2.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
-        const r1 = Hsluv2.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
-        const g0 = Hsluv2.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
-        const g1 = Hsluv2.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
-        const b0 = Hsluv2.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
-        const b1 = Hsluv2.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
-        return Hsluv2.min6(r0, r1, g0, g1, b0, b1,);
+        const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
+        const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
+        const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
+        const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
+        const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
+        const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
+        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
       }
       hsluvToLch() {
         if (this.hsluv_l > 99.9999999) {
@@ -10947,167 +10947,10 @@ var require_eventemitter3 = __commonJS({
     }
   },
 },);
-var require_browser = __commonJS({
-  '../../../node_modules/process/browser.js'(exports, module,) {
-    var process5 = module.exports = {};
-    var cachedSetTimeout;
-    var cachedClearTimeout;
-    function defaultSetTimout() {
-      throw new Error('setTimeout has not been defined',);
-    }
-    function defaultClearTimeout() {
-      throw new Error('clearTimeout has not been defined',);
-    }
-    (function () {
-      try {
-        if (typeof setTimeout === 'function') {
-          cachedSetTimeout = setTimeout;
-        } else {
-          cachedSetTimeout = defaultSetTimout;
-        }
-      } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-      }
-      try {
-        if (typeof clearTimeout === 'function') {
-          cachedClearTimeout = clearTimeout;
-        } else {
-          cachedClearTimeout = defaultClearTimeout;
-        }
-      } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-      }
-    })();
-    function runTimeout(fun,) {
-      if (cachedSetTimeout === setTimeout) {
-        return setTimeout(fun, 0,);
-      }
-      if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0,);
-      }
-      try {
-        return cachedSetTimeout(fun, 0,);
-      } catch (e) {
-        try {
-          return cachedSetTimeout.call(null, fun, 0,);
-        } catch (e2) {
-          return cachedSetTimeout.call(this, fun, 0,);
-        }
-      }
-    }
-    function runClearTimeout(marker,) {
-      if (cachedClearTimeout === clearTimeout) {
-        return clearTimeout(marker,);
-      }
-      if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker,);
-      }
-      try {
-        return cachedClearTimeout(marker,);
-      } catch (e) {
-        try {
-          return cachedClearTimeout.call(null, marker,);
-        } catch (e2) {
-          return cachedClearTimeout.call(this, marker,);
-        }
-      }
-    }
-    var queue = [];
-    var draining = false;
-    var currentQueue;
-    var queueIndex = -1;
-    function cleanUpNextTick() {
-      if (!draining || !currentQueue) {
-        return;
-      }
-      draining = false;
-      if (currentQueue.length) {
-        queue = currentQueue.concat(queue,);
-      } else {
-        queueIndex = -1;
-      }
-      if (queue.length) {
-        drainQueue();
-      }
-    }
-    function drainQueue() {
-      if (draining) {
-        return;
-      }
-      var timeout = runTimeout(cleanUpNextTick,);
-      draining = true;
-      var len = queue.length;
-      while (len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-          if (currentQueue) {
-            currentQueue[queueIndex].run();
-          }
-        }
-        queueIndex = -1;
-        len = queue.length;
-      }
-      currentQueue = null;
-      draining = false;
-      runClearTimeout(timeout,);
-    }
-    process5.nextTick = function (fun,) {
-      var args = new Array(arguments.length - 1,);
-      if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-          args[i - 1] = arguments[i];
-        }
-      }
-      queue.push(new Item(fun, args,),);
-      if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue,);
-      }
-    };
-    function Item(fun, array,) {
-      this.fun = fun;
-      this.array = array;
-    }
-    Item.prototype.run = function () {
-      this.fun.apply(null, this.array,);
-    };
-    process5.title = 'browser';
-    process5.browser = true;
-    process5.env = {};
-    process5.argv = [];
-    process5.version = '';
-    process5.versions = {};
-    function noop4() {}
-    process5.on = noop4;
-    process5.addListener = noop4;
-    process5.once = noop4;
-    process5.off = noop4;
-    process5.removeListener = noop4;
-    process5.removeAllListeners = noop4;
-    process5.emit = noop4;
-    process5.prependListener = noop4;
-    process5.prependOnceListener = noop4;
-    process5.listeners = function (name,) {
-      return [];
-    };
-    process5.binding = function (name,) {
-      throw new Error('process.binding is not supported',);
-    };
-    process5.cwd = function () {
-      return '/';
-    };
-    process5.chdir = function (dir,) {
-      throw new Error('process.chdir is not supported',);
-    };
-    process5.umask = function () {
-      return 0;
-    };
-  },
-},);
 var require_resize_observer_umd = __commonJS({
   '../../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.umd.js'(exports, module,) {
+    'use strict';
+
     (function (global, factory,) {
       typeof exports === 'object' && typeof module !== 'undefined'
         ? factory(exports,)
@@ -11395,7 +11238,7 @@ var require_resize_observer_umd = __commonJS({
           },);
         },);
       };
-      var process5 = function () {
+      var process2 = function () {
         var depth = 0;
         gatherActiveObservationsAtDepth(depth,);
         while (hasActiveObservations()) {
@@ -11491,7 +11334,7 @@ var require_resize_observer_umd = __commonJS({
           queueResizeObserver(function () {
             var elementsHaveResized = false;
             try {
-              elementsHaveResized = process5();
+              elementsHaveResized = process2();
             } finally {
               scheduled = false;
               timeout = until - time2();
@@ -11889,6 +11732,8 @@ var require_hoist_non_react_statics_cjs = __commonJS({
 },);
 var require_fontfaceobserver_standalone = __commonJS({
   '../../../node_modules/fontfaceobserver/fontfaceobserver.standalone.js'(exports, module,) {
+    'use strict';
+
     (function () {
       function l(a, b,) {
         document.addEventListener ? a.addEventListener('scroll', b, false,) : a.attachEvent('scroll', b,);
@@ -12164,9 +12009,6 @@ function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect
   }, deps,);
 }
 var EMPTY_ARRAY = [];
-var requestIdleCallback = /* @__PURE__ */ (() => {
-  return typeof window !== 'undefined' ? window.requestIdleCallback || window.setTimeout : setTimeout;
-})();
 var objectKeys = Object.keys;
 function hasProp(o, prop,) {
   return Object.prototype.hasOwnProperty.call(o, prop,);
@@ -12423,9 +12265,13 @@ function isGenerator2(value,) {
   return isObject(value,) && isFunction(value.return,);
 }
 var noop2 = () => {};
-var isBot = /* @__PURE__ */ (() => {
-  return typeof window !== 'undefined' && /bot|-google|google-|yandex|ia_archiver/iu.test(__unframerNavigator2.userAgent,);
-})();
+var isWindow = typeof window !== 'undefined';
+var isBot =
+  /* @__PURE__ */ (() => isWindow && /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,))();
+var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
+var requestIdleCallback = /* @__PURE__ */ (() =>
+  // eslint-disable-next-line compat/compat,framer-studio/tscompat
+  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
 var shouldPreloadBasedOnUA = !isBot;
 function useRoutePreloader(routeIds, enabled = true,) {
   const {
@@ -12513,7 +12359,7 @@ var mockWindow = {
   open: function (_url, _target, _features,) {},
   __framer_events: [],
 };
-var safeWindow = typeof window === 'undefined' ? mockWindow : window;
+var safeWindow = !isWindow ? mockWindow : window;
 var timezone;
 var visitorLocale;
 function setTimezoneAndLocaleForTracking() {
@@ -13390,6 +13236,10 @@ function useReplaceInitialState({
     );
   }, [],);
 }
+var supportsNavigationAPI = /* @__PURE__ */ (() => {
+  var _a;
+  return isWindow && typeof ((_a = window.navigation) == null ? void 0 : _a.back) === 'function';
+})();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change-popstate',);
@@ -13447,13 +13297,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     },);
   }, [],);
   useEffect(() => {
-    var _a;
     window.addEventListener('popstate', popStateHandler,);
-    (_a = window.navigation) == null ? void 0 : _a.addEventListener('navigate', traversalHandler,);
+    if (supportsNavigationAPI) window.navigation.addEventListener('navigate', traversalHandler,);
     return () => {
-      var _a2;
       window.removeEventListener('popstate', popStateHandler,);
-      (_a2 = window.navigation) == null ? void 0 : _a2.removeEventListener('navigate', traversalHandler,);
+      if (supportsNavigationAPI) window.navigation.removeEventListener('navigate', traversalHandler,);
     };
   }, [popStateHandler, traversalHandler,],);
 }
@@ -13569,7 +13417,7 @@ function useNativeLoadingSpinner() {
     },);
   }, [],);
   return useCallback((promise, updateURL, controller,) => {
-    if (!window.navigation) {
+    if (!supportsNavigationAPI) {
       void updateURL();
       return;
     }
@@ -13577,7 +13425,7 @@ function useNativeLoadingSpinner() {
     navigationController.current = controller;
     window.navigation.addEventListener('navigate', navigateListener,);
     void updateURL(true,);
-    promise.catch(noop2,).finally(() => {
+    void promise.finally(() => {
       window.navigation.removeEventListener('navigate', navigateListener,);
     },);
   }, [navigateListener,],);
@@ -13801,7 +13649,7 @@ function setHydrationDone() {
   hydrationRunning = false;
 }
 function useIsHydrationOrSSR() {
-  const isHydrationOrSSR = useRef(typeof window === 'undefined' || hydrationRunning,);
+  const isHydrationOrSSR = useRef(!isWindow || hydrationRunning,);
   useEffect(() => {
     isHydrationOrSSR.current = false;
   }, [],);
@@ -15616,6 +15464,291 @@ function parseIntFromHex(hex2,) {
 function convertHexToDecimal(h,) {
   return parseIntFromHex(h,) / 255;
 }
+var p3Matcher =
+  /^color\(display-p3\s+(?<r>\d+\.\d+|\d+|\.\d+)\s+(?<g>\d+\.\d+|\d+|\.\d+)\s+(?<b>\d+\.\d+|\d+|\.\d+)(?:\s*\/\s*(?<a>\d+\.\d+|\d+|\.\d+))?\)$/u;
+function parseP3(color2,) {
+  const match = p3Matcher.exec(color2,);
+  if (!match) return null;
+  const {
+    r = '0',
+    g = '0',
+    b = '0',
+    a,
+  } = match.groups ?? {};
+  return {
+    r: parseFloat(r,),
+    g: parseFloat(g,),
+    b: parseFloat(b,),
+    a: a ? parseFloat(a,) : 1,
+  };
+}
+function convertRGBChannelToLrgb(c = 0,) {
+  const abs = Math.abs(c,);
+  if (abs <= 0.04045) return c / 12.92;
+  return (Math.sign(c,) || 1) * ((abs + 0.055) / 1.055) ** 2.4;
+}
+function convertRgbToLrgb({
+  r,
+  g,
+  b,
+  a,
+},) {
+  return {
+    r: convertRGBChannelToLrgb(r,),
+    g: convertRGBChannelToLrgb(g,),
+    b: convertRGBChannelToLrgb(b,),
+    a,
+  };
+}
+function convertLrgbChannelToRgb(c = 0,) {
+  const abs = Math.abs(c,);
+  if (abs > 31308e-7) return (Math.sign(c,) || 1) * (1.055 * abs ** (1 / 2.4) - 0.055);
+  return c * 12.92;
+}
+function convertLrgbToRgb({
+  r,
+  g,
+  b,
+  a,
+},) {
+  return {
+    r: convertLrgbChannelToRgb(r,),
+    g: convertLrgbChannelToRgb(g,),
+    b: convertLrgbChannelToRgb(b,),
+    a,
+  };
+}
+var convertP3ToXyz65 = (color2) => {
+  const {
+    r,
+    g,
+    b,
+    a,
+  } = convertRgbToLrgb(color2,);
+  return {
+    x: 0.486570948648216 * r + 0.265667693169093 * g + 0.1982172852343625 * b,
+    y: 0.2289745640697487 * r + 0.6917385218365062 * g + 0.079286914093745 * b,
+    z: 0 * r + 0.0451133818589026 * g + 1.043944368900976 * b,
+    a,
+  };
+};
+var convertXyz65ToRgb = ({
+  x = 0,
+  y = 0,
+  z = 0,
+  a = 1,
+},) => {
+  return convertLrgbToRgb({
+    r: x * 3.2409699419045226 - y * 1.537383177570094 - 0.4986107602930034 * z,
+    g: x * -0.9692436362808796 + y * 1.8759675015077204 + 0.0415550574071756 * z,
+    b: x * 0.0556300796969936 - y * 0.2039769588889765 + 1.0569715142428784 * z,
+    a,
+  },);
+};
+var convertRgbToXyz65 = (color2) => {
+  const {
+    r,
+    g,
+    b,
+    a,
+  } = convertRgbToLrgb(color2,);
+  return {
+    x: 0.4123907992659593 * r + 0.357584339383878 * g + 0.1804807884018343 * b,
+    y: 0.2126390058715102 * r + 0.715168678767756 * g + 0.0721923153607337 * b,
+    z: 0.0193308187155918 * r + 0.119194779794626 * g + 0.9505321522496607 * b,
+    a,
+  };
+};
+var convertXyz65ToP3 = ({
+  x = 0,
+  y = 0,
+  z = 0,
+  a = 1,
+},) => {
+  return convertLrgbToRgb({
+    r: x * 2.4934969119414263 - y * 0.9313836179191242 - 0.402710784450717 * z,
+    g: x * -0.8294889695615749 + y * 1.7626640603183465 + 0.0236246858419436 * z,
+    b: x * 0.0358458302437845 - y * 0.0761723892680418 + 0.9568845240076871 * z,
+    a,
+  },);
+};
+function convertRGBToHSV({
+  r,
+  g,
+  b,
+  a,
+},) {
+  const M = Math.max(r, g, b,),
+    m2 = Math.min(r, g, b,);
+  const res = {
+    h: 0,
+    s: M === 0 ? 0 : 1 - m2 / M,
+    v: M,
+    a,
+  };
+  if (M - m2 !== 0) {
+    res.h = (M === r ? (g - b) / (M - m2) + (g < b ? 6 : 0) : M === g ? (b - r) / (M - m2) + 2 : (r - g) / (M - m2) + 4) * 60;
+  }
+  return res;
+}
+function normalizeHue(hue,) {
+  return (hue = hue % 360) < 0 ? hue + 360 : hue;
+}
+function convertHsvToRgb({
+  h = 0,
+  s = 0,
+  v = 0,
+  a = 1,
+},) {
+  const hue = normalizeHue(h,);
+  const f = Math.abs(hue / 60 % 2 - 1,);
+  switch (Math.floor(hue / 60,)) {
+    case 0:
+      return {
+        r: v,
+        g: v * (1 - s * f),
+        b: v * (1 - s),
+        a,
+      };
+    case 1:
+      return {
+        r: v * (1 - s * f),
+        g: v,
+        b: v * (1 - s),
+        a,
+      };
+    case 2:
+      return {
+        r: v * (1 - s),
+        g: v,
+        b: v * (1 - s * f),
+        a,
+      };
+    case 3:
+      return {
+        r: v * (1 - s),
+        g: v * (1 - s * f),
+        b: v,
+        a,
+      };
+    case 4:
+      return {
+        r: v * (1 - s * f),
+        g: v * (1 - s),
+        b: v,
+        a,
+      };
+    case 5:
+      return {
+        r: v,
+        g: v * (1 - s),
+        b: v * (1 - s * f),
+        a,
+      };
+    default:
+      return {
+        r: v * (1 - s),
+        g: v * (1 - s),
+        b: v * (1 - s),
+        a,
+      };
+  }
+}
+function convertRgbToP3(color2,) {
+  return convertXyz65ToP3(convertRgbToXyz65(color2,),);
+}
+function convertP3ToRgb(color2,) {
+  return convertXyz65ToRgb(convertP3ToXyz65(color2,),);
+}
+var P3Color = class _P3Color {
+  constructor(color2,) {
+    __publicField(this, 'format',);
+    __publicField(this, 'r',);
+    __publicField(this, 'g',);
+    __publicField(this, 'b',);
+    __publicField(this, 'a',);
+    this.r = color2.r ?? 0;
+    this.g = color2.g ?? 0;
+    this.b = color2.b ?? 0;
+    this.a = color2.a ?? 1;
+  }
+  hsv() {
+    return convertRGBToHSV(this,);
+  }
+  rgb() {
+    return convertP3ToRgb(this,);
+  }
+  hsl() {
+    return rgbToHsl(this.r, this.g, this.b,);
+  }
+  toString(space = 'p3', overrides,) {
+    switch (space) {
+      case 'p3': {
+        const r = (overrides == null ? void 0 : overrides.r) ?? this.r;
+        const g = (overrides == null ? void 0 : overrides.g) ?? this.g;
+        const b = (overrides == null ? void 0 : overrides.b) ?? this.b;
+        const a = (overrides == null ? void 0 : overrides.a) ?? this.a;
+        return a === 1 ? `color(display-p3 ${r} ${g} ${b})` : `color(display-p3 ${r} ${g} ${b} / ${a})`;
+      }
+      case 'srgb': {
+        const color2 = this.rgb();
+        const clampedR = Math.round(Math.max(0, Math.min(color2.r, 1,),) * 100,) / 100;
+        const clampedG = Math.round(Math.max(0, Math.min(color2.g, 1,),) * 100,) / 100;
+        const clampedB = Math.round(Math.max(0, Math.min(color2.b, 1,),) * 100,) / 100;
+        const r = (overrides == null ? void 0 : overrides.r) ?? clampedR * 255;
+        const g = (overrides == null ? void 0 : overrides.g) ?? clampedG * 255;
+        const b = (overrides == null ? void 0 : overrides.b) ?? clampedB * 255;
+        const a = (overrides == null ? void 0 : overrides.a) ?? color2.a ?? 1;
+        return a === 1 ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a})`;
+      }
+    }
+  }
+  static isP3String(color2,) {
+    return color2.startsWith('color(display-p3',);
+  }
+  static fromHSV(color2, space = 'p3',) {
+    switch (space) {
+      case 'p3':
+        return new _P3Color(convertHsvToRgb(color2,),);
+      case 'srgb':
+        return new _P3Color(convertRgbToP3(convertHsvToRgb(color2,),),);
+    }
+  }
+  static fromRGB(color2,) {
+    return new _P3Color(convertRgbToP3({
+      // Converted an rgb value between 0-255 to a 0-1 decimal with 5 decimal places -> 0.78607.
+      r: Math.round(color2.r / 255 * 1e4,) / 1e4,
+      g: Math.round(color2.g / 255 * 1e4,) / 1e4,
+      b: Math.round(color2.b / 255 * 1e4,) / 1e4,
+      a: color2.a ?? 1,
+    },),);
+  }
+  static fromRGBString(color2,) {
+    const value = Color(color2,);
+    if (!value) return void 0;
+    return _P3Color.fromRGB(value,);
+  }
+  static fromString(color2,) {
+    if (!_P3Color.isP3String(color2,)) return void 0;
+    const parsed = parseP3(color2,);
+    if (!parsed) return void 0;
+    return new _P3Color({
+      r: parsed.r,
+      g: parsed.g,
+      b: parsed.b,
+      a: parsed.a,
+    },);
+  }
+  static srgbFromValue(color2,) {
+    if (!isString(color2,) || !Color.isP3String(color2,)) return color2;
+    const value = _P3Color.fromString(color2,);
+    if (!value) return color2;
+    return value.toString('srgb',);
+  }
+};
+function clampRGB(color2,) {
+  return P3Color.srgbFromValue(color2,);
+}
 var cache = /* @__PURE__ */ new Map();
 var Color = /* @__PURE__ */ (() => {
   function Color2(color2, r, g, b,) {
@@ -15692,9 +15825,9 @@ var Color = /* @__PURE__ */ (() => {
     return false;
   };
   Color2.isColorObject = (color2) => {
-    return color2 && typeof color2 !== 'string' && typeof color2.r === 'number' && typeof color2.g === 'number' &&
-      typeof color2.b === 'number' && typeof color2.h === 'number' && typeof color2.s === 'number' && typeof color2.l === 'number' &&
-      typeof color2.a === 'number' && typeof color2.roundA === 'number' && typeof color2.format === 'string';
+    return isObject(color2,) && typeof color2.r === 'number' && typeof color2.g === 'number' && typeof color2.b === 'number' &&
+      typeof color2.h === 'number' && typeof color2.s === 'number' && typeof color2.l === 'number' && typeof color2.a === 'number' &&
+      typeof color2.roundA === 'number' && typeof color2.format === 'string';
   };
   Color2.toString = (color2) => {
     return Color2.toRgbString(color2,);
@@ -15704,6 +15837,10 @@ var Color = /* @__PURE__ */ (() => {
   };
   Color2.toHexString = (color2, allow3Char = false,) => {
     return `#${Color2.toHex(color2, allow3Char,)}`;
+  };
+  Color2.isP3String = (color2) => {
+    if (typeof color2 !== 'string') return false;
+    return P3Color.isP3String(color2,);
   };
   Color2.toRgbString = (color2) => {
     return color2.a === 1
@@ -16127,7 +16264,7 @@ var DefaultInterpolationOptions = {
   colorModel: 'husl',
   /* HUSL */
 };
-var ValueInterpolation = class {
+var ValueInterpolation = class _ValueInterpolation {
   /**
    * @internal
    */
@@ -16164,7 +16301,7 @@ var ValueInterpolation = class {
       const constructor = value.constructor;
       if (constructor && isInterpolatable(constructor,)) {
         const interpolation = constructor.interpolationFor(value, this,);
-        if (interpolation && interpolation !== this && interpolation.constructor !== ValueInterpolation) {
+        if (interpolation && interpolation !== this && interpolation.constructor !== _ValueInterpolation) {
           return interpolation;
         }
       }
@@ -16572,7 +16709,7 @@ var DefaultDeprecatedAnimationOptions = {
   colorModel: 'husl',
   /* HUSL */
 };
-var FramerAnimation = class {
+var FramerAnimation = class _FramerAnimation {
   /**
    * @internal
    */
@@ -16615,11 +16752,11 @@ var FramerAnimation = class {
     animator.setFrom(from,);
     animator.setTo(to,);
     const updateCallback = (value) => {
-      FramerAnimation.driverCallbackHandler(target, value,);
+      _FramerAnimation.driverCallbackHandler(target, value,);
     };
     const finishedCallback = (isFinished) => {
       if (isFinished) {
-        FramerAnimation.driverCallbackHandler(target, to,);
+        _FramerAnimation.driverCallbackHandler(target, to,);
         if (this.playStateSource === 'running') {
           this.playStateValue = 'finished';
         }
@@ -19146,7 +19283,211 @@ var deprecatedRichTextCSSRules = [
   richTextStylesNumberedListMarker,
   richTextStylesBulletedListMarker,
 ];
-var richTextCSSRules = [
+var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2) => {
+  FormInputStyleVariableNames2['Padding'] = '--framer-input-padding';
+  FormInputStyleVariableNames2['BorderRadiusTopLeft'] = '--framer-input-border-radius-top-left';
+  FormInputStyleVariableNames2['BorderRadiusTopRight'] = '--framer-input-border-radius-top-right';
+  FormInputStyleVariableNames2['BorderRadiusBottomRight'] = '--framer-input-border-radius-bottom-right';
+  FormInputStyleVariableNames2['BorderRadiusBottomLeft'] = '--framer-input-border-radius-bottom-left';
+  FormInputStyleVariableNames2['BorderColor'] = '--framer-input-border-color';
+  FormInputStyleVariableNames2['BorderTopWidth'] = '--framer-input-border-top-width';
+  FormInputStyleVariableNames2['BorderRightWidth'] = '--framer-input-border-right-width';
+  FormInputStyleVariableNames2['BorderBottomWidth'] = '--framer-input-border-bottom-width';
+  FormInputStyleVariableNames2['BorderLeftWidth'] = '--framer-input-border-left-width';
+  FormInputStyleVariableNames2['BorderStyle'] = '--framer-input-border-style';
+  FormInputStyleVariableNames2['Background'] = '--framer-input-background';
+  FormInputStyleVariableNames2['FontFamily'] = '--framer-input-font-family';
+  FormInputStyleVariableNames2['FontWeight'] = '--framer-input-font-weight';
+  FormInputStyleVariableNames2['FontSize'] = '--framer-input-font-size';
+  FormInputStyleVariableNames2['FontColor'] = '--framer-input-font-color';
+  FormInputStyleVariableNames2['FontStyle'] = '--framer-input-font-style';
+  FormInputStyleVariableNames2['FontLetterSpacing'] = '--framer-input-font-letter-spacing';
+  FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
+  FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
+  FormInputStyleVariableNames2['FontOpenType'] = '--framer-input-font-open-type-features';
+  FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
+  FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
+  FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
+  FormInputStyleVariableNames2['FocusedBorderWidth'] = '--framer-input-focused-border-width';
+  FormInputStyleVariableNames2['FocusedBorderStyle'] = '--framer-input-focused-border-style';
+  FormInputStyleVariableNames2['FocusedBackground'] = '--framer-input-focused-background';
+  FormInputStyleVariableNames2['FocusedBoxShadow'] = '--framer-input-focused-box-shadow';
+  FormInputStyleVariableNames2['FocusedTransition'] = '--framer-input-focused-transition';
+  FormInputStyleVariableNames2['BooleanCheckedBackground'] = '--framer-input-boolean-checked-background';
+  FormInputStyleVariableNames2['BooleanCheckedBorderColor'] = '--framer-input-boolean-checked-border-color';
+  FormInputStyleVariableNames2['BooleanCheckedBorderWidth'] = '--framer-input-boolean-checked-border-width';
+  FormInputStyleVariableNames2['BooleanCheckedBorderStyle'] = '--framer-input-boolean-checked-border-style';
+  FormInputStyleVariableNames2['BooleanCheckedBoxShadow'] = '--framer-input-boolean-checked-box-shadow';
+  FormInputStyleVariableNames2['BooleanCheckedTransition'] = '--framer-input-boolean-checked-transition';
+  FormInputStyleVariableNames2['InvalidTextColor'] = '--framer-input-invalid-text-color';
+  FormInputStyleVariableNames2['IconBackgroundImage'] = '--framer-input-icon-image';
+  FormInputStyleVariableNames2['IconMaskImage'] = '--framer-input-icon-mask-image';
+  FormInputStyleVariableNames2['IconColor'] = '--framer-input-icon-color';
+  FormInputStyleVariableNames2['WrapperHeight'] = '--framer-input-wrapper-height';
+  return FormInputStyleVariableNames2;
+})(FormInputStyleVariableNames || {},);
+var Var = FormInputStyleVariableNames;
+var inputClassName = 'framer-form-input';
+var inputWrapperClassName = 'framer-form-input-wrapper';
+var emptyValueClassName = 'framer-form-input-empty';
+var forcedFocusClassName = 'framer-form-input-forced-focus';
+var forcedCheckedClassName = 'framer-form-input-forced-checked';
+function cssValue(value,) {
+  if (typeof value === 'number') return value;
+  if (value.startsWith('--',)) return css.variable(value,);
+  if (value === '') return '""';
+  return value;
+}
+function css(selector, declaration,) {
+  let output = ' ';
+  for (const key7 in declaration) {
+    const value = declaration[key7];
+    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
+  }
+  return selector + ' {' + output + '}';
+}
+((css2) => {
+  function variable(...variables) {
+    const lastItem = variables[variables.length - 1];
+    let value = lastItem.startsWith('--',) ? `var(${lastItem})` : lastItem;
+    for (let index = variables.length - 2; index >= 0; index--) {
+      const element = variables[index];
+      value = `var(${element}, ${value})`;
+    }
+    return value;
+  }
+  css2.variable = variable;
+})(css || (css = {}),);
+var sharedInputCSS = [
+  css(`.${inputClassName}`, {
+    padding: css.variable(Var.Padding,),
+    background: 'transparent',
+    fontFamily: css.variable(Var.FontFamily,),
+    fontWeight: css.variable(Var.FontWeight,),
+    fontSize: css.variable(Var.FontSize,),
+    fontStyle: css.variable(Var.FontStyle,),
+    color: css.variable(Var.FontColor,),
+    fontFeatureSettings: css.variable(Var.FontOpenType,),
+    border: 'none',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    width: '100%',
+    height: css.variable(Var.WrapperHeight, '100%',),
+    letterSpacing: css.variable(Var.FontLetterSpacing,),
+    textAlign: css.variable(Var.FontTextAlignment,),
+    lineHeight: css.variable(Var.FontLineHeight,),
+  },),
+  css(`.${inputClassName}:focus-visible`, {
+    outline: 'none',
+  },),
+];
+var inputWrapperCSS = /* @__PURE__ */ (() => [css(`.${inputWrapperClassName}`, {
+  overflow: 'hidden',
+},),])();
+var inputBorderAllSides =
+  `var(${Var.BorderTopWidth}) var(${Var.BorderRightWidth}) var(${Var.BorderBottomWidth}) var(${Var.BorderLeftWidth})`;
+var inputBorderCSS = [`.${inputWrapperClassName}:after {
+        content: "";
+        pointer-events: none;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: var(${Var.BorderRadiusTopLeft});
+        border-top-right-radius: var(${Var.BorderRadiusTopRight});
+        border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
+        border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
+        border-color: var(${Var.BorderColor});
+        border-top-width: var(${Var.BorderTopWidth});
+        border-right-width: var(${Var.BorderRightWidth});
+        border-bottom-width: var(${Var.BorderBottomWidth});
+        border-left-width: var(${Var.BorderLeftWidth});
+        border-style: var(${Var.BorderStyle});
+        transition: var(${Var.FocusedTransition});
+        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
+    }`,];
+var customValidityKey = 'customError';
+var validKey = 'valid';
+function isRelevantValidityStateKey(key7,) {
+  return key7 !== customValidityKey && key7 !== validKey;
+}
+function isInvalid(validity,) {
+  for (const key7 in validity) {
+    if (!isRelevantValidityStateKey(key7,)) continue;
+    if ((validity == null ? void 0 : validity[key7]) === true) return true;
+  }
+  return false;
+}
+function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
+  const isValidRef = React4.useRef(null,);
+  const handleInvalid = React4.useCallback((e) => {
+    if (!onInvalid) return;
+    if (isValidRef.current === false) return;
+    isValidRef.current = false;
+    e.currentTarget.setCustomValidity(' ',);
+    e.currentTarget.reportValidity();
+    onInvalid(e,);
+  }, [onInvalid,],);
+  const handleChange = React4.useCallback((e) => {
+    onChange == null ? void 0 : onChange(e,);
+    if (!onInvalid && !onValid) return;
+    const validity = e.target.validity;
+    if (isValidRef.current === false && !isInvalid(validity,)) {
+      e.currentTarget.setCustomValidity('',);
+      e.target.reportValidity();
+      isValidRef.current = true;
+      onValid == null ? void 0 : onValid();
+    }
+  }, [onInvalid, onValid, onChange,],);
+  const handleBlur = React4.useCallback((e) => {
+    if (!onInvalid) {
+      onBlur == null ? void 0 : onBlur(e,);
+      return;
+    }
+    if (isValidRef.current === false) return;
+    const validity = e.currentTarget.validity;
+    if (isInvalid(validity,)) {
+      handleInvalid(e,);
+      return;
+    }
+    onBlur == null ? void 0 : onBlur(e,);
+  }, [handleInvalid, onBlur, onInvalid,],);
+  return React4.useMemo(() => {
+    return {
+      onInvalid: handleInvalid,
+      onChange: handleChange,
+      onBlur: handleBlur,
+      onFocus,
+    };
+  }, [handleInvalid, handleChange, handleBlur, onFocus,],);
+}
+var iconSpacing = 10;
+var iconSize = 16;
+var inputIconCSSDeclaration = {
+  content: '',
+  display: 'block',
+  position: 'absolute',
+  right: 0,
+  top: 0,
+  bottom: 0,
+  width: `${iconSize}px`,
+  boxSizing: 'content-box',
+  padding: css.variable(Var.Padding,),
+  border: 'none',
+  pointerEvents: 'none',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: `${iconSize}px`,
+  maskRepeat: 'no-repeat',
+  maskSize: `${iconSize}px`,
+  backgroundColor: css.variable(Var.IconColor,),
+};
+function createRGBVariableFallbacks(variables, fallback,) {
+  return css.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
+}
+var richTextCSSRules = /* @__PURE__ */ (() => [
   /* css */
   `
         p.framer-text,
@@ -19194,6 +19535,25 @@ var richTextCSSRules = [
             font-feature-settings: var(--framer-font-open-type-features, initial);
             font-variation-settings: var(--framer-font-variation-axes, normal);
             text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap));
+        }
+    `, /* css */
+  `
+        @supports not (color: color(display-p3 1 1 1)) {
+            p.framer-text,
+            div.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            li.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            span.framer-text:not([data-text-fill]) {
+                color: ${createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-text-color',], '#000',)};
+                -webkit-text-stroke-color: ${createRGBVariableFallbacks(['--framer-text-stroke-color',], 'initial',)};
+            }
         }
     `, /* css */
   `
@@ -19287,6 +19647,16 @@ var richTextCSSRules = [
         }
     `, /* css */
   `
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text,
+            code.framer-text span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-code-text-color', '--framer-text-color',], '#000',)
+  };
+            }
+        }
+    `, /* css */
+  `
         blockquote.framer-text {
             margin-block-start: initial;
             margin-block-end: initial;
@@ -19312,6 +19682,18 @@ var richTextCSSRules = [
         }
     `, /* css */
   `
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text,
+            a.framer-text span.framer-text:not([data-text-fill]),
+            span.framer-text[data-nested-link],
+            span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
+  };
+            }
+        }
+    `, /* css */
+  `
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link],
@@ -19321,6 +19703,23 @@ var richTextCSSRules = [
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+        }
+    `, /* css */
+  `
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text,
+            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-nested-link],
+            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks([
+      '--framer-blockquote-text-color',
+      '--framer-link-text-color',
+      '--framer-code-text-color',
+      '--framer-text-color',
+    ], '#000',)
+  };
+            }
         }
     `, /* css */
   `
@@ -19338,6 +19737,23 @@ var richTextCSSRules = [
         }
     `, /* css */
   `
+    @supports not (color: color(display-p3 1 1 1)) {
+        a.framer-text:hover,
+        a.framer-text:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link]:hover,
+        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-color',
+      '--framer-blockquote-text-color',
+      '--framer-link-text-color',
+      '--framer-text-color',
+    ], '#000',)
+  };
+        }
+    }
+    `, /* css */
+  `
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link]:hover,
@@ -19349,6 +19765,23 @@ var richTextCSSRules = [
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
+  `
+    @supports not (color: color(display-p3 1 1 1)) {
+        code.framer-text a.framer-text:hover,
+        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-nested-link]:hover,
+        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-color',
+      '--framer-blockquote-text-color',
+      '--framer-link-text-color',
+      '--framer-text-color',
+    ], '#000',)
+  };
+        }
+    }
+   `, /* css */
   `
         a.framer-text[data-framer-page-link-current],
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
@@ -19364,6 +19797,18 @@ var richTextCSSRules = [
         }
     `, /* css */
   `
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text[data-framer-page-link-current],
+            a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            span.framer-text[data-framer-page-link-current],
+            span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks(['--framer-link-current-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
+  };
+            }
+        }
+    `, /* css */
+  `
         code.framer-text a.framer-text[data-framer-page-link-current],
         code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-framer-page-link-current],
@@ -19373,6 +19818,23 @@ var richTextCSSRules = [
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+        }
+    `, /* css */
+  `
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text[data-framer-page-link-current],
+            code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current],
+            code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-current-text-color',
+      '--framer-link-text-color',
+      '--framer-code-text-color',
+      '--framer-text-color',
+    ], '#000',)
+  };
+            }
         }
     `, /* css */
   `
@@ -19390,6 +19852,24 @@ var richTextCSSRules = [
         }
     `, /* css */
   `
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text[data-framer-page-link-current]:hover,
+            a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            span.framer-text[data-framer-page-link-current]:hover,
+            span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-color',
+      '--framer-link-current-text-color',
+      '--framer-link-text-color',
+      '--framer-code-text-color',
+      '--framer-text-color',
+    ], '#000',)
+  };
+            }
+        }
+    `, /* css */
+  `
         code.framer-text a.framer-text[data-framer-page-link-current]:hover,
         code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-framer-page-link-current]:hover,
@@ -19399,6 +19879,24 @@ var richTextCSSRules = [
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+        }
+    `, /* css */
+  `
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-color',
+      '--framer-link-current-text-color',
+      '--framer-link-text-color',
+      '--framer-code-text-color',
+      '--framer-text-color',
+    ], '#000',)
+  };
+            }
         }
     `, /* css */
   `
@@ -19514,7 +20012,7 @@ var richTextCSSRules = [
             }
         }
     `,
-];
+])();
 var defaultCache = /* @__PURE__ */ new Set();
 var defaultSheet;
 function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
@@ -19913,6 +20411,7 @@ function getControlDefaultValue(control,) {
       case 'trackingid':
       case 'vectorsetitem':
         return void 0;
+      // No default
       default:
         shouldBeNever(control,);
         return void 0;
@@ -21895,7 +22394,6 @@ function backgroundImageFromProps(props,) {
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
 }
-var import_process = __toESM(require_browser(), 1,);
 var safeNavigator = typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
 var isBrowser2 = () => typeof document === 'object';
 var isWebKit = () => {
@@ -21936,7 +22434,7 @@ var isTablet = () => deviceType() === 'tablet';
 var isMobile = () => isPhone() || isTablet();
 var isFileUrl = (url) => url.startsWith('file://',);
 var isDataUrl = (url) => url.startsWith('data:',);
-var isTest = () => import_process.default.env.NODE_ENV === 'test';
+var isTest = () => false;
 var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
 var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/u.test(url,);
 var isLocalUrl = (url) => {
@@ -22453,6 +22951,7 @@ var ConvertColor = {
     return Color(color2,).isValid !== false;
   },
   equals: (a, b,) => {
+    if (Color.isP3String(a,) || Color.isP3String(b,)) return a === b;
     if (typeof a === 'string') {
       a = Color(a,);
     }
@@ -22464,6 +22963,13 @@ var ConvertColor = {
   toHexOrRgbaString: (input) => {
     const color2 = Color(input,);
     return color2.a !== 1 ? Color.toRgbString(color2,) : Color.toHexString(color2,);
+  },
+  /**
+   * Converts a color to a string to consistent formats for animating.
+   */
+  toFormatString: (color2) => {
+    if (Color.isP3String(color2,)) return color2;
+    return Color.toRgbString(Color(color2,),);
   },
 };
 var CSSVariableRegExp = /var\(.+\)/u;
@@ -22518,17 +23024,20 @@ var LinearGradient = {
    * @param value -
    */
   isLinearGradient: (value) => {
-    return value && linearGradientKeys.every((key7) => key7 in value) && (isSimpleGradient(value,) || isMultiStopGradient(value,));
+    return isObject(value,) && linearGradientKeys.every((key7) => key7 in value) &&
+      (isSimpleGradient(value,) || isMultiStopGradient(value,));
   },
   /** @internal */
   hash: (linearGradient) => {
     return linearGradient.angle ^ gradientColorStopsHash(linearGradient, linearGradient.alpha,);
   },
   /** @internal */
-  toCSS: (linearGradient, overrideAngle,) => {
+  toCSS: (linearGradient, overrideAngle, getStopValue,) => {
     const stops = gradientColorStops(linearGradient, linearGradient.alpha,);
     const angle = overrideAngle !== void 0 ? overrideAngle : linearGradient.angle;
-    const cssStops = stops.map((stop) => `${stop.value} ${stop.position * 100}%`);
+    const cssStops = stops.map((stop) =>
+      `${(getStopValue == null ? void 0 : getStopValue(stop.value,)) ?? stop.value} ${stop.position * 100}%`
+    );
     return `linear-gradient(${angle}deg, ${cssStops.join(', ',)})`;
   },
 };
@@ -22539,7 +23048,8 @@ var RadialGradient = {
    * @public
    */
   isRadialGradient: (value) => {
-    return value && radialGradientKeys.every((key7) => key7 in value) && (isSimpleGradient(value,) || isMultiStopGradient(value,));
+    return isObject(value,) && radialGradientKeys.every((key7) => key7 in value) &&
+      (isSimpleGradient(value,) || isMultiStopGradient(value,));
   },
   /** @internal */
   hash: (radialGradient) => {
@@ -22547,7 +23057,7 @@ var RadialGradient = {
       gradientColorStopsHash(radialGradient, radialGradient.alpha,);
   },
   /** @internal */
-  toCSS: (radialGradient) => {
+  toCSS: (radialGradient, getStopValue,) => {
     const {
       alpha: alpha2,
       widthFactor,
@@ -22559,7 +23069,7 @@ var RadialGradient = {
     const cssStops = stops.map((stop, index,) => {
       const nextStop = stops[index + 1];
       const position = stop.position === 1 && (nextStop == null ? void 0 : nextStop.position) === 1 ? stop.position - 1e-4 : stop.position;
-      return `${stop.value} ${position * 100}%`;
+      return `${(getStopValue == null ? void 0 : getStopValue(stop.value,)) ?? stop.value} ${position * 100}%`;
     },);
     return `radial-gradient(${widthFactor * 100}% ${heightFactor * 100}% at ${centerAnchorX * 100}% ${centerAnchorY * 100}%, ${
       cssStops.join(', ',)
@@ -23442,7 +23952,7 @@ function pointForEvent(event, customTarget = null,) {
       y: event.pageY,
     };
   }
-  if ('webkitConvertPointFromPageToNode' in safeWindow) {
+  if (typeof safeWindow.webkitConvertPointFromPageToNode === 'function') {
     let webkitPoint = new safeWindow.WebKitPoint(event.pageX, event.pageY,);
     webkitPoint = safeWindow.webkitConvertPointFromPageToNode(target, webkitPoint,);
     return {
@@ -23463,7 +23973,7 @@ function pointForEvent(event, customTarget = null,) {
   };
   return point2;
 }
-var FramerEvent = class {
+var FramerEvent = class _FramerEvent {
   /**
    * @internal
    */
@@ -23477,7 +23987,7 @@ var FramerEvent = class {
     __publicField(this, 'target',);
     __publicField(this, 'delta',);
     const customTarget = session && session.startEvent && session.startEvent.target || originalEvent.target;
-    const eventLike = FramerEvent.eventLikeFromOriginalEvent(originalEvent,);
+    const eventLike = _FramerEvent.eventLikeFromOriginalEvent(originalEvent,);
     this.point = pointForEvent(eventLike, customTarget,);
     const deviceTarget = session && session.originElement ? session.originElement : document.body;
     this.devicePoint = pointForEvent(eventLike, deviceTarget,);
@@ -23570,7 +24080,7 @@ var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
 function WithDragging(Component18,) {
-  const _WithDraggingHOC = class extends React4.Component {
+  const _WithDraggingHOC = class _WithDraggingHOC2 extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', {
@@ -24182,7 +24692,7 @@ function WithDragging(Component18,) {
       const originalProps = {
         ...attributes,
       };
-      Object.keys(_WithDraggingHOC.draggingDefaultProps,).forEach((key7) => {
+      Object.keys(_WithDraggingHOC2.draggingDefaultProps,).forEach((key7) => {
         delete asRecord(originalProps,)[key7];
       },);
       originalProps.onPanStart = this.wrapHandler(this.panStart, onPanStart,);
@@ -24203,8 +24713,7 @@ function WithDragging(Component18,) {
       },);
     }
   };
-  let WithDraggingHOC = _WithDraggingHOC;
-  __publicField(WithDraggingHOC, 'draggingDefaultProps', {
+  __publicField(_WithDraggingHOC, 'draggingDefaultProps', {
     momentum: true,
     momentumOptions: {
       friction: 2.1,
@@ -24235,7 +24744,8 @@ function WithDragging(Component18,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(WithDraggingHOC, 'defaultProps', Object.assign({}, Component18.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(_WithDraggingHOC, 'defaultProps', Object.assign({}, Component18.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  let WithDraggingHOC = _WithDraggingHOC;
   const withDragging = WithDraggingHOC;
   (0, import_hoist_non_react_statics.default)(withDragging, Component18,);
   return withDragging;
@@ -25090,7 +25600,7 @@ function applyLayoutProp(style, props, key7,) {
   }
 }
 var DeprecatedFrame = /* @__PURE__ */ (() => {
-  const _DeprecatedFrameInner = class extends Layer {
+  const _DeprecatedFrameInner = class _DeprecatedFrameInner2 extends Layer {
     constructor() {
       super(...arguments,);
       __publicField(this, 'element', null,);
@@ -25113,7 +25623,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       __publicField(this, 'sizeObserver',);
       __publicField(this, 'sizeObserverCancel',);
       __publicField(this, 'onPropsChange', (props) => {
-        const rect = _DeprecatedFrameInner.rect(Animatable.objectToValues(props.value,),);
+        const rect = _DeprecatedFrameInner2.rect(Animatable.objectToValues(props.value,),);
         if (this.state.size && isAnimatable2(this.state.size.width,) && isAnimatable2(props.value.width,)) {
           this.state.size.width.set(rect.width,);
         }
@@ -25138,10 +25648,10 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       return ConstraintValues.toRect(constraintValues, parentSizeInfo, null, true,);
     }
     get rect() {
-      return _DeprecatedFrameInner.rect(this.props,);
+      return _DeprecatedFrameInner2.rect(this.props,);
     }
     static getDerivedStateFromProps(nextProps, prevState,) {
-      const size = _DeprecatedFrameInner.updatedSize(nextProps, prevState,);
+      const size = _DeprecatedFrameInner2.updatedSize(nextProps, prevState,);
       const {
         target,
       } = RenderEnvironment;
@@ -25166,7 +25676,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       };
     }
     static updatedSize(props, state2,) {
-      const rect = _DeprecatedFrameInner.rect(props,);
+      const rect = _DeprecatedFrameInner2.rect(props,);
       let size = state2.size;
       const newSize = {
         width: rect.width,
@@ -25360,9 +25870,8 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       return children;
     }
   };
-  let DeprecatedFrameInner = _DeprecatedFrameInner;
-  __publicField(DeprecatedFrameInner, 'supportsConstraints', true,);
-  __publicField(DeprecatedFrameInner, 'defaultFrameSpecificProps', {
+  __publicField(_DeprecatedFrameInner, 'supportsConstraints', true,);
+  __publicField(_DeprecatedFrameInner, 'defaultFrameSpecificProps', {
     ...constraintDefaults,
     ...transformDefaults,
     opacity: 1,
@@ -25372,10 +25881,11 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
     borderColor: '#222',
     borderStyle: 'solid',
   },);
-  __publicField(DeprecatedFrameInner, 'defaultProps', {
+  __publicField(_DeprecatedFrameInner, 'defaultProps', {
     ...Layer.defaultProps,
     ..._DeprecatedFrameInner.defaultFrameSpecificProps,
   },);
+  let DeprecatedFrameInner = _DeprecatedFrameInner;
   DeprecatedFrameInner.contextType = ConstraintsContext;
   return DeprecatedFrameInner;
 })();
@@ -26452,22 +26962,12 @@ var NavigationCallbackContext = /* @__PURE__ */ React4.createContext(void 0,);
 var NavigationCallbackProvider = /* @__PURE__ */ (() => NavigationCallbackContext.Provider)();
 var IsInitialNavigationContext = /* @__PURE__ */ React4.createContext(void 0,);
 var Navigation = /* @__PURE__ */ (() => {
-  var _lastEventTimeStamp,
-    _a,
-    _getStackState,
-    getStackState_fn,
-    _isSameEventTransition,
-    isSameEventTransition_fn,
-    _navigationAction,
-    _transition,
-    transition_fn;
+  var _lastEventTimeStamp, _a, _Navigation_instances, getStackState_fn, isSameEventTransition_fn, _navigationAction, transition_fn;
   return _a = class extends Component {
     constructor(props,) {
       var _a2;
       super(props,);
-      __privateAdd(this, _getStackState,);
-      __privateAdd(this, _isSameEventTransition,);
-      __privateAdd(this, _transition,);
+      __privateAdd(this, _Navigation_instances,);
       __privateAdd(this, _lastEventTimeStamp, null,);
       __publicField(this, 'state', defaultState(),);
       __privateAdd(this, _navigationAction, (action2) => {
@@ -26496,7 +26996,7 @@ var Navigation = /* @__PURE__ */ (() => {
       },);
       __publicField(this, 'goBack', () => {
         var _a22;
-        if (__privateMethod(this, _isSameEventTransition, isSameEventTransition_fn,).call(this,)) return;
+        if (__privateMethod(this, _Navigation_instances, isSameEventTransition_fn,).call(this,)) return;
         __privateSet(this, _lastEventTimeStamp, ((_a22 = globalThis.event) == null ? void 0 : _a22.timeStamp) || null,);
         if (this.state.currentOverlay !== -1) {
           return __privateGet(this, _navigationAction,).call(this, {
@@ -26536,7 +27036,7 @@ var Navigation = /* @__PURE__ */ (() => {
       const key7 = (_a2 = component.key) == null ? void 0 : _a2.toString();
       if (!key7) return;
       if (this.state.history.length === 0) {
-        __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Instant,);
+        __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Instant,);
       } else {
         __privateGet(this, _navigationAction,).call(this, {
           type: 'update',
@@ -26550,35 +27050,35 @@ var Navigation = /* @__PURE__ */ (() => {
       (_b = (_a2 = this.props).resetProjection) == null ? void 0 : _b.call(_a2,);
     }
     instant(component,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Instant, void 0,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Instant, void 0,);
     }
     fade(component, options,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Fade, options,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Fade, options,);
     }
     push(component, options,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, pushTransition(options,), options,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, pushTransition(options,), options,);
     }
     modal(component, options,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.Modal, options,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Modal, options,);
     }
     overlay(component, options,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, overlayTransition(options,), options,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, overlayTransition(options,), options,);
     }
     flip(component, options,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, flipTransition(options,), options,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, flipTransition(options,), options,);
     }
     magicMotion(component, options,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, TransitionDefaults.MagicMotion, options,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.MagicMotion, options,);
     }
     customTransition(component, transition,) {
-      __privateMethod(this, _transition, transition_fn,).call(this, component, transition,);
+      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, transition,);
     }
     render() {
       var _a2, _b, _c, _d, _e;
-      const stackState = __privateMethod(this, _getStackState, getStackState_fn,).call(this, {
+      const stackState = __privateMethod(this, _Navigation_instances, getStackState_fn,).call(this, {
         overCurrentContext: false,
       },);
-      const overlayStackState = __privateMethod(this, _getStackState, getStackState_fn,).call(this, {
+      const overlayStackState = __privateMethod(this, _Navigation_instances, getStackState_fn,).call(this, {
         overCurrentContext: true,
       },);
       const activeOverlay = activeOverlayItem(overlayStackState,);
@@ -26694,7 +27194,7 @@ var Navigation = /* @__PURE__ */ (() => {
     }
   },
     _lastEventTimeStamp = /* @__PURE__ */ new WeakMap(),
-    _getStackState = /* @__PURE__ */ new WeakSet(),
+    _Navigation_instances = /* @__PURE__ */ new WeakSet(),
     getStackState_fn = function (options,) {
       const {
         current,
@@ -26715,16 +27215,22 @@ var Navigation = /* @__PURE__ */ (() => {
         history: this.state.history,
       };
     },
-    _isSameEventTransition = /* @__PURE__ */ new WeakSet(),
+    /**
+     * To prevent bubbling events from triggering multiple transitions,
+     * we ensure that the current event has a different timestamp then the event that triggered the last transition.
+     * We use Window.event to ensure that even transitions invoked by code components - and may not pass a reference to the event - are caught.
+     * This works better than measuring the time of transition calls with performance.now()
+     * because the time between calls can get longer and longer as more screens are added to the stack,
+     * preventing a deterministic time between transitions to be used to determine if they were triggered at the same time or not.
+     */
     isSameEventTransition_fn = function () {
       if (!globalThis.event) return false;
       return __privateGet(this, _lastEventTimeStamp,) === globalThis.event.timeStamp;
     },
     _navigationAction = /* @__PURE__ */ new WeakMap(),
-    _transition = /* @__PURE__ */ new WeakSet(),
     transition_fn = function (component, transitionTraits, transitionOptions,) {
       var _a2, _b;
-      if (__privateMethod(this, _isSameEventTransition, isSameEventTransition_fn,).call(this,)) return;
+      if (__privateMethod(this, _Navigation_instances, isSameEventTransition_fn,).call(this,)) return;
       __privateSet(this, _lastEventTimeStamp, ((_a2 = globalThis.event) == null ? void 0 : _a2.timeStamp) || null,);
       if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
       const transition = {
@@ -27090,7 +27596,6 @@ function withInfiniteScroll(Component18,) {
     },);
   },);
 }
-var import_process2 = __toESM(require_browser(), 1,);
 function debounce(fn, time2,) {
   let timeout;
   const debounced = (...args) => {
@@ -27936,6 +28441,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
       _constraints: {
         enabled: false,
       },
+      style: void 0,
     };
     if (containerProps.__fromCanvasComponent) {
       update.style = child.props.style ?? {};
@@ -28019,9 +28525,9 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
         /* @__PURE__ */ jsx(EmptyState, {
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
-          children,
           size: containerSizeRef.current,
           insideUserCodeComponent: !__fromCodeComponentNode,
+          children,
         },),
         childComponents,
       ],
@@ -28150,7 +28656,7 @@ function getPageContentRects(containerRef, containerSize, direction, gap,) {
     if (contentWrapper instanceof HTMLElement && contentWrapper.firstChild instanceof HTMLElement) {
       let width = contentWrapper.firstChild.offsetWidth;
       let height = contentWrapper.firstChild.offsetHeight;
-      if (import_process2.default.env.NODE_ENV === 'test') {
+      if (isTest()) {
         width = 100;
         height = 100;
       }
@@ -31707,7 +32213,7 @@ function NullFallback() {
 }
 var nullFallback = /* @__PURE__ */ jsx(NullFallback, {},);
 function collectErrorToAnalytics(error, errorInfo,) {
-  if (typeof window === 'undefined') return;
+  if (!isWindow) return;
   if (Math.random() > 0.01) return;
   const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
   const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
@@ -33030,13 +33536,13 @@ var GracefullyDegradingErrorBoundary = class extends Component {
     );
   }
 };
-var LazyValue = class {
+var LazyValue = class _LazyValue {
   constructor(resolver,) {
     this.resolver = resolver;
     __publicField(this, 'status',);
   }
   static is(value,) {
-    return value instanceof LazyValue;
+    return value instanceof _LazyValue;
   }
   /** Preload the value so it can be read() later. */
   preload() {
@@ -33106,10 +33612,6 @@ function findAnchorElement(target, withinElement,) {
 function ChildrenCanSuspend({
   children,
 },) {
-  const {
-    useGranularSuspense,
-  } = useLibraryFeatures();
-  if (!useGranularSuspense) return children;
   return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
     children,
   },);
@@ -33630,7 +34132,7 @@ var NestedLinksCollector = class {
     return result;
   }
   collectNestedLink(outerLink, innerLink,) {
-    if (typeof window !== 'undefined' && true || !outerLink.nodeId || !innerLink.nodeId) {
+    if (isWindow && !isTest() || !outerLink.nodeId || !innerLink.nodeId) {
       return;
     }
     this.collectedLinks.set(linkInfoKey(outerLink,), outerLink,);
@@ -33870,7 +34372,8 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkCl
     // provide any hashVariables.
     hash: elementId,
     pathVariables,
-    preserveQueryParams: router.preserveQueryParams,
+    preserveQueryParams: router.preserveQueryParams && !isBot,
+    // don't preserve query params for bots
     siteCanonicalURL: router.siteCanonicalURL,
   },);
   const anchorTarget = getTargetAttrValue(openInNewTab, true,);
@@ -34405,6 +34908,14 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
+function isSamePage(a, b,) {
+  if (a.routeId !== b.routeId) return false;
+  if (a.pathVariables === b.pathVariables) return true;
+  const aPathVariables = a.pathVariables || {};
+  const bPathVariables = b.pathVariables || {};
+  return aPathVariables.length === bPathVariables.length &&
+    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
+}
 function getPageviewEventData({
   framerSiteId,
   routeId,
@@ -34420,14 +34931,54 @@ function getPageviewEventData({
     webPageId: routeId,
   };
 }
-function isSamePage(a, b,) {
-  if (a.routeId !== b.routeId) return false;
-  if (a.pathVariables === b.pathVariables) return true;
-  const aPathVariables = a.pathVariables || {};
-  const bPathVariables = b.pathVariables || {};
-  return aPathVariables.length === bPathVariables.length &&
-    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
-}
+var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,) => {
+  const framerSiteId = useContext(FormContext,);
+  const {
+    newTrackingEvents,
+  } = useLibraryFeatures();
+  const pageviewEventData = useRef();
+  const skipFirstPageView = useRef(true,);
+  useEffect(() => {
+    if (!newTrackingEvents) return;
+    const getFullPageviewEventData = async () => {
+      var _a;
+      let collectionItemId = null;
+      if ((currentRoute == null ? void 0 : currentRoute.collectionId) && collectionUtils && currentPathVariables) {
+        const utils = await ((_a = collectionUtils[currentRoute.collectionId]) == null ? void 0 : _a.call(collectionUtils,));
+        const [slug,] = Object.values(currentPathVariables,);
+        if (utils && typeof slug === 'string') {
+          collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
+        }
+      }
+      return getPageviewEventData({
+        framerSiteId: framerSiteId ?? null,
+        routeId: currentRouteId,
+        routePath: currentRoute == null ? void 0 : currentRoute.path,
+        collectionItemId,
+        localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
+      },);
+    };
+    void (async () => {
+      pageviewEventData.current = await getFullPageviewEventData();
+      if (skipFirstPageView.current) {
+        skipFirstPageView.current = false;
+        return;
+      }
+      sendTrackingEvent('published_site_pageview', pageviewEventData.current,);
+    })();
+    const listener = async (event) => {
+      if (event.persisted) {
+        pageviewEventData.current = await getFullPageviewEventData();
+        sendTrackingEvent('published_site_pageview', pageviewEventData.current,);
+      }
+    };
+    window.addEventListener('pageshow', listener,);
+    return () => {
+      window.removeEventListener('pageshow', listener,);
+    };
+  }, [currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale, framerSiteId, newTrackingEvents,],);
+  return pageviewEventData;
+};
 var defaultLocaleId = 'default';
 function useForceUpdate3() {
   const [_, setForcedRenderCount,] = React4.useState(0,);
@@ -34454,7 +35005,7 @@ function useScheduleRenderSideEffects(dep,) {
     actions.current.push(cb,);
   }, [],);
 }
-function useNavigationTransition(enableAsyncURLUpdates,) {
+function useNavigationTransition() {
   const startNativeSpinner = useNativeLoadingSpinner();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
   const navigationController = useRef(void 0,);
@@ -34462,14 +35013,6 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
     var _a;
     setHydrationDone();
     const hasUpdateURL = updateURL !== void 0;
-    if (!enableAsyncURLUpdates) {
-      if (hasUpdateURL) await updateURL();
-      transitionFn();
-      void monitorNextPaintAfterRender();
-      return new Promise((resolve) => {
-        resolve();
-      },);
-    }
     (_a = navigationController.current) == null ? void 0 : _a.abort();
     const controller = isAbortable ? new AbortController() : void 0;
     navigationController.current = controller;
@@ -34483,9 +35026,8 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
     let resolveNavigationPromise;
     const navigationPromise = new Promise((resolve, reject,) => {
       resolveNavigationPromise = resolve;
-      if (signal == null ? void 0 : signal.aborted) reject();
-      else signal == null ? void 0 : signal.addEventListener('abort', reject,);
-    },);
+      signal == null ? void 0 : signal.addEventListener('abort', reject,);
+    },).catch(noop2,);
     await interactionResponse({
       priority: 'user-blocking',
       signal,
@@ -34493,9 +35035,10 @@ function useNavigationTransition(enableAsyncURLUpdates,) {
     transitionFn(signal,);
     startNativeSpinner(navigationPromise, updateURL, controller,);
     return nextRender.then(() => {
+      if (controller == null ? void 0 : controller.signal.aborted) return;
       resolveNavigationPromise();
     },);
-  }, [enableAsyncURLUpdates, monitorNextPaintAfterRender, startNativeSpinner,],);
+  }, [monitorNextPaintAfterRender, startNativeSpinner,],);
 }
 function Router({
   defaultPageStyle,
@@ -34508,7 +35051,6 @@ function Router({
   initialLocaleId,
   locales = EMPTY_ARRAY,
   preserveQueryParams = false,
-  enableAsyncURLUpdates = false,
   LayoutTemplate,
   editorBar,
   siteCanonicalURL,
@@ -34523,8 +35065,7 @@ function Router({
   const startViewTransition2 = useViewTransition();
   const [dep, forceUpdate,] = useForceUpdate3();
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
-  const startNavigation = useNavigationTransition(enableAsyncURLUpdates,);
-  const skipFirstPageView = useRef(true,);
+  const startNavigation = useNavigationTransition();
   const currentRouteRef = useRef(initialRoute,);
   const currentPathVariablesRef = useRef(initialPathVariables,);
   const currentLocaleIdRef = useRef(initialLocaleId,);
@@ -34592,7 +35133,7 @@ function Router({
           };
           void startNavigation(
             () => {
-              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), enableAsyncURLUpdates,// no signal here, because we update the refs above immediately
+              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), true,// no signal here, because we update the refs above immediately
               );
             },
             updateURL,
@@ -34601,17 +35142,7 @@ function Router({
         } catch {}
       },
     };
-  }, [
-    activeLocale,
-    collectionUtils,
-    enableAsyncURLUpdates,
-    forceUpdate,
-    locales,
-    preserveQueryParams,
-    routes,
-    startNavigation,
-    startViewTransition2,
-  ],);
+  }, [activeLocale, collectionUtils, forceUpdate, locales, preserveQueryParams, routes, startNavigation, startViewTransition2,],);
   const setCurrentRouteId = useCallback(
     (routeId, localeId, hash2, pathVariables, isHistoryTransition, smoothScroll = false, updateURL,) => {
       const currentRouteId2 = currentRouteRef.current;
@@ -34626,10 +35157,10 @@ function Router({
         return;
       }
       void startNavigation((signal) => {
-        void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), enableAsyncURLUpdates, signal,);
+        void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), true, signal,);
       }, updateURL,);
     },
-    [enableAsyncURLUpdates, forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
+    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll,) => {
@@ -34674,7 +35205,7 @@ function Router({
             siteCanonicalURL,
           },
           // we want to yield as this is called synchronusly from an user interaction.
-          enableAsyncURLUpdates,
+          true,
         );
       }
       updateScrollPosition(routeElementId, smoothScroll, false,);
@@ -34708,43 +35239,13 @@ function Router({
       smoothScroll,
       disableHistory ? void 0 : updateURL,
     );
-  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, enableAsyncURLUpdates, siteCanonicalURL,],);
+  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, siteCanonicalURL,],);
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
   const currentRoute = routes[currentRouteId];
   const currentRoutePath = currentRoute == null ? void 0 : currentRoute.path;
-  const framerSiteId = useContext(FormContext,);
-  const pageviewEventData = useRef();
-  const {
-    newTrackingEvents,
-  } = useLibraryFeatures();
-  useEffect(() => {
-    if (!newTrackingEvents) return;
-    void (async () => {
-      var _a;
-      let collectionItemId = null;
-      if ((currentRoute == null ? void 0 : currentRoute.collectionId) && collectionUtils && currentPathVariables) {
-        const utils = await ((_a = collectionUtils[currentRoute.collectionId]) == null ? void 0 : _a.call(collectionUtils,));
-        const [slug,] = Object.values(currentPathVariables,);
-        if (utils && typeof slug === 'string') {
-          collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
-        }
-      }
-      pageviewEventData.current = getPageviewEventData({
-        framerSiteId: framerSiteId ?? null,
-        routeId: currentRouteId,
-        routePath: currentRoute == null ? void 0 : currentRoute.path,
-        collectionItemId,
-        localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
-      },);
-      if (skipFirstPageView.current) {
-        skipFirstPageView.current = false;
-        return;
-      }
-      sendTrackingEvent('published_site_pageview', pageviewEventData.current,);
-    })();
-  }, [newTrackingEvents, framerSiteId, currentRouteId, currentRoute, activeLocale, currentPathVariables, collectionUtils,],);
+  const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,);
   const api = useMemo(() => ({
     navigate,
     getRoute,
@@ -34755,7 +35256,17 @@ function Router({
     preserveQueryParams,
     pageviewEventData,
     siteCanonicalURL,
-  }), [navigate, getRoute, currentRouteId, currentPathVariables, routes, collectionUtils, preserveQueryParams, siteCanonicalURL,],);
+  }), [
+    navigate,
+    getRoute,
+    currentRouteId,
+    currentPathVariables,
+    routes,
+    collectionUtils,
+    preserveQueryParams,
+    siteCanonicalURL,
+    pageviewEventData,
+  ],);
   if (!currentRoute) {
     throw new Error(`Router cannot find route for ${currentRouteId}`,);
   }
@@ -34927,7 +35438,7 @@ var _shortestCacheDurations;
 var _cachedAt;
 var _ongoingFetches;
 var _staleQueriesInterval;
-var _FetchClient = class {
+var _FetchClient = class _FetchClient2 {
   constructor() {
     __publicField(this, 'responseValues', /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers, /* @__PURE__ */ new Map(),);
@@ -34954,7 +35465,7 @@ var _FetchClient = class {
           data2[url] = [storedAt, cacheConfig, responseValue.data,];
         }
         try {
-          localStorage.setItem(_FetchClient.cacheKey, JSON.stringify(data2,),);
+          localStorage.setItem(_FetchClient2.cacheKey, JSON.stringify(data2,),);
         } catch {}
       }, 500,),
     );
@@ -34996,7 +35507,7 @@ var _FetchClient = class {
   }
   hydrateCache() {
     try {
-      const rawData = localStorage.getItem(_FetchClient.cacheKey,);
+      const rawData = localStorage.getItem(_FetchClient2.cacheKey,);
       if (!rawData) return;
       const data2 = JSON.parse(rawData,);
       if (typeof data2 !== 'object') throw new Error('Invalid cache data',);
@@ -35014,7 +35525,7 @@ var _FetchClient = class {
       }
     } catch (error) {
       try {
-        localStorage.removeItem(_FetchClient.cacheKey,);
+        localStorage.removeItem(_FetchClient2.cacheKey,);
       } catch {}
     }
   }
@@ -35131,14 +35642,14 @@ var _FetchClient = class {
     };
   }
 };
-var FetchClient = _FetchClient;
 _subscribers = /* @__PURE__ */ new WeakMap();
 _preloadedRequests = /* @__PURE__ */ new WeakMap();
 _shortestCacheDurations = /* @__PURE__ */ new WeakMap();
 _cachedAt = /* @__PURE__ */ new WeakMap();
 _ongoingFetches = /* @__PURE__ */ new WeakMap();
 _staleQueriesInterval = /* @__PURE__ */ new WeakMap();
-__publicField(FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
+__publicField(_FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
+var FetchClient = _FetchClient;
 var FetchClientContext = /* @__PURE__ */ React2.createContext(void 0,);
 var IsRestoringCacheContext = /* @__PURE__ */ React2.createContext(true,);
 var FetchClientProvider = ({
@@ -35173,8 +35684,8 @@ var RequestsObserver = class {
     this.requests = requests;
     __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
-    __privateAdd(this, _results, void 0,);
-    __privateAdd(this, _SSRResults, void 0,);
+    __privateAdd(this, _results,);
+    __privateAdd(this, _SSRResults,);
     __privateAdd(this, _onlyPrefetched, true,);
     __publicField(this, 'updateResults', () => {
       const data2 = [];
@@ -35334,9 +35845,6 @@ function PageRoot({
   LayoutTemplate,
   siteCanonicalURL,
 },) {
-  const {
-    enableAsyncURLUpdates,
-  } = useLibraryFeatures();
   React4.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
@@ -35361,7 +35869,6 @@ function PageRoot({
                 width: 'auto',
               },
               preserveQueryParams,
-              enableAsyncURLUpdates,
               editorBar: /* @__PURE__ */ jsx(EditorBarLauncher, {
                 EditorBar,
               },),
@@ -36166,7 +36673,7 @@ function getNetworkSpeed() {
   return 100 * 125;
 }
 var KB = 1e3;
-var Cost = class {
+var Cost = class _Cost {
   constructor(network,) {
     this.network = network;
   }
@@ -36174,11 +36681,11 @@ var Cost = class {
     const latency = getNetworkLatency();
     const speed = getNetworkSpeed();
     const network = totalRequests * latency + transferredBytes / speed;
-    return new Cost(network,);
+    return new _Cost(network,);
   }
   static max(left, right,) {
     const network = Math.max(left.network, right.network,);
-    return new Cost(network,);
+    return new _Cost(network,);
   }
   static compare(left, right,) {
     if (left.network < right.network) return -1;
@@ -36584,7 +37091,7 @@ var RequiredProps = class {
     return node.canProvideResolvedFields(this.resolvedFields,);
   }
 };
-var Scope = class {
+var Scope = class _Scope {
   constructor(parent,) {
     this.parent = parent;
     __publicField(this, 'node',);
@@ -36616,13 +37123,13 @@ var Scope = class {
    * Create a new scope with the this scope as its parent.
    */
   push() {
-    return new Scope(this,);
+    return new _Scope(this,);
   }
   /**
    * Creates a new scope with the parent of the this scope as its parent.
    */
   replace() {
-    return new Scope(this.parent,);
+    return new _Scope(this.parent,);
   }
   /**
    * Adds a field to this scope. Any fields that are added will be available
@@ -36768,7 +37275,7 @@ var Tuple = class {
     this.mergePointers(tuple,);
   }
 };
-var Relation = class {
+var Relation = class _Relation {
   constructor(fields, tuples = [],) {
     this.fields = fields;
     this.tuples = tuples;
@@ -36778,19 +37285,19 @@ var Relation = class {
   }
   filter(predicate,) {
     const tuples = this.tuples.filter(predicate,);
-    return new Relation(this.fields, tuples,);
+    return new _Relation(this.fields, tuples,);
   }
   map(fields, callback,) {
     const tuples = this.tuples.map(callback,);
-    return new Relation(fields, tuples,);
+    return new _Relation(fields, tuples,);
   }
   sort(callback,) {
     const tuples = Array.from(this.tuples,).sort(callback,);
-    return new Relation(this.fields, tuples,);
+    return new _Relation(this.fields, tuples,);
   }
   slice(start, end,) {
     const tuples = this.tuples.slice(start, end,);
-    return new Relation(this.fields, tuples,);
+    return new _Relation(this.fields, tuples,);
   }
   union(other,) {
     const fields = new Fields();
@@ -36800,7 +37307,7 @@ var Relation = class {
       }
     }
     const keys3 = /* @__PURE__ */ new Set();
-    const result = new Relation(fields,);
+    const result = new _Relation(fields,);
     for (const tuple of this.tuples) {
       const key7 = tuple.getKey();
       keys3.add(key7,);
@@ -36821,7 +37328,7 @@ var Relation = class {
       }
     }
     const keys3 = /* @__PURE__ */ new Set();
-    const result = new Relation(fields,);
+    const result = new _Relation(fields,);
     for (const tuple of this.tuples) {
       const key7 = tuple.getKey();
       keys3.add(key7,);
@@ -36843,7 +37350,7 @@ var ProjectionField = class {
     return calculateHash('ProjectionField', this.input, this.field.id,);
   }
 };
-var RelationalProject = class extends RelationalNode {
+var RelationalProject = class _RelationalProject extends RelationalNode {
   constructor(input, projections, passthrough,) {
     let isSynchronous = input.isSynchronous;
     for (const projection of projections) {
@@ -36911,7 +37418,7 @@ var RelationalProject = class extends RelationalNode {
       const projectionInput = projection.input.getOptimized();
       return new ProjectionField(projectionInput, projection.field,);
     },);
-    return new RelationalProject(input, projections, this.passthrough,);
+    return new _RelationalProject(input, projections, this.passthrough,);
   }
   *evaluate(context,) {
     const outputFields = this.getOutputFields();
@@ -36987,7 +37494,7 @@ var CaseCondition = class {
     return calculateHash('CaseCondition', this.when, this.then,);
   }
 };
-var ScalarCase = class extends ScalarNode {
+var ScalarCase = class _ScalarCase extends ScalarNode {
   constructor(input, conditions, otherwise,) {
     const referencedFields = new Fields();
     const referencedOuterFields = new Fields();
@@ -37046,7 +37553,7 @@ var ScalarCase = class extends ScalarNode {
       return new CaseCondition(when, then,);
     },);
     const otherwise = (_b = this.otherwise) == null ? void 0 : _b.getOptimized();
-    return new ScalarCase(input, conditions, otherwise,);
+    return new _ScalarCase(input, conditions, otherwise,);
   }
   *evaluate(context, tuple,) {
     var _a, _b;
@@ -37515,7 +38022,7 @@ var Subquery = class {
     __publicField(this, 'referencedOuterFields', new Fields(),);
   }
 };
-var RelationalFilter = class extends RelationalNode {
+var RelationalFilter = class _RelationalFilter extends RelationalNode {
   constructor(input, predicate,) {
     super(input.isSynchronous && predicate.isSynchronous,);
     this.input = input;
@@ -37550,7 +38057,7 @@ var RelationalFilter = class extends RelationalNode {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
     const predicate = this.predicate.getOptimized();
-    return new RelationalFilter(input, predicate,);
+    return new _RelationalFilter(input, predicate,);
   }
   *evaluate(context,) {
     const input = yield* this.input.evaluate(context,);
@@ -37563,7 +38070,7 @@ var RelationalFilter = class extends RelationalNode {
     },);
   }
 };
-var RelationalIndexLookup = class extends RelationalNode {
+var RelationalIndexLookup = class _RelationalIndexLookup extends RelationalNode {
   constructor(index, query,) {
     super(false,);
     this.index = index;
@@ -37587,7 +38094,7 @@ var RelationalIndexLookup = class extends RelationalNode {
     return Cost.estimate(1, isFullScan ? 100 * KB : 50 * KB,);
   }
   getOptimized() {
-    return new RelationalIndexLookup(this.index, this.query,);
+    return new _RelationalIndexLookup(this.index, this.query,);
   }
   *evaluate() {
     const index = this.index;
@@ -37606,7 +38113,7 @@ var RelationalIndexLookup = class extends RelationalNode {
     return new Relation(outputFields, tuples,);
   }
 };
-var RelationalIntersection = class extends RelationalNode {
+var RelationalIntersection = class _RelationalIntersection extends RelationalNode {
   constructor(left, right,) {
     super(left.isSynchronous && right.isSynchronous,);
     this.left = left;
@@ -37652,7 +38159,7 @@ var RelationalIntersection = class extends RelationalNode {
     const left = this.leftGroup.getOptimized(leftRequired,);
     const rightRequired = this.getChildRequiredProps(required,);
     const right = this.rightGroup.getOptimized(rightRequired,);
-    return new RelationalIntersection(left, right,);
+    return new _RelationalIntersection(left, right,);
   }
   *evaluate(context,) {
     const {
@@ -37665,7 +38172,7 @@ var RelationalIntersection = class extends RelationalNode {
     return left.intersection(right,);
   }
 };
-var ScalarEquals = class extends ScalarNode {
+var ScalarEquals = class _ScalarEquals extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -37693,7 +38200,7 @@ var ScalarEquals = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarEquals(left, right,);
+    return new _ScalarEquals(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -37709,7 +38216,7 @@ var ScalarEquals = class extends ScalarNode {
     };
   }
 };
-var RelationalLeftJoin = class extends RelationalNode {
+var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
   constructor(left, right, constraint,) {
     super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
     this.left = left;
@@ -37765,7 +38272,7 @@ var RelationalLeftJoin = class extends RelationalNode {
     const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
     const right = this.rightGroup.getOptimized(rightRequired,);
     const constraint = this.constraint.getOptimized();
-    return new RelationalLeftJoin(left, right, constraint,);
+    return new _RelationalLeftJoin(left, right, constraint,);
   }
   /** Optimized path for equality constraints that runs in O(n + m) time. */
   *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
@@ -37839,7 +38346,7 @@ var RelationalLeftJoin = class extends RelationalNode {
     return result;
   }
 };
-var RelationalRightJoin = class extends RelationalNode {
+var RelationalRightJoin = class _RelationalRightJoin extends RelationalNode {
   constructor(left, right, constraint,) {
     super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
     this.left = left;
@@ -37895,7 +38402,7 @@ var RelationalRightJoin = class extends RelationalNode {
     const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
     const right = this.rightGroup.getOptimized(rightRequired,);
     const constraint = this.constraint.getOptimized();
-    return new RelationalRightJoin(left, right, constraint,);
+    return new _RelationalRightJoin(left, right, constraint,);
   }
   /** Optimized path for equality constraints that runs in O(n + m) time. */
   *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
@@ -37969,7 +38476,7 @@ var RelationalRightJoin = class extends RelationalNode {
     return result;
   }
 };
-var RelationalScan = class extends RelationalNode {
+var RelationalScan = class _RelationalScan extends RelationalNode {
   constructor(collection,) {
     super(false,);
     this.collection = collection;
@@ -37990,7 +38497,7 @@ var RelationalScan = class extends RelationalNode {
     return Cost.estimate(1, 200 * KB,);
   }
   getOptimized() {
-    return new RelationalScan(this.collection,);
+    return new _RelationalScan(this.collection,);
   }
   *evaluate() {
     const collection = this.collection;
@@ -38008,7 +38515,7 @@ var RelationalScan = class extends RelationalNode {
     return new Relation(outputFields, tuples,);
   }
 };
-var RelationalUnion = class extends RelationalNode {
+var RelationalUnion = class _RelationalUnion extends RelationalNode {
   constructor(left, right,) {
     super(left.isSynchronous && right.isSynchronous,);
     this.left = left;
@@ -38054,7 +38561,7 @@ var RelationalUnion = class extends RelationalNode {
     const left = this.leftGroup.getOptimized(leftRequired,);
     const rightRequired = this.getChildRequiredProps(required,);
     const right = this.rightGroup.getOptimized(rightRequired,);
-    return new RelationalUnion(left, right,);
+    return new _RelationalUnion(left, right,);
   }
   *evaluate(context,) {
     const {
@@ -38067,7 +38574,7 @@ var RelationalUnion = class extends RelationalNode {
     return left.union(right,);
   }
 };
-var ScalarAnd = class extends ScalarNode {
+var ScalarAnd = class _ScalarAnd extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38095,7 +38602,7 @@ var ScalarAnd = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarAnd(left, right,);
+    return new _ScalarAnd(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38137,7 +38644,7 @@ var collation3 = {
   type: 0,
   /* CaseInsensitive */
 };
-var ScalarContains = class extends ScalarNode {
+var ScalarContains = class _ScalarContains extends ScalarNode {
   constructor(source, target,) {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
@@ -38165,7 +38672,7 @@ var ScalarContains = class extends ScalarNode {
   getOptimized() {
     const source = this.source.getOptimized();
     const target = this.target.getOptimized();
-    return new ScalarContains(source, target,);
+    return new _ScalarContains(source, target,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38185,7 +38692,7 @@ var collation4 = {
   type: 0,
   /* CaseInsensitive */
 };
-var ScalarEndsWith = class extends ScalarNode {
+var ScalarEndsWith = class _ScalarEndsWith extends ScalarNode {
   constructor(source, target,) {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
@@ -38213,7 +38720,7 @@ var ScalarEndsWith = class extends ScalarNode {
   getOptimized() {
     const source = this.source.getOptimized();
     const target = this.target.getOptimized();
-    return new ScalarEndsWith(source, target,);
+    return new _ScalarEndsWith(source, target,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38229,7 +38736,7 @@ var ScalarEndsWith = class extends ScalarNode {
     };
   }
 };
-var ScalarGreaterThan = class extends ScalarNode {
+var ScalarGreaterThan = class _ScalarGreaterThan extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38257,7 +38764,7 @@ var ScalarGreaterThan = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarGreaterThan(left, right,);
+    return new _ScalarGreaterThan(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38273,7 +38780,7 @@ var ScalarGreaterThan = class extends ScalarNode {
     };
   }
 };
-var ScalarGreaterThanOrEqual = class extends ScalarNode {
+var ScalarGreaterThanOrEqual = class _ScalarGreaterThanOrEqual extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38301,7 +38808,7 @@ var ScalarGreaterThanOrEqual = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarGreaterThanOrEqual(left, right,);
+    return new _ScalarGreaterThanOrEqual(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38317,7 +38824,7 @@ var ScalarGreaterThanOrEqual = class extends ScalarNode {
     };
   }
 };
-var ScalarLessThan = class extends ScalarNode {
+var ScalarLessThan = class _ScalarLessThan extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38345,7 +38852,7 @@ var ScalarLessThan = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarLessThan(left, right,);
+    return new _ScalarLessThan(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38361,7 +38868,7 @@ var ScalarLessThan = class extends ScalarNode {
     };
   }
 };
-var ScalarLessThanOrEqual = class extends ScalarNode {
+var ScalarLessThanOrEqual = class _ScalarLessThanOrEqual extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38389,7 +38896,7 @@ var ScalarLessThanOrEqual = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarLessThanOrEqual(left, right,);
+    return new _ScalarLessThanOrEqual(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38405,7 +38912,7 @@ var ScalarLessThanOrEqual = class extends ScalarNode {
     };
   }
 };
-var ScalarNotEquals = class extends ScalarNode {
+var ScalarNotEquals = class _ScalarNotEquals extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38433,7 +38940,7 @@ var ScalarNotEquals = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarNotEquals(left, right,);
+    return new _ScalarNotEquals(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38449,7 +38956,7 @@ var ScalarNotEquals = class extends ScalarNode {
     };
   }
 };
-var ScalarOr = class extends ScalarNode {
+var ScalarOr = class _ScalarOr extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -38477,7 +38984,7 @@ var ScalarOr = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarOr(left, right,);
+    return new _ScalarOr(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38497,7 +39004,7 @@ var collation5 = {
   type: 0,
   /* CaseInsensitive */
 };
-var ScalarStartsWith = class extends ScalarNode {
+var ScalarStartsWith = class _ScalarStartsWith extends ScalarNode {
   constructor(source, target,) {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
@@ -38525,7 +39032,7 @@ var ScalarStartsWith = class extends ScalarNode {
   getOptimized() {
     const source = this.source.getOptimized();
     const target = this.target.getOptimized();
-    return new ScalarStartsWith(source, target,);
+    return new _ScalarStartsWith(source, target,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -38769,7 +39276,7 @@ var Memo = class {
     return node;
   }
 };
-var RelationalLimit = class extends RelationalNode {
+var RelationalLimit = class _RelationalLimit extends RelationalNode {
   constructor(input, limit, ordering,) {
     super(input.isSynchronous && limit.isSynchronous,);
     this.input = input;
@@ -38805,7 +39312,7 @@ var RelationalLimit = class extends RelationalNode {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
     const limit = this.limit.getOptimized();
-    return new RelationalLimit(input, limit, this.ordering,);
+    return new _RelationalLimit(input, limit, this.ordering,);
   }
   *evaluate(context,) {
     const {
@@ -38820,7 +39327,7 @@ var RelationalLimit = class extends RelationalNode {
     return input.slice(0, value,);
   }
 };
-var RelationalOffset = class extends RelationalNode {
+var RelationalOffset = class _RelationalOffset extends RelationalNode {
   constructor(input, offset, ordering,) {
     super(input.isSynchronous && offset.isSynchronous,);
     this.input = input;
@@ -38856,7 +39363,7 @@ var RelationalOffset = class extends RelationalNode {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
     const offset = this.offset.getOptimized();
-    return new RelationalOffset(input, offset, this.ordering,);
+    return new _RelationalOffset(input, offset, this.ordering,);
   }
   *evaluate(context,) {
     const {
@@ -38871,7 +39378,7 @@ var RelationalOffset = class extends RelationalNode {
     return input.slice(value,);
   }
 };
-var ScalarArray = class extends ScalarNode {
+var ScalarArray = class _ScalarArray extends ScalarNode {
   constructor(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
     super(referencedFields, referencedOuterFields, input.isSynchronous,);
     this.input = input;
@@ -38929,7 +39436,7 @@ var ScalarArray = class extends ScalarNode {
   getOptimized() {
     const inputRequired = this.getInputRequiredProps();
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new ScalarArray(input, this.namedFields, this.ordering, this.referencedFields, this.referencedOuterFields,);
+    return new _ScalarArray(input, this.namedFields, this.ordering, this.referencedFields, this.referencedOuterFields,);
   }
   *evaluate(context, tuple,) {
     const inputContext = new Tuple();
@@ -38952,7 +39459,7 @@ var ScalarArray = class extends ScalarNode {
     };
   }
 };
-var ScalarCast = class extends ScalarNode {
+var ScalarCast = class _ScalarCast extends ScalarNode {
   constructor(input, definition,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
     this.input = input;
@@ -38967,14 +39474,14 @@ var ScalarCast = class extends ScalarNode {
   }
   getOptimized() {
     const input = this.input.getOptimized();
-    return new ScalarCast(input, this.definition,);
+    return new _ScalarCast(input, this.definition,);
   }
   *evaluate(context, tuple,) {
     const input = yield* this.input.evaluate(context, tuple,);
     return DatabaseValue.cast(input, this.definition,);
   }
 };
-var ScalarFlatArray = class extends ScalarNode {
+var ScalarFlatArray = class _ScalarFlatArray extends ScalarNode {
   constructor(input, field, ordering, referencedFields, referencedOuterFields,) {
     super(referencedFields, referencedOuterFields, input.isSynchronous,);
     this.input = input;
@@ -39016,7 +39523,7 @@ var ScalarFlatArray = class extends ScalarNode {
   getOptimized() {
     const inputRequired = this.getInputRequiredProps();
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new ScalarFlatArray(input, this.field, this.ordering, this.referencedFields, this.referencedOuterFields,);
+    return new _ScalarFlatArray(input, this.field, this.ordering, this.referencedFields, this.referencedOuterFields,);
   }
   *evaluate(context, tuple,) {
     const inputContext = new Tuple();
@@ -39035,7 +39542,7 @@ var collation6 = {
   type: 0,
   /* CaseInsensitive */
 };
-var ScalarIn = class extends ScalarNode {
+var ScalarIn = class _ScalarIn extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -39063,7 +39570,7 @@ var ScalarIn = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarIn(left, right,);
+    return new _ScalarIn(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -39083,7 +39590,7 @@ var collation7 = {
   type: 1,
   /* CaseSensitive */
 };
-var ScalarIndexOf = class extends ScalarNode {
+var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
   constructor(source, target,) {
     const referencedFields = new Fields();
     referencedFields.merge(source.referencedFields,);
@@ -39111,7 +39618,7 @@ var ScalarIndexOf = class extends ScalarNode {
   getOptimized() {
     const source = this.source.getOptimized();
     const target = this.target.getOptimized();
-    return new ScalarIndexOf(source, target,);
+    return new _ScalarIndexOf(source, target,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -39127,7 +39634,7 @@ var ScalarIndexOf = class extends ScalarNode {
     };
   }
 };
-var ScalarLength = class extends ScalarNode {
+var ScalarLength = class _ScalarLength extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
     this.input = input;
@@ -39144,7 +39651,7 @@ var ScalarLength = class extends ScalarNode {
   }
   getOptimized() {
     const input = this.input.getOptimized();
-    return new ScalarLength(input,);
+    return new _ScalarLength(input,);
   }
   *evaluate(context, tuple,) {
     const input = yield* this.input.evaluate(context, tuple,);
@@ -39154,7 +39661,7 @@ var ScalarLength = class extends ScalarNode {
     };
   }
 };
-var ScalarNot = class extends ScalarNode {
+var ScalarNot = class _ScalarNot extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
     this.input = input;
@@ -39171,7 +39678,7 @@ var ScalarNot = class extends ScalarNode {
   }
   getOptimized() {
     const input = this.input.getOptimized();
-    return new ScalarNot(input,);
+    return new _ScalarNot(input,);
   }
   *evaluate(context, tuple,) {
     const input = yield* this.input.evaluate(context, tuple,);
@@ -39185,7 +39692,7 @@ var collation8 = {
   type: 0,
   /* CaseInsensitive */
 };
-var ScalarNotIn = class extends ScalarNode {
+var ScalarNotIn = class _ScalarNotIn extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
     referencedFields.merge(left.referencedFields,);
@@ -39213,7 +39720,7 @@ var ScalarNotIn = class extends ScalarNode {
   getOptimized() {
     const left = this.left.getOptimized();
     const right = this.right.getOptimized();
-    return new ScalarNotIn(left, right,);
+    return new _ScalarNotIn(left, right,);
   }
   *evaluate(context, tuple,) {
     const {
@@ -39575,7 +40082,7 @@ var Normalizer = class {
   }
 };
 var EnforcerNode = class extends RelationalNode {};
-var EnforcerResolve = class extends EnforcerNode {
+var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
   constructor(input, fields,) {
     super(false,);
     this.input = input;
@@ -39607,7 +40114,7 @@ var EnforcerResolve = class extends EnforcerNode {
   getOptimized(required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new EnforcerResolve(input, this.fields,);
+    return new _EnforcerResolve(input, this.fields,);
   }
   *evaluate(context,) {
     const input = yield* this.input.evaluate(context,);
@@ -39659,7 +40166,7 @@ var collation9 = {
   type: 0,
   /* CaseInsensitive */
 };
-var EnforcerSort = class extends EnforcerNode {
+var EnforcerSort = class _EnforcerSort extends EnforcerNode {
   constructor(input, ordering,) {
     super(input.isSynchronous,);
     this.input = input;
@@ -39701,7 +40208,7 @@ var EnforcerSort = class extends EnforcerNode {
   getOptimized(required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new EnforcerSort(input, this.ordering,);
+    return new _EnforcerSort(input, this.ordering,);
   }
   *evaluate(context,) {
     const input = yield* this.input.evaluate(context,);
@@ -40204,7 +40711,7 @@ function removeHiddenBreakpointLayersV2(breakpoints,) {
       }
     }
   }
-  const requestIdleCallback2 = safeWindow.requestIdleCallback ?? requestIdleCallbackFallback;
+  const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : requestIdleCallbackFallback;
   requestIdleCallback2(() => {
     var _a2;
     (_a2 = document.querySelector(framerBreakpointCSSSelector,)) == null ? void 0 : _a2.remove();
@@ -40638,6 +41145,8 @@ function usePrototypeNavigate({
           animation,
         },);
         break;
+      // Overlay stack navigation doesn't support updating the browser's
+      // path.
       case 'modal':
         navigation.modal(Component18, {
           backdropColor,
@@ -40952,7 +41461,6 @@ function useVariantState({
   const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   const {
-    wrapUpdatesInTransitions,
     pauseOffscreen: pauseOffscreenFeatureOn,
   } = useLibraryFeatures();
   const update = useCallback((useTransition) => {
@@ -41015,9 +41523,9 @@ function useVariantState({
       if (clearError) internalState.current.isError = false;
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      runUpdateIfVisible(() => update(wrapUpdatesInTransitions && !highPriority || isError2,), pauseOffscreenFeatureOn && checkViewport,);
+      runUpdateIfVisible(() => update(!highPriority || isError2,), pauseOffscreenFeatureOn && checkViewport,);
     },
-    [resolveNextVariant, wrapUpdatesInTransitions, update, runUpdateIfVisible, pauseOffscreenFeatureOn,],
+    [resolveNextVariant, update, runUpdateIfVisible, pauseOffscreenFeatureOn,],
   );
   const setGestureState = useCallback(({
     isHovered: isHovered2,
@@ -41283,9 +41791,6 @@ var withVariantAppearEffect = (Component18) =>
         ref: forwardedRef,
       },);
     }
-    const {
-      wrapUpdatesInTransitions,
-    } = useLibraryFeatures();
     const [options, rest,] = extractPrefixedProps(props, keys2,);
     const {
       visibleVariantId,
@@ -41306,23 +41811,9 @@ var withVariantAppearEffect = (Component18) =>
       if (animateOnce && animateState.current === true) return;
       if (animateState.current === appears) return;
       animateState.current = appears;
-      if (appears) {
-        if (wrapUpdatesInTransitions) {
-          React4.startTransition(() => {
-            setVariant(visibleVariantId,);
-          },);
-        } else {
-          setVariant(visibleVariantId,);
-        }
-      } else {
-        if (wrapUpdatesInTransitions) {
-          React4.startTransition(() => {
-            setVariant(obscuredVariantId,);
-          },);
-        } else {
-          setVariant(obscuredVariantId,);
-        }
-      }
+      React4.startTransition(() => {
+        setVariant(appears ? visibleVariantId : obscuredVariantId,);
+      },);
     }, {
       enabled: variantAppearEffectEnabled,
       animateOnce,
@@ -41351,15 +41842,11 @@ var withVariantAppearEffect = (Component18) =>
         const variant = ((_a = targets[index]) == null ? void 0 : _a.target) ?? void 0;
         if (variant === currentVariant) return;
         currentVariant = variant;
-        if (wrapUpdatesInTransitions) {
-          React4.startTransition(() => {
-            setVariant(variant,);
-          },);
-        } else {
+        React4.startTransition(() => {
           setVariant(variant,);
-        }
+        },);
       },);
-    }, [animateOnce, threshold, targets, props.variant, scrollDirection, exitTarget, wrapUpdatesInTransitions,],);
+    }, [animateOnce, threshold, targets, props.variant, scrollDirection, exitTarget,],);
     useScrollDirectionChange(scrollDirection, setVariant, {
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
@@ -41368,11 +41855,7 @@ var withVariantAppearEffect = (Component18) =>
       if (!variantAppearEffectEnabled) return;
       const useObscuredVariant = !options.targets && !options.scrollDirection;
       const target = useObscuredVariant ? options.obscuredVariantId : void 0;
-      if (wrapUpdatesInTransitions) {
-        React4.startTransition(() => setVariant(target,));
-        return;
-      }
-      setVariant(target,);
+      React4.startTransition(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
       return /* @__PURE__ */ jsx(Component18, {
@@ -42161,7 +42644,6 @@ function createVariantName(weight, style,) {
   }
   return `${fontWeightNames[weight]}`;
 }
-var import_process3 = __toESM(require_browser(), 1,);
 function isVariableFont(font,) {
   return Boolean(font.variationAxes,);
 }
@@ -42622,11 +43104,11 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-AYKKG2SQ-TJFCYLCF.js');
+      const supportedFonts = await import('./framer-chunks/google-T7EOPBBK-Z5PQYCYP.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-26R7ZKFH-2QEZZUGW.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-I3DFKGTY-Z5C3RM4B.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -42636,15 +43118,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-SWLQ2TQI-KVBTY6BO.js');
+      const features = await import('./framer-chunks/google-FXMGJG4N-3YVGUBYO.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-TJDTFQF5-A5LBYTX6.js');
+      const features = await import('./framer-chunks/fontshare-LDKNUCSH-JQEK5723.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-O4FG2JPU-MLD5YE77.js');
+      const features = await import('./framer-chunks/framer-font-UL4TVQPD-IYLCFU52.js');
       return features == null ? void 0 : features.default;
     }
     default:
@@ -42678,7 +43160,7 @@ var weightNameToNumber = {
 };
 var weightNames = /* @__PURE__ */ Object.keys(weightNameToNumber,);
 var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic', 'variable',].join('|',)})`, 'u',))();
-var FontshareSource = class {
+var FontshareSource = class _FontshareSource {
   constructor() {
     __publicField(this, 'name', 'fontshare',/* Fontshare */
     );
@@ -42756,16 +43238,16 @@ var FontshareSource = class {
         return true;
       },);
       const fontVariants = fontStyles.map((fontStyle) => {
-        const variantInfo = FontshareSource.parseVariant(fontStyle.name,);
+        const variantInfo = _FontshareSource.parseVariant(fontStyle.name,);
         return {
           ...variantInfo,
-          selector: FontshareSource.createSelector(fontshareFont.name, fontStyle.name,),
+          selector: _FontshareSource.createSelector(fontshareFont.name, fontStyle.name,),
           isVariable: fontStyle.is_variable,
           fontshareVariantName: fontStyle.name,
           file: fontStyle.file,
         };
       },);
-      const key7 = FontshareSource.createMetadataSelector(fontshareFont.name,);
+      const key7 = _FontshareSource.createMetadataSelector(fontshareFont.name,);
       const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
       const familyName = fontshareFont.name;
       let fontFamily = this.getFontFamilyByName(familyName,);
@@ -42777,7 +43259,7 @@ var FontshareSource = class {
         };
         this.addFontFamily(fontFamily,);
       }
-      const fontMetadataSelector = FontshareSource.createMetadataSelector(fontshareFont.name,);
+      const fontMetadataSelector = _FontshareSource.createMetadataSelector(fontshareFont.name,);
       const hasOpenTypeFeatures = fontsWithOpenType[fontMetadataSelector];
       for (const fontVariant of fontVariants) {
         const {
@@ -42812,7 +43294,7 @@ var FontshareSource = class {
   async getOpenTypeFeatures(family,) {
     const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('fontshare',/* Fontshare */
     );
-    const selector = FontshareSource.createMetadataSelector(family,);
+    const selector = _FontshareSource.createMetadataSelector(family,);
     return fontToOpenTypeFeatures[selector];
   }
 };
@@ -42843,7 +43325,7 @@ var weightNameToNumber2 = {
   ExtraBold: 800,
   Black: 900,
 };
-var FramerFontSource = class {
+var FramerFontSource = class _FramerFontSource {
   constructor() {
     __publicField(this, 'name', 'framer',/* Framer */
     );
@@ -42892,7 +43374,7 @@ var FramerFontSource = class {
         familyName,
         ...rest
       } = framerFont;
-      const key7 = FramerFontSource.createMetadataSelector(framerFont.familyName,);
+      const key7 = _FramerFontSource.createMetadataSelector(framerFont.familyName,);
       const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
       let fontFamily = this.getFontFamilyByName(familyName,);
       if (!fontFamily) {
@@ -42912,12 +43394,12 @@ var FramerFontSource = class {
   async getOpenTypeFeatures(family,) {
     const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('framer',/* Framer */
     );
-    const selector = FramerFontSource.createMetadataSelector(family,);
+    const selector = _FramerFontSource.createMetadataSelector(family,);
     return fontToOpenTypeFeatures[selector];
   }
 };
 var googleFontSelectorPrefix = 'GF;';
-var GoogleFontSource = class {
+var GoogleFontSource = class _GoogleFontSource {
   constructor() {
     __publicField(this, 'name', 'google',/* Google */
     );
@@ -42996,11 +43478,11 @@ var GoogleFontSource = class {
       }
       const rawStaticVariants = webFont.variants;
       const staticVariants = rawStaticVariants.map((variantName) => {
-        const parsedVariant = GoogleFontSource.parseVariant(variantName,);
+        const parsedVariant = _GoogleFontSource.parseVariant(variantName,);
         return {
           ...parsedVariant,
           googleFontsVariantName: variantName,
-          selector: GoogleFontSource.createSelector(webFontName, variantName, false,),
+          selector: _GoogleFontSource.createSelector(webFontName, variantName, false,),
           isVariable: false,
           file: webFont.files[variantName],
         };
@@ -43008,21 +43490,21 @@ var GoogleFontSource = class {
       const variableFont = webFontsWithAxesMap[webFontName];
       const variableVariants = (variableFont == null ? void 0 : variableFont.axes)
         ? variableFont.variants.map((variantName) => {
-          const parsedVariant = GoogleFontSource.parseVariant(variantName,);
+          const parsedVariant = _GoogleFontSource.parseVariant(variantName,);
           return {
             ...parsedVariant,
             googleFontsVariantName: variantName,
-            selector: GoogleFontSource.createSelector(webFontName, variantName, true,),
+            selector: _GoogleFontSource.createSelector(webFontName, variantName, true,),
             isVariable: true,
             file: variableFont.files[variantName],
           };
         },)
         : [];
-      const key7 = GoogleFontSource.createMetadataSelector(webFont.family,);
+      const key7 = _GoogleFontSource.createMetadataSelector(webFont.family,);
       const variationAxes = fontsToVariationAxes == null ? void 0 : fontsToVariationAxes[key7];
       const allVariants = [...staticVariants, ...variableVariants,];
       const allSuccessfullyParsedVariants = allVariants.filter(isSuccessfullyParsedFontVariant,);
-      const fontMetadataSelector = GoogleFontSource.createMetadataSelector(webFontName,);
+      const fontMetadataSelector = _GoogleFontSource.createMetadataSelector(webFontName,);
       const hasOpenTypeFeatures = fontsWithOpenType[fontMetadataSelector];
       for (const variant of allVariants) {
         const {
@@ -43066,7 +43548,7 @@ var GoogleFontSource = class {
   async getOpenTypeFeatures(family,) {
     const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('google',/* Google */
     );
-    const selector = GoogleFontSource.createMetadataSelector(family,);
+    const selector = _GoogleFontSource.createMetadataSelector(family,);
     return fontToOpenTypeFeatures[selector];
   }
 };
@@ -43188,10 +43670,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-UJB733SC-7VBQ75F5.js')).default;
+            return (await import('./framer-chunks/google-2YSVUDPR-ZFLY6NGM.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-5ADQGVKG-P3LKIZR5.js')).default;
+            return (await import('./framer-chunks/fontshare-PNQPH3CW-6TWJ6FKC.js')).default;
           }
           default:
             assertNever(source,);
@@ -43402,7 +43884,7 @@ var FontStore = class {
         this.loadedSelectors.add(font.selector,);
         return 1;
       case 'framer':
-        if (import_process3.default.env.NODE_ENV !== 'test') {
+        if (!isTest()) {
           await isFontReady(font.family.name, font.style, font.weight,);
         }
         if (fontIsVariable) {
@@ -43722,207 +44204,6 @@ function isPageOrScroll(identifier,) {
   if (identifier === 'framer/Scroll') return true;
   return false;
 }
-var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2) => {
-  FormInputStyleVariableNames2['Padding'] = '--framer-input-padding';
-  FormInputStyleVariableNames2['BorderRadiusTopLeft'] = '--framer-input-border-radius-top-left';
-  FormInputStyleVariableNames2['BorderRadiusTopRight'] = '--framer-input-border-radius-top-right';
-  FormInputStyleVariableNames2['BorderRadiusBottomRight'] = '--framer-input-border-radius-bottom-right';
-  FormInputStyleVariableNames2['BorderRadiusBottomLeft'] = '--framer-input-border-radius-bottom-left';
-  FormInputStyleVariableNames2['BorderColor'] = '--framer-input-border-color';
-  FormInputStyleVariableNames2['BorderTopWidth'] = '--framer-input-border-top-width';
-  FormInputStyleVariableNames2['BorderRightWidth'] = '--framer-input-border-right-width';
-  FormInputStyleVariableNames2['BorderBottomWidth'] = '--framer-input-border-bottom-width';
-  FormInputStyleVariableNames2['BorderLeftWidth'] = '--framer-input-border-left-width';
-  FormInputStyleVariableNames2['BorderStyle'] = '--framer-input-border-style';
-  FormInputStyleVariableNames2['Background'] = '--framer-input-background';
-  FormInputStyleVariableNames2['FontFamily'] = '--framer-input-font-family';
-  FormInputStyleVariableNames2['FontWeight'] = '--framer-input-font-weight';
-  FormInputStyleVariableNames2['FontSize'] = '--framer-input-font-size';
-  FormInputStyleVariableNames2['FontColor'] = '--framer-input-font-color';
-  FormInputStyleVariableNames2['FontStyle'] = '--framer-input-font-style';
-  FormInputStyleVariableNames2['FontLetterSpacing'] = '--framer-input-font-letter-spacing';
-  FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
-  FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
-  FormInputStyleVariableNames2['FontOpenType'] = '--framer-input-font-open-type-features';
-  FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
-  FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
-  FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
-  FormInputStyleVariableNames2['FocusedBorderWidth'] = '--framer-input-focused-border-width';
-  FormInputStyleVariableNames2['FocusedBorderStyle'] = '--framer-input-focused-border-style';
-  FormInputStyleVariableNames2['FocusedBackground'] = '--framer-input-focused-background';
-  FormInputStyleVariableNames2['FocusedBoxShadow'] = '--framer-input-focused-box-shadow';
-  FormInputStyleVariableNames2['FocusedTransition'] = '--framer-input-focused-transition';
-  FormInputStyleVariableNames2['BooleanCheckedBackground'] = '--framer-input-boolean-checked-background';
-  FormInputStyleVariableNames2['BooleanCheckedBorderColor'] = '--framer-input-boolean-checked-border-color';
-  FormInputStyleVariableNames2['BooleanCheckedBorderWidth'] = '--framer-input-boolean-checked-border-width';
-  FormInputStyleVariableNames2['BooleanCheckedBorderStyle'] = '--framer-input-boolean-checked-border-style';
-  FormInputStyleVariableNames2['BooleanCheckedBoxShadow'] = '--framer-input-boolean-checked-box-shadow';
-  FormInputStyleVariableNames2['BooleanCheckedTransition'] = '--framer-input-boolean-checked-transition';
-  FormInputStyleVariableNames2['InvalidTextColor'] = '--framer-input-invalid-text-color';
-  FormInputStyleVariableNames2['IconBackgroundImage'] = '--framer-input-icon-image';
-  FormInputStyleVariableNames2['IconMaskImage'] = '--framer-input-icon-mask-image';
-  FormInputStyleVariableNames2['IconColor'] = '--framer-input-icon-color';
-  FormInputStyleVariableNames2['WrapperHeight'] = '--framer-input-wrapper-height';
-  return FormInputStyleVariableNames2;
-})(FormInputStyleVariableNames || {},);
-var Var = FormInputStyleVariableNames;
-var inputClassName = 'framer-form-input';
-var inputWrapperClassName = 'framer-form-input-wrapper';
-var emptyValueClassName = 'framer-form-input-empty';
-var forcedFocusClassName = 'framer-form-input-forced-focus';
-var forcedCheckedClassName = 'framer-form-input-forced-checked';
-function cssValue(value,) {
-  if (typeof value === 'number') return value;
-  if (value.startsWith('--',)) return css.variable(value,);
-  if (value === '') return '""';
-  return value;
-}
-function css(selector, declaration,) {
-  let output = ' ';
-  for (const key7 in declaration) {
-    const value = declaration[key7];
-    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
-  }
-  return selector + ' {' + output + '}';
-}
-((css2) => {
-  function variable(...variables) {
-    const lastItem = variables[variables.length - 1];
-    let value = lastItem.startsWith('--',) ? `var(${lastItem})` : lastItem;
-    for (let index = variables.length - 2; index >= 0; index--) {
-      const element = variables[index];
-      value = `var(${element}, ${value})`;
-    }
-    return value;
-  }
-  css2.variable = variable;
-})(css || (css = {}),);
-var sharedInputCSS = [
-  css(`.${inputClassName}`, {
-    padding: css.variable(Var.Padding,),
-    background: 'transparent',
-    fontFamily: css.variable(Var.FontFamily,),
-    fontWeight: css.variable(Var.FontWeight,),
-    fontSize: css.variable(Var.FontSize,),
-    fontStyle: css.variable(Var.FontStyle,),
-    color: css.variable(Var.FontColor,),
-    fontFeatureSettings: css.variable(Var.FontOpenType,),
-    border: 'none',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    width: '100%',
-    height: css.variable(Var.WrapperHeight, '100%',),
-    letterSpacing: css.variable(Var.FontLetterSpacing,),
-    textAlign: css.variable(Var.FontTextAlignment,),
-    lineHeight: css.variable(Var.FontLineHeight,),
-  },),
-  css(`.${inputClassName}:focus-visible`, {
-    outline: 'none',
-  },),
-];
-var inputWrapperCSS = /* @__PURE__ */ (() => [css(`.${inputWrapperClassName}`, {
-  overflow: 'hidden',
-},),])();
-var inputBorderAllSides =
-  `var(${Var.BorderTopWidth}) var(${Var.BorderRightWidth}) var(${Var.BorderBottomWidth}) var(${Var.BorderLeftWidth})`;
-var inputBorderCSS = [`.${inputWrapperClassName}:after {
-        content: "";
-        pointer-events: none;
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-top-left-radius: var(${Var.BorderRadiusTopLeft});
-        border-top-right-radius: var(${Var.BorderRadiusTopRight});
-        border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
-        border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
-        border-color: var(${Var.BorderColor});
-        border-top-width: var(${Var.BorderTopWidth});
-        border-right-width: var(${Var.BorderRightWidth});
-        border-bottom-width: var(${Var.BorderBottomWidth});
-        border-left-width: var(${Var.BorderLeftWidth});
-        border-style: var(${Var.BorderStyle});
-        transition: var(${Var.FocusedTransition});
-        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
-    }`,];
-var customValidityKey = 'customError';
-var validKey = 'valid';
-function isRelevantValidityStateKey(key7,) {
-  return key7 !== customValidityKey && key7 !== validKey;
-}
-function isInvalid(validity,) {
-  for (const key7 in validity) {
-    if (!isRelevantValidityStateKey(key7,)) continue;
-    if ((validity == null ? void 0 : validity[key7]) === true) return true;
-  }
-  return false;
-}
-function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
-  const isValidRef = React4.useRef(null,);
-  const handleInvalid = React4.useCallback((e) => {
-    if (!onInvalid) return;
-    if (isValidRef.current === false) return;
-    isValidRef.current = false;
-    e.currentTarget.setCustomValidity(' ',);
-    e.currentTarget.reportValidity();
-    onInvalid(e,);
-  }, [onInvalid,],);
-  const handleChange = React4.useCallback((e) => {
-    onChange == null ? void 0 : onChange(e,);
-    if (!onInvalid && !onValid) return;
-    const validity = e.target.validity;
-    if (isValidRef.current === false && !isInvalid(validity,)) {
-      e.currentTarget.setCustomValidity('',);
-      e.target.reportValidity();
-      isValidRef.current = true;
-      onValid == null ? void 0 : onValid();
-    }
-  }, [onInvalid, onValid, onChange,],);
-  const handleBlur = React4.useCallback((e) => {
-    if (!onInvalid) {
-      onBlur == null ? void 0 : onBlur(e,);
-      return;
-    }
-    if (isValidRef.current === false) return;
-    const validity = e.currentTarget.validity;
-    if (isInvalid(validity,)) {
-      handleInvalid(e,);
-      return;
-    }
-    onBlur == null ? void 0 : onBlur(e,);
-  }, [handleInvalid, onBlur, onInvalid,],);
-  return React4.useMemo(() => {
-    return {
-      onInvalid: handleInvalid,
-      onChange: handleChange,
-      onBlur: handleBlur,
-      onFocus,
-    };
-  }, [handleInvalid, handleChange, handleBlur, onFocus,],);
-}
-var iconSpacing = 10;
-var iconSize = 16;
-var inputIconCSSDeclaration = {
-  content: '',
-  display: 'block',
-  position: 'absolute',
-  right: 0,
-  top: 0,
-  bottom: 0,
-  width: `${iconSize}px`,
-  boxSizing: 'content-box',
-  padding: css.variable(Var.Padding,),
-  border: 'none',
-  pointerEvents: 'none',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: `${iconSize}px`,
-  maskRepeat: 'no-repeat',
-  maskSize: `${iconSize}px`,
-  backgroundColor: css.variable(Var.IconColor,),
-};
 var passwordManagerIgnoreDataProps = {
   // 1Password
   'data-1p-ignore': true,
@@ -44891,12 +45172,20 @@ function createKeyframes(effect,) {
   }
   return out;
 }
-var emojiSplitRe =
-  // eslint-disable-next-line redos-detector/no-unsafe-regex
-  /\p{Regional_Indicator}{2}|\p{Emoji}\p{Emoji_Modifier}?\p{Variation_Selector}?(?:\u{200d}\p{Emoji}\p{Emoji_Modifier}?\p{Variation_Selector}?)*|./gu;
+var emojiSplitRe = /* @__PURE__ */ (() => {
+  return new RegExp(
+    '\\p{Regional_Indicator}{2}|\\p{Emoji}\\p{Emoji_Modifier}?\\p{Variation_Selector}?(?:\\u{200d}\\p{Emoji}\\p{Emoji_Modifier}?\\p{Variation_Selector}?)*|.',
+    'gu',
+  );
+})();
 function tokenizeText(text, tokenization = 'character', elements, style,) {
   switch (tokenization) {
     case 'character':
+    // When we want to animate "lines" that aren't split by newlines, but
+    // instead by wrapping, we have to split the text into characters, and
+    // then measure the top offset of each character, creating groups of
+    // characters every time the top offset changes
+    // eslint-disable-next-line no-fallthrough
     case 'line': {
       const words = text.split(' ',);
       const lastWordIndex = words.length - 1;
@@ -44948,6 +45237,7 @@ function tokenizeText(text, tokenization = 'character', elements, style,) {
         }, char + i + isLastWord,);
       },);
     }
+    // Per: Element doesn't require text to be split.
     case 'element':
     default:
       return text;
@@ -46857,14 +47147,14 @@ function getTabIndexProps(tabIndex,) {
   };
 }
 var keys22 = /* @__PURE__ */ new Map();
-var InternalID = class {
+var InternalID = class _InternalID {
   constructor(id3,) {
     this.id = id3;
     __publicField(this, '_link', null,);
     __publicField(this, '_urllink', null,);
   }
   add(str,) {
-    return InternalID.forKey(this.id + str,);
+    return _InternalID.forKey(this.id + str,);
   }
   toString() {
     return this.id;
@@ -46882,13 +47172,13 @@ var InternalID = class {
   static forKey(key7,) {
     let res = keys22.get(key7,);
     if (res) return res;
-    res = new InternalID('a' + (1e3 + keys22.size) + 'z',);
+    res = new _InternalID('a' + (1e3 + keys22.size) + 'z',);
     keys22.set(key7, res,);
     return res;
   }
 };
 var PathSegmentOuter = /* @__PURE__ */ (() => {
-  const _PathSegment = class {
+  const _PathSegment = class _PathSegment {
     constructor(value,) {
       __publicField(this, '__class', 'PathSegment',);
       __publicField(this, 'x', 0,);
@@ -46907,27 +47197,26 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
       return Object.assign(Object.create(Object.getPrototypeOf(this,),), this, value,);
     }
   };
-  let PathSegment2 = _PathSegment;
-  __publicField(PathSegment2, 'displayName', 'WithClassDiscriminatorMixin(PathSegment)',);
-  __publicField(PathSegment2, 'point', (pathSegment) => {
+  __publicField(_PathSegment, 'displayName', 'WithClassDiscriminatorMixin(PathSegment)',);
+  __publicField(_PathSegment, 'point', (pathSegment) => {
     return {
       x: pathSegment.x,
       y: pathSegment.y,
     };
   },);
-  __publicField(PathSegment2, 'handleOut', (pathSegment) => {
+  __publicField(_PathSegment, 'handleOut', (pathSegment) => {
     return {
       x: pathSegment.handleOutX,
       y: pathSegment.handleOutY,
     };
   },);
-  __publicField(PathSegment2, 'handleIn', (pathSegment) => {
+  __publicField(_PathSegment, 'handleIn', (pathSegment) => {
     return {
       x: pathSegment.handleInX,
       y: pathSegment.handleInY,
     };
   },);
-  __publicField(PathSegment2, 'calculatedHandleOut', (pathSegment) => {
+  __publicField(_PathSegment, 'calculatedHandleOut', (pathSegment) => {
     switch (pathSegment.handleMirroring) {
       case 'symmetric':
       case 'disconnected':
@@ -46940,7 +47229,7 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
         };
     }
   },);
-  __publicField(PathSegment2, 'calculatedHandleIn', (pathSegment) => {
+  __publicField(_PathSegment, 'calculatedHandleIn', (pathSegment) => {
     switch (pathSegment.handleMirroring) {
       case 'symmetric':
         return Point.subtract(_PathSegment.point(pathSegment,), _PathSegment.handleOut(pathSegment,),);
@@ -46951,7 +47240,7 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
         return _PathSegment.point(pathSegment,);
     }
   },);
-  __publicField(PathSegment2, 'curveDefault', (points, index,) => {
+  __publicField(_PathSegment, 'curveDefault', (points, index,) => {
     if (points.length > 2) {
       let pointBefore;
       let pointAfter;
@@ -46978,6 +47267,7 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
       y: 10,
     };
   },);
+  let PathSegment2 = _PathSegment;
 
   PathSegment2.prototype.__class = 'PathSegment';
   return PathSegment2;
@@ -48048,6 +48338,7 @@ export {
   circInOut,
   circOut,
   clamp,
+  clampRGB,
   collectVisualStyleFromProps,
   Color,
   color,
