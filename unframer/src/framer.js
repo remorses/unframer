@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.VXACZ4AY.mjs
+// /:https://app.framerstatic.com/framer.RU4W3YHZ.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -13076,6 +13076,29 @@ function useViewTransition() {
     update();
   }, [sitePageEffects,],);
 }
+function updateCanonicalURL(url, prevUrl,) {
+  requestIdleCallback(() => {
+    const canonical = document.querySelector('link[rel=\'canonical\']',);
+    if (!canonical) return;
+    const newURL = new URL(url, prevUrl,);
+    newURL.search = '';
+    canonical.setAttribute('href', newURL.toString(),);
+  },);
+}
+var announceDiv;
+var announceNavigation = () => {
+  if (!announceDiv) {
+    announceDiv = document.createElement('div',);
+    announceDiv.setAttribute('aria-live', 'assertive',);
+    announceDiv.setAttribute('aria-atomic', 'true',);
+    announceDiv.style.position = 'absolute';
+    announceDiv.style.transform = 'scale(0)';
+    document.body.append(announceDiv,);
+  }
+  setTimeout(() => {
+    announceDiv.textContent = document.title;
+  }, 60,);
+};
 function useMonitorNextPaintAfterRender(label,) {
   const startLabel = `${label}-start`;
   const endLabel = `${label}-end`;
@@ -13088,7 +13111,7 @@ function useMonitorNextPaintAfterRender(label,) {
       }
     },
     void 0,
-    // user-blocking ensures we get the correct timings here. Other priorites might delay this effect a little bit.
+    // user-blocking ensures we get the correct timings here. Other priorities might delay this effect a little bit.
     {
       priority: 'user-blocking',
     },
@@ -13147,15 +13170,6 @@ async function pushRouteState(
     );
     return await urlUpdatePromise;
   } catch {}
-}
-function updateCanonicalURL(url, prevUrl,) {
-  requestIdleCallback(() => {
-    const canonical = document.querySelector('link[rel=\'canonical\']',);
-    if (!canonical) return;
-    const newURL = new URL(url, prevUrl,);
-    newURL.search = '';
-    canonical.setAttribute('href', newURL.toString(),);
-  },);
 }
 function isHistoryState(data2,) {
   const routeIdKey = 'routeId';
@@ -13260,7 +13274,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       localeId,
     } = state2;
     if (!isString(routeId,)) return;
-    void monitorNextPaintAfterRender();
+    const nextRender = monitorNextPaintAfterRender();
     const changeRoute = () => {
       setCurrentRouteId(
         routeId,
@@ -13271,15 +13285,19 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         false,
       );
     };
-    updateCanonicalURL(window.location.href,);
-    const transition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
-    if (transition) {
-      void transition.updateCallbackDone.then((_d = viewTransitionReady.current) == null ? void 0 : _d.resolve,).catch(
-        (_e = viewTransitionReady.current) == null ? void 0 : _e.reject,
-      );
-    } else {
-      (_f = viewTransitionReady.current) == null ? void 0 : _f.resolve();
+    const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
+    const navigationTransition = (_d = window.navigation) == null ? void 0 : _d.transition;
+    await ((viewTransition == null ? void 0 : viewTransition.updateCallbackDone) ?? Promise.resolve()).then(
+      (_e = viewTransitionReady.current) == null ? void 0 : _e.resolve,
+    ).catch((_f = viewTransitionReady.current) == null ? void 0 : _f.reject,);
+    await nextRender;
+    try {
+      await (navigationTransition == null ? void 0 : navigationTransition.finished);
+    } catch (error) {
+      console.warn('Popstate transition failed', error,);
     }
+    announceNavigation();
+    updateCanonicalURL(window.location.href,);
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback((event) => {
     if (event.navigationType !== 'traverse') return;
@@ -14004,6 +14022,73 @@ function matchPath(path, routePath,) {
 }
 function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
+}
+function getVariantsFromServerTiming() {
+  var _a;
+  if ('PerformanceServerTiming' in window) {
+    const serverTiming = (_a = performance.getEntriesByType('navigation',)[0]) == null ? void 0 : _a.serverTiming;
+    if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
+    const entry = serverTiming.find((it) => it.name === 'abtests');
+    if (!entry) return new URLSearchParams();
+    return new URLSearchParams(entry.description,);
+  }
+  return new URLSearchParams();
+}
+var cookieValueRegex = /[^|; ]?framerAbTestingOverrides=(?<value>[^;]*)[;|$]?/u;
+function getVariantsFromCookie() {
+  var _a;
+  let value = '';
+  try {
+    const matches = cookieValueRegex.exec(document.cookie,);
+    value = ((_a = matches == null ? void 0 : matches.groups) == null ? void 0 : _a.value) ?? '';
+  } catch {}
+  return new URLSearchParams(value,);
+}
+function patchRoute(routes, abTestId, variantId,) {
+  const variantRoute = routes[variantId];
+  if (!variantRoute) return;
+  const routeId = variantRoute.abTestingParentId;
+  if (!routeId) return;
+  if (!routes[routeId]) return;
+  routes[routeId] = {
+    ...variantRoute,
+    abTestingVariantId: variantId,
+    abTestId,
+  };
+}
+function patchRoutesFromSearchParams(routes, variants,) {
+  for (const [routeId, variantId,] of variants) {
+    patchRoute(routes, routeId, variantId,);
+  }
+}
+function removeRoutesVariants(routes, initialRouteId,) {
+  var _a, _b;
+  for (const routeId in routes) {
+    if (
+      routeId !== initialRouteId && ((_a = routes[routeId]) == null ? void 0 : _a.abTestingParentId) &&
+      !((_b = routes[routeId]) == null ? void 0 : _b.abTestId)
+    ) {
+      delete routes[routeId];
+    }
+  }
+}
+function patchInitialRoute(routes, routeId,) {
+  if (!routes[routeId]) return;
+  if (!routes[routeId].abTestingParentId) return;
+  const parentId = routes[routeId].abTestingParentId;
+  routes[parentId] = {
+    ...routes[routeId],
+    abTestingVariantId: routeId,
+  };
+}
+function patchRoutesForABTesting(routes, initialRouteId,) {
+  if (typeof window === 'undefined') return;
+  if (initialRouteId) {
+    patchInitialRoute(routes, initialRouteId,);
+  }
+  patchRoutesFromSearchParams(routes, getVariantsFromServerTiming(),);
+  patchRoutesFromSearchParams(routes, getVariantsFromCookie(),);
+  removeRoutesVariants(routes, initialRouteId,);
 }
 var warningMessages = /* @__PURE__ */ new Set();
 function warnOnce2(keyMessage, ...rest) {
@@ -30786,7 +30871,10 @@ function renderBranchedChildrenFromPropertyOverrides(
       // affect the size of the generated HTML.
       /* @__PURE__ */
       jsx(SSRParentVariantsContext.Provider, {
-        value: new Set(variants,),
+        value: {
+          primaryVariantId,
+          variants: new Set(variants,),
+        },
         children: cloneChildren(
           child,
           propOverrides
@@ -30861,7 +30949,7 @@ var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function Pro
   ...props
 }, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  const parentVariants = React4.useContext(SSRParentVariantsContext,);
+  const ancestorCtx = React4.useContext(SSRParentVariantsContext,);
   const isHydrationOrSSR = useIsHydrationOrSSR();
   const action = useConstant2(() => {
     if (isHydrationOrSSR.current) {
@@ -30883,6 +30971,9 @@ var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function Pro
     primaryVariantId,
     variantClassNames,
   } = generatedComponentContext;
+  const parentVariants = (ancestorCtx == null ? void 0 : ancestorCtx.primaryVariantId) === primaryVariantId
+    ? ancestorCtx == null ? void 0 : ancestorCtx.variants
+    : void 0;
   switch (action) {
     case 0:
       return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
@@ -31002,8 +31093,9 @@ function withOptimizedAppearEffect(Component18,) {
     optimized,
     ...props
   }, ref,) => {
+    var _a;
     const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
-    const variants = React4.useContext(SSRParentVariantsContext,);
+    const variants = (_a = React4.useContext(SSRParentVariantsContext,)) == null ? void 0 : _a.variants;
     const id3 = props[framerAppearIdKey];
     if (id3 && !isBrowser2()) {
       framerAppearEffects.setAll(
@@ -34279,7 +34371,6 @@ function maybeReplaceAnchorWithSpan(component,) {
   return component;
 }
 function useTrackLinkClick({
-  newTrackingEventsEnabled,
   nodeId,
   clickTrackingId,
   router,
@@ -34288,7 +34379,7 @@ function useTrackLinkClick({
 },) {
   return useCallback(async (hrefAttribute) => {
     var _a, _b, _c, _d, _e;
-    if (!newTrackingEventsEnabled || !((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
     const pageviewEventData = router.pageviewEventData.current;
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!isLinkToWebPage(pageLink,)) {
@@ -34325,7 +34416,7 @@ function useTrackLinkClick({
       targetWebPageId,
       targetCollectionItemId,
     },);
-  }, [newTrackingEventsEnabled, nodeId, clickTrackingId, router, href, activeLocale,],);
+  }, [nodeId, clickTrackingId, router, href, activeLocale,],);
 }
 function makeUrlAbsolute(href,) {
   try {
@@ -34402,11 +34493,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const {
     activeLocale,
   } = useLocaleInfo();
-  const {
-    newTrackingEvents,
-  } = useLibraryFeatures();
   const trackLinkClick = useTrackLinkClick({
-    newTrackingEventsEnabled: newTrackingEvents,
     nodeId,
     clickTrackingId,
     router,
@@ -34659,13 +34746,12 @@ function addUTMTagsToFormData(data2, document2,) {
   } catch (e) {}
 }
 function trackFormSubmit({
-  newTrackingEventsEnabled,
   router,
   nodeId,
   submitTrackingId,
 },) {
   var _a;
-  if (!newTrackingEventsEnabled || !((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
+  if (!((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
   const pageviewEventData = router.pageviewEventData.current;
   const eventData = {
     ...pageviewEventData,
@@ -34762,9 +34848,6 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     onError,
     onLoading,
   };
-  const {
-    newTrackingEvents,
-  } = useLibraryFeatures();
   async function redirectTo(link,) {
     var _a, _b;
     if (isString(link,)) {
@@ -34808,7 +34891,6 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     try {
       (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
       trackFormSubmit({
-        newTrackingEventsEnabled: newTrackingEvents,
         router,
         nodeId,
         submitTrackingId,
@@ -34917,6 +34999,7 @@ function isSamePage(a, b,) {
     Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
 }
 function getPageviewEventData({
+  abTestId,
   framerSiteId,
   routeId,
   routePath,
@@ -34924,6 +35007,7 @@ function getPageviewEventData({
   localeCode,
 },) {
   return {
+    abTestId,
     framerSiteId,
     routePath: routePath || '/',
     collectionItemId,
@@ -34933,13 +35017,9 @@ function getPageviewEventData({
 }
 var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,) => {
   const framerSiteId = useContext(FormContext,);
-  const {
-    newTrackingEvents,
-  } = useLibraryFeatures();
   const pageviewEventData = useRef();
   const skipFirstPageView = useRef(true,);
   useEffect(() => {
-    if (!newTrackingEvents) return;
     const getFullPageviewEventData = async () => {
       var _a;
       let collectionItemId = null;
@@ -34951,8 +35031,10 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, colle
         }
       }
       return getPageviewEventData({
+        abTestId: currentRoute == null ? void 0 : currentRoute.abTestId,
         framerSiteId: framerSiteId ?? null,
-        routeId: currentRouteId,
+        // If we are in a variant route, let's use the variant ID as the route ID instead, so that the analytics panel will be able to show the correct tracking data.
+        routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
         routePath: currentRoute == null ? void 0 : currentRoute.path,
         collectionItemId,
         localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
@@ -34976,7 +35058,7 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, colle
     return () => {
       window.removeEventListener('pageshow', listener,);
     };
-  }, [currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale, framerSiteId, newTrackingEvents,],);
+  }, [currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale, framerSiteId,],);
   return pageviewEventData;
 };
 var defaultLocaleId = 'default';
@@ -35010,7 +35092,7 @@ function useNavigationTransition() {
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
   const navigationController = useRef(void 0,);
   return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
-    var _a;
+    var _a, _b;
     setHydrationDone();
     const hasUpdateURL = updateURL !== void 0;
     (_a = navigationController.current) == null ? void 0 : _a.abort();
@@ -35034,10 +35116,17 @@ function useNavigationTransition() {
     },).catch(noop2,);
     transitionFn(signal,);
     startNativeSpinner(navigationPromise, updateURL, controller,);
-    return nextRender.then(() => {
-      if (controller == null ? void 0 : controller.signal.aborted) return;
-      resolveNavigationPromise();
-    },);
+    await nextRender;
+    if (signal == null ? void 0 : signal.aborted) return;
+    const navigationTransition = (_b = window.navigation) == null ? void 0 : _b.transition;
+    resolveNavigationPromise();
+    try {
+      await (navigationTransition == null ? void 0 : navigationTransition.finished);
+    } catch (error) {
+      console.error('Navigation transition failed', error,);
+    }
+    if (signal == null ? void 0 : signal.aborted) return;
+    announceNavigation();
   }, [monitorNextPaintAfterRender, startNativeSpinner,],);
 }
 function Router({
@@ -48526,6 +48615,7 @@ export {
   PageRoot,
   ParentSizeState,
   parseFramerPageLink,
+  patchRoutesForABTesting,
   pathDefaults,
   PathSegment,
   PathVariablesContext,
@@ -48703,6 +48793,7 @@ export {
   withVariantFX,
   wrap,
 };
+//! Credit to Astro | MIT License
 /**
  * @license Emotion v11.0.0
  * MIT License
