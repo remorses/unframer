@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.RU4W3YHZ.mjs
+// /:https://app.framerstatic.com/framer.J5VZGGYJ.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -14066,7 +14066,7 @@ function removeRoutesVariants(routes, initialRouteId,) {
   for (const routeId in routes) {
     if (
       routeId !== initialRouteId && ((_a = routes[routeId]) == null ? void 0 : _a.abTestingParentId) &&
-      !((_b = routes[routeId]) == null ? void 0 : _b.abTestId)
+      !((_b = routes[routeId]) == null ? void 0 : _b.abTestingVariantId)
     ) {
       delete routes[routeId];
     }
@@ -20010,37 +20010,75 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         ol.framer-text {
             --list-style-type: decimal;
         }
-    `, /* css */
+    `,
+  // Why all the `position: relative` and `position: absolute` and `::before` tricks?
+  // We want ul’s disks and ol’s numbers to be left-aligned at the start of the line.
+  // There’s no way to do that with ::marker styles alone, so we have to resort to this trick.
+  /* css */
   `
         ul.framer-text,
         ol.framer-text {
-            display: table;
-            width: 100%;
+            padding-left: 3ch;
+            position: relative;
         }
     `, /* css */
   `
         li.framer-text {
-            display: table-row;
             counter-increment: list-item;
             list-style: none;
         }
-    `, /* css */
+    `,
+  // font-variant-numeric: tabular-nums enables monospaced numbers (which is neat in a vertical list of numbers)
+  // and makes `li`s match the default browser styles better.
+  /* css */
   `
         ol.framer-text > li.framer-text::before {
-            display: table-cell;
-            width: 2.25ch;
-            box-sizing: border-box;
-            padding-inline-end: 0.75ch;
+            position: absolute;
+            left: 0;
             content: counter(list-item, var(--list-style-type)) ".";
-            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+    `,
+  // Why this? Due to `position: absolute` (see above), if a list has a lot of items, the numbers
+  // might start overlapping the text content. This compensates for that. The trick is based on
+  // https://alistapart.com/article/quantity-queries-for-css/#section6. The trick doesn’t account
+  // for lists longer than 1,000,000 items, but if you have a list of 1,000,000 items, you’ll have
+  // other problems ¯\_(ツ)_/¯
+  /* css */
+  `
+        ol.framer-text > li.framer-text:nth-last-child(n + 100),
+        ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
+            padding-left: 1ch;
+        }
+    `, /* css */
+  `
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
+            padding-left: 2ch;
+        }
+    `, /* css */
+  `
+        ol.framer-text > li.framer-text:nth-last-child(n + 10000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
+            padding-left: 3ch;
+        }
+    `, /* css */
+  `
+        ol.framer-text > li.framer-text:nth-last-child(n + 100000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
+            padding-left: 4ch;
+        }
+    `, /* css */
+  `
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
+            padding-left: 5ch;
         }
     `, /* css */
   `
         ul.framer-text > li.framer-text::before {
-            display: table-cell;
-            width: 2.25ch;
-            box-sizing: border-box;
-            padding-inline-end: 0.75ch;
+            position: absolute;
+            left: 0;
             content: "\u2022";
         }
     `, /* css */
