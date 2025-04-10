@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.J5VZGGYJ.mjs
+// /:https://app.framerstatic.com/framer.IJSF7P5H.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -14044,21 +14044,20 @@ function getVariantsFromCookie() {
   } catch {}
   return new URLSearchParams(value,);
 }
-function patchRoute(routes, abTestId, variantId,) {
-  const variantRoute = routes[variantId];
-  if (!variantRoute) return;
-  const routeId = variantRoute.abTestingParentId;
-  if (!routeId) return;
+function patchRoute(routes, abTestId, abTestingVariantId,) {
+  const route = routes[abTestingVariantId];
+  if (!route) return;
+  const routeId = route.abTestingParentId ?? abTestingVariantId;
   if (!routes[routeId]) return;
   routes[routeId] = {
-    ...variantRoute,
-    abTestingVariantId: variantId,
+    ...route,
+    abTestingVariantId,
     abTestId,
   };
 }
 function patchRoutesFromSearchParams(routes, variants,) {
-  for (const [routeId, variantId,] of variants) {
-    patchRoute(routes, routeId, variantId,);
+  for (const [abTestId, abTestingVariantId,] of variants) {
+    patchRoute(routes, abTestId, abTestingVariantId,);
   }
 }
 function removeRoutesVariants(routes, initialRouteId,) {
@@ -22295,6 +22294,8 @@ function StaticImage({
       decoding: syncDecoding ? 'sync' : 'async',
       fetchPriority: image.fetchPriority,
       loading: image.loading,
+      width: image.pixelWidth,
+      height: image.pixelHeight,
       sizes: image.sizes,
       srcSet: image.srcSet,
       src: source,
