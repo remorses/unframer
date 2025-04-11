@@ -1,24 +1,18 @@
 'use client'
 
 import '@/framer/styles.css'
-import { AnimatePresence, PageRoot,  } from 'unframer'
 
-import Logos from '@/framer/logos'
-import InputFramerComponent from '@/framer/input'
-import Nav from '@/framer/framerNav'
+import Card from '@/framer/card'
+import Collection from '@/framer/collection'
+import Footer from '@/framer/footer'
 import Form from '@/framer/form'
+import Nav from '@/framer/framerNav'
+import GrowthSpaceMenu from '@/framer/GrowthSpaceMenu'
+import Hero from '@/framer/hero'
+import InputFramerComponent from '@/framer/input'
+import MenuOverlay from '@/framer/menu-overlay'
 import Menus from '@/framer/menus'
 import Test from '@/framer/testimonials'
-import Comp from '@/framer/fylo'
-import FullPage from '@/framer/full-page'
-import Hero from '@/framer/hero'
-import MenuOverlay from '@/framer/menu-overlay'
-import Collection from '@/framer/collection'
-import Card from '@/framer/card'
-import GrowthSpaceMenu from '@/framer/GrowthSpaceMenu'
-import Footer from '@/framer/footer'
-import Issue17FramerComponent from '@/framer/issue-17'
-import { use } from 'react'
 
 const proxyThatLogsProps = (original) =>
     new Proxy(original, {
