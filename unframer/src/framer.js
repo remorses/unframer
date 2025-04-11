@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.IJSF7P5H.mjs
+// /:https://app.framerstatic.com/framer.QVMHWXL2.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -33719,6 +33719,11 @@ var LazyValue = class _LazyValue {
   async readAsync() {
     const promise = this.preload();
     if (promise) await promise;
+    return this.read();
+  }
+  use() {
+    const promise = this.preload();
+    if (promise) throw promise;
     return this.read();
   }
 };
