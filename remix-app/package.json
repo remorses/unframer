@@ -15,7 +15,7 @@
     "dependencies": {
         "@builder.io/react-hydration-overlay": "^0.3.0",
         "@remix-run/node": "^2.15.2",
-        "@remix-run/react": "^2.15.2",
+        "@remix-run/react": "^2.16.5",
         "@remix-run/serve": "^2.15.2",
         "isbot": "^4.4.0",
         "nextjs-app": "workspace:*",
@@ -25,8 +25,8 @@
     },
     "devDependencies": {
         "@remix-run/dev": "2.15.2",
-        "@types/react": "^19.0.10",
-        "@types/react-dom": "^19.0.4",
+        "@types/react": "^19.1.1",
+        "@types/react-dom": "^19.1.2",
         "autoprefixer": "10.4.20",
         "postcss": "8.5.1",
         "tailwindcss": "3.3.2",
