@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QVMHWXL2.mjs
+// /:https://app.framerstatic.com/framer.R2OPJ64Q.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense3, } from 'react';
@@ -14061,7 +14061,7 @@ function patchRoutesFromSearchParams(routes, variants,) {
   }
 }
 function removeRoutesVariants(routes, initialRouteId,) {
-  var _a, _b;
+  var _a, _b, _c, _d, _e;
   for (const routeId in routes) {
     if (
       routeId !== initialRouteId && ((_a = routes[routeId]) == null ? void 0 : _a.abTestingParentId) &&
@@ -14069,6 +14069,13 @@ function removeRoutesVariants(routes, initialRouteId,) {
     ) {
       delete routes[routeId];
     }
+  }
+  if (initialRouteId && ((_c = routes[initialRouteId]) == null ? void 0 : _c.abTestingParentId)) {
+    const parentRoute = routes[(_d = routes[initialRouteId]) == null ? void 0 : _d.abTestingParentId];
+    if (!parentRoute) return;
+    routes[initialRouteId].abTestId = parentRoute.abTestId;
+    routes[initialRouteId].abTestingVariantId = parentRoute.abTestingVariantId;
+    delete routes[(_e = routes[initialRouteId]) == null ? void 0 : _e.abTestingParentId];
   }
 }
 function patchInitialRoute(routes, routeId,) {
@@ -19119,6 +19126,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['ResponsiveImage'] = 'responsiveimage';
   ControlType2['File'] = 'file';
   ControlType2['ComponentInstance'] = 'componentinstance';
+  ControlType2['Slot'] = 'slot';
   ControlType2['Array'] = 'array';
   ControlType2['EventHandler'] = 'eventhandler';
   ControlType2['Transition'] = 'transition';
@@ -20527,6 +20535,7 @@ function getControlDefaultValue(control,) {
       case 'segmentedenum':
       case 'responsiveimage':
       case 'componentinstance':
+      case 'slot':
       case 'scrollsectionref':
       case 'customcursor':
       case 'cursor':
@@ -44889,111 +44898,6 @@ var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
     ],
   },);
 },);
-function isShallowEqualArray(a, b,) {
-  return a.length === b.length && a.every((v, i,) => v === b[i]);
-}
-function convertPresentationTree(node, converter, componentDefinitionProvider, getCachedNode, skipCodeComponentPropsCache = false,) {
-  const cachedNode = getCachedNode && getCachedNode(node,);
-  if (cachedNode) return cachedNode;
-  let children;
-  if (isCodeComponentContainerPresentation(node,)) {
-    children = convertCodeComponentContainer(componentDefinitionProvider, node, converter, getCachedNode, skipCodeComponentPropsCache,);
-  } else if (node.children) {
-    children = node.children.map((n) =>
-      convertPresentationTree(n, converter, componentDefinitionProvider, getCachedNode, skipCodeComponentPropsCache,)
-    );
-  }
-  return converter(node, children,);
-}
-function isCodeComponentContainerPresentation(value,) {
-  return !!value.codeComponentIdentifier;
-}
-function convertCodeComponentContainer(componentDefinitionProvider, node, converter, getCachedNode, skipCodeComponentPropsCache = false,) {
-  var _a;
-  const codeComponentChildren = node.getComponentChildren ? node.getComponentChildren(componentDefinitionProvider,) : [];
-  const codeComponentSlots = node.getComponentSlotChildren ? node.getComponentSlotChildren(componentDefinitionProvider,) : {};
-  let codeComponentPresentation;
-  const props = node.getCodeComponentProps
-    ? node.getCodeComponentProps(componentDefinitionProvider, {
-      skipCache: skipCodeComponentPropsCache,
-    },)
-    : void 0;
-  if (node.cache.codeComponentPresentation) {
-    codeComponentPresentation = node.cache.codeComponentPresentation;
-    if (!isShallowEqualArray(codeComponentPresentation.children, codeComponentChildren,)) {
-      codeComponentPresentation.cache.reactElement = null;
-      codeComponentPresentation.children = codeComponentChildren;
-    }
-    if (!isEqual(codeComponentPresentation.props, props,)) {
-      codeComponentPresentation.cache.reactElement = null;
-      codeComponentPresentation.cache.props = null;
-      codeComponentPresentation.props = props;
-    }
-  } else {
-    const {
-      id: containerId,
-      codeComponentIdentifier: identifier,
-      codeComponentPackageVersion,
-    } = node;
-    node.cache.codeComponentPresentation = codeComponentPresentation = new CodeComponentPresentation(
-      containerId + identifier,
-      identifier,
-      codeComponentPackageVersion,
-      props,
-      codeComponentChildren,
-    );
-  }
-  codeComponentPresentation.props.placeholders = node.cache.placeholders;
-  const slotKeys = Object.keys(codeComponentSlots,);
-  if (slotKeys.length) {
-    codeComponentPresentation.props = {
-      ...codeComponentPresentation.props,
-    };
-    codeComponentPresentation.props.__slotKeys = slotKeys;
-    for (const slotKey of slotKeys) {
-      const slotChildren = (_a = codeComponentSlots[slotKey]) == null
-        ? void 0
-        : _a.map((child) =>
-          convertPresentationTree(child, converter, componentDefinitionProvider, getCachedNode, skipCodeComponentPropsCache,)
-        );
-      codeComponentPresentation.props[slotKey] = slotChildren;
-    }
-  }
-  return [
-    converter(
-      codeComponentPresentation,
-      codeComponentPresentation.children.map((child) =>
-        convertPresentationTree(child, converter, componentDefinitionProvider, getCachedNode, skipCodeComponentPropsCache,)
-      ),
-    ),
-  ];
-}
-var CodeComponentPresentation = class {
-  constructor(id3, componentIdentifier, packageVersion, props, children, codeOverrideIdentifier,) {
-    this.id = id3;
-    this.componentIdentifier = componentIdentifier;
-    this.packageVersion = packageVersion;
-    this.props = props;
-    this.children = children;
-    this.codeOverrideIdentifier = codeOverrideIdentifier;
-    __publicField(this, 'cache', {},);
-  }
-  getProps() {
-    return {
-      ...this.props,
-      id: this.id,
-      key: this.id,
-    };
-  }
-  rect(_parentSizeInfo,) {
-    return {
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-    };
-  }
-};
 var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
 var trimSlugRegExp = /^-+|-+$/gu;
 function slugify(value,) {
@@ -45046,6 +44950,9 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
     return pre1 + pre2 + `"${escapeHTML(relativePath + (elementId ? `#${elementId}` : ''),)}"` + attributes + post;
   },);
 }
+function isShallowEqualArray(a, b,) {
+  return a.length === b.length && a.every((v, i,) => v === b[i]);
+}
 var htmlEscapes = {
   '&': '&amp;',
   '<': '&lt;',
@@ -45083,7 +44990,6 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
     rotation = 0,
     verticalAlignment = 'top',
     isEditable = false,
-    willChangeTransform,
     environment: environment2 = RenderTarget.current,
     withExternalLayout = false,
     positionSticky,
@@ -45206,9 +45112,6 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
   }
   collectFiltersFromProps(props, style,);
   collectTextShadowsForProps(props, style,);
-  if (willChangeTransform) {
-    forceLayerBackingWithCSSProperties(style,);
-  }
   Object.assign(style, props.style,);
   return /* @__PURE__ */ jsx(motion.div, {
     id: id3,
@@ -45749,7 +45652,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
     verticalAlignment = 'top',
     visible = true,
     width,
-    willChangeTransform,
     withExternalLayout = false,
     viewBox,
     viewBoxScale = 1,
@@ -45821,9 +45723,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   }
   collectFiltersFromProps(props, containerStyle,);
   collectTextShadowsForProps(props, containerStyle,);
-  if (willChangeTransform) {
-    forceLayerBackingWithCSSProperties(containerStyle,);
-  }
   Object.assign(containerStyle, _initialStyle, style, positionStyle,);
   if (layoutId) {
     rest.layout = 'preserve-aspect';
@@ -46991,7 +46890,6 @@ var TextComponent = /* @__PURE__ */ (() => {
           font,
           visible,
           alignment,
-          willChangeTransform,
           opacity,
           id: id3,
           layoutId,
@@ -47044,9 +46942,6 @@ var TextComponent = /* @__PURE__ */ (() => {
         collectTextShadowsForProps(this.props, style,);
         if (style.opacity === 1 || style.opacity === void 0) {
           delete style.opacity;
-        }
-        if (willChangeTransform) {
-          forceLayerBackingWithCSSProperties(style,);
         }
         let rawHTML = this.props.rawHTML;
         const text = this.getOverrideText() || this.props.text;
@@ -47628,23 +47523,24 @@ var SVGRoot = class extends Component {
       children,
       frame: frame2,
       innerRef,
+      left,
+      top,
     } = this.props;
     const {
       width,
       height,
     } = frame2;
-    const fx = Math.floor(frame2.x,);
-    const fy = Math.floor(frame2.y,);
     const svgStyle = {
       position: 'absolute',
       width: Math.ceil(width,),
       height: Math.ceil(height,),
       overflow: 'visible',
       display: 'block',
-      transform: `translate(${fx}px, ${fy}px)`,
+      left: Math.floor(left,),
+      top: Math.floor(top,),
     };
-    Layer.applyWillChange(this.props, svgStyle, false,);
     return /* @__PURE__ */ jsx('svg', {
+      role: 'presentation',
       width: '100%',
       height: '100%',
       style: svgStyle,
@@ -47889,22 +47785,24 @@ var Vector = /* @__PURE__ */ (() => {
         width,
         height,
         rect,
-        willChangeTransform,
         includeTransform,
+        left,
+        top,
       } = this.props;
+      if (!isRootVectorNode) return element;
+      if (includeTransform) return element;
       const frame2 = this.props.frame ?? rect ?? {
         x: 0,
         y: 0,
         width: 100,
         height: 100,
       };
-      if (!isRootVectorNode) return element;
-      if (includeTransform) return element;
       return /* @__PURE__ */ jsx(SVGRoot, {
         frame: frame2,
         width,
         height,
-        willChangeTransform,
+        left,
+        top,
         innerRef: this.setLayerElement,
         children: element,
       },);
@@ -47920,6 +47818,8 @@ var Vector = /* @__PURE__ */ (() => {
       defaultStrokeAlignment: 'center',
       width: 100,
       height: 100,
+      left: 0,
+      top: 0,
       rotation: 0,
       rotate: void 0,
       frame: void 0,
@@ -47969,8 +47869,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
         defaultName,
         children,
         includeTransform,
-        x,
-        y,
+        left,
+        top,
         width,
         height,
         rotation,
@@ -47981,8 +47881,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
         target,
       } = RenderEnvironment;
       const rect = {
-        x,
-        y,
+        x: left,
+        y: top,
         width,
         height,
       };
@@ -48014,16 +47914,18 @@ var VectorGroup = /* @__PURE__ */ (() => {
         width,
         height,
         frame: frame2,
-        willChangeTransform,
         includeTransform,
+        left,
+        top,
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
       return /* @__PURE__ */ jsx(SVGRoot, {
         frame: frame2,
+        left,
+        top,
         width,
         height,
-        willChangeTransform,
         innerRef: this.setLayerElement,
         children: element,
       },);
@@ -48033,8 +47935,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
       name: void 0,
       opacity: void 0,
       visible: true,
-      x: 0,
-      y: 0,
+      left: 0,
+      top: 0,
       rotation: 0,
       width: 100,
       height: 100,
@@ -48489,7 +48391,6 @@ export {
   Container,
   ControlType,
   ConvertColor,
-  convertPresentationTree,
   convertPropsToDeviceOptions,
   createBox,
   createData,
