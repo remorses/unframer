@@ -10429,10 +10429,10 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.R2OPJ64Q.mjs
+// /:https://app.framerstatic.com/framer.RHPWPDUD.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
-import { Suspense as Suspense3, } from 'react';
+import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
@@ -10947,574 +10947,6 @@ var require_eventemitter3 = __commonJS({
     }
   },
 },);
-var require_resize_observer_umd = __commonJS({
-  '../../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.umd.js'(exports, module,) {
-    'use strict';
-
-    (function (global, factory,) {
-      typeof exports === 'object' && typeof module !== 'undefined'
-        ? factory(exports,)
-        : typeof define === 'function' && define.amd
-        ? define(['exports',], factory,)
-        : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ResizeObserver = {},));
-    })(exports, function (exports2,) {
-      'use strict';
-
-      var resizeObservers = [];
-      var hasActiveObservations = function () {
-        return resizeObservers.some(function (ro,) {
-          return ro.activeTargets.length > 0;
-        },);
-      };
-      var hasSkippedObservations = function () {
-        return resizeObservers.some(function (ro,) {
-          return ro.skippedTargets.length > 0;
-        },);
-      };
-      var msg = 'ResizeObserver loop completed with undelivered notifications.';
-      var deliverResizeLoopError = function () {
-        var event;
-        if (typeof ErrorEvent === 'function') {
-          event = new ErrorEvent('error', {
-            message: msg,
-          },);
-        } else {
-          event = document.createEvent('Event',);
-          event.initEvent('error', false, false,);
-          event.message = msg;
-        }
-        window.dispatchEvent(event,);
-      };
-      var ResizeObserverBoxOptions;
-      (function (ResizeObserverBoxOptions2,) {
-        ResizeObserverBoxOptions2['BORDER_BOX'] = 'border-box';
-        ResizeObserverBoxOptions2['CONTENT_BOX'] = 'content-box';
-        ResizeObserverBoxOptions2['DEVICE_PIXEL_CONTENT_BOX'] = 'device-pixel-content-box';
-      })(ResizeObserverBoxOptions || (ResizeObserverBoxOptions = {}),);
-      var freeze = function (obj,) {
-        return Object.freeze(obj,);
-      };
-      var ResizeObserverSize = /* @__PURE__ */ function () {
-        function ResizeObserverSize2(inlineSize, blockSize,) {
-          this.inlineSize = inlineSize;
-          this.blockSize = blockSize;
-          freeze(this,);
-        }
-        return ResizeObserverSize2;
-      }();
-      var DOMRectReadOnly = function () {
-        function DOMRectReadOnly2(x, y, width, height,) {
-          this.x = x;
-          this.y = y;
-          this.width = width;
-          this.height = height;
-          this.top = this.y;
-          this.left = this.x;
-          this.bottom = this.top + this.height;
-          this.right = this.left + this.width;
-          return freeze(this,);
-        }
-        DOMRectReadOnly2.prototype.toJSON = function () {
-          var _a = this,
-            x = _a.x,
-            y = _a.y,
-            top = _a.top,
-            right = _a.right,
-            bottom = _a.bottom,
-            left = _a.left,
-            width = _a.width,
-            height = _a.height;
-          return {
-            x,
-            y,
-            top,
-            right,
-            bottom,
-            left,
-            width,
-            height,
-          };
-        };
-        DOMRectReadOnly2.fromRect = function (rectangle,) {
-          return new DOMRectReadOnly2(rectangle.x, rectangle.y, rectangle.width, rectangle.height,);
-        };
-        return DOMRectReadOnly2;
-      }();
-      var isSVG = function (target,) {
-        return target instanceof SVGElement && 'getBBox' in target;
-      };
-      var isHidden = function (target,) {
-        if (isSVG(target,)) {
-          var _a = target.getBBox(),
-            width = _a.width,
-            height = _a.height;
-          return !width && !height;
-        }
-        var _b = target,
-          offsetWidth = _b.offsetWidth,
-          offsetHeight = _b.offsetHeight;
-        return !(offsetWidth || offsetHeight || target.getClientRects().length);
-      };
-      var isElement = function (obj,) {
-        var _a, _b;
-        if (obj instanceof Element) {
-          return true;
-        }
-        var scope = (_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.ownerDocument) === null || _b === void 0
-          ? void 0
-          : _b.defaultView;
-        return !!(scope && obj instanceof scope.Element);
-      };
-      var isReplacedElement = function (target,) {
-        switch (target.tagName) {
-          case 'INPUT':
-            if (target.type !== 'image') {
-              break;
-            }
-          case 'VIDEO':
-          case 'AUDIO':
-          case 'EMBED':
-          case 'OBJECT':
-          case 'CANVAS':
-          case 'IFRAME':
-          case 'IMG':
-            return true;
-        }
-        return false;
-      };
-      var global = typeof window !== 'undefined' ? window : {};
-      var cache2 = /* @__PURE__ */ new WeakMap();
-      var scrollRegexp = /auto|scroll/;
-      var verticalRegexp = /^tb|vertical/;
-      var IE = /msie|trident/i.test(global.navigator && global.navigator.userAgent,);
-      var parseDimension = function (pixel,) {
-        return parseFloat(pixel || '0',);
-      };
-      var size = function (inlineSize, blockSize, switchSizes,) {
-        if (inlineSize === void 0) {
-          inlineSize = 0;
-        }
-        if (blockSize === void 0) {
-          blockSize = 0;
-        }
-        if (switchSizes === void 0) {
-          switchSizes = false;
-        }
-        return new ResizeObserverSize((switchSizes ? blockSize : inlineSize) || 0, (switchSizes ? inlineSize : blockSize) || 0,);
-      };
-      var zeroBoxes = freeze({
-        devicePixelContentBoxSize: size(),
-        borderBoxSize: size(),
-        contentBoxSize: size(),
-        contentRect: new DOMRectReadOnly(0, 0, 0, 0,),
-      },);
-      var calculateBoxSizes = function (target, forceRecalculation,) {
-        if (forceRecalculation === void 0) {
-          forceRecalculation = false;
-        }
-        if (cache2.has(target,) && !forceRecalculation) {
-          return cache2.get(target,);
-        }
-        if (isHidden(target,)) {
-          cache2.set(target, zeroBoxes,);
-          return zeroBoxes;
-        }
-        var cs = getComputedStyle(target,);
-        var svg = isSVG(target,) && target.ownerSVGElement && target.getBBox();
-        var removePadding = !IE && cs.boxSizing === 'border-box';
-        var switchSizes = verticalRegexp.test(cs.writingMode || '',);
-        var canScrollVertically = !svg && scrollRegexp.test(cs.overflowY || '',);
-        var canScrollHorizontally = !svg && scrollRegexp.test(cs.overflowX || '',);
-        var paddingTop = svg ? 0 : parseDimension(cs.paddingTop,);
-        var paddingRight = svg ? 0 : parseDimension(cs.paddingRight,);
-        var paddingBottom = svg ? 0 : parseDimension(cs.paddingBottom,);
-        var paddingLeft = svg ? 0 : parseDimension(cs.paddingLeft,);
-        var borderTop = svg ? 0 : parseDimension(cs.borderTopWidth,);
-        var borderRight = svg ? 0 : parseDimension(cs.borderRightWidth,);
-        var borderBottom = svg ? 0 : parseDimension(cs.borderBottomWidth,);
-        var borderLeft = svg ? 0 : parseDimension(cs.borderLeftWidth,);
-        var horizontalPadding = paddingLeft + paddingRight;
-        var verticalPadding = paddingTop + paddingBottom;
-        var horizontalBorderArea = borderLeft + borderRight;
-        var verticalBorderArea = borderTop + borderBottom;
-        var horizontalScrollbarThickness = !canScrollHorizontally ? 0 : target.offsetHeight - verticalBorderArea - target.clientHeight;
-        var verticalScrollbarThickness = !canScrollVertically ? 0 : target.offsetWidth - horizontalBorderArea - target.clientWidth;
-        var widthReduction = removePadding ? horizontalPadding + horizontalBorderArea : 0;
-        var heightReduction = removePadding ? verticalPadding + verticalBorderArea : 0;
-        var contentWidth = svg ? svg.width : parseDimension(cs.width,) - widthReduction - verticalScrollbarThickness;
-        var contentHeight = svg ? svg.height : parseDimension(cs.height,) - heightReduction - horizontalScrollbarThickness;
-        var borderBoxWidth = contentWidth + horizontalPadding + verticalScrollbarThickness + horizontalBorderArea;
-        var borderBoxHeight = contentHeight + verticalPadding + horizontalScrollbarThickness + verticalBorderArea;
-        var boxes = freeze({
-          devicePixelContentBoxSize: size(
-            Math.round(contentWidth * devicePixelRatio,),
-            Math.round(contentHeight * devicePixelRatio,),
-            switchSizes,
-          ),
-          borderBoxSize: size(borderBoxWidth, borderBoxHeight, switchSizes,),
-          contentBoxSize: size(contentWidth, contentHeight, switchSizes,),
-          contentRect: new DOMRectReadOnly(paddingLeft, paddingTop, contentWidth, contentHeight,),
-        },);
-        cache2.set(target, boxes,);
-        return boxes;
-      };
-      var calculateBoxSize = function (target, observedBox, forceRecalculation,) {
-        var _a = calculateBoxSizes(target, forceRecalculation,),
-          borderBoxSize = _a.borderBoxSize,
-          contentBoxSize = _a.contentBoxSize,
-          devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
-        switch (observedBox) {
-          case ResizeObserverBoxOptions.DEVICE_PIXEL_CONTENT_BOX:
-            return devicePixelContentBoxSize;
-          case ResizeObserverBoxOptions.BORDER_BOX:
-            return borderBoxSize;
-          default:
-            return contentBoxSize;
-        }
-      };
-      var ResizeObserverEntry = /* @__PURE__ */ function () {
-        function ResizeObserverEntry2(target,) {
-          var boxes = calculateBoxSizes(target,);
-          this.target = target;
-          this.contentRect = boxes.contentRect;
-          this.borderBoxSize = freeze([boxes.borderBoxSize,],);
-          this.contentBoxSize = freeze([boxes.contentBoxSize,],);
-          this.devicePixelContentBoxSize = freeze([boxes.devicePixelContentBoxSize,],);
-        }
-        return ResizeObserverEntry2;
-      }();
-      var calculateDepthForNode = function (node,) {
-        if (isHidden(node,)) {
-          return Infinity;
-        }
-        var depth = 0;
-        var parent = node.parentNode;
-        while (parent) {
-          depth += 1;
-          parent = parent.parentNode;
-        }
-        return depth;
-      };
-      var broadcastActiveObservations = function () {
-        var shallowestDepth = Infinity;
-        var callbacks2 = [];
-        resizeObservers.forEach(function processObserver(ro,) {
-          if (ro.activeTargets.length === 0) {
-            return;
-          }
-          var entries = [];
-          ro.activeTargets.forEach(function processTarget(ot,) {
-            var entry = new ResizeObserverEntry(ot.target,);
-            var targetDepth = calculateDepthForNode(ot.target,);
-            entries.push(entry,);
-            ot.lastReportedSize = calculateBoxSize(ot.target, ot.observedBox,);
-            if (targetDepth < shallowestDepth) {
-              shallowestDepth = targetDepth;
-            }
-          },);
-          callbacks2.push(function resizeObserverCallback() {
-            ro.callback.call(ro.observer, entries, ro.observer,);
-          },);
-          ro.activeTargets.splice(0, ro.activeTargets.length,);
-        },);
-        for (var _i = 0, callbacks_1 = callbacks2; _i < callbacks_1.length; _i++) {
-          var callback = callbacks_1[_i];
-          callback();
-        }
-        return shallowestDepth;
-      };
-      var gatherActiveObservationsAtDepth = function (depth,) {
-        resizeObservers.forEach(function processObserver(ro,) {
-          ro.activeTargets.splice(0, ro.activeTargets.length,);
-          ro.skippedTargets.splice(0, ro.skippedTargets.length,);
-          ro.observationTargets.forEach(function processTarget(ot,) {
-            if (ot.isActive()) {
-              if (calculateDepthForNode(ot.target,) > depth) {
-                ro.activeTargets.push(ot,);
-              } else {
-                ro.skippedTargets.push(ot,);
-              }
-            }
-          },);
-        },);
-      };
-      var process2 = function () {
-        var depth = 0;
-        gatherActiveObservationsAtDepth(depth,);
-        while (hasActiveObservations()) {
-          depth = broadcastActiveObservations();
-          gatherActiveObservationsAtDepth(depth,);
-        }
-        if (hasSkippedObservations()) {
-          deliverResizeLoopError();
-        }
-        return depth > 0;
-      };
-      var trigger;
-      var callbacks = [];
-      var notify2 = function () {
-        return callbacks.splice(0,).forEach(function (cb,) {
-          return cb();
-        },);
-      };
-      var queueMicroTask = function (callback,) {
-        if (!trigger) {
-          var toggle_1 = 0;
-          var el_1 = document.createTextNode('',);
-          var config = {
-            characterData: true,
-          };
-          new MutationObserver(function () {
-            return notify2();
-          },).observe(el_1, config,);
-          trigger = function () {
-            el_1.textContent = '' + (toggle_1 ? toggle_1-- : toggle_1++);
-          };
-        }
-        callbacks.push(callback,);
-        trigger();
-      };
-      var queueResizeObserver = function (cb,) {
-        queueMicroTask(function ResizeObserver22() {
-          requestAnimationFrame(cb,);
-        },);
-      };
-      var watching = 0;
-      var isWatching = function () {
-        return !!watching;
-      };
-      var CATCH_PERIOD = 250;
-      var observerConfig = {
-        attributes: true,
-        characterData: true,
-        childList: true,
-        subtree: true,
-      };
-      var events = [
-        'resize',
-        'load',
-        'transitionend',
-        'animationend',
-        'animationstart',
-        'animationiteration',
-        'keyup',
-        'keydown',
-        'mouseup',
-        'mousedown',
-        'mouseover',
-        'mouseout',
-        'blur',
-        'focus',
-      ];
-      var time2 = function (timeout,) {
-        if (timeout === void 0) {
-          timeout = 0;
-        }
-        return Date.now() + timeout;
-      };
-      var scheduled = false;
-      var Scheduler = function () {
-        function Scheduler2() {
-          var _this = this;
-          this.stopped = true;
-          this.listener = function () {
-            return _this.schedule();
-          };
-        }
-        Scheduler2.prototype.run = function (timeout,) {
-          var _this = this;
-          if (timeout === void 0) {
-            timeout = CATCH_PERIOD;
-          }
-          if (scheduled) {
-            return;
-          }
-          scheduled = true;
-          var until = time2(timeout,);
-          queueResizeObserver(function () {
-            var elementsHaveResized = false;
-            try {
-              elementsHaveResized = process2();
-            } finally {
-              scheduled = false;
-              timeout = until - time2();
-              if (!isWatching()) {
-                return;
-              }
-              if (elementsHaveResized) {
-                _this.run(1e3,);
-              } else if (timeout > 0) {
-                _this.run(timeout,);
-              } else {
-                _this.start();
-              }
-            }
-          },);
-        };
-        Scheduler2.prototype.schedule = function () {
-          this.stop();
-          this.run();
-        };
-        Scheduler2.prototype.observe = function () {
-          var _this = this;
-          var cb = function () {
-            return _this.observer && _this.observer.observe(document.body, observerConfig,);
-          };
-          document.body ? cb() : global.addEventListener('DOMContentLoaded', cb,);
-        };
-        Scheduler2.prototype.start = function () {
-          var _this = this;
-          if (this.stopped) {
-            this.stopped = false;
-            this.observer = new MutationObserver(this.listener,);
-            this.observe();
-            events.forEach(function (name,) {
-              return global.addEventListener(name, _this.listener, true,);
-            },);
-          }
-        };
-        Scheduler2.prototype.stop = function () {
-          var _this = this;
-          if (!this.stopped) {
-            this.observer && this.observer.disconnect();
-            events.forEach(function (name,) {
-              return global.removeEventListener(name, _this.listener, true,);
-            },);
-            this.stopped = true;
-          }
-        };
-        return Scheduler2;
-      }();
-      var scheduler2 = new Scheduler();
-      var updateCount = function (n,) {
-        !watching && n > 0 && scheduler2.start();
-        watching += n;
-        !watching && scheduler2.stop();
-      };
-      var skipNotifyOnElement = function (target,) {
-        return !isSVG(target,) && !isReplacedElement(target,) && getComputedStyle(target,).display === 'inline';
-      };
-      var ResizeObservation = function () {
-        function ResizeObservation2(target, observedBox,) {
-          this.target = target;
-          this.observedBox = observedBox || ResizeObserverBoxOptions.CONTENT_BOX;
-          this.lastReportedSize = {
-            inlineSize: 0,
-            blockSize: 0,
-          };
-        }
-        ResizeObservation2.prototype.isActive = function () {
-          var size2 = calculateBoxSize(this.target, this.observedBox, true,);
-          if (skipNotifyOnElement(this.target,)) {
-            this.lastReportedSize = size2;
-          }
-          if (this.lastReportedSize.inlineSize !== size2.inlineSize || this.lastReportedSize.blockSize !== size2.blockSize) {
-            return true;
-          }
-          return false;
-        };
-        return ResizeObservation2;
-      }();
-      var ResizeObserverDetail = /* @__PURE__ */ function () {
-        function ResizeObserverDetail2(resizeObserver, callback,) {
-          this.activeTargets = [];
-          this.skippedTargets = [];
-          this.observationTargets = [];
-          this.observer = resizeObserver;
-          this.callback = callback;
-        }
-        return ResizeObserverDetail2;
-      }();
-      var observerMap = /* @__PURE__ */ new WeakMap();
-      var getObservationIndex = function (observationTargets, target,) {
-        for (var i = 0; i < observationTargets.length; i += 1) {
-          if (observationTargets[i].target === target) {
-            return i;
-          }
-        }
-        return -1;
-      };
-      var ResizeObserverController = function () {
-        function ResizeObserverController2() {}
-        ResizeObserverController2.connect = function (resizeObserver, callback,) {
-          var detail = new ResizeObserverDetail(resizeObserver, callback,);
-          observerMap.set(resizeObserver, detail,);
-        };
-        ResizeObserverController2.observe = function (resizeObserver, target, options,) {
-          var detail = observerMap.get(resizeObserver,);
-          var firstObservation = detail.observationTargets.length === 0;
-          if (getObservationIndex(detail.observationTargets, target,) < 0) {
-            firstObservation && resizeObservers.push(detail,);
-            detail.observationTargets.push(new ResizeObservation(target, options && options.box,),);
-            updateCount(1,);
-            scheduler2.schedule();
-          }
-        };
-        ResizeObserverController2.unobserve = function (resizeObserver, target,) {
-          var detail = observerMap.get(resizeObserver,);
-          var index = getObservationIndex(detail.observationTargets, target,);
-          var lastObservation = detail.observationTargets.length === 1;
-          if (index >= 0) {
-            lastObservation && resizeObservers.splice(resizeObservers.indexOf(detail,), 1,);
-            detail.observationTargets.splice(index, 1,);
-            updateCount(-1,);
-          }
-        };
-        ResizeObserverController2.disconnect = function (resizeObserver,) {
-          var _this = this;
-          var detail = observerMap.get(resizeObserver,);
-          detail.observationTargets.slice().forEach(function (ot,) {
-            return _this.unobserve(resizeObserver, ot.target,);
-          },);
-          detail.activeTargets.splice(0, detail.activeTargets.length,);
-        };
-        return ResizeObserverController2;
-      }();
-      var ResizeObserver2 = function () {
-        function ResizeObserver22(callback,) {
-          if (arguments.length === 0) {
-            throw new TypeError('Failed to construct \'ResizeObserver\': 1 argument required, but only 0 present.',);
-          }
-          if (typeof callback !== 'function') {
-            throw new TypeError('Failed to construct \'ResizeObserver\': The callback provided as parameter 1 is not a function.',);
-          }
-          ResizeObserverController.connect(this, callback,);
-        }
-        ResizeObserver22.prototype.observe = function (target, options,) {
-          if (arguments.length === 0) {
-            throw new TypeError('Failed to execute \'observe\' on \'ResizeObserver\': 1 argument required, but only 0 present.',);
-          }
-          if (!isElement(target,)) {
-            throw new TypeError('Failed to execute \'observe\' on \'ResizeObserver\': parameter 1 is not of type \'Element',);
-          }
-          ResizeObserverController.observe(this, target, options,);
-        };
-        ResizeObserver22.prototype.unobserve = function (target,) {
-          if (arguments.length === 0) {
-            throw new TypeError('Failed to execute \'unobserve\' on \'ResizeObserver\': 1 argument required, but only 0 present.',);
-          }
-          if (!isElement(target,)) {
-            throw new TypeError('Failed to execute \'unobserve\' on \'ResizeObserver\': parameter 1 is not of type \'Element',);
-          }
-          ResizeObserverController.unobserve(this, target,);
-        };
-        ResizeObserver22.prototype.disconnect = function () {
-          ResizeObserverController.disconnect(this,);
-        };
-        ResizeObserver22.toString = function () {
-          return 'function ResizeObserver () { [polyfill code] }';
-        };
-        return ResizeObserver22;
-      }();
-      exports2.ResizeObserver = ResizeObserver2;
-      exports2.ResizeObserverEntry = ResizeObserverEntry;
-      exports2.ResizeObserverSize = ResizeObserverSize;
-      Object.defineProperty(exports2, '__esModule', {
-        value: true,
-      },);
-    },);
-  },
-},);
 var require_react_is_production_min = __commonJS({
   '../../../node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.production.min.js'(exports,) {
     'use strict';
@@ -11735,195 +11167,195 @@ var require_fontfaceobserver_standalone = __commonJS({
     'use strict';
 
     (function () {
-      function l(a, b,) {
-        document.addEventListener ? a.addEventListener('scroll', b, false,) : a.attachEvent('scroll', b,);
+      function p(a, c,) {
+        document.addEventListener ? a.addEventListener('scroll', c, false,) : a.attachEvent('scroll', c,);
       }
-      function m2(a,) {
+      function u(a,) {
         document.body ? a() : document.addEventListener
-          ? document.addEventListener('DOMContentLoaded', function c() {
-            document.removeEventListener('DOMContentLoaded', c,);
+          ? document.addEventListener('DOMContentLoaded', function b() {
+            document.removeEventListener('DOMContentLoaded', b,);
             a();
           },)
-          : document.attachEvent('onreadystatechange', function k() {
+          : document.attachEvent('onreadystatechange', function g() {
             if ('interactive' == document.readyState || 'complete' == document.readyState) {
-              document.detachEvent('onreadystatechange', k,), a();
+              document.detachEvent('onreadystatechange', g,), a();
             }
           },);
       }
 
-      function t(a,) {
-        this.a = document.createElement('div',);
-        this.a.setAttribute('aria-hidden', 'true',);
-        this.a.appendChild(document.createTextNode(a,),);
-        this.b = document.createElement('span',);
-        this.c = document.createElement('span',);
+      function w(a,) {
+        this.g = document.createElement('div',);
+        this.g.setAttribute('aria-hidden', 'true',);
+        this.g.appendChild(document.createTextNode(a,),);
         this.h = document.createElement('span',);
-        this.f = document.createElement('span',);
-        this.g = -1;
-        this.b.style.cssText =
+        this.i = document.createElement('span',);
+        this.m = document.createElement('span',);
+        this.j = document.createElement('span',);
+        this.l = -1;
+        this.h.style.cssText =
           'max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;';
-        this.c.style.cssText =
+        this.i.style.cssText =
           'max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;';
-        this.f.style.cssText =
+        this.j.style.cssText =
           'max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;';
-        this.h.style.cssText = 'display:inline-block;width:200%;height:200%;font-size:16px;max-width:none;';
-        this.b.appendChild(this.h,);
-        this.c.appendChild(this.f,);
-        this.a.appendChild(this.b,);
-        this.a.appendChild(this.c,);
+        this.m.style.cssText = 'display:inline-block;width:200%;height:200%;font-size:16px;max-width:none;';
+        this.h.appendChild(this.m,);
+        this.i.appendChild(this.j,);
+        this.g.appendChild(this.h,);
+        this.g.appendChild(this.i,);
       }
-      function u(a, b,) {
-        a.a.style.cssText =
+      function x(a, c,) {
+        a.g.style.cssText =
           'max-width:none;min-width:20px;min-height:20px;display:inline-block;overflow:hidden;position:absolute;width:auto;margin:0;padding:0;top:-999px;white-space:nowrap;font-synthesis:none;font:' +
-          b + ';';
+          c + ';';
       }
-      function z(a,) {
-        var b = a.a.offsetWidth,
-          c = b + 100;
-        a.f.style.width = c + 'px';
-        a.c.scrollLeft = c;
-        a.b.scrollLeft = a.b.scrollWidth + 100;
-        return a.g !== b ? (a.g = b, true) : false;
+      function B(a,) {
+        var c = a.g.offsetWidth,
+          b = c + 100;
+        a.j.style.width = b + 'px';
+        a.i.scrollLeft = b;
+        a.h.scrollLeft = a.h.scrollWidth + 100;
+        return a.l !== c ? (a.l = c, true) : false;
       }
-      function A(a, b,) {
-        function c() {
-          var a2 = k;
-          z(a2,) && a2.a.parentNode && b(a2.g,);
+      function C(a, c,) {
+        function b() {
+          var e = g;
+          B(e,) && null !== e.g.parentNode && c(e.l,);
         }
-        var k = a;
-        l(a.b, c,);
-        l(a.c, c,);
-        z(a,);
+        var g = a;
+        p(a.h, b,);
+        p(a.i, b,);
+        B(a,);
       }
 
-      function B(a, b,) {
-        var c = b || {};
+      function D(a, c, b,) {
+        c = c || {};
+        b = b || window;
         this.family = a;
         this.style = c.style || 'normal';
         this.weight = c.weight || 'normal';
         this.stretch = c.stretch || 'normal';
+        this.context = b;
       }
-      var C = null,
-        D = null,
-        E = null,
-        F = null;
-      function G() {
-        if (null === D) {
-          if (J() && /Apple/.test(window.navigator.vendor,)) {
-            var a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent,);
-            D = !!a && 603 > parseInt(a[1], 10,);
-          } else D = false;
-        }
-        return D;
-      }
-      function J() {
-        null === F && (F = !!document.fonts);
+      var E = null,
+        F = null,
+        G = null,
+        H = null;
+      function I(a,) {
+        null === F &&
+          (M(a,) && /Apple/.test(window.navigator.vendor,)
+            ? (a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
+              F = !!a && 603 > parseInt(a[1], 10,))
+            : F = false);
         return F;
       }
-      function K() {
-        if (null === E) {
-          var a = document.createElement('div',);
+      function M(a,) {
+        null === H && (H = !!a.document.fonts);
+        return H;
+      }
+      function N(a, c,) {
+        var b = a.style,
+          g = a.weight;
+        if (null === G) {
+          var e = document.createElement('div',);
           try {
-            a.style.font = 'condensed 100px sans-serif';
-          } catch (b) {}
-          E = '' !== a.style.font;
+            e.style.font = 'condensed 100px sans-serif';
+          } catch (q) {}
+          G = '' !== e.style.font;
         }
-        return E;
+        return [b, g, G ? a.stretch : '', '100px', c,].join(' ',);
       }
-      function L(a, b,) {
-        return [a.style, a.weight, K() ? a.stretch : '', '100px', b,].join(' ',);
-      }
-      B.prototype.load = function (a, b,) {
-        var c = this,
-          k = a || 'BESbswy',
-          r = 0,
-          n = b || 3e3,
-          H = (/* @__PURE__ */ new Date()).getTime();
-        return new Promise(function (a2, b2,) {
-          if (J() && !G()) {
-            var M = new Promise(function (a3, b3,) {
-                function e() {
-                  (/* @__PURE__ */ new Date()).getTime() - H >= n
-                    ? b3(Error('' + n + 'ms timeout exceeded',),)
-                    : document.fonts.load(L(c, '"' + c.family + '"',), k,).then(function (c2,) {
-                      1 <= c2.length ? a3() : setTimeout(e, 25,);
-                    }, b3,);
+      D.prototype.load = function (a, c,) {
+        var b = this,
+          g = a || 'BESbswy',
+          e = 0,
+          q = c || 3e3,
+          J = (/* @__PURE__ */ new Date()).getTime();
+        return new Promise(function (K, L,) {
+          if (M(b.context,) && !I(b.context,)) {
+            var O = new Promise(function (r, t,) {
+                function h() {
+                  (/* @__PURE__ */ new Date()).getTime() - J >= q
+                    ? t(Error('' + q + 'ms timeout exceeded',),)
+                    : b.context.document.fonts.load(N(b, '"' + b.family + '"',), g,).then(function (n,) {
+                      1 <= n.length ? r() : setTimeout(h, 25,);
+                    }, t,);
                 }
-                e();
+                h();
               },),
-              N = new Promise(function (a3, c2,) {
-                r = setTimeout(function () {
-                  c2(Error('' + n + 'ms timeout exceeded',),);
-                }, n,);
+              P = new Promise(function (r, t,) {
+                e = setTimeout(function () {
+                  t(Error('' + q + 'ms timeout exceeded',),);
+                }, q,);
               },);
-            Promise.race([N, M,],).then(function () {
-              clearTimeout(r,);
-              a2(c,);
-            }, b2,);
-          } else {m2(function () {
-              function v() {
-                var b3;
-                if (b3 = -1 != f && -1 != g || -1 != f && -1 != h || -1 != g && -1 != h) {
-                  (b3 = f != g && f != h && g != h) ||
-                  (null === C &&
-                    (b3 = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
-                      C = !!b3 && (536 > parseInt(b3[1], 10,) || 536 === parseInt(b3[1], 10,) && 11 >= parseInt(b3[2], 10,))),
-                    b3 = C && (f == w && g == w && h == w || f == x && g == x && h == x || f == y && g == y && h == y)), b3 = !b3;
+            Promise.race([P, O,],).then(function () {
+              clearTimeout(e,);
+              K(b,);
+            }, L,);
+          } else {u(function () {
+              function r() {
+                var d;
+                if (d = -1 != k && -1 != l || -1 != k && -1 != m2 || -1 != l && -1 != m2) {
+                  (d = k != l && k != m2 && l != m2) ||
+                  (null === E &&
+                    (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
+                      E = !!d && (536 > parseInt(d[1], 10,) || 536 === parseInt(d[1], 10,) && 11 >= parseInt(d[2], 10,))),
+                    d = E && (k == y && l == y && m2 == y || k == z && l == z && m2 == z || k == A && l == A && m2 == A)), d = !d;
                 }
-                b3 && (d.parentNode && d.parentNode.removeChild(d,), clearTimeout(r,), a2(c,));
+                d && (null !== f.parentNode && f.parentNode.removeChild(f,), clearTimeout(e,), K(b,));
               }
-              function I() {
-                if ((/* @__PURE__ */ new Date()).getTime() - H >= n) {
-                  d.parentNode && d.parentNode.removeChild(d,), b2(Error('' + n + 'ms timeout exceeded',),);
+              function t() {
+                if ((/* @__PURE__ */ new Date()).getTime() - J >= q) {
+                  null !== f.parentNode && f.parentNode.removeChild(f,), L(Error('' + q + 'ms timeout exceeded',),);
                 } else {
-                  var a3 = document.hidden;
-                  if (true === a3 || void 0 === a3) f = e.a.offsetWidth, g = p.a.offsetWidth, h = q.a.offsetWidth, v();
-                  r = setTimeout(I, 50,);
+                  var d = b.context.document.hidden;
+                  if (true === d || void 0 === d) k = h.g.offsetWidth, l = n.g.offsetWidth, m2 = v.g.offsetWidth, r();
+                  e = setTimeout(t, 50,);
                 }
               }
-              var e = new t(k,),
-                p = new t(k,),
-                q = new t(k,),
-                f = -1,
-                g = -1,
-                h = -1,
-                w = -1,
-                x = -1,
+              var h = new w(g,),
+                n = new w(g,),
+                v = new w(g,),
+                k = -1,
+                l = -1,
+                m2 = -1,
                 y = -1,
-                d = document.createElement('div',);
-              d.dir = 'ltr';
-              u(e, L(c, 'sans-serif',),);
-              u(p, L(c, 'serif',),);
-              u(q, L(c, 'monospace',),);
-              d.appendChild(e.a,);
-              d.appendChild(p.a,);
-              d.appendChild(q.a,);
-              document.body.appendChild(d,);
-              w = e.a.offsetWidth;
-              x = p.a.offsetWidth;
-              y = q.a.offsetWidth;
-              I();
-              A(e, function (a3,) {
-                f = a3;
-                v();
+                z = -1,
+                A = -1,
+                f = document.createElement('div',);
+              f.dir = 'ltr';
+              x(h, N(b, 'sans-serif',),);
+              x(n, N(b, 'serif',),);
+              x(v, N(b, 'monospace',),);
+              f.appendChild(h.g,);
+              f.appendChild(n.g,);
+              f.appendChild(v.g,);
+              b.context.document.body.appendChild(f,);
+              y = h.g.offsetWidth;
+              z = n.g.offsetWidth;
+              A = v.g.offsetWidth;
+              t();
+              C(h, function (d,) {
+                k = d;
+                r();
               },);
-              u(e, L(c, '"' + c.family + '",sans-serif',),);
-              A(p, function (a3,) {
-                g = a3;
-                v();
+              x(h, N(b, '"' + b.family + '",sans-serif',),);
+              C(n, function (d,) {
+                l = d;
+                r();
               },);
-              u(p, L(c, '"' + c.family + '",serif',),);
-              A(q, function (a3,) {
-                h = a3;
-                v();
+              x(n, N(b, '"' + b.family + '",serif',),);
+              C(v, function (d,) {
+                m2 = d;
+                r();
               },);
-              u(q, L(c, '"' + c.family + '",monospace',),);
+              x(v, N(b, '"' + b.family + '",monospace',),);
             },);}
         },);
       };
       'object' === typeof module
-        ? module.exports = B
-        : (window.FontFaceObserver = B, window.FontFaceObserver.prototype.load = B.prototype.load);
+        ? module.exports = D
+        : (window.FontFaceObserver = D, window.FontFaceObserver.prototype.load = D.prototype.load);
     })();
   },
 },);
@@ -11936,7 +11368,7 @@ function lazy(factory,) {
   const LazyComponent = React4.lazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component18 = React4.forwardRef(function LazyWithPreload(props, ref,) {
+  const Component17 = React4.forwardRef(function LazyWithPreload(props, ref,) {
     return React4.createElement(
       LoadedComponent ?? LazyComponent,
       ref
@@ -11947,7 +11379,7 @@ function lazy(factory,) {
         : props,
     );
   },);
-  Component18.preload = () => {
+  Component17.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
         LoadedComponent = module.default;
@@ -11956,7 +11388,7 @@ function lazy(factory,) {
     }
     return factoryPromise;
   };
-  return Component18;
+  return Component17;
 }
 function getRouteElementId(route, hash2,) {
   if (hash2 && route) {
@@ -13824,12 +13256,6 @@ function renderPage(Page4, defaultPageStyle,) {
   return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, props,) : React4.createElement(Page4, props,);
 }
 var NotFoundError = class extends Error {};
-var NotFoundErrorBoundaryCaughtError = class extends Error {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'cause',);
-  }
-};
 var NotFoundErrorBoundary = class extends Component {
   constructor(props,) {
     super(props,);
@@ -13861,9 +13287,7 @@ var NotFoundErrorBoundary = class extends Component {
       return this.props.children;
     }
     if (!(this.state.error instanceof NotFoundError)) {
-      const error = new NotFoundErrorBoundaryCaughtError();
-      error.cause = this.state.error;
-      throw error;
+      throw this.state.error;
     }
     const {
       notFoundPage,
@@ -14049,8 +13473,12 @@ function patchRoute(routes, abTestId, abTestingVariantId,) {
   if (!route) return;
   const routeId = route.abTestingParentId ?? abTestingVariantId;
   if (!routes[routeId]) return;
+  const {
+    abTestingParentId,
+    ...patchingRoute
+  } = route;
   routes[routeId] = {
-    ...route,
+    ...patchingRoute,
     abTestingVariantId,
     abTestId,
   };
@@ -14060,41 +13488,42 @@ function patchRoutesFromSearchParams(routes, variants,) {
     patchRoute(routes, abTestId, abTestingVariantId,);
   }
 }
-function removeRoutesVariants(routes, initialRouteId,) {
-  var _a, _b, _c, _d, _e;
+function removeRoutesVariants(routes,) {
+  var _a;
   for (const routeId in routes) {
-    if (
-      routeId !== initialRouteId && ((_a = routes[routeId]) == null ? void 0 : _a.abTestingParentId) &&
-      !((_b = routes[routeId]) == null ? void 0 : _b.abTestingVariantId)
-    ) {
+    if ((_a = routes[routeId]) == null ? void 0 : _a.abTestingParentId) {
       delete routes[routeId];
     }
-  }
-  if (initialRouteId && ((_c = routes[initialRouteId]) == null ? void 0 : _c.abTestingParentId)) {
-    const parentRoute = routes[(_d = routes[initialRouteId]) == null ? void 0 : _d.abTestingParentId];
-    if (!parentRoute) return;
-    routes[initialRouteId].abTestId = parentRoute.abTestId;
-    routes[initialRouteId].abTestingVariantId = parentRoute.abTestingVariantId;
-    delete routes[(_e = routes[initialRouteId]) == null ? void 0 : _e.abTestingParentId];
   }
 }
 function patchInitialRoute(routes, routeId,) {
   if (!routes[routeId]) return;
   if (!routes[routeId].abTestingParentId) return;
   const parentId = routes[routeId].abTestingParentId;
+  const {
+    abTestingParentId,
+    ...route
+  } = routes[routeId];
   routes[parentId] = {
-    ...routes[routeId],
+    ...route,
     abTestingVariantId: routeId,
   };
 }
 function patchRoutesForABTesting(routes, initialRouteId,) {
-  if (typeof window === 'undefined') return;
+  var _a;
+  if (typeof window === 'undefined') return initialRouteId;
+  let resolvedInitialRouteId = initialRouteId;
   if (initialRouteId) {
     patchInitialRoute(routes, initialRouteId,);
+    const parentRouteId = (_a = routes[initialRouteId]) == null ? void 0 : _a.abTestingParentId;
+    if (parentRouteId) {
+      resolvedInitialRouteId = parentRouteId;
+    }
   }
   patchRoutesFromSearchParams(routes, getVariantsFromServerTiming(),);
   patchRoutesFromSearchParams(routes, getVariantsFromCookie(),);
-  removeRoutesVariants(routes, initialRouteId,);
+  removeRoutesVariants(routes,);
+  return resolvedInitialRouteId;
 }
 var warningMessages = /* @__PURE__ */ new Set();
 function warnOnce2(keyMessage, ...rest) {
@@ -22582,7 +22011,7 @@ var isLocalAssetUrl = (url, baseUrl,) => {
   if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
   return false;
 };
-var devicePixelRatio2 = () => safeWindow.devicePixelRatio;
+var devicePixelRatio = () => safeWindow.devicePixelRatio;
 var isJP2Supported = function () {
   if (isFirefox()) return false;
   return isWebKit();
@@ -22637,7 +22066,7 @@ var environment = {
   isLocalServerUrl,
   isLocalUrl,
   isLocalAssetUrl,
-  devicePixelRatio: devicePixelRatio2,
+  devicePixelRatio,
   isJP2Supported,
   isWebPSupported,
   deviceType,
@@ -22745,14 +22174,12 @@ function useForceUpdate2() {
   const [_, setForcedRenderCount,] = React4.useState(0,);
   return React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
 }
-var ResizeObserverPolyfill = /* @__PURE__ */ (() => require_resize_observer_umd().ResizeObserver)();
 var DEFAULT_SIZE = 200;
 var SharedObserver = class {
   constructor() {
     __publicField(this, 'sharedResizeObserver',);
     __publicField(this, 'callbacks', /* @__PURE__ */ new WeakMap(),);
-    const ResizeObserver2 = safeWindow.ResizeObserver ?? ResizeObserverPolyfill;
-    this.sharedResizeObserver = new ResizeObserver2(this.updateResizedElements.bind(this,),);
+    this.sharedResizeObserver = new ResizeObserver(this.updateResizedElements.bind(this,),);
   }
   updateResizedElements(entries,) {
     for (const entry of entries) {
@@ -22813,7 +22240,7 @@ function useMeasuredSize(ref,) {
   return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component18) => (props) => {
+var withMeasuredSize = (Component17) => (props) => {
   const ref = React4.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
@@ -22830,7 +22257,7 @@ var withMeasuredSize = (Component18) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx(Component18, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component17, {
       ...props,
       width: (size == null ? void 0 : size.width) ?? fallbackWidth,
       height: (size == null ? void 0 : size.height) ?? fallbackHeight,
@@ -22925,6 +22352,7 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
   const style = asRecord(element.style,);
   const value = toValue ? toValue : style[key7];
   const reset = () => {
+    if (!isValidCSSStyleValue(value,)) return;
     style[key7] = value;
   };
   style[key7] = null;
@@ -22933,6 +22361,9 @@ function resetSetStyle(element, key7, toValue, microtask2 = true,) {
   } else {
     setTimeout(reset, 0,);
   }
+}
+function isValidCSSStyleValue(value,) {
+  return isString(value,) || isNumber2(value,) || isNull(value,);
 }
 var Layer = /* @__PURE__ */ (() => {
   class Layer2 extends Component {
@@ -24212,7 +23643,7 @@ var clamp2 = (value, a, b,) => {
 var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
-function WithDragging(Component18,) {
+function WithDragging(Component17,) {
   const _WithDraggingHOC = class _WithDraggingHOC2 extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
@@ -24840,7 +24271,7 @@ function WithDragging(Component18,) {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx(Component18, {
+        children: /* @__PURE__ */ jsx(Component17, {
           ...originalProps,
         },),
       },);
@@ -24877,10 +24308,10 @@ function WithDragging(Component18,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(_WithDraggingHOC, 'defaultProps', Object.assign({}, Component18.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(_WithDraggingHOC, 'defaultProps', Object.assign({}, Component17.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
   let WithDraggingHOC = _WithDraggingHOC;
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics.default)(withDragging, Component18,);
+  (0, import_hoist_non_react_statics.default)(withDragging, Component17,);
   return withDragging;
 }
 var hoverProps = {
@@ -27709,7 +27140,7 @@ function useInfiniteScroll({
     };
   }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
 }
-function withInfiniteScroll(Component18,) {
+function withInfiniteScroll(Component17,) {
   return React4.forwardRef(({
     __paginationInfo,
     __loadMore,
@@ -27723,7 +27154,7 @@ function withInfiniteScroll(Component18,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -30662,7 +30093,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component18, override,) {
+function WithOverride(Component17, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext(DataObserverContext,);
@@ -30671,14 +30102,14 @@ function WithOverride(Component18, override,) {
       style,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...rest,
       ...overrideProps,
       _initialStyle: style,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component18,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component18.displayName || Component18.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component17,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component17.displayName || Component17.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -30817,7 +30248,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
       sheet,
@@ -30838,7 +30269,7 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
               __html: concatenatedCSS,
             },
           },),
-          /* @__PURE__ */ jsx(Component18, {
+          /* @__PURE__ */ jsx(Component17, {
             ...props,
             ref,
           },),
@@ -30854,7 +30285,7 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css2.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
       ref,
     },);
@@ -31136,7 +30567,7 @@ var AnimationCollector = class {
 };
 _variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component18,) {
+function withOptimizedAppearEffect(Component17,) {
   return React4.forwardRef(({
     optimized,
     ...props
@@ -31159,7 +30590,7 @@ function withOptimizedAppearEffect(Component18,) {
       );
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ref,
       ...props,
       ...disabledProps,
@@ -32091,11 +31522,11 @@ function addMotionValueStyle(style, values,) {
 function isVariantOrVariantList2(value,) {
   return isString(value,) || Array.isArray(value,);
 }
-var withFX = (Component18) =>
+var withFX = (Component17) =>
   React4.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -32105,7 +31536,7 @@ var withFX = (Component18) =>
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     if (disabledProps) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...props,
         ...disabledProps,
         ref: forwardedRef,
@@ -32209,7 +31640,7 @@ var withFX = (Component18) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -32274,10 +31705,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(function Compo
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component18) =>
+var withGeneratedLayoutId = (Component17) =>
   React4.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -32285,7 +31716,8 @@ var withGeneratedLayoutId = (Component18) =>
       ref,
     },);
   },);
-var SuspenseErrorBoundary = class extends Component {
+var shouldSuspenseBoundariesBeActive = false;
+var SynchronousSuspenseErrorBoundary = class extends Component {
   constructor() {
     super(...arguments,);
     __publicField(this, 'state', {
@@ -32297,9 +31729,21 @@ var SuspenseErrorBoundary = class extends Component {
       error,
     };
   }
+  // Note: SynchronousSuspenseErrorBoundary is relying on some narrow implementation details of React
+  // which we don’t fully understand: https://www.notion.so/framer/SuspenseThatPreservesDOM-1b0adf6e8c968089ae0dc158fc514e6b?pvs=4#1d1adf6e8c96801a9ef2d6f2f0c27f8c
+  //
+  // As a side effect, `componentDidCatch` is usually *never* executed. If you do see the log below,
+  // it means that you’re experiencing a scenario not covered by our tests.
   componentDidCatch(error, errorInfo,) {
+    if (!isSuspense426Error(error,)) return;
     const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
-    console.error('Caught error in SuspenseErrorBoundary:\n', error, componentStack,);
+    console.error(
+      'Caught an error in SynchronousSuspenseErrorBoundary:\n\n',
+      error,
+      '\n\nComponent stack:\n',
+      componentStack,
+      '\n\nThis error indicates a state update wasn\u2019t wrapped with startTransition. Some of the UI might flash as a result. If you are the author of this website, check recently added custom code, and if the issue persists, report it to the Framer team via https://www.framer.community/.',
+    );
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : void 0;
     sendTrackingEvent('published_site_load_recoverable_error', {
       message: String(error,),
@@ -32311,18 +31755,19 @@ var SuspenseErrorBoundary = class extends Component {
   render() {
     const error = this.state.error;
     if (error === void 0) return this.props.children;
-    if (error instanceof NotFoundErrorBoundaryCaughtError) {
-      throw error.cause;
-    }
-    window.__framer_STPD_OPT_OUT__ = true;
-    return /* @__PURE__ */ jsx(Suspense3, {
-      children: this.props.fallbackChildren,
-    },);
+    if (!isSuspense426Error(error,)) throw error;
+    shouldSuspenseBoundariesBeActive = true;
+    return this.props.children;
   }
 };
+function isSuspense426Error(error,) {
+  const unminifiedMessage = 'A component suspended while responding to synchronous input.';
+  const minifiedMessage = 'Minified React error #426';
+  return error instanceof Error && (error.message.includes(unminifiedMessage,) || error.message.includes(minifiedMessage,));
+}
 var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
-  if (typeof window === 'undefined' || window.__framer_STPD_OPT_OUT__) {
+  if (typeof window === 'undefined' || shouldSuspenseBoundariesBeActive) {
     return /* @__PURE__ */ jsx('div', {
       hidden: true,
       dangerouslySetInnerHTML: {
@@ -32332,15 +31777,13 @@ function Suspend() {
   }
   throw suspendPromise;
 }
+var suspend = /* @__PURE__ */ jsx(Suspend, {},);
 function SuspenseThatPreservesDom({
   children,
 },) {
-  return /* @__PURE__ */ jsx(SuspenseErrorBoundary, {
-    fallbackChildren: children,
-    children: /* @__PURE__ */ jsx(Suspense3, {
-      fallback: /* @__PURE__ */ jsx(Suspend, {},),
-      children,
-    },),
+  return /* @__PURE__ */ jsx(Suspense2, {
+    fallback: suspend,
+    children,
   },);
 }
 function NullFallback() {
@@ -32423,7 +31866,7 @@ function ServerSideErrorBoundary({
     ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
     // and render the actual error fallback if Suspense activates.
     /* @__PURE__ */
-    jsx(Suspense3, {
+    jsx(Suspense2, {
       fallback,
       children,
     },)
@@ -32667,15 +32110,15 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
   );
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
-    const Component18 = htmlElementAsMotionComponent(tagName,);
-    return /* @__PURE__ */ jsx(Component18, {
+    const Component17 = htmlElementAsMotionComponent(tagName,);
+    return /* @__PURE__ */ jsx(Component17, {
       ...otherProps,
       ref,
       style: props.style,
       children: childrenWithCodeBoundary,
     },);
   } else {
-    const Component18 = tagName;
+    const Component17 = tagName;
     const {
       layoutId,
       layoutDependency,
@@ -32685,7 +32128,7 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
       // Passing `props.style` explicitly to allow TypeScript to narrow the type of `props.style` according
       // to the value of `props.rendersWithMotion`.
       /* @__PURE__ */
-      jsx(Component18, {
+      jsx(Component17, {
         ...plainHTMLRenderableProps,
         ref,
         style: props.style,
@@ -33633,7 +33076,12 @@ var GracefullyDegradingErrorBoundary = class extends Component {
     if ('cause' in error) {
       error = error.cause;
     }
-    console.error(`${isBot ? this.message : this.messageFatal} (see above). ${this.messageReport}.`,);
+    console.error(
+      `${isBot ? this.message : this.messageFatal}. ${this.messageReport}. Error:
+
+`,
+      error,
+    );
     const sampleRate = Math.random();
     if (sampleRate > 0.25) return;
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
@@ -33761,10 +33209,10 @@ function ChildrenCanSuspend({
     children,
   },);
 }
-function withChildrenCanSuspend(Component18,) {
+function withChildrenCanSuspend(Component17,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx(Component18, {
+      children: /* @__PURE__ */ jsx(Component17, {
         ...props,
         ref,
       },),
@@ -35426,33 +34874,35 @@ function Router({
     api,
     children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-        children: [
-          /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
-            notFoundPage,
-            defaultPageStyle,
-            forceUpdateKey: dep,
-            children: [
-              /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
-              /* @__PURE__ */ jsx(WithLayoutTemplate, {
-                LayoutTemplate,
-                routeId: currentRouteId,
-                style: defaultPageStyle,
-                children: (inLayoutTemplate) => {
-                  return /* @__PURE__ */ jsx(Fragment, {
-                    children: pageExistsInCurrentLocale
-                      ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
-                      : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                      notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                  }, remountKey,);
-                },
-              },),
-            ],
-          },),
-          editorBar,
-          /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
-          /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
-        ],
+      children: /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
+        children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+          children: [
+            /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
+              notFoundPage,
+              defaultPageStyle,
+              forceUpdateKey: dep,
+              children: [
+                /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+                /* @__PURE__ */ jsx(WithLayoutTemplate, {
+                  LayoutTemplate,
+                  routeId: currentRouteId,
+                  style: defaultPageStyle,
+                  children: (inLayoutTemplate) => {
+                    return /* @__PURE__ */ jsx(Fragment, {
+                      children: pageExistsInCurrentLocale
+                        ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                        : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                        notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                    }, remountKey,);
+                  },
+                },),
+              ],
+            },),
+            editorBar,
+            /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+            /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
+          ],
+        },),
       },),
     },),
   },);
@@ -36064,7 +35514,7 @@ function EditorBarLauncher({
   }, [],);
   if (!EditorBar || !framerSiteId || !mounted) return null;
   return /* @__PURE__ */ jsx(IgnoreErrors, {
-    children: /* @__PURE__ */ jsx(Suspense3, {
+    children: /* @__PURE__ */ jsx(Suspense2, {
       children: /* @__PURE__ */ jsx(EditorBar, {
         framerSiteId,
         features: editorBarFeatures,
@@ -41249,12 +40699,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component18 = typeof target === 'string'
+    const Component17 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
       : React4.isValidElement(target,)
       ? target
       : null;
-    if (!Component18) return;
+    if (!Component17) return;
     const {
       appearsFrom,
       backdropColor,
@@ -41263,40 +40713,40 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component18,);
+        navigation.instant(Component17,);
         break;
       case 'fade':
-        navigation.fade(Component18, {
+        navigation.fade(Component17, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component18, {
+        navigation.push(Component17, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component18, {
+        navigation.flip(Component17, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component18, {
+        navigation.magicMotion(Component17, {
           animation,
         },);
         break;
       // Overlay stack navigation doesn't support updating the browser's
       // path.
       case 'modal':
-        navigation.modal(Component18, {
+        navigation.modal(Component17, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component18, {
+        navigation.overlay(Component17, {
           appearsFrom,
           backdropColor,
           animation,
@@ -41796,16 +41246,16 @@ function safeCSSValue(value,) {
   if (reUnsafeCharacters.test(value,)) return 'none';
   return value;
 }
-function withCodeBoundaryForOverrides(Component18, {
+function withCodeBoundaryForOverrides(Component17, {
   scopeId,
   nodeId,
   override,
   inComponentSlot,
 },) {
   if (!shouldEnableCodeBoundaries()) {
-    return override(Component18,);
+    return override(Component17,);
   }
-  const appliedOverride = tryToApplyOverride(Component18, override,);
+  const appliedOverride = tryToApplyOverride(Component17, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
     const nearestExternalComponent = useNearestExternalComponent();
@@ -41819,7 +41269,7 @@ function withCodeBoundaryForOverrides(Component18, {
       if (appliedOverride.status === 'success') {
         return /* @__PURE__ */ jsx(CodeComponentBoundary, {
           errorMessage: getErrorMessageForOverride(scopeId, nodeId,),
-          fallback: /* @__PURE__ */ jsx(Component18, {
+          fallback: /* @__PURE__ */ jsx(Component17, {
             ...props,
             ref,
           },),
@@ -41835,7 +41285,7 @@ function withCodeBoundaryForOverrides(Component18, {
           collectErrorToAnalytics(appliedOverride.error,);
           hasErrorBeenLogged = true;
         }
-        return /* @__PURE__ */ jsx(Component18, {
+        return /* @__PURE__ */ jsx(Component17, {
           ...props,
           ref,
         },);
@@ -41853,9 +41303,9 @@ function withCodeBoundaryForOverrides(Component18, {
   }
   return React4.forwardRef(CodeBoundaryForOverrides,);
 }
-function tryToApplyOverride(Component18, override,) {
+function tryToApplyOverride(Component17, override,) {
   try {
-    const ComponentWithOverrides = override(Component18,);
+    const ComponentWithOverrides = override(Component17,);
     return {
       status: 'success',
       Component: ComponentWithOverrides,
@@ -41877,14 +41327,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component18, info,) {
+function withMappedReactProps(Component17, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
     },);
   };
@@ -41925,10 +41375,10 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component18) =>
+var withVariantAppearEffect = (Component17) =>
   React4.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...props,
         ref: forwardedRef,
       },);
@@ -42000,18 +41450,18 @@ var withVariantAppearEffect = (Component18) =>
       React4.startTransition(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component18) =>
+var withVariantFX = (Component17) =>
   React4.forwardRef(({
     initial,
     animate: animate3,
@@ -42028,7 +41478,7 @@ var withVariantFX = (Component18) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -45727,10 +45177,10 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component18 = htmlElementAsMotionComponent(props.as,);
+  const Component17 = htmlElementAsMotionComponent(props.as,);
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -45763,7 +45213,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
       },);
     }
   }
-  return /* @__PURE__ */ jsx(Component18, {
+  return /* @__PURE__ */ jsx(Component17, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -47517,37 +46967,49 @@ function getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, ce
   const scaleWidth = widthFactor ? heightFactor / widthFactor : 1e3;
   return `translate(${centerAnchorX}, ${centerAnchorY}) scale(1 ${scaleWidth}) translate(-${centerAnchorX}, -${centerAnchorY})`;
 }
-var SVGRoot = class extends Component {
-  render() {
-    const {
-      children,
-      frame: frame2,
-      innerRef,
-      left,
-      top,
-    } = this.props;
-    const {
-      width,
-      height,
-    } = frame2;
-    const svgStyle = {
-      position: 'absolute',
-      width: Math.ceil(width,),
-      height: Math.ceil(height,),
-      overflow: 'visible',
-      display: 'block',
-      left: Math.floor(left,),
-      top: Math.floor(top,),
-    };
-    return /* @__PURE__ */ jsx('svg', {
-      role: 'presentation',
-      width: '100%',
-      height: '100%',
-      style: svgStyle,
-      ref: innerRef,
-      children,
-    },);
+var SVGRoot = (props) => {
+  const {
+    id: id3,
+    children,
+    frame: frame2,
+    left,
+    width,
+    height,
+    top,
+    style,
+    _needsMeasure,
+  } = props;
+  const inCodeComponent = React4.useContext(ComponentContainerContext,);
+  const ref = React4.useRef(null,);
+  useMeasureLayout({
+    id: id3,
+    // SVGRoot won't be rendered if the node is invisible.
+    visible: true,
+    _needsMeasure,
+  }, ref,);
+  const svgStyle = {
+    position: 'absolute',
+    width: Math.ceil(width ?? frame2.width,),
+    height: Math.ceil(height ?? frame2.height,),
+    overflow: 'visible',
+    display: 'block',
+    ...style,
+  };
+  if (isNumber2(left,)) {
+    svgStyle.left = Math.floor(left,);
   }
+  if (isNumber2(top,)) {
+    svgStyle.top = Math.floor(top,);
+  }
+  return /* @__PURE__ */ jsx('svg', {
+    id: inCodeComponent ? void 0 : id3,
+    role: 'presentation',
+    width: '100%',
+    height: '100%',
+    style: svgStyle,
+    ref,
+    children,
+  },);
 };
 var Vector = /* @__PURE__ */ (() => {
   var _a;
@@ -47559,7 +47021,6 @@ var Vector = /* @__PURE__ */ (() => {
         calculatedPath,
         d,
         insideStroke,
-        shapeId,
         strokeEnabled,
         strokeClipId,
         strokeWidth,
@@ -47582,8 +47043,10 @@ var Vector = /* @__PURE__ */ (() => {
         variants,
         transition,
         fillOpacity,
+        visible,
       } = this.props;
-      if (!id3 || !shapeId || !strokeClipId) return null;
+      if (!visible) return null;
+      if (!id3 || !strokeClipId) return null;
       const rotate = this.props.rotate ?? rotation ?? 0;
       const {
         target,
@@ -47664,7 +47127,7 @@ var Vector = /* @__PURE__ */ (() => {
           asRecord(svgStrokeAttributes,)[key7] = void 0;
         }
       }
-      const internalShapeId = InternalID.forKey(shapeId,);
+      const internalShapeId = InternalID.forKey(id3,);
       const internalStrokeClipId = InternalID.forKey(strokeClipId,);
       const shadow = shadowForShape(
         shadows,
@@ -47781,6 +47244,7 @@ var Vector = /* @__PURE__ */ (() => {
     }
     renderElement(element,) {
       const {
+        id: id3,
         isRootVectorNode,
         width,
         height,
@@ -47788,6 +47252,8 @@ var Vector = /* @__PURE__ */ (() => {
         includeTransform,
         left,
         top,
+        style,
+        _needsMeasure,
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
@@ -47798,12 +47264,14 @@ var Vector = /* @__PURE__ */ (() => {
         height: 100,
       };
       return /* @__PURE__ */ jsx(SVGRoot, {
+        id: id3,
         frame: frame2,
         width,
         height,
         left,
         top,
-        innerRef: this.setLayerElement,
+        style,
+        _needsMeasure,
         children: element,
       },);
     }
@@ -47826,7 +47294,6 @@ var Vector = /* @__PURE__ */ (() => {
       opacity: void 0,
       calculatedPath: [],
       d: void 0,
-      shapeId: void 0,
       insideStroke: false,
       strokeEnabled: true,
       strokeClipId: void 0,
@@ -47848,6 +47315,7 @@ var Vector = /* @__PURE__ */ (() => {
       strokeDashArray: '0',
       strokeDashOffset: 0,
       fill: 'rgba(0,170,255,0.5)',
+      visible: void 0,
     },),
     __publicField(_a, 'defaultProps', {
       ...Layer.defaultProps,
@@ -47861,7 +47329,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
     render() {
       countNodeRender();
       const {
-        id: id3,
         name: nameProp,
         opacity,
         visible,
@@ -47901,7 +47368,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
       return this.renderElement(/* @__PURE__ */ jsx('g', {
         transform: transformString2(transform2,),
         ...{
-          id: id3,
           name,
           opacity,
         },
@@ -47910,6 +47376,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
     }
     renderElement(element,) {
       const {
+        id: id3,
         isRootVectorNode,
         width,
         height,
@@ -47917,16 +47384,20 @@ var VectorGroup = /* @__PURE__ */ (() => {
         includeTransform,
         left,
         top,
+        style,
+        _needsMeasure,
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
       return /* @__PURE__ */ jsx(SVGRoot, {
+        id: id3,
         frame: frame2,
         left,
         top,
         width,
         height,
-        innerRef: this.setLayerElement,
+        style,
+        _needsMeasure,
         children: element,
       },);
     }
@@ -48277,28 +47748,28 @@ var package_default = {
     postinstall: 'node postinstall.cjs',
   },
   dependencies: {
-    '@juggle/resize-observer': '^3.3.1',
     eventemitter3: '^3.1.0',
-    fontfaceobserver: '^2.1.0',
+    fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
     hsluv: '^1.0.1',
   },
   devDependencies: {
-    '@microsoft/api-extractor': '^7.42.3',
+    '@juggle/resize-observer': '^3.4.0',
+    '@microsoft/api-extractor': '^7.52.3',
     '@testing-library/dom': '^8.19.1',
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
-    '@types/dom-navigation': '^1.0.3',
+    '@types/dom-navigation': '^1.0.5',
     '@types/google.fonts': '^1.0.5',
     '@types/node': '^20.16.5',
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
-    '@types/yargs': '^17.0.19',
-    '@typescript-eslint/eslint-plugin': '^8.2.0',
-    '@typescript-eslint/parser': '^8.21.0',
+    '@types/yargs': '^17.0.33',
+    '@typescript-eslint/eslint-plugin': '^8.29.1',
+    '@typescript-eslint/parser': '^8.29.1',
     chalk: '^4.1.2',
-    eslint: '^8.57.0',
+    eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
     immutable: '^3.8.2',
     'jest-diff': '^29.3.1',
@@ -48307,9 +47778,9 @@ var package_default = {
     'jest-junit': '^15.0.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
-    semver: '^7.5.2',
+    semver: '^7.7.1',
     typescript: '^5.7.3',
-    yargs: '^17.6.2',
+    yargs: '^17.7.2',
   },
   peerDependencies: {
     'framer-motion': '11.11.7',
