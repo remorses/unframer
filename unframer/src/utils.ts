@@ -32,11 +32,13 @@ export const logger = {
 }
 
 export function componentNameToPath(name: string) {
-    return name
-        .split('/')
-        .filter(Boolean)
-        .map((part) => kebabCase(part))
-        .join('/')
+    return (
+        name
+            .split('/')
+            .filter(Boolean)
+            .map((part) => kebabCase(part))
+            .join('/') || 'component-without-name'
+    )
 }
 
 export function sleep(ms: number) {

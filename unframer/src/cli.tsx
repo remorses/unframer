@@ -84,12 +84,10 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                             data?.project?.fullFramerProjectId!,
                         locales: data?.locales,
                         components: Object.fromEntries(
-                            await Promise.all(
-                                data.components.map(async (c) => [
-                                    componentNameToPath(c.name),
-                                    c.url,
-                                ]),
-                            ),
+                            data.components.map((c) => [
+                                componentNameToPath(c.name),
+                                c.url,
+                            ]),
                         ),
                         componentBreakpoints:
                             data.breakpoints

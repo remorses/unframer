@@ -88,15 +88,17 @@ export async function bundle({
     }
     const fn = watch ? context : fakeContext
     let foundError = false
+    
     const buildContext = await fn({
         absWorkingDir: out,
-
-        entryPoints: Object.keys(components).map((name) => {
-            return {
-                in: `virtual:${name}`,
-                out: name,
-            }
-        }),
+        entryPoints: Object.keys(components)
+            .filter((x) => x)
+            .map((name) => {
+                return {
+                    in: `virtual:${name}`,
+                    out: name,
+                }
+            }),
         jsx: 'automatic',
         bundle: true,
         platform: 'browser',
