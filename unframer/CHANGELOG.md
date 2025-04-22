@@ -1,5 +1,11 @@
 # unframer
 
+## 2.24.2
+
+### Patch Changes
+
+- Handle components without names
+
 ## 2.24.1
 
 ### Patch Changes
