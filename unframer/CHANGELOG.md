@@ -1,5 +1,11 @@
 # unframer
 
+## 2.24.4
+
+### Patch Changes
+
+- Make sure the cli always logs the progress, remove use of nanospinner, use undici with a single TCP connection
+
 ## 2.24.3
 
 ### Patch Changes
