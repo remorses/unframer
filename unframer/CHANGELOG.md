@@ -1,5 +1,12 @@
 # unframer
 
+## 2.24.3
+
+### Patch Changes
+
+- d8c3742: Update framer to 2.4.1, update framer motion to 11.11.7
+- Add Sentry error reporting during generation
+
 ## 2.24.2
 
 ### Patch Changes
