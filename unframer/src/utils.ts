@@ -55,7 +55,7 @@ export const logger = {
     },
 }
 
-export const spinner = logger
+export const spinner = createSpinner('Unframer')
 
 export function componentNameToPath(name: string) {
     return (

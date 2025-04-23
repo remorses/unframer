@@ -1,5 +1,11 @@
 # unframer
 
+## 2.24.5
+
+### Patch Changes
+
+- Use spinner again for logs
+
 ## 2.24.4
 
 ### Patch Changes
