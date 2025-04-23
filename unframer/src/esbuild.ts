@@ -1,6 +1,5 @@
-import { createSpinner } from 'nanospinner'
-import fetch from 'node-fetch-commonjs'
-import { logger, spinner } from './utils'
+import { fetch } from 'undici'
+import { dispatcher, logger, spinner } from './utils'
 
 import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
@@ -173,7 +172,10 @@ export function esbuildPluginBundleDependencies({
                     logger.log('fetching', url, 'because of', args.path)
                     spinner.update(`Fetching ${url.replace(/https?:\/\//, '')}`)
 
-                    const res = await fetchWithRetry(resolved, { signal })
+                    const res = await fetchWithRetry(resolved, {
+                        signal,
+                        dispatcher,
+                    })
                     if (!res.ok) {
                         throw new Error(
                             `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
@@ -274,6 +276,7 @@ export async function recursiveResolveRedirect(
     let res = await fetchWithRetry(url, {
         redirect: 'manual',
         method: 'HEAD',
+        dispatcher,
         signal: signal,
     })
     const loc = res.headers.get('location')
@@ -284,8 +287,14 @@ export async function recursiveResolveRedirect(
 
     return url
 }
-
-export const fetchWithRetry = retryTwice(fetch) as typeof fetch
+export const fetchWithRetry = retryTwice(
+    (url: string, options?: RequestInit) => {
+        const timeout = setTimeout(() => {
+            logger.error('fetch taking more than 5s', url)
+        }, 5000)
+        return fetch(url, options as any).finally(() => clearTimeout(timeout))
+    },
+) as typeof fetch
 
 export function retryTwice<F extends Function>(fn: Function): Function {
     return async (...args) => {

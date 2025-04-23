@@ -1,4 +1,5 @@
 import { setMaxListeners } from 'events'
+import { fetch } from 'undici'
 import './sentry.js'
 import JSON from 'json5'
 import { bundle, StyleToken } from './exporter.js'
@@ -11,6 +12,7 @@ import path, { basename } from 'path'
 import { BreakpointSizes } from './css.js'
 import {
     componentNameToPath,
+    dispatcher,
     isTruthy,
     logger,
     sleep,
@@ -57,6 +59,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     url:
                         process.env.UNFRAMER_SERVER_URL ||
                         'https://unframer.co',
+                    
                 })
 
                 spinner.start(`Fetching config for project ${projectId}`)
@@ -132,6 +135,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 while (Date.now() - startTime < 30 * 60 * 1000) {
                     const etag = await fetch(websiteUrl, {
                         method: 'HEAD',
+                        dispatcher,
                     })
                         .then((response) => response.headers.get('etag'))
                         .catch((error) => {

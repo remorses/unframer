@@ -1,4 +1,11 @@
 import pico from 'picocolors'
+import {
+    Agent,
+    fetch,
+    getGlobalDispatcher,
+    interceptors,
+    setGlobalDispatcher,
+} from 'undici'
 
 import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
@@ -9,6 +16,11 @@ marked.use(markedTerminal())
 export function terminalMarkdown(markdown: string) {
     return marked(markdown)
 }
+
+export const dispatcher = new Agent({
+    keepAliveTimeout: 20,
+    keepAliveMaxTimeout: 20,
+})
 
 const shouldDebugUnframer = !!process.env.DEBUG_UNFRAMER
 
@@ -21,9 +33,14 @@ export const logger = {
         }
         console.log(prefix, ...args)
     },
-    start(x?: string) {},
-    stop(x?: string) {},
-
+    start(x?: string) {
+        if (!x) return
+        console.log(prefix, x)
+    },
+    stop(x?: string) {
+        if (!x) return
+        console.log(prefix, x)
+    },
     info(...args) {
         console.log(prefix, ...args)
     },
