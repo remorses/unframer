@@ -59,16 +59,19 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                         'https://unframer.co',
                 })
 
+                spinner.start(`Fetching config for project ${projectId}`)
                 const { data, error } =
                     await client.api.plugins.reactExportPlugin
                         .project({ projectId })
                         .get()
                 if (error) {
-                    logger.error('Error fetching project data:', error)
+                    spinner.error('Error fetching project data:')
+                    console.error(error)
                     throw error
                 }
+                spinner.info(`Got Framer project data`)
                 const websiteUrl = data?.project?.websiteUrl
-                logger.log('unframer data', data)
+
                 const projectName = data?.project?.projectName || ''
                 if (projectName) {
                     spinner.info(`Using project: ${projectName}`)

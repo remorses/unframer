@@ -4,8 +4,6 @@ import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
 import { createSpinner } from 'nanospinner'
 
-export const spinner = createSpinner('Downloading Framer Components')
-
 marked.use(markedTerminal())
 
 export function terminalMarkdown(markdown: string) {
@@ -23,6 +21,15 @@ export const logger = {
         }
         console.log(prefix, ...args)
     },
+    start(x?: string) {},
+    stop(x?: string) {},
+
+    info(...args) {
+        console.log(prefix, ...args)
+    },
+    update(...args) {
+        console.log(prefix, ...args)
+    },
     green(...args) {
         console.log([prefix, ...args].map((x) => pico.green(x)).join(' '))
     },
@@ -30,6 +37,8 @@ export const logger = {
         console.error([prefix, ...args].map((x) => pico.red(x)).join(' '))
     },
 }
+
+export const spinner = logger
 
 export function componentNameToPath(name: string) {
     return (

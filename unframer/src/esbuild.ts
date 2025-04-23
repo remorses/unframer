@@ -1,6 +1,6 @@
 import { createSpinner } from 'nanospinner'
 import fetch from 'node-fetch-commonjs'
-import { logger } from './utils'
+import { logger, spinner } from './utils'
 
 import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
@@ -47,7 +47,7 @@ export function esbuildPluginBundleDependencies({
     externalPackages = [...defaultExternalPackages, ...externalPackages]
     // console.log(externalPackages)
     const codeCache = new Map()
-    const spinner = createSpinner('Fetching Framer Components Modules')
+
     spinner.start()
 
     const plugin: Plugin = {
