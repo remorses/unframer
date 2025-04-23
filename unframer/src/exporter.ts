@@ -39,6 +39,8 @@ import {
     spinner,
     terminalMarkdown,
 } from './utils.js'
+import { error } from 'console'
+import { notifyError } from './sentry'
 
 export type StyleToken = {
     id: string
@@ -811,6 +813,7 @@ async function extractPropControlsSafe(text, name) {
         }
         return propControls
     } catch (e: any) {
+        notifyError(error, 'typescript generation error')
         logger.error(`Cannot get property controls for ${name}`, e.stack)
     }
 }

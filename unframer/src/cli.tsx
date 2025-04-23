@@ -1,4 +1,5 @@
 import { setMaxListeners } from 'events'
+import './sentry.js'
 import JSON from 'json5'
 import { bundle, StyleToken } from './exporter.js'
 import { createClient } from './generated/api-client.js'
@@ -15,6 +16,7 @@ import {
     sleep,
     spinner,
 } from './utils.js'
+import { notifyError } from './sentry.js'
 const configNames = ['unframer.config.json', 'unframer.json']
 
 export const cli = cac('unframer')
@@ -179,7 +181,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             })
             await buildContext.dispose?.()
         } catch (error) {
-            logger.error('Error in main:', error)
+            notifyError(error)
+
             throw error
         }
     })
@@ -222,34 +225,6 @@ cli.command('init', 'Init the unframer.config.json config').action(
         console.log(`${p} file created`)
     },
 )
-
-function safeJsonParse(json: string) {
-    try {
-        return JSON.parse(json)
-    } catch (e) {
-        return null
-    }
-}
-
-function pluck<T, K extends keyof T>(o: T, names: K[]): { [k: string]: T[K] } {
-    return Object.fromEntries(names.map((n) => [n, o[n]]))
-}
-
-function getNewNames(oldConfig: Config, newConfig: Config) {
-    // get the new names, also check if the previous url (object value) has changed
-    const oldKeys = Object.keys(oldConfig.components)
-    const newKeys = Object.keys(newConfig.components)
-    const newNames = newKeys.filter((key) => {
-        if (!oldKeys.includes(key)) {
-            return true
-        }
-        if (oldConfig.components[key] !== newConfig.components[key]) {
-            return true
-        }
-        return false
-    })
-    return newNames
-}
 
 export type Config = {
     components: {
