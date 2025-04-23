@@ -87,7 +87,7 @@ export async function main({ framerTypesUrl }) {
         unframer: patch
         --- 
 
-        Update framer to ${framerVersion}, update framer motion to ${framerMotionVersion}
+        Update to latest Framer runtime, framer@${framerVersion}, framer-motion@${framerMotionVersion}
         `
         fs.writeFileSync(
             `../.changeset/${framerVersion}-${framerMotionVersion}.md`,
