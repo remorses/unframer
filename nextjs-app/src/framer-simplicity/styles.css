@@ -142,7 +142,7 @@ h1, h2, h3, h4, h5, h6, p, figure {
 }
 
 
-body { --framer-will-change-override: none; }
+body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }
@@ -276,6 +276,7 @@ body { --framer-will-change-override: none; }
 
         p.framer-text,
         div.framer-text,
+        figure.framer-text,
         h1.framer-text,
         h2.framer-text,
         h3.framer-text,
@@ -321,6 +322,25 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            p.framer-text,
+            div.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            li.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))));
+                -webkit-text-stroke-color: var(--framer-text-stroke-color-rgb, var(--framer-text-stroke-color, initial));
+            }
+        }
+    
+
         .framer-fit-text .framer-text {
             white-space: nowrap;
             white-space-collapse: preserve;
@@ -362,6 +382,8 @@ body { --framer-will-change-override: none; }
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
         blockquote.framer-text:not(:first-child),
+        table.framer-text:not(:first-child),
+        figure.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -396,6 +418,14 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text,
+            code.framer-text span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+            }
+        }
+    
+
         blockquote.framer-text {
             margin-block-start: initial;
             margin-block-end: initial;
@@ -421,6 +451,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text,
+            a.framer-text span.framer-text:not([data-text-fill]),
+            span.framer-text[data-nested-link],
+            span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+            }
+        }
+    
+
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link],
@@ -430,6 +470,16 @@ body { --framer-will-change-override: none; }
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text,
+            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-nested-link],
+            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+            }
         }
     
 
@@ -447,6 +497,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+    @supports not (color: color(display-p3 1 1 1)) {
+        a.framer-text:hover,
+        a.framer-text:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link]:hover,
+        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+        }
+    }
+    
+
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link]:hover,
@@ -458,6 +518,16 @@ body { --framer-will-change-override: none; }
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     
+
+    @supports not (color: color(display-p3 1 1 1)) {
+        code.framer-text a.framer-text:hover,
+        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-nested-link]:hover,
+        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+        }
+    }
+   
 
         a.framer-text[data-framer-page-link-current],
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
@@ -473,6 +543,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text[data-framer-page-link-current],
+            a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            span.framer-text[data-framer-page-link-current],
+            span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+            }
+        }
+    
+
         code.framer-text a.framer-text[data-framer-page-link-current],
         code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-framer-page-link-current],
@@ -482,6 +562,16 @@ body { --framer-will-change-override: none; }
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text[data-framer-page-link-current],
+            code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current],
+            code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+            }
         }
     
 
@@ -499,6 +589,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text[data-framer-page-link-current]:hover,
+            a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            span.framer-text[data-framer-page-link-current]:hover,
+            span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+            }
+        }
+    
+
         code.framer-text a.framer-text[data-framer-page-link-current]:hover,
         code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-framer-page-link-current]:hover,
@@ -508,6 +608,16 @@ body { --framer-will-change-override: none; }
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+            }
         }
     
 
@@ -540,34 +650,81 @@ body { --framer-will-change-override: none; }
 
         ul.framer-text,
         ol.framer-text {
-            display: table;
-            width: 100%;
+            padding-left: 3ch;
+            position: relative;
         }
     
 
         li.framer-text {
-            display: table-row;
             counter-increment: list-item;
             list-style: none;
         }
     
 
         ol.framer-text > li.framer-text::before {
-            display: table-cell;
-            width: 2.25ch;
-            box-sizing: border-box;
-            padding-inline-end: 0.75ch;
+            position: absolute;
+            left: 0;
             content: counter(list-item, var(--list-style-type)) ".";
-            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 100),
+        ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
+            padding-left: 1ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
+            padding-left: 2ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 10000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
+            padding-left: 3ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 100000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
+            padding-left: 4ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
+            padding-left: 5ch;
         }
     
 
         ul.framer-text > li.framer-text::before {
-            display: table-cell;
-            width: 2.25ch;
-            box-sizing: border-box;
-            padding-inline-end: 0.75ch;
+            position: absolute;
+            left: 0;
             content: "•";
+        }
+    
+
+        .framer-table-wrapper {
+            overflow-x: auto;
+        }
+    
+
+        table.framer-text,
+        .framer-table-wrapper table.framer-text {
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: auto;
+            word-break: normal;
+            width: 100%;
+        }
+    
+
+        td.framer-text,
+        th.framer-text {
+            min-width: 16ch;
+            vertical-align: top;
         }
     
 
@@ -868,6 +1025,7 @@ NavigationContainer
 }
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
+[data-hide-scrollbars="true"] { scrollbar-width: none; }
 
 /* used by section-frequently-asked-questions.js, section-hero.js, section-pricing.js */
 

@@ -569,7 +569,7 @@ export async function bundle({
     const prop = findExampleProperty(exampleComponent?.propertyControls)
     const propStr = prop ? ` ${prop}='example'` : ''
     const responsiveComponent = dedent`
-    {/* use .Responsive for components with breakpoints, remove it if you want to pass a specific variant */}
+    {/* use .Responsive for components with breakpoints */}
     <${exampleComponent?.componentName}.Responsive${propStr} />
     `
     const nonResponsiveComponent = dedent`
