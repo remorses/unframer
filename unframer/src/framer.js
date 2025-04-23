@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.RHPWPDUD.mjs
+// /:https://app.framerstatic.com/framer.J6CEE64J.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
@@ -18571,6 +18571,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Cursor'] = 'cursor';
   ControlType2['Padding'] = 'padding';
   ControlType2['BorderRadius'] = 'borderradius';
+  ControlType2['Gap'] = 'gap';
   ControlType2['CollectionReference'] = 'collectionreference';
   ControlType2['MultiCollectionReference'] = 'multicollectionreference';
   ControlType2['TrackingId'] = 'trackingid';
@@ -19008,6 +19009,9 @@ var inputIconCSSDeclaration = {
 function createRGBVariableFallbacks(variables, fallback,) {
   return css.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
 }
+function createFontSizeVariableFallbacks(variables, fallback,) {
+  return css.variable(...variables.flatMap((variable) => [`${variable}-canvas`, variable,]), fallback,);
+}
 var richTextCSSRules = /* @__PURE__ */ (() => [
   /* css */
   `
@@ -19043,7 +19047,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
             text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
@@ -19162,7 +19168,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
             line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
         }
@@ -19195,7 +19203,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             text-decoration: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
@@ -19223,7 +19233,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19252,7 +19264,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  })) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             text-decoration: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
@@ -19283,7 +19297,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19312,7 +19328,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  })) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
         }
@@ -19338,7 +19356,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  })) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19367,7 +19387,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
@@ -19399,7 +19421,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, ${
+    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
+  }))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19932,6 +19956,7 @@ function getControlDefaultValue(control,) {
       case 'boxshadow':
       case 'padding':
       case 'borderradius':
+      case 'gap':
         return isString(control.defaultValue,) ? control.defaultValue : void 0;
       case 'boolean':
         return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
@@ -42474,6 +42499,10 @@ var variantsNameToWeight = {
   'solid-regular': 700,
   'solid-medium': 800,
   'solid-bold': 900,
+  // The following variants are only used in the Tecnica font.
+  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
+  '53': 400,
+  '55': 600,
   // we want to put variable fonts last
   variable: 1e3,
   'variable-italic': 1e3,
