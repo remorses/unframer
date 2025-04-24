@@ -10429,7 +10429,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.J6CEE64J.mjs
+// /:https://app.framerstatic.com/framer.JZXYF3A4.mjs
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
@@ -13477,8 +13477,15 @@ function patchRoute(routes, abTestId, abTestingVariantId,) {
     abTestingParentId,
     ...patchingRoute
   } = route;
+  const elements = routes[routeId].elements || route.elements
+    ? {
+      ...routes[routeId].elements,
+      ...route.elements,
+    }
+    : void 0;
   routes[routeId] = {
     ...patchingRoute,
+    elements,
     abTestingVariantId,
     abTestId,
   };
@@ -13497,6 +13504,7 @@ function removeRoutesVariants(routes,) {
   }
 }
 function patchInitialRoute(routes, routeId,) {
+  var _a, _b;
   if (!routes[routeId]) return;
   if (!routes[routeId].abTestingParentId) return;
   const parentId = routes[routeId].abTestingParentId;
@@ -13504,8 +13512,15 @@ function patchInitialRoute(routes, routeId,) {
     abTestingParentId,
     ...route
   } = routes[routeId];
+  const elements = ((_a = routes[parentId]) == null ? void 0 : _a.elements) || route.elements
+    ? {
+      ...((_b = routes[parentId]) == null ? void 0 : _b.elements),
+      ...route.elements,
+    }
+    : void 0;
   routes[parentId] = {
     ...route,
+    elements,
     abTestingVariantId: routeId,
   };
 }
@@ -43544,25 +43559,33 @@ var FontStore = class {
   }
   async loadFontsFromSelectors(selectors,) {
     if (!this.enabled) return [];
-    const googleFontsRequested = selectors.some((selector) => selector.startsWith(googleFontSelectorPrefix,));
-    const fontshareFontsRequested = selectors.some((selector) => selector.startsWith(fontsharePrefix,));
-    const builtInFontsRequested = selectors.some((selector) => selector.startsWith(builtInFontSelectorPrefix,));
-    if (googleFontsRequested || fontshareFontsRequested || builtInFontsRequested) {
-      try {
-        await this.importFontshareFonts();
-      } catch (error) {
-        warnOnce2('Failed to load Fontshare fonts:', error,);
-      }
-      try {
-        await this.importGoogleFonts();
-      } catch (error) {
-        warnOnce2('Failed to load Google fonts:', error,);
-      }
-      try {
-        await this.importBuiltInFonts();
-      } catch (error) {
-        warnOnce2('Failed to load built=in fonts:', error,);
-      }
+    const importPromises = [];
+    const shouldImportFontshareFonts = selectors.some((selector) => selector.startsWith(fontsharePrefix,));
+    if (shouldImportFontshareFonts) {
+      importPromises.push(
+        this.importFontshareFonts().catch((error) => {
+          warnOnce2('Failed to load Fontshare fonts:', error,);
+        },),
+      );
+    }
+    const shouldImportGoogleFonts = selectors.some((selector) => selector.startsWith(googleFontSelectorPrefix,));
+    if (shouldImportGoogleFonts) {
+      importPromises.push(
+        this.importGoogleFonts().catch((error) => {
+          warnOnce2('Failed to load Google fonts:', error,);
+        },),
+      );
+    }
+    const shouldImportBuiltInFonts = selectors.some((selector) => selector.startsWith(builtInFontSelectorPrefix,));
+    if (shouldImportBuiltInFonts) {
+      importPromises.push(
+        this.importBuiltInFonts().catch((error) => {
+          warnOnce2('Failed to load built-in fonts:', error,);
+        },),
+      );
+    }
+    if (importPromises.length > 0) {
+      await Promise.all(importPromises,);
     }
     const fonts = selectors.map((s) => this.bySelector.get(s,)).filter((f) => !!f);
     return Promise.allSettled(fonts.map((f) => this.loadFont(f,)),);
@@ -47000,7 +47023,6 @@ var SVGRoot = (props) => {
   const {
     id: id3,
     children,
-    frame: frame2,
     left,
     width,
     height,
@@ -47018,8 +47040,8 @@ var SVGRoot = (props) => {
   }, ref,);
   const svgStyle = {
     position: 'absolute',
-    width: Math.ceil(width ?? frame2.width,),
-    height: Math.ceil(height ?? frame2.height,),
+    width: Math.ceil(width,),
+    height: Math.ceil(height,),
     overflow: 'visible',
     display: 'block',
     ...style,
@@ -47277,7 +47299,6 @@ var Vector = /* @__PURE__ */ (() => {
         isRootVectorNode,
         width,
         height,
-        rect,
         includeTransform,
         left,
         top,
@@ -47286,15 +47307,8 @@ var Vector = /* @__PURE__ */ (() => {
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      const frame2 = this.props.frame ?? rect ?? {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-      };
       return /* @__PURE__ */ jsx(SVGRoot, {
         id: id3,
-        frame: frame2,
         width,
         height,
         left,
@@ -47319,7 +47333,6 @@ var Vector = /* @__PURE__ */ (() => {
       top: 0,
       rotation: 0,
       rotate: void 0,
-      frame: void 0,
       opacity: void 0,
       calculatedPath: [],
       d: void 0,
@@ -47409,7 +47422,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
         isRootVectorNode,
         width,
         height,
-        frame: frame2,
         includeTransform,
         left,
         top,
@@ -47420,7 +47432,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
       if (includeTransform) return element;
       return /* @__PURE__ */ jsx(SVGRoot, {
         id: id3,
-        frame: frame2,
         left,
         top,
         width,
@@ -47444,12 +47455,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
       defaultName: '',
       isRootVectorNode: false,
       includeTransform: void 0,
-      frame: {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-      },
     },),
     __publicField(_a, 'defaultProps', {
       ...Layer.defaultProps,
