@@ -269,23 +269,23 @@
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs": {
+    "/:https://esm.sh/*@motionone/utils@10.18.0/node/utils.mjs": {
       "bytes": 1852,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/utils": {
-      "bytes": 142,
+      "bytes": 140,
       "imports": [
         {
-          "path": "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs",
+          "path": "/:https://esm.sh/*@motionone/utils@10.18.0/node/utils.mjs",
           "kind": "import-statement",
-          "original": "/*@motionone/utils@10.18.0/es2022/utils.mjs"
+          "original": "/*@motionone/utils@10.18.0/node/utils.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs": {
+    "/:https://esm.sh/*@motionone/easing@10.18.0/node/easing.mjs": {
       "bytes": 841,
       "imports": [
         {
@@ -302,17 +302,17 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/easing": {
-      "bytes": 144,
+      "bytes": 142,
       "imports": [
         {
-          "path": "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs",
+          "path": "/:https://esm.sh/*@motionone/easing@10.18.0/node/easing.mjs",
           "kind": "import-statement",
-          "original": "/*@motionone/easing@10.18.0/es2022/easing.mjs"
+          "original": "/*@motionone/easing@10.18.0/node/easing.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs": {
+    "/:https://esm.sh/*@motionone/animation@10.18.0/node/animation.mjs": {
       "bytes": 3671,
       "imports": [
         {
@@ -334,70 +334,70 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/animation": {
-      "bytes": 150,
+      "bytes": 148,
       "imports": [
         {
-          "path": "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs",
+          "path": "/:https://esm.sh/*@motionone/animation@10.18.0/node/animation.mjs",
           "kind": "import-statement",
-          "original": "/*@motionone/animation@10.18.0/es2022/animation.mjs"
+          "original": "/*@motionone/animation@10.18.0/node/animation.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs": {
+    "/:https://esm.sh/*hey-listen@1.0.8/node/hey-listen.mjs": {
       "bytes": 170,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*hey-listen": {
-      "bytes": 139,
+      "bytes": 137,
       "imports": [
         {
-          "path": "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs",
+          "path": "/:https://esm.sh/*hey-listen@1.0.8/node/hey-listen.mjs",
           "kind": "import-statement",
-          "original": "/*hey-listen@1.0.8/es2022/hey-listen.mjs"
+          "original": "/*hey-listen@1.0.8/node/hey-listen.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs": {
+    "/:https://esm.sh/*@motionone/types@10.17.1/node/types.mjs": {
       "bytes": 318,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/types": {
-      "bytes": 142,
+      "bytes": 140,
       "imports": [
         {
-          "path": "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs",
+          "path": "/:https://esm.sh/*@motionone/types@10.17.1/node/types.mjs",
           "kind": "import-statement",
-          "original": "/*@motionone/types@10.17.1/es2022/types.mjs"
+          "original": "/*@motionone/types@10.17.1/node/types.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs": {
+    "/:https://esm.sh/*tslib@2.8.1/node/tslib.mjs": {
       "bytes": 14748,
       "imports": [],
       "format": "esm"
     },
     "/:https://esm.sh/*tslib": {
-      "bytes": 233,
+      "bytes": 229,
       "imports": [
         {
-          "path": "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs",
+          "path": "/:https://esm.sh/*tslib@2.8.1/node/tslib.mjs",
           "kind": "import-statement",
-          "original": "/*tslib@2.8.1/es2022/tslib.mjs"
+          "original": "/*tslib@2.8.1/node/tslib.mjs"
         },
         {
-          "path": "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs",
+          "path": "/:https://esm.sh/*tslib@2.8.1/node/tslib.mjs",
           "kind": "import-statement",
-          "original": "/*tslib@2.8.1/es2022/tslib.mjs"
+          "original": "/*tslib@2.8.1/node/tslib.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs": {
+    "/:https://esm.sh/*@motionone/generators@10.18.0/node/generators.mjs": {
       "bytes": 2980,
       "imports": [
         {
@@ -424,17 +424,17 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/generators": {
-      "bytes": 152,
+      "bytes": 150,
       "imports": [
         {
-          "path": "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs",
+          "path": "/:https://esm.sh/*@motionone/generators@10.18.0/node/generators.mjs",
           "kind": "import-statement",
-          "original": "/*@motionone/generators@10.18.0/es2022/generators.mjs"
+          "original": "/*@motionone/generators@10.18.0/node/generators.mjs"
         }
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs": {
+    "/:https://esm.sh/*@motionone/dom@10.18.0/node/dom.mjs": {
       "bytes": 26392,
       "imports": [
         {
@@ -616,12 +616,12 @@
       "format": "esm"
     },
     "/:https://esm.sh/*@motionone/dom": {
-      "bytes": 138,
+      "bytes": 136,
       "imports": [
         {
-          "path": "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs",
+          "path": "/:https://esm.sh/*@motionone/dom@10.18.0/node/dom.mjs",
           "kind": "import-statement",
-          "original": "/*@motionone/dom@10.18.0/es2022/dom.mjs"
+          "original": "/*@motionone/dom@10.18.0/node/dom.mjs"
         }
       ],
       "format": "esm"
@@ -1624,56 +1624,56 @@
         "/:https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/6YdWVZhgezRAHPsDckZo/Ticker.js": {
           "bytesInOutput": 13701
         },
-        "/:https://esm.sh/*@motionone/utils@10.18.0/es2022/utils.mjs": {
+        "/:https://esm.sh/*@motionone/utils@10.18.0/node/utils.mjs": {
           "bytesInOutput": 1319
         },
         "/:https://esm.sh/*@motionone/utils": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*@motionone/easing@10.18.0/es2022/easing.mjs": {
+        "/:https://esm.sh/*@motionone/easing@10.18.0/node/easing.mjs": {
           "bytesInOutput": 676
         },
         "/:https://esm.sh/*@motionone/easing": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*@motionone/animation@10.18.0/es2022/animation.mjs": {
+        "/:https://esm.sh/*@motionone/animation@10.18.0/node/animation.mjs": {
           "bytesInOutput": 3357
         },
         "/:https://esm.sh/*@motionone/animation": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*hey-listen@1.0.8/es2022/hey-listen.mjs": {
+        "/:https://esm.sh/*hey-listen@1.0.8/node/hey-listen.mjs": {
           "bytesInOutput": 24
         },
         "/:https://esm.sh/*hey-listen": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*@motionone/types@10.17.1/es2022/types.mjs": {
+        "/:https://esm.sh/*@motionone/types@10.17.1/node/types.mjs": {
           "bytesInOutput": 209
         },
         "/:https://esm.sh/*@motionone/types": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*tslib@2.8.1/es2022/tslib.mjs": {
+        "/:https://esm.sh/*tslib@2.8.1/node/tslib.mjs": {
           "bytesInOutput": 407
         },
         "/:https://esm.sh/*tslib": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*@motionone/generators@10.18.0/es2022/generators.mjs": {
+        "/:https://esm.sh/*@motionone/generators@10.18.0/node/generators.mjs": {
           "bytesInOutput": 2797
         },
         "/:https://esm.sh/*@motionone/generators": {
           "bytesInOutput": 0
         },
-        "/:https://esm.sh/*@motionone/dom@10.18.0/es2022/dom.mjs": {
+        "/:https://esm.sh/*@motionone/dom@10.18.0/node/dom.mjs": {
           "bytesInOutput": 12968
         },
         "/:https://esm.sh/*@motionone/dom": {
           "bytesInOutput": 0
         }
       },
-      "bytes": 55845
+      "bytes": 55829
     },
     "hero.js": {
       "imports": [

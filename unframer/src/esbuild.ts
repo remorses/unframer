@@ -277,7 +277,7 @@ export async function recursiveResolveRedirect(
         redirect: 'manual',
         method: 'HEAD',
         dispatcher,
-        signal: signal,
+        signal,
     })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
