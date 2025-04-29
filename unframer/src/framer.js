@@ -1,15 +1,19 @@
 import {
   __commonJS,
+  __decorateElement,
+  __decoratorMetadata,
+  __decoratorStart,
   __export,
   __privateAdd,
   __privateGet,
   __privateMethod,
   __privateSet,
   __publicField,
+  __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-2JNOE5PX.js';
+} from './framer-chunks/chunk-A2PMVMFI.js';
 
-// /:https://app.framerstatic.com/chunk-RKC6CDUL.mjs
+// /:https://app.framerstatic.com/chunk-YZ6MPS6I.mjs
 import { createContext, } from 'react';
 import { useCallback, useContext, useEffect, useId, } from 'react';
 import { useLayoutEffect, } from 'react';
@@ -10429,7 +10433,8 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.JZXYF3A4.mjs
+// /:https://app.framerstatic.com/framer.6XWNWO56.mjs
+import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
@@ -11361,23 +11366,22 @@ var require_fontfaceobserver_standalone = __commonJS({
 },);
 var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
-  return typeof componentType === 'object' && componentType !== null && !React4.isValidElement(componentType,) &&
-    preloadKey in componentType;
+  return typeof componentType === 'object' && componentType !== null && !isValidElement(componentType,) && preloadKey in componentType;
 }
 function lazy(factory,) {
-  const LazyComponent = React4.lazy(factory,);
+  const LazyComponent = ReactLazy(factory,);
   let factoryPromise;
   let LoadedComponent;
-  const Component17 = React4.forwardRef(function LazyWithPreload(props, ref,) {
-    return React4.createElement(
-      LoadedComponent ?? LazyComponent,
-      ref
-        ? {
-          ref,
-          ...props,
-        }
-        : props,
-    );
+  let hasRendered = false;
+  const Component17 = forwardRef(function LazyWithPreload(props, ref,) {
+    useEffect(() => {
+      hasRendered = true;
+    }, [],);
+    const Comp = LoadedComponent ?? LazyComponent;
+    return /* @__PURE__ */ jsx(Comp, {
+      ref,
+      ...props,
+    },);
   },);
   Component17.preload = () => {
     if (!factoryPromise) {
@@ -11388,59 +11392,14 @@ function lazy(factory,) {
     }
     return factoryPromise;
   };
+  Component17.getStatus = () => {
+    return {
+      hasLoaded: LoadedComponent !== void 0,
+      hasRendered,
+    };
+  };
   return Component17;
 }
-function getRouteElementId(route, hash2,) {
-  if (hash2 && route) {
-    if (route.elements && hash2 in route.elements) {
-      return route.elements[hash2];
-    } else {
-      return hash2;
-    }
-  }
-  return void 0;
-}
-function yieldToMain(options,) {
-  if ('scheduler' in window) {
-    if ('yield' in scheduler) return scheduler.yield(options,);
-    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
-  }
-  if ((options == null ? void 0 : options.priority) === 'user-blocking') {
-    return Promise.resolve();
-  }
-  return new Promise((resolve) => {
-    setTimeout(resolve,);
-  },);
-}
-async function yieldBefore(fn, options,) {
-  await yieldToMain(options,);
-  return fn();
-}
-function interactionResponse(options,) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 100,);
-    requestAnimationFrame(() => {
-      void yieldBefore(resolve, options,);
-    },);
-  },);
-}
-function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect,) {
-  useEffectFn(() => {
-    const runAfterPaint = async (fn) => {
-      await interactionResponse(opts,);
-      return fn();
-    };
-    const runPromise = runAfterPaint(effectFn,);
-    return () => {
-      void (async () => {
-        const cleanup = await runPromise;
-        if (!cleanup) return;
-        void runAfterPaint(cleanup,);
-      })();
-    };
-  }, deps,);
-}
-var EMPTY_ARRAY = [];
 var objectKeys = Object.keys;
 function hasProp(o, prop,) {
   return Object.prototype.hasOwnProperty.call(o, prop,);
@@ -11651,6 +11610,80 @@ function useRoute(routeId,) {
   if (!routeId) return void 0;
   return (_a = routerAPI.getRoute) == null ? void 0 : _a.call(routerAPI, routeId,);
 }
+function getRouteElementId(route, hash2,) {
+  if (hash2 && route) {
+    if (route.elements && hash2 in route.elements) {
+      return route.elements[hash2];
+    } else {
+      return hash2;
+    }
+  }
+  return void 0;
+}
+function yieldToMain(options,) {
+  if ('scheduler' in window) {
+    if ('yield' in scheduler) return scheduler.yield(options,);
+    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
+  }
+  if ((options == null ? void 0 : options.priority) === 'user-blocking') {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    setTimeout(resolve,);
+  },);
+}
+async function yieldBefore(fn, options,) {
+  await yieldToMain(options,);
+  return fn();
+}
+function interactionResponse(options,) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100,);
+    requestAnimationFrame(() => {
+      void yieldBefore(resolve, options,);
+    },);
+  },);
+}
+function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect,) {
+  useEffectFn(() => {
+    const runAfterPaint = async (fn) => {
+      await interactionResponse(opts,);
+      return fn();
+    };
+    const runPromise = runAfterPaint(effectFn,);
+    return () => {
+      void (async () => {
+        const cleanup = await runPromise;
+        if (!cleanup) return;
+        void runAfterPaint(cleanup,);
+      })();
+    };
+  }, deps,);
+}
+var EMPTY_ARRAY = [];
+var EMPTY_OBJECT = {};
+function monitorINPRelatedInputs(signal,) {
+  const inpRelatedInputs = ['pointerdown', 'pointerup', 'keydown', 'keyup',];
+  const inpRelatedInputHandler = (event) => {
+    const type = event.type;
+    if (!inpRelatedInputs.includes(type,)) return;
+    performance.mark(`framer-navigation-input`, {
+      detail: {
+        type,
+      },
+    },);
+  };
+  for (let i = 0; i < inpRelatedInputs.length; i++) {
+    document.addEventListener(inpRelatedInputs[i], inpRelatedInputHandler, {
+      signal,
+    },);
+  }
+  return () => {
+    for (let i = 0; i < inpRelatedInputs.length; i++) {
+      document.removeEventListener(inpRelatedInputs[i], inpRelatedInputHandler,);
+    }
+  };
+}
 function useRouteElementId(id3, targetRouteId,) {
   const currentRoute = useCurrentRoute();
   const route = useRoute(targetRouteId,) ?? currentRoute;
@@ -11788,6 +11821,7 @@ var mockWindow = {
   innerHeight: 0,
   innerWidth: 0,
   SVGSVGElement: {},
+  scheduler: void 0,
   open: function (_url, _target, _features,) {},
   __framer_events: [],
 };
@@ -11800,7 +11834,7 @@ function setTimezoneAndLocaleForTracking() {
   visitorLocale = resolvedDateTimeOptions.locale;
 }
 requestIdleCallback(setTimezoneAndLocaleForTracking,);
-function sendTrackingEvent(eventType, eventData,) {
+function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   if (!safeWindow.__framer_events) return;
   if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
   safeWindow.__framer_events.push([eventType, {
@@ -11816,7 +11850,55 @@ function sendTrackingEvent(eventType, eventData,) {
     locale: visitorLocale,
     // Additional properties specific to custom events
     ...eventData,
-  },],);
+  }, sendOn,],);
+  switch (eventType) {
+    case 'published_site_click': {
+      const {
+        trackingId,
+        href,
+      } = eventData;
+      if (trackingId) {
+        document.dispatchEvent(
+          new CustomEvent('framer:click', {
+            detail: {
+              trackingId,
+              href,
+            },
+          },),
+        );
+      }
+      break;
+    }
+    case 'published_site_form_submit': {
+      const {
+        trackingId,
+      } = eventData;
+      if (trackingId) {
+        document.dispatchEvent(
+          new CustomEvent('framer:formsubmit', {
+            detail: {
+              trackingId,
+            },
+          },),
+        );
+      }
+      break;
+    }
+    // NOTE: keep in sync with exportToHTML.ts, the initial pageview is sent from there
+    case 'published_site_pageview': {
+      const {
+        framerLocale,
+      } = eventData;
+      document.dispatchEvent(
+        new CustomEvent('framer:pageview', {
+          detail: {
+            framerLocale,
+          },
+        },),
+      );
+      break;
+    }
+  }
 }
 function computeRelativePath(from, to,) {
   if (!from.startsWith('/',) || !to.startsWith('/',)) {
@@ -12531,9 +12613,7 @@ var announceNavigation = () => {
     announceDiv.textContent = document.title;
   }, 60,);
 };
-function useMonitorNextPaintAfterRender(label,) {
-  const startLabel = `${label}-start`;
-  const endLabel = `${label}-end`;
+function useMonitorNextPaintAfterRender() {
   const resolveHasPainted = useRef(void 0,);
   useAfterPaintEffect(
     () => {
@@ -12548,18 +12628,25 @@ function useMonitorNextPaintAfterRender(label,) {
       priority: 'user-blocking',
     },
   );
-  return useCallback(() => {
+  return useCallback((label, measureDetail,) => {
+    const startLabel = `${label}-start`;
+    const endLabel = `${label}-end`;
     const hasPainted = new Promise((resolve) => {
       resolveHasPainted.current = resolve;
     },);
+    if (!label) return hasPainted;
     performance.mark(startLabel,);
     return hasPainted.finally(() => {
       performance.mark(endLabel,);
-      performance.measure(label, startLabel, endLabel,);
+      performance.measure(label, {
+        start: startLabel,
+        end: endLabel,
+        detail: measureDetail,
+      },);
     },).catch((e) => {
       console.error(e,);
     },);
-  }, [label, startLabel, endLabel,],);
+  }, [],);
 }
 async function pushRouteState(
   routeId,
@@ -12688,7 +12775,7 @@ var supportsNavigationAPI = /* @__PURE__ */ (() => {
 })();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change-popstate',);
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender();
   const viewTransitionReady = useRef(void 0,);
   const popStateHandler = useCallback(async ({
     state: state2,
@@ -12706,7 +12793,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       localeId,
     } = state2;
     if (!isString(routeId,)) return;
-    const nextRender = monitorNextPaintAfterRender();
+    const nextRender = monitorNextPaintAfterRender('framer-route-change', {
+      popstate: true,
+    },);
+    const stopMonitoringINPRelatedInputs = monitorINPRelatedInputs();
+    void nextRender.finally(stopMonitoringINPRelatedInputs,);
     const changeRoute = () => {
       setCurrentRouteId(
         routeId,
@@ -13105,6 +13196,14 @@ function useIsHydrationOrSSR() {
   }, [],);
   return isHydrationOrSSR;
 }
+function onlyRunOnce(originalMethod,) {
+  let hasRun = false;
+  return function (...args) {
+    if (hasRun) return;
+    hasRun = true;
+    return originalMethod.apply(this, args,);
+  };
+}
 function measureSafe(name, start, end,) {
   try {
     performance.measure(name, start, end,);
@@ -13112,129 +13211,286 @@ function measureSafe(name, start, end,) {
     console.warn(`Could not measure ${name}`, e,);
   }
 }
-var shouldMark = false;
+var _measureUnattributedHydrationOverhead_dec;
+var _measureMutationEffects_dec;
+var _markLayoutStylePaintEnd_dec;
+var _markRafEnd_dec;
+var _markRafStart_dec;
+var _markUseEffectsEnd_dec;
+var _markUseEffectsAreSynchronous_dec;
+var _markUseEffectsRouterStart_dec;
+var _markUseEffectsStart_dec;
+var _markUseLayoutEffectsEnd_dec;
+var _markRouterUseLayoutEffectStart_dec;
+var _markUseLayoutEffectsStart_dec;
+var _markUseInsertionEffectsEnd_dec;
+var _markUseInsertionEffectRouterStart_dec;
+var _markUseInsertionEffectsStart_dec;
+var _markRenderEnd_dec;
+var _markRenderStart_dec;
+var _init;
+_markRenderStart_dec = [onlyRunOnce,],
+  _markRenderEnd_dec = [onlyRunOnce,],
+  _markUseInsertionEffectsStart_dec = [onlyRunOnce,],
+  _markUseInsertionEffectRouterStart_dec = [onlyRunOnce,],
+  _markUseInsertionEffectsEnd_dec = [onlyRunOnce,],
+  _markUseLayoutEffectsStart_dec = [onlyRunOnce,],
+  _markRouterUseLayoutEffectStart_dec = [onlyRunOnce,],
+  _markUseLayoutEffectsEnd_dec = [onlyRunOnce,],
+  _markUseEffectsStart_dec = [onlyRunOnce,],
+  _markUseEffectsRouterStart_dec = [onlyRunOnce,],
+  _markUseEffectsAreSynchronous_dec = [onlyRunOnce,],
+  _markUseEffectsEnd_dec = [onlyRunOnce,],
+  _markRafStart_dec = [onlyRunOnce,],
+  _markRafEnd_dec = [onlyRunOnce,],
+  _markLayoutStylePaintEnd_dec = [onlyRunOnce,],
+  _measureMutationEffects_dec = [onlyRunOnce,],
+  _measureUnattributedHydrationOverhead_dec = [onlyRunOnce,];
+var HydrationMarker = class {
+  constructor() {
+    __runInitializers(_init, 5, this,);
+    __publicField(this, 'render', {
+      markStart: () => this.markRenderStart(),
+      markEnd: () => this.markRenderEnd(),
+    },);
+    __publicField(this, 'mutationEffects', {
+      measure: () => this.measureMutationEffects(),
+    },);
+    __publicField(this, 'useInsertionEffects', {
+      markStart: () => this.markUseInsertionEffectsStart(),
+      markRouterStart: () => this.markUseInsertionEffectRouterStart(),
+      markEnd: () => this.markUseInsertionEffectsEnd(),
+    },);
+    __publicField(this, 'useLayoutEffects', {
+      markStart: () => this.markUseLayoutEffectsStart(),
+      markRouterStart: () => this.markRouterUseLayoutEffectStart(),
+      markEnd: () => this.markUseLayoutEffectsEnd(),
+    },);
+    __publicField(this, 'useEffects', {
+      markStart: () => this.markUseEffectsStart(),
+      markRouterStart: () => this.markUseEffectsRouterStart(),
+      markEnd: () => this.markUseEffectsEnd(),
+      markAreSynchronous: () => this.markUseEffectsAreSynchronous(),
+    },);
+    __publicField(this, 'browserRendering', {
+      hasStarted: false,
+      requestAnimationFrame: {
+        markStart: () => this.markRafStart(),
+        markEnd: () => this.markRafEnd(),
+      },
+      layoutStylePaint: {
+        markEnd: () => this.markLayoutStylePaintEnd(),
+      },
+    },);
+    __publicField(this, 'unattributedHydrationOverhead', {
+      measure: () => this.measureUnattributedHydrationOverhead(),
+    },);
+  }
+  markRenderStart() {
+    performance.mark('framer-hydration-start',/* Hydration_Start */
+    );
+  }
+  markRenderEnd() {
+    performance.mark('framer-hydration-render-end',/* ReactRender_End */
+    );
+    measureSafe('framer-hydration-render', 'framer-hydration-start', 'framer-hydration-render-end',/* ReactRender_End */
+    );
+  }
+  markUseInsertionEffectsStart() {
+    performance.mark('framer-hydration-insertion-effects-start',/* UseInsertionEffects_Start */
+    );
+  }
+  markUseInsertionEffectRouterStart() {
+    performance.mark('framer-hydration-router-insertion-effect',/* UseInsertionEffect_RouterStart */
+    );
+  }
+  markUseInsertionEffectsEnd() {
+    performance.mark('framer-hydration-insertion-effects-end',/* UseInsertionEffects_End */
+    );
+    measureSafe(
+      'framer-hydration-insertion-effects',
+      'framer-hydration-insertion-effects-start',
+      'framer-hydration-insertion-effects-end',
+      /* UseInsertionEffects_End */
+    );
+  }
+  markUseLayoutEffectsStart() {
+    performance.mark('framer-hydration-layout-effects-start',/* UseLayoutEffects_Start */
+    );
+  }
+  markRouterUseLayoutEffectStart() {
+    performance.mark('framer-hydration-router-layout-effect',/* UseLayoutEffect_RouterStart */
+    );
+  }
+  markUseLayoutEffectsEnd() {
+    performance.mark('framer-hydration-layout-effects-end',/* UseLayoutEffects_End */
+    );
+    measureSafe(
+      'framer-hydration-layout-effects',
+      'framer-hydration-layout-effects-start',
+      'framer-hydration-layout-effects-end',
+      /* UseLayoutEffects_End */
+    );
+  }
+  markUseEffectsStart() {
+    performance.mark('framer-hydration-effects-start',/* UseEffects_Start */
+    );
+  }
+  markUseEffectsRouterStart() {
+    performance.mark('framer-hydration-router-effect',/* UseEffects_RouterStart */
+    );
+  }
+  markUseEffectsAreSynchronous() {
+    performance.mark('framer-hydration-effects-sync',/* UseEffectsAreSynchronous */
+    );
+  }
+  markUseEffectsEnd() {
+    var _a, _b;
+    performance.mark('framer-hydration-effects-end',/* UseEffects_End */
+    );
+    measureSafe(
+      'framer-hydration-effects',
+      ((_a = performance.getEntriesByName('framer-hydration-first-paint',/* BrowserRender_LayoutStylePaintEnd */
+        )[0]) == null
+        ? void 0
+        : _a.name) ?? ((_b = performance.getEntriesByName('framer-hydration-effects-start',/* UseEffects_Start */
+          )[0]) == null
+          ? void 0
+          : _b.name),
+      'framer-hydration-effects-end',
+      /* UseEffects_End */
+    );
+  }
+  markRafStart() {
+    this.browserRendering.hasStarted = true;
+    performance.mark('framer-hydration-browser-render-start',/* BrowserRender_RafStart */
+    );
+  }
+  markRafEnd() {
+    performance.mark('framer-hydration-browser-raf-end',/* BrowserRender_RafEnd */
+    );
+    measureSafe(
+      'framer-hydration-raf',
+      'framer-hydration-browser-render-start',
+      'framer-hydration-browser-raf-end',
+      /* BrowserRender_RafEnd */
+    );
+  }
+  markLayoutStylePaintEnd() {
+    performance.mark('framer-hydration-first-paint',/* BrowserRender_LayoutStylePaintEnd */
+    );
+    measureSafe(
+      'framer-hydration-time-to-first-paint',
+      'framer-hydration-start',
+      'framer-hydration-first-paint',
+      /* BrowserRender_LayoutStylePaintEnd */
+    );
+    measureSafe(
+      'framer-hydration-browser-render',
+      'framer-hydration-browser-raf-end',
+      'framer-hydration-first-paint',
+      /* BrowserRender_LayoutStylePaintEnd */
+    );
+  }
+  measureMutationEffects() {
+    measureSafe('framer-hydration-commit', 'framer-hydration-layout-effects-end', 'framer-hydration-effects-start',/* UseEffects_Start */
+    );
+  }
+  measureUnattributedHydrationOverhead() {
+    var _a, _b;
+    measureSafe(
+      'framer-hydration-uho',
+      // If effects have run before the start of the render pipeline, we measure from the effects end.
+      // If not, the paint will happen before effects run, so we measure from the layout effects end.
+      ((_a = performance.getEntriesByName('framer-hydration-effects-end',/* UseEffects_End */
+        )[0]) == null
+        ? void 0
+        : _a.name) ?? ((_b = performance.getEntriesByName('framer-hydration-layout-effects-end',/* UseLayoutEffects_End */
+          )[0]) == null
+          ? void 0
+          : _b.name),
+      'framer-hydration-browser-render-start',
+      /* BrowserRender_RafStart */
+    );
+  }
+};
+_init = __decoratorStart(null,);
+__decorateElement(_init, 1, 'markRenderStart', _markRenderStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markRenderEnd', _markRenderEnd_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseInsertionEffectsStart', _markUseInsertionEffectsStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseInsertionEffectRouterStart', _markUseInsertionEffectRouterStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseInsertionEffectsEnd', _markUseInsertionEffectsEnd_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseLayoutEffectsStart', _markUseLayoutEffectsStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markRouterUseLayoutEffectStart', _markRouterUseLayoutEffectStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseLayoutEffectsEnd', _markUseLayoutEffectsEnd_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseEffectsStart', _markUseEffectsStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseEffectsRouterStart', _markUseEffectsRouterStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseEffectsAreSynchronous', _markUseEffectsAreSynchronous_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markUseEffectsEnd', _markUseEffectsEnd_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markRafStart', _markRafStart_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markRafEnd', _markRafEnd_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'markLayoutStylePaintEnd', _markLayoutStylePaintEnd_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'measureMutationEffects', _measureMutationEffects_dec, HydrationMarker,);
+__decorateElement(_init, 1, 'measureUnattributedHydrationOverhead', _measureUnattributedHydrationOverhead_dec, HydrationMarker,);
+__decoratorMetadata(_init, HydrationMarker,);
+var hydrationMarker;
 function markHydrationStart() {
-  shouldMark = true;
-  performance.mark('framer-hydration-start',);
+  hydrationMarker = new HydrationMarker();
+  hydrationMarker.render.markStart();
 }
-var routerHydrationInsertionEffectStartHasRun = false;
-var routerHydrationLayoutEffectStartHasRun = false;
-var routerHydrationEffectStartHasRun = false;
 function useMarkRouterEffects() {
-  const hydrationMarkPrefix = 'framer-hydration-router';
   useInsertionEffect(() => {
-    if (routerHydrationInsertionEffectStartHasRun || !shouldMark) return;
-    routerHydrationInsertionEffectStartHasRun = true;
-    performance.mark(`${hydrationMarkPrefix}-insertion-effect`,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useInsertionEffects.markRouterStart();
   }, [],);
   useLayoutEffect(() => {
-    if (routerHydrationLayoutEffectStartHasRun || !shouldMark) return;
-    routerHydrationLayoutEffectStartHasRun = true;
-    performance.mark(`${hydrationMarkPrefix}-layout-effect`,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markRouterStart();
   }, [],);
   useEffect(() => {
-    if (routerHydrationEffectStartHasRun || !shouldMark) return;
-    routerHydrationEffectStartHasRun = true;
-    performance.mark(`${hydrationMarkPrefix}-effect`,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markRouterStart();
   }, [],);
 }
-var hydrationInsertionEffectStartHasRun = false;
-var hydrationLayoutEffectStartHasRun = false;
-var hydrationEffectStartHasRun = false;
 var wasInBackground = false;
 function useMarkSuspenseEffectsStart() {
-  const hydrationMarkPrefix = 'framer-hydration-';
-  const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
-  const hydrationEffectsEnd = `${hydrationMarkPrefix}effects-end`;
-  const hydrationBrowserRenderStart = `${hydrationMarkPrefix}browser-render-start`;
-  const hydrationRenderEnd = `${hydrationMarkPrefix}render-end`;
   useInsertionEffect(() => {
-    if (hydrationInsertionEffectStartHasRun || !shouldMark) return;
-    hydrationInsertionEffectStartHasRun = true;
-    performance.mark(hydrationRenderEnd,);
-    measureSafe(`${hydrationMarkPrefix}render`, `${hydrationMarkPrefix}start`, hydrationRenderEnd,);
-    performance.mark(`${hydrationMarkPrefix}insertion-effects-start`,);
+    hydrationMarker == null ? void 0 : hydrationMarker.render.markEnd();
+    hydrationMarker == null ? void 0 : hydrationMarker.useInsertionEffects.markStart();
   }, [],);
   useLayoutEffect(() => {
-    if (hydrationLayoutEffectStartHasRun || !shouldMark) return;
-    hydrationLayoutEffectStartHasRun = true;
-    performance.mark(`${hydrationMarkPrefix}layout-effects-start`,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markStart();
     if (document.visibilityState !== 'visible') {
       wasInBackground = true;
       return;
     }
     requestAnimationFrame(() => {
-      var _a, _b;
-      performance.mark(hydrationBrowserRenderStart,);
-      measureSafe(
-        `${hydrationMarkPrefix}uho`,
-        ((_a = performance.getEntriesByName(hydrationEffectsEnd,)[0]) == null ? void 0 : _a.name) ??
-          ((_b = performance.getEntriesByName(hydrationLayoutEffectsEnd,)[0]) == null ? void 0 : _b.name),
-        hydrationBrowserRenderStart,
-      );
+      hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.requestAnimationFrame.markStart();
+      hydrationMarker == null ? void 0 : hydrationMarker.unattributedHydrationOverhead.measure();
     },);
   }, [],);
   useEffect(() => {
-    var _a;
-    if (hydrationEffectStartHasRun || !shouldMark) return;
-    hydrationEffectStartHasRun = true;
-    const hydrationEffectsStart = `${hydrationMarkPrefix}effects-start`;
-    performance.mark(hydrationEffectsStart,);
-    const hasPaintStarted = (_a = performance.getEntriesByName(hydrationBrowserRenderStart,)[0]) == null ? void 0 : _a.name;
-    if (!hasPaintStarted) {
-      measureSafe(`${hydrationMarkPrefix}commit`, hydrationLayoutEffectsEnd, hydrationEffectsStart,);
-      performance.mark(`${hydrationMarkPrefix}effects-sync`,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markStart();
+    if (!(hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.hasStarted)) {
+      hydrationMarker == null ? void 0 : hydrationMarker.mutationEffects.measure();
+      hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markAreSynchronous();
     }
   }, [],);
-  return null;
 }
-var hydrationInsertionEffectHasRun = false;
-var hydrationLayoutEffectHasRun = false;
-var hydrationEffectHasRun = false;
 function useMarkSuspenseEffectEnd() {
-  const hydrationMarkPrefix = 'framer-hydration-';
-  const hydrationLayoutEffectsEnd = `${hydrationMarkPrefix}layout-effects-end`;
-  const hydrationEffectsEnd = `${hydrationMarkPrefix}effects-end`;
-  const hydrationBrowserRenderStart = `${hydrationMarkPrefix}browser-render-start`;
-  const hydrationStart = `${hydrationMarkPrefix}start`;
-  const hydrationInsertionEffectsEnd = `${hydrationMarkPrefix}insertion-effects-end`;
-  const hydrationFP = `${hydrationMarkPrefix}first-paint`;
-  const hydrationAnimationFrameEnd = `${hydrationMarkPrefix}browser-raf-end`;
   useInsertionEffect(() => {
-    if (hydrationInsertionEffectHasRun || !shouldMark) return;
-    hydrationInsertionEffectHasRun = true;
-    performance.mark(hydrationInsertionEffectsEnd,);
-    measureSafe(`${hydrationMarkPrefix}insertion-effects`, `${hydrationMarkPrefix}insertion-effects-start`, hydrationInsertionEffectsEnd,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useInsertionEffects.markEnd();
   }, [],);
   useLayoutEffect(() => {
-    if (hydrationLayoutEffectHasRun || !shouldMark) return;
-    hydrationLayoutEffectHasRun = true;
-    performance.mark(hydrationLayoutEffectsEnd,);
-    measureSafe(`${hydrationMarkPrefix}layout-effects`, `${hydrationMarkPrefix}layout-effects-start`, hydrationLayoutEffectsEnd,);
+    hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markEnd();
     if (wasInBackground || document.visibilityState !== 'visible') return;
     requestAnimationFrame(() => {
-      performance.mark(hydrationAnimationFrameEnd,);
-      measureSafe(`${hydrationMarkPrefix}raf`, hydrationBrowserRenderStart, hydrationAnimationFrameEnd,);
+      hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.requestAnimationFrame.markEnd();
       void yieldBefore(() => {
-        performance.mark(hydrationFP,);
-        measureSafe(`${hydrationMarkPrefix}time-to-first-paint`, hydrationStart, hydrationFP,);
-        measureSafe(`${hydrationMarkPrefix}browser-render`, hydrationAnimationFrameEnd, hydrationFP,);
+        hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.layoutStylePaint.markEnd();
       },);
     },);
   }, [],);
   useEffect(() => {
-    var _a, _b;
-    if (hydrationEffectHasRun || !shouldMark) return;
-    hydrationEffectHasRun = true;
-    performance.mark(hydrationEffectsEnd,);
-    measureSafe(
-      `${hydrationMarkPrefix}effects`,
-      ((_a = performance.getEntriesByName(hydrationFP,)[0]) == null ? void 0 : _a.name) ??
-        ((_b = performance.getEntriesByName(`${hydrationMarkPrefix}effects-start`,)[0]) == null ? void 0 : _b.name),
-      hydrationEffectsEnd,
-    );
+    hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markEnd();
   }, [],);
-  return null;
 }
 function MarkSuspenseEffectsStart() {
   useMarkSuspenseEffectsStart();
@@ -13253,7 +13509,9 @@ function renderPage(Page4, defaultPageStyle,) {
     style: defaultPageStyle,
     'data-framer-root': '',
   };
-  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, props,) : React4.createElement(Page4, props,);
+  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, props,) : /* @__PURE__ */ jsx(Page4, {
+    ...props,
+  },);
 }
 var NotFoundError = class extends Error {};
 var NotFoundErrorBoundary = class extends Component {
@@ -15969,7 +16227,7 @@ var EventEmitter = class {
   removeAllEventListeners() {
     this._emitter.removeAllListeners();
   }
-  countEventListeners(eventName, handler,) {
+  countEventListeners(eventName,) {
     if (eventName) {
       return this._emitter.listeners(eventName,).length;
     } else {
@@ -19024,9 +19282,6 @@ var inputIconCSSDeclaration = {
 function createRGBVariableFallbacks(variables, fallback,) {
   return css.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
 }
-function createFontSizeVariableFallbacks(variables, fallback,) {
-  return css.variable(...variables.flatMap((variable) => [`${variable}-canvas`, variable,]), fallback,);
-}
 var richTextCSSRules = /* @__PURE__ */ (() => [
   /* css */
   `
@@ -19062,9 +19317,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-blockquote-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
             text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
@@ -19183,9 +19436,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-blockquote-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
             line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
         }
@@ -19218,9 +19469,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-blockquote-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             text-decoration: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
@@ -19248,9 +19497,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-blockquote-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19279,9 +19526,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  })) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             text-decoration: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
@@ -19312,9 +19557,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19343,9 +19586,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  })) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
         }
@@ -19371,9 +19612,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  })) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -19402,9 +19641,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
@@ -19436,9 +19673,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, ${
-    createFontSizeVariableFallbacks(['--framer-font-size',], '16px',)
-  }))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
@@ -27352,36 +27587,6 @@ function makePaddingString({
   }
   return `${top}px ${right}px ${bottom}px ${left}px`;
 }
-function triggerStackReflow(element, display,) {
-  if (!element) return;
-  element.style.display = 'none';
-  void element.offsetHeight;
-  element.style.display = display;
-}
-var requiresPolyfill = /* @__PURE__ */ (() => Boolean(isSafari() && safariVersion() < 15.4,))();
-function useSafariGapFix(gap, ref, display,) {
-  if (!requiresPolyfill) return void 0;
-  const isInitialRender = React4.useRef(true,);
-  const hasTriggeredReflow = React4.useRef(false,);
-  const prevGapValue = React4.useRef(gap,);
-  hasTriggeredReflow.current = false;
-  React4.useLayoutEffect(() => {
-    prevGapValue.current = gap;
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
-      return;
-    }
-    if (!hasTriggeredReflow.current) {
-      triggerStackReflow(ref.current, display,);
-      hasTriggeredReflow.current = true;
-    }
-  }, [gap, ref, prevGapValue, display,],);
-  return React4.useCallback(() => {
-    if (prevGapValue.current === gap) return;
-    if (!hasTriggeredReflow.current) triggerStackReflow(ref.current, display,);
-    hasTriggeredReflow.current = true;
-  }, [gap, ref,],);
-}
 var Stack = /* @__PURE__ */ (() => {
   const StackInner = React4.forwardRef(function StackInner2(stackProps, forwardedRef,) {
     const {
@@ -27403,7 +27608,6 @@ var Stack = /* @__PURE__ */ (() => {
     } = stackProps;
     const useFlexboxGap = Boolean(externalUseFlexboxGap || wrap2,);
     const stackRef = React4.useRef(null,);
-    const onBeforeLayoutMeasure = useSafariGapFix(gap, stackRef, 'flex',);
     const flexDirection = toFlexDirection(direction,);
     const isReverse = isReverseDirection(flexDirection,);
     const justifyContent = toJustifyOrAlignment(distribution,);
@@ -27489,7 +27693,6 @@ var Stack = /* @__PURE__ */ (() => {
         'data-framer-stack-direction-reverse': isReverse,
         'data-framer-stack-gap-enabled': gapEnabled,
         style: contentWrapperStyle,
-        onBeforeLayoutMeasure,
         children: content,
       },),
     },);
@@ -33123,7 +33326,7 @@ var GracefullyDegradingErrorBoundary = class extends Component {
       error,
     );
     const sampleRate = Math.random();
-    if (sampleRate > 0.25) return;
+    if (sampleRate > 0.5) return;
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
     sendTrackingEvent('published_site_load_error', {
       message: String(error,),
@@ -33241,6 +33444,42 @@ function findAnchorElement(target, withinElement,) {
     return findAnchorElement(target.parentElement, withinElement,);
   }
   return null;
+}
+var pendingResolvers = /* @__PURE__ */ new Set();
+function resolvePendingPromises() {
+  for (const resolve of pendingResolvers) resolve();
+  pendingResolvers.clear();
+}
+var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
+var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
+function yieldUnlessUrgent(important = false,) {
+  return new Promise((resolve) => {
+    pendingResolvers.add(resolve,);
+    if (document.visibilityState === 'visible') {
+      document.addEventListener('visibilitychange', resolvePendingPromises,);
+      document.addEventListener('pagehide', resolvePendingPromises,);
+      requestAnimationFrame(async () => {
+        const resolveFn = () => {
+          pendingResolvers.delete(resolve,);
+          resolve();
+        };
+        if (important) {
+          if (canUseYield) {
+            await scheduler.yield();
+            resolveFn();
+          } else if (canUsePostTask) {
+            void scheduler.postTask(resolveFn,);
+          } else {
+            setTimeout(resolveFn, 0,);
+          }
+        } else {
+          setTimeout(resolveFn, 1,);
+        }
+      },);
+      return;
+    }
+    resolvePendingPromises();
+  },);
 }
 function ChildrenCanSuspend({
   children,
@@ -33932,7 +34171,7 @@ function useTrackLinkClick({
         targetRoutePath: null,
         targetWebPageId: null,
         targetCollectionItemId: null,
-      },);
+      }, 'eager',);
     }
     const targetWebPageId = pageLink.webPageId;
     const targetRoute = (_b = router == null ? void 0 : router.getRoute) == null ? void 0 : _b.call(router, targetWebPageId,);
@@ -33956,7 +34195,7 @@ function useTrackLinkClick({
       targetRoutePath,
       targetWebPageId,
       targetCollectionItemId,
-    },);
+    }, 'eager',);
   }, [nodeId, clickTrackingId, router, href, activeLocale,],);
 }
 function makeUrlAbsolute(href,) {
@@ -33977,12 +34216,18 @@ function performNavigation(router, routeId, elementId, combinedPathVariables, sm
 }
 function createOnClickLinkHandler(router, routeId, href, trackLinkClick, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
-    void trackLinkClick(href,);
-    if (event.metaKey) return;
+    const usedMetaKey = event.metaKey;
     const anchorElement = findAnchorElement(event.target,);
-    if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
-    event.preventDefault();
-    performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+    const isExternalLink = !anchorElement || anchorElement.getAttribute('target',) === '_blank';
+    const shouldPerformNavigation = !usedMetaKey && !isExternalLink;
+    if (shouldPerformNavigation) {
+      event.preventDefault();
+    }
+    await yieldUnlessUrgent();
+    void trackLinkClick(href,);
+    if (shouldPerformNavigation) {
+      performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+    }
   };
 }
 function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkClick, implicitPathVariables, smoothScroll,) {
@@ -34299,7 +34544,7 @@ function trackFormSubmit({
     nodeId: nodeId ?? null,
     trackingId: submitTrackingId ?? null,
   };
-  return sendTrackingEvent('published_site_form_submit', eventData,);
+  return sendTrackingEvent('published_site_form_submit', eventData, 'eager',);
 }
 var pendingState = {
   state: 'pending',
@@ -34587,12 +34832,12 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, colle
         skipFirstPageView.current = false;
         return;
       }
-      sendTrackingEvent('published_site_pageview', pageviewEventData.current,);
+      sendTrackingEvent('published_site_pageview', pageviewEventData.current, 'eager',);
     })();
     const listener = async (event) => {
       if (event.persisted) {
         pageviewEventData.current = await getFullPageviewEventData();
-        sendTrackingEvent('published_site_pageview', pageviewEventData.current,);
+        sendTrackingEvent('published_site_pageview', pageviewEventData.current, 'eager',);
       }
     };
     window.addEventListener('pageshow', listener,);
@@ -34630,9 +34875,9 @@ function useScheduleRenderSideEffects(dep,) {
 }
 function useNavigationTransition() {
   const startNativeSpinner = useNativeLoadingSpinner();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender();
   const navigationController = useRef(void 0,);
-  return useCallback(async (transitionFn, updateURL, isAbortable = true,) => {
+  return useCallback(async (routeStatus, transitionFn, updateURL, isAbortable = true,) => {
     var _a, _b;
     setHydrationDone();
     const hasUpdateURL = updateURL !== void 0;
@@ -34640,7 +34885,22 @@ function useNavigationTransition() {
     const controller = isAbortable ? new AbortController() : void 0;
     navigationController.current = controller;
     const signal = controller == null ? void 0 : controller.signal;
-    const nextRender = monitorNextPaintAfterRender();
+    const {
+      hasRendered,
+      hasLoaded,
+      localized,
+    } = routeStatus;
+    const nextRender = monitorNextPaintAfterRender('framer-route-change', {
+      // If a page has been rendered before, it means the navigation is a cached one.
+      cached: hasRendered,
+      // If a page hasn't rendered yet, but has loaded, we know it was preloaded.
+      // We only want to collect this for the first nav, so it allows us to do
+      // amount(framer-route-change w/ preloaded:true) / amount(framer-route-change w/ preloaded:false) = preload ratio
+      preloaded: hasRendered ? void 0 : hasLoaded,
+      localized: localized ?? void 0,
+    },);
+    const stopMonitoringINPRelatedInputs = monitorINPRelatedInputs(signal,);
+    void nextRender.finally(stopMonitoringINPRelatedInputs,);
     if (!hasUpdateURL) {
       navigationController.current = void 0;
       transitionFn(signal,);
@@ -34762,6 +35022,9 @@ function Router({
             );
           };
           void startNavigation(
+            {
+              localized: true,
+            },
             () => {
               void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), true,// no signal here, because we update the refs above immediately
               );
@@ -34775,6 +35038,7 @@ function Router({
   }, [activeLocale, collectionUtils, forceUpdate, locales, preserveQueryParams, routes, startNavigation, startViewTransition2,],);
   const setCurrentRouteId = useCallback(
     (routeId, localeId, hash2, pathVariables, isHistoryTransition, smoothScroll = false, updateURL,) => {
+      var _a;
       const currentRouteId2 = currentRouteRef.current;
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -34786,11 +35050,24 @@ function Router({
         startTransition2(forceUpdate,);
         return;
       }
-      void startNavigation((signal) => {
-        void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), true, signal,);
-      }, updateURL,);
+      const nextPage = (_a = routes[routeId]) == null ? void 0 : _a.page;
+      const isLazy = isLazyComponentType(nextPage,);
+      void startNavigation(
+        isLazy ? nextPage.getStatus() : EMPTY_OBJECT,
+        (signal) => {
+          void startViewTransition2(
+            currentRouteId2,
+            routeId,
+            () => startTransition2(forceUpdate,),
+            true,
+            signal,
+          );
+        },
+        updateURL,
+        true,
+      );
     },
-    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
+    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2, routes,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll,) => {
@@ -34834,7 +35111,7 @@ function Router({
             preserveQueryParams,
             siteCanonicalURL,
           },
-          // we want to yield as this is called synchronusly from an user interaction.
+          // we want to yield as this is called synchronously from an user interaction.
           true,
         );
       }
@@ -42740,11 +43017,11 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-T7EOPBBK-Z5PQYCYP.js');
+      const supportedFonts = await import('./framer-chunks/google-LHIHIYDX-NVWWNJLR.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-I3DFKGTY-Z5C3RM4B.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-G3KSKQMF-6RG7QQ3J.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -42754,15 +43031,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-FXMGJG4N-3YVGUBYO.js');
+      const features = await import('./framer-chunks/google-3GQMHAEU-WSITVUPV.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-LDKNUCSH-JQEK5723.js');
+      const features = await import('./framer-chunks/fontshare-PSV545VO-KUZ52D7F.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-UL4TVQPD-IYLCFU52.js');
+      const features = await import('./framer-chunks/framer-font-TNC5DMGA-CVBTEZ7G.js');
       return features == null ? void 0 : features.default;
     }
     default:
@@ -43306,10 +43583,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-2YSVUDPR-ZFLY6NGM.js')).default;
+            return (await import('./framer-chunks/google-LMM7WH6E-5EU2EAFQ.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-PNQPH3CW-6TWJ6FKC.js')).default;
+            return (await import('./framer-chunks/fontshare-YYTAVKI7-DXLAG4CY.js')).default;
           }
           default:
             assertNever(source,);
@@ -47782,7 +48059,7 @@ var package_default = {
     postinstall: 'node postinstall.cjs',
   },
   dependencies: {
-    eventemitter3: '^3.1.0',
+    eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
     hsluv: '^1.0.1',
@@ -48242,6 +48519,7 @@ export {
   withVariantAppearEffect,
   withVariantFX,
   wrap,
+  yieldUnlessUrgent,
 };
 //! Credit to Astro | MIT License
 /**
