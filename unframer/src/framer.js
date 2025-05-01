@@ -10433,7 +10433,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.6XWNWO56.mjs
+// /:https://app.framerstatic.com/framer.IBF2KS3H.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11566,27 +11566,30 @@ function RoutesProvider({
   children,
 },) {
   const getRoute = useGetRouteCallback(routes,);
+  const api = useMemo(() => ({
+    getRoute,
+  }), [getRoute,],);
   return /* @__PURE__ */ jsx(RouterContext.Provider, {
-    value: {
-      getRoute,
-    },
+    value: api,
     children,
   },);
 }
-var CurrentRouteContext = /* @__PURE__ */ (() => React4.createContext(void 0,))();
+var CurrentRouteContext = /* @__PURE__ */ (() => React4.createContext({},))();
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
   const override = useContext(CurrentRouteContext,);
-  const id3 = override ?? router.currentRouteId;
-  if (!id3) return void 0;
-  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, id3,);
-  if (!route) return void 0;
-  return {
-    ...route,
-    id: id3,
-    pathVariables: override ? void 0 : router.currentPathVariables,
-  };
+  const id3 = (override == null ? void 0 : override.routeId) ?? router.currentRouteId;
+  const pathVariables = (override == null ? void 0 : override.routeId) ? override.pathVariables : router.currentPathVariables;
+  const route = id3 ? (_a = router.getRoute) == null ? void 0 : _a.call(router, id3,) : void 0;
+  return useMemo(() => {
+    if (!id3 || !route) return void 0;
+    return {
+      ...route,
+      id: id3,
+      pathVariables,
+    };
+  }, [id3, pathVariables, route,],);
 }
 function useCurrentRouteKey() {
   const currentRoute = useCurrentRoute();
@@ -17252,14 +17255,14 @@ function Device({
   const containerRef = React4.useRef(null,);
   const deviceRef = React4.useRef(null,);
   const screenRef = React4.useRef(null,);
-  const updateImperativeScale = ({
+  const updateImperativeScale = React4.useCallback(({
     scale: scale2,
     screenScalePixelFix,
   },) => {
     if (!scaleDataRef.current || !deviceRef.current || !screenRef.current) return;
     deviceRef.current.style.transform = `scale(${scale2})`;
     screenRef.current.style.transform = `scale(${screenScalePixelFix})`;
-  };
+  }, [],);
   if (scaleDataRef.current === void 0 && options.deviceOptions && options.scaleTo && options.scaleTo !== 'dynamic') {
     const scale2 = scaleDataRef.current = getScaleData(options.deviceOptions, options.scaleTo,);
     updateImperativeScale(scale2,);
@@ -17273,12 +17276,11 @@ function Device({
       x: point2.x / scale2,
       y: point2.y / scale2,
     };
-  }, [scaleDataRef,],);
+  }, [],);
   const updateScale = React4.useCallback(() => {
     const {
       deviceOptions,
       scaleTo,
-      onScaleChange,
     } = optionsRef.current ?? {};
     if (!deviceOptions || !scaleTo || scaleTo !== 'dynamic' || !containerRef.current) return;
     if (containerRef.current.offsetWidth === 0 || containerRef.current.offsetHeight === 0) return;
@@ -17286,9 +17288,8 @@ function Device({
       width: containerRef.current.offsetWidth,
       height: containerRef.current.offsetHeight,
     },);
-    onScaleChange == null ? void 0 : onScaleChange(scaleData,);
     updateImperativeScale(scaleData,);
-  }, [],);
+  }, [updateImperativeScale,],);
   const observer2 = useConstant2(() => {
     if (!ResizeObserver2) {
       return;
@@ -17298,11 +17299,10 @@ function Device({
   React4.useLayoutEffect(() => {
     optionsRef.current = {
       deviceOptions: options.deviceOptions,
-      onScaleChange: options.onScaleChange,
       overrideTheme: options.overrideTheme,
       scaleTo: options.scaleTo,
     };
-  }, [options.deviceOptions, options.onScaleChange, options.overrideTheme, options.scaleTo,],);
+  }, [options.deviceOptions, options.overrideTheme, options.scaleTo,],);
   React4.useLayoutEffect(() => {
     updateScale();
   }, [updateScale,],);
@@ -17310,7 +17310,7 @@ function Device({
     if (!observer2 || !containerRef.current) return;
     observer2.observe(containerRef.current,);
     return () => observer2.disconnect();
-  }, [observer2,],);
+  }, [],);
   const {
     containerStyle,
     handStyle,
@@ -45398,7 +45398,7 @@ var FitText = /* @__PURE__ */ forwardRef(({
     },)
   );
 },);
-var RichTextContainer = /* @__PURE__ */ forwardRef((props, ref,) => {
+var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, ref,) {
   const {
     __fromCanvasComponent = false,
     _forwardedOverrideId,
@@ -45634,12 +45634,12 @@ function extractTextFromReactNode(node,) {
   }
   return '';
 }
-var RichText2 = /* @__PURE__ */ forwardRef(({
+var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
   children,
   html,
   htmlFromDesign,
   ...props
-}, ref,) => {
+}, ref,) {
   const content = html || children || htmlFromDesign;
   if (isString(content,)) {
     if (!props.stylesPresetsClassName && isObject(props.stylesPresetsClassNames,)) {
@@ -45978,6 +45978,7 @@ var visuallyHiddenStyle = 'position: absolute; overflow: hidden; bottom: 0; left
 var SharedSVGManager = class {
   constructor() {
     __publicField(this, 'entries', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'vectorSetItems', /* @__PURE__ */ new Map(),);
   }
   debugGetEntries() {
     return this.entries;
@@ -46042,30 +46043,48 @@ var SharedSVGManager = class {
       container == null ? void 0 : container.remove();
     }
   }
+  getOrCreateTemplateContainer() {
+    const container = document.getElementById('svg-templates',);
+    if (container) return container;
+    const newContainer = document.createElement('div',);
+    newContainer.id = 'svg-templates';
+    newContainer.ariaHidden = 'true';
+    newContainer.style.cssText = visuallyHiddenStyle;
+    document.body.appendChild(newContainer,);
+    return newContainer;
+  }
+  maybeAppendTemplate(id3, svg,) {
+    if (document.getElementById(id3,)) return;
+    const container = document.createElement('div',);
+    container.innerHTML = svg;
+    const svgElement = container.firstElementChild;
+    if (!svgElement) return;
+    svgElement.id = id3;
+    this.getOrCreateTemplateContainer().appendChild(svgElement,);
+  }
   createDOMElementFor(svg, id3, size,) {
-    if (useDOM) {
-      let svgTemplates = document.getElementById('svg-templates',);
-      if (!svgTemplates) {
-        svgTemplates = document.createElement('div',);
-        svgTemplates.id = 'svg-templates';
-        svgTemplates.ariaHidden = 'true';
-        svgTemplates.style.cssText = visuallyHiddenStyle;
-        document.body.appendChild(svgTemplates,);
-      }
-      if (!document.getElementById(id3,)) {
-        const container = document.createElement('div',);
-        container.innerHTML = svg;
-        const svgElement = container.firstElementChild;
-        if (svgElement) {
-          svgElement.id = id3;
-          svgTemplates.appendChild(svgElement,);
-        }
-      }
-    }
+    if (useDOM) this.maybeAppendTemplate(id3, svg,);
     const box = size ? `0 0 ${size.width} ${size.height}` : void 0;
     const viewBox = box ? ` viewBox="${box}"` : '';
     const innerHTML = `<svg style="width:100%;height:100%"${viewBox}><use href="#${id3}"/></svg>`;
     return new SharedSVGEntry(id3, svg, innerHTML, box,);
+  }
+  /**
+   * Vectors are serialized in such a way that they don't need to be parsed again, instead they
+   * just need to provide their template. The hash is already known.
+   *
+   * VECTOR @TODO - Unsubscribe from vector set items.
+   */
+  template(id3, svg,) {
+    const entry = this.vectorSetItems.get(svg,);
+    if (entry) return `#${entry.id}`;
+    this.vectorSetItems.set(id3, {
+      id: id3,
+      svg,
+    },);
+    if (!useDOM) return `#${id3}`;
+    this.maybeAppendTemplate(id3, svg,);
+    return `#${id3}`;
   }
   clear() {
     this.entries.clear();
@@ -46076,6 +46095,7 @@ var SharedSVGManager = class {
     const output = [];
     output.push(`<div id="svg-templates" style="${visuallyHiddenStyle}" aria-hidden="true">`,);
     this.entries.forEach((value) => output.push(value.svg,));
+    this.vectorSetItems.forEach((value) => output.push(value.svg,));
     output.push('</div>',);
     return output.join('\n',);
   }
