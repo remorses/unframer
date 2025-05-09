@@ -10433,7 +10433,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.JH6JALQN.mjs
+// /:https://app.framerstatic.com/framer.MRBDEK52.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -47404,28 +47404,63 @@ var SVGRoot = (props) => {
   }, ref,);
   const svgStyle = {
     position: 'absolute',
-    width: Math.ceil(width,),
-    height: Math.ceil(height,),
+    width,
+    height,
+    left,
+    top,
     overflow: 'visible',
     display: 'block',
     ...style,
   };
-  if (isNumber2(left,)) {
-    svgStyle.left = Math.floor(left,);
-  }
-  if (isNumber2(top,)) {
-    svgStyle.top = Math.floor(top,);
-  }
-  return /* @__PURE__ */ jsx('svg', {
+  const svgProps = {
+    // Avoid duplicating IDs when the SVG is rendered through slots. We only need the ID for
+    // measurement so code component descendants don't matter.
     id: inCodeComponent ? void 0 : id3,
-    role: 'presentation',
-    width: '100%',
-    height: '100%',
-    style: svgStyle,
+    viewBox: `0 0 ${width} ${height}`,
     ref,
-    children,
+  };
+  const needsScale = isSafari() ? window.devicePixelRatio !== 1 : window.devicePixelRatio === 1;
+  const needsTranslate = window.devicePixelRatio === 1;
+  if (!needsScale && !needsTranslate) {
+    return /* @__PURE__ */ jsx('svg', {
+      role: 'presentation',
+      ...svgProps,
+      style: svgStyle,
+      children,
+    },);
+  }
+  const svgTransform = needsScale
+    ? {
+      transform: 'scale(2)',
+    }
+    : void 0;
+  return /* @__PURE__ */ jsx('svg', {
+    role: 'presentation',
+    ...svgProps,
+    style: {
+      ...svgStyle,
+      ...svgTransform,
+    },
+    children: /* @__PURE__ */ jsx('g', {
+      style: {
+        // The default value of transform-origin is 0 0 for all SVG elements except
+        // for root <svg> elements:
+        // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform-origin
+        transformOrigin: 'center',
+        transform: getShapeTransform(needsScale, needsTranslate, left, top,),
+      },
+      children,
+    },),
   },);
 };
+function getShapeTransform(needsScale, needsTranslate, left, top,) {
+  const l = Math.floor(left,) - left;
+  const t = Math.floor(top,) - top;
+  const transforms = [];
+  if (needsScale) transforms.push('scale(0.5)',);
+  if (needsTranslate && (l || t)) transforms.push(`translate(${l}px, ${t}px)`,);
+  return transforms.length ? transforms.join(' ',) : void 0;
+}
 var Vector = /* @__PURE__ */ (() => {
   var _a;
   return _a = class extends Layer {
