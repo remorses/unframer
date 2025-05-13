@@ -90,7 +90,7 @@ export async function bundle({
     }
     const fn = watch ? context : fakeContext
     let foundError = false
-    
+
     const buildContext = await fn({
         absWorkingDir: out,
         entryPoints: Object.keys(components)
@@ -586,7 +586,7 @@ export async function bundle({
     import ${exampleComponent?.componentName} from './${outDirForExample}/${
         exampleComponent?.path
     }'
-    
+
     export default function App() {
         return (
             <div className='flex flex-col'>
@@ -618,7 +618,7 @@ export async function bundle({
         \`\`\`
 
         Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
-        
+
         You can use the components like this (try copy pasting the code below into your React app):
 
         \`\`\`jsx
@@ -630,7 +630,7 @@ export async function bundle({
         To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
         Read more on GitHub: https://github.com/remorses/unframer
-        
+
         `),
         )
     }
@@ -1068,7 +1068,7 @@ export function propControlsToType({
                             return 'Function'
                     }
                 }
-                let name = propCamelCase(value.title || key || '')
+                let name = propCamelCaseJustLikeFramer(value.title || key || '')
                 if (!name) {
                     return ''
                 }
@@ -1279,9 +1279,10 @@ function findExampleProperty(propertyControls?: PropertyControls) {
         return null
     }
 
-    return propCamelCase(stringProp[1]?.title || '')
+    return propCamelCaseJustLikeFramer(stringProp[1]?.title || '')
 }
-export function propCamelCase(str: string) {
+
+export function propCamelCaseJustLikeFramer(str?: string) {
     if (!str) {
         return ''
     }
@@ -1317,7 +1318,7 @@ const resetCssStyles = `
 h1, h2, h3, h4, h5, h6, p, figure {
     margin: 0;
 }
-        
+
 `
 
 async function recursiveReaddir(dir: string): Promise<string[]> {

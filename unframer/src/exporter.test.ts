@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { checkUnframerVersion, propCamelCase } from './exporter'
+import { checkUnframerVersion, propCamelCaseJustLikeFramer } from './exporter'
 import { replaceWebPageIds } from './esbuild'
 import path from 'path'
 
@@ -74,51 +74,54 @@ describe('replaceWebPageIds', () => {
 
 describe('propCamelCase', () => {
     test('converts dashes to camelCase', () => {
-        expect(propCamelCase('foo-bar')).toMatchInlineSnapshot(`"fooBar"`)
-        expect(propCamelCase('foo-bar-baz')).toMatchInlineSnapshot(
+        expect(propCamelCaseJustLikeFramer('foo-bar')).toMatchInlineSnapshot(`"fooBar"`)
+        expect(propCamelCaseJustLikeFramer('foo-bar-baz')).toMatchInlineSnapshot(
             `"fooBarBaz"`,
+        )
+        expect(propCamelCaseJustLikeFramer('Detail - 1')).toMatchInlineSnapshot(
+            `"detail-1"`,
         )
     })
     test('converts example-variable_dashes etc XX something 11 to camelCase', () => {
         expect(
-            propCamelCase('example-variable_dashes etc XX something 11'),
+            propCamelCaseJustLikeFramer('example-variable_dashes etc XX something 11'),
         ).toBe(`exampleVariableDashesEtcXXSomething11`)
     })
     test('converts 0 starts with ZeroEtc to camelCase', () => {
-        expect(propCamelCase('0 starts with ZeroEtc')).toBe(
+        expect(propCamelCaseJustLikeFramer('0 starts with ZeroEtc')).toBe(
             `_0StartsWithZeroEtc`,
         )
     })
 
     test('converts underscores to camelCase', () => {
-        expect(propCamelCase('foo_bar')).toMatchInlineSnapshot(`"fooBar"`)
-        expect(propCamelCase('foo_bar_baz')).toMatchInlineSnapshot(
+        expect(propCamelCaseJustLikeFramer('foo_bar')).toMatchInlineSnapshot(`"fooBar"`)
+        expect(propCamelCaseJustLikeFramer('foo_bar_baz')).toMatchInlineSnapshot(
             `"fooBarBaz"`,
         )
     })
 
     test('removes spaces and camelCases', () => {
-        expect(propCamelCase('Foo Bar')).toMatchInlineSnapshot(`"fooBar"`)
-        expect(propCamelCase('Foo Bar Baz')).toMatchInlineSnapshot(
+        expect(propCamelCaseJustLikeFramer('Foo Bar')).toMatchInlineSnapshot(`"fooBar"`)
+        expect(propCamelCaseJustLikeFramer('Foo Bar Baz')).toMatchInlineSnapshot(
             `"fooBarBaz"`,
         )
     })
 
     test('ensures first character is lowercase', () => {
-        expect(propCamelCase('FooBar')).toMatchInlineSnapshot(`"fooBar"`)
-        expect(propCamelCase('Foo')).toMatchInlineSnapshot(`"foo"`)
+        expect(propCamelCaseJustLikeFramer('FooBar')).toMatchInlineSnapshot(`"fooBar"`)
+        expect(propCamelCaseJustLikeFramer('Foo')).toMatchInlineSnapshot(`"foo"`)
     })
 
     test('handles empty string', () => {
-        expect(propCamelCase('')).toMatchInlineSnapshot('""')
+        expect(propCamelCaseJustLikeFramer('')).toMatchInlineSnapshot('""')
     })
 
     test('handles mixed cases', () => {
-        expect(propCamelCase('Foo-Bar_Baz Test')).toMatchInlineSnapshot(
+        expect(propCamelCaseJustLikeFramer('Foo-Bar_Baz Test')).toMatchInlineSnapshot(
             `"fooBar_BazTest"`,
         )
     })
     test('converts APITableData to apiTableData', () => {
-        expect(propCamelCase('Settings APITableData')).toBe(`settingsAPITAbleData`)
+        expect(propCamelCaseJustLikeFramer('Settings APITableData')).toBe(`settingsAPITAbleData`)
     })
 })
