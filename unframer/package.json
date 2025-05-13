@@ -36,6 +36,9 @@
             "module": "./esm/exporter.js",
             "default": "./dist/exporter.js"
         },
+        "./src/*": {
+            "default": "./src/*.ts"
+        },
         "./package.json": "./package.json"
     },
     "keywords": [],
