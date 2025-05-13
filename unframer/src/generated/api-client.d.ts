@@ -228,7 +228,7 @@ export declare function createClient({ url }: {
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             frontMatter: {
-                                properties: Record<string, import("./elysia-markdown-plugin").MarkdownPluginFrontMatterProperty>;
+                                properties: Record<string, import("./spiceflow-github-sync-plugin").MarkdownPluginFrontMatterProperty>;
                                 order: string[];
                             };
                         };
