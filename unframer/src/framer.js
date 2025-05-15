@@ -10433,7 +10433,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.AHSHABAY.mjs
+// /:https://app.framerstatic.com/framer.DQBZISS5.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11664,7 +11664,6 @@ function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect
   }, deps,);
 }
 var EMPTY_ARRAY = [];
-var EMPTY_OBJECT = {};
 function monitorINPRelatedInputs(signal,) {
   const inpRelatedInputs = ['pointerdown', 'pointerup', 'keydown', 'keyup',];
   const inpRelatedInputHandler = (event) => {
@@ -11740,6 +11739,9 @@ var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback 
 var requestIdleCallback = /* @__PURE__ */ (() =>
   // eslint-disable-next-line compat/compat,framer-studio/tscompat
   supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
+function encodeSVGForCSS(svg,) {
+  return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
+}
 var shouldPreloadBasedOnUA = !isBot;
 function useRoutePreloader(routeIds, enabled = true,) {
   const {
@@ -12570,25 +12572,20 @@ function useViewTransition() {
       resolveHasPainted.current = void 0;
     }
   },);
-  return useCallback((currentRouteId, nextRouteId, update, yieldBeforeFreezePeriod, signal,) => {
+  return useCallback((currentRouteId, nextRouteId, update, signal,) => {
     const pageEffect = getPageEffectForRoute(currentRouteId, nextRouteId, sitePageEffects,);
     if (pageEffect) {
       const hasPainted = new Promise((resolve) => {
         resolveHasPainted.current = resolve;
       },);
-      const asyncUpdate = async () => {
-        update();
-        await hasPainted;
-      };
-      const yieldBeforeViewTransition = async () => {
-        await interactionResponse({
-          priority: 'user-blocking',
-          signal,
-        },).catch(noop2,);
-        return startViewTransition(asyncUpdate, pageEffect, signal,);
-      };
-      if (yieldBeforeFreezePeriod) return yieldBeforeViewTransition();
-      return startViewTransition(asyncUpdate, pageEffect,);
+      return startViewTransition(
+        async () => {
+          update();
+          await hasPainted;
+        },
+        pageEffect,
+        signal,
+      );
     }
     update();
   }, [sitePageEffects,],);
@@ -12616,7 +12613,7 @@ var announceNavigation = () => {
     announceDiv.textContent = document.title;
   }, 60,);
 };
-function useMonitorNextPaintAfterRender() {
+function useMonitorNextPaintAfterRender(label,) {
   const resolveHasPainted = useRef(void 0,);
   useAfterPaintEffect(
     () => {
@@ -12631,15 +12628,23 @@ function useMonitorNextPaintAfterRender() {
       priority: 'user-blocking',
     },
   );
-  return useCallback((label, measureDetail,) => {
-    const startLabel = `${label}-start`;
-    const endLabel = `${label}-end`;
+  return useCallback((measureDetail) => {
     const hasPainted = new Promise((resolve) => {
       resolveHasPainted.current = resolve;
     },);
-    if (!label) return hasPainted;
+    if (!label) {
+      return {
+        promise: hasPainted,
+        measureDetail,
+        ignore: null,
+      };
+    }
+    const startLabel = `${label}-start`;
+    const endLabel = `${label}-end`;
+    let ignore = false;
     performance.mark(startLabel,);
-    return hasPainted.finally(() => {
+    hasPainted.finally(() => {
+      if (ignore) return;
       performance.mark(endLabel,);
       performance.measure(label, {
         start: startLabel,
@@ -12649,23 +12654,27 @@ function useMonitorNextPaintAfterRender() {
     },).catch((e) => {
       console.error(e,);
     },);
-  }, [],);
+    return {
+      promise: hasPainted,
+      measureDetail,
+      ignore: () => {
+        var _a;
+        ignore = true;
+        (_a = resolveHasPainted.current) == null ? void 0 : _a.call(resolveHasPainted,);
+        resolveHasPainted.current = void 0;
+      },
+    };
+  }, [label,],);
 }
-async function pushRouteState(
-  routeId,
-  route,
-  {
-    currentRoutePath,
-    currentPathVariables,
-    hash: hash2,
-    pathVariables,
-    localeId,
-    preserveQueryParams,
-    siteCanonicalURL,
-  },
-  enableAsyncURLUpdate = false,
-  isNavigationTransition = false,
-) {
+async function pushRouteState(routeId, route, {
+  currentRoutePath,
+  currentPathVariables,
+  hash: hash2,
+  pathVariables,
+  localeId,
+  preserveQueryParams,
+  siteCanonicalURL,
+}, isNavigationTransition = false,) {
   const {
     path,
   } = route;
@@ -12679,7 +12688,7 @@ async function pushRouteState(
     siteCanonicalURL,
   },);
   try {
-    const urlUpdatePromise = pushHistoryState(
+    return await pushHistoryState(
       {
         routeId,
         hash: hash2,
@@ -12687,10 +12696,8 @@ async function pushRouteState(
         localeId,
       },
       newPath,
-      enableAsyncURLUpdate,
       isNavigationTransition,
     );
-    return await urlUpdatePromise;
   } catch {}
 }
 function isHistoryState(data2,) {
@@ -12710,12 +12717,7 @@ var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
   const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
   return chromiumVersion > 101 && chromiumVersion < 128;
 })();
-async function pushHistoryState(data2, url, awaitPaintBeforeUpdate = false, isNavigationTransition = false,) {
-  if (awaitPaintBeforeUpdate) {
-    await interactionResponse({
-      priority: 'user-blocking',
-    },);
-  }
+async function pushHistoryState(data2, url, isNavigationTransition = false,) {
   performance.mark('framer-history-push',);
   updateCanonicalURL(url, window.location.href,);
   if (!isNavigationTransition) {
@@ -12778,7 +12780,7 @@ var supportsNavigationAPI = /* @__PURE__ */ (() => {
 })();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender();
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
   const viewTransitionReady = useRef(void 0,);
   const popStateHandler = useCallback(async ({
     state: state2,
@@ -12796,11 +12798,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       localeId,
     } = state2;
     if (!isString(routeId,)) return;
-    const nextRender = monitorNextPaintAfterRender('framer-route-change', {
+    const nextRender = monitorNextPaintAfterRender({
       popstate: true,
     },);
     const stopMonitoringINPRelatedInputs = monitorINPRelatedInputs();
-    void nextRender.finally(stopMonitoringINPRelatedInputs,);
+    void nextRender.promise.finally(stopMonitoringINPRelatedInputs,);
     const changeRoute = () => {
       setCurrentRouteId(
         routeId,
@@ -12808,15 +12810,16 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         isString(hash2,) ? hash2 : void 0,
         isObject(pathVariables,) ? pathVariables : void 0,
         true,
+        nextRender,
         false,
       );
     };
-    const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute, false,);
+    const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute,);
     const navigationTransition = (_d = window.navigation) == null ? void 0 : _d.transition;
     await ((viewTransition == null ? void 0 : viewTransition.updateCallbackDone) ?? Promise.resolve()).then(
       (_e = viewTransitionReady.current) == null ? void 0 : _e.resolve,
     ).catch((_f = viewTransitionReady.current) == null ? void 0 : _f.reject,);
-    await nextRender;
+    await nextRender.promise;
     try {
       await (navigationTransition == null ? void 0 : navigationTransition.finished);
     } catch (error) {
@@ -21650,10 +21653,9 @@ function makeScreenMaskImage({
     // result down into the viewport (rightmost transform is applied first).
     `transform="translate(0 ${width}) rotate(-90)"`
     : '';
-  const encoded = encodeURIComponent(
+  return encodeSVGForCSS(
     `<svg xmlns="http://www.w3.org/2000/svg" viewport="0 0 ${width} ${height}" preserveAspectRatio="none"><g x="0" y="0" ${transform2}>${mask}</g></svg>`,
   );
-  return `url("data:image/svg+xml;utf8,${encoded}")`;
 }
 var lightColors = /* @__PURE__ */ new Set(['white', 'silver', 'clearly-white', 'sorta-sage',],);
 var darkColors = /* @__PURE__ */ new Set(['black', 'space-grey', 'graphite', 'just-black', 'pro',],);
@@ -21902,6 +21904,12 @@ var isPropValid = /* @__PURE__ */ memoize((prop) =>
   reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
   /* Z+1 */
 );
+var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React4.useContext(LibraryFeaturesContext,);
+  return context ?? {};
+};
 var mockWithWarning = (message) => {
   return () => {
     warnOnce2(message,);
@@ -21954,14 +21962,18 @@ var wrapperStyle = {
   bottom: 0,
   left: 0,
 };
-var placeholderStyle = {
-  backgroundRepeat: 'repeat',
-  backgroundPosition: 'left top',
-  backgroundSize: '126px auto',
-  backgroundImage:
-    'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEyNiI+PGRlZnM+PHBhdGggaWQ9ImEiIGQ9Ik0xMjYgMHYyMS41ODRMMjEuNTg0IDEyNkgwdi0xNy41ODVMMTA4LjQxNSAwSDEyNlptMCAxMDguNDE0VjEyNmgtMTcuNTg2TDEyNiAxMDguNDE0Wm0wLTg0djM5LjE3MUw2My41ODUgMTI2SDI0LjQxNEwxMjYgMjQuNDE0Wm0wIDQydjM5LjE3TDEwNS41ODQgMTI2aC0zOS4xN0wxMjYgNjYuNDE0Wk0xMDUuNTg2IDAgMCAxMDUuNTg2VjY2LjQxNUw2Ni40MTUgMGgzOS4xNzFabS00MiAwTDAgNjMuNTg2VjI0LjQxNUwyNC40MTUgMGgzOS4xNzFabS00MiAwTDAgMjEuNTg2VjBoMjEuNTg2WiIvPjwvZGVmcz48dXNlIHhsaW5rOmhyZWY9IiNhIiBmaWxsPSIjODg4IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=)',
-  opacity: 0.2,
-};
+function getPlaceholderStyle() {
+  const placeholderStyle = {
+    backgroundRepeat: 'repeat',
+    backgroundPosition: 'left top',
+    backgroundSize: '126px auto',
+    backgroundImage: encodeSVGForCSS(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="#888" fill-rule="evenodd"/></svg>`,
+    ),
+    opacity: 0.2,
+  };
+  return placeholderStyle;
+}
 function cssObjectFit(imageFit,) {
   switch (imageFit) {
     case 'fit':
@@ -22000,7 +22012,7 @@ function StaticImage({
   const imageStyle = getImageStyle(image,);
   const imageRef = React4.useRef(null,);
   return (
-    // eslint-disable-next-line framer-studio/require-async-decoding
+    // eslint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
     /* @__PURE__ */
     jsx('img', {
       ref: imageRef,
@@ -22069,13 +22081,14 @@ function BackgroundImageComponent({
   image,
   ...props
 },) {
+  const {
+    motionDivToDiv,
+  } = useLibraryFeatures();
   if (layoutId) {
-    layoutId = layoutId + '-background';
+    layoutId += '-background';
   }
-  const fallbackWrapperStyles = {
-    ...wrapperStyle,
-    ...placeholderStyle,
-  };
+  let fallbackWrapperStyles = null;
+  let needsMotion = !!layoutId;
   let imageNode = null;
   if (isString(image.src,)) {
     if (image.fit === 'tile' && image.pixelWidth && image.pixelHeight) {
@@ -22085,20 +22098,35 @@ function BackgroundImageComponent({
         height: Math.round(backgroundSize * image.pixelHeight,),
       };
       const imageSource = runtime.useImageSource(image, tileSize,);
-      fallbackWrapperStyles.backgroundImage = `url(${imageSource})`;
-      fallbackWrapperStyles.backgroundRepeat = 'repeat';
-      fallbackWrapperStyles.backgroundPosition = cssObjectPosition(image.positionX, image.positionY,);
-      fallbackWrapperStyles.opacity = void 0;
-      fallbackWrapperStyles.border = 0;
-      fallbackWrapperStyles.backgroundSize = `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`;
+      fallbackWrapperStyles = {
+        ...wrapperStyle,
+        backgroundImage: `url(${imageSource})`,
+        backgroundRepeat: 'repeat',
+        backgroundPosition: cssObjectPosition(image.positionX, image.positionY,),
+        opacity: void 0,
+        border: 0,
+        // image.backgroundSize is a floating point number like 0.05
+        // so we need to multiply it by the pixelWidth to get the pixel
+        // value for the backgroundSize so that the size of the tile is
+        // a function of the image width + background size percentage.
+        // e.g image is 64px/64px and backgroundSize is 0.05, the tile size
+        // should be 3.2px
+        // We divide the pixel width by 2 because we assume that most designers
+        // will be working with 2x (retina) assets.
+        backgroundSize: `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`,
+      };
       imageNode = null;
+      needsMotion = true;
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
       imageNode = /* @__PURE__ */ jsx(StaticImage, {
         image,
         syncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
       },);
-    } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
+    } else if (
+      // biome-ignore lint/correctness/useHookAtTopLevel: This is ok since this function acts just like a util to get the source.
+      runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)
+    ) {
       imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
         image,
         ...props,
@@ -22110,12 +22138,22 @@ function BackgroundImageComponent({
       },);
     }
   }
-  return /* @__PURE__ */ jsx(motion.div, {
-    layoutId,
-    style: imageNode ? wrapperStyle : fallbackWrapperStyles,
-    'data-framer-background-image-wrapper': true,
-    children: imageNode,
-  },);
+  const style = imageNode ? wrapperStyle : fallbackWrapperStyles ?? {
+    ...wrapperStyle,
+    ...getPlaceholderStyle(),
+  };
+  return needsMotion || !motionDivToDiv
+    ? /* @__PURE__ */ jsx(motion.div, {
+      layoutId,
+      style,
+      'data-framer-background-image-wrapper': true,
+      children: imageNode,
+    },)
+    : /* @__PURE__ */ jsx('div', {
+      style,
+      'data-framer-background-image-wrapper': true,
+      children: imageNode,
+    },);
 }
 function collectBorderStyleForProps(props, style, collapseEqualBorders = true,) {
   const {
@@ -33432,12 +33470,6 @@ var LazyValue = class _LazyValue {
     return this.read();
   }
 };
-var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React4.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -33457,33 +33489,38 @@ function resolvePendingPromises() {
 }
 var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
 var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
-function yieldUnlessUrgent(important = false,) {
+function yieldUnlessUrgent(options,) {
   return new Promise((resolve) => {
     pendingResolvers.add(resolve,);
-    if (document.visibilityState === 'visible') {
-      document.addEventListener('visibilitychange', resolvePendingPromises,);
-      document.addEventListener('pagehide', resolvePendingPromises,);
-      requestAnimationFrame(async () => {
-        const resolveFn = () => {
-          pendingResolvers.delete(resolve,);
-          resolve();
-        };
-        if (important) {
-          if (canUseYield) {
-            await scheduler.yield();
-            resolveFn();
-          } else if (canUsePostTask) {
-            void scheduler.postTask(resolveFn,);
-          } else {
-            setTimeout(resolveFn, 0,);
-          }
-        } else {
-          setTimeout(resolveFn, 1,);
-        }
-      },);
+    if (document.hidden) {
+      resolvePendingPromises();
       return;
     }
-    resolvePendingPromises();
+    document.addEventListener('visibilitychange', resolvePendingPromises,);
+    document.addEventListener('pagehide', resolvePendingPromises,);
+    requestAnimationFrame(() => {
+      const resolveFn = () => {
+        var _a;
+        pendingResolvers.delete(resolve,);
+        if ((_a = options == null ? void 0 : options.signal) == null ? void 0 : _a.aborted) return;
+        resolve();
+      };
+      const priority = options == null ? void 0 : options.priority;
+      const canUseModernAPI = canUseYield || canUsePostTask;
+      if (!canUseModernAPI) {
+        if (priority === 'user-blocking') return resolveFn();
+        return setTimeout(resolveFn, priority === 'background' ? 1 : 0,);
+      }
+      if (priority === 'background') {
+        return setTimeout(resolveFn, 1,);
+      }
+      if (canUseYield) {
+        safeWindow.scheduler.yield(options,).then(resolveFn,).catch(noop2,);
+        return;
+      }
+      safeWindow.scheduler.postTask(resolveFn, options,).catch(noop2,);
+    },);
+    return;
   },);
 }
 function ChildrenCanSuspend({
@@ -34211,13 +34248,13 @@ function makeUrlAbsolute(href,) {
     return href;
   }
 }
-function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,) {
+function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,) {
   var _a, _b;
   const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
   if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
     void route.page.preload();
   }
-  (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll,);
+  (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,);
 }
 function createOnClickLinkHandler(router, routeId, href, trackLinkClick, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
@@ -34225,14 +34262,16 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, element
     const anchorElement = findAnchorElement(event.target,);
     const isExternalLink = !anchorElement || anchorElement.getAttribute('target',) === '_blank';
     const shouldPerformNavigation = !usedMetaKey && !isExternalLink;
-    if (shouldPerformNavigation) {
-      event.preventDefault();
+    const track = () => void trackLinkClick(href,);
+    if (!shouldPerformNavigation) {
+      await yieldUnlessUrgent({
+        priority: 'user-blocking',
+      },);
+      track();
+      return;
     }
-    await yieldUnlessUrgent();
-    void trackLinkClick(href,);
-    if (shouldPerformNavigation) {
-      performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll,);
-    }
+    event.preventDefault();
+    performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, track,);
   };
 }
 function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkClick, implicitPathVariables, smoothScroll,) {
@@ -34878,11 +34917,19 @@ function useScheduleRenderSideEffects(dep,) {
     actions.current.push(cb,);
   }, [],);
 }
+function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
+  if (!beforeUrlUpdate) return noop2;
+  let beforeUrlUpdateExecuted = false;
+  return () => {
+    if (beforeUrlUpdateExecuted) return;
+    beforeUrlUpdateExecuted = true;
+    beforeUrlUpdate == null ? void 0 : beforeUrlUpdate();
+  };
+}
 function useNavigationTransition() {
   const startNativeSpinner = useNativeLoadingSpinner();
-  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender();
   const navigationController = useRef(void 0,);
-  return useCallback(async (routeStatus, transitionFn, updateURL, isAbortable = true,) => {
+  return useCallback(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
     var _a, _b;
     setHydrationDone();
     const hasUpdateURL = updateURL !== void 0;
@@ -34890,39 +34937,21 @@ function useNavigationTransition() {
     const controller = isAbortable ? new AbortController() : void 0;
     navigationController.current = controller;
     const signal = controller == null ? void 0 : controller.signal;
-    const {
-      hasRendered,
-      hasLoaded,
-      localized,
-    } = routeStatus;
-    const nextRender = monitorNextPaintAfterRender('framer-route-change', {
-      // If a page has been rendered before, it means the navigation is a cached one.
-      cached: hasRendered,
-      // If a page hasn't rendered yet, but has loaded, we know it was preloaded.
-      // We only want to collect this for the first nav, so it allows us to do
-      // amount(framer-route-change w/ preloaded:true) / amount(framer-route-change w/ preloaded:false) = preload ratio
-      preloaded: hasRendered ? void 0 : hasLoaded,
-      localized: localized ?? void 0,
-    },);
     const stopMonitoringINPRelatedInputs = monitorINPRelatedInputs(signal,);
-    void nextRender.finally(stopMonitoringINPRelatedInputs,);
+    void nextRender.promise.finally(stopMonitoringINPRelatedInputs,);
     if (!hasUpdateURL) {
       navigationController.current = void 0;
       transitionFn(signal,);
-      return nextRender;
+      return nextRender.promise;
     }
+    transitionFn(signal,);
     let resolveNavigationPromise;
     const navigationPromise = new Promise((resolve, reject,) => {
       resolveNavigationPromise = resolve;
       signal == null ? void 0 : signal.addEventListener('abort', reject,);
     },).catch(noop2,);
-    await interactionResponse({
-      priority: 'user-blocking',
-      signal,
-    },).catch(noop2,);
-    transitionFn(signal,);
     startNativeSpinner(navigationPromise, updateURL, controller,);
-    await nextRender;
+    await nextRender.promise;
     if (signal == null ? void 0 : signal.aborted) return;
     const navigationTransition = (_b = window.navigation) == null ? void 0 : _b.transition;
     resolveNavigationPromise();
@@ -34933,7 +34962,7 @@ function useNavigationTransition() {
     }
     if (signal == null ? void 0 : signal.aborted) return;
     announceNavigation();
-  }, [monitorNextPaintAfterRender, startNativeSpinner,],);
+  }, [startNativeSpinner,],);
 }
 function Router({
   defaultPageStyle,
@@ -34961,6 +34990,7 @@ function Router({
   const [dep, forceUpdate,] = useForceUpdate3();
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const startNavigation = useNavigationTransition();
+  const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
   const currentRouteRef = useRef(initialRoute,);
   const currentPathVariablesRef = useRef(initialPathVariables,);
   const currentLocaleIdRef = useRef(initialLocaleId,);
@@ -34978,6 +35008,9 @@ function Router({
       activeLocale,
       locales,
       setLocale: async (localeOrLocaleId) => {
+        const nextRender = monitorNextPaintAfterRender({
+          localized: true,
+        },);
         let localeId;
         if (isString(localeOrLocaleId,)) {
           localeId = localeOrLocaleId;
@@ -35021,29 +35054,34 @@ function Router({
                 paginationInfo: currentStatePaginationInfo,
               },
               currentPath,
-              // we yield in startNavigation before updating the URL, so yielding again is not needed.
-              false,
               ignorePushStateWrapper,
             );
           };
           void startNavigation(
-            {
-              localized: true,
-            },
             () => {
-              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,), true,// no signal here, because we update the refs above immediately
+              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,),// no signal here, because we update the refs above immediately
               );
             },
+            nextRender,
             updateURL,
             false,
           );
         } catch {}
       },
     };
-  }, [activeLocale, collectionUtils, forceUpdate, locales, preserveQueryParams, routes, startNavigation, startViewTransition2,],);
+  }, [
+    activeLocale,
+    collectionUtils,
+    forceUpdate,
+    locales,
+    preserveQueryParams,
+    routes,
+    startNavigation,
+    startViewTransition2,
+    monitorNextPaintAfterRender,
+  ],);
   const setCurrentRouteId = useCallback(
-    (routeId, localeId, hash2, pathVariables, isHistoryTransition, smoothScroll = false, updateURL,) => {
-      var _a;
+    (routeId, localeId, hash2, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
       const currentRouteId2 = currentRouteRef.current;
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -35055,29 +35093,34 @@ function Router({
         startTransition2(forceUpdate,);
         return;
       }
-      const nextPage = (_a = routes[routeId]) == null ? void 0 : _a.page;
-      const isLazy = isLazyComponentType(nextPage,);
       void startNavigation(
-        isLazy ? nextPage.getStatus() : EMPTY_OBJECT,
         (signal) => {
-          void startViewTransition2(
-            currentRouteId2,
-            routeId,
-            () => startTransition2(forceUpdate,),
-            true,
-            signal,
-          );
+          void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), signal,);
         },
+        nextRender,
         updateURL,
         true,
       );
     },
-    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2, routes,],
+    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll,) => {
-    var _a;
+  const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll, beforeUrlUpdate,) => {
+    var _a, _b;
     const newRoute = routes[routeId];
+    const routeStatus = isLazyComponentType(newRoute == null ? void 0 : newRoute.page,) ? newRoute.page.getStatus() : void 0;
+    const hasRendered = routeStatus == null ? void 0 : routeStatus.hasRendered;
+    const nextRender = monitorNextPaintAfterRender({
+      cached: hasRendered,
+      preloaded: hasRendered ? void 0 : routeStatus == null ? void 0 : routeStatus.hasLoaded,
+    },);
+    const executeBeforeUrlUpdate = executeBeforeUrlUpdateOnce(beforeUrlUpdate,);
+    void yieldUnlessUrgent({
+      priority: 'background',
+    },).then(executeBeforeUrlUpdate,);
+    await interactionResponse({
+      priority: 'user-blocking',
+    },);
     if (pathVariables) {
       const inUse = /* @__PURE__ */ new Set();
       const path = (newRoute == null ? void 0 : newRoute.path) ?? '/';
@@ -35102,56 +35145,48 @@ function Router({
         pathVariables,
       },)
     ) {
+      (_a = nextRender.ignore) == null ? void 0 : _a.call(nextRender,);
       const route = routes[routeId];
-      if (((_a = window.history.state) == null ? void 0 : _a.hash) !== hash2 && !disableHistory && route) {
-        await pushRouteState(
-          routeId,
-          route,
-          {
-            currentRoutePath: route.path,
-            currentPathVariables: currentPathVariables2,
-            pathVariables,
-            hash: hash2,
-            localeId: currentRouteLocaleId,
-            preserveQueryParams,
-            siteCanonicalURL,
-          },
-          // we want to yield as this is called synchronously from an user interaction.
-          true,
-        );
+      if (((_b = window.history.state) == null ? void 0 : _b.hash) !== hash2 && !disableHistory && route) {
+        executeBeforeUrlUpdate();
+        await pushRouteState(routeId, route, {
+          currentRoutePath: route.path,
+          currentPathVariables: currentPathVariables2,
+          pathVariables,
+          hash: hash2,
+          localeId: currentRouteLocaleId,
+          preserveQueryParams,
+          siteCanonicalURL,
+        },);
       }
       updateScrollPosition(routeElementId, smoothScroll, false,);
       return;
     }
     if (!newRoute) return;
     const currentRoute2 = routes[currentRouteRef.current];
-    const updateURL = async (ignorePushStateWrapper = false,) =>
-      pushRouteState(
-        routeId,
-        newRoute,
-        {
-          currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
-          currentPathVariables: currentPathVariables2,
-          hash: hash2,
-          pathVariables,
-          localeId: currentRouteLocaleId,
-          preserveQueryParams,
-          siteCanonicalURL,
-        },
-        // we yield in startNavigation before updating the URL, so yielding again is not needed.
-        false,
-        ignorePushStateWrapper,
-      );
+    const updateURL = async (ignorePushStateWrapper = false,) => {
+      executeBeforeUrlUpdate();
+      return pushRouteState(routeId, newRoute, {
+        currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
+        currentPathVariables: currentPathVariables2,
+        hash: hash2,
+        pathVariables,
+        localeId: currentRouteLocaleId,
+        preserveQueryParams,
+        siteCanonicalURL,
+      }, ignorePushStateWrapper,);
+    };
     setCurrentRouteId(
       routeId,
       currentRouteLocaleId,
       routeElementId,
       pathVariables,
       false,
+      nextRender,
       smoothScroll,
       disableHistory ? void 0 : updateURL,
     );
-  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, siteCanonicalURL,],);
+  }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, siteCanonicalURL, monitorNextPaintAfterRender,],);
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
@@ -44290,11 +44325,11 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
 var iconSize2 = 16;
 var textInputWrapperClassName = 'framer-form-text-input';
 var defaultTextareaResizerIcon =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>';
+  `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
 var defaultDateIconMaskImage =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>';
+  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>';
 var defaultTimeIconMaskImage =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M2.5 8a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.75 8.25v-3m0 3h2"/></svg>';
+  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M2.5 8a5.5 5.5 0 1 1 11 0 5.5 5.5 0 1 1-11 0Z"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.75 8.25v-3m0 3h2"/></svg>';
 var styles = /* @__PURE__ */ (() => [
   ...sharedInputCSS,
   ...inputBorderCSS,
@@ -44341,7 +44376,7 @@ var styles = /* @__PURE__ */ (() => [
   // possible in CSS to target the resize handle in Firefox, so FF will always
   // show the native resize handle.
   css(`.${textInputWrapperClassName} textarea::-webkit-resizer`, {
-    background: `no-repeat url('${defaultTextareaResizerIcon}')`,
+    background: `no-repeat ${encodeSVGForCSS(defaultTextareaResizerIcon,)}`,
   },),
   css(`.${textInputWrapperClassName} textarea::-webkit-scrollbar`, {
     cursor: 'pointer',
@@ -44378,12 +44413,12 @@ var styles = /* @__PURE__ */ (() => [
     },
   ),
   css(`.${textInputWrapperClassName} .${inputClassName}[type="date"]::before`, {
-    maskImage: css.variable('--framer-input-icon-mask-image', `url('${defaultDateIconMaskImage}')`,),
+    maskImage: css.variable('--framer-input-icon-mask-image', encodeSVGForCSS(defaultDateIconMaskImage,),),
     backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
   css(`.${textInputWrapperClassName} .${inputClassName}[type="time"]::before`, {
-    maskImage: css.variable('--framer-input-icon-mask-image', `url('${defaultTimeIconMaskImage}')`,),
+    maskImage: css.variable('--framer-input-icon-mask-image', encodeSVGForCSS(defaultTimeIconMaskImage,),),
     backgroundImage: css.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
@@ -44716,6 +44751,7 @@ var styles3 = /* @__PURE__ */ (() => [
 ])();
 var FormSelect = /* @__PURE__ */ withCSS(Select, styles3, 'framer-lib-form-select',);
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
+  var _a;
   const {
     background,
     children,
@@ -44725,10 +44761,10 @@ var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
   } = props;
   const style = {
     ...rest.style,
+    // Remove existing `background` props from style, when we are rendering a background asset.
+    // This ensures that the background prop can be properly reset when removing the background-image.
+    background: background ? void 0 : (_a = rest.style) == null ? void 0 : _a.background,
   };
-  if (background) {
-    delete style.background;
-  }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
   return /* @__PURE__ */ jsxs(MotionComponent, {
     ...rest,
@@ -46054,7 +46090,7 @@ var SharedSVGManager = class {
    * template referencing the image. Must be balanced with `unsubscribe()` calls using the same
    * svg. If called multiple times while the shared SVG exists, the generateUniqueIds and
    * contentId parameters are ignored. */
-  subscribe(svg, generateUniqueIds, contentId,) {
+  subscribe(svg, generateUniqueIds, contentId, overflowVisible,) {
     if (!svg || svg === '') return '';
     let entry = this.entries.get(svg,);
     if (!entry) {
@@ -46075,7 +46111,7 @@ var SharedSVGManager = class {
         svgDom.removeAttribute('xmlns:xlink',);
         uniqueSVG = svgDom.outerHTML;
       }
-      entry = this.createDOMElementFor(uniqueSVG, contentId, svgSize,);
+      entry = this.createDOMElementFor(uniqueSVG, contentId, svgSize, overflowVisible,);
       this.entries.set(svg, entry,);
     }
     entry.count += 1;
@@ -46129,11 +46165,13 @@ var SharedSVGManager = class {
     svgElement.id = id3;
     this.getOrCreateTemplateContainer().appendChild(svgElement,);
   }
-  createDOMElementFor(svg, id3, size,) {
+  createDOMElementFor(svg, id3, size, overflowVisible,) {
     if (useDOM) this.maybeAppendTemplate(id3, svg,);
     const box = size ? `0 0 ${size.width} ${size.height}` : void 0;
     const viewBox = box ? ` viewBox="${box}"` : '';
-    const innerHTML = `<svg style="width:100%;height:100%"${viewBox}><use href="#${id3}"/></svg>`;
+    const innerHTML = `<svg style="width:100%;height:100%;${
+      overflowVisible ? 'overflow: visible;' : ''
+    }"${viewBox}><use href="#${id3}"/></svg>`;
     return new SharedSVGEntry(id3, svg, innerHTML, box,);
   }
   /**
@@ -46455,6 +46493,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         height: _height,
         opacity: _opacity,
         width: _width,
+        requiresOverflowVisible,
         ...rest
       } = this.props;
       if (!withExternalLayout && (!visible || !id3)) return null;
@@ -46567,17 +46606,20 @@ var SVGComponent = /* @__PURE__ */ (() => {
       if (hasTransformTemplate) {
         Object.assign(dataProps, layoutHintDataPropsForCenter(this.props.center,),);
       }
-      const svgAsBackgroundImage = !fillElement && !outerStyle.fill && !outerStyle.background && !outerStyle.backgroundImage &&
+      const svgAsBackgroundImage =
+        // If requiresOverflowVisible is true, we cannot safely render the SVG as background
+        // images, as it might cropped any centered stroke that exceeds the bounding box.
+        !requiresOverflowVisible && !fillElement && !outerStyle.fill && !outerStyle.background && !outerStyle.backgroundImage &&
         svg.length < MAX_BACKGROUND_SVG_TEXT_LENGTH && !containsImageReference(svg,) && !containsCustomPropertyReference(svg,);
       let content = null;
       if (svgAsBackgroundImage) {
         outerStyle.backgroundSize = '100% 100%';
-        outerStyle.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg,)}')`;
+        outerStyle.backgroundImage = encodeSVGForCSS(svg,);
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = '';
       } else {
         const contentid = svgContentId ? `svg${svgContentId}` : null;
-        const __html = sharedSVGManager.subscribe(svg, !svgContentId, contentid,);
+        const __html = sharedSVGManager.subscribe(svg, !svgContentId, contentid, requiresOverflowVisible,);
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = svg;
         if (hasBorderRadius(outerStyle,)) {
@@ -47263,10 +47305,7 @@ function createTransformValues(baseTransform, mode,) {
     height,
     rotation,
   } = baseTransform;
-  if (mode === 'resetXYKeepFraction') {
-    x = x - Math.floor(x,);
-    y = y - Math.floor(y,);
-  } else if (mode === 'resetXY') {
+  if (mode === 'resetXY') {
     x = 0;
     y = 0;
   }
@@ -47288,11 +47327,7 @@ function getTransformMode(isRootVectorNode, includeTransform,) {
       return 'asIs';
     }
   }
-  if (isRootVectorNode) {
-    return 'resetXYKeepFraction';
-  } else {
-    return 'resetXY';
-  }
+  return 'resetXY';
 }
 function transformValues(rect, rotation, isRootVectorNode, includeTransform,) {
   const transformMode = getTransformMode(isRootVectorNode, includeTransform,);
@@ -47475,7 +47510,6 @@ var Vector = /* @__PURE__ */ (() => {
         strokeClipId,
         strokeWidth,
         idAttribute,
-        rect,
         shadows,
         strokeAlpha,
         name,
@@ -47494,6 +47528,10 @@ var Vector = /* @__PURE__ */ (() => {
         transition,
         fillOpacity,
         visible,
+        x,
+        y,
+        width,
+        height,
       } = this.props;
       if (!visible) return null;
       if (!id3 || !strokeClipId) return null;
@@ -47501,6 +47539,12 @@ var Vector = /* @__PURE__ */ (() => {
       const {
         target,
       } = RenderEnvironment;
+      const rect = {
+        x,
+        y,
+        width,
+        height,
+      };
       const transform2 = transformValues(rect, rotate, isRootVectorNode, includeTransform,);
       let vectorFill;
       let fillAlpha = 0;
@@ -47728,6 +47772,8 @@ var Vector = /* @__PURE__ */ (() => {
       defaultStrokeAlignment: 'center',
       width: 100,
       height: 100,
+      x: 0,
+      y: 0,
       left: 0,
       top: 0,
       rotation: 0,
@@ -47743,12 +47789,6 @@ var Vector = /* @__PURE__ */ (() => {
       transition: void 0,
       shadows: [],
       strokeAlpha: 1,
-      rect: {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-      },
       lineCap: 'butt',
       strokeColor: '#0AF',
       lineJoin: 'miter',
@@ -47777,8 +47817,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
         defaultName,
         children,
         includeTransform,
-        left,
-        top,
+        x,
+        y,
         width,
         height,
         rotation,
@@ -47789,8 +47829,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
         target,
       } = RenderEnvironment;
       const rect = {
-        x: left,
-        y: top,
+        x,
+        y,
         width,
         height,
       };
@@ -47845,6 +47885,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
       name: void 0,
       opacity: void 0,
       visible: true,
+      x: 0,
+      y: 0,
       left: 0,
       top: 0,
       rotation: 0,
