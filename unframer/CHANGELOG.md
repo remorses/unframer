@@ -1,5 +1,11 @@
 # unframer
 
+## 2.25.0
+
+### Minor Changes
+
+- Update reset css with same styles as Framer websites
+
 ## 2.24.6
 
 ### Patch Changes

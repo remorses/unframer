@@ -15,7 +15,7 @@ import 'tailwindcss/tailwind.css'
 
 export default function App() {
     return (
-        <html lang='en'>
+        <html lang='en' className=''>
             <head>
                 <meta charSet='utf-8' />
                 <meta
