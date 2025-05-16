@@ -10433,7 +10433,7 @@ function steps(numSteps, direction = 'end',) {
   };
 }
 
-// /:https://app.framerstatic.com/framer.DQBZISS5.mjs
+// /:https://app.framerstatic.com/framer.KUUCW2T3.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -44751,20 +44751,20 @@ var styles3 = /* @__PURE__ */ (() => [
 ])();
 var FormSelect = /* @__PURE__ */ withCSS(Select, styles3, 'framer-lib-form-select',);
 var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
-  var _a;
   const {
     background,
     children,
     alt,
     draggable,
+    style: styleFromProps,
     ...rest
   } = props;
   const style = {
-    ...rest.style,
-    // Remove existing `background` props from style, when we are rendering a background asset.
-    // This ensures that the background prop can be properly reset when removing the background-image.
-    background: background ? void 0 : (_a = rest.style) == null ? void 0 : _a.background,
+    ...styleFromProps,
   };
+  if (background) {
+    delete style.background;
+  }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
   return /* @__PURE__ */ jsxs(MotionComponent, {
     ...rest,
