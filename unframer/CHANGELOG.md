@@ -1,5 +1,13 @@
 # unframer
 
+## 2.24.6
+
+### Patch Changes
+
+- c3a2059: Update to latest Framer runtime, framer@2.4.1, framer-motion@11.11.7
+- a956976: Update to latest Framer runtime, framer@2.4.1, framer-motion@12.7.2
+- f44f17d: Update to latest Framer runtime, framer@2.4.1, framer-motion@**VERSION**
+
 ## 2.24.5
 
 ### Patch Changes

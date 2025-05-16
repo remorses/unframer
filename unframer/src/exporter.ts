@@ -41,6 +41,7 @@ import {
 } from './utils.js'
 import { error } from 'console'
 import { notifyError } from './sentry'
+import { propCamelCaseJustLikeFramer } from './compat'
 
 export type StyleToken = {
     id: string
