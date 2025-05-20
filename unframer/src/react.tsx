@@ -269,6 +269,13 @@ function isRelativeLink(url) {
     }
     return url?.startsWith?.('/') || url?.startsWith?.('#')
 }
+
+function isMailto(url) {
+    if (!url) {
+        return false
+    }
+    return url?.startsWith?.('mailto:')
+}
 export function AdaptedLink({
     href,
     nodeId,
@@ -296,7 +303,7 @@ export function AdaptedLink({
     const route = routes?.[webPageId]
     const target = openInNewTab ? '_blank' : undefined
     // console.log({ href, pathVariables, path: route?.path, ...rest })
-    if (isRelativeLink(href)) {
+    if (isRelativeLink(href) || isMailto(href)) {
         return React.cloneElement(children, { ...rest, onClick, href, target })
     }
     if (!webPageId) {
@@ -310,7 +317,7 @@ export function AdaptedLink({
     if (pathVariables) {
         path = replacePathParams(path, pathVariables)
     }
-    if (isRelativeLink(path)) {
+    if (isRelativeLink(path) || isMailto(href)) {
         return React.cloneElement(children, {
             ...rest,
             onClick,
