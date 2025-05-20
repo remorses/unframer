@@ -1,5 +1,13 @@
 # unframer
 
+## 2.25.1
+
+### Patch Changes
+
+- 4c30c40: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- 6e3a86f: Update to latest Framer runtime, framer@2.4.1, framer-motion@11.11.7
+- Add support for mailto: links
+
 ## 2.25.0
 
 ### Minor Changes
