@@ -1,5 +1,11 @@
 # unframer
 
+## 2.25.2
+
+### Patch Changes
+
+- Apply Framer reset css only to Framer components, not other elements without .unframer class
+
 ## 2.25.1
 
 ### Patch Changes
