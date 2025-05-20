@@ -11104,7 +11104,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.V5AO5VTZ.mjs
+// /:https://app.framerstatic.com/framer.ZDVTUSJ2.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12294,46 +12294,6 @@ function getRouteElementId(route, hash2,) {
   }
   return void 0;
 }
-function yieldToMain(options,) {
-  if ('scheduler' in window) {
-    if ('yield' in scheduler) return scheduler.yield(options,);
-    if ('postTask' in scheduler) return scheduler.postTask(() => {}, options,);
-  }
-  if ((options == null ? void 0 : options.priority) === 'user-blocking') {
-    return Promise.resolve();
-  }
-  return new Promise((resolve) => {
-    setTimeout(resolve,);
-  },);
-}
-async function yieldBefore(fn, options,) {
-  await yieldToMain(options,);
-  return fn();
-}
-function interactionResponse(options,) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 100,);
-    requestAnimationFrame(() => {
-      void yieldBefore(resolve, options,);
-    },);
-  },);
-}
-function useAfterPaintEffect(effectFn, deps, opts, useEffectFn = useLayoutEffect,) {
-  useEffectFn(() => {
-    const runAfterPaint = async (fn) => {
-      await interactionResponse(opts,);
-      return fn();
-    };
-    const runPromise = runAfterPaint(effectFn,);
-    return () => {
-      void (async () => {
-        const cleanup = await runPromise;
-        if (!cleanup) return;
-        void runAfterPaint(cleanup,);
-      })();
-    };
-  }, deps,);
-}
 var EMPTY_ARRAY = [];
 function monitorINPRelatedInputs(signal,) {
   const inpRelatedInputs = ['pointerdown', 'pointerup', 'keydown', 'keyup',];
@@ -12413,37 +12373,6 @@ var requestIdleCallback = /* @__PURE__ */ (() =>
 function encodeSVGForCSS(svg,) {
   return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
 }
-var shouldPreloadBasedOnUA = !isBot;
-function useRoutePreloader(routeIds, enabled = true,) {
-  const {
-    getRoute,
-  } = useRouter();
-  useEffect(() => {
-    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
-    for (const routeId of routeIds) {
-      void preloadRoute(getRoute(routeId,),);
-    }
-  }, [routeIds, getRoute, enabled,],);
-}
-async function preloadRoute(route,) {
-  if (!shouldPreloadBasedOnUA || !route) return;
-  const component = route.page;
-  if (!component || !isLazyComponentType(component,)) return;
-  await yieldToMain();
-  try {
-    await component.preload();
-  } catch (e) {
-    if (false) console.warn('Preload failed', route, e,);
-  }
-}
-function useRouteHandler(routeId, preload = false, elementId,) {
-  const {
-    navigate,
-  } = useRouter();
-  useRoutePreloader([routeId,], preload,);
-  const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
-  return handler;
-}
 var mockWindow = {
   addEventListener: () => {},
   removeEventListener: () => {},
@@ -12502,6 +12431,108 @@ var mockWindow = {
   __framer_events: [],
 };
 var safeWindow = !isWindow ? mockWindow : window;
+var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
+var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
+var pendingResolvers = /* @__PURE__ */ new Set();
+function resolvePendingPromises() {
+  for (const resolve of pendingResolvers) resolve();
+  pendingResolvers.clear();
+}
+function yieldUnlessUrgent(options,) {
+  return new Promise((resolve) => {
+    pendingResolvers.add(resolve,);
+    if (document.hidden) {
+      resolvePendingPromises();
+      return;
+    }
+    document.addEventListener('visibilitychange', resolvePendingPromises,);
+    document.addEventListener('pagehide', resolvePendingPromises,);
+    frame.read(() => {
+      const resolveFn = () => {
+        var _a;
+        pendingResolvers.delete(resolve,);
+        if ((_a = options == null ? void 0 : options.signal) == null ? void 0 : _a.aborted) return;
+        resolve();
+      };
+      void schedulerYield(options,).then(resolveFn,);
+    },);
+    return;
+  },);
+}
+function interactionResponse(options,) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100,);
+    frame.read(() => {
+      void schedulerYield(options,).then(resolve,);
+    },);
+  },);
+}
+function schedulerYield(options,) {
+  const priority = options == null ? void 0 : options.priority;
+  const canUseModernAPI = canUseYield || canUsePostTask;
+  if (!canUseModernAPI) {
+    if (priority === 'user-blocking') {
+      return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+      setTimeout(resolve, priority === 'background' ? 1 : 0,);
+    },);
+  }
+  if (priority === 'background') {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1,);
+    },);
+  }
+  if (canUseYield) {
+    return safeWindow.scheduler.yield(options,).catch(noop2,);
+  }
+  return safeWindow.scheduler.postTask(() => {}, options,).catch(noop2,);
+}
+function yieldToMain(options,) {
+  const {
+    continueAfter,
+    ensureContinueBeforeUnload,
+    ...schedulerOptions
+  } = options ?? {};
+  if (ensureContinueBeforeUnload) {
+    return yieldUnlessUrgent(schedulerOptions,);
+  }
+  if (continueAfter === 'paint') {
+    return interactionResponse(schedulerOptions,);
+  }
+  return schedulerYield(schedulerOptions,);
+}
+var shouldPreloadBasedOnUA = !isBot;
+function useRoutePreloader(routeIds, enabled = true,) {
+  const {
+    getRoute,
+  } = useRouter();
+  useEffect(() => {
+    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
+    for (const routeId of routeIds) {
+      void preloadRoute(getRoute(routeId,),);
+    }
+  }, [routeIds, getRoute, enabled,],);
+}
+async function preloadRoute(route,) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  await yieldToMain();
+  try {
+    await component.preload();
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
+  }
+}
+function useRouteHandler(routeId, preload = false, elementId,) {
+  const {
+    navigate,
+  } = useRouter();
+  useRoutePreloader([routeId,], preload,);
+  const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
+  return handler;
+}
 var timezone;
 var visitorLocale;
 function setTimezoneAndLocaleForTracking() {
@@ -13284,6 +13315,25 @@ var announceNavigation = () => {
     announceDiv.textContent = document.title;
   }, 60,);
 };
+function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEffect,) {
+  useEffectFn(() => {
+    const runAfterPaint = async (fn) => {
+      await yieldToMain({
+        ...options,
+        continueAfter: 'paint',
+      },);
+      return fn();
+    };
+    const runPromise = runAfterPaint(effectFn,);
+    return () => {
+      void (async () => {
+        const cleanup = await runPromise;
+        if (!cleanup) return;
+        void runAfterPaint(cleanup,);
+      })();
+    };
+  }, deps,);
+}
 function useMonitorNextPaintAfterRender(label,) {
   const resolveHasPainted = useRef3(void 0,);
   useAfterPaintEffect(
@@ -14138,7 +14188,7 @@ function useMarkSuspenseEffectsStart() {
       wasInBackground = true;
       return;
     }
-    requestAnimationFrame(() => {
+    frame.read(() => {
       hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.requestAnimationFrame.markStart();
       hydrationMarker == null ? void 0 : hydrationMarker.unattributedHydrationOverhead.measure();
     },);
@@ -14158,9 +14208,9 @@ function useMarkSuspenseEffectEnd() {
   useLayoutEffect(() => {
     hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markEnd();
     if (wasInBackground || document.visibilityState !== 'visible') return;
-    requestAnimationFrame(() => {
+    frame.read(() => {
       hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.requestAnimationFrame.markEnd();
-      void yieldBefore(() => {
+      void yieldToMain().then(() => {
         hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.layoutStylePaint.markEnd();
       },);
     },);
@@ -27203,7 +27253,7 @@ function collectBoxShadowsForProps(props, style2,) {
   if (!boxShadow) return;
   style2.boxShadow = boxShadow;
 }
-function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strokeWidth, strokeClipId, svgStrokeAttributes,) {
+function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, strokeClipId, svgStrokeAttributes,) {
   const definition = [];
   let outsetElement = null;
   let insetElement = null;
@@ -27249,8 +27299,8 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
     if (!isFiniteNumber(miter,)) miter = 4;
     let shadowRect = Rect.merge(...shadowRects,);
     shadowRect = Rect.inflate(shadowRect, (expandStrokeWidth * miter / 2 + maxBlur) * 1.1,);
-    const width = rect.width + (strokeWidth ? strokeWidth / 2 : 0.1);
-    const height = rect.height + (strokeWidth ? strokeWidth / 2 : 0.1);
+    const width = rect.width + (strokeWidth ? strokeWidth / 2 : 0);
+    const height = rect.height + (strokeWidth ? strokeWidth / 2 : 0);
     const filterX = shadowRect.x / width * 100;
     const filterY = shadowRect.y / height * 100;
     const filterWidth = shadowRect.width / width * 100;
@@ -27297,7 +27347,6 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
       children: /* @__PURE__ */ jsx3('use', {
         ...svgStrokeAttributes,
         fill: 'black',
-        fillOpacity: fillAlpha <= 0 ? 0 : 1,
         stroke: 'black',
         strokeOpacity: strokeAlpha <= 0 ? 0 : 1,
         strokeWidth: strokeAlpha > 0 ? strokeWidth : 0,
@@ -27374,17 +27423,12 @@ function shadowForShape(boxShadows, rect, shapeId, fillAlpha, strokeAlpha, strok
 }
 function outerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_outer_shadow' + index,);
-  const offsetResultId = shadowKey.add('offset',).id;
-  const blurResultId = shadowKey.add('blur',).id;
-  const matrixResultId = shadowKey.add('matrix',).id;
   const filterElements = /* @__PURE__ */ jsx3(OuterShadowFilterElements, {
     shadow,
-    blurId: blurResultId,
-    offsetId: offsetResultId,
-    matrixId: matrixResultId,
+    shadowKey,
   }, shadowKey.id + '-filters',);
   const mergeElement = /* @__PURE__ */ jsx3('feMergeNode', {
-    in: matrixResultId,
+    in: shadowKey.id,
   }, shadowKey.id + '-merge',);
   return {
     filterElements,
@@ -27394,16 +27438,11 @@ function outerShadowElements(shapeID, shadow, index,) {
 var OuterShadowFilterElements = (props) => {
   const {
     shadow,
-    blurId,
-    offsetId,
-    matrixId,
+    shadowKey,
   } = props;
-  const color2 = shadow.color;
-  const rgb = ConvertColor.toRgb(color2,);
-  const r = roundedNumberString(rgb.r / 255, 3,);
-  const g = roundedNumberString(rgb.g / 255, 3,);
-  const b = roundedNumberString(rgb.b / 255, 3,);
-  const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
+  const offsetId = shadowKey.add('offset',).id;
+  const blurId = shadowKey.add('blur',).id;
+  const floodId = shadowKey.add('flood',).id;
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx3('feOffset', {
@@ -27417,31 +27456,27 @@ var OuterShadowFilterElements = (props) => {
         in: offsetId,
         result: blurId,
       },),
-      /* @__PURE__ */ jsx3('feColorMatrix', {
-        colorInterpolationFilters: 'sRGB',
-        values: matrixValues,
-        type: 'matrix',
-        in: blurId,
-        result: matrixId,
+      /* @__PURE__ */ jsx3('feFlood', {
+        floodColor: shadow.color,
+        result: floodId,
+      },),
+      /* @__PURE__ */ jsx3('feComposite', {
+        in: floodId,
+        in2: blurId,
+        operator: 'in',
+        result: shadowKey.id,
       },),
     ],
   },);
 };
 function innerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_inside_shadow' + index,);
-  const blurId = shadowKey.add('blur',).id;
-  const offsetId = shadowKey.add('offset',).id;
-  const compositeId = shadowKey.add('composite',).id;
-  const matrixId = shadowKey.add('matrix',).id;
   const filterElements = /* @__PURE__ */ jsx3(InnerShadowFilterElements, {
     shadow,
-    blurId,
-    offsetId,
-    compositeId,
-    matrixId,
+    shadowKey,
   }, shadowKey.id + '-filters',);
   const mergeElement = /* @__PURE__ */ jsx3('feMergeNode', {
-    in: matrixId,
+    in: shadowKey.id,
   }, shadowKey.id + '-merge',);
   return {
     filterElements,
@@ -27451,17 +27486,12 @@ function innerShadowElements(shapeID, shadow, index,) {
 var InnerShadowFilterElements = (props) => {
   const {
     shadow,
-    blurId,
-    offsetId,
-    compositeId,
-    matrixId,
+    shadowKey,
   } = props;
-  const color2 = shadow.color;
-  const rgb = ConvertColor.toRgb(color2,);
-  const r = rgb.r / 255;
-  const g = rgb.g / 255;
-  const b = rgb.b / 255;
-  const matrixValues = `0 0 0 0 ${r}   0 0 0 0 ${g}   0 0 0 0 ${b}  0 0 0 ${rgb.a} 0`;
+  const blurId = shadowKey.add('blur',).id;
+  const offsetId = shadowKey.add('offset',).id;
+  const compositeId = shadowKey.add('composite',).id;
+  const floodId = shadowKey.add('flood',).id;
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx3('feGaussianBlur', {
@@ -27483,12 +27513,15 @@ var InnerShadowFilterElements = (props) => {
         k3: '1',
         result: compositeId,
       },),
-      /* @__PURE__ */ jsx3('feColorMatrix', {
-        colorInterpolationFilters: 'sRGB',
-        values: matrixValues,
-        type: 'matrix',
-        in: compositeId,
-        result: matrixId,
+      /* @__PURE__ */ jsx3('feFlood', {
+        floodColor: shadow.color,
+        result: floodId,
+      },),
+      /* @__PURE__ */ jsx3('feComposite', {
+        in: floodId,
+        in2: compositeId,
+        operator: 'in',
+        result: shadowKey.id,
       },),
     ],
   },);
@@ -33950,6 +33983,9 @@ function Floating({
       ref: floatingPositionRef,
       className: className2,
       style: {
+        // Start from the top left of the screen to prevent jumps.
+        top: 0,
+        left: 0,
         // Initially rendered as hidden, but the layout effect will set
         // to visible when the position is calculated.
         visibility: 'hidden',
@@ -34021,7 +34057,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
       error,
     );
     const sampleRate = Math.random();
-    if (sampleRate > 0.5) return;
+    if (sampleRate > 0.25) return;
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
     sendTrackingEvent('published_site_load_error', {
       message: String(error,),
@@ -34133,47 +34169,6 @@ function findAnchorElement(target, withinElement,) {
     return findAnchorElement(target.parentElement, withinElement,);
   }
   return null;
-}
-var pendingResolvers = /* @__PURE__ */ new Set();
-function resolvePendingPromises() {
-  for (const resolve of pendingResolvers) resolve();
-  pendingResolvers.clear();
-}
-var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
-var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
-function yieldUnlessUrgent(options,) {
-  return new Promise((resolve) => {
-    pendingResolvers.add(resolve,);
-    if (document.hidden) {
-      resolvePendingPromises();
-      return;
-    }
-    document.addEventListener('visibilitychange', resolvePendingPromises,);
-    document.addEventListener('pagehide', resolvePendingPromises,);
-    requestAnimationFrame(() => {
-      const resolveFn = () => {
-        var _a;
-        pendingResolvers.delete(resolve,);
-        if ((_a = options == null ? void 0 : options.signal) == null ? void 0 : _a.aborted) return;
-        resolve();
-      };
-      const priority = options == null ? void 0 : options.priority;
-      const canUseModernAPI = canUseYield || canUsePostTask;
-      if (!canUseModernAPI) {
-        if (priority === 'user-blocking') return resolveFn();
-        return setTimeout(resolveFn, priority === 'background' ? 1 : 0,);
-      }
-      if (priority === 'background') {
-        return setTimeout(resolveFn, 1,);
-      }
-      if (canUseYield) {
-        safeWindow.scheduler.yield(options,).then(resolveFn,).catch(noop2,);
-        return;
-      }
-      safeWindow.scheduler.postTask(resolveFn, options,).catch(noop2,);
-    },);
-    return;
-  },);
 }
 function ChildrenCanSuspend({
   children,
@@ -34916,8 +34911,10 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, element
     const shouldPerformNavigation = !usedMetaKey && !isExternalLink;
     const track = () => void trackLinkClick(href,);
     if (!shouldPerformNavigation) {
-      await yieldUnlessUrgent({
+      await yieldToMain({
         priority: 'user-blocking',
+        ensureContinueBeforeUnload: true,
+        continueAfter: 'paint',
       },);
       track();
       return;
@@ -35363,8 +35360,9 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
       type: 'submit',
     },);
     const data2 = new FormData(event.currentTarget,);
-    await interactionResponse({
+    await yieldToMain({
       priority: 'user-blocking',
+      continueAfter: 'paint',
     },);
     addUTMTagsToFormData(data2, safeWindow.document,);
     for (const [key7, value,] of data2) {
@@ -35413,8 +35411,9 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
   };
   const checkValidity = async (e) => {
     const target = e.currentTarget;
-    await interactionResponse({
+    await yieldToMain({
       priority: 'background',
+      continueAfter: 'paint',
     },);
     startTransition2(() =>
       dispatch({
@@ -35663,6 +35662,10 @@ function Router({
         const nextRender = monitorNextPaintAfterRender({
           localized: true,
         },);
+        await yieldToMain({
+          priority: 'user-blocking',
+          continueAfter: 'paint',
+        },);
         let localeId;
         if (isString(localeOrLocaleId,)) {
           localeId = localeOrLocaleId;
@@ -35767,11 +35770,14 @@ function Router({
       preloaded: hasRendered ? void 0 : routeStatus == null ? void 0 : routeStatus.hasLoaded,
     },);
     const executeBeforeUrlUpdate = executeBeforeUrlUpdateOnce(beforeUrlUpdate,);
-    void yieldUnlessUrgent({
+    void yieldToMain({
       priority: 'background',
+      ensureContinueBeforeUnload: true,
+      continueAfter: 'paint',
     },).then(executeBeforeUrlUpdate,);
-    await interactionResponse({
+    await yieldToMain({
       priority: 'user-blocking',
+      continueAfter: 'paint',
     },);
     if (pathVariables) {
       const inUse = /* @__PURE__ */ new Set();
@@ -41634,9 +41640,13 @@ function useOnAppear(callback,) {
     default: callback,
   },);
 }
-async function setOverflow(blockDocumentScrolling, show, yieldBefore2 = true,) {
+async function setOverflow(blockDocumentScrolling, show, yieldBefore = true,) {
   if (blockDocumentScrolling === false) return;
-  if (yieldBefore2) await interactionResponse();
+  if (yieldBefore) {
+    await yieldToMain({
+      continueAfter: 'paint',
+    },);
+  }
   frame.render(() => {
     const htmlStyle = document.documentElement.style;
     if (show) {
@@ -42049,6 +42059,35 @@ function useUpdateIfVisible(ref,) {
     runUpdateIfPageIsVisible(runUpdate,);
   }, [runUpdateIfPageIsVisible, runUpdateIfElementIsInView, ref,],);
 }
+var globalWaitingForClickPromise;
+var globalWaitingForClickResolve;
+async function getPromiseWithFallback() {
+  return new Promise((resolve) => {
+    const resolveFn = () => {
+      resolve();
+      clearTimeout(timeout,);
+    };
+    const timeout = setTimeout(resolveFn, 150,);
+    globalWaitingForClickResolve = resolveFn;
+  },);
+}
+function globalWaitForClickListener(event,) {
+  if (event.button === 0) {
+    globalWaitingForClickPromise = getPromiseWithFallback();
+  }
+}
+function globalClickReceivedListener() {
+  globalWaitingForClickPromise = void 0;
+  globalWaitingForClickResolve == null ? void 0 : globalWaitingForClickResolve();
+  globalWaitingForClickResolve = void 0;
+}
+function useWaitForGlobalClick(enabled = false,) {
+  useEffect(() => {
+    if (!enabled) return;
+    document.addEventListener('pointerup', globalWaitForClickListener, true,);
+    document.__proto__.addEventListener.call(document, 'click', globalClickReceivedListener, true,);
+  }, [enabled,],);
+}
 function useVariantState({
   variant,
   defaultVariant: externalDefaultVariant,
@@ -42064,18 +42103,15 @@ function useVariantState({
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   const {
     pauseOffscreen: pauseOffscreenFeatureOn,
+    yieldOnTap: yieldOnTapFeatureOn,
   } = useLibraryFeatures();
-  const update = useCallback((useTransition) => {
-    if (useTransition) {
-      startTransition2(() => void forceUpdate());
-      return;
-    }
-    forceUpdate();
-  }, [forceUpdate,],);
+  useWaitForGlobalClick(yieldOnTapFeatureOn,);
   const runUpdateIfVisible = useUpdateIfVisible(ref,);
   const internalState = useRef3({
     isHovered: false,
+    isHoveredHasUpdated: false,
     isPressed: false,
+    isPressedHasUpdated: false,
     isError: false,
     hasPressedVariants: true,
     baseVariant: safeBaseVariant(variant, externalDefaultVariant, validBaseVariants,),
@@ -42084,7 +42120,7 @@ function useVariantState({
     loadedBaseVariant: {},
     // When used in generated components, these are static values defined
     // outside of the component function that also need to not result in
-    // memoized values being recalculated, so we dump them into the ref.
+    // memorized values being recalculated, so we dump them into the ref.
     defaultVariant: externalDefaultVariant,
     enabledGestures: externalEnabledGestures,
     cycleOrder: externalCycleOrder,
@@ -42110,30 +42146,43 @@ function useVariantState({
     return [nextBaseVariant, nextGestureVariant,];
   }, [],);
   const updateIfNeeded = useCallback(
-    (
-      baseVariant2,
-      gestureVariant2,
-      defaultVariant2,
-      nextBaseVariant,
-      isError2 = false,
-      checkViewport = false,
-      highPriority = false,
-      clearError = false,
-    ) => {
+    async (baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, checkViewport = false, clearError = false,) => {
       const [nextBase, nextGesture,] = resolveNextVariant(nextBaseVariant,);
       if (nextBase === baseVariant2 && nextGesture === gestureVariant2) return;
       if (clearError) internalState.current.isError = false;
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      runUpdateIfVisible(() => update(!highPriority || isError2,), pauseOffscreenFeatureOn && checkViewport,);
+      const yieldOnTap = yieldOnTapFeatureOn && internalState.current.isPressedHasUpdated;
+      if (yieldOnTap && globalWaitingForClickPromise) {
+        await globalWaitingForClickPromise;
+      }
+      if (yieldOnTap) {
+        await yieldToMain({
+          priority: 'user-blocking',
+          continueAfter: 'paint',
+        },);
+      }
+      const {
+        isHovered: isHovered2,
+        isPressed: isPressed2,
+        isHoveredHasUpdated,
+        isPressedHasUpdated,
+      } = internalState.current;
+      if (isHovered2 || isHoveredHasUpdated || isPressed2 || isPressedHasUpdated) {
+        startTransition2(forceUpdate,);
+        return;
+      }
+      runUpdateIfVisible(() => startTransition2(forceUpdate,), pauseOffscreenFeatureOn && checkViewport,);
     },
-    [resolveNextVariant, update, runUpdateIfVisible, pauseOffscreenFeatureOn,],
+    [resolveNextVariant, forceUpdate, runUpdateIfVisible, pauseOffscreenFeatureOn, yieldOnTapFeatureOn,],
   );
   const setGestureState = useCallback(({
     isHovered: isHovered2,
     isPressed: isPressed2,
     isError: isError2,
   },) => {
+    const isPressedHasUpdated = isPressed2 !== internalState.current.isPressed;
+    const isHoveredHasUpdated = isHovered2 !== internalState.current.isHovered;
     if (isHovered2 !== void 0) internalState.current.isHovered = isHovered2;
     if (isPressed2 !== void 0) internalState.current.isPressed = isPressed2;
     if (isError2 !== void 0) internalState.current.isError = isError2;
@@ -42142,9 +42191,9 @@ function useVariantState({
       gestureVariant: gestureVariant2,
       defaultVariant: defaultVariant2,
     } = internalState.current;
-    const visibleUserInteraction = isPressed2 || isHovered2;
-    updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, isError2, !visibleUserInteraction, isHovered2,// a hover needs instant response for a smooth UX; while we optimize for INP for clicks
-    );
+    internalState.current.isPressedHasUpdated = isPressedHasUpdated;
+    internalState.current.isHoveredHasUpdated = isHoveredHasUpdated;
+    void updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, false,);
   }, [updateIfNeeded,],);
   const setVariant = useCallback((proposedVariant, pauseOffscreen = false,) => {
     const {
@@ -42156,15 +42205,15 @@ function useVariantState({
     const nextBaseVariant = proposedVariant === CycleVariantState
       ? nextVariant(cycleOrder || [], baseVariant2 || defaultVariant2,)
       : proposedVariant;
-    updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, false, pauseOffscreen, false, true,);
+    void updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, pauseOffscreen, true,);
   }, [updateIfNeeded,],);
   const clearLoadingGesture = useCallback(() => {
     const {
       baseVariant: baseVariant2,
     } = internalState.current;
     internalState.current.loadedBaseVariant[baseVariant2] = true;
-    runUpdateIfVisible(() => update(true,), true,);
-  }, [update, runUpdateIfVisible,],);
+    runUpdateIfVisible(() => startTransition2(forceUpdate,), true,);
+  }, [forceUpdate, runUpdateIfVisible,],);
   if (variant !== internalState.current.lastVariant) {
     const [nextBase, nextGesture,] = resolveNextVariant(variant,);
     internalState.current.lastVariant = nextBase;
@@ -44925,7 +44974,9 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     setPrevDefaultValue(defaultValue,);
   }
   const handleChange = useCallback(async (e) => {
-    await interactionResponse();
+    await yieldToMain({
+      continueAfter: 'paint',
+    },);
     const newValue = e.target.value;
     onChange == null ? void 0 : onChange(e,);
     startTransition2(() => setHasValue(!!newValue,));
@@ -46834,7 +46885,7 @@ var SharedSVGManager = class {
    * VECTOR @TODO - Unsubscribe from vector set items.
    */
   template(id3, svg,) {
-    const entry = this.vectorSetItems.get(svg,);
+    const entry = this.vectorSetItems.get(id3,);
     if (entry) return `#${entry.id}`;
     this.vectorSetItems.set(id3, {
       id: id3,
@@ -48276,16 +48327,7 @@ var Vector = /* @__PURE__ */ (() => {
       }
       const internalShapeId = InternalID.forKey(id3,);
       const internalStrokeClipId = InternalID.forKey(strokeClipId,);
-      const shadow = shadowForShape(
-        shadows,
-        rect,
-        internalShapeId,
-        fillAlpha,
-        strokeAlpha,
-        strokeWidth,
-        internalStrokeClipId,
-        svgStrokeAttributes,
-      );
+      const shadow = shadowForShape(shadows, rect, internalShapeId, strokeAlpha, strokeWidth, internalStrokeClipId, svgStrokeAttributes,);
       const currentName = target === RenderTarget.preview ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
@@ -49456,7 +49498,7 @@ export {
   withVariantAppearEffect,
   withVariantFX,
   wrap,
-  yieldUnlessUrgent,
+  yieldToMain,
 };
 //! Credit to Astro | MIT License
 /**

@@ -40,7 +40,7 @@ importers:
         version: 4.2.3(@types/node@22.15.3)(@types/react-dom@19.1.2(@types/react@19.1.1))(@types/react@19.1.1)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)
       '@astrojs/tailwind':
         specifier: ^5.1.5
-        version: 5.1.5(astro@5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.5.1))(tailwindcss@3.4.17)
+        version: 5.1.5(astro@5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1))(tailwindcss@3.4.17)
       '@types/react':
         specifier: ^19.1.1
         version: 19.1.1
@@ -49,7 +49,7 @@ importers:
         version: 19.1.2(@types/react@19.1.1)
       astro:
         specifier: ^5.1.10
-        version: 5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.5.1)
+        version: 5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1)
       nextjs-app:
         specifier: workspace:*
         version: link:../nextjs-app
@@ -112,13 +112,13 @@ importers:
         version: 0.3.0(@spotlightjs/spotlight@2.3.2)(@types/react@19.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(webpack@5.94.0(esbuild@0.17.6))
       '@remix-run/node':
         specifier: ^2.15.2
-        version: 2.15.2(typescript@5.7.3)
+        version: 2.15.2(typescript@5.8.3)
       '@remix-run/react':
         specifier: ^2.16.5
-        version: 2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+        version: 2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3)
       '@remix-run/serve':
         specifier: ^2.15.2
-        version: 2.15.2(typescript@5.7.3)
+        version: 2.15.2(typescript@5.8.3)
       isbot:
         specifier: ^4.4.0
         version: 4.4.0
@@ -137,7 +137,7 @@ importers:
     devDependencies:
       '@remix-run/dev':
         specifier: 2.15.2
-        version: 2.15.2(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(@remix-run/serve@2.15.2(typescript@5.7.3))(@types/node@22.15.3)(babel-plugin-macros@3.1.0)(terser@5.39.0)(typescript@5.7.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))
+        version: 2.15.2(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3))(@remix-run/serve@2.15.2(typescript@5.8.3))(@types/node@22.15.3)(babel-plugin-macros@3.1.0)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))
       '@types/react':
         specifier: ^19.1.1
         version: 19.1.1
@@ -158,7 +158,7 @@ importers:
         version: 6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.7.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))
+        version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))
 
   unframer:
     dependencies:
@@ -269,8 +269,8 @@ importers:
         specifier: ^1.0.18
         version: 1.0.18
       typescript:
-        specifier: ^5.7.3
-        version: 5.7.3
+        specifier: ^5.8.3
+        version: 5.8.3
 
 packages:
 
@@ -6133,8 +6133,8 @@ packages:
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -6874,9 +6874,9 @@ snapshots:
       - tsx
       - yaml
 
-  '@astrojs/tailwind@5.1.5(astro@5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.5.1))(tailwindcss@3.4.17)':
+  '@astrojs/tailwind@5.1.5(astro@5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1))(tailwindcss@3.4.17)':
     dependencies:
-      astro: 5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.5.1)
+      astro: 5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1)
       autoprefixer: 10.4.20(postcss@8.5.1)
       postcss: 8.5.1
       postcss-load-config: 4.0.2(postcss@8.5.1)
@@ -8512,7 +8512,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@remix-run/dev@2.15.2(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(@remix-run/serve@2.15.2(typescript@5.7.3))(@types/node@22.15.3)(babel-plugin-macros@3.1.0)(terser@5.39.0)(typescript@5.7.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))':
+  '@remix-run/dev@2.15.2(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3))(@remix-run/serve@2.15.2(typescript@5.8.3))(@types/node@22.15.3)(babel-plugin-macros@3.1.0)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))':
     dependencies:
       '@babel/core': 7.26.7
       '@babel/generator': 7.25.6
@@ -8524,10 +8524,10 @@ snapshots:
       '@babel/types': 7.26.7
       '@mdx-js/mdx': 2.3.0
       '@npmcli/package-json': 4.0.1
-      '@remix-run/node': 2.15.2(typescript@5.7.3)
-      '@remix-run/react': 2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+      '@remix-run/node': 2.15.2(typescript@5.8.3)
+      '@remix-run/react': 2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3)
       '@remix-run/router': 1.21.0
-      '@remix-run/server-runtime': 2.15.2(typescript@5.7.3)
+      '@remix-run/server-runtime': 2.15.2(typescript@5.8.3)
       '@types/mdx': 2.0.13
       '@vanilla-extract/integration': 6.5.0(@types/node@22.15.3)(babel-plugin-macros@3.1.0)(terser@5.39.0)
       arg: 5.0.2
@@ -8567,12 +8567,12 @@ snapshots:
       set-cookie-parser: 2.7.0
       tar-fs: 2.1.1
       tsconfig-paths: 4.2.0
-      valibot: 0.41.0(typescript@5.7.3)
+      valibot: 0.41.0(typescript@5.8.3)
       vite-node: 1.6.0(@types/node@22.15.3)(terser@5.39.0)
       ws: 7.5.10
     optionalDependencies:
-      '@remix-run/serve': 2.15.2(typescript@5.7.3)
-      typescript: 5.7.3
+      '@remix-run/serve': 2.15.2(typescript@5.8.3)
+      typescript: 5.8.3
       vite: 6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)
     transitivePeerDependencies:
       - '@types/node'
@@ -8590,16 +8590,16 @@ snapshots:
       - ts-node
       - utf-8-validate
 
-  '@remix-run/express@2.15.2(express@4.21.1)(typescript@5.7.3)':
+  '@remix-run/express@2.15.2(express@4.21.1)(typescript@5.8.3)':
     dependencies:
-      '@remix-run/node': 2.15.2(typescript@5.7.3)
+      '@remix-run/node': 2.15.2(typescript@5.8.3)
       express: 4.21.1
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
-  '@remix-run/node@2.15.2(typescript@5.7.3)':
+  '@remix-run/node@2.15.2(typescript@5.8.3)':
     dependencies:
-      '@remix-run/server-runtime': 2.15.2(typescript@5.7.3)
+      '@remix-run/server-runtime': 2.15.2(typescript@5.8.3)
       '@remix-run/web-fetch': 4.4.2
       '@web3-storage/multipart-parser': 1.0.0
       cookie-signature: 1.2.1
@@ -8607,28 +8607,28 @@ snapshots:
       stream-slice: 0.1.2
       undici: 6.19.8
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
-  '@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
+  '@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3)':
     dependencies:
       '@remix-run/router': 1.23.0
-      '@remix-run/server-runtime': 2.16.5(typescript@5.7.3)
+      '@remix-run/server-runtime': 2.16.5(typescript@5.8.3)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       react-router: 6.30.0(react@19.0.0)
       react-router-dom: 6.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       turbo-stream: 2.4.0
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
   '@remix-run/router@1.21.0': {}
 
   '@remix-run/router@1.23.0': {}
 
-  '@remix-run/serve@2.15.2(typescript@5.7.3)':
+  '@remix-run/serve@2.15.2(typescript@5.8.3)':
     dependencies:
-      '@remix-run/express': 2.15.2(express@4.21.1)(typescript@5.7.3)
-      '@remix-run/node': 2.15.2(typescript@5.7.3)
+      '@remix-run/express': 2.15.2(express@4.21.1)(typescript@5.8.3)
+      '@remix-run/node': 2.15.2(typescript@5.8.3)
       chokidar: 3.6.0
       compression: 1.7.4
       express: 4.21.1
@@ -8639,7 +8639,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@remix-run/server-runtime@2.15.2(typescript@5.7.3)':
+  '@remix-run/server-runtime@2.15.2(typescript@5.8.3)':
     dependencies:
       '@remix-run/router': 1.21.0
       '@types/cookie': 0.6.0
@@ -8649,9 +8649,9 @@ snapshots:
       source-map: 0.7.4
       turbo-stream: 2.4.0
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
-  '@remix-run/server-runtime@2.16.5(typescript@5.7.3)':
+  '@remix-run/server-runtime@2.16.5(typescript@5.8.3)':
     dependencies:
       '@remix-run/router': 1.23.0
       '@types/cookie': 0.6.0
@@ -8661,7 +8661,7 @@ snapshots:
       source-map: 0.7.4
       turbo-stream: 2.4.0
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
   '@remix-run/web-blob@3.1.0':
     dependencies:
@@ -9467,7 +9467,7 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro@5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.5.1):
+  astro@5.1.10(@types/node@22.15.3)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.2
@@ -9514,7 +9514,7 @@ snapshots:
       semver: 7.6.3
       shiki: 1.29.1
       tinyexec: 0.3.2
-      tsconfck: 3.1.4(typescript@5.7.3)
+      tsconfck: 3.1.4(typescript@5.8.3)
       ultrahtml: 1.5.3
       unist-util-visit: 5.0.0
       unstorage: 1.14.4
@@ -9527,7 +9527,7 @@ snapshots:
       yocto-spinner: 0.1.2
       zod: 3.24.1
       zod-to-json-schema: 3.24.1(zod@3.24.1)
-      zod-to-ts: 1.2.0(typescript@5.7.3)(zod@3.24.1)
+      zod-to-ts: 1.2.0(typescript@5.8.3)(zod@3.24.1)
     optionalDependencies:
       sharp: 0.33.5
     transitivePeerDependencies:
@@ -13436,13 +13436,13 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  tsconfck@3.0.3(typescript@5.7.3):
+  tsconfck@3.0.3(typescript@5.8.3):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
-  tsconfck@3.1.4(typescript@5.7.3):
+  tsconfck@3.1.4(typescript@5.8.3):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
   tsconfig-paths@4.2.0:
     dependencies:
@@ -13474,7 +13474,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typescript@5.7.3: {}
+  typescript@5.8.3: {}
 
   ufo@1.5.4: {}
 
@@ -13669,9 +13669,9 @@ snapshots:
       '@types/istanbul-lib-coverage': 2.0.4
       convert-source-map: 1.9.0
 
-  valibot@0.41.0(typescript@5.7.3):
+  valibot@0.41.0(typescript@5.8.3):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
 
   validate-npm-package-license@3.0.4:
     dependencies:
@@ -13748,11 +13748,11 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@5.1.4(typescript@5.7.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
-      tsconfck: 3.0.3(typescript@5.7.3)
+      tsconfck: 3.0.3(typescript@5.8.3)
     optionalDependencies:
       vite: 6.3.5(@types/node@22.15.3)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)
     transitivePeerDependencies:
@@ -14037,9 +14037,9 @@ snapshots:
     dependencies:
       zod: 3.24.1
 
-  zod-to-ts@1.2.0(typescript@5.7.3)(zod@3.24.1):
+  zod-to-ts@1.2.0(typescript@5.8.3)(zod@3.24.1):
     dependencies:
-      typescript: 5.7.3
+      typescript: 5.8.3
       zod: 3.24.1
 
   zod@3.24.1: {}
