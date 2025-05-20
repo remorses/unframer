@@ -285,12 +285,12 @@ export function AdaptedLink({
     ...rest
 }) {
     const context = useContext(unframerContext)
-    let onClick =
+    let navigateClientSide =
         context.navigate && !openInNewTab
             ? (e) => {
                   if (!context.navigate) return
                   const href = e.currentTarget?.getAttribute('href')
-                  if (!href) return
+                  if (!href || !isRelativeLink(href)) return
                   e.preventDefault()
                   if (rest.onClick) rest.onClick(e)
                   context.navigate(href)
@@ -302,9 +302,8 @@ export function AdaptedLink({
     const pathVariables = href?.pathVariables as Record<string, string>
     const route = routes?.[webPageId]
     const target = openInNewTab ? '_blank' : undefined
-    // console.log({ href, pathVariables, path: route?.path, ...rest })
     if (isRelativeLink(href) || isMailto(href)) {
-        return React.cloneElement(children, { ...rest, onClick, href, target })
+        return React.cloneElement(children, { ...rest, onClick: navigateClientSide, href, target })
     }
     if (!webPageId) {
         return <Link href={href} {...rest} {...onlyForFramer} />
@@ -313,20 +312,20 @@ export function AdaptedLink({
     if (!route || !route.path) {
         return <Link href={href} {...rest} {...onlyForFramer} />
     }
-    let path = route.path
+    let resolvedPath = route.path
     if (pathVariables) {
-        path = replacePathParams(path, pathVariables)
+        resolvedPath = replacePathParams(resolvedPath, pathVariables)
     }
-    if (isRelativeLink(path) || isMailto(href)) {
+    if (isRelativeLink(resolvedPath) || isMailto(href)) {
         return React.cloneElement(children, {
             ...rest,
-            onClick,
-            href: path,
+            onClick: navigateClientSide,
+            href: resolvedPath,
             target,
         })
     }
 
-    return <Link href={path} {...rest} {...onlyForFramer} />
+    return <Link href={resolvedPath} {...rest} {...onlyForFramer} />
 }
 
 export function ContextProviders({
