@@ -1287,12 +1287,6 @@ function findExampleProperty(propertyControls?: PropertyControls) {
 // these styles are global styles injected by Framer in the generated websites, without them things like icons can look weird
 const resetCssStyles = `
 
-html, body, #main {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1303,11 +1297,11 @@ html, body, #main {
     -webkit-font-smoothing: inherit;
 }
 
-h1, h2, h3, h4, h5, h6, p, figure {
+.unframer h1, .unframer h2, .unframer h3, .unframer h4, .unframer h5, .unframer h6, .unframer p, .unframer figure {
     margin: 0;
 }
 
-body, input, textarea, select, button {
+.unframer body, .unframer input, .unframer textarea, .unframer select, .unframer button {
     font-size: 12px;
     font-family: sans-serif;
 }
