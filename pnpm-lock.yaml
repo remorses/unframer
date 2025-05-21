@@ -199,8 +199,8 @@ importers:
         specifier: npm:framer-motion@12.0.6
         version: framer-motion@12.0.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       spiceflow:
-        specifier: ^1.6.1
-        version: 1.6.1(@modelcontextprotocol/sdk@1.0.4)
+        specifier: ^1.9.1
+        version: 1.9.1(@modelcontextprotocol/sdk@1.0.4)
       string-dedent:
         specifier: ^3.0.1
         version: 3.0.1
@@ -2510,9 +2510,6 @@ packages:
   '@shikijs/vscode-textmate@10.0.1':
     resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
 
-  '@sinclair/typebox@0.34.16':
-    resolution: {integrity: sha512-rIljj8VPYAfn26ANY+5pCNVBPiv6hSufuKGe46y65cJZpvx8vHvPXlU0Q/Le4OGtlNaL8Jg2FuhtvQX18lSIqA==}
-
   '@sindresorhus/is@4.6.0':
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
     engines: {node: '>=10'}
@@ -2819,14 +2816,6 @@ packages:
 
   ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
-    peerDependenciesMeta:
-      ajv:
-        optional: true
-
-  ajv-formats@3.0.1:
-    resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
     peerDependencies:
       ajv: ^8.0.0
     peerDependenciesMeta:
@@ -4414,6 +4403,9 @@ packages:
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
 
+  lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
@@ -5817,8 +5809,8 @@ packages:
   spdx-license-ids@3.0.20:
     resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
 
-  spiceflow@1.6.1:
-    resolution: {integrity: sha512-PBJ4QC/RjBIoNKVBALDAQZkTF7KG94xV7rmSil9HXi0kXh4k+akaI7pFG15pTMPfX7EZPQRo/3kml9tSEeJ9gw==}
+  spiceflow@1.9.1:
+    resolution: {integrity: sha512-tI2k0ux2wtV8RrUGBobbHOtTFRWur6a4TNpxSGOtPjciwcy98NOtFFKxfY5I1QD60yYsCW9pJfifNAEK6v1/vA==}
     peerDependencies:
       '@modelcontextprotocol/sdk': ^1.0.4
     peerDependenciesMeta:
@@ -8956,8 +8948,6 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.1': {}
 
-  '@sinclair/typebox@0.34.16': {}
-
   '@sindresorhus/is@4.6.0': {}
 
   '@spotlightjs/overlay@2.4.0':
@@ -9386,10 +9376,6 @@ snapshots:
       indent-string: 4.0.0
 
   ajv-formats@2.1.1(ajv@8.17.1):
-    optionalDependencies:
-      ajv: 8.17.1
-
-  ajv-formats@3.0.1(ajv@8.17.1):
     optionalDependencies:
       ajv: 8.17.1
 
@@ -11233,6 +11219,8 @@ snapshots:
       p-locate: 6.0.0
 
   lodash.camelcase@4.3.0: {}
+
+  lodash.clonedeep@4.5.0: {}
 
   lodash.debounce@4.0.8: {}
 
@@ -13135,13 +13123,11 @@ snapshots:
 
   spdx-license-ids@3.0.20: {}
 
-  spiceflow@1.6.1(@modelcontextprotocol/sdk@1.0.4):
+  spiceflow@1.9.1(@modelcontextprotocol/sdk@1.0.4):
     dependencies:
       '@medley/router': 0.2.1
-      '@sinclair/typebox': 0.34.16
-      ajv: 8.17.1
-      ajv-formats: 3.0.1(ajv@8.17.1)
       eventsource-parser: 3.0.0
+      lodash.clonedeep: 4.5.0
       openapi-types: 12.1.3
       superjson: 2.2.2
       zod: 3.24.1
