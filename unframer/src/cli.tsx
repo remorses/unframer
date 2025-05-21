@@ -59,7 +59,6 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     url:
                         process.env.UNFRAMER_SERVER_URL ||
                         'https://unframer.co',
-                    
                 })
 
                 spinner.start(`Fetching config for project ${projectId}`)
@@ -81,6 +80,18 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 }
                 let cwd = path.resolve(process.cwd(), outDir || 'framer')
                 logger.log('bundling', cwd)
+                const indexPage = data?.framerWebPages?.find(
+                    (x) => x.path === '/',
+                )
+                const componentInstancesInIndexPage =
+                    data.componentInstances
+                        ?.filter((x) => x.webPageId === indexPage?.webPageId)
+                        .map((x) => {
+                            return { ...x }
+                        })
+                        .sort((a, b) => {
+                            return a.pageOrdering - b.pageOrdering
+                        }) || []
                 const { rebuild, buildContext } = await bundle({
                     config: {
                         outDir,
@@ -115,6 +126,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                                 })
                                 .filter(isTruthy) || [],
                         tokens: data.colorStyles,
+                        componentInstancesInIndexPage,
                         framerWebPages: data.framerWebPages || [],
                     },
                     watch,
@@ -264,4 +276,14 @@ export type Config = {
     breakpoints?: BreakpointSizes
     tokens?: StyleToken[]
     outDir?: string
+    componentInstancesInIndexPage: ComponentInstanceInPage[]
 }
+
+type ComponentInstanceInPage = {
+        pageOrdering: number
+        componentId: string
+        controls: Record<string, any>
+        nodeDepth: number
+        // pagePath: string
+        webPageId: string
+    }

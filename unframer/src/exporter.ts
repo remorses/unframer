@@ -575,12 +575,7 @@ export async function bundle({
     {/* use .Responsive for components with breakpoints */}
     <${exampleComponent?.componentName}.Responsive${propStr} />
     `
-    const nonResponsiveComponent = dedent`
-    <${exampleComponent?.componentName}
-        ${prop}='example'
-        style={{ width: '100%' }}
-    />
-    `
+
     const exampleCode = dedent`
     import './${outDirForExample}/styles.css'
     // this file imported below is generated when you run \`npm run framer\`
@@ -591,10 +586,7 @@ export async function bundle({
     export default function App() {
         return (
             <div className='flex flex-col'>
-                ${responsiveComponent
-                    .split('\n')
-                    .map((line, i) => (!i ? line : '            ' + line))
-                    .join('\n')}
+                ${indentWithTabs(responsiveComponent, '            ')}
             </div>
         );
     };
@@ -1283,7 +1275,6 @@ function findExampleProperty(propertyControls?: PropertyControls) {
     return propCamelCaseJustLikeFramer(stringProp[1]?.title || '')
 }
 
-
 // these styles are global styles injected by Framer in the generated websites, without them things like icons can look weird
 const resetCssStyles = `
 
@@ -1320,4 +1311,11 @@ async function recursiveReaddir(dir: string): Promise<string[]> {
         }),
     )
     return files.flat()
+}
+
+function indentWithTabs(str: string, tabs: string) {
+    return str
+        .split('\n')
+        .map((line, i) => (!i ? line : tabs + line))
+        .join('\n')
 }
