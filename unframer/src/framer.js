@@ -11104,7 +11104,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.ZDVTUSJ2.mjs
+// /:https://app.framerstatic.com/framer.LGZ4Y5MK.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -48208,6 +48208,7 @@ var Vector = /* @__PURE__ */ (() => {
       const {
         opacity,
         calculatedPath,
+        calculatedPathBoundingBox,
         d,
         insideStroke,
         strokeEnabled,
@@ -48327,7 +48328,18 @@ var Vector = /* @__PURE__ */ (() => {
       }
       const internalShapeId = InternalID.forKey(id3,);
       const internalStrokeClipId = InternalID.forKey(strokeClipId,);
-      const shadow = shadowForShape(shadows, rect, internalShapeId, strokeAlpha, strokeWidth, internalStrokeClipId, svgStrokeAttributes,);
+      const shadow = shadowForShape(
+        shadows,
+        // Shadow filter uses 'objectBoundingBox' as filter units, so calculations should be
+        // relative to the referenced object itself (path), instead of the node rect, which
+        // can be larger than the path bounding box.
+        calculatedPathBoundingBox,
+        internalShapeId,
+        strokeAlpha,
+        strokeWidth,
+        internalStrokeClipId,
+        svgStrokeAttributes,
+      );
       const currentName = target === RenderTarget.preview ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
@@ -48475,6 +48487,12 @@ var Vector = /* @__PURE__ */ (() => {
       rotate: void 0,
       opacity: void 0,
       calculatedPath: [],
+      calculatedPathBoundingBox: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      },
       d: void 0,
       insideStroke: false,
       strokeEnabled: true,
