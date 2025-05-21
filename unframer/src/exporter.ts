@@ -1301,8 +1301,13 @@ const resetCssStyles = `
     margin: 0;
 }
 
+.unframer {
+    line-height: normal;
+}
+
 .unframer, .unframer input, .unframer textarea, .unframer select, .unframer button {
     font-size: 12px;
+    
     font-family: sans-serif;
 }
 `
