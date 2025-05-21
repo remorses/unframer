@@ -1,5 +1,11 @@
 # unframer
 
+## 2.25.3
+
+### Patch Changes
+
+- 7980bbf: fix unframer reset css
+
 ## 2.25.2
 
 ### Patch Changes
