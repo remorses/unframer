@@ -11104,7 +11104,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.LGZ4Y5MK.mjs
+// /:https://app.framerstatic.com/framer.7RIGOQQA.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13908,20 +13908,6 @@ function TurnOnReactEventHandling() {
     performance.mark('framer-react-event-handling-end',);
   }, [],);
   return null;
-}
-var hydrationRunning = false;
-function setInitialHydrationState() {
-  hydrationRunning = true;
-}
-function setHydrationDone() {
-  hydrationRunning = false;
-}
-function useIsHydrationOrSSR() {
-  const isHydrationOrSSR = useRef3(!isWindow || hydrationRunning,);
-  useEffect(() => {
-    isHydrationOrSSR.current = false;
-  }, [],);
-  return isHydrationOrSSR;
 }
 function onlyRunOnce(originalMethod,) {
   let hasRun = false;
@@ -31390,17 +31376,15 @@ function propsForBreakpoint(variant, props, overrides,) {
     ...overrides[variant],
   };
 }
-var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides({
-  breakpoint,
-  overrides,
-  children,
-  ...props
-}, ref,) {
+var noopSubscribe = () => () => {};
+var returnTrue = () => true;
+var returnFalse = () => false;
+var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides(props, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
   const ancestorCtx = React4.useContext(SSRParentVariantsContext,);
-  const isHydrationOrSSR = useIsHydrationOrSSR();
+  const isHydrationOrSSR = React4.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
   const action = useConstant2(() => {
-    if (isHydrationOrSSR.current) {
+    if (isHydrationOrSSR) {
       if (isBrowser2()) {
         return 1;
       } else {
@@ -31411,50 +31395,58 @@ var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function Pro
     }
   },);
   const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
-  if (!generatedComponentContext) {
-    console.warn('PropertyOverrides is missing GeneratedComponentContext',);
-    return cloneWithRefs(children, props,);
-  }
-  const {
-    primaryVariantId,
-    variantClassNames,
-  } = generatedComponentContext;
-  const parentVariants = (ancestorCtx == null ? void 0 : ancestorCtx.primaryVariantId) === primaryVariantId
-    ? ancestorCtx == null ? void 0 : ancestorCtx.variants
-    : void 0;
-  switch (action) {
-    case 0:
-      return cloneWithRefs(children, propsForBreakpoint(breakpoint, props, overrides,),);
-    case 1:
-      return renderBranchedChildrenFromPropertyOverrides(
-        overrides,
-        children,
-        props,
-        variantClassNames,
-        primaryVariantId,
-        parentVariants,
-        cloneWithRefs,
-        breakpoint,
-        // only render the single, active branch
-      );
-    case 2:
-      return renderBranchedChildrenFromPropertyOverrides(
-        overrides,
-        children,
-        props,
-        variantClassNames,
-        primaryVariantId,
-        parentVariants,
-        // On the server, we use plain cloneChildrenWithProps instead of useCloneChildrenWithPropsAndRef,
-        // because we can't clone one ref to multiple branched-out elements (useCloneChildrenWithPropsAndRef
-        // even guards against it), but luckily, refs mean nothing on the server anyway.
-        cloneChildrenWithProps,
-        void 0,
-        // render all branches
-      );
-    default:
-      assertNever(action,);
-  }
+  return useMemo2(() => {
+    const {
+      breakpoint,
+      overrides,
+      children,
+      ...restProps
+    } = props;
+    if (!generatedComponentContext) {
+      console.warn('PropertyOverrides is missing GeneratedComponentContext',);
+      return cloneWithRefs(children, restProps,);
+    }
+    const {
+      primaryVariantId,
+      variantClassNames,
+    } = generatedComponentContext;
+    const parentVariants = (ancestorCtx == null ? void 0 : ancestorCtx.primaryVariantId) === primaryVariantId
+      ? ancestorCtx == null ? void 0 : ancestorCtx.variants
+      : void 0;
+    switch (action) {
+      case 0:
+        return cloneWithRefs(children, propsForBreakpoint(breakpoint, restProps, overrides,),);
+      case 1:
+        return renderBranchedChildrenFromPropertyOverrides(
+          overrides,
+          children,
+          restProps,
+          variantClassNames,
+          primaryVariantId,
+          parentVariants,
+          cloneWithRefs,
+          breakpoint,
+          // only render the single, active branch
+        );
+      case 2:
+        return renderBranchedChildrenFromPropertyOverrides(
+          overrides,
+          children,
+          restProps,
+          variantClassNames,
+          primaryVariantId,
+          parentVariants,
+          // On the server, we use plain cloneChildrenWithProps instead of useCloneChildrenWithPropsAndRef,
+          // because we can't clone one ref to multiple branched-out elements (useCloneChildrenWithPropsAndRef
+          // even guards against it), but luckily, refs mean nothing on the server anyway.
+          cloneChildrenWithProps,
+          void 0,
+          // render all branches
+        );
+      default:
+        assertNever(action,);
+    }
+  }, [generatedComponentContext, ancestorCtx, cloneWithRefs, props,],);
 },);
 var PropertyOverrides2 =
   /* @__PURE__ */ (() => withCSS(PropertyOverridesWithoutCSS, `.${SSRVariantClassName} { display: contents }`, 'PropertyOverrides',))();
@@ -35582,7 +35574,6 @@ function useNavigationTransition() {
   const navigationController = useRef3(void 0,);
   return useCallback(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
     var _a, _b;
-    setHydrationDone();
     const hasUpdateURL = updateURL !== void 0;
     (_a = navigationController.current) == null ? void 0 : _a.abort();
     const controller = isAbortable ? new AbortController() : void 0;
@@ -46884,16 +46875,33 @@ var SharedSVGManager = class {
    *
    * VECTOR @TODO - Unsubscribe from vector set items.
    */
-  template(id3, svg,) {
-    const entry = this.vectorSetItems.get(id3,);
-    if (entry) return `#${entry.id}`;
-    this.vectorSetItems.set(id3, {
-      id: id3,
+  template(revision, svg,) {
+    const entry = this.vectorSetItems.get(revision,);
+    if (entry) return `#${revision}`;
+    this.vectorSetItems.set(revision, {
       svg,
+      count: 0,
     },);
-    if (!useDOM) return `#${id3}`;
-    this.maybeAppendTemplate(id3, svg,);
-    return `#${id3}`;
+    if (!useDOM) return `#${revision}`;
+    this.maybeAppendTemplate(revision, svg,);
+    return `#${revision}`;
+  }
+  subscribeToTemplate(revision,) {
+    const entry = this.vectorSetItems.get(revision,);
+    if (!entry) return;
+    entry.count++;
+    return () => {
+      const latest = this.vectorSetItems.get(revision,);
+      if (!latest) return;
+      latest.count--;
+      if (latest.count > 0) return;
+      setTimeout(() => {
+        var _a, _b;
+        if ((_a = this.vectorSetItems.get(revision,)) == null ? void 0 : _a.count) return;
+        this.vectorSetItems.delete(revision,);
+        if (useDOM) (_b = document == null ? void 0 : document.getElementById(revision,)) == null ? void 0 : _b.remove();
+      }, 5e3,);
+    };
   }
   clear() {
     this.entries.clear();
@@ -46909,6 +46917,10 @@ var SharedSVGManager = class {
     return output.join('\n',);
   }
 };
+function useSVGTemplate(revision, svg,) {
+  useEffect(() => sharedSVGManager.subscribeToTemplate(revision,), [revision,],);
+  return sharedSVGManager.template(revision, svg,);
+}
 var sharedSVGManager = /* @__PURE__ */ new SharedSVGManager();
 function parseSVG(svg,) {
   try {
@@ -49351,7 +49363,6 @@ export {
   secondsToMilliseconds,
   setDragLock,
   setGlobalRenderEnvironment,
-  setInitialHydrationState,
   setStyle,
   Shadow,
   sharedSVGManager,
@@ -49473,6 +49484,7 @@ export {
   useScroll,
   useSiteRefs,
   useSpring,
+  useSVGTemplate,
   useTime,
   useTransform,
   useUnmountEffect,
