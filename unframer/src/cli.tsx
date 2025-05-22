@@ -53,84 +53,15 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             const signal = controller.signal
             const watch = options.watch
             if (projectId) {
-                logger.log(`Fetching config for project ${projectId}`)
-
-                const client = await createClient({
-                    url:
-                        process.env.UNFRAMER_SERVER_URL ||
-                        'https://unframer.co',
+                const { config, cwd, websiteUrl } = await configFromFetch({
+                    allExternal,
+                    externalPackages,
+                    outDir,
+                    projectId,
                 })
-
-                spinner.start(`Fetching config for project ${projectId}`)
-                const { data, error } =
-                    await client.api.plugins.reactExportPlugin
-                        .project({ projectId })
-                        .get()
-                if (error) {
-                    spinner.error('Error fetching project data:')
-                    console.error(error)
-                    throw error
-                }
-                spinner.info(`Got Framer project data`)
-                const websiteUrl = data?.project?.websiteUrl
-
-                const projectName = data?.project?.projectName || ''
-                if (projectName) {
-                    spinner.info(`Using project: ${projectName}`)
-                }
-                let cwd = path.resolve(process.cwd(), outDir || 'framer')
-                logger.log('bundling', cwd)
-                const indexPage = data?.framerWebPages?.find(
-                    (x) => x.path === '/',
-                )
-                const componentInstancesInIndexPage =
-                    data.componentInstances
-                        ?.filter((x) => x.webPageId === indexPage?.webPageId)
-                        .map((x) => {
-                            return { ...x }
-                        })
-                        .sort((a, b) => {
-                            return a.pageOrdering - b.pageOrdering
-                        }) || []
                 const { rebuild, buildContext } = await bundle({
-                    config: {
-                        outDir,
-                        externalPackages,
-                        allExternal,
-                        projectId: data?.project?.projectId,
-                        projectName,
-                        fullFramerProjectId:
-                            data?.project?.fullFramerProjectId!,
-                        locales: data?.locales,
-                        components: Object.fromEntries(
-                            data.components.map((c) => [
-                                componentNameToPath(c.name),
-                                c.url,
-                            ]),
-                        ),
-                        componentBreakpoints:
-                            data.breakpoints
-                                ?.map((b) => {
-                                    const c = data.components.find(
-                                        (c) => c.id === b.componentId,
-                                    )
-                                    if (!c) {
-                                        return
-                                    }
-                                    return {
-                                        ...b,
-                                        componentName: componentNameToPath(
-                                            c.name,
-                                        ),
-                                    }
-                                })
-                                .filter(isTruthy) || [],
-                        tokens: data.colorStyles,
-                        componentInstancesInIndexPage,
-                        framerWebPages: data.framerWebPages || [],
-                    },
+                    config,
                     watch,
-
                     cwd,
                     signal,
                 })
@@ -280,10 +211,103 @@ export type Config = {
 }
 
 type ComponentInstanceInPage = {
-        pageOrdering: number
-        componentId: string
-        controls: Record<string, any>
-        nodeDepth: number
-        // pagePath: string
-        webPageId: string
+    pageOrdering: number
+    componentId: string
+    componentPathSlug: string
+    controls: Record<string, any>
+    nodeDepth: number
+    // pagePath: string
+    webPageId: string
+}
+
+export async function configFromFetch({
+    projectId,
+    externalPackages = [] as string[],
+    allExternal = false,
+    outDir = undefined as undefined | string,
+}) {
+    logger.log(`Fetching config for project ${projectId}`)
+
+    const url = process.env.UNFRAMER_SERVER_URL
+    if (url) {
+      console.log(`using server url ${url}`)
     }
+    const client = await createClient({
+        url: url || 'https://unframer.co',
+    })
+
+    spinner.start(`Fetching config for project ${projectId}`)
+    const { data, error } = await client.api.plugins.reactExportPlugin
+        .project({ projectId })
+        .get()
+    if (error) {
+        spinner.error('Error fetching project data:')
+        console.error(error)
+        throw error
+    }
+    spinner.info(`Got Framer project data`)
+    const websiteUrl = data?.project?.websiteUrl
+
+    const projectName = data?.project?.projectName || ''
+    if (projectName) {
+        spinner.info(`Using project: ${projectName}`)
+    }
+    let cwd = path.resolve(process.cwd(), outDir || 'framer')
+    logger.log('bundling', cwd)
+    const indexPage = data?.framerWebPages?.find((x) => x.path === '/')
+    const componentInstancesInIndexPage =
+        data.componentInstances
+            ?.filter((x) => x.webPageId === indexPage?.webPageId)
+            .map((x) => {
+                const component = data.components.find((c) => {
+                    return x.componentId === c.id
+                })
+                if (!component) {
+                    console.error(
+                        new Error(
+                            `cannot find component for instance ${x.componentId}`,
+                        ),
+                    )
+                }
+                const componentPathSlug = componentNameToPath(
+                    component?.name || '',
+                )
+                const res: ComponentInstanceInPage = { ...x, componentPathSlug }
+                return res
+            })
+            .sort((a, b) => {
+                return a.pageOrdering - b.pageOrdering
+            }) || []
+    const config: Config = {
+        outDir,
+        externalPackages,
+        allExternal,
+        projectId: data?.project?.projectId,
+        projectName,
+        fullFramerProjectId: data?.project?.fullFramerProjectId!,
+        locales: data?.locales,
+
+        components: Object.fromEntries(
+            data.components.map((c) => [componentNameToPath(c.name), c.url]),
+        ),
+        componentBreakpoints:
+            data.breakpoints
+                ?.map((b) => {
+                    const c = data.components.find(
+                        (c) => c.id === b.componentId,
+                    )
+                    if (!c) {
+                        return
+                    }
+                    return {
+                        ...b,
+                        componentName: componentNameToPath(c.name),
+                    }
+                })
+                .filter(isTruthy) || [],
+        tokens: data.colorStyles,
+        componentInstancesInIndexPage,
+        framerWebPages: data.framerWebPages || [],
+    }
+    return { websiteUrl, cwd, config }
+}

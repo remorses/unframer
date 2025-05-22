@@ -480,14 +480,14 @@ export async function bundle({
                 'utf-8',
             )
         }
-        const res = {
+        const res: BundleResult = {
             components: Object.entries(components).map(([name, v]) => {
                 const propControls = propControlsData.find(
                     (x) => x?.name === name,
                 )
 
                 return {
-                    path: name,
+                    componentPathSlug: name,
                     url: v,
                     name,
                     componentName: componentCamelCase(name),
@@ -523,75 +523,14 @@ export async function bundle({
     const result = await rebuild()
     console.log()
     console.log()
-
-    let exampleComponent = result?.components?.sort((a, b) => {
-        const aVariants = getVariantsFromPropControls(a.propertyControls)
-        const bVariants = getVariantsFromPropControls(b.propertyControls)
-        const aHasBreakpoints = (aVariants?.breakpoints?.length || 0) >= 2
-        const bHasBreakpoints = (bVariants?.breakpoints?.length || 0) >= 2
-
-        // Sort components with breakpoints first
-        if (aHasBreakpoints && !bHasBreakpoints) return -1
-        if (!aHasBreakpoints && bHasBreakpoints) return 1
-
-        // Within each group, prefer components with example properties
-        const aProp = findExampleProperty(a.propertyControls)
-        const bProp = findExampleProperty(b.propertyControls)
-        return (bProp ? 1 : 0) - (aProp ? 1 : 0)
-    })?.[0]
-    if (!exampleComponent) {
-        logger.log(
-            `No example component found with breakpoints, using random example`,
-        )
-        // Create an example component if none found with breakpoints
-        exampleComponent = {
-            path: 'hero',
-            componentName: 'HeroFramerComponent',
-            propertyControls: {
-                variant: {
-                    type: ControlType.Enum,
-                    options: ['Desktop', 'Tablet', 'Mobile'],
-                    optionTitles: ['Desktop', 'Tablet', 'Mobile'],
-                },
-            } as any,
-            name: 'Hero',
-            url: '',
-        }
-        if (!exampleComponent) {
-            return { rebuild, buildContext }
-        }
-    }
-
     const outDirForExample = path.posix
         .relative(process.cwd(), out)
         .replace(/^src\//, '') // remove src so file works inside src
-    logger.log(
-        'exampleComponent?.propertyControls',
-        exampleComponent?.propertyControls,
-    )
-    const prop = findExampleProperty(exampleComponent?.propertyControls)
-    const propStr = prop ? ` ${prop}='example'` : ''
-    const responsiveComponent = dedent`
-    {/* use .Responsive for components with breakpoints */}
-    <${exampleComponent?.componentName}.Responsive${propStr} />
-    `
-
-    const exampleCode = dedent`
-    import './${outDirForExample}/styles.css'
-    // this file imported below is generated when you run \`npm run framer\`
-    import ${exampleComponent?.componentName} from './${outDirForExample}/${
-        exampleComponent?.path
-    }'
-
-    export default function App() {
-        return (
-            <div className='flex flex-col'>
-                ${indentWithTabs(responsiveComponent, '            ')}
-            </div>
-        );
-    };
-    `
-
+    const { exampleCode } = await createExampleComponentCode({
+        outDir: out,
+        // buildResult: result,
+        config,
+    })
     if (stackblitzDemoExample) {
         logger.log(`Inside Stackblitz demo, writing App.tsx`)
         await fs.promises.mkdir(path.dirname(stackblitzDemoExample), {
@@ -1318,4 +1257,74 @@ function indentWithTabs(str: string, tabs: string) {
         .split('\n')
         .map((line, i) => (!i ? line : tabs + line))
         .join('\n')
+}
+
+export async function createExampleComponentCode({
+    outDir,
+
+    config,
+}: {
+    outDir: string
+
+    config: Config
+}) {
+    const outDirForExample = path.posix
+        .relative(process.cwd(), outDir)
+        .replace(/^src\//, '') // remove src so file works inside src
+    const instances = config?.componentInstancesInIndexPage.sort((a, b) => {
+        // Order first by nodeDepth (lower is better)
+        return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
+    })
+    console.log(instances)
+    const imports = instances.map((exampleComponent) => {
+        return `import ${componentCamelCase(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
+            exampleComponent?.componentPathSlug
+        }'`
+    })
+
+    const jsx = instances.map((exampleComponent) => {
+        let propStr = ''
+        for (let [attrKey, value] of Object.entries(
+            exampleComponent.controls || {},
+        )) {
+            if (attrKey === 'variant') {
+                continue
+            }
+            // TODO get property controls to render enums much better? maybe do this in plugin instead
+            propStr += '\n'
+            propStr += `    ${attrKey}={${JSON.stringify(value)}}`
+        }
+        if (propStr) propStr += '\n'
+        const responsiveComponent = dedent`
+        <${componentCamelCase(exampleComponent?.componentPathSlug)}.Responsive${propStr}/>
+        `
+        return responsiveComponent
+    })
+
+    const exampleCode = dedent`
+      import './${outDirForExample}/styles.css'
+
+      ${indentWithTabs(imports.join('\n'), '')}
+
+      export default function App() {
+          return (
+              <div className='flex flex-col'>
+                  ${indentWithTabs(jsx.join('\n'), '            ')}
+              </div>
+          );
+      };
+      `
+    return {
+        exampleCode,
+    }
+}
+
+type BundleResult = {
+    components: Array<{
+        componentPathSlug: string
+        name: string
+        url: string
+        componentName: string
+        propertyControls?: PropertyControls
+    }>
 }
