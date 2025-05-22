@@ -1284,15 +1284,18 @@ export async function createExampleComponentCode({
 
     const jsx = instances.map((exampleComponent) => {
         let propStr = ''
-        for (let [attrKey, value] of Object.entries(
+        for (let [key, value] of Object.entries(
             exampleComponent.controls || {},
         )) {
-            if (attrKey === 'variant') {
+            if (key === 'variant') {
+                continue
+            }
+            if (typeof value === 'object') {
                 continue
             }
             // TODO get property controls to render enums much better? maybe do this in plugin instead
             propStr += '\n'
-            propStr += `    ${attrKey}={${JSON.stringify(value)}}`
+            propStr += `    ${key}={${JSON.stringify(value)}}`
         }
         if (propStr) propStr += '\n'
         const responsiveComponent = dedent`

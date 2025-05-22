@@ -5,7 +5,7 @@ import { Config, configFromFetch } from './cli.js'
 
 describe('createExampleComponentCode', () => {
     test('should create example component code', async () => {
-        const projectId = '620e74c088cdcb26'
+        const projectId = 'cf755ed7d59e0319'
 
         const { config } = await configFromFetch({ projectId })
         const { exampleCode } = await createExampleComponentCode({
@@ -16,25 +16,54 @@ describe('createExampleComponentCode', () => {
           "import './src/styles.css'
 
           import NavigationFramerComponent from './src/navigation'
-          import TopContentFramerComponent from './src/top-content'
+          import HeroFramerComponent from './src/hero'
+          import PricingBannerFramerComponent from './src/pricing-banner'
           import FooterFramerComponent from './src/footer'
-          import TestimonialsFramerComponent from './src/testimonials'
-          import LogosFramerComponent from './src/logos'
-          import TabsContentFramerComponent from './src/tabs-content'
+          import FeatureListFramerComponent from './src/feature-list'
+          import ServiceSliderFramerComponent from './src/service-slider'
+          import SectionTitleFramerComponent from './src/section-title'
+          import ButtonFramerComponent from './src/button'
+          import BrandLogoFramerComponent from './src/brand-logo'
+          import TestmonialItemFramerComponent from './src/testmonial-item'
+          import ArticlesCardFramerComponent from './src/articles-card'
 
           export default function App() {
               return (
                   <div className='flex flex-col'>
-                      <NavigationFramerComponent.Responsive/>
-                      <TopContentFramerComponent.Responsive/>
+                      <NavigationFramerComponent.Responsive
+                          ctaVariant={"ia7uVki50"}
+                      />
+                      <HeroFramerComponent.Responsive/>
+                      <PricingBannerFramerComponent.Responsive/>
                       <FooterFramerComponent.Responsive
                           year={"2024"}
                       />
-                      <TestimonialsFramerComponent.Responsive/>
-                      <LogosFramerComponent.Responsive
-                          invert={0}
+                      <FeatureListFramerComponent.Responsive/>
+                      <ServiceSliderFramerComponent.Responsive/>
+                      <SectionTitleFramerComponent.Responsive
+                          text={"We are pioneers in harnessing the power of Blockchain and Web3 technologies to drive innovation, security, and decentralization."}
+                          title={"Smart Automation"}
+                          tagline={"Systems and Building Web3"}
+                          iconVisible={true}
+                          textVisible={true}
                       />
-                      <TabsContentFramerComponent.Responsive/>
+                      <ButtonFramerComponent.Responsive
+                          link={"/news"}
+                          buttonTitle={"Read all blog"}
+                          iconVisibility={true}
+                      />
+                      <BrandLogoFramerComponent.Responsive/>
+                      <TestmonialItemFramerComponent.Responsive
+                          name1={"Wade Warren"}
+                          paragraph={"Security is non-negotiable in the decentralized world, and we take this aspect very seriously. Our solutions are built with a robust emphasis on security, utilizing advanced cryptographic"}
+                          designation={"Flutter Developer"}
+                      />
+                      <ArticlesCardFramerComponent.Responsive
+                          date={"Mar 06, 2024 "}
+                          link={"/news/:slug"}
+                          title={"Discoveries from Our Thinkers"}
+                          excerpt={"Experience seamless integration with decentralized applications (DApps)."}
+                      />
                   </div>
               );
           };"
