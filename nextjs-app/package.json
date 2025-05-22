@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "@motionone/dom": "^10.18.0",
-        "@types/node": "22.13.4",
+        "@types/node": "22.15.21",
         "@types/react": "19.0.10",
         "@types/react-dom": "19.0.4",
         "autoprefixer": "10.4.20",
