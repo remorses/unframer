@@ -11104,7 +11104,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.7RIGOQQA.mjs
+// /:https://app.framerstatic.com/framer.4LIH3HZD.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12816,6 +12816,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
     hasMatch = true;
   }
   if (hasMatch) {
+    replacedPath += resultPath.substring(lastIndex,);
     resultPath = replacedPath;
   }
   return {
@@ -24308,6 +24309,24 @@ function MagicMotionCrossfadeRoot(props,) {
     children: props.children,
   },);
 }
+function useMemoOne(factory, inputs,) {
+  const initial = useState(() => ({
+    inputs,
+    result: factory(),
+  }))[0];
+  const isFirstRun = useRef3(true,);
+  const committed = useRef3(initial,);
+  const useCache = isFirstRun.current || Boolean(inputs && committed.current.inputs && isEqual(inputs, committed.current.inputs, false,),);
+  const cache2 = useCache ? committed.current : {
+    inputs,
+    result: factory(),
+  };
+  useEffect(() => {
+    isFirstRun.current = false;
+    committed.current = cache2;
+  }, [cache2,],);
+  return cache2.result;
+}
 function setRef(ref, value,) {
   if (isFunction(ref,)) {
     ref(value,);
@@ -24373,7 +24392,7 @@ function useRefEffect(ref, effect, deps,) {
   var _a;
   const effectRef = useRef3();
   const depsChangedRef = useRef3();
-  useMemo2(() => {
+  useMemoOne(() => {
     if (depsChangedRef.current !== void 0) depsChangedRef.current = true;
   }, deps ?? [{},],);
   if (!ref) return;
@@ -31395,7 +31414,7 @@ var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function Pro
     }
   },);
   const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
-  return useMemo2(() => {
+  return useMemoOne(() => {
     const {
       breakpoint,
       overrides,
