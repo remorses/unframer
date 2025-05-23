@@ -55,7 +55,7 @@
         "@sentry/node": "^9.22.0",
         "async-sema": "^3.1.1",
         "cac": "^6.7.14",
-        "esbuild": "^0.25.3",
+        "esbuild": "^0.25.4",
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
         "find-up": "^7.0.0",
         "json5": "^2.2.3",
