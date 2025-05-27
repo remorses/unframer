@@ -11104,7 +11104,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4LIH3HZD.mjs
+// /:https://app.framerstatic.com/framer.7ISJZ3TZ.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14430,16 +14430,6 @@ function getVariantsFromServerTiming() {
   }
   return new URLSearchParams();
 }
-var cookieValueRegex = /[^|; ]?framerAbTestingOverrides=(?<value>[^;]*)[;|$]?/u;
-function getVariantsFromCookie() {
-  var _a;
-  let value = '';
-  try {
-    const matches = cookieValueRegex.exec(document.cookie,);
-    value = ((_a = matches == null ? void 0 : matches.groups) == null ? void 0 : _a.value) ?? '';
-  } catch {}
-  return new URLSearchParams(value,);
-}
 function patchRoute(routes, abTestId, abTestingVariantId,) {
   const route = routes[abTestingVariantId];
   if (!route) return;
@@ -14508,7 +14498,6 @@ function patchRoutesForABTesting(routes, initialRouteId,) {
     }
   }
   patchRoutesFromSearchParams(routes, getVariantsFromServerTiming(),);
-  patchRoutesFromSearchParams(routes, getVariantsFromCookie(),);
   removeRoutesVariants(routes,);
   return resolvedInitialRouteId;
 }
@@ -14821,6 +14810,27 @@ function Point(x, y,) {
   }
   Point2.sortClockwise = sortClockwise;
 })(Point || (Point = {}),);
+function assert(condition, ...msg) {
+  var _a, _b;
+  if (condition) return;
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (e.stack) {
+    try {
+      const lines = e.stack.split('\n',);
+      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+        lines.splice(1, 1,);
+        e.stack = lines.join('\n',);
+      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+        lines.splice(0, 1,);
+        e.stack = lines.join('\n',);
+      }
+    } catch {}
+  }
+  throw e;
+}
+function assertNever(x, error,) {
+  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
+}
 var BezierDefaults = {
   curve: 'ease',
   duration: 1,
@@ -14854,6 +14864,7 @@ var BezierAnimator = class {
       } = this.options;
       this.progress += delta / duration;
       const value = this.unitBezier.solve(this.progress, this.solveEpsilon(duration,),);
+      assert(this.interpolator !== void 0, 'setFrom() or setTo() must be called before next()',);
       this.current = this.interpolator(value,);
       return this.current;
     },);
@@ -15188,6 +15199,7 @@ var SpringAnimator = class {
   }
   next(delta,) {
     this.state = this.integrator.integrateState(this.state, delta,);
+    assert(this.interpolator !== void 0, 'setFrom() or setTo() must be called before next()',);
     const value = this.interpolator(this.progress(),);
     return value;
   }
@@ -15204,12 +15216,14 @@ var SpringAnimator = class {
     this.state.v = velocity;
   }
   progress() {
+    assert(this.difference !== void 0, 'setTo() must be called before progress()',);
     return 1 - this.state.x / this.difference;
   }
   // The spring always settles to 0, so we create an interpolation to the destination
   // And calculate the progress based on the current state and the span of the interpolation
   // This lets us integrate over state.x, even though Value is generic
   setTo(value,) {
+    assert(this.current !== void 0, 'setFrom() must be called before setTo()',);
     this.destination = value;
     this.difference = this.interpolation.difference(this.destination, this.current,);
     this.state.x = this.difference;
@@ -16169,7 +16183,7 @@ function convertP3ToRgb(color2,) {
 }
 var P3Color = class _P3Color {
   constructor(color2,) {
-    __publicField(this, 'format',);
+    __publicField(this, 'format', 'p3',);
     __publicField(this, 'r',);
     __publicField(this, 'g',);
     __publicField(this, 'b',);
@@ -16859,9 +16873,12 @@ var PrecalculatedAnimator = class {
     this.totalTime = this.values.length * delta;
   }
   indexForTime(time2,) {
+    assert(this.values !== void 0, 'values must be set before calling indexForTime()',);
+    assert(this.totalTime !== void 0, 'totalTime must be set before calling indexForTime()',);
     return Math.max(0, Math.min(this.values.length - 1, Math.round(this.values.length * (time2 / this.totalTime),) - 1,),);
   }
   valueForTime(time2,) {
+    assert(this.values !== void 0, 'values must be set before calling valueForTime()',);
     const index = this.indexForTime(time2,);
     const value = this.values[index];
     return value;
@@ -16875,6 +16892,7 @@ var PrecalculatedAnimator = class {
     this.preCalculate();
   }
   isReady() {
+    assert(this.totalTime !== void 0, 'totalTime must be set before calling isReady()',);
     return this.values !== void 0 && this.values.length > 0 && this.totalTime > 0;
   }
   next(delta,) {
@@ -16882,11 +16900,14 @@ var PrecalculatedAnimator = class {
     return this.valueForTime(this.currentTime,);
   }
   isFinished() {
+    assert(this.totalTime !== void 0, 'totalTime must be set before calling isFinished()',);
     return this.totalTime === 0 || this.currentTime >= this.totalTime;
   }
   get endValue() {
     this.preCalculate();
+    assert(this.totalTime !== void 0, 'expecting totalTime to be set after calling preCalculate()',);
     const value = this.valueForTime(this.totalTime,);
+    assert(this.values !== void 0, 'expecting values to be set after calling preCalculate()',);
     return this.values.length > 0 ? value : this.animator.next(0,);
   }
 };
@@ -17226,10 +17247,10 @@ var FramerAnimation = class _FramerAnimation {
     __publicField(this, 'onfinish',);
     __publicField(this, 'oncancel',);
     __publicField(this, 'readyPromise', Promise.resolve(),);
-    __publicField(this, 'readyResolve',);
-    __publicField(this, 'finishedPromise',);
-    __publicField(this, 'finishedResolve',);
-    __publicField(this, 'finishedReject',);
+    __publicField(this, 'readyResolve', null,);
+    __publicField(this, 'finishedPromise', Promise.resolve(),);
+    __publicField(this, 'finishedResolve', null,);
+    __publicField(this, 'finishedReject', null,);
     this.resetFinishedPromise();
     const deprecatedAnimationOptions = {
       ...DefaultDeprecatedAnimationOptions,
@@ -17539,27 +17560,6 @@ var animate2 = /* @__PURE__ */ (() => {
   };
   return animate3;
 })();
-function assert(condition, ...msg) {
-  var _a, _b;
-  if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
-  if (e.stack) {
-    try {
-      const lines = e.stack.split('\n',);
-      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
-        lines.splice(1, 1,);
-        e.stack = lines.join('\n',);
-      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
-        lines.splice(0, 1,);
-        e.stack = lines.join('\n',);
-      }
-    } catch {}
-  }
-  throw e;
-}
-function assertNever(x, error,) {
-  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
-}
 var LayoutIdContext = /* @__PURE__ */ React4.createContext({
   getLayoutId: (args) => null,
   persistLayoutIdCache: () => {},
@@ -24521,7 +24521,7 @@ function isIntersectingWithThreshold({
 var LayoutTree = class extends Component2 {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'layoutMaybeMutated',);
+    __publicField(this, 'layoutMaybeMutated', false,);
     __publicField(this, 'projectionNodes', /* @__PURE__ */ new Map(),);
     __publicField(this, 'rootProjectionNode',);
     __publicField(this, 'isExiting',);
@@ -26252,11 +26252,11 @@ function WithDragging(Component17,) {
       __publicField(this, 'isMoving', false,);
       __publicField(this, 'isAnimating', false,);
       __publicField(this, 'directionLockAxis', null,);
-      __publicField(this, 'layerStartPoint',);
-      __publicField(this, 'correctedLayerStartPoint',);
-      __publicField(this, 'previousPoint',);
+      __publicField(this, 'layerStartPoint', null,);
+      __publicField(this, 'correctedLayerStartPoint', null,);
+      __publicField(this, 'previousPoint', null,);
       __publicField(this, '_constraints', null,);
-      __publicField(this, 'animation',);
+      __publicField(this, 'animation', null,);
       __publicField(this, 'panStart', (event) => {
         if (!this.props.enabled) {
           return;
@@ -26301,6 +26301,7 @@ function WithDragging(Component17,) {
         if (!enabled) {
           return;
         }
+        assert(this.previousPoint !== null, 'previousPoint must be set in panStart()',);
         let point2 = {
           ...this.previousPoint,
         };
@@ -26320,6 +26321,7 @@ function WithDragging(Component17,) {
             this.updatedirectionLock(offset,);
             return;
           } else {
+            assert(this.layerStartPoint !== null, 'layerStartPoint must be set in panStart()',);
             if (this.directionLockAxis === 'y') {
               point2.x = this.layerStartPoint.x;
             }
@@ -26833,27 +26835,18 @@ function WithDragging(Component17,) {
       };
     }
     render() {
-      const {
-        onPanStart,
-        onPan,
-        onPanEnd,
-        onMouseWheelStart,
-        onMouseWheel,
-        onMouseWheelEnd,
-        ...attributes
-      } = this.props;
       const originalProps = {
-        ...attributes,
+        ...this.props,
       };
       Object.keys(_WithDraggingHOC2.draggingDefaultProps,).forEach((key7) => {
         delete asRecord(originalProps,)[key7];
       },);
-      originalProps.onPanStart = this.wrapHandler(this.panStart, onPanStart,);
-      originalProps.onPan = this.wrapHandler(this.pan, onPan,);
-      originalProps.onPanEnd = this.wrapHandler(this.panEnd, onPanEnd,);
-      originalProps.onMouseWheelStart = this.wrapHandler(this.mouseWheelStart, onMouseWheelStart,);
-      originalProps.onMouseWheel = this.wrapHandler(this.mouseWheel, onMouseWheel,);
-      originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, onMouseWheelEnd,);
+      originalProps.onPanStart = this.wrapHandler(this.panStart, originalProps.onPanStart,);
+      originalProps.onPan = this.wrapHandler(this.pan, originalProps.onPan,);
+      originalProps.onPanEnd = this.wrapHandler(this.panEnd, originalProps.onPanEnd,);
+      originalProps.onMouseWheelStart = this.wrapHandler(this.mouseWheelStart, originalProps.onMouseWheelStart,);
+      originalProps.onMouseWheel = this.wrapHandler(this.mouseWheel, originalProps.onMouseWheel,);
+      originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, originalProps.onMouseWheelEnd,);
       originalProps.left = this.x;
       originalProps.top = this.y;
       return /* @__PURE__ */ jsx3(DraggingContext.Provider, {
@@ -27989,6 +27982,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
           return React4.cloneElement(child, {
             parentSize: this.state.size,
             _forwardedOverrides,
+            // biome-ignore lint/suspicious/noExplicitAny: deprecated code
           },);
         } else if (_forwardedOverrides && child) {
           return React4.cloneElement(child, {
@@ -29520,7 +29514,7 @@ var GestureRecognizer = class {
   constructor() {
     __publicField(this, '_state', 2,/* Possible */
     );
-    __publicField(this, 'handler',);
+    __publicField(this, 'handler', null,);
     __publicField(this, 'preventers', [],);
   }
   get state() {
@@ -29595,7 +29589,7 @@ var GestureRecognizer = class {
 var MouseWheelGestureRecognizer = class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'startEvent',);
+    __publicField(this, 'startEvent', null,);
     __publicField(this, 'eventType', 'mousewheel',);
     __publicField(
       this,
@@ -29640,7 +29634,7 @@ var MouseWheelGestureRecognizer = class extends GestureRecognizer {
 var PanGestureRecognizer = class extends GestureRecognizer {
   constructor() {
     super(...arguments,);
-    __publicField(this, 'startEvent',);
+    __publicField(this, 'startEvent', null,);
     __publicField(this, 'eventType', 'pan',);
   }
   pointerSessionBegan(session, event,) {
