@@ -523,9 +523,9 @@ export async function bundle({
     const result = await rebuild()
     console.log()
     console.log()
-    const outDirForExample = path.posix
-        .relative(process.cwd(), out)
-        .replace(/^src\//, '') // remove src so file works inside src
+    const outDirForExample =
+        path.posix.relative(process.cwd(), out).replace(/^src\//, '') ||
+        'framer' // remove src so file works inside src
     const { exampleCode } = await createExampleComponentCode({
         outDir: out,
         // buildResult: result,
@@ -1261,11 +1261,9 @@ function indentWithTabs(str: string, tabs: string) {
 
 export async function createExampleComponentCode({
     outDir,
-
     config,
 }: {
     outDir: string
-
     config: Config
 }) {
     const outDirForExample = path.posix
@@ -1275,7 +1273,7 @@ export async function createExampleComponentCode({
         // Order first by nodeDepth (lower is better)
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
-    console.log(instances)
+
     const imports = instances.map((exampleComponent) => {
         return `import ${componentCamelCase(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
             exampleComponent?.componentPathSlug
@@ -1304,6 +1302,12 @@ export async function createExampleComponentCode({
         return responsiveComponent
     })
 
+    let containerClasses = ''
+    if (config.pageBackgroundColor) {
+        let bg = config.pageBackgroundColor?.replace(' ', '_')
+        containerClasses += `bg-[${bg}]`
+    }
+
     const exampleCode = dedent`
       import './${outDirForExample}/styles.css'
 
@@ -1311,7 +1315,7 @@ export async function createExampleComponentCode({
 
       export default function App() {
           return (
-              <div className='flex flex-col'>
+              <div className='flex flex-col ${containerClasses}'>
                   ${indentWithTabs(jsx.join('\n'), '            ')}
               </div>
           );

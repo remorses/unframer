@@ -9,7 +9,7 @@ import { cac } from 'cac'
 
 import fs from 'fs'
 import path, { basename } from 'path'
-import { BreakpointSizes } from './css.js'
+import { BreakpointSizes, defaultBreakpointSizes } from './css.js'
 import {
     componentNameToPath,
     dispatcher,
@@ -208,6 +208,8 @@ export type Config = {
     tokens?: StyleToken[]
     outDir?: string
     componentInstancesInIndexPage: ComponentInstanceInPage[]
+    pageBackgroundColor?: string
+    // [key: string]: any
 }
 
 type ComponentInstanceInPage = {
@@ -230,7 +232,7 @@ export async function configFromFetch({
 
     const url = process.env.UNFRAMER_SERVER_URL
     if (url) {
-      console.log(`using server url ${url}`)
+        console.log(`using server url ${url}`)
     }
     const client = await createClient({
         url: url || 'https://unframer.co',
@@ -253,7 +255,7 @@ export async function configFromFetch({
         spinner.info(`Using project: ${projectName}`)
     }
     let cwd = path.resolve(process.cwd(), outDir || 'framer')
-    logger.log('bundling', cwd)
+
     const indexPage = data?.framerWebPages?.find((x) => x.path === '/')
     const componentInstancesInIndexPage =
         data.componentInstances
@@ -279,6 +281,8 @@ export async function configFromFetch({
                 return a.pageOrdering - b.pageOrdering
             }) || []
     const config: Config = {
+        ...data,
+        breakpoints: defaultBreakpointSizes,
         outDir,
         externalPackages,
         allExternal,
