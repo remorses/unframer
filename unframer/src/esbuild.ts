@@ -1,8 +1,10 @@
 import { fetch } from 'undici'
+import { RateLimit, Sema } from 'async-sema'
 import { dispatcher, logger, spinner } from './utils'
 
 import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
+import { notifyError } from './sentry'
 
 export const defaultExternalPackages = [
     'react',
@@ -150,86 +152,94 @@ export function esbuildPluginBundleDependencies({
             })
 
             build.onLoad({ filter: /.*/, namespace }, async (args) => {
-                if (signal?.aborted) {
-                    throw new Error('aborted')
-                }
-                const url = args.path
+                try {
+                    if (signal?.aborted) {
+                        throw new Error('aborted')
+                    }
+                    const url = args.path
 
-                const resolved = await resolveRedirect({
-                    url,
-                    redirectCache,
-                    signal,
-                })
-                if (codeCache.has(url)) {
-                    const code = await codeCache.get(url)
+                    const resolved = await resolveRedirect({
+                        url,
+                        redirectCache,
+                        signal,
+                    })
+                    if (codeCache.has(url)) {
+                        const code = await codeCache.get(url)
+                        return {
+                            contents: code,
+                            loader: 'js',
+                        }
+                    }
+                    let loader = 'jsx' as any
+                    const promise = Promise.resolve().then(async () => {
+                        logger.log('fetching', url, 'because of', args.path)
+                        spinner.update(
+                            `Fetching ${url.replace(/https?:\/\//, '')}`,
+                        )
+
+                        const res = await fetchWithRetry(resolved, {
+                            signal,
+                            dispatcher,
+                        })
+                        if (!res.ok) {
+                            throw new Error(
+                                `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
+                            )
+                        }
+                        // console.log('type', res.headers.get('content-type'))
+                        if (
+                            res.headers
+                                .get('content-type')
+                                ?.startsWith('application/json')
+                        ) {
+                            loader = 'json'
+                            return await res.text()
+                        }
+                        let text = await res.text()
+
+                        // when it finds a line with /* webpackIgnore: true */
+                        // it also adds /* @vite-ignore */
+                        text = text.replace(
+                            /(\/\* webpackIgnore: true \*\/)/g,
+                            '$1 /* @vite-ignore */',
+                        )
+                        // if (!text.includes('import.meta.url')) {
+                        //     return text
+                        // }
+
+                        logger.log('transforming', url)
+                        const transformed = await transform(text, {
+                            define: {
+                                'import.meta.url': JSON.stringify(resolved),
+                                navigator: '__unframerNavigator',
+                            },
+                            // Fix lottie: https://github.com/airbnb/lottie-web/issues/3047
+                            banner: `var __unframerNavigator = typeof window !== 'undefined' ? navigator : undefined;`,
+                            minify: false,
+                            format: 'esm',
+                            jsx: 'transform',
+                            logLevel: 'error',
+                            loader,
+                            platform: 'browser',
+                        })
+                        // console.log('transformed', resolved)
+                        return transformed.code
+                    })
+
+                    if (loader === 'jsx') {
+                        codeCache.set(url, promise)
+                    }
+                    const code = await promise
+
                     return {
                         contents: code,
-                        loader: 'js',
-                    }
-                }
-                let loader = 'jsx' as any
-                const promise = Promise.resolve().then(async () => {
-                    logger.log('fetching', url, 'because of', args.path)
-                    spinner.update(`Fetching ${url.replace(/https?:\/\//, '')}`)
 
-                    const res = await fetchWithRetry(resolved, {
-                        signal,
-                        dispatcher,
-                    })
-                    if (!res.ok) {
-                        throw new Error(
-                            `Cannot fetch ${resolved}: ${res.status} ${res.statusText}`,
-                        )
-                    }
-                    // console.log('type', res.headers.get('content-type'))
-                    if (
-                        res.headers
-                            .get('content-type')
-                            ?.startsWith('application/json')
-                    ) {
-                        loader = 'json'
-                        return await res.text()
-                    }
-                    let text = await res.text()
-
-                    // when it finds a line with /* webpackIgnore: true */
-                    // it also adds /* @vite-ignore */
-                    text = text.replace(
-                        /(\/\* webpackIgnore: true \*\/)/g,
-                        '$1 /* @vite-ignore */',
-                    )
-                    // if (!text.includes('import.meta.url')) {
-                    //     return text
-                    // }
-
-                    logger.log('transforming', url)
-                    const transformed = await transform(text, {
-                        define: {
-                            'import.meta.url': JSON.stringify(resolved),
-                            navigator: '__unframerNavigator',
-                        },
-                        // Fix lottie: https://github.com/airbnb/lottie-web/issues/3047
-                        banner: `var __unframerNavigator = typeof window !== 'undefined' ? navigator : undefined;`,
-                        minify: false,
-                        format: 'esm',
-                        jsx: 'transform',
-                        logLevel: 'error',
                         loader,
-                        platform: 'browser',
-                    })
-                    // console.log('transformed', resolved)
-                    return transformed.code
-                })
-
-                if (loader === 'jsx') {
-                    codeCache.set(url, promise)
-                }
-                const code = await promise
-
-                return {
-                    contents: code,
-
-                    loader,
+                    }
+                } catch (e) {
+                    logger.error(e.message)
+                    notifyError(e)
+                    process.exit(1)
                 }
             })
         },
@@ -287,12 +297,20 @@ export async function recursiveResolveRedirect(
 
     return url
 }
+let semaphore = new Sema(4)
+let rateLimiter = RateLimit(12, { timeUnit: 1000 })
+
 export const fetchWithRetry = retryTwice(
-    (url: string, options?: RequestInit) => {
+    async (url: string, options?: RequestInit) => {
+        await semaphore.acquire()
+        await rateLimiter()
         const timeout = setTimeout(() => {
-            logger.error('fetch taking more than 5s', url)
-        }, 5000)
-        return fetch(url, options as any).finally(() => clearTimeout(timeout))
+            logger.error('fetch taking more than 10s', url)
+        }, 10000)
+        return await fetch(url, options as any).finally(() => {
+            clearTimeout(timeout)
+            semaphore.release()
+        })
     },
 ) as typeof fetch
 

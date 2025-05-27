@@ -3,8 +3,8 @@ const SENTRY_DSN =
 
 let sentry: typeof import('@sentry/node') | null = null
 
-export async function notifyError(error: unknown, msg?: string) {
-    console.error(msg, error)
+export async function notifyError(error: any, msg?: string) {
+    console.error(msg, error?.['stack'] || error)
 
     if (!sentry) {
         const mod = await import('@sentry/node')
