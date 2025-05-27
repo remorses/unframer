@@ -29,9 +29,9 @@ describe('createExampleComponentCode', () => {
 
           export default function App() {
               return (
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col items-center gap-3 '>
                       <NavigationFramerComponent.Responsive
-                          ctaVariant={"ia7uVki50"}
+                          ctaVariant={"Primary"}
                       />
                       <HeroFramerComponent.Responsive/>
                       <PricingBannerFramerComponent.Responsive/>
