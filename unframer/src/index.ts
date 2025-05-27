@@ -5,7 +5,7 @@ import {
 } from './react.js'
 export {
     FramerStyles,
-    UnframerBreakpoint,
+    type UnframerBreakpoint,
     WithFramerBreakpoints,
     ContextProviders,
     AdaptedLink,
