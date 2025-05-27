@@ -1,5 +1,11 @@
 # unframer
 
+## 2.25.4
+
+### Patch Changes
+
+- Include web page color in example code
+
 ## 2.25.3
 
 ### Patch Changes

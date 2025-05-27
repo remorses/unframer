@@ -1315,7 +1315,7 @@ export async function createExampleComponentCode({
 
       export default function App() {
           return (
-              <div className='flex flex-col ${containerClasses}'>
+              <div className='flex flex-col items-center gap-3 ${containerClasses}'>
                   ${indentWithTabs(jsx.join('\n'), '            ')}
               </div>
           );
