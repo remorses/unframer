@@ -1,5 +1,12 @@
 # unframer
 
+## 2.25.5
+
+### Patch Changes
+
+- 7c6a488: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- Add rate limit for fetch, fix giant projects
+
 ## 2.25.4
 
 ### Patch Changes
