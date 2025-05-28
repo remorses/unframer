@@ -11104,7 +11104,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.7ISJZ3TZ.mjs
+// /:https://app.framerstatic.com/framer.JBOEBC6F.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12273,9 +12273,9 @@ function useCurrentRouteId() {
 }
 function useOnRouteChange(cb,) {
   const currentRoute = useCurrentRoute();
-  const [lastRoute, setLastRoute,] = React4.useState(currentRoute,);
-  if (isEqual(lastRoute, currentRoute,) || !currentRoute) return;
-  setLastRoute(currentRoute,);
+  const lastRoute = React4.useRef(currentRoute,);
+  if (isEqual(lastRoute.current, currentRoute,) || !currentRoute) return;
+  lastRoute.current = currentRoute;
   cb(currentRoute,);
 }
 function useRoute(routeId,) {
@@ -12462,9 +12462,14 @@ function yieldUnlessUrgent(options,) {
 function interactionResponse(options,) {
   return new Promise((resolve) => {
     setTimeout(resolve, 100,);
-    frame.read(() => {
-      void schedulerYield(options,).then(resolve,);
-    },);
+    frame.read(
+      () => {
+        void schedulerYield(options,).then(resolve,);
+      },
+      false,
+      // In some cases, interactionResponse might be called in a rAF. This means, we should right away call `schedulerYield`, as the next paint follows immediately.
+      true,
+    );
   },);
 }
 function schedulerYield(options,) {
@@ -24439,6 +24444,21 @@ var SharedIntersectionObserver = class {
   }
 };
 var SharedIntersectionObserverContext = /* @__PURE__ */ createContext(/* @__PURE__ */ new Map(),);
+function observeElement(observers2, key7, element, root, callback, rootMargin, threshold,) {
+  let observer2 = observers2.get(key7,);
+  if (!observer2 || observer2.root !== (root == null ? void 0 : root.current)) {
+    observer2 = new SharedIntersectionObserver({
+      root: root == null ? void 0 : root.current,
+      rootMargin,
+      threshold,
+    },);
+    observers2.set(key7, observer2,);
+  }
+  observer2.observeElementWithCallback(element, callback,);
+  return () => {
+    observer2.unobserve(element,);
+  };
+}
 function _useSharedIntersectionObserver(ref, callback, options,) {
   const key7 = useConstant2(() => `${options.rootMargin}`);
   const observers2 = useContext(SharedIntersectionObserverContext,);
@@ -24451,19 +24471,7 @@ function _useSharedIntersectionObserver(ref, callback, options,) {
   useRefEffect(ref, (element) => {
     if (!enabled) return;
     if (element === null) return;
-    let observer2 = observers2.get(key7,);
-    if (!observer2 || observer2.root !== (root == null ? void 0 : root.current)) {
-      observer2 = new SharedIntersectionObserver({
-        root: root == null ? void 0 : root.current,
-        rootMargin,
-        threshold,
-      },);
-      observers2.set(key7, observer2,);
-    }
-    observer2.observeElementWithCallback(element, callback,);
-    return () => {
-      observer2 == null ? void 0 : observer2.unobserve(element,);
-    };
+    return observeElement(observers2, key7, element, root, callback, rootMargin, threshold,);
   }, [enabled, callback, root, rootMargin, threshold,],);
 }
 var useSharedIntersectionObserver = typeof IntersectionObserver === 'undefined' ? noop2 : _useSharedIntersectionObserver;
@@ -28793,7 +28801,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
     containerSizeRef.current.height = containerProps.height;
   }
   const updateOnResize = React4.useCallback(() => {
-    if (!hasFixedSize) setForceUpdateCount((v) => v + 1);
+    if (!hasFixedSize) startTransition2(() => setForceUpdateCount((v) => v + 1));
   }, [hasFixedSize,],);
   React4.useEffect(() => {
     if (RenderTarget.current() !== RenderTarget.preview) return;
@@ -31697,6 +31705,7 @@ function useLoop({
   const values = useConstant2(makeFXValues,);
   const mirrorStateRef = useRef3(false,);
   const delay2 = useDelay();
+  const animationPromiseRef = useRef3(null,);
   const animateValues = useCallback(async () => {
     if (!loop) return;
     const transition = loopTransition || void 0;
@@ -31704,7 +31713,7 @@ function useLoop({
     const to = mirror ? defaultFXValues : loop;
     const from = mirror ? loop : defaultFXValues;
     mirrorStateRef.current = !mirrorStateRef.current;
-    return Promise.all(effectValuesKeys.map((key7) => {
+    animationPromiseRef.current = Promise.all(effectValuesKeys.map((key7) => {
       if (shouldReduceMotion && key7 !== 'opacity') return;
       values[key7].set(from[key7] ?? defaultFXValues[key7],);
       return new Promise((resolve) => {
@@ -31718,6 +31727,7 @@ function useLoop({
         }
       },);
     },),);
+    return animationPromiseRef.current;
   }, [loop, loopRepeatType, loopTransition, shouldReduceMotion,],);
   const [isRunning, setIsRunning,] = useState(false,);
   const shouldRunRef = useRef3(false,);
@@ -31725,7 +31735,7 @@ function useLoop({
     if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues();
     await delay2(loopRepeatDelay ?? 0,);
-    await animateLoop();
+    void animateLoop();
   }, [animateValues, delay2, loopEffectEnabled, loopRepeatDelay,],);
   const start2 = useCallback(() => {
     if (shouldRunRef.current) return;
@@ -31772,14 +31782,23 @@ function useLoop({
   }, [start2, stop, loopPauseOffscreen, hasLoop,],);
   useEffect(() => {
     return () => stop();
-  }, [],);
+  }, [stop,],);
+  const isIntersectingRef = useRef3(false,);
+  const stopAfterAnimationEnds = useCallback(async () => {
+    if (!animationPromiseRef.current) return;
+    await animationPromiseRef.current;
+    if (isIntersectingRef.current) return;
+    stop();
+  }, [stop,],);
   const startAndStopBasedOnIntersection = useCallback((entry) => {
     if (entry.isIntersecting) {
+      isIntersectingRef.current = true;
       start2();
     } else {
-      stop();
+      isIntersectingRef.current = false;
+      void stopAfterAnimationEnds();
     }
-  }, [start2, stop,],);
+  }, [start2, stopAfterAnimationEnds,],);
   useSharedIntersectionObserver(ref, startAndStopBasedOnIntersection, {
     enabled: hasLoop && loopPauseOffscreen,
   },);
@@ -32791,7 +32810,7 @@ function shouldEnableCodeBoundaries() {
   return RenderTarget.current() !== RenderTarget.canvas;
 }
 function CodeComponentBoundary({
-  errorMessage,
+  getErrorMessage,
   fallback,
   children,
 },) {
@@ -32802,7 +32821,7 @@ function CodeComponentBoundary({
     fallback,
     children: /* @__PURE__ */ jsx3(ClientSideErrorBoundary, {
       fallback,
-      errorMessage,
+      getErrorMessage,
       children,
     },),
   },);
@@ -32820,7 +32839,7 @@ var ClientSideErrorBoundary = class extends Component2 {
     };
   }
   componentDidCatch(error, errorInfo,) {
-    logError(this.props.errorMessage, errorInfo == null ? void 0 : errorInfo.componentStack,);
+    logError(this.props.getErrorMessage(), errorInfo == null ? void 0 : errorInfo.componentStack,);
     collectErrorToAnalytics(error, errorInfo,);
   }
   render() {
@@ -33002,7 +33021,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   );
   if (shouldWrapWithBoundary) {
     children = /* @__PURE__ */ jsx3(CodeComponentBoundary, {
-      errorMessage: getErrorMessageForComponent(scopeId, nodeId,),
+      getErrorMessage: getErrorMessageForComponent.bind(null, scopeId, nodeId,),
       fallback: null,
       children,
     },);
@@ -34031,6 +34050,17 @@ function Floating({
     getPortalContainer(portalSelector, inComponent,),
   );
 }
+var Instance = /* @__PURE__ */ React4.forwardRef(function Instance2({
+  Component: Component17,
+  ...props
+}, ref,) {
+  return Component17
+    ? /* @__PURE__ */ jsx3(Component17, {
+      ...props,
+      ref,
+    },)
+    : null;
+},);
 var GracefullyDegradingErrorBoundary = class extends Component2 {
   constructor() {
     super(...arguments,);
@@ -35698,7 +35728,6 @@ function Router({
             preserveQueryParams,
           },);
           if (!localeResult) return;
-          const currentPathVariables2 = currentPathVariablesRef.current;
           const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
           const currentPath = localeResult.path;
           currentPathVariablesRef.current = localeResult.pathVariables;
@@ -35708,7 +35737,7 @@ function Router({
             return pushHistoryState(
               {
                 routeId: currentRouteId2,
-                pathVariables: currentPathVariables2,
+                pathVariables: localeResult.pathVariables,
                 localeId: nextLocale.id,
                 paginationInfo: currentStatePaginationInfo,
               },
@@ -36401,14 +36430,13 @@ _subscribers2 = /* @__PURE__ */ new WeakMap();
 _results = /* @__PURE__ */ new WeakMap();
 _SSRResults = /* @__PURE__ */ new WeakMap();
 _onlyPrefetched = /* @__PURE__ */ new WeakMap();
-function useFetchRequests(requests, disabled,) {
+function useFetchRequestsForChildren(requests, disabled, children,) {
   const fetchClient = React2.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
   const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
   const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
-  const [result, setResult,] = React2.useState(() => observer2.getServerResults());
   React2.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
@@ -36416,18 +36444,15 @@ function useFetchRequests(requests, disabled,) {
     },);
   }, [requests, observer2, disabled,],);
   React2.useEffect(() => {
-    if (isRestoringCache || disabled) return;
-    const unsubscribe = observer2.subscribe(() => {
-      React2.startTransition(() => {
-        setResult(observer2.getResults(),);
-      },);
-    },);
-    return () => {
-      unsubscribe();
-      observer2.unmount();
-    };
-  }, [observer2, disabled, isRestoringCache,],);
-  return result;
+    return () => observer2.unmount();
+  }, [observer2,],);
+  const subscribe = React2.useCallback((onChange) => {
+    if (isRestoringCache || disabled) return noop4;
+    return observer2.subscribe(onChange,);
+  }, [disabled, observer2, isRestoringCache,],);
+  const synchronousData = React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
+  const deferredData = React2.useDeferredValue(synchronousData,);
+  return useMemoOne(() => children(deferredData.data, deferredData.status,), [deferredData, children,],);
 }
 function usePrefetch() {
   const fetchClient = React2.useContext(FetchClientContext,);
@@ -36595,11 +36620,7 @@ var Fetcher = /* @__PURE__ */ React2.forwardRef(function Fetcher2({
   ...rest
 }, ref,) {
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
-  const {
-    data: data2,
-    status,
-  } = useFetchRequests(requests, disabled,);
-  const childrenWithValues = children(data2, status,);
+  const childrenWithValues = useFetchRequestsForChildren(requests, disabled, children,);
   return cloneWithPropsAndRef(childrenWithValues, rest,);
 },);
 var callEach = (...fns) => fns.forEach((fn) => fn && fn());
@@ -41644,13 +41665,8 @@ function useOnAppear(callback,) {
     default: callback,
   },);
 }
-async function setOverflow(blockDocumentScrolling, show, yieldBefore = true,) {
+function setOverflow(blockDocumentScrolling, show,) {
   if (blockDocumentScrolling === false) return;
-  if (yieldBefore) {
-    await yieldToMain({
-      continueAfter: 'paint',
-    },);
-  }
   frame.render(() => {
     const htmlStyle = document.documentElement.style;
     if (show) {
@@ -41664,12 +41680,21 @@ function useOverlayState({
   blockDocumentScrolling = true,
 } = {},) {
   const [showOverlay, setShowOverlay,] = React4.useState(false,);
-  const callback = React4.useCallback((show) => {
-    setShowOverlay(show,);
-    void setOverflow(blockDocumentScrolling, show,);
+  const callback = React4.useCallback(async (show) => {
+    await yieldToMain({
+      priority: 'user-blocking',
+      continueAfter: 'paint',
+    },);
+    startTransition2(() => setShowOverlay(show,));
+    setOverflow(blockDocumentScrolling, show,);
   }, [blockDocumentScrolling,],);
   React4.useEffect(() => () => {
-    void setOverflow(blockDocumentScrolling, false, false,);
+    void yieldToMain({
+      priority: 'user-blocking',
+      continueAfter: 'paint',
+    },).then(() => {
+      setOverflow(blockDocumentScrolling, false,);
+    },);
   }, [blockDocumentScrolling,],);
   return [showOverlay, callback,];
 }
@@ -42018,15 +42043,16 @@ function useRunCallbackIfPageIsVisible() {
   }, [clean,],);
 }
 function useRunCallbackIfElementIsInView() {
-  const observerRef = useRef3(null,);
+  const observerRefCleanup = useRef3();
   const isInViewRef = useRef3(false,);
   const callbackRef = useRef3();
+  const observers2 = useContext(SharedIntersectionObserverContext,);
   useEffect(() => {
     return () => {
       var _a;
-      (_a = observerRef.current) == null ? void 0 : _a.disconnect();
+      (_a = observerRefCleanup.current) == null ? void 0 : _a.call(observerRefCleanup,);
       callbackRef.current = void 0;
-      observerRef.current = null;
+      observerRefCleanup.current = void 0;
     };
   }, [],);
   return useCallback((callback, ref,) => {
@@ -42035,21 +42061,21 @@ function useRunCallbackIfElementIsInView() {
       return;
     }
     callbackRef.current = callback;
-    if (observerRef.current) return;
-    const observer2 = new IntersectionObserver((entries) => {
-      var _a;
-      let isIntersecting = false;
-      for (let i = 0; i < entries.length; ++i) {
-        const entry = entries[i];
-        isIntersecting = entry.isIntersecting;
-      }
-      isInViewRef.current = isIntersecting;
-      if (!isIntersecting) return;
-      (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
-    },);
-    observerRef.current = observer2;
-    observer2.observe(ref.current,);
-  }, [],);
+    if (observerRefCleanup.current) return;
+    let queuedMicrotask = false;
+    const observerCallback = (entry) => {
+      isInViewRef.current = entry.isIntersecting;
+      if (queuedMicrotask) return;
+      queuedMicrotask = true;
+      queueMicrotask(() => {
+        var _a;
+        if (!isInViewRef.current) return;
+        queuedMicrotask = false;
+        (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
+      },);
+    };
+    observerRefCleanup.current = observeElement(observers2, 'undefined', ref.current, null, observerCallback,);
+  }, [observers2,],);
 }
 function useUpdateIfVisible(ref,) {
   const runUpdateIfPageIsVisible = useRunCallbackIfPageIsVisible();
@@ -42067,20 +42093,26 @@ var globalWaitingForClickPromise;
 var globalWaitingForClickResolve;
 async function getPromiseWithFallback() {
   return new Promise((resolve) => {
-    const resolveFn = () => {
+    let resolveFn = resolve;
+    setTimeout(() => {
+      if (!resolveFn) return;
+      performance.mark('wait-for-click-fallback',);
+      resolveFn();
+    }, 150,);
+    globalWaitingForClickResolve = () => {
       resolve();
-      clearTimeout(timeout,);
+      resolveFn = void 0;
     };
-    const timeout = setTimeout(resolveFn, 150,);
-    globalWaitingForClickResolve = resolveFn;
   },);
 }
 function globalWaitForClickListener(event,) {
   if (event.button === 0) {
+    performance.mark('pointerdown-listener',);
     globalWaitingForClickPromise = getPromiseWithFallback();
   }
 }
 function globalClickReceivedListener() {
+  performance.mark('click-received-listener',);
   globalWaitingForClickPromise = void 0;
   globalWaitingForClickResolve == null ? void 0 : globalWaitingForClickResolve();
   globalWaitingForClickResolve = void 0;
@@ -42158,13 +42190,17 @@ function useVariantState({
       internalState.current.gestureVariant = nextGesture;
       const yieldOnTap = yieldOnTapFeatureOn && internalState.current.isPressedHasUpdated;
       if (yieldOnTap && globalWaitingForClickPromise) {
+        performance.mark('wait-for-tap-start',);
         await globalWaitingForClickPromise;
+        performance.measure('wait-for-tap', 'wait-for-tap-start',);
       }
       if (yieldOnTap) {
+        performance.mark('yield-on-tap-start',);
         await yieldToMain({
           priority: 'user-blocking',
           continueAfter: 'paint',
         },);
+        performance.measure('yield-on-tap', 'yield-on-tap-start',);
       }
       const {
         isHovered: isHovered2,
@@ -42331,7 +42367,7 @@ function withCodeBoundaryForOverrides(Component17, {
     if (shouldWrapWithBoundary) {
       if (appliedOverride.status === 'success') {
         return /* @__PURE__ */ jsx3(CodeComponentBoundary, {
-          errorMessage: getErrorMessageForOverride(scopeId, nodeId,),
+          getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
           fallback: /* @__PURE__ */ jsx3(Component17, {
             ...props,
             ref,
@@ -42572,7 +42608,7 @@ var withVariantAppearEffect = (Component17) =>
       if (!variantAppearEffectEnabled) return;
       const useObscuredVariant = !options.targets && !options.scrollDirection;
       const target = useObscuredVariant ? options.obscuredVariantId : void 0;
-      React4.startTransition(() => setVariant(target,));
+      startTransition2(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
       return /* @__PURE__ */ jsx3(Component17, {
@@ -45000,10 +45036,9 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     className: cx(textInputWrapperClassName, inputWrapperClassName, className2,),
     ...rest,
     children: type === 'textarea'
-      ? /* @__PURE__ */ createElement(motion.textarea, {
+      ? /* @__PURE__ */ jsx3(motion.textarea, {
         ...dataProps,
         ...eventHandlers,
-        key: defaultValue,
         required,
         autoFocus,
         name: inputName,
@@ -45011,11 +45046,10 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
         className: inputClassName,
         defaultValue,
         maxLength,
-      },)
-      : /* @__PURE__ */ createElement(motion.input, {
+      }, defaultValue,)
+      : /* @__PURE__ */ jsx3(motion.input, {
         ...dataProps,
         ...eventHandlers,
-        key: defaultValue,
         type,
         required,
         autoFocus,
@@ -45027,7 +45061,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
         max,
         step: step2,
         maxLength,
-      },),
+      }, defaultValue,),
   },);
 },);
 var iconSize2 = 16;
@@ -48979,8 +49013,8 @@ var package_default = {
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.29.1',
-    '@typescript-eslint/parser': '^8.29.1',
+    '@typescript-eslint/eslint-plugin': '^8.32.1',
+    '@typescript-eslint/parser': '^8.32.1',
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
@@ -49214,6 +49248,7 @@ export {
   inferInitialRouteFromPath,
   injectComponentCSSRules,
   installFlexboxGapWorkaroundIfNeeded,
+  Instance,
   InternalID,
   interpolate,
   invariant,
