@@ -1,17 +1,14 @@
 import pico from 'picocolors'
 import {
     Agent,
-    fetch,
-    getGlobalDispatcher,
     interceptors,
-    setGlobalDispatcher,
+    setGlobalDispatcher
 } from 'undici'
 
 import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
 import { createSpinner } from 'nanospinner'
 import { FlatCacheStore } from './flat-cache-interceptor'
-import { rateLimitInterceptor } from './rate-limit-interceptor'
 
 marked.use(markedTerminal())
 

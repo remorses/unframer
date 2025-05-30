@@ -288,32 +288,40 @@ export async function bundle({
 
             let tooBig = file.text.length >= tooBigSize
             let didFormat = false
-            if (!tooBig && !resultPathAbsJs.includes('/chunks/')) {
-                let res = transform(file.text || '', {
-                    babelrc: false,
-                    sourceType: 'module',
-                    plugins: [
-                        // babelPluginDeduplicateImports,
-                        babelPluginJsxTransform(),
-                        removeJsxExpressionContainer,
-                    ],
-                    // ast: true,
-                    // code: false,
-                    filename: 'x.jsx',
-                    compact: false,
-                    sourceMaps: false,
-                })
-                if (res?.code) {
-                    if (!biome) {
-                        biome = await Biome.create({
-                            distribution: Distribution.NODE, // Or BUNDLER / WEB depending on the distribution package you've installed
-                        })
-                    }
-                    let result = biome.formatContent(res.code, {
-                        filePath: 'example.jsx',
+            if (
+                config.jsx &&
+                !tooBig &&
+                !resultPathAbsJs.includes('/chunks/')
+            ) {
+                try {
+                    let res = transform(file.text || '', {
+                        babelrc: false,
+                        sourceType: 'module',
+                        plugins: [
+                            // babelPluginDeduplicateImports,
+                            babelPluginJsxTransform(),
+                            removeJsxExpressionContainer,
+                        ],
+                        // ast: true,
+                        // code: false,
+                        filename: 'x.jsx',
+                        compact: false,
+                        sourceMaps: false,
                     })
-                    didFormat = true
-                    formatted = result.content
+                    if (res?.code) {
+                        if (!biome) {
+                            biome = await Biome.create({
+                                distribution: Distribution.NODE,
+                            })
+                        }
+                        let result = biome.formatContent(res.code, {
+                            filePath: 'example.jsx',
+                        })
+                        didFormat = true
+                        formatted = result.content
+                    }
+                } catch (e) {
+                    notifyError(e, 'babel transform and format')
                 }
             }
 

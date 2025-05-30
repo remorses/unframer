@@ -183,9 +183,6 @@ importers:
       esbuild-plugins-node-modules-polyfill:
         specifier: ^1.6.8
         version: 1.6.8(esbuild@0.25.4)
-      file-entry-cache:
-        specifier: ^10.1.0
-        version: 10.1.0
       find-up:
         specifier: ^7.0.0
         version: 7.0.0
@@ -3773,9 +3770,6 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
-
-  file-entry-cache@10.1.0:
-    resolution: {integrity: sha512-Et/ex6smi3wOOB+n5mek+Grf7P2AxZR5ueqRUvAAn4qkyatXi3cUC1cuQXVkX0VlzBVsN4BkWJFmY/fYiRTdww==}
 
   fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
@@ -10563,10 +10557,6 @@ snapshots:
   fdir@6.4.4(picomatch@4.0.2):
     optionalDependencies:
       picomatch: 4.0.2
-
-  file-entry-cache@10.1.0:
-    dependencies:
-      flat-cache: 6.1.9
 
   fill-range@7.0.1:
     dependencies:

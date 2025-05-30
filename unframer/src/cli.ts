@@ -35,6 +35,9 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         },
     )
     .option('--watch', 'Watch for changes and rebuild', { default: false })
+    .option('--jsx', 'Output jsx code instead of minified .js code', {
+        default: false,
+    })
     .option('--debug', 'Enable debug logging', { default: false })
     .action(async function main(projectId, options) {
         const external_ = options.external
@@ -59,8 +62,12 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     outDir,
                     projectId,
                 })
+                let jsx = options.jsx
                 const { rebuild, buildContext } = await bundle({
-                    config,
+                    config: {
+                        jsx,
+                        ...config,
+                    },
                     watch,
                     cwd,
                     signal,
@@ -177,6 +184,7 @@ cli.command('init', 'Init the unframer.config.json config').action(
 )
 
 export type Config = {
+    jsx?: boolean
     components: {
         [name: string]: string
     }
@@ -282,6 +290,7 @@ export async function configFromFetch({
             }) || []
     const config: Config = {
         ...data,
+
         breakpoints: defaultBreakpointSizes,
         outDir,
         externalPackages,
