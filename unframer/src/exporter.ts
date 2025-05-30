@@ -1373,7 +1373,7 @@ export async function createExampleComponentCode({
     const exampleCode = dedent`
       import './${outDirForExample}/styles.css'
 
-      ${indentWithTabs(imports.join('\n'), '')}
+      ${indentWithTabs(imports?.join('\n'), '')}
 
       export default function App() {
         return (
