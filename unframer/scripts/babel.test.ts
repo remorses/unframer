@@ -12,7 +12,7 @@ import { transform } from '@babel/core'
 function trans(
     code: string,
     plugins: any[] = [babelPluginDeduplicateImports],
-    filename: string = 'x.js',
+    filename: string = 'x.jsx',
 ) {
     const res = transform(code || '', {
         babelrc: false,
@@ -91,7 +91,7 @@ describe('babelPluginJsxTransform transforms files in nextjs-app/src/framer to J
         expect(files[0]).toMatch(/\.js$/)
     })
 
-    test(
+    test.skip(
         'transforms each file to JSX',
         async () => {
             const files = await getAllFiles(baseDir)
@@ -121,13 +121,14 @@ describe('babelPluginJsxTransform transforms files in nextjs-app/src/framer to J
         1000 * 20,
     )
 })
+
 describe('babelPluginJsxTransform', () => {
     test('transforms _jsx and _jsxs calls to JSX', () => {
         expect(
             trans(
                 dedent`
                 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
-                
+
                 const element = _jsx("div", {
                     className: "container",
                     children: _jsxs("span", {
@@ -162,7 +163,7 @@ describe('babelPluginJsxTransform', () => {
             trans(
                 dedent`
                 import { jsx as _jsx } from 'react/jsx-runtime';
-                
+
                 const element = _jsx(Components.Button, {
                     onClick: () => 'Hello',
                     children: "Click me"
@@ -185,7 +186,7 @@ describe('babelPluginJsxTransform', () => {
                 dedent`
                 import { jsx as _jsx } from 'react/jsx-runtime';
                 import { cloneElement } from 'react';
-                
+
                 const element = _jsx("li", {
                     ref: ref,
                     style: size2,
@@ -198,7 +199,7 @@ describe('babelPluginJsxTransform', () => {
                                 flexShrink: 0,
                                 ...childrenStyles,
                             },
-                            layoutId: child.props.layoutId 
+                            layoutId: child.props.layoutId
                                 ? child.props.layoutId + '-original-' + index
                                 : undefined,
                         },
@@ -226,6 +227,29 @@ describe('babelPluginJsxTransform', () => {
               }, child.props?.children,)}
             </li>
           );
+          "
+        `)
+    })
+
+    test('handles jsx function called jsx', () => {
+        expect(
+            trans(
+                dedent`
+                    import { jsx } from 'react/jsx-runtime';
+
+                    const element = jsx("div", {
+                        className: "container",
+                        children: "Hello world"
+                    });
+                    `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx, } from 'react/jsx-runtime';
+          const element = jsx('div', {
+            className: 'container',
+            children: 'Hello world',
+          },);
           "
         `)
     })

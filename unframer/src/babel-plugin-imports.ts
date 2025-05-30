@@ -312,7 +312,7 @@ export function babelPluginJsxTransform() {
                 } else if (elementArg.type === 'StringLiteral') {
                     elementName = elementArg.value
                 } else if (elementArg.type === 'Identifier') {
-                    if (!canComponentNameRenderAsJsx(elementArg.name)) {
+                    if (!canRenderAsJsx(elementArg.name)) {
                         return
                     }
                     elementName = elementArg.name
@@ -443,7 +443,7 @@ function jsonStringifyWithMaps(map) {
     )
 }
 
-function canComponentNameRenderAsJsx(name: string): boolean {
+function canRenderAsJsx(name: string): boolean {
     // 1. Valid JS identifier?
     const isIdentifier = /^[$A-Za-z_][$\w]*$/.test(name)
     if (!isIdentifier) return false
