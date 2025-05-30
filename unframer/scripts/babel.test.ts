@@ -10,11 +10,11 @@ import {
 } from '../src/babel-plugin-imports'
 import { transform } from '@babel/core'
 
-const plugins = [babelPluginJsxTransform(), removeJsxExpressionContainer]
+const defaultPlugins = [babelPluginJsxTransform(), removeJsxExpressionContainer]
 
 function trans(
     code: string,
-    plugins: any[] = [babelPluginDeduplicateImports],
+    plugins: any[] = defaultPlugins,
     filename: string = 'x.jsx',
 ) {
     const res = transform(code || '', {
@@ -109,7 +109,7 @@ describe('babelPluginJsxTransform transforms files in nextjs-app/src/framer to J
                     recursive: true,
                 })
 
-                const transformed = trans(code, plugins, outPath)
+                const transformed = trans(code, defaultPlugins, outPath)
                 await fs.promises.writeFile(outPath, transformed)
                 console.log(outPath)
 
@@ -141,18 +141,16 @@ describe('babelPluginJsxTransform', () => {
                     })
                 });
                 `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
           const element = (
             <div className={'container'}>
-              {
-                <span style={{ color: 'red', }}>
-                  {<strong>{'Hello'}</strong>}
-                  {' world'}
-                </span>
-              }
+              <span style={{ color: 'red', }}>
+                <strong>{'Hello'}</strong>
+                {' world'}
+              </span>
             </div>
           );
           "
@@ -170,7 +168,7 @@ describe('babelPluginJsxTransform', () => {
                     children: "Click me"
                 });
                 `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -208,7 +206,7 @@ describe('babelPluginJsxTransform', () => {
                     )
                 });
                 `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -243,7 +241,7 @@ describe('babelPluginJsxTransform', () => {
                         children: "Hello world"
                     });
                     `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx, } from 'react/jsx-runtime';
@@ -277,21 +275,23 @@ describe('babelPluginJsxTransform', () => {
                         })
                     });
                     `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
           const element = (
             <Modal
-              content={
-                <div className={'modal-content'}>{<p>{'This is modal content'}</p>}</div>
-              }
-              footer={
-                <div className={'modal-footer'}>
-                  {<button>{'Cancel'}</button>}
-                  {<button>{'OK'}</button>}
+              content=(
+                <div className={'modal-content'}>
+                  <p>{'This is modal content'}</p>
                 </div>
-              }
+              )
+              footer=(
+                <div className={'modal-footer'}>
+                  <button>{'Cancel'}</button>
+                  <button>{'OK'}</button>
+                </div>
+              )
             />
           );
           "
@@ -313,7 +313,7 @@ describe('babelPluginJsxTransform', () => {
                             })
                         });
                         `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -359,7 +359,7 @@ describe('babelPluginJsxTransform', () => {
                         ]
                     });
                     `,
-                plugins,
+                defaultPlugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -372,7 +372,10 @@ describe('babelPluginJsxTransform', () => {
                 null,
                 <span className={'highlight'}>{'Second element'}</span>,
                 undefined,
-                <p>{'Complex '}{<strong>{'element'}</strong>}</p>,
+                <p>
+                  {'Complex '}
+                  <strong>{'element'}</strong>
+                </p>,
               ]}
             />
           );
@@ -384,7 +387,8 @@ describe('babelPluginJsxTransform', () => {
 describe('babelPluginDeduplicateImports', () => {
     test('simple', () => {
         expect(
-            trans(dedent`
+            trans(
+                dedent`
             import React1 from 'react';
             import React2 from 'react';
             import * as ReactAll from 'react';
@@ -400,7 +404,9 @@ describe('babelPluginDeduplicateImports', () => {
             import { jsx, jsxs, } from 'react/jsx-runtime';
 
             console.log(React1, React2, createContext, createContext2, createContext3, useEffect, useLayoutEffect, createContext4, createContext5, jsx, jsxs)
-        `),
+        `,
+                [babelPluginDeduplicateImports],
+            ),
         ).toMatchInlineSnapshot(`
           "import React1 from 'react';
           import * as ReactAll from 'react';

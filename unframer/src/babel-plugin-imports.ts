@@ -281,26 +281,45 @@ const noContainerTypes = new Set([
     // 'StringLiteral',
     'NumericLiteral',
 ])
-export function removeJsxExpressionContainer({ types: t }) {
-    return {
+
+
+export function removeJsxExpressionContainer({
+    types: t,
+}: {
+    types: typeof BabelTypes
+}): PluginObj {
+    const plugin: PluginObj = {
         name: 'remove-jsx-expression-container',
         visitor: {
-            JSXExpressionContainer(path) {
-                const expr = path.node.expression
-                if (t.isJSXElement(expr) || t.isJSXFragment(expr)) {
-                    path.replaceWith(expr)
-                } else if (t.isArrayExpression(expr)) {
-                    // Check if array contains only JSX elements/fragments
-                    const allJsx = expr.elements.every(element =>
-                        element && (t.isJSXElement(element) || t.isJSXFragment(element))
-                    )
-                    if (allJsx) {
-                        path.replaceWithMultiple(expr.elements)
+            JSXExpressionContainer: {
+                exit(path) {
+                    const expr = path.node.expression
+
+                    if (t.isJSXElement(expr) || t.isJSXFragment(expr)) {
+                        path.replaceWith(expr)
+                    } else if (t.isArrayExpression(expr)) {
+                        // Check if array contains only JSX elements/fragments
+                        const allJsx = expr.elements.every(
+                            (element) =>
+                                element &&
+                                (t.isJSXElement(element) ||
+                                    t.isJSXFragment(element)),
+                        )
+                        if (allJsx && 'elements' in expr && expr.elements) {
+                            path.replaceWithMultiple(
+                                expr.elements.filter(isTruthy),
+                            )
+                        }
                     }
-                }
+                },
             },
         },
     }
+    return plugin
+}
+
+function isTruthy<T>(value: T): value is NonNullable<T> {
+    return value != null
 }
 
 export function babelPluginJsxTransform() {
