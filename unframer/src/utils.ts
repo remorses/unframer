@@ -1,4 +1,4 @@
-import dedent from 'dedent'
+import dedent from 'string-dedent'
 import pico from 'picocolors'
 
 import { createSpinner } from 'nanospinner'

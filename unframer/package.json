@@ -57,13 +57,13 @@
         "@biomejs/wasm-nodejs": "^1.9.4",
         "async-sema": "^3.1.1",
         "cac": "^6.7.14",
-        "dedent": "^1.6.0",
         "esbuild": "^0.25.4",
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
         "nanospinner": "^1.2.2",
         "picocolors": "^1.1.1",
         "real-framer-motion": "npm:framer-motion@12.0.6",
         "spiceflow": "^1.9.1",
+        "string-dedent": "^3.0.1",
         "undici": "^7.10.0"
     },
     "devDependencies": {

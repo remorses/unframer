@@ -70,7 +70,9 @@ describe('dedent', () => {
     })
 
     it('should handle single line', () => {
-        const result = dedent`Single line`
+        const result = dedent`
+          Single line
+          `
         expect(result).toMatchInlineSnapshot(`"Single line"`)
     })
 
@@ -103,14 +105,14 @@ describe('dedent', () => {
         `
         expect(result).toMatchInlineSnapshot(`
           "class Example {
-                      function inner() {
-          return 'hello'
+              function inner() {
+              return 'hello'
           }
 
-                      method() {
-                          console.log('test')
-                      }
-                  }"
+              method() {
+                  console.log('test')
+              }
+          }"
         `)
     })
 
@@ -132,15 +134,15 @@ describe('dedent', () => {
         `
         expect(result).toMatchInlineSnapshot(`
           "function wrapper() {
-                      if (condition) {
-          doSomething()
-              .then(result => {
-                  console.log(result)
-              })
+              if (condition) {
+              doSomething()
+                  .then(result => {
+                      console.log(result)
+                  })
           }
 
-                      return true
-                  }"
+              return true
+          }"
         `)
     })
 })
