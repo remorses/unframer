@@ -1,4 +1,6 @@
 import { BuildResult, build, context, type BuildOptions } from 'esbuild'
+import { print } from '@putout/printer'
+
 import packageJson from '../package.json'
 
 import url from 'url'
@@ -47,6 +49,10 @@ import {
     babelPluginDeduplicateImports,
     babelPluginJsxTransform,
 } from './babel-plugin-imports'
+
+import { Biome, Distribution } from '@biomejs/js-api'
+
+let biome: Biome
 
 export type StyleToken = {
     id: string
@@ -270,7 +276,10 @@ export async function bundle({
         spinner.update('Finished build')
 
         for (let file of buildResult.outputFiles!) {
-            const resultPathAbs = path.resolve(out, file.path)
+            const resultPathAbs = path.resolve(
+                out,
+                file.path.replace(/\.js$/, '.jsx'),
+            )
             const existing = await fs.promises
                 .readFile(file.path, 'utf-8')
                 .catch(() => null)
@@ -285,14 +294,26 @@ export async function bundle({
                     babelrc: false,
                     sourceType: 'module',
                     plugins: [
-                        babelPluginDeduplicateImports,
+                        // babelPluginDeduplicateImports,
                         babelPluginJsxTransform(),
                     ],
-                    filename: 'x.js',
+                    // ast: true,
+                    // code: false,
+                    filename: 'x.jsx',
                     compact: false,
                     sourceMaps: false,
                 })
-                if (res?.code) formatted = res?.code
+                if (res?.code) {
+                    if (!biome) {
+                        biome = await Biome.create({
+                            distribution: Distribution.NODE, // Or BUNDLER / WEB depending on the distribution package you've installed
+                        })
+                    }
+                    let result = biome.formatContent(res.code, {
+                        filePath: 'example.jsx',
+                    })
+                    formatted = result.content
+                }
             }
 
             // let inputCode = res!.code!
@@ -372,7 +393,7 @@ export async function bundle({
                     await sema.acquire()
                     const name = path
                         .relative(out, file.path)
-                        .replace(/\.js$/, '')
+                        .replace(/\.jsx?$/, '')
                     const resultPathAbs = path.resolve(out, file.path)
                     if (!components[name]) {
                         return
@@ -401,6 +422,7 @@ export async function bundle({
                         path.resolve(out, `${name}.d.ts`),
                         types,
                     )
+
                     return {
                         propertyControls,
                         fonts,
@@ -452,10 +474,20 @@ export async function bundle({
             ])
             .concat(
                 buildResult.outputFiles.map((x) =>
-                    path.resolve(out, x.path.replace('.js', '.d.ts')),
+                    path.resolve(out, x.path.replace(/\.jsx?$/, '.d.ts')),
                 ),
             )
-        const filesToDelete = prevFiles.filter((x) => !outFiles.includes(x))
+
+        const filesToDelete = prevFiles
+            .filter((x) => !outFiles.includes(x))
+            .concat(
+                // .js files if the .jsx version exists
+                buildResult.outputFiles
+                    .filter((x) =>
+                        fs.existsSync(x.path.replace(/\.js$/, '.jsx')),
+                    )
+                    .map((x) => x.path),
+            )
         for (let file of filesToDelete) {
             logger.log('deleting', path.relative(out, file))
             try {
@@ -1171,7 +1203,7 @@ function splitOnce(str: string, separator: string) {
 }
 
 export function componentCamelCase(str: string) {
-    str = str?.replace(/\.js$/, '')
+    str = str?.replace(/\.jsx?$/, '')
     if (!str) {
         return 'FramerComponent'
     }

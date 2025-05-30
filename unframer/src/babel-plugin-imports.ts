@@ -116,7 +116,7 @@ export function babelPluginDeduplicateImports({
             },
             Program: {
                 exit(path) {
-                    console.log(`renaming imports...`)
+                    // console.log(`renaming imports...`)
                     for (const [source, modMap] of importAliasMap) {
                         // rename import names to consolidated names
                         for (let [local, { consolidated, path: p }] of modMap) {
@@ -150,7 +150,7 @@ export function babelPluginDeduplicateImports({
 
                     const definedImports = new Set<string>()
                     const later = [] as Function[]
-                    console.log(`removing duplicates...`)
+                    // console.log(`removing duplicates...`)
                     for (let importDec of importDecs) {
                         const source = importDec.source.value
 
