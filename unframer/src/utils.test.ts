@@ -10,12 +10,10 @@ describe('dedent', () => {
             With multiple lines
         `
         expect(result).toMatchInlineSnapshot(`
-          "
-          Hello world
+          "Hello world
           This is a test
 
-          With multiple lines
-          "
+          With multiple lines"
         `)
     })
 
@@ -29,14 +27,12 @@ describe('dedent', () => {
             }
         `
         expect(result).toMatchInlineSnapshot(`
-          "
-          function example() {
+          "function example() {
               const x = 1
               if (x) {
                   console.log('hello')
               }
-          }
-          "
+          }"
         `)
     })
 
@@ -49,11 +45,9 @@ describe('dedent', () => {
             End of message
         `
         expect(result).toMatchInlineSnapshot(`
-          "
-          Hello world!
+          "Hello world!
           The count is 42
-          End of message
-          "
+          End of message"
         `)
     })
 
@@ -67,13 +61,11 @@ describe('dedent', () => {
             End
         `
         expect(result).toMatchInlineSnapshot(`
-          "
-          Start
+          "Start
 
               Indented line
 
-          End
-          "
+          End"
         `)
     })
 
@@ -89,11 +81,66 @@ describe('dedent', () => {
             Line 3
         `
         expect(result).toMatchInlineSnapshot(`
-          "
-          Line 1
+          "Line 1
 
-          Line 3
-          "
+          Line 3"
+        `)
+    })
+    it('should handle nested dedent calls', () => {
+        const inner = dedent`
+            function inner() {
+                return 'hello'
+            }
+        `
+        const result = dedent`
+            class Example {
+                ${inner}
+
+                method() {
+                    console.log('test')
+                }
+            }
+        `
+        expect(result).toMatchInlineSnapshot(`
+          "class Example {
+                      function inner() {
+          return 'hello'
+          }
+
+                      method() {
+                          console.log('test')
+                      }
+                  }"
+        `)
+    })
+
+    it('should preserve additional indentation in template values', () => {
+        const codeBlock = dedent`
+            if (condition) {
+                doSomething()
+                    .then(result => {
+                        console.log(result)
+                    })
+            }
+        `
+        const result = dedent`
+            function wrapper() {
+                ${codeBlock}
+
+                return true
+            }
+        `
+        expect(result).toMatchInlineSnapshot(`
+          "function wrapper() {
+                      if (condition) {
+          doSomething()
+              .then(result => {
+                  console.log(result)
+              })
+          }
+
+                      return true
+                  }"
         `)
     })
 })

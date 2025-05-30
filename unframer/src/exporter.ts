@@ -1357,12 +1357,10 @@ export async function createExampleComponentCode({
             }
             // TODO get property controls to render enums much better? maybe do this in plugin instead
             propStr += '\n'
-            propStr += `    ${key}={${JSON.stringify(value)}}`
+            propStr += `  ${key}={${JSON.stringify(value)}}`
         }
         if (propStr) propStr += '\n'
-        const responsiveComponent = dedent`
-        <${componentCamelCase(exampleComponent?.componentPathSlug)}.Responsive${propStr}/>
-        `
+        const responsiveComponent = `<${componentCamelCase(exampleComponent?.componentPathSlug)}.Responsive${propStr}/>`
         return responsiveComponent
     })
 
@@ -1378,11 +1376,11 @@ export async function createExampleComponentCode({
       ${indentWithTabs(imports.join('\n'), '')}
 
       export default function App() {
-          return (
-              <div className='flex flex-col items-center gap-3 ${containerClasses}'>
-                  ${indentWithTabs(jsx.join('\n'), '            ')}
-              </div>
-          );
+        return (
+          <div className='flex flex-col items-center gap-3 ${containerClasses}'>
+            ${indentWithTabs(jsx.join('\n'), '            ')}
+          </div>
+        );
       };
       `
     return {
