@@ -1,5 +1,4 @@
 import { BuildResult, build, context, type BuildOptions } from 'esbuild'
-import { print } from '@putout/printer'
 
 import packageJson from '../package.json'
 
@@ -10,10 +9,14 @@ import { Sema } from 'async-sema'
 
 import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill'
 
+import { transform } from '@babel/core'
 import { exec } from 'child_process'
+import { error } from 'console'
 import fs from 'fs'
 import path from 'path'
 import dedent from 'string-dedent'
+import { babelPluginJsxTransform } from './babel-plugin-imports'
+import { propCamelCaseJustLikeFramer } from './compat'
 import {
     ComponentFontBundle,
     breakpointsStyles,
@@ -34,21 +37,14 @@ import {
     PropertyControls,
     combinedCSSRules,
 } from './framer.js'
+import { notifyError } from './sentry'
 import {
-    stackblitzDemoExample,
     kebabCase,
     logger,
     spinner,
+    stackblitzDemoExample,
     terminalMarkdown,
 } from './utils.js'
-import { error } from 'console'
-import { notifyError } from './sentry'
-import { propCamelCaseJustLikeFramer } from './compat'
-import { transform } from '@babel/core'
-import {
-    babelPluginDeduplicateImports,
-    babelPluginJsxTransform,
-} from './babel-plugin-imports'
 
 import { Biome, Distribution } from '@biomejs/js-api'
 
@@ -79,7 +75,7 @@ export async function bundle({
         await fs.promises.mkdir(out, { recursive: true })
     } catch (e) {}
 
-    spinner.start()
+    spinner.start('bundling')
 
     const otherRoutes = Object.fromEntries(
         (config.framerWebPages || []).map((page) => [
@@ -114,6 +110,7 @@ export async function bundle({
                 }
             }),
         jsx: 'automatic',
+        // jsxFactory: '_jsx',
         bundle: true,
         platform: 'browser',
         metafile: true,
@@ -276,20 +273,19 @@ export async function bundle({
         spinner.update('Finished build')
 
         for (let file of buildResult.outputFiles!) {
-            const resultPathAbs = path.resolve(
-                out,
-                file.path.replace(/\.js$/, '.jsx'),
-            )
+            const resultPathAbsJs = path.resolve(out, file.path)
+            const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
+
             const existing = await fs.promises
-                .readFile(file.path, 'utf-8')
+                .readFile(resultPathAbsJsx, 'utf-8')
                 .catch(() => null)
             const tooBigSize = 0.7 * 1024 * 1024
 
             let formatted = file.text
 
             let tooBig = file.text.length >= tooBigSize
-            // tooBig = true
-            if (!tooBig) {
+            let didFormat = false
+            if (!tooBig && !resultPathAbsJs.includes('/chunks/')) {
                 let res = transform(file.text || '', {
                     babelrc: false,
                     sourceType: 'module',
@@ -312,6 +308,7 @@ export async function bundle({
                     let result = biome.formatContent(res.code, {
                         filePath: 'example.jsx',
                     })
+                    didFormat = true
                     formatted = result.content
                 }
             }
@@ -336,11 +333,6 @@ export async function bundle({
             //     )
             // }
 
-            let codeNew =
-                `// @ts-nocheck\n` +
-                `/* eslint-disable */\n` +
-                doNotEditComment +
-                formatted
             // if (framerWebPages?.length) {
             //     codeNew = replaceWebPageIds({
             //         code: codeNew,
@@ -357,14 +349,23 @@ export async function bundle({
             //     })
             // }
 
-            if (existing === codeNew) {
-                continue
-            }
+            const prefix =
+                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
+            const codeJsx = prefix + formatted
+            const codeJs = prefix + file.text
+            // if (existing === codeJsx) {
+            //     continue
+            // }
             logger.log(`writing`, path.relative(out, file.path))
-            await fs.promises.mkdir(path.dirname(resultPathAbs), {
+            await fs.promises.mkdir(path.dirname(resultPathAbsJsx), {
                 recursive: true,
             })
-            await fs.promises.writeFile(resultPathAbs, codeNew, 'utf-8')
+            if (codeJs !== codeJsx || !didFormat) {
+                await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
+            }
+            if (didFormat) {
+                await fs.promises.writeFile(resultPathAbsJsx, codeJsx, 'utf-8')
+            }
         }
         spinner.stop()
         await fs.promises.writeFile(
@@ -464,6 +465,13 @@ export async function bundle({
             .split('\n')
             .forEach((x) => logger.log(x))
 
+        const jsxFiles = buildResult.outputFiles
+            .filter(
+                (x) =>
+                    x.path.endsWith('.js') &&
+                    fs.existsSync(x.path.replace(/\.js$/, '.jsx')),
+            )
+            .map((x) => x.path.replace(/\.js$/, '.jsx'))
         const outFiles = buildResult.outputFiles
             .map((x) => path.resolve(out, x.path))
             .concat([
@@ -472,6 +480,7 @@ export async function bundle({
                 path.resolve(out, '.cursorignore'),
                 path.resolve(out, 'styles.css'),
             ])
+            .concat(jsxFiles)
             .concat(
                 buildResult.outputFiles.map((x) =>
                     path.resolve(out, x.path.replace(/\.jsx?$/, '.d.ts')),
@@ -481,13 +490,15 @@ export async function bundle({
         const filesToDelete = prevFiles
             .filter((x) => !outFiles.includes(x))
             .concat(
-                // .js files if the .jsx version exists
                 buildResult.outputFiles
-                    .filter((x) =>
-                        fs.existsSync(x.path.replace(/\.js$/, '.jsx')),
-                    )
-                    .map((x) => x.path),
+                    .map((x) => x.path)
+                    .filter(
+                        (js) =>
+                            js.endsWith('.js') &&
+                            jsxFiles.some((x) => x.startsWith(js)),
+                    ),
             )
+
         for (let file of filesToDelete) {
             logger.log('deleting', path.relative(out, file))
             try {

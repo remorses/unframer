@@ -312,6 +312,9 @@ export function babelPluginJsxTransform() {
                 } else if (elementArg.type === 'StringLiteral') {
                     elementName = elementArg.value
                 } else if (elementArg.type === 'Identifier') {
+                    if (!canComponentNameRenderAsJsx(elementArg.name)) {
+                        return
+                    }
                     elementName = elementArg.name
                 } else {
                     // Skip if we can't determine element name
@@ -438,4 +441,14 @@ function jsonStringifyWithMaps(map) {
         (key, value) => (value instanceof Map ? [...value] : value),
         2,
     )
+}
+
+function canComponentNameRenderAsJsx(name: string): boolean {
+    // 1. Valid JS identifier?
+    const isIdentifier = /^[$A-Za-z_][$\w]*$/.test(name)
+    if (!isIdentifier) return false
+
+    // 2. First char not lowercase letter?
+    const first = name[0]
+    return first.toUpperCase() === first
 }

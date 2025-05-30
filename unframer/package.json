@@ -59,7 +59,9 @@
         "cac": "^6.7.14",
         "esbuild": "^0.25.4",
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
+        "file-entry-cache": "^10.1.0",
         "find-up": "^7.0.0",
+        "flat-cache": "^6.1.9",
         "json5": "^2.2.3",
         "marked": "^15.0.6",
         "marked-terminal": "^7.2.1",
@@ -68,7 +70,7 @@
         "real-framer-motion": "npm:framer-motion@12.0.6",
         "spiceflow": "^1.9.1",
         "string-dedent": "^3.0.1",
-        "undici": "^7.8.0"
+        "undici": "^7.10.0"
     },
     "devDependencies": {
         "@babel/core": "^7.26.7",

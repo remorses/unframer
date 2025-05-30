@@ -10,6 +10,8 @@ import {
 import { marked } from 'marked'
 import { markedTerminal } from 'marked-terminal'
 import { createSpinner } from 'nanospinner'
+import { FlatCacheStore } from './flat-cache-interceptor'
+import { rateLimitInterceptor } from './rate-limit-interceptor'
 
 marked.use(markedTerminal())
 
@@ -21,6 +23,14 @@ export const dispatcher = new Agent({
     keepAliveTimeout: 20,
     keepAliveMaxTimeout: 20,
 })
+    .compose(
+        interceptors.cache({
+            store: new FlatCacheStore(),
+        }),
+    )
+    // .compose(rateLimitInterceptor({ requestsPerSecond: 20 }))
+
+setGlobalDispatcher(dispatcher)
 
 const shouldDebugUnframer = !!process.env.DEBUG_UNFRAMER
 
