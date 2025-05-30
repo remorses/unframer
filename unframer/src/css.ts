@@ -1,4 +1,4 @@
-import dedent from 'string-dedent'
+import { dedent } from './utils.js'
 import { ComponentFont } from './framer.js'
 
 function deduplicateByKey<T>(arr: T[], key: (k: T) => string): T[] {
@@ -91,7 +91,7 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
                     let str = ''
                     str += dedent`
                     @font-face {
-                        font-family: '${x.family}'; 
+                        font-family: '${x.family}';
                         src: url('${x.url}');\n
                     `
                     if (x.style) {
@@ -132,7 +132,7 @@ export const breakpointsStylesLegacy = (breakpointSizes?: BreakpointSizes) => {
 @media (min-width: ${breakpointSizes.base}px) and (max-width: ${
         breakpointSizes.sm - 1
     }px) {
-    .unframer-hidden.unframer-base { 
+    .unframer-hidden.unframer-base {
         display: contents;
     }
 }
@@ -141,7 +141,7 @@ export const breakpointsStylesLegacy = (breakpointSizes?: BreakpointSizes) => {
 @media (min-width: ${breakpointSizes.sm}px) and (max-width: ${
         breakpointSizes.md - 1
     }px) {
-    .unframer-hidden.unframer-sm { 
+    .unframer-hidden.unframer-sm {
         display: contents;
     }
 }
@@ -150,7 +150,7 @@ export const breakpointsStylesLegacy = (breakpointSizes?: BreakpointSizes) => {
 @media (min-width: ${breakpointSizes.md}px) and (max-width: ${
         breakpointSizes.lg - 1
     }px) {
-    .unframer-hidden.unframer-md { 
+    .unframer-hidden.unframer-md {
         display: contents;
     }
 }
@@ -159,7 +159,7 @@ export const breakpointsStylesLegacy = (breakpointSizes?: BreakpointSizes) => {
 @media (min-width: ${breakpointSizes.lg}px) and (max-width: ${
         breakpointSizes.xl - 1
     }px) {
-    .unframer-hidden.unframer-lg { 
+    .unframer-hidden.unframer-lg {
         display: contents;
     }
 }
@@ -168,14 +168,14 @@ export const breakpointsStylesLegacy = (breakpointSizes?: BreakpointSizes) => {
 @media (min-width: ${breakpointSizes.xl}px) and (max-width: ${
         breakpointSizes['2xl'] - 1
     }px) {
-    .unframer-hidden.unframer-xl { 
+    .unframer-hidden.unframer-xl {
         display: contents;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: ${breakpointSizes['2xl']}px) {
-    .unframer-hidden.unframer-2xl { 
+    .unframer-hidden.unframer-2xl {
         display: contents;
     }
 }
@@ -190,42 +190,42 @@ export const breakpointsStyles = (breakpointSizes?: BreakpointSizes) => {
     return /* css */ `
 /* Base */
 @media (min-width: ${breakpointSizes.base}px) and (max-width: ${breakpointSizes.sm - 1}px) {
-    .unframer:not(.unframer-base) { 
+    .unframer:not(.unframer-base) {
         display: none !important;
     }
 }
 
 /* Small */
 @media (min-width: ${breakpointSizes.sm}px) and (max-width: ${breakpointSizes.md - 1}px) {
-    .unframer:not(.unframer-sm) { 
+    .unframer:not(.unframer-sm) {
         display: none !important;
     }
 }
 
 /* Medium */
 @media (min-width: ${breakpointSizes.md}px) and (max-width: ${breakpointSizes.lg - 1}px) {
-    .unframer:not(.unframer-md) { 
+    .unframer:not(.unframer-md) {
         display: none !important;
     }
 }
 
 /* Large */
 @media (min-width: ${breakpointSizes.lg}px) and (max-width: ${breakpointSizes.xl - 1}px) {
-    .unframer:not(.unframer-lg) { 
+    .unframer:not(.unframer-lg) {
         display: none !important;
     }
 }
 
 /* Extra Large */
 @media (min-width: ${breakpointSizes.xl}px) and (max-width: ${breakpointSizes['2xl'] - 1}px) {
-    .unframer:not(.unframer-xl) { 
+    .unframer:not(.unframer-xl) {
         display: none !important;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: ${breakpointSizes['2xl']}px) {
-    .unframer:not(.unframer-2xl) { 
+    .unframer:not(.unframer-2xl) {
         display: none !important;
     }
 }

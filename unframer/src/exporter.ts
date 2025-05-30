@@ -14,7 +14,7 @@ import { exec } from 'child_process'
 import { error } from 'console'
 import fs from 'fs'
 import path from 'path'
-import dedent from 'string-dedent'
+import { dedent } from './utils.js'
 import {
     babelPluginJsxTransform,
     removeJsxExpressionContainer,

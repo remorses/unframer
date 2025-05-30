@@ -1,4 +1,4 @@
-import dedent from 'string-dedent'
+import { dedent } from '../src/utils.js'
 import * as t from '@babel/types'
 
 import annotateAsPure from '@babel/helper-annotate-as-pure'
@@ -56,7 +56,7 @@ export async function main({ framerTypesUrl }) {
         plugins: [
             esbuildPluginBundleDependencies({
                 externalizeNpm: true,
-                
+
                 outDir: path.dirname(resultFile),
             }),
         ],
@@ -85,7 +85,7 @@ export async function main({ framerTypesUrl }) {
         const change = dedent`
         ---
         unframer: patch
-        --- 
+        ---
 
         Update to latest Framer runtime, framer@${framerVersion}, framer-motion@${framerMotionVersion}
         `
@@ -225,7 +225,7 @@ export async function fixFramerCode({ resultFile }) {
     // Add suppressHydrationWarning prop to svgContainer elements
     codeAfter = codeAfter.replace(
         /className: 'svgContainer',/g,
-        'className: \'svgContainer\', suppressHydrationWarning: true,'
+        "className: 'svgContainer', suppressHydrationWarning: true,",
     )
     codeAfter += '\n\n'
     codeAfter += dedent`

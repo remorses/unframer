@@ -2,7 +2,7 @@ import { test, expect, describe } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 import dprint from 'dprint-node'
-import dedent from 'string-dedent'
+import { dedent } from '../src/utils.js'
 import { babelPluginDeduplicateImports } from '../src/babel-plugin-imports'
 import { transform } from '@babel/core'
 

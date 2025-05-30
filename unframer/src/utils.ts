@@ -8,7 +8,6 @@ export function terminalMarkdown(markdown: string) {
     return markdown
 }
 
-
 const shouldDebugUnframer = !!process.env.DEBUG_UNFRAMER
 
 const prefix = '[unframer]'
@@ -91,3 +90,44 @@ export function isTruthy<T>(x: T | null | undefined | false | 0 | ''): x is T {
 }
 
 export const stackblitzDemoExample = process.env.STACKBLITZ_DEMO_EXAMPLE
+
+export function dedent(
+    strings: TemplateStringsArray,
+    ...values: any[]
+): string {
+    // 1) Build the full string first by interleaving raw strings and values
+    let fullString = ''
+    for (let i = 0; i < strings.raw.length; i++) {
+        fullString += strings.raw[i]
+        if (i < values.length) {
+            fullString += values[i]
+        }
+    }
+
+    // 2) Split into lines and find minimum indentation
+    const lines = fullString.split('\n')
+    const nonEmptyLines = lines.filter((line) => line.trim().length > 0)
+
+    if (nonEmptyLines.length === 0) {
+        return fullString
+    }
+
+    // Math.min finds the smallest number of leading whitespace characters
+    // across all non-empty lines to determine the common indentation level
+    const minIndent = Math.min(
+        ...nonEmptyLines.map((line) => {
+            const match = line.match(/^(\s*)/)
+            return match ? match[1].length : 0
+        }),
+    )
+
+    // 3) Remove common indentation from all lines
+    const dedentedLines = lines.map((line) => {
+        // if (line.trim().length === 0) {
+        //     return line
+        // }
+        return line.slice(minIndent)
+    })
+
+    return dedentedLines.join('\n')
+}
