@@ -15,68 +15,76 @@ var defaultResponsiveVariants = {
 	base: "I6854:8695;6765:3116",
 };
 stdin_default.Responsive = ({ locale, ...rest }) => {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			E9iSo0Hog: {
-				path: "/docs",
-			},
-			TdQ_ISe7W: {
-				path: "/404",
-			},
-			YC1NE44pE: {
-				path: "/terms",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			jg9o0Jk8V: {
-				path: "/privacy",
-			},
-			rHzp0yyuW: {
-				path: "/blog-3",
-			},
-		},
-		children: /* @__PURE__ */ jsx(WithFramerBreakpoints, {
-			Component: stdin_default,
-			variants: defaultResponsiveVariants,
-			...rest,
-		}),
-		framerSiteId:
-			"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				E9iSo0Hog: {
+					path: "/docs",
+				},
+				TdQ_ISe7W: {
+					path: "/404",
+				},
+				YC1NE44pE: {
+					path: "/terms",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				jg9o0Jk8V: {
+					path: "/privacy",
+				},
+				rHzp0yyuW: {
+					path: "/blog-3",
+				},
+			}}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
+		</ContextProviders>
+	);
 };
 function ComponentWithRoot({ locale, ...rest }) {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			E9iSo0Hog: {
-				path: "/docs",
-			},
-			TdQ_ISe7W: {
-				path: "/404",
-			},
-			YC1NE44pE: {
-				path: "/terms",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			jg9o0Jk8V: {
-				path: "/privacy",
-			},
-			rHzp0yyuW: {
-				path: "/blog-3",
-			},
-		},
-		children: /* @__PURE__ */ jsx(stdin_default, {
-			...rest,
-		}),
-		framerSiteId:
-			"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				E9iSo0Hog: {
+					path: "/docs",
+				},
+				TdQ_ISe7W: {
+					path: "/404",
+				},
+				YC1NE44pE: {
+					path: "/terms",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				jg9o0Jk8V: {
+					path: "/privacy",
+				},
+				rHzp0yyuW: {
+					path: "/blog-3",
+				},
+			}}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default);
 export { ComponentWithRoot as default };

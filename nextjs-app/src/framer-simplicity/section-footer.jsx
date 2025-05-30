@@ -4,9 +4,17 @@
 "use client";
 
 import { stdin_default } from "./chunks/chunk-WTNHL2WX.js";
-import { className as className2, css as css2, fonts as fonts2 } from "./chunks/chunk-N2K3P4T2.js";
+import {
+	className as className2,
+	css as css2,
+	fonts as fonts2,
+} from "./chunks/chunk-N2K3P4T2.js";
 import { className, css, fonts } from "./chunks/chunk-PGXTBGNK.js";
-import { className as className3, css as css3, fonts as fonts3 } from "./chunks/chunk-SFTTTBUM.js";
+import {
+	className as className3,
+	css as css3,
+	fonts as fonts3,
+} from "./chunks/chunk-SFTTTBUM.js";
 
 // virtual:section-footer
 import { Fragment as Fragment2 } from "react";
@@ -14,720 +22,938 @@ import { ContextProviders } from "unframer";
 
 // /:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/FgpMz097ScdmqPPCKXSD/m5keEQA6U.js
 import { jsx as _jsx2, jsxs as _jsxs2 } from "react/jsx-runtime";
-import { addFonts, addPropertyControls as addPropertyControls2, ComponentViewportProvider, ControlType as ControlType2, cx, getFonts, getFontsFromSharedStyle, getLoadingLazyAtYPosition, Image, Link, ResolveLinks, RichText, SmartComponentScopedContainer, useComponentViewport, useLocaleInfo, useRouter as useRouter2, useVariantState, withCSS as withCSS2 } from "unframer";
+import {
+	addFonts,
+	addPropertyControls as addPropertyControls2,
+	ComponentViewportProvider,
+	ControlType as ControlType2,
+	cx,
+	getFonts,
+	getFontsFromSharedStyle,
+	getLoadingLazyAtYPosition,
+	Image,
+	Link,
+	ResolveLinks,
+	RichText,
+	SmartComponentScopedContainer,
+	useComponentViewport,
+	useLocaleInfo,
+	useRouter as useRouter2,
+	useVariantState,
+	withCSS as withCSS2,
+} from "unframer";
 import { LayoutGroup, motion as motion2, MotionConfigContext } from "unframer";
 import * as React from "react";
 
 // /:https://framerusercontent.com/modules/oWVHHLIj4Q7woeIlKzbt/Jo2d4bKbCdbbg0oiZ0LB/Input.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { addPropertyControls, ControlType, withCSS, useRouter, inferInitialRouteFromPath } from "unframer";
+import {
+	addPropertyControls,
+	ControlType,
+	withCSS,
+	useRouter,
+	inferInitialRouteFromPath,
+} from "unframer";
 import { motion, useAnimationControls } from "unframer";
-var emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+var emailRegex =
+	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var mailchimpRegex = /^https?:\/\/([^\/]+)[^\?]+\??(.+)$/;
-var validateEmail = email => {
-  return emailRegex.test(String(email).toLowerCase());
+var validateEmail = (email) => {
+	return emailRegex.test(String(email).toLowerCase());
 };
-var parseMailChimpUrl = url => {
-  var _url_replace_match;
-  const [, domain, parameters] = (_url_replace_match = url.replace("&amp;", "&").match(mailchimpRegex)) !== null && _url_replace_match !== void 0 ? _url_replace_match : [null, null, null];
-  return [domain, parameters ? new URLSearchParams(parameters) : null];
+var parseMailChimpUrl = (url) => {
+	var _url_replace_match;
+	const [, domain, parameters] =
+		(_url_replace_match = url.replace("&amp;", "&").match(mailchimpRegex)) !==
+			null && _url_replace_match !== void 0
+			? _url_replace_match
+			: [null, null, null];
+	return [domain, parameters ? new URLSearchParams(parameters) : null];
 };
 function safeURL(url) {
-  console.log(url);
-  try {
-    new URL(url);
-    return url;
-  } catch {
-    try {
-      new URL(`https://${url}`);
-      return `https://${url}`;
-    } catch {}
-  }
-  return void 0;
+	console.log(url);
+	try {
+		new URL(url);
+		return url;
+	} catch {
+		try {
+			new URL(`https://${url}`);
+			return `https://${url}`;
+		} catch {}
+	}
+	return void 0;
 }
 function isInternalURL(href) {
-  if (href === void 0) return false;
-  if (href.startsWith("#") || href.startsWith("/") || href.startsWith(".")) return true;
-  return false;
+	if (href === void 0) return false;
+	if (href.startsWith("#") || href.startsWith("/") || href.startsWith("."))
+		return true;
+	return false;
 }
 var VERSION = "v1";
-var Input = withCSS(function Input2({
-  service,
-  redirectAs,
-  mailchimpURL,
-  loopsID,
-  loopsUserGroup,
-  formsparkID,
-  getwaitlistAPI,
-  convertkitAPI,
-  convertkitFormID,
-  input,
-  button,
-  font,
-  layout,
-  link,
-  gap,
-  style,
-  onSubmit
-}) {
-  const [email, setEmail] = useState("");
-  const [isError, setError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const [isFocus, setFocus] = useState(false);
-  const {
-    paddingPerSide,
-    paddingTop,
-    paddingRight,
-    paddingBottom,
-    paddingLeft,
-    padding,
-    borderRadius,
-    borderObject,
-    focusObject,
-    shadowObject,
-    height,
-    fixedHeight
-  } = input;
-  const {
-    buttonPaddingPerSide,
-    buttonPaddingTop,
-    buttonPaddingRight,
-    buttonPaddingBottom,
-    buttonPaddingLeft,
-    buttonPadding
-  } = button;
-  const paddingValue = paddingPerSide ? `${paddingTop}px ${button.isDocked ? paddingRight + button.widthWhenDocked : paddingRight}px ${paddingBottom}px ${paddingLeft}px` : `${padding}px ${button.isDocked ? padding + button.widthWhenDocked : padding}px ${padding}px ${padding}px`;
-  const buttonPaddingValue = buttonPaddingPerSide ? `${button.isDocked ? 0 : buttonPaddingTop}px ${buttonPaddingRight}px ${button.isDocked ? 0 : buttonPaddingBottom}px ${buttonPaddingLeft}px` : `${button.isDocked ? 0 : buttonPadding}px ${buttonPadding}px ${button.isDocked ? 0 : buttonPadding}px ${buttonPadding}px`;
-  const router = useRouter();
-  const onSuccess = () => {
-    setLoading(false);
-    setFocus(false);
-    setEmail("");
-    if (redirectAs === "link" && link && !isError) {
-      const [path, hash] = link.split("#");
-      const {
-        routeId,
-        pathVariables
-      } = inferInitialRouteFromPath(router.routes, path);
-      if (routeId) {
-        router.navigate(routeId, hash, pathVariables);
-      }
-      if (!isInternalURL(link)) {
-        const url = safeURL(link);
-        if (url) window.open(url, "_blank");
-      }
-    }
-  };
-  const validateForm = useCallback(email2 => {
-    if (email2 === "" || !validateEmail(email2)) {
-      setError(true);
-      formControls.start("error");
-      return false;
-    }
-    return true;
-  }, [validateEmail]);
-  const handleChange = useCallback(event => {
-    setError(false);
-    setEmail(event.target.value);
-  }, []);
-  const handleFocus = useCallback(event => {
-    setFocus(true);
-  }, []);
-  const handleBlur = useCallback(event => {
-    setFocus(false);
-    setError(false);
-  }, []);
-  const handleSubmit = useCallback(event => {
-    event.preventDefault();
-    if (isLoading) return;
-    setLoading(true);
-    if (service === "mailchimp") {
-      const [domain, parameters] = parseMailChimpUrl(mailchimpURL);
-      if (!validateForm(email) || !domain || !parameters) {
-        setLoading(false);
-        return;
-      }
-      parameters.set("MERGE0", email);
-      fetch(`https://${domain}/subscribe/post`, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-        },
-        body: parameters.toString()
-      }).then(response => {
-        onSuccess();
-        if (redirectAs === "overlay") onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
-      }).catch(error => {
-        console.error(error);
-        setLoading(false);
-        setError(true);
-        formControls.start("error");
-      });
-    }
-    if (service === "loops") {
-      if (!validateForm(email)) {
-        setLoading(false);
-        return;
-      }
-      const emailBody = `email=${encodeURIComponent(email)}`;
-      const userGroupBody = `userGroup=${encodeURIComponent(loopsUserGroup)}`;
-      const hasUserGroup = !!loopsUserGroup && loopsUserGroup !== " ";
-      const formBody = hasUserGroup ? emailBody + "&" + userGroupBody : emailBody;
-      fetch(`https://app.loops.so/api/newsletter-form/${loopsID}`, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formBody
-      }).then(() => {
-        onSuccess();
-        if (redirectAs === "overlay") onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
-      }).catch(error => {
-        console.error(error);
-        setLoading(false);
-        setError(true);
-        formControls.start("error");
-      });
-    }
-    if (service === "formspark") {
-      if (!validateForm(email)) {
-        setLoading(false);
-        return;
-      }
-      const data = new FormData(event.target);
-      const entries = Object.fromEntries(data.entries());
-      fetch(`https://api.formspark.io/${formsparkID}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(entries)
-      }).then(() => {
-        onSuccess();
-        onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
-      }).catch(error => {
-        console.error(error);
-        setLoading(false);
-        setError(true);
-        formControls.start("error");
-      });
-    }
-    if (service === "getwaitlist") {
-      if (!validateForm(email)) {
-        setLoading(false);
-        return;
-      }
-      const formData = new FormData(event.target);
-      const data = Object.fromEntries(formData.entries());
-      data.referral_link = document.URL;
-      fetch(`https://api.getwaitlist.com/api/v1
-/waiter/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(data)
-      }).then(() => {
-        onSuccess();
-        if (redirectAs === "overlay") onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
-      }).catch(error => {
-        console.error(error);
-        setLoading(false);
-        setError(true);
-        formControls.start("error");
-      });
-    }
-    if (service === "convertkit") {
-      if (!validateForm(email)) {
-        setLoading(false);
-        return;
-      }
-      const formData = new FormData(event.target);
-      const data = Object.fromEntries(formData.entries());
-      data.referral_link = document.URL;
-      data.api_key = convertkitAPI;
-      fetch(`https://api.convertkit.com/v3/forms/${convertkitFormID}/subscribe`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(data)
-      }).then(() => {
-        onSuccess();
-        if (redirectAs === "overlay") onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
-      }).catch(error => {
-        console.error(error);
-        setLoading(false);
-        setError(true);
-        formControls.start("error");
-      });
-    }
-  }, [mailchimpURL, formsparkID, convertkitFormID, email, onSubmit, validateForm, isLoading]);
-  const formControls = useAnimationControls();
-  const focusStylesFrom = input.focusObject ? `inset 0 0 0 ${focusObject.focusWidthFrom}px ${focusObject.focusColor}` : null;
-  const focusStylesTo = input.focusObject ? `inset 0 0 0 ${focusObject.focusWidthTo}px ${focusObject.focusColor}` : null;
-  const shadowStyles = input.shadowObject ? `${shadowObject.shadowX}px ${shadowObject.shadowY}px ${shadowObject.shadowBlur}px ${shadowObject.shadowColor}` : null;
-  const borderStyles = input.borderObject ? `inset 0 0 0 ${borderObject.borderWidth}px ${borderObject.borderColor}` : null;
-  const formVariants = {
-    default: {
-      x: 0
-    },
-    error: {
-      x: [0, -4, 4, 0],
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
-  const inputVariants = {
-    default: {
-      boxShadow: dynamicBoxShadow(focusStylesFrom, shadowStyles, borderStyles)
-    },
-    focused: {
-      boxShadow: dynamicBoxShadow(focusStylesTo, shadowStyles, borderStyles)
-    }
-  };
-  return <motion.div style={{
-    ...style,
-    ...containerStyles,
-    "--framer-custom-placeholder-color": input.placeholderColor
-  }} variants={formVariants} animate={formControls}><form style={{
-      width: "100%",
-      height: "auto",
-      display: "flex",
-      position: "relative",
-      flexDirection: layout === "vertical" ? "column" : "row",
-      color: button.color,
-      gap: button.isDocked ? 0 : gap
-    }} onSubmit={handleSubmit} method={"POST"}>{service === "getwaitlist" && <input type={"hidden"} name={"api_key"} value={getwaitlistAPI} />}{service === "convertkit" && <input type={"hidden"} name={"api_key"} value={convertkitAPI} />}<motion.input type={"email"} name={"email"} placeholder={input.placeholder} value={email} className={`${VERSION} framer-custom-input`} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} autoComplete={"off"} autoCapitalize={"off"} autoCorrect={"off"} spellCheck={"false"} style={{
-        ...defaultStyle,
-        padding: paddingValue,
-        borderRadius,
-        fontSize: 16,
-        ...font,
-        background: input.fill,
-        height: height ? "auto" : fixedHeight,
-        color: input.color,
-        boxShadow: dynamicBoxShadow(focusStylesFrom, shadowStyles, borderStyles)
-      }} variants={inputVariants} initial={false} animate={isFocus ? "focused" : "default"} transition={{
-        duration: 0.3
-      }} data-1p-ignore={true} />{!button.shouldAppear && isLoading && <Spinner shouldAppear={button.shouldAppear} paddingPerSide={paddingPerSide} paddingTop={paddingTop} paddingRight={paddingRight} padding={padding} color={input.color} />}{button.shouldAppear && <div style={{
-        position: button.isDocked ? "absolute" : "relative",
-        top: button.isDocked ? button.insetWhenDocked : 0,
-        right: button.isDocked ? button.insetWhenDocked : 0,
-        bottom: button.isDocked ? button.insetWhenDocked : 0
-      }}><motion.input type={"submit"} value={button.label} style={{
-          ...defaultStyle,
-          width: button.isDocked ? button.widthWhenDocked : "100%",
-          height: height ? "100%" : fixedHeight,
-          cursor: "pointer",
-          padding: buttonPaddingValue,
-          borderRadius: button.isDocked ? borderRadius - button.insetWhenDocked : borderRadius,
-          // fontWeight: button.fontWeight,
-          fontSize: 16,
-          ...button.buttonFont,
-          background: button.fill,
-          color: button.color,
-          zIndex: 1,
-          boxShadow: getButtonShadow(button)
-        }} />{isLoading && <div style={{
-          borderRadius: button.isDocked ? borderRadius - button.insetWhenDocked : borderRadius,
-          position: "absolute",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: "100%",
-          inset: 0,
-          zIndex: 2,
-          color: button.color,
-          background: button.fill
-        }}><Spinner color={button.color} /></div>}</div>}</form></motion.div>;
-}, [`.${VERSION}.framer-custom-input::placeholder { color: var(--framer-custom-placeholder-color) !important; }`]);
-var Spinner = props => {
-  const noButtonStyles = !props.shouldAppear ? {
-    position: "absolute",
-    top: `calc(50% - 8px)`,
-    right: props.paddingPerSide ? props.paddingRight : props.padding
-  } : {};
-  return <motion.div style={{
-    height: 16,
-    width: 16,
-    ...noButtonStyles
-  }} initial={{
-    rotate: 0
-  }} animate={{
-    rotate: 360
-  }} transition={{
-    duration: 1,
-    repeat: Infinity
-  }}><motion.div initial={{
-      scale: 0
-    }} animate={{
-      scale: 1
-    }}><svg xmlns={"http://www.w3.org/2000/svg"} width={"16"} height={"16"} style={{
-        fill: "currentColor",
-        color: props.color
-      }}><path d={"M 8 0 C 3.582 0 0 3.582 0 8 C 0 12.419 3.582 16 8 16 C 12.418 16 16 12.419 16 8 C 15.999 3.582 12.418 0 8 0 Z M 8 14 C 4.687 14 2 11.314 2 8 C 2 4.687 4.687 2 8 2 C 11.314 2 14 4.687 14 8 C 14 11.314 11.314 14 8 14 Z"} fill={"currentColor"} opacity={"0.2"} /><path d={"M 8 0 C 12.418 0 15.999 3.582 16 8 C 16 8 16 9 15 9 C 14 9 14 8 14 8 C 14 4.687 11.314 2 8 2 C 4.687 2 2 4.687 2 8 C 2 8 2 9 1 9 C 0 9 0 8 0 8 C 0 3.582 3.582 0 8 0 Z"} fill={"currentColor"} /></svg></motion.div></motion.div>;
+var Input = withCSS(
+	function Input2({
+		service,
+		redirectAs,
+		mailchimpURL,
+		loopsID,
+		loopsUserGroup,
+		formsparkID,
+		getwaitlistAPI,
+		convertkitAPI,
+		convertkitFormID,
+		input,
+		button,
+		font,
+		layout,
+		link,
+		gap,
+		style,
+		onSubmit,
+	}) {
+		const [email, setEmail] = useState("");
+		const [isError, setError] = useState(false);
+		const [isLoading, setLoading] = useState(false);
+		const [isFocus, setFocus] = useState(false);
+		const {
+			paddingPerSide,
+			paddingTop,
+			paddingRight,
+			paddingBottom,
+			paddingLeft,
+			padding,
+			borderRadius,
+			borderObject,
+			focusObject,
+			shadowObject,
+			height,
+			fixedHeight,
+		} = input;
+		const {
+			buttonPaddingPerSide,
+			buttonPaddingTop,
+			buttonPaddingRight,
+			buttonPaddingBottom,
+			buttonPaddingLeft,
+			buttonPadding,
+		} = button;
+		const paddingValue = paddingPerSide
+			? `${paddingTop}px ${button.isDocked ? paddingRight + button.widthWhenDocked : paddingRight}px ${paddingBottom}px ${paddingLeft}px`
+			: `${padding}px ${button.isDocked ? padding + button.widthWhenDocked : padding}px ${padding}px ${padding}px`;
+		const buttonPaddingValue = buttonPaddingPerSide
+			? `${button.isDocked ? 0 : buttonPaddingTop}px ${buttonPaddingRight}px ${button.isDocked ? 0 : buttonPaddingBottom}px ${buttonPaddingLeft}px`
+			: `${button.isDocked ? 0 : buttonPadding}px ${buttonPadding}px ${button.isDocked ? 0 : buttonPadding}px ${buttonPadding}px`;
+		const router = useRouter();
+		const onSuccess = () => {
+			setLoading(false);
+			setFocus(false);
+			setEmail("");
+			if (redirectAs === "link" && link && !isError) {
+				const [path, hash] = link.split("#");
+				const { routeId, pathVariables } = inferInitialRouteFromPath(
+					router.routes,
+					path,
+				);
+				if (routeId) {
+					router.navigate(routeId, hash, pathVariables);
+				}
+				if (!isInternalURL(link)) {
+					const url = safeURL(link);
+					if (url) window.open(url, "_blank");
+				}
+			}
+		};
+		const validateForm = useCallback(
+			(email2) => {
+				if (email2 === "" || !validateEmail(email2)) {
+					setError(true);
+					formControls.start("error");
+					return false;
+				}
+				return true;
+			},
+			[validateEmail],
+		);
+		const handleChange = useCallback((event) => {
+			setError(false);
+			setEmail(event.target.value);
+		}, []);
+		const handleFocus = useCallback((event) => {
+			setFocus(true);
+		}, []);
+		const handleBlur = useCallback((event) => {
+			setFocus(false);
+			setError(false);
+		}, []);
+		const handleSubmit = useCallback(
+			(event) => {
+				event.preventDefault();
+				if (isLoading) return;
+				setLoading(true);
+				if (service === "mailchimp") {
+					const [domain, parameters] = parseMailChimpUrl(mailchimpURL);
+					if (!validateForm(email) || !domain || !parameters) {
+						setLoading(false);
+						return;
+					}
+					parameters.set("MERGE0", email);
+					fetch(`https://${domain}/subscribe/post`, {
+						method: "POST",
+						mode: "no-cors",
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+						},
+						body: parameters.toString(),
+					})
+						.then((response) => {
+							onSuccess();
+							if (redirectAs === "overlay")
+								onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
+						})
+						.catch((error) => {
+							console.error(error);
+							setLoading(false);
+							setError(true);
+							formControls.start("error");
+						});
+				}
+				if (service === "loops") {
+					if (!validateForm(email)) {
+						setLoading(false);
+						return;
+					}
+					const emailBody = `email=${encodeURIComponent(email)}`;
+					const userGroupBody = `userGroup=${encodeURIComponent(loopsUserGroup)}`;
+					const hasUserGroup = !!loopsUserGroup && loopsUserGroup !== " ";
+					const formBody = hasUserGroup
+						? emailBody + "&" + userGroupBody
+						: emailBody;
+					fetch(`https://app.loops.so/api/newsletter-form/${loopsID}`, {
+						method: "POST",
+						mode: "no-cors",
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded",
+						},
+						body: formBody,
+					})
+						.then(() => {
+							onSuccess();
+							if (redirectAs === "overlay")
+								onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
+						})
+						.catch((error) => {
+							console.error(error);
+							setLoading(false);
+							setError(true);
+							formControls.start("error");
+						});
+				}
+				if (service === "formspark") {
+					if (!validateForm(email)) {
+						setLoading(false);
+						return;
+					}
+					const data = new FormData(event.target);
+					const entries = Object.fromEntries(data.entries());
+					fetch(`https://api.formspark.io/${formsparkID}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							Accept: "application/json",
+						},
+						body: JSON.stringify(entries),
+					})
+						.then(() => {
+							onSuccess();
+							onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
+						})
+						.catch((error) => {
+							console.error(error);
+							setLoading(false);
+							setError(true);
+							formControls.start("error");
+						});
+				}
+				if (service === "getwaitlist") {
+					if (!validateForm(email)) {
+						setLoading(false);
+						return;
+					}
+					const formData = new FormData(event.target);
+					const data = Object.fromEntries(formData.entries());
+					data.referral_link = document.URL;
+					fetch(
+						`https://api.getwaitlist.com/api/v1
+/waiter/`,
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								Accept: "application/json",
+							},
+							body: JSON.stringify(data),
+						},
+					)
+						.then(() => {
+							onSuccess();
+							if (redirectAs === "overlay")
+								onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
+						})
+						.catch((error) => {
+							console.error(error);
+							setLoading(false);
+							setError(true);
+							formControls.start("error");
+						});
+				}
+				if (service === "convertkit") {
+					if (!validateForm(email)) {
+						setLoading(false);
+						return;
+					}
+					const formData = new FormData(event.target);
+					const data = Object.fromEntries(formData.entries());
+					data.referral_link = document.URL;
+					data.api_key = convertkitAPI;
+					fetch(
+						`https://api.convertkit.com/v3/forms/${convertkitFormID}/subscribe`,
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								Accept: "application/json",
+							},
+							body: JSON.stringify(data),
+						},
+					)
+						.then(() => {
+							onSuccess();
+							if (redirectAs === "overlay")
+								onSubmit === null || onSubmit === void 0 ? void 0 : onSubmit();
+						})
+						.catch((error) => {
+							console.error(error);
+							setLoading(false);
+							setError(true);
+							formControls.start("error");
+						});
+				}
+			},
+			[
+				mailchimpURL,
+				formsparkID,
+				convertkitFormID,
+				email,
+				onSubmit,
+				validateForm,
+				isLoading,
+			],
+		);
+		const formControls = useAnimationControls();
+		const focusStylesFrom = input.focusObject
+			? `inset 0 0 0 ${focusObject.focusWidthFrom}px ${focusObject.focusColor}`
+			: null;
+		const focusStylesTo = input.focusObject
+			? `inset 0 0 0 ${focusObject.focusWidthTo}px ${focusObject.focusColor}`
+			: null;
+		const shadowStyles = input.shadowObject
+			? `${shadowObject.shadowX}px ${shadowObject.shadowY}px ${shadowObject.shadowBlur}px ${shadowObject.shadowColor}`
+			: null;
+		const borderStyles = input.borderObject
+			? `inset 0 0 0 ${borderObject.borderWidth}px ${borderObject.borderColor}`
+			: null;
+		const formVariants = {
+			default: {
+				x: 0,
+			},
+			error: {
+				x: [0, -4, 4, 0],
+				transition: {
+					duration: 0.2,
+				},
+			},
+		};
+		const inputVariants = {
+			default: {
+				boxShadow: dynamicBoxShadow(
+					focusStylesFrom,
+					shadowStyles,
+					borderStyles,
+				),
+			},
+			focused: {
+				boxShadow: dynamicBoxShadow(focusStylesTo, shadowStyles, borderStyles),
+			},
+		};
+		return (
+			<motion.div
+				style={{
+					...style,
+					...containerStyles,
+					"--framer-custom-placeholder-color": input.placeholderColor,
+				}}
+				variants={formVariants}
+				animate={formControls}
+			>
+				<form
+					style={{
+						width: "100%",
+						height: "auto",
+						display: "flex",
+						position: "relative",
+						flexDirection: layout === "vertical" ? "column" : "row",
+						color: button.color,
+						gap: button.isDocked ? 0 : gap,
+					}}
+					onSubmit={handleSubmit}
+					method={"POST"}
+				>
+					{service === "getwaitlist" && (
+						<input type={"hidden"} name={"api_key"} value={getwaitlistAPI} />
+					)}
+					{service === "convertkit" && (
+						<input type={"hidden"} name={"api_key"} value={convertkitAPI} />
+					)}
+					<motion.input
+						type={"email"}
+						name={"email"}
+						placeholder={input.placeholder}
+						value={email}
+						className={`${VERSION} framer-custom-input`}
+						onChange={handleChange}
+						onFocus={handleFocus}
+						onBlur={handleBlur}
+						autoComplete={"off"}
+						autoCapitalize={"off"}
+						autoCorrect={"off"}
+						spellCheck={"false"}
+						style={{
+							...defaultStyle,
+							padding: paddingValue,
+							borderRadius,
+							fontSize: 16,
+							...font,
+							background: input.fill,
+							height: height ? "auto" : fixedHeight,
+							color: input.color,
+							boxShadow: dynamicBoxShadow(
+								focusStylesFrom,
+								shadowStyles,
+								borderStyles,
+							),
+						}}
+						variants={inputVariants}
+						initial={false}
+						animate={isFocus ? "focused" : "default"}
+						transition={{
+							duration: 0.3,
+						}}
+						data-1p-ignore={true}
+					/>
+					{!button.shouldAppear && isLoading && (
+						<Spinner
+							shouldAppear={button.shouldAppear}
+							paddingPerSide={paddingPerSide}
+							paddingTop={paddingTop}
+							paddingRight={paddingRight}
+							padding={padding}
+							color={input.color}
+						/>
+					)}
+					{button.shouldAppear && (
+						<div
+							style={{
+								position: button.isDocked ? "absolute" : "relative",
+								top: button.isDocked ? button.insetWhenDocked : 0,
+								right: button.isDocked ? button.insetWhenDocked : 0,
+								bottom: button.isDocked ? button.insetWhenDocked : 0,
+							}}
+						>
+							<motion.input
+								type={"submit"}
+								value={button.label}
+								style={{
+									...defaultStyle,
+									width: button.isDocked ? button.widthWhenDocked : "100%",
+									height: height ? "100%" : fixedHeight,
+									cursor: "pointer",
+									padding: buttonPaddingValue,
+									borderRadius: button.isDocked
+										? borderRadius - button.insetWhenDocked
+										: borderRadius,
+									// fontWeight: button.fontWeight,
+									fontSize: 16,
+									...button.buttonFont,
+									background: button.fill,
+									color: button.color,
+									zIndex: 1,
+									boxShadow: getButtonShadow(button),
+								}}
+							/>
+							{isLoading && (
+								<div
+									style={{
+										borderRadius: button.isDocked
+											? borderRadius - button.insetWhenDocked
+											: borderRadius,
+										position: "absolute",
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										width: "100%",
+										height: "100%",
+										inset: 0,
+										zIndex: 2,
+										color: button.color,
+										background: button.fill,
+									}}
+								>
+									<Spinner color={button.color} />
+								</div>
+							)}
+						</div>
+					)}
+				</form>
+			</motion.div>
+		);
+	},
+	[
+		`.${VERSION}.framer-custom-input::placeholder { color: var(--framer-custom-placeholder-color) !important; }`,
+	],
+);
+var Spinner = (props) => {
+	const noButtonStyles = !props.shouldAppear
+		? {
+				position: "absolute",
+				top: `calc(50% - 8px)`,
+				right: props.paddingPerSide ? props.paddingRight : props.padding,
+			}
+		: {};
+	return (
+		<motion.div
+			style={{
+				height: 16,
+				width: 16,
+				...noButtonStyles,
+			}}
+			initial={{
+				rotate: 0,
+			}}
+			animate={{
+				rotate: 360,
+			}}
+			transition={{
+				duration: 1,
+				repeat: Infinity,
+			}}
+		>
+			<motion.div
+				initial={{
+					scale: 0,
+				}}
+				animate={{
+					scale: 1,
+				}}
+			>
+				<svg
+					xmlns={"http://www.w3.org/2000/svg"}
+					width={"16"}
+					height={"16"}
+					style={{
+						fill: "currentColor",
+						color: props.color,
+					}}
+				>
+					<path
+						d={
+							"M 8 0 C 3.582 0 0 3.582 0 8 C 0 12.419 3.582 16 8 16 C 12.418 16 16 12.419 16 8 C 15.999 3.582 12.418 0 8 0 Z M 8 14 C 4.687 14 2 11.314 2 8 C 2 4.687 4.687 2 8 2 C 11.314 2 14 4.687 14 8 C 14 11.314 11.314 14 8 14 Z"
+						}
+						fill={"currentColor"}
+						opacity={"0.2"}
+					/>
+					<path
+						d={
+							"M 8 0 C 12.418 0 15.999 3.582 16 8 C 16 8 16 9 15 9 C 14 9 14 8 14 8 C 14 4.687 11.314 2 8 2 C 4.687 2 2 4.687 2 8 C 2 8 2 9 1 9 C 0 9 0 8 0 8 C 0 3.582 3.582 0 8 0 Z"
+						}
+						fill={"currentColor"}
+					/>
+				</svg>
+			</motion.div>
+		</motion.div>
+	);
 };
 addPropertyControls(Input, {
-  service: {
-    title: "Service",
-    type: ControlType.Enum,
-    options: ["loops", "formspark", "mailchimp", "getwaitlist", "convertkit"],
-    optionTitles: ["Loops", "FormSpark", "MailChimp", "Get Waitlist", "ConvertKit"],
-    defaultValue: "loops"
-  },
-  mailchimpURL: {
-    title: "URL",
-    placeholder: "https://***.us6.list-manage.com/subscribe/post?u=***",
-    type: ControlType.String,
-    hidden: props => props.service !== "mailchimp"
-  },
-  loopsID: {
-    title: "ID",
-    placeholder: "klm2jxy0i98abzr01pq7defg5",
-    type: ControlType.String,
-    hidden: props => props.service !== "loops"
-  },
-  loopsUserGroup: {
-    title: "User Group",
-    type: ControlType.String,
-    placeholder: "Title",
-    optional: true,
-    hidden: props => props.service !== "loops"
-  },
-  formsparkID: {
-    title: "ID",
-    placeholder: "7PbPpGN3",
-    type: ControlType.String,
-    hidden: props => props.service !== "formspark"
-  },
-  getwaitlistAPI: {
-    title: "ID",
-    placeholder: "9148",
-    type: ControlType.String,
-    hidden: props => props.service !== "getwaitlist"
-  },
-  convertkitAPI: {
-    title: "API Key",
-    placeholder: "5opis1WK6xnVsBwrOINUpe",
-    type: ControlType.String,
-    hidden: props => props.service !== "convertkit"
-  },
-  convertkitFormID: {
-    title: "Form ID",
-    placeholder: "1043389",
-    type: ControlType.String,
-    hidden: props => props.service !== "convertkit"
-  },
-  redirectAs: {
-    title: "Success",
-    type: ControlType.Enum,
-    options: ["link", "overlay"],
-    optionTitles: ["Open Link", "Show Overlay"],
-    defaultValue: "link"
-  },
-  link: {
-    title: "Redirect",
-    type: ControlType.Link,
-    hidden: props => props.redirectAs === "overlay"
-  },
-  onSubmit: {
-    title: "Submit",
-    type: ControlType.EventHandler,
-    hidden: props => props.redirectAs === "link"
-  },
-  layout: {
-    title: "Layout",
-    type: ControlType.Enum,
-    options: ["horizontal", "vertical"],
-    displaySegmentedControl: true,
-    hidden: props => props.button.isDocked
-  },
-  font: {
-    type: ControlType.Font,
-    title: "Font",
-    controls: "extended"
-  },
-  input: {
-    title: "Input",
-    type: ControlType.Object,
-    controls: {
-      placeholder: {
-        title: "Placeholder",
-        type: ControlType.String,
-        defaultValue: "name@email.com"
-      },
-      placeholderColor: {
-        title: " ",
-        type: ControlType.Color,
-        defaultValue: "rgba(0, 0, 0, 0.3)"
-      },
-      fill: {
-        title: "Fill",
-        type: ControlType.Color,
-        defaultValue: "#EBEBEB"
-      },
-      color: {
-        title: "Text",
-        type: ControlType.Color,
-        defaultValue: "#000"
-      },
-      height: {
-        title: "Height",
-        type: ControlType.Boolean,
-        enabledTitle: "Auto",
-        disabledTitle: "Fixed"
-      },
-      fixedHeight: {
-        title: " ",
-        type: ControlType.Number,
-        displayStepper: true,
-        min: 0,
-        defaultValue: 50,
-        hidden: props => props.height
-      },
-      padding: {
-        title: "Padding",
-        type: ControlType.FusedNumber,
-        toggleKey: "paddingPerSide",
-        toggleTitles: ["Padding", "Padding per side"],
-        defaultValue: 15,
-        valueKeys: ["paddingTop", "paddingRight", "paddingBottom", "paddingLeft"],
-        valueLabels: ["T", "R", "B", "L"],
-        min: 0
-      },
-      borderRadius: {
-        title: "Radius",
-        type: ControlType.Number,
-        displayStepper: true,
-        min: 0,
-        defaultValue: 8
-      },
-      focusObject: {
-        type: ControlType.Object,
-        title: "Focus",
-        optional: true,
-        controls: {
-          focusWidthFrom: {
-            title: "From",
-            type: ControlType.Number,
-            displayStepper: true,
-            defaultValue: 0
-          },
-          focusWidthTo: {
-            title: "To",
-            type: ControlType.Number,
-            displayStepper: true,
-            defaultValue: 2
-          },
-          focusColor: {
-            title: "Color",
-            type: ControlType.Color,
-            defaultValue: "#09F"
-          }
-        }
-      },
-      borderObject: {
-        type: ControlType.Object,
-        title: "Border",
-        optional: true,
-        controls: {
-          borderWidth: {
-            title: "Width",
-            type: ControlType.Number,
-            displayStepper: true,
-            defaultValue: 1
-          },
-          borderColor: {
-            title: "Color",
-            type: ControlType.Color,
-            defaultValue: "rgba(200,200,200,0.5)"
-          }
-        }
-      },
-      shadowObject: {
-        type: ControlType.Object,
-        title: "Shadow",
-        optional: true,
-        controls: {
-          shadowColor: {
-            title: "Color",
-            type: ControlType.Color,
-            defaultValue: "rgba(0,0,0,0.25)"
-          },
-          shadowX: {
-            title: "Shadow X",
-            type: ControlType.Number,
-            min: -100,
-            max: 100,
-            defaultValue: 0
-          },
-          shadowY: {
-            title: "Shadow Y",
-            type: ControlType.Number,
-            min: -100,
-            max: 100,
-            defaultValue: 2
-          },
-          shadowBlur: {
-            title: "Shadow B",
-            type: ControlType.Number,
-            min: 0,
-            max: 100,
-            defaultValue: 4
-          }
-        }
-      }
-    }
-  },
-  button: {
-    title: "Button",
-    type: ControlType.Object,
-    controls: {
-      shouldAppear: {
-        title: "Show",
-        type: ControlType.Boolean,
-        defaultValue: true
-      },
-      label: {
-        title: "Label",
-        type: ControlType.String,
-        defaultValue: "Subscribe"
-      },
-      buttonFont: {
-        type: ControlType.Font,
-        title: "Font",
-        controls: "extended"
-      },
-      fill: {
-        title: "Fill",
-        type: ControlType.Color,
-        defaultValue: "#333"
-      },
-      color: {
-        title: "Text",
-        type: ControlType.Color,
-        defaultValue: "#FFF"
-      },
-      isDocked: {
-        title: "Docked",
-        type: ControlType.Boolean,
-        defaultValue: false
-      },
-      widthWhenDocked: {
-        title: "Width",
-        type: ControlType.Number,
-        min: 0,
-        defaultValue: 100,
-        displayStepper: true,
-        hidden: props => !props.isDocked
-      },
-      insetWhenDocked: {
-        title: "Inset",
-        type: ControlType.Number,
-        min: 0,
-        defaultValue: 5,
-        displayStepper: true,
-        hidden: props => !props.isDocked
-      },
-      buttonPadding: {
-        title: "Padding",
-        type: ControlType.FusedNumber,
-        toggleKey: "buttonPaddingPerSide",
-        toggleTitles: ["Padding", "Padding per side"],
-        defaultValue: 15,
-        valueKeys: ["buttonPaddingTop", "buttonPaddingRight", "buttonPaddingBottom", "buttonPaddingLeft"],
-        valueLabels: ["T", "R", "B", "L"],
-        min: 0
-      },
-      buttonShadow: {
-        type: ControlType.Object,
-        title: "Shadow",
-        optional: true,
-        controls: {
-          shadowColor: {
-            title: "Color",
-            type: ControlType.Color,
-            defaultValue: "rgba(0,0,0,0.25)"
-          },
-          shadowX: {
-            title: "Shadow X",
-            type: ControlType.Number,
-            min: -100,
-            max: 100,
-            defaultValue: 0
-          },
-          shadowY: {
-            title: "Shadow Y",
-            type: ControlType.Number,
-            min: -100,
-            max: 100,
-            defaultValue: 2
-          },
-          shadowBlur: {
-            title: "Shadow B",
-            type: ControlType.Number,
-            min: 0,
-            max: 100,
-            defaultValue: 4
-          }
-        }
-      }
-    }
-  },
-  gap: {
-    title: "Gap",
-    type: ControlType.Number,
-    displayStepper: true,
-    min: 0,
-    defaultValue: 10,
-    hidden: props => props.button.isDocked
-  }
+	service: {
+		title: "Service",
+		type: ControlType.Enum,
+		options: ["loops", "formspark", "mailchimp", "getwaitlist", "convertkit"],
+		optionTitles: [
+			"Loops",
+			"FormSpark",
+			"MailChimp",
+			"Get Waitlist",
+			"ConvertKit",
+		],
+		defaultValue: "loops",
+	},
+	mailchimpURL: {
+		title: "URL",
+		placeholder: "https://***.us6.list-manage.com/subscribe/post?u=***",
+		type: ControlType.String,
+		hidden: (props) => props.service !== "mailchimp",
+	},
+	loopsID: {
+		title: "ID",
+		placeholder: "klm2jxy0i98abzr01pq7defg5",
+		type: ControlType.String,
+		hidden: (props) => props.service !== "loops",
+	},
+	loopsUserGroup: {
+		title: "User Group",
+		type: ControlType.String,
+		placeholder: "Title",
+		optional: true,
+		hidden: (props) => props.service !== "loops",
+	},
+	formsparkID: {
+		title: "ID",
+		placeholder: "7PbPpGN3",
+		type: ControlType.String,
+		hidden: (props) => props.service !== "formspark",
+	},
+	getwaitlistAPI: {
+		title: "ID",
+		placeholder: "9148",
+		type: ControlType.String,
+		hidden: (props) => props.service !== "getwaitlist",
+	},
+	convertkitAPI: {
+		title: "API Key",
+		placeholder: "5opis1WK6xnVsBwrOINUpe",
+		type: ControlType.String,
+		hidden: (props) => props.service !== "convertkit",
+	},
+	convertkitFormID: {
+		title: "Form ID",
+		placeholder: "1043389",
+		type: ControlType.String,
+		hidden: (props) => props.service !== "convertkit",
+	},
+	redirectAs: {
+		title: "Success",
+		type: ControlType.Enum,
+		options: ["link", "overlay"],
+		optionTitles: ["Open Link", "Show Overlay"],
+		defaultValue: "link",
+	},
+	link: {
+		title: "Redirect",
+		type: ControlType.Link,
+		hidden: (props) => props.redirectAs === "overlay",
+	},
+	onSubmit: {
+		title: "Submit",
+		type: ControlType.EventHandler,
+		hidden: (props) => props.redirectAs === "link",
+	},
+	layout: {
+		title: "Layout",
+		type: ControlType.Enum,
+		options: ["horizontal", "vertical"],
+		displaySegmentedControl: true,
+		hidden: (props) => props.button.isDocked,
+	},
+	font: {
+		type: ControlType.Font,
+		title: "Font",
+		controls: "extended",
+	},
+	input: {
+		title: "Input",
+		type: ControlType.Object,
+		controls: {
+			placeholder: {
+				title: "Placeholder",
+				type: ControlType.String,
+				defaultValue: "name@email.com",
+			},
+			placeholderColor: {
+				title: " ",
+				type: ControlType.Color,
+				defaultValue: "rgba(0, 0, 0, 0.3)",
+			},
+			fill: {
+				title: "Fill",
+				type: ControlType.Color,
+				defaultValue: "#EBEBEB",
+			},
+			color: {
+				title: "Text",
+				type: ControlType.Color,
+				defaultValue: "#000",
+			},
+			height: {
+				title: "Height",
+				type: ControlType.Boolean,
+				enabledTitle: "Auto",
+				disabledTitle: "Fixed",
+			},
+			fixedHeight: {
+				title: " ",
+				type: ControlType.Number,
+				displayStepper: true,
+				min: 0,
+				defaultValue: 50,
+				hidden: (props) => props.height,
+			},
+			padding: {
+				title: "Padding",
+				type: ControlType.FusedNumber,
+				toggleKey: "paddingPerSide",
+				toggleTitles: ["Padding", "Padding per side"],
+				defaultValue: 15,
+				valueKeys: [
+					"paddingTop",
+					"paddingRight",
+					"paddingBottom",
+					"paddingLeft",
+				],
+				valueLabels: ["T", "R", "B", "L"],
+				min: 0,
+			},
+			borderRadius: {
+				title: "Radius",
+				type: ControlType.Number,
+				displayStepper: true,
+				min: 0,
+				defaultValue: 8,
+			},
+			focusObject: {
+				type: ControlType.Object,
+				title: "Focus",
+				optional: true,
+				controls: {
+					focusWidthFrom: {
+						title: "From",
+						type: ControlType.Number,
+						displayStepper: true,
+						defaultValue: 0,
+					},
+					focusWidthTo: {
+						title: "To",
+						type: ControlType.Number,
+						displayStepper: true,
+						defaultValue: 2,
+					},
+					focusColor: {
+						title: "Color",
+						type: ControlType.Color,
+						defaultValue: "#09F",
+					},
+				},
+			},
+			borderObject: {
+				type: ControlType.Object,
+				title: "Border",
+				optional: true,
+				controls: {
+					borderWidth: {
+						title: "Width",
+						type: ControlType.Number,
+						displayStepper: true,
+						defaultValue: 1,
+					},
+					borderColor: {
+						title: "Color",
+						type: ControlType.Color,
+						defaultValue: "rgba(200,200,200,0.5)",
+					},
+				},
+			},
+			shadowObject: {
+				type: ControlType.Object,
+				title: "Shadow",
+				optional: true,
+				controls: {
+					shadowColor: {
+						title: "Color",
+						type: ControlType.Color,
+						defaultValue: "rgba(0,0,0,0.25)",
+					},
+					shadowX: {
+						title: "Shadow X",
+						type: ControlType.Number,
+						min: -100,
+						max: 100,
+						defaultValue: 0,
+					},
+					shadowY: {
+						title: "Shadow Y",
+						type: ControlType.Number,
+						min: -100,
+						max: 100,
+						defaultValue: 2,
+					},
+					shadowBlur: {
+						title: "Shadow B",
+						type: ControlType.Number,
+						min: 0,
+						max: 100,
+						defaultValue: 4,
+					},
+				},
+			},
+		},
+	},
+	button: {
+		title: "Button",
+		type: ControlType.Object,
+		controls: {
+			shouldAppear: {
+				title: "Show",
+				type: ControlType.Boolean,
+				defaultValue: true,
+			},
+			label: {
+				title: "Label",
+				type: ControlType.String,
+				defaultValue: "Subscribe",
+			},
+			buttonFont: {
+				type: ControlType.Font,
+				title: "Font",
+				controls: "extended",
+			},
+			fill: {
+				title: "Fill",
+				type: ControlType.Color,
+				defaultValue: "#333",
+			},
+			color: {
+				title: "Text",
+				type: ControlType.Color,
+				defaultValue: "#FFF",
+			},
+			isDocked: {
+				title: "Docked",
+				type: ControlType.Boolean,
+				defaultValue: false,
+			},
+			widthWhenDocked: {
+				title: "Width",
+				type: ControlType.Number,
+				min: 0,
+				defaultValue: 100,
+				displayStepper: true,
+				hidden: (props) => !props.isDocked,
+			},
+			insetWhenDocked: {
+				title: "Inset",
+				type: ControlType.Number,
+				min: 0,
+				defaultValue: 5,
+				displayStepper: true,
+				hidden: (props) => !props.isDocked,
+			},
+			buttonPadding: {
+				title: "Padding",
+				type: ControlType.FusedNumber,
+				toggleKey: "buttonPaddingPerSide",
+				toggleTitles: ["Padding", "Padding per side"],
+				defaultValue: 15,
+				valueKeys: [
+					"buttonPaddingTop",
+					"buttonPaddingRight",
+					"buttonPaddingBottom",
+					"buttonPaddingLeft",
+				],
+				valueLabels: ["T", "R", "B", "L"],
+				min: 0,
+			},
+			buttonShadow: {
+				type: ControlType.Object,
+				title: "Shadow",
+				optional: true,
+				controls: {
+					shadowColor: {
+						title: "Color",
+						type: ControlType.Color,
+						defaultValue: "rgba(0,0,0,0.25)",
+					},
+					shadowX: {
+						title: "Shadow X",
+						type: ControlType.Number,
+						min: -100,
+						max: 100,
+						defaultValue: 0,
+					},
+					shadowY: {
+						title: "Shadow Y",
+						type: ControlType.Number,
+						min: -100,
+						max: 100,
+						defaultValue: 2,
+					},
+					shadowBlur: {
+						title: "Shadow B",
+						type: ControlType.Number,
+						min: 0,
+						max: 100,
+						defaultValue: 4,
+					},
+				},
+			},
+		},
+	},
+	gap: {
+		title: "Gap",
+		type: ControlType.Number,
+		displayStepper: true,
+		min: 0,
+		defaultValue: 10,
+		hidden: (props) => props.button.isDocked,
+	},
 });
 var defaultStyle = {
-  WebkitAppearance: "none",
-  appearance: "none",
-  width: "100%",
-  height: "auto",
-  outline: "none",
-  border: "none"
+	WebkitAppearance: "none",
+	appearance: "none",
+	width: "100%",
+	height: "auto",
+	outline: "none",
+	border: "none",
 };
 var containerStyles = {
-  position: "relative",
-  width: "100%",
-  height: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center"
+	position: "relative",
+	width: "100%",
+	height: "100%",
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
 };
 function getButtonShadow(button) {
-  if (button.buttonShadow) {
-    return `${button.buttonShadow.shadowX}px ${button.buttonShadow.shadowY}px ${button.buttonShadow.shadowBlur}px ${button.buttonShadow.shadowColor}`;
-  } else return "none";
+	if (button.buttonShadow) {
+		return `${button.buttonShadow.shadowX}px ${button.buttonShadow.shadowY}px ${button.buttonShadow.shadowBlur}px ${button.buttonShadow.shadowColor}`;
+	} else return "none";
 }
 function dynamicBoxShadow(...shadows) {
-  const output = [];
-  shadows.forEach(shadow => shadow && output.push(shadow));
-  return output.join(", ");
+	const output = [];
+	shadows.forEach((shadow) => shadow && output.push(shadow));
+	return output.join(", ");
 }
 var stdin_default2 = Input;
 
 // /:https://framerusercontent.com/modules/7huRV9yM58McdmZvBs30/fRle3ltkVjd5JzW6LeBZ/QqbrxlqQv.js
 import { fontStore } from "unframer";
 fontStore.loadFonts([]);
-var fonts4 = [{
-  explicitInter: true,
-  fonts: []
-}];
-var css4 = ['.framer-NXUh0 .framer-styles-preset-1fr0mxk:not(.rich-text-wrapper), .framer-NXUh0 .framer-styles-preset-1fr0mxk.rich-text-wrapper a { --framer-link-current-text-decoration: none; --framer-link-hover-text-color: var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, #ffffff) /* {"name":"Heading"} */; --framer-link-hover-text-decoration: none; --framer-link-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-link-text-decoration: none; transition: color 0.4s cubic-bezier(0.44, 0, 0.56, 1) 0s; }'];
+var fonts4 = [
+	{
+		explicitInter: true,
+		fonts: [],
+	},
+];
+var css4 = [
+	'.framer-NXUh0 .framer-styles-preset-1fr0mxk:not(.rich-text-wrapper), .framer-NXUh0 .framer-styles-preset-1fr0mxk.rich-text-wrapper a { --framer-link-current-text-decoration: none; --framer-link-hover-text-color: var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, #ffffff) /* {"name":"Heading"} */; --framer-link-hover-text-decoration: none; --framer-link-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-link-text-decoration: none; transition: color 0.4s cubic-bezier(0.44, 0, 0.56, 1) 0s; }',
+];
 var className4 = "framer-NXUh0";
 
 // /:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/FgpMz097ScdmqPPCKXSD/m5keEQA6U.js
@@ -736,493 +962,1124 @@ var InputFonts = getFonts(stdin_default2);
 var cycleOrder = ["ByvYcqeqt", "kdbCtkU1X", "Gz1rE_I8V"];
 var serializationHash = "framer-bQBAL";
 var variantClassNames = {
-  ByvYcqeqt: "framer-v-1xyvahw",
-  Gz1rE_I8V: "framer-v-rnpsh9",
-  kdbCtkU1X: "framer-v-kjjoq7"
+	ByvYcqeqt: "framer-v-1xyvahw",
+	Gz1rE_I8V: "framer-v-rnpsh9",
+	kdbCtkU1X: "framer-v-kjjoq7",
 };
 function addPropertyOverrides(overrides, ...variants) {
-  const nextOverrides = {};
-  variants?.forEach(variant => variant && Object.assign(nextOverrides, overrides[variant]));
-  return nextOverrides;
+	const nextOverrides = {};
+	variants?.forEach(
+		(variant) => variant && Object.assign(nextOverrides, overrides[variant]),
+	);
+	return nextOverrides;
 }
 var transition1 = {
-  damping: 60,
-  delay: 0,
-  mass: 1,
-  stiffness: 500,
-  type: "spring"
+	damping: 60,
+	delay: 0,
+	mass: 1,
+	stiffness: 500,
+	type: "spring",
 };
-var Transition = ({
-  value,
-  children
-}) => {
-  const config = React.useContext(MotionConfigContext);
-  const transition = value ?? config.transition;
-  const contextValue = React.useMemo(() => ({
-    ...config,
-    transition
-  }), [JSON.stringify(transition)]);
-  return <MotionConfigContext.Provider value={contextValue}>{children}</MotionConfigContext.Provider>;
+var Transition = ({ value, children }) => {
+	const config = React.useContext(MotionConfigContext);
+	const transition = value ?? config.transition;
+	const contextValue = React.useMemo(
+		() => ({
+			...config,
+			transition,
+		}),
+		[JSON.stringify(transition)],
+	);
+	return (
+		<MotionConfigContext.Provider value={contextValue}>
+			{children}
+		</MotionConfigContext.Provider>
+	);
 };
 var Variants = motion2.create(React.Fragment);
 var humanReadableVariantMap = {
-  Desktop: "ByvYcqeqt",
-  Mobile: "Gz1rE_I8V",
-  Tablet: "kdbCtkU1X"
+	Desktop: "ByvYcqeqt",
+	Mobile: "Gz1rE_I8V",
+	Tablet: "kdbCtkU1X",
 };
-var getProps = ({
-  height,
-  id,
-  width,
-  ...props
-}) => {
-  return {
-    ...props,
-    variant: humanReadableVariantMap[props.variant] ?? props.variant ?? "ByvYcqeqt"
-  };
+var getProps = ({ height, id, width, ...props }) => {
+	return {
+		...props,
+		variant:
+			humanReadableVariantMap[props.variant] ?? props.variant ?? "ByvYcqeqt",
+	};
 };
 var createLayoutDependency = (props, variants) => {
-  if (props.layoutDependency) return variants.join("-") + props.layoutDependency;
-  return variants.join("-");
+	if (props.layoutDependency)
+		return variants.join("-") + props.layoutDependency;
+	return variants.join("-");
 };
-var Component = /* @__PURE__ */React.forwardRef(function (props, ref) {
-  const {
-    activeLocale,
-    setLocale
-  } = useLocaleInfo();
-  const {
-    style,
-    className: className5,
-    layoutId,
-    variant,
-    ...restProps
-  } = getProps(props);
-  const {
-    baseVariant,
-    classNames,
-    clearLoadingGesture,
-    gestureHandlers,
-    gestureVariant,
-    isLoading,
-    setGestureState,
-    setVariant,
-    variants
-  } = useVariantState({
-    cycleOrder,
-    defaultVariant: "ByvYcqeqt",
-    variant,
-    variantClassNames
-  });
-  const layoutDependency = createLayoutDependency(props, variants);
-  const sharedStyleClassNames = [className, className3, className2, className4];
-  const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
-  const ref1 = React.useRef(null);
-  const router = useRouter2();
-  const defaultLayoutId = React.useId();
-  const componentViewport = useComponentViewport();
-  return <LayoutGroup id={layoutId ?? defaultLayoutId}><Variants animate={variants} initial={false}><Transition value={transition1}><motion2.footer {...restProps} {...gestureHandlers} className={cx(scopingClassNames, "framer-1xyvahw", className5, classNames)} data-border={true} data-framer-name={"Desktop"} layoutDependency={layoutDependency} layoutId={"ByvYcqeqt"} ref={ref ?? ref1} style={{
-          "--border-bottom-width": "0px",
-          "--border-color": "var(--token-af7273d3-1fb6-4796-9326-48ad035c57d2, rgba(255, 255, 255, 0.1))",
-          "--border-left-width": "0px",
-          "--border-right-width": "0px",
-          "--border-style": "solid",
-          "--border-top-width": "1px",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          ...style
-        }} {...addPropertyOverrides({
-          Gz1rE_I8V: {
-            "data-framer-name": "Mobile"
-          },
-          kdbCtkU1X: {
-            "data-framer-name": "Tablet"
-          }
-        }, baseVariant, gestureVariant)}><Image background={{
-            alt: "",
-            fit: "fill",
-            intrinsicHeight: 1080,
-            intrinsicWidth: 1920,
-            loading: getLoadingLazyAtYPosition((componentViewport?.y || 0) + ((componentViewport?.height || 348) * 0.4985507246376814 - (componentViewport?.height || 348) * 1.3115942028985508 / 2)),
-            pixelHeight: 2160,
-            pixelWidth: 3840,
-            positionX: "center",
-            positionY: "center",
-            sizes: componentViewport?.width || "100vw",
-            src: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048",
-            srcSet: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg 3840w"
-          }} className={"framer-lebctk"} data-framer-name={"BG"} layoutDependency={layoutDependency} layoutId={"P66uZcaJK"} style={{
-            filter: "hue-rotate(33deg)",
-            mask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add",
-            opacity: 0.75,
-            WebkitFilter: "hue-rotate(33deg)",
-            WebkitMask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add"
-          }} {...addPropertyOverrides({
-            Gz1rE_I8V: {
-              background: {
-                alt: "",
-                fit: "fill",
-                intrinsicHeight: 1080,
-                intrinsicWidth: 1920,
-                loading: getLoadingLazyAtYPosition((componentViewport?.y || 0) + ((componentViewport?.height || 200) * 0.4985507246376814 - (componentViewport?.height || 200) * 1.3115942028985508 / 2)),
-                pixelHeight: 2160,
-                pixelWidth: 3840,
-                positionX: "center",
-                positionY: "center",
-                sizes: componentViewport?.width || "100vw",
-                src: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048",
-                srcSet: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg 3840w"
-              }
-            },
-            kdbCtkU1X: {
-              background: {
-                alt: "",
-                fit: "fill",
-                intrinsicHeight: 1080,
-                intrinsicWidth: 1920,
-                loading: getLoadingLazyAtYPosition((componentViewport?.y || 0) + ((componentViewport?.height || 354) * 0.4985507246376814 - (componentViewport?.height || 354) * 1.3115942028985508 / 2)),
-                pixelHeight: 2160,
-                pixelWidth: 3840,
-                positionX: "center",
-                positionY: "center",
-                sizes: componentViewport?.width || "100vw",
-                src: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048",
-                srcSet: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg 3840w"
-              }
-            }
-          }, baseVariant, gestureVariant)} /><motion2.div className={"framer-4aroaq"} data-framer-name={"Container"} layoutDependency={layoutDependency} layoutId={"wBtGzI7cw"}><motion2.div className={"framer-51n2j"} data-framer-name={"Logo + Socials"} layoutDependency={layoutDependency} layoutId={"kE9fURpZq"}><ResolveLinks links={[{
-                href: {
-                  webPageId: "augiA20Il"
-                },
-                implicitPathVariables: void 0
-              }, {
-                href: {
-                  webPageId: "augiA20Il"
-                },
-                implicitPathVariables: void 0
-              }, {
-                href: {
-                  webPageId: "augiA20Il"
-                },
-                implicitPathVariables: void 0
-              }]}>{resolvedLinks => <ComponentViewportProvider height={36} width={"36px"} y={(componentViewport?.y || 0) + 64 + (((componentViewport?.height || 348) - 128 - 379) / 2 + 0 + 0) + 0 + 0 + 0 + 0} {...addPropertyOverrides({
-                  Gz1rE_I8V: {
-                    y: (componentViewport?.y || 0) + 64 + (((componentViewport?.height || 200) - 128 - 651) / 2 + 0 + 0) + 0 + 0 + 0 + 0
-                  },
-                  kdbCtkU1X: {
-                    y: (componentViewport?.y || 0) + 64 + (((componentViewport?.height || 354) - 128 - 379) / 2 + 0 + 0) + 0 + 0 + 0 + 0
-                  }
-                }, baseVariant, gestureVariant)}><SmartComponentScopedContainer className={"framer-2j1wk2-container"} layoutDependency={layoutDependency} layoutId={"MQUnesvFM-container"} nodeId={"MQUnesvFM"} rendersWithMotion={true} scopeId={"m5keEQA6U"}>_jsx2(stdin_default, {
-                      height: "100%",
-                      id: "MQUnesvFM",
-                      layoutId: "MQUnesvFM",
-                      style: {
-                        height: "100%",
-                        width: "100%"
-                      },
-                      width: "100%",
-                      ZceSIG0ZG: resolvedLinks[0],
-                      ...addPropertyOverrides({
-                        Gz1rE_I8V: {
-                          ZceSIG0ZG: resolvedLinks[2]
-                        },
-                        kdbCtkU1X: {
-                          ZceSIG0ZG: resolvedLinks[1]
-                        }
-                      }, baseVariant, gestureVariant)
-                    })</SmartComponentScopedContainer></ComponentViewportProvider>}</ResolveLinks></motion2.div><motion2.div className={"framer-1hjoplj"} data-framer-name={"Newsletter + Sitemap"} layoutDependency={layoutDependency} layoutId={"GQpNj2GWU"}><motion2.div className={"framer-1qeoqxl"} data-framer-name={"Newsletter"} layoutDependency={layoutDependency} layoutId={"cFzxXrwyT"}><motion2.div className={"framer-35bfwh"} data-framer-name={"Description"} layoutDependency={layoutDependency} layoutId={"uFzI4kgRx"}><RichText __fromCanvasComponent={true} className={"framer-2q2c69"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"w2KLXvEhU"} style={{
-                    "--extracted-r6o4lv": "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                    "--framer-link-text-color": "rgb(0, 153, 255)",
-                    "--framer-link-text-decoration": "underline",
-                    "--framer-paragraph-spacing": "0px"
-                  }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-1qe6evr"} data-styles-preset={"wHLHeTMJ0"} style={{
-                        "--framer-text-alignment": "left",
-                        "--framer-text-color": "var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))"
-                      }}>{"Join our newsletter"}</motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-q6t2vz"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"wmAxIojN6"} style={{
-                    "--extracted-r6o4lv": "var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7))",
-                    "--framer-link-text-color": "rgb(0, 153, 255)",
-                    "--framer-link-text-decoration": "underline",
-                    "--framer-paragraph-spacing": "0px"
-                  }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-1fgmqi7"} data-styles-preset={"CWRpkcDNO"} style={{
-                        "--framer-text-alignment": "left",
-                        "--framer-text-color": "var(--extracted-r6o4lv, var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)))"
-                      }}>{"Sign up to our mailing list below and be the first to know about new updates. Don't worry, we hate spam too."}</motion2.p></React.Fragment></RichText></motion2.div><ComponentViewportProvider><SmartComponentScopedContainer className={"framer-jwpma1-container"} isAuthoredByUser={true} isModuleExternal={true} layoutDependency={layoutDependency} layoutId={"f85CSRcw9-container"} nodeId={"f85CSRcw9"} rendersWithMotion={true} scopeId={"m5keEQA6U"}>_jsx2(stdin_default2, {
-                      button: {
-                        buttonFont: {
-                          fontFamily: '"Satoshi", "Satoshi Placeholder", sans-serif',
-                          fontSize: "16px",
-                          fontStyle: "normal",
-                          fontWeight: 500,
-                          letterSpacing: "-0.02em",
-                          lineHeight: "1em"
-                        },
-                        buttonPadding: 12,
-                        buttonPaddingBottom: 12,
-                        buttonPaddingLeft: 16,
-                        buttonPaddingPerSide: true,
-                        buttonPaddingRight: 16,
-                        buttonPaddingTop: 12,
-                        color: "var(--token-958d6a9e-bb7c-4a88-a47a-70db899d1dd5, rgb(252, 252, 250))",
-                        fill: "var(--token-e3c51256-0961-4b79-ba15-cc3f17394ba4, rgb(81, 47, 235))",
-                        insetWhenDocked: 5,
-                        isDocked: false,
-                        label: "Get Notified",
-                        shouldAppear: true,
-                        widthWhenDocked: 120
-                      },
-                      convertkitAPI: "",
-                      convertkitFormID: "",
-                      font: {
-                        fontFamily: '"Satoshi", "Satoshi Placeholder", sans-serif',
-                        fontSize: "16px",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        letterSpacing: "-0.02em",
-                        lineHeight: "1.2em"
-                      },
-                      formsparkID: "",
-                      gap: 10,
-                      getwaitlistAPI: "",
-                      height: "100%",
-                      id: "f85CSRcw9",
-                      input: {
-                        borderRadius: 12,
-                        color: "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                        fill: "var(--token-115c046d-423c-4ec9-aef7-c8228c767968, rgba(255, 255, 255, 0.04))",
-                        fixedHeight: 50,
-                        focusObject: {
-                          focusColor: "rgba(255, 255, 255, 0.1)",
-                          focusWidthFrom: 0,
-                          focusWidthTo: 2
-                        },
-                        height: true,
-                        padding: 12,
-                        paddingBottom: 12,
-                        paddingLeft: 12,
-                        paddingPerSide: false,
-                        paddingRight: 12,
-                        paddingTop: 12,
-                        placeholder: "Your Email Address",
-                        placeholderColor: "var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7))"
-                      },
-                      layout: "horizontal",
-                      layoutId: "f85CSRcw9",
-                      loopsID: "clobcloc900brmm0proyyz9wu",
-                      loopsUserGroup: "Built In Framer",
-                      mailchimpURL: "",
-                      redirectAs: "link",
-                      service: "formspark",
-                      style: {
-                        maxWidth: "100%",
-                        width: "100%"
-                      },
-                      width: "100%"
-                    })</SmartComponentScopedContainer></ComponentViewportProvider></motion2.div><motion2.div className={"framer-zm8v2b"} data-framer-name={"Sitemap"} layoutDependency={layoutDependency} layoutId={"FueLQooPm"}><motion2.div className={"framer-1c57hm2"} data-framer-name={"Account"} layoutDependency={layoutDependency} layoutId={"CSxEK3_yc"}><RichText __fromCanvasComponent={true} className={"framer-jdyvvx"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"TdJMUhpRm"} style={{
-                    "--extracted-r6o4lv": "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                    "--framer-link-text-color": "rgb(0, 153, 255)",
-                    "--framer-link-text-decoration": "underline",
-                    "--framer-paragraph-spacing": "0px"
-                  }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-1fgmqi7"} data-styles-preset={"CWRpkcDNO"} style={{
-                        "--framer-text-color": "var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))"
-                      }}>{"Sections"}</motion2.p></React.Fragment></RichText><motion2.div className={"framer-h6pu6e"} data-framer-name={"Pages"} layoutDependency={layoutDependency} layoutId={"bMKfbJv7i"}><RichText __fromCanvasComponent={true} className={"framer-6v65zf"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"uULMEi1eH"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            hash: ":tZ3Nk88mM",
-                            webPageId: "augiA20Il"
-                          }} nodeId={"uULMEi1eH"} openInNewTab={false} smoothScroll={true}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"How It Works"}</motion2.a></Link></motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-1w85510"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"bkierWyI1"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            hash: ":sHnGLtvML",
-                            webPageId: "augiA20Il"
-                          }} nodeId={"bkierWyI1"} openInNewTab={false} smoothScroll={true}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"Features"}</motion2.a></Link></motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-1mzz3wa"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"oDLvbqDww"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            hash: ":jEif1shEi",
-                            webPageId: "augiA20Il"
-                          }} nodeId={"oDLvbqDww"} openInNewTab={false} smoothScroll={true}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"Testimonials"}</motion2.a></Link></motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-149njf6"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"IWOXRQovK"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            hash: ":NK_tcQhZf",
-                            webPageId: "augiA20Il"
-                          }} nodeId={"IWOXRQovK"} openInNewTab={false} smoothScroll={true}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"Pricing"}</motion2.a></Link></motion2.p></React.Fragment></RichText></motion2.div></motion2.div><motion2.div className={"framer-1pw2j6z"} data-framer-name={"Information"} layoutDependency={layoutDependency} layoutId={"rLEHlxq9m"}><RichText __fromCanvasComponent={true} className={"framer-1caedjc"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"NQGFDCmu2"} style={{
-                    "--extracted-r6o4lv": "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                    "--framer-link-text-color": "rgb(0, 153, 255)",
-                    "--framer-link-text-decoration": "underline",
-                    "--framer-paragraph-spacing": "0px"
-                  }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-1fgmqi7"} data-styles-preset={"CWRpkcDNO"} style={{
-                        "--framer-text-color": "var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))"
-                      }}>{"Information"}</motion2.p></React.Fragment></RichText><motion2.div className={"framer-w2wpd5"} data-framer-name={"Pages"} layoutDependency={layoutDependency} layoutId={"CRYUebkza"}><RichText __fromCanvasComponent={true} className={"framer-1qpminj"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"WeHGfVy6R"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            hash: ":g_GAoicEt",
-                            webPageId: "augiA20Il"
-                          }} nodeId={"WeHGfVy6R"} openInNewTab={false} smoothScroll={true}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"FAQ"}</motion2.a></Link></motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-1kuie0d"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"i3B2JHop5"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            webPageId: "jg9o0Jk8V"
-                          }} nodeId={"i3B2JHop5"} openInNewTab={false} smoothScroll={false}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"Privacy"}</motion2.a></Link></motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-wpllre"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"A6S2uOeeN"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            webPageId: "TdQ_ISe7W"
-                          }} nodeId={"A6S2uOeeN"} openInNewTab={false} smoothScroll={false}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"404"}</motion2.a></Link></motion2.p></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-1vzi2vs"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"EHNV3Abmg"} style={{
-                      "--framer-paragraph-spacing": "0px"
-                    }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion2.p className={"framer-styles-preset-14ew30v"} data-styles-preset={"TQvmJK7UB"}><Link href={{
-                            webPageId: "YC1NE44pE"
-                          }} nodeId={"EHNV3Abmg"} openInNewTab={false} smoothScroll={false}><motion2.a className={"framer-styles-preset-1fr0mxk"} data-styles-preset={"QqbrxlqQv"}>{"Terms"}</motion2.a></Link></motion2.p></React.Fragment></RichText></motion2.div></motion2.div></motion2.div></motion2.div></motion2.div></motion2.footer></Transition></Variants></LayoutGroup>;
+var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
+	const { activeLocale, setLocale } = useLocaleInfo();
+	const {
+		style,
+		className: className5,
+		layoutId,
+		variant,
+		...restProps
+	} = getProps(props);
+	const {
+		baseVariant,
+		classNames,
+		clearLoadingGesture,
+		gestureHandlers,
+		gestureVariant,
+		isLoading,
+		setGestureState,
+		setVariant,
+		variants,
+	} = useVariantState({
+		cycleOrder,
+		defaultVariant: "ByvYcqeqt",
+		variant,
+		variantClassNames,
+	});
+	const layoutDependency = createLayoutDependency(props, variants);
+	const sharedStyleClassNames = [className, className3, className2, className4];
+	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
+	const ref1 = React.useRef(null);
+	const router = useRouter2();
+	const defaultLayoutId = React.useId();
+	const componentViewport = useComponentViewport();
+	return (
+		<LayoutGroup id={layoutId ?? defaultLayoutId}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion2.footer
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							scopingClassNames,
+							"framer-1xyvahw",
+							className5,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Desktop"}
+						layoutDependency={layoutDependency}
+						layoutId={"ByvYcqeqt"}
+						ref={ref ?? ref1}
+						style={{
+							"--border-bottom-width": "0px",
+							"--border-color":
+								"var(--token-af7273d3-1fb6-4796-9326-48ad035c57d2, rgba(255, 255, 255, 0.1))",
+							"--border-left-width": "0px",
+							"--border-right-width": "0px",
+							"--border-style": "solid",
+							"--border-top-width": "1px",
+							backdropFilter: "blur(20px)",
+							WebkitBackdropFilter: "blur(20px)",
+							...style,
+						}}
+						{...addPropertyOverrides(
+							{
+								Gz1rE_I8V: {
+									"data-framer-name": "Mobile",
+								},
+								kdbCtkU1X: {
+									"data-framer-name": "Tablet",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<Image
+							background={{
+								alt: "",
+								fit: "fill",
+								intrinsicHeight: 1080,
+								intrinsicWidth: 1920,
+								loading: getLoadingLazyAtYPosition(
+									(componentViewport?.y || 0) +
+										((componentViewport?.height || 348) * 0.4985507246376814 -
+											((componentViewport?.height || 348) *
+												1.3115942028985508) /
+												2),
+								),
+								pixelHeight: 2160,
+								pixelWidth: 3840,
+								positionX: "center",
+								positionY: "center",
+								sizes: componentViewport?.width || "100vw",
+								src: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048",
+								srcSet:
+									"https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg 3840w",
+							}}
+							className={"framer-lebctk"}
+							data-framer-name={"BG"}
+							layoutDependency={layoutDependency}
+							layoutId={"P66uZcaJK"}
+							style={{
+								filter: "hue-rotate(33deg)",
+								mask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add",
+								opacity: 0.75,
+								WebkitFilter: "hue-rotate(33deg)",
+								WebkitMask:
+									"radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add",
+							}}
+							{...addPropertyOverrides(
+								{
+									Gz1rE_I8V: {
+										background: {
+											alt: "",
+											fit: "fill",
+											intrinsicHeight: 1080,
+											intrinsicWidth: 1920,
+											loading: getLoadingLazyAtYPosition(
+												(componentViewport?.y || 0) +
+													((componentViewport?.height || 200) *
+														0.4985507246376814 -
+														((componentViewport?.height || 200) *
+															1.3115942028985508) /
+															2),
+											),
+											pixelHeight: 2160,
+											pixelWidth: 3840,
+											positionX: "center",
+											positionY: "center",
+											sizes: componentViewport?.width || "100vw",
+											src: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048",
+											srcSet:
+												"https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg 3840w",
+										},
+									},
+									kdbCtkU1X: {
+										background: {
+											alt: "",
+											fit: "fill",
+											intrinsicHeight: 1080,
+											intrinsicWidth: 1920,
+											loading: getLoadingLazyAtYPosition(
+												(componentViewport?.y || 0) +
+													((componentViewport?.height || 354) *
+														0.4985507246376814 -
+														((componentViewport?.height || 354) *
+															1.3115942028985508) /
+															2),
+											),
+											pixelHeight: 2160,
+											pixelWidth: 3840,
+											positionX: "center",
+											positionY: "center",
+											sizes: componentViewport?.width || "100vw",
+											src: "https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048",
+											srcSet:
+												"https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/yD0U6zt6U4ibtiPWyr1twxpY7M.jpg 3840w",
+										},
+									},
+								},
+								baseVariant,
+								gestureVariant,
+							)}
+						/>
+						<motion2.div
+							className={"framer-4aroaq"}
+							data-framer-name={"Container"}
+							layoutDependency={layoutDependency}
+							layoutId={"wBtGzI7cw"}
+						>
+							<motion2.div
+								className={"framer-51n2j"}
+								data-framer-name={"Logo + Socials"}
+								layoutDependency={layoutDependency}
+								layoutId={"kE9fURpZq"}
+							>
+								<ResolveLinks
+									links={[
+										{
+											href: {
+												webPageId: "augiA20Il",
+											},
+											implicitPathVariables: void 0,
+										},
+										{
+											href: {
+												webPageId: "augiA20Il",
+											},
+											implicitPathVariables: void 0,
+										},
+										{
+											href: {
+												webPageId: "augiA20Il",
+											},
+											implicitPathVariables: void 0,
+										},
+									]}
+								>
+									{(resolvedLinks) => (
+										<ComponentViewportProvider
+											height={36}
+											width={"36px"}
+											y={
+												(componentViewport?.y || 0) +
+												64 +
+												(((componentViewport?.height || 348) - 128 - 379) / 2 +
+													0 +
+													0) +
+												0 +
+												0 +
+												0 +
+												0
+											}
+											{...addPropertyOverrides(
+												{
+													Gz1rE_I8V: {
+														y:
+															(componentViewport?.y || 0) +
+															64 +
+															(((componentViewport?.height || 200) -
+																128 -
+																651) /
+																2 +
+																0 +
+																0) +
+															0 +
+															0 +
+															0 +
+															0,
+													},
+													kdbCtkU1X: {
+														y:
+															(componentViewport?.y || 0) +
+															64 +
+															(((componentViewport?.height || 354) -
+																128 -
+																379) /
+																2 +
+																0 +
+																0) +
+															0 +
+															0 +
+															0 +
+															0,
+													},
+												},
+												baseVariant,
+												gestureVariant,
+											)}
+										>
+											<SmartComponentScopedContainer
+												className={"framer-2j1wk2-container"}
+												layoutDependency={layoutDependency}
+												layoutId={"MQUnesvFM-container"}
+												nodeId={"MQUnesvFM"}
+												rendersWithMotion={true}
+												scopeId={"m5keEQA6U"}
+											>
+												{_jsx2(stdin_default, {
+													height: "100%",
+													id: "MQUnesvFM",
+													layoutId: "MQUnesvFM",
+													style: {
+														height: "100%",
+														width: "100%",
+													},
+													width: "100%",
+													ZceSIG0ZG: resolvedLinks[0],
+													...addPropertyOverrides(
+														{
+															Gz1rE_I8V: {
+																ZceSIG0ZG: resolvedLinks[2],
+															},
+															kdbCtkU1X: {
+																ZceSIG0ZG: resolvedLinks[1],
+															},
+														},
+														baseVariant,
+														gestureVariant,
+													),
+												})}
+											</SmartComponentScopedContainer>
+										</ComponentViewportProvider>
+									)}
+								</ResolveLinks>
+							</motion2.div>
+							<motion2.div
+								className={"framer-1hjoplj"}
+								data-framer-name={"Newsletter + Sitemap"}
+								layoutDependency={layoutDependency}
+								layoutId={"GQpNj2GWU"}
+							>
+								<motion2.div
+									className={"framer-1qeoqxl"}
+									data-framer-name={"Newsletter"}
+									layoutDependency={layoutDependency}
+									layoutId={"cFzxXrwyT"}
+								>
+									<motion2.div
+										className={"framer-35bfwh"}
+										data-framer-name={"Description"}
+										layoutDependency={layoutDependency}
+										layoutId={"uFzI4kgRx"}
+									>
+										<RichText
+											__fromCanvasComponent={true}
+											className={"framer-2q2c69"}
+											fonts={["Inter"]}
+											layoutDependency={layoutDependency}
+											layoutId={"w2KLXvEhU"}
+											style={{
+												"--extracted-r6o4lv":
+													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+												"--framer-link-text-color": "rgb(0, 153, 255)",
+												"--framer-link-text-decoration": "underline",
+												"--framer-paragraph-spacing": "0px",
+											}}
+											verticalAlignment={"top"}
+											withExternalLayout={true}
+										>
+											<React.Fragment>
+												<motion2.p
+													className={"framer-styles-preset-1qe6evr"}
+													data-styles-preset={"wHLHeTMJ0"}
+													style={{
+														"--framer-text-alignment": "left",
+														"--framer-text-color":
+															"var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))",
+													}}
+												>
+													{"Join our newsletter"}
+												</motion2.p>
+											</React.Fragment>
+										</RichText>
+										<RichText
+											__fromCanvasComponent={true}
+											className={"framer-q6t2vz"}
+											fonts={["Inter"]}
+											layoutDependency={layoutDependency}
+											layoutId={"wmAxIojN6"}
+											style={{
+												"--extracted-r6o4lv":
+													"var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7))",
+												"--framer-link-text-color": "rgb(0, 153, 255)",
+												"--framer-link-text-decoration": "underline",
+												"--framer-paragraph-spacing": "0px",
+											}}
+											verticalAlignment={"top"}
+											withExternalLayout={true}
+										>
+											<React.Fragment>
+												<motion2.p
+													className={"framer-styles-preset-1fgmqi7"}
+													data-styles-preset={"CWRpkcDNO"}
+													style={{
+														"--framer-text-alignment": "left",
+														"--framer-text-color":
+															"var(--extracted-r6o4lv, var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)))",
+													}}
+												>
+													{
+														"Sign up to our mailing list below and be the first to know about new updates. Don't worry, we hate spam too."
+													}
+												</motion2.p>
+											</React.Fragment>
+										</RichText>
+									</motion2.div>
+									<ComponentViewportProvider>
+										<SmartComponentScopedContainer
+											className={"framer-jwpma1-container"}
+											isAuthoredByUser={true}
+											isModuleExternal={true}
+											layoutDependency={layoutDependency}
+											layoutId={"f85CSRcw9-container"}
+											nodeId={"f85CSRcw9"}
+											rendersWithMotion={true}
+											scopeId={"m5keEQA6U"}
+										>
+											{_jsx2(stdin_default2, {
+												button: {
+													buttonFont: {
+														fontFamily:
+															'"Satoshi", "Satoshi Placeholder", sans-serif',
+														fontSize: "16px",
+														fontStyle: "normal",
+														fontWeight: 500,
+														letterSpacing: "-0.02em",
+														lineHeight: "1em",
+													},
+													buttonPadding: 12,
+													buttonPaddingBottom: 12,
+													buttonPaddingLeft: 16,
+													buttonPaddingPerSide: true,
+													buttonPaddingRight: 16,
+													buttonPaddingTop: 12,
+													color:
+														"var(--token-958d6a9e-bb7c-4a88-a47a-70db899d1dd5, rgb(252, 252, 250))",
+													fill: "var(--token-e3c51256-0961-4b79-ba15-cc3f17394ba4, rgb(81, 47, 235))",
+													insetWhenDocked: 5,
+													isDocked: false,
+													label: "Get Notified",
+													shouldAppear: true,
+													widthWhenDocked: 120,
+												},
+												convertkitAPI: "",
+												convertkitFormID: "",
+												font: {
+													fontFamily:
+														'"Satoshi", "Satoshi Placeholder", sans-serif',
+													fontSize: "16px",
+													fontStyle: "normal",
+													fontWeight: 500,
+													letterSpacing: "-0.02em",
+													lineHeight: "1.2em",
+												},
+												formsparkID: "",
+												gap: 10,
+												getwaitlistAPI: "",
+												height: "100%",
+												id: "f85CSRcw9",
+												input: {
+													borderRadius: 12,
+													color:
+														"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+													fill: "var(--token-115c046d-423c-4ec9-aef7-c8228c767968, rgba(255, 255, 255, 0.04))",
+													fixedHeight: 50,
+													focusObject: {
+														focusColor: "rgba(255, 255, 255, 0.1)",
+														focusWidthFrom: 0,
+														focusWidthTo: 2,
+													},
+													height: true,
+													padding: 12,
+													paddingBottom: 12,
+													paddingLeft: 12,
+													paddingPerSide: false,
+													paddingRight: 12,
+													paddingTop: 12,
+													placeholder: "Your Email Address",
+													placeholderColor:
+														"var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7))",
+												},
+												layout: "horizontal",
+												layoutId: "f85CSRcw9",
+												loopsID: "clobcloc900brmm0proyyz9wu",
+												loopsUserGroup: "Built In Framer",
+												mailchimpURL: "",
+												redirectAs: "link",
+												service: "formspark",
+												style: {
+													maxWidth: "100%",
+													width: "100%",
+												},
+												width: "100%",
+											})}
+										</SmartComponentScopedContainer>
+									</ComponentViewportProvider>
+								</motion2.div>
+								<motion2.div
+									className={"framer-zm8v2b"}
+									data-framer-name={"Sitemap"}
+									layoutDependency={layoutDependency}
+									layoutId={"FueLQooPm"}
+								>
+									<motion2.div
+										className={"framer-1c57hm2"}
+										data-framer-name={"Account"}
+										layoutDependency={layoutDependency}
+										layoutId={"CSxEK3_yc"}
+									>
+										<RichText
+											__fromCanvasComponent={true}
+											className={"framer-jdyvvx"}
+											fonts={["Inter"]}
+											layoutDependency={layoutDependency}
+											layoutId={"TdJMUhpRm"}
+											style={{
+												"--extracted-r6o4lv":
+													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+												"--framer-link-text-color": "rgb(0, 153, 255)",
+												"--framer-link-text-decoration": "underline",
+												"--framer-paragraph-spacing": "0px",
+											}}
+											verticalAlignment={"top"}
+											withExternalLayout={true}
+										>
+											<React.Fragment>
+												<motion2.p
+													className={"framer-styles-preset-1fgmqi7"}
+													data-styles-preset={"CWRpkcDNO"}
+													style={{
+														"--framer-text-color":
+															"var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))",
+													}}
+												>
+													{"Sections"}
+												</motion2.p>
+											</React.Fragment>
+										</RichText>
+										<motion2.div
+											className={"framer-h6pu6e"}
+											data-framer-name={"Pages"}
+											layoutDependency={layoutDependency}
+											layoutId={"bMKfbJv7i"}
+										>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-6v65zf"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"uULMEi1eH"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																hash: ":tZ3Nk88mM",
+																webPageId: "augiA20Il",
+															}}
+															nodeId={"uULMEi1eH"}
+															openInNewTab={false}
+															smoothScroll={true}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"How It Works"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-1w85510"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"bkierWyI1"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																hash: ":sHnGLtvML",
+																webPageId: "augiA20Il",
+															}}
+															nodeId={"bkierWyI1"}
+															openInNewTab={false}
+															smoothScroll={true}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"Features"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-1mzz3wa"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"oDLvbqDww"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																hash: ":jEif1shEi",
+																webPageId: "augiA20Il",
+															}}
+															nodeId={"oDLvbqDww"}
+															openInNewTab={false}
+															smoothScroll={true}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"Testimonials"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-149njf6"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"IWOXRQovK"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																hash: ":NK_tcQhZf",
+																webPageId: "augiA20Il",
+															}}
+															nodeId={"IWOXRQovK"}
+															openInNewTab={false}
+															smoothScroll={true}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"Pricing"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+										</motion2.div>
+									</motion2.div>
+									<motion2.div
+										className={"framer-1pw2j6z"}
+										data-framer-name={"Information"}
+										layoutDependency={layoutDependency}
+										layoutId={"rLEHlxq9m"}
+									>
+										<RichText
+											__fromCanvasComponent={true}
+											className={"framer-1caedjc"}
+											fonts={["Inter"]}
+											layoutDependency={layoutDependency}
+											layoutId={"NQGFDCmu2"}
+											style={{
+												"--extracted-r6o4lv":
+													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+												"--framer-link-text-color": "rgb(0, 153, 255)",
+												"--framer-link-text-decoration": "underline",
+												"--framer-paragraph-spacing": "0px",
+											}}
+											verticalAlignment={"top"}
+											withExternalLayout={true}
+										>
+											<React.Fragment>
+												<motion2.p
+													className={"framer-styles-preset-1fgmqi7"}
+													data-styles-preset={"CWRpkcDNO"}
+													style={{
+														"--framer-text-color":
+															"var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))",
+													}}
+												>
+													{"Information"}
+												</motion2.p>
+											</React.Fragment>
+										</RichText>
+										<motion2.div
+											className={"framer-w2wpd5"}
+											data-framer-name={"Pages"}
+											layoutDependency={layoutDependency}
+											layoutId={"CRYUebkza"}
+										>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-1qpminj"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"WeHGfVy6R"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																hash: ":g_GAoicEt",
+																webPageId: "augiA20Il",
+															}}
+															nodeId={"WeHGfVy6R"}
+															openInNewTab={false}
+															smoothScroll={true}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"FAQ"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-1kuie0d"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"i3B2JHop5"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																webPageId: "jg9o0Jk8V",
+															}}
+															nodeId={"i3B2JHop5"}
+															openInNewTab={false}
+															smoothScroll={false}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"Privacy"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-wpllre"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"A6S2uOeeN"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																webPageId: "TdQ_ISe7W",
+															}}
+															nodeId={"A6S2uOeeN"}
+															openInNewTab={false}
+															smoothScroll={false}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"404"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+											<RichText
+												__fromCanvasComponent={true}
+												className={"framer-1vzi2vs"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"EHNV3Abmg"}
+												style={{
+													"--framer-paragraph-spacing": "0px",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-14ew30v"}
+														data-styles-preset={"TQvmJK7UB"}
+													>
+														<Link
+															href={{
+																webPageId: "YC1NE44pE",
+															}}
+															nodeId={"EHNV3Abmg"}
+															openInNewTab={false}
+															smoothScroll={false}
+														>
+															<motion2.a
+																className={"framer-styles-preset-1fr0mxk"}
+																data-styles-preset={"QqbrxlqQv"}
+															>
+																{"Terms"}
+															</motion2.a>
+														</Link>
+													</motion2.p>
+												</React.Fragment>
+											</RichText>
+										</motion2.div>
+									</motion2.div>
+								</motion2.div>
+							</motion2.div>
+						</motion2.div>
+					</motion2.footer>
+				</Transition>
+			</Variants>
+		</LayoutGroup>
+	);
 });
-var css5 = ["@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }", ".framer-bQBAL.framer-hc160l, .framer-bQBAL .framer-hc160l { display: block; }", ".framer-bQBAL.framer-1xyvahw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 24px; height: min-content; justify-content: center; overflow: visible; padding: 64px; position: relative; width: 1200px; }", ".framer-bQBAL .framer-lebctk { flex: none; height: 131%; left: calc(50.00000000000002% - 100% / 2); overflow: visible; position: absolute; top: calc(49.85507246376814% - 131.15942028985506% / 2); width: 100%; }", ".framer-bQBAL .framer-4aroaq { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 24px; height: min-content; justify-content: center; max-width: 1200px; overflow: visible; padding: 0px; position: relative; width: 100%; }", ".framer-bQBAL .framer-51n2j { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; max-width: 1440px; overflow: visible; padding: 0px; position: relative; width: 100%; }", ".framer-bQBAL .framer-2j1wk2-container { aspect-ratio: 1 / 1; flex: none; height: var(--framer-aspect-ratio-supported, 36px); position: relative; width: 36px; }", ".framer-bQBAL .framer-1hjoplj { align-content: flex-end; align-items: flex-end; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; max-width: 1440px; overflow: hidden; padding: 0px; position: relative; width: 100%; }", ".framer-bQBAL .framer-1qeoqxl { align-content: flex-start; align-items: flex-start; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: flex-start; overflow: visible; padding: 0px; position: relative; width: 1px; }", ".framer-bQBAL .framer-35bfwh { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }", ".framer-bQBAL .framer-2q2c69 { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }", ".framer-bQBAL .framer-q6t2vz { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 397px; word-break: break-word; word-wrap: break-word; }", ".framer-bQBAL .framer-jwpma1-container { flex: none; height: auto; max-width: 400px; position: relative; width: 400px; }", ".framer-bQBAL .framer-zm8v2b { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 0px; position: relative; width: min-content; }", ".framer-bQBAL .framer-1c57hm2, .framer-bQBAL .framer-1pw2j6z { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 0px; position: relative; width: min-content; }", ".framer-bQBAL .framer-jdyvvx, .framer-bQBAL .framer-6v65zf, .framer-bQBAL .framer-1w85510, .framer-bQBAL .framer-1mzz3wa, .framer-bQBAL .framer-149njf6, .framer-bQBAL .framer-1caedjc, .framer-bQBAL .framer-1qpminj, .framer-bQBAL .framer-1kuie0d, .framer-bQBAL .framer-wpllre, .framer-bQBAL .framer-1vzi2vs { flex: none; height: auto; position: relative; white-space: pre; width: auto; }", ".framer-bQBAL .framer-h6pu6e, .framer-bQBAL .framer-w2wpd5 { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: flex-start; overflow: visible; padding: 0px; position: relative; width: min-content; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-bQBAL.framer-1xyvahw, .framer-bQBAL .framer-4aroaq, .framer-bQBAL .framer-51n2j, .framer-bQBAL .framer-1hjoplj, .framer-bQBAL .framer-1qeoqxl, .framer-bQBAL .framer-35bfwh, .framer-bQBAL .framer-zm8v2b, .framer-bQBAL .framer-1c57hm2, .framer-bQBAL .framer-h6pu6e, .framer-bQBAL .framer-1pw2j6z, .framer-bQBAL .framer-w2wpd5 { gap: 0px; } .framer-bQBAL.framer-1xyvahw > *, .framer-bQBAL .framer-4aroaq > * { margin: 0px; margin-bottom: calc(24px / 2); margin-top: calc(24px / 2); } .framer-bQBAL.framer-1xyvahw > :first-child, .framer-bQBAL .framer-4aroaq > :first-child, .framer-bQBAL .framer-51n2j > :first-child, .framer-bQBAL .framer-1qeoqxl > :first-child, .framer-bQBAL .framer-35bfwh > :first-child, .framer-bQBAL .framer-1c57hm2 > :first-child, .framer-bQBAL .framer-h6pu6e > :first-child, .framer-bQBAL .framer-1pw2j6z > :first-child, .framer-bQBAL .framer-w2wpd5 > :first-child { margin-top: 0px; } .framer-bQBAL.framer-1xyvahw > :last-child, .framer-bQBAL .framer-4aroaq > :last-child, .framer-bQBAL .framer-51n2j > :last-child, .framer-bQBAL .framer-1qeoqxl > :last-child, .framer-bQBAL .framer-35bfwh > :last-child, .framer-bQBAL .framer-1c57hm2 > :last-child, .framer-bQBAL .framer-h6pu6e > :last-child, .framer-bQBAL .framer-1pw2j6z > :last-child, .framer-bQBAL .framer-w2wpd5 > :last-child { margin-bottom: 0px; } .framer-bQBAL .framer-51n2j > *, .framer-bQBAL .framer-1qeoqxl > *, .framer-bQBAL .framer-1c57hm2 > *, .framer-bQBAL .framer-1pw2j6z > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-bQBAL .framer-1hjoplj > * { margin: 0px; margin-left: calc(0px / 2); margin-right: calc(0px / 2); } .framer-bQBAL .framer-1hjoplj > :first-child, .framer-bQBAL .framer-zm8v2b > :first-child { margin-left: 0px; } .framer-bQBAL .framer-1hjoplj > :last-child, .framer-bQBAL .framer-zm8v2b > :last-child { margin-right: 0px; } .framer-bQBAL .framer-35bfwh > * { margin: 0px; margin-bottom: calc(8px / 2); margin-top: calc(8px / 2); } .framer-bQBAL .framer-zm8v2b > * { margin: 0px; margin-left: calc(32px / 2); margin-right: calc(32px / 2); } .framer-bQBAL .framer-h6pu6e > *, .framer-bQBAL .framer-w2wpd5 > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }", ".framer-bQBAL.framer-v-kjjoq7.framer-1xyvahw { padding: 64px 32px 64px 32px; width: 810px; }", ".framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj { gap: unset; justify-content: space-between; }", ".framer-bQBAL.framer-v-kjjoq7 .framer-1qeoqxl { flex: none; width: 380px; }", ".framer-bQBAL.framer-v-kjjoq7 .framer-q6t2vz { max-width: 360px; width: 100%; }", ".framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b { gap: 24px; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj, .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b { gap: 0px; } .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj > *, .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj > :first-child, .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj > :last-child { margin: 0px; } .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b > * { margin: 0px; margin-left: calc(24px / 2); margin-right: calc(24px / 2); } .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b > :first-child { margin-left: 0px; } .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b > :last-child { margin-right: 0px; } }", ".framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw { gap: 42px; padding: 64px 32px 64px 32px; width: 390px; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-51n2j { gap: 42px; justify-content: flex-start; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj { flex-direction: column; gap: 42px; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-1qeoqxl { flex: none; order: 1; width: 100%; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-q6t2vz, .framer-bQBAL.framer-v-rnpsh9 .framer-jwpma1-container, .framer-bQBAL.framer-v-rnpsh9 .framer-1c57hm2, .framer-bQBAL.framer-v-rnpsh9 .framer-1pw2j6z { width: 100%; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b { flex-direction: column; gap: 24px; order: 0; width: 100%; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 { align-content: center; align-items: center; flex-direction: row; gap: 16px; width: 100%; }", ".framer-bQBAL.framer-v-rnpsh9 .framer-1vzi2vs { flex: 1 0 0px; white-space: pre-wrap; width: 1px; word-break: break-word; word-wrap: break-word; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj, .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b, .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 { gap: 0px; } .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw > *, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j > *, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj > * { margin: 0px; margin-bottom: calc(42px / 2); margin-top: calc(42px / 2); } .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b > :first-child { margin-top: 0px; } .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b > :last-child { margin-bottom: 0px; } .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b > * { margin: 0px; margin-bottom: calc(24px / 2); margin-top: calc(24px / 2); } .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e > *, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 > * { margin: 0px; margin-left: calc(16px / 2); margin-right: calc(16px / 2); } .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 > :first-child { margin-left: 0px; } .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 > :last-child { margin-right: 0px; } }", ...css, ...css3, ...css2, ...css4, '.framer-bQBAL[data-border="true"]::after, .framer-bQBAL [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }'];
+var css5 = [
+	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
+	".framer-bQBAL.framer-hc160l, .framer-bQBAL .framer-hc160l { display: block; }",
+	".framer-bQBAL.framer-1xyvahw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 24px; height: min-content; justify-content: center; overflow: visible; padding: 64px; position: relative; width: 1200px; }",
+	".framer-bQBAL .framer-lebctk { flex: none; height: 131%; left: calc(50.00000000000002% - 100% / 2); overflow: visible; position: absolute; top: calc(49.85507246376814% - 131.15942028985506% / 2); width: 100%; }",
+	".framer-bQBAL .framer-4aroaq { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 24px; height: min-content; justify-content: center; max-width: 1200px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-bQBAL .framer-51n2j { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; max-width: 1440px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-bQBAL .framer-2j1wk2-container { aspect-ratio: 1 / 1; flex: none; height: var(--framer-aspect-ratio-supported, 36px); position: relative; width: 36px; }",
+	".framer-bQBAL .framer-1hjoplj { align-content: flex-end; align-items: flex-end; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; max-width: 1440px; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
+	".framer-bQBAL .framer-1qeoqxl { align-content: flex-start; align-items: flex-start; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: flex-start; overflow: visible; padding: 0px; position: relative; width: 1px; }",
+	".framer-bQBAL .framer-35bfwh { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
+	".framer-bQBAL .framer-2q2c69 { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-bQBAL .framer-q6t2vz { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 397px; word-break: break-word; word-wrap: break-word; }",
+	".framer-bQBAL .framer-jwpma1-container { flex: none; height: auto; max-width: 400px; position: relative; width: 400px; }",
+	".framer-bQBAL .framer-zm8v2b { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 0px; position: relative; width: min-content; }",
+	".framer-bQBAL .framer-1c57hm2, .framer-bQBAL .framer-1pw2j6z { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: flex-start; overflow: hidden; padding: 0px; position: relative; width: min-content; }",
+	".framer-bQBAL .framer-jdyvvx, .framer-bQBAL .framer-6v65zf, .framer-bQBAL .framer-1w85510, .framer-bQBAL .framer-1mzz3wa, .framer-bQBAL .framer-149njf6, .framer-bQBAL .framer-1caedjc, .framer-bQBAL .framer-1qpminj, .framer-bQBAL .framer-1kuie0d, .framer-bQBAL .framer-wpllre, .framer-bQBAL .framer-1vzi2vs { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	".framer-bQBAL .framer-h6pu6e, .framer-bQBAL .framer-w2wpd5 { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: flex-start; overflow: visible; padding: 0px; position: relative; width: min-content; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-bQBAL.framer-1xyvahw, .framer-bQBAL .framer-4aroaq, .framer-bQBAL .framer-51n2j, .framer-bQBAL .framer-1hjoplj, .framer-bQBAL .framer-1qeoqxl, .framer-bQBAL .framer-35bfwh, .framer-bQBAL .framer-zm8v2b, .framer-bQBAL .framer-1c57hm2, .framer-bQBAL .framer-h6pu6e, .framer-bQBAL .framer-1pw2j6z, .framer-bQBAL .framer-w2wpd5 { gap: 0px; } .framer-bQBAL.framer-1xyvahw > *, .framer-bQBAL .framer-4aroaq > * { margin: 0px; margin-bottom: calc(24px / 2); margin-top: calc(24px / 2); } .framer-bQBAL.framer-1xyvahw > :first-child, .framer-bQBAL .framer-4aroaq > :first-child, .framer-bQBAL .framer-51n2j > :first-child, .framer-bQBAL .framer-1qeoqxl > :first-child, .framer-bQBAL .framer-35bfwh > :first-child, .framer-bQBAL .framer-1c57hm2 > :first-child, .framer-bQBAL .framer-h6pu6e > :first-child, .framer-bQBAL .framer-1pw2j6z > :first-child, .framer-bQBAL .framer-w2wpd5 > :first-child { margin-top: 0px; } .framer-bQBAL.framer-1xyvahw > :last-child, .framer-bQBAL .framer-4aroaq > :last-child, .framer-bQBAL .framer-51n2j > :last-child, .framer-bQBAL .framer-1qeoqxl > :last-child, .framer-bQBAL .framer-35bfwh > :last-child, .framer-bQBAL .framer-1c57hm2 > :last-child, .framer-bQBAL .framer-h6pu6e > :last-child, .framer-bQBAL .framer-1pw2j6z > :last-child, .framer-bQBAL .framer-w2wpd5 > :last-child { margin-bottom: 0px; } .framer-bQBAL .framer-51n2j > *, .framer-bQBAL .framer-1qeoqxl > *, .framer-bQBAL .framer-1c57hm2 > *, .framer-bQBAL .framer-1pw2j6z > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-bQBAL .framer-1hjoplj > * { margin: 0px; margin-left: calc(0px / 2); margin-right: calc(0px / 2); } .framer-bQBAL .framer-1hjoplj > :first-child, .framer-bQBAL .framer-zm8v2b > :first-child { margin-left: 0px; } .framer-bQBAL .framer-1hjoplj > :last-child, .framer-bQBAL .framer-zm8v2b > :last-child { margin-right: 0px; } .framer-bQBAL .framer-35bfwh > * { margin: 0px; margin-bottom: calc(8px / 2); margin-top: calc(8px / 2); } .framer-bQBAL .framer-zm8v2b > * { margin: 0px; margin-left: calc(32px / 2); margin-right: calc(32px / 2); } .framer-bQBAL .framer-h6pu6e > *, .framer-bQBAL .framer-w2wpd5 > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }",
+	".framer-bQBAL.framer-v-kjjoq7.framer-1xyvahw { padding: 64px 32px 64px 32px; width: 810px; }",
+	".framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj { gap: unset; justify-content: space-between; }",
+	".framer-bQBAL.framer-v-kjjoq7 .framer-1qeoqxl { flex: none; width: 380px; }",
+	".framer-bQBAL.framer-v-kjjoq7 .framer-q6t2vz { max-width: 360px; width: 100%; }",
+	".framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b { gap: 24px; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj, .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b { gap: 0px; } .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj > *, .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj > :first-child, .framer-bQBAL.framer-v-kjjoq7 .framer-1hjoplj > :last-child { margin: 0px; } .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b > * { margin: 0px; margin-left: calc(24px / 2); margin-right: calc(24px / 2); } .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b > :first-child { margin-left: 0px; } .framer-bQBAL.framer-v-kjjoq7 .framer-zm8v2b > :last-child { margin-right: 0px; } }",
+	".framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw { gap: 42px; padding: 64px 32px 64px 32px; width: 390px; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-51n2j { gap: 42px; justify-content: flex-start; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj { flex-direction: column; gap: 42px; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-1qeoqxl { flex: none; order: 1; width: 100%; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-q6t2vz, .framer-bQBAL.framer-v-rnpsh9 .framer-jwpma1-container, .framer-bQBAL.framer-v-rnpsh9 .framer-1c57hm2, .framer-bQBAL.framer-v-rnpsh9 .framer-1pw2j6z { width: 100%; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b { flex-direction: column; gap: 24px; order: 0; width: 100%; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 { align-content: center; align-items: center; flex-direction: row; gap: 16px; width: 100%; }",
+	".framer-bQBAL.framer-v-rnpsh9 .framer-1vzi2vs { flex: 1 0 0px; white-space: pre-wrap; width: 1px; word-break: break-word; word-wrap: break-word; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj, .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b, .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 { gap: 0px; } .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw > *, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j > *, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj > * { margin: 0px; margin-bottom: calc(42px / 2); margin-top: calc(42px / 2); } .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b > :first-child { margin-top: 0px; } .framer-bQBAL.framer-v-rnpsh9.framer-1xyvahw > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-51n2j > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-1hjoplj > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b > :last-child { margin-bottom: 0px; } .framer-bQBAL.framer-v-rnpsh9 .framer-zm8v2b > * { margin: 0px; margin-bottom: calc(24px / 2); margin-top: calc(24px / 2); } .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e > *, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 > * { margin: 0px; margin-left: calc(16px / 2); margin-right: calc(16px / 2); } .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e > :first-child, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 > :first-child { margin-left: 0px; } .framer-bQBAL.framer-v-rnpsh9 .framer-h6pu6e > :last-child, .framer-bQBAL.framer-v-rnpsh9 .framer-w2wpd5 > :last-child { margin-right: 0px; } }",
+	...css,
+	...css3,
+	...css2,
+	...css4,
+	'.framer-bQBAL[data-border="true"]::after, .framer-bQBAL [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
+];
 var Framerm5keEQA6U = withCSS2(Component, css5, "framer-bQBAL");
 var stdin_default3 = Framerm5keEQA6U;
 Framerm5keEQA6U.displayName = "Section Footer";
 Framerm5keEQA6U.defaultProps = {
-  height: 348,
-  width: 1200
+	height: 348,
+	width: 1200,
 };
 addPropertyControls2(Framerm5keEQA6U, {
-  variant: {
-    options: ["ByvYcqeqt", "kdbCtkU1X", "Gz1rE_I8V"],
-    optionTitles: ["Desktop", "Tablet", "Mobile"],
-    title: "Variant",
-    type: ControlType2.Enum
-  }
+	variant: {
+		options: ["ByvYcqeqt", "kdbCtkU1X", "Gz1rE_I8V"],
+		optionTitles: ["Desktop", "Tablet", "Mobile"],
+		title: "Variant",
+		type: ControlType2.Enum,
+	},
 });
-addFonts(Framerm5keEQA6U, [{
-  explicitInter: true,
-  fonts: [{
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-    url: "https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-    url: "https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+1F00-1FFF",
-    url: "https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0370-03FF",
-    url: "https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-    url: "https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-    url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-    url: "https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2",
-    weight: "400"
-  }, {
-    family: "Satoshi",
-    source: "fontshare",
-    style: "normal",
-    url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
-    weight: "500"
-  }]
-}, ...ElementsLogoFonts, ...InputFonts, ...getFontsFromSharedStyle(fonts), ...getFontsFromSharedStyle(fonts3), ...getFontsFromSharedStyle(fonts2), ...getFontsFromSharedStyle(fonts4)], {
-  supportsExplicitInterCodegen: true
-});
+addFonts(
+	Framerm5keEQA6U,
+	[
+		{
+			explicitInter: true,
+			fonts: [
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+					url: "https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+					url: "https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+1F00-1FFF",
+					url: "https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+0370-03FF",
+					url: "https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+					url: "https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+					url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+					url: "https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2",
+					weight: "400",
+				},
+				{
+					family: "Satoshi",
+					source: "fontshare",
+					style: "normal",
+					url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
+					weight: "500",
+				},
+			],
+		},
+		...ElementsLogoFonts,
+		...InputFonts,
+		...getFontsFromSharedStyle(fonts),
+		...getFontsFromSharedStyle(fonts3),
+		...getFontsFromSharedStyle(fonts2),
+		...getFontsFromSharedStyle(fonts4),
+	],
+	{
+		supportsExplicitInterCodegen: true,
+	},
+);
 
 // virtual:section-footer
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-  "base": "Gz1rE_I8V",
-  "md": "kdbCtkU1X",
-  "xl": "ByvYcqeqt"
+	base: "Gz1rE_I8V",
+	md: "kdbCtkU1X",
+	xl: "ByvYcqeqt",
 };
-stdin_default3.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return /* @__PURE__ */jsx(ContextProviders, {
-    routes: {
-      "E9iSo0Hog": {
-        "path": "/docs"
-      },
-      "TdQ_ISe7W": {
-        "path": "/404"
-      },
-      "YC1NE44pE": {
-        "path": "/terms"
-      },
-      "augiA20Il": {
-        "path": "/"
-      },
-      "jg9o0Jk8V": {
-        "path": "/privacy"
-      },
-      "rHzp0yyuW": {
-        "path": "/blog-3"
-      }
-    },
-    children: /* @__PURE__ */jsx(WithFramerBreakpoints, {
-      Component: stdin_default3,
-      variants: defaultResponsiveVariants,
-      ...rest
-    }),
-    framerSiteId: "080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c",
-    locale,
-    locales
-  });
+stdin_default3.Responsive = ({ locale, ...rest }) => {
+	return (
+		<ContextProviders
+			routes={{
+				E9iSo0Hog: {
+					path: "/docs",
+				},
+				TdQ_ISe7W: {
+					path: "/404",
+				},
+				YC1NE44pE: {
+					path: "/terms",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				jg9o0Jk8V: {
+					path: "/privacy",
+				},
+				rHzp0yyuW: {
+					path: "/blog-3",
+				},
+			}}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			<WithFramerBreakpoints
+				Component={stdin_default3}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
+		</ContextProviders>
+	);
 };
-function ComponentWithRoot({
-  locale,
-  ...rest
-}) {
-  return /* @__PURE__ */jsx(ContextProviders, {
-    routes: {
-      "E9iSo0Hog": {
-        "path": "/docs"
-      },
-      "TdQ_ISe7W": {
-        "path": "/404"
-      },
-      "YC1NE44pE": {
-        "path": "/terms"
-      },
-      "augiA20Il": {
-        "path": "/"
-      },
-      "jg9o0Jk8V": {
-        "path": "/privacy"
-      },
-      "rHzp0yyuW": {
-        "path": "/blog-3"
-      }
-    },
-    children: /* @__PURE__ */jsx(stdin_default3, {
-      ...rest
-    }),
-    framerSiteId: "080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c",
-    locale,
-    locales
-  });
+function ComponentWithRoot({ locale, ...rest }) {
+	return (
+		<ContextProviders
+			routes={{
+				E9iSo0Hog: {
+					path: "/docs",
+				},
+				TdQ_ISe7W: {
+					path: "/404",
+				},
+				YC1NE44pE: {
+					path: "/terms",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				jg9o0Jk8V: {
+					path: "/privacy",
+				},
+				rHzp0yyuW: {
+					path: "/blog-3",
+				},
+			}}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default3, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default3);
 export { ComponentWithRoot as default };

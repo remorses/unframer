@@ -14,602 +14,983 @@ import { ContextProviders } from "unframer";
 
 // /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/JFPa2SSU5YrQQQzAqbEt/aKlzorVQO.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { addFonts, addPropertyControls, ComponentViewportProvider, ControlType, cx, getFonts, getFontsFromSharedStyle, RichText, useActiveVariantCallback, useComponentViewport, useLocaleInfo, useVariantState, withCSS, withFX, withOptimizedAppearEffect } from "unframer";
+import {
+	addFonts,
+	addPropertyControls,
+	ComponentViewportProvider,
+	ControlType,
+	cx,
+	getFonts,
+	getFontsFromSharedStyle,
+	RichText,
+	useActiveVariantCallback,
+	useComponentViewport,
+	useLocaleInfo,
+	useVariantState,
+	withCSS,
+	withFX,
+	withOptimizedAppearEffect,
+} from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
 
 // /:https://framerusercontent.com/modules/2dgi2DlUClY4qBbVakOw/0jnC5BbjXLdwysUvlueD/kpcp5QUWe.js
 import { fontStore } from "unframer";
-fontStore.loadFonts(["FS;Satoshi-medium", "Inter-Bold", "Inter-BoldItalic", "Inter-Italic"]);
-var fonts2 = [{
-  explicitInter: true,
-  fonts: [{
-    family: "Satoshi",
-    source: "fontshare",
-    style: "normal",
-    url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
-    weight: "500"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-    url: "https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-    url: "https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+1F00-1FFF",
-    url: "https://framerusercontent.com/assets/1K3W8DizY3v4emK8Mb08YHxTbs.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0370-03FF",
-    url: "https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-    url: "https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-    url: "https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-    url: "https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-    url: "https://framerusercontent.com/assets/H89BbHkbHDzlxZzxi8uPzTsp90.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-    url: "https://framerusercontent.com/assets/u6gJwDuwB143kpNK1T1MDKDWkMc.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+1F00-1FFF",
-    url: "https://framerusercontent.com/assets/43sJ6MfOPh1LCJt46OvyDuSbA6o.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0370-03FF",
-    url: "https://framerusercontent.com/assets/wccHG0r4gBDAIRhfHiOlq6oEkqw.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-    url: "https://framerusercontent.com/assets/WZ367JPwf9bRW6LdTHN8rXgSjw.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-    url: "https://framerusercontent.com/assets/QxmhnWTzLtyjIiZcfaLIJ8EFBXU.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-    url: "https://framerusercontent.com/assets/2A4Xx7CngadFGlVV4xrO06OBHY.woff2",
-    weight: "700"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-    url: "https://framerusercontent.com/assets/CfMzU8w2e7tHgF4T4rATMPuWosA.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-    url: "https://framerusercontent.com/assets/867QObYax8ANsfX4TGEVU9YiCM.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+1F00-1FFF",
-    url: "https://framerusercontent.com/assets/Oyn2ZbENFdnW7mt2Lzjk1h9Zb9k.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0370-03FF",
-    url: "https://framerusercontent.com/assets/cdAe8hgZ1cMyLu9g005pAW3xMo.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-    url: "https://framerusercontent.com/assets/DOfvtmE1UplCq161m6Hj8CSQYg.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-    url: "https://framerusercontent.com/assets/vFzuJY0c65av44uhEKB6vyjFMg.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "italic",
-    unicodeRange: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-    url: "https://framerusercontent.com/assets/tKtBcDnBMevsEEJKdNGhhkLzYo.woff2",
-    weight: "400"
-  }]
-}];
-var css2 = [`.framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; }`, `@media (max-width: 1199px) and (min-width: 810px) { .framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`, `@media (max-width: 809px) and (min-width: 0px) { .framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`];
+fontStore.loadFonts([
+	"FS;Satoshi-medium",
+	"Inter-Bold",
+	"Inter-BoldItalic",
+	"Inter-Italic",
+]);
+var fonts2 = [
+	{
+		explicitInter: true,
+		fonts: [
+			{
+				family: "Satoshi",
+				source: "fontshare",
+				style: "normal",
+				url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
+				weight: "500",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange:
+					"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+				url: "https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+				url: "https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange: "U+1F00-1FFF",
+				url: "https://framerusercontent.com/assets/1K3W8DizY3v4emK8Mb08YHxTbs.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange: "U+0370-03FF",
+				url: "https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange:
+					"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+				url: "https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange:
+					"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+				url: "https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "normal",
+				unicodeRange:
+					"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+				url: "https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+				url: "https://framerusercontent.com/assets/H89BbHkbHDzlxZzxi8uPzTsp90.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+				url: "https://framerusercontent.com/assets/u6gJwDuwB143kpNK1T1MDKDWkMc.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange: "U+1F00-1FFF",
+				url: "https://framerusercontent.com/assets/43sJ6MfOPh1LCJt46OvyDuSbA6o.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange: "U+0370-03FF",
+				url: "https://framerusercontent.com/assets/wccHG0r4gBDAIRhfHiOlq6oEkqw.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+				url: "https://framerusercontent.com/assets/WZ367JPwf9bRW6LdTHN8rXgSjw.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+				url: "https://framerusercontent.com/assets/QxmhnWTzLtyjIiZcfaLIJ8EFBXU.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+				url: "https://framerusercontent.com/assets/2A4Xx7CngadFGlVV4xrO06OBHY.woff2",
+				weight: "700",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+				url: "https://framerusercontent.com/assets/CfMzU8w2e7tHgF4T4rATMPuWosA.woff2",
+				weight: "400",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+				url: "https://framerusercontent.com/assets/867QObYax8ANsfX4TGEVU9YiCM.woff2",
+				weight: "400",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange: "U+1F00-1FFF",
+				url: "https://framerusercontent.com/assets/Oyn2ZbENFdnW7mt2Lzjk1h9Zb9k.woff2",
+				weight: "400",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange: "U+0370-03FF",
+				url: "https://framerusercontent.com/assets/cdAe8hgZ1cMyLu9g005pAW3xMo.woff2",
+				weight: "400",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+				url: "https://framerusercontent.com/assets/DOfvtmE1UplCq161m6Hj8CSQYg.woff2",
+				weight: "400",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+				url: "https://framerusercontent.com/assets/vFzuJY0c65av44uhEKB6vyjFMg.woff2",
+				weight: "400",
+			},
+			{
+				family: "Inter",
+				source: "framer",
+				style: "italic",
+				unicodeRange:
+					"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+				url: "https://framerusercontent.com/assets/tKtBcDnBMevsEEJKdNGhhkLzYo.woff2",
+				weight: "400",
+			},
+		],
+	},
+];
+var css2 = [
+	`.framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; }`,
+	`@media (max-width: 1199px) and (min-width: 810px) { .framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
+	`@media (max-width: 809px) and (min-width: 0px) { .framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
+];
 var className2 = "framer-a3inn";
 
 // /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/JFPa2SSU5YrQQQzAqbEt/aKlzorVQO.js
 var ElementsBadgeFonts = getFonts(stdin_default);
-var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(withFX(motion.div));
+var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
+	withFX(motion.div),
+);
 var ButtonsButtonFonts = getFonts(stdin_default2);
 var cycleOrder = ["L_pX4uUkR", "Gbz9maQw1", "K1iE6Mz7N"];
 var serializationHash = "framer-YkAYi";
 var variantClassNames = {
-  Gbz9maQw1: "framer-v-g9taje",
-  K1iE6Mz7N: "framer-v-1hchsjm",
-  L_pX4uUkR: "framer-v-lv3ofw"
+	Gbz9maQw1: "framer-v-g9taje",
+	K1iE6Mz7N: "framer-v-1hchsjm",
+	L_pX4uUkR: "framer-v-lv3ofw",
 };
 function addPropertyOverrides(overrides, ...variants) {
-  const nextOverrides = {};
-  variants?.forEach(variant => variant && Object.assign(nextOverrides, overrides[variant]));
-  return nextOverrides;
+	const nextOverrides = {};
+	variants?.forEach(
+		(variant) => variant && Object.assign(nextOverrides, overrides[variant]),
+	);
+	return nextOverrides;
 }
 var transition1 = {
-  bounce: 0.2,
-  delay: 0,
-  duration: 0.4,
-  type: "spring"
+	bounce: 0.2,
+	delay: 0,
+	duration: 0.4,
+	type: "spring",
 };
 var transition2 = {
-  damping: 100,
-  delay: 1,
-  mass: 1,
-  stiffness: 400,
-  type: "spring"
+	damping: 100,
+	delay: 1,
+	mass: 1,
+	stiffness: 400,
+	type: "spring",
 };
 var animation = {
-  opacity: 1,
-  rotate: 0,
-  rotateX: 0,
-  rotateY: 0,
-  scale: 1,
-  skewX: 0,
-  skewY: 0,
-  transition: transition2,
-  x: 0,
-  y: 0
+	opacity: 1,
+	rotate: 0,
+	rotateX: 0,
+	rotateY: 0,
+	scale: 1,
+	skewX: 0,
+	skewY: 0,
+	transition: transition2,
+	x: 0,
+	y: 0,
 };
 var animation1 = {
-  opacity: 1e-3,
-  rotate: 0,
-  rotateX: 0,
-  rotateY: 0,
-  scale: 1,
-  skewX: 0,
-  skewY: 0,
-  x: 0,
-  y: 0
+	opacity: 1e-3,
+	rotate: 0,
+	rotateX: 0,
+	rotateY: 0,
+	scale: 1,
+	skewX: 0,
+	skewY: 0,
+	x: 0,
+	y: 0,
 };
 var animation2 = {
-  filter: "blur(10px)",
-  opacity: 1e-3,
-  rotate: 0,
-  scale: 1,
-  skewX: 0,
-  skewY: 0,
-  x: 0,
-  y: 10
+	filter: "blur(10px)",
+	opacity: 1e-3,
+	rotate: 0,
+	scale: 1,
+	skewX: 0,
+	skewY: 0,
+	x: 0,
+	y: 10,
 };
 var transition3 = {
-  damping: 100,
-  delay: 0.05,
-  mass: 1,
-  stiffness: 400,
-  type: "spring"
+	damping: 100,
+	delay: 0.05,
+	mass: 1,
+	stiffness: 400,
+	type: "spring",
 };
 var textEffect = {
-  effect: animation2,
-  repeat: false,
-  startDelay: 0.5,
-  tokenization: "word",
-  transition: transition3,
-  trigger: "onMount",
-  type: "appear"
+	effect: animation2,
+	repeat: false,
+	startDelay: 0.5,
+	tokenization: "word",
+	transition: transition3,
+	trigger: "onMount",
+	type: "appear",
 };
 var textEffect1 = {
-  effect: animation2,
-  repeat: false,
-  startDelay: 0.7,
-  tokenization: "word",
-  transition: transition3,
-  trigger: "onMount",
-  type: "appear"
+	effect: animation2,
+	repeat: false,
+	startDelay: 0.7,
+	tokenization: "word",
+	transition: transition3,
+	trigger: "onMount",
+	type: "appear",
 };
-var Transition = ({
-  value,
-  children
-}) => {
-  const config = React.useContext(MotionConfigContext);
-  const transition = value ?? config.transition;
-  const contextValue = React.useMemo(() => ({
-    ...config,
-    transition
-  }), [JSON.stringify(transition)]);
-  return <MotionConfigContext.Provider value={contextValue}>{children}</MotionConfigContext.Provider>;
+var Transition = ({ value, children }) => {
+	const config = React.useContext(MotionConfigContext);
+	const transition = value ?? config.transition;
+	const contextValue = React.useMemo(
+		() => ({
+			...config,
+			transition,
+		}),
+		[JSON.stringify(transition)],
+	);
+	return (
+		<MotionConfigContext.Provider value={contextValue}>
+			{children}
+		</MotionConfigContext.Provider>
+	);
 };
 var Variants = motion.create(React.Fragment);
 var humanReadableVariantMap = {
-  Desktop: "L_pX4uUkR",
-  Phone: "K1iE6Mz7N",
-  Tablet: "Gbz9maQw1"
+	Desktop: "L_pX4uUkR",
+	Phone: "K1iE6Mz7N",
+	Tablet: "Gbz9maQw1",
 };
 var getProps = ({
-  ctaLink,
-  height,
-  id,
-  onClick,
-  subheading,
-  width,
-  ...props
+	ctaLink,
+	height,
+	id,
+	onClick,
+	subheading,
+	width,
+	...props
 }) => {
-  return {
-    ...props,
-    Oa_Hk8pfq: onClick ?? props.Oa_Hk8pfq,
-    OF9UPudni: ctaLink ?? props.OF9UPudni,
-    Q09IoXmix: subheading ?? props.Q09IoXmix ?? "Transform your Framer components into production-ready React code",
-    variant: humanReadableVariantMap[props.variant] ?? props.variant ?? "L_pX4uUkR"
-  };
+	return {
+		...props,
+		Oa_Hk8pfq: onClick ?? props.Oa_Hk8pfq,
+		OF9UPudni: ctaLink ?? props.OF9UPudni,
+		Q09IoXmix:
+			subheading ??
+			props.Q09IoXmix ??
+			"Transform your Framer components into production-ready React code",
+		variant:
+			humanReadableVariantMap[props.variant] ?? props.variant ?? "L_pX4uUkR",
+	};
 };
 var createLayoutDependency = (props, variants) => {
-  if (props.layoutDependency) return variants.join("-") + props.layoutDependency;
-  return variants.join("-");
+	if (props.layoutDependency)
+		return variants.join("-") + props.layoutDependency;
+	return variants.join("-");
 };
-var Component = /* @__PURE__ */React.forwardRef(function (props, ref) {
-  const {
-    activeLocale,
-    setLocale
-  } = useLocaleInfo();
-  const {
-    style,
-    className: className3,
-    layoutId,
-    variant,
-    OF9UPudni,
-    Q09IoXmix,
-    Oa_Hk8pfq,
-    ...restProps
-  } = getProps(props);
-  const {
-    baseVariant,
-    classNames,
-    clearLoadingGesture,
-    gestureHandlers,
-    gestureVariant,
-    isLoading,
-    setGestureState,
-    setVariant,
-    variants
-  } = useVariantState({
-    cycleOrder,
-    defaultVariant: "L_pX4uUkR",
-    variant,
-    variantClassNames
-  });
-  const layoutDependency = createLayoutDependency(props, variants);
-  const {
-    activeVariantCallback,
-    delay
-  } = useActiveVariantCallback(baseVariant);
-  const onTap1qmbiqx = activeVariantCallback(async (...args) => {
-    if (Oa_Hk8pfq) {
-      const res = await Oa_Hk8pfq(...args);
-      if (res === false) return false;
-    }
-  });
-  const sharedStyleClassNames = [className, className2];
-  const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
-  const ref1 = React.useRef(null);
-  const defaultLayoutId = React.useId();
-  const componentViewport = useComponentViewport();
-  return <LayoutGroup id={layoutId ?? defaultLayoutId}><Variants animate={variants} initial={false}><Transition value={transition1}><motion.div {...restProps} {...gestureHandlers} className={cx(scopingClassNames, "framer-lv3ofw", className3, classNames)} data-framer-name={"Desktop"} layoutDependency={layoutDependency} layoutId={"L_pX4uUkR"} ref={ref ?? ref1} style={{
-          backgroundColor: "var(--token-f4cf9e3e-da35-4e33-897c-29a30a250c5f, rgb(0, 0, 0))",
-          ...style
-        }} {...addPropertyOverrides({
-          Gbz9maQw1: {
-            "data-framer-name": "Tablet"
-          },
-          K1iE6Mz7N: {
-            "data-framer-name": "Phone"
-          }
-        }, baseVariant, gestureVariant)}><motion.div className={"framer-he1c7i"} data-framer-name={"Container"} layoutDependency={layoutDependency} layoutId={"lGPbizWWG"}><motion.div className={"framer-c0n0jm"} data-framer-name={"Content"} layoutDependency={layoutDependency} layoutId={"hlxSFnsHY"}><motion.div className={"framer-1sx2h0"} data-framer-name={"Content"} layoutDependency={layoutDependency} layoutId={"VLwZ0s7IZ"}><ComponentViewportProvider height={40} y={(componentViewport?.y || 0) + 160 + (((componentViewport?.height || 704) - 240 - 418) / 2 + 0 + 0) + 0 + 0 + 0 + 0 + 0 + 0} {...addPropertyOverrides({
-                  Gbz9maQw1: {
-                    y: (componentViewport?.y || 0) + 96 + (((componentViewport?.height || 794) - 176 - 418) / 2 + 0 + 0) + 0 + 0 + 0 + 0 + 0 + 0
-                  },
-                  K1iE6Mz7N: {
-                    y: (componentViewport?.y || 0) + 96 + (((componentViewport?.height || 816) - 176 - 640) / 2 + 0 + 0) + 0 + 0 + 0 + 0 + 0 + 0
-                  }
-                }, baseVariant, gestureVariant)}><MotionDivWithFXWithOptimizedAppearEffect __perspectiveFX={false} __smartComponentFX={true} __targetOpacity={1} animate={animation} className={"framer-pz5jso-container"} data-framer-appear-id={"pz5jso"} initial={animation1} layoutDependency={layoutDependency} layoutId={"EBGIPu010-container"} optimized={true}>_jsx(stdin_default, {
-                      D_QyhowU2: "Export Framer Components to React",
-                      height: "100%",
-                      id: "EBGIPu010",
-                      layoutId: "EBGIPu010",
-                      variant: "ih1f0O9Of",
-                      width: "100%"
-                    })</MotionDivWithFXWithOptimizedAppearEffect></ComponentViewportProvider><RichText __fromCanvasComponent={true} className={"framer-7elwrr"} data-highlight={true} effect={textEffect} fonts={["FS;Satoshi-medium", "GF;Instrument Serif-italic"]} layoutDependency={layoutDependency} layoutId={"DxJluarpu"} onTap={onTap1qmbiqx} style={{
-                  "--extracted-gdpscs": "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion.h1 style={{
-                      "--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
-                      "--framer-font-family": '"Satoshi", "Satoshi Placeholder", sans-serif',
-                      "--framer-font-size": "70px",
-                      "--framer-font-weight": "500",
-                      "--framer-letter-spacing": "-0.04em",
-                      "--framer-line-height": "1.1em",
-                      "--framer-text-alignment": "center",
-                      "--framer-text-color": "var(--extracted-gdpscs, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))"
-                    }}>{"Seamlessly Convert "}<motion.span style={{
-                        "--font-selector": "R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
-                        "--framer-font-family": '"Instrument Serif", "Instrument Serif Placeholder", serif',
-                        "--framer-font-style": "italic",
-                        "--framer-font-weight": "400"
-                      }}>{"Framer"}</motion.span>{" Designs to "}<motion.span style={{
-                        "--font-selector": "R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
-                        "--framer-font-family": '"Instrument Serif", "Instrument Serif Placeholder", serif',
-                        "--framer-font-style": "italic",
-                        "--framer-font-weight": "400"
-                      }}>{"React components"}</motion.span></motion.h1></React.Fragment></RichText><RichText __fromCanvasComponent={true} className={"framer-nqkn6i"} effect={textEffect1} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"eokbgTZL8"} style={{
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} text={Q09IoXmix} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion.p className={"framer-styles-preset-1qe6evr"} data-styles-preset={"wHLHeTMJ0"} style={{
-                      "--framer-text-alignment": "center"
-                    }}>{"Transform your Framer components into production-ready React code. Enhance your React projects with high-fidelity components, effortlessly bridging the gap between design and development."}</motion.p></React.Fragment></RichText></motion.div><MotionDivWithFXWithOptimizedAppearEffect __perspectiveFX={false} __smartComponentFX={true} __targetOpacity={1} animate={animation} className={"framer-1rh3sqh"} data-framer-appear-id={"1rh3sqh"} data-framer-name={"Button"} initial={animation1} layoutDependency={layoutDependency} layoutId={"ZtPwGwF3_"} optimized={true}><ComponentViewportProvider height={68} y={(componentViewport?.y || 0) + 160 + (((componentViewport?.height || 704) - 240 - 418) / 2 + 0 + 0) + 0 + 0 + 0 + 316 + 0 + 0} {...addPropertyOverrides({
-                  Gbz9maQw1: {
-                    y: (componentViewport?.y || 0) + 96 + (((componentViewport?.height || 794) - 176 - 418) / 2 + 0 + 0) + 0 + 0 + 0 + 316 + 0 + 0
-                  },
-                  K1iE6Mz7N: {
-                    y: (componentViewport?.y || 0) + 96 + (((componentViewport?.height || 816) - 176 - 640) / 2 + 0 + 0) + 0 + 0 + 0 + 316 + 0 + 0
-                  }
-                }, baseVariant, gestureVariant)}><motion.div className={"framer-1pwvu55-container"} layoutDependency={layoutDependency} layoutId={"ZuNhKVdul-container"}>_jsx(stdin_default2, {
-                      GLWImmBy_: false,
-                      HBR9r6Wzz: false,
-                      height: "100%",
-                      id: "ZuNhKVdul",
-                      kTynE2FQc: "regular",
-                      layoutId: "ZuNhKVdul",
-                      LdEuC589O: "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                      nL8OQ61g_: "House",
-                      nZIvc5R21: "AppleLogo",
-                      odb0bWURU: OF9UPudni,
-                      QQq_dHjj6: "fill",
-                      rt9DsEiKG: "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
-                      saKEMwXXL: true,
-                      tipS0P7cJ: "Start Exporting Now",
-                      Ud3HdUmNm: true,
-                      variant: "b_66fXdIn",
-                      width: "100%"
-                    })</motion.div></ComponentViewportProvider><RichText __fromCanvasComponent={true} className={"framer-yf4qez"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"gjG8xytXP"} style={{
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} verticalAlignment={"top"} withExternalLayout={true}><React.Fragment><motion.p className={"framer-styles-preset-d2jvfr"} data-styles-preset={"kpcp5QUWe"}>{"Free for open source projects"}</motion.p></React.Fragment></RichText></MotionDivWithFXWithOptimizedAppearEffect></motion.div></motion.div></motion.div></Transition></Variants></LayoutGroup>;
+var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
+	const { activeLocale, setLocale } = useLocaleInfo();
+	const {
+		style,
+		className: className3,
+		layoutId,
+		variant,
+		OF9UPudni,
+		Q09IoXmix,
+		Oa_Hk8pfq,
+		...restProps
+	} = getProps(props);
+	const {
+		baseVariant,
+		classNames,
+		clearLoadingGesture,
+		gestureHandlers,
+		gestureVariant,
+		isLoading,
+		setGestureState,
+		setVariant,
+		variants,
+	} = useVariantState({
+		cycleOrder,
+		defaultVariant: "L_pX4uUkR",
+		variant,
+		variantClassNames,
+	});
+	const layoutDependency = createLayoutDependency(props, variants);
+	const { activeVariantCallback, delay } =
+		useActiveVariantCallback(baseVariant);
+	const onTap1qmbiqx = activeVariantCallback(async (...args) => {
+		if (Oa_Hk8pfq) {
+			const res = await Oa_Hk8pfq(...args);
+			if (res === false) return false;
+		}
+	});
+	const sharedStyleClassNames = [className, className2];
+	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
+	const ref1 = React.useRef(null);
+	const defaultLayoutId = React.useId();
+	const componentViewport = useComponentViewport();
+	return (
+		<LayoutGroup id={layoutId ?? defaultLayoutId}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							scopingClassNames,
+							"framer-lv3ofw",
+							className3,
+							classNames,
+						)}
+						data-framer-name={"Desktop"}
+						layoutDependency={layoutDependency}
+						layoutId={"L_pX4uUkR"}
+						ref={ref ?? ref1}
+						style={{
+							backgroundColor:
+								"var(--token-f4cf9e3e-da35-4e33-897c-29a30a250c5f, rgb(0, 0, 0))",
+							...style,
+						}}
+						{...addPropertyOverrides(
+							{
+								Gbz9maQw1: {
+									"data-framer-name": "Tablet",
+								},
+								K1iE6Mz7N: {
+									"data-framer-name": "Phone",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion.div
+							className={"framer-he1c7i"}
+							data-framer-name={"Container"}
+							layoutDependency={layoutDependency}
+							layoutId={"lGPbizWWG"}
+						>
+							<motion.div
+								className={"framer-c0n0jm"}
+								data-framer-name={"Content"}
+								layoutDependency={layoutDependency}
+								layoutId={"hlxSFnsHY"}
+							>
+								<motion.div
+									className={"framer-1sx2h0"}
+									data-framer-name={"Content"}
+									layoutDependency={layoutDependency}
+									layoutId={"VLwZ0s7IZ"}
+								>
+									<ComponentViewportProvider
+										height={40}
+										y={
+											(componentViewport?.y || 0) +
+											160 +
+											(((componentViewport?.height || 704) - 240 - 418) / 2 +
+												0 +
+												0) +
+											0 +
+											0 +
+											0 +
+											0 +
+											0 +
+											0
+										}
+										{...addPropertyOverrides(
+											{
+												Gbz9maQw1: {
+													y:
+														(componentViewport?.y || 0) +
+														96 +
+														(((componentViewport?.height || 794) - 176 - 418) /
+															2 +
+															0 +
+															0) +
+														0 +
+														0 +
+														0 +
+														0 +
+														0 +
+														0,
+												},
+												K1iE6Mz7N: {
+													y:
+														(componentViewport?.y || 0) +
+														96 +
+														(((componentViewport?.height || 816) - 176 - 640) /
+															2 +
+															0 +
+															0) +
+														0 +
+														0 +
+														0 +
+														0 +
+														0 +
+														0,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<MotionDivWithFXWithOptimizedAppearEffect
+											__perspectiveFX={false}
+											__smartComponentFX={true}
+											__targetOpacity={1}
+											animate={animation}
+											className={"framer-pz5jso-container"}
+											data-framer-appear-id={"pz5jso"}
+											initial={animation1}
+											layoutDependency={layoutDependency}
+											layoutId={"EBGIPu010-container"}
+											optimized={true}
+										>
+											{_jsx(stdin_default, {
+												D_QyhowU2: "Export Framer Components to React",
+												height: "100%",
+												id: "EBGIPu010",
+												layoutId: "EBGIPu010",
+												variant: "ih1f0O9Of",
+												width: "100%",
+											})}
+										</MotionDivWithFXWithOptimizedAppearEffect>
+									</ComponentViewportProvider>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-7elwrr"}
+										data-highlight={true}
+										effect={textEffect}
+										fonts={["FS;Satoshi-medium", "GF;Instrument Serif-italic"]}
+										layoutDependency={layoutDependency}
+										layoutId={"DxJluarpu"}
+										onTap={onTap1qmbiqx}
+										style={{
+											"--extracted-gdpscs":
+												"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.h1
+												style={{
+													"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
+													"--framer-font-family":
+														'"Satoshi", "Satoshi Placeholder", sans-serif',
+													"--framer-font-size": "70px",
+													"--framer-font-weight": "500",
+													"--framer-letter-spacing": "-0.04em",
+													"--framer-line-height": "1.1em",
+													"--framer-text-alignment": "center",
+													"--framer-text-color":
+														"var(--extracted-gdpscs, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))",
+												}}
+											>
+												{"Seamlessly Convert "}
+												<motion.span
+													style={{
+														"--font-selector":
+															"R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
+														"--framer-font-family":
+															'"Instrument Serif", "Instrument Serif Placeholder", serif',
+														"--framer-font-style": "italic",
+														"--framer-font-weight": "400",
+													}}
+												>
+													{"Framer"}
+												</motion.span>
+												{" Designs to "}
+												<motion.span
+													style={{
+														"--font-selector":
+															"R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
+														"--framer-font-family":
+															'"Instrument Serif", "Instrument Serif Placeholder", serif',
+														"--framer-font-style": "italic",
+														"--framer-font-weight": "400",
+													}}
+												>
+													{"React components"}
+												</motion.span>
+											</motion.h1>
+										</React.Fragment>
+									</RichText>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-nqkn6i"}
+										effect={textEffect1}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"eokbgTZL8"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										text={Q09IoXmix}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1qe6evr"}
+												data-styles-preset={"wHLHeTMJ0"}
+												style={{
+													"--framer-text-alignment": "center",
+												}}
+											>
+												{
+													"Transform your Framer components into production-ready React code. Enhance your React projects with high-fidelity components, effortlessly bridging the gap between design and development."
+												}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+								</motion.div>
+								<MotionDivWithFXWithOptimizedAppearEffect
+									__perspectiveFX={false}
+									__smartComponentFX={true}
+									__targetOpacity={1}
+									animate={animation}
+									className={"framer-1rh3sqh"}
+									data-framer-appear-id={"1rh3sqh"}
+									data-framer-name={"Button"}
+									initial={animation1}
+									layoutDependency={layoutDependency}
+									layoutId={"ZtPwGwF3_"}
+									optimized={true}
+								>
+									<ComponentViewportProvider
+										height={68}
+										y={
+											(componentViewport?.y || 0) +
+											160 +
+											(((componentViewport?.height || 704) - 240 - 418) / 2 +
+												0 +
+												0) +
+											0 +
+											0 +
+											0 +
+											316 +
+											0 +
+											0
+										}
+										{...addPropertyOverrides(
+											{
+												Gbz9maQw1: {
+													y:
+														(componentViewport?.y || 0) +
+														96 +
+														(((componentViewport?.height || 794) - 176 - 418) /
+															2 +
+															0 +
+															0) +
+														0 +
+														0 +
+														0 +
+														316 +
+														0 +
+														0,
+												},
+												K1iE6Mz7N: {
+													y:
+														(componentViewport?.y || 0) +
+														96 +
+														(((componentViewport?.height || 816) - 176 - 640) /
+															2 +
+															0 +
+															0) +
+														0 +
+														0 +
+														0 +
+														316 +
+														0 +
+														0,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-1pwvu55-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"ZuNhKVdul-container"}
+										>
+											{_jsx(stdin_default2, {
+												GLWImmBy_: false,
+												HBR9r6Wzz: false,
+												height: "100%",
+												id: "ZuNhKVdul",
+												kTynE2FQc: "regular",
+												layoutId: "ZuNhKVdul",
+												LdEuC589O:
+													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+												nL8OQ61g_: "House",
+												nZIvc5R21: "AppleLogo",
+												odb0bWURU: OF9UPudni,
+												QQq_dHjj6: "fill",
+												rt9DsEiKG:
+													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
+												saKEMwXXL: true,
+												tipS0P7cJ: "Start Exporting Now",
+												Ud3HdUmNm: true,
+												variant: "b_66fXdIn",
+												width: "100%",
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-yf4qez"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"gjG8xytXP"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-d2jvfr"}
+												data-styles-preset={"kpcp5QUWe"}
+											>
+												{"Free for open source projects"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+								</MotionDivWithFXWithOptimizedAppearEffect>
+							</motion.div>
+						</motion.div>
+					</motion.div>
+				</Transition>
+			</Variants>
+		</LayoutGroup>
+	);
 });
-var css3 = ["@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }", ".framer-YkAYi.framer-1wa8zo6, .framer-YkAYi .framer-1wa8zo6 { display: block; }", ".framer-YkAYi.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }", ".framer-YkAYi .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }", ".framer-YkAYi .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }", ".framer-YkAYi .framer-1sx2h0, .framer-YkAYi .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }", ".framer-YkAYi .framer-pz5jso-container, .framer-YkAYi .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }", ".framer-YkAYi .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }", ".framer-YkAYi .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }", ".framer-YkAYi .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-YkAYi.framer-lv3ofw, .framer-YkAYi .framer-he1c7i, .framer-YkAYi .framer-c0n0jm, .framer-YkAYi .framer-1sx2h0, .framer-YkAYi .framer-1rh3sqh { gap: 0px; } .framer-YkAYi.framer-lv3ofw > *, .framer-YkAYi .framer-he1c7i > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-YkAYi.framer-lv3ofw > :first-child, .framer-YkAYi .framer-he1c7i > :first-child, .framer-YkAYi .framer-c0n0jm > :first-child, .framer-YkAYi .framer-1sx2h0 > :first-child, .framer-YkAYi .framer-1rh3sqh > :first-child { margin-top: 0px; } .framer-YkAYi.framer-lv3ofw > :last-child, .framer-YkAYi .framer-he1c7i > :last-child, .framer-YkAYi .framer-c0n0jm > :last-child, .framer-YkAYi .framer-1sx2h0 > :last-child, .framer-YkAYi .framer-1rh3sqh > :last-child { margin-bottom: 0px; } .framer-YkAYi .framer-c0n0jm > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-YkAYi .framer-1sx2h0 > *, .framer-YkAYi .framer-1rh3sqh > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } }", ".framer-YkAYi.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }", ".framer-YkAYi.framer-v-g9taje .framer-7elwrr { max-width: 412px; }", ".framer-YkAYi.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }", ".framer-YkAYi.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }", ".framer-YkAYi.framer-v-1hchsjm .framer-he1c7i { height: 640px; }", ".framer-YkAYi.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }", ".framer-YkAYi.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }", ...css, ...css2];
+var css3 = [
+	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
+	".framer-YkAYi.framer-1wa8zo6, .framer-YkAYi .framer-1wa8zo6 { display: block; }",
+	".framer-YkAYi.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
+	".framer-YkAYi .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
+	".framer-YkAYi .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-YkAYi .framer-1sx2h0, .framer-YkAYi .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-YkAYi .framer-pz5jso-container, .framer-YkAYi .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
+	".framer-YkAYi .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-YkAYi .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
+	".framer-YkAYi .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-YkAYi.framer-lv3ofw, .framer-YkAYi .framer-he1c7i, .framer-YkAYi .framer-c0n0jm, .framer-YkAYi .framer-1sx2h0, .framer-YkAYi .framer-1rh3sqh { gap: 0px; } .framer-YkAYi.framer-lv3ofw > *, .framer-YkAYi .framer-he1c7i > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-YkAYi.framer-lv3ofw > :first-child, .framer-YkAYi .framer-he1c7i > :first-child, .framer-YkAYi .framer-c0n0jm > :first-child, .framer-YkAYi .framer-1sx2h0 > :first-child, .framer-YkAYi .framer-1rh3sqh > :first-child { margin-top: 0px; } .framer-YkAYi.framer-lv3ofw > :last-child, .framer-YkAYi .framer-he1c7i > :last-child, .framer-YkAYi .framer-c0n0jm > :last-child, .framer-YkAYi .framer-1sx2h0 > :last-child, .framer-YkAYi .framer-1rh3sqh > :last-child { margin-bottom: 0px; } .framer-YkAYi .framer-c0n0jm > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-YkAYi .framer-1sx2h0 > *, .framer-YkAYi .framer-1rh3sqh > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } }",
+	".framer-YkAYi.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
+	".framer-YkAYi.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
+	".framer-YkAYi.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
+	".framer-YkAYi.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
+	".framer-YkAYi.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
+	".framer-YkAYi.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
+	".framer-YkAYi.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
+	...css,
+	...css2,
+];
 var FrameraKlzorVQO = withCSS(Component, css3, "framer-YkAYi");
 var stdin_default3 = FrameraKlzorVQO;
 FrameraKlzorVQO.displayName = "Section Hero";
 FrameraKlzorVQO.defaultProps = {
-  height: 704,
-  width: 1200
+	height: 704,
+	width: 1200,
 };
 addPropertyControls(FrameraKlzorVQO, {
-  variant: {
-    options: ["L_pX4uUkR", "Gbz9maQw1", "K1iE6Mz7N"],
-    optionTitles: ["Desktop", "Tablet", "Phone"],
-    title: "Variant",
-    type: ControlType.Enum
-  },
-  OF9UPudni: {
-    title: "cta link",
-    type: ControlType.Link
-  },
-  Q09IoXmix: {
-    defaultValue: "Transform your Framer components into production-ready React code",
-    displayTextArea: false,
-    title: "subheading",
-    type: ControlType.String
-  },
-  Oa_Hk8pfq: {
-    title: "On Click",
-    type: ControlType.EventHandler
-  }
+	variant: {
+		options: ["L_pX4uUkR", "Gbz9maQw1", "K1iE6Mz7N"],
+		optionTitles: ["Desktop", "Tablet", "Phone"],
+		title: "Variant",
+		type: ControlType.Enum,
+	},
+	OF9UPudni: {
+		title: "cta link",
+		type: ControlType.Link,
+	},
+	Q09IoXmix: {
+		defaultValue:
+			"Transform your Framer components into production-ready React code",
+		displayTextArea: false,
+		title: "subheading",
+		type: ControlType.String,
+	},
+	Oa_Hk8pfq: {
+		title: "On Click",
+		type: ControlType.EventHandler,
+	},
 });
-addFonts(FrameraKlzorVQO, [{
-  explicitInter: true,
-  fonts: [{
-    family: "Satoshi",
-    source: "fontshare",
-    style: "normal",
-    url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
-    weight: "500"
-  }, {
-    family: "Instrument Serif",
-    source: "google",
-    style: "italic",
-    url: "https://fonts.gstatic.com/s/instrumentserif/v4/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATjnTNgNq55w.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-    url: "https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-    url: "https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+1F00-1FFF",
-    url: "https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0370-03FF",
-    url: "https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-    url: "https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-    url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-    url: "https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2",
-    weight: "400"
-  }]
-}, ...ElementsBadgeFonts, ...ButtonsButtonFonts, ...getFontsFromSharedStyle(fonts), ...getFontsFromSharedStyle(fonts2)], {
-  supportsExplicitInterCodegen: true
-});
+addFonts(
+	FrameraKlzorVQO,
+	[
+		{
+			explicitInter: true,
+			fonts: [
+				{
+					family: "Satoshi",
+					source: "fontshare",
+					style: "normal",
+					url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
+					weight: "500",
+				},
+				{
+					family: "Instrument Serif",
+					source: "google",
+					style: "italic",
+					url: "https://fonts.gstatic.com/s/instrumentserif/v4/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATjnTNgNq55w.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+					url: "https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+					url: "https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+1F00-1FFF",
+					url: "https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+0370-03FF",
+					url: "https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+					url: "https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+					url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+					url: "https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2",
+					weight: "400",
+				},
+			],
+		},
+		...ElementsBadgeFonts,
+		...ButtonsButtonFonts,
+		...getFontsFromSharedStyle(fonts),
+		...getFontsFromSharedStyle(fonts2),
+	],
+	{
+		supportsExplicitInterCodegen: true,
+	},
+);
 
 // virtual:section-hero
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-  "base": "K1iE6Mz7N",
-  "md": "Gbz9maQw1",
-  "xl": "L_pX4uUkR"
+	base: "K1iE6Mz7N",
+	md: "Gbz9maQw1",
+	xl: "L_pX4uUkR",
 };
-stdin_default3.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return /* @__PURE__ */jsx(ContextProviders, {
-    routes: {
-      "E9iSo0Hog": {
-        "path": "/docs"
-      },
-      "TdQ_ISe7W": {
-        "path": "/404"
-      },
-      "YC1NE44pE": {
-        "path": "/terms"
-      },
-      "augiA20Il": {
-        "path": "/"
-      },
-      "jg9o0Jk8V": {
-        "path": "/privacy"
-      },
-      "rHzp0yyuW": {
-        "path": "/blog-3"
-      }
-    },
-    children: /* @__PURE__ */jsx(WithFramerBreakpoints, {
-      Component: stdin_default3,
-      variants: defaultResponsiveVariants,
-      ...rest
-    }),
-    framerSiteId: "080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c",
-    locale,
-    locales
-  });
+stdin_default3.Responsive = ({ locale, ...rest }) => {
+	return (
+		<ContextProviders
+			routes={{
+				E9iSo0Hog: {
+					path: "/docs",
+				},
+				TdQ_ISe7W: {
+					path: "/404",
+				},
+				YC1NE44pE: {
+					path: "/terms",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				jg9o0Jk8V: {
+					path: "/privacy",
+				},
+				rHzp0yyuW: {
+					path: "/blog-3",
+				},
+			}}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			<WithFramerBreakpoints
+				Component={stdin_default3}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
+		</ContextProviders>
+	);
 };
-function ComponentWithRoot({
-  locale,
-  ...rest
-}) {
-  return /* @__PURE__ */jsx(ContextProviders, {
-    routes: {
-      "E9iSo0Hog": {
-        "path": "/docs"
-      },
-      "TdQ_ISe7W": {
-        "path": "/404"
-      },
-      "YC1NE44pE": {
-        "path": "/terms"
-      },
-      "augiA20Il": {
-        "path": "/"
-      },
-      "jg9o0Jk8V": {
-        "path": "/privacy"
-      },
-      "rHzp0yyuW": {
-        "path": "/blog-3"
-      }
-    },
-    children: /* @__PURE__ */jsx(stdin_default3, {
-      ...rest
-    }),
-    framerSiteId: "080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c",
-    locale,
-    locales
-  });
+function ComponentWithRoot({ locale, ...rest }) {
+	return (
+		<ContextProviders
+			routes={{
+				E9iSo0Hog: {
+					path: "/docs",
+				},
+				TdQ_ISe7W: {
+					path: "/404",
+				},
+				YC1NE44pE: {
+					path: "/terms",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				jg9o0Jk8V: {
+					path: "/privacy",
+				},
+				rHzp0yyuW: {
+					path: "/blog-3",
+				},
+			}}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default3, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default3);
 export { ComponentWithRoot as default };
