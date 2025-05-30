@@ -66,84 +66,84 @@
 }
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer:not(.unframer-base) { 
+    .unframer:not(.unframer-base) {
         display: none !important;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer:not(.unframer-sm) { 
+    .unframer:not(.unframer-sm) {
         display: none !important;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer:not(.unframer-md) { 
+    .unframer:not(.unframer-md) {
         display: none !important;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer:not(.unframer-lg) { 
+    .unframer:not(.unframer-lg) {
         display: none !important;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer:not(.unframer-xl) { 
+    .unframer:not(.unframer-xl) {
         display: none !important;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer:not(.unframer-2xl) { 
+    .unframer:not(.unframer-2xl) {
         display: none !important;
     }
 }
 
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer-hidden.unframer-base { 
+    .unframer-hidden.unframer-base {
         display: contents;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer-hidden.unframer-sm { 
+    .unframer-hidden.unframer-sm {
         display: contents;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer-hidden.unframer-md { 
+    .unframer-hidden.unframer-md {
         display: contents;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer-hidden.unframer-lg { 
+    .unframer-hidden.unframer-lg {
         display: contents;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer-hidden.unframer-xl { 
+    .unframer-hidden.unframer-xl {
         display: contents;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer-hidden.unframer-2xl { 
+    .unframer-hidden.unframer-2xl {
         display: contents;
     }
 }
@@ -1041,7 +1041,7 @@ NavigationContainer
 /* used by section-frequently-asked-questions.js, section-hero.js, section-pricing.js */
 
 @font-face {
-    font-family: 'Instrument Serif'; 
+    font-family: 'Instrument Serif';
     src: url('https://fonts.gstatic.com/s/instrumentserif/v4/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATjnTNgNq55w.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1050,21 +1050,21 @@ NavigationContainer
 /* used by docs-cms-with-filters.js */
 
 @font-face {
-    font-family: 'Manrope'; 
+    font-family: 'Manrope';
     src: url('https://fonts.gstatic.com/s/manrope/v14/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F87jxeN7B.ttf');
     font-style: normal;
     font-weight: 500;
 }
 
 @font-face {
-    font-family: 'Manrope'; 
+    font-family: 'Manrope';
     src: url('https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_A87jxeN7B.woff2');
     font-style: normal;
     font-weight: 700;
 }
 
 @font-face {
-    font-family: 'Syne'; 
+    font-family: 'Syne';
     src: url('https://fonts.gstatic.com/s/syne/v16/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6kR47NCV5Z.ttf');
     font-style: normal;
     font-weight: 700;
@@ -1073,7 +1073,7 @@ NavigationContainer
 /* used by blog-articles-collection.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/05KsVHGDmqXSBXM4yRZ65P8i0s.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1081,7 +1081,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/1ZFS7N918ojhhd0nQWdj3jz4w.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1089,7 +1089,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/3ZmXbBKToJifDV9gwcifVd1tEY.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1097,7 +1097,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/5HcVoGak8k5agFJSaKa4floXVu0.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1105,7 +1105,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/6FI2EneKzM3qBy5foOZXey7coCA.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1113,7 +1113,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1121,7 +1121,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/b8ezwLrN7h2AUoPEENcsTMVJ0.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1129,7 +1129,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1137,7 +1137,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/cugnVhSraaRyANCaUtI5FV17wk.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1145,7 +1145,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/efTfQcBJ53kM2pB1hezSZ3RDUFs.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1153,7 +1153,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/FNfhX3dt4ChuLJq2PwdlxHO7PU.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1161,7 +1161,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/g0c8vEViiXNlKAgI4Ymmk3Ig.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1169,7 +1169,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/gQhNpS3tN86g8RcVKYUUaKt2oMQ.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1177,7 +1177,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1185,7 +1185,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/jn4BtSPLlS0NDp1KiFAtFKiiY0o.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1193,7 +1193,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/ky8ovPukK4dJ1Pxq74qGhOqCYI.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1201,7 +1201,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1209,7 +1209,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/mkY5Sgyq51ik0AMrSBwhm9DJg.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1217,7 +1217,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/mvNEIBLyHbscgHtwfsByjXUz3XY.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1225,7 +1225,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1233,7 +1233,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/NHHeAKJVP0ZWHk5YZnQQChIsBM.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1241,7 +1241,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1249,7 +1249,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/P2Bw01CtL0b9wqygO0sSVogWbo.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1257,7 +1257,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/qrVgiXNd6RuQjETYQiVQ9nqCk.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1265,7 +1265,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/vvNSqIj42qeQ2bvCRBIWKHscrc.woff2');
     font-style: italic;
     font-weight: 900;
@@ -1273,7 +1273,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/vxBnBhH8768IFAXAb4Qf6wQHKs.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1281,7 +1281,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/X5hj6qzcHUYv7h1390c8Rhm6550.woff2');
     font-style: normal;
     font-weight: 900;
@@ -1289,7 +1289,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/zSsEuoJdh8mcFVk976C05ZfQr8.woff2');
     font-style: italic;
     font-weight: 600;
@@ -1299,7 +1299,7 @@ NavigationContainer
 /* used by blog-articles-collection.js, feature.js, features-container.js, section-features.js, section-footer.js, section-frequently-asked-questions.js, section-hero.js, section-how-it-works.js, section-large-testimonial.js, section-logos.js, section-testimonials.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/1K3W8DizY3v4emK8Mb08YHxTbs.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1307,7 +1307,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/2A4Xx7CngadFGlVV4xrO06OBHY.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1315,7 +1315,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/43sJ6MfOPh1LCJt46OvyDuSbA6o.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1323,7 +1323,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1331,7 +1331,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/867QObYax8ANsfX4TGEVU9YiCM.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1339,7 +1339,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/cdAe8hgZ1cMyLu9g005pAW3xMo.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1347,7 +1347,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/CfMzU8w2e7tHgF4T4rATMPuWosA.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1355,7 +1355,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DOfvtmE1UplCq161m6Hj8CSQYg.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1363,7 +1363,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1371,7 +1371,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1379,7 +1379,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1387,7 +1387,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/H89BbHkbHDzlxZzxi8uPzTsp90.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1395,7 +1395,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/Oyn2ZbENFdnW7mt2Lzjk1h9Zb9k.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1403,7 +1403,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/QxmhnWTzLtyjIiZcfaLIJ8EFBXU.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1411,7 +1411,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/tKtBcDnBMevsEEJKdNGhhkLzYo.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1419,7 +1419,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1427,7 +1427,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/u6gJwDuwB143kpNK1T1MDKDWkMc.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1435,7 +1435,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/vFzuJY0c65av44uhEKB6vyjFMg.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1443,7 +1443,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1451,7 +1451,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/wccHG0r4gBDAIRhfHiOlq6oEkqw.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1459,7 +1459,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/WZ367JPwf9bRW6LdTHN8rXgSjw.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1469,7 +1469,7 @@ NavigationContainer
 /* used by blog-articles-collection.js, feature.js, features-container.js, pricing.js, section-call-to-action.js, section-features.js, section-footer.js, section-frequently-asked-questions.js, section-hero.js, section-how-it-works.js, section-large-testimonial.js, section-logos.js, section-pricing.js, section-testimonials.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1477,7 +1477,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1485,7 +1485,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1493,7 +1493,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1501,7 +1501,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1509,7 +1509,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1517,7 +1517,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1527,14 +1527,14 @@ NavigationContainer
 /* used by feature.js, features-container.js, pricing.js, section-call-to-action.js, section-features.js, section-footer.js, section-frequently-asked-questions.js, section-hero.js, section-how-it-works.js, section-large-testimonial.js, section-pricing.js, section-testimonials.js */
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/CDEBEFT2R7XKNGXSBBLZGMY4MMHZG75P/HEVKDGQCYDZ7Z6CDVR2ZQGBCTUD6ZARH/BKWEE3VKGTFABE37K2DTH625VUSN2N35.woff2');
     font-style: italic;
     font-weight: 700;
 }
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1543,7 +1543,7 @@ NavigationContainer
 /* used by pricing.js, section-call-to-action.js, section-footer.js, section-frequently-asked-questions.js, section-hero.js, section-how-it-works.js, section-pricing.js, section-testimonials.js */
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/MPIFA4B3XXRNY2MJDGP6GOOOAF6EOCLO/W5E4ZFYPJ3V6JKMBGHB6YMITK6EWS2XA/QOMBWPST76ICDYF6WOBS7SQ7RBT67QW2.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1552,7 +1552,7 @@ NavigationContainer
 /* used by feature.js, features-container.js, pricing.js, section-features.js, section-footer.js, section-large-testimonial.js, section-pricing.js, section-testimonials.js */
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/NID3I7RITWZSKXRCJGOCMP5NOADJK6IG/2HLHGD7OBTWCOHW64YXOE5KFXHU4KJHM/ZHME2QIRFR7UPJ47NLY27RCAFY44CKZJ.woff2');
     font-style: italic;
     font-weight: 500;
@@ -1561,7 +1561,7 @@ NavigationContainer
 /* used by feature.js, features-animation.js, features-container.js, navigation.js, pricing.js, section-call-to-action.js, section-features.js, section-footer.js, section-frequently-asked-questions.js, section-hero.js, section-how-it-works.js, section-large-testimonial.js, section-logos.js, section-pricing.js, section-testimonials.js */
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2');
     font-style: normal;
     font-weight: 500;

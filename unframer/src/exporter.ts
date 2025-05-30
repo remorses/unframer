@@ -474,7 +474,7 @@ export async function bundle({
         )
 
         logFontsUsage(allFonts)
-            .split('\n')
+            ?.split('\n')
             .forEach((x) => logger.log(x))
 
         const jsxFiles = buildResult.outputFiles
