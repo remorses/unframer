@@ -246,12 +246,57 @@ describe('babelPluginJsxTransform', () => {
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx, } from 'react/jsx-runtime';
-          const element = jsx('div', {
-            className: 'container',
-            children: 'Hello world',
-          },);
+          const element = <div className={'container'}>{'Hello world'}</div>;
           "
         `)
+    })
+    test('handles jsx passed as prop to another component', () => {
+        expect(
+            trans(
+                dedent`
+                    import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+
+                    const element = _jsx(Modal, {
+                        content: _jsx("div", {
+                            className: "modal-content",
+                            children: _jsx("p", {
+                                children: "This is modal content"
+                            })
+                        }),
+                        footer: _jsxs("div", {
+                            className: "modal-footer",
+                            children: [
+                                _jsx("button", {
+                                    children: "Cancel"
+                                }),
+                                _jsx("button", {
+                                    children: "OK"
+                                })
+                            ]
+                        })
+                    });
+                    `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+              "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+              const element = (
+                <Modal
+                  content={
+                    <div className={'modal-content'}>
+                      <p>{'This is modal content'}</p>
+                    </div>
+                  }
+                  footer={
+                    <div className={'modal-footer'}>
+                      <button>{'Cancel'}</button>
+                      <button>{'OK'}</button>
+                    </div>
+                  }
+                />
+              );
+              "
+            `)
     })
 })
 

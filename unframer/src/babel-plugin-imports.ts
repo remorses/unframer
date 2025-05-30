@@ -283,14 +283,66 @@ const noContainerTypes = new Set([
 ])
 
 export function babelPluginJsxTransform() {
+    const jsxFunctions = new Set<string>()
+
     return {
         name: 'jsx-transform',
         visitor: {
+            ImportDeclaration(path) {
+                const source = path.node.source.value
+
+                // Track React JSX runtime imports
+                if (
+                    source === 'react/jsx-runtime' ||
+                    source === 'react/jsx-dev-runtime'
+                ) {
+                    path.node.specifiers.forEach((specifier) => {
+                        if (
+                            BabelTypes.isImportSpecifier(specifier) &&
+                            BabelTypes.isIdentifier(specifier.imported)
+                        ) {
+                            const importName = specifier.imported.name
+                            const localName = specifier.local.name
+
+                            // Track common JSX runtime functions
+                            if (
+                                importName === 'jsx' ||
+                                importName === 'jsxs' ||
+                                importName === 'Fragment'
+                            ) {
+                                jsxFunctions.add(localName)
+                            }
+                        }
+                    })
+                }
+
+                // Track React imports that could be JSX functions
+                if (source === 'react') {
+                    path.node.specifiers.forEach((specifier) => {
+                        if (
+                            BabelTypes.isImportSpecifier(specifier) &&
+                            BabelTypes.isIdentifier(specifier.imported)
+                        ) {
+                            const importName = specifier.imported.name
+                            const localName = specifier.local.name
+
+                            // Track createElement and other JSX-related functions
+                            if (
+                                importName === 'createElement' ||
+                                importName === 'Fragment'
+                            ) {
+                                jsxFunctions.add(localName)
+                            }
+                        }
+                    })
+                }
+            },
             CallExpression(path) {
-                // Check if it's a _jsx or _jsxs call
+                // Check if it's a JSX function call
                 if (
                     !path.node.callee ||
-                    !path.node.callee.name?.startsWith('_jsx')
+                    !path.node.callee.name ||
+                    !jsxFunctions.has(path.node.callee.name)
                 ) {
                     return
                 }
