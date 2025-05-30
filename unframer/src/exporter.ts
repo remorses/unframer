@@ -78,7 +78,7 @@ export async function bundle({
         await fs.promises.mkdir(out, { recursive: true })
     } catch (e) {}
 
-    spinner.start('bundling')
+    spinner.start('exporting components...')
 
     const otherRoutes = Object.fromEntries(
         (config.framerWebPages || []).map((page) => [
@@ -1338,13 +1338,13 @@ export async function createExampleComponentCode({
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
 
-    const imports = instances.map((exampleComponent) => {
+    const imports = instances?.map((exampleComponent) => {
         return `import ${componentCamelCase(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
             exampleComponent?.componentPathSlug
         }'`
     })
 
-    const jsx = instances.map((exampleComponent) => {
+    const jsx = instances?.map((exampleComponent) => {
         let propStr = ''
         for (let [key, value] of Object.entries(
             exampleComponent.controls || {},

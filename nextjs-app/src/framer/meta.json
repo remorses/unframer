@@ -26,8 +26,8 @@
       ],
       "format": "esm"
     },
-    "/:https://esm.sh/*typewriter-effect@2.21.0/node/typewriter-effect.mjs": {
-      "bytes": 46938,
+    "/:https://esm.sh/*typewriter-effect@2.22.0/node/typewriter-effect.mjs": {
+      "bytes": 46812,
       "imports": [
         {
           "path": "react",
@@ -41,14 +41,14 @@
       "bytes": 279,
       "imports": [
         {
-          "path": "/:https://esm.sh/*typewriter-effect@2.21.0/node/typewriter-effect.mjs",
+          "path": "/:https://esm.sh/*typewriter-effect@2.22.0/node/typewriter-effect.mjs",
           "kind": "import-statement",
-          "original": "/*typewriter-effect@2.21.0/node/typewriter-effect.mjs"
+          "original": "/*typewriter-effect@2.22.0/node/typewriter-effect.mjs"
         },
         {
-          "path": "/:https://esm.sh/*typewriter-effect@2.21.0/node/typewriter-effect.mjs",
+          "path": "/:https://esm.sh/*typewriter-effect@2.22.0/node/typewriter-effect.mjs",
           "kind": "import-statement",
-          "original": "/*typewriter-effect@2.21.0/node/typewriter-effect.mjs"
+          "original": "/*typewriter-effect@2.22.0/node/typewriter-effect.mjs"
         }
       ],
       "format": "esm"
@@ -5385,8 +5385,8 @@
         "/:https://framerusercontent.com/modules/vgSbxmWWvbgW6ShllXld/9oZlwlOxsp6zJVFpVkIp/Typewriter.js": {
           "bytesInOutput": 6190
         },
-        "/:https://esm.sh/*typewriter-effect@2.21.0/node/typewriter-effect.mjs": {
-          "bytesInOutput": 49407
+        "/:https://esm.sh/*typewriter-effect@2.22.0/node/typewriter-effect.mjs": {
+          "bytesInOutput": 49283
         },
         "/:https://esm.sh/*typewriter-effect": {
           "bytesInOutput": 0
@@ -5461,7 +5461,7 @@
           "bytesInOutput": 44579
         }
       },
-      "bytes": 522909
+      "bytes": 522785
     },
     "hero.js": {
       "imports": [
