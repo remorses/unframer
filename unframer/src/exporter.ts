@@ -42,6 +42,11 @@ import {
 import { error } from 'console'
 import { notifyError } from './sentry'
 import { propCamelCaseJustLikeFramer } from './compat'
+import { transform } from '@babel/core'
+import {
+    babelPluginDeduplicateImports,
+    babelPluginJsxTransform,
+} from './babel-plugin-imports'
 
 export type StyleToken = {
     id: string
@@ -269,24 +274,28 @@ export async function bundle({
             const existing = await fs.promises
                 .readFile(file.path, 'utf-8')
                 .catch(() => null)
-            // let res = transform(file.text || '', {
-            //     babelrc: false,
-            //     sourceType: 'module',
-            //     plugins: [
-            //         babelPluginDeduplicateImports,
-
-            //         babelPluginJsxTransform(),
-            //     ],
-            //     filename: 'x.js',
-            //     compact: true,
-            //     sourceMaps: false,
-            // })
-            // let inputCode = res!.code!
-
-            const tooBigSize = 1 * 1024 * 1024
+            const tooBigSize = 0.7 * 1024 * 1024
 
             let formatted = file.text
-            // let tooBig = file.text.length >= tooBigSize
+
+            let tooBig = file.text.length >= tooBigSize
+            // tooBig = true
+            if (!tooBig) {
+                let res = transform(file.text || '', {
+                    babelrc: false,
+                    sourceType: 'module',
+                    plugins: [
+                        babelPluginDeduplicateImports,
+                        babelPluginJsxTransform(),
+                    ],
+                    filename: 'x.js',
+                    compact: false,
+                    sourceMaps: false,
+                })
+                if (res?.code) formatted = res?.code
+            }
+
+            // let inputCode = res!.code!
             // let shouldFormat = !tooBig && !file.path.includes('chunks')
             // if (shouldFormat) {
             //     spinner.update(`Formatting ${path.relative(out, file.path)}`)

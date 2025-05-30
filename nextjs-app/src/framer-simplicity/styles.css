@@ -2,18 +2,29 @@
 /* This css file has all the necessary styles to run all your components */
 
 
+
 :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 * {
     box-sizing: border-box;
     -webkit-font-smoothing: inherit;
 }
-h1, h2, h3, h4, h5, h6, p, figure {
+
+.unframer h1, .unframer h2, .unframer h3, .unframer h4, .unframer h5, .unframer h6, .unframer p, .unframer figure {
     margin: 0;
 }
-        
+
+.unframer {
+    line-height: normal;
+}
+
+.unframer, .unframer input, .unframer textarea, .unframer select, .unframer button {
+    font-size: 12px;
+    font-family: sans-serif;
+}
 :root {
     --unframer-ui: rgba(255, 255, 255, 0.04);
     --unframer-text: rgba(255, 255, 255, 0.7);
