@@ -281,32 +281,30 @@ const noContainerTypes = new Set([
     // 'StringLiteral',
     'NumericLiteral',
 ])
+export function removeJsxExpressionContainer({ types: t }) {
+    return {
+        name: 'remove-jsx-expression-container',
+        visitor: {
+            JSXExpressionContainer(path) {
+                const expr = path.node.expression
+                if (t.isJSXElement(expr) || t.isJSXFragment(expr)) {
+                    path.replaceWith(expr)
+                } else if (t.isArrayExpression(expr)) {
+                    // Check if array contains only JSX elements/fragments
+                    const allJsx = expr.elements.every(element =>
+                        element && (t.isJSXElement(element) || t.isJSXFragment(element))
+                    )
+                    if (allJsx) {
+                        path.replaceWithMultiple(expr.elements)
+                    }
+                }
+            },
+        },
+    }
+}
 
 export function babelPluginJsxTransform() {
     const jsxFunctions = new Set<string>()
-    function isJsxCalleeValidName(prop) {
-        if (
-            prop.value?.type !== 'CallExpression' ||
-            !jsxFunctions.has(prop.value.callee?.name)
-        ) {
-            return
-        }
-
-        // Get the first argument name if it's a variable
-        if (!prop.value.arguments || prop.value.arguments.length === 0) {
-            return
-        }
-
-        const firstArg = prop.value.arguments[0]
-
-        if (firstArg.type !== 'Identifier') {
-            return
-        }
-
-        if (canRenderAsJsx(firstArg.name)) {
-            return true
-        }
-    }
 
     return {
         name: 'jsx-transform',
@@ -433,15 +431,11 @@ export function babelPluginJsxTransform() {
                                 argument: prop.argument,
                             })
                         } else if (prop.key?.name === 'children') {
-                            console.log(prop)
                             if (prop.value.type === 'ArrayExpression') {
                                 jsxElement.children = prop.value.elements.map(
                                     (element) => {
                                         if (
-                                            noContainerTypes.has(
-                                                element.type,
-                                            ) ||
-                                            isJsxCalleeValidName(element)
+                                            noContainerTypes.has(element.type)
                                         ) {
                                             return element
                                         }
@@ -452,11 +446,7 @@ export function babelPluginJsxTransform() {
                                     },
                                 )
                             } else {
-                                if (isJsxCalleeValidName(prop)) {
-                                    jsxElement.children = [prop.value]
-                                } else if (
-                                    noContainerTypes.has(prop.value.type)
-                                ) {
+                                if (noContainerTypes.has(prop.value.type)) {
                                     jsxElement.children = [prop.value]
                                 } else {
                                     jsxElement.children = [

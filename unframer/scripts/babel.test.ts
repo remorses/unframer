@@ -6,8 +6,11 @@ import dedent from 'string-dedent'
 import {
     babelPluginDeduplicateImports,
     babelPluginJsxTransform,
+    removeJsxExpressionContainer,
 } from '../src/babel-plugin-imports'
 import { transform } from '@babel/core'
+
+const plugins = [babelPluginJsxTransform(), removeJsxExpressionContainer]
 
 function trans(
     code: string,
@@ -106,11 +109,7 @@ describe('babelPluginJsxTransform transforms files in nextjs-app/src/framer to J
                     recursive: true,
                 })
 
-                const transformed = trans(
-                    code,
-                    [babelPluginJsxTransform()],
-                    outPath,
-                )
+                const transformed = trans(code, plugins, outPath)
                 await fs.promises.writeFile(outPath, transformed)
                 console.log(outPath)
 
@@ -142,7 +141,7 @@ describe('babelPluginJsxTransform', () => {
                     })
                 });
                 `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -171,7 +170,7 @@ describe('babelPluginJsxTransform', () => {
                     children: "Click me"
                 });
                 `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -209,7 +208,7 @@ describe('babelPluginJsxTransform', () => {
                     )
                 });
                 `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -244,7 +243,7 @@ describe('babelPluginJsxTransform', () => {
                         children: "Hello world"
                     });
                     `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx, } from 'react/jsx-runtime';
@@ -278,7 +277,7 @@ describe('babelPluginJsxTransform', () => {
                         })
                     });
                     `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
@@ -314,7 +313,7 @@ describe('babelPluginJsxTransform', () => {
                             })
                         });
                         `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, } from 'react/jsx-runtime';
@@ -360,7 +359,7 @@ describe('babelPluginJsxTransform', () => {
                         ]
                     });
                     `,
-                [babelPluginJsxTransform()],
+                plugins,
             ),
         ).toMatchInlineSnapshot(`
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
