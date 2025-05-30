@@ -10,6 +10,7 @@
         "module": "Node16",
         "noEmit": false,
         "skipLibCheck": true,
+        "declarationMap": true,
         "useUnknownInCatchVariables": false,
         "jsx": "react-jsx",
         "allowJs": true,
