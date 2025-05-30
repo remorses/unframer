@@ -1,7 +1,6 @@
-import { expect, describe, test } from 'vitest'
+import { describe, expect, test } from 'vitest'
+import { configFromFetch } from './cli.js'
 import { createExampleComponentCode } from './exporter.js'
-import { componentNameToPath } from './utils.js'
-import { Config, configFromFetch } from './cli.js'
 
 describe('createExampleComponentCode', () => {
     test('should create example component code', async () => {

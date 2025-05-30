@@ -298,7 +298,7 @@ export async function recursiveResolveRedirect(
     return url
 }
 let semaphore = new Sema(4)
-let rateLimiter = RateLimit(12, { timeUnit: 1000 })
+let rateLimiter = RateLimit(20, { timeUnit: 1000 })
 
 export const fetchWithRetry = retryTwice(
     async (url: string, options?: RequestInit) => {
