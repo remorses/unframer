@@ -263,515 +263,453 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<FormContainer
+						{...restProps}
+						{...gestureHandlers}
+						action={
+							"https://api.framer.com/forms/v1/forms/52bddac8-f567-4e11-9080-b96cbcc26802/submit"
+						}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-82k6qr",
+							className4,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Variant 1"}
+						data-highlight={true}
+						layoutDependency={layoutDependency}
+						layoutId={"DFX4NM0kF"}
+						onLoading={onLoadingyyjg20}
+						onSuccess={onSuccess10521vk}
+						redirectUrl={{
+							webPageId: "augiA20Il",
+						}}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							"--border-bottom-width": "1px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "1px",
+							"--border-right-width": "1px",
+							"--border-style": "solid",
+							"--border-top-width": "1px",
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
-								<FormContainer
-									{...restProps}
-									{...gestureHandlers}
-									action={
-										"https://api.framer.com/forms/v1/forms/52bddac8-f567-4e11-9080-b96cbcc26802/submit"
-									}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-82k6qr",
-										className4,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Variant 1"}
-									data-highlight={true}
+								KevRZF7cn: {
+									"data-framer-name": "Success",
+								},
+								ZsrCWHO_c: {
+									"data-framer-name": "Loading",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						{(formState) => (
+							<_Fragment>
+								<motion.label
+									className={"framer-1grcb95"}
 									layoutDependency={layoutDependency}
-									layoutId={"DFX4NM0kF"}
-									onLoading={onLoadingyyjg20}
-									onSuccess={onSuccess10521vk}
-									redirectUrl={{
-										webPageId: "augiA20Il",
-									}}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
+									layoutId={"BAGjNNxcG"}
 									style={{
-										"--border-bottom-width": "1px",
-										"--border-color":
-											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-										"--border-left-width": "1px",
-										"--border-right-width": "1px",
-										"--border-style": "solid",
-										"--border-top-width": "1px",
-										...style,
+										opacity: 1,
 									}}
-									{...addPropertyOverrides(
-										{
-											KevRZF7cn: {
-												"data-framer-name": "Success",
-											},
-											ZsrCWHO_c: {
-												"data-framer-name": "Loading",
-											},
+									variants={{
+										ZsrCWHO_c: {
+											opacity: 0.4,
 										},
-										baseVariant,
-										gestureVariant,
-									)}
+									}}
 								>
-									{(formState) => (
-										<_Fragment>
-											{
-												<motion.label
-													className={"framer-1grcb95"}
-													layoutDependency={layoutDependency}
-													layoutId={"BAGjNNxcG"}
-													style={{
-														opacity: 1,
-													}}
-													variants={{
-														ZsrCWHO_c: {
-															opacity: 0.4,
-														},
-													}}
-												>
-													{
-														<RichText
-															__fromCanvasComponent={true}
-															className={"framer-1ubiyc4"}
-															fonts={["Inter"]}
-															layoutDependency={layoutDependency}
-															layoutId={"HSD4H8tme"}
-															verticalAlignment={"top"}
-															withExternalLayout={true}
-														>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-1ubiyc4"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"HSD4H8tme"}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1dbggqt"}
+												data-styles-preset={"gj4zreqLr"}
+											>
+												{"Email"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<FormPlainTextInput
+										className={"framer-1vtdut"}
+										inputName={"Email"}
+										layoutDependency={layoutDependency}
+										layoutId={"irIA0GOhu"}
+										placeholder={"jane@framer.com"}
+										required={true}
+										style={{
+											"--framer-input-background":
+												"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+											"--framer-input-border-bottom-width": "1px",
+											"--framer-input-border-color":
+												"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+											"--framer-input-border-left-width": "1px",
+											"--framer-input-border-radius-bottom-left": "6px",
+											"--framer-input-border-radius-bottom-right": "6px",
+											"--framer-input-border-radius-top-left": "6px",
+											"--framer-input-border-radius-top-right": "6px",
+											"--framer-input-border-right-width": "1px",
+											"--framer-input-border-style": "solid",
+											"--framer-input-border-top-width": "1px",
+											"--framer-input-font-color":
+												"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+											"--framer-input-icon-color": "rgb(153, 153, 153)",
+											"--framer-input-placeholder-color":
+												"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgb(169, 169, 169))",
+										}}
+										type={"email"}
+									/>
+								</motion.label>
+								<motion.label
+									className={"framer-xpfw2y"}
+									layoutDependency={layoutDependency}
+									layoutId={"kzlMZMGv3"}
+									style={{
+										opacity: 1,
+									}}
+									variants={{
+										ZsrCWHO_c: {
+											opacity: 0.4,
+										},
+									}}
+								>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-1gp62fu"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"v5dkPvzbr"}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1dbggqt"}
+												data-styles-preset={"gj4zreqLr"}
+											>
+												{"Password"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<FormPlainTextInput
+										className={"framer-wh5g3b"}
+										inputName={"Password"}
+										layoutDependency={layoutDependency}
+										layoutId={"OVqCQBR8V"}
+										placeholder={"Your password"}
+										required={true}
+										style={{
+											"--framer-input-background":
+												"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+											"--framer-input-border-bottom-width": "1px",
+											"--framer-input-border-color":
+												"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+											"--framer-input-border-left-width": "1px",
+											"--framer-input-border-radius-bottom-left": "6px",
+											"--framer-input-border-radius-bottom-right": "6px",
+											"--framer-input-border-radius-top-left": "6px",
+											"--framer-input-border-radius-top-right": "6px",
+											"--framer-input-border-right-width": "1px",
+											"--framer-input-border-style": "solid",
+											"--framer-input-border-top-width": "1px",
+											"--framer-input-font-color":
+												"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+											"--framer-input-icon-color": "rgb(153, 153, 153)",
+											"--framer-input-placeholder-color":
+												"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgb(169, 169, 169))",
+										}}
+										type={"text"}
+									/>
+								</motion.label>
+								<ComponentViewportProvider
+									width={`calc(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} - 64px)`}
+								>
+									<motion.div
+										className={"framer-ti4l0z-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"rYEFuhQNX-container"}
+									>
+										{_jsx(stdin_default, {
+											height: "100%",
+											id: "rYEFuhQNX",
+											layoutId: "rYEFuhQNX",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											type: "submit",
+											variant: formVariants(
+												formState,
+												{
+													incomplete: "olHnyKRpu",
+													pending: "v9ww8TY_e",
+													success: "Qo5bjy5GS",
+												},
+												"Yeuipk5Te",
+											),
+											width: "100%",
+											yU_zUVX0e: "Log in",
+											...addPropertyOverrides(
+												{
+													KevRZF7cn: {
+														variant: formVariants(
+															formState,
 															{
-																<React.Fragment>
-																	{
-																		<motion.p
-																			className={"framer-styles-preset-1dbggqt"}
-																			data-styles-preset={"gj4zreqLr"}
-																		>
-																			{"Email"}
-																		</motion.p>
-																	}
-																</React.Fragment>
-															}
-														</RichText>
-													}
-													{
-														<FormPlainTextInput
-															className={"framer-1vtdut"}
-															inputName={"Email"}
-															layoutDependency={layoutDependency}
-															layoutId={"irIA0GOhu"}
-															placeholder={"jane@framer.com"}
-															required={true}
-															style={{
-																"--framer-input-background":
-																	"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-																"--framer-input-border-bottom-width": "1px",
-																"--framer-input-border-color":
-																	"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-																"--framer-input-border-left-width": "1px",
-																"--framer-input-border-radius-bottom-left":
-																	"6px",
-																"--framer-input-border-radius-bottom-right":
-																	"6px",
-																"--framer-input-border-radius-top-left": "6px",
-																"--framer-input-border-radius-top-right": "6px",
-																"--framer-input-border-right-width": "1px",
-																"--framer-input-border-style": "solid",
-																"--framer-input-border-top-width": "1px",
-																"--framer-input-font-color":
-																	"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-																"--framer-input-icon-color":
-																	"rgb(153, 153, 153)",
-																"--framer-input-placeholder-color":
-																	"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgb(169, 169, 169))",
-															}}
-															type={"email"}
-														/>
-													}
-												</motion.label>
-											}
-											{
-												<motion.label
-													className={"framer-xpfw2y"}
-													layoutDependency={layoutDependency}
-													layoutId={"kzlMZMGv3"}
-													style={{
-														opacity: 1,
-													}}
-													variants={{
-														ZsrCWHO_c: {
-															opacity: 0.4,
-														},
-													}}
-												>
-													{
-														<RichText
-															__fromCanvasComponent={true}
-															className={"framer-1gp62fu"}
-															fonts={["Inter"]}
-															layoutDependency={layoutDependency}
-															layoutId={"v5dkPvzbr"}
-															verticalAlignment={"top"}
-															withExternalLayout={true}
-														>
+																incomplete: "olHnyKRpu",
+																pending: "v9ww8TY_e",
+																success: "Qo5bjy5GS",
+															},
+															"v9ww8TY_e",
+														),
+													},
+													ZsrCWHO_c: {
+														variant: formVariants(
+															formState,
 															{
-																<React.Fragment>
-																	{
-																		<motion.p
-																			className={"framer-styles-preset-1dbggqt"}
-																			data-styles-preset={"gj4zreqLr"}
-																		>
-																			{"Password"}
-																		</motion.p>
-																	}
-																</React.Fragment>
-															}
-														</RichText>
-													}
-													{
-														<FormPlainTextInput
-															className={"framer-wh5g3b"}
-															inputName={"Password"}
-															layoutDependency={layoutDependency}
-															layoutId={"OVqCQBR8V"}
-															placeholder={"Your password"}
-															required={true}
-															style={{
-																"--framer-input-background":
-																	"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-																"--framer-input-border-bottom-width": "1px",
-																"--framer-input-border-color":
-																	"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-																"--framer-input-border-left-width": "1px",
-																"--framer-input-border-radius-bottom-left":
-																	"6px",
-																"--framer-input-border-radius-bottom-right":
-																	"6px",
-																"--framer-input-border-radius-top-left": "6px",
-																"--framer-input-border-radius-top-right": "6px",
-																"--framer-input-border-right-width": "1px",
-																"--framer-input-border-style": "solid",
-																"--framer-input-border-top-width": "1px",
-																"--framer-input-font-color":
-																	"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-																"--framer-input-icon-color":
-																	"rgb(153, 153, 153)",
-																"--framer-input-placeholder-color":
-																	"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgb(169, 169, 169))",
-															}}
-															type={"text"}
-														/>
-													}
-												</motion.label>
-											}
-											{
-												<ComponentViewportProvider
-													width={`calc(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} - 64px)`}
-												>
-													{
-														<motion.div
-															className={"framer-ti4l0z-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"rYEFuhQNX-container"}
-														>
-															{_jsx(stdin_default, {
-																height: "100%",
-																id: "rYEFuhQNX",
-																layoutId: "rYEFuhQNX",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																type: "submit",
-																variant: formVariants(
-																	formState,
-																	{
-																		incomplete: "olHnyKRpu",
-																		pending: "v9ww8TY_e",
-																		success: "Qo5bjy5GS",
-																	},
-																	"Yeuipk5Te",
-																),
-																width: "100%",
-																yU_zUVX0e: "Log in",
-																...addPropertyOverrides(
-																	{
-																		KevRZF7cn: {
-																			variant: formVariants(
-																				formState,
-																				{
-																					incomplete: "olHnyKRpu",
-																					pending: "v9ww8TY_e",
-																					success: "Qo5bjy5GS",
-																				},
-																				"v9ww8TY_e",
-																			),
-																		},
-																		ZsrCWHO_c: {
-																			variant: formVariants(
-																				formState,
-																				{
-																					incomplete: "olHnyKRpu",
-																					pending: "v9ww8TY_e",
-																					success: "Qo5bjy5GS",
-																				},
-																				"v9ww8TY_e",
-																			),
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion.div>
-													}
-												</ComponentViewportProvider>
-											}
-											{isDisplayed() && (
-												<motion.div
-													className={"framer-y98a49"}
-													data-framer-name={"Success message"}
-													layoutDependency={layoutDependency}
-													layoutId={"eSQ4267NS"}
-													style={{
-														backgroundColor:
-															"var(--token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2, rgb(255, 252, 250))",
-													}}
-												>
-													{
-														<MotionDivWithFX
-															__perspectiveFX={false}
-															__smartComponentFX={true}
-															__targetOpacity={1}
-															animate={optimizeAppear(
-																"animate",
-																"1fgk054",
-																animation,
-																"82k6qr",
-															)}
-															className={"framer-1fgk054"}
-															data-framer-appear-id={"1fgk054"}
-															data-framer-name={"Checkmark"}
-															initial={optimizeAppear(
-																"initial",
-																"1fgk054",
-																animation1,
-																"82k6qr",
-															)}
-															layoutDependency={layoutDependency}
-															layoutId={"Q5Xm5tp26"}
-															style={{
-																backgroundColor:
-																	"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-																borderBottomLeftRadius: 99,
-																borderBottomRightRadius: 99,
-																borderTopLeftRadius: 99,
-																borderTopRightRadius: 99,
-															}}
-															{...addPropertyOverrides(
-																{
-																	KevRZF7cn: {
-																		"data-framer-appear-id": "mee2w9",
-																		animate: optimizeAppear(
-																			"animate",
-																			"mee2w9",
-																			animation,
-																			"5refmd",
-																		),
-																		initial: optimizeAppear(
-																			"initial",
-																			"mee2w9",
-																			animation1,
-																			"5refmd",
-																		),
-																	},
-																},
-																baseVariant,
-																gestureVariant,
-															)}
-														>
-															{
-																<SVG
-																	className={"framer-2ouv4j"}
-																	data-framer-name={"graphic"}
-																	fill={
-																		"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))"
-																	}
-																	intrinsicHeight={24}
-																	intrinsicWidth={24}
-																	layoutDependency={layoutDependency}
-																	layoutId={"aGfPYYqBh"}
-																	svg={
-																		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/></svg>'
-																	}
-																	withExternalLayout={true}
-																/>
-															}
-														</MotionDivWithFX>
-													}
-													{
-														<motion.div
-															className={"framer-s88tvp"}
-															layoutDependency={layoutDependency}
-															layoutId={"wwWLdRLwZ"}
-														>
-															{
-																<RichTextWithFX
-																	__fromCanvasComponent={true}
-																	__perspectiveFX={false}
-																	__smartComponentFX={true}
-																	__targetOpacity={1}
-																	animate={optimizeAppear(
-																		"animate",
-																		"1vbbzi3",
-																		animation2,
-																		"82k6qr",
-																	)}
-																	className={"framer-1vbbzi3"}
-																	data-framer-appear-id={"1vbbzi3"}
-																	fonts={["Inter"]}
-																	initial={optimizeAppear(
-																		"initial",
-																		"1vbbzi3",
-																		animation1,
-																		"82k6qr",
-																	)}
-																	layoutDependency={layoutDependency}
-																	layoutId={"K2dBHnkj8"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			KevRZF7cn: {
-																				"data-framer-appear-id": "1qz5uo1",
-																				animate: optimizeAppear(
-																					"animate",
-																					"1qz5uo1",
-																					animation2,
-																					"5refmd",
-																				),
-																				initial: optimizeAppear(
-																					"initial",
-																					"1qz5uo1",
-																					animation1,
-																					"5refmd",
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1o7aipf"
-																					}
-																					data-styles-preset={"x1n9RoGI8"}
-																					style={{
-																						"--framer-text-alignment": "center",
-																					}}
-																				>
-																					{"Sign in successful"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichTextWithFX>
-															}
-															{
-																<RichTextWithFX
-																	__fromCanvasComponent={true}
-																	__perspectiveFX={false}
-																	__smartComponentFX={true}
-																	__targetOpacity={1}
-																	animate={optimizeAppear(
-																		"animate",
-																		"1j497b8",
-																		animation3,
-																		"82k6qr",
-																	)}
-																	className={"framer-1j497b8"}
-																	data-framer-appear-id={"1j497b8"}
-																	fonts={["Inter"]}
-																	initial={optimizeAppear(
-																		"initial",
-																		"1j497b8",
-																		animation1,
-																		"82k6qr",
-																	)}
-																	layoutDependency={layoutDependency}
-																	layoutId={"A1pFbpZlc"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			KevRZF7cn: {
-																				"data-framer-appear-id": "cn9ko2",
-																				animate: optimizeAppear(
-																					"animate",
-																					"cn9ko2",
-																					animation3,
-																					"5refmd",
-																				),
-																				initial: optimizeAppear(
-																					"initial",
-																					"cn9ko2",
-																					animation1,
-																					"5refmd",
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1aj6jmn"
-																					}
-																					data-styles-preset={"TeHXylmO7"}
-																					style={{
-																						"--framer-text-alignment": "center",
-																					}}
-																				>
-																					{"We will redirect you in a moment"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichTextWithFX>
-															}
-														</motion.div>
-													}
-												</motion.div>
+																incomplete: "olHnyKRpu",
+																pending: "v9ww8TY_e",
+																success: "Qo5bjy5GS",
+															},
+															"v9ww8TY_e",
+														),
+													},
+												},
+												baseVariant,
+												gestureVariant,
+											),
+										})}
+									</motion.div>
+								</ComponentViewportProvider>
+								{isDisplayed() && (
+									<motion.div
+										className={"framer-y98a49"}
+										data-framer-name={"Success message"}
+										layoutDependency={layoutDependency}
+										layoutId={"eSQ4267NS"}
+										style={{
+											backgroundColor:
+												"var(--token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2, rgb(255, 252, 250))",
+										}}
+									>
+										<MotionDivWithFX
+											__perspectiveFX={false}
+											__smartComponentFX={true}
+											__targetOpacity={1}
+											animate={optimizeAppear(
+												"animate",
+												"1fgk054",
+												animation,
+												"82k6qr",
 											)}
-										</_Fragment>
-									)}
-								</FormContainer>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+											className={"framer-1fgk054"}
+											data-framer-appear-id={"1fgk054"}
+											data-framer-name={"Checkmark"}
+											initial={optimizeAppear(
+												"initial",
+												"1fgk054",
+												animation1,
+												"82k6qr",
+											)}
+											layoutDependency={layoutDependency}
+											layoutId={"Q5Xm5tp26"}
+											style={{
+												backgroundColor:
+													"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
+												borderBottomLeftRadius: 99,
+												borderBottomRightRadius: 99,
+												borderTopLeftRadius: 99,
+												borderTopRightRadius: 99,
+											}}
+											{...addPropertyOverrides(
+												{
+													KevRZF7cn: {
+														"data-framer-appear-id": "mee2w9",
+														animate: optimizeAppear(
+															"animate",
+															"mee2w9",
+															animation,
+															"5refmd",
+														),
+														initial: optimizeAppear(
+															"initial",
+															"mee2w9",
+															animation1,
+															"5refmd",
+														),
+													},
+												},
+												baseVariant,
+												gestureVariant,
+											)}
+										>
+											<SVG
+												className={"framer-2ouv4j"}
+												data-framer-name={"graphic"}
+												fill={
+													"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))"
+												}
+												intrinsicHeight={24}
+												intrinsicWidth={24}
+												layoutDependency={layoutDependency}
+												layoutId={"aGfPYYqBh"}
+												svg={
+													'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/></svg>'
+												}
+												withExternalLayout={true}
+											/>
+										</MotionDivWithFX>
+										<motion.div
+											className={"framer-s88tvp"}
+											layoutDependency={layoutDependency}
+											layoutId={"wwWLdRLwZ"}
+										>
+											<RichTextWithFX
+												__fromCanvasComponent={true}
+												__perspectiveFX={false}
+												__smartComponentFX={true}
+												__targetOpacity={1}
+												animate={optimizeAppear(
+													"animate",
+													"1vbbzi3",
+													animation2,
+													"82k6qr",
+												)}
+												className={"framer-1vbbzi3"}
+												data-framer-appear-id={"1vbbzi3"}
+												fonts={["Inter"]}
+												initial={optimizeAppear(
+													"initial",
+													"1vbbzi3",
+													animation1,
+													"82k6qr",
+												)}
+												layoutDependency={layoutDependency}
+												layoutId={"K2dBHnkj8"}
+												style={{
+													"--framer-link-text-color": "rgb(0, 153, 255)",
+													"--framer-link-text-decoration": "underline",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+												{...addPropertyOverrides(
+													{
+														KevRZF7cn: {
+															"data-framer-appear-id": "1qz5uo1",
+															animate: optimizeAppear(
+																"animate",
+																"1qz5uo1",
+																animation2,
+																"5refmd",
+															),
+															initial: optimizeAppear(
+																"initial",
+																"1qz5uo1",
+																animation1,
+																"5refmd",
+															),
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												)}
+											>
+												<React.Fragment>
+													<motion.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+														}}
+													>
+														{"Sign in successful"}
+													</motion.p>
+												</React.Fragment>
+											</RichTextWithFX>
+											<RichTextWithFX
+												__fromCanvasComponent={true}
+												__perspectiveFX={false}
+												__smartComponentFX={true}
+												__targetOpacity={1}
+												animate={optimizeAppear(
+													"animate",
+													"1j497b8",
+													animation3,
+													"82k6qr",
+												)}
+												className={"framer-1j497b8"}
+												data-framer-appear-id={"1j497b8"}
+												fonts={["Inter"]}
+												initial={optimizeAppear(
+													"initial",
+													"1j497b8",
+													animation1,
+													"82k6qr",
+												)}
+												layoutDependency={layoutDependency}
+												layoutId={"A1pFbpZlc"}
+												style={{
+													"--framer-link-text-color": "rgb(0, 153, 255)",
+													"--framer-link-text-decoration": "underline",
+												}}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+												{...addPropertyOverrides(
+													{
+														KevRZF7cn: {
+															"data-framer-appear-id": "cn9ko2",
+															animate: optimizeAppear(
+																"animate",
+																"cn9ko2",
+																animation3,
+																"5refmd",
+															),
+															initial: optimizeAppear(
+																"initial",
+																"cn9ko2",
+																animation1,
+																"5refmd",
+															),
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												)}
+											>
+												<React.Fragment>
+													<motion.p
+														className={"framer-styles-preset-1aj6jmn"}
+														data-styles-preset={"TeHXylmO7"}
+														style={{
+															"--framer-text-alignment": "center",
+														}}
+													>
+														{"We will redirect you in a moment"}
+													</motion.p>
+												</React.Fragment>
+											</RichTextWithFX>
+										</motion.div>
+									</motion.div>
+								)}
+							</_Fragment>
+						)}
+					</FormContainer>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -952,13 +890,11 @@ stdin_default2.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default2}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default2}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

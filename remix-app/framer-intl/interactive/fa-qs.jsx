@@ -3569,311 +3569,285 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-13mvb3q",
+							className,
+							classNames,
+						)}
+						data-framer-name={"Homepage"}
+						layoutDependency={layoutDependency}
+						layoutId={"ZQ8oV6EzC"}
+						ref={ref ?? ref1}
+						style={{
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
-								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-13mvb3q",
-										className,
-										classNames,
-									)}
-									data-framer-name={"Homepage"}
-									layoutDependency={layoutDependency}
-									layoutId={"ZQ8oV6EzC"}
-									ref={ref ?? ref1}
-									style={{
-										...style,
-									}}
-									{...addPropertyOverrides(
+								IURjCWqK1: {
+									"data-framer-name": "Sales",
+								},
+								u4G7Oc5d1: {
+									"data-framer-name": "Pricing",
+								},
+								W7eBOvVqA: {
+									"data-framer-name": "Support",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion.div
+							className={"framer-xs1ywm"}
+							layoutDependency={layoutDependency}
+							layoutId={"JyVDIVuF4"}
+						>
+							<QueryData
+								query={{
+									from: {
+										data: stdin_default2,
+										type: "Collection",
+									},
+									orderBy: [
 										{
-											IURjCWqK1: {
-												"data-framer-name": "Sales",
-											},
-											u4G7Oc5d1: {
-												"data-framer-name": "Pricing",
-											},
-											W7eBOvVqA: {
-												"data-framer-name": "Support",
+											direction: "desc",
+											name: "index",
+											type: "Identifier",
+										},
+									],
+									select: [
+										{
+											name: "o7Sggubxr",
+											type: "Identifier",
+										},
+										{
+											name: "K6sIsqXW4",
+											type: "Identifier",
+										},
+										{
+											name: "id",
+											type: "Identifier",
+										},
+										{
+											name: "kHpF3nLoI",
+											type: "Identifier",
+										},
+									],
+									where: {
+										left: {
+											name: "yZPDVnBTG",
+											type: "Identifier",
+										},
+										operator: "==",
+										right: {
+											type: "LiteralValue",
+											value: "XsNXAvkMi",
+										},
+										type: "BinaryOperation",
+									},
+								}}
+								{...addPropertyOverrides(
+									{
+										IURjCWqK1: {
+											query: {
+												from: {
+													data: stdin_default2,
+													type: "Collection",
+												},
+												orderBy: [
+													{
+														direction: "desc",
+														name: "index",
+														type: "Identifier",
+													},
+												],
+												select: [
+													{
+														name: "o7Sggubxr",
+														type: "Identifier",
+													},
+													{
+														name: "K6sIsqXW4",
+														type: "Identifier",
+													},
+													{
+														name: "id",
+														type: "Identifier",
+													},
+													{
+														name: "kHpF3nLoI",
+														type: "Identifier",
+													},
+												],
+												where: {
+													left: {
+														name: "yZPDVnBTG",
+														type: "Identifier",
+													},
+													operator: "==",
+													right: {
+														type: "LiteralValue",
+														value: "sGRLO0HWE",
+													},
+													type: "BinaryOperation",
+												},
 											},
 										},
-										baseVariant,
-										gestureVariant,
-									)}
-								>
-									{
-										<motion.div
-											className={"framer-xs1ywm"}
-											layoutDependency={layoutDependency}
-											layoutId={"JyVDIVuF4"}
-										>
-											{
-												<QueryData
-													query={{
-														from: {
-															data: stdin_default2,
-															type: "Collection",
-														},
-														orderBy: [
-															{
-																direction: "desc",
-																name: "index",
-																type: "Identifier",
-															},
-														],
-														select: [
-															{
-																name: "o7Sggubxr",
-																type: "Identifier",
-															},
-															{
-																name: "K6sIsqXW4",
-																type: "Identifier",
-															},
-															{
-																name: "id",
-																type: "Identifier",
-															},
-															{
-																name: "kHpF3nLoI",
-																type: "Identifier",
-															},
-														],
-														where: {
-															left: {
-																name: "yZPDVnBTG",
-																type: "Identifier",
-															},
-															operator: "==",
-															right: {
-																type: "LiteralValue",
-																value: "XsNXAvkMi",
-															},
-															type: "BinaryOperation",
-														},
-													}}
-													{...addPropertyOverrides(
-														{
-															IURjCWqK1: {
-																query: {
-																	from: {
-																		data: stdin_default2,
-																		type: "Collection",
-																	},
-																	orderBy: [
-																		{
-																			direction: "desc",
-																			name: "index",
-																			type: "Identifier",
+										u4G7Oc5d1: {
+											query: {
+												from: {
+													data: stdin_default2,
+													type: "Collection",
+												},
+												orderBy: [
+													{
+														direction: "desc",
+														name: "index",
+														type: "Identifier",
+													},
+												],
+												select: [
+													{
+														name: "o7Sggubxr",
+														type: "Identifier",
+													},
+													{
+														name: "K6sIsqXW4",
+														type: "Identifier",
+													},
+													{
+														name: "id",
+														type: "Identifier",
+													},
+													{
+														name: "kHpF3nLoI",
+														type: "Identifier",
+													},
+												],
+												where: {
+													left: {
+														name: "yZPDVnBTG",
+														type: "Identifier",
+													},
+													operator: "==",
+													right: {
+														type: "LiteralValue",
+														value: "YrB2Iu5gy",
+													},
+													type: "BinaryOperation",
+												},
+											},
+										},
+										W7eBOvVqA: {
+											query: {
+												from: {
+													data: stdin_default2,
+													type: "Collection",
+												},
+												orderBy: [
+													{
+														direction: "desc",
+														name: "index",
+														type: "Identifier",
+													},
+												],
+												select: [
+													{
+														name: "o7Sggubxr",
+														type: "Identifier",
+													},
+													{
+														name: "K6sIsqXW4",
+														type: "Identifier",
+													},
+													{
+														name: "id",
+														type: "Identifier",
+													},
+													{
+														name: "kHpF3nLoI",
+														type: "Identifier",
+													},
+												],
+												where: {
+													left: {
+														name: "yZPDVnBTG",
+														type: "Identifier",
+													},
+													operator: "==",
+													right: {
+														type: "LiteralValue",
+														value: "yAAGDyE3Q",
+													},
+													type: "BinaryOperation",
+												},
+											},
+										},
+									},
+									baseVariant,
+									gestureVariant,
+								)}
+							>
+								{(collection, paginationInfo, loadMore) => (
+									<_Fragment>
+										{collection.map(
+											(
+												{
+													o7Sggubxr: o7SggubxrJyVDIVuF42,
+													K6sIsqXW4: K6sIsqXW4JyVDIVuF42,
+													id: idJyVDIVuF42,
+													kHpF3nLoI: kHpF3nLoIJyVDIVuF42,
+												},
+												i2,
+											) => {
+												return (
+													<LayoutGroup id={`JyVDIVuF4-${idJyVDIVuF42}`}>
+														<PathVariablesContext.Provider
+															value={{
+																kHpF3nLoI: kHpF3nLoIJyVDIVuF42,
+															}}
+														>
+															<ComponentViewportProvider
+																width={`max(${componentViewport?.width || "100vw"}, 1px)`}
+															>
+																<motion.div
+																	className={"framer-oiu6r7-container"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"jPDiID7fc-container"}
+																>
+																	{_jsx(stdin_default, {
+																		height: "100%",
+																		id: "jPDiID7fc",
+																		layoutId: "jPDiID7fc",
+																		style: {
+																			width: "100%",
 																		},
-																	],
-																	select: [
-																		{
-																			name: "o7Sggubxr",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "K6sIsqXW4",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "id",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "kHpF3nLoI",
-																			type: "Identifier",
-																		},
-																	],
-																	where: {
-																		left: {
-																			name: "yZPDVnBTG",
-																			type: "Identifier",
-																		},
-																		operator: "==",
-																		right: {
-																			type: "LiteralValue",
-																			value: "sGRLO0HWE",
-																		},
-																		type: "BinaryOperation",
-																	},
-																},
-															},
-															u4G7Oc5d1: {
-																query: {
-																	from: {
-																		data: stdin_default2,
-																		type: "Collection",
-																	},
-																	orderBy: [
-																		{
-																			direction: "desc",
-																			name: "index",
-																			type: "Identifier",
-																		},
-																	],
-																	select: [
-																		{
-																			name: "o7Sggubxr",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "K6sIsqXW4",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "id",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "kHpF3nLoI",
-																			type: "Identifier",
-																		},
-																	],
-																	where: {
-																		left: {
-																			name: "yZPDVnBTG",
-																			type: "Identifier",
-																		},
-																		operator: "==",
-																		right: {
-																			type: "LiteralValue",
-																			value: "YrB2Iu5gy",
-																		},
-																		type: "BinaryOperation",
-																	},
-																},
-															},
-															W7eBOvVqA: {
-																query: {
-																	from: {
-																		data: stdin_default2,
-																		type: "Collection",
-																	},
-																	orderBy: [
-																		{
-																			direction: "desc",
-																			name: "index",
-																			type: "Identifier",
-																		},
-																	],
-																	select: [
-																		{
-																			name: "o7Sggubxr",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "K6sIsqXW4",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "id",
-																			type: "Identifier",
-																		},
-																		{
-																			name: "kHpF3nLoI",
-																			type: "Identifier",
-																		},
-																	],
-																	where: {
-																		left: {
-																			name: "yZPDVnBTG",
-																			type: "Identifier",
-																		},
-																		operator: "==",
-																		right: {
-																			type: "LiteralValue",
-																			value: "yAAGDyE3Q",
-																		},
-																		type: "BinaryOperation",
-																	},
-																},
-															},
-														},
-														baseVariant,
-														gestureVariant,
-													)}
-												>
-													{(collection, paginationInfo, loadMore) => (
-														<_Fragment>
-															{collection.map(
-																(
-																	{
-																		o7Sggubxr: o7SggubxrJyVDIVuF42,
-																		K6sIsqXW4: K6sIsqXW4JyVDIVuF42,
-																		id: idJyVDIVuF42,
-																		kHpF3nLoI: kHpF3nLoIJyVDIVuF42,
-																	},
-																	i2,
-																) => {
-																	return (
-																		<LayoutGroup
-																			id={`JyVDIVuF4-${idJyVDIVuF42}`}
-																		>
-																			{
-																				<PathVariablesContext.Provider
-																					value={{
-																						kHpF3nLoI: kHpF3nLoIJyVDIVuF42,
-																					}}
-																				>
-																					{
-																						<ComponentViewportProvider
-																							width={`max(${componentViewport?.width || "100vw"}, 1px)`}
-																						>
-																							{
-																								<motion.div
-																									className={
-																										"framer-oiu6r7-container"
-																									}
-																									layoutDependency={
-																										layoutDependency
-																									}
-																									layoutId={
-																										"jPDiID7fc-container"
-																									}
-																								>
-																									{_jsx(stdin_default, {
-																										height: "100%",
-																										id: "jPDiID7fc",
-																										layoutId: "jPDiID7fc",
-																										style: {
-																											width: "100%",
-																										},
-																										variant: "Gb01L_14E",
-																										W4S_nsMzp:
-																											o7SggubxrJyVDIVuF42,
-																										width: "100%",
-																										YyuQfUuG8:
-																											K6sIsqXW4JyVDIVuF42,
-																									})}
-																								</motion.div>
-																							}
-																						</ComponentViewportProvider>
-																					}
-																				</PathVariablesContext.Provider>
-																			}
-																		</LayoutGroup>
-																	);
-																},
-															)}
-														</_Fragment>
-													)}
-												</QueryData>
-											}
-										</motion.div>
-									}
-								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+																		variant: "Gb01L_14E",
+																		W4S_nsMzp: o7SggubxrJyVDIVuF42,
+																		width: "100%",
+																		YyuQfUuG8: K6sIsqXW4JyVDIVuF42,
+																	})}
+																</motion.div>
+															</ComponentViewportProvider>
+														</PathVariablesContext.Provider>
+													</LayoutGroup>
+												);
+											},
+										)}
+									</_Fragment>
+								)}
+							</QueryData>
+						</motion.div>
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -3971,13 +3945,11 @@ stdin_default3.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default3}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default3}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

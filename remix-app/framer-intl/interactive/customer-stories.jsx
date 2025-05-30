@@ -264,436 +264,402 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-1husurc",
+							className,
+							classNames,
+						)}
+						data-framer-name={"First"}
+						data-highlight={true}
+						layoutDependency={layoutDependency}
+						layoutId={"ZDH19H5O5"}
+						ref={ref ?? ref1}
+						style={{
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
+								c6Ed4HKPI: {
+									"data-framer-name": "Fourth",
+								},
+								GuDtpnQNI: {
+									"data-framer-name": "Third",
+								},
+								Qmt4ya9CZ: {
+									"data-framer-name": "Second",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion.div
+							className={"framer-1nwm2fq"}
+							data-framer-name={"Section buttons"}
+							layoutDependency={layoutDependency}
+							layoutId={"TNsjI5Pms"}
+						>
+							<ComponentViewportProvider
+								height={48}
+								width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
+							>
 								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-1husurc",
-										className,
-										classNames,
-									)}
-									data-framer-name={"First"}
-									data-highlight={true}
+									className={"framer-13t59ub-container"}
 									layoutDependency={layoutDependency}
-									layoutId={"ZDH19H5O5"}
-									ref={ref ?? ref1}
-									style={{
-										...style,
-									}}
-									{...addPropertyOverrides(
-										{
-											c6Ed4HKPI: {
-												"data-framer-name": "Fourth",
-											},
-											GuDtpnQNI: {
-												"data-framer-name": "Third",
-											},
-											Qmt4ya9CZ: {
-												"data-framer-name": "Second",
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
+									layoutId={"aO4xJnjWK-container"}
 								>
-									{
-										<motion.div
-											className={"framer-1nwm2fq"}
-											data-framer-name={"Section buttons"}
-											layoutDependency={layoutDependency}
-											layoutId={"TNsjI5Pms"}
-										>
+									{_jsx(stdin_default2, {
+										height: "100%",
+										id: "aO4xJnjWK",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" /> </svg>',
+										layoutId: "aO4xJnjWK",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "h0XQJLrlb",
+										Vb218_9bK: "Documentation",
+										Wd_uH5B3z: Wd_uH5B3z1e76usu,
+										width: "100%",
+										...addPropertyOverrides(
 											{
-												<ComponentViewportProvider
-													height={48}
-													width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
-												>
-													{
-														<motion.div
-															className={"framer-13t59ub-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"aO4xJnjWK-container"}
-														>
-															{_jsx(stdin_default2, {
-																height: "100%",
-																id: "aO4xJnjWK",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" /> </svg>',
-																layoutId: "aO4xJnjWK",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "h0XQJLrlb",
-																Vb218_9bK: "Documentation",
-																Wd_uH5B3z: Wd_uH5B3z1e76usu,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		c6Ed4HKPI: {
-																			variant: "IIv28kAHe",
-																		},
-																		GuDtpnQNI: {
-																			variant: "IIv28kAHe",
-																		},
-																		Qmt4ya9CZ: {
-																			variant: "IIv28kAHe",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion.div>
-													}
-												</ComponentViewportProvider>
-											}
-											{
-												<ComponentViewportProvider
-													height={48}
-													width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
-												>
-													{
-														<motion.div
-															className={"framer-19ir56w-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"rtV7edR3d-container"}
-														>
-															{_jsx(stdin_default2, {
-																height: "100%",
-																id: "rtV7edR3d",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" /> </svg>',
-																layoutId: "rtV7edR3d",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "IIv28kAHe",
-																Vb218_9bK: "Help Desk",
-																Wd_uH5B3z: Wd_uH5B3z1khcbpb,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		Qmt4ya9CZ: {
-																			variant: "h0XQJLrlb",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion.div>
-													}
-												</ComponentViewportProvider>
-											}
-											{
-												<ComponentViewportProvider
-													height={48}
-													width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
-												>
-													{
-														<motion.div
-															className={"framer-rjbnvi-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"MAuUOtat9-container"}
-														>
-															{_jsx(stdin_default2, {
-																height: "100%",
-																id: "MAuUOtat9",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" /> </svg>',
-																layoutId: "MAuUOtat9",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "IIv28kAHe",
-																Vb218_9bK: "Blog",
-																Wd_uH5B3z: Wd_uH5B3zpmk5ux,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		GuDtpnQNI: {
-																			variant: "h0XQJLrlb",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion.div>
-													}
-												</ComponentViewportProvider>
-											}
-											{
-												<ComponentViewportProvider
-													height={48}
-													width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
-												>
-													{
-														<motion.div
-															className={"framer-qupgo6-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"mD9LkR50m-container"}
-														>
-															{_jsx(stdin_default2, {
-																height: "100%",
-																id: "mD9LkR50m",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M16.5 7.5h-9v9h9v-9Z" />   <path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd" /> </svg>',
-																layoutId: "mD9LkR50m",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "IIv28kAHe",
-																Vb218_9bK: "Changelog",
-																Wd_uH5B3z: Wd_uH5B3zg90a97,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		c6Ed4HKPI: {
-																			variant: "h0XQJLrlb",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion.div>
-													}
-												</ComponentViewportProvider>
-											}
-										</motion.div>
-									}
-									{isDisplayed() && (
-										<ComponentViewportProvider
-											height={335}
-											width={`min(${componentViewport?.width || "100vw"}, 1000px)`}
-										>
-											{
-												<MotionDivWithFXWithOptimizedAppearEffect
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													animate={animation}
-													className={"framer-oz2qgs-container"}
-													data-framer-appear-id={"oz2qgs"}
-													data-framer-name={"Retail"}
-													initial={animation1}
-													layoutDependency={layoutDependency}
-													layoutId={"hEQLWLEiI-container"}
-													name={"Retail"}
-													optimized={true}
-												>
-													{_jsx(stdin_default, {
-														height: "100%",
-														id: "hEQLWLEiI",
-														j1XFDHXr2:
-															"Turn Notion into a professional docs website",
-														J3WQIyWE_: `"Integrating ApiFlow's AI voice API into our stores has been a game-changer. We've reduced our operational costs by 40% and significantly enhanced the shopping experience for our customers. "`,
-														KA7akYL6j:
-															"Publish awesome websites using Notion to manage content. Save 500+ hours of dev work. No design or code skills required.",
-														layoutId: "hEQLWLEiI",
-														name: "Retail",
-														NrPTfcfPh: "CTO at BigCompany",
-														style: {
-															maxWidth: "100%",
-															width: "100%",
-														},
-														variant: "aDTDT_hty",
-														w2AZSnOj8: "Jack Jones",
-														width: "100%",
-													})}
-												</MotionDivWithFXWithOptimizedAppearEffect>
-											}
-										</ComponentViewportProvider>
-									)}
-									{isDisplayed1() && (
-										<ComponentViewportProvider
-											{...addPropertyOverrides(
-												{
-													Qmt4ya9CZ: {
-														height: 335,
-														width: `min(${componentViewport?.width || "100vw"}, 1000px)`,
-													},
+												c6Ed4HKPI: {
+													variant: "IIv28kAHe",
 												},
-												baseVariant,
-												gestureVariant,
-											)}
-										>
-											{
-												<MotionDivWithFXWithOptimizedAppearEffect
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													animate={animation}
-													className={"framer-hyaqnx-container"}
-													data-framer-appear-id={"hyaqnx"}
-													data-framer-name={"Healthcare"}
-													initial={animation1}
-													layoutDependency={layoutDependency}
-													layoutId={"BjOsDBouY-container"}
-													name={"Healthcare"}
-													optimized={true}
-												>
-													{_jsx(stdin_default, {
-														height: "100%",
-														id: "BjOsDBouY",
-														j1XFDHXr2: "Improving Patient Care with ApiFlow",
-														J3WQIyWE_: `"ApiFlow's AI voice API has revolutionized our administrative processes. By automating routine tasks like appointment scheduling and billing inquiries, we've cut administrative costs by 50%."`,
-														KA7akYL6j:
-															"A major healthcare provider adopted ApiFlow's AI voice API to automate routine administrative tasks such as appointment scheduling, patient registration, and billing inquiries. This automation freed up healthcare staff to focus on more complex responsibilities, leading to a 50% reduction in administrative costs and improved patient care through more efficient and accurate data management.",
-														layoutId: "BjOsDBouY",
-														name: "Healthcare",
-														NrPTfcfPh:
-															"Chief Administrative Officer at HealthPlus",
-														NY610Fasy: addImageAlt(
-															{
-																src: "https://framerusercontent.com/images/RwJYO348qAEWdigjrVxcKEE155I.svg",
-															},
-															"",
-														),
-														style: {
-															maxWidth: "100%",
-															width: "100%",
-														},
-														variant: Qhkm0Er7y,
-														w2AZSnOj8: "Dr. Emily Roberts",
-														width: "100%",
-													})}
-												</MotionDivWithFXWithOptimizedAppearEffect>
-											}
-										</ComponentViewportProvider>
-									)}
-									{isDisplayed2() && (
-										<ComponentViewportProvider
-											{...addPropertyOverrides(
-												{
-													GuDtpnQNI: {
-														height: 335,
-														width: `min(${componentViewport?.width || "100vw"}, 1000px)`,
-													},
+												GuDtpnQNI: {
+													variant: "IIv28kAHe",
 												},
-												baseVariant,
-												gestureVariant,
-											)}
-										>
-											{
-												<MotionDivWithFXWithOptimizedAppearEffect
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													animate={animation}
-													className={"framer-z6se6n-container"}
-													data-framer-appear-id={"z6se6n"}
-													data-framer-name={"B2B"}
-													initial={animation1}
-													layoutDependency={layoutDependency}
-													layoutId={"X8KeWh24V-container"}
-													name={"B2B"}
-													optimized={true}
-												>
-													{_jsx(stdin_default, {
-														height: "100%",
-														id: "X8KeWh24V",
-														j1XFDHXr2:
-															"Boosting Sales Efficiency and Customer Engagement",
-														J3WQIyWE_: `"Using ApiFlow's AI voice API has transformed our sales process. The AI voice agents handle initial inquiries and qualify leads, allowing our sales team to focus on closing deals. We've seen a 30% increase in sales efficiency."`,
-														KA7akYL6j:
-															"A B2B sales company implemented ApiFlow's AI voice API to enhance their sales process. The AI voice agents handled initial customer inquiries, qualified leads, and scheduled follow-up calls, allowing sales representatives to focus on closing deals. This led to a 30% increase in sales efficiency and a 25% boost in customer engagement, ultimately driving higher revenue.",
-														layoutId: "X8KeWh24V",
-														name: "B2B",
-														NrPTfcfPh: "Customer Support at TechSolutions",
-														NY610Fasy: addImageAlt(
-															{
-																src: "https://framerusercontent.com/images/RI6iObLNqFGzuPqHlfzJC8nvlag.svg",
-															},
-															"",
-														),
-														style: {
-															maxWidth: "100%",
-															width: "100%",
-														},
-														variant: Qhkm0Er7y,
-														w2AZSnOj8: "Jessica Martinez",
-														width: "100%",
-													})}
-												</MotionDivWithFXWithOptimizedAppearEffect>
-											}
-										</ComponentViewportProvider>
-									)}
-									{isDisplayed3() && (
-										<ComponentViewportProvider
-											{...addPropertyOverrides(
-												{
-													c6Ed4HKPI: {
-														height: 335,
-														width: `min(${componentViewport?.width || "100vw"}, 1000px)`,
-													},
+												Qmt4ya9CZ: {
+													variant: "IIv28kAHe",
 												},
-												baseVariant,
-												gestureVariant,
-											)}
-										>
-											{
-												<MotionDivWithFXWithOptimizedAppearEffect
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													animate={animation}
-													className={"framer-16ldg55-container"}
-													data-framer-appear-id={"16ldg55"}
-													data-framer-name={"Ai Startups"}
-													initial={animation1}
-													layoutDependency={layoutDependency}
-													layoutId={"WzVgqaiqx-container"}
-													name={"Ai Startups"}
-													optimized={true}
-												>
-													{_jsx(stdin_default, {
-														height: "100%",
-														id: "WzVgqaiqx",
-														j1XFDHXr2:
-															"Optimizing Technical Support and Reducing Response Times",
-														J3WQIyWE_: `"ApiFlow's AI voice API has drastically improved our technical support system. The AI-powered voice agents provide instant troubleshooting assistance, reducing our response times by 60% and cutting support costs by 35%."`,
-														KA7akYL6j:
-															"A tech company integrated ApiFlow's AI voice API into their technical support system. The AI-powered voice agents provided instant troubleshooting assistance and resolved common technical issues without human intervention. This resulted in a 60% reduction in response times and a 35% decrease in support costs, while maintaining high levels of customer satisfaction.",
-														layoutId: "WzVgqaiqx",
-														name: "Ai Startups",
-														NrPTfcfPh: "CTO at BigCompany",
-														NY610Fasy: addImageAlt(
-															{
-																src: "https://framerusercontent.com/images/GX4rQcDnl0SX41IBDeAIKsOFXk.svg",
-															},
-															"",
-														),
-														style: {
-															maxWidth: "100%",
-															width: "100%",
-														},
-														variant: Qhkm0Er7y,
-														w2AZSnOj8: "Jack Jones",
-														width: "100%",
-													})}
-												</MotionDivWithFXWithOptimizedAppearEffect>
-											}
-										</ComponentViewportProvider>
-									)}
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
 								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+							</ComponentViewportProvider>
+							<ComponentViewportProvider
+								height={48}
+								width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
+							>
+								<motion.div
+									className={"framer-19ir56w-container"}
+									layoutDependency={layoutDependency}
+									layoutId={"rtV7edR3d-container"}
+								>
+									{_jsx(stdin_default2, {
+										height: "100%",
+										id: "rtV7edR3d",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" /> </svg>',
+										layoutId: "rtV7edR3d",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "IIv28kAHe",
+										Vb218_9bK: "Help Desk",
+										Wd_uH5B3z: Wd_uH5B3z1khcbpb,
+										width: "100%",
+										...addPropertyOverrides(
+											{
+												Qmt4ya9CZ: {
+													variant: "h0XQJLrlb",
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
+								</motion.div>
+							</ComponentViewportProvider>
+							<ComponentViewportProvider
+								height={48}
+								width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
+							>
+								<motion.div
+									className={"framer-rjbnvi-container"}
+									layoutDependency={layoutDependency}
+									layoutId={"MAuUOtat9-container"}
+								>
+									{_jsx(stdin_default2, {
+										height: "100%",
+										id: "MAuUOtat9",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" /> </svg>',
+										layoutId: "MAuUOtat9",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "IIv28kAHe",
+										Vb218_9bK: "Blog",
+										Wd_uH5B3z: Wd_uH5B3zpmk5ux,
+										width: "100%",
+										...addPropertyOverrides(
+											{
+												GuDtpnQNI: {
+													variant: "h0XQJLrlb",
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
+								</motion.div>
+							</ComponentViewportProvider>
+							<ComponentViewportProvider
+								height={48}
+								width={`max(min(${componentViewport?.width || "100vw"}, 800px), 200px)`}
+							>
+								<motion.div
+									className={"framer-qupgo6-container"}
+									layoutDependency={layoutDependency}
+									layoutId={"mD9LkR50m-container"}
+								>
+									{_jsx(stdin_default2, {
+										height: "100%",
+										id: "mD9LkR50m",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M16.5 7.5h-9v9h9v-9Z" />   <path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd" /> </svg>',
+										layoutId: "mD9LkR50m",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "IIv28kAHe",
+										Vb218_9bK: "Changelog",
+										Wd_uH5B3z: Wd_uH5B3zg90a97,
+										width: "100%",
+										...addPropertyOverrides(
+											{
+												c6Ed4HKPI: {
+													variant: "h0XQJLrlb",
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
+								</motion.div>
+							</ComponentViewportProvider>
+						</motion.div>
+						{isDisplayed() && (
+							<ComponentViewportProvider
+								height={335}
+								width={`min(${componentViewport?.width || "100vw"}, 1000px)`}
+							>
+								<MotionDivWithFXWithOptimizedAppearEffect
+									__perspectiveFX={false}
+									__smartComponentFX={true}
+									__targetOpacity={1}
+									animate={animation}
+									className={"framer-oz2qgs-container"}
+									data-framer-appear-id={"oz2qgs"}
+									data-framer-name={"Retail"}
+									initial={animation1}
+									layoutDependency={layoutDependency}
+									layoutId={"hEQLWLEiI-container"}
+									name={"Retail"}
+									optimized={true}
+								>
+									{_jsx(stdin_default, {
+										height: "100%",
+										id: "hEQLWLEiI",
+										j1XFDHXr2: "Turn Notion into a professional docs website",
+										J3WQIyWE_: `"Integrating ApiFlow's AI voice API into our stores has been a game-changer. We've reduced our operational costs by 40% and significantly enhanced the shopping experience for our customers. "`,
+										KA7akYL6j:
+											"Publish awesome websites using Notion to manage content. Save 500+ hours of dev work. No design or code skills required.",
+										layoutId: "hEQLWLEiI",
+										name: "Retail",
+										NrPTfcfPh: "CTO at BigCompany",
+										style: {
+											maxWidth: "100%",
+											width: "100%",
+										},
+										variant: "aDTDT_hty",
+										w2AZSnOj8: "Jack Jones",
+										width: "100%",
+									})}
+								</MotionDivWithFXWithOptimizedAppearEffect>
+							</ComponentViewportProvider>
+						)}
+						{isDisplayed1() && (
+							<ComponentViewportProvider
+								{...addPropertyOverrides(
+									{
+										Qmt4ya9CZ: {
+											height: 335,
+											width: `min(${componentViewport?.width || "100vw"}, 1000px)`,
+										},
+									},
+									baseVariant,
+									gestureVariant,
+								)}
+							>
+								<MotionDivWithFXWithOptimizedAppearEffect
+									__perspectiveFX={false}
+									__smartComponentFX={true}
+									__targetOpacity={1}
+									animate={animation}
+									className={"framer-hyaqnx-container"}
+									data-framer-appear-id={"hyaqnx"}
+									data-framer-name={"Healthcare"}
+									initial={animation1}
+									layoutDependency={layoutDependency}
+									layoutId={"BjOsDBouY-container"}
+									name={"Healthcare"}
+									optimized={true}
+								>
+									{_jsx(stdin_default, {
+										height: "100%",
+										id: "BjOsDBouY",
+										j1XFDHXr2: "Improving Patient Care with ApiFlow",
+										J3WQIyWE_: `"ApiFlow's AI voice API has revolutionized our administrative processes. By automating routine tasks like appointment scheduling and billing inquiries, we've cut administrative costs by 50%."`,
+										KA7akYL6j:
+											"A major healthcare provider adopted ApiFlow's AI voice API to automate routine administrative tasks such as appointment scheduling, patient registration, and billing inquiries. This automation freed up healthcare staff to focus on more complex responsibilities, leading to a 50% reduction in administrative costs and improved patient care through more efficient and accurate data management.",
+										layoutId: "BjOsDBouY",
+										name: "Healthcare",
+										NrPTfcfPh: "Chief Administrative Officer at HealthPlus",
+										NY610Fasy: addImageAlt(
+											{
+												src: "https://framerusercontent.com/images/RwJYO348qAEWdigjrVxcKEE155I.svg",
+											},
+											"",
+										),
+										style: {
+											maxWidth: "100%",
+											width: "100%",
+										},
+										variant: Qhkm0Er7y,
+										w2AZSnOj8: "Dr. Emily Roberts",
+										width: "100%",
+									})}
+								</MotionDivWithFXWithOptimizedAppearEffect>
+							</ComponentViewportProvider>
+						)}
+						{isDisplayed2() && (
+							<ComponentViewportProvider
+								{...addPropertyOverrides(
+									{
+										GuDtpnQNI: {
+											height: 335,
+											width: `min(${componentViewport?.width || "100vw"}, 1000px)`,
+										},
+									},
+									baseVariant,
+									gestureVariant,
+								)}
+							>
+								<MotionDivWithFXWithOptimizedAppearEffect
+									__perspectiveFX={false}
+									__smartComponentFX={true}
+									__targetOpacity={1}
+									animate={animation}
+									className={"framer-z6se6n-container"}
+									data-framer-appear-id={"z6se6n"}
+									data-framer-name={"B2B"}
+									initial={animation1}
+									layoutDependency={layoutDependency}
+									layoutId={"X8KeWh24V-container"}
+									name={"B2B"}
+									optimized={true}
+								>
+									{_jsx(stdin_default, {
+										height: "100%",
+										id: "X8KeWh24V",
+										j1XFDHXr2:
+											"Boosting Sales Efficiency and Customer Engagement",
+										J3WQIyWE_: `"Using ApiFlow's AI voice API has transformed our sales process. The AI voice agents handle initial inquiries and qualify leads, allowing our sales team to focus on closing deals. We've seen a 30% increase in sales efficiency."`,
+										KA7akYL6j:
+											"A B2B sales company implemented ApiFlow's AI voice API to enhance their sales process. The AI voice agents handled initial customer inquiries, qualified leads, and scheduled follow-up calls, allowing sales representatives to focus on closing deals. This led to a 30% increase in sales efficiency and a 25% boost in customer engagement, ultimately driving higher revenue.",
+										layoutId: "X8KeWh24V",
+										name: "B2B",
+										NrPTfcfPh: "Customer Support at TechSolutions",
+										NY610Fasy: addImageAlt(
+											{
+												src: "https://framerusercontent.com/images/RI6iObLNqFGzuPqHlfzJC8nvlag.svg",
+											},
+											"",
+										),
+										style: {
+											maxWidth: "100%",
+											width: "100%",
+										},
+										variant: Qhkm0Er7y,
+										w2AZSnOj8: "Jessica Martinez",
+										width: "100%",
+									})}
+								</MotionDivWithFXWithOptimizedAppearEffect>
+							</ComponentViewportProvider>
+						)}
+						{isDisplayed3() && (
+							<ComponentViewportProvider
+								{...addPropertyOverrides(
+									{
+										c6Ed4HKPI: {
+											height: 335,
+											width: `min(${componentViewport?.width || "100vw"}, 1000px)`,
+										},
+									},
+									baseVariant,
+									gestureVariant,
+								)}
+							>
+								<MotionDivWithFXWithOptimizedAppearEffect
+									__perspectiveFX={false}
+									__smartComponentFX={true}
+									__targetOpacity={1}
+									animate={animation}
+									className={"framer-16ldg55-container"}
+									data-framer-appear-id={"16ldg55"}
+									data-framer-name={"Ai Startups"}
+									initial={animation1}
+									layoutDependency={layoutDependency}
+									layoutId={"WzVgqaiqx-container"}
+									name={"Ai Startups"}
+									optimized={true}
+								>
+									{_jsx(stdin_default, {
+										height: "100%",
+										id: "WzVgqaiqx",
+										j1XFDHXr2:
+											"Optimizing Technical Support and Reducing Response Times",
+										J3WQIyWE_: `"ApiFlow's AI voice API has drastically improved our technical support system. The AI-powered voice agents provide instant troubleshooting assistance, reducing our response times by 60% and cutting support costs by 35%."`,
+										KA7akYL6j:
+											"A tech company integrated ApiFlow's AI voice API into their technical support system. The AI-powered voice agents provided instant troubleshooting assistance and resolved common technical issues without human intervention. This resulted in a 60% reduction in response times and a 35% decrease in support costs, while maintaining high levels of customer satisfaction.",
+										layoutId: "WzVgqaiqx",
+										name: "Ai Startups",
+										NrPTfcfPh: "CTO at BigCompany",
+										NY610Fasy: addImageAlt(
+											{
+												src: "https://framerusercontent.com/images/GX4rQcDnl0SX41IBDeAIKsOFXk.svg",
+											},
+											"",
+										),
+										style: {
+											maxWidth: "100%",
+											width: "100%",
+										},
+										variant: Qhkm0Er7y,
+										w2AZSnOj8: "Jack Jones",
+										width: "100%",
+									})}
+								</MotionDivWithFXWithOptimizedAppearEffect>
+							</ComponentViewportProvider>
+						)}
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -816,13 +782,11 @@ stdin_default3.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default3}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default3}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

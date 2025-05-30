@@ -120,945 +120,839 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-17yuyye",
+							className,
+							classNames,
+						)}
+						data-framer-name={"Variant 1"}
+						layoutDependency={layoutDependency}
+						layoutId={"fAYTisBu1"}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							...style,
+						}}
+					>
+						<MotionDivWithFX
+							__framer__loop={animation}
+							__framer__loopEffectEnabled={true}
+							__framer__loopRepeatDelay={0}
+							__framer__loopRepeatType={"loop"}
+							__framer__loopTransition={transition2}
+							__perspectiveFX={false}
+							__smartComponentFX={true}
+							__targetOpacity={1}
+							className={"framer-1bjeu1s"}
+							data-border={true}
+							data-framer-name={"Assets/Integration-Circular"}
+							layoutDependency={layoutDependency}
+							layoutId={"SsHVkF1QC"}
+							style={{
+								"--border-bottom-width": "1px",
+								"--border-color":
+									"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+								"--border-left-width": "1px",
+								"--border-right-width": "1px",
+								"--border-style": "solid",
+								"--border-top-width": "1px",
+								borderBottomLeftRadius: 1e4,
+								borderBottomRightRadius: 1e4,
+								borderTopLeftRadius: 1e4,
+								borderTopRightRadius: 1e4,
+							}}
+						>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-m5590z"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"w0VOpvYob"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
 								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-17yuyye",
-										className,
-										classNames,
-									)}
-									data-framer-name={"Variant 1"}
+									className={"framer-bz6b57"}
+									data-framer-name={"Gradient"}
 									layoutDependency={layoutDependency}
-									layoutId={"fAYTisBu1"}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
+									layoutId={"S72x8_6As"}
 									style={{
-										...style,
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
 									}}
-								>
-									{
-										<MotionDivWithFX
-											__framer__loop={animation}
-											__framer__loopEffectEnabled={true}
-											__framer__loopRepeatDelay={0}
-											__framer__loopRepeatType={"loop"}
-											__framer__loopTransition={transition2}
-											__perspectiveFX={false}
-											__smartComponentFX={true}
-											__targetOpacity={1}
-											className={"framer-1bjeu1s"}
-											data-border={true}
-											data-framer-name={"Assets/Integration-Circular"}
-											layoutDependency={layoutDependency}
-											layoutId={"SsHVkF1QC"}
-											style={{
-												"--border-bottom-width": "1px",
-												"--border-color":
-													"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-												"--border-left-width": "1px",
-												"--border-right-width": "1px",
-												"--border-style": "solid",
-												"--border-top-width": "1px",
-												borderBottomLeftRadius: 1e4,
-												borderBottomRightRadius: 1e4,
-												borderTopLeftRadius: 1e4,
-												borderTopRightRadius: 1e4,
-											}}
-										>
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-m5590z"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"w0VOpvYob"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<motion.div
-															className={"framer-bz6b57"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"S72x8_6As"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/ByXgP9K27ijLFEwVySqueWD558.png",
-															}}
-															className={"framer-ipn06w"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"xUyqy7oGv"}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-62n0gz"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"XtJq9qb_B"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/eI9yKV9nd0AT4YF5dO7pyE64.png",
-															}}
-															className={"framer-alqkfr"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"JCVidIJIn"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-sk8i65"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"I0cirVwd7"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-1iuz82i"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"lBcXJToCk"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/LgaG7RxfarBIPxEApx6sGPjGg.png",
-															}}
-															className={"framer-rwc59f"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"OXf92vAHp"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-1kei7te"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"Cd6Su4tci"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-rt9ps1"}
-													data-framer-name={"loom"}
-													layoutDependency={layoutDependency}
-													layoutId={"E2MwxR4AV"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/OaH0awhGJfcOAvFsAYep2Z6beEE.png",
-															}}
-															className={"framer-mr74rv"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"QnDWrxm2J"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-18519z9"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"Luo74UCu8"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-yv1hpt"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"ZIisH96vH"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/PVROWMfOxe7E0D21nTwMY5JhYY.png",
-															}}
-															className={"framer-88xxm9"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"S9VqxTZD4"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-wq0x7z"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"lHNjeuxTZ"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-1ohhcd0"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"B4QIJgVz7"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/BHkrVKbuQarTI8Frp27VNWIvP8.png",
-															}}
-															className={"framer-1hu22p"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"tlSsiz3QE"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-wfqe2g"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"OlQbhvKUi"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-vmilmd"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"WxHhDLiJI"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/IJ80IurJqPQfNz8aeBjOFChuio.png",
-															}}
-															className={"framer-1th0s8g"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"IEZ8y8ahp"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-1wn4pvp"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"ZtWMp0zrl"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation1}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-1lgvijs"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"K8bXMlHVz"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/lb4CRbi0PnjfvT8yDGXrv1EqH9I.png",
-															}}
-															className={"framer-12vl19x"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"q4WHa5P18"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-j2amty"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"lfsQtzYvH"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-										</MotionDivWithFX>
-									}
-									{
-										<MotionDivWithFX
-											__framer__loop={animation1}
-											__framer__loopEffectEnabled={true}
-											__framer__loopRepeatDelay={0}
-											__framer__loopRepeatType={"loop"}
-											__framer__loopTransition={transition2}
-											__perspectiveFX={false}
-											__smartComponentFX={true}
-											__targetOpacity={1}
-											className={"framer-exi2yi"}
-											data-border={true}
-											data-framer-name={"Assets/Integration-Circular"}
-											layoutDependency={layoutDependency}
-											layoutId={"qXoH2uwEQ"}
-											style={{
-												"--border-bottom-width": "1px",
-												"--border-color":
-													"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-												"--border-left-width": "1px",
-												"--border-right-width": "1px",
-												"--border-style": "solid",
-												"--border-top-width": "1px",
-												borderBottomLeftRadius: 1e4,
-												borderBottomRightRadius: 1e4,
-												borderTopLeftRadius: 1e4,
-												borderTopRightRadius: 1e4,
-											}}
-										>
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-12pjvbr"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"dzmBuv2mN"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/ByXgP9K27ijLFEwVySqueWD558.png",
-															}}
-															className={"framer-j3ekjs"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"eg0ADG1hQ"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-181z68y"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"LjUPqiwuG"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-9alsmc"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"JKFAjISNc"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/eI9yKV9nd0AT4YF5dO7pyE64.png",
-															}}
-															className={"framer-13kyp59"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"qPOInKQ3S"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-gpkc8t"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"ovpijes7Y"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-1600ler"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"gchasepUL"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/LgaG7RxfarBIPxEApx6sGPjGg.png",
-															}}
-															className={"framer-qqxbuk"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"SKzDcpxVh"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-af5dbc"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"dCcxOkNC6"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-z1s7sg"}
-													data-framer-name={"loom"}
-													layoutDependency={layoutDependency}
-													layoutId={"gghvdiQ7U"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/OaH0awhGJfcOAvFsAYep2Z6beEE.png",
-															}}
-															className={"framer-1207gu2"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"BuOusKM0P"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-sdoelk"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"f3eAywQhl"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-xq1kn9"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"jp2fBovax"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/PVROWMfOxe7E0D21nTwMY5JhYY.png",
-															}}
-															className={"framer-f9ukn4"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"jdbbcmEKj"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-1j02d2f"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"ReqP6Tw55"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-16uamwp"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"AYi55YgR4"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/BHkrVKbuQarTI8Frp27VNWIvP8.png",
-															}}
-															className={"framer-1gojkfw"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"nvOfT9PwU"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-1s2eus9"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"FnfKfBjOl"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-1ox063k"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"OBqg8Yca5"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/IJ80IurJqPQfNz8aeBjOFChuio.png",
-															}}
-															className={"framer-1v0sh0t"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"PXkYKbuTe"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-ad72r0"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"e5xYllBL1"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-											{
-												<MotionDivWithFX
-													__framer__loop={animation}
-													__framer__loopEffectEnabled={true}
-													__framer__loopRepeatDelay={0}
-													__framer__loopRepeatType={"loop"}
-													__framer__loopTransition={transition2}
-													__perspectiveFX={false}
-													__smartComponentFX={true}
-													__targetOpacity={1}
-													className={"framer-1mw8q24"}
-													data-framer-name={"Icon"}
-													layoutDependency={layoutDependency}
-													layoutId={"Xascmlc26"}
-													style={{
-														backgroundColor: "rgb(255, 255, 255)",
-														borderBottomLeftRadius: 36,
-														borderBottomRightRadius: 36,
-														borderTopLeftRadius: 36,
-														borderTopRightRadius: 36,
-													}}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																intrinsicHeight: 128,
-																intrinsicWidth: 128,
-																pixelHeight: 256,
-																pixelWidth: 256,
-																src: "https://framerusercontent.com/images/lb4CRbi0PnjfvT8yDGXrv1EqH9I.png",
-															}}
-															className={"framer-165s1ev"}
-															data-framer-name={"Image"}
-															layoutDependency={layoutDependency}
-															layoutId={"la_zgwoh1"}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-1njyxx6"}
-															data-framer-name={"Gradient"}
-															layoutDependency={layoutDependency}
-															layoutId={"z5LyifPxF"}
-															style={{
-																background:
-																	"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
-															}}
-														/>
-													}
-												</MotionDivWithFX>
-											}
-										</MotionDivWithFX>
-									}
-								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+								/>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/ByXgP9K27ijLFEwVySqueWD558.png",
+									}}
+									className={"framer-ipn06w"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"xUyqy7oGv"}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-62n0gz"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"XtJq9qb_B"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/eI9yKV9nd0AT4YF5dO7pyE64.png",
+									}}
+									className={"framer-alqkfr"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"JCVidIJIn"}
+								/>
+								<motion.div
+									className={"framer-sk8i65"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"I0cirVwd7"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-1iuz82i"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"lBcXJToCk"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/LgaG7RxfarBIPxEApx6sGPjGg.png",
+									}}
+									className={"framer-rwc59f"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"OXf92vAHp"}
+								/>
+								<motion.div
+									className={"framer-1kei7te"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"Cd6Su4tci"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-rt9ps1"}
+								data-framer-name={"loom"}
+								layoutDependency={layoutDependency}
+								layoutId={"E2MwxR4AV"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/OaH0awhGJfcOAvFsAYep2Z6beEE.png",
+									}}
+									className={"framer-mr74rv"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"QnDWrxm2J"}
+								/>
+								<motion.div
+									className={"framer-18519z9"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"Luo74UCu8"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-yv1hpt"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"ZIisH96vH"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/PVROWMfOxe7E0D21nTwMY5JhYY.png",
+									}}
+									className={"framer-88xxm9"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"S9VqxTZD4"}
+								/>
+								<motion.div
+									className={"framer-wq0x7z"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"lHNjeuxTZ"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-1ohhcd0"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"B4QIJgVz7"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/BHkrVKbuQarTI8Frp27VNWIvP8.png",
+									}}
+									className={"framer-1hu22p"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"tlSsiz3QE"}
+								/>
+								<motion.div
+									className={"framer-wfqe2g"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"OlQbhvKUi"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-vmilmd"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"WxHhDLiJI"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/IJ80IurJqPQfNz8aeBjOFChuio.png",
+									}}
+									className={"framer-1th0s8g"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"IEZ8y8ahp"}
+								/>
+								<motion.div
+									className={"framer-1wn4pvp"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"ZtWMp0zrl"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation1}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-1lgvijs"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"K8bXMlHVz"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/lb4CRbi0PnjfvT8yDGXrv1EqH9I.png",
+									}}
+									className={"framer-12vl19x"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"q4WHa5P18"}
+								/>
+								<motion.div
+									className={"framer-j2amty"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"lfsQtzYvH"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+						</MotionDivWithFX>
+						<MotionDivWithFX
+							__framer__loop={animation1}
+							__framer__loopEffectEnabled={true}
+							__framer__loopRepeatDelay={0}
+							__framer__loopRepeatType={"loop"}
+							__framer__loopTransition={transition2}
+							__perspectiveFX={false}
+							__smartComponentFX={true}
+							__targetOpacity={1}
+							className={"framer-exi2yi"}
+							data-border={true}
+							data-framer-name={"Assets/Integration-Circular"}
+							layoutDependency={layoutDependency}
+							layoutId={"qXoH2uwEQ"}
+							style={{
+								"--border-bottom-width": "1px",
+								"--border-color":
+									"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+								"--border-left-width": "1px",
+								"--border-right-width": "1px",
+								"--border-style": "solid",
+								"--border-top-width": "1px",
+								borderBottomLeftRadius: 1e4,
+								borderBottomRightRadius: 1e4,
+								borderTopLeftRadius: 1e4,
+								borderTopRightRadius: 1e4,
+							}}
+						>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-12pjvbr"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"dzmBuv2mN"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/ByXgP9K27ijLFEwVySqueWD558.png",
+									}}
+									className={"framer-j3ekjs"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"eg0ADG1hQ"}
+								/>
+								<motion.div
+									className={"framer-181z68y"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"LjUPqiwuG"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-9alsmc"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"JKFAjISNc"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/eI9yKV9nd0AT4YF5dO7pyE64.png",
+									}}
+									className={"framer-13kyp59"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"qPOInKQ3S"}
+								/>
+								<motion.div
+									className={"framer-gpkc8t"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"ovpijes7Y"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-1600ler"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"gchasepUL"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/LgaG7RxfarBIPxEApx6sGPjGg.png",
+									}}
+									className={"framer-qqxbuk"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"SKzDcpxVh"}
+								/>
+								<motion.div
+									className={"framer-af5dbc"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"dCcxOkNC6"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-z1s7sg"}
+								data-framer-name={"loom"}
+								layoutDependency={layoutDependency}
+								layoutId={"gghvdiQ7U"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/OaH0awhGJfcOAvFsAYep2Z6beEE.png",
+									}}
+									className={"framer-1207gu2"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"BuOusKM0P"}
+								/>
+								<motion.div
+									className={"framer-sdoelk"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"f3eAywQhl"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-xq1kn9"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"jp2fBovax"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/PVROWMfOxe7E0D21nTwMY5JhYY.png",
+									}}
+									className={"framer-f9ukn4"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"jdbbcmEKj"}
+								/>
+								<motion.div
+									className={"framer-1j02d2f"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"ReqP6Tw55"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-16uamwp"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"AYi55YgR4"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/BHkrVKbuQarTI8Frp27VNWIvP8.png",
+									}}
+									className={"framer-1gojkfw"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"nvOfT9PwU"}
+								/>
+								<motion.div
+									className={"framer-1s2eus9"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"FnfKfBjOl"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-1ox063k"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"OBqg8Yca5"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/IJ80IurJqPQfNz8aeBjOFChuio.png",
+									}}
+									className={"framer-1v0sh0t"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"PXkYKbuTe"}
+								/>
+								<motion.div
+									className={"framer-ad72r0"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"e5xYllBL1"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+							<MotionDivWithFX
+								__framer__loop={animation}
+								__framer__loopEffectEnabled={true}
+								__framer__loopRepeatDelay={0}
+								__framer__loopRepeatType={"loop"}
+								__framer__loopTransition={transition2}
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								className={"framer-1mw8q24"}
+								data-framer-name={"Icon"}
+								layoutDependency={layoutDependency}
+								layoutId={"Xascmlc26"}
+								style={{
+									backgroundColor: "rgb(255, 255, 255)",
+									borderBottomLeftRadius: 36,
+									borderBottomRightRadius: 36,
+									borderTopLeftRadius: 36,
+									borderTopRightRadius: 36,
+								}}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										intrinsicHeight: 128,
+										intrinsicWidth: 128,
+										pixelHeight: 256,
+										pixelWidth: 256,
+										src: "https://framerusercontent.com/images/lb4CRbi0PnjfvT8yDGXrv1EqH9I.png",
+									}}
+									className={"framer-165s1ev"}
+									data-framer-name={"Image"}
+									layoutDependency={layoutDependency}
+									layoutId={"la_zgwoh1"}
+								/>
+								<motion.div
+									className={"framer-1njyxx6"}
+									data-framer-name={"Gradient"}
+									layoutDependency={layoutDependency}
+									layoutId={"z5LyifPxF"}
+									style={{
+										background:
+											"linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(171, 171, 171, 0) 100%)",
+									}}
+								/>
+							</MotionDivWithFX>
+						</MotionDivWithFX>
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -1160,13 +1054,11 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

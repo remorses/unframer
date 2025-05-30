@@ -94,103 +94,87 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
-								<Link href={GlApASFCK} nodeId={"H4nYYUuvT"} openInNewTab={true}>
-									{
-										<motion.a
-											{...restProps}
-											{...gestureHandlers}
-											className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-1op36gg", className, classNames)} framer-o8af5c`}
-											data-border={true}
-											data-framer-name={"Variant 1"}
-											data-reset={"button"}
-											layoutDependency={layoutDependency}
-											layoutId={"H4nYYUuvT"}
-											ref={ref !== null && ref !== void 0 ? ref : ref1}
-											style={{
-												"--border-bottom-width": "1px",
-												"--border-color": "rgb(232, 232, 232)",
-												"--border-left-width": "1px",
-												"--border-right-width": "1px",
-												"--border-style": "solid",
-												"--border-top-width": "1px",
-												backgroundColor:
-													"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-												borderBottomLeftRadius: 10,
-												borderBottomRightRadius: 10,
-												borderTopLeftRadius: 10,
-												borderTopRightRadius: 10,
-												boxShadow:
-													"0px 0.6021873017743928px 0.421531111242075px -1px rgba(0, 0, 0, 0.11759), 0px 2.288533303243457px 1.60197331227042px -2px rgba(0, 0, 0, 0.11085), 0px 10px 7px -3px rgba(0, 0, 0, 0.08)",
-												...style,
-											}}
-										>
-											{
-												<SVG
-													className={"framer-1508vfs"}
-													data-framer-name={"bag"}
-													fill={
-														"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))"
-													}
-													intrinsicHeight={512}
-													intrinsicWidth={512}
-													layoutDependency={layoutDependency}
-													layoutId={"YaQPRJ5rT"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M454.65 169.4A31.82 31.82 0 0 0 432 160h-64v-16a112 112 0 0 0-224 0v16H80a32 32 0 0 0-32 32v216c0 39 33 72 72 72h272a72.22 72.22 0 0 0 50.48-20.55 69.48 69.48 0 0 0 21.52-50.2V192a31.75 31.75 0 0 0-9.35-22.6zM176 144a80 80 0 0 1 160 0v16H176z"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											}
-											{
-												<RichText
-													__fromCanvasComponent={true}
-													className={"framer-177121f"}
-													fonts={["GF;DM Sans-700"]}
-													layoutDependency={layoutDependency}
-													layoutId={"xRh2ZBpJM"}
-													style={{
-														"--extracted-r6o4lv":
-															"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-														"--framer-paragraph-spacing": "0px",
-													}}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-												>
-													{
-														<React.Fragment>
-															{
-																<motion.p
-																	style={{
-																		"--font-selector": "R0Y7RE0gU2Fucy03MDA=",
-																		"--framer-font-family":
-																			'"DM Sans", "DM Sans Placeholder", sans-serif',
-																		"--framer-font-size": "14px",
-																		"--framer-font-weight": "700",
-																		"--framer-letter-spacing": "-0.04em",
-																		"--framer-text-color":
-																			"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
-																	}}
-																>
-																	{"Sign Up With Google"}
-																</motion.p>
-															}
-														</React.Fragment>
-													}
-												</RichText>
-											}
-										</motion.a>
-									}
-								</Link>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<Link href={GlApASFCK} nodeId={"H4nYYUuvT"} openInNewTab={true}>
+						<motion.a
+							{...restProps}
+							{...gestureHandlers}
+							className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-1op36gg", className, classNames)} framer-o8af5c`}
+							data-border={true}
+							data-framer-name={"Variant 1"}
+							data-reset={"button"}
+							layoutDependency={layoutDependency}
+							layoutId={"H4nYYUuvT"}
+							ref={ref !== null && ref !== void 0 ? ref : ref1}
+							style={{
+								"--border-bottom-width": "1px",
+								"--border-color": "rgb(232, 232, 232)",
+								"--border-left-width": "1px",
+								"--border-right-width": "1px",
+								"--border-style": "solid",
+								"--border-top-width": "1px",
+								backgroundColor:
+									"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+								borderBottomLeftRadius: 10,
+								borderBottomRightRadius: 10,
+								borderTopLeftRadius: 10,
+								borderTopRightRadius: 10,
+								boxShadow:
+									"0px 0.6021873017743928px 0.421531111242075px -1px rgba(0, 0, 0, 0.11759), 0px 2.288533303243457px 1.60197331227042px -2px rgba(0, 0, 0, 0.11085), 0px 10px 7px -3px rgba(0, 0, 0, 0.08)",
+								...style,
+							}}
+						>
+							<SVG
+								className={"framer-1508vfs"}
+								data-framer-name={"bag"}
+								fill={
+									"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))"
+								}
+								intrinsicHeight={512}
+								intrinsicWidth={512}
+								layoutDependency={layoutDependency}
+								layoutId={"YaQPRJ5rT"}
+								svg={
+									'<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M454.65 169.4A31.82 31.82 0 0 0 432 160h-64v-16a112 112 0 0 0-224 0v16H80a32 32 0 0 0-32 32v216c0 39 33 72 72 72h272a72.22 72.22 0 0 0 50.48-20.55 69.48 69.48 0 0 0 21.52-50.2V192a31.75 31.75 0 0 0-9.35-22.6zM176 144a80 80 0 0 1 160 0v16H176z"/></svg>'
+								}
+								withExternalLayout={true}
+							/>
+							<RichText
+								__fromCanvasComponent={true}
+								className={"framer-177121f"}
+								fonts={["GF;DM Sans-700"]}
+								layoutDependency={layoutDependency}
+								layoutId={"xRh2ZBpJM"}
+								style={{
+									"--extracted-r6o4lv":
+										"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+									"--framer-paragraph-spacing": "0px",
+								}}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+							>
+								<React.Fragment>
+									<motion.p
+										style={{
+											"--font-selector": "R0Y7RE0gU2Fucy03MDA=",
+											"--framer-font-family":
+												'"DM Sans", "DM Sans Placeholder", sans-serif',
+											"--framer-font-size": "14px",
+											"--framer-font-weight": "700",
+											"--framer-letter-spacing": "-0.04em",
+											"--framer-text-color":
+												"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
+										}}
+									>
+										{"Sign Up With Google"}
+									</motion.p>
+								</React.Fragment>
+							</RichText>
+						</motion.a>
+					</Link>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -292,13 +276,11 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

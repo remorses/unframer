@@ -183,26 +183,78 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	};
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.nav
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							scopingClassNames,
+							"framer-1f6f2pv",
+							className4,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Desktop"}
+						layoutDependency={layoutDependency}
+						layoutId={"atzuKDLl2"}
+						ref={refBinding}
+						style={{
+							"--border-bottom-width": "1px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "0px",
+							"--border-right-width": "0px",
+							"--border-style": "dotted",
+							"--border-top-width": "0px",
+							backgroundColor:
+								"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
-								<motion.nav
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										scopingClassNames,
-										"framer-1f6f2pv",
-										className4,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Desktop"}
-									layoutDependency={layoutDependency}
-									layoutId={"atzuKDLl2"}
-									ref={refBinding}
-									style={{
+								TD3BSWKBy: {
+									"data-framer-name": "Phone closed",
+								},
+								VTuwB9HI5: {
+									"data-framer-name": "Phone open",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion.div
+							className={"framer-1vmomoj"}
+							data-border={true}
+							data-framer-name={"Main container"}
+							layoutDependency={layoutDependency}
+							layoutId={"wXgQIJGDg"}
+							style={{
+								"--border-bottom-width": "0px",
+								"--border-color":
+									"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+								"--border-left-width": "1px",
+								"--border-right-width": "1px",
+								"--border-style": "dotted",
+								"--border-top-width": "0px",
+							}}
+						>
+							<motion.div
+								className={"framer-ho2vhc"}
+								data-framer-name={"Name"}
+								layoutDependency={layoutDependency}
+								layoutId={"h99hNTDNi"}
+								style={{
+									"--border-bottom-width": "0px",
+									"--border-color": "rgba(0, 0, 0, 0)",
+									"--border-left-width": "0px",
+									"--border-right-width": "0px",
+									"--border-style": "solid",
+									"--border-top-width": "0px",
+								}}
+								variants={{
+									TD3BSWKBy: {
 										"--border-bottom-width": "1px",
 										"--border-color":
 											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
@@ -210,1147 +262,879 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										"--border-right-width": "0px",
 										"--border-style": "dotted",
 										"--border-top-width": "0px",
-										backgroundColor:
-											"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-										...style,
-									}}
-									{...addPropertyOverrides(
-										{
-											TD3BSWKBy: {
-												"data-framer-name": "Phone closed",
-											},
-											VTuwB9HI5: {
-												"data-framer-name": "Phone open",
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
-								>
+									},
+									VTuwB9HI5: {
+										"--border-bottom-width": "1px",
+										"--border-color":
+											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+										"--border-left-width": "0px",
+										"--border-right-width": "0px",
+										"--border-style": "dotted",
+										"--border-top-width": "0px",
+									},
+								}}
+								{...addPropertyOverrides(
 									{
-										<motion.div
-											className={"framer-1vmomoj"}
-											data-border={true}
-											data-framer-name={"Main container"}
-											layoutDependency={layoutDependency}
-											layoutId={"wXgQIJGDg"}
-											style={{
-												"--border-bottom-width": "0px",
-												"--border-color":
-													"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-												"--border-left-width": "1px",
-												"--border-right-width": "1px",
-												"--border-style": "dotted",
-												"--border-top-width": "0px",
-											}}
-										>
+										TD3BSWKBy: {
+											"data-border": true,
+										},
+										VTuwB9HI5: {
+											"data-border": true,
+										},
+									},
+									baseVariant,
+									gestureVariant,
+								)}
+							>
+								<motion.div
+									className={"framer-wux2wo"}
+									data-framer-name={"Logo and Name"}
+									layoutDependency={layoutDependency}
+									layoutId={"pcR49UEa7"}
+								>
+									<ComponentViewportProvider
+										height={20}
+										y={
+											(componentViewport?.y || 0) +
+											(0 + ((componentViewport?.height || 72) - 0 - 72) / 2) +
+											26 +
+											0 +
+											0
+										}
+										{...addPropertyOverrides(
 											{
+												TD3BSWKBy: {
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														0 +
+														26 +
+														0,
+												},
+												VTuwB9HI5: {
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														0 +
+														26 +
+														0,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<SmartComponentScopedContainer
+											className={"framer-dxf2b5-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"zz7qRIzZD-container"}
+											nodeId={"zz7qRIzZD"}
+											rendersWithMotion={true}
+											scopeId={"jBzjFrEWY"}
+										>
+											{_jsx(stdin_default, {
+												height: "100%",
+												id: "zz7qRIzZD",
+												layoutId: "zz7qRIzZD",
+												variant: "f64gXesMC",
+												width: "100%",
+											})}
+										</SmartComponentScopedContainer>
+									</ComponentViewportProvider>
+								</motion.div>
+								{isDisplayed() && (
+									<motion.div
+										className={"framer-eh1yuy"}
+										layoutDependency={layoutDependency}
+										layoutId={"fok5Al9AF"}
+									>
+										<ComponentViewportProvider
+											height={40}
+											{...addPropertyOverrides(
+												{
+													TD3BSWKBy: {
+														y:
+															(componentViewport?.y || 0) +
+															0 +
+															0 +
+															0 +
+															0 +
+															16 +
+															0,
+													},
+													VTuwB9HI5: {
+														y:
+															(componentViewport?.y || 0) +
+															0 +
+															0 +
+															0 +
+															0 +
+															16 +
+															0,
+													},
+												},
+												baseVariant,
+												gestureVariant,
+											)}
+										>
+											<SmartComponentScopedContainer
+												className={"framer-1kva5x-container"}
+												layoutDependency={layoutDependency}
+												layoutId={"iIwoVU_nJ-container"}
+												nodeId={"iIwoVU_nJ"}
+												rendersWithMotion={true}
+												scopeId={"jBzjFrEWY"}
+											>
+												<NavigationSingleToggleWithSingleToggle1kva5xWithMappedReactProps19vtxsf
+													height={"100%"}
+													id={"iIwoVU_nJ"}
+													layoutId={"iIwoVU_nJ"}
+													Tib6Q7ZnQ={
+														"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
+													}
+													width={"100%"}
+												/>
+											</SmartComponentScopedContainer>
+										</ComponentViewportProvider>
+										{isDisplayed() && (
+											<motion.div
+												className={"framer-smiekb"}
+												data-framer-name={"Icon"}
+												layoutDependency={layoutDependency}
+												layoutId={"AUdbUdxPM"}
+												{...addPropertyOverrides(
+													{
+														TD3BSWKBy: {
+															"data-highlight": true,
+															onTap: onTap5gcrnq,
+														},
+														VTuwB9HI5: {
+															"data-highlight": true,
+															onTap: onTapncg83m,
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												)}
+											>
 												<motion.div
-													className={"framer-ho2vhc"}
-													data-framer-name={"Name"}
+													className={"framer-1xbq15v"}
+													data-framer-name={"Bottom"}
 													layoutDependency={layoutDependency}
-													layoutId={"h99hNTDNi"}
+													layoutId={"wd68fKY7J"}
 													style={{
-														"--border-bottom-width": "0px",
-														"--border-color": "rgba(0, 0, 0, 0)",
-														"--border-left-width": "0px",
-														"--border-right-width": "0px",
-														"--border-style": "solid",
-														"--border-top-width": "0px",
+														backgroundColor: "rgb(153, 153, 153)",
+														borderBottomLeftRadius: 10,
+														borderBottomRightRadius: 10,
+														borderTopLeftRadius: 10,
+														borderTopRightRadius: 10,
+														rotate: 0,
 													}}
 													variants={{
 														TD3BSWKBy: {
-															"--border-bottom-width": "1px",
-															"--border-color":
-																"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-															"--border-left-width": "0px",
-															"--border-right-width": "0px",
-															"--border-style": "dotted",
-															"--border-top-width": "0px",
+															backgroundColor:
+																"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
+															rotate: 0,
 														},
 														VTuwB9HI5: {
-															"--border-bottom-width": "1px",
-															"--border-color":
-																"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-															"--border-left-width": "0px",
-															"--border-right-width": "0px",
-															"--border-style": "dotted",
-															"--border-top-width": "0px",
+															backgroundColor:
+																"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
+															rotate: -135,
 														},
 													}}
-													{...addPropertyOverrides(
-														{
-															TD3BSWKBy: {
-																"data-border": true,
-															},
-															VTuwB9HI5: {
-																"data-border": true,
-															},
-														},
-														baseVariant,
-														gestureVariant,
-													)}
-												>
-													{
-														<motion.div
-															className={"framer-wux2wo"}
-															data-framer-name={"Logo and Name"}
-															layoutDependency={layoutDependency}
-															layoutId={"pcR49UEa7"}
-														>
-															{
-																<ComponentViewportProvider
-																	height={20}
-																	y={
-																		(componentViewport?.y || 0) +
-																		(0 +
-																			((componentViewport?.height || 72) -
-																				0 -
-																				72) /
-																				2) +
-																		26 +
-																		0 +
-																		0
-																	}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					0 +
-																					26 +
-																					0,
-																			},
-																			VTuwB9HI5: {
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					0 +
-																					26 +
-																					0,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<SmartComponentScopedContainer
-																			className={"framer-dxf2b5-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"zz7qRIzZD-container"}
-																			nodeId={"zz7qRIzZD"}
-																			rendersWithMotion={true}
-																			scopeId={"jBzjFrEWY"}
-																		>
-																			{_jsx(stdin_default, {
-																				height: "100%",
-																				id: "zz7qRIzZD",
-																				layoutId: "zz7qRIzZD",
-																				variant: "f64gXesMC",
-																				width: "100%",
-																			})}
-																		</SmartComponentScopedContainer>
-																	}
-																</ComponentViewportProvider>
-															}
-														</motion.div>
-													}
-													{isDisplayed() && (
-														<motion.div
-															className={"framer-eh1yuy"}
-															layoutDependency={layoutDependency}
-															layoutId={"fok5Al9AF"}
-														>
-															{
-																<ComponentViewportProvider
-																	height={40}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					0 +
-																					16 +
-																					0,
-																			},
-																			VTuwB9HI5: {
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					0 +
-																					16 +
-																					0,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<SmartComponentScopedContainer
-																			className={"framer-1kva5x-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"iIwoVU_nJ-container"}
-																			nodeId={"iIwoVU_nJ"}
-																			rendersWithMotion={true}
-																			scopeId={"jBzjFrEWY"}
-																		>
-																			{
-																				<NavigationSingleToggleWithSingleToggle1kva5xWithMappedReactProps19vtxsf
-																					height={"100%"}
-																					id={"iIwoVU_nJ"}
-																					layoutId={"iIwoVU_nJ"}
-																					Tib6Q7ZnQ={
-																						"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
-																					}
-																					width={"100%"}
-																				/>
-																			}
-																		</SmartComponentScopedContainer>
-																	}
-																</ComponentViewportProvider>
-															}
-															{isDisplayed() && (
-																<motion.div
-																	className={"framer-smiekb"}
-																	data-framer-name={"Icon"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"AUdbUdxPM"}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				"data-highlight": true,
-																				onTap: onTap5gcrnq,
-																			},
-																			VTuwB9HI5: {
-																				"data-highlight": true,
-																				onTap: onTapncg83m,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<motion.div
-																			className={"framer-1xbq15v"}
-																			data-framer-name={"Bottom"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"wd68fKY7J"}
-																			style={{
-																				backgroundColor: "rgb(153, 153, 153)",
-																				borderBottomLeftRadius: 10,
-																				borderBottomRightRadius: 10,
-																				borderTopLeftRadius: 10,
-																				borderTopRightRadius: 10,
-																				rotate: 0,
-																			}}
-																			variants={{
-																				TD3BSWKBy: {
-																					backgroundColor:
-																						"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-																					rotate: 0,
-																				},
-																				VTuwB9HI5: {
-																					backgroundColor:
-																						"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-																					rotate: -135,
-																				},
-																			}}
-																		/>
-																	}
-																	{
-																		<motion.div
-																			className={"framer-248j2y"}
-																			data-framer-name={"Top"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"n4KhhrFW2"}
-																			style={{
-																				backgroundColor: "rgb(153, 153, 153)",
-																				borderBottomLeftRadius: 10,
-																				borderBottomRightRadius: 10,
-																				borderTopLeftRadius: 10,
-																				borderTopRightRadius: 10,
-																				rotate: 0,
-																			}}
-																			variants={{
-																				TD3BSWKBy: {
-																					backgroundColor:
-																						"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-																					rotate: 0,
-																				},
-																				VTuwB9HI5: {
-																					backgroundColor:
-																						"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-																					rotate: 135,
-																				},
-																			}}
-																		/>
-																	}
-																</motion.div>
-															)}
-														</motion.div>
-													)}
-												</motion.div>
-											}
-											{
+												/>
 												<motion.div
-													className={"framer-vtos0b"}
-													data-framer-name={"Links"}
+													className={"framer-248j2y"}
+													data-framer-name={"Top"}
 													layoutDependency={layoutDependency}
-													layoutId={"cpdNPZb4f"}
-												>
-													{
-														<motion.div
-															className={"framer-ah54yt"}
-															data-framer-name={"Inline Link"}
-															layoutDependency={layoutDependency}
-															layoutId={"qtQFtwypA"}
-														>
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-pzql37"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"h0AxRbKfn"}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "I0Vjsk230",
-																										}}
-																										motionChild={true}
-																										nodeId={"h0AxRbKfn"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"Explore Features"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			VTuwB9HI5: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "I0Vjsk230",
-																										}}
-																										motionChild={true}
-																										nodeId={"h0AxRbKfn"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"Explore Features"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1aj6jmn"
-																					}
-																					data-styles-preset={"TeHXylmO7"}
-																				>
-																					{
-																						<Link
-																							href={{
-																								webPageId: "I0Vjsk230",
-																							}}
-																							motionChild={true}
-																							nodeId={"h0AxRbKfn"}
-																							openInNewTab={false}
-																							scopeId={"jBzjFrEWY"}
-																							smoothScroll={false}
-																						>
-																							{
-																								<motion.a
-																									className={
-																										"framer-styles-preset-1awn4pb"
-																									}
-																									data-styles-preset={
-																										"XWZdRWLkO"
-																									}
-																								>
-																									{"Explore Features"}
-																								</motion.a>
-																							}
-																						</Link>
-																					}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-7g5k4h"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"tNk8d0Tf4"}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "tBghjsyop",
-																										}}
-																										motionChild={true}
-																										nodeId={"tNk8d0Tf4"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"Read Success Stories"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			VTuwB9HI5: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "tBghjsyop",
-																										}}
-																										motionChild={true}
-																										nodeId={"tNk8d0Tf4"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"Read Success Stories"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1aj6jmn"
-																					}
-																					data-styles-preset={"TeHXylmO7"}
-																				>
-																					{
-																						<Link
-																							href={{
-																								webPageId: "tBghjsyop",
-																							}}
-																							motionChild={true}
-																							nodeId={"tNk8d0Tf4"}
-																							openInNewTab={false}
-																							scopeId={"jBzjFrEWY"}
-																							smoothScroll={false}
-																						>
-																							{
-																								<motion.a
-																									className={
-																										"framer-styles-preset-1awn4pb"
-																									}
-																									data-styles-preset={
-																										"XWZdRWLkO"
-																									}
-																								>
-																									{"Read Success Stories"}
-																								</motion.a>
-																							}
-																						</Link>
-																					}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-1egjlbc"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"MaC15YC5L"}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "MYlLV6Tip",
-																										}}
-																										motionChild={true}
-																										nodeId={"MaC15YC5L"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"View Pricing Options"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			VTuwB9HI5: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "MYlLV6Tip",
-																										}}
-																										motionChild={true}
-																										nodeId={"MaC15YC5L"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"View Pricing Options"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1aj6jmn"
-																					}
-																					data-styles-preset={"TeHXylmO7"}
-																				>
-																					{
-																						<Link
-																							href={{
-																								webPageId: "MYlLV6Tip",
-																							}}
-																							motionChild={true}
-																							nodeId={"MaC15YC5L"}
-																							openInNewTab={false}
-																							scopeId={"jBzjFrEWY"}
-																							smoothScroll={false}
-																						>
-																							{
-																								<motion.a
-																									className={
-																										"framer-styles-preset-1awn4pb"
-																									}
-																									data-styles-preset={
-																										"XWZdRWLkO"
-																									}
-																								>
-																									{"View Pricing Options"}
-																								</motion.a>
-																							}
-																						</Link>
-																					}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-qyikaj"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"tAy29Vpru"}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			TD3BSWKBy: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "qNb6QfkBq",
-																										}}
-																										motionChild={true}
-																										nodeId={"tAy29Vpru"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"Get Expert Support"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			VTuwB9HI5: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-17qeria"
-																								}
-																								data-styles-preset={"vSuRg5Prj"}
-																							>
-																								{
-																									<Link
-																										href={{
-																											webPageId: "qNb6QfkBq",
-																										}}
-																										motionChild={true}
-																										nodeId={"tAy29Vpru"}
-																										openInNewTab={false}
-																										scopeId={"jBzjFrEWY"}
-																										smoothScroll={false}
-																									>
-																										{
-																											<motion.a
-																												className={
-																													"framer-styles-preset-1awn4pb"
-																												}
-																												data-styles-preset={
-																													"XWZdRWLkO"
-																												}
-																											>
-																												{"Get Expert Support"}
-																											</motion.a>
-																										}
-																									</Link>
-																								}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1aj6jmn"
-																					}
-																					data-styles-preset={"TeHXylmO7"}
-																				>
-																					{
-																						<Link
-																							href={{
-																								webPageId: "qNb6QfkBq",
-																							}}
-																							motionChild={true}
-																							nodeId={"tAy29Vpru"}
-																							openInNewTab={false}
-																							scopeId={"jBzjFrEWY"}
-																							smoothScroll={false}
-																						>
-																							{
-																								<motion.a
-																									className={
-																										"framer-styles-preset-1awn4pb"
-																									}
-																									data-styles-preset={
-																										"XWZdRWLkO"
-																									}
-																								>
-																									{"Get Expert Support"}
-																								</motion.a>
-																							}
-																						</Link>
-																					}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-														</motion.div>
-													}
-													{
-														<motion.div
-															className={"framer-1ub2g6w"}
-															data-framer-name={"Sign in & Sign up"}
-															layoutDependency={layoutDependency}
-															layoutId={"NZekzYFHJ"}
-														>
-															{
-																<ResolveLinks
-																	links={[
-																		{
-																			href: {
-																				webPageId: "j_IHQLq_9",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "j_IHQLq_9",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "j_IHQLq_9",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																	]}
-																>
-																	{(resolvedLinks) => (
-																		<ComponentViewportProvider
-																			height={36}
-																			y={
-																				(componentViewport?.y || 0) +
-																				(0 +
-																					((componentViewport?.height || 72) -
-																						0 -
-																						72) /
-																						2) +
-																				16 +
-																				2 +
-																				0
-																			}
-																			{...addPropertyOverrides(
-																				{
-																					TD3BSWKBy: {
-																						width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
-																						y:
-																							(componentViewport?.y || 0) +
-																							0 +
-																							0 +
-																							0 +
-																							72 +
-																							32 +
-																							580 +
-																							0,
-																					},
-																					VTuwB9HI5: {
-																						width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
-																						y:
-																							(componentViewport?.y || 0) +
-																							0 +
-																							0 +
-																							0 +
-																							72 +
-																							32 +
-																							580 +
-																							0,
-																					},
-																				},
-																				baseVariant,
-																				gestureVariant,
-																			)}
-																		>
-																			{
-																				<SmartComponentScopedContainer
-																					className={"framer-1fx8wrw-container"}
-																					layoutDependency={layoutDependency}
-																					layoutId={"GZeOOZV5e-container"}
-																					nodeId={"GZeOOZV5e"}
-																					rendersWithMotion={true}
-																					scopeId={"jBzjFrEWY"}
-																				>
-																					{_jsx(stdin_default3, {
-																						aLzckSHOC: resolvedLinks[0],
-																						height: "100%",
-																						id: "GZeOOZV5e",
-																						layoutId: "GZeOOZV5e",
-																						style: {
-																							height: "100%",
-																						},
-																						TJIuLmRdX: "Signup or Login",
-																						variant: "pwQe2A20s",
-																						width: "100%",
-																						...addPropertyOverrides(
-																							{
-																								TD3BSWKBy: {
-																									aLzckSHOC: resolvedLinks[2],
-																									style: {
-																										height: "100%",
-																										width: "100%",
-																									},
-																									variant: "yXEyLi9JB",
-																								},
-																								VTuwB9HI5: {
-																									aLzckSHOC: resolvedLinks[1],
-																									style: {
-																										height: "100%",
-																										width: "100%",
-																									},
-																									variant: "yXEyLi9JB",
-																								},
-																							},
-																							baseVariant,
-																							gestureVariant,
-																						),
-																					})}
-																				</SmartComponentScopedContainer>
-																			}
-																		</ComponentViewportProvider>
-																	)}
-																</ResolveLinks>
-															}
-															{
-																<ResolveLinks
-																	links={[
-																		{
-																			href: {
-																				webPageId: "cvVskSlKE",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "cvVskSlKE",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "cvVskSlKE",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																	]}
-																>
-																	{(resolvedLinks1) => (
-																		<ComponentViewportProvider
-																			height={36}
-																			y={
-																				(componentViewport?.y || 0) +
-																				(0 +
-																					((componentViewport?.height || 72) -
-																						0 -
-																						72) /
-																						2) +
-																				16 +
-																				2 +
-																				0
-																			}
-																			{...addPropertyOverrides(
-																				{
-																					TD3BSWKBy: {
-																						width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
-																						y:
-																							(componentViewport?.y || 0) +
-																							0 +
-																							0 +
-																							0 +
-																							72 +
-																							32 +
-																							580 +
-																							0,
-																					},
-																					VTuwB9HI5: {
-																						width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
-																						y:
-																							(componentViewport?.y || 0) +
-																							0 +
-																							0 +
-																							0 +
-																							72 +
-																							32 +
-																							580 +
-																							0,
-																					},
-																				},
-																				baseVariant,
-																				gestureVariant,
-																			)}
-																		>
-																			{
-																				<SmartComponentScopedContainer
-																					className={"framer-pe9tpw-container"}
-																					layoutDependency={layoutDependency}
-																					layoutId={"WsU61ox6l-container"}
-																					nodeId={"WsU61ox6l"}
-																					rendersWithMotion={true}
-																					scopeId={"jBzjFrEWY"}
-																				>
-																					{_jsx(stdin_default3, {
-																						aLzckSHOC: resolvedLinks1[0],
-																						height: "100%",
-																						id: "WsU61ox6l",
-																						layoutId: "WsU61ox6l",
-																						style: {
-																							height: "100%",
-																						},
-																						TJIuLmRdX: "Sign up ",
-																						variant: "JOn8gzR30",
-																						width: "100%",
-																						...addPropertyOverrides(
-																							{
-																								TD3BSWKBy: {
-																									aLzckSHOC: resolvedLinks1[2],
-																									style: {
-																										height: "100%",
-																										width: "100%",
-																									},
-																								},
-																								VTuwB9HI5: {
-																									aLzckSHOC: resolvedLinks1[1],
-																									style: {
-																										height: "100%",
-																										width: "100%",
-																									},
-																								},
-																							},
-																							baseVariant,
-																							gestureVariant,
-																						),
-																					})}
-																				</SmartComponentScopedContainer>
-																			}
-																		</ComponentViewportProvider>
-																	)}
-																</ResolveLinks>
-															}
-														</motion.div>
-													}
-													{isDisplayed1() && (
-														<ComponentViewportProvider
-															height={40}
-															y={
-																(componentViewport?.y || 0) +
-																(0 +
-																	((componentViewport?.height || 72) - 0 - 72) /
-																		2) +
-																16 +
-																0
-															}
-														>
-															{
-																<SmartComponentScopedContainer
-																	className={"framer-motdmn-container"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"Pdaml9hoK-container"}
-																	nodeId={"Pdaml9hoK"}
-																	rendersWithMotion={true}
+													layoutId={"n4KhhrFW2"}
+													style={{
+														backgroundColor: "rgb(153, 153, 153)",
+														borderBottomLeftRadius: 10,
+														borderBottomRightRadius: 10,
+														borderTopLeftRadius: 10,
+														borderTopRightRadius: 10,
+														rotate: 0,
+													}}
+													variants={{
+														TD3BSWKBy: {
+															backgroundColor:
+																"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
+															rotate: 0,
+														},
+														VTuwB9HI5: {
+															backgroundColor:
+																"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
+															rotate: 135,
+														},
+													}}
+												/>
+											</motion.div>
+										)}
+									</motion.div>
+								)}
+							</motion.div>
+							<motion.div
+								className={"framer-vtos0b"}
+								data-framer-name={"Links"}
+								layoutDependency={layoutDependency}
+								layoutId={"cpdNPZb4f"}
+							>
+								<motion.div
+									className={"framer-ah54yt"}
+									data-framer-name={"Inline Link"}
+									layoutDependency={layoutDependency}
+									layoutId={"qtQFtwypA"}
+								>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-pzql37"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"h0AxRbKfn"}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												TD3BSWKBy: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "I0Vjsk230",
+																	}}
+																	motionChild={true}
+																	nodeId={"h0AxRbKfn"}
+																	openInNewTab={false}
 																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
 																>
-																	{
-																		<NavigationSingleToggleWithSingleTogglemotdmnWithMappedReactProps19vtxsf
-																			height={"100%"}
-																			id={"Pdaml9hoK"}
-																			layoutId={"Pdaml9hoK"}
-																			Tib6Q7ZnQ={
-																				"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
-																			}
-																			width={"100%"}
-																		/>
-																	}
-																</SmartComponentScopedContainer>
-															}
-														</ComponentViewportProvider>
-													)}
-												</motion.div>
-											}
-										</motion.div>
-									}
-								</motion.nav>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"Explore Features"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												VTuwB9HI5: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "I0Vjsk230",
+																	}}
+																	motionChild={true}
+																	nodeId={"h0AxRbKfn"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"Explore Features"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1aj6jmn"}
+												data-styles-preset={"TeHXylmO7"}
+											>
+												<Link
+													href={{
+														webPageId: "I0Vjsk230",
+													}}
+													motionChild={true}
+													nodeId={"h0AxRbKfn"}
+													openInNewTab={false}
+													scopeId={"jBzjFrEWY"}
+													smoothScroll={false}
+												>
+													<motion.a
+														className={"framer-styles-preset-1awn4pb"}
+														data-styles-preset={"XWZdRWLkO"}
+													>
+														{"Explore Features"}
+													</motion.a>
+												</Link>
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-7g5k4h"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"tNk8d0Tf4"}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												TD3BSWKBy: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "tBghjsyop",
+																	}}
+																	motionChild={true}
+																	nodeId={"tNk8d0Tf4"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"Read Success Stories"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												VTuwB9HI5: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "tBghjsyop",
+																	}}
+																	motionChild={true}
+																	nodeId={"tNk8d0Tf4"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"Read Success Stories"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1aj6jmn"}
+												data-styles-preset={"TeHXylmO7"}
+											>
+												<Link
+													href={{
+														webPageId: "tBghjsyop",
+													}}
+													motionChild={true}
+													nodeId={"tNk8d0Tf4"}
+													openInNewTab={false}
+													scopeId={"jBzjFrEWY"}
+													smoothScroll={false}
+												>
+													<motion.a
+														className={"framer-styles-preset-1awn4pb"}
+														data-styles-preset={"XWZdRWLkO"}
+													>
+														{"Read Success Stories"}
+													</motion.a>
+												</Link>
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-1egjlbc"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"MaC15YC5L"}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												TD3BSWKBy: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "MYlLV6Tip",
+																	}}
+																	motionChild={true}
+																	nodeId={"MaC15YC5L"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"View Pricing Options"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												VTuwB9HI5: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "MYlLV6Tip",
+																	}}
+																	motionChild={true}
+																	nodeId={"MaC15YC5L"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"View Pricing Options"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1aj6jmn"}
+												data-styles-preset={"TeHXylmO7"}
+											>
+												<Link
+													href={{
+														webPageId: "MYlLV6Tip",
+													}}
+													motionChild={true}
+													nodeId={"MaC15YC5L"}
+													openInNewTab={false}
+													scopeId={"jBzjFrEWY"}
+													smoothScroll={false}
+												>
+													<motion.a
+														className={"framer-styles-preset-1awn4pb"}
+														data-styles-preset={"XWZdRWLkO"}
+													>
+														{"View Pricing Options"}
+													</motion.a>
+												</Link>
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-qyikaj"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"tAy29Vpru"}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												TD3BSWKBy: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "qNb6QfkBq",
+																	}}
+																	motionChild={true}
+																	nodeId={"tAy29Vpru"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"Get Expert Support"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												VTuwB9HI5: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-17qeria"}
+																data-styles-preset={"vSuRg5Prj"}
+															>
+																<Link
+																	href={{
+																		webPageId: "qNb6QfkBq",
+																	}}
+																	motionChild={true}
+																	nodeId={"tAy29Vpru"}
+																	openInNewTab={false}
+																	scopeId={"jBzjFrEWY"}
+																	smoothScroll={false}
+																>
+																	<motion.a
+																		className={"framer-styles-preset-1awn4pb"}
+																		data-styles-preset={"XWZdRWLkO"}
+																	>
+																		{"Get Expert Support"}
+																	</motion.a>
+																</Link>
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1aj6jmn"}
+												data-styles-preset={"TeHXylmO7"}
+											>
+												<Link
+													href={{
+														webPageId: "qNb6QfkBq",
+													}}
+													motionChild={true}
+													nodeId={"tAy29Vpru"}
+													openInNewTab={false}
+													scopeId={"jBzjFrEWY"}
+													smoothScroll={false}
+												>
+													<motion.a
+														className={"framer-styles-preset-1awn4pb"}
+														data-styles-preset={"XWZdRWLkO"}
+													>
+														{"Get Expert Support"}
+													</motion.a>
+												</Link>
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+								</motion.div>
+								<motion.div
+									className={"framer-1ub2g6w"}
+									data-framer-name={"Sign in & Sign up"}
+									layoutDependency={layoutDependency}
+									layoutId={"NZekzYFHJ"}
+								>
+									<ResolveLinks
+										links={[
+											{
+												href: {
+													webPageId: "j_IHQLq_9",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "j_IHQLq_9",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "j_IHQLq_9",
+												},
+												implicitPathVariables: void 0,
+											},
+										]}
+									>
+										{(resolvedLinks) => (
+											<ComponentViewportProvider
+												height={36}
+												y={
+													(componentViewport?.y || 0) +
+													(0 +
+														((componentViewport?.height || 72) - 0 - 72) / 2) +
+													16 +
+													2 +
+													0
+												}
+												{...addPropertyOverrides(
+													{
+														TD3BSWKBy: {
+															width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
+															y:
+																(componentViewport?.y || 0) +
+																0 +
+																0 +
+																0 +
+																72 +
+																32 +
+																580 +
+																0,
+														},
+														VTuwB9HI5: {
+															width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
+															y:
+																(componentViewport?.y || 0) +
+																0 +
+																0 +
+																0 +
+																72 +
+																32 +
+																580 +
+																0,
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												)}
+											>
+												<SmartComponentScopedContainer
+													className={"framer-1fx8wrw-container"}
+													layoutDependency={layoutDependency}
+													layoutId={"GZeOOZV5e-container"}
+													nodeId={"GZeOOZV5e"}
+													rendersWithMotion={true}
+													scopeId={"jBzjFrEWY"}
+												>
+													{_jsx(stdin_default3, {
+														aLzckSHOC: resolvedLinks[0],
+														height: "100%",
+														id: "GZeOOZV5e",
+														layoutId: "GZeOOZV5e",
+														style: {
+															height: "100%",
+														},
+														TJIuLmRdX: "Signup or Login",
+														variant: "pwQe2A20s",
+														width: "100%",
+														...addPropertyOverrides(
+															{
+																TD3BSWKBy: {
+																	aLzckSHOC: resolvedLinks[2],
+																	style: {
+																		height: "100%",
+																		width: "100%",
+																	},
+																	variant: "yXEyLi9JB",
+																},
+																VTuwB9HI5: {
+																	aLzckSHOC: resolvedLinks[1],
+																	style: {
+																		height: "100%",
+																		width: "100%",
+																	},
+																	variant: "yXEyLi9JB",
+																},
+															},
+															baseVariant,
+															gestureVariant,
+														),
+													})}
+												</SmartComponentScopedContainer>
+											</ComponentViewportProvider>
+										)}
+									</ResolveLinks>
+									<ResolveLinks
+										links={[
+											{
+												href: {
+													webPageId: "cvVskSlKE",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "cvVskSlKE",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "cvVskSlKE",
+												},
+												implicitPathVariables: void 0,
+											},
+										]}
+									>
+										{(resolvedLinks1) => (
+											<ComponentViewportProvider
+												height={36}
+												y={
+													(componentViewport?.y || 0) +
+													(0 +
+														((componentViewport?.height || 72) - 0 - 72) / 2) +
+													16 +
+													2 +
+													0
+												}
+												{...addPropertyOverrides(
+													{
+														TD3BSWKBy: {
+															width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
+															y:
+																(componentViewport?.y || 0) +
+																0 +
+																0 +
+																0 +
+																72 +
+																32 +
+																580 +
+																0,
+														},
+														VTuwB9HI5: {
+															width: `max((min(min(${componentViewport?.width || "100vw"} - 24px, 1200px), 1100px) - 60px) / 2, 1px)`,
+															y:
+																(componentViewport?.y || 0) +
+																0 +
+																0 +
+																0 +
+																72 +
+																32 +
+																580 +
+																0,
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												)}
+											>
+												<SmartComponentScopedContainer
+													className={"framer-pe9tpw-container"}
+													layoutDependency={layoutDependency}
+													layoutId={"WsU61ox6l-container"}
+													nodeId={"WsU61ox6l"}
+													rendersWithMotion={true}
+													scopeId={"jBzjFrEWY"}
+												>
+													{_jsx(stdin_default3, {
+														aLzckSHOC: resolvedLinks1[0],
+														height: "100%",
+														id: "WsU61ox6l",
+														layoutId: "WsU61ox6l",
+														style: {
+															height: "100%",
+														},
+														TJIuLmRdX: "Sign up ",
+														variant: "JOn8gzR30",
+														width: "100%",
+														...addPropertyOverrides(
+															{
+																TD3BSWKBy: {
+																	aLzckSHOC: resolvedLinks1[2],
+																	style: {
+																		height: "100%",
+																		width: "100%",
+																	},
+																},
+																VTuwB9HI5: {
+																	aLzckSHOC: resolvedLinks1[1],
+																	style: {
+																		height: "100%",
+																		width: "100%",
+																	},
+																},
+															},
+															baseVariant,
+															gestureVariant,
+														),
+													})}
+												</SmartComponentScopedContainer>
+											</ComponentViewportProvider>
+										)}
+									</ResolveLinks>
+								</motion.div>
+								{isDisplayed1() && (
+									<ComponentViewportProvider
+										height={40}
+										y={
+											(componentViewport?.y || 0) +
+											(0 + ((componentViewport?.height || 72) - 0 - 72) / 2) +
+											16 +
+											0
+										}
+									>
+										<SmartComponentScopedContainer
+											className={"framer-motdmn-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"Pdaml9hoK-container"}
+											nodeId={"Pdaml9hoK"}
+											rendersWithMotion={true}
+											scopeId={"jBzjFrEWY"}
+										>
+											<NavigationSingleToggleWithSingleTogglemotdmnWithMappedReactProps19vtxsf
+												height={"100%"}
+												id={"Pdaml9hoK"}
+												layoutId={"Pdaml9hoK"}
+												Tib6Q7ZnQ={
+													"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
+												}
+												width={"100%"}
+											/>
+										</SmartComponentScopedContainer>
+									</ComponentViewportProvider>
+								)}
+							</motion.div>
+						</motion.div>
+					</motion.nav>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -1543,13 +1327,11 @@ stdin_default4.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default4}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default4}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

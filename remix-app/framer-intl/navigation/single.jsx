@@ -188,83 +188,71 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-ppjx8h",
+							className,
+							classNames,
+						)}
+						data-framer-name={"Dark"}
+						layoutDependency={layoutDependency}
+						layoutId={"fEK3tJNwU"}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
-								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-ppjx8h",
-										className,
-										classNames,
-									)}
-									data-framer-name={"Dark"}
-									layoutDependency={layoutDependency}
-									layoutId={"fEK3tJNwU"}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
+								DZYGJlw5t: {
+									"data-framer-name": "Light",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<ComponentViewportProvider>
+							<motion.div
+								className={"framer-14wnnsq-container"}
+								layoutDependency={layoutDependency}
+								layoutId={"tuCGdCCPL-container"}
+							>
+								<Icon
+									color={AeO5PLd9q}
+									height={"100%"}
+									iconSearch={"House"}
+									iconSelection={pdO6Nm4lI}
+									id={"tuCGdCCPL"}
+									layoutId={"tuCGdCCPL"}
+									mirrored={false}
+									selectByList={true}
 									style={{
-										...style,
+										height: "100%",
+										width: "100%",
 									}}
+									weight={njtQOvFbC}
+									width={"100%"}
 									{...addPropertyOverrides(
 										{
 											DZYGJlw5t: {
-												"data-framer-name": "Light",
+												iconSelection: fle84VlOx,
 											},
 										},
 										baseVariant,
 										gestureVariant,
 									)}
-								>
-									{
-										<ComponentViewportProvider>
-											{
-												<motion.div
-													className={"framer-14wnnsq-container"}
-													layoutDependency={layoutDependency}
-													layoutId={"tuCGdCCPL-container"}
-												>
-													{
-														<Icon
-															color={AeO5PLd9q}
-															height={"100%"}
-															iconSearch={"House"}
-															iconSelection={pdO6Nm4lI}
-															id={"tuCGdCCPL"}
-															layoutId={"tuCGdCCPL"}
-															mirrored={false}
-															selectByList={true}
-															style={{
-																height: "100%",
-																width: "100%",
-															}}
-															weight={njtQOvFbC}
-															width={"100%"}
-															{...addPropertyOverrides(
-																{
-																	DZYGJlw5t: {
-																		iconSelection: fle84VlOx,
-																	},
-																},
-																baseVariant,
-																gestureVariant,
-															)}
-														/>
-													}
-												</motion.div>
-											}
-										</ComponentViewportProvider>
-									}
-								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+								/>
+							</motion.div>
+						</ComponentViewportProvider>
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -392,13 +380,11 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

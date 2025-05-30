@@ -152,141 +152,115 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
-								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-axqbx",
-										className3,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Variant 1"}
-									layoutDependency={layoutDependency}
-									layoutId={"AgOviMGtv"}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-axqbx",
+							className3,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Variant 1"}
+						layoutDependency={layoutDependency}
+						layoutId={"AgOviMGtv"}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							"--border-bottom-width": "1px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "1px",
+							"--border-right-width": "1px",
+							"--border-style": "dotted",
+							"--border-top-width": "1px",
+							...style,
+						}}
+					>
+						<ComponentViewportProvider>
+							<motion.div
+								className={"framer-1njo5kl-container"}
+								layoutDependency={layoutDependency}
+								layoutId={"xGKE7Iil_-container"}
+							>
+								<SVGDisplay
+									color={
+										"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+									}
+									height={"100%"}
+									id={"xGKE7Iil_"}
+									layoutId={"xGKE7Iil_"}
+									strokeWidth={0}
 									style={{
-										"--border-bottom-width": "1px",
-										"--border-color":
-											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-										"--border-left-width": "1px",
-										"--border-right-width": "1px",
-										"--border-style": "dotted",
-										"--border-top-width": "1px",
-										...style,
+										height: "100%",
+										width: "100%",
 									}}
-								>
-									{
-										<ComponentViewportProvider>
-											{
-												<motion.div
-													className={"framer-1njo5kl-container"}
-													layoutDependency={layoutDependency}
-													layoutId={"xGKE7Iil_-container"}
-												>
-													{
-														<SVGDisplay
-															color={
-																"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-															}
-															height={"100%"}
-															id={"xGKE7Iil_"}
-															layoutId={"xGKE7Iil_"}
-															strokeWidth={0}
-															style={{
-																height: "100%",
-																width: "100%",
-															}}
-															svgCode={ICnfhZzNy}
-															width={"100%"}
-														/>
-													}
-												</motion.div>
-											}
-										</ComponentViewportProvider>
-									}
-									{
-										<motion.div
-											className={"framer-1jmkwl0"}
-											layoutDependency={layoutDependency}
-											layoutId={"M_YGXwOmJ"}
-										>
-											{
-												<RichText
-													__fromCanvasComponent={true}
-													className={"framer-1vzd6eh"}
-													fonts={["Inter"]}
-													layoutDependency={layoutDependency}
-													layoutId={"sHsxs6nj6"}
-													style={{
-														"--framer-link-text-color": "rgb(0, 153, 255)",
-														"--framer-link-text-decoration": "underline",
-													}}
-													text={PW_L6OdbJ}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-												>
-													{
-														<React.Fragment>
-															{
-																<motion.h6
-																	className={"framer-styles-preset-g81avr"}
-																	data-styles-preset={"V_9DXRxzH"}
-																	style={{
-																		"--framer-text-alignment": "left",
-																	}}
-																>
-																	{"Always Accessible"}
-																</motion.h6>
-															}
-														</React.Fragment>
-													}
-												</RichText>
-											}
-											{
-												<RichText
-													__fromCanvasComponent={true}
-													className={"framer-g24c0u"}
-													fonts={["Inter"]}
-													layoutDependency={layoutDependency}
-													layoutId={"BGtoogdpN"}
-													style={{
-														"--framer-link-text-color": "rgb(0, 153, 255)",
-														"--framer-link-text-decoration": "underline",
-													}}
-													text={bnxxWw7CV}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-												>
-													{
-														<React.Fragment>
-															{
-																<motion.p
-																	className={"framer-styles-preset-1k8riq"}
-																	data-styles-preset={"n4VV4jzz6"}
-																>
-																	{"Edit and collaborate from anywhere"}
-																</motion.p>
-															}
-														</React.Fragment>
-													}
-												</RichText>
-											}
-										</motion.div>
-									}
-								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+									svgCode={ICnfhZzNy}
+									width={"100%"}
+								/>
+							</motion.div>
+						</ComponentViewportProvider>
+						<motion.div
+							className={"framer-1jmkwl0"}
+							layoutDependency={layoutDependency}
+							layoutId={"M_YGXwOmJ"}
+						>
+							<RichText
+								__fromCanvasComponent={true}
+								className={"framer-1vzd6eh"}
+								fonts={["Inter"]}
+								layoutDependency={layoutDependency}
+								layoutId={"sHsxs6nj6"}
+								style={{
+									"--framer-link-text-color": "rgb(0, 153, 255)",
+									"--framer-link-text-decoration": "underline",
+								}}
+								text={PW_L6OdbJ}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+							>
+								<React.Fragment>
+									<motion.h6
+										className={"framer-styles-preset-g81avr"}
+										data-styles-preset={"V_9DXRxzH"}
+										style={{
+											"--framer-text-alignment": "left",
+										}}
+									>
+										{"Always Accessible"}
+									</motion.h6>
+								</React.Fragment>
+							</RichText>
+							<RichText
+								__fromCanvasComponent={true}
+								className={"framer-g24c0u"}
+								fonts={["Inter"]}
+								layoutDependency={layoutDependency}
+								layoutId={"BGtoogdpN"}
+								style={{
+									"--framer-link-text-color": "rgb(0, 153, 255)",
+									"--framer-link-text-decoration": "underline",
+								}}
+								text={bnxxWw7CV}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+							>
+								<React.Fragment>
+									<motion.p
+										className={"framer-styles-preset-1k8riq"}
+										data-styles-preset={"n4VV4jzz6"}
+									>
+										{"Edit and collaborate from anywhere"}
+									</motion.p>
+								</React.Fragment>
+							</RichText>
+						</motion.div>
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -567,710 +541,615 @@ var Component2 = /* @__PURE__ */ React2.forwardRef(function (props, ref) {
 		<LayoutGroup2
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants2 animate={variants} initial={false}>
-					{
-						<Transition2 value={transition12}>
+			<Variants2 animate={variants} initial={false}>
+				<Transition2 value={transition12}>
+					<motion2.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx2(
+							serializationHash2,
+							...sharedStyleClassNames,
+							"framer-1ay4y5j",
+							className3,
+							classNames,
+						)}
+						data-framer-name={"First use-case"}
+						layoutDependency={layoutDependency}
+						layoutId={"kJJP_Ak25"}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
+								CVMjChs6O: {
+									"data-framer-name": "Third use-case",
+								},
+								zOqTYMqZm: {
+									"data-framer-name": "Second use-case",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion2.div
+							className={"framer-100hosk"}
+							data-framer-name={"Section buttons"}
+							layoutDependency={layoutDependency}
+							layoutId={"JvOvh9DsJ"}
+						>
+							<ComponentViewportProvider2
+								height={48}
+								width={`max(min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"}, 600px), 200px)`}
+							>
 								<motion2.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx2(
-										serializationHash2,
-										...sharedStyleClassNames,
-										"framer-1ay4y5j",
-										className3,
-										classNames,
-									)}
-									data-framer-name={"First use-case"}
+									className={"framer-8gu7r-container"}
 									layoutDependency={layoutDependency}
-									layoutId={"kJJP_Ak25"}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
-									style={{
-										...style,
-									}}
-									{...addPropertyOverrides(
-										{
-											CVMjChs6O: {
-												"data-framer-name": "Third use-case",
-											},
-											zOqTYMqZm: {
-												"data-framer-name": "Second use-case",
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
+									layoutId={"DFO40IpUm-container"}
 								>
-									{
-										<motion2.div
-											className={"framer-100hosk"}
-											data-framer-name={"Section buttons"}
-											layoutDependency={layoutDependency}
-											layoutId={"JvOvh9DsJ"}
-										>
+									{_jsx2(stdin_default, {
+										height: "100%",
+										id: "DFO40IpUm",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M19.5 9.75a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l4.72-4.72a.75.75 0 1 1 1.06 1.06L16.06 9h2.69a.75.75 0 0 1 .75.75Z" clip-rule="evenodd" />   <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" /> </svg>',
+										layoutId: "DFO40IpUm",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "fmCTFeuFp",
+										Vb218_9bK: "Docs website",
+										Wd_uH5B3z: Wd_uH5B3z1t1fh0a,
+										width: "100%",
+										...addPropertyOverrides(
 											{
-												<ComponentViewportProvider2
-													height={48}
-													width={`max(min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"}, 600px), 200px)`}
-												>
-													{
-														<motion2.div
-															className={"framer-8gu7r-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"DFO40IpUm-container"}
-														>
-															{_jsx2(stdin_default, {
-																height: "100%",
-																id: "DFO40IpUm",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M19.5 9.75a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 1 1.5 0v2.69l4.72-4.72a.75.75 0 1 1 1.06 1.06L16.06 9h2.69a.75.75 0 0 1 .75.75Z" clip-rule="evenodd" />   <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" /> </svg>',
-																layoutId: "DFO40IpUm",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "fmCTFeuFp",
-																Vb218_9bK: "Docs website",
-																Wd_uH5B3z: Wd_uH5B3z1t1fh0a,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		CVMjChs6O: {
-																			variant: "IIv28kAHe",
-																		},
-																		zOqTYMqZm: {
-																			variant: "IIv28kAHe",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2
-													height={48}
-													width={`max(min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"}, 600px), 200px)`}
-												>
-													{
-														<motion2.div
-															className={"framer-11ho8on-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"VcnBcynM1-container"}
-														>
-															{_jsx2(stdin_default, {
-																height: "100%",
-																id: "VcnBcynM1",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-4.72 4.72a.75.75 0 1 1-1.06-1.06l4.72-4.72h-2.69a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />   <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" /> </svg>',
-																layoutId: "VcnBcynM1",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "IIv28kAHe",
-																Vb218_9bK: "Blog website",
-																Wd_uH5B3z: Wd_uH5B3z3vdiu3,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		zOqTYMqZm: {
-																			variant: "fmCTFeuFp",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2
-													height={48}
-													width={`max(min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"}, 600px), 200px)`}
-												>
-													{
-														<motion2.div
-															className={"framer-g8h9vo-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"FKpwSs4sh-container"}
-														>
-															{_jsx2(stdin_default, {
-																height: "100%",
-																id: "FKpwSs4sh",
-																kg1wL8gqw:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z" />   <path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z" /> </svg>',
-																layoutId: "FKpwSs4sh",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																variant: "IIv28kAHe",
-																Vb218_9bK: "Changelog website",
-																Wd_uH5B3z: Wd_uH5B3zukvn5t,
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		CVMjChs6O: {
-																			variant: "fmCTFeuFp",
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-										</motion2.div>
-									}
-									{isDisplayed() && (
-										<MotionDivWithFXWithOptimizedAppearEffect
-											__perspectiveFX={false}
-											__smartComponentFX={true}
-											__targetOpacity={1}
-											animate={animation}
-											className={"framer-7c7ts0"}
-											data-framer-appear-id={"7c7ts0"}
-											data-framer-name={"Inbound calls cards"}
-											initial={animation1}
-											layoutDependency={layoutDependency}
-											layoutId={"oFHBKtkWw"}
-											optimized={true}
-										>
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-66o36i-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"JGso2XeyZ-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Keep all your product public docs in one place",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd" /> </svg>',
-																id: "JGso2XeyZ",
-																layoutId: "JGso2XeyZ",
-																PW_L6OdbJ: "Knowledge base",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-tl0e1n-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"htGGwWkDg-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Create support articles and tutorials",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025.75.75 0 0 1 .313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 0 1 1.248.313 5.25 5.25 0 0 1-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 1 1 2.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0 1 12 6.75ZM4.117 19.125a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" />   <path d="m10.076 8.64-2.201-2.2V4.874a.75.75 0 0 0-.364-.643l-3.75-2.25a.75.75 0 0 0-.916.113l-.75.75a.75.75 0 0 0-.113.916l2.25 3.75a.75.75 0 0 0 .643.364h1.564l2.062 2.062 1.575-1.297Z" />   <path fill-rule="evenodd" d="m12.556 17.329 4.183 4.182a3.375 3.375 0 0 0 4.773-4.773l-3.306-3.305a6.803 6.803 0 0 1-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 0 0-.167.063l-3.086 3.748Zm3.414-1.36a.75.75 0 0 1 1.06 0l1.875 1.876a.75.75 0 1 1-1.06 1.06L15.97 17.03a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /> </svg>',
-																id: "htGGwWkDg",
-																layoutId: "htGGwWkDg",
-																PW_L6OdbJ: "Help Desk",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-lzqbhm-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"ZgxIg7kpv-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Track release notes, new features and fixes",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" /> </svg>',
-																id: "ZgxIg7kpv",
-																layoutId: "ZgxIg7kpv",
-																PW_L6OdbJ: "Changelog",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1trd2x5-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"DwBYuwyuV-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Show your company's future roadmap and let users vote on features",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" /> </svg>',
-																id: "DwBYuwyuV",
-																layoutId: "DwBYuwyuV",
-																PW_L6OdbJ: "Roadmap",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1lxrwif-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"zm6xFh2XE-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Share stories, articles and announcements",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.718Z" clip-rule="evenodd" /> </svg>',
-																id: "zm6xFh2XE",
-																layoutId: "zm6xFh2XE",
-																PW_L6OdbJ: "Blog",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-cz3yw6-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"KbgqH58sa-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Write content in multiple languages in different Notion pages",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.756a49.106 49.106 0 0 1 9.152 1 .75.75 0 0 1-.152 1.485h-1.918l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 18.75 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84l2.474-10.124H12.75v13.28c1.293.076 2.534.343 3.697.776a.75.75 0 0 1-.262 1.453h-8.37a.75.75 0 0 1-.262-1.453c1.162-.433 2.404-.7 3.697-.775V6.24H6.332l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 5.25 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84L4.168 6.241H2.25a.75.75 0 0 1-.152-1.485 49.105 49.105 0 0 1 9.152-1V3a.75.75 0 0 1 .75-.75Zm4.878 13.543 1.872-7.662 1.872 7.662h-3.744Zm-9.756 0L5.25 8.131l-1.872 7.662h3.744Z" clip-rule="evenodd" /> </svg>',
-																id: "KbgqH58sa",
-																layoutId: "KbgqH58sa",
-																PW_L6OdbJ: "Multi-language",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-										</MotionDivWithFXWithOptimizedAppearEffect>
-									)}
-									{isDisplayed1() && (
-										<MotionDivWithFXWithOptimizedAppearEffect
-											__perspectiveFX={false}
-											__smartComponentFX={true}
-											__targetOpacity={1}
-											animate={animation}
-											className={"framer-1o06x0v"}
-											data-framer-appear-id={"1o06x0v"}
-											data-framer-name={"Outbound calls cards"}
-											initial={animation1}
-											layoutDependency={layoutDependency}
-											layoutId={"xiR5uhzL_"}
-											optimized={true}
-										>
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-f3o6k3-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"KcXpkiC8P-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Gather detailed customer feedback through automated voice surveys.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /> </svg>',
-																id: "KcXpkiC8P",
-																layoutId: "KcXpkiC8P",
-																PW_L6OdbJ: "Feedback Collection",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-ud1bc4-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"mc20hkZ1L-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Automatically screen and qualify potential leads based on predefined criteria.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M3.792 2.938A49.069 49.069 0 0 1 12 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 0 1 1.541 1.836v1.044a3 3 0 0 1-.879 2.121l-6.182 6.182a1.5 1.5 0 0 0-.439 1.061v2.927a3 3 0 0 1-1.658 2.684l-1.757.878A.75.75 0 0 1 9.75 21v-5.818a1.5 1.5 0 0 0-.44-1.06L3.13 7.938a3 3 0 0 1-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836Z" clip-rule="evenodd" /> </svg>',
-																id: "mc20hkZ1L",
-																layoutId: "mc20hkZ1L",
-																PW_L6OdbJ: "Lead Qualification",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-i233n3-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"mExrbf4fN-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Send automated voice reminders for upcoming payments and due dates.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />   <path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" clip-rule="evenodd" /> </svg>',
-																id: "mExrbf4fN",
-																layoutId: "mExrbf4fN",
-																PW_L6OdbJ: "Payment Reminders",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-18ldl11-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"STDmsO5Ol-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Provide real-time updates on shipment statuses through voice notifications.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 1 1 6 0h3a.75.75 0 0 0 .75-.75V15Z" />   <path d="M8.25 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0ZM15.75 6.75a.75.75 0 0 0-.75.75v11.25c0 .087.015.17.042.248a3 3 0 0 1 5.958.464c.853-.175 1.522-.935 1.464-1.883a18.659 18.659 0 0 0-3.732-10.104 1.837 1.837 0 0 0-1.47-.725H15.75Z" />   <path d="M19.5 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" /> </svg>',
-																id: "STDmsO5Ol",
-																layoutId: "STDmsO5Ol",
-																PW_L6OdbJ: "Shipment Tracking",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1gmsw4r-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"fsSaIXjnX-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Conduct regular health check-ins with patients via voice calls.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" /> </svg>',
-																id: "fsSaIXjnX",
-																layoutId: "fsSaIXjnX",
-																PW_L6OdbJ: "Patient Monitoring",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-f4v7w8-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"dvqlyD6OH-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Inform customers about the status and progress of their food delivery orders.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.756a49.106 49.106 0 0 1 9.152 1 .75.75 0 0 1-.152 1.485h-1.918l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 18.75 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84l2.474-10.124H12.75v13.28c1.293.076 2.534.343 3.697.776a.75.75 0 0 1-.262 1.453h-8.37a.75.75 0 0 1-.262-1.453c1.162-.433 2.404-.7 3.697-.775V6.24H6.332l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 5.25 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84L4.168 6.241H2.25a.75.75 0 0 1-.152-1.485 49.105 49.105 0 0 1 9.152-1V3a.75.75 0 0 1 .75-.75Zm4.878 13.543 1.872-7.662 1.872 7.662h-3.744Zm-9.756 0L5.25 8.131l-1.872 7.662h3.744Z" clip-rule="evenodd" /> </svg>',
-																id: "dvqlyD6OH",
-																layoutId: "dvqlyD6OH",
-																PW_L6OdbJ: "Order Status Updates",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-										</MotionDivWithFXWithOptimizedAppearEffect>
-									)}
-									{isDisplayed2() && (
-										<MotionDivWithFXWithOptimizedAppearEffect
-											__perspectiveFX={false}
-											__smartComponentFX={true}
-											__targetOpacity={1}
-											animate={animation}
-											className={"framer-1l9w9tf"}
-											data-framer-appear-id={"1l9w9tf"}
-											data-framer-name={"Voice products cards"}
-											initial={animation1}
-											layoutDependency={layoutDependency}
-											layoutId={"BenCRUaBw"}
-											optimized={true}
-										>
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1y7jyci-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"vdhONJU8I-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Train your new employees with realistic sales scenarios.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" /> </svg>',
-																id: "vdhONJU8I",
-																layoutId: "vdhONJU8I",
-																PW_L6OdbJ: "Sales Roleplay",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-2r0lex-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"BAjrlUTeB-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Train your managers in effective communication.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z" />   <path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z" /> </svg>',
-																id: "BAjrlUTeB",
-																layoutId: "BAjrlUTeB",
-																PW_L6OdbJ: "Conversations Roleplay",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1plvme5-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"yrX49EWAW-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Conversational workplace AI agents for routine tasks.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z" clip-rule="evenodd" /> </svg>',
-																id: "yrX49EWAW",
-																layoutId: "yrX49EWAW",
-																PW_L6OdbJ: "Digital Employees",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1cedyz6-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"zdswZRGEV-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Train for job interviews with simulated scenarios.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.54 15h6.42l.5 1.5H8.29l.5-1.5Zm8.085-8.995a.75.75 0 1 0-.75-1.299 12.81 12.81 0 0 0-3.558 3.05L11.03 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l2.47-2.47 1.617 1.618a.75.75 0 0 0 1.146-.102 11.312 11.312 0 0 1 3.612-3.321Z" clip-rule="evenodd" /> </svg>',
-																id: "zdswZRGEV",
-																layoutId: "zdswZRGEV",
-																PW_L6OdbJ: "Mock Interviews",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-1cdqfvu-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"HYYP0VlUd-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Supportive conversations and inquiry for mental health.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M8.161 2.58a1.875 1.875 0 0 1 1.678 0l4.993 2.498c.106.052.23.052.336 0l3.869-1.935A1.875 1.875 0 0 1 21.75 4.82v12.485c0 .71-.401 1.36-1.037 1.677l-4.875 2.437a1.875 1.875 0 0 1-1.676 0l-4.994-2.497a.375.375 0 0 0-.336 0l-3.868 1.935A1.875 1.875 0 0 1 2.25 19.18V6.695c0-.71.401-1.36 1.036-1.677l4.875-2.437ZM9 6a.75.75 0 0 1 .75.75V15a.75.75 0 0 1-1.5 0V6.75A.75.75 0 0 1 9 6Zm6.75 3a.75.75 0 0 0-1.5 0v8.25a.75.75 0 0 0 1.5 0V9Z" clip-rule="evenodd" /> </svg>',
-																id: "HYYP0VlUd",
-																layoutId: "HYYP0VlUd",
-																PW_L6OdbJ: "AI Therapy",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-											{
-												<ComponentViewportProvider2>
-													{
-														<motion2.div
-															className={"framer-me11y2-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"M1iMztcW9-container"}
-														>
-															{_jsx2(stdin_default2, {
-																bnxxWw7CV:
-																	"Interactive emotional support through AI companions.",
-																height: "100%",
-																ICnfhZzNy:
-																	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M16.5 7.5h-9v9h9v-9Z" />   <path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd" /> </svg>',
-																id: "M1iMztcW9",
-																layoutId: "M1iMztcW9",
-																PW_L6OdbJ: "AI Companions",
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-															})}
-														</motion2.div>
-													}
-												</ComponentViewportProvider2>
-											}
-										</MotionDivWithFXWithOptimizedAppearEffect>
-									)}
+												CVMjChs6O: {
+													variant: "IIv28kAHe",
+												},
+												zOqTYMqZm: {
+													variant: "IIv28kAHe",
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
 								</motion2.div>
-							}
-						</Transition2>
-					}
-				</Variants2>
-			}
+							</ComponentViewportProvider2>
+							<ComponentViewportProvider2
+								height={48}
+								width={`max(min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"}, 600px), 200px)`}
+							>
+								<motion2.div
+									className={"framer-11ho8on-container"}
+									layoutDependency={layoutDependency}
+									layoutId={"VcnBcynM1-container"}
+								>
+									{_jsx2(stdin_default, {
+										height: "100%",
+										id: "VcnBcynM1",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M15 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V5.56l-4.72 4.72a.75.75 0 1 1-1.06-1.06l4.72-4.72h-2.69a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />   <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" /> </svg>',
+										layoutId: "VcnBcynM1",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "IIv28kAHe",
+										Vb218_9bK: "Blog website",
+										Wd_uH5B3z: Wd_uH5B3z3vdiu3,
+										width: "100%",
+										...addPropertyOverrides(
+											{
+												zOqTYMqZm: {
+													variant: "fmCTFeuFp",
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
+								</motion2.div>
+							</ComponentViewportProvider2>
+							<ComponentViewportProvider2
+								height={48}
+								width={`max(min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"}, 600px), 200px)`}
+							>
+								<motion2.div
+									className={"framer-g8h9vo-container"}
+									layoutDependency={layoutDependency}
+									layoutId={"FKpwSs4sh-container"}
+								>
+									{_jsx2(stdin_default, {
+										height: "100%",
+										id: "FKpwSs4sh",
+										kg1wL8gqw:
+											'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z" />   <path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z" /> </svg>',
+										layoutId: "FKpwSs4sh",
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										variant: "IIv28kAHe",
+										Vb218_9bK: "Changelog website",
+										Wd_uH5B3z: Wd_uH5B3zukvn5t,
+										width: "100%",
+										...addPropertyOverrides(
+											{
+												CVMjChs6O: {
+													variant: "fmCTFeuFp",
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
+								</motion2.div>
+							</ComponentViewportProvider2>
+						</motion2.div>
+						{isDisplayed() && (
+							<MotionDivWithFXWithOptimizedAppearEffect
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								animate={animation}
+								className={"framer-7c7ts0"}
+								data-framer-appear-id={"7c7ts0"}
+								data-framer-name={"Inbound calls cards"}
+								initial={animation1}
+								layoutDependency={layoutDependency}
+								layoutId={"oFHBKtkWw"}
+								optimized={true}
+							>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-66o36i-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"JGso2XeyZ-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Keep all your product public docs in one place",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd" /> </svg>',
+											id: "JGso2XeyZ",
+											layoutId: "JGso2XeyZ",
+											PW_L6OdbJ: "Knowledge base",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-tl0e1n-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"htGGwWkDg-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV: "Create support articles and tutorials",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025.75.75 0 0 1 .313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 0 1 1.248.313 5.25 5.25 0 0 1-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 1 1 2.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0 1 12 6.75ZM4.117 19.125a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" />   <path d="m10.076 8.64-2.201-2.2V4.874a.75.75 0 0 0-.364-.643l-3.75-2.25a.75.75 0 0 0-.916.113l-.75.75a.75.75 0 0 0-.113.916l2.25 3.75a.75.75 0 0 0 .643.364h1.564l2.062 2.062 1.575-1.297Z" />   <path fill-rule="evenodd" d="m12.556 17.329 4.183 4.182a3.375 3.375 0 0 0 4.773-4.773l-3.306-3.305a6.803 6.803 0 0 1-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 0 0-.167.063l-3.086 3.748Zm3.414-1.36a.75.75 0 0 1 1.06 0l1.875 1.876a.75.75 0 1 1-1.06 1.06L15.97 17.03a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /> </svg>',
+											id: "htGGwWkDg",
+											layoutId: "htGGwWkDg",
+											PW_L6OdbJ: "Help Desk",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-lzqbhm-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"ZgxIg7kpv-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV: "Track release notes, new features and fixes",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" /> </svg>',
+											id: "ZgxIg7kpv",
+											layoutId: "ZgxIg7kpv",
+											PW_L6OdbJ: "Changelog",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1trd2x5-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"DwBYuwyuV-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Show your company's future roadmap and let users vote on features",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" /> </svg>',
+											id: "DwBYuwyuV",
+											layoutId: "DwBYuwyuV",
+											PW_L6OdbJ: "Roadmap",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1lxrwif-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"zm6xFh2XE-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV: "Share stories, articles and announcements",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.718Z" clip-rule="evenodd" /> </svg>',
+											id: "zm6xFh2XE",
+											layoutId: "zm6xFh2XE",
+											PW_L6OdbJ: "Blog",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-cz3yw6-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"KbgqH58sa-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Write content in multiple languages in different Notion pages",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.756a49.106 49.106 0 0 1 9.152 1 .75.75 0 0 1-.152 1.485h-1.918l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 18.75 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84l2.474-10.124H12.75v13.28c1.293.076 2.534.343 3.697.776a.75.75 0 0 1-.262 1.453h-8.37a.75.75 0 0 1-.262-1.453c1.162-.433 2.404-.7 3.697-.775V6.24H6.332l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 5.25 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84L4.168 6.241H2.25a.75.75 0 0 1-.152-1.485 49.105 49.105 0 0 1 9.152-1V3a.75.75 0 0 1 .75-.75Zm4.878 13.543 1.872-7.662 1.872 7.662h-3.744Zm-9.756 0L5.25 8.131l-1.872 7.662h3.744Z" clip-rule="evenodd" /> </svg>',
+											id: "KbgqH58sa",
+											layoutId: "KbgqH58sa",
+											PW_L6OdbJ: "Multi-language",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+							</MotionDivWithFXWithOptimizedAppearEffect>
+						)}
+						{isDisplayed1() && (
+							<MotionDivWithFXWithOptimizedAppearEffect
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								animate={animation}
+								className={"framer-1o06x0v"}
+								data-framer-appear-id={"1o06x0v"}
+								data-framer-name={"Outbound calls cards"}
+								initial={animation1}
+								layoutDependency={layoutDependency}
+								layoutId={"xiR5uhzL_"}
+								optimized={true}
+							>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-f3o6k3-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"KcXpkiC8P-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Gather detailed customer feedback through automated voice surveys.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /> </svg>',
+											id: "KcXpkiC8P",
+											layoutId: "KcXpkiC8P",
+											PW_L6OdbJ: "Feedback Collection",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-ud1bc4-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"mc20hkZ1L-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Automatically screen and qualify potential leads based on predefined criteria.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M3.792 2.938A49.069 49.069 0 0 1 12 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 0 1 1.541 1.836v1.044a3 3 0 0 1-.879 2.121l-6.182 6.182a1.5 1.5 0 0 0-.439 1.061v2.927a3 3 0 0 1-1.658 2.684l-1.757.878A.75.75 0 0 1 9.75 21v-5.818a1.5 1.5 0 0 0-.44-1.06L3.13 7.938a3 3 0 0 1-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836Z" clip-rule="evenodd" /> </svg>',
+											id: "mc20hkZ1L",
+											layoutId: "mc20hkZ1L",
+											PW_L6OdbJ: "Lead Qualification",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-i233n3-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"mExrbf4fN-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Send automated voice reminders for upcoming payments and due dates.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />   <path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" clip-rule="evenodd" /> </svg>',
+											id: "mExrbf4fN",
+											layoutId: "mExrbf4fN",
+											PW_L6OdbJ: "Payment Reminders",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-18ldl11-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"STDmsO5Ol-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Provide real-time updates on shipment statuses through voice notifications.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 1 1 6 0h3a.75.75 0 0 0 .75-.75V15Z" />   <path d="M8.25 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0ZM15.75 6.75a.75.75 0 0 0-.75.75v11.25c0 .087.015.17.042.248a3 3 0 0 1 5.958.464c.853-.175 1.522-.935 1.464-1.883a18.659 18.659 0 0 0-3.732-10.104 1.837 1.837 0 0 0-1.47-.725H15.75Z" />   <path d="M19.5 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" /> </svg>',
+											id: "STDmsO5Ol",
+											layoutId: "STDmsO5Ol",
+											PW_L6OdbJ: "Shipment Tracking",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1gmsw4r-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"fsSaIXjnX-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Conduct regular health check-ins with patients via voice calls.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" /> </svg>',
+											id: "fsSaIXjnX",
+											layoutId: "fsSaIXjnX",
+											PW_L6OdbJ: "Patient Monitoring",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-f4v7w8-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"dvqlyD6OH-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Inform customers about the status and progress of their food delivery orders.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.756a49.106 49.106 0 0 1 9.152 1 .75.75 0 0 1-.152 1.485h-1.918l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 18.75 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84l2.474-10.124H12.75v13.28c1.293.076 2.534.343 3.697.776a.75.75 0 0 1-.262 1.453h-8.37a.75.75 0 0 1-.262-1.453c1.162-.433 2.404-.7 3.697-.775V6.24H6.332l2.474 10.124a.75.75 0 0 1-.375.84A6.723 6.723 0 0 1 5.25 18a6.723 6.723 0 0 1-3.181-.795.75.75 0 0 1-.375-.84L4.168 6.241H2.25a.75.75 0 0 1-.152-1.485 49.105 49.105 0 0 1 9.152-1V3a.75.75 0 0 1 .75-.75Zm4.878 13.543 1.872-7.662 1.872 7.662h-3.744Zm-9.756 0L5.25 8.131l-1.872 7.662h3.744Z" clip-rule="evenodd" /> </svg>',
+											id: "dvqlyD6OH",
+											layoutId: "dvqlyD6OH",
+											PW_L6OdbJ: "Order Status Updates",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+							</MotionDivWithFXWithOptimizedAppearEffect>
+						)}
+						{isDisplayed2() && (
+							<MotionDivWithFXWithOptimizedAppearEffect
+								__perspectiveFX={false}
+								__smartComponentFX={true}
+								__targetOpacity={1}
+								animate={animation}
+								className={"framer-1l9w9tf"}
+								data-framer-appear-id={"1l9w9tf"}
+								data-framer-name={"Voice products cards"}
+								initial={animation1}
+								layoutDependency={layoutDependency}
+								layoutId={"BenCRUaBw"}
+								optimized={true}
+							>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1y7jyci-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"vdhONJU8I-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Train your new employees with realistic sales scenarios.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" /> </svg>',
+											id: "vdhONJU8I",
+											layoutId: "vdhONJU8I",
+											PW_L6OdbJ: "Sales Roleplay",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-2r0lex-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"BAjrlUTeB-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Train your managers in effective communication.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z" />   <path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z" /> </svg>',
+											id: "BAjrlUTeB",
+											layoutId: "BAjrlUTeB",
+											PW_L6OdbJ: "Conversations Roleplay",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1plvme5-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"yrX49EWAW-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Conversational workplace AI agents for routine tasks.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z" clip-rule="evenodd" /> </svg>',
+											id: "yrX49EWAW",
+											layoutId: "yrX49EWAW",
+											PW_L6OdbJ: "Digital Employees",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1cedyz6-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"zdswZRGEV-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Train for job interviews with simulated scenarios.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.54 15h6.42l.5 1.5H8.29l.5-1.5Zm8.085-8.995a.75.75 0 1 0-.75-1.299 12.81 12.81 0 0 0-3.558 3.05L11.03 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l2.47-2.47 1.617 1.618a.75.75 0 0 0 1.146-.102 11.312 11.312 0 0 1 3.612-3.321Z" clip-rule="evenodd" /> </svg>',
+											id: "zdswZRGEV",
+											layoutId: "zdswZRGEV",
+											PW_L6OdbJ: "Mock Interviews",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-1cdqfvu-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"HYYP0VlUd-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Supportive conversations and inquiry for mental health.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M8.161 2.58a1.875 1.875 0 0 1 1.678 0l4.993 2.498c.106.052.23.052.336 0l3.869-1.935A1.875 1.875 0 0 1 21.75 4.82v12.485c0 .71-.401 1.36-1.037 1.677l-4.875 2.437a1.875 1.875 0 0 1-1.676 0l-4.994-2.497a.375.375 0 0 0-.336 0l-3.868 1.935A1.875 1.875 0 0 1 2.25 19.18V6.695c0-.71.401-1.36 1.036-1.677l4.875-2.437ZM9 6a.75.75 0 0 1 .75.75V15a.75.75 0 0 1-1.5 0V6.75A.75.75 0 0 1 9 6Zm6.75 3a.75.75 0 0 0-1.5 0v8.25a.75.75 0 0 0 1.5 0V9Z" clip-rule="evenodd" /> </svg>',
+											id: "HYYP0VlUd",
+											layoutId: "HYYP0VlUd",
+											PW_L6OdbJ: "AI Therapy",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+								<ComponentViewportProvider2>
+									<motion2.div
+										className={"framer-me11y2-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"M1iMztcW9-container"}
+									>
+										{_jsx2(stdin_default2, {
+											bnxxWw7CV:
+												"Interactive emotional support through AI companions.",
+											height: "100%",
+											ICnfhZzNy:
+												'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M16.5 7.5h-9v9h9v-9Z" />   <path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd" /> </svg>',
+											id: "M1iMztcW9",
+											layoutId: "M1iMztcW9",
+											PW_L6OdbJ: "AI Companions",
+											style: {
+												height: "100%",
+												width: "100%",
+											},
+											width: "100%",
+										})}
+									</motion2.div>
+								</ComponentViewportProvider2>
+							</MotionDivWithFXWithOptimizedAppearEffect>
+						)}
+					</motion2.div>
+				</Transition2>
+			</Variants2>
 		</LayoutGroup2>
 	);
 });
@@ -1371,13 +1250,11 @@ stdin_default3.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default3}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default3}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

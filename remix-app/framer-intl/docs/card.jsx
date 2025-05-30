@@ -153,188 +153,160 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
-								<Link href={fBduhNBs8} openInNewTab={false}>
-									{
-										<motion.a
-											{...restProps}
-											{...gestureHandlers}
-											className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-p085eo", className3, classNames)} framer-z92tw2`}
-											data-border={true}
-											data-framer-name={"Variant 1"}
-											layoutDependency={layoutDependency}
-											layoutId={"KyMhylhxM"}
-											ref={ref ?? ref1}
-											style={{
-												"--border-bottom-width": "1px",
-												"--border-color":
-													"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-												"--border-left-width": "1px",
-												"--border-right-width": "1px",
-												"--border-style": "solid",
-												"--border-top-width": "1px",
-												borderBottomLeftRadius: 6,
-												borderBottomRightRadius: 6,
-												borderTopLeftRadius: 6,
-												borderTopRightRadius: 6,
-												boxShadow: "none",
-												...style,
-											}}
-											variants={{
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<Link href={fBduhNBs8} openInNewTab={false}>
+						<motion.a
+							{...restProps}
+							{...gestureHandlers}
+							className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-p085eo", className3, classNames)} framer-z92tw2`}
+							data-border={true}
+							data-framer-name={"Variant 1"}
+							layoutDependency={layoutDependency}
+							layoutId={"KyMhylhxM"}
+							ref={ref ?? ref1}
+							style={{
+								"--border-bottom-width": "1px",
+								"--border-color":
+									"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+								"--border-left-width": "1px",
+								"--border-right-width": "1px",
+								"--border-style": "solid",
+								"--border-top-width": "1px",
+								borderBottomLeftRadius: 6,
+								borderBottomRightRadius: 6,
+								borderTopLeftRadius: 6,
+								borderTopRightRadius: 6,
+								boxShadow: "none",
+								...style,
+							}}
+							variants={{
+								"BDi7dP4jJ-hover": {
+									"--border-color":
+										"var(--token-4a18edb7-e149-464f-8c02-aa015661ab43, rgb(255, 160, 122))",
+									borderBottomLeftRadius: 0,
+									borderBottomRightRadius: 0,
+									borderTopLeftRadius: 0,
+									borderTopRightRadius: 0,
+								},
+								"KyMhylhxM-hover": {
+									boxShadow: "0px 4px 12px 0px rgba(0, 0, 1, 0.06)",
+								},
+								BDi7dP4jJ: {
+									"--border-style": "dotted",
+									borderBottomLeftRadius: 0,
+									borderBottomRightRadius: 0,
+									borderTopLeftRadius: 0,
+									borderTopRightRadius: 0,
+								},
+							}}
+							{...addPropertyOverrides(
+								{
+									"BDi7dP4jJ-hover": {
+										"data-framer-name": void 0,
+									},
+									"KyMhylhxM-hover": {
+										"data-framer-name": void 0,
+									},
+									BDi7dP4jJ: {
+										"data-framer-name": "Variant 2",
+									},
+								},
+								baseVariant,
+								gestureVariant,
+							)}
+						>
+							<ComponentViewportProvider>
+								<motion.div
+									className={"framer-52jqh7-container"}
+									layoutDependency={layoutDependency}
+									layoutId={"E0l9AYUaG-container"}
+								>
+									<SVGDisplay
+										color={
+											"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
+										}
+										height={"100%"}
+										id={"E0l9AYUaG"}
+										layoutId={"E0l9AYUaG"}
+										strokeWidth={0}
+										style={{
+											height: "100%",
+											width: "100%",
+										}}
+										svgCode={ZBnLvuwfQ}
+										width={"100%"}
+										{...addPropertyOverrides(
+											{
 												"BDi7dP4jJ-hover": {
-													"--border-color":
-														"var(--token-4a18edb7-e149-464f-8c02-aa015661ab43, rgb(255, 160, 122))",
-													borderBottomLeftRadius: 0,
-													borderBottomRightRadius: 0,
-													borderTopLeftRadius: 0,
-													borderTopRightRadius: 0,
+													color:
+														"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
 												},
-												"KyMhylhxM-hover": {
-													boxShadow: "0px 4px 12px 0px rgba(0, 0, 1, 0.06)",
-												},
-												BDi7dP4jJ: {
-													"--border-style": "dotted",
-													borderBottomLeftRadius: 0,
-													borderBottomRightRadius: 0,
-													borderTopLeftRadius: 0,
-													borderTopRightRadius: 0,
-												},
-											}}
-											{...addPropertyOverrides(
-												{
-													"BDi7dP4jJ-hover": {
-														"data-framer-name": void 0,
-													},
-													"KyMhylhxM-hover": {
-														"data-framer-name": void 0,
-													},
-													BDi7dP4jJ: {
-														"data-framer-name": "Variant 2",
-													},
-												},
-												baseVariant,
-												gestureVariant,
-											)}
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									/>
+								</motion.div>
+							</ComponentViewportProvider>
+							<motion.div
+								className={"framer-lqo8y4"}
+								layoutDependency={layoutDependency}
+								layoutId={"EGkXZujRe"}
+							>
+								<RichText
+									__fromCanvasComponent={true}
+									className={"framer-qluz7v"}
+									fonts={["Inter"]}
+									layoutDependency={layoutDependency}
+									layoutId={"s0lG5QL03"}
+									style={{
+										"--framer-link-text-color": "rgb(0, 153, 255)",
+										"--framer-link-text-decoration": "underline",
+									}}
+									text={muSJDuVtN}
+									verticalAlignment={"top"}
+									withExternalLayout={true}
+								>
+									<React.Fragment>
+										<motion.p
+											className={"framer-styles-preset-17qeria"}
+											data-styles-preset={"vSuRg5Prj"}
+										>
+											{"Just beginning?"}
+										</motion.p>
+									</React.Fragment>
+								</RichText>
+								<RichText
+									__fromCanvasComponent={true}
+									className={"framer-fv5aca"}
+									fonts={["Inter"]}
+									layoutDependency={layoutDependency}
+									layoutId={"Lpw6V0XjY"}
+									style={{
+										"--framer-link-text-color": "rgb(0, 153, 255)",
+										"--framer-link-text-decoration": "underline",
+									}}
+									text={xd6IqC5Dy}
+									verticalAlignment={"top"}
+									withExternalLayout={true}
+								>
+									<React.Fragment>
+										<motion.p
+											className={"framer-styles-preset-1k8riq"}
+											data-styles-preset={"n4VV4jzz6"}
 										>
 											{
-												<ComponentViewportProvider>
-													{
-														<motion.div
-															className={"framer-52jqh7-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"E0l9AYUaG-container"}
-														>
-															{
-																<SVGDisplay
-																	color={
-																		"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
-																	}
-																	height={"100%"}
-																	id={"E0l9AYUaG"}
-																	layoutId={"E0l9AYUaG"}
-																	strokeWidth={0}
-																	style={{
-																		height: "100%",
-																		width: "100%",
-																	}}
-																	svgCode={ZBnLvuwfQ}
-																	width={"100%"}
-																	{...addPropertyOverrides(
-																		{
-																			"BDi7dP4jJ-hover": {
-																				color:
-																					"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																/>
-															}
-														</motion.div>
-													}
-												</ComponentViewportProvider>
+												"Start with a step by step walk through getting started guide."
 											}
-											{
-												<motion.div
-													className={"framer-lqo8y4"}
-													layoutDependency={layoutDependency}
-													layoutId={"EGkXZujRe"}
-												>
-													{
-														<RichText
-															__fromCanvasComponent={true}
-															className={"framer-qluz7v"}
-															fonts={["Inter"]}
-															layoutDependency={layoutDependency}
-															layoutId={"s0lG5QL03"}
-															style={{
-																"--framer-link-text-color": "rgb(0, 153, 255)",
-																"--framer-link-text-decoration": "underline",
-															}}
-															text={muSJDuVtN}
-															verticalAlignment={"top"}
-															withExternalLayout={true}
-														>
-															{
-																<React.Fragment>
-																	{
-																		<motion.p
-																			className={"framer-styles-preset-17qeria"}
-																			data-styles-preset={"vSuRg5Prj"}
-																		>
-																			{"Just beginning?"}
-																		</motion.p>
-																	}
-																</React.Fragment>
-															}
-														</RichText>
-													}
-													{
-														<RichText
-															__fromCanvasComponent={true}
-															className={"framer-fv5aca"}
-															fonts={["Inter"]}
-															layoutDependency={layoutDependency}
-															layoutId={"Lpw6V0XjY"}
-															style={{
-																"--framer-link-text-color": "rgb(0, 153, 255)",
-																"--framer-link-text-decoration": "underline",
-															}}
-															text={xd6IqC5Dy}
-															verticalAlignment={"top"}
-															withExternalLayout={true}
-														>
-															{
-																<React.Fragment>
-																	{
-																		<motion.p
-																			className={"framer-styles-preset-1k8riq"}
-																			data-styles-preset={"n4VV4jzz6"}
-																		>
-																			{
-																				"Start with a step by step walk through getting started guide."
-																			}
-																		</motion.p>
-																	}
-																</React.Fragment>
-															}
-														</RichText>
-													}
-												</motion.div>
-											}
-										</motion.a>
-									}
-								</Link>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+										</motion.p>
+									</React.Fragment>
+								</RichText>
+							</motion.div>
+						</motion.a>
+					</Link>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -524,13 +496,11 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

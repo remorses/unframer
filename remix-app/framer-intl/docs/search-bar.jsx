@@ -56,14 +56,12 @@ function SearchIcon(props) {
 				color: props.color,
 			}}
 		>
-			{
-				<path
-					d={
-						"M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z"
-					}
-					fill={"currentColor"}
-				/>
-			}
+			<path
+				d={
+					"M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z"
+				}
+				fill={"currentColor"}
+			/>
 		</svg>
 	);
 }
@@ -74,15 +72,13 @@ function ClearIcon(props) {
 			viewBox={"0 0 256 256"}
 			{...props}
 		>
-			{<rect width={"256"} height={"256"} fill={"none"} />}
-			{
-				<path
-					d={
-						"M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm37.66,130.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
-					}
-					fill={"currentColor"}
-				/>
-			}
+			<rect width={"256"} height={"256"} fill={"none"} />
+			<path
+				d={
+					"M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm37.66,130.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+				}
+				fill={"currentColor"}
+			/>
 		</svg>
 	);
 }
@@ -95,37 +91,33 @@ function SpinnerIcon(props) {
 				...props.style,
 			}}
 		>
-			{
-				<motion.div
-					animate={{
-						rotate: 360,
-					}}
-					transition={{
-						ease: "linear",
-						duration: 1,
-						repeat: Infinity,
-					}}
-					style={{
-						borderRadius: 100,
-						backgroundImage: `conic-gradient(from 270deg, transparent 0%, ${props.color} 100%)`,
-						width: "100%",
-						height: "100%",
-					}}
-				/>
-			}
-			{
-				<div
-					style={{
-						backgroundColor: props.backgroundColor,
-						borderRadius: 100,
-						position: "absolute",
-						top: borderWidth,
-						left: borderWidth,
-						bottom: borderWidth,
-						right: borderWidth,
-					}}
-				/>
-			}
+			<motion.div
+				animate={{
+					rotate: 360,
+				}}
+				transition={{
+					ease: "linear",
+					duration: 1,
+					repeat: Infinity,
+				}}
+				style={{
+					borderRadius: 100,
+					backgroundImage: `conic-gradient(from 270deg, transparent 0%, ${props.color} 100%)`,
+					width: "100%",
+					height: "100%",
+				}}
+			/>
+			<div
+				style={{
+					backgroundColor: props.backgroundColor,
+					borderRadius: 100,
+					position: "absolute",
+					top: borderWidth,
+					left: borderWidth,
+					bottom: borderWidth,
+					right: borderWidth,
+				}}
+			/>
 		</div>
 	);
 }
@@ -967,25 +959,23 @@ function ClearButton({ theme, type, onClick, text }) {
 						: 15,
 			}}
 		>
-			{
-				<button
-					className={"__framer-search-clear-button"}
-					onClick={onClick}
-					style={{
-						fontFamily: "inherit",
-						border: "none",
-						background: "none",
-						cursor: "pointer",
-						display: "flex",
-						textTransform: "uppercase",
-						color: theme.inputIconColor,
-						fontSize: "0.75em",
-						padding: 0,
-					}}
-				>
-					{iconOrText}
-				</button>
-			}
+			<button
+				className={"__framer-search-clear-button"}
+				onClick={onClick}
+				style={{
+					fontFamily: "inherit",
+					border: "none",
+					background: "none",
+					cursor: "pointer",
+					display: "flex",
+					textTransform: "uppercase",
+					color: theme.inputIconColor,
+					fontSize: "0.75em",
+					padding: 0,
+				}}
+			>
+				{iconOrText}
+			</button>
 		</div>
 	);
 }
@@ -1071,53 +1061,49 @@ var Input = /* @__PURE__ */ forwardRef(function Input2(props, ref) {
 			}}
 			onClick={handleInputClick}
 		>
-			{
-				<div
-					style={{
-						flexShrink: 0,
-						display: "flex",
-					}}
-				>
-					{status === "loading" && inputValue ? (
-						<SpinnerIcon
-							color={theme.inputIconColor}
-							backgroundColor={theme.backgroundColor}
-							style={{
-								height: theme && theme.inputIconSize,
-								width: theme && theme.inputIconSize,
-							}}
-						/>
-					) : (
-						searchIcon
-					)}
-				</div>
-			}
-			{
-				<input
-					ref={inputRef}
-					spellCheck={false}
-					autoFocus={autofocus}
-					style={{
-						...inputStyle,
-						WebkitTapHighlightColor: "rgba(0,0,0,0)",
-						color: theme.foregroundColor,
-						lineHeight: "2em",
-						verticalAlign: "baseline",
-						...theme.titleFont,
-						...theme.inputFont,
-						fontSize: theme.inputFontSize,
-						// @ts-ignore
-						"--framer-search-placeholder-color": theme.placeholderColor,
-					}}
-					onFocus={() => {
-						const scrollOffset = document.documentElement.scrollTop;
-						document.documentElement.scrollTop = scrollOffset;
-					}}
-					placeholder={placeholder}
-					value={inputValue}
-					onChange={() => setInputValue(inputRef.current.value)}
-				/>
-			}
+			<div
+				style={{
+					flexShrink: 0,
+					display: "flex",
+				}}
+			>
+				{status === "loading" && inputValue ? (
+					<SpinnerIcon
+						color={theme.inputIconColor}
+						backgroundColor={theme.backgroundColor}
+						style={{
+							height: theme && theme.inputIconSize,
+							width: theme && theme.inputIconSize,
+						}}
+					/>
+				) : (
+					searchIcon
+				)}
+			</div>
+			<input
+				ref={inputRef}
+				spellCheck={false}
+				autoFocus={autofocus}
+				style={{
+					...inputStyle,
+					WebkitTapHighlightColor: "rgba(0,0,0,0)",
+					color: theme.foregroundColor,
+					lineHeight: "2em",
+					verticalAlign: "baseline",
+					...theme.titleFont,
+					...theme.inputFont,
+					fontSize: theme.inputFontSize,
+					// @ts-ignore
+					"--framer-search-placeholder-color": theme.placeholderColor,
+				}}
+				onFocus={() => {
+					const scrollOffset = document.documentElement.scrollTop;
+					document.documentElement.scrollTop = scrollOffset;
+				}}
+				placeholder={placeholder}
+				value={inputValue}
+				onChange={() => setInputValue(inputRef.current.value)}
+			/>
 			{showClearButton && (
 				<ClearButton
 					theme={theme}
@@ -1194,72 +1180,62 @@ var ResultRow = /* @__PURE__ */ React.memo(
 				onMouseDown={focusTrap}
 				onPointerDown={(event) => onPointerDown(event, index)}
 			>
-				{
-					<li
+				<li
+					style={{
+						...resultContainer,
+						...style,
+						paddingTop: isContained ? 12 : 16,
+						paddingBottom: isContained ? 12 : 16,
+						color: theme.foregroundColor,
+						position: "relative",
+						paddingLeft: theme && theme.horizontalSpacing,
+						paddingRight: theme && theme.horizontalSpacing,
+					}}
+				>
+					<div
 						style={{
-							...resultContainer,
-							...style,
-							paddingTop: isContained ? 12 : 16,
-							paddingBottom: isContained ? 12 : 16,
-							color: theme.foregroundColor,
-							position: "relative",
-							paddingLeft: theme && theme.horizontalSpacing,
-							paddingRight: theme && theme.horizontalSpacing,
+							backgroundColor: theme.foregroundColor,
+							position: "absolute",
+							opacity: selected ? 0.06 : 0,
+							borderRadius,
+							left: theme && isContained ? theme.spacing : 0,
+							right: theme && isContained ? theme.spacing : 0,
+							top: 0,
+							bottom: 0,
+						}}
+					/>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							overflow: "hidden",
+							gap: 4,
 						}}
 					>
-						{
-							<div
-								style={{
-									backgroundColor: theme.foregroundColor,
-									position: "absolute",
-									opacity: selected ? 0.06 : 0,
-									borderRadius,
-									left: theme && isContained ? theme.spacing : 0,
-									right: theme && isContained ? theme.spacing : 0,
-									top: 0,
-									bottom: 0,
-								}}
-							/>
-						}
-						{
-							<div
-								style={{
-									display: "flex",
-									flexDirection: "column",
-									overflow: "hidden",
-									gap: 4,
-								}}
-							>
-								{
-									<h3
-										style={{
-											...resultTitle,
-											...theme.titleFont,
-											lineHeight: "1.4em",
-										}}
-									>
-										{title}
-									</h3>
-								}
-								{
-									<p
-										style={{
-											margin: 0,
-											color: theme.subtitleColor,
-											...theme.subtitleFont,
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "ellipsis",
-											lineHeight: "1.4em",
-										}}
-									>
-										{localStorageDebugFlag ? score : ""} {subtitleText}
-									</p>
-								}
-							</div>
-						}
-					</li>
-				}
+						<h3
+							style={{
+								...resultTitle,
+								...theme.titleFont,
+								lineHeight: "1.4em",
+							}}
+						>
+							{title}
+						</h3>
+						<p
+							style={{
+								margin: 0,
+								color: theme.subtitleColor,
+								...theme.subtitleFont,
+								whiteSpace: "nowrap",
+								overflow: "hidden",
+								textOverflow: "ellipsis",
+								lineHeight: "1.4em",
+							}}
+						>
+							{localStorageDebugFlag ? score : ""} {subtitleText}
+						</p>
+					</div>
+				</li>
 			</a>
 		);
 	}),
@@ -1380,30 +1356,26 @@ function LayoutContainer({
 			onClick={(event) => event.stopPropagation()}
 		>
 			{layoutType === "QuickMenu" && <QuickMenuSpacer onClick={onDismiss} />}
-			{
-				<motion2.div
-					initial={containerAnimation}
-					animate={{
-						opacity: 1,
-						scale: 1,
-						x: 0,
-						y: 0,
-						rotate: 0,
-					}}
-					transition={
-						containerAnimation ? containerAnimation.transition : void 0
-					}
-					exit={{
-						opacity: 0,
-						transition: {
-							duration: 0,
-						},
-					}}
-					style={innerStyle}
-				>
-					{children}
-				</motion2.div>
-			}
+			<motion2.div
+				initial={containerAnimation}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					x: 0,
+					y: 0,
+					rotate: 0,
+				}}
+				transition={containerAnimation ? containerAnimation.transition : void 0}
+				exit={{
+					opacity: 0,
+					transition: {
+						duration: 0,
+					},
+				}}
+				style={innerStyle}
+			>
+				{children}
+			</motion2.div>
 		</div>
 	);
 }
@@ -1790,104 +1762,91 @@ function SearchModal(props) {
 			onKeyDown={handleKeyDown}
 			onDismiss={onDismiss}
 		>
-			{
-				<ModalContainer
-					layoutType={layoutType}
+			<ModalContainer
+				layoutType={layoutType}
+				theme={theme}
+				heightIsStatic={modalOptions.heightIsStatic}
+				heightTransition={modalOptions.heightTransition}
+				heightDeps={[results.length, showNoResults]}
+			>
+				<Input
+					autofocus={true}
+					ref={input}
+					onChange={setQuery}
+					value={query}
 					theme={theme}
-					heightIsStatic={modalOptions.heightIsStatic}
-					heightTransition={modalOptions.heightTransition}
-					heightDeps={[results.length, showNoResults]}
-				>
-					{
-						<Input
-							autofocus={true}
-							ref={input}
-							onChange={setQuery}
-							value={query}
-							theme={theme}
-							status={status}
-							iconType={inputOptions.iconOptions.iconType}
-							placeholder={inputOptions.placeholderOptions.placeholderText}
-							clearButtonType={
-								inputOptions ? inputOptions.clearButtonType : void 0
-							}
-							clearButtonText={inputOptions.clearButtonText}
-						/>
-					}
-					{showDivider && (
-						<Divider theme={theme} type={inputOptions.dividerType} />
-					)}
-					{
-						<ScrollView ref={scrollView} theme={theme}>
-							{
-								<ul
-									aria-live={"polite"}
+					status={status}
+					iconType={inputOptions.iconOptions.iconType}
+					placeholder={inputOptions.placeholderOptions.placeholderText}
+					clearButtonType={inputOptions ? inputOptions.clearButtonType : void 0}
+					clearButtonText={inputOptions.clearButtonText}
+				/>
+				{showDivider && (
+					<Divider theme={theme} type={inputOptions.dividerType} />
+				)}
+				<ScrollView ref={scrollView} theme={theme}>
+					<ul
+						aria-live={"polite"}
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							width: `calc(100% - ${theme.scrollBarWidth}px)`,
+							padding: 0,
+							paddingTop: listPaddingTop,
+							paddingBottom: results.length && isItemContained ? spacing : 0,
+							gap: theme.gapBetweenResults,
+							margin: 0,
+						}}
+					>
+						{results.map((result, index) => {
+							const isSelected = index === selected.index;
+							return (
+								<ResultRow
+									ref={isSelected ? selectedResultRow : null}
+									index={index}
+									result={result}
+									prevMousePositionRef={prevMousePositionRef}
+									selected={!isKeyboardNavigationDisabled && isSelected}
+									type={props.resultOptions.itemType}
+									subtitleType={
+										props.resultOptions.subtitleOptions.subtitleType
+									}
+									theme={theme}
+									localeSlug={localeSlug}
+									onMouseMove={handleResultRowMouseMove}
+									onPointerDown={handleResultRowPointerDown}
+									onNavigateTo={navigateTo}
+								/>
+							);
+						})}
+						{showNoResults && (
+							<li
+								style={{
+									paddingTop: verticalSpacing - listPaddingTop,
+									paddingBottom: verticalSpacing,
+									lineHeight: "2em",
+									paddingLeft: theme && theme.horizontalSpacing,
+									paddingRight: theme && theme.horizontalSpacing,
+									height: "Sidebar" ? "100%" : "auto",
+								}}
+							>
+								<h3
 									style={{
-										display: "flex",
-										flexDirection: "column",
-										width: `calc(100% - ${theme.scrollBarWidth}px)`,
-										padding: 0,
-										paddingTop: listPaddingTop,
-										paddingBottom:
-											results.length && isItemContained ? spacing : 0,
-										gap: theme.gapBetweenResults,
-										margin: 0,
+										...resultTitle,
+										textAlign: "center",
+										lineHeight: `calc(${theme.inputFontSize} * 2)`,
+										color: theme.subtitleColor,
+										...theme.titleFont,
 									}}
 								>
-									{results.map((result, index) => {
-										const isSelected = index === selected.index;
-										return (
-											<ResultRow
-												ref={isSelected ? selectedResultRow : null}
-												index={index}
-												result={result}
-												prevMousePositionRef={prevMousePositionRef}
-												selected={!isKeyboardNavigationDisabled && isSelected}
-												type={props.resultOptions.itemType}
-												subtitleType={
-													props.resultOptions.subtitleOptions.subtitleType
-												}
-												theme={theme}
-												localeSlug={localeSlug}
-												onMouseMove={handleResultRowMouseMove}
-												onPointerDown={handleResultRowPointerDown}
-												onNavigateTo={navigateTo}
-											/>
-										);
-									})}
-									{showNoResults && (
-										<li
-											style={{
-												paddingTop: verticalSpacing - listPaddingTop,
-												paddingBottom: verticalSpacing,
-												lineHeight: "2em",
-												paddingLeft: theme && theme.horizontalSpacing,
-												paddingRight: theme && theme.horizontalSpacing,
-												height: "Sidebar" ? "100%" : "auto",
-											}}
-										>
-											{
-												<h3
-													style={{
-														...resultTitle,
-														textAlign: "center",
-														lineHeight: `calc(${theme.inputFontSize} * 2)`,
-														color: theme.subtitleColor,
-														...theme.titleFont,
-													}}
-												>
-													{"No results"}
-												</h3>
-											}
-										</li>
-									)}
-								</ul>
-							}
-						</ScrollView>
-					}
-				</ModalContainer>
-			}
-			{<StatusMessage status={status} layoutType={layoutType} theme={theme} />}
+									{"No results"}
+								</h3>
+							</li>
+						)}
+					</ul>
+				</ScrollView>
+			</ModalContainer>
+			<StatusMessage status={status} layoutType={layoutType} theme={theme} />
 		</LayoutContainer>
 	);
 }
@@ -1975,48 +1934,44 @@ var Overlay = /* @__PURE__ */ forwardRef2(function Overlay2(props, ref) {
 			}}
 			onClick={onDismiss}
 		>
-			{
-				<motion3.div
-					role={"presentation"}
-					initial={{
-						opacity: 0,
-					}}
-					animate={{
-						opacity: 1,
-					}}
-					exit={{
-						opacity: 0,
-						transition: {
-							duration: 0,
-						},
-					}}
-					transition={theme.overlayTransition}
-					style={{
-						top: 0,
-						left: 0,
-						right: 0,
-						bottom: 0,
-						width: "100%",
-						height: "100%",
-						boxSizing: "border-box",
-						position: "absolute",
-						touchAction: "none",
-						backgroundColor: props.backdropOptions.backgroundColor,
-					}}
-				/>
-			}
-			{
-				<SearchModal
-					urlScope={props.urlScope}
-					layoutType={layoutType}
-					inputOptions={props.inputOptions}
-					resultOptions={props.resultOptions}
-					modalOptions={props.modalOptions}
-					backdropOptions={props.backdropOptions}
-					theme={props.theme}
-					onDismiss={onDismiss}
-				/>
-			}
+			<motion3.div
+				role={"presentation"}
+				initial={{
+					opacity: 0,
+				}}
+				animate={{
+					opacity: 1,
+				}}
+				exit={{
+					opacity: 0,
+					transition: {
+						duration: 0,
+					},
+				}}
+				transition={theme.overlayTransition}
+				style={{
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					width: "100%",
+					height: "100%",
+					boxSizing: "border-box",
+					position: "absolute",
+					touchAction: "none",
+					backgroundColor: props.backdropOptions.backgroundColor,
+				}}
+			/>
+			<SearchModal
+				urlScope={props.urlScope}
+				layoutType={layoutType}
+				inputOptions={props.inputOptions}
+				resultOptions={props.resultOptions}
+				modalOptions={props.modalOptions}
+				backdropOptions={props.backdropOptions}
+				theme={props.theme}
+				onDismiss={onDismiss}
+			/>
 		</div>,
 		document.body,
 	);
@@ -2157,58 +2112,53 @@ var EntryPoint = withCSS(
 					opacity: isOverLimit ? 0.4 : 1,
 				}}
 			>
-				{
-					<button
-						aria-label={"Search Icon"}
-						style={{
-							width: "100%",
-							height: "100%",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-							background: "none",
-							cursor: "inherit",
-							color: "inherit",
-							border: "none",
-							outline: "inherit",
-							padding: 0,
-						}}
-						onClick={handleClick}
-					>
-						{props.iconType === SearchIconType.Custom &&
-						theme.entryIconImage ? (
-							<img
-								alt={"icon entry point for Site Search"}
-								src={theme.entryIconImage.src}
-								width={theme.entryIconSize}
-								height={theme.entryIconSize}
-							/>
-						) : (
-							<SearchIcon
-								color={theme.entryIconColor}
-								width={theme.entryIconSize}
-								height={theme.entryIconSize}
-							/>
-						)}
-					</button>
-				}
-				{
-					<AnimatePresence>
-						{isOpen && !isOnCanvas && (
-							<Overlay
-								ref={overlay}
-								layoutType={layoutType}
-								urlScope={props.urlScope}
-								inputOptions={props.inputOptions}
-								resultOptions={props.resultOptions}
-								backdropOptions={props.backdropOptions}
-								modalOptions={props.modalOptions}
-								theme={theme}
-								onDismiss={() => setIsOpen(false)}
-							/>
-						)}
-					</AnimatePresence>
-				}
+				<button
+					aria-label={"Search Icon"}
+					style={{
+						width: "100%",
+						height: "100%",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						background: "none",
+						cursor: "inherit",
+						color: "inherit",
+						border: "none",
+						outline: "inherit",
+						padding: 0,
+					}}
+					onClick={handleClick}
+				>
+					{props.iconType === SearchIconType.Custom && theme.entryIconImage ? (
+						<img
+							alt={"icon entry point for Site Search"}
+							src={theme.entryIconImage.src}
+							width={theme.entryIconSize}
+							height={theme.entryIconSize}
+						/>
+					) : (
+						<SearchIcon
+							color={theme.entryIconColor}
+							width={theme.entryIconSize}
+							height={theme.entryIconSize}
+						/>
+					)}
+				</button>
+				<AnimatePresence>
+					{isOpen && !isOnCanvas && (
+						<Overlay
+							ref={overlay}
+							layoutType={layoutType}
+							urlScope={props.urlScope}
+							inputOptions={props.inputOptions}
+							resultOptions={props.resultOptions}
+							backdropOptions={props.backdropOptions}
+							modalOptions={props.modalOptions}
+							theme={theme}
+							onDismiss={() => setIsOpen(false)}
+						/>
+					)}
+				</AnimatePresence>
 			</div>
 		);
 	},
@@ -2777,335 +2727,313 @@ var Component = /* @__PURE__ */ React2.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion4.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-1rtq0nx",
+							className2,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Desktop"}
+						layoutDependency={layoutDependency}
+						layoutId={"jsVKEKG4s"}
+						ref={ref ?? ref1}
+						style={{
+							"--border-bottom-width": "1px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "0px",
+							"--border-right-width": "0px",
+							"--border-style": "solid",
+							"--border-top-width": "0px",
+							backgroundColor:
+								"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+							...style,
+						}}
+						{...addPropertyOverrides(
 							{
+								lBkI6MWTM: {
+									"data-framer-name": "Mobile",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion4.div
+							className={"framer-14gp762"}
+							data-framer-name={"Search Container"}
+							layoutDependency={layoutDependency}
+							layoutId={"AOFl7NI65"}
+						>
+							<ComponentViewportProvider>
 								<motion4.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-1rtq0nx",
-										className2,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Desktop"}
+									className={"framer-1s197uu-container"}
 									layoutDependency={layoutDependency}
-									layoutId={"jsVKEKG4s"}
-									ref={ref ?? ref1}
+									layoutId={"G38UBLMGf-container"}
 									style={{
-										"--border-bottom-width": "1px",
-										"--border-color":
-											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-										"--border-left-width": "0px",
-										"--border-right-width": "0px",
-										"--border-style": "solid",
-										"--border-top-width": "0px",
-										backgroundColor:
-											"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-										...style,
+										opacity: 0,
 									}}
-									{...addPropertyOverrides(
-										{
-											lBkI6MWTM: {
-												"data-framer-name": "Mobile",
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
 								>
-									{
-										<motion4.div
-											className={"framer-14gp762"}
-											data-framer-name={"Search Container"}
-											layoutDependency={layoutDependency}
-											layoutId={"AOFl7NI65"}
-										>
+									{_jsx4(stdin_default, {
+										backdropOptions: {
+											backgroundColor: "rgba(0, 0, 0, 0.3)",
+											transition: {
+												damping: 60,
+												delay: 0,
+												duration: 0.3,
+												ease: [0.44, 0, 0.56, 1],
+												mass: 1,
+												stiffness: 500,
+												type: "spring",
+											},
+											zIndex: 10,
+										},
+										height: "100%",
+										iconColor:
+											"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
+										iconImage: addImageAlt(
 											{
-												<ComponentViewportProvider>
+												src: "https://framerusercontent.com/images/LcSrauRN6S5dbcfiUyHSBISkE.svg",
+											},
+											"",
+										),
+										iconSize: 20,
+										iconType: "custom",
+										id: "G38UBLMGf",
+										inputOptions: {
+											clearButtonText: "Clear",
+											clearButtonType: "icon",
+											dividerType: "fullWidth",
+											iconOptions: {
+												iconColor:
+													"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
+												iconImage: addImageAlt(
 													{
-														<motion4.div
-															className={"framer-1s197uu-container"}
-															layoutDependency={layoutDependency}
-															layoutId={"G38UBLMGf-container"}
-															style={{
-																opacity: 0,
-															}}
-														>
-															{_jsx4(stdin_default, {
-																backdropOptions: {
-																	backgroundColor: "rgba(0, 0, 0, 0.3)",
-																	transition: {
-																		damping: 60,
-																		delay: 0,
-																		duration: 0.3,
-																		ease: [0.44, 0, 0.56, 1],
-																		mass: 1,
-																		stiffness: 500,
-																		type: "spring",
-																	},
-																	zIndex: 10,
-																},
-																height: "100%",
-																iconColor:
-																	"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
-																iconImage: addImageAlt(
-																	{
-																		src: "https://framerusercontent.com/images/LcSrauRN6S5dbcfiUyHSBISkE.svg",
-																	},
-																	"",
-																),
-																iconSize: 20,
-																iconType: "custom",
-																id: "G38UBLMGf",
-																inputOptions: {
-																	clearButtonText: "Clear",
-																	clearButtonType: "icon",
-																	dividerType: "fullWidth",
-																	iconOptions: {
-																		iconColor:
-																			"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
-																		iconImage: addImageAlt(
-																			{
-																				src: "https://framerusercontent.com/images/LcSrauRN6S5dbcfiUyHSBISkE.svg",
-																			},
-																			"",
-																		),
-																		iconSize: 20,
-																		iconType: "custom",
-																	},
-																	inputFont: {
-																		fontFamily:
-																			'"General Sans", "General Sans Placeholder", sans-serif',
-																		fontSize: "20px",
-																		fontStyle: "normal",
-																		fontWeight: 500,
-																	},
-																	placeholderOptions: {
-																		placeholderColor:
-																			"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
-																		placeholderText: "Search Docs...",
-																	},
-																	textColor:
-																		"var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(17, 17, 17))",
-																},
-																layoutId: "G38UBLMGf",
-																modalOptions: {
-																	backgroundColor:
-																		"var(--token-74b02f5b-961b-49eb-8e13-4477bd831f3e, rgb(250, 250, 251))",
-																	borderRadius: 18,
-																	heightIsStatic: false,
-																	heightTransition: {
-																		damping: 60,
-																		stiffness: 800,
-																		type: "spring",
-																	},
-																	layoutType: "QuickMenu",
-																	shadow: {
-																		blur: 40,
-																		color: "rgba(0, 0, 0, 0.2)",
-																		spread: 0,
-																		x: 0,
-																		y: 20,
-																	},
-																	top: 0,
-																	width: 500,
-																},
-																resultOptions: {
-																	itemType: "contained",
-																	subtitleOptions: {
-																		subtitleColor:
-																			"var(--token-95cb0a67-053e-4ab2-a5d0-7294f60d31fe, rgb(136, 136, 138))",
-																		subtitleFont: {
-																			fontFamily:
-																				'"General Sans", "General Sans Placeholder", sans-serif',
-																			fontSize: "14px",
-																			fontStyle: "normal",
-																			fontWeight: 500,
-																		},
-																		subtitleType: "description",
-																	},
-																	titleColor:
-																		"var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(17, 17, 17))",
-																	titleFont: {
-																		fontFamily:
-																			'"General Sans", "General Sans Placeholder", sans-serif',
-																		fontSize: "16px",
-																		fontStyle: "normal",
-																		fontWeight: 500,
-																	},
-																	titleType: "h1",
-																},
-																style: {
-																	height: "100%",
-																	width: "100%",
-																},
-																width: "100%",
-																...addPropertyOverrides(
-																	{
-																		lBkI6MWTM: {
-																			backdropOptions: {
-																				backgroundColor: "rgba(0, 0, 0, 0.3)",
-																				transition: {
-																					damping: 60,
-																					delay: 0,
-																					duration: 0.3,
-																					ease: [0.44, 0, 0.56, 1],
-																					mass: 1,
-																					stiffness: 800,
-																					type: "spring",
-																				},
-																				zIndex: 2,
-																			},
-																			inputOptions: {
-																				clearButtonText: "Clear",
-																				clearButtonType: "icon",
-																				dividerType: "fullWidth",
-																				iconOptions: {
-																					iconColor:
-																						"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
-																					iconImage: addImageAlt(
-																						{
-																							src: "https://framerusercontent.com/images/LcSrauRN6S5dbcfiUyHSBISkE.svg",
-																						},
-																						"",
-																					),
-																					iconSize: 20,
-																					iconType: "custom",
-																				},
-																				inputFont: {
-																					fontFamily:
-																						'"General Sans", "General Sans Placeholder", sans-serif',
-																					fontSize: "20px",
-																					fontStyle: "normal",
-																					fontWeight: 500,
-																				},
-																				placeholderOptions: {
-																					placeholderColor:
-																						"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
-																					placeholderText: "Search Docs\u2026",
-																				},
-																				textColor:
-																					"var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(17, 17, 17))",
-																			},
-																			modalOptions: {
-																				backgroundColor:
-																					"var(--token-74b02f5b-961b-49eb-8e13-4477bd831f3e, rgb(250, 250, 251))",
-																				borderRadius: 18,
-																				FixedTopAnimation: {
-																					opacity: 0.8,
-																					transition: {
-																						damping: 60,
-																						delay: 0,
-																						duration: 0.3,
-																						ease: [0.44, 0, 0.56, 1],
-																						mass: 1,
-																						stiffness: 500,
-																						type: false,
-																					},
-																					y: 0,
-																				},
-																				heightIsStatic: false,
-																				heightTransition: {
-																					damping: 60,
-																					stiffness: 800,
-																					type: "spring",
-																				},
-																				layoutType: "FixedTop",
-																				shadow: {
-																					blur: 40,
-																					color: "rgba(0, 0, 0, 0.2)",
-																					spread: 0,
-																					x: 0,
-																					y: 20,
-																				},
-																				top: 70,
-																				width: 500,
-																			},
-																		},
-																	},
-																	baseVariant,
-																	gestureVariant,
-																),
-															})}
-														</motion4.div>
-													}
-												</ComponentViewportProvider>
-											}
+														src: "https://framerusercontent.com/images/LcSrauRN6S5dbcfiUyHSBISkE.svg",
+													},
+													"",
+												),
+												iconSize: 20,
+												iconType: "custom",
+											},
+											inputFont: {
+												fontFamily:
+													'"General Sans", "General Sans Placeholder", sans-serif',
+												fontSize: "20px",
+												fontStyle: "normal",
+												fontWeight: 500,
+											},
+											placeholderOptions: {
+												placeholderColor:
+													"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
+												placeholderText: "Search Docs...",
+											},
+											textColor:
+												"var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(17, 17, 17))",
+										},
+										layoutId: "G38UBLMGf",
+										modalOptions: {
+											backgroundColor:
+												"var(--token-74b02f5b-961b-49eb-8e13-4477bd831f3e, rgb(250, 250, 251))",
+											borderRadius: 18,
+											heightIsStatic: false,
+											heightTransition: {
+												damping: 60,
+												stiffness: 800,
+												type: "spring",
+											},
+											layoutType: "QuickMenu",
+											shadow: {
+												blur: 40,
+												color: "rgba(0, 0, 0, 0.2)",
+												spread: 0,
+												x: 0,
+												y: 20,
+											},
+											top: 0,
+											width: 500,
+										},
+										resultOptions: {
+											itemType: "contained",
+											subtitleOptions: {
+												subtitleColor:
+													"var(--token-95cb0a67-053e-4ab2-a5d0-7294f60d31fe, rgb(136, 136, 138))",
+												subtitleFont: {
+													fontFamily:
+														'"General Sans", "General Sans Placeholder", sans-serif',
+													fontSize: "14px",
+													fontStyle: "normal",
+													fontWeight: 500,
+												},
+												subtitleType: "description",
+											},
+											titleColor:
+												"var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(17, 17, 17))",
+											titleFont: {
+												fontFamily:
+													'"General Sans", "General Sans Placeholder", sans-serif',
+												fontSize: "16px",
+												fontStyle: "normal",
+												fontWeight: 500,
+											},
+											titleType: "h1",
+										},
+										style: {
+											height: "100%",
+											width: "100%",
+										},
+										width: "100%",
+										...addPropertyOverrides(
 											{
-												<motion4.div
-													className={"framer-19moii3"}
-													data-framer-name={"Search Input"}
-													layoutDependency={layoutDependency}
-													layoutId={"dxNGQGLEY"}
-												>
-													{
-														<SVG
-															className={"framer-12hme5w"}
-															data-framer-name={"graphic"}
-															fill={
-																"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgb(169, 169, 169))"
-															}
-															intrinsicHeight={24}
-															intrinsicWidth={24}
-															layoutDependency={layoutDependency}
-															layoutId={"tqZ40nGhR"}
-															svg={
-																'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd"/></svg>'
-															}
-															withExternalLayout={true}
-														/>
-													}
-													{
-														<RichText
-															__fromCanvasComponent={true}
-															className={"framer-8oasec"}
-															fonts={["Inter"]}
-															layoutDependency={layoutDependency}
-															layoutId={"Vyk5gzfJN"}
-															style={{
-																"--extracted-r6o4lv":
-																	"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgba(15, 15, 15, 0.5))",
-																"--framer-link-text-color": "rgb(0, 153, 255)",
-																"--framer-link-text-decoration": "underline",
-																"--framer-paragraph-spacing": "0px",
-															}}
-															verticalAlignment={"top"}
-															withExternalLayout={true}
-														>
-															{
-																<React2.Fragment>
-																	{
-																		<motion4.p
-																			className={"framer-styles-preset-17qeria"}
-																			data-styles-preset={"vSuRg5Prj"}
-																			style={{
-																				"--framer-text-color":
-																					"var(--extracted-r6o4lv, var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgba(15, 15, 15, 0.5)))",
-																			}}
-																		>
-																			{"Search Docs\u2026"}
-																		</motion4.p>
-																	}
-																</React2.Fragment>
-															}
-														</RichText>
-													}
-												</motion4.div>
-											}
-										</motion4.div>
-									}
+												lBkI6MWTM: {
+													backdropOptions: {
+														backgroundColor: "rgba(0, 0, 0, 0.3)",
+														transition: {
+															damping: 60,
+															delay: 0,
+															duration: 0.3,
+															ease: [0.44, 0, 0.56, 1],
+															mass: 1,
+															stiffness: 800,
+															type: "spring",
+														},
+														zIndex: 2,
+													},
+													inputOptions: {
+														clearButtonText: "Clear",
+														clearButtonType: "icon",
+														dividerType: "fullWidth",
+														iconOptions: {
+															iconColor:
+																"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
+															iconImage: addImageAlt(
+																{
+																	src: "https://framerusercontent.com/images/LcSrauRN6S5dbcfiUyHSBISkE.svg",
+																},
+																"",
+															),
+															iconSize: 20,
+															iconType: "custom",
+														},
+														inputFont: {
+															fontFamily:
+																'"General Sans", "General Sans Placeholder", sans-serif',
+															fontSize: "20px",
+															fontStyle: "normal",
+															fontWeight: 500,
+														},
+														placeholderOptions: {
+															placeholderColor:
+																"var(--token-0903d63a-94ee-49f4-896e-eb837e1f22c9, rgb(160, 160, 160))",
+															placeholderText: "Search Docs\u2026",
+														},
+														textColor:
+															"var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(17, 17, 17))",
+													},
+													modalOptions: {
+														backgroundColor:
+															"var(--token-74b02f5b-961b-49eb-8e13-4477bd831f3e, rgb(250, 250, 251))",
+														borderRadius: 18,
+														FixedTopAnimation: {
+															opacity: 0.8,
+															transition: {
+																damping: 60,
+																delay: 0,
+																duration: 0.3,
+																ease: [0.44, 0, 0.56, 1],
+																mass: 1,
+																stiffness: 500,
+																type: false,
+															},
+															y: 0,
+														},
+														heightIsStatic: false,
+														heightTransition: {
+															damping: 60,
+															stiffness: 800,
+															type: "spring",
+														},
+														layoutType: "FixedTop",
+														shadow: {
+															blur: 40,
+															color: "rgba(0, 0, 0, 0.2)",
+															spread: 0,
+															x: 0,
+															y: 20,
+														},
+														top: 70,
+														width: 500,
+													},
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										),
+									})}
 								</motion4.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+							</ComponentViewportProvider>
+							<motion4.div
+								className={"framer-19moii3"}
+								data-framer-name={"Search Input"}
+								layoutDependency={layoutDependency}
+								layoutId={"dxNGQGLEY"}
+							>
+								<SVG
+									className={"framer-12hme5w"}
+									data-framer-name={"graphic"}
+									fill={
+										"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgb(169, 169, 169))"
+									}
+									intrinsicHeight={24}
+									intrinsicWidth={24}
+									layoutDependency={layoutDependency}
+									layoutId={"tqZ40nGhR"}
+									svg={
+										'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd"/></svg>'
+									}
+									withExternalLayout={true}
+								/>
+								<RichText
+									__fromCanvasComponent={true}
+									className={"framer-8oasec"}
+									fonts={["Inter"]}
+									layoutDependency={layoutDependency}
+									layoutId={"Vyk5gzfJN"}
+									style={{
+										"--extracted-r6o4lv":
+											"var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgba(15, 15, 15, 0.5))",
+										"--framer-link-text-color": "rgb(0, 153, 255)",
+										"--framer-link-text-decoration": "underline",
+										"--framer-paragraph-spacing": "0px",
+									}}
+									verticalAlignment={"top"}
+									withExternalLayout={true}
+								>
+									<React2.Fragment>
+										<motion4.p
+											className={"framer-styles-preset-17qeria"}
+											data-styles-preset={"vSuRg5Prj"}
+											style={{
+												"--framer-text-color":
+													"var(--extracted-r6o4lv, var(--token-944d416b-60ec-406a-99c8-94ca89212156, rgba(15, 15, 15, 0.5)))",
+											}}
+										>
+											{"Search Docs\u2026"}
+										</motion4.p>
+									</React2.Fragment>
+								</RichText>
+							</motion4.div>
+						</motion4.div>
+					</motion4.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -3282,13 +3210,11 @@ stdin_default2.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default2}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default2}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

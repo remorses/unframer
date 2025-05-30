@@ -15,7 +15,10 @@ import { error } from 'console'
 import fs from 'fs'
 import path from 'path'
 import dedent from 'string-dedent'
-import { babelPluginJsxTransform } from './babel-plugin-imports'
+import {
+    babelPluginJsxTransform,
+    removeJsxExpressionContainer,
+} from './babel-plugin-imports'
 import { propCamelCaseJustLikeFramer } from './compat'
 import {
     ComponentFontBundle,
@@ -292,6 +295,7 @@ export async function bundle({
                     plugins: [
                         // babelPluginDeduplicateImports,
                         babelPluginJsxTransform(),
+                        removeJsxExpressionContainer,
                     ],
                     // ast: true,
                     // code: false,

@@ -118,93 +118,75 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
-								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-1rjpv2s",
-										className3,
-										classNames,
-									)}
-									data-framer-name={"Variant 1"}
-									layoutDependency={layoutDependency}
-									layoutId={"VfvVtQZpq"}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
-									style={{
-										...style,
-									}}
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-1rjpv2s",
+							className3,
+							classNames,
+						)}
+						data-framer-name={"Variant 1"}
+						layoutDependency={layoutDependency}
+						layoutId={"VfvVtQZpq"}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							...style,
+						}}
+					>
+						<RichText
+							__fromCanvasComponent={true}
+							className={"framer-1mqs6me"}
+							fonts={["Inter"]}
+							layoutDependency={layoutDependency}
+							layoutId={"MqNPuMcGd"}
+							style={{
+								"--framer-link-text-color": "rgb(0, 153, 255)",
+								"--framer-link-text-decoration": "underline",
+							}}
+							text={AXJg7HfXz}
+							verticalAlignment={"top"}
+							withExternalLayout={true}
+						>
+							<React.Fragment>
+								<motion.p
+									className={"framer-styles-preset-1o7aipf"}
+									data-styles-preset={"x1n9RoGI8"}
 								>
-									{
-										<RichText
-											__fromCanvasComponent={true}
-											className={"framer-1mqs6me"}
-											fonts={["Inter"]}
-											layoutDependency={layoutDependency}
-											layoutId={"MqNPuMcGd"}
-											style={{
-												"--framer-link-text-color": "rgb(0, 153, 255)",
-												"--framer-link-text-decoration": "underline",
-											}}
-											text={AXJg7HfXz}
-											verticalAlignment={"top"}
-											withExternalLayout={true}
-										>
-											{
-												<React.Fragment>
-													{
-														<motion.p
-															className={"framer-styles-preset-1o7aipf"}
-															data-styles-preset={"x1n9RoGI8"}
-														>
-															{"Notion like editor for markdown"}
-														</motion.p>
-													}
-												</React.Fragment>
-											}
-										</RichText>
-									}
-									{
-										<RichText
-											__fromCanvasComponent={true}
-											className={"framer-821ruj"}
-											fonts={["Inter"]}
-											layoutDependency={layoutDependency}
-											layoutId={"YHz1MA82P"}
-											style={{
-												"--framer-link-text-color": "rgb(0, 153, 255)",
-												"--framer-link-text-decoration": "underline",
-											}}
-											text={zfxlqYK6h}
-											verticalAlignment={"top"}
-											withExternalLayout={true}
-										>
-											{
-												<React.Fragment>
-													{
-														<motion.p
-															className={"framer-styles-preset-1dbggqt"}
-															data-styles-preset={"gj4zreqLr"}
-														>
-															{"Make your markdown files editable by everyone"}
-														</motion.p>
-													}
-												</React.Fragment>
-											}
-										</RichText>
-									}
-								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+									{"Notion like editor for markdown"}
+								</motion.p>
+							</React.Fragment>
+						</RichText>
+						<RichText
+							__fromCanvasComponent={true}
+							className={"framer-821ruj"}
+							fonts={["Inter"]}
+							layoutDependency={layoutDependency}
+							layoutId={"YHz1MA82P"}
+							style={{
+								"--framer-link-text-color": "rgb(0, 153, 255)",
+								"--framer-link-text-decoration": "underline",
+							}}
+							text={zfxlqYK6h}
+							verticalAlignment={"top"}
+							withExternalLayout={true}
+						>
+							<React.Fragment>
+								<motion.p
+									className={"framer-styles-preset-1dbggqt"}
+									data-styles-preset={"gj4zreqLr"}
+								>
+									{"Make your markdown files editable by everyone"}
+								</motion.p>
+							</React.Fragment>
+						</RichText>
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -370,13 +352,11 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

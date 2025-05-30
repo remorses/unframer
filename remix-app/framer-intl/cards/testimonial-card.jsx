@@ -212,344 +212,288 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
-								<motion.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-c01yfx",
-										className4,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Variant 1"}
-									layoutDependency={layoutDependency}
-									layoutId={"PiMtXYhCL"}
-									ref={ref !== null && ref !== void 0 ? ref : ref1}
-									style={{
-										"--border-bottom-width": "1px",
-										"--border-color":
-											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-										"--border-left-width": "1px",
-										"--border-right-width": "1px",
-										"--border-style": "dotted",
-										"--border-top-width": "1px",
-										...style,
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-c01yfx",
+							className4,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Variant 1"}
+						layoutDependency={layoutDependency}
+						layoutId={"PiMtXYhCL"}
+						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						style={{
+							"--border-bottom-width": "1px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "1px",
+							"--border-right-width": "1px",
+							"--border-style": "dotted",
+							"--border-top-width": "1px",
+							...style,
+						}}
+					>
+						<motion.div
+							className={"framer-vn3rfu"}
+							layoutDependency={layoutDependency}
+							layoutId={"c_JXXkCD1"}
+						>
+							<motion.div
+								className={"framer-kedl8z"}
+								layoutDependency={layoutDependency}
+								layoutId={"I15:764;15:722"}
+							>
+								<Image
+									background={{
+										alt: "",
+										fit: "fill",
+										loading: getLoadingLazyAtYPosition(
+											((componentViewport === null ||
+											componentViewport === void 0
+												? void 0
+												: componentViewport.y) || 0) +
+												32 +
+												(0 +
+													0 +
+													((((componentViewport === null ||
+													componentViewport === void 0
+														? void 0
+														: componentViewport.height) || 280) -
+														64 -
+														489) /
+														1) *
+														0) +
+												0 +
+												0 +
+												79.5,
+										),
+										sizes: "44px",
+										...toResponsiveImage(aZa4d5_t4),
 									}}
+									className={"framer-1k0q7zc"}
+									data-framer-name={"Avatar"}
+									layoutDependency={layoutDependency}
+									layoutId={"I15:764;15:729"}
+									style={{
+										borderBottomLeftRadius: 100,
+										borderBottomRightRadius: 100,
+										borderTopLeftRadius: 100,
+										borderTopRightRadius: 100,
+										filter: "grayscale(0)",
+										WebkitFilter: "grayscale(0)",
+									}}
+								/>
+								<motion.div
+									className={"framer-k7emcz"}
+									layoutDependency={layoutDependency}
+									layoutId={"yadz1eCxs"}
 								>
-									{
-										<motion.div
-											className={"framer-vn3rfu"}
-											layoutDependency={layoutDependency}
-											layoutId={"c_JXXkCD1"}
-										>
-											{
-												<motion.div
-													className={"framer-kedl8z"}
-													layoutDependency={layoutDependency}
-													layoutId={"I15:764;15:722"}
-												>
-													{
-														<Image
-															background={{
-																alt: "",
-																fit: "fill",
-																loading: getLoadingLazyAtYPosition(
-																	((componentViewport === null ||
-																	componentViewport === void 0
-																		? void 0
-																		: componentViewport.y) || 0) +
-																		32 +
-																		(0 +
-																			0 +
-																			((((componentViewport === null ||
-																			componentViewport === void 0
-																				? void 0
-																				: componentViewport.height) || 280) -
-																				64 -
-																				489) /
-																				1) *
-																				0) +
-																		0 +
-																		0 +
-																		79.5,
-																),
-																sizes: "44px",
-																...toResponsiveImage(aZa4d5_t4),
-															}}
-															className={"framer-1k0q7zc"}
-															data-framer-name={"Avatar"}
-															layoutDependency={layoutDependency}
-															layoutId={"I15:764;15:729"}
-															style={{
-																borderBottomLeftRadius: 100,
-																borderBottomRightRadius: 100,
-																borderTopLeftRadius: 100,
-																borderTopRightRadius: 100,
-																filter: "grayscale(0)",
-																WebkitFilter: "grayscale(0)",
-															}}
-														/>
-													}
-													{
-														<motion.div
-															className={"framer-k7emcz"}
-															layoutDependency={layoutDependency}
-															layoutId={"yadz1eCxs"}
-														>
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-zlcoqe"}
-																	data-framer-name={"Heading"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"I15:764;15:723"}
-																	style={{
-																		"--framer-paragraph-spacing": "24px",
-																	}}
-																	text={jlmtqqTI7}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1o7aipf"
-																					}
-																					data-styles-preset={"x1n9RoGI8"}
-																					style={{
-																						"--framer-text-alignment": "left",
-																					}}
-																				>
-																					{"Developer"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-7qrfv3"}
-																	data-framer-name={"Position"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"Lp0AAs16H"}
-																	style={{
-																		"--framer-paragraph-spacing": "24px",
-																	}}
-																	text={oJ5BCqF2B}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1dbggqt"
-																					}
-																					data-styles-preset={"gj4zreqLr"}
-																				>
-																					{"Holocron User"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-														</motion.div>
-													}
-												</motion.div>
-											}
-											{
-												<RichText
-													__fromCanvasComponent={true}
-													className={"framer-11mjbal"}
-													data-framer-name={"Supporting text"}
-													fonts={["Inter"]}
-													layoutDependency={layoutDependency}
-													layoutId={"I15:764;15:726"}
-													style={{
-														"--framer-paragraph-spacing": "16px",
-													}}
-													text={O14Q0kfgb}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-												>
-													{
-														<React.Fragment>
-															{
-																<motion.p
-																	className={"framer-styles-preset-1k8riq"}
-																	data-styles-preset={"n4VV4jzz6"}
-																>
-																	{
-																		"Holocron saves our team hours of documentation work"
-																	}
-																</motion.p>
-															}
-														</React.Fragment>
-													}
-												</RichText>
-											}
-											{
-												<Fetcher
-													disabled={isLoading}
-													requests={[
-														{
-															cacheDuration: 0,
-															credentials: "same-origin",
-															errorFallbackValue: "Error",
-															fallbackValue: "x. xx ",
-															resultKeyPath: "name",
-															resultOutputType: "string",
-															url: `https://api.fetch.tools/emoji`,
-														},
-													]}
-												>
-													{(fetchResult) => (
-														<RichText
-															__fromCanvasComponent={true}
-															className={"framer-1eogk3o"}
-															data-framer-name={"Supporting text"}
-															fonts={["Inter"]}
-															layoutDependency={layoutDependency}
-															layoutId={"GBqZR2Mm7"}
-															style={{
-																"--framer-paragraph-spacing": "16px",
-															}}
-															text={toString(fetchResult[0])}
-															verticalAlignment={"top"}
-															withExternalLayout={true}
-														>
-															{
-																<React.Fragment>
-																	{
-																		<motion.p
-																			className={"framer-styles-preset-1k8riq"}
-																			data-styles-preset={"n4VV4jzz6"}
-																		>
-																			{"Highly recommended"}
-																		</motion.p>
-																	}
-																</React.Fragment>
-															}
-														</RichText>
-													)}
-												</Fetcher>
-											}
-										</motion.div>
-									}
-									{
-										<motion.div
-											className={"framer-2b9p47"}
-											layoutDependency={layoutDependency}
-											layoutId={"v3Wf9HNo3"}
-										>
-											{
-												<SVG
-													className={"framer-12bdw31"}
-													data-framer-name={"graphic"}
-													fill={
-														"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-													}
-													intrinsicHeight={24}
-													intrinsicWidth={24}
-													layoutDependency={layoutDependency}
-													layoutId={"yEVxHBQgE"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											}
-											{
-												<SVG
-													className={"framer-1u95l1n"}
-													data-framer-name={"graphic"}
-													fill={
-														"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-													}
-													intrinsicHeight={24}
-													intrinsicWidth={24}
-													layoutDependency={layoutDependency}
-													layoutId={"gad73JHfE"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											}
-											{
-												<SVG
-													className={"framer-167ags3"}
-													data-framer-name={"graphic"}
-													fill={
-														"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-													}
-													intrinsicHeight={24}
-													intrinsicWidth={24}
-													layoutDependency={layoutDependency}
-													layoutId={"zhbAd93la"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											}
-											{
-												<SVG
-													className={"framer-1s0igdu"}
-													data-framer-name={"graphic"}
-													fill={
-														"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-													}
-													intrinsicHeight={24}
-													intrinsicWidth={24}
-													layoutDependency={layoutDependency}
-													layoutId={"AKEyDmijZ"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											}
-											{
-												<SVG
-													className={"framer-uotk5"}
-													data-framer-name={"graphic"}
-													fill={
-														"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-													}
-													intrinsicHeight={24}
-													intrinsicWidth={24}
-													layoutDependency={layoutDependency}
-													layoutId={"Vfqp0sw1Z"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											}
-										</motion.div>
-									}
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-zlcoqe"}
+										data-framer-name={"Heading"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"I15:764;15:723"}
+										style={{
+											"--framer-paragraph-spacing": "24px",
+										}}
+										text={jlmtqqTI7}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1o7aipf"}
+												data-styles-preset={"x1n9RoGI8"}
+												style={{
+													"--framer-text-alignment": "left",
+												}}
+											>
+												{"Developer"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-7qrfv3"}
+										data-framer-name={"Position"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"Lp0AAs16H"}
+										style={{
+											"--framer-paragraph-spacing": "24px",
+										}}
+										text={oJ5BCqF2B}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1dbggqt"}
+												data-styles-preset={"gj4zreqLr"}
+											>
+												{"Holocron User"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
 								</motion.div>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+							</motion.div>
+							<RichText
+								__fromCanvasComponent={true}
+								className={"framer-11mjbal"}
+								data-framer-name={"Supporting text"}
+								fonts={["Inter"]}
+								layoutDependency={layoutDependency}
+								layoutId={"I15:764;15:726"}
+								style={{
+									"--framer-paragraph-spacing": "16px",
+								}}
+								text={O14Q0kfgb}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+							>
+								<React.Fragment>
+									<motion.p
+										className={"framer-styles-preset-1k8riq"}
+										data-styles-preset={"n4VV4jzz6"}
+									>
+										{"Holocron saves our team hours of documentation work"}
+									</motion.p>
+								</React.Fragment>
+							</RichText>
+							<Fetcher
+								disabled={isLoading}
+								requests={[
+									{
+										cacheDuration: 0,
+										credentials: "same-origin",
+										errorFallbackValue: "Error",
+										fallbackValue: "x. xx ",
+										resultKeyPath: "name",
+										resultOutputType: "string",
+										url: `https://api.fetch.tools/emoji`,
+									},
+								]}
+							>
+								{(fetchResult) => (
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-1eogk3o"}
+										data-framer-name={"Supporting text"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"GBqZR2Mm7"}
+										style={{
+											"--framer-paragraph-spacing": "16px",
+										}}
+										text={toString(fetchResult[0])}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1k8riq"}
+												data-styles-preset={"n4VV4jzz6"}
+											>
+												{"Highly recommended"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+								)}
+							</Fetcher>
+						</motion.div>
+						<motion.div
+							className={"framer-2b9p47"}
+							layoutDependency={layoutDependency}
+							layoutId={"v3Wf9HNo3"}
+						>
+							<SVG
+								className={"framer-12bdw31"}
+								data-framer-name={"graphic"}
+								fill={
+									"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+								}
+								intrinsicHeight={24}
+								intrinsicWidth={24}
+								layoutDependency={layoutDependency}
+								layoutId={"yEVxHBQgE"}
+								svg={
+									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
+								}
+								withExternalLayout={true}
+							/>
+							<SVG
+								className={"framer-1u95l1n"}
+								data-framer-name={"graphic"}
+								fill={
+									"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+								}
+								intrinsicHeight={24}
+								intrinsicWidth={24}
+								layoutDependency={layoutDependency}
+								layoutId={"gad73JHfE"}
+								svg={
+									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
+								}
+								withExternalLayout={true}
+							/>
+							<SVG
+								className={"framer-167ags3"}
+								data-framer-name={"graphic"}
+								fill={
+									"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+								}
+								intrinsicHeight={24}
+								intrinsicWidth={24}
+								layoutDependency={layoutDependency}
+								layoutId={"zhbAd93la"}
+								svg={
+									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
+								}
+								withExternalLayout={true}
+							/>
+							<SVG
+								className={"framer-1s0igdu"}
+								data-framer-name={"graphic"}
+								fill={
+									"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+								}
+								intrinsicHeight={24}
+								intrinsicWidth={24}
+								layoutDependency={layoutDependency}
+								layoutId={"AKEyDmijZ"}
+								svg={
+									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
+								}
+								withExternalLayout={true}
+							/>
+							<SVG
+								className={"framer-uotk5"}
+								data-framer-name={"graphic"}
+								fill={
+									"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+								}
+								intrinsicHeight={24}
+								intrinsicWidth={24}
+								layoutDependency={layoutDependency}
+								layoutId={"Vfqp0sw1Z"}
+								svg={
+									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/></svg>'
+								}
+								withExternalLayout={true}
+							/>
+						</motion.div>
+					</motion.div>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -733,13 +677,11 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

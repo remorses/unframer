@@ -442,16 +442,12 @@ import { motion } from "unframer";
 import * as React from "react";
 var v0 = (
 	<React.Fragment>
-		{
-			<motion.h1
-				className={"framer-styles-preset-1uddyv4"}
-				data-styles-preset={"BJ5jKpx2K"}
-			>
-				{
-					"Rivoluziona il tuo flusso di lavoro con le nostre soluzioni innovative"
-				}
-			</motion.h1>
-		}
+		<motion.h1
+			className={"framer-styles-preset-1uddyv4"}
+			data-styles-preset={"BJ5jKpx2K"}
+		>
+			{"Rivoluziona il tuo flusso di lavoro con le nostre soluzioni innovative"}
+		</motion.h1>
 	</React.Fragment>
 );
 var __FramerMetadata__ = {
@@ -657,342 +653,300 @@ var Component = /* @__PURE__ */ React2.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
-							{
-								<Link
-									href={EiEU24ZnT}
-									nodeId={"ua4bVRH8I"}
-									smoothScroll={Kr3LjdzQA}
-								>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<Link href={EiEU24ZnT} nodeId={"ua4bVRH8I"} smoothScroll={Kr3LjdzQA}>
+						<motion2.a
+							{...restProps}
+							{...gestureHandlers}
+							className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-18j6smf", className4, classNames)} framer-iw3d34`}
+							data-border={true}
+							data-framer-name={"Primary"}
+							layoutDependency={layoutDependency}
+							layoutId={"ua4bVRH8I"}
+							ref={ref !== null && ref !== void 0 ? ref : ref1}
+							style={{
+								"--border-bottom-width": "2px",
+								"--border-color":
+									"var(--token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d, rgb(252, 62, 19))",
+								"--border-left-width": "2px",
+								"--border-right-width": "2px",
+								"--border-style": "solid",
+								"--border-top-width": "2px",
+								backgroundColor:
+									"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(231, 34, 8))",
+								borderBottomLeftRadius: 99,
+								borderBottomRightRadius: 99,
+								borderTopLeftRadius: 99,
+								borderTopRightRadius: 99,
+								...style,
+							}}
+							variants={{
+								"hMFJC9STy-hover": {
+									"--border-bottom-width": "0px",
+									"--border-left-width": "0px",
+									"--border-right-width": "0px",
+									"--border-top-width": "0px",
+									backgroundColor:
+										"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+								},
+								"sbPQDlDeC-hover": {
+									backgroundColor: "rgba(0, 0, 0, 0)",
+								},
+								"ua4bVRH8I-hover": {
+									backgroundColor:
+										"var(--token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d, rgb(252, 62, 19))",
+								},
+								"xM5PygEYs-hover": {
+									"--border-bottom-width": "0px",
+									"--border-left-width": "0px",
+									"--border-right-width": "0px",
+									"--border-top-width": "0px",
+									backgroundColor:
+										"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+								},
+								hMFJC9STy: {
+									"--border-bottom-width": "0px",
+									"--border-left-width": "0px",
+									"--border-right-width": "0px",
+									"--border-top-width": "0px",
+									backgroundColor:
+										"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+								},
+								qB4tsGNCe: {
+									"--border-bottom-width": "0px",
+									"--border-left-width": "0px",
+									"--border-right-width": "0px",
+									"--border-top-width": "0px",
+									backgroundColor: "rgba(0, 0, 0, 0)",
+								},
+								sbPQDlDeC: {
+									"--border-bottom-width": "1px",
+									"--border-color":
+										"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+									"--border-left-width": "1px",
+									"--border-right-width": "1px",
+									"--border-top-width": "1px",
+									backgroundColor: "rgba(0, 0, 0, 0)",
+								},
+								xM5PygEYs: {
+									"--border-bottom-width": "0px",
+									"--border-left-width": "0px",
+									"--border-right-width": "0px",
+									"--border-top-width": "0px",
+									backgroundColor:
+										"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+								},
+							}}
+							{...addPropertyOverrides(
+								{
+									"hMFJC9STy-hover": {
+										"data-framer-name": void 0,
+									},
+									"sbPQDlDeC-hover": {
+										"data-framer-name": void 0,
+									},
+									"ua4bVRH8I-hover": {
+										"data-framer-name": void 0,
+									},
+									"xM5PygEYs-hover": {
+										"data-framer-name": void 0,
+									},
+									hMFJC9STy: {
+										"data-framer-name": "Variant 5",
+									},
+									qB4tsGNCe: {
+										"data-framer-name": "Variant 4",
+									},
+									sbPQDlDeC: {
+										"data-framer-name": "Secondary",
+									},
+									xM5PygEYs: {
+										"data-framer-name": "Variant 3",
+									},
+								},
+								baseVariant,
+								gestureVariant,
+							)}
+						>
+							<RichText
+								__fromCanvasComponent={true}
+								className={"framer-8zzvul"}
+								fonts={["Inter"]}
+								layoutDependency={layoutDependency}
+								layoutId={"sz0TWsWnJ"}
+								style={{
+									"--extracted-r6o4lv": "rgb(255, 255, 255)",
+									"--framer-link-text-color": "rgb(0, 153, 255)",
+									"--framer-link-text-decoration": "underline",
+								}}
+								text={QTPGB_MgK}
+								variants={{
+									"hMFJC9STy-hover": {
+										"--extracted-r6o4lv":
+											"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+									},
+									"xM5PygEYs-hover": {
+										"--extracted-r6o4lv":
+											"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+									},
+									hMFJC9STy: {
+										"--extracted-r6o4lv":
+											"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+									},
+									qB4tsGNCe: {
+										"--extracted-r6o4lv":
+											"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
+									},
+									xM5PygEYs: {
+										"--extracted-r6o4lv":
+											"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+									},
+								}}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+								{...addPropertyOverrides(
 									{
-										<motion2.a
-											{...restProps}
-											{...gestureHandlers}
-											className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-18j6smf", className4, classNames)} framer-iw3d34`}
-											data-border={true}
-											data-framer-name={"Primary"}
-											layoutDependency={layoutDependency}
-											layoutId={"ua4bVRH8I"}
-											ref={ref !== null && ref !== void 0 ? ref : ref1}
-											style={{
-												"--border-bottom-width": "2px",
-												"--border-color":
-													"var(--token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d, rgb(252, 62, 19))",
-												"--border-left-width": "2px",
-												"--border-right-width": "2px",
-												"--border-style": "solid",
-												"--border-top-width": "2px",
-												backgroundColor:
-													"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(231, 34, 8))",
-												borderBottomLeftRadius: 99,
-												borderBottomRightRadius: 99,
-												borderTopLeftRadius: 99,
-												borderTopRightRadius: 99,
-												...style,
-											}}
-											variants={{
-												"hMFJC9STy-hover": {
-													"--border-bottom-width": "0px",
-													"--border-left-width": "0px",
-													"--border-right-width": "0px",
-													"--border-top-width": "0px",
-													backgroundColor:
-														"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-												},
-												"sbPQDlDeC-hover": {
-													backgroundColor: "rgba(0, 0, 0, 0)",
-												},
-												"ua4bVRH8I-hover": {
-													backgroundColor:
-														"var(--token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d, rgb(252, 62, 19))",
-												},
-												"xM5PygEYs-hover": {
-													"--border-bottom-width": "0px",
-													"--border-left-width": "0px",
-													"--border-right-width": "0px",
-													"--border-top-width": "0px",
-													backgroundColor:
-														"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-												},
-												hMFJC9STy: {
-													"--border-bottom-width": "0px",
-													"--border-left-width": "0px",
-													"--border-right-width": "0px",
-													"--border-top-width": "0px",
-													backgroundColor:
-														"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-												},
-												qB4tsGNCe: {
-													"--border-bottom-width": "0px",
-													"--border-left-width": "0px",
-													"--border-right-width": "0px",
-													"--border-top-width": "0px",
-													backgroundColor: "rgba(0, 0, 0, 0)",
-												},
-												sbPQDlDeC: {
-													"--border-bottom-width": "1px",
-													"--border-color":
-														"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-													"--border-left-width": "1px",
-													"--border-right-width": "1px",
-													"--border-top-width": "1px",
-													backgroundColor: "rgba(0, 0, 0, 0)",
-												},
-												xM5PygEYs: {
-													"--border-bottom-width": "0px",
-													"--border-left-width": "0px",
-													"--border-right-width": "0px",
-													"--border-top-width": "0px",
-													backgroundColor:
-														"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-												},
-											}}
-											{...addPropertyOverrides(
-												{
-													"hMFJC9STy-hover": {
-														"data-framer-name": void 0,
-													},
-													"sbPQDlDeC-hover": {
-														"data-framer-name": void 0,
-													},
-													"ua4bVRH8I-hover": {
-														"data-framer-name": void 0,
-													},
-													"xM5PygEYs-hover": {
-														"data-framer-name": void 0,
-													},
-													hMFJC9STy: {
-														"data-framer-name": "Variant 5",
-													},
-													qB4tsGNCe: {
-														"data-framer-name": "Variant 4",
-													},
-													sbPQDlDeC: {
-														"data-framer-name": "Secondary",
-													},
-													xM5PygEYs: {
-														"data-framer-name": "Variant 3",
-													},
-												},
-												baseVariant,
-												gestureVariant,
-											)}
-										>
-											{
-												<RichText
-													__fromCanvasComponent={true}
-													className={"framer-8zzvul"}
-													fonts={["Inter"]}
-													layoutDependency={layoutDependency}
-													layoutId={"sz0TWsWnJ"}
-													style={{
-														"--extracted-r6o4lv": "rgb(255, 255, 255)",
-														"--framer-link-text-color": "rgb(0, 153, 255)",
-														"--framer-link-text-decoration": "underline",
-													}}
-													text={QTPGB_MgK}
-													variants={{
-														"hMFJC9STy-hover": {
-															"--extracted-r6o4lv":
-																"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-														},
-														"xM5PygEYs-hover": {
-															"--extracted-r6o4lv":
-																"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-														},
-														hMFJC9STy: {
-															"--extracted-r6o4lv":
-																"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-														},
-														qB4tsGNCe: {
-															"--extracted-r6o4lv":
-																"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))",
-														},
-														xM5PygEYs: {
-															"--extracted-r6o4lv":
-																"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-														},
-													}}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-													{...addPropertyOverrides(
-														{
-															"hMFJC9STy-hover": {
-																children: (
-																	<React2.Fragment>
-																		{
-																			<motion2.p
-																				className={
-																					"framer-styles-preset-1o7aipf"
-																				}
-																				data-styles-preset={"x1n9RoGI8"}
-																				style={{
-																					"--framer-text-alignment": "center",
-																					"--framer-text-color":
-																						"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
-																				}}
-																			>
-																				{"Get Started Today"}
-																			</motion2.p>
-																		}
-																	</React2.Fragment>
-																),
-															},
-															"xM5PygEYs-hover": {
-																children: (
-																	<React2.Fragment>
-																		{
-																			<motion2.p
-																				className={
-																					"framer-styles-preset-1o7aipf"
-																				}
-																				data-styles-preset={"x1n9RoGI8"}
-																				style={{
-																					"--framer-text-alignment": "center",
-																					"--framer-text-color":
-																						"var(--extracted-r6o4lv, var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16)))",
-																				}}
-																			>
-																				{"Get Started Today"}
-																			</motion2.p>
-																		}
-																	</React2.Fragment>
-																),
-															},
-															hMFJC9STy: {
-																children: (
-																	<React2.Fragment>
-																		{
-																			<motion2.p
-																				className={
-																					"framer-styles-preset-1o7aipf"
-																				}
-																				data-styles-preset={"x1n9RoGI8"}
-																				style={{
-																					"--framer-text-alignment": "center",
-																					"--framer-text-color":
-																						"var(--extracted-r6o4lv, var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16)))",
-																				}}
-																			>
-																				{"Get Started Today"}
-																			</motion2.p>
-																		}
-																	</React2.Fragment>
-																),
-															},
-															qB4tsGNCe: {
-																children: (
-																	<React2.Fragment>
-																		{
-																			<motion2.p
-																				className={
-																					"framer-styles-preset-1o7aipf"
-																				}
-																				data-styles-preset={"x1n9RoGI8"}
-																				style={{
-																					"--framer-text-alignment": "center",
-																					"--framer-text-color":
-																						"var(--extracted-r6o4lv, var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16)))",
-																				}}
-																			>
-																				{"Get Started Today"}
-																			</motion2.p>
-																		}
-																	</React2.Fragment>
-																),
-															},
-															sbPQDlDeC: {
-																children: (
-																	<React2.Fragment>
-																		{
-																			<motion2.p
-																				className={
-																					"framer-styles-preset-1o7aipf"
-																				}
-																				data-styles-preset={"x1n9RoGI8"}
-																				style={{
-																					"--framer-text-alignment": "center",
-																				}}
-																			>
-																				{"Get Started Today"}
-																			</motion2.p>
-																		}
-																	</React2.Fragment>
-																),
-															},
-															xM5PygEYs: {
-																children: (
-																	<React2.Fragment>
-																		{
-																			<motion2.p
-																				className={
-																					"framer-styles-preset-1o7aipf"
-																				}
-																				data-styles-preset={"x1n9RoGI8"}
-																				style={{
-																					"--framer-text-alignment": "center",
-																					"--framer-text-color":
-																						"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
-																				}}
-																			>
-																				{"Get Started Today"}
-																			</motion2.p>
-																		}
-																	</React2.Fragment>
-																),
-															},
-														},
-														baseVariant,
-														gestureVariant,
-													)}
-												>
-													{
-														<React2.Fragment>
-															{
-																<motion2.p
-																	className={"framer-styles-preset-1o7aipf"}
-																	data-styles-preset={"x1n9RoGI8"}
-																	style={{
-																		"--framer-text-alignment": "center",
-																		"--framer-text-color":
-																			"var(--extracted-r6o4lv, rgb(255, 255, 255))",
-																	}}
-																>
-																	{"Get Started Today"}
-																</motion2.p>
-															}
-														</React2.Fragment>
-													}
-												</RichText>
-											}
-											{isDisplayed() && (
-												<SVG
-													className={"framer-4fkkym"}
-													data-framer-name={"graphic"}
-													fill={
-														"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
-													}
-													intrinsicHeight={24}
-													intrinsicWidth={24}
-													layoutDependency={layoutDependency}
-													layoutId={"wxaQbLUJQ"}
-													svg={
-														'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/></svg>'
-													}
-													withExternalLayout={true}
-												/>
-											)}
-										</motion2.a>
+										"hMFJC9STy-hover": {
+											children: (
+												<React2.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+															"--framer-text-color":
+																"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
+														}}
+													>
+														{"Get Started Today"}
+													</motion2.p>
+												</React2.Fragment>
+											),
+										},
+										"xM5PygEYs-hover": {
+											children: (
+												<React2.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+															"--framer-text-color":
+																"var(--extracted-r6o4lv, var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16)))",
+														}}
+													>
+														{"Get Started Today"}
+													</motion2.p>
+												</React2.Fragment>
+											),
+										},
+										hMFJC9STy: {
+											children: (
+												<React2.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+															"--framer-text-color":
+																"var(--extracted-r6o4lv, var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16)))",
+														}}
+													>
+														{"Get Started Today"}
+													</motion2.p>
+												</React2.Fragment>
+											),
+										},
+										qB4tsGNCe: {
+											children: (
+												<React2.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+															"--framer-text-color":
+																"var(--extracted-r6o4lv, var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16)))",
+														}}
+													>
+														{"Get Started Today"}
+													</motion2.p>
+												</React2.Fragment>
+											),
+										},
+										sbPQDlDeC: {
+											children: (
+												<React2.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+														}}
+													>
+														{"Get Started Today"}
+													</motion2.p>
+												</React2.Fragment>
+											),
+										},
+										xM5PygEYs: {
+											children: (
+												<React2.Fragment>
+													<motion2.p
+														className={"framer-styles-preset-1o7aipf"}
+														data-styles-preset={"x1n9RoGI8"}
+														style={{
+															"--framer-text-alignment": "center",
+															"--framer-text-color":
+																"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
+														}}
+													>
+														{"Get Started Today"}
+													</motion2.p>
+												</React2.Fragment>
+											),
+										},
+									},
+									baseVariant,
+									gestureVariant,
+								)}
+							>
+								<React2.Fragment>
+									<motion2.p
+										className={"framer-styles-preset-1o7aipf"}
+										data-styles-preset={"x1n9RoGI8"}
+										style={{
+											"--framer-text-alignment": "center",
+											"--framer-text-color":
+												"var(--extracted-r6o4lv, rgb(255, 255, 255))",
+										}}
+									>
+										{"Get Started Today"}
+									</motion2.p>
+								</React2.Fragment>
+							</RichText>
+							{isDisplayed() && (
+								<SVG
+									className={"framer-4fkkym"}
+									data-framer-name={"graphic"}
+									fill={
+										"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
 									}
-								</Link>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+									intrinsicHeight={24}
+									intrinsicWidth={24}
+									layoutDependency={layoutDependency}
+									layoutId={"wxaQbLUJQ"}
+									svg={
+										'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/></svg>'
+									}
+									withExternalLayout={true}
+								/>
+							)}
+						</motion2.a>
+					</Link>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -1269,410 +1223,349 @@ var Component2 = /* @__PURE__ */ React3.forwardRef(function (props, ref) {
 	useLoadingVariant(baseVariant, void 0, clearLoadingGesture, setGestureState);
 	return (
 		<LayoutGroup2 id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants2 animate={variants} initial={false}>
-					{
-						<Transition2 value={transition12}>
+			<Variants2 animate={variants} initial={false}>
+				<Transition2 value={transition12}>
+					<motion3.div
+						{...restProps}
+						{...gestureHandlers}
+						className={cx2(
+							scopingClassNames,
+							"framer-1tm8u0e",
+							className4,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Desktop"}
+						layoutDependency={layoutDependency}
+						layoutId={"irmdDvW3M"}
+						ref={refBinding}
+						style={{
+							"--border-bottom-width": "1px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "0px",
+							"--border-right-width": "0px",
+							"--border-style": "dotted",
+							"--border-top-width": "0px",
+							...style,
+						}}
+						{...addPropertyOverrides2(
 							{
+								AT8wrmErb: {
+									"data-framer-name": "Phone",
+								},
+								k0WNJFkxG: {
+									"data-framer-name": "Tablet",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion3.div
+							className={"framer-wwjp8a"}
+							data-border={true}
+							data-framer-name={"Main container"}
+							layoutDependency={layoutDependency}
+							layoutId={"FuLtNkywy"}
+							style={{
+								"--border-bottom-width": "0px",
+								"--border-color":
+									"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+								"--border-left-width": "1px",
+								"--border-right-width": "1px",
+								"--border-style": "dotted",
+								"--border-top-width": "0px",
+							}}
+						>
+							<motion3.div
+								className={"framer-779yo8"}
+								data-framer-name={"Pattern"}
+								layoutDependency={layoutDependency}
+								layoutId={"osNI1YhNF"}
+								style={{
+									backgroundColor:
+										"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+									mask: "url('https://framerusercontent.com/images/0RjNkZYilrHi1gaLamPLmApzh4.svg') alpha repeat top / 31px 31px add",
+									WebkitMask:
+										"url('https://framerusercontent.com/images/0RjNkZYilrHi1gaLamPLmApzh4.svg') alpha repeat top / 31px 31px add",
+								}}
+							/>
+							<motion3.div
+								className={"framer-h6rytd"}
+								data-framer-name={"Content"}
+								layoutDependency={layoutDependency}
+								layoutId={"zLk0rkZle"}
+							>
 								<motion3.div
-									{...restProps}
-									{...gestureHandlers}
-									className={cx2(
-										scopingClassNames,
-										"framer-1tm8u0e",
-										className4,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Desktop"}
+									className={"framer-geefo3"}
+									data-framer-name={"Title"}
 									layoutDependency={layoutDependency}
-									layoutId={"irmdDvW3M"}
-									ref={refBinding}
-									style={{
-										"--border-bottom-width": "1px",
-										"--border-color":
-											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-										"--border-left-width": "0px",
-										"--border-right-width": "0px",
-										"--border-style": "dotted",
-										"--border-top-width": "0px",
-										...style,
-									}}
-									{...addPropertyOverrides2(
-										{
-											AT8wrmErb: {
-												"data-framer-name": "Phone",
-											},
-											k0WNJFkxG: {
-												"data-framer-name": "Tablet",
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
+									layoutId={"f2nHerqYg"}
 								>
-									{
-										<motion3.div
-											className={"framer-wwjp8a"}
-											data-border={true}
-											data-framer-name={"Main container"}
-											layoutDependency={layoutDependency}
-											layoutId={"FuLtNkywy"}
-											style={{
-												"--border-bottom-width": "0px",
-												"--border-color":
-													"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-												"--border-left-width": "1px",
-												"--border-right-width": "1px",
-												"--border-style": "dotted",
-												"--border-top-width": "0px",
-											}}
-										>
-											{
-												<motion3.div
-													className={"framer-779yo8"}
-													data-framer-name={"Pattern"}
-													layoutDependency={layoutDependency}
-													layoutId={"osNI1YhNF"}
-													style={{
-														backgroundColor:
-															"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-														mask: "url('https://framerusercontent.com/images/0RjNkZYilrHi1gaLamPLmApzh4.svg') alpha repeat top / 31px 31px add",
-														WebkitMask:
-															"url('https://framerusercontent.com/images/0RjNkZYilrHi1gaLamPLmApzh4.svg') alpha repeat top / 31px 31px add",
-													}}
-												/>
-											}
-											{
-												<motion3.div
-													className={"framer-h6rytd"}
-													data-framer-name={"Content"}
-													layoutDependency={layoutDependency}
-													layoutId={"zLk0rkZle"}
+									<RichTextWithHotkeyCommandKqiuusm
+										__fromCanvasComponent={true}
+										className={"framer-qiuusm"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"YTpkTplet"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										{getLocalizedValue("v0", activeLocale) ?? (
+											<React3.Fragment>
+												<motion3.h1
+													className={"framer-styles-preset-1uddyv4"}
+													data-styles-preset={"BJ5jKpx2K"}
 												>
 													{
-														<motion3.div
-															className={"framer-geefo3"}
-															data-framer-name={"Title"}
-															layoutDependency={layoutDependency}
-															layoutId={"f2nHerqYg"}
-														>
-															{
-																<RichTextWithHotkeyCommandKqiuusm
-																	__fromCanvasComponent={true}
-																	className={"framer-qiuusm"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"YTpkTplet"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																>
-																	{getLocalizedValue("v0", activeLocale) ?? (
-																		<React3.Fragment>
-																			{
-																				<motion3.h1
-																					className={
-																						"framer-styles-preset-1uddyv4"
-																					}
-																					data-styles-preset={"BJ5jKpx2K"}
-																				>
-																					{
-																						"Supercharge your markdown files with our team editor"
-																					}
-																				</motion3.h1>
-																			}
-																		</React3.Fragment>
-																	)}
-																</RichTextWithHotkeyCommandKqiuusm>
-															}
-															{
-																<RichText2
-																	__fromCanvasComponent={true}
-																	className={"framer-w3ea6e"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"VqEU0TFLW"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																>
-																	{
-																		<React3.Fragment>
-																			{
-																				<motion3.p
-																					className={
-																						"framer-styles-preset-17qeria"
-																					}
-																					data-styles-preset={"vSuRg5Prj"}
-																					style={{
-																						"--framer-text-alignment": "center",
-																					}}
-																				>
-																					{
-																						"Make your markdown files editable by everyone. Let non technical team members write docs, save 1000+ hours of your engineers time! Edit effortlessly with our intuitive interface, designed for seamless collaboration and content creation. This is a longer text to showcase the capabilities of the editor. We aim to provide a seamless experience."
-																					}
-																				</motion3.p>
-																			}
-																		</React3.Fragment>
-																	}
-																</RichText2>
-															}
-															{
-																<Fetcher
-																	disabled={isLoading}
-																	requests={[
-																		{
-																			cacheDuration: 0,
-																			credentials: "same-origin",
-																			errorFallbackValue: "Error",
-																			fallbackValue:
-																				"Integrate seamlessly with our advanced technology platform",
-																			resultKeyPath: "description",
-																			resultOutputType: "string",
-																			url: `https://api.fetch.tools/weather?city=chiavari`,
-																		},
-																	]}
-																>
-																	{(fetchResult) => (
-																		<RichText2
-																			__fromCanvasComponent={true}
-																			className={"framer-nta2qk"}
-																			fonts={["Inter"]}
-																			layoutDependency={layoutDependency}
-																			layoutId={"at_FLmz5A"}
-																			style={{
-																				"--framer-link-text-color":
-																					"rgb(0, 153, 255)",
-																				"--framer-link-text-decoration":
-																					"underline",
-																			}}
-																			text={toString(fetchResult[0])}
-																			verticalAlignment={"top"}
-																			withExternalLayout={true}
-																		>
-																			{
-																				<React3.Fragment>
-																					{
-																						<motion3.p
-																							className={
-																								"framer-styles-preset-17qeria"
-																							}
-																							data-styles-preset={"vSuRg5Prj"}
-																							style={{
-																								"--framer-text-alignment":
-																									"center",
-																							}}
-																						>
-																							{
-																								"Integrate seamlessly with our advanced technology platform"
-																							}
-																						</motion3.p>
-																					}
-																				</React3.Fragment>
-																			}
-																		</RichText2>
-																	)}
-																</Fetcher>
-															}
-														</motion3.div>
+														"Supercharge your markdown files with our team editor"
 													}
-													{
-														<motion3.div
-															className={"framer-1tmomy5"}
-															layoutDependency={layoutDependency}
-															layoutId={"X4aIR0MSs"}
-														>
-															{
-																<ResolveLinks
-																	links={[
-																		{
-																			href: {
-																				webPageId: "cvVskSlKE",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "cvVskSlKE",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "cvVskSlKE",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																	]}
-																>
-																	{(resolvedLinks) => (
-																		<ComponentViewportProvider height={44}>
-																			{
-																				<SmartComponentScopedContainer
-																					className={"framer-xkdxln-container"}
-																					layoutDependency={layoutDependency}
-																					layoutId={"nMe9uT6NE-container"}
-																					nodeId={"nMe9uT6NE"}
-																					rendersWithMotion={true}
-																					scopeId={"mmEURJmx_"}
-																				>
-																					{_jsx4(stdin_default, {
-																						EiEU24ZnT: resolvedLinks[0],
-																						height: "100%",
-																						id: "nMe9uT6NE",
-																						Kr3LjdzQA: false,
-																						layoutId: "nMe9uT6NE",
-																						QTPGB_MgK: "Start Writing Now",
-																						variant: "ua4bVRH8I",
-																						width: "100%",
-																						...addPropertyOverrides2(
-																							{
-																								AT8wrmErb: {
-																									EiEU24ZnT: resolvedLinks[2],
-																								},
-																								k0WNJFkxG: {
-																									EiEU24ZnT: resolvedLinks[1],
-																								},
-																							},
-																							baseVariant,
-																							gestureVariant,
-																						),
-																					})}
-																				</SmartComponentScopedContainer>
-																			}
-																		</ComponentViewportProvider>
-																	)}
-																</ResolveLinks>
-															}
-															{
-																<ResolveLinks
-																	links={[
-																		{
-																			href: {
-																				webPageId: "qNb6QfkBq",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "qNb6QfkBq",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "qNb6QfkBq",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																	]}
-																>
-																	{(resolvedLinks1) => (
-																		<ComponentViewportProvider height={44}>
-																			{
-																				<SmartComponentScopedContainer
-																					className={"framer-19f5vcq-container"}
-																					layoutDependency={layoutDependency}
-																					layoutId={"x66oOyCLv-container"}
-																					nodeId={"x66oOyCLv"}
-																					rendersWithMotion={true}
-																					scopeId={"mmEURJmx_"}
-																				>
-																					{_jsx4(stdin_default, {
-																						EiEU24ZnT: resolvedLinks1[0],
-																						height: "100%",
-																						id: "x66oOyCLv",
-																						Kr3LjdzQA: false,
-																						layoutId: "x66oOyCLv",
-																						QTPGB_MgK: "Wanna Talk?",
-																						variant: "sbPQDlDeC",
-																						width: "100%",
-																						...addPropertyOverrides2(
-																							{
-																								AT8wrmErb: {
-																									EiEU24ZnT: resolvedLinks1[2],
-																								},
-																								k0WNJFkxG: {
-																									EiEU24ZnT: resolvedLinks1[1],
-																								},
-																							},
-																							baseVariant,
-																							gestureVariant,
-																						),
-																					})}
-																				</SmartComponentScopedContainer>
-																			}
-																		</ComponentViewportProvider>
-																	)}
-																</ResolveLinks>
-															}
-														</motion3.div>
-													}
-												</motion3.div>
-											}
+												</motion3.h1>
+											</React3.Fragment>
+										)}
+									</RichTextWithHotkeyCommandKqiuusm>
+									<RichText2
+										__fromCanvasComponent={true}
+										className={"framer-w3ea6e"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"VqEU0TFLW"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+									>
+										<React3.Fragment>
+											<motion3.p
+												className={"framer-styles-preset-17qeria"}
+												data-styles-preset={"vSuRg5Prj"}
+												style={{
+													"--framer-text-alignment": "center",
+												}}
+											>
+												{
+													"Make your markdown files editable by everyone. Let non technical team members write docs, save 1000+ hours of your engineers time! Edit effortlessly with our intuitive interface, designed for seamless collaboration and content creation. This is a longer text to showcase the capabilities of the editor. We aim to provide a seamless experience."
+												}
+											</motion3.p>
+										</React3.Fragment>
+									</RichText2>
+									<Fetcher
+										disabled={isLoading}
+										requests={[
 											{
-												<RichText2
-													__fromCanvasComponent={true}
-													className={"framer-3lr5ch"}
-													fonts={["Inter"]}
-													layoutDependency={layoutDependency}
-													layoutId={"oQVCiZeOK"}
-													style={{
-														"--framer-link-text-color": "rgb(0, 153, 255)",
-														"--framer-link-text-decoration": "underline",
-													}}
-													text={pK2wngmSd}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-												>
-													{
-														<React3.Fragment>
-															{<motion3.p>{"asdf"}</motion3.p>}
-														</React3.Fragment>
-													}
-												</RichText2>
-											}
-											{
-												<RichText2
-													__fromCanvasComponent={true}
-													className={"framer-ikh0zc"}
-													fonts={["Inter"]}
-													layoutDependency={layoutDependency}
-													layoutId={"xnzQlv7U9"}
-													style={{
-														"--framer-link-text-color": "rgb(0, 153, 255)",
-														"--framer-link-text-decoration": "underline",
-													}}
-													text={eDjww7bT1}
-													verticalAlignment={"top"}
-													withExternalLayout={true}
-												>
-													{
-														<React3.Fragment>
-															{<motion3.p>{"asdf"}</motion3.p>}
-														</React3.Fragment>
-													}
-												</RichText2>
-											}
-										</motion3.div>
-									}
+												cacheDuration: 0,
+												credentials: "same-origin",
+												errorFallbackValue: "Error",
+												fallbackValue:
+													"Integrate seamlessly with our advanced technology platform",
+												resultKeyPath: "description",
+												resultOutputType: "string",
+												url: `https://api.fetch.tools/weather?city=chiavari`,
+											},
+										]}
+									>
+										{(fetchResult) => (
+											<RichText2
+												__fromCanvasComponent={true}
+												className={"framer-nta2qk"}
+												fonts={["Inter"]}
+												layoutDependency={layoutDependency}
+												layoutId={"at_FLmz5A"}
+												style={{
+													"--framer-link-text-color": "rgb(0, 153, 255)",
+													"--framer-link-text-decoration": "underline",
+												}}
+												text={toString(fetchResult[0])}
+												verticalAlignment={"top"}
+												withExternalLayout={true}
+											>
+												<React3.Fragment>
+													<motion3.p
+														className={"framer-styles-preset-17qeria"}
+														data-styles-preset={"vSuRg5Prj"}
+														style={{
+															"--framer-text-alignment": "center",
+														}}
+													>
+														{
+															"Integrate seamlessly with our advanced technology platform"
+														}
+													</motion3.p>
+												</React3.Fragment>
+											</RichText2>
+										)}
+									</Fetcher>
 								</motion3.div>
-							}
-						</Transition2>
-					}
-				</Variants2>
-			}
+								<motion3.div
+									className={"framer-1tmomy5"}
+									layoutDependency={layoutDependency}
+									layoutId={"X4aIR0MSs"}
+								>
+									<ResolveLinks
+										links={[
+											{
+												href: {
+													webPageId: "cvVskSlKE",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "cvVskSlKE",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "cvVskSlKE",
+												},
+												implicitPathVariables: void 0,
+											},
+										]}
+									>
+										{(resolvedLinks) => (
+											<ComponentViewportProvider height={44}>
+												<SmartComponentScopedContainer
+													className={"framer-xkdxln-container"}
+													layoutDependency={layoutDependency}
+													layoutId={"nMe9uT6NE-container"}
+													nodeId={"nMe9uT6NE"}
+													rendersWithMotion={true}
+													scopeId={"mmEURJmx_"}
+												>
+													{_jsx4(stdin_default, {
+														EiEU24ZnT: resolvedLinks[0],
+														height: "100%",
+														id: "nMe9uT6NE",
+														Kr3LjdzQA: false,
+														layoutId: "nMe9uT6NE",
+														QTPGB_MgK: "Start Writing Now",
+														variant: "ua4bVRH8I",
+														width: "100%",
+														...addPropertyOverrides2(
+															{
+																AT8wrmErb: {
+																	EiEU24ZnT: resolvedLinks[2],
+																},
+																k0WNJFkxG: {
+																	EiEU24ZnT: resolvedLinks[1],
+																},
+															},
+															baseVariant,
+															gestureVariant,
+														),
+													})}
+												</SmartComponentScopedContainer>
+											</ComponentViewportProvider>
+										)}
+									</ResolveLinks>
+									<ResolveLinks
+										links={[
+											{
+												href: {
+													webPageId: "qNb6QfkBq",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "qNb6QfkBq",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "qNb6QfkBq",
+												},
+												implicitPathVariables: void 0,
+											},
+										]}
+									>
+										{(resolvedLinks1) => (
+											<ComponentViewportProvider height={44}>
+												<SmartComponentScopedContainer
+													className={"framer-19f5vcq-container"}
+													layoutDependency={layoutDependency}
+													layoutId={"x66oOyCLv-container"}
+													nodeId={"x66oOyCLv"}
+													rendersWithMotion={true}
+													scopeId={"mmEURJmx_"}
+												>
+													{_jsx4(stdin_default, {
+														EiEU24ZnT: resolvedLinks1[0],
+														height: "100%",
+														id: "x66oOyCLv",
+														Kr3LjdzQA: false,
+														layoutId: "x66oOyCLv",
+														QTPGB_MgK: "Wanna Talk?",
+														variant: "sbPQDlDeC",
+														width: "100%",
+														...addPropertyOverrides2(
+															{
+																AT8wrmErb: {
+																	EiEU24ZnT: resolvedLinks1[2],
+																},
+																k0WNJFkxG: {
+																	EiEU24ZnT: resolvedLinks1[1],
+																},
+															},
+															baseVariant,
+															gestureVariant,
+														),
+													})}
+												</SmartComponentScopedContainer>
+											</ComponentViewportProvider>
+										)}
+									</ResolveLinks>
+								</motion3.div>
+							</motion3.div>
+							<RichText2
+								__fromCanvasComponent={true}
+								className={"framer-3lr5ch"}
+								fonts={["Inter"]}
+								layoutDependency={layoutDependency}
+								layoutId={"oQVCiZeOK"}
+								style={{
+									"--framer-link-text-color": "rgb(0, 153, 255)",
+									"--framer-link-text-decoration": "underline",
+								}}
+								text={pK2wngmSd}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+							>
+								<React3.Fragment>
+									<motion3.p>{"asdf"}</motion3.p>
+								</React3.Fragment>
+							</RichText2>
+							<RichText2
+								__fromCanvasComponent={true}
+								className={"framer-ikh0zc"}
+								fonts={["Inter"]}
+								layoutDependency={layoutDependency}
+								layoutId={"xnzQlv7U9"}
+								style={{
+									"--framer-link-text-color": "rgb(0, 153, 255)",
+									"--framer-link-text-decoration": "underline",
+								}}
+								text={eDjww7bT1}
+								verticalAlignment={"top"}
+								withExternalLayout={true}
+							>
+								<React3.Fragment>
+									<motion3.p>{"asdf"}</motion3.p>
+								</React3.Fragment>
+							</RichText2>
+						</motion3.div>
+					</motion3.div>
+				</Transition2>
+			</Variants2>
 		</LayoutGroup2>
 	);
 });
@@ -1858,13 +1751,11 @@ stdin_default2.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default2}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default2}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };

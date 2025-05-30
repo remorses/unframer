@@ -3190,2020 +3190,1642 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			{
-				<Variants animate={variants} initial={false}>
-					{
-						<Transition value={transition1}>
+			<Variants animate={variants} initial={false}>
+				<Transition value={transition1}>
+					<motion.nav
+						{...restProps}
+						{...gestureHandlers}
+						className={cx(
+							serializationHash,
+							...sharedStyleClassNames,
+							"framer-1itxsq0",
+							className3,
+							classNames,
+						)}
+						data-border={true}
+						data-framer-name={"Desktop"}
+						layoutDependency={layoutDependency}
+						layoutId={"Ua7zIMVrQ"}
+						ref={ref ?? ref1}
+						style={{
+							"--border-bottom-width": "0px",
+							"--border-color":
+								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+							"--border-left-width": "0px",
+							"--border-right-width": "1px",
+							"--border-style": "solid",
+							"--border-top-width": "0px",
+							backgroundColor:
+								"var(--token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2, rgb(255, 252, 250))",
+							...style,
+						}}
+						variants={{
+							j23OGbszH: {
+								"--border-bottom-width": "0px",
+								"--border-left-width": "0px",
+								"--border-right-width": "0px",
+								"--border-top-width": "0px",
+							},
+						}}
+						{...addPropertyOverrides(
 							{
-								<motion.nav
-									{...restProps}
-									{...gestureHandlers}
-									className={cx(
-										serializationHash,
-										...sharedStyleClassNames,
-										"framer-1itxsq0",
-										className3,
-										classNames,
-									)}
-									data-border={true}
-									data-framer-name={"Desktop"}
-									layoutDependency={layoutDependency}
-									layoutId={"Ua7zIMVrQ"}
-									ref={ref ?? ref1}
-									style={{
-										"--border-bottom-width": "0px",
-										"--border-color":
-											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-										"--border-left-width": "0px",
-										"--border-right-width": "1px",
-										"--border-style": "solid",
-										"--border-top-width": "0px",
-										backgroundColor:
-											"var(--token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2, rgb(255, 252, 250))",
-										...style,
-									}}
-									variants={{
-										j23OGbszH: {
-											"--border-bottom-width": "0px",
-											"--border-left-width": "0px",
-											"--border-right-width": "0px",
-											"--border-top-width": "0px",
-										},
-									}}
-									{...addPropertyOverrides(
-										{
-											j23OGbszH: {
-												"data-framer-name": "Mobile Open",
-											},
-											RZi2QXpn2: {
-												"data-framer-name": "Mobile",
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
+								j23OGbszH: {
+									"data-framer-name": "Mobile Open",
+								},
+								RZi2QXpn2: {
+									"data-framer-name": "Mobile",
+								},
+							},
+							baseVariant,
+							gestureVariant,
+						)}
+					>
+						<motion.div
+							className={"framer-1ndgmpu"}
+							layoutDependency={layoutDependency}
+							layoutId={"kX4IzoHJs"}
+						>
+							<motion.div
+								className={"framer-ly0fsu"}
+								data-border={true}
+								layoutDependency={layoutDependency}
+								layoutId={"V8tJDHFHj"}
+								style={{
+									"--border-bottom-width": "1px",
+									"--border-color":
+										"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+									"--border-left-width": "0px",
+									"--border-right-width": "1px",
+									"--border-style": "solid",
+									"--border-top-width": "0px",
+									backgroundColor:
+										"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+								}}
+								variants={{
+									j23OGbszH: {
+										"--border-right-width": "0px",
+									},
+									RZi2QXpn2: {
+										"--border-right-width": "0px",
+									},
+								}}
+							>
+								<ComponentViewportProvider
+									height={20}
+									y={(componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 26}
 								>
-									{
+									<motion.div
+										className={"framer-se4jzp-container"}
+										layoutDependency={layoutDependency}
+										layoutId={"XZL0KK4M0-container"}
+									>
+										{_jsx(stdin_default, {
+											height: "100%",
+											id: "XZL0KK4M0",
+											layoutId: "XZL0KK4M0",
+											variant: "f64gXesMC",
+											width: "100%",
+										})}
+									</motion.div>
+								</ComponentViewportProvider>
+								<motion.div
+									className={"framer-1daod3w"}
+									layoutDependency={layoutDependency}
+									layoutId={"O2ZIGxm7J"}
+								>
+									<ComponentViewportProvider
+										height={40}
+										y={(componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 16 + 0}
+									>
 										<motion.div
-											className={"framer-1ndgmpu"}
+											className={"framer-1l3wpga-container"}
 											layoutDependency={layoutDependency}
-											layoutId={"kX4IzoHJs"}
+											layoutId={"FXtvEQdeW-container"}
 										>
+											<NavigationSingleToggleWithSingleToggleWithMappedReactProps19vtxsf
+												height={"100%"}
+												id={"FXtvEQdeW"}
+												layoutId={"FXtvEQdeW"}
+												Tib6Q7ZnQ={
+													"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
+												}
+												width={"100%"}
+											/>
+										</motion.div>
+									</ComponentViewportProvider>
+								</motion.div>
+								{isDisplayed() && (
+									<ComponentViewportProvider
+										{...addPropertyOverrides(
 											{
-												<motion.div
-													className={"framer-ly0fsu"}
-													data-border={true}
-													layoutDependency={layoutDependency}
-													layoutId={"V8tJDHFHj"}
-													style={{
-														"--border-bottom-width": "1px",
-														"--border-color":
-															"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-														"--border-left-width": "0px",
-														"--border-right-width": "1px",
-														"--border-style": "solid",
-														"--border-top-width": "0px",
-														backgroundColor:
-															"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-													}}
-													variants={{
+												j23OGbszH: {
+													height: 44,
+													width: "44px",
+													y: (componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 14,
+												},
+												RZi2QXpn2: {
+													height: 44,
+													width: "44px",
+													y: (componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 14,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-u4hjb-container"}
+											data-framer-name={"Menu Icon"}
+											layoutDependency={layoutDependency}
+											layoutId={"MUbWImX46-container"}
+											name={"Menu Icon"}
+										>
+											{_jsx(stdin_default2, {
+												height: "100%",
+												id: "MUbWImX46",
+												layoutId: "MUbWImX46",
+												name: "Menu Icon",
+												style: {
+													height: "100%",
+												},
+												variant: "ufJIpzVk3",
+												width: "100%",
+												...addPropertyOverrides(
+													{
 														j23OGbszH: {
-															"--border-right-width": "0px",
+															variant: "h7DS_KM0Q",
+															XKaY3MrGu: XKaY3MrGuevdhk3,
 														},
 														RZi2QXpn2: {
-															"--border-right-width": "0px",
+															XKaY3MrGu: XKaY3MrGu1d8p0gt,
 														},
-													}}
-												>
-													{
-														<ComponentViewportProvider
-															height={20}
-															y={
-																(componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 26
-															}
-														>
-															{
-																<motion.div
-																	className={"framer-se4jzp-container"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"XZL0KK4M0-container"}
-																>
-																	{_jsx(stdin_default, {
-																		height: "100%",
-																		id: "XZL0KK4M0",
-																		layoutId: "XZL0KK4M0",
-																		variant: "f64gXesMC",
-																		width: "100%",
-																	})}
-																</motion.div>
-															}
-														</ComponentViewportProvider>
-													}
-													{
-														<motion.div
-															className={"framer-1daod3w"}
-															layoutDependency={layoutDependency}
-															layoutId={"O2ZIGxm7J"}
-														>
-															{
-																<ComponentViewportProvider
-																	height={40}
-																	y={
-																		(componentViewport?.y || 0) +
-																		0 +
-																		0 +
-																		0 +
-																		0 +
-																		16 +
-																		0
-																	}
-																>
-																	{
-																		<motion.div
-																			className={"framer-1l3wpga-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"FXtvEQdeW-container"}
-																		>
-																			{
-																				<NavigationSingleToggleWithSingleToggleWithMappedReactProps19vtxsf
-																					height={"100%"}
-																					id={"FXtvEQdeW"}
-																					layoutId={"FXtvEQdeW"}
-																					Tib6Q7ZnQ={
-																						"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
-																					}
-																					width={"100%"}
-																				/>
-																			}
-																		</motion.div>
-																	}
-																</ComponentViewportProvider>
-															}
-														</motion.div>
-													}
-													{isDisplayed() && (
-														<ComponentViewportProvider
-															{...addPropertyOverrides(
-																{
-																	j23OGbszH: {
-																		height: 44,
-																		width: "44px",
-																		y:
-																			(componentViewport?.y || 0) +
-																			0 +
-																			0 +
-																			0 +
-																			0 +
-																			14,
-																	},
-																	RZi2QXpn2: {
-																		height: 44,
-																		width: "44px",
-																		y:
-																			(componentViewport?.y || 0) +
-																			0 +
-																			0 +
-																			0 +
-																			0 +
-																			14,
-																	},
-																},
-																baseVariant,
-																gestureVariant,
-															)}
-														>
-															{
-																<motion.div
-																	className={"framer-u4hjb-container"}
-																	data-framer-name={"Menu Icon"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"MUbWImX46-container"}
-																	name={"Menu Icon"}
-																>
-																	{_jsx(stdin_default2, {
-																		height: "100%",
-																		id: "MUbWImX46",
-																		layoutId: "MUbWImX46",
-																		name: "Menu Icon",
-																		style: {
-																			height: "100%",
-																		},
-																		variant: "ufJIpzVk3",
-																		width: "100%",
-																		...addPropertyOverrides(
-																			{
-																				j23OGbszH: {
-																					variant: "h7DS_KM0Q",
-																					XKaY3MrGu: XKaY3MrGuevdhk3,
-																				},
-																				RZi2QXpn2: {
-																					XKaY3MrGu: XKaY3MrGu1d8p0gt,
-																				},
-																			},
-																			baseVariant,
-																			gestureVariant,
-																		),
-																	})}
-																</motion.div>
-															}
-														</ComponentViewportProvider>
-													)}
-													{isDisplayed() && (
-														<motion.div
-															className={"framer-4q32db"}
-															layoutDependency={layoutDependency}
-															layoutId={"DVibIJMlg"}
-														/>
-													)}
-												</motion.div>
-											}
+													},
+													baseVariant,
+													gestureVariant,
+												),
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+								)}
+								{isDisplayed() && (
+									<motion.div
+										className={"framer-4q32db"}
+										layoutDependency={layoutDependency}
+										layoutId={"DVibIJMlg"}
+									/>
+								)}
+							</motion.div>
+							<motion.div
+								className={"framer-7ps8qj"}
+								layoutDependency={layoutDependency}
+								layoutId={"at1kHec1T"}
+							>
+								<motion.div
+									className={"framer-1hgoa8b"}
+									layoutDependency={layoutDependency}
+									layoutId={"NwzRPDKBV"}
+								>
+									<ResolveLinks
+										links={[
 											{
-												<motion.div
-													className={"framer-7ps8qj"}
-													layoutDependency={layoutDependency}
-													layoutId={"at1kHec1T"}
-												>
+												href: {
+													webPageId: "augiA20Il",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "augiA20Il",
+												},
+												implicitPathVariables: void 0,
+											},
+											{
+												href: {
+													webPageId: "augiA20Il",
+												},
+												implicitPathVariables: void 0,
+											},
+										]}
+									>
+										{(resolvedLinks) => (
+											<ComponentViewportProvider
+												height={22}
+												width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+												y={
+													(componentViewport?.y || 0) +
+													0 +
+													0 +
+													0 +
+													72 +
+													24 +
+													0 +
+													0 +
+													0
+												}
+												{...addPropertyOverrides(
 													{
-														<motion.div
-															className={"framer-1hgoa8b"}
-															layoutDependency={layoutDependency}
-															layoutId={"NwzRPDKBV"}
-														>
+														j23OGbszH: {
+															width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+															y:
+																(componentViewport?.y || 0) +
+																0 +
+																0 +
+																0 +
+																72 +
+																20 +
+																0 +
+																0 +
+																0,
+														},
+														RZi2QXpn2: {
+															width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+															y:
+																(componentViewport?.y || 0) +
+																0 +
+																0 +
+																0 +
+																72 +
+																20 +
+																0 +
+																0 +
+																0,
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												)}
+											>
+												<motion.div
+													className={"framer-1q9065w-container"}
+													layoutDependency={layoutDependency}
+													layoutId={"dulrMZGd0-container"}
+												>
+													{_jsx(stdin_default4, {
+														ePlyYLEKs: resolvedLinks[0],
+														height: "100%",
+														hXz7zW7sx:
+															'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+														id: "dulrMZGd0",
+														layoutId: "dulrMZGd0",
+														QH5Qo5oGm: "Homepage",
+														style: {
+															width: "100%",
+														},
+														variant: "heetu2faa",
+														width: "100%",
+														...addPropertyOverrides(
 															{
-																<ResolveLinks
-																	links={[
-																		{
-																			href: {
-																				webPageId: "augiA20Il",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "augiA20Il",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																		{
-																			href: {
-																				webPageId: "augiA20Il",
-																			},
-																			implicitPathVariables: void 0,
-																		},
-																	]}
-																>
-																	{(resolvedLinks) => (
-																		<ComponentViewportProvider
-																			height={22}
-																			width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
-																			y={
-																				(componentViewport?.y || 0) +
-																				0 +
-																				0 +
-																				0 +
-																				72 +
-																				24 +
-																				0 +
-																				0 +
-																				0
-																			}
-																			{...addPropertyOverrides(
-																				{
-																					j23OGbszH: {
-																						width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																						y:
-																							(componentViewport?.y || 0) +
-																							0 +
-																							0 +
-																							0 +
-																							72 +
-																							20 +
-																							0 +
-																							0 +
-																							0,
-																					},
-																					RZi2QXpn2: {
-																						width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																						y:
-																							(componentViewport?.y || 0) +
-																							0 +
-																							0 +
-																							0 +
-																							72 +
-																							20 +
-																							0 +
-																							0 +
-																							0,
-																					},
-																				},
-																				baseVariant,
-																				gestureVariant,
-																			)}
+																j23OGbszH: {
+																	ePlyYLEKs: resolvedLinks[2],
+																	variant: "GjdyYzXnv",
+																},
+																RZi2QXpn2: {
+																	ePlyYLEKs: resolvedLinks[1],
+																	variant: "GjdyYzXnv",
+																},
+															},
+															baseVariant,
+															gestureVariant,
+														),
+													})}
+												</motion.div>
+											</ComponentViewportProvider>
+										)}
+									</ResolveLinks>
+									<ComponentViewportProvider
+										height={22}
+										width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+										y={
+											(componentViewport?.y || 0) +
+											0 +
+											0 +
+											0 +
+											72 +
+											24 +
+											0 +
+											0 +
+											34
+										}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														34,
+												},
+												RZi2QXpn2: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														34,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-ooe0aj-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"D1i4CbWxt-container"}
+										>
+											{_jsx(stdin_default4, {
+												ePlyYLEKs: "discord.com",
+												height: "100%",
+												hXz7zW7sx:
+													'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" /> </svg>',
+												id: "D1i4CbWxt",
+												layoutId: "D1i4CbWxt",
+												QH5Qo5oGm: "Developer community",
+												style: {
+													width: "100%",
+												},
+												variant: "heetu2faa",
+												width: "100%",
+												...addPropertyOverrides(
+													{
+														j23OGbszH: {
+															variant: "GjdyYzXnv",
+														},
+														RZi2QXpn2: {
+															variant: "GjdyYzXnv",
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												),
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+									<ComponentViewportProvider
+										height={22}
+										width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+										y={
+											(componentViewport?.y || 0) +
+											0 +
+											0 +
+											0 +
+											72 +
+											24 +
+											0 +
+											0 +
+											68
+										}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														68,
+												},
+												RZi2QXpn2: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														68,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-1udxc7a-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"KG5Lw9u0E-container"}
+										>
+											{_jsx(stdin_default4, {
+												ePlyYLEKs: "/blog",
+												height: "100%",
+												hXz7zW7sx:
+													'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" /> </svg>',
+												id: "KG5Lw9u0E",
+												layoutId: "KG5Lw9u0E",
+												QH5Qo5oGm: "Company blog",
+												style: {
+													width: "100%",
+												},
+												variant: "heetu2faa",
+												width: "100%",
+												...addPropertyOverrides(
+													{
+														j23OGbszH: {
+															variant: "GjdyYzXnv",
+														},
+														RZi2QXpn2: {
+															variant: "GjdyYzXnv",
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												),
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+									<ComponentViewportProvider
+										height={22}
+										width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+										y={
+											(componentViewport?.y || 0) +
+											0 +
+											0 +
+											0 +
+											72 +
+											24 +
+											0 +
+											0 +
+											102
+										}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														102,
+												},
+												RZi2QXpn2: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														102,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-5q893l-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"HnsixN5fY-container"}
+										>
+											{_jsx(stdin_default4, {
+												ePlyYLEKs: "zapier.com",
+												height: "100%",
+												hXz7zW7sx:
+													'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" /> </svg>',
+												id: "HnsixN5fY",
+												layoutId: "HnsixN5fY",
+												QH5Qo5oGm: "Zapier no-code",
+												style: {
+													width: "100%",
+												},
+												variant: "heetu2faa",
+												width: "100%",
+												...addPropertyOverrides(
+													{
+														j23OGbszH: {
+															variant: "GjdyYzXnv",
+														},
+														RZi2QXpn2: {
+															variant: "GjdyYzXnv",
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												),
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+									<ComponentViewportProvider
+										height={22}
+										width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+										y={
+											(componentViewport?.y || 0) +
+											0 +
+											0 +
+											0 +
+											72 +
+											24 +
+											0 +
+											0 +
+											136
+										}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														136,
+												},
+												RZi2QXpn2: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														136,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-eexe78-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"JlFB3zL5T-container"}
+										>
+											{_jsx(stdin_default4, {
+												ePlyYLEKs: "make.com",
+												height: "100%",
+												hXz7zW7sx:
+													'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6Zm1.5 1.5a.75.75 0 0 0-.75.75V16.5a.75.75 0 0 0 1.085.67L12 15.089l4.165 2.083a.75.75 0 0 0 1.085-.671V5.25a.75.75 0 0 0-.75-.75h-9Z" clip-rule="evenodd" /> </svg>',
+												id: "JlFB3zL5T",
+												layoutId: "JlFB3zL5T",
+												QH5Qo5oGm: "Make no-code",
+												style: {
+													width: "100%",
+												},
+												variant: "heetu2faa",
+												width: "100%",
+												...addPropertyOverrides(
+													{
+														j23OGbszH: {
+															variant: "GjdyYzXnv",
+														},
+														RZi2QXpn2: {
+															variant: "GjdyYzXnv",
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												),
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+									<ComponentViewportProvider
+										height={22}
+										width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+										y={
+											(componentViewport?.y || 0) +
+											0 +
+											0 +
+											0 +
+											72 +
+											24 +
+											0 +
+											0 +
+											170
+										}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														170,
+												},
+												RZi2QXpn2: {
+													width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+													y:
+														(componentViewport?.y || 0) +
+														0 +
+														0 +
+														0 +
+														72 +
+														20 +
+														0 +
+														0 +
+														170,
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<motion.div
+											className={"framer-yruap7-container"}
+											layoutDependency={layoutDependency}
+											layoutId={"Ps_D4SbEo-container"}
+										>
+											{_jsx(stdin_default4, {
+												ePlyYLEKs: "/contact-sales",
+												height: "100%",
+												hXz7zW7sx:
+													'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M17.303 5.197A7.5 7.5 0 0 0 6.697 15.803a.75.75 0 0 1-1.061 1.061A9 9 0 1 1 21 10.5a.75.75 0 0 1-1.5 0c0-1.92-.732-3.839-2.197-5.303Zm-2.121 2.121a4.5 4.5 0 0 0-6.364 6.364.75.75 0 1 1-1.06 1.06A6 6 0 1 1 18 10.5a.75.75 0 0 1-1.5 0c0-1.153-.44-2.303-1.318-3.182Zm-3.634 1.314a.75.75 0 0 1 .82.311l5.228 7.917a.75.75 0 0 1-.777 1.148l-2.097-.43 1.045 3.9a.75.75 0 0 1-1.45.388l-1.044-3.899-1.601 1.42a.75.75 0 0 1-1.247-.606l.569-9.47a.75.75 0 0 1 .554-.68Z" clip-rule="evenodd" /> </svg>',
+												id: "Ps_D4SbEo",
+												layoutId: "Ps_D4SbEo",
+												QH5Qo5oGm: "Contact Sales",
+												style: {
+													width: "100%",
+												},
+												variant: "heetu2faa",
+												width: "100%",
+												...addPropertyOverrides(
+													{
+														j23OGbszH: {
+															variant: "GjdyYzXnv",
+														},
+														RZi2QXpn2: {
+															variant: "GjdyYzXnv",
+														},
+													},
+													baseVariant,
+													gestureVariant,
+												),
+											})}
+										</motion.div>
+									</ComponentViewportProvider>
+								</motion.div>
+								<motion.div
+									className={"framer-9ino1c"}
+									layoutDependency={layoutDependency}
+									layoutId={"PwNAMIdKB"}
+								>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-t1dpes"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"NZAWzxRRb"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Guides"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												RZi2QXpn2: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Guides"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1o7aipf"}
+												data-styles-preset={"x1n9RoGI8"}
+											>
+												{"Guides"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<motion.div
+										className={"framer-y890q8"}
+										layoutDependency={layoutDependency}
+										layoutId={"AifdLQB51"}
+									>
+										<ChildrenCanSuspend>
+											<QueryData
+												query={{
+													from: {
+														alias: "AifdLQB51",
+														data: stdin_default5,
+														type: "Collection",
+													},
+													orderBy: [
+														{
+															collection: "AifdLQB51",
+															direction: "desc",
+															name: "index",
+															type: "Identifier",
+														},
+													],
+													select: [
+														{
+															collection: "AifdLQB51",
+															name: "mtLfIqK6f",
+															type: "Identifier",
+														},
+														{
+															collection: "AifdLQB51",
+															name: "TU8f1WfzS",
+															type: "Identifier",
+														},
+														{
+															collection: "AifdLQB51",
+															name: "id",
+															type: "Identifier",
+														},
+													],
+													where: {
+														left: {
+															collection: "AifdLQB51",
+															name: "ewkIozG5C",
+															type: "Identifier",
+														},
+														operator: "==",
+														right: {
+															type: "LiteralValue",
+															value: "Zwla6d58d",
+														},
+														type: "BinaryOperation",
+													},
+												}}
+											>
+												{(collection, paginationInfo, loadMore) => (
+													<_Fragment>
+														{collection.map(
+															(
+																{
+																	mtLfIqK6f: mtLfIqK6fAifdLQB512,
+																	TU8f1WfzS: TU8f1WfzSAifdLQB512,
+																	id: idAifdLQB512,
+																},
+																i2,
+															) => {
+																mtLfIqK6fAifdLQB512 ??= "";
+																TU8f1WfzSAifdLQB512 ??= "";
+																return (
+																	<LayoutGroup id={`AifdLQB51-${idAifdLQB512}`}>
+																		<PathVariablesContext.Provider
+																			value={{
+																				TU8f1WfzS: TU8f1WfzSAifdLQB512,
+																			}}
 																		>
-																			{
-																				<motion.div
-																					className={"framer-1q9065w-container"}
-																					layoutDependency={layoutDependency}
-																					layoutId={"dulrMZGd0-container"}
-																				>
-																					{_jsx(stdin_default4, {
-																						ePlyYLEKs: resolvedLinks[0],
-																						height: "100%",
-																						hXz7zW7sx:
-																							'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-																						id: "dulrMZGd0",
-																						layoutId: "dulrMZGd0",
-																						QH5Qo5oGm: "Homepage",
-																						style: {
-																							width: "100%",
+																			<ResolveLinks
+																				links={[
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSAifdLQB512,
+																							},
+																							webPageId: "dqRVpj9Kn",
 																						},
-																						variant: "heetu2faa",
-																						width: "100%",
-																						...addPropertyOverrides(
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSAifdLQB512,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSAifdLQB512,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																				]}
+																			>
+																				{(resolvedLinks1) => (
+																					<ComponentViewportProvider
+																						height={22}
+																						width={"186px"}
+																						{...addPropertyOverrides(
 																							{
 																								j23OGbszH: {
-																									ePlyYLEKs: resolvedLinks[2],
-																									variant: "GjdyYzXnv",
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
 																								},
 																								RZi2QXpn2: {
-																									ePlyYLEKs: resolvedLinks[1],
-																									variant: "GjdyYzXnv",
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
 																								},
 																							},
 																							baseVariant,
 																							gestureVariant,
-																						),
-																					})}
-																				</motion.div>
-																			}
-																		</ComponentViewportProvider>
-																	)}
-																</ResolveLinks>
-															}
-															{
-																<ComponentViewportProvider
-																	height={22}
-																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
-																	y={
-																		(componentViewport?.y || 0) +
-																		0 +
-																		0 +
-																		0 +
-																		72 +
-																		24 +
-																		0 +
-																		0 +
-																		34
-																	}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					34,
-																			},
-																			RZi2QXpn2: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					34,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<motion.div
-																			className={"framer-ooe0aj-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"D1i4CbWxt-container"}
-																		>
-																			{_jsx(stdin_default4, {
-																				ePlyYLEKs: "discord.com",
-																				height: "100%",
-																				hXz7zW7sx:
-																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" /> </svg>',
-																				id: "D1i4CbWxt",
-																				layoutId: "D1i4CbWxt",
-																				QH5Qo5oGm: "Developer community",
-																				style: {
-																					width: "100%",
-																				},
-																				variant: "heetu2faa",
-																				width: "100%",
-																				...addPropertyOverrides(
-																					{
-																						j23OGbszH: {
-																							variant: "GjdyYzXnv",
-																						},
-																						RZi2QXpn2: {
-																							variant: "GjdyYzXnv",
-																						},
-																					},
-																					baseVariant,
-																					gestureVariant,
-																				),
-																			})}
-																		</motion.div>
-																	}
-																</ComponentViewportProvider>
-															}
-															{
-																<ComponentViewportProvider
-																	height={22}
-																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
-																	y={
-																		(componentViewport?.y || 0) +
-																		0 +
-																		0 +
-																		0 +
-																		72 +
-																		24 +
-																		0 +
-																		0 +
-																		68
-																	}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					68,
-																			},
-																			RZi2QXpn2: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					68,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<motion.div
-																			className={"framer-1udxc7a-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"KG5Lw9u0E-container"}
-																		>
-																			{_jsx(stdin_default4, {
-																				ePlyYLEKs: "/blog",
-																				height: "100%",
-																				hXz7zW7sx:
-																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" /> </svg>',
-																				id: "KG5Lw9u0E",
-																				layoutId: "KG5Lw9u0E",
-																				QH5Qo5oGm: "Company blog",
-																				style: {
-																					width: "100%",
-																				},
-																				variant: "heetu2faa",
-																				width: "100%",
-																				...addPropertyOverrides(
-																					{
-																						j23OGbszH: {
-																							variant: "GjdyYzXnv",
-																						},
-																						RZi2QXpn2: {
-																							variant: "GjdyYzXnv",
-																						},
-																					},
-																					baseVariant,
-																					gestureVariant,
-																				),
-																			})}
-																		</motion.div>
-																	}
-																</ComponentViewportProvider>
-															}
-															{
-																<ComponentViewportProvider
-																	height={22}
-																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
-																	y={
-																		(componentViewport?.y || 0) +
-																		0 +
-																		0 +
-																		0 +
-																		72 +
-																		24 +
-																		0 +
-																		0 +
-																		102
-																	}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					102,
-																			},
-																			RZi2QXpn2: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					102,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<motion.div
-																			className={"framer-5q893l-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"HnsixN5fY-container"}
-																		>
-																			{_jsx(stdin_default4, {
-																				ePlyYLEKs: "zapier.com",
-																				height: "100%",
-																				hXz7zW7sx:
-																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" /> </svg>',
-																				id: "HnsixN5fY",
-																				layoutId: "HnsixN5fY",
-																				QH5Qo5oGm: "Zapier no-code",
-																				style: {
-																					width: "100%",
-																				},
-																				variant: "heetu2faa",
-																				width: "100%",
-																				...addPropertyOverrides(
-																					{
-																						j23OGbszH: {
-																							variant: "GjdyYzXnv",
-																						},
-																						RZi2QXpn2: {
-																							variant: "GjdyYzXnv",
-																						},
-																					},
-																					baseVariant,
-																					gestureVariant,
-																				),
-																			})}
-																		</motion.div>
-																	}
-																</ComponentViewportProvider>
-															}
-															{
-																<ComponentViewportProvider
-																	height={22}
-																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
-																	y={
-																		(componentViewport?.y || 0) +
-																		0 +
-																		0 +
-																		0 +
-																		72 +
-																		24 +
-																		0 +
-																		0 +
-																		136
-																	}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					136,
-																			},
-																			RZi2QXpn2: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					136,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<motion.div
-																			className={"framer-eexe78-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"JlFB3zL5T-container"}
-																		>
-																			{_jsx(stdin_default4, {
-																				ePlyYLEKs: "make.com",
-																				height: "100%",
-																				hXz7zW7sx:
-																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6Zm1.5 1.5a.75.75 0 0 0-.75.75V16.5a.75.75 0 0 0 1.085.67L12 15.089l4.165 2.083a.75.75 0 0 0 1.085-.671V5.25a.75.75 0 0 0-.75-.75h-9Z" clip-rule="evenodd" /> </svg>',
-																				id: "JlFB3zL5T",
-																				layoutId: "JlFB3zL5T",
-																				QH5Qo5oGm: "Make no-code",
-																				style: {
-																					width: "100%",
-																				},
-																				variant: "heetu2faa",
-																				width: "100%",
-																				...addPropertyOverrides(
-																					{
-																						j23OGbszH: {
-																							variant: "GjdyYzXnv",
-																						},
-																						RZi2QXpn2: {
-																							variant: "GjdyYzXnv",
-																						},
-																					},
-																					baseVariant,
-																					gestureVariant,
-																				),
-																			})}
-																		</motion.div>
-																	}
-																</ComponentViewportProvider>
-															}
-															{
-																<ComponentViewportProvider
-																	height={22}
-																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
-																	y={
-																		(componentViewport?.y || 0) +
-																		0 +
-																		0 +
-																		0 +
-																		72 +
-																		24 +
-																		0 +
-																		0 +
-																		170
-																	}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					170,
-																			},
-																			RZi2QXpn2: {
-																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																				y:
-																					(componentViewport?.y || 0) +
-																					0 +
-																					0 +
-																					0 +
-																					72 +
-																					20 +
-																					0 +
-																					0 +
-																					170,
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<motion.div
-																			className={"framer-yruap7-container"}
-																			layoutDependency={layoutDependency}
-																			layoutId={"Ps_D4SbEo-container"}
-																		>
-																			{_jsx(stdin_default4, {
-																				ePlyYLEKs: "/contact-sales",
-																				height: "100%",
-																				hXz7zW7sx:
-																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M17.303 5.197A7.5 7.5 0 0 0 6.697 15.803a.75.75 0 0 1-1.061 1.061A9 9 0 1 1 21 10.5a.75.75 0 0 1-1.5 0c0-1.92-.732-3.839-2.197-5.303Zm-2.121 2.121a4.5 4.5 0 0 0-6.364 6.364.75.75 0 1 1-1.06 1.06A6 6 0 1 1 18 10.5a.75.75 0 0 1-1.5 0c0-1.153-.44-2.303-1.318-3.182Zm-3.634 1.314a.75.75 0 0 1 .82.311l5.228 7.917a.75.75 0 0 1-.777 1.148l-2.097-.43 1.045 3.9a.75.75 0 0 1-1.45.388l-1.044-3.899-1.601 1.42a.75.75 0 0 1-1.247-.606l.569-9.47a.75.75 0 0 1 .554-.68Z" clip-rule="evenodd" /> </svg>',
-																				id: "Ps_D4SbEo",
-																				layoutId: "Ps_D4SbEo",
-																				QH5Qo5oGm: "Contact Sales",
-																				style: {
-																					width: "100%",
-																				},
-																				variant: "heetu2faa",
-																				width: "100%",
-																				...addPropertyOverrides(
-																					{
-																						j23OGbszH: {
-																							variant: "GjdyYzXnv",
-																						},
-																						RZi2QXpn2: {
-																							variant: "GjdyYzXnv",
-																						},
-																					},
-																					baseVariant,
-																					gestureVariant,
-																				),
-																			})}
-																		</motion.div>
-																	}
-																</ComponentViewportProvider>
-															}
-														</motion.div>
-													}
-													{
-														<motion.div
-															className={"framer-9ino1c"}
-															layoutDependency={layoutDependency}
-															layoutId={"PwNAMIdKB"}
-														>
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-t1dpes"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"NZAWzxRRb"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Guides"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			RZi2QXpn2: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Guides"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1o7aipf"
-																					}
-																					data-styles-preset={"x1n9RoGI8"}
-																				>
-																					{"Guides"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<motion.div
-																	className={"framer-y890q8"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"AifdLQB51"}
-																>
-																	{
-																		<ChildrenCanSuspend>
-																			{
-																				<QueryData
-																					query={{
-																						from: {
-																							alias: "AifdLQB51",
-																							data: stdin_default5,
-																							type: "Collection",
-																						},
-																						orderBy: [
-																							{
-																								collection: "AifdLQB51",
-																								direction: "desc",
-																								name: "index",
-																								type: "Identifier",
-																							},
-																						],
-																						select: [
-																							{
-																								collection: "AifdLQB51",
-																								name: "mtLfIqK6f",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "AifdLQB51",
-																								name: "TU8f1WfzS",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "AifdLQB51",
-																								name: "id",
-																								type: "Identifier",
-																							},
-																						],
-																						where: {
-																							left: {
-																								collection: "AifdLQB51",
-																								name: "ewkIozG5C",
-																								type: "Identifier",
-																							},
-																							operator: "==",
-																							right: {
-																								type: "LiteralValue",
-																								value: "Zwla6d58d",
-																							},
-																							type: "BinaryOperation",
-																						},
-																					}}
-																				>
-																					{(
-																						collection,
-																						paginationInfo,
-																						loadMore,
-																					) => (
-																						<_Fragment>
-																							{collection.map(
-																								(
-																									{
-																										mtLfIqK6f:
-																											mtLfIqK6fAifdLQB512,
-																										TU8f1WfzS:
-																											TU8f1WfzSAifdLQB512,
-																										id: idAifdLQB512,
-																									},
-																									i2,
-																								) => {
-																									mtLfIqK6fAifdLQB512 ??= "";
-																									TU8f1WfzSAifdLQB512 ??= "";
-																									return (
-																										<LayoutGroup
-																											id={`AifdLQB51-${idAifdLQB512}`}
-																										>
-																											{
-																												<PathVariablesContext.Provider
-																													value={{
-																														TU8f1WfzS:
-																															TU8f1WfzSAifdLQB512,
-																													}}
-																												>
-																													{
-																														<ResolveLinks
-																															links={[
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSAifdLQB512,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSAifdLQB512,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSAifdLQB512,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																															]}
-																														>
-																															{(
-																																resolvedLinks1,
-																															) => (
-																																<ComponentViewportProvider
-																																	height={22}
-																																	width={
-																																		"186px"
-																																	}
-																																	{...addPropertyOverrides(
-																																		{
-																																			j23OGbszH:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																			RZi2QXpn2:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																		},
-																																		baseVariant,
-																																		gestureVariant,
-																																	)}
-																																>
-																																	{
-																																		<motion.div
-																																			className={
-																																				"framer-1tqqi79-container"
-																																			}
-																																			layoutDependency={
-																																				layoutDependency
-																																			}
-																																			layoutId={
-																																				"QQpX9gHvU-container"
-																																			}
-																																		>
-																																			{_jsx(
-																																				stdin_default4,
-																																				{
-																																					ePlyYLEKs:
-																																						resolvedLinks1[0],
-																																					height:
-																																						"100%",
-																																					hXz7zW7sx:
-																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-																																					id: "QQpX9gHvU",
-																																					layoutId:
-																																						"QQpX9gHvU",
-																																					QH5Qo5oGm:
-																																						mtLfIqK6fAifdLQB512,
-																																					style:
-																																						{
-																																							width:
-																																								"100%",
-																																						},
-																																					variant:
-																																						"TV9DGWcYE",
-																																					width:
-																																						"100%",
-																																					...addPropertyOverrides(
-																																						{
-																																							j23OGbszH:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks1[2],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																							RZi2QXpn2:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks1[1],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																						},
-																																						baseVariant,
-																																						gestureVariant,
-																																					),
-																																				},
-																																			)}
-																																		</motion.div>
-																																	}
-																																</ComponentViewportProvider>
-																															)}
-																														</ResolveLinks>
-																													}
-																												</PathVariablesContext.Provider>
-																											}
-																										</LayoutGroup>
-																									);
+																						)}
+																					>
+																						<motion.div
+																							className={
+																								"framer-1tqqi79-container"
+																							}
+																							layoutDependency={
+																								layoutDependency
+																							}
+																							layoutId={"QQpX9gHvU-container"}
+																						>
+																							{_jsx(stdin_default4, {
+																								ePlyYLEKs: resolvedLinks1[0],
+																								height: "100%",
+																								hXz7zW7sx:
+																									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																								id: "QQpX9gHvU",
+																								layoutId: "QQpX9gHvU",
+																								QH5Qo5oGm: mtLfIqK6fAifdLQB512,
+																								style: {
+																									width: "100%",
 																								},
-																							)}
-																						</_Fragment>
-																					)}
-																				</QueryData>
-																			}
-																		</ChildrenCanSuspend>
-																	}
-																</motion.div>
-															}
-														</motion.div>
-													}
-													{
-														<motion.div
-															className={"framer-1h7ykz2"}
-															layoutDependency={layoutDependency}
-															layoutId={"ogebNJxq7"}
-														>
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-yuq2fc"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"xQEZc3b7t"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Reference"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			RZi2QXpn2: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Reference"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1o7aipf"
-																					}
-																					data-styles-preset={"x1n9RoGI8"}
-																				>
-																					{"Reference"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<motion.div
-																	className={"framer-17e576z"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"j9cRd0xpx"}
-																>
-																	{
-																		<ChildrenCanSuspend>
-																			{
-																				<QueryData
-																					query={{
-																						from: {
-																							alias: "j9cRd0xpx",
-																							data: stdin_default5,
-																							type: "Collection",
-																						},
-																						orderBy: [
-																							{
-																								collection: "j9cRd0xpx",
-																								direction: "desc",
-																								name: "index",
-																								type: "Identifier",
-																							},
-																						],
-																						select: [
-																							{
-																								collection: "j9cRd0xpx",
-																								name: "mtLfIqK6f",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "j9cRd0xpx",
-																								name: "TU8f1WfzS",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "j9cRd0xpx",
-																								name: "id",
-																								type: "Identifier",
-																							},
-																						],
-																						where: {
-																							left: {
-																								collection: "j9cRd0xpx",
-																								name: "ewkIozG5C",
-																								type: "Identifier",
-																							},
-																							operator: "==",
-																							right: {
-																								type: "LiteralValue",
-																								value: "sHSYkPY5r",
-																							},
-																							type: "BinaryOperation",
-																						},
-																					}}
-																				>
-																					{(
-																						collection1,
-																						paginationInfo1,
-																						loadMore1,
-																					) => (
-																						<_Fragment>
-																							{collection1.map(
-																								(
+																								variant: "TV9DGWcYE",
+																								width: "100%",
+																								...addPropertyOverrides(
 																									{
-																										mtLfIqK6f:
-																											mtLfIqK6fj9cRd0xpx2,
-																										TU8f1WfzS:
-																											TU8f1WfzSj9cRd0xpx2,
-																										id: idj9cRd0xpx2,
+																										j23OGbszH: {
+																											ePlyYLEKs:
+																												resolvedLinks1[2],
+																											variant: "bHRuYKyHD",
+																										},
+																										RZi2QXpn2: {
+																											ePlyYLEKs:
+																												resolvedLinks1[1],
+																											variant: "bHRuYKyHD",
+																										},
 																									},
-																									i2,
-																								) => {
-																									mtLfIqK6fj9cRd0xpx2 ??= "";
-																									TU8f1WfzSj9cRd0xpx2 ??= "";
-																									return (
-																										<LayoutGroup
-																											id={`j9cRd0xpx-${idj9cRd0xpx2}`}
-																										>
-																											{
-																												<PathVariablesContext.Provider
-																													value={{
-																														TU8f1WfzS:
-																															TU8f1WfzSj9cRd0xpx2,
-																													}}
-																												>
-																													{
-																														<ResolveLinks
-																															links={[
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSj9cRd0xpx2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSj9cRd0xpx2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSj9cRd0xpx2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																															]}
-																														>
-																															{(
-																																resolvedLinks2,
-																															) => (
-																																<ComponentViewportProvider
-																																	height={22}
-																																	width={
-																																		"184px"
-																																	}
-																																	{...addPropertyOverrides(
-																																		{
-																																			j23OGbszH:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																			RZi2QXpn2:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																		},
-																																		baseVariant,
-																																		gestureVariant,
-																																	)}
-																																>
-																																	{
-																																		<motion.div
-																																			className={
-																																				"framer-p0qhy9-container"
-																																			}
-																																			layoutDependency={
-																																				layoutDependency
-																																			}
-																																			layoutId={
-																																				"MYPZ_OFb9-container"
-																																			}
-																																		>
-																																			{_jsx(
-																																				stdin_default4,
-																																				{
-																																					ePlyYLEKs:
-																																						resolvedLinks2[0],
-																																					height:
-																																						"100%",
-																																					hXz7zW7sx:
-																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-																																					id: "MYPZ_OFb9",
-																																					layoutId:
-																																						"MYPZ_OFb9",
-																																					QH5Qo5oGm:
-																																						mtLfIqK6fj9cRd0xpx2,
-																																					style:
-																																						{
-																																							width:
-																																								"100%",
-																																						},
-																																					variant:
-																																						"TV9DGWcYE",
-																																					width:
-																																						"100%",
-																																					...addPropertyOverrides(
-																																						{
-																																							j23OGbszH:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks2[2],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																							RZi2QXpn2:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks2[1],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																						},
-																																						baseVariant,
-																																						gestureVariant,
-																																					),
-																																				},
-																																			)}
-																																		</motion.div>
-																																	}
-																																</ComponentViewportProvider>
-																															)}
-																														</ResolveLinks>
-																													}
-																												</PathVariablesContext.Provider>
-																											}
-																										</LayoutGroup>
-																									);
+																									baseVariant,
+																									gestureVariant,
+																								),
+																							})}
+																						</motion.div>
+																					</ComponentViewportProvider>
+																				)}
+																			</ResolveLinks>
+																		</PathVariablesContext.Provider>
+																	</LayoutGroup>
+																);
+															},
+														)}
+													</_Fragment>
+												)}
+											</QueryData>
+										</ChildrenCanSuspend>
+									</motion.div>
+								</motion.div>
+								<motion.div
+									className={"framer-1h7ykz2"}
+									layoutDependency={layoutDependency}
+									layoutId={"ogebNJxq7"}
+								>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-yuq2fc"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"xQEZc3b7t"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Reference"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												RZi2QXpn2: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Reference"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1o7aipf"}
+												data-styles-preset={"x1n9RoGI8"}
+											>
+												{"Reference"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<motion.div
+										className={"framer-17e576z"}
+										layoutDependency={layoutDependency}
+										layoutId={"j9cRd0xpx"}
+									>
+										<ChildrenCanSuspend>
+											<QueryData
+												query={{
+													from: {
+														alias: "j9cRd0xpx",
+														data: stdin_default5,
+														type: "Collection",
+													},
+													orderBy: [
+														{
+															collection: "j9cRd0xpx",
+															direction: "desc",
+															name: "index",
+															type: "Identifier",
+														},
+													],
+													select: [
+														{
+															collection: "j9cRd0xpx",
+															name: "mtLfIqK6f",
+															type: "Identifier",
+														},
+														{
+															collection: "j9cRd0xpx",
+															name: "TU8f1WfzS",
+															type: "Identifier",
+														},
+														{
+															collection: "j9cRd0xpx",
+															name: "id",
+															type: "Identifier",
+														},
+													],
+													where: {
+														left: {
+															collection: "j9cRd0xpx",
+															name: "ewkIozG5C",
+															type: "Identifier",
+														},
+														operator: "==",
+														right: {
+															type: "LiteralValue",
+															value: "sHSYkPY5r",
+														},
+														type: "BinaryOperation",
+													},
+												}}
+											>
+												{(collection1, paginationInfo1, loadMore1) => (
+													<_Fragment>
+														{collection1.map(
+															(
+																{
+																	mtLfIqK6f: mtLfIqK6fj9cRd0xpx2,
+																	TU8f1WfzS: TU8f1WfzSj9cRd0xpx2,
+																	id: idj9cRd0xpx2,
+																},
+																i2,
+															) => {
+																mtLfIqK6fj9cRd0xpx2 ??= "";
+																TU8f1WfzSj9cRd0xpx2 ??= "";
+																return (
+																	<LayoutGroup id={`j9cRd0xpx-${idj9cRd0xpx2}`}>
+																		<PathVariablesContext.Provider
+																			value={{
+																				TU8f1WfzS: TU8f1WfzSj9cRd0xpx2,
+																			}}
+																		>
+																			<ResolveLinks
+																				links={[
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSj9cRd0xpx2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSj9cRd0xpx2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSj9cRd0xpx2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																				]}
+																			>
+																				{(resolvedLinks2) => (
+																					<ComponentViewportProvider
+																						height={22}
+																						width={"184px"}
+																						{...addPropertyOverrides(
+																							{
+																								j23OGbszH: {
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
 																								},
-																							)}
-																						</_Fragment>
-																					)}
-																				</QueryData>
-																			}
-																		</ChildrenCanSuspend>
-																	}
-																</motion.div>
-															}
-														</motion.div>
-													}
-													{
-														<motion.div
-															className={"framer-w0hyjz"}
-															layoutDependency={layoutDependency}
-															layoutId={"P8FrvQSrH"}
-														>
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-1jg9cih"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"iilP8SRwF"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Reference"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			RZi2QXpn2: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Reference"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1o7aipf"
-																					}
-																					data-styles-preset={"x1n9RoGI8"}
-																				>
-																					{"Reference"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<motion.div
-																	className={"framer-1lqdphq"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"M0I78iTKl"}
-																>
-																	{
-																		<ChildrenCanSuspend>
-																			{
-																				<QueryData
-																					query={{
-																						from: {
-																							alias: "M0I78iTKl",
-																							data: stdin_default5,
-																							type: "Collection",
-																						},
-																						orderBy: [
-																							{
-																								collection: "M0I78iTKl",
-																								direction: "desc",
-																								name: "index",
-																								type: "Identifier",
+																								RZi2QXpn2: {
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																								},
 																							},
-																						],
-																						select: [
-																							{
-																								collection: "M0I78iTKl",
-																								name: "mtLfIqK6f",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "M0I78iTKl",
-																								name: "TU8f1WfzS",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "M0I78iTKl",
-																								name: "id",
-																								type: "Identifier",
-																							},
-																						],
-																						where: {
-																							left: {
-																								collection: "M0I78iTKl",
-																								name: "ewkIozG5C",
-																								type: "Identifier",
-																							},
-																							operator: "==",
-																							right: {
-																								type: "LiteralValue",
-																								value: "sHSYkPY5r",
-																							},
-																							type: "BinaryOperation",
-																						},
-																					}}
-																				>
-																					{(
-																						collection2,
-																						paginationInfo2,
-																						loadMore2,
-																					) => (
-																						<_Fragment>
-																							{collection2.map(
-																								(
+																							baseVariant,
+																							gestureVariant,
+																						)}
+																					>
+																						<motion.div
+																							className={
+																								"framer-p0qhy9-container"
+																							}
+																							layoutDependency={
+																								layoutDependency
+																							}
+																							layoutId={"MYPZ_OFb9-container"}
+																						>
+																							{_jsx(stdin_default4, {
+																								ePlyYLEKs: resolvedLinks2[0],
+																								height: "100%",
+																								hXz7zW7sx:
+																									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																								id: "MYPZ_OFb9",
+																								layoutId: "MYPZ_OFb9",
+																								QH5Qo5oGm: mtLfIqK6fj9cRd0xpx2,
+																								style: {
+																									width: "100%",
+																								},
+																								variant: "TV9DGWcYE",
+																								width: "100%",
+																								...addPropertyOverrides(
 																									{
-																										mtLfIqK6f:
-																											mtLfIqK6fM0I78iTKl2,
-																										TU8f1WfzS:
-																											TU8f1WfzSM0I78iTKl2,
-																										id: idM0I78iTKl2,
+																										j23OGbszH: {
+																											ePlyYLEKs:
+																												resolvedLinks2[2],
+																											variant: "bHRuYKyHD",
+																										},
+																										RZi2QXpn2: {
+																											ePlyYLEKs:
+																												resolvedLinks2[1],
+																											variant: "bHRuYKyHD",
+																										},
 																									},
-																									i2,
-																								) => {
-																									mtLfIqK6fM0I78iTKl2 ??= "";
-																									TU8f1WfzSM0I78iTKl2 ??= "";
-																									return (
-																										<LayoutGroup
-																											id={`M0I78iTKl-${idM0I78iTKl2}`}
-																										>
-																											{
-																												<PathVariablesContext.Provider
-																													value={{
-																														TU8f1WfzS:
-																															TU8f1WfzSM0I78iTKl2,
-																													}}
-																												>
-																													{
-																														<ResolveLinks
-																															links={[
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSM0I78iTKl2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSM0I78iTKl2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSM0I78iTKl2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																															]}
-																														>
-																															{(
-																																resolvedLinks3,
-																															) => (
-																																<ComponentViewportProvider
-																																	height={22}
-																																	width={
-																																		"184px"
-																																	}
-																																	{...addPropertyOverrides(
-																																		{
-																																			j23OGbszH:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																			RZi2QXpn2:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																		},
-																																		baseVariant,
-																																		gestureVariant,
-																																	)}
-																																>
-																																	{
-																																		<motion.div
-																																			className={
-																																				"framer-4qniqy-container"
-																																			}
-																																			layoutDependency={
-																																				layoutDependency
-																																			}
-																																			layoutId={
-																																				"okx4W9Xaf-container"
-																																			}
-																																		>
-																																			{_jsx(
-																																				stdin_default4,
-																																				{
-																																					ePlyYLEKs:
-																																						resolvedLinks3[0],
-																																					height:
-																																						"100%",
-																																					hXz7zW7sx:
-																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-																																					id: "okx4W9Xaf",
-																																					layoutId:
-																																						"okx4W9Xaf",
-																																					QH5Qo5oGm:
-																																						mtLfIqK6fM0I78iTKl2,
-																																					style:
-																																						{
-																																							width:
-																																								"100%",
-																																						},
-																																					variant:
-																																						"TV9DGWcYE",
-																																					width:
-																																						"100%",
-																																					...addPropertyOverrides(
-																																						{
-																																							j23OGbszH:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks3[2],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																							RZi2QXpn2:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks3[1],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																						},
-																																						baseVariant,
-																																						gestureVariant,
-																																					),
-																																				},
-																																			)}
-																																		</motion.div>
-																																	}
-																																</ComponentViewportProvider>
-																															)}
-																														</ResolveLinks>
-																													}
-																												</PathVariablesContext.Provider>
-																											}
-																										</LayoutGroup>
-																									);
+																									baseVariant,
+																									gestureVariant,
+																								),
+																							})}
+																						</motion.div>
+																					</ComponentViewportProvider>
+																				)}
+																			</ResolveLinks>
+																		</PathVariablesContext.Provider>
+																	</LayoutGroup>
+																);
+															},
+														)}
+													</_Fragment>
+												)}
+											</QueryData>
+										</ChildrenCanSuspend>
+									</motion.div>
+								</motion.div>
+								<motion.div
+									className={"framer-w0hyjz"}
+									layoutDependency={layoutDependency}
+									layoutId={"P8FrvQSrH"}
+								>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-1jg9cih"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"iilP8SRwF"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Reference"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												RZi2QXpn2: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Reference"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1o7aipf"}
+												data-styles-preset={"x1n9RoGI8"}
+											>
+												{"Reference"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<motion.div
+										className={"framer-1lqdphq"}
+										layoutDependency={layoutDependency}
+										layoutId={"M0I78iTKl"}
+									>
+										<ChildrenCanSuspend>
+											<QueryData
+												query={{
+													from: {
+														alias: "M0I78iTKl",
+														data: stdin_default5,
+														type: "Collection",
+													},
+													orderBy: [
+														{
+															collection: "M0I78iTKl",
+															direction: "desc",
+															name: "index",
+															type: "Identifier",
+														},
+													],
+													select: [
+														{
+															collection: "M0I78iTKl",
+															name: "mtLfIqK6f",
+															type: "Identifier",
+														},
+														{
+															collection: "M0I78iTKl",
+															name: "TU8f1WfzS",
+															type: "Identifier",
+														},
+														{
+															collection: "M0I78iTKl",
+															name: "id",
+															type: "Identifier",
+														},
+													],
+													where: {
+														left: {
+															collection: "M0I78iTKl",
+															name: "ewkIozG5C",
+															type: "Identifier",
+														},
+														operator: "==",
+														right: {
+															type: "LiteralValue",
+															value: "sHSYkPY5r",
+														},
+														type: "BinaryOperation",
+													},
+												}}
+											>
+												{(collection2, paginationInfo2, loadMore2) => (
+													<_Fragment>
+														{collection2.map(
+															(
+																{
+																	mtLfIqK6f: mtLfIqK6fM0I78iTKl2,
+																	TU8f1WfzS: TU8f1WfzSM0I78iTKl2,
+																	id: idM0I78iTKl2,
+																},
+																i2,
+															) => {
+																mtLfIqK6fM0I78iTKl2 ??= "";
+																TU8f1WfzSM0I78iTKl2 ??= "";
+																return (
+																	<LayoutGroup id={`M0I78iTKl-${idM0I78iTKl2}`}>
+																		<PathVariablesContext.Provider
+																			value={{
+																				TU8f1WfzS: TU8f1WfzSM0I78iTKl2,
+																			}}
+																		>
+																			<ResolveLinks
+																				links={[
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSM0I78iTKl2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSM0I78iTKl2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSM0I78iTKl2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																				]}
+																			>
+																				{(resolvedLinks3) => (
+																					<ComponentViewportProvider
+																						height={22}
+																						width={"184px"}
+																						{...addPropertyOverrides(
+																							{
+																								j23OGbszH: {
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
 																								},
-																							)}
-																						</_Fragment>
-																					)}
-																				</QueryData>
-																			}
-																		</ChildrenCanSuspend>
-																	}
-																</motion.div>
-															}
-														</motion.div>
-													}
-													{
-														<motion.div
-															className={"framer-1vi4g7m"}
-															layoutDependency={layoutDependency}
-															layoutId={"x6BKPIMyZ"}
-														>
-															{
-																<RichText
-																	__fromCanvasComponent={true}
-																	className={"framer-5junn7"}
-																	fonts={["Inter"]}
-																	layoutDependency={layoutDependency}
-																	layoutId={"rUL9TPScZ"}
-																	style={{
-																		"--framer-link-text-color":
-																			"rgb(0, 153, 255)",
-																		"--framer-link-text-decoration":
-																			"underline",
-																	}}
-																	verticalAlignment={"top"}
-																	withExternalLayout={true}
-																	{...addPropertyOverrides(
-																		{
-																			j23OGbszH: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Tutorials"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																			RZi2QXpn2: {
-																				children: (
-																					<React.Fragment>
-																						{
-																							<motion.p
-																								className={
-																									"framer-styles-preset-1aj6jmn"
-																								}
-																								data-styles-preset={"TeHXylmO7"}
-																							>
-																								{"Tutorials"}
-																							</motion.p>
-																						}
-																					</React.Fragment>
-																				),
-																			},
-																		},
-																		baseVariant,
-																		gestureVariant,
-																	)}
-																>
-																	{
-																		<React.Fragment>
-																			{
-																				<motion.p
-																					className={
-																						"framer-styles-preset-1o7aipf"
-																					}
-																					data-styles-preset={"x1n9RoGI8"}
-																				>
-																					{"Tutorials"}
-																				</motion.p>
-																			}
-																		</React.Fragment>
-																	}
-																</RichText>
-															}
-															{
-																<motion.div
-																	className={"framer-xhra02"}
-																	layoutDependency={layoutDependency}
-																	layoutId={"h1EOySKgG"}
-																>
-																	{
-																		<ChildrenCanSuspend>
-																			{
-																				<QueryData
-																					query={{
-																						from: {
-																							alias: "h1EOySKgG",
-																							data: stdin_default5,
-																							type: "Collection",
-																						},
-																						orderBy: [
-																							{
-																								collection: "h1EOySKgG",
-																								direction: "desc",
-																								name: "index",
-																								type: "Identifier",
+																								RZi2QXpn2: {
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																								},
 																							},
-																						],
-																						select: [
-																							{
-																								collection: "h1EOySKgG",
-																								name: "mtLfIqK6f",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "h1EOySKgG",
-																								name: "TU8f1WfzS",
-																								type: "Identifier",
-																							},
-																							{
-																								collection: "h1EOySKgG",
-																								name: "id",
-																								type: "Identifier",
-																							},
-																						],
-																						where: {
-																							left: {
-																								collection: "h1EOySKgG",
-																								name: "ewkIozG5C",
-																								type: "Identifier",
-																							},
-																							operator: "==",
-																							right: {
-																								type: "LiteralValue",
-																								value: "HVhD3aod1",
-																							},
-																							type: "BinaryOperation",
-																						},
-																					}}
-																				>
-																					{(
-																						collection3,
-																						paginationInfo3,
-																						loadMore3,
-																					) => (
-																						<_Fragment>
-																							{collection3.map(
-																								(
+																							baseVariant,
+																							gestureVariant,
+																						)}
+																					>
+																						<motion.div
+																							className={
+																								"framer-4qniqy-container"
+																							}
+																							layoutDependency={
+																								layoutDependency
+																							}
+																							layoutId={"okx4W9Xaf-container"}
+																						>
+																							{_jsx(stdin_default4, {
+																								ePlyYLEKs: resolvedLinks3[0],
+																								height: "100%",
+																								hXz7zW7sx:
+																									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																								id: "okx4W9Xaf",
+																								layoutId: "okx4W9Xaf",
+																								QH5Qo5oGm: mtLfIqK6fM0I78iTKl2,
+																								style: {
+																									width: "100%",
+																								},
+																								variant: "TV9DGWcYE",
+																								width: "100%",
+																								...addPropertyOverrides(
 																									{
-																										mtLfIqK6f:
-																											mtLfIqK6fh1EOySKgG2,
-																										TU8f1WfzS:
-																											TU8f1WfzSh1EOySKgG2,
-																										id: idh1EOySKgG2,
+																										j23OGbszH: {
+																											ePlyYLEKs:
+																												resolvedLinks3[2],
+																											variant: "bHRuYKyHD",
+																										},
+																										RZi2QXpn2: {
+																											ePlyYLEKs:
+																												resolvedLinks3[1],
+																											variant: "bHRuYKyHD",
+																										},
 																									},
-																									i2,
-																								) => {
-																									mtLfIqK6fh1EOySKgG2 ??= "";
-																									TU8f1WfzSh1EOySKgG2 ??= "";
-																									return (
-																										<LayoutGroup
-																											id={`h1EOySKgG-${idh1EOySKgG2}`}
-																										>
-																											{
-																												<PathVariablesContext.Provider
-																													value={{
-																														TU8f1WfzS:
-																															TU8f1WfzSh1EOySKgG2,
-																													}}
-																												>
-																													{
-																														<ResolveLinks
-																															links={[
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSh1EOySKgG2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSh1EOySKgG2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																																{
-																																	href: {
-																																		pathVariables:
-																																			{
-																																				TU8f1WfzS:
-																																					TU8f1WfzSh1EOySKgG2,
-																																			},
-																																		webPageId:
-																																			"dqRVpj9Kn",
-																																	},
-																																	implicitPathVariables:
-																																		void 0,
-																																},
-																															]}
-																														>
-																															{(
-																																resolvedLinks4,
-																															) => (
-																																<ComponentViewportProvider
-																																	height={22}
-																																	width={
-																																		"184px"
-																																	}
-																																	{...addPropertyOverrides(
-																																		{
-																																			j23OGbszH:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																			RZi2QXpn2:
-																																				{
-																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-																																				},
-																																		},
-																																		baseVariant,
-																																		gestureVariant,
-																																	)}
-																																>
-																																	{
-																																		<motion.div
-																																			className={
-																																				"framer-10cmebc-container"
-																																			}
-																																			layoutDependency={
-																																				layoutDependency
-																																			}
-																																			layoutId={
-																																				"DLw0xO8Uc-container"
-																																			}
-																																		>
-																																			{_jsx(
-																																				stdin_default4,
-																																				{
-																																					ePlyYLEKs:
-																																						resolvedLinks4[0],
-																																					height:
-																																						"100%",
-																																					hXz7zW7sx:
-																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-																																					id: "DLw0xO8Uc",
-																																					layoutId:
-																																						"DLw0xO8Uc",
-																																					QH5Qo5oGm:
-																																						mtLfIqK6fh1EOySKgG2,
-																																					style:
-																																						{
-																																							width:
-																																								"100%",
-																																						},
-																																					variant:
-																																						"TV9DGWcYE",
-																																					width:
-																																						"100%",
-																																					...addPropertyOverrides(
-																																						{
-																																							j23OGbszH:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks4[2],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																							RZi2QXpn2:
-																																								{
-																																									ePlyYLEKs:
-																																										resolvedLinks4[1],
-																																									variant:
-																																										"bHRuYKyHD",
-																																								},
-																																						},
-																																						baseVariant,
-																																						gestureVariant,
-																																					),
-																																				},
-																																			)}
-																																		</motion.div>
-																																	}
-																																</ComponentViewportProvider>
-																															)}
-																														</ResolveLinks>
-																													}
-																												</PathVariablesContext.Provider>
-																											}
-																										</LayoutGroup>
-																									);
+																									baseVariant,
+																									gestureVariant,
+																								),
+																							})}
+																						</motion.div>
+																					</ComponentViewportProvider>
+																				)}
+																			</ResolveLinks>
+																		</PathVariablesContext.Provider>
+																	</LayoutGroup>
+																);
+															},
+														)}
+													</_Fragment>
+												)}
+											</QueryData>
+										</ChildrenCanSuspend>
+									</motion.div>
+								</motion.div>
+								<motion.div
+									className={"framer-1vi4g7m"}
+									layoutDependency={layoutDependency}
+									layoutId={"x6BKPIMyZ"}
+								>
+									<RichText
+										__fromCanvasComponent={true}
+										className={"framer-5junn7"}
+										fonts={["Inter"]}
+										layoutDependency={layoutDependency}
+										layoutId={"rUL9TPScZ"}
+										style={{
+											"--framer-link-text-color": "rgb(0, 153, 255)",
+											"--framer-link-text-decoration": "underline",
+										}}
+										verticalAlignment={"top"}
+										withExternalLayout={true}
+										{...addPropertyOverrides(
+											{
+												j23OGbszH: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Tutorials"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+												RZi2QXpn2: {
+													children: (
+														<React.Fragment>
+															<motion.p
+																className={"framer-styles-preset-1aj6jmn"}
+																data-styles-preset={"TeHXylmO7"}
+															>
+																{"Tutorials"}
+															</motion.p>
+														</React.Fragment>
+													),
+												},
+											},
+											baseVariant,
+											gestureVariant,
+										)}
+									>
+										<React.Fragment>
+											<motion.p
+												className={"framer-styles-preset-1o7aipf"}
+												data-styles-preset={"x1n9RoGI8"}
+											>
+												{"Tutorials"}
+											</motion.p>
+										</React.Fragment>
+									</RichText>
+									<motion.div
+										className={"framer-xhra02"}
+										layoutDependency={layoutDependency}
+										layoutId={"h1EOySKgG"}
+									>
+										<ChildrenCanSuspend>
+											<QueryData
+												query={{
+													from: {
+														alias: "h1EOySKgG",
+														data: stdin_default5,
+														type: "Collection",
+													},
+													orderBy: [
+														{
+															collection: "h1EOySKgG",
+															direction: "desc",
+															name: "index",
+															type: "Identifier",
+														},
+													],
+													select: [
+														{
+															collection: "h1EOySKgG",
+															name: "mtLfIqK6f",
+															type: "Identifier",
+														},
+														{
+															collection: "h1EOySKgG",
+															name: "TU8f1WfzS",
+															type: "Identifier",
+														},
+														{
+															collection: "h1EOySKgG",
+															name: "id",
+															type: "Identifier",
+														},
+													],
+													where: {
+														left: {
+															collection: "h1EOySKgG",
+															name: "ewkIozG5C",
+															type: "Identifier",
+														},
+														operator: "==",
+														right: {
+															type: "LiteralValue",
+															value: "HVhD3aod1",
+														},
+														type: "BinaryOperation",
+													},
+												}}
+											>
+												{(collection3, paginationInfo3, loadMore3) => (
+													<_Fragment>
+														{collection3.map(
+															(
+																{
+																	mtLfIqK6f: mtLfIqK6fh1EOySKgG2,
+																	TU8f1WfzS: TU8f1WfzSh1EOySKgG2,
+																	id: idh1EOySKgG2,
+																},
+																i2,
+															) => {
+																mtLfIqK6fh1EOySKgG2 ??= "";
+																TU8f1WfzSh1EOySKgG2 ??= "";
+																return (
+																	<LayoutGroup id={`h1EOySKgG-${idh1EOySKgG2}`}>
+																		<PathVariablesContext.Provider
+																			value={{
+																				TU8f1WfzS: TU8f1WfzSh1EOySKgG2,
+																			}}
+																		>
+																			<ResolveLinks
+																				links={[
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSh1EOySKgG2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSh1EOySKgG2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																					{
+																						href: {
+																							pathVariables: {
+																								TU8f1WfzS: TU8f1WfzSh1EOySKgG2,
+																							},
+																							webPageId: "dqRVpj9Kn",
+																						},
+																						implicitPathVariables: void 0,
+																					},
+																				]}
+																			>
+																				{(resolvedLinks4) => (
+																					<ComponentViewportProvider
+																						height={22}
+																						width={"184px"}
+																						{...addPropertyOverrides(
+																							{
+																								j23OGbszH: {
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
 																								},
-																							)}
-																						</_Fragment>
-																					)}
-																				</QueryData>
-																			}
-																		</ChildrenCanSuspend>
-																	}
-																</motion.div>
-															}
-														</motion.div>
-													}
-												</motion.div>
-											}
-										</motion.div>
-									}
-								</motion.nav>
-							}
-						</Transition>
-					}
-				</Variants>
-			}
+																								RZi2QXpn2: {
+																									width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																								},
+																							},
+																							baseVariant,
+																							gestureVariant,
+																						)}
+																					>
+																						<motion.div
+																							className={
+																								"framer-10cmebc-container"
+																							}
+																							layoutDependency={
+																								layoutDependency
+																							}
+																							layoutId={"DLw0xO8Uc-container"}
+																						>
+																							{_jsx(stdin_default4, {
+																								ePlyYLEKs: resolvedLinks4[0],
+																								height: "100%",
+																								hXz7zW7sx:
+																									'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																								id: "DLw0xO8Uc",
+																								layoutId: "DLw0xO8Uc",
+																								QH5Qo5oGm: mtLfIqK6fh1EOySKgG2,
+																								style: {
+																									width: "100%",
+																								},
+																								variant: "TV9DGWcYE",
+																								width: "100%",
+																								...addPropertyOverrides(
+																									{
+																										j23OGbszH: {
+																											ePlyYLEKs:
+																												resolvedLinks4[2],
+																											variant: "bHRuYKyHD",
+																										},
+																										RZi2QXpn2: {
+																											ePlyYLEKs:
+																												resolvedLinks4[1],
+																											variant: "bHRuYKyHD",
+																										},
+																									},
+																									baseVariant,
+																									gestureVariant,
+																								),
+																							})}
+																						</motion.div>
+																					</ComponentViewportProvider>
+																				)}
+																			</ResolveLinks>
+																		</PathVariablesContext.Provider>
+																	</LayoutGroup>
+																);
+															},
+														)}
+													</_Fragment>
+												)}
+											</QueryData>
+										</ChildrenCanSuspend>
+									</motion.div>
+								</motion.div>
+							</motion.div>
+						</motion.div>
+					</motion.nav>
+				</Transition>
+			</Variants>
 		</LayoutGroup>
 	);
 });
@@ -5397,13 +5019,11 @@ stdin_default6.Responsive = ({ locale, ...rest }) => {
 			locale={locale}
 			locales={locales}
 		>
-			{
-				<WithFramerBreakpoints
-					Component={stdin_default6}
-					variants={defaultResponsiveVariants}
-					{...rest}
-				/>
-			}
+			<WithFramerBreakpoints
+				Component={stdin_default6}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
 		</ContextProviders>
 	);
 };
