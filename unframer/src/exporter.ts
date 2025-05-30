@@ -1333,7 +1333,7 @@ export async function createExampleComponentCode({
     const outDirForExample = path.posix
         .relative(process.cwd(), outDir)
         .replace(/^src\//, '') // remove src so file works inside src
-    const instances = config?.componentInstancesInIndexPage.sort((a, b) => {
+    const instances = config?.componentInstancesInIndexPage?.sort((a, b) => {
         // Order first by nodeDepth (lower is better)
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
