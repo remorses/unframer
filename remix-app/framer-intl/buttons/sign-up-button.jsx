@@ -18,110 +18,120 @@ var defaultResponsiveVariants = {
 	xl: "JOn8gzR30",
 };
 stdin_default.Responsive = ({ locale, ...rest }) => {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(WithFramerBreakpoints, {
-			Component: stdin_default,
-			variants: defaultResponsiveVariants,
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{
+				<WithFramerBreakpoints
+					Component={stdin_default}
+					variants={defaultResponsiveVariants}
+					{...rest}
+				/>
+			}
+		</ContextProviders>
+	);
 };
 function ComponentWithRoot({ locale, ...rest }) {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(stdin_default, {
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default);
 export { ComponentWithRoot as default };

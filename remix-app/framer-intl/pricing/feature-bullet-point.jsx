@@ -50,16 +50,18 @@ function SVGDisplay(props) {
 				overflow: "visible",
 			}}
 		>
-			<svg
-				width={"100%"}
-				height={"100%"}
-				viewBox={"0 0 24 24"}
-				preserveAspectRatio={"xMidYMid meet"}
-				overflow={"visible"}
-				dangerouslySetInnerHTML={{
-					__html: adjustedSvgCode,
-				}}
-			/>
+			{
+				<svg
+					width={"100%"}
+					height={"100%"}
+					viewBox={"0 0 24 24"}
+					preserveAspectRatio={"xMidYMid meet"}
+					overflow={"visible"}
+					dangerouslySetInnerHTML={{
+						__html: adjustedSvgCode,
+					}}
+				/>
+			}
 		</div>
 	);
 }
@@ -218,115 +220,133 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
-					<motion.div
-						{...restProps}
-						{...gestureHandlers}
-						className={cx(
-							serializationHash,
-							...sharedStyleClassNames,
-							"framer-t1dflu",
-							className2,
-							classNames,
-						)}
-						data-framer-name={"Variant 1"}
-						layoutDependency={layoutDependency}
-						layoutId={"VQyi9C9if"}
-						ref={ref !== null && ref !== void 0 ? ref : ref1}
-						style={{
-							...style,
-						}}
-						{...addPropertyOverrides(
+			{
+				<Variants animate={variants} initial={false}>
+					{
+						<Transition value={transition1}>
 							{
-								GCXb3mAXe: {
-									"data-framer-name": "Variant 2",
-								},
-							},
-							baseVariant,
-							gestureVariant,
-						)}
-					>
-						{isDisplayed() && (
-							<motion.div
-								className={"framer-g3e60i"}
-								layoutDependency={layoutDependency}
-								layoutId={"HafWMKckk"}
-								style={{
-									backgroundColor:
-										"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
-									borderBottomLeftRadius: 99,
-									borderBottomRightRadius: 99,
-									borderTopLeftRadius: 99,
-									borderTopRightRadius: 99,
-								}}
-							>
-								<SVG
-									className={"framer-tpn1ur"}
-									data-framer-name={"graphic"}
-									fill={"rgb(255, 255, 255)"}
-									intrinsicHeight={24}
-									intrinsicWidth={24}
-									layoutDependency={layoutDependency}
-									layoutId={"K6i1ZWpdl"}
-									svg={
-										'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/></svg>'
-									}
-									withExternalLayout={true}
-								/>
-							</motion.div>
-						)}
-						{isDisplayed1() && (
-							<ComponentViewportProvider>
 								<motion.div
-									className={"framer-nhpp3p-container"}
+									{...restProps}
+									{...gestureHandlers}
+									className={cx(
+										serializationHash,
+										...sharedStyleClassNames,
+										"framer-t1dflu",
+										className2,
+										classNames,
+									)}
+									data-framer-name={"Variant 1"}
 									layoutDependency={layoutDependency}
-									layoutId={"C9IbOmvcv-container"}
+									layoutId={"VQyi9C9if"}
+									ref={ref !== null && ref !== void 0 ? ref : ref1}
+									style={{
+										...style,
+									}}
+									{...addPropertyOverrides(
+										{
+											GCXb3mAXe: {
+												"data-framer-name": "Variant 2",
+											},
+										},
+										baseVariant,
+										gestureVariant,
+									)}
 								>
-									<SVGDisplay
-										color={
-											"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
-										}
-										height={"100%"}
-										id={"C9IbOmvcv"}
-										layoutId={"C9IbOmvcv"}
-										strokeWidth={0}
-										style={{
-											height: "100%",
-											width: "100%",
-										}}
-										svgCode={wzbuQUmb2}
-										width={"100%"}
-									/>
+									{isDisplayed() && (
+										<motion.div
+											className={"framer-g3e60i"}
+											layoutDependency={layoutDependency}
+											layoutId={"HafWMKckk"}
+											style={{
+												backgroundColor:
+													"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))",
+												borderBottomLeftRadius: 99,
+												borderBottomRightRadius: 99,
+												borderTopLeftRadius: 99,
+												borderTopRightRadius: 99,
+											}}
+										>
+											{
+												<SVG
+													className={"framer-tpn1ur"}
+													data-framer-name={"graphic"}
+													fill={"rgb(255, 255, 255)"}
+													intrinsicHeight={24}
+													intrinsicWidth={24}
+													layoutDependency={layoutDependency}
+													layoutId={"K6i1ZWpdl"}
+													svg={
+														'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/></svg>'
+													}
+													withExternalLayout={true}
+												/>
+											}
+										</motion.div>
+									)}
+									{isDisplayed1() && (
+										<ComponentViewportProvider>
+											{
+												<motion.div
+													className={"framer-nhpp3p-container"}
+													layoutDependency={layoutDependency}
+													layoutId={"C9IbOmvcv-container"}
+												>
+													{
+														<SVGDisplay
+															color={
+																"var(--token-f5909a4b-54e7-4c08-b63f-44713b4eba16, rgb(237, 36, 9))"
+															}
+															height={"100%"}
+															id={"C9IbOmvcv"}
+															layoutId={"C9IbOmvcv"}
+															strokeWidth={0}
+															style={{
+																height: "100%",
+																width: "100%",
+															}}
+															svgCode={wzbuQUmb2}
+															width={"100%"}
+														/>
+													}
+												</motion.div>
+											}
+										</ComponentViewportProvider>
+									)}
+									{
+										<RichText
+											__fromCanvasComponent={true}
+											className={"framer-1bphxqo"}
+											fonts={["Inter"]}
+											layoutDependency={layoutDependency}
+											layoutId={"MV45GRIje"}
+											style={{
+												"--framer-link-text-color": "rgb(0, 153, 255)",
+												"--framer-link-text-decoration": "underline",
+											}}
+											text={GkyWlUp9t}
+											verticalAlignment={"top"}
+											withExternalLayout={true}
+										>
+											{
+												<React.Fragment>
+													{
+														<motion.p
+															className={"framer-styles-preset-1aj6jmn"}
+															data-styles-preset={"TeHXylmO7"}
+														>
+															{"10 minutes of free calls"}
+														</motion.p>
+													}
+												</React.Fragment>
+											}
+										</RichText>
+									}
 								</motion.div>
-							</ComponentViewportProvider>
-						)}
-						<RichText
-							__fromCanvasComponent={true}
-							className={"framer-1bphxqo"}
-							fonts={["Inter"]}
-							layoutDependency={layoutDependency}
-							layoutId={"MV45GRIje"}
-							style={{
-								"--framer-link-text-color": "rgb(0, 153, 255)",
-								"--framer-link-text-decoration": "underline",
-							}}
-							text={GkyWlUp9t}
-							verticalAlignment={"top"}
-							withExternalLayout={true}
-						>
-							<React.Fragment>
-								<motion.p
-									className={"framer-styles-preset-1aj6jmn"}
-									data-styles-preset={"TeHXylmO7"}
-								>
-									{"10 minutes of free calls"}
-								</motion.p>
-							</React.Fragment>
-						</RichText>
-					</motion.div>
-				</Transition>
-			</Variants>
+							}
+						</Transition>
+					}
+				</Variants>
+			}
 		</LayoutGroup>
 	);
 });
@@ -453,110 +473,120 @@ var defaultResponsiveVariants = {
 	base: "VQyi9C9if",
 };
 stdin_default.Responsive = ({ locale, ...rest }) => {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(WithFramerBreakpoints, {
-			Component: stdin_default,
-			variants: defaultResponsiveVariants,
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{
+				<WithFramerBreakpoints
+					Component={stdin_default}
+					variants={defaultResponsiveVariants}
+					{...rest}
+				/>
+			}
+		</ContextProviders>
+	);
 };
 function ComponentWithRoot({ locale, ...rest }) {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(stdin_default, {
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default);
 export { ComponentWithRoot as default };

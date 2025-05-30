@@ -7,11 +7,18 @@ import { withSingleToggle } from "../chunks/chunk-VB6YERXI.js";
 import { stdin_default as stdin_default4 } from "../chunks/chunk-MJ2XD2LN.js";
 import { stdin_default as stdin_default2 } from "../chunks/chunk-ZCPWFOW3.js";
 import "../chunks/chunk-YVFI7H4N.js";
-import { j0G74AxCR_exports, stdin_default as stdin_default3 } from "../chunks/chunk-ABL6Y7OR.js";
+import {
+	j0G74AxCR_exports,
+	stdin_default as stdin_default3,
+} from "../chunks/chunk-ABL6Y7OR.js";
 import "../chunks/chunk-BTSBQWPZ.js";
 import { stdin_default } from "../chunks/chunk-3CQ6LZCY.js";
 import "../chunks/chunk-M37TDJZ6.js";
-import { className as className2, css as css2, fonts as fonts2 } from "../chunks/chunk-YFLJ3AFA.js";
+import {
+	className as className2,
+	css as css2,
+	fonts as fonts2,
+} from "../chunks/chunk-YFLJ3AFA.js";
 import "../chunks/chunk-DOAYAVFF.js";
 import { className, css, fonts } from "../chunks/chunk-3IMWMF2U.js";
 import "../chunks/chunk-WSFCRVEQ.js";
@@ -21,13 +28,41 @@ import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
 // /:https://framerusercontent.com/modules/5exKH8X0djOcoCxmab7W/1BEJWapjGVO67WmTyeHg/MlPzuwAVd.js
-import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { addFonts, addPropertyControls, ChildrenCanSuspend, ComponentViewportProvider, ControlType, cx, getFonts, getFontsFromSharedStyle, PathVariablesContext, ResolveLinks, RichText, useActiveVariantCallback, useComponentViewport, useLocaleInfo, useQueryData, useRouter, useVariantState, withCSS, withMappedReactProps } from "unframer";
+import {
+	jsx as _jsx,
+	jsxs as _jsxs,
+	Fragment as _Fragment,
+} from "react/jsx-runtime";
+import {
+	addFonts,
+	addPropertyControls,
+	ChildrenCanSuspend,
+	ComponentViewportProvider,
+	ControlType,
+	cx,
+	getFonts,
+	getFontsFromSharedStyle,
+	PathVariablesContext,
+	ResolveLinks,
+	RichText,
+	useActiveVariantCallback,
+	useComponentViewport,
+	useLocaleInfo,
+	useQueryData,
+	useRouter,
+	useVariantState,
+	withCSS,
+	withMappedReactProps,
+} from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
 
 // /:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js
-import { addPropertyControls as e4, ControlType as t11, QueryEngine as l2 } from "unframer";
+import {
+	addPropertyControls as e4,
+	ControlType as t11,
+	QueryEngine as l2,
+} from "unframer";
 
 // /:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-0.js
 import { ControlType as U } from "unframer";
@@ -41,906 +76,1352 @@ var s = Object.getOwnPropertyDescriptor;
 var a = Object.getOwnPropertyNames;
 var o = Object.getPrototypeOf;
 var u = Object.prototype.hasOwnProperty;
-var l = (t102, e22) => function () {
-  return e22 || (0, t102[a(t102)[0]])((e22 = {
-    exports: {}
-  }).exports, e22), e22.exports;
-};
+var l = (t102, e22) =>
+	function () {
+		return (
+			e22 ||
+				(0, t102[a(t102)[0]])(
+					(e22 = {
+						exports: {},
+					}).exports,
+					e22,
+				),
+			e22.exports
+		);
+	};
 var f = (t102, e22, r22, n22) => {
-  if (e22 && "object" == typeof e22 || "function" == typeof e22) for (let o2 of a(e22)) u.call(t102, o2) || o2 === r22 || i(t102, o2, {
-    get: () => e22[o2],
-    enumerable: !(n22 = s(e22, o2)) || n22.enumerable
-  });
-  return t102;
+	if ((e22 && "object" == typeof e22) || "function" == typeof e22)
+		for (let o2 of a(e22))
+			u.call(t102, o2) ||
+				o2 === r22 ||
+				i(t102, o2, {
+					get: () => e22[o2],
+					enumerable: !(n22 = s(e22, o2)) || n22.enumerable,
+				});
+	return t102;
 };
-var h = (t102, e22, r22) => (r22 = null != t102 ? n(o(t102)) : {}, f(
-// If the importer is in node compatibility mode or this is not an ESM
-// file that has been converted to a CommonJS file using a Babel-
-// compatible transform (i.e. "__esModule" has not been set), then set
-// "default" to the CommonJS "module.exports" for node compatibility.
-!e22 && t102 && t102.__esModule ? r22 : i(r22, "default", {
-  value: t102,
-  enumerable: true
-}), t102));
+var h = (t102, e22, r22) => (
+	(r22 = null != t102 ? n(o(t102)) : {}),
+	f(
+		// If the importer is in node compatibility mode or this is not an ESM
+		// file that has been converted to a CommonJS file using a Babel-
+		// compatible transform (i.e. "__esModule" has not been set), then set
+		// "default" to the CommonJS "module.exports" for node compatibility.
+		!e22 && t102 && t102.__esModule
+			? r22
+			: i(r22, "default", {
+					value: t102,
+					enumerable: true,
+				}),
+		t102,
+	)
+);
 var c = l({
-  "../../../node_modules/dataloader/index.js"(t102, e22) {
-    var r22,
-      n22 = /* @__PURE__ */function () {
-        function t112(t12, e42) {
-          if ("function" != typeof t12) throw TypeError("DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but got: " + t12 + ".");
-          this._batchLoadFn = t12, this._maxBatchSize = function (t13) {
-            if (!(!t13 || false !== t13.batch)) return 1;
-            var e5 = t13 && t13.maxBatchSize;
-            if (void 0 === e5) return 1 / 0;
-            if ("number" != typeof e5 || e5 < 1) throw TypeError("maxBatchSize must be a positive number: " + e5);
-            return e5;
-          }(e42), this._batchScheduleFn = function (t13) {
-            var e5 = t13 && t13.batchScheduleFn;
-            if (void 0 === e5) return i2;
-            if ("function" != typeof e5) throw TypeError("batchScheduleFn must be a function: " + e5);
-            return e5;
-          }(e42), this._cacheKeyFn = function (t13) {
-            var e5 = t13 && t13.cacheKeyFn;
-            if (void 0 === e5) return function (t14) {
-              return t14;
-            };
-            if ("function" != typeof e5) throw TypeError("cacheKeyFn must be a function: " + e5);
-            return e5;
-          }(e42), this._cacheMap = function (t13) {
-            if (!(!t13 || false !== t13.cache)) return null;
-            var e5 = t13 && t13.cacheMap;
-            if (void 0 === e5) return /* @__PURE__ */new Map();
-            if (null !== e5) {
-              var r32 = ["get", "set", "delete", "clear"].filter(function (t14) {
-                return e5 && "function" != typeof e5[t14];
-              });
-              if (0 !== r32.length) throw TypeError("Custom cacheMap missing methods: " + r32.join(", "));
-            }
-            return e5;
-          }(e42), this._batch = null, this.name = e42 && e42.name ? e42.name : null;
-        }
-        var e32 = t112.prototype;
-        return e32.load = function (t12) {
-          if (null == t12) throw TypeError("The loader.load() function must be called with a value, but got: " + String(t12) + ".");
-          var e42 = function (t13) {
-              var e5 = t13._batch;
-              if (null !== e5 && !e5.hasDispatched && e5.keys.length < t13._maxBatchSize) return e5;
-              var r4 = {
-                hasDispatched: false,
-                keys: [],
-                callbacks: []
-              };
-              return t13._batch = r4, t13._batchScheduleFn(function () {
-                (function (t14, e6) {
-                  var r5;
-                  if (e6.hasDispatched = true, 0 === e6.keys.length) {
-                    a22(e6);
-                    return;
-                  }
-                  try {
-                    r5 = t14._batchLoadFn(e6.keys);
-                  } catch (r6) {
-                    return s2(t14, e6, TypeError("DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function errored synchronously: " + String(r6) + "."));
-                  }
-                  if (!r5 || "function" != typeof r5.then) return s2(t14, e6, TypeError("DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise: " + String(r5) + "."));
-                  r5.then(function (t15) {
-                    if (!o2(t15)) throw TypeError("DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise of an Array: " + String(t15) + ".");
-                    if (t15.length !== e6.keys.length) throw TypeError("DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise of an Array of the same length as the Array of keys.\n\nKeys:\n" + String(e6.keys) + "\n\nValues:\n" + String(t15));
-                    a22(e6);
-                    for (var r6 = 0; r6 < e6.callbacks.length; r6++) {
-                      var n4 = t15[r6];
-                      n4 instanceof Error ? e6.callbacks[r6].reject(n4) : e6.callbacks[r6].resolve(n4);
-                    }
-                  }).catch(function (r6) {
-                    s2(t14, e6, r6);
-                  });
-                })(t13, r4);
-              }), r4;
-            }(this),
-            r32 = this._cacheMap,
-            n3 = this._cacheKeyFn(t12);
-          if (r32) {
-            var i3 = r32.get(n3);
-            if (i3) {
-              var u22 = e42.cacheHits || (e42.cacheHits = []);
-              return new Promise(function (t13) {
-                u22.push(function () {
-                  t13(i3);
-                });
-              });
-            }
-          }
-          e42.keys.push(t12);
-          var l22 = new Promise(function (t13, r4) {
-            e42.callbacks.push({
-              resolve: t13,
-              reject: r4
-            });
-          });
-          return r32 && r32.set(n3, l22), l22;
-        }, e32.loadMany = function (t12) {
-          if (!o2(t12)) throw TypeError("The loader.loadMany() function must be called with Array<key> but got: " + t12 + ".");
-          for (var e42 = [], r32 = 0; r32 < t12.length; r32++) e42.push(this.load(t12[r32]).catch(function (t13) {
-            return t13;
-          }));
-          return Promise.all(e42);
-        }, e32.clear = function (t12) {
-          var e42 = this._cacheMap;
-          if (e42) {
-            var r32 = this._cacheKeyFn(t12);
-            e42.delete(r32);
-          }
-          return this;
-        }, e32.clearAll = function () {
-          var t12 = this._cacheMap;
-          return t12 && t12.clear(), this;
-        }, e32.prime = function (t12, e42) {
-          var r32 = this._cacheMap;
-          if (r32) {
-            var n3,
-              i3 = this._cacheKeyFn(t12);
-            void 0 === r32.get(i3) && (e42 instanceof Error ? (n3 = Promise.reject(e42)).catch(function () {}) : n3 = Promise.resolve(e42), r32.set(i3, n3));
-          }
-          return this;
-        }, t112;
-      }(),
-      i2 = "object" == typeof process && "function" == typeof process.nextTick ? function (t112) {
-        r22 || (r22 = Promise.resolve()), r22.then(function () {
-          process.nextTick(t112);
-        });
-      } : "function" == typeof setImmediate ? function (t112) {
-        setImmediate(t112);
-      } : function (t112) {
-        setTimeout(t112);
-      };
-    function s2(t112, e32, r32) {
-      a22(e32);
-      for (var n3 = 0; n3 < e32.keys.length; n3++) t112.clear(e32.keys[n3]), e32.callbacks[n3].reject(r32);
-    }
-    function a22(t112) {
-      if (t112.cacheHits) for (var e32 = 0; e32 < t112.cacheHits.length; e32++) t112.cacheHits[e32]();
-    }
-    function o2(t112) {
-      return "object" == typeof t112 && null !== t112 && "number" == typeof t112.length && (0 === t112.length || t112.length > 0 && Object.prototype.hasOwnProperty.call(t112, t112.length - 1));
-    }
-    e22.exports = n22;
-  }
+	"../../../node_modules/dataloader/index.js"(t102, e22) {
+		var r22,
+			n22 = /* @__PURE__ */ (function () {
+				function t112(t12, e42) {
+					if ("function" != typeof t12)
+						throw TypeError(
+							"DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but got: " +
+								t12 +
+								".",
+						);
+					(this._batchLoadFn = t12),
+						(this._maxBatchSize = (function (t13) {
+							if (!(!t13 || false !== t13.batch)) return 1;
+							var e5 = t13 && t13.maxBatchSize;
+							if (void 0 === e5) return 1 / 0;
+							if ("number" != typeof e5 || e5 < 1)
+								throw TypeError(
+									"maxBatchSize must be a positive number: " + e5,
+								);
+							return e5;
+						})(e42)),
+						(this._batchScheduleFn = (function (t13) {
+							var e5 = t13 && t13.batchScheduleFn;
+							if (void 0 === e5) return i2;
+							if ("function" != typeof e5)
+								throw TypeError("batchScheduleFn must be a function: " + e5);
+							return e5;
+						})(e42)),
+						(this._cacheKeyFn = (function (t13) {
+							var e5 = t13 && t13.cacheKeyFn;
+							if (void 0 === e5)
+								return function (t14) {
+									return t14;
+								};
+							if ("function" != typeof e5)
+								throw TypeError("cacheKeyFn must be a function: " + e5);
+							return e5;
+						})(e42)),
+						(this._cacheMap = (function (t13) {
+							if (!(!t13 || false !== t13.cache)) return null;
+							var e5 = t13 && t13.cacheMap;
+							if (void 0 === e5) return /* @__PURE__ */ new Map();
+							if (null !== e5) {
+								var r32 = ["get", "set", "delete", "clear"].filter(
+									function (t14) {
+										return e5 && "function" != typeof e5[t14];
+									},
+								);
+								if (0 !== r32.length)
+									throw TypeError(
+										"Custom cacheMap missing methods: " + r32.join(", "),
+									);
+							}
+							return e5;
+						})(e42)),
+						(this._batch = null),
+						(this.name = e42 && e42.name ? e42.name : null);
+				}
+				var e32 = t112.prototype;
+				return (
+					(e32.load = function (t12) {
+						if (null == t12)
+							throw TypeError(
+								"The loader.load() function must be called with a value, but got: " +
+									String(t12) +
+									".",
+							);
+						var e42 = (function (t13) {
+								var e5 = t13._batch;
+								if (
+									null !== e5 &&
+									!e5.hasDispatched &&
+									e5.keys.length < t13._maxBatchSize
+								)
+									return e5;
+								var r4 = {
+									hasDispatched: false,
+									keys: [],
+									callbacks: [],
+								};
+								return (
+									(t13._batch = r4),
+									t13._batchScheduleFn(function () {
+										(function (t14, e6) {
+											var r5;
+											if (((e6.hasDispatched = true), 0 === e6.keys.length)) {
+												a22(e6);
+												return;
+											}
+											try {
+												r5 = t14._batchLoadFn(e6.keys);
+											} catch (r6) {
+												return s2(
+													t14,
+													e6,
+													TypeError(
+														"DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function errored synchronously: " +
+															String(r6) +
+															".",
+													),
+												);
+											}
+											if (!r5 || "function" != typeof r5.then)
+												return s2(
+													t14,
+													e6,
+													TypeError(
+														"DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise: " +
+															String(r5) +
+															".",
+													),
+												);
+											r5.then(function (t15) {
+												if (!o2(t15))
+													throw TypeError(
+														"DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise of an Array: " +
+															String(t15) +
+															".",
+													);
+												if (t15.length !== e6.keys.length)
+													throw TypeError(
+														"DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise of an Array of the same length as the Array of keys.\n\nKeys:\n" +
+															String(e6.keys) +
+															"\n\nValues:\n" +
+															String(t15),
+													);
+												a22(e6);
+												for (var r6 = 0; r6 < e6.callbacks.length; r6++) {
+													var n4 = t15[r6];
+													n4 instanceof Error
+														? e6.callbacks[r6].reject(n4)
+														: e6.callbacks[r6].resolve(n4);
+												}
+											}).catch(function (r6) {
+												s2(t14, e6, r6);
+											});
+										})(t13, r4);
+									}),
+									r4
+								);
+							})(this),
+							r32 = this._cacheMap,
+							n3 = this._cacheKeyFn(t12);
+						if (r32) {
+							var i3 = r32.get(n3);
+							if (i3) {
+								var u22 = e42.cacheHits || (e42.cacheHits = []);
+								return new Promise(function (t13) {
+									u22.push(function () {
+										t13(i3);
+									});
+								});
+							}
+						}
+						e42.keys.push(t12);
+						var l22 = new Promise(function (t13, r4) {
+							e42.callbacks.push({
+								resolve: t13,
+								reject: r4,
+							});
+						});
+						return r32 && r32.set(n3, l22), l22;
+					}),
+					(e32.loadMany = function (t12) {
+						if (!o2(t12))
+							throw TypeError(
+								"The loader.loadMany() function must be called with Array<key> but got: " +
+									t12 +
+									".",
+							);
+						for (var e42 = [], r32 = 0; r32 < t12.length; r32++)
+							e42.push(
+								this.load(t12[r32]).catch(function (t13) {
+									return t13;
+								}),
+							);
+						return Promise.all(e42);
+					}),
+					(e32.clear = function (t12) {
+						var e42 = this._cacheMap;
+						if (e42) {
+							var r32 = this._cacheKeyFn(t12);
+							e42.delete(r32);
+						}
+						return this;
+					}),
+					(e32.clearAll = function () {
+						var t12 = this._cacheMap;
+						return t12 && t12.clear(), this;
+					}),
+					(e32.prime = function (t12, e42) {
+						var r32 = this._cacheMap;
+						if (r32) {
+							var n3,
+								i3 = this._cacheKeyFn(t12);
+							void 0 === r32.get(i3) &&
+								(e42 instanceof Error
+									? (n3 = Promise.reject(e42)).catch(function () {})
+									: (n3 = Promise.resolve(e42)),
+								r32.set(i3, n3));
+						}
+						return this;
+					}),
+					t112
+				);
+			})(),
+			i2 =
+				"object" == typeof process && "function" == typeof process.nextTick
+					? function (t112) {
+							r22 || (r22 = Promise.resolve()),
+								r22.then(function () {
+									process.nextTick(t112);
+								});
+						}
+					: "function" == typeof setImmediate
+						? function (t112) {
+								setImmediate(t112);
+							}
+						: function (t112) {
+								setTimeout(t112);
+							};
+		function s2(t112, e32, r32) {
+			a22(e32);
+			for (var n3 = 0; n3 < e32.keys.length; n3++)
+				t112.clear(e32.keys[n3]), e32.callbacks[n3].reject(r32);
+		}
+		function a22(t112) {
+			if (t112.cacheHits)
+				for (var e32 = 0; e32 < t112.cacheHits.length; e32++)
+					t112.cacheHits[e32]();
+		}
+		function o2(t112) {
+			return (
+				"object" == typeof t112 &&
+				null !== t112 &&
+				"number" == typeof t112.length &&
+				(0 === t112.length ||
+					(t112.length > 0 &&
+						Object.prototype.hasOwnProperty.call(t112, t112.length - 1)))
+			);
+		}
+		e22.exports = n22;
+	},
 });
 var p = l({
-  "../../../node_modules/splaytree/dist/splay.js"(t102, e22) {
-    var r22;
-    r22 = function () {
-      var t112 = function (t12, e42) {
-        this.next = null, this.key = t12, this.data = e42, this.left = null, this.right = null;
-      };
-      function e32(t12, e42) {
-        return t12 > e42 ? 1 : t12 < e42 ? -1 : 0;
-      }
-      function r32(e42, r4, n3) {
-        for (var i3 = new t112(null, null), s2 = i3, a22 = i3;;) {
-          var o2 = n3(e42, r4.key);
-          if (o2 < 0) {
-            if (null === r4.left) break;
-            if (0 > n3(e42, r4.left.key)) {
-              var u22 = r4.left;
-              if (r4.left = u22.right, u22.right = r4, null === (r4 = u22).left) break;
-            }
-            a22.left = r4, a22 = r4, r4 = r4.left;
-          } else if (o2 > 0) {
-            if (null === r4.right) break;
-            if (n3(e42, r4.right.key) > 0) {
-              var u22 = r4.right;
-              if (r4.right = u22.left, u22.left = r4, null === (r4 = u22).right) break;
-            }
-            s2.right = r4, s2 = r4, r4 = r4.right;
-          } else break;
-        }
-        return s2.right = r4.left, a22.left = r4.right, r4.left = i3.right, r4.right = i3.left, r4;
-      }
-      function n22(e42, n3, i3, s2) {
-        var a22 = new t112(e42, n3);
-        if (null === i3) return a22.left = a22.right = null, a22;
-        i3 = r32(e42, i3, s2);
-        var o2 = s2(e42, i3.key);
-        return o2 < 0 ? (a22.left = i3.left, a22.right = i3, i3.left = null) : o2 >= 0 && (a22.right = i3.right, a22.left = i3, i3.right = null), a22;
-      }
-      function i2(t12, e42, n3) {
-        var i3 = null,
-          s2 = null;
-        if (e42) {
-          e42 = r32(t12, e42, n3);
-          var a22 = n3(e42.key, t12);
-          0 === a22 ? (i3 = e42.left, s2 = e42.right) : a22 < 0 ? (s2 = e42.right, e42.right = null, i3 = e42) : (i3 = e42.left, e42.left = null, s2 = e42);
-        }
-        return {
-          left: i3,
-          right: s2
-        };
-      }
-      return /** @class */function () {
-        function s2(t12) {
-          void 0 === t12 && (t12 = e32), this._root = null, this._size = 0, this._comparator = t12;
-        }
-        return s2.prototype.insert = function (t12, e42) {
-          return this._size++, this._root = n22(t12, e42, this._root, this._comparator);
-        }, s2.prototype.add = function (e42, n3) {
-          var i3 = new t112(e42, n3);
-          null === this._root && (i3.left = i3.right = null, this._size++, this._root = i3);
-          var s3 = this._comparator,
-            a22 = r32(e42, this._root, s3),
-            o2 = s3(e42, a22.key);
-          return 0 === o2 ? this._root = a22 : (o2 < 0 ? (i3.left = a22.left, i3.right = a22, a22.left = null) : o2 > 0 && (i3.right = a22.right, i3.left = a22, a22.right = null), this._size++, this._root = i3), this._root;
-        }, s2.prototype.remove = function (t12) {
-          this._root = this._remove(t12, this._root, this._comparator);
-        }, s2.prototype._remove = function (t12, e42, n3) {
-          var i3;
-          return null === e42 ? null : (e42 = r32(t12, e42, n3), 0 === n3(t12, e42.key)) ? (null === e42.left ? i3 = e42.right : (i3 = r32(t12, e42.left, n3)).right = e42.right, this._size--, i3) : e42;
-        }, s2.prototype.pop = function () {
-          var t12 = this._root;
-          if (t12) {
-            for (; t12.left;) t12 = t12.left;
-            return this._root = r32(t12.key, this._root, this._comparator), this._root = this._remove(t12.key, this._root, this._comparator), {
-              key: t12.key,
-              data: t12.data
-            };
-          }
-          return null;
-        }, s2.prototype.findStatic = function (t12) {
-          for (var e42 = this._root, r4 = this._comparator; e42;) {
-            var n3 = r4(t12, e42.key);
-            if (0 === n3) return e42;
-            e42 = n3 < 0 ? e42.left : e42.right;
-          }
-          return null;
-        }, s2.prototype.find = function (t12) {
-          return this._root && (this._root = r32(t12, this._root, this._comparator), 0 !== this._comparator(t12, this._root.key)) ? null : this._root;
-        }, s2.prototype.contains = function (t12) {
-          for (var e42 = this._root, r4 = this._comparator; e42;) {
-            var n3 = r4(t12, e42.key);
-            if (0 === n3) return true;
-            e42 = n3 < 0 ? e42.left : e42.right;
-          }
-          return false;
-        }, s2.prototype.forEach = function (t12, e42) {
-          for (var r4 = this._root, n3 = [], i3 = false; !i3;) null !== r4 ? (n3.push(r4), r4 = r4.left) : 0 !== n3.length ? (r4 = n3.pop(), t12.call(e42, r4), r4 = r4.right) : i3 = true;
-          return this;
-        }, s2.prototype.range = function (t12, e42, r4, n3) {
-          for (var i3 = [], s3 = this._comparator, a22 = this._root; 0 !== i3.length || a22;) if (a22) i3.push(a22), a22 = a22.left;else {
-            if (s3((a22 = i3.pop()).key, e42) > 0) break;
-            if (s3(a22.key, t12) >= 0 && r4.call(n3, a22)) return this;
-            a22 = a22.right;
-          }
-          return this;
-        }, s2.prototype.keys = function () {
-          var t12 = [];
-          return this.forEach(function (e42) {
-            var r4 = e42.key;
-            return t12.push(r4);
-          }), t12;
-        }, s2.prototype.values = function () {
-          var t12 = [];
-          return this.forEach(function (e42) {
-            var r4 = e42.data;
-            return t12.push(r4);
-          }), t12;
-        }, s2.prototype.min = function () {
-          return this._root ? this.minNode(this._root).key : null;
-        }, s2.prototype.max = function () {
-          return this._root ? this.maxNode(this._root).key : null;
-        }, s2.prototype.minNode = function (t12) {
-          if (void 0 === t12 && (t12 = this._root), t12) for (; t12.left;) t12 = t12.left;
-          return t12;
-        }, s2.prototype.maxNode = function (t12) {
-          if (void 0 === t12 && (t12 = this._root), t12) for (; t12.right;) t12 = t12.right;
-          return t12;
-        }, s2.prototype.at = function (t12) {
-          for (var e42 = this._root, r4 = false, n3 = 0, i3 = []; !r4;) if (e42) i3.push(e42), e42 = e42.left;else if (i3.length > 0) {
-            if (e42 = i3.pop(), n3 === t12) return e42;
-            n3++, e42 = e42.right;
-          } else r4 = true;
-          return null;
-        }, s2.prototype.next = function (t12) {
-          var e42 = this._root,
-            r4 = null;
-          if (t12.right) {
-            for (r4 = t12.right; r4.left;) r4 = r4.left;
-            return r4;
-          }
-          for (var n3 = this._comparator; e42;) {
-            var i3 = n3(t12.key, e42.key);
-            if (0 === i3) break;
-            i3 < 0 ? (r4 = e42, e42 = e42.left) : e42 = e42.right;
-          }
-          return r4;
-        }, s2.prototype.prev = function (t12) {
-          var e42 = this._root,
-            r4 = null;
-          if (null !== t12.left) {
-            for (r4 = t12.left; r4.right;) r4 = r4.right;
-            return r4;
-          }
-          for (var n3 = this._comparator; e42;) {
-            var i3 = n3(t12.key, e42.key);
-            if (0 === i3) break;
-            i3 < 0 ? e42 = e42.left : (r4 = e42, e42 = e42.right);
-          }
-          return r4;
-        }, s2.prototype.clear = function () {
-          return this._root = null, this._size = 0, this;
-        }, s2.prototype.toList = function () {
-          return function (e42) {
-            for (var r4 = e42, n3 = [], i3 = false, s3 = new t112(null, null), a22 = s3; !i3;) r4 ? (n3.push(r4), r4 = r4.left) : n3.length > 0 ? r4 = (r4 = a22 = a22.next = n3.pop()).right : i3 = true;
-            return a22.next = null, s3.next;
-          }(this._root);
-        }, s2.prototype.load = function (e42, r4, n3) {
-          void 0 === r4 && (r4 = []), void 0 === n3 && (n3 = false);
-          var i3 = e42.length,
-            s3 = this._comparator;
-          if (n3 && function t12(e5, r5, n4, i4, s4) {
-            if (!(n4 >= i4)) {
-              for (var a3 = e5[n4 + i4 >> 1], o2 = n4 - 1, u22 = i4 + 1;;) {
-                do o2++; while (0 > s4(e5[o2], a3));
-                do u22--; while (s4(e5[u22], a3) > 0);
-                if (o2 >= u22) break;
-                var l22 = e5[o2];
-                e5[o2] = e5[u22], e5[u22] = l22, l22 = r5[o2], r5[o2] = r5[u22], r5[u22] = l22;
-              }
-              t12(e5, r5, n4, u22, s4), t12(e5, r5, u22 + 1, i4, s4);
-            }
-          }(e42, r4, 0, i3 - 1, s3), null === this._root) this._root = function e5(r5, n4, i4, s4) {
-            var a3 = s4 - i4;
-            if (a3 > 0) {
-              var o2 = i4 + Math.floor(a3 / 2),
-                u22 = r5[o2],
-                l22 = n4[o2],
-                f2 = new t112(u22, l22);
-              return f2.left = e5(r5, n4, i4, o2), f2.right = e5(r5, n4, o2 + 1, s4), f2;
-            }
-            return null;
-          }(e42, r4, 0, i3), this._size = i3;else {
-            var a22 = function (e5, r5, n4) {
-              for (var i4 = new t112(null, null), s4 = i4, a3 = e5, o2 = r5; null !== a3 && null !== o2;) 0 > n4(a3.key, o2.key) ? (s4.next = a3, a3 = a3.next) : (s4.next = o2, o2 = o2.next), s4 = s4.next;
-              return null !== a3 ? s4.next = a3 : null !== o2 && (s4.next = o2), i4.next;
-            }(this.toList(), function (e5, r5) {
-              for (var n4 = new t112(null, null), i4 = n4, s4 = 0; s4 < e5.length; s4++) i4 = i4.next = new t112(e5[s4], r5[s4]);
-              return i4.next = null, n4.next;
-            }(e42, r4), s3);
-            i3 = this._size + i3, this._root = function t12(e5, r5, n4) {
-              var i4 = n4 - r5;
-              if (i4 > 0) {
-                var s4 = r5 + Math.floor(i4 / 2),
-                  a3 = t12(e5, r5, s4),
-                  o2 = e5.head;
-                return o2.left = a3, e5.head = e5.head.next, o2.right = t12(e5, s4 + 1, n4), o2;
-              }
-              return null;
-            }({
-              head: a22
-            }, 0, i3);
-          }
-          return this;
-        }, s2.prototype.isEmpty = function () {
-          return null === this._root;
-        }, Object.defineProperty(s2.prototype, "size", {
-          get: function () {
-            return this._size;
-          },
-          enumerable: true,
-          configurable: true
-        }), Object.defineProperty(s2.prototype, "root", {
-          get: function () {
-            return this._root;
-          },
-          enumerable: true,
-          configurable: true
-        }), s2.prototype.toString = function (t12) {
-          void 0 === t12 && (t12 = function (t13) {
-            return String(t13.key);
-          });
-          var e42 = [];
-          return function t13(e5, r4, n3, i3, s3) {
-            if (e5) {
-              i3("" + r4 + (n3 ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ") + s3(e5) + "\n");
-              var a22 = r4 + (n3 ? "    " : "\u2502   ");
-              e5.left && t13(e5.left, a22, false, i3, s3), e5.right && t13(e5.right, a22, true, i3, s3);
-            }
-          }(this._root, "", true, function (t13) {
-            return e42.push(t13);
-          }, t12), e42.join("");
-        }, s2.prototype.update = function (t12, e42, s3) {
-          var a22,
-            o2,
-            u22 = this._comparator,
-            l22 = i2(t12, this._root, u22),
-            f2 = l22.left,
-            h2 = l22.right;
-          0 > u22(t12, e42) ? h2 = n22(e42, s3, h2, u22) : f2 = n22(e42, s3, f2, u22), this._root = (a22 = f2, null === (o2 = h2) ? a22 : (null === a22 || ((o2 = r32(a22.key, o2, u22)).left = a22), o2));
-        }, s2.prototype.split = function (t12) {
-          return i2(t12, this._root, this._comparator);
-        }, s2.prototype[Symbol.iterator] = function () {
-          var t12, e42, r4;
-          return function (t13, e5) {
-            var r5,
-              n3,
-              i3,
-              s3,
-              a22 = {
-                label: 0,
-                sent: function () {
-                  if (1 & i3[0]) throw i3[1];
-                  return i3[1];
-                },
-                trys: [],
-                ops: []
-              };
-            return s3 = {
-              next: o2(0),
-              throw: o2(1),
-              return: o2(2)
-            }, "function" == typeof Symbol && (s3[Symbol.iterator] = function () {
-              return this;
-            }), s3;
-            function o2(s4) {
-              return function (o3) {
-                return function (s5) {
-                  if (r5) throw TypeError("Generator is already executing.");
-                  for (; a22;) try {
-                    if (r5 = 1, n3 && (i3 = 2 & s5[0] ? n3.return : s5[0] ? n3.throw || ((i3 = n3.return) && i3.call(n3), 0) : n3.next) && !(i3 = i3.call(n3, s5[1])).done) return i3;
-                    switch (n3 = 0, i3 && (s5 = [2 & s5[0], i3.value]), s5[0]) {
-                      case 0:
-                      case 1:
-                        i3 = s5;
-                        break;
-                      case 4:
-                        return a22.label++, {
-                          value: s5[1],
-                          done: false
-                        };
-                      case 5:
-                        a22.label++, n3 = s5[1], s5 = [0];
-                        continue;
-                      case 7:
-                        s5 = a22.ops.pop(), a22.trys.pop();
-                        continue;
-                      default:
-                        if (!(i3 = (i3 = a22.trys).length > 0 && i3[i3.length - 1]) && (6 === s5[0] || 2 === s5[0])) {
-                          a22 = 0;
-                          continue;
-                        }
-                        if (3 === s5[0] && (!i3 || s5[1] > i3[0] && s5[1] < i3[3])) {
-                          a22.label = s5[1];
-                          break;
-                        }
-                        if (6 === s5[0] && a22.label < i3[1]) {
-                          a22.label = i3[1], i3 = s5;
-                          break;
-                        }
-                        if (i3 && a22.label < i3[2]) {
-                          a22.label = i3[2], a22.ops.push(s5);
-                          break;
-                        }
-                        i3[2] && a22.ops.pop(), a22.trys.pop();
-                        continue;
-                    }
-                    s5 = e5.call(t13, a22);
-                  } catch (t14) {
-                    s5 = [6, t14], n3 = 0;
-                  } finally {
-                    r5 = i3 = 0;
-                  }
-                  if (5 & s5[0]) throw s5[1];
-                  return {
-                    value: s5[0] ? s5[1] : void 0,
-                    done: true
-                  };
-                }([s4, o3]);
-              };
-            }
-          }(this, function (n3) {
-            switch (n3.label) {
-              case 0:
-                t12 = this._root, e42 = [], r4 = false, n3.label = 1;
-              case 1:
-                if (r4) return [3, 6];
-                if (!(null !== t12)) return [3, 2];
-                return e42.push(t12), t12 = t12.left, [3, 5];
-              case 2:
-                if (!(0 !== e42.length)) return [3, 4];
-                return [4, t12 = e42.pop()];
-              case 3:
-                return n3.sent(), t12 = t12.right, [3, 5];
-              case 4:
-                r4 = true, n3.label = 5;
-              case 5:
-                return [3, 1];
-              case 6:
-                return [2];
-            }
-          });
-        }, s2;
-      }();
-    }, "object" == typeof t102 && void 0 !== e22 ? e22.exports = r22() : "function" == typeof define && define.amd ? define(r22) : t102.SplayTree = r22();
-  }
+	"../../../node_modules/splaytree/dist/splay.js"(t102, e22) {
+		var r22;
+		(r22 = function () {
+			var t112 = function (t12, e42) {
+				(this.next = null),
+					(this.key = t12),
+					(this.data = e42),
+					(this.left = null),
+					(this.right = null);
+			};
+			function e32(t12, e42) {
+				return t12 > e42 ? 1 : t12 < e42 ? -1 : 0;
+			}
+			function r32(e42, r4, n3) {
+				for (var i3 = new t112(null, null), s2 = i3, a22 = i3; ; ) {
+					var o2 = n3(e42, r4.key);
+					if (o2 < 0) {
+						if (null === r4.left) break;
+						if (0 > n3(e42, r4.left.key)) {
+							var u22 = r4.left;
+							if (
+								((r4.left = u22.right),
+								(u22.right = r4),
+								null === (r4 = u22).left)
+							)
+								break;
+						}
+						(a22.left = r4), (a22 = r4), (r4 = r4.left);
+					} else if (o2 > 0) {
+						if (null === r4.right) break;
+						if (n3(e42, r4.right.key) > 0) {
+							var u22 = r4.right;
+							if (
+								((r4.right = u22.left),
+								(u22.left = r4),
+								null === (r4 = u22).right)
+							)
+								break;
+						}
+						(s2.right = r4), (s2 = r4), (r4 = r4.right);
+					} else break;
+				}
+				return (
+					(s2.right = r4.left),
+					(a22.left = r4.right),
+					(r4.left = i3.right),
+					(r4.right = i3.left),
+					r4
+				);
+			}
+			function n22(e42, n3, i3, s2) {
+				var a22 = new t112(e42, n3);
+				if (null === i3) return (a22.left = a22.right = null), a22;
+				i3 = r32(e42, i3, s2);
+				var o2 = s2(e42, i3.key);
+				return (
+					o2 < 0
+						? ((a22.left = i3.left), (a22.right = i3), (i3.left = null))
+						: o2 >= 0 &&
+							((a22.right = i3.right), (a22.left = i3), (i3.right = null)),
+					a22
+				);
+			}
+			function i2(t12, e42, n3) {
+				var i3 = null,
+					s2 = null;
+				if (e42) {
+					e42 = r32(t12, e42, n3);
+					var a22 = n3(e42.key, t12);
+					0 === a22
+						? ((i3 = e42.left), (s2 = e42.right))
+						: a22 < 0
+							? ((s2 = e42.right), (e42.right = null), (i3 = e42))
+							: ((i3 = e42.left), (e42.left = null), (s2 = e42));
+				}
+				return {
+					left: i3,
+					right: s2,
+				};
+			}
+			return /** @class */ (function () {
+				function s2(t12) {
+					void 0 === t12 && (t12 = e32),
+						(this._root = null),
+						(this._size = 0),
+						(this._comparator = t12);
+				}
+				return (
+					(s2.prototype.insert = function (t12, e42) {
+						return (
+							this._size++,
+							(this._root = n22(t12, e42, this._root, this._comparator))
+						);
+					}),
+					(s2.prototype.add = function (e42, n3) {
+						var i3 = new t112(e42, n3);
+						null === this._root &&
+							((i3.left = i3.right = null), this._size++, (this._root = i3));
+						var s3 = this._comparator,
+							a22 = r32(e42, this._root, s3),
+							o2 = s3(e42, a22.key);
+						return (
+							0 === o2
+								? (this._root = a22)
+								: (o2 < 0
+										? ((i3.left = a22.left),
+											(i3.right = a22),
+											(a22.left = null))
+										: o2 > 0 &&
+											((i3.right = a22.right),
+											(i3.left = a22),
+											(a22.right = null)),
+									this._size++,
+									(this._root = i3)),
+							this._root
+						);
+					}),
+					(s2.prototype.remove = function (t12) {
+						this._root = this._remove(t12, this._root, this._comparator);
+					}),
+					(s2.prototype._remove = function (t12, e42, n3) {
+						var i3;
+						return null === e42
+							? null
+							: ((e42 = r32(t12, e42, n3)), 0 === n3(t12, e42.key))
+								? (null === e42.left
+										? (i3 = e42.right)
+										: ((i3 = r32(t12, e42.left, n3)).right = e42.right),
+									this._size--,
+									i3)
+								: e42;
+					}),
+					(s2.prototype.pop = function () {
+						var t12 = this._root;
+						if (t12) {
+							for (; t12.left; ) t12 = t12.left;
+							return (
+								(this._root = r32(t12.key, this._root, this._comparator)),
+								(this._root = this._remove(
+									t12.key,
+									this._root,
+									this._comparator,
+								)),
+								{
+									key: t12.key,
+									data: t12.data,
+								}
+							);
+						}
+						return null;
+					}),
+					(s2.prototype.findStatic = function (t12) {
+						for (var e42 = this._root, r4 = this._comparator; e42; ) {
+							var n3 = r4(t12, e42.key);
+							if (0 === n3) return e42;
+							e42 = n3 < 0 ? e42.left : e42.right;
+						}
+						return null;
+					}),
+					(s2.prototype.find = function (t12) {
+						return this._root &&
+							((this._root = r32(t12, this._root, this._comparator)),
+							0 !== this._comparator(t12, this._root.key))
+							? null
+							: this._root;
+					}),
+					(s2.prototype.contains = function (t12) {
+						for (var e42 = this._root, r4 = this._comparator; e42; ) {
+							var n3 = r4(t12, e42.key);
+							if (0 === n3) return true;
+							e42 = n3 < 0 ? e42.left : e42.right;
+						}
+						return false;
+					}),
+					(s2.prototype.forEach = function (t12, e42) {
+						for (var r4 = this._root, n3 = [], i3 = false; !i3; )
+							null !== r4
+								? (n3.push(r4), (r4 = r4.left))
+								: 0 !== n3.length
+									? ((r4 = n3.pop()), t12.call(e42, r4), (r4 = r4.right))
+									: (i3 = true);
+						return this;
+					}),
+					(s2.prototype.range = function (t12, e42, r4, n3) {
+						for (
+							var i3 = [], s3 = this._comparator, a22 = this._root;
+							0 !== i3.length || a22;
+						)
+							if (a22) i3.push(a22), (a22 = a22.left);
+							else {
+								if (s3((a22 = i3.pop()).key, e42) > 0) break;
+								if (s3(a22.key, t12) >= 0 && r4.call(n3, a22)) return this;
+								a22 = a22.right;
+							}
+						return this;
+					}),
+					(s2.prototype.keys = function () {
+						var t12 = [];
+						return (
+							this.forEach(function (e42) {
+								var r4 = e42.key;
+								return t12.push(r4);
+							}),
+							t12
+						);
+					}),
+					(s2.prototype.values = function () {
+						var t12 = [];
+						return (
+							this.forEach(function (e42) {
+								var r4 = e42.data;
+								return t12.push(r4);
+							}),
+							t12
+						);
+					}),
+					(s2.prototype.min = function () {
+						return this._root ? this.minNode(this._root).key : null;
+					}),
+					(s2.prototype.max = function () {
+						return this._root ? this.maxNode(this._root).key : null;
+					}),
+					(s2.prototype.minNode = function (t12) {
+						if ((void 0 === t12 && (t12 = this._root), t12))
+							for (; t12.left; ) t12 = t12.left;
+						return t12;
+					}),
+					(s2.prototype.maxNode = function (t12) {
+						if ((void 0 === t12 && (t12 = this._root), t12))
+							for (; t12.right; ) t12 = t12.right;
+						return t12;
+					}),
+					(s2.prototype.at = function (t12) {
+						for (var e42 = this._root, r4 = false, n3 = 0, i3 = []; !r4; )
+							if (e42) i3.push(e42), (e42 = e42.left);
+							else if (i3.length > 0) {
+								if (((e42 = i3.pop()), n3 === t12)) return e42;
+								n3++, (e42 = e42.right);
+							} else r4 = true;
+						return null;
+					}),
+					(s2.prototype.next = function (t12) {
+						var e42 = this._root,
+							r4 = null;
+						if (t12.right) {
+							for (r4 = t12.right; r4.left; ) r4 = r4.left;
+							return r4;
+						}
+						for (var n3 = this._comparator; e42; ) {
+							var i3 = n3(t12.key, e42.key);
+							if (0 === i3) break;
+							i3 < 0 ? ((r4 = e42), (e42 = e42.left)) : (e42 = e42.right);
+						}
+						return r4;
+					}),
+					(s2.prototype.prev = function (t12) {
+						var e42 = this._root,
+							r4 = null;
+						if (null !== t12.left) {
+							for (r4 = t12.left; r4.right; ) r4 = r4.right;
+							return r4;
+						}
+						for (var n3 = this._comparator; e42; ) {
+							var i3 = n3(t12.key, e42.key);
+							if (0 === i3) break;
+							i3 < 0 ? (e42 = e42.left) : ((r4 = e42), (e42 = e42.right));
+						}
+						return r4;
+					}),
+					(s2.prototype.clear = function () {
+						return (this._root = null), (this._size = 0), this;
+					}),
+					(s2.prototype.toList = function () {
+						return (function (e42) {
+							for (
+								var r4 = e42,
+									n3 = [],
+									i3 = false,
+									s3 = new t112(null, null),
+									a22 = s3;
+								!i3;
+							)
+								r4
+									? (n3.push(r4), (r4 = r4.left))
+									: n3.length > 0
+										? (r4 = (r4 = a22 = a22.next = n3.pop()).right)
+										: (i3 = true);
+							return (a22.next = null), s3.next;
+						})(this._root);
+					}),
+					(s2.prototype.load = function (e42, r4, n3) {
+						void 0 === r4 && (r4 = []), void 0 === n3 && (n3 = false);
+						var i3 = e42.length,
+							s3 = this._comparator;
+						if (
+							(n3 &&
+								(function t12(e5, r5, n4, i4, s4) {
+									if (!(n4 >= i4)) {
+										for (
+											var a3 = e5[(n4 + i4) >> 1], o2 = n4 - 1, u22 = i4 + 1;
+											;
+										) {
+											do o2++;
+											while (0 > s4(e5[o2], a3));
+											do u22--;
+											while (s4(e5[u22], a3) > 0);
+											if (o2 >= u22) break;
+											var l22 = e5[o2];
+											(e5[o2] = e5[u22]),
+												(e5[u22] = l22),
+												(l22 = r5[o2]),
+												(r5[o2] = r5[u22]),
+												(r5[u22] = l22);
+										}
+										t12(e5, r5, n4, u22, s4), t12(e5, r5, u22 + 1, i4, s4);
+									}
+								})(e42, r4, 0, i3 - 1, s3),
+							null === this._root)
+						)
+							(this._root = (function e5(r5, n4, i4, s4) {
+								var a3 = s4 - i4;
+								if (a3 > 0) {
+									var o2 = i4 + Math.floor(a3 / 2),
+										u22 = r5[o2],
+										l22 = n4[o2],
+										f2 = new t112(u22, l22);
+									return (
+										(f2.left = e5(r5, n4, i4, o2)),
+										(f2.right = e5(r5, n4, o2 + 1, s4)),
+										f2
+									);
+								}
+								return null;
+							})(e42, r4, 0, i3)),
+								(this._size = i3);
+						else {
+							var a22 = (function (e5, r5, n4) {
+								for (
+									var i4 = new t112(null, null), s4 = i4, a3 = e5, o2 = r5;
+									null !== a3 && null !== o2;
+								)
+									0 > n4(a3.key, o2.key)
+										? ((s4.next = a3), (a3 = a3.next))
+										: ((s4.next = o2), (o2 = o2.next)),
+										(s4 = s4.next);
+								return (
+									null !== a3 ? (s4.next = a3) : null !== o2 && (s4.next = o2),
+									i4.next
+								);
+							})(
+								this.toList(),
+								(function (e5, r5) {
+									for (
+										var n4 = new t112(null, null), i4 = n4, s4 = 0;
+										s4 < e5.length;
+										s4++
+									)
+										i4 = i4.next = new t112(e5[s4], r5[s4]);
+									return (i4.next = null), n4.next;
+								})(e42, r4),
+								s3,
+							);
+							(i3 = this._size + i3),
+								(this._root = (function t12(e5, r5, n4) {
+									var i4 = n4 - r5;
+									if (i4 > 0) {
+										var s4 = r5 + Math.floor(i4 / 2),
+											a3 = t12(e5, r5, s4),
+											o2 = e5.head;
+										return (
+											(o2.left = a3),
+											(e5.head = e5.head.next),
+											(o2.right = t12(e5, s4 + 1, n4)),
+											o2
+										);
+									}
+									return null;
+								})(
+									{
+										head: a22,
+									},
+									0,
+									i3,
+								));
+						}
+						return this;
+					}),
+					(s2.prototype.isEmpty = function () {
+						return null === this._root;
+					}),
+					Object.defineProperty(s2.prototype, "size", {
+						get: function () {
+							return this._size;
+						},
+						enumerable: true,
+						configurable: true,
+					}),
+					Object.defineProperty(s2.prototype, "root", {
+						get: function () {
+							return this._root;
+						},
+						enumerable: true,
+						configurable: true,
+					}),
+					(s2.prototype.toString = function (t12) {
+						void 0 === t12 &&
+							(t12 = function (t13) {
+								return String(t13.key);
+							});
+						var e42 = [];
+						return (
+							(function t13(e5, r4, n3, i3, s3) {
+								if (e5) {
+									i3(
+										"" +
+											r4 +
+											(n3 ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ") +
+											s3(e5) +
+											"\n",
+									);
+									var a22 = r4 + (n3 ? "    " : "\u2502   ");
+									e5.left && t13(e5.left, a22, false, i3, s3),
+										e5.right && t13(e5.right, a22, true, i3, s3);
+								}
+							})(
+								this._root,
+								"",
+								true,
+								function (t13) {
+									return e42.push(t13);
+								},
+								t12,
+							),
+							e42.join("")
+						);
+					}),
+					(s2.prototype.update = function (t12, e42, s3) {
+						var a22,
+							o2,
+							u22 = this._comparator,
+							l22 = i2(t12, this._root, u22),
+							f2 = l22.left,
+							h2 = l22.right;
+						0 > u22(t12, e42)
+							? (h2 = n22(e42, s3, h2, u22))
+							: (f2 = n22(e42, s3, f2, u22)),
+							(this._root =
+								((a22 = f2),
+								null === (o2 = h2)
+									? a22
+									: (null === a22 || ((o2 = r32(a22.key, o2, u22)).left = a22),
+										o2)));
+					}),
+					(s2.prototype.split = function (t12) {
+						return i2(t12, this._root, this._comparator);
+					}),
+					(s2.prototype[Symbol.iterator] = function () {
+						var t12, e42, r4;
+						return (function (t13, e5) {
+							var r5,
+								n3,
+								i3,
+								s3,
+								a22 = {
+									label: 0,
+									sent: function () {
+										if (1 & i3[0]) throw i3[1];
+										return i3[1];
+									},
+									trys: [],
+									ops: [],
+								};
+							return (
+								(s3 = {
+									next: o2(0),
+									throw: o2(1),
+									return: o2(2),
+								}),
+								"function" == typeof Symbol &&
+									(s3[Symbol.iterator] = function () {
+										return this;
+									}),
+								s3
+							);
+							function o2(s4) {
+								return function (o3) {
+									return (function (s5) {
+										if (r5) throw TypeError("Generator is already executing.");
+										for (; a22; )
+											try {
+												if (
+													((r5 = 1),
+													n3 &&
+														(i3 =
+															2 & s5[0]
+																? n3.return
+																: s5[0]
+																	? n3.throw ||
+																		((i3 = n3.return) && i3.call(n3), 0)
+																	: n3.next) &&
+														!(i3 = i3.call(n3, s5[1])).done)
+												)
+													return i3;
+												switch (
+													((n3 = 0), i3 && (s5 = [2 & s5[0], i3.value]), s5[0])
+												) {
+													case 0:
+													case 1:
+														i3 = s5;
+														break;
+													case 4:
+														return (
+															a22.label++,
+															{
+																value: s5[1],
+																done: false,
+															}
+														);
+													case 5:
+														a22.label++, (n3 = s5[1]), (s5 = [0]);
+														continue;
+													case 7:
+														(s5 = a22.ops.pop()), a22.trys.pop();
+														continue;
+													default:
+														if (
+															!(i3 =
+																(i3 = a22.trys).length > 0 &&
+																i3[i3.length - 1]) &&
+															(6 === s5[0] || 2 === s5[0])
+														) {
+															a22 = 0;
+															continue;
+														}
+														if (
+															3 === s5[0] &&
+															(!i3 || (s5[1] > i3[0] && s5[1] < i3[3]))
+														) {
+															a22.label = s5[1];
+															break;
+														}
+														if (6 === s5[0] && a22.label < i3[1]) {
+															(a22.label = i3[1]), (i3 = s5);
+															break;
+														}
+														if (i3 && a22.label < i3[2]) {
+															(a22.label = i3[2]), a22.ops.push(s5);
+															break;
+														}
+														i3[2] && a22.ops.pop(), a22.trys.pop();
+														continue;
+												}
+												s5 = e5.call(t13, a22);
+											} catch (t14) {
+												(s5 = [6, t14]), (n3 = 0);
+											} finally {
+												r5 = i3 = 0;
+											}
+										if (5 & s5[0]) throw s5[1];
+										return {
+											value: s5[0] ? s5[1] : void 0,
+											done: true,
+										};
+									})([s4, o3]);
+								};
+							}
+						})(this, function (n3) {
+							switch (n3.label) {
+								case 0:
+									(t12 = this._root), (e42 = []), (r4 = false), (n3.label = 1);
+								case 1:
+									if (r4) return [3, 6];
+									if (!(null !== t12)) return [3, 2];
+									return e42.push(t12), (t12 = t12.left), [3, 5];
+								case 2:
+									if (!(0 !== e42.length)) return [3, 4];
+									return [4, (t12 = e42.pop())];
+								case 3:
+									return n3.sent(), (t12 = t12.right), [3, 5];
+								case 4:
+									(r4 = true), (n3.label = 5);
+								case 5:
+									return [3, 1];
+								case 6:
+									return [2];
+							}
+						});
+					}),
+					s2
+				);
+			})();
+		}),
+			"object" == typeof t102 && void 0 !== e22
+				? (e22.exports = r22())
+				: "function" == typeof define && define.amd
+					? define(r22)
+					: (t102.SplayTree = r22());
+	},
 });
 var d = l({
-  "../../../node_modules/whatwg-mimetype/lib/utils.js"(t102) {
-    t102.removeLeadingAndTrailingHTTPWhitespace = t112 => t112.replace(/^[ \t\n\r]+/u, "").replace(/[ \t\n\r]+$/u, ""), t102.removeTrailingHTTPWhitespace = t112 => t112.replace(/[ \t\n\r]+$/u, ""), t102.isHTTPWhitespaceChar = t112 => " " === t112 || "	" === t112 || "\n" === t112 || "\r" === t112, t102.solelyContainsHTTPTokenCodePoints = t112 => /^[-!#$%&'*+.^_`|~A-Za-z0-9]*$/u.test(t112), t102.soleyContainsHTTPQuotedStringTokenCodePoints = t112 => /^[\t\u0020-\u007E\u0080-\u00FF]*$/u.test(t112), t102.asciiLowercase = t112 => t112.replace(/[A-Z]/ug, t12 => t12.toLowerCase()), t102.collectAnHTTPQuotedString = (t112, e22) => {
-      let r22 = "";
-      for (e22++;;) {
-        for (; e22 < t112.length && '"' !== t112[e22] && "\\" !== t112[e22];) r22 += t112[e22], ++e22;
-        if (e22 >= t112.length) break;
-        let n22 = t112[e22];
-        if (++e22, "\\" === n22) {
-          if (e22 >= t112.length) {
-            r22 += "\\";
-            break;
-          }
-          r22 += t112[e22], ++e22;
-        } else break;
-      }
-      return [r22, e22];
-    };
-  }
+	"../../../node_modules/whatwg-mimetype/lib/utils.js"(t102) {
+		(t102.removeLeadingAndTrailingHTTPWhitespace = (t112) =>
+			t112.replace(/^[ \t\n\r]+/u, "").replace(/[ \t\n\r]+$/u, "")),
+			(t102.removeTrailingHTTPWhitespace = (t112) =>
+				t112.replace(/[ \t\n\r]+$/u, "")),
+			(t102.isHTTPWhitespaceChar = (t112) =>
+				" " === t112 || "	" === t112 || "\n" === t112 || "\r" === t112),
+			(t102.solelyContainsHTTPTokenCodePoints = (t112) =>
+				/^[-!#$%&'*+.^_`|~A-Za-z0-9]*$/u.test(t112)),
+			(t102.soleyContainsHTTPQuotedStringTokenCodePoints = (t112) =>
+				/^[\t\u0020-\u007E\u0080-\u00FF]*$/u.test(t112)),
+			(t102.asciiLowercase = (t112) =>
+				t112.replace(/[A-Z]/gu, (t12) => t12.toLowerCase())),
+			(t102.collectAnHTTPQuotedString = (t112, e22) => {
+				let r22 = "";
+				for (e22++; ; ) {
+					for (; e22 < t112.length && '"' !== t112[e22] && "\\" !== t112[e22]; )
+						(r22 += t112[e22]), ++e22;
+					if (e22 >= t112.length) break;
+					let n22 = t112[e22];
+					if ((++e22, "\\" === n22)) {
+						if (e22 >= t112.length) {
+							r22 += "\\";
+							break;
+						}
+						(r22 += t112[e22]), ++e22;
+					} else break;
+				}
+				return [r22, e22];
+			});
+	},
 });
 var g = l({
-  "../../../node_modules/whatwg-mimetype/lib/mime-type-parameters.js"(t102, e22) {
-    var {
-      asciiLowercase: r22,
-      solelyContainsHTTPTokenCodePoints: n22,
-      soleyContainsHTTPQuotedStringTokenCodePoints: i2
-    } = d();
-    e22.exports = class {
-      get size() {
-        return this._map.size;
-      }
-      get(t112) {
-        return t112 = r22(String(t112)), this._map.get(t112);
-      }
-      has(t112) {
-        return t112 = r22(String(t112)), this._map.has(t112);
-      }
-      set(t112, e32) {
-        if (t112 = r22(String(t112)), e32 = String(e32), !n22(t112)) throw Error(`Invalid MIME type parameter name "${t112}": only HTTP token code points are valid.`);
-        if (!i2(e32)) throw Error(`Invalid MIME type parameter value "${e32}": only HTTP quoted-string token code points are valid.`);
-        return this._map.set(t112, e32);
-      }
-      clear() {
-        this._map.clear();
-      }
-      delete(t112) {
-        return t112 = r22(String(t112)), this._map.delete(t112);
-      }
-      forEach(t112, e32) {
-        this._map.forEach(t112, e32);
-      }
-      keys() {
-        return this._map.keys();
-      }
-      values() {
-        return this._map.values();
-      }
-      entries() {
-        return this._map.entries();
-      }
-      [Symbol.iterator]() {
-        return this._map[Symbol.iterator]();
-      }
-      constructor(t112) {
-        this._map = t112;
-      }
-    };
-  }
+	"../../../node_modules/whatwg-mimetype/lib/mime-type-parameters.js"(
+		t102,
+		e22,
+	) {
+		var {
+			asciiLowercase: r22,
+			solelyContainsHTTPTokenCodePoints: n22,
+			soleyContainsHTTPQuotedStringTokenCodePoints: i2,
+		} = d();
+		e22.exports = class {
+			get size() {
+				return this._map.size;
+			}
+			get(t112) {
+				return (t112 = r22(String(t112))), this._map.get(t112);
+			}
+			has(t112) {
+				return (t112 = r22(String(t112))), this._map.has(t112);
+			}
+			set(t112, e32) {
+				if (((t112 = r22(String(t112))), (e32 = String(e32)), !n22(t112)))
+					throw Error(
+						`Invalid MIME type parameter name "${t112}": only HTTP token code points are valid.`,
+					);
+				if (!i2(e32))
+					throw Error(
+						`Invalid MIME type parameter value "${e32}": only HTTP quoted-string token code points are valid.`,
+					);
+				return this._map.set(t112, e32);
+			}
+			clear() {
+				this._map.clear();
+			}
+			delete(t112) {
+				return (t112 = r22(String(t112))), this._map.delete(t112);
+			}
+			forEach(t112, e32) {
+				this._map.forEach(t112, e32);
+			}
+			keys() {
+				return this._map.keys();
+			}
+			values() {
+				return this._map.values();
+			}
+			entries() {
+				return this._map.entries();
+			}
+			[Symbol.iterator]() {
+				return this._map[Symbol.iterator]();
+			}
+			constructor(t112) {
+				this._map = t112;
+			}
+		};
+	},
 });
 var v = l({
-  "../../../node_modules/whatwg-mimetype/lib/parser.js"(t102, e22) {
-    var {
-      removeLeadingAndTrailingHTTPWhitespace: r22,
-      removeTrailingHTTPWhitespace: n22,
-      isHTTPWhitespaceChar: i2,
-      solelyContainsHTTPTokenCodePoints: s2,
-      soleyContainsHTTPQuotedStringTokenCodePoints: a22,
-      asciiLowercase: o2,
-      collectAnHTTPQuotedString: u22
-    } = d();
-    e22.exports = t112 => {
-      t112 = r22(t112);
-      let e32 = 0,
-        l22 = "";
-      for (; e32 < t112.length && "/" !== t112[e32];) l22 += t112[e32], ++e32;
-      if (0 === l22.length || !s2(l22) || e32 >= t112.length) return null;
-      ++e32;
-      let f2 = "";
-      for (; e32 < t112.length && ";" !== t112[e32];) f2 += t112[e32], ++e32;
-      if (0 === (f2 = n22(f2)).length || !s2(f2)) return null;
-      let h2 = {
-        type: o2(l22),
-        subtype: o2(f2),
-        parameters: /* @__PURE__ */new Map()
-      };
-      for (; e32 < t112.length;) {
-        for (++e32; i2(t112[e32]);) ++e32;
-        let r32 = "";
-        for (; e32 < t112.length && ";" !== t112[e32] && "=" !== t112[e32];) r32 += t112[e32], ++e32;
-        if (r32 = o2(r32), e32 < t112.length) {
-          if (";" === t112[e32]) continue;
-          ++e32;
-        }
-        let l3 = null;
-        if ('"' === t112[e32]) for ([l3, e32] = u22(t112, e32); e32 < t112.length && ";" !== t112[e32];) ++e32;else {
-          for (l3 = ""; e32 < t112.length && ";" !== t112[e32];) l3 += t112[e32], ++e32;
-          if ("" === (l3 = n22(l3))) continue;
-        }
-        r32.length > 0 && s2(r32) && a22(l3) && !h2.parameters.has(r32) && h2.parameters.set(r32, l3);
-      }
-      return h2;
-    };
-  }
+	"../../../node_modules/whatwg-mimetype/lib/parser.js"(t102, e22) {
+		var {
+			removeLeadingAndTrailingHTTPWhitespace: r22,
+			removeTrailingHTTPWhitespace: n22,
+			isHTTPWhitespaceChar: i2,
+			solelyContainsHTTPTokenCodePoints: s2,
+			soleyContainsHTTPQuotedStringTokenCodePoints: a22,
+			asciiLowercase: o2,
+			collectAnHTTPQuotedString: u22,
+		} = d();
+		e22.exports = (t112) => {
+			t112 = r22(t112);
+			let e32 = 0,
+				l22 = "";
+			for (; e32 < t112.length && "/" !== t112[e32]; )
+				(l22 += t112[e32]), ++e32;
+			if (0 === l22.length || !s2(l22) || e32 >= t112.length) return null;
+			++e32;
+			let f2 = "";
+			for (; e32 < t112.length && ";" !== t112[e32]; ) (f2 += t112[e32]), ++e32;
+			if (0 === (f2 = n22(f2)).length || !s2(f2)) return null;
+			let h2 = {
+				type: o2(l22),
+				subtype: o2(f2),
+				parameters: /* @__PURE__ */ new Map(),
+			};
+			for (; e32 < t112.length; ) {
+				for (++e32; i2(t112[e32]); ) ++e32;
+				let r32 = "";
+				for (; e32 < t112.length && ";" !== t112[e32] && "=" !== t112[e32]; )
+					(r32 += t112[e32]), ++e32;
+				if (((r32 = o2(r32)), e32 < t112.length)) {
+					if (";" === t112[e32]) continue;
+					++e32;
+				}
+				let l3 = null;
+				if ('"' === t112[e32])
+					for (
+						[l3, e32] = u22(t112, e32);
+						e32 < t112.length && ";" !== t112[e32];
+					)
+						++e32;
+				else {
+					for (l3 = ""; e32 < t112.length && ";" !== t112[e32]; )
+						(l3 += t112[e32]), ++e32;
+					if ("" === (l3 = n22(l3))) continue;
+				}
+				r32.length > 0 &&
+					s2(r32) &&
+					a22(l3) &&
+					!h2.parameters.has(r32) &&
+					h2.parameters.set(r32, l3);
+			}
+			return h2;
+		};
+	},
 });
 var y = l({
-  "../../../node_modules/whatwg-mimetype/lib/serializer.js"(t102, e22) {
-    var {
-      solelyContainsHTTPTokenCodePoints: r22
-    } = d();
-    e22.exports = t112 => {
-      let e32 = `${t112.type}/${t112.subtype}`;
-      if (0 === t112.parameters.size) return e32;
-      for (let [n22, i2] of t112.parameters) e32 += ";" + n22 + "=", r22(i2) && 0 !== i2.length || (i2 = i2.replace(/(["\\])/ug, "\\$1"), i2 = `"${i2}"`), e32 += i2;
-      return e32;
-    };
-  }
+	"../../../node_modules/whatwg-mimetype/lib/serializer.js"(t102, e22) {
+		var { solelyContainsHTTPTokenCodePoints: r22 } = d();
+		e22.exports = (t112) => {
+			let e32 = `${t112.type}/${t112.subtype}`;
+			if (0 === t112.parameters.size) return e32;
+			for (let [n22, i2] of t112.parameters)
+				(e32 += ";" + n22 + "="),
+					(r22(i2) && 0 !== i2.length) ||
+						((i2 = i2.replace(/(["\\])/gu, "\\$1")), (i2 = `"${i2}"`)),
+					(e32 += i2);
+			return e32;
+		};
+	},
 });
 var m = l({
-  "../../../node_modules/whatwg-mimetype/lib/mime-type.js"(t102, e22) {
-    var r22 = g(),
-      n22 = v(),
-      i2 = y(),
-      {
-        asciiLowercase: s2,
-        solelyContainsHTTPTokenCodePoints: a22
-      } = d();
-    e22.exports = class {
-      static parse(t112) {
-        try {
-          return new this(t112);
-        } catch (t12) {
-          return null;
-        }
-      }
-      get essence() {
-        return `${this.type}/${this.subtype}`;
-      }
-      get type() {
-        return this._type;
-      }
-      set type(t112) {
-        if (0 === (t112 = s2(String(t112))).length) throw Error("Invalid type: must be a non-empty string");
-        if (!a22(t112)) throw Error(`Invalid type ${t112}: must contain only HTTP token code points`);
-        this._type = t112;
-      }
-      get subtype() {
-        return this._subtype;
-      }
-      set subtype(t112) {
-        if (0 === (t112 = s2(String(t112))).length) throw Error("Invalid subtype: must be a non-empty string");
-        if (!a22(t112)) throw Error(`Invalid subtype ${t112}: must contain only HTTP token code points`);
-        this._subtype = t112;
-      }
-      get parameters() {
-        return this._parameters;
-      }
-      toString() {
-        return i2(this);
-      }
-      isJavaScript({
-        prohibitParameters: t112 = false
-      } = {}) {
-        switch (this._type) {
-          case "text":
-            switch (this._subtype) {
-              case "ecmascript":
-              case "javascript":
-              case "javascript1.0":
-              case "javascript1.1":
-              case "javascript1.2":
-              case "javascript1.3":
-              case "javascript1.4":
-              case "javascript1.5":
-              case "jscript":
-              case "livescript":
-              case "x-ecmascript":
-              case "x-javascript":
-                return !t112 || 0 === this._parameters.size;
-              default:
-                return false;
-            }
-          case "application":
-            switch (this._subtype) {
-              case "ecmascript":
-              case "javascript":
-              case "x-ecmascript":
-              case "x-javascript":
-                return !t112 || 0 === this._parameters.size;
-              default:
-                return false;
-            }
-          default:
-            return false;
-        }
-      }
-      isXML() {
-        return "xml" === this._subtype && ("text" === this._type || "application" === this._type) || this._subtype.endsWith("+xml");
-      }
-      isHTML() {
-        return "html" === this._subtype && "text" === this._type;
-      }
-      constructor(t112) {
-        t112 = String(t112);
-        let e32 = n22(t112);
-        if (null === e32) throw Error(`Could not parse MIME type string "${t112}"`);
-        this._type = e32.type, this._subtype = e32.subtype, this._parameters = new r22(e32.parameters);
-      }
-    };
-  }
+	"../../../node_modules/whatwg-mimetype/lib/mime-type.js"(t102, e22) {
+		var r22 = g(),
+			n22 = v(),
+			i2 = y(),
+			{ asciiLowercase: s2, solelyContainsHTTPTokenCodePoints: a22 } = d();
+		e22.exports = class {
+			static parse(t112) {
+				try {
+					return new this(t112);
+				} catch (t12) {
+					return null;
+				}
+			}
+			get essence() {
+				return `${this.type}/${this.subtype}`;
+			}
+			get type() {
+				return this._type;
+			}
+			set type(t112) {
+				if (0 === (t112 = s2(String(t112))).length)
+					throw Error("Invalid type: must be a non-empty string");
+				if (!a22(t112))
+					throw Error(
+						`Invalid type ${t112}: must contain only HTTP token code points`,
+					);
+				this._type = t112;
+			}
+			get subtype() {
+				return this._subtype;
+			}
+			set subtype(t112) {
+				if (0 === (t112 = s2(String(t112))).length)
+					throw Error("Invalid subtype: must be a non-empty string");
+				if (!a22(t112))
+					throw Error(
+						`Invalid subtype ${t112}: must contain only HTTP token code points`,
+					);
+				this._subtype = t112;
+			}
+			get parameters() {
+				return this._parameters;
+			}
+			toString() {
+				return i2(this);
+			}
+			isJavaScript({ prohibitParameters: t112 = false } = {}) {
+				switch (this._type) {
+					case "text":
+						switch (this._subtype) {
+							case "ecmascript":
+							case "javascript":
+							case "javascript1.0":
+							case "javascript1.1":
+							case "javascript1.2":
+							case "javascript1.3":
+							case "javascript1.4":
+							case "javascript1.5":
+							case "jscript":
+							case "livescript":
+							case "x-ecmascript":
+							case "x-javascript":
+								return !t112 || 0 === this._parameters.size;
+							default:
+								return false;
+						}
+					case "application":
+						switch (this._subtype) {
+							case "ecmascript":
+							case "javascript":
+							case "x-ecmascript":
+							case "x-javascript":
+								return !t112 || 0 === this._parameters.size;
+							default:
+								return false;
+						}
+					default:
+						return false;
+				}
+			}
+			isXML() {
+				return (
+					("xml" === this._subtype &&
+						("text" === this._type || "application" === this._type)) ||
+					this._subtype.endsWith("+xml")
+				);
+			}
+			isHTML() {
+				return "html" === this._subtype && "text" === this._type;
+			}
+			constructor(t112) {
+				t112 = String(t112);
+				let e32 = n22(t112);
+				if (null === e32)
+					throw Error(`Could not parse MIME type string "${t112}"`);
+				(this._type = e32.type),
+					(this._subtype = e32.subtype),
+					(this._parameters = new r22(e32.parameters));
+			}
+		};
+	},
 });
 var w = h(c());
 function b(t102, ...e22) {
-  if (!t102) throw Error("Assertion Error" + (e22.length > 0 ? ": " + e22.join(" ") : ""));
+	if (!t102)
+		throw Error(
+			"Assertion Error" + (e22.length > 0 ? ": " + e22.join(" ") : ""),
+		);
 }
 function _(t102) {
-  throw Error(`Unexpected value: ${t102}`);
+	throw Error(`Unexpected value: ${t102}`);
 }
 var k = {
-  Uint8: 1,
-  Uint16: 2,
-  Uint32: 4,
-  BigUint64: 8,
-  Int8: 1,
-  Int16: 2,
-  Int32: 4,
-  BigInt64: 8,
-  Float32: 4,
-  Float64: 8
+	Uint8: 1,
+	Uint16: 2,
+	Uint32: 4,
+	BigUint64: 8,
+	Int8: 1,
+	Int16: 2,
+	Int32: 4,
+	BigInt64: 8,
+	Float32: 4,
+	Float64: 8,
 };
 var I = class {
-  getOffset() {
-    return this.offset;
-  }
-  ensureBufferLength(t102) {
-    let e22 = this.buffer.byteLength;
-    if (!(this.offset + t102 <= e22)) throw Error("Reading out of bounds");
-  }
-  readUint8() {
-    let t102 = k.Uint8;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getUint8(this.offset);
-    return this.offset += t102, e22;
-  }
-  readUint16() {
-    let t102 = k.Uint16;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getUint16(this.offset);
-    return this.offset += t102, e22;
-  }
-  readUint32() {
-    let t102 = k.Uint32;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getUint32(this.offset);
-    return this.offset += t102, e22;
-  }
-  readUint64() {
-    let t102 = this.readBigUint64();
-    return Number(t102);
-  }
-  readBigUint64() {
-    let t102 = k.BigUint64;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getBigUint64(this.offset);
-    return this.offset += t102, e22;
-  }
-  readInt8() {
-    let t102 = k.Int8;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getInt8(this.offset);
-    return this.offset += t102, e22;
-  }
-  readInt16() {
-    let t102 = k.Int16;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getInt16(this.offset);
-    return this.offset += t102, e22;
-  }
-  readInt32() {
-    let t102 = k.Int32;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getInt32(this.offset);
-    return this.offset += t102, e22;
-  }
-  readInt64() {
-    let t102 = this.readBigInt64();
-    return Number(t102);
-  }
-  readBigInt64() {
-    let t102 = k.BigInt64;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getBigInt64(this.offset);
-    return this.offset += t102, e22;
-  }
-  readFloat32() {
-    let t102 = k.Float32;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getFloat32(this.offset);
-    return this.offset += t102, e22;
-  }
-  readFloat64() {
-    let t102 = k.Float64;
-    this.ensureBufferLength(t102);
-    let e22 = this.view.getFloat64(this.offset);
-    return this.offset += t102, e22;
-  }
-  readBuffer(t102) {
-    let e22 = this.offset,
-      r22 = e22 + t102,
-      n22 = this.buffer.slice(e22, r22);
-    return this.offset = r22, n22;
-  }
-  readString() {
-    let t102 = this.readUint32(),
-      e22 = this.readBuffer(t102);
-    return this.decoder.decode(e22);
-  }
-  readJson() {
-    let t102 = this.readString();
-    return JSON.parse(t102);
-  }
-  constructor(t102) {
-    this.buffer = t102, this.offset = 0, this.view = new DataView(this.buffer), this.decoder = new TextDecoder();
-  }
+	getOffset() {
+		return this.offset;
+	}
+	ensureBufferLength(t102) {
+		let e22 = this.buffer.byteLength;
+		if (!(this.offset + t102 <= e22)) throw Error("Reading out of bounds");
+	}
+	readUint8() {
+		let t102 = k.Uint8;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getUint8(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readUint16() {
+		let t102 = k.Uint16;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getUint16(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readUint32() {
+		let t102 = k.Uint32;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getUint32(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readUint64() {
+		let t102 = this.readBigUint64();
+		return Number(t102);
+	}
+	readBigUint64() {
+		let t102 = k.BigUint64;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getBigUint64(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readInt8() {
+		let t102 = k.Int8;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getInt8(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readInt16() {
+		let t102 = k.Int16;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getInt16(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readInt32() {
+		let t102 = k.Int32;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getInt32(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readInt64() {
+		let t102 = this.readBigInt64();
+		return Number(t102);
+	}
+	readBigInt64() {
+		let t102 = k.BigInt64;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getBigInt64(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readFloat32() {
+		let t102 = k.Float32;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getFloat32(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readFloat64() {
+		let t102 = k.Float64;
+		this.ensureBufferLength(t102);
+		let e22 = this.view.getFloat64(this.offset);
+		return (this.offset += t102), e22;
+	}
+	readBuffer(t102) {
+		let e22 = this.offset,
+			r22 = e22 + t102,
+			n22 = this.buffer.slice(e22, r22);
+		return (this.offset = r22), n22;
+	}
+	readString() {
+		let t102 = this.readUint32(),
+			e22 = this.readBuffer(t102);
+		return this.decoder.decode(e22);
+	}
+	readJson() {
+		let t102 = this.readString();
+		return JSON.parse(t102);
+	}
+	constructor(t102) {
+		(this.buffer = t102),
+			(this.offset = 0),
+			(this.view = new DataView(this.buffer)),
+			(this.decoder = new TextDecoder());
+	}
 };
 function S(t102) {
-  return Number.isFinite(t102);
+	return Number.isFinite(t102);
 }
 function x(t102) {
-  return void 0 === t102;
+	return void 0 === t102;
 }
 function E(t102) {
-  return null === t102;
+	return null === t102;
 }
 var T = Uint8Array;
 var L = Uint16Array;
 var M = Int32Array;
-var A = new T([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, /* unused */
-0, 0, /* impossible */
-0]);
-var F = new T([0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, /* unused */
-0, 0]);
-var j = new T([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]);
+var A = new T([
+	0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5,
+	5, 5, 0 /* unused */, 0, 0 /* impossible */, 0,
+]);
+var F = new T([
+	0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11,
+	11, 12, 12, 13, 13 /* unused */, 0, 0,
+]);
+var j = new T([
+	16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15,
+]);
 var P = function (t102, e22) {
-  for (var r22 = new L(31), n22 = 0; n22 < 31; ++n22) r22[n22] = e22 += 1 << t102[n22 - 1];
-  for (var i2 = new M(r22[30]), n22 = 1; n22 < 30; ++n22) for (var s2 = r22[n22]; s2 < r22[n22 + 1]; ++s2) i2[s2] = s2 - r22[n22] << 5 | n22;
-  return {
-    b: r22,
-    r: i2
-  };
+	for (var r22 = new L(31), n22 = 0; n22 < 31; ++n22)
+		r22[n22] = e22 += 1 << t102[n22 - 1];
+	for (var i2 = new M(r22[30]), n22 = 1; n22 < 30; ++n22)
+		for (var s2 = r22[n22]; s2 < r22[n22 + 1]; ++s2)
+			i2[s2] = ((s2 - r22[n22]) << 5) | n22;
+	return {
+		b: r22,
+		r: i2,
+	};
 };
 var D = P(A, 2);
 var N = D.b;
 var C = D.r;
-N[28] = 258, C[258] = 28;
+(N[28] = 258), (C[258] = 28);
 var O = P(F, 0);
 var $ = O.b;
 var q = O.r;
 var z = new L(32768);
-for (e = 0; e < 32768; ++e) t = (61680 & (t = (52428 & (t = (43690 & e) >> 1 | (21845 & e) << 1)) >> 2 | (13107 & t) << 2)) >> 4 | (3855 & t) << 4, z[e] = ((65280 & t) >> 8 | (255 & t) << 8) >> 1;
+for (e = 0; e < 32768; ++e)
+	(t =
+		((61680 &
+			(t =
+				((52428 & (t = ((43690 & e) >> 1) | ((21845 & e) << 1))) >> 2) |
+				((13107 & t) << 2))) >>
+			4) |
+		((3855 & t) << 4)),
+		(z[e] = (((65280 & t) >> 8) | ((255 & t) << 8)) >> 1);
 var R = function (t102, e22, r22) {
-  for (var n22, i2 = t102.length, s2 = 0, a22 = new L(e22); s2 < i2; ++s2) t102[s2] && ++a22[t102[s2] - 1];
-  var o2 = new L(e22);
-  for (s2 = 1; s2 < e22; ++s2) o2[s2] = o2[s2 - 1] + a22[s2 - 1] << 1;
-  if (r22) {
-    n22 = new L(1 << e22);
-    var u22 = 15 - e22;
-    for (s2 = 0; s2 < i2; ++s2) if (t102[s2]) for (var l22 = s2 << 4 | t102[s2], f2 = e22 - t102[s2], h2 = o2[t102[s2] - 1]++ << f2, c2 = h2 | (1 << f2) - 1; h2 <= c2; ++h2) n22[z[h2] >> u22] = l22;
-  } else for (s2 = 0, n22 = new L(i2); s2 < i2; ++s2) t102[s2] && (n22[s2] = z[o2[t102[s2] - 1]++] >> 15 - t102[s2]);
-  return n22;
+	for (var n22, i2 = t102.length, s2 = 0, a22 = new L(e22); s2 < i2; ++s2)
+		t102[s2] && ++a22[t102[s2] - 1];
+	var o2 = new L(e22);
+	for (s2 = 1; s2 < e22; ++s2) o2[s2] = (o2[s2 - 1] + a22[s2 - 1]) << 1;
+	if (r22) {
+		n22 = new L(1 << e22);
+		var u22 = 15 - e22;
+		for (s2 = 0; s2 < i2; ++s2)
+			if (t102[s2])
+				for (
+					var l22 = (s2 << 4) | t102[s2],
+						f2 = e22 - t102[s2],
+						h2 = o2[t102[s2] - 1]++ << f2,
+						c2 = h2 | ((1 << f2) - 1);
+					h2 <= c2;
+					++h2
+				)
+					n22[z[h2] >> u22] = l22;
+	} else
+		for (s2 = 0, n22 = new L(i2); s2 < i2; ++s2)
+			t102[s2] && (n22[s2] = z[o2[t102[s2] - 1]++] >> (15 - t102[s2]));
+	return n22;
 };
 var H = new T(288);
 for (e = 0; e < 144; ++e) H[e] = 8;
@@ -949,2322 +1430,4038 @@ for (e = 256; e < 280; ++e) H[e] = 7;
 for (e = 280; e < 288; ++e) H[e] = 8;
 var J = new T(32);
 for (e = 0; e < 32; ++e) J[e] = 5;
-var W = /* @__PURE__ */R(H, 9, 0);
-var G = /* @__PURE__ */R(H, 9, 1);
-var K = /* @__PURE__ */R(J, 5, 0);
-var V = /* @__PURE__ */R(J, 5, 1);
+var W = /* @__PURE__ */ R(H, 9, 0);
+var G = /* @__PURE__ */ R(H, 9, 1);
+var K = /* @__PURE__ */ R(J, 5, 0);
+var V = /* @__PURE__ */ R(J, 5, 1);
 var X = function (t102) {
-  for (var e22 = t102[0], r22 = 1; r22 < t102.length; ++r22) t102[r22] > e22 && (e22 = t102[r22]);
-  return e22;
+	for (var e22 = t102[0], r22 = 1; r22 < t102.length; ++r22)
+		t102[r22] > e22 && (e22 = t102[r22]);
+	return e22;
 };
 var Q = function (t102, e22, r22) {
-  var n22 = e22 / 8 | 0;
-  return (t102[n22] | t102[n22 + 1] << 8) >> (7 & e22) & r22;
+	var n22 = (e22 / 8) | 0;
+	return ((t102[n22] | (t102[n22 + 1] << 8)) >> (7 & e22)) & r22;
 };
 var Z = function (t102, e22) {
-  var r22 = e22 / 8 | 0;
-  return (t102[r22] | t102[r22 + 1] << 8 | t102[r22 + 2] << 16) >> (7 & e22);
+	var r22 = (e22 / 8) | 0;
+	return (
+		(t102[r22] | (t102[r22 + 1] << 8) | (t102[r22 + 2] << 16)) >> (7 & e22)
+	);
 };
 var Y = function (t102) {
-  return (t102 + 7) / 8 | 0;
+	return ((t102 + 7) / 8) | 0;
 };
 var tt = function (t102, e22, r22) {
-  return (null == e22 || e22 < 0) && (e22 = 0), (null == r22 || r22 > t102.length) && (r22 = t102.length), new T(t102.subarray(e22, r22));
+	return (
+		(null == e22 || e22 < 0) && (e22 = 0),
+		(null == r22 || r22 > t102.length) && (r22 = t102.length),
+		new T(t102.subarray(e22, r22))
+	);
 };
-var te = ["unexpected EOF", "invalid block type", "invalid length/literal", "invalid distance", "stream finished", "no stream handler",, "no callback", "invalid UTF-8 data", "extra field too long", "date not in range 1980-2099", "filename too long", "stream finishing", "invalid zip data"];
+var te = [
+	"unexpected EOF",
+	"invalid block type",
+	"invalid length/literal",
+	"invalid distance",
+	"stream finished",
+	"no stream handler",
+	,
+	"no callback",
+	"invalid UTF-8 data",
+	"extra field too long",
+	"date not in range 1980-2099",
+	"filename too long",
+	"stream finishing",
+	"invalid zip data",
+];
 var tr = function (t102, e22, r22) {
-  var n22 = Error(e22 || te[t102]);
-  if (n22.code = t102, Error.captureStackTrace && Error.captureStackTrace(n22, tr), !r22) throw n22;
-  return n22;
+	var n22 = Error(e22 || te[t102]);
+	if (
+		((n22.code = t102),
+		Error.captureStackTrace && Error.captureStackTrace(n22, tr),
+		!r22)
+	)
+		throw n22;
+	return n22;
 };
 var tn = function (t102, e22, r22, n22) {
-  var i2 = t102.length,
-    s2 = n22 ? n22.length : 0;
-  if (!i2 || e22.f && !e22.l) return r22 || new T(0);
-  var a22 = !r22,
-    o2 = a22 || 2 != e22.i,
-    u22 = e22.i;
-  a22 && (r22 = new T(3 * i2));
-  var l22 = function (t112) {
-      var e32 = r22.length;
-      if (t112 > e32) {
-        var n3 = new T(Math.max(2 * e32, t112));
-        n3.set(r22), r22 = n3;
-      }
-    },
-    f2 = e22.f || 0,
-    h2 = e22.p || 0,
-    c2 = e22.b || 0,
-    p2 = e22.l,
-    d2 = e22.d,
-    g2 = e22.m,
-    v2 = e22.n,
-    y2 = 8 * i2;
-  do {
-    if (!p2) {
-      f2 = Q(t102, h2, 1);
-      var m2 = Q(t102, h2 + 1, 3);
-      if (h2 += 3, m2) {
-        if (1 == m2) p2 = G, d2 = V, g2 = 9, v2 = 5;else if (2 == m2) {
-          var w2 = Q(t102, h2, 31) + 257,
-            b2 = Q(t102, h2 + 10, 15) + 4,
-            _2 = w2 + Q(t102, h2 + 5, 31) + 1;
-          h2 += 14;
-          for (var k2 = new T(_2), I2 = new T(19), U2 = 0; U2 < b2; ++U2) I2[j[U2]] = Q(t102, h2 + 3 * U2, 7);
-          h2 += 3 * b2;
-          for (var S2 = X(I2), x2 = (1 << S2) - 1, E2 = R(I2, S2, 1), U2 = 0; U2 < _2;) {
-            var B2 = E2[Q(t102, h2, x2)];
-            h2 += 15 & B2;
-            var L2 = B2 >> 4;
-            if (L2 < 16) k2[U2++] = L2;else {
-              var M2 = 0,
-                P2 = 0;
-              for (16 == L2 ? (P2 = 3 + Q(t102, h2, 3), h2 += 2, M2 = k2[U2 - 1]) : 17 == L2 ? (P2 = 3 + Q(t102, h2, 7), h2 += 3) : 18 == L2 && (P2 = 11 + Q(t102, h2, 127), h2 += 7); P2--;) k2[U2++] = M2;
-            }
-          }
-          var D2 = k2.subarray(0, w2),
-            C2 = k2.subarray(w2);
-          g2 = X(D2), v2 = X(C2), p2 = R(D2, g2, 1), d2 = R(C2, v2, 1);
-        } else tr(1);
-      } else {
-        var L2 = Y(h2) + 4,
-          O2 = t102[L2 - 4] | t102[L2 - 3] << 8,
-          q2 = L2 + O2;
-        if (q2 > i2) {
-          u22 && tr(0);
-          break;
-        }
-        o2 && l22(c2 + O2), r22.set(t102.subarray(L2, q2), c2), e22.b = c2 += O2, e22.p = h2 = 8 * q2, e22.f = f2;
-        continue;
-      }
-      if (h2 > y2) {
-        u22 && tr(0);
-        break;
-      }
-    }
-    o2 && l22(c2 + 131072);
-    for (var z2 = (1 << g2) - 1, H2 = (1 << v2) - 1, J2 = h2;; J2 = h2) {
-      var M2 = p2[Z(t102, h2) & z2],
-        W2 = M2 >> 4;
-      if ((h2 += 15 & M2) > y2) {
-        u22 && tr(0);
-        break;
-      }
-      if (M2 || tr(2), W2 < 256) r22[c2++] = W2;else if (256 == W2) {
-        J2 = h2, p2 = null;
-        break;
-      } else {
-        var K2 = W2 - 254;
-        if (W2 > 264) {
-          var U2 = W2 - 257,
-            te2 = A[U2];
-          K2 = Q(t102, h2, (1 << te2) - 1) + N[U2], h2 += te2;
-        }
-        var tn2 = d2[Z(t102, h2) & H2],
-          ti2 = tn2 >> 4;
-        tn2 || tr(3), h2 += 15 & tn2;
-        var C2 = $[ti2];
-        if (ti2 > 3) {
-          var te2 = F[ti2];
-          C2 += Z(t102, h2) & (1 << te2) - 1, h2 += te2;
-        }
-        if (h2 > y2) {
-          u22 && tr(0);
-          break;
-        }
-        o2 && l22(c2 + 131072);
-        var ts2 = c2 + K2;
-        if (c2 < C2) {
-          var ta2 = s2 - C2,
-            to2 = Math.min(C2, ts2);
-          for (ta2 + c2 < 0 && tr(3); c2 < to2; ++c2) r22[c2] = n22[ta2 + c2];
-        }
-        for (; c2 < ts2; ++c2) r22[c2] = r22[c2 - C2];
-      }
-    }
-    e22.l = p2, e22.p = J2, e22.b = c2, e22.f = f2, p2 && (f2 = 1, e22.m = g2, e22.d = d2, e22.n = v2);
-  } while (!f2);
-  return c2 != r22.length && a22 ? tt(r22, 0, c2) : r22.subarray(0, c2);
+	var i2 = t102.length,
+		s2 = n22 ? n22.length : 0;
+	if (!i2 || (e22.f && !e22.l)) return r22 || new T(0);
+	var a22 = !r22,
+		o2 = a22 || 2 != e22.i,
+		u22 = e22.i;
+	a22 && (r22 = new T(3 * i2));
+	var l22 = function (t112) {
+			var e32 = r22.length;
+			if (t112 > e32) {
+				var n3 = new T(Math.max(2 * e32, t112));
+				n3.set(r22), (r22 = n3);
+			}
+		},
+		f2 = e22.f || 0,
+		h2 = e22.p || 0,
+		c2 = e22.b || 0,
+		p2 = e22.l,
+		d2 = e22.d,
+		g2 = e22.m,
+		v2 = e22.n,
+		y2 = 8 * i2;
+	do {
+		if (!p2) {
+			f2 = Q(t102, h2, 1);
+			var m2 = Q(t102, h2 + 1, 3);
+			if (((h2 += 3), m2)) {
+				if (1 == m2) (p2 = G), (d2 = V), (g2 = 9), (v2 = 5);
+				else if (2 == m2) {
+					var w2 = Q(t102, h2, 31) + 257,
+						b2 = Q(t102, h2 + 10, 15) + 4,
+						_2 = w2 + Q(t102, h2 + 5, 31) + 1;
+					h2 += 14;
+					for (var k2 = new T(_2), I2 = new T(19), U2 = 0; U2 < b2; ++U2)
+						I2[j[U2]] = Q(t102, h2 + 3 * U2, 7);
+					h2 += 3 * b2;
+					for (
+						var S2 = X(I2), x2 = (1 << S2) - 1, E2 = R(I2, S2, 1), U2 = 0;
+						U2 < _2;
+					) {
+						var B2 = E2[Q(t102, h2, x2)];
+						h2 += 15 & B2;
+						var L2 = B2 >> 4;
+						if (L2 < 16) k2[U2++] = L2;
+						else {
+							var M2 = 0,
+								P2 = 0;
+							for (
+								16 == L2
+									? ((P2 = 3 + Q(t102, h2, 3)), (h2 += 2), (M2 = k2[U2 - 1]))
+									: 17 == L2
+										? ((P2 = 3 + Q(t102, h2, 7)), (h2 += 3))
+										: 18 == L2 && ((P2 = 11 + Q(t102, h2, 127)), (h2 += 7));
+								P2--;
+							)
+								k2[U2++] = M2;
+						}
+					}
+					var D2 = k2.subarray(0, w2),
+						C2 = k2.subarray(w2);
+					(g2 = X(D2)), (v2 = X(C2)), (p2 = R(D2, g2, 1)), (d2 = R(C2, v2, 1));
+				} else tr(1);
+			} else {
+				var L2 = Y(h2) + 4,
+					O2 = t102[L2 - 4] | (t102[L2 - 3] << 8),
+					q2 = L2 + O2;
+				if (q2 > i2) {
+					u22 && tr(0);
+					break;
+				}
+				o2 && l22(c2 + O2),
+					r22.set(t102.subarray(L2, q2), c2),
+					(e22.b = c2 += O2),
+					(e22.p = h2 = 8 * q2),
+					(e22.f = f2);
+				continue;
+			}
+			if (h2 > y2) {
+				u22 && tr(0);
+				break;
+			}
+		}
+		o2 && l22(c2 + 131072);
+		for (var z2 = (1 << g2) - 1, H2 = (1 << v2) - 1, J2 = h2; ; J2 = h2) {
+			var M2 = p2[Z(t102, h2) & z2],
+				W2 = M2 >> 4;
+			if ((h2 += 15 & M2) > y2) {
+				u22 && tr(0);
+				break;
+			}
+			if ((M2 || tr(2), W2 < 256)) r22[c2++] = W2;
+			else if (256 == W2) {
+				(J2 = h2), (p2 = null);
+				break;
+			} else {
+				var K2 = W2 - 254;
+				if (W2 > 264) {
+					var U2 = W2 - 257,
+						te2 = A[U2];
+					(K2 = Q(t102, h2, (1 << te2) - 1) + N[U2]), (h2 += te2);
+				}
+				var tn2 = d2[Z(t102, h2) & H2],
+					ti2 = tn2 >> 4;
+				tn2 || tr(3), (h2 += 15 & tn2);
+				var C2 = $[ti2];
+				if (ti2 > 3) {
+					var te2 = F[ti2];
+					(C2 += Z(t102, h2) & ((1 << te2) - 1)), (h2 += te2);
+				}
+				if (h2 > y2) {
+					u22 && tr(0);
+					break;
+				}
+				o2 && l22(c2 + 131072);
+				var ts2 = c2 + K2;
+				if (c2 < C2) {
+					var ta2 = s2 - C2,
+						to2 = Math.min(C2, ts2);
+					for (ta2 + c2 < 0 && tr(3); c2 < to2; ++c2) r22[c2] = n22[ta2 + c2];
+				}
+				for (; c2 < ts2; ++c2) r22[c2] = r22[c2 - C2];
+			}
+		}
+		(e22.l = p2),
+			(e22.p = J2),
+			(e22.b = c2),
+			(e22.f = f2),
+			p2 && ((f2 = 1), (e22.m = g2), (e22.d = d2), (e22.n = v2));
+	} while (!f2);
+	return c2 != r22.length && a22 ? tt(r22, 0, c2) : r22.subarray(0, c2);
 };
 var ti = function (t102, e22, r22) {
-  r22 <<= 7 & e22;
-  var n22 = e22 / 8 | 0;
-  t102[n22] |= r22, t102[n22 + 1] |= r22 >> 8;
+	r22 <<= 7 & e22;
+	var n22 = (e22 / 8) | 0;
+	(t102[n22] |= r22), (t102[n22 + 1] |= r22 >> 8);
 };
 var ts = function (t102, e22, r22) {
-  r22 <<= 7 & e22;
-  var n22 = e22 / 8 | 0;
-  t102[n22] |= r22, t102[n22 + 1] |= r22 >> 8, t102[n22 + 2] |= r22 >> 16;
+	r22 <<= 7 & e22;
+	var n22 = (e22 / 8) | 0;
+	(t102[n22] |= r22), (t102[n22 + 1] |= r22 >> 8), (t102[n22 + 2] |= r22 >> 16);
 };
 var ta = function (t102, e22) {
-  for (var r22 = [], n22 = 0; n22 < t102.length; ++n22) t102[n22] && r22.push({
-    s: n22,
-    f: t102[n22]
-  });
-  var i2 = r22.length,
-    s2 = r22.slice();
-  if (!i2) return {
-    t: tp,
-    l: 0
-  };
-  if (1 == i2) {
-    var a22 = new T(r22[0].s + 1);
-    return a22[r22[0].s] = 1, {
-      t: a22,
-      l: 1
-    };
-  }
-  r22.sort(function (t112, e32) {
-    return t112.f - e32.f;
-  }), r22.push({
-    s: -1,
-    f: 25001
-  });
-  var o2 = r22[0],
-    u22 = r22[1],
-    l22 = 0,
-    f2 = 1,
-    h2 = 2;
-  for (r22[0] = {
-    s: -1,
-    f: o2.f + u22.f,
-    l: o2,
-    r: u22
-  }; f2 != i2 - 1;) o2 = r22[r22[l22].f < r22[h2].f ? l22++ : h2++], u22 = r22[l22 != f2 && r22[l22].f < r22[h2].f ? l22++ : h2++], r22[f2++] = {
-    s: -1,
-    f: o2.f + u22.f,
-    l: o2,
-    r: u22
-  };
-  for (var c2 = s2[0].s, n22 = 1; n22 < i2; ++n22) s2[n22].s > c2 && (c2 = s2[n22].s);
-  var p2 = new L(c2 + 1),
-    d2 = to(r22[f2 - 1], p2, 0);
-  if (d2 > e22) {
-    var n22 = 0,
-      g2 = 0,
-      v2 = d2 - e22,
-      y2 = 1 << v2;
-    for (s2.sort(function (t112, e32) {
-      return p2[e32.s] - p2[t112.s] || t112.f - e32.f;
-    }); n22 < i2; ++n22) {
-      var m2 = s2[n22].s;
-      if (p2[m2] > e22) g2 += y2 - (1 << d2 - p2[m2]), p2[m2] = e22;else break;
-    }
-    for (g2 >>= v2; g2 > 0;) {
-      var w2 = s2[n22].s;
-      p2[w2] < e22 ? g2 -= 1 << e22 - p2[w2]++ - 1 : ++n22;
-    }
-    for (; n22 >= 0 && g2; --n22) {
-      var b2 = s2[n22].s;
-      p2[b2] == e22 && (--p2[b2], ++g2);
-    }
-    d2 = e22;
-  }
-  return {
-    t: new T(p2),
-    l: d2
-  };
+	for (var r22 = [], n22 = 0; n22 < t102.length; ++n22)
+		t102[n22] &&
+			r22.push({
+				s: n22,
+				f: t102[n22],
+			});
+	var i2 = r22.length,
+		s2 = r22.slice();
+	if (!i2)
+		return {
+			t: tp,
+			l: 0,
+		};
+	if (1 == i2) {
+		var a22 = new T(r22[0].s + 1);
+		return (
+			(a22[r22[0].s] = 1),
+			{
+				t: a22,
+				l: 1,
+			}
+		);
+	}
+	r22.sort(function (t112, e32) {
+		return t112.f - e32.f;
+	}),
+		r22.push({
+			s: -1,
+			f: 25001,
+		});
+	var o2 = r22[0],
+		u22 = r22[1],
+		l22 = 0,
+		f2 = 1,
+		h2 = 2;
+	for (
+		r22[0] = {
+			s: -1,
+			f: o2.f + u22.f,
+			l: o2,
+			r: u22,
+		};
+		f2 != i2 - 1;
+	)
+		(o2 = r22[r22[l22].f < r22[h2].f ? l22++ : h2++]),
+			(u22 = r22[l22 != f2 && r22[l22].f < r22[h2].f ? l22++ : h2++]),
+			(r22[f2++] = {
+				s: -1,
+				f: o2.f + u22.f,
+				l: o2,
+				r: u22,
+			});
+	for (var c2 = s2[0].s, n22 = 1; n22 < i2; ++n22)
+		s2[n22].s > c2 && (c2 = s2[n22].s);
+	var p2 = new L(c2 + 1),
+		d2 = to(r22[f2 - 1], p2, 0);
+	if (d2 > e22) {
+		var n22 = 0,
+			g2 = 0,
+			v2 = d2 - e22,
+			y2 = 1 << v2;
+		for (
+			s2.sort(function (t112, e32) {
+				return p2[e32.s] - p2[t112.s] || t112.f - e32.f;
+			});
+			n22 < i2;
+			++n22
+		) {
+			var m2 = s2[n22].s;
+			if (p2[m2] > e22) (g2 += y2 - (1 << (d2 - p2[m2]))), (p2[m2] = e22);
+			else break;
+		}
+		for (g2 >>= v2; g2 > 0; ) {
+			var w2 = s2[n22].s;
+			p2[w2] < e22 ? (g2 -= 1 << (e22 - p2[w2]++ - 1)) : ++n22;
+		}
+		for (; n22 >= 0 && g2; --n22) {
+			var b2 = s2[n22].s;
+			p2[b2] == e22 && (--p2[b2], ++g2);
+		}
+		d2 = e22;
+	}
+	return {
+		t: new T(p2),
+		l: d2,
+	};
 };
 var to = function (t102, e22, r22) {
-  return -1 == t102.s ? Math.max(to(t102.l, e22, r22 + 1), to(t102.r, e22, r22 + 1)) : e22[t102.s] = r22;
+	return -1 == t102.s
+		? Math.max(to(t102.l, e22, r22 + 1), to(t102.r, e22, r22 + 1))
+		: (e22[t102.s] = r22);
 };
 var tu = function (t102) {
-  for (var e22 = t102.length; e22 && !t102[--e22];);
-  for (var r22 = new L(++e22), n22 = 0, i2 = t102[0], s2 = 1, a22 = function (t112) {
-      r22[n22++] = t112;
-    }, o2 = 1; o2 <= e22; ++o2) if (t102[o2] == i2 && o2 != e22) ++s2;else {
-    if (!i2 && s2 > 2) {
-      for (; s2 > 138; s2 -= 138) a22(32754);
-      s2 > 2 && (a22(s2 > 10 ? s2 - 11 << 5 | 28690 : s2 - 3 << 5 | 12305), s2 = 0);
-    } else if (s2 > 3) {
-      for (a22(i2), --s2; s2 > 6; s2 -= 6) a22(8304);
-      s2 > 2 && (a22(s2 - 3 << 5 | 8208), s2 = 0);
-    }
-    for (; s2--;) a22(i2);
-    s2 = 1, i2 = t102[o2];
-  }
-  return {
-    c: r22.subarray(0, n22),
-    n: e22
-  };
+	for (var e22 = t102.length; e22 && !t102[--e22]; );
+	for (
+		var r22 = new L(++e22),
+			n22 = 0,
+			i2 = t102[0],
+			s2 = 1,
+			a22 = function (t112) {
+				r22[n22++] = t112;
+			},
+			o2 = 1;
+		o2 <= e22;
+		++o2
+	)
+		if (t102[o2] == i2 && o2 != e22) ++s2;
+		else {
+			if (!i2 && s2 > 2) {
+				for (; s2 > 138; s2 -= 138) a22(32754);
+				s2 > 2 &&
+					(a22(s2 > 10 ? ((s2 - 11) << 5) | 28690 : ((s2 - 3) << 5) | 12305),
+					(s2 = 0));
+			} else if (s2 > 3) {
+				for (a22(i2), --s2; s2 > 6; s2 -= 6) a22(8304);
+				s2 > 2 && (a22(((s2 - 3) << 5) | 8208), (s2 = 0));
+			}
+			for (; s2--; ) a22(i2);
+			(s2 = 1), (i2 = t102[o2]);
+		}
+	return {
+		c: r22.subarray(0, n22),
+		n: e22,
+	};
 };
 var tl = function (t102, e22) {
-  for (var r22 = 0, n22 = 0; n22 < e22.length; ++n22) r22 += t102[n22] * e22[n22];
-  return r22;
+	for (var r22 = 0, n22 = 0; n22 < e22.length; ++n22)
+		r22 += t102[n22] * e22[n22];
+	return r22;
 };
 var tf = function (t102, e22, r22) {
-  var n22 = r22.length,
-    i2 = Y(e22 + 2);
-  t102[i2] = 255 & n22, t102[i2 + 1] = n22 >> 8, t102[i2 + 2] = 255 ^ t102[i2], t102[i2 + 3] = 255 ^ t102[i2 + 1];
-  for (var s2 = 0; s2 < n22; ++s2) t102[i2 + s2 + 4] = r22[s2];
-  return (i2 + 4 + n22) * 8;
+	var n22 = r22.length,
+		i2 = Y(e22 + 2);
+	(t102[i2] = 255 & n22),
+		(t102[i2 + 1] = n22 >> 8),
+		(t102[i2 + 2] = 255 ^ t102[i2]),
+		(t102[i2 + 3] = 255 ^ t102[i2 + 1]);
+	for (var s2 = 0; s2 < n22; ++s2) t102[i2 + s2 + 4] = r22[s2];
+	return (i2 + 4 + n22) * 8;
 };
 var th = function (t102, e22, r22, n22, i2, s2, a22, o2, u22, l22, f2) {
-  ti(e22, f2++, r22), ++i2[256];
-  for (var h2, c2, p2, d2, g2 = ta(i2, 15), v2 = g2.t, y2 = g2.l, m2 = ta(s2, 15), w2 = m2.t, b2 = m2.l, _2 = tu(v2), k2 = _2.c, I2 = _2.n, U2 = tu(w2), S2 = U2.c, x2 = U2.n, E2 = new L(19), B2 = 0; B2 < k2.length; ++B2) ++E2[31 & k2[B2]];
-  for (var B2 = 0; B2 < S2.length; ++B2) ++E2[31 & S2[B2]];
-  for (var T2 = ta(E2, 7), M2 = T2.t, P2 = T2.l, D2 = 19; D2 > 4 && !M2[j[D2 - 1]]; --D2);
-  var N2 = l22 + 5 << 3,
-    C2 = tl(i2, H) + tl(s2, J) + a22,
-    O2 = tl(i2, v2) + tl(s2, w2) + a22 + 14 + 3 * D2 + tl(E2, M2) + 2 * E2[16] + 3 * E2[17] + 7 * E2[18];
-  if (u22 >= 0 && N2 <= C2 && N2 <= O2) return tf(e22, f2, t102.subarray(u22, u22 + l22));
-  if (ti(e22, f2, 1 + (O2 < C2)), f2 += 2, O2 < C2) {
-    h2 = R(v2, y2, 0), c2 = v2, p2 = R(w2, b2, 0), d2 = w2;
-    var $2 = R(M2, P2, 0);
-    ti(e22, f2, I2 - 257), ti(e22, f2 + 5, x2 - 1), ti(e22, f2 + 10, D2 - 4), f2 += 14;
-    for (var B2 = 0; B2 < D2; ++B2) ti(e22, f2 + 3 * B2, M2[j[B2]]);
-    f2 += 3 * D2;
-    for (var q2 = [k2, S2], z2 = 0; z2 < 2; ++z2) for (var G2 = q2[z2], B2 = 0; B2 < G2.length; ++B2) {
-      var V2 = 31 & G2[B2];
-      ti(e22, f2, $2[V2]), f2 += M2[V2], V2 > 15 && (ti(e22, f2, G2[B2] >> 5 & 127), f2 += G2[B2] >> 12);
-    }
-  } else h2 = W, c2 = H, p2 = K, d2 = J;
-  for (var B2 = 0; B2 < o2; ++B2) {
-    var X2 = n22[B2];
-    if (X2 > 255) {
-      var V2 = X2 >> 18 & 31;
-      ts(e22, f2, h2[V2 + 257]), f2 += c2[V2 + 257], V2 > 7 && (ti(e22, f2, X2 >> 23 & 31), f2 += A[V2]);
-      var Q2 = 31 & X2;
-      ts(e22, f2, p2[Q2]), f2 += d2[Q2], Q2 > 3 && (ts(e22, f2, X2 >> 5 & 8191), f2 += F[Q2]);
-    } else ts(e22, f2, h2[X2]), f2 += c2[X2];
-  }
-  return ts(e22, f2, h2[256]), f2 + c2[256];
+	ti(e22, f2++, r22), ++i2[256];
+	for (
+		var h2,
+			c2,
+			p2,
+			d2,
+			g2 = ta(i2, 15),
+			v2 = g2.t,
+			y2 = g2.l,
+			m2 = ta(s2, 15),
+			w2 = m2.t,
+			b2 = m2.l,
+			_2 = tu(v2),
+			k2 = _2.c,
+			I2 = _2.n,
+			U2 = tu(w2),
+			S2 = U2.c,
+			x2 = U2.n,
+			E2 = new L(19),
+			B2 = 0;
+		B2 < k2.length;
+		++B2
+	)
+		++E2[31 & k2[B2]];
+	for (var B2 = 0; B2 < S2.length; ++B2) ++E2[31 & S2[B2]];
+	for (
+		var T2 = ta(E2, 7), M2 = T2.t, P2 = T2.l, D2 = 19;
+		D2 > 4 && !M2[j[D2 - 1]];
+		--D2
+	);
+	var N2 = (l22 + 5) << 3,
+		C2 = tl(i2, H) + tl(s2, J) + a22,
+		O2 =
+			tl(i2, v2) +
+			tl(s2, w2) +
+			a22 +
+			14 +
+			3 * D2 +
+			tl(E2, M2) +
+			2 * E2[16] +
+			3 * E2[17] +
+			7 * E2[18];
+	if (u22 >= 0 && N2 <= C2 && N2 <= O2)
+		return tf(e22, f2, t102.subarray(u22, u22 + l22));
+	if ((ti(e22, f2, 1 + (O2 < C2)), (f2 += 2), O2 < C2)) {
+		(h2 = R(v2, y2, 0)), (c2 = v2), (p2 = R(w2, b2, 0)), (d2 = w2);
+		var $2 = R(M2, P2, 0);
+		ti(e22, f2, I2 - 257),
+			ti(e22, f2 + 5, x2 - 1),
+			ti(e22, f2 + 10, D2 - 4),
+			(f2 += 14);
+		for (var B2 = 0; B2 < D2; ++B2) ti(e22, f2 + 3 * B2, M2[j[B2]]);
+		f2 += 3 * D2;
+		for (var q2 = [k2, S2], z2 = 0; z2 < 2; ++z2)
+			for (var G2 = q2[z2], B2 = 0; B2 < G2.length; ++B2) {
+				var V2 = 31 & G2[B2];
+				ti(e22, f2, $2[V2]),
+					(f2 += M2[V2]),
+					V2 > 15 && (ti(e22, f2, (G2[B2] >> 5) & 127), (f2 += G2[B2] >> 12));
+			}
+	} else (h2 = W), (c2 = H), (p2 = K), (d2 = J);
+	for (var B2 = 0; B2 < o2; ++B2) {
+		var X2 = n22[B2];
+		if (X2 > 255) {
+			var V2 = (X2 >> 18) & 31;
+			ts(e22, f2, h2[V2 + 257]),
+				(f2 += c2[V2 + 257]),
+				V2 > 7 && (ti(e22, f2, (X2 >> 23) & 31), (f2 += A[V2]));
+			var Q2 = 31 & X2;
+			ts(e22, f2, p2[Q2]),
+				(f2 += d2[Q2]),
+				Q2 > 3 && (ts(e22, f2, (X2 >> 5) & 8191), (f2 += F[Q2]));
+		} else ts(e22, f2, h2[X2]), (f2 += c2[X2]);
+	}
+	return ts(e22, f2, h2[256]), f2 + c2[256];
 };
-var tc = /* @__PURE__ */new M([65540, 131080, 131088, 131104, 262176, 1048704, 1048832, 2114560, 2117632]);
-var tp = /* @__PURE__ */new T(0);
+var tc = /* @__PURE__ */ new M([
+	65540, 131080, 131088, 131104, 262176, 1048704, 1048832, 2114560, 2117632,
+]);
+var tp = /* @__PURE__ */ new T(0);
 var td = function (t102, e22, r22, n22, i2, s2) {
-  var a22 = s2.z || t102.length,
-    o2 = new T(n22 + a22 + 5 * (1 + Math.ceil(a22 / 7e3)) + i2),
-    u22 = o2.subarray(n22, o2.length - i2),
-    l22 = s2.l,
-    f2 = 7 & (s2.r || 0);
-  if (e22) {
-    f2 && (u22[0] = s2.r >> 3);
-    for (var h2 = tc[e22 - 1], c2 = h2 >> 13, p2 = 8191 & h2, d2 = (1 << r22) - 1, g2 = s2.p || new L(32768), v2 = s2.h || new L(d2 + 1), y2 = Math.ceil(r22 / 3), m2 = 2 * y2, w2 = function (e32) {
-        return (t102[e32] ^ t102[e32 + 1] << y2 ^ t102[e32 + 2] << m2) & d2;
-      }, b2 = new M(25e3), _2 = new L(288), k2 = new L(32), I2 = 0, U2 = 0, S2 = s2.i || 0, x2 = 0, E2 = s2.w || 0, B2 = 0; S2 + 2 < a22; ++S2) {
-      var j2 = w2(S2),
-        P2 = 32767 & S2,
-        D2 = v2[j2];
-      if (g2[P2] = D2, v2[j2] = P2, E2 <= S2) {
-        var N2 = a22 - S2;
-        if ((I2 > 7e3 || x2 > 24576) && (N2 > 423 || !l22)) {
-          f2 = th(t102, u22, 0, b2, _2, k2, U2, x2, B2, S2 - B2, f2), x2 = I2 = U2 = 0, B2 = S2;
-          for (var O2 = 0; O2 < 286; ++O2) _2[O2] = 0;
-          for (var O2 = 0; O2 < 30; ++O2) k2[O2] = 0;
-        }
-        var $2 = 2,
-          z2 = 0,
-          R2 = p2,
-          H2 = P2 - D2 & 32767;
-        if (N2 > 2 && j2 == w2(S2 - H2)) for (var J2 = Math.min(c2, N2) - 1, W2 = Math.min(32767, S2), G2 = Math.min(258, N2); H2 <= W2 && --R2 && P2 != D2;) {
-          if (t102[S2 + $2] == t102[S2 + $2 - H2]) {
-            for (var K2 = 0; K2 < G2 && t102[S2 + K2] == t102[S2 + K2 - H2]; ++K2);
-            if (K2 > $2) {
-              if ($2 = K2, z2 = H2, K2 > J2) break;
-              for (var V2 = Math.min(H2, K2 - 2), X2 = 0, O2 = 0; O2 < V2; ++O2) {
-                var Q2 = S2 - H2 + O2 & 32767,
-                  Z2 = g2[Q2],
-                  te2 = Q2 - Z2 & 32767;
-                te2 > X2 && (X2 = te2, D2 = Q2);
-              }
-            }
-          }
-          D2 = g2[P2 = D2], H2 += P2 - D2 & 32767;
-        }
-        if (z2) {
-          b2[x2++] = 268435456 | C[$2] << 18 | q[z2];
-          var tr2 = 31 & C[$2],
-            tn2 = 31 & q[z2];
-          U2 += A[tr2] + F[tn2], ++_2[257 + tr2], ++k2[tn2], E2 = S2 + $2, ++I2;
-        } else b2[x2++] = t102[S2], ++_2[t102[S2]];
-      }
-    }
-    for (S2 = Math.max(S2, E2); S2 < a22; ++S2) b2[x2++] = t102[S2], ++_2[t102[S2]];
-    f2 = th(t102, u22, l22, b2, _2, k2, U2, x2, B2, S2 - B2, f2), l22 || (s2.r = 7 & f2 | u22[f2 / 8 | 0] << 3, f2 -= 7, s2.h = v2, s2.p = g2, s2.i = S2, s2.w = E2);
-  } else {
-    for (var S2 = s2.w || 0; S2 < a22 + l22; S2 += 65535) {
-      var ti2 = S2 + 65535;
-      ti2 >= a22 && (u22[f2 / 8 | 0] = l22, ti2 = a22), f2 = tf(u22, f2 + 1, t102.subarray(S2, ti2));
-    }
-    s2.i = a22;
-  }
-  return tt(o2, 0, n22 + Y(f2) + i2);
+	var a22 = s2.z || t102.length,
+		o2 = new T(n22 + a22 + 5 * (1 + Math.ceil(a22 / 7e3)) + i2),
+		u22 = o2.subarray(n22, o2.length - i2),
+		l22 = s2.l,
+		f2 = 7 & (s2.r || 0);
+	if (e22) {
+		f2 && (u22[0] = s2.r >> 3);
+		for (
+			var h2 = tc[e22 - 1],
+				c2 = h2 >> 13,
+				p2 = 8191 & h2,
+				d2 = (1 << r22) - 1,
+				g2 = s2.p || new L(32768),
+				v2 = s2.h || new L(d2 + 1),
+				y2 = Math.ceil(r22 / 3),
+				m2 = 2 * y2,
+				w2 = function (e32) {
+					return (
+						(t102[e32] ^ (t102[e32 + 1] << y2) ^ (t102[e32 + 2] << m2)) & d2
+					);
+				},
+				b2 = new M(25e3),
+				_2 = new L(288),
+				k2 = new L(32),
+				I2 = 0,
+				U2 = 0,
+				S2 = s2.i || 0,
+				x2 = 0,
+				E2 = s2.w || 0,
+				B2 = 0;
+			S2 + 2 < a22;
+			++S2
+		) {
+			var j2 = w2(S2),
+				P2 = 32767 & S2,
+				D2 = v2[j2];
+			if (((g2[P2] = D2), (v2[j2] = P2), E2 <= S2)) {
+				var N2 = a22 - S2;
+				if ((I2 > 7e3 || x2 > 24576) && (N2 > 423 || !l22)) {
+					(f2 = th(t102, u22, 0, b2, _2, k2, U2, x2, B2, S2 - B2, f2)),
+						(x2 = I2 = U2 = 0),
+						(B2 = S2);
+					for (var O2 = 0; O2 < 286; ++O2) _2[O2] = 0;
+					for (var O2 = 0; O2 < 30; ++O2) k2[O2] = 0;
+				}
+				var $2 = 2,
+					z2 = 0,
+					R2 = p2,
+					H2 = (P2 - D2) & 32767;
+				if (N2 > 2 && j2 == w2(S2 - H2))
+					for (
+						var J2 = Math.min(c2, N2) - 1,
+							W2 = Math.min(32767, S2),
+							G2 = Math.min(258, N2);
+						H2 <= W2 && --R2 && P2 != D2;
+					) {
+						if (t102[S2 + $2] == t102[S2 + $2 - H2]) {
+							for (
+								var K2 = 0;
+								K2 < G2 && t102[S2 + K2] == t102[S2 + K2 - H2];
+								++K2
+							);
+							if (K2 > $2) {
+								if ((($2 = K2), (z2 = H2), K2 > J2)) break;
+								for (
+									var V2 = Math.min(H2, K2 - 2), X2 = 0, O2 = 0;
+									O2 < V2;
+									++O2
+								) {
+									var Q2 = (S2 - H2 + O2) & 32767,
+										Z2 = g2[Q2],
+										te2 = (Q2 - Z2) & 32767;
+									te2 > X2 && ((X2 = te2), (D2 = Q2));
+								}
+							}
+						}
+						(D2 = g2[(P2 = D2)]), (H2 += (P2 - D2) & 32767);
+					}
+				if (z2) {
+					b2[x2++] = 268435456 | (C[$2] << 18) | q[z2];
+					var tr2 = 31 & C[$2],
+						tn2 = 31 & q[z2];
+					(U2 += A[tr2] + F[tn2]),
+						++_2[257 + tr2],
+						++k2[tn2],
+						(E2 = S2 + $2),
+						++I2;
+				} else (b2[x2++] = t102[S2]), ++_2[t102[S2]];
+			}
+		}
+		for (S2 = Math.max(S2, E2); S2 < a22; ++S2)
+			(b2[x2++] = t102[S2]), ++_2[t102[S2]];
+		(f2 = th(t102, u22, l22, b2, _2, k2, U2, x2, B2, S2 - B2, f2)),
+			l22 ||
+				((s2.r = (7 & f2) | (u22[(f2 / 8) | 0] << 3)),
+				(f2 -= 7),
+				(s2.h = v2),
+				(s2.p = g2),
+				(s2.i = S2),
+				(s2.w = E2));
+	} else {
+		for (var S2 = s2.w || 0; S2 < a22 + l22; S2 += 65535) {
+			var ti2 = S2 + 65535;
+			ti2 >= a22 && ((u22[(f2 / 8) | 0] = l22), (ti2 = a22)),
+				(f2 = tf(u22, f2 + 1, t102.subarray(S2, ti2)));
+		}
+		s2.i = a22;
+	}
+	return tt(o2, 0, n22 + Y(f2) + i2);
 };
 var tg = function (t102, e22, r22, n22, i2) {
-  if (!i2 && (i2 = {
-    l: 1
-  }, e22.dictionary)) {
-    var s2 = e22.dictionary.subarray(-32768),
-      a22 = new T(s2.length + t102.length);
-    a22.set(s2), a22.set(t102, s2.length), t102 = a22, i2.w = s2.length;
-  }
-  return td(t102, null == e22.level ? 6 : e22.level, null == e22.mem ? i2.l ? Math.ceil(1.5 * Math.max(8, Math.min(13, Math.log(t102.length)))) : 20 : 12 + e22.mem, r22, n22, i2);
+	if (
+		!i2 &&
+		((i2 = {
+			l: 1,
+		}),
+		e22.dictionary)
+	) {
+		var s2 = e22.dictionary.subarray(-32768),
+			a22 = new T(s2.length + t102.length);
+		a22.set(s2), a22.set(t102, s2.length), (t102 = a22), (i2.w = s2.length);
+	}
+	return td(
+		t102,
+		null == e22.level ? 6 : e22.level,
+		null == e22.mem
+			? i2.l
+				? Math.ceil(1.5 * Math.max(8, Math.min(13, Math.log(t102.length))))
+				: 20
+			: 12 + e22.mem,
+		r22,
+		n22,
+		i2,
+	);
 };
 function tv(t102, e22) {
-  return tg(t102, e22 || {}, 0, 0);
+	return tg(t102, e22 || {}, 0, 0);
 }
 function ty(t102, e22) {
-  return tn(t102, {
-    i: 2
-  }, e22 && e22.out, e22 && e22.dictionary);
+	return tn(
+		t102,
+		{
+			i: 2,
+		},
+		e22 && e22.out,
+		e22 && e22.dictionary,
+	);
 }
-var tm = "undefined" != typeof TextDecoder && /* @__PURE__ */new TextDecoder();
+var tm = "undefined" != typeof TextDecoder && /* @__PURE__ */ new TextDecoder();
 var tw = 0;
 try {
-  tm.decode(tp, {
-    stream: true
-  }), tw = 1;
+	tm.decode(tp, {
+		stream: true,
+	}),
+		(tw = 1);
 } catch (t102) {}
 var tb = h(p());
 var t_ = 1024;
 var tk = 1.5;
-var tI = t102 => 2 ** t102 - 1;
-var tU = t102 => -(2 ** (t102 - 1));
-var tS = t102 => 2 ** (t102 - 1) - 1;
+var tI = (t102) => 2 ** t102 - 1;
+var tU = (t102) => -(2 ** (t102 - 1));
+var tS = (t102) => 2 ** (t102 - 1) - 1;
 var tx = {
-  Uint8: 0,
-  Uint16: 0,
-  Uint32: 0,
-  Uint64: 0,
-  BigUint64: 0,
-  Int8: tU(8),
-  Int16: tU(16),
-  Int32: tU(32),
-  Int64: Number.MIN_SAFE_INTEGER,
-  BigInt64: -(BigInt(2) ** BigInt(63))
+	Uint8: 0,
+	Uint16: 0,
+	Uint32: 0,
+	Uint64: 0,
+	BigUint64: 0,
+	Int8: tU(8),
+	Int16: tU(16),
+	Int32: tU(32),
+	Int64: Number.MIN_SAFE_INTEGER,
+	BigInt64: -(BigInt(2) ** BigInt(63)),
 };
 var tE = {
-  Uint8: tI(8),
-  Uint16: tI(16),
-  Uint32: tI(32),
-  Uint64: Number.MAX_SAFE_INTEGER,
-  BigUint64: BigInt(2) ** BigInt(64) - BigInt(1),
-  Int8: tS(8),
-  Int16: tS(16),
-  Int32: tS(32),
-  Int64: Number.MAX_SAFE_INTEGER,
-  BigInt64: BigInt(2) ** BigInt(63) - BigInt(1)
+	Uint8: tI(8),
+	Uint16: tI(16),
+	Uint32: tI(32),
+	Uint64: Number.MAX_SAFE_INTEGER,
+	BigUint64: BigInt(2) ** BigInt(64) - BigInt(1),
+	Int8: tS(8),
+	Int16: tS(16),
+	Int32: tS(32),
+	Int64: Number.MAX_SAFE_INTEGER,
+	BigInt64: BigInt(2) ** BigInt(63) - BigInt(1),
 };
 function tB(t102, e22, r22, n22) {
-  b(t102 >= e22, t102, "outside lower bound for", n22), b(t102 <= r22, t102, "outside upper bound for", n22);
+	b(t102 >= e22, t102, "outside lower bound for", n22),
+		b(t102 <= r22, t102, "outside upper bound for", n22);
 }
 var tT = class {
-  getOffset() {
-    return this.offset;
-  }
-  slice(t102 = 0, e22 = this.offset) {
-    return this.buffer.slice(t102, e22);
-  }
-  subarray(t102 = 0, e22 = this.offset) {
-    return new Uint8Array(this.buffer, t102, e22);
-  }
-  ensureBufferLength(t102) {
-    let e22 = this.buffer.byteLength;
-    if (this.offset + t102 <= e22) return;
-    let r22 = new ArrayBuffer(Math.ceil(e22 * tk) + t102);
-    tL(this.buffer, r22, 0), this.buffer = r22, this.view = new DataView(r22);
-  }
-  writeUint8(t102) {
-    tB(t102, tx.Uint8, tE.Uint8, "Uint8");
-    let e22 = k.Uint8;
-    this.ensureBufferLength(e22), this.view.setUint8(this.offset, t102), this.offset += e22;
-  }
-  writeUint16(t102) {
-    tB(t102, tx.Uint16, tE.Uint16, "Uint16");
-    let e22 = k.Uint16;
-    this.ensureBufferLength(e22), this.view.setUint16(this.offset, t102), this.offset += e22;
-  }
-  writeUint32(t102) {
-    tB(t102, tx.Uint32, tE.Uint32, "Uint32");
-    let e22 = k.Uint32;
-    this.ensureBufferLength(e22), this.view.setUint32(this.offset, t102), this.offset += e22;
-  }
-  writeUint64(t102) {
-    tB(t102, tx.Uint64, tE.Uint64, "Uint64");
-    let e22 = BigInt(t102);
-    this.writeBigUint64(e22);
-  }
-  writeBigUint64(t102) {
-    tB(t102, tx.BigUint64, tE.BigUint64, "BigUint64");
-    let e22 = k.BigUint64;
-    this.ensureBufferLength(e22), this.view.setBigUint64(this.offset, t102), this.offset += e22;
-  }
-  writeInt8(t102) {
-    tB(t102, tx.Int8, tE.Int8, "Int8");
-    let e22 = k.Int8;
-    this.ensureBufferLength(e22), this.view.setInt8(this.offset, t102), this.offset += e22;
-  }
-  writeInt16(t102) {
-    tB(t102, tx.Int16, tE.Int16, "Int16");
-    let e22 = k.Int16;
-    this.ensureBufferLength(e22), this.view.setInt16(this.offset, t102), this.offset += e22;
-  }
-  writeInt32(t102) {
-    tB(t102, tx.Int32, tE.Int32, "Int32");
-    let e22 = k.Int32;
-    this.ensureBufferLength(e22), this.view.setInt32(this.offset, t102), this.offset += e22;
-  }
-  writeInt64(t102) {
-    tB(t102, tx.Int64, tE.Int64, "Int64");
-    let e22 = BigInt(t102);
-    this.writeBigInt64(e22);
-  }
-  writeBigInt64(t102) {
-    tB(t102, tx.BigInt64, tE.BigInt64, "BigInt64");
-    let e22 = k.BigInt64;
-    this.ensureBufferLength(e22), this.view.setBigInt64(this.offset, t102), this.offset += e22;
-  }
-  writeFloat32(t102) {
-    let e22 = k.Float32;
-    this.ensureBufferLength(e22), this.view.setFloat32(this.offset, t102), this.offset += e22;
-  }
-  writeFloat64(t102) {
-    let e22 = k.Float64;
-    this.ensureBufferLength(e22), this.view.setFloat64(this.offset, t102), this.offset += e22;
-  }
-  writeBuffer(t102) {
-    let e22 = t102.byteLength;
-    this.ensureBufferLength(e22), tL(t102, this.buffer, this.offset), this.offset += e22;
-  }
-  encodeString(t102) {
-    let e22 = this.encodedStrings.get(t102);
-    if (e22) return e22;
-    let r22 = this.encoder.encode(t102);
-    return this.encodedStrings.set(t102, r22), r22;
-  }
-  writeString(t102) {
-    let e22 = this.encodeString(t102),
-      r22 = e22.byteLength;
-    this.writeUint32(r22), this.writeBuffer(e22);
-  }
-  writeJson(t102) {
-    let e22 = JSON.stringify(t102);
-    this.writeString(e22);
-  }
-  constructor() {
-    this.offset = 0, this.buffer = new ArrayBuffer(t_), this.view = new DataView(this.buffer), this.encoder = new TextEncoder(), this.encodedStrings = /* @__PURE__ */new Map();
-  }
+	getOffset() {
+		return this.offset;
+	}
+	slice(t102 = 0, e22 = this.offset) {
+		return this.buffer.slice(t102, e22);
+	}
+	subarray(t102 = 0, e22 = this.offset) {
+		return new Uint8Array(this.buffer, t102, e22);
+	}
+	ensureBufferLength(t102) {
+		let e22 = this.buffer.byteLength;
+		if (this.offset + t102 <= e22) return;
+		let r22 = new ArrayBuffer(Math.ceil(e22 * tk) + t102);
+		tL(this.buffer, r22, 0),
+			(this.buffer = r22),
+			(this.view = new DataView(r22));
+	}
+	writeUint8(t102) {
+		tB(t102, tx.Uint8, tE.Uint8, "Uint8");
+		let e22 = k.Uint8;
+		this.ensureBufferLength(e22),
+			this.view.setUint8(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeUint16(t102) {
+		tB(t102, tx.Uint16, tE.Uint16, "Uint16");
+		let e22 = k.Uint16;
+		this.ensureBufferLength(e22),
+			this.view.setUint16(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeUint32(t102) {
+		tB(t102, tx.Uint32, tE.Uint32, "Uint32");
+		let e22 = k.Uint32;
+		this.ensureBufferLength(e22),
+			this.view.setUint32(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeUint64(t102) {
+		tB(t102, tx.Uint64, tE.Uint64, "Uint64");
+		let e22 = BigInt(t102);
+		this.writeBigUint64(e22);
+	}
+	writeBigUint64(t102) {
+		tB(t102, tx.BigUint64, tE.BigUint64, "BigUint64");
+		let e22 = k.BigUint64;
+		this.ensureBufferLength(e22),
+			this.view.setBigUint64(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeInt8(t102) {
+		tB(t102, tx.Int8, tE.Int8, "Int8");
+		let e22 = k.Int8;
+		this.ensureBufferLength(e22),
+			this.view.setInt8(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeInt16(t102) {
+		tB(t102, tx.Int16, tE.Int16, "Int16");
+		let e22 = k.Int16;
+		this.ensureBufferLength(e22),
+			this.view.setInt16(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeInt32(t102) {
+		tB(t102, tx.Int32, tE.Int32, "Int32");
+		let e22 = k.Int32;
+		this.ensureBufferLength(e22),
+			this.view.setInt32(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeInt64(t102) {
+		tB(t102, tx.Int64, tE.Int64, "Int64");
+		let e22 = BigInt(t102);
+		this.writeBigInt64(e22);
+	}
+	writeBigInt64(t102) {
+		tB(t102, tx.BigInt64, tE.BigInt64, "BigInt64");
+		let e22 = k.BigInt64;
+		this.ensureBufferLength(e22),
+			this.view.setBigInt64(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeFloat32(t102) {
+		let e22 = k.Float32;
+		this.ensureBufferLength(e22),
+			this.view.setFloat32(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeFloat64(t102) {
+		let e22 = k.Float64;
+		this.ensureBufferLength(e22),
+			this.view.setFloat64(this.offset, t102),
+			(this.offset += e22);
+	}
+	writeBuffer(t102) {
+		let e22 = t102.byteLength;
+		this.ensureBufferLength(e22),
+			tL(t102, this.buffer, this.offset),
+			(this.offset += e22);
+	}
+	encodeString(t102) {
+		let e22 = this.encodedStrings.get(t102);
+		if (e22) return e22;
+		let r22 = this.encoder.encode(t102);
+		return this.encodedStrings.set(t102, r22), r22;
+	}
+	writeString(t102) {
+		let e22 = this.encodeString(t102),
+			r22 = e22.byteLength;
+		this.writeUint32(r22), this.writeBuffer(e22);
+	}
+	writeJson(t102) {
+		let e22 = JSON.stringify(t102);
+		this.writeString(e22);
+	}
+	constructor() {
+		(this.offset = 0),
+			(this.buffer = new ArrayBuffer(t_)),
+			(this.view = new DataView(this.buffer)),
+			(this.encoder = new TextEncoder()),
+			(this.encodedStrings = /* @__PURE__ */ new Map());
+	}
 };
 function tL(t102, e22, r22) {
-  let n22 = new Uint8Array(t102),
-    i2 = new Uint8Array(e22);
-  i2.set(n22, r22);
+	let n22 = new Uint8Array(t102),
+		i2 = new Uint8Array(e22);
+	i2.set(n22, r22);
 }
 var tM = class {
-  static fromString(t102) {
-    let [e22, r22, n22] = t102.split("/").map(Number);
-    return b(S(e22), "Invalid chunkId"), b(S(r22), "Invalid offset"), b(S(n22), "Invalid length"), new tM(e22, r22, n22);
-  }
-  toString() {
-    return `${this.chunkId}/${this.offset}/${this.length}`;
-  }
-  static read(t102) {
-    let e22 = t102.readUint16(),
-      r22 = t102.readUint32(),
-      n22 = t102.readUint32();
-    return new tM(e22, r22, n22);
-  }
-  write(t102) {
-    t102.writeUint16(this.chunkId), t102.writeUint32(this.offset), t102.writeUint32(this.length);
-  }
-  compare(t102) {
-    return this.chunkId < t102.chunkId ? -1 : this.chunkId > t102.chunkId ? 1 : this.offset < t102.offset ? -1 : this.offset > t102.offset ? 1 : (b(this.length === t102.length), 0);
-  }
-  constructor(t102, e22, r22) {
-    this.chunkId = t102, this.offset = e22, this.length = r22;
-  }
+	static fromString(t102) {
+		let [e22, r22, n22] = t102.split("/").map(Number);
+		return (
+			b(S(e22), "Invalid chunkId"),
+			b(S(r22), "Invalid offset"),
+			b(S(n22), "Invalid length"),
+			new tM(e22, r22, n22)
+		);
+	}
+	toString() {
+		return `${this.chunkId}/${this.offset}/${this.length}`;
+	}
+	static read(t102) {
+		let e22 = t102.readUint16(),
+			r22 = t102.readUint32(),
+			n22 = t102.readUint32();
+		return new tM(e22, r22, n22);
+	}
+	write(t102) {
+		t102.writeUint16(this.chunkId),
+			t102.writeUint32(this.offset),
+			t102.writeUint32(this.length);
+	}
+	compare(t102) {
+		return this.chunkId < t102.chunkId
+			? -1
+			: this.chunkId > t102.chunkId
+				? 1
+				: this.offset < t102.offset
+					? -1
+					: this.offset > t102.offset
+						? 1
+						: (b(this.length === t102.length), 0);
+	}
+	constructor(t102, e22, r22) {
+		(this.chunkId = t102), (this.offset = e22), (this.length = r22);
+	}
 };
 function tF(t102) {
-  if (E(t102)) return 0;
-  switch (t102.type) {
-    case tA.Array:
-      return 1;
-    case tA.Boolean:
-      return 2;
-    case tA.Color:
-      return 3;
-    case tA.Date:
-      return 4;
-    case tA.Enum:
-      return 5;
-    case tA.File:
-      return 6;
-    case tA.ResponsiveImage:
-      return 10;
-    case tA.Link:
-      return 7;
-    case tA.Number:
-      return 8;
-    case tA.Object:
-      return 9;
-    case tA.RichText:
-      return 11;
-    case tA.String:
-      return 12;
-    default:
-      _(t102);
-  }
+	if (E(t102)) return 0;
+	switch (t102.type) {
+		case tA.Array:
+			return 1;
+		case tA.Boolean:
+			return 2;
+		case tA.Color:
+			return 3;
+		case tA.Date:
+			return 4;
+		case tA.Enum:
+			return 5;
+		case tA.File:
+			return 6;
+		case tA.ResponsiveImage:
+			return 10;
+		case tA.Link:
+			return 7;
+		case tA.Number:
+			return 8;
+		case tA.Object:
+			return 9;
+		case tA.RichText:
+			return 11;
+		case tA.String:
+			return 12;
+		default:
+			_(t102);
+	}
 }
-(t102 => {
-  t102.read = function (t112) {
-    let e22 = t112.readUint8();
-    switch (e22) {
-      case 0:
-        return null;
-      case 1:
-        return tj.read(t112);
-      case 2:
-        return tP.read(t112);
-      case 3:
-        return tD.read(t112);
-      case 4:
-        return tN.read(t112);
-      case 5:
-        return tC.read(t112);
-      case 6:
-        return tO.read(t112);
-      case 7:
-        return t$.read(t112);
-      case 8:
-        return tq.read(t112);
-      case 9:
-        return tz.read(t112);
-      case 10:
-        return tR.read(t112);
-      case 11:
-        return tH.read(t112);
-      case 12:
-        return tJ.read(t112);
-      default:
-        _(e22);
-    }
-  }, t102.write = function (t112, e22) {
-    let r22 = tF(e22);
-    if (t112.writeUint8(r22), !E(e22)) switch (e22.type) {
-      case tA.Array:
-        return tj.write(t112, e22);
-      case tA.Boolean:
-        return tP.write(t112, e22);
-      case tA.Color:
-        return tD.write(t112, e22);
-      case tA.Date:
-        return tN.write(t112, e22);
-      case tA.Enum:
-        return tC.write(t112, e22);
-      case tA.File:
-        return tO.write(t112, e22);
-      case tA.Link:
-        return t$.write(t112, e22);
-      case tA.Number:
-        return tq.write(t112, e22);
-      case tA.Object:
-        return tz.write(t112, e22);
-      case tA.ResponsiveImage:
-        return tR.write(t112, e22);
-      case tA.RichText:
-        return tH.write(t112, e22);
-      case tA.String:
-        return tJ.write(t112, e22);
-      default:
-        _(e22);
-    }
-  }, t102.compare = function (t112, e22, r22) {
-    let n22 = tF(t112),
-      i2 = tF(e22);
-    if (n22 < i2) return -1;
-    if (n22 > i2) return 1;
-    if (E(t112) || E(e22)) return 0;
-    switch (t112.type) {
-      case tA.Array:
-        return b(e22.type === tA.Array), tj.compare(t112, e22, r22);
-      case tA.Boolean:
-        return b(e22.type === tA.Boolean), tP.compare(t112, e22, r22);
-      case tA.Color:
-        return b(e22.type === tA.Color), tD.compare(t112, e22, r22);
-      case tA.Date:
-        return b(e22.type === tA.Date), tN.compare(t112, e22, r22);
-      case tA.Enum:
-        return b(e22.type === tA.Enum), tC.compare(t112, e22, r22);
-      case tA.File:
-        return b(e22.type === tA.File), tO.compare(t112, e22, r22);
-      case tA.Link:
-        return b(e22.type === tA.Link), t$.compare(t112, e22, r22);
-      case tA.Number:
-        return b(e22.type === tA.Number), tq.compare(t112, e22, r22);
-      case tA.Object:
-        return b(e22.type === tA.Object), tz.compare(t112, e22, r22);
-      case tA.ResponsiveImage:
-        return b(e22.type === tA.ResponsiveImage), tR.compare(t112, e22, r22);
-      case tA.RichText:
-        return b(e22.type === tA.RichText), tH.compare(t112, e22, r22);
-      case tA.String:
-        return b(e22.type === tA.String), tJ.compare(t112, e22, r22);
-      default:
-        _(t112);
-    }
-  };
+((t102) => {
+	(t102.read = function (t112) {
+		let e22 = t112.readUint8();
+		switch (e22) {
+			case 0:
+				return null;
+			case 1:
+				return tj.read(t112);
+			case 2:
+				return tP.read(t112);
+			case 3:
+				return tD.read(t112);
+			case 4:
+				return tN.read(t112);
+			case 5:
+				return tC.read(t112);
+			case 6:
+				return tO.read(t112);
+			case 7:
+				return t$.read(t112);
+			case 8:
+				return tq.read(t112);
+			case 9:
+				return tz.read(t112);
+			case 10:
+				return tR.read(t112);
+			case 11:
+				return tH.read(t112);
+			case 12:
+				return tJ.read(t112);
+			default:
+				_(e22);
+		}
+	}),
+		(t102.write = function (t112, e22) {
+			let r22 = tF(e22);
+			if ((t112.writeUint8(r22), !E(e22)))
+				switch (e22.type) {
+					case tA.Array:
+						return tj.write(t112, e22);
+					case tA.Boolean:
+						return tP.write(t112, e22);
+					case tA.Color:
+						return tD.write(t112, e22);
+					case tA.Date:
+						return tN.write(t112, e22);
+					case tA.Enum:
+						return tC.write(t112, e22);
+					case tA.File:
+						return tO.write(t112, e22);
+					case tA.Link:
+						return t$.write(t112, e22);
+					case tA.Number:
+						return tq.write(t112, e22);
+					case tA.Object:
+						return tz.write(t112, e22);
+					case tA.ResponsiveImage:
+						return tR.write(t112, e22);
+					case tA.RichText:
+						return tH.write(t112, e22);
+					case tA.String:
+						return tJ.write(t112, e22);
+					default:
+						_(e22);
+				}
+		}),
+		(t102.compare = function (t112, e22, r22) {
+			let n22 = tF(t112),
+				i2 = tF(e22);
+			if (n22 < i2) return -1;
+			if (n22 > i2) return 1;
+			if (E(t112) || E(e22)) return 0;
+			switch (t112.type) {
+				case tA.Array:
+					return b(e22.type === tA.Array), tj.compare(t112, e22, r22);
+				case tA.Boolean:
+					return b(e22.type === tA.Boolean), tP.compare(t112, e22, r22);
+				case tA.Color:
+					return b(e22.type === tA.Color), tD.compare(t112, e22, r22);
+				case tA.Date:
+					return b(e22.type === tA.Date), tN.compare(t112, e22, r22);
+				case tA.Enum:
+					return b(e22.type === tA.Enum), tC.compare(t112, e22, r22);
+				case tA.File:
+					return b(e22.type === tA.File), tO.compare(t112, e22, r22);
+				case tA.Link:
+					return b(e22.type === tA.Link), t$.compare(t112, e22, r22);
+				case tA.Number:
+					return b(e22.type === tA.Number), tq.compare(t112, e22, r22);
+				case tA.Object:
+					return b(e22.type === tA.Object), tz.compare(t112, e22, r22);
+				case tA.ResponsiveImage:
+					return b(e22.type === tA.ResponsiveImage), tR.compare(t112, e22, r22);
+				case tA.RichText:
+					return b(e22.type === tA.RichText), tH.compare(t112, e22, r22);
+				case tA.String:
+					return b(e22.type === tA.String), tJ.compare(t112, e22, r22);
+				default:
+					_(t112);
+			}
+		});
 })(r || (r = {}));
 var tj = {
-  read(t102) {
-    let e22 = t102.readUint16(),
-      n22 = [];
-    for (let i2 = 0; i2 < e22; i2++) {
-      let e32 = r.read(t102);
-      n22.push(e32);
-    }
-    return {
-      type: tA.Array,
-      value: n22
-    };
-  },
-  write(t102, e22) {
-    for (let n22 of (t102.writeUint16(e22.value.length), e22.value)) r.write(t102, n22);
-  },
-  compare(t102, e22, n22) {
-    let i2 = t102.value.length,
-      s2 = e22.value.length;
-    if (i2 < s2) return -1;
-    if (i2 > s2) return 1;
-    for (let s3 = 0; s3 < i2; s3++) {
-      let i3 = t102.value[s3],
-        a22 = e22.value[s3];
-      b(!x(i3), "Left item must exist"), b(!x(a22), "Right item must exist");
-      let o2 = r.compare(i3, a22, n22);
-      if (0 !== o2) return o2;
-    }
-    return 0;
-  }
+	read(t102) {
+		let e22 = t102.readUint16(),
+			n22 = [];
+		for (let i2 = 0; i2 < e22; i2++) {
+			let e32 = r.read(t102);
+			n22.push(e32);
+		}
+		return {
+			type: tA.Array,
+			value: n22,
+		};
+	},
+	write(t102, e22) {
+		for (let n22 of (t102.writeUint16(e22.value.length), e22.value))
+			r.write(t102, n22);
+	},
+	compare(t102, e22, n22) {
+		let i2 = t102.value.length,
+			s2 = e22.value.length;
+		if (i2 < s2) return -1;
+		if (i2 > s2) return 1;
+		for (let s3 = 0; s3 < i2; s3++) {
+			let i3 = t102.value[s3],
+				a22 = e22.value[s3];
+			b(!x(i3), "Left item must exist"), b(!x(a22), "Right item must exist");
+			let o2 = r.compare(i3, a22, n22);
+			if (0 !== o2) return o2;
+		}
+		return 0;
+	},
 };
 var tP = {
-  read: t102 => ({
-    type: tA.Boolean,
-    value: 0 !== t102.readUint8()
-  }),
-  write(t102, e22) {
-    t102.writeUint8(e22.value ? 1 : 0);
-  },
-  compare: (t102, e22) => t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0
+	read: (t102) => ({
+		type: tA.Boolean,
+		value: 0 !== t102.readUint8(),
+	}),
+	write(t102, e22) {
+		t102.writeUint8(e22.value ? 1 : 0);
+	},
+	compare: (t102, e22) =>
+		t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0,
 };
 var tD = {
-  read: t102 => ({
-    type: tA.Color,
-    value: t102.readString()
-  }),
-  write(t102, e22) {
-    t102.writeString(e22.value);
-  },
-  compare: (t102, e22) => t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0
+	read: (t102) => ({
+		type: tA.Color,
+		value: t102.readString(),
+	}),
+	write(t102, e22) {
+		t102.writeString(e22.value);
+	},
+	compare: (t102, e22) =>
+		t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0,
 };
 var tN = {
-  read(t102) {
-    let e22 = t102.readInt64(),
-      r22 = new Date(e22);
-    return {
-      type: tA.Date,
-      value: r22.toISOString()
-    };
-  },
-  write(t102, e22) {
-    let r22 = new Date(e22.value),
-      n22 = r22.getTime();
-    t102.writeInt64(n22);
-  },
-  compare(t102, e22) {
-    let r22 = new Date(t102.value),
-      n22 = new Date(e22.value);
-    return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
-  }
+	read(t102) {
+		let e22 = t102.readInt64(),
+			r22 = new Date(e22);
+		return {
+			type: tA.Date,
+			value: r22.toISOString(),
+		};
+	},
+	write(t102, e22) {
+		let r22 = new Date(e22.value),
+			n22 = r22.getTime();
+		t102.writeInt64(n22);
+	},
+	compare(t102, e22) {
+		let r22 = new Date(t102.value),
+			n22 = new Date(e22.value);
+		return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
+	},
 };
 var tC = {
-  read: t102 => ({
-    type: tA.Enum,
-    value: t102.readString()
-  }),
-  write(t102, e22) {
-    t102.writeString(e22.value);
-  },
-  compare: (t102, e22) => t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0
+	read: (t102) => ({
+		type: tA.Enum,
+		value: t102.readString(),
+	}),
+	write(t102, e22) {
+		t102.writeString(e22.value);
+	},
+	compare: (t102, e22) =>
+		t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0,
 };
 var tO = {
-  read: t102 => ({
-    type: tA.File,
-    value: t102.readString()
-  }),
-  write(t102, e22) {
-    t102.writeString(e22.value);
-  },
-  compare: (t102, e22) => t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0
+	read: (t102) => ({
+		type: tA.File,
+		value: t102.readString(),
+	}),
+	write(t102, e22) {
+		t102.writeString(e22.value);
+	},
+	compare: (t102, e22) =>
+		t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0,
 };
 var t$ = {
-  read: t102 => ({
-    type: tA.Link,
-    value: t102.readJson()
-  }),
-  write(t102, e22) {
-    t102.writeJson(e22.value);
-  },
-  compare(t102, e22) {
-    let r22 = JSON.stringify(t102.value),
-      n22 = JSON.stringify(e22.value);
-    return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
-  }
+	read: (t102) => ({
+		type: tA.Link,
+		value: t102.readJson(),
+	}),
+	write(t102, e22) {
+		t102.writeJson(e22.value);
+	},
+	compare(t102, e22) {
+		let r22 = JSON.stringify(t102.value),
+			n22 = JSON.stringify(e22.value);
+		return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
+	},
 };
 var tq = {
-  read: t102 => ({
-    type: tA.Number,
-    value: t102.readFloat64()
-  }),
-  write(t102, e22) {
-    t102.writeFloat64(e22.value);
-  },
-  compare: (t102, e22) => t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0
+	read: (t102) => ({
+		type: tA.Number,
+		value: t102.readFloat64(),
+	}),
+	write(t102, e22) {
+		t102.writeFloat64(e22.value);
+	},
+	compare: (t102, e22) =>
+		t102.value < e22.value ? -1 : t102.value > e22.value ? 1 : 0,
 };
 var tz = {
-  read(t102) {
-    let e22 = t102.readUint16(),
-      n22 = {};
-    for (let i2 = 0; i2 < e22; i2++) {
-      let e32 = t102.readString();
-      n22[e32] = r.read(t102);
-    }
-    return {
-      type: tA.Object,
-      value: n22
-    };
-  },
-  write(t102, e22) {
-    let n22 = Object.entries(e22.value);
-    for (let [e32, i2] of (t102.writeUint16(n22.length), n22)) t102.writeString(e32), r.write(t102, i2);
-  },
-  compare(t102, e22, n22) {
-    let i2 = Object.keys(t102.value).sort(),
-      s2 = Object.keys(e22.value).sort();
-    if (i2.length < s2.length) return -1;
-    if (i2.length > s2.length) return 1;
-    for (let a22 = 0; a22 < i2.length; a22++) {
-      let o2 = i2[a22],
-        u22 = s2[a22];
-      if (b(!x(o2), "Left key must exist"), b(!x(u22), "Left key must exist"), o2 < u22) return -1;
-      if (o2 > u22) return 1;
-      let l22 = t102.value[o2],
-        f2 = e22.value[u22];
-      b(!x(l22), "Left value must exist"), b(!x(f2), "Right value must exist");
-      let h2 = r.compare(l22, f2, n22);
-      if (0 !== h2) return h2;
-    }
-    return 0;
-  }
+	read(t102) {
+		let e22 = t102.readUint16(),
+			n22 = {};
+		for (let i2 = 0; i2 < e22; i2++) {
+			let e32 = t102.readString();
+			n22[e32] = r.read(t102);
+		}
+		return {
+			type: tA.Object,
+			value: n22,
+		};
+	},
+	write(t102, e22) {
+		let n22 = Object.entries(e22.value);
+		for (let [e32, i2] of (t102.writeUint16(n22.length), n22))
+			t102.writeString(e32), r.write(t102, i2);
+	},
+	compare(t102, e22, n22) {
+		let i2 = Object.keys(t102.value).sort(),
+			s2 = Object.keys(e22.value).sort();
+		if (i2.length < s2.length) return -1;
+		if (i2.length > s2.length) return 1;
+		for (let a22 = 0; a22 < i2.length; a22++) {
+			let o2 = i2[a22],
+				u22 = s2[a22];
+			if (
+				(b(!x(o2), "Left key must exist"),
+				b(!x(u22), "Left key must exist"),
+				o2 < u22)
+			)
+				return -1;
+			if (o2 > u22) return 1;
+			let l22 = t102.value[o2],
+				f2 = e22.value[u22];
+			b(!x(l22), "Left value must exist"), b(!x(f2), "Right value must exist");
+			let h2 = r.compare(l22, f2, n22);
+			if (0 !== h2) return h2;
+		}
+		return 0;
+	},
 };
 var tR = {
-  read: t102 => ({
-    type: tA.ResponsiveImage,
-    value: t102.readJson()
-  }),
-  write(t102, e22) {
-    t102.writeJson(e22.value);
-  },
-  compare(t102, e22) {
-    let r22 = JSON.stringify(t102.value),
-      n22 = JSON.stringify(e22.value);
-    return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
-  }
+	read: (t102) => ({
+		type: tA.ResponsiveImage,
+		value: t102.readJson(),
+	}),
+	write(t102, e22) {
+		t102.writeJson(e22.value);
+	},
+	compare(t102, e22) {
+		let r22 = JSON.stringify(t102.value),
+			n22 = JSON.stringify(e22.value);
+		return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
+	},
 };
 var tH = {
-  read: t102 => ({
-    type: tA.RichText,
-    value: t102.readUint32()
-  }),
-  write(t102, e22) {
-    t102.writeUint32(e22.value);
-  },
-  compare(t102, e22) {
-    let r22 = t102.value,
-      n22 = e22.value;
-    return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
-  }
+	read: (t102) => ({
+		type: tA.RichText,
+		value: t102.readUint32(),
+	}),
+	write(t102, e22) {
+		t102.writeUint32(e22.value);
+	},
+	compare(t102, e22) {
+		let r22 = t102.value,
+			n22 = e22.value;
+		return r22 < n22 ? -1 : r22 > n22 ? 1 : 0;
+	},
 };
 var tJ = {
-  read: t102 => ({
-    type: tA.String,
-    value: t102.readString()
-  }),
-  write(t102, e22) {
-    t102.writeString(e22.value);
-  },
-  compare(t102, e22, r22) {
-    let n22 = t102.value,
-      i2 = e22.value;
-    return (0 === r22.type && (n22 = t102.value.toLowerCase(), i2 = e22.value.toLowerCase()), n22 < i2) ? -1 : n22 > i2 ? 1 : 0;
-  }
+	read: (t102) => ({
+		type: tA.String,
+		value: t102.readString(),
+	}),
+	write(t102, e22) {
+		t102.writeString(e22.value);
+	},
+	compare(t102, e22, r22) {
+		let n22 = t102.value,
+			i2 = e22.value;
+		return (0 === r22.type &&
+			((n22 = t102.value.toLowerCase()), (i2 = e22.value.toLowerCase())),
+		n22 < i2)
+			? -1
+			: n22 > i2
+				? 1
+				: 0;
+	},
 };
 var tG = h(m());
 var tK = "\r\n";
 var tV = "--";
 async function tX(t102, e22) {
-  let r22 = await fetch(t102, {
-    headers: {
-      Range: t5(e22)
-    }
-  });
-  if (!r22.ok) throw Error(`Request failed: ${r22.status} ${r22.statusText}`);
-  let n22 = await r22.arrayBuffer(),
-    i2 = new Uint8Array(n22);
-  if (200 === r22.status) return e22.map(t112 => {
-    if (t112.to > i2.length) throw Error("Missing data");
-    return i2.slice(t112.from, t112.to);
-  });
-  if (206 === r22.status) {
-    let t112 = r22.headers.get("Content-Type");
-    if (!t112) throw Error("Missing Content-Type header");
-    let n3 = new t1(),
-      s2 = new tG.default(t112);
-    if ("multipart" === s2.type && "byteranges" === s2.subtype) {
-      let t12 = s2.parameters.get("boundary");
-      if (!t12) throw Error("Missing boundary parameter");
-      let e32 = tY(i2, t12);
-      for (let {
-        headers: t13,
-        body: r32
-      } of e32) {
-        let e42 = t13.get("Content-Range");
-        if (!e42) throw Error("Missing Content-Range header");
-        let i3 = t0(e42);
-        if ("bytes" !== i3.unit) throw Error("Unsupported unit");
-        n3.write(i3.start, r32);
-      }
-    } else {
-      let t12 = r22.headers.get("Content-Range");
-      if (!t12) throw Error("Missing Content-Range header");
-      let e32 = t0(t12);
-      if ("bytes" !== e32.unit) throw Error("Unsupported unit");
-      n3.write(e32.start, i2);
-    }
-    return e22.map(t12 => n3.read(t12.from, t12.to - t12.from));
-  }
-  throw Error(`Unsupported response: ${r22.status} ${r22.statusText}`);
+	let r22 = await fetch(t102, {
+		headers: {
+			Range: t5(e22),
+		},
+	});
+	if (!r22.ok) throw Error(`Request failed: ${r22.status} ${r22.statusText}`);
+	let n22 = await r22.arrayBuffer(),
+		i2 = new Uint8Array(n22);
+	if (200 === r22.status)
+		return e22.map((t112) => {
+			if (t112.to > i2.length) throw Error("Missing data");
+			return i2.slice(t112.from, t112.to);
+		});
+	if (206 === r22.status) {
+		let t112 = r22.headers.get("Content-Type");
+		if (!t112) throw Error("Missing Content-Type header");
+		let n3 = new t1(),
+			s2 = new tG.default(t112);
+		if ("multipart" === s2.type && "byteranges" === s2.subtype) {
+			let t12 = s2.parameters.get("boundary");
+			if (!t12) throw Error("Missing boundary parameter");
+			let e32 = tY(i2, t12);
+			for (let { headers: t13, body: r32 } of e32) {
+				let e42 = t13.get("Content-Range");
+				if (!e42) throw Error("Missing Content-Range header");
+				let i3 = t0(e42);
+				if ("bytes" !== i3.unit) throw Error("Unsupported unit");
+				n3.write(i3.start, r32);
+			}
+		} else {
+			let t12 = r22.headers.get("Content-Range");
+			if (!t12) throw Error("Missing Content-Range header");
+			let e32 = t0(t12);
+			if ("bytes" !== e32.unit) throw Error("Unsupported unit");
+			n3.write(e32.start, i2);
+		}
+		return e22.map((t12) => n3.read(t12.from, t12.to - t12.from));
+	}
+	throw Error(`Unsupported response: ${r22.status} ${r22.statusText}`);
 }
 var tQ = new TextEncoder();
 var tZ = new TextDecoder();
 function tY(t102, e22) {
-  let r22 = tQ.encode(tV + e22),
-    n22 = t3(t102, r22);
-  if (x(n22)) throw Error("Missing parts start");
-  let i2 = n22 + r22.length,
-    s2 = tQ.encode(tK + tV + e22 + tV),
-    a22 = t6(t102, s2);
-  if (x(a22)) throw Error("Missing parts end");
-  let o2 = tQ.encode(tK + tV + e22),
-    u22 = t102.subarray(i2, a22),
-    l22 = t2(u22, o2);
-  return l22.map(t112 => {
-    let e32 = tQ.encode(tK + tK),
-      r32 = t3(t112, e32);
-    if (x(r32)) throw Error("Missing headers end");
-    let n3 = tQ.encode(tK),
-      i3 = t112.subarray(0, r32),
-      s3 = t2(i3, n3),
-      a3 = new Headers();
-    for (let t12 of s3) {
-      let e42 = tZ.decode(t12),
-        [r4, n4] = e42.split(": ", 2);
-      r4 && n4 && a3.append(r4, n4);
-    }
-    let o3 = r32 + e32.length,
-      u3 = t112.slice(o3);
-    return {
-      headers: a3,
-      body: u3
-    };
-  });
+	let r22 = tQ.encode(tV + e22),
+		n22 = t3(t102, r22);
+	if (x(n22)) throw Error("Missing parts start");
+	let i2 = n22 + r22.length,
+		s2 = tQ.encode(tK + tV + e22 + tV),
+		a22 = t6(t102, s2);
+	if (x(a22)) throw Error("Missing parts end");
+	let o2 = tQ.encode(tK + tV + e22),
+		u22 = t102.subarray(i2, a22),
+		l22 = t2(u22, o2);
+	return l22.map((t112) => {
+		let e32 = tQ.encode(tK + tK),
+			r32 = t3(t112, e32);
+		if (x(r32)) throw Error("Missing headers end");
+		let n3 = tQ.encode(tK),
+			i3 = t112.subarray(0, r32),
+			s3 = t2(i3, n3),
+			a3 = new Headers();
+		for (let t12 of s3) {
+			let e42 = tZ.decode(t12),
+				[r4, n4] = e42.split(": ", 2);
+			r4 && n4 && a3.append(r4, n4);
+		}
+		let o3 = r32 + e32.length,
+			u3 = t112.slice(o3);
+		return {
+			headers: a3,
+			body: u3,
+		};
+	});
 }
 function t0(t102) {
-  let e22 = RegExp("^(?<unit>\\w+) (?<start>\\d+)-(?<end>\\d+)\\/(?<size>\\d+|\\*)$", "u").exec(t102);
-  if (!e22 || !e22.groups) throw Error("Invalid Content-Range header");
-  let {
-    unit: r22,
-    start: n22,
-    end: i2,
-    size: s2
-  } = e22.groups;
-  return {
-    unit: r22,
-    start: Number(n22),
-    end: Number(i2),
-    size: "*" !== s2 ? Number(s2) : null
-  };
+	let e22 = RegExp(
+		"^(?<unit>\\w+) (?<start>\\d+)-(?<end>\\d+)\\/(?<size>\\d+|\\*)$",
+		"u",
+	).exec(t102);
+	if (!e22 || !e22.groups) throw Error("Invalid Content-Range header");
+	let { unit: r22, start: n22, end: i2, size: s2 } = e22.groups;
+	return {
+		unit: r22,
+		start: Number(n22),
+		end: Number(i2),
+		size: "*" !== s2 ? Number(s2) : null,
+	};
 }
 var t1 = class {
-  read(t102, e22) {
-    for (let r22 of this.chunks) {
-      if (t102 < r22.start) break;
-      if (t102 > r22.end) continue;
-      if (t102 + e22 > r22.end) break;
-      let n22 = t102 - r22.start,
-        i2 = n22 + e22;
-      return r22.data.slice(n22, i2);
-    }
-    throw Error("Missing data");
-  }
-  write(t102, e22) {
-    let r22 = t102,
-      n22 = r22 + e22.length,
-      i2 = 0,
-      s2 = this.chunks.length;
-    for (; i2 < s2; i2++) {
-      let t112 = this.chunks[i2];
-      if (b(t112, "Missing chunk"), !(r22 > t112.end)) {
-        if (r22 > t112.start) {
-          let n3 = r22 - t112.start,
-            i3 = t112.data.subarray(0, n3);
-          e22 = t4(i3, e22), r22 = t112.start;
-        }
-        break;
-      }
-    }
-    for (; s2 > i2; s2--) {
-      let t112 = this.chunks[s2 - 1];
-      if (b(t112, "Missing chunk"), !(n22 < t112.start)) {
-        if (n22 < t112.end) {
-          let r32 = n22 - t112.start,
-            i3 = t112.data.subarray(r32);
-          e22 = t4(e22, i3), n22 = t112.end;
-        }
-        break;
-      }
-    }
-    let a22 = {
-        start: r22,
-        end: n22,
-        data: e22
-      },
-      o2 = s2 - i2;
-    this.chunks.splice(i2, o2, a22);
-  }
-  constructor() {
-    this.chunks = [];
-  }
+	read(t102, e22) {
+		for (let r22 of this.chunks) {
+			if (t102 < r22.start) break;
+			if (t102 > r22.end) continue;
+			if (t102 + e22 > r22.end) break;
+			let n22 = t102 - r22.start,
+				i2 = n22 + e22;
+			return r22.data.slice(n22, i2);
+		}
+		throw Error("Missing data");
+	}
+	write(t102, e22) {
+		let r22 = t102,
+			n22 = r22 + e22.length,
+			i2 = 0,
+			s2 = this.chunks.length;
+		for (; i2 < s2; i2++) {
+			let t112 = this.chunks[i2];
+			if ((b(t112, "Missing chunk"), !(r22 > t112.end))) {
+				if (r22 > t112.start) {
+					let n3 = r22 - t112.start,
+						i3 = t112.data.subarray(0, n3);
+					(e22 = t4(i3, e22)), (r22 = t112.start);
+				}
+				break;
+			}
+		}
+		for (; s2 > i2; s2--) {
+			let t112 = this.chunks[s2 - 1];
+			if ((b(t112, "Missing chunk"), !(n22 < t112.start))) {
+				if (n22 < t112.end) {
+					let r32 = n22 - t112.start,
+						i3 = t112.data.subarray(r32);
+					(e22 = t4(e22, i3)), (n22 = t112.end);
+				}
+				break;
+			}
+		}
+		let a22 = {
+				start: r22,
+				end: n22,
+				data: e22,
+			},
+			o2 = s2 - i2;
+		this.chunks.splice(i2, o2, a22);
+	}
+	constructor() {
+		this.chunks = [];
+	}
 };
 function t2(t102, e22) {
-  var r22;
-  let n22 = [];
-  for (; t102.length > 0;) {
-    let i2 = null != (r22 = t3(t102, e22)) ? r22 : t102.length,
-      s2 = t102.subarray(0, i2);
-    n22.push(s2), t102 = t102.subarray(i2 + e22.length);
-  }
-  return n22;
+	var r22;
+	let n22 = [];
+	for (; t102.length > 0; ) {
+		let i2 = null != (r22 = t3(t102, e22)) ? r22 : t102.length,
+			s2 = t102.subarray(0, i2);
+		n22.push(s2), (t102 = t102.subarray(i2 + e22.length));
+	}
+	return n22;
 }
 function t3(t102, e22) {
-  for (let r22 = 0; r22 < t102.length - e22.length; r22++) {
-    let n22 = t102.subarray(r22);
-    if (t8(n22, e22)) return r22;
-  }
+	for (let r22 = 0; r22 < t102.length - e22.length; r22++) {
+		let n22 = t102.subarray(r22);
+		if (t8(n22, e22)) return r22;
+	}
 }
 function t6(t102, e22) {
-  for (let r22 = t102.length - e22.length; r22 >= 0; r22--) {
-    let n22 = t102.subarray(r22);
-    if (t8(n22, e22)) return r22;
-  }
+	for (let r22 = t102.length - e22.length; r22 >= 0; r22--) {
+		let n22 = t102.subarray(r22);
+		if (t8(n22, e22)) return r22;
+	}
 }
 function t8(t102, e22) {
-  for (let r22 = 0; r22 < e22.length; r22++) if (t102[r22] !== e22[r22]) return false;
-  return true;
+	for (let r22 = 0; r22 < e22.length; r22++)
+		if (t102[r22] !== e22[r22]) return false;
+	return true;
 }
 function t4(t102, e22) {
-  let r22 = t102.length + e22.length,
-    n22 = new Uint8Array(r22);
-  return n22.set(t102, 0), n22.set(e22, t102.length), n22;
+	let r22 = t102.length + e22.length,
+		n22 = new Uint8Array(r22);
+	return n22.set(t102, 0), n22.set(e22, t102.length), n22;
 }
 function t5(t102) {
-  b(t102.length > 0, "Must have at least one range");
-  let e22 = [...t102].sort((t112, e32) => t112.from - e32.from),
-    r22 = [];
-  for (let t112 of e22) {
-    let e32 = r22.length - 1,
-      n3 = r22[e32];
-    n3 && t112.from <= n3.to ? r22[e32] = {
-      from: n3.from,
-      to: Math.max(n3.to, t112.to)
-    } : r22.push(t112);
-  }
-  let n22 = r22.map(t112 => `${t112.from}-${t112.to - 1}`);
-  return `bytes=${n22.join(",")}`;
+	b(t102.length > 0, "Must have at least one range");
+	let e22 = [...t102].sort((t112, e32) => t112.from - e32.from),
+		r22 = [];
+	for (let t112 of e22) {
+		let e32 = r22.length - 1,
+			n3 = r22[e32];
+		n3 && t112.from <= n3.to
+			? (r22[e32] = {
+					from: n3.from,
+					to: Math.max(n3.to, t112.to),
+				})
+			: r22.push(t112);
+	}
+	let n22 = r22.map((t112) => `${t112.from}-${t112.to - 1}`);
+	return `bytes=${n22.join(",")}`;
 }
 var t9 = class {
-  static read(t102, e22) {
-    let n22 = new t9(),
-      i2 = t102.readUint32(),
-      s2 = t102.readBuffer(i2),
-      a22 = ty(new Uint8Array(s2), {
-        dictionary: e22
-      }),
-      o2 = new I(a22.buffer),
-      u22 = o2.readUint16();
-    for (let t112 = 0; t112 < u22; t112++) {
-      let t12 = o2.readString(),
-        e32 = r.read(o2);
-      n22.setField(t12, e32);
-    }
-    return n22;
-  }
-  writeUncompressed(t102) {
-    for (let [e22, n22] of (t102.writeUint16(this.fields.size), this.fields)) t102.writeString(e22), r.write(t102, n22);
-  }
-  write(t102, e22) {
-    let r22 = new tT();
-    this.writeUncompressed(r22);
-    let n22 = tv(r22.subarray(), {
-      dictionary: e22
-    });
-    t102.writeUint32(n22.byteLength), t102.writeBuffer(n22);
-  }
-  getData() {
-    let t102 = {};
-    for (let [e22, r22] of this.fields) t102[e22] = r22;
-    return t102;
-  }
-  setField(t102, e22) {
-    this.fields.set(t102, e22);
-  }
-  getField(t102) {
-    return this.fields.get(t102);
-  }
-  constructor() {
-    this.fields = /* @__PURE__ */new Map();
-  }
+	static read(t102, e22) {
+		let n22 = new t9(),
+			i2 = t102.readUint32(),
+			s2 = t102.readBuffer(i2),
+			a22 = ty(new Uint8Array(s2), {
+				dictionary: e22,
+			}),
+			o2 = new I(a22.buffer),
+			u22 = o2.readUint16();
+		for (let t112 = 0; t112 < u22; t112++) {
+			let t12 = o2.readString(),
+				e32 = r.read(o2);
+			n22.setField(t12, e32);
+		}
+		return n22;
+	}
+	writeUncompressed(t102) {
+		for (let [e22, n22] of (t102.writeUint16(this.fields.size), this.fields))
+			t102.writeString(e22), r.write(t102, n22);
+	}
+	write(t102, e22) {
+		let r22 = new tT();
+		this.writeUncompressed(r22);
+		let n22 = tv(r22.subarray(), {
+			dictionary: e22,
+		});
+		t102.writeUint32(n22.byteLength), t102.writeBuffer(n22);
+	}
+	getData() {
+		let t102 = {};
+		for (let [e22, r22] of this.fields) t102[e22] = r22;
+		return t102;
+	}
+	setField(t102, e22) {
+		this.fields.set(t102, e22);
+	}
+	getField(t102) {
+		return this.fields.get(t102);
+	}
+	constructor() {
+		this.fields = /* @__PURE__ */ new Map();
+	}
 };
 var et = class {
-  scanItems() {
-    return null != this.itemsPromise || (this.itemsPromise = Promise.all([fetch(this.url), this.getCompressionDictionary()]).then(async ([t102, e22]) => {
-      if (!t102.ok) throw Error(`Request failed: ${t102.status} ${t102.statusText}`);
-      let r22 = await t102.arrayBuffer(),
-        n22 = new I(r22),
-        i2 = [],
-        s2 = n22.readUint32();
-      for (let t112 = 0; t112 < s2; t112++) {
-        let t12 = n22.getOffset(),
-          r32 = t9.read(n22, e22),
-          s3 = n22.getOffset() - t12,
-          a22 = new tM(this.id, t12, s3),
-          o2 = a22.toString(),
-          u22 = {
-            pointer: o2,
-            data: r32.getData()
-          };
-        this.itemLoader.prime(o2, u22), i2.push(u22);
-      }
-      return i2;
-    })), this.itemsPromise;
-  }
-  resolveItem(t102) {
-    return this.itemLoader.load(t102);
-  }
-  getCompressionDictionary() {
-    let t102 = this.compressionDictionaryCache.get(this.compressionDictionaryUrl);
-    if (t102) return t102;
-    let e22 = fetch(this.compressionDictionaryUrl).then(async t112 => {
-      if (!t112.ok) throw Error(`Compression dictionary request failed: ${t112.status} ${t112.statusText}`);
-      let e32 = await t112.arrayBuffer();
-      return new Uint8Array(e32);
-    });
-    return this.compressionDictionaryCache.set(this.compressionDictionaryUrl, e22), e22;
-  }
-  constructor(t102, e22, r22, n22) {
-    this.id = t102, this.url = e22, this.compressionDictionaryUrl = r22, this.compressionDictionaryCache = n22, this.itemLoader = new w.default(async t112 => {
-      let e32 = t112.map(t12 => {
-          let e42 = tM.fromString(t12);
-          return {
-            from: e42.offset,
-            to: e42.offset + e42.length
-          };
-        }),
-        [r32, n3] = await Promise.all([tX(this.url, e32), this.getCompressionDictionary()]);
-      return r32.map((e42, r4) => {
-        let i2 = new I(e42.buffer),
-          s2 = t9.read(i2, n3),
-          a22 = t112[r4];
-        return b(a22, "Missing pointer"), {
-          pointer: a22,
-          data: s2.getData()
-        };
-      });
-    });
-  }
+	scanItems() {
+		return (
+			null != this.itemsPromise ||
+				(this.itemsPromise = Promise.all([
+					fetch(this.url),
+					this.getCompressionDictionary(),
+				]).then(async ([t102, e22]) => {
+					if (!t102.ok)
+						throw Error(`Request failed: ${t102.status} ${t102.statusText}`);
+					let r22 = await t102.arrayBuffer(),
+						n22 = new I(r22),
+						i2 = [],
+						s2 = n22.readUint32();
+					for (let t112 = 0; t112 < s2; t112++) {
+						let t12 = n22.getOffset(),
+							r32 = t9.read(n22, e22),
+							s3 = n22.getOffset() - t12,
+							a22 = new tM(this.id, t12, s3),
+							o2 = a22.toString(),
+							u22 = {
+								pointer: o2,
+								data: r32.getData(),
+							};
+						this.itemLoader.prime(o2, u22), i2.push(u22);
+					}
+					return i2;
+				})),
+			this.itemsPromise
+		);
+	}
+	resolveItem(t102) {
+		return this.itemLoader.load(t102);
+	}
+	getCompressionDictionary() {
+		let t102 = this.compressionDictionaryCache.get(
+			this.compressionDictionaryUrl,
+		);
+		if (t102) return t102;
+		let e22 = fetch(this.compressionDictionaryUrl).then(async (t112) => {
+			if (!t112.ok)
+				throw Error(
+					`Compression dictionary request failed: ${t112.status} ${t112.statusText}`,
+				);
+			let e32 = await t112.arrayBuffer();
+			return new Uint8Array(e32);
+		});
+		return (
+			this.compressionDictionaryCache.set(this.compressionDictionaryUrl, e22),
+			e22
+		);
+	}
+	constructor(t102, e22, r22, n22) {
+		(this.id = t102),
+			(this.url = e22),
+			(this.compressionDictionaryUrl = r22),
+			(this.compressionDictionaryCache = n22),
+			(this.itemLoader = new w.default(async (t112) => {
+				let e32 = t112.map((t12) => {
+						let e42 = tM.fromString(t12);
+						return {
+							from: e42.offset,
+							to: e42.offset + e42.length,
+						};
+					}),
+					[r32, n3] = await Promise.all([
+						tX(this.url, e32),
+						this.getCompressionDictionary(),
+					]);
+				return r32.map((e42, r4) => {
+					let i2 = new I(e42.buffer),
+						s2 = t9.read(i2, n3),
+						a22 = t112[r4];
+					return (
+						b(a22, "Missing pointer"),
+						{
+							pointer: a22,
+							data: s2.getData(),
+						}
+					);
+				});
+			}));
+	}
 };
 var ee = class {
-  async scanItems() {
-    let t102 = await Promise.all(this.chunks.map(async t112 => t112.scanItems()));
-    return t102.flat();
-  }
-  async resolveItems(t102) {
-    return Promise.all(t102.map(t112 => {
-      let e22 = tM.fromString(t112),
-        r22 = this.chunks[e22.chunkId];
-      return b(r22, "Missing chunk"), r22.resolveItem(t112);
-    }));
-  }
-  compareItems(t102, e22) {
-    let r22 = tM.fromString(t102.pointer),
-      n22 = tM.fromString(e22.pointer);
-    return r22.compare(n22);
-  }
-  compareValues(t102, e22, n22) {
-    return r.compare(t102, e22, n22);
-  }
-  constructor(t102) {
-    this.options = t102, this.schema = this.options.schema, this.indexes = this.options.indexes, this.resolveRichText = this.options.resolveRichText;
-    let e22 = /* @__PURE__ */new Map();
-    this.chunks = this.options.chunks.map((t112, r22) => new et(r22, t112, this.options.compressionDictionary, e22));
-  }
+	async scanItems() {
+		let t102 = await Promise.all(
+			this.chunks.map(async (t112) => t112.scanItems()),
+		);
+		return t102.flat();
+	}
+	async resolveItems(t102) {
+		return Promise.all(
+			t102.map((t112) => {
+				let e22 = tM.fromString(t112),
+					r22 = this.chunks[e22.chunkId];
+				return b(r22, "Missing chunk"), r22.resolveItem(t112);
+			}),
+		);
+	}
+	compareItems(t102, e22) {
+		let r22 = tM.fromString(t102.pointer),
+			n22 = tM.fromString(e22.pointer);
+		return r22.compare(n22);
+	}
+	compareValues(t102, e22, n22) {
+		return r.compare(t102, e22, n22);
+	}
+	constructor(t102) {
+		(this.options = t102),
+			(this.schema = this.options.schema),
+			(this.indexes = this.options.indexes),
+			(this.resolveRichText = this.options.resolveRichText);
+		let e22 = /* @__PURE__ */ new Map();
+		this.chunks = this.options.chunks.map(
+			(t112, r22) => new et(r22, t112, this.options.compressionDictionary, e22),
+		);
+	}
 };
 
 // /:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-1.js
 var t7 = (t22, e22) => async () => {
-  let r22 = await t22();
-  return r22[e22];
+	let r22 = await t22();
+	return r22[e22];
 };
 var e2 = () => import("../chunks/YjSYmMwoo-2-TEQ76CEY.js");
-var r2 = [t7(e2, "richText"), t7(e2, "richText1"), t7(e2, "richText2"), t7(e2, "richText3"), t7(e2, "richText4"), t7(e2, "richText5"), t7(e2, "richText6"), t7(e2, "richText7"), t7(e2, "richText8"), t7(e2, "richText9")];
+var r2 = [
+	t7(e2, "richText"),
+	t7(e2, "richText1"),
+	t7(e2, "richText2"),
+	t7(e2, "richText3"),
+	t7(e2, "richText4"),
+	t7(e2, "richText5"),
+	t7(e2, "richText6"),
+	t7(e2, "richText7"),
+	t7(e2, "richText8"),
+	t7(e2, "richText9"),
+];
 async function resolveRichText(t22) {
-  let e22 = r2[t22];
-  if (e22) return await e22();
+	let e22 = r2[t22];
+	if (e22) return await e22();
 }
 
 // /:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo-3.js
 var t10 = (t22, e22) => async () => {
-  let r22 = await t22();
-  return r22[e22];
+	let r22 = await t22();
+	return r22[e22];
 };
 var e3 = () => import("../chunks/YjSYmMwoo-4-2COQSL5N.js");
-var r3 = [t10(e3, "richText"), t10(e3, "richText1"), t10(e3, "richText2"), t10(e3, "richText3"), t10(e3, "richText4"), t10(e3, "richText5"), t10(e3, "richText6"), t10(e3, "richText7"), t10(e3, "richText8"), t10(e3, "richText9")];
+var r3 = [
+	t10(e3, "richText"),
+	t10(e3, "richText1"),
+	t10(e3, "richText2"),
+	t10(e3, "richText3"),
+	t10(e3, "richText4"),
+	t10(e3, "richText5"),
+	t10(e3, "richText6"),
+	t10(e3, "richText7"),
+	t10(e3, "richText8"),
+	t10(e3, "richText9"),
+];
 async function resolveRichTextIt(t22) {
-  let e22 = r3[t22];
-  if (e22) return await e22();
+	let e22 = r3[t22];
+	if (e22) return await e22();
 }
 
 // /:https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js
 var a2 = {
-  ewkIozG5C: {
-    isNullable: true,
-    type: t11.Enum
-  },
-  fFLl4NdI7: {
-    isNullable: true,
-    type: t11.Number
-  },
-  id: {
-    isNullable: false,
-    type: t11.String
-  },
-  mtLfIqK6f: {
-    isNullable: true,
-    type: t11.String
-  },
-  nextItemId: {
-    isNullable: true,
-    type: t11.String
-  },
-  previousItemId: {
-    isNullable: true,
-    type: t11.String
-  },
-  TU8f1WfzS: {
-    isNullable: true,
-    type: t11.String
-  },
-  UD0SYS70_: {
-    isNullable: true,
-    type: t11.RichText
-  }
+	ewkIozG5C: {
+		isNullable: true,
+		type: t11.Enum,
+	},
+	fFLl4NdI7: {
+		isNullable: true,
+		type: t11.Number,
+	},
+	id: {
+		isNullable: false,
+		type: t11.String,
+	},
+	mtLfIqK6f: {
+		isNullable: true,
+		type: t11.String,
+	},
+	nextItemId: {
+		isNullable: true,
+		type: t11.String,
+	},
+	previousItemId: {
+		isNullable: true,
+		type: t11.String,
+	},
+	TU8f1WfzS: {
+		isNullable: true,
+		type: t11.String,
+	},
+	UD0SYS70_: {
+		isNullable: true,
+		type: t11.RichText,
+	},
 };
 var n2 = new l2();
 var u2 = {
-  collectionByLocaleId: {
-    default: new ee({
-      chunks: [new URL("./YjSYmMwoo-chunk-default-0.framercms", "https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js").href],
-      compressionDictionary: new URL("./YjSYmMwoo-chunk-default-dict.framercms", "https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js").href,
-      indexes: [],
-      resolveRichText,
-      schema: a2
-    }),
-    M_lnJlsvf: new ee({
-      chunks: [new URL("./YjSYmMwoo-chunk-M_lnJlsvf-0.framercms", "https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js").href],
-      compressionDictionary: new URL("./YjSYmMwoo-chunk-M_lnJlsvf-dict.framercms", "https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js").href,
-      indexes: [],
-      resolveRichText: resolveRichTextIt,
-      schema: a2
-    })
-  },
-  displayName: "Docs"
+	collectionByLocaleId: {
+		default: new ee({
+			chunks: [
+				new URL(
+					"./YjSYmMwoo-chunk-default-0.framercms",
+					"https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js",
+				).href,
+			],
+			compressionDictionary: new URL(
+				"./YjSYmMwoo-chunk-default-dict.framercms",
+				"https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js",
+			).href,
+			indexes: [],
+			resolveRichText,
+			schema: a2,
+		}),
+		M_lnJlsvf: new ee({
+			chunks: [
+				new URL(
+					"./YjSYmMwoo-chunk-M_lnJlsvf-0.framercms",
+					"https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js",
+				).href,
+			],
+			compressionDictionary: new URL(
+				"./YjSYmMwoo-chunk-M_lnJlsvf-dict.framercms",
+				"https://framerusercontent.com/modules/fjvJ5gZJMrmSs4P3l3tX/dtuIpKjrEqJpU1Uv7mNp/YjSYmMwoo.js",
+			).href,
+			indexes: [],
+			resolveRichText: resolveRichTextIt,
+			schema: a2,
+		}),
+	},
+	displayName: "Docs",
 };
 var stdin_default5 = u2;
 e4(u2, {
-  fFLl4NdI7: {
-    defaultValue: 0,
-    displayStepper: true,
-    title: "ID",
-    type: t11.Number
-  },
-  mtLfIqK6f: {
-    defaultValue: "",
-    title: "Title",
-    type: t11.String
-  },
-  ewkIozG5C: {
-    defaultValue: "Zwla6d58d",
-    options: ["Zwla6d58d", "sHSYkPY5r", "HVhD3aod1"],
-    optionTitles: ["Guide", "Reference", "Tutorials"],
-    title: "Type",
-    type: t11.Enum
-  },
-  UD0SYS70_: {
-    defaultValue: "",
-    title: "Content",
-    type: t11.RichText
-  },
-  TU8f1WfzS: {
-    title: "Slug",
-    type: t11.String
-  },
-  previousItemId: {
-    dataIdentifier: "local-module:collection/YjSYmMwoo:default",
-    title: "Previous",
-    type: t11.CollectionReference
-  },
-  nextItemId: {
-    dataIdentifier: "local-module:collection/YjSYmMwoo:default",
-    title: "Next",
-    type: t11.CollectionReference
-  }
+	fFLl4NdI7: {
+		defaultValue: 0,
+		displayStepper: true,
+		title: "ID",
+		type: t11.Number,
+	},
+	mtLfIqK6f: {
+		defaultValue: "",
+		title: "Title",
+		type: t11.String,
+	},
+	ewkIozG5C: {
+		defaultValue: "Zwla6d58d",
+		options: ["Zwla6d58d", "sHSYkPY5r", "HVhD3aod1"],
+		optionTitles: ["Guide", "Reference", "Tutorials"],
+		title: "Type",
+		type: t11.Enum,
+	},
+	UD0SYS70_: {
+		defaultValue: "",
+		title: "Content",
+		type: t11.RichText,
+	},
+	TU8f1WfzS: {
+		title: "Slug",
+		type: t11.String,
+	},
+	previousItemId: {
+		dataIdentifier: "local-module:collection/YjSYmMwoo:default",
+		title: "Previous",
+		type: t11.CollectionReference,
+	},
+	nextItemId: {
+		dataIdentifier: "local-module:collection/YjSYmMwoo:default",
+		title: "Next",
+		type: t11.CollectionReference,
+	},
 });
 
 // /:https://framerusercontent.com/modules/5exKH8X0djOcoCxmab7W/1BEJWapjGVO67WmTyeHg/MlPzuwAVd.js
 var NavigationLogoFonts = getFonts(stdin_default);
 var NavigationSingleToggleFonts = getFonts(stdin_default3);
-var NavigationSingleToggleWithSingleToggleWithMappedReactProps19vtxsf = withMappedReactProps(withSingleToggle(stdin_default3), j0G74AxCR_exports);
+var NavigationSingleToggleWithSingleToggleWithMappedReactProps19vtxsf =
+	withMappedReactProps(withSingleToggle(stdin_default3), j0G74AxCR_exports);
 var NavigationIconFonts = getFonts(stdin_default2);
 var DocsMenuLinkFonts = getFonts(stdin_default4);
 var cycleOrder = ["Ua7zIMVrQ", "RZi2QXpn2", "j23OGbszH"];
 var serializationHash = "framer-GkwH1";
 var variantClassNames = {
-  j23OGbszH: "framer-v-90sr53",
-  RZi2QXpn2: "framer-v-gnbrjh",
-  Ua7zIMVrQ: "framer-v-1itxsq0"
+	j23OGbszH: "framer-v-90sr53",
+	RZi2QXpn2: "framer-v-gnbrjh",
+	Ua7zIMVrQ: "framer-v-1itxsq0",
 };
 function addPropertyOverrides(overrides, ...variants) {
-  const nextOverrides = {};
-  variants?.forEach(variant => variant && Object.assign(nextOverrides, overrides[variant]));
-  return nextOverrides;
+	const nextOverrides = {};
+	variants?.forEach(
+		(variant) => variant && Object.assign(nextOverrides, overrides[variant]),
+	);
+	return nextOverrides;
 }
 var transition1 = {
-  damping: 60,
-  delay: 0,
-  mass: 1,
-  stiffness: 500,
-  type: "spring"
+	damping: 60,
+	delay: 0,
+	mass: 1,
+	stiffness: 500,
+	type: "spring",
 };
-var QueryData = ({
-  query: query4,
-  pageSize,
-  children
-}) => {
-  const data = useQueryData(query4);
-  return children(data);
+var QueryData = ({ query: query4, pageSize, children }) => {
+	const data = useQueryData(query4);
+	return children(data);
 };
-var Transition = ({
-  value,
-  children
-}) => {
-  const config = React.useContext(MotionConfigContext);
-  const transition = value ?? config.transition;
-  const contextValue = React.useMemo(() => ({
-    ...config,
-    transition
-  }), [JSON.stringify(transition)]);
-  return <MotionConfigContext.Provider value={contextValue}>{children}</MotionConfigContext.Provider>;
+var Transition = ({ value, children }) => {
+	const config = React.useContext(MotionConfigContext);
+	const transition = value ?? config.transition;
+	const contextValue = React.useMemo(
+		() => ({
+			...config,
+			transition,
+		}),
+		[JSON.stringify(transition)],
+	);
+	return (
+		<MotionConfigContext.Provider value={contextValue}>
+			{children}
+		</MotionConfigContext.Provider>
+	);
 };
 var Variants = motion.create(React.Fragment);
 var humanReadableVariantMap = {
-  "Mobile Open": "j23OGbszH",
-  Desktop: "Ua7zIMVrQ",
-  Mobile: "RZi2QXpn2"
+	"Mobile Open": "j23OGbszH",
+	Desktop: "Ua7zIMVrQ",
+	Mobile: "RZi2QXpn2",
 };
-var getProps = ({
-  height,
-  id,
-  width,
-  ...props
-}) => {
-  return {
-    ...props,
-    variant: humanReadableVariantMap[props.variant] ?? props.variant ?? "Ua7zIMVrQ"
-  };
+var getProps = ({ height, id, width, ...props }) => {
+	return {
+		...props,
+		variant:
+			humanReadableVariantMap[props.variant] ?? props.variant ?? "Ua7zIMVrQ",
+	};
 };
 var createLayoutDependency = (props, variants) => {
-  if (props.layoutDependency) return variants.join("-") + props.layoutDependency;
-  return variants.join("-");
+	if (props.layoutDependency)
+		return variants.join("-") + props.layoutDependency;
+	return variants.join("-");
 };
-var Component = /* @__PURE__ */React.forwardRef(function (props, ref) {
-  const {
-    activeLocale,
-    setLocale
-  } = useLocaleInfo();
-  const {
-    style,
-    className: className3,
-    layoutId,
-    variant,
-    mtLfIqK6fAifdLQB51,
-    TU8f1WfzSAifdLQB51,
-    idAifdLQB51,
-    mtLfIqK6fj9cRd0xpx,
-    TU8f1WfzSj9cRd0xpx,
-    idj9cRd0xpx,
-    mtLfIqK6fM0I78iTKl,
-    TU8f1WfzSM0I78iTKl,
-    idM0I78iTKl,
-    mtLfIqK6fh1EOySKgG,
-    TU8f1WfzSh1EOySKgG,
-    idh1EOySKgG,
-    ...restProps
-  } = getProps(props);
-  const {
-    baseVariant,
-    classNames,
-    clearLoadingGesture,
-    gestureHandlers,
-    gestureVariant,
-    isLoading,
-    setGestureState,
-    setVariant,
-    variants
-  } = useVariantState({
-    cycleOrder,
-    defaultVariant: "Ua7zIMVrQ",
-    variant,
-    variantClassNames
-  });
-  const layoutDependency = createLayoutDependency(props, variants);
-  const {
-    activeVariantCallback,
-    delay
-  } = useActiveVariantCallback(baseVariant);
-  const XKaY3MrGu1d8p0gt = activeVariantCallback(async (...args) => {
-    setVariant("j23OGbszH");
-  });
-  const XKaY3MrGuevdhk3 = activeVariantCallback(async (...args) => {
-    setVariant("RZi2QXpn2");
-  });
-  const ref1 = React.useRef(null);
-  const isDisplayed = () => {
-    if (["RZi2QXpn2", "j23OGbszH"].includes(baseVariant)) return true;
-    return false;
-  };
-  const router = useRouter();
-  const defaultLayoutId = React.useId();
-  const sharedStyleClassNames = [className2, className];
-  const componentViewport = useComponentViewport();
-  return <LayoutGroup id={layoutId ?? defaultLayoutId}><Variants animate={variants} initial={false}><Transition value={transition1}><motion.nav {...restProps} {...gestureHandlers} className={cx(serializationHash, ...sharedStyleClassNames, "framer-1itxsq0", className3, classNames)} data-border={true} data-framer-name={"Desktop"} layoutDependency={layoutDependency} layoutId={"Ua7zIMVrQ"} ref={ref ?? ref1} style={{
-          "--border-bottom-width": "0px",
-          "--border-color": "var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-          "--border-left-width": "0px",
-          "--border-right-width": "1px",
-          "--border-style": "solid",
-          "--border-top-width": "0px",
-          backgroundColor: "var(--token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2, rgb(255, 252, 250))",
-          ...style
-        }} variants={{
-          j23OGbszH: {
-            "--border-bottom-width": "0px",
-            "--border-left-width": "0px",
-            "--border-right-width": "0px",
-            "--border-top-width": "0px"
-          }
-        }} {...addPropertyOverrides({
-          j23OGbszH: {
-            "data-framer-name": "Mobile Open"
-          },
-          RZi2QXpn2: {
-            "data-framer-name": "Mobile"
-          }
-        }, baseVariant, gestureVariant)}><motion.div className={"framer-1ndgmpu"} layoutDependency={layoutDependency} layoutId={"kX4IzoHJs"}><motion.div className={"framer-ly0fsu"} data-border={true} layoutDependency={layoutDependency} layoutId={"V8tJDHFHj"} style={{
-              "--border-bottom-width": "1px",
-              "--border-color": "var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-              "--border-left-width": "0px",
-              "--border-right-width": "1px",
-              "--border-style": "solid",
-              "--border-top-width": "0px",
-              backgroundColor: "var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))"
-            }} variants={{
-              j23OGbszH: {
-                "--border-right-width": "0px"
-              },
-              RZi2QXpn2: {
-                "--border-right-width": "0px"
-              }
-            }}><ComponentViewportProvider height={20} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 26}><motion.div className={"framer-se4jzp-container"} layoutDependency={layoutDependency} layoutId={"XZL0KK4M0-container"}>_jsx(stdin_default, {
-                    height: "100%",
-                    id: "XZL0KK4M0",
-                    layoutId: "XZL0KK4M0",
-                    variant: "f64gXesMC",
-                    width: "100%"
-                  })</motion.div></ComponentViewportProvider><motion.div className={"framer-1daod3w"} layoutDependency={layoutDependency} layoutId={"O2ZIGxm7J"}><ComponentViewportProvider height={40} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 16 + 0}><motion.div className={"framer-1l3wpga-container"} layoutDependency={layoutDependency} layoutId={"FXtvEQdeW-container"}><NavigationSingleToggleWithSingleToggleWithMappedReactProps19vtxsf height={"100%"} id={"FXtvEQdeW"} layoutId={"FXtvEQdeW"} Tib6Q7ZnQ={"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"} width={"100%"} /></motion.div></ComponentViewportProvider></motion.div>{isDisplayed() && <ComponentViewportProvider {...addPropertyOverrides({
-                j23OGbszH: {
-                  height: 44,
-                  width: "44px",
-                  y: (componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 14
-                },
-                RZi2QXpn2: {
-                  height: 44,
-                  width: "44px",
-                  y: (componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 14
-                }
-              }, baseVariant, gestureVariant)}><motion.div className={"framer-u4hjb-container"} data-framer-name={"Menu Icon"} layoutDependency={layoutDependency} layoutId={"MUbWImX46-container"} name={"Menu Icon"}>_jsx(stdin_default2, {
-                    height: "100%",
-                    id: "MUbWImX46",
-                    layoutId: "MUbWImX46",
-                    name: "Menu Icon",
-                    style: {
-                      height: "100%"
-                    },
-                    variant: "ufJIpzVk3",
-                    width: "100%",
-                    ...addPropertyOverrides({
-                      j23OGbszH: {
-                        variant: "h7DS_KM0Q",
-                        XKaY3MrGu: XKaY3MrGuevdhk3
-                      },
-                      RZi2QXpn2: {
-                        XKaY3MrGu: XKaY3MrGu1d8p0gt
-                      }
-                    }, baseVariant, gestureVariant)
-                  })</motion.div></ComponentViewportProvider>}{isDisplayed() && <motion.div className={"framer-4q32db"} layoutDependency={layoutDependency} layoutId={"DVibIJMlg"} />}</motion.div><motion.div className={"framer-7ps8qj"} layoutDependency={layoutDependency} layoutId={"at1kHec1T"}><motion.div className={"framer-1hgoa8b"} layoutDependency={layoutDependency} layoutId={"NwzRPDKBV"}><ResolveLinks links={[{
-                  href: {
-                    webPageId: "augiA20Il"
-                  },
-                  implicitPathVariables: void 0
-                }, {
-                  href: {
-                    webPageId: "augiA20Il"
-                  },
-                  implicitPathVariables: void 0
-                }, {
-                  href: {
-                    webPageId: "augiA20Il"
-                  },
-                  implicitPathVariables: void 0
-                }]}>{resolvedLinks => <ComponentViewportProvider height={22} width={`calc(${componentViewport?.width || "100vw"} - 48px)`} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 24 + 0 + 0 + 0} {...addPropertyOverrides({
-                    j23OGbszH: {
-                      width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                      y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 0
-                    },
-                    RZi2QXpn2: {
-                      width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                      y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 0
-                    }
-                  }, baseVariant, gestureVariant)}><motion.div className={"framer-1q9065w-container"} layoutDependency={layoutDependency} layoutId={"dulrMZGd0-container"}>_jsx(stdin_default4, {
-                        ePlyYLEKs: resolvedLinks[0],
-                        height: "100%",
-                        hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-                        id: "dulrMZGd0",
-                        layoutId: "dulrMZGd0",
-                        QH5Qo5oGm: "Homepage",
-                        style: {
-                          width: "100%"
-                        },
-                        variant: "heetu2faa",
-                        width: "100%",
-                        ...addPropertyOverrides({
-                          j23OGbszH: {
-                            ePlyYLEKs: resolvedLinks[2],
-                            variant: "GjdyYzXnv"
-                          },
-                          RZi2QXpn2: {
-                            ePlyYLEKs: resolvedLinks[1],
-                            variant: "GjdyYzXnv"
-                          }
-                        }, baseVariant, gestureVariant)
-                      })</motion.div></ComponentViewportProvider>}</ResolveLinks><ComponentViewportProvider height={22} width={`calc(${componentViewport?.width || "100vw"} - 48px)`} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 24 + 0 + 0 + 34} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 34
-                  },
-                  RZi2QXpn2: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 34
-                  }
-                }, baseVariant, gestureVariant)}><motion.div className={"framer-ooe0aj-container"} layoutDependency={layoutDependency} layoutId={"D1i4CbWxt-container"}>_jsx(stdin_default4, {
-                      ePlyYLEKs: "discord.com",
-                      height: "100%",
-                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" /> </svg>',
-                      id: "D1i4CbWxt",
-                      layoutId: "D1i4CbWxt",
-                      QH5Qo5oGm: "Developer community",
-                      style: {
-                        width: "100%"
-                      },
-                      variant: "heetu2faa",
-                      width: "100%",
-                      ...addPropertyOverrides({
-                        j23OGbszH: {
-                          variant: "GjdyYzXnv"
-                        },
-                        RZi2QXpn2: {
-                          variant: "GjdyYzXnv"
-                        }
-                      }, baseVariant, gestureVariant)
-                    })</motion.div></ComponentViewportProvider><ComponentViewportProvider height={22} width={`calc(${componentViewport?.width || "100vw"} - 48px)`} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 24 + 0 + 0 + 68} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 68
-                  },
-                  RZi2QXpn2: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 68
-                  }
-                }, baseVariant, gestureVariant)}><motion.div className={"framer-1udxc7a-container"} layoutDependency={layoutDependency} layoutId={"KG5Lw9u0E-container"}>_jsx(stdin_default4, {
-                      ePlyYLEKs: "/blog",
-                      height: "100%",
-                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" /> </svg>',
-                      id: "KG5Lw9u0E",
-                      layoutId: "KG5Lw9u0E",
-                      QH5Qo5oGm: "Company blog",
-                      style: {
-                        width: "100%"
-                      },
-                      variant: "heetu2faa",
-                      width: "100%",
-                      ...addPropertyOverrides({
-                        j23OGbszH: {
-                          variant: "GjdyYzXnv"
-                        },
-                        RZi2QXpn2: {
-                          variant: "GjdyYzXnv"
-                        }
-                      }, baseVariant, gestureVariant)
-                    })</motion.div></ComponentViewportProvider><ComponentViewportProvider height={22} width={`calc(${componentViewport?.width || "100vw"} - 48px)`} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 24 + 0 + 0 + 102} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 102
-                  },
-                  RZi2QXpn2: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 102
-                  }
-                }, baseVariant, gestureVariant)}><motion.div className={"framer-5q893l-container"} layoutDependency={layoutDependency} layoutId={"HnsixN5fY-container"}>_jsx(stdin_default4, {
-                      ePlyYLEKs: "zapier.com",
-                      height: "100%",
-                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" /> </svg>',
-                      id: "HnsixN5fY",
-                      layoutId: "HnsixN5fY",
-                      QH5Qo5oGm: "Zapier no-code",
-                      style: {
-                        width: "100%"
-                      },
-                      variant: "heetu2faa",
-                      width: "100%",
-                      ...addPropertyOverrides({
-                        j23OGbszH: {
-                          variant: "GjdyYzXnv"
-                        },
-                        RZi2QXpn2: {
-                          variant: "GjdyYzXnv"
-                        }
-                      }, baseVariant, gestureVariant)
-                    })</motion.div></ComponentViewportProvider><ComponentViewportProvider height={22} width={`calc(${componentViewport?.width || "100vw"} - 48px)`} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 24 + 0 + 0 + 136} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 136
-                  },
-                  RZi2QXpn2: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 136
-                  }
-                }, baseVariant, gestureVariant)}><motion.div className={"framer-eexe78-container"} layoutDependency={layoutDependency} layoutId={"JlFB3zL5T-container"}>_jsx(stdin_default4, {
-                      ePlyYLEKs: "make.com",
-                      height: "100%",
-                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6Zm1.5 1.5a.75.75 0 0 0-.75.75V16.5a.75.75 0 0 0 1.085.67L12 15.089l4.165 2.083a.75.75 0 0 0 1.085-.671V5.25a.75.75 0 0 0-.75-.75h-9Z" clip-rule="evenodd" /> </svg>',
-                      id: "JlFB3zL5T",
-                      layoutId: "JlFB3zL5T",
-                      QH5Qo5oGm: "Make no-code",
-                      style: {
-                        width: "100%"
-                      },
-                      variant: "heetu2faa",
-                      width: "100%",
-                      ...addPropertyOverrides({
-                        j23OGbszH: {
-                          variant: "GjdyYzXnv"
-                        },
-                        RZi2QXpn2: {
-                          variant: "GjdyYzXnv"
-                        }
-                      }, baseVariant, gestureVariant)
-                    })</motion.div></ComponentViewportProvider><ComponentViewportProvider height={22} width={`calc(${componentViewport?.width || "100vw"} - 48px)`} y={(componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 24 + 0 + 0 + 170} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 170
-                  },
-                  RZi2QXpn2: {
-                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
-                    y: (componentViewport?.y || 0) + 0 + 0 + 0 + 72 + 20 + 0 + 0 + 170
-                  }
-                }, baseVariant, gestureVariant)}><motion.div className={"framer-yruap7-container"} layoutDependency={layoutDependency} layoutId={"Ps_D4SbEo-container"}>_jsx(stdin_default4, {
-                      ePlyYLEKs: "/contact-sales",
-                      height: "100%",
-                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M17.303 5.197A7.5 7.5 0 0 0 6.697 15.803a.75.75 0 0 1-1.061 1.061A9 9 0 1 1 21 10.5a.75.75 0 0 1-1.5 0c0-1.92-.732-3.839-2.197-5.303Zm-2.121 2.121a4.5 4.5 0 0 0-6.364 6.364.75.75 0 1 1-1.06 1.06A6 6 0 1 1 18 10.5a.75.75 0 0 1-1.5 0c0-1.153-.44-2.303-1.318-3.182Zm-3.634 1.314a.75.75 0 0 1 .82.311l5.228 7.917a.75.75 0 0 1-.777 1.148l-2.097-.43 1.045 3.9a.75.75 0 0 1-1.45.388l-1.044-3.899-1.601 1.42a.75.75 0 0 1-1.247-.606l.569-9.47a.75.75 0 0 1 .554-.68Z" clip-rule="evenodd" /> </svg>',
-                      id: "Ps_D4SbEo",
-                      layoutId: "Ps_D4SbEo",
-                      QH5Qo5oGm: "Contact Sales",
-                      style: {
-                        width: "100%"
-                      },
-                      variant: "heetu2faa",
-                      width: "100%",
-                      ...addPropertyOverrides({
-                        j23OGbszH: {
-                          variant: "GjdyYzXnv"
-                        },
-                        RZi2QXpn2: {
-                          variant: "GjdyYzXnv"
-                        }
-                      }, baseVariant, gestureVariant)
-                    })</motion.div></ComponentViewportProvider></motion.div><motion.div className={"framer-9ino1c"} layoutDependency={layoutDependency} layoutId={"PwNAMIdKB"}><RichText __fromCanvasComponent={true} className={"framer-t1dpes"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"NZAWzxRRb"} style={{
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} verticalAlignment={"top"} withExternalLayout={true} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Guides"}</motion.p></React.Fragment>
-                  },
-                  RZi2QXpn2: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Guides"}</motion.p></React.Fragment>
-                  }
-                }, baseVariant, gestureVariant)}><React.Fragment><motion.p className={"framer-styles-preset-1o7aipf"} data-styles-preset={"x1n9RoGI8"}>{"Guides"}</motion.p></React.Fragment></RichText><motion.div className={"framer-y890q8"} layoutDependency={layoutDependency} layoutId={"AifdLQB51"}><ChildrenCanSuspend><QueryData query={{
-                      from: {
-                        alias: "AifdLQB51",
-                        data: stdin_default5,
-                        type: "Collection"
-                      },
-                      orderBy: [{
-                        collection: "AifdLQB51",
-                        direction: "desc",
-                        name: "index",
-                        type: "Identifier"
-                      }],
-                      select: [{
-                        collection: "AifdLQB51",
-                        name: "mtLfIqK6f",
-                        type: "Identifier"
-                      }, {
-                        collection: "AifdLQB51",
-                        name: "TU8f1WfzS",
-                        type: "Identifier"
-                      }, {
-                        collection: "AifdLQB51",
-                        name: "id",
-                        type: "Identifier"
-                      }],
-                      where: {
-                        left: {
-                          collection: "AifdLQB51",
-                          name: "ewkIozG5C",
-                          type: "Identifier"
-                        },
-                        operator: "==",
-                        right: {
-                          type: "LiteralValue",
-                          value: "Zwla6d58d"
-                        },
-                        type: "BinaryOperation"
-                      }
-                    }}>{(collection, paginationInfo, loadMore) => <_Fragment>{collection.map(({
-                          mtLfIqK6f: mtLfIqK6fAifdLQB512,
-                          TU8f1WfzS: TU8f1WfzSAifdLQB512,
-                          id: idAifdLQB512
-                        }, i2) => {
-                          mtLfIqK6fAifdLQB512 ??= "";
-                          TU8f1WfzSAifdLQB512 ??= "";
-                          return <LayoutGroup id={`AifdLQB51-${idAifdLQB512}`}><PathVariablesContext.Provider value={{
-                              TU8f1WfzS: TU8f1WfzSAifdLQB512
-                            }}><ResolveLinks links={[{
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSAifdLQB512
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSAifdLQB512
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSAifdLQB512
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }]}>{resolvedLinks1 => <ComponentViewportProvider height={22} width={"186px"} {...addPropertyOverrides({
-                                  j23OGbszH: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  },
-                                  RZi2QXpn2: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  }
-                                }, baseVariant, gestureVariant)}><motion.div className={"framer-1tqqi79-container"} layoutDependency={layoutDependency} layoutId={"QQpX9gHvU-container"}>_jsx(stdin_default4, {
-                                      ePlyYLEKs: resolvedLinks1[0],
-                                      height: "100%",
-                                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-                                      id: "QQpX9gHvU",
-                                      layoutId: "QQpX9gHvU",
-                                      QH5Qo5oGm: mtLfIqK6fAifdLQB512,
-                                      style: {
-                                        width: "100%"
-                                      },
-                                      variant: "TV9DGWcYE",
-                                      width: "100%",
-                                      ...addPropertyOverrides({
-                                        j23OGbszH: {
-                                          ePlyYLEKs: resolvedLinks1[2],
-                                          variant: "bHRuYKyHD"
-                                        },
-                                        RZi2QXpn2: {
-                                          ePlyYLEKs: resolvedLinks1[1],
-                                          variant: "bHRuYKyHD"
-                                        }
-                                      }, baseVariant, gestureVariant)
-                                    })</motion.div></ComponentViewportProvider>}</ResolveLinks></PathVariablesContext.Provider></LayoutGroup>;
-                        })}</_Fragment>}</QueryData></ChildrenCanSuspend></motion.div></motion.div><motion.div className={"framer-1h7ykz2"} layoutDependency={layoutDependency} layoutId={"ogebNJxq7"}><RichText __fromCanvasComponent={true} className={"framer-yuq2fc"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"xQEZc3b7t"} style={{
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} verticalAlignment={"top"} withExternalLayout={true} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Reference"}</motion.p></React.Fragment>
-                  },
-                  RZi2QXpn2: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Reference"}</motion.p></React.Fragment>
-                  }
-                }, baseVariant, gestureVariant)}><React.Fragment><motion.p className={"framer-styles-preset-1o7aipf"} data-styles-preset={"x1n9RoGI8"}>{"Reference"}</motion.p></React.Fragment></RichText><motion.div className={"framer-17e576z"} layoutDependency={layoutDependency} layoutId={"j9cRd0xpx"}><ChildrenCanSuspend><QueryData query={{
-                      from: {
-                        alias: "j9cRd0xpx",
-                        data: stdin_default5,
-                        type: "Collection"
-                      },
-                      orderBy: [{
-                        collection: "j9cRd0xpx",
-                        direction: "desc",
-                        name: "index",
-                        type: "Identifier"
-                      }],
-                      select: [{
-                        collection: "j9cRd0xpx",
-                        name: "mtLfIqK6f",
-                        type: "Identifier"
-                      }, {
-                        collection: "j9cRd0xpx",
-                        name: "TU8f1WfzS",
-                        type: "Identifier"
-                      }, {
-                        collection: "j9cRd0xpx",
-                        name: "id",
-                        type: "Identifier"
-                      }],
-                      where: {
-                        left: {
-                          collection: "j9cRd0xpx",
-                          name: "ewkIozG5C",
-                          type: "Identifier"
-                        },
-                        operator: "==",
-                        right: {
-                          type: "LiteralValue",
-                          value: "sHSYkPY5r"
-                        },
-                        type: "BinaryOperation"
-                      }
-                    }}>{(collection1, paginationInfo1, loadMore1) => <_Fragment>{collection1.map(({
-                          mtLfIqK6f: mtLfIqK6fj9cRd0xpx2,
-                          TU8f1WfzS: TU8f1WfzSj9cRd0xpx2,
-                          id: idj9cRd0xpx2
-                        }, i2) => {
-                          mtLfIqK6fj9cRd0xpx2 ??= "";
-                          TU8f1WfzSj9cRd0xpx2 ??= "";
-                          return <LayoutGroup id={`j9cRd0xpx-${idj9cRd0xpx2}`}><PathVariablesContext.Provider value={{
-                              TU8f1WfzS: TU8f1WfzSj9cRd0xpx2
-                            }}><ResolveLinks links={[{
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSj9cRd0xpx2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSj9cRd0xpx2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSj9cRd0xpx2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }]}>{resolvedLinks2 => <ComponentViewportProvider height={22} width={"184px"} {...addPropertyOverrides({
-                                  j23OGbszH: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  },
-                                  RZi2QXpn2: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  }
-                                }, baseVariant, gestureVariant)}><motion.div className={"framer-p0qhy9-container"} layoutDependency={layoutDependency} layoutId={"MYPZ_OFb9-container"}>_jsx(stdin_default4, {
-                                      ePlyYLEKs: resolvedLinks2[0],
-                                      height: "100%",
-                                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-                                      id: "MYPZ_OFb9",
-                                      layoutId: "MYPZ_OFb9",
-                                      QH5Qo5oGm: mtLfIqK6fj9cRd0xpx2,
-                                      style: {
-                                        width: "100%"
-                                      },
-                                      variant: "TV9DGWcYE",
-                                      width: "100%",
-                                      ...addPropertyOverrides({
-                                        j23OGbszH: {
-                                          ePlyYLEKs: resolvedLinks2[2],
-                                          variant: "bHRuYKyHD"
-                                        },
-                                        RZi2QXpn2: {
-                                          ePlyYLEKs: resolvedLinks2[1],
-                                          variant: "bHRuYKyHD"
-                                        }
-                                      }, baseVariant, gestureVariant)
-                                    })</motion.div></ComponentViewportProvider>}</ResolveLinks></PathVariablesContext.Provider></LayoutGroup>;
-                        })}</_Fragment>}</QueryData></ChildrenCanSuspend></motion.div></motion.div><motion.div className={"framer-w0hyjz"} layoutDependency={layoutDependency} layoutId={"P8FrvQSrH"}><RichText __fromCanvasComponent={true} className={"framer-1jg9cih"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"iilP8SRwF"} style={{
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} verticalAlignment={"top"} withExternalLayout={true} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Reference"}</motion.p></React.Fragment>
-                  },
-                  RZi2QXpn2: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Reference"}</motion.p></React.Fragment>
-                  }
-                }, baseVariant, gestureVariant)}><React.Fragment><motion.p className={"framer-styles-preset-1o7aipf"} data-styles-preset={"x1n9RoGI8"}>{"Reference"}</motion.p></React.Fragment></RichText><motion.div className={"framer-1lqdphq"} layoutDependency={layoutDependency} layoutId={"M0I78iTKl"}><ChildrenCanSuspend><QueryData query={{
-                      from: {
-                        alias: "M0I78iTKl",
-                        data: stdin_default5,
-                        type: "Collection"
-                      },
-                      orderBy: [{
-                        collection: "M0I78iTKl",
-                        direction: "desc",
-                        name: "index",
-                        type: "Identifier"
-                      }],
-                      select: [{
-                        collection: "M0I78iTKl",
-                        name: "mtLfIqK6f",
-                        type: "Identifier"
-                      }, {
-                        collection: "M0I78iTKl",
-                        name: "TU8f1WfzS",
-                        type: "Identifier"
-                      }, {
-                        collection: "M0I78iTKl",
-                        name: "id",
-                        type: "Identifier"
-                      }],
-                      where: {
-                        left: {
-                          collection: "M0I78iTKl",
-                          name: "ewkIozG5C",
-                          type: "Identifier"
-                        },
-                        operator: "==",
-                        right: {
-                          type: "LiteralValue",
-                          value: "sHSYkPY5r"
-                        },
-                        type: "BinaryOperation"
-                      }
-                    }}>{(collection2, paginationInfo2, loadMore2) => <_Fragment>{collection2.map(({
-                          mtLfIqK6f: mtLfIqK6fM0I78iTKl2,
-                          TU8f1WfzS: TU8f1WfzSM0I78iTKl2,
-                          id: idM0I78iTKl2
-                        }, i2) => {
-                          mtLfIqK6fM0I78iTKl2 ??= "";
-                          TU8f1WfzSM0I78iTKl2 ??= "";
-                          return <LayoutGroup id={`M0I78iTKl-${idM0I78iTKl2}`}><PathVariablesContext.Provider value={{
-                              TU8f1WfzS: TU8f1WfzSM0I78iTKl2
-                            }}><ResolveLinks links={[{
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSM0I78iTKl2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSM0I78iTKl2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSM0I78iTKl2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }]}>{resolvedLinks3 => <ComponentViewportProvider height={22} width={"184px"} {...addPropertyOverrides({
-                                  j23OGbszH: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  },
-                                  RZi2QXpn2: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  }
-                                }, baseVariant, gestureVariant)}><motion.div className={"framer-4qniqy-container"} layoutDependency={layoutDependency} layoutId={"okx4W9Xaf-container"}>_jsx(stdin_default4, {
-                                      ePlyYLEKs: resolvedLinks3[0],
-                                      height: "100%",
-                                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-                                      id: "okx4W9Xaf",
-                                      layoutId: "okx4W9Xaf",
-                                      QH5Qo5oGm: mtLfIqK6fM0I78iTKl2,
-                                      style: {
-                                        width: "100%"
-                                      },
-                                      variant: "TV9DGWcYE",
-                                      width: "100%",
-                                      ...addPropertyOverrides({
-                                        j23OGbszH: {
-                                          ePlyYLEKs: resolvedLinks3[2],
-                                          variant: "bHRuYKyHD"
-                                        },
-                                        RZi2QXpn2: {
-                                          ePlyYLEKs: resolvedLinks3[1],
-                                          variant: "bHRuYKyHD"
-                                        }
-                                      }, baseVariant, gestureVariant)
-                                    })</motion.div></ComponentViewportProvider>}</ResolveLinks></PathVariablesContext.Provider></LayoutGroup>;
-                        })}</_Fragment>}</QueryData></ChildrenCanSuspend></motion.div></motion.div><motion.div className={"framer-1vi4g7m"} layoutDependency={layoutDependency} layoutId={"x6BKPIMyZ"}><RichText __fromCanvasComponent={true} className={"framer-5junn7"} fonts={["Inter"]} layoutDependency={layoutDependency} layoutId={"rUL9TPScZ"} style={{
-                  "--framer-link-text-color": "rgb(0, 153, 255)",
-                  "--framer-link-text-decoration": "underline"
-                }} verticalAlignment={"top"} withExternalLayout={true} {...addPropertyOverrides({
-                  j23OGbszH: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Tutorials"}</motion.p></React.Fragment>
-                  },
-                  RZi2QXpn2: {
-                    children: <React.Fragment><motion.p className={"framer-styles-preset-1aj6jmn"} data-styles-preset={"TeHXylmO7"}>{"Tutorials"}</motion.p></React.Fragment>
-                  }
-                }, baseVariant, gestureVariant)}><React.Fragment><motion.p className={"framer-styles-preset-1o7aipf"} data-styles-preset={"x1n9RoGI8"}>{"Tutorials"}</motion.p></React.Fragment></RichText><motion.div className={"framer-xhra02"} layoutDependency={layoutDependency} layoutId={"h1EOySKgG"}><ChildrenCanSuspend><QueryData query={{
-                      from: {
-                        alias: "h1EOySKgG",
-                        data: stdin_default5,
-                        type: "Collection"
-                      },
-                      orderBy: [{
-                        collection: "h1EOySKgG",
-                        direction: "desc",
-                        name: "index",
-                        type: "Identifier"
-                      }],
-                      select: [{
-                        collection: "h1EOySKgG",
-                        name: "mtLfIqK6f",
-                        type: "Identifier"
-                      }, {
-                        collection: "h1EOySKgG",
-                        name: "TU8f1WfzS",
-                        type: "Identifier"
-                      }, {
-                        collection: "h1EOySKgG",
-                        name: "id",
-                        type: "Identifier"
-                      }],
-                      where: {
-                        left: {
-                          collection: "h1EOySKgG",
-                          name: "ewkIozG5C",
-                          type: "Identifier"
-                        },
-                        operator: "==",
-                        right: {
-                          type: "LiteralValue",
-                          value: "HVhD3aod1"
-                        },
-                        type: "BinaryOperation"
-                      }
-                    }}>{(collection3, paginationInfo3, loadMore3) => <_Fragment>{collection3.map(({
-                          mtLfIqK6f: mtLfIqK6fh1EOySKgG2,
-                          TU8f1WfzS: TU8f1WfzSh1EOySKgG2,
-                          id: idh1EOySKgG2
-                        }, i2) => {
-                          mtLfIqK6fh1EOySKgG2 ??= "";
-                          TU8f1WfzSh1EOySKgG2 ??= "";
-                          return <LayoutGroup id={`h1EOySKgG-${idh1EOySKgG2}`}><PathVariablesContext.Provider value={{
-                              TU8f1WfzS: TU8f1WfzSh1EOySKgG2
-                            }}><ResolveLinks links={[{
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSh1EOySKgG2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSh1EOySKgG2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }, {
-                                href: {
-                                  pathVariables: {
-                                    TU8f1WfzS: TU8f1WfzSh1EOySKgG2
-                                  },
-                                  webPageId: "dqRVpj9Kn"
-                                },
-                                implicitPathVariables: void 0
-                              }]}>{resolvedLinks4 => <ComponentViewportProvider height={22} width={"184px"} {...addPropertyOverrides({
-                                  j23OGbszH: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  },
-                                  RZi2QXpn2: {
-                                    width: `calc(${componentViewport?.width || "100vw"} - 40px)`
-                                  }
-                                }, baseVariant, gestureVariant)}><motion.div className={"framer-10cmebc-container"} layoutDependency={layoutDependency} layoutId={"DLw0xO8Uc-container"}>_jsx(stdin_default4, {
-                                      ePlyYLEKs: resolvedLinks4[0],
-                                      height: "100%",
-                                      hXz7zW7sx: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
-                                      id: "DLw0xO8Uc",
-                                      layoutId: "DLw0xO8Uc",
-                                      QH5Qo5oGm: mtLfIqK6fh1EOySKgG2,
-                                      style: {
-                                        width: "100%"
-                                      },
-                                      variant: "TV9DGWcYE",
-                                      width: "100%",
-                                      ...addPropertyOverrides({
-                                        j23OGbszH: {
-                                          ePlyYLEKs: resolvedLinks4[2],
-                                          variant: "bHRuYKyHD"
-                                        },
-                                        RZi2QXpn2: {
-                                          ePlyYLEKs: resolvedLinks4[1],
-                                          variant: "bHRuYKyHD"
-                                        }
-                                      }, baseVariant, gestureVariant)
-                                    })</motion.div></ComponentViewportProvider>}</ResolveLinks></PathVariablesContext.Provider></LayoutGroup>;
-                        })}</_Fragment>}</QueryData></ChildrenCanSuspend></motion.div></motion.div></motion.div></motion.div></motion.nav></Transition></Variants></LayoutGroup>;
+var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
+	const { activeLocale, setLocale } = useLocaleInfo();
+	const {
+		style,
+		className: className3,
+		layoutId,
+		variant,
+		mtLfIqK6fAifdLQB51,
+		TU8f1WfzSAifdLQB51,
+		idAifdLQB51,
+		mtLfIqK6fj9cRd0xpx,
+		TU8f1WfzSj9cRd0xpx,
+		idj9cRd0xpx,
+		mtLfIqK6fM0I78iTKl,
+		TU8f1WfzSM0I78iTKl,
+		idM0I78iTKl,
+		mtLfIqK6fh1EOySKgG,
+		TU8f1WfzSh1EOySKgG,
+		idh1EOySKgG,
+		...restProps
+	} = getProps(props);
+	const {
+		baseVariant,
+		classNames,
+		clearLoadingGesture,
+		gestureHandlers,
+		gestureVariant,
+		isLoading,
+		setGestureState,
+		setVariant,
+		variants,
+	} = useVariantState({
+		cycleOrder,
+		defaultVariant: "Ua7zIMVrQ",
+		variant,
+		variantClassNames,
+	});
+	const layoutDependency = createLayoutDependency(props, variants);
+	const { activeVariantCallback, delay } =
+		useActiveVariantCallback(baseVariant);
+	const XKaY3MrGu1d8p0gt = activeVariantCallback(async (...args) => {
+		setVariant("j23OGbszH");
+	});
+	const XKaY3MrGuevdhk3 = activeVariantCallback(async (...args) => {
+		setVariant("RZi2QXpn2");
+	});
+	const ref1 = React.useRef(null);
+	const isDisplayed = () => {
+		if (["RZi2QXpn2", "j23OGbszH"].includes(baseVariant)) return true;
+		return false;
+	};
+	const router = useRouter();
+	const defaultLayoutId = React.useId();
+	const sharedStyleClassNames = [className2, className];
+	const componentViewport = useComponentViewport();
+	return (
+		<LayoutGroup id={layoutId ?? defaultLayoutId}>
+			{
+				<Variants animate={variants} initial={false}>
+					{
+						<Transition value={transition1}>
+							{
+								<motion.nav
+									{...restProps}
+									{...gestureHandlers}
+									className={cx(
+										serializationHash,
+										...sharedStyleClassNames,
+										"framer-1itxsq0",
+										className3,
+										classNames,
+									)}
+									data-border={true}
+									data-framer-name={"Desktop"}
+									layoutDependency={layoutDependency}
+									layoutId={"Ua7zIMVrQ"}
+									ref={ref ?? ref1}
+									style={{
+										"--border-bottom-width": "0px",
+										"--border-color":
+											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+										"--border-left-width": "0px",
+										"--border-right-width": "1px",
+										"--border-style": "solid",
+										"--border-top-width": "0px",
+										backgroundColor:
+											"var(--token-d1a3e0f4-6e17-46f5-80ee-40f13ad38ea2, rgb(255, 252, 250))",
+										...style,
+									}}
+									variants={{
+										j23OGbszH: {
+											"--border-bottom-width": "0px",
+											"--border-left-width": "0px",
+											"--border-right-width": "0px",
+											"--border-top-width": "0px",
+										},
+									}}
+									{...addPropertyOverrides(
+										{
+											j23OGbszH: {
+												"data-framer-name": "Mobile Open",
+											},
+											RZi2QXpn2: {
+												"data-framer-name": "Mobile",
+											},
+										},
+										baseVariant,
+										gestureVariant,
+									)}
+								>
+									{
+										<motion.div
+											className={"framer-1ndgmpu"}
+											layoutDependency={layoutDependency}
+											layoutId={"kX4IzoHJs"}
+										>
+											{
+												<motion.div
+													className={"framer-ly0fsu"}
+													data-border={true}
+													layoutDependency={layoutDependency}
+													layoutId={"V8tJDHFHj"}
+													style={{
+														"--border-bottom-width": "1px",
+														"--border-color":
+															"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+														"--border-left-width": "0px",
+														"--border-right-width": "1px",
+														"--border-style": "solid",
+														"--border-top-width": "0px",
+														backgroundColor:
+															"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+													}}
+													variants={{
+														j23OGbszH: {
+															"--border-right-width": "0px",
+														},
+														RZi2QXpn2: {
+															"--border-right-width": "0px",
+														},
+													}}
+												>
+													{
+														<ComponentViewportProvider
+															height={20}
+															y={
+																(componentViewport?.y || 0) + 0 + 0 + 0 + 0 + 26
+															}
+														>
+															{
+																<motion.div
+																	className={"framer-se4jzp-container"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"XZL0KK4M0-container"}
+																>
+																	{_jsx(stdin_default, {
+																		height: "100%",
+																		id: "XZL0KK4M0",
+																		layoutId: "XZL0KK4M0",
+																		variant: "f64gXesMC",
+																		width: "100%",
+																	})}
+																</motion.div>
+															}
+														</ComponentViewportProvider>
+													}
+													{
+														<motion.div
+															className={"framer-1daod3w"}
+															layoutDependency={layoutDependency}
+															layoutId={"O2ZIGxm7J"}
+														>
+															{
+																<ComponentViewportProvider
+																	height={40}
+																	y={
+																		(componentViewport?.y || 0) +
+																		0 +
+																		0 +
+																		0 +
+																		0 +
+																		16 +
+																		0
+																	}
+																>
+																	{
+																		<motion.div
+																			className={"framer-1l3wpga-container"}
+																			layoutDependency={layoutDependency}
+																			layoutId={"FXtvEQdeW-container"}
+																		>
+																			{
+																				<NavigationSingleToggleWithSingleToggleWithMappedReactProps19vtxsf
+																					height={"100%"}
+																					id={"FXtvEQdeW"}
+																					layoutId={"FXtvEQdeW"}
+																					Tib6Q7ZnQ={
+																						"var(--token-36bb1a2d-632b-41b6-8e08-ee48dcf29873, rgb(16, 16, 16))"
+																					}
+																					width={"100%"}
+																				/>
+																			}
+																		</motion.div>
+																	}
+																</ComponentViewportProvider>
+															}
+														</motion.div>
+													}
+													{isDisplayed() && (
+														<ComponentViewportProvider
+															{...addPropertyOverrides(
+																{
+																	j23OGbszH: {
+																		height: 44,
+																		width: "44px",
+																		y:
+																			(componentViewport?.y || 0) +
+																			0 +
+																			0 +
+																			0 +
+																			0 +
+																			14,
+																	},
+																	RZi2QXpn2: {
+																		height: 44,
+																		width: "44px",
+																		y:
+																			(componentViewport?.y || 0) +
+																			0 +
+																			0 +
+																			0 +
+																			0 +
+																			14,
+																	},
+																},
+																baseVariant,
+																gestureVariant,
+															)}
+														>
+															{
+																<motion.div
+																	className={"framer-u4hjb-container"}
+																	data-framer-name={"Menu Icon"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"MUbWImX46-container"}
+																	name={"Menu Icon"}
+																>
+																	{_jsx(stdin_default2, {
+																		height: "100%",
+																		id: "MUbWImX46",
+																		layoutId: "MUbWImX46",
+																		name: "Menu Icon",
+																		style: {
+																			height: "100%",
+																		},
+																		variant: "ufJIpzVk3",
+																		width: "100%",
+																		...addPropertyOverrides(
+																			{
+																				j23OGbszH: {
+																					variant: "h7DS_KM0Q",
+																					XKaY3MrGu: XKaY3MrGuevdhk3,
+																				},
+																				RZi2QXpn2: {
+																					XKaY3MrGu: XKaY3MrGu1d8p0gt,
+																				},
+																			},
+																			baseVariant,
+																			gestureVariant,
+																		),
+																	})}
+																</motion.div>
+															}
+														</ComponentViewportProvider>
+													)}
+													{isDisplayed() && (
+														<motion.div
+															className={"framer-4q32db"}
+															layoutDependency={layoutDependency}
+															layoutId={"DVibIJMlg"}
+														/>
+													)}
+												</motion.div>
+											}
+											{
+												<motion.div
+													className={"framer-7ps8qj"}
+													layoutDependency={layoutDependency}
+													layoutId={"at1kHec1T"}
+												>
+													{
+														<motion.div
+															className={"framer-1hgoa8b"}
+															layoutDependency={layoutDependency}
+															layoutId={"NwzRPDKBV"}
+														>
+															{
+																<ResolveLinks
+																	links={[
+																		{
+																			href: {
+																				webPageId: "augiA20Il",
+																			},
+																			implicitPathVariables: void 0,
+																		},
+																		{
+																			href: {
+																				webPageId: "augiA20Il",
+																			},
+																			implicitPathVariables: void 0,
+																		},
+																		{
+																			href: {
+																				webPageId: "augiA20Il",
+																			},
+																			implicitPathVariables: void 0,
+																		},
+																	]}
+																>
+																	{(resolvedLinks) => (
+																		<ComponentViewportProvider
+																			height={22}
+																			width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+																			y={
+																				(componentViewport?.y || 0) +
+																				0 +
+																				0 +
+																				0 +
+																				72 +
+																				24 +
+																				0 +
+																				0 +
+																				0
+																			}
+																			{...addPropertyOverrides(
+																				{
+																					j23OGbszH: {
+																						width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																						y:
+																							(componentViewport?.y || 0) +
+																							0 +
+																							0 +
+																							0 +
+																							72 +
+																							20 +
+																							0 +
+																							0 +
+																							0,
+																					},
+																					RZi2QXpn2: {
+																						width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																						y:
+																							(componentViewport?.y || 0) +
+																							0 +
+																							0 +
+																							0 +
+																							72 +
+																							20 +
+																							0 +
+																							0 +
+																							0,
+																					},
+																				},
+																				baseVariant,
+																				gestureVariant,
+																			)}
+																		>
+																			{
+																				<motion.div
+																					className={"framer-1q9065w-container"}
+																					layoutDependency={layoutDependency}
+																					layoutId={"dulrMZGd0-container"}
+																				>
+																					{_jsx(stdin_default4, {
+																						ePlyYLEKs: resolvedLinks[0],
+																						height: "100%",
+																						hXz7zW7sx:
+																							'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																						id: "dulrMZGd0",
+																						layoutId: "dulrMZGd0",
+																						QH5Qo5oGm: "Homepage",
+																						style: {
+																							width: "100%",
+																						},
+																						variant: "heetu2faa",
+																						width: "100%",
+																						...addPropertyOverrides(
+																							{
+																								j23OGbszH: {
+																									ePlyYLEKs: resolvedLinks[2],
+																									variant: "GjdyYzXnv",
+																								},
+																								RZi2QXpn2: {
+																									ePlyYLEKs: resolvedLinks[1],
+																									variant: "GjdyYzXnv",
+																								},
+																							},
+																							baseVariant,
+																							gestureVariant,
+																						),
+																					})}
+																				</motion.div>
+																			}
+																		</ComponentViewportProvider>
+																	)}
+																</ResolveLinks>
+															}
+															{
+																<ComponentViewportProvider
+																	height={22}
+																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+																	y={
+																		(componentViewport?.y || 0) +
+																		0 +
+																		0 +
+																		0 +
+																		72 +
+																		24 +
+																		0 +
+																		0 +
+																		34
+																	}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					34,
+																			},
+																			RZi2QXpn2: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					34,
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<motion.div
+																			className={"framer-ooe0aj-container"}
+																			layoutDependency={layoutDependency}
+																			layoutId={"D1i4CbWxt-container"}
+																		>
+																			{_jsx(stdin_default4, {
+																				ePlyYLEKs: "discord.com",
+																				height: "100%",
+																				hXz7zW7sx:
+																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" /> </svg>',
+																				id: "D1i4CbWxt",
+																				layoutId: "D1i4CbWxt",
+																				QH5Qo5oGm: "Developer community",
+																				style: {
+																					width: "100%",
+																				},
+																				variant: "heetu2faa",
+																				width: "100%",
+																				...addPropertyOverrides(
+																					{
+																						j23OGbszH: {
+																							variant: "GjdyYzXnv",
+																						},
+																						RZi2QXpn2: {
+																							variant: "GjdyYzXnv",
+																						},
+																					},
+																					baseVariant,
+																					gestureVariant,
+																				),
+																			})}
+																		</motion.div>
+																	}
+																</ComponentViewportProvider>
+															}
+															{
+																<ComponentViewportProvider
+																	height={22}
+																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+																	y={
+																		(componentViewport?.y || 0) +
+																		0 +
+																		0 +
+																		0 +
+																		72 +
+																		24 +
+																		0 +
+																		0 +
+																		68
+																	}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					68,
+																			},
+																			RZi2QXpn2: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					68,
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<motion.div
+																			className={"framer-1udxc7a-container"}
+																			layoutDependency={layoutDependency}
+																			layoutId={"KG5Lw9u0E-container"}
+																		>
+																			{_jsx(stdin_default4, {
+																				ePlyYLEKs: "/blog",
+																				height: "100%",
+																				hXz7zW7sx:
+																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" /> </svg>',
+																				id: "KG5Lw9u0E",
+																				layoutId: "KG5Lw9u0E",
+																				QH5Qo5oGm: "Company blog",
+																				style: {
+																					width: "100%",
+																				},
+																				variant: "heetu2faa",
+																				width: "100%",
+																				...addPropertyOverrides(
+																					{
+																						j23OGbszH: {
+																							variant: "GjdyYzXnv",
+																						},
+																						RZi2QXpn2: {
+																							variant: "GjdyYzXnv",
+																						},
+																					},
+																					baseVariant,
+																					gestureVariant,
+																				),
+																			})}
+																		</motion.div>
+																	}
+																</ComponentViewportProvider>
+															}
+															{
+																<ComponentViewportProvider
+																	height={22}
+																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+																	y={
+																		(componentViewport?.y || 0) +
+																		0 +
+																		0 +
+																		0 +
+																		72 +
+																		24 +
+																		0 +
+																		0 +
+																		102
+																	}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					102,
+																			},
+																			RZi2QXpn2: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					102,
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<motion.div
+																			className={"framer-5q893l-container"}
+																			layoutDependency={layoutDependency}
+																			layoutId={"HnsixN5fY-container"}
+																		>
+																			{_jsx(stdin_default4, {
+																				ePlyYLEKs: "zapier.com",
+																				height: "100%",
+																				hXz7zW7sx:
+																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" /> </svg>',
+																				id: "HnsixN5fY",
+																				layoutId: "HnsixN5fY",
+																				QH5Qo5oGm: "Zapier no-code",
+																				style: {
+																					width: "100%",
+																				},
+																				variant: "heetu2faa",
+																				width: "100%",
+																				...addPropertyOverrides(
+																					{
+																						j23OGbszH: {
+																							variant: "GjdyYzXnv",
+																						},
+																						RZi2QXpn2: {
+																							variant: "GjdyYzXnv",
+																						},
+																					},
+																					baseVariant,
+																					gestureVariant,
+																				),
+																			})}
+																		</motion.div>
+																	}
+																</ComponentViewportProvider>
+															}
+															{
+																<ComponentViewportProvider
+																	height={22}
+																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+																	y={
+																		(componentViewport?.y || 0) +
+																		0 +
+																		0 +
+																		0 +
+																		72 +
+																		24 +
+																		0 +
+																		0 +
+																		136
+																	}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					136,
+																			},
+																			RZi2QXpn2: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					136,
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<motion.div
+																			className={"framer-eexe78-container"}
+																			layoutDependency={layoutDependency}
+																			layoutId={"JlFB3zL5T-container"}
+																		>
+																			{_jsx(stdin_default4, {
+																				ePlyYLEKs: "make.com",
+																				height: "100%",
+																				hXz7zW7sx:
+																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6Zm1.5 1.5a.75.75 0 0 0-.75.75V16.5a.75.75 0 0 0 1.085.67L12 15.089l4.165 2.083a.75.75 0 0 0 1.085-.671V5.25a.75.75 0 0 0-.75-.75h-9Z" clip-rule="evenodd" /> </svg>',
+																				id: "JlFB3zL5T",
+																				layoutId: "JlFB3zL5T",
+																				QH5Qo5oGm: "Make no-code",
+																				style: {
+																					width: "100%",
+																				},
+																				variant: "heetu2faa",
+																				width: "100%",
+																				...addPropertyOverrides(
+																					{
+																						j23OGbszH: {
+																							variant: "GjdyYzXnv",
+																						},
+																						RZi2QXpn2: {
+																							variant: "GjdyYzXnv",
+																						},
+																					},
+																					baseVariant,
+																					gestureVariant,
+																				),
+																			})}
+																		</motion.div>
+																	}
+																</ComponentViewportProvider>
+															}
+															{
+																<ComponentViewportProvider
+																	height={22}
+																	width={`calc(${componentViewport?.width || "100vw"} - 48px)`}
+																	y={
+																		(componentViewport?.y || 0) +
+																		0 +
+																		0 +
+																		0 +
+																		72 +
+																		24 +
+																		0 +
+																		0 +
+																		170
+																	}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					170,
+																			},
+																			RZi2QXpn2: {
+																				width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																				y:
+																					(componentViewport?.y || 0) +
+																					0 +
+																					0 +
+																					0 +
+																					72 +
+																					20 +
+																					0 +
+																					0 +
+																					170,
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<motion.div
+																			className={"framer-yruap7-container"}
+																			layoutDependency={layoutDependency}
+																			layoutId={"Ps_D4SbEo-container"}
+																		>
+																			{_jsx(stdin_default4, {
+																				ePlyYLEKs: "/contact-sales",
+																				height: "100%",
+																				hXz7zW7sx:
+																					'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path fill-rule="evenodd" d="M17.303 5.197A7.5 7.5 0 0 0 6.697 15.803a.75.75 0 0 1-1.061 1.061A9 9 0 1 1 21 10.5a.75.75 0 0 1-1.5 0c0-1.92-.732-3.839-2.197-5.303Zm-2.121 2.121a4.5 4.5 0 0 0-6.364 6.364.75.75 0 1 1-1.06 1.06A6 6 0 1 1 18 10.5a.75.75 0 0 1-1.5 0c0-1.153-.44-2.303-1.318-3.182Zm-3.634 1.314a.75.75 0 0 1 .82.311l5.228 7.917a.75.75 0 0 1-.777 1.148l-2.097-.43 1.045 3.9a.75.75 0 0 1-1.45.388l-1.044-3.899-1.601 1.42a.75.75 0 0 1-1.247-.606l.569-9.47a.75.75 0 0 1 .554-.68Z" clip-rule="evenodd" /> </svg>',
+																				id: "Ps_D4SbEo",
+																				layoutId: "Ps_D4SbEo",
+																				QH5Qo5oGm: "Contact Sales",
+																				style: {
+																					width: "100%",
+																				},
+																				variant: "heetu2faa",
+																				width: "100%",
+																				...addPropertyOverrides(
+																					{
+																						j23OGbszH: {
+																							variant: "GjdyYzXnv",
+																						},
+																						RZi2QXpn2: {
+																							variant: "GjdyYzXnv",
+																						},
+																					},
+																					baseVariant,
+																					gestureVariant,
+																				),
+																			})}
+																		</motion.div>
+																	}
+																</ComponentViewportProvider>
+															}
+														</motion.div>
+													}
+													{
+														<motion.div
+															className={"framer-9ino1c"}
+															layoutDependency={layoutDependency}
+															layoutId={"PwNAMIdKB"}
+														>
+															{
+																<RichText
+																	__fromCanvasComponent={true}
+																	className={"framer-t1dpes"}
+																	fonts={["Inter"]}
+																	layoutDependency={layoutDependency}
+																	layoutId={"NZAWzxRRb"}
+																	style={{
+																		"--framer-link-text-color":
+																			"rgb(0, 153, 255)",
+																		"--framer-link-text-decoration":
+																			"underline",
+																	}}
+																	verticalAlignment={"top"}
+																	withExternalLayout={true}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Guides"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																			RZi2QXpn2: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Guides"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<React.Fragment>
+																			{
+																				<motion.p
+																					className={
+																						"framer-styles-preset-1o7aipf"
+																					}
+																					data-styles-preset={"x1n9RoGI8"}
+																				>
+																					{"Guides"}
+																				</motion.p>
+																			}
+																		</React.Fragment>
+																	}
+																</RichText>
+															}
+															{
+																<motion.div
+																	className={"framer-y890q8"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"AifdLQB51"}
+																>
+																	{
+																		<ChildrenCanSuspend>
+																			{
+																				<QueryData
+																					query={{
+																						from: {
+																							alias: "AifdLQB51",
+																							data: stdin_default5,
+																							type: "Collection",
+																						},
+																						orderBy: [
+																							{
+																								collection: "AifdLQB51",
+																								direction: "desc",
+																								name: "index",
+																								type: "Identifier",
+																							},
+																						],
+																						select: [
+																							{
+																								collection: "AifdLQB51",
+																								name: "mtLfIqK6f",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "AifdLQB51",
+																								name: "TU8f1WfzS",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "AifdLQB51",
+																								name: "id",
+																								type: "Identifier",
+																							},
+																						],
+																						where: {
+																							left: {
+																								collection: "AifdLQB51",
+																								name: "ewkIozG5C",
+																								type: "Identifier",
+																							},
+																							operator: "==",
+																							right: {
+																								type: "LiteralValue",
+																								value: "Zwla6d58d",
+																							},
+																							type: "BinaryOperation",
+																						},
+																					}}
+																				>
+																					{(
+																						collection,
+																						paginationInfo,
+																						loadMore,
+																					) => (
+																						<_Fragment>
+																							{collection.map(
+																								(
+																									{
+																										mtLfIqK6f:
+																											mtLfIqK6fAifdLQB512,
+																										TU8f1WfzS:
+																											TU8f1WfzSAifdLQB512,
+																										id: idAifdLQB512,
+																									},
+																									i2,
+																								) => {
+																									mtLfIqK6fAifdLQB512 ??= "";
+																									TU8f1WfzSAifdLQB512 ??= "";
+																									return (
+																										<LayoutGroup
+																											id={`AifdLQB51-${idAifdLQB512}`}
+																										>
+																											{
+																												<PathVariablesContext.Provider
+																													value={{
+																														TU8f1WfzS:
+																															TU8f1WfzSAifdLQB512,
+																													}}
+																												>
+																													{
+																														<ResolveLinks
+																															links={[
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSAifdLQB512,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSAifdLQB512,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSAifdLQB512,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																															]}
+																														>
+																															{(
+																																resolvedLinks1,
+																															) => (
+																																<ComponentViewportProvider
+																																	height={22}
+																																	width={
+																																		"186px"
+																																	}
+																																	{...addPropertyOverrides(
+																																		{
+																																			j23OGbszH:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																			RZi2QXpn2:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																		},
+																																		baseVariant,
+																																		gestureVariant,
+																																	)}
+																																>
+																																	{
+																																		<motion.div
+																																			className={
+																																				"framer-1tqqi79-container"
+																																			}
+																																			layoutDependency={
+																																				layoutDependency
+																																			}
+																																			layoutId={
+																																				"QQpX9gHvU-container"
+																																			}
+																																		>
+																																			{_jsx(
+																																				stdin_default4,
+																																				{
+																																					ePlyYLEKs:
+																																						resolvedLinks1[0],
+																																					height:
+																																						"100%",
+																																					hXz7zW7sx:
+																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																																					id: "QQpX9gHvU",
+																																					layoutId:
+																																						"QQpX9gHvU",
+																																					QH5Qo5oGm:
+																																						mtLfIqK6fAifdLQB512,
+																																					style:
+																																						{
+																																							width:
+																																								"100%",
+																																						},
+																																					variant:
+																																						"TV9DGWcYE",
+																																					width:
+																																						"100%",
+																																					...addPropertyOverrides(
+																																						{
+																																							j23OGbszH:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks1[2],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																							RZi2QXpn2:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks1[1],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																						},
+																																						baseVariant,
+																																						gestureVariant,
+																																					),
+																																				},
+																																			)}
+																																		</motion.div>
+																																	}
+																																</ComponentViewportProvider>
+																															)}
+																														</ResolveLinks>
+																													}
+																												</PathVariablesContext.Provider>
+																											}
+																										</LayoutGroup>
+																									);
+																								},
+																							)}
+																						</_Fragment>
+																					)}
+																				</QueryData>
+																			}
+																		</ChildrenCanSuspend>
+																	}
+																</motion.div>
+															}
+														</motion.div>
+													}
+													{
+														<motion.div
+															className={"framer-1h7ykz2"}
+															layoutDependency={layoutDependency}
+															layoutId={"ogebNJxq7"}
+														>
+															{
+																<RichText
+																	__fromCanvasComponent={true}
+																	className={"framer-yuq2fc"}
+																	fonts={["Inter"]}
+																	layoutDependency={layoutDependency}
+																	layoutId={"xQEZc3b7t"}
+																	style={{
+																		"--framer-link-text-color":
+																			"rgb(0, 153, 255)",
+																		"--framer-link-text-decoration":
+																			"underline",
+																	}}
+																	verticalAlignment={"top"}
+																	withExternalLayout={true}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Reference"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																			RZi2QXpn2: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Reference"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<React.Fragment>
+																			{
+																				<motion.p
+																					className={
+																						"framer-styles-preset-1o7aipf"
+																					}
+																					data-styles-preset={"x1n9RoGI8"}
+																				>
+																					{"Reference"}
+																				</motion.p>
+																			}
+																		</React.Fragment>
+																	}
+																</RichText>
+															}
+															{
+																<motion.div
+																	className={"framer-17e576z"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"j9cRd0xpx"}
+																>
+																	{
+																		<ChildrenCanSuspend>
+																			{
+																				<QueryData
+																					query={{
+																						from: {
+																							alias: "j9cRd0xpx",
+																							data: stdin_default5,
+																							type: "Collection",
+																						},
+																						orderBy: [
+																							{
+																								collection: "j9cRd0xpx",
+																								direction: "desc",
+																								name: "index",
+																								type: "Identifier",
+																							},
+																						],
+																						select: [
+																							{
+																								collection: "j9cRd0xpx",
+																								name: "mtLfIqK6f",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "j9cRd0xpx",
+																								name: "TU8f1WfzS",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "j9cRd0xpx",
+																								name: "id",
+																								type: "Identifier",
+																							},
+																						],
+																						where: {
+																							left: {
+																								collection: "j9cRd0xpx",
+																								name: "ewkIozG5C",
+																								type: "Identifier",
+																							},
+																							operator: "==",
+																							right: {
+																								type: "LiteralValue",
+																								value: "sHSYkPY5r",
+																							},
+																							type: "BinaryOperation",
+																						},
+																					}}
+																				>
+																					{(
+																						collection1,
+																						paginationInfo1,
+																						loadMore1,
+																					) => (
+																						<_Fragment>
+																							{collection1.map(
+																								(
+																									{
+																										mtLfIqK6f:
+																											mtLfIqK6fj9cRd0xpx2,
+																										TU8f1WfzS:
+																											TU8f1WfzSj9cRd0xpx2,
+																										id: idj9cRd0xpx2,
+																									},
+																									i2,
+																								) => {
+																									mtLfIqK6fj9cRd0xpx2 ??= "";
+																									TU8f1WfzSj9cRd0xpx2 ??= "";
+																									return (
+																										<LayoutGroup
+																											id={`j9cRd0xpx-${idj9cRd0xpx2}`}
+																										>
+																											{
+																												<PathVariablesContext.Provider
+																													value={{
+																														TU8f1WfzS:
+																															TU8f1WfzSj9cRd0xpx2,
+																													}}
+																												>
+																													{
+																														<ResolveLinks
+																															links={[
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSj9cRd0xpx2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSj9cRd0xpx2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSj9cRd0xpx2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																															]}
+																														>
+																															{(
+																																resolvedLinks2,
+																															) => (
+																																<ComponentViewportProvider
+																																	height={22}
+																																	width={
+																																		"184px"
+																																	}
+																																	{...addPropertyOverrides(
+																																		{
+																																			j23OGbszH:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																			RZi2QXpn2:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																		},
+																																		baseVariant,
+																																		gestureVariant,
+																																	)}
+																																>
+																																	{
+																																		<motion.div
+																																			className={
+																																				"framer-p0qhy9-container"
+																																			}
+																																			layoutDependency={
+																																				layoutDependency
+																																			}
+																																			layoutId={
+																																				"MYPZ_OFb9-container"
+																																			}
+																																		>
+																																			{_jsx(
+																																				stdin_default4,
+																																				{
+																																					ePlyYLEKs:
+																																						resolvedLinks2[0],
+																																					height:
+																																						"100%",
+																																					hXz7zW7sx:
+																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																																					id: "MYPZ_OFb9",
+																																					layoutId:
+																																						"MYPZ_OFb9",
+																																					QH5Qo5oGm:
+																																						mtLfIqK6fj9cRd0xpx2,
+																																					style:
+																																						{
+																																							width:
+																																								"100%",
+																																						},
+																																					variant:
+																																						"TV9DGWcYE",
+																																					width:
+																																						"100%",
+																																					...addPropertyOverrides(
+																																						{
+																																							j23OGbszH:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks2[2],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																							RZi2QXpn2:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks2[1],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																						},
+																																						baseVariant,
+																																						gestureVariant,
+																																					),
+																																				},
+																																			)}
+																																		</motion.div>
+																																	}
+																																</ComponentViewportProvider>
+																															)}
+																														</ResolveLinks>
+																													}
+																												</PathVariablesContext.Provider>
+																											}
+																										</LayoutGroup>
+																									);
+																								},
+																							)}
+																						</_Fragment>
+																					)}
+																				</QueryData>
+																			}
+																		</ChildrenCanSuspend>
+																	}
+																</motion.div>
+															}
+														</motion.div>
+													}
+													{
+														<motion.div
+															className={"framer-w0hyjz"}
+															layoutDependency={layoutDependency}
+															layoutId={"P8FrvQSrH"}
+														>
+															{
+																<RichText
+																	__fromCanvasComponent={true}
+																	className={"framer-1jg9cih"}
+																	fonts={["Inter"]}
+																	layoutDependency={layoutDependency}
+																	layoutId={"iilP8SRwF"}
+																	style={{
+																		"--framer-link-text-color":
+																			"rgb(0, 153, 255)",
+																		"--framer-link-text-decoration":
+																			"underline",
+																	}}
+																	verticalAlignment={"top"}
+																	withExternalLayout={true}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Reference"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																			RZi2QXpn2: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Reference"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<React.Fragment>
+																			{
+																				<motion.p
+																					className={
+																						"framer-styles-preset-1o7aipf"
+																					}
+																					data-styles-preset={"x1n9RoGI8"}
+																				>
+																					{"Reference"}
+																				</motion.p>
+																			}
+																		</React.Fragment>
+																	}
+																</RichText>
+															}
+															{
+																<motion.div
+																	className={"framer-1lqdphq"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"M0I78iTKl"}
+																>
+																	{
+																		<ChildrenCanSuspend>
+																			{
+																				<QueryData
+																					query={{
+																						from: {
+																							alias: "M0I78iTKl",
+																							data: stdin_default5,
+																							type: "Collection",
+																						},
+																						orderBy: [
+																							{
+																								collection: "M0I78iTKl",
+																								direction: "desc",
+																								name: "index",
+																								type: "Identifier",
+																							},
+																						],
+																						select: [
+																							{
+																								collection: "M0I78iTKl",
+																								name: "mtLfIqK6f",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "M0I78iTKl",
+																								name: "TU8f1WfzS",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "M0I78iTKl",
+																								name: "id",
+																								type: "Identifier",
+																							},
+																						],
+																						where: {
+																							left: {
+																								collection: "M0I78iTKl",
+																								name: "ewkIozG5C",
+																								type: "Identifier",
+																							},
+																							operator: "==",
+																							right: {
+																								type: "LiteralValue",
+																								value: "sHSYkPY5r",
+																							},
+																							type: "BinaryOperation",
+																						},
+																					}}
+																				>
+																					{(
+																						collection2,
+																						paginationInfo2,
+																						loadMore2,
+																					) => (
+																						<_Fragment>
+																							{collection2.map(
+																								(
+																									{
+																										mtLfIqK6f:
+																											mtLfIqK6fM0I78iTKl2,
+																										TU8f1WfzS:
+																											TU8f1WfzSM0I78iTKl2,
+																										id: idM0I78iTKl2,
+																									},
+																									i2,
+																								) => {
+																									mtLfIqK6fM0I78iTKl2 ??= "";
+																									TU8f1WfzSM0I78iTKl2 ??= "";
+																									return (
+																										<LayoutGroup
+																											id={`M0I78iTKl-${idM0I78iTKl2}`}
+																										>
+																											{
+																												<PathVariablesContext.Provider
+																													value={{
+																														TU8f1WfzS:
+																															TU8f1WfzSM0I78iTKl2,
+																													}}
+																												>
+																													{
+																														<ResolveLinks
+																															links={[
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSM0I78iTKl2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSM0I78iTKl2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSM0I78iTKl2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																															]}
+																														>
+																															{(
+																																resolvedLinks3,
+																															) => (
+																																<ComponentViewportProvider
+																																	height={22}
+																																	width={
+																																		"184px"
+																																	}
+																																	{...addPropertyOverrides(
+																																		{
+																																			j23OGbszH:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																			RZi2QXpn2:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																		},
+																																		baseVariant,
+																																		gestureVariant,
+																																	)}
+																																>
+																																	{
+																																		<motion.div
+																																			className={
+																																				"framer-4qniqy-container"
+																																			}
+																																			layoutDependency={
+																																				layoutDependency
+																																			}
+																																			layoutId={
+																																				"okx4W9Xaf-container"
+																																			}
+																																		>
+																																			{_jsx(
+																																				stdin_default4,
+																																				{
+																																					ePlyYLEKs:
+																																						resolvedLinks3[0],
+																																					height:
+																																						"100%",
+																																					hXz7zW7sx:
+																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																																					id: "okx4W9Xaf",
+																																					layoutId:
+																																						"okx4W9Xaf",
+																																					QH5Qo5oGm:
+																																						mtLfIqK6fM0I78iTKl2,
+																																					style:
+																																						{
+																																							width:
+																																								"100%",
+																																						},
+																																					variant:
+																																						"TV9DGWcYE",
+																																					width:
+																																						"100%",
+																																					...addPropertyOverrides(
+																																						{
+																																							j23OGbszH:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks3[2],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																							RZi2QXpn2:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks3[1],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																						},
+																																						baseVariant,
+																																						gestureVariant,
+																																					),
+																																				},
+																																			)}
+																																		</motion.div>
+																																	}
+																																</ComponentViewportProvider>
+																															)}
+																														</ResolveLinks>
+																													}
+																												</PathVariablesContext.Provider>
+																											}
+																										</LayoutGroup>
+																									);
+																								},
+																							)}
+																						</_Fragment>
+																					)}
+																				</QueryData>
+																			}
+																		</ChildrenCanSuspend>
+																	}
+																</motion.div>
+															}
+														</motion.div>
+													}
+													{
+														<motion.div
+															className={"framer-1vi4g7m"}
+															layoutDependency={layoutDependency}
+															layoutId={"x6BKPIMyZ"}
+														>
+															{
+																<RichText
+																	__fromCanvasComponent={true}
+																	className={"framer-5junn7"}
+																	fonts={["Inter"]}
+																	layoutDependency={layoutDependency}
+																	layoutId={"rUL9TPScZ"}
+																	style={{
+																		"--framer-link-text-color":
+																			"rgb(0, 153, 255)",
+																		"--framer-link-text-decoration":
+																			"underline",
+																	}}
+																	verticalAlignment={"top"}
+																	withExternalLayout={true}
+																	{...addPropertyOverrides(
+																		{
+																			j23OGbszH: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Tutorials"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																			RZi2QXpn2: {
+																				children: (
+																					<React.Fragment>
+																						{
+																							<motion.p
+																								className={
+																									"framer-styles-preset-1aj6jmn"
+																								}
+																								data-styles-preset={"TeHXylmO7"}
+																							>
+																								{"Tutorials"}
+																							</motion.p>
+																						}
+																					</React.Fragment>
+																				),
+																			},
+																		},
+																		baseVariant,
+																		gestureVariant,
+																	)}
+																>
+																	{
+																		<React.Fragment>
+																			{
+																				<motion.p
+																					className={
+																						"framer-styles-preset-1o7aipf"
+																					}
+																					data-styles-preset={"x1n9RoGI8"}
+																				>
+																					{"Tutorials"}
+																				</motion.p>
+																			}
+																		</React.Fragment>
+																	}
+																</RichText>
+															}
+															{
+																<motion.div
+																	className={"framer-xhra02"}
+																	layoutDependency={layoutDependency}
+																	layoutId={"h1EOySKgG"}
+																>
+																	{
+																		<ChildrenCanSuspend>
+																			{
+																				<QueryData
+																					query={{
+																						from: {
+																							alias: "h1EOySKgG",
+																							data: stdin_default5,
+																							type: "Collection",
+																						},
+																						orderBy: [
+																							{
+																								collection: "h1EOySKgG",
+																								direction: "desc",
+																								name: "index",
+																								type: "Identifier",
+																							},
+																						],
+																						select: [
+																							{
+																								collection: "h1EOySKgG",
+																								name: "mtLfIqK6f",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "h1EOySKgG",
+																								name: "TU8f1WfzS",
+																								type: "Identifier",
+																							},
+																							{
+																								collection: "h1EOySKgG",
+																								name: "id",
+																								type: "Identifier",
+																							},
+																						],
+																						where: {
+																							left: {
+																								collection: "h1EOySKgG",
+																								name: "ewkIozG5C",
+																								type: "Identifier",
+																							},
+																							operator: "==",
+																							right: {
+																								type: "LiteralValue",
+																								value: "HVhD3aod1",
+																							},
+																							type: "BinaryOperation",
+																						},
+																					}}
+																				>
+																					{(
+																						collection3,
+																						paginationInfo3,
+																						loadMore3,
+																					) => (
+																						<_Fragment>
+																							{collection3.map(
+																								(
+																									{
+																										mtLfIqK6f:
+																											mtLfIqK6fh1EOySKgG2,
+																										TU8f1WfzS:
+																											TU8f1WfzSh1EOySKgG2,
+																										id: idh1EOySKgG2,
+																									},
+																									i2,
+																								) => {
+																									mtLfIqK6fh1EOySKgG2 ??= "";
+																									TU8f1WfzSh1EOySKgG2 ??= "";
+																									return (
+																										<LayoutGroup
+																											id={`h1EOySKgG-${idh1EOySKgG2}`}
+																										>
+																											{
+																												<PathVariablesContext.Provider
+																													value={{
+																														TU8f1WfzS:
+																															TU8f1WfzSh1EOySKgG2,
+																													}}
+																												>
+																													{
+																														<ResolveLinks
+																															links={[
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSh1EOySKgG2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSh1EOySKgG2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																																{
+																																	href: {
+																																		pathVariables:
+																																			{
+																																				TU8f1WfzS:
+																																					TU8f1WfzSh1EOySKgG2,
+																																			},
+																																		webPageId:
+																																			"dqRVpj9Kn",
+																																	},
+																																	implicitPathVariables:
+																																		void 0,
+																																},
+																															]}
+																														>
+																															{(
+																																resolvedLinks4,
+																															) => (
+																																<ComponentViewportProvider
+																																	height={22}
+																																	width={
+																																		"184px"
+																																	}
+																																	{...addPropertyOverrides(
+																																		{
+																																			j23OGbszH:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																			RZi2QXpn2:
+																																				{
+																																					width: `calc(${componentViewport?.width || "100vw"} - 40px)`,
+																																				},
+																																		},
+																																		baseVariant,
+																																		gestureVariant,
+																																	)}
+																																>
+																																	{
+																																		<motion.div
+																																			className={
+																																				"framer-10cmebc-container"
+																																			}
+																																			layoutDependency={
+																																				layoutDependency
+																																			}
+																																			layoutId={
+																																				"DLw0xO8Uc-container"
+																																			}
+																																		>
+																																			{_jsx(
+																																				stdin_default4,
+																																				{
+																																					ePlyYLEKs:
+																																						resolvedLinks4[0],
+																																					height:
+																																						"100%",
+																																					hXz7zW7sx:
+																																						'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">   <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />   <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> </svg>',
+																																					id: "DLw0xO8Uc",
+																																					layoutId:
+																																						"DLw0xO8Uc",
+																																					QH5Qo5oGm:
+																																						mtLfIqK6fh1EOySKgG2,
+																																					style:
+																																						{
+																																							width:
+																																								"100%",
+																																						},
+																																					variant:
+																																						"TV9DGWcYE",
+																																					width:
+																																						"100%",
+																																					...addPropertyOverrides(
+																																						{
+																																							j23OGbszH:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks4[2],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																							RZi2QXpn2:
+																																								{
+																																									ePlyYLEKs:
+																																										resolvedLinks4[1],
+																																									variant:
+																																										"bHRuYKyHD",
+																																								},
+																																						},
+																																						baseVariant,
+																																						gestureVariant,
+																																					),
+																																				},
+																																			)}
+																																		</motion.div>
+																																	}
+																																</ComponentViewportProvider>
+																															)}
+																														</ResolveLinks>
+																													}
+																												</PathVariablesContext.Provider>
+																											}
+																										</LayoutGroup>
+																									);
+																								},
+																							)}
+																						</_Fragment>
+																					)}
+																				</QueryData>
+																			}
+																		</ChildrenCanSuspend>
+																	}
+																</motion.div>
+															}
+														</motion.div>
+													}
+												</motion.div>
+											}
+										</motion.div>
+									}
+								</motion.nav>
+							}
+						</Transition>
+					}
+				</Variants>
+			}
+		</LayoutGroup>
+	);
 });
-var css3 = ["@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }", ".framer-GkwH1.framer-y6soq8, .framer-GkwH1 .framer-y6soq8 { display: block; }", ".framer-GkwH1.framer-1itxsq0 { align-content: flex-start; align-items: flex-start; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; overflow: auto; padding: 0px; position: relative; width: 250px; }", ".framer-GkwH1 .framer-1ndgmpu { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; overflow: visible; padding: 0px; position: sticky; top: 0px; width: 100%; will-change: transform; z-index: 1; }", ".framer-GkwH1 .framer-ly0fsu { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; height: 72px; justify-content: space-between; overflow: visible; padding: 24px; position: sticky; top: 0px; width: 100%; will-change: transform; z-index: 2; }", ".framer-GkwH1 .framer-se4jzp-container, .framer-GkwH1 .framer-1l3wpga-container { flex: none; height: auto; position: relative; width: auto; }", ".framer-GkwH1 .framer-1daod3w { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 4px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: min-content; }", ".framer-GkwH1 .framer-u4hjb-container { flex: none; height: 44px; position: relative; width: auto; }", ".framer-GkwH1 .framer-4q32db { flex: 1 0 0px; height: 20px; overflow: hidden; position: relative; width: 1px; }", ".framer-GkwH1 .framer-7ps8qj { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: flex-start; overflow: visible; padding: 24px; position: relative; width: 100%; }", ".framer-GkwH1 .framer-1hgoa8b { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }", ".framer-GkwH1 .framer-1q9065w-container, .framer-GkwH1 .framer-ooe0aj-container, .framer-GkwH1 .framer-1udxc7a-container, .framer-GkwH1 .framer-5q893l-container, .framer-GkwH1 .framer-eexe78-container, .framer-GkwH1 .framer-yruap7-container, .framer-GkwH1 .framer-1tqqi79-container, .framer-GkwH1 .framer-p0qhy9-container, .framer-GkwH1 .framer-4qniqy-container, .framer-GkwH1 .framer-10cmebc-container { flex: none; height: auto; position: relative; width: 100%; }", ".framer-GkwH1 .framer-9ino1c, .framer-GkwH1 .framer-1h7ykz2, .framer-GkwH1 .framer-w0hyjz, .framer-GkwH1 .framer-1vi4g7m { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 200px; }", ".framer-GkwH1 .framer-t1dpes, .framer-GkwH1 .framer-yuq2fc, .framer-GkwH1 .framer-1jg9cih, .framer-GkwH1 .framer-5junn7 { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }", ".framer-GkwH1 .framer-y890q8 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: flex-start; padding: 0px 0px 0px 14px; position: relative; width: 100%; }", ".framer-GkwH1 .framer-17e576z, .framer-GkwH1 .framer-1lqdphq, .framer-GkwH1 .framer-xhra02 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: flex-start; padding: 0px 0px 0px 16px; position: relative; width: 100%; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-GkwH1.framer-1itxsq0, .framer-GkwH1 .framer-1ndgmpu, .framer-GkwH1 .framer-1daod3w, .framer-GkwH1 .framer-7ps8qj, .framer-GkwH1 .framer-1hgoa8b, .framer-GkwH1 .framer-9ino1c, .framer-GkwH1 .framer-y890q8, .framer-GkwH1 .framer-1h7ykz2, .framer-GkwH1 .framer-17e576z, .framer-GkwH1 .framer-w0hyjz, .framer-GkwH1 .framer-1lqdphq, .framer-GkwH1 .framer-1vi4g7m, .framer-GkwH1 .framer-xhra02 { gap: 0px; } .framer-GkwH1.framer-1itxsq0 > *, .framer-GkwH1 .framer-1ndgmpu > * { margin: 0px; margin-bottom: calc(0px / 2); margin-top: calc(0px / 2); } .framer-GkwH1.framer-1itxsq0 > :first-child, .framer-GkwH1 .framer-1ndgmpu > :first-child, .framer-GkwH1 .framer-7ps8qj > :first-child, .framer-GkwH1 .framer-1hgoa8b > :first-child, .framer-GkwH1 .framer-9ino1c > :first-child, .framer-GkwH1 .framer-y890q8 > :first-child, .framer-GkwH1 .framer-1h7ykz2 > :first-child, .framer-GkwH1 .framer-17e576z > :first-child, .framer-GkwH1 .framer-w0hyjz > :first-child, .framer-GkwH1 .framer-1lqdphq > :first-child, .framer-GkwH1 .framer-1vi4g7m > :first-child, .framer-GkwH1 .framer-xhra02 > :first-child { margin-top: 0px; } .framer-GkwH1.framer-1itxsq0 > :last-child, .framer-GkwH1 .framer-1ndgmpu > :last-child, .framer-GkwH1 .framer-7ps8qj > :last-child, .framer-GkwH1 .framer-1hgoa8b > :last-child, .framer-GkwH1 .framer-9ino1c > :last-child, .framer-GkwH1 .framer-y890q8 > :last-child, .framer-GkwH1 .framer-1h7ykz2 > :last-child, .framer-GkwH1 .framer-17e576z > :last-child, .framer-GkwH1 .framer-w0hyjz > :last-child, .framer-GkwH1 .framer-1lqdphq > :last-child, .framer-GkwH1 .framer-1vi4g7m > :last-child, .framer-GkwH1 .framer-xhra02 > :last-child { margin-bottom: 0px; } .framer-GkwH1 .framer-1daod3w > * { margin: 0px; margin-left: calc(4px / 2); margin-right: calc(4px / 2); } .framer-GkwH1 .framer-1daod3w > :first-child { margin-left: 0px; } .framer-GkwH1 .framer-1daod3w > :last-child { margin-right: 0px; } .framer-GkwH1 .framer-7ps8qj > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-GkwH1 .framer-1hgoa8b > *, .framer-GkwH1 .framer-9ino1c > *, .framer-GkwH1 .framer-1h7ykz2 > *, .framer-GkwH1 .framer-w0hyjz > *, .framer-GkwH1 .framer-1vi4g7m > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } .framer-GkwH1 .framer-y890q8 > *, .framer-GkwH1 .framer-17e576z > *, .framer-GkwH1 .framer-1lqdphq > *, .framer-GkwH1 .framer-xhra02 > * { margin: 0px; margin-bottom: calc(8px / 2); margin-top: calc(8px / 2); } }", ".framer-GkwH1.framer-v-gnbrjh.framer-1itxsq0 { height: 72px; overflow: hidden; overflow-y: auto; width: 350px; }", ".framer-GkwH1.framer-v-gnbrjh .framer-1ndgmpu, .framer-GkwH1.framer-v-90sr53 .framer-1ndgmpu { position: relative; top: unset; }", ".framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu, .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu { gap: 10px; justify-content: flex-start; padding: 20px 8px 20px 20px; }", ".framer-GkwH1.framer-v-gnbrjh .framer-se4jzp-container, .framer-GkwH1.framer-v-gnbrjh .framer-1l3wpga-container, .framer-GkwH1.framer-v-gnbrjh .framer-t1dpes, .framer-GkwH1.framer-v-90sr53 .framer-se4jzp-container, .framer-GkwH1.framer-v-90sr53 .framer-yuq2fc, .framer-GkwH1.framer-v-90sr53 .framer-1jg9cih, .framer-GkwH1.framer-v-90sr53 .framer-5junn7 { order: 0; }", ".framer-GkwH1.framer-v-gnbrjh .framer-1daod3w, .framer-GkwH1.framer-v-90sr53 .framer-1daod3w { order: 3; }", ".framer-GkwH1.framer-v-gnbrjh .framer-u4hjb-container, .framer-GkwH1.framer-v-90sr53 .framer-u4hjb-container { order: 4; }", ".framer-GkwH1.framer-v-gnbrjh .framer-4q32db, .framer-GkwH1.framer-v-90sr53 .framer-4q32db { order: 2; }", ".framer-GkwH1.framer-v-gnbrjh .framer-7ps8qj { padding: 20px; }", ".framer-GkwH1.framer-v-gnbrjh .framer-9ino1c, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m, .framer-GkwH1.framer-v-90sr53 .framer-9ino1c, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m { gap: 16px; width: 100%; }", ".framer-GkwH1.framer-v-gnbrjh .framer-y890q8, .framer-GkwH1.framer-v-90sr53 .framer-17e576z, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 { gap: 12px; order: 1; padding: 0px; }", ".framer-GkwH1.framer-v-gnbrjh .framer-17e576z, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02, .framer-GkwH1.framer-v-90sr53 .framer-y890q8 { gap: 12px; padding: 0px; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu, .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c, .framer-GkwH1.framer-v-gnbrjh .framer-y890q8, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 { gap: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu > :first-child { margin-left: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu > :last-child { margin-right: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c > *, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2 > *, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz > *, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-y890q8 > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2 > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 > :first-child { margin-top: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-y890q8 > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2 > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 > :last-child { margin-bottom: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-y890q8 > *, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z > *, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq > *, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }", ".framer-GkwH1.framer-v-90sr53.framer-1itxsq0 { max-height: calc(var(--framer-viewport-height, 100vh) * 1); min-height: calc(var(--framer-viewport-height, 100vh) * 1); overflow: hidden; overflow-y: auto; width: 350px; }", ".framer-GkwH1.framer-v-90sr53 .framer-7ps8qj { padding: 20px 20px 120px 20px; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu, .framer-GkwH1.framer-v-90sr53 .framer-9ino1c, .framer-GkwH1.framer-v-90sr53 .framer-y890q8, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2, .framer-GkwH1.framer-v-90sr53 .framer-17e576z, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 { gap: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu > :first-child { margin-left: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu > :last-child { margin-right: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-9ino1c > *, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2 > *, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz > *, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-GkwH1.framer-v-90sr53 .framer-9ino1c > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-y890q8 > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2 > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-17e576z > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 > :first-child { margin-top: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-9ino1c > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-y890q8 > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2 > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-17e576z > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 > :last-child { margin-bottom: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-y890q8 > *, .framer-GkwH1.framer-v-90sr53 .framer-17e576z > *, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq > *, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }", ...css2, ...css, '.framer-GkwH1[data-border="true"]::after, .framer-GkwH1 [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }'];
+var css3 = [
+	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
+	".framer-GkwH1.framer-y6soq8, .framer-GkwH1 .framer-y6soq8 { display: block; }",
+	".framer-GkwH1.framer-1itxsq0 { align-content: flex-start; align-items: flex-start; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; overflow: auto; padding: 0px; position: relative; width: 250px; }",
+	".framer-GkwH1 .framer-1ndgmpu { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 0px; height: min-content; justify-content: flex-start; overflow: visible; padding: 0px; position: sticky; top: 0px; width: 100%; will-change: transform; z-index: 1; }",
+	".framer-GkwH1 .framer-ly0fsu { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; height: 72px; justify-content: space-between; overflow: visible; padding: 24px; position: sticky; top: 0px; width: 100%; will-change: transform; z-index: 2; }",
+	".framer-GkwH1 .framer-se4jzp-container, .framer-GkwH1 .framer-1l3wpga-container { flex: none; height: auto; position: relative; width: auto; }",
+	".framer-GkwH1 .framer-1daod3w { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 4px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: min-content; }",
+	".framer-GkwH1 .framer-u4hjb-container { flex: none; height: 44px; position: relative; width: auto; }",
+	".framer-GkwH1 .framer-4q32db { flex: 1 0 0px; height: 20px; overflow: hidden; position: relative; width: 1px; }",
+	".framer-GkwH1 .framer-7ps8qj { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: flex-start; overflow: visible; padding: 24px; position: relative; width: 100%; }",
+	".framer-GkwH1 .framer-1hgoa8b { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-GkwH1 .framer-1q9065w-container, .framer-GkwH1 .framer-ooe0aj-container, .framer-GkwH1 .framer-1udxc7a-container, .framer-GkwH1 .framer-5q893l-container, .framer-GkwH1 .framer-eexe78-container, .framer-GkwH1 .framer-yruap7-container, .framer-GkwH1 .framer-1tqqi79-container, .framer-GkwH1 .framer-p0qhy9-container, .framer-GkwH1 .framer-4qniqy-container, .framer-GkwH1 .framer-10cmebc-container { flex: none; height: auto; position: relative; width: 100%; }",
+	".framer-GkwH1 .framer-9ino1c, .framer-GkwH1 .framer-1h7ykz2, .framer-GkwH1 .framer-w0hyjz, .framer-GkwH1 .framer-1vi4g7m { align-content: flex-start; align-items: flex-start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 200px; }",
+	".framer-GkwH1 .framer-t1dpes, .framer-GkwH1 .framer-yuq2fc, .framer-GkwH1 .framer-1jg9cih, .framer-GkwH1 .framer-5junn7 { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-GkwH1 .framer-y890q8 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: flex-start; padding: 0px 0px 0px 14px; position: relative; width: 100%; }",
+	".framer-GkwH1 .framer-17e576z, .framer-GkwH1 .framer-1lqdphq, .framer-GkwH1 .framer-xhra02 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: flex-start; padding: 0px 0px 0px 16px; position: relative; width: 100%; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-GkwH1.framer-1itxsq0, .framer-GkwH1 .framer-1ndgmpu, .framer-GkwH1 .framer-1daod3w, .framer-GkwH1 .framer-7ps8qj, .framer-GkwH1 .framer-1hgoa8b, .framer-GkwH1 .framer-9ino1c, .framer-GkwH1 .framer-y890q8, .framer-GkwH1 .framer-1h7ykz2, .framer-GkwH1 .framer-17e576z, .framer-GkwH1 .framer-w0hyjz, .framer-GkwH1 .framer-1lqdphq, .framer-GkwH1 .framer-1vi4g7m, .framer-GkwH1 .framer-xhra02 { gap: 0px; } .framer-GkwH1.framer-1itxsq0 > *, .framer-GkwH1 .framer-1ndgmpu > * { margin: 0px; margin-bottom: calc(0px / 2); margin-top: calc(0px / 2); } .framer-GkwH1.framer-1itxsq0 > :first-child, .framer-GkwH1 .framer-1ndgmpu > :first-child, .framer-GkwH1 .framer-7ps8qj > :first-child, .framer-GkwH1 .framer-1hgoa8b > :first-child, .framer-GkwH1 .framer-9ino1c > :first-child, .framer-GkwH1 .framer-y890q8 > :first-child, .framer-GkwH1 .framer-1h7ykz2 > :first-child, .framer-GkwH1 .framer-17e576z > :first-child, .framer-GkwH1 .framer-w0hyjz > :first-child, .framer-GkwH1 .framer-1lqdphq > :first-child, .framer-GkwH1 .framer-1vi4g7m > :first-child, .framer-GkwH1 .framer-xhra02 > :first-child { margin-top: 0px; } .framer-GkwH1.framer-1itxsq0 > :last-child, .framer-GkwH1 .framer-1ndgmpu > :last-child, .framer-GkwH1 .framer-7ps8qj > :last-child, .framer-GkwH1 .framer-1hgoa8b > :last-child, .framer-GkwH1 .framer-9ino1c > :last-child, .framer-GkwH1 .framer-y890q8 > :last-child, .framer-GkwH1 .framer-1h7ykz2 > :last-child, .framer-GkwH1 .framer-17e576z > :last-child, .framer-GkwH1 .framer-w0hyjz > :last-child, .framer-GkwH1 .framer-1lqdphq > :last-child, .framer-GkwH1 .framer-1vi4g7m > :last-child, .framer-GkwH1 .framer-xhra02 > :last-child { margin-bottom: 0px; } .framer-GkwH1 .framer-1daod3w > * { margin: 0px; margin-left: calc(4px / 2); margin-right: calc(4px / 2); } .framer-GkwH1 .framer-1daod3w > :first-child { margin-left: 0px; } .framer-GkwH1 .framer-1daod3w > :last-child { margin-right: 0px; } .framer-GkwH1 .framer-7ps8qj > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-GkwH1 .framer-1hgoa8b > *, .framer-GkwH1 .framer-9ino1c > *, .framer-GkwH1 .framer-1h7ykz2 > *, .framer-GkwH1 .framer-w0hyjz > *, .framer-GkwH1 .framer-1vi4g7m > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } .framer-GkwH1 .framer-y890q8 > *, .framer-GkwH1 .framer-17e576z > *, .framer-GkwH1 .framer-1lqdphq > *, .framer-GkwH1 .framer-xhra02 > * { margin: 0px; margin-bottom: calc(8px / 2); margin-top: calc(8px / 2); } }",
+	".framer-GkwH1.framer-v-gnbrjh.framer-1itxsq0 { height: 72px; overflow: hidden; overflow-y: auto; width: 350px; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-1ndgmpu, .framer-GkwH1.framer-v-90sr53 .framer-1ndgmpu { position: relative; top: unset; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu, .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu { gap: 10px; justify-content: flex-start; padding: 20px 8px 20px 20px; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-se4jzp-container, .framer-GkwH1.framer-v-gnbrjh .framer-1l3wpga-container, .framer-GkwH1.framer-v-gnbrjh .framer-t1dpes, .framer-GkwH1.framer-v-90sr53 .framer-se4jzp-container, .framer-GkwH1.framer-v-90sr53 .framer-yuq2fc, .framer-GkwH1.framer-v-90sr53 .framer-1jg9cih, .framer-GkwH1.framer-v-90sr53 .framer-5junn7 { order: 0; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-1daod3w, .framer-GkwH1.framer-v-90sr53 .framer-1daod3w { order: 3; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-u4hjb-container, .framer-GkwH1.framer-v-90sr53 .framer-u4hjb-container { order: 4; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-4q32db, .framer-GkwH1.framer-v-90sr53 .framer-4q32db { order: 2; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-7ps8qj { padding: 20px; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-9ino1c, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m, .framer-GkwH1.framer-v-90sr53 .framer-9ino1c, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m { gap: 16px; width: 100%; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-y890q8, .framer-GkwH1.framer-v-90sr53 .framer-17e576z, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 { gap: 12px; order: 1; padding: 0px; }",
+	".framer-GkwH1.framer-v-gnbrjh .framer-17e576z, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02, .framer-GkwH1.framer-v-90sr53 .framer-y890q8 { gap: 12px; padding: 0px; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu, .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c, .framer-GkwH1.framer-v-gnbrjh .framer-y890q8, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 { gap: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu > :first-child { margin-left: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-ly0fsu > :last-child { margin-right: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c > *, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2 > *, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz > *, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-y890q8 > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2 > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m > :first-child, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 > :first-child { margin-top: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-9ino1c > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-y890q8 > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-1h7ykz2 > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-w0hyjz > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-1vi4g7m > :last-child, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 > :last-child { margin-bottom: 0px; } .framer-GkwH1.framer-v-gnbrjh .framer-y890q8 > *, .framer-GkwH1.framer-v-gnbrjh .framer-17e576z > *, .framer-GkwH1.framer-v-gnbrjh .framer-1lqdphq > *, .framer-GkwH1.framer-v-gnbrjh .framer-xhra02 > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }",
+	".framer-GkwH1.framer-v-90sr53.framer-1itxsq0 { max-height: calc(var(--framer-viewport-height, 100vh) * 1); min-height: calc(var(--framer-viewport-height, 100vh) * 1); overflow: hidden; overflow-y: auto; width: 350px; }",
+	".framer-GkwH1.framer-v-90sr53 .framer-7ps8qj { padding: 20px 20px 120px 20px; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu, .framer-GkwH1.framer-v-90sr53 .framer-9ino1c, .framer-GkwH1.framer-v-90sr53 .framer-y890q8, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2, .framer-GkwH1.framer-v-90sr53 .framer-17e576z, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 { gap: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu > :first-child { margin-left: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-ly0fsu > :last-child { margin-right: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-9ino1c > *, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2 > *, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz > *, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-GkwH1.framer-v-90sr53 .framer-9ino1c > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-y890q8 > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2 > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-17e576z > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m > :first-child, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 > :first-child { margin-top: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-9ino1c > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-y890q8 > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-1h7ykz2 > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-17e576z > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-w0hyjz > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-1vi4g7m > :last-child, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 > :last-child { margin-bottom: 0px; } .framer-GkwH1.framer-v-90sr53 .framer-y890q8 > *, .framer-GkwH1.framer-v-90sr53 .framer-17e576z > *, .framer-GkwH1.framer-v-90sr53 .framer-1lqdphq > *, .framer-GkwH1.framer-v-90sr53 .framer-xhra02 > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }",
+	...css2,
+	...css,
+	'.framer-GkwH1[data-border="true"]::after, .framer-GkwH1 [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
+];
 var FramerMlPzuwAVd = withCSS(Component, css3, "framer-GkwH1");
 var stdin_default6 = FramerMlPzuwAVd;
 FramerMlPzuwAVd.displayName = "Docs/Navigation";
 FramerMlPzuwAVd.defaultProps = {
-  height: 910,
-  width: 250
+	height: 910,
+	width: 250,
 };
 addPropertyControls(FramerMlPzuwAVd, {
-  variant: {
-    options: ["Ua7zIMVrQ", "RZi2QXpn2", "j23OGbszH"],
-    optionTitles: ["Desktop", "Mobile", "Mobile Open"],
-    title: "Variant",
-    type: ControlType.Enum
-  }
+	variant: {
+		options: ["Ua7zIMVrQ", "RZi2QXpn2", "j23OGbszH"],
+		optionTitles: ["Desktop", "Mobile", "Mobile Open"],
+		title: "Variant",
+		type: ControlType.Enum,
+	},
 });
-addFonts(FramerMlPzuwAVd, [{
-  explicitInter: true,
-  fonts: [{
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-    url: "https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-    url: "https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+1F00-1FFF",
-    url: "https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0370-03FF",
-    url: "https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-    url: "https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-    url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
-    weight: "400"
-  }, {
-    family: "Inter",
-    source: "framer",
-    style: "normal",
-    unicodeRange: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-    url: "https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2",
-    weight: "400"
-  }]
-}, ...NavigationLogoFonts, ...NavigationSingleToggleFonts, ...NavigationIconFonts, ...DocsMenuLinkFonts, ...getFontsFromSharedStyle(fonts2), ...getFontsFromSharedStyle(fonts)], {
-  supportsExplicitInterCodegen: true
-});
+addFonts(
+	FramerMlPzuwAVd,
+	[
+		{
+			explicitInter: true,
+			fonts: [
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+					url: "https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+					url: "https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+1F00-1FFF",
+					url: "https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange: "U+0370-03FF",
+					url: "https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+					url: "https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+					url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
+					weight: "400",
+				},
+				{
+					family: "Inter",
+					source: "framer",
+					style: "normal",
+					unicodeRange:
+						"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+					url: "https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2",
+					weight: "400",
+				},
+			],
+		},
+		...NavigationLogoFonts,
+		...NavigationSingleToggleFonts,
+		...NavigationIconFonts,
+		...DocsMenuLinkFonts,
+		...getFontsFromSharedStyle(fonts2),
+		...getFontsFromSharedStyle(fonts),
+	],
+	{
+		supportsExplicitInterCodegen: true,
+	},
+);
 
 // virtual:docs/navigation
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-  "base": "RZi2QXpn2",
-  "xl": "Ua7zIMVrQ"
+	base: "RZi2QXpn2",
+	xl: "Ua7zIMVrQ",
 };
-stdin_default6.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return /* @__PURE__ */jsx(ContextProviders, {
-    routes: {
-      "I0Vjsk230": {
-        "path": "/pricing"
-      },
-      "If1LKvdh8": {
-        "path": "/blog/:slug"
-      },
-      "MYlLV6Tip": {
-        "path": "/docs"
-      },
-      "NSnQ_g8yw": {
-        "path": "/:slug"
-      },
-      "augiA20Il": {
-        "path": "/"
-      },
-      "cvVskSlKE": {
-        "path": "/sign-up"
-      },
-      "dqRVpj9Kn": {
-        "path": "/docs/:slug"
-      },
-      "iUM2Wrnwp": {
-        "path": "/contact-sales-2"
-      },
-      "j_IHQLq_9": {
-        "path": "/sign-in"
-      },
-      "lreH5keWI": {
-        "path": "/support"
-      },
-      "qNb6QfkBq": {
-        "path": "/contact-sales"
-      },
-      "so7P3QBWY": {
-        "path": "/404"
-      },
-      "tBghjsyop": {
-        "path": "/blog"
-      }
-    },
-    children: /* @__PURE__ */jsx(WithFramerBreakpoints, {
-      Component: stdin_default6,
-      variants: defaultResponsiveVariants,
-      ...rest
-    }),
-    framerSiteId: "f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-    locale,
-    locales
-  });
+stdin_default6.Responsive = ({ locale, ...rest }) => {
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{
+				<WithFramerBreakpoints
+					Component={stdin_default6}
+					variants={defaultResponsiveVariants}
+					{...rest}
+				/>
+			}
+		</ContextProviders>
+	);
 };
-function ComponentWithRoot({
-  locale,
-  ...rest
-}) {
-  return /* @__PURE__ */jsx(ContextProviders, {
-    routes: {
-      "I0Vjsk230": {
-        "path": "/pricing"
-      },
-      "If1LKvdh8": {
-        "path": "/blog/:slug"
-      },
-      "MYlLV6Tip": {
-        "path": "/docs"
-      },
-      "NSnQ_g8yw": {
-        "path": "/:slug"
-      },
-      "augiA20Il": {
-        "path": "/"
-      },
-      "cvVskSlKE": {
-        "path": "/sign-up"
-      },
-      "dqRVpj9Kn": {
-        "path": "/docs/:slug"
-      },
-      "iUM2Wrnwp": {
-        "path": "/contact-sales-2"
-      },
-      "j_IHQLq_9": {
-        "path": "/sign-in"
-      },
-      "lreH5keWI": {
-        "path": "/support"
-      },
-      "qNb6QfkBq": {
-        "path": "/contact-sales"
-      },
-      "so7P3QBWY": {
-        "path": "/404"
-      },
-      "tBghjsyop": {
-        "path": "/blog"
-      }
-    },
-    children: /* @__PURE__ */jsx(stdin_default6, {
-      ...rest
-    }),
-    framerSiteId: "f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-    locale,
-    locales
-  });
+function ComponentWithRoot({ locale, ...rest }) {
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default6, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default6);
 export { ComponentWithRoot as default };

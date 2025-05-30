@@ -133,127 +133,143 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
-					<motion.div
-						{...restProps}
-						{...gestureHandlers}
-						className={cx(
-							serializationHash,
-							...sharedStyleClassNames,
-							"framer-13bqdc3",
-							className2,
-							classNames,
-						)}
-						data-framer-name={"Variant 1"}
-						layoutDependency={layoutDependency}
-						layoutId={"HgnGA8QKl"}
-						ref={ref !== null && ref !== void 0 ? ref : ref1}
-						style={{
-							backgroundColor:
-								"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-							borderBottomLeftRadius: 99,
-							borderBottomRightRadius: 99,
-							borderTopLeftRadius: 99,
-							borderTopRightRadius: 99,
-							...style,
-						}}
-						variants={{
-							JIihADejD: {
-								backgroundColor:
-									"var(--token-98bc5b6f-7a2c-4386-9864-434ca3560bb1, rgb(254, 102, 57))",
-							},
-							unFUZQtMb: {
-								backgroundColor:
-									"var(--token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d, rgb(252, 62, 19))",
-							},
-						}}
-						{...addPropertyOverrides(
+			{
+				<Variants animate={variants} initial={false}>
+					{
+						<Transition value={transition1}>
 							{
-								JIihADejD: {
-									"data-framer-name": "Variant 2",
-								},
-								unFUZQtMb: {
-									"data-framer-name": "Variant 3",
-								},
-							},
-							baseVariant,
-							gestureVariant,
-						)}
-					>
-						<RichText
-							__fromCanvasComponent={true}
-							className={"framer-i9gova"}
-							fonts={["Inter"]}
-							layoutDependency={layoutDependency}
-							layoutId={"gHBqvdFgM"}
-							style={{
-								"--framer-link-text-color": "rgb(0, 153, 255)",
-								"--framer-link-text-decoration": "underline",
-							}}
-							text={uTXaAf4vS}
-							variants={{
-								JIihADejD: {
-									"--extracted-r6o4lv": "rgb(255, 255, 255)",
-								},
-								unFUZQtMb: {
-									"--extracted-r6o4lv":
-										"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
-								},
-							}}
-							verticalAlignment={"top"}
-							withExternalLayout={true}
-							{...addPropertyOverrides(
-								{
-									JIihADejD: {
-										children: (
-											<React.Fragment>
-												<motion.p
-													className={"framer-styles-preset-1aj6jmn"}
-													data-styles-preset={"TeHXylmO7"}
-													style={{
-														"--framer-text-color":
-															"var(--extracted-r6o4lv, rgb(255, 255, 255))",
-													}}
-												>
-													{"Markdown Editor"}
-												</motion.p>
-											</React.Fragment>
-										),
-									},
-									unFUZQtMb: {
-										children: (
-											<React.Fragment>
-												<motion.p
-													className={"framer-styles-preset-1aj6jmn"}
-													data-styles-preset={"TeHXylmO7"}
-													style={{
-														"--framer-text-color":
-															"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
-													}}
-												>
-													{"Markdown Editor"}
-												</motion.p>
-											</React.Fragment>
-										),
-									},
-								},
-								baseVariant,
-								gestureVariant,
-							)}
-						>
-							<React.Fragment>
-								<motion.p
-									className={"framer-styles-preset-1aj6jmn"}
-									data-styles-preset={"TeHXylmO7"}
+								<motion.div
+									{...restProps}
+									{...gestureHandlers}
+									className={cx(
+										serializationHash,
+										...sharedStyleClassNames,
+										"framer-13bqdc3",
+										className2,
+										classNames,
+									)}
+									data-framer-name={"Variant 1"}
+									layoutDependency={layoutDependency}
+									layoutId={"HgnGA8QKl"}
+									ref={ref !== null && ref !== void 0 ? ref : ref1}
+									style={{
+										backgroundColor:
+											"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+										borderBottomLeftRadius: 99,
+										borderBottomRightRadius: 99,
+										borderTopLeftRadius: 99,
+										borderTopRightRadius: 99,
+										...style,
+									}}
+									variants={{
+										JIihADejD: {
+											backgroundColor:
+												"var(--token-98bc5b6f-7a2c-4386-9864-434ca3560bb1, rgb(254, 102, 57))",
+										},
+										unFUZQtMb: {
+											backgroundColor:
+												"var(--token-816b9f7c-e26f-4679-8e8e-d7b2281f3c6d, rgb(252, 62, 19))",
+										},
+									}}
+									{...addPropertyOverrides(
+										{
+											JIihADejD: {
+												"data-framer-name": "Variant 2",
+											},
+											unFUZQtMb: {
+												"data-framer-name": "Variant 3",
+											},
+										},
+										baseVariant,
+										gestureVariant,
+									)}
 								>
-									{"Markdown Editor"}
-								</motion.p>
-							</React.Fragment>
-						</RichText>
-					</motion.div>
-				</Transition>
-			</Variants>
+									{
+										<RichText
+											__fromCanvasComponent={true}
+											className={"framer-i9gova"}
+											fonts={["Inter"]}
+											layoutDependency={layoutDependency}
+											layoutId={"gHBqvdFgM"}
+											style={{
+												"--framer-link-text-color": "rgb(0, 153, 255)",
+												"--framer-link-text-decoration": "underline",
+											}}
+											text={uTXaAf4vS}
+											variants={{
+												JIihADejD: {
+													"--extracted-r6o4lv": "rgb(255, 255, 255)",
+												},
+												unFUZQtMb: {
+													"--extracted-r6o4lv":
+														"var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255))",
+												},
+											}}
+											verticalAlignment={"top"}
+											withExternalLayout={true}
+											{...addPropertyOverrides(
+												{
+													JIihADejD: {
+														children: (
+															<React.Fragment>
+																{
+																	<motion.p
+																		className={"framer-styles-preset-1aj6jmn"}
+																		data-styles-preset={"TeHXylmO7"}
+																		style={{
+																			"--framer-text-color":
+																				"var(--extracted-r6o4lv, rgb(255, 255, 255))",
+																		}}
+																	>
+																		{"Markdown Editor"}
+																	</motion.p>
+																}
+															</React.Fragment>
+														),
+													},
+													unFUZQtMb: {
+														children: (
+															<React.Fragment>
+																{
+																	<motion.p
+																		className={"framer-styles-preset-1aj6jmn"}
+																		data-styles-preset={"TeHXylmO7"}
+																		style={{
+																			"--framer-text-color":
+																				"var(--extracted-r6o4lv, var(--token-f1edbbf0-4dde-4043-88fc-e447b2e4f208, rgb(255, 255, 255)))",
+																		}}
+																	>
+																		{"Markdown Editor"}
+																	</motion.p>
+																}
+															</React.Fragment>
+														),
+													},
+												},
+												baseVariant,
+												gestureVariant,
+											)}
+										>
+											{
+												<React.Fragment>
+													{
+														<motion.p
+															className={"framer-styles-preset-1aj6jmn"}
+															data-styles-preset={"TeHXylmO7"}
+														>
+															{"Markdown Editor"}
+														</motion.p>
+													}
+												</React.Fragment>
+											}
+										</RichText>
+									}
+								</motion.div>
+							}
+						</Transition>
+					}
+				</Variants>
+			}
 		</LayoutGroup>
 	);
 });
@@ -370,110 +386,120 @@ var defaultResponsiveVariants = {
 	base: "HgnGA8QKl",
 };
 stdin_default.Responsive = ({ locale, ...rest }) => {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(WithFramerBreakpoints, {
-			Component: stdin_default,
-			variants: defaultResponsiveVariants,
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{
+				<WithFramerBreakpoints
+					Component={stdin_default}
+					variants={defaultResponsiveVariants}
+					{...rest}
+				/>
+			}
+		</ContextProviders>
+	);
 };
 function ComponentWithRoot({ locale, ...rest }) {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(stdin_default, {
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default);
 export { ComponentWithRoot as default };

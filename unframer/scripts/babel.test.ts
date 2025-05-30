@@ -148,10 +148,12 @@ describe('babelPluginJsxTransform', () => {
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
           const element = (
             <div className={'container'}>
-              <span style={{ color: 'red', }}>
-                <strong>{'Hello'}</strong>
-                {' world'}
-              </span>
+              {
+                <span style={{ color: 'red', }}>
+                  {<strong>{'Hello'}</strong>}
+                  {' world'}
+                </span>
+              }
             </div>
           );
           "
@@ -279,24 +281,104 @@ describe('babelPluginJsxTransform', () => {
                 [babelPluginJsxTransform()],
             ),
         ).toMatchInlineSnapshot(`
-              "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
-              const element = (
-                <Modal
-                  content={
-                    <div className={'modal-content'}>
-                      <p>{'This is modal content'}</p>
-                    </div>
-                  }
-                  footer={
-                    <div className={'modal-footer'}>
-                      <button>{'Cancel'}</button>
-                      <button>{'OK'}</button>
-                    </div>
-                  }
-                />
-              );
-              "
-            `)
+          "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+          const element = (
+            <Modal
+              content={
+                <div className={'modal-content'}>{<p>{'This is modal content'}</p>}</div>
+              }
+              footer={
+                <div className={'modal-footer'}>
+                  {<button>{'Cancel'}</button>}
+                  {<button>{'OK'}</button>}
+                </div>
+              }
+            />
+          );
+          "
+        `)
+    })
+    test('handles non-capitalized function as jsx component and attribute', () => {
+        expect(
+            trans(
+                dedent`
+                        import { jsx as _jsx } from 'react/jsx-runtime';
+
+                        const element = _jsx(ValidComponent, {
+                            onClick: anotherFunction,
+                            children: _jsx(someFunction, {
+                                onClick: anotherFunction,
+                                children: _jsx("button", {
+                                    children: "Click me"
+                                })
+                            })
+                        });
+                        `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const element = (
+            <ValidComponent onClick={anotherFunction}>
+              {_jsx(someFunction, {
+                onClick: anotherFunction,
+                children: <button>{'Click me'}</button>,
+              },)}
+            </ValidComponent>
+          );
+          "
+        `)
+    })
+
+    test('handles array of jsx elements and other non jsx passed as prop', () => {
+        expect(
+            trans(
+                dedent`
+                    import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+
+                    const element = _jsx(Container, {
+                        items: [
+                            "Just a string",
+                            42,
+                            _jsx("div", {
+                                children: "First element"
+                            }),
+                            null,
+                            _jsx("span", {
+                                className: "highlight",
+                                children: "Second element"
+                            }),
+                            undefined,
+                            _jsxs("p", {
+                                children: [
+                                    "Complex ",
+                                    _jsx("strong", {
+                                        children: "element"
+                                    })
+                                ]
+                            })
+                        ]
+                    });
+                    `,
+                [babelPluginJsxTransform()],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+          const element = (
+            <Container
+              items={[
+                'Just a string',
+                42,
+                <div>{'First element'}</div>,
+                null,
+                <span className={'highlight'}>{'Second element'}</span>,
+                undefined,
+                <p>{'Complex '}{<strong>{'element'}</strong>}</p>,
+              ]}
+            />
+          );
+          "
+        `)
     })
 })
 

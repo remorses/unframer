@@ -284,6 +284,29 @@ const noContainerTypes = new Set([
 
 export function babelPluginJsxTransform() {
     const jsxFunctions = new Set<string>()
+    function isJsxCalleeValidName(prop) {
+        if (
+            prop.value?.type !== 'CallExpression' ||
+            !jsxFunctions.has(prop.value.callee?.name)
+        ) {
+            return
+        }
+
+        // Get the first argument name if it's a variable
+        if (!prop.value.arguments || prop.value.arguments.length === 0) {
+            return
+        }
+
+        const firstArg = prop.value.arguments[0]
+
+        if (firstArg.type !== 'Identifier') {
+            return
+        }
+
+        if (canRenderAsJsx(firstArg.name)) {
+            return true
+        }
+    }
 
     return {
         name: 'jsx-transform',
@@ -410,6 +433,7 @@ export function babelPluginJsxTransform() {
                                 argument: prop.argument,
                             })
                         } else if (prop.key?.name === 'children') {
+                            console.log(prop)
                             if (prop.value.type === 'ArrayExpression') {
                                 jsxElement.children = prop.value.elements.map(
                                     (element) => {
@@ -417,11 +441,7 @@ export function babelPluginJsxTransform() {
                                             noContainerTypes.has(
                                                 element.type,
                                             ) ||
-                                            (element.type ===
-                                                'CallExpression' &&
-                                                element.callee?.name?.startsWith(
-                                                    '_jsx',
-                                                ))
+                                            isJsxCalleeValidName(element)
                                         ) {
                                             return element
                                         }
@@ -432,12 +452,10 @@ export function babelPluginJsxTransform() {
                                     },
                                 )
                             } else {
-                                if (
-                                    noContainerTypes.has(prop.value.type) ||
-                                    (prop.value.type === 'CallExpression' &&
-                                        prop.value.callee?.name?.startsWith(
-                                            '_jsx',
-                                        ))
+                                if (isJsxCalleeValidName(prop)) {
+                                    jsxElement.children = [prop.value]
+                                } else if (
+                                    noContainerTypes.has(prop.value.type)
                                 ) {
                                     jsxElement.children = [prop.value]
                                 } else {

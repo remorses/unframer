@@ -196,205 +196,247 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		<LayoutGroup
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
-					<Link href={Lzm9iQLvn} nodeId={"lmPHjoU0y"}>
-						<motion.a
-							{...restProps}
-							{...gestureHandlers}
-							className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-1ne6iib", className4, classNames)} framer-njkgze`}
-							data-border={true}
-							data-framer-name={"Variant 1"}
-							layoutDependency={layoutDependency}
-							layoutId={"lmPHjoU0y"}
-							ref={ref !== null && ref !== void 0 ? ref : ref1}
-							style={{
-								"--border-bottom-width": "1px",
-								"--border-color":
-									"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-								"--border-left-width": "1px",
-								"--border-right-width": "1px",
-								"--border-style": "dotted",
-								"--border-top-width": "1px",
-								...style,
-							}}
-							variants={{
-								"lmPHjoU0y-hover": {
-									"--border-color":
-										"var(--token-4a18edb7-e149-464f-8c02-aa015661ab43, rgb(255, 160, 122))",
-								},
-							}}
-							{...addPropertyOverrides(
-								{
-									"lmPHjoU0y-hover": {
-										"data-framer-name": void 0,
-									},
-								},
-								baseVariant,
-								gestureVariant,
-							)}
-						>
-							<motion.div
-								className={"framer-169u9pa"}
-								layoutDependency={layoutDependency}
-								layoutId={"rOKdLgngr"}
-							>
-								<Image
-									background={{
-										alt: "",
-										fit: "fill",
-										loading: getLoadingLazyAtYPosition(
-											((componentViewport === null ||
-											componentViewport === void 0
-												? void 0
-												: componentViewport.y) || 0) +
-												0 +
-												0 +
-												0,
-										),
-										pixelHeight: 2656,
-										pixelWidth: 3984,
-										sizes:
-											(componentViewport === null ||
-											componentViewport === void 0
-												? void 0
-												: componentViewport.width) || "100vw",
-										...toResponsiveImage(ccSVqR0N7),
-									}}
-									className={"framer-m86a3e"}
-									layoutDependency={layoutDependency}
-									layoutId={"YBv_yXuH3"}
-									{...addPropertyOverrides(
-										{
-											"lmPHjoU0y-hover": {
-												background: {
-													alt: "",
-													fit: "fill",
-													loading: getLoadingLazyAtYPosition(
-														((componentViewport === null ||
-														componentViewport === void 0
-															? void 0
-															: componentViewport.y) || 0) +
-															0 +
-															0 +
-															-8,
-													),
-													pixelHeight: 2656,
-													pixelWidth: 3984,
-													sizes: `calc(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} + 16px)`,
-													...toResponsiveImage(ccSVqR0N7),
-												},
-											},
-										},
-										baseVariant,
-										gestureVariant,
-									)}
-								/>
-							</motion.div>
-							<motion.div
-								className={"framer-il5aw8"}
-								data-border={true}
-								layoutDependency={layoutDependency}
-								layoutId={"DakVN7nE5"}
-								style={{
-									"--border-bottom-width": "0px",
-									"--border-color":
-										"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
-									"--border-left-width": "0px",
-									"--border-right-width": "0px",
-									"--border-style": "dotted",
-									"--border-top-width": "1px",
-								}}
-							>
-								<motion.div
-									className={"framer-ks1xkh"}
-									layoutDependency={layoutDependency}
-									layoutId={"T3JvFK2ji"}
-								>
-									<RichText
-										__fromCanvasComponent={true}
-										className={"framer-klc264"}
-										data-highlight={true}
-										fonts={["Inter"]}
-										layoutDependency={layoutDependency}
-										layoutId={"Hj4i_tXrx"}
-										onTap={onTap15fmku8}
-										style={{
-											"--framer-link-text-color": "rgb(0, 153, 255)",
-											"--framer-link-text-decoration": "underline",
-										}}
-										text={K_G_RvC9u}
-										verticalAlignment={"top"}
-										withExternalLayout={true}
-									>
-										<React.Fragment>
-											<motion.p
-												className={"framer-styles-preset-1o7aipf"}
-												data-styles-preset={"x1n9RoGI8"}
-											>
-												{"Holocron is now in alpha"}
-											</motion.p>
-										</React.Fragment>
-									</RichText>
-									<RichText
-										__fromCanvasComponent={true}
-										className={"framer-12jhylw"}
-										fonts={["Inter"]}
-										layoutDependency={layoutDependency}
-										layoutId={"qapkBQIZd"}
-										style={{
-											"--framer-link-text-color": "rgb(0, 153, 255)",
-											"--framer-link-text-decoration": "underline",
-											opacity: 0.9,
-										}}
-										text={OHaD85dYv}
-										verticalAlignment={"top"}
-										withExternalLayout={true}
-									>
-										<React.Fragment>
-											<motion.p
-												className={"framer-styles-preset-1aj6jmn"}
-												data-styles-preset={"TeHXylmO7"}
-											>
-												{
-													"News about our latest development and upcoming features"
-												}
-											</motion.p>
-										</React.Fragment>
-									</RichText>
-								</motion.div>
-								<RichText
-									__fromCanvasComponent={true}
-									className={"framer-1lm5x7i"}
-									fonts={["Inter"]}
-									layoutDependency={layoutDependency}
-									layoutId={"AOqVZ0D69"}
-									style={{
-										"--framer-link-text-color": "rgb(0, 153, 255)",
-										"--framer-link-text-decoration": "underline",
-										opacity: 0.8,
-									}}
-									text={Vaoq_Msyt}
-									verticalAlignment={"top"}
-									withExternalLayout={true}
-								>
-									<React.Fragment>
-										<motion.p
-											className={"framer-styles-preset-1dbggqt"}
-											data-styles-preset={"gj4zreqLr"}
+			{
+				<Variants animate={variants} initial={false}>
+					{
+						<Transition value={transition1}>
+							{
+								<Link href={Lzm9iQLvn} nodeId={"lmPHjoU0y"}>
+									{
+										<motion.a
+											{...restProps}
+											{...gestureHandlers}
+											className={`${cx(serializationHash, ...sharedStyleClassNames, "framer-1ne6iib", className4, classNames)} framer-njkgze`}
+											data-border={true}
+											data-framer-name={"Variant 1"}
+											layoutDependency={layoutDependency}
+											layoutId={"lmPHjoU0y"}
+											ref={ref !== null && ref !== void 0 ? ref : ref1}
 											style={{
-												"--framer-text-alignment": "left",
+												"--border-bottom-width": "1px",
+												"--border-color":
+													"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+												"--border-left-width": "1px",
+												"--border-right-width": "1px",
+												"--border-style": "dotted",
+												"--border-top-width": "1px",
+												...style,
 											}}
+											variants={{
+												"lmPHjoU0y-hover": {
+													"--border-color":
+														"var(--token-4a18edb7-e149-464f-8c02-aa015661ab43, rgb(255, 160, 122))",
+												},
+											}}
+											{...addPropertyOverrides(
+												{
+													"lmPHjoU0y-hover": {
+														"data-framer-name": void 0,
+													},
+												},
+												baseVariant,
+												gestureVariant,
+											)}
 										>
-											{"June 2024"}
-										</motion.p>
-									</React.Fragment>
-								</RichText>
-							</motion.div>
-						</motion.a>
-					</Link>
-				</Transition>
-			</Variants>
+											{
+												<motion.div
+													className={"framer-169u9pa"}
+													layoutDependency={layoutDependency}
+													layoutId={"rOKdLgngr"}
+												>
+													{
+														<Image
+															background={{
+																alt: "",
+																fit: "fill",
+																loading: getLoadingLazyAtYPosition(
+																	((componentViewport === null ||
+																	componentViewport === void 0
+																		? void 0
+																		: componentViewport.y) || 0) +
+																		0 +
+																		0 +
+																		0,
+																),
+																pixelHeight: 2656,
+																pixelWidth: 3984,
+																sizes:
+																	(componentViewport === null ||
+																	componentViewport === void 0
+																		? void 0
+																		: componentViewport.width) || "100vw",
+																...toResponsiveImage(ccSVqR0N7),
+															}}
+															className={"framer-m86a3e"}
+															layoutDependency={layoutDependency}
+															layoutId={"YBv_yXuH3"}
+															{...addPropertyOverrides(
+																{
+																	"lmPHjoU0y-hover": {
+																		background: {
+																			alt: "",
+																			fit: "fill",
+																			loading: getLoadingLazyAtYPosition(
+																				((componentViewport === null ||
+																				componentViewport === void 0
+																					? void 0
+																					: componentViewport.y) || 0) +
+																					0 +
+																					0 +
+																					-8,
+																			),
+																			pixelHeight: 2656,
+																			pixelWidth: 3984,
+																			sizes: `calc(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} + 16px)`,
+																			...toResponsiveImage(ccSVqR0N7),
+																		},
+																	},
+																},
+																baseVariant,
+																gestureVariant,
+															)}
+														/>
+													}
+												</motion.div>
+											}
+											{
+												<motion.div
+													className={"framer-il5aw8"}
+													data-border={true}
+													layoutDependency={layoutDependency}
+													layoutId={"DakVN7nE5"}
+													style={{
+														"--border-bottom-width": "0px",
+														"--border-color":
+															"var(--token-1691cb44-c002-4542-9545-8a0801f91af2, rgb(231, 231, 231))",
+														"--border-left-width": "0px",
+														"--border-right-width": "0px",
+														"--border-style": "dotted",
+														"--border-top-width": "1px",
+													}}
+												>
+													{
+														<motion.div
+															className={"framer-ks1xkh"}
+															layoutDependency={layoutDependency}
+															layoutId={"T3JvFK2ji"}
+														>
+															{
+																<RichText
+																	__fromCanvasComponent={true}
+																	className={"framer-klc264"}
+																	data-highlight={true}
+																	fonts={["Inter"]}
+																	layoutDependency={layoutDependency}
+																	layoutId={"Hj4i_tXrx"}
+																	onTap={onTap15fmku8}
+																	style={{
+																		"--framer-link-text-color":
+																			"rgb(0, 153, 255)",
+																		"--framer-link-text-decoration":
+																			"underline",
+																	}}
+																	text={K_G_RvC9u}
+																	verticalAlignment={"top"}
+																	withExternalLayout={true}
+																>
+																	{
+																		<React.Fragment>
+																			{
+																				<motion.p
+																					className={
+																						"framer-styles-preset-1o7aipf"
+																					}
+																					data-styles-preset={"x1n9RoGI8"}
+																				>
+																					{"Holocron is now in alpha"}
+																				</motion.p>
+																			}
+																		</React.Fragment>
+																	}
+																</RichText>
+															}
+															{
+																<RichText
+																	__fromCanvasComponent={true}
+																	className={"framer-12jhylw"}
+																	fonts={["Inter"]}
+																	layoutDependency={layoutDependency}
+																	layoutId={"qapkBQIZd"}
+																	style={{
+																		"--framer-link-text-color":
+																			"rgb(0, 153, 255)",
+																		"--framer-link-text-decoration":
+																			"underline",
+																		opacity: 0.9,
+																	}}
+																	text={OHaD85dYv}
+																	verticalAlignment={"top"}
+																	withExternalLayout={true}
+																>
+																	{
+																		<React.Fragment>
+																			{
+																				<motion.p
+																					className={
+																						"framer-styles-preset-1aj6jmn"
+																					}
+																					data-styles-preset={"TeHXylmO7"}
+																				>
+																					{
+																						"News about our latest development and upcoming features"
+																					}
+																				</motion.p>
+																			}
+																		</React.Fragment>
+																	}
+																</RichText>
+															}
+														</motion.div>
+													}
+													{
+														<RichText
+															__fromCanvasComponent={true}
+															className={"framer-1lm5x7i"}
+															fonts={["Inter"]}
+															layoutDependency={layoutDependency}
+															layoutId={"AOqVZ0D69"}
+															style={{
+																"--framer-link-text-color": "rgb(0, 153, 255)",
+																"--framer-link-text-decoration": "underline",
+																opacity: 0.8,
+															}}
+															text={Vaoq_Msyt}
+															verticalAlignment={"top"}
+															withExternalLayout={true}
+														>
+															{
+																<React.Fragment>
+																	{
+																		<motion.p
+																			className={"framer-styles-preset-1dbggqt"}
+																			data-styles-preset={"gj4zreqLr"}
+																			style={{
+																				"--framer-text-alignment": "left",
+																			}}
+																		>
+																			{"June 2024"}
+																		</motion.p>
+																	}
+																</React.Fragment>
+															}
+														</RichText>
+													}
+												</motion.div>
+											}
+										</motion.a>
+									}
+								</Link>
+							}
+						</Transition>
+					}
+				</Variants>
+			}
 		</LayoutGroup>
 	);
 });
@@ -540,110 +582,120 @@ import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {};
 stdin_default.Responsive = ({ locale, ...rest }) => {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(WithFramerBreakpoints, {
-			Component: stdin_default,
-			variants: defaultResponsiveVariants,
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{
+				<WithFramerBreakpoints
+					Component={stdin_default}
+					variants={defaultResponsiveVariants}
+					{...rest}
+				/>
+			}
+		</ContextProviders>
+	);
 };
 function ComponentWithRoot({ locale, ...rest }) {
-	return /* @__PURE__ */ jsx(ContextProviders, {
-		routes: {
-			I0Vjsk230: {
-				path: "/pricing",
-			},
-			If1LKvdh8: {
-				path: "/blog/:slug",
-			},
-			MYlLV6Tip: {
-				path: "/docs",
-			},
-			NSnQ_g8yw: {
-				path: "/:slug",
-			},
-			augiA20Il: {
-				path: "/",
-			},
-			cvVskSlKE: {
-				path: "/sign-up",
-			},
-			dqRVpj9Kn: {
-				path: "/docs/:slug",
-			},
-			iUM2Wrnwp: {
-				path: "/contact-sales-2",
-			},
-			j_IHQLq_9: {
-				path: "/sign-in",
-			},
-			lreH5keWI: {
-				path: "/support",
-			},
-			qNb6QfkBq: {
-				path: "/contact-sales",
-			},
-			so7P3QBWY: {
-				path: "/404",
-			},
-			tBghjsyop: {
-				path: "/blog",
-			},
-		},
-		children: /* @__PURE__ */ jsx(stdin_default, {
-			...rest,
-		}),
-		framerSiteId:
-			"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405",
-		locale,
-		locales,
-	});
+	return (
+		<ContextProviders
+			routes={{
+				I0Vjsk230: {
+					path: "/pricing",
+				},
+				If1LKvdh8: {
+					path: "/blog/:slug",
+				},
+				MYlLV6Tip: {
+					path: "/docs",
+				},
+				NSnQ_g8yw: {
+					path: "/:slug",
+				},
+				augiA20Il: {
+					path: "/",
+				},
+				cvVskSlKE: {
+					path: "/sign-up",
+				},
+				dqRVpj9Kn: {
+					path: "/docs/:slug",
+				},
+				iUM2Wrnwp: {
+					path: "/contact-sales-2",
+				},
+				j_IHQLq_9: {
+					path: "/sign-in",
+				},
+				lreH5keWI: {
+					path: "/support",
+				},
+				qNb6QfkBq: {
+					path: "/contact-sales",
+				},
+				so7P3QBWY: {
+					path: "/404",
+				},
+				tBghjsyop: {
+					path: "/blog",
+				},
+			}}
+			framerSiteId={
+				"f667fc580d8d9346cf49d633d75940b95292fa43c24dd7765c9a175ec73f7405"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			{jsx(stdin_default, {
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 Object.assign(ComponentWithRoot, stdin_default);
 export { ComponentWithRoot as default };
