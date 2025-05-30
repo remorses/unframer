@@ -37,16 +37,16 @@ importers:
     dependencies:
       '@astrojs/react':
         specifier: ^4.2.3
-        version: 4.2.3(@types/node@22.15.21)(@types/react-dom@19.1.2(@types/react@19.1.1))(@types/react@19.1.1)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)
+        version: 4.2.3(@types/node@22.15.21)(@types/react-dom@19.1.2(@types/react@19.1.3))(@types/react@19.1.3)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)
       '@astrojs/tailwind':
         specifier: ^5.1.5
         version: 5.1.5(astro@5.1.10(@types/node@22.15.21)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1))(tailwindcss@3.4.17)
       '@types/react':
         specifier: ^19.1.1
-        version: 19.1.1
+        version: 19.1.3
       '@types/react-dom':
         specifier: ^19.1.2
-        version: 19.1.2(@types/react@19.1.1)
+        version: 19.1.2(@types/react@19.1.3)
       astro:
         specifier: ^5.1.10
         version: 5.1.10(@types/node@22.15.21)(jiti@1.21.7)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.2)(typescript@5.8.3)(yaml@2.5.1)
@@ -109,7 +109,7 @@ importers:
     dependencies:
       '@builder.io/react-hydration-overlay':
         specifier: ^0.3.0
-        version: 0.3.0(@spotlightjs/spotlight@2.3.2)(@types/react@19.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(webpack@5.94.0(esbuild@0.17.6))
+        version: 0.3.0(@spotlightjs/spotlight@2.3.2)(@types/react@19.1.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(webpack@5.94.0(esbuild@0.17.6))
       '@remix-run/node':
         specifier: ^2.15.2
         version: 2.15.2(typescript@5.8.3)
@@ -140,10 +140,10 @@ importers:
         version: 2.15.2(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3))(@remix-run/serve@2.15.2(typescript@5.8.3))(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))
       '@types/react':
         specifier: ^19.1.1
-        version: 19.1.1
+        version: 19.1.3
       '@types/react-dom':
         specifier: ^19.1.2
-        version: 19.1.2(@types/react@19.1.1)
+        version: 19.1.2(@types/react@19.1.3)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.5.1)
@@ -162,6 +162,15 @@ importers:
 
   unframer:
     dependencies:
+      '@biomejs/js-api':
+        specifier: ^0.7.1
+        version: 0.7.1(@biomejs/wasm-nodejs@1.9.4)
+      '@biomejs/wasm-nodejs':
+        specifier: ^1.9.4
+        version: 1.9.4
+      '@putout/printer':
+        specifier: ^14.8.0
+        version: 14.8.0
       '@sentry/node':
         specifier: ^9.22.0
         version: 9.22.0
@@ -596,6 +605,23 @@ packages:
   '@bcoe/v8-coverage@1.0.2':
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
+
+  '@biomejs/js-api@0.7.1':
+    resolution: {integrity: sha512-VFdgFFZWcyCQxZcAasyv8Enpexn4CblMdWmr6izLYHTLcbd+z9x/LuKU71qnmClABfnYqZjiY7c8DKTVri3Ajw==}
+    peerDependencies:
+      '@biomejs/wasm-bundler': ^1.9.2
+      '@biomejs/wasm-nodejs': ^1.9.2
+      '@biomejs/wasm-web': ^1.9.2
+    peerDependenciesMeta:
+      '@biomejs/wasm-bundler':
+        optional: true
+      '@biomejs/wasm-nodejs':
+        optional: true
+      '@biomejs/wasm-web':
+        optional: true
+
+  '@biomejs/wasm-nodejs@1.9.4':
+    resolution: {integrity: sha512-ZqNlhKcZW6MW1LxWIOfh9YVrBykvzyFad3bOh6JJFraDnNa3NXboRDiaI8dmrbb0ZHXCU1Tsq6WQsKV2Vpp5dw==}
 
   '@builder.io/react-hydration-overlay@0.3.0':
     resolution: {integrity: sha512-o8CPDcGoWS5NkND8xQGvHmz/mixslQzNu0yxWD+xVM8AJpr2gW3pg6Q2LeSt5wLLswJg0e3hT8E0kyqDSVNrjg==}
@@ -2073,6 +2099,30 @@ packages:
     peerDependencies:
       '@opentelemetry/api': ^1.8
 
+  '@putout/babel@3.2.0':
+    resolution: {integrity: sha512-05ZVVKdT4cRgAKitceZb33h3RPEukXcrLba60rn4j36HA788YAgYWeieXs3j+uju4k/bMxswTVVL7mOTLwT9pQ==}
+    engines: {node: '>=18'}
+
+  '@putout/compare@17.2.1':
+    resolution: {integrity: sha512-aCCJSq3QpQtckeMp1UpugWfoNan+PGN6KiyDjJtRxVgATBOIhnW36ZlJEt5kKiIvLYQKkhDcpyZWNgQpME1EUw==}
+    engines: {node: '>=20'}
+
+  '@putout/engine-parser@13.1.0':
+    resolution: {integrity: sha512-2+Yri5qJASchzeSyUkguJnB7jZJWWMlmSNZzsXeyeGludg0onAdacyqHpjanddVk/23Ogc3w1bpAhhme630LYg==}
+    engines: {node: '>=20'}
+
+  '@putout/operate@13.5.0':
+    resolution: {integrity: sha512-chPBFIsUsJpQDsI3pGbIIqsCH63ntq2WwOO2xetxz4G+5zAw58X3k4J6Zq9jNPT6Cz+RFQpwqi0vE7fJ3vEkkg==}
+    engines: {node: '>=18'}
+
+  '@putout/operator-json@2.2.0':
+    resolution: {integrity: sha512-yPY+Cc9FzUXfYzlhR+qhyu/KdD3qd5NwQnjGZfgJxYAPvZAFSgBYEQ8LRXZ1/8vLAGDc3Lytu3zL5TU7xJS9bA==}
+    engines: {node: '>=18'}
+
+  '@putout/printer@14.8.0':
+    resolution: {integrity: sha512-JbnHSCUcZGdCd2rs50tPYEB4zntd1xlO2s8EpP+dJnoDxR7JfTRjqBGFja2OT9lmzxJlrQk5X41G0NeR5VHw9A==}
+    engines: {node: '>=20'}
+
   '@remix-run/dev@2.15.2':
     resolution: {integrity: sha512-o8lix8t4GBhtXjo/G1IzwtHVW5GRMs7amtFtBHiR1bhSyK7VyX5qGtTDmJyny5QDv83pxaLOCiE0dUng2BCoyQ==}
     engines: {node: '>=18.0.0'}
@@ -2630,9 +2680,6 @@ packages:
   '@types/react@19.0.10':
     resolution: {integrity: sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==}
 
-  '@types/react@19.1.1':
-    resolution: {integrity: sha512-ePapxDL7qrgqSF67s0h9m412d9DbXyC1n59O2st+9rjuuamWsZuD2w55rqY12CbzsZ7uVXb5Nw0gEp9Z8MMutQ==}
-
   '@types/react@19.1.3':
     resolution: {integrity: sha512-dLWQ+Z0CkIvK1J8+wrDPwGxEYFA4RAyHoZPxHVGspYmFVnwGSNT24cGIhFJrtfRnWVuW8X7NO52gCXmhkVUWGQ==}
 
@@ -2828,6 +2875,11 @@ packages:
 
   ajv@8.17.1:
     resolution: {integrity: sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g==}
+
+  align-spaces@2.0.0:
+    resolution: {integrity: sha512-X6gR58NCT6MeoAVbe14SsDySGGGcxyze8rE6s/tJNcOCezeEeQXTV6U89JHjyLDvlfZuB7XATIxrFAWjRBFAVg==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -3627,6 +3679,10 @@ packages:
     resolution: {integrity: sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==}
     engines: {node: '>=4.0'}
 
+  estree-to-babel@11.0.3:
+    resolution: {integrity: sha512-rCmCdePX4KuspyeDU1lyMOJx6DYQ+WzgG3UTpEPg0ZtvDkMu+i4B1ihtrN4FTdpcCKPn8ajKx+YXMwzTLk3Lrw==}
+    engines: {node: '>=20'}
+
   estree-util-attach-comments@2.1.1:
     resolution: {integrity: sha512-+5Ba/xGGS6mnwFbXIuQiDPTbuTxuMCooq3arVv7gPZtYpjp+VXH/NkHAP35OOefPhNG/UGqU3vt/LTABwcHX0w==}
 
@@ -3866,6 +3922,10 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  fullstore@3.0.0:
+    resolution: {integrity: sha512-EEIdG+HWpyygWRwSLIZy+x4u0xtghjHNfhQb0mI5825Mmjq6oFESFUY0hoZigEgd3KH8GX+ZOCK9wgmOiS7VBQ==}
+    engines: {node: '>=4'}
 
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
@@ -4271,6 +4331,10 @@ packages:
   javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
 
+  jessy@4.1.0:
+    resolution: {integrity: sha512-fcq7gQpQs/7EKl3r+titWyizLkYGhO+PtWYnZG5aVVVSnnJb+bQyXQi8JF4/PZygbxVISFC5Xzw72LbNrVNj7Q==}
+    engines: {node: '>=18'}
+
   jest-worker@27.5.1:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
@@ -4336,6 +4400,9 @@ packages:
 
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
+
+  just-snake-case@3.2.0:
+    resolution: {integrity: sha512-iugHP9bSE0jOq3BzN0W0rdu/OOkFirPe8FtUw6v9y37UlbUDgJ1x4xiGNfUhI6mV9dc/paaifyiyn+F+mrm8gw==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -4852,6 +4919,9 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
+  nano-memoize@3.0.16:
+    resolution: {integrity: sha512-JyK96AKVGAwVeMj3MoMhaSXaUNqgMbCRSQB3trUV8tYZfWEzqUBKdK1qJpfuNXgKeHOx1jv/IEYTM659ly7zUA==}
+
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -4875,6 +4945,10 @@ packages:
   neotraverse@0.6.18:
     resolution: {integrity: sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA==}
     engines: {node: '>= 10'}
+
+  nessy@5.3.0:
+    resolution: {integrity: sha512-KYIB48Vx32Tmpe1p5iyhLGJp7iVqi2220A+F7hUoQJT+XiyrW5pu0PU8QHb5eFzrt34bgpclgQPNQKvSmLjmWg==}
+    engines: {node: '>=18'}
 
   next@15.1.6:
     resolution: {integrity: sha512-Hch4wzbaX0vKQtalpXvUiw5sYivBy4cm5rzUKrBnUB/y436LGrvOUqYvlSeNVCWFO/770gDlltR9gqZH62ct4Q==}
@@ -5100,6 +5174,10 @@ packages:
 
   parse-entities@4.0.1:
     resolution: {integrity: sha512-SWzvYcSJh4d/SGLIOQfZ/CoNv6BTlI6YEQ7Nj82oDVnRpwe/Z/F1EMx42x3JAOwGBlCjeCH0BRJQbQ/opHL17w==}
+
+  parse-import-specifiers@1.0.3:
+    resolution: {integrity: sha512-jNtWL2DinOHUGnFEzeAyCJhacxwFkLzPnR3Foy3t2mOTIEgzZ3aaOakPw0PvoLaPZUy64CWYuhVFa/QkEMLJhA==}
+    engines: {node: '>=16'}
 
   parse-json@5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
@@ -5573,6 +5651,13 @@ packages:
 
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
+
+  remove-blank-lines@1.4.2:
+    resolution: {integrity: sha512-B8ru6S9sbP9AtXa14Mz1lYeiSPaG2UCu6yPT17QRLJnkk5RDPSe5f35RshaNpCTgiYEndIGgPzXxuB6Ayqjd/Q==}
+
+  rendy@4.1.3:
+    resolution: {integrity: sha512-ljyvSWWFaPvncY+C/0GlpRh6f2Ufe1fhZwAVkqTHi/EvZjWM1PumqWJzFY5dBRBvXGnxxvWzDasK7UihddJfmg==}
+    engines: {node: '>=16'}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -6059,6 +6144,10 @@ packages:
 
   trough@2.2.0:
     resolution: {integrity: sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==}
+
+  try-catch@3.0.1:
+    resolution: {integrity: sha512-91yfXw1rr/P6oLpHSyHDOHm0vloVvUoo9FVdw8YwY05QjJQG9OT0LUxe2VRAzmHG+0CUOmI3nhxDUMLxDN/NEQ==}
+    engines: {node: '>=6'}
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
@@ -6831,10 +6920,10 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  '@astrojs/react@4.2.3(@types/node@22.15.21)(@types/react-dom@19.1.2(@types/react@19.1.1))(@types/react@19.1.1)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)':
+  '@astrojs/react@4.2.3(@types/node@22.15.21)(@types/react-dom@19.1.2(@types/react@19.1.3))(@types/react@19.1.3)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1)':
     dependencies:
-      '@types/react': 19.1.1
-      '@types/react-dom': 19.1.2(@types/react@19.1.1)
+      '@types/react': 19.1.3
+      '@types/react-dom': 19.1.2(@types/react@19.1.3)
       '@vitejs/plugin-react': 4.3.4(vite@6.2.6(@types/node@22.15.21)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -7258,11 +7347,17 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@builder.io/react-hydration-overlay@0.3.0(@spotlightjs/spotlight@2.3.2)(@types/react@19.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(webpack@5.94.0(esbuild@0.17.6))':
+  '@biomejs/js-api@0.7.1(@biomejs/wasm-nodejs@1.9.4)':
+    optionalDependencies:
+      '@biomejs/wasm-nodejs': 1.9.4
+
+  '@biomejs/wasm-nodejs@1.9.4': {}
+
+  '@builder.io/react-hydration-overlay@0.3.0(@spotlightjs/spotlight@2.3.2)(@types/react@19.1.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(webpack@5.94.0(esbuild@0.17.6))':
     dependencies:
       beautify: 0.0.8
       react: 19.0.0
-      react-diff-viewer-continued: 4.0.4(@types/react@19.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react-diff-viewer-continued: 4.0.4(@types/react@19.1.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-dom: 19.0.0(react@19.0.0)
       webpack: 5.94.0(esbuild@0.17.6)
     optionalDependencies:
@@ -7459,7 +7554,7 @@ snapshots:
 
   '@emotion/memoize@0.9.0': {}
 
-  '@emotion/react@11.14.0(@types/react@19.1.1)(react@19.0.0)':
+  '@emotion/react@11.14.0(@types/react@19.1.3)(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.25.6
       '@emotion/babel-plugin': 11.13.5
@@ -7471,7 +7566,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 19.0.0
     optionalDependencies:
-      '@types/react': 19.1.1
+      '@types/react': 19.1.3
     transitivePeerDependencies:
       - supports-color
 
@@ -8483,6 +8578,50 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@putout/babel@3.2.0': {}
+
+  '@putout/compare@17.2.1':
+    dependencies:
+      '@putout/babel': 3.2.0
+      '@putout/engine-parser': 13.1.0
+      '@putout/operate': 13.5.0
+      debug: 4.4.0
+      jessy: 4.1.0
+      nessy: 5.3.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@putout/engine-parser@13.1.0':
+    dependencies:
+      '@putout/babel': 3.2.0
+      '@putout/printer': 14.8.0
+      align-spaces: 2.0.0
+      estree-to-babel: 11.0.3
+      nano-memoize: 3.0.16
+      once: 1.4.0
+      try-catch: 3.0.1
+
+  '@putout/operate@13.5.0':
+    dependencies:
+      '@putout/babel': 3.2.0
+
+  '@putout/operator-json@2.2.0':
+    dependencies:
+      remove-blank-lines: 1.4.2
+
+  '@putout/printer@14.8.0':
+    dependencies:
+      '@putout/babel': 3.2.0
+      '@putout/compare': 17.2.1
+      '@putout/operate': 13.5.0
+      '@putout/operator-json': 2.2.0
+      fullstore: 3.0.0
+      just-snake-case: 3.2.0
+      parse-import-specifiers: 1.0.3
+      rendy: 4.1.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@remix-run/dev@2.15.2(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3))(@remix-run/serve@2.15.2(typescript@5.8.3))(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@1.21.7)(terser@5.39.0)(tsx@4.19.2)(yaml@2.5.1))':
     dependencies:
       '@babel/core': 7.26.7
@@ -9064,15 +9203,11 @@ snapshots:
     dependencies:
       '@types/react': 19.0.10
 
-  '@types/react-dom@19.1.2(@types/react@19.1.1)':
+  '@types/react-dom@19.1.2(@types/react@19.1.3)':
     dependencies:
-      '@types/react': 19.1.1
+      '@types/react': 19.1.3
 
   '@types/react@19.0.10':
-    dependencies:
-      csstype: 3.1.3
-
-  '@types/react@19.1.1':
     dependencies:
       csstype: 3.1.3
 
@@ -9371,6 +9506,8 @@ snapshots:
       fast-uri: 3.0.6
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
+
+  align-spaces@2.0.0: {}
 
   ansi-align@3.0.1:
     dependencies:
@@ -10348,6 +10485,10 @@ snapshots:
 
   estraverse@5.3.0: {}
 
+  estree-to-babel@11.0.3:
+    dependencies:
+      '@putout/babel': 3.2.0
+
   estree-util-attach-comments@2.1.1:
     dependencies:
       '@types/estree': 1.0.7
@@ -10631,6 +10772,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  fullstore@3.0.0: {}
 
   function-bind@1.1.2: {}
 
@@ -11087,6 +11230,8 @@ snapshots:
 
   javascript-stringify@2.1.0: {}
 
+  jessy@4.1.0: {}
+
   jest-worker@27.5.1:
     dependencies:
       '@types/node': 22.15.21
@@ -11141,6 +11286,8 @@ snapshots:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
+
+  just-snake-case@3.2.0: {}
 
   kleur@3.0.3: {}
 
@@ -12009,6 +12156,8 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
+  nano-memoize@3.0.16: {}
+
   nanoid@3.3.11: {}
 
   nanoid@3.3.8: {}
@@ -12022,6 +12171,8 @@ snapshots:
   neo-async@2.6.2: {}
 
   neotraverse@0.6.18: {}
+
+  nessy@5.3.0: {}
 
   next@15.1.6(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
@@ -12250,6 +12401,8 @@ snapshots:
       is-alphanumerical: 2.0.1
       is-decimal: 2.0.1
       is-hexadecimal: 2.0.1
+
+  parse-import-specifiers@1.0.3: {}
 
   parse-json@5.2.0:
     dependencies:
@@ -12572,10 +12725,10 @@ snapshots:
       unpipe: 1.0.0
     optional: true
 
-  react-diff-viewer-continued@4.0.4(@types/react@19.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-diff-viewer-continued@4.0.4(@types/react@19.1.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@emotion/css': 11.13.5
-      '@emotion/react': 11.14.0(@types/react@19.1.1)(react@19.0.0)
+      '@emotion/react': 11.14.0(@types/react@19.1.3)(react@19.0.0)
       classnames: 2.5.1
       diff: 5.2.0
       memoize-one: 6.0.0
@@ -12762,6 +12915,10 @@ snapshots:
       '@types/mdast': 4.0.4
       mdast-util-to-markdown: 2.1.2
       unified: 11.0.5
+
+  remove-blank-lines@1.4.2: {}
+
+  rendy@4.1.3: {}
 
   require-directory@2.1.1: {}
 
@@ -13389,6 +13546,8 @@ snapshots:
   trim-lines@3.0.1: {}
 
   trough@2.2.0: {}
+
+  try-catch@3.0.1: {}
 
   ts-interface-checker@0.1.13: {}
 
