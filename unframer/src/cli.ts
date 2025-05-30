@@ -1,7 +1,7 @@
 import { setMaxListeners } from 'events'
 import { fetch } from 'undici'
 import './sentry.js'
-import JSON from 'json5'
+
 import { bundle, StyleToken } from './exporter.js'
 import { createClient } from './generated/api-client.js'
 
@@ -12,13 +12,13 @@ import path, { basename } from 'path'
 import { BreakpointSizes, defaultBreakpointSizes } from './css.js'
 import {
     componentNameToPath,
-    dispatcher,
     isTruthy,
     logger,
     sleep,
     spinner,
 } from './utils.js'
 import { notifyError } from './sentry.js'
+import { dispatcher } from './undici-dispatcher.js'
 const configNames = ['unframer.config.json', 'unframer.json']
 
 export const cli = cac('unframer')
@@ -112,8 +112,8 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             fixOldUnframerPath()
             const cwd = process.cwd()
             logger.log(`Looking for ${configNames.join(', ')} in ${cwd}`)
-            const { findUp } = await import('find-up')
-            const configPath = await findUp(configNames, { cwd })
+
+            const configPath = findUp(configNames, { cwd })
             if (!configPath) {
                 logger.log(`No ${configNames.join(', ')} found`)
                 return
@@ -124,7 +124,12 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 logger.log(`No ${configBasename} contents found`)
                 return
             }
-            const config = JSON.parse(configContent)
+            const configContentWithoutComments = configContent.replace(
+                /^\s*\/\/.*$/gm,
+                '',
+            )
+
+            const config = JSON.parse(configContentWithoutComments)
             if (outDir !== defaultOutDir) {
                 config.outDir = outDir
             }
@@ -323,4 +328,29 @@ export async function configFromFetch({
         framerWebPages: data.framerWebPages || [],
     }
     return { websiteUrl, cwd, config }
+}
+
+function findUp(
+    configNames: string[],
+    { cwd }: { cwd: string },
+): string | null {
+    let currentDir = cwd
+
+    while (true) {
+        for (const configName of configNames) {
+            const configPath = path.join(currentDir, configName)
+            if (fs.existsSync(configPath)) {
+                return configPath
+            }
+        }
+
+        const parentDir = path.dirname(currentDir)
+        if (parentDir === currentDir) {
+            // Reached the root directory
+            break
+        }
+        currentDir = parentDir
+    }
+
+    return null
 }

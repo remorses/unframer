@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { createHash } from 'node:crypto'
 
 import type CacheHandler from 'undici/types/cache-interceptor.js'
+import { logger } from './utils'
 
 /* Narrow the names we need from the .d.ts so we stay 1-to-1 with the built-ins */
 type CacheKey = CacheHandler.CacheKey
@@ -24,7 +25,7 @@ export class FlatCacheStore implements CacheStore {
 
     constructor() {
         this.cacheDir = join(tmpdir(), '.unframer')
-        console.log(this.cacheDir)
+        logger.log(`using cache dir`, this.cacheDir)
         this.ensureCacheDir()
     }
 
@@ -40,11 +41,14 @@ export class FlatCacheStore implements CacheStore {
         return createHash('sha256').update(JSON.stringify(key)).digest('hex')
     }
 
-    private getFilePaths(key: CacheKey): { metaPath: string; bodyPath: string } {
+    private getFilePaths(key: CacheKey): {
+        metaPath: string
+        bodyPath: string
+    } {
         const hash = this.getFileHash(key)
         return {
             metaPath: join(this.cacheDir, `${hash}.json`),
-            bodyPath: join(this.cacheDir, `${hash}.bin`)
+            bodyPath: join(this.cacheDir, `${hash}.bin`),
         }
     }
 
@@ -55,13 +59,13 @@ export class FlatCacheStore implements CacheStore {
 
             const [metaData, bodyData] = await Promise.all([
                 fs.readFile(metaPath, 'utf-8'),
-                fs.readFile(bodyPath)
+                fs.readFile(bodyPath),
             ])
 
             const meta = JSON.parse(metaData)
             return {
                 ...meta,
-                body: bodyData
+                body: bodyData,
             }
         } catch (error) {
             return undefined
@@ -84,7 +88,7 @@ export class FlatCacheStore implements CacheStore {
 
                     await Promise.all([
                         fs.writeFile(metaPath, JSON.stringify(meta, null, 2)),
-                        fs.writeFile(bodyPath, Buffer.concat(chunks))
+                        fs.writeFile(bodyPath, Buffer.concat(chunks)),
                     ])
 
                     cb()
@@ -101,7 +105,7 @@ export class FlatCacheStore implements CacheStore {
             const { metaPath, bodyPath } = this.getFilePaths(key)
             await Promise.all([
                 fs.unlink(metaPath).catch(() => {}),
-                fs.unlink(bodyPath).catch(() => {})
+                fs.unlink(bodyPath).catch(() => {}),
             ])
         } catch (error) {
             // Ignore errors when deleting non-existent files

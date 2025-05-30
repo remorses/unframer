@@ -18,8 +18,8 @@ import dedent from 'string-dedent'
 import {
     babelPluginJsxTransform,
     removeJsxExpressionContainer,
-} from './babel-plugin-imports'
-import { propCamelCaseJustLikeFramer } from './compat'
+} from './babel-jsx.js'
+import { propCamelCaseJustLikeFramer } from './compat.js'
 import {
     ComponentFontBundle,
     breakpointsStyles,
@@ -299,7 +299,7 @@ export async function bundle({
                         sourceType: 'module',
                         plugins: [
                             // babelPluginDeduplicateImports,
-                            babelPluginJsxTransform(),
+                            babelPluginJsxTransform,
                             removeJsxExpressionContainer,
                         ],
                         // ast: true,

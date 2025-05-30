@@ -1,33 +1,13 @@
 import pico from 'picocolors'
-import {
-    Agent,
-    interceptors,
-    setGlobalDispatcher
-} from 'undici'
+import { Agent, interceptors, setGlobalDispatcher } from 'undici'
 
-import { marked } from 'marked'
-import { markedTerminal } from 'marked-terminal'
 import { createSpinner } from 'nanospinner'
 import { FlatCacheStore } from './flat-cache-interceptor'
 
-marked.use(markedTerminal())
-
 export function terminalMarkdown(markdown: string) {
-    return marked(markdown)
+    return markdown
 }
 
-export const dispatcher = new Agent({
-    keepAliveTimeout: 20,
-    keepAliveMaxTimeout: 20,
-})
-    .compose(
-        interceptors.cache({
-            store: new FlatCacheStore(),
-        }),
-    )
-    // .compose(rateLimitInterceptor({ requestsPerSecond: 20 }))
-
-setGlobalDispatcher(dispatcher)
 
 const shouldDebugUnframer = !!process.env.DEBUG_UNFRAMER
 

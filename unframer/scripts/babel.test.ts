@@ -3,14 +3,10 @@ import fs from 'fs'
 import path from 'path'
 import dprint from 'dprint-node'
 import dedent from 'string-dedent'
-import {
-    babelPluginDeduplicateImports,
-    babelPluginJsxTransform,
-    removeJsxExpressionContainer,
-} from '../src/babel-plugin-imports'
+import { babelPluginDeduplicateImports } from '../src/babel-plugin-imports'
 import { transform } from '@babel/core'
 
-const defaultPlugins = [babelPluginJsxTransform(), removeJsxExpressionContainer]
+const defaultPlugins = [babelPluginJsxTransform, removeJsxExpressionContainer]
 
 function trans(
     code: string,
@@ -36,6 +32,10 @@ function trans(
 }
 
 import { babelPluginRenameExports } from '../src/babel-plugin-imports'
+import {
+    babelPluginJsxTransform,
+    removeJsxExpressionContainer,
+} from '../src/babel-jsx'
 
 describe('babelPluginRenameExports', () => {
     test('renames exports', () => {

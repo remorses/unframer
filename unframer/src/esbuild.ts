@@ -1,10 +1,11 @@
 import { fetch } from 'undici'
 import { RateLimit, Sema } from 'async-sema'
-import { dispatcher, logger, spinner } from './utils'
+import { logger, spinner } from './utils'
 
 import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
 import { notifyError } from './sentry'
+import { dispatcher } from './undici-dispatcher'
 
 export const defaultExternalPackages = [
     'react',
