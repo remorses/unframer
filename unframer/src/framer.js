@@ -13,7 +13,7 @@ import {
   __toESM,
 } from './framer-chunks/chunk-A2PMVMFI.js';
 
-// /:https://app.framerstatic.com/chunk-IGW3TQSG.mjs
+// /:https://app.framerstatic.com/chunk-A6RUM2JZ.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { useCallback, useContext, useId, } from 'react';
@@ -68,281 +68,6 @@ var LayoutGroupContext = createContext({},);
 var isBrowser = typeof window !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 var PresenceContext = /* @__PURE__ */ createContext(null,);
-var MotionConfigContext = createContext({
-  transformPagePoint: (p) => p,
-  isStatic: false,
-  reducedMotion: 'never',
-},);
-function usePresence(subscribe = true,) {
-  const context = useContext(PresenceContext,);
-  if (context === null) return [true, null,];
-  const {
-    isPresent: isPresent2,
-    onExitComplete,
-    register,
-  } = context;
-  const id4 = useId();
-  useEffect(() => {
-    if (subscribe) {
-      return register(id4,);
-    }
-  }, [subscribe,],);
-  const safeToRemove = useCallback(() => subscribe && onExitComplete && onExitComplete(id4,), [id4, onExitComplete, subscribe,],);
-  return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
-}
-function useIsPresent() {
-  return isPresent(useContext(PresenceContext,),);
-}
-function isPresent(context,) {
-  return context === null ? true : context.isPresent;
-}
-function useConstant(init,) {
-  const ref = useRef3(null,);
-  if (ref.current === null) {
-    ref.current = init();
-  }
-  return ref.current;
-}
-var PopChildMeasure = class extends React2.Component {
-  getSnapshotBeforeUpdate(prevProps,) {
-    const element = this.props.childRef.current;
-    if (element && prevProps.isPresent && !this.props.isPresent) {
-      const parent = element.offsetParent;
-      const parentWidth = parent instanceof HTMLElement ? parent.offsetWidth || 0 : 0;
-      const size = this.props.sizeRef.current;
-      size.height = element.offsetHeight || 0;
-      size.width = element.offsetWidth || 0;
-      size.top = element.offsetTop;
-      size.left = element.offsetLeft;
-      size.right = parentWidth - size.width - size.left;
-    }
-    return null;
-  }
-  /**
-   * Required with getSnapshotBeforeUpdate to stop React complaining.
-   */
-  componentDidUpdate() {}
-  render() {
-    return this.props.children;
-  }
-};
-function PopChild({
-  children,
-  isPresent: isPresent2,
-  anchorX,
-},) {
-  const id4 = useId();
-  const ref = useRef3(null,);
-  const size = useRef3({
-    width: 0,
-    height: 0,
-    top: 0,
-    left: 0,
-    right: 0,
-  },);
-  const {
-    nonce,
-  } = useContext(MotionConfigContext,);
-  useInsertionEffect(() => {
-    const {
-      width,
-      height,
-      top,
-      left,
-      right,
-    } = size.current;
-    if (isPresent2 || !ref.current || !width || !height) return;
-    const x = anchorX === 'left' ? `left: ${left}` : `right: ${right}`;
-    ref.current.dataset.motionPopId = id4;
-    const style2 = document.createElement('style',);
-    if (nonce) style2.nonce = nonce;
-    document.head.appendChild(style2,);
-    if (style2.sheet) {
-      style2.sheet.insertRule(`
-          [data-motion-pop-id="${id4}"] {
-            position: absolute !important;
-            width: ${width}px !important;
-            height: ${height}px !important;
-            ${x}px !important;
-            top: ${top}px !important;
-          }
-        `,);
-    }
-    return () => {
-      if (document.head.contains(style2,)) {
-        document.head.removeChild(style2,);
-      }
-    };
-  }, [isPresent2,],);
-  return jsx3(PopChildMeasure, {
-    isPresent: isPresent2,
-    childRef: ref,
-    sizeRef: size,
-    children: React2.cloneElement(children, {
-      ref,
-    },),
-  },);
-}
-var PresenceChild = ({
-  children,
-  initial,
-  isPresent: isPresent2,
-  onExitComplete,
-  custom,
-  presenceAffectsLayout,
-  mode,
-  anchorX,
-},) => {
-  const presenceChildren = useConstant(newChildrenMap,);
-  const id4 = useId();
-  let isReusedContext = true;
-  let context = useMemo2(() => {
-    isReusedContext = false;
-    return {
-      id: id4,
-      initial,
-      isPresent: isPresent2,
-      custom,
-      onExitComplete: (childId) => {
-        presenceChildren.set(childId, true,);
-        for (const isComplete of presenceChildren.values()) {
-          if (!isComplete) return;
-        }
-        onExitComplete && onExitComplete();
-      },
-      register: (childId) => {
-        presenceChildren.set(childId, false,);
-        return () => presenceChildren.delete(childId,);
-      },
-    };
-  }, [isPresent2, presenceChildren, onExitComplete,],);
-  if (presenceAffectsLayout && isReusedContext) {
-    context = {
-      ...context,
-    };
-  }
-  useMemo2(() => {
-    presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
-  }, [isPresent2,],);
-  React2.useEffect(() => {
-    !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
-  }, [isPresent2,],);
-  if (mode === 'popLayout') {
-    children = jsx3(PopChild, {
-      isPresent: isPresent2,
-      anchorX,
-      children,
-    },);
-  }
-  return jsx3(PresenceContext.Provider, {
-    value: context,
-    children,
-  },);
-};
-function newChildrenMap() {
-  return /* @__PURE__ */ new Map();
-}
-var getChildKey = (child) => child.key || '';
-function onlyElements(children,) {
-  const filtered = [];
-  Children.forEach(children, (child) => {
-    if (isValidElement(child,)) filtered.push(child,);
-  },);
-  return filtered;
-}
-var AnimatePresence = ({
-  children,
-  custom,
-  initial = true,
-  onExitComplete,
-  presenceAffectsLayout = true,
-  mode = 'sync',
-  propagate = false,
-  anchorX = 'left',
-},) => {
-  const [isParentPresent, safeToRemove,] = usePresence(propagate,);
-  const presentChildren = useMemo2(() => onlyElements(children,), [children,],);
-  const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey,);
-  const isInitialRender = useRef3(true,);
-  const pendingPresentChildren = useRef3(presentChildren,);
-  const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
-  const [diffedChildren, setDiffedChildren,] = useState(presentChildren,);
-  const [renderedChildren, setRenderedChildren,] = useState(presentChildren,);
-  useIsomorphicLayoutEffect(() => {
-    isInitialRender.current = false;
-    pendingPresentChildren.current = presentChildren;
-    for (let i = 0; i < renderedChildren.length; i++) {
-      const key7 = getChildKey(renderedChildren[i],);
-      if (!presentKeys.includes(key7,)) {
-        if (exitComplete.get(key7,) !== true) {
-          exitComplete.set(key7, false,);
-        }
-      } else {
-        exitComplete.delete(key7,);
-      }
-    }
-  }, [renderedChildren, presentKeys.length, presentKeys.join('-',),],);
-  const exitingChildren = [];
-  if (presentChildren !== diffedChildren) {
-    let nextChildren = [...presentChildren,];
-    for (let i = 0; i < renderedChildren.length; i++) {
-      const child = renderedChildren[i];
-      const key7 = getChildKey(child,);
-      if (!presentKeys.includes(key7,)) {
-        nextChildren.splice(i, 0, child,);
-        exitingChildren.push(child,);
-      }
-    }
-    if (mode === 'wait' && exitingChildren.length) {
-      nextChildren = exitingChildren;
-    }
-    setRenderedChildren(onlyElements(nextChildren,),);
-    setDiffedChildren(presentChildren,);
-    return null;
-  }
-  if (false) {
-    console.warn(
-      `You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`,
-    );
-  }
-  const {
-    forceRender,
-  } = useContext(LayoutGroupContext,);
-  return jsx3(Fragment, {
-    children: renderedChildren.map((child) => {
-      const key7 = getChildKey(child,);
-      const isPresent2 = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key7,);
-      const onExit = () => {
-        if (exitComplete.has(key7,)) {
-          exitComplete.set(key7, true,);
-        } else {
-          return;
-        }
-        let isEveryExitComplete = true;
-        exitComplete.forEach((isExitComplete) => {
-          if (!isExitComplete) isEveryExitComplete = false;
-        },);
-        if (isEveryExitComplete) {
-          forceRender == null ? void 0 : forceRender();
-          setRenderedChildren(pendingPresentChildren.current,);
-          propagate && (safeToRemove == null ? void 0 : safeToRemove());
-          onExitComplete && onExitComplete();
-        }
-      };
-      return jsx3(PresenceChild, {
-        isPresent: isPresent2,
-        initial: !isInitialRender.current || initial ? void 0 : false,
-        custom,
-        presenceAffectsLayout,
-        mode,
-        onExitComplete: isPresent2 ? void 0 : onExit,
-        anchorX,
-        children: child,
-      }, key7,);
-    },),
-  },);
-};
-var DeprecatedLayoutGroupContext = createContext(null,);
 function addUniqueItem(arr, item,) {
   if (arr.indexOf(item,) === -1) arr.push(item,);
 }
@@ -380,6 +105,9 @@ if (false) {
 }
 var MotionGlobalConfig = {};
 var isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
+function isObject(value,) {
+  return typeof value === 'object' && value !== null;
+}
 var isZeroValueString = (v) => /^0[^.\s]+$/u.test(v,);
 // @__NO_SIDE_EFFECTS__
 function memo(callback,) {
@@ -1609,15 +1337,13 @@ var JSAnimation = class extends WithPromise {
     this.currentTime = 0;
     this.holdTime = null;
     this.playbackSpeed = 1;
-    this.stop = (sync2 = true,) => {
+    this.stop = () => {
       var _a, _b;
-      if (sync2) {
-        const {
-          motionValue: motionValue2,
-        } = this.options;
-        if (motionValue2 && motionValue2.updatedAt !== time.now()) {
-          this.tick(time.now(),);
-        }
+      const {
+        motionValue: motionValue2,
+      } = this.options;
+      if (motionValue2 && motionValue2.updatedAt !== time.now()) {
+        this.tick(time.now(),);
       }
       this.isStopped = true;
       if (this.state === 'idle') return;
@@ -2478,12 +2204,15 @@ var NativeAnimationExtended = class extends NativeAnimation {
     sampleAnimation.stop();
   }
 };
-var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
-  // or until we implement support for linear() easing.
+function isHTMLElement(element,) {
+  return isObject(element,) && 'offsetHeight' in element;
+}
+var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Could be re-enabled now we have support for linear() easing
   // "background-color"
 ],);
 var supportsWaapi = /* @__PURE__ */ memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
 function supportsBrowserAnimation(options,) {
+  var _a;
   const {
     motionValue: motionValue2,
     name,
@@ -2492,7 +2221,7 @@ function supportsBrowserAnimation(options,) {
     damping,
     type,
   } = options;
-  if (!motionValue2 || !motionValue2.owner || !(motionValue2.owner.current instanceof HTMLElement)) {
+  if (!isHTMLElement((_a = motionValue2 == null ? void 0 : motionValue2.owner) == null ? void 0 : _a.current,)) {
     return false;
   }
   const {
@@ -3148,6 +2877,120 @@ function resolveElements(elementOrSelector, scope, selectorCache,) {
   }
   return Array.from(elementOrSelector,);
 }
+var getValueAsType = (value, type,) => {
+  return type && typeof value === 'number' ? type.transform(value,) : value;
+};
+function camelToDash(str,) {
+  return str.replace(/([A-Z])/g, (match) => `-${match.toLowerCase()}`,);
+}
+function createSelectorEffect(subjectEffect,) {
+  return (subject, values,) => {
+    const elements = resolveElements(subject,);
+    const subscriptions = [];
+    for (const element of elements) {
+      const remove2 = subjectEffect(element, values,);
+      subscriptions.push(remove2,);
+    }
+    return () => {
+      for (const remove2 of subscriptions) remove2();
+    };
+  };
+}
+var MotionValueState = class {
+  constructor() {
+    this.latest = {};
+    this.values = /* @__PURE__ */ new Map();
+  }
+  set(name, value, render, computed, useDefaultValueType = true,) {
+    const existingValue = this.values.get(name,);
+    if (existingValue) {
+      existingValue.onRemove();
+    }
+    const onChange = () => {
+      const v = value.get();
+      if (useDefaultValueType) {
+        this.latest[name] = getValueAsType(v, numberValueTypes[name],);
+      } else {
+        this.latest[name] = v;
+      }
+      render && frame.render(render,);
+    };
+    onChange();
+    const cancelOnChange = value.on('change', onChange,);
+    computed && value.addDependent(computed,);
+    const remove2 = () => {
+      cancelOnChange();
+      render && cancelFrame(render,);
+      this.values.delete(name,);
+      computed && value.removeDependent(computed,);
+    };
+    this.values.set(name, {
+      value,
+      onRemove: remove2,
+    },);
+    return remove2;
+  }
+  get(name,) {
+    var _a;
+    return (_a = this.values.get(name,)) == null ? void 0 : _a.value;
+  }
+  destroy() {
+    for (const value of this.values.values()) {
+      value.onRemove();
+    }
+  }
+};
+function createEffect(addValue,) {
+  const stateCache = /* @__PURE__ */ new WeakMap();
+  const subscriptions = [];
+  return (subject, values,) => {
+    const state = stateCache.get(subject,) ?? new MotionValueState();
+    stateCache.set(subject, state,);
+    for (const key7 in values) {
+      const value = values[key7];
+      const remove2 = addValue(subject, state, key7, value,);
+      subscriptions.push(remove2,);
+    }
+    return () => {
+      for (const cancel of subscriptions) cancel();
+    };
+  };
+}
+function canSetAsProperty(element, name,) {
+  if (!(name in element)) return false;
+  const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element,), name,) ||
+    Object.getOwnPropertyDescriptor(element, name,);
+  return descriptor && typeof descriptor.set === 'function';
+}
+var addAttrValue = (element, state, key7, value,) => {
+  const isProp = canSetAsProperty(element, key7,);
+  const name = isProp ? key7 : key7.startsWith('data',) || key7.startsWith('aria',) ? camelToDash(key7,) : key7;
+  const render = isProp
+    ? () => {
+      element[name] = state.latest[key7];
+    }
+    : () => {
+      const v = state.latest[key7];
+      if (v === null || v === void 0) {
+        element.removeAttribute(name,);
+      } else {
+        element.setAttribute(name, String(v,),);
+      }
+    };
+  return state.set(key7, value, render,);
+};
+var attrEffect = /* @__PURE__ */ createSelectorEffect(/* @__PURE__ */ createEffect(addAttrValue,),);
+var propEffect = /* @__PURE__ */ createEffect((subject, state, key7, value,) => {
+  return state.set(
+    key7,
+    value,
+    () => {
+      subject[key7] = state.latest[key7];
+    },
+    void 0,
+    false,
+  );
+},);
 var MAX_VELOCITY_DELTA = 30;
 var isFloat = (value) => {
   return !isNaN(parseFloat(value,),);
@@ -3436,48 +3279,6 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
-var getValueAsType = (value, type,) => {
-  return type && typeof value === 'number' ? type.transform(value,) : value;
-};
-var MotionValueState = class {
-  constructor() {
-    this.latest = {};
-    this.values = /* @__PURE__ */ new Map();
-  }
-  set(name, value, render, computed,) {
-    const existingValue = this.values.get(name,);
-    if (existingValue) {
-      existingValue.onRemove();
-    }
-    const onChange = () => {
-      this.latest[name] = getValueAsType(value.get(), numberValueTypes[name],);
-      render && frame.render(render,);
-    };
-    onChange();
-    const cancelOnChange = value.on('change', onChange,);
-    computed && value.addDependent(computed,);
-    const remove2 = () => {
-      cancelOnChange();
-      render && cancelFrame(render,);
-      this.values.delete(name,);
-      computed && value.removeDependent(computed,);
-    };
-    this.values.set(name, {
-      value,
-      onRemove: remove2,
-    },);
-    return remove2;
-  }
-  get(name,) {
-    var _a;
-    return (_a = this.values.get(name,)) == null ? void 0 : _a.value;
-  }
-  destroy() {
-    for (const value of this.values.values()) {
-      value.onRemove();
-    }
-  }
-};
 var translateAlias = {
   x: 'translateX',
   y: 'translateY',
@@ -3506,34 +3307,30 @@ function buildTransform(state,) {
   }
   return transformIsDefault ? 'none' : transform2.trim();
 }
-var stateMap = /* @__PURE__ */ new WeakMap();
-function styleEffect(subject, values,) {
-  const elements = resolveElements(subject,);
-  const subscriptions = [];
-  for (let i = 0; i < elements.length; i++) {
-    const element = elements[i];
-    const state = stateMap.get(element,) ?? new MotionValueState();
-    stateMap.set(element, state,);
-    for (const key7 in values) {
-      const value = values[key7];
-      const remove2 = addValue(element, state, key7, value,);
-      subscriptions.push(remove2,);
-    }
-  }
-  return () => {
-    for (const cancel of subscriptions) cancel();
-  };
-}
-function addValue(element, state, key7, value,) {
+var originProps = /* @__PURE__ */ new Set(['originX', 'originY', 'originZ',],);
+var addStyleValue = (element, state, key7, value,) => {
   let render = void 0;
   let computed = void 0;
   if (transformProps.has(key7,)) {
     if (!state.get('transform',)) {
+      if (!isHTMLElement(element,) && !state.get('transformBox',)) {
+        addStyleValue(element, state, 'transformBox', new MotionValue('fill-box',),);
+      }
       state.set('transform', new MotionValue('none',), () => {
         element.style.transform = buildTransform(state,);
       },);
     }
     computed = state.get('transform',);
+  } else if (originProps.has(key7,)) {
+    if (!state.get('transformOrigin',)) {
+      state.set('transformOrigin', new MotionValue('',), () => {
+        const originX = state.latest.originX ?? '50%';
+        const originY = state.latest.originY ?? '50%';
+        const originZ = state.latest.originZ ?? 0;
+        element.style.transformOrigin = `${originX} ${originY} ${originZ}`;
+      },);
+    }
+    computed = state.get('transformOrigin',);
   } else if (isCSSVar(key7,)) {
     render = () => {
       element.style.setProperty(key7, state.latest[key7],);
@@ -3544,6 +3341,38 @@ function addValue(element, state, key7, value,) {
     };
   }
   return state.set(key7, value, render, computed,);
+};
+var styleEffect = /* @__PURE__ */ createSelectorEffect(/* @__PURE__ */ createEffect(addStyleValue,),);
+var toPx = px.transform;
+function addSVGPathValue(element, state, key7, value,) {
+  frame.render(() => element.setAttribute('pathLength', '1',));
+  if (key7 === 'pathOffset') {
+    return state.set(key7, value, () => element.setAttribute('stroke-dashoffset', toPx(-state.latest[key7],),),);
+  } else {
+    if (!state.get('stroke-dasharray',)) {
+      state.set('stroke-dasharray', new MotionValue('1 1',), () => {
+        const {
+          pathLength = 1,
+          pathSpacing,
+        } = state.latest;
+        element.setAttribute('stroke-dasharray', `${toPx(pathLength,)} ${toPx(pathSpacing ?? 1 - Number(pathLength,),)}`,);
+      },);
+    }
+    return state.set(key7, value, void 0, state.get('stroke-dasharray',),);
+  }
+}
+var addSVGValue = (element, state, key7, value,) => {
+  if (key7.startsWith('path',)) {
+    return addSVGPathValue(element, state, key7, value,);
+  } else if (key7.startsWith('attr',)) {
+    return addAttrValue(element, state, convertAttrKey(key7,), value,);
+  }
+  const handler = key7 in element.style ? addStyleValue : addAttrValue;
+  return handler(element, state, key7, value,);
+};
+var svgEffect = /* @__PURE__ */ createSelectorEffect(/* @__PURE__ */ createEffect(addSVGValue,),);
+function convertAttrKey(key7,) {
+  return key7.replace(/^attr([A-Z])/, (_, firstChar,) => firstChar.toLowerCase(),);
 }
 var {
   schedule: microtask,
@@ -3700,7 +3529,7 @@ function press(targetOrSelector, onPressStart, options = {},) {
   targets.forEach((target) => {
     const pointerDownTarget = options.useGlobalTarget ? window : target;
     pointerDownTarget.addEventListener('pointerdown', startPress, eventOptions,);
-    if (target instanceof HTMLElement) {
+    if (isHTMLElement(target,)) {
       target.addEventListener('focus', (event) => enableKeyboardPress(event, eventOptions,),);
       if (!isElementKeyboardAccessible(target,) && !target.hasAttribute('tabindex',)) {
         target.tabIndex = 0;
@@ -3845,6 +3674,12 @@ function recordStats() {
   frame.postRender(record, true,);
   return reportStats;
 }
+function isSVGElement(element,) {
+  return isObject(element,) && 'ownerSVGElement' in element;
+}
+function isSVGSVGElement(element,) {
+  return isSVGElement(element,) && element.tagName === 'svg';
+}
 function transform(...args) {
   const useImmediate = !Array.isArray(args[0],);
   const argOffset = useImmediate ? 0 : -1;
@@ -3876,6 +3711,56 @@ function transformValue(transform2,) {
 function mapValue(inputValue, inputRange, outputRange, options,) {
   const map2 = transform(inputRange, outputRange, options,);
   return transformValue(() => map2(inputValue.get(),));
+}
+var isMotionValue = (value) => Boolean(value && value.getVelocity,);
+function springValue(source, options,) {
+  const initialValue = isMotionValue(source,) ? source.get() : source;
+  const value = motionValue(initialValue,);
+  attachSpring(value, source, options,);
+  return value;
+}
+function attachSpring(value, source, options,) {
+  const initialValue = value.get();
+  let activeAnimation = null;
+  let latestValue = initialValue;
+  let latestSetter;
+  const unit = typeof initialValue === 'string' ? initialValue.replace(/[\d.-]/g, '',) : void 0;
+  const stopAnimation2 = () => {
+    if (activeAnimation) {
+      activeAnimation.stop();
+      activeAnimation = null;
+    }
+  };
+  const startAnimation2 = () => {
+    stopAnimation2();
+    activeAnimation = new JSAnimation({
+      keyframes: [asNumber(value.get(),), asNumber(latestValue,),],
+      velocity: value.getVelocity(),
+      type: 'spring',
+      restDelta: 1e-3,
+      restSpeed: 0.01,
+      ...options,
+      onUpdate: latestSetter,
+    },);
+  };
+  value.attach((v, set,) => {
+    latestValue = v;
+    latestSetter = (latest) => set(parseValue(latest, unit,),);
+    frame.postRender(startAnimation2,);
+    return value.get();
+  }, stopAnimation2,);
+  let unsubscribe = void 0;
+  if (isMotionValue(source,)) {
+    unsubscribe = source.on('change', (v) => value.set(parseValue(v, unit,),),);
+    value.on('destroy', unsubscribe,);
+  }
+  return unsubscribe;
+}
+function parseValue(v, unit,) {
+  return unit ? v + unit : v;
+}
+function asNumber(v,) {
+  return typeof v === 'number' ? v : parseFloat(v,);
 }
 var valueTypes = [...dimensionValueTypes, color, complex,];
 var findValueType = (v) => valueTypes.find(testValueType(v,),);
@@ -4163,6 +4048,281 @@ var cancelSync = stepsOrder.reduce((acc, key7,) => {
   acc[key7] = (process2) => cancelFrame(process2,);
   return acc;
 }, {},);
+var MotionConfigContext = createContext({
+  transformPagePoint: (p) => p,
+  isStatic: false,
+  reducedMotion: 'never',
+},);
+function usePresence(subscribe = true,) {
+  const context = useContext(PresenceContext,);
+  if (context === null) return [true, null,];
+  const {
+    isPresent: isPresent2,
+    onExitComplete,
+    register,
+  } = context;
+  const id4 = useId();
+  useEffect(() => {
+    if (subscribe) {
+      return register(id4,);
+    }
+  }, [subscribe,],);
+  const safeToRemove = useCallback(() => subscribe && onExitComplete && onExitComplete(id4,), [id4, onExitComplete, subscribe,],);
+  return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
+}
+function useIsPresent() {
+  return isPresent(useContext(PresenceContext,),);
+}
+function isPresent(context,) {
+  return context === null ? true : context.isPresent;
+}
+function useConstant(init,) {
+  const ref = useRef3(null,);
+  if (ref.current === null) {
+    ref.current = init();
+  }
+  return ref.current;
+}
+var PopChildMeasure = class extends React2.Component {
+  getSnapshotBeforeUpdate(prevProps,) {
+    const element = this.props.childRef.current;
+    if (element && prevProps.isPresent && !this.props.isPresent) {
+      const parent = element.offsetParent;
+      const parentWidth = isHTMLElement(parent,) ? parent.offsetWidth || 0 : 0;
+      const size = this.props.sizeRef.current;
+      size.height = element.offsetHeight || 0;
+      size.width = element.offsetWidth || 0;
+      size.top = element.offsetTop;
+      size.left = element.offsetLeft;
+      size.right = parentWidth - size.width - size.left;
+    }
+    return null;
+  }
+  /**
+   * Required with getSnapshotBeforeUpdate to stop React complaining.
+   */
+  componentDidUpdate() {}
+  render() {
+    return this.props.children;
+  }
+};
+function PopChild({
+  children,
+  isPresent: isPresent2,
+  anchorX,
+},) {
+  const id4 = useId();
+  const ref = useRef3(null,);
+  const size = useRef3({
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+  },);
+  const {
+    nonce,
+  } = useContext(MotionConfigContext,);
+  useInsertionEffect(() => {
+    const {
+      width,
+      height,
+      top,
+      left,
+      right,
+    } = size.current;
+    if (isPresent2 || !ref.current || !width || !height) return;
+    const x = anchorX === 'left' ? `left: ${left}` : `right: ${right}`;
+    ref.current.dataset.motionPopId = id4;
+    const style2 = document.createElement('style',);
+    if (nonce) style2.nonce = nonce;
+    document.head.appendChild(style2,);
+    if (style2.sheet) {
+      style2.sheet.insertRule(`
+          [data-motion-pop-id="${id4}"] {
+            position: absolute !important;
+            width: ${width}px !important;
+            height: ${height}px !important;
+            ${x}px !important;
+            top: ${top}px !important;
+          }
+        `,);
+    }
+    return () => {
+      if (document.head.contains(style2,)) {
+        document.head.removeChild(style2,);
+      }
+    };
+  }, [isPresent2,],);
+  return jsx3(PopChildMeasure, {
+    isPresent: isPresent2,
+    childRef: ref,
+    sizeRef: size,
+    children: React2.cloneElement(children, {
+      ref,
+    },),
+  },);
+}
+var PresenceChild = ({
+  children,
+  initial,
+  isPresent: isPresent2,
+  onExitComplete,
+  custom,
+  presenceAffectsLayout,
+  mode,
+  anchorX,
+},) => {
+  const presenceChildren = useConstant(newChildrenMap,);
+  const id4 = useId();
+  let isReusedContext = true;
+  let context = useMemo2(() => {
+    isReusedContext = false;
+    return {
+      id: id4,
+      initial,
+      isPresent: isPresent2,
+      custom,
+      onExitComplete: (childId) => {
+        presenceChildren.set(childId, true,);
+        for (const isComplete of presenceChildren.values()) {
+          if (!isComplete) return;
+        }
+        onExitComplete && onExitComplete();
+      },
+      register: (childId) => {
+        presenceChildren.set(childId, false,);
+        return () => presenceChildren.delete(childId,);
+      },
+    };
+  }, [isPresent2, presenceChildren, onExitComplete,],);
+  if (presenceAffectsLayout && isReusedContext) {
+    context = {
+      ...context,
+    };
+  }
+  useMemo2(() => {
+    presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
+  }, [isPresent2,],);
+  React2.useEffect(() => {
+    !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
+  }, [isPresent2,],);
+  if (mode === 'popLayout') {
+    children = jsx3(PopChild, {
+      isPresent: isPresent2,
+      anchorX,
+      children,
+    },);
+  }
+  return jsx3(PresenceContext.Provider, {
+    value: context,
+    children,
+  },);
+};
+function newChildrenMap() {
+  return /* @__PURE__ */ new Map();
+}
+var getChildKey = (child) => child.key || '';
+function onlyElements(children,) {
+  const filtered = [];
+  Children.forEach(children, (child) => {
+    if (isValidElement(child,)) filtered.push(child,);
+  },);
+  return filtered;
+}
+var AnimatePresence = ({
+  children,
+  custom,
+  initial = true,
+  onExitComplete,
+  presenceAffectsLayout = true,
+  mode = 'sync',
+  propagate = false,
+  anchorX = 'left',
+},) => {
+  const [isParentPresent, safeToRemove,] = usePresence(propagate,);
+  const presentChildren = useMemo2(() => onlyElements(children,), [children,],);
+  const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey,);
+  const isInitialRender = useRef3(true,);
+  const pendingPresentChildren = useRef3(presentChildren,);
+  const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
+  const [diffedChildren, setDiffedChildren,] = useState(presentChildren,);
+  const [renderedChildren, setRenderedChildren,] = useState(presentChildren,);
+  useIsomorphicLayoutEffect(() => {
+    isInitialRender.current = false;
+    pendingPresentChildren.current = presentChildren;
+    for (let i = 0; i < renderedChildren.length; i++) {
+      const key7 = getChildKey(renderedChildren[i],);
+      if (!presentKeys.includes(key7,)) {
+        if (exitComplete.get(key7,) !== true) {
+          exitComplete.set(key7, false,);
+        }
+      } else {
+        exitComplete.delete(key7,);
+      }
+    }
+  }, [renderedChildren, presentKeys.length, presentKeys.join('-',),],);
+  const exitingChildren = [];
+  if (presentChildren !== diffedChildren) {
+    let nextChildren = [...presentChildren,];
+    for (let i = 0; i < renderedChildren.length; i++) {
+      const child = renderedChildren[i];
+      const key7 = getChildKey(child,);
+      if (!presentKeys.includes(key7,)) {
+        nextChildren.splice(i, 0, child,);
+        exitingChildren.push(child,);
+      }
+    }
+    if (mode === 'wait' && exitingChildren.length) {
+      nextChildren = exitingChildren;
+    }
+    setRenderedChildren(onlyElements(nextChildren,),);
+    setDiffedChildren(presentChildren,);
+    return null;
+  }
+  if (false) {
+    console.warn(
+      `You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`,
+    );
+  }
+  const {
+    forceRender,
+  } = useContext(LayoutGroupContext,);
+  return jsx3(Fragment, {
+    children: renderedChildren.map((child) => {
+      const key7 = getChildKey(child,);
+      const isPresent2 = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key7,);
+      const onExit = () => {
+        if (exitComplete.has(key7,)) {
+          exitComplete.set(key7, true,);
+        } else {
+          return;
+        }
+        let isEveryExitComplete = true;
+        exitComplete.forEach((isExitComplete) => {
+          if (!isExitComplete) isEveryExitComplete = false;
+        },);
+        if (isEveryExitComplete) {
+          forceRender == null ? void 0 : forceRender();
+          setRenderedChildren(pendingPresentChildren.current,);
+          propagate && (safeToRemove == null ? void 0 : safeToRemove());
+          onExitComplete && onExitComplete();
+        }
+      };
+      return jsx3(PresenceChild, {
+        isPresent: isPresent2,
+        initial: !isInitialRender.current || initial ? void 0 : false,
+        custom,
+        presenceAffectsLayout,
+        mode,
+        onExitComplete: isPresent2 ? void 0 : onExit,
+        anchorX,
+        children: child,
+      }, key7,);
+    },),
+  },);
+};
+var DeprecatedLayoutGroupContext = createContext(null,);
 function useIsMounted() {
   const isMounted = useRef3(false,);
   useIsomorphicLayoutEffect(() => {
@@ -4376,9 +4536,9 @@ function MotionConfig({
   },);
 }
 var MotionContext = /* @__PURE__ */ createContext({},);
-var camelToDash = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
+var camelToDash2 = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
 var optimizedAppearDataId = 'framerAppearId';
-var optimizedAppearDataAttribute = 'data-' + camelToDash(optimizedAppearDataId,);
+var optimizedAppearDataAttribute = 'data-' + camelToDash2(optimizedAppearDataId,);
 var SwitchLayoutGroupContext = createContext({},);
 function isAnimationControls(v,) {
   return v !== null && typeof v === 'object' && typeof v.start === 'function';
@@ -4649,7 +4809,6 @@ function addScaleCorrector(correctors,) {
     }
   }
 }
-var isMotionValue = (value) => Boolean(value && value.getVelocity,);
 var translateAlias2 = {
   x: 'translateX',
   y: 'translateY',
@@ -4901,60 +5060,6 @@ function useHTMLProps(props, visualState,) {
   htmlProps.style = style2;
   return htmlProps;
 }
-var lowercaseSVGElements = [
-  'animate',
-  'circle',
-  'defs',
-  'desc',
-  'ellipse',
-  'g',
-  'image',
-  'line',
-  'filter',
-  'marker',
-  'mask',
-  'metadata',
-  'path',
-  'pattern',
-  'polygon',
-  'polyline',
-  'rect',
-  'stop',
-  'switch',
-  'symbol',
-  'svg',
-  'text',
-  'tspan',
-  'use',
-  'view',
-];
-function isSVGComponent(Component33,) {
-  if (
-    /**
-     * If it's not a string, it's a custom React component. Currently we only support
-     * HTML custom React components.
-     */
-    typeof Component33 !== 'string' ||
-    /**
-     * If it contains a dash, the element is a custom HTML webcomponent.
-     */
-    Component33.includes('-',)
-  ) {
-    return false;
-  } else if (
-    /**
-     * If it's in our list of lowercase SVG tags, it's an SVG component
-     */
-    lowercaseSVGElements.indexOf(Component33,) > -1 ||
-    /**
-     * If it contains a capital letter, it's an SVG component
-     */
-    /[A-Z]/u.test(Component33,)
-  ) {
-    return true;
-  }
-  return false;
-}
 var dashKeys = {
   offset: 'stroke-dashoffset',
   array: 'stroke-dasharray',
@@ -5044,6 +5149,60 @@ function useSVGProps(props, visualState, _isStatic, Component33,) {
     };
   }
   return visualProps;
+}
+var lowercaseSVGElements = [
+  'animate',
+  'circle',
+  'defs',
+  'desc',
+  'ellipse',
+  'g',
+  'image',
+  'line',
+  'filter',
+  'marker',
+  'mask',
+  'metadata',
+  'path',
+  'pattern',
+  'polygon',
+  'polyline',
+  'rect',
+  'stop',
+  'switch',
+  'symbol',
+  'svg',
+  'text',
+  'tspan',
+  'use',
+  'view',
+];
+function isSVGComponent(Component33,) {
+  if (
+    /**
+     * If it's not a string, it's a custom React component. Currently we only support
+     * HTML custom React components.
+     */
+    typeof Component33 !== 'string' ||
+    /**
+     * If it contains a dash, the element is a custom HTML webcomponent.
+     */
+    Component33.includes('-',)
+  ) {
+    return false;
+  } else if (
+    /**
+     * If it's in our list of lowercase SVG tags, it's an SVG component
+     */
+    lowercaseSVGElements.indexOf(Component33,) > -1 ||
+    /**
+     * If it contains a capital letter, it's an SVG component
+     */
+    /[A-Z]/u.test(Component33,)
+  ) {
+    return true;
+  }
+  return false;
 }
 function createUseRender(forwardMotionProps = false,) {
   const useRender = (Component33, props, ref, {
@@ -7438,12 +7597,9 @@ function animateSingleValue(value, keyframes2, options,) {
   motionValue$1.start(animateMotionValue('', motionValue$1, keyframes2, options,),);
   return motionValue$1.animation;
 }
-function isSVGElement(element,) {
-  return element instanceof SVGElement && element.tagName !== 'svg';
-}
 var borders = ['TopLeft', 'TopRight', 'BottomLeft', 'BottomRight',];
 var numBorders = borders.length;
-var asNumber = (value) => typeof value === 'string' ? parseFloat(value,) : value;
+var asNumber2 = (value) => typeof value === 'string' ? parseFloat(value,) : value;
 var isPx = (value) => typeof value === 'number' || px.test(value,);
 function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOnlyMember,) {
   if (shouldCrossfadeOpacity) {
@@ -7461,7 +7617,7 @@ function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOn
     leadRadius || (leadRadius = 0);
     const canMix = followRadius === 0 || leadRadius === 0 || isPx(followRadius,) === isPx(leadRadius,);
     if (canMix) {
-      target[borderLabel] = Math.max(mixNumber(asNumber(followRadius,), asNumber(leadRadius,), progress2,), 0,);
+      target[borderLabel] = Math.max(mixNumber(asNumber2(followRadius,), asNumber2(leadRadius,), progress2,), 0,);
       if (percent.test(leadRadius,) || percent.test(followRadius,)) {
         target[borderLabel] += '%';
       }
@@ -7811,7 +7967,7 @@ function createProjectionNode2({
      */
     mount(instance,) {
       if (this.instance) return;
-      this.isSVG = isSVGElement(instance,);
+      this.isSVG = isSVGElement(instance,) && !isSVGSVGElement(instance,);
       this.instance = instance;
       const {
         layoutId,
@@ -7869,7 +8025,6 @@ function createProjectionNode2({
               this.resumingFrom = this.resumeFrom;
               this.resumingFrom.resumingFrom = void 0;
             }
-            this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged,);
             const animationOptions = {
               ...getValueTransition(layoutTransition, 'layout',),
               onPlay: onLayoutAnimationStart,
@@ -7880,6 +8035,7 @@ function createProjectionNode2({
               animationOptions.type = false;
             }
             this.startAnimation(animationOptions,);
+            this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged,);
           } else {
             if (!hasLayoutChanged) {
               finishAnimation(this,);
@@ -8408,8 +8564,8 @@ function createProjectionNode2({
     startAnimation(options,) {
       var _a, _b, _c;
       this.notifyListeners('animationStart',);
-      (_a = this.currentAnimation) == null ? void 0 : _a.stop(false,);
-      (_c = (_b = this.resumingFrom) == null ? void 0 : _b.currentAnimation) == null ? void 0 : _c.stop(false,);
+      (_a = this.currentAnimation) == null ? void 0 : _a.stop();
+      (_c = (_b = this.resumingFrom) == null ? void 0 : _b.currentAnimation) == null ? void 0 : _c.stop();
       if (this.pendingAnimation) {
         cancelFrame(this.pendingAnimation,);
         this.pendingAnimation = void 0;
@@ -8453,7 +8609,7 @@ function createProjectionNode2({
     finishAnimation() {
       if (this.currentAnimation) {
         this.mixTargetDelta && this.mixTargetDelta(animationTarget,);
-        this.currentAnimation.stop(false,);
+        this.currentAnimation.stop();
       }
       this.completeAnimation();
     }
@@ -8662,7 +8818,7 @@ function createProjectionNode2({
     resetTree() {
       this.root.nodes.forEach((node) => {
         var _a;
-        return (_a = node.currentAnimation) == null ? void 0 : _a.stop(false,);
+        return (_a = node.currentAnimation) == null ? void 0 : _a.stop();
       },);
       this.root.nodes.forEach(clearMeasurements,);
       this.root.sharedNodes.clear();
@@ -9212,7 +9368,7 @@ var camelCaseAttributes = /* @__PURE__ */ new Set([
 function renderSVG(element, renderState, _styleProp, projection,) {
   renderHTML(element, renderState, void 0, projection,);
   for (const key7 in renderState.attrs) {
-    element.setAttribute(!camelCaseAttributes.has(key7,) ? camelToDash(key7,) : key7, renderState.attrs[key7],);
+    element.setAttribute(!camelCaseAttributes.has(key7,) ? camelToDash2(key7,) : key7, renderState.attrs[key7],);
   }
 }
 var SVGVisualElement = class extends DOMVisualElement {
@@ -9230,7 +9386,7 @@ var SVGVisualElement = class extends DOMVisualElement {
       const defaultType = getDefaultValueType(key7,);
       return defaultType ? defaultType.default || 0 : 0;
     }
-    key7 = !camelCaseAttributes.has(key7,) ? camelToDash(key7,) : key7;
+    key7 = !camelCaseAttributes.has(key7,) ? camelToDash2(key7,) : key7;
     return instance.getAttribute(key7,);
   }
   scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
@@ -9291,7 +9447,7 @@ function getElementSize(target, borderBoxSize,) {
       width: inlineSize,
       height: blockSize,
     };
-  } else if (target instanceof SVGElement && 'getBBox' in target) {
+  } else if (isSVGElement(target,) && 'getBBox' in target) {
     return target.getBBox();
   } else {
     return {
@@ -9430,7 +9586,7 @@ function calcInset(element, container,) {
   };
   let current2 = element;
   while (current2 && current2 !== container) {
-    if (current2 instanceof HTMLElement) {
+    if (isHTMLElement(current2,)) {
       inset2.x += current2.offsetLeft;
       inset2.y += current2.offsetTop;
       current2 = current2.offsetParent;
@@ -9590,8 +9746,8 @@ function measure(container, target = container, info,) {
 }
 function createOnScrollHandler(element, onScroll, info, options = {},) {
   return {
-    measure: () => measure(element, options.target, info,),
-    update: (time2) => {
+    measure: (time2) => {
+      measure(element, options.target, info,);
       updateScrollInfo(element, info, time2,);
       if (options.offset || options.target) {
         resolveOffsets(element, info, options,);
@@ -9619,21 +9775,17 @@ function scrollInfo(onScroll, {
   containerHandlers.add(containerHandler,);
   if (!scrollListeners.has(container,)) {
     const measureAll = () => {
-      for (const handler of containerHandlers) handler.measure();
-    };
-    const updateAll = () => {
       for (const handler of containerHandlers) {
-        handler.update(frameData.timestamp,);
+        handler.measure(frameData.timestamp,);
       }
-    };
-    const notifyAll2 = () => {
-      for (const handler of containerHandlers) handler.notify();
-    };
-    const listener2 = () => {
-      frame.read(measureAll,);
-      frame.read(updateAll,);
       frame.preUpdate(notifyAll2,);
     };
+    const notifyAll2 = () => {
+      for (const handler of containerHandlers) {
+        handler.notify();
+      }
+    };
+    const listener2 = () => frame.read(measureAll,);
     scrollListeners.set(container, listener2,);
     const target = getEventTarget(container,);
     window.addEventListener('resize', listener2, {
@@ -9837,78 +9989,6 @@ function useMotionTemplate(fragments, ...values) {
   }
   return useCombineMotionValues(values.filter(isMotionValue,), buildValue,);
 }
-function useSpring(source, config = {},) {
-  const {
-    isStatic,
-  } = useContext(MotionConfigContext,);
-  const activeSpringAnimation = useRef3(null,);
-  const initialValue = useConstant(() => isMotionValue(source,) ? source.get() : source);
-  const unit = useConstant(() => typeof initialValue === 'string' ? initialValue.replace(/[\d.-]/g, '',) : void 0);
-  const value = useMotionValue(initialValue,);
-  const latestValue = useRef3(initialValue,);
-  const latestSetter = useRef3(noop,);
-  const startAnimation2 = () => {
-    stopAnimation2();
-    activeSpringAnimation.current = new JSAnimation({
-      keyframes: [asNumber2(value.get(),), asNumber2(latestValue.current,),],
-      velocity: value.getVelocity(),
-      type: 'spring',
-      restDelta: 1e-3,
-      restSpeed: 0.01,
-      ...config,
-      onUpdate: latestSetter.current,
-    },);
-  };
-  const stopAnimation2 = () => {
-    if (activeSpringAnimation.current) {
-      activeSpringAnimation.current.stop();
-    }
-  };
-  useInsertionEffect(() => {
-    return value.attach((v, set,) => {
-      if (isStatic) return set(v,);
-      latestValue.current = v;
-      latestSetter.current = (latest) => set(parseValue(latest, unit,),);
-      frame.postRender(startAnimation2,);
-      return value.get();
-    }, stopAnimation2,);
-  }, [JSON.stringify(config,),],);
-  useIsomorphicLayoutEffect(() => {
-    if (isMotionValue(source,)) {
-      return source.on('change', (v) => value.set(parseValue(v, unit,),),);
-    }
-  }, [value, unit,],);
-  return value;
-}
-function parseValue(v, unit,) {
-  return unit ? v + unit : v;
-}
-function asNumber2(v,) {
-  return typeof v === 'number' ? v : parseFloat(v,);
-}
-function useAnimationFrame(callback,) {
-  const initialTimestamp = useRef3(0,);
-  const {
-    isStatic,
-  } = useContext(MotionConfigContext,);
-  useEffect(() => {
-    if (isStatic) return;
-    const provideTimeSinceStart = ({
-      timestamp,
-      delta,
-    },) => {
-      if (!initialTimestamp.current) initialTimestamp.current = timestamp;
-      callback(timestamp - initialTimestamp.current, delta,);
-    };
-    frame.update(provideTimeSinceStart, true,);
-    return () => cancelFrame(provideTimeSinceStart,);
-  }, [callback,],);
-}
-function useTime() {
-  const time2 = useMotionValue(0,);
-  useAnimationFrame((t) => time2.set(t,));
-  return time2;
-}
 function useComputed(compute,) {
   collectMotionValues.current = [];
   compute();
@@ -9935,6 +10015,43 @@ function useListTransform(values, transformer,) {
     }
     return transformer(latest,);
   },);
+}
+function useSpring(source, options = {},) {
+  const {
+    isStatic,
+  } = useContext(MotionConfigContext,);
+  const getFromSource = () => isMotionValue(source,) ? source.get() : source;
+  if (isStatic) {
+    return useTransform(getFromSource,);
+  }
+  const value = useMotionValue(getFromSource(),);
+  useInsertionEffect(() => {
+    return attachSpring(value, source, options,);
+  }, [value, JSON.stringify(options,),],);
+  return value;
+}
+function useAnimationFrame(callback,) {
+  const initialTimestamp = useRef3(0,);
+  const {
+    isStatic,
+  } = useContext(MotionConfigContext,);
+  useEffect(() => {
+    if (isStatic) return;
+    const provideTimeSinceStart = ({
+      timestamp,
+      delta,
+    },) => {
+      if (!initialTimestamp.current) initialTimestamp.current = timestamp;
+      callback(timestamp - initialTimestamp.current, delta,);
+    };
+    frame.update(provideTimeSinceStart, true,);
+    return () => cancelFrame(provideTimeSinceStart,);
+  }, [callback,],);
+}
+function useTime() {
+  const time2 = useMotionValue(0,);
+  useAnimationFrame((t) => time2.set(t,));
+  return time2;
 }
 function useVelocity(value,) {
   const velocity = useMotionValue(value.getVelocity(),);
@@ -10359,7 +10476,7 @@ function createDOMVisualElement(element,) {
       latestValues: {},
     },
   };
-  const node = isSVGElement(element,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options,);
+  const node = isSVGElement(element,) && !isSVGSVGElement(element,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options,);
   node.mount(element,);
   visualElementStore.set(element, node,);
 }
@@ -11104,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.JBOEBC6F.mjs
+// /:https://app.framerstatic.com/framer.C2MZBAEL.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11112,6 +11229,7 @@ import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
+import { useTransition, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerNavigator2 = typeof window !== 'undefined' ? navigator : void 0;
 var require_hsluv = __commonJS({
@@ -12344,7 +12462,7 @@ function isNumber2(value,) {
 function isArray(value,) {
   return Array.isArray(value,);
 }
-function isObject(value,) {
+function isObject2(value,) {
   return value !== null && typeof value === 'object' && !isArray(value,);
 }
 function isUndefined(value,) {
@@ -12360,7 +12478,7 @@ function isValidDate(value,) {
   return value instanceof Date && !Number.isNaN(value.getTime(),);
 }
 function isGenerator2(value,) {
-  return isObject(value,) && isFunction(value.return,);
+  return isObject2(value,) && isFunction(value.return,);
 }
 var noop2 = () => {};
 var isWindow = typeof window !== 'undefined';
@@ -13429,7 +13547,7 @@ async function pushRouteState(routeId, route, {
 }
 function isHistoryState(data2,) {
   const routeIdKey = 'routeId';
-  return isObject(data2,) && isString(data2[routeIdKey],);
+  return isObject2(data2,) && isString(data2[routeIdKey],);
 }
 function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   performance.mark('framer-history-replace',);
@@ -13517,7 +13635,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       ((_a = window.navigation) == null ? void 0 : _a.transition) &&
       ((_c = (_b = window.navigation) == null ? void 0 : _b.transition) == null ? void 0 : _c.navigationType) !== 'traverse'
     ) return;
-    if (!isObject(state,)) return;
+    if (!isObject2(state,)) return;
     const {
       routeId,
       hash: hash2,
@@ -13535,7 +13653,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         routeId,
         isString(localeId,) ? localeId : void 0,
         isString(hash2,) ? hash2 : void 0,
-        isObject(pathVariables,) ? pathVariables : void 0,
+        isObject2(pathVariables,) ? pathVariables : void 0,
         true,
         nextRender,
         false,
@@ -13583,7 +13701,7 @@ function getHashForRoute(hash2, route, hashVariables,) {
   const resolvedHash = getRouteElementId(route, hash2,);
   if (!resolvedHash) return void 0;
   const variables = Object.assign({}, route == null ? void 0 : route.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => String(variables[p1] ?? m2,),);
+  return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => variables[p1] ?? m2,);
 }
 function getPathForRoute(route, {
   currentRoutePath,
@@ -15051,7 +15169,7 @@ var Interpolation = {
 var NumberInterpolation = {
   interpolate(from, to,) {
     [from, to,] = Interpolation.handleUndefined(from, to,);
-    const a1 = +from;
+    const a1 = from;
     const b1 = to - a1;
     return (progress2) => {
       const value = a1 + b1 * progress2;
@@ -15763,7 +15881,7 @@ function rgbToHsv(r, g, b,) {
   const max = Math.max(r, g, b,);
   const min = Math.min(r, g, b,);
   const d = max - min;
-  let h;
+  let h = 0;
   const s = max === 0 ? 0 : d / max;
   const v = max;
   if (max === min) {
@@ -16351,7 +16469,7 @@ var Color = /* @__PURE__ */ (() => {
     return false;
   };
   Color2.isColorObject = (color2) => {
-    return isObject(color2,) && typeof color2.r === 'number' && typeof color2.g === 'number' && typeof color2.b === 'number' &&
+    return isObject2(color2,) && typeof color2.r === 'number' && typeof color2.g === 'number' && typeof color2.b === 'number' &&
       typeof color2.h === 'number' && typeof color2.s === 'number' && typeof color2.l === 'number' && typeof color2.a === 'number' &&
       typeof color2.roundA === 'number' && typeof color2.format === 'string';
   };
@@ -20903,7 +21021,7 @@ function injectComponentCSSRules() {
   }
 }
 function isReactComponent(component,) {
-  return isObject(component,) || isFunction(component,);
+  return isObject2(component,) || isFunction(component,);
 }
 var optionalKey = 'optional';
 function controlIsOptional(control,) {
@@ -20933,14 +21051,14 @@ function getControlDefaultValue(control,) {
       case 'number':
         return isNumber2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'transition':
-        return isObject(control.defaultValue,) ? control.defaultValue : void 0;
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'border':
-        return isObject(control.defaultValue,) ? control.defaultValue : void 0;
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'font':
-        return isObject(control.defaultValue,) ? control.defaultValue : void 0;
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'object': {
-        const value = isObject(control.defaultValue,) ? control.defaultValue : {};
-        if (isObject(control.controls,)) {
+        const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
+        if (isObject2(control.controls,)) {
           applyControlDefaultsToDefaultProps(value, control.controls,);
         }
         return value;
@@ -20984,7 +21102,7 @@ function applyControlDefaultsToDefaultProps(defaultProps, controls,) {
   }
 }
 function getDefaultProps(component,) {
-  if (isObject(component.defaultProps,)) {
+  if (isObject2(component.defaultProps,)) {
     return component.defaultProps;
   }
   const defaultProps = {};
@@ -23325,7 +23443,7 @@ function useMeasureLayout(props, ref, getChildren = () => [], options = {},) {
   const {
     skipHook = false,
   } = options;
-  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const onCanvas = RenderTarget.current() === RenderTarget.canvas;
   useIsomorphicLayoutEffect2(() => {
     if (!onCanvas || inCodeComponent || skipHook) {
@@ -23614,7 +23732,7 @@ var LinearGradient = {
    * @param value -
    */
   isLinearGradient: (value) => {
-    return isObject(value,) && linearGradientKeys.every((key7) => key7 in value) &&
+    return isObject2(value,) && linearGradientKeys.every((key7) => key7 in value) &&
       (isSimpleGradient(value,) || isMultiStopGradient(value,));
   },
   /** @internal */
@@ -23638,7 +23756,7 @@ var RadialGradient = {
    * @public
    */
   isRadialGradient: (value) => {
-    return isObject(value,) && radialGradientKeys.every((key7) => key7 in value) &&
+    return isObject2(value,) && radialGradientKeys.every((key7) => key7 in value) &&
       (isSimpleGradient(value,) || isMultiStopGradient(value,));
   },
   /** @internal */
@@ -23878,7 +23996,7 @@ function useStyleAndRect(props,) {
   React4.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const {
     style: style2,
     _initialStyle,
@@ -24052,7 +24170,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   }
   useMeasureLayout(props, ref,);
   const backgroundImage = backgroundImageFromProps(props,);
-  const inCodeComponent = Boolean(useContext(ComponentContainerContext,),);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, inCodeComponent,);
   const wrappedContent = useProvideParentSize(
     /* @__PURE__ */ jsxs(Fragment, {
@@ -24268,7 +24386,7 @@ var SharedLayoutRoot = class extends Component2 {
   getSnapshotBeforeUpdate() {
     var _a;
     if (!this.scheduledPromotion || !this.lead || !this.follow) return null;
-    const needsReset = !!((_a = this.lead) == null ? void 0 : _a.layoutMaybeMutated) && !this.shouldAnimate;
+    const needsReset = ((_a = this.lead) == null ? void 0 : _a.layoutMaybeMutated) && !this.shouldAnimate;
     this.lead.projectionNodes.forEach((projectionNode) => {
       var _a2;
       projectionNode == null ? void 0 : projectionNode.promote({
@@ -24340,7 +24458,7 @@ function setRef(ref, value,) {
   }
 }
 function isMutableRef(ref,) {
-  return isObject(ref,) && 'current' in ref;
+  return isObject2(ref,) && 'current' in ref;
 }
 function refHasValue(ref,) {
   return isMutableRef(ref,) && ref.current !== null;
@@ -24560,7 +24678,7 @@ var LayoutTree = class extends Component2 {
     } = nextProps;
     this.isExiting = isExiting;
     if (isLead === void 0) return true;
-    const hasBecomeLead = !this.props.isLead && !!isLead;
+    const hasBecomeLead = !this.props.isLead && isLead;
     const hasExitBeenCancelled = this.props.isExiting && !isExiting;
     const shouldPromote = hasBecomeLead || hasExitBeenCancelled;
     const shouldDemote = !!this.props.isLead && !isLead;
@@ -25973,7 +26091,7 @@ function containerContent(item,) {
     const position = (_a = item == null ? void 0 : item.transition) == null ? void 0 : _a.position;
     const shouldStretchWidth = !position || position.left !== void 0 && position.right !== void 0;
     const shouldStretchHeight = !position || position.top !== void 0 && position.bottom !== void 0;
-    const canStretchStyle = 'style' in child.props ? isObject(child.props.style,) : true;
+    const canStretchStyle = 'style' in child.props ? isObject2(child.props.style,) : true;
     if (shouldStretchWidth) {
       const canStretchWidth = 'width' in child.props;
       if (canStretchWidth) props.width = '100%';
@@ -27172,7 +27290,7 @@ function hasRadius(props,) {
 }
 function getRadiusValue(value,) {
   let num = Number(value,);
-  if (typeof value === 'string' && Number.isNaN(Number(num,),)) {
+  if (typeof value === 'string' && Number.isNaN(num,)) {
     return value;
   } else if (isAnimatable2(value,)) {
     num = Animatable.getNumber(value,);
@@ -28339,7 +28457,7 @@ var Stack = /* @__PURE__ */ (() => {
       __contentWrapperStyle,
       ...containerProps
     } = stackProps;
-    const useFlexboxGap = Boolean(externalUseFlexboxGap || wrap2,);
+    const useFlexboxGap = externalUseFlexboxGap || wrap2;
     const stackRef = React4.useRef(null,);
     const flexDirection = toFlexDirection(direction,);
     const isReverse = isReverseDirection(flexDirection,);
@@ -30034,7 +30152,7 @@ var useUpdateChildSize = ({
         : updatedSize;
       return React4.cloneElement(child, update,);
     },);
-  }, [dragDirection, children,],);
+  }, [dragDirection, children, fromCanvasComponent,],);
 };
 var numberFromOptionalMotionValue = (value) => {
   return typeof value === 'number' ? value : value.get();
@@ -30327,7 +30445,6 @@ var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(
       preserve3d: containerProps.preserve3d,
       children: [
         /* @__PURE__ */ jsx3(EmptyState, {
-          children,
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
             height: isFiniteNumber(containerProps.height,) ? containerProps.height : '100%',
@@ -30335,6 +30452,7 @@ var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(
           insideUserCodeComponent: !containerProps.__fromCodeComponentNode,
           title: 'Scroll',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
+          children,
         },),
         useUpdateChildSize({
           dragDirection: direction,
@@ -31534,8 +31652,8 @@ var AnimationCollector = class {
     const initial = props.__framer__presenceInitial ?? props.initial;
     const animate3 = props.__framer__presenceAnimate ?? props.animate;
     const config = {
-      initial: isObject(initial,) ? initial : void 0,
-      animate: isObject(animate3,) ? animate3 : void 0,
+      initial: isObject2(initial,) ? initial : void 0,
+      animate: isObject2(animate3,) ? animate3 : void 0,
       transformTemplate: isString(transformTemplate2,) ? transformTemplate2 : void 0,
     };
     for (const variantId of variants) this.setHash(id3, this.variantHash(variantId, info,), config,);
@@ -31715,7 +31833,7 @@ function useLoop({
     mirrorStateRef.current = !mirrorStateRef.current;
     animationPromiseRef.current = Promise.all(effectValuesKeys.map((key7) => {
       if (shouldReduceMotion && key7 !== 'opacity') return;
-      values[key7].set(from[key7] ?? defaultFXValues[key7],);
+      values[key7].jump(from[key7] ?? defaultFXValues[key7],);
       return new Promise((resolve) => {
         const opts = {
           ...transition,
@@ -31864,7 +31982,7 @@ function useParallax(options, ref, visibilityStyle,) {
   };
 }
 function getTransition(value,) {
-  if (isString(value,) || !isObject(value,)) return void 0;
+  if (isString(value,) || !isObject2(value,)) return void 0;
   return value == null ? void 0 : value.transition;
 }
 function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
@@ -31874,7 +31992,7 @@ function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, i
       if (shouldReduceMotion && key7 !== 'opacity') return resolve();
       const motionValue2 = effect.values[key7];
       motionValue2.stop();
-      let value = !isObject(target,) ? defaultFXValues[key7] : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
+      let value = !isObject2(target,) ? defaultFXValues[key7] : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
       if (isMotionValue(value,)) value = value.get();
       if (!isNumber2(value,)) return resolve();
       const visualElement = visualElementStore.get(ref.current,);
@@ -31926,14 +32044,14 @@ function usePresenceAnimation(
   },);
   const effect = useConstant2(() => {
     const base = initial ?? style2;
-    if (!isObject(base,)) {
+    if (!isObject2(base,)) {
       return {
         values: makeFXValues(),
       };
     }
     const defaults = {};
     for (const key7 in base) {
-      const value = isObject(base,) ? base[key7] : void 0;
+      const value = isObject2(base,) ? base[key7] : void 0;
       if (!isNumber2(value,)) continue;
       defaults[key7] = value;
     }
@@ -32503,10 +32621,10 @@ var add2 = (values) => values.reduce((sum, value,) => sum += value, 0,);
 var multiply = (values) => values.reduce((sum, value,) => sum = sum * value, 1,);
 var reactRefObjectKey = 'current';
 function isReactRefObject(value,) {
-  return isObject(value,) && reactRefObjectKey in value;
+  return isObject2(value,) && reactRefObjectKey in value;
 }
 function addMotionValueStyle(style2, values,) {
-  if (!style2 || !isObject(style2,)) return values;
+  if (!style2 || !isObject2(style2,)) return values;
   for (const key7 in style2) {
     const value = style2[key7];
     if (!isMotionValue(value,) || !isFXValuesKey(key7,)) continue;
@@ -32737,7 +32855,7 @@ var SynchronousSuspenseErrorBoundary = class extends Component2 {
       error,
       '\n\nComponent stack:\n',
       componentStack,
-      '\n\nThis error indicates a state update wasn\u2019t wrapped with startTransition. Some of the UI might flash as a result. If you are the author of this website, check recently added custom code, and if the issue persists, report it to the Framer team via https://www.framer.community/.',
+      '\n\nThis error indicates a state update wasn\u2019t wrapped with startTransition. Some of the UI might flash as a result. If you are the author of this website, check recently added custom code, and if the issue persists, report it to the Framer team via https://www.framer.com/contact/.',
     );
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : void 0;
     sendTrackingEvent('published_site_load_recoverable_error', {
@@ -33889,7 +34007,7 @@ function childrenWithOrigin(child, {
   y,
 },) {
   if (!child || !isReactChild(child,) || !isReactElement(child,)) return null;
-  if (!isObject(child.props.style,) && !isUndefined(child.props.style,)) return null;
+  if (!isObject2(child.props.style,) && !isUndefined(child.props.style,)) return null;
   const style2 = {
     ...child.props.style,
     originX: x,
@@ -34072,7 +34190,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     __publicField(
       this,
       'messageReport',
-      'If you are the author of this website, please report this issue to the Framer team via https://www.framer.community/',
+      'If you are the author of this website, please report this issue to the Framer team via https://www.framer.com/contact/',
     );
   }
   static getDerivedStateFromError(error,) {
@@ -34092,7 +34210,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
       error,
     );
     const sampleRate = Math.random();
-    if (sampleRate > 0.25) return;
+    if (sampleRate > 0.5) return;
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
     sendTrackingEvent('published_site_load_error', {
       message: String(error,),
@@ -35503,7 +35621,7 @@ async function submitForm(action, data2, projectHash,) {
   }
 }
 function responseHasError(response,) {
-  return typeof response === 'object' && response !== null && 'error' in response && isObject(response.error,) &&
+  return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
 function isSamePage(a, b,) {
@@ -35703,7 +35821,7 @@ function Router({
         let localeId;
         if (isString(localeOrLocaleId,)) {
           localeId = localeOrLocaleId;
-        } else if (isObject(localeOrLocaleId,)) {
+        } else if (isObject2(localeOrLocaleId,)) {
           localeId = localeOrLocaleId.id;
         }
         const defaultLocale = locales.find(({
@@ -36652,19 +36770,19 @@ function isAnyCollection(value,) {
   return isAnyLegacyCollection(value,) || isAnyDatabaseCollection(value,);
 }
 function isLegacyCollection(value,) {
-  return isArray(value,) && value.every(isObject,);
+  return isArray(value,) && value.every(isObject2,);
 }
 function isLegacyLocalizedCollection(value,) {
-  return isObject(value,) && isFunction(value.read,) && isFunction(value.preload,);
+  return isObject2(value,) && isFunction(value.read,) && isFunction(value.preload,);
 }
 function isAnyLegacyCollection(value,) {
   return isLegacyCollection(value,) || isLegacyLocalizedCollection(value,);
 }
 function isDatabaseCollection(value,) {
-  return isObject(value,) && isObject(value.schema,);
+  return isObject2(value,) && isObject2(value.schema,);
 }
 function isLocalizedDatabaseCollection(value,) {
-  return isObject(value,) && isObject(value.collectionByLocaleId,);
+  return isObject2(value,) && isObject2(value.collectionByLocaleId,);
 }
 function isAnyDatabaseCollection(value,) {
   return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
@@ -37502,7 +37620,7 @@ function Hash(value,) {
   return value;
 }
 function isHashable(value,) {
-  return isObject(value,) && isFunction(value.getHash,);
+  return isObject2(value,) && isFunction(value.getHash,);
 }
 function calculateHash(name, ...values) {
   const hashes = values.map((value) => {
@@ -41145,7 +41263,7 @@ function getCollectionId(collection,) {
   return id3;
 }
 function replaceCollection(_, value,) {
-  if (isObject(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
+  if (isObject2(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
     return getCollectionId(value.data,);
   }
   return value;
@@ -41379,7 +41497,7 @@ function useDataRecord(collection, variables,) {
     const pageRecord = collection.find((record2) => {
       return Object.entries(variables,).every(([key7, value,],) => {
         const recordValue = record2[key7];
-        if (value === void 0 || recordValue === void 0 || isObject(value,) || isObject(recordValue,)) {
+        if (value === void 0 || recordValue === void 0 || isObject2(value,) || isObject2(recordValue,)) {
           return false;
         }
         return String(value,) === String(recordValue,);
@@ -41421,7 +41539,7 @@ function useSiteRefs() {
   }, [path,],);
 }
 function isFramerGamepadKeydownData(value,) {
-  return isObject(value,) && value.mapping !== void 0;
+  return isObject2(value,) && value.mapping !== void 0;
 }
 function gamepadInputsHaveChanged(previous, current2,) {
   if (previous.length !== current2.length) return true;
@@ -41700,7 +41818,7 @@ function useOverlayState({
 }
 var key4 = 'page';
 function isRoute(route,) {
-  return isObject(route,) && key4 in route && route.page !== void 0;
+  return isObject2(route,) && key4 in route && route.page !== void 0;
 }
 async function componentForRoute(route,) {
   if (!isRoute(route,)) return;
@@ -41716,7 +41834,7 @@ async function componentForRoute(route,) {
 }
 var preloadKey2 = 'preload';
 function withPreload(component,) {
-  return !!component && isObject(component,) && preloadKey2 in component;
+  return !!component && isObject2(component,) && preloadKey2 in component;
 }
 function usePrototypeNavigate({
   preload,
@@ -41838,7 +41956,7 @@ function usePreloadQuery() {
 function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   const entries = Object.entries(pathVariables ?? {},).filter(([, value,],) => {
     if (isUndefined(value,)) return false;
-    if (isObject(value,)) return false;
+    if (isObject2(value,)) return false;
     return true;
   },);
   const expressions = entries.map(([name, value,],) => ({
@@ -41873,62 +41991,44 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   }));
 }
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
+  var _a, _b, _c, _d;
+  const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
-  const [paginationInfo, setPaginationInfo,] = useState(() => {
-    var _a, _b, _c, _d;
-    const currentPage = ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
+  const [currentPage, setCurrentPage,] = useState(
+    ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
           ? void 0
           : _b.paginationInfo) == null
         ? void 0
         : _c[hash2]) == null
       ? void 0
-      : _d.currentPage) ?? 1;
+      : _d.currentPage) ?? 1,
+  );
+  const paginationInfo = useMemo2(() => {
     return {
       currentPage,
       totalPages,
-      isLoading: false,
+      isLoading: isPending,
     };
-  },);
-  useEffect(() => {
-    startTransition2(() => {
-      setPaginationInfo((current2) => {
-        if (current2.totalPages === totalPages) return current2;
-        return {
-          ...current2,
-          totalPages,
-        };
-      },);
-    },);
-  }, [totalPages,],);
+  }, [currentPage, totalPages, isPending,],);
   useEffect(() => {
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
   const onCanvas = useIsOnFramerCanvas();
-  const loadMore = useCallback(() => {
+  const loadMore = useCallback(async () => {
     if (onCanvas) return;
-    if (paginationInfo.currentPage >= paginationInfo.totalPages) return;
-    if (!paginateWithSuspendedLoadingState) {
-      startTransition2(() => {
-        setPaginationInfo((info) => ({
-          ...info,
-          currentPage: Math.min(info.currentPage + 1, info.totalPages,),
-          isLoading: false,
-        }));
-      },);
-      return;
-    }
-    setPaginationInfo((info) => ({
-      ...info,
-      isLoading: true,
-    }));
-    requestAnimationFrame(() => {
-      setPaginationInfo((info) => ({
-        ...info,
-        currentPage: Math.min(info.currentPage + 1, info.totalPages,),
-        isLoading: false,
-      }));
+    if (currentPage >= totalPages) return;
+    await yieldToMain({
+      priority: 'user-blocking',
+      continueAfter: 'paint',
     },);
-  }, [onCanvas, paginationInfo.currentPage, paginationInfo.totalPages, paginateWithSuspendedLoadingState,],);
+    const renderNextPage = (startTransition14) => {
+      startTransition14(() => {
+        setCurrentPage((_currentPage) => Math.min(_currentPage + 1, totalPages,));
+      },);
+    };
+    if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
+    return renderNextPage(startLoadingTransition,);
+  }, [currentPage, totalPages, paginateWithSuspendedLoadingState,],);
   return {
     paginationInfo,
     loadMore,
@@ -42600,7 +42700,7 @@ var withVariantAppearEffect = (Component17) =>
         },);
       },);
     }, [animateOnce, threshold, targets, props.variant, scrollDirection, exitTarget,],);
-    useScrollDirectionChange(scrollDirection, setVariant, {
+    useScrollDirectionChange(scrollDirection, (variant) => React4.startTransition(() => setVariant(variant,)), {
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
     },);
@@ -44445,10 +44545,10 @@ function loadVariationAxes(source,) {
   }
 }
 function isValidVariationAxesData(data2,) {
-  return isObject(data2,) && Object.values(data2,).every(isValidVariationAxes,);
+  return isObject2(data2,) && Object.values(data2,).every(isValidVariationAxes,);
 }
 function isVariationAxis2(data2,) {
-  return isObject(data2,) && isString(data2.tag,);
+  return isObject2(data2,) && isString(data2.tag,);
 }
 function isValidVariationAxes(data2,) {
   return Array.isArray(data2,) && data2.every(isVariationAxis2,);
@@ -44457,10 +44557,17 @@ var FontStore = class {
   constructor() {
     __publicField(this, 'enabled', false,);
     __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'loadedSelectors', /* @__PURE__ */ new Set(),);
     __publicField(this, 'getGoogleFontsListPromise',);
     __publicField(this, 'getFontshareFontsListPromise',);
     __publicField(this, 'getBuiltInFontsListPromise',);
-    __publicField(this, 'loadedSelectors', /* @__PURE__ */ new Set(),);
+    __publicField(
+      this,
+      'customFontsImportPromise',
+      new Promise((resolve) => {
+        this.resolveCustomFontsImportPromise = resolve;
+      },),
+    );
     __publicField(this, 'local',);
     __publicField(this, 'google',);
     __publicField(this, 'fontshare',);
@@ -44543,8 +44650,12 @@ var FontStore = class {
         this.bySelector.delete(key7,);
       }
     },);
-    for (const font of this.custom.importFonts(assets,)) {
+    const importedFonts = this.custom.importFonts(assets,);
+    for (const font of importedFonts) {
       this.addFont(font,);
+    }
+    if (importedFonts.length > 0) {
+      this.resolveCustomFontsImportPromise();
     }
   }
   getFontFamily(info,) {
@@ -44704,6 +44815,12 @@ var FontStore = class {
           warnOnce2('Failed to load built-in fonts:', error,);
         },),
       );
+    }
+    const shouldImportCustomFonts = selectors.some((selector) => selector.startsWith(customFontSelectorPrefix,));
+    if (shouldImportCustomFonts) {
+      importPromises.push(this.customFontsImportPromise.catch((error) => {
+        warnOnce2('Failed to load custom fonts:', error,);
+      },),);
     }
     if (importPromises.length > 0) {
       await Promise.all(importPromises,);
@@ -46487,7 +46604,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
 }, ref,) {
   const content = html || children || htmlFromDesign;
   if (isString(content,)) {
-    if (!props.stylesPresetsClassName && isObject(props.stylesPresetsClassNames,)) {
+    if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
       props.stylesPresetsClassName = Object.values(props.stylesPresetsClassNames,).join(' ',);
     }
     const contentProp = {
@@ -48677,7 +48794,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
 })();
 var key6 = 'calculatedPaths';
 function withShape(target,) {
-  if (!isObject(target,)) return false;
+  if (!isObject2(target,)) return false;
   return key6 in target;
 }
 var Size = /* @__PURE__ */ (() => {
@@ -48914,7 +49031,7 @@ function inspect(item, max, l,) {
   if (item === void 0) {
     return 'undefined';
   }
-  if (isObject(item,) && isFunction(item.toInspect,)) {
+  if (isObject2(item,) && isFunction(item.toInspect,)) {
     return item.toInspect();
   }
   if (isString(item,)) {
@@ -48927,7 +49044,7 @@ function inspect(item, max, l,) {
     let code = item.toString().slice('function '.length,).replace(/\n/gu, '',).replace(/\s+/gu, ' ',);
     const limit = 50;
     if (code.length > limit && l > 0) {
-      code = `${code.slice(0, +limit + 1 || void 0,).trim()}\u2026 }`;
+      code = `${code.slice(0, limit + 1,).trim()}\u2026 }`;
     }
     return `<Function ${code}>`;
   }
@@ -48937,7 +49054,7 @@ function inspect(item, max, l,) {
     }
     return `[${item.map((i) => inspect(i, max, (l || 0) + 1,)).join(', ',)}]`;
   }
-  if (isObject(item,)) {
+  if (isObject2(item,)) {
     let objectInfo;
     const objectType = inspectObjectType(item,);
     if (/HTML\w+?Element/u.test(objectType,)) {
@@ -49030,7 +49147,7 @@ var package_default = {
     yargs: '^17.7.2',
   },
   peerDependencies: {
-    'framer-motion': '12.11.4',
+    'framer-motion': '12.14.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -49055,11 +49172,13 @@ export {
   acceleratedValues2 as acceleratedValues,
   activeAnimations,
   addActionControls,
+  addAttrValue,
   addFonts,
   addPointerEvent,
   addPointerInfo,
   addPropertyControls,
   addScaleCorrector,
+  addStyleValue,
   addUniqueItem,
   alpha,
   analyseComplexValue,
@@ -49080,6 +49199,8 @@ export {
   AnyInterpolation,
   applyPxDefaults,
   AsyncMotionValueAnimation,
+  attachSpring,
+  attrEffect,
   AutomaticLayoutIds,
   BackgroundImage,
   backgroundImageFromProps,
@@ -49270,10 +49391,12 @@ export {
   isFramerPageLink,
   isGapEnabled,
   isGenerator,
+  isHTMLElement,
   isMotionComponent,
   isMotionValue2 as isMotionValue,
   isNodeOrChild,
   isNumericalString,
+  isObject,
   isOfAnnotatedType,
   isOverride,
   isPrimaryPointer,
@@ -49282,6 +49405,8 @@ export {
   isShallowEqualArray,
   isStaticRenderer,
   isStraightCurve,
+  isSVGElement,
+  isSVGSVGElement,
   isValidMotionProp,
   isWaapiSupportedEasing,
   isZeroValueString,
@@ -49376,6 +49501,7 @@ export {
   print,
   progress,
   progressPercentage,
+  propEffect,
   PropertyOverrides2 as PropertyOverrides,
   PropertyStore,
   propsForLink,
@@ -49419,6 +49545,7 @@ export {
   SmartComponentScopedContainer,
   spring,
   SpringAnimator,
+  springValue,
   SSRVariants,
   Stack,
   stagger,
@@ -49437,6 +49564,7 @@ export {
   supportsPartialKeyframes,
   supportsScrollTimeline,
   SVG,
+  svgEffect,
   SwitchLayoutGroupContext,
   sync,
   systemFontFamilyName,
