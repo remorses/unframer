@@ -2,155 +2,266 @@
 /* This css file has all the necessary styles to run all your components */
 
 
+
 :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 * {
     box-sizing: border-box;
     -webkit-font-smoothing: inherit;
 }
-h1, h2, h3, h4, h5, h6, p, figure {
+
+.unframer h1, .unframer h2, .unframer h3, .unframer h4, .unframer h5, .unframer h6, .unframer p, .unframer figure {
     margin: 0;
 }
-        
+
+.unframer {
+    line-height: normal;
+}
+
+.unframer, .unframer input, .unframer textarea, .unframer select, .unframer button {
+    font-size: 12px;
+    font-family: sans-serif;
+}
 :root {
-    --token-0e800c74-0e52-49bf-96c3-175f20e989b7: rgba(0, 0, 0, 0.8);
+    --unframer-purple: rgb(130, 112, 219);
     --unframer-black-transparent: rgba(0, 0, 0, 0.8);
-    --token-0f51fcfd-e97a-4e3b-8e90-4dde88da0e0b: rgb(82, 82, 91);
     --unframer-secondary-text: rgb(82, 82, 91);
-    --token-16f4c489-7aaa-4809-b9a3-055414e9887c: rgb(214, 225, 245);
     --unframer-secondary-blue-hover: rgb(214, 225, 245);
-    --token-1cf1f543-08fc-43a7-baad-630903ca6897: rgb(235, 245, 254);
     --unframer-secondary-blue: rgb(235, 245, 254);
-    --token-25b52238-70ec-48e4-ace9-396a7e6ddba8: rgb(113, 113, 122);
     --unframer-base-gray: rgb(113, 113, 122);
-    --token-261410e1-0b63-42a8-aec1-e42b1419edce: rgb(255, 74, 74);
-    --unframer-red-light: rgb(255, 74, 74);
-    --token-27ed6e95-9593-4911-be1f-4b9b714013e0: rgb(18, 86, 159);
+    --unframer-red-light: rgb(255, 242, 242);
     --unframer-blue-images: rgb(18, 86, 159);
-    --token-396e83c8-a3d0-4509-8f3b-9e57b915d3ef: rgba(114, 115, 117, 0.12);
-    --unframer-card-shadow: rgba(114, 115, 117, 0.12);
-    --token-39b5ea5d-db88-47fc-8e8c-b9a92ce11555: rgb(12, 65, 107);
-    --unframer-teritary: rgb(12, 65, 107);
-    --token-3b1e8dd6-e47f-45cb-ad1c-a159bd11b5b0: rgb(23, 23, 23);
-    --unframer-black-overlay-hover: rgb(23, 23, 23);
-    --token-49fdb0a9-d716-418a-b9fb-142ee3cfbb8e: rgb(134, 239, 172);
-    --unframer-mint: rgb(134, 239, 172);
-    --token-5f0ba7d2-9b13-4ef7-b9be-d254e5e8f888: rgb(31, 143, 255);
-    --unframer-primary-hover: rgb(31, 143, 255);
-    --token-736eff3f-2831-4b99-94f5-7d3874cf006f: rgb(255, 177, 0);
-    --unframer-yellow: rgb(255, 177, 0);
-    --token-7f38ac97-94a3-487c-ad67-6999c5284e48: rgb(22, 136, 53);
-    --unframer-green: rgb(22, 136, 53);
-    --token-9f549c08-ff89-4d86-99c4-e5ad2a870e2a: rgb(250, 250, 250);
-    --unframer-secondary-bg: rgb(250, 250, 250);
-    --token-a147d0a8-dc4a-48b4-a0e3-7673a8eb9fd2: rgb(245, 245, 245);
-    --unframer-white-hover: rgb(245, 245, 245);
-    --token-a675a693-33e5-4708-8af2-75093fc7f16d: rgb(39, 39, 42);
-    --unframer-secondary-bg-dark: rgb(39, 39, 42);
-    --token-abc765bb-4f1b-45aa-9bdc-0add1aff8e20: rgb(24, 24, 27);
-    --unframer-primary-text-900: rgb(24, 24, 27);
-    --token-ad22872e-8820-44b3-9dc3-0d1bf136ea27: rgb(63, 63, 70);
-    --unframer-base-text: rgb(63, 63, 70);
-    --token-adb645e8-9e23-4a36-8022-1d6005025478: rgb(208, 64, 53);
-    --unframer-red: rgb(208, 64, 53);
-    --token-ae989108-62fb-49f9-9766-821b931e52be: rgba(245, 245, 247, 0.9);
-    --unframer-primary-bg-transparent: rgba(245, 245, 247, 0.9);
-    --token-b4d7a30c-515c-49f6-ad3a-6d54583880b0: rgb(153, 181, 255);
-    --unframer-primary-border: rgb(153, 181, 255);
-    --token-b83339f5-ee2f-4292-aa4b-f8993c91ee80: rgb(245, 245, 247);
-    --unframer-primary-bg: rgb(245, 245, 247);
-    --token-bd01c5a0-8545-46b8-a2f9-92ca823a89fc: rgb(161, 161, 170);
-    --unframer-light-gray: rgb(161, 161, 170);
-    --token-c23b38eb-9089-4794-a772-bf016a6b1358: rgb(255, 255, 255);
-    --unframer-static-white-on-background: rgb(255, 255, 255);
-    --token-c954bfde-6d74-4a5e-ab1c-228c5bed5c11: rgb(0, 119, 237);
-    --unframer-primary: rgb(0, 119, 237);
-    --token-cd8b457a-cb7f-466b-9c65-6c2e9533e54f: rgb(255, 255, 255);
     --unframer-white: rgb(255, 255, 255);
-    --token-d864d204-e075-4506-9452-3841cce585a3: rgb(242, 242, 242);
-    --unframer-card-background: rgb(242, 242, 242);
-    --token-d8e8284b-37e6-4511-a345-15c4b7900464: rgba(255, 255, 255, 0.75);
-    --unframer-white-transparent: rgba(255, 255, 255, 0.75);
-    --token-e3c91ef2-551b-4bbe-b74f-46395a8e0f18: rgb(41, 158, 70);
-    --unframer-green-background: rgb(41, 158, 70);
-    --token-f8828005-fb5c-4770-b374-12fa184c16ca: rgb(0, 0, 0);
-    --unframer-black: rgb(0, 0, 0);
-    --token-fb98f046-fe13-4879-88a6-c6623591cebc: rgb(31, 31, 31);
-    --unframer-black-overlay: rgb(31, 31, 31);
-    --token-ff9ff1d6-af94-4e59-af44-888718fa53ee: rgb(228, 228, 231);
+    --unframer-purple-light: rgb(193, 181, 255);
+    --unframer-shadow: rgba(114, 115, 117, 0.12);
+    --unframer-teritary: rgb(12, 65, 107);
+    --unframer-black-overlay-hover: rgb(23, 23, 23);
+    --unframer-orange: rgb(255, 136, 0);
+    --unframer-green-light: rgb(237, 255, 241);
+    --unframer-mint: rgb(134, 239, 172);
+    --unframer-secondary-bg-hover: rgb(235, 235, 235);
+    --unframer-legacy-white: rgb(255, 255, 255);
+    --unframer-secondary-bg-transparent: rgba(250, 250, 250, 0.9);
+    --unframer-primary-hover: rgb(31, 143, 255);
+    --unframer-yellow: rgb(255, 177, 0);
+    --unframer-green: rgb(22, 136, 53);
+    --unframer-purple-hover: rgb(95, 76, 194);
+    --unframer-green: rgb(22, 136, 53);
+    --unframer-secondary-bg: rgb(250, 250, 250);
+    --unframer-white-hover: rgb(245, 245, 245);
+    --unframer-primary-text-900: rgb(24, 24, 27);
+    --unframer-base-text: rgb(63, 63, 70);
+    --unframer-red: rgb(208, 64, 53);
+    --unframer-primary-bg-transparent: rgba(245, 245, 247, 0.9);
+    --unframer-primary-border: rgb(70, 90, 130);
+    --unframer-yellow-light: rgb(255, 245, 222);
+    --unframer-primary-bg: rgb(245, 245, 247);
+    --unframer-light-gray: rgb(161, 161, 170);
+    --unframer-static-white-on-background: rgb(255, 255, 255);
+    --unframer-primary: rgb(0, 119, 237);
+    --unframer-white: rgb(255, 255, 255);
+    --unframer-primary-light: rgb(230, 240, 250);
+    --unframer-white-invisible: rgba(255, 255, 255, 0);
     --unframer-border: rgb(228, 228, 231);
+    --unframer-red-hover: rgb(255, 74, 74);
+    --unframer-white-transparent: rgba(255, 255, 255, 0.85);
+    --unframer-green-background: rgb(41, 158, 70);
+    --unframer-black: rgb(0, 0, 0);
+    --unframer-black-overlay: rgb(31, 31, 31);
+    --unframer-primary-text-900: rgb(24, 24, 27);
+    --unframer-border: rgb(228, 228, 231);
+
+    --token-032a2ee5-223b-4744-8230-f1e5138dd135: rgb(130, 112, 219);
+    --token-0e800c74-0e52-49bf-96c3-175f20e989b7: rgba(0, 0, 0, 0.8);
+    --token-0f51fcfd-e97a-4e3b-8e90-4dde88da0e0b: rgb(82, 82, 91);
+    --token-16f4c489-7aaa-4809-b9a3-055414e9887c: rgb(214, 225, 245);
+    --token-1cf1f543-08fc-43a7-baad-630903ca6897: rgb(235, 245, 254);
+    --token-25b52238-70ec-48e4-ace9-396a7e6ddba8: rgb(113, 113, 122);
+    --token-261410e1-0b63-42a8-aec1-e42b1419edce: rgb(255, 242, 242);
+    --token-27ed6e95-9593-4911-be1f-4b9b714013e0: rgb(18, 86, 159);
+    --token-30004c26-3ed1-4d83-b179-d80f874e5ac0: rgb(255, 255, 255);
+    --token-3055e888-581f-4a8b-8457-2ef5af7ec979: rgb(193, 181, 255);
+    --token-396e83c8-a3d0-4509-8f3b-9e57b915d3ef: rgba(114, 115, 117, 0.12);
+    --token-39b5ea5d-db88-47fc-8e8c-b9a92ce11555: rgb(12, 65, 107);
+    --token-3b1e8dd6-e47f-45cb-ad1c-a159bd11b5b0: rgb(23, 23, 23);
+    --token-3dff9ce1-cff9-43d9-8e6d-27cd5f739631: rgb(255, 136, 0);
+    --token-4233fc19-59c6-4b93-bb5b-16406f35833e: rgb(237, 255, 241);
+    --token-49fdb0a9-d716-418a-b9fb-142ee3cfbb8e: rgb(134, 239, 172);
+    --token-4a2a4ab4-009c-410d-8503-8978f2af1273: rgb(235, 235, 235);
+    --token-5d0049ec-42c3-416d-9d26-a1cc9860205a: rgb(255, 255, 255);
+    --token-5d870def-9650-4806-8796-0e8d62424201: rgba(250, 250, 250, 0.9);
+    --token-5f0ba7d2-9b13-4ef7-b9be-d254e5e8f888: rgb(31, 143, 255);
+    --token-736eff3f-2831-4b99-94f5-7d3874cf006f: rgb(255, 177, 0);
+    --token-7f38ac97-94a3-487c-ad67-6999c5284e48: rgb(22, 136, 53);
+    --token-98485959-976d-4aa8-aac2-7103cca20409: rgb(95, 76, 194);
+    --token-9aaf3096-a446-4fb6-9ac1-dc0dc6e18df7: rgb(22, 136, 53);
+    --token-9f549c08-ff89-4d86-99c4-e5ad2a870e2a: rgb(250, 250, 250);
+    --token-a147d0a8-dc4a-48b4-a0e3-7673a8eb9fd2: rgb(245, 245, 245);
+    --token-abc765bb-4f1b-45aa-9bdc-0add1aff8e20: rgb(24, 24, 27);
+    --token-ad22872e-8820-44b3-9dc3-0d1bf136ea27: rgb(63, 63, 70);
+    --token-adb645e8-9e23-4a36-8022-1d6005025478: rgb(208, 64, 53);
+    --token-ae989108-62fb-49f9-9766-821b931e52be: rgba(245, 245, 247, 0.9);
+    --token-b4d7a30c-515c-49f6-ad3a-6d54583880b0: rgb(70, 90, 130);
+    --token-b756de25-5961-43c3-b9db-224aa4e285f9: rgb(255, 245, 222);
+    --token-b83339f5-ee2f-4292-aa4b-f8993c91ee80: rgb(245, 245, 247);
+    --token-bd01c5a0-8545-46b8-a2f9-92ca823a89fc: rgb(161, 161, 170);
+    --token-c23b38eb-9089-4794-a772-bf016a6b1358: rgb(255, 255, 255);
+    --token-c954bfde-6d74-4a5e-ab1c-228c5bed5c11: rgb(0, 119, 237);
+    --token-cd8b457a-cb7f-466b-9c65-6c2e9533e54f: rgb(255, 255, 255);
+    --token-d572a379-5c5d-4a96-84c0-9ac94053a5df: rgb(230, 240, 250);
+    --token-d5c198fa-f03d-405a-b72b-205dbf717072: rgba(255, 255, 255, 0);
+    --token-d653afa9-bc6f-4b98-817f-f6f1aecccc37: rgb(228, 228, 231);
+    --token-d7a82d88-e67e-4223-90d0-fe65a6fe884f: rgb(255, 74, 74);
+    --token-d8e8284b-37e6-4511-a345-15c4b7900464: rgba(255, 255, 255, 0.85);
+    --token-e3c91ef2-551b-4bbe-b74f-46395a8e0f18: rgb(41, 158, 70);
+    --token-f8828005-fb5c-4770-b374-12fa184c16ca: rgb(0, 0, 0);
+    --token-fb98f046-fe13-4879-88a6-c6623591cebc: rgb(31, 31, 31);
+    --token-fd041e59-7f0a-4be6-b74f-7dbbe6759afb: rgb(24, 24, 27);
+    --token-ff9ff1d6-af94-4e59-af44-888718fa53ee: rgb(228, 228, 231);
 }
 
 .dark {
-    --token-0e800c74-0e52-49bf-96c3-175f20e989b7: rgba(0, 0, 0, 0.8);
+    --unframer-purple: rgb(130, 112, 219);
     --unframer-black-transparent: rgba(0, 0, 0, 0.8);
-    --token-0f51fcfd-e97a-4e3b-8e90-4dde88da0e0b: rgb(82, 82, 91);
     --unframer-secondary-text: rgb(82, 82, 91);
-    --token-16f4c489-7aaa-4809-b9a3-055414e9887c: rgb(214, 225, 245);
     --unframer-secondary-blue-hover: rgb(214, 225, 245);
-    --token-1cf1f543-08fc-43a7-baad-630903ca6897: rgb(235, 245, 254);
     --unframer-secondary-blue: rgb(235, 245, 254);
-    --token-25b52238-70ec-48e4-ace9-396a7e6ddba8: rgb(113, 113, 122);
     --unframer-base-gray: rgb(113, 113, 122);
-    --token-261410e1-0b63-42a8-aec1-e42b1419edce: rgb(255, 74, 74);
-    --unframer-red-light: rgb(255, 74, 74);
-    --token-27ed6e95-9593-4911-be1f-4b9b714013e0: rgb(18, 86, 159);
+    --unframer-red-light: rgb(255, 242, 242);
     --unframer-blue-images: rgb(18, 86, 159);
-    --token-396e83c8-a3d0-4509-8f3b-9e57b915d3ef: rgba(114, 115, 117, 0.12);
-    --unframer-card-shadow: rgba(114, 115, 117, 0.12);
-    --token-39b5ea5d-db88-47fc-8e8c-b9a92ce11555: rgb(12, 65, 107);
-    --unframer-teritary: rgb(12, 65, 107);
-    --token-3b1e8dd6-e47f-45cb-ad1c-a159bd11b5b0: rgb(23, 23, 23);
-    --unframer-black-overlay-hover: rgb(23, 23, 23);
-    --token-49fdb0a9-d716-418a-b9fb-142ee3cfbb8e: rgb(134, 239, 172);
-    --unframer-mint: rgb(134, 239, 172);
-    --token-5f0ba7d2-9b13-4ef7-b9be-d254e5e8f888: rgb(31, 143, 255);
-    --unframer-primary-hover: rgb(31, 143, 255);
-    --token-736eff3f-2831-4b99-94f5-7d3874cf006f: rgb(255, 177, 0);
-    --unframer-yellow: rgb(255, 177, 0);
-    --token-7f38ac97-94a3-487c-ad67-6999c5284e48: rgb(22, 136, 53);
-    --unframer-green: rgb(22, 136, 53);
-    --token-9f549c08-ff89-4d86-99c4-e5ad2a870e2a: rgb(250, 250, 250);
-    --unframer-secondary-bg: rgb(250, 250, 250);
-    --token-a147d0a8-dc4a-48b4-a0e3-7673a8eb9fd2: rgb(245, 245, 245);
-    --unframer-white-hover: rgb(245, 245, 245);
-    --token-a675a693-33e5-4708-8af2-75093fc7f16d: rgb(39, 39, 42);
-    --unframer-secondary-bg-dark: rgb(39, 39, 42);
-    --token-abc765bb-4f1b-45aa-9bdc-0add1aff8e20: rgb(24, 24, 27);
-    --unframer-primary-text-900: rgb(24, 24, 27);
-    --token-ad22872e-8820-44b3-9dc3-0d1bf136ea27: rgb(63, 63, 70);
-    --unframer-base-text: rgb(63, 63, 70);
-    --token-adb645e8-9e23-4a36-8022-1d6005025478: rgb(208, 64, 53);
-    --unframer-red: rgb(208, 64, 53);
-    --token-ae989108-62fb-49f9-9766-821b931e52be: rgba(245, 245, 247, 0.9);
-    --unframer-primary-bg-transparent: rgba(245, 245, 247, 0.9);
-    --token-b4d7a30c-515c-49f6-ad3a-6d54583880b0: rgb(153, 181, 255);
-    --unframer-primary-border: rgb(153, 181, 255);
-    --token-b83339f5-ee2f-4292-aa4b-f8993c91ee80: rgb(245, 245, 247);
-    --unframer-primary-bg: rgb(245, 245, 247);
-    --token-bd01c5a0-8545-46b8-a2f9-92ca823a89fc: rgb(161, 161, 170);
-    --unframer-light-gray: rgb(161, 161, 170);
-    --token-c23b38eb-9089-4794-a772-bf016a6b1358: rgb(255, 255, 255);
-    --unframer-static-white-on-background: rgb(255, 255, 255);
-    --token-c954bfde-6d74-4a5e-ab1c-228c5bed5c11: rgb(0, 119, 237);
-    --unframer-primary: rgb(0, 119, 237);
-    --token-cd8b457a-cb7f-466b-9c65-6c2e9533e54f: rgb(255, 255, 255);
     --unframer-white: rgb(255, 255, 255);
-    --token-d864d204-e075-4506-9452-3841cce585a3: rgb(242, 242, 242);
-    --unframer-card-background: rgb(242, 242, 242);
-    --token-d8e8284b-37e6-4511-a345-15c4b7900464: rgba(255, 255, 255, 0.75);
-    --unframer-white-transparent: rgba(255, 255, 255, 0.75);
-    --token-e3c91ef2-551b-4bbe-b74f-46395a8e0f18: rgb(41, 158, 70);
-    --unframer-green-background: rgb(41, 158, 70);
-    --token-f8828005-fb5c-4770-b374-12fa184c16ca: rgb(0, 0, 0);
-    --unframer-black: rgb(0, 0, 0);
-    --token-fb98f046-fe13-4879-88a6-c6623591cebc: rgb(31, 31, 31);
-    --unframer-black-overlay: rgb(31, 31, 31);
-    --token-ff9ff1d6-af94-4e59-af44-888718fa53ee: rgb(228, 228, 231);
+    --unframer-purple-light: rgb(193, 181, 255);
+    --unframer-shadow: rgba(114, 115, 117, 0.12);
+    --unframer-teritary: rgb(12, 65, 107);
+    --unframer-black-overlay-hover: rgb(23, 23, 23);
+    --unframer-orange: rgb(255, 136, 0);
+    --unframer-green-light: rgb(237, 255, 241);
+    --unframer-mint: rgb(134, 239, 172);
+    --unframer-secondary-bg-hover: rgb(235, 235, 235);
+    --unframer-legacy-white: rgb(255, 255, 255);
+    --unframer-secondary-bg-transparent: rgba(250, 250, 250, 0.9);
+    --unframer-primary-hover: rgb(31, 143, 255);
+    --unframer-yellow: rgb(255, 177, 0);
+    --unframer-green: rgb(22, 136, 53);
+    --unframer-purple-hover: rgb(95, 76, 194);
+    --unframer-green: rgb(22, 136, 53);
+    --unframer-secondary-bg: rgb(250, 250, 250);
+    --unframer-white-hover: rgb(245, 245, 245);
+    --unframer-primary-text-900: rgb(24, 24, 27);
+    --unframer-base-text: rgb(63, 63, 70);
+    --unframer-red: rgb(208, 64, 53);
+    --unframer-primary-bg-transparent: rgba(245, 245, 247, 0.9);
+    --unframer-primary-border: rgb(70, 90, 130);
+    --unframer-yellow-light: rgb(255, 245, 222);
+    --unframer-primary-bg: rgb(245, 245, 247);
+    --unframer-light-gray: rgb(161, 161, 170);
+    --unframer-static-white-on-background: rgb(255, 255, 255);
+    --unframer-primary: rgb(0, 119, 237);
+    --unframer-white: rgb(255, 255, 255);
+    --unframer-primary-light: rgb(230, 240, 250);
+    --unframer-white-invisible: rgba(255, 255, 255, 0);
     --unframer-border: rgb(228, 228, 231);
+    --unframer-red-hover: rgb(255, 74, 74);
+    --unframer-white-transparent: rgba(255, 255, 255, 0.85);
+    --unframer-green-background: rgb(41, 158, 70);
+    --unframer-black: rgb(0, 0, 0);
+    --unframer-black-overlay: rgb(31, 31, 31);
+    --unframer-primary-text-900: rgb(24, 24, 27);
+    --unframer-border: rgb(228, 228, 231);
+
+    --token-032a2ee5-223b-4744-8230-f1e5138dd135: rgb(130, 112, 219);
+    --token-0e800c74-0e52-49bf-96c3-175f20e989b7: rgba(0, 0, 0, 0.8);
+    --token-0f51fcfd-e97a-4e3b-8e90-4dde88da0e0b: rgb(82, 82, 91);
+    --token-16f4c489-7aaa-4809-b9a3-055414e9887c: rgb(214, 225, 245);
+    --token-1cf1f543-08fc-43a7-baad-630903ca6897: rgb(235, 245, 254);
+    --token-25b52238-70ec-48e4-ace9-396a7e6ddba8: rgb(113, 113, 122);
+    --token-261410e1-0b63-42a8-aec1-e42b1419edce: rgb(255, 242, 242);
+    --token-27ed6e95-9593-4911-be1f-4b9b714013e0: rgb(18, 86, 159);
+    --token-30004c26-3ed1-4d83-b179-d80f874e5ac0: rgb(255, 255, 255);
+    --token-3055e888-581f-4a8b-8457-2ef5af7ec979: rgb(193, 181, 255);
+    --token-396e83c8-a3d0-4509-8f3b-9e57b915d3ef: rgba(114, 115, 117, 0.12);
+    --token-39b5ea5d-db88-47fc-8e8c-b9a92ce11555: rgb(12, 65, 107);
+    --token-3b1e8dd6-e47f-45cb-ad1c-a159bd11b5b0: rgb(23, 23, 23);
+    --token-3dff9ce1-cff9-43d9-8e6d-27cd5f739631: rgb(255, 136, 0);
+    --token-4233fc19-59c6-4b93-bb5b-16406f35833e: rgb(237, 255, 241);
+    --token-49fdb0a9-d716-418a-b9fb-142ee3cfbb8e: rgb(134, 239, 172);
+    --token-4a2a4ab4-009c-410d-8503-8978f2af1273: rgb(235, 235, 235);
+    --token-5d0049ec-42c3-416d-9d26-a1cc9860205a: rgb(255, 255, 255);
+    --token-5d870def-9650-4806-8796-0e8d62424201: rgba(250, 250, 250, 0.9);
+    --token-5f0ba7d2-9b13-4ef7-b9be-d254e5e8f888: rgb(31, 143, 255);
+    --token-736eff3f-2831-4b99-94f5-7d3874cf006f: rgb(255, 177, 0);
+    --token-7f38ac97-94a3-487c-ad67-6999c5284e48: rgb(22, 136, 53);
+    --token-98485959-976d-4aa8-aac2-7103cca20409: rgb(95, 76, 194);
+    --token-9aaf3096-a446-4fb6-9ac1-dc0dc6e18df7: rgb(22, 136, 53);
+    --token-9f549c08-ff89-4d86-99c4-e5ad2a870e2a: rgb(250, 250, 250);
+    --token-a147d0a8-dc4a-48b4-a0e3-7673a8eb9fd2: rgb(245, 245, 245);
+    --token-abc765bb-4f1b-45aa-9bdc-0add1aff8e20: rgb(24, 24, 27);
+    --token-ad22872e-8820-44b3-9dc3-0d1bf136ea27: rgb(63, 63, 70);
+    --token-adb645e8-9e23-4a36-8022-1d6005025478: rgb(208, 64, 53);
+    --token-ae989108-62fb-49f9-9766-821b931e52be: rgba(245, 245, 247, 0.9);
+    --token-b4d7a30c-515c-49f6-ad3a-6d54583880b0: rgb(70, 90, 130);
+    --token-b756de25-5961-43c3-b9db-224aa4e285f9: rgb(255, 245, 222);
+    --token-b83339f5-ee2f-4292-aa4b-f8993c91ee80: rgb(245, 245, 247);
+    --token-bd01c5a0-8545-46b8-a2f9-92ca823a89fc: rgb(161, 161, 170);
+    --token-c23b38eb-9089-4794-a772-bf016a6b1358: rgb(255, 255, 255);
+    --token-c954bfde-6d74-4a5e-ab1c-228c5bed5c11: rgb(0, 119, 237);
+    --token-cd8b457a-cb7f-466b-9c65-6c2e9533e54f: rgb(255, 255, 255);
+    --token-d572a379-5c5d-4a96-84c0-9ac94053a5df: rgb(230, 240, 250);
+    --token-d5c198fa-f03d-405a-b72b-205dbf717072: rgba(255, 255, 255, 0);
+    --token-d653afa9-bc6f-4b98-817f-f6f1aecccc37: rgb(228, 228, 231);
+    --token-d7a82d88-e67e-4223-90d0-fe65a6fe884f: rgb(255, 74, 74);
+    --token-d8e8284b-37e6-4511-a345-15c4b7900464: rgba(255, 255, 255, 0.85);
+    --token-e3c91ef2-551b-4bbe-b74f-46395a8e0f18: rgb(41, 158, 70);
+    --token-f8828005-fb5c-4770-b374-12fa184c16ca: rgb(0, 0, 0);
+    --token-fb98f046-fe13-4879-88a6-c6623591cebc: rgb(31, 31, 31);
+    --token-fd041e59-7f0a-4be6-b74f-7dbbe6759afb: rgb(24, 24, 27);
+    --token-ff9ff1d6-af94-4e59-af44-888718fa53ee: rgb(228, 228, 231);
 }
+/* Base */
+@media (min-width: 0px) and (max-width: 319px) {
+    .unframer:not(.unframer-base) { 
+        display: none !important;
+    }
+}
+
+/* Small */
+@media (min-width: 320px) and (max-width: 767px) {
+    .unframer:not(.unframer-sm) { 
+        display: none !important;
+    }
+}
+
+/* Medium */
+@media (min-width: 768px) and (max-width: 959px) {
+    .unframer:not(.unframer-md) { 
+        display: none !important;
+    }
+}
+
+/* Large */
+@media (min-width: 960px) and (max-width: 1199px) {
+    .unframer:not(.unframer-lg) { 
+        display: none !important;
+    }
+}
+
+/* Extra Large */
+@media (min-width: 1200px) and (max-width: 1535px) {
+    .unframer:not(.unframer-xl) { 
+        display: none !important;
+    }
+}
+
+/* 2 Extra Large */
+@media (min-width: 1536px) {
+    .unframer:not(.unframer-2xl) { 
+        display: none !important;
+    }
+}
+
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
     .unframer-hidden.unframer-base { 
@@ -198,7 +309,7 @@ h1, h2, h3, h4, h5, h6, p, figure {
 }
 
 
-body { --framer-will-change-override: none; }
+body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }
@@ -332,6 +443,7 @@ body { --framer-will-change-override: none; }
 
         p.framer-text,
         div.framer-text,
+        figure.framer-text,
         h1.framer-text,
         h2.framer-text,
         h3.framer-text,
@@ -377,6 +489,25 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            p.framer-text,
+            div.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            li.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))));
+                -webkit-text-stroke-color: var(--framer-text-stroke-color-rgb, var(--framer-text-stroke-color, initial));
+            }
+        }
+    
+
         .framer-fit-text .framer-text {
             white-space: nowrap;
             white-space-collapse: preserve;
@@ -418,6 +549,8 @@ body { --framer-will-change-override: none; }
         ol.framer-text:not(:first-child),
         ul.framer-text:not(:first-child),
         blockquote.framer-text:not(:first-child),
+        table.framer-text:not(:first-child),
+        figure.framer-text:not(:first-child),
         .framer-image.framer-text:not(:first-child) {
             margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0));
         }
@@ -452,6 +585,14 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text,
+            code.framer-text span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+            }
+        }
+    
+
         blockquote.framer-text {
             margin-block-start: initial;
             margin-block-end: initial;
@@ -477,6 +618,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text,
+            a.framer-text span.framer-text:not([data-text-fill]),
+            span.framer-text[data-nested-link],
+            span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+            }
+        }
+    
+
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link],
@@ -486,6 +637,16 @@ body { --framer-will-change-override: none; }
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text,
+            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-nested-link],
+            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+            }
         }
     
 
@@ -503,17 +664,37 @@ body { --framer-will-change-override: none; }
         }
     
 
+    @supports not (color: color(display-p3 1 1 1)) {
+        a.framer-text:hover,
+        a.framer-text:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link]:hover,
+        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+        }
+    }
+    
+
         code.framer-text a.framer-text:hover,
         code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link]:hover,
         code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     
+
+    @supports not (color: color(display-p3 1 1 1)) {
+        code.framer-text a.framer-text:hover,
+        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-nested-link]:hover,
+        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+        }
+    }
+   
 
         a.framer-text[data-framer-page-link-current],
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
@@ -529,6 +710,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text[data-framer-page-link-current],
+            a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            span.framer-text[data-framer-page-link-current],
+            span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+            }
+        }
+    
+
         code.framer-text a.framer-text[data-framer-page-link-current],
         code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-framer-page-link-current],
@@ -538,6 +729,16 @@ body { --framer-will-change-override: none; }
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text[data-framer-page-link-current],
+            code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current],
+            code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+            }
         }
     
 
@@ -555,6 +756,16 @@ body { --framer-will-change-override: none; }
         }
     
 
+        @supports not (color: color(display-p3 1 1 1)) {
+            a.framer-text[data-framer-page-link-current]:hover,
+            a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            span.framer-text[data-framer-page-link-current]:hover,
+            span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+            }
+        }
+    
+
         code.framer-text a.framer-text[data-framer-page-link-current]:hover,
         code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-framer-page-link-current]:hover,
@@ -564,6 +775,16 @@ body { --framer-will-change-override: none; }
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        @supports not (color: color(display-p3 1 1 1)) {
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+            }
         }
     
 
@@ -596,34 +817,81 @@ body { --framer-will-change-override: none; }
 
         ul.framer-text,
         ol.framer-text {
-            display: table;
-            width: 100%;
+            padding-left: 3ch;
+            position: relative;
         }
     
 
         li.framer-text {
-            display: table-row;
             counter-increment: list-item;
             list-style: none;
         }
     
 
         ol.framer-text > li.framer-text::before {
-            display: table-cell;
-            width: 2.25ch;
-            box-sizing: border-box;
-            padding-inline-end: 0.75ch;
+            position: absolute;
+            left: 0;
             content: counter(list-item, var(--list-style-type)) ".";
-            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 100),
+        ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
+            padding-left: 1ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
+            padding-left: 2ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 10000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
+            padding-left: 3ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 100000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
+            padding-left: 4ch;
+        }
+    
+
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
+        ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
+            padding-left: 5ch;
         }
     
 
         ul.framer-text > li.framer-text::before {
-            display: table-cell;
-            width: 2.25ch;
-            box-sizing: border-box;
-            padding-inline-end: 0.75ch;
+            position: absolute;
+            left: 0;
             content: "•";
+        }
+    
+
+        .framer-table-wrapper {
+            overflow-x: auto;
+        }
+    
+
+        table.framer-text,
+        .framer-table-wrapper table.framer-text {
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: auto;
+            word-break: normal;
+            width: 100%;
+        }
+    
+
+        td.framer-text,
+        th.framer-text {
+            min-width: 16ch;
+            vertical-align: top;
         }
     
 
@@ -924,208 +1192,24 @@ NavigationContainer
 }
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
+[data-hide-scrollbars="true"] { scrollbar-width: none; }
 
-/* used by main.js */
+/* used by accordion.js, card-info-banner.js, overlay-upgrade-plan.js, sc-billing.js */
 
 @font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.cyrillic-ext-CFTLRB35.woff2');
+    font-family: 'Fragment Mono'; 
+    src: url('https://fonts.gstatic.com/s/fragmentmono/v4/4iCr6K5wfMRRjxp0DA6-2CLnN4FNh4UI_1U.woff2');
     font-style: normal;
     font-weight: 400;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.cyrillic-KKLZBALH.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.greek-ext-ULEBLIFV.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.greek-IRHSNFQB.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0370-03FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.latin-ext-VZDUGU3Q.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.latin-JLQMKCHE.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-Regular.vietnamese-QK7VSWXK.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.cyrillic-ext-C7KWUKA7.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.cyrillic-JWV7SOZ6.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.greek-EQ3PSENU.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+0370-03FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.greek-ext-FBKSFTSU.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.latin-ext-ULRSO3ZR.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.latin-RDYY2AG2.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://app.framerstatic.com/Inter-SemiBold.vietnamese-ESQNSEQ3.woff2');
-    font-style: normal;
-    font-weight: 600;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/5A3Ce6C9YYmCjpQx9M4inSaKU.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/5vvr9Vy74if2I6bQ bJvbw7SY1pQ.woff2');
-    font-style: normal;
-    font-weight: 400;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/6mJuEAguuIuMog10gGvH5d3cl8.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/d3tHnaQIAeqiE5hGcRw4mmgWYU.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/DolVirEGb34pEXEp8t8FQBSK4.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/otTaNuNpVK4RbdlT7zDDdKvQBA.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/Qx95Xyt0Ka3SGhinnbXIGpEIyP4.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/xYYWaj7wCU5zSQH0eXvSaS19wo.woff2');
-    font-style: normal;
-    font-weight: 500;
-    unicodeRange: U+0370-03FF;
-}
-
-/* used by bar-chart.js */
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZ1rib2Bg-4.woff2');
-    font-style: normal;
-    font-weight: 600;
-}
+/* used by bubble-up.js */
 
 @font-face {
     font-family: 'Inter'; 
     src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZ1rib2Bg-4.woff2');
     font-style: normal;
     font-weight: 500;
-}
-
-/* used by button-search.js, component.js, default.js, left.js, main-layout.js, main.js, overlay-search.js, overlay-settings.js, right.js, search.js, siteinformation-logo.js, wrapper.js */
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZ1rib2Bg-4.woff2');
-    font-style: normal;
-    font-weight: 400;
 }
 
 /* used by menu-secondary.js */
@@ -1137,7 +1221,7 @@ NavigationContainer
     font-weight: 700;
 }
 
-/* used by button-search.js, cell-click-icon-text.js, cell-text.js, cell.js, default.js, field.js, left.js, main-layout.js, main.js, overlay-settings.js, row.js, siteinformation-logo.js, wrapper.js */
+/* used by accordion.js, auth-layout.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, field-base.js, graphic-library-cards.js, graphic-library.js, left.js, library.js, main-layout.js, overlay-add-addon.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, sc-users.js, slider-comp.js, task-base.js, version.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1146,6 +1230,114 @@ NavigationContainer
     font-weight: 700;
     unicodeRange: U+1F00-1FFF;
 }
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2');
+    font-style: normal;
+    font-weight: 700;
+    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2');
+    font-style: normal;
+    font-weight: 700;
+    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2');
+    font-style: normal;
+    font-weight: 700;
+    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2');
+    font-style: normal;
+    font-weight: 700;
+    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2');
+    font-style: normal;
+    font-weight: 700;
+    unicodeRange: U+0370-03FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2');
+    font-style: normal;
+    font-weight: 700;
+    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* used by slider-comp.js */
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/1ZFS7N918ojhhd0nQWdj3jz4w.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+0370-03FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2');
+    font-style: normal;
+    font-weight: 600;
+    unicodeRange: U+1F00-1FFF;
+}
+
+/* used by accordion.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, field-base.js, left.js, library.js, main-layout.js, overlay-add-addon.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, slider-comp.js, task-base.js, version.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1161,14 +1353,6 @@ NavigationContainer
     font-style: italic;
     font-weight: 700;
     unicodeRange: U+1F00-1FFF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2');
-    font-style: normal;
-    font-weight: 700;
-    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
 @font-face {
@@ -1205,30 +1389,6 @@ NavigationContainer
 
 @font-face {
     font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2');
-    font-style: normal;
-    font-weight: 700;
-    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2');
-    font-style: normal;
-    font-weight: 700;
-    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2');
-    font-style: normal;
-    font-weight: 700;
-    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-}
-
-@font-face {
-    font-family: 'Inter'; 
     src: url('https://framerusercontent.com/assets/H89BbHkbHDzlxZzxi8uPzTsp90.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1261,14 +1421,6 @@ NavigationContainer
 
 @font-face {
     font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2');
-    font-style: normal;
-    font-weight: 700;
-    unicodeRange: U+0370-03FF;
-}
-
-@font-face {
-    font-family: 'Inter'; 
     src: url('https://framerusercontent.com/assets/u6gJwDuwB143kpNK1T1MDKDWkMc.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1281,14 +1433,6 @@ NavigationContainer
     font-style: italic;
     font-weight: 400;
     unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Inter'; 
-    src: url('https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2');
-    font-style: normal;
-    font-weight: 700;
-    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
@@ -1307,7 +1451,7 @@ NavigationContainer
     unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* used by button-search.js, default.js, left.js, main-layout.js, overlay-settings.js, siteinformation-logo.js, wrapper.js */
+/* used by button-search.js, left.js, main-layout.js */
 
 @font-face {
     font-family: 'Inter Display'; 
@@ -1365,7 +1509,72 @@ NavigationContainer
     unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
-/* used by apple-touch.js, auth-layout.js, button-card.js, button-company.js, button-search.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, checkbox-menu.js, component.js, content-overlay.js, default.js, department.js, dropdown-multiple-select-roles.js, field.js, form.js, group-row-general.js, group-row.js, header-title-switch.js, header.js, icon-selector.js, install-app.js, item.js, left-footer.js, left-header.js, left.js, library.js, main-layout.js, main.js, menu-delete.js, menu-folder.js, menu-open-event.js, menu.js, move-to-menu-button.js, move-to-static.js, move-to.js, overlay-dialog.js, overlay-file-view.js, overlay-search.js, overlay-settings.js, overlay-share.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, right.js, role-to-delete.js, role.js, row.js, search.js, secondary.js, sidebar.js, siteinformation-logo.js, switch-text.js, switch-toggle.js, table-formatted.js, test-d-d.js, textfield-checkbox.js, top-bar.js, user-detail.js, wrapper.js */
+/* used by overlay-upgrade-plan.js, sc-billing.js */
+
+@font-face {
+    font-family: 'Base Italic'; 
+    src: url('https://framerusercontent.com/assets/3WY2eBEI6z2xUoZWfA1MvFcsMx0.woff2');
+}
+
+/* used by overlay-onboarding.js, slider-comp.js, testimonial-texts.js, testimonials.js */
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/5A3Ce6C9YYmCjpQx9M4inSaKU.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/6mJuEAguuIuMog10gGvH5d3cl8.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+1F00-1FFF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/d3tHnaQIAeqiE5hGcRw4mmgWYU.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/DolVirEGb34pEXEp8t8FQBSK4.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/otTaNuNpVK4RbdlT7zDDdKvQBA.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/Qx95Xyt0Ka3SGhinnbXIGpEIyP4.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+    font-family: 'Inter'; 
+    src: url('https://framerusercontent.com/assets/xYYWaj7wCU5zSQH0eXvSaS19wo.woff2');
+    font-style: normal;
+    font-weight: 500;
+    unicodeRange: U+0370-03FF;
+}
+
+/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, card.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, empty.js, error.js, field-base.js, file-preview.js, form.js, good-x-text.js, graphic-customer-portal.js, graphic-docs.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, icon-selector.js, info-overlay.js, install-app.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, slider-comp.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, textfield-checkbox.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-collection.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, version.js, warning.js, wrapper.js */
 
 @font-face {
     font-family: 'Inter'; 
@@ -1423,21 +1632,35 @@ NavigationContainer
     unicodeRange: U+1F00-1FFF;
 }
 
-/* used by apple-touch.js, auth-layout.js, button-card.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, checkbox-menu.js, default.js, department.js, dropdown-multiple-select-roles.js, field.js, group-row-general.js, group-row.js, header-title-switch.js, header.js, install-app.js, left-footer.js, left.js, library.js, main-layout.js, move-to-static.js, move-to.js, overlay-dialog.js, overlay-file-view.js, overlay-settings.js, overlay-share.js, permission-group-formatted.js, permission-group.js, permission-selection.js, role-to-delete.js, role.js, row.js, sidebar.js, siteinformation-logo.js, top-bar.js, user-detail.js, wrapper.js */
+/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-live-chat.js, button-primary-with-static-image.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, community-support.js, content-info-banner.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, default.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, empty.js, error.js, field-base.js, file-preview.js, form.js, graphic-customer-portal.js, graphic-docs.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, info-overlay.js, install-app.js, left-footer.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, public-layout.js, result-button.js, role.js, row.js, sc-ai.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, texts.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, warning.js, wrapper.js */
 
 @font-face {
     font-family: 'SanBase Medium'; 
     src: url('https://framerusercontent.com/assets/Anmn6ZKjuUjcfr07HEmCpUbPxdY.woff2');
 }
 
-/* used by component.js, default.js, library.js, main-layout.js, overlay-dialog.js, overlay-file-view.js, overlay-settings.js, overlay-share.js, right.js, secondary.js, siteinformation-logo.js, wrapper.js */
+/* used by accordion.js, auth-layout.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, charts-section.js, community-support.js, default.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, good-x-text.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, info-overlay.js, lesson-page.js, library.js, module-hero.js, module-page.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overview-page.js, sc-billing.js, sc-users.js, secondary.js, texts.js, trainings-collection.js, trainings-hero.js, update.js */
 
 @font-face {
     font-family: 'SanBase Bold'; 
     src: url('https://framerusercontent.com/assets/GiBlJQKeaFvSuLMd7bhsYgy9r4g.woff2');
 }
 
-/* used by auth-layout.js, button-company.js, button-search.js, cell-click-icon-text.js, cell-text.js, cell.js, component.js, content-overlay.js, default.js, department.js, dropdown-multiple-select-roles.js, dropdown-roles.js, dropdown-users.js, dropdown-workbases.js, field.js, form.js, group-row-general.js, group-row.js, header.js, left-footer.js, left-header.js, left.js, library.js, main-button.js, main-layout.js, menu-delete.js, menu-folder.js, menu-open-event.js, menu.js, move-to-menu-button.js, move-to-static.js, move-to.js, overlay-dialog.js, overlay-file-view.js, overlay-search.js, overlay-settings.js, overlay-share.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, right.js, role-to-delete.js, role.js, row.js, search.js, secondary.js, sidebar.js, siteinformation-logo.js, switch-text.js, switch-toggle.js, table-formatted.js, test-d-d.js, top-bar.js, user-detail.js, wrapper.js */
+/* used by charts-section.js, detail-page.js, lesson-page.js, module-page.js */
+
+@font-face {
+    font-family: 'SanBase Light'; 
+    src: url('https://framerusercontent.com/assets/JfBnyDK1wE3VJsTSmyKJ2WWG8.woff2');
+}
+
+/* used by ai-sidebar.js, auth-layout.js, bookmark-expanded.js, left-footer.js, left.js, library.js, main-layout.js, overlay-info-welcome.js, overlay-onboarding.js, task-base.js, upgrade-card.js */
+
+@font-face {
+    font-family: 'SanBase SemiBold'; 
+    src: url('https://framerusercontent.com/assets/RDmy2JXVyn1eWMLxhJn0Fb9tk0.woff2');
+}
+
+/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, ai-top-bar.js, app.js, auth-layout.js, bookmark-expanded.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-click-icon-text.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, default.js, delete.js, department.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, dropdown-ai-chats.js, dropdown-languages.js, dropdown-one-select.js, dropdown-roles.js, dropdown-users.js, dropdown-workbases.js, error.js, field-base.js, file-preview.js, graphic-customer-portal.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, group-row-general.js, group-row.js, group.js, header.js, info-overlay.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-button.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-base.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, table-formatted.js, task-base.js, texts.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, user-detail.js, version.js, warning.js */
 
 @font-face {
     font-family: 'SanBase Regular'; 
