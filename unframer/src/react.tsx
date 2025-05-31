@@ -21,13 +21,13 @@ import { version } from './version.js'
 function classNames(...args) {
     return args.filter(Boolean).join(' ')
 }
-function hints() {
+function Hints() {
     prefetchDNS('https://fonts.gstatic.com')
     preconnect('https://fonts.gstatic.com')
     preconnect('https://framerusercontent.com')
     return null // nothing to render
 }
-hints()
+
 // breakpoints from the higher to the lower
 const defaultBreakpoints = Object.keys(
     defaultBreakpointSizes,
@@ -365,6 +365,7 @@ export function ContextProviders({
     }, [activeLocale, locales])
     return (
         <FetchClientProvider>
+            <Hints />
             <CustomCursorHost>
                 <FormContext.Provider value={framerSiteId}>
                     <LocaleInfoContext value={localeInfo}>
@@ -414,6 +415,7 @@ const unframerContext = createContext<Partial<UnframerProviderProps>>({
 export function UnframerProvider(props: UnframerProviderProps) {
     return (
         <unframerContext.Provider value={props}>
+            <Hints />
             {props.children}
         </unframerContext.Provider>
     )
