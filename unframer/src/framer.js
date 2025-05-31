@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.C2MZBAEL.mjs
+// /:https://app.framerstatic.com/framer.EIKPCYI5.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -42169,8 +42169,8 @@ function useRunCallbackIfElementIsInView() {
       queuedMicrotask = true;
       queueMicrotask(() => {
         var _a;
-        if (!isInViewRef.current) return;
         queuedMicrotask = false;
+        if (!isInViewRef.current) return;
         (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
       },);
     };
