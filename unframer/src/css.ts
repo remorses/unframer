@@ -1,4 +1,4 @@
-import { dedent } from './utils.js'
+import dedent from 'string-dedent'
 import { ComponentFont } from './framer.js'
 
 function deduplicateByKey<T>(arr: T[], key: (k: T) => string): T[] {
