@@ -1,5 +1,6 @@
 'use client'
 import { combinedCSSRules, withCSS as originalWithCSS } from './framer.js'
+import { preconnect, prefetchDNS } from 'react-dom'
 
 import {
     ComponentPropsWithoutRef,
@@ -20,7 +21,13 @@ import { version } from './version.js'
 function classNames(...args) {
     return args.filter(Boolean).join(' ')
 }
-
+function hints() {
+    prefetchDNS('https://fonts.gstatic.com')
+    preconnect('https://fonts.gstatic.com')
+    preconnect('https://framerusercontent.com')
+    return null // nothing to render
+}
+hints()
 // breakpoints from the higher to the lower
 const defaultBreakpoints = Object.keys(
     defaultBreakpointSizes,
@@ -303,7 +310,12 @@ export function AdaptedLink({
     const route = routes?.[webPageId]
     const target = openInNewTab ? '_blank' : undefined
     if (isRelativeLink(href) || isMailto(href)) {
-        return React.cloneElement(children, { ...rest, onClick: navigateClientSide, href, target })
+        return React.cloneElement(children, {
+            ...rest,
+            onClick: navigateClientSide,
+            href,
+            target,
+        })
     }
     if (!webPageId) {
         return <Link href={href} {...rest} {...onlyForFramer} />
