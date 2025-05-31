@@ -291,7 +291,8 @@ export async function bundle({
             if (
                 config.jsx &&
                 !tooBig &&
-                !resultPathAbsJs.includes('/chunks/')
+                !resultPathAbsJs.includes('/chunks/') &&
+                !resultPathAbsJs.includes('\\chunks\\')
             ) {
                 try {
                     let res = transform(file.text || '', {
