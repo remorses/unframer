@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.EIKPCYI5.mjs
+// /:https://app.framerstatic.com/framer.T5O3RCPT.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -46333,34 +46333,44 @@ function createLineGroups(elements,) {
   groups2.push(currentGroup,);
   return groups2;
 }
-var FitText = /* @__PURE__ */ forwardRef(({
+var BaseSVG = /* @__PURE__ */ forwardRef(function BaseSVG2(props, forwardedRef,) {
+  return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: FIXME: FitText might be inaccessible to screen readers because it’s wrapped in an svg
+    /* @__PURE__ */
+    jsx3('svg', {
+      ...props,
+      ref: forwardedRef,
+      children: props.children,
+    },)
+  );
+},);
+var MotionSVG = /* @__PURE__ */ motion.create(BaseSVG,);
+var FitText = /* @__PURE__ */ forwardRef(function FitText2({
   viewBoxScale,
   viewBox,
   children,
   ...props
-}, ref,) => {
-  return (
-    // biome-ignore lint/a11y/noSvgWithoutTitle: FIXME: FitText might be inaccessible to screen readers because it’s wrapped in an svg
-    /* @__PURE__ */
-    jsx3(motion.svg, {
-      ref,
-      ...props,
-      viewBox,
-      children: /* @__PURE__ */ jsx3(motion.foreignObject, {
-        width: '100%',
-        height: '100%',
-        className: 'framer-fit-text',
-        transform: `scale(${viewBoxScale})`,
-        style: {
-          overflow: 'visible',
-          transformOrigin: 'center center',
-        },
-        children,
-      },),
-    },)
-  );
+}, forwardedRef,) {
+  return /* @__PURE__ */ jsx3(MotionSVG, {
+    ...props,
+    ref: forwardedRef,
+    viewBox,
+    children: /* @__PURE__ */ jsx3(motion.foreignObject, {
+      width: '100%',
+      height: '100%',
+      className: 'framer-fit-text',
+      transform: `scale(${viewBoxScale})`,
+      style: {
+        overflow: 'visible',
+        transformOrigin: 'center center',
+      },
+      children,
+    },),
+  },);
 },);
-var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, ref,) {
+var defaultFonts = [];
+var richTextContainerComponentType = 'RichTextContainer';
+var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, forwardedRef,) {
   const {
     __fromCanvasComponent = false,
     _forwardedOverrideId,
@@ -46372,7 +46382,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     center,
     children,
     environment: environment2 = RenderTarget.current,
-    fonts = [],
+    fonts = defaultFonts,
     height,
     isEditable = false,
     left,
@@ -46404,7 +46414,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
   const fallbackRef = useRef3(null,);
-  const containerRef = ref ?? fallbackRef;
+  const containerRef = forwardedRef ?? fallbackRef;
   useMeasureLayout(props, containerRef,);
   useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
   useInsertionEffect(() => {
@@ -46469,6 +46479,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     rest.layout = 'preserve-aspect';
   }
   const Component17 = htmlElementAsMotionComponent(props.as,);
+  const dataFramerName = rest['data-framer-name'] ?? name;
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
       return /* @__PURE__ */ jsx3(Component17, {
@@ -46477,8 +46488,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         style: containerStyle,
         layoutId,
         transformTemplate: template,
-        'data-framer-name': rest['data-framer-name'] ?? name,
-        'data-framer-component-type': 'RichTextContainer',
+        'data-framer-name': dataFramerName,
+        'data-framer-component-type': richTextContainerComponentType,
         children: /* @__PURE__ */ jsx3(FitText, {
           viewBox,
           viewBoxScale,
@@ -46498,8 +46509,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         viewBox,
         viewBoxScale,
         transformTemplate: template,
-        'data-framer-name': rest['data-framer-name'] ?? name,
-        'data-framer-component-type': 'RichTextContainer',
+        'data-framer-name': dataFramerName,
+        'data-framer-component-type': richTextContainerComponentType,
         children: processedChildren,
       },);
     }
@@ -46510,8 +46521,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     style: containerStyle,
     layoutId,
     transformTemplate: template,
-    'data-framer-name': rest['data-framer-name'] ?? name,
-    'data-framer-component-type': 'RichTextContainer',
+    'data-framer-name': dataFramerName,
+    'data-framer-component-type': richTextContainerComponentType,
     children: processedChildren,
   },);
 },);
@@ -46601,7 +46612,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
   html,
   htmlFromDesign,
   ...props
-}, ref,) {
+}, forwardedRef,) {
   const content = html || children || htmlFromDesign;
   if (isString(content,)) {
     if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
@@ -46614,7 +46625,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
     return /* @__PURE__ */ jsx3(DeprecatedRichText, {
       ...props,
       ...contentProp,
-      ref,
+      ref: forwardedRef,
     },);
   }
   if (!props.stylesPresetsClassNames && isString(props.stylesPresetsClassName,)) {
@@ -46633,7 +46644,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
   }
   return /* @__PURE__ */ jsx3(RichTextContainer, {
     ...props,
-    ref,
+    ref: forwardedRef,
     children: isValidElement(content,) ? content : void 0,
   },);
 },);
