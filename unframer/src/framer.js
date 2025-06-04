@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.T5O3RCPT.mjs
+// /:https://app.framerstatic.com/framer.QGXECURX.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17190,7 +17190,10 @@ var Loop = class extends EventEmitter {
 };
 var MainLoop = /* @__PURE__ */ new Loop();
 var RenderEnvironment = {
-  target: 'PREVIEW',
+  target:
+    // Enable static renderer when taking screenshots
+    // in screenshot-site lambda
+    safeWindow.location.origin === 'https://screenshot.framer.invalid' ? 'EXPORT' : 'PREVIEW',
   zoom: 1,
 };
 function executeInRenderEnvironment(customEnvironment, task,) {
