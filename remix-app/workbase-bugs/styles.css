@@ -222,84 +222,84 @@
 }
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer:not(.unframer-base) { 
+    .unframer:not(.unframer-base) {
         display: none !important;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer:not(.unframer-sm) { 
+    .unframer:not(.unframer-sm) {
         display: none !important;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer:not(.unframer-md) { 
+    .unframer:not(.unframer-md) {
         display: none !important;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer:not(.unframer-lg) { 
+    .unframer:not(.unframer-lg) {
         display: none !important;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer:not(.unframer-xl) { 
+    .unframer:not(.unframer-xl) {
         display: none !important;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer:not(.unframer-2xl) { 
+    .unframer:not(.unframer-2xl) {
         display: none !important;
     }
 }
 
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer-hidden.unframer-base { 
+    .unframer-hidden.unframer-base {
         display: contents;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer-hidden.unframer-sm { 
+    .unframer-hidden.unframer-sm {
         display: contents;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer-hidden.unframer-md { 
+    .unframer-hidden.unframer-md {
         display: contents;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer-hidden.unframer-lg { 
+    .unframer-hidden.unframer-lg {
         display: contents;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer-hidden.unframer-xl { 
+    .unframer-hidden.unframer-xl {
         display: contents;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer-hidden.unframer-2xl { 
+    .unframer-hidden.unframer-2xl {
         display: contents;
     }
 }
@@ -1197,7 +1197,7 @@ NavigationContainer
 /* used by accordion.js, card-info-banner.js, overlay-upgrade-plan.js, sc-billing.js */
 
 @font-face {
-    font-family: 'Fragment Mono'; 
+    font-family: 'Fragment Mono';
     src: url('https://fonts.gstatic.com/s/fragmentmono/v4/4iCr6K5wfMRRjxp0DA6-2CLnN4FNh4UI_1U.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1206,7 +1206,7 @@ NavigationContainer
 /* used by bubble-up.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZ1rib2Bg-4.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1215,16 +1215,16 @@ NavigationContainer
 /* used by menu-secondary.js */
 
 @font-face {
-    font-family: 'Manrope'; 
-    src: url('https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_A87jxeN7B.woff2');
+    font-family: 'Manrope';
+    src: url('https://fonts.gstatic.com/s/manrope/v19/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_A87jxeN7B.woff2');
     font-style: normal;
     font-weight: 700;
 }
 
-/* used by accordion.js, auth-layout.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, field-base.js, graphic-library-cards.js, graphic-library.js, left.js, library.js, main-layout.js, overlay-add-addon.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, sc-users.js, slider-comp.js, task-base.js, version.js */
+/* used by accordion.js, auth-layout.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, clips.js, field-base.js, graphic-library-cards.js, graphic-library.js, left.js, overlay-add-addon.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, sc-users.js, slider-comp.js, task-base.js, version.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/1K3W8DizY3v4emK8Mb08YHxTbs.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1232,7 +1232,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1240,7 +1240,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1248,7 +1248,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1256,7 +1256,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1264,7 +1264,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1272,7 +1272,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2');
     font-style: normal;
     font-weight: 700;
@@ -1282,7 +1282,7 @@ NavigationContainer
 /* used by slider-comp.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/1ZFS7N918ojhhd0nQWdj3jz4w.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1290,7 +1290,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1298,7 +1298,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1306,7 +1306,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1314,7 +1314,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1322,7 +1322,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2');
     font-style: normal;
     font-weight: 600;
@@ -1330,17 +1330,17 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2');
     font-style: normal;
     font-weight: 600;
     unicodeRange: U+1F00-1FFF;
 }
 
-/* used by accordion.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, field-base.js, left.js, library.js, main-layout.js, overlay-add-addon.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, slider-comp.js, task-base.js, version.js */
+/* used by accordion.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, clips.js, field-base.js, left.js, overlay-add-addon.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, slider-comp.js, task-base.js, version.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/2A4Xx7CngadFGlVV4xrO06OBHY.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1348,7 +1348,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/43sJ6MfOPh1LCJt46OvyDuSbA6o.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1356,7 +1356,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/867QObYax8ANsfX4TGEVU9YiCM.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1364,7 +1364,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/cdAe8hgZ1cMyLu9g005pAW3xMo.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1372,7 +1372,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/CfMzU8w2e7tHgF4T4rATMPuWosA.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1380,7 +1380,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DOfvtmE1UplCq161m6Hj8CSQYg.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1388,7 +1388,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/H89BbHkbHDzlxZzxi8uPzTsp90.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1396,7 +1396,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/Oyn2ZbENFdnW7mt2Lzjk1h9Zb9k.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1404,7 +1404,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/QxmhnWTzLtyjIiZcfaLIJ8EFBXU.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1412,7 +1412,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/tKtBcDnBMevsEEJKdNGhhkLzYo.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1420,7 +1420,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/u6gJwDuwB143kpNK1T1MDKDWkMc.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1428,7 +1428,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/vFzuJY0c65av44uhEKB6vyjFMg.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1436,7 +1436,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/wccHG0r4gBDAIRhfHiOlq6oEkqw.woff2');
     font-style: italic;
     font-weight: 700;
@@ -1444,17 +1444,17 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/WZ367JPwf9bRW6LdTHN8rXgSjw.woff2');
     font-style: italic;
     font-weight: 700;
     unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* used by button-search.js, left.js, main-layout.js */
+/* used by button-search.js, left.js */
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/2uIBiALfCHVpWbHqRMZutfT7giU.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1462,7 +1462,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/DF7bjCRmStYPqSb945lAlMfCCVQ.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1470,7 +1470,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/nCpxWS6DaPlPe0lHzStXAPCo3lw.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1478,7 +1478,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/tVew2LzXJ1t7QfxP1gdTIdj2o0g.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1486,7 +1486,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/U9LaDDmbRhzX3sB8g8glTy5feTE.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1494,7 +1494,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/vebZUMjGyKkYsfcY73iwWTzLNag.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1502,7 +1502,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter Display'; 
+    font-family: 'Inter Display';
     src: url('https://framerusercontent.com/assets/Zwfz6xbVe5pmcWRJRgBDHnMkOkI.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1512,14 +1512,14 @@ NavigationContainer
 /* used by overlay-upgrade-plan.js, sc-billing.js */
 
 @font-face {
-    font-family: 'Base Italic'; 
+    font-family: 'Base Italic';
     src: url('https://framerusercontent.com/assets/3WY2eBEI6z2xUoZWfA1MvFcsMx0.woff2');
 }
 
 /* used by overlay-onboarding.js, slider-comp.js, testimonial-texts.js, testimonials.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/5A3Ce6C9YYmCjpQx9M4inSaKU.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1527,7 +1527,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/6mJuEAguuIuMog10gGvH5d3cl8.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1535,7 +1535,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/d3tHnaQIAeqiE5hGcRw4mmgWYU.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1543,7 +1543,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/DolVirEGb34pEXEp8t8FQBSK4.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1551,7 +1551,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/otTaNuNpVK4RbdlT7zDDdKvQBA.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1559,7 +1559,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/Qx95Xyt0Ka3SGhinnbXIGpEIyP4.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1567,17 +1567,17 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/xYYWaj7wCU5zSQH0eXvSaS19wo.woff2');
     font-style: normal;
     font-weight: 500;
     unicodeRange: U+0370-03FF;
 }
 
-/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, card.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, empty.js, error.js, field-base.js, file-preview.js, form.js, good-x-text.js, graphic-customer-portal.js, graphic-docs.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, icon-selector.js, info-overlay.js, install-app.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, slider-comp.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, textfield-checkbox.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-collection.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, version.js, warning.js, wrapper.js */
+/* used by accordion.js, addon-card.js, ai-button-base.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, card.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, clips.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, error.js, field-base.js, file-preview.js, form.js, good-x-text.js, graphic-customer-portal.js, graphic-docs.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, icon-selector.js, info-overlay.js, install-app.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, slider-comp.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, textfield-checkbox.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-collection.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, version.js, warning.js, wrapper.js */
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1585,7 +1585,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1593,7 +1593,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1601,7 +1601,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1609,7 +1609,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1617,7 +1617,7 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2');
     font-style: normal;
     font-weight: 400;
@@ -1625,45 +1625,45 @@ NavigationContainer
 }
 
 @font-face {
-    font-family: 'Inter'; 
+    font-family: 'Inter';
     src: url('https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2');
     font-style: normal;
     font-weight: 400;
     unicodeRange: U+1F00-1FFF;
 }
 
-/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-live-chat.js, button-primary-with-static-image.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, community-support.js, content-info-banner.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, default.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, empty.js, error.js, field-base.js, file-preview.js, form.js, graphic-customer-portal.js, graphic-docs.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, info-overlay.js, install-app.js, left-footer.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, public-layout.js, result-button.js, role.js, row.js, sc-ai.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, texts.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, warning.js, wrapper.js */
+/* used by accordion.js, addon-card.js, ai-button-base.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-live-chat.js, button-primary-with-static-image.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, clips.js, community-support.js, content-info-banner.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, default.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, error.js, field-base.js, file-preview.js, form.js, graphic-customer-portal.js, graphic-docs.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, info-overlay.js, install-app.js, left-footer.js, left.js, lesson-page.js, library-video-card.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, public-layout.js, result-button.js, role.js, row.js, sc-ai.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, texts.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, warning.js, wrapper.js */
 
 @font-face {
-    font-family: 'SanBase Medium'; 
+    font-family: 'SanBase Medium';
     src: url('https://framerusercontent.com/assets/Anmn6ZKjuUjcfr07HEmCpUbPxdY.woff2');
 }
 
-/* used by accordion.js, auth-layout.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, charts-section.js, community-support.js, default.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, good-x-text.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, info-overlay.js, lesson-page.js, library.js, module-hero.js, module-page.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overview-page.js, sc-billing.js, sc-users.js, secondary.js, texts.js, trainings-collection.js, trainings-hero.js, update.js */
+/* used by accordion.js, auth-layout.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, charts-section.js, clips.js, community-support.js, default.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, good-x-text.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, info-overlay.js, lesson-page.js, library.js, module-hero.js, module-page.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overview-page.js, sc-billing.js, sc-users.js, secondary.js, texts.js, trainings-collection.js, trainings-hero.js, update.js */
 
 @font-face {
-    font-family: 'SanBase Bold'; 
+    font-family: 'SanBase Bold';
     src: url('https://framerusercontent.com/assets/GiBlJQKeaFvSuLMd7bhsYgy9r4g.woff2');
 }
 
 /* used by charts-section.js, detail-page.js, lesson-page.js, module-page.js */
 
 @font-face {
-    font-family: 'SanBase Light'; 
+    font-family: 'SanBase Light';
     src: url('https://framerusercontent.com/assets/JfBnyDK1wE3VJsTSmyKJ2WWG8.woff2');
 }
 
-/* used by ai-sidebar.js, auth-layout.js, bookmark-expanded.js, left-footer.js, left.js, library.js, main-layout.js, overlay-info-welcome.js, overlay-onboarding.js, task-base.js, upgrade-card.js */
+/* used by ai-sidebar.js, auth-layout.js, bookmark-expanded.js, clips.js, left-footer.js, left.js, main-layout.js, overlay-info-welcome.js, overlay-onboarding.js, task-base.js, upgrade-card.js */
 
 @font-face {
-    font-family: 'SanBase SemiBold'; 
+    font-family: 'SanBase SemiBold';
     src: url('https://framerusercontent.com/assets/RDmy2JXVyn1eWMLxhJn0Fb9tk0.woff2');
 }
 
-/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, ai-top-bar.js, app.js, auth-layout.js, bookmark-expanded.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-click-icon-text.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, default.js, delete.js, department.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, dropdown-ai-chats.js, dropdown-languages.js, dropdown-one-select.js, dropdown-roles.js, dropdown-users.js, dropdown-workbases.js, error.js, field-base.js, file-preview.js, graphic-customer-portal.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, group-row-general.js, group-row.js, group.js, header.js, info-overlay.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-button.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-base.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, table-formatted.js, task-base.js, texts.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, user-detail.js, version.js, warning.js */
+/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, ai-top-bar.js, app.js, auth-layout.js, bookmark-expanded.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-click-icon-text.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, clips.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, default.js, delete.js, department.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, dropdown-ai-chats.js, dropdown-languages.js, dropdown-one-select.js, dropdown-roles.js, dropdown-users.js, dropdown-workbases.js, error.js, field-base.js, file-preview.js, graphic-customer-portal.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, group-row-general.js, group-row.js, group.js, header.js, info-overlay.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-button.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-base.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, table-formatted.js, task-base.js, texts.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, user-detail.js, version.js, warning.js */
 
 @font-face {
-    font-family: 'SanBase Regular'; 
+    font-family: 'SanBase Regular';
     src: url('https://framerusercontent.com/assets/yst7FBAPGkl0ksj0P2rh10jmhQ.woff2');
 }
 

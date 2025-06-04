@@ -397,7 +397,7 @@ export async function bundle({
             'utf-8',
         )
 
-        const sema = new Sema(stackblitzDemoExample ? 5 : 10)
+        const sema = new Sema(stackblitzDemoExample ? 5 : 6)
         spinner.update('Extracting types')
         logger.log(`using node path`, nodePath)
         let allFonts = [] as ComponentFontBundle[]
@@ -410,6 +410,12 @@ export async function bundle({
                         .replace(/\.jsx?$/, '')
                     const resultPathAbs = path.resolve(out, file.path)
                     if (!components[name]) {
+                        return
+                    }
+                    if (!fs.existsSync(resultPathAbs)) {
+                        spinner.error(
+                            `cannot extract types for ${name}, missing output file`,
+                        )
                         return
                     }
                     logger.log(`extracting types for ${name}`)
@@ -661,7 +667,7 @@ export function resolvePackage({ cwd, pkg }) {
                 if (error) {
                     logger.log(stderr)
                     reject(
-                        new Error('Unframer is not installed in your project'),
+                        new Error(`${pkg} is not installed in your project`),
                     )
                     return
                 }

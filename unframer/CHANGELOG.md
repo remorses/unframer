@@ -1,5 +1,17 @@
 # unframer
 
+## 2.26.0
+
+### Minor Changes
+
+- 0ca1aba: Added preconnect hints for faster Framer CDN connection
+- 3aa69a9: Add http caching on disk for faster regeneration, debloat dependencies
+
+### Patch Changes
+
+- 3661c24: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- Update framer-motion package types, fix jsx generation for multiple children in jsx with container expression
+
 ## 2.25.5
 
 ### Patch Changes

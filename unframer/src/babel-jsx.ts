@@ -30,9 +30,25 @@ export function removeJsxExpressionContainer({
                                     t.isJSXFragment(element)),
                         )
                         if (allJsx && 'elements' in expr && expr.elements) {
-                            path.replaceWithMultiple(
-                                expr.elements.filter(isTruthy),
-                            )
+                            try {
+                                const fragment: BabelTypes.JSXFragment = {
+                                    type: 'JSXFragment',
+                                    openingFragment: {
+                                        type: 'JSXOpeningFragment',
+                                    },
+                                    closingFragment: {
+                                        type: 'JSXClosingFragment',
+                                    },
+                                    children: expr.elements.filter(isTruthy) as any,
+                                }
+                                path.replaceWith(fragment)
+                            } catch (e) {
+                                console.error(
+                                    `cannot remove expression container for`,
+                                    expr,
+                                    e,
+                                )
+                            }
                         }
                     }
                 },
