@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QGXECURX.mjs
+// /:https://app.framerstatic.com/framer.3BZ7SNNF.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18452,11 +18452,21 @@ var Rect = {
     return rect.x === other.x && rect.y === other.y && rect.width === other.width && rect.height === other.height;
   },
   /** @internal */
+  from: (rect) => {
+    return {
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height,
+    };
+  },
+  /** @internal */
   atOrigin: (size) => {
     return {
-      ...size,
       x: 0,
       y: 0,
+      width: size.width,
+      height: size.height,
     };
   },
   /** @internal */
@@ -18619,13 +18629,13 @@ var Rect = {
     };
   },
   /** @internal */
-  boundingRectFromPoints: (ps) => {
+  boundingRectFromPoints: (points) => {
     let minX = Infinity;
     let maxX = -Infinity;
     let minY = Infinity;
     let maxY = -Infinity;
-    for (let i = 0; i < ps.length; i++) {
-      const point2 = ps[i];
+    for (let i = 0; i < points.length; i++) {
+      const point2 = points[i];
       minX = Math.min(minX, point2.x,);
       maxX = Math.max(maxX, point2.x,);
       minY = Math.min(minY, point2.y,);
@@ -18941,20 +18951,6 @@ var Rect = {
       x: 0,
       y: 0,
     },);
-  },
-  /** @internal */
-  fromAny: (rect, defaults = {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  },) => {
-    return {
-      x: rect.x || defaults.x,
-      y: rect.y || defaults.y,
-      width: rect.width || defaults.width,
-      height: rect.height || defaults.height,
-    };
   },
   delta: (a, b,) => {
     const pointA = {
@@ -27380,7 +27376,7 @@ function collectBoxShadowsForProps(props, style2,) {
   if (!boxShadow) return;
   style2.boxShadow = boxShadow;
 }
-function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, strokeClipId, svgStrokeAttributes,) {
+function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, strokeWidth, strokeClipId, svgStrokeAttributes,) {
   const definition = [];
   let outsetElement = null;
   let insetElement = null;
@@ -27464,6 +27460,7 @@ function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, str
         /* @__PURE__ */ jsx3('use', {
           href: shapeId.link,
           fill: 'black',
+          fillOpacity: fillEnabled ? void 0 : 0,
         },),
       ],
     },);
@@ -27474,9 +27471,10 @@ function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, str
       children: /* @__PURE__ */ jsx3('use', {
         ...svgStrokeAttributes,
         fill: 'black',
+        fillOpacity: fillEnabled ? void 0 : 0,
         stroke: 'black',
-        strokeOpacity: strokeAlpha <= 0 ? 0 : 1,
-        strokeWidth: strokeAlpha > 0 ? strokeWidth : 0,
+        strokeOpacity: strokeEnabled ? void 0 : 0,
+        strokeWidth: strokeEnabled ? strokeWidth : 0,
         xlinkHref: shapeId.link,
         clipPath: strokeClipId.urlLink,
       },),
@@ -48406,7 +48404,6 @@ var Vector = /* @__PURE__ */ (() => {
         strokeWidth,
         idAttribute,
         shadows,
-        strokeAlpha,
         name,
         includeTransform,
         isRootVectorNode,
@@ -48525,7 +48522,8 @@ var Vector = /* @__PURE__ */ (() => {
         // can be larger than the path bounding box.
         calculatedPathBoundingBox,
         internalShapeId,
-        strokeAlpha,
+        Boolean(fill,),
+        strokeEnabled,
         strokeWidth,
         internalStrokeClipId,
         svgStrokeAttributes,
