@@ -2,7 +2,6 @@
     "name": "root",
     "private": true,
     "scripts": {
-        "test": "NODE_ENV=test vitest",
         "watch": "pnpm -r watch",
         "download-framer": "pnpm --filter unframer run download-framer",
         "build": "pnpm --filter unframer build",
