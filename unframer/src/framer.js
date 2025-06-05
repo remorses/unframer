@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.C2MZBAEL.mjs
+// /:https://app.framerstatic.com/framer.3BZ7SNNF.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -17190,7 +17190,10 @@ var Loop = class extends EventEmitter {
 };
 var MainLoop = /* @__PURE__ */ new Loop();
 var RenderEnvironment = {
-  target: 'PREVIEW',
+  target:
+    // Enable static renderer when taking screenshots
+    // in screenshot-site lambda
+    safeWindow.location.origin === 'https://screenshot.framer.invalid' ? 'EXPORT' : 'PREVIEW',
   zoom: 1,
 };
 function executeInRenderEnvironment(customEnvironment, task,) {
@@ -18449,11 +18452,21 @@ var Rect = {
     return rect.x === other.x && rect.y === other.y && rect.width === other.width && rect.height === other.height;
   },
   /** @internal */
+  from: (rect) => {
+    return {
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height,
+    };
+  },
+  /** @internal */
   atOrigin: (size) => {
     return {
-      ...size,
       x: 0,
       y: 0,
+      width: size.width,
+      height: size.height,
     };
   },
   /** @internal */
@@ -18616,13 +18629,13 @@ var Rect = {
     };
   },
   /** @internal */
-  boundingRectFromPoints: (ps) => {
+  boundingRectFromPoints: (points) => {
     let minX = Infinity;
     let maxX = -Infinity;
     let minY = Infinity;
     let maxY = -Infinity;
-    for (let i = 0; i < ps.length; i++) {
-      const point2 = ps[i];
+    for (let i = 0; i < points.length; i++) {
+      const point2 = points[i];
       minX = Math.min(minX, point2.x,);
       maxX = Math.max(maxX, point2.x,);
       minY = Math.min(minY, point2.y,);
@@ -18938,20 +18951,6 @@ var Rect = {
       x: 0,
       y: 0,
     },);
-  },
-  /** @internal */
-  fromAny: (rect, defaults = {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  },) => {
-    return {
-      x: rect.x || defaults.x,
-      y: rect.y || defaults.y,
-      width: rect.width || defaults.width,
-      height: rect.height || defaults.height,
-    };
   },
   delta: (a, b,) => {
     const pointA = {
@@ -27377,7 +27376,7 @@ function collectBoxShadowsForProps(props, style2,) {
   if (!boxShadow) return;
   style2.boxShadow = boxShadow;
 }
-function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, strokeClipId, svgStrokeAttributes,) {
+function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, strokeWidth, strokeClipId, svgStrokeAttributes,) {
   const definition = [];
   let outsetElement = null;
   let insetElement = null;
@@ -27461,6 +27460,7 @@ function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, str
         /* @__PURE__ */ jsx3('use', {
           href: shapeId.link,
           fill: 'black',
+          fillOpacity: fillEnabled ? void 0 : 0,
         },),
       ],
     },);
@@ -27471,9 +27471,10 @@ function shadowForShape(boxShadows, rect, shapeId, strokeAlpha, strokeWidth, str
       children: /* @__PURE__ */ jsx3('use', {
         ...svgStrokeAttributes,
         fill: 'black',
+        fillOpacity: fillEnabled ? void 0 : 0,
         stroke: 'black',
-        strokeOpacity: strokeAlpha <= 0 ? 0 : 1,
-        strokeWidth: strokeAlpha > 0 ? strokeWidth : 0,
+        strokeOpacity: strokeEnabled ? void 0 : 0,
+        strokeWidth: strokeEnabled ? strokeWidth : 0,
         xlinkHref: shapeId.link,
         clipPath: strokeClipId.urlLink,
       },),
@@ -42169,8 +42170,8 @@ function useRunCallbackIfElementIsInView() {
       queuedMicrotask = true;
       queueMicrotask(() => {
         var _a;
-        if (!isInViewRef.current) return;
         queuedMicrotask = false;
+        if (!isInViewRef.current) return;
         (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
       },);
     };
@@ -46333,34 +46334,44 @@ function createLineGroups(elements,) {
   groups2.push(currentGroup,);
   return groups2;
 }
-var FitText = /* @__PURE__ */ forwardRef(({
+var BaseSVG = /* @__PURE__ */ forwardRef(function BaseSVG2(props, forwardedRef,) {
+  return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: FIXME: FitText might be inaccessible to screen readers because it’s wrapped in an svg
+    /* @__PURE__ */
+    jsx3('svg', {
+      ...props,
+      ref: forwardedRef,
+      children: props.children,
+    },)
+  );
+},);
+var MotionSVG = /* @__PURE__ */ motion.create(BaseSVG,);
+var FitText = /* @__PURE__ */ forwardRef(function FitText2({
   viewBoxScale,
   viewBox,
   children,
   ...props
-}, ref,) => {
-  return (
-    // biome-ignore lint/a11y/noSvgWithoutTitle: FIXME: FitText might be inaccessible to screen readers because it’s wrapped in an svg
-    /* @__PURE__ */
-    jsx3(motion.svg, {
-      ref,
-      ...props,
-      viewBox,
-      children: /* @__PURE__ */ jsx3(motion.foreignObject, {
-        width: '100%',
-        height: '100%',
-        className: 'framer-fit-text',
-        transform: `scale(${viewBoxScale})`,
-        style: {
-          overflow: 'visible',
-          transformOrigin: 'center center',
-        },
-        children,
-      },),
-    },)
-  );
+}, forwardedRef,) {
+  return /* @__PURE__ */ jsx3(MotionSVG, {
+    ...props,
+    ref: forwardedRef,
+    viewBox,
+    children: /* @__PURE__ */ jsx3(motion.foreignObject, {
+      width: '100%',
+      height: '100%',
+      className: 'framer-fit-text',
+      transform: `scale(${viewBoxScale})`,
+      style: {
+        overflow: 'visible',
+        transformOrigin: 'center center',
+      },
+      children,
+    },),
+  },);
 },);
-var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, ref,) {
+var defaultFonts = [];
+var richTextContainerComponentType = 'RichTextContainer';
+var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, forwardedRef,) {
   const {
     __fromCanvasComponent = false,
     _forwardedOverrideId,
@@ -46372,7 +46383,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     center,
     children,
     environment: environment2 = RenderTarget.current,
-    fonts = [],
+    fonts = defaultFonts,
     height,
     isEditable = false,
     left,
@@ -46404,7 +46415,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
   const fallbackRef = useRef3(null,);
-  const containerRef = ref ?? fallbackRef;
+  const containerRef = forwardedRef ?? fallbackRef;
   useMeasureLayout(props, containerRef,);
   useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
   useInsertionEffect(() => {
@@ -46469,6 +46480,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     rest.layout = 'preserve-aspect';
   }
   const Component17 = htmlElementAsMotionComponent(props.as,);
+  const dataFramerName = rest['data-framer-name'] ?? name;
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
       return /* @__PURE__ */ jsx3(Component17, {
@@ -46477,8 +46489,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         style: containerStyle,
         layoutId,
         transformTemplate: template,
-        'data-framer-name': rest['data-framer-name'] ?? name,
-        'data-framer-component-type': 'RichTextContainer',
+        'data-framer-name': dataFramerName,
+        'data-framer-component-type': richTextContainerComponentType,
         children: /* @__PURE__ */ jsx3(FitText, {
           viewBox,
           viewBoxScale,
@@ -46498,8 +46510,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         viewBox,
         viewBoxScale,
         transformTemplate: template,
-        'data-framer-name': rest['data-framer-name'] ?? name,
-        'data-framer-component-type': 'RichTextContainer',
+        'data-framer-name': dataFramerName,
+        'data-framer-component-type': richTextContainerComponentType,
         children: processedChildren,
       },);
     }
@@ -46510,8 +46522,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     style: containerStyle,
     layoutId,
     transformTemplate: template,
-    'data-framer-name': rest['data-framer-name'] ?? name,
-    'data-framer-component-type': 'RichTextContainer',
+    'data-framer-name': dataFramerName,
+    'data-framer-component-type': richTextContainerComponentType,
     children: processedChildren,
   },);
 },);
@@ -46601,7 +46613,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
   html,
   htmlFromDesign,
   ...props
-}, ref,) {
+}, forwardedRef,) {
   const content = html || children || htmlFromDesign;
   if (isString(content,)) {
     if (!props.stylesPresetsClassName && isObject2(props.stylesPresetsClassNames,)) {
@@ -46614,7 +46626,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
     return /* @__PURE__ */ jsx3(DeprecatedRichText, {
       ...props,
       ...contentProp,
-      ref,
+      ref: forwardedRef,
     },);
   }
   if (!props.stylesPresetsClassNames && isString(props.stylesPresetsClassName,)) {
@@ -46633,7 +46645,7 @@ var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
   }
   return /* @__PURE__ */ jsx3(RichTextContainer, {
     ...props,
-    ref,
+    ref: forwardedRef,
     children: isValidElement(content,) ? content : void 0,
   },);
 },);
@@ -48392,7 +48404,6 @@ var Vector = /* @__PURE__ */ (() => {
         strokeWidth,
         idAttribute,
         shadows,
-        strokeAlpha,
         name,
         includeTransform,
         isRootVectorNode,
@@ -48511,7 +48522,8 @@ var Vector = /* @__PURE__ */ (() => {
         // can be larger than the path bounding box.
         calculatedPathBoundingBox,
         internalShapeId,
-        strokeAlpha,
+        Boolean(fill,),
+        strokeEnabled,
         strokeWidth,
         internalStrokeClipId,
         svgStrokeAttributes,
