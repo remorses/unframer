@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.3BZ7SNNF.mjs
+// /:https://app.framerstatic.com/framer.6QOLYTKW.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -34786,31 +34786,35 @@ var AnchorLinkTarget = /* @__PURE__ */ ((AnchorLinkTarget2) => {
   AnchorLinkTarget2['_self'] = '_self';
   return AnchorLinkTarget2;
 })(AnchorLinkTarget || {},);
-function propsForLink(href, openInNewTab = void 0, trackLinkClick,) {
+function propsForLink(href, options,) {
   const isInternal = isInternalURL(href,);
-  const target = getTargetAttrValue(openInNewTab, isInternal,);
-  const rel = !isInternal ? 'noopener' : void 0;
-  href = href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`;
-  return trackLinkClick
-    ? {
-      href,
-      target,
-      rel,
-      onClick() {
-        void trackLinkClick(href,);
-      },
-    }
-    : {
-      href,
-      target,
-      rel,
+  const props = {
+    href: href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`,
+    target: getTargetAttrValue(options == null ? void 0 : options.openInNewTab, isInternal,),
+    rel: !isInternal ? combineRels('noopener', options == null ? void 0 : options.rel,) : void 0,
+  };
+  if (options == null ? void 0 : options.preserveParams) {
+    props.href = forwardCurrentQueryParams(href,);
+    props['data-framer-preserve-params'] = true;
+  }
+  if (options == null ? void 0 : options.trackLinkClick) {
+    props.onClick = () => {
+      void options.trackLinkClick(href,);
     };
+  }
+  return props;
 }
 function getTargetAttrValue(openInNewTab, isInternal,) {
   if (openInNewTab !== void 0) {
     return openInNewTab ? '_blank' : void 0;
   }
   return isInternal ? void 0 : '_blank';
+}
+function combineRels(rel, otherRel,) {
+  if (rel && !otherRel) return rel;
+  if (!rel && otherRel) return otherRel;
+  if (rel && otherRel) return `${rel} ${otherRel}`;
+  return void 0;
 }
 function linkInfoKey(link,) {
   var _a, _b;
@@ -35077,17 +35081,17 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, element
     performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, track,);
   };
 }
-function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkClick, implicitPathVariables, smoothScroll,) {
-  if (!currentRoute) return propsForLink(href, openInNewTab, trackLinkClick,);
+function propsForRoutePath(href, router, currentRoute, linkOptions, implicitPathVariables,) {
+  if (!currentRoute) return propsForLink(href, linkOptions,);
   const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
-  if (!matchedRoute) return propsForLink(href, openInNewTab, trackLinkClick,);
+  if (!matchedRoute) return propsForLink(href, linkOptions,);
   const {
     routeId,
     route,
     elementId,
     pathVariables,
   } = matchedRoute;
-  if (!route) return propsForLink(href, openInNewTab, trackLinkClick,);
+  if (!route) return propsForLink(href, linkOptions,);
   const path = getPathForRoute(route, {
     // If the link is resolved, we trust that the slugs are resolved.
     currentRoutePath: currentRoute.path,
@@ -35100,12 +35104,20 @@ function propsForRoutePath(href, openInNewTab, router, currentRoute, trackLinkCl
     // don't preserve query params for bots
     siteCanonicalURL: router.siteCanonicalURL,
   },);
-  const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+  const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   return {
     href: path,
     target: anchorTarget,
-    onClick: createOnClickLinkHandler(router, routeId, path, trackLinkClick, elementId, pathVariables, smoothScroll,),
-    navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
+    onClick: createOnClickLinkHandler(
+      router,
+      routeId,
+      path,
+      linkOptions.trackLinkClick,
+      elementId,
+      pathVariables,
+      linkOptions.smoothScroll,
+    ),
+    navigate: () => performNavigation(router, routeId, elementId, pathVariables, linkOptions.smoothScroll,),
     'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
   };
 }
@@ -35115,6 +35127,8 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   openInNewTab,
   smoothScroll,
   clickTrackingId,
+  rel,
+  preserveParams,
   nodeId,
   scopeId,
   motionChild,
@@ -35138,7 +35152,13 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
     if (isString(pageLink,)) {
-      return propsForRoutePath(pageLink, openInNewTab, router, currentRoute, trackLinkClick, implicitPathVariables, smoothScroll,);
+      return propsForRoutePath(pageLink, router, currentRoute, {
+        openInNewTab,
+        trackLinkClick,
+        rel,
+        preserveParams,
+        smoothScroll,
+      }, implicitPathVariables,);
     }
     const {
       routeId,
@@ -35154,7 +35174,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
-  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackLinkClick,],);
+  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackLinkClick, rel, preserveParams,],);
   const hasRef = isValidElement(children,) && 'ref' in children;
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
   useRefEffect(observerRef, (node) => {
