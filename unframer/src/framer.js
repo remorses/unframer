@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.6QOLYTKW.mjs
+// /:https://app.framerstatic.com/framer.EZMS46EZ.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -19682,6 +19682,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['MultiCollectionReference'] = 'multicollectionreference';
   ControlType2['TrackingId'] = 'trackingid';
   ControlType2['VectorSetItem'] = 'vectorsetitem';
+  ControlType2['LinkRelValues'] = 'linkrelvalues';
   return ControlType2;
 })(ControlType || {},);
 var isFlexboxGapSupportedCached;
@@ -21055,6 +21056,8 @@ function getControlDefaultValue(control,) {
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'font':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'linkrelvalues':
+        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
       case 'object': {
         const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
         if (isObject2(control.controls,)) {
@@ -23129,7 +23132,13 @@ var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/u.test(safeNavigator.
 var isFramerX = () => safeNavigator && /FramerX/u.test(safeNavigator.userAgent,);
 var isEdge = () => safeNavigator && /Edg\//u.test(safeNavigator.userAgent,);
 var isAndroid = () => safeNavigator && /android/iu.test(safeNavigator.userAgent,);
-var isIOS = () => safeNavigator && /iPhone|iPod|iPad/iu.test(safeNavigator.platform,);
+var iOSRegex = /iPhone|iPod|iPad/iu;
+var macIntelRegex = /MacIntel/iu;
+var isIOS = () => {
+  if (!safeNavigator) return false;
+  if (iOSRegex.test(safeNavigator.platform,)) return true;
+  return macIntelRegex.test(safeNavigator.platform,) && safeNavigator.maxTouchPoints && safeNavigator.maxTouchPoints > 2;
+};
 var isMacOS = () => safeNavigator && /Mac/u.test(safeNavigator.platform,);
 var isWindows = () => safeNavigator && /Win/u.test(safeNavigator.platform,);
 var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
@@ -34794,7 +34803,7 @@ function propsForLink(href, options,) {
     rel: !isInternal ? combineRels('noopener', options == null ? void 0 : options.rel,) : void 0,
   };
   if (options == null ? void 0 : options.preserveParams) {
-    props.href = forwardCurrentQueryParams(href,);
+    props.href = forwardCurrentQueryParams(props.href ?? href,);
     props['data-framer-preserve-params'] = true;
   }
   if (options == null ? void 0 : options.trackLinkClick) {
@@ -35127,7 +35136,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   openInNewTab,
   smoothScroll,
   clickTrackingId,
-  rel,
+  relValues,
   preserveParams,
   nodeId,
   scopeId,
@@ -35155,7 +35164,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       return propsForRoutePath(pageLink, router, currentRoute, {
         openInNewTab,
         trackLinkClick,
-        rel,
+        rel: relValues == null ? void 0 : relValues.join(' ',),
         preserveParams,
         smoothScroll,
       }, implicitPathVariables,);
@@ -35174,7 +35183,18 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
-  }, [href, router, activeLocale, implicitPathVariables, openInNewTab, currentRoute, smoothScroll, trackLinkClick, rel, preserveParams,],);
+  }, [
+    href,
+    router,
+    activeLocale,
+    implicitPathVariables,
+    openInNewTab,
+    currentRoute,
+    smoothScroll,
+    trackLinkClick,
+    relValues,
+    preserveParams,
+  ],);
   const hasRef = isValidElement(children,) && 'ref' in children;
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
   useRefEffect(observerRef, (node) => {
