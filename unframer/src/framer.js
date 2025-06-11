@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.EZMS46EZ.mjs
+// /:https://app.framerstatic.com/framer.EVNG5OMK.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14805,6 +14805,9 @@ function roundWithOffset(value, offset,) {
     offset = 1 - offset;
   }
   return Math.round(value - offset,) + offset;
+}
+function roundToHalfPixel(value,) {
+  return Math.round(value * 2,) / 2;
 }
 function Point(x, y,) {
   return {
@@ -22930,6 +22933,7 @@ function BackgroundImageComponent({
         width: Math.round(backgroundSize * image.pixelWidth,),
         height: Math.round(backgroundSize * image.pixelHeight,),
       };
+      const roundedBackgroundSize = roundToHalfPixel(backgroundSize * (image.pixelWidth / 2),);
       const imageSource = runtime.useImageSource(image, tileSize,);
       fallbackWrapperStyles = {
         ...wrapperStyle,
@@ -22938,15 +22942,7 @@ function BackgroundImageComponent({
         backgroundPosition: cssObjectPosition(image.positionX, image.positionY,),
         opacity: void 0,
         border: 0,
-        // image.backgroundSize is a floating point number like 0.05
-        // so we need to multiply it by the pixelWidth to get the pixel
-        // value for the backgroundSize so that the size of the tile is
-        // a function of the image width + background size percentage.
-        // e.g image is 64px/64px and backgroundSize is 0.05, the tile size
-        // should be 3.2px
-        // We divide the pixel width by 2 because we assume that most designers
-        // will be working with 2x (retina) assets.
-        backgroundSize: `${(backgroundSize * (image.pixelWidth / 2)).toFixed(2,)}px auto`,
+        backgroundSize: `${roundedBackgroundSize}px auto`,
       };
       imageNode = null;
       needsMotion = true;
@@ -36872,6 +36868,7 @@ var CompatibilityDatabaseCollection = class {
       assert(definition.type !== 'unknown', 'Invalid definition type',);
       data2[key7] = {
         type: definition.type,
+        // biome-ignore lint/suspicious/noExplicitAny: Existing.
         value,
       };
     }
@@ -37150,6 +37147,21 @@ function castRichText(value,) {
   }
   return null;
 }
+function compareVectorSetItem(left, right,) {
+  const leftValue = left.value;
+  const rightValue = right.value;
+  if (leftValue < rightValue) return -1;
+  if (leftValue > rightValue) return 1;
+  return 0;
+}
+function castVectorSetItem(value,) {
+  switch (value == null ? void 0 : value.type) {
+    case 'vectorsetitem': {
+      return value;
+    }
+  }
+  return null;
+}
 function compareString(left, right, collation11,) {
   let leftValue = left.value;
   let rightValue = right.value;
@@ -37209,6 +37221,8 @@ var DatabaseValue = {
         return castRichText(value,);
       case 'string':
         return castString(value,);
+      case 'vectorsetitem':
+        return castVectorSetItem(value,);
       case 'unknown':
         return value;
       default:
@@ -37382,6 +37396,8 @@ var DatabaseValue = {
         return `'${value.value}' /* Date */`;
       case 'richtext':
         return 'RichText';
+      case 'vectorsetitem':
+        return 'VectorSetItem';
       case 'responsiveimage':
         return 'ResponsiveImage';
       case 'file':
@@ -37444,6 +37460,10 @@ function compare(left, right, collation11,) {
     case 'richtext': {
       assert(left.type === right.type,);
       return compareRichText(left, right,);
+    }
+    case 'vectorsetitem': {
+      assert(left.type === right.type,);
+      return compareVectorSetItem(left, right,);
     }
     case 'string': {
       assert(left.type === right.type,);
@@ -37682,7 +37702,7 @@ function calculateHash(name, ...values) {
   },);
   return Hash(`${name}(${hashes.join(', ',)})`,);
 }
-var RichText = class {
+var RichTextResolver = class {
   constructor(data2, pointer,) {
     this.data = data2;
     this.pointer = pointer;
@@ -37690,6 +37710,18 @@ var RichText = class {
   }
   resolve() {
     this.cached ??= this.data.resolveRichText(this.pointer,);
+    return this.cached;
+  }
+};
+var VectorSetItemResolver = class {
+  constructor(data2, pointer,) {
+    this.data = data2;
+    this.pointer = pointer;
+    __publicField(this, 'cached',);
+  }
+  resolve() {
+    assert(this.data.resolveVectorSetItem, 'Can\'t resolve vector set item.',);
+    this.cached ??= this.data.resolveVectorSetItem(this.pointer,);
     return this.cached;
   }
 };
@@ -37781,7 +37813,14 @@ var FieldMetadata = class {
       assert(this.collection, 'Rich text field must have a collection',);
       return {
         type: 'richtext',
-        value: new RichText(this.collection.data, value.value,),
+        value: new RichTextResolver(this.collection.data, value.value,),
+      };
+    }
+    if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
+      assert(this.collection, 'Vector set item field must have a collection',);
+      return {
+        type: 'vectorsetitem',
+        value: new VectorSetItemResolver(this.collection.data, value.value,),
       };
     }
     return value ?? null;
@@ -40919,9 +40958,13 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
     for (const tuple of input.tuples) {
       for (const field of this.fields) {
         const value = tuple.getValue(field,);
-        if ((value == null ? void 0 : value.type) !== 'richtext') continue;
-        assert(value.value instanceof RichText, 'Pointer must be wrapped',);
-        void value.value.resolve();
+        if ((value == null ? void 0 : value.type) === 'richtext') {
+          assert(value.value instanceof RichTextResolver, 'Pointer must be wrapped',);
+          void value.value.resolve();
+        } else if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
+          assert(value.value instanceof VectorSetItemResolver, 'Pointer must be wrapped',);
+          void value.value.resolve();
+        }
       }
     }
     const collectionItems = yield Promise.all(
@@ -41261,7 +41304,11 @@ ${stringifyQuery(query,)}`,);
   }
   async resolveValue(value,) {
     if ((value == null ? void 0 : value.type) === 'richtext') {
-      assert(value.value instanceof RichText, 'Pointer must be wrapped',);
+      assert(value.value instanceof RichTextResolver, 'Pointer must be wrapped',);
+      return value.value.resolve();
+    }
+    if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
+      assert(value.value instanceof VectorSetItemResolver, 'Pointer must be wrapped',);
       return value.value.resolve();
     }
     if ((value == null ? void 0 : value.type) === 'array') {
@@ -45685,16 +45732,105 @@ var trimSlugRegExp = /^-+|-+$/gu;
 function slugify(value,) {
   return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
 }
-var htmlRegExp = /[&<>'"]/gu;
-var escapeHTML = (str) =>
-  str.replace(htmlRegExp, (tag) =>
-    ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '\'': '&#39;',
-      '"': '&quot;',
-    })[tag] || tag,);
+var frameFromElement = (element) => {
+  const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
+  frame2.x = frame2.x + safeWindow.scrollX;
+  frame2.y = frame2.y + safeWindow.scrollY;
+  return frame2;
+};
+var frameFromElements = (elements) => {
+  return Rect.merge(...elements.map(frameFromElement,),);
+};
+var convertToPageFrame = (frame2, element,) => {
+  const point2 = convertToPagePoint(frame2, element,);
+  return {
+    x: point2.x,
+    y: point2.y,
+    width: frame2.width,
+    height: frame2.height,
+  };
+};
+var convertFromPageFrame = (frame2, element,) => {
+  const point2 = convertFromPagePoint(frame2, element,);
+  return {
+    x: point2.x,
+    y: point2.y,
+    width: frame2.width,
+    height: frame2.height,
+  };
+};
+var getPageFrame = (element) => {
+  const rect = element.getBoundingClientRect();
+  return {
+    x: rect.left + safeWindow.scrollX,
+    y: rect.top + safeWindow.scrollY,
+    width: rect.width,
+    height: rect.height,
+  };
+};
+var fromEventForPage = (event) => {
+  return {
+    x: event.pageX,
+    y: event.pageY,
+  };
+};
+var fromEventForClient = (event) => {
+  return {
+    x: event.clientX,
+    y: event.clientY,
+  };
+};
+var convertToPagePoint = (point2, element,) => {
+  const frame2 = getPageFrame(element,);
+  return {
+    x: point2.x + frame2.x,
+    y: point2.y + frame2.y,
+  };
+};
+var convertFromPagePoint = (point2, element,) => {
+  const frame2 = getPageFrame(element,);
+  return {
+    x: point2.x - frame2.x,
+    y: point2.y - frame2.y,
+  };
+};
+var dispatchKeyDownEvent = (keyCode, options = {},) => {
+  const keyboardEvent = new KeyboardEvent('keydown', {
+    bubbles: true,
+    keyCode,
+    ...options,
+  },);
+  const activeElement = document.activeElement;
+  if (activeElement) {
+    activeElement.dispatchEvent(keyboardEvent,);
+  }
+};
+var DOM = {
+  frameFromElement,
+  frameFromElements,
+  convertToPageFrame,
+  convertFromPageFrame,
+  getPageFrame,
+  fromEventForPage,
+  fromEventForClient,
+  convertToPagePoint,
+  convertFromPagePoint,
+};
+var parser;
+var supportsNativeParseHTML = /* @__PURE__ */ (() =>
+  // Firefox has rare-random issues with the native parser: https://framer-team.slack.com/archives/C01B14R6E22/p1724159313153969
+  !isFirefox() && typeof Document !== 'undefined' && typeof Document.parseHTMLUnsafe === 'function')();
+function domParser(html, type,) {
+  if (supportsNativeParseHTML && !type) return Document.parseHTMLUnsafe(html,);
+  parser ??= new DOMParser();
+  return parser.parseFromString(html, type ?? 'text/html',);
+}
+function escapeHTML(value,) {
+  return value.replaceAll('&', '&amp;',).replaceAll('<', '&lt;',).replaceAll('>', '&gt;',).replaceAll('"', '&quot;',).replaceAll(
+    '\'',
+    '&#39;',
+  );
+}
 var regex =
   /(<([a-z]+)(?:\s+(?!href[\s=])[^=\s]+=(?:'[^']*'|"[^"]*"))*)(?:(\s+href\s*=)(?:'([^']*)'|"([^"]*)"))?((?:\s+[^=\s]+=(?:'[^']*'|"[^"]*"))*>)/gi;
 function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVariables,) {
@@ -45734,18 +45870,6 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
 }
 function isShallowEqualArray(a, b,) {
   return a.length === b.length && a.every((v, i,) => v === b[i]);
-}
-var htmlEscapes = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  '\'': '&#39;',
-};
-var reUnescapedHtml = /[&<>"']/gu;
-var reHasUnescapedHtml = /* @__PURE__ */ (() => new RegExp(reUnescapedHtml.source,))();
-function escapeHTML2(str,) {
-  return str && reHasUnescapedHtml.test(str,) ? str.replace(reUnescapedHtml, (chr) => htmlEscapes[chr] ?? '',) : str || '';
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
@@ -45810,12 +45934,12 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
   }
   let innerHTML = '';
   if (textOrOverride) {
-    const escapedText = escapeHTML2(textOrOverride,);
+    const escapedText = escapeHTML(textOrOverride,);
     innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
   } else if (html) {
     innerHTML = html;
   } else if (textFromDesign) {
-    const escapedText = escapeHTML2(textFromDesign,);
+    const escapedText = escapeHTML(textFromDesign,);
     innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
   } else if (htmlFromDesign) {
     innerHTML = htmlFromDesign;
@@ -46648,7 +46772,7 @@ function extractTextFromReactNode(node,) {
   }
   return '';
 }
-var RichText2 = /* @__PURE__ */ forwardRef(function RichText3({
+var RichText = /* @__PURE__ */ forwardRef(function RichText2({
   children,
   html,
   htmlFromDesign,
@@ -46885,99 +47009,6 @@ var ImagePatternElement = ({
     }, href,),
   },);
 };
-var frameFromElement = (element) => {
-  const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
-  frame2.x = frame2.x + safeWindow.scrollX;
-  frame2.y = frame2.y + safeWindow.scrollY;
-  return frame2;
-};
-var frameFromElements = (elements) => {
-  return Rect.merge(...elements.map(frameFromElement,),);
-};
-var convertToPageFrame = (frame2, element,) => {
-  const point2 = convertToPagePoint(frame2, element,);
-  return {
-    x: point2.x,
-    y: point2.y,
-    width: frame2.width,
-    height: frame2.height,
-  };
-};
-var convertFromPageFrame = (frame2, element,) => {
-  const point2 = convertFromPagePoint(frame2, element,);
-  return {
-    x: point2.x,
-    y: point2.y,
-    width: frame2.width,
-    height: frame2.height,
-  };
-};
-var getPageFrame = (element) => {
-  const rect = element.getBoundingClientRect();
-  return {
-    x: rect.left + safeWindow.scrollX,
-    y: rect.top + safeWindow.scrollY,
-    width: rect.width,
-    height: rect.height,
-  };
-};
-var fromEventForPage = (event) => {
-  return {
-    x: event.pageX,
-    y: event.pageY,
-  };
-};
-var fromEventForClient = (event) => {
-  return {
-    x: event.clientX,
-    y: event.clientY,
-  };
-};
-var convertToPagePoint = (point2, element,) => {
-  const frame2 = getPageFrame(element,);
-  return {
-    x: point2.x + frame2.x,
-    y: point2.y + frame2.y,
-  };
-};
-var convertFromPagePoint = (point2, element,) => {
-  const frame2 = getPageFrame(element,);
-  return {
-    x: point2.x - frame2.x,
-    y: point2.y - frame2.y,
-  };
-};
-var dispatchKeyDownEvent = (keyCode, options = {},) => {
-  const keyboardEvent = new KeyboardEvent('keydown', {
-    bubbles: true,
-    keyCode,
-    ...options,
-  },);
-  const activeElement = document.activeElement;
-  if (activeElement) {
-    activeElement.dispatchEvent(keyboardEvent,);
-  }
-};
-var DOM = {
-  frameFromElement,
-  frameFromElements,
-  convertToPageFrame,
-  convertFromPageFrame,
-  getPageFrame,
-  fromEventForPage,
-  fromEventForClient,
-  convertToPagePoint,
-  convertFromPagePoint,
-};
-var parser;
-var supportsNativeParseHTML = /* @__PURE__ */ (() =>
-  // Firefox has rare-random issues with the native parser: https://framer-team.slack.com/archives/C01B14R6E22/p1724159313153969
-  !isFirefox() && typeof Document !== 'undefined' && typeof Document.parseHTMLUnsafe === 'function')();
-function domParser(html, type,) {
-  if (supportsNativeParseHTML && !type) return Document.parseHTMLUnsafe(html,);
-  parser ??= new DOMParser();
-  return parser.parseFromString(html, type ?? 'text/html',);
-}
 var useDOM = /* @__PURE__ */ isBrowser2();
 var SharedSVGEntry = class {
   constructor(id3, svg, innerHTML, viewBox, count = 0,) {
@@ -49577,7 +49608,7 @@ export {
   reverseEasing,
   rgba,
   rgbUnit,
-  RichText2 as RichText,
+  RichText,
   roundedNumber,
   roundedNumberString,
   roundWithOffset,
