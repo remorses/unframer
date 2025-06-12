@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.EVNG5OMK.mjs
+// /:https://app.framerstatic.com/framer.LBDG4FP4.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -24476,32 +24476,53 @@ function useStableRefWithObserver() {
         return ref.current;
       },
       set current(value,) {
-        if (refCallback) refCallback(value,);
+        if (value === ref.current) return;
         ref.current = value;
-        const needsCleanup = value === null;
-        callbacks.forEach((callback) => {
-          if (needsCleanup && cleanups.has(callback,)) return;
-          const cleanup = callback(value,);
-          if (cleanup) cleanups.set(callback, cleanup,);
+        if (refCallback) refCallback(value,);
+        cleanups.forEach((cleanup, callback,) => {
+          if (cleanup) {
+            cleanup();
+          } else {
+            callback(null,);
+          }
         },);
-        if (needsCleanup) {
-          cleanups.forEach((cleanup) => cleanup());
+        if (value === null) {
           cleanups.clear();
+          callbacks.clear();
+          return;
+        }
+        callbacks.forEach((callback) => {
+          const cleanup = callback(value,);
+          cleanups.set(callback, cleanup,);
+        },);
+      },
+      /**
+       * Adds `fn` to the list of callbacks to be called when the ref is updated.
+       * Executes `fn` immediately if the ref already has a value.
+       */
+      observe(fn,) {
+        callbacks.add(fn,);
+        const value = ref.current;
+        if (value) {
+          const cleanup = fn(value,);
+          cleanups.set(fn, cleanup,);
         }
       },
-      observe(fn, skipCall = false,) {
-        if (callbacks.has(fn,)) return;
-        callbacks.add(fn,);
-        if (!skipCall && ref.current) fn(ref.current,);
-      },
+      /**
+       * Removes `fn` from the list of callbacks.
+       * Runs the cleanup for `fn` if it has been called before.
+       */
       unobserve(fn,) {
-        if (fn) callbacks.delete(fn,);
-      },
-      cleanup(fn,) {
-        var _a;
-        if (!fn || !cleanups.has(fn,)) return false;
-        (_a = cleanups.get(fn,)) == null ? void 0 : _a();
-        return true;
+        if (!fn) return;
+        callbacks.delete(fn,);
+        if (!cleanups.has(fn,)) return;
+        const cleanupFn = cleanups.get(fn,);
+        if (cleanupFn) {
+          cleanupFn();
+        } else {
+          fn(null,);
+        }
+        cleanups.delete(fn,);
       },
     };
   });
@@ -24516,27 +24537,20 @@ function useObserverRef(forwardedRef,) {
   },);
 }
 function useRefEffect(ref, effect, deps,) {
-  var _a;
   const effectRef = useRef3();
   const depsChangedRef = useRef3();
   useMemoOne(() => {
-    if (depsChangedRef.current !== void 0) depsChangedRef.current = true;
+    if (depsChangedRef.current !== void 0) {
+      depsChangedRef.current = true;
+    }
   }, deps ?? [{},],);
   if (!ref) return;
   const depsChanged = depsChangedRef.current;
-  if (depsChanged) {
-    depsChangedRef.current = false;
-    if (!ref.cleanup(effectRef.current,)) {
-      (_a = effectRef.current) == null ? void 0 : _a.call(effectRef, null,);
-    }
-    const value = ref.current;
-    if (value) effect == null ? void 0 : effect(value,);
-  }
-  if (effectRef.current === effect) return;
+  if (depsChanged === false) return;
+  depsChangedRef.current = false;
   ref.unobserve(effectRef.current,);
+  ref.observe(effect,);
   effectRef.current = effect;
-  ref.observe(effect, depsChanged,);
-  if (depsChangedRef.current === void 0) depsChangedRef.current = false;
 }
 var SharedIntersectionObserver = class {
   constructor(options,) {
@@ -32600,8 +32614,12 @@ function extractFXOptions(props,) {
     },
     loop: {},
     forwardedProps: {},
+    targetOpacityValue: props.__targetOpacity,
+    withPerspective: props.__perspectiveFX,
+    inSmartComponent: props.__smartComponentFX,
   };
   for (const key7 in props) {
+    if (key7 === '__targetOpacity' || key7 === '__perspectiveFX' || key7 === '__smartComponentFX') continue;
     const strippedKey = stripPrefixFromPrefixedKey(key7,);
     if (strippedKey) {
       for (const group of groupValues) {
@@ -32668,13 +32686,10 @@ var withFX = (Component17) =>
       presence = {},
       loop = {},
       forwardedProps,
+      targetOpacityValue,
+      withPerspective,
+      inSmartComponent = false,
     } = extractFXOptions(props,);
-    const {
-      __targetOpacity: targetOpacityValue,
-      __perspectiveFX: withPerspective,
-      __smartComponentFX: inSmartComponent = false,
-    } = props;
-    const targetOpacity = useMotionValue(targetOpacityValue ?? 1,);
     const observerRef = useObserverRef(forwardedRef,);
     const {
       values: presenceEffectValues,
@@ -32697,16 +32712,10 @@ var withFX = (Component17) =>
       style: loopStyle,
     } = useLoop(loop, observerRef,);
     const fxValues = React4.useMemo(() => {
+      const layerOpacity = new MotionValue(targetOpacityValue ?? 1,);
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
-        opacity: [
-          appearEffectValues.opacity,
-          loopValues.opacity,
-          presenceEffectValues.opacity,
-          // Ensure that the layers opacity is always represented.
-          targetOpacity,
-          transformValues2.opacity,
-        ],
+        opacity: [appearEffectValues.opacity, loopValues.opacity, presenceEffectValues.opacity, layerOpacity, transformValues2.opacity,],
         x: [appearEffectValues.x, loopValues.x, presenceEffectValues.x, transformValues2.x,],
         y: [appearEffectValues.y, loopValues.y, parallaxValues.y, presenceEffectValues.y, transformValues2.y,],
         rotate: [appearEffectValues.rotate, loopValues.rotate, presenceEffectValues.rotate, transformValues2.rotate,],
@@ -32720,7 +32729,7 @@ var withFX = (Component17) =>
           // value here on purpose.
         ],
       };
-    }, [targetOpacity, transformValues2, parallaxValues, appearEffectValues, loopValues, presenceEffectValues,],);
+    }, [targetOpacityValue, transformValues2, parallaxValues, appearEffectValues, loopValues, presenceEffectValues,],);
     addMotionValueStyle(props.style, fxValues,);
     const scale2 = useTransform(fxValues.scale, multiply,);
     const opacity = useTransform(fxValues.opacity, multiply,);
@@ -49188,8 +49197,8 @@ var package_default = {
   scripts: {
     coverage: 'yarn :jest --coverage',
     lint: 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
-    'lint:ci': 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache --cache-strategy content',
-    'lint:fix': 'yarn lint --fix --cache',
+    'lint:ci': 'yarn lint --cache-strategy content --cache-location ~/.cache/eslint/framer-library',
+    'lint:fix': 'yarn lint --fix',
     test: 'yarn :jest',
     watch: 'yarn :jest --watch',
     postinstall: 'node postinstall.cjs',
