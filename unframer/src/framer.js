@@ -11221,7 +11221,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.LBDG4FP4.mjs
+// /:https://app.framerstatic.com/framer.4MJDZZYM.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14624,6 +14624,211 @@ function patchRoutesForABTesting(routes, initialRouteId,) {
   removeRoutesVariants(routes,);
   return resolvedInitialRouteId;
 }
+var mainTagId = 'main';
+var generatedPageDatasetKey = 'framerGeneratedPage';
+var endOfHeadStartMarker = '<!-- End of headStart -->';
+var endOfHeadEndMarker = '<!-- End of headEnd -->';
+var endOfBodyStartMarker = '<!-- End of bodyStart -->';
+var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
+function assert(condition, ...msg) {
+  var _a, _b;
+  if (condition) return;
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (e.stack) {
+    try {
+      const lines = e.stack.split('\n',);
+      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+        lines.splice(1, 1,);
+        e.stack = lines.join('\n',);
+      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+        lines.splice(0, 1,);
+        e.stack = lines.join('\n',);
+      }
+    } catch {}
+  }
+  throw e;
+}
+function assertNever(x, error,) {
+  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
+}
+async function insertHTML(html, referenceNode, position = 'beforeend',) {
+  let insertionParent, insertionPoint;
+  switch (position) {
+    case 'beforebegin':
+      assert(referenceNode.parentNode, 'Can\'t use \'beforebegin\' with a referenceNode at the top level',);
+      insertionParent = referenceNode.parentNode;
+      insertionPoint = referenceNode;
+      break;
+    case 'afterend':
+      assert(referenceNode.parentNode, 'Can\'t use \'afterend\' with a referenceNode at the top level',);
+      insertionParent = referenceNode.parentNode;
+      insertionPoint = referenceNode.nextSibling;
+      break;
+    case 'afterbegin':
+      insertionParent = referenceNode;
+      insertionPoint = referenceNode.firstChild;
+      break;
+    case 'beforeend':
+      insertionParent = referenceNode;
+      insertionPoint = null;
+      break;
+    default:
+      assertNever(position,);
+  }
+  const range = document.createRange();
+  range.selectNodeContents(insertionParent,);
+  const fragment = range.createContextualFragment(html,);
+  await pump(fragment, insertionParent, insertionPoint,);
+}
+async function pump(sourceNode, targetParent, beforeNode,) {
+  for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
+    if (node instanceof HTMLScriptElement) {
+      await handleScript(node, targetParent, beforeNode,);
+      continue;
+    }
+    const clone = node.cloneNode(false,);
+    targetParent.insertBefore(clone, beforeNode,);
+    if (node.firstChild) {
+      await pump(node, clone, null,);
+    }
+  }
+}
+async function handleScript(node, parent, beforeNode,) {
+  var _a;
+  const script = node.cloneNode(true,);
+  const isExternal = script.hasAttribute('src',);
+  const isAsync = script.hasAttribute('async',);
+  const isDefer = script.hasAttribute('defer',);
+  const isModule = ((_a = script.getAttribute('type',)) == null ? void 0 : _a.toLowerCase()) === 'module';
+  if (!isExternal || isAsync || isDefer || isModule) {
+    parent.insertBefore(script, beforeNode,);
+  } else {
+    await execExternalBlockingScript(script, parent, beforeNode,);
+  }
+}
+function execExternalBlockingScript(script, parent, beforeNode,) {
+  return new Promise((resolve) => {
+    script.onload = () => resolve();
+    script.onerror = () => resolve();
+    parent.insertBefore(script, beforeNode,);
+  },);
+}
+function useMetadata(metadata,) {
+  const {
+    isInitialNavigation,
+  } = useRouter();
+  React2.useEffect(() => {
+    if (metadata.robots) {
+      let robotsTag = document.querySelector('meta[name="robots"]',);
+      if (robotsTag) {
+        robotsTag.setAttribute('content', metadata.robots,);
+      } else {
+        robotsTag = document.createElement('meta',);
+        robotsTag.setAttribute('name', 'robots',);
+        robotsTag.setAttribute('content', metadata.robots,);
+        document.head.appendChild(robotsTag,);
+      }
+    }
+  }, [metadata.robots,],);
+  React2.useInsertionEffect(() => {
+    var _a;
+    document.title = metadata.title || '';
+    if (metadata.viewport) {
+      (_a = document.querySelector('meta[name="viewport"]',)) == null ? void 0 : _a.setAttribute('content', metadata.viewport,);
+    }
+  }, [metadata.title, metadata.viewport,],);
+  React2.useEffect(() => {
+    if (!isInitialNavigation) return;
+    const mainTag = document.getElementById(mainTagId,);
+    const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
+    if (isGeneratedPage) return;
+    void insertCustomHTML(
+      metadata.customHTMLHeadStart,
+      metadata.customHTMLHeadEnd,
+      metadata.customHTMLBodyStart,
+      metadata.customHTMLBodyEnd,
+    );
+  }, [],);
+}
+async function insertCustomHTML(customHTMLHeadStart, customHTMLHeadEnd, customHTMLBodyStart, customHTMLBodyEnd,) {
+  let endOfHeadStart;
+  let endOfHeadEnd;
+  let endOfBodyStart;
+  let endOfBodyEnd;
+  if (customHTMLHeadStart || customHTMLHeadEnd) {
+    const {
+      start: start2,
+      end,
+    } = findCommentMarkers(
+      document.head.childNodes,
+      customHTMLHeadStart ? endOfHeadStartMarker : void 0,
+      customHTMLHeadEnd ? endOfHeadEndMarker : void 0,
+    );
+    endOfHeadStart = start2;
+    endOfHeadEnd = end;
+  }
+  if (customHTMLBodyStart || customHTMLBodyEnd) {
+    const {
+      start: start2,
+      end,
+    } = findCommentMarkers(
+      document.body.childNodes,
+      customHTMLBodyStart ? endOfBodyStartMarker : void 0,
+      customHTMLBodyEnd ? endOfBodyEndMarker : void 0,
+    );
+    endOfBodyStart = start2;
+    endOfBodyEnd = end;
+  }
+  if (customHTMLHeadStart && endOfHeadStart) {
+    await insertHTML(customHTMLHeadStart, endOfHeadStart, 'beforebegin',);
+  }
+  if (customHTMLHeadEnd && endOfHeadEnd) {
+    await insertHTML(customHTMLHeadEnd, endOfHeadEnd, 'beforebegin',);
+  }
+  if (customHTMLBodyStart && endOfBodyStart) {
+    await insertHTML(customHTMLBodyStart, endOfBodyStart, 'beforebegin',);
+  }
+  if (customHTMLBodyEnd && endOfBodyEnd) {
+    await insertHTML(customHTMLBodyEnd, endOfBodyEnd, 'beforebegin',);
+  }
+}
+function findCommentMarkers(nodes, startMarker, endMarker,) {
+  if (!startMarker && !endMarker) {
+    return {
+      start: void 0,
+      end: void 0,
+    };
+  }
+  let start2;
+  let end;
+  let i = 0;
+  let j = nodes.length - 1;
+  while (i <= j) {
+    const startNode = nodes[i];
+    const endNode = nodes[j];
+    if (
+      !start2 && (startNode == null ? void 0 : startNode.nodeType) === Node.COMMENT_NODE && startMarker &&
+      `<!--${startNode.nodeValue}-->` === startMarker
+    ) {
+      start2 = startNode;
+      if (!endMarker) break;
+    }
+    if (
+      !end && (endNode == null ? void 0 : endNode.nodeType) === Node.COMMENT_NODE && endMarker &&
+      `<!--${endNode.nodeValue}-->` === endMarker
+    ) {
+      end = endNode;
+      if (!startMarker) break;
+    }
+    if (start2 && end) break;
+    i++;
+    j--;
+  }
+  return {
+    start: start2,
+    end,
+  };
+}
 var warningMessages = /* @__PURE__ */ new Set();
 function warnOnce2(keyMessage, ...rest) {
   if (warningMessages.has(keyMessage,)) return;
@@ -14936,27 +15141,6 @@ function Point(x, y,) {
   }
   Point2.sortClockwise = sortClockwise;
 })(Point || (Point = {}),);
-function assert(condition, ...msg) {
-  var _a, _b;
-  if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
-  if (e.stack) {
-    try {
-      const lines = e.stack.split('\n',);
-      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
-        lines.splice(1, 1,);
-        e.stack = lines.join('\n',);
-      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
-        lines.splice(0, 1,);
-        e.stack = lines.join('\n',);
-      }
-    } catch {}
-  }
-  throw e;
-}
-function assertNever(x, error,) {
-  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
-}
 var BezierDefaults = {
   curve: 'ease',
   duration: 1,
@@ -22918,7 +23102,7 @@ function BackgroundImageComponent({
   ...props
 },) {
   const {
-    motionDivToDiv,
+    motionDivToDivBackgroundImage,
   } = useLibraryFeatures();
   if (layoutId) {
     layoutId += '-background';
@@ -22971,7 +23155,7 @@ function BackgroundImageComponent({
     ...wrapperStyle,
     ...getPlaceholderStyle(),
   };
-  return needsMotion || !motionDivToDiv
+  return needsMotion || !motionDivToDivBackgroundImage
     ? /* @__PURE__ */ jsx3(motion.div, {
       layoutId,
       style: style2,
@@ -35840,6 +36024,7 @@ function Router({
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const startNavigation = useNavigationTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
+  const isInitialNavigationRef = useRef3(true,);
   const currentRouteRef = useRef3(initialRoute,);
   const currentPathVariablesRef = useRef3(initialPathVariables,);
   const currentLocaleIdRef = useRef3(initialLocaleId,);
@@ -35894,6 +36079,7 @@ function Router({
           if (!localeResult) return;
           const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
           const currentPath = localeResult.path;
+          isInitialNavigationRef.current = false;
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
           const updateURL = async (ignorePushStateWrapper = false,) => {
@@ -35934,6 +36120,7 @@ function Router({
   ],);
   const setCurrentRouteId = useCallback(
     (routeId, localeId, hash2, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
+      isInitialNavigationRef.current = false;
       const currentRouteId2 = currentRouteRef.current;
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
@@ -36048,6 +36235,7 @@ function Router({
   const currentRoute = routes[currentRouteId];
   const currentRoutePath = currentRoute == null ? void 0 : currentRoute.path;
   const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,);
+  const isInitialNavigation = isInitialNavigationRef.current;
   const api = useMemo2(() => ({
     navigate,
     getRoute,
@@ -36058,6 +36246,7 @@ function Router({
     preserveQueryParams,
     pageviewEventData,
     siteCanonicalURL,
+    isInitialNavigation,
   }), [
     navigate,
     getRoute,
@@ -36068,6 +36257,7 @@ function Router({
     preserveQueryParams,
     siteCanonicalURL,
     pageviewEventData,
+    isInitialNavigation,
   ],);
   if (!currentRoute) {
     throw new Error(`Router cannot find route for ${currentRouteId}`,);
@@ -49722,6 +49912,7 @@ export {
   useLocalesForCurrentRoute,
   useLocalizationInfo,
   useMeasureLayout,
+  useMetadata,
   useMotionTemplate,
   useMotionValue,
   useMotionValueEvent,
