@@ -13,7 +13,7 @@ import {
   __toESM,
 } from './framer-chunks/chunk-A2PMVMFI.js';
 
-// /:https://app.framerstatic.com/chunk-A6RUM2JZ.mjs
+// /:https://app.framerstatic.com/chunk-BLFSVU7M.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { useCallback, useContext, useId, } from 'react';
@@ -3542,6 +3542,97 @@ function getComputedStyle2(element, name,) {
   const computedStyle = window.getComputedStyle(element,);
   return isCSSVar(name,) ? computedStyle.getPropertyValue(name,) : computedStyle[name];
 }
+function isSVGElement(element,) {
+  return isObject(element,) && 'ownerSVGElement' in element;
+}
+var resizeHandlers = /* @__PURE__ */ new WeakMap();
+var observer;
+var getSize = (borderBoxAxis, svgAxis, htmlAxis,) => (target, borderBoxSize,) => {
+  if (borderBoxSize && borderBoxSize[0]) {
+    return borderBoxSize[0][borderBoxAxis + 'Size'];
+  } else if (isSVGElement(target,) && 'getBBox' in target) {
+    return target.getBBox()[svgAxis];
+  } else {
+    return target[htmlAxis];
+  }
+};
+var getWidth = /* @__PURE__ */ getSize('inline', 'width', 'offsetWidth',);
+var getHeight = /* @__PURE__ */ getSize('block', 'height', 'offsetHeight',);
+function notifyTarget({
+  target,
+  borderBoxSize,
+},) {
+  var _a;
+  (_a = resizeHandlers.get(target,)) == null ? void 0 : _a.forEach((handler) => {
+    handler(target, {
+      get width() {
+        return getWidth(target, borderBoxSize,);
+      },
+      get height() {
+        return getHeight(target, borderBoxSize,);
+      },
+    },);
+  },);
+}
+function notifyAll(entries,) {
+  entries.forEach(notifyTarget,);
+}
+function createResizeObserver() {
+  if (typeof ResizeObserver === 'undefined') return;
+  observer = new ResizeObserver(notifyAll,);
+}
+function resizeElement(target, handler,) {
+  if (!observer) createResizeObserver();
+  const elements = resolveElements(target,);
+  elements.forEach((element) => {
+    let elementHandlers = resizeHandlers.get(element,);
+    if (!elementHandlers) {
+      elementHandlers = /* @__PURE__ */ new Set();
+      resizeHandlers.set(element, elementHandlers,);
+    }
+    elementHandlers.add(handler,);
+    observer == null ? void 0 : observer.observe(element,);
+  },);
+  return () => {
+    elements.forEach((element) => {
+      const elementHandlers = resizeHandlers.get(element,);
+      elementHandlers == null ? void 0 : elementHandlers.delete(handler,);
+      if (!(elementHandlers == null ? void 0 : elementHandlers.size)) {
+        observer == null ? void 0 : observer.unobserve(element,);
+      }
+    },);
+  };
+}
+var windowCallbacks = /* @__PURE__ */ new Set();
+var windowResizeHandler;
+function createWindowResizeHandler() {
+  windowResizeHandler = () => {
+    const info = {
+      get width() {
+        return window.innerWidth;
+      },
+      get height() {
+        return window.innerHeight;
+      },
+    };
+    windowCallbacks.forEach((callback) => callback(info,));
+  };
+  window.addEventListener('resize', windowResizeHandler,);
+}
+function resizeWindow(callback,) {
+  windowCallbacks.add(callback,);
+  if (!windowResizeHandler) createWindowResizeHandler();
+  return () => {
+    windowCallbacks.delete(callback,);
+    if (!windowCallbacks.size && typeof windowResizeHandler === 'function') {
+      window.removeEventListener('resize', windowResizeHandler,);
+      windowResizeHandler = void 0;
+    }
+  };
+}
+function resize(a, b,) {
+  return typeof a === 'function' ? resizeWindow(a,) : resizeElement(a, b,);
+}
 function observeTimeline(update, timeline,) {
   let prevProgress;
   const onFrame = () => {
@@ -3673,9 +3764,6 @@ function recordStats() {
   };
   frame.postRender(record, true,);
   return reportStats;
-}
-function isSVGElement(element,) {
-  return isObject(element,) && 'ownerSVGElement' in element;
 }
 function isSVGSVGElement(element,) {
   return isSVGElement(element,) && element.tagName === 'svg';
@@ -8576,6 +8664,7 @@ function createProjectionNode2({
         this.motionValue || (this.motionValue = motionValue(0,));
         this.currentAnimation = animateSingleValue(this.motionValue, [0, 1e3,], {
           ...options,
+          velocity: 0,
           isSync: true,
           onUpdate: (latest) => {
             this.mixTargetDelta(latest,);
@@ -9434,102 +9523,6 @@ var domMin = {
 };
 function useMotionValueEvent(value, event, callback,) {
   useInsertionEffect(() => value.on(event, callback,), [value, event, callback,],);
-}
-var resizeHandlers = /* @__PURE__ */ new WeakMap();
-var observer;
-function getElementSize(target, borderBoxSize,) {
-  if (borderBoxSize) {
-    const {
-      inlineSize,
-      blockSize,
-    } = borderBoxSize[0];
-    return {
-      width: inlineSize,
-      height: blockSize,
-    };
-  } else if (isSVGElement(target,) && 'getBBox' in target) {
-    return target.getBBox();
-  } else {
-    return {
-      width: target.offsetWidth,
-      height: target.offsetHeight,
-    };
-  }
-}
-function notifyTarget({
-  target,
-  contentRect,
-  borderBoxSize,
-},) {
-  var _a;
-  (_a = resizeHandlers.get(target,)) == null ? void 0 : _a.forEach((handler) => {
-    handler({
-      target,
-      contentSize: contentRect,
-      get size() {
-        return getElementSize(target, borderBoxSize,);
-      },
-    },);
-  },);
-}
-function notifyAll(entries,) {
-  entries.forEach(notifyTarget,);
-}
-function createResizeObserver() {
-  if (typeof ResizeObserver === 'undefined') return;
-  observer = new ResizeObserver(notifyAll,);
-}
-function resizeElement(target, handler,) {
-  if (!observer) createResizeObserver();
-  const elements = resolveElements(target,);
-  elements.forEach((element) => {
-    let elementHandlers = resizeHandlers.get(element,);
-    if (!elementHandlers) {
-      elementHandlers = /* @__PURE__ */ new Set();
-      resizeHandlers.set(element, elementHandlers,);
-    }
-    elementHandlers.add(handler,);
-    observer == null ? void 0 : observer.observe(element,);
-  },);
-  return () => {
-    elements.forEach((element) => {
-      const elementHandlers = resizeHandlers.get(element,);
-      elementHandlers == null ? void 0 : elementHandlers.delete(handler,);
-      if (!(elementHandlers == null ? void 0 : elementHandlers.size)) {
-        observer == null ? void 0 : observer.unobserve(element,);
-      }
-    },);
-  };
-}
-var windowCallbacks = /* @__PURE__ */ new Set();
-var windowResizeHandler;
-function createWindowResizeHandler() {
-  windowResizeHandler = () => {
-    const size = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-    const info = {
-      target: window,
-      size,
-      contentSize: size,
-    };
-    windowCallbacks.forEach((callback) => callback(info,));
-  };
-  window.addEventListener('resize', windowResizeHandler,);
-}
-function resizeWindow(callback,) {
-  windowCallbacks.add(callback,);
-  if (!windowResizeHandler) createWindowResizeHandler();
-  return () => {
-    windowCallbacks.delete(callback,);
-    if (!windowCallbacks.size && windowResizeHandler) {
-      windowResizeHandler = void 0;
-    }
-  };
-}
-function resize(a, b,) {
-  return typeof a === 'function' ? resizeWindow(a,) : resizeElement(a, b,);
 }
 var maxElapsed2 = 50;
 var createAxisInfo = () => ({
@@ -11221,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4MJDZZYM.mjs
+// /:https://app.framerstatic.com/framer.PPEM7X7M.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14626,6 +14619,8 @@ function patchRoutesForABTesting(routes, initialRouteId,) {
 }
 var mainTagId = 'main';
 var generatedPageDatasetKey = 'framerGeneratedPage';
+var searchIndexMetaName = 'framer-search-index';
+var searchIndexMetaSelector = `meta[name="${searchIndexMetaName}"]`;
 var endOfHeadStartMarker = '<!-- End of headStart -->';
 var endOfHeadEndMarker = '<!-- End of headEnd -->';
 var endOfBodyStartMarker = '<!-- End of bodyStart -->';
@@ -34082,7 +34077,7 @@ function motionOriginFromFloatingPosition(placement = 'bottom', alignment = 'cen
       assertNever(placement,);
   }
 }
-function getAncestorInfo(anchorRef,) {
+function domReadGetAncestorInfo(anchorRef,) {
   var _a;
   let el = anchorRef.current;
   const info = {
@@ -34098,12 +34093,11 @@ function getAncestorInfo(anchorRef,) {
   }
   return info;
 }
-function createAnimationFrameLoop(onRead,) {
-  const startLoop = () => frame.read(onRead, true,);
-  const cancelLoop = () => cancelFrame(onRead,);
-  return [startLoop, cancelLoop,];
+function domReadStartAnimationFrameLoop(onRead,) {
+  frame.read(onRead, true,);
+  return () => cancelFrame(onRead,);
 }
-function createUpdateSafeArea(safeAreaRef,) {
+function domWriteCreateUpdateSafeArea(safeAreaRef,) {
   let x = 0;
   let y = 0;
   return (anchorRect, calculatedRect, placement, event,) => {
@@ -34114,7 +34108,7 @@ function createUpdateSafeArea(safeAreaRef,) {
     Object.assign(safeAreaRef.current.style, floatingPositionSafeAreaStyle(x, y, placement, anchorRect, calculatedRect,),);
   };
 }
-function updatePosition(floatingPositionRef, position, rect,) {
+function domWriteUpdatePosition(floatingPositionRef, position, rect,) {
   if (!floatingPositionRef.current) return;
   Object.assign(floatingPositionRef.current.style, {
     position,
@@ -34124,7 +34118,11 @@ function updatePosition(floatingPositionRef, position, rect,) {
     top: ((rect == null ? void 0 : rect.y) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
   },);
 }
-var FloatingStackingContext = /* @__PURE__ */ React4.createContext(/* @__PURE__ */ new Set(),);
+var FloatingStackingContext = /* @__PURE__ */ (() => {
+  const Context2 = React4.createContext(/* @__PURE__ */ new Set(),);
+  Context2.displayName = 'FloatingStackingContext';
+  return Context2;
+})();
 function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
   safeArea,
   onDismiss,
@@ -34249,69 +34247,90 @@ function Floating({
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
   React4.useLayoutEffect(() => {
     if (!refHasValue(anchorRef,) || !contentRef.current || !placement || !alignment) return;
-    const {
-      position,
-      scrolls,
-    } = getAncestorInfo(anchorRef,);
-    const elementRect = contentRef.current.getBoundingClientRect();
-    const initialAnchorRect = anchorRef.current.getBoundingClientRect();
     const offset = {
       x: offsetX ?? 0,
       y: offsetY ?? 0,
     };
-    const getSafePlacementRect = makeGetSafePlacementFloatingPositionRect({
-      placement,
-      alignment,
-      offset,
-      collisionDetectionSize: collisionDetection
-        ? {
-          width: safeWindow.innerWidth,
-          height: safeWindow.innerHeight,
-        }
-        : void 0,
-      collisionDetectionPadding,
-    },);
-    const [initialSafePlacement, initialCalculatedRect,] = getSafePlacementRect(initialAnchorRect, elementRect,);
-    frame.update(() => {
-      updateOrigin(initialSafePlacement,);
-    },);
-    frame.render(() => {
-      if (!floatingPositionRef.current) return;
-      updatePosition(floatingPositionRef, position, initialCalculatedRect,);
-    },);
-    const updateSafeArea = createUpdateSafeArea(safeAreaRef,);
-    let anchorRect = initialAnchorRect;
+    let getSafePlacementRect;
+    let position;
+    let cleanup;
+    let cleanupHasRun = false;
+    let initialUpdateHasRun = false;
+    let anchorRect;
+    let elementRect;
     let safePlacement;
     let calculatedRect;
+    let scrolls;
     let latestEvent;
-    const onUpdate = () => {
-      updateOrigin(safePlacement,);
-    };
+    let updateSafeArea;
     const onRender = () => {
-      updatePosition(floatingPositionRef, position, calculatedRect,);
+      if (cleanupHasRun) return;
+      domWriteUpdatePosition(floatingPositionRef, position, calculatedRect,);
       if (safeArea) updateSafeArea(anchorRect, calculatedRect, safePlacement, latestEvent,);
       latestEvent = void 0;
     };
-    const onRead = () => {
+    const initialRender = () => {
+      updateSafeArea = domWriteCreateUpdateSafeArea(safeAreaRef,);
+      if (latestEvent) {
+        onRender();
+      } else {
+        domWriteUpdatePosition(floatingPositionRef, position, calculatedRect,);
+      }
+      initialUpdateHasRun = true;
+    };
+    const onUpdate = () => {
+      if (cleanupHasRun) return;
+      updateOrigin(safePlacement,);
+    };
+    const domReadUpdateSafePlacementAndRect = () => {
+      if (!getSafePlacementRect || cleanupHasRun) return;
       anchorRect = anchorRef.current.getBoundingClientRect();
       const safePlacementAndRect = getSafePlacementRect(anchorRect, elementRect,);
       safePlacement = safePlacementAndRect[0];
       calculatedRect = safePlacementAndRect[1];
-      frame.update(onUpdate,);
-      frame.render(onRender,);
     };
-    const [loop, cancelAnimationFrameLoop,] = createAnimationFrameLoop(onRead,);
-    if (scrolls) loop == null ? void 0 : loop();
-    if (!safeArea) return () => cancelAnimationFrameLoop == null ? void 0 : cancelAnimationFrameLoop();
+    frame.read(() => {
+      if (cleanupHasRun || !contentRef.current) return;
+      const ancestorInfo = domReadGetAncestorInfo(anchorRef,);
+      position = ancestorInfo.position;
+      elementRect = contentRef.current.getBoundingClientRect();
+      getSafePlacementRect = makeGetSafePlacementFloatingPositionRect({
+        placement,
+        alignment,
+        offset,
+        collisionDetectionSize: collisionDetection
+          ? {
+            width: safeWindow.innerWidth,
+            height: safeWindow.innerHeight,
+          }
+          : void 0,
+        collisionDetectionPadding,
+      },);
+      domReadUpdateSafePlacementAndRect();
+      frame.update(onUpdate,);
+      frame.render(initialRender,);
+      if (!ancestorInfo.scrolls) return;
+      cleanup = domReadStartAnimationFrameLoop(domReadUpdateSafePlacementAndRect,);
+    },);
+    if (!safeArea) {
+      return () => {
+        cleanup == null ? void 0 : cleanup();
+        cleanupHasRun = true;
+      };
+    }
     const handleMouseMove = (event) => {
       latestEvent = event;
-      frame.read(onRead,);
+      if (!initialUpdateHasRun) return;
+      frame.read(domReadUpdateSafePlacementAndRect,);
+      frame.update(onUpdate, false, true,);
+      frame.render(onRender, false, true,);
     };
     const anchor = anchorRef.current;
     anchor.addEventListener('mousemove', handleMouseMove,);
     return () => {
-      cancelAnimationFrameLoop == null ? void 0 : cancelAnimationFrameLoop();
       anchor.removeEventListener('mousemove', handleMouseMove,);
+      cleanup == null ? void 0 : cleanup();
+      cleanupHasRun = true;
     };
   }, [safeArea, placement, alignment, offsetX, offsetY, anchorRef, collisionDetection, collisionDetectionPadding, updateOrigin,],);
   const descendantContext = useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
@@ -42834,11 +42853,11 @@ var withV1StrokeFX = (Component17) =>
         let index = 0;
         while (true) {
           if (signal.signal.aborted) break;
-          const mirror = strokeEffectLoopType === 'mirror';
+          const mirror = strokeEffectLoop && strokeEffectLoopType === 'mirror';
           const from = valueWithMirroring(index, mirror,);
           const to = valueWithMirroring(index + 1, mirror,);
           await animate(offset, [from, to,], pathLengthTransition,);
-          if (!strokeEffectLoop && !mirror) break;
+          if (!strokeEffectLoop) break;
           if (strokeEffectLoop && strokeEffectLoopType === 'repeat') continue;
           index++;
         }
@@ -45006,11 +45025,12 @@ var FontStore = class {
     if (builtInFontLocator) {
       const fontVariant = BuiltInFontSource.parseVariant(builtInFontLocator.variant,);
       if (isSuccessfullyParsedFontVariant(fontVariant,)) {
+        const family = builtInFontLocator.isVariable ? createVariableFontFamilyName(builtInFontLocator.name,) : builtInFontLocator.name;
         return {
           style: fontVariant.style,
           weight: fontVariant.weight,
           variant: builtInFontLocator.variant,
-          family: builtInFontLocator.name,
+          family,
           source: 'builtIn',
           category: void 0,
         };
@@ -49387,7 +49407,7 @@ var package_default = {
   scripts: {
     coverage: 'yarn :jest --coverage',
     lint: 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
-    'lint:ci': 'yarn lint --cache-strategy content --cache-location ~/.cache/eslint/framer-library',
+    'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
     test: 'yarn :jest',
     watch: 'yarn :jest --watch',
@@ -49799,6 +49819,7 @@ export {
   removeHiddenBreakpointLayersV2,
   removeItem,
   RenderTarget,
+  resize,
   resolveElements,
   resolveLink,
   ResolveLinks,
