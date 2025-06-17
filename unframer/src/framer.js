@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.PPEM7X7M.mjs
+// /:https://app.framerstatic.com/framer.4HIUELIE.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -32155,7 +32155,7 @@ function useParallax(options, ref, visibilityStyle,) {
   const visibility = useMotionValue(adjustPosition && originalPosition.current === null ? 'hidden' : visibilityStyle,);
   const defaultValue = useMotionValue(0,);
   useRefEffect(ref, (element) => {
-    if (element === null) return;
+    if (element === null || !parallaxTransformEnabled) return;
     frame.read(() => {
       var _a;
       originalPosition.current = ((_a = element.getBoundingClientRect()) == null ? void 0 : _a.top) ?? 0;
@@ -32166,8 +32166,11 @@ function useParallax(options, ref, visibilityStyle,) {
         visibility.set(visibilityStyle ?? 'initial',);
       }
     },);
-  }, [adjustPosition,],);
-  useOnRouteChange(() => parallaxY.set(0,));
+  }, [adjustPosition, parallaxTransformEnabled,],);
+  useOnRouteChange(() => {
+    if (!parallaxTransformEnabled) return;
+    parallaxY.set(0,);
+  },);
   return {
     values: {
       y: shouldReduceMotion || !parallaxTransformEnabled ? defaultValue : parallaxY,
@@ -44018,6 +44021,8 @@ var variantsNameToWeight = {
   extrabold: 800,
   'extrabold-italic': 800,
   black: 900,
+  extralight: 100,
+  'extralight-italic': 100,
   'black-italic': 900,
   'extra-italic': 900,
   'extra-italic-bold': 900,
@@ -44271,7 +44276,7 @@ async function loadFontsWithOpenType(source,) {
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-G3KSKQMF-6RG7QQ3J.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-GSJIWLGZ-3DSFZVD7.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -44285,7 +44290,7 @@ async function loadFontToOpenTypeFeatures(source,) {
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-PSV545VO-KUZ52D7F.js');
+      const features = await import('./framer-chunks/fontshare-SSHBFVID-JIQZ2OLR.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
@@ -44833,10 +44838,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-LMM7WH6E-5EU2EAFQ.js')).default;
+            return (await import('./framer-chunks/google-42BCYVR5-QT55MZO3.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-YYTAVKI7-DXLAG4CY.js')).default;
+            return (await import('./framer-chunks/fontshare-X6MCIXW5-UOB5XTBQ.js')).default;
           }
           default:
             assertNever(source,);
