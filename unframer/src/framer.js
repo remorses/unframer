@@ -11,7 +11,8 @@ import {
   __publicField,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-A2PMVMFI.js';
+  framer_motion_inject_exports,
+} from './framer-chunks/chunk-22NYTOTD.js';
 
 // /:https://app.framerstatic.com/chunk-BLFSVU7M.mjs
 import { createContext, } from 'react';
@@ -11214,7 +11215,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QUUNUZCV.mjs
+// /:https://app.framerstatic.com/framer.6RBAH774.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11222,6 +11223,7 @@ import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
+import { useTransition, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerNavigator2 = typeof window !== 'undefined' ? navigator : void 0;
 var require_hsluv = __commonJS({
@@ -42299,62 +42301,44 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   }));
 }
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
+  var _a, _b, _c, _d;
+  const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
-  const [paginationInfo, setPaginationInfo,] = useState(() => {
-    var _a, _b, _c, _d;
-    const currentPage = ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
+  const [currentPage, setCurrentPage,] = useState(
+    ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
           ? void 0
           : _b.paginationInfo) == null
         ? void 0
         : _c[hash2]) == null
       ? void 0
-      : _d.currentPage) ?? 1;
+      : _d.currentPage) ?? 1,
+  );
+  const paginationInfo = useMemo2(() => {
     return {
       currentPage,
       totalPages,
-      isLoading: false,
+      isLoading: isPending,
     };
-  },);
-  useEffect(() => {
-    startTransition2(() => {
-      setPaginationInfo((current2) => {
-        if (current2.totalPages === totalPages) return current2;
-        return {
-          ...current2,
-          totalPages,
-        };
-      },);
-    },);
-  }, [totalPages,],);
+  }, [currentPage, totalPages, isPending,],);
   useEffect(() => {
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
   const onCanvas = useIsOnFramerCanvas();
-  const loadMore = useCallback(() => {
+  const loadMore = useCallback(async () => {
     if (onCanvas) return;
-    if (paginationInfo.currentPage >= paginationInfo.totalPages) return;
-    if (!paginateWithSuspendedLoadingState) {
-      startTransition2(() => {
-        setPaginationInfo((info) => ({
-          ...info,
-          currentPage: Math.min(info.currentPage + 1, info.totalPages,),
-          isLoading: false,
-        }));
-      },);
-      return;
-    }
-    setPaginationInfo((info) => ({
-      ...info,
-      isLoading: true,
-    }));
-    requestAnimationFrame(() => {
-      setPaginationInfo((info) => ({
-        ...info,
-        currentPage: Math.min(info.currentPage + 1, info.totalPages,),
-        isLoading: false,
-      }));
+    if (currentPage >= totalPages) return;
+    await yieldToMain({
+      priority: 'user-blocking',
+      continueAfter: 'paint',
     },);
-  }, [onCanvas, paginationInfo.currentPage, paginationInfo.totalPages, paginateWithSuspendedLoadingState,],);
+    const renderNextPage = (startTransition14) => {
+      startTransition14(() => {
+        setCurrentPage((_currentPage) => Math.min(_currentPage + 1, totalPages,));
+      },);
+    };
+    if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
+    return renderNextPage(startLoadingTransition,);
+  }, [currentPage, totalPages, paginateWithSuspendedLoadingState,],);
   return {
     paginationInfo,
     loadMore,
@@ -42845,6 +42829,11 @@ function tryToApplyOverride(Component17, override,) {
 function valueWithMirroring(value, mirror,) {
   return mirror ? wrap(0, 2, value,) : value;
 }
+function singleFrame() {
+  return new Promise((resolve) => {
+    frame.postRender(() => resolve());
+  },);
+}
 var withV1StrokeFX = (Component17) =>
   forwardRef((props, forwardedRef,) => {
     const {
@@ -42876,7 +42865,7 @@ var withV1StrokeFX = (Component17) =>
           const mirror = strokeEffectLoop && strokeEffectLoopType === 'mirror';
           const from = valueWithMirroring(index, mirror,);
           const to = valueWithMirroring(index + 1, mirror,);
-          await animate(offset, [from, to,], pathLengthTransition,);
+          await Promise.all([animate(offset, [from, to,], pathLengthTransition,), singleFrame(),],);
           if (!strokeEffectLoop) break;
           if (strokeEffectLoop && strokeEffectLoopType === 'repeat') continue;
           index++;
@@ -44289,11 +44278,11 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-LHIHIYDX-NVWWNJLR.js');
+      const supportedFonts = await import('./framer-chunks/google-LHIHIYDX-FZZ6UXE7.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-GSJIWLGZ-3DSFZVD7.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-GSJIWLGZ-7BHTUG6K.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -44303,15 +44292,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3GQMHAEU-WSITVUPV.js');
+      const features = await import('./framer-chunks/google-3GQMHAEU-KEOTHDV6.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-SSHBFVID-JIQZ2OLR.js');
+      const features = await import('./framer-chunks/fontshare-SSHBFVID-ZX5Y6FJ4.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-TNC5DMGA-CVBTEZ7G.js');
+      const features = await import('./framer-chunks/framer-font-TNC5DMGA-XVG7BST3.js');
       return features == null ? void 0 : features.default;
     }
     default:
@@ -44855,10 +44844,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-42BCYVR5-QT55MZO3.js')).default;
+            return (await import('./framer-chunks/google-42BCYVR5-PDCHFNPY.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X6MCIXW5-UOB5XTBQ.js')).default;
+            return (await import('./framer-chunks/fontshare-X6MCIXW5-FUMOBUA2.js')).default;
           }
           default:
             assertNever(source,);
