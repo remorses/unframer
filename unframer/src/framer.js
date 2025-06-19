@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4HIUELIE.mjs
+// /:https://app.framerstatic.com/framer.QUUNUZCV.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11222,7 +11222,6 @@ import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
 import { createRef, } from 'react';
-import { useTransition, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerNavigator2 = typeof window !== 'undefined' ? navigator : void 0;
 var require_hsluv = __commonJS({
@@ -42300,44 +42299,62 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   }));
 }
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
-  var _a, _b, _c, _d;
-  const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
-  const [currentPage, setCurrentPage,] = useState(
-    ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
+  const [paginationInfo, setPaginationInfo,] = useState(() => {
+    var _a, _b, _c, _d;
+    const currentPage = ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
           ? void 0
           : _b.paginationInfo) == null
         ? void 0
         : _c[hash2]) == null
       ? void 0
-      : _d.currentPage) ?? 1,
-  );
-  const paginationInfo = useMemo2(() => {
+      : _d.currentPage) ?? 1;
     return {
       currentPage,
       totalPages,
-      isLoading: isPending,
+      isLoading: false,
     };
-  }, [currentPage, totalPages, isPending,],);
+  },);
+  useEffect(() => {
+    startTransition2(() => {
+      setPaginationInfo((current2) => {
+        if (current2.totalPages === totalPages) return current2;
+        return {
+          ...current2,
+          totalPages,
+        };
+      },);
+    },);
+  }, [totalPages,],);
   useEffect(() => {
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
   const onCanvas = useIsOnFramerCanvas();
-  const loadMore = useCallback(async () => {
+  const loadMore = useCallback(() => {
     if (onCanvas) return;
-    if (currentPage >= totalPages) return;
-    await yieldToMain({
-      priority: 'user-blocking',
-      continueAfter: 'paint',
-    },);
-    const renderNextPage = (startTransition14) => {
-      startTransition14(() => {
-        setCurrentPage((_currentPage) => Math.min(_currentPage + 1, totalPages,));
+    if (paginationInfo.currentPage >= paginationInfo.totalPages) return;
+    if (!paginateWithSuspendedLoadingState) {
+      startTransition2(() => {
+        setPaginationInfo((info) => ({
+          ...info,
+          currentPage: Math.min(info.currentPage + 1, info.totalPages,),
+          isLoading: false,
+        }));
       },);
-    };
-    if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
-    return renderNextPage(startLoadingTransition,);
-  }, [currentPage, totalPages, paginateWithSuspendedLoadingState,],);
+      return;
+    }
+    setPaginationInfo((info) => ({
+      ...info,
+      isLoading: true,
+    }));
+    requestAnimationFrame(() => {
+      setPaginationInfo((info) => ({
+        ...info,
+        currentPage: Math.min(info.currentPage + 1, info.totalPages,),
+        isLoading: false,
+      }));
+    },);
+  }, [onCanvas, paginationInfo.currentPage, paginationInfo.totalPages, paginateWithSuspendedLoadingState,],);
   return {
     paginationInfo,
     loadMore,
