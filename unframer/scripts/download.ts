@@ -53,6 +53,8 @@ export async function main({ framerTypesUrl }) {
             'process.env.NODE_ENV': JSON.stringify('production'),
             // 'RenderEnvironment.target': JSON.stringify('PREVIEW'),
         },
+        external: ['real-framer-motion', 'framer-motion'],
+        inject: [path.resolve(__dirname, 'framer-motion-inject.js')],
         plugins: [
             esbuildPluginBundleDependencies({
                 externalizeNpm: true,
