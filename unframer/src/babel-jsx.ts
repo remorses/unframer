@@ -20,7 +20,16 @@ export function removeJsxExpressionContainer({
                     const expr = path.node.expression
 
                     if (t.isJSXElement(expr) || t.isJSXFragment(expr)) {
-                        path.replaceWith(expr)
+                        const parent = path.parentPath
+
+                        if (
+                            parent &&
+                            parent.isJSXElement() &&
+                            Array.isArray(parent.node?.children) &&
+                            parent.node?.children?.includes(path.node)
+                        ) {
+                            path.replaceWith(expr)
+                        }
                     } else if (t.isArrayExpression(expr)) {
                         // Check if array contains only JSX elements/fragments
                         const allJsx = expr.elements.every(
@@ -39,7 +48,9 @@ export function removeJsxExpressionContainer({
                                     closingFragment: {
                                         type: 'JSXClosingFragment',
                                     },
-                                    children: expr.elements.filter(isTruthy) as any,
+                                    children: expr.elements.filter(
+                                        isTruthy,
+                                    ) as any,
                                 }
                                 path.replaceWith(fragment)
                             } catch (e) {

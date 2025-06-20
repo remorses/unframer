@@ -281,17 +281,17 @@ describe('babelPluginJsxTransform', () => {
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
           const element = (
             <Modal
-              content=(
+              content={
                 <div className={'modal-content'}>
                   <p>{'This is modal content'}</p>
                 </div>
-              )
-              footer=(
+              }
+              footer={
                 <div className={'modal-footer'}>
                   <button>{'Cancel'}</button>
                   <button>{'OK'}</button>
                 </div>
-              )
+              }
             />
           );
           "
@@ -336,6 +336,12 @@ describe('babelPluginJsxTransform', () => {
                     import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 
                     const element = _jsx(Container, {
+                        slots: _jsx("div", {
+                            children: "First element"
+                        }),
+                        children: _jsx("div", {
+                            children: "First element"
+                        }),
                         items: [
                             "Just a string",
                             42,
@@ -365,6 +371,7 @@ describe('babelPluginJsxTransform', () => {
           "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
           const element = (
             <Container
+              slots={<div>{'First element'}</div>}
               items={[
                 'Just a string',
                 42,
@@ -377,7 +384,9 @@ describe('babelPluginJsxTransform', () => {
                   <strong>{'element'}</strong>
                 </p>,
               ]}
-            />
+            >
+              <div>{'First element'}</div>
+            </Container>
           );
           "
         `)
