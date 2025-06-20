@@ -18,18 +18,17 @@ export function removeJsxExpressionContainer({
             JSXExpressionContainer: {
                 exit(path) {
                     const expr = path.node.expression
-
+                    const parent = path.parentPath
+                    const isChildren =
+                        parent &&
+                        parent.isJSXElement() &&
+                        Array.isArray(parent.node?.children) &&
+                        parent.node?.children?.includes(path.node)
+                    if (!isChildren) {
+                        return
+                    }
                     if (t.isJSXElement(expr) || t.isJSXFragment(expr)) {
-                        const parent = path.parentPath
-
-                        if (
-                            parent &&
-                            parent.isJSXElement() &&
-                            Array.isArray(parent.node?.children) &&
-                            parent.node?.children?.includes(path.node)
-                        ) {
-                            path.replaceWith(expr)
-                        }
+                        path.replaceWith(expr)
                     } else if (t.isArrayExpression(expr)) {
                         // Check if array contains only JSX elements/fragments
                         const allJsx = expr.elements.every(

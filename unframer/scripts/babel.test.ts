@@ -22,6 +22,7 @@ function trans(
         sourceMaps: false,
     })
     let out = res!.code!
+
     let formatted = dprint.format(filename, out, {
         lineWidth: 80,
         quoteStyle: 'alwaysSingle',
@@ -342,6 +343,11 @@ describe('babelPluginJsxTransform', () => {
                         children: _jsx("div", {
                             children: "First element"
                         }),
+                        jsxOnly: [
+                          _jsx("div", {
+                              children: "First element"
+                          }),
+                        ],
                         items: [
                             "Just a string",
                             42,
@@ -372,6 +378,7 @@ describe('babelPluginJsxTransform', () => {
           const element = (
             <Container
               slots={<div>{'First element'}</div>}
+              jsxOnly={[<div>{'First element'}</div>,]}
               items={[
                 'Just a string',
                 42,

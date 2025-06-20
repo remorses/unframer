@@ -1,5 +1,18 @@
 # unframer
 
+## 2.27.2
+
+### Patch Changes
+
+- Fix --jsx option with array jsx attributes
+
+## 2.27.1
+
+### Patch Changes
+
+- 3661c24: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- Fix --jsx option for jsx attributes
+
 ## 2.27.0
 
 ### Minor Changes

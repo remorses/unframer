@@ -23,8 +23,8 @@ type CacheStore = CacheHandler.CacheStore
 export class FlatCacheStore implements CacheStore {
     private readonly cacheDir: string
 
-    constructor() {
-        this.cacheDir = join(tmpdir(), '.unframer')
+    constructor({ cacheDir }) {
+        this.cacheDir = join(tmpdir(), cacheDir)
         logger.log(`using cache dir`, this.cacheDir)
         this.ensureCacheDir()
     }
