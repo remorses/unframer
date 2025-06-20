@@ -21,6 +21,7 @@ import { version } from './version.js'
 function classNames(...args) {
     return args.filter(Boolean).join(' ')
 }
+
 function Hints() {
     prefetchDNS('https://fonts.gstatic.com')
     preconnect('https://fonts.gstatic.com')
@@ -117,6 +118,29 @@ export function FramerStyles({ Components = [] as any[] }): any {
             />
         </>
     )
+}
+function removeInactiveUnframerHiddenElements() {
+    // Remove all elements with the 'unframer-hidden' class that are not for the current breakpoint
+    const windowWidth = window.innerWidth
+    const activeBreakpoint = getBreakpointNameFromWindowWidth(windowWidth)
+    const activeClass = activeBreakpoint ? `unframer-${activeBreakpoint}` : null
+
+    console.log('Active unframer breakpoint class:', activeClass)
+
+    document.querySelectorAll('.unframer-hidden').forEach((el) => {
+        // Merge: Only remove the element itself if it has 'unframer-hidden' and does not match the current breakpoint's class.
+        if (
+            el.classList.contains('unframer-hidden') &&
+            activeClass &&
+            !el.classList.contains(activeClass)
+        ) {
+            el.parentNode?.removeChild(el)
+        }
+    })
+}
+
+if (typeof window !== 'undefined') {
+    removeInactiveUnframerHiddenElements()
 }
 
 export const WithFramerBreakpoints = <

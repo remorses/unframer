@@ -468,7 +468,6 @@ export async function bundle({
             resetCssStyles +
             getStyleTokensCss(tokens || []) +
             breakpointsStyles(breakpoints) +
-            breakpointsStylesLegacy(breakpoints) +
             '\n\n' +
             combinedCSSRules
                 .map((x) => (x?.startsWith('  ') ? dedent(x) : x))

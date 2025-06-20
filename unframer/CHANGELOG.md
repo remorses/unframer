@@ -1,5 +1,15 @@
 # unframer
 
+## 2.27.0
+
+### Minor Changes
+
+- Make .Responsive components much faster, delete them before React hydration
+
+### Patch Changes
+
+- 3661c24: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+
 ## 2.26.0
 
 ### Minor Changes
