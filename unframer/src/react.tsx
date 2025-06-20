@@ -213,6 +213,7 @@ export const WithFramerBreakpoints = <
             return (
                 // @ts-ignore
                 <Component
+                    suppressHydrationWarning
                     // LayoutGroup is used internally
                     layoutId={variant}
                     key={variant}
