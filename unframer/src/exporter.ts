@@ -284,120 +284,20 @@ export async function bundle({
 
         spinner.update('Finished build')
 
-        // Store TypeDoc comments for later use
-        const typedocCommentsMap = new Map<string, any>()
-
+        // First, write raw JS files for type extraction
         for (let file of buildResult.outputFiles!) {
             const resultPathAbsJs = path.resolve(out, file.path)
-            const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
-
-            const existing = await fs.promises
-                .readFile(resultPathAbsJsx, 'utf-8')
-                .catch(() => null)
-            const tooBigSize = 0.7 * 1024 * 1024
-
-            let formatted = file.text
-
-            let tooBig = file.text.length >= tooBigSize
-            let didFormat = false
-            if (
-                config.jsx &&
-                !tooBig &&
-                !resultPathAbsJs.includes('/chunks/') &&
-                !resultPathAbsJs.includes('\\chunks\\')
-            ) {
-                try {
-                    let res = transform(file.text || '', {
-                        babelrc: false,
-                        sourceType: 'module',
-                        plugins: [
-                            // babelPluginDeduplicateImports,
-                            babelPluginJsxTransform,
-                            removeJsxExpressionContainer,
-                        ],
-                        // ast: true,
-                        // code: false,
-                        filename: 'x.jsx',
-                        compact: false,
-                        sourceMaps: false,
-                    })
-                    if (res?.code) {
-                        if (!biome) {
-                            biome = await Biome.create({
-                                distribution: Distribution.NODE,
-                            })
-                        }
-                        let result = biome.formatContent(res.code, {
-                            filePath: 'example.jsx',
-                        })
-                        didFormat = true
-                        formatted = result.content
-                    }
-                } catch (e) {
-                    notifyError(e, 'babel transform and format')
-                }
-            }
-
-            // let inputCode = res!.code!
-            // let shouldFormat = !tooBig && !file.path.includes('chunks')
-            // if (shouldFormat) {
-            //     spinner.update(`Formatting ${path.relative(out, file.path)}`)
-            //     formatted = dprint.format('file.jsx', file.text, {
-            //         lineWidth: 140,
-            //         quoteStyle: 'alwaysSingle',
-            //         trailingCommas: 'always',
-            //         semiColons: 'always',
-            //     })
-            // }
-            // if (tooBig) {
-            //     spinner.info(
-            //         `skipping formatting ${path.relative(
-            //             out,
-            //             file.path,
-            //         )}, too big`,
-            //     )
-            // }
-
-            // if (framerWebPages?.length) {
-            //     codeNew = replaceWebPageIds({
-            //         code: codeNew,
-            //         elements: framerWebPages,
-            //     })
-            // }
-            // const lines = findRelativeLinks(codeNew)
-            // if (lines.length) {
-            //     spinner.error(
-            //         `found broken links for ${path.relative(out, file.path)}`,
-            //     )
-            //     lines.forEach((line) => {
-            //         logger.log(`${path.resolve(out, file.path)}:${line + 1}`)
-            //     })
-            // }
-
-            const prefix =
-                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
-            const codeJsx = prefix + formatted
+            const prefix = `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
             const codeJs = prefix + file.text
-            // if (existing === codeJsx) {
-            //     continue
-            // }
-            logger.log(`writing`, path.relative(out, file.path))
-            await fs.promises.mkdir(path.dirname(resultPathAbsJsx), {
+            
+            logger.log(`writing raw JS`, path.relative(out, file.path))
+            await fs.promises.mkdir(path.dirname(resultPathAbsJs), {
                 recursive: true,
             })
-            if (codeJs !== codeJsx || !didFormat) {
-                await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
-            }
-            if (didFormat) {
-                await fs.promises.writeFile(resultPathAbsJsx, codeJsx, 'utf-8')
-            }
+            await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
         }
-        spinner.stop()
-        await fs.promises.writeFile(
-            path.resolve(out, '.cursorignore'),
-            `**/*.js\nchunks\n`,
-            'utf-8',
-        )
+
+
 
         if (!buildResult?.outputFiles) {
             throw new Error('Failed to generate result')
@@ -471,40 +371,93 @@ export async function bundle({
             }
         })
 
-        // Second pass: Apply TypeDoc comments to JSX files
-        spinner.update('Injecting TypeDoc comments')
-        for (const propData of propControlsData.filter(Boolean)) {
-            if (!propData?.typedocComments) continue
+        // Process and write JSX files with TypeDoc comments
+        for (let file of buildResult.outputFiles!) {
+            const resultPathAbsJs = path.resolve(out, file.path)
+            const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
+            const componentName = path.basename(file.path, '.js')
+            const propData = propControlsData.find(p => p?.name === componentName)
+            const typedocComments = propData?.typedocComments
 
-            const componentName = propData.name
-            const jsxPath = path.resolve(out, `${componentName}.jsx`)
+            const existing = await fs.promises
+                .readFile(resultPathAbsJsx, 'utf-8')
+                .catch(() => null)
+            const tooBigSize = 0.7 * 1024 * 1024
 
-            if (fs.existsSync(jsxPath)) {
+            let formatted = file.text
+
+            let tooBig = file.text.length >= tooBigSize
+            let didFormat = false
+            if (
+                config.jsx &&
+                !tooBig &&
+                !resultPathAbsJs.includes('/chunks/') &&
+                !resultPathAbsJs.includes('\\chunks\\')
+            ) {
                 try {
-                    const jsxContent = await fs.promises.readFile(jsxPath, 'utf-8')
-                    const res = transform(jsxContent, {
+                    const plugins = [
+                        // babelPluginDeduplicateImports,
+                        babelPluginJsxTransform,
+                        removeJsxExpressionContainer,
+                    ]
+                    
+                    // Add TypeDoc plugin if we have comments for this component
+                    if (typedocComments) {
+                        plugins.push(babelPluginTypedoc(typedocComments))
+                    }
+
+                    let res = transform(file.text || '', {
                         babelrc: false,
                         sourceType: 'module',
                         parserOpts: {
                             plugins: ['jsx'],
                         },
-                        plugins: [
-                            babelPluginTypedoc(propData.typedocComments),
-                        ],
-                        filename: `${componentName}.jsx`,
+                        plugins,
+                        // ast: true,
+                        // code: false,
+                        filename: 'x.jsx',
                         compact: false,
                         sourceMaps: false,
                     })
-
                     if (res?.code) {
-                        await fs.promises.writeFile(jsxPath, res.code, 'utf-8')
-                        logger.log(`Injected TypeDoc comments for ${componentName}`)
+                        if (!biome) {
+                            biome = await Biome.create({
+                                distribution: Distribution.NODE,
+                            })
+                        }
+                        let result = biome.formatContent(res.code, {
+                            filePath: 'example.jsx',
+                        })
+                        didFormat = true
+                        formatted = result.content
                     }
                 } catch (e) {
-                    logger.error(`Failed to inject TypeDoc comments for ${componentName}:`, e)
+                    notifyError(e, 'babel transform and format')
                 }
             }
+
+            const prefix =
+                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
+            const codeJsx = prefix + formatted
+            const codeJs = prefix + file.text
+            logger.log(`writing`, path.relative(out, file.path))
+            await fs.promises.mkdir(path.dirname(resultPathAbsJsx), {
+                recursive: true,
+            })
+            if (codeJs !== codeJsx || !didFormat) {
+                await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
+            }
+            if (didFormat) {
+                await fs.promises.writeFile(resultPathAbsJsx, codeJsx, 'utf-8')
+            }
         }
+        spinner.stop()
+        await fs.promises.writeFile(
+            path.resolve(out, '.cursorignore'),
+            `**/*.js\nchunks\n`,
+            'utf-8',
+        )
+
         // spinner.stop()
 
         const cssString =
