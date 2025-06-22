@@ -49,6 +49,7 @@ import {
     stackblitzDemoExample,
     terminalMarkdown,
 } from './utils.js'
+import { installPackagesBatch } from './package-manager.js'
 
 import { Biome, Distribution } from '@biomejs/js-api'
 
@@ -101,7 +102,7 @@ export async function bundle({
         }
     }
     const fn = watch ? context : fakeContext
-    let foundError = false
+    const missingPackages = new Set<string>()
 
     const buildContext = await fn({
         absWorkingDir: out,
@@ -131,9 +132,12 @@ export async function bundle({
                 signal,
                 externalPackages: config.externalPackages,
                 externalizeNpm: config.allExternal,
-                outDir: config.outDir,
+                outDir: out,
                 onMissingPackage: (e) => {
-                    foundError = true
+                    // No longer needed - packages are auto-installed
+                },
+                onCollectMissingPackage: (pkg) => {
+                    missingPackages.add(pkg)
                 },
             }),
             nodeModulesPolyfillPlugin({}),
@@ -267,10 +271,11 @@ export async function bundle({
     } "${config.projectName}", do not edit manually */\n`
 
     async function rebuild() {
+        // Clear missing packages for each rebuild (important for watch mode)
+        missingPackages.clear()
         const prevFiles = await recursiveReaddir(out)
         const buildResult = await buildContext.rebuild().catch((e) => {
             if (e.message.includes('No matching export ')) {
-                foundError = true
                 spinner.error(
                     `esbuild failed to import from an external package, this usually means that the npm package version in Framer is older than the latest.`,
                 )
@@ -283,6 +288,23 @@ export async function bundle({
         })
 
         spinner.update('Finished build')
+
+        // Install missing packages if any were collected
+        if (missingPackages.size > 0) {
+            const packagesToInstall = Array.from(missingPackages)
+            logger.log(`Installing missing packages: ${packagesToInstall.join(', ')}`)
+
+            const installResult = await installPackagesBatch({
+                packageNames: packagesToInstall,
+                cwd: out,
+                isDev: false
+            })
+
+            if (!installResult.success) {
+                spinner.error(`Failed to install packages: ${installResult.error}`)
+                // Don't fail the build, just warn
+            }
+        }
 
         // First, write raw JS files for type extraction
         for (let file of buildResult.outputFiles!) {
@@ -637,34 +659,32 @@ export async function bundle({
         })
         await fs.promises.writeFile(stackblitzDemoExample, exampleCode)
     }
-    if (!foundError) {
-        console.log(
-            terminalMarkdown(dedent`
-        # How to use the Framer components
+    console.log(
+        terminalMarkdown(dedent`
+    # How to use the Framer components
 
-        Your components are exported to \`${outDirForExample}\` folder. Now please install the \`unframer\` runtime dependency:
+    Your components are exported to \`${outDirForExample}\` folder. Now please install the \`unframer\` runtime dependency:
 
-        \`\`\`sh
-        npm install unframer
-        \`\`\`
+    \`\`\`sh
+    npm install unframer
+    \`\`\`
 
-        Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
+    Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
 
-        You can use the components like this (try copy pasting the code below into your React app):
+    You can use the components like this (try copy pasting the code below into your React app):
 
-        \`\`\`jsx
-        ${exampleCode}
-        \`\`\`
+    \`\`\`jsx
+    ${exampleCode}
+    \`\`\`
 
-        It's very important to import the \`styles.css\` file to include the necessary styles for the components.
+    It's very important to import the \`styles.css\` file to include the necessary styles for the components.
 
-        To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
+    To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
-        Read more on GitHub: https://github.com/remorses/unframer
+    Read more on GitHub: https://github.com/remorses/unframer
 
-        `),
-        )
-    }
+    `),
+    )
     await checkUnframerVersion({ cwd: out })
     console.log()
     return { result, rebuild, buildContext }

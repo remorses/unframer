@@ -6,6 +6,7 @@ import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
 import { notifyError } from './sentry'
 import { dispatcher } from './undici-dispatcher'
+import { installPackage } from './package-manager.js'
 
 export const defaultExternalPackages = [
     'react',
@@ -45,10 +46,12 @@ export function esbuildPluginBundleDependencies({
     externalizeNpm = false,
     outDir,
     onMissingPackage = (pkg: string) => {},
+    onCollectMissingPackage = (pkg: string) => {},
 }) {
     externalPackages = [...defaultExternalPackages, ...externalPackages]
     // console.log(externalPackages)
     const codeCache = new Map()
+    const reportedMissingPackages = new Set<string>()
 
     spinner.start()
 
@@ -100,10 +103,11 @@ export function esbuildPluginBundleDependencies({
                         pkg,
                     }).catch(() => '')
                     if (!installedVersion) {
-                        onMissingPackage?.(pkg)
-                        spinner.error(
-                            `${pkg} not found: install it with \`npm i ${pkg}\` then run \`unframer\` again to generate the types`,
-                        )
+                        if (!reportedMissingPackages.has(pkg)) {
+                            spinner.info(`Missing package detected: ${pkg}`)
+                            reportedMissingPackages.add(pkg)
+                        }
+                        onCollectMissingPackage?.(pkg)
                     }
                     return {
                         path: args.path,
@@ -127,10 +131,11 @@ export function esbuildPluginBundleDependencies({
                         pkg,
                     }).catch(() => '')
                     if (!installedVersion) {
-                        onMissingPackage?.(pkg)
-                        spinner.error(
-                            `${pkg} not found: install it with \`npm i ${pkg}\` then run \`unframer\` again to generate the types`,
-                        )
+                        if (!reportedMissingPackages.has(pkg)) {
+                            spinner.info(`Missing package detected: ${pkg}`)
+                            reportedMissingPackages.add(pkg)
+                        }
+                        onCollectMissingPackage?.(pkg)
                     }
                     return {
                         path: args.path,

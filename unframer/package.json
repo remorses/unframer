@@ -52,6 +52,7 @@
         "node": ">=18.0.0"
     },
     "dependencies": {
+        "@antfu/ni": "^25.0.0",
         "@babel/core": "^7.26.7",
         "@biomejs/js-api": "^0.7.1",
         "@biomejs/wasm-nodejs": "^1.9.4",

@@ -41,6 +41,7 @@
     --unframer-black-overlay-hover: rgb(23, 23, 23);
     --unframer-orange: rgb(255, 136, 0);
     --unframer-green-light: rgb(237, 255, 241);
+    --unframer-border: rgb(228, 228, 231);
     --unframer-mint: rgb(134, 239, 172);
     --unframer-secondary-bg-hover: rgb(235, 235, 235);
     --unframer-legacy-white: rgb(255, 255, 255);
@@ -52,6 +53,8 @@
     --unframer-green: rgb(22, 136, 53);
     --unframer-secondary-bg: rgb(250, 250, 250);
     --unframer-white-hover: rgb(245, 245, 245);
+    --unframer-primary-bg: rgb(245, 245, 247);
+    --unframer-card-shadow: rgba(114, 115, 117, 0.12);
     --unframer-primary-text-900: rgb(24, 24, 27);
     --unframer-base-text: rgb(63, 63, 70);
     --unframer-red: rgb(208, 64, 53);
@@ -60,6 +63,7 @@
     --unframer-yellow-light: rgb(255, 245, 222);
     --unframer-primary-bg: rgb(245, 245, 247);
     --unframer-light-gray: rgb(161, 161, 170);
+    --unframer-white: rgb(255, 255, 255);
     --unframer-static-white-on-background: rgb(255, 255, 255);
     --unframer-primary: rgb(0, 119, 237);
     --unframer-white: rgb(255, 255, 255);
@@ -89,6 +93,7 @@
     --token-3b1e8dd6-e47f-45cb-ad1c-a159bd11b5b0: rgb(23, 23, 23);
     --token-3dff9ce1-cff9-43d9-8e6d-27cd5f739631: rgb(255, 136, 0);
     --token-4233fc19-59c6-4b93-bb5b-16406f35833e: rgb(237, 255, 241);
+    --token-49275b38-bc2e-418d-ad9b-aff60caa1322: rgb(228, 228, 231);
     --token-49fdb0a9-d716-418a-b9fb-142ee3cfbb8e: rgb(134, 239, 172);
     --token-4a2a4ab4-009c-410d-8503-8978f2af1273: rgb(235, 235, 235);
     --token-5d0049ec-42c3-416d-9d26-a1cc9860205a: rgb(255, 255, 255);
@@ -100,6 +105,8 @@
     --token-9aaf3096-a446-4fb6-9ac1-dc0dc6e18df7: rgb(22, 136, 53);
     --token-9f549c08-ff89-4d86-99c4-e5ad2a870e2a: rgb(250, 250, 250);
     --token-a147d0a8-dc4a-48b4-a0e3-7673a8eb9fd2: rgb(245, 245, 245);
+    --token-a7553eef-f8ab-45b7-bf45-5cdd6a65e300: rgb(245, 245, 247);
+    --token-a95166ed-f015-42bf-b56a-eb3cb7f09865: rgba(114, 115, 117, 0.12);
     --token-abc765bb-4f1b-45aa-9bdc-0add1aff8e20: rgb(24, 24, 27);
     --token-ad22872e-8820-44b3-9dc3-0d1bf136ea27: rgb(63, 63, 70);
     --token-adb645e8-9e23-4a36-8022-1d6005025478: rgb(208, 64, 53);
@@ -108,6 +115,7 @@
     --token-b756de25-5961-43c3-b9db-224aa4e285f9: rgb(255, 245, 222);
     --token-b83339f5-ee2f-4292-aa4b-f8993c91ee80: rgb(245, 245, 247);
     --token-bd01c5a0-8545-46b8-a2f9-92ca823a89fc: rgb(161, 161, 170);
+    --token-be23fd9d-5df7-4c48-aa48-06265f36fe39: rgb(255, 255, 255);
     --token-c23b38eb-9089-4794-a772-bf016a6b1358: rgb(255, 255, 255);
     --token-c954bfde-6d74-4a5e-ab1c-228c5bed5c11: rgb(0, 119, 237);
     --token-cd8b457a-cb7f-466b-9c65-6c2e9533e54f: rgb(255, 255, 255);
@@ -139,6 +147,7 @@
     --unframer-black-overlay-hover: rgb(23, 23, 23);
     --unframer-orange: rgb(255, 136, 0);
     --unframer-green-light: rgb(237, 255, 241);
+    --unframer-border: rgb(228, 228, 231);
     --unframer-mint: rgb(134, 239, 172);
     --unframer-secondary-bg-hover: rgb(235, 235, 235);
     --unframer-legacy-white: rgb(255, 255, 255);
@@ -150,6 +159,8 @@
     --unframer-green: rgb(22, 136, 53);
     --unframer-secondary-bg: rgb(250, 250, 250);
     --unframer-white-hover: rgb(245, 245, 245);
+    --unframer-primary-bg: rgb(245, 245, 247);
+    --unframer-card-shadow: rgba(114, 115, 117, 0.12);
     --unframer-primary-text-900: rgb(24, 24, 27);
     --unframer-base-text: rgb(63, 63, 70);
     --unframer-red: rgb(208, 64, 53);
@@ -158,6 +169,7 @@
     --unframer-yellow-light: rgb(255, 245, 222);
     --unframer-primary-bg: rgb(245, 245, 247);
     --unframer-light-gray: rgb(161, 161, 170);
+    --unframer-white: rgb(255, 255, 255);
     --unframer-static-white-on-background: rgb(255, 255, 255);
     --unframer-primary: rgb(0, 119, 237);
     --unframer-white: rgb(255, 255, 255);
@@ -187,6 +199,7 @@
     --token-3b1e8dd6-e47f-45cb-ad1c-a159bd11b5b0: rgb(23, 23, 23);
     --token-3dff9ce1-cff9-43d9-8e6d-27cd5f739631: rgb(255, 136, 0);
     --token-4233fc19-59c6-4b93-bb5b-16406f35833e: rgb(237, 255, 241);
+    --token-49275b38-bc2e-418d-ad9b-aff60caa1322: rgb(228, 228, 231);
     --token-49fdb0a9-d716-418a-b9fb-142ee3cfbb8e: rgb(134, 239, 172);
     --token-4a2a4ab4-009c-410d-8503-8978f2af1273: rgb(235, 235, 235);
     --token-5d0049ec-42c3-416d-9d26-a1cc9860205a: rgb(255, 255, 255);
@@ -198,6 +211,8 @@
     --token-9aaf3096-a446-4fb6-9ac1-dc0dc6e18df7: rgb(22, 136, 53);
     --token-9f549c08-ff89-4d86-99c4-e5ad2a870e2a: rgb(250, 250, 250);
     --token-a147d0a8-dc4a-48b4-a0e3-7673a8eb9fd2: rgb(245, 245, 245);
+    --token-a7553eef-f8ab-45b7-bf45-5cdd6a65e300: rgb(245, 245, 247);
+    --token-a95166ed-f015-42bf-b56a-eb3cb7f09865: rgba(114, 115, 117, 0.12);
     --token-abc765bb-4f1b-45aa-9bdc-0add1aff8e20: rgb(24, 24, 27);
     --token-ad22872e-8820-44b3-9dc3-0d1bf136ea27: rgb(63, 63, 70);
     --token-adb645e8-9e23-4a36-8022-1d6005025478: rgb(208, 64, 53);
@@ -206,6 +221,7 @@
     --token-b756de25-5961-43c3-b9db-224aa4e285f9: rgb(255, 245, 222);
     --token-b83339f5-ee2f-4292-aa4b-f8993c91ee80: rgb(245, 245, 247);
     --token-bd01c5a0-8545-46b8-a2f9-92ca823a89fc: rgb(161, 161, 170);
+    --token-be23fd9d-5df7-4c48-aa48-06265f36fe39: rgb(255, 255, 255);
     --token-c23b38eb-9089-4794-a772-bf016a6b1358: rgb(255, 255, 255);
     --token-c954bfde-6d74-4a5e-ab1c-228c5bed5c11: rgb(0, 119, 237);
     --token-cd8b457a-cb7f-466b-9c65-6c2e9533e54f: rgb(255, 255, 255);
@@ -220,92 +236,47 @@
     --token-fd041e59-7f0a-4be6-b74f-7dbbe6759afb: rgb(24, 24, 27);
     --token-ff9ff1d6-af94-4e59-af44-888718fa53ee: rgb(228, 228, 231);
 }
+
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer:not(.unframer-base) {
+    .unframer-hidden:not(.unframer-base) {
         display: none !important;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer:not(.unframer-sm) {
+    .unframer-hidden:not(.unframer-sm) {
         display: none !important;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer:not(.unframer-md) {
+    .unframer-hidden:not(.unframer-md) {
         display: none !important;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer:not(.unframer-lg) {
+    .unframer-hidden:not(.unframer-lg) {
         display: none !important;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer:not(.unframer-xl) {
+    .unframer-hidden:not(.unframer-xl) {
         display: none !important;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer:not(.unframer-2xl) {
+    .unframer-hidden:not(.unframer-2xl) {
         display: none !important;
     }
-}
-
-/* Base */
-@media (min-width: 0px) and (max-width: 319px) {
-    .unframer-hidden.unframer-base {
-        display: contents;
-    }
-}
-
-/* Small */
-@media (min-width: 320px) and (max-width: 767px) {
-    .unframer-hidden.unframer-sm {
-        display: contents;
-    }
-}
-
-/* Medium */
-@media (min-width: 768px) and (max-width: 959px) {
-    .unframer-hidden.unframer-md {
-        display: contents;
-    }
-}
-
-/* Large */
-@media (min-width: 960px) and (max-width: 1199px) {
-    .unframer-hidden.unframer-lg {
-        display: contents;
-    }
-}
-
-/* Extra Large */
-@media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer-hidden.unframer-xl {
-        display: contents;
-    }
-}
-
-/* 2 Extra Large */
-@media (min-width: 1536px) {
-    .unframer-hidden.unframer-2xl {
-        display: contents;
-    }
-}
-
-.unframer-hidden {
-    display: none;
 }
 
 
@@ -1221,7 +1192,19 @@ NavigationContainer
     font-weight: 700;
 }
 
-/* used by accordion.js, auth-layout.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, clips.js, field-base.js, graphic-library-cards.js, graphic-library.js, left.js, overlay-add-addon.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, sc-users.js, slider-comp.js, task-base.js, version.js */
+/* used by overlay-upgrade-plan.js, sc-billing.js */
+
+@font-face {
+    font-family: 'SanBase ExtraBold';
+    src: url('https://framerusercontent.com/assets/1eWVbEiITOSwQfZzqEuwvyqxBm0.woff2');
+}
+
+@font-face {
+    font-family: 'Base Italic';
+    src: url('https://framerusercontent.com/assets/3WY2eBEI6z2xUoZWfA1MvFcsMx0.woff2');
+}
+
+/* used by accordion.js, auth-layout.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, clips.js, field-base.js, graphic-library-cards.js, graphic-library.js, left.js, main-layout.js, overlay-add-addon.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-upgrade-plan.js, row.js, sc-users.js, slider-comp.js, task-base.js, task-highlight.js, version.js */
 
 @font-face {
     font-family: 'Inter';
@@ -1337,7 +1320,7 @@ NavigationContainer
     unicodeRange: U+1F00-1FFF;
 }
 
-/* used by accordion.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, clips.js, field-base.js, left.js, overlay-add-addon.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, slider-comp.js, task-base.js, version.js */
+/* used by accordion.js, auth-layout.js, button-search.js, button-sidebar-help-base.js, card-info-banner.js, cell-click-icon-text.js, cell-text.js, cell.js, clips.js, field-base.js, left.js, main-layout.js, overlay-add-addon.js, overlay-change-billing-period.js, overlay-info-welcome.js, overlay-manage-domain.js, overlay-upgrade-plan.js, row.js, slider-comp.js, task-base.js, version.js */
 
 @font-face {
     font-family: 'Inter';
@@ -1451,7 +1434,7 @@ NavigationContainer
     unicodeRange: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* used by button-search.js, left.js */
+/* used by button-search.js, left.js, main-layout.js */
 
 @font-face {
     font-family: 'Inter Display';
@@ -1507,13 +1490,6 @@ NavigationContainer
     font-style: normal;
     font-weight: 400;
     unicodeRange: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-
-/* used by overlay-upgrade-plan.js, sc-billing.js */
-
-@font-face {
-    font-family: 'Base Italic';
-    src: url('https://framerusercontent.com/assets/3WY2eBEI6z2xUoZWfA1MvFcsMx0.woff2');
 }
 
 /* used by overlay-onboarding.js, slider-comp.js, testimonial-texts.js, testimonials.js */
@@ -1574,7 +1550,7 @@ NavigationContainer
     unicodeRange: U+0370-03FF;
 }
 
-/* used by accordion.js, addon-card.js, ai-button-base.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, card.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, clips.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, error.js, field-base.js, file-preview.js, form.js, good-x-text.js, graphic-customer-portal.js, graphic-docs.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, icon-selector.js, info-overlay.js, install-app.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, slider-comp.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, textfield-checkbox.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-collection.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, version.js, warning.js, wrapper.js */
+/* used by accordion.js, add-view-grid-button.js, add-view-overlay.js, addon-card.js, ai-button-base.js, ai-error.js, ai-limit-overlay.js, ai-placeholder.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-ask-ai.js, button-badge.js, button-card.js, button-company.js, button-live-chat.js, button-primary-with-static-image.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, card.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, clips.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, data-source-row.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, error.js, field-base.js, file-preview.js, form.js, good-x-text.js, graphic-customer-portal.js, graphic-docs.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, icon-selector.js, install-app.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, onboarding-welcome.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder-big.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, slider-comp.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, task-highlight.js, testimonial-texts.js, testimonials.js, textfield-checkbox.js, timestamp.js, to-delete.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-collection.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, uploading-component.js, use-case-card.js, user-detail.js, version.js, warning.js, wrapper.js */
 
 @font-face {
     font-family: 'Inter';
@@ -1632,14 +1608,14 @@ NavigationContainer
     unicodeRange: U+1F00-1FFF;
 }
 
-/* used by accordion.js, addon-card.js, ai-button-base.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-badge.js, button-card.js, button-live-chat.js, button-primary-with-static-image.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, clips.js, community-support.js, content-info-banner.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, default.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, error.js, field-base.js, file-preview.js, form.js, graphic-customer-portal.js, graphic-docs.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, info-overlay.js, install-app.js, left-footer.js, left.js, lesson-page.js, library-video-card.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, public-layout.js, result-button.js, role.js, row.js, sc-ai.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, testimonial-texts.js, testimonials.js, texts.js, timestamp.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, update.js, upgrade-card.js, uploading-component.js, user-detail.js, warning.js, wrapper.js */
+/* used by accordion.js, addon-card.js, ai-button-base.js, ai-error.js, ai-limit-overlay.js, ai-placeholder.js, ai-sidebar.js, app.js, apple-touch.js, auth-layout.js, bookmark-expanded.js, button-ask-ai.js, button-badge.js, button-card.js, button-live-chat.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-badge.js, cell-click-icon-text.js, cell-progress.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, checkbox-menu.js, clips.js, community-support.js, content-info-banner.js, content-title.js, copy-link-base.js, costs-details-fold.js, costs.js, crashed.js, dashboard-bar.js, data-source-row.js, default.js, delete.js, demo-cta.js, department.js, detail-hero.js, detail-page.js, detail-trainings-bar.js, disabled-card.js, disabled.js, dropdown-languages.js, dropdown-one-select.js, error.js, field-base.js, file-preview.js, form.js, graphic-customer-portal.js, graphic-docs.js, graphic-whiteboards.js, group-row-general.js, group-row.js, group.js, header-title-switch.js, header.js, install-app.js, left-footer.js, left.js, lesson-page.js, library-video-card.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, onboarding-welcome.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, public-layout.js, result-button.js, role.js, row.js, sc-ai.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-result-header.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, tab-dashboard-bar.js, tab.js, table-formatted.js, task-base.js, task-highlight.js, testimonial-texts.js, testimonials.js, texts.js, timestamp.js, to-delete.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, update.js, upgrade-card.js, uploading-component.js, use-case-card.js, user-detail.js, warning.js, wrapper.js */
 
 @font-face {
     font-family: 'SanBase Medium';
     src: url('https://framerusercontent.com/assets/Anmn6ZKjuUjcfr07HEmCpUbPxdY.woff2');
 }
 
-/* used by accordion.js, auth-layout.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, charts-section.js, clips.js, community-support.js, default.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, good-x-text.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, info-overlay.js, lesson-page.js, library.js, module-hero.js, module-page.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overview-page.js, sc-billing.js, sc-users.js, secondary.js, texts.js, trainings-collection.js, trainings-hero.js, update.js */
+/* used by accordion.js, auth-layout.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, charts-section.js, clips.js, community-support.js, default.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, good-x-text.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, lesson-page.js, library.js, module-hero.js, module-page.js, onboarding-welcome.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overview-page.js, sc-billing.js, sc-users.js, secondary.js, task-highlight.js, texts.js, trainings-collection.js, trainings-hero.js, update.js, use-case-card.js */
 
 @font-face {
     font-family: 'SanBase Bold';
@@ -1653,14 +1629,14 @@ NavigationContainer
     src: url('https://framerusercontent.com/assets/JfBnyDK1wE3VJsTSmyKJ2WWG8.woff2');
 }
 
-/* used by ai-sidebar.js, auth-layout.js, bookmark-expanded.js, clips.js, left-footer.js, left.js, main-layout.js, overlay-info-welcome.js, overlay-onboarding.js, task-base.js, upgrade-card.js */
+/* used by add-view-grid-button.js, add-view-overlay.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, app.js, auth-layout.js, bookmark-expanded.js, button-primary-with-static-image.js, cell.js, clips.js, community-support.js, copy-link-base.js, crashed.js, dashboard-bar.js, data-source-row.js, department.js, detail-page.js, disabled-card.js, disabled.js, file-preview.js, group-row-general.js, group-row.js, header.js, left-footer.js, left.js, lesson-page.js, library-video-card.js, main-layout.js, module-hero.js, module-page.js, newsfeed-content.js, onboarding-welcome.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overview-page.js, placeholder-big.js, public-layout.js, row.js, sc-billing.js, sc-import.js, sc-profile.js, sc-siteinformation.js, sc-users.js, sidebar-menu.js, skeleton.js, statistics-row.js, supademo-base.js, table-formatted.js, task-base.js, top-bar.js, trainings-card.js, trainings-hero.js, update.js, upgrade-card.js, user-detail.js */
 
 @font-face {
     font-family: 'SanBase SemiBold';
     src: url('https://framerusercontent.com/assets/RDmy2JXVyn1eWMLxhJn0Fb9tk0.woff2');
 }
 
-/* used by accordion.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-sidebar.js, ai-top-bar.js, app.js, auth-layout.js, bookmark-expanded.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-click-icon-text.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, clips.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, default.js, delete.js, department.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, dropdown-ai-chats.js, dropdown-languages.js, dropdown-one-select.js, dropdown-roles.js, dropdown-users.js, dropdown-workbases.js, error.js, field-base.js, file-preview.js, graphic-customer-portal.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, group-row-general.js, group-row.js, group.js, header.js, info-overlay.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-button.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-base.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, table-formatted.js, task-base.js, texts.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, user-detail.js, version.js, warning.js */
+/* used by accordion.js, add-view-grid-button.js, add-view-overlay.js, addon-card.js, ai-error.js, ai-limit-overlay.js, ai-placeholder.js, ai-sidebar.js, ai-top-bar.js, app.js, auth-layout.js, bookmark-expanded.js, button-card.js, button-company.js, button-live-chat.js, button-search.js, button-secondary-action.js, button-setup-guide.js, button-sidebar-help-base.js, calculated-amount-text.js, card-info-banner.js, card-lesson.js, card-module-base.js, card-module.js, cell-click-icon-text.js, cell-text.js, cell.js, charts-section.js, checkbox-card.js, clips.js, community-support.js, content-info-banner.js, content-overlay.js, content-title.js, copy-link-base.js, costs.js, crashed.js, dashboard-bar.js, dashboard-header.js, data-source-row.js, default.js, delete.js, department.js, detail-hero.js, detail-page.js, disabled-card.js, disabled.js, dropdown-ai-chats.js, dropdown-languages.js, dropdown-one-select.js, dropdown-roles.js, dropdown-users.js, dropdown-workbases.js, error.js, field-base.js, file-preview.js, graphic-customer-portal.js, graphic-library-cards.js, graphic-library.js, graphic-trainings.js, group-row-general.js, group-row.js, group.js, header.js, item.js, left-footer.js, left-header.js, left.js, lesson-page.js, library-video-card.js, library.js, main-button.js, main-layout.js, menu-delete.js, menu-link.js, menu-open-event.js, menu-three-points.js, menu.js, module-hero.js, module-page.js, move-to-menu-button.js, move-to.js, multiple-select-base.js, newsfeed-content.js, onboarding-welcome.js, overlay-add-addon.js, overlay-billing-changed.js, overlay-cancel-subscription.js, overlay-change-billing-period.js, overlay-dialog-compact.js, overlay-dialog.js, overlay-downgrade.js, overlay-file-view.js, overlay-in-app-recording.js, overlay-info-welcome.js, overlay-limit-reached.js, overlay-loading.js, overlay-manage-domain.js, overlay-onboarding.js, overlay-partner-program.js, overlay-search.js, overlay-settings.js, overlay-share.js, overlay-upgrade-plan.js, overlay-warning.js, overlay.js, overview-page.js, period-card.js, period-options.js, permission-group-formatted.js, permission-group.js, permission-row.js, permission-selection.js, placeholder-big.js, placeholder.js, public-layout.js, question.js, result-button.js, role.js, row.js, sc-ai.js, sc-api.js, sc-billing.js, sc-custom-code.js, sc-customer-groups.js, sc-departments.js, sc-import.js, sc-profile.js, sc-recommendations.js, sc-siteinformation.js, sc-users.js, search-base.js, secondary.js, sidebar-menu.js, sidebar.js, skeleton.js, statistics-row.js, status-button.js, success.js, supademo-base.js, switch-text.js, switch-toggle.js, tab-dashboard-bar.js, table-formatted.js, task-base.js, task-highlight.js, texts.js, top-bar.js, training-badge.js, training-bulk-edit.js, trainings-card.js, trainings-hero.js, trainings-lessons-minutes.js, update.js, upgrade-card.js, use-case-card.js, user-detail.js, version.js, warning.js */
 
 @font-face {
     font-family: 'SanBase Regular';

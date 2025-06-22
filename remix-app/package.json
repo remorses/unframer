@@ -8,20 +8,28 @@
         "dev": "remix vite:dev",
         "framer-test-canvas-pages": "pnpm unframer 1a22b140dd1bd637 --jsx --outDir framer-canvas-pages",
         "framer-intl": "pnpm unframer f667fc580d8d9346 --jsx --outDir framer-intl --watch",
-        "workbase": "pnpm unframer 71fd72204da79e7e --jsx --outDir workbase-bugs",
+        "workbase": "pnpm unframer 71fd72204da79e7e --jsx --external --outDir workbase-bugs",
         "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
         "start": "PORT=5173 remix-serve ./build/server/index.js"
     },
     "dependencies": {
         "@builder.io/react-hydration-overlay": "^0.3.0",
+        "@motionone/dom": "^10.18.0",
         "@remix-run/node": "^2.15.2",
         "@remix-run/react": "^2.16.5",
         "@remix-run/serve": "^2.15.2",
+        "canvas-confetti": "^1.9.3",
         "isbot": "^4.4.0",
+        "matter-js": "^0.20.0",
         "nextjs-app": "workspace:*",
         "react": "19.0.0",
+        "react-colorful": "^5.6.1",
         "react-dom": "19.0.0",
-        "unframer": "workspace:*"
+        "react-simple-typewriter": "^5.0.1",
+        "react-window": "^1.8.11",
+        "recharts": "^2.15.4",
+        "unframer": "workspace:*",
+        "validator": "^13.15.15"
     },
     "devDependencies": {
         "@remix-run/dev": "2.15.2",
