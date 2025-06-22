@@ -18,7 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Annual (Desktop)' | 'Annual (Mobile)'} [variant] - The component responsive variant; values: Annual (Desktop) | Annual (Mobile).
  * @property {'Annual (Desktop)' | 'Annual (Mobile)'} [variant] - Variant
  */
 

@@ -1169,20 +1169,6 @@ export function propControlsToTypedocComments({
             ' * @property {string} [layoutId] - The layout id.',
         ].join('\n')
 
-        // Check if component has variant prop
-        const hasVariant = controls && 'variant' in controls
-        const variantType = hasVariant
-            ? (() => {
-                  const variantControl = controls.variant
-                  if (variantControl?.type === ControlType.Enum) {
-                      const options =
-                          // @ts-expect-error
-                          variantControl.optionTitles || variantControl.options
-                      return options.map((x) => `'${x}'`).join(' | ')
-                  }
-                  return 'string'
-              })()
-            : undefined
 
         // Generate header comment with type definitions
         let headerComment = '/**\n'
@@ -1192,9 +1178,9 @@ export function propControlsToTypedocComments({
         headerComment += '/**\n'
         headerComment += ' * @typedef Props\n'
         headerComment += defaultPropsJsDoc
-        if (hasVariant) {
-            headerComment += `\n * @property {${variantType}} [variant] - The component responsive variant; values: ${variantType.replace(/'/g, '')}.`
-        }
+        // if (hasVariant) {
+        //     headerComment += `\n * @property {${variantType}} [variant] - The component responsive variant; values: ${variantType.replace(/'/g, '')}.`
+        // }
         if (types) {
             headerComment += '\n' + types
         }

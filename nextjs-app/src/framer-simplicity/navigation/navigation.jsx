@@ -18,7 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Mobile Closed' | 'Mobile Expanded'} [variant] - The component responsive variant; values: Desktop | Mobile Closed | Mobile Expanded.
  * @property {'Desktop' | 'Mobile Closed' | 'Mobile Expanded'} [variant] - Variant
  */
 

@@ -18,7 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - The component responsive variant; values: Desktop | Tablet | Phone.
  * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - Variant
  * @property {string} [ctaLink] - cta link
  * @property {string} [subheading] - subheading

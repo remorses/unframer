@@ -18,7 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Active' | 'Inactive'} [variant] - The component responsive variant; values: Active | Inactive.
  * @property {'Active' | 'Inactive'} [variant] - Variant
  * @property {string} [title] - Title
  * @property {string} [text] - Text
