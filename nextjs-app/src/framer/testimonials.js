@@ -5,6 +5,9 @@
 import {
   Et
 } from "./chunks/chunk-3CPCBMG6.js";
+import {
+  routes
+} from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
 // virtual:testimonials
@@ -303,11 +306,23 @@ import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {};
-stdin_default2.Responsive = ({ locale, ...rest }) => {
+function ComponentWithRoot({ locale, ...rest }) {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
-      routes: {},
+      routes,
+      children: /* @__PURE__ */ jsx(stdin_default2, { ...rest }),
+      framerSiteId: void 0,
+      locale,
+      locales
+    }
+  );
+}
+ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+  return /* @__PURE__ */ jsx(
+    ContextProviders,
+    {
+      routes,
       children: /* @__PURE__ */ jsx(
         WithFramerBreakpoints,
         {
@@ -322,19 +337,8 @@ stdin_default2.Responsive = ({ locale, ...rest }) => {
     }
   );
 };
-function ComponentWithRoot({ locale, ...rest }) {
-  return /* @__PURE__ */ jsx(
-    ContextProviders,
-    {
-      routes: {},
-      children: /* @__PURE__ */ jsx(stdin_default2, { ...rest }),
-      framerSiteId: void 0,
-      locale,
-      locales
-    }
-  );
-}
 Object.assign(ComponentWithRoot, stdin_default2);
+var testimonials_default = ComponentWithRoot;
 export {
-  ComponentWithRoot as default
+  testimonials_default as default
 };

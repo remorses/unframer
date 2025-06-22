@@ -6,6 +6,9 @@ import {
   Icon
 } from "./chunks/chunk-37XVHH6T.js";
 import "./chunks/chunk-BVM6H744.js";
+import {
+  routes
+} from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
 // virtual:full-page
@@ -73,11 +76,23 @@ import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {};
-stdin_default.Responsive = ({ locale, ...rest }) => {
+function ComponentWithRoot({ locale, ...rest }) {
   return /* @__PURE__ */ jsx(
     ContextProviders,
     {
-      routes: {},
+      routes,
+      children: /* @__PURE__ */ jsx(stdin_default, { ...rest }),
+      framerSiteId: void 0,
+      locale,
+      locales
+    }
+  );
+}
+ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+  return /* @__PURE__ */ jsx(
+    ContextProviders,
+    {
+      routes,
       children: /* @__PURE__ */ jsx(
         WithFramerBreakpoints,
         {
@@ -92,19 +107,8 @@ stdin_default.Responsive = ({ locale, ...rest }) => {
     }
   );
 };
-function ComponentWithRoot({ locale, ...rest }) {
-  return /* @__PURE__ */ jsx(
-    ContextProviders,
-    {
-      routes: {},
-      children: /* @__PURE__ */ jsx(stdin_default, { ...rest }),
-      framerSiteId: void 0,
-      locale,
-      locales
-    }
-  );
-}
 Object.assign(ComponentWithRoot, stdin_default);
+var full_page_default = ComponentWithRoot;
 export {
-  ComponentWithRoot as default
+  full_page_default as default
 };
