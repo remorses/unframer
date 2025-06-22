@@ -2,18 +2,29 @@
 /* This css file has all the necessary styles to run all your components */
 
 
+
 :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 * {
     box-sizing: border-box;
     -webkit-font-smoothing: inherit;
 }
-h1, h2, h3, h4, h5, h6, p, figure {
+
+.unframer h1, .unframer h2, .unframer h3, .unframer h4, .unframer h5, .unframer h6, .unframer p, .unframer figure {
     margin: 0;
 }
-        
+
+.unframer {
+    line-height: normal;
+}
+
+.unframer, .unframer input, .unframer textarea, .unframer select, .unframer button {
+    font-size: 12px;
+    font-family: sans-serif;
+}
 :root {
     --unframer-heading: rgb(252, 252, 250);
     --unframer-background: rgb(10, 10, 10);
@@ -49,92 +60,47 @@ h1, h2, h3, h4, h5, h6, p, figure {
     --token-b02f73c3-0c77-4fa1-b52e-eca57fd70529: rgb(13, 13, 13);
     --token-b92efc33-3246-4525-adc1-724299866d2f: rgb(255, 69, 51);
 }
+
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer:not(.unframer-base) { 
+    .unframer-hidden:not(.unframer-base) {
         display: none !important;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer:not(.unframer-sm) { 
+    .unframer-hidden:not(.unframer-sm) {
         display: none !important;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer:not(.unframer-md) { 
+    .unframer-hidden:not(.unframer-md) {
         display: none !important;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer:not(.unframer-lg) { 
+    .unframer-hidden:not(.unframer-lg) {
         display: none !important;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer:not(.unframer-xl) { 
+    .unframer-hidden:not(.unframer-xl) {
         display: none !important;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer:not(.unframer-2xl) { 
+    .unframer-hidden:not(.unframer-2xl) {
         display: none !important;
     }
-}
-
-/* Base */
-@media (min-width: 0px) and (max-width: 319px) {
-    .unframer-hidden.unframer-base { 
-        display: contents;
-    }
-}
-
-/* Small */
-@media (min-width: 320px) and (max-width: 767px) {
-    .unframer-hidden.unframer-sm { 
-        display: contents;
-    }
-}
-
-/* Medium */
-@media (min-width: 768px) and (max-width: 959px) {
-    .unframer-hidden.unframer-md { 
-        display: contents;
-    }
-}
-
-/* Large */
-@media (min-width: 960px) and (max-width: 1199px) {
-    .unframer-hidden.unframer-lg { 
-        display: contents;
-    }
-}
-
-/* Extra Large */
-@media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer-hidden.unframer-xl { 
-        display: contents;
-    }
-}
-
-/* 2 Extra Large */
-@media (min-width: 1536px) {
-    .unframer-hidden.unframer-2xl { 
-        display: contents;
-    }
-}
-
-.unframer-hidden {
-    display: none;
 }
 
 
@@ -302,7 +268,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
             text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
@@ -408,7 +374,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
             line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
         }
@@ -439,7 +405,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             text-decoration: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
@@ -465,7 +431,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
         }
     
 
@@ -487,7 +453,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             text-decoration: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
@@ -511,7 +477,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     
 
@@ -533,7 +499,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
         }
@@ -557,7 +523,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
         }
     
 
@@ -579,7 +545,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
         }
@@ -603,7 +569,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size-canvas, var(--framer-font-size, 16px))))) * var(--framer-font-size-scale, 1));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     
 
@@ -1026,7 +992,7 @@ NavigationContainer
 /* used by footer.js, hero.js, navigation.js, section-how-it-works.js */
 
 @font-face {
-    font-family: 'Instrument Serif'; 
+    font-family: 'Instrument Serif';
     src: url('https://fonts.gstatic.com/s/instrumentserif/v4/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATjnTNgNq55w.woff2');
     font-style: italic;
     font-weight: 400;
@@ -1035,7 +1001,7 @@ NavigationContainer
 /* used by footer.js, hero.js, logos.js, navigation.js, section-how-it-works.js */
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2');
     font-style: normal;
     font-weight: 500;
@@ -1044,7 +1010,7 @@ NavigationContainer
 /* used by footer.js */
 
 @font-face {
-    font-family: 'Satoshi'; 
+    font-family: 'Satoshi';
     src: url('https://framerusercontent.com/third-party-assets/fontshare/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2');
     font-style: normal;
     font-weight: 400;
