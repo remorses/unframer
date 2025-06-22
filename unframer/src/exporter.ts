@@ -151,6 +151,15 @@ export async function bundle({
                         { filter: /.*/, namespace: 'virtual' },
                         async (args) => {
                             const name = args.path
+
+                            // Handle virtual routes module
+                            if (name === '__routes') {
+                                return {
+                                    contents: `export const routes = ${JSON.stringify(otherRoutes, null, 2)};`,
+                                    loader: 'js',
+                                }
+                            }
+
                             const url = components[name]
                             const componentBreakpoints =
                                 config.componentBreakpoints?.filter(
@@ -185,6 +194,9 @@ export async function bundle({
                                       ])
                                     : {}
 
+                            // Use virtual routes module
+                            const routesImportPath = 'virtual:__routes'
+
                             return {
                                 contents: /** js **/ `
                                 'use client'
@@ -195,6 +207,7 @@ export async function bundle({
                                     signal,
                                 })}'
                                 import { WithFramerBreakpoints } from 'unframer'
+                                import { routes } from '${routesImportPath}'
                                 const locales = ${
                                     JSON.stringify(config.locales) || '[]'
                                 }
@@ -208,11 +221,7 @@ export async function bundle({
                                 function ComponentWithRoot({ locale, ...rest }) {
                                     return (
                                         <ContextProviders
-                                            routes={${JSON.stringify(
-                                                otherRoutes,
-                                                null,
-                                                2,
-                                            )}}
+                                            routes={routes}
                                             children={<Component {...rest} />}
                                             framerSiteId={${JSON.stringify(
                                                 config.fullFramerProjectId,
@@ -225,9 +234,7 @@ export async function bundle({
                                 ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
                                     return (
                                         <ContextProviders
-                                            routes={${JSON.stringify(
-                                                otherRoutes,
-                                            )}}
+                                            routes={routes}
                                             children={<WithFramerBreakpoints
                                                         Component={Component}
                                                         variants={defaultResponsiveVariants}

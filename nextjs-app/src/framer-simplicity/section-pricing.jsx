@@ -38,6 +38,7 @@ import "./chunks/chunk-D4IPCJGN.js";
 import "./chunks/chunk-BTSBQWPZ.js";
 import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
 import { className, css, fonts } from "./chunks/chunk-PGXTBGNK.js";
+import { routes } from "./chunks/chunk-PRX3RHWQ.js";
 
 // virtual:section-pricing
 import { Fragment as Fragment2 } from "react";
@@ -400,26 +401,7 @@ function ComponentWithRoot({
   locale,
   ...rest
 }) {
-  return <ContextProviders routes={{
-    E9iSo0Hog: {
-      path: "/docs"
-    },
-    TdQ_ISe7W: {
-      path: "/404"
-    },
-    YC1NE44pE: {
-      path: "/terms"
-    },
-    augiA20Il: {
-      path: "/"
-    },
-    jg9o0Jk8V: {
-      path: "/privacy"
-    },
-    rHzp0yyuW: {
-      path: "/blog-3"
-    }
-  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+  return <ContextProviders routes={routes} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
 			{jsx(stdin_default3, {
       ...rest
     })}
@@ -436,26 +418,7 @@ ComponentWithRoot.Responsive = ({
   locale,
   ...rest
 }) => {
-  return <ContextProviders routes={{
-    E9iSo0Hog: {
-      path: "/docs"
-    },
-    TdQ_ISe7W: {
-      path: "/404"
-    },
-    YC1NE44pE: {
-      path: "/terms"
-    },
-    augiA20Il: {
-      path: "/"
-    },
-    jg9o0Jk8V: {
-      path: "/privacy"
-    },
-    rHzp0yyuW: {
-      path: "/blog-3"
-    }
-  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+  return <ContextProviders routes={routes} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
 			<WithFramerBreakpoints Component={stdin_default3} variants={defaultResponsiveVariants} {...rest} />
 		</ContextProviders>;
 };
