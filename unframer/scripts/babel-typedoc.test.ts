@@ -53,7 +53,10 @@ describe('babelPluginTypedoc', () => {
             const SectionHeroFramerComponent = () => <div>Hello</div>;
             SectionHeroFramerComponent.Responsive = () => <div />;
 
-            export default SectionHeroFramerComponent;
+            function ComponentWithRoot(props) {
+                return <SectionHeroFramerComponent {...props} />;
+            }
+            export default ComponentWithRoot;
         `
         const headerComment = dedent`
             /**
@@ -91,7 +94,10 @@ describe('babelPluginTypedoc', () => {
            */
           SectionHeroFramerComponent.Responsive = () => <div />;
           /** @type {SectionHeroFramerComponent} */
-          export default SectionHeroFramerComponent;
+          function ComponentWithRoot(props,) {
+            return <SectionHeroFramerComponent {...props} />;
+          }
+          export default ComponentWithRoot;
           "
         `)
     })

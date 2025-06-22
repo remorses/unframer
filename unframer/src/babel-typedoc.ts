@@ -117,11 +117,14 @@ export function babelPluginTypedoc(options: InjectTypedocOptions) {
                     }
                 },
 
-                ExportDefaultDeclaration(path) {
+                FunctionDeclaration(path) {
                     if (!defaultExportComment) return
-                    path.node.leadingComments = (
-                        path.node.leadingComments || []
-                    ).concat(toBlockComment(defaultExportComment))
+                    // Look for ComponentWithRoot function declaration
+                    if (path.node.id?.name === 'ComponentWithRoot') {
+                        path.node.leadingComments = (
+                            path.node.leadingComments || []
+                        ).concat(toBlockComment(defaultExportComment))
+                    }
                 },
             },
         }
