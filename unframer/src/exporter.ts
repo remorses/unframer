@@ -50,6 +50,7 @@ import {
     terminalMarkdown,
 } from './utils.js'
 import { installPackagesBatch } from './package-manager.js'
+import { version as currentUnframerVersion } from './version.js'
 
 import { Biome, Distribution } from '@biomejs/js-api'
 
@@ -103,6 +104,26 @@ export async function bundle({
     }
     const fn = watch ? context : fakeContext
     const missingPackages = new Set<string>()
+
+    try {
+        const installedVersion = await resolvePackage({
+            cwd: out,
+            pkg: 'unframer',
+        })
+        if (installedVersion !== currentUnframerVersion) {
+            // Version mismatch, add with specific version
+            missingPackages.add(`unframer@${currentUnframerVersion}`)
+            spinner.info(
+                `Different unframer version detected (${installedVersion}), will install unframer@${currentUnframerVersion}`,
+            )
+        }
+    } catch (e) {
+        // Unframer not installed, add with specific version
+        missingPackages.add(`unframer@${currentUnframerVersion}`)
+        spinner.info(
+            `Missing package detected: unframer@${currentUnframerVersion}`,
+        )
+    }
 
     const buildContext = await fn({
         absWorkingDir: out,
@@ -292,16 +313,20 @@ export async function bundle({
         // Install missing packages if any were collected
         if (missingPackages.size > 0) {
             const packagesToInstall = Array.from(missingPackages)
-            logger.log(`Installing missing packages: ${packagesToInstall.join(', ')}`)
+            logger.log(
+                `Installing missing packages: ${packagesToInstall.join(', ')}`,
+            )
 
             const installResult = await installPackagesBatch({
                 packageNames: packagesToInstall,
                 cwd: out,
-                isDev: false
+                isDev: false,
             })
 
             if (!installResult.success) {
-                spinner.error(`Failed to install packages: ${installResult.error}`)
+                spinner.error(
+                    `Failed to install packages: ${installResult.error}`,
+                )
                 // Don't fail the build, just warn
             }
         }
@@ -309,7 +334,8 @@ export async function bundle({
         // First, write raw JS files for type extraction
         for (let file of buildResult.outputFiles!) {
             const resultPathAbsJs = path.resolve(out, file.path)
-            const prefix = `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
+            const prefix =
+                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
             const codeJs = prefix + file.text
 
             logger.log(`writing raw JS`, path.relative(out, file.path))
@@ -318,8 +344,6 @@ export async function bundle({
             })
             await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
         }
-
-
 
         if (!buildResult?.outputFiles) {
             throw new Error('Failed to generate result')
@@ -372,7 +396,9 @@ export async function bundle({
                         fileName: name,
                         config,
                     })
-                    logger.log(`Generated TypeDoc comments for ${name}: ${!!typedocComments.headerComment}`)
+                    logger.log(
+                        `Generated TypeDoc comments for ${name}: ${!!typedocComments.headerComment}`,
+                    )
                     await fs.promises.mkdir(out, { recursive: true })
                     // .d.ts generation removed – types are now injected as typedoc
                     // comments directly inside the generated JSX file.
@@ -394,7 +420,6 @@ export async function bundle({
                 // Ignore error if file doesn't exist or can't be deleted
             }
         })
-
 
         const cssString =
             doNotEditComment +
@@ -501,8 +526,12 @@ export async function bundle({
         for (let file of buildResult.outputFiles!) {
             const resultPathAbsJs = path.resolve(out, file.path)
             const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
-            const componentName = path.relative(out, file.path).replace(/\.js$/, '')
-            const propData = propControlsData.find(p => p?.name === componentName)
+            const componentName = path
+                .relative(out, file.path)
+                .replace(/\.js$/, '')
+            const propData = propControlsData.find(
+                (p) => p?.name === componentName,
+            )
             const typedocComments = propData?.typedocComments
 
             logger.log(`Processing component: ${componentName}`)
@@ -510,11 +539,15 @@ export async function bundle({
             if (!propData) {
                 logger.log(`  No propData found for ${componentName}`)
             } else {
-                logger.log(`  PropData found for ${componentName}, has propertyControls: ${!!propData.propertyControls}`)
+                logger.log(
+                    `  PropData found for ${componentName}, has propertyControls: ${!!propData.propertyControls}`,
+                )
                 if (!typedocComments) {
                     logger.log(`  No typedocComments for ${componentName}`)
                 } else {
-                    logger.log(`  TypeDoc comments available for ${componentName}`)
+                    logger.log(
+                        `  TypeDoc comments available for ${componentName}`,
+                    )
                 }
             }
 
@@ -542,10 +575,14 @@ export async function bundle({
 
                     // Add TypeDoc plugin if we have comments for this component
                     if (typedocComments) {
-                        logger.log(`  Adding TypeDoc plugin for ${componentName}`)
+                        logger.log(
+                            `  Adding TypeDoc plugin for ${componentName}`,
+                        )
                         plugins.push(babelPluginTypedoc(typedocComments))
                     } else {
-                        logger.log(`  No TypeDoc comments to add for ${componentName}`)
+                        logger.log(
+                            `  No TypeDoc comments to add for ${componentName}`,
+                        )
                     }
 
                     let res = transform(file.text || '', {
@@ -604,10 +641,16 @@ export async function bundle({
         for (let file of buildResult.outputFiles!) {
             if (file.path.endsWith('.js')) {
                 const jsPath = path.resolve(out, file.path)
-                const jsxPath = path.resolve(out, file.path.replace(/\.js$/, '.jsx'))
+                const jsxPath = path.resolve(
+                    out,
+                    file.path.replace(/\.js$/, '.jsx'),
+                )
 
                 if (fs.existsSync(jsxPath)) {
-                    logger.log('removing JS file with JSX equivalent:', path.relative(out, jsPath))
+                    logger.log(
+                        'removing JS file with JSX equivalent:',
+                        path.relative(out, jsPath),
+                    )
                     try {
                         await fs.promises.rm(jsPath)
                     } catch (error) {
@@ -685,7 +728,6 @@ export async function bundle({
 
     `),
     )
-    await checkUnframerVersion({ cwd: out })
     console.log()
     return { result, rebuild, buildContext }
 }
@@ -713,10 +755,8 @@ export function resolvePackage({ cwd, pkg }) {
             },
             (error, stdout, stderr) => {
                 if (error) {
-                    logger.log(stderr)
-                    reject(
-                        new Error(`${pkg} is not installed in your project`),
-                    )
+                    // Package not installed - this is expected and handled by auto-install
+                    reject(new Error(`${pkg} is not installed in your project`))
                     return
                 }
                 const version = stdout.trim()
@@ -725,22 +765,6 @@ export function resolvePackage({ cwd, pkg }) {
             },
         )
     })
-}
-
-export async function checkUnframerVersion({ cwd }: { cwd: string }) {
-    const currentVersion = packageJson.version
-    try {
-        const installedVersion = await resolvePackage({ cwd, pkg: 'unframer' })
-        if (installedVersion !== currentVersion) {
-            spinner.error(
-                `IMPORTANT: Unframer version mismatch. Please run: npm update unframer@latest`,
-            )
-        }
-    } catch (e) {
-        spinner.error(
-            'IMPORTANT: Unframer is not installed in your project. Please run: npm install unframer',
-        )
-    }
 }
 
 export function getDarkModeSelector(opts: {
@@ -1147,15 +1171,18 @@ export function propControlsToTypedocComments({
 
         // Check if component has variant prop
         const hasVariant = controls && 'variant' in controls
-        const variantType = hasVariant ? (() => {
-            const variantControl = controls.variant
-            if (variantControl?.type === ControlType.Enum) {
-                // @ts-expect-error
-                const options = variantControl.optionTitles || variantControl.options
-                return options.map((x) => `'${x}'`).join(' | ')
-            }
-            return 'string'
-        })() : undefined
+        const variantType = hasVariant
+            ? (() => {
+                  const variantControl = controls.variant
+                  if (variantControl?.type === ControlType.Enum) {
+                      const options =
+                          // @ts-expect-error
+                          variantControl.optionTitles || variantControl.options
+                      return options.map((x) => `'${x}'`).join(' | ')
+                  }
+                  return 'string'
+              })()
+            : undefined
 
         // Generate header comment with type definitions
         let headerComment = '/**\n'
@@ -1178,8 +1205,10 @@ export function propControlsToTypedocComments({
         headerComment += ' */\n\n'
         headerComment += '/**\n'
         headerComment += ' * @typedef VariantsMap\n'
-        headerComment += ' * Partial record of UnframerBreakpoint to Props.variant, with a mandatory \'base\' key.\n'
-        headerComment += ' * { [key in UnframerBreakpoint]?: Props[\'variant\'] } & { base: Props[\'variant\'] }\n'
+        headerComment +=
+            " * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.\n"
+        headerComment +=
+            " * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }\n"
         headerComment += ' */'
 
         // Generate responsive comment
@@ -1202,7 +1231,6 @@ export function propControlsToTypedocComments({
         }
     }
 }
-
 
 export function parsePropertyControls(code: string) {
     const start = code.indexOf('addPropertyControls(')
