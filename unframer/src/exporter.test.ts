@@ -1,11 +1,6 @@
 import { describe, test, expect } from 'vitest'
-import { checkUnframerVersion,  } from './exporter'
 import { replaceWebPageIds } from './esbuild'
 import path from 'path'
-
-test('checkUnframerVersion', () => {
-    checkUnframerVersion({ cwd: process.cwd() })
-})
 
 describe('replaceWebPageIds', () => {
     test('replaces webPageIds with paths', () => {

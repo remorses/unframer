@@ -64,92 +64,47 @@
     --token-e3c51256-0961-4b79-ba15-cc3f17394ba4: rgb(81, 47, 235);
     --token-f4cf9e3e-da35-4e33-897c-29a30a250c5f: rgb(0, 0, 0);
 }
+
 /* Base */
 @media (min-width: 0px) and (max-width: 319px) {
-    .unframer:not(.unframer-base) {
+    .unframer-hidden:not(.unframer-base) {
         display: none !important;
     }
 }
 
 /* Small */
 @media (min-width: 320px) and (max-width: 767px) {
-    .unframer:not(.unframer-sm) {
+    .unframer-hidden:not(.unframer-sm) {
         display: none !important;
     }
 }
 
 /* Medium */
 @media (min-width: 768px) and (max-width: 959px) {
-    .unframer:not(.unframer-md) {
+    .unframer-hidden:not(.unframer-md) {
         display: none !important;
     }
 }
 
 /* Large */
 @media (min-width: 960px) and (max-width: 1199px) {
-    .unframer:not(.unframer-lg) {
+    .unframer-hidden:not(.unframer-lg) {
         display: none !important;
     }
 }
 
 /* Extra Large */
 @media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer:not(.unframer-xl) {
+    .unframer-hidden:not(.unframer-xl) {
         display: none !important;
     }
 }
 
 /* 2 Extra Large */
 @media (min-width: 1536px) {
-    .unframer:not(.unframer-2xl) {
+    .unframer-hidden:not(.unframer-2xl) {
         display: none !important;
     }
-}
-
-/* Base */
-@media (min-width: 0px) and (max-width: 319px) {
-    .unframer-hidden.unframer-base {
-        display: contents;
-    }
-}
-
-/* Small */
-@media (min-width: 320px) and (max-width: 767px) {
-    .unframer-hidden.unframer-sm {
-        display: contents;
-    }
-}
-
-/* Medium */
-@media (min-width: 768px) and (max-width: 959px) {
-    .unframer-hidden.unframer-md {
-        display: contents;
-    }
-}
-
-/* Large */
-@media (min-width: 960px) and (max-width: 1199px) {
-    .unframer-hidden.unframer-lg {
-        display: contents;
-    }
-}
-
-/* Extra Large */
-@media (min-width: 1200px) and (max-width: 1535px) {
-    .unframer-hidden.unframer-xl {
-        display: contents;
-    }
-}
-
-/* 2 Extra Large */
-@media (min-width: 1536px) {
-    .unframer-hidden.unframer-2xl {
-        display: contents;
-    }
-}
-
-.unframer-hidden {
-    display: none;
 }
 
 

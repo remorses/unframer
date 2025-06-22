@@ -198,8 +198,13 @@
       ],
       "format": "esm"
     },
+    "virtual:__routes": {
+      "bytes": 278,
+      "imports": [],
+      "format": "esm"
+    },
     "virtual:section-testimonials": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -220,6 +225,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -432,7 +442,7 @@
       "format": "esm"
     },
     "virtual:sections/pricing": {
-      "bytes": 2790,
+      "bytes": 2503,
       "imports": [
         {
           "path": "react",
@@ -453,6 +463,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -562,7 +577,7 @@
       "format": "esm"
     },
     "virtual:section-large-testimonial": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -583,6 +598,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -629,7 +649,7 @@
       "format": "esm"
     },
     "virtual:sections/feature": {
-      "bytes": 2769,
+      "bytes": 2482,
       "imports": [
         {
           "path": "react",
@@ -650,6 +670,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -696,7 +721,7 @@
       "format": "esm"
     },
     "virtual:section-logos": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -717,6 +742,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -820,7 +850,7 @@
       "format": "esm"
     },
     "virtual:section-features": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -841,6 +871,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -908,7 +943,7 @@
       "format": "esm"
     },
     "virtual:section-how-it-works": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -931,6 +966,11 @@
           "external": true
         },
         {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -939,7 +979,7 @@
       "format": "esm"
     },
     "virtual:sections/features-animation": {
-      "bytes": 2780,
+      "bytes": 2493,
       "imports": [
         {
           "path": "react",
@@ -960,6 +1000,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1042,7 +1087,7 @@
       "format": "esm"
     },
     "virtual:section-frequently-asked-questions": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1063,6 +1108,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1130,7 +1180,7 @@
       "format": "esm"
     },
     "virtual:section-hero": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1151,6 +1201,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1351,7 +1406,7 @@
       "format": "esm"
     },
     "virtual:blog-articles-collection": {
-      "bytes": 2746,
+      "bytes": 2459,
       "imports": [
         {
           "path": "react",
@@ -1374,6 +1429,11 @@
           "external": true
         },
         {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
+        },
+        {
           "path": "react/jsx-runtime",
           "kind": "import-statement",
           "external": true
@@ -1382,7 +1442,7 @@
       "format": "esm"
     },
     "virtual:sections/features-container": {
-      "bytes": 2790,
+      "bytes": 2503,
       "imports": [
         {
           "path": "react",
@@ -1403,6 +1463,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1532,7 +1597,7 @@
       "format": "esm"
     },
     "virtual:section-footer": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1553,6 +1618,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1694,7 +1764,7 @@
       "format": "esm"
     },
     "virtual:docs-cms-with-filters": {
-      "bytes": 2746,
+      "bytes": 2459,
       "imports": [
         {
           "path": "react",
@@ -1715,6 +1785,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1766,7 +1841,7 @@
       "format": "esm"
     },
     "virtual:section-call-to-action": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1787,6 +1862,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1838,7 +1918,7 @@
       "format": "esm"
     },
     "virtual:section-pricing": {
-      "bytes": 2811,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1859,6 +1939,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1967,7 +2052,7 @@
       "format": "esm"
     },
     "virtual:navigation/navigation": {
-      "bytes": 2790,
+      "bytes": 2503,
       "imports": [
         {
           "path": "react",
@@ -1988,6 +2073,11 @@
           "path": "unframer",
           "kind": "import-statement",
           "external": true
+        },
+        {
+          "path": "virtual:__routes",
+          "kind": "import-statement",
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -2011,6 +2101,10 @@
         },
         {
           "path": "chunks/chunk-BTSBQWPZ.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2100,7 +2194,7 @@
       "entryPoint": "virtual:navigation/navigation",
       "inputs": {
         "virtual:navigation/navigation": {
-          "bytesInOutput": 1684
+          "bytesInOutput": 1151
         },
         "/:https://framerusercontent.com/modules/9dDgXA6011Bw2J407SjG/t23MObJyprsKWWB6SqUI/z5xRU1d9T.js": {
           "bytesInOutput": 26923
@@ -2112,7 +2206,7 @@
           "bytesInOutput": 9667
         }
       },
-      "bytes": 45826
+      "bytes": 45350
     },
     "chunks/pRkZD_P47-2-PCEJG23U.js": {
       "imports": [
@@ -2189,6 +2283,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -2255,7 +2353,7 @@
       "entryPoint": "virtual:section-frequently-asked-questions",
       "inputs": {
         "virtual:section-frequently-asked-questions": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1196
         },
         "/:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/1gZ71eIVxFqHkjFaXdmc/WirOdcJBs.js": {
           "bytesInOutput": 16330
@@ -2264,7 +2362,7 @@
           "bytesInOutput": 48034
         }
       },
-      "bytes": 66759
+      "bytes": 66330
     },
     "section-hero.js": {
       "imports": [
@@ -2282,6 +2380,10 @@
         },
         {
           "path": "chunks/chunk-PGXTBGNK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2336,7 +2438,7 @@
       "entryPoint": "virtual:section-hero",
       "inputs": {
         "virtual:section-hero": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1174
         },
         "/:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/JFPa2SSU5YrQQQzAqbEt/aKlzorVQO.js": {
           "bytesInOutput": 17597
@@ -2345,10 +2447,14 @@
           "bytesInOutput": 9105
         }
       },
-      "bytes": 29064
+      "bytes": 28591
     },
     "blog-articles-collection.js": {
       "imports": [
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
         {
           "path": "react",
           "kind": "import-statement",
@@ -2445,7 +2551,7 @@
       "entryPoint": "virtual:blog-articles-collection",
       "inputs": {
         "virtual:blog-articles-collection": {
-          "bytesInOutput": 1640
+          "bytesInOutput": 1121
         },
         "/:https://framerusercontent.com/modules/WBpWuqb66GFTXogRd8eX/87dVRhay4mjMKot1xo6J/aNGNl9ehf.js": {
           "bytesInOutput": 16126
@@ -2478,7 +2584,7 @@
           "bytesInOutput": 10423
         }
       },
-      "bytes": 202346
+      "bytes": 201897
     },
     "sections/features-container.js": {
       "imports": [
@@ -2500,6 +2606,10 @@
         },
         {
           "path": "chunks/chunk-BPH5BCDR.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2529,10 +2639,10 @@
       "entryPoint": "virtual:sections/features-container",
       "inputs": {
         "virtual:sections/features-container": {
-          "bytesInOutput": 1667
+          "bytesInOutput": 1143
         }
       },
-      "bytes": 1979
+      "bytes": 1520
     },
     "section-footer.js": {
       "imports": [
@@ -2550,6 +2660,10 @@
         },
         {
           "path": "chunks/chunk-SFTTTBUM.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2624,7 +2738,7 @@
       "entryPoint": "virtual:section-footer",
       "inputs": {
         "virtual:section-footer": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1176
         },
         "/:https://framerusercontent.com/modules/xYPIDPSFNMAKkm6Viw2t/FgpMz097ScdmqPPCKXSD/m5keEQA6U.js": {
           "bytesInOutput": 34305
@@ -2636,10 +2750,14 @@
           "bytesInOutput": 703
         }
       },
-      "bytes": 56865
+      "bytes": 56396
     },
     "docs-cms-with-filters.js": {
       "imports": [
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
         {
           "path": "react",
           "kind": "import-statement",
@@ -2726,7 +2844,7 @@
       "entryPoint": "virtual:docs-cms-with-filters",
       "inputs": {
         "virtual:docs-cms-with-filters": {
-          "bytesInOutput": 1640
+          "bytesInOutput": 1118
         },
         "/:https://framerusercontent.com/modules/fZtk3mJZsrTHlzFv2mTj/Z4zoRwpawYvBRBcXd6Nq/s1GzfynKW.js": {
           "bytesInOutput": 21304
@@ -2744,7 +2862,7 @@
           "bytesInOutput": 290
         }
       },
-      "bytes": 109712
+      "bytes": 109257
     },
     "section-call-to-action.js": {
       "imports": [
@@ -2762,6 +2880,10 @@
         },
         {
           "path": "chunks/chunk-PGXTBGNK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2811,13 +2933,13 @@
       "entryPoint": "virtual:section-call-to-action",
       "inputs": {
         "virtual:section-call-to-action": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1184
         },
         "/:https://framerusercontent.com/modules/Znl9Gi26xTfU17mHETUh/LU2TOfn0UkJdrUd8vUnJ/u898_CyTd.js": {
           "bytesInOutput": 14650
         }
       },
-      "bytes": 16834
+      "bytes": 16381
     },
     "chunks/chunk-WTNHL2WX.js": {
       "imports": [
@@ -2879,6 +3001,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -2925,13 +3051,13 @@
       "entryPoint": "virtual:section-pricing",
       "inputs": {
         "virtual:section-pricing": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1177
         },
         "/:https://framerusercontent.com/modules/Qi5b7QPu9c3NjXeCuWjP/uX8k1muLc5D10ljL4GMh/wqLJMyDAb.js": {
           "bytesInOutput": 15021
         }
       },
-      "bytes": 17265
+      "bytes": 16798
     },
     "section-testimonials.js": {
       "imports": [
@@ -2941,6 +3067,10 @@
         },
         {
           "path": "chunks/chunk-PGXTBGNK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3060,7 +3190,7 @@
       "entryPoint": "virtual:section-testimonials",
       "inputs": {
         "virtual:section-testimonials": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1182
         },
         "/:https://framerusercontent.com/modules/8yWQJevMrmbyJU3TjtDM/qR3pbfMdwcOg8kkMli8Y/BLpQs2pt2.js": {
           "bytesInOutput": 25917
@@ -3081,7 +3211,7 @@
           "bytesInOutput": 4864
         }
       },
-      "bytes": 85711
+      "bytes": 85254
     },
     "sections/pricing.js": {
       "imports": [
@@ -3103,6 +3233,10 @@
         },
         {
           "path": "chunks/chunk-PGXTBGNK.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3132,10 +3266,10 @@
       "entryPoint": "virtual:sections/pricing",
       "inputs": {
         "virtual:sections/pricing": {
-          "bytesInOutput": 1667
+          "bytesInOutput": 1132
         }
       },
-      "bytes": 1968
+      "bytes": 1487
     },
     "chunks/chunk-57ITGDZQ.js": {
       "imports": [
@@ -3285,6 +3419,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -3331,13 +3469,13 @@
       "entryPoint": "virtual:section-large-testimonial",
       "inputs": {
         "virtual:section-large-testimonial": {
-          "bytesInOutput": 1701
+          "bytesInOutput": 1184
         },
         "/:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/WWEquI82OywT67jASbI1/HOWKuDHCy.js": {
           "bytesInOutput": 53050
         }
       },
-      "bytes": 55271
+      "bytes": 54825
     },
     "chunks/chunk-BTSBQWPZ.js": {
       "imports": [
@@ -3421,6 +3559,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -3447,10 +3589,10 @@
       "entryPoint": "virtual:sections/feature",
       "inputs": {
         "virtual:sections/feature": {
-          "bytesInOutput": 1646
+          "bytesInOutput": 1111
         }
       },
-      "bytes": 1871
+      "bytes": 1390
     },
     "section-logos.js": {
       "imports": [
@@ -3460,6 +3602,10 @@
         },
         {
           "path": "chunks/chunk-SFTTTBUM.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3509,13 +3655,13 @@
       "entryPoint": "virtual:section-logos",
       "inputs": {
         "virtual:section-logos": {
-          "bytesInOutput": 1701
+          "bytesInOutput": 1172
         },
         "/:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/HCclcTJUJiLOReYO6QPL/MPskWHg5T.js": {
           "bytesInOutput": 49709
         }
       },
-      "bytes": 51747
+      "bytes": 51277
     },
     "chunks/chunk-IH7WK4VG.js": {
       "imports": [
@@ -3578,6 +3724,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -3624,13 +3774,13 @@
       "entryPoint": "virtual:section-features",
       "inputs": {
         "virtual:section-features": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1178
         },
         "/:https://framerusercontent.com/modules/jVQGemd6yn35sShs6D7P/1pRGuRnLG3t4AOU3dtBF/SpenI5W7L.js": {
           "bytesInOutput": 7028
         }
       },
-      "bytes": 9157
+      "bytes": 8692
     },
     "chunks/chunk-W7Z4VVDG.js": {
       "imports": [
@@ -3749,6 +3899,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -3800,7 +3954,7 @@
       "entryPoint": "virtual:section-how-it-works",
       "inputs": {
         "virtual:section-how-it-works": {
-          "bytesInOutput": 1705
+          "bytesInOutput": 1182
         },
         "/:https://framerusercontent.com/modules/sa8zVXMWkXY0aWzV57or/HQ1QIeJOUFgL9PXAq0lN/SrEfHh8IE.js": {
           "bytesInOutput": 36469
@@ -3809,7 +3963,7 @@
           "bytesInOutput": 9225
         }
       },
-      "bytes": 48061
+      "bytes": 47604
     },
     "chunks/chunk-U2BTSRYM.js": {
       "imports": [
@@ -3891,6 +4045,10 @@
           "kind": "import-statement"
         },
         {
+          "path": "chunks/chunk-HEB6EHGG.js",
+          "kind": "import-statement"
+        },
+        {
           "path": "react",
           "kind": "import-statement",
           "external": true
@@ -3917,10 +4075,10 @@
       "entryPoint": "virtual:sections/features-animation",
       "inputs": {
         "virtual:sections/features-animation": {
-          "bytesInOutput": 1657
+          "bytesInOutput": 1133
         }
       },
-      "bytes": 1817
+      "bytes": 1358
     },
     "chunks/chunk-BPH5BCDR.js": {
       "imports": [
@@ -3954,6 +4112,18 @@
         }
       },
       "bytes": 65123
+    },
+    "chunks/chunk-HEB6EHGG.js": {
+      "imports": [],
+      "exports": [
+        "routes"
+      ],
+      "inputs": {
+        "virtual:__routes": {
+          "bytesInOutput": 270
+        }
+      },
+      "bytes": 312
     }
   }
 }

@@ -19,6 +19,7 @@ import {
     babelPluginJsxTransform,
     removeJsxExpressionContainer,
 } from './babel-jsx.js'
+import { babelPluginTypedoc } from './babel-typedoc.js'
 import { propCamelCaseJustLikeFramer } from './compat.js'
 import {
     ComponentFontBundle,
@@ -48,6 +49,8 @@ import {
     stackblitzDemoExample,
     terminalMarkdown,
 } from './utils.js'
+import { installPackagesBatch } from './package-manager.js'
+import { version as currentUnframerVersion } from './version.js'
 
 import { Biome, Distribution } from '@biomejs/js-api'
 
@@ -100,7 +103,27 @@ export async function bundle({
         }
     }
     const fn = watch ? context : fakeContext
-    let foundError = false
+    const missingPackages = new Set<string>()
+
+    try {
+        const installedVersion = await resolvePackage({
+            cwd: out,
+            pkg: 'unframer',
+        })
+        if (installedVersion !== currentUnframerVersion) {
+            // Version mismatch, add with specific version
+            missingPackages.add(`unframer@${currentUnframerVersion}`)
+            spinner.info(
+                `Different unframer version detected (${installedVersion}), will install unframer@${currentUnframerVersion}`,
+            )
+        }
+    } catch (e) {
+        // Unframer not installed, add with specific version
+        missingPackages.add(`unframer@${currentUnframerVersion}`)
+        spinner.info(
+            `Missing package detected: unframer@${currentUnframerVersion}`,
+        )
+    }
 
     const buildContext = await fn({
         absWorkingDir: out,
@@ -130,9 +153,12 @@ export async function bundle({
                 signal,
                 externalPackages: config.externalPackages,
                 externalizeNpm: config.allExternal,
-                outDir: config.outDir,
+                outDir: out,
                 onMissingPackage: (e) => {
-                    foundError = true
+                    // No longer needed - packages are auto-installed
+                },
+                onCollectMissingPackage: (pkg) => {
+                    missingPackages.add(pkg)
                 },
             }),
             nodeModulesPolyfillPlugin({}),
@@ -150,6 +176,15 @@ export async function bundle({
                         { filter: /.*/, namespace: 'virtual' },
                         async (args) => {
                             const name = args.path
+
+                            // Handle virtual routes module
+                            if (name === '__routes') {
+                                return {
+                                    contents: `export const routes = ${JSON.stringify(otherRoutes, null, 2)};`,
+                                    loader: 'js',
+                                }
+                            }
+
                             const url = components[name]
                             const componentBreakpoints =
                                 config.componentBreakpoints?.filter(
@@ -184,6 +219,9 @@ export async function bundle({
                                       ])
                                     : {}
 
+                            // Use virtual routes module
+                            const routesImportPath = 'virtual:__routes'
+
                             return {
                                 contents: /** js **/ `
                                 'use client'
@@ -194,6 +232,7 @@ export async function bundle({
                                     signal,
                                 })}'
                                 import { WithFramerBreakpoints } from 'unframer'
+                                import { routes } from '${routesImportPath}'
                                 const locales = ${
                                     JSON.stringify(config.locales) || '[]'
                                 }
@@ -203,12 +242,24 @@ export async function bundle({
                                     2,
                                 )}
 
-                                Component.Responsive = ({ locale, ...rest }) => {
+
+                                function ComponentWithRoot({ locale, ...rest }) {
                                     return (
                                         <ContextProviders
-                                            routes={${JSON.stringify(
-                                                otherRoutes,
+                                            routes={routes}
+                                            children={<Component {...rest} />}
+                                            framerSiteId={${JSON.stringify(
+                                                config.fullFramerProjectId,
                                             )}}
+                                            locale={locale}
+                                            locales={locales}
+                                        />
+                                    )
+                                }
+                                ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+                                    return (
+                                        <ContextProviders
+                                            routes={routes}
                                             children={<WithFramerBreakpoints
                                                         Component={Component}
                                                         variants={defaultResponsiveVariants}
@@ -222,25 +273,8 @@ export async function bundle({
                                         />
                                     )
                                 }
-
-                                export default function ComponentWithRoot({ locale, ...rest }) {
-                                    return (
-                                        <ContextProviders
-                                            routes={${JSON.stringify(
-                                                otherRoutes,
-                                                null,
-                                                2,
-                                            )}}
-                                            children={<Component {...rest} />}
-                                            framerSiteId={${JSON.stringify(
-                                                config.fullFramerProjectId,
-                                            )}}
-                                            locale={locale}
-                                            locales={locales}
-                                        />
-                                    )
-                                }
                                 Object.assign(ComponentWithRoot, Component)
+                                export default ComponentWithRoot
                                 `,
                                 loader: 'jsx',
                             }
@@ -258,10 +292,11 @@ export async function bundle({
     } "${config.projectName}", do not edit manually */\n`
 
     async function rebuild() {
+        // Clear missing packages for each rebuild (important for watch mode)
+        missingPackages.clear()
         const prevFiles = await recursiveReaddir(out)
         const buildResult = await buildContext.rebuild().catch((e) => {
             if (e.message.includes('No matching export ')) {
-                foundError = true
                 spinner.error(
                     `esbuild failed to import from an external package, this usually means that the npm package version in Framer is older than the latest.`,
                 )
@@ -275,117 +310,40 @@ export async function bundle({
 
         spinner.update('Finished build')
 
-        for (let file of buildResult.outputFiles!) {
-            const resultPathAbsJs = path.resolve(out, file.path)
-            const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
+        // Install missing packages if any were collected
+        if (missingPackages.size > 0) {
+            const packagesToInstall = Array.from(missingPackages)
+            logger.log(
+                `Installing missing packages: ${packagesToInstall.join(', ')}`,
+            )
 
-            const existing = await fs.promises
-                .readFile(resultPathAbsJsx, 'utf-8')
-                .catch(() => null)
-            const tooBigSize = 0.7 * 1024 * 1024
-
-            let formatted = file.text
-
-            let tooBig = file.text.length >= tooBigSize
-            let didFormat = false
-            if (
-                config.jsx &&
-                !tooBig &&
-                !resultPathAbsJs.includes('/chunks/') &&
-                !resultPathAbsJs.includes('\\chunks\\')
-            ) {
-                try {
-                    let res = transform(file.text || '', {
-                        babelrc: false,
-                        sourceType: 'module',
-                        plugins: [
-                            // babelPluginDeduplicateImports,
-                            babelPluginJsxTransform,
-                            removeJsxExpressionContainer,
-                        ],
-                        // ast: true,
-                        // code: false,
-                        filename: 'x.jsx',
-                        compact: false,
-                        sourceMaps: false,
-                    })
-                    if (res?.code) {
-                        if (!biome) {
-                            biome = await Biome.create({
-                                distribution: Distribution.NODE,
-                            })
-                        }
-                        let result = biome.formatContent(res.code, {
-                            filePath: 'example.jsx',
-                        })
-                        didFormat = true
-                        formatted = result.content
-                    }
-                } catch (e) {
-                    notifyError(e, 'babel transform and format')
-                }
-            }
-
-            // let inputCode = res!.code!
-            // let shouldFormat = !tooBig && !file.path.includes('chunks')
-            // if (shouldFormat) {
-            //     spinner.update(`Formatting ${path.relative(out, file.path)}`)
-            //     formatted = dprint.format('file.jsx', file.text, {
-            //         lineWidth: 140,
-            //         quoteStyle: 'alwaysSingle',
-            //         trailingCommas: 'always',
-            //         semiColons: 'always',
-            //     })
-            // }
-            // if (tooBig) {
-            //     spinner.info(
-            //         `skipping formatting ${path.relative(
-            //             out,
-            //             file.path,
-            //         )}, too big`,
-            //     )
-            // }
-
-            // if (framerWebPages?.length) {
-            //     codeNew = replaceWebPageIds({
-            //         code: codeNew,
-            //         elements: framerWebPages,
-            //     })
-            // }
-            // const lines = findRelativeLinks(codeNew)
-            // if (lines.length) {
-            //     spinner.error(
-            //         `found broken links for ${path.relative(out, file.path)}`,
-            //     )
-            //     lines.forEach((line) => {
-            //         logger.log(`${path.resolve(out, file.path)}:${line + 1}`)
-            //     })
-            // }
-
-            const prefix =
-                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
-            const codeJsx = prefix + formatted
-            const codeJs = prefix + file.text
-            // if (existing === codeJsx) {
-            //     continue
-            // }
-            logger.log(`writing`, path.relative(out, file.path))
-            await fs.promises.mkdir(path.dirname(resultPathAbsJsx), {
-                recursive: true,
+            const installResult = await installPackagesBatch({
+                packageNames: packagesToInstall,
+                cwd: out,
+                isDev: false,
             })
-            if (codeJs !== codeJsx || !didFormat) {
-                await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
-            }
-            if (didFormat) {
-                await fs.promises.writeFile(resultPathAbsJsx, codeJsx, 'utf-8')
+
+            if (!installResult.success) {
+                spinner.error(
+                    `Failed to install packages: ${installResult.error}`,
+                )
+                // Don't fail the build, just warn
             }
         }
-        spinner.stop()
-        await fs.promises.writeFile(
-            path.resolve(out, '.cursorignore'),
-            `**/*.js\nchunks\n`,
-            'utf-8',
-        )
+
+        // First, write raw JS files for type extraction
+        for (let file of buildResult.outputFiles!) {
+            const resultPathAbsJs = path.resolve(out, file.path)
+            const prefix =
+                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
+            const codeJs = prefix + file.text
+
+            logger.log(`writing raw JS`, path.relative(out, file.path))
+            await fs.promises.mkdir(path.dirname(resultPathAbsJs), {
+                recursive: true,
+            })
+            await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
+        }
 
         if (!buildResult?.outputFiles) {
             throw new Error('Failed to generate result')
@@ -419,6 +377,7 @@ export async function bundle({
                         return
                     }
                     logger.log(`extracting types for ${name}`)
+                    spinner.info(`Extracting types for component: ${name}`)
                     spinner.update(`Extracting types for ${name}`)
                     const { propertyControls, fonts } =
                         await extractPropControlsUnsafe(resultPathAbs, name)
@@ -432,21 +391,23 @@ export async function bundle({
                             fileName: path.basename(file.path),
                         })),
                     )
-                    const types = propControlsToType({
+                    const typedocComments = propControlsToTypedocComments({
                         controls: propertyControls!,
                         fileName: name,
                         config,
                     })
-                    await fs.promises.mkdir(out, { recursive: true })
-                    await fs.promises.writeFile(
-                        path.resolve(out, `${name}.d.ts`),
-                        types,
+                    logger.log(
+                        `Generated TypeDoc comments for ${name}: ${!!typedocComments.headerComment}`,
                     )
+                    await fs.promises.mkdir(out, { recursive: true })
+                    // .d.ts generation removed – types are now injected as typedoc
+                    // comments directly inside the generated JSX file.
 
                     return {
                         propertyControls,
                         fonts,
                         name,
+                        typedocComments,
                     }
                 } finally {
                     sema.release()
@@ -459,7 +420,6 @@ export async function bundle({
                 // Ignore error if file doesn't exist or can't be deleted
             }
         })
-        // spinner.stop()
 
         const cssString =
             doNotEditComment +
@@ -499,11 +459,6 @@ export async function bundle({
                 path.resolve(out, 'styles.css'),
             ])
             .concat(jsxFiles)
-            .concat(
-                buildResult.outputFiles.map((x) =>
-                    path.resolve(out, x.path.replace(/\.jsx?$/, '.d.ts')),
-                ),
-            )
 
         const filesToDelete = prevFiles
             .filter((x) => !outFiles.includes(x))
@@ -566,6 +521,145 @@ export async function bundle({
             }),
         }
 
+        // Process and write JSX files with TypeDoc comments
+        spinner.update('Processing JSX files with TypeDoc comments')
+        for (let file of buildResult.outputFiles!) {
+            const resultPathAbsJs = path.resolve(out, file.path)
+            const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
+            const componentName = path
+                .relative(out, file.path)
+                .replace(/\.js$/, '')
+            const propData = propControlsData.find(
+                (p) => p?.name === componentName,
+            )
+            const typedocComments = propData?.typedocComments
+
+            logger.log(`Processing component: ${componentName}`)
+            spinner.update(`Processing JSX for ${componentName}`)
+            if (!propData) {
+                logger.log(`  No propData found for ${componentName}`)
+            } else {
+                logger.log(
+                    `  PropData found for ${componentName}, has propertyControls: ${!!propData.propertyControls}`,
+                )
+                if (!typedocComments) {
+                    logger.log(`  No typedocComments for ${componentName}`)
+                } else {
+                    logger.log(
+                        `  TypeDoc comments available for ${componentName}`,
+                    )
+                }
+            }
+
+            const existing = await fs.promises
+                .readFile(resultPathAbsJsx, 'utf-8')
+                .catch(() => null)
+            const tooBigSize = 0.7 * 1024 * 1024
+
+            let formatted = file.text
+
+            let tooBig = file.text.length >= tooBigSize
+            let didFormat = false
+            if (
+                config.jsx &&
+                !tooBig &&
+                !resultPathAbsJs.includes('/chunks/') &&
+                !resultPathAbsJs.includes('\\chunks\\')
+            ) {
+                try {
+                    const plugins = [
+                        // babelPluginDeduplicateImports,
+                        babelPluginJsxTransform,
+                        removeJsxExpressionContainer,
+                    ]
+
+                    // Add TypeDoc plugin if we have comments for this component
+                    if (typedocComments) {
+                        logger.log(
+                            `  Adding TypeDoc plugin for ${componentName}`,
+                        )
+                        plugins.push(babelPluginTypedoc(typedocComments))
+                    } else {
+                        logger.log(
+                            `  No TypeDoc comments to add for ${componentName}`,
+                        )
+                    }
+
+                    let res = transform(file.text || '', {
+                        babelrc: false,
+                        sourceType: 'module',
+                        parserOpts: {
+                            plugins: ['jsx'],
+                        },
+                        plugins,
+                        // ast: true,
+                        // code: false,
+                        filename: 'x.jsx',
+                        compact: false,
+                        sourceMaps: false,
+                    })
+                    if (res?.code) {
+                        if (!biome) {
+                            biome = await Biome.create({
+                                distribution: Distribution.NODE,
+                            })
+                        }
+                        let result = biome.formatContent(res.code, {
+                            filePath: 'example.jsx',
+                        })
+                        didFormat = true
+                        formatted = result.content
+                    }
+                } catch (e) {
+                    notifyError(e, 'babel transform and format')
+                }
+            }
+
+            const prefix =
+                `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
+            const codeJsx = prefix + formatted
+            const codeJs = prefix + file.text
+            logger.log(`writing`, path.relative(out, file.path))
+            await fs.promises.mkdir(path.dirname(resultPathAbsJsx), {
+                recursive: true,
+            })
+            if (codeJs !== codeJsx || !didFormat) {
+                await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
+            }
+            if (didFormat) {
+                await fs.promises.writeFile(resultPathAbsJsx, codeJsx, 'utf-8')
+            }
+        }
+        spinner.stop()
+        await fs.promises.writeFile(
+            path.resolve(out, '.cursorignore'),
+            `**/*.js\nchunks\n`,
+            'utf-8',
+        )
+
+        // Clean up .js files that have .jsx equivalents
+        for (let file of buildResult.outputFiles!) {
+            if (file.path.endsWith('.js')) {
+                const jsPath = path.resolve(out, file.path)
+                const jsxPath = path.resolve(
+                    out,
+                    file.path.replace(/\.js$/, '.jsx'),
+                )
+
+                if (fs.existsSync(jsxPath)) {
+                    logger.log(
+                        'removing JS file with JSX equivalent:',
+                        path.relative(out, jsPath),
+                    )
+                    try {
+                        await fs.promises.rm(jsPath)
+                    } catch (error) {
+                        // Ignore error if file doesn't exist
+                    }
+                }
+            }
+        }
+
         spinner.info(`Build completed`)
         return res
     }
@@ -608,35 +702,32 @@ export async function bundle({
         })
         await fs.promises.writeFile(stackblitzDemoExample, exampleCode)
     }
-    if (!foundError) {
-        console.log(
-            terminalMarkdown(dedent`
-        # How to use the Framer components
+    console.log(
+        terminalMarkdown(dedent`
+    # How to use the Framer components
 
-        Your components are exported to \`${outDirForExample}\` folder. Now please install the \`unframer\` runtime dependency:
+    Your components are exported to \`${outDirForExample}\` folder. Now please install the \`unframer\` runtime dependency:
 
-        \`\`\`sh
-        npm install unframer
-        \`\`\`
+    \`\`\`sh
+    npm install unframer
+    \`\`\`
 
-        Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
+    Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
 
-        You can use the components like this (try copy pasting the code below into your React app):
+    You can use the components like this (try copy pasting the code below into your React app):
 
-        \`\`\`jsx
-        ${exampleCode}
-        \`\`\`
+    \`\`\`jsx
+    ${exampleCode}
+    \`\`\`
 
-        It's very important to import the \`styles.css\` file to include the necessary styles for the components.
+    It's very important to import the \`styles.css\` file to include the necessary styles for the components.
 
-        To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
+    To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
-        Read more on GitHub: https://github.com/remorses/unframer
+    Read more on GitHub: https://github.com/remorses/unframer
 
-        `),
-        )
-    }
-    await checkUnframerVersion({ cwd: out })
+    `),
+    )
     console.log()
     return { result, rebuild, buildContext }
 }
@@ -664,10 +755,8 @@ export function resolvePackage({ cwd, pkg }) {
             },
             (error, stdout, stderr) => {
                 if (error) {
-                    logger.log(stderr)
-                    reject(
-                        new Error(`${pkg} is not installed in your project`),
-                    )
+                    // Package not installed - this is expected and handled by auto-install
+                    reject(new Error(`${pkg} is not installed in your project`))
                     return
                 }
                 const version = stdout.trim()
@@ -676,22 +765,6 @@ export function resolvePackage({ cwd, pkg }) {
             },
         )
     })
-}
-
-export async function checkUnframerVersion({ cwd }: { cwd: string }) {
-    const currentVersion = packageJson.version
-    try {
-        const installedVersion = await resolvePackage({ cwd, pkg: 'unframer' })
-        if (installedVersion !== currentVersion) {
-            spinner.error(
-                `IMPORTANT: Unframer version mismatch. Please run: npm update unframer@latest`,
-            )
-        }
-    } catch (e) {
-        spinner.error(
-            'IMPORTANT: Unframer is not installed in your project. Please run: npm install unframer',
-        )
-    }
 }
 
 export function getDarkModeSelector(opts: {
@@ -1007,14 +1080,18 @@ function safeJsonParse(text) {
     }
 }
 
-export function propControlsToType({
+/**
+ * Generates TypeDoc comments that will be injected into JSX files
+ * instead of generating separate .d.ts files
+ */
+export function propControlsToTypedocComments({
     config,
     fileName,
     controls,
 }: {
     controls: PropertyControls
-    fileName
-    config
+    fileName: string
+    config: any
 }) {
     try {
         const types = Object.entries(controls || ({} as PropertyControls))
@@ -1074,46 +1151,70 @@ export function propControlsToType({
                 if (!name) {
                     return ''
                 }
-                return `    ${JSON.stringify(name)}?: ${typescriptType(value)}`
+                return ` * @property {${typescriptType(value)}} [${name}] - ${value.title || name}`
             })
             .filter(Boolean)
             .join('\n')
 
         const componentName = componentCamelCase(fileName)
 
-        const defaultPropsTypes =
-            [
-                'children?: React.ReactNode',
-                'locale?: Locale',
-                'style?: React.CSSProperties',
-                'className?: string',
-                'id?: string',
-                'width?: any',
-                'height?: any',
-                'layoutId?: string',
-            ]
-                .map((line) => `    ${line}`)
-                .join('\n') + '\n'
-        let t = ''
-        t += '/* This file was generated by Unframer, do not edit manually */\n'
+        const defaultPropsJsDoc = [
+            ' * @property {React.ReactNode} [children] - The children components.',
+            ' * @property {Locale} [locale] - The active locale.',
+            ' * @property {React.CSSProperties} [style] - The component styles.',
+            ' * @property {string} [className] - Additional class names for the component.',
+            ' * @property {string} [id] - The component id.',
+            ' * @property {*} [width] - The component width.',
+            ' * @property {*} [height] - The component height.',
+            ' * @property {string} [layoutId] - The layout id.',
+        ].join('\n')
 
-        t += 'import * as React from "react"\n\n'
-        t += 'import { UnframerBreakpoint } from "unframer"\n\n'
-        t += `type Locale = ${
-            config.locales?.length
-                ? config.locales.map((l) => `'${l.code}'`).join(' | ')
-                : 'string'
-        }\n`
-        t += `export interface Props {\n${defaultPropsTypes}${types}\n}\n\n`
-        t += `const ${componentName} = (props: Props) => any\n\n`
-        t += `type VariantsMap = Partial<Record<UnframerBreakpoint, Props['variant']>> & { base: Props['variant'] }\n\n`
-        t += `${componentName}.Responsive = (props: Omit<Props, 'variant'> & {variants?: VariantsMap}) => any\n\n`
-        t += `export default ${componentName}\n\n`
 
-        return t
+        // Generate header comment with type definitions
+        let headerComment = '/**\n'
+        headerComment += ' * @typedef Locale\n'
+        headerComment += ' * A string that represents the locale.\n'
+        headerComment += ' */\n\n'
+        headerComment += '/**\n'
+        headerComment += ' * @typedef Props\n'
+        headerComment += defaultPropsJsDoc
+        // if (hasVariant) {
+        //     headerComment += `\n * @property {${variantType}} [variant] - The component responsive variant; values: ${variantType.replace(/'/g, '')}.`
+        // }
+        if (types) {
+            headerComment += '\n' + types
+        }
+        headerComment += '\n */\n\n'
+        headerComment += '/**\n'
+        headerComment += ' * @type {import("unframer").UnframerBreakpoint}\n'
+        headerComment += ' * Represents a responsive breakpoint for unframer.\n'
+        headerComment += ' */\n\n'
+        headerComment += '/**\n'
+        headerComment += ' * @typedef VariantsMap\n'
+        headerComment +=
+            " * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.\n"
+        headerComment +=
+            " * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }\n"
+        headerComment += ' */'
+
+        // Generate responsive comment
+        const responsiveComment = `/**\n * Renders ${componentName} for all breakpoints with a variants map. Variant prop is inferred per breakpoint.\n * @function\n * @memberof ${componentName}\n * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props\n * @returns {any}\n */`
+
+        // Generate default export comment - use inline function type instead of referencing undefined type
+        const defaultExportComment = `/** @type {function(Props): any} */`
+
+        return {
+            headerComment,
+            responsiveComment,
+            defaultExportComment,
+        }
     } catch (e: any) {
-        logger.error('cannot generate types', e.stack)
-        return ''
+        logger.error('cannot generate typedoc comments', e.stack)
+        return {
+            headerComment: '',
+            responsiveComment: '',
+            defaultExportComment: '',
+        }
     }
 }
 
