@@ -1433,7 +1433,7 @@ var defaultResponsiveVariants = {
   md: "PBicSvuJH",
   xl: "jEif1shEi"
 };
-/** @type {SectionTestimonialsFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

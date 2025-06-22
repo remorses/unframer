@@ -395,7 +395,7 @@ var defaultResponsiveVariants = {
   md: "RoFGE5oWb",
   xl: "NK_tcQhZf"
 };
-/** @type {SectionPricingFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

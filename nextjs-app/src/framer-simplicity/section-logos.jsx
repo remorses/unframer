@@ -297,7 +297,7 @@ var defaultResponsiveVariants = {
   md: "KSBqb5uN_",
   xl: "q5MeF1uQl"
 };
-/** @type {SectionLogosFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

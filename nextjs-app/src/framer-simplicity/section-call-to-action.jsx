@@ -346,7 +346,7 @@ var defaultResponsiveVariants = {
   md: "fh2L_2CEw",
   xl: "gtsbNa8O8"
 };
-/** @type {SectionCallToActionFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

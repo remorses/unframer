@@ -1172,8 +1172,8 @@ export function propControlsToTypedocComments({
         // Generate responsive comment
         const responsiveComment = `/**\n * Renders ${componentName} for all breakpoints with a variants map. Variant prop is inferred per breakpoint.\n * @function\n * @memberof ${componentName}\n * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props\n * @returns {any}\n */`
 
-        // Generate default export comment
-        const defaultExportComment = `/** @type {${componentName}} */`
+        // Generate default export comment - use inline function type instead of referencing undefined type
+        const defaultExportComment = `/** @type {function(Props): any} */`
 
         return {
             headerComment,

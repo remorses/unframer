@@ -1356,7 +1356,7 @@ var defaultResponsiveVariants = {
   md: "gFvLeQTQg",
   xl: "g_GAoicEt"
 };
-/** @type {SectionFrequentlyAskedQuestionsFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

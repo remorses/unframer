@@ -1363,7 +1363,7 @@ var defaultResponsiveVariants = {
   md: "kdbCtkU1X",
   xl: "ByvYcqeqt"
 };
-/** @type {SectionFooterFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

@@ -1086,7 +1086,7 @@ var defaultResponsiveVariants = {
   base: "vL5s_eZpu",
   xl: "g3AInmvkW"
 };
-/** @type {NavigationFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

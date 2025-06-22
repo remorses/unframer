@@ -48,7 +48,7 @@ var defaultResponsiveVariants = {
   base: "BBhLTTA5K",
   xl: "FM3SqD1tW"
 };
-/** @type {PricingFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

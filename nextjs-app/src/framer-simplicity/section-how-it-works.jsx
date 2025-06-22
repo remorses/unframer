@@ -804,7 +804,7 @@ var defaultResponsiveVariants = {
   md: "sRbSQTUZm",
   xl: "tZ3Nk88mM"
 };
-/** @type {SectionHowItWorksFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

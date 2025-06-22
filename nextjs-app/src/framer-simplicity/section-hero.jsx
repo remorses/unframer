@@ -630,7 +630,7 @@ var defaultResponsiveVariants = {
   md: "Gbz9maQw1",
   xl: "L_pX4uUkR"
 };
-/** @type {SectionHeroFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

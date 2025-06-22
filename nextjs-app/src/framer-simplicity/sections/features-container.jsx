@@ -48,7 +48,7 @@ var defaultResponsiveVariants = {
   base: "SZ4WQIvQT",
   xl: "G9YxcgYmG"
 };
-/** @type {FeaturesContainerFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

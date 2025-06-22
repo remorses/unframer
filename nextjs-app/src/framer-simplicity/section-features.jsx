@@ -219,7 +219,7 @@ var defaultResponsiveVariants = {
   md: "IOIaixBce",
   xl: "sHnGLtvML"
 };
-/** @type {SectionFeaturesFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

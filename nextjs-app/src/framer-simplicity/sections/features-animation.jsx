@@ -43,7 +43,7 @@ var locales = [];
 var defaultResponsiveVariants = {
   base: "I6854:8695;6765:3116"
 };
-/** @type {FeaturesAnimationFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest

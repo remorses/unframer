@@ -43,6 +43,7 @@ function Home() {
                 <SectionCallToActionFramerComponent.Responsive />
                 <LogosFramerComponent.Responsive />
                 <SectionFooterFramerComponent.Responsive />
+                <SectionPricingFramerComponent  />
             </div>
         </UnframerProvider>
     )

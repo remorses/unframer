@@ -377,7 +377,7 @@ var defaultResponsiveVariants = {
   md: "UQjHTCbHp",
   xl: "iB4cGAnq6"
 };
-/** @type {SectionLargeTestimonialFramerComponent} */
+/** @type {function(Props): any} */
 function ComponentWithRoot({
   locale,
   ...rest
