@@ -18,6 +18,8 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
+ * @property {'Create in Seconds (Desktop)' | 'Organize with Ease (Desktop)' | 'Sync Across Devices (Desktop)' | 'Create in Seconds (Mobile)' | 'Organize with Ease (Mobile)' | 'Sync Across Devices (Mobile)'} [variant] - The component responsive variant; values: Create in Seconds (Desktop) | Organize with Ease (Desktop) | Sync Across Devices (Desktop) | Create in Seconds (Mobile) | Organize with Ease (Mobile) | Sync Across Devices (Mobile).
+ * @property {'Create in Seconds (Desktop)' | 'Organize with Ease (Desktop)' | 'Sync Across Devices (Desktop)' | 'Create in Seconds (Mobile)' | 'Organize with Ease (Mobile)' | 'Sync Across Devices (Mobile)'} [variant] - Variant
  */
 
 /**
@@ -110,4 +112,6 @@ ComponentWithRoot.Responsive = ({
 			<WithFramerBreakpoints Component={stdin_default} variants={defaultResponsiveVariants} {...rest} />
 		</ContextProviders>;
 };
-export { ComponentWithRoot as default };
+Object.assign(ComponentWithRoot, stdin_default);
+var features_container_default = ComponentWithRoot;
+export { features_container_default as default };

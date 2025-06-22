@@ -205,7 +205,7 @@ export async function bundle({
                                 )}
 
 
-                                export default function ComponentWithRoot({ locale, ...rest }) {
+                                function ComponentWithRoot({ locale, ...rest }) {
                                     return (
                                         <ContextProviders
                                             routes={${JSON.stringify(
@@ -241,6 +241,8 @@ export async function bundle({
                                         />
                                     )
                                 }
+                                Object.assign(ComponentWithRoot, Component)
+                                export default ComponentWithRoot
                                 `,
                                 loader: 'jsx',
                             }

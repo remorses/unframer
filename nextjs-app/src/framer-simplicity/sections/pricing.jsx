@@ -18,6 +18,8 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
+ * @property {'Annual (Desktop)' | 'Annual (Mobile)'} [variant] - The component responsive variant; values: Annual (Desktop) | Annual (Mobile).
+ * @property {'Annual (Desktop)' | 'Annual (Mobile)'} [variant] - Variant
  */
 
 /**
@@ -110,4 +112,6 @@ ComponentWithRoot.Responsive = ({
 			<WithFramerBreakpoints Component={stdin_default} variants={defaultResponsiveVariants} {...rest} />
 		</ContextProviders>;
 };
-export { ComponentWithRoot as default };
+Object.assign(ComponentWithRoot, stdin_default);
+var pricing_default = ComponentWithRoot;
+export { pricing_default as default };

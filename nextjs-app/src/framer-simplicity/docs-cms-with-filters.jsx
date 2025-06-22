@@ -3307,7 +3307,9 @@ ComponentWithRoot.Responsive = ({
 			<WithFramerBreakpoints Component={stdin_default3} variants={defaultResponsiveVariants} {...rest} />
 		</ContextProviders>;
 };
-export { ComponentWithRoot as default };
+Object.assign(ComponentWithRoot, stdin_default3);
+var docs_cms_with_filters_default = ComponentWithRoot;
+export { docs_cms_with_filters_default as default };
 /*! Bundled license information:
 
 splaytree/dist/splay.js:

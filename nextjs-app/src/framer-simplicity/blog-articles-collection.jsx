@@ -19,6 +19,7 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
+ * @property {string} [link] - Link
  */
 
 /**
@@ -5765,7 +5766,9 @@ ComponentWithRoot.Responsive = ({
 			<WithFramerBreakpoints Component={stdin_default3} variants={defaultResponsiveVariants} {...rest} />
 		</ContextProviders>;
 };
-export { ComponentWithRoot as default };
+Object.assign(ComponentWithRoot, stdin_default3);
+var blog_articles_collection_default = ComponentWithRoot;
+export { blog_articles_collection_default as default };
 /*! Bundled license information:
 
 splaytree/dist/splay.js:

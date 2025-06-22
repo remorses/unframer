@@ -18,6 +18,8 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
+ * @property {'Desktop' | 'Mobile Closed' | 'Mobile Expanded'} [variant] - The component responsive variant; values: Desktop | Mobile Closed | Mobile Expanded.
+ * @property {'Desktop' | 'Mobile Closed' | 'Mobile Expanded'} [variant] - Variant
  */
 
 /**
@@ -1148,4 +1150,6 @@ ComponentWithRoot.Responsive = ({
 			<WithFramerBreakpoints Component={stdin_default5} variants={defaultResponsiveVariants} {...rest} />
 		</ContextProviders>;
 };
-export { ComponentWithRoot as default };
+Object.assign(ComponentWithRoot, stdin_default5);
+var navigation_default = ComponentWithRoot;
+export { navigation_default as default };
