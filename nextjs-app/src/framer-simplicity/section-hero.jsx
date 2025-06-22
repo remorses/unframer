@@ -18,11 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - The component responsive variant; values: Desktop | Tablet | Phone.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - Variant
- * @property {string} [ctaLink] - cta link
- * @property {string} [subheading] - subheading
- * @property {Function} [onClick] - On Click
  */
 
 /**
@@ -630,40 +625,7 @@ var defaultResponsiveVariants = {
   md: "Gbz9maQw1",
   xl: "L_pX4uUkR"
 };
-/**
- * Renders SectionHeroFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
- * @function
- * @memberof SectionHeroFramerComponent
- * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
- * @returns {any}
- */
-stdin_default3.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return <ContextProviders routes={{
-    E9iSo0Hog: {
-      path: "/docs"
-    },
-    TdQ_ISe7W: {
-      path: "/404"
-    },
-    YC1NE44pE: {
-      path: "/terms"
-    },
-    augiA20Il: {
-      path: "/"
-    },
-    jg9o0Jk8V: {
-      path: "/privacy"
-    },
-    rHzp0yyuW: {
-      path: "/blog-3"
-    }
-  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
-			<WithFramerBreakpoints Component={stdin_default3} variants={defaultResponsiveVariants} {...rest} />
-		</ContextProviders>;
-};
+/** @type {SectionHeroFramerComponent} */
 function ComponentWithRoot({
   locale,
   ...rest
@@ -693,5 +655,38 @@ function ComponentWithRoot({
     })}
 		</ContextProviders>;
 }
-Object.assign(ComponentWithRoot, stdin_default3);
+/**
+ * Renders SectionHeroFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * @function
+ * @memberof SectionHeroFramerComponent
+ * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
+ * @returns {any}
+ */
+ComponentWithRoot.Responsive = ({
+  locale,
+  ...rest
+}) => {
+  return <ContextProviders routes={{
+    E9iSo0Hog: {
+      path: "/docs"
+    },
+    TdQ_ISe7W: {
+      path: "/404"
+    },
+    YC1NE44pE: {
+      path: "/terms"
+    },
+    augiA20Il: {
+      path: "/"
+    },
+    jg9o0Jk8V: {
+      path: "/privacy"
+    },
+    rHzp0yyuW: {
+      path: "/blog-3"
+    }
+  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+			<WithFramerBreakpoints Component={stdin_default3} variants={defaultResponsiveVariants} {...rest} />
+		</ContextProviders>;
+};
 export { ComponentWithRoot as default };

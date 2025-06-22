@@ -18,8 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - The component responsive variant; values: Desktop | Tablet | Phone.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - Variant
  */
 
 /**
@@ -377,40 +375,7 @@ var defaultResponsiveVariants = {
   md: "UQjHTCbHp",
   xl: "iB4cGAnq6"
 };
-/**
- * Renders SectionLargeTestimonialFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
- * @function
- * @memberof SectionLargeTestimonialFramerComponent
- * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
- * @returns {any}
- */
-stdin_default.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return <ContextProviders routes={{
-    E9iSo0Hog: {
-      path: "/docs"
-    },
-    TdQ_ISe7W: {
-      path: "/404"
-    },
-    YC1NE44pE: {
-      path: "/terms"
-    },
-    augiA20Il: {
-      path: "/"
-    },
-    jg9o0Jk8V: {
-      path: "/privacy"
-    },
-    rHzp0yyuW: {
-      path: "/blog-3"
-    }
-  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
-			<WithFramerBreakpoints Component={stdin_default} variants={defaultResponsiveVariants} {...rest} />
-		</ContextProviders>;
-};
+/** @type {SectionLargeTestimonialFramerComponent} */
 function ComponentWithRoot({
   locale,
   ...rest
@@ -440,5 +405,38 @@ function ComponentWithRoot({
     })}
 		</ContextProviders>;
 }
-Object.assign(ComponentWithRoot, stdin_default);
+/**
+ * Renders SectionLargeTestimonialFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * @function
+ * @memberof SectionLargeTestimonialFramerComponent
+ * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
+ * @returns {any}
+ */
+ComponentWithRoot.Responsive = ({
+  locale,
+  ...rest
+}) => {
+  return <ContextProviders routes={{
+    E9iSo0Hog: {
+      path: "/docs"
+    },
+    TdQ_ISe7W: {
+      path: "/404"
+    },
+    YC1NE44pE: {
+      path: "/terms"
+    },
+    augiA20Il: {
+      path: "/"
+    },
+    jg9o0Jk8V: {
+      path: "/privacy"
+    },
+    rHzp0yyuW: {
+      path: "/blog-3"
+    }
+  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+			<WithFramerBreakpoints Component={stdin_default} variants={defaultResponsiveVariants} {...rest} />
+		</ContextProviders>;
+};
 export { ComponentWithRoot as default };

@@ -18,8 +18,6 @@
  * @property {*} [width] - The component width.
  * @property {*} [height] - The component height.
  * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Mobile Closed' | 'Mobile Expanded'} [variant] - The component responsive variant; values: Desktop | Mobile Closed | Mobile Expanded.
- * @property {'Desktop' | 'Mobile Closed' | 'Mobile Expanded'} [variant] - Variant
  */
 
 /**
@@ -1086,40 +1084,6 @@ var defaultResponsiveVariants = {
   base: "vL5s_eZpu",
   xl: "g3AInmvkW"
 };
-/**
- * Renders NavigationFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
- * @function
- * @memberof NavigationFramerComponent
- * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
- * @returns {any}
- */
-stdin_default5.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return <ContextProviders routes={{
-    E9iSo0Hog: {
-      path: "/docs"
-    },
-    TdQ_ISe7W: {
-      path: "/404"
-    },
-    YC1NE44pE: {
-      path: "/terms"
-    },
-    augiA20Il: {
-      path: "/"
-    },
-    jg9o0Jk8V: {
-      path: "/privacy"
-    },
-    rHzp0yyuW: {
-      path: "/blog-3"
-    }
-  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
-			<WithFramerBreakpoints Component={stdin_default5} variants={defaultResponsiveVariants} {...rest} />
-		</ContextProviders>;
-};
 /** @type {NavigationFramerComponent} */
 function ComponentWithRoot({
   locale,
@@ -1150,6 +1114,38 @@ function ComponentWithRoot({
     })}
 		</ContextProviders>;
 }
-Object.assign(ComponentWithRoot, stdin_default5);
-
+/**
+ * Renders NavigationFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * @function
+ * @memberof NavigationFramerComponent
+ * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
+ * @returns {any}
+ */
+ComponentWithRoot.Responsive = ({
+  locale,
+  ...rest
+}) => {
+  return <ContextProviders routes={{
+    E9iSo0Hog: {
+      path: "/docs"
+    },
+    TdQ_ISe7W: {
+      path: "/404"
+    },
+    YC1NE44pE: {
+      path: "/terms"
+    },
+    augiA20Il: {
+      path: "/"
+    },
+    jg9o0Jk8V: {
+      path: "/privacy"
+    },
+    rHzp0yyuW: {
+      path: "/blog-3"
+    }
+  }} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+			<WithFramerBreakpoints Component={stdin_default5} variants={defaultResponsiveVariants} {...rest} />
+		</ContextProviders>;
+};
 export { ComponentWithRoot as default };
