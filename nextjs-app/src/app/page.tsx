@@ -20,7 +20,7 @@ export default function Page() {
 }
 
 function Home() {
-    
+
     return (
         <UnframerProvider
             // navigate={(x) => {
@@ -29,7 +29,7 @@ function Home() {
             // }}
         >
             <div className='bg-black flex flex-col items-center'>
-                <NavigationFramerComponent.Responsive />
+                <NavigationFramerComponent.Responsive  />
 
                 <SectionHeroFramerComponent.Responsive />
 

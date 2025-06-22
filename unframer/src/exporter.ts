@@ -19,6 +19,7 @@ import {
     babelPluginJsxTransform,
     removeJsxExpressionContainer,
 } from './babel-jsx.js'
+import { babelPluginTypedoc } from './babel-typedoc.js'
 import { propCamelCaseJustLikeFramer } from './compat.js'
 import {
     ComponentFontBundle,
@@ -203,25 +204,6 @@ export async function bundle({
                                     2,
                                 )}
 
-                                Component.Responsive = ({ locale, ...rest }) => {
-                                    return (
-                                        <ContextProviders
-                                            routes={${JSON.stringify(
-                                                otherRoutes,
-                                            )}}
-                                            children={<WithFramerBreakpoints
-                                                        Component={Component}
-                                                        variants={defaultResponsiveVariants}
-                                                        {...rest}
-                                                    />}
-                                            framerSiteId={${JSON.stringify(
-                                                config.fullFramerProjectId,
-                                            )}}
-                                            locale={locale}
-                                            locales={locales}
-                                        />
-                                    )
-                                }
 
                                 export default function ComponentWithRoot({ locale, ...rest }) {
                                     return (
@@ -240,7 +222,25 @@ export async function bundle({
                                         />
                                     )
                                 }
-                                Object.assign(ComponentWithRoot, Component)
+                                ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+                                    return (
+                                        <ContextProviders
+                                            routes={${JSON.stringify(
+                                                otherRoutes,
+                                            )}}
+                                            children={<WithFramerBreakpoints
+                                                        Component={Component}
+                                                        variants={defaultResponsiveVariants}
+                                                        {...rest}
+                                                    />}
+                                            framerSiteId={${JSON.stringify(
+                                                config.fullFramerProjectId,
+                                            )}}
+                                            locale={locale}
+                                            locales={locales}
+                                        />
+                                    )
+                                }
                                 `,
                                 loader: 'jsx',
                             }
@@ -274,6 +274,9 @@ export async function bundle({
         })
 
         spinner.update('Finished build')
+
+        // Store TypeDoc comments for later use
+        const typedocCommentsMap = new Map<string, any>()
 
         for (let file of buildResult.outputFiles!) {
             const resultPathAbsJs = path.resolve(out, file.path)
@@ -432,21 +435,20 @@ export async function bundle({
                             fileName: path.basename(file.path),
                         })),
                     )
-                    const types = propControlsToType({
+                    const typedocComments = propControlsToTypedocComments({
                         controls: propertyControls!,
                         fileName: name,
                         config,
                     })
                     await fs.promises.mkdir(out, { recursive: true })
-                    await fs.promises.writeFile(
-                        path.resolve(out, `${name}.d.ts`),
-                        types,
-                    )
+                    // .d.ts generation removed – types are now injected as typedoc
+                    // comments directly inside the generated JSX file.
 
                     return {
                         propertyControls,
                         fonts,
                         name,
+                        typedocComments,
                     }
                 } finally {
                     sema.release()
@@ -459,6 +461,41 @@ export async function bundle({
                 // Ignore error if file doesn't exist or can't be deleted
             }
         })
+
+        // Second pass: Apply TypeDoc comments to JSX files
+        spinner.update('Injecting TypeDoc comments')
+        for (const propData of propControlsData.filter(Boolean)) {
+            if (!propData?.typedocComments) continue
+
+            const componentName = propData.name
+            const jsxPath = path.resolve(out, `${componentName}.jsx`)
+
+            if (fs.existsSync(jsxPath)) {
+                try {
+                    const jsxContent = await fs.promises.readFile(jsxPath, 'utf-8')
+                    const res = transform(jsxContent, {
+                        babelrc: false,
+                        sourceType: 'module',
+                        parserOpts: {
+                            plugins: ['jsx'],
+                        },
+                        plugins: [
+                            babelPluginTypedoc(propData.typedocComments),
+                        ],
+                        filename: `${componentName}.jsx`,
+                        compact: false,
+                        sourceMaps: false,
+                    })
+
+                    if (res?.code) {
+                        await fs.promises.writeFile(jsxPath, res.code, 'utf-8')
+                        logger.log(`Injected TypeDoc comments for ${componentName}`)
+                    }
+                } catch (e) {
+                    logger.error(`Failed to inject TypeDoc comments for ${componentName}:`, e)
+                }
+            }
+        }
         // spinner.stop()
 
         const cssString =
@@ -499,11 +536,8 @@ export async function bundle({
                 path.resolve(out, 'styles.css'),
             ])
             .concat(jsxFiles)
-            .concat(
-                buildResult.outputFiles.map((x) =>
-                    path.resolve(out, x.path.replace(/\.jsx?$/, '.d.ts')),
-                ),
-            )
+            // .d.ts files are no longer produced, so we no longer add them to
+            // the list of output files.
 
         const filesToDelete = prevFiles
             .filter((x) => !outFiles.includes(x))
@@ -1004,6 +1038,153 @@ function safeJsonParse(text) {
     } catch (e) {
         logger.error('cannot parse json', text.slice(0, 100))
         return null
+    }
+}
+
+/**
+ * Generates TypeDoc comments that will be injected into JSX files
+ * instead of generating separate .d.ts files
+ */
+export function propControlsToTypedocComments({
+    config,
+    fileName,
+    controls,
+}: {
+    controls: PropertyControls
+    fileName: string
+    config: any
+}) {
+    try {
+        const types = Object.entries(controls || ({} as PropertyControls))
+            .map(([key, value]) => {
+                if (!value) {
+                    return
+                }
+
+                const typescriptType = (value: ControlDescription<any>) => {
+                    value.type
+                    switch (value.type) {
+                        case ControlType.Color:
+                            return 'string'
+                        case ControlType.Boolean:
+                            return 'boolean'
+                        case ControlType.Number:
+                            return 'number'
+                        case ControlType.String:
+                            return 'string'
+                        case ControlType.Enum: {
+                            // @ts-expect-error
+                            const options = value.optionTitles || value.options
+                            return options.map((x) => `'${x}'`).join(' | ')
+                        }
+                        case ControlType.File:
+                            return 'string'
+                        case ControlType.Image:
+                            return 'string'
+                        case ControlType.ComponentInstance:
+                            return 'React.ReactNode'
+                        case ControlType.Array:
+                            // @ts-expect-error
+                            return `${typescriptType(value.control)}[]`
+                        case ControlType.Object:
+                            // @ts-expect-error
+                            return `{${Object.entries(value.controls)
+                                .map(([k, v]) => {
+                                    // @ts-expect-error
+                                    return `${k}: ${typescriptType(v)}`
+                                })
+                                .join(', ')}`
+                        case ControlType.Date:
+                            return 'string | Date'
+                        case ControlType.Link:
+                            return 'string'
+                        case ControlType.ResponsiveImage:
+                            return `{src: string, srcSet?: string, alt?: string}`
+                        case ControlType.FusedNumber:
+                            return 'number'
+                        case ControlType.Transition:
+                            return 'any'
+                        case ControlType.EventHandler:
+                            return 'Function'
+                    }
+                }
+                let name = propCamelCaseJustLikeFramer(value.title || key || '')
+                if (!name) {
+                    return ''
+                }
+                return ` * @property {${typescriptType(value)}} [${name}] - ${value.title || name}`
+            })
+            .filter(Boolean)
+            .join('\n')
+
+        const componentName = componentCamelCase(fileName)
+
+        const defaultPropsJsDoc = [
+            ' * @property {React.ReactNode} [children] - The children components.',
+            ' * @property {Locale} [locale] - The active locale.',
+            ' * @property {React.CSSProperties} [style] - The component styles.',
+            ' * @property {string} [className] - Additional class names for the component.',
+            ' * @property {string} [id] - The component id.',
+            ' * @property {*} [width] - The component width.',
+            ' * @property {*} [height] - The component height.',
+            ' * @property {string} [layoutId] - The layout id.',
+        ].join('\n')
+
+        // Check if component has variant prop
+        const hasVariant = controls && 'variant' in controls
+        const variantType = hasVariant ? (() => {
+            const variantControl = controls.variant
+            if (variantControl?.type === ControlType.Enum) {
+                // @ts-expect-error
+                const options = variantControl.optionTitles || variantControl.options
+                return options.map((x) => `'${x}'`).join(' | ')
+            }
+            return 'string'
+        })() : undefined
+
+        // Generate header comment with type definitions
+        let headerComment = '/**\n'
+        headerComment += ' * @typedef Locale\n'
+        headerComment += ' * A string that represents the locale.\n'
+        headerComment += ' */\n\n'
+        headerComment += '/**\n'
+        headerComment += ' * @typedef Props\n'
+        headerComment += defaultPropsJsDoc
+        if (hasVariant) {
+            headerComment += `\n * @property {${variantType}} [variant] - The component responsive variant; values: ${variantType.replace(/'/g, '')}.`
+        }
+        if (types) {
+            headerComment += '\n' + types
+        }
+        headerComment += '\n */\n\n'
+        headerComment += '/**\n'
+        headerComment += ' * @type {import("unframer").UnframerBreakpoint}\n'
+        headerComment += ' * Represents a responsive breakpoint for unframer.\n'
+        headerComment += ' */\n\n'
+        headerComment += '/**\n'
+        headerComment += ' * @typedef VariantsMap\n'
+        headerComment += ' * Partial record of UnframerBreakpoint to Props.variant, with a mandatory \'base\' key.\n'
+        headerComment += ' * { [key in UnframerBreakpoint]?: Props[\'variant\'] } & { base: Props[\'variant\'] }\n'
+        headerComment += ' */'
+
+        // Generate responsive comment
+        const responsiveComment = `/**\n * Renders ${componentName} for all breakpoints with a variants map. Variant prop is inferred per breakpoint.\n * @function\n * @memberof ${componentName}\n * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props\n * @returns {any}\n */`
+
+        // Generate default export comment
+        const defaultExportComment = `/** @type {${componentName}} */`
+
+        return {
+            headerComment,
+            responsiveComment,
+            defaultExportComment,
+        }
+    } catch (e: any) {
+        logger.error('cannot generate typedoc comments', e.stack)
+        return {
+            headerComment: '',
+            responsiveComment: '',
+            defaultExportComment: '',
+        }
     }
 }
 
