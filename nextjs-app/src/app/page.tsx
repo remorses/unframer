@@ -29,9 +29,9 @@ function Home() {
             // }}
         >
             <div className='bg-black flex flex-col items-center'>
-                <NavigationFramerComponent.Responsive   />
+                <NavigationFramerComponent.Responsive    />
 
-                <SectionHeroFramerComponent.Responsive />
+                <SectionHeroFramerComponent.Responsive  />
 
                 <SectionLogosFramerComponent.Responsive />
                 <SectionHowItWorksFramerComponent.Responsive />

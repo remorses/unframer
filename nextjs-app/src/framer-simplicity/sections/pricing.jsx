@@ -37,7 +37,7 @@ import "../chunks/chunk-N2K3P4T2.js";
 import "../chunks/chunk-D4IPCJGN.js";
 import "../chunks/chunk-BTSBQWPZ.js";
 import "../chunks/chunk-PGXTBGNK.js";
-import { routes } from "../chunks/chunk-PRX3RHWQ.js";
+import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:sections/pricing
 import { Fragment } from "react";
@@ -46,19 +46,25 @@ import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-  base: "BBhLTTA5K",
-  xl: "FM3SqD1tW"
+	base: "BBhLTTA5K",
+	xl: "FM3SqD1tW",
 };
 /** @type {function(Props): any} */
-function ComponentWithRoot({
-  locale,
-  ...rest
-}) {
-  return <ContextProviders routes={routes} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+function ComponentWithRoot({ locale, ...rest }) {
+	return (
+		<ContextProviders
+			routes={routes}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
 			{jsx(stdin_default, {
-      ...rest
-    })}
-		</ContextProviders>;
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 /**
  * Renders PricingFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
@@ -67,13 +73,23 @@ function ComponentWithRoot({
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return <ContextProviders routes={routes} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
-			<WithFramerBreakpoints Component={stdin_default} variants={defaultResponsiveVariants} {...rest} />
-		</ContextProviders>;
+ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+	return (
+		<ContextProviders
+			routes={routes}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
+		</ContextProviders>
+	);
 };
 Object.assign(ComponentWithRoot, stdin_default);
 var pricing_default = ComponentWithRoot;

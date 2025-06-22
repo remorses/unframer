@@ -49,3 +49,7 @@ Never write tests yourself that call prisma or interact with database or emails.
 after a change you have to run `pnpm typecheck` or `pnpm tsc` to make sure the typescript code compiles
 
 To test changes in the framer exporting logic you have to first run `pnpm --filter unframer build`  then try running `pnpm --filter nextjs-app framer-simplicity` to generate the framer components. You can then read contents in the framer-simplicity to make sure they are right. notice these components can be very big.
+
+## logging
+
+notice that the unframer folder uses a logger, when using the .debug method logs are only visible when passing `--debug` to the unframer cli, for example `pnpm --filter nextjs-app framer-simplicity --debug`

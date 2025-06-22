@@ -198,13 +198,13 @@
       ],
       "format": "esm"
     },
-    "virtual:routes": {
+    "virtual:__routes": {
       "bytes": 278,
       "imports": [],
       "format": "esm"
     },
     "virtual:section-testimonials": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -227,9 +227,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -442,7 +442,7 @@
       "format": "esm"
     },
     "virtual:sections/pricing": {
-      "bytes": 2501,
+      "bytes": 2503,
       "imports": [
         {
           "path": "react",
@@ -465,9 +465,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -577,7 +577,7 @@
       "format": "esm"
     },
     "virtual:section-large-testimonial": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -600,9 +600,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -649,7 +649,7 @@
       "format": "esm"
     },
     "virtual:sections/feature": {
-      "bytes": 2480,
+      "bytes": 2482,
       "imports": [
         {
           "path": "react",
@@ -672,9 +672,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -721,7 +721,7 @@
       "format": "esm"
     },
     "virtual:section-logos": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -744,9 +744,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -850,7 +850,7 @@
       "format": "esm"
     },
     "virtual:section-features": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -873,9 +873,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -943,7 +943,7 @@
       "format": "esm"
     },
     "virtual:section-how-it-works": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -966,9 +966,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -979,7 +979,7 @@
       "format": "esm"
     },
     "virtual:sections/features-animation": {
-      "bytes": 2491,
+      "bytes": 2493,
       "imports": [
         {
           "path": "react",
@@ -1002,9 +1002,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1087,7 +1087,7 @@
       "format": "esm"
     },
     "virtual:section-frequently-asked-questions": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1110,9 +1110,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1180,7 +1180,7 @@
       "format": "esm"
     },
     "virtual:section-hero": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1203,9 +1203,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1406,7 +1406,7 @@
       "format": "esm"
     },
     "virtual:blog-articles-collection": {
-      "bytes": 2457,
+      "bytes": 2459,
       "imports": [
         {
           "path": "react",
@@ -1429,9 +1429,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1442,7 +1442,7 @@
       "format": "esm"
     },
     "virtual:sections/features-container": {
-      "bytes": 2501,
+      "bytes": 2503,
       "imports": [
         {
           "path": "react",
@@ -1465,9 +1465,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1597,7 +1597,7 @@
       "format": "esm"
     },
     "virtual:section-footer": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1620,9 +1620,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1764,7 +1764,7 @@
       "format": "esm"
     },
     "virtual:docs-cms-with-filters": {
-      "bytes": 2457,
+      "bytes": 2459,
       "imports": [
         {
           "path": "react",
@@ -1787,9 +1787,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1841,7 +1841,7 @@
       "format": "esm"
     },
     "virtual:section-call-to-action": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1864,9 +1864,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -1918,7 +1918,7 @@
       "format": "esm"
     },
     "virtual:section-pricing": {
-      "bytes": 2522,
+      "bytes": 2524,
       "imports": [
         {
           "path": "react",
@@ -1941,9 +1941,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -2052,7 +2052,7 @@
       "format": "esm"
     },
     "virtual:navigation/navigation": {
-      "bytes": 2501,
+      "bytes": 2503,
       "imports": [
         {
           "path": "react",
@@ -2075,9 +2075,9 @@
           "external": true
         },
         {
-          "path": "virtual:routes",
+          "path": "virtual:__routes",
           "kind": "import-statement",
-          "original": "virtual:routes"
+          "original": "virtual:__routes"
         },
         {
           "path": "react/jsx-runtime",
@@ -2104,7 +2104,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2283,7 +2283,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2383,7 +2383,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2452,7 +2452,7 @@
     "blog-articles-collection.js": {
       "imports": [
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2609,7 +2609,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2663,7 +2663,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2755,7 +2755,7 @@
     "docs-cms-with-filters.js": {
       "imports": [
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -2883,7 +2883,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3001,7 +3001,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3070,7 +3070,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3236,7 +3236,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3419,7 +3419,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3559,7 +3559,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3605,7 +3605,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3724,7 +3724,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -3899,7 +3899,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -4045,7 +4045,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "chunks/chunk-PRX3RHWQ.js",
+          "path": "chunks/chunk-HEB6EHGG.js",
           "kind": "import-statement"
         },
         {
@@ -4113,17 +4113,17 @@
       },
       "bytes": 65123
     },
-    "chunks/chunk-PRX3RHWQ.js": {
+    "chunks/chunk-HEB6EHGG.js": {
       "imports": [],
       "exports": [
         "routes"
       ],
       "inputs": {
-        "virtual:routes": {
+        "virtual:__routes": {
           "bytesInOutput": 270
         }
       },
-      "bytes": 310
+      "bytes": 312
     }
   }
 }

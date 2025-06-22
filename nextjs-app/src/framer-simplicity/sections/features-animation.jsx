@@ -33,7 +33,7 @@
  * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
  */
 import { stdin_default } from "../chunks/chunk-BPH5BCDR.js";
-import { routes } from "../chunks/chunk-PRX3RHWQ.js";
+import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:sections/features-animation
 import { Fragment } from "react";
@@ -42,18 +42,24 @@ import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-  base: "I6854:8695;6765:3116"
+	base: "I6854:8695;6765:3116",
 };
 /** @type {function(Props): any} */
-function ComponentWithRoot({
-  locale,
-  ...rest
-}) {
-  return <ContextProviders routes={routes} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
+function ComponentWithRoot({ locale, ...rest }) {
+	return (
+		<ContextProviders
+			routes={routes}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
 			{jsx(stdin_default, {
-      ...rest
-    })}
-		</ContextProviders>;
+				...rest,
+			})}
+		</ContextProviders>
+	);
 }
 /**
  * Renders FeaturesAnimationFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
@@ -62,13 +68,23 @@ function ComponentWithRoot({
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({
-  locale,
-  ...rest
-}) => {
-  return <ContextProviders routes={routes} framerSiteId={"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"} locale={locale} locales={locales}>
-			<WithFramerBreakpoints Component={stdin_default} variants={defaultResponsiveVariants} {...rest} />
-		</ContextProviders>;
+ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+	return (
+		<ContextProviders
+			routes={routes}
+			framerSiteId={
+				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
+			}
+			locale={locale}
+			locales={locales}
+		>
+			<WithFramerBreakpoints
+				Component={stdin_default}
+				variants={defaultResponsiveVariants}
+				{...rest}
+			/>
+		</ContextProviders>
+	);
 };
 Object.assign(ComponentWithRoot, stdin_default);
 var features_animation_default = ComponentWithRoot;
