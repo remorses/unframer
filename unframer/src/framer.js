@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.22V5YKK5.mjs
+// /:https://app.framerstatic.com/framer.KA7X7LIH.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14012,7 +14012,8 @@ function turnOffReactEventHandling() {
   const options = {
     capture: true,
   };
-  eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
+  const body = document.body;
+  eventsToStop.forEach((event) => body.addEventListener(event, stopFn, options,));
 }
 function TurnOnReactEventHandling() {
   useEffect(() => {
@@ -14020,7 +14021,8 @@ function TurnOnReactEventHandling() {
     const options = {
       capture: true,
     };
-    eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
+    const body = document.body;
+    eventsToStop.forEach((event) => body.removeEventListener(event, stopFn, options,));
     eventsToStop = void 0;
     performance.mark('framer-react-event-handling-end',);
   }, [],);
@@ -28478,32 +28480,34 @@ var Frame = /* @__PURE__ */ (() => {
 })();
 var Draggable = /* @__PURE__ */ WithDragging(DeprecatedFrameWithEvents,);
 function useInfiniteScroll({
-  ref: elementRef,
+  ref: observerRef,
   loadMore,
   rootMargin = '0px',
-  threshold,
   paginationInfo,
 },) {
-  const callback = React4.useCallback((entries) => {
-    for (let i = 0; i < entries.length; ++i) {
-      const entry = entries[i];
-      if (entry.isIntersecting) {
-        loadMore();
-        return;
-      }
+  const isVisibleRef = useRef3(false,);
+  const callback = React4.useCallback((entry) => {
+    if (!entry.isIntersecting) {
+      isVisibleRef.current = false;
+      return;
     }
+    isVisibleRef.current = true;
+    loadMore();
+    return;
   }, [loadMore,],);
-  React4.useEffect(() => {
-    if (!elementRef.current) return;
-    const observer2 = new IntersectionObserver(callback, {
-      rootMargin,
-      threshold,
+  useEffect(() => {
+    frame.postRender(() => {
+      frame.render(() => {
+        if (isVisibleRef.current) {
+          loadMore();
+        }
+      },);
     },);
-    observer2.observe(elementRef.current,);
-    return () => {
-      observer2.disconnect();
-    };
-  }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
+  }, [paginationInfo.currentPage, loadMore,],);
+  useSharedIntersectionObserver(observerRef, callback, {
+    rootMargin,
+    enabled: paginationInfo.currentPage < paginationInfo.totalPages,
+  },);
 }
 function withInfiniteScroll(Component17,) {
   return React4.forwardRef(({
@@ -28511,8 +28515,7 @@ function withInfiniteScroll(Component17,) {
     __loadMore,
     ...props
   }, ref,) => {
-    const backupRef = React4.useRef(null,);
-    const infiniteScrollRef = ref ?? backupRef;
+    const infiniteScrollRef = useObserverRef(ref,);
     useInfiniteScroll({
       rootMargin: '500px',
       loadMore: __loadMore,
@@ -42352,6 +42355,7 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       ? void 0
       : _d.currentPage) ?? 1,
   );
+  const currentPageRef = useRef3(currentPage,);
   const paginationInfo = useMemo2(() => {
     return {
       currentPage,
@@ -42365,19 +42369,24 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
   const onCanvas = useIsOnFramerCanvas();
   const loadMore = useCallback(async () => {
     if (onCanvas) return;
-    if (currentPage >= totalPages) return;
+    if (currentPageRef.current >= totalPages) return;
     await yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
     },);
+    if (currentPageRef.current >= totalPages) return;
     const renderNextPage = (startTransition14) => {
       startTransition14(() => {
-        setCurrentPage((_currentPage) => Math.min(_currentPage + 1, totalPages,));
+        setCurrentPage((_currentPage) => {
+          const nextPage = Math.min(_currentPage + 1, totalPages,);
+          currentPageRef.current = nextPage;
+          return nextPage;
+        },);
       },);
     };
     if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
     return renderNextPage(startLoadingTransition,);
-  }, [currentPage, totalPages, paginateWithSuspendedLoadingState,],);
+  }, [totalPages, paginateWithSuspendedLoadingState,],);
   return {
     paginationInfo,
     loadMore,
