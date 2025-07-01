@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.MZELLCOR.mjs
+// /:https://app.framerstatic.com/framer.XBEXBSA4.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14680,7 +14680,10 @@ async function insertHTML(html, referenceNode, position = 'beforeend',) {
 async function pump(sourceNode, targetParent, beforeNode,) {
   for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
     if (node instanceof HTMLScriptElement) {
-      await handleScript(node, targetParent, beforeNode,);
+      const needsWait = handleScript(node, targetParent, beforeNode,);
+      if (needsWait !== void 0) {
+        await needsWait;
+      }
       continue;
     }
     const clone = node.cloneNode(false,);
@@ -14690,23 +14693,26 @@ async function pump(sourceNode, targetParent, beforeNode,) {
     }
   }
 }
-async function handleScript(node, parent, beforeNode,) {
+function handleScript(node, parent, beforeNode,) {
   var _a;
   const script = node.cloneNode(true,);
-  const isExternal = script.hasAttribute('src',);
-  const isAsync = script.hasAttribute('async',);
-  const isDefer = script.hasAttribute('defer',);
-  const isModule = ((_a = script.getAttribute('type',)) == null ? void 0 : _a.toLowerCase()) === 'module';
-  if (!isExternal || isAsync || isDefer || isModule) {
+  if (
+    !node.hasAttribute('src',) ||
+    // external
+    node.hasAttribute('async',) ||
+    // async
+    node.hasAttribute('defer',) ||
+    // defer
+    ((_a = node.getAttribute('type',)) == null ? void 0 : _a.toLowerCase()) === 'module'
+  ) {
     parent.insertBefore(script, beforeNode,);
   } else {
-    await execExternalBlockingScript(script, parent, beforeNode,);
+    return execExternalBlockingScript(script, parent, beforeNode,);
   }
 }
 function execExternalBlockingScript(script, parent, beforeNode,) {
   return new Promise((resolve) => {
-    script.onload = () => resolve();
-    script.onerror = () => resolve();
+    script.onload = script.onerror = resolve;
     parent.insertBefore(script, beforeNode,);
   },);
 }
@@ -35643,41 +35649,88 @@ var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
 var maxTime = 1e4;
+function createWorkerTask() {
+  return function () {
+    async function sha256(text,) {
+      const buffer = new TextEncoder().encode(text,);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
+      return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
+    }
+    function randomCharacters(count,) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      const charactersLength = characters.length;
+      for (let i = 0; i < count; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
+      }
+      return result;
+    }
+    addEventListener('message', async (event) => {
+      const {
+        salt: salt2,
+        difficulty: difficulty2,
+        tokenLength: tokenLength2,
+        maxTime: maxTime2,
+      } = event.data;
+      const target = '0'.repeat(difficulty2,);
+      const startTime = performance.now();
+      let processing = true;
+      while (processing) {
+        const timestamp = performance.now();
+        if (timestamp - startTime > maxTime2) {
+          processing = false;
+          postMessage({
+            success: false,
+          },);
+          return;
+        }
+        const nonce = randomCharacters(tokenLength2,);
+        const secret = `${Date.now()}:${nonce}`;
+        const hash2 = await sha256(salt2 + secret,);
+        if (hash2.startsWith(target,)) {
+          postMessage({
+            success: true,
+            secret,
+            hash: hash2,
+          },);
+          return;
+        }
+      }
+    },);
+  }.toString();
+}
 async function calculateProofOfWork() {
-  const target = '0'.repeat(difficulty,);
-  const startTime = Date.now();
-  let processing = true;
-  while (processing) {
-    const timestamp = Date.now();
-    if (timestamp - startTime > maxTime) {
-      processing = false;
-      return;
-    }
-    const nonce = randomCharacters(tokenLength,);
-    const secret = `${timestamp}:${nonce}`;
-    const hash2 = await sha256(salt + secret,);
-    if (hash2.startsWith(target,)) {
-      return {
-        secret,
-        hash: hash2,
-      };
-    }
-  }
-  return;
-}
-async function sha256(text,) {
-  const buffer = new TextEncoder().encode(text,);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
-  return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
-}
-function randomCharacters(count,) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < count; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
-  }
-  return result;
+  return new Promise((resolve, reject,) => {
+    const webWorkerURL = URL.createObjectURL(
+      new Blob(['(', createWorkerTask(), ')()',], {
+        type: 'application/javascript',
+      },),
+    );
+    const worker = new Worker(webWorkerURL,);
+    worker.onmessage = (event) => {
+      worker.terminate();
+      URL.revokeObjectURL(webWorkerURL,);
+      if (event.data.success) {
+        resolve({
+          secret: event.data.secret,
+          hash: event.data.hash,
+        },);
+      } else {
+        resolve(void 0,);
+      }
+    };
+    worker.onerror = (event) => {
+      worker.terminate();
+      URL.revokeObjectURL(webWorkerURL,);
+      reject(event,);
+    };
+    worker.postMessage({
+      salt,
+      difficulty,
+      tokenLength,
+      maxTime,
+    },);
+  },);
 }
 function getEncodedFormFieldsHeader(data2,) {
   return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
