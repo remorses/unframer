@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.XBEXBSA4.mjs
+// /:https://app.framerstatic.com/framer.LCXU4FED.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -49566,8 +49566,8 @@ var package_default = {
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.32.1',
-    '@typescript-eslint/parser': '^8.32.1',
+    '@typescript-eslint/eslint-plugin': '^8.35.0',
+    '@typescript-eslint/parser': '^8.35.0',
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
