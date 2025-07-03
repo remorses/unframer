@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.22V5YKK5.mjs
+// /:https://app.framerstatic.com/framer.LCXU4FED.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14012,7 +14012,8 @@ function turnOffReactEventHandling() {
   const options = {
     capture: true,
   };
-  eventsToStop.forEach((event) => document.body.addEventListener(event, stopFn, options,));
+  const body = document.body;
+  eventsToStop.forEach((event) => body.addEventListener(event, stopFn, options,));
 }
 function TurnOnReactEventHandling() {
   useEffect(() => {
@@ -14020,7 +14021,8 @@ function TurnOnReactEventHandling() {
     const options = {
       capture: true,
     };
-    eventsToStop.forEach((event) => document.body.removeEventListener(event, stopFn, options,));
+    const body = document.body;
+    eventsToStop.forEach((event) => body.removeEventListener(event, stopFn, options,));
     eventsToStop = void 0;
     performance.mark('framer-react-event-handling-end',);
   }, [],);
@@ -14678,7 +14680,10 @@ async function insertHTML(html, referenceNode, position = 'beforeend',) {
 async function pump(sourceNode, targetParent, beforeNode,) {
   for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
     if (node instanceof HTMLScriptElement) {
-      await handleScript(node, targetParent, beforeNode,);
+      const needsWait = handleScript(node, targetParent, beforeNode,);
+      if (needsWait !== void 0) {
+        await needsWait;
+      }
       continue;
     }
     const clone = node.cloneNode(false,);
@@ -14688,23 +14693,26 @@ async function pump(sourceNode, targetParent, beforeNode,) {
     }
   }
 }
-async function handleScript(node, parent, beforeNode,) {
+function handleScript(node, parent, beforeNode,) {
   var _a;
   const script = node.cloneNode(true,);
-  const isExternal = script.hasAttribute('src',);
-  const isAsync = script.hasAttribute('async',);
-  const isDefer = script.hasAttribute('defer',);
-  const isModule = ((_a = script.getAttribute('type',)) == null ? void 0 : _a.toLowerCase()) === 'module';
-  if (!isExternal || isAsync || isDefer || isModule) {
+  if (
+    !node.hasAttribute('src',) ||
+    // external
+    node.hasAttribute('async',) ||
+    // async
+    node.hasAttribute('defer',) ||
+    // defer
+    ((_a = node.getAttribute('type',)) == null ? void 0 : _a.toLowerCase()) === 'module'
+  ) {
     parent.insertBefore(script, beforeNode,);
   } else {
-    await execExternalBlockingScript(script, parent, beforeNode,);
+    return execExternalBlockingScript(script, parent, beforeNode,);
   }
 }
 function execExternalBlockingScript(script, parent, beforeNode,) {
   return new Promise((resolve) => {
-    script.onload = () => resolve();
-    script.onerror = () => resolve();
+    script.onload = script.onerror = resolve;
     parent.insertBefore(script, beforeNode,);
   },);
 }
@@ -20492,14 +20500,21 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
+            cursor: var(--framer-custom-cursors, pointer);
+        }
+    `,
+  // Text decoration can't be applied to the nested spans of links because it breaks animations
+  /* css */
+  `
+        a.framer-text,
+        span.framer-text[data-nested-link] {
             text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
             text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
             text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
             text-decoration-thickness: var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
             text-decoration-skip-ink: var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
             text-underline-offset: var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
-            /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
-            cursor: var(--framer-custom-cursors, pointer);
         }
     `, /* css */
   `
@@ -20554,6 +20569,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+        }
+    `, /* css */
+  `
+        a.framer-text:hover,
+        span.framer-text[data-nested-link]:hover {
             text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
             text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
             text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
@@ -20619,6 +20639,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+        }
+    `, /* css */
+  `
+        a.framer-text[data-framer-page-link-current],
+        span.framer-text[data-framer-page-link-current] {
             text-decoration-line: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
             text-decoration-style: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
             text-decoration-color: var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
@@ -20679,6 +20704,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+        }
+    `, /* css */
+  `
+        a.framer-text[data-framer-page-link-current]:hover,
+        span.framer-text[data-framer-page-link-current]:hover {
             text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
             text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
             text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
@@ -28478,32 +28508,34 @@ var Frame = /* @__PURE__ */ (() => {
 })();
 var Draggable = /* @__PURE__ */ WithDragging(DeprecatedFrameWithEvents,);
 function useInfiniteScroll({
-  ref: elementRef,
+  ref: observerRef,
   loadMore,
   rootMargin = '0px',
-  threshold,
   paginationInfo,
 },) {
-  const callback = React4.useCallback((entries) => {
-    for (let i = 0; i < entries.length; ++i) {
-      const entry = entries[i];
-      if (entry.isIntersecting) {
-        loadMore();
-        return;
-      }
+  const isVisibleRef = useRef3(false,);
+  const callback = React4.useCallback((entry) => {
+    if (!entry.isIntersecting) {
+      isVisibleRef.current = false;
+      return;
     }
+    isVisibleRef.current = true;
+    loadMore();
+    return;
   }, [loadMore,],);
-  React4.useEffect(() => {
-    if (!elementRef.current) return;
-    const observer2 = new IntersectionObserver(callback, {
-      rootMargin,
-      threshold,
+  useEffect(() => {
+    frame.postRender(() => {
+      frame.render(() => {
+        if (isVisibleRef.current) {
+          loadMore();
+        }
+      },);
     },);
-    observer2.observe(elementRef.current,);
-    return () => {
-      observer2.disconnect();
-    };
-  }, [elementRef, callback, rootMargin, threshold, paginationInfo.currentPage,],);
+  }, [paginationInfo.currentPage, loadMore,],);
+  useSharedIntersectionObserver(observerRef, callback, {
+    rootMargin,
+    enabled: paginationInfo.currentPage < paginationInfo.totalPages,
+  },);
 }
 function withInfiniteScroll(Component17,) {
   return React4.forwardRef(({
@@ -28511,8 +28543,7 @@ function withInfiniteScroll(Component17,) {
     __loadMore,
     ...props
   }, ref,) => {
-    const backupRef = React4.useRef(null,);
-    const infiniteScrollRef = ref ?? backupRef;
+    const infiniteScrollRef = useObserverRef(ref,);
     useInfiniteScroll({
       rootMargin: '500px',
       loadMore: __loadMore,
@@ -35618,41 +35649,88 @@ var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
 var maxTime = 1e4;
+function createWorkerTask() {
+  return function () {
+    async function sha256(text,) {
+      const buffer = new TextEncoder().encode(text,);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
+      return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
+    }
+    function randomCharacters(count,) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      const charactersLength = characters.length;
+      for (let i = 0; i < count; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
+      }
+      return result;
+    }
+    addEventListener('message', async (event) => {
+      const {
+        salt: salt2,
+        difficulty: difficulty2,
+        tokenLength: tokenLength2,
+        maxTime: maxTime2,
+      } = event.data;
+      const target = '0'.repeat(difficulty2,);
+      const startTime = performance.now();
+      let processing = true;
+      while (processing) {
+        const timestamp = performance.now();
+        if (timestamp - startTime > maxTime2) {
+          processing = false;
+          postMessage({
+            success: false,
+          },);
+          return;
+        }
+        const nonce = randomCharacters(tokenLength2,);
+        const secret = `${Date.now()}:${nonce}`;
+        const hash2 = await sha256(salt2 + secret,);
+        if (hash2.startsWith(target,)) {
+          postMessage({
+            success: true,
+            secret,
+            hash: hash2,
+          },);
+          return;
+        }
+      }
+    },);
+  }.toString();
+}
 async function calculateProofOfWork() {
-  const target = '0'.repeat(difficulty,);
-  const startTime = Date.now();
-  let processing = true;
-  while (processing) {
-    const timestamp = Date.now();
-    if (timestamp - startTime > maxTime) {
-      processing = false;
-      return;
-    }
-    const nonce = randomCharacters(tokenLength,);
-    const secret = `${timestamp}:${nonce}`;
-    const hash2 = await sha256(salt + secret,);
-    if (hash2.startsWith(target,)) {
-      return {
-        secret,
-        hash: hash2,
-      };
-    }
-  }
-  return;
-}
-async function sha256(text,) {
-  const buffer = new TextEncoder().encode(text,);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
-  return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
-}
-function randomCharacters(count,) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < count; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength,),);
-  }
-  return result;
+  return new Promise((resolve, reject,) => {
+    const webWorkerURL = URL.createObjectURL(
+      new Blob(['(', createWorkerTask(), ')()',], {
+        type: 'application/javascript',
+      },),
+    );
+    const worker = new Worker(webWorkerURL,);
+    worker.onmessage = (event) => {
+      worker.terminate();
+      URL.revokeObjectURL(webWorkerURL,);
+      if (event.data.success) {
+        resolve({
+          secret: event.data.secret,
+          hash: event.data.hash,
+        },);
+      } else {
+        resolve(void 0,);
+      }
+    };
+    worker.onerror = (event) => {
+      worker.terminate();
+      URL.revokeObjectURL(webWorkerURL,);
+      reject(event,);
+    };
+    worker.postMessage({
+      salt,
+      difficulty,
+      tokenLength,
+      maxTime,
+    },);
+  },);
 }
 function getEncodedFormFieldsHeader(data2,) {
   return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
@@ -42352,6 +42430,7 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       ? void 0
       : _d.currentPage) ?? 1,
   );
+  const currentPageRef = useRef3(currentPage,);
   const paginationInfo = useMemo2(() => {
     return {
       currentPage,
@@ -42365,19 +42444,24 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
   const onCanvas = useIsOnFramerCanvas();
   const loadMore = useCallback(async () => {
     if (onCanvas) return;
-    if (currentPage >= totalPages) return;
+    if (currentPageRef.current >= totalPages) return;
     await yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
     },);
+    if (currentPageRef.current >= totalPages) return;
     const renderNextPage = (startTransition14) => {
       startTransition14(() => {
-        setCurrentPage((_currentPage) => Math.min(_currentPage + 1, totalPages,));
+        setCurrentPage((_currentPage) => {
+          const nextPage = Math.min(_currentPage + 1, totalPages,);
+          currentPageRef.current = nextPage;
+          return nextPage;
+        },);
       },);
     };
     if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
     return renderNextPage(startLoadingTransition,);
-  }, [currentPage, totalPages, paginateWithSuspendedLoadingState,],);
+  }, [totalPages, paginateWithSuspendedLoadingState,],);
   return {
     paginationInfo,
     loadMore,
@@ -49482,8 +49566,8 @@ var package_default = {
     '@types/react': '^18.2.67',
     '@types/react-dom': '^18.2.22',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.32.1',
-    '@typescript-eslint/parser': '^8.32.1',
+    '@typescript-eslint/eslint-plugin': '^8.35.0',
+    '@typescript-eslint/parser': '^8.35.0',
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
