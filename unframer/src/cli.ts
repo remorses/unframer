@@ -172,7 +172,8 @@ function fixOldUnframerPath() {
     }
     return false
 }
-const version = require('../package.json').version
+import pkg from '../package.json'
+const version = pkg.version
 
 cli.version(version).help()
 

@@ -1169,7 +1169,6 @@ export function propControlsToTypedocComments({
             ' * @property {string} [layoutId] - The layout id.',
         ].join('\n')
 
-
         // Generate header comment with type definitions
         let headerComment = '/**\n'
         headerComment += ' * @typedef Locale\n'
@@ -1423,7 +1422,7 @@ async function recursiveReaddir(dir: string): Promise<string[]> {
     return files.flat()
 }
 
-function indentWithTabs(str: string, tabs: string) {
+export function indentWithTabs(str: string, tabs: string) {
     if (!str) return ''
     return str
         .split('\n')
@@ -1492,6 +1491,7 @@ export async function createExampleComponentCode({
       };
       `
     return {
+        outDirForExample,
         exampleCode,
     }
 }

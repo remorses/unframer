@@ -63,7 +63,7 @@
         "nanospinner": "^1.2.2",
         "picocolors": "^1.1.1",
         "real-framer-motion": "npm:framer-motion@^12.16.0",
-        "spiceflow": "^1.10.1",
+        "spiceflow": "^1.13.2",
         "string-dedent": "^3.0.1",
         "undici": "^7.10.0"
     },
