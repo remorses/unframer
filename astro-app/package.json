@@ -11,7 +11,7 @@
     "dependencies": {
         "@astrojs/react": "^4.2.3",
         "@astrojs/tailwind": "^5.1.5",
-        "@types/react": "^19.1.1",
+        "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.2",
         "astro": "^5.1.10",
         "nextjs-app": "workspace:*",

@@ -288,7 +288,11 @@ export async function configFromFetch({
                 const componentPathSlug = componentNameToPath(
                     component?.name || '',
                 )
-                const res: ComponentInstanceInPage = { ...x, componentPathSlug }
+                const res: ComponentInstanceInPage = {
+                    ...x,
+                    controls: x.controls as any,
+                    componentPathSlug,
+                }
                 return res
             })
             .sort((a, b) => {
