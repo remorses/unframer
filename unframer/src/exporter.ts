@@ -494,17 +494,7 @@ export async function bundle({
         if (watch) {
             logger.log('waiting for components or config changes')
         }
-        if (!tokens?.length) {
-            const tokensCss =
-                "/* This css file contains your color variables, sometimes these get desynced when updated in Framer so it's good that you copy and paste this snippet into your app css */\n" +
-                '/* Bug: https://www.framer.community/c/bugs/color-style-unlinks-when-copying-component-between-projects-resulting-in-potential-value-discrepancy */\n' +
-                getTokensCss({ out, result: buildResult })
-            await fs.promises.writeFile(
-                path.resolve(out, 'tokens.css'),
-                tokensCss,
-                'utf-8',
-            )
-        }
+
         const res: BundleResult = {
             components: Object.entries(components).map(([name, v]) => {
                 const propControls = propControlsData.find(
@@ -893,7 +883,7 @@ async function extractPropControlsSafe(text, name) {
     }
 }
 
-function getTokensCss({
+async function getTokensCss({
     out,
     result,
 }: {

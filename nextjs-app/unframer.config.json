@@ -2,6 +2,8 @@
     "$schema": "https://unframer-schema.vercel.app/schema.json",
     "outDir": "src/framer",
     "breakpoints": { "sm": 300, "md": 760 },
+    "jsx": true,
+    "external": true,
     "components": {
         "fylo": "https://framer.com/m/FYLO-COMPOSITION-5nyv.js@SvdQ0E7jGkV2jj2lbCzd",
         "hero": "https://framer.com/m/Header-WtSW.js",
