@@ -4,7 +4,7 @@
 
 ### Major Changes
 
-- Set --jsx to true by default, output files will be converted to jsx
+- Set `--jsx` to true by default, output files will be converted to jsx
 - Remove the need for `.d.ts` files
 - Set `--external` by default, npm packages will be installed locally if you have a local `package.json` file and a package manager
 - Run formatter on the output files
