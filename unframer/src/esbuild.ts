@@ -6,7 +6,7 @@ import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
 import { notifyError } from './sentry'
 import { dispatcher } from './undici-dispatcher'
-import { installPackage } from './package-manager.js'
+
 
 export const defaultExternalPackages = [
     'react',
