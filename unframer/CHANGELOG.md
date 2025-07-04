@@ -1,5 +1,20 @@
 # unframer
 
+## 3.0.0
+
+### Major Changes
+
+- Set --jsx to true by default, output files will be converted to jsx
+- Remove the need for `.d.ts` files
+- Set `--external` by default, npm packages will be installed locally if you have a local `package.json` file and a package manager
+- Run formatter on the output files
+- React 19 is now required
+- Preconnect hints for common Framer CDN urls
+
+### Patch Changes
+
+- d85817c: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+
 ## 2.27.2
 
 ### Patch Changes
