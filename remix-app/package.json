@@ -7,7 +7,7 @@
         "build": "pnpm --filter unframer build && pnpm remix vite:build",
         "dev": "remix vite:dev",
         "framer-test-canvas-pages": "pnpm unframer 1a22b140dd1bd637 --jsx --outDir framer-canvas-pages",
-        "framer-intl": "pnpm unframer f667fc580d8d9346 --jsx --outDir framer-intl --watch",
+        "framer-intl": "pnpm unframer f667fc580d8d9346 --outDir framer-intl --watch",
         "workbase": "pnpm unframer 71fd72204da79e7e --jsx --external --outDir workbase-bugs",
         "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
         "start": "PORT=5173 remix-serve ./build/server/index.js"

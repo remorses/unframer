@@ -15,6 +15,7 @@
  * style?: React.CSSProperties
  * className?: string
  * id?: string
+ * ref?: any
  * width?: any
  * height?: any
  * layoutId?: string
