@@ -5,7 +5,7 @@
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
-        "build": "rm -rf dist && pnpm concurrently \"pnpm tsc -m esnext --moduleResolution node --outDir esm\" \"pnpm tsc\" && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
+        "build": "rm -rf dist && pnpm concurrently \"pnpm tsc -m esnext --moduleResolution node --outDir esm\" \"pnpm tsc\" && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts && rm ./esm/framer.*.map ./dist/framer.*.map",
         "test": "vitest",
         "prepublishOnly": "pnpm tsx scripts/version-replace.ts && pnpm build",
         "download-framer": "tsx scripts/download.ts",
