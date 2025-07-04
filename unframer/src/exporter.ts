@@ -678,8 +678,11 @@ export async function bundle({
     console.log()
     console.log()
     const outDirForExample =
-        path.posix.relative(process.cwd(), out).replace(/^src\//, '') ||
-        'framer' // remove src so file works inside src
+        path
+            .relative(process.cwd(), out)
+            .split(path.sep)
+            .join('/')
+            .replace(/^src\//, '') || 'framer' // remove src so file works inside src
     const { exampleCode } = await createExampleComponentCode({
         outDir: out,
         // buildResult: result,
@@ -696,11 +699,7 @@ export async function bundle({
         terminalMarkdown(dedent`
     # How to use the Framer components
 
-    Your components are exported to \`${outDirForExample}\` folder. Now please install the \`unframer\` runtime dependency:
-
-    \`\`\`sh
-    npm install unframer
-    \`\`\`
+    Your components are exported to \`${outDirForExample}\` folder.
 
     Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
 
@@ -1149,14 +1148,14 @@ export function propControlsToTypedocComments({
         const componentName = componentCamelCase(fileName)
 
         const defaultPropsJsDoc = [
-          ' * @property {React.ReactNode=}     children   - The children components.',
-          ' * @property {Locale=}              locale     - The active locale.',
-          ' * @property {React.CSSProperties=} style      - Component styles.',
-          ' * @property {string=}               className - Additional class names.',
-          ' * @property {string=}               id        - Component id.',
-          ' * @property {*=}                    width     - Component width.',
-          ' * @property {*=}                    height    - Component height.',
-          ' * @property {string=}               layoutId  - Layout id.',
+            ' * @property {React.ReactNode=}     children   - The children components.',
+            ' * @property {Locale=}              locale     - The active locale.',
+            ' * @property {React.CSSProperties=} style      - Component styles.',
+            ' * @property {string=}               className - Additional class names.',
+            ' * @property {string=}               id        - Component id.',
+            ' * @property {*=}                    width     - Component width.',
+            ' * @property {*=}                    height    - Component height.',
+            ' * @property {string=}               layoutId  - Layout id.',
         ].join('\n')
 
         // Generate header comment with type definitions

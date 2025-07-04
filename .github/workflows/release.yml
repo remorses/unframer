@@ -40,7 +40,7 @@ jobs:
             - run: pnpm i --frozen-lockfile false
             - run: pnpm --filter unframer build && pnpm unframer && pnpm framer-simplicity && pnpm framer-unchatgpt
               working-directory: nextjs-app
-            - run: pnpm build
+            - run: npx --yes tree-node-cli -I node_modules && pnpm build
               working-directory: nextjs-app
             # - name: Create Release Pull Request or Publish to npm
             #   id: changesets
