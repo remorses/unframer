@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.LCXU4FED.mjs
+// /:https://app.framerstatic.com/framer.6HDYDFRL.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -32225,18 +32225,20 @@ function useParallax(options, ref, visibilityStyle,) {
   const parallaxY = useTransform(scrollY, transform2,);
   const visibility = useMotionValue(adjustPosition && originalPosition.current === null ? 'hidden' : visibilityStyle,);
   const defaultValue = useMotionValue(0,);
+  const observers2 = useContext(SharedIntersectionObserverContext,);
   useRefEffect(ref, (element) => {
     if (element === null || !parallaxTransformEnabled) return;
-    frame.read(() => {
-      var _a;
-      originalPosition.current = ((_a = element.getBoundingClientRect()) == null ? void 0 : _a.top) ?? 0;
+    const unobserve = observeElement(observers2, 'undefined', element, null, (entry) => {
+      originalPosition.current = entry.boundingClientRect.top;
+      frame.update(() => {
+        parallaxY.set(transform2(scrollY.get(),),);
+        if (adjustPosition) {
+          visibility.set(visibilityStyle ?? 'initial',);
+        }
+      },);
+      unobserve();
     },);
-    frame.update(() => {
-      parallaxY.set(transform2(scrollY.get(),),);
-      if (adjustPosition) {
-        visibility.set(visibilityStyle ?? 'initial',);
-      }
-    },);
+    return unobserve;
   }, [adjustPosition, parallaxTransformEnabled,],);
   useOnRouteChange(() => {
     if (!parallaxTransformEnabled) return;
@@ -32461,7 +32463,7 @@ function useScrollDirectionChange(scrollDirection, cb, options = {},) {
     let directionChangeOffset = 0;
     let lastDirection = void 0;
     let currentTarget = void 0;
-    return scrollInfo(({
+    return scroll((_2, {
       y: scrollY,
     },) => {
       if (!repeat && currentTarget === target) return;
@@ -32623,7 +32625,7 @@ function useStyleAppearEffect(options, ref,) {
     playState.current.scheduledAppearState = void 0;
     playState.current.lastAppearState = appears;
     if (lastAppearState === appears) return;
-    runAnimation(appears ? variants.animate : variants.exit, appears,);
+    void runAnimation(appears ? variants.animate : variants.exit, appears,);
   }, {
     enabled: animateWithIntersectionObserver,
     animateOnce: !!options.animateOnce,
@@ -32639,7 +32641,7 @@ function useStyleAppearEffect(options, ref,) {
     };
     const _ = currentRouteKey;
     let lastVariant = 'initial';
-    return scrollInfo(({
+    return scroll((_2, {
       y: scrollY,
     },) => {
       const {
@@ -32659,10 +32661,10 @@ function useStyleAppearEffect(options, ref,) {
       lastVariant = variant;
       const variantAnimation = asRecord(variants,)[variant];
       if (!variantAnimation) return;
-      runAnimation(variantAnimation,);
+      void runAnimation(variantAnimation,);
     },);
   }, [currentRouteKey, animateWithScrollInfo,],);
-  useScrollDirectionChange(options.scrollDirection, (target) => runAnimation(target ?? variants.animate,), {
+  useScrollDirectionChange(options.scrollDirection, (target) => void runAnimation(target ?? variants.animate,), {
     enabled,
     repeat: !options.animateOnce,
   },);
@@ -32785,7 +32787,7 @@ function useStyleTransform({
   const currentRouteKey = useCurrentRouteKey();
   useLayoutEffect(() => {
     if (effectDisabled || !triggerOnScroll) return;
-    return scrollInfo(({
+    return scroll((_, {
       y: scrollY,
     },) => {
       if (!transformTargets[0] || transformTargets[0].ref && !transformTargets[0].ref.current) {
@@ -32810,8 +32812,8 @@ function useStyleTransform({
     }
     const _ = currentRouteKey;
     const outputRange = createPageOutputRange(transformTargets,);
-    return scrollInfo(
-      ({
+    return scroll(
+      (_2, {
         y: scrollY,
       },) => {
         for (const key7 of effectValuesKeys) {
@@ -33159,9 +33161,17 @@ function Suspend() {
   throw suspendPromise;
 }
 var suspend = /* @__PURE__ */ jsx3(Suspend, {},);
+var DisableSuspenseSuspenseThatPreservesDomContext = createContext(false,);
+DisableSuspenseSuspenseThatPreservesDomContext.displayName = 'DisableSuspenseSuspenseThatPreservesDomContext';
 function SuspenseThatPreservesDom({
   children,
 },) {
+  const isSuspenseBoundaryDisabled = useContext(DisableSuspenseSuspenseThatPreservesDomContext,);
+  if (isSuspenseBoundaryDisabled) {
+    return /* @__PURE__ */ jsx3(Fragment, {
+      children,
+    },);
+  }
   return /* @__PURE__ */ jsx3(Suspense2, {
     fallback: suspend,
     children,
@@ -43117,7 +43127,7 @@ var withVariantAppearEffect = (Component17) =>
       if (!targets) return;
       const playedState = {};
       let currentVariant = void 0;
-      return scrollInfo(({
+      return scroll((_, {
         y: scrollY,
       },) => {
         var _a;
