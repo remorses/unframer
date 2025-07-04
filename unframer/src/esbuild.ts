@@ -98,11 +98,11 @@ export function esbuildPluginBundleDependencies({
                     )
                 ) {
                     const pkg = getPackageName(args.path)
-                    const installedVersion = await resolvePackage({
+                    const installed = await resolvePackage({
                         cwd: outDir,
                         pkg,
                     }).catch(() => '')
-                    if (!installedVersion) {
+                    if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
                             spinner.info(`Missing package detected: ${pkg}`)
                             reportedMissingPackages.add(pkg)
@@ -126,11 +126,11 @@ export function esbuildPluginBundleDependencies({
                 }
                 if (externalizeNpm) {
                     const pkg = getPackageName(args.path)
-                    const installedVersion = await resolvePackage({
+                    const installed = await resolvePackage({
                         cwd: outDir,
                         pkg,
                     }).catch(() => '')
-                    if (!installedVersion) {
+                    if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
                             spinner.info(`Missing package detected: ${pkg}`)
                             reportedMissingPackages.add(pkg)

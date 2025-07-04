@@ -106,7 +106,7 @@ export async function bundle({
     const missingPackages = new Set<string>()
 
     try {
-        const installedVersion = await resolvePackage({
+        const installedVersion = await resolvePackageVersion({
             cwd: out,
             pkg: 'unframer',
         })
@@ -723,7 +723,7 @@ export async function bundle({
 
 const packageVersionCache = new Map<string, string>()
 
-export function resolvePackage({ cwd, pkg }) {
+export function resolvePackageVersion({ cwd, pkg }) {
     if (packageVersionCache.has(pkg)) {
         return Promise.resolve(packageVersionCache.get(pkg))
     }
@@ -751,6 +751,33 @@ export function resolvePackage({ cwd, pkg }) {
                 const version = stdout.trim()
                 packageVersionCache.set(pkg, version)
                 resolve(version)
+            },
+        )
+    })
+}
+
+export function resolvePackage({ cwd, pkg }) {
+    return new Promise<boolean>((resolve, reject) => {
+        const code = `import('${pkg}').then(() => console.log('true')).catch(() => console.log('false'));`
+
+        const command = [
+            JSON.stringify(nodePath),
+            '-e',
+            JSON.stringify(code),
+        ].join(' ')
+
+        exec(
+            command,
+            {
+                cwd,
+            },
+            (error, stdout, stderr) => {
+                if (error) {
+                    resolve(false)
+                    return
+                }
+                const exists = stdout.trim() === 'true'
+                resolve(exists)
             },
         )
     })
@@ -1148,14 +1175,14 @@ export function propControlsToTypedocComments({
         const componentName = componentCamelCase(fileName)
 
         const defaultPropsJsDoc = [
-            ' * @property {React.ReactNode=}     children   - The children components.',
-            ' * @property {Locale=}              locale     - The active locale.',
-            ' * @property {React.CSSProperties=} style      - Component styles.',
-            ' * @property {string=}               className - Additional class names.',
-            ' * @property {string=}               id        - Component id.',
-            ' * @property {*=}                    width     - Component width.',
-            ' * @property {*=}                    height    - Component height.',
-            ' * @property {string=}               layoutId  - Layout id.',
+          ' * @property {React.ReactNode=} children - The children components.',
+          ' * @property {Locale=} locale - The active locale.',
+          ' * @property {React.CSSProperties=} style - Component styles.',
+          ' * @property {string=} className - Additional class names.',
+          ' * @property {string=} id - Component id.',
+          ' * @property {*=} width - Component width.',
+          ' * @property {*=} height - Component height.',
+          ' * @property {string=} layoutId - Layout id.',
         ].join('\n')
 
         // Generate header comment with type definitions
