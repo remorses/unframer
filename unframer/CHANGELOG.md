@@ -5,7 +5,7 @@
 ### Major Changes
 
 - Set `--jsx` to true by default, output files will be converted to jsx
-- HMR for exported files should now work, you should no longer see the page reloading when running a dev server and running the unframer command
+- HMR for exported files should now work much better, you should no longer see the page reloading when running a dev server and running the `unframer` command
 - Remove the need for `.d.ts` files
 - Set `--external` by default, npm packages will be installed locally if you have a local `package.json` file and a package manager
 - Run formatter on the output files
