@@ -12,6 +12,7 @@
 - React 19 is now required
 - Errors during types generation are now logged without need for `--debug`
 - React Preconnect hints for common Framer CDN urls
+- Removed the .cursorignore default output file
 
 ### Patch Changes
 
