@@ -177,11 +177,11 @@ export function babelPluginJsxTransform({
                             name: elementName,
                         },
                         attributes: [],
-                        selfClosing: !propsArg.properties.find(
+                        selfClosing: !propsArg.properties?.find(
                             (p) => p.key?.name === 'children',
                         ),
                     },
-                    closingElement: propsArg.properties.find(
+                    closingElement: propsArg.properties?.find(
                         (p) => p.key?.name === 'children',
                     )
                         ? {
