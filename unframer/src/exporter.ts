@@ -98,7 +98,7 @@ export async function bundle({
             jsxPath: path.resolve(outDir, filePath.replace(/\.js$/, '.jsx')),
             tempFilePath,
             baseName,
-            dirName
+            dirName,
         }
     }
 
@@ -359,7 +359,10 @@ export async function bundle({
                 `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
             const codeJs = prefix + file.text
 
-            logger.log(`writing temp JS`, path.relative(out, paths.tempFilePath))
+            logger.log(
+                `writing temp JS`,
+                path.relative(out, paths.tempFilePath),
+            )
             await fs.promises.mkdir(path.dirname(paths.tempJsPath), {
                 recursive: true,
             })
@@ -537,7 +540,6 @@ export async function bundle({
         for (let file of buildResult.outputFiles!) {
             const paths = getFilePaths(file.path, out)
 
-
             const componentName = path
                 .relative(out, file.path)
                 .replace(/\.js$/, '')
@@ -676,7 +678,10 @@ export async function bundle({
                         path.relative(out, paths.finalJsPath),
                     )
                     try {
-                        await fs.promises.rename(paths.tempJsPath, paths.finalJsPath)
+                        await fs.promises.rename(
+                            paths.tempJsPath,
+                            paths.finalJsPath,
+                        )
                     } catch (error) {
                         // Ignore error if file doesn't exist
                     }
@@ -792,7 +797,7 @@ export function resolvePackageVersion({ cwd, pkg }) {
 
 export function resolvePackage({ cwd, pkg }) {
     return new Promise<boolean>((resolve) => {
-      const code = `import('${pkg}/package.json', { with: { type: 'json' } }).then(()=>console.log('true')).catch(()=>import('${pkg}').then(()=>console.log('true')).catch(()=>console.log('false')));`
+        const code = `import('${pkg}/package.json', { with: { type: 'json' } }).then(()=>console.log('true')).catch(()=>import('${pkg}').then(()=>console.log('true')).catch(()=>console.log('false')));`
 
         const command = [
             JSON.stringify(nodePath),
@@ -1504,8 +1509,10 @@ export async function createExampleComponentCode({
     outDir: string
     config: Config
 }) {
-    const outDirForExample = path.posix
+    const outDirForExample = path
         .relative(process.cwd(), outDir)
+        .split(path.sep)
+        .join('/')
         .replace(/^src\//, '') // remove src so file works inside src
     const instances = config?.componentInstancesInIndexPage?.sort((a, b) => {
         // Order first by nodeDepth (lower is better)
