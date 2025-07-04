@@ -81,6 +81,27 @@ export async function bundle({
         await fs.promises.mkdir(out, { recursive: true })
     } catch (e) {}
 
+    // Prefix for temporary .js files to avoid HMR issues
+    const tempJsPrefix = 'temp_'
+
+    // Helper function to handle file path transformations with temp prefix
+    function getFilePaths(filePath: string, outDir: string) {
+        const baseName = path.basename(filePath)
+        const dirName = path.dirname(filePath)
+        const tempFileName = tempJsPrefix + baseName
+        const tempFilePath = path.join(dirName, tempFileName)
+
+        return {
+            originalPath: filePath,
+            tempJsPath: path.resolve(outDir, tempFilePath),
+            finalJsPath: path.resolve(outDir, filePath),
+            jsxPath: path.resolve(outDir, filePath.replace(/\.js$/, '.jsx')),
+            tempFilePath,
+            baseName,
+            dirName
+        }
+    }
+
     spinner.start('exporting components...')
 
     const otherRoutes = Object.fromEntries(
@@ -331,18 +352,18 @@ export async function bundle({
             }
         }
 
-        // First, write raw JS files for type extraction
+        // First, write raw JS files for type extraction with temp prefix
         for (let file of buildResult.outputFiles!) {
-            const resultPathAbsJs = path.resolve(out, file.path)
+            const paths = getFilePaths(file.path, out)
             const prefix =
                 `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
             const codeJs = prefix + file.text
 
-            logger.log(`writing raw JS`, path.relative(out, file.path))
-            await fs.promises.mkdir(path.dirname(resultPathAbsJs), {
+            logger.log(`writing temp JS`, path.relative(out, paths.tempFilePath))
+            await fs.promises.mkdir(path.dirname(paths.tempJsPath), {
                 recursive: true,
             })
-            await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
+            await fs.promises.writeFile(paths.tempJsPath, codeJs, 'utf-8')
         }
 
         if (!buildResult?.outputFiles) {
@@ -366,7 +387,8 @@ export async function bundle({
                     const name = path
                         .relative(out, file.path)
                         .replace(/\.jsx?$/, '')
-                    const resultPathAbs = path.resolve(out, file.path)
+                    const paths = getFilePaths(file.path, out)
+                    const resultPathAbs = paths.tempJsPath
                     if (!components[name]) {
                         return
                     }
@@ -447,11 +469,18 @@ export async function bundle({
             .filter(
                 (x) =>
                     x.path.endsWith('.js') &&
-                    fs.existsSync(x.path.replace(/\.js$/, '.jsx')),
+                    fs.existsSync(getFilePaths(x.path, out).jsxPath),
             )
-            .map((x) => x.path.replace(/\.js$/, '.jsx'))
+            .map((x) => getFilePaths(x.path, out).jsxPath)
         const outFiles = buildResult.outputFiles
-            .map((x) => path.resolve(out, x.path))
+            .map((x) => {
+                const paths = getFilePaths(x.path, out)
+                if (x.path.endsWith('.js') && fs.existsSync(paths.jsxPath)) {
+                    return null // Will be handled by jsx files
+                }
+                return paths.finalJsPath
+            })
+            .filter(Boolean)
             .concat([
                 path.resolve(out, 'meta.json'),
                 path.resolve(out, 'tokens.css'),
@@ -462,15 +491,7 @@ export async function bundle({
 
         const filesToDelete = prevFiles
             .filter((x) => !outFiles.includes(x))
-            .concat(
-                buildResult.outputFiles
-                    .map((x) => x.path)
-                    .filter(
-                        (js) =>
-                            js.endsWith('.js') &&
-                            jsxFiles.some((x) => x.startsWith(js)),
-                    ),
-            )
+            .filter((x) => !x.includes(tempJsPrefix)) // Don't delete temp files here, they're handled separately
 
         for (let file of filesToDelete) {
             logger.log('deleting', path.relative(out, file))
@@ -514,8 +535,9 @@ export async function bundle({
         // Process and write JSX files with TypeDoc comments
         spinner.update('Processing JSX files with TypeDoc comments')
         for (let file of buildResult.outputFiles!) {
-            const resultPathAbsJs = path.resolve(out, file.path)
-            const resultPathAbsJsx = resultPathAbsJs.replace(/\.js$/, '.jsx')
+            const paths = getFilePaths(file.path, out)
+
+
             const componentName = path
                 .relative(out, file.path)
                 .replace(/\.js$/, '')
@@ -542,7 +564,7 @@ export async function bundle({
             }
 
             const existing = await fs.promises
-                .readFile(resultPathAbsJsx, 'utf-8')
+                .readFile(paths.jsxPath, 'utf-8')
                 .catch(() => null)
             const tooBigSize = 0.7 * 1024 * 1024
 
@@ -553,8 +575,8 @@ export async function bundle({
             if (
                 config.jsx &&
                 !tooBig &&
-                !resultPathAbsJs.includes('/chunks/') &&
-                !resultPathAbsJs.includes('\\chunks\\')
+                !paths.tempJsPath.includes('/chunks/') &&
+                !paths.tempJsPath.includes('\\chunks\\')
             ) {
                 try {
                     const plugins = [
@@ -610,14 +632,15 @@ export async function bundle({
             const codeJsx = prefix + formatted
             const codeJs = prefix + file.text
             logger.log(`writing`, path.relative(out, file.path))
-            await fs.promises.mkdir(path.dirname(resultPathAbsJsx), {
+            await fs.promises.mkdir(path.dirname(paths.jsxPath), {
                 recursive: true,
             })
-            if (codeJs !== codeJsx || !didFormat) {
-                await fs.promises.writeFile(resultPathAbsJs, codeJs, 'utf-8')
-            }
-            if (didFormat) {
-                await fs.promises.writeFile(resultPathAbsJsx, codeJsx, 'utf-8')
+            // Always write the temp .js file for type extraction
+            await fs.promises.writeFile(paths.tempJsPath, codeJs, 'utf-8')
+
+            // Only write .jsx file if it's different from existing or if formatting was done
+            if (didFormat && codeJsx !== existing) {
+                await fs.promises.writeFile(paths.jsxPath, codeJsx, 'utf-8')
             }
         }
         spinner.stop()
@@ -627,22 +650,33 @@ export async function bundle({
         //     'utf-8',
         // )
 
-        // Clean up .js files that have .jsx equivalents
+        // Clean up temp .js files and handle prefixes
         for (let file of buildResult.outputFiles!) {
             if (file.path.endsWith('.js')) {
-                const jsPath = path.resolve(out, file.path)
-                const jsxPath = path.resolve(
-                    out,
-                    file.path.replace(/\.js$/, '.jsx'),
-                )
+                const paths = getFilePaths(file.path, out)
 
-                if (fs.existsSync(jsxPath)) {
+                if (fs.existsSync(paths.jsxPath)) {
+                    // Remove temp .js file if .jsx equivalent exists
                     logger.log(
-                        'removing JS file with JSX equivalent:',
-                        path.relative(out, jsPath),
+                        'removing temp JS file with JSX equivalent:',
+                        path.relative(out, paths.tempJsPath),
                     )
                     try {
-                        await fs.promises.rm(jsPath)
+                        await fs.promises.rm(paths.tempJsPath)
+                        await fs.promises.rm(paths.finalJsPath)
+                    } catch (error) {
+                        // Ignore error if file doesn't exist
+                    }
+                } else {
+                    // Rename temp .js file to final name if no .jsx equivalent
+                    logger.log(
+                        'renaming temp JS file to final name:',
+                        path.relative(out, paths.tempJsPath),
+                        '->',
+                        path.relative(out, paths.finalJsPath),
+                    )
+                    try {
+                        await fs.promises.rename(paths.tempJsPath, paths.finalJsPath)
                     } catch (error) {
                         // Ignore error if file doesn't exist
                     }
@@ -757,8 +791,8 @@ export function resolvePackageVersion({ cwd, pkg }) {
 }
 
 export function resolvePackage({ cwd, pkg }) {
-    return new Promise<boolean>((resolve, reject) => {
-        const code = `import('${pkg}').then(() => console.log('true')).catch(() => console.log('false'));`
+    return new Promise<boolean>((resolve) => {
+      const code = `import('${pkg}/package.json', { with: { type: 'json' } }).then(()=>console.log('true')).catch(()=>import('${pkg}').then(()=>console.log('true')).catch(()=>console.log('false')));`
 
         const command = [
             JSON.stringify(nodePath),
@@ -771,12 +805,12 @@ export function resolvePackage({ cwd, pkg }) {
             {
                 cwd,
             },
-            (error, stdout, stderr) => {
+            (error, stdout) => {
                 if (error) {
                     resolve(false)
                     return
                 }
-                const exists = stdout.trim() === 'true'
+                const exists = stdout.trim().split('\n').pop() === 'true'
                 resolve(exists)
             },
         )
@@ -1207,9 +1241,9 @@ export function propControlsToTypedocComments({
         headerComment += ` * ${localeType}\n`
         headerComment += ' */\n\n'
         headerComment += '/**\n'
-        headerComment += ' * @typedef {import(\'react\').ComponentPropsWithRef<"div"> & {\n'
+        headerComment +=
+            ' * @typedef {import(\'react\').ComponentPropsWithRef<"div"> & {\n'
         headerComment += defaultPropsJsDoc
-
 
         if (types) {
             headerComment += '\n' + types
@@ -1240,6 +1274,7 @@ export function propControlsToTypedocComments({
             defaultExportComment,
         }
     } catch (e: any) {
+        logger.error(e.message)
         logger.error('cannot generate typedoc comments', e.stack)
         return {
             headerComment: '',
