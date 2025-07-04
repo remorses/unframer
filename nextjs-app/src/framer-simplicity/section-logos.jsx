@@ -10,14 +10,14 @@
 
 /**
  * @typedef Props
- * @property {React.ReactNode} [children] - The children components.
- * @property {Locale} [locale] - The active locale.
- * @property {React.CSSProperties} [style] - The component styles.
- * @property {string} [className] - Additional class names for the component.
- * @property {string} [id] - The component id.
- * @property {*} [width] - The component width.
- * @property {*} [height] - The component height.
- * @property {string} [layoutId] - The layout id.
+ * @property {React.ReactNode=} children - The children components.
+ * @property {Locale=} locale - The active locale.
+ * @property {React.CSSProperties=} style - Component styles.
+ * @property {string=} className - Additional class names.
+ * @property {string=} id - Component id.
+ * @property {*=} width - Component width.
+ * @property {*=} height - Component height.
+ * @property {string=} layoutId - Layout id.
  * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - Variant
  */
 
