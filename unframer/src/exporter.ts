@@ -126,26 +126,6 @@ export async function bundle({
     const fn = watch ? context : fakeContext
     const missingPackages = new Set<string>()
 
-    try {
-        const installedVersion = await resolvePackageVersion({
-            cwd: out,
-            pkg: 'unframer',
-        })
-        if (installedVersion !== currentUnframerVersion) {
-            // Version mismatch, add with specific version
-            missingPackages.add(`unframer@${currentUnframerVersion}`)
-            spinner.info(
-                `Different unframer version detected (${installedVersion}), will install unframer@${currentUnframerVersion}`,
-            )
-        }
-    } catch (e) {
-        // Unframer not installed, add with specific version
-        missingPackages.add(`unframer@${currentUnframerVersion}`)
-        spinner.info(
-            `Missing package detected: unframer@${currentUnframerVersion}`,
-        )
-    }
-
     const buildContext = await fn({
         absWorkingDir: out,
         entryPoints: Object.keys(components)
@@ -315,6 +295,25 @@ export async function bundle({
     async function rebuild() {
         // Clear missing packages for each rebuild (important for watch mode)
         missingPackages.clear()
+        try {
+            const installedVersion = await resolvePackageVersion({
+                cwd: out,
+                pkg: 'unframer',
+            })
+            if (installedVersion !== currentUnframerVersion) {
+                // Version mismatch, add with specific version
+                missingPackages.add(`unframer@${currentUnframerVersion}`)
+                spinner.info(
+                    `Different unframer version detected (${installedVersion}), will install unframer@${currentUnframerVersion}`,
+                )
+            }
+        } catch (e) {
+            // Unframer not installed, add with specific version
+            missingPackages.add(`unframer@${currentUnframerVersion}`)
+            spinner.info(
+                `Missing package detected: unframer@${currentUnframerVersion}`,
+            )
+        }
         const prevFiles = await recursiveReaddir(out)
         const buildResult = await buildContext.rebuild().catch((e) => {
             if (e.message.includes('No matching export ')) {
