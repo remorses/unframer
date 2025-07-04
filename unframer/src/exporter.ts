@@ -621,11 +621,11 @@ export async function bundle({
             }
         }
         spinner.stop()
-        await fs.promises.writeFile(
-            path.resolve(out, '.cursorignore'),
-            `**/*.js\nchunks\n`,
-            'utf-8',
-        )
+        // await fs.promises.writeFile(
+        //     path.resolve(out, '.cursorignore'),
+        //     `**/*.js\nchunks\n`,
+        //     'utf-8',
+        // )
 
         // Clean up .js files that have .jsx equivalents
         for (let file of buildResult.outputFiles!) {
