@@ -300,7 +300,12 @@ export async function bundle({
                 cwd: out,
                 pkg: 'unframer',
             })
-            if (installedVersion !== currentUnframerVersion) {
+            if (
+                isVersionGreater(
+                    installedVersion || '0.0.0',
+                    currentUnframerVersion || '0.0.0',
+                )
+            ) {
                 // Version mismatch, add with specific version
                 missingPackages.add(`unframer@${currentUnframerVersion}`)
                 spinner.info(
@@ -1577,4 +1582,36 @@ type BundleResult = {
         componentName: string
         propertyControls?: PropertyControls
     }>
+}
+
+/**
+ * Compares two semantic version strings.
+ * Returns true if versionB is greater than versionA.
+ * Handles x.y.z, x.y, x, and optional pre-release (-alpha, etc).
+ */
+export function isVersionGreater(versionA: string, versionB: string): boolean {
+    try {
+        function parseVersion(version: string) {
+            // Remove pre-release (e.g. -alpha.1)
+            let [core] = version.trim().split('-')
+            return core.split('.').map((x) => parseInt(x, 10))
+        }
+        const [a1 = 0, a2 = 0, a3 = 0] = parseVersion(versionA)
+        const [b1 = 0, b2 = 0, b3 = 0] = parseVersion(versionB)
+
+        if (b1 > a1) return true
+        if (b1 < a1) return false
+        if (b2 > a2) return true
+        if (b2 < a2) return false
+        if (b3 > a3) return true
+        if (b3 < a3) return false
+
+        // If all equal, not greater
+        return false
+    } catch (error) {
+        spinner.error(
+            `Error comparing versions "${versionA}" and "${versionB}": ${error?.stack || error?.message || error}`,
+        )
+        return true
+    }
 }
