@@ -5,27 +5,30 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=}     children   - The children components.
- * @property {Locale=}              locale     - The active locale.
- * @property {React.CSSProperties=} style      - Component styles.
- * @property {string=}               className - Additional class names.
- * @property {string=}               id        - Component id.
- * @property {*=}                    width     - Component width.
- * @property {*=}                    height    - Component height.
- * @property {string=}               layoutId  - Layout id.
- * @property {'1' | '2' | 'Rani' | 'RaniHistory' | '3'} [variant] - Variant
- * @property {Function} [on2] - on2
- * @property {Function} [on1] - on1
- * @property {Function} [on3] - on3
- * @property {string} [title] - Title
- * @property {string} [platformName1] - Platform Name 1
- * @property {string} [platformName2] - Platform Name 2
- * @property {string} [platformName3] - Platform Name 3
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: '1' | '2' | 'Rani' | 'RaniHistory' | '3' // Variant
+ * on2?: Function // on2
+ * on1?: Function // on1
+ * on3?: Function // on3
+ * title?: string // Title
+ * platformName1?: string // Platform Name 1
+ * platformName2?: string // Platform Name 2
+ * platformName3?: string // Platform Name 3
+}} Props
+
  */
 
 /**
@@ -1737,7 +1740,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders GrowthSpaceMenuFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof GrowthSpaceMenuFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

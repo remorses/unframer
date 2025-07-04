@@ -5,21 +5,24 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=}     children   - The children components.
- * @property {Locale=}              locale     - The active locale.
- * @property {React.CSSProperties=} style      - Component styles.
- * @property {string=}               className - Additional class names.
- * @property {string=}               id        - Component id.
- * @property {*=}                    width     - Component width.
- * @property {*=}                    height    - Component height.
- * @property {string=}               layoutId  - Layout id.
- * @property {'Default' | 'Focus' | 'Blur'} [variant] - Variant
- * @property {string} [inputName] - inputName
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Default' | 'Focus' | 'Blur' // Variant
+ * inputName?: string // inputName
+}} Props
+
  */
 
 /**
@@ -467,7 +470,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders InputFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof InputFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

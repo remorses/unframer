@@ -5,21 +5,24 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=}     children   - The children components.
- * @property {Locale=}              locale     - The active locale.
- * @property {React.CSSProperties=} style      - Component styles.
- * @property {string=}               className - Additional class names.
- * @property {string=}               id        - Component id.
- * @property {*=}                    width     - Component width.
- * @property {*=}                    height    - Component height.
- * @property {string=}               layoutId  - Layout id.
- * @property {'Desktop 1' | 'Tablet 1' | 'Mobile 1' | 'Mobile 2'} [variant] - Variant
- * @property {Function} [buyEvent] - BuyEvent
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Desktop 1' | 'Tablet 1' | 'Mobile 1' | 'Mobile 2' // Variant
+ * buyEvent?: Function // BuyEvent
+}} Props
+
  */
 
 /**
@@ -2775,7 +2778,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders PricingFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof PricingFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

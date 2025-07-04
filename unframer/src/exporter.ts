@@ -1251,7 +1251,7 @@ export function propControlsToTypedocComments({
         headerComment += ' */\n\n'
         headerComment += '/**\n'
         headerComment +=
-            ' * @typedef {import(\'react\').ComponentPropsWithRef<"div"> & {\n'
+            ' * @typedef {{\n'
         headerComment += defaultPropsJsDoc
 
         if (types) {

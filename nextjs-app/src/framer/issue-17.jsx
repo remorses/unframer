@@ -5,61 +5,64 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=}     children   - The children components.
- * @property {Locale=}              locale     - The active locale.
- * @property {React.CSSProperties=} style      - Component styles.
- * @property {string=}               className - Additional class names.
- * @property {string=}               id        - Component id.
- * @property {*=}                    width     - Component width.
- * @property {*=}                    height    - Component height.
- * @property {string=}               layoutId  - Layout id.
- * @property {'Desktop' | 'Tablet' | 'Mobile'} [variant] - Variant
- * @property {string} [primaryCTATExt] - primaryCTAText
- * @property {string} [primaryCTALInk] - primaryCTALink
- * @property {string} [heroPreHeadingText] - heroPreHeadingText
- * @property {string} [heroTitle] - heroTitle
- * @property {string} [heroDescription] - heroDescription
- * @property {string} [heroSocialProof] - heroSocialProof
- * @property {string} [logosSocialProofText] - logosSocialProofText
- * @property {string} [valuePropIntroPreHeadingText] - valuePropIntroPreHeadingText
- * @property {string} [valuePropIntroTitle] - valuePropIntroTitle
- * @property {string} [valuePropIntroDescription] - valuePropIntroDescription
- * @property {string} [valueProp1PreHeadingText] - valueProp1PreHeadingText
- * @property {string} [valueProp1Title] - valueProp1Title
- * @property {string} [valueProp1Description] - valueProp1Description
- * @property {string} [valueProp2PreHeadingText] - valueProp2PreHeadingText
- * @property {string} [valueProp2Title] - valueProp2Title
- * @property {string} [valueProp2Description] - valueProp2Description
- * @property {string} [valueProp3PreHeadingText] - valueProp3PreHeadingText
- * @property {string} [valueProp3Title] - valueProp3Title
- * @property {string} [valueProp3Description] - valueProp3Description
- * @property {string} [howItWorksIntroTitle] - howItWorksIntroTitle
- * @property {string} [howItWorks1PhosphorIcon] - howItWorks1PhosphorIcon
- * @property {string} [howItWorks1Title] - howItWorks1Title
- * @property {string} [howItWorks1Description] - howItWorks1Description
- * @property {string} [howItWorks2PhosphorIcon] - howItWorks2PhosphorIcon
- * @property {string} [howItWorks2Title] - howItWorks2Title
- * @property {string} [howItWorks2Description] - howItWorks2Description
- * @property {string} [howItWorks3PhosphorIcon] - howItWorks3PhosphorIcon
- * @property {string} [howItWorks3Title] - howItWorks3Title
- * @property {string} [howItWorks3Description] - howItWorks3Description
- * @property {string} [ctaSectionTitle] - ctaSectionTitle
- * @property {string} [ctaSectionDescription] - ctaSectionDescription
- * @property {string} [faqQuestion1] - faqQuestion1
- * @property {string} [faqAnswer1] - faqAnswer1
- * @property {string} [faqQuestion2] - faqQuestion2
- * @property {string} [faqAnswer2] - faqAnswer2
- * @property {string} [faqQuestion3] - faqQuestion3
- * @property {string} [faqAnswer3] - faqAnswer3
- * @property {string} [faqQuestion4] - faqQuestion4
- * @property {string} [faqAnswer4] - faqAnswer4
- * @property {string} [faqQuestion5] - faqQuestion5
- * @property {string} [faqAnswer5] - faqAnswer5
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Desktop' | 'Tablet' | 'Mobile' // Variant
+ * primaryCTATExt?: string // primaryCTAText
+ * primaryCTALInk?: string // primaryCTALink
+ * heroPreHeadingText?: string // heroPreHeadingText
+ * heroTitle?: string // heroTitle
+ * heroDescription?: string // heroDescription
+ * heroSocialProof?: string // heroSocialProof
+ * logosSocialProofText?: string // logosSocialProofText
+ * valuePropIntroPreHeadingText?: string // valuePropIntroPreHeadingText
+ * valuePropIntroTitle?: string // valuePropIntroTitle
+ * valuePropIntroDescription?: string // valuePropIntroDescription
+ * valueProp1PreHeadingText?: string // valueProp1PreHeadingText
+ * valueProp1Title?: string // valueProp1Title
+ * valueProp1Description?: string // valueProp1Description
+ * valueProp2PreHeadingText?: string // valueProp2PreHeadingText
+ * valueProp2Title?: string // valueProp2Title
+ * valueProp2Description?: string // valueProp2Description
+ * valueProp3PreHeadingText?: string // valueProp3PreHeadingText
+ * valueProp3Title?: string // valueProp3Title
+ * valueProp3Description?: string // valueProp3Description
+ * howItWorksIntroTitle?: string // howItWorksIntroTitle
+ * howItWorks1PhosphorIcon?: string // howItWorks1PhosphorIcon
+ * howItWorks1Title?: string // howItWorks1Title
+ * howItWorks1Description?: string // howItWorks1Description
+ * howItWorks2PhosphorIcon?: string // howItWorks2PhosphorIcon
+ * howItWorks2Title?: string // howItWorks2Title
+ * howItWorks2Description?: string // howItWorks2Description
+ * howItWorks3PhosphorIcon?: string // howItWorks3PhosphorIcon
+ * howItWorks3Title?: string // howItWorks3Title
+ * howItWorks3Description?: string // howItWorks3Description
+ * ctaSectionTitle?: string // ctaSectionTitle
+ * ctaSectionDescription?: string // ctaSectionDescription
+ * faqQuestion1?: string // faqQuestion1
+ * faqAnswer1?: string // faqAnswer1
+ * faqQuestion2?: string // faqQuestion2
+ * faqAnswer2?: string // faqAnswer2
+ * faqQuestion3?: string // faqQuestion3
+ * faqAnswer3?: string // faqAnswer3
+ * faqQuestion4?: string // faqQuestion4
+ * faqAnswer4?: string // faqAnswer4
+ * faqQuestion5?: string // faqQuestion5
+ * faqAnswer5?: string // faqAnswer5
+}} Props
+
  */
 
 /**
@@ -12731,7 +12734,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders Issue17FramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof Issue17FramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

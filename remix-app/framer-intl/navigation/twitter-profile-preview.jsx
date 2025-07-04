@@ -9,7 +9,7 @@
  */
 
 /**
- * @typedef {import('react').ComponentPropsWithRef<"div"> & {
+ * @typedef {{
  * children?: React.ReactNode
  * locale?: Locale
  * style?: React.CSSProperties
