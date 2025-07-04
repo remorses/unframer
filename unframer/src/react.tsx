@@ -428,7 +428,39 @@ function isEmpty(obj: Record<any, any>) {
 }
 
 type UnframerProviderProps = {
+    /**
+     * Optional function to handle client-side navigation.
+     * You can provide a navigation function such as one from React Router's `useNavigate`
+     * or Next.js's `useRouter().push`, for example:
+     *
+     * ```tsx
+     * // Using React Router:
+     * import { useNavigate } from "react-router-dom";
+     * const navigate = useNavigate();
+     *
+     * <UnframerProvider navigate={navigate}>...</UnframerProvider>
+     *
+     * // Using Next.js:
+     * import { useRouter } from "next/navigation";
+     * const router = useRouter();
+     * const navigate = (url: string) => router.push(url);
+     *
+     * <UnframerProvider navigate={navigate}>...</UnframerProvider>
+     * ```
+     */
     navigate?: (url: string) => void
+    /**
+     * The locale slug for the language, e.g. "de" for German, "it" for Italian, etc.
+     * This should be a short identifier (typically two or more lowercase letters)
+     * that uniquely identifies the active language/region. Used for language resolution,
+     * translations, routing, etc.
+     * Examples:
+     *   - "en" for English
+     *   - "de" for German
+     *   - "it" for Italian
+     *   - "fr" for French
+     *   - "es" for Spanish
+     */
     locale?: string
     children: React.ReactNode
 }

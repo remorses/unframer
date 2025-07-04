@@ -1107,7 +1107,7 @@ export function propControlsToTypedocComments({
 }: {
     controls: PropertyControls
     fileName: string
-    config: any
+    config: Config
 }) {
     try {
         const types = Object.entries(controls || ({} as PropertyControls))
@@ -1188,7 +1188,16 @@ export function propControlsToTypedocComments({
         // Generate header comment with type definitions
         let headerComment = '/**\n'
         headerComment += ' * @typedef Locale\n'
-        headerComment += ' * A string that represents the locale.\n'
+
+        // Generate union type from config.locales if available
+        const localeType = (() => {
+            if (config?.locales && Array.isArray(config.locales) && config.locales.length > 0) {
+                return config.locales.map(locale => `'${locale.slug}'`).join(' | ')
+            }
+            return 'string'
+        })()
+
+        headerComment += ` * ${localeType}\n`
         headerComment += ' */\n\n'
         headerComment += '/**\n'
         headerComment += ' * @typedef Props\n'
