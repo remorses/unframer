@@ -9,23 +9,25 @@
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=} children - The children components.
- * @property {Locale=} locale - The active locale.
- * @property {React.CSSProperties=} style - Component styles.
- * @property {string=} className - Additional class names.
- * @property {string=} id - Component id.
- * @property {*=} width - Component width.
- * @property {*=} height - Component height.
- * @property {string=} layoutId - Layout id.
- * @property {'Closed' | 'Open' | 'Preview - Mobile'} [variant] - Variant
- * @property {string} [linkText] - Link text
- * @property {string} [link] - Link
- * @property {string} [name] - Name
- * @property {string} [username] - Username
- * @property {boolean} [verified] - Verified
- * @property {{src: string, srcSet?: string, alt?: string}} [profilePicture] - Profile picture
- * @property {string} [bioPlain] - Bio-plain
+ * @typedef {import('react').ComponentPropsWithRef<"div"> & {
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Closed' | 'Open' | 'Preview - Mobile' // Variant
+ * linkText?: string // Link text
+ * link?: string // Link
+ * name?: string // Name
+ * username?: string // Username
+ * verified?: boolean // Verified
+ * profilePicture?: {src: string, srcSet?: string, alt?: string} // Profile picture
+ * bioPlain?: string // Bio-plain
+}} Props
+
  */
 
 /**
@@ -72,7 +74,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders TwitterProfilePreviewFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof TwitterProfilePreviewFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

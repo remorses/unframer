@@ -9,21 +9,23 @@
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=} children - The children components.
- * @property {Locale=} locale - The active locale.
- * @property {React.CSSProperties=} style - Component styles.
- * @property {string=} className - Additional class names.
- * @property {string=} id - Component id.
- * @property {*=} width - Component width.
- * @property {*=} height - Component height.
- * @property {string=} layoutId - Layout id.
- * @property {'First' | 'Second' | 'Third' | 'Fourth'} [variant] - Variant
- * @property {Function} [click] - Click
- * @property {Function} [click2] - Click 2
- * @property {Function} [click3] - Click 3
- * @property {Function} [click4] - Click 4
- * @property {'Desktop' | 'Mobile'} [variant] - Variant
+ * @typedef {import('react').ComponentPropsWithRef<"div"> & {
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'First' | 'Second' | 'Third' | 'Fourth' // Variant
+ * click?: Function // Click
+ * click2?: Function // Click 2
+ * click3?: Function // Click 3
+ * click4?: Function // Click 4
+ * variant?: 'Desktop' | 'Mobile' // Variant
+}} Props
+
  */
 
 /**
@@ -786,7 +788,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders CustomerStoriesFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof CustomerStoriesFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

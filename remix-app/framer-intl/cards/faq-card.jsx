@@ -9,18 +9,20 @@
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=} children - The children components.
- * @property {Locale=} locale - The active locale.
- * @property {React.CSSProperties=} style - Component styles.
- * @property {string=} className - Additional class names.
- * @property {string=} id - Component id.
- * @property {*=} width - Component width.
- * @property {*=} height - Component height.
- * @property {string=} layoutId - Layout id.
- * @property {'Answers' | 'Question'} [variant] - Variant
- * @property {string} [question] - Question
- * @property {string} [answer] - Answer
+ * @typedef {import('react').ComponentPropsWithRef<"div"> & {
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Answers' | 'Question' // Variant
+ * question?: string // Question
+ * answer?: string // Answer
+}} Props
+
  */
 
 /**
@@ -68,7 +70,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders FaqCardFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof FaqCardFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

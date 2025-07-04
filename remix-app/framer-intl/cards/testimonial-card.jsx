@@ -9,19 +9,21 @@
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=} children - The children components.
- * @property {Locale=} locale - The active locale.
- * @property {React.CSSProperties=} style - Component styles.
- * @property {string=} className - Additional class names.
- * @property {string=} id - Component id.
- * @property {*=} width - Component width.
- * @property {*=} height - Component height.
- * @property {string=} layoutId - Layout id.
- * @property {{src: string, srcSet?: string, alt?: string}} [image] - Image
- * @property {string} [name] - Name
- * @property {string} [positionAndCompany] - Position and company
- * @property {string} [testimonial] - Testimonial
+ * @typedef {import('react').ComponentPropsWithRef<"div"> & {
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * image?: {src: string, srcSet?: string, alt?: string} // Image
+ * name?: string // Name
+ * positionAndCompany?: string // Position and company
+ * testimonial?: string // Testimonial
+}} Props
+
  */
 
 /**
@@ -679,7 +681,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders TestimonialCardFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof TestimonialCardFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */

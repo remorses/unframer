@@ -1,4 +1,5 @@
 'use client'
+import {ComponentPropsWithRef } from 'react'
 
 import '../../framer-intl/styles.css'
 import { PageRoot } from 'unframer'
@@ -67,7 +68,7 @@ export default function Home() {
                     }}
                 /> */}
                 <Hero locale='it-IT' />
-                <Navigation locale='it-IT' />
+                <Navigation variant='Desktop' locale='it-IT' />
                 {/* <Component locale='it' /> */}
             </div>
         </div>

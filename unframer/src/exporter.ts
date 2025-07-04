@@ -1167,7 +1167,7 @@ export function propControlsToTypedocComments({
                 if (!name) {
                     return ''
                 }
-                return ` * @property {${typescriptType(value)}} [${name}] - ${value.title || name}`
+                return ` * ${name}?: ${typescriptType(value)} // ${value.title || name}`
             })
             .filter(Boolean)
             .join('\n')
@@ -1175,14 +1175,15 @@ export function propControlsToTypedocComments({
         const componentName = componentCamelCase(fileName)
 
         const defaultPropsJsDoc = [
-          ' * @property {React.ReactNode=} children - The children components.',
-          ' * @property {Locale=} locale - The active locale.',
-          ' * @property {React.CSSProperties=} style - Component styles.',
-          ' * @property {string=} className - Additional class names.',
-          ' * @property {string=} id - Component id.',
-          ' * @property {*=} width - Component width.',
-          ' * @property {*=} height - Component height.',
-          ' * @property {string=} layoutId - Layout id.',
+            ' * children?: React.ReactNode',
+            ' * locale?: Locale',
+            ' * style?: React.CSSProperties',
+            ' * className?: string',
+            ' * id?: string',
+            ' * ref?: any',
+            ' * width?: any',
+            ' * height?: any',
+            ' * layoutId?: string',
         ].join('\n')
 
         // Generate header comment with type definitions
@@ -1191,8 +1192,14 @@ export function propControlsToTypedocComments({
 
         // Generate union type from config.locales if available
         const localeType = (() => {
-            if (config?.locales && Array.isArray(config.locales) && config.locales.length > 0) {
-                return config.locales.map(locale => `'${locale.slug}'`).join(' | ')
+            if (
+                config?.locales &&
+                Array.isArray(config.locales) &&
+                config.locales.length > 0
+            ) {
+                return config.locales
+                    .map((locale) => `'${locale.slug}'`)
+                    .join(' | ')
             }
             return 'string'
         })()
@@ -1200,14 +1207,14 @@ export function propControlsToTypedocComments({
         headerComment += ` * ${localeType}\n`
         headerComment += ' */\n\n'
         headerComment += '/**\n'
-        headerComment += ' * @typedef Props\n'
+        headerComment += ' * @typedef {import(\'react\').ComponentPropsWithRef<"div"> & {\n'
         headerComment += defaultPropsJsDoc
-        // if (hasVariant) {
-        //     headerComment += `\n * @property {${variantType}} [variant] - The component responsive variant; values: ${variantType.replace(/'/g, '')}.`
-        // }
+
+
         if (types) {
             headerComment += '\n' + types
         }
+        headerComment += `\n}} Props\n`
         headerComment += '\n */\n\n'
         headerComment += '/**\n'
         headerComment += ' * @type {import("unframer").UnframerBreakpoint}\n'
@@ -1222,7 +1229,7 @@ export function propControlsToTypedocComments({
         headerComment += ' */'
 
         // Generate responsive comment
-        const responsiveComment = `/**\n * Renders ${componentName} for all breakpoints with a variants map. Variant prop is inferred per breakpoint.\n * @function\n * @memberof ${componentName}\n * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props\n * @returns {any}\n */`
+        const responsiveComment = `/**\n * Renders ${componentName} for all breakpoints with a variants map. Variant prop is inferred per breakpoint.\n * @function\n * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props\n * @returns {any}\n */`
 
         // Generate default export comment - use inline function type instead of referencing undefined type
         const defaultExportComment = `/** @type {function(Props): any} */`
