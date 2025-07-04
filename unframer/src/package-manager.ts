@@ -140,7 +140,7 @@ export async function installPackagesBatch({
             child.on('close', (code) => {
                 if (code === 0) {
                     spinner.info(
-                        `Successfully installed packages: ${packagesStr}`,
+                        `Successfully installed packages`,
                     )
                     resolve({ success: true })
                 } else {
