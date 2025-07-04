@@ -5,23 +5,26 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode=} children - The children components.
- * @property {Locale=} locale - The active locale.
- * @property {React.CSSProperties=} style - Component styles.
- * @property {string=} className - Additional class names.
- * @property {string=} id - Component id.
- * @property {*=} width - Component width.
- * @property {*=} height - Component height.
- * @property {string=} layoutId - Layout id.
- * @property {'Active' | 'Inactive'} [variant] - Variant
- * @property {string} [title] - Title
- * @property {string} [text] - Text
- * @property {Function} [click] - Click
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Active' | 'Inactive' // Variant
+ * title?: string // Title
+ * text?: string // Text
+ * click?: Function // Click
+}} Props
+
  */
 
 /**
@@ -68,7 +71,6 @@ function ComponentWithRoot({ locale, ...rest }) {
 /**
  * Renders FeatureFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof FeatureFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
