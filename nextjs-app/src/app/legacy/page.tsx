@@ -47,6 +47,7 @@ function Home() {
                 <div className='relative w-full flex flex-col'>
                     <Nav.Responsive
                         className='!w-full'
+
                         variants={{ base: 'Phone', lg: 'Desktop' }}
                     />
                 </div>
