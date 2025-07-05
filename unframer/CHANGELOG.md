@@ -1,5 +1,11 @@
 # unframer
 
+## 3.0.1
+
+### Patch Changes
+
+- Apply new defaults to --jsx and --external
+
 ## 3.0.0
 
 ### Major Changes

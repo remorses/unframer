@@ -31,12 +31,12 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         '--external [package]',
         'Make some package external, do not pass a package name to make all packages external',
         {
-            default: false,
+            default: true,
         },
     )
     .option('--watch', 'Watch for changes and rebuild', { default: false })
     .option('--jsx', 'Output jsx code instead of minified .js code', {
-        default: false,
+        default: true,
     })
     .option('--debug', 'Enable debug logging', { default: false })
     .action(async function main(projectId, options) {
