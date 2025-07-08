@@ -300,7 +300,7 @@ export async function configFromFetch({
             }) || []
     const config: Config = {
         ...data,
-
+        pageBackgroundColor: data.project?.pageBackgroundColor || '',
         breakpoints: defaultBreakpointSizes,
         outDir,
         externalPackages,

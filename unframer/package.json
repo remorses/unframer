@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",

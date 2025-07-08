@@ -6,7 +6,7 @@
         "dev": "next dev  --port 5543",
         "gen": "pnpm --filter unframer build && pnpm unframer",
         "build": "pnpm --filter unframer build && next build",
-        "framer-simplicity": "pnpm unframer 080b0b6d577bdc21 --jsx --external --outDir ./src/framer-simplicity",
+        "framer-simplicity": "rm -rf ./src/framer-simplicity && pnpm unframer 080b0b6d577bdc21 --jsx --external --outDir ./src/framer-simplicity",
         "framer-unchatgpt": "pnpm unframer 4f7c408e7441586d --jsx --external --outDir src/framer-unchatgpt",
         "start": "next start",
         "lint": "next lint"

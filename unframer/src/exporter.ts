@@ -88,17 +88,25 @@ export async function bundle({
     function getFilePaths(filePath: string, outDir: string) {
         const baseName = path.basename(filePath)
         const dirName = path.dirname(filePath)
+        const relativeDirname = path.relative(outDir, dirName)
+        // chunks are imported, which means they should not have the temp_ prefix or imports will fail
+        if (relativeDirname === 'chunks') {
+            return {
+                tempJsPath: path.resolve(outDir, filePath),
+                finalJsPath: path.resolve(outDir, filePath),
+                jsxPath: path.resolve(
+                    outDir,
+                    filePath.replace(/\.js$/, '.jsx'),
+                ),
+            }
+        }
         const tempFileName = tempJsPrefix + baseName
         const tempFilePath = path.join(dirName, tempFileName)
 
         return {
-            originalPath: filePath,
             tempJsPath: path.resolve(outDir, tempFilePath),
             finalJsPath: path.resolve(outDir, filePath),
             jsxPath: path.resolve(outDir, filePath.replace(/\.js$/, '.jsx')),
-            tempFilePath,
-            baseName,
-            dirName,
         }
     }
 
@@ -363,10 +371,7 @@ export async function bundle({
                 `// @ts-nocheck\n` + `/* eslint-disable */\n` + doNotEditComment
             const codeJs = prefix + file.text
 
-            logger.log(
-                `writing temp JS`,
-                path.relative(out, paths.tempFilePath),
-            )
+            logger.log(`writing temp JS`, path.relative(out, paths.tempJsPath))
             await fs.promises.mkdir(path.dirname(paths.tempJsPath), {
                 recursive: true,
             })
@@ -1250,8 +1255,7 @@ export function propControlsToTypedocComments({
         headerComment += ` * ${localeType}\n`
         headerComment += ' */\n\n'
         headerComment += '/**\n'
-        headerComment +=
-            ' * @typedef {{\n'
+        headerComment += ' * @typedef {{\n'
         headerComment += defaultPropsJsDoc
 
         if (types) {

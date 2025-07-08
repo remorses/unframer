@@ -1,5 +1,11 @@
 # unframer
 
+## 3.0.2
+
+### Patch Changes
+
+- Fix imports of chunks for the first generation
+
 ## 3.0.1
 
 ### Patch Changes
