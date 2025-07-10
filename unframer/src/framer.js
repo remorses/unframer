@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.A3XNACP5.mjs
+// /:https://app.framerstatic.com/framer.AIFWHV3N.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -22990,6 +22990,7 @@ var isPropValid = /* @__PURE__ */ memoize((prop) =>
   /* Z+1 */
 );
 var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
 var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
 var useLibraryFeatures = () => {
   const context = React4.useContext(LibraryFeaturesContext,);
@@ -23010,10 +23011,13 @@ var implementation = {
     return image.src ?? '';
   },
   useImageElement(image, rect, nodeId,) {
-    const element = new Image();
-    element.src = runtime.useImageSource(image, rect, nodeId,);
-    if (image.srcSet) element.srcset = image.srcSet;
-    return element;
+    const src = runtime.useImageSource(image, rect, nodeId,);
+    return useMemo2(() => {
+      const element = new Image();
+      element.src = src;
+      if (image.srcSet) element.srcset = image.srcSet;
+      return element;
+    }, [src, image.srcSet,],);
   },
   canRenderOptimizedCanvasImage() {
     return false;
@@ -32092,7 +32096,7 @@ function useLoop({
   const shouldReduceMotion = useReducedMotionConfig();
   const values = useConstant2(makeFXValues,);
   const mirrorStateRef = useRef3(false,);
-  const delay2 = useDelay();
+  const delay3 = useDelay();
   const animationPromiseRef = useRef3(null,);
   const animateValues = useCallback(async () => {
     if (!loop) return;
@@ -32122,9 +32126,9 @@ function useLoop({
   const animateLoop = useCallback(async () => {
     if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues();
-    await delay2(loopRepeatDelay ?? 0,);
+    await delay3(loopRepeatDelay ?? 0,);
     void animateLoop();
-  }, [animateValues, delay2, loopEffectEnabled, loopRepeatDelay,],);
+  }, [animateValues, delay3, loopEffectEnabled, loopRepeatDelay,],);
   const start2 = useCallback(() => {
     if (shouldRunRef.current) return;
     shouldRunRef.current = true;
@@ -43995,6 +43999,730 @@ function isVariationAxis(axis,) {
   }
   return true;
 }
+function assert2(condition, ...msg) {
+  var _a, _b;
+  if (condition) return;
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (e.stack) {
+    try {
+      const lines = e.stack.split('\n',);
+      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+        lines.splice(1, 1,);
+        e.stack = lines.join('\n',);
+      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+        lines.splice(0, 1,);
+        e.stack = lines.join('\n',);
+      }
+    } catch {}
+  }
+  throw e;
+}
+var missing = Symbol('missing',);
+var frozenEmptyArray = Object.freeze([],);
+var errorReporter;
+function reportError({
+  error: maybeError,
+  tags,
+  extras,
+  critical,
+  caller,
+},) {
+  assert2(errorReporter, 'Set up an error callback with setErrorReporter, or configure Sentry with initializeEnvironment',);
+  const error = reportableError(maybeError, caller,);
+  errorReporter({
+    error,
+    tags: {
+      ...error.tags,
+      ...tags,
+    },
+    extras: {
+      ...error.extras,
+      ...extras,
+    },
+    critical: !!critical,
+  },);
+  return error;
+}
+function reportableError(error, caller = reportableError,) {
+  if (error instanceof Error) {
+    return error;
+  }
+  return new UnhandledError(error, caller,);
+}
+var UnhandledError = class extends Error {
+  constructor(error, caller,) {
+    const message = error ? JSON.stringify(error,) : 'No error message provided';
+    super(message,);
+    this.message = message;
+    if (caller && Error.captureStackTrace) {
+      Error.captureStackTrace(this, caller,);
+    } else {
+      try {
+        throw new Error();
+      } catch (e) {
+        this.stack = e.stack;
+      }
+    }
+  }
+};
+var hostname = typeof window !== 'undefined' ? window.location.hostname : void 0;
+var isLocal = Boolean(hostname && ['web.framerlocal.com', 'localhost', '127.0.0.1', '[::1]',].includes(hostname,),);
+var hosts = (() => {
+  if (!hostname) return;
+  if (isLocal) {
+    return {
+      main: hostname,
+      previewLink: void 0,
+    };
+  }
+  const previewHostRegex = /^(([^.]+\.)?beta\.)?((?:development\.)?framer\.com)$/u;
+  const match = hostname.match(previewHostRegex,);
+  if (!match || !match[3]) return;
+  return {
+    previewLink: match[2] && match[0],
+    main: match[3],
+  };
+})();
+var hostInfo = {
+  hosts,
+  isDevelopment: (hosts == null ? void 0 : hosts.main) === 'development.framer.com',
+  isProduction: (hosts == null ? void 0 : hosts.main) === 'framer.com',
+  isLocal,
+};
+var cachedServiceMap;
+function getServiceMap() {
+  if (typeof window === 'undefined') return {};
+  if (cachedServiceMap) return cachedServiceMap;
+  cachedServiceMap = extractServiceMap();
+  return cachedServiceMap;
+}
+function extractServiceMap() {
+  var _a, _b, _c;
+  const location = window.location;
+  let services = (_a = window == null ? void 0 : window.bootstrap) == null ? void 0 : _a.services;
+  if (services) {
+    return services;
+  }
+  let topOrigin;
+  try {
+    const topWindow = window.top;
+    topOrigin = topWindow.location.origin;
+    services = (_c = (_b = window.top) == null ? void 0 : _b.bootstrap) == null ? void 0 : _c.services;
+    if (services) {
+      return services;
+    }
+  } catch (e) {}
+  if (topOrigin && topOrigin !== location.origin) {
+    throw Error(`Unexpectedly embedded by ${topOrigin} (expected ${location.origin})`,);
+  }
+  if (location.origin.endsWith('framer.com',) || location.origin.endsWith('framer.dev',)) {
+    throw Error('ServiceMap data was not provided in document',);
+  }
+  try {
+    const servicesJSON = new URLSearchParams(location.search,).get('services',) ||
+      new URLSearchParams(location.hash.substring(1,),).get('services',);
+    if (servicesJSON) {
+      services = JSON.parse(servicesJSON,);
+    }
+  } catch (e) {}
+  if (services && typeof services === 'object' && services.api) {
+    return services;
+  }
+  throw Error('ServiceMap requested but not available',);
+}
+function jsonSafeCopy(obj, depth = 0, seen = /* @__PURE__ */ new Set(),) {
+  var _a;
+  if (obj === null) return obj;
+  if (typeof obj === 'function') return `[Function: ${obj.name ?? 'unknown'}]`;
+  if (typeof obj !== 'object') return obj;
+  if (obj instanceof Error) return `[${obj.toString()}]`;
+  if (seen.has(obj,)) return '[Circular]';
+  if (depth > 2) return '...';
+  seen.add(obj,);
+  try {
+    if ('toJSON' in obj && typeof obj.toJSON === 'function') {
+      return jsonSafeCopy(obj.toJSON(), depth + 1, seen,);
+    } else if (Array.isArray(obj,)) {
+      return obj.map((v) => jsonSafeCopy(v, depth + 1, seen,));
+    } else if (Object.getPrototypeOf(obj,) !== Object.prototype) {
+      return `[Object: ${'__class' in obj && obj.__class || ((_a = obj.constructor) == null ? void 0 : _a.name)}]`;
+    } else {
+      const result = {};
+      for (const [key7, v,] of Object.entries(obj,)) {
+        result[key7] = jsonSafeCopy(v, depth + 1, seen,);
+      }
+      return result;
+    }
+  } catch (e) {
+    return `[Throws: ${e instanceof Error ? e.message : e}]`;
+  } finally {
+    seen.delete(obj,);
+  }
+}
+var levelNames = ['trace', 'debug', 'info', 'warn', 'error',];
+var postfixNames = [':trace', ':debug', ':info', ':warn', ':error',];
+function applyLogLevelSpec(spec, all,) {
+  const missingSpecs = [];
+  for (const s of spec.split(/[ ,]/u,)) {
+    let match = s.trim();
+    if (match.length === 0) continue;
+    let level = 1;
+    let inverted = false;
+    if (match.startsWith('-',)) {
+      match = match.slice(1,);
+      level = 3;
+      inverted = true;
+    }
+    for (let i = 0; i <= 4; i++) {
+      const postfix = postfixNames[i];
+      if (!postfix) continue;
+      if (match.endsWith(postfix,)) {
+        level = i;
+        if (inverted) {
+          level += 1;
+        }
+        match = match.slice(0, match.length - postfix.length,);
+        if (match.length === 0) {
+          match = '*';
+        }
+        break;
+      }
+    }
+    const regex2 = new RegExp('^' + escapeRegExp(match,).replace(/\\\*/gu, '.*',) + '$',);
+    let loggersUpdated = 0;
+    for (const logger of all) {
+      if (logger.id.match(regex2,)) {
+        logger.level = level;
+        ++loggersUpdated;
+      }
+    }
+    if (loggersUpdated === 0) {
+      missingSpecs.push(s,);
+    }
+  }
+  return missingSpecs;
+}
+var _LogEntry = class _LogEntry2 {
+  constructor(logger, level, parts,) {
+    this.logger = logger;
+    this.level = level;
+    this.parts = parts;
+    __publicField(this, 'id',);
+    __publicField(this, 'time',);
+    __publicField(this, 'stringPrefix',);
+    this.id = _LogEntry2.nextId++;
+    this.time = Date.now();
+  }
+  toMessage() {
+    if (this.stringPrefix) return this.parts;
+    const r = [new Date(this.time,).toISOString().substr(-14, 14,), levelNames[this.level] + ': [' + this.logger.id + ']',];
+    let i = 0;
+    for (; i < this.parts.length; i++) {
+      const part = this.parts[i];
+      if (typeof part === 'string') {
+        r.push(part,);
+        continue;
+      }
+      break;
+    }
+    this.stringPrefix = r.join(' ',);
+    this.parts.splice(0, i, this.stringPrefix,);
+    return this.parts;
+  }
+  toString() {
+    return this.toMessage().map((part) => {
+      const type = typeof part;
+      if (type === 'string') return part;
+      if (type === 'function') return `[Function: ${part.name ?? 'unknown'}]`;
+      if (part instanceof Error) return part.stack ?? part.toString();
+      const json = JSON.stringify(jsonSafeCopy(part,),);
+      if ((json == null ? void 0 : json.length) > 253) {
+        return json.slice(0, 250,) + '...';
+      }
+      return json;
+    },).join(' ',);
+  }
+};
+__publicField(_LogEntry, 'nextId', 0,);
+var LogEntry = _LogEntry;
+var logLevelSpec = '*:app:info,app:info';
+var isNode = typeof process !== 'undefined' && !!process.kill;
+var isCI = isNode && false;
+if (isCI) {
+  logLevelSpec = '-:warn';
+} else if (isNode) {
+  logLevelSpec = '';
+}
+try {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    logLevelSpec = window.localStorage.logLevel || logLevelSpec;
+  }
+} catch {}
+try {
+  if (typeof process !== 'undefined') {
+    logLevelSpec = process.env.DEBUG || logLevelSpec;
+  }
+} catch {}
+try {
+  if (typeof window !== 'undefined') {
+    Object.assign(window, {
+      setLogLevel,
+    },);
+  }
+} catch {}
+try {
+  if (typeof window !== 'undefined' && !!window.postMessage && window.top === window) {
+    window.addEventListener('message', (msg) => {
+      if (!msg.data || typeof msg.data !== 'object') return;
+      const {
+        loggerId,
+        level,
+        parts,
+        printed,
+      } = msg.data;
+      if (typeof loggerId !== 'string') return;
+      if (!Array.isArray(parts,) || parts.length < 1 || typeof level !== 'number') return;
+      const logger = getLogger2(loggerId,);
+      if (level < 0 || level > 5) return;
+      parts[0] = parts[0].replace('[', '*[',);
+      const entry = new LogEntry(logger, level, parts,);
+      entry.stringPrefix = parts[0];
+      replayBuffer.push(entry,);
+      if (printed) return;
+      if (logger.level > level) return;
+      console == null ? void 0 : console.log(...entry.toMessage(),);
+    },);
+  }
+} catch {}
+var postLogEntry;
+try {
+  if (typeof window !== 'undefined' && !!window.postMessage && window.top !== window) {
+    postLogEntry = (entry) => {
+      var _a;
+      try {
+        const parts = entry.toMessage().map((p) => jsonSafeCopy(p,));
+        const logger = entry.logger;
+        const level = entry.level;
+        const printed = logger.level <= entry.level;
+        const data2 = {
+          loggerId: logger.id,
+          level,
+          parts,
+          printed,
+        };
+        (_a = window.top) == null ? void 0 : _a.postMessage(data2, getServiceMap().app,);
+      } catch {}
+    };
+  }
+} catch {}
+var loggers = {};
+var replayBuffer = [];
+var maxReplayBufferEntries = 1e3;
+function createLogEntry(logger, level, parts,) {
+  const entry = new LogEntry(logger, level, parts,);
+  replayBuffer.push(entry,);
+  postLogEntry == null ? void 0 : postLogEntry(entry,);
+  while (replayBuffer.length > maxReplayBufferEntries) {
+    replayBuffer.shift();
+  }
+  return entry;
+}
+function getLogReplayBuffer(maxEntries,) {
+  if (typeof maxEntries === 'number') {
+    maxReplayBufferEntries = maxEntries;
+  }
+  return replayBuffer;
+}
+var pathRegex = /\/(?<filename>[^/.]+)(?=\.(?:debug\.)?html$)/u;
+var cachedFilename;
+function getFilenameFromWindowPathname() {
+  var _a, _b;
+  if (typeof window === 'undefined' || !window.location) return;
+  cachedFilename ??= (_b = (_a = pathRegex.exec(window.location.pathname,)) == null ? void 0 : _a.groups) == null ? void 0 : _b.filename;
+  return cachedFilename;
+}
+function getLogger2(id3,) {
+  const path = getFilenameFromWindowPathname();
+  id3 = (path ? path + ':' : '') + id3;
+  const existing = loggers[id3];
+  if (existing) return existing;
+  const logger = new Logger(id3,);
+  loggers[id3] = logger;
+  applyLogLevelSpec(logLevelSpec, [logger,],);
+  postLogEntry == null ? void 0 : postLogEntry(new LogEntry(logger, -1, [],),);
+  return logger;
+}
+function setLogLevel(spec, replay = true,) {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.logLevel = spec;
+    }
+  } catch {}
+  const previousSpec = logLevelSpec;
+  logLevelSpec = spec;
+  const all = Object.values(loggers,);
+  for (const logger of all) {
+    logger.level = 3;
+  }
+  const missingSpecs = applyLogLevelSpec(spec, all,);
+  if (missingSpecs.length > 0) {
+    console == null ? void 0 : console.warn('Some log level specs matched no loggers:', missingSpecs,);
+  }
+  if (replay && replayBuffer.length > 0) {
+    console == null ? void 0 : console.log('--- LOG REPLAY ---',);
+    for (const entry of replayBuffer) {
+      if (entry.logger.level > entry.level) continue;
+      if (entry.level >= 3) {
+        console == null ? void 0 : console.warn(...entry.toMessage(),);
+      } else {
+        console == null ? void 0 : console.log(...entry.toMessage(),);
+      }
+    }
+    console == null ? void 0 : console.log('--- END OF LOG REPLAY ---',);
+  }
+  return previousSpec;
+}
+var enrichWithLogs = (extras) => {
+  const result = {
+    ...extras,
+    logs: getLogReplayBuffer().slice(-50,).map((entry) => entry.toString().slice(0, 600,)).join('\n',),
+  };
+  if (extras.logs) {
+    console == null ? void 0 : console.warn('extras.logs is reserved for log replay buffer, use another key',);
+  }
+  return result;
+};
+var Logger = class {
+  constructor(id3, errorIsCritical,) {
+    this.id = id3;
+    __publicField(this, 'level', 3,/* Warn */
+    );
+    __publicField(this, 'didLog', {},);
+    __publicField(this, 'errorIsCritical',);
+    __publicField(this, 'trace', (...parts) => {
+      if (this.level > 0) return;
+      const entry = createLogEntry(this, 0, parts,);
+      console == null ? void 0 : console.log(...entry.toMessage(),);
+    },);
+    __publicField(this, 'debug', (...parts) => {
+      const entry = createLogEntry(this, 1, parts,);
+      if (this.level > 1) return;
+      console == null ? void 0 : console.log(...entry.toMessage(),);
+    },);
+    __publicField(this, 'info', (...parts) => {
+      const entry = createLogEntry(this, 2, parts,);
+      if (this.level > 2) return;
+      console == null ? void 0 : console.info(...entry.toMessage(),);
+    },);
+    __publicField(this, 'warn', (...parts) => {
+      const entry = createLogEntry(this, 3, parts,);
+      if (this.level > 3) return;
+      console == null ? void 0 : console.warn(...entry.toMessage(),);
+    },);
+    __publicField(this, 'warnOncePerMinute', (firstPart, ...parts) => {
+      const lastLoggedTime = this.didLog[firstPart];
+      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
+      this.didLog[firstPart] = Date.now() + 1e3 * 60;
+      parts.unshift(firstPart,);
+      const entry = createLogEntry(this, 3, parts,);
+      if (this.level > 3) return;
+      console == null ? void 0 : console.warn(...entry.toMessage(),);
+    },);
+    __publicField(this, 'error', (...parts) => {
+      const entry = createLogEntry(this, 4, parts,);
+      if (this.level > 4) return;
+      console == null ? void 0 : console.error(...entry.toMessage(),);
+    },);
+    __publicField(this, 'errorOncePerMinute', (firstPart, ...parts) => {
+      const lastLoggedTime = this.didLog[firstPart];
+      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
+      this.didLog[firstPart] = Date.now() + 1e3 * 60;
+      parts.unshift(firstPart,);
+      const entry = createLogEntry(this, 4, parts,);
+      if (this.level > 4) return;
+      console == null ? void 0 : console.error(...entry.toMessage(),);
+    },);
+    __publicField(this, 'reportError', (maybeError, extras, tags, critical,) => {
+      extras = enrichWithLogs(extras ?? {},);
+      const reportedError = reportError({
+        caller: this.reportError,
+        error: maybeError,
+        tags: {
+          ...tags,
+          handler: 'logger',
+          where: this.id,
+        },
+        extras,
+        critical: critical ?? this.errorIsCritical,
+      },);
+      extras ? this.error(reportedError, extras,) : this.error(reportedError,);
+    },);
+    __publicField(this, 'reportErrorOncePerMinute', (error, extras,) => {
+      if (!isErrorWithMessage(error,)) return;
+      const lastLoggedTime = this.didLog[error.message];
+      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
+      this.didLog[error.message] = Date.now() + 1e3 * 60;
+      this.reportError(error, extras,);
+    },);
+    __publicField(this, 'reportCriticalError', (maybeError, extras, tags,) => this.reportError(maybeError, extras, tags, true,),);
+    this.errorIsCritical = errorIsCritical ?? (id3 === 'fatal' || id3.endsWith(':fatal',));
+  }
+  extend(name,) {
+    const id3 = this.id + ':' + name;
+    return getLogger2(id3,);
+  }
+  /** Returns the messages this logger created that are still in the global replay buffer. */
+  getBufferedMessages() {
+    return replayBuffer.filter((entry) => entry.logger === this);
+  }
+  /** Set new level and return previous level. */
+  setLevel(level,) {
+    const previous = this.level;
+    this.level = level;
+    return previous;
+  }
+  /** Check if a trace messages will be output. */
+  isLoggingTraceMessages() {
+    return this.level >= 0;
+  }
+};
+function isErrorWithMessage(maybeError,) {
+  return Object.prototype.hasOwnProperty.call(maybeError, 'message',);
+}
+function escapeRegExp(string,) {
+  return string.replace(/[/\-\\^$*+?.()|[\]{}]/gu, '\\$&',);
+}
+var Mixed = Symbol('Mixed',);
+var DEPENDENCIES_MODULE_NAME = 'dependencies';
+var DEPENDENCIES_MODULE_TYPE = 'config';
+var DEPENDENCIES_MODULE_TYPE_SLASH_NAME = `${DEPENDENCIES_MODULE_TYPE}/${DEPENDENCIES_MODULE_NAME}`;
+var IMPORT_MAP_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/importMap.json`;
+var DEPENDENCIES_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/dependencies.json`;
+var USE_FREEZE = false;
+var List;
+((List2) => {
+  function push(ls, ...elements) {
+    return ls.concat(elements,);
+  }
+  List2.push = push;
+  function pop(a,) {
+    return a.slice(0, -1,);
+  }
+  List2.pop = pop;
+  function unshift(ls, ...elements) {
+    return elements.concat(ls,);
+  }
+  List2.unshift = unshift;
+  function insert(a, index, ...elements) {
+    const length = a.length;
+    if (index < 0 || index > length) throw Error('index out of range: ' + index,);
+    const copy = a.slice();
+    copy.splice(index, 0, ...elements,);
+    return copy;
+  }
+  List2.insert = insert;
+  function replace(a, index, replacement,) {
+    const length = a.length;
+    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
+    const itemsToAdd = Array.isArray(replacement,) ? replacement : [replacement,];
+    const copy = a.slice();
+    copy.splice(index, 1, ...itemsToAdd,);
+    return copy;
+  }
+  List2.replace = replace;
+  function remove2(a, index,) {
+    const length = a.length;
+    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
+    const copy = a.slice();
+    copy.splice(index, 1,);
+    return copy;
+  }
+  List2.remove = remove2;
+  function move(a, from, to,) {
+    const length = a.length;
+    if (from < 0 || from >= length) throw Error('from index out of range: ' + from,);
+    if (to < 0 || to >= length) throw Error('to index out of range: ' + to,);
+    const copy = a.slice();
+    if (to === from) return copy;
+    const element = copy[from];
+    if (from < to) {
+      copy.splice(to + 1, 0, element,);
+      copy.splice(from, 1,);
+    } else {
+      copy.splice(from, 1,);
+      copy.splice(to, 0, element,);
+    }
+    return copy;
+  }
+  List2.move = move;
+  function zip(a, b,) {
+    const res = [];
+    const length = Math.min(a.length, b.length,);
+    for (let i = 0; i < length; i++) {
+      res.push([a[i], b[i],],);
+    }
+    return res;
+  }
+  List2.zip = zip;
+  function update(a, index, body,) {
+    const res = a.slice();
+    const targetElement = res[index];
+    if (targetElement === void 0) return res;
+    res[index] = body(targetElement,);
+    return res;
+  }
+  List2.update = update;
+  function unique(a,) {
+    return Array.from(new Set(a,),);
+  }
+  List2.unique = unique;
+  function union(a, ...collections) {
+    return Array.from(/* @__PURE__ */ new Set([...a, ...collections.flat(),],),);
+  }
+  List2.union = union;
+  function filter2(a, predicate,) {
+    return a.filter(predicate,);
+  }
+  List2.filter = filter2;
+})(List || (List = {}),);
+var objectHasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwnProperty2(object, property,) {
+  return objectHasOwnProperty.call(object, property,);
+}
+var ValueObject;
+((ValueObject2) => {
+  function morphUsingTemplate(values, template,) {
+    for (const field of Object.keys(values,)) {
+      if (!hasOwnProperty2(template, field,)) {
+        delete values[field];
+      }
+    }
+    for (const field of Object.keys(template,)) {
+      if (values[field] === void 0) {
+        values[field] = template[field];
+      }
+    }
+    Object.setPrototypeOf(values, Object.getPrototypeOf(template,),);
+    if (USE_FREEZE) {
+      Object.freeze(values,);
+    }
+    return values;
+  }
+  ValueObject2.morphUsingTemplate = morphUsingTemplate;
+  function writeOnce(object, values,) {
+    if (values) {
+      Object.assign(object, values,);
+    }
+    if (USE_FREEZE) {
+      Object.freeze(object,);
+    }
+  }
+  ValueObject2.writeOnce = writeOnce;
+  function update(object, values,) {
+    const result = Object.assign(Object.create(Object.getPrototypeOf(object,),), object, values,);
+    if (USE_FREEZE) {
+      Object.freeze(result,);
+    }
+    return result;
+  }
+  ValueObject2.update = update;
+})(ValueObject || (ValueObject = {}),);
+var ReadonlySet;
+((ReadonlySet2) => {
+  function add3(set, ...items) {
+    return /* @__PURE__ */ new Set([...set, ...items,],);
+  }
+  ReadonlySet2.add = add3;
+  function remove2(set, ...items) {
+    const result = new Set(set,);
+    for (const item of items) {
+      result.delete(item,);
+    }
+    return result;
+  }
+  ReadonlySet2.remove = remove2;
+  function union(...sets) {
+    const result = /* @__PURE__ */ new Set();
+    for (const set of sets) {
+      for (const item of set) {
+        result.add(item,);
+      }
+    }
+    return result;
+  }
+  ReadonlySet2.union = union;
+  function toggle(set, item,) {
+    if (set.has(item,)) {
+      return ReadonlySet2.remove(set, item,);
+    }
+    return ReadonlySet2.add(set, item,);
+  }
+  ReadonlySet2.toggle = toggle;
+})(ReadonlySet || (ReadonlySet = {}),);
+var ReadonlyMap;
+((ReadonlyMap2) => {
+  function set(map2, key7, value,) {
+    const result = new Map(map2,);
+    result.set(key7, value,);
+    return result;
+  }
+  ReadonlyMap2.set = set;
+  function remove2(map2, key7,) {
+    const result = new Map(map2,);
+    result.delete(key7,);
+    return result;
+  }
+  ReadonlyMap2.remove = remove2;
+})(ReadonlyMap || (ReadonlyMap = {}),);
+var ResolvablePromise = class extends Promise {
+  constructor() {
+    let res;
+    let rej;
+    super((resolve, reject,) => {
+      res = resolve;
+      rej = reject;
+    },);
+    __publicField(this, '_state', 'initial',);
+    __publicField(this, 'resolve',);
+    __publicField(this, 'reject',);
+    this.resolve = (val) => {
+      this._state = 'fulfilled';
+      res(val,);
+    };
+    this.reject = (reason) => {
+      this._state = 'rejected';
+      rej(reason,);
+    };
+  }
+  get state() {
+    return this._state;
+  }
+  /**
+   * A function that sets the state to "pending".
+   * Useful for when you want to signal that the task started but is not yet completed.
+   */
+  pending() {
+    this._state = 'pending';
+    return this;
+  }
+  isResolved() {
+    return this._state === 'fulfilled' || this._state === 'rejected';
+  }
+};
+ResolvablePromise.prototype.constructor = Promise;
+var hasNativeYield = false;
+var hasNativePostTask = false;
+var hasIsInputPending = false;
+if (typeof window !== 'undefined' && window.scheduler) {
+  hasNativeYield = 'yield' in window.scheduler;
+  hasNativePostTask = 'postTask' in window.scheduler;
+  hasIsInputPending = 'isInputPending' in window.scheduler;
+}
+var log2 = getLogger2('task-queue',);
+function createAbsoluteAssetURL(filename,) {
+  const serviceMap = getServiceMap();
+  return `${serviceMap.userContent}/assets/${filename}`;
+}
 var builtInFontSelectorPrefix = 'BI;';
 var BuiltInFontSource = class {
   constructor() {
@@ -44020,11 +44748,12 @@ var BuiltInFontSource = class {
       const variationAxesData = properties.font.variationAxes;
       const isVariableFont2 = Array.isArray(variationAxesData,);
       const variant = isVariableFont2 ? 'variable' : properties.font.preferredSubFamily || properties.font.fontSubFamily || 'regular';
+      const url = createAbsoluteAssetURL(asset.filename,);
       const font = {
         family: fontFamily,
         selector: this.createSelector(fontName, variant, properties.font.fontVersion,),
         variant,
-        file: asset.url,
+        file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes(variationAxesData,),
         category: properties.font.fontCategory,
@@ -44242,12 +44971,13 @@ var CustomFontSource = class {
       const fontFamily = this.createFontFamily(fontName,);
       const openTypeData = (_b = asset.properties) == null ? void 0 : _b.font.openTypeData;
       const variant = isVariableFont2 ? 'variable' : this.inferVariantName(fontName,);
+      const url = createAbsoluteAssetURL(asset.filename,);
       const font = {
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
         variant,
         postscriptName: (_c = asset.properties) == null ? void 0 : _c.font.postscriptName,
-        file: asset.url,
+        file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes(variationAxesData,),
       };
@@ -47326,11 +48056,11 @@ function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
   };
 }
 var mediaType2 = 'framer/asset-reference,';
-function isAssetReference(value,) {
+function isAssetReference2(value,) {
   return value.startsWith(`data:${mediaType2}`,);
 }
 function imageUrlForAsset(asset, pixelSize,) {
-  if (/^\w+:/u.test(asset,) && !isAssetReference(asset,)) return asset;
+  if (/^\w+:/u.test(asset,) && !isAssetReference2(asset,)) return asset;
   if (typeof pixelSize !== 'number') pixelSize = void 0;
   else if (pixelSize <= 512) pixelSize = 512;
   else if (pixelSize <= 1024) pixelSize = 1024;
@@ -49571,13 +50301,14 @@ var package_default = {
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
     '@types/dom-navigation': '^1.0.5',
-    '@types/google.fonts': '^1.0.5',
-    '@types/node': '^20.16.5',
-    '@types/react': '^18.2.67',
-    '@types/react-dom': '^18.2.22',
+    '@types/fontfaceobserver': '2.1',
+    '@types/google.fonts': '1.0',
+    '@types/node': '22.16',
+    '@types/react': '18.2',
+    '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.35.0',
-    '@typescript-eslint/parser': '^8.35.0',
+    '@typescript-eslint/eslint-plugin': '^8.36.0',
+    '@typescript-eslint/parser': '^8.36.0',
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
@@ -49589,7 +50320,7 @@ var package_default = {
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
-    typescript: '^5.7.3',
+    typescript: '^5.8.3',
     yargs: '^17.7.2',
   },
   peerDependencies: {
