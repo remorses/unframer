@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.AIFWHV3N.mjs
+// /:https://app.framerstatic.com/framer.7ZIFZG7B.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -35319,7 +35319,7 @@ function useTrackLinkClick({
         ...pageviewEventData,
         href: hrefAttribute ? makeUrlAbsolute(hrefAttribute,) : null,
         nodeId: nodeId ?? null,
-        trackingId: clickTrackingId ?? null,
+        trackingId: clickTrackingId || null,
         targetRoutePath: null,
         targetWebPageId: null,
         targetCollectionItemId: null,
@@ -35772,7 +35772,7 @@ function trackFormSubmit({
   const eventData = {
     ...pageviewEventData,
     nodeId: nodeId ?? null,
-    trackingId: submitTrackingId ?? null,
+    trackingId: submitTrackingId || null,
   };
   return sendTrackingEvent('published_site_form_submit', eventData, 'eager',);
 }
