@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.62F4HQXS.mjs
+// /:https://app.framerstatic.com/framer.PCWRWNKC.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -44783,10 +44783,9 @@ var BuiltInFontSource = class {
       style: style2,
     };
   }
-  getFontBySelector(selector, createFont = true,) {
+  getFontBySelector(selector,) {
     const locator = this.parseSelector(selector,);
     if (!locator) return;
-    if (!createFont && !this.byFamilyName.get(locator.name,)) return;
     const fontFamily = this.getFontFamilyByName(locator.name,);
     if (!fontFamily) return;
     return fontFamily.fonts.find((f) => f.selector === selector);
@@ -45044,31 +45043,22 @@ var CustomFontSource = class {
     };
     return locator;
   }
-  getFontBySelector(selector, createFont = true,) {
+  getFontBySelector(selector,) {
+    var _a;
     const locator = this.parseSelector(selector,);
     if (!locator) return;
-    if (!createFont && !this.byFamilyName.get(locator.name,)) return;
-    const fonts = this.getFontFamilyByName(locator.name,).fonts;
+    const fonts = (_a = this.getFontFamilyByName(locator.name,)) == null ? void 0 : _a.fonts;
+    if (!fonts) return;
     const woff2Font = fonts.find((font) => {
-      var _a;
-      return (_a = font.file) == null ? void 0 : _a.endsWith('.woff2',);
+      var _a2;
+      return (_a2 = font.file) == null ? void 0 : _a2.endsWith('.woff2',);
     },);
     return woff2Font || fonts[0];
   }
   getFontFamilyByName(family,) {
     const foundFontFamily = this.byFamilyName.get(family,);
-    if (foundFontFamily) return foundFontFamily;
-    const fontFamily = {
-      source: 'custom',
-      name: family,
-      fonts: [],
-    };
-    fontFamily.fonts.push({
-      selector: `${customFontSelectorPrefix}${family}`,
-      variant: this.inferVariantName(family,),
-      family: fontFamily,
-    },);
-    return fontFamily;
+    if (!foundFontFamily) return null;
+    return foundFontFamily;
   }
 };
 function getRelatedFontVariants(currentVariant, availableVariants,) {
@@ -45838,14 +45828,21 @@ var FontStore = class {
       this.resolveCustomFontsImportPromise();
     }
   }
+  /**
+   * Returns a promise that resolves when custom fonts have been imported
+   * @internal
+   */
+  getCustomFontsImportPromise() {
+    return this.customFontsImportPromise;
+  }
   getFontFamily(info,) {
     const fontFamily = this[info.source].getFontFamilyByName(info.name,);
     return fontFamily;
   }
-  getFontBySelector(selector, createFont = true,) {
+  getFontBySelector(selector,) {
     if (!selector) return void 0;
     if (selector.startsWith(customFontSelectorPrefix,)) {
-      return this.custom.getFontBySelector(selector, createFont,);
+      return this.custom.getFontBySelector(selector,);
     }
     return this.bySelector.get(selector,);
   }
