@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.PCWRWNKC.mjs
+// /:https://app.framerstatic.com/framer.Z2MZKKHP.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -44719,9 +44719,15 @@ if (typeof window !== 'undefined' && window.scheduler) {
   hasIsInputPending = 'isInputPending' in window.scheduler;
 }
 var log2 = getLogger2('task-queue',);
+function getAssetFilename(asset,) {
+  return asset.key + asset.extension;
+}
 function createAbsoluteAssetURL(filename,) {
   const serviceMap = getServiceMap();
   return `${serviceMap.userContent}/assets/${filename}`;
+}
+function createAbsoluteAssetURLFromAsset(asset,) {
+  return createAbsoluteAssetURL(getAssetFilename(asset,),);
 }
 var builtInFontSelectorPrefix = 'BI;';
 var BuiltInFontSource = class {
@@ -44748,7 +44754,7 @@ var BuiltInFontSource = class {
       const variationAxesData = properties.font.variationAxes;
       const isVariableFont2 = Array.isArray(variationAxesData,);
       const variant = isVariableFont2 ? 'variable' : properties.font.preferredSubFamily || properties.font.fontSubFamily || 'regular';
-      const url = createAbsoluteAssetURL(asset.filename,);
+      const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
         family: fontFamily,
         selector: this.createSelector(fontName, variant, properties.font.fontVersion,),
@@ -44970,7 +44976,7 @@ var CustomFontSource = class {
       const fontFamily = this.createFontFamily(fontName,);
       const openTypeData = (_b = asset.properties) == null ? void 0 : _b.font.openTypeData;
       const variant = isVariableFont2 ? 'variable' : this.inferVariantName(fontName,);
-      const url = createAbsoluteAssetURL(asset.filename,);
+      const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
