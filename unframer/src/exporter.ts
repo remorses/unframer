@@ -1421,6 +1421,10 @@ export function componentCamelCase(str: string) {
     str = str.replace(/-([\w])/g, (g) => g[1].toUpperCase())
     str = str.replace(/_([a-z])/g, (g) => g[1].toUpperCase())
     str = str[0].toUpperCase() + str.slice(1)
+    // If component name starts with a number, add prefix 'Framer'
+    if (/^[0-9]/.test(str)) {
+        str = 'Framer' + str
+    }
     str = str + 'FramerComponent'
     return str
 }
