@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.Z2MZKKHP.mjs
+// /:https://app.framerstatic.com/framer.F4HUXOMT.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13667,7 +13667,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     updateCanonicalURL(window.location.href,);
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback((event) => {
-    if (event.navigationType !== 'traverse') return;
+    if (event.navigationType !== 'traverse' || !event.canIntercept) return;
     event.intercept({
       async handler() {
         await new Promise((resolve, reject,) => {
@@ -13792,7 +13792,7 @@ function useNativeLoadingSpinner() {
   const navigationPromise = useRef3(Promise.resolve(),);
   const navigationController = useRef3();
   const navigateListener = useCallback((navigateEvent) => {
-    if (navigateEvent.navigationType === 'traverse') return;
+    if (navigateEvent.navigationType === 'traverse' || !navigateEvent.canIntercept) return;
     const controller = navigationController.current;
     controller == null ? void 0 : controller.signal.addEventListener('abort', () => {
       controller.abort('user aborted',);
@@ -34565,6 +34565,10 @@ var LazyValue = class _LazyValue {
   static is(value,) {
     return value instanceof _LazyValue;
   }
+  get state() {
+    var _a;
+    return ((_a = this.status) == null ? void 0 : _a.type) ?? 'pending';
+  }
   /** Preload the value so it can be read() later. */
   preload() {
     if (this.status) {
@@ -41681,17 +41685,31 @@ ${stringifyQuery(query,)}`,);
   }
 };
 var QueryCache = class {
-  constructor(queryEngine2,) {
+  constructor(queryEngine2, maxSize = Infinity,) {
     this.queryEngine = queryEngine2;
+    this.maxSize = maxSize;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
+  }
+  prune() {
+    if (this.cache.size <= this.maxSize) return;
+    for (const [key7, value,] of this.cache) {
+      if (this.cache.size <= this.maxSize) break;
+      if (value.state === 'pending') continue;
+      this.cache.delete(key7,);
+    }
   }
   get(query, locale,) {
     const key7 = getCacheKey(query, locale,);
     const existing = this.cache.get(key7,);
-    if (existing) return existing;
+    if (existing) {
+      this.cache.delete(key7,);
+      this.cache.set(key7, existing,);
+      return existing;
+    }
     const resolver = () => this.queryEngine.query(query, locale,);
     const value = new LazyValue(resolver,);
     this.cache.set(key7, value,);
+    this.prune();
     return value;
   }
 };
@@ -43961,44 +43979,6 @@ function createFontFamilyName(font,) {
 function createVariableFontFamilyName(familyName,) {
   return `${familyName} Variable`;
 }
-function supportsOpenType(openTypeData,) {
-  return Boolean(openTypeData && Array.isArray(openTypeData,),);
-}
-function validateVariationAxes(variationAxesData,) {
-  if (!variationAxesData) return;
-  if (!Array.isArray(variationAxesData,)) return;
-  const variationAxes = [];
-  for (const axis of variationAxesData) {
-    if (!isVariationAxis(axis,)) continue;
-    variationAxes.push({
-      tag: axis.tag,
-      name: axis.name,
-      minValue: axis.minValue,
-      maxValue: axis.maxValue,
-      defaultValue: axis.defaultValue,
-    },);
-  }
-  return variationAxes;
-}
-function isOpenTypeFeature(feature,) {
-  if (typeof feature !== 'object' || feature === null) return false;
-  if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
-  if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
-    return false;
-  }
-  return true;
-}
-function isVariationAxis(axis,) {
-  if (typeof axis !== 'object' || axis === null) return false;
-  if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
-  if ('name' in axis && typeof axis.name !== 'string') return false;
-  if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
-  if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
-  if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
-    return false;
-  }
-  return true;
-}
 function assert2(condition, ...msg) {
   var _a, _b;
   if (condition) return;
@@ -44729,6 +44709,44 @@ function createAbsoluteAssetURL(filename,) {
 function createAbsoluteAssetURLFromAsset(asset,) {
   return createAbsoluteAssetURL(getAssetFilename(asset,),);
 }
+function supportsOpenType(openTypeData,) {
+  return Boolean(openTypeData && Array.isArray(openTypeData,),);
+}
+function validateVariationAxes(variationAxesData,) {
+  if (!variationAxesData) return;
+  if (!Array.isArray(variationAxesData,)) return;
+  const variationAxes = [];
+  for (const axis of variationAxesData) {
+    if (!isVariationAxis(axis,)) continue;
+    variationAxes.push({
+      tag: axis.tag,
+      name: axis.name,
+      minValue: axis.minValue,
+      maxValue: axis.maxValue,
+      defaultValue: axis.defaultValue,
+    },);
+  }
+  return variationAxes;
+}
+function isOpenTypeFeature(feature,) {
+  if (typeof feature !== 'object' || feature === null) return false;
+  if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
+  if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
+    return false;
+  }
+  return true;
+}
+function isVariationAxis(axis,) {
+  if (typeof axis !== 'object' || axis === null) return false;
+  if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
+  if ('name' in axis && typeof axis.name !== 'string') return false;
+  if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
+  if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
+  if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
+    return false;
+  }
+  return true;
+}
 var builtInFontSelectorPrefix = 'BI;';
 var BuiltInFontSource = class {
   constructor() {
@@ -44748,12 +44766,12 @@ var BuiltInFontSource = class {
       const {
         properties,
       } = asset;
-      const fontName = properties.font.preferredFamily || properties.font.fontFamily;
+      const fontName = properties.font.fontFamily;
       const fontFamily = this.createFontFamily(fontName, properties.font.foundryName, properties.font.fontVersion,);
       const openTypeData = properties.font.openTypeData;
       const variationAxesData = properties.font.variationAxes;
       const isVariableFont2 = Array.isArray(variationAxesData,);
-      const variant = isVariableFont2 ? 'variable' : properties.font.preferredSubFamily || properties.font.fontSubFamily || 'regular';
+      const variant = isVariableFont2 ? 'variable' : properties.font.fontSubFamily || 'regular';
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
         family: fontFamily,
@@ -44940,19 +44958,56 @@ function getFontStyle(variant,) {
   return 'normal';
 }
 var customFontSelectorPrefix = 'CUSTOM;';
+var log3 = getLogger('custom-font-source',);
+function findDuplicateFont(existingFonts, newFont,) {
+  for (let i = 0; i < existingFonts.length; i++) {
+    const existingFont = existingFonts[i];
+    if (
+      existingFont && existingFont.selector === newFont.selector && existingFont.weight === newFont.weight &&
+      existingFont.style === newFont.style
+    ) {
+      return {
+        existingFont,
+        index: i,
+      };
+    }
+  }
+  return void 0;
+}
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
   const {
     font,
   } = properties;
-  const fontFamily = font.preferredFamily || font.fontFamily;
+  const fontFamily = font.fontFamily;
   const isAssetVariableFont = Array.isArray(font.variationAxes,);
   if (isAssetVariableFont && fontFamily.toLowerCase().includes('variable',)) return fontFamily;
-  const variant = isAssetVariableFont ? 'Variable' : (font.preferredSubFamily || font.fontSubFamily).trim();
+  const variant = isAssetVariableFont ? 'Variable' : font.fontSubFamily.trim();
   if (variant === '') return fontFamily;
   return `${fontFamily} ${variant}`;
 }
-var CustomFontSource = class {
+function getCustomFontInfo({
+  fontFamily,
+  fontSubFamily,
+  variationAxes,
+  faceDescriptors,
+},) {
+  const rawVariant = fontSubFamily.trim() || 'Regular';
+  const variant = validateVariationAxes(variationAxes,) ? 'Variable' : rawVariant;
+  let style2 = 'normal';
+  let weight = 400;
+  if (faceDescriptors) {
+    weight = faceDescriptors.weight;
+    style2 = faceDescriptors.italic || faceDescriptors.oblique ? 'italic' : 'normal';
+  }
+  return {
+    family: fontFamily,
+    variant,
+    weight,
+    style: style2,
+  };
+}
+var CustomFontSource = class _CustomFontSource {
   constructor() {
     __publicField(this, 'name', 'custom',/* Custom */
     );
@@ -44960,8 +45015,8 @@ var CustomFontSource = class {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
     __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
   }
-  importFonts(assets,) {
-    var _a, _b, _c;
+  deprecatedImportFonts(assets,) {
+    var _a, _b;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
@@ -44981,7 +45036,6 @@ var CustomFontSource = class {
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
         variant,
-        postscriptName: (_c = asset.properties) == null ? void 0 : _c.font.postscriptName,
         file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes(variationAxesData,),
@@ -44992,6 +45046,60 @@ var CustomFontSource = class {
       fonts.push(...fontFamily.fonts,);
     }
     return fonts;
+  }
+  importFonts(assets, enableFontImprovements,) {
+    var _a, _b, _c, _d;
+    if (!enableFontImprovements) {
+      return this.deprecatedImportFonts(assets,);
+    }
+    this.fontFamilies.length = 0;
+    this.byFamilyName.clear();
+    this.assetsByFamily.clear();
+    const fonts = {};
+    for (const asset of assets) {
+      if (!this.isValidCustomFontAsset(asset,)) {
+        continue;
+      }
+      const {
+        family,
+        variant,
+        weight,
+        style: style2,
+      } = getCustomFontInfo(asset.properties.font,);
+      const fontFamily = this.createFontFamily(family,);
+      const openTypeData = (_a = asset.properties) == null ? void 0 : _a.font.openTypeData;
+      const url = createAbsoluteAssetURLFromAsset(asset,);
+      const font = {
+        family: fontFamily,
+        selector: _CustomFontSource.createSelector(fontFamily.name, variant,),
+        variant,
+        weight,
+        style: style2,
+        file: url,
+        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
+        variationAxes: validateVariationAxes((_b = asset.properties) == null ? void 0 : _b.font.variationAxes,),
+      };
+      const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
+      if (duplicateInfo) {
+        log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
+        const existingFont = duplicateInfo.existingFont;
+        const newIsWoff2 = ((_c = font.file) == null ? void 0 : _c.endsWith('.woff2',)) ?? false;
+        const existingIsWoff2 = ((_d = existingFont.file) == null ? void 0 : _d.endsWith('.woff2',)) ?? false;
+        if (newIsWoff2 && !existingIsWoff2) {
+          fontFamily.fonts[duplicateInfo.index] = font;
+          fonts[font.selector] = font;
+        }
+      } else {
+        fontFamily.fonts.push(font,);
+        fonts[font.selector] = font;
+      }
+      fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
+      this.assetsByFamily.set(family, asset,);
+    }
+    return Object.values(fonts,);
+  }
+  static createSelector(family, variant,) {
+    return `${customFontSelectorPrefix}${family}${variant ? ` ${variant}` : ''}`;
   }
   isValidCustomFontAsset(asset,) {
     var _a;
@@ -45039,27 +45147,32 @@ var CustomFontSource = class {
     this.fontFamilies.push(fontFamily,);
     this.byFamilyName.set(fontFamily.name, fontFamily,);
   }
-  parseSelector(selector,) {
-    if (!selector.startsWith(customFontSelectorPrefix,)) return null;
-    const tokens = selector.split(customFontSelectorPrefix,);
-    if (tokens[1] === void 0) return null;
-    const locator = {
-      source: 'custom',
-      name: tokens[1],
-    };
-    return locator;
-  }
   getFontBySelector(selector,) {
-    var _a;
-    const locator = this.parseSelector(selector,);
-    if (!locator) return;
-    const fonts = (_a = this.getFontFamilyByName(locator.name,)) == null ? void 0 : _a.fonts;
-    if (!fonts) return;
-    const woff2Font = fonts.find((font) => {
-      var _a2;
-      return (_a2 = font.file) == null ? void 0 : _a2.endsWith('.woff2',);
-    },);
-    return woff2Font || fonts[0];
+    if (!selector.startsWith(customFontSelectorPrefix,)) return void 0;
+    const remainingSelector = selector.slice(customFontSelectorPrefix.length,);
+    if (!remainingSelector) return void 0;
+    const matchingFonts = [];
+    let firstMatchingFamily;
+    for (const [familyName, fontFamily,] of this.byFamilyName) {
+      if (remainingSelector.startsWith(familyName,)) {
+        if (!firstMatchingFamily) {
+          firstMatchingFamily = fontFamily;
+        }
+        const exactMatches = fontFamily.fonts.filter((font) => font.selector === selector);
+        matchingFonts.push(...exactMatches,);
+      }
+    }
+    if (matchingFonts.length > 0) {
+      if (matchingFonts.length > 1) {
+        const woff2Font = matchingFonts.find((font) => {
+          var _a;
+          return (_a = font.file) == null ? void 0 : _a.endsWith('.woff2',);
+        },);
+        if (woff2Font) return woff2Font;
+      }
+      return matchingFonts[0];
+    }
+    return void 0;
   }
   getFontFamilyByName(family,) {
     const foundFontFamily = this.byFamilyName.get(family,);
@@ -45820,13 +45933,13 @@ var FontStore = class {
       this.addFont(font,);
     },);
   }
-  importCustomFonts(assets,) {
+  importCustomFonts(assets, enableFontImprovements,) {
     this.bySelector.forEach((_, key7,) => {
       if (key7.startsWith(customFontSelectorPrefix,)) {
         this.bySelector.delete(key7,);
       }
     },);
-    const importedFonts = this.custom.importFonts(assets,);
+    const importedFonts = this.custom.importFonts(assets, enableFontImprovements,);
     for (const font of importedFonts) {
       this.addFont(font,);
     }
@@ -50316,6 +50429,7 @@ var package_default = {
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
     immutable: '^3.8.2',
+    jest: '29.4.1',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
