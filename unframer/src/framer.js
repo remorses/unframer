@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.F4HUXOMT.mjs
+// /:https://app.framerstatic.com/framer.CRIKKNR5.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -33790,18 +33790,20 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     placement,
   ],);
   if (!hasHoverCapability || !cursor || !Cursor) return null;
-  return /* @__PURE__ */ jsx3(Cursor, {
-    transformTemplate: transformTemplate2,
-    style: {
-      ...staticCursorStyle,
-      x,
-      y,
-      opacity,
-    },
-    globalTapTarget: true,
-    variant: cursor == null ? void 0 : cursor.variant,
-    ref: cursorRef,
-    className: cursorComponentClassName,
+  return /* @__PURE__ */ jsx3(Suspense2, {
+    children: /* @__PURE__ */ jsx3(Cursor, {
+      transformTemplate: transformTemplate2,
+      style: {
+        ...staticCursorStyle,
+        x,
+        y,
+        opacity,
+      },
+      globalTapTarget: true,
+      variant: cursor == null ? void 0 : cursor.variant,
+      ref: cursorRef,
+      className: cursorComponentClassName,
+    },),
   },);
 },);
 function useCustomCursors(webPageCursors,) {
@@ -36182,6 +36184,15 @@ function Router({
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const startNavigation = useNavigationTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
+  const {
+    synchronousNavigationOnDesktop,
+  } = useLibraryFeatures();
+  const transitionFn = useMemo2(() => {
+    if (!synchronousNavigationOnDesktop || !isDesktop()) {
+      return startTransition2;
+    }
+    return (fn) => fn();
+  }, [synchronousNavigationOnDesktop,],);
   const isInitialNavigationRef = useRef3(true,);
   const currentRouteRef = useRef3(initialRoute,);
   const currentPathVariablesRef = useRef3(initialPathVariables,);
@@ -36255,7 +36266,7 @@ function Router({
           };
           void startNavigation(
             () => {
-              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,),// no signal here, because we update the refs above immediately
+              void startViewTransition2(currentRouteId2, currentRouteId2, () => transitionFn(forceUpdate,),// no signal here, because we update the refs above immediately
               );
             },
             nextRender,
@@ -36275,6 +36286,7 @@ function Router({
     startNavigation,
     startViewTransition2,
     monitorNextPaintAfterRender,
+    transitionFn,
   ],);
   const setCurrentRouteId = useCallback(
     (routeId, localeId, hash2, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
@@ -36287,19 +36299,19 @@ function Router({
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
       if (isHistoryTransition) {
-        startTransition2(forceUpdate,);
+        transitionFn(forceUpdate,);
         return;
       }
       void startNavigation(
         (signal) => {
-          void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), signal,);
+          void startViewTransition2(currentRouteId2, routeId, () => transitionFn(forceUpdate,), signal,);
         },
         nextRender,
         updateURL,
         true,
       );
     },
-    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
+    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2, transitionFn,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll, beforeUrlUpdate,) => {
@@ -50395,12 +50407,12 @@ var package_default = {
   author: 'Framer',
   license: 'MIT',
   scripts: {
-    coverage: 'yarn :jest --coverage',
-    lint: 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
+    coverage: 'jest --coverage',
+    lint: 'eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
-    test: 'yarn :jest',
-    watch: 'yarn :jest --watch',
+    test: 'jest',
+    watch: 'jest --watch',
     postinstall: 'node postinstall.cjs',
   },
   dependencies: {
