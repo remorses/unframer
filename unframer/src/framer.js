@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4GECUXCI.mjs
+// /:https://app.framerstatic.com/framer.GOWL5DJH.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13814,6 +13814,30 @@ function useNativeLoadingSpinner() {
       window.navigation.removeEventListener('navigate', navigateListener,);
     },);
   }, [navigateListener,],);
+}
+var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
+var trimSlugRegExp = /^-+|-+$/gu;
+function slugify(value,) {
+  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
+}
+var NodeIdContext = /* @__PURE__ */ React4.createContext(null,);
+function useTracking() {
+  const router = useRouter();
+  const nodeId = useContext(NodeIdContext,);
+  return useCallback((trackingId) => {
+    var _a;
+    if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    if (slugify(trackingId,) !== trackingId) {
+      throw new Error(`Invalid tracking ID: ${trackingId}`,);
+    }
+    const pageviewEventData = router.pageviewEventData.current;
+    return sendTrackingEvent('published_site_custom_event', {
+      ...pageviewEventData,
+      nodeId,
+      // Don't attach a tracking ID if it's empty
+      trackingId: trackingId || null,
+    }, 'eager',);
+  }, [router, nodeId,],);
 }
 function useRouteAnchor(routeId, {
   elementId,
@@ -23005,8 +23029,11 @@ var mockWithoutWarning = () => {
   return () => {};
 };
 var implementation = {
-  // We need a default implementation for useImageSource and useImageElement as it is used for rendering image backgrounds which would break otherwise.
-  // The default value is used for HTML export and when using the library without Framer.
+  // We need a default implementation for useImageSource and useImageElement as it is used for
+  // rendering image backgrounds which would break otherwise. The default value is used for HTML
+  // export and when using the library without Framer.
+  imagePlaceholderSvg:
+    `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="rgb(136, 136, 136, 0.2)" fill-rule="evenodd"/></svg>`,
   useImageSource(image,) {
     return image.src ?? '';
   },
@@ -23052,16 +23079,12 @@ var wrapperStyle = {
   left: 0,
 };
 function getPlaceholderStyle() {
-  const placeholderStyle = {
+  return {
     backgroundRepeat: 'repeat',
     backgroundPosition: 'left top',
-    backgroundSize: '126px auto',
-    backgroundImage: encodeSVGForCSS(
-      `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="#888" fill-rule="evenodd"/></svg>`,
-    ),
-    opacity: 0.2,
+    backgroundSize: '64px auto',
+    backgroundImage: encodeSVGForCSS(runtime.imagePlaceholderSvg,),
   };
-  return placeholderStyle;
 }
 function cssObjectFit(imageFit,) {
   switch (imageFit) {
@@ -33469,12 +33492,15 @@ var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
     ref,
     children: /* @__PURE__ */ jsx3(ComponentContainerContext.Provider, {
       value: true,
-      children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
-        enabled: false,
-        children: /* @__PURE__ */ jsx3(LayoutGroup, {
-          id: layoutId ?? '',
-          inherit: 'id',
-          children: childrenWithCodeBoundary,
+      children: /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+        value: nodeId ?? null,
+        children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
+          enabled: false,
+          children: /* @__PURE__ */ jsx3(LayoutGroup, {
+            id: layoutId ?? '',
+            inherit: 'id',
+            children: childrenWithCodeBoundary,
+          },),
         },),
       },),
     },),
@@ -33506,11 +33532,14 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
     const Component17 = htmlElementAsMotionComponent(tagName,);
-    return /* @__PURE__ */ jsx3(Component17, {
-      ...otherProps,
-      ref,
-      style: props.style,
-      children: childrenWithCodeBoundary,
+    return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+      value: nodeId ?? null,
+      children: /* @__PURE__ */ jsx3(Component17, {
+        ...otherProps,
+        ref,
+        style: props.style,
+        children: childrenWithCodeBoundary,
+      },),
     },);
   } else {
     const Component17 = tagName;
@@ -33519,17 +33548,15 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
       layoutDependency,
       ...plainHTMLRenderableProps
     } = otherProps;
-    return (
-      // Passing `props.style` explicitly to allow TypeScript to narrow the type of `props.style` according
-      // to the value of `props.rendersWithMotion`.
-      /* @__PURE__ */
-      jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+      value: nodeId ?? null,
+      children: /* @__PURE__ */ jsx3(Component17, {
         ...plainHTMLRenderableProps,
         ref,
         style: props.style,
         children: childrenWithCodeBoundary,
-      },)
-    );
+      },),
+    },);
   }
 },);
 var CustomCursorContext = /* @__PURE__ */ createContext({
@@ -42943,15 +42970,18 @@ function withCodeBoundaryForOverrides(Component17, {
     );
     if (shouldWrapWithBoundary) {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx3(CodeComponentBoundary, {
-          getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
-          fallback: /* @__PURE__ */ jsx3(Component17, {
-            ...props,
-            ref,
-          },),
-          children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
-            ...props,
-            ref,
+        return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+          value: nodeId,
+          children: /* @__PURE__ */ jsx3(CodeComponentBoundary, {
+            getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
+            fallback: /* @__PURE__ */ jsx3(Component17, {
+              ...props,
+              ref,
+            },),
+            children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
+              ...props,
+              ref,
+            },),
           },),
         },);
       } else {
@@ -42968,9 +42998,12 @@ function withCodeBoundaryForOverrides(Component17, {
       }
     } else {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx3(appliedOverride.Component, {
-          ...props,
-          ref,
+        return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+          value: nodeId,
+          children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
+            ...props,
+            ref,
+          },),
         },);
       } else {
         throw appliedOverride.error;
@@ -45262,11 +45295,11 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-LHIHIYDX-NVWWNJLR.js');
+      const supportedFonts = await import('./framer-chunks/google-3ASCFEEO-3R47BR2A.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-GSJIWLGZ-3DSFZVD7.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-4J2ZFRBB-H5VQLZTM.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -45276,11 +45309,11 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3GQMHAEU-WSITVUPV.js');
+      const features = await import('./framer-chunks/google-FDB6LUFQ-PFSUZGKF.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-SSHBFVID-JIQZ2OLR.js');
+      const features = await import('./framer-chunks/fontshare-622CVMZZ-HFPH543A.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
@@ -45828,10 +45861,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-42BCYVR5-QT55MZO3.js')).default;
+            return (await import('./framer-chunks/google-C62SNV32-LCI4F7VO.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X6MCIXW5-UOB5XTBQ.js')).default;
+            return (await import('./framer-chunks/fontshare-JGEKH7YN-QOX3MC3K.js')).default;
           }
           default:
             assertNever(source,);
@@ -46948,11 +46981,6 @@ var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
     ],
   },);
 },);
-var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
-var trimSlugRegExp = /^-+|-+$/gu;
-function slugify(value,) {
-  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
-}
 var frameFromElement = (element) => {
   const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
   frame2.x = frame2.x + safeWindow.scrollX;
@@ -50970,6 +50998,7 @@ export {
   useSpring,
   useSVGTemplate,
   useTime,
+  useTracking,
   useTransform,
   useUnmountEffect,
   useVariantState,
