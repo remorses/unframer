@@ -1,4 +1,3 @@
-import { Config } from './cli'
 import { propCamelCaseJustLikeFramer } from './compat.js'
 import { ControlDescription, ControlType, PropertyControls } from './framer.js'
 import { logger } from './utils.js'
@@ -26,16 +25,16 @@ export function componentCamelCase(str: string) {
  * instead of generating separate .d.ts files
  */
 export function propControlsToTypedocComments({
-    config,
-    fileName,
-    controls,
+    locales,
+    componentImportedName,
+    propertyControls,
 }: {
-    controls: PropertyControls
-    fileName: string
-    config: Config
+    propertyControls: PropertyControls
+    componentImportedName: string
+    locales?: Array<{ slug: string }>
 }) {
     try {
-        const types = Object.entries(controls || ({} as PropertyControls))
+        const types = Object.entries(propertyControls || ({} as PropertyControls))
             .map(([key, value]) => {
                 if (!value) {
                     return
@@ -97,7 +96,7 @@ export function propControlsToTypedocComments({
             .filter(Boolean)
             .join('\n')
 
-        const componentName = componentCamelCase(fileName)
+        const componentName = componentImportedName
 
         const defaultPropsJsDoc = [
             ' * children?: React.ReactNode',
@@ -115,14 +114,14 @@ export function propControlsToTypedocComments({
         let headerComment = '/**\n'
         headerComment += ' * @typedef Locale\n'
 
-        // Generate union type from config.locales if available
+        // Generate union type from locales if available
         const localeType = (() => {
             if (
-                config?.locales &&
-                Array.isArray(config.locales) &&
-                config.locales.length > 0
+                locales &&
+                Array.isArray(locales) &&
+                locales.length > 0
             ) {
-                return config.locales
+                return locales
                     .map((locale) => `'${locale.slug}'`)
                     .join(' | ')
             }

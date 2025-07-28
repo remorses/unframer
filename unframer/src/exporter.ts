@@ -426,10 +426,11 @@ export async function bundle({
                             fileName: path.basename(file.path),
                         })),
                     )
+                    const componentImportedName = componentCamelCase(name)
                     const typedocComments = propControlsToTypedocComments({
-                        controls: propertyControls!,
-                        fileName: name,
-                        config,
+                        propertyControls: propertyControls!,
+                        componentImportedName,
+                        locales: config.locales,
                     })
                     logger.log(
                         `Generated TypeDoc comments for ${name}: ${!!typedocComments.headerComment}`,
