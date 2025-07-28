@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.PCWRWNKC.mjs
+// /:https://app.framerstatic.com/framer.GOWL5DJH.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13667,7 +13667,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     updateCanonicalURL(window.location.href,);
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback((event) => {
-    if (event.navigationType !== 'traverse') return;
+    if (event.navigationType !== 'traverse' || !event.canIntercept) return;
     event.intercept({
       async handler() {
         await new Promise((resolve, reject,) => {
@@ -13792,7 +13792,7 @@ function useNativeLoadingSpinner() {
   const navigationPromise = useRef3(Promise.resolve(),);
   const navigationController = useRef3();
   const navigateListener = useCallback((navigateEvent) => {
-    if (navigateEvent.navigationType === 'traverse') return;
+    if (navigateEvent.navigationType === 'traverse' || !navigateEvent.canIntercept) return;
     const controller = navigationController.current;
     controller == null ? void 0 : controller.signal.addEventListener('abort', () => {
       controller.abort('user aborted',);
@@ -13814,6 +13814,30 @@ function useNativeLoadingSpinner() {
       window.navigation.removeEventListener('navigate', navigateListener,);
     },);
   }, [navigateListener,],);
+}
+var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
+var trimSlugRegExp = /^-+|-+$/gu;
+function slugify(value,) {
+  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
+}
+var NodeIdContext = /* @__PURE__ */ React4.createContext(null,);
+function useTracking() {
+  const router = useRouter();
+  const nodeId = useContext(NodeIdContext,);
+  return useCallback((trackingId) => {
+    var _a;
+    if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    if (slugify(trackingId,) !== trackingId) {
+      throw new Error(`Invalid tracking ID: ${trackingId}`,);
+    }
+    const pageviewEventData = router.pageviewEventData.current;
+    return sendTrackingEvent('published_site_custom_event', {
+      ...pageviewEventData,
+      nodeId,
+      // Don't attach a tracking ID if it's empty
+      trackingId: trackingId || null,
+    }, 'eager',);
+  }, [router, nodeId,],);
 }
 function useRouteAnchor(routeId, {
   elementId,
@@ -23005,8 +23029,11 @@ var mockWithoutWarning = () => {
   return () => {};
 };
 var implementation = {
-  // We need a default implementation for useImageSource and useImageElement as it is used for rendering image backgrounds which would break otherwise.
-  // The default value is used for HTML export and when using the library without Framer.
+  // We need a default implementation for useImageSource and useImageElement as it is used for
+  // rendering image backgrounds which would break otherwise. The default value is used for HTML
+  // export and when using the library without Framer.
+  imagePlaceholderSvg:
+    `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="rgb(136, 136, 136, 0.2)" fill-rule="evenodd"/></svg>`,
   useImageSource(image,) {
     return image.src ?? '';
   },
@@ -23052,16 +23079,12 @@ var wrapperStyle = {
   left: 0,
 };
 function getPlaceholderStyle() {
-  const placeholderStyle = {
+  return {
     backgroundRepeat: 'repeat',
     backgroundPosition: 'left top',
-    backgroundSize: '126px auto',
-    backgroundImage: encodeSVGForCSS(
-      `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="#888" fill-rule="evenodd"/></svg>`,
-    ),
-    opacity: 0.2,
+    backgroundSize: '64px auto',
+    backgroundImage: encodeSVGForCSS(runtime.imagePlaceholderSvg,),
   };
-  return placeholderStyle;
 }
 function cssObjectFit(imageFit,) {
   switch (imageFit) {
@@ -33469,12 +33492,15 @@ var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
     ref,
     children: /* @__PURE__ */ jsx3(ComponentContainerContext.Provider, {
       value: true,
-      children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
-        enabled: false,
-        children: /* @__PURE__ */ jsx3(LayoutGroup, {
-          id: layoutId ?? '',
-          inherit: 'id',
-          children: childrenWithCodeBoundary,
+      children: /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+        value: nodeId ?? null,
+        children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
+          enabled: false,
+          children: /* @__PURE__ */ jsx3(LayoutGroup, {
+            id: layoutId ?? '',
+            inherit: 'id',
+            children: childrenWithCodeBoundary,
+          },),
         },),
       },),
     },),
@@ -33506,11 +33532,14 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
     const Component17 = htmlElementAsMotionComponent(tagName,);
-    return /* @__PURE__ */ jsx3(Component17, {
-      ...otherProps,
-      ref,
-      style: props.style,
-      children: childrenWithCodeBoundary,
+    return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+      value: nodeId ?? null,
+      children: /* @__PURE__ */ jsx3(Component17, {
+        ...otherProps,
+        ref,
+        style: props.style,
+        children: childrenWithCodeBoundary,
+      },),
     },);
   } else {
     const Component17 = tagName;
@@ -33519,17 +33548,15 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
       layoutDependency,
       ...plainHTMLRenderableProps
     } = otherProps;
-    return (
-      // Passing `props.style` explicitly to allow TypeScript to narrow the type of `props.style` according
-      // to the value of `props.rendersWithMotion`.
-      /* @__PURE__ */
-      jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+      value: nodeId ?? null,
+      children: /* @__PURE__ */ jsx3(Component17, {
         ...plainHTMLRenderableProps,
         ref,
         style: props.style,
         children: childrenWithCodeBoundary,
-      },)
-    );
+      },),
+    },);
   }
 },);
 var CustomCursorContext = /* @__PURE__ */ createContext({
@@ -33790,18 +33817,20 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     placement,
   ],);
   if (!hasHoverCapability || !cursor || !Cursor) return null;
-  return /* @__PURE__ */ jsx3(Cursor, {
-    transformTemplate: transformTemplate2,
-    style: {
-      ...staticCursorStyle,
-      x,
-      y,
-      opacity,
-    },
-    globalTapTarget: true,
-    variant: cursor == null ? void 0 : cursor.variant,
-    ref: cursorRef,
-    className: cursorComponentClassName,
+  return /* @__PURE__ */ jsx3(Suspense2, {
+    children: /* @__PURE__ */ jsx3(Cursor, {
+      transformTemplate: transformTemplate2,
+      style: {
+        ...staticCursorStyle,
+        x,
+        y,
+        opacity,
+      },
+      globalTapTarget: true,
+      variant: cursor == null ? void 0 : cursor.variant,
+      ref: cursorRef,
+      className: cursorComponentClassName,
+    },),
   },);
 },);
 function useCustomCursors(webPageCursors,) {
@@ -34564,6 +34593,10 @@ var LazyValue = class _LazyValue {
   }
   static is(value,) {
     return value instanceof _LazyValue;
+  }
+  get state() {
+    var _a;
+    return ((_a = this.status) == null ? void 0 : _a.type) ?? 'pending';
   }
   /** Preload the value so it can be read() later. */
   preload() {
@@ -36178,6 +36211,15 @@ function Router({
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const startNavigation = useNavigationTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
+  const {
+    synchronousNavigationOnDesktop,
+  } = useLibraryFeatures();
+  const transitionFn = useMemo2(() => {
+    if (!synchronousNavigationOnDesktop || !isDesktop()) {
+      return startTransition2;
+    }
+    return (fn) => fn();
+  }, [synchronousNavigationOnDesktop,],);
   const isInitialNavigationRef = useRef3(true,);
   const currentRouteRef = useRef3(initialRoute,);
   const currentPathVariablesRef = useRef3(initialPathVariables,);
@@ -36251,7 +36293,7 @@ function Router({
           };
           void startNavigation(
             () => {
-              void startViewTransition2(currentRouteId2, currentRouteId2, () => startTransition2(forceUpdate,),// no signal here, because we update the refs above immediately
+              void startViewTransition2(currentRouteId2, currentRouteId2, () => transitionFn(forceUpdate,),// no signal here, because we update the refs above immediately
               );
             },
             nextRender,
@@ -36271,6 +36313,7 @@ function Router({
     startNavigation,
     startViewTransition2,
     monitorNextPaintAfterRender,
+    transitionFn,
   ],);
   const setCurrentRouteId = useCallback(
     (routeId, localeId, hash2, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
@@ -36283,19 +36326,19 @@ function Router({
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
       if (isHistoryTransition) {
-        startTransition2(forceUpdate,);
+        transitionFn(forceUpdate,);
         return;
       }
       void startNavigation(
         (signal) => {
-          void startViewTransition2(currentRouteId2, routeId, () => startTransition2(forceUpdate,), signal,);
+          void startViewTransition2(currentRouteId2, routeId, () => transitionFn(forceUpdate,), signal,);
         },
         nextRender,
         updateURL,
         true,
       );
     },
-    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2,],
+    [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2, transitionFn,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll, beforeUrlUpdate,) => {
@@ -41681,17 +41724,31 @@ ${stringifyQuery(query,)}`,);
   }
 };
 var QueryCache = class {
-  constructor(queryEngine2,) {
+  constructor(queryEngine2, maxSize = Infinity,) {
     this.queryEngine = queryEngine2;
+    this.maxSize = maxSize;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
+  }
+  prune() {
+    if (this.cache.size <= this.maxSize) return;
+    for (const [key7, value,] of this.cache) {
+      if (this.cache.size <= this.maxSize) break;
+      if (value.state === 'pending') continue;
+      this.cache.delete(key7,);
+    }
   }
   get(query, locale,) {
     const key7 = getCacheKey(query, locale,);
     const existing = this.cache.get(key7,);
-    if (existing) return existing;
+    if (existing) {
+      this.cache.delete(key7,);
+      this.cache.set(key7, existing,);
+      return existing;
+    }
     const resolver = () => this.queryEngine.query(query, locale,);
     const value = new LazyValue(resolver,);
     this.cache.set(key7, value,);
+    this.prune();
     return value;
   }
 };
@@ -42913,15 +42970,18 @@ function withCodeBoundaryForOverrides(Component17, {
     );
     if (shouldWrapWithBoundary) {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx3(CodeComponentBoundary, {
-          getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
-          fallback: /* @__PURE__ */ jsx3(Component17, {
-            ...props,
-            ref,
-          },),
-          children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
-            ...props,
-            ref,
+        return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+          value: nodeId,
+          children: /* @__PURE__ */ jsx3(CodeComponentBoundary, {
+            getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
+            fallback: /* @__PURE__ */ jsx3(Component17, {
+              ...props,
+              ref,
+            },),
+            children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
+              ...props,
+              ref,
+            },),
           },),
         },);
       } else {
@@ -42938,9 +42998,12 @@ function withCodeBoundaryForOverrides(Component17, {
       }
     } else {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx3(appliedOverride.Component, {
-          ...props,
-          ref,
+        return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+          value: nodeId,
+          children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
+            ...props,
+            ref,
+          },),
         },);
       } else {
         throw appliedOverride.error;
@@ -43961,44 +44024,6 @@ function createFontFamilyName(font,) {
 function createVariableFontFamilyName(familyName,) {
   return `${familyName} Variable`;
 }
-function supportsOpenType(openTypeData,) {
-  return Boolean(openTypeData && Array.isArray(openTypeData,),);
-}
-function validateVariationAxes(variationAxesData,) {
-  if (!variationAxesData) return;
-  if (!Array.isArray(variationAxesData,)) return;
-  const variationAxes = [];
-  for (const axis of variationAxesData) {
-    if (!isVariationAxis(axis,)) continue;
-    variationAxes.push({
-      tag: axis.tag,
-      name: axis.name,
-      minValue: axis.minValue,
-      maxValue: axis.maxValue,
-      defaultValue: axis.defaultValue,
-    },);
-  }
-  return variationAxes;
-}
-function isOpenTypeFeature(feature,) {
-  if (typeof feature !== 'object' || feature === null) return false;
-  if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
-  if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
-    return false;
-  }
-  return true;
-}
-function isVariationAxis(axis,) {
-  if (typeof axis !== 'object' || axis === null) return false;
-  if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
-  if ('name' in axis && typeof axis.name !== 'string') return false;
-  if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
-  if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
-  if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
-    return false;
-  }
-  return true;
-}
 function assert2(condition, ...msg) {
   var _a, _b;
   if (condition) return;
@@ -44719,9 +44744,53 @@ if (typeof window !== 'undefined' && window.scheduler) {
   hasIsInputPending = 'isInputPending' in window.scheduler;
 }
 var log2 = getLogger2('task-queue',);
+function getAssetFilename(asset,) {
+  return asset.key + asset.extension;
+}
 function createAbsoluteAssetURL(filename,) {
   const serviceMap = getServiceMap();
   return `${serviceMap.userContent}/assets/${filename}`;
+}
+function createAbsoluteAssetURLFromAsset(asset,) {
+  return createAbsoluteAssetURL(getAssetFilename(asset,),);
+}
+function supportsOpenType(openTypeData,) {
+  return Boolean(openTypeData && Array.isArray(openTypeData,),);
+}
+function validateVariationAxes(variationAxesData,) {
+  if (!variationAxesData) return;
+  if (!Array.isArray(variationAxesData,)) return;
+  const variationAxes = [];
+  for (const axis of variationAxesData) {
+    if (!isVariationAxis(axis,)) continue;
+    variationAxes.push({
+      tag: axis.tag,
+      name: axis.name,
+      minValue: axis.minValue,
+      maxValue: axis.maxValue,
+      defaultValue: axis.defaultValue,
+    },);
+  }
+  return variationAxes;
+}
+function isOpenTypeFeature(feature,) {
+  if (typeof feature !== 'object' || feature === null) return false;
+  if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
+  if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
+    return false;
+  }
+  return true;
+}
+function isVariationAxis(axis,) {
+  if (typeof axis !== 'object' || axis === null) return false;
+  if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
+  if ('name' in axis && typeof axis.name !== 'string') return false;
+  if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
+  if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
+  if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
+    return false;
+  }
+  return true;
 }
 var builtInFontSelectorPrefix = 'BI;';
 var BuiltInFontSource = class {
@@ -44742,13 +44811,13 @@ var BuiltInFontSource = class {
       const {
         properties,
       } = asset;
-      const fontName = properties.font.preferredFamily || properties.font.fontFamily;
+      const fontName = properties.font.fontFamily;
       const fontFamily = this.createFontFamily(fontName, properties.font.foundryName, properties.font.fontVersion,);
       const openTypeData = properties.font.openTypeData;
       const variationAxesData = properties.font.variationAxes;
       const isVariableFont2 = Array.isArray(variationAxesData,);
-      const variant = isVariableFont2 ? 'variable' : properties.font.preferredSubFamily || properties.font.fontSubFamily || 'regular';
-      const url = createAbsoluteAssetURL(asset.filename,);
+      const variant = isVariableFont2 ? 'variable' : properties.font.fontSubFamily || 'regular';
+      const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
         family: fontFamily,
         selector: this.createSelector(fontName, variant, properties.font.fontVersion,),
@@ -44934,19 +45003,56 @@ function getFontStyle(variant,) {
   return 'normal';
 }
 var customFontSelectorPrefix = 'CUSTOM;';
+var log3 = getLogger('custom-font-source',);
+function findDuplicateFont(existingFonts, newFont,) {
+  for (let i = 0; i < existingFonts.length; i++) {
+    const existingFont = existingFonts[i];
+    if (
+      existingFont && existingFont.selector === newFont.selector && existingFont.weight === newFont.weight &&
+      existingFont.style === newFont.style
+    ) {
+      return {
+        existingFont,
+        index: i,
+      };
+    }
+  }
+  return void 0;
+}
 function getCustomFontName(fileName, properties,) {
   if (!properties) return fileName.substring(0, fileName.lastIndexOf('.',),);
   const {
     font,
   } = properties;
-  const fontFamily = font.preferredFamily || font.fontFamily;
+  const fontFamily = font.fontFamily;
   const isAssetVariableFont = Array.isArray(font.variationAxes,);
   if (isAssetVariableFont && fontFamily.toLowerCase().includes('variable',)) return fontFamily;
-  const variant = isAssetVariableFont ? 'Variable' : (font.preferredSubFamily || font.fontSubFamily).trim();
+  const variant = isAssetVariableFont ? 'Variable' : font.fontSubFamily.trim();
   if (variant === '') return fontFamily;
   return `${fontFamily} ${variant}`;
 }
-var CustomFontSource = class {
+function getCustomFontInfo({
+  fontFamily,
+  fontSubFamily,
+  variationAxes,
+  faceDescriptors,
+},) {
+  const rawVariant = fontSubFamily.trim() || 'Regular';
+  const variant = validateVariationAxes(variationAxes,) ? 'Variable' : rawVariant;
+  let style2 = 'normal';
+  let weight = 400;
+  if (faceDescriptors) {
+    weight = faceDescriptors.weight;
+    style2 = faceDescriptors.italic || faceDescriptors.oblique ? 'italic' : 'normal';
+  }
+  return {
+    family: fontFamily,
+    variant,
+    weight,
+    style: style2,
+  };
+}
+var CustomFontSource = class _CustomFontSource {
   constructor() {
     __publicField(this, 'name', 'custom',/* Custom */
     );
@@ -44954,8 +45060,8 @@ var CustomFontSource = class {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
     __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
   }
-  importFonts(assets,) {
-    var _a, _b, _c;
+  deprecatedImportFonts(assets,) {
+    var _a, _b;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
@@ -44970,12 +45076,11 @@ var CustomFontSource = class {
       const fontFamily = this.createFontFamily(fontName,);
       const openTypeData = (_b = asset.properties) == null ? void 0 : _b.font.openTypeData;
       const variant = isVariableFont2 ? 'variable' : this.inferVariantName(fontName,);
-      const url = createAbsoluteAssetURL(asset.filename,);
+      const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
         variant,
-        postscriptName: (_c = asset.properties) == null ? void 0 : _c.font.postscriptName,
         file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes(variationAxesData,),
@@ -44986,6 +45091,60 @@ var CustomFontSource = class {
       fonts.push(...fontFamily.fonts,);
     }
     return fonts;
+  }
+  importFonts(assets, enableFontImprovements,) {
+    var _a, _b, _c, _d;
+    if (!enableFontImprovements) {
+      return this.deprecatedImportFonts(assets,);
+    }
+    this.fontFamilies.length = 0;
+    this.byFamilyName.clear();
+    this.assetsByFamily.clear();
+    const fonts = {};
+    for (const asset of assets) {
+      if (!this.isValidCustomFontAsset(asset,)) {
+        continue;
+      }
+      const {
+        family,
+        variant,
+        weight,
+        style: style2,
+      } = getCustomFontInfo(asset.properties.font,);
+      const fontFamily = this.createFontFamily(family,);
+      const openTypeData = (_a = asset.properties) == null ? void 0 : _a.font.openTypeData;
+      const url = createAbsoluteAssetURLFromAsset(asset,);
+      const font = {
+        family: fontFamily,
+        selector: _CustomFontSource.createSelector(fontFamily.name, variant,),
+        variant,
+        weight,
+        style: style2,
+        file: url,
+        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
+        variationAxes: validateVariationAxes((_b = asset.properties) == null ? void 0 : _b.font.variationAxes,),
+      };
+      const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
+      if (duplicateInfo) {
+        log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
+        const existingFont = duplicateInfo.existingFont;
+        const newIsWoff2 = ((_c = font.file) == null ? void 0 : _c.endsWith('.woff2',)) ?? false;
+        const existingIsWoff2 = ((_d = existingFont.file) == null ? void 0 : _d.endsWith('.woff2',)) ?? false;
+        if (newIsWoff2 && !existingIsWoff2) {
+          fontFamily.fonts[duplicateInfo.index] = font;
+          fonts[font.selector] = font;
+        }
+      } else {
+        fontFamily.fonts.push(font,);
+        fonts[font.selector] = font;
+      }
+      fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
+      this.assetsByFamily.set(family, asset,);
+    }
+    return Object.values(fonts,);
+  }
+  static createSelector(family, variant,) {
+    return `${customFontSelectorPrefix}${family}${variant ? ` ${variant}` : ''}`;
   }
   isValidCustomFontAsset(asset,) {
     var _a;
@@ -45033,27 +45192,32 @@ var CustomFontSource = class {
     this.fontFamilies.push(fontFamily,);
     this.byFamilyName.set(fontFamily.name, fontFamily,);
   }
-  parseSelector(selector,) {
-    if (!selector.startsWith(customFontSelectorPrefix,)) return null;
-    const tokens = selector.split(customFontSelectorPrefix,);
-    if (tokens[1] === void 0) return null;
-    const locator = {
-      source: 'custom',
-      name: tokens[1],
-    };
-    return locator;
-  }
   getFontBySelector(selector,) {
-    var _a;
-    const locator = this.parseSelector(selector,);
-    if (!locator) return;
-    const fonts = (_a = this.getFontFamilyByName(locator.name,)) == null ? void 0 : _a.fonts;
-    if (!fonts) return;
-    const woff2Font = fonts.find((font) => {
-      var _a2;
-      return (_a2 = font.file) == null ? void 0 : _a2.endsWith('.woff2',);
-    },);
-    return woff2Font || fonts[0];
+    if (!selector.startsWith(customFontSelectorPrefix,)) return void 0;
+    const remainingSelector = selector.slice(customFontSelectorPrefix.length,);
+    if (!remainingSelector) return void 0;
+    const matchingFonts = [];
+    let firstMatchingFamily;
+    for (const [familyName, fontFamily,] of this.byFamilyName) {
+      if (remainingSelector.startsWith(familyName,)) {
+        if (!firstMatchingFamily) {
+          firstMatchingFamily = fontFamily;
+        }
+        const exactMatches = fontFamily.fonts.filter((font) => font.selector === selector);
+        matchingFonts.push(...exactMatches,);
+      }
+    }
+    if (matchingFonts.length > 0) {
+      if (matchingFonts.length > 1) {
+        const woff2Font = matchingFonts.find((font) => {
+          var _a;
+          return (_a = font.file) == null ? void 0 : _a.endsWith('.woff2',);
+        },);
+        if (woff2Font) return woff2Font;
+      }
+      return matchingFonts[0];
+    }
+    return void 0;
   }
   getFontFamilyByName(family,) {
     const foundFontFamily = this.byFamilyName.get(family,);
@@ -45131,11 +45295,11 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-LHIHIYDX-NVWWNJLR.js');
+      const supportedFonts = await import('./framer-chunks/google-3ASCFEEO-3R47BR2A.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-GSJIWLGZ-3DSFZVD7.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-4J2ZFRBB-H5VQLZTM.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -45145,11 +45309,11 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3GQMHAEU-WSITVUPV.js');
+      const features = await import('./framer-chunks/google-FDB6LUFQ-PFSUZGKF.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-SSHBFVID-JIQZ2OLR.js');
+      const features = await import('./framer-chunks/fontshare-622CVMZZ-HFPH543A.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
@@ -45697,10 +45861,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-42BCYVR5-QT55MZO3.js')).default;
+            return (await import('./framer-chunks/google-C62SNV32-LCI4F7VO.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X6MCIXW5-UOB5XTBQ.js')).default;
+            return (await import('./framer-chunks/fontshare-JGEKH7YN-QOX3MC3K.js')).default;
           }
           default:
             assertNever(source,);
@@ -45814,13 +45978,13 @@ var FontStore = class {
       this.addFont(font,);
     },);
   }
-  importCustomFonts(assets,) {
+  importCustomFonts(assets, enableFontImprovements,) {
     this.bySelector.forEach((_, key7,) => {
       if (key7.startsWith(customFontSelectorPrefix,)) {
         this.bySelector.delete(key7,);
       }
     },);
-    const importedFonts = this.custom.importFonts(assets,);
+    const importedFonts = this.custom.importFonts(assets, enableFontImprovements,);
     for (const font of importedFonts) {
       this.addFont(font,);
     }
@@ -46817,11 +46981,6 @@ var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
     ],
   },);
 },);
-var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
-var trimSlugRegExp = /^-+|-+$/gu;
-function slugify(value,) {
-  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
-}
 var frameFromElement = (element) => {
   const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
   frame2.x = frame2.x + safeWindow.scrollX;
@@ -50276,12 +50435,12 @@ var package_default = {
   author: 'Framer',
   license: 'MIT',
   scripts: {
-    coverage: 'yarn :jest --coverage',
-    lint: 'yarn :eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
+    coverage: 'jest --coverage',
+    lint: 'eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
-    test: 'yarn :jest',
-    watch: 'yarn :jest --watch',
+    test: 'jest',
+    watch: 'jest --watch',
     postinstall: 'node postinstall.cjs',
   },
   dependencies: {
@@ -50310,6 +50469,7 @@ var package_default = {
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
     immutable: '^3.8.2',
+    jest: '29.4.1',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
@@ -50838,6 +50998,7 @@ export {
   useSpring,
   useSVGTemplate,
   useTime,
+  useTracking,
   useTransform,
   useUnmountEffect,
   useVariantState,
