@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 import {
-    componentCamelCase,
     extractTokenInfo,
     findRelativeLinks,
 } from './exporter.js'
+import { componentCamelCase } from './typescript.js'
 
 import { componentNameToPath } from './utils.js'
 

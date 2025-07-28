@@ -1,5 +1,11 @@
 # unframer
 
+## 3.0.3
+
+### Patch Changes
+
+- Refactor: Move TypeScript type generation code to separate module
+
 ## 3.0.2
 
 ### Patch Changes
