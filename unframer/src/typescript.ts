@@ -1,6 +1,5 @@
 import { propCamelCaseJustLikeFramer } from './compat.js'
 import { ControlDescription, ControlType, PropertyControls } from './framer.js'
-import { logger } from './utils.js'
 
 export function componentCamelCase(str: string) {
     str = str?.replace(/\.jsx?$/, '')
@@ -28,13 +27,17 @@ export function propControlsToTypedocComments({
     locales,
     componentImportedName,
     propertyControls,
+    logger,
 }: {
     propertyControls: PropertyControls
     componentImportedName: string
     locales?: Array<{ slug: string }>
+    logger: any
 }) {
     try {
-        const types = Object.entries(propertyControls || ({} as PropertyControls))
+        const types = Object.entries(
+            propertyControls || ({} as PropertyControls),
+        )
             .map(([key, value]) => {
                 if (!value) {
                     return
@@ -116,14 +119,8 @@ export function propControlsToTypedocComments({
 
         // Generate union type from locales if available
         const localeType = (() => {
-            if (
-                locales &&
-                Array.isArray(locales) &&
-                locales.length > 0
-            ) {
-                return locales
-                    .map((locale) => `'${locale.slug}'`)
-                    .join(' | ')
+            if (locales && Array.isArray(locales) && locales.length > 0) {
+                return locales.map((locale) => `'${locale.slug}'`).join(' | ')
             }
             return 'string'
         })()

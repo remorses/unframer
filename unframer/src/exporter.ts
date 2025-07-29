@@ -429,6 +429,7 @@ export async function bundle({
                     const componentImportedName = componentCamelCase(name)
                     const typedocComments = propControlsToTypedocComments({
                         propertyControls: propertyControls!,
+                        logger,
                         componentImportedName,
                         locales: config.locales,
                     })
