@@ -432,6 +432,7 @@ export async function bundle({
                         logger,
                         componentImportedName,
                         locales: config.locales,
+                        includeLocaleTypes: true,
                     })
                     logger.log(
                         `Generated TypeDoc comments for ${name}: ${!!typedocComments.headerComment}`,

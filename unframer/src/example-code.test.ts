@@ -28,7 +28,7 @@ describe('createExampleComponentCode', () => {
 
           export default function App() {
             return (
-              <div className='flex flex-col items-center gap-3 '>
+              <div className='flex flex-col items-center gap-3 bg-[rgb(8,_8, 7)]'>
                 <NavigationFramerComponent.Responsive
                   ctaVariant={"Primary"}
                 />

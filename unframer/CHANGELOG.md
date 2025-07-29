@@ -5,6 +5,7 @@
 ### Patch Changes
 
 - Refactor: Move TypeScript type generation code to separate module
+- Fix `componentCamelCase` to handle spaces and special characters in component names
 
 ## 3.0.2
 
