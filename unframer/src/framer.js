@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.GOWL5DJH.mjs
+// /:https://app.framerstatic.com/framer.QIGYLLGG.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -45002,6 +45002,93 @@ function getFontStyle(variant,) {
   if (variant.includes('italic',) || variant.includes('oblique',) || variant.includes('slanted',)) return 'italic';
   return 'normal';
 }
+function getRelatedFontVariants(currentVariant, availableVariants,) {
+  return {
+    ...pickBoldItalicVariants(currentVariant, availableVariants,),
+    ...pickVariableVariants(currentVariant, availableVariants,),
+  };
+}
+function pickBoldItalicVariants(currentVariant, availableVariants,) {
+  if (availableVariants.length === 0) {
+    return {
+      variantBold: void 0,
+      variantBoldItalic: void 0,
+      variantItalic: void 0,
+    };
+  }
+  const {
+    weight: currentWeight,
+    style: currentStyle,
+  } = currentVariant;
+  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
+  const boldVariantByStyle = /* @__PURE__ */ new Map();
+  for (const variant of availableVariants) {
+    if (variant.isVariable !== currentVariant.isVariable) continue;
+    variantByWeightAndStyle.set(`${variant.weight}-${variant.style}`, variant,);
+    if (variant.weight <= currentWeight) continue;
+    if (!boldVariantByStyle.has(variant.style,)) {
+      boldVariantByStyle.set(variant.style, variant,);
+    }
+  }
+  let variantBold = boldVariantByStyle.get(currentStyle,);
+  let variantBoldItalic = boldVariantByStyle.get('italic',);
+  const currentVariantWeight = currentVariant.weight;
+  if (currentVariantWeight <= 300) {
+    variantBold = variantByWeightAndStyle.get(`400-${currentStyle}`,) ?? variantBold;
+    variantBoldItalic = variantByWeightAndStyle.get('400-italic',) ?? variantBoldItalic;
+  } else if (currentVariantWeight <= 500) {
+    variantBold = variantByWeightAndStyle.get(`700-${currentStyle}`,) ?? variantBold;
+    variantBoldItalic = variantByWeightAndStyle.get('700-italic',) ?? variantBoldItalic;
+  } else {
+    variantBold = variantByWeightAndStyle.get(`900-${currentStyle}`,) ?? variantBold;
+    variantBoldItalic = variantByWeightAndStyle.get('900-italic',) ?? variantBoldItalic;
+  }
+  const variantItalic = variantByWeightAndStyle.get(`${currentWeight}-italic`,);
+  return {
+    variantBold,
+    variantItalic,
+    variantBoldItalic,
+  };
+}
+function pickVariableVariants(currentVariant, availableVariants,) {
+  if (availableVariants.length === 0) {
+    return {
+      variantVariable: void 0,
+      variantVariableItalic: void 0,
+    };
+  }
+  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
+  let variantVariable;
+  let variantVariableItalic;
+  let fallbackVariant;
+  let fallbackItalicVariant;
+  for (const variant of availableVariants) {
+    if (!variant.isVariable) continue;
+    const isSameWeight = variant.weight === currentVariant.weight;
+    const isDefaultWeight = variant.weight === 400;
+    if (variant.style === 'normal') {
+      if (isSameWeight) {
+        variantVariable = variant;
+      } else if (isDefaultWeight) {
+        fallbackVariant = variant;
+      } else if (!fallbackVariant) {
+        fallbackVariant = variant;
+      }
+    } else if (variant.style === 'italic') {
+      if (isSameWeight) {
+        variantVariableItalic = variant;
+      } else if (isDefaultWeight) {
+        fallbackItalicVariant = variant;
+      } else if (!fallbackItalicVariant) {
+        fallbackItalicVariant = variant;
+      }
+    }
+  }
+  return {
+    variantVariable: variantVariable ?? fallbackVariant,
+    variantVariableItalic: variantVariableItalic ?? fallbackItalicVariant,
+  };
+}
 var customFontSelectorPrefix = 'CUSTOM;';
 var log3 = getLogger('custom-font-source',);
 function findDuplicateFont(existingFonts, newFont,) {
@@ -45038,7 +45125,8 @@ function getCustomFontInfo({
   faceDescriptors,
 },) {
   const rawVariant = fontSubFamily.trim() || 'Regular';
-  const variant = validateVariationAxes(variationAxes,) ? 'Variable' : rawVariant;
+  const containsVariant = rawVariant.toLocaleLowerCase().includes('variable',);
+  const variant = validateVariationAxes(variationAxes,) && !containsVariant ? `Variable ${rawVariant}` : rawVariant;
   let style2 = 'normal';
   let weight = 400;
   if (faceDescriptors) {
@@ -45141,6 +45229,11 @@ var CustomFontSource = class _CustomFontSource {
       fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
       this.assetsByFamily.set(family, asset,);
     }
+    for (const fontFamily of this.fontFamilies) {
+      if (fontFamily.fonts.length > 0) {
+        updateFontRelationships(fontFamily,);
+      }
+    }
     return Object.values(fonts,);
   }
   static createSelector(family, variant,) {
@@ -45197,12 +45290,8 @@ var CustomFontSource = class _CustomFontSource {
     const remainingSelector = selector.slice(customFontSelectorPrefix.length,);
     if (!remainingSelector) return void 0;
     const matchingFonts = [];
-    let firstMatchingFamily;
     for (const [familyName, fontFamily,] of this.byFamilyName) {
       if (remainingSelector.startsWith(familyName,)) {
-        if (!firstMatchingFamily) {
-          firstMatchingFamily = fontFamily;
-        }
         const exactMatches = fontFamily.fonts.filter((font) => font.selector === selector);
         matchingFonts.push(...exactMatches,);
       }
@@ -45225,72 +45314,28 @@ var CustomFontSource = class _CustomFontSource {
     return foundFontFamily;
   }
 };
-function getRelatedFontVariants(currentVariant, availableVariants,) {
+function fontToVariantWithMetadata(font,) {
+  if (!font.weight || !font.style) return void 0;
   return {
-    ...pickBoldItalicVariants(currentVariant, availableVariants,),
-    ...pickVariableVariants(currentVariant, availableVariants,),
+    weight: font.weight,
+    style: font.style,
+    isVariable: isVariableFont(font,),
+    selector: font.selector,
   };
 }
-function pickBoldItalicVariants(currentVariant, availableVariants,) {
-  if (availableVariants.length === 0) {
-    return {
-      variantBold: void 0,
-      variantBoldItalic: void 0,
-      variantItalic: void 0,
-    };
+function updateFontRelationships(fontFamily,) {
+  var _a, _b, _c, _d, _e;
+  const availableVariants = fontFamily.fonts.map((font) => fontToVariantWithMetadata(font,)).filter((font) => font !== void 0);
+  for (const font of fontFamily.fonts) {
+    const variant = fontToVariantWithMetadata(font,);
+    if (!variant) continue;
+    const relatedVariants = getRelatedFontVariants(variant, availableVariants,);
+    font.selectorVariable = (_a = relatedVariants.variantVariable) == null ? void 0 : _a.selector;
+    font.selectorVariableItalic = (_b = relatedVariants.variantVariableItalic) == null ? void 0 : _b.selector;
+    font.selectorBold = (_c = relatedVariants.variantBold) == null ? void 0 : _c.selector;
+    font.selectorBoldItalic = (_d = relatedVariants.variantBoldItalic) == null ? void 0 : _d.selector;
+    font.selectorItalic = (_e = relatedVariants.variantItalic) == null ? void 0 : _e.selector;
   }
-  const {
-    weight: currentWeight,
-    style: currentStyle,
-  } = currentVariant;
-  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
-  const boldVariantByStyle = /* @__PURE__ */ new Map();
-  for (const variant of availableVariants) {
-    if (variant.isVariable !== currentVariant.isVariable) continue;
-    variantByWeightAndStyle.set(`${variant.weight}-${variant.style}`, variant,);
-    if (variant.weight <= currentWeight) continue;
-    if (!boldVariantByStyle.has(variant.style,)) {
-      boldVariantByStyle.set(variant.style, variant,);
-    }
-  }
-  let variantBold = boldVariantByStyle.get(currentStyle,);
-  let variantBoldItalic = boldVariantByStyle.get('italic',);
-  const currentVariantWeight = currentVariant.weight;
-  if (currentVariantWeight <= 300) {
-    variantBold = variantByWeightAndStyle.get(`400-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('400-italic',) ?? variantBoldItalic;
-  } else if (currentVariantWeight <= 500) {
-    variantBold = variantByWeightAndStyle.get(`700-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('700-italic',) ?? variantBoldItalic;
-  } else {
-    variantBold = variantByWeightAndStyle.get(`900-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('900-italic',) ?? variantBoldItalic;
-  }
-  const variantItalic = variantByWeightAndStyle.get(`${currentWeight}-italic`,);
-  return {
-    variantBold,
-    variantItalic,
-    variantBoldItalic,
-  };
-}
-function pickVariableVariants(currentVariant, availableVariants,) {
-  if (availableVariants.length === 0) {
-    return {
-      variantVariable: void 0,
-      variantVariableItalic: void 0,
-    };
-  }
-  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
-  for (const variant of availableVariants) {
-    if (!variant.isVariable) continue;
-    variantByWeightAndStyle.set(`${variant.weight}-${variant.style}`, variant,);
-  }
-  return {
-    variantVariable: variantByWeightAndStyle.get(`${currentVariant.weight}-normal`,) ?? variantByWeightAndStyle.get(`400-normal`,) ??
-      void 0,
-    variantVariableItalic: variantByWeightAndStyle.get(`${currentVariant.weight}-italic`,) ?? variantByWeightAndStyle.get(`400-italic`,) ??
-      void 0,
-  };
 }
 async function loadFontsWithOpenType(source,) {
   switch (source) {
@@ -50481,7 +50526,7 @@ var package_default = {
     yargs: '^17.7.2',
   },
   peerDependencies: {
-    'framer-motion': '12.14.0',
+    'framer-motion': '>=12.14.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
