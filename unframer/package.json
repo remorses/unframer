@@ -62,7 +62,7 @@
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
         "nanospinner": "^1.2.2",
         "picocolors": "^1.1.1",
-        "real-framer-motion": "npm:framer-motion@^12.16.0",
+        "real-framer-motion": "npm:framer-motion@^12.23.12",
         "spiceflow": "^1.13.2",
         "string-dedent": "^3.0.1",
         "undici": "^7.10.0"
