@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QIGYLLGG.mjs
+// /:https://app.framerstatic.com/framer.Q6KVMOJP.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13830,14 +13830,20 @@ function useTracking() {
     if (slugify(trackingId,) !== trackingId) {
       throw new Error(`Invalid tracking ID: ${trackingId}`,);
     }
-    const pageviewEventData = router.pageviewEventData.current;
-    return sendTrackingEvent('published_site_custom_event', {
-      ...pageviewEventData,
-      nodeId,
-      // Don't attach a tracking ID if it's empty
-      trackingId: trackingId || null,
-    }, 'eager',);
+    if (router.pageviewEventData.current instanceof Promise) {
+      void router.pageviewEventData.current.then((eventData) => sendCustomTrackingEvent(eventData, nodeId, trackingId,));
+    } else {
+      sendCustomTrackingEvent(router.pageviewEventData.current, nodeId, trackingId,);
+    }
   }, [router, nodeId,],);
+}
+function sendCustomTrackingEvent(eventData, nodeId, trackingId,) {
+  sendTrackingEvent('published_site_custom_event', {
+    ...eventData,
+    nodeId,
+    // Don't attach a tracking ID if it's empty
+    trackingId: trackingId || null,
+  }, 'eager',);
 }
 function useRouteAnchor(routeId, {
   elementId,
@@ -35345,7 +35351,9 @@ function useTrackLinkClick({
   return useCallback(async (hrefAttribute) => {
     var _a, _b, _c, _d, _e;
     if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
-    const pageviewEventData = router.pageviewEventData.current;
+    const pageviewEventData = router.pageviewEventData.current instanceof Promise
+      ? await router.pageviewEventData.current
+      : router.pageviewEventData.current;
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!isLinkToWebPage(pageLink,)) {
       return sendTrackingEvent('published_site_click', {
@@ -35801,13 +35809,20 @@ function trackFormSubmit({
 },) {
   var _a;
   if (!((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
-  const pageviewEventData = router.pageviewEventData.current;
-  const eventData = {
+  if (router.pageviewEventData.current instanceof Promise) {
+    void router.pageviewEventData.current.then((pageviewEventData) => {
+      sendFormSubmitTrackingEvent(pageviewEventData, nodeId, submitTrackingId,);
+    },);
+  } else {
+    sendFormSubmitTrackingEvent(router.pageviewEventData.current, nodeId, submitTrackingId,);
+  }
+}
+function sendFormSubmitTrackingEvent(pageviewEventData, nodeId, trackingId,) {
+  return sendTrackingEvent('published_site_form_submit', {
     ...pageviewEventData,
     nodeId: nodeId ?? null,
-    trackingId: submitTrackingId || null,
-  };
-  return sendTrackingEvent('published_site_form_submit', eventData, 'eager',);
+    trackingId: trackingId || null,
+  }, 'eager',);
 }
 var pendingState = {
   state: 'pending',
@@ -36092,17 +36107,23 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, colle
       },);
     };
     void (async () => {
-      pageviewEventData.current = await getFullPageviewEventData();
+      const pageviewEventDataPromise = getFullPageviewEventData();
+      pageviewEventData.current = pageviewEventDataPromise;
       if (skipFirstPageView.current) {
         skipFirstPageView.current = false;
         return;
       }
-      sendTrackingEvent('published_site_pageview', pageviewEventData.current, 'eager',);
+      const eventData = await pageviewEventDataPromise;
+      pageviewEventData.current = eventData;
+      sendTrackingEvent('published_site_pageview', eventData, 'eager',);
     })();
     const listener = async (event) => {
       if (event.persisted) {
-        pageviewEventData.current = await getFullPageviewEventData();
-        sendTrackingEvent('published_site_pageview', pageviewEventData.current, 'eager',);
+        const pageviewEventDataPromise = getFullPageviewEventData();
+        pageviewEventData.current = pageviewEventDataPromise;
+        const eventData = await getFullPageviewEventData();
+        pageviewEventData.current = eventData;
+        sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
     };
     window.addEventListener('pageshow', listener,);
@@ -50481,7 +50502,7 @@ var package_default = {
   license: 'MIT',
   scripts: {
     coverage: 'jest --coverage',
-    lint: 'eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
+    lint: 'eslint ./src --ext .ts,.tsx --format gha-codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
     test: 'jest',

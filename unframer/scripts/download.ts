@@ -1,4 +1,5 @@
 import { dedent } from '../src/utils.js'
+
 import * as t from '@babel/types'
 
 import annotateAsPure from '@babel/helper-annotate-as-pure'
@@ -98,6 +99,13 @@ export async function main({ framerTypesUrl }) {
 
         // await changeset()
     }
+
+    const { combinedCSSRules } = await import(resultFile)
+
+    const css = combinedCSSRules
+        .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
+        .join('\n')
+    fs.writeFileSync(path.resolve(out, 'styles/framer.css'), css)
 }
 
 const purePlugin = ({}: { types: typeof t }): PluginObj => ({

@@ -30,7 +30,10 @@ import {
     groupBy,
     logFontsUsage,
 } from './css.js'
-import { propControlsToTypedocComments, componentCamelCase } from './typescript.js'
+import {
+    propControlsToTypedocComments,
+    componentCamelCase,
+} from './typescript.js'
 import {
     defaultExternalPackages,
     esbuildPluginBundleDependencies,
@@ -461,15 +464,12 @@ export async function bundle({
 
         const cssString =
             doNotEditComment +
-            '/* This css file has all the necessary styles to run all your components */\n' +
-            '\n' +
-            resetCssStyles +
+            '/* This css file has all the necessary styles to run all your Framer components */\n' +
+            '@import "unframer/styles/reset.css";\n' +
+            '@import "unframer/styles/framer.css";\n\n' +
             getStyleTokensCss(tokens || []) +
             breakpointsStyles(breakpoints) +
             '\n\n' +
-            combinedCSSRules
-                .map((x) => (x?.startsWith('  ') ? dedent(x) : x))
-                .join('\n') +
             getFontsStyles(allFonts)
         await fs.promises.writeFile(
             path.resolve(out, 'styles.css'),
@@ -1148,7 +1148,6 @@ function safeJsonParse(text) {
     }
 }
 
-
 export function parsePropertyControls(code: string) {
     const start = code.indexOf('addPropertyControls(')
     if (start === -1) {
@@ -1263,7 +1262,6 @@ function splitOnce(str: string, separator: string) {
     return [str.slice(0, index), str.slice(index + 1)]
 }
 
-
 const breakpointVariants = ['mobile', 'tablet', 'desktop']
 
 function getVariantsFromPropControls(propControls?: PropertyControls) {
@@ -1302,33 +1300,6 @@ function findExampleProperty(propertyControls?: PropertyControls) {
 
     return propCamelCaseJustLikeFramer(stringProp[1]?.title || '')
 }
-
-// these styles are global styles injected by Framer in the generated websites, without them things like icons can look weird
-const resetCssStyles = `
-
-:root {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-    box-sizing: border-box;
-    -webkit-font-smoothing: inherit;
-}
-
-.unframer h1, .unframer h2, .unframer h3, .unframer h4, .unframer h5, .unframer h6, .unframer p, .unframer figure {
-    margin: 0;
-}
-
-.unframer {
-    line-height: normal;
-}
-
-.unframer, .unframer input, .unframer textarea, .unframer select, .unframer button {
-    font-size: 12px;
-    font-family: sans-serif;
-}
-`
 
 async function recursiveReaddir(dir: string): Promise<string[]> {
     const dirents = await fs.promises.readdir(dir, { withFileTypes: true })

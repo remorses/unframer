@@ -1,5 +1,12 @@
 # unframer
 
+## 3.0.4
+
+### Patch Changes
+
+- 97ab7bb: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- Put common styles in unframer .css instead of generated code. Makes css used by apps with many projects smaller
+
 ## 3.0.3
 
 ### Patch Changes

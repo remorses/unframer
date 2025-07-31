@@ -35,7 +35,7 @@ export declare function createClient({ url }: {
                 rephrase: {
                     post: (request: {
                         url: string;
-                        oldText: import("./rewrite").FramerLayersTree;
+                        oldText: import("plugin-mcp").FramerLayersTree;
                         sourceHtml: string | null;
                         description?: string | null | undefined;
                         projectName?: string | undefined;
@@ -47,20 +47,20 @@ export declare function createClient({ url }: {
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: AsyncGenerator<{
                             type: "chunk";
-                            partialItem: Partial<import("./xml").NewExtractedNode> | null;
-                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode> | null;
-                            fullItem: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode>;
+                            partialItem: Partial<import("plugin-mcp").NewExtractedNode> | null;
+                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("plugin-mcp").NewExtractedNode> | null;
+                            fullItem: import("type-fest/source/required-deep").RequiredObjectDeep<import("plugin-mcp").NewExtractedNode>;
                             generationId?: undefined;
                         } | {
                             type: "chunk";
-                            partialItem: Partial<import("./xml").NewExtractedNode> | null;
-                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode> | null;
+                            partialItem: Partial<import("plugin-mcp").NewExtractedNode> | null;
+                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("plugin-mcp").NewExtractedNode> | null;
                             fullItem: undefined;
                             generationId?: undefined;
                         } | {
                             type: "chunk";
-                            partialItem: Partial<import("./xml").NewExtractedNode> | null;
-                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode> | null;
+                            partialItem: Partial<import("plugin-mcp").NewExtractedNode> | null;
+                            completeObj: import("type-fest/source/required-deep").RequiredObjectDeep<import("plugin-mcp").NewExtractedNode> | null;
                             fullXml: string;
                             generationId?: undefined;
                         } | {
@@ -295,12 +295,12 @@ export declare function createClient({ url }: {
                         200: {
                             project: {
                                 projectId: string;
-                                pageBackgroundColor: string | null;
                                 websiteUrl: string | null;
                                 createdAt: Date;
                                 orgId: string;
                                 projectName: string | null;
                                 fullFramerProjectId: string | null;
+                                pageBackgroundColor: string | null;
                                 framerUserId: string | null;
                                 connectedGitHubRepoName: string | null;
                                 invitedGitHubRepoUsername: string | null;
@@ -309,26 +309,26 @@ export declare function createClient({ url }: {
                             };
                             components: {
                                 url: string;
-                                projectId: string;
                                 name: string;
+                                projectId: string;
                                 id: string;
                                 componentIdentifier: string | null;
                             }[];
                             framerWebPages: {
-                                projectId: string;
                                 path: string;
+                                projectId: string;
                                 webPageId: string;
                             }[];
                             colorStyles: {
-                                projectId: string;
                                 name: string | null;
+                                projectId: string;
                                 id: string;
                                 lightColor: string;
                                 darkColor: string;
                             }[];
                             locales: {
-                                code: string;
                                 name: string;
+                                code: string;
                                 id: string;
                                 slug: string;
                             }[];
@@ -339,20 +339,20 @@ export declare function createClient({ url }: {
                                 breakpointName: string;
                             }[];
                             componentInstances: {
-                                controls: import("@prisma/client/runtime/library").JsonValue;
                                 webPageId: string;
                                 componentId: string;
                                 pageOrdering: number;
                                 nodeDepth: number;
+                                controls: import("@prisma/client/runtime/library").JsonValue;
                             }[];
                         };
                     }>>;
                     publish: {
                         post: (request: {
                             components: {
-                                projectId: string;
-                                url: string;
                                 name: string;
+                                url: string;
+                                projectId: string;
                                 id: string;
                                 componentIdentifier: string | null;
                             }[];
@@ -376,12 +376,12 @@ export declare function createClient({ url }: {
                             } | {
                                 project: {
                                     projectId: string;
-                                    pageBackgroundColor: string | null;
                                     websiteUrl: string | null;
                                     createdAt: Date;
                                     orgId: string;
                                     projectName: string | null;
                                     fullFramerProjectId: string | null;
+                                    pageBackgroundColor: string | null;
                                     framerUserId: string | null;
                                     connectedGitHubRepoName: string | null;
                                     invitedGitHubRepoUsername: string | null;
@@ -390,26 +390,26 @@ export declare function createClient({ url }: {
                                 };
                                 components: {
                                     url: string;
-                                    projectId: string;
                                     name: string;
+                                    projectId: string;
                                     id: string;
                                     componentIdentifier: string | null;
                                 }[];
                                 framerWebPages: {
-                                    projectId: string;
                                     path: string;
+                                    projectId: string;
                                     webPageId: string;
                                 }[];
                                 colorStyles: {
-                                    projectId: string;
                                     name: string | null;
+                                    projectId: string;
                                     id: string;
                                     lightColor: string;
                                     darkColor: string;
                                 }[];
                                 locales: {
-                                    code: string;
                                     name: string;
+                                    code: string;
                                     id: string;
                                     slug: string;
                                 }[];
@@ -420,11 +420,11 @@ export declare function createClient({ url }: {
                                     breakpointName: string;
                                 }[];
                                 componentInstances: {
-                                    controls: import("@prisma/client/runtime/library").JsonValue;
                                     webPageId: string;
                                     componentId: string;
                                     pageOrdering: number;
                                     nodeDepth: number;
+                                    controls: import("@prisma/client/runtime/library").JsonValue;
                                 }[];
                                 type: "project";
                             }, void, unknown>;
@@ -493,49 +493,61 @@ export declare function createClient({ url }: {
                         query?: Record<string, unknown> | undefined;
                         fetch?: RequestInit | undefined;
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
-                        200: Response | {
+                        200: AsyncGenerator<{
+                            message: string;
+                            success?: undefined;
+                            result?: undefined;
+                        } | {
                             success: boolean;
-                        };
+                            result: import("resend").CreateEmailResponse;
+                            message?: undefined;
+                        }, Response | {
+                            success: boolean;
+                            error: string;
+                        } | {
+                            success: boolean;
+                            error?: undefined;
+                        } | undefined, unknown>;
                     }>>;
                 };
                 upsertProject: {
                     post: (request: {
-                        projectId: string;
                         components: {
-                            projectId: string;
-                            url: string;
                             name: string;
+                            url: string;
+                            projectId: string;
                             id: string;
                             componentIdentifier: string | null;
                         }[];
+                        projectId: string;
                         colorStyles: {
-                            projectId: string;
                             name: string | null;
+                            projectId: string;
                             id: string;
                             lightColor: string;
                             darkColor: string;
                         }[];
-                        pageBackgroundColor?: string | undefined;
-                        websiteUrl?: string | undefined;
                         breakpoints?: {
-                            projectId: string;
                             width: number;
+                            projectId: string;
                             variantId: string;
                             componentId: string;
                             breakpointName: string;
                         }[] | undefined;
+                        websiteUrl?: string | undefined;
                         projectName?: string | null | undefined;
                         fullFramerProjectId?: string | undefined;
+                        pageBackgroundColor?: string | undefined;
                         framerUserId?: string | undefined;
                         pages?: {
-                            projectId: string;
                             path: string;
+                            projectId: string;
                             webPageId: string;
                         }[] | undefined;
                         locales?: {
-                            projectId: string;
-                            code: string;
                             name: string;
+                            code: string;
+                            projectId: string;
                             id: string;
                             slug: string;
                         }[] | undefined;
@@ -583,7 +595,7 @@ export declare function createClient({ url }: {
                     post: (request: {
                         randomId: string;
                         callId: string;
-                        tree: import("./rewrite").FramerLayersTree;
+                        tree: import("plugin-mcp").FramerLayersTree;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -605,7 +617,7 @@ export declare function createClient({ url }: {
                     post: (request: {
                         description: string;
                         randomId: string;
-                        tree: import("./rewrite").FramerLayersTree;
+                        tree: import("plugin-mcp").FramerLayersTree;
                         projectId?: string | undefined;
                         projectName?: string | undefined;
                     }, options?: {
@@ -614,14 +626,14 @@ export declare function createClient({ url }: {
                         fetch?: RequestInit | undefined;
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: AsyncGenerator<{
-                            fullItem: import("type-fest/source/required-deep").RequiredObjectDeep<import("./xml").NewExtractedNode>;
+                            fullItem: import("type-fest/source/required-deep").RequiredObjectDeep<import("plugin-mcp").NewExtractedNode>;
                             type: "fullItem";
                             partialItem: undefined;
                             nodeId: string;
                         } | {
                             fullItem: undefined;
                             type: "partialItem";
-                            partialItem: Partial<import("./xml").NewExtractedNode>;
+                            partialItem: Partial<import("plugin-mcp").NewExtractedNode>;
                             nodeId: string;
                         } | {
                             url: string;
@@ -753,8 +765,8 @@ export declare function createClient({ url }: {
             };
             getSessionForKey: {
                 post: (request: {
-                    projectId?: string | undefined;
                     key?: string | undefined;
+                    projectId?: string | undefined;
                 }, options?: {
                     headers?: Record<string, unknown> | undefined;
                     query?: Record<string, unknown> | undefined;
@@ -805,6 +817,21 @@ export declare function createClient({ url }: {
                 } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                     readonly 200: {
                         ok: boolean;
+                    };
+                }>>;
+            };
+            validateSession: {
+                post: (request: {
+                    framerUserId: string;
+                    sessionId: string;
+                }, options?: {
+                    headers?: Record<string, unknown> | undefined;
+                    query?: Record<string, unknown> | undefined;
+                    fetch?: RequestInit | undefined;
+                } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                    200: {
+                        valid: boolean;
+                        error?: string | undefined;
                     };
                 }>>;
             };
