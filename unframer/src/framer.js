@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QG2BFCE3.mjs
+// /:https://app.framerstatic.com/framer.Q6KVMOJP.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -50502,7 +50502,7 @@ var package_default = {
   license: 'MIT',
   scripts: {
     coverage: 'jest --coverage',
-    lint: 'eslint ./src --ext .ts,.tsx --format codeframe --quiet --cache',
+    lint: 'eslint ./src --ext .ts,.tsx --format gha-codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
     test: 'jest',
