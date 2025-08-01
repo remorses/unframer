@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.Q6KVMOJP.mjs
+// /:https://app.framerstatic.com/framer.WJU6JXVJ.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -45115,13 +45115,19 @@ var log3 = getLogger('custom-font-source',);
 function findDuplicateFont(existingFonts, newFont,) {
   for (let i = 0; i < existingFonts.length; i++) {
     const existingFont = existingFonts[i];
-    if (
-      existingFont && existingFont.selector === newFont.selector && existingFont.weight === newFont.weight &&
-      existingFont.style === newFont.style
-    ) {
+    if (!existingFont) continue;
+    if (existingFont.owner !== newFont.owner && existingFont.file === newFont.file) {
       return {
         existingFont,
         index: i,
+        projectDuplicate: true,
+      };
+    }
+    if (existingFont.selector === newFont.selector && existingFont.weight === newFont.weight && existingFont.style === newFont.style) {
+      return {
+        existingFont,
+        index: i,
+        projectDuplicate: false,
       };
     }
   }
@@ -45193,9 +45199,9 @@ var CustomFontSource = class _CustomFontSource {
         file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes(variationAxesData,),
+        owner: getAssetOwnerType(asset,),
       };
       fontFamily.fonts.push(font,);
-      fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
       this.assetsByFamily.set(fontName, asset,);
       fonts.push(...fontFamily.fonts,);
     }
@@ -45223,6 +45229,7 @@ var CustomFontSource = class _CustomFontSource {
       const fontFamily = this.createFontFamily(family,);
       const openTypeData = (_a = asset.properties) == null ? void 0 : _a.font.openTypeData;
       const url = createAbsoluteAssetURLFromAsset(asset,);
+      const ownerType = getAssetOwnerType(asset,);
       const font = {
         family: fontFamily,
         selector: _CustomFontSource.createSelector(fontFamily.name, variant,),
@@ -45232,9 +45239,15 @@ var CustomFontSource = class _CustomFontSource {
         file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes((_b = asset.properties) == null ? void 0 : _b.font.variationAxes,),
+        owner: ownerType,
       };
       const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
-      if (duplicateInfo) {
+      if (duplicateInfo && duplicateInfo.projectDuplicate) {
+        if (font.owner === 'project') {
+          fontFamily.fonts[duplicateInfo.index] = font;
+          fonts[font.selector] = font;
+        }
+      } else if (duplicateInfo) {
         log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
         const existingFont = duplicateInfo.existingFont;
         const newIsWoff2 = ((_c = font.file) == null ? void 0 : _c.endsWith('.woff2',)) ?? false;
@@ -45247,7 +45260,7 @@ var CustomFontSource = class _CustomFontSource {
         fontFamily.fonts.push(font,);
         fonts[font.selector] = font;
       }
-      fontFamily.owner = asset.ownerType === 'team' ? 'team' : 'project';
+      fontFamily.owner = ownerType;
       this.assetsByFamily.set(family, asset,);
     }
     for (const fontFamily of this.fontFamilies) {
@@ -45357,6 +45370,9 @@ function updateFontRelationships(fontFamily,) {
     font.selectorBoldItalic = (_d = relatedVariants.variantBoldItalic) == null ? void 0 : _d.selector;
     font.selectorItalic = (_e = relatedVariants.variantItalic) == null ? void 0 : _e.selector;
   }
+}
+function getAssetOwnerType(asset,) {
+  return asset.ownerType === 'team' ? 'team' : 'project';
 }
 async function loadFontsWithOpenType(source,) {
   switch (source) {
