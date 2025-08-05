@@ -14,6 +14,7 @@ import { exec } from 'child_process'
 import { error } from 'console'
 import fs from 'fs'
 import path from 'path'
+import crypto from 'crypto'
 import { dedent } from './utils.js'
 import {
     babelPluginJsxTransform,
@@ -65,6 +66,22 @@ export type StyleToken = {
     name?: string | null
     lightColor: string
     darkColor: string
+}
+
+// Cache for component type extraction results
+type ComponentCacheEntry = {
+    hash: string
+    propertyControls?: PropertyControls
+    fonts?: ComponentFontBundle[]
+    typedocComments?: any
+}
+
+const componentTypeCache = new Map<string, ComponentCacheEntry>()
+
+// Helper to calculate file hash
+async function getFileHash(filePath: string): Promise<string> {
+    const content = await fs.promises.readFile(filePath, 'utf-8')
+    return crypto.createHash('sha256').update(content).digest('hex')
 }
 
 export async function bundle({
@@ -307,6 +324,7 @@ export async function bundle({
     async function rebuild() {
         // Clear missing packages for each rebuild (important for watch mode)
         missingPackages.clear()
+
         try {
             const installedVersion = await resolvePackageVersion({
                 cwd: out,
@@ -414,6 +432,38 @@ export async function bundle({
                         )
                         return
                     }
+
+                    // Only use cache in watch mode
+                    if (watch) {
+                        // Check if we have a cached result for this file
+                        const currentHash = await getFileHash(resultPathAbs)
+                        const cacheKey = resultPathAbs
+                        const cachedEntry = componentTypeCache.get(cacheKey)
+
+                        if (cachedEntry && cachedEntry.hash === currentHash) {
+                            // File hasn't changed, use cached results
+                            logger.log(`using cached types for ${name}`)
+
+                            // Add cached fonts to allFonts
+                            if (cachedEntry.fonts) {
+                                allFonts.push(
+                                    ...cachedEntry.fonts.map((x) => ({
+                                        ...x,
+                                        fileName: path.basename(file.path),
+                                    })),
+                                )
+                            }
+
+                            return {
+                                propertyControls: cachedEntry.propertyControls,
+                                fonts: cachedEntry.fonts,
+                                name,
+                                typedocComments: cachedEntry.typedocComments,
+                            }
+                        }
+                    }
+
+                    // File has changed or not in cache, extract types
                     logger.log(`extracting types for ${name}`)
                     spinner.info(`Extracting types for component: ${name}`)
                     spinner.update(`Extracting types for ${name}`)
@@ -440,9 +490,18 @@ export async function bundle({
                     logger.log(
                         `Generated TypeDoc comments for ${name}: ${!!typedocComments.headerComment}`,
                     )
-                    await fs.promises.mkdir(out, { recursive: true })
-                    // .d.ts generation removed – types are now injected as typedoc
-                    // comments directly inside the generated JSX file.
+
+                    // Update cache (only if in watch mode)
+                    if (watch) {
+                        const currentHash = await getFileHash(resultPathAbs)
+                        const cacheKey = resultPathAbs
+                        componentTypeCache.set(cacheKey, {
+                            hash: currentHash,
+                            propertyControls,
+                            fonts,
+                            typedocComments,
+                        })
+                    }
 
                     return {
                         propertyControls,
@@ -656,6 +715,9 @@ export async function bundle({
             // Only write .jsx file if it's different from existing or if formatting was done
             if (didFormat && codeJsx !== existing) {
                 await fs.promises.writeFile(paths.jsxPath, codeJsx, 'utf-8')
+                logger.log(`Updated JSX file for ${componentName}`)
+            } else if (didFormat) {
+                logger.log(`JSX file unchanged for ${componentName}`)
             }
         }
         spinner.stop()

@@ -36,7 +36,7 @@ import { routes } from "./chunks/chunk-HEB6EHGG.js";
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/JFPa2SSU5YrQQQzAqbEt/aKlzorVQO.js
+// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/huUcpZLMFvynsWq8uspC/aKlzorVQO.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -47,6 +47,7 @@ import {
 	getFonts,
 	getFontsFromSharedStyle,
 	RichText,
+	SmartComponentScopedContainer,
 	useActiveVariantCallback,
 	useComponentViewport,
 	useLocaleInfo,
@@ -57,6 +58,7 @@ import {
 } from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
+import { useRef } from "react";
 
 // /:https://framerusercontent.com/modules/2dgi2DlUClY4qBbVakOw/0jnC5BbjXLdwysUvlueD/kpcp5QUWe.js
 import { fontStore } from "unframer";
@@ -267,14 +269,16 @@ var css2 = [
 ];
 var className2 = "framer-a3inn";
 
-// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/JFPa2SSU5YrQQQzAqbEt/aKlzorVQO.js
+// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/huUcpZLMFvynsWq8uspC/aKlzorVQO.js
 var ElementsBadgeFonts = getFonts(stdin_default);
+var SmartComponentScopedContainerWithFXWithOptimizedAppearEffect =
+	withOptimizedAppearEffect(withFX(SmartComponentScopedContainer));
+var ButtonsButtonFonts = getFonts(stdin_default2);
 var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
-var ButtonsButtonFonts = getFonts(stdin_default2);
 var cycleOrder = ["L_pX4uUkR", "Gbz9maQw1", "K1iE6Mz7N"];
-var serializationHash = "framer-YkAYi";
+var serializationHash = "framer-6U6Cj";
 var variantClassNames = {
 	Gbz9maQw1: "framer-v-g9taje",
 	K1iE6Mz7N: "framer-v-1hchsjm",
@@ -407,7 +411,11 @@ var createLayoutDependency = (props, variants) => {
 	return variants.join("-");
 };
 var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
+	const fallbackRef = useRef(null);
+	const refBinding = ref ?? fallbackRef;
+	const defaultLayoutId = React.useId();
 	const { activeLocale, setLocale } = useLocaleInfo();
+	const componentViewport = useComponentViewport();
 	const {
 		style,
 		className: className3,
@@ -431,6 +439,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	} = useVariantState({
 		cycleOrder,
 		defaultVariant: "L_pX4uUkR",
+		ref: refBinding,
 		variant,
 		variantClassNames,
 	});
@@ -445,9 +454,6 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	});
 	const sharedStyleClassNames = [className, className2];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
-	const ref1 = React.useRef(null);
-	const defaultLayoutId = React.useId();
-	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
 			<Variants animate={variants} initial={false}>
@@ -464,7 +470,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						data-framer-name={"Desktop"}
 						layoutDependency={layoutDependency}
 						layoutId={"L_pX4uUkR"}
-						ref={ref ?? ref1}
+						ref={refBinding}
 						style={{
 							backgroundColor:
 								"var(--token-f4cf9e3e-da35-4e33-897c-29a30a250c5f, rgb(0, 0, 0))",
@@ -522,7 +528,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 794) - 176 - 418) /
+														(((componentViewport?.height || 874) - 176 - 418) /
 															2 +
 															0 +
 															0) +
@@ -537,7 +543,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 816) - 176 - 640) /
+														(((componentViewport?.height || 200) - 176 - 640) /
 															2 +
 															0 +
 															0) +
@@ -553,7 +559,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											gestureVariant,
 										)}
 									>
-										<MotionDivWithFXWithOptimizedAppearEffect
+										<SmartComponentScopedContainerWithFXWithOptimizedAppearEffect
 											__perspectiveFX={false}
 											__smartComponentFX={true}
 											__targetOpacity={1}
@@ -563,7 +569,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											initial={animation1}
 											layoutDependency={layoutDependency}
 											layoutId={"EBGIPu010-container"}
+											nodeId={"EBGIPu010"}
 											optimized={true}
+											rendersWithMotion={true}
+											scopeId={"aKlzorVQO"}
 										>
 											{_jsx(stdin_default, {
 												D_QyhowU2: "Export Framer Components to React",
@@ -573,7 +582,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												variant: "ih1f0O9Of",
 												width: "100%",
 											})}
-										</MotionDivWithFXWithOptimizedAppearEffect>
+										</SmartComponentScopedContainerWithFXWithOptimizedAppearEffect>
 									</ComponentViewportProvider>
 									<RichText
 										__fromCanvasComponent={true}
@@ -632,7 +641,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 														"--framer-font-weight": "400",
 													}}
 												>
-													{"React components"}
+													{"React components."}
 												</motion.span>
 											</motion.h1>
 										</React.Fragment>
@@ -701,7 +710,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 794) - 176 - 418) /
+														(((componentViewport?.height || 874) - 176 - 418) /
 															2 +
 															0 +
 															0) +
@@ -716,7 +725,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 816) - 176 - 640) /
+														(((componentViewport?.height || 200) - 176 - 640) /
 															2 +
 															0 +
 															0) +
@@ -732,10 +741,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											gestureVariant,
 										)}
 									>
-										<motion.div
+										<SmartComponentScopedContainer
 											className={"framer-1pwvu55-container"}
 											layoutDependency={layoutDependency}
 											layoutId={"ZuNhKVdul-container"}
+											nodeId={"ZuNhKVdul"}
+											rendersWithMotion={true}
+											scopeId={"aKlzorVQO"}
 										>
 											{_jsx(stdin_default2, {
 												GLWImmBy_: false,
@@ -758,7 +770,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												variant: "b_66fXdIn",
 												width: "100%",
 											})}
-										</motion.div>
+										</SmartComponentScopedContainer>
 									</ComponentViewportProvider>
 									<RichText
 										__fromCanvasComponent={true}
@@ -793,27 +805,26 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 });
 var css3 = [
 	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
-	".framer-YkAYi.framer-1wa8zo6, .framer-YkAYi .framer-1wa8zo6 { display: block; }",
-	".framer-YkAYi.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
-	".framer-YkAYi .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
-	".framer-YkAYi .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-YkAYi .framer-1sx2h0, .framer-YkAYi .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-YkAYi .framer-pz5jso-container, .framer-YkAYi .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
-	".framer-YkAYi .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-YkAYi .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
-	".framer-YkAYi .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
-	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-YkAYi.framer-lv3ofw, .framer-YkAYi .framer-he1c7i, .framer-YkAYi .framer-c0n0jm, .framer-YkAYi .framer-1sx2h0, .framer-YkAYi .framer-1rh3sqh { gap: 0px; } .framer-YkAYi.framer-lv3ofw > *, .framer-YkAYi .framer-he1c7i > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-YkAYi.framer-lv3ofw > :first-child, .framer-YkAYi .framer-he1c7i > :first-child, .framer-YkAYi .framer-c0n0jm > :first-child, .framer-YkAYi .framer-1sx2h0 > :first-child, .framer-YkAYi .framer-1rh3sqh > :first-child { margin-top: 0px; } .framer-YkAYi.framer-lv3ofw > :last-child, .framer-YkAYi .framer-he1c7i > :last-child, .framer-YkAYi .framer-c0n0jm > :last-child, .framer-YkAYi .framer-1sx2h0 > :last-child, .framer-YkAYi .framer-1rh3sqh > :last-child { margin-bottom: 0px; } .framer-YkAYi .framer-c0n0jm > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-YkAYi .framer-1sx2h0 > *, .framer-YkAYi .framer-1rh3sqh > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } }",
-	".framer-YkAYi.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
-	".framer-YkAYi.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
-	".framer-YkAYi.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
-	".framer-YkAYi.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
-	".framer-YkAYi.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
-	".framer-YkAYi.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
-	".framer-YkAYi.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
+	".framer-6U6Cj.framer-1wa8zo6, .framer-6U6Cj .framer-1wa8zo6 { display: block; }",
+	".framer-6U6Cj.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
+	".framer-6U6Cj .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
+	".framer-6U6Cj .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-6U6Cj .framer-1sx2h0, .framer-6U6Cj .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-6U6Cj .framer-pz5jso-container, .framer-6U6Cj .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
+	".framer-6U6Cj .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-6U6Cj .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
+	".framer-6U6Cj .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	".framer-6U6Cj.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
+	".framer-6U6Cj.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
+	".framer-6U6Cj.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
+	".framer-6U6Cj.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
+	".framer-6U6Cj.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
+	".framer-6U6Cj.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
+	".framer-6U6Cj.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
 	...css,
 	...css2,
 ];
-var FrameraKlzorVQO = withCSS(Component, css3, "framer-YkAYi");
+var FrameraKlzorVQO = withCSS(Component, css3, "framer-6U6Cj");
 var stdin_default3 = FrameraKlzorVQO;
 FrameraKlzorVQO.displayName = "Section Hero";
 FrameraKlzorVQO.defaultProps = {

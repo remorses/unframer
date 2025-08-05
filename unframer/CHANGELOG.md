@@ -1,5 +1,11 @@
 # unframer
 
+## 3.0.6
+
+### Patch Changes
+
+- Optimize watch mode: only regenerate types for changed components, using file hash caching
+
 ## 3.0.5
 
 ### Patch Changes
