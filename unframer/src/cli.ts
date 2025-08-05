@@ -78,7 +78,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     return
                 }
                 spinner.start(
-                    `Waiting for changes, try editing a Framer component and publishing...`,
+                    `Waiting for changes, try editing a component in Framer and click publish...`,
                 )
                 let lastEtag: string | null = null
                 const startTime = Date.now()

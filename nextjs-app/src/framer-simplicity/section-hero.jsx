@@ -36,7 +36,7 @@ import { routes } from "./chunks/chunk-HEB6EHGG.js";
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/huUcpZLMFvynsWq8uspC/aKlzorVQO.js
+// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/qHBheAUur4mOMMrc2BQz/aKlzorVQO.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -269,7 +269,7 @@ var css2 = [
 ];
 var className2 = "framer-a3inn";
 
-// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/huUcpZLMFvynsWq8uspC/aKlzorVQO.js
+// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/qHBheAUur4mOMMrc2BQz/aKlzorVQO.js
 var ElementsBadgeFonts = getFonts(stdin_default);
 var SmartComponentScopedContainerWithFXWithOptimizedAppearEffect =
 	withOptimizedAppearEffect(withFX(SmartComponentScopedContainer));
@@ -278,7 +278,7 @@ var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
 var cycleOrder = ["L_pX4uUkR", "Gbz9maQw1", "K1iE6Mz7N"];
-var serializationHash = "framer-6U6Cj";
+var serializationHash = "framer-b0vi3";
 var variantClassNames = {
 	Gbz9maQw1: "framer-v-g9taje",
 	K1iE6Mz7N: "framer-v-1hchsjm",
@@ -528,7 +528,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 874) - 176 - 418) /
+														(((componentViewport?.height || 794) - 176 - 418) /
 															2 +
 															0 +
 															0) +
@@ -641,7 +641,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 														"--framer-font-weight": "400",
 													}}
 												>
-													{"React components."}
+													{"React components"}
 												</motion.span>
 											</motion.h1>
 										</React.Fragment>
@@ -710,7 +710,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 874) - 176 - 418) /
+														(((componentViewport?.height || 794) - 176 - 418) /
 															2 +
 															0 +
 															0) +
@@ -805,26 +805,26 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 });
 var css3 = [
 	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
-	".framer-6U6Cj.framer-1wa8zo6, .framer-6U6Cj .framer-1wa8zo6 { display: block; }",
-	".framer-6U6Cj.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
-	".framer-6U6Cj .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
-	".framer-6U6Cj .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-6U6Cj .framer-1sx2h0, .framer-6U6Cj .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-6U6Cj .framer-pz5jso-container, .framer-6U6Cj .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
-	".framer-6U6Cj .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-6U6Cj .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
-	".framer-6U6Cj .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
-	".framer-6U6Cj.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
-	".framer-6U6Cj.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
-	".framer-6U6Cj.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
-	".framer-6U6Cj.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
-	".framer-6U6Cj.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
-	".framer-6U6Cj.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
-	".framer-6U6Cj.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
+	".framer-b0vi3.framer-1wa8zo6, .framer-b0vi3 .framer-1wa8zo6 { display: block; }",
+	".framer-b0vi3.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
+	".framer-b0vi3 .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
+	".framer-b0vi3 .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-b0vi3 .framer-1sx2h0, .framer-b0vi3 .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-b0vi3 .framer-pz5jso-container, .framer-b0vi3 .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
+	".framer-b0vi3 .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-b0vi3 .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
+	".framer-b0vi3 .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	".framer-b0vi3.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
+	".framer-b0vi3.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
+	".framer-b0vi3.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
+	".framer-b0vi3.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
+	".framer-b0vi3.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
+	".framer-b0vi3.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
+	".framer-b0vi3.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
 	...css,
 	...css2,
 ];
-var FrameraKlzorVQO = withCSS(Component, css3, "framer-6U6Cj");
+var FrameraKlzorVQO = withCSS(Component, css3, "framer-b0vi3");
 var stdin_default3 = FrameraKlzorVQO;
 FrameraKlzorVQO.displayName = "Section Hero";
 FrameraKlzorVQO.defaultProps = {

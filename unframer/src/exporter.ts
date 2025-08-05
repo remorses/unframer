@@ -823,7 +823,7 @@ export async function bundle({
     ${exampleCode}
     \`\`\`
 
-    It's very important to import the \`styles.css\` file to include the necessary styles for the components.
+    Remember to import the \`styles.css\` file to include the necessary styles for the components.
 
     To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
