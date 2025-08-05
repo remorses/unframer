@@ -1,5 +1,11 @@
 # unframer
 
+## 3.0.5
+
+### Patch Changes
+
+- use :where to decrease specificity of reset css
+
 ## 3.0.4
 
 ### Patch Changes

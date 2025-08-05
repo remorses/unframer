@@ -8,26 +8,30 @@
     -webkit-font-smoothing: inherit;
 }
 
-.unframer h1,
-.unframer h2,
-.unframer h3,
-.unframer h4,
-.unframer h5,
-.unframer h6,
-.unframer p,
-.unframer figure {
+:where(
+    .unframer h1,
+    .unframer h2,
+    .unframer h3,
+    .unframer h4,
+    .unframer h5,
+    .unframer h6,
+    .unframer p,
+    .unframer figure
+) {
     margin: 0;
 }
 
-.unframer {
+:where(.unframer) {
     line-height: normal;
 }
 
-.unframer,
-.unframer input,
-.unframer textarea,
-.unframer select,
-.unframer button {
+:where(
+    .unframer,
+    .unframer input,
+    .unframer textarea,
+    .unframer select,
+    .unframer button
+) {
     font-size: 12px;
     font-family: sans-serif;
 }
