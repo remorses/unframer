@@ -286,7 +286,7 @@ export async function bundle({
                                         />
                                     )
                                 }
-                                ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+                                ComponentWithRoot.Responsive = ({ locale='', ...rest }) => {
                                     return (
                                         <ContextProviders
                                             routes={routes}
