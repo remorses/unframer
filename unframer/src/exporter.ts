@@ -809,28 +809,37 @@ export async function bundle({
         })
         await fs.promises.writeFile(stackblitzDemoExample, exampleCode)
     }
-    console.log(
-        terminalMarkdown(dedent`
+    // Build the output message
+
+    let outputMessage = dedent`
     # How to use the Framer components
 
     Your components are exported to \`${outDirForExample}\` folder.
 
     Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
+    `
 
-    You can use the components like this (try copy pasting the code below into your React app):
+    if (exampleCode) {
+        outputMessage += dedent`
 
-    \`\`\`jsx
-    ${exampleCode}
-    \`\`\`
+        You can use the components like this (try copy pasting the code below into your React app):
+
+        \`\`\`jsx
+        ${exampleCode}
+        \`\`\`
+        `
+    }
+
+    outputMessage += dedent`
 
     Remember to import the \`styles.css\` file to include the necessary styles for the components.
 
     To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
 
     Read more on GitHub: https://github.com/remorses/unframer
+    `
 
-    `),
-    )
+    console.log(terminalMarkdown(outputMessage))
     console.log()
     return { result, rebuild, buildContext }
 }
@@ -1398,6 +1407,7 @@ export async function createExampleComponentCode({
         // Order first by nodeDepth (lower is better)
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
+    if (!instances?.length) return { outDirForExample, exampleCode: '' }
 
     const imports = instances?.map((exampleComponent) => {
         return `import ${componentCamelCase(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
@@ -1424,6 +1434,7 @@ export async function createExampleComponentCode({
         const responsiveComponent = `<${componentCamelCase(exampleComponent?.componentPathSlug)}.Responsive${propStr}/>`
         return responsiveComponent
     })
+    if (!jsx.join().trim()) return { outDirForExample, exampleCode: '' }
 
     let containerClasses = ''
     if (config.pageBackgroundColor) {
