@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.FPGXVICM.mjs
+// /:https://app.framerstatic.com/framer.KDD5JHV3.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -23019,13 +23019,6 @@ var isPropValid = /* @__PURE__ */ memoize((prop) =>
   reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
   /* Z+1 */
 );
-var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React4.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
 var mockWithWarning = (message) => {
   return () => {
     warnOnce2(message,);
@@ -23055,6 +23048,7 @@ var implementation = {
   canRenderOptimizedCanvasImage() {
     return false;
   },
+  isOnPageCanvas: false,
 };
 var isRuntimeInjected = false;
 var runtimeProxy = {
@@ -23076,6 +23070,13 @@ function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
 }
+var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React4.useContext(LibraryFeaturesContext,);
+  return context ?? {};
+};
 var wrapperStyle = {
   position: 'absolute',
   borderRadius: 'inherit',
@@ -24358,7 +24359,7 @@ function useStyleAndRect(props,) {
   }
   const isRenderingStaticContent = isStaticRenderer();
   if (props.positionSticky) {
-    if (!isRenderingStaticContent || inCodeComponent) {
+    if (!isRenderingStaticContent || runtime.isOnPageCanvas || inCodeComponent) {
       resultStyle.position = 'sticky';
       resultStyle.willChange = 'transform';
       resultStyle.zIndex = 1;
@@ -24367,8 +24368,12 @@ function useStyleAndRect(props,) {
       resultStyle.bottom = props.positionStickyBottom;
       resultStyle.left = props.positionStickyLeft;
     }
-  } else if (isRenderingStaticContent && (props.positionFixed || props.positionAbsolute)) {
-    resultStyle.position = 'absolute';
+  } else if (isRenderingStaticContent) {
+    if (props.positionFixed) {
+      resultStyle.position = runtime.isOnPageCanvas ? 'fixed' : 'absolute';
+    } else if (props.positionAbsolute) {
+      resultStyle.position = 'absolute';
+    }
   }
   if ('rotate' in resultStyle && resultStyle.rotate === void 0) {
     delete resultStyle.rotate;
