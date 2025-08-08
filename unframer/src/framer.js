@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.KDD5JHV3.mjs
+// /:https://app.framerstatic.com/framer.2O4XSJDC.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -20366,6 +20366,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         li.framer-text,
         ol.framer-text,
         ul.framer-text,
+        mark.framer-text,
         span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
@@ -20392,6 +20393,22 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         }
     `, /* css */
   `
+        mark.framer-text,
+        p.framer-text,
+        div.framer-text,
+        h1.framer-text,
+        h2.framer-text,
+        h3.framer-text,
+        h4.framer-text,
+        h5.framer-text,
+        h6.framer-text,
+        li.framer-text,
+        ol.framer-text,
+        ul.framer-text {
+            background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
+        }
+    `, /* css */
+  `
         @supports not (color: color(display-p3 1 1 1)) {
             p.framer-text,
             div.framer-text,
@@ -20407,6 +20424,12 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             span.framer-text:not([data-text-fill]) {
                 color: ${createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-text-color',], '#000',)};
                 -webkit-text-stroke-color: ${createRGBVariableFallbacks(['--framer-text-stroke-color',], 'initial',)};
+            }
+
+            mark.framer-text {
+                background-color: ${
+    createRGBVariableFallbacks(['--framer-blockquote-text-background-color', '--framer-text-background-color',], 'initial',)
+  };
             }
         }
     `, /* css */
@@ -20820,6 +20843,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             --framer-line-height: 1.2em;
             --framer-text-alignment: start;
             --framer-font-open-type-features: normal;
+            --framer-text-background-color: initial;
         }
     `, /* css */
   `
@@ -44070,6 +44094,9 @@ function assert2(condition, ...msg) {
 }
 var missing = Symbol('missing',);
 var frozenEmptyArray = Object.freeze([],);
+function emptyArray() {
+  return frozenEmptyArray;
+}
 var errorReporter;
 function reportError({
   error: maybeError,
@@ -50336,8 +50363,9 @@ function addFonts(component, passedFonts, flags,) {
   },);
 }
 function getFonts(component,) {
+  if (!component) return emptyArray();
   const fonts = component.fonts;
-  return fonts ?? [];
+  return fonts ?? emptyArray();
 }
 function getFontsFromSharedStyle(fonts,) {
   if (fonts.length === 0) {
