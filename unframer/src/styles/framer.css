@@ -167,6 +167,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         li.framer-text,
         ol.framer-text,
         ul.framer-text,
+        mark.framer-text,
         span.framer-text:not([data-text-fill]) {
             font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
@@ -193,6 +194,22 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         }
     
 
+        mark.framer-text,
+        p.framer-text,
+        div.framer-text,
+        h1.framer-text,
+        h2.framer-text,
+        h3.framer-text,
+        h4.framer-text,
+        h5.framer-text,
+        h6.framer-text,
+        li.framer-text,
+        ol.framer-text,
+        ul.framer-text {
+            background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
+        }
+    
+
         @supports not (color: color(display-p3 1 1 1)) {
             p.framer-text,
             div.framer-text,
@@ -208,6 +225,10 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             span.framer-text:not([data-text-fill]) {
                 color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))));
                 -webkit-text-stroke-color: var(--framer-text-stroke-color-rgb, var(--framer-text-stroke-color, initial));
+            }
+
+            mark.framer-text {
+                background-color: var(--framer-blockquote-text-background-color-rgb, var(--framer-blockquote-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))));
             }
         }
     
@@ -556,6 +577,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             --framer-line-height: 1.2em;
             --framer-text-alignment: start;
             --framer-font-open-type-features: normal;
+            --framer-text-background-color: initial;
         }
     
 
