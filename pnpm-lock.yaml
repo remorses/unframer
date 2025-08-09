@@ -269,8 +269,8 @@ importers:
         specifier: ^19.1.5
         version: 19.1.5(@types/react@19.1.8)
       '@xmorse/deployment-utils':
-        specifier: ^0.4.2
-        version: 0.4.2(@types/node@22.15.21)(jiti@1.21.7)(terser@5.43.1)(tsx@4.20.3)(yaml@2.5.1)
+        specifier: ^0.4.3
+        version: 0.4.3(@types/node@22.15.21)(jiti@1.21.7)(terser@5.43.1)(tsx@4.20.3)(yaml@2.5.1)
       concurrently:
         specifier: ^9.1.2
         version: 9.1.2
@@ -2470,8 +2470,8 @@ packages:
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
 
-  '@xmorse/deployment-utils@0.4.2':
-    resolution: {integrity: sha512-6j1buBjQVW0PorRc+F39ui4fk3bOh5kQkMniKcC2LP76JpQIKo9/Zn3tKzD9Eh1gQnWbQlwougusuIVhCdh2Jg==}
+  '@xmorse/deployment-utils@0.4.3':
+    resolution: {integrity: sha512-WvZOWb88QG6bK3rjGrWGDWiq4uh3DMgHRpfV18BWAcQGLaUUfhVRiB084K0BvMoqMB2nSLLQpLUQcN3xvZqOhQ==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -2960,6 +2960,9 @@ packages:
   confbox@0.1.7:
     resolution: {integrity: sha512-uJcB/FKZtBMCJpK8MQji6bJHgu1tixKPxRLeGkNzBoOZzpnZUJm0jm2/sBDWcuBx1dYgxV4JU+g5hmNxCyAmdA==}
 
+  confbox@0.2.2:
+    resolution: {integrity: sha512-1NB+BKqhtNipMsov4xI/NnhCKp9XG9NamYp5PVm9klAT0fsrNPjaFICsCFhNhwZJKNh7zB/3q8qXz0E9oaMNtQ==}
+
   config-chain@1.1.13:
     resolution: {integrity: sha512-qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==}
 
@@ -3446,6 +3449,9 @@ packages:
   express@4.21.1:
     resolution: {integrity: sha512-YSFlK1Ee0/GC8QaO91tHcDxJiE/X4FbpAyQWkxAvG6AXCuR65YzK8ua6D9hvi/TzUfZMpc+BwuM1IPw8fmQBiQ==}
     engines: {node: '>= 0.10.0'}
+
+  exsolve@1.0.7:
+    resolution: {integrity: sha512-VO5fQUzZtI6C+vx4w/4BWJpg3s/5l+6pRQEHzFRM8WFi4XffSP1Z+4qi7GbjWbvRQEbdIco5mIMq+zX4rPuLrw==}
 
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
@@ -4946,6 +4952,9 @@ packages:
 
   pkg-types@1.2.0:
     resolution: {integrity: sha512-+ifYuSSqOQ8CqP4MbZA5hDpb97n3E8SVWdJe+Wms9kj745lmd3b7EZJiqvmLwAlmRfjrI7Hi5z3kdBJ93lFNPA==}
+
+  pkg-types@2.2.0:
+    resolution: {integrity: sha512-2SM/GZGAEkPp3KWORxQZns4M+WSeXbC2HEvmOIJe3Cmiv6ieAJvdVhDldtHqM5J1Y7MrR1XhkBT/rMlhh9FdqQ==}
 
   possible-typed-array-names@1.0.0:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
@@ -8701,7 +8710,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@xmorse/deployment-utils@0.4.2(@types/node@22.15.21)(jiti@1.21.7)(terser@5.43.1)(tsx@4.20.3)(yaml@2.5.1)':
+  '@xmorse/deployment-utils@0.4.3(@types/node@22.15.21)(jiti@1.21.7)(terser@5.43.1)(tsx@4.20.3)(yaml@2.5.1)':
     dependencies:
       '@actions/cache': 3.2.4
       '@iarna/toml': 2.2.5
@@ -8711,6 +8720,7 @@ snapshots:
       folder-hash: 4.0.4
       fs-extra: 10.1.0
       picocolors: 1.1.1
+      pkg-types: 2.2.0
       tempfile: 4.0.0
       vite: 6.3.5(@types/node@22.15.21)(jiti@1.21.7)(terser@5.43.1)(tsx@4.20.3)(yaml@2.5.1)
     transitivePeerDependencies:
@@ -9319,6 +9329,8 @@ snapshots:
 
   confbox@0.1.7: {}
 
+  confbox@0.2.2: {}
+
   config-chain@1.1.13:
     dependencies:
       ini: 1.3.8
@@ -9878,6 +9890,8 @@ snapshots:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+
+  exsolve@1.0.7: {}
 
   extend@3.0.2: {}
 
@@ -11745,6 +11759,12 @@ snapshots:
       confbox: 0.1.7
       mlly: 1.7.1
       pathe: 1.1.2
+
+  pkg-types@2.2.0:
+    dependencies:
+      confbox: 0.2.2
+      exsolve: 1.0.7
+      pathe: 2.0.3
 
   possible-typed-array-names@1.0.0: {}
 
