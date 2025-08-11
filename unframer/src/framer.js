@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.2O4XSJDC.mjs
+// /:https://app.framerstatic.com/framer.2VMGCK6K.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -21295,6 +21295,10 @@ var frameCSSRules = (isPreview) => {
   return isPreview ? frameCSS : [];
 };
 var svgCSSRules = [`.svgContainer svg { display: block; }`,];
+var overflowClipFallbackCSSVariable = '--overflow-clip-fallback';
+var overflowClipFallbackCSSRules = /* @__PURE__ */ (() => [`@supports (not (overflow: clip)) {
+        :root { ${overflowClipFallbackCSSVariable}: hidden; }
+    }`,])();
 var combineCSSRules =
   (isPreview) => [
     ...willChangeTransformRules(isPreview,),
@@ -21314,6 +21318,7 @@ var combineCSSRules =
     ...svgCSSRules,
     ...resetCSS,
     ...hideScrollbars,
+    ...overflowClipFallbackCSSRules,
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);

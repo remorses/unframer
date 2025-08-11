@@ -964,3 +964,6 @@ NavigationContainer
 [data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }
 [data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }
 [data-hide-scrollbars="true"] { scrollbar-width: none; }
+@supports (not (overflow: clip)) {
+        :root { --overflow-clip-fallback: hidden; }
+    }
