@@ -163,7 +163,12 @@ export const WithFramerBreakpoints = <
             return breakpoint
         },
         () => {
-            // on server and during hydration
+            if (typeof window !== 'undefined') {
+                const breakpoint = getBreakpointNameFromWindowWidth(
+                    window.innerWidth,
+                )
+                return breakpoint
+            }
 
             return ''
         },
@@ -335,34 +340,65 @@ export function AdaptedLink({
     const route = routes?.[webPageId]
     const target = openInNewTab ? '_blank' : undefined
     if (isRelativeLink(href) || isMailto(href)) {
-        return React.cloneElement(children, {
-            ...rest,
-            onClick: navigateClientSide,
-            href,
-            target,
-        })
+        return (
+            <>
+                {React.cloneElement(children, {
+                    ...rest,
+                    suppressHydrationWarning: true,
+                    onClick: navigateClientSide,
+                    href,
+                    target,
+                })}
+            </>
+        )
     }
     if (!webPageId) {
-        return <Link href={href} {...rest} {...onlyForFramer} />
+        return (
+            <Link
+                suppressHydrationWarning={true}
+                href={href}
+                {...rest}
+                {...onlyForFramer}
+            />
+        )
     }
 
     if (!route || !route.path) {
-        return <Link href={href} {...rest} {...onlyForFramer} />
+        return (
+            <Link
+                suppressHydrationWarning={true}
+                href={href}
+                {...rest}
+                {...onlyForFramer}
+            />
+        )
     }
     let resolvedPath = route.path
     if (pathVariables) {
         resolvedPath = replacePathParams(resolvedPath, pathVariables)
     }
     if (isRelativeLink(resolvedPath) || isMailto(href)) {
-        return React.cloneElement(children, {
-            ...rest,
-            onClick: navigateClientSide,
-            href: resolvedPath,
-            target,
-        })
+        return (
+            <>
+                {React.cloneElement(children, {
+                    ...rest,
+                    suppressHydrationWarning: true,
+                    onClick: navigateClientSide,
+                    href: resolvedPath,
+                    target,
+                })}
+            </>
+        )
     }
 
-    return <Link href={resolvedPath} {...rest} {...onlyForFramer} />
+    return (
+        <Link
+            href={resolvedPath}
+            suppressHydrationWarning={true}
+            {...rest}
+            {...onlyForFramer}
+        />
+    )
 }
 
 export function ContextProviders({
