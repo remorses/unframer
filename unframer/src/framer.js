@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.2O4XSJDC.mjs
+// /:https://app.framerstatic.com/framer.O23R7WUO.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -16609,6 +16609,14 @@ var P3Color = class _P3Color {
     if (!value) return color2;
     return value.toString('srgb',);
   }
+  static multiplyAlpha(color2, alpha2,) {
+    return new _P3Color({
+      r: color2.r,
+      g: color2.g,
+      b: color2.b,
+      a: color2.a * alpha2,
+    },);
+  }
 };
 function clampRGB(color2,) {
   return P3Color.srgbFromValue(color2,);
@@ -20406,6 +20414,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         ol.framer-text,
         ul.framer-text {
             background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
+            border-radius: var(--framer-blockquote-text-background-radius, var(--framer-text-background-radius, initial));
+            padding: var(--framer-blockquote-text-background-padding, var(--framer-text-background-padding, initial));
         }
     `, /* css */
   `
@@ -20555,6 +20565,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
+            background-color: var(--framer-link-text-background-color, var(--framer-text-background-color, initial));
+            border-radius: var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial));
+            padding: var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial));
         }
     `,
   // Text decoration can't be applied to the nested spans of links because it breaks animations
@@ -20578,6 +20591,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
                 color: ${
     createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
+  };
+                background-color: ${
+    createRGBVariableFallbacks(['--framer-link-text-background-color', '--framer-text-background-color',], 'initial',)
   };
             }
         }
@@ -20622,6 +20638,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
+            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
+            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
     `, /* css */
   `
@@ -20648,6 +20667,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-link-text-color',
       '--framer-text-color',
     ], '#000',)
+  };
+            background-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-background-color',
+      '--framer-link-text-background-color',
+      '--framer-text-background-color',
+    ], 'initial',)
   };
         }
     }
@@ -20692,6 +20718,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
+            border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
+            padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
     `, /* css */
   `
@@ -20713,6 +20742,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
                 color: ${
     createRGBVariableFallbacks(['--framer-link-current-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
+  };
+                background-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-current-text-background-color',
+      '--framer-link-text-background-color',
+      '--framer-text-background-color',
+    ], 'initial',)
   };
             }
         }
@@ -20743,6 +20779,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-text-color',
     ], '#000',)
   };
+                background-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-current-text-background-color',
+      '--framer-link-text-background-color',
+      '--framer-text-background-color',
+    ], 'initial',)
+  };
             }
         }
     `, /* css */
@@ -20757,6 +20800,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial))));
+            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial))));
+            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial))));
         }
     `, /* css */
   `
@@ -20785,6 +20831,14 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-text-color',
     ], '#000',)
   };
+                background-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-background-color',
+      '--framer-link-current-text-background-color',
+      '--framer-link-text-background-color',
+      '--framer-text-background-color',
+    ], 'initial',)
+  };
             }
         }
     `, /* css */
@@ -20798,6 +20852,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial))));
+            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial))));
+            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial))));
         }
     `, /* css */
   `
@@ -20814,6 +20871,14 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-code-text-color',
       '--framer-text-color',
     ], '#000',)
+  };
+                background-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-background-color',
+      '--framer-link-current-text-background-color',
+      '--framer-link-text-background-color',
+      '--framer-text-background-color',
+    ], 'initial',)
   };
             }
         }
@@ -20844,6 +20909,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             --framer-text-alignment: start;
             --framer-font-open-type-features: normal;
             --framer-text-background-color: initial;
+            --framer-text-background-radius: initial;
+            --framer-text-background-padding: initial;
         }
     `, /* css */
   `
@@ -21295,6 +21362,10 @@ var frameCSSRules = (isPreview) => {
   return isPreview ? frameCSS : [];
 };
 var svgCSSRules = [`.svgContainer svg { display: block; }`,];
+var overflowClipFallbackCSSVariable = '--overflow-clip-fallback';
+var overflowClipFallbackCSSRules = /* @__PURE__ */ (() => [`@supports (not (overflow: clip)) {
+        :root { ${overflowClipFallbackCSSVariable}: hidden; }
+    }`,])();
 var combineCSSRules =
   (isPreview) => [
     ...willChangeTransformRules(isPreview,),
@@ -21314,6 +21385,7 @@ var combineCSSRules =
     ...svgCSSRules,
     ...resetCSS,
     ...hideScrollbars,
+    ...overflowClipFallbackCSSRules,
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
