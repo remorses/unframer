@@ -1,5 +1,16 @@
 # unframer
 
+## 3.1.0
+
+### Minor Changes
+
+- b71744b: Add support for exporting React components via MCP. Install the MCP Framer plugin and you can use Claude Code to export your React Components
+
+### Patch Changes
+
+- 8745fbd: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- fix hydration warnings in Resposive caused by useSyncExternalStore
+
 ## 3.0.6
 
 ### Patch Changes
