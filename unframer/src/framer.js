@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.O23R7WUO.mjs
+// /:https://app.framerstatic.com/framer.4556WC32.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12649,31 +12649,9 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
-var timezone;
-var visitorLocale;
-function setTimezoneAndLocaleForTracking() {
-  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
-  timezone = resolvedDateTimeOptions.timeZone;
-  visitorLocale = resolvedDateTimeOptions.locale;
-}
-requestIdleCallback(setTimezoneAndLocaleForTracking,);
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
-  if (!safeWindow.__framer_events) return;
-  if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
-  safeWindow.__framer_events.push([eventType, {
-    // Base properties common to all events
-    referrer: null,
-    // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
-    url: safeWindow.location.href,
-    hostname: safeWindow.location.hostname || null,
-    pathname: safeWindow.location.pathname || null,
-    hash: safeWindow.location.hash || null,
-    search: safeWindow.location.search || null,
-    timezone,
-    locale: visitorLocale,
-    // Additional properties specific to custom events
-    ...eventData,
-  }, sendOn,],);
+  var _a;
+  (_a = safeWindow.__framer_events) == null ? void 0 : _a.push([eventType, eventData, sendOn,],);
   switch (eventType) {
     case 'published_site_click': {
       const {
@@ -20565,9 +20543,10 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
-            background-color: var(--framer-link-text-background-color, var(--framer-text-background-color, initial));
-            border-radius: var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial));
-            padding: var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial));
+            /* Don't inherit background styles from any parent text style. */
+            background-color: var(--framer-link-text-background-color, initial);
+            border-radius: var(--framer-link-text-background-radius, initial);
+            padding: var(--framer-link-text-background-padding, initial);
         }
     `,
   // Text decoration can't be applied to the nested spans of links because it breaks animations
@@ -20592,9 +20571,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
                 color: ${
     createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
   };
-                background-color: ${
-    createRGBVariableFallbacks(['--framer-link-text-background-color', '--framer-text-background-color',], 'initial',)
-  };
+                background-color: ${createRGBVariableFallbacks(['--framer-link-text-background-color',], 'initial',)};
             }
         }
     `, /* css */
@@ -20718,9 +20695,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
-            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
-            border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
-            padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
+            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial));
+            border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
+            padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial));
         }
     `, /* css */
   `
@@ -20800,9 +20777,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial))));
-            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial))));
-            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial)));
+            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
+            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)));
         }
     `, /* css */
   `
@@ -20836,7 +20813,6 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-link-hover-text-background-color',
       '--framer-link-current-text-background-color',
       '--framer-link-text-background-color',
-      '--framer-text-background-color',
     ], 'initial',)
   };
             }
@@ -20877,7 +20853,6 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-link-hover-text-background-color',
       '--framer-link-current-text-background-color',
       '--framer-link-text-background-color',
-      '--framer-text-background-color',
     ], 'initial',)
   };
             }
@@ -36165,64 +36140,73 @@ function isSamePage(a, b,) {
   return aPathVariables.length === bPathVariables.length &&
     Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
 }
-function getPageviewEventData({
-  abTestId,
-  framerSiteId,
-  routeId,
-  routePath,
-  collectionItemId,
-  localeCode,
-},) {
-  return {
-    abTestId,
-    framerSiteId,
-    routePath: routePath || '/',
-    collectionItemId,
-    framerLocale: localeCode,
-    webPageId: routeId,
-  };
+var timezone = null;
+var visitorLocale = null;
+function setTimezoneAndLocaleForTracking() {
+  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
+  timezone = resolvedDateTimeOptions.timeZone;
+  visitorLocale = resolvedDateTimeOptions.locale;
 }
+requestIdleCallback(setTimezoneAndLocaleForTracking,);
 var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,) => {
   const framerSiteId = useContext(FormContext,);
   const pageviewEventData = useRef3();
   const skipFirstPageView = useRef3(true,);
   useEffect(() => {
-    const getFullPageviewEventData = async () => {
-      var _a;
-      let collectionItemId = null;
-      if ((currentRoute == null ? void 0 : currentRoute.collectionId) && collectionUtils && currentPathVariables) {
-        const utils = await ((_a = collectionUtils[currentRoute.collectionId]) == null ? void 0 : _a.call(collectionUtils,));
-        const [slug,] = Object.values(currentPathVariables,);
-        if (utils && typeof slug === 'string') {
-          collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
-        }
-      }
-      return getPageviewEventData({
+    function getFullPageviewEventData() {
+      if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
+      const eventData = {
         abTestId: currentRoute == null ? void 0 : currentRoute.abTestId,
         framerSiteId: framerSiteId ?? null,
         // If we are in a variant route, let's use the variant ID as the route ID instead, so that the analytics panel will be able to show the correct tracking data.
-        routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
-        routePath: currentRoute == null ? void 0 : currentRoute.path,
-        collectionItemId,
-        localeCode: (activeLocale == null ? void 0 : activeLocale.code) || null,
-      },);
-    };
+        webPageId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
+        routePath: (currentRoute == null ? void 0 : currentRoute.path) || '/',
+        collectionItemId: null,
+        framerLocale: (activeLocale == null ? void 0 : activeLocale.code) || null,
+        referrer: null,
+        // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
+        url: safeWindow.location.href,
+        hostname: safeWindow.location.hostname,
+        // Capture the current location before the user moves to a new page to prevent
+        // tracking wrong pathnames due to a race condition caused by async operations
+        // when resolving the collection item ID below
+        pathname: safeWindow.location.pathname,
+        search: safeWindow.location.search || null,
+        hash: safeWindow.location.hash || null,
+        timezone,
+        locale: visitorLocale,
+      };
+      return (currentRoute == null ? void 0 : currentRoute.collectionId) && collectionUtils && currentPathVariables
+        ? (async () => {
+          var _a;
+          let collectionItemId = null;
+          const utils = currentRoute.collectionId &&
+            (await ((_a = collectionUtils[currentRoute.collectionId]) == null ? void 0 : _a.call(collectionUtils,)));
+          const [slug,] = Object.values(currentPathVariables,);
+          if (utils && typeof slug === 'string') {
+            collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
+          }
+          return {
+            ...eventData,
+            collectionItemId,
+          };
+        })()
+        : eventData;
+    }
     void (async () => {
-      const pageviewEventDataPromise = getFullPageviewEventData();
-      pageviewEventData.current = pageviewEventDataPromise;
+      const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
+      const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
+      pageviewEventData.current = eventData;
       if (skipFirstPageView.current) {
         skipFirstPageView.current = false;
-        return;
+      } else {
+        sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
-      const eventData = await pageviewEventDataPromise;
-      pageviewEventData.current = eventData;
-      sendTrackingEvent('published_site_pageview', eventData, 'eager',);
     })();
     const listener = async (event) => {
       if (event.persisted) {
-        const pageviewEventDataPromise = getFullPageviewEventData();
-        pageviewEventData.current = pageviewEventDataPromise;
-        const eventData = await getFullPageviewEventData();
+        const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
+        const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
         pageviewEventData.current = eventData;
         sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
