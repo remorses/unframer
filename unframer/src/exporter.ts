@@ -89,11 +89,13 @@ export async function bundle({
     cwd: out = '',
     watch = false,
     signal = undefined as AbortSignal | undefined,
+    metafile = false,
 }: {
     config: Config
     cwd: string
     watch?: boolean
     signal?: AbortSignal
+    metafile?: boolean
 }) {
     const { components, breakpoints, tokens, framerWebPages } = config
     out ||= path.resolve(process.cwd(), 'example')
@@ -557,7 +559,7 @@ export async function bundle({
             })
             .filter(Boolean)
             .concat([
-                path.resolve(out, 'meta.json'),
+                ...(metafile ? [path.resolve(out, 'meta.json')] : []),
                 path.resolve(out, 'tokens.css'),
                 path.resolve(out, '.cursorignore'),
                 path.resolve(out, 'styles.css'),
@@ -577,11 +579,13 @@ export async function bundle({
             }
         }
 
-        await fs.promises.writeFile(
-            path.resolve(out, 'meta.json'),
-            JSON.stringify(buildResult.metafile, null, 2),
-            'utf-8',
-        )
+        if (metafile) {
+            await fs.promises.writeFile(
+                path.resolve(out, 'meta.json'),
+                JSON.stringify(buildResult.metafile, null, 2),
+                'utf-8',
+            )
+        }
 
         if (signal?.aborted) {
             throw new Error('aborted')

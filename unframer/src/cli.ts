@@ -39,6 +39,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         default: true,
     })
     .option('--debug', 'Enable debug logging', { default: false })
+    .option('--metafile', 'Generate meta.json file with build metadata', { default: false })
     .action(async function main(projectId, options) {
         const external_ = options.external
         const allExternal = external_ === true
@@ -71,6 +72,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                     watch,
                     cwd,
                     signal,
+                    metafile: options.metafile,
                 })
                 // console.log('buildContext', buildContext)
                 if (!websiteUrl || !options.watch) {
@@ -140,6 +142,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
                 watch,
                 signal: controller.signal,
                 cwd: path.resolve(process.cwd(), config.outDir || 'framer'),
+                metafile: options.metafile,
             })
             await buildContext.dispose?.()
         } catch (error) {
