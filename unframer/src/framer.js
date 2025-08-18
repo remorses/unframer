@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4556WC32.mjs
+// /:https://app.framerstatic.com/framer.QVDBFP2K.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12649,6 +12649,7 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
+var pageviewEventVersion = 2;
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   var _a;
   (_a = safeWindow.__framer_events) == null ? void 0 : _a.push([eventType, eventData, sendOn,],);
@@ -13624,6 +13625,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         routeId,
         isString(localeId,) ? localeId : void 0,
         isString(hash2,) ? hash2 : void 0,
+        window.location.pathname + window.location.search + window.location.hash,
         isObject2(pathVariables,) ? pathVariables : void 0,
         true,
         nextRender,
@@ -36148,14 +36150,18 @@ function setTimezoneAndLocaleForTracking() {
   visitorLocale = resolvedDateTimeOptions.locale;
 }
 requestIdleCallback(setTimezoneAndLocaleForTracking,);
-var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,) => {
+var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, collectionUtils, activeLocale,) => {
   const framerSiteId = useContext(FormContext,);
   const pageviewEventData = useRef3();
   const skipFirstPageView = useRef3(true,);
   useEffect(() => {
     function getFullPageviewEventData() {
       if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
+      const currentLocation = currentPathnameWithHash
+        ? new URL(safeWindow.location.origin + currentPathnameWithHash,)
+        : safeWindow.location;
       const eventData = {
+        version: pageviewEventVersion,
         abTestId: currentRoute == null ? void 0 : currentRoute.abTestId,
         framerSiteId: framerSiteId ?? null,
         // If we are in a variant route, let's use the variant ID as the route ID instead, so that the analytics panel will be able to show the correct tracking data.
@@ -36165,14 +36171,14 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, colle
         framerLocale: (activeLocale == null ? void 0 : activeLocale.code) || null,
         referrer: null,
         // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
-        url: safeWindow.location.href,
-        hostname: safeWindow.location.hostname,
+        url: currentLocation.href,
+        hostname: currentLocation.hostname,
         // Capture the current location before the user moves to a new page to prevent
         // tracking wrong pathnames due to a race condition caused by async operations
         // when resolving the collection item ID below
-        pathname: safeWindow.location.pathname,
-        search: safeWindow.location.search || null,
-        hash: safeWindow.location.hash || null,
+        pathname: currentLocation.pathname,
+        search: currentLocation.search || null,
+        hash: currentLocation.hash || null,
         timezone,
         locale: visitorLocale,
       };
@@ -36215,7 +36221,7 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathVariables, colle
     return () => {
       window.removeEventListener('pageshow', listener,);
     };
-  }, [currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale, framerSiteId,],);
+  }, [currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, collectionUtils, activeLocale, framerSiteId,],);
   return pageviewEventData;
 };
 var defaultLocaleId = 'default';
@@ -36327,6 +36333,7 @@ function Router({
     return (fn) => fn();
   }, [synchronousNavigationOnDesktop,],);
   const isInitialNavigationRef = useRef3(true,);
+  const currentPathnameWithHashRef = useRef3();
   const currentRouteRef = useRef3(initialRoute,);
   const currentPathVariablesRef = useRef3(initialPathVariables,);
   const currentLocaleIdRef = useRef3(initialLocaleId,);
@@ -36422,12 +36429,13 @@ function Router({
     transitionFn,
   ],);
   const setCurrentRouteId = useCallback(
-    (routeId, localeId, hash2, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
+    (routeId, localeId, hash2, pathnameWithHash, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
       isInitialNavigationRef.current = false;
       const currentRouteId2 = currentRouteRef.current;
       currentRouteRef.current = routeId;
       currentPathVariablesRef.current = pathVariables;
       currentLocaleIdRef.current = localeId;
+      currentPathnameWithHashRef.current = pathnameWithHash;
       scheduleSideEffect(() => {
         updateScrollPosition(hash2, smoothScroll, isHistoryTransition,);
       },);
@@ -36521,10 +36529,22 @@ function Router({
         siteCanonicalURL,
       }, ignorePushStateWrapper,);
     };
+    const pathnameWithHash = getSitePrefix(siteCanonicalURL,) + getPathForRoute(newRoute, {
+      currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
+      currentPathVariables: currentPathVariables2,
+      hash: hash2,
+      pathVariables,
+      localeId: currentRouteLocaleId,
+      preserveQueryParams,
+      siteCanonicalURL,
+      relative: false,
+      // We need an absolute path for the hash
+    },);
     setCurrentRouteId(
       routeId,
       currentRouteLocaleId,
       routeElementId,
+      pathnameWithHash,
       pathVariables,
       false,
       nextRender,
@@ -36534,10 +36554,18 @@ function Router({
   }, [routes, setCurrentRouteId, disableHistory, preserveQueryParams, siteCanonicalURL, monitorNextPaintAfterRender,],);
   const getRoute = useGetRouteCallback(routes,);
   const currentRouteId = currentRouteRef.current;
+  const currentPathnameWithHash = currentPathnameWithHashRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
   const currentRoute = routes[currentRouteId];
   const currentRoutePath = currentRoute == null ? void 0 : currentRoute.path;
-  const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathVariables, collectionUtils, activeLocale,);
+  const pageviewEventData = useSendPageView(
+    currentRoute,
+    currentRouteId,
+    currentPathnameWithHash,
+    currentPathVariables,
+    collectionUtils,
+    activeLocale,
+  );
   const isInitialNavigation = isInitialNavigationRef.current;
   const api = useMemo2(() => ({
     navigate,
