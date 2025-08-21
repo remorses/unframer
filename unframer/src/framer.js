@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QVDBFP2K.mjs
+// /:https://app.framerstatic.com/framer.QYMX4MSQ.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -34309,14 +34309,14 @@ function domWriteCreateUpdateSafeArea(safeAreaRef,) {
     Object.assign(safeAreaRef.current.style, floatingPositionSafeAreaStyle(x, y, placement, anchorRect, calculatedRect,),);
   };
 }
-function domWriteUpdatePosition(floatingPositionRef, position, rect,) {
+function domWriteUpdatePosition(floatingPositionRef, position, rect, scrollX, scrollY,) {
   if (!floatingPositionRef.current) return;
   Object.assign(floatingPositionRef.current.style, {
     position,
     visibility: 'visible',
     // Append "px" because we are assigning this object straight to style.
-    left: ((rect == null ? void 0 : rect.x) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollX) + 'px',
-    top: ((rect == null ? void 0 : rect.y) ?? 0) + (position === 'fixed' ? 0 : safeWindow.scrollY) + 'px',
+    left: ((rect == null ? void 0 : rect.x) ?? 0) + scrollX + 'px',
+    top: ((rect == null ? void 0 : rect.y) ?? 0) + scrollY + 'px',
   },);
 }
 var FloatingStackingContext = /* @__PURE__ */ (() => {
@@ -34461,12 +34461,13 @@ function Floating({
     let elementRect;
     let safePlacement;
     let calculatedRect;
-    let scrolls;
     let latestEvent;
     let updateSafeArea;
+    let scrollX = 0;
+    let scrollY = 0;
     const onRender = () => {
       if (cleanupHasRun) return;
-      domWriteUpdatePosition(floatingPositionRef, position, calculatedRect,);
+      domWriteUpdatePosition(floatingPositionRef, position, calculatedRect, scrollX, scrollY,);
       if (safeArea) updateSafeArea(anchorRect, calculatedRect, safePlacement, latestEvent,);
       latestEvent = void 0;
     };
@@ -34475,7 +34476,7 @@ function Floating({
       if (latestEvent) {
         onRender();
       } else {
-        domWriteUpdatePosition(floatingPositionRef, position, calculatedRect,);
+        domWriteUpdatePosition(floatingPositionRef, position, calculatedRect, scrollX, scrollY,);
       }
       initialUpdateHasRun = true;
     };
@@ -34485,6 +34486,13 @@ function Floating({
     };
     const domReadUpdateSafePlacementAndRect = () => {
       if (!getSafePlacementRect || cleanupHasRun) return;
+      if (position === 'fixed') {
+        scrollX = 0;
+        scrollY = 0;
+      } else {
+        scrollX = safeWindow.scrollX;
+        scrollY = safeWindow.scrollY;
+      }
       anchorRect = anchorRef.current.getBoundingClientRect();
       const safePlacementAndRect = getSafePlacementRect(anchorRect, elementRect,);
       safePlacement = safePlacementAndRect[0];
@@ -36618,7 +36626,7 @@ function Router({
                 /* @__PURE__ */ jsx3(MarkSuspenseEffects.Start, {},),
                 /* @__PURE__ */ jsx3(WithLayoutTemplate, {
                   LayoutTemplate,
-                  routeId: currentRouteId,
+                  routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
                   style: defaultPageStyle,
                   children: (inLayoutTemplate) => {
                     return /* @__PURE__ */ jsx3(Fragment, {
@@ -44458,7 +44466,11 @@ try {
 } catch {}
 var postLogEntry;
 try {
-  if (typeof window !== 'undefined' && !!window.postMessage && window.top !== window) {
+  if (
+    typeof window !== 'undefined' && !!window.postMessage && window.parent !== window &&
+    // Don't post messages to the top-level site from the Editor Bar
+    !window.location.pathname.startsWith('/edit',)
+  ) {
     postLogEntry = (entry) => {
       var _a;
       try {
@@ -44472,7 +44484,7 @@ try {
           parts,
           printed,
         };
-        (_a = window.top) == null ? void 0 : _a.postMessage(data2, getServiceMap().app,);
+        (_a = window.parent) == null ? void 0 : _a.postMessage(data2, getServiceMap().app,);
       } catch {}
     };
   }
@@ -45493,11 +45505,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-3ASCFEEO-3R47BR2A.js');
+      const supportedFonts = await import('./framer-chunks/google-2KFYDWCN-PJC2DDXK.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-4J2ZFRBB-H5VQLZTM.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-EOIRPPWV-VDFFNW4K.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -45507,11 +45519,11 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-FDB6LUFQ-PFSUZGKF.js');
+      const features = await import('./framer-chunks/google-HSMCYMMG-DWNQGSHN.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-622CVMZZ-HFPH543A.js');
+      const features = await import('./framer-chunks/fontshare-Y53BJZLK-EUQIV252.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
@@ -46059,10 +46071,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-C62SNV32-LCI4F7VO.js')).default;
+            return (await import('./framer-chunks/google-S367OFIE-AWJEPMSF.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-JGEKH7YN-QOX3MC3K.js')).default;
+            return (await import('./framer-chunks/fontshare-2X4LZ75B-D2V5BX73.js')).default;
           }
           default:
             assertNever(source,);
