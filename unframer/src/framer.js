@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.QYMX4MSQ.mjs
+// /:https://app.framerstatic.com/framer.UWLYDHV3.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -19294,8 +19294,13 @@ var DimensionType = /* @__PURE__ */ ((DimensionType2) => {
   DimensionType2[DimensionType2['Auto'] = 2] = 'Auto';
   DimensionType2[DimensionType2['FractionOfFreeSpace'] = 3] = 'FractionOfFreeSpace';
   DimensionType2[DimensionType2['Viewport'] = 4] = 'Viewport';
+  DimensionType2[DimensionType2['FitImage'] = 5] = 'FitImage';
   return DimensionType2;
 })(DimensionType || {},);
+function isAutoDimensionType(dimensionType,) {
+  if (isUndefined(dimensionType,)) return false;
+  return dimensionType === 2 || dimensionType === 5;
+}
 function isConstraintSupportingChild(child,) {
   if (!isReactChild(child,) || !isReactElement(child,)) {
     return false;
@@ -19306,7 +19311,7 @@ var ConstraintMask = {
   // Modifies the constraint mask to remove invalid (mutually exclusive) options and returns the original.
   // TODO: this removes major inconsistencies but probably needs to be merged with ConstraintSolver.
   quickfix: (constraints) => {
-    if (constraints.widthType === 2 || constraints.heightType === 2) {
+    if (isAutoDimensionType(constraints.widthType,) || isAutoDimensionType(constraints.heightType,)) {
       constraints.aspectRatio = null;
     }
     if (isFiniteNumber(constraints.aspectRatio,)) {
@@ -19324,13 +19329,13 @@ var ConstraintMask = {
       }
     }
     if (constraints.left && constraints.right) {
-      if (constraints.fixedSize || constraints.widthType === 2 || isFiniteNumber(constraints.maxWidth,)) {
+      if (constraints.fixedSize || isAutoDimensionType(constraints.widthType,) || isFiniteNumber(constraints.maxWidth,)) {
         constraints.right = false;
       }
       constraints.widthType = 0;
     }
     if (constraints.top && constraints.bottom) {
-      if (constraints.fixedSize || constraints.heightType === 2 || isFiniteNumber(constraints.maxHeight,)) {
+      if (constraints.fixedSize || isAutoDimensionType(constraints.heightType,) || isFiniteNumber(constraints.maxHeight,)) {
         constraints.bottom = false;
       }
       constraints.heightType = 0;
@@ -19439,7 +19444,7 @@ var ConstraintValues = {
     const hOpposingPinsOffset = pinnedOffset(values.left, values.right,);
     if (parentWidth && isFiniteNumber(hOpposingPinsOffset,)) {
       width = parentWidth - hOpposingPinsOffset;
-    } else if (autoSize && values.widthType === 2) {
+    } else if (autoSize && isAutoDimensionType(values.widthType,)) {
       width = autoSize.width;
     } else if (isFiniteNumber(values.width,)) {
       switch (values.widthType) {
@@ -19456,6 +19461,7 @@ var ConstraintValues = {
           }
           break;
         case 2:
+        case 5:
           break;
         default:
           assertNever(values.widthType,);
@@ -19464,7 +19470,7 @@ var ConstraintValues = {
     const vOpposingPinsOffset = pinnedOffset(values.top, values.bottom,);
     if (parentHeight && isFiniteNumber(vOpposingPinsOffset,)) {
       height = parentHeight - vOpposingPinsOffset;
-    } else if (autoSize && values.heightType === 2) {
+    } else if (autoSize && isAutoDimensionType(values.heightType,)) {
       height = autoSize.height;
     } else if (isFiniteNumber(values.height,)) {
       switch (values.heightType) {
@@ -19481,6 +19487,7 @@ var ConstraintValues = {
           }
           break;
         case 2:
+        case 5:
           break;
         default:
           assertNever(values.heightType,);
@@ -23410,7 +23417,7 @@ var key = 'src';
 var BackgroundImage = {
   isImageObject: function (image,) {
     if (!image || typeof image === 'string') return false;
-    return key in image;
+    return typeof image === 'object' && key in image;
   },
 };
 function applyForwardOverrides(background, props,) {
@@ -23450,6 +23457,29 @@ function backgroundImageFromProps(props,) {
     return;
   }
   return applyForwardOverrides(backgroundImage, props,);
+}
+function getIntrinsicSizeForBackgroundImage(background,) {
+  if (!background) return void 0;
+  if (background.pixelHeight && background.pixelWidth) {
+    return {
+      width: background.pixelWidth,
+      height: background.pixelHeight,
+    };
+  }
+  return parseImageSizeFromSrc(background.src,);
+}
+function parseImageSizeFromSrc(src,) {
+  if (!src) return void 0;
+  const url = new URL(src,);
+  const width = url.searchParams.get('width',);
+  const height = url.searchParams.get('height',);
+  if (width && height) {
+    return {
+      width: parseInt(width,),
+      height: parseInt(height,),
+    };
+  }
+  return void 0;
 }
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
@@ -24559,6 +24589,11 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     parentSize,
   );
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
+  const intrinsicSize = getIntrinsicSizeForBackgroundImage(backgroundImage,);
+  if (props.fitImageDimension && intrinsicSize) {
+    currentStyle[props.fitImageDimension] = 'auto';
+    currentStyle.aspectRatio = intrinsicSize.width / intrinsicSize.height;
+  }
   return /* @__PURE__ */ jsxs(MotionComponent, {
     ...dataProps,
     ...motionProps,
@@ -47167,12 +47202,35 @@ var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
     children,
     alt,
     draggable,
+    fitImageDimension,
     style: styleFromProps,
     ...rest
   } = props;
   const style2 = {
     ...styleFromProps,
   };
+  const intrinsicSize = useMemo2(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
+  const [fallbackIntrinsicSize, setFallbackIntrinsicSize,] = useState();
+  React4.useLayoutEffect(() => {
+    if (!(background == null ? void 0 : background.src)) return;
+    if (!fitImageDimension) return;
+    if (intrinsicSize) return;
+    const img = document.createElement('img',);
+    img.onload = () => {
+      if (img.naturalWidth && img.naturalHeight) {
+        setFallbackIntrinsicSize({
+          width: img.naturalWidth,
+          height: img.naturalHeight,
+        },);
+      }
+    };
+    img.src = background.src;
+  }, [background == null ? void 0 : background.src, fitImageDimension, intrinsicSize,],);
+  const size = intrinsicSize ?? fallbackIntrinsicSize;
+  if (fitImageDimension && size) {
+    style2[fitImageDimension] = 'auto';
+    style2.aspectRatio = size.width / size.height;
+  }
   if (background) {
     delete style2.background;
   }
@@ -49432,7 +49490,7 @@ var TextComponent = /* @__PURE__ */ (() => {
       } = this.props;
       if (this.props.transformTemplate) return this.props.transformTemplate;
       const frame2 = this.frame;
-      const isDOMLayoutAutoSized = _usesDOMRect && (widthType === 2 || heightType === 2);
+      const isDOMLayoutAutoSized = _usesDOMRect && (isAutoDimensionType(widthType,) || isAutoDimensionType(heightType,));
       const hasTransformTemplate = !frame2 || !RenderTarget.hasRestrictions() || __fromCanvasComponent || isDOMLayoutAutoSized;
       if (hasTransformTemplate) return transformTemplate(this.props.center,);
     }
