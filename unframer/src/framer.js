@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.UWLYDHV3.mjs
+// /:https://app.framerstatic.com/framer.TLIAXGT6.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -23470,7 +23470,12 @@ function getIntrinsicSizeForBackgroundImage(background,) {
 }
 function parseImageSizeFromSrc(src,) {
   if (!src) return void 0;
-  const url = new URL(src,);
+  let url;
+  try {
+    url = new URL(src,);
+  } catch {
+    return void 0;
+  }
   const width = url.searchParams.get('width',);
   const height = url.searchParams.get('height',);
   if (width && height) {
