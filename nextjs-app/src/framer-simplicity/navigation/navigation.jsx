@@ -1683,10 +1683,7 @@ addFonts3(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "vL5s_eZpu",
-	xl: "g3AInmvkW",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -1721,7 +1718,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

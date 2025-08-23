@@ -23,15 +23,15 @@
 }} Props
 
  */
-import { Ticker } from "./chunks/chunk-IH7WK4VG.js";
-import { className, css, fonts } from "./chunks/chunk-SFTTTBUM.js";
+import { Ticker } from "./chunks/chunk-DUXOTEEB.js";
+import { className, css, fonts } from "./chunks/chunk-ZKAXZ4P5.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-logos
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/HCclcTJUJiLOReYO6QPL/MPskWHg5T.js
+// /:https://framerusercontent.com/modules/mTaShty4DbZOb4YL6J2a/nm0zgQxk4whn7oe07HaZ/MPskWHg5T.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -53,12 +53,13 @@ import {
 } from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
+import { useRef } from "react";
 var TickerFonts = getFonts(Ticker);
 var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
 var cycleOrder = ["q5MeF1uQl", "KSBqb5uN_", "UMydUWA7p"];
-var serializationHash = "framer-urDBx";
+var serializationHash = "framer-Woeb0";
 var variantClassNames = {
 	KSBqb5uN_: "framer-v-thi0gg",
 	q5MeF1uQl: "framer-v-lrpot7",
@@ -142,7 +143,11 @@ var createLayoutDependency = (props, variants) => {
 	return variants.join("-");
 };
 var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
+	const fallbackRef = useRef(null);
+	const refBinding = ref ?? fallbackRef;
+	const defaultLayoutId = React.useId();
 	const { activeLocale, setLocale } = useLocaleInfo();
+	const componentViewport = useComponentViewport();
 	const {
 		style,
 		className: className2,
@@ -163,15 +168,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	} = useVariantState({
 		cycleOrder,
 		defaultVariant: "q5MeF1uQl",
+		ref: refBinding,
 		variant,
 		variantClassNames,
 	});
 	const layoutDependency = createLayoutDependency(props, variants);
 	const sharedStyleClassNames = [className];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
-	const ref1 = React.useRef(null);
-	const defaultLayoutId = React.useId();
-	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
 			<Variants animate={variants} initial={false}>
@@ -188,7 +191,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						data-framer-name={"Desktop"}
 						layoutDependency={layoutDependency}
 						layoutId={"q5MeF1uQl"}
-						ref={ref ?? ref1}
+						ref={refBinding}
 						style={{
 							backgroundColor:
 								"var(--token-f4cf9e3e-da35-4e33-897c-29a30a250c5f, rgb(0, 0, 0))",
@@ -390,25 +393,24 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 });
 var css2 = [
 	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
-	".framer-urDBx.framer-e410uj, .framer-urDBx .framer-e410uj { display: block; }",
-	".framer-urDBx.framer-lrpot7 { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 32px; position: relative; width: 1200px; }",
-	".framer-urDBx .framer-1lav5jp { align-content: flex-end; align-items: flex-end; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: center; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-urDBx .framer-13fft3k { align-content: center; align-items: center; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; scroll-margin-top: 150px; width: 1px; z-index: 1; }",
-	".framer-urDBx .framer-1cukwhl { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
-	".framer-urDBx .framer-18vmn4v-container { flex: none; height: 55px; max-width: 700px; position: relative; width: 100%; }",
-	".framer-urDBx .framer-1qm86zp { height: 20px; position: relative; width: 83px; }",
-	".framer-urDBx .framer-1qnkvu0 { height: 17px; position: relative; width: 146px; }",
-	".framer-urDBx .framer-8nmu0j { height: 16px; position: relative; width: 124px; }",
-	".framer-urDBx .framer-qpn3nq { height: 25px; position: relative; width: 95px; }",
-	".framer-urDBx .framer-1qicr3e { height: 23px; position: relative; width: 113px; }",
-	".framer-urDBx .framer-72cawn { height: 22px; overflow: hidden; position: relative; width: 132px; }",
-	".framer-urDBx .framer-1lj0428 { aspect-ratio: 6 / 1; bottom: 0px; flex: none; height: var(--framer-aspect-ratio-supported, 21px); left: 0px; position: absolute; width: 126px; }",
-	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-urDBx.framer-lrpot7, .framer-urDBx .framer-1lav5jp, .framer-urDBx .framer-13fft3k { gap: 0px; } .framer-urDBx.framer-lrpot7 > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-urDBx.framer-lrpot7 > :first-child, .framer-urDBx .framer-13fft3k > :first-child { margin-top: 0px; } .framer-urDBx.framer-lrpot7 > :last-child, .framer-urDBx .framer-13fft3k > :last-child { margin-bottom: 0px; } .framer-urDBx .framer-1lav5jp > * { margin: 0px; margin-left: calc(10px / 2); margin-right: calc(10px / 2); } .framer-urDBx .framer-1lav5jp > :first-child { margin-left: 0px; } .framer-urDBx .framer-1lav5jp > :last-child { margin-right: 0px; } .framer-urDBx .framer-13fft3k > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } }",
-	".framer-urDBx.framer-v-thi0gg.framer-lrpot7 { width: 810px; }",
-	".framer-urDBx.framer-v-sidi3o.framer-lrpot7 { width: 390px; }",
+	".framer-Woeb0.framer-e410uj, .framer-Woeb0 .framer-e410uj { display: block; }",
+	".framer-Woeb0.framer-lrpot7 { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 32px; position: relative; width: 1200px; }",
+	".framer-Woeb0 .framer-1lav5jp { align-content: flex-end; align-items: flex-end; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 10px; height: min-content; justify-content: center; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-Woeb0 .framer-13fft3k { align-content: center; align-items: center; display: flex; flex: 1 0 0px; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; scroll-margin-top: 150px; width: 1px; z-index: 1; }",
+	".framer-Woeb0 .framer-1cukwhl { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	".framer-Woeb0 .framer-18vmn4v-container { flex: none; height: 55px; max-width: 700px; position: relative; width: 100%; }",
+	".framer-Woeb0 .framer-1qm86zp { height: 20px; position: relative; width: 83px; }",
+	".framer-Woeb0 .framer-1qnkvu0 { height: 17px; position: relative; width: 146px; }",
+	".framer-Woeb0 .framer-8nmu0j { height: 16px; position: relative; width: 124px; }",
+	".framer-Woeb0 .framer-qpn3nq { height: 25px; position: relative; width: 95px; }",
+	".framer-Woeb0 .framer-1qicr3e { height: 23px; position: relative; width: 113px; }",
+	".framer-Woeb0 .framer-72cawn { height: 22px; overflow: hidden; position: relative; width: 132px; }",
+	".framer-Woeb0 .framer-1lj0428 { aspect-ratio: 6 / 1; bottom: 0px; flex: none; height: var(--framer-aspect-ratio-supported, 21px); left: 0px; position: absolute; width: 126px; }",
+	".framer-Woeb0.framer-v-thi0gg.framer-lrpot7 { width: 810px; }",
+	".framer-Woeb0.framer-v-sidi3o.framer-lrpot7 { width: 390px; }",
 	...css,
 ];
-var FramerMPskWHg5T = withCSS(Component, css2, "framer-urDBx");
+var FramerMPskWHg5T = withCSS(Component, css2, "framer-Woeb0");
 var stdin_default = FramerMPskWHg5T;
 FramerMPskWHg5T.displayName = "Section Logos";
 FramerMPskWHg5T.defaultProps = {
@@ -476,8 +478,8 @@ addFonts(
 					source: "framer",
 					style: "normal",
 					unicodeRange:
-						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-					url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
+						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070, U+2074-207E, U+2080-208E, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+					url: "https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2",
 					weight: "400",
 				},
 				{
@@ -503,11 +505,7 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "UMydUWA7p",
-	md: "KSBqb5uN_",
-	xl: "q5MeF1uQl",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -542,7 +540,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

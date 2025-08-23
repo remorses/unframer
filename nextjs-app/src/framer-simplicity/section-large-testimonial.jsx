@@ -24,20 +24,20 @@
 
  */
 import { Icon } from "./chunks/chunk-BTSBQWPZ.js";
-import { Ticker } from "./chunks/chunk-IH7WK4VG.js";
+import { Ticker } from "./chunks/chunk-DUXOTEEB.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
-} from "./chunks/chunk-HHDHZ6TZ.js";
-import { className, css, fonts } from "./chunks/chunk-SFTTTBUM.js";
+} from "./chunks/chunk-PSINJK7R.js";
+import { className, css, fonts } from "./chunks/chunk-ZKAXZ4P5.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-large-testimonial
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/WWEquI82OywT67jASbI1/HOWKuDHCy.js
+// /:https://framerusercontent.com/modules/rcRkhs4bGTraIFq4gMc3/3gyIxxzL08FKUs5q2xZl/HOWKuDHCy.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -59,13 +59,14 @@ import {
 } from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
+import { useRef } from "react";
 var PhosphorFonts = getFonts(Icon);
 var TickerFonts = getFonts(Ticker);
 var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
 var cycleOrder = ["iB4cGAnq6", "UQjHTCbHp", "nzfsXBXZO"];
-var serializationHash = "framer-lkMVE";
+var serializationHash = "framer-AutQ9";
 var variantClassNames = {
 	iB4cGAnq6: "framer-v-1ky95h0",
 	nzfsXBXZO: "framer-v-m7we1m",
@@ -149,7 +150,11 @@ var createLayoutDependency = (props, variants) => {
 	return variants.join("-");
 };
 var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
+	const fallbackRef = useRef(null);
+	const refBinding = ref ?? fallbackRef;
+	const defaultLayoutId = React.useId();
 	const { activeLocale, setLocale } = useLocaleInfo();
+	const componentViewport = useComponentViewport();
 	const {
 		style,
 		className: className3,
@@ -170,15 +175,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	} = useVariantState({
 		cycleOrder,
 		defaultVariant: "iB4cGAnq6",
+		ref: refBinding,
 		variant,
 		variantClassNames,
 	});
 	const layoutDependency = createLayoutDependency(props, variants);
 	const sharedStyleClassNames = [className2, className];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
-	const ref1 = React.useRef(null);
-	const defaultLayoutId = React.useId();
-	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
 			<Variants animate={variants} initial={false}>
@@ -195,7 +198,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						data-framer-name={"Desktop"}
 						layoutDependency={layoutDependency}
 						layoutId={"iB4cGAnq6"}
-						ref={ref ?? ref1}
+						ref={refBinding}
 						style={{
 							backgroundColor:
 								"var(--token-f4cf9e3e-da35-4e33-897c-29a30a250c5f, rgb(0, 0, 0))",
@@ -604,33 +607,32 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 });
 var css3 = [
 	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
-	".framer-lkMVE.framer-155kuwg, .framer-lkMVE .framer-155kuwg { display: block; }",
-	".framer-lkMVE.framer-1ky95h0 { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 80px; position: relative; width: 1200px; }",
-	".framer-lkMVE .framer-vrnr1w { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-lkMVE .framer-1qi96ef { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
-	".framer-lkMVE .framer-16tvqdz { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 4px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
-	".framer-lkMVE .framer-11jouj7-container, .framer-lkMVE .framer-swc2x7-container, .framer-lkMVE .framer-18e32rz-container, .framer-lkMVE .framer-v6s7oy-container, .framer-lkMVE .framer-z4mpyh-container { flex: none; height: 28px; position: relative; width: 28px; }",
-	".framer-lkMVE .framer-1dvn0mp { flex: none; height: auto; max-width: 673px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-lkMVE .framer-11chmli { flex: none; height: auto; max-width: 515px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-lkMVE .framer-e3qeol { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; scroll-margin-top: 150px; width: 100%; z-index: 1; }",
-	".framer-lkMVE .framer-a625c0 { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
-	".framer-lkMVE .framer-1mzb2ws-container { flex: none; height: 55px; max-width: 700px; position: relative; width: 100%; }",
-	".framer-lkMVE .framer-1moehjd { height: 20px; position: relative; width: 83px; }",
-	".framer-lkMVE .framer-as1h11 { height: 17px; position: relative; width: 146px; }",
-	".framer-lkMVE .framer-zouc92 { height: 16px; position: relative; width: 124px; }",
-	".framer-lkMVE .framer-irmrvw { height: 25px; position: relative; width: 95px; }",
-	".framer-lkMVE .framer-gst7rv { height: 23px; position: relative; width: 113px; }",
-	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-lkMVE.framer-1ky95h0, .framer-lkMVE .framer-vrnr1w, .framer-lkMVE .framer-1qi96ef, .framer-lkMVE .framer-16tvqdz, .framer-lkMVE .framer-e3qeol { gap: 0px; } .framer-lkMVE.framer-1ky95h0 > *, .framer-lkMVE .framer-vrnr1w > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-lkMVE.framer-1ky95h0 > :first-child, .framer-lkMVE .framer-vrnr1w > :first-child, .framer-lkMVE .framer-1qi96ef > :first-child, .framer-lkMVE .framer-e3qeol > :first-child { margin-top: 0px; } .framer-lkMVE.framer-1ky95h0 > :last-child, .framer-lkMVE .framer-vrnr1w > :last-child, .framer-lkMVE .framer-1qi96ef > :last-child, .framer-lkMVE .framer-e3qeol > :last-child { margin-bottom: 0px; } .framer-lkMVE .framer-1qi96ef > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-lkMVE .framer-16tvqdz > * { margin: 0px; margin-left: calc(4px / 2); margin-right: calc(4px / 2); } .framer-lkMVE .framer-16tvqdz > :first-child { margin-left: 0px; } .framer-lkMVE .framer-16tvqdz > :last-child { margin-right: 0px; } .framer-lkMVE .framer-e3qeol > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } }",
-	".framer-lkMVE.framer-v-1gzxy6r.framer-1ky95h0 { padding: 80px 32px 80px 32px; width: 810px; }",
-	".framer-lkMVE.framer-v-1gzxy6r .framer-11chmli, .framer-lkMVE.framer-v-m7we1m .framer-11chmli { --framer-text-wrap-override: balance; max-width: unset; }",
-	".framer-lkMVE.framer-v-m7we1m.framer-1ky95h0 { padding: 80px 24px 80px 24px; width: 390px; }",
-	".framer-lkMVE.framer-v-m7we1m .framer-11jouj7-container, .framer-lkMVE.framer-v-m7we1m .framer-swc2x7-container, .framer-lkMVE.framer-v-m7we1m .framer-18e32rz-container, .framer-lkMVE.framer-v-m7we1m .framer-v6s7oy-container, .framer-lkMVE.framer-v-m7we1m .framer-z4mpyh-container { height: 24px; width: 24px; }",
-	".framer-lkMVE.framer-v-m7we1m .framer-1dvn0mp { --framer-text-wrap: balance; max-width: unset; }",
-	".framer-lkMVE.framer-v-m7we1m .framer-a625c0 { white-space: pre-wrap; width: 277px; word-break: break-word; word-wrap: break-word; }",
+	".framer-AutQ9.framer-155kuwg, .framer-AutQ9 .framer-155kuwg { display: block; }",
+	".framer-AutQ9.framer-1ky95h0 { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 80px; position: relative; width: 1200px; }",
+	".framer-AutQ9 .framer-vrnr1w { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-AutQ9 .framer-1qi96ef { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
+	".framer-AutQ9 .framer-16tvqdz { align-content: center; align-items: center; display: flex; flex: none; flex-direction: row; flex-wrap: nowrap; gap: 4px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
+	".framer-AutQ9 .framer-11jouj7-container, .framer-AutQ9 .framer-swc2x7-container, .framer-AutQ9 .framer-18e32rz-container, .framer-AutQ9 .framer-v6s7oy-container, .framer-AutQ9 .framer-z4mpyh-container { flex: none; height: 28px; position: relative; width: 28px; }",
+	".framer-AutQ9 .framer-1dvn0mp { flex: none; height: auto; max-width: 673px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-AutQ9 .framer-11chmli { flex: none; height: auto; max-width: 515px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-AutQ9 .framer-e3qeol { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; scroll-margin-top: 150px; width: 100%; z-index: 1; }",
+	".framer-AutQ9 .framer-a625c0 { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	".framer-AutQ9 .framer-1mzb2ws-container { flex: none; height: 55px; max-width: 700px; position: relative; width: 100%; }",
+	".framer-AutQ9 .framer-1moehjd { height: 20px; position: relative; width: 83px; }",
+	".framer-AutQ9 .framer-as1h11 { height: 17px; position: relative; width: 146px; }",
+	".framer-AutQ9 .framer-zouc92 { height: 16px; position: relative; width: 124px; }",
+	".framer-AutQ9 .framer-irmrvw { height: 25px; position: relative; width: 95px; }",
+	".framer-AutQ9 .framer-gst7rv { height: 23px; position: relative; width: 113px; }",
+	".framer-AutQ9.framer-v-1gzxy6r.framer-1ky95h0 { padding: 80px 32px 80px 32px; width: 810px; }",
+	".framer-AutQ9.framer-v-1gzxy6r .framer-11chmli, .framer-AutQ9.framer-v-m7we1m .framer-11chmli { --framer-text-wrap-override: balance; max-width: unset; }",
+	".framer-AutQ9.framer-v-m7we1m.framer-1ky95h0 { padding: 80px 24px 80px 24px; width: 390px; }",
+	".framer-AutQ9.framer-v-m7we1m .framer-11jouj7-container, .framer-AutQ9.framer-v-m7we1m .framer-swc2x7-container, .framer-AutQ9.framer-v-m7we1m .framer-18e32rz-container, .framer-AutQ9.framer-v-m7we1m .framer-v6s7oy-container, .framer-AutQ9.framer-v-m7we1m .framer-z4mpyh-container { height: 24px; width: 24px; }",
+	".framer-AutQ9.framer-v-m7we1m .framer-1dvn0mp { --framer-text-wrap: balance; max-width: unset; }",
+	".framer-AutQ9.framer-v-m7we1m .framer-a625c0 { white-space: pre-wrap; width: 277px; word-break: break-word; word-wrap: break-word; }",
 	...css2,
 	...css,
 ];
-var FramerHOWKuDHCy = withCSS(Component, css3, "framer-lkMVE");
+var FramerHOWKuDHCy = withCSS(Component, css3, "framer-AutQ9");
 var stdin_default = FramerHOWKuDHCy;
 FramerHOWKuDHCy.displayName = "Section Large Testimonial";
 FramerHOWKuDHCy.defaultProps = {
@@ -705,8 +707,8 @@ addFonts(
 					source: "framer",
 					style: "normal",
 					unicodeRange:
-						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-					url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
+						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070, U+2074-207E, U+2080-208E, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+					url: "https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2",
 					weight: "400",
 				},
 				{
@@ -734,11 +736,7 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "nzfsXBXZO",
-	md: "UQjHTCbHp",
-	xl: "iB4cGAnq6",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -773,7 +771,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import LogosFramerComponent from '@/framer-unchatgpt/logos'
+// import LogosFramerComponent from '@/framer-unchatgpt/logos'
 import NavigationFramerComponent from '../framer-simplicity/navigation/navigation'
 import SectionCallToActionFramerComponent from '../framer-simplicity/section-call-to-action'
 import SectionFeaturesFramerComponent from '../framer-simplicity/section-features'
@@ -41,7 +41,7 @@ function Home() {
                 <SectionTestimonialsFramerComponent.Responsive />
                 <SectionFrequentlyAskedQuestionsFramerComponent.Responsive />
                 <SectionCallToActionFramerComponent.Responsive />
-                <LogosFramerComponent.Responsive />
+                {/*<LogosFramerComponent.Responsive />*/}
                 <SectionFooterFramerComponent.Responsive />
                 <SectionPricingFramerComponent  />
             </div>

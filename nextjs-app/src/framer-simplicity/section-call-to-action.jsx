@@ -26,14 +26,14 @@
 import { stdin_default as stdin_default2 } from "./chunks/chunk-WTNHL2WX.js";
 import { stdin_default } from "./chunks/chunk-D4IPCJGN.js";
 import "./chunks/chunk-BTSBQWPZ.js";
-import { className, css, fonts } from "./chunks/chunk-PGXTBGNK.js";
+import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-call-to-action
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/Znl9Gi26xTfU17mHETUh/LU2TOfn0UkJdrUd8vUnJ/u898_CyTd.js
+// /:https://framerusercontent.com/modules/Znl9Gi26xTfU17mHETUh/glPPl4PLH6pk2yeY5f2T/u898_CyTd.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -544,11 +544,7 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "TjYrmqx1V",
-	md: "fh2L_2CEw",
-	xl: "gtsbNa8O8",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -583,7 +579,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

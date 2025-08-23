@@ -23,10 +23,10 @@
 }} Props
 
  */
-import { stdin_default } from "./chunks/chunk-W7Z4VVDG.js";
-import "./chunks/chunk-H3WDA3QT.js";
-import "./chunks/chunk-HHDHZ6TZ.js";
-import "./chunks/chunk-SFTTTBUM.js";
+import { stdin_default } from "./chunks/chunk-GADIJJRS.js";
+import "./chunks/chunk-KEXPIFJ3.js";
+import "./chunks/chunk-PSINJK7R.js";
+import "./chunks/chunk-ZKAXZ4P5.js";
 import "./chunks/chunk-BPH5BCDR.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
@@ -34,7 +34,7 @@ import { routes } from "./chunks/chunk-HEB6EHGG.js";
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/jVQGemd6yn35sShs6D7P/1pRGuRnLG3t4AOU3dtBF/SpenI5W7L.js
+// /:https://framerusercontent.com/modules/jVQGemd6yn35sShs6D7P/6jjz3o55NRIi9IakXuaA/SpenI5W7L.js
 import { jsx as _jsx } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -60,12 +60,9 @@ var variantClassNames = {
 };
 function addPropertyOverrides(overrides, ...variants) {
 	const nextOverrides = {};
-	variants === null || variants === void 0
-		? void 0
-		: variants.forEach(
-				(variant) =>
-					variant && Object.assign(nextOverrides, overrides[variant]),
-			);
+	variants?.forEach(
+		(variant) => variant && Object.assign(nextOverrides, overrides[variant]),
+	);
 	return nextOverrides;
 }
 var transition1 = {
@@ -76,8 +73,7 @@ var transition1 = {
 };
 var Transition = ({ value, children }) => {
 	const config = React.useContext(MotionConfigContext);
-	const transition =
-		value !== null && value !== void 0 ? value : config.transition;
+	const transition = value ?? config.transition;
 	const contextValue = React.useMemo(
 		() => ({
 			...config,
@@ -97,18 +93,10 @@ var humanReadableVariantMap = {
 	Tablet: "IOIaixBce",
 };
 var getProps = ({ height, id, width, ...props }) => {
-	var _humanReadableVariantMap_props_variant, _ref;
 	return {
 		...props,
 		variant:
-			(_ref =
-				(_humanReadableVariantMap_props_variant =
-					humanReadableVariantMap[props.variant]) !== null &&
-				_humanReadableVariantMap_props_variant !== void 0
-					? _humanReadableVariantMap_props_variant
-					: props.variant) !== null && _ref !== void 0
-				? _ref
-				: "sHnGLtvML",
+			humanReadableVariantMap[props.variant] ?? props.variant ?? "sHnGLtvML",
 	};
 };
 var createLayoutDependency = (props, variants) => {
@@ -143,9 +131,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const defaultLayoutId = React.useId();
 	const componentViewport = useComponentViewport();
 	return (
-		<LayoutGroup
-			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
-		>
+		<LayoutGroup id={layoutId ?? defaultLayoutId}>
 			<Variants animate={variants} initial={false}>
 				<Transition value={transition1}>
 					<motion.div
@@ -160,7 +146,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						data-framer-name={"Desktop"}
 						layoutDependency={layoutDependency}
 						layoutId={"sHnGLtvML"}
-						ref={ref !== null && ref !== void 0 ? ref : ref1}
+						ref={ref ?? ref1}
 						style={{
 							backgroundColor:
 								"var(--token-f4cf9e3e-da35-4e33-897c-29a30a250c5f, rgb(0, 0, 0))",
@@ -181,56 +167,29 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 					>
 						<ComponentViewportProvider
 							height={452}
-							width={`min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} - 160px, 1072px)`}
+							width={`min(${componentViewport?.width || "100vw"} - 160px, 1072px)`}
 							y={
-								((componentViewport === null || componentViewport === void 0
-									? void 0
-									: componentViewport.y) || 0) +
+								(componentViewport?.y || 0) +
 								80 +
-								((((componentViewport === null || componentViewport === void 0
-									? void 0
-									: componentViewport.height) || 612) -
-									160 -
-									452) /
-									2 +
-									0 +
-									0)
+								(((componentViewport?.height || 612) - 160 - 452) / 2 + 0 + 0)
 							}
 							{...addPropertyOverrides(
 								{
 									IOIaixBce: {
-										width: `min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} - 64px, 1072px)`,
+										width: `min(${componentViewport?.width || "100vw"} - 64px, 1072px)`,
 										y:
-											((componentViewport === null ||
-											componentViewport === void 0
-												? void 0
-												: componentViewport.y) || 0) +
+											(componentViewport?.y || 0) +
 											80 +
-											((((componentViewport === null ||
-											componentViewport === void 0
-												? void 0
-												: componentViewport.height) || 1056) -
-												160 -
-												452) /
-												2 +
+											(((componentViewport?.height || 1056) - 160 - 452) / 2 +
 												0 +
 												0),
 									},
 									Z9XgSJQcP: {
-										width: `min(${(componentViewport === null || componentViewport === void 0 ? void 0 : componentViewport.width) || "100vw"} - 48px, 1072px)`,
+										width: `min(${componentViewport?.width || "100vw"} - 48px, 1072px)`,
 										y:
-											((componentViewport === null ||
-											componentViewport === void 0
-												? void 0
-												: componentViewport.y) || 0) +
+											(componentViewport?.y || 0) +
 											80 +
-											((((componentViewport === null ||
-											componentViewport === void 0
-												? void 0
-												: componentViewport.height) || 1176) -
-												160 -
-												452) /
-												2 +
+											(((componentViewport?.height || 1176) - 160 - 452) / 2 +
 												0 +
 												0),
 									},
@@ -317,11 +276,7 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "Z9XgSJQcP",
-	md: "IOIaixBce",
-	xl: "sHnGLtvML",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -356,7 +311,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

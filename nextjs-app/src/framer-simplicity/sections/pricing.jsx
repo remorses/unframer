@@ -23,11 +23,11 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-57ITGDZQ.js";
-import "../chunks/chunk-N2K3P4T2.js";
+import { stdin_default } from "../chunks/chunk-ZTGE4HX2.js";
 import "../chunks/chunk-D4IPCJGN.js";
+import "../chunks/chunk-QYC47C72.js";
 import "../chunks/chunk-BTSBQWPZ.js";
-import "../chunks/chunk-PGXTBGNK.js";
+import "../chunks/chunk-BEKPESE7.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:sections/pricing
@@ -36,10 +36,7 @@ import { ContextProviders } from "unframer";
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "BBhLTTA5K",
-	xl: "FM3SqD1tW",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -74,7 +71,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

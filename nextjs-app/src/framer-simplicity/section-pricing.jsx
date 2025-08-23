@@ -23,19 +23,19 @@
 }} Props
 
  */
-import { stdin_default as stdin_default2 } from "./chunks/chunk-57ITGDZQ.js";
-import "./chunks/chunk-N2K3P4T2.js";
+import { stdin_default as stdin_default2 } from "./chunks/chunk-ZTGE4HX2.js";
 import "./chunks/chunk-D4IPCJGN.js";
+import "./chunks/chunk-QYC47C72.js";
 import "./chunks/chunk-BTSBQWPZ.js";
 import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
-import { className, css, fonts } from "./chunks/chunk-PGXTBGNK.js";
+import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-pricing
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/Qi5b7QPu9c3NjXeCuWjP/uX8k1muLc5D10ljL4GMh/wqLJMyDAb.js
+// /:https://framerusercontent.com/modules/Qi5b7QPu9c3NjXeCuWjP/2y0aGFR834D1EabnfKNv/wqLJMyDAb.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -605,11 +605,7 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "t2BtxXlKz",
-	md: "RoFGE5oWb",
-	xl: "NK_tcQhZf",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -644,7 +640,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

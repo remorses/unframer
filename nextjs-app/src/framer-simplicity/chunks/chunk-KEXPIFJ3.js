@@ -5,14 +5,14 @@ import {
   className as className2,
   css as css2,
   fonts as fonts2
-} from "./chunk-HHDHZ6TZ.js";
+} from "./chunk-PSINJK7R.js";
 import {
   className,
   css,
   fonts
-} from "./chunk-SFTTTBUM.js";
+} from "./chunk-ZKAXZ4P5.js";
 
-// /:https://framerusercontent.com/modules/vZHcUtXg2Gy3CW0UYnss/1zHPAND2ybcM9iawLN6Y/HiujzNyFs.js
+// /:https://framerusercontent.com/modules/vZHcUtXg2Gy3CW0UYnss/xC69u9zMBZrU3F0x1G6q/HiujzNyFs.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { addFonts, addPropertyControls, ControlType, cx, getFontsFromSharedStyle, RichText, useActiveVariantCallback, useComponentViewport, useLocaleInfo, useVariantState, withCSS } from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
@@ -23,20 +23,19 @@ var serializationHash = "framer-Ju6Oi";
 var variantClassNames = { t3lFA7uHU: "framer-v-gn7ixc", vrduVgFDq: "framer-v-r5r1j2" };
 function addPropertyOverrides(overrides, ...variants) {
   const nextOverrides = {};
-  variants === null || variants === void 0 ? void 0 : variants.forEach((variant) => variant && Object.assign(nextOverrides, overrides[variant]));
+  variants?.forEach((variant) => variant && Object.assign(nextOverrides, overrides[variant]));
   return nextOverrides;
 }
 var transition1 = { bounce: 0.2, delay: 0, duration: 0.4, type: "spring" };
 var Transition = ({ value, children }) => {
   const config = React.useContext(MotionConfigContext);
-  const transition = value !== null && value !== void 0 ? value : config.transition;
+  const transition = value ?? config.transition;
   const contextValue = React.useMemo(() => ({ ...config, transition }), [JSON.stringify(transition)]);
   return /* @__PURE__ */ _jsx(MotionConfigContext.Provider, { value: contextValue, children });
 };
 var humanReadableVariantMap = { Active: "vrduVgFDq", Inactive: "t3lFA7uHU" };
 var getProps = ({ click, height, id, text, title, width, ...props }) => {
-  var _ref, _humanReadableVariantMap_props_variant, _ref1, _ref2;
-  return { ...props, f0FQOFhWM: click !== null && click !== void 0 ? click : props.f0FQOFhWM, RMkwwTQQY: (_ref = text !== null && text !== void 0 ? text : props.RMkwwTQQY) !== null && _ref !== void 0 ? _ref : "Build new lists and add tasks instantly with a simple, streamlined interface.", variant: (_ref1 = (_humanReadableVariantMap_props_variant = humanReadableVariantMap[props.variant]) !== null && _humanReadableVariantMap_props_variant !== void 0 ? _humanReadableVariantMap_props_variant : props.variant) !== null && _ref1 !== void 0 ? _ref1 : "vrduVgFDq", vv34GURgb: (_ref2 = title !== null && title !== void 0 ? title : props.vv34GURgb) !== null && _ref2 !== void 0 ? _ref2 : "Create in Seconds" };
+  return { ...props, f0FQOFhWM: click ?? props.f0FQOFhWM, RMkwwTQQY: text ?? props.RMkwwTQQY ?? "Build new lists and add tasks instantly with a simple, streamlined interface.", variant: humanReadableVariantMap[props.variant] ?? props.variant ?? "vrduVgFDq", vv34GURgb: title ?? props.vv34GURgb ?? "Create in Seconds" };
 };
 var createLayoutDependency = (props, variants) => {
   if (props.layoutDependency) return variants.join("-") + props.layoutDependency;
@@ -61,7 +60,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function(props, ref) {
   const ref1 = React.useRef(null);
   const defaultLayoutId = React.useId();
   const componentViewport = useComponentViewport();
-  return /* @__PURE__ */ _jsx(LayoutGroup, { id: layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId, children: /* @__PURE__ */ _jsx(Variants, { animate: variants, initial: false, children: /* @__PURE__ */ _jsx(Transition, { value: transition1, children: /* @__PURE__ */ _jsxs(motion.div, { ...restProps, ...gestureHandlers, className: cx(scopingClassNames, "framer-r5r1j2", className3, classNames), "data-framer-name": "Active", "data-highlight": true, layoutDependency, layoutId: "vrduVgFDq", onTap: onTaprsg7k2, ref: ref !== null && ref !== void 0 ? ref : ref1, style: { backdropFilter: "blur(10px)", backgroundColor: "rgba(255, 255, 255, 0.06)", borderBottomLeftRadius: 24, borderBottomRightRadius: 24, borderTopLeftRadius: 24, borderTopRightRadius: 24, WebkitBackdropFilter: "blur(10px)", ...style }, variants: { "t3lFA7uHU-hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" }, "vrduVgFDq-hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" }, t3lFA7uHU: { backgroundColor: "rgba(255, 255, 255, 0)" } }, ...addPropertyOverrides({ "t3lFA7uHU-hover": { "data-framer-name": void 0 }, "vrduVgFDq-hover": { "data-framer-name": void 0 }, t3lFA7uHU: { "data-framer-name": "Inactive" } }, baseVariant, gestureVariant), children: [/* @__PURE__ */ _jsx(RichText, { __fromCanvasComponent: true, children: /* @__PURE__ */ _jsx(React.Fragment, { children: /* @__PURE__ */ _jsx(motion.p, { className: "framer-styles-preset-1o0gqap", "data-styles-preset": "YdlE6s2va", style: { "--framer-text-alignment": "left", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))" }, children: "Download Framer Components" }) }), className: "framer-e2386u", fonts: ["Inter"], layoutDependency, layoutId: "Z1ptUVtCH", style: { "--extracted-r6o4lv": "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline" }, text: vv34GURgb, verticalAlignment: "top", withExternalLayout: true }), /* @__PURE__ */ _jsx(RichText, { __fromCanvasComponent: true, children: /* @__PURE__ */ _jsx(React.Fragment, { children: /* @__PURE__ */ _jsx(motion.p, { className: "framer-styles-preset-1fgmqi7", "data-styles-preset": "CWRpkcDNO", children: "Works with any React framework and includes all component dependencies." }) }), className: "framer-1y3l97a", fonts: ["Inter"], layoutDependency, layoutId: "YSddL29zI", style: { "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline" }, text: RMkwwTQQY, verticalAlignment: "top", withExternalLayout: true })] }) }) }) });
+  return /* @__PURE__ */ _jsx(LayoutGroup, { id: layoutId ?? defaultLayoutId, children: /* @__PURE__ */ _jsx(Variants, { animate: variants, initial: false, children: /* @__PURE__ */ _jsx(Transition, { value: transition1, children: /* @__PURE__ */ _jsxs(motion.div, { ...restProps, ...gestureHandlers, className: cx(scopingClassNames, "framer-r5r1j2", className3, classNames), "data-framer-name": "Active", "data-highlight": true, layoutDependency, layoutId: "vrduVgFDq", onTap: onTaprsg7k2, ref: ref ?? ref1, style: { backdropFilter: "blur(10px)", backgroundColor: "rgba(255, 255, 255, 0.06)", borderBottomLeftRadius: 24, borderBottomRightRadius: 24, borderTopLeftRadius: 24, borderTopRightRadius: 24, WebkitBackdropFilter: "blur(10px)", ...style }, variants: { "t3lFA7uHU-hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" }, "vrduVgFDq-hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" }, t3lFA7uHU: { backgroundColor: "rgba(255, 255, 255, 0)" } }, ...addPropertyOverrides({ "t3lFA7uHU-hover": { "data-framer-name": void 0 }, "vrduVgFDq-hover": { "data-framer-name": void 0 }, t3lFA7uHU: { "data-framer-name": "Inactive" } }, baseVariant, gestureVariant), children: [/* @__PURE__ */ _jsx(RichText, { __fromCanvasComponent: true, children: /* @__PURE__ */ _jsx(React.Fragment, { children: /* @__PURE__ */ _jsx(motion.p, { className: "framer-styles-preset-1o0gqap", "data-styles-preset": "YdlE6s2va", style: { "--framer-text-alignment": "left", "--framer-text-color": "var(--extracted-r6o4lv, var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255)))" }, children: "Download Framer Components" }) }), className: "framer-e2386u", fonts: ["Inter"], layoutDependency, layoutId: "Z1ptUVtCH", style: { "--extracted-r6o4lv": "var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline" }, text: vv34GURgb, verticalAlignment: "top", withExternalLayout: true }), /* @__PURE__ */ _jsx(RichText, { __fromCanvasComponent: true, children: /* @__PURE__ */ _jsx(React.Fragment, { children: /* @__PURE__ */ _jsx(motion.p, { className: "framer-styles-preset-1fgmqi7", "data-styles-preset": "CWRpkcDNO", children: "Works with any React framework and includes all component dependencies." }) }), className: "framer-1y3l97a", fonts: ["Inter"], layoutDependency, layoutId: "YSddL29zI", style: { "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline" }, text: RMkwwTQQY, verticalAlignment: "top", withExternalLayout: true })] }) }) }) });
 });
 var css3 = ["@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }", ".framer-Ju6Oi.framer-1nfsn0g, .framer-Ju6Oi .framer-1nfsn0g { display: block; }", ".framer-Ju6Oi.framer-r5r1j2 { align-content: flex-start; align-items: flex-start; cursor: pointer; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 8px; height: min-content; justify-content: center; overflow: hidden; padding: 24px; position: relative; width: 488px; will-change: var(--framer-will-change-override, transform); }", ".framer-Ju6Oi .framer-e2386u { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }", ".framer-Ju6Oi .framer-1y3l97a { --framer-text-wrap-override: balance; flex: none; height: auto; position: relative; width: 100%; }", "@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-Ju6Oi.framer-r5r1j2 { gap: 0px; } .framer-Ju6Oi.framer-r5r1j2 > * { margin: 0px; margin-bottom: calc(8px / 2); margin-top: calc(8px / 2); } .framer-Ju6Oi.framer-r5r1j2 > :first-child { margin-top: 0px; } .framer-Ju6Oi.framer-r5r1j2 > :last-child { margin-bottom: 0px; } }", ...css2, ...css];
 var FramerHiujzNyFs = withCSS(Component, css3, "framer-Ju6Oi");

@@ -24,19 +24,19 @@
 
  */
 import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
-import { className, css, fonts } from "./chunks/chunk-PGXTBGNK.js";
+import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
-} from "./chunks/chunk-SFTTTBUM.js";
+} from "./chunks/chunk-ZKAXZ4P5.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-frequently-asked-questions
 import { Fragment as Fragment3 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/1gZ71eIVxFqHkjFaXdmc/WirOdcJBs.js
+// /:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/ZWrjalRRHKaIzOV6c1fg/WirOdcJBs.js
 import { jsx as _jsx2, jsxs as _jsxs2 } from "react/jsx-runtime";
 import {
 	addFonts as addFonts2,
@@ -59,7 +59,7 @@ import {
 } from "unframer";
 import * as React2 from "react";
 
-// /:https://framerusercontent.com/modules/vBPIHY51XZE5TET5oqaA/2lz2rgwJtAFAPcg1BEJk/pGqsrn12V.js
+// /:https://framerusercontent.com/modules/vBPIHY51XZE5TET5oqaA/XinFZMFArv6h40PmDLlw/pGqsrn12V.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -1664,7 +1664,7 @@ addFonts(
 	},
 );
 
-// /:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/1gZ71eIVxFqHkjFaXdmc/WirOdcJBs.js
+// /:https://framerusercontent.com/modules/3N3NXszYbBUMGs3WxgYl/ZWrjalRRHKaIzOV6c1fg/WirOdcJBs.js
 var ElementsBadgeFonts = getFonts(stdin_default);
 var ElementsFAQFonts = getFonts(stdin_default2);
 var cycleOrder2 = ["g_GAoicEt", "gFvLeQTQg", "eHhGnXfVc"];
@@ -2228,11 +2228,7 @@ addFonts2(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "eHhGnXfVc",
-	md: "gFvLeQTQg",
-	xl: "g_GAoicEt",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -2267,7 +2263,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

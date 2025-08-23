@@ -29,14 +29,14 @@
 import { stdin_default as stdin_default2 } from "./chunks/chunk-D4IPCJGN.js";
 import "./chunks/chunk-BTSBQWPZ.js";
 import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
-import { className, css, fonts } from "./chunks/chunk-PGXTBGNK.js";
+import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-hero
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/qHBheAUur4mOMMrc2BQz/aKlzorVQO.js
+// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/MZxnJqxrMYkSma05q109/aKlzorVQO.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -46,6 +46,7 @@ import {
 	cx,
 	getFonts,
 	getFontsFromSharedStyle,
+	Link,
 	RichText,
 	SmartComponentScopedContainer,
 	useActiveVariantCallback,
@@ -60,216 +61,75 @@ import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
 import { useRef } from "react";
 
-// /:https://framerusercontent.com/modules/2dgi2DlUClY4qBbVakOw/0jnC5BbjXLdwysUvlueD/kpcp5QUWe.js
+// /:https://framerusercontent.com/modules/2dgi2DlUClY4qBbVakOw/XpFm4laVOw6jSka0keqw/kpcp5QUWe.js
 import { fontStore } from "unframer";
 fontStore.loadFonts([
-	"FS;Satoshi-medium",
-	"Inter-Bold",
-	"Inter-BoldItalic",
-	"Inter-Italic",
+	"GF;Inter-500",
+	"GF;Inter-700",
+	"GF;Inter-700italic",
+	"GF;Inter-500italic",
 ]);
 var fonts2 = [
 	{
 		explicitInter: true,
 		fonts: [
 			{
-				family: "Satoshi",
-				source: "fontshare",
+				family: "Inter",
+				openType: true,
+				source: "google",
 				style: "normal",
-				url: "https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
+				url: "https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZ1rib2Bg-4.woff2",
 				weight: "500",
 			},
 			{
 				family: "Inter",
-				source: "framer",
+				openType: true,
+				source: "google",
 				style: "normal",
-				unicodeRange:
-					"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-				url: "https://framerusercontent.com/assets/DpPBYI0sL4fYLgAkX8KXOPVt7c.woff2",
+				url: "https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZ1rib2Bg-4.woff2",
 				weight: "700",
 			},
 			{
 				family: "Inter",
-				source: "framer",
-				style: "normal",
-				unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-				url: "https://framerusercontent.com/assets/4RAEQdEOrcnDkhHiiCbJOw92Lk.woff2",
+				openType: true,
+				source: "google",
+				style: "italic",
+				url: "https://fonts.gstatic.com/s/inter/v19/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTcPtxhiJ-Ek-7MeA.woff2",
 				weight: "700",
 			},
 			{
 				family: "Inter",
-				source: "framer",
-				style: "normal",
-				unicodeRange: "U+1F00-1FFF",
-				url: "https://framerusercontent.com/assets/1K3W8DizY3v4emK8Mb08YHxTbs.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "normal",
-				unicodeRange: "U+0370-03FF",
-				url: "https://framerusercontent.com/assets/tUSCtfYVM1I1IchuyCwz9gDdQ.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "normal",
-				unicodeRange:
-					"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-				url: "https://framerusercontent.com/assets/VgYFWiwsAC5OYxAycRXXvhze58.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "normal",
-				unicodeRange:
-					"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-				url: "https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "normal",
-				unicodeRange:
-					"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-				url: "https://framerusercontent.com/assets/GIryZETIX4IFypco5pYZONKhJIo.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
+				openType: true,
+				source: "google",
 				style: "italic",
-				unicodeRange:
-					"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-				url: "https://framerusercontent.com/assets/H89BbHkbHDzlxZzxi8uPzTsp90.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-				url: "https://framerusercontent.com/assets/u6gJwDuwB143kpNK1T1MDKDWkMc.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange: "U+1F00-1FFF",
-				url: "https://framerusercontent.com/assets/43sJ6MfOPh1LCJt46OvyDuSbA6o.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange: "U+0370-03FF",
-				url: "https://framerusercontent.com/assets/wccHG0r4gBDAIRhfHiOlq6oEkqw.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-				url: "https://framerusercontent.com/assets/WZ367JPwf9bRW6LdTHN8rXgSjw.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-				url: "https://framerusercontent.com/assets/QxmhnWTzLtyjIiZcfaLIJ8EFBXU.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-				url: "https://framerusercontent.com/assets/2A4Xx7CngadFGlVV4xrO06OBHY.woff2",
-				weight: "700",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
-				url: "https://framerusercontent.com/assets/CfMzU8w2e7tHgF4T4rATMPuWosA.woff2",
-				weight: "400",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange: "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
-				url: "https://framerusercontent.com/assets/867QObYax8ANsfX4TGEVU9YiCM.woff2",
-				weight: "400",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange: "U+1F00-1FFF",
-				url: "https://framerusercontent.com/assets/Oyn2ZbENFdnW7mt2Lzjk1h9Zb9k.woff2",
-				weight: "400",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange: "U+0370-03FF",
-				url: "https://framerusercontent.com/assets/cdAe8hgZ1cMyLu9g005pAW3xMo.woff2",
-				weight: "400",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
-				url: "https://framerusercontent.com/assets/DOfvtmE1UplCq161m6Hj8CSQYg.woff2",
-				weight: "400",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-				url: "https://framerusercontent.com/assets/vFzuJY0c65av44uhEKB6vyjFMg.woff2",
-				weight: "400",
-			},
-			{
-				family: "Inter",
-				source: "framer",
-				style: "italic",
-				unicodeRange:
-					"U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
-				url: "https://framerusercontent.com/assets/tKtBcDnBMevsEEJKdNGhhkLzYo.woff2",
-				weight: "400",
+				url: "https://fonts.gstatic.com/s/inter/v19/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTc69thiJ-Ek-7MeA.woff2",
+				weight: "500",
 			},
 		],
 	},
 ];
 var css2 = [
-	`.framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; }`,
-	`@media (max-width: 1199px) and (min-width: 810px) { .framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
-	`@media (max-width: 809px) and (min-width: 0px) { .framer-a3inn .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-a3inn .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Satoshi", "Satoshi Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 400; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
+	`.framer-d41tb .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-d41tb .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-variation-axes: normal; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 500; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; }`,
+	`@media (max-width: 1199px) and (min-width: 810px) { .framer-d41tb .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-d41tb .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-variation-axes: normal; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 500; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
+	`@media (max-width: 809px) and (min-width: 0px) { .framer-d41tb .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-d41tb .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-variation-axes: normal; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 500; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
 ];
-var className2 = "framer-a3inn";
+var className2 = "framer-d41tb";
 
-// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/qHBheAUur4mOMMrc2BQz/aKlzorVQO.js
+// /:https://framerusercontent.com/modules/dwaoDH2PyfjCqM82JqPh/lweX3SI5cQI8d99yaz3c/UwhnZFjEy.js
+import { fontStore as fontStore2 } from "unframer";
+fontStore2.loadFonts([]);
+var fonts3 = [
+	{
+		explicitInter: true,
+		fonts: [],
+	},
+];
+var css3 = [
+	".framer-cIlNy .framer-styles-preset-1ge2maa:not(.rich-text-wrapper), .framer-cIlNy .framer-styles-preset-1ge2maa.rich-text-wrapper a { --framer-link-current-text-decoration: none; --framer-link-hover-text-color: rgba(255, 255, 255, 0.9); --framer-link-hover-text-decoration: none; --framer-link-text-color: #b8a8ff; --framer-link-text-decoration: underline; transition-delay: 0s; transition-duration: 0.4s; transition-property: color,text-decoration-color,text-decoration-thickness,text-underline-offset; transition-timing-function: cubic-bezier(0.44, 0, 0.56, 1); }",
+];
+var className3 = "framer-cIlNy";
+
+// /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/MZxnJqxrMYkSma05q109/aKlzorVQO.js
 var ElementsBadgeFonts = getFonts(stdin_default);
 var SmartComponentScopedContainerWithFXWithOptimizedAppearEffect =
 	withOptimizedAppearEffect(withFX(SmartComponentScopedContainer));
@@ -278,7 +138,7 @@ var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
 var cycleOrder = ["L_pX4uUkR", "Gbz9maQw1", "K1iE6Mz7N"];
-var serializationHash = "framer-b0vi3";
+var serializationHash = "framer-nykwV";
 var variantClassNames = {
 	Gbz9maQw1: "framer-v-g9taje",
 	K1iE6Mz7N: "framer-v-1hchsjm",
@@ -418,7 +278,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	const {
 		style,
-		className: className3,
+		className: className4,
 		layoutId,
 		variant,
 		OF9UPudni,
@@ -452,7 +312,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 			if (res === false) return false;
 		}
 	});
-	const sharedStyleClassNames = [className, className2];
+	const sharedStyleClassNames = [className, className2, className3];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
@@ -464,7 +324,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						className={cx(
 							scopingClassNames,
 							"framer-lv3ofw",
-							className3,
+							className4,
 							classNames,
 						)}
 						data-framer-name={"Desktop"}
@@ -528,7 +388,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 794) - 176 - 418) /
+														(((componentViewport?.height || 821) - 176 - 418) /
 															2 +
 															0 +
 															0) +
@@ -710,7 +570,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													y:
 														(componentViewport?.y || 0) +
 														96 +
-														(((componentViewport?.height || 794) - 176 - 418) /
+														(((componentViewport?.height || 821) - 176 - 418) /
 															2 +
 															0 +
 															0) +
@@ -778,10 +638,6 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										fonts={["Inter"]}
 										layoutDependency={layoutDependency}
 										layoutId={"gjG8xytXP"}
-										style={{
-											"--framer-link-text-color": "rgb(0, 153, 255)",
-											"--framer-link-text-decoration": "underline",
-										}}
 										verticalAlignment={"top"}
 										withExternalLayout={true}
 									>
@@ -790,7 +646,26 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												className={"framer-styles-preset-d2jvfr"}
 												data-styles-preset={"kpcp5QUWe"}
 											>
-												{"Free for open source projects"}
+												{"Free for open "}
+												<Link
+													href={{
+														webPageId: "augiA20Il",
+													}}
+													motionChild={true}
+													nodeId={"gjG8xytXP"}
+													openInNewTab={false}
+													relValues={[]}
+													scopeId={"aKlzorVQO"}
+													smoothScroll={false}
+												>
+													<motion.a
+														className={"framer-styles-preset-1ge2maa"}
+														data-styles-preset={"UwhnZFjEy"}
+													>
+														{"source"}
+													</motion.a>
+												</Link>
+												{" projects"}
 											</motion.p>
 										</React.Fragment>
 									</RichText>
@@ -803,28 +678,29 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		</LayoutGroup>
 	);
 });
-var css3 = [
+var css4 = [
 	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
-	".framer-b0vi3.framer-1wa8zo6, .framer-b0vi3 .framer-1wa8zo6 { display: block; }",
-	".framer-b0vi3.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
-	".framer-b0vi3 .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
-	".framer-b0vi3 .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-b0vi3 .framer-1sx2h0, .framer-b0vi3 .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-b0vi3 .framer-pz5jso-container, .framer-b0vi3 .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
-	".framer-b0vi3 .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-b0vi3 .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
-	".framer-b0vi3 .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
-	".framer-b0vi3.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
-	".framer-b0vi3.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
-	".framer-b0vi3.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
-	".framer-b0vi3.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
-	".framer-b0vi3.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
-	".framer-b0vi3.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
-	".framer-b0vi3.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
+	".framer-nykwV.framer-1wa8zo6, .framer-nykwV .framer-1wa8zo6 { display: block; }",
+	".framer-nykwV.framer-lv3ofw { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 160px 80px 80px 80px; position: relative; width: 1200px; }",
+	".framer-nykwV .framer-he1c7i { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: flex-start; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; z-index: 1; }",
+	".framer-nykwV .framer-c0n0jm { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-nykwV .framer-1sx2h0, .framer-nykwV .framer-1rh3sqh { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-nykwV .framer-pz5jso-container, .framer-nykwV .framer-1pwvu55-container { flex: none; height: auto; position: relative; width: auto; }",
+	".framer-nykwV .framer-7elwrr { cursor: pointer; flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-nykwV .framer-nqkn6i { --framer-text-wrap-override: balance; flex: none; height: auto; max-width: 515px; position: relative; width: 100%; }",
+	".framer-nykwV .framer-yf4qez { flex: none; height: auto; position: relative; white-space: pre; width: auto; }",
+	".framer-nykwV.framer-v-g9taje.framer-lv3ofw { padding: 96px 32px 80px 32px; width: 810px; }",
+	".framer-nykwV.framer-v-g9taje .framer-7elwrr { max-width: 412px; }",
+	".framer-nykwV.framer-v-g9taje .framer-nqkn6i { max-width: 283px; white-space: pre-wrap; word-break: break-word; word-wrap: break-word; }",
+	".framer-nykwV.framer-v-1hchsjm.framer-lv3ofw { padding: 96px 24px 80px 24px; width: 390px; }",
+	".framer-nykwV.framer-v-1hchsjm .framer-he1c7i { height: 640px; }",
+	".framer-nykwV.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
+	".framer-nykwV.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
 	...css,
 	...css2,
+	...css3,
 ];
-var FrameraKlzorVQO = withCSS(Component, css3, "framer-b0vi3");
+var FrameraKlzorVQO = withCSS(Component, css4, "framer-nykwV");
 var stdin_default3 = FrameraKlzorVQO;
 FrameraKlzorVQO.displayName = "Section Hero";
 FrameraKlzorVQO.defaultProps = {
@@ -921,8 +797,8 @@ addFonts(
 					source: "framer",
 					style: "normal",
 					unicodeRange:
-						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-					url: "https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2",
+						"U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070, U+2074-207E, U+2080-208E, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+					url: "https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2",
 					weight: "400",
 				},
 				{
@@ -940,6 +816,7 @@ addFonts(
 		...ButtonsButtonFonts,
 		...getFontsFromSharedStyle(fonts),
 		...getFontsFromSharedStyle(fonts2),
+		...getFontsFromSharedStyle(fonts3),
 	],
 	{
 		supportsExplicitInterCodegen: true,
@@ -950,11 +827,7 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "K1iE6Mz7N",
-	md: "Gbz9maQw1",
-	xl: "L_pX4uUkR",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -989,7 +862,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}
