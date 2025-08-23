@@ -54,6 +54,7 @@ import {
     stackblitzDemoExample,
     terminalMarkdown,
 } from './utils.js'
+import pico from 'picocolors'
 import { installPackagesBatch } from './package-manager.js'
 import { version as currentUnframerVersion } from './version.js'
 
@@ -813,37 +814,59 @@ export async function bundle({
         })
         await fs.promises.writeFile(stackblitzDemoExample, exampleCode)
     }
-    // Build the output message
+    // Build the colorful output message
+    console.log()
+    console.log(pico.cyan(pico.bold('How to use the Framer components')))
+    console.log()
 
-    let outputMessage = dedent`
-    # How to use the Framer components
+    console.log(
+        pico.green('✓') +
+            ' Your components are exported to ' +
+            pico.yellow(outDirForExample) +
+            ' folder',
+    )
+    console.log()
 
-    Your components are exported to \`${outDirForExample}\` folder.
-
-    Each component has a \`.Responsive\` variant that allows you to specify different variants for different breakpoints.
-    `
+    console.log(
+        pico.dim('Each component has a ') +
+            pico.cyan('.Responsive') +
+            pico.dim(' variant that allows you to'),
+    )
+    console.log(
+        pico.dim('specify different variants for different breakpoints.'),
+    )
 
     if (exampleCode) {
-        outputMessage += dedent`
-
-        You can use the components like this (try copy pasting the code below into your React app):
-
-        \`\`\`jsx
-        ${exampleCode}
-        \`\`\`
-        `
+        console.log()
+        console.log(pico.magenta('You can use the components like this:'))
+        console.log(
+            pico.dim('(try copy pasting the code below into your React app)'),
+        )
+        console.log()
+        console.log(exampleCode)
     }
 
-    outputMessage += dedent`
-
-    Remember to import the \`styles.css\` file to include the necessary styles for the components.
-
-    To style components you can pass a \`style\` or \`className\` prop (but remember to use !important to increase the specificity).
-
-    Read more on GitHub: https://github.com/remorses/unframer
-    `
-
-    console.log(terminalMarkdown(outputMessage))
+    console.log()
+    console.log(
+        pico.yellow('⚠') +
+            '  Remember to import the ' +
+            pico.cyan('styles.css') +
+            ' file to include',
+    )
+    console.log('   the necessary styles for the components.')
+    console.log()
+    console.log(
+        pico.dim('To style components you can pass a ') +
+            pico.cyan('style') +
+            pico.dim(' or ') +
+            pico.cyan('className') +
+            pico.dim(' prop'),
+    )
+    console.log()
+    console.log(
+        pico.dim('Read more on GitHub: ') +
+            pico.underline(pico.blue('https://github.com/remorses/unframer')),
+    )
     console.log()
     return { result, rebuild, buildContext }
 }
