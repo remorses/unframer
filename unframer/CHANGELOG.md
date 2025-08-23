@@ -1,5 +1,27 @@
 # unframer
 
+## 3.2.0
+
+### Minor Changes
+
+- c573978: Disable automatic meta.json generation by default
+
+    The meta.json file is now only generated when the `--metafile` flag is passed to the CLI. This reduces unnecessary file generation for users who don't need build metadata.
+
+    Usage:
+
+    ```bash
+    # Without meta.json (default)
+    npx unframer <projectId>
+
+    # With meta.json
+    npx unframer <projectId> --metafile
+    ```
+
+### Patch Changes
+
+- 0541935: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+
 ## 3.1.0
 
 ### Minor Changes
