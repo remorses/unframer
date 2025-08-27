@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.ZNMFLOLI.mjs
+// /:https://app.framerstatic.com/framer.BTRNGHWV.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -31766,6 +31766,9 @@ var framerCSSMarker = 'data-framer-css-ssr';
 var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
+      cssCollector: cssCollectorEnabled,
+    } = useLibraryFeatures();
+    const {
       sheet,
       cache: cache2,
     } = React4.useContext(StyleSheetContext,) ?? {};
@@ -31773,23 +31776,27 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
     if (!isBrowser2()) {
       if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx3('style', {
-            ...{
-              [framerCSSMarker]: true,
-            },
-            'data-framer-component': id3,
-            dangerouslySetInnerHTML: {
-              __html: concatenatedCSS,
-            },
-          },),
-          /* @__PURE__ */ jsx3(Component17, {
-            ...props,
-            ref,
-          },),
-        ],
-      },);
+      if (cssCollectorEnabled) {
+        cssCollector.add(concatenatedCSS, id3,);
+      } else {
+        return /* @__PURE__ */ jsxs(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx3('style', {
+              ...{
+                [framerCSSMarker]: true,
+              },
+              'data-framer-component': id3,
+              dangerouslySetInnerHTML: {
+                __html: concatenatedCSS,
+              },
+            },),
+            /* @__PURE__ */ jsx3(Component17, {
+              ...props,
+              ref,
+            },),
+          ],
+        },);
+      }
     }
     useInsertionEffect(() => {
       if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
@@ -31805,6 +31812,27 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
       ref,
     },);
   },);
+var CSSCollector = class {
+  constructor() {
+    __publicField(this, 'styles', /* @__PURE__ */ new Set(),);
+    __publicField(this, 'componentIds', /* @__PURE__ */ new Set(),);
+  }
+  add(css22, componentId,) {
+    this.styles.add(css22,);
+    if (componentId) this.componentIds.add(componentId,);
+  }
+  getStyles() {
+    return this.styles;
+  }
+  getComponentIds() {
+    return this.componentIds;
+  }
+  clear() {
+    this.styles.clear();
+    this.componentIds.clear();
+  }
+};
+var cssCollector = /* @__PURE__ */ new CSSCollector();
 var SSRParentVariantsContext = /* @__PURE__ */ React4.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function renderBranchedChildrenFromPropertyOverrides(
@@ -35351,13 +35379,8 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     if (!pageLink) return;
     return getRouteFromPageLink(pageLink, router, currentRoute,);
   }, [currentRoute, href, router,],);
-  const {
-    replaceNestedLinks,
-  } = useLibraryFeatures();
   const isOnFramerCanvas = useIsOnFramerCanvas();
-  const shouldReplaceLink = Boolean(
-    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
-  );
+  const shouldReplaceLink = Boolean(!isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,);
   const onClick = useCallback((event) => {
     var _a;
     if (!propsAddedByLink.href) return;
@@ -36786,20 +36809,12 @@ function resolveFetchDataValue(result, request,) {
   }
   return resolvedValue;
 }
+var minimumCacheDurationMs = 5e3;
 function isCacheExpired(insertionTimestamp, cacheDuration,) {
   if (RenderTarget.current() === RenderTarget.canvas) {
     return false;
   }
-  const cacheDurationMs = cacheDuration === 0
-    ? // When the cache is set to 0 seconds we set use a 500ms cache delay
-    // to avoid triggering refetching when a variant switches from
-    // preloading to rendering the component (and
-    // resubscribing to the fetch client). When another component
-    // relying on the same endpoint (eg another page) is mounted again
-    // and the cache time is set to 0, the the data will be fetched
-    // again.
-    500
-    : cacheDuration * 1e3;
+  const cacheDurationMs = Math.max(cacheDuration * 1e3, minimumCacheDurationMs,);
   const currentTimestamp = Date.now();
   const expirationTimestamp = insertionTimestamp + cacheDurationMs;
   return currentTimestamp >= expirationTimestamp;
@@ -50859,6 +50874,7 @@ export {
   createRendererMotionComponent,
   createScopedAnimate,
   cssBackgroundSize,
+  cssCollector,
   cubicBezier,
   cubicBezierAsString,
   CustomCursorHost,
