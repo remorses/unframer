@@ -1,5 +1,12 @@
 # unframer
 
+## 3.2.1
+
+### Patch Changes
+
+- fa766bc: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+- Better generated example code
+
 ## 3.2.0
 
 ### Minor Changes
