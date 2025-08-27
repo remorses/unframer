@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.TLIAXGT6.mjs
+// /:https://app.framerstatic.com/framer.ZNMFLOLI.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -50733,12 +50733,12 @@ var package_default = {
     '@types/dom-navigation': '^1.0.5',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
-    '@types/node': '22.16',
+    '@types/node': '22.17',
     '@types/react': '18.2',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.36.0',
-    '@typescript-eslint/parser': '^8.36.0',
+    '@typescript-eslint/eslint-plugin': '^8.40.0',
+    '@typescript-eslint/parser': '^8.40.0',
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
@@ -50751,7 +50751,7 @@ var package_default = {
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
-    typescript: '^5.8.3',
+    typescript: '^5.9.2',
     yargs: '^17.7.2',
   },
   peerDependencies: {
