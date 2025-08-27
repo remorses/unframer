@@ -1434,29 +1434,29 @@ export async function createExampleComponentCode({
         // Order first by nodeDepth (lower is better)
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
-    
+
     // If no instances, use components directly
     if (!instances?.length) {
         const componentNames = Object.keys(config.components || {})
         if (!componentNames.length) {
             return { outDirForExample, exampleCode: '' }
         }
-        
+
         // Generate simple example with all available components
         const imports = componentNames.map((name) => {
             return `import ${componentCamelCase(name)} from './${outDirForExample}/${name}'`
         })
-        
+
         const jsx = componentNames.map((name) => {
             return `<${componentCamelCase(name)}.Responsive />`
         })
-        
+
         let containerClasses = ''
         if (config.pageBackgroundColor) {
             let bg = config.pageBackgroundColor?.replace(/ /g, '_')
             containerClasses += `bg-[${bg}]`
         }
-        
+
         const exampleCode = dedent`
           import './${outDirForExample}/styles.css'
 
@@ -1470,7 +1470,7 @@ export async function createExampleComponentCode({
             );
           };
           `
-        
+
         return {
             outDirForExample,
             exampleCode,
