@@ -1434,7 +1434,48 @@ export async function createExampleComponentCode({
         // Order first by nodeDepth (lower is better)
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
-    if (!instances?.length) return { outDirForExample, exampleCode: '' }
+    
+    // If no instances, use components directly
+    if (!instances?.length) {
+        const componentNames = Object.keys(config.components || {})
+        if (!componentNames.length) {
+            return { outDirForExample, exampleCode: '' }
+        }
+        
+        // Generate simple example with all available components
+        const imports = componentNames.map((name) => {
+            return `import ${componentCamelCase(name)} from './${outDirForExample}/${name}'`
+        })
+        
+        const jsx = componentNames.map((name) => {
+            return `<${componentCamelCase(name)}.Responsive />`
+        })
+        
+        let containerClasses = ''
+        if (config.pageBackgroundColor) {
+            let bg = config.pageBackgroundColor?.replace(/ /g, '_')
+            containerClasses += `bg-[${bg}]`
+        }
+        
+        const exampleCode = dedent`
+          import './${outDirForExample}/styles.css'
+
+          ${indentWithTabs(imports?.join('\n'), '')}
+
+          export default function App() {
+            return (
+              <div className='flex flex-col items-center gap-3 ${containerClasses}'>
+                ${indentWithTabs(jsx?.join('\n'), '          ')}
+              </div>
+            );
+          };
+          `
+        
+        return {
+            outDirForExample,
+            exampleCode,
+        }
+    }
 
     const imports = instances?.map((exampleComponent) => {
         return `import ${componentCamelCase(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
@@ -1465,7 +1506,7 @@ export async function createExampleComponentCode({
 
     let containerClasses = ''
     if (config.pageBackgroundColor) {
-        let bg = config.pageBackgroundColor?.replace(' ', '_')
+        let bg = config.pageBackgroundColor?.replace(/ /g, '_')
         containerClasses += `bg-[${bg}]`
     }
 
