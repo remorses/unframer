@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.BTRNGHWV.mjs
+// /:https://app.framerstatic.com/framer.H4RL7CEG.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -23199,23 +23199,45 @@ function getImageStyle(image,) {
     objectFit: cssObjectFit(image.fit,),
   };
 }
+function useDecodingAttribute(avoidAsyncDecoding,) {
+  const currentDecoding = React4.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
+  const switchDecodingToAuto = useCallback((node) => {
+    currentDecoding.current = 'auto';
+    node.decoding = 'auto';
+  }, [],);
+  const onImageLoad = useCallback((event) => {
+    switchDecodingToAuto(event.currentTarget,);
+  }, [switchDecodingToAuto,],);
+  const onImageMount = useCallback((node) => {
+    if (node == null ? void 0 : node.complete) switchDecodingToAuto(node,);
+  }, [switchDecodingToAuto,],);
+  return {
+    decoding: currentDecoding.current,
+    onImageLoad,
+    onImageMount,
+  };
+}
 function StaticImage({
   image,
   containerSize,
   nodeId,
   alt,
   draggable,
-  syncDecoding,
+  avoidAsyncDecoding,
 },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image,);
-  const imageRef = React4.useRef(null,);
+  const {
+    decoding,
+    onImageLoad,
+    onImageMount,
+  } = useDecodingAttribute(avoidAsyncDecoding,);
   return (
     // eslint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
     /* @__PURE__ */
     jsx3('img', {
-      ref: imageRef,
-      decoding: syncDecoding ? 'sync' : 'async',
+      ref: onImageMount,
+      decoding,
       fetchPriority: image.fetchPriority,
       loading: image.loading,
       width: image.pixelWidth,
@@ -23223,6 +23245,7 @@ function StaticImage({
       sizes: image.sizes,
       srcSet: image.srcSet,
       src: source,
+      onLoad: onImageLoad,
       alt: alt ?? image.alt ?? '',
       style: imageStyle,
       draggable,
@@ -23312,7 +23335,7 @@ function BackgroundImageComponent({
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
       imageNode = /* @__PURE__ */ jsx3(StaticImage, {
         image,
-        syncDecoding: RenderTarget.current() === RenderTarget.export,
+        avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
       },);
     } else if (
@@ -48131,6 +48154,12 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const containerStyle = {
     outline: 'none',
+    /**
+     * NOTE: `display` can be overridden for example with `-webkit-box` in
+     * `collectTextTruncation.ts`. In such case, not all flex properties are supported. For
+     * example `justifyContent` doesn't work, but it doesn't matter for truncated text since it
+     * has auto height. In any case, keep this in mind when modifying these styles.
+     */
     display: 'flex',
     flexDirection: 'column',
     justifyContent: convertVerticalAlignment(verticalAlignment,),
