@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.ZNMFLOLI.mjs
+// /:https://app.framerstatic.com/framer.H4RL7CEG.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -23199,23 +23199,45 @@ function getImageStyle(image,) {
     objectFit: cssObjectFit(image.fit,),
   };
 }
+function useDecodingAttribute(avoidAsyncDecoding,) {
+  const currentDecoding = React4.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
+  const switchDecodingToAuto = useCallback((node) => {
+    currentDecoding.current = 'auto';
+    node.decoding = 'auto';
+  }, [],);
+  const onImageLoad = useCallback((event) => {
+    switchDecodingToAuto(event.currentTarget,);
+  }, [switchDecodingToAuto,],);
+  const onImageMount = useCallback((node) => {
+    if (node == null ? void 0 : node.complete) switchDecodingToAuto(node,);
+  }, [switchDecodingToAuto,],);
+  return {
+    decoding: currentDecoding.current,
+    onImageLoad,
+    onImageMount,
+  };
+}
 function StaticImage({
   image,
   containerSize,
   nodeId,
   alt,
   draggable,
-  syncDecoding,
+  avoidAsyncDecoding,
 },) {
   const source = runtime.useImageSource(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image,);
-  const imageRef = React4.useRef(null,);
+  const {
+    decoding,
+    onImageLoad,
+    onImageMount,
+  } = useDecodingAttribute(avoidAsyncDecoding,);
   return (
     // eslint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
     /* @__PURE__ */
     jsx3('img', {
-      ref: imageRef,
-      decoding: syncDecoding ? 'sync' : 'async',
+      ref: onImageMount,
+      decoding,
       fetchPriority: image.fetchPriority,
       loading: image.loading,
       width: image.pixelWidth,
@@ -23223,6 +23245,7 @@ function StaticImage({
       sizes: image.sizes,
       srcSet: image.srcSet,
       src: source,
+      onLoad: onImageLoad,
       alt: alt ?? image.alt ?? '',
       style: imageStyle,
       draggable,
@@ -23312,7 +23335,7 @@ function BackgroundImageComponent({
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
       imageNode = /* @__PURE__ */ jsx3(StaticImage, {
         image,
-        syncDecoding: RenderTarget.current() === RenderTarget.export,
+        avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
       },);
     } else if (
@@ -31766,6 +31789,9 @@ var framerCSSMarker = 'data-framer-css-ssr';
 var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
+      cssCollector: cssCollectorEnabled,
+    } = useLibraryFeatures();
+    const {
       sheet,
       cache: cache2,
     } = React4.useContext(StyleSheetContext,) ?? {};
@@ -31773,23 +31799,27 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
     if (!isBrowser2()) {
       if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      return /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx3('style', {
-            ...{
-              [framerCSSMarker]: true,
-            },
-            'data-framer-component': id3,
-            dangerouslySetInnerHTML: {
-              __html: concatenatedCSS,
-            },
-          },),
-          /* @__PURE__ */ jsx3(Component17, {
-            ...props,
-            ref,
-          },),
-        ],
-      },);
+      if (cssCollectorEnabled) {
+        cssCollector.add(concatenatedCSS, id3,);
+      } else {
+        return /* @__PURE__ */ jsxs(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx3('style', {
+              ...{
+                [framerCSSMarker]: true,
+              },
+              'data-framer-component': id3,
+              dangerouslySetInnerHTML: {
+                __html: concatenatedCSS,
+              },
+            },),
+            /* @__PURE__ */ jsx3(Component17, {
+              ...props,
+              ref,
+            },),
+          ],
+        },);
+      }
     }
     useInsertionEffect(() => {
       if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
@@ -31805,6 +31835,27 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
       ref,
     },);
   },);
+var CSSCollector = class {
+  constructor() {
+    __publicField(this, 'styles', /* @__PURE__ */ new Set(),);
+    __publicField(this, 'componentIds', /* @__PURE__ */ new Set(),);
+  }
+  add(css22, componentId,) {
+    this.styles.add(css22,);
+    if (componentId) this.componentIds.add(componentId,);
+  }
+  getStyles() {
+    return this.styles;
+  }
+  getComponentIds() {
+    return this.componentIds;
+  }
+  clear() {
+    this.styles.clear();
+    this.componentIds.clear();
+  }
+};
+var cssCollector = /* @__PURE__ */ new CSSCollector();
 var SSRParentVariantsContext = /* @__PURE__ */ React4.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function renderBranchedChildrenFromPropertyOverrides(
@@ -35351,13 +35402,8 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     if (!pageLink) return;
     return getRouteFromPageLink(pageLink, router, currentRoute,);
   }, [currentRoute, href, router,],);
-  const {
-    replaceNestedLinks,
-  } = useLibraryFeatures();
   const isOnFramerCanvas = useIsOnFramerCanvas();
-  const shouldReplaceLink = Boolean(
-    replaceNestedLinks && !isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,
-  );
+  const shouldReplaceLink = Boolean(!isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,);
   const onClick = useCallback((event) => {
     var _a;
     if (!propsAddedByLink.href) return;
@@ -36786,20 +36832,12 @@ function resolveFetchDataValue(result, request,) {
   }
   return resolvedValue;
 }
+var minimumCacheDurationMs = 5e3;
 function isCacheExpired(insertionTimestamp, cacheDuration,) {
   if (RenderTarget.current() === RenderTarget.canvas) {
     return false;
   }
-  const cacheDurationMs = cacheDuration === 0
-    ? // When the cache is set to 0 seconds we set use a 500ms cache delay
-    // to avoid triggering refetching when a variant switches from
-    // preloading to rendering the component (and
-    // resubscribing to the fetch client). When another component
-    // relying on the same endpoint (eg another page) is mounted again
-    // and the cache time is set to 0, the the data will be fetched
-    // again.
-    500
-    : cacheDuration * 1e3;
+  const cacheDurationMs = Math.max(cacheDuration * 1e3, minimumCacheDurationMs,);
   const currentTimestamp = Date.now();
   const expirationTimestamp = insertionTimestamp + cacheDurationMs;
   return currentTimestamp >= expirationTimestamp;
@@ -48116,6 +48154,12 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const containerStyle = {
     outline: 'none',
+    /**
+     * NOTE: `display` can be overridden for example with `-webkit-box` in
+     * `collectTextTruncation.ts`. In such case, not all flex properties are supported. For
+     * example `justifyContent` doesn't work, but it doesn't matter for truncated text since it
+     * has auto height. In any case, keep this in mind when modifying these styles.
+     */
     display: 'flex',
     flexDirection: 'column',
     justifyContent: convertVerticalAlignment(verticalAlignment,),
@@ -50859,6 +50903,7 @@ export {
   createRendererMotionComponent,
   createScopedAnimate,
   cssBackgroundSize,
+  cssCollector,
   cubicBezier,
   cubicBezierAsString,
   CustomCursorHost,
