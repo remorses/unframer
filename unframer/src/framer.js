@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.IBYFR5C4.mjs
+// /:https://app.framerstatic.com/framer.2KKSHREQ.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12842,23 +12842,26 @@ function forwardCurrentQueryParams(href,) {
   }
   return forwardQueryParams(queryParamsString, href,);
 }
+var FRAMER_VARIANT_KEY = 'framer_variant';
 function forwardQueryParams(queryParamsString, href,) {
   const startOfHash = href.indexOf('#',);
   const hrefWithoutHash = startOfHash === -1 ? href : href.substring(0, startOfHash,);
   const hash2 = startOfHash === -1 ? '' : href.substring(startOfHash,);
   const startOfSearch = hrefWithoutHash.indexOf('?',);
-  if (startOfSearch === -1) {
-    return hrefWithoutHash + queryParamsString + hash2;
-  }
+  const baseUrl = startOfSearch === -1 ? hrefWithoutHash : hrefWithoutHash.substring(0, startOfSearch,);
+  const searchString = startOfSearch === -1 ? '' : hrefWithoutHash.substring(startOfSearch,);
+  const newSearchParams = new URLSearchParams(searchString,);
   const currentSearchParams = new URLSearchParams(queryParamsString,);
-  const newSearchString = hrefWithoutHash.substring(startOfSearch + 1,);
-  const newSearchParams = new URLSearchParams(newSearchString,);
   for (const [key7, value,] of currentSearchParams) {
-    if (!newSearchParams.has(key7,)) {
-      newSearchParams.append(key7, value,);
-    }
+    if (newSearchParams.has(key7,)) continue;
+    if (key7 === FRAMER_VARIANT_KEY) continue;
+    newSearchParams.append(key7, value,);
   }
-  return hrefWithoutHash.substring(0, startOfSearch + 1,) + newSearchParams.toString() + hash2;
+  const newSearchString = newSearchParams.toString();
+  if (newSearchString === '') {
+    return hrefWithoutHash + hash2;
+  }
+  return baseUrl + '?' + newSearchString + hash2;
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   var _a;
@@ -36084,6 +36087,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     onError,
     onLoading,
   };
+  const submissionInProgressRef = React4.useRef(false,);
   async function redirectTo(link,) {
     var _a, _b;
     if (isString(link,)) {
@@ -36112,15 +36116,18 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
   const handleSubmit = async (event) => {
     var _a, _b, _c, _d, _e, _f;
     event.preventDefault();
-    if (!action || !projectHash) return;
-    dispatch({
-      type: 'submit',
-    },);
+    if (!action || !projectHash || submissionInProgressRef.current) return;
+    submissionInProgressRef.current = true;
     const data2 = new FormData(event.currentTarget,);
     await yieldToMain({
-      priority: 'user-blocking',
+      priority: 'user-visible',
       continueAfter: 'paint',
     },);
+    startTransition2(() =>
+      dispatch({
+        type: 'submit',
+      },)
+    );
     addUTMTagsToFormData(data2, safeWindow.document,);
     for (const [key7, value,] of data2) {
       if (value instanceof File) data2.delete(key7,);
@@ -36152,6 +36159,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
       (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
       console.error(error,);
     }
+    submissionInProgressRef.current = false;
   };
   const handleKeyDown = (event) => {
     const {
