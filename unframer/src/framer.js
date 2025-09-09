@@ -9,11 +9,12 @@ import {
   __privateMethod,
   __privateSet,
   __publicField,
+  __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-A2PMVMFI.js';
+} from './framer-chunks/chunk-VUHWYTYT.js';
 
-// /:https://app.framerstatic.com/chunk-BLFSVU7M.mjs
+// /:https://app.framerstatic.com/chunk-NOJDLQXT.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { useCallback, useContext, useId, } from 'react';
@@ -27,43 +28,6 @@ import { forwardRef, } from 'react';
 import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
 var __unframerNavigator = typeof window !== 'undefined' ? navigator : void 0;
-var require_memoize_browser_cjs = __commonJS({
-  '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    function memoize3(fn,) {
-      var cache2 = {};
-      return function (arg,) {
-        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
-        return cache2[arg];
-      };
-    }
-    exports.default = memoize3;
-  },
-},);
-var require_is_prop_valid_browser_cjs = __commonJS({
-  '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    function _interopDefault(ex,) {
-      return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
-    }
-    var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
-    var reactPropsRegex2 =
-      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
-    var index = memoize3(function (prop,) {
-      return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
-    },/* Z+1 */
-    );
-    exports.default = index;
-  },
-},);
 var LayoutGroupContext = createContext({},);
 var isBrowser = typeof window !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
@@ -4590,7 +4554,7 @@ function loadExternalIsValidProp(isValidProp,) {
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
-  loadExternalIsValidProp(require_is_prop_valid_browser_cjs().default,);
+  loadExternalIsValidProp(__require('@emotion/is-prop-valid',).default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
@@ -11214,13 +11178,14 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.JYARJRD7.mjs
+// /:https://app.framerstatic.com/framer.V2QOA7YH.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
+import { useSyncExternalStore, } from 'react';
 import { createRef, } from 'react';
 import { useTransition, } from 'react';
 import { cloneElement as cloneElement32, } from 'react';
@@ -23492,22 +23457,10 @@ function getIntrinsicSizeForBackgroundImage(background,) {
       height: background.pixelHeight,
     };
   }
-  return parseImageSizeFromSrc(background.src,);
-}
-function parseImageSizeFromSrc(src,) {
-  if (!src) return void 0;
-  let url;
-  try {
-    url = new URL(src,);
-  } catch {
-    return void 0;
-  }
-  const width = url.searchParams.get('width',);
-  const height = url.searchParams.get('height',);
-  if (width && height) {
+  if (background.src === void 0) {
     return {
-      width: parseInt(width,),
-      height: parseInt(height,),
+      width: 1,
+      height: 1,
     };
   }
   return void 0;
@@ -35868,23 +35821,6 @@ function resolvePageScope(pageLink, router,) {
     siteCanonicalURL: void 0,
   },);
 }
-var IgnoreErrors = class extends Component2 {
-  constructor() {
-    super(...arguments,);
-    __publicField(this, 'state', {
-      error: void 0,
-    },);
-  }
-  static getDerivedStateFromError(error,) {
-    return {
-      error,
-    };
-  }
-  render() {
-    if (this.state.error) return null;
-    return this.props.children;
-  }
-};
 var salt = 'framer';
 var difficulty = 3;
 var tokenLength = 30;
@@ -36246,6 +36182,61 @@ function responseHasError(response,) {
   return typeof response === 'object' && response !== null && 'error' in response && isObject2(response.error,) &&
     'message' in response.error && typeof response.error.message === 'string';
 }
+var FORCE_SHOW_EDITORBAR_LOCALSTORAGE_KEY = '__framer_force_showing_editorbar_since';
+var IgnoreErrors = class extends Component2 {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, 'state', {
+      error: void 0,
+    },);
+  }
+  static getDerivedStateFromError(error,) {
+    return {
+      error,
+    };
+  }
+  render() {
+    if (this.state.error) return null;
+    return this.props.children;
+  }
+};
+var isPrioritized = () => {
+  try {
+    return !!localStorage[FORCE_SHOW_EDITORBAR_LOCALSTORAGE_KEY];
+  } catch (e) {
+    return false;
+  }
+};
+var isntPrioritized = () => !isPrioritized();
+var getServerSnapshot = () => false;
+var noOpSubscribe = () => () => {};
+function EditorBarLauncher({
+  EditorBar,
+  fast = false,
+},) {
+  const libraryFeatures = useLibraryFeatures();
+  const framerSiteId = useContext(FormContext,);
+  const enabled = useSyncExternalStore(noOpSubscribe, fast ? isPrioritized : isntPrioritized, getServerSnapshot,);
+  const editorBarFeatures = useMemo2(() => {
+    const features = {};
+    let key7;
+    for (key7 in libraryFeatures) {
+      if (libraryFeatures.hasOwnProperty(key7,) && key7.startsWith('editorBar',)) {
+        features[key7] = libraryFeatures[key7];
+      }
+    }
+    return features;
+  }, [libraryFeatures,],);
+  if (!EditorBar || !framerSiteId || !enabled) return null;
+  return /* @__PURE__ */ jsx3(IgnoreErrors, {
+    children: /* @__PURE__ */ jsx3(Suspense2, {
+      children: /* @__PURE__ */ jsx3(EditorBar, {
+        framerSiteId,
+        features: editorBarFeatures,
+      },),
+    },),
+  },);
+}
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
   if (a.pathVariables === b.pathVariables) return true;
@@ -36420,7 +36411,7 @@ function Router({
   locales = EMPTY_ARRAY,
   preserveQueryParams = false,
   LayoutTemplate,
-  editorBar,
+  EditorBar,
   siteCanonicalURL,
 },) {
   useMarkRouterEffects();
@@ -36717,38 +36708,46 @@ function Router({
   }));
   return /* @__PURE__ */ jsx3(RouterAPIProvider, {
     api,
-    children: /* @__PURE__ */ jsx3(LocaleInfoContext.Provider, {
+    children: /* @__PURE__ */ jsxs(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: /* @__PURE__ */ jsx3(SynchronousSuspenseErrorBoundary, {
-        children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-          children: [
-            /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
-              notFoundPage,
-              defaultPageStyle,
-              forceUpdateKey: dep,
-              children: [
-                /* @__PURE__ */ jsx3(MarkSuspenseEffects.Start, {},),
-                /* @__PURE__ */ jsx3(WithLayoutTemplate, {
-                  LayoutTemplate,
-                  routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
-                  style: defaultPageStyle,
-                  children: (inLayoutTemplate) => {
-                    return /* @__PURE__ */ jsx3(Fragment, {
-                      children: pageExistsInCurrentLocale
-                        ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
-                        : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                        notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                    }, remountKey,);
-                  },
-                },),
-              ],
-            },),
-            editorBar,
-            /* @__PURE__ */ jsx3(TurnOnReactEventHandling, {},),
-            /* @__PURE__ */ jsx3(MarkSuspenseEffects.End, {},),
-          ],
+      children: [
+        EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
+          EditorBar,
+          fast: true,
         },),
-      },),
+        /* @__PURE__ */ jsx3(SynchronousSuspenseErrorBoundary, {
+          children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+            children: [
+              /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
+                notFoundPage,
+                defaultPageStyle,
+                forceUpdateKey: dep,
+                children: [
+                  /* @__PURE__ */ jsx3(MarkSuspenseEffects.Start, {},),
+                  /* @__PURE__ */ jsx3(WithLayoutTemplate, {
+                    LayoutTemplate,
+                    routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
+                    style: defaultPageStyle,
+                    children: (inLayoutTemplate) => {
+                      return /* @__PURE__ */ jsx3(Fragment, {
+                        children: pageExistsInCurrentLocale
+                          ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                          : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                          notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                      }, remountKey,);
+                    },
+                  },),
+                ],
+              },),
+              EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
+                EditorBar,
+              },),
+              /* @__PURE__ */ jsx3(TurnOnReactEventHandling, {},),
+              /* @__PURE__ */ jsx3(MarkSuspenseEffects.End, {},),
+            ],
+          },),
+        },),
+      ],
     },),
   },);
 }
@@ -37295,9 +37294,7 @@ function PageRoot({
                 width: 'auto',
               },
               preserveQueryParams,
-              editorBar: /* @__PURE__ */ jsx3(EditorBarLauncher, {
-                EditorBar,
-              },),
+              EditorBar,
               disableHistory,
               LayoutTemplate,
               siteCanonicalURL,
@@ -37324,37 +37321,6 @@ function PageRoot({
       },),
     },);
   }
-}
-function EditorBarLauncher({
-  EditorBar,
-},) {
-  const libraryFeatures = useLibraryFeatures();
-  const [mounted, setMounted,] = useState(false,);
-  const framerSiteId = useContext(FormContext,);
-  const editorBarFeatures = useMemo2(() => {
-    const features = {};
-    let key7;
-    for (key7 in libraryFeatures) {
-      if (libraryFeatures.hasOwnProperty(key7,) && key7.startsWith('editorBar',)) {
-        features[key7] = libraryFeatures[key7];
-      }
-    }
-    return features;
-  }, [libraryFeatures,],);
-  useEffect(() => {
-    startTransition2(() => {
-      setMounted(true,);
-    },);
-  }, [],);
-  if (!EditorBar || !framerSiteId || !mounted) return null;
-  return /* @__PURE__ */ jsx3(IgnoreErrors, {
-    children: /* @__PURE__ */ jsx3(Suspense2, {
-      children: /* @__PURE__ */ jsx3(EditorBar, {
-        framerSiteId,
-        features: editorBarFeatures,
-      },),
-    },),
-  },);
 }
 var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function ResolveLinksInner({
   links,
@@ -42759,8 +42725,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition14) => {
-      startTransition14(() => {
+    const renderNextPage = (startTransition13) => {
+      startTransition13(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -45601,11 +45567,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-2KFYDWCN-PJC2DDXK.js');
+      const supportedFonts = await import('./framer-chunks/google-63PUBKA6-AMAUIPXM.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-EOIRPPWV-VDFFNW4K.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-V2SGEFJT-AVIABYEX.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -45615,15 +45581,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-HSMCYMMG-DWNQGSHN.js');
+      const features = await import('./framer-chunks/google-KTMKGB4J-RA7CAZTC.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-Y53BJZLK-EUQIV252.js');
+      const features = await import('./framer-chunks/fontshare-YCG7BCG4-T3OENDSJ.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-TNC5DMGA-CVBTEZ7G.js');
+      const features = await import('./framer-chunks/framer-font-T5XNAHJ3-SBU5UWOY.js');
       return features == null ? void 0 : features.default;
     }
     default:
@@ -46167,10 +46133,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-S367OFIE-AWJEPMSF.js')).default;
+            return (await import('./framer-chunks/google-7QNFQWAU-FKX5MRKV.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-2X4LZ75B-D2V5BX73.js')).default;
+            return (await import('./framer-chunks/fontshare-SWUWNY3H-GSSY33IO.js')).default;
           }
           default:
             assertNever(source,);
@@ -50795,7 +50761,7 @@ var package_default = {
     '@types/dom-navigation': '^1.0.5',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
-    '@types/node': '22.17',
+    '@types/node': '22.18',
     '@types/react': '18.2',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
