@@ -9,12 +9,11 @@ import {
   __privateMethod,
   __privateSet,
   __publicField,
-  __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-VUHWYTYT.js';
+} from './framer-chunks/chunk-A2PMVMFI.js';
 
-// /:https://app.framerstatic.com/chunk-NOJDLQXT.mjs
+// /:https://app.framerstatic.com/chunk-BLFSVU7M.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { useCallback, useContext, useId, } from 'react';
@@ -28,6 +27,43 @@ import { forwardRef, } from 'react';
 import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
 var __unframerNavigator = typeof window !== 'undefined' ? navigator : void 0;
+var require_memoize_browser_cjs = __commonJS({
+  '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    function memoize3(fn,) {
+      var cache2 = {};
+      return function (arg,) {
+        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
+        return cache2[arg];
+      };
+    }
+    exports.default = memoize3;
+  },
+},);
+var require_is_prop_valid_browser_cjs = __commonJS({
+  '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    function _interopDefault(ex,) {
+      return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
+    }
+    var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
+    var reactPropsRegex2 =
+      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+    var index = memoize3(function (prop,) {
+      return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
+    },/* Z+1 */
+    );
+    exports.default = index;
+  },
+},);
 var LayoutGroupContext = createContext({},);
 var isBrowser = typeof window !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
@@ -4554,7 +4590,7 @@ function loadExternalIsValidProp(isValidProp,) {
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
-  loadExternalIsValidProp(__require('@emotion/is-prop-valid',).default,);
+  loadExternalIsValidProp(require_is_prop_valid_browser_cjs().default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
@@ -11178,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.V2QOA7YH.mjs
+// /:https://app.framerstatic.com/framer.PJ4LQYY3.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -45567,11 +45603,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-63PUBKA6-AMAUIPXM.js');
+      const supportedFonts = await import('./framer-chunks/google-2KFYDWCN-PJC2DDXK.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-V2SGEFJT-AVIABYEX.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-EOIRPPWV-VDFFNW4K.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -45581,15 +45617,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-KTMKGB4J-RA7CAZTC.js');
+      const features = await import('./framer-chunks/google-HSMCYMMG-DWNQGSHN.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-YCG7BCG4-T3OENDSJ.js');
+      const features = await import('./framer-chunks/fontshare-Y53BJZLK-EUQIV252.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-T5XNAHJ3-SBU5UWOY.js');
+      const features = await import('./framer-chunks/framer-font-TNC5DMGA-CVBTEZ7G.js');
       return features == null ? void 0 : features.default;
     }
     default:
@@ -46133,10 +46169,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-7QNFQWAU-FKX5MRKV.js')).default;
+            return (await import('./framer-chunks/google-S367OFIE-AWJEPMSF.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-SWUWNY3H-GSSY33IO.js')).default;
+            return (await import('./framer-chunks/fontshare-2X4LZ75B-D2V5BX73.js')).default;
           }
           default:
             assertNever(source,);
