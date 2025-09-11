@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.PJ4LQYY3.mjs
+// /:https://app.framerstatic.com/framer.MRKGI23E.mjs
 import { lazy as ReactLazy, } from 'react';
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -33319,7 +33319,7 @@ var SynchronousSuspenseErrorBoundary = class extends Component2 {
       error,
       '\n\nComponent stack:\n',
       componentStack,
-      '\n\nThis error indicates a state update wasn\u2019t wrapped with startTransition. Some of the UI might flash as a result. If you are the author of this website, check recently added custom code, and if the issue persists, report it to the Framer team via https://www.framer.com/contact/.',
+      '\n\nThis error indicates a state update wasn\u2019t wrapped with `startTransition`. Some of the UI might flash as a result. If you are the author of this website, update external components and check recently added custom code or code overrides. In case the issue persists, report it to the Framer team via https://www.framer.com/contact/.',
     );
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : void 0;
     sendTrackingEvent('published_site_load_recoverable_error', {
@@ -44768,8 +44768,10 @@ var Mixed = Symbol('Mixed',);
 var DEPENDENCIES_MODULE_NAME = 'dependencies';
 var DEPENDENCIES_MODULE_TYPE = 'config';
 var DEPENDENCIES_MODULE_TYPE_SLASH_NAME = `${DEPENDENCIES_MODULE_TYPE}/${DEPENDENCIES_MODULE_NAME}`;
-var IMPORT_MAP_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/importMap.json`;
-var DEPENDENCIES_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/dependencies.json`;
+var IMPORT_MAP_FILE_NAME = 'importMap.json';
+var DEPENDENCIES_FILE_NAME = 'dependencies.json';
+var IMPORT_MAP_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${IMPORT_MAP_FILE_NAME}`;
+var DEPENDENCIES_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${DEPENDENCIES_FILE_NAME}`;
 var USE_FREEZE = false;
 var List;
 ((List2) => {
