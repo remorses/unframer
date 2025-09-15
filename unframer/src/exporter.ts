@@ -1202,7 +1202,7 @@ export async function extractPropControlsUnsafe(
                         UNFRAMER_MAP_PACKAGES,
                     ),
                 },
-            },
+            } as any,
             (err, stdout, stderr) => {
                 clearTimeout(timer)
                 if (err) {
