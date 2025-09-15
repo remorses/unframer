@@ -11214,8 +11214,8 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.MRKGI23E.mjs
-import { lazy as ReactLazy, } from 'react';
+// /:https://app.framerstatic.com/framer.XY7LZI3O.mjs
+
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
@@ -12151,30 +12151,39 @@ var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
   return typeof componentType === 'object' && componentType !== null && !isValidElement(componentType,) && preloadKey in componentType;
 }
-function lazy(factory,) {
-  const LazyComponent = ReactLazy(factory,);
+function lazy(factory, moduleName = 'default',) {
   let factoryPromise;
   let LoadedComponent;
   let hasRendered = false;
-  const Component17 = forwardRef(function LazyWithPreload(props, ref,) {
-    useEffect(() => {
-      hasRendered = true;
-    }, [],);
-    const Comp = LoadedComponent ?? LazyComponent;
-    return /* @__PURE__ */ jsx3(Comp, {
-      ref,
-      ...props,
-    },);
-  },);
-  Component17.preload = () => {
+  let error;
+  const load = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
-        LoadedComponent = module.default;
+        if (!(moduleName in module)) throw new Error(`Module does not contain export '${moduleName}'`,);
+        LoadedComponent = module[moduleName];
         return LoadedComponent;
+      },).catch((err) => {
+        error = err;
       },);
     }
     return factoryPromise;
   };
+  const Component17 = forwardRef(function LazyWithPreload(props, ref,) {
+    useEffect(() => {
+      hasRendered = true;
+    }, [],);
+    if (error) {
+      throw error;
+    }
+    if (!LoadedComponent) {
+      throw load();
+    }
+    return /* @__PURE__ */ jsx3(LoadedComponent, {
+      ref,
+      ...props,
+    },);
+  },);
+  Component17.preload = load;
   Component17.getStatus = () => {
     return {
       hasLoaded: LoadedComponent !== void 0,
@@ -31781,9 +31790,6 @@ var framerCSSMarker = 'data-framer-css-ssr';
 var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
-      cssCollector: cssCollectorEnabled,
-    } = useLibraryFeatures();
-    const {
       sheet,
       cache: cache2,
     } = React4.useContext(StyleSheetContext,) ?? {};
@@ -31791,27 +31797,7 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
     if (!isBrowser2()) {
       if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      if (cssCollectorEnabled) {
-        cssCollector.add(concatenatedCSS, id3,);
-      } else {
-        return /* @__PURE__ */ jsxs(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx3('style', {
-              ...{
-                [framerCSSMarker]: true,
-              },
-              'data-framer-component': id3,
-              dangerouslySetInnerHTML: {
-                __html: concatenatedCSS,
-              },
-            },),
-            /* @__PURE__ */ jsx3(Component17, {
-              ...props,
-              ref,
-            },),
-          ],
-        },);
-      }
+      cssCollector.add(concatenatedCSS, id3,);
     }
     useInsertionEffect(() => {
       if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
@@ -44252,6 +44238,27 @@ function createVariantName(weight, style2,) {
   }
   return `${fontWeightNames[weight]}`;
 }
+var MapWithHash = class extends Map {
+  constructor() {
+    super(...arguments,);
+    __publicField(this, '_hash', 0,);
+  }
+  get hash() {
+    return this._hash;
+  }
+  set(key7, value,) {
+    this._hash++;
+    return super.set(key7, value,);
+  }
+  delete(key7,) {
+    this._hash++;
+    return super.delete(key7,);
+  }
+  clear() {
+    this._hash++;
+    return super.clear();
+  }
+};
 function isVariableFont(font,) {
   return Boolean(font.variationAxes,);
 }
@@ -46200,7 +46207,7 @@ function isValidVariationAxes(data2,) {
 var FontStore = class {
   constructor() {
     __publicField(this, 'enabled', false,);
-    __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'bySelector', new MapWithHash(),);
     __publicField(this, 'loadedSelectors', /* @__PURE__ */ new Set(),);
     __publicField(this, 'getGoogleFontsListPromise',);
     __publicField(this, 'getFontshareFontsListPromise',);
@@ -46218,20 +46225,29 @@ var FontStore = class {
     __publicField(this, 'builtIn',);
     __publicField(this, 'framer',);
     __publicField(this, 'custom',);
+    __publicField(this, 'bySelectorValuesCache',);
     this.local = new LocalFontSource();
     this.google = new GoogleFontSource();
     this.fontshare = new FontshareSource();
     this.framer = new FramerFontSource();
     this.custom = new CustomFontSource();
     this.builtIn = new BuiltInFontSource();
-    this.bySelector = /* @__PURE__ */ new Map();
     this.importLocalFonts();
+  }
+  get hash() {
+    return this.bySelector.hash;
   }
   addFont(font,) {
     this.bySelector.set(font.selector, font,);
   }
   getAvailableFonts() {
-    return Array.from(this.bySelector.values(),);
+    if (!this.bySelectorValuesCache || this.bySelectorValuesCache.hash !== this.bySelector.hash) {
+      this.bySelectorValuesCache = {
+        result: Array.from(this.bySelector.values(),),
+        hash: this.bySelector.hash,
+      };
+    }
+    return this.bySelectorValuesCache.result;
   }
   importLocalFonts() {
     for (const font of this.local.importFonts()) {
@@ -47685,13 +47701,14 @@ var defaultValues2 = {
 function isEffectKey(key7,) {
   return key7 in defaultValues2;
 }
-function createKeyframes(effect,) {
+function createKeyframes(effect, shouldReduceMotion,) {
   const out = {};
   for (const key7 in effect) {
     if (!isEffectKey(key7,)) continue;
     const effectValue = effect[key7];
     const defaultValue = defaultValues2[key7];
     if (isUndefined(effectValue,) || isUndefined(defaultValue,)) continue;
+    if (shouldReduceMotion && key7 !== 'opacity') continue;
     out[key7] = [effectValue, defaultValue,];
   }
   return out;
@@ -47702,7 +47719,16 @@ var emojiSplitRe = /* @__PURE__ */ (() => {
     'gu',
   );
 })();
-function tokenizeText(text, tokenization = 'character', elements, style2,) {
+function tokenizeText(text, tokenization = 'character', elements, shouldReduceMotion, style2,) {
+  if (shouldReduceMotion) {
+    const ref = newOverrideableRef();
+    elements.add(ref,);
+    return /* @__PURE__ */ jsx3('span', {
+      ref,
+      style: style2,
+      children: text,
+    },);
+  }
   switch (tokenization) {
     case 'character':
     // When we want to animate "lines" that aren't split by newlines, but
@@ -47788,7 +47814,7 @@ function transformString(effect,) {
   if (isNumber2(effect.skewY,)) transforms.push(`skewY(${effect.skewY}deg)`,);
   return transforms.join(' ',);
 }
-function getInitialEffectStyle(canPlay, canAnimate2, effect,) {
+function getInitialEffectStyle(canPlay, canAnimate2, effect, shouldReduceMotion,) {
   if (!effect || !effect.effect) return void 0;
   const type = effect.type;
   switch (type) {
@@ -47798,8 +47824,8 @@ function getInitialEffectStyle(canPlay, canAnimate2, effect,) {
           if (!canPlay || !canAnimate2) return void 0;
           return {
             opacity: effect.effect.opacity,
-            filter: effect.effect.filter,
-            transform: transformString(effect.effect,),
+            filter: shouldReduceMotion ? void 0 : effect.effect.filter,
+            transform: shouldReduceMotion ? void 0 : transformString(effect.effect,),
           };
         case 'line':
         case 'word':
@@ -47813,8 +47839,8 @@ function getInitialEffectStyle(canPlay, canAnimate2, effect,) {
           return {
             display: 'inline-block',
             opacity: effect.effect.opacity,
-            filter: effect.effect.filter,
-            transform: transformString(effect.effect,),
+            filter: shouldReduceMotion ? void 0 : effect.effect.filter,
+            transform: shouldReduceMotion ? void 0 : transformString(effect.effect,),
           };
       }
     default:
@@ -47825,6 +47851,7 @@ function useTextEffect(config, ref, preview,) {
   const elements = useConstant2(() => /* @__PURE__ */ new Set());
   const isRenderingStaticContent = isStaticRenderer();
   const canPlay = preview || !isRenderingStaticContent;
+  const shouldReduceMotion = useReducedMotionConfig();
   const state = React2.useRef({
     hasMounted: false,
     hasAnimatedOnce: false,
@@ -47861,7 +47888,7 @@ function useTextEffect(config, ref, preview,) {
           const cleanupRef = {
             current: void 0,
           };
-          void runAppearEffect(tokenization2, effect.effect, elements, transition, startDelay, repeat, () => {
+          void runAppearEffect(tokenization2, effect.effect, elements, transition, startDelay, repeat, shouldReduceMotion, () => {
             Object.assign(state.current, {
               isAnimating: false,
             },);
@@ -47917,9 +47944,10 @@ function useTextEffect(config, ref, preview,) {
         canPlay,
         preview || mayAnimate(hasMounted, hasAnimatedOnce, effect,),
         state.current.effect,
+        shouldReduceMotion,
       );
       return {
-        text: (text) => tokenizeText(text, tokenization, elements, effectStyle,),
+        text: (text) => tokenizeText(text, tokenization, elements, shouldReduceMotion, effectStyle,),
         props: (style2) => {
           if ((effect == null ? void 0 : effect.tokenization) !== 'element') return void 0;
           const r = newOverrideableRef();
@@ -47946,7 +47974,7 @@ function useTextEffect(config, ref, preview,) {
             transition,
             startDelay,
           } = effect;
-          void runAppearEffect(tokenization, effect.effect, elements, transition, startDelay,);
+          void runAppearEffect(tokenization, effect.effect, elements, transition, startDelay, false, shouldReduceMotion,);
           break;
         }
         default:
@@ -47974,10 +48002,11 @@ async function runAppearEffect(
   transition,
   startDelay = 0,
   repeat = false,
+  shouldReduceMotion,
   callback,
   cleanupRef,
 ) {
-  const enter = createKeyframes(effect,);
+  const enter = createKeyframes(effect, shouldReduceMotion,);
   const controller = new AbortController();
   if (cleanupRef) cleanupRef.current = () => controller.abort();
   switch (tokenization) {
@@ -47994,14 +48023,20 @@ async function runAppearEffect(
         },),
       },).then(() => callback == null ? void 0 : callback());
       if (!repeat || !cleanupRef) return;
-      cleanupRef.current = () =>
-        void animate(list, effect, {
+      cleanupRef.current = () => {
+        const actualEffect = shouldReduceMotion
+          ? {
+            opacity: effect.opacity,
+          }
+          : effect;
+        void animate(list, actualEffect, {
           ...transition,
           restDelta: 1e-3,
           delay: stagger((transition == null ? void 0 : transition.delay) ?? 0, {
             startDelay,
           },),
         },);
+      };
       return;
     }
     case 'line': {
@@ -48034,8 +48069,13 @@ async function runAppearEffect(
       if (!repeat || !cleanupRef) return;
       cleanupRef.current = () => {
         if (list.length === 0) return;
+        const actualEffect = shouldReduceMotion
+          ? {
+            opacity: effect.opacity,
+          }
+          : effect;
         list.forEach((group, i,) => {
-          void animate(group, effect, {
+          void animate(group, actualEffect, {
             ...transition,
             restDelta: 1e-3,
             delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
@@ -50759,10 +50799,13 @@ function initialRouteComponent(component,) {
 function useInitialRouteComponent(routes, homeNodeId,) {
   var _a;
   const InitialRouteComponent = (_a = routes[homeNodeId]) == null ? void 0 : _a.page;
-  const [RouteComponent, setRouteComponent,] = useState(initialRouteComponent(InitialRouteComponent,),);
+  const [RouteComponent, setRouteComponent,] = useState(() => initialRouteComponent(InitialRouteComponent,));
   useEffect(() => {
     if (withPreload(InitialRouteComponent,)) {
-      void InitialRouteComponent.preload().then(setRouteComponent,);
+      void (async () => {
+        await InitialRouteComponent.preload();
+        setRouteComponent(InitialRouteComponent,);
+      })();
     }
   }, [],);
   return RouteComponent;
