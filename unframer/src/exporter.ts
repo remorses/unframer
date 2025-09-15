@@ -1211,7 +1211,7 @@ export async function extractPropControlsUnsafe(
                     return rej(err)
                 }
 
-                res(stdout)
+                res(stdout.toString())
             },
         )
 
