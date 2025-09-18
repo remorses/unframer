@@ -343,7 +343,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     isProcessing: false,
   };
   const flagRunNextFrame = () => runNextFrame = true;
-  const steps2 = stepsOrder.reduce((acc, key7,) => {
+  const steps22 = stepsOrder.reduce((acc, key7,) => {
     acc[key7] = createRenderStep(flagRunNextFrame, allowKeepAlive ? key7 : void 0,);
     return acc;
   }, {},);
@@ -356,7 +356,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     preRender,
     render,
     postRender,
-  } = steps2;
+  } = steps22;
   const processBatch = () => {
     const timestamp = MotionGlobalConfig.useManualTiming ? state.timestamp : performance.now();
     runNextFrame = false;
@@ -387,7 +387,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     }
   };
   const schedule = stepsOrder.reduce((acc, key7,) => {
-    const step2 = steps2[key7];
+    const step2 = steps22[key7];
     acc[key7] = (process2, keepAlive = false, immediate = false,) => {
       if (!runNextFrame) wake();
       return step2.schedule(process2, keepAlive, immediate,);
@@ -396,14 +396,14 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
   }, {},);
   const cancel = (process2) => {
     for (let i = 0; i < stepsOrder.length; i++) {
-      steps2[stepsOrder[i]].cancel(process2,);
+      steps22[stepsOrder[i]].cancel(process2,);
     }
   };
   return {
     schedule,
     cancel,
     state,
-    steps: steps2,
+    steps: steps22,
   };
 }
 var {
@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.XY7LZI3O.mjs
+// /:https://app.framerstatic.com/framer.4BVLRPEB.mjs
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11224,6 +11224,7 @@ import ReactDOM from 'react-dom';
 import { useSyncExternalStore, } from 'react';
 import { createRef, } from 'react';
 import { useTransition, } from 'react';
+import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerNavigator2 = typeof window !== 'undefined' ? navigator : void 0;
 var require_hsluv = __commonJS({
@@ -12168,7 +12169,7 @@ function lazy(factory, moduleName = 'default',) {
     }
     return factoryPromise;
   };
-  const Component17 = forwardRef(function LazyWithPreload(props, ref,) {
+  const Component18 = forwardRef(function LazyWithPreload(props, ref,) {
     useEffect(() => {
       hasRendered = true;
     }, [],);
@@ -12183,14 +12184,14 @@ function lazy(factory, moduleName = 'default',) {
       ...props,
     },);
   },);
-  Component17.preload = load;
-  Component17.getStatus = () => {
+  Component18.preload = load;
+  Component18.getStatus = () => {
     return {
       hasLoaded: LoadedComponent !== void 0,
       hasRendered,
     };
   };
-  return Component17;
+  return Component18;
 }
 var objectKeys = Object.keys;
 function hasProp(o, prop,) {
@@ -21314,6 +21315,7 @@ var pageContentWrapperWrapperCSSRules = [
   `[data-framer-component-type="PageContentWrapper"] > *, [data-framer-component-type="PageContentWrapper"] > [data-framer-component-type] { position: relative; }`,
 ];
 var presenceCSS = [`[data-is-present="false"], [data-is-present="false"] * { pointer-events: none !important; }`,];
+var lightboxCSS = [`.framer-lightbox-container { opacity: 1 !important; pointer-events: auto !important; }`,];
 var cursorCSS = [
   `[data-framer-cursor="pointer"] { cursor: pointer; }`,
   `[data-framer-cursor="grab"] { cursor: grab; }`,
@@ -21383,6 +21385,7 @@ var combineCSSRules =
     ...resetCSS,
     ...hideScrollbars,
     ...overflowClipFallbackCSSRules,
+    ...lightboxCSS,
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
@@ -23803,7 +23806,7 @@ function useMeasuredSize(ref,) {
   return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component17) => (props) => {
+var withMeasuredSize = (Component18) => (props) => {
   const ref = React4.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
@@ -23820,7 +23823,7 @@ var withMeasuredSize = (Component17) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx3(Component17, {
+    children: shouldRender && /* @__PURE__ */ jsx3(Component18, {
       ...props,
       width: (size == null ? void 0 : size.width) ?? fallbackWidth,
       height: (size == null ? void 0 : size.height) ?? fallbackHeight,
@@ -26800,7 +26803,7 @@ var clamp2 = (value, a, b,) => {
 var DraggingContext = /* @__PURE__ */ React4.createContext({
   dragging: false,
 },);
-function WithDragging(Component17,) {
+function WithDragging(Component18,) {
   const _WithDraggingHOC = class _WithDraggingHOC2 extends React4.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
@@ -27421,7 +27424,7 @@ function WithDragging(Component17,) {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx3(Component17, {
+        children: /* @__PURE__ */ jsx3(Component18, {
           ...originalProps,
         },),
       },);
@@ -27458,10 +27461,10 @@ function WithDragging(Component17,) {
     constraints: {},
     mouseWheel: false,
   },);
-  __publicField(_WithDraggingHOC, 'defaultProps', Object.assign({}, Component17.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
+  __publicField(_WithDraggingHOC, 'defaultProps', Object.assign({}, Component18.defaultProps, _WithDraggingHOC.draggingDefaultProps,),);
   let WithDraggingHOC = _WithDraggingHOC;
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics2.default)(withDragging, Component17,);
+  (0, import_hoist_non_react_statics2.default)(withDragging, Component18,);
   return withDragging;
 }
 var hoverProps = {
@@ -28712,7 +28715,7 @@ function useInfiniteScroll({
     enabled: paginationInfo.currentPage < paginationInfo.totalPages,
   },);
 }
-function withInfiniteScroll(Component17,) {
+function withInfiniteScroll(Component18,) {
   return React4.forwardRef(({
     __paginationInfo,
     __loadMore,
@@ -28725,7 +28728,7 @@ function withInfiniteScroll(Component17,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -31632,7 +31635,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component17, override,) {
+function WithOverride(Component18, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext(DataObserverContext,);
@@ -31641,14 +31644,14 @@ function WithOverride(Component17, override,) {
       style: style2,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...rest,
       ...overrideProps,
       _initialStyle: style2,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component17,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component17.displayName || Component17.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component18,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component18.displayName || Component18.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -31787,7 +31790,7 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
   React4.forwardRef((props, ref,) => {
     const {
       sheet,
@@ -31808,7 +31811,7 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css22.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...props,
       ref,
     },);
@@ -32117,7 +32120,7 @@ var AnimationCollector = class {
 };
 _variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component17,) {
+function withOptimizedAppearEffect(Component18,) {
   return React4.forwardRef(({
     optimized,
     ...props
@@ -32140,7 +32143,7 @@ function withOptimizedAppearEffect(Component17,) {
       );
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ref,
       ...props,
       ...disabledProps,
@@ -33094,11 +33097,11 @@ function addMotionValueStyle(style2, values,) {
 function isVariantOrVariantList2(value,) {
   return isString(value,) || Array.isArray(value,);
 }
-var withFX = (Component17) =>
+var withFX = (Component18) =>
   React4.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx3(Component17, {
+      return /* @__PURE__ */ jsx3(Component18, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -33108,7 +33111,7 @@ var withFX = (Component17) =>
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     if (disabledProps) {
-      return /* @__PURE__ */ jsx3(Component17, {
+      return /* @__PURE__ */ jsx3(Component18, {
         ...props,
         ...disabledProps,
         ref: forwardedRef,
@@ -33203,7 +33206,7 @@ var withFX = (Component17) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -33268,10 +33271,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(function Compo
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component17) =>
+var withGeneratedLayoutId = (Component18) =>
   React4.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -33684,10 +33687,10 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
   );
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
-    const Component17 = htmlElementAsMotionComponent(tagName,);
+    const Component18 = htmlElementAsMotionComponent(tagName,);
     return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx3(Component17, {
+      children: /* @__PURE__ */ jsx3(Component18, {
         ...otherProps,
         ref,
         style: props.style,
@@ -33695,7 +33698,7 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
       },),
     },);
   } else {
-    const Component17 = tagName;
+    const Component18 = tagName;
     const {
       layoutId,
       layoutDependency,
@@ -33703,7 +33706,7 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, re
     } = otherProps;
     return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx3(Component17, {
+      children: /* @__PURE__ */ jsx3(Component18, {
         ...plainHTMLRenderableProps,
         ref,
         style: props.style,
@@ -34851,19 +34854,31 @@ function Floating({
       x: offsetX ?? 0,
       y: offsetY ?? 0,
     };
-    let getSafePlacementRect;
-    let position;
     let cleanup;
     let cleanupHasRun = false;
     let initialUpdateHasRun = false;
     let anchorRect;
-    let elementRect;
     let safePlacement;
     let calculatedRect;
     let latestEvent;
     let updateSafeArea;
     let scrollX = 0;
     let scrollY = 0;
+    const ancestorInfo = domReadGetAncestorInfo(anchorRef,);
+    const position = ancestorInfo.position;
+    const elementRect = contentRef.current.getBoundingClientRect();
+    const getSafePlacementRect = makeGetSafePlacementFloatingPositionRect({
+      placement,
+      alignment,
+      offset,
+      collisionDetectionSize: collisionDetection
+        ? {
+          width: safeWindow.innerWidth,
+          height: safeWindow.innerHeight,
+        }
+        : void 0,
+      collisionDetectionPadding,
+    },);
     const onRender = () => {
       if (cleanupHasRun) return;
       domWriteUpdatePosition(floatingPositionRef, position, calculatedRect, scrollX, scrollY,);
@@ -34897,29 +34912,12 @@ function Floating({
       safePlacement = safePlacementAndRect[0];
       calculatedRect = safePlacementAndRect[1];
     };
-    frame.read(() => {
-      if (cleanupHasRun || !contentRef.current) return;
-      const ancestorInfo = domReadGetAncestorInfo(anchorRef,);
-      position = ancestorInfo.position;
-      elementRect = contentRef.current.getBoundingClientRect();
-      getSafePlacementRect = makeGetSafePlacementFloatingPositionRect({
-        placement,
-        alignment,
-        offset,
-        collisionDetectionSize: collisionDetection
-          ? {
-            width: safeWindow.innerWidth,
-            height: safeWindow.innerHeight,
-          }
-          : void 0,
-        collisionDetectionPadding,
-      },);
-      domReadUpdateSafePlacementAndRect();
-      frame.update(onUpdate,);
-      frame.render(initialRender,);
-      if (!ancestorInfo.scrolls) return;
+    domReadUpdateSafePlacementAndRect();
+    onUpdate();
+    initialRender();
+    if (ancestorInfo.scrolls) {
       cleanup = domReadStartAnimationFrameLoop(domReadUpdateSafePlacementAndRect,);
-    },);
+    }
     if (!safeArea) {
       return () => {
         cleanup == null ? void 0 : cleanup();
@@ -34997,11 +34995,11 @@ function Floating({
   );
 }
 var Instance = /* @__PURE__ */ React4.forwardRef(function Instance2({
-  Component: Component17,
+  Component: Component18,
   ...props
 }, ref,) {
-  return Component17
-    ? /* @__PURE__ */ jsx3(Component17, {
+  return Component18
+    ? /* @__PURE__ */ jsx3(Component18, {
       ...props,
       ref,
     },)
@@ -35162,10 +35160,10 @@ function ChildrenCanSuspend({
     children,
   },);
 }
-function withChildrenCanSuspend(Component17,) {
+function withChildrenCanSuspend(Component18,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx3(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx3(Component17, {
+      children: /* @__PURE__ */ jsx3(Component18, {
         ...props,
         ref,
       },),
@@ -42590,12 +42588,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component17 = typeof target === 'string'
+    const Component18 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
       : React4.isValidElement(target,)
       ? target
       : null;
-    if (!Component17) return;
+    if (!Component18) return;
     const {
       appearsFrom,
       backdropColor,
@@ -42604,40 +42602,40 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component17,);
+        navigation.instant(Component18,);
         break;
       case 'fade':
-        navigation.fade(Component17, {
+        navigation.fade(Component18, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component17, {
+        navigation.push(Component18, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component17, {
+        navigation.flip(Component18, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component17, {
+        navigation.magicMotion(Component18, {
           animation,
         },);
         break;
       // Overlay stack navigation doesn't support updating the browser's
       // path.
       case 'modal':
-        navigation.modal(Component17, {
+        navigation.modal(Component18, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component17, {
+        navigation.overlay(Component18, {
           appearsFrom,
           backdropColor,
           animation,
@@ -42747,8 +42745,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition13) => {
-      startTransition13(() => {
+    const renderNextPage = (startTransition14) => {
+      startTransition14(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -43175,16 +43173,16 @@ function safeCSSValue(value,) {
   if (reUnsafeCharacters.test(value,)) return 'none';
   return value;
 }
-function withCodeBoundaryForOverrides(Component17, {
+function withCodeBoundaryForOverrides(Component18, {
   scopeId,
   nodeId,
   override,
   inComponentSlot,
 },) {
   if (!shouldEnableCodeBoundaries()) {
-    return override(Component17,);
+    return override(Component18,);
   }
-  const appliedOverride = tryToApplyOverride(Component17, override,);
+  const appliedOverride = tryToApplyOverride(Component18, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
     const nearestExternalComponent = useNearestExternalComponent();
@@ -43200,7 +43198,7 @@ function withCodeBoundaryForOverrides(Component17, {
           value: nodeId,
           children: /* @__PURE__ */ jsx3(CodeComponentBoundary, {
             getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
-            fallback: /* @__PURE__ */ jsx3(Component17, {
+            fallback: /* @__PURE__ */ jsx3(Component18, {
               ...props,
               ref,
             },),
@@ -43217,7 +43215,7 @@ function withCodeBoundaryForOverrides(Component17, {
           collectErrorToAnalytics(appliedOverride.error,);
           hasErrorBeenLogged = true;
         }
-        return /* @__PURE__ */ jsx3(Component17, {
+        return /* @__PURE__ */ jsx3(Component18, {
           ...props,
           ref,
         },);
@@ -43238,9 +43236,9 @@ function withCodeBoundaryForOverrides(Component17, {
   }
   return React4.forwardRef(CodeBoundaryForOverrides,);
 }
-function tryToApplyOverride(Component17, override,) {
+function tryToApplyOverride(Component18, override,) {
   try {
-    const ComponentWithOverrides = override(Component17,);
+    const ComponentWithOverrides = override(Component18,);
     return {
       status: 'success',
       Component: ComponentWithOverrides,
@@ -43260,7 +43258,7 @@ function singleFrame() {
     frame.postRender(() => resolve());
   },);
 }
-var withV1StrokeFX = (Component17) =>
+var withV1StrokeFX = (Component18) =>
   forwardRef((props, forwardedRef,) => {
     const {
       strokeEffectLength,
@@ -43313,7 +43311,7 @@ var withV1StrokeFX = (Component17) =>
         strokeDashoffset: value,
       }
       : void 0;
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...restProps,
       ...effect,
       ref: forwardedRef,
@@ -43329,14 +43327,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component17, info,) {
+function withMappedReactProps(Component18, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...props,
     },);
   };
@@ -43377,10 +43375,10 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component17) =>
+var withVariantAppearEffect = (Component18) =>
   React4.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx3(Component17, {
+      return /* @__PURE__ */ jsx3(Component18, {
         ...props,
         ref: forwardedRef,
       },);
@@ -43452,18 +43450,18 @@ var withVariantAppearEffect = (Component17) =>
       startTransition2(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx3(Component17, {
+      return /* @__PURE__ */ jsx3(Component18, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx3(Component17, {
+      return /* @__PURE__ */ jsx3(Component18, {
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component17) =>
+var withVariantFX = (Component18) =>
   React4.forwardRef(({
     initial,
     animate: animate3,
@@ -43480,7 +43478,7 @@ var withVariantFX = (Component17) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx3(Component17, {
+    return /* @__PURE__ */ jsx3(Component18, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -47277,7 +47275,313 @@ var styles3 = /* @__PURE__ */ (() => [
   },),
 ])();
 var FormSelect = /* @__PURE__ */ withCSS(Select, styles3, 'framer-lib-form-select',);
-var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
+function useEscToClose(isOpen, close,) {
+  useEffect(() => {
+    function handleKeyDown(e,) {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        close();
+      }
+    }
+    window.addEventListener('keyup', handleKeyDown,);
+    return () => window.removeEventListener('keyup', handleKeyDown,);
+  }, [isOpen, close,],);
+}
+var steps2 = [512, 1024, 2048, 4096,];
+function calculateImageWidth(aspectRatio2, maxWidth, totalHorizontalPadding, totalVerticalPadding,) {
+  const availableHeight = window.innerHeight - totalVerticalPadding;
+  const availableWidth = Math.min(window.innerWidth - totalHorizontalPadding, maxWidth,);
+  const maxWidthBasedOnHeight = availableHeight / aspectRatio2;
+  return Math.min(availableWidth, maxWidthBasedOnHeight,);
+}
+function optimisticallyDecodeImage(image, {
+  width,
+  height,
+},) {
+  if (!image.src || !image.srcSet) return;
+  const i = new window.Image();
+  i.src = image.src;
+  i.srcset = image.srcSet;
+  i.width = width;
+  i.height = height;
+  return i.decode();
+}
+function getPortalContainer2() {
+  return document.getElementById(templateOverlayContainerId,) ?? document.getElementById(overlayContainerId,) ?? document.body;
+}
+function getSidePadding(value, padding,) {
+  if (isNumber2(value,)) return value;
+  return padding ?? 0;
+}
+function getTotalVerticalPadding(lightbox,) {
+  return getSidePadding(lightbox == null ? void 0 : lightbox.paddingTop, lightbox == null ? void 0 : lightbox.padding,) +
+    getSidePadding(lightbox == null ? void 0 : lightbox.paddingBottom, lightbox == null ? void 0 : lightbox.padding,);
+}
+function getTotalHorizontalPadding(lightbox,) {
+  return getSidePadding(lightbox == null ? void 0 : lightbox.paddingLeft, lightbox == null ? void 0 : lightbox.padding,) +
+    getSidePadding(lightbox == null ? void 0 : lightbox.paddingRight, lightbox == null ? void 0 : lightbox.padding,);
+}
+function useStableCallback(callback,) {
+  const latest = useRef3(callback,);
+  latest.current = callback;
+  return useCallback((...args) => latest.current(...args,), [],);
+}
+function createImageWithSrcSet(lightbox, background,) {
+  if (!lightbox || !background || !background.src) return background;
+  const base = new URL(background.src,);
+  base.searchParams.delete('scale-down-to',);
+  base.searchParams.delete('lossless',);
+  return {
+    ...background,
+    sizes: `min(100vw, ${lightbox.maxWidth - getTotalHorizontalPadding(lightbox,)}px)`,
+    // Use all steps since the lightbox can scale up and down with the viewport.
+    srcSet: steps2.map((size) => {
+      const src = new URL(base,);
+      src.searchParams.set('scale-down-to', size.toString(),);
+      return `${src.toString()} ${size}w`;
+    },).join(', ',),
+  };
+}
+var enterExitBackdropAnimation = {
+  opacity: 0,
+};
+var targetBackdropAnimation = {
+  opacity: 1,
+};
+function withLightboxEffect(Component18,) {
+  return forwardRef(function LightboxEffect({
+    lightbox,
+    lightboxClassName,
+    onClick,
+    ...props
+  }, forwardedRef,) {
+    const config = useContext(MotionConfigContext,);
+    const fallbackRef = useRef3(null,);
+    const ref = forwardedRef ?? fallbackRef;
+    const decodePromiseRef = useRef3();
+    const image = useMemo2(() => createImageWithSrcSet(lightbox, props.background,), [lightbox, props.background,],);
+    const [open, setOpen,] = useState(false,);
+    const [openOverrides, setOpenOverrides,] = useState();
+    const onOpen = useCallback(() => {
+      if (!lightbox) return;
+      if (open) {
+        startTransition2(() => {
+          setOpen(true,);
+        },);
+        return;
+      }
+      frame.read(() => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const style22 = getComputedStyle(ref.current,);
+        const hasBorder = ref.current.getAttribute('data-border',) === 'true';
+        const borderStyle2 = hasBorder ? getComputedStyle(ref.current, '::after',) : void 0;
+        startTransition2(() => {
+          setOpenOverrides({
+            borderRadius: style22.borderRadius,
+            aspectRatio: rect ? rect.width / (rect.height || 1) : void 0,
+            borderTop: borderStyle2 == null ? void 0 : borderStyle2.borderTopWidth,
+            borderRight: borderStyle2 == null ? void 0 : borderStyle2.borderRightWidth,
+            borderBottom: borderStyle2 == null ? void 0 : borderStyle2.borderBottomWidth,
+            borderLeft: borderStyle2 == null ? void 0 : borderStyle2.borderLeftWidth,
+            borderStyle: borderStyle2 == null ? void 0 : borderStyle2.borderStyle,
+            borderColor: borderStyle2 == null ? void 0 : borderStyle2.borderColor,
+            transition: lightbox.transition,
+            imageRendering: style22.imageRendering,
+            filter: style22.filter,
+          },);
+          setOpen(!!rect,);
+        },);
+      },);
+    }, [lightbox, open, ref,],);
+    const aspectRatio2 = (openOverrides == null ? void 0 : openOverrides.aspectRatio) ?? 1;
+    const decode = useStableCallback(() => {
+      var _a;
+      if (!lightbox || !image || !image.src) return;
+      const srcDecodePromise = (_a = decodePromiseRef.current) == null ? void 0 : _a[image.src];
+      if (srcDecodePromise) return srcDecodePromise;
+      const width = calculateImageWidth(
+        aspectRatio2,
+        lightbox.maxWidth,
+        getTotalHorizontalPadding(lightbox,),
+        getTotalVerticalPadding(lightbox,),
+      );
+      const promise = optimisticallyDecodeImage(image, {
+        width,
+        height: width * aspectRatio2,
+      },);
+      decodePromiseRef.current = {
+        [image.src]: promise,
+      };
+      return promise;
+    },);
+    const handleClick = useCallback(async (e) => {
+      onClick == null ? void 0 : onClick(e,);
+      if (open || !lightbox || !image) return;
+      await decode();
+      onOpen();
+    }, [onClick, onOpen, open, image, lightbox, decode,],);
+    const onClose = useCallback((e) => {
+      e == null ? void 0 : e.stopPropagation();
+      startTransition2(() => {
+        setOpen(false,);
+      },);
+    }, [],);
+    useEscToClose(open, onClose,);
+    useEffect(() => {
+      if (!lightbox) return;
+      let timer;
+      function enter() {
+        timer = setTimeout(() => {
+          void decode();
+        }, 50,);
+      }
+      function clear() {
+        clearTimeout(timer,);
+      }
+      const currentRef = ref.current;
+      currentRef == null ? void 0 : currentRef.addEventListener('mouseenter', enter,);
+      currentRef == null ? void 0 : currentRef.addEventListener('mouseleave', clear,);
+      currentRef == null ? void 0 : currentRef.addEventListener('pointerdown', decode,);
+      return () => {
+        clear();
+        currentRef == null ? void 0 : currentRef.removeEventListener('mouseenter', enter,);
+        currentRef == null ? void 0 : currentRef.removeEventListener('mouseleave', clear,);
+        currentRef == null ? void 0 : currentRef.removeEventListener('pointerdown', decode,);
+      };
+    }, [decode, ref, lightbox,],);
+    const fallbackLayoutId = useId();
+    const transition = (openOverrides == null ? void 0 : openOverrides.transition) ?? props.transition ?? config.transition;
+    const borderRadius2 = openOverrides == null ? void 0 : openOverrides.borderRadius;
+    const imageRendering = openOverrides == null ? void 0 : openOverrides.imageRendering;
+    const filter2 = openOverrides == null ? void 0 : openOverrides.filter;
+    const borderTop = openOverrides == null ? void 0 : openOverrides.borderTop;
+    const borderRight = openOverrides == null ? void 0 : openOverrides.borderRight;
+    const borderBottom = openOverrides == null ? void 0 : openOverrides.borderBottom;
+    const borderLeft = openOverrides == null ? void 0 : openOverrides.borderLeft;
+    const borderStyle = openOverrides == null ? void 0 : openOverrides.borderStyle;
+    const borderColor = openOverrides == null ? void 0 : openOverrides.borderColor;
+    const hasAnyBorder = Boolean(borderTop || borderRight || borderBottom || borderLeft || borderStyle || borderColor,);
+    const border = hasAnyBorder
+      ? {
+        '--border-top-width': borderTop,
+        '--border-right-width': borderRight,
+        '--border-bottom-width': borderBottom,
+        '--border-left-width': borderLeft,
+        '--border-style': borderStyle,
+        '--border-color': borderColor,
+      }
+      : void 0;
+    const portalProps = {
+      [portalIdAttribute]: props.id,
+    };
+    const paddingTop = getSidePadding(lightbox == null ? void 0 : lightbox.paddingTop, lightbox == null ? void 0 : lightbox.padding,);
+    const paddingBottom = getSidePadding(lightbox == null ? void 0 : lightbox.paddingBottom, lightbox == null ? void 0 : lightbox.padding,);
+    const paddingLeft = getSidePadding(lightbox == null ? void 0 : lightbox.paddingLeft, lightbox == null ? void 0 : lightbox.padding,);
+    const paddingRight = getSidePadding(lightbox == null ? void 0 : lightbox.paddingRight, lightbox == null ? void 0 : lightbox.padding,);
+    const style2 = (openOverrides == null ? void 0 : openOverrides.borderRadius)
+      ? {
+        ...props.style,
+        borderRadius: openOverrides.borderRadius,
+      }
+      : props.style;
+    const layoutDependency = open && !!props.layoutDependency ? `${props.layoutDependency}-open` : props.layoutDependency;
+    return /* @__PURE__ */ jsxs(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx3(Component18, {
+          ...props,
+          style: style2,
+          onClick: handleClick,
+          layoutId: props.layoutId ?? (lightbox ? fallbackLayoutId : void 0),
+          ref,
+          layoutDependency,
+          transition,
+        },),
+        /* @__PURE__ */ jsx3(AnimatePresence, {
+          children: open && lightbox && image && /* @__PURE__ */ jsx3(Fragment, {
+            children: createPortal(
+              /* @__PURE__ */ jsxs(Fragment, {
+                children: [
+                  /* @__PURE__ */ jsx3(motion.div, {
+                    ...portalProps,
+                    className: lightboxClassName,
+                    onClick: onClose,
+                    style: {
+                      position: 'fixed',
+                      inset: 0,
+                      zIndex: lightbox.zIndex,
+                      backgroundColor: lightbox.backdrop ?? 'transparent',
+                    },
+                    transition: lightbox.transition,
+                    initial: enterExitBackdropAnimation,
+                    animate: targetBackdropAnimation,
+                    exit: enterExitBackdropAnimation,
+                    onTransitionEnd: () => {
+                      startTransition2(() => {
+                        setOpenOverrides(void 0,);
+                      },);
+                    },
+                  },),
+                  /* @__PURE__ */ jsx3('div', {
+                    ...portalProps,
+                    className: lightboxClassName,
+                    style: {
+                      alignItems: 'center',
+                      display: 'flex',
+                      inset: `${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`,
+                      justifyContent: 'center',
+                      pointerEvents: 'none',
+                      position: 'fixed',
+                      zIndex: lightbox.zIndex,
+                    },
+                    children: /* @__PURE__ */ jsx3('div', {
+                      style: {
+                        alignItems: 'center',
+                        aspectRatio: aspectRatio2,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        maxHeight: '100%',
+                        position: 'relative',
+                        width: '100%',
+                        maxWidth: lightbox.maxWidth,
+                      },
+                      children: /* @__PURE__ */ jsx3(motion.div, {
+                        layoutId: props.layoutId ?? fallbackLayoutId,
+                        transition: lightbox.transition,
+                        onClick: onOpen,
+                        className: 'framer-lightbox-container',
+                        'data-border': hasAnyBorder,
+                        style: {
+                          aspectRatio: aspectRatio2,
+                          borderRadius: borderRadius2,
+                          bottom: 0,
+                          position: 'absolute',
+                          top: 0,
+                          userSelect: 'none',
+                          imageRendering,
+                          filter: filter2,
+                          ...border,
+                        },
+                        children: /* @__PURE__ */ jsx3(BackgroundImageComponent, {
+                          image,
+                          alt: image.alt,
+                          draggable: props.draggable,
+                        },),
+                      },),
+                    },),
+                  },),
+                ],
+              },),
+              getPortalContainer2(),
+            ),
+          }, 'backdrop',),
+        },),
+      ],
+    },);
+  },);
+}
+var Component16 = /* @__PURE__ */ React4.forwardRef(function Image2(props, ref,) {
   const {
     background,
     children,
@@ -47330,6 +47634,7 @@ var Image2 = /* @__PURE__ */ React4.forwardRef(function Image3(props, ref,) {
     ],
   },);
 },);
+var Image3 = /* @__PURE__ */ withLightboxEffect(Component16,);
 var frameFromElement = (element) => {
   const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
   frame2.x = frame2.x + safeWindow.scrollX;
@@ -48271,11 +48576,11 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component17 = htmlElementAsMotionComponent(props.as,);
+  const Component18 = htmlElementAsMotionComponent(props.as,);
   const dataFramerName = rest['data-framer-name'] ?? name;
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx3(Component17, {
+      return /* @__PURE__ */ jsx3(Component18, {
         ...rest,
         ref: containerRef,
         style: containerStyle,
@@ -48308,7 +48613,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       },);
     }
   }
-  return /* @__PURE__ */ jsx3(Component17, {
+  return /* @__PURE__ */ jsx3(Component18, {
     ...rest,
     ref: containerRef,
     style: containerStyle,
@@ -51080,7 +51385,7 @@ export {
   hover,
   hsla,
   hslaToRgba,
-  Image2 as Image,
+  Image3 as Image,
   imagePatternPropsForFill,
   imageUrlForAsset,
   inertia,

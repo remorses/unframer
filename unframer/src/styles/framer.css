@@ -993,3 +993,4 @@ NavigationContainer
 @supports (not (overflow: clip)) {
         :root { --overflow-clip-fallback: hidden; }
     }
+.framer-lightbox-container { opacity: 1 !important; pointer-events: auto !important; }
