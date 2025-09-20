@@ -11214,7 +11214,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.4BVLRPEB.mjs
+// /:https://app.framerstatic.com/framer.M3L76RW7.mjs
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -51161,7 +51161,6 @@ var package_default = {
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
-    'jest-junit': '^15.0.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
