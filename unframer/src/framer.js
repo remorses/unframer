@@ -13,7 +13,7 @@ import {
   __toESM,
 } from './framer-chunks/chunk-A2PMVMFI.js';
 
-// /:https://app.framerstatic.com/chunk-BLFSVU7M.mjs
+// /:https://app.framerstatic.com/chunk-VDW2YK33.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { useCallback, useContext, useId, } from 'react';
@@ -569,6 +569,11 @@ var color = {
   transform: (v) => {
     return typeof v === 'string' ? v : v.hasOwnProperty('red',) ? rgba.transform(v,) : hsla.transform(v,);
   },
+  getAnimatableNone: (v) => {
+    const parsed = color.parse(v,);
+    parsed.alpha = 0;
+    return color.transform(parsed,);
+  },
 };
 var colorRegex = /(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))/giu;
 function test(v,) {
@@ -646,7 +651,7 @@ function createTransformer(source,) {
     return output;
   };
 }
-var convertNumbersToZero = (v) => typeof v === 'number' ? 0 : v;
+var convertNumbersToZero = (v) => typeof v === 'number' ? 0 : color.test(v,) ? color.getAnimatableNone(v,) : v;
 function getAnimatableNone(v,) {
   const parsed = parseComplexValue(v,);
   const transformer = createTransformer(v,);
@@ -833,7 +838,7 @@ var generateLinearEasing = (easing, duration, resolution = 10,) => {
   let points = '';
   const numPoints = Math.max(Math.round(duration / resolution,), 2,);
   for (let i = 0; i < numPoints; i++) {
-    points += easing(i / (numPoints - 1),) + ', ';
+    points += Math.round(easing(i / (numPoints - 1),) * 1e4,) / 1e4 + ', ';
   }
   return `linear(${points.substring(0, points.length - 2,)})`;
 };
@@ -4064,7 +4069,7 @@ function addToQueue(builder,) {
 }
 var ViewTransitionBuilder = class {
   constructor(update, options = {},) {
-    this.currentTarget = 'root';
+    this.currentSubject = 'root';
     this.targets = /* @__PURE__ */ new Map();
     this.notifyReady = noop;
     this.readyPromise = new Promise((resolve) => {
@@ -4077,8 +4082,8 @@ var ViewTransitionBuilder = class {
     };
     addToQueue(this,);
   }
-  get(selector,) {
-    this.currentTarget = selector;
+  get(subject,) {
+    this.currentSubject = subject;
     return this;
   }
   layout(keyframes2, options,) {
@@ -4112,13 +4117,13 @@ var ViewTransitionBuilder = class {
   }
   updateTarget(target, keyframes2, options = {},) {
     const {
-      currentTarget,
+      currentSubject,
       targets,
     } = this;
-    if (!targets.has(currentTarget,)) {
-      targets.set(currentTarget, {},);
+    if (!targets.has(currentSubject,)) {
+      targets.set(currentSubject, {},);
     }
-    const targetData = targets.get(currentTarget,);
+    const targetData = targets.get(currentSubject,);
     targetData[target] = {
       keyframes: keyframes2,
       options,
@@ -4198,6 +4203,7 @@ function PopChild({
   children,
   isPresent: isPresent2,
   anchorX,
+  root,
 },) {
   const id4 = useId();
   const ref = useRef3(null,);
@@ -4224,7 +4230,8 @@ function PopChild({
     ref.current.dataset.motionPopId = id4;
     const style2 = document.createElement('style',);
     if (nonce) style2.nonce = nonce;
-    document.head.appendChild(style2,);
+    const parent = root ?? document.head;
+    parent.appendChild(style2,);
     if (style2.sheet) {
       style2.sheet.insertRule(`
           [data-motion-pop-id="${id4}"] {
@@ -4237,8 +4244,9 @@ function PopChild({
         `,);
     }
     return () => {
-      if (document.head.contains(style2,)) {
-        document.head.removeChild(style2,);
+      parent.removeChild(style2,);
+      if (parent.contains(style2,)) {
+        parent.removeChild(style2,);
       }
     };
   }, [isPresent2,],);
@@ -4260,6 +4268,7 @@ var PresenceChild = ({
   presenceAffectsLayout,
   mode,
   anchorX,
+  root,
 },) => {
   const presenceChildren = useConstant(newChildrenMap,);
   const id4 = useId();
@@ -4299,6 +4308,7 @@ var PresenceChild = ({
     children = jsx3(PopChild, {
       isPresent: isPresent2,
       anchorX,
+      root,
       children,
     },);
   }
@@ -4327,6 +4337,7 @@ var AnimatePresence = ({
   mode = 'sync',
   propagate = false,
   anchorX = 'left',
+  root,
 },) => {
   const [isParentPresent, safeToRemove,] = usePresence(propagate,);
   const presentChildren = useMemo2(() => onlyElements(children,), [children,],);
@@ -4403,6 +4414,7 @@ var AnimatePresence = ({
         custom,
         presenceAffectsLayout,
         mode,
+        root,
         onExitComplete: isPresent2 ? void 0 : onExit,
         anchorX,
         children: child,
@@ -4586,7 +4598,7 @@ function isValidMotionProp(key7,) {
 }
 var shouldForward = (key7) => !isValidMotionProp(key7,);
 function loadExternalIsValidProp(isValidProp,) {
-  if (!isValidProp) return;
+  if (typeof isValidProp !== 'function') return;
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
@@ -7979,6 +7991,7 @@ function createProjectionNode2({
     constructor(latestValues = {}, parent = defaultParent == null ? void 0 : defaultParent(),) {
       this.id = id2++;
       this.animationId = 0;
+      this.animationCommitId = 0;
       this.children = /* @__PURE__ */ new Set();
       this.options = {};
       this.isTreeAnimating = false;
@@ -8211,9 +8224,14 @@ function createProjectionNode2({
         this.nodes.forEach(clearMeasurements,);
         return;
       }
+      if (this.animationId <= this.animationCommitId) {
+        this.nodes.forEach(clearIsLayoutDirty,);
+        return;
+      }
       if (!this.isUpdating) {
         this.nodes.forEach(clearIsLayoutDirty,);
       }
+      this.animationCommitId = this.animationId;
       this.isUpdating = false;
       this.nodes.forEach(resetTransformStyle,);
       this.nodes.forEach(updateLayout,);
@@ -10190,6 +10208,8 @@ function calcNextTime(current2, next2, prev, labels,) {
     return Math.max(0, current2 + parseFloat(next2,),);
   } else if (next2 === '<') {
     return prev;
+  } else if (next2.startsWith('<',)) {
+    return Math.max(0, prev + parseFloat(next2.slice(1,),),);
   } else {
     return labels.get(next2,) ?? current2;
   }
@@ -10277,7 +10297,7 @@ function createAnimationsFromSequence(
       } = valueTransition;
       const calculatedDelay = typeof delay2 === 'function' ? delay2(elementIndex, numSubjects,) : delay2;
       const numKeyframes = valueKeyframesAsList.length;
-      const createGenerator = isGenerator(type,) ? type : generators == null ? void 0 : generators[type];
+      const createGenerator = isGenerator(type,) ? type : generators == null ? void 0 : generators[type || 'keyframes'];
       if (numKeyframes <= 2 && createGenerator) {
         let absoluteDelta = 100;
         if (numKeyframes === 2 && isNumberKeyframesArray(valueKeyframesAsList,)) {
@@ -10553,6 +10573,9 @@ function createScopedAnimate(scope,) {
     const animation = new GroupAnimationWithThen(animations2,);
     if (scope) {
       scope.animations.push(animation,);
+      animation.finished.then(() => {
+        removeItem(scope.animations, animation,);
+      },);
     }
     return animation;
   }
@@ -10568,6 +10591,7 @@ function useAnimate() {
   const animate22 = useConstant(() => createScopedAnimate(scope,));
   useUnmountEffect(() => {
     scope.animations.forEach((animation) => animation.stop());
+    scope.animations.length = 0;
   },);
   return [scope, animate22,];
 }
@@ -10840,6 +10864,20 @@ function useInstantTransition() {
 }
 function disableInstantTransitions() {
   MotionGlobalConfig.instantAnimations = false;
+}
+function usePageInView() {
+  const [isInView, setIsInView,] = useState(true,);
+  useEffect(() => {
+    const handleVisibilityChange = () => setIsInView(!document.hidden,);
+    if (document.hidden) {
+      handleVisibilityChange();
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange,);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange,);
+    };
+  }, [],);
+  return isInView;
 }
 var appearAnimationStore = /* @__PURE__ */ new Map();
 var appearComplete = /* @__PURE__ */ new Map();
@@ -11214,7 +11252,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.M3L76RW7.mjs
+// /:https://app.framerstatic.com/framer.NRM37W24.mjs
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -20345,8 +20383,38 @@ var inputIconCSSDeclaration = {
 function createRGBVariableFallbacks(variables, fallback,) {
   return css2.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
 }
+var defaultRichTextContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+};
+var defaultTextFillStyle = {
+  display: 'inline-block',
+};
+var defaultImageStyle = {
+  display: 'block',
+};
 var richTextCSSRules = /* @__PURE__ */ (() => [
+  /**
+   * RichTextContainer styles can get overridden by other static or inline styles collected in
+   * style collectors, as well as styles defined directly in the @link{RichText.tsx} component.
+   *
+   * NOTE: `display: flex` can get overridden with `display: -webkit-box` in
+   * @link{collectTextTruncation.ts} if the text is truncated. In this case, the flex-specific
+   * properties are not supported, e.g. `justify-content`. This is ok because truncated text has
+   * auto height and doesn't support vertical alignment. In any case, keep this in mind when
+   * using other flex-specific properties.
+   */
   /* css */
+  `
+        [data-framer-component-type="RichTextContainer"] {
+            display: ${defaultRichTextContainerStyle.display};
+            flex-direction: ${defaultRichTextContainerStyle.flexDirection};
+            justify-content: ${defaultRichTextContainerStyle.justifyContent};
+            outline: none;
+            flex-shrink: 0;
+        }
+    `, /* css */
   `
         p.framer-text,
         div.framer-text,
@@ -20513,7 +20581,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   /* css */
   `
         .framer-text[data-text-fill] {
-            display: inline-block;
+            display: ${defaultTextFillStyle.display};
             background-clip: text;
             -webkit-background-clip: text;
             /* make this a transparent color if you want to visualise the clipping  */
@@ -20883,7 +20951,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
     `, /* css */
   `
         .framer-image.framer-text {
-            display: block;
+            display: ${defaultImageStyle.display};
             max-width: 100%;
             height: auto;
         }
@@ -21041,6 +21109,42 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         }
     `,
 ])();
+var textTruncationDisplayInlineVariableForSafari16 = '--text-truncation-display-inline-for-safari-16';
+var textTruncationDisplayNoneVariableForSafari16 = '--text-truncation-display-none-for-safari-16';
+var textTruncationLineBreakVariableForSafari16 = '--text-truncation-line-break-for-safari-16';
+var blockLikeElementSelectors = [
+  'div.framer-text',
+  'p.framer-text',
+  'h1.framer-text',
+  'h2.framer-text',
+  'h3.framer-text',
+  'h4.framer-text',
+  'h5.framer-text',
+  'h6.framer-text',
+  'ol.framer-text',
+  'ul.framer-text',
+  'li.framer-text',
+  'blockquote.framer-text',
+  '.framer-text.framer-image',
+];
+var anySafariVersion = '(background: -webkit-named-image(i))';
+var safari17OrGreater = '(contain-intrinsic-size: inherit)';
+var safari16TextTruncationFix = /* @__PURE__ */ (() => [`@supports ${anySafariVersion} and (not ${safari17OrGreater}) {
+        /* Render block-like elements inline when text is truncated, otherwise default to user agent (revert)  */
+        ${blockLikeElementSelectors.join(', ',)} { display: var(${textTruncationDisplayInlineVariableForSafari16}, revert) }
+
+        /* Add a line break after each block-like element that we render inline, to resemble the block-like behavior */
+        ${
+  blockLikeElementSelectors.map((selector) => `${selector}::after`).join(', ',)
+} { content: var(${textTruncationLineBreakVariableForSafari16}); white-space: pre; }
+
+        /* Don't render modules (e.g. videos, code-blocks), or tables when text is truncated, because often these can't be truncated and their children might be block elements */
+        .framer-text.framer-text-module,
+        .framer-text.framer-table-wrapper { display: var(${textTruncationDisplayNoneVariableForSafari16}, revert) }
+
+        /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
+        p.framer-text[data-text-fill] { display: var(${textTruncationDisplayInlineVariableForSafari16}, ${defaultTextFillStyle.display}) }
+    }`,])();
 var defaultCache = /* @__PURE__ */ new Set();
 var defaultSheet;
 function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
@@ -21348,13 +21452,13 @@ var hideScrollbars = [
 ];
 var willChangeOverrideCSSVariable = '--framer-will-change-override';
 var willChangeEffectOverrideCSSVariable = '--framer-will-change-effect-override';
-var anySafariVersion = '(background: -webkit-named-image(i))';
+var anySafariVersion2 = '(background: -webkit-named-image(i))';
 var safari16OrGreater = '(grid-template-rows: subgrid)';
 var willChangeTransformRules = (isPreview) =>
   isPreview
     ? [
       `body { ${willChangeOverrideCSSVariable}: none; }`,
-      `@supports ${anySafariVersion} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`,
+      `@supports ${anySafariVersion2} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`,
     ]
     : [`body { ${willChangeOverrideCSSVariable}: none; ${willChangeEffectOverrideCSSVariable}: none; }`,];
 var frameCSSRules = (isPreview) => {
@@ -21386,6 +21490,7 @@ var combineCSSRules =
     ...hideScrollbars,
     ...overflowClipFallbackCSSRules,
     ...lightboxCSS,
+    ...safari16TextTruncationFix,
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
@@ -32439,8 +32544,11 @@ function useParallax(options, ref, visibilityStyle,) {
       : effectDisabledStyle,
   };
 }
+function isTargetAndTransition(value,) {
+  return typeof value === 'object' && value !== null;
+}
 function getTransition(value,) {
-  if (isString(value,) || !isObject2(value,)) return void 0;
+  if (!isTargetAndTransition(value,)) return void 0;
   return value == null ? void 0 : value.transition;
 }
 function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
@@ -32450,7 +32558,9 @@ function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, i
       if (shouldReduceMotion && key7 !== 'opacity') return resolve();
       const motionValue2 = effect.values[key7];
       motionValue2.stop();
-      let value = !isObject2(target,) ? defaultFXValues[key7] : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
+      let value = !isTargetAndTransition(target,)
+        ? defaultFXValues[key7]
+        : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
       if (isMotionValue(value,)) value = value.get();
       if (!isNumber2(value,)) return resolve();
       const visualElement = visualElementStore.get(ref.current,);
@@ -48520,19 +48630,12 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   if (!visible) return null;
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const containerStyle = {
-    outline: 'none',
-    /**
-     * NOTE: `display` can be overridden for example with `-webkit-box` in
-     * `collectTextTruncation.ts`. In such case, not all flex properties are supported. For
-     * example `justifyContent` doesn't work, but it doesn't matter for truncated text since it
-     * has auto height. In any case, keep this in mind when modifying these styles.
-     */
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: convertVerticalAlignment(verticalAlignment,),
     opacity: isHidden ? 0 : opacity,
-    flexShrink: 0,
   };
+  const justifyContent = convertVerticalAlignment(verticalAlignment,);
+  if (justifyContent !== defaultRichTextContainerStyle.justifyContent) {
+    containerStyle.justifyContent = justifyContent;
+  }
   const positionStyle = {};
   const restrictedRenderTarget = RenderTarget.hasRestrictions();
   const frame2 = calculateRect(props, parentSize || 0, false,);
@@ -51168,7 +51271,7 @@ var package_default = {
     yargs: '^17.7.2',
   },
   peerDependencies: {
-    'framer-motion': '>=12.14.0',
+    'framer-motion': '12.20.2',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
   },
@@ -51666,6 +51769,7 @@ export {
   useOnVariantChange,
   useOverlayState,
   usePageEffects,
+  usePageInView,
   usePrefetch,
   usePreloadQuery,
   usePresence,

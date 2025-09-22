@@ -140,6 +140,15 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
     --text-underline-offset: var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset)));
 }
 
+        [data-framer-component-type="RichTextContainer"] {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            outline: none;
+            flex-shrink: 0;
+        }
+    
+
         p.framer-text,
         div.framer-text,
         figure.framer-text,
@@ -994,3 +1003,17 @@ NavigationContainer
         :root { --overflow-clip-fallback: hidden; }
     }
 .framer-lightbox-container { opacity: 1 !important; pointer-events: auto !important; }
+@supports (background: -webkit-named-image(i)) and (not (contain-intrinsic-size: inherit)) {
+        /* Render block-like elements inline when text is truncated, otherwise default to user agent (revert)  */
+        div.framer-text, p.framer-text, h1.framer-text, h2.framer-text, h3.framer-text, h4.framer-text, h5.framer-text, h6.framer-text, ol.framer-text, ul.framer-text, li.framer-text, blockquote.framer-text, .framer-text.framer-image { display: var(--text-truncation-display-inline-for-safari-16, revert) }
+
+        /* Add a line break after each block-like element that we render inline, to resemble the block-like behavior */
+        div.framer-text::after, p.framer-text::after, h1.framer-text::after, h2.framer-text::after, h3.framer-text::after, h4.framer-text::after, h5.framer-text::after, h6.framer-text::after, ol.framer-text::after, ul.framer-text::after, li.framer-text::after, blockquote.framer-text::after, .framer-text.framer-image::after { content: var(--text-truncation-line-break-for-safari-16); white-space: pre; }
+
+        /* Don't render modules (e.g. videos, code-blocks), or tables when text is truncated, because often these can't be truncated and their children might be block elements */
+        .framer-text.framer-text-module,
+        .framer-text.framer-table-wrapper { display: var(--text-truncation-display-none-for-safari-16, revert) }
+
+        /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
+        p.framer-text[data-text-fill] { display: var(--text-truncation-display-inline-for-safari-16, inline-block) }
+    }
