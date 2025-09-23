@@ -11252,7 +11252,7 @@ function stagger(duration = 0.1, {
   };
 }
 
-// /:https://app.framerstatic.com/framer.NRM37W24.mjs
+// /:https://app.framerstatic.com/framer.L7DRXRFF.mjs
 
 import React4 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -47453,6 +47453,54 @@ function createImageWithSrcSet(lightbox, background,) {
     },).join(', ',),
   };
 }
+var distortionTransforms = /* @__PURE__ */ (() => ({
+  x: void 0,
+  y: void 0,
+  z: 0,
+  translateX: void 0,
+  translateY: void 0,
+  translateZ: 0,
+  rotate: void 0,
+  rotateX: 0,
+  rotateY: 0,
+  rotateZ: void 0,
+  scale: 1,
+  scaleX: 1,
+  scaleY: 1,
+  scaleZ: 1,
+  skew: 0,
+  skewX: 0,
+  skewY: 0,
+  originX: void 0,
+  originY: void 0,
+  originZ: void 0,
+  perspective: 0,
+  transformPerspective: 0,
+}))();
+function isDistortionTransform(values,) {
+  if (!values) return false;
+  for (const k in values) {
+    if (!(k in distortionTransforms)) continue;
+    const identityValue = distortionTransforms[k];
+    const value = values[k];
+    if (!isNumber2(identityValue,) || !isNumber2(value,)) continue;
+    if (identityValue === value) continue;
+    return true;
+  }
+  return false;
+}
+function isDistorted(ref,) {
+  var _a, _b;
+  const element = visualElementStore.get(ref.current,);
+  if (!element) return false;
+  if (isDistortionTransform((_a = element.projection) == null ? void 0 : _a.latestValues,)) return true;
+  const path = (_b = element.projection) == null ? void 0 : _b.path;
+  if (!path || path.length === 0) return false;
+  for (const p of path) {
+    if (isDistortionTransform(p.latestValues,)) return true;
+  }
+  return false;
+}
 var enterExitBackdropAnimation = {
   opacity: 0,
 };
@@ -47483,25 +47531,31 @@ function withLightboxEffect(Component18,) {
       }
       frame.read(() => {
         if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
         const style22 = getComputedStyle(ref.current,);
         const hasBorder = ref.current.getAttribute('data-border',) === 'true';
         const borderStyle2 = hasBorder ? getComputedStyle(ref.current, '::after',) : void 0;
+        const width = ref.current.offsetWidth ?? 1;
+        const height = ref.current.offsetHeight ?? 1;
+        const transition2 = isDistorted(ref,)
+          ? {
+            duration: 0,
+          }
+          : lightbox.transition;
         startTransition2(() => {
           setOpenOverrides({
             borderRadius: style22.borderRadius,
-            aspectRatio: rect ? rect.width / (rect.height || 1) : void 0,
+            aspectRatio: width / (height || 1),
             borderTop: borderStyle2 == null ? void 0 : borderStyle2.borderTopWidth,
             borderRight: borderStyle2 == null ? void 0 : borderStyle2.borderRightWidth,
             borderBottom: borderStyle2 == null ? void 0 : borderStyle2.borderBottomWidth,
             borderLeft: borderStyle2 == null ? void 0 : borderStyle2.borderLeftWidth,
             borderStyle: borderStyle2 == null ? void 0 : borderStyle2.borderStyle,
             borderColor: borderStyle2 == null ? void 0 : borderStyle2.borderColor,
-            transition: lightbox.transition,
+            transition: transition2,
             imageRendering: style22.imageRendering,
             filter: style22.filter,
           },);
-          setOpen(!!rect,);
+          setOpen(true,);
         },);
       },);
     }, [lightbox, open, ref,],);
@@ -47596,7 +47650,7 @@ function withLightboxEffect(Component18,) {
         borderRadius: openOverrides.borderRadius,
       }
       : props.style;
-    const layoutDependency = open && !!props.layoutDependency ? `${props.layoutDependency}-open` : props.layoutDependency;
+    const layoutDependency = open ? props.layoutDependency ? `${props.layoutDependency}-open` : 'open' : props.layoutDependency;
     return /* @__PURE__ */ jsxs(Fragment, {
       children: [
         /* @__PURE__ */ jsx3(Component18, {
@@ -47623,7 +47677,7 @@ function withLightboxEffect(Component18,) {
                       zIndex: lightbox.zIndex,
                       backgroundColor: lightbox.backdrop ?? 'transparent',
                     },
-                    transition: lightbox.transition,
+                    transition,
                     initial: enterExitBackdropAnimation,
                     animate: targetBackdropAnimation,
                     exit: enterExitBackdropAnimation,
@@ -47658,7 +47712,7 @@ function withLightboxEffect(Component18,) {
                       },
                       children: /* @__PURE__ */ jsx3(motion.div, {
                         layoutId: props.layoutId ?? fallbackLayoutId,
-                        transition: lightbox.transition,
+                        transition,
                         onClick: onOpen,
                         className: 'framer-lightbox-container',
                         'data-border': hasAnyBorder,
