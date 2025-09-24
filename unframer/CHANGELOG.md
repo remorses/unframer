@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.4
+
+### Patch Changes
+
+- Add `generateStackblitzFiles` export to generate Vite + React + TypeScript project files for StackBlitz integration
+
 ## 3.2.3
 
 ### Patch Changes
