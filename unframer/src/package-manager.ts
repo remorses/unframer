@@ -4,7 +4,7 @@ import { logger, spinner } from './utils.js'
 
 const execAsync = promisify(exec)
 
-export async function getPackageManager(targetDir: string) {
+export async function getPackageManager(targetDir?: string) {
     const { detect } = await import('@antfu/ni')
     const packageManager = await detect({ programmatic: true, cwd: targetDir })
 
@@ -139,9 +139,7 @@ export async function installPackagesBatch({
 
             child.on('close', (code) => {
                 if (code === 0) {
-                    spinner.info(
-                        `Successfully installed packages`,
-                    )
+                    spinner.info(`Successfully installed packages`)
                     resolve({ success: true })
                 } else {
                     const errorMessage = `Installation failed with exit code ${code}`

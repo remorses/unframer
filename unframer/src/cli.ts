@@ -21,6 +21,7 @@ import {
     sleep,
     spinner,
 } from './utils.js'
+import { getPackageManager } from './package-manager.js'
 import { notifyError } from './sentry.js'
 import { dispatcher } from './undici-dispatcher.js'
 const configNames = ['unframer.config.json', 'unframer.json']
@@ -191,7 +192,7 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
     .action(async (projectId, options) => {
         try {
             const outDir = options.outDir
-            logger.info(`Creating example app in ${outDir}`)
+            console.log(`Creating example app in ${outDir}`)
 
             // Create the output directory
             const absoluteOutDir = path.resolve(process.cwd(), outDir)
@@ -212,7 +213,7 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
             // Generate example component code
             spinner.start('Generating example component code...')
             const { exampleCode } = await createExampleComponentCode({
-                outDir: path.join(absoluteOutDir, 'src/framer'),
+                outDir: './framer',
                 config,
             })
 
@@ -234,7 +235,7 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
                 }
 
                 fs.writeFileSync(filePath, file.contents)
-                logger.log(`Created ${file.relativePath}`)
+                console.log(`Created ${file.relativePath}`)
             }
             spinner.stop('Example files created')
 
@@ -257,14 +258,18 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
             await buildContext?.dispose?.()
             spinner.stop('Framer components downloaded')
 
-            // Run npm install
+            // Install dependencies using detected package manager
             spinner.stop('Framer components downloaded')
-            logger.info('Installing npm dependencies...')
-            spinner.start('Running npm install...')
             
+            const packageManager = await getPackageManager()
+            const installCommand = packageManager === 'yarn' ? 'yarn' : `${packageManager} install`
+            
+            console.log(`Installing dependencies with ${packageManager}...`)
+            spinner.start(`Running ${installCommand}...`)
+
             const execAsync = promisify(exec)
             try {
-                await execAsync('npm install', {
+                await execAsync(installCommand, {
                     cwd: absoluteOutDir,
                     // Can't use 'inherit' with async exec, so we'll capture output
                     encoding: 'utf8',
@@ -272,26 +277,23 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
                 spinner.stop('Dependencies installed successfully')
             } catch (error) {
                 spinner.stop('Failed to install dependencies')
-                logger.error('npm install failed:', error?.message || error)
-                logger.info('You can manually run "npm install" in the created directory')
+                console.error(`${packageManager} install failed:`, error?.message || error)
+                console.log(`You can manually run "${installCommand}" in the created directory`)
             }
 
             logger.green(dedent`
             
-            ✨ Example app created successfully in ${outDir}!
+            Example app created successfully in ${outDir}!
 
-            📖 Next steps:
+            Next steps:
               cd ${outDir}
-              npm run dev
+              ${packageManager} run dev
 
-            📝 Quick guide:
-            - Read the README.md file to understand how the app works
-            - Edit src/App.tsx to add or customize your Framer components
-            - Your components are in src/framer/ directory
-            - The app uses Vite + React + TypeScript + Tailwind CSS
-
-            🚀 To see your app:
-              Run 'npm run dev' and open http://localhost:5173
+            Quick guide:
+            ▪︎ Edit src/App.tsx to add or customize your Framer components
+            ▪︎ Your components are in src/framer/ directory
+            ▪︎ The app uses Vite + React + TypeScript + Tailwind CSS
+            ▪︎ Your app will be running at http://localhost:5173
             
             `)
         } catch (error) {
