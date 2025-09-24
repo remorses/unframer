@@ -265,7 +265,7 @@ export function withCSS(Component: any, escapedCSS: any, componentSerializationI
             // Server-side: render style tags like the old behavior
             const id = componentSerializationId
             const cssContent = typeof escapedCSS === 'function' 
-                ? escapedCSS('export')  // Assuming 'export' as default render target
+                ? escapedCSS('EXPORT')
                 : Array.isArray(escapedCSS) 
                     ? escapedCSS.join('\n') 
                     : escapedCSS
