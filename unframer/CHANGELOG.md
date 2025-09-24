@@ -1,5 +1,17 @@
 # unframer
 
+## 3.2.3
+
+### Patch Changes
+
+- Fix SSR styles support, export custom withCSS that has SSR support, fix Framer september 15 css collector breaking change
+
+## 3.2.2
+
+### Patch Changes
+
+- 2267693: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+
 ## 3.2.1
 
 ### Patch Changes

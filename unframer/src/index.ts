@@ -14,3 +14,9 @@ export {
 } from './react.js'
 
 export { Link, ResolveLinks }
+
+// Override withCSS with our custom implementation that restores style tags
+import { withCSS as withCSSOriginal } from './framer.js'
+import { withCSS } from './css.js'
+
+export { withCSSOriginal, withCSS }
