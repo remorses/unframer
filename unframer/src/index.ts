@@ -20,5 +20,3 @@ import { withCSS as withCSSOriginal } from './framer.js'
 import { withCSS } from './css.js'
 
 export { withCSSOriginal, withCSS }
-
-export { generateStackblitzFiles } from './stackblitz'

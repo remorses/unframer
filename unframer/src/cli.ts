@@ -2,16 +2,20 @@ import { setMaxListeners } from 'events'
 import { fetch } from 'undici'
 import './sentry.js'
 
-import { bundle, StyleToken } from './exporter.js'
+import { bundle, StyleToken, createExampleComponentCode } from './exporter.js'
 import { createClient } from './generated/api-client.js'
+import { generateStackblitzFiles } from './stackblitz.js'
 
 import { cac } from 'cac'
+import { exec } from 'child_process'
+import { promisify } from 'util'
 
 import fs from 'fs'
 import path, { basename } from 'path'
 import { BreakpointSizes, defaultBreakpointSizes } from './css.js'
 import {
     componentNameToPath,
+    dedent,
     isTruthy,
     logger,
     sleep,
@@ -180,17 +184,122 @@ const version = pkg.version
 
 cli.version(version).help()
 
-cli.command('init', 'Init the unframer.config.json config').action(
-    async (options) => {
-        let fixed = fixOldUnframerPath()
-        if (fixed) {
-            return
+
+
+cli.command('example-app <projectId>', 'Create an example app with Framer components')
+    .option('--outDir <dir>', 'Output directory', { default: 'example-unframer-app' })
+    .action(async (projectId, options) => {
+        try {
+            const outDir = options.outDir
+            logger.info(`Creating example app in ${outDir}`)
+
+            // Create the output directory
+            const absoluteOutDir = path.resolve(process.cwd(), outDir)
+            if (!fs.existsSync(absoluteOutDir)) {
+                fs.mkdirSync(absoluteOutDir, { recursive: true })
+            }
+
+            // Fetch the project configuration
+            spinner.start('Fetching project configuration...')
+            const { config, websiteUrl } = await configFromFetch({
+                projectId,
+                allExternal: true,
+                externalPackages: [],
+                outDir: 'src/framer',
+            })
+            spinner.stop('Project configuration fetched')
+
+            // Generate example component code
+            spinner.start('Generating example component code...')
+            const { exampleCode } = await createExampleComponentCode({
+                outDir: path.join(absoluteOutDir, 'src/framer'),
+                config,
+            })
+
+            // Generate all the files needed for the example app
+            const files = generateStackblitzFiles({
+                projectId,
+                appComponentCode: exampleCode,
+                title: config.projectName || 'Unframer Example App',
+            })
+
+            // Write all files to the output directory
+            for (const file of files) {
+                const filePath = path.join(absoluteOutDir, file.relativePath)
+                const fileDir = path.dirname(filePath)
+
+                // Ensure directory exists
+                if (!fs.existsSync(fileDir)) {
+                    fs.mkdirSync(fileDir, { recursive: true })
+                }
+
+                fs.writeFileSync(filePath, file.contents)
+                logger.log(`Created ${file.relativePath}`)
+            }
+            spinner.stop('Example files created')
+
+            // Bundle the Framer components
+            spinner.start('Downloading Framer components...')
+            const componentsOutDir = path.join(absoluteOutDir, 'src/framer')
+            const { buildContext } = await bundle({
+                config: {
+                    ...config,
+                    jsx: true,
+                    outDir: componentsOutDir,
+                    allExternal: true,
+                    externalPackages: [],
+                },
+                watch: false,
+                cwd: componentsOutDir,
+                signal: new AbortController().signal,
+                metafile: false,
+            })
+            await buildContext?.dispose?.()
+            spinner.stop('Framer components downloaded')
+
+            // Run npm install
+            spinner.stop('Framer components downloaded')
+            logger.info('Installing npm dependencies...')
+            spinner.start('Running npm install...')
+            
+            const execAsync = promisify(exec)
+            try {
+                await execAsync('npm install', {
+                    cwd: absoluteOutDir,
+                    // Can't use 'inherit' with async exec, so we'll capture output
+                    encoding: 'utf8',
+                })
+                spinner.stop('Dependencies installed successfully')
+            } catch (error) {
+                spinner.stop('Failed to install dependencies')
+                logger.error('npm install failed:', error?.message || error)
+                logger.info('You can manually run "npm install" in the created directory')
+            }
+
+            logger.green(dedent`
+            
+            ✨ Example app created successfully in ${outDir}!
+
+            📖 Next steps:
+              cd ${outDir}
+              npm run dev
+
+            📝 Quick guide:
+            - Read the README.md file to understand how the app works
+            - Edit src/App.tsx to add or customize your Framer components
+            - Your components are in src/framer/ directory
+            - The app uses Vite + React + TypeScript + Tailwind CSS
+
+            🚀 To see your app:
+              Run 'npm run dev' and open http://localhost:5173
+            
+            `)
+        } catch (error) {
+            notifyError(error)
+            spinner.error('Failed to create example app')
+            throw error
         }
-        fs.writeFileSync(`unframer.config.json`, defaultConfig)
-        const p = path.resolve(process.cwd(), 'unframer.config.json')
-        console.log(`${p} file created`)
-    },
-)
+    })
 
 export type Config = {
     jsx?: boolean

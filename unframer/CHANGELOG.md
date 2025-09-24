@@ -5,6 +5,11 @@
 ### Patch Changes
 
 - Add `generateStackblitzFiles` export to generate Vite + React + TypeScript project files for StackBlitz integration
+- Add new `example-app` CLI command to create a complete example application with Framer components:
+  ```bash
+  unframer example-app <projectId> --outDir my-app
+  ```
+  This command creates a ready-to-use Vite + React + TypeScript app with all your Framer components and runs `npm install` automatically
 
 ## 3.2.3
 

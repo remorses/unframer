@@ -56,23 +56,30 @@ export function generateStackblitzFiles({
     }
 
     const viteConfig = dedent`
+
         import { defineConfig } from 'vite'
         import react from '@vitejs/plugin-react'
 
         // https://vitejs.dev/config/
         export default defineConfig({
             plugins: [react()],
-        })`
+        })
+
+    `
 
     const postcssConfig = dedent`
+
         export default {
             plugins: {
                 tailwindcss: {},
                 autoprefixer: {},
             }
-        }`
+        }
+
+    `
 
     const tailwindConfig = dedent`
+
         /** @type {import('tailwindcss').Config} */
         export default {
             content: [
@@ -83,9 +90,12 @@ export function generateStackblitzFiles({
                 extend: {},
             },
             plugins: [],
-        }`
+        }
+
+    `
 
     const indexHtml = dedent`
+
         <!doctype html>
         <html lang="en">
             <head>
@@ -97,7 +107,9 @@ export function generateStackblitzFiles({
                 <div id="root"></div>
                 <script type="module" src="/src/main.tsx"></script>
             </body>
-        </html>`
+        </html>
+
+    `
 
     const app =
         appComponentCode ||
@@ -125,6 +137,7 @@ export function generateStackblitzFiles({
         `
 
     const main = dedent`
+
         import './index.css'
         import React from 'react'
         import ReactDOM from 'react-dom/client'
@@ -132,12 +145,15 @@ export function generateStackblitzFiles({
 
         ReactDOM.createRoot(document.getElementById('root')!).render(
             <App />
-        )`
+        )
+
+    `
 
     const css = dedent`
         @tailwind base;
         @tailwind components;
-        @tailwind utilities;`
+        @tailwind utilities;
+    `
 
     return [
         {
@@ -151,6 +167,7 @@ export function generateStackblitzFiles({
         {
             relativePath: '.gitignore',
             contents: dedent`
+            
                 node_modules
                 dist
                 .DS_Store
@@ -161,6 +178,7 @@ export function generateStackblitzFiles({
                 yarn-debug.log*
                 yarn-error.log*
                 *.log
+            
             `,
         },
         { relativePath: 'vite.config.ts', contents: viteConfig },
