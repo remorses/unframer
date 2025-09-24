@@ -1,11 +1,11 @@
 {
     "name": "unframer",
-    "version": "3.2.4",
+    "version": "3.2.6",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
-        "build": "rm -rf dist && pnpm concurrently \"pnpm tsc -m esnext --moduleResolution node --outDir esm\" \"pnpm tsc\" && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts && rm ./esm/framer.*.map ./dist/framer.*.map",
+        "build": "rm -rf dist && pnpm concurrently \"pnpm tsc -m esnext --moduleResolution node --outDir esm\" \"pnpm tsc\" && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
         "test": "vitest",
         "prepublishOnly": "pnpm tsx scripts/version-replace.ts && pnpm build",
         "download-framer": "tsx scripts/download.ts",

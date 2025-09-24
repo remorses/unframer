@@ -1,4 +1,5 @@
 import dedent from 'string-dedent'
+import { withCSS as withCSSOriginal } from './framer.js'
 import React from 'react'
 import { ComponentFont } from './framer.js'
 
@@ -254,34 +255,44 @@ function sortByKey<T>(arr: T[], key: (x: T) => string) {
  * Custom withCSS function that restores the previous behavior
  * of rendering inline style tags instead of using cssCollector
  */
-export function withCSS(Component: any, escapedCSS: any, componentSerializationId?: string) {
+export function withCSS(
+    Component: any,
+    escapedCSS: any,
+    componentSerializationId?: string,
+) {
     const framerCSSMarker = 'data-framer-css-ssr'
-    
+
+    if (typeof window !== 'undefined' && typeof window.document !== 'undefined')
+        return withCSSOriginal(Component, escapedCSS, componentSerializationId)
+
     return (props: any) => {
         // Check if we're in SSR mode
-        const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
-        
+        const isBrowser =
+            typeof window !== 'undefined' &&
+            typeof window.document !== 'undefined'
+
         if (!isBrowser) {
             // Server-side: render style tags like the old behavior
             const id = componentSerializationId
-            const cssContent = typeof escapedCSS === 'function' 
-                ? escapedCSS('EXPORT')
-                : Array.isArray(escapedCSS) 
-                    ? escapedCSS.join('\n') 
-                    : escapedCSS
-            
+            const cssContent =
+                typeof escapedCSS === 'function'
+                    ? escapedCSS('EXPORT')
+                    : Array.isArray(escapedCSS)
+                      ? escapedCSS.join('\n')
+                      : escapedCSS
+
             return (
                 <>
                     <style
-                        {...{[framerCSSMarker]: true}}
+                        {...{ [framerCSSMarker]: true }}
                         data-framer-component={id}
-                        dangerouslySetInnerHTML={{__html: cssContent}}
+                        dangerouslySetInnerHTML={{ __html: cssContent }}
                     />
                     <Component {...props} />
                 </>
             )
         }
-        
+
         // Client-side: just render the component
         return <Component {...props} />
     }

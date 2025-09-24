@@ -29,17 +29,6 @@
 }} Props
 
  */
-
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
 import { stdin_default } from "../chunks/chunk-I55YHQAG.js";
 import "../chunks/chunk-5WKTYKZI.js";
 import "../chunks/chunk-ZYGL2A5H.js";
@@ -75,12 +64,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders CustomerStoriesFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

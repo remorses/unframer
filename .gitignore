@@ -12,3 +12,4 @@ next.lock
 
 example-framer-site
 isolate-*.log
+/test

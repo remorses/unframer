@@ -25,17 +25,6 @@
 }} Props
 
  */
-
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
 import { className, css, fonts } from "./chunks/chunk-YFLJ3AFA.js";
 import {
 	className as className2,
@@ -82,323 +71,9 @@ import { useRef as useRef2 } from "react";
 
 // /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js
 import { jsx as _jsx } from "react/jsx-runtime";
-
-// /:https://esm.sh/*react-hotkeys-hook@5.1.0/node/react-hotkeys-hook.mjs
-import {
-	createContext as W,
-	useContext as F,
-	useState as b,
-	useCallback as h,
-	useRef as K,
-	useLayoutEffect as Y,
-	useEffect as Z,
-} from "react";
-import { jsx as O } from "react/jsx-runtime";
-var z = ["shift", "alt", "meta", "mod", "ctrl", "control"];
-var _ = {
-	esc: "escape",
-	return: "enter",
-	left: "arrowleft",
-	right: "arrowright",
-	up: "arrowup",
-	down: "arrowdown",
-	ShiftLeft: "shift",
-	ShiftRight: "shift",
-	AltLeft: "alt",
-	AltRight: "alt",
-	MetaLeft: "meta",
-	MetaRight: "meta",
-	OSLeft: "meta",
-	OSRight: "meta",
-	ControlLeft: "ctrl",
-	ControlRight: "ctrl",
-};
-function S(t) {
-	return (_[t.trim()] || t.trim())
-		.toLowerCase()
-		.replace(/key|digit|numpad/, "");
-}
-function B(t) {
-	return z.includes(t);
-}
-function A(t, n = ",") {
-	return t.toLowerCase().split(n);
-}
-function H(t, n = "+", o = ">", c = false, u) {
-	let r = [],
-		l = false;
-	t.includes(o)
-		? ((l = true),
-			(r = t
-				.toLocaleLowerCase()
-				.split(o)
-				.map((a) => S(a))))
-		: (r = t
-				.toLocaleLowerCase()
-				.split(n)
-				.map((a) => S(a)));
-	let v = {
-			alt: r.includes("alt"),
-			ctrl: r.includes("ctrl") || r.includes("control"),
-			shift: r.includes("shift"),
-			meta: r.includes("meta"),
-			mod: r.includes("mod"),
-			useKey: c,
-		},
-		s = r.filter((a) => !z.includes(a));
-	return {
-		...v,
-		keys: s,
-		description: u,
-		isSequence: l,
-	};
-}
-typeof document < "u" &&
-	(document.addEventListener("keydown", (t) => {
-		t.code !== void 0 && G([S(t.code)]);
-	}),
-	document.addEventListener("keyup", (t) => {
-		t.code !== void 0 && J([S(t.code)]);
-	})),
-	typeof window < "u" &&
-		(window.addEventListener("blur", () => {
-			L.clear();
-		}),
-		window.addEventListener("contextmenu", () => {
-			setTimeout(() => {
-				L.clear();
-			}, 0);
-		}));
-var L = /* @__PURE__ */ new Set();
-function P(t) {
-	return Array.isArray(t);
-}
-function ee(t, n = ",") {
-	return (P(t) ? t : t.split(n)).every((o) => L.has(o.trim().toLowerCase()));
-}
-function G(t) {
-	let n = Array.isArray(t) ? t : [t];
-	L.has("meta") && L.forEach((o) => !B(o) && L.delete(o.toLowerCase())),
-		n.forEach((o) => L.add(o.toLowerCase()));
-}
-function J(t) {
-	let n = Array.isArray(t) ? t : [t];
-	t === "meta" ? L.clear() : n.forEach((o) => L.delete(o.toLowerCase()));
-}
-function te(t, n, o) {
-	((typeof o == "function" && o(t, n)) || o === true) && t.preventDefault();
-}
-function ne(t, n, o) {
-	return typeof o == "function" ? o(t, n) : o === true || o === void 0;
-}
-function oe(t) {
-	return Q(t, ["input", "textarea", "select"]);
-}
-function Q(t, n = false) {
-	let { target: o, composed: c } = t,
-		u;
-	return (
-		re(o) && c
-			? (u = t.composedPath()[0] && t.composedPath()[0].tagName)
-			: (u = o && o.tagName),
-		P(n)
-			? !!(u && n && n.some((r) => r.toLowerCase() === u.toLowerCase()))
-			: !!(u && n && n)
-	);
-}
-function re(t) {
-	return !!t.tagName && !t.tagName.startsWith("-") && t.tagName.includes("-");
-}
-function ie(t, n) {
-	return t.length === 0 && n
-		? (console.warn(
-				'A hotkey has the "scopes" option set, however no active scopes were found. If you want to use the global scopes feature, you need to wrap your app in a <HotkeysProvider>',
-			),
-			true)
-		: n
-			? t.some((o) => n.includes(o)) || t.includes("*")
-			: true;
-}
-var le = (t, n, o = false) => {
-	let { alt: c, meta: u, mod: r, shift: l, ctrl: v, keys: s, useKey: a } = n,
-		{ code: p, key: e, ctrlKey: d, metaKey: f, shiftKey: w, altKey: k } = t,
-		y = S(p);
-	if (a && s?.length === 1 && s.includes(e)) return true;
-	if (
-		!(s != null && s.includes(y)) &&
-		!["ctrl", "control", "unknown", "meta", "alt", "shift", "os"].includes(y)
-	)
-		return false;
-	if (!o) {
-		if ((c !== k && y !== "alt") || (l !== w && y !== "shift")) return false;
-		if (r) {
-			if (!f && !d) return false;
-		} else if (
-			(u !== f && y !== "meta" && y !== "os") ||
-			(v !== d && y !== "ctrl" && y !== "control")
-		)
-			return false;
-	}
-	return s && s.length === 1 && s.includes(y) ? true : s ? ee(s) : !s;
-};
-var U = W(void 0);
-var ue = () => F(U);
-function R(t, n) {
-	return t && n && typeof t == "object" && typeof n == "object"
-		? Object.keys(t).length === Object.keys(n).length &&
-				Object.keys(t).reduce((o, c) => o && R(t[c], n[c]), true)
-		: t === n;
-}
-var V = W({
-	hotkeys: [],
-	activeScopes: [],
-	toggleScope: () => {},
-	enableScope: () => {},
-	disableScope: () => {},
-});
-var ce = () => F(V);
-function de(t) {
-	let n = K(void 0);
-	return R(n.current, t) || (n.current = t), n.current;
-}
-var M = (t) => {
-	t.stopPropagation(), t.preventDefault(), t.stopImmediatePropagation();
-};
-var ae = typeof window < "u" ? Y : Z;
-function pe(t, n, o, c) {
-	let u = K(null),
-		r = K(false),
-		l = o instanceof Array ? (c instanceof Array ? void 0 : c) : o,
-		v = P(t) ? t.join(l?.delimiter) : t,
-		s = o instanceof Array ? o : c instanceof Array ? c : void 0,
-		a = h(n, s ?? []),
-		p = K(a);
-	s ? (p.current = a) : (p.current = n);
-	let e = de(l),
-		{ activeScopes: d } = ce(),
-		f = ue();
-	return (
-		ae(() => {
-			if (e?.enabled === false || !ie(d, e?.scopes)) return;
-			let w = [],
-				k,
-				y = (i, x = false) => {
-					var T;
-					if (!(oe(i) && !Q(i, e?.enableOnFormTags))) {
-						if (u.current !== null) {
-							let g = u.current.getRootNode();
-							if (
-								(g instanceof Document || g instanceof ShadowRoot) &&
-								g.activeElement !== u.current &&
-								!u.current.contains(g.activeElement)
-							) {
-								M(i);
-								return;
-							}
-						}
-						((T = i.target) != null &&
-							T.isContentEditable &&
-							!(e != null && e.enableOnContentEditable)) ||
-							A(v, e?.delimiter).forEach((g) => {
-								var N, D, $, I;
-								if (
-									g.includes(e?.splitKey ?? "+") &&
-									g.includes(e?.sequenceSplitKey ?? ">")
-								) {
-									console.warn(
-										`Hotkey ${g} contains both ${e?.splitKey ?? "+"} and ${e?.sequenceSplitKey ?? ">"} which is not supported.`,
-									);
-									return;
-								}
-								let m = H(
-									g,
-									e?.splitKey,
-									e?.sequenceSplitKey,
-									e?.useKey,
-									e?.description,
-								);
-								if (m.isSequence) {
-									k = setTimeout(() => {
-										w = [];
-									}, e?.sequenceTimeoutMs ?? 1e3);
-									let C = m.useKey ? i.key : S(i.code);
-									if (B(C.toLowerCase())) return;
-									w.push(C);
-									let X = (N = m.keys) == null ? void 0 : N[w.length - 1];
-									if (C !== X) {
-										(w = []), k && clearTimeout(k);
-										return;
-									}
-									w.length === ((D = m.keys) == null ? void 0 : D.length) &&
-										(p.current(i, m), k && clearTimeout(k), (w = []));
-								} else if (
-									le(i, m, e?.ignoreModifiers) ||
-									(($ = m.keys) != null && $.includes("*"))
-								) {
-									if (
-										((I = e?.ignoreEventWhen) != null && I.call(e, i)) ||
-										(x && r.current)
-									)
-										return;
-									if ((te(i, m, e?.preventDefault), !ne(i, m, e?.enabled))) {
-										M(i);
-										return;
-									}
-									p.current(i, m), x || (r.current = true);
-								}
-							});
-					}
-				},
-				q = (i) => {
-					i.code !== void 0 &&
-						(G(S(i.code)),
-						((e?.keydown === void 0 && e?.keyup !== true) ||
-							(e != null && e.keydown)) &&
-							y(i));
-				},
-				j = (i) => {
-					i.code !== void 0 &&
-						(J(S(i.code)),
-						(r.current = false),
-						e != null && e.keyup && y(i, true));
-				},
-				E = u.current || l?.document || document;
-			return (
-				E.addEventListener("keyup", j, l?.eventListenerOptions),
-				E.addEventListener("keydown", q, l?.eventListenerOptions),
-				f &&
-					A(v, e?.delimiter).forEach((i) =>
-						f.addHotkey(
-							H(i, e?.splitKey, e?.sequenceSplitKey, e?.useKey, e?.description),
-						),
-					),
-				() => {
-					E.removeEventListener("keyup", j, l?.eventListenerOptions),
-						E.removeEventListener("keydown", q, l?.eventListenerOptions),
-						f &&
-							A(v, e?.delimiter).forEach((i) =>
-								f.removeHotkey(
-									H(
-										i,
-										e?.splitKey,
-										e?.sequenceSplitKey,
-										e?.useKey,
-										e?.description,
-									),
-								),
-							),
-						(w = []),
-						k && clearTimeout(k);
-				}
-			);
-		}, [v, e, d]),
-		u
-	);
-}
-
-// /:https://framerusercontent.com/modules/U45W8ogsikCVNYHYtTzF/WGf5NWZBqcxz1fAUzmA9/Broken.js
+import { useHotkeys } from "react-hotkeys-hook";
 function createWrappedComponent(Component3, key, props) {
-	pe(
+	useHotkeys(
 		key,
 		(event) => {
 			event.preventDefault();
@@ -1753,12 +1428,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders HeroSectionFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}
