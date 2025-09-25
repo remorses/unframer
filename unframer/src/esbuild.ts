@@ -6,6 +6,7 @@ import { Plugin, transform, type OnResolveArgs } from 'esbuild'
 import { resolvePackage } from './exporter'
 import { notifyError } from './sentry'
 import { dispatcher } from './undici-dispatcher'
+import { framerPackageVersions } from './framer-package-versions'
 
 
 export const defaultExternalPackages = [
@@ -45,7 +46,6 @@ export function esbuildPluginBundleDependencies({
     externalPackages = [] as string[],
     externalizeNpm = false,
     outDir,
-    onMissingPackage = (pkg: string) => {},
     onCollectMissingPackage = (pkg: string) => {},
 }) {
     externalPackages = [...defaultExternalPackages, ...externalPackages]
@@ -104,10 +104,20 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
-                            spinner.info(`Missing package detected: ${pkg}`)
+                            const hasFramerVersion = pkg in framerPackageVersions
+                            if (hasFramerVersion) {
+                                const version = framerPackageVersions[pkg as keyof typeof framerPackageVersions]
+                                spinner.info(`Missing package detected: ${pkg} (using Framer version ^${version})`)
+                            } else {
+                                spinner.info(`Missing package detected: ${pkg}`)
+                            }
                             reportedMissingPackages.add(pkg)
                         }
-                        onCollectMissingPackage?.(pkg)
+                        // Check if we have a specific version from framerPackageVersions
+                        const packageWithVersion = pkg in framerPackageVersions
+                            ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
+                            : pkg
+                        onCollectMissingPackage?.(packageWithVersion)
                     }
                     return {
                         path: args.path,
@@ -132,10 +142,20 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
-                            spinner.info(`Missing package detected: ${pkg}`)
+                            const hasFramerVersion = pkg in framerPackageVersions
+                            if (hasFramerVersion) {
+                                const version = framerPackageVersions[pkg as keyof typeof framerPackageVersions]
+                                spinner.info(`Missing package detected: ${pkg} (using Framer version ^${version})`)
+                            } else {
+                                spinner.info(`Missing package detected: ${pkg}`)
+                            }
                             reportedMissingPackages.add(pkg)
                         }
-                        onCollectMissingPackage?.(pkg)
+                        // Check if we have a specific version from framerPackageVersions
+                        const packageWithVersion = pkg in framerPackageVersions
+                            ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
+                            : pkg
+                        onCollectMissingPackage?.(packageWithVersion)
                     }
                     return {
                         path: args.path,

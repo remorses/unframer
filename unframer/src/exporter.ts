@@ -187,9 +187,6 @@ export async function bundle({
                 externalPackages: config.externalPackages,
                 externalizeNpm: config.allExternal,
                 outDir: out,
-                onMissingPackage: (e) => {
-                    // No longer needed - packages are auto-installed
-                },
                 onCollectMissingPackage: (pkg) => {
                     missingPackages.add(pkg)
                 },
