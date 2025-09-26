@@ -13,13 +13,13 @@ import {
   __toESM,
 } from './framer-chunks/chunk-A2PMVMFI.js';
 
-// /:https://app.framerstatic.com/chunk-VDW2YK33.mjs
+// /:https://app.framerstatic.com/chunk-CLPQIJRF.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import { useCallback, useContext, useId, } from 'react';
 import { Fragment, jsx as jsx3, } from 'react/jsx-runtime';
 import { useMemo as useMemo2, useRef as useRef3, useState, } from 'react';
-import * as React2 from 'react';
+import * as React3 from 'react';
 import { useInsertionEffect, } from 'react';
 import { Children, isValidElement, } from 'react';
 import { jsxs, } from 'react/jsx-runtime';
@@ -89,17 +89,22 @@ var clamp = (min, max, v,) => {
   if (v < min) return min;
   return v;
 };
+function formatErrorMessage(message, errorCode,) {
+  return errorCode
+    ? `${message}. For more information and steps for solving, visit https://motion.dev/troubleshooting/${errorCode}`
+    : message;
+}
 var warning = () => {};
 var invariant = () => {};
 if (false) {
-  warning = (check, message,) => {
+  warning = (check, message, errorCode,) => {
     if (!check && typeof console !== 'undefined') {
-      console.warn(message,);
+      console.warn(formatErrorMessage(message, errorCode,),);
     }
   };
-  invariant = (check, message,) => {
+  invariant = (check, message, errorCode,) => {
     if (!check) {
-      throw new Error(message,);
+      throw new Error(formatErrorMessage(message, errorCode,),);
     }
   };
 }
@@ -160,10 +165,9 @@ var warned = /* @__PURE__ */ new Set();
 function hasWarned(message,) {
   return warned.has(message,);
 }
-function warnOnce(condition, message, element,) {
+function warnOnce(condition, message, errorCode,) {
   if (condition || warned.has(message,)) return;
-  console.warn(message,);
-  if (element) console.warn(element,);
+  console.warn(formatErrorMessage(message, errorCode,),);
   warned.add(message,);
 }
 var wrap = (min, max, v,) => {
@@ -238,11 +242,11 @@ var isValidEasing = (easing) => {
 };
 var easingDefinitionToFunction = (definition) => {
   if (isBezierDefinition(definition,)) {
-    invariant(definition.length === 4, `Cubic bezier arrays must contain four numerical values.`,);
+    invariant(definition.length === 4, `Cubic bezier arrays must contain four numerical values.`, 'cubic-bezier-length',);
     const [x1, y1, x2, y2,] = definition;
     return cubicBezier(x1, y1, x2, y2,);
   } else if (isValidEasing(definition,)) {
-    invariant(easingLookup[definition] !== void 0, `Invalid easing type '${definition}'`,);
+    invariant(easingLookup[definition] !== void 0, `Invalid easing type '${definition}'`, 'invalid-easing-type',);
     return easingLookup[definition];
   }
   return definition;
@@ -714,7 +718,7 @@ var colorTypes = [hex, rgba, hsla,];
 var getColorType = (v) => colorTypes.find((type) => type.test(v,));
 function asRGBA(color2,) {
   const type = getColorType(color2,);
-  warning(Boolean(type,), `'${color2}' is not an animatable color. Use the equivalent color code instead.`,);
+  warning(Boolean(type,), `'${color2}' is not an animatable color. Use the equivalent color code instead.`, 'color-not-animatable',);
   if (!Boolean(type,)) return false;
   let model = type.parse(color2,);
   if (type === hsla) {
@@ -823,6 +827,7 @@ var mixComplex = (origin, target,) => {
     warning(
       true,
       `Complex values '${origin}' and '${target}' too different to mix. Ensure all colors are of the same type, and that each contains the same quantity of number and color values. Falling back to instant transition.`,
+      'complex-values-different',
     );
     return mixImmediate(origin, target,);
   }
@@ -910,7 +915,11 @@ function findSpring({
 },) {
   let envelope;
   let derivative;
-  warning(duration <= secondsToMilliseconds(springDefaults.maxDuration,), 'Spring duration must be 10 seconds or less',);
+  warning(
+    duration <= secondsToMilliseconds(springDefaults.maxDuration,),
+    'Spring duration must be 10 seconds or less',
+    'spring-duration-limit',
+  );
   let dampingRatio = 1 - bounce;
   dampingRatio = clamp(springDefaults.minDamping, springDefaults.maxDamping, dampingRatio,);
   duration = clamp(springDefaults.minDuration, springDefaults.maxDuration, millisecondsToSeconds(duration,),);
@@ -1197,7 +1206,7 @@ function interpolate(input, output, {
   mixer,
 } = {},) {
   const inputLength = input.length;
-  invariant(inputLength === output.length, 'Both input and output ranges must be the same length',);
+  invariant(inputLength === output.length, 'Both input and output ranges must be the same length', 'range-length',);
   if (inputLength === 1) return () => output[0];
   if (inputLength === 2 && output[0] === output[1]) return () => output[1];
   const isZeroDeltaRange = input[0] === input[1];
@@ -1381,6 +1390,7 @@ var JSAnimation = class extends WithPromise {
       invariant(
         keyframes$1.length <= 2,
         `Only two keyframes currently supported with spring and inertia animations. Trying to animate ${keyframes$1}`,
+        'spring-two-frames',
       );
     }
     if (generatorFactory !== keyframes && typeof keyframes$1[0] !== 'number') {
@@ -2019,10 +2029,7 @@ var NativeAnimation = class extends WithPromise {
     this.isPseudoElement = Boolean(pseudoElement,);
     this.allowFlatten = allowFlatten;
     this.options = options;
-    invariant(
-      typeof options.type !== 'string',
-      `animateMini doesn't support "type" as a string. Did you mean to import { spring } from "motion"?`,
-    );
+    invariant(typeof options.type !== 'string', `Mini animate() doesn't support "type" as a string.`, 'mini-spring',);
     const transition = applyGeneratorOptions(options,);
     this.animation = startWaapiAnimation(element, name, keyframes2, transition, pseudoElement,);
     if (transition.autoplay === false) {
@@ -2209,8 +2216,9 @@ var NativeAnimationExtended = class extends NativeAnimation {
     sampleAnimation.stop();
   }
 };
-function isHTMLElement(element,) {
-  return isObject(element,) && 'offsetHeight' in element;
+function makeAnimationInstant(options,) {
+  options.duration = 0;
+  options.type === 'keyframes';
 }
 var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Could be re-enabled now we have support for linear() easing
   // "background-color"
@@ -2226,7 +2234,8 @@ function supportsBrowserAnimation(options,) {
     damping,
     type,
   } = options;
-  if (!isHTMLElement((_a = motionValue2 == null ? void 0 : motionValue2.owner) == null ? void 0 : _a.current,)) {
+  const subject = (_a = motionValue2 == null ? void 0 : motionValue2.owner) == null ? void 0 : _a.current;
+  if (!(subject instanceof HTMLElement)) {
     return false;
   }
   const {
@@ -2271,7 +2280,10 @@ function canAnimate(keyframes2, name, type, velocity,) {
   const isTargetAnimatable = isAnimatable(targetKeyframe, name,);
   warning(
     isOriginAnimatable === isTargetAnimatable,
-    `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". ${originKeyframe} is not an animatable value - to enable this animation set ${originKeyframe} to a value animatable to ${targetKeyframe} via the \`style\` property.`,
+    `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${
+      isOriginAnimatable ? targetKeyframe : originKeyframe
+    }" is not an animatable value.`,
+    'value-not-animatable',
   );
   if (!isOriginAnimatable || !isTargetAnimatable) {
     return false;
@@ -2343,7 +2355,7 @@ var AsyncMotionValueAnimation = class extends WithPromise {
         onUpdate == null ? void 0 : onUpdate(getFinalKeyframe(keyframes2, options, finalKeyframe,),);
       }
       keyframes2[0] = keyframes2[keyframes2.length - 1];
-      options.duration = 0;
+      makeAnimationInstant(options,);
       options.repeat = 0;
     }
     const startTime = sync2
@@ -2537,6 +2549,7 @@ function getVariableValue(current2, element, depth = 1,) {
   invariant(
     depth <= maxDepth,
     `Max CSS variable fallback depth detected in property "${current2}". This may indicate a circular fallback dependency.`,
+    'max-css-var-depth',
   );
   const [token, fallback,] = parseCSSVariable(current2,);
   if (!token) return;
@@ -2996,6 +3009,9 @@ var propEffect = /* @__PURE__ */ createEffect((subject, state, key7, value,) => 
     false,
   );
 },);
+function isHTMLElement(element,) {
+  return isObject(element,) && 'offsetHeight' in element;
+}
 var MAX_VELOCITY_DELTA = 30;
 var isFloat = (value) => {
   return !isNaN(parseFloat(value,),);
@@ -3013,8 +3029,8 @@ var MotionValue = class {
   constructor(init, options = {},) {
     this.canTrackVelocity = null;
     this.events = {};
-    this.updateAndNotify = (v, render = true,) => {
-      var _a, _b;
+    this.updateAndNotify = (v) => {
+      var _a;
       const currentTime = time.now();
       if (this.updatedAt !== currentTime) {
         this.setPrevFrameValue();
@@ -3028,9 +3044,6 @@ var MotionValue = class {
             dependent.dirty();
           }
         }
-      }
-      if (render) {
-        (_b = this.events.renderRequest) == null ? void 0 : _b.notify(this.current,);
       }
     };
     this.hasAnimated = false;
@@ -3138,9 +3151,9 @@ var MotionValue = class {
    *
    * @public
    */
-  set(v, render = true,) {
-    if (!render || !this.passiveEffect) {
-      this.updateAndNotify(v, render,);
+  set(v,) {
+    if (!this.passiveEffect) {
+      this.updateAndNotify(v,);
     } else {
       this.passiveEffect(v, this.updateAndNotify,);
     }
@@ -3773,6 +3786,31 @@ function recordStats() {
 function isSVGSVGElement(element,) {
   return isSVGElement(element,) && element.tagName === 'svg';
 }
+function getOriginIndex(from, total,) {
+  if (from === 'first') {
+    return 0;
+  } else {
+    const lastIndex = total - 1;
+    return from === 'last' ? lastIndex : lastIndex / 2;
+  }
+}
+function stagger(duration = 0.1, {
+  startDelay = 0,
+  from = 0,
+  ease: ease2,
+} = {},) {
+  return (i, total,) => {
+    const fromIndex = typeof from === 'number' ? from : getOriginIndex(from, total,);
+    const distance2 = Math.abs(fromIndex - i,);
+    let delay2 = duration * distance2;
+    if (ease2) {
+      const maxDelay = total * duration;
+      const easingFunction = easingDefinitionToFunction(ease2,);
+      delay2 = easingFunction(delay2 / maxDelay,) * maxDelay;
+    }
+    return startDelay + delay2;
+  };
+}
 function transform(...args) {
   const useImmediate = !Array.isArray(args[0],);
   const argOffset = useImmediate ? 0 : -1;
@@ -3842,12 +3880,15 @@ function attachSpring(value, source, options,) {
     frame.postRender(startAnimation2,);
     return value.get();
   }, stopAnimation2,);
-  let unsubscribe = void 0;
   if (isMotionValue(source,)) {
-    unsubscribe = source.on('change', (v) => value.set(parseValue(v, unit,),),);
-    value.on('destroy', unsubscribe,);
+    const removeSourceOnChange = source.on('change', (v) => value.set(parseValue(v, unit,),),);
+    const removeValueOnDestroy = value.on('destroy', removeSourceOnChange,);
+    return () => {
+      removeSourceOnChange();
+      removeValueOnDestroy();
+    };
   }
-  return unsubscribe;
+  return stopAnimation2;
 }
 function parseValue(v, unit,) {
   return unit ? v + unit : v;
@@ -3857,6 +3898,25 @@ function asNumber(v,) {
 }
 var valueTypes = [...dimensionValueTypes, color, complex,];
 var findValueType = (v) => valueTypes.find(testValueType(v,),);
+function getViewAnimationLayerInfo(pseudoElement,) {
+  const match = pseudoElement.match(/::view-transition-(old|new|group|image-pair)\((.*?)\)/,);
+  if (!match) return null;
+  return {
+    layer: match[2],
+    type: match[1],
+  };
+}
+function filterViewAnimations(animation,) {
+  var _a;
+  const {
+    effect,
+  } = animation;
+  if (!effect) return false;
+  return effect.target === document.documentElement && ((_a = effect.pseudoElement) == null ? void 0 : _a.startsWith('::view-transition',));
+}
+function getViewAnimations() {
+  return document.getAnimations().filter(filterViewAnimations,);
+}
 function chooseLayerType(valueName,) {
   if (valueName === 'layout') return 'group';
   if (valueName === 'enter' || valueName === 'new') return 'new';
@@ -3895,25 +3955,6 @@ var css = {
     }
   },
 };
-function getLayerName(pseudoElement,) {
-  const match = pseudoElement.match(/::view-transition-(old|new|group|image-pair)\((.*?)\)/,);
-  if (!match) return null;
-  return {
-    layer: match[2],
-    type: match[1],
-  };
-}
-function filterViewAnimations(animation,) {
-  var _a;
-  const {
-    effect,
-  } = animation;
-  if (!effect) return false;
-  return effect.target === document.documentElement && ((_a = effect.pseudoElement) == null ? void 0 : _a.startsWith('::view-transition',));
-}
-function getViewAnimations() {
-  return document.getAnimations().filter(filterViewAnimations,);
-}
 function hasTarget(target, targets,) {
   return targets.has(target,) && Object.keys(targets.get(target,),).length > 0;
 }
@@ -3993,7 +4034,7 @@ function startViewAnimation(builder,) {
           pseudoElement,
         } = effect;
         if (!pseudoElement) continue;
-        const name = getLayerName(pseudoElement,);
+        const name = getViewAnimationLayerInfo(pseudoElement,);
         if (!name) continue;
         const targetDefinition = targets.get(name.layer,);
         if (!targetDefinition) {
@@ -4176,7 +4217,41 @@ function useConstant(init,) {
   }
   return ref.current;
 }
-var PopChildMeasure = class extends React2.Component {
+function setRef(ref, value,) {
+  if (typeof ref === 'function') {
+    return ref(value,);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node,);
+      if (!hasCleanup && typeof cleanup === 'function') {
+        hasCleanup = true;
+      }
+      return cleanup;
+    },);
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup === 'function') {
+            cleanup();
+          } else {
+            setRef(refs[i], null,);
+          }
+        }
+      };
+    }
+  };
+}
+function useComposedRefs(...refs) {
+  return React3.useCallback(composeRefs(...refs,), refs,);
+}
+var PopChildMeasure = class extends React3.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
@@ -4217,6 +4292,7 @@ function PopChild({
   const {
     nonce,
   } = useContext(MotionConfigContext,);
+  const composedRef = useComposedRefs(ref, children == null ? void 0 : children.ref,);
   useInsertionEffect(() => {
     const {
       width,
@@ -4244,7 +4320,6 @@ function PopChild({
         `,);
     }
     return () => {
-      parent.removeChild(style2,);
       if (parent.contains(style2,)) {
         parent.removeChild(style2,);
       }
@@ -4254,8 +4329,8 @@ function PopChild({
     isPresent: isPresent2,
     childRef: ref,
     sizeRef: size,
-    children: React2.cloneElement(children, {
-      ref,
+    children: React3.cloneElement(children, {
+      ref: composedRef,
     },),
   },);
 }
@@ -4301,7 +4376,7 @@ var PresenceChild = ({
   useMemo2(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
   }, [isPresent2,],);
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
   if (mode === 'popLayout') {
@@ -4636,270 +4711,6 @@ function MotionConfig({
   },);
 }
 var MotionContext = /* @__PURE__ */ createContext({},);
-var camelToDash2 = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
-var optimizedAppearDataId = 'framerAppearId';
-var optimizedAppearDataAttribute = 'data-' + camelToDash2(optimizedAppearDataId,);
-var SwitchLayoutGroupContext = createContext({},);
-function isAnimationControls(v,) {
-  return v !== null && typeof v === 'object' && typeof v.start === 'function';
-}
-function isVariantLabel(v,) {
-  return typeof v === 'string' || Array.isArray(v,);
-}
-var variantPriorityOrder = ['animate', 'whileInView', 'whileFocus', 'whileHover', 'whileTap', 'whileDrag', 'exit',];
-var variantProps = ['initial', ...variantPriorityOrder,];
-function isControllingVariants(props,) {
-  return isAnimationControls(props.animate,) || variantProps.some((name) => isVariantLabel(props[name],));
-}
-function isVariantNode(props,) {
-  return Boolean(isControllingVariants(props,) || props.variants,);
-}
-function getCurrentTreeVariants(props, context,) {
-  if (isControllingVariants(props,)) {
-    const {
-      initial,
-      animate: animate22,
-    } = props;
-    return {
-      initial: initial === false || isVariantLabel(initial,) ? initial : void 0,
-      animate: isVariantLabel(animate22,) ? animate22 : void 0,
-    };
-  }
-  return props.inherit !== false ? context : {};
-}
-function useCreateMotionContext(props,) {
-  const {
-    initial,
-    animate: animate22,
-  } = getCurrentTreeVariants(props, useContext(MotionContext,),);
-  return useMemo2(() => ({
-    initial,
-    animate: animate22,
-  }), [variantLabelsAsDependency(initial,), variantLabelsAsDependency(animate22,),],);
-}
-function variantLabelsAsDependency(prop,) {
-  return Array.isArray(prop,) ? prop.join(' ',) : prop;
-}
-var motionComponentSymbol = Symbol.for('motionComponentSymbol',);
-function isRefObject(ref,) {
-  return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
-}
-function useMotionRef(visualState, visualElement, externalRef,) {
-  return useCallback((instance) => {
-    if (instance) {
-      visualState.onMount && visualState.onMount(instance,);
-    }
-    if (visualElement) {
-      if (instance) {
-        visualElement.mount(instance,);
-      } else {
-        visualElement.unmount();
-      }
-    }
-    if (externalRef) {
-      if (typeof externalRef === 'function') {
-        externalRef(instance,);
-      } else if (isRefObject(externalRef,)) {
-        externalRef.current = instance;
-      }
-    }
-  }, /**
-   * Only pass a new ref callback to React if we've received a visual element
-   * factory. Otherwise we'll be mounting/remounting every time externalRef
-   * or other dependencies change.
-   */
-  [visualElement,],);
-}
-function useVisualElement(Component33, visualState, props, createVisualElement, ProjectionNodeConstructor,) {
-  var _a, _b;
-  const {
-    visualElement: parent,
-  } = useContext(MotionContext,);
-  const lazyContext = useContext(LazyContext,);
-  const presenceContext = useContext(PresenceContext,);
-  const reducedMotionConfig = useContext(MotionConfigContext,).reducedMotion;
-  const visualElementRef = useRef3(null,);
-  createVisualElement = createVisualElement || lazyContext.renderer;
-  if (!visualElementRef.current && createVisualElement) {
-    visualElementRef.current = createVisualElement(Component33, {
-      visualState,
-      parent,
-      props,
-      presenceContext,
-      blockInitialAnimation: presenceContext ? presenceContext.initial === false : false,
-      reducedMotionConfig,
-    },);
-  }
-  const visualElement = visualElementRef.current;
-  const initialLayoutGroupConfig = useContext(SwitchLayoutGroupContext,);
-  if (
-    visualElement && !visualElement.projection && ProjectionNodeConstructor &&
-    (visualElement.type === 'html' || visualElement.type === 'svg')
-  ) {
-    createProjectionNode(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig,);
-  }
-  const isMounted = useRef3(false,);
-  useInsertionEffect(() => {
-    if (visualElement && isMounted.current) {
-      visualElement.update(props, presenceContext,);
-    }
-  },);
-  const optimisedAppearId = props[optimizedAppearDataAttribute];
-  const wantsHandoff = useRef3(
-    Boolean(optimisedAppearId,) && !((_a = window.MotionHandoffIsComplete) == null ? void 0 : _a.call(window, optimisedAppearId,)) &&
-      ((_b = window.MotionHasOptimisedAnimation) == null ? void 0 : _b.call(window, optimisedAppearId,)),
-  );
-  useIsomorphicLayoutEffect(() => {
-    if (!visualElement) return;
-    isMounted.current = true;
-    window.MotionIsMounted = true;
-    visualElement.updateFeatures();
-    microtask.render(visualElement.render,);
-    if (wantsHandoff.current && visualElement.animationState) {
-      visualElement.animationState.animateChanges();
-    }
-  },);
-  useEffect(() => {
-    if (!visualElement) return;
-    if (!wantsHandoff.current && visualElement.animationState) {
-      visualElement.animationState.animateChanges();
-    }
-    if (wantsHandoff.current) {
-      queueMicrotask(() => {
-        var _a2;
-        (_a2 = window.MotionHandoffMarkAsComplete) == null ? void 0 : _a2.call(window, optimisedAppearId,);
-      },);
-      wantsHandoff.current = false;
-    }
-  },);
-  return visualElement;
-}
-function createProjectionNode(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig,) {
-  const {
-    layoutId,
-    layout: layout2,
-    drag: drag2,
-    dragConstraints,
-    layoutScroll,
-    layoutRoot,
-    layoutCrossfade,
-  } = props;
-  visualElement.projection = new ProjectionNodeConstructor(
-    visualElement.latestValues,
-    props['data-framer-portal-id'] ? void 0 : getClosestProjectingNode(visualElement.parent,),
-  );
-  visualElement.projection.setOptions({
-    layoutId,
-    layout: layout2,
-    alwaysMeasureLayout: Boolean(drag2,) || dragConstraints && isRefObject(dragConstraints,),
-    visualElement,
-    /**
-     * TODO: Update options in an effect. This could be tricky as it'll be too late
-     * to update by the time layout animations run.
-     * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
-     * ensuring it gets called if there's no potential layout animations.
-     */
-    animationType: typeof layout2 === 'string' ? layout2 : 'both',
-    initialPromotionConfig,
-    crossfade: layoutCrossfade,
-    layoutScroll,
-    layoutRoot,
-  },);
-}
-function getClosestProjectingNode(visualElement,) {
-  if (!visualElement) return void 0;
-  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
-}
-function createRendererMotionComponent({
-  preloadedFeatures,
-  createVisualElement,
-  useRender,
-  useVisualState: useVisualState2,
-  Component: Component33,
-},) {
-  preloadedFeatures && loadFeatures(preloadedFeatures,);
-  function MotionComponent(props, externalRef,) {
-    let MeasureLayout2;
-    const configAndProps = {
-      ...useContext(MotionConfigContext,),
-      ...props,
-      layoutId: useLayoutId(props,),
-    };
-    const {
-      isStatic,
-    } = configAndProps;
-    const context = useCreateMotionContext(props,);
-    const visualState = useVisualState2(props, isStatic,);
-    if (!isStatic && isBrowser) {
-      useStrictMode(configAndProps, preloadedFeatures,);
-      const layoutProjection = getProjectionFunctionality(configAndProps,);
-      MeasureLayout2 = layoutProjection.MeasureLayout;
-      context.visualElement = useVisualElement(
-        Component33,
-        visualState,
-        configAndProps,
-        createVisualElement,
-        layoutProjection.ProjectionNode,
-      );
-    }
-    return jsxs(MotionContext.Provider, {
-      value: context,
-      children: [
-        MeasureLayout2 && context.visualElement
-          ? jsx3(MeasureLayout2, {
-            visualElement: context.visualElement,
-            ...configAndProps,
-          },)
-          : null,
-        useRender(
-          Component33,
-          props,
-          useMotionRef(visualState, context.visualElement, externalRef,),
-          visualState,
-          isStatic,
-          context.visualElement,
-        ),
-      ],
-    },);
-  }
-  MotionComponent.displayName = `motion.${
-    typeof Component33 === 'string' ? Component33 : `create(${Component33.displayName ?? Component33.name ?? ''})`
-  }`;
-  const ForwardRefMotionComponent = forwardRef(MotionComponent,);
-  ForwardRefMotionComponent[motionComponentSymbol] = Component33;
-  return ForwardRefMotionComponent;
-}
-function useLayoutId({
-  layoutId,
-},) {
-  const layoutGroupId = useContext(LayoutGroupContext,).id;
-  return layoutGroupId && layoutId !== void 0 ? layoutGroupId + '-' + layoutId : layoutId;
-}
-function useStrictMode(configAndProps, preloadedFeatures,) {
-  const isStrict = useContext(LazyContext,).strict;
-  if (false) {
-    const strictMessage =
-      'You have rendered a `motion` component within a `LazyMotion` component. This will break tree shaking. Import and render a `m` component instead.';
-    configAndProps.ignoreStrict ? warning(false, strictMessage,) : invariant(false, strictMessage,);
-  }
-}
-function getProjectionFunctionality(props,) {
-  const {
-    drag: drag2,
-    layout: layout2,
-  } = featureDefinitions;
-  if (!drag2 && !layout2) return {};
-  const combined = {
-    ...drag2,
-    ...layout2,
-  };
-  return {
-    MeasureLayout: (drag2 == null ? void 0 : drag2.isEnabled(props,)) || (layout2 == null ? void 0 : layout2.isEnabled(props,))
-      ? combined.MeasureLayout
-      : void 0,
-    ProjectionNode: combined.ProjectionNode,
-  };
-}
 var scaleCorrectors = {};
 function addScaleCorrector(correctors,) {
   for (const key7 in correctors) {
@@ -4952,6 +4763,20 @@ function buildTransform2(latestValues, transform2, transformTemplate2,) {
 function resolveMotionValue(value,) {
   return isMotionValue(value,) ? value.get() : value;
 }
+function isAnimationControls(v,) {
+  return v !== null && typeof v === 'object' && typeof v.start === 'function';
+}
+function isVariantLabel(v,) {
+  return typeof v === 'string' || Array.isArray(v,);
+}
+var variantPriorityOrder = ['animate', 'whileInView', 'whileFocus', 'whileHover', 'whileTap', 'whileDrag', 'exit',];
+var variantProps = ['initial', ...variantPriorityOrder,];
+function isControllingVariants(props,) {
+  return isAnimationControls(props.animate,) || variantProps.some((name) => isVariantLabel(props[name],));
+}
+function isVariantNode(props,) {
+  return Boolean(isControllingVariants(props,) || props.variants,);
+}
 function getValueState(visualElement,) {
   const state = [{}, {},];
   visualElement == null ? void 0 : visualElement.values.forEach((value, key7,) => {
@@ -4989,12 +4814,6 @@ function makeState(
   };
   return state;
 }
-var makeUseVisualState = (config) => (props, isStatic,) => {
-  const context = useContext(MotionContext,);
-  const presenceContext = useContext(PresenceContext,);
-  const make = () => makeState(config, props, context, presenceContext,);
-  return isStatic ? make() : useConstant(make,);
-};
 function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) {
   const values = {};
   const motionValues = scrapeMotionValues(props, {},);
@@ -5042,31 +4861,41 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) 
   }
   return values;
 }
-function createDOMMotionComponentProxy(componentFactory,) {
-  if (typeof Proxy === 'undefined') {
-    return componentFactory;
+var makeUseVisualState = (config) => (props, isStatic,) => {
+  const context = useContext(MotionContext,);
+  const presenceContext = useContext(PresenceContext,);
+  const make = () => makeState(config, props, context, presenceContext,);
+  return isStatic ? make() : useConstant(make,);
+};
+var camelToDash2 = (str) => str.replace(/([a-z])([A-Z])/gu, '$1-$2',).toLowerCase();
+var optimizedAppearDataId = 'framerAppearId';
+var optimizedAppearDataAttribute = 'data-' + camelToDash2(optimizedAppearDataId,);
+var SwitchLayoutGroupContext = createContext({},);
+function getCurrentTreeVariants(props, context,) {
+  if (isControllingVariants(props,)) {
+    const {
+      initial,
+      animate: animate22,
+    } = props;
+    return {
+      initial: initial === false || isVariantLabel(initial,) ? initial : void 0,
+      animate: isVariantLabel(animate22,) ? animate22 : void 0,
+    };
   }
-  const componentCache = /* @__PURE__ */ new Map();
-  const deprecatedFactoryFunction = (...args) => {
-    if (false) {
-      warnOnce(false, 'motion() is deprecated. Use motion.create() instead.',);
-    }
-    return componentFactory(...args,);
-  };
-  return new Proxy(deprecatedFactoryFunction, {
-    /**
-     * Called when `motion` is referenced with a prop: `motion.div`, `motion.input` etc.
-     * The prop name is passed through as `key` and we can use that to generate a `motion`
-     * DOM component with that name.
-     */
-    get: (_target, key7,) => {
-      if (key7 === 'create') return componentFactory;
-      if (!componentCache.has(key7,)) {
-        componentCache.set(key7, componentFactory(key7,),);
-      }
-      return componentCache.get(key7,);
-    },
-  },);
+  return props.inherit !== false ? context : {};
+}
+function useCreateMotionContext(props,) {
+  const {
+    initial,
+    animate: animate22,
+  } = getCurrentTreeVariants(props, useContext(MotionContext,),);
+  return useMemo2(() => ({
+    initial,
+    animate: animate22,
+  }), [variantLabelsAsDependency(initial,), variantLabelsAsDependency(animate22,),],);
+}
+function variantLabelsAsDependency(prop,) {
+  return Array.isArray(prop,) ? prop.join(' ',) : prop;
 }
 function isForcedMotionValue(key7, {
   layout: layout2,
@@ -5304,30 +5133,34 @@ function isSVGComponent(Component33,) {
   }
   return false;
 }
-function createUseRender(forwardMotionProps = false,) {
-  const useRender = (Component33, props, ref, {
+function useRender(
+  Component33,
+  props,
+  ref,
+  {
     latestValues,
-  }, isStatic,) => {
-    const useVisualProps = isSVGComponent(Component33,) ? useSVGProps : useHTMLProps;
-    const visualProps = useVisualProps(props, latestValues, isStatic, Component33,);
-    const filteredProps2 = filterProps(props, typeof Component33 === 'string', forwardMotionProps,);
-    const elementProps = Component33 !== Fragment
-      ? {
-        ...filteredProps2,
-        ...visualProps,
-        ref,
-      }
-      : {};
-    const {
-      children,
-    } = props;
-    const renderedChildren = useMemo2(() => isMotionValue(children,) ? children.get() : children, [children,],);
-    return createElement(Component33, {
-      ...elementProps,
-      children: renderedChildren,
-    },);
-  };
-  return useRender;
+  },
+  isStatic,
+  forwardMotionProps = false,
+) {
+  const useVisualProps = isSVGComponent(Component33,) ? useSVGProps : useHTMLProps;
+  const visualProps = useVisualProps(props, latestValues, isStatic, Component33,);
+  const filteredProps2 = filterProps(props, typeof Component33 === 'string', forwardMotionProps,);
+  const elementProps = Component33 !== Fragment
+    ? {
+      ...filteredProps2,
+      ...visualProps,
+      ref,
+    }
+    : {};
+  const {
+    children,
+  } = props;
+  const renderedChildren = useMemo2(() => isMotionValue(children,) ? children.get() : children, [children,],);
+  return createElement(Component33, {
+    ...elementProps,
+    children: renderedChildren,
+  },);
 }
 function scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
   var _a;
@@ -5345,12 +5178,10 @@ function scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
   }
   return newValues;
 }
-var htmlMotionConfig = {
-  useVisualState: makeUseVisualState({
-    scrapeMotionValuesFromProps,
-    createRenderState: createHtmlRenderState,
-  },),
-};
+var useHTMLVisualState = /* @__PURE__ */ makeUseVisualState({
+  scrapeMotionValuesFromProps,
+  createRenderState: createHtmlRenderState,
+},);
 function scrapeMotionValuesFromProps2(props, prevProps, visualElement,) {
   const newValues = scrapeMotionValuesFromProps(props, prevProps, visualElement,);
   for (const key7 in props) {
@@ -5361,31 +5192,731 @@ function scrapeMotionValuesFromProps2(props, prevProps, visualElement,) {
   }
   return newValues;
 }
-var svgMotionConfig = {
-  useVisualState: makeUseVisualState({
-    scrapeMotionValuesFromProps: scrapeMotionValuesFromProps2,
-    createRenderState: createSvgRenderState,
-  },),
-};
-function createMotionComponentFactory(preloadedFeatures, createVisualElement,) {
-  return function createMotionComponent2(Component33, {
-    forwardMotionProps,
-  } = {
-    forwardMotionProps: false,
-  },) {
-    const baseConfig = isSVGComponent(Component33,) ? svgMotionConfig : htmlMotionConfig;
-    const config = {
-      ...baseConfig,
-      preloadedFeatures,
-      useRender: createUseRender(forwardMotionProps,),
-      createVisualElement,
-      Component: Component33,
+var useSVGVisualState = /* @__PURE__ */ makeUseVisualState({
+  scrapeMotionValuesFromProps: scrapeMotionValuesFromProps2,
+  createRenderState: createSvgRenderState,
+},);
+var motionComponentSymbol = Symbol.for('motionComponentSymbol',);
+function isRefObject(ref,) {
+  return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
+}
+function useMotionRef(visualState, visualElement, externalRef,) {
+  return useCallback((instance) => {
+    if (instance) {
+      visualState.onMount && visualState.onMount(instance,);
+    }
+    if (visualElement) {
+      if (instance) {
+        visualElement.mount(instance,);
+      } else {
+        visualElement.unmount();
+      }
+    }
+    if (externalRef) {
+      if (typeof externalRef === 'function') {
+        externalRef(instance,);
+      } else if (isRefObject(externalRef,)) {
+        externalRef.current = instance;
+      }
+    }
+  }, /**
+   * Include externalRef in dependencies to ensure the callback updates
+   * when the ref changes, allowing proper ref forwarding.
+   */
+  [visualElement,],);
+}
+function useVisualElement(Component33, visualState, props, createVisualElement, ProjectionNodeConstructor,) {
+  var _a, _b;
+  const {
+    visualElement: parent,
+  } = useContext(MotionContext,);
+  const lazyContext = useContext(LazyContext,);
+  const presenceContext = useContext(PresenceContext,);
+  const reducedMotionConfig = useContext(MotionConfigContext,).reducedMotion;
+  const visualElementRef = useRef3(null,);
+  createVisualElement = createVisualElement || lazyContext.renderer;
+  if (!visualElementRef.current && createVisualElement) {
+    visualElementRef.current = createVisualElement(Component33, {
+      visualState,
+      parent,
+      props,
+      presenceContext,
+      blockInitialAnimation: presenceContext ? presenceContext.initial === false : false,
+      reducedMotionConfig,
+    },);
+  }
+  const visualElement = visualElementRef.current;
+  const initialLayoutGroupConfig = useContext(SwitchLayoutGroupContext,);
+  if (
+    visualElement && !visualElement.projection && ProjectionNodeConstructor &&
+    (visualElement.type === 'html' || visualElement.type === 'svg')
+  ) {
+    createProjectionNode(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig,);
+  }
+  const isMounted = useRef3(false,);
+  useInsertionEffect(() => {
+    if (visualElement && isMounted.current) {
+      visualElement.update(props, presenceContext,);
+    }
+  },);
+  const optimisedAppearId = props[optimizedAppearDataAttribute];
+  const wantsHandoff = useRef3(
+    Boolean(optimisedAppearId,) && !((_a = window.MotionHandoffIsComplete) == null ? void 0 : _a.call(window, optimisedAppearId,)) &&
+      ((_b = window.MotionHasOptimisedAnimation) == null ? void 0 : _b.call(window, optimisedAppearId,)),
+  );
+  useIsomorphicLayoutEffect(() => {
+    if (!visualElement) return;
+    isMounted.current = true;
+    window.MotionIsMounted = true;
+    visualElement.updateFeatures();
+    visualElement.scheduleRenderMicrotask();
+    if (wantsHandoff.current && visualElement.animationState) {
+      visualElement.animationState.animateChanges();
+    }
+  },);
+  useEffect(() => {
+    if (!visualElement) return;
+    if (!wantsHandoff.current && visualElement.animationState) {
+      visualElement.animationState.animateChanges();
+    }
+    if (wantsHandoff.current) {
+      queueMicrotask(() => {
+        var _a2;
+        (_a2 = window.MotionHandoffMarkAsComplete) == null ? void 0 : _a2.call(window, optimisedAppearId,);
+      },);
+      wantsHandoff.current = false;
+    }
+    visualElement.enteringChildren = void 0;
+  },);
+  return visualElement;
+}
+function createProjectionNode(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig,) {
+  const {
+    layoutId,
+    layout: layout2,
+    drag: drag2,
+    dragConstraints,
+    layoutScroll,
+    layoutRoot,
+    layoutCrossfade,
+  } = props;
+  visualElement.projection = new ProjectionNodeConstructor(
+    visualElement.latestValues,
+    props['data-framer-portal-id'] ? void 0 : getClosestProjectingNode(visualElement.parent,),
+  );
+  visualElement.projection.setOptions({
+    layoutId,
+    layout: layout2,
+    alwaysMeasureLayout: Boolean(drag2,) || dragConstraints && isRefObject(dragConstraints,),
+    visualElement,
+    /**
+     * TODO: Update options in an effect. This could be tricky as it'll be too late
+     * to update by the time layout animations run.
+     * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
+     * ensuring it gets called if there's no potential layout animations.
+     */
+    animationType: typeof layout2 === 'string' ? layout2 : 'both',
+    initialPromotionConfig,
+    crossfade: layoutCrossfade,
+    layoutScroll,
+    layoutRoot,
+  },);
+}
+function getClosestProjectingNode(visualElement,) {
+  if (!visualElement) return void 0;
+  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent,);
+}
+function createMotionComponent(
+  Component33,
+  {
+    forwardMotionProps = false,
+  } = {},
+  preloadedFeatures,
+  createVisualElement,
+) {
+  preloadedFeatures && loadFeatures(preloadedFeatures,);
+  const useVisualState2 = isSVGComponent(Component33,) ? useSVGVisualState : useHTMLVisualState;
+  function MotionDOMComponent(props, externalRef,) {
+    let MeasureLayout2;
+    const configAndProps = {
+      ...useContext(MotionConfigContext,),
+      ...props,
+      layoutId: useLayoutId(props,),
     };
-    return createRendererMotionComponent(config,);
+    const {
+      isStatic,
+    } = configAndProps;
+    const context = useCreateMotionContext(props,);
+    const visualState = useVisualState2(props, isStatic,);
+    if (!isStatic && isBrowser) {
+      useStrictMode(configAndProps, preloadedFeatures,);
+      const layoutProjection = getProjectionFunctionality(configAndProps,);
+      MeasureLayout2 = layoutProjection.MeasureLayout;
+      context.visualElement = useVisualElement(
+        Component33,
+        visualState,
+        configAndProps,
+        createVisualElement,
+        layoutProjection.ProjectionNode,
+      );
+    }
+    return jsxs(MotionContext.Provider, {
+      value: context,
+      children: [
+        MeasureLayout2 && context.visualElement
+          ? jsx3(MeasureLayout2, {
+            visualElement: context.visualElement,
+            ...configAndProps,
+          },)
+          : null,
+        useRender(
+          Component33,
+          props,
+          useMotionRef(visualState, context.visualElement, externalRef,),
+          visualState,
+          isStatic,
+          forwardMotionProps,
+        ),
+      ],
+    },);
+  }
+  MotionDOMComponent.displayName = `motion.${
+    typeof Component33 === 'string' ? Component33 : `create(${Component33.displayName ?? Component33.name ?? ''})`
+  }`;
+  const ForwardRefMotionComponent = forwardRef(MotionDOMComponent,);
+  ForwardRefMotionComponent[motionComponentSymbol] = Component33;
+  return ForwardRefMotionComponent;
+}
+function useLayoutId({
+  layoutId,
+},) {
+  const layoutGroupId = useContext(LayoutGroupContext,).id;
+  return layoutGroupId && layoutId !== void 0 ? layoutGroupId + '-' + layoutId : layoutId;
+}
+function useStrictMode(configAndProps, preloadedFeatures,) {
+  const isStrict = useContext(LazyContext,).strict;
+  if (false) {
+    const strictMessage =
+      'You have rendered a `motion` component within a `LazyMotion` component. This will break tree shaking. Import and render a `m` component instead.';
+    configAndProps.ignoreStrict ? warning(false, strictMessage, 'lazy-strict-mode',) : invariant(false, strictMessage, 'lazy-strict-mode',);
+  }
+}
+function getProjectionFunctionality(props,) {
+  const {
+    drag: drag2,
+    layout: layout2,
+  } = featureDefinitions;
+  if (!drag2 && !layout2) return {};
+  const combined = {
+    ...drag2,
+    ...layout2,
+  };
+  return {
+    MeasureLayout: (drag2 == null ? void 0 : drag2.isEnabled(props,)) || (layout2 == null ? void 0 : layout2.isEnabled(props,))
+      ? combined.MeasureLayout
+      : void 0,
+    ProjectionNode: combined.ProjectionNode,
   };
 }
-var createMinimalMotionComponent = /* @__PURE__ */ createMotionComponentFactory();
-var m = /* @__PURE__ */ createDOMMotionComponentProxy(createMinimalMotionComponent,);
+function createMotionProxy(preloadedFeatures, createVisualElement,) {
+  if (typeof Proxy === 'undefined') {
+    return createMotionComponent;
+  }
+  const componentCache = /* @__PURE__ */ new Map();
+  const factory = (Component33, options,) => {
+    return createMotionComponent(Component33, options, preloadedFeatures, createVisualElement,);
+  };
+  const deprecatedFactoryFunction = (Component33, options,) => {
+    if (false) {
+      warnOnce(false, 'motion() is deprecated. Use motion.create() instead.',);
+    }
+    return factory(Component33, options,);
+  };
+  return new Proxy(deprecatedFactoryFunction, {
+    /**
+     * Called when `motion` is referenced with a prop: `motion.div`, `motion.input` etc.
+     * The prop name is passed through as `key` and we can use that to generate a `motion`
+     * DOM component with that name.
+     */
+    get: (_target, key7,) => {
+      if (key7 === 'create') return factory;
+      if (!componentCache.has(key7,)) {
+        componentCache.set(key7, createMotionComponent(key7, void 0, preloadedFeatures, createVisualElement,),);
+      }
+      return componentCache.get(key7,);
+    },
+  },);
+}
+var m = /* @__PURE__ */ createMotionProxy();
+var createAxisDelta = () => ({
+  translate: 0,
+  scale: 1,
+  origin: 0,
+  originPoint: 0,
+});
+var createDelta = () => ({
+  x: createAxisDelta(),
+  y: createAxisDelta(),
+});
+var createAxis = () => ({
+  min: 0,
+  max: 0,
+});
+var createBox = () => ({
+  x: createAxis(),
+  y: createAxis(),
+});
+var visualElementStore = /* @__PURE__ */ new WeakMap();
+var prefersReducedMotion = {
+  current: null,
+};
+var hasReducedMotionListener = {
+  current: false,
+};
+function initPrefersReducedMotion() {
+  hasReducedMotionListener.current = true;
+  if (!isBrowser) return;
+  if (window.matchMedia) {
+    const motionMediaQuery = window.matchMedia('(prefers-reduced-motion)',);
+    const setReducedMotionPreferences = () => prefersReducedMotion.current = motionMediaQuery.matches;
+    motionMediaQuery.addEventListener('change', setReducedMotionPreferences,);
+    setReducedMotionPreferences();
+  } else {
+    prefersReducedMotion.current = false;
+  }
+}
+function updateMotionValuesFromProps(element, next2, prev,) {
+  for (const key7 in next2) {
+    const nextValue = next2[key7];
+    const prevValue = prev[key7];
+    if (isMotionValue(nextValue,)) {
+      element.addValue(key7, nextValue,);
+    } else if (isMotionValue(prevValue,)) {
+      element.addValue(
+        key7,
+        motionValue(nextValue, {
+          owner: element,
+        },),
+      );
+    } else if (prevValue !== nextValue) {
+      if (element.hasValue(key7,)) {
+        const existingValue = element.getValue(key7,);
+        if (existingValue.liveStyle === true) {
+          existingValue.jump(nextValue,);
+        } else if (!existingValue.hasAnimated) {
+          existingValue.set(nextValue,);
+        }
+      } else {
+        const latestValue = element.getStaticValue(key7,);
+        element.addValue(
+          key7,
+          motionValue(latestValue !== void 0 ? latestValue : nextValue, {
+            owner: element,
+          },),
+        );
+      }
+    }
+  }
+  for (const key7 in prev) {
+    if (next2[key7] === void 0) element.removeValue(key7,);
+  }
+  return next2;
+}
+var propEventHandlers = [
+  'AnimationStart',
+  'AnimationComplete',
+  'Update',
+  'BeforeLayoutMeasure',
+  'LayoutMeasure',
+  'LayoutAnimationStart',
+  'LayoutAnimationComplete',
+];
+var VisualElement = class {
+  /**
+   * This method takes React props and returns found MotionValues. For example, HTML
+   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
+   *
+   * This isn't an abstract method as it needs calling in the constructor, but it is
+   * intended to be one.
+   */
+  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
+    return {};
+  }
+  constructor({
+    parent,
+    props,
+    presenceContext,
+    reducedMotionConfig,
+    blockInitialAnimation,
+    visualState,
+  }, options = {},) {
+    this.current = null;
+    this.children = /* @__PURE__ */ new Set();
+    this.isVariantNode = false;
+    this.isControllingVariants = false;
+    this.shouldReduceMotion = null;
+    this.values = /* @__PURE__ */ new Map();
+    this.KeyframeResolver = KeyframeResolver;
+    this.features = {};
+    this.valueSubscriptions = /* @__PURE__ */ new Map();
+    this.prevMotionValues = {};
+    this.events = {};
+    this.propEventSubscriptions = {};
+    this.notifyUpdate = () => this.notify('Update', this.latestValues,);
+    this.render = () => {
+      if (!this.current) return;
+      this.triggerBuild();
+      this.renderInstance(this.current, this.renderState, this.props.style, this.projection,);
+    };
+    this.renderScheduledAt = 0;
+    this.scheduleRender = () => {
+      const now2 = time.now();
+      if (this.renderScheduledAt < now2) {
+        this.renderScheduledAt = now2;
+        frame.render(this.render, false, true,);
+      }
+    };
+    const {
+      latestValues,
+      renderState,
+    } = visualState;
+    this.latestValues = latestValues;
+    this.baseTarget = {
+      ...latestValues,
+    };
+    this.initialValues = props.initial
+      ? {
+        ...latestValues,
+      }
+      : {};
+    this.renderState = renderState;
+    this.parent = parent;
+    this.props = props;
+    this.presenceContext = presenceContext;
+    this.depth = parent ? parent.depth + 1 : 0;
+    this.reducedMotionConfig = reducedMotionConfig;
+    this.options = options;
+    this.blockInitialAnimation = Boolean(blockInitialAnimation,);
+    this.isControllingVariants = isControllingVariants(props,);
+    this.isVariantNode = isVariantNode(props,);
+    if (this.isVariantNode) {
+      this.variantChildren = /* @__PURE__ */ new Set();
+    }
+    this.manuallyAnimateOnMount = Boolean(parent && parent.current,);
+    const {
+      willChange,
+      ...initialMotionValues
+    } = this.scrapeMotionValuesFromProps(props, {}, this,);
+    for (const key7 in initialMotionValues) {
+      const value = initialMotionValues[key7];
+      if (latestValues[key7] !== void 0 && isMotionValue(value,)) {
+        value.set(latestValues[key7],);
+      }
+    }
+  }
+  mount(instance,) {
+    var _a;
+    this.current = instance;
+    visualElementStore.set(instance, this,);
+    if (this.projection && !this.projection.instance) {
+      this.projection.mount(instance,);
+    }
+    if (this.parent && this.isVariantNode && !this.isControllingVariants) {
+      this.removeFromVariantTree = this.parent.addVariantChild(this,);
+    }
+    this.values.forEach((value, key7,) => this.bindToMotionValue(key7, value,));
+    if (!hasReducedMotionListener.current) {
+      initPrefersReducedMotion();
+    }
+    this.shouldReduceMotion = this.reducedMotionConfig === 'never'
+      ? false
+      : this.reducedMotionConfig === 'always'
+      ? true
+      : prefersReducedMotion.current;
+    if (false) {
+      warnOnce(
+        this.shouldReduceMotion !== true,
+        'You have Reduced Motion enabled on your device. Animations may not appear as expected.',
+        'reduced-motion-disabled',
+      );
+    }
+    (_a = this.parent) == null ? void 0 : _a.addChild(this,);
+    this.update(this.props, this.presenceContext,);
+  }
+  unmount() {
+    var _a;
+    this.projection && this.projection.unmount();
+    cancelFrame(this.notifyUpdate,);
+    cancelFrame(this.render,);
+    this.valueSubscriptions.forEach((remove2) => remove2());
+    this.valueSubscriptions.clear();
+    this.removeFromVariantTree && this.removeFromVariantTree();
+    (_a = this.parent) == null ? void 0 : _a.removeChild(this,);
+    for (const key7 in this.events) {
+      this.events[key7].clear();
+    }
+    for (const key7 in this.features) {
+      const feature = this.features[key7];
+      if (feature) {
+        feature.unmount();
+        feature.isMounted = false;
+      }
+    }
+    this.current = null;
+  }
+  addChild(child,) {
+    this.children.add(child,);
+    this.enteringChildren ?? (this.enteringChildren = /* @__PURE__ */ new Set());
+    this.enteringChildren.add(child,);
+  }
+  removeChild(child,) {
+    this.children.delete(child,);
+    this.enteringChildren && this.enteringChildren.delete(child,);
+  }
+  bindToMotionValue(key7, value,) {
+    if (this.valueSubscriptions.has(key7,)) {
+      this.valueSubscriptions.get(key7,)();
+    }
+    const valueIsTransform = transformProps.has(key7,);
+    if (valueIsTransform && this.onBindTransform) {
+      this.onBindTransform();
+    }
+    const removeOnChange = value.on('change', (latestValue) => {
+      this.latestValues[key7] = latestValue;
+      this.props.onUpdate && frame.preRender(this.notifyUpdate,);
+      if (valueIsTransform && this.projection) {
+        this.projection.isTransformDirty = true;
+      }
+      this.scheduleRender();
+    },);
+    let removeSyncCheck;
+    if (window.MotionCheckAppearSync) {
+      removeSyncCheck = window.MotionCheckAppearSync(this, key7, value,);
+    }
+    this.valueSubscriptions.set(key7, () => {
+      removeOnChange();
+      if (removeSyncCheck) removeSyncCheck();
+      if (value.owner) value.stop();
+    },);
+  }
+  sortNodePosition(other,) {
+    if (!this.current || !this.sortInstanceNodePosition || this.type !== other.type) {
+      return 0;
+    }
+    return this.sortInstanceNodePosition(this.current, other.current,);
+  }
+  updateFeatures() {
+    let key7 = 'animation';
+    for (key7 in featureDefinitions) {
+      const featureDefinition = featureDefinitions[key7];
+      if (!featureDefinition) continue;
+      const {
+        isEnabled,
+        Feature: FeatureConstructor,
+      } = featureDefinition;
+      if (!this.features[key7] && FeatureConstructor && isEnabled(this.props,)) {
+        this.features[key7] = new FeatureConstructor(this,);
+      }
+      if (this.features[key7]) {
+        const feature = this.features[key7];
+        if (feature.isMounted) {
+          feature.update();
+        } else {
+          feature.mount();
+          feature.isMounted = true;
+        }
+      }
+    }
+  }
+  triggerBuild() {
+    this.build(this.renderState, this.latestValues, this.props,);
+  }
+  /**
+   * Measure the current viewport box with or without transforms.
+   * Only measures axis-aligned boxes, rotate and skew must be manually
+   * removed with a re-render to work.
+   */
+  measureViewportBox() {
+    return this.current ? this.measureInstanceViewportBox(this.current, this.props,) : createBox();
+  }
+  getStaticValue(key7,) {
+    return this.latestValues[key7];
+  }
+  setStaticValue(key7, value,) {
+    this.latestValues[key7] = value;
+  }
+  /**
+   * Update the provided props. Ensure any newly-added motion values are
+   * added to our map, old ones removed, and listeners updated.
+   */
+  update(props, presenceContext,) {
+    if (props.transformTemplate || this.props.transformTemplate) {
+      this.scheduleRender();
+    }
+    this.prevProps = this.props;
+    this.props = props;
+    this.prevPresenceContext = this.presenceContext;
+    this.presenceContext = presenceContext;
+    for (let i = 0; i < propEventHandlers.length; i++) {
+      const key7 = propEventHandlers[i];
+      if (this.propEventSubscriptions[key7]) {
+        this.propEventSubscriptions[key7]();
+        delete this.propEventSubscriptions[key7];
+      }
+      const listenerName = 'on' + key7;
+      const listener = props[listenerName];
+      if (listener) {
+        this.propEventSubscriptions[key7] = this.on(key7, listener,);
+      }
+    }
+    this.prevMotionValues = updateMotionValuesFromProps(
+      this,
+      this.scrapeMotionValuesFromProps(props, this.prevProps, this,),
+      this.prevMotionValues,
+    );
+    if (this.handleChildMotionValue) {
+      this.handleChildMotionValue();
+    }
+  }
+  getProps() {
+    return this.props;
+  }
+  /**
+   * Returns the variant definition with a given name.
+   */
+  getVariant(name,) {
+    return this.props.variants ? this.props.variants[name] : void 0;
+  }
+  /**
+   * Returns the defined default transition on this component.
+   */
+  getDefaultTransition() {
+    return this.props.transition;
+  }
+  getTransformPagePoint() {
+    return this.props.transformPagePoint;
+  }
+  getClosestVariantNode() {
+    return this.isVariantNode ? this : this.parent ? this.parent.getClosestVariantNode() : void 0;
+  }
+  /**
+   * Add a child visual element to our set of children.
+   */
+  addVariantChild(child,) {
+    const closestVariantNode = this.getClosestVariantNode();
+    if (closestVariantNode) {
+      closestVariantNode.variantChildren && closestVariantNode.variantChildren.add(child,);
+      return () => closestVariantNode.variantChildren.delete(child,);
+    }
+  }
+  /**
+   * Add a motion value and bind it to this visual element.
+   */
+  addValue(key7, value,) {
+    const existingValue = this.values.get(key7,);
+    if (value !== existingValue) {
+      if (existingValue) this.removeValue(key7,);
+      this.bindToMotionValue(key7, value,);
+      this.values.set(key7, value,);
+      this.latestValues[key7] = value.get();
+    }
+  }
+  /**
+   * Remove a motion value and unbind any active subscriptions.
+   */
+  removeValue(key7,) {
+    this.values.delete(key7,);
+    const unsubscribe = this.valueSubscriptions.get(key7,);
+    if (unsubscribe) {
+      unsubscribe();
+      this.valueSubscriptions.delete(key7,);
+    }
+    delete this.latestValues[key7];
+    this.removeValueFromRenderState(key7, this.renderState,);
+  }
+  /**
+   * Check whether we have a motion value for this key
+   */
+  hasValue(key7,) {
+    return this.values.has(key7,);
+  }
+  getValue(key7, defaultValue,) {
+    if (this.props.values && this.props.values[key7]) {
+      return this.props.values[key7];
+    }
+    let value = this.values.get(key7,);
+    if (value === void 0 && defaultValue !== void 0) {
+      value = motionValue(defaultValue === null ? void 0 : defaultValue, {
+        owner: this,
+      },);
+      this.addValue(key7, value,);
+    }
+    return value;
+  }
+  /**
+   * If we're trying to animate to a previously unencountered value,
+   * we need to check for it in our state and as a last resort read it
+   * directly from the instance (which might have performance implications).
+   */
+  readValue(key7, target,) {
+    let value = this.latestValues[key7] !== void 0 || !this.current
+      ? this.latestValues[key7]
+      : this.getBaseTargetFromProps(this.props, key7,) ?? this.readValueFromInstance(this.current, key7, this.options,);
+    if (value !== void 0 && value !== null) {
+      if (typeof value === 'string' && (isNumericalString(value,) || isZeroValueString(value,))) {
+        value = parseFloat(value,);
+      } else if (!findValueType(value,) && complex.test(target,)) {
+        value = getAnimatableNone2(key7, target,);
+      }
+      this.setBaseTarget(key7, isMotionValue(value,) ? value.get() : value,);
+    }
+    return isMotionValue(value,) ? value.get() : value;
+  }
+  /**
+   * Set the base target to later animate back to. This is currently
+   * only hydrated on creation and when we first read a value.
+   */
+  setBaseTarget(key7, value,) {
+    this.baseTarget[key7] = value;
+  }
+  /**
+   * Find the base target for a value thats been removed from all animation
+   * props.
+   */
+  getBaseTarget(key7,) {
+    var _a;
+    const {
+      initial,
+    } = this.props;
+    let valueFromInitial;
+    if (typeof initial === 'string' || typeof initial === 'object') {
+      const variant = resolveVariantFromProps(this.props, initial, (_a = this.presenceContext) == null ? void 0 : _a.custom,);
+      if (variant) {
+        valueFromInitial = variant[key7];
+      }
+    }
+    if (initial && valueFromInitial !== void 0) {
+      return valueFromInitial;
+    }
+    const target = this.getBaseTargetFromProps(this.props, key7,);
+    if (target !== void 0 && !isMotionValue(target,)) return target;
+    return this.initialValues[key7] !== void 0 && valueFromInitial === void 0 ? void 0 : this.baseTarget[key7];
+  }
+  on(eventName, callback,) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = new SubscriptionManager();
+    }
+    return this.events[eventName].add(callback,);
+  }
+  notify(eventName, ...args) {
+    if (this.events[eventName]) {
+      this.events[eventName].notify(...args,);
+    }
+  }
+  scheduleRenderMicrotask() {
+    microtask.render(this.render,);
+  }
+};
 function resolveVariant(visualElement, definition, custom,) {
   const props = visualElement.getProps();
   return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement,);
@@ -5525,14 +6056,14 @@ var animateMotionValue = (name, value, target, transition = {}, element, isHando
   }
   let shouldSkip = false;
   if (options.type === false || options.duration === 0 && !options.repeatDelay) {
-    options.duration = 0;
+    makeAnimationInstant(options,);
     if (options.delay === 0) {
       shouldSkip = true;
     }
   }
   if (MotionGlobalConfig.instantAnimations || MotionGlobalConfig.skipAnimations) {
     shouldSkip = true;
-    options.duration = 0;
+    makeAnimationInstant(options,);
     options.delay = 0;
   }
   options.allowFlatten = !valueTransition.type && !valueTransition.ease;
@@ -5624,6 +6155,17 @@ function animateTarget(visualElement, targetAndTransition, {
   }
   return animations2;
 }
+function calcChildStagger(children, child, delayChildren, staggerChildren = 0, staggerDirection = 1,) {
+  const index = Array.from(children,).sort((a, b,) => a.sortNodePosition(b,)).indexOf(child,);
+  const numChildren = children.size;
+  const maxStaggerDuration = (numChildren - 1) * staggerChildren;
+  const delayIsFunction = typeof delayChildren === 'function';
+  return delayIsFunction
+    ? delayChildren(index, numChildren,)
+    : staggerDirection === 1
+    ? index * staggerChildren
+    : maxStaggerDuration - index * staggerChildren;
+}
 function animateVariant(visualElement, variant, options = {},) {
   var _a;
   const resolved = resolveVariant(
@@ -5645,7 +6187,7 @@ function animateVariant(visualElement, variant, options = {},) {
         staggerChildren,
         staggerDirection,
       } = transition;
-      return animateChildren(visualElement, variant, delayChildren + forwardDelay, staggerChildren, staggerDirection, options,);
+      return animateChildren(visualElement, variant, forwardDelay, delayChildren, staggerChildren, staggerDirection, options,);
     }
     : () => Promise.resolve();
   const {
@@ -5658,25 +6200,19 @@ function animateVariant(visualElement, variant, options = {},) {
     return Promise.all([getAnimation(), getChildAnimations(options.delay,),],);
   }
 }
-function animateChildren(visualElement, variant, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options,) {
+function animateChildren(visualElement, variant, delay2 = 0, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options,) {
   const animations2 = [];
-  const maxStaggerDuration = (visualElement.variantChildren.size - 1) * staggerChildren;
-  const generateStaggerDuration = staggerDirection === 1
-    ? (i = 0,) => i * staggerChildren
-    : (i = 0,) => maxStaggerDuration - i * staggerChildren;
-  Array.from(visualElement.variantChildren,).sort(sortByTreeOrder,).forEach((child, i,) => {
+  for (const child of visualElement.variantChildren) {
     child.notify('AnimationStart', variant,);
     animations2.push(
       animateVariant(child, variant, {
         ...options,
-        delay: delayChildren + generateStaggerDuration(i,),
+        delay: delay2 + (typeof delayChildren === 'function' ? 0 : delayChildren) +
+          calcChildStagger(visualElement.variantChildren, child, delayChildren, staggerChildren, staggerDirection,),
       },).then(() => child.notify('AnimationComplete', variant,)),
     );
-  },);
+  }
   return Promise.all(animations2,);
-}
-function sortByTreeOrder(a, b,) {
-  return a.sortNodePosition(b,);
 }
 function animateVisualElement(visualElement, definition, options = {},) {
   visualElement.notify('AnimationStart', definition,);
@@ -5856,12 +6392,30 @@ function createAnimationState(visualElement,) {
       const willAnimateViaParent = isInherited && variantDidChange;
       const needsAnimating = !willAnimateViaParent || handledRemovedValues;
       if (shouldAnimateType && needsAnimating) {
-        animations2.push(...definitionList.map((animation) => ({
-          animation,
-          options: {
+        animations2.push(...definitionList.map((animation) => {
+          const options = {
             type,
-          },
-        })),);
+          };
+          if (
+            typeof animation === 'string' && isInitialRender && !willAnimateViaParent && visualElement.manuallyAnimateOnMount &&
+            visualElement.parent
+          ) {
+            const {
+              parent,
+            } = visualElement;
+            const parentVariant = resolveVariant(parent, animation,);
+            if (parent.enteringChildren && parentVariant) {
+              const {
+                delayChildren,
+              } = parentVariant.transition || {};
+              options.delay = calcChildStagger(parent.enteringChildren, visualElement, delayChildren,);
+            }
+          }
+          return {
+            animation,
+            options,
+          };
+        },),);
       }
     }
     if (removedKeys.size) {
@@ -6100,50 +6654,12 @@ function calcRelativePosition(target, layout2, parent,) {
   calcRelativeAxisPosition(target.x, layout2.x, parent.x,);
   calcRelativeAxisPosition(target.y, layout2.y, parent.y,);
 }
-var createAxisDelta = () => ({
-  translate: 0,
-  scale: 1,
-  origin: 0,
-  originPoint: 0,
-});
-var createDelta = () => ({
-  x: createAxisDelta(),
-  y: createAxisDelta(),
-});
-var createAxis = () => ({
-  min: 0,
-  max: 0,
-});
-var createBox = () => ({
-  x: createAxis(),
-  y: createAxis(),
-});
 var distance = (a, b,) => Math.abs(a - b,);
 function distance2D(a, b,) {
   const xDelta = distance(a.x, b.x,);
   const yDelta = distance(a.y, b.y,);
   return Math.sqrt(xDelta ** 2 + yDelta ** 2,);
 }
-var compareByDepth = (a, b,) => a.depth - b.depth;
-var FlatTree = class {
-  constructor() {
-    this.children = [];
-    this.isDirty = false;
-  }
-  add(child,) {
-    addUniqueItem(this.children, child,);
-    this.isDirty = true;
-  }
-  remove(child,) {
-    removeItem(this.children, child,);
-    this.isDirty = true;
-  }
-  forEach(callback,) {
-    this.isDirty && this.children.sort(compareByDepth,);
-    this.isDirty = false;
-    this.children.forEach(callback,);
-  }
-};
 function delay(callback, timeout,) {
   const start2 = time.now();
   const checkElapsed = ({
@@ -6158,440 +6674,6 @@ function delay(callback, timeout,) {
   frame.setup(checkElapsed, true,);
   return () => cancelFrame(checkElapsed,);
 }
-var visualElementStore = /* @__PURE__ */ new WeakMap();
-var prefersReducedMotion = {
-  current: null,
-};
-var hasReducedMotionListener = {
-  current: false,
-};
-function initPrefersReducedMotion() {
-  hasReducedMotionListener.current = true;
-  if (!isBrowser) return;
-  if (window.matchMedia) {
-    const motionMediaQuery = window.matchMedia('(prefers-reduced-motion)',);
-    const setReducedMotionPreferences = () => prefersReducedMotion.current = motionMediaQuery.matches;
-    motionMediaQuery.addListener(setReducedMotionPreferences,);
-    setReducedMotionPreferences();
-  } else {
-    prefersReducedMotion.current = false;
-  }
-}
-function updateMotionValuesFromProps(element, next2, prev,) {
-  for (const key7 in next2) {
-    const nextValue = next2[key7];
-    const prevValue = prev[key7];
-    if (isMotionValue(nextValue,)) {
-      element.addValue(key7, nextValue,);
-    } else if (isMotionValue(prevValue,)) {
-      element.addValue(
-        key7,
-        motionValue(nextValue, {
-          owner: element,
-        },),
-      );
-    } else if (prevValue !== nextValue) {
-      if (element.hasValue(key7,)) {
-        const existingValue = element.getValue(key7,);
-        if (existingValue.liveStyle === true) {
-          existingValue.jump(nextValue,);
-        } else if (!existingValue.hasAnimated) {
-          existingValue.set(nextValue,);
-        }
-      } else {
-        const latestValue = element.getStaticValue(key7,);
-        element.addValue(
-          key7,
-          motionValue(latestValue !== void 0 ? latestValue : nextValue, {
-            owner: element,
-          },),
-        );
-      }
-    }
-  }
-  for (const key7 in prev) {
-    if (next2[key7] === void 0) element.removeValue(key7,);
-  }
-  return next2;
-}
-var propEventHandlers = [
-  'AnimationStart',
-  'AnimationComplete',
-  'Update',
-  'BeforeLayoutMeasure',
-  'LayoutMeasure',
-  'LayoutAnimationStart',
-  'LayoutAnimationComplete',
-];
-var VisualElement = class {
-  /**
-   * This method takes React props and returns found MotionValues. For example, HTML
-   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
-   *
-   * This isn't an abstract method as it needs calling in the constructor, but it is
-   * intended to be one.
-   */
-  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement,) {
-    return {};
-  }
-  constructor({
-    parent,
-    props,
-    presenceContext,
-    reducedMotionConfig,
-    blockInitialAnimation,
-    visualState,
-  }, options = {},) {
-    this.current = null;
-    this.children = /* @__PURE__ */ new Set();
-    this.isVariantNode = false;
-    this.isControllingVariants = false;
-    this.shouldReduceMotion = null;
-    this.values = /* @__PURE__ */ new Map();
-    this.KeyframeResolver = KeyframeResolver;
-    this.features = {};
-    this.valueSubscriptions = /* @__PURE__ */ new Map();
-    this.prevMotionValues = {};
-    this.events = {};
-    this.propEventSubscriptions = {};
-    this.notifyUpdate = () => this.notify('Update', this.latestValues,);
-    this.render = () => {
-      if (!this.current) return;
-      this.triggerBuild();
-      this.renderInstance(this.current, this.renderState, this.props.style, this.projection,);
-    };
-    this.renderScheduledAt = 0;
-    this.scheduleRender = () => {
-      const now2 = time.now();
-      if (this.renderScheduledAt < now2) {
-        this.renderScheduledAt = now2;
-        frame.render(this.render, false, true,);
-      }
-    };
-    const {
-      latestValues,
-      renderState,
-    } = visualState;
-    this.latestValues = latestValues;
-    this.baseTarget = {
-      ...latestValues,
-    };
-    this.initialValues = props.initial
-      ? {
-        ...latestValues,
-      }
-      : {};
-    this.renderState = renderState;
-    this.parent = parent;
-    this.props = props;
-    this.presenceContext = presenceContext;
-    this.depth = parent ? parent.depth + 1 : 0;
-    this.reducedMotionConfig = reducedMotionConfig;
-    this.options = options;
-    this.blockInitialAnimation = Boolean(blockInitialAnimation,);
-    this.isControllingVariants = isControllingVariants(props,);
-    this.isVariantNode = isVariantNode(props,);
-    if (this.isVariantNode) {
-      this.variantChildren = /* @__PURE__ */ new Set();
-    }
-    this.manuallyAnimateOnMount = Boolean(parent && parent.current,);
-    const {
-      willChange,
-      ...initialMotionValues
-    } = this.scrapeMotionValuesFromProps(props, {}, this,);
-    for (const key7 in initialMotionValues) {
-      const value = initialMotionValues[key7];
-      if (latestValues[key7] !== void 0 && isMotionValue(value,)) {
-        value.set(latestValues[key7], false,);
-      }
-    }
-  }
-  mount(instance,) {
-    this.current = instance;
-    visualElementStore.set(instance, this,);
-    if (this.projection && !this.projection.instance) {
-      this.projection.mount(instance,);
-    }
-    if (this.parent && this.isVariantNode && !this.isControllingVariants) {
-      this.removeFromVariantTree = this.parent.addVariantChild(this,);
-    }
-    this.values.forEach((value, key7,) => this.bindToMotionValue(key7, value,));
-    if (!hasReducedMotionListener.current) {
-      initPrefersReducedMotion();
-    }
-    this.shouldReduceMotion = this.reducedMotionConfig === 'never'
-      ? false
-      : this.reducedMotionConfig === 'always'
-      ? true
-      : prefersReducedMotion.current;
-    if (false) {
-      warnOnce(this.shouldReduceMotion !== true, 'You have Reduced Motion enabled on your device. Animations may not appear as expected.',);
-    }
-    if (this.parent) this.parent.children.add(this,);
-    this.update(this.props, this.presenceContext,);
-  }
-  unmount() {
-    this.projection && this.projection.unmount();
-    cancelFrame(this.notifyUpdate,);
-    cancelFrame(this.render,);
-    this.valueSubscriptions.forEach((remove2) => remove2());
-    this.valueSubscriptions.clear();
-    this.removeFromVariantTree && this.removeFromVariantTree();
-    this.parent && this.parent.children.delete(this,);
-    for (const key7 in this.events) {
-      this.events[key7].clear();
-    }
-    for (const key7 in this.features) {
-      const feature = this.features[key7];
-      if (feature) {
-        feature.unmount();
-        feature.isMounted = false;
-      }
-    }
-    this.current = null;
-  }
-  bindToMotionValue(key7, value,) {
-    if (this.valueSubscriptions.has(key7,)) {
-      this.valueSubscriptions.get(key7,)();
-    }
-    const valueIsTransform = transformProps.has(key7,);
-    if (valueIsTransform && this.onBindTransform) {
-      this.onBindTransform();
-    }
-    const removeOnChange = value.on('change', (latestValue) => {
-      this.latestValues[key7] = latestValue;
-      this.props.onUpdate && frame.preRender(this.notifyUpdate,);
-      if (valueIsTransform && this.projection) {
-        this.projection.isTransformDirty = true;
-      }
-    },);
-    const removeOnRenderRequest = value.on('renderRequest', this.scheduleRender,);
-    let removeSyncCheck;
-    if (window.MotionCheckAppearSync) {
-      removeSyncCheck = window.MotionCheckAppearSync(this, key7, value,);
-    }
-    this.valueSubscriptions.set(key7, () => {
-      removeOnChange();
-      removeOnRenderRequest();
-      if (removeSyncCheck) removeSyncCheck();
-      if (value.owner) value.stop();
-    },);
-  }
-  sortNodePosition(other,) {
-    if (!this.current || !this.sortInstanceNodePosition || this.type !== other.type) {
-      return 0;
-    }
-    return this.sortInstanceNodePosition(this.current, other.current,);
-  }
-  updateFeatures() {
-    let key7 = 'animation';
-    for (key7 in featureDefinitions) {
-      const featureDefinition = featureDefinitions[key7];
-      if (!featureDefinition) continue;
-      const {
-        isEnabled,
-        Feature: FeatureConstructor,
-      } = featureDefinition;
-      if (!this.features[key7] && FeatureConstructor && isEnabled(this.props,)) {
-        this.features[key7] = new FeatureConstructor(this,);
-      }
-      if (this.features[key7]) {
-        const feature = this.features[key7];
-        if (feature.isMounted) {
-          feature.update();
-        } else {
-          feature.mount();
-          feature.isMounted = true;
-        }
-      }
-    }
-  }
-  triggerBuild() {
-    this.build(this.renderState, this.latestValues, this.props,);
-  }
-  /**
-   * Measure the current viewport box with or without transforms.
-   * Only measures axis-aligned boxes, rotate and skew must be manually
-   * removed with a re-render to work.
-   */
-  measureViewportBox() {
-    return this.current ? this.measureInstanceViewportBox(this.current, this.props,) : createBox();
-  }
-  getStaticValue(key7,) {
-    return this.latestValues[key7];
-  }
-  setStaticValue(key7, value,) {
-    this.latestValues[key7] = value;
-  }
-  /**
-   * Update the provided props. Ensure any newly-added motion values are
-   * added to our map, old ones removed, and listeners updated.
-   */
-  update(props, presenceContext,) {
-    if (props.transformTemplate || this.props.transformTemplate) {
-      this.scheduleRender();
-    }
-    this.prevProps = this.props;
-    this.props = props;
-    this.prevPresenceContext = this.presenceContext;
-    this.presenceContext = presenceContext;
-    for (let i = 0; i < propEventHandlers.length; i++) {
-      const key7 = propEventHandlers[i];
-      if (this.propEventSubscriptions[key7]) {
-        this.propEventSubscriptions[key7]();
-        delete this.propEventSubscriptions[key7];
-      }
-      const listenerName = 'on' + key7;
-      const listener = props[listenerName];
-      if (listener) {
-        this.propEventSubscriptions[key7] = this.on(key7, listener,);
-      }
-    }
-    this.prevMotionValues = updateMotionValuesFromProps(
-      this,
-      this.scrapeMotionValuesFromProps(props, this.prevProps, this,),
-      this.prevMotionValues,
-    );
-    if (this.handleChildMotionValue) {
-      this.handleChildMotionValue();
-    }
-  }
-  getProps() {
-    return this.props;
-  }
-  /**
-   * Returns the variant definition with a given name.
-   */
-  getVariant(name,) {
-    return this.props.variants ? this.props.variants[name] : void 0;
-  }
-  /**
-   * Returns the defined default transition on this component.
-   */
-  getDefaultTransition() {
-    return this.props.transition;
-  }
-  getTransformPagePoint() {
-    return this.props.transformPagePoint;
-  }
-  getClosestVariantNode() {
-    return this.isVariantNode ? this : this.parent ? this.parent.getClosestVariantNode() : void 0;
-  }
-  /**
-   * Add a child visual element to our set of children.
-   */
-  addVariantChild(child,) {
-    const closestVariantNode = this.getClosestVariantNode();
-    if (closestVariantNode) {
-      closestVariantNode.variantChildren && closestVariantNode.variantChildren.add(child,);
-      return () => closestVariantNode.variantChildren.delete(child,);
-    }
-  }
-  /**
-   * Add a motion value and bind it to this visual element.
-   */
-  addValue(key7, value,) {
-    const existingValue = this.values.get(key7,);
-    if (value !== existingValue) {
-      if (existingValue) this.removeValue(key7,);
-      this.bindToMotionValue(key7, value,);
-      this.values.set(key7, value,);
-      this.latestValues[key7] = value.get();
-    }
-  }
-  /**
-   * Remove a motion value and unbind any active subscriptions.
-   */
-  removeValue(key7,) {
-    this.values.delete(key7,);
-    const unsubscribe = this.valueSubscriptions.get(key7,);
-    if (unsubscribe) {
-      unsubscribe();
-      this.valueSubscriptions.delete(key7,);
-    }
-    delete this.latestValues[key7];
-    this.removeValueFromRenderState(key7, this.renderState,);
-  }
-  /**
-   * Check whether we have a motion value for this key
-   */
-  hasValue(key7,) {
-    return this.values.has(key7,);
-  }
-  getValue(key7, defaultValue,) {
-    if (this.props.values && this.props.values[key7]) {
-      return this.props.values[key7];
-    }
-    let value = this.values.get(key7,);
-    if (value === void 0 && defaultValue !== void 0) {
-      value = motionValue(defaultValue === null ? void 0 : defaultValue, {
-        owner: this,
-      },);
-      this.addValue(key7, value,);
-    }
-    return value;
-  }
-  /**
-   * If we're trying to animate to a previously unencountered value,
-   * we need to check for it in our state and as a last resort read it
-   * directly from the instance (which might have performance implications).
-   */
-  readValue(key7, target,) {
-    let value = this.latestValues[key7] !== void 0 || !this.current
-      ? this.latestValues[key7]
-      : this.getBaseTargetFromProps(this.props, key7,) ?? this.readValueFromInstance(this.current, key7, this.options,);
-    if (value !== void 0 && value !== null) {
-      if (typeof value === 'string' && (isNumericalString(value,) || isZeroValueString(value,))) {
-        value = parseFloat(value,);
-      } else if (!findValueType(value,) && complex.test(target,)) {
-        value = getAnimatableNone2(key7, target,);
-      }
-      this.setBaseTarget(key7, isMotionValue(value,) ? value.get() : value,);
-    }
-    return isMotionValue(value,) ? value.get() : value;
-  }
-  /**
-   * Set the base target to later animate back to. This is currently
-   * only hydrated on creation and when we first read a value.
-   */
-  setBaseTarget(key7, value,) {
-    this.baseTarget[key7] = value;
-  }
-  /**
-   * Find the base target for a value thats been removed from all animation
-   * props.
-   */
-  getBaseTarget(key7,) {
-    var _a;
-    const {
-      initial,
-    } = this.props;
-    let valueFromInitial;
-    if (typeof initial === 'string' || typeof initial === 'object') {
-      const variant = resolveVariantFromProps(this.props, initial, (_a = this.presenceContext) == null ? void 0 : _a.custom,);
-      if (variant) {
-        valueFromInitial = variant[key7];
-      }
-    }
-    if (initial && valueFromInitial !== void 0) {
-      return valueFromInitial;
-    }
-    const target = this.getBaseTargetFromProps(this.props, key7,);
-    if (target !== void 0 && !isMotionValue(target,)) return target;
-    return this.initialValues[key7] !== void 0 && valueFromInitial === void 0 ? void 0 : this.baseTarget[key7];
-  }
-  on(eventName, callback,) {
-    if (!this.events[eventName]) {
-      this.events[eventName] = new SubscriptionManager();
-    }
-    return this.events[eventName].add(callback,);
-  }
-  notify(eventName, ...args) {
-    if (this.events[eventName]) {
-      this.events[eventName].notify(...args,);
-    }
-  }
-};
 function convertBoundingBoxToBox({
   top,
   left,
@@ -6636,9 +6718,6 @@ function transformBoxPoints(point2, transformPoint2,) {
     bottom: bottomRight.y,
     right: bottomRight.x,
   };
-}
-function eachAxis(callback,) {
-  return [callback('x',), callback('y',),];
 }
 function isIdentityScale(scale2,) {
   return scale2 === void 0 || scale2 === 1;
@@ -6747,6 +6826,164 @@ function measurePageBox(element, rootProjectionNode2, transformPagePoint,) {
   }
   return viewportBox;
 }
+var DOMVisualElement = class extends VisualElement {
+  constructor() {
+    super(...arguments,);
+    this.KeyframeResolver = DOMKeyframesResolver;
+  }
+  sortInstanceNodePosition(a, b,) {
+    return a.compareDocumentPosition(b,) & 2 ? 1 : -1;
+  }
+  getBaseTargetFromProps(props, key7,) {
+    return props.style ? props.style[key7] : void 0;
+  }
+  removeValueFromRenderState(key7, {
+    vars,
+    style: style2,
+  },) {
+    delete vars[key7];
+    delete style2[key7];
+  }
+  handleChildMotionValue() {
+    if (this.childSubscription) {
+      this.childSubscription();
+      delete this.childSubscription;
+    }
+    const {
+      children,
+    } = this.props;
+    if (isMotionValue(children,)) {
+      this.childSubscription = children.on('change', (latest) => {
+        if (this.current) {
+          this.current.textContent = `${latest}`;
+        }
+      },);
+    }
+  }
+};
+function renderHTML(
+  element,
+  {
+    style: style2,
+    vars,
+  },
+  styleProp,
+  projection,
+) {
+  const elementStyle = element.style;
+  let key7;
+  for (key7 in style2) {
+    elementStyle[key7] = style2[key7];
+  }
+  projection == null ? void 0 : projection.applyProjectionStyles(elementStyle, styleProp,);
+  for (key7 in vars) {
+    elementStyle.setProperty(key7, vars[key7],);
+  }
+}
+function getComputedStyle3(element,) {
+  return window.getComputedStyle(element,);
+}
+var HTMLVisualElement = class extends DOMVisualElement {
+  constructor() {
+    super(...arguments,);
+    this.type = 'html';
+    this.renderInstance = renderHTML;
+  }
+  readValueFromInstance(instance, key7,) {
+    var _a;
+    if (transformProps.has(key7,)) {
+      return ((_a = this.projection) == null ? void 0 : _a.isProjecting)
+        ? defaultTransformValue(key7,)
+        : readTransformValue(instance, key7,);
+    } else {
+      const computedStyle = getComputedStyle3(instance,);
+      const value = (isCSSVariableName(key7,) ? computedStyle.getPropertyValue(key7,) : computedStyle[key7]) || 0;
+      return typeof value === 'string' ? value.trim() : value;
+    }
+  }
+  measureInstanceViewportBox(instance, {
+    transformPagePoint,
+  },) {
+    return measureViewportBox(instance, transformPagePoint,);
+  }
+  build(renderState, latestValues, props,) {
+    buildHTMLStyles(renderState, latestValues, props.transformTemplate,);
+  }
+  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
+    return scrapeMotionValuesFromProps(props, prevProps, visualElement,);
+  }
+};
+var camelCaseAttributes = /* @__PURE__ */ new Set([
+  'baseFrequency',
+  'diffuseConstant',
+  'kernelMatrix',
+  'kernelUnitLength',
+  'keySplines',
+  'keyTimes',
+  'limitingConeAngle',
+  'markerHeight',
+  'markerWidth',
+  'numOctaves',
+  'targetX',
+  'targetY',
+  'surfaceScale',
+  'specularConstant',
+  'specularExponent',
+  'stdDeviation',
+  'tableValues',
+  'viewBox',
+  'gradientTransform',
+  'pathLength',
+  'startOffset',
+  'textLength',
+  'lengthAdjust',
+],);
+function renderSVG(element, renderState, _styleProp, projection,) {
+  renderHTML(element, renderState, void 0, projection,);
+  for (const key7 in renderState.attrs) {
+    element.setAttribute(!camelCaseAttributes.has(key7,) ? camelToDash2(key7,) : key7, renderState.attrs[key7],);
+  }
+}
+var SVGVisualElement = class extends DOMVisualElement {
+  constructor() {
+    super(...arguments,);
+    this.type = 'svg';
+    this.isSVGTag = false;
+    this.measureInstanceViewportBox = createBox;
+  }
+  getBaseTargetFromProps(props, key7,) {
+    return props[key7];
+  }
+  readValueFromInstance(instance, key7,) {
+    if (transformProps.has(key7,)) {
+      const defaultType = getDefaultValueType(key7,);
+      return defaultType ? defaultType.default || 0 : 0;
+    }
+    key7 = !camelCaseAttributes.has(key7,) ? camelToDash2(key7,) : key7;
+    return instance.getAttribute(key7,);
+  }
+  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
+    return scrapeMotionValuesFromProps2(props, prevProps, visualElement,);
+  }
+  build(renderState, latestValues, props,) {
+    buildSVGAttrs(renderState, latestValues, this.isSVGTag, props.transformTemplate, props.style,);
+  }
+  renderInstance(instance, renderState, styleProp, projection,) {
+    renderSVG(instance, renderState, styleProp, projection,);
+  }
+  mount(instance,) {
+    this.isSVGTag = isSVGTag(instance.tagName,);
+    super.mount(instance,);
+  }
+};
+var createDomVisualElement = (Component33, options,) => {
+  return isSVGComponent(Component33,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options, {
+    allowProjection: Component33 !== Fragment,
+  },);
+};
+function eachAxis(callback,) {
+  return [callback('x',), callback('y',),];
+}
 var getContextWindow = ({
   current: current2,
 },) => {
@@ -6755,8 +6992,9 @@ var getContextWindow = ({
 var PanSession = class {
   constructor(event, handlers, {
     transformPagePoint,
-    contextWindow,
+    contextWindow = window,
     dragSnapToOrigin = false,
+    distanceThreshold = 3,
   } = {},) {
     this.startEvent = null;
     this.lastMoveEvent = null;
@@ -6770,7 +7008,7 @@ var PanSession = class {
       const isDistancePastThreshold = distance2D(info2.offset, {
         x: 0,
         y: 0,
-      },) >= 3;
+      },) >= this.distanceThreshold;
       if (!isPanStarted && !isDistancePastThreshold) return;
       const {
         point: point3,
@@ -6819,6 +7057,7 @@ var PanSession = class {
     this.dragSnapToOrigin = dragSnapToOrigin;
     this.handlers = handlers;
     this.transformPagePoint = transformPagePoint;
+    this.distanceThreshold = distanceThreshold;
     this.contextWindow = contextWindow || window;
     const info = extractEventInfo(event,);
     const initialInfo = transformPoint(info, this.transformPagePoint,);
@@ -7021,10 +7260,13 @@ var VisualElementDragControls = class {
     this.constraints = false;
     this.hasMutatedConstraints = false;
     this.elastic = createBox();
+    this.latestPointerEvent = null;
+    this.latestPanInfo = null;
     this.visualElement = visualElement;
   }
   start(originEvent, {
     snapToCursor = false,
+    distanceThreshold,
   } = {},) {
     const {
       presenceContext,
@@ -7050,6 +7292,8 @@ var VisualElementDragControls = class {
         this.openDragLock = setDragLock(drag2,);
         if (!this.openDragLock) return;
       }
+      this.latestPointerEvent = event;
+      this.latestPanInfo = info;
       this.isDragging = true;
       this.currentDirection = null;
       this.resolveConstraints();
@@ -7083,6 +7327,8 @@ var VisualElementDragControls = class {
       animationState && animationState.setActive('whileDrag', true,);
     };
     const onMove = (event, info,) => {
+      this.latestPointerEvent = event;
+      this.latestPanInfo = info;
       const {
         dragPropagation,
         dragDirectionLock,
@@ -7105,7 +7351,13 @@ var VisualElementDragControls = class {
       this.visualElement.render();
       onDrag && onDrag(event, info,);
     };
-    const onSessionEnd = (event, info,) => this.stop(event, info,);
+    const onSessionEnd = (event, info,) => {
+      this.latestPointerEvent = event;
+      this.latestPanInfo = info;
+      this.stop(event, info,);
+      this.latestPointerEvent = null;
+      this.latestPanInfo = null;
+    };
     const resumeAnimation = () =>
       eachAxis((axis) => {
         var _a;
@@ -7123,24 +7375,33 @@ var VisualElementDragControls = class {
     }, {
       transformPagePoint: this.visualElement.getTransformPagePoint(),
       dragSnapToOrigin,
+      distanceThreshold,
       contextWindow: getContextWindow(this.visualElement,),
     },);
   }
-  stop(event, info,) {
+  /**
+   * @internal
+   */
+  stop(event, panInfo,) {
+    const finalEvent = event || this.latestPointerEvent;
+    const finalPanInfo = panInfo || this.latestPanInfo;
     const isDragging2 = this.isDragging;
     this.cancel();
-    if (!isDragging2) return;
+    if (!isDragging2 || !finalPanInfo || !finalEvent) return;
     const {
       velocity,
-    } = info;
+    } = finalPanInfo;
     this.startAnimation(velocity,);
     const {
       onDragEnd,
     } = this.getProps();
     if (onDragEnd) {
-      frame.postRender(() => onDragEnd(event, info,));
+      frame.postRender(() => onDragEnd(finalEvent, finalPanInfo,));
     }
   }
+  /**
+   * @internal
+   */
   cancel() {
     this.isDragging = false;
     const {
@@ -7215,6 +7476,7 @@ var VisualElementDragControls = class {
     invariant(
       constraintsElement !== null,
       'If `dragConstraints` is set as a React ref, that ref must be passed to another component\'s `ref` prop.',
+      'drag-constraints-ref',
     );
     const {
       projection,
@@ -7568,6 +7830,7 @@ var correctBoxShadow = {
     return template(shadow,);
   },
 };
+var hasTakenAnySnapshot = false;
 var MeasureLayoutWithContext = class extends Component2 {
   /**
    * This only mounts projection nodes for components that
@@ -7590,7 +7853,9 @@ var MeasureLayoutWithContext = class extends Component2 {
       if (switchLayoutGroup && switchLayoutGroup.register && layoutId) {
         switchLayoutGroup.register(projection,);
       }
-      projection.root.didUpdate();
+      if (hasTakenAnySnapshot) {
+        projection.root.didUpdate();
+      }
       projection.addEventListener('animationComplete', () => {
         this.safeToRemove();
       },);
@@ -7613,6 +7878,7 @@ var MeasureLayoutWithContext = class extends Component2 {
     } = visualElement;
     if (!projection) return null;
     projection.isPresent = isPresent2;
+    hasTakenAnySnapshot = true;
     if (drag2 || prevProps.layoutDependency !== layoutDependency || layoutDependency === void 0 || prevProps.isPresent !== isPresent2) {
       projection.willUpdate();
     } else {
@@ -7654,6 +7920,7 @@ var MeasureLayoutWithContext = class extends Component2 {
     const {
       projection,
     } = visualElement;
+    hasTakenAnySnapshot = true;
     if (projection) {
       projection.scheduleCheckAfterUnmount();
       if (layoutGroup && layoutGroup.group) layoutGroup.group.remove(projection,);
@@ -7697,6 +7964,26 @@ function animateSingleValue(value, keyframes2, options,) {
   motionValue$1.start(animateMotionValue('', motionValue$1, keyframes2, options,),);
   return motionValue$1.animation;
 }
+var compareByDepth = (a, b,) => a.depth - b.depth;
+var FlatTree = class {
+  constructor() {
+    this.children = [];
+    this.isDirty = false;
+  }
+  add(child,) {
+    addUniqueItem(this.children, child,);
+    this.isDirty = true;
+  }
+  remove(child,) {
+    removeItem(this.children, child,);
+    this.isDirty = true;
+  }
+  forEach(callback,) {
+    this.isDirty && this.children.sort(compareByDepth,);
+    this.isDirty = false;
+    this.children.forEach(callback,);
+  }
+};
 var borders = ['TopLeft', 'TopRight', 'BottomLeft', 'BottomRight',];
 var numBorders = borders.length;
 var asNumber2 = (value) => typeof value === 'string' ? parseFloat(value,) : value;
@@ -7941,9 +8228,6 @@ var metrics = {
   calculatedProjections: 0,
 };
 var transformAxes = ['', 'X', 'Y', 'Z',];
-var hiddenVisibility = {
-  visibility: 'hidden',
-};
 var animationTarget = 1e3;
 var id2 = 0;
 function resetDistortingTransform(key7, visualElement, values, sharedAnimationValues,) {
@@ -8085,8 +8369,15 @@ function createProjectionNode2({
       }
       if (attachResizeListener) {
         let cancelDelay;
+        let innerWidth = 0;
         const resizeUnblockUpdate = () => this.root.updateBlockedByResize = false;
+        frame.read(() => {
+          innerWidth = window.innerWidth;
+        },);
         attachResizeListener(instance, () => {
+          const newInnerWidth = window.innerWidth;
+          if (newInnerWidth === innerWidth) return;
+          innerWidth = newInnerWidth;
           this.root.updateBlockedByResize = true;
           cancelDelay && cancelDelay();
           cancelDelay = delay(resizeUnblockUpdate, 250,);
@@ -8228,14 +8519,15 @@ function createProjectionNode2({
         this.nodes.forEach(clearIsLayoutDirty,);
         return;
       }
+      this.animationCommitId = this.animationId;
       if (!this.isUpdating) {
         this.nodes.forEach(clearIsLayoutDirty,);
+      } else {
+        this.isUpdating = false;
+        this.nodes.forEach(resetTransformStyle,);
+        this.nodes.forEach(updateLayout,);
+        this.nodes.forEach(notifyLayoutUpdate,);
       }
-      this.animationCommitId = this.animationId;
-      this.isUpdating = false;
-      this.nodes.forEach(resetTransformStyle,);
-      this.nodes.forEach(updateLayout,);
-      this.nodes.forEach(notifyLayoutUpdate,);
       this.clearAllSnapshots();
       const now2 = time.now();
       frameData.delta = clamp(0, 1e3 / 60, now2 - frameData.timestamp,);
@@ -8839,54 +9131,54 @@ function createProjectionNode2({
       }
       visualElement.scheduleRender();
     }
-    getProjectionStyles(styleProp,) {
-      if (!this.instance || this.isSVG) return void 0;
+    applyProjectionStyles(targetStyle, styleProp,) {
+      if (!this.instance || this.isSVG) return;
       if (!this.isVisible) {
-        return hiddenVisibility;
+        targetStyle.visibility = 'hidden';
+        return;
       }
-      const styles4 = {
-        visibility: '',
-      };
       const transformTemplate2 = this.getTransformTemplate();
       if (this.needsReset) {
         this.needsReset = false;
-        styles4.opacity = '';
-        styles4.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '';
-        styles4.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
-        return styles4;
+        targetStyle.visibility = '';
+        targetStyle.opacity = '';
+        targetStyle.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '';
+        targetStyle.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
+        return;
       }
       const lead = this.getLead();
       if (!this.projectionDelta || !this.layout || !lead.target) {
-        const emptyStyles = {};
         if (this.options.layoutId) {
-          emptyStyles.opacity = this.latestValues.opacity !== void 0 ? this.latestValues.opacity : 1;
-          emptyStyles.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '';
+          targetStyle.opacity = this.latestValues.opacity !== void 0 ? this.latestValues.opacity : 1;
+          targetStyle.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '';
         }
         if (this.hasProjected && !hasTransform(this.latestValues,)) {
-          emptyStyles.transform = transformTemplate2 ? transformTemplate2({}, '',) : 'none';
+          targetStyle.transform = transformTemplate2 ? transformTemplate2({}, '',) : 'none';
           this.hasProjected = false;
         }
-        return emptyStyles;
+        return;
       }
+      targetStyle.visibility = '';
       const valuesToRender = lead.animationValues || lead.latestValues;
       this.applyTransformsToTarget();
-      styles4.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender,);
+      let transform2 = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender,);
       if (transformTemplate2) {
-        styles4.transform = transformTemplate2(valuesToRender, styles4.transform,);
+        transform2 = transformTemplate2(valuesToRender, transform2,);
       }
+      targetStyle.transform = transform2;
       const {
         x,
         y,
       } = this.projectionDelta;
-      styles4.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
+      targetStyle.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
       if (lead.animationValues) {
-        styles4.opacity = lead === this
+        targetStyle.opacity = lead === this
           ? valuesToRender.opacity ?? this.latestValues.opacity ?? 1
           : this.preserveOpacity
           ? this.latestValues.opacity
           : valuesToRender.opacityExit;
       } else {
-        styles4.opacity = lead === this
+        targetStyle.opacity = lead === this
           ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : ''
           : valuesToRender.opacityExit !== void 0
           ? valuesToRender.opacityExit
@@ -8899,24 +9191,25 @@ function createProjectionNode2({
           applyTo,
           isCSSVariable,
         } = scaleCorrectors[key7];
-        const corrected = styles4.transform === 'none' ? valuesToRender[key7] : correct(valuesToRender[key7], lead,);
+        const corrected = transform2 === 'none' ? valuesToRender[key7] : correct(valuesToRender[key7], lead,);
         if (applyTo) {
           const num = applyTo.length;
           for (let i = 0; i < num; i++) {
-            styles4[applyTo[i]] = corrected;
+            targetStyle[applyTo[i]] = corrected;
           }
         } else {
           if (isCSSVariable) {
             this.options.visualElement.renderState.vars[key7] = corrected;
           } else {
-            styles4[key7] = corrected;
+            targetStyle[key7] = corrected;
           }
         }
       }
       if (this.options.layoutId) {
-        styles4.pointerEvents = lead === this ? resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '' : 'none';
+        targetStyle.pointerEvents = lead === this
+          ? resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || ''
+          : 'none';
       }
-      return styles4;
     }
     clearSnapshot() {
       this.resumeFrom = this.snapshot = void 0;
@@ -9365,163 +9658,13 @@ var layout = {
     MeasureLayout,
   },
 };
-var DOMVisualElement = class extends VisualElement {
-  constructor() {
-    super(...arguments,);
-    this.KeyframeResolver = DOMKeyframesResolver;
-  }
-  sortInstanceNodePosition(a, b,) {
-    return a.compareDocumentPosition(b,) & 2 ? 1 : -1;
-  }
-  getBaseTargetFromProps(props, key7,) {
-    return props.style ? props.style[key7] : void 0;
-  }
-  removeValueFromRenderState(key7, {
-    vars,
-    style: style2,
-  },) {
-    delete vars[key7];
-    delete style2[key7];
-  }
-  handleChildMotionValue() {
-    if (this.childSubscription) {
-      this.childSubscription();
-      delete this.childSubscription;
-    }
-    const {
-      children,
-    } = this.props;
-    if (isMotionValue(children,)) {
-      this.childSubscription = children.on('change', (latest) => {
-        if (this.current) {
-          this.current.textContent = `${latest}`;
-        }
-      },);
-    }
-  }
-};
-function renderHTML(
-  element,
-  {
-    style: style2,
-    vars,
-  },
-  styleProp,
-  projection,
-) {
-  Object.assign(element.style, style2, projection && projection.getProjectionStyles(styleProp,),);
-  for (const key7 in vars) {
-    element.style.setProperty(key7, vars[key7],);
-  }
-}
-function getComputedStyle3(element,) {
-  return window.getComputedStyle(element,);
-}
-var HTMLVisualElement = class extends DOMVisualElement {
-  constructor() {
-    super(...arguments,);
-    this.type = 'html';
-    this.renderInstance = renderHTML;
-  }
-  readValueFromInstance(instance, key7,) {
-    var _a;
-    if (transformProps.has(key7,)) {
-      return ((_a = this.projection) == null ? void 0 : _a.isProjecting)
-        ? defaultTransformValue(key7,)
-        : readTransformValue(instance, key7,);
-    } else {
-      const computedStyle = getComputedStyle3(instance,);
-      const value = (isCSSVariableName(key7,) ? computedStyle.getPropertyValue(key7,) : computedStyle[key7]) || 0;
-      return typeof value === 'string' ? value.trim() : value;
-    }
-  }
-  measureInstanceViewportBox(instance, {
-    transformPagePoint,
-  },) {
-    return measureViewportBox(instance, transformPagePoint,);
-  }
-  build(renderState, latestValues, props,) {
-    buildHTMLStyles(renderState, latestValues, props.transformTemplate,);
-  }
-  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
-    return scrapeMotionValuesFromProps(props, prevProps, visualElement,);
-  }
-};
-var camelCaseAttributes = /* @__PURE__ */ new Set([
-  'baseFrequency',
-  'diffuseConstant',
-  'kernelMatrix',
-  'kernelUnitLength',
-  'keySplines',
-  'keyTimes',
-  'limitingConeAngle',
-  'markerHeight',
-  'markerWidth',
-  'numOctaves',
-  'targetX',
-  'targetY',
-  'surfaceScale',
-  'specularConstant',
-  'specularExponent',
-  'stdDeviation',
-  'tableValues',
-  'viewBox',
-  'gradientTransform',
-  'pathLength',
-  'startOffset',
-  'textLength',
-  'lengthAdjust',
-],);
-function renderSVG(element, renderState, _styleProp, projection,) {
-  renderHTML(element, renderState, void 0, projection,);
-  for (const key7 in renderState.attrs) {
-    element.setAttribute(!camelCaseAttributes.has(key7,) ? camelToDash2(key7,) : key7, renderState.attrs[key7],);
-  }
-}
-var SVGVisualElement = class extends DOMVisualElement {
-  constructor() {
-    super(...arguments,);
-    this.type = 'svg';
-    this.isSVGTag = false;
-    this.measureInstanceViewportBox = createBox;
-  }
-  getBaseTargetFromProps(props, key7,) {
-    return props[key7];
-  }
-  readValueFromInstance(instance, key7,) {
-    if (transformProps.has(key7,)) {
-      const defaultType = getDefaultValueType(key7,);
-      return defaultType ? defaultType.default || 0 : 0;
-    }
-    key7 = !camelCaseAttributes.has(key7,) ? camelToDash2(key7,) : key7;
-    return instance.getAttribute(key7,);
-  }
-  scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
-    return scrapeMotionValuesFromProps2(props, prevProps, visualElement,);
-  }
-  build(renderState, latestValues, props,) {
-    buildSVGAttrs(renderState, latestValues, this.isSVGTag, props.transformTemplate, props.style,);
-  }
-  renderInstance(instance, renderState, styleProp, projection,) {
-    renderSVG(instance, renderState, styleProp, projection,);
-  }
-  mount(instance,) {
-    this.isSVGTag = isSVGTag(instance.tagName,);
-    super.mount(instance,);
-  }
-};
-var createDomVisualElement = (Component33, options,) => {
-  return isSVGComponent(Component33,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options, {
-    allowProjection: Component33 !== Fragment,
-  },);
-};
-var createMotionComponent = /* @__PURE__ */ createMotionComponentFactory({
+var featureBundle = {
   ...animations,
   ...gestureAnimations,
   ...drag,
   ...layout,
-}, createDomVisualElement,);
-var motion = /* @__PURE__ */ createDOMMotionComponentProxy(createMotionComponent,);
+};
+var motion = /* @__PURE__ */ createMotionProxy(featureBundle, createDomVisualElement,);
 function useUnmountEffect(callback,) {
   return useEffect(() => () => callback(), [],);
 }
@@ -9907,30 +10050,26 @@ function scroll(onScroll, {
     ? attachToFunction(onScroll, optionsWithDefaults,)
     : attachToAnimation(onScroll, optionsWithDefaults,);
 }
-function refWarning(name, ref,) {
-  warning(
-    Boolean(!ref || ref.current,),
-    `You have defined a ${name} options but the provided ref is not yet hydrated, probably because it's defined higher up the tree. Try calling useScroll() in the same component as the ref, or setting its \`layoutEffect: false\` option.`,
-  );
-}
 var createScrollMotionValues = () => ({
   scrollX: motionValue(0,),
   scrollY: motionValue(0,),
   scrollXProgress: motionValue(0,),
   scrollYProgress: motionValue(0,),
 });
+var isRefPending = (ref) => {
+  if (!ref) return false;
+  return !ref.current;
+};
 function useScroll({
   container,
   target,
-  layoutEffect = true,
   ...options
 } = {},) {
   const values = useConstant(createScrollMotionValues,);
-  const useLifecycleEffect = layoutEffect ? useIsomorphicLayoutEffect : useEffect;
-  useLifecycleEffect(() => {
-    refWarning('target', target,);
-    refWarning('container', container,);
-    return scroll((_progress, {
+  const scrollAnimation = useRef3(null,);
+  const needsStart = useRef3(false,);
+  const start2 = useCallback(() => {
+    scrollAnimation.current = scroll((_progress, {
       x,
       y,
     },) => {
@@ -9943,7 +10082,29 @@ function useScroll({
       container: (container == null ? void 0 : container.current) || void 0,
       target: (target == null ? void 0 : target.current) || void 0,
     },);
+    return () => {
+      var _a;
+      (_a = scrollAnimation.current) == null ? void 0 : _a.call(scrollAnimation,);
+    };
   }, [container, target, JSON.stringify(options.offset,),],);
+  useIsomorphicLayoutEffect(() => {
+    needsStart.current = false;
+    if (isRefPending(container,) || isRefPending(target,)) {
+      needsStart.current = true;
+      return;
+    } else {
+      return start2();
+    }
+  }, [start2,],);
+  useEffect(() => {
+    if (needsStart.current) {
+      invariant(!isRefPending(container,), 'Container ref is defined but not hydrated', 'use-scroll-ref',);
+      invariant(!isRefPending(target,), 'Target ref is defined but not hydrated', 'use-scroll-ref',);
+      return start2();
+    } else {
+      return;
+    }
+  }, [start2,],);
   return values;
 }
 function useElementScroll(ref,) {
@@ -10098,7 +10259,11 @@ function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
   const [shouldReduceMotion,] = useState(prefersReducedMotion.current,);
   if (false) {
-    warnOnce(shouldReduceMotion !== true, 'You have Reduced Motion enabled on your device. Animations may not appear as expected.',);
+    warnOnce(
+      shouldReduceMotion !== true,
+      'You have Reduced Motion enabled on your device. Animations may not appear as expected.',
+      'reduced-motion-disabled',
+    );
   }
   return shouldReduceMotion;
 }
@@ -10323,7 +10488,7 @@ function createAnimationsFromSequence(
       remainder > 0 && fillOffset(times, remainder,);
       valueKeyframesAsList.length === 1 && valueKeyframesAsList.unshift(null,);
       if (repeat) {
-        invariant(repeat < MAX_REPEAT, 'Repeat count too high, must be less than 20',);
+        invariant(repeat < MAX_REPEAT, 'Repeat count too high, must be less than 20', 'repeat-count-high',);
         duration = calculateRepeatDuration(duration, repeat,);
         const originalKeyframes = [...valueKeyframesAsList,];
         const originalTimes = [...times,];
@@ -10524,9 +10689,14 @@ function animateSubject(subject, keyframes2, options, scope,) {
   } else {
     const subjects = resolveSubjects(subject, keyframes2, scope,);
     const numSubjects = subjects.length;
-    invariant(Boolean(numSubjects,), 'No valid elements provided.',);
+    invariant(Boolean(numSubjects,), 'No valid elements provided.', 'no-valid-elements',);
     for (let i = 0; i < numSubjects; i++) {
       const thisSubject = subjects[i];
+      invariant(
+        thisSubject !== null,
+        'You\'re trying to perform an animation on null. Ensure that selectors are correctly finding elements and refs are correctly hydrated.',
+        'animate-null',
+      );
       const createVisualElement = thisSubject instanceof Element ? createDOMVisualElement : createObjectVisualElement;
       if (!visualElementStore.has(thisSubject,)) {
         createVisualElement(thisSubject,);
@@ -10598,7 +10768,7 @@ function useAnimate() {
 function animateElements(elementOrSelector, keyframes2, options, scope,) {
   const elements = resolveElements(elementOrSelector, scope,);
   const numElements = elements.length;
-  invariant(Boolean(numElements,), 'No valid element provided.',);
+  invariant(Boolean(numElements,), 'No valid elements provided.', 'no-valid-elements',);
   const animationDefinitions = [];
   for (let i = 0; i < numElements; i++) {
     const element = elements[i];
@@ -10737,6 +10907,34 @@ var DragControls = class {
   start(event, options,) {
     this.componentControls.forEach((controls) => {
       controls.start(event.nativeEvent || event, options,);
+    },);
+  }
+  /**
+   * Cancels a drag gesture.
+   *
+   * ```jsx
+   * dragControls.cancel()
+   * ```
+   *
+   * @public
+   */
+  cancel() {
+    this.componentControls.forEach((controls) => {
+      controls.cancel();
+    },);
+  }
+  /**
+   * Stops a drag gesture.
+   *
+   * ```jsx
+   * dragControls.stop()
+   * ```
+   *
+   * @public
+   */
+  stop() {
+    this.componentControls.forEach((controls) => {
+      controls.stop();
     },);
   }
 };
@@ -11132,7 +11330,7 @@ function ReorderGroupComponent({
   const Component33 = useConstant(() => motion[as]);
   const order = [];
   const isReordering = useRef3(false,);
-  invariant(Boolean(values,), 'Reorder.Group must be provided a values prop',);
+  invariant(Boolean(values,), 'Reorder.Group must be provided a values prop', 'reorder-values',);
   const context = {
     axis,
     registerItem: (value, layout2,) => {
@@ -11195,7 +11393,7 @@ function ReorderItemComponent({
     y: useDefaultMotionValue(style2.y,),
   };
   const zIndex = useTransform([point2.x, point2.y,], ([latestX, latestY,],) => latestX || latestY ? 1 : 'unset',);
-  invariant(Boolean(context,), 'Reorder.Item must be a child of Reorder.Group',);
+  invariant(Boolean(context,), 'Reorder.Item must be a child of Reorder.Group', 'reorder-item-child',);
   const {
     axis,
     registerItem,
@@ -11226,35 +11424,10 @@ function ReorderItemComponent({
   },);
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
-function getOriginIndex(from, total,) {
-  if (from === 'first') {
-    return 0;
-  } else {
-    const lastIndex = total - 1;
-    return from === 'last' ? lastIndex : lastIndex / 2;
-  }
-}
-function stagger(duration = 0.1, {
-  startDelay = 0,
-  from = 0,
-  ease: ease2,
-} = {},) {
-  return (i, total,) => {
-    const fromIndex = typeof from === 'number' ? from : getOriginIndex(from, total,);
-    const distance2 = Math.abs(fromIndex - i,);
-    let delay2 = duration * distance2;
-    if (ease2) {
-      const maxDelay = total * duration;
-      const easingFunction = easingDefinitionToFunction(ease2,);
-      delay2 = easingFunction(delay2 / maxDelay,) * maxDelay;
-    }
-    return startDelay + delay2;
-  };
-}
 
-// /:https://app.framerstatic.com/framer.L7DRXRFF.mjs
+// /:https://app.framerstatic.com/framer.6PNBS5CQ.mjs
 
-import React4 from 'react';
+import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
@@ -12377,9 +12550,9 @@ function isEqual(a, b, deep = true,) {
   }
 }
 function useGetRouteCallback(routes,) {
-  return React4.useCallback((routeId) => routes[routeId], [routes,],);
+  return React42.useCallback((routeId) => routes[routeId], [routes,],);
 }
-var RouterContext = /* @__PURE__ */ (() => React4.createContext({},))();
+var RouterContext = /* @__PURE__ */ (() => React42.createContext({},))();
 function RouterAPIProvider({
   api,
   children,
@@ -12390,7 +12563,7 @@ function RouterAPIProvider({
   },);
 }
 function useRouter() {
-  return React4.useContext(RouterContext,);
+  return React42.useContext(RouterContext,);
 }
 function RoutesProvider({
   routes,
@@ -12405,7 +12578,7 @@ function RoutesProvider({
     children,
   },);
 }
-var CurrentRouteContext = /* @__PURE__ */ (() => React4.createContext({},))();
+var CurrentRouteContext = /* @__PURE__ */ (() => React42.createContext({},))();
 function useCurrentRoute() {
   var _a;
   const router = useRouter();
@@ -12433,7 +12606,7 @@ function useCurrentRouteId() {
 }
 function useOnRouteChange(cb,) {
   const currentRoute = useCurrentRoute();
-  const lastRoute = React4.useRef(currentRoute,);
+  const lastRoute = React42.useRef(currentRoute,);
   if (isEqual(lastRoute.current, currentRoute,) || !currentRoute) return;
   lastRoute.current = currentRoute;
   cb(currentRoute,);
@@ -12480,7 +12653,7 @@ function monitorINPRelatedInputs(signal,) {
 function useRouteElementId(id3, targetRouteId,) {
   const currentRoute = useCurrentRoute();
   const route = useRoute(targetRouteId,) ?? currentRoute;
-  return React4.useMemo(() => {
+  return React42.useMemo(() => {
     if (!route) return id3;
     return getRouteElementId(route, id3,);
   }, [id3, route,],);
@@ -12521,6 +12694,9 @@ function isValidDate(value,) {
 }
 function isGenerator2(value,) {
   return isObject2(value,) && isFunction(value.return,);
+}
+function isPromiseLike(value,) {
+  return isObject2(value,) && isFunction(value.then,);
 }
 var noop2 = () => {};
 var isWindow = typeof window !== 'undefined';
@@ -12695,7 +12871,7 @@ function useRouteHandler(routeId, preload = false, elementId,) {
     navigate,
   } = useRouter();
   useRoutePreloader([routeId,], preload,);
-  const handler = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
+  const handler = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
 var pageviewEventVersion = 2;
@@ -13027,7 +13203,7 @@ var defaultSitePageEffects = {
   global: void 0,
   routes: {},
 };
-var PageEffectsContext = /* @__PURE__ */ React4.createContext(defaultSitePageEffects,);
+var PageEffectsContext = /* @__PURE__ */ React42.createContext(defaultSitePageEffects,);
 function PageEffectsProvider({
   children,
   value,
@@ -13038,7 +13214,7 @@ function PageEffectsProvider({
   },);
 }
 function usePageEffects() {
-  return React4.useContext(PageEffectsContext,);
+  return React42.useContext(PageEffectsContext,);
 }
 function getPageEffectForRoute(currentRouteId, nextRouteId, {
   global,
@@ -13852,7 +14028,7 @@ var trimSlugRegExp = /^-+|-+$/gu;
 function slugify(value,) {
   return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
 }
-var NodeIdContext = /* @__PURE__ */ React4.createContext(null,);
+var NodeIdContext = /* @__PURE__ */ React42.createContext(null,);
 function useTracking() {
   const router = useRouter();
   const nodeId = useContext(NodeIdContext,);
@@ -13892,7 +14068,7 @@ function useRouteAnchor(routeId, {
   const currentRoute = useRoute(currentRouteId ?? '',);
   useRoutePreloader([routeId,], true,);
   const hash2 = linkHash ?? elementId;
-  const href = React4.useMemo(() =>
+  const href = React42.useMemo(() =>
     getPathForRoute(route, {
       currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
       currentPathVariables,
@@ -13900,8 +14076,8 @@ function useRouteAnchor(routeId, {
       preserveQueryParams,
       siteCanonicalURL,
     },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route, siteCanonicalURL,],);
-  const navigateToRoute = React4.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
-  const onClick = React4.useCallback((event) => {
+  const navigateToRoute = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
+  const onClick = React42.useCallback((event) => {
     event.preventDefault();
     navigateToRoute();
   }, [navigateToRoute,],);
@@ -13976,9 +14152,9 @@ var defaultLocaleInfo = {
   locales: [],
   setLocale: noopAsync,
 };
-var LocaleInfoContext = /* @__PURE__ */ React4.createContext(defaultLocaleInfo,);
+var LocaleInfoContext = /* @__PURE__ */ React42.createContext(defaultLocaleInfo,);
 function useLocaleInfo() {
-  return React4.useContext(LocaleInfoContext,);
+  return React42.useContext(LocaleInfoContext,);
 }
 function useLocalesForCurrentRoute() {
   const {
@@ -13991,13 +14167,13 @@ function useLocalesForCurrentRoute() {
     activeLocale,
     locales,
   } = useLocaleInfo();
-  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React4.useState(() => activeLocale ? [activeLocale,] : []);
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
   const currentRoute = currentRouteId ? routes == null ? void 0 : routes[currentRouteId] : void 0;
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     let active = true;
     getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
       if (!active) return;
-      React4.startTransition(() => {
+      React42.startTransition(() => {
         if (localesSubset) {
           setLocalesForCurrentRoute(localesSubset,);
         } else {
@@ -14403,7 +14579,7 @@ function renderPage(Page4, defaultPageStyle,) {
     style: defaultPageStyle,
     'data-framer-root': '',
   };
-  return React4.isValidElement(Page4,) ? React4.cloneElement(Page4, props,) : /* @__PURE__ */ jsx3(Page4, {
+  return React42.isValidElement(Page4,) ? React42.cloneElement(Page4, props,) : /* @__PURE__ */ jsx3(Page4, {
     ...props,
   },);
 }
@@ -14782,7 +14958,7 @@ function useMetadata(metadata,) {
   const {
     isInitialNavigation,
   } = useRouter();
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     if (metadata.robots) {
       let robotsTag = document.querySelector('meta[name="robots"]',);
       if (robotsTag) {
@@ -14795,14 +14971,14 @@ function useMetadata(metadata,) {
       }
     }
   }, [metadata.robots,],);
-  React2.useInsertionEffect(() => {
+  React3.useInsertionEffect(() => {
     var _a;
     document.title = metadata.title || '';
     if (metadata.viewport) {
       (_a = document.querySelector('meta[name="viewport"]',)) == null ? void 0 : _a.setAttribute('content', metadata.viewport,);
     }
   }, [metadata.title, metadata.viewport,],);
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     if (!isInitialNavigation) return;
     const mainTag = document.getElementById(mainTagId,);
     const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
@@ -17946,7 +18122,7 @@ var animate2 = /* @__PURE__ */ (() => {
   };
   return animate3;
 })();
-var LayoutIdContext = /* @__PURE__ */ React4.createContext({
+var LayoutIdContext = /* @__PURE__ */ React42.createContext({
   getLayoutId: (args) => null,
   persistLayoutIdCache: () => {},
   top: false,
@@ -18345,14 +18521,14 @@ function Device({
   ...options
 },) {
   var _a, _b;
-  const optionsRef = React4.useRef(void 0,);
+  const optionsRef = React42.useRef(void 0,);
   if (optionsRef.current === void 0) optionsRef.current = options;
   const deviceAppearance = (_a = options.deviceOptions) == null ? void 0 : _a.appearance.type;
-  const scaleDataRef = React4.useRef();
-  const containerRef = React4.useRef(null,);
-  const deviceRef = React4.useRef(null,);
-  const screenRef = React4.useRef(null,);
-  const updateImperativeScale = React4.useCallback(({
+  const scaleDataRef = React42.useRef();
+  const containerRef = React42.useRef(null,);
+  const deviceRef = React42.useRef(null,);
+  const screenRef = React42.useRef(null,);
+  const updateImperativeScale = React42.useCallback(({
     scale: scale2,
     screenScalePixelFix,
   },) => {
@@ -18364,7 +18540,7 @@ function Device({
     const scale2 = scaleDataRef.current = getScaleData(options.deviceOptions, options.scaleTo,);
     updateImperativeScale(scale2,);
   }
-  const invertScale2 = React4.useCallback((point2) => {
+  const invertScale2 = React42.useCallback((point2) => {
     if (!scaleDataRef.current) return point2;
     const {
       scale: scale2 = 1,
@@ -18374,7 +18550,7 @@ function Device({
       y: point2.y / scale2,
     };
   }, [],);
-  const updateScale = React4.useCallback(() => {
+  const updateScale = React42.useCallback(() => {
     const {
       deviceOptions,
       scaleTo,
@@ -18393,17 +18569,17 @@ function Device({
     }
     return new ResizeObserver2(() => updateScale());
   },);
-  React4.useLayoutEffect(() => {
+  React42.useLayoutEffect(() => {
     optionsRef.current = {
       deviceOptions: options.deviceOptions,
       overrideTheme: options.overrideTheme,
       scaleTo: options.scaleTo,
     };
   }, [options.deviceOptions, options.overrideTheme, options.scaleTo,],);
-  React4.useLayoutEffect(() => {
+  React42.useLayoutEffect(() => {
     updateScale();
   }, [updateScale,],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (!observer2 || !containerRef.current) return;
     observer2.observe(containerRef.current,);
     return () => observer2.disconnect();
@@ -19855,7 +20031,7 @@ var ParentSizeState = /* @__PURE__ */ ((ParentSizeState2) => {
   ParentSizeState2[ParentSizeState2['DisabledForCurrentLevel'] = 2] = 'DisabledForCurrentLevel';
   return ParentSizeState2;
 })(ParentSizeState || {},);
-var ConstraintsContext = /* @__PURE__ */ React4.createContext({
+var ConstraintsContext = /* @__PURE__ */ React42.createContext({
   parentSize: 0,
   /* Unknown */
 },);
@@ -19866,7 +20042,7 @@ function deprecatedParentSize(parentSize,) {
   return parentSize;
 }
 function useParentSize() {
-  return React4.useContext(ConstraintsContext,).parentSize;
+  return React42.useContext(ConstraintsContext,).parentSize;
 }
 function isSize(o,) {
   return typeof o === 'object';
@@ -19877,7 +20053,7 @@ var ProvideParentSize = (props) => {
     parentSize,
     children,
   } = props;
-  const value = React4.useMemo(() => ({
+  const value = React42.useMemo(() => ({
     parentSize,
   }), [getParentWidth(parentSize,), getParentHeight(parentSize,),],);
   if (currentParentSize === 1) {
@@ -20318,8 +20494,8 @@ function isInvalid(validity,) {
   return false;
 }
 function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
-  const isValidRef = React4.useRef(null,);
-  const handleInvalid = React4.useCallback((e) => {
+  const isValidRef = React42.useRef(null,);
+  const handleInvalid = React42.useCallback((e) => {
     if (!onInvalid) return;
     if (isValidRef.current === false) return;
     isValidRef.current = false;
@@ -20327,7 +20503,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
     e.currentTarget.reportValidity();
     onInvalid(e,);
   }, [onInvalid,],);
-  const handleChange = React4.useCallback((e) => {
+  const handleChange = React42.useCallback((e) => {
     onChange == null ? void 0 : onChange(e,);
     if (!onInvalid && !onValid) return;
     const validity = e.target.validity;
@@ -20338,7 +20514,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
       onValid == null ? void 0 : onValid();
     }
   }, [onInvalid, onValid, onChange,],);
-  const handleBlur = React4.useCallback((e) => {
+  const handleBlur = React42.useCallback((e) => {
     if (!onInvalid) {
       onBlur == null ? void 0 : onBlur(e,);
       return;
@@ -20351,7 +20527,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
     }
     onBlur == null ? void 0 : onBlur(e,);
   }, [handleInvalid, onBlur, onInvalid,],);
-  return React4.useMemo(() => {
+  return React42.useMemo(() => {
     return {
       onInvalid: handleInvalid,
       onChange: handleChange,
@@ -23009,7 +23185,7 @@ function applyMetaTag(name, props,) {
   }
 }
 function usePrototypingMetaTags() {
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     applyMetaTag('mobile-web-app-capable', {
       content: 'yes',
     },);
@@ -23032,7 +23208,7 @@ var DeviceCodeComponentInner = ({
   const deviceOptions = convertPropsToDeviceOptions(props, {
     forceOldClay: true,
   },);
-  React4.useInsertionEffect(() => {
+  React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
@@ -23050,8 +23226,8 @@ var DeviceCodeComponentInner = ({
     },);
   }
   const child = Array.isArray(children,) ? children[0] : children;
-  const resizedChild = child && React4.isValidElement(child,)
-    ? React4.cloneElement(child, {
+  const resizedChild = child && React42.isValidElement(child,)
+    ? React42.cloneElement(child, {
       width: deviceOptions.screenWidth,
       height: deviceOptions.screenHeight,
     },)
@@ -23271,11 +23447,11 @@ function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
 }
-var LibraryFeaturesContext = /* @__PURE__ */ React4.createContext(void 0,);
+var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
 LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
 var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
 var useLibraryFeatures = () => {
-  const context = React4.useContext(LibraryFeaturesContext,);
+  const context = React42.useContext(LibraryFeaturesContext,);
   return context ?? {};
 };
 var wrapperStyle = {
@@ -23321,7 +23497,7 @@ function getImageStyle(image,) {
   };
 }
 function useDecodingAttribute(avoidAsyncDecoding,) {
-  const currentDecoding = React4.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
+  const currentDecoding = React42.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
   const switchDecodingToAuto = useCallback((node) => {
     currentDecoding.current = 'auto';
     node.decoding = 'auto';
@@ -23378,10 +23554,10 @@ function CanvasImage({
   containerSize,
   nodeId,
 },) {
-  const wrapperRef = React4.useRef(null,);
+  const wrapperRef = React42.useRef(null,);
   const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image,);
-  React4.useLayoutEffect(() => {
+  React42.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     wrapper.appendChild(imageElement,);
@@ -23403,9 +23579,9 @@ function OptimizedCanvasImage({
   image,
   containerSize,
 },) {
-  const wrapperRef = React4.useRef(null,);
+  const wrapperRef = React42.useRef(null,);
   const source = runtime.useImageSource(image, containerSize, nodeId,);
-  React4.useLayoutEffect(() => {
+  React42.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     const imageStyle = getImageStyle(image,);
@@ -23784,9 +23960,9 @@ function processOverrideForwarding(props, children,) {
       children,
     };
   }
-  children = React4.Children.map(children, (child) => {
-    if (!React4.isValidElement(child,)) return child;
-    return React4.cloneElement(child, {
+  children = React42.Children.map(children, (child) => {
+    if (!React42.isValidElement(child,)) return child;
+    return React42.cloneElement(child, {
       _forwardedOverrides,
     },);
   },);
@@ -23840,10 +24016,10 @@ function useLayoutId2(props, {
   }, [enabled,],);
 }
 var useIsomorphicLayoutEffect2 = typeof document !== 'undefined' ? useLayoutEffect : useEffect;
-var ComponentContainerContext = /* @__PURE__ */ React4.createContext(false,);
+var ComponentContainerContext = /* @__PURE__ */ React42.createContext(false,);
 function useForceUpdate2() {
-  const [_, setForcedRenderCount,] = React4.useState(0,);
-  return React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
+  const [_, setForcedRenderCount,] = React42.useState(0,);
+  return React42.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
 }
 var DEFAULT_SIZE = 200;
 var SharedObserver = class {
@@ -23881,7 +24057,7 @@ function useRerenderOnResize(ref,) {
 }
 function useMeasuredSize(ref,) {
   const forceUpdate = useForceUpdate2();
-  const size = React4.useRef(null,);
+  const size = React42.useRef(null,);
   function updateSize(newSize,) {
     if (newSize.width === 0 && newSize.height === 0) return;
     if (!size.current || newSize.height !== size.current.height || newSize.width !== size.current.width) {
@@ -23912,7 +24088,7 @@ function useMeasuredSize(ref,) {
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
 var withMeasuredSize = (Component18) => (props) => {
-  const ref = React4.useRef(null,);
+  const ref = React42.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
     [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true,
@@ -24520,7 +24696,7 @@ var defaultFrameRect = {
   height: 200,
 };
 function useStyleAndRect(props,) {
-  React4.useInsertionEffect(() => {
+  React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   const inCodeComponent = useContext(ComponentContainerContext,);
@@ -24545,7 +24721,7 @@ function useStyleAndRect(props,) {
   if (shouldDisablePointerEvents && safeToEditPointerEvents) {
     defaultStyle.pointerEvents = 'none';
   }
-  const addTextCentering = React4.Children.count(props.children,) > 0 && React4.Children.toArray(props.children,).every((child) => {
+  const addTextCentering = React42.Children.count(props.children,) > 0 && React42.Children.toArray(props.children,).every((child) => {
     return typeof child === 'string' || typeof child === 'number';
   },);
   const centerTextStyle = addTextCentering && {
@@ -24796,7 +24972,7 @@ function EmptyState({
   const {
     target,
   } = RenderEnvironment;
-  const childCount = React4.Children.count(children,);
+  const childCount = React42.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
     return /* @__PURE__ */ jsx3(FrameWithMotion, {
       ...size,
@@ -24880,7 +25056,7 @@ function Description({
   },);
 }
 var TREE_ROOT_ID = '__LAYOUT_TREE_ROOT';
-var SharedLayoutContext = /* @__PURE__ */ React4.createContext({
+var SharedLayoutContext = /* @__PURE__ */ React42.createContext({
   schedulePromoteTree: () => {},
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
@@ -24986,7 +25162,7 @@ function useMemoOne(factory, inputs,) {
   }, [cache2,],);
   return cache2.result;
 }
-function setRef(ref, value,) {
+function setRef2(ref, value,) {
   if (isFunction(ref,)) {
     ref(value,);
   } else if (isMutableRef(ref,)) {
@@ -25144,9 +25320,9 @@ function _useSharedIntersectionObserver(ref, callback, options,) {
 }
 var useSharedIntersectionObserver = typeof IntersectionObserver === 'undefined' ? noop2 : _useSharedIntersectionObserver;
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
-var ViewportContext = /* @__PURE__ */ React4.createContext(null,);
+var ViewportContext = /* @__PURE__ */ React42.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
-  const internalState = React4.useRef({
+  const internalState = React42.useRef({
     isInView: false,
     hasAnimatedOnce: false,
   },);
@@ -25156,7 +25332,7 @@ function useAppearEffect(ref, appearCallback, options,) {
     threshold,
     rootMargin = `0px 0px 0px 0px`,
   } = options;
-  const callback = React4.useCallback((entry) => {
+  const callback = React42.useCallback((entry) => {
     const {
       isInView,
       hasAnimatedOnce,
@@ -25272,13 +25448,13 @@ var LayoutTree = class extends Component2 {
   }
 };
 var SharedLayoutTree = (props) => {
-  const sharedLayoutContext = React4.useContext(SharedLayoutContext,);
+  const sharedLayoutContext = React42.useContext(SharedLayoutContext,);
   return /* @__PURE__ */ jsx3(LayoutTree, {
     ...props,
     sharedLayoutContext,
   },);
 };
-var NavigationContainerContext = /* @__PURE__ */ React4.createContext(true,);
+var NavigationContainerContext = /* @__PURE__ */ React42.createContext(true,);
 function useIsInCurrentNavigationTarget() {
   const isInCurrentNavigationTarget = useContext(NavigationContainerContext,);
   return isInCurrentNavigationTarget;
@@ -25347,7 +25523,7 @@ function useOnCurrentTargetChange(callback, deps = [],) {
     return () => deregister(callback,);
   }, [register, deregister, ...deps,],);
 }
-var NavigationContainer = /* @__PURE__ */ React4.memo(function NavigationContainer2({
+var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContainer2({
   isLayeredContainer,
   isCurrent,
   isPrevious,
@@ -26177,9 +26353,9 @@ function sequence(direction, transition, animation,) {
   };
 }
 var NavigationConsumer = /* @__PURE__ */ (() => NavigationContext.Consumer)();
-var NavigationCallbackContext = /* @__PURE__ */ React4.createContext(void 0,);
+var NavigationCallbackContext = /* @__PURE__ */ React42.createContext(void 0,);
 var NavigationCallbackProvider = /* @__PURE__ */ (() => NavigationCallbackContext.Provider)();
-var IsInitialNavigationContext = /* @__PURE__ */ React4.createContext(void 0,);
+var IsInitialNavigationContext = /* @__PURE__ */ React42.createContext(void 0,);
 var Navigation = /* @__PURE__ */ (() => {
   var _lastEventTimeStamp, _a, _Navigation_instances, getStackState_fn, isSameEventTransition_fn, _navigationAction, transition_fn;
   return _a = class extends Component2 {
@@ -26630,7 +26806,7 @@ function containerIsVisible(containerIndex, stackState,) {
   return false;
 }
 function containerContent(item,) {
-  const content = React4.Children.map(item.component, (child) => {
+  const content = React42.Children.map(item.component, (child) => {
     var _a;
     if (!isReactChild(child,) || !isReactElement(child,) || !child.props) {
       return child;
@@ -26652,7 +26828,7 @@ function containerContent(item,) {
       if (canStretchHeight) props.height = '100%';
       if (canStretchStyle) props.style.height = '100%';
     }
-    return React4.cloneElement(child, props,);
+    return React42.cloneElement(child, props,);
   },);
   return content;
 }
@@ -26662,7 +26838,7 @@ function backdropTapAction(transition, goBackAction,) {
 function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  React4.useInsertionEffect(() => {
+  React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return /* @__PURE__ */ jsx3(Navigation, {
@@ -26688,7 +26864,7 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
   return NavigationTransitionType2;
 })(NavigationTransitionType || {},);
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = class extends React4.Component {
+  const InternalWithNavigator = class extends React42.Component {
     render() {
       return /* @__PURE__ */ jsx3(NavigationContext.Consumer, {
         children: (navigation) => {
@@ -26905,11 +27081,11 @@ var clamp2 = (value, a, b,) => {
   }
   return value;
 };
-var DraggingContext = /* @__PURE__ */ React4.createContext({
+var DraggingContext = /* @__PURE__ */ React42.createContext({
   dragging: false,
 },);
 function WithDragging(Component18,) {
-  const _WithDraggingHOC = class _WithDraggingHOC2 extends React4.Component {
+  const _WithDraggingHOC = class _WithDraggingHOC2 extends React42.Component {
     constructor(props, defaultProps,) {
       super(props, defaultProps,);
       __publicField(this, 'state', {
@@ -27591,13 +27767,13 @@ var eventHandlerMapping = {
 var tapEventKeys = /* @__PURE__ */ new Set(['tapstart', 'tap', 'tapend',],);
 function WithEvents(BaseComponent,) {
   var _a;
-  const withEvents = (_a = class extends React4.Component {
+  const withEvents = (_a = class extends React42.Component {
     constructor() {
       super(...arguments,);
       __publicField(this, 'shouldCancelTap', false,);
       __publicField(this, 'activeEventListeners', /* @__PURE__ */ new Map(),);
       __publicField(this, 'hasFramerEventListener', false,);
-      __publicField(this, 'component', React4.createRef(),);
+      __publicField(this, 'component', React42.createRef(),);
     }
     get element() {
       return this.component.current && this.component.current.element;
@@ -28655,15 +28831,15 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
     }
     layoutChildren() {
       const _forwardedOverrides = this.props._forwardedOverrides;
-      let children = React4.Children.map(this.props.children, (child) => {
+      let children = React42.Children.map(this.props.children, (child) => {
         if (isConstraintSupportingChild(child,)) {
-          return React4.cloneElement(child, {
+          return React42.cloneElement(child, {
             parentSize: this.state.size,
             _forwardedOverrides,
             // biome-ignore lint/suspicious/noExplicitAny: deprecated code
           },);
         } else if (_forwardedOverrides && child) {
-          return React4.cloneElement(child, {
+          return React42.cloneElement(child, {
             _forwardedOverrides,
           },);
         } else {
@@ -28797,7 +28973,7 @@ function useInfiniteScroll({
   paginationInfo,
 },) {
   const isVisibleRef = useRef3(false,);
-  const callback = React4.useCallback((entry) => {
+  const callback = React42.useCallback((entry) => {
     if (!entry.isIntersecting) {
       isVisibleRef.current = false;
       return;
@@ -28821,7 +28997,7 @@ function useInfiniteScroll({
   },);
 }
 function withInfiniteScroll(Component18,) {
-  return React4.forwardRef(({
+  return React42.forwardRef(({
     __paginationInfo,
     __loadMore,
     ...props
@@ -28992,7 +29168,7 @@ function makePaddingString({
   return `${top}px ${right}px ${bottom}px ${left}px`;
 }
 var Stack = /* @__PURE__ */ (() => {
-  const StackInner = React4.forwardRef(function StackInner2(stackProps, forwardedRef,) {
+  const StackInner = React42.forwardRef(function StackInner2(stackProps, forwardedRef,) {
     const {
       as = 'div',
       direction = 'vertical',
@@ -29011,7 +29187,7 @@ var Stack = /* @__PURE__ */ (() => {
       ...containerProps
     } = stackProps;
     const useFlexboxGap = externalUseFlexboxGap || wrap2;
-    const stackRef = React4.useRef(null,);
+    const stackRef = React42.useRef(null,);
     const flexDirection = toFlexDirection(direction,);
     const isReverse = isReverseDirection(flexDirection,);
     const justifyContent = toJustifyOrAlignment(distribution,);
@@ -29155,7 +29331,7 @@ function fraction(dimension,) {
   return isFiniteNumber(value,) ? value : 0;
 }
 function handleFraction(children, direction, widthType, heightType,) {
-  return React4.Children.map(children, (child) => {
+  return React42.Children.map(children, (child) => {
     if (!isReactChild(child,) || !isReactElement(child,)) return;
     const isVertical = direction === 'vertical';
     const style2 = {};
@@ -29212,7 +29388,7 @@ function handleFraction(children, direction, widthType, heightType,) {
       ...propsStyle,
       ...style2,
     };
-    return React4.cloneElement(child, {
+    return React42.cloneElement(child, {
       width: newWidth,
       height: newHeight,
       style: nextStyle,
@@ -29362,7 +29538,7 @@ function PageContainer({
     }, effect ? Object.keys(effect,).join('',) : '',),
   },);
 }
-var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,) {
+var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef,) {
   var _a;
   const {
     direction = 'horizontal',
@@ -29405,7 +29581,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
     ...rest,
     background,
   };
-  const hasMountedRef = React4.useRef(false,);
+  const hasMountedRef = React42.useRef(false,);
   const hasFixedSize = RenderTarget.hasRestrictions() && props.__fromCodeComponentNode && isFiniteNumber(containerProps.width,) &&
     isFiniteNumber(containerProps.height,);
   if (!hasFixedSize && __fromCodeComponentNode && !containerProps.__fromCanvasComponent) {
@@ -29418,7 +29594,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
   const {
     initial,
     prev,
-  } = React4.useRef({
+  } = React42.useRef({
     initial: {
       x: 0,
       y: 0,
@@ -29434,36 +29610,36 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
     warnOnce2(`The 'gap' property of Page component can not be negative, but is ${gapValue}.`,);
     gap = 0;
   }
-  React4.useInsertionEffect(() => {
+  React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  const pageCount = React4.Children.count(children,);
-  const maxOffsetRef = React4.useRef(0,);
-  const constraints = React4.useRef({
+  const pageCount = React42.Children.count(children,);
+  const maxOffsetRef = React42.useRef(0,);
+  const constraints = React42.useRef({
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
   },);
-  const fallbackContainerRef = React4.useRef(null,);
+  const fallbackContainerRef = React42.useRef(null,);
   const containerRef = forwardedRef || fallbackContainerRef;
-  const scrollableRef = React4.useRef(null,);
-  const pageEffectValuesRef = React4.useRef([],);
-  const pageRectsRef = React4.useRef([],);
+  const scrollableRef = React42.useRef(null,);
+  const pageEffectValuesRef = React42.useRef([],);
+  const pageRectsRef = React42.useRef([],);
   const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX ?? 0,);
   const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY ?? 0,);
-  const contentOffsetRef = React4.useRef({
+  const contentOffsetRef = React42.useRef({
     x: isMotionValue2(contentOffsetX,) ? contentOffsetX : internalX,
     y: isMotionValue2(contentOffsetY,) ? contentOffsetY : internalY,
   },);
-  const currentContentPageRef = React4.useRef(currentPage,);
-  const propsBoundedCurrentPageRef = React4.useRef(currentPage,);
-  const latestPropsRef = React4.useRef(props,);
+  const currentContentPageRef = React42.useRef(currentPage,);
+  const propsBoundedCurrentPageRef = React42.useRef(currentPage,);
+  const latestPropsRef = React42.useRef(props,);
   latestPropsRef.current = props;
-  const lastDirectionRef = React4.useRef(props.direction,);
+  const lastDirectionRef = React42.useRef(props.direction,);
   const snapToPage = useSnapToPage(currentContentPageRef, contentOffsetRef, isHorizontal,);
-  const [_, setForceUpdateCount,] = React4.useState(0,);
-  const containerSizeRef = React4.useRef({
+  const [_, setForceUpdateCount,] = React42.useState(0,);
+  const containerSizeRef = React42.useRef({
     width: 200,
     height: 200,
   },);
@@ -29471,10 +29647,10 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
     containerSizeRef.current.width = containerProps.width;
     containerSizeRef.current.height = containerProps.height;
   }
-  const updateOnResize = React4.useCallback(() => {
+  const updateOnResize = React42.useCallback(() => {
     if (!hasFixedSize) startTransition2(() => setForceUpdateCount((v) => v + 1));
   }, [hasFixedSize,],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (RenderTarget.current() !== RenderTarget.preview) return;
     globalThis.addEventListener('resize', updateOnResize,);
     return () => {
@@ -29548,7 +29724,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
       updateAndSnapToPage(currentContentPageRef.current, true,);
     },);
   }, [],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (currentPage !== currentContentPageRef.current) updateAndSnapToPage(currentPage,);
   }, [currentPage,],);
   const handleMeasureLifecycle = () => {
@@ -29640,7 +29816,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
     },);
   };
   pageEffectValuesRef.current = [];
-  const childComponents = React4.Children.map(children, (child, index,) => {
+  const childComponents = React42.Children.map(children, (child, index,) => {
     if (!isReactChild(child,) || !isReactElement(child,)) {
       return child;
     }
@@ -29687,7 +29863,7 @@ var Page = /* @__PURE__ */ React4.forwardRef(function Page2(props, forwardedRef,
       onDrag: onDragHandler,
       onDragEnd: onDragEndHandler,
       layoutId: layoutId ? `${layoutId}-${index}` : void 0,
-      children: React4.cloneElement(child, update,),
+      children: React42.cloneElement(child, update,),
     }, index,);
   },);
   useWheelScroll(scrollableRef, {
@@ -30683,7 +30859,7 @@ var useUpdateChildSize = ({
   fromCanvasComponent,
 },) => {
   return useMemo2(() => {
-    return React4.Children.map(children, (child) => {
+    return React42.Children.map(children, (child) => {
       if (child === null || typeof child !== 'object' || typeof child.type === 'string') {
         return child;
       }
@@ -30703,14 +30879,14 @@ var useUpdateChildSize = ({
           style: Object.assign({}, child.props.style, updatedSize,),
         }
         : updatedSize;
-      return React4.cloneElement(child, update,);
+      return React42.cloneElement(child, update,);
     },);
   }, [dragDirection, children, fromCanvasComponent,],);
 };
 var numberFromOptionalMotionValue = (value) => {
   return typeof value === 'number' ? value : value.get();
 };
-var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
+var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     directionLock = false,
@@ -30823,7 +30999,7 @@ var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(
     if (RenderTarget.current() === RenderTarget.canvas) return;
     measureAndUpdateScrollOffset();
   }, [],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (shouldResetScroll(isInTarget,)) measureAndUpdateScrollOffset();
     if (isInTarget === false) wasInTargetRef.current = false;
   }, [isInTarget,],);
@@ -30928,7 +31104,7 @@ var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(
     if (currentY !== 0) setScrollY(currentY,);
     return y.on('change', setScrollY,);
   }, [y, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
-  const nativeOnScroll = React4.useCallback(() => {
+  const nativeOnScroll = React42.useCallback(() => {
     const element = containerRef.current;
     if (!(element instanceof HTMLDivElement)) return;
     const xDelta = Math.abs(x.get() + element.scrollLeft,);
@@ -30936,7 +31112,7 @@ var EmulatedScroll = /* @__PURE__ */ React4.forwardRef(function EmulatedScroll2(
     if (xDelta > 1) x.set(-element.scrollLeft,);
     if (yDelta > 1) y.set(-element.scrollTop,);
   }, [x, y,],);
-  const isEmpty2 = React4.Children.count(children,) === 0;
+  const isEmpty2 = React42.Children.count(children,) === 0;
   const width = direction !== 'vertical' && !isEmpty2 ? 'auto' : '100%';
   const height = direction !== 'horizontal' && !isEmpty2 ? 'auto' : '100%';
   const size = !containerProps.__fromCanvasComponent
@@ -31173,7 +31349,7 @@ var emptyObject = /* @__PURE__ */ Object.freeze({},);
 function useEmulateTouchScroll(ref, direction, enabled,) {
   if (isTouchDevice) return emptyObject;
   if (RenderTarget.current() !== RenderTarget.preview) return emptyObject;
-  const scrollAnimationControlsRef = React4.useRef(null,);
+  const scrollAnimationControlsRef = React42.useRef(null,);
   useEffect(() => {
     if (!ref.current) return;
     const element = ref.current;
@@ -31316,7 +31492,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
       (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
     };
   }, [ref, direction, enabled,],);
-  return React4.useMemo(() => {
+  return React42.useMemo(() => {
     return {
       cancelEmulatedTouchScrollAnimation: () => {
         var _a;
@@ -31369,7 +31545,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
     }
   }, [offset,],);
 }
-var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(props, forwardedRef,) {
+var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(props, forwardedRef,) {
   const {
     direction = 'vertical',
     scrollBarVisible = false,
@@ -31406,7 +31582,7 @@ var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(prop
     specificLayoutId,
     postfix: 'scroll',
   },);
-  const fallbackRef = React4.useRef(null,);
+  const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef || fallbackRef;
   const {
     cancelEmulatedTouchScrollAnimation,
@@ -31415,7 +31591,7 @@ var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(prop
     injectComponentCSSRules();
   }, [],);
   const isInTarget = useIsInCurrentNavigationTarget();
-  const previousIsInTargetRef = React4.useRef(isInTarget,);
+  const previousIsInTargetRef = React42.useRef(isInTarget,);
   const updateScrollOffsetHandler = () => {
     if (!resetOffset) return;
     const previousIsTarget = previousIsInTargetRef.current;
@@ -31469,7 +31645,7 @@ var NativeScroll = /* @__PURE__ */ React4.forwardRef(function NativeScroll2(prop
   },);
 },);
 var Scroll = /* @__PURE__ */ (() => {
-  const ScrollInner = React4.forwardRef(function ScrollInner2(props, forwardedRef,) {
+  const ScrollInner = React42.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
       return /* @__PURE__ */ jsx3(NativeScroll, {
         ref: forwardedRef,
@@ -31667,11 +31843,11 @@ function createData(defaultState2, actions,) {
 var initialState = {
   update: 0,
 };
-var DataObserverContext = /* @__PURE__ */ React4.createContext({
+var DataObserverContext = /* @__PURE__ */ React42.createContext({
   update: NaN,
 },);
 function useObserveData() {
-  const context = React4.useContext(DataObserverContext,);
+  const context = React42.useContext(DataObserverContext,);
   return !Number.isNaN(context.update,);
 }
 var DataObserver = class extends Component2 {
@@ -31780,11 +31956,11 @@ function stripPrefixFromPrefixedKey(key7,) {
   }
   return void 0;
 }
-var GeneratedComponentContext = /* @__PURE__ */ React4.createContext(void 0,);
+var GeneratedComponentContext = /* @__PURE__ */ React42.createContext(void 0,);
 function cloneChildrenWithProps(children, props, asNode,) {
-  const cloned = React2.Children.map(children, (child) => {
-    if (React2.isValidElement(child,)) {
-      return React2.cloneElement(child, props,);
+  const cloned = React3.Children.map(children, (child) => {
+    if (React3.isValidElement(child,)) {
+      return React3.cloneElement(child, props,);
     }
     return child;
   },);
@@ -31828,19 +32004,19 @@ function createHook(forwardedRef,) {
       ;
     }
     preventNextCall = true;
-    if (React2.Children.count(children,) > 1 && forwardedRef) {
+    if (React3.Children.count(children,) > 1 && forwardedRef) {
       if (false) {
         throw new ReferenceError('useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',);
       }
       state.forwardedRef = void 0;
       state.ref = state.childRef;
     }
-    return React2.Children.map(children, (child) => {
-      if (React2.isValidElement(child,)) {
+    return React3.Children.map(children, (child) => {
+      if (React3.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state.forwardedRef, ownRef,);
         const newProps = isFunction(props,) ? props(child.props,) : props;
-        return React2.cloneElement(
+        return React3.cloneElement(
           child,
           state.ref !== ownRef
             ? {
@@ -31879,11 +32055,11 @@ function createRefFunction(state,) {
     childRef: prevChildRef,
   } = state;
   return (value) => {
-    setRef(prevChildRef, value,);
-    setRef(prevForwardedRef, value,);
+    setRef2(prevChildRef, value,);
+    setRef2(prevForwardedRef, value,);
   };
 }
-var StyleSheetContext = /* @__PURE__ */ React4.createContext(void 0,);
+var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
 var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   var _a;
@@ -31896,21 +32072,21 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
 var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
-  React4.forwardRef((props, ref,) => {
+  React42.forwardRef((props, ref,) => {
     const {
       sheet,
       cache: cache2,
-    } = React4.useContext(StyleSheetContext,) ?? {};
+    } = React42.useContext(StyleSheetContext,) ?? {};
     const id3 = componentSerializationId;
     if (!isBrowser2()) {
-      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(),);
+      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(), props,);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
       cssCollector.add(concatenatedCSS, id3,);
     }
     useInsertionEffect(() => {
       if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
       const css22 = isFunction(escapedCSS,)
-        ? escapedCSS(RenderTarget.current(),)
+        ? escapedCSS(RenderTarget.current(), props,)
         : Array.isArray(escapedCSS,)
         ? escapedCSS
         : escapedCSS.split('\n',);
@@ -31942,7 +32118,7 @@ var CSSCollector = class {
   }
 };
 var cssCollector = /* @__PURE__ */ new CSSCollector();
-var SSRParentVariantsContext = /* @__PURE__ */ React4.createContext(void 0,);
+var SSRParentVariantsContext = /* @__PURE__ */ React42.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function renderBranchedChildrenFromPropertyOverrides(
   overrides,
@@ -31954,9 +32130,9 @@ function renderBranchedChildrenFromPropertyOverrides(
   cloneChildren,
   activeVariantId,
 ) {
-  const childrenArray = React4.Children.toArray(children,);
+  const childrenArray = React42.Children.toArray(children,);
   const child = childrenArray[0];
-  if (childrenArray.length !== 1 || !React4.isValidElement(child,)) {
+  if (childrenArray.length !== 1 || !React42.isValidElement(child,)) {
     console.warn('PropertyOverrides: expected exactly one React element for a child', children,);
     return cloneChildren(children, props,);
   }
@@ -32031,7 +32207,7 @@ function renderBranchedChildrenFromPropertyOverrides(
   assert(!activeVariantId || renderedBranches.length === 1, 'Must render exactly one branch when activeVariantId is given',);
   return renderedBranches;
 }
-var SSRVariants = /* @__PURE__ */ React4.forwardRef(function SSRVariants2({
+var SSRVariants = /* @__PURE__ */ React42.forwardRef(function SSRVariants2({
   id: _nodeId,
   children,
   ...props
@@ -32076,10 +32252,10 @@ function propsForBreakpoint(variant, props, overrides,) {
 var noopSubscribe = () => () => {};
 var returnTrue = () => true;
 var returnFalse = () => false;
-var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function PropertyOverrides(props, ref,) {
+var PropertyOverridesWithoutCSS = /* @__PURE__ */ React42.forwardRef(function PropertyOverrides(props, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  const ancestorCtx = React4.useContext(SSRParentVariantsContext,);
-  const isHydrationOrSSR = React4.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
+  const ancestorCtx = React42.useContext(SSRParentVariantsContext,);
+  const isHydrationOrSSR = React42.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
   const action = useConstant2(() => {
     if (isHydrationOrSSR) {
       if (isBrowser2()) {
@@ -32091,7 +32267,7 @@ var PropertyOverridesWithoutCSS = /* @__PURE__ */ React4.forwardRef(function Pro
       return 0;
     }
   },);
-  const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
+  const generatedComponentContext = React42.useContext(GeneratedComponentContext,);
   return useMemoOne(() => {
     const {
       breakpoint,
@@ -32226,13 +32402,13 @@ var AnimationCollector = class {
 _variantHashes = /* @__PURE__ */ new WeakMap();
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
 function withOptimizedAppearEffect(Component18,) {
-  return React4.forwardRef(({
+  return React42.forwardRef(({
     optimized,
     ...props
   }, ref,) => {
     var _a;
-    const generatedComponentContext = React4.useContext(GeneratedComponentContext,);
-    const variants = (_a = React4.useContext(SSRParentVariantsContext,)) == null ? void 0 : _a.variants;
+    const generatedComponentContext = React42.useContext(GeneratedComponentContext,);
+    const variants = (_a = React42.useContext(SSRParentVariantsContext,)) == null ? void 0 : _a.variants;
     const id3 = props[framerAppearIdKey];
     if (id3 && !isBrowser2()) {
       framerAppearEffects.setAll(
@@ -32337,7 +32513,7 @@ function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({
     values: makeFXValues(enabled ? values : void 0,),
   }));
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (enabled) return;
     for (const key7 of effectValuesKeys) {
       const value = defaultFXValues[key7];
@@ -32500,9 +32676,9 @@ function useParallax(options, ref, visibilityStyle,) {
     adjustPosition = false,
     parallaxTransformEnabled,
   } = options;
-  const originalPosition = React4.useRef(null,);
+  const originalPosition = React42.useRef(null,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const transform2 = React4.useCallback((yValue) => {
+  const transform2 = React42.useCallback((yValue) => {
     if (originalPosition.current === null) return 0;
     if (speed === 100) return 0;
     return parallaxTransform(yValue, originalPosition.current, speed, offset, adjustPosition,);
@@ -32749,7 +32925,7 @@ function useScrollDirectionChange(scrollDirection, cb, options = {},) {
     enabled = true,
   } = options;
   const currentRouteKey = useCurrentRouteKey();
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (!direction || !enabled) return;
     const _ = currentRouteKey;
     let lastOffset = void 0;
@@ -32848,7 +33024,7 @@ function useAnimationVariants({
   animate: animateVariant2,
   ...defaultStyles
 },) {
-  return React4.useMemo(() => ({
+  return React42.useMemo(() => ({
     initial: enter ?? makeStyle({
       ...defaultStyles,
       opacity: opacity ?? targetOpacity ?? 1,
@@ -32866,14 +33042,14 @@ function useStyleAppearEffect(options, ref,) {
   const variants = useAnimationVariants(options,);
   const enabled = options.styleAppearEffectEnabled;
   const effect = useFXValues(enabled ? variants.initial : variants.animate, enabled,);
-  const playState = React4.useRef({
+  const playState = React42.useRef({
     isPlaying: false,
     scheduledAppearState: void 0,
     lastAppearState: !options.styleAppearEffectEnabled,
   },);
   const currentRouteKey = useCurrentRouteKey();
-  const animation = React4.useRef();
-  const runAnimation = React4.useCallback(async ({
+  const animation = React42.useRef();
+  const runAnimation = React42.useCallback(async ({
     transition,
     ...target
   }, fromInitial,) => {
@@ -32927,7 +33103,7 @@ function useStyleAppearEffect(options, ref,) {
     },
   },);
   const animateWithScrollInfo = options.targets && enabled && !options.scrollDirection;
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (!animateWithScrollInfo) return;
     const playedState = {
       initial: true,
@@ -33005,8 +33181,8 @@ var defaultRanges2 = () => ({
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
-  const springs = React4.useRef({},);
-  React4.useEffect(() => {
+  const springs = React42.useRef({},);
+  React42.useEffect(() => {
     if (spring2 === void 0) return;
     for (const key7 of objectKeys(values,)) {
       let startAnimation3 = function () {
@@ -33132,7 +33308,7 @@ function useStyleTransform({
       effect.values[key7].set((values == null ? void 0 : values[key7]) ?? defaultFXValues[key7],);
     }
   },);
-  return React4.useMemo(() => {
+  return React42.useMemo(() => {
     return {
       values: effect.values,
       style: styleTransformEffectEnabled ? effectEnabledStyle : effectDisabledStyle,
@@ -33208,7 +33384,7 @@ function isVariantOrVariantList2(value,) {
   return isString(value,) || Array.isArray(value,);
 }
 var withFX = (Component18) =>
-  React4.forwardRef((props, forwardedRef,) => {
+  React42.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
       return /* @__PURE__ */ jsx3(Component18, {
@@ -33259,7 +33435,7 @@ var withFX = (Component18) =>
       values: loopValues,
       style: loopStyle,
     } = useLoop(loop, observerRef,);
-    const fxValues = React4.useMemo(() => {
+    const fxValues = React42.useMemo(() => {
       const layerOpacity = new MotionValue(targetOpacityValue ?? 1,);
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
@@ -33357,18 +33533,18 @@ function ComponentPresetsConsumer({
   const presetProps = componentPresets[componentIdentifier] ?? {};
   return children(presetProps,);
 }
-var ComponentViewportContext = /* @__PURE__ */ React4.createContext({},);
+var ComponentViewportContext = /* @__PURE__ */ React42.createContext({},);
 function useComponentViewport() {
-  return React4.useContext(ComponentViewportContext,);
+  return React42.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(function ComponentViewportProvider2({
+var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function ComponentViewportProvider2({
   width,
   height,
   y,
   children,
   ...rest
 }, ref,) {
-  const componentViewport = React4.useMemo(() => {
+  const componentViewport = React42.useMemo(() => {
     return {
       width,
       height,
@@ -33382,7 +33558,7 @@ var ComponentViewportProvider = /* @__PURE__ */ React4.forwardRef(function Compo
   },);
 },);
 var withGeneratedLayoutId = (Component18) =>
-  React4.forwardRef((props, ref,) => {
+  React42.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
     return /* @__PURE__ */ jsx3(Component18, {
       layoutId,
@@ -33594,13 +33770,13 @@ var DeprecatedContainerErrorBoundary = class extends Component2 {
     return hasError ? null : children;
   }
 };
-var ExternalComponentContext = /* @__PURE__ */ (() => React4.createContext(void 0,))();
+var ExternalComponentContext = /* @__PURE__ */ (() => React42.createContext(void 0,))();
 function useNearestExternalComponent() {
-  return React4.useContext(ExternalComponentContext,);
+  return React42.useContext(ExternalComponentContext,);
 }
 function useFurthestExternalComponent() {
   const nearestExternalComponent = useNearestExternalComponent();
-  const furthestExternalComponent = React4.useMemo(() => {
+  const furthestExternalComponent = React42.useMemo(() => {
     if (!nearestExternalComponent) return void 0;
     let item = nearestExternalComponent;
     while (item.parent && item.parent.level > 0) {
@@ -33616,7 +33792,7 @@ function IsExternalComponent({
   nodeId,
 },) {
   const parent = useNearestExternalComponent();
-  const newValue = React4.useMemo(() => ({
+  const newValue = React42.useMemo(() => ({
     level: ((parent == null ? void 0 : parent.level) ?? 0) + 1,
     scopeId,
     nodeId,
@@ -33724,7 +33900,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   }
   return children;
 }
-var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
+var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
   children,
   layoutId,
   as,
@@ -33737,9 +33913,9 @@ var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
 }, ref,) => {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
-  const clonedChildren = React4.Children.map(children, (child) => {
-    return React4.isValidElement(child,)
-      ? React4.cloneElement(child, {
+  const clonedChildren = React42.Children.map(children, (child) => {
+    return React42.isValidElement(child,)
+      ? React42.cloneElement(child, {
         layoutId,
       },)
       : child;
@@ -33773,7 +33949,7 @@ var ContainerInner = /* @__PURE__ */ React4.forwardRef(({
   },);
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(ContainerInner,);
-var SmartComponentScopedContainer = /* @__PURE__ */ React4.forwardRef((props, ref,) => {
+var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef((props, ref,) => {
   const {
     as,
     children,
@@ -34439,6 +34615,50 @@ function maybeReplaceAnchorWithSpan(component,) {
   if (isMotionComponent(component,) && unwrapMotionComponent(component,) === 'a') return motion.span;
   return component;
 }
+var textSelectionColorVariable = '--text-selection-color';
+var textSelectionBackgroundColorVariable = '--text-selection-background-color';
+function updateTextSelectionStyles(triggerId,) {
+  if (!triggerId) return;
+  frame.read(() => {
+    const el = document.getElementById(triggerId,);
+    if (!el) return;
+    const styles4 = getComputedStyle(el, '::selection',);
+    const textSelectionColor = styles4.getPropertyValue('color',).trim();
+    const textSelectionBackgroundColor = styles4.getPropertyValue('background-color',).trim();
+    frame.render(() => {
+      const overlayPortal = document.querySelectorAll(`[data-framer-portal-id="${triggerId}"]`,);
+      if (overlayPortal.length === 0) return;
+      if (textSelectionColor) {
+        overlayPortal.forEach((el2) => el2.style.setProperty(textSelectionColorVariable, textSelectionColor,));
+      }
+      if (textSelectionBackgroundColor) {
+        overlayPortal.forEach((el2) => el2.style.setProperty(textSelectionBackgroundColorVariable, textSelectionBackgroundColor,));
+      }
+    },);
+  },);
+}
+function getTextSelectionStylesFromTrigger(triggerId,) {
+  return [`[data-framer-portal-id="${triggerId}"] * ::selection {
+    color: var(${textSelectionColorVariable});
+    background-color: var(${textSelectionBackgroundColorVariable});
+}`,];
+}
+function InjectSelectionStyleWithoutCSS({
+  triggerId,
+  children,
+},) {
+  React42.useLayoutEffect(() => {
+    if (triggerId) updateTextSelectionStyles(triggerId,);
+  }, [triggerId,],);
+  return children;
+}
+var InjectSelectionStyle =
+  /* @__PURE__ */ (() =>
+    withCSS(
+      InjectSelectionStyleWithoutCSS,
+      (_target, props,) => getTextSelectionStylesFromTrigger(props == null ? void 0 : props.triggerId,),
+      'InjectSelectionStyle',
+    ))();
 var Polygon = {
   /**
    * Determine if the vertices are ordered clockwise or counter-clockwise. This works for simple
@@ -34832,7 +35052,7 @@ function domWriteUpdatePosition(floatingPositionRef, position, rect, scrollX, sc
   },);
 }
 var FloatingStackingContext = /* @__PURE__ */ (() => {
-  const Context2 = React4.createContext(/* @__PURE__ */ new Set(),);
+  const Context2 = React42.createContext(/* @__PURE__ */ new Set(),);
   Context2.displayName = 'FloatingStackingContext';
   return Context2;
 })();
@@ -34841,9 +35061,9 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
   onDismiss,
 },) {
   const descendantStackingContext = useConstant2(() => /* @__PURE__ */ new Set());
-  const ancestorStackingContext = React4.useContext(FloatingStackingContext,);
+  const ancestorStackingContext = React42.useContext(FloatingStackingContext,);
   const [isPresent2, safeToRemove,] = usePresence();
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (isPresent2) {
       if (!floatingPositionRef.current) return;
       floatingPositionRef.current.style.pointerEvents = '';
@@ -34855,7 +35075,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
       safeToRemove();
     }
   }, [isPresent2, safeToRemove, floatingPositionRef, ancestorStackingContext,],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (!safeArea) {
       const handleEscape = (e) => {
         if (e.key !== 'Escape') return;
@@ -34923,7 +35143,7 @@ function childrenWithOrigin(child, {
     originX: x,
     originY: y,
   };
-  return React4.cloneElement(child, {
+  return React42.cloneElement(child, {
     style: style2,
   },);
 }
@@ -34954,11 +35174,12 @@ function Floating({
   onDismiss,
   ...rest
 },) {
-  const floatingPositionRef = React4.useRef(null,);
-  const safeAreaRef = React4.useRef(null,);
-  const contentRef = React4.useRef(null,);
+  var _a;
+  const floatingPositionRef = React42.useRef(null,);
+  const safeAreaRef = React42.useRef(null,);
+  const contentRef = React42.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
-  React4.useLayoutEffect(() => {
+  React42.useLayoutEffect(() => {
     if (!refHasValue(anchorRef,) || !contentRef.current || !placement || !alignment) return;
     const offset = {
       x: offsetX ?? 0,
@@ -35037,7 +35258,7 @@ function Floating({
     const handleMouseMove = (event) => {
       latestEvent = event;
       if (!initialUpdateHasRun) return;
-      frame.read(domReadUpdateSafePlacementAndRect,);
+      frame.read(domReadUpdateSafePlacementAndRect, false, true,);
       frame.update(onUpdate, false, true,);
       frame.render(onRender, false, true,);
     };
@@ -35093,9 +35314,12 @@ function Floating({
         /* @__PURE__ */ jsx3(FloatingStackingContext.Provider, {
           value: descendantContext,
           children: /* @__PURE__ */ jsx3(ResetOuterLinkContext, {
-            children: /* @__PURE__ */ jsx3('div', {
-              ref: contentRef,
-              children: childrenWithOrigin(children, origin,),
+            children: /* @__PURE__ */ jsx3(InjectSelectionStyle, {
+              triggerId: ((_a = anchorRef.current) == null ? void 0 : _a.id) ?? void 0,
+              children: /* @__PURE__ */ jsx3('div', {
+                ref: contentRef,
+                children: childrenWithOrigin(children, origin,),
+              },),
             },),
           },),
         },),
@@ -35104,7 +35328,7 @@ function Floating({
     getPortalContainer(portalSelector, inComponent,),
   );
 }
-var Instance = /* @__PURE__ */ React4.forwardRef(function Instance2({
+var Instance = /* @__PURE__ */ React42.forwardRef(function Instance2({
   Component: Component18,
   ...props
 }, ref,) {
@@ -36131,8 +36355,8 @@ function openExternalLinkInCurrentTab(link, formRef,) {
   linkElement.click();
   linkElement.remove();
 }
-var FormContext = React4.createContext(void 0,);
-var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
+var FormContext = React42.createContext(void 0,);
+var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   action,
   children,
   redirectUrl,
@@ -36143,17 +36367,17 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
   nodeId,
   ...props
 }, forwardedRef,) {
-  const fallbackRef = React4.useRef(null,);
+  const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
-  const [state, dispatch,] = React4.useReducer(formReducer, incompleteState,);
+  const [state, dispatch,] = React42.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
   } = useLocaleInfo();
   const projectHash = useContext(FormContext,);
-  const callbacks = React4.useRef({
+  const callbacks = React42.useRef({
     onSuccess,
     onError,
     onLoading,
@@ -36163,7 +36387,7 @@ var FormContainer = /* @__PURE__ */ React4.forwardRef(function FormContainer2({
     onError,
     onLoading,
   };
-  const submissionInProgressRef = React4.useRef(false,);
+  const submissionInProgressRef = React42.useRef(false,);
   async function redirectTo(link,) {
     var _a, _b;
     if (isString(link,)) {
@@ -36459,8 +36683,8 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
 };
 var defaultLocaleId = 'default';
 function useForceUpdate3() {
-  const [_, setForcedRenderCount,] = React4.useState(0,);
-  return [_, React4.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
+  const [_, setForcedRenderCount,] = React42.useState(0,);
+  return [_, React42.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
 function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   const element = hash2 && document.getElementById(hash2,);
@@ -36543,6 +36767,7 @@ function Router({
   LayoutTemplate,
   EditorBar,
   siteCanonicalURL,
+  adaptLayoutToTextDirection,
 },) {
   useMarkRouterEffects();
   useReplaceInitialState({
@@ -36579,6 +36804,12 @@ function Router({
       return id3 === currentLocaleId;
     },) ?? null;
   }, [currentLocaleId, locales,],);
+  const textDirection = activeLocale == null ? void 0 : activeLocale.textDirection;
+  useLayoutEffect(() => {
+    if (!textDirection) return;
+    if (!adaptLayoutToTextDirection) return;
+    document.documentElement.setAttribute('dir', textDirection,);
+  }, [textDirection, adaptLayoutToTextDirection,],);
   const localeInfo = useMemo2(() => {
     return {
       activeLocale,
@@ -37208,17 +37439,17 @@ _ongoingFetches = /* @__PURE__ */ new WeakMap();
 _staleQueriesInterval = /* @__PURE__ */ new WeakMap();
 __publicField(_FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
 var FetchClient = _FetchClient;
-var FetchClientContext = /* @__PURE__ */ React2.createContext(void 0,);
-var IsRestoringCacheContext = /* @__PURE__ */ React2.createContext(true,);
+var FetchClientContext = /* @__PURE__ */ React3.createContext(void 0,);
+var IsRestoringCacheContext = /* @__PURE__ */ React3.createContext(true,);
 var FetchClientProvider = ({
   children,
   client: initialClient,
 },) => {
-  const [client,] = React2.useState(() => initialClient ?? new FetchClient());
-  const [isRestoring, setIsRestoring,] = React2.useState(true,);
-  React2.useEffect(() => {
+  const [client,] = React3.useState(() => initialClient ?? new FetchClient());
+  const [isRestoring, setIsRestoring,] = React3.useState(true,);
+  React3.useEffect(() => {
     client.hydrateCache();
-    React2.startTransition(() => {
+    React3.startTransition(() => {
       setIsRestoring(false,);
     },);
     return () => client.unmount();
@@ -37349,35 +37580,35 @@ _results = /* @__PURE__ */ new WeakMap();
 _SSRResults = /* @__PURE__ */ new WeakMap();
 _onlyPrefetched = /* @__PURE__ */ new WeakMap();
 function useFetchRequestsForChildren(requests, disabled, children,) {
-  const fetchClient = React2.useContext(FetchClientContext,);
+  const fetchClient = React3.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
-  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
-  React2.useLayoutEffect(() => {
+  const isRestoringCache = React3.useContext(IsRestoringCacheContext,);
+  const [observer2,] = React3.useState(() => new RequestsObserver(fetchClient, requests,));
+  React3.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
       onlyPrefetched: false,
     },);
   }, [requests, observer2, disabled,],);
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     return () => observer2.unmount();
   }, [observer2,],);
-  const subscribe = React2.useCallback((onChange) => {
+  const subscribe = React3.useCallback((onChange) => {
     if (isRestoringCache || disabled) return noop4;
     return observer2.subscribe(onChange,);
   }, [disabled, observer2, isRestoringCache,],);
-  const synchronousData = React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
-  const deferredData = React2.useDeferredValue(synchronousData,);
+  const synchronousData = React3.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
+  const deferredData = React3.useDeferredValue(synchronousData,);
   return useMemoOne(() => children(deferredData.data, deferredData.status,), [deferredData, children,],);
 }
 function usePrefetch() {
-  const fetchClient = React2.useContext(FetchClientContext,);
+  const fetchClient = React3.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  return React2.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
+  return React3.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
 MotionGlobalConfig.WillChange = WillChangeMotionValue;
 function PageRoot({
@@ -37399,8 +37630,9 @@ function PageRoot({
   disableHistory,
   LayoutTemplate,
   siteCanonicalURL,
+  adaptLayoutToTextDirection,
 },) {
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
   }, [],);
@@ -37428,18 +37660,19 @@ function PageRoot({
               disableHistory,
               LayoutTemplate,
               siteCanonicalURL,
+              adaptLayoutToTextDirection,
             },),
           },),
         },),
       },),
     },);
   } else {
-    const Wrapper = includeDataObserver ? DataObserver : React4.Fragment;
+    const Wrapper = includeDataObserver ? DataObserver : React42.Fragment;
     return /* @__PURE__ */ jsx3(Wrapper, {
       children: /* @__PURE__ */ jsx3(RoutesProvider, {
         routes,
         children: /* @__PURE__ */ jsx3(NavigationWrapper, {
-          children: React4.isValidElement(RootComponent,) ? RootComponent : React4.createElement(
+          children: React42.isValidElement(RootComponent,) ? RootComponent : React42.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
             RootComponent,
@@ -37498,7 +37731,7 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
   const childrenWithLinks = children(resolvedLinks,);
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
 },),);
-var Fetcher = /* @__PURE__ */ React2.forwardRef(function Fetcher2({
+var Fetcher = /* @__PURE__ */ React3.forwardRef(function Fetcher2({
   requests,
   disabled,
   children,
@@ -37533,6 +37766,70 @@ function getLogger(name,) {
     },
   };
 }
+function evaluateSync(generator,) {
+  const state = generator.next();
+  assert(state.done, 'Generator must not yield',);
+  return state.value;
+}
+async function evaluateAsync(generator, state = generator.next(),) {
+  while (!state.done) {
+    const value = await state.value;
+    state = generator.next(value,);
+  }
+  return state.value;
+}
+function* evaluateObject(values,) {
+  const result = {};
+  const keys3 = Object.keys(values,);
+  const promises = [];
+  for (const key7 of keys3) {
+    const generator = values[key7];
+    if (isGenerator2(generator,)) {
+      const state = generator.next();
+      if (state.done) {
+        result[key7] = state.value;
+      } else {
+        promises.push(
+          evaluateAsync(generator, state,).then((value) => {
+            result[key7] = value;
+          },),
+        );
+      }
+    } else {
+      result[key7] = generator;
+    }
+  }
+  if (promises.length > 0) {
+    yield Promise.all(promises,);
+  }
+  return result;
+}
+function* evaluateArray(values,) {
+  const result = [];
+  const keys3 = values.keys();
+  const promises = [];
+  for (const key7 of keys3) {
+    const generator = values[key7];
+    if (isGenerator2(generator,)) {
+      const state = generator.next();
+      if (state.done) {
+        result[key7] = state.value;
+      } else {
+        promises.push(
+          evaluateAsync(generator, state,).then((value) => {
+            result[key7] = value;
+          },),
+        );
+      }
+    } else {
+      result[key7] = generator;
+    }
+  }
+  if (promises.length > 0) {
+    yield Promise.all(promises,);
+  }
+  return result;
+}
 function isAnyCollection(value,) {
   return isAnyLegacyCollection(value,) || isAnyDatabaseCollection(value,);
 }
@@ -37554,87 +37851,6 @@ function isLocalizedDatabaseCollection(value,) {
 function isAnyDatabaseCollection(value,) {
   return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
 }
-async function getCollectionItems(collection, locale,) {
-  if (isLegacyLocalizedCollection(collection,)) {
-    await collection.preload(locale,);
-    return collection.read(locale,);
-  }
-  return collection;
-}
-var CompatibilityDatabaseCollection = class {
-  constructor(collection, locale,) {
-    this.collection = collection;
-    this.locale = locale;
-    __publicField(this, 'schema',);
-    __publicField(this, 'indexes', [],);
-    const propertyControls = getPropertyControls(collection,);
-    assert(propertyControls, 'Collection does not have properties',);
-    const schema = {
-      id: {
-        type: 'string',
-        isNullable: false,
-      },
-    };
-    const controlEntries = Object.entries(propertyControls,);
-    for (const [key7, controlDescription,] of controlEntries) {
-      if (!controlDescription) continue;
-      const type = controlDescription.type;
-      assert(type !== 'array', 'Array properties are not supported',);
-      assert(type !== 'object', 'Object properties are not supported',);
-      schema[key7] = {
-        type,
-        isNullable: true,
-      };
-    }
-    this.schema = schema;
-  }
-  getDatabaseItem(item, pointer,) {
-    const data2 = {};
-    for (const key7 in this.schema) {
-      const value = item[key7];
-      if (isNullish2(value,)) continue;
-      const definition = this.schema[key7];
-      if (isUndefined(definition,)) continue;
-      assert(definition.type !== 'unknown', 'Invalid definition type',);
-      data2[key7] = {
-        type: definition.type,
-        // biome-ignore lint/suspicious/noExplicitAny: Existing.
-        value,
-      };
-    }
-    return {
-      pointer,
-      data: data2,
-    };
-  }
-  async resolveRichText(pointer,) {
-    if (LazyValue.is(pointer,)) {
-      const promise = pointer.preload();
-      if (promise) await promise;
-      return pointer.read();
-    }
-    return pointer;
-  }
-  async scanItems() {
-    const items = await getCollectionItems(this.collection, this.locale,);
-    return items.map((item, index,) => {
-      const pointer = String(index,);
-      return this.getDatabaseItem(item, pointer,);
-    },);
-  }
-  async resolveItems(pointers,) {
-    const items = await getCollectionItems(this.collection, this.locale,);
-    return pointers.map((pointer) => {
-      const index = Number(pointer,);
-      const item = items[index];
-      assert(item, 'Can\'t find collection item',);
-      return this.getDatabaseItem(item, pointer,);
-    },);
-  }
-  compareItems(left, right,) {
-    return Number(left.pointer,) - Number(right.pointer,);
-  }
-};
 function compareArray(left, right, collation11,) {
   const leftLength = left.value.length;
   const rightLength = right.value.length;
@@ -38208,6 +38424,120 @@ var unknownDefinition = {
   type: 'unknown',
   isNullable: true,
 };
+async function getCollectionItems(collection, locale,) {
+  if (isLegacyLocalizedCollection(collection,)) {
+    await collection.preload(locale,);
+    return collection.read(locale,);
+  }
+  return collection;
+}
+var CompatibilityDatabaseCollection = class {
+  constructor(collection, locale,) {
+    this.collection = collection;
+    this.locale = locale;
+    __publicField(this, 'schema',);
+    __publicField(this, 'indexes', [],);
+    const propertyControls = getPropertyControls(collection,);
+    assert(propertyControls, 'Collection does not have properties',);
+    const schema = {
+      id: {
+        type: 'string',
+        isNullable: false,
+      },
+    };
+    const controlEntries = Object.entries(propertyControls,);
+    for (const [key7, controlDescription,] of controlEntries) {
+      if (!controlDescription) continue;
+      const type = controlDescription.type;
+      assert(type !== 'array', 'Array properties are not supported',);
+      assert(type !== 'object', 'Object properties are not supported',);
+      schema[key7] = {
+        type,
+        isNullable: true,
+      };
+    }
+    this.schema = schema;
+  }
+  getDatabaseItem(item, pointer,) {
+    const data2 = {};
+    for (const key7 in this.schema) {
+      const value = item[key7];
+      if (isNullish2(value,)) continue;
+      const definition = this.schema[key7];
+      if (isUndefined(definition,)) continue;
+      assert(definition.type !== 'unknown', 'Invalid definition type',);
+      data2[key7] = {
+        type: definition.type,
+        // biome-ignore lint/suspicious/noExplicitAny: Existing.
+        value,
+      };
+    }
+    return {
+      pointer,
+      data: data2,
+    };
+  }
+  async resolveRichText(pointer,) {
+    if (LazyValue.is(pointer,)) {
+      const promise = pointer.preload();
+      if (promise) await promise;
+      return pointer.read();
+    }
+    return pointer;
+  }
+  async scanItems() {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    return items.map((item, index,) => {
+      const pointer = String(index,);
+      return this.getDatabaseItem(item, pointer,);
+    },);
+  }
+  async resolveItems(pointers,) {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    return pointers.map((pointer) => {
+      const index = Number(pointer,);
+      const item = items[index];
+      assert(item, 'Can\'t find collection item',);
+      return this.getDatabaseItem(item, pointer,);
+    },);
+  }
+  compareItems(left, right,) {
+    return Number(left.pointer,) - Number(right.pointer,);
+  }
+};
+var collectionIds = /* @__PURE__ */ new WeakMap();
+function getCollectionId(collection,) {
+  const existing = collectionIds.get(collection,);
+  if (existing) return existing;
+  const id3 = Math.random().toString(16,).slice(2,);
+  collectionIds.set(collection, id3,);
+  return id3;
+}
+var compatibilityCache = /* @__PURE__ */ new Map();
+function getCollectionForLocale(data2, locale,) {
+  if (isAnyLegacyCollection(data2,)) {
+    const collectionId = getCollectionId(data2,);
+    const localeId = (locale == null ? void 0 : locale.id) ?? defaultLocaleId;
+    const cacheKey = collectionId + localeId;
+    const cached = compatibilityCache.get(cacheKey,);
+    if (cached) return cached;
+    const collection = new CompatibilityDatabaseCollection(data2, locale,);
+    compatibilityCache.set(cacheKey, collection,);
+    return collection;
+  }
+  if (isDatabaseCollection(data2,)) {
+    return data2;
+  }
+  if (isLocalizedDatabaseCollection(data2,)) {
+    while (locale) {
+      const collection = data2.collectionByLocaleId[locale.id];
+      if (collection) return collection;
+      locale = locale.fallback;
+    }
+    return data2.collectionByLocaleId.default;
+  }
+  assertNever(data2, 'Unsupported collection type',);
+}
 function getNetworkLatency() {
   return 25;
 }
@@ -38300,70 +38630,6 @@ var Winner = class {
     }
   }
 };
-function evaluateSync(generator,) {
-  const state = generator.next();
-  assert(state.done, 'Generator must not yield',);
-  return state.value;
-}
-async function evaluateAsync(generator, state = generator.next(),) {
-  while (!state.done) {
-    const value = await state.value;
-    state = generator.next(value,);
-  }
-  return state.value;
-}
-function* evaluateObject(values,) {
-  const result = {};
-  const keys3 = Object.keys(values,);
-  const promises = [];
-  for (const key7 of keys3) {
-    const generator = values[key7];
-    if (isGenerator2(generator,)) {
-      const state = generator.next();
-      if (state.done) {
-        result[key7] = state.value;
-      } else {
-        promises.push(
-          evaluateAsync(generator, state,).then((value) => {
-            result[key7] = value;
-          },),
-        );
-      }
-    } else {
-      result[key7] = generator;
-    }
-  }
-  if (promises.length > 0) {
-    yield Promise.all(promises,);
-  }
-  return result;
-}
-function* evaluateArray(values,) {
-  const result = [];
-  const keys3 = values.keys();
-  const promises = [];
-  for (const key7 of keys3) {
-    const generator = values[key7];
-    if (isGenerator2(generator,)) {
-      const state = generator.next();
-      if (state.done) {
-        result[key7] = state.value;
-      } else {
-        promises.push(
-          evaluateAsync(generator, state,).then((value) => {
-            result[key7] = value;
-          },),
-        );
-      }
-    } else {
-      result[key7] = generator;
-    }
-  }
-  if (promises.length > 0) {
-    yield Promise.all(promises,);
-  }
-  return result;
-}
 var AbstractNode = class {
   constructor(isSynchronous,) {
     this.isSynchronous = isSynchronous;
@@ -38432,29 +38698,124 @@ function calculateHash(name, ...values) {
   },);
   return Hash(`${name}(${hashes.join(', ',)})`,);
 }
-var RichTextResolver = class {
-  constructor(data2, pointer,) {
-    this.data = data2;
-    this.pointer = pointer;
-    __publicField(this, 'cached',);
+function wrapRichTextPointer(collection, pointer,) {
+  return {
+    collectionId: getCollectionId(collection,),
+    pointer,
+  };
+}
+function isWrappedRichTextPointer(value,) {
+  return isObject2(value,) && isString(value.collectionId,);
+}
+function wrapVectorSetItemPointer(collection, pointer,) {
+  return {
+    collectionId: getCollectionId(collection,),
+    pointer,
+  };
+}
+function isWrappedVectorSetItemPointer(value,) {
+  return isObject2(value,) && isString(value.collectionId,);
+}
+var Resolver = class {
+  constructor(query, locale,) {
+    __publicField(this, 'collections',);
+    __publicField(this, 'richTextCache', /* @__PURE__ */ new WeakMap(),);
+    __publicField(this, 'vectorSetItemCache', /* @__PURE__ */ new WeakMap(),);
+    this.collections = getCollectionsFromQuery(query, locale,);
   }
-  resolve() {
-    this.cached ??= this.data.resolveRichText(this.pointer,);
-    return this.cached;
+  *resolveArrayValue(value,) {
+    return yield* evaluateArray(value.value.map((item) => {
+      return this.resolveValue(item,);
+    },),);
+  }
+  *resolveObjectValue(value,) {
+    const result = {};
+    for (const key7 in value.value) {
+      const item = value.value[key7];
+      result[key7] = this.resolveValue(item,);
+    }
+    return yield* evaluateObject(result,);
+  }
+  loadRichTextValue(value,) {
+    const wrapped = value.value;
+    assert(isWrappedRichTextPointer(wrapped,), 'Rich text pointer must be wrapped',);
+    const collection = this.collections.get(wrapped.collectionId,);
+    assert(collection, 'Can\'t find collection for rich text pointer',);
+    const cache2 = this.richTextCache.get(collection,) ?? /* @__PURE__ */ new Map();
+    this.richTextCache.set(collection, cache2,);
+    const cached = cache2.get(wrapped.pointer,);
+    if (cached) return cached;
+    const result = collection.resolveRichText(wrapped.pointer,);
+    cache2.set(wrapped.pointer, result,);
+    return result;
+  }
+  preloadRichTextValue(value,) {
+    void this.loadRichTextValue(value,);
+  }
+  *resolveRichTextValue(value,) {
+    const result = this.loadRichTextValue(value,);
+    if (isPromiseLike(result,)) return yield result;
+    return result;
+  }
+  loadVectorSetItemValue(value,) {
+    const wrapped = value.value;
+    assert(isWrappedVectorSetItemPointer(wrapped,), 'Vector set item pointer must be wrapped',);
+    const collection = this.collections.get(wrapped.collectionId,);
+    assert(collection, 'Can\'t find collection for vector set item pointer',);
+    assert(collection.resolveVectorSetItem, 'Can\'t resolve vector set item pointer',);
+    const cache2 = this.vectorSetItemCache.get(collection,) ?? /* @__PURE__ */ new Map();
+    this.vectorSetItemCache.set(collection, cache2,);
+    const cached = cache2.get(wrapped.pointer,);
+    if (cached) return cached;
+    const result = collection.resolveVectorSetItem(wrapped.pointer,);
+    cache2.set(wrapped.pointer, result,);
+    return result;
+  }
+  preloadVectorSetItemValue(value,) {
+    void this.loadVectorSetItemValue(value,);
+  }
+  *resolveVectorSetItemValue(value,) {
+    const result = this.loadVectorSetItemValue(value,);
+    if (isPromiseLike(result,)) return yield result;
+    return result;
+  }
+  *resolveValue(value,) {
+    switch (value == null ? void 0 : value.type) {
+      case 'array':
+        return yield* this.resolveArrayValue(value,);
+      case 'object':
+        return yield* this.resolveObjectValue(value,);
+      case 'richtext':
+        return yield* this.resolveRichTextValue(value,);
+      case 'vectorsetitem':
+        return yield* this.resolveVectorSetItemValue(value,);
+    }
+    return (value == null ? void 0 : value.value) ?? null;
   }
 };
-var VectorSetItemResolver = class {
-  constructor(data2, pointer,) {
-    this.data = data2;
-    this.pointer = pointer;
-    __publicField(this, 'cached',);
+function getCollectionsFromQuery(query, locale,) {
+  const collections = /* @__PURE__ */ new Map();
+  function collect(value,) {
+    if (isObject2(value,)) {
+      if (value.type === 'Collection' && isAnyCollection(value.data,)) {
+        const collection = getCollectionForLocale(value.data, locale,);
+        const collectionId = getCollectionId(collection,);
+        collections.set(collectionId, collection,);
+      } else {
+        for (const key7 in value) {
+          const property = value[key7];
+          collect(property,);
+        }
+      }
+    } else if (isArray(value,)) {
+      for (const item of value) {
+        collect(item,);
+      }
+    }
   }
-  resolve() {
-    assert(this.data.resolveVectorSetItem, 'Can\'t resolve vector set item.',);
-    this.cached ??= this.data.resolveVectorSetItem(this.pointer,);
-    return this.cached;
-  }
-};
+  collect(query,);
+  return collections;
+}
 var VIRTUAL_INDEX_FIELD = 'index';
 var Metadata = class extends Set {
   merge(other,) {
@@ -38539,19 +38900,21 @@ var FieldMetadata = class {
   getValue(item,) {
     assert(this.name, 'Can only get value of field with a name',);
     const value = item.data[this.name];
-    if ((value == null ? void 0 : value.type) === 'richtext') {
-      assert(this.collection, 'Rich text field must have a collection',);
-      return {
-        type: 'richtext',
-        value: new RichTextResolver(this.collection.data, value.value,),
-      };
-    }
-    if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
-      assert(this.collection, 'Vector set item field must have a collection',);
-      return {
-        type: 'vectorsetitem',
-        value: new VectorSetItemResolver(this.collection.data, value.value,),
-      };
+    switch (value == null ? void 0 : value.type) {
+      case 'richtext': {
+        assert(this.collection, 'Rich text field must have a collection',);
+        return {
+          type: 'richtext',
+          value: wrapRichTextPointer(this.collection.data, value.value,),
+        };
+      }
+      case 'vectorsetitem': {
+        assert(this.collection, 'Vector set item field must have a collection',);
+        return {
+          type: 'vectorsetitem',
+          value: wrapVectorSetItemPointer(this.collection.data, value.value,),
+        };
+      }
     }
     return value ?? null;
   }
@@ -39275,7 +39638,7 @@ var Builder = class {
   }
   buildCollection(inScope, from,) {
     const outScope = inScope.push();
-    const collectionData = getCollection(from.data, this.locale,);
+    const collectionData = getCollectionForLocale(from.data, this.locale,);
     const collectionName = from.alias;
     const collectionId = CollectionId(this.collectionId++,);
     const collection = new CollectionMetadata(collectionId, collectionName, collectionData,);
@@ -39559,23 +39922,6 @@ var Builder = class {
     }
   }
 };
-function getCollection(data2, locale,) {
-  if (isAnyLegacyCollection(data2,)) {
-    return new CompatibilityDatabaseCollection(data2, locale,);
-  }
-  if (isDatabaseCollection(data2,)) {
-    return data2;
-  }
-  if (isLocalizedDatabaseCollection(data2,)) {
-    while (locale) {
-      const collection = data2.collectionByLocaleId[locale.id];
-      if (collection) return collection;
-      locale = locale.fallback;
-    }
-    return data2.collectionByLocaleId.default;
-  }
-  assertNever(data2, 'Unsupported collection type',);
-}
 var Subquery = class {
   constructor(inScope,) {
     this.inScope = inScope;
@@ -41644,10 +41990,11 @@ var Normalizer = class {
 };
 var EnforcerNode = class extends RelationalNode {};
 var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
-  constructor(input, fields,) {
+  constructor(input, fields, resolver,) {
     super(false,);
     this.input = input;
     this.fields = fields;
+    this.resolver = resolver;
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -41675,7 +42022,7 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
   getOptimized(required,) {
     const inputRequired = this.getInputRequiredProps(required,);
     const input = this.inputGroup.getOptimized(inputRequired,);
-    return new _EnforcerResolve(input, this.fields,);
+    return new _EnforcerResolve(input, this.fields, this.resolver,);
   }
   *evaluate(context,) {
     const input = yield* this.input.evaluate(context,);
@@ -41689,11 +42036,9 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
       for (const field of this.fields) {
         const value = tuple.getValue(field,);
         if ((value == null ? void 0 : value.type) === 'richtext') {
-          assert(value.value instanceof RichTextResolver, 'Pointer must be wrapped',);
-          void value.value.resolve();
+          this.resolver.preloadRichTextValue(value,);
         } else if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
-          assert(value.value instanceof VectorSetItemResolver, 'Pointer must be wrapped',);
-          void value.value.resolve();
+          this.resolver.preloadVectorSetItemValue(value,);
         }
       }
     }
@@ -41821,9 +42166,10 @@ var EnforcerSort = class _EnforcerSort extends EnforcerNode {
   }
 };
 var Optimizer = class {
-  constructor(query, locale,) {
+  constructor(query, locale, resolver,) {
     this.query = query;
     this.locale = locale;
+    this.resolver = resolver;
     __publicField(this, 'memo', new Memo(),);
     __publicField(this, 'normalizer', new Normalizer(this.memo,),);
     __publicField(this, 'explorer', new Explorer(this.normalizer,),);
@@ -41863,7 +42209,7 @@ var Optimizer = class {
   }
   createEnforcer(winner, node, required,) {
     if (required.resolvedFields.size > 0) {
-      const enforcer = new EnforcerResolve(node, required.resolvedFields,);
+      const enforcer = new EnforcerResolve(node, required.resolvedFields, this.resolver,);
       const cost = enforcer.optimize(this, required,);
       winner.update(enforcer, cost,);
     }
@@ -42018,43 +42364,20 @@ var QueryEngine = class {
   async query(query, locale,) {
     log.debug(`Query:
 ${stringifyQuery(query,)}`,);
-    const optimizer = new Optimizer(query, locale,);
+    const resolver = new Resolver(query, locale,);
+    const optimizer = new Optimizer(query, locale, resolver,);
     const [root, namedFields,] = optimizer.optimize();
     const relation = await root.evaluateAsync();
     const namedFieldEntries = Object.entries(namedFields,);
-    const result = await Promise.all(relation.tuples.map(async (tuple) => {
-      const resolvedFields = await Promise.all(namedFieldEntries.map(async ([name, field,],) => {
+    const result = await evaluateAsync(evaluateArray(relation.tuples.map((tuple) => {
+      const object = {};
+      for (const [name, field,] of namedFieldEntries) {
         const value = tuple.getValue(field,);
-        const resolved = await this.resolveValue(value,);
-        return [name, resolved,];
-      },),);
-      return Object.fromEntries(resolvedFields,);
-    },),);
+        object[name] = resolver.resolveValue(value,);
+      }
+      return evaluateObject(object,);
+    },),),);
     return result;
-  }
-  async resolveValue(value,) {
-    if ((value == null ? void 0 : value.type) === 'richtext') {
-      assert(value.value instanceof RichTextResolver, 'Pointer must be wrapped',);
-      return value.value.resolve();
-    }
-    if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
-      assert(value.value instanceof VectorSetItemResolver, 'Pointer must be wrapped',);
-      return value.value.resolve();
-    }
-    if ((value == null ? void 0 : value.type) === 'array') {
-      return Promise.all(value.value.map(async (item) => {
-        return this.resolveValue(item,);
-      },),);
-    }
-    if ((value == null ? void 0 : value.type) === 'object') {
-      const entries = Object.entries(value.value,);
-      const resolvedEntries = await Promise.all(entries.map(async ([key7, item,],) => {
-        const resolved = await this.resolveValue(item,);
-        return [key7, resolved,];
-      },),);
-      return Object.fromEntries(resolvedEntries,);
-    }
-    return (value == null ? void 0 : value.value) ?? null;
   }
 };
 var QueryCache = class {
@@ -42086,14 +42409,6 @@ var QueryCache = class {
     return value;
   }
 };
-var collectionIds = /* @__PURE__ */ new WeakMap();
-function getCollectionId(collection,) {
-  const existing = collectionIds.get(collection,);
-  if (existing) return existing;
-  const id3 = Math.random().toString(16,).slice(2,);
-  collectionIds.set(collection, id3,);
-  return id3;
-}
 function replaceCollection(_, value,) {
   if (isObject2(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
     return getCollectionId(value.data,);
@@ -42156,7 +42471,7 @@ function useActiveTargetCallback() {
   },).current;
 }
 function useAddVariantProps(baseVariant, gestureVariant, variantProps2,) {
-  return React4.useCallback((id3) => {
+  return React42.useCallback((id3) => {
     var _a, _b, _c;
     if (!variantProps2) return {};
     if (!baseVariant) return {};
@@ -42340,7 +42655,7 @@ function useDataRecord(collection, variables,) {
 }
 function useDynamicRefs() {
   const map2 = useConstant2(() => /* @__PURE__ */ new Map());
-  return React4.useCallback((key7) => {
+  return React42.useCallback((key7) => {
     const existing = map2.get(key7,);
     if (existing) return existing;
     const ref = createRef();
@@ -42360,7 +42675,7 @@ function useSiteRefs() {
       siteCanonicalURL: void 0,
     },);
   }, [route,],);
-  return React4.useCallback((key7) => {
+  return React42.useCallback((key7) => {
     if (!key7) return;
     const computedKey = `${path}-${key7}`;
     const existing = map.get(computedKey,);
@@ -42450,7 +42765,7 @@ function createGamepadPoller() {
   };
 }
 var gamepadPoller = /* @__PURE__ */ createGamepadPoller();
-var GamepadContext = /* @__PURE__ */ React4.createContext(gamepadPoller,);
+var GamepadContext = /* @__PURE__ */ React42.createContext(gamepadPoller,);
 function getGamepadInputs() {
   let firstConnectedGamepad = null;
   const gamepads = __unframerNavigator2.getGamepads();
@@ -42496,16 +42811,16 @@ function useGamepad(input, callback, {
   mapping,
   on,
 } = {},) {
-  const context = React4.useContext(GamepadContext,);
+  const context = React42.useContext(GamepadContext,);
   const settings = useConstant2(() => ({
     mapping: mapping ?? 'standard',
     on: on ?? 'keydown',
   }));
-  const stateRef = React4.useRef({
+  const stateRef = React42.useRef({
     pressed: false,
     handler: callback,
   },);
-  const cb = React4.useCallback((gamepad) => {
+  const cb = React42.useCallback((gamepad) => {
     const {
       pressed,
       handler,
@@ -42527,10 +42842,10 @@ function useGamepad(input, callback, {
     }
     return () => context.unregister(cb,);
   }, [],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     return () => context.unregister(cb,);
   }, [cb, context,],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     stateRef.current.handler = callback;
   }, [callback,],);
 }
@@ -42555,20 +42870,20 @@ function createShortcutDefinition(shortcut,) {
   };
 }
 function useHotkey(shortcut, callback,) {
-  const inTarget = React4.useRef(true,);
+  const inTarget = React42.useRef(true,);
   const shortcutDefinition = useConstant2(() => createShortcutDefinition(shortcut,));
   useOnCurrentTargetChange((isCurrentTarget, isOverlayed,) => {
     inTarget.current = isCurrentTarget && !isOverlayed;
     return () => inTarget.current = false;
   },);
-  const eventHandler = React4.useCallback((event) => {
+  const eventHandler = React42.useCallback((event) => {
     if (!shortcutDefinition) return;
     if (!inTarget.current) return;
     if (!Object.keys(shortcutDefinition,).every((key7) => shortcutDefinition[key7] === asRecord(event,)[key7])) return;
     event.preventDefault();
     callback();
   }, [shortcutDefinition, callback,],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     document.addEventListener('keydown', eventHandler,);
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
@@ -42593,8 +42908,8 @@ function callbackForVariant(map2, variant,) {
 function useOnVariantChange(variant, callbackMap,) {
   const isRenderingStaticContent = isStaticRenderer();
   if (isRenderingStaticContent) return;
-  const isActiveScreenRef = React4.useRef(true,);
-  const callbackMapRef = React4.useRef(callbackMap,);
+  const isActiveScreenRef = React42.useRef(true,);
+  const callbackMapRef = React42.useRef(callbackMap,);
   useOnCurrentTargetChange((isCurrent, isOverlayed,) => {
     const isActiveScreen = isCurrent && !isOverlayed;
     if (!isActiveScreenRef.current && isActiveScreen) {
@@ -42603,7 +42918,7 @@ function useOnVariantChange(variant, callbackMap,) {
     }
     isActiveScreenRef.current = isActiveScreen;
   }, [],);
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (isActiveScreenRef.current) {
       const callback = callbackForVariant(callbackMapRef.current, variant,);
       if (callback) callback();
@@ -42629,8 +42944,8 @@ function setOverflow(blockDocumentScrolling, show,) {
 function useOverlayState({
   blockDocumentScrolling = true,
 } = {},) {
-  const [showOverlay, setShowOverlay,] = React4.useState(false,);
-  const callback = React4.useCallback(async (show) => {
+  const [showOverlay, setShowOverlay,] = React42.useState(false,);
+  const callback = React42.useCallback(async (show) => {
     await yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
@@ -42638,7 +42953,7 @@ function useOverlayState({
     startTransition2(() => setShowOverlay(show,));
     setOverflow(blockDocumentScrolling, show,);
   }, [blockDocumentScrolling,],);
-  React4.useEffect(() => () => {
+  React42.useEffect(() => () => {
     void yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
@@ -42658,9 +42973,9 @@ async function componentForRoute(route,) {
     page: routeComponent,
   } = route;
   if (!routeComponent) return;
-  if (React4.isValidElement(routeComponent,)) return routeComponent;
+  if (React42.isValidElement(routeComponent,)) return routeComponent;
   if (withPreload(routeComponent,)) await routeComponent.preload();
-  return React4.createElement(routeComponent, {
+  return React42.createElement(routeComponent, {
     key: route.path,
   },);
 }
@@ -42676,7 +42991,7 @@ function usePrototypeNavigate({
     getRoute,
   } = useRouter();
   const onCanvas = useIsOnFramerCanvas();
-  React4.useEffect(() => {
+  React42.useEffect(() => {
     if (!navigation || onCanvas) return;
     preload == null ? void 0 : preload.forEach((componentOrRoute) => {
       let component;
@@ -42700,7 +43015,7 @@ function usePrototypeNavigate({
     }
     const Component18 = typeof target === 'string'
       ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
-      : React4.isValidElement(target,)
+      : React42.isValidElement(target,)
       ? target
       : null;
     if (!Component18) return;
@@ -43344,7 +43659,7 @@ function withCodeBoundaryForOverrides(Component18, {
       }
     }
   }
-  return React4.forwardRef(CodeBoundaryForOverrides,);
+  return React42.forwardRef(CodeBoundaryForOverrides,);
 }
 function tryToApplyOverride(Component18, override,) {
   try {
@@ -43486,7 +43801,7 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
   };
 }
 var withVariantAppearEffect = (Component18) =>
-  React4.forwardRef((props, forwardedRef,) => {
+  React42.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
       return /* @__PURE__ */ jsx3(Component18, {
         ...props,
@@ -43504,8 +43819,8 @@ var withVariantAppearEffect = (Component18) =>
       exitTarget,
       scrollDirection,
     } = options;
-    const [activeVariant, setVariant,] = React4.useState(obscuredVariantId,);
-    const animateState = React4.useRef(false,);
+    const [activeVariant, setVariant,] = React42.useState(obscuredVariantId,);
+    const animateState = React42.useRef(false,);
     const observerRef = useObserverRef(forwardedRef,);
     useAppearEffect(observerRef, (appears) => {
       if (options.targets) return;
@@ -43513,7 +43828,7 @@ var withVariantAppearEffect = (Component18) =>
       if (animateOnce && animateState.current === true) return;
       if (animateState.current === appears) return;
       animateState.current = appears;
-      React4.startTransition(() => {
+      React42.startTransition(() => {
         setVariant(appears ? visibleVariantId : obscuredVariantId,);
       },);
     }, {
@@ -43523,7 +43838,7 @@ var withVariantAppearEffect = (Component18) =>
         y: threshold,
       },
     },);
-    React4.useEffect(() => {
+    React42.useEffect(() => {
       if (scrollDirection) return;
       if (!targets) return;
       const playedState = {};
@@ -43544,12 +43859,12 @@ var withVariantAppearEffect = (Component18) =>
         const variant = ((_a = targets[index]) == null ? void 0 : _a.target) ?? void 0;
         if (variant === currentVariant) return;
         currentVariant = variant;
-        React4.startTransition(() => {
+        React42.startTransition(() => {
           setVariant(variant,);
         },);
       },);
     }, [animateOnce, threshold, targets, props.variant, scrollDirection, exitTarget,],);
-    useScrollDirectionChange(scrollDirection, (variant) => React4.startTransition(() => setVariant(variant,)), {
+    useScrollDirectionChange(scrollDirection, (variant) => React42.startTransition(() => setVariant(variant,)), {
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
     },);
@@ -43572,7 +43887,7 @@ var withVariantAppearEffect = (Component18) =>
     }
   },);
 var withVariantFX = (Component18) =>
-  React4.forwardRef(({
+  React42.forwardRef(({
     initial,
     animate: animate3,
     exit,
@@ -43597,8 +43912,8 @@ var withVariantFX = (Component18) =>
       ref: observerRef,
     },);
   },);
-var WindowContext = /* @__PURE__ */ React4.createContext(void 0,);
-var useProvidedWindow = () => React4.useContext(WindowContext,);
+var WindowContext = /* @__PURE__ */ React42.createContext(void 0,);
+var useProvidedWindow = () => React42.useContext(WindowContext,);
 function isDesignDefinition(d,) {
   return d.type === 'master';
 }
@@ -46776,7 +47091,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
           heightType,
           ...childProps
         } = frameProps;
-        children = React4.Children.map(originalChildren, (child) => {
+        children = React42.Children.map(originalChildren, (child) => {
           if (!isReactChild(child,) || !isReactElement(child,)) {
             return child;
           }
@@ -46786,11 +47101,11 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
               id: this.props.__layoutId,
               children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
                 enabled: false,
-                children: React4.cloneElement(child, childProps,),
+                children: React42.cloneElement(child, childProps,),
               },),
             },);
           }
-          return React4.cloneElement(child, childProps,);
+          return React42.cloneElement(child, childProps,);
         },);
         frameProps = {
           style: style2,
@@ -47089,7 +47404,7 @@ var styles = /* @__PURE__ */ (() => [
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
 var className = 'framer-form-boolean-input';
-var BooleanInput = /* @__PURE__ */ React4.forwardRef(function FormPlainTextInput3(props, ref,) {
+var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormPlainTextInput3(props, ref,) {
   const {
     inputName,
     type = 'checkbox',
@@ -47243,7 +47558,7 @@ var styles2 = /* @__PURE__ */ (() => [
   },),
 ])();
 var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles2, 'framer-lib-form-boolean-input',);
-var Select = /* @__PURE__ */ React4.forwardRef(function Select2(props, measureRef,) {
+var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureRef,) {
   const {
     autoFocus,
     className: className2,
@@ -47745,7 +48060,7 @@ function withLightboxEffect(Component18,) {
     },);
   },);
 }
-var Component16 = /* @__PURE__ */ React4.forwardRef(function Image2(props, ref,) {
+var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,) {
   const {
     background,
     children,
@@ -47760,7 +48075,7 @@ var Component16 = /* @__PURE__ */ React4.forwardRef(function Image2(props, ref,)
   };
   const intrinsicSize = useMemo2(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
   const [fallbackIntrinsicSize, setFallbackIntrinsicSize,] = useState();
-  React4.useLayoutEffect(() => {
+  React42.useLayoutEffect(() => {
     if (!(background == null ? void 0 : background.src)) return;
     if (!fitImageDimension) return;
     if (intrinsicSize) return;
@@ -47940,7 +48255,7 @@ function isShallowEqualArray(a, b,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, forwardedRef,) {
+var DeprecatedRichText = /* @__PURE__ */ React3.forwardRef(function Text(props, forwardedRef,) {
   const {
     id: id3,
     name,
@@ -47989,7 +48304,7 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
   const currentRoute = useCurrentRoute();
   useRoutePreloader(props.preload ?? [],);
   useMeasureLayout(props, layoutRef,);
-  const inCodeComponent = React2.useContext(ComponentContainerContext,);
+  const inCodeComponent = React3.useContext(ComponentContainerContext,);
   const isOnCanvas = useIsOnFramerCanvas();
   let textOrOverride = text;
   const forwardedOverrideId = _forwardedOverrideId ?? id3;
@@ -48012,11 +48327,11 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
     innerHTML = htmlFromDesign;
   }
   const implicitPathVariables = useImplicitPathVariables();
-  const innerHTMLWithReplacedFramerPageLinks = React2.useMemo(() => {
+  const innerHTMLWithReplacedFramerPageLinks = React3.useMemo(() => {
     if (isOnCanvas || !getRoute || !currentRoute) return innerHTML;
     return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     const container = layoutRef.current;
     if (container === null) return;
     function interceptPageLinks(event,) {
@@ -48035,7 +48350,7 @@ var DeprecatedRichText = /* @__PURE__ */ React2.forwardRef(function Text(props, 
     };
   }, [navigate, implicitPathVariables,],);
   useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-  React2.useInsertionEffect(() => {
+  React3.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!visible) return null;
@@ -48212,7 +48527,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         var _a;
         const isLastWord = wordIndex === lastWordIndex;
         const short = word.length <= 12;
-        return /* @__PURE__ */ jsxs(React2.Fragment, {
+        return /* @__PURE__ */ jsxs(React3.Fragment, {
           children: [
             /* @__PURE__ */ jsx3('span', {
               style: {
@@ -48244,7 +48559,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         const isLastWord = i === lastWordIndex;
         const ref = newOverrideableRef();
         elements.add(ref,);
-        return /* @__PURE__ */ jsxs(React2.Fragment, {
+        return /* @__PURE__ */ jsxs(React3.Fragment, {
           children: [
             /* @__PURE__ */ jsx3('span', {
               ref,
@@ -48321,7 +48636,7 @@ function useTextEffect(config, ref, preview,) {
   const isRenderingStaticContent = isStaticRenderer();
   const canPlay = preview || !isRenderingStaticContent;
   const shouldReduceMotion = useReducedMotionConfig();
-  const state = React2.useRef({
+  const state = React3.useRef({
     hasMounted: false,
     hasAnimatedOnce: false,
     isAnimating: false,
@@ -48331,7 +48646,7 @@ function useTextEffect(config, ref, preview,) {
   const trigger = (config == null ? void 0 : config.trigger) ?? 'onMount';
   const target = config == null ? void 0 : config.target;
   const threshold = config == null ? void 0 : config.threshold;
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     if (!canPlay || preview) return;
     state.current.hasMounted = true;
     function play() {
@@ -48397,7 +48712,7 @@ function useTextEffect(config, ref, preview,) {
   }, [canPlay, elements, preview, ref, target, threshold, trigger,],);
   const effectEnabled = !!config;
   const tokenization = config ? tokenizationForEffect(config,) : void 0;
-  return React2.useMemo(() => ({
+  return React3.useMemo(() => ({
     // The tokenizer is memoized such that it won't trigger RichText to
     // be rerendered if the effect changes in a way that doesn't effect
     // the tokenization.
@@ -49339,7 +49654,7 @@ function getSVGSize(svg,) {
 var SVG = /* @__PURE__ */ forwardRef(function SVG2(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const layoutRef = React4.useRef(null,);
+  const layoutRef = React42.useRef(null,);
   const ref = forwardedRef ?? layoutRef;
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
@@ -49401,7 +49716,7 @@ function sizeSVG(container, props,) {
   svg.setAttribute('height', '100%',);
 }
 function SVGStyleSheet() {
-  React4.useInsertionEffect(() => {
+  React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
@@ -49411,7 +49726,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
   return _a = class extends Layer {
     constructor() {
       super(...arguments,);
-      __publicField(this, 'container', React4.createRef(),);
+      __publicField(this, 'container', React42.createRef(),);
       __publicField(this, 'svgElement', null,);
       __publicField(this, 'setSVGElement', (element) => {
         this.svgElement = element;
@@ -49752,8 +50067,8 @@ var SVGComponent = /* @__PURE__ */ (() => {
 })();
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s) => !fontStore.isSelectorLoaded(s,));
-  const [fontLoadStatus, setFontLoadStatus,] = React4.useState(missingFontSelectors.length ? 'loading' : 'done',);
-  React4.useEffect(() => {
+  const [fontLoadStatus, setFontLoadStatus,] = React42.useState(missingFontSelectors.length ? 'loading' : 'done',);
+  React42.useEffect(() => {
     if (!missingFontSelectors.length) return;
     setFontLoadStatus('loading',);
     const timer = setTimeout(() => {
@@ -49767,12 +50082,12 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   return fontLoadStatus;
 }
 function TextStyleSheet() {
-  React4.useInsertionEffect(() => {
+  React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   return null;
 }
-var Text2 = /* @__PURE__ */ React4.forwardRef(function Text3(props, forwardedRef,) {
+var Text2 = /* @__PURE__ */ React42.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
   const fallbackLayoutRef = useRef3(null,);
@@ -49805,7 +50120,7 @@ var Text2 = /* @__PURE__ */ React4.forwardRef(function Text3(props, forwardedRef
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React4.useCallback((event) => {
+  const interceptPageLinks = React42.useCallback((event) => {
     const anchorElement = findAnchorElement(event.target, layoutRef.current,);
     if (event.metaKey || !navigate || !anchorElement) return;
     const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
@@ -49819,7 +50134,7 @@ var Text2 = /* @__PURE__ */ React4.forwardRef(function Text3(props, forwardedRef
     ref.addEventListener('click', interceptPageLinks,);
     return () => ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React4.useMemo(() => {
+  const rawHTML = React42.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, currentRoute, implicitPathVariables,],);
@@ -50482,8 +50797,8 @@ var SVGRoot = (props) => {
     style: style2,
     _needsMeasure,
   } = props;
-  const inCodeComponent = React4.useContext(ComponentContainerContext,);
-  const ref = React4.useRef(null,);
+  const inCodeComponent = React42.useContext(ComponentContainerContext,);
+  const ref = React42.useRef(null,);
   useMeasureLayout({
     id: id3,
     // SVGRoot won't be rendered if the node is invisible.
@@ -51375,6 +51690,7 @@ export {
   annotateTypeOnStringify,
   anticipate,
   AnyInterpolation,
+  applyGeneratorOptions,
   applyPxDefaults,
   AsyncMotionValueAnimation,
   attachSpring,
@@ -51426,7 +51742,6 @@ export {
   createFramerPageLink,
   createGeneratorEasing,
   createRenderBatcher,
-  createRendererMotionComponent,
   createScopedAnimate,
   cssBackgroundSize,
   cssCollector,
@@ -51484,7 +51799,6 @@ export {
   findDimensionValueType,
   findValueType,
   finiteNumber,
-  FlatTree,
   Floating,
   flushKeyframeResolvers,
   FontSourceNames,
@@ -51527,10 +51841,13 @@ export {
   getLoadingLazyAtYPosition,
   getMeasurableCodeComponentChildren,
   getMixer,
+  getOriginIndex,
   getPropertyControls,
   getValueAsType,
   getValueTransition,
   getVariableValue,
+  getViewAnimationLayerInfo,
+  getViewAnimations,
   getWhereExpressionFromPathVariables,
   GracefullyDegradingErrorBoundary,
   gradientForShape,
@@ -51547,6 +51864,7 @@ export {
   inertia,
   inferInitialRouteFromPath,
   injectComponentCSSRules,
+  InjectSelectionStyle,
   installFlexboxGapWorkaroundIfNeeded,
   Instance,
   InternalID,
@@ -51608,6 +51926,7 @@ export {
   localShadowFrame,
   m,
   MainLoop,
+  makeAnimationInstant,
   makePaddingString,
   makeUseVisualState,
   mapEasingToNativeEasing,
