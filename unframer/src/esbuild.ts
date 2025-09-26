@@ -104,7 +104,7 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
-                            const hasFramerVersion = pkg in framerPackageVersions
+                            const hasFramerVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
                             if (hasFramerVersion) {
                                 const version = framerPackageVersions[pkg as keyof typeof framerPackageVersions]
                                 spinner.info(`Missing package detected: ${pkg} (using Framer version ^${version})`)
@@ -114,7 +114,7 @@ export function esbuildPluginBundleDependencies({
                             reportedMissingPackages.add(pkg)
                         }
                         // Check if we have a specific version from framerPackageVersions
-                        const packageWithVersion = pkg in framerPackageVersions
+                        const packageWithVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
                             ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
                             : pkg
                         onCollectMissingPackage?.(packageWithVersion)
@@ -142,7 +142,7 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
-                            const hasFramerVersion = pkg in framerPackageVersions
+                            const hasFramerVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
                             if (hasFramerVersion) {
                                 const version = framerPackageVersions[pkg as keyof typeof framerPackageVersions]
                                 spinner.info(`Missing package detected: ${pkg} (using Framer version ^${version})`)
@@ -152,7 +152,7 @@ export function esbuildPluginBundleDependencies({
                             reportedMissingPackages.add(pkg)
                         }
                         // Check if we have a specific version from framerPackageVersions
-                        const packageWithVersion = pkg in framerPackageVersions
+                        const packageWithVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
                             ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
                             : pkg
                         onCollectMissingPackage?.(packageWithVersion)
