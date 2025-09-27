@@ -444,6 +444,7 @@ export function ContextProviders({
  * Add Unframer debug information to debug websites using Unframer
  */
 function DebugUnframerVersion() {
+    return null
     return (
         <details style={{ display: 'none' }}>
             Using{' '}
