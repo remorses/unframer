@@ -260,10 +260,10 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
 
             // Install dependencies using detected package manager
             spinner.stop('Framer components downloaded')
-            
+
             const packageManager = await getPackageManager()
             const installCommand = packageManager === 'yarn' ? 'yarn' : `${packageManager} install`
-            
+
             console.log(`Installing dependencies with ${packageManager}...`)
             spinner.start(`Running ${installCommand}...`)
 
@@ -282,7 +282,7 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
             }
 
             logger.green(dedent`
-            
+
             Example app created successfully in ${outDir}!
 
             Next steps:
@@ -290,11 +290,10 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
               ${packageManager} run dev
 
             Quick guide:
-            ▪︎ Edit src/App.tsx to add or customize your Framer components
-            ▪︎ Your components are in src/framer/ directory
+            ▪︎ Read and edit src/App.tsx to add or customize your rendered Framer components
+            ▪︎ Your components are in src/framer/ directory. Run npm run framer to sync changes from Framer
             ▪︎ The app uses Vite + React + TypeScript + Tailwind CSS
-            ▪︎ Your app will be running at http://localhost:5173
-            
+
             `)
         } catch (error) {
             notifyError(error)
