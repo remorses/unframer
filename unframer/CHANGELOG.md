@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.7
+
+### Patch Changes
+
+- Install the same npm packages versions as Framer
+
 ## 3.2.6
 
 ### Patch Changes
