@@ -1180,11 +1180,10 @@ export async function extractPropControlsUnsafe(
     let loaderOption = `--loader "${url.pathToFileURL(
         require.resolve('../dist/unframer-loader.js'),
     )}"`
-    try {
-        require.resolve('unframer/package.json')
-
-        UNFRAMER_MAP_PACKAGES.unframer = ''
-    } catch {}
+    // try {
+    //     require.resolve('unframer/package.json')
+    //     UNFRAMER_MAP_PACKAGES.unframer = ''
+    // } catch {}
     let stdout = await new Promise<string>((res, rej) => {
         const cmd = `"${
             nodePath
