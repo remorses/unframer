@@ -9,17 +9,18 @@ import {
   __privateMethod,
   __privateSet,
   __publicField,
+  __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-A2PMVMFI.js';
+} from './framer-chunks/chunk-VUHWYTYT.js';
 
-// /:https://app.framerstatic.com/chunk-CLPQIJRF.mjs
+// /:https://app.framerstatic.com/chunk-WPXZNJRU.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
-import { useCallback, useContext, useId, } from 'react';
+import * as React from 'react';
+import { useCallback as useCallback2, useContext, useId, } from 'react';
 import { Fragment, jsx as jsx3, } from 'react/jsx-runtime';
 import { useMemo as useMemo2, useRef as useRef3, useState, } from 'react';
-import * as React3 from 'react';
 import { useInsertionEffect, } from 'react';
 import { Children, isValidElement, } from 'react';
 import { jsxs, } from 'react/jsx-runtime';
@@ -27,43 +28,6 @@ import { forwardRef, } from 'react';
 import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
 var __unframerNavigator = typeof window !== 'undefined' ? navigator : void 0;
-var require_memoize_browser_cjs = __commonJS({
-  '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    function memoize3(fn,) {
-      var cache2 = {};
-      return function (arg,) {
-        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
-        return cache2[arg];
-      };
-    }
-    exports.default = memoize3;
-  },
-},);
-var require_is_prop_valid_browser_cjs = __commonJS({
-  '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    function _interopDefault(ex,) {
-      return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
-    }
-    var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
-    var reactPropsRegex2 =
-      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
-    var index = memoize3(function (prop,) {
-      return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
-    },/* Z+1 */
-    );
-    exports.default = index;
-  },
-},);
 var LayoutGroupContext = createContext({},);
 var isBrowser = typeof window !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
@@ -1525,6 +1489,12 @@ var JSAnimation = class extends WithPromise {
   get duration() {
     return millisecondsToSeconds(this.calculatedDuration,);
   }
+  get iterationDuration() {
+    const {
+      delay: delay2 = 0,
+    } = this.options || {};
+    return this.duration + millisecondsToSeconds(delay2,);
+  }
   get time() {
     return millisecondsToSeconds(this.currentTime,);
   }
@@ -2109,6 +2079,12 @@ var NativeAnimation = class extends WithPromise {
       ((_b = (_a = this.animation.effect) == null ? void 0 : _a.getComputedTiming) == null ? void 0 : _b.call(_a,).duration) || 0;
     return millisecondsToSeconds(Number(duration,),);
   }
+  get iterationDuration() {
+    const {
+      delay: delay2 = 0,
+    } = this.options || {};
+    return this.duration + millisecondsToSeconds(delay2,);
+  }
   get time() {
     return millisecondsToSeconds(Number(this.animation.currentTime,) || 0,);
   }
@@ -2218,7 +2194,7 @@ var NativeAnimationExtended = class extends NativeAnimation {
 };
 function makeAnimationInstant(options,) {
   options.duration = 0;
-  options.type === 'keyframes';
+  options.type = 'keyframes';
 }
 var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Could be re-enabled now we have support for linear() easing
   // "background-color"
@@ -2401,6 +2377,9 @@ var AsyncMotionValueAnimation = class extends WithPromise {
   get duration() {
     return this.animation.duration;
   }
+  get iterationDuration() {
+    return this.animation.iterationDuration;
+  }
   get time() {
     return this.animation.time;
   }
@@ -2491,11 +2470,10 @@ var GroupAnimation = class {
     return this.getAll('startTime',);
   }
   get duration() {
-    let max = 0;
-    for (let i = 0; i < this.animations.length; i++) {
-      max = Math.max(max, this.animations[i].duration,);
-    }
-    return max;
+    return getMax(this.animations, 'duration',);
+  }
+  get iterationDuration() {
+    return getMax(this.animations, 'iterationDuration',);
   }
   runAll(methodName,) {
     this.animations.forEach((controls) => controls[methodName]());
@@ -2513,6 +2491,16 @@ var GroupAnimation = class {
     this.runAll('complete',);
   }
 };
+function getMax(animations2, propName,) {
+  let max = 0;
+  for (let i = 0; i < animations2.length; i++) {
+    const value = animations2[i][propName];
+    if (value !== null && value > max) {
+      max = value;
+    }
+  }
+  return max;
+}
 var GroupAnimationWithThen = class extends GroupAnimation {
   then(onResolve, _onReject,) {
     return this.finished.finally(onResolve,).then(() => {},);
@@ -4187,36 +4175,6 @@ var MotionConfigContext = createContext({
   isStatic: false,
   reducedMotion: 'never',
 },);
-function usePresence(subscribe = true,) {
-  const context = useContext(PresenceContext,);
-  if (context === null) return [true, null,];
-  const {
-    isPresent: isPresent2,
-    onExitComplete,
-    register,
-  } = context;
-  const id4 = useId();
-  useEffect(() => {
-    if (subscribe) {
-      return register(id4,);
-    }
-  }, [subscribe,],);
-  const safeToRemove = useCallback(() => subscribe && onExitComplete && onExitComplete(id4,), [id4, onExitComplete, subscribe,],);
-  return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
-}
-function useIsPresent() {
-  return isPresent(useContext(PresenceContext,),);
-}
-function isPresent(context,) {
-  return context === null ? true : context.isPresent;
-}
-function useConstant(init,) {
-  const ref = useRef3(null,);
-  if (ref.current === null) {
-    ref.current = init();
-  }
-  return ref.current;
-}
 function setRef(ref, value,) {
   if (typeof ref === 'function') {
     return ref(value,);
@@ -4249,9 +4207,39 @@ function composeRefs(...refs) {
   };
 }
 function useComposedRefs(...refs) {
-  return React3.useCallback(composeRefs(...refs,), refs,);
+  return React.useCallback(composeRefs(...refs,), refs,);
 }
-var PopChildMeasure = class extends React3.Component {
+function usePresence(subscribe = true,) {
+  const context = useContext(PresenceContext,);
+  if (context === null) return [true, null,];
+  const {
+    isPresent: isPresent2,
+    onExitComplete,
+    register,
+  } = context;
+  const id4 = useId();
+  useEffect(() => {
+    if (subscribe) {
+      return register(id4,);
+    }
+  }, [subscribe,],);
+  const safeToRemove = useCallback2(() => subscribe && onExitComplete && onExitComplete(id4,), [id4, onExitComplete, subscribe,],);
+  return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
+}
+function useIsPresent() {
+  return isPresent(useContext(PresenceContext,),);
+}
+function isPresent(context,) {
+  return context === null ? true : context.isPresent;
+}
+function useConstant(init,) {
+  const ref = useRef3(null,);
+  if (ref.current === null) {
+    ref.current = init();
+  }
+  return ref.current;
+}
+var PopChildMeasure = class extends React.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (element && prevProps.isPresent && !this.props.isPresent) {
@@ -4329,7 +4317,7 @@ function PopChild({
     isPresent: isPresent2,
     childRef: ref,
     sizeRef: size,
-    children: React3.cloneElement(children, {
+    children: React.cloneElement(children, {
       ref: composedRef,
     },),
   },);
@@ -4376,7 +4364,7 @@ var PresenceChild = ({
   useMemo2(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
   }, [isPresent2,],);
-  React3.useEffect(() => {
+  React.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
   if (mode === 'popLayout') {
@@ -4511,10 +4499,10 @@ function useIsMounted() {
 function useForceUpdate() {
   const isMounted = useIsMounted();
   const [forcedRenderCount, setForcedRenderCount,] = useState(0,);
-  const forceRender = useCallback(() => {
+  const forceRender = useCallback2(() => {
     isMounted.current && setForcedRenderCount(forcedRenderCount + 1,);
   }, [forcedRenderCount,],);
-  const deferredForceRender = useCallback(() => frame.postRender(forceRender,), [forceRender,],);
+  const deferredForceRender = useCallback2(() => frame.postRender(forceRender,), [forceRender,],);
   return [deferredForceRender, forcedRenderCount,];
 }
 var notify = (node) => !node.isLayoutDirty && node.willUpdate(false,);
@@ -4677,7 +4665,7 @@ function loadExternalIsValidProp(isValidProp,) {
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
-  loadExternalIsValidProp(require_is_prop_valid_browser_cjs().default,);
+  loadExternalIsValidProp(__require('@emotion/is-prop-valid',).default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
@@ -5201,7 +5189,7 @@ function isRefObject(ref,) {
   return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
 }
 function useMotionRef(visualState, visualElement, externalRef,) {
-  return useCallback((instance) => {
+  return useCallback2((instance) => {
     if (instance) {
       visualState.onMount && visualState.onMount(instance,);
     }
@@ -10018,7 +10006,7 @@ function attachToAnimation(animation, options,) {
     observe: (valueAnimation) => {
       valueAnimation.pause();
       return observeTimeline((progress2) => {
-        valueAnimation.time = valueAnimation.duration * progress2;
+        valueAnimation.time = valueAnimation.iterationDuration * progress2;
       }, timeline,);
     },
   },);
@@ -10068,7 +10056,7 @@ function useScroll({
   const values = useConstant(createScrollMotionValues,);
   const scrollAnimation = useRef3(null,);
   const needsStart = useRef3(false,);
-  const start2 = useCallback(() => {
+  const start2 = useCallback2(() => {
     scrollAnimation.current = scroll((_progress, {
       x,
       y,
@@ -10735,12 +10723,23 @@ function isSequence(value,) {
 function createScopedAnimate(scope,) {
   function scopedAnimate(subjectOrSequence, optionsOrKeyframes, options,) {
     let animations2 = [];
+    let animationOnComplete;
     if (isSequence(subjectOrSequence,)) {
       animations2 = animateSequence(subjectOrSequence, optionsOrKeyframes, scope,);
     } else {
-      animations2 = animateSubject(subjectOrSequence, optionsOrKeyframes, options, scope,);
+      const {
+        onComplete,
+        ...rest
+      } = options || {};
+      if (typeof onComplete === 'function') {
+        animationOnComplete = onComplete;
+      }
+      animations2 = animateSubject(subjectOrSequence, optionsOrKeyframes, rest, scope,);
     }
     const animation = new GroupAnimationWithThen(animations2,);
+    if (animationOnComplete) {
+      animation.finished.then(animationOnComplete,);
+    }
     if (scope) {
       scope.animations.push(animation,);
       animation.finished.then(() => {
@@ -10961,7 +10960,7 @@ function startTransition(callback,) {
   callback && callback();
 }
 function useResetProjection() {
-  const reset = useCallback(() => {
+  const reset = useCallback2(() => {
     const root = rootProjectionNode.current;
     if (!root) return;
     root.resetTree();
@@ -10971,7 +10970,7 @@ function useResetProjection() {
 function useCycle(...items) {
   const index = useRef3(0,);
   const [item, setItem,] = useState(items[index.current],);
-  const runCycle = useCallback((next2) => {
+  const runCycle = useCallback2((next2) => {
     index.current = typeof next2 !== 'number' ? wrap(0, items.length, index.current + 1,) : next2;
     setItem(items[index.current],);
   }, // The array will change on each call, but by putting items.length at
@@ -11425,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6PNBS5CQ.mjs
+// /:https://app.framerstatic.com/framer.BXUJCS7M.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13598,7 +13597,7 @@ function useViewTransition() {
       resolveHasPainted.current = void 0;
     }
   },);
-  return useCallback((currentRouteId, nextRouteId, update, signal,) => {
+  return useCallback2((currentRouteId, nextRouteId, update, signal,) => {
     const pageEffect = getPageEffectForRoute(currentRouteId, nextRouteId, sitePageEffects,);
     if (pageEffect) {
       const hasPainted = new Promise((resolve) => {
@@ -13673,7 +13672,7 @@ function useMonitorNextPaintAfterRender(label,) {
       priority: 'user-blocking',
     },
   );
-  return useCallback((measureDetail) => {
+  return useCallback2((measureDetail) => {
     const hasPainted = new Promise((resolve) => {
       resolveHasPainted.current = resolve;
     },);
@@ -13827,7 +13826,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
   const viewTransitionReady = useRef3(void 0,);
-  const popStateHandler = useCallback(async ({
+  const popStateHandler = useCallback2(async ({
     state,
   },) => {
     var _a, _b, _c, _d, _e, _f;
@@ -13874,7 +13873,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     announceNavigation();
     updateCanonicalURL(window.location.href,);
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
-  const traversalHandler = useCallback((event) => {
+  const traversalHandler = useCallback2((event) => {
     if (event.navigationType !== 'traverse' || !event.canIntercept) return;
     event.intercept({
       async handler() {
@@ -13999,7 +13998,7 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
 function useNativeLoadingSpinner() {
   const navigationPromise = useRef3(Promise.resolve(),);
   const navigationController = useRef3();
-  const navigateListener = useCallback((navigateEvent) => {
+  const navigateListener = useCallback2((navigateEvent) => {
     if (navigateEvent.navigationType === 'traverse' || !navigateEvent.canIntercept) return;
     const controller = navigationController.current;
     controller == null ? void 0 : controller.signal.addEventListener('abort', () => {
@@ -14009,7 +14008,7 @@ function useNativeLoadingSpinner() {
       handler: () => navigationPromise.current,
     },);
   }, [],);
-  return useCallback((promise, updateURL, controller,) => {
+  return useCallback2((promise, updateURL, controller,) => {
     if (!supportsNavigationAPI) {
       void updateURL();
       return;
@@ -14032,7 +14031,7 @@ var NodeIdContext = /* @__PURE__ */ React42.createContext(null,);
 function useTracking() {
   const router = useRouter();
   const nodeId = useContext(NodeIdContext,);
-  return useCallback((trackingId) => {
+  return useCallback2((trackingId) => {
     var _a;
     if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
     if (slugify(trackingId,) !== trackingId) {
@@ -14152,7 +14151,11 @@ var defaultLocaleInfo = {
   locales: [],
   setLocale: noopAsync,
 };
-var LocaleInfoContext = /* @__PURE__ */ React42.createContext(defaultLocaleInfo,);
+var LocaleInfoContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext(defaultLocaleInfo,);
+  Context2.displayName = 'LocaleInfoContext';
+  return Context2;
+})();
 function useLocaleInfo() {
   return React42.useContext(LocaleInfoContext,);
 }
@@ -14205,6 +14208,14 @@ function useLocaleCode() {
 }
 function useLocale() {
   return useLocaleCode();
+}
+var LayoutDirectionContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext('ltr',);
+  Context2.displayName = 'LayoutDirectionContext';
+  return Context2;
+})();
+function useLayoutDirection() {
+  return React42.useContext(LayoutDirectionContext,);
 }
 var eventsToStop = [
   'mousedown',
@@ -14958,7 +14969,7 @@ function useMetadata(metadata,) {
   const {
     isInitialNavigation,
   } = useRouter();
-  React3.useEffect(() => {
+  React.useEffect(() => {
     if (metadata.robots) {
       let robotsTag = document.querySelector('meta[name="robots"]',);
       if (robotsTag) {
@@ -14971,14 +14982,14 @@ function useMetadata(metadata,) {
       }
     }
   }, [metadata.robots,],);
-  React3.useInsertionEffect(() => {
+  React.useInsertionEffect(() => {
     var _a;
     document.title = metadata.title || '';
     if (metadata.viewport) {
       (_a = document.querySelector('meta[name="viewport"]',)) == null ? void 0 : _a.setAttribute('content', metadata.viewport,);
     }
   }, [metadata.title, metadata.viewport,],);
-  React3.useEffect(() => {
+  React.useEffect(() => {
     if (!isInitialNavigation) return;
     const mainTag = document.getElementById(mainTagId,);
     const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
@@ -18172,7 +18183,7 @@ function LayoutIdProvider({
     byLayoutId: {},
   },);
   const usedIds = useRef3(/* @__PURE__ */ new Set(),).current;
-  const getLayoutId = useCallback(({
+  const getLayoutId = useCallback2(({
     id: id3,
     name,
     duplicatedFrom,
@@ -18267,7 +18278,7 @@ function LayoutIdProvider({
     usedIds.add(layoutId,);
     return layoutId;
   }, [],);
-  const persistLayoutIdCache = useCallback(() => {
+  const persistLayoutIdCache = useCallback2(() => {
     cache2.current = {
       byId: {
         ...cache2.current.byId,
@@ -23498,14 +23509,14 @@ function getImageStyle(image,) {
 }
 function useDecodingAttribute(avoidAsyncDecoding,) {
   const currentDecoding = React42.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
-  const switchDecodingToAuto = useCallback((node) => {
+  const switchDecodingToAuto = useCallback2((node) => {
     currentDecoding.current = 'auto';
     node.decoding = 'auto';
   }, [],);
-  const onImageLoad = useCallback((event) => {
+  const onImageLoad = useCallback2((event) => {
     switchDecodingToAuto(event.currentTarget,);
   }, [switchDecodingToAuto,],);
-  const onImageMount = useCallback((node) => {
+  const onImageMount = useCallback2((node) => {
     if (node == null ? void 0 : node.complete) switchDecodingToAuto(node,);
   }, [switchDecodingToAuto,],);
   return {
@@ -25475,7 +25486,7 @@ var NavigationTargetWrapper = ({
   children,
 },) => {
   const callbacks = useMap();
-  const register = useCallback((fn) => {
+  const register = useCallback2((fn) => {
     if (callbacks.has(fn,)) {
       console.warn('NavigationTargetWrapper: already registered',);
       return;
@@ -25483,7 +25494,7 @@ var NavigationTargetWrapper = ({
     callbacks.set(fn, void 0,);
   }, [callbacks,/* constant, so should never change */
   ],);
-  const deregister = useCallback((fn) => {
+  const deregister = useCallback2((fn) => {
     const cleanup = callbacks.get(fn,);
     cleanup == null ? void 0 : cleanup();
     callbacks.delete(fn,);
@@ -29040,7 +29051,7 @@ function useWheelScroll(ref, {
   onScrollEnd,
 },) {
   const isWheelScrollActive = useRef3(false,);
-  const getPointData = useCallback(() => {
+  const getPointData = useCallback2(() => {
     const point2 = getPoint(offsetX, offsetY,);
     const data2 = {
       point: point2,
@@ -31007,14 +31018,14 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
     x: x.get(),
     y: y.get(),
   });
-  const resetInitialPoint = useCallback(() => {
+  const resetInitialPoint = useCallback2(() => {
     const point2 = getLatestPoint();
     initial.x = point2.x;
     initial.y = point2.y;
     prev.x = point2.x;
     prev.y = point2.y;
   }, [],);
-  const getPointData = useCallback(() => {
+  const getPointData = useCallback2(() => {
     const point2 = getLatestPoint();
     const data2 = {
       point: point2,
@@ -31035,14 +31046,14 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
     prev.y = point2.y;
     return data2;
   }, [x, y,],);
-  const updateScrollListeners = useCallback(() => {
+  const updateScrollListeners = useCallback2(() => {
     onUpdate && onUpdate({
       x: x.get(),
       y: y.get(),
     },);
     onScroll && onScroll(getPointData(),);
   }, [onScroll, onUpdate, getPointData, x, y,],);
-  const scheduleUpdateScrollListeners = useCallback(() => {
+  const scheduleUpdateScrollListeners = useCallback2(() => {
     frame.update(updateScrollListeners, false, true,);
   }, [updateScrollListeners,],);
   const onMotionDragStart = (event, info,) => {
@@ -31958,9 +31969,9 @@ function stripPrefixFromPrefixedKey(key7,) {
 }
 var GeneratedComponentContext = /* @__PURE__ */ React42.createContext(void 0,);
 function cloneChildrenWithProps(children, props, asNode,) {
-  const cloned = React3.Children.map(children, (child) => {
-    if (React3.isValidElement(child,)) {
-      return React3.cloneElement(child, props,);
+  const cloned = React.Children.map(children, (child) => {
+    if (React.isValidElement(child,)) {
+      return React.cloneElement(child, props,);
     }
     return child;
   },);
@@ -32004,19 +32015,19 @@ function createHook(forwardedRef,) {
       ;
     }
     preventNextCall = true;
-    if (React3.Children.count(children,) > 1 && forwardedRef) {
+    if (React.Children.count(children,) > 1 && forwardedRef) {
       if (false) {
         throw new ReferenceError('useCloneChildrenWithPropsAndRef: You should not have more than one child when using a forwarded ref.',);
       }
       state.forwardedRef = void 0;
       state.ref = state.childRef;
     }
-    return React3.Children.map(children, (child) => {
-      if (React3.isValidElement(child,)) {
+    return React.Children.map(children, (child) => {
+      if (React.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state.forwardedRef, ownRef,);
         const newProps = isFunction(props,) ? props(child.props,) : props;
-        return React3.cloneElement(
+        return React.cloneElement(
           child,
           state.ref !== ownRef
             ? {
@@ -32558,7 +32569,7 @@ function useLoop({
   const mirrorStateRef = useRef3(false,);
   const delay3 = useDelay();
   const animationPromiseRef = useRef3(null,);
-  const animateValues = useCallback(async () => {
+  const animateValues = useCallback2(async () => {
     if (!loop) return;
     const transition = loopTransition || void 0;
     const mirror = mirrorStateRef.current && loopRepeatType === 'mirror';
@@ -32583,19 +32594,19 @@ function useLoop({
   }, [loop, loopRepeatType, loopTransition, shouldReduceMotion,],);
   const [isRunning, setIsRunning,] = useState(false,);
   const shouldRunRef = useRef3(false,);
-  const animateLoop = useCallback(async () => {
+  const animateLoop = useCallback2(async () => {
     if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues();
     await delay3(loopRepeatDelay ?? 0,);
     void animateLoop();
   }, [animateValues, delay3, loopEffectEnabled, loopRepeatDelay,],);
-  const start2 = useCallback(() => {
+  const start2 = useCallback2(() => {
     if (shouldRunRef.current) return;
     shouldRunRef.current = true;
     startTransition2(() => setIsRunning(true,));
     void animateLoop();
   }, [animateLoop,],);
-  const stop = useCallback((overrideRunRef = true,) => {
+  const stop = useCallback2((overrideRunRef = true,) => {
     effectValuesKeys.forEach((key7) => {
       values[key7].stop();
     },);
@@ -32609,7 +32620,7 @@ function useLoop({
     }
   }, [],);
   const hasLoop = loopEffectEnabled && loop;
-  const startStopTabVisibilityListener = useCallback(() => {
+  const startStopTabVisibilityListener = useCallback2(() => {
     if (document.hidden) {
       stop(false,);
     } else if (shouldRunRef.current) {
@@ -32636,13 +32647,13 @@ function useLoop({
     return () => stop();
   }, [stop,],);
   const isIntersectingRef = useRef3(false,);
-  const stopAfterAnimationEnds = useCallback(async () => {
+  const stopAfterAnimationEnds = useCallback2(async () => {
     if (!animationPromiseRef.current) return;
     await animationPromiseRef.current;
     if (isIntersectingRef.current) return;
     stop();
   }, [stop,],);
-  const startAndStopBasedOnIntersection = useCallback((entry) => {
+  const startAndStopBasedOnIntersection = useCallback2((entry) => {
     if (entry.isIntersecting) {
       isIntersectingRef.current = true;
       start2();
@@ -34254,7 +34265,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
   },);
   const alignment = cursor == null ? void 0 : cursor.alignment;
   const placement = cursor == null ? void 0 : cursor.placement;
-  const transformTemplate2 = useCallback((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
+  const transformTemplate2 = useCallback2((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
     alignment,
     placement,
   ],);
@@ -34506,7 +34517,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
   }, [currentRoute, href, router,],);
   const isOnFramerCanvas = useIsOnFramerCanvas();
   const shouldReplaceLink = Boolean(!isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,);
-  const onClick = useCallback((event) => {
+  const onClick = useCallback2((event) => {
     var _a;
     if (!propsAddedByLink.href) return;
     event.preventDefault();
@@ -34522,13 +34533,13 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
   }, [propsAddedByLink, route,],);
-  const onAuxClick = useCallback((event) => {
+  const onAuxClick = useCallback2((event) => {
     if (!propsAddedByLink.href) return;
     event.preventDefault();
     event.stopPropagation();
     openExternalLink(propsAddedByLink.href, '', '_blank',);
   }, [propsAddedByLink,],);
-  const onKeyDown = useCallback((event) => {
+  const onKeyDown = useCallback2((event) => {
     var _a;
     if (!propsAddedByLink.href) return;
     if (event.key !== 'Enter') return;
@@ -35840,7 +35851,7 @@ function useTrackLinkClick({
   href,
   activeLocale,
 },) {
-  return useCallback(async (hrefAttribute) => {
+  return useCallback2(async (hrefAttribute) => {
     var _a, _b, _c, _d, _e;
     if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
     const pageviewEventData = router.pageviewEventData.current instanceof Promise
@@ -36703,7 +36714,7 @@ function useScheduleRenderSideEffects(dep,) {
     actions.current.forEach((action) => action());
     actions.current = [];
   }, [dep,],);
-  return useCallback((cb) => {
+  return useCallback2((cb) => {
     actions.current.push(cb,);
   }, [],);
 }
@@ -36719,7 +36730,7 @@ function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
 function useNavigationTransition() {
   const startNativeSpinner = useNativeLoadingSpinner();
   const navigationController = useRef3(void 0,);
-  return useCallback(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
+  return useCallback2(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
     var _a, _b;
     const hasUpdateURL = updateURL !== void 0;
     (_a = navigationController.current) == null ? void 0 : _a.abort();
@@ -36804,9 +36815,9 @@ function Router({
       return id3 === currentLocaleId;
     },) ?? null;
   }, [currentLocaleId, locales,],);
-  const textDirection = activeLocale == null ? void 0 : activeLocale.textDirection;
+  const textDirection = (activeLocale == null ? void 0 : activeLocale.textDirection) ?? 'ltr';
+  const layoutDirection = adaptLayoutToTextDirection ? textDirection : 'ltr';
   useLayoutEffect(() => {
-    if (!textDirection) return;
     if (!adaptLayoutToTextDirection) return;
     document.documentElement.setAttribute('dir', textDirection,);
   }, [textDirection, adaptLayoutToTextDirection,],);
@@ -36892,7 +36903,7 @@ function Router({
     monitorNextPaintAfterRender,
     transitionFn,
   ],);
-  const setCurrentRouteId = useCallback(
+  const setCurrentRouteId = useCallback2(
     (routeId, localeId, hash2, pathnameWithHash, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
       isInitialNavigationRef.current = false;
       const currentRouteId2 = currentRouteRef.current;
@@ -36919,7 +36930,7 @@ function Router({
     [forceUpdate, scheduleSideEffect, startNavigation, startViewTransition2, transitionFn,],
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
-  const navigate = useCallback(async (routeId, hash2, pathVariables, smoothScroll, beforeUrlUpdate,) => {
+  const navigate = useCallback2(async (routeId, hash2, pathVariables, smoothScroll, beforeUrlUpdate,) => {
     var _a, _b;
     const newRoute = routes[routeId];
     const routeStatus = isLazyComponentType(newRoute == null ? void 0 : newRoute.page,) ? newRoute.page.getStatus() : void 0;
@@ -37069,46 +37080,49 @@ function Router({
   }));
   return /* @__PURE__ */ jsx3(RouterAPIProvider, {
     api,
-    children: /* @__PURE__ */ jsxs(LocaleInfoContext.Provider, {
+    children: /* @__PURE__ */ jsx3(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: [
-        EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
-          EditorBar,
-          fast: true,
-        },),
-        /* @__PURE__ */ jsx3(SynchronousSuspenseErrorBoundary, {
-          children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-            children: [
-              /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
-                notFoundPage,
-                defaultPageStyle,
-                forceUpdateKey: dep,
-                children: [
-                  /* @__PURE__ */ jsx3(MarkSuspenseEffects.Start, {},),
-                  /* @__PURE__ */ jsx3(WithLayoutTemplate, {
-                    LayoutTemplate,
-                    routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
-                    style: defaultPageStyle,
-                    children: (inLayoutTemplate) => {
-                      return /* @__PURE__ */ jsx3(Fragment, {
-                        children: pageExistsInCurrentLocale
-                          ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
-                          : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                          notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                      }, remountKey,);
-                    },
-                  },),
-                ],
-              },),
-              EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
-                EditorBar,
-              },),
-              /* @__PURE__ */ jsx3(TurnOnReactEventHandling, {},),
-              /* @__PURE__ */ jsx3(MarkSuspenseEffects.End, {},),
-            ],
+      children: /* @__PURE__ */ jsxs(LayoutDirectionContext.Provider, {
+        value: layoutDirection,
+        children: [
+          EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
+            EditorBar,
+            fast: true,
           },),
-        },),
-      ],
+          /* @__PURE__ */ jsx3(SynchronousSuspenseErrorBoundary, {
+            children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+              children: [
+                /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
+                  notFoundPage,
+                  defaultPageStyle,
+                  forceUpdateKey: dep,
+                  children: [
+                    /* @__PURE__ */ jsx3(MarkSuspenseEffects.Start, {},),
+                    /* @__PURE__ */ jsx3(WithLayoutTemplate, {
+                      LayoutTemplate,
+                      routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
+                      style: defaultPageStyle,
+                      children: (inLayoutTemplate) => {
+                        return /* @__PURE__ */ jsx3(Fragment, {
+                          children: pageExistsInCurrentLocale
+                            ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                            : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                            notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                        }, remountKey,);
+                      },
+                    },),
+                  ],
+                },),
+                EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
+                  EditorBar,
+                },),
+                /* @__PURE__ */ jsx3(TurnOnReactEventHandling, {},),
+                /* @__PURE__ */ jsx3(MarkSuspenseEffects.End, {},),
+              ],
+            },),
+          },),
+        ],
+      },),
     },),
   },);
 }
@@ -37439,17 +37453,17 @@ _ongoingFetches = /* @__PURE__ */ new WeakMap();
 _staleQueriesInterval = /* @__PURE__ */ new WeakMap();
 __publicField(_FetchClient, 'cacheKey', 'framer-fetch-client-cache',);
 var FetchClient = _FetchClient;
-var FetchClientContext = /* @__PURE__ */ React3.createContext(void 0,);
-var IsRestoringCacheContext = /* @__PURE__ */ React3.createContext(true,);
+var FetchClientContext = /* @__PURE__ */ React.createContext(void 0,);
+var IsRestoringCacheContext = /* @__PURE__ */ React.createContext(true,);
 var FetchClientProvider = ({
   children,
   client: initialClient,
 },) => {
-  const [client,] = React3.useState(() => initialClient ?? new FetchClient());
-  const [isRestoring, setIsRestoring,] = React3.useState(true,);
-  React3.useEffect(() => {
+  const [client,] = React.useState(() => initialClient ?? new FetchClient());
+  const [isRestoring, setIsRestoring,] = React.useState(true,);
+  React.useEffect(() => {
     client.hydrateCache();
-    React3.startTransition(() => {
+    React.startTransition(() => {
       setIsRestoring(false,);
     },);
     return () => client.unmount();
@@ -37580,35 +37594,35 @@ _results = /* @__PURE__ */ new WeakMap();
 _SSRResults = /* @__PURE__ */ new WeakMap();
 _onlyPrefetched = /* @__PURE__ */ new WeakMap();
 function useFetchRequestsForChildren(requests, disabled, children,) {
-  const fetchClient = React3.useContext(FetchClientContext,);
+  const fetchClient = React.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  const isRestoringCache = React3.useContext(IsRestoringCacheContext,);
-  const [observer2,] = React3.useState(() => new RequestsObserver(fetchClient, requests,));
-  React3.useLayoutEffect(() => {
+  const isRestoringCache = React.useContext(IsRestoringCacheContext,);
+  const [observer2,] = React.useState(() => new RequestsObserver(fetchClient, requests,));
+  React.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
       onlyPrefetched: false,
     },);
   }, [requests, observer2, disabled,],);
-  React3.useEffect(() => {
+  React.useEffect(() => {
     return () => observer2.unmount();
   }, [observer2,],);
-  const subscribe = React3.useCallback((onChange) => {
+  const subscribe = React.useCallback((onChange) => {
     if (isRestoringCache || disabled) return noop4;
     return observer2.subscribe(onChange,);
   }, [disabled, observer2, isRestoringCache,],);
-  const synchronousData = React3.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
-  const deferredData = React3.useDeferredValue(synchronousData,);
+  const synchronousData = React.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
+  const deferredData = React.useDeferredValue(synchronousData,);
   return useMemoOne(() => children(deferredData.data, deferredData.status,), [deferredData, children,],);
 }
 function usePrefetch() {
-  const fetchClient = React3.useContext(FetchClientContext,);
+  const fetchClient = React.useContext(FetchClientContext,);
   if (!fetchClient) {
     throw new Error('useFetchRequest must be used within a FetchClientProvider',);
   }
-  return React3.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
+  return React.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
 MotionGlobalConfig.WillChange = WillChangeMotionValue;
 function PageRoot({
@@ -37731,7 +37745,7 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
   const childrenWithLinks = children(resolvedLinks,);
   return cloneWithPropsAndRef(childrenWithLinks, rest,);
 },),);
-var Fetcher = /* @__PURE__ */ React3.forwardRef(function Fetcher2({
+var Fetcher = /* @__PURE__ */ React.forwardRef(function Fetcher2({
   requests,
   disabled,
   children,
@@ -42531,7 +42545,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
   const basePropsVariant = useRef3(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate2();
   const instantTransition = useInstantTransition();
-  const setActiveVariantInstant = useCallback((variant) => {
+  const setActiveVariantInstant = useCallback2((variant) => {
     if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
       let updateStateAndRerender2 = function () {
         baseVariant.current = basePropsVariant.current = variant;
@@ -43096,7 +43110,7 @@ function usePreloadQuery() {
   const {
     activeLocale,
   } = useLocaleInfo();
-  return useCallback(async (query) => {
+  return useCallback2(async (query) => {
     return queryCache.get(query, activeLocale,).readAsync();
   }, [activeLocale,],);
 }
@@ -43162,7 +43176,7 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
   const onCanvas = useIsOnFramerCanvas();
-  const loadMore = useCallback(async () => {
+  const loadMore = useCallback2(async () => {
     if (onCanvas) return;
     if (currentPageRef.current >= totalPages) return;
     await yieldToMain({
@@ -43266,7 +43280,7 @@ var CycleVariantState = /* @__PURE__ */ Symbol('cycle',);
 function useRunCallbackIfPageIsVisible() {
   const listenerRef = useRef3();
   const callbackRef = useRef3();
-  const clean = useCallback(() => {
+  const clean = useCallback2(() => {
     if (!listenerRef.current) return;
     document.removeEventListener('visibilitychange', listenerRef.current,);
     listenerRef.current = void 0;
@@ -43277,7 +43291,7 @@ function useRunCallbackIfPageIsVisible() {
       clean();
     };
   }, [clean,],);
-  return useCallback((callback) => {
+  return useCallback2((callback) => {
     if (!document.hidden) {
       callback();
       clean();
@@ -43308,7 +43322,7 @@ function useRunCallbackIfElementIsInView() {
       observerRefCleanup.current = void 0;
     };
   }, [],);
-  return useCallback((callback, ref,) => {
+  return useCallback2((callback, ref,) => {
     if (!(ref == null ? void 0 : ref.current) || isInViewRef.current) {
       callback();
       return;
@@ -43333,7 +43347,7 @@ function useRunCallbackIfElementIsInView() {
 function useUpdateIfVisible(ref,) {
   const runUpdateIfPageIsVisible = useRunCallbackIfPageIsVisible();
   const runUpdateIfElementIsInView = useRunCallbackIfElementIsInView();
-  return useCallback((callback, checkViewport = false,) => {
+  return useCallback2((callback, checkViewport = false,) => {
     if (isBot) {
       callback();
       return;
@@ -43415,7 +43429,7 @@ function useVariantState({
     cycleOrder: externalCycleOrder,
     transitions: externalTransitions,
   },);
-  const resolveNextVariant = useCallback((targetBaseVariant) => {
+  const resolveNextVariant = useCallback2((targetBaseVariant) => {
     const {
       isHovered: isHovered2,
       isPressed: isPressed2,
@@ -43434,7 +43448,7 @@ function useVariantState({
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [],);
-  const updateIfNeeded = useCallback(
+  const updateIfNeeded = useCallback2(
     async (baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, checkViewport = false, clearError = false,) => {
       const [nextBase, nextGesture,] = resolveNextVariant(nextBaseVariant,);
       if (nextBase === baseVariant2 && nextGesture === gestureVariant2) return;
@@ -43469,7 +43483,7 @@ function useVariantState({
     },
     [resolveNextVariant, forceUpdate, runUpdateIfVisible, pauseOffscreenFeatureOn, yieldOnTapFeatureOn,],
   );
-  const setGestureState = useCallback(({
+  const setGestureState = useCallback2(({
     isHovered: isHovered2,
     isPressed: isPressed2,
     isError: isError2,
@@ -43488,7 +43502,7 @@ function useVariantState({
     internalState.current.isHoveredHasUpdated = isHoveredHasUpdated;
     void updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, false,);
   }, [updateIfNeeded,],);
-  const setVariant = useCallback((proposedVariant, pauseOffscreen = false,) => {
+  const setVariant = useCallback2((proposedVariant, pauseOffscreen = false,) => {
     const {
       defaultVariant: defaultVariant2,
       cycleOrder,
@@ -43500,7 +43514,7 @@ function useVariantState({
       : proposedVariant;
     void updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, pauseOffscreen, true,);
   }, [updateIfNeeded,],);
-  const clearLoadingGesture = useCallback(() => {
+  const clearLoadingGesture = useCallback2(() => {
     const {
       baseVariant: baseVariant2,
     } = internalState.current;
@@ -45851,6 +45865,7 @@ var CustomFontSource = class _CustomFontSource {
       const variant = isVariableFont2 ? 'variable' : this.inferVariantName(fontName,);
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
+        assetKey: asset.key,
         family: fontFamily,
         selector: `${customFontSelectorPrefix}${fontName}`,
         variant,
@@ -45889,6 +45904,7 @@ var CustomFontSource = class _CustomFontSource {
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const ownerType = getAssetOwnerType(asset,);
       const font = {
+        assetKey: asset.key,
         family: fontFamily,
         selector: _CustomFontSource.createSelector(fontFamily.name, variant,),
         variant,
@@ -46035,11 +46051,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-2KFYDWCN-PJC2DDXK.js');
+      const supportedFonts = await import('./framer-chunks/google-AEMWXYNR-IDCH7KHR.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-EOIRPPWV-VDFFNW4K.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-J4HPAOKI-YVOYXTV4.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -46049,15 +46065,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-HSMCYMMG-DWNQGSHN.js');
+      const features = await import('./framer-chunks/google-RSE7HKS2-D4J2Q4I5.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-Y53BJZLK-EUQIV252.js');
+      const features = await import('./framer-chunks/fontshare-A6KDKBQN-6VKBSDHV.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-TNC5DMGA-CVBTEZ7G.js');
+      const features = await import('./framer-chunks/framer-font-T5XNAHJ3-SBU5UWOY.js');
       return features == null ? void 0 : features.default;
     }
     default:
@@ -46601,10 +46617,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-S367OFIE-AWJEPMSF.js')).default;
+            return (await import('./framer-chunks/google-MBJLJ3TS-7YGIU73P.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-2X4LZ75B-D2V5BX73.js')).default;
+            return (await import('./framer-chunks/fontshare-E26JE4UP-P3LIR4AL.js')).default;
           }
           default:
             assertNever(source,);
@@ -47221,7 +47237,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     setHasValue(!!defaultValue,);
     setPrevDefaultValue(defaultValue,);
   }
-  const handleChange = useCallback(async (e) => {
+  const handleChange = useCallback2(async (e) => {
     await yieldToMain({
       continueAfter: 'paint',
     },);
@@ -47750,7 +47766,7 @@ function getTotalHorizontalPadding(lightbox,) {
 function useStableCallback(callback,) {
   const latest = useRef3(callback,);
   latest.current = callback;
-  return useCallback((...args) => latest.current(...args,), [],);
+  return useCallback2((...args) => latest.current(...args,), [],);
 }
 function createImageWithSrcSet(lightbox, background,) {
   if (!lightbox || !background || !background.src) return background;
@@ -47836,7 +47852,7 @@ function withLightboxEffect(Component18,) {
     const image = useMemo2(() => createImageWithSrcSet(lightbox, props.background,), [lightbox, props.background,],);
     const [open, setOpen,] = useState(false,);
     const [openOverrides, setOpenOverrides,] = useState();
-    const onOpen = useCallback(() => {
+    const onOpen = useCallback2(() => {
       if (!lightbox) return;
       if (open) {
         startTransition2(() => {
@@ -47895,13 +47911,13 @@ function withLightboxEffect(Component18,) {
       };
       return promise;
     },);
-    const handleClick = useCallback(async (e) => {
+    const handleClick = useCallback2(async (e) => {
       onClick == null ? void 0 : onClick(e,);
       if (open || !lightbox || !image) return;
       await decode();
       onOpen();
     }, [onClick, onOpen, open, image, lightbox, decode,],);
-    const onClose = useCallback((e) => {
+    const onClose = useCallback2((e) => {
       e == null ? void 0 : e.stopPropagation();
       startTransition2(() => {
         setOpen(false,);
@@ -48255,7 +48271,7 @@ function isShallowEqualArray(a, b,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React3.forwardRef(function Text(props, forwardedRef,) {
+var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, forwardedRef,) {
   const {
     id: id3,
     name,
@@ -48304,7 +48320,7 @@ var DeprecatedRichText = /* @__PURE__ */ React3.forwardRef(function Text(props, 
   const currentRoute = useCurrentRoute();
   useRoutePreloader(props.preload ?? [],);
   useMeasureLayout(props, layoutRef,);
-  const inCodeComponent = React3.useContext(ComponentContainerContext,);
+  const inCodeComponent = React.useContext(ComponentContainerContext,);
   const isOnCanvas = useIsOnFramerCanvas();
   let textOrOverride = text;
   const forwardedOverrideId = _forwardedOverrideId ?? id3;
@@ -48327,11 +48343,11 @@ var DeprecatedRichText = /* @__PURE__ */ React3.forwardRef(function Text(props, 
     innerHTML = htmlFromDesign;
   }
   const implicitPathVariables = useImplicitPathVariables();
-  const innerHTMLWithReplacedFramerPageLinks = React3.useMemo(() => {
+  const innerHTMLWithReplacedFramerPageLinks = React.useMemo(() => {
     if (isOnCanvas || !getRoute || !currentRoute) return innerHTML;
     return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-  React3.useEffect(() => {
+  React.useEffect(() => {
     const container = layoutRef.current;
     if (container === null) return;
     function interceptPageLinks(event,) {
@@ -48350,7 +48366,7 @@ var DeprecatedRichText = /* @__PURE__ */ React3.forwardRef(function Text(props, 
     };
   }, [navigate, implicitPathVariables,],);
   useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-  React3.useInsertionEffect(() => {
+  React.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
   if (!visible) return null;
@@ -48527,7 +48543,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         var _a;
         const isLastWord = wordIndex === lastWordIndex;
         const short = word.length <= 12;
-        return /* @__PURE__ */ jsxs(React3.Fragment, {
+        return /* @__PURE__ */ jsxs(React.Fragment, {
           children: [
             /* @__PURE__ */ jsx3('span', {
               style: {
@@ -48559,7 +48575,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         const isLastWord = i === lastWordIndex;
         const ref = newOverrideableRef();
         elements.add(ref,);
-        return /* @__PURE__ */ jsxs(React3.Fragment, {
+        return /* @__PURE__ */ jsxs(React.Fragment, {
           children: [
             /* @__PURE__ */ jsx3('span', {
               ref,
@@ -48636,7 +48652,7 @@ function useTextEffect(config, ref, preview,) {
   const isRenderingStaticContent = isStaticRenderer();
   const canPlay = preview || !isRenderingStaticContent;
   const shouldReduceMotion = useReducedMotionConfig();
-  const state = React3.useRef({
+  const state = React.useRef({
     hasMounted: false,
     hasAnimatedOnce: false,
     isAnimating: false,
@@ -48646,7 +48662,7 @@ function useTextEffect(config, ref, preview,) {
   const trigger = (config == null ? void 0 : config.trigger) ?? 'onMount';
   const target = config == null ? void 0 : config.target;
   const threshold = config == null ? void 0 : config.threshold;
-  React3.useEffect(() => {
+  React.useEffect(() => {
     if (!canPlay || preview) return;
     state.current.hasMounted = true;
     function play() {
@@ -48712,7 +48728,7 @@ function useTextEffect(config, ref, preview,) {
   }, [canPlay, elements, preview, ref, target, threshold, trigger,],);
   const effectEnabled = !!config;
   const tokenization = config ? tokenizationForEffect(config,) : void 0;
-  return React3.useMemo(() => ({
+  return React.useMemo(() => ({
     // The tokenizer is memoized such that it won't trigger RichText to
     // be rerendered if the effect changes in a way that doesn't effect
     // the tokenization.
@@ -52096,6 +52112,7 @@ export {
   useAnimationFrame,
   useBreakpointVariants,
   useComponentViewport,
+  useComposedRefs,
   useConstant2 as useConstant,
   useCurrentPathVariables,
   useCurrentRoute,
@@ -52122,6 +52139,7 @@ export {
   useIsOnFramerCanvas,
   useIsPresent,
   useIsStaticRenderer,
+  useLayoutDirection,
   useLoadMorePaginatedQuery,
   useLoadMorePagination,
   useLocale,
