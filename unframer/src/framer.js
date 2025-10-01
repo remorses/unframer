@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.BXUJCS7M.mjs
+// /:https://app.framerstatic.com/framer.43LOB63L.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13157,8 +13157,10 @@ async function getLocalizedNavigationPath({
   preserveQueryParams,
 },) {
   const {
-    path,
+    path: basePath,
+    pathLocalized,
   } = route;
+  const path = (pathLocalized == null ? void 0 : pathLocalized[nextLocale.id]) ?? basePath;
   let result = {
     path,
     pathVariables,
@@ -13712,6 +13714,7 @@ function useMonitorNextPaintAfterRender(label,) {
 }
 async function pushRouteState(routeId, route, {
   currentRoutePath,
+  currentRoutePathLocalized,
   currentPathVariables,
   hash: hash2,
   pathVariables,
@@ -13725,11 +13728,13 @@ async function pushRouteState(routeId, route, {
   if (!path) return;
   const newPath = getPathForRoute(route, {
     currentRoutePath,
+    currentRoutePathLocalized,
     currentPathVariables,
     hash: hash2,
     pathVariables,
     preserveQueryParams,
     siteCanonicalURL,
+    localeId,
   },);
   try {
     return await pushHistoryState(
@@ -13905,6 +13910,7 @@ function getHashForRoute(hash2, route, hashVariables,) {
 }
 function getPathForRoute(route, {
   currentRoutePath,
+  currentRoutePathLocalized,
   currentPathVariables,
   hash: hash2,
   pathVariables,
@@ -13913,14 +13919,20 @@ function getPathForRoute(route, {
   preserveQueryParams,
   onlyHash = false,
   siteCanonicalURL,
+  localeId,
 },) {
+  var _a;
   const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
   if (onlyHash) return resolvedHash ?? '';
   let currentPath = currentRoutePath ?? '/';
+  if (currentRoutePathLocalized && localeId) {
+    currentPath = currentRoutePathLocalized[localeId] ?? currentPath;
+  }
   if (currentPathVariables) {
     currentPath = currentPath.replace(pathVariablesRegExp, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
   }
-  const targetPath = (route == null ? void 0 : route.path) ?? '/';
+  const targetPathLocalized = localeId ? (_a = route == null ? void 0 : route.pathLocalized) == null ? void 0 : _a[localeId] : void 0;
+  const targetPath = targetPathLocalized ?? (route == null ? void 0 : route.path) ?? '/';
   let path = targetPath;
   if (pathVariables) {
     path = path.replace(pathVariablesRegExp, (m2, p1,) => String(pathVariables[p1] || m2,),);
@@ -14051,39 +14063,6 @@ function sendCustomTrackingEvent(eventData, nodeId, trackingId,) {
     // Don't attach a tracking ID if it's empty
     trackingId: trackingId || null,
   }, 'eager',);
-}
-function useRouteAnchor(routeId, {
-  elementId,
-  hash: linkHash,
-} = {},) {
-  const {
-    navigate,
-    currentPathVariables,
-    preserveQueryParams,
-    siteCanonicalURL,
-  } = useRouter();
-  const route = useRoute(routeId,);
-  const currentRouteId = useCurrentRouteId();
-  const currentRoute = useRoute(currentRouteId ?? '',);
-  useRoutePreloader([routeId,], true,);
-  const hash2 = linkHash ?? elementId;
-  const href = React42.useMemo(() =>
-    getPathForRoute(route, {
-      currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-      currentPathVariables,
-      hash: hash2,
-      preserveQueryParams,
-      siteCanonicalURL,
-    },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route, siteCanonicalURL,],);
-  const navigateToRoute = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
-  const onClick = React42.useCallback((event) => {
-    event.preventDefault();
-    navigateToRoute();
-  }, [navigateToRoute,],);
-  return {
-    onClick,
-    href,
-  };
 }
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
@@ -14216,6 +14195,52 @@ var LayoutDirectionContext = /* @__PURE__ */ (() => {
 })();
 function useLayoutDirection() {
   return React42.useContext(LayoutDirectionContext,);
+}
+function useRouteAnchor(routeId, {
+  elementId,
+  hash: linkHash,
+} = {},) {
+  const {
+    navigate,
+    currentPathVariables,
+    preserveQueryParams,
+    siteCanonicalURL,
+  } = useRouter();
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const route = useRoute(routeId,);
+  const currentRouteId = useCurrentRouteId();
+  const currentRoute = useRoute(currentRouteId ?? '',);
+  useRoutePreloader([routeId,], true,);
+  const hash2 = linkHash ?? elementId;
+  const href = React42.useMemo(() =>
+    getPathForRoute(route, {
+      currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+      currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
+      currentPathVariables,
+      hash: hash2,
+      preserveQueryParams,
+      siteCanonicalURL,
+      localeId: activeLocale == null ? void 0 : activeLocale.id,
+    },), [
+    currentRoute,
+    currentPathVariables,
+    hash2,
+    preserveQueryParams,
+    route,
+    siteCanonicalURL,
+    activeLocale == null ? void 0 : activeLocale.id,
+  ],);
+  const navigateToRoute = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
+  const onClick = React42.useCallback((event) => {
+    event.preventDefault();
+    navigateToRoute();
+  }, [navigateToRoute,],);
+  return {
+    onClick,
+    href,
+  };
 }
 var eventsToStop = [
   'mousedown',
@@ -35698,7 +35723,17 @@ async function findMatchingRouteAttributesForWebPageLink(router, currentRoute, p
     unresolvedPathSlugs,
   } = pageLink;
   const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
+  return getRouteAttributes(
+    router,
+    currentRoute,
+    webPageId,
+    hash2,
+    implicitPathVariables,
+    pathVariables,
+    hashVariables,
+    resolvedSlugs,
+    activeLocale,
+  );
 }
 function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
   const {
@@ -35710,7 +35745,17 @@ function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRo
     unresolvedPathSlugs,
   } = pageLink;
   const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-  return getRouteAttributes(router, currentRoute, webPageId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,);
+  return getRouteAttributes(
+    router,
+    currentRoute,
+    webPageId,
+    hash2,
+    implicitPathVariables,
+    pathVariables,
+    hashVariables,
+    resolvedSlugs,
+    activeLocale,
+  );
 }
 function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVariables,) {
   if (!router.routes || !router.getRoute) {
@@ -35744,7 +35789,17 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
     }
   } catch {}
 }
-function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVariables, pathVariables, hashVariables, resolvedSlugs,) {
+function getRouteAttributes(
+  router,
+  currentRoute,
+  routeId,
+  hash2,
+  implicitPathVariables,
+  pathVariables,
+  hashVariables,
+  resolvedSlugs,
+  activeLocale,
+) {
   var _a;
   const combinedPathVariables = {
     ...implicitPathVariables,
@@ -35759,12 +35814,14 @@ function getRouteAttributes(router, currentRoute, routeId, hash2, implicitPathVa
   const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
   const resolvedHref = getPathForRoute(route, {
     currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
     currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
     hash: hash2,
     pathVariables: combinedPathVariables,
     hashVariables: combinedHashVariables,
     preserveQueryParams: router.preserveQueryParams,
     siteCanonicalURL: router.siteCanonicalURL,
+    localeId: activeLocale == null ? void 0 : activeLocale.id,
   },);
   const resolvedHash = resolvedHref.split('#', 2,)[1];
   return {
@@ -35930,7 +35987,7 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, element
     performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, track,);
   };
 }
-function propsForRoutePath(href, router, currentRoute, linkOptions, implicitPathVariables,) {
+function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, implicitPathVariables,) {
   if (!currentRoute) return propsForLink(href, linkOptions,);
   const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
   if (!matchedRoute) return propsForLink(href, linkOptions,);
@@ -35944,6 +36001,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, implicitPath
   const path = getPathForRoute(route, {
     // If the link is resolved, we trust that the slugs are resolved.
     currentRoutePath: currentRoute.path,
+    currentRoutePathLocalized: currentRoute.pathLocalized,
     currentPathVariables: currentRoute.pathVariables,
     // The hash value is already fully resolved so we don't need to
     // provide any hashVariables.
@@ -35952,6 +36010,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, implicitPath
     preserveQueryParams: router.preserveQueryParams && !isBot,
     // don't preserve query params for bots
     siteCanonicalURL: router.siteCanonicalURL,
+    localeId,
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   return {
@@ -36001,13 +36060,20 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
     if (isString(pageLink,)) {
-      return propsForRoutePath(pageLink, router, currentRoute, {
-        openInNewTab,
-        trackLinkClick,
-        rel: relValues == null ? void 0 : relValues.join(' ',),
-        preserveParams,
-        smoothScroll,
-      }, implicitPathVariables,);
+      return propsForRoutePath(
+        pageLink,
+        router,
+        currentRoute,
+        {
+          openInNewTab,
+          trackLinkClick,
+          rel: relValues == null ? void 0 : relValues.join(' ',),
+          preserveParams,
+          smoothScroll,
+        },
+        activeLocale == null ? void 0 : activeLocale.id,
+        implicitPathVariables,
+      );
     }
     const {
       routeId,
@@ -36125,10 +36191,10 @@ function preventClickOnNativeAnchorLink(event,) {
   if (!anchorElement || anchorElement.getAttribute('target',) === '_blank') return;
   event.preventDefault();
 }
-function resolveLink(href, router, implicitPathVariables,) {
-  return resolveLinkInternal(href, router, implicitPathVariables,);
+function resolveLink(href, router, implicitPathVariables, activeLocale,) {
+  return resolveLinkInternal(href, router, implicitPathVariables, void 0, activeLocale,);
 }
-function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, resolveSlugs2,) {
+function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, activeLocale, resolveSlugs2,) {
   const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
   if (!isLinkToWebPage(pageLink,)) return isString(href,) ? propsForLink(href,).href : void 0;
   if (!router.getRoute || !router.currentRouteId) return void 0;
@@ -36161,6 +36227,7 @@ function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, reso
   );
   return getPathForRoute(route, {
     currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
     currentPathVariables: router.currentPathVariables,
     hash: hash2,
     pathVariables: combinedPathVariables,
@@ -36169,9 +36236,10 @@ function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, reso
     preserveQueryParams: router.preserveQueryParams,
     onlyHash,
     siteCanonicalURL: router.siteCanonicalURL,
+    localeId: activeLocale == null ? void 0 : activeLocale.id,
   },);
 }
-function resolvePageScope(pageLink, router,) {
+function resolvePageScope(pageLink, router, localeId,) {
   if (!router.getRoute || !router.currentRouteId) return void 0;
   const currentRoute = router.getRoute(router.currentRouteId,);
   const {
@@ -36180,10 +36248,12 @@ function resolvePageScope(pageLink, router,) {
   const route = router.getRoute(webPageId,);
   return getPathForRoute(route, {
     currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
+    currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
     currentPathVariables: router.currentPathVariables,
     relative: false,
     preserveQueryParams: false,
     siteCanonicalURL: void 0,
+    localeId,
   },);
 }
 var salt = 'framer';
@@ -36985,6 +37055,7 @@ function Router({
           localeId: currentRouteLocaleId,
           preserveQueryParams,
           siteCanonicalURL,
+          currentRoutePathLocalized: route.pathLocalized,
         },);
       }
       updateScrollPosition(routeElementId, smoothScroll, false,);
@@ -36997,6 +37068,7 @@ function Router({
       return pushRouteState(routeId, newRoute, {
         currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
         currentPathVariables: currentPathVariables2,
+        currentRoutePathLocalized: currentRoute2 == null ? void 0 : currentRoute2.pathLocalized,
         hash: hash2,
         pathVariables,
         localeId: currentRouteLocaleId,
@@ -37006,6 +37078,7 @@ function Router({
     };
     const pathnameWithHash = getSitePrefix(siteCanonicalURL,) + getPathForRoute(newRoute, {
       currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
+      currentRoutePathLocalized: currentRoute2 == null ? void 0 : currentRoute2.pathLocalized,
       currentPathVariables: currentPathVariables2,
       hash: hash2,
       pathVariables,
@@ -37712,32 +37785,39 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
   const promises = [];
   const resolvedLinks = links.map((link) => {
     if (!link) return void 0;
-    if (isString(link,)) return resolveLinkInternal(link, router,);
-    return resolveLinkInternal(link.href, router, link.implicitPathVariables, link.refKey, (unresolvedPathSlugs, unresolvedHashSlugs,) => {
-      function handleSlugs(slugs,) {
-        const result = {};
-        for (const slugKey in slugs) {
-          const unresolvedSlug = slugs[slugKey];
-          assert(router.collectionUtils, 'collectionUtils should be defined',);
-          assert(unresolvedSlug, 'unresolvedSlug be defined',);
-          const lazyValue = resolveSlug(unresolvedSlug, router.collectionUtils, activeLocale,);
-          const promise = lazyValue.preload();
-          if (promise) {
-            promises.push(promise,);
-          } else {
-            const resolvedValue = lazyValue.read();
-            if (resolvedValue) {
-              result[slugKey] = resolvedValue;
+    if (isString(link,)) return resolveLinkInternal(link, router, void 0, void 0, activeLocale,);
+    return resolveLinkInternal(
+      link.href,
+      router,
+      link.implicitPathVariables,
+      link.refKey,
+      activeLocale,
+      (unresolvedPathSlugs, unresolvedHashSlugs,) => {
+        function handleSlugs(slugs,) {
+          const result = {};
+          for (const slugKey in slugs) {
+            const unresolvedSlug = slugs[slugKey];
+            assert(router.collectionUtils, 'collectionUtils should be defined',);
+            assert(unresolvedSlug, 'unresolvedSlug be defined',);
+            const lazyValue = resolveSlug(unresolvedSlug, router.collectionUtils, activeLocale,);
+            const promise = lazyValue.preload();
+            if (promise) {
+              promises.push(promise,);
+            } else {
+              const resolvedValue = lazyValue.read();
+              if (resolvedValue) {
+                result[slugKey] = resolvedValue;
+              }
             }
           }
+          return result;
         }
-        return result;
-      }
-      return {
-        path: handleSlugs(unresolvedPathSlugs,),
-        hash: handleSlugs(unresolvedHashSlugs,),
-      };
-    },);
+        return {
+          path: handleSlugs(unresolvedPathSlugs,),
+          hash: handleSlugs(unresolvedHashSlugs,),
+        };
+      },
+    );
   },);
   if (promises.length > 0) {
     throw Promise.allSettled(promises,);
@@ -42680,15 +42760,20 @@ function useDynamicRefs() {
 var map = /* @__PURE__ */ new Map();
 function useSiteRefs() {
   const route = useCurrentRoute();
+  const {
+    activeLocale,
+  } = useLocaleInfo();
   const path = useMemo2(() => {
     return getPathForRoute(route, {
       currentRoutePath: route == null ? void 0 : route.path,
+      currentRoutePathLocalized: route == null ? void 0 : route.pathLocalized,
       currentPathVariables: route == null ? void 0 : route.pathVariables,
       preserveQueryParams: false,
       relative: false,
       siteCanonicalURL: void 0,
+      localeId: activeLocale == null ? void 0 : activeLocale.id,
     },);
-  }, [route,],);
+  }, [route, activeLocale == null ? void 0 : activeLocale.id,],);
   return React42.useCallback((key7) => {
     if (!key7) return;
     const computedKey = `${path}-${key7}`;
