@@ -186,7 +186,9 @@ cli.command(
     })
     .action(async (projectId, options) => {
         if (!projectId?.trim()) {
-            console.log(`unframer example-app requires a project id positional param`)
+            console.log(
+                `unframer example-app requires a project id positional param`,
+            )
             process.exit(1)
         }
         try {
@@ -286,7 +288,7 @@ cli.command(
                 )
             }
 
-            logger.green(dedent`
+            console.info(dedent`
 
             Example app created successfully in ${outDir}!
 
