@@ -34,7 +34,7 @@ export async function getPackageManager(targetDir?: string) {
         return 'bun'
     }
 
-    return ''
+    return 'npm'
 }
 
 export async function installPackagesBatch({
@@ -52,14 +52,6 @@ export async function installPackagesBatch({
 
     try {
         const packageManager = await getPackageManager(cwd)
-
-        // If no package manager is detected, skip installation
-        if (packageManager === '') {
-            spinner.error(
-                `No package manager detected in ${cwd}, skipping installation of packages: ${packageNames.join(', ')}`,
-            )
-            return { success: false, error: 'No package manager detected' }
-        }
 
         const devFlag = isDev
             ? packageManager === 'npm'
