@@ -44,7 +44,9 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         default: true,
     })
     .option('--debug', 'Enable debug logging', { default: false })
-    .option('--metafile', 'Generate meta.json file with build metadata', { default: false })
+    .option('--metafile', 'Generate meta.json file with build metadata', {
+        default: false,
+    })
     .action(async function main(projectId, options) {
         const external_ = options.external
         const allExternal = external_ === true
@@ -157,16 +159,6 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
         }
     })
 
-const defaultConfig = `{
-    "schema": "https://unframer-schema.vercel.app/schema.json",
-    "outDir": "./framer",
-    "components": {
-        // add here your Framer components urls, the code will be written to outDir/{componentName}.js
-        "example-hero": "https://framer.com/m/Header-WtSW.js",
-    }
-}
-`
-
 function fixOldUnframerPath() {
     // if unframer.json exists, rename it to unframer.config.json
 
@@ -185,11 +177,18 @@ const version = pkg.version
 
 cli.version(version).help()
 
-
-
-cli.command('example-app <projectId>', 'Create an example app with Framer components')
-    .option('--outDir <dir>', 'Output directory', { default: 'example-unframer-app' })
+cli.command(
+    'example-app <projectId>',
+    'Create an example app with Framer components',
+)
+    .option('--outDir <dir>', 'Output directory', {
+        default: 'example-unframer-app',
+    })
     .action(async (projectId, options) => {
+        if (!projectId?.trim()) {
+            console.log(`unframer example-app requires a project id positional param`)
+            process.exit(1)
+        }
         try {
             const outDir = options.outDir
             console.log(`Creating example app in ${outDir}`)
@@ -262,7 +261,8 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
             spinner.stop('Framer components downloaded')
 
             const packageManager = await getPackageManager()
-            const installCommand = packageManager === 'yarn' ? 'yarn' : `${packageManager} install`
+            const installCommand =
+                packageManager === 'yarn' ? 'yarn' : `${packageManager} install`
 
             console.log(`Installing dependencies with ${packageManager}...`)
             spinner.start(`Running ${installCommand}...`)
@@ -277,8 +277,13 @@ cli.command('example-app <projectId>', 'Create an example app with Framer compon
                 spinner.stop('Dependencies installed successfully')
             } catch (error) {
                 spinner.stop('Failed to install dependencies')
-                console.error(`${packageManager} install failed:`, error?.message || error)
-                console.log(`You can manually run "${installCommand}" in the created directory`)
+                console.error(
+                    `${packageManager} install failed:`,
+                    error?.message || error,
+                )
+                console.log(
+                    `You can manually run "${installCommand}" in the created directory`,
+                )
             }
 
             logger.green(dedent`

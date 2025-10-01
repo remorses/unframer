@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.9
+
+### Patch Changes
+
+- make package manager install always work when creating example app
+
 ## 3.2.8
 
 ### Patch Changes
