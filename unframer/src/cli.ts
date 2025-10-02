@@ -377,6 +377,22 @@ export async function configFromFetch({
         .project({ projectId })
         .get()
     if (error) {
+        if (error.status === 402) {
+            const rawValue = error.value
+            const buyUrl = rawValue?.buyUrl
+
+            const message = (() => {
+                if (typeof rawValue === 'object' && rawValue?.message) {
+                    return String(rawValue.message)
+                }
+                return 'A React Export subscription is required to download components.'
+            })()
+            const details = buyUrl
+                ? `${message}\nPurchase subscription: ${buyUrl}`
+                : message
+            // spinner.error(details)
+            throw new Error(details, { cause: error })
+        }
         spinner.error('Error fetching project data:')
         console.error(error)
         throw error
