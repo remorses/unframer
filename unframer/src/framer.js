@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.43LOB63L.mjs
+// /:https://app.framerstatic.com/framer.2273VDAM.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -45256,7 +45256,11 @@ var Logger = class {
         extras,
         critical: critical ?? this.errorIsCritical,
       },);
-      extras ? this.error(reportedError, extras,) : this.error(reportedError,);
+      if (extras) {
+        this.error(reportedError, extras,);
+      } else {
+        this.error(reportedError,);
+      }
     },);
     __publicField(this, 'reportErrorOncePerMinute', (error, extras,) => {
       if (!isErrorWithMessage(error,)) return;
@@ -51717,7 +51721,7 @@ var package_default = {
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
     '@testing-library/user-event': '^14.4.3',
-    '@types/dom-navigation': '^1.0.5',
+    '@types/dom-navigation': '^1.0.6',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
     '@types/node': '22.18',
