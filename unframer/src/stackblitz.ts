@@ -1,4 +1,4 @@
-import { dedent } from './utils'
+import dedent from 'string-dedent'
 
 export function generateStackblitzFiles({
     projectId,
@@ -167,7 +167,7 @@ export function generateStackblitzFiles({
         {
             relativePath: '.gitignore',
             contents: dedent`
-            
+
                 node_modules
                 dist
                 .DS_Store
@@ -178,7 +178,7 @@ export function generateStackblitzFiles({
                 yarn-debug.log*
                 yarn-error.log*
                 *.log
-            
+
             `,
         },
         { relativePath: 'vite.config.ts', contents: viteConfig },
