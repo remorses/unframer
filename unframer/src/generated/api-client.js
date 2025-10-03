@@ -1,4 +1,4 @@
-export async function createClient({ url }) {
+export async function createClient({ url, headers: extraHeaders }) {
     const { createSpiceflowClient } = await import('spiceflow/client');
     const client = createSpiceflowClient(url, {
         // async fetch(input, requestInit) {
@@ -16,7 +16,8 @@ export async function createClient({ url }) {
         // },
         headers() {
             return {
-            // Cookie: `sb-${supabaseRef}-auth-token=${encodeURIComponent(JSON.stringify(session))}`,
+                // Cookie: `sb-${supabaseRef}-auth-token=${encodeURIComponent(JSON.stringify(session))}`,
+                ...extraHeaders,
             };
         },
     });

@@ -7,6 +7,7 @@
     "scripts": {
         "build": "rm -rf dist && pnpm concurrently \"pnpm tsc -m esnext --moduleResolution node --outDir esm\" \"pnpm tsc\" && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts",
         "test": "vitest",
+        "gen-client": "export DIR=./src/generated/ && cd ../../website && pnpm tsc; rm -rf $DIR && mkdir -p $DIR && cp ./dist/src/lib/api-client.* $DIR",
         "prepublishOnly": "pnpm tsx scripts/version-replace.ts && pnpm build",
         "download-framer": "tsx scripts/download.ts",
         "watch": "rm -rf dist esm && pnpm concurrently 'pnpm tsc -w' 'pnpm tsc -m esnext --moduleResolution node --outDir esm --watch'"

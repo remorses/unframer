@@ -370,6 +370,9 @@ export async function configFromFetch({
     }
     const client = await createClient({
         url: url || 'https://unframer.co',
+        headers: {
+            'X-Agent': 'cli',
+        },
     })
 
     spinner.start(`Fetching config for project ${projectId}`)

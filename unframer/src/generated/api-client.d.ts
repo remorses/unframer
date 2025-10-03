@@ -1,5 +1,6 @@
-export declare function createClient({ url }: {
+export declare function createClient({ url, headers: extraHeaders }: {
     url: string;
+    headers?: Record<string, string>;
 }): Promise<{
     api: {
         plugins: {
@@ -34,9 +35,9 @@ export declare function createClient({ url }: {
                 };
                 rephrase: {
                     post: (request: {
-                        url: string;
                         oldText: import("plugin-mcp").FramerLayersTree;
                         sourceHtml: string | null;
+                        url: string;
                         description?: string | null | undefined;
                         projectName?: string | undefined;
                         pagePath?: string | undefined;
@@ -161,40 +162,40 @@ export declare function createClient({ url }: {
                     }) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             subs: ({
-                                createdAt: Date;
                                 orgId: string;
-                                status: import("db/.prisma/enums").SubscriptionStatus;
-                                pluginName: import("db/.prisma/enums").PluginName | null;
-                                orderId: string | null;
+                                email: string | null;
+                                createdAt: Date;
                                 variantId: string;
+                                subscriptionId: string;
+                                orderId: string | null;
+                                itemId: string | null;
                                 productId: string;
                                 variantName: string | null;
-                                email: string | null;
-                                subscriptionId: string;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("db/.prisma/enums").PaymentProvider;
-                                customerId: string | null;
-                                itemId: string | null;
                                 quantity: number;
+                                status: import("db/generated/enums").SubscriptionStatus;
                                 endsAt: Date | null;
+                                provider: import("db/generated/enums").PaymentProvider;
+                                metadata: import("@prisma/client/runtime/client").JsonValue | null;
+                                pluginName: import("db/generated/enums").PluginName | null;
+                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                createdAt: Date;
                                 orgId: string;
-                                status: import("db/.prisma/enums").SubscriptionStatus;
-                                pluginName: import("db/.prisma/enums").PluginName | null;
-                                orderId: string | null;
+                                email: string | null;
+                                createdAt: Date;
                                 variantId: string;
+                                subscriptionId: string;
+                                orderId: string | null;
+                                itemId: string | null;
                                 productId: string;
                                 variantName: string | null;
-                                email: string | null;
-                                subscriptionId: string;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("db/.prisma/enums").PaymentProvider;
-                                customerId: string | null;
-                                itemId: string | null;
                                 quantity: number;
+                                status: import("db/generated/enums").SubscriptionStatus;
                                 endsAt: Date | null;
+                                provider: import("db/generated/enums").PaymentProvider;
+                                metadata: import("@prisma/client/runtime/client").JsonValue | null;
+                                pluginName: import("db/generated/enums").PluginName | null;
+                                customerId: string | null;
                             } | null;
                             freeSyncs: number;
                             manageSubUrl: string | undefined;
@@ -203,9 +204,9 @@ export declare function createClient({ url }: {
                 };
                 frontmatter: {
                     post: (request: {
-                        basePath: string;
-                        repo: string;
                         owner: string;
+                        repo: string;
+                        basePath: string;
                         githubAccountLogin: string;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
@@ -222,12 +223,12 @@ export declare function createClient({ url }: {
                 };
                 syncGithub: {
                     post: (request: {
-                        projectId: string;
-                        basePath: string;
-                        projectName: string;
-                        repo: string;
                         owner: string;
+                        repo: string;
+                        basePath: string;
                         githubAccountLogin: string;
+                        projectId: string;
+                        projectName: string;
                         itemIds?: string[] | undefined;
                         mapFieldsConfig?: import("framer-plugin").ManagedCollectionField[] | undefined;
                         onlyGetFrontmatter?: boolean | undefined;
@@ -258,9 +259,9 @@ export declare function createClient({ url }: {
                 };
                 checkBasePath: {
                     post: (request: {
-                        basePath: string;
-                        repo: string;
                         owner: string;
+                        repo: string;
+                        basePath: string;
                         githubAccountLogin: string;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
@@ -294,18 +295,19 @@ export declare function createClient({ url }: {
                     } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             project: {
-                                projectId: string;
-                                websiteUrl: string | null;
-                                createdAt: Date;
                                 orgId: string;
+                                projectId: string;
                                 projectName: string | null;
+                                createdAt: Date;
                                 fullFramerProjectId: string | null;
-                                pageBackgroundColor: string | null;
+                                websiteUrl: string | null;
                                 framerUserId: string | null;
+                                pageBackgroundColor: string | null;
+                                connectedGitHubRepoAt: Date | null;
                                 connectedGitHubRepoName: string | null;
                                 invitedGitHubRepoUsername: string | null;
-                                connectedGitHubRepoAt: Date | null;
                                 lastGitHubSyncAt: Date | null;
+                                creationReason: import("db/generated/enums").ReactExportCreationReason;
                             };
                             components: {
                                 url: string;
@@ -313,6 +315,7 @@ export declare function createClient({ url }: {
                                 projectId: string;
                                 id: string;
                                 componentIdentifier: string | null;
+                                componentType: import("db/generated/enums").ReactExportComponentType;
                             }[];
                             framerWebPages: {
                                 path: string;
@@ -328,14 +331,14 @@ export declare function createClient({ url }: {
                             }[];
                             locales: {
                                 name: string;
-                                code: string;
                                 id: string;
                                 slug: string;
+                                code: string;
                             }[];
                             breakpoints: {
-                                width: number;
-                                variantId: string;
                                 componentId: string;
+                                variantId: string;
+                                width: number;
                                 breakpointName: string;
                             }[];
                             componentInstances: {
@@ -343,7 +346,7 @@ export declare function createClient({ url }: {
                                 componentId: string;
                                 pageOrdering: number;
                                 nodeDepth: number;
-                                controls: import("@prisma/client/runtime/library").JsonValue;
+                                controls: import("@prisma/client/runtime/client").JsonValue;
                             }[];
                         };
                     }>>;
@@ -355,6 +358,7 @@ export declare function createClient({ url }: {
                                 projectId: string;
                                 id: string;
                                 componentIdentifier: string | null;
+                                componentType: import("db/generated/enums").ReactExportComponentType;
                             }[];
                         }, options?: {
                             headers?: Record<string, unknown> | undefined;
@@ -375,18 +379,19 @@ export declare function createClient({ url }: {
                                 components: import("db").ReactExportComponent[];
                             } | {
                                 project: {
-                                    projectId: string;
-                                    websiteUrl: string | null;
-                                    createdAt: Date;
                                     orgId: string;
+                                    projectId: string;
                                     projectName: string | null;
+                                    createdAt: Date;
                                     fullFramerProjectId: string | null;
-                                    pageBackgroundColor: string | null;
+                                    websiteUrl: string | null;
                                     framerUserId: string | null;
+                                    pageBackgroundColor: string | null;
+                                    connectedGitHubRepoAt: Date | null;
                                     connectedGitHubRepoName: string | null;
                                     invitedGitHubRepoUsername: string | null;
-                                    connectedGitHubRepoAt: Date | null;
                                     lastGitHubSyncAt: Date | null;
+                                    creationReason: import("db/generated/enums").ReactExportCreationReason;
                                 };
                                 components: {
                                     url: string;
@@ -394,6 +399,7 @@ export declare function createClient({ url }: {
                                     projectId: string;
                                     id: string;
                                     componentIdentifier: string | null;
+                                    componentType: import("db/generated/enums").ReactExportComponentType;
                                 }[];
                                 framerWebPages: {
                                     path: string;
@@ -409,14 +415,14 @@ export declare function createClient({ url }: {
                                 }[];
                                 locales: {
                                     name: string;
-                                    code: string;
                                     id: string;
                                     slug: string;
+                                    code: string;
                                 }[];
                                 breakpoints: {
-                                    width: number;
-                                    variantId: string;
                                     componentId: string;
+                                    variantId: string;
+                                    width: number;
                                     breakpointName: string;
                                 }[];
                                 componentInstances: {
@@ -424,7 +430,7 @@ export declare function createClient({ url }: {
                                     componentId: string;
                                     pageOrdering: number;
                                     nodeDepth: number;
-                                    controls: import("@prisma/client/runtime/library").JsonValue;
+                                    controls: import("@prisma/client/runtime/client").JsonValue;
                                 }[];
                                 type: "project";
                             }, void, unknown>;
@@ -443,50 +449,50 @@ export declare function createClient({ url }: {
                         200: {
                             freeComponents: number;
                             subs: ({
-                                createdAt: Date;
                                 orgId: string;
-                                status: import("db/.prisma/enums").SubscriptionStatus;
-                                pluginName: import("db/.prisma/enums").PluginName | null;
-                                orderId: string | null;
+                                email: string | null;
+                                createdAt: Date;
                                 variantId: string;
+                                subscriptionId: string;
+                                orderId: string | null;
+                                itemId: string | null;
                                 productId: string;
                                 variantName: string | null;
-                                email: string | null;
-                                subscriptionId: string;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("db/.prisma/enums").PaymentProvider;
-                                customerId: string | null;
-                                itemId: string | null;
                                 quantity: number;
+                                status: import("db/generated/enums").SubscriptionStatus;
                                 endsAt: Date | null;
+                                provider: import("db/generated/enums").PaymentProvider;
+                                metadata: import("@prisma/client/runtime/client").JsonValue | null;
+                                pluginName: import("db/generated/enums").PluginName | null;
+                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                createdAt: Date;
                                 orgId: string;
-                                status: import("db/.prisma/enums").SubscriptionStatus;
-                                pluginName: import("db/.prisma/enums").PluginName | null;
-                                orderId: string | null;
+                                email: string | null;
+                                createdAt: Date;
                                 variantId: string;
+                                subscriptionId: string;
+                                orderId: string | null;
+                                itemId: string | null;
                                 productId: string;
                                 variantName: string | null;
-                                email: string | null;
-                                subscriptionId: string;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("db/.prisma/enums").PaymentProvider;
-                                customerId: string | null;
-                                itemId: string | null;
                                 quantity: number;
+                                status: import("db/generated/enums").SubscriptionStatus;
                                 endsAt: Date | null;
+                                provider: import("db/generated/enums").PaymentProvider;
+                                metadata: import("@prisma/client/runtime/client").JsonValue | null;
+                                pluginName: import("db/generated/enums").PluginName | null;
+                                customerId: string | null;
                             } | null;
                             manageSubUrl: string | undefined;
-                            subscriptionStatus: import("db/.prisma/enums").SubscriptionStatus | undefined;
+                            subscriptionStatus: import("db/generated/enums").SubscriptionStatus | undefined;
                         };
                     }>>;
                 };
                 upsertUnframerRepoWithAI: {
                     post: (request: {
-                        projectId: string;
                         secret: string;
+                        projectId: string;
                         sendEmail?: boolean | undefined;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
@@ -504,8 +510,14 @@ export declare function createClient({ url }: {
                         }, Response | {
                             success: boolean;
                             error: string;
+                            result?: undefined;
                         } | {
                             success: boolean;
+                            error?: undefined;
+                            result?: undefined;
+                        } | {
+                            success: boolean;
+                            result: import("resend").CreateEmailResponse;
                             error?: undefined;
                         } | undefined, unknown>;
                     }>>;
@@ -518,6 +530,7 @@ export declare function createClient({ url }: {
                             projectId: string;
                             id: string;
                             componentIdentifier: string | null;
+                            componentType: import("db/generated/enums").ReactExportComponentType;
                         }[];
                         projectId: string;
                         colorStyles: {
@@ -528,30 +541,31 @@ export declare function createClient({ url }: {
                             darkColor: string;
                         }[];
                         breakpoints?: {
-                            width: number;
                             projectId: string;
-                            variantId: string;
                             componentId: string;
+                            variantId: string;
+                            width: number;
                             breakpointName: string;
                         }[] | undefined;
-                        websiteUrl?: string | undefined;
-                        projectName?: string | null | undefined;
-                        fullFramerProjectId?: string | undefined;
-                        pageBackgroundColor?: string | undefined;
-                        framerUserId?: string | undefined;
                         pages?: {
                             path: string;
                             projectId: string;
                             webPageId: string;
                         }[] | undefined;
+                        fullFramerProjectId?: string | undefined;
+                        websiteUrl?: string | undefined;
                         locales?: {
                             name: string;
-                            code: string;
                             projectId: string;
                             id: string;
                             slug: string;
+                            code: string;
                         }[] | undefined;
-                        componentInstances?: import("db/.prisma/models").ReactExportComponentInstanceUncheckedCreateInput[] | undefined;
+                        projectName?: string | null | undefined;
+                        framerUserId?: string | undefined;
+                        pageBackgroundColor?: string | undefined;
+                        componentInstances?: import("db").ReactExportComponentInstanceUncheckedCreateInput[] | undefined;
+                        creationReason?: "USER_REQUESTED" | "MCP_FIRST_OPEN" | undefined;
                     }, options?: {
                         headers?: Record<string, unknown> | undefined;
                         query?: Record<string, unknown> | undefined;
@@ -615,8 +629,8 @@ export declare function createClient({ url }: {
                 };
                 generate: {
                     post: (request: {
-                        description: string;
                         randomId: string;
+                        description: string;
                         tree: import("plugin-mcp").FramerLayersTree;
                         projectId?: string | undefined;
                         projectName?: string | undefined;
@@ -636,18 +650,11 @@ export declare function createClient({ url }: {
                             partialItem: Partial<import("plugin-mcp").NewExtractedNode>;
                             nodeId: string;
                         } | {
-                            url: string;
                             type: "tool-call";
                             id: string;
-                            toolName: "delete" | "fetch" | "duplicate";
+                            toolName: string;
                             callId: string;
                             nodeIds: never[];
-                        } | {
-                            nodeIds: string[];
-                            type: "tool-call";
-                            id: string;
-                            toolName: "delete" | "fetch" | "duplicate";
-                            callId: string;
                         }, {
                             fullXml: string;
                         }, unknown>;
@@ -663,40 +670,40 @@ export declare function createClient({ url }: {
                     }) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
                         200: {
                             subs: ({
-                                createdAt: Date;
                                 orgId: string;
-                                status: import("db/.prisma/enums").SubscriptionStatus;
-                                pluginName: import("db/.prisma/enums").PluginName | null;
-                                orderId: string | null;
+                                email: string | null;
+                                createdAt: Date;
                                 variantId: string;
+                                subscriptionId: string;
+                                orderId: string | null;
+                                itemId: string | null;
                                 productId: string;
                                 variantName: string | null;
-                                email: string | null;
-                                subscriptionId: string;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("db/.prisma/enums").PaymentProvider;
-                                customerId: string | null;
-                                itemId: string | null;
                                 quantity: number;
+                                status: import("db/generated/enums").SubscriptionStatus;
                                 endsAt: Date | null;
+                                provider: import("db/generated/enums").PaymentProvider;
+                                metadata: import("@prisma/client/runtime/client").JsonValue | null;
+                                pluginName: import("db/generated/enums").PluginName | null;
+                                customerId: string | null;
                             } | null)[];
                             activeSub: {
-                                createdAt: Date;
                                 orgId: string;
-                                status: import("db/.prisma/enums").SubscriptionStatus;
-                                pluginName: import("db/.prisma/enums").PluginName | null;
-                                orderId: string | null;
+                                email: string | null;
+                                createdAt: Date;
                                 variantId: string;
+                                subscriptionId: string;
+                                orderId: string | null;
+                                itemId: string | null;
                                 productId: string;
                                 variantName: string | null;
-                                email: string | null;
-                                subscriptionId: string;
-                                metadata: import("@prisma/client/runtime/library").JsonValue | null;
-                                provider: import("db/.prisma/enums").PaymentProvider;
-                                customerId: string | null;
-                                itemId: string | null;
                                 quantity: number;
+                                status: import("db/generated/enums").SubscriptionStatus;
                                 endsAt: Date | null;
+                                provider: import("db/generated/enums").PaymentProvider;
+                                metadata: import("@prisma/client/runtime/client").JsonValue | null;
+                                pluginName: import("db/generated/enums").PluginName | null;
+                                customerId: string | null;
                             } | null;
                             manageSubUrl: string | undefined;
                         };
@@ -822,8 +829,8 @@ export declare function createClient({ url }: {
             };
             validateSession: {
                 post: (request: {
-                    framerUserId: string;
                     sessionId: string;
+                    framerUserId: string;
                 }, options?: {
                     headers?: Record<string, unknown> | undefined;
                     query?: Record<string, unknown> | undefined;
@@ -834,6 +841,38 @@ export declare function createClient({ url }: {
                         error?: string | undefined;
                     };
                 }>>;
+            };
+            mcp: {
+                createSession: {
+                    post: (request: {
+                        supabaseUserId: string;
+                        email?: string | undefined;
+                    }, options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: {
+                            sessionToken: string;
+                            framerUserId: string;
+                        };
+                    }>>;
+                };
+                validateSession: {
+                    post: (request: {
+                        sessionToken: string;
+                    }, options?: {
+                        headers?: Record<string, unknown> | undefined;
+                        query?: Record<string, unknown> | undefined;
+                        fetch?: RequestInit | undefined;
+                    } | undefined) => Promise<import("spiceflow/client").SpiceflowClient.ClientResponse<{
+                        200: {
+                            framerUserId: string;
+                            userId: string | null;
+                            email: string;
+                        };
+                    }>>;
+                };
             };
         };
     };
