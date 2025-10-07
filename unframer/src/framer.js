@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.2273VDAM.mjs
+// /:https://app.framerstatic.com/framer.LRXNL3UI.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -18621,7 +18621,7 @@ function Device({
     return () => observer2.disconnect();
   }, [],);
   const {
-    containerStyle,
+    containerStyle: containerStyle2,
     handStyle,
     deviceStyle,
     deviceImageStyle,
@@ -18638,7 +18638,7 @@ function Device({
   const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
   return /* @__PURE__ */ jsx3('div', {
     style: {
-      ...containerStyle,
+      ...containerStyle2,
       ...resizeStyles,
     },
     ref: containerRef,
@@ -24280,6 +24280,542 @@ var Layer = /* @__PURE__ */ (() => {
   __publicField(Layer2, 'defaultProps', {},);
   return Layer2;
 })();
+var TickerItemContext = /* @__PURE__ */ createContext(void 0,);
+function TickerItem({
+  offset,
+  axis,
+  listSize = 0,
+  itemIndex,
+  cloneIndex,
+  bounds,
+  inset: inset2,
+  alignItems,
+  itemSize = 'auto',
+  ...props
+},) {
+  const ref = useRef3(null,);
+  const {
+    start: start2,
+    end,
+  } = bounds;
+  const transform2 = useTransform(() => {
+    const currentOffset = offset.get();
+    if (!start2 && !end || !listSize) return 0;
+    if (currentOffset + end <= -inset2) {
+      return listSize;
+    }
+    return 0;
+  },);
+  const itemOffset = useTransform(() => {
+    const currentOffset = offset.get();
+    const currentTransform = transform2.get();
+    if (!start2 && !end || !listSize) return 0;
+    return currentOffset + start2 + currentTransform;
+  },);
+  const itemWrapperOffAxisSize = alignItems === 'stretch' ? '100%' : 'fit-content';
+  const isClone = cloneIndex !== void 0;
+  return /* @__PURE__ */ jsx3(TickerItemContext.Provider, {
+    value: {
+      offset: itemOffset,
+    },
+    children: /* @__PURE__ */ jsx3(LayoutGroup, {
+      inherit: 'id',
+      id: isClone ? `clone-${cloneIndex}` : void 0,
+      children: /* @__PURE__ */ jsx3(motion.li, {
+        ref,
+        ...props,
+        className: cloneIndex === void 0 ? 'ticker-item' : 'clone-item',
+        style: {
+          flexGrow: 0,
+          flexShrink: 0,
+          flexBasis: itemSize === 'fill' ? '100%' : void 0,
+          display: itemSize === 'fill' ? 'flex' : void 0,
+          height: axis === 'x' ? itemWrapperOffAxisSize : void 0,
+          width: axis === 'y' ? itemWrapperOffAxisSize : void 0,
+          x: axis === 'x' ? transform2 : 0,
+          y: axis === 'y' ? transform2 : 0,
+        },
+        'aria-hidden': isClone ? true : void 0,
+      },),
+    },),
+  },);
+}
+function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus,) {
+  const isFocusTrapped = useRef3(false,);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    let detectionEnabled = false;
+    const abortController = new AbortController();
+    const eventOptions = {
+      signal: abortController.signal,
+    };
+    const eventOptionsWithCapture = {
+      ...eventOptions,
+      capture: true,
+    };
+    const scrollProp = axis === 'x' ? 'scrollLeft' : 'scrollTop';
+    const offsetProp = axis === 'x' ? 'offsetLeft' : 'offsetTop';
+    const leftKey = axis === 'x' ? 'ArrowLeft' : 'ArrowUp';
+    const rightKey = axis === 'x' ? 'ArrowRight' : 'ArrowDown';
+    let focusableElements2 = [];
+    let focusIndex = 0;
+    const applyFocusOffset = () => {
+      const nextFocusableElement = focusableElements2[focusIndex];
+      nextFocusableElement.focus();
+      focusOffset.set(-nextFocusableElement[offsetProp],);
+      container[scrollProp] = 0;
+      frame.render(() => {
+        container[scrollProp] = 0;
+      },);
+    };
+    const handleFocusNavigation = (event) => {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        endFocusTrap();
+        const allFocusableElements = Array.from(
+          document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',),
+        ).filter(isHTMLElement,);
+        allFocusableElements.sort(compareTabIndexes,);
+        const lastFocusableElement = allFocusableElements[event.shiftKey ? 0 : allFocusableElements.length - 1];
+        const initialIndex = event.shiftKey ? allFocusableElements.length - 1 : 0;
+        if (container.contains(lastFocusableElement,)) {
+          allFocusableElements[initialIndex].focus();
+          return;
+        } else {
+          const indexOfCurrentElement = allFocusableElements.indexOf(focusableElements2[focusIndex],);
+          const delta = event.shiftKey ? -1 : 1;
+          for (let i = indexOfCurrentElement; i < allFocusableElements.length && i >= 0; i += delta) {
+            const element = allFocusableElements[i];
+            if (!container.contains(element,)) {
+              element.focus();
+              return;
+            }
+          }
+        }
+        return;
+      } else if (event.key === leftKey) {
+        focusIndex--;
+      } else if (event.key === rightKey) {
+        focusIndex++;
+      }
+      focusIndex = wrap(0, focusableElements2.length, focusIndex,);
+      applyFocusOffset();
+    };
+    const startFocusTrap = () => {
+      if (isFocusTrapped.current) return;
+      setHasFocus(true,);
+      isFocusTrapped.current = true;
+      focusableElements2 = Array.from(
+        container.querySelectorAll(
+          '.ticker-item a, .ticker-item button, .ticker-item input, .ticker-item textarea, .ticker-item select, .ticker-item [tabindex]:not([tabindex="-1"]), .ticker-item [contenteditable="true"]',
+        ),
+      ).filter(isHTMLElement,);
+      focusIndex = 0;
+      applyFocusOffset();
+      window.addEventListener('focus', detectTrapEnd, eventOptionsWithCapture,);
+      window.addEventListener('blur', detectTrapEnd, eventOptionsWithCapture,);
+      container.addEventListener('keydown', handleFocusNavigation, eventOptions,);
+    };
+    const detectTrapEnd = (event) => {
+      if (!event.target || !(event.target instanceof HTMLElement) || !container.contains(event.target,)) {
+        endFocusTrap();
+      }
+    };
+    const endFocusTrap = () => {
+      if (!isFocusTrapped.current) return;
+      isFocusTrapped.current = false;
+      setHasFocus(false,);
+      offset.set(focusOffset.get(),);
+      window.removeEventListener('focus', detectTrapEnd,);
+      window.removeEventListener('blur', detectTrapEnd,);
+      container.removeEventListener('keydown', handleFocusNavigation,);
+    };
+    const handleFocus = (event) => {
+      const {
+        target,
+      } = event;
+      if (!isHTMLElement(target,)) return;
+      if (!isFocusTrapped.current) {
+        startFocusTrap();
+      }
+    };
+    const detectFocusTrapEnable = () => {
+      if (detectionEnabled) return;
+      detectionEnabled = true;
+      container.addEventListener('focus', handleFocus, eventOptionsWithCapture,);
+      window.addEventListener('pointermove', handlePointerMove, eventOptions,);
+    };
+    const handlePointerMove = () => {
+      if (!detectionEnabled) return;
+      detectionEnabled = false;
+      container.removeEventListener('focus', handleFocus, true,);
+      window.removeEventListener('pointermove', handlePointerMove, eventOptions,);
+    };
+    const handleAriaHiddenClicks = (event) => {
+      const target = event.target;
+      const ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
+      if (ariaHiddenAncestor) {
+        ariaHiddenAncestor.removeAttribute('aria-hidden',);
+      }
+    };
+    window.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
+    container.addEventListener('pointerdown', handleAriaHiddenClicks, eventOptions,);
+    return () => {
+      abortController.abort();
+      endFocusTrap();
+    };
+  }, [],);
+}
+function compareTabIndexes(a, b,) {
+  if (a.tabIndex >= 1 && b.tabIndex >= 1) {
+    return a.tabIndex - b.tabIndex;
+  }
+  if (a.tabIndex >= 1 && b.tabIndex <= 0) {
+    return -1;
+  }
+  if (b.tabIndex >= 1 && a.tabIndex <= 0) {
+    return 1;
+  }
+  return 0;
+}
+function calcItemLength(itemPosition,) {
+  return itemPosition.end - itemPosition.start;
+}
+function calcTotalItemLength(itemPositions,) {
+  return itemPositions[itemPositions.length - 1].end - itemPositions[0].start;
+}
+function calcNumClones(visibleLength, itemPositions, gap,) {
+  const totalItemLength = calcTotalItemLength(itemPositions,);
+  const maxItemLength = Math.max(...itemPositions.map(calcItemLength,),);
+  let count = 0;
+  let safeFillLength = 0;
+  while (safeFillLength < visibleLength) {
+    safeFillLength = (totalItemLength + gap) * (count + 1) - maxItemLength;
+    count++;
+  }
+  return Math.max(count - 1, 0,);
+}
+var alignAlias = {
+  start: 'flex-start',
+  end: 'flex-end',
+};
+function Ticker({
+  items,
+  velocity = 50,
+  hoverFactor = 1,
+  gap = 10,
+  axis = 'x',
+  align = 'center',
+  offset,
+  isStatic = false,
+  itemSize = 'auto',
+  overflow = false,
+  ...props
+},) {
+  const [state, setState,] = useState({
+    visibleLength: 0,
+    inset: 0,
+    totalItemLength: 0,
+    itemPositions: [],
+  },);
+  const alignItems = alignAlias[align] || align;
+  if (isStatic) {
+    const renderedOffset2 = useMotionValue(0,);
+    return /* @__PURE__ */ jsx3(ListView, {
+      containerProps: props,
+      gap,
+      axis,
+      alignItems,
+      renderedOffset: renderedOffset2,
+      items,
+      itemSize,
+      state,
+      overflow,
+      isStatic: true,
+    },);
+  }
+  const [hasFocus, setHasFocus,] = useState(false,);
+  const velocityFactor = useMotionValue(1,);
+  const defaultOffset22 = useMotionValue(0,);
+  offset ?? (offset = defaultOffset22);
+  const wrappedOffset = useTransform(() => wrap(-state.totalItemLength - gap - state.inset, -state.inset, offset.get(),));
+  const focusOffset = useMotionValue(0,);
+  const renderedOffset = hasFocus ? focusOffset : wrappedOffset;
+  const containerRef = useRef3(null,);
+  const listRef = useRef3(null,);
+  const isInViewport = useInView(containerRef, {
+    margin: '100px',
+  },);
+  const isPageInView = usePageInView();
+  const isInView = isInViewport && isPageInView;
+  const isReducedMotion = useReducedMotion();
+  const updateMeasurements = () => {
+    if (!containerRef.current || !listRef.current) return;
+    const viewportLengthProp = axis === 'x' ? 'innerWidth' : 'innerHeight';
+    const lengthProp = axis === 'x' ? 'offsetWidth' : 'offsetHeight';
+    const insetProp = axis === 'x' ? 'offsetLeft' : 'offsetTop';
+    const paddingStartProp = axis === 'x' ? 'paddingLeft' : 'paddingTop';
+    const container = containerRef.current;
+    const list = listRef.current;
+    const allItems = list.querySelectorAll('.ticker-item',);
+    if (!allItems.length) return;
+    let haveItemSizesChanged = false;
+    const itemPositions = [];
+    for (let i = 0; i < allItems.length; i++) {
+      const item = allItems[i];
+      itemPositions.push({
+        start: item[insetProp],
+        end: item[insetProp] + item[lengthProp],
+      },);
+      if (
+        !state.itemPositions[i] || itemPositions[i].start !== state.itemPositions[i].start ||
+        itemPositions[i].end !== state.itemPositions[i].end
+      ) {
+        haveItemSizesChanged = true;
+      }
+    }
+    const visibleLength = overflow ? window[viewportLengthProp] : (
+      /**
+       * Cap to viewport size to prevent infinite or wasteful cloning in the event that the
+       * container width is reactive to the number of children rendered within it.
+       */
+      Math.min(container[lengthProp], window[viewportLengthProp],)
+    );
+    const totalItemLength = calcTotalItemLength(itemPositions,);
+    const computedContainerStyle = window.getComputedStyle(container,);
+    const containerPaddingStart = parseInt(computedContainerStyle[paddingStartProp] ?? 0,);
+    const inset2 = overflow ? getCumulativeOffset(allItems[0], axis,) : containerPaddingStart;
+    if (
+      visibleLength !== state.visibleLength || totalItemLength !== state.totalItemLength || inset2 !== state.inset || haveItemSizesChanged
+    ) {
+      setState({
+        visibleLength,
+        itemPositions,
+        totalItemLength,
+        inset: inset2,
+      },);
+    }
+  };
+  useIsomorphicLayoutEffect(() => {
+    if (!isInView || !containerRef.current) return;
+    updateMeasurements();
+    const trackViewport = overflow ? resize(updateMeasurements,) : void 0;
+    const trackContainer = resize(containerRef.current, updateMeasurements,);
+    return () => {
+      trackViewport == null ? void 0 : trackViewport();
+      trackContainer();
+    };
+  }, [items, isInView, overflow,],);
+  const isMeasured = state.totalItemLength > 0;
+  useAnimationFrame(
+    isMeasured && isInView && offset === defaultOffset22 && !isReducedMotion
+      ? (_, delta,) => {
+        const frameOffset = delta / 1e3 * (velocity * velocityFactor.get());
+        offset.set(offset.get() - frameOffset,);
+      }
+      : noop,
+  );
+  const cloneCount = useMemo2(() => {
+    if (!isMeasured || !state.visibleLength) return 0;
+    return calcNumClones(state.visibleLength, state.itemPositions, gap,);
+  }, [isMeasured, state,],);
+  const totalListSize = state.totalItemLength === 0 ? 0 : (state.totalItemLength + gap) * (cloneCount + 1);
+  const clonedItems = [];
+  for (let i = 0; i < cloneCount; i++) {
+    items.forEach((item, itemIndex,) => {
+      const originalBounds = state.itemPositions[itemIndex];
+      const cloneOffset = (state.totalItemLength + gap) * (i + 1);
+      const cloneBounds = originalBounds
+        ? {
+          start: originalBounds.start + cloneOffset,
+          end: originalBounds.end + cloneOffset,
+        }
+        : defaultBounds;
+      clonedItems.push(/* @__PURE__ */ jsx3(TickerItem, {
+        offset: renderedOffset,
+        axis,
+        listSize: totalListSize,
+        cloneIndex: itemIndex,
+        bounds: cloneBounds,
+        inset: state.inset,
+        alignItems,
+        itemSize,
+        children: item,
+      }, `clone-${i}-${itemIndex}`,),);
+    },);
+  }
+  useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus,);
+  return /* @__PURE__ */ jsx3(ListView, {
+    containerProps: props,
+    containerRef,
+    listRef,
+    gap,
+    axis,
+    alignItems,
+    isMeasured,
+    isInView,
+    renderedOffset,
+    items,
+    itemSize,
+    clonedItems,
+    onPointerEnter: () => {
+      animate(velocityFactor, hoverFactor,);
+    },
+    onPointerLeave: () => {
+      animate(velocityFactor, 1,);
+    },
+    totalListSize,
+    state,
+    overflow,
+  },);
+}
+function ListView({
+  containerProps,
+  containerRef,
+  listRef,
+  gap,
+  axis,
+  alignItems,
+  isMeasured,
+  isInView,
+  isStatic,
+  items,
+  clonedItems,
+  renderedOffset,
+  onPointerEnter,
+  onPointerLeave,
+  totalListSize,
+  itemSize,
+  overflow,
+  state,
+},) {
+  return /* @__PURE__ */ jsx3(motion.div, {
+    ...containerProps,
+    ref: containerRef,
+    style: {
+      ...containerStyle,
+      ...containerProps.style,
+      overflow: overflow ? 'visible' : 'hidden',
+    },
+    onPointerEnter,
+    onPointerLeave,
+    children: /* @__PURE__ */ jsxs(motion.ul, {
+      ref: listRef,
+      style: {
+        ...listStyle,
+        flexDirection: axis === 'x' ? 'row' : 'column',
+        gap: `${gap}px`,
+        x: axis === 'x' ? renderedOffset : 0,
+        y: axis === 'y' ? renderedOffset : 0,
+        opacity: isMeasured || isStatic ? 1 : 0,
+        alignItems,
+        willChange: isMeasured && isInView ? 'transform' : void 0,
+        width: '100%',
+        height: '100%',
+        maxHeight: '100%',
+        maxWidth: '100%',
+      },
+      children: [
+        items.map((item, index,) =>
+          /* @__PURE__ */ jsx3(TickerItem, {
+            axis,
+            offset: renderedOffset,
+            listSize: totalListSize,
+            itemIndex: index,
+            bounds: state.itemPositions[index] ?? defaultBounds,
+            inset: state.inset,
+            alignItems,
+            itemSize,
+            children: item,
+          }, 'original-' + index,)
+        ),
+        clonedItems || null,
+      ],
+    },),
+  },);
+}
+var defaultBounds = {
+  start: 0,
+  end: 0,
+};
+var containerStyle = {
+  display: 'flex',
+  position: 'relative',
+  overflow: 'hidden',
+};
+var listStyle = {
+  display: 'flex',
+  position: 'relative',
+  willChange: 'transform',
+  listStyleType: 'none',
+  padding: 0,
+  margin: 0,
+  justifyContent: 'flex-start',
+};
+function getCumulativeOffset(element, axis,) {
+  let offset = 0;
+  let el = element;
+  while (el) {
+    offset += axis === 'x' ? el.offsetLeft : el.offsetTop;
+    el = el.offsetParent;
+  }
+  return offset;
+}
+var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
+  const {
+    children,
+    as: asProp,
+    tickerEffectVelocity,
+    tickerEffectHoverModifier,
+    tickerEffectDirection,
+    tickerEffectDirectionModifier,
+    tickerEffectAlign,
+    tickerEffectGap,
+    ...rest
+  } = props;
+  const Component18 = asProp ?? motion.div;
+  const isStatic = useIsStaticRenderer();
+  const align = tickerEffectAlign ?? 'center';
+  const gap = typeof tickerEffectGap === 'string' ? parseInt(tickerEffectGap,) : 10;
+  const direction = tickerEffectDirection ?? 'row';
+  const baseVelocity = tickerEffectVelocity ?? 100;
+  const hoverModifier = tickerEffectHoverModifier ?? 1;
+  const directionModifier = tickerEffectDirectionModifier ?? 1;
+  const velocity = baseVelocity * directionModifier;
+  return /* @__PURE__ */ jsx3(Component18, {
+    ref,
+    ...rest,
+    style: {
+      position: 'relative',
+      ...rest.style,
+    },
+    children: /* @__PURE__ */ jsx3(Ticker, {
+      items: unwrapFragments(children,),
+      gap: isFiniteNumber(gap,) ? gap : 10,
+      axis: direction === 'column' ? 'y' : 'x',
+      align,
+      isStatic,
+      style: {
+        height: '100%',
+        width: '100%',
+      },
+      velocity,
+      hoverFactor: hoverModifier,
+    },),
+  },);
+},);
+function unwrapFragments(children,) {
+  const result = [];
+  Children.forEach(children, (child) => {
+    if (isValidElement(child,) && child.type === Fragment) {
+      result.push(...unwrapFragments(child.props.children,),);
+    } else {
+      result.push(child,);
+    }
+  },);
+  return result;
+}
 function manageCache(cache2, maxEntries,) {
   const size = cache2.size;
   if (size < maxEntries) return;
@@ -24937,6 +25473,30 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     },),
     parentSize,
   );
+  if (props.tickerEffectEnabled) {
+    const {
+      tickerEffectVelocity,
+      tickerEffectHoverModifier,
+      tickerEffectDirectionModifier,
+      tickerEffectGap,
+      tickerEffectDirection,
+      tickerEffectAlign,
+    } = props;
+    return /* @__PURE__ */ jsx3(Ticker2, {
+      ...dataProps,
+      ...motionProps,
+      layoutId,
+      style: currentStyle,
+      ref,
+      tickerEffectVelocity,
+      tickerEffectHoverModifier,
+      tickerEffectDirectionModifier,
+      tickerEffectGap,
+      tickerEffectDirection,
+      tickerEffectAlign,
+      children,
+    },);
+  }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
   const intrinsicSize = getIntrinsicSizeForBackgroundImage(backgroundImage,);
   if (props.fitImageDimension && intrinsicSize) {
@@ -43841,6 +44401,19 @@ var withV1StrokeFX = (Component18) =>
       ref: forwardedRef,
     },);
   },);
+var withTickerFX = (Component18) => {
+  return (props) => {
+    if (props.tickerEffectEnabled) {
+      return /* @__PURE__ */ jsx3(Ticker2, {
+        ...props,
+        as: Component18,
+      },);
+    }
+    return /* @__PURE__ */ jsx3(Component18, {
+      ...props,
+    },);
+  };
+};
 function extractMappingFromInfo(info,) {
   var _a;
   const json = (_a = info.__FramerMetadata__.exports.default.annotations) == null ? void 0 : _a.framerVariables;
@@ -49103,12 +49676,12 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, textEffect,],);
   if (!visible) return null;
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
-  const containerStyle = {
+  const containerStyle2 = {
     opacity: isHidden ? 0 : opacity,
   };
   const justifyContent = convertVerticalAlignment(verticalAlignment,);
   if (justifyContent !== defaultRichTextContainerStyle.justifyContent) {
-    containerStyle.justifyContent = justifyContent;
+    containerStyle2.justifyContent = justifyContent;
   }
   const positionStyle = {};
   const restrictedRenderTarget = RenderTarget.hasRestrictions();
@@ -49120,36 +49693,36 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     if (frame2 && restrictedRenderTarget && !isAutoSized2) {
       positionStyle.x = frame2.x + (isNumber2(style2 == null ? void 0 : style2.x,) ? style2.x : 0);
       positionStyle.y = frame2.y + (isNumber2(style2 == null ? void 0 : style2.y,) ? style2.y : 0);
-      containerStyle.rotate = Animatable.getNumber(rotation,);
-      containerStyle.width = frame2.width;
-      containerStyle.minWidth = frame2.width;
-      containerStyle.height = frame2.height;
+      containerStyle2.rotate = Animatable.getNumber(rotation,);
+      containerStyle2.width = frame2.width;
+      containerStyle2.minWidth = frame2.width;
+      containerStyle2.height = frame2.height;
     } else {
-      containerStyle.left = left;
-      containerStyle.right = right;
-      containerStyle.top = top;
-      containerStyle.bottom = bottom;
-      containerStyle.width = width;
-      containerStyle.height = height;
-      containerStyle.rotate = rotation;
+      containerStyle2.left = left;
+      containerStyle2.right = right;
+      containerStyle2.top = top;
+      containerStyle2.bottom = bottom;
+      containerStyle2.width = width;
+      containerStyle2.height = height;
+      containerStyle2.rotate = rotation;
     }
     if (positionSticky) {
       if (!isOnCanvas || inCodeComponent) {
-        containerStyle.position = 'sticky';
-        containerStyle.willChange = 'transform';
-        containerStyle.zIndex = 1;
-        containerStyle.top = positionStickyTop;
-        containerStyle.right = positionStickyRight;
-        containerStyle.bottom = positionStickyBottom;
-        containerStyle.left = positionStickyLeft;
+        containerStyle2.position = 'sticky';
+        containerStyle2.willChange = 'transform';
+        containerStyle2.zIndex = 1;
+        containerStyle2.top = positionStickyTop;
+        containerStyle2.right = positionStickyRight;
+        containerStyle2.bottom = positionStickyBottom;
+        containerStyle2.left = positionStickyLeft;
       }
     } else if (isOnCanvas && (props.positionFixed || props.positionAbsolute)) {
-      containerStyle.position = 'absolute';
+      containerStyle2.position = 'absolute';
     }
   }
-  collectFiltersFromProps(props, containerStyle,);
-  collectTextShadowsForProps(props, containerStyle,);
-  Object.assign(containerStyle, _initialStyle, style2, positionStyle,);
+  collectFiltersFromProps(props, containerStyle2,);
+  collectTextShadowsForProps(props, containerStyle2,);
+  Object.assign(containerStyle2, _initialStyle, style2, positionStyle,);
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
@@ -49160,7 +49733,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       return /* @__PURE__ */ jsx3(Component18, {
         ...rest,
         ref: containerRef,
-        style: containerStyle,
+        style: containerStyle2,
         layoutId,
         transformTemplate: template,
         'data-framer-name': dataFramerName,
@@ -49179,7 +49752,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       return /* @__PURE__ */ jsx3(FitText, {
         ...rest,
         ref: containerRef,
-        style: containerStyle,
+        style: containerStyle2,
         layoutId,
         viewBox,
         viewBoxScale,
@@ -49193,7 +49766,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   return /* @__PURE__ */ jsx3(Component18, {
     ...rest,
     ref: containerRef,
-    style: containerStyle,
+    style: containerStyle2,
     layoutId,
     transformTemplate: template,
     'data-framer-name': dataFramerName,
@@ -52310,6 +52883,7 @@ export {
   withPerformanceMarks,
   withShape,
   withStyleAppearEffect,
+  withTickerFX,
   withV1StrokeFX,
   withVariantAppearEffect,
   withVariantFX,
