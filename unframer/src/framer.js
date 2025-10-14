@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.INN3QSKB.mjs
+// /:https://app.framerstatic.com/framer.4UJ3BCAV.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -24280,7 +24280,27 @@ var Layer = /* @__PURE__ */ (() => {
   __publicField(Layer2, 'defaultProps', {},);
   return Layer2;
 })();
-var TickerItemContext = /* @__PURE__ */ createContext(void 0,);
+function flattenChildrenToTickerItems(children,) {
+  const result = [];
+  Children.forEach(children, (child) => {
+    if (isValidElement(child,) && child.type === Fragment) {
+      result.push(...flattenChildrenToTickerItems(child.props.children,),);
+    } else {
+      result.push(child,);
+    }
+  },);
+  return result;
+}
+var TickerContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext(null,);
+  Context2.displayName = 'TickerContext';
+  return Context2;
+})();
+var TickerItemContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext(void 0,);
+  Context2.displayName = 'TickerItemContext';
+  return Context2;
+})();
 function TickerItem({
   offset,
   axis,
@@ -24290,7 +24310,9 @@ function TickerItem({
   bounds,
   inset: inset2,
   alignItems,
-  itemSize = 'auto',
+  reproject = true,
+  size = 'auto',
+  crossSize = 'fit-content',
   ...props
 },) {
   const ref = useRef3(null,);
@@ -24299,8 +24321,13 @@ function TickerItem({
     end,
   } = bounds;
   const transform2 = useTransform(() => {
+    if (!reproject) {
+      return 0;
+    }
     const currentOffset = offset.get();
-    if (!start2 && !end || !listSize) return 0;
+    if (!start2 && !end || !listSize) {
+      return 0;
+    }
     if (currentOffset + end <= -inset2) {
       return listSize;
     }
@@ -24309,34 +24336,32 @@ function TickerItem({
   const itemOffset = useTransform(() => {
     const currentOffset = offset.get();
     const currentTransform = transform2.get();
-    if (!start2 && !end || !listSize) return 0;
+    if (!start2 && !end || !listSize) {
+      return 0;
+    }
     return currentOffset + start2 + currentTransform;
   },);
-  const itemWrapperOffAxisSize = alignItems === 'stretch' ? '100%' : 'fit-content';
+  const itemWrapperOffAxisSize = alignItems === 'stretch' ? '100%' : crossSize;
   const isClone = cloneIndex !== void 0;
   return /* @__PURE__ */ jsx3(TickerItemContext.Provider, {
     value: {
       offset: itemOffset,
     },
-    children: /* @__PURE__ */ jsx3(LayoutGroup, {
-      inherit: 'id',
-      id: isClone ? `clone-${cloneIndex}` : void 0,
-      children: /* @__PURE__ */ jsx3(motion.li, {
-        ref,
-        ...props,
-        className: cloneIndex === void 0 ? 'ticker-item' : 'clone-item',
-        style: {
-          flexGrow: 0,
-          flexShrink: 0,
-          flexBasis: itemSize === 'fill' ? '100%' : void 0,
-          display: itemSize === 'fill' ? 'flex' : void 0,
-          height: axis === 'x' ? itemWrapperOffAxisSize : void 0,
-          width: axis === 'y' ? itemWrapperOffAxisSize : void 0,
-          x: axis === 'x' ? transform2 : 0,
-          y: axis === 'y' ? transform2 : 0,
-        },
-        'aria-hidden': isClone ? true : void 0,
-      },),
+    children: /* @__PURE__ */ jsx3(motion.li, {
+      ref,
+      ...props,
+      className: cloneIndex === void 0 ? 'ticker-item' : 'clone-item',
+      style: {
+        flexGrow: 0,
+        flexShrink: 0,
+        flexBasis: size === 'fill' ? '100%' : void 0,
+        display: size === 'fill' ? 'flex' : void 0,
+        height: axis === 'x' ? itemWrapperOffAxisSize : void 0,
+        width: axis === 'y' ? itemWrapperOffAxisSize : void 0,
+        x: axis === 'x' ? transform2 : 0,
+        y: axis === 'y' ? transform2 : 0,
+      },
+      'aria-hidden': isClone ? true : void 0,
     },),
   },);
 }
@@ -24344,7 +24369,9 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
   const isFocusTrapped = useRef3(false,);
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
     let detectionEnabled = false;
     const abortController = new AbortController();
     const eventOptions = {
@@ -24362,6 +24389,9 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
     let focusIndex = 0;
     const applyFocusOffset = () => {
       const nextFocusableElement = focusableElements2[focusIndex];
+      if (!nextFocusableElement) {
+        return;
+      }
       nextFocusableElement.focus();
       focusOffset.set(-nextFocusableElement[offsetProp],);
       container[scrollProp] = 0;
@@ -24403,15 +24433,20 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       applyFocusOffset();
     };
     const startFocusTrap = () => {
-      if (isFocusTrapped.current) return;
-      setHasFocus(true,);
-      isFocusTrapped.current = true;
+      if (isFocusTrapped.current) {
+        return;
+      }
       focusableElements2 = Array.from(
         container.querySelectorAll(
           '.ticker-item a, .ticker-item button, .ticker-item input, .ticker-item textarea, .ticker-item select, .ticker-item [tabindex]:not([tabindex="-1"]), .ticker-item [contenteditable="true"]',
         ),
       ).filter(isHTMLElement,);
       focusIndex = 0;
+      if (!focusableElements2.length) {
+        return;
+      }
+      setHasFocus(true,);
+      isFocusTrapped.current = true;
       applyFocusOffset();
       window.addEventListener('focus', detectTrapEnd, eventOptionsWithCapture,);
       window.addEventListener('blur', detectTrapEnd, eventOptionsWithCapture,);
@@ -24423,7 +24458,9 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       }
     };
     const endFocusTrap = () => {
-      if (!isFocusTrapped.current) return;
+      if (!isFocusTrapped.current) {
+        return;
+      }
       isFocusTrapped.current = false;
       setHasFocus(false,);
       offset.set(focusOffset.get(),);
@@ -24435,26 +24472,32 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       const {
         target,
       } = event;
-      if (!isHTMLElement(target,)) return;
+      if (!isHTMLElement(target,)) {
+        return;
+      }
       if (!isFocusTrapped.current) {
         startFocusTrap();
       }
     };
     const detectFocusTrapEnable = () => {
-      if (detectionEnabled) return;
+      if (detectionEnabled) {
+        return;
+      }
       detectionEnabled = true;
       container.addEventListener('focus', handleFocus, eventOptionsWithCapture,);
       window.addEventListener('pointermove', handlePointerMove, eventOptions,);
     };
     const handlePointerMove = () => {
-      if (!detectionEnabled) return;
+      if (!detectionEnabled) {
+        return;
+      }
       detectionEnabled = false;
       container.removeEventListener('focus', handleFocus, true,);
       window.removeEventListener('pointermove', handlePointerMove, eventOptions,);
     };
     const handleAriaHiddenClicks = (event) => {
       const target = event.target;
-      const ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
+      let ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
       if (ariaHiddenAncestor) {
         ariaHiddenAncestor.removeAttribute('aria-hidden',);
       }
@@ -24500,7 +24543,7 @@ var alignAlias = {
   start: 'flex-start',
   end: 'flex-end',
 };
-function Ticker({
+function TickerComponent({
   items,
   velocity = 50,
   hoverFactor = 1,
@@ -24510,56 +24553,73 @@ function Ticker({
   offset,
   isStatic = false,
   itemSize = 'auto',
+  _itemCrossSize: itemCrossSize = 'fit-content',
   overflow = false,
+  loop = true,
+  children,
+  as = 'div',
   ...props
-},) {
+}, ref,) {
   const [state, setState,] = useState({
     visibleLength: 0,
     inset: 0,
     totalItemLength: 0,
+    containerLength: 0,
     itemPositions: [],
+    isMeasured: false,
   },);
   const alignItems = alignAlias[align] || align;
   if (isStatic) {
     const renderedOffset2 = useMotionValue(0,);
     return /* @__PURE__ */ jsx3(ListView, {
       containerProps: props,
+      containerRef: ref,
+      children,
       gap,
       axis,
       alignItems,
       renderedOffset: renderedOffset2,
       items,
       itemSize,
+      itemCrossSize,
       state,
       overflow,
       isStatic: true,
+      as,
     },);
   }
   const [hasFocus, setHasFocus,] = useState(false,);
   const velocityFactor = useMotionValue(1,);
   const defaultOffset22 = useMotionValue(0,);
   offset ?? (offset = defaultOffset22);
-  const wrappedOffset = useTransform(() => wrap(-state.totalItemLength - gap - state.inset, -state.inset, offset.get(),));
+  const wrappedOffset = useTransform(() => {
+    return wrap(-state.totalItemLength - gap - state.inset, -state.inset, offset.get(),);
+  },);
   const focusOffset = useMotionValue(0,);
-  const renderedOffset = hasFocus ? focusOffset : wrappedOffset;
-  const containerRef = useRef3(null,);
+  const renderedOffset = hasFocus ? focusOffset : loop ? wrappedOffset : offset;
+  const internalContainerRef = useRef3(null,);
+  const containerRef = useComposedRefs(ref, internalContainerRef,);
   const listRef = useRef3(null,);
-  const isInViewport = useInView(containerRef, {
+  const isInViewport = useInView(internalContainerRef, {
     margin: '100px',
   },);
   const isPageInView = usePageInView();
   const isInView = isInViewport && isPageInView;
   const isReducedMotion = useReducedMotion();
   const updateMeasurements = () => {
-    if (!containerRef.current || !listRef.current) return;
+    if (!internalContainerRef.current || !listRef.current) {
+      return;
+    }
     const viewportLengthProp = axis === 'x' ? 'innerWidth' : 'innerHeight';
     const lengthProp = axis === 'x' ? 'offsetWidth' : 'offsetHeight';
     const insetProp = axis === 'x' ? 'offsetLeft' : 'offsetTop';
     const paddingStartProp = axis === 'x' ? 'paddingLeft' : 'paddingTop';
-    const container = containerRef.current;
+    const container = internalContainerRef.current;
     const list = listRef.current;
     const allItems = list.querySelectorAll('.ticker-item',);
-    if (!allItems.length) return;
+    if (!allItems.length) {
+      return;
+    }
     let haveItemSizesChanged = false;
     const itemPositions = [];
     for (let i = 0; i < allItems.length; i++) {
@@ -24575,13 +24635,8 @@ function Ticker({
         haveItemSizesChanged = true;
       }
     }
-    const visibleLength = overflow ? window[viewportLengthProp] : (
-      /**
-       * Cap to viewport size to prevent infinite or wasteful cloning in the event that the
-       * container width is reactive to the number of children rendered within it.
-       */
-      Math.min(container[lengthProp], window[viewportLengthProp],)
-    );
+    const containerLength = Math.min(container[lengthProp], window[viewportLengthProp],);
+    const visibleLength = overflow ? window[viewportLengthProp] : containerLength;
     const totalItemLength = calcTotalItemLength(itemPositions,);
     const computedContainerStyle = window.getComputedStyle(container,);
     const containerPaddingStart = parseInt(computedContainerStyle[paddingStartProp] ?? 0,);
@@ -24594,14 +24649,18 @@ function Ticker({
         itemPositions,
         totalItemLength,
         inset: inset2,
+        containerLength,
+        isMeasured: true,
       },);
     }
   };
   useIsomorphicLayoutEffect(() => {
-    if (!isInView || !containerRef.current) return;
+    if (!isInView || !internalContainerRef.current) {
+      return;
+    }
     updateMeasurements();
     const trackViewport = overflow ? resize(updateMeasurements,) : void 0;
-    const trackContainer = resize(containerRef.current, updateMeasurements,);
+    const trackContainer = resize(internalContainerRef.current, updateMeasurements,);
     return () => {
       trackViewport == null ? void 0 : trackViewport();
       trackContainer();
@@ -24617,60 +24676,83 @@ function Ticker({
       : noop,
   );
   const cloneCount = useMemo2(() => {
-    if (!isMeasured || !state.visibleLength) return 0;
+    if (!isMeasured || !state.visibleLength) {
+      return 0;
+    }
     return calcNumClones(state.visibleLength, state.itemPositions, gap,);
   }, [isMeasured, state,],);
   const totalListSize = state.totalItemLength === 0 ? 0 : (state.totalItemLength + gap) * (cloneCount + 1);
-  const clonedItems = [];
-  for (let i = 0; i < cloneCount; i++) {
-    items.forEach((item, itemIndex,) => {
-      const originalBounds = state.itemPositions[itemIndex];
-      const cloneOffset = (state.totalItemLength + gap) * (i + 1);
-      const cloneBounds = originalBounds
-        ? {
-          start: originalBounds.start + cloneOffset,
-          end: originalBounds.end + cloneOffset,
-        }
-        : defaultBounds;
-      clonedItems.push(/* @__PURE__ */ jsx3(TickerItem, {
-        offset: renderedOffset,
-        axis,
-        listSize: totalListSize,
-        cloneIndex: itemIndex,
-        bounds: cloneBounds,
-        inset: state.inset,
-        alignItems,
-        itemSize,
-        children: item,
-      }, `clone-${i}-${itemIndex}`,),);
-    },);
+  const clonedItemGroups = [];
+  if (loop) {
+    for (let i = 0; i < cloneCount; i++) {
+      const clonedItems = [];
+      items.forEach((item, itemIndex,) => {
+        const originalBounds = state.itemPositions[itemIndex];
+        const cloneOffset = (state.totalItemLength + gap) * (i + 1);
+        const cloneBounds = originalBounds
+          ? {
+            start: originalBounds.start + cloneOffset,
+            end: originalBounds.end + cloneOffset,
+          }
+          : defaultBounds;
+        clonedItems.push(/* @__PURE__ */ jsx3(TickerItem, {
+          offset: renderedOffset,
+          axis,
+          listSize: totalListSize,
+          cloneIndex: itemIndex,
+          bounds: cloneBounds,
+          inset: state.inset,
+          alignItems,
+          size: itemSize,
+          crossSize: itemCrossSize,
+          children: item,
+        }, `clone-${i}-${itemIndex}`,),);
+      },);
+      const id3 = `ticker-group-${i}`;
+      clonedItemGroups.push(/* @__PURE__ */ jsx3(LayoutGroup, {
+        id: id3,
+        children: clonedItems,
+      }, id3,),);
+    }
   }
-  useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus,);
-  return /* @__PURE__ */ jsx3(ListView, {
-    containerProps: props,
-    containerRef,
-    listRef,
-    gap,
-    axis,
-    alignItems,
-    isMeasured,
-    isInView,
-    renderedOffset,
-    items,
-    itemSize,
-    clonedItems,
-    onPointerEnter: () => {
-      animate(velocityFactor, hoverFactor,);
+  useFocusNavigation(internalContainerRef, axis, focusOffset, offset, setHasFocus,);
+  return /* @__PURE__ */ jsx3(TickerContext.Provider, {
+    value: {
+      ...state,
+      gap,
     },
-    onPointerLeave: () => {
-      animate(velocityFactor, 1,);
-    },
-    totalListSize,
-    state,
-    overflow,
+    children: /* @__PURE__ */ jsx3(ListView, {
+      containerProps: props,
+      children,
+      containerRef,
+      listRef,
+      gap,
+      axis,
+      alignItems,
+      isMeasured,
+      isInView,
+      renderedOffset,
+      items,
+      itemSize,
+      itemCrossSize,
+      clonedItems: clonedItemGroups,
+      onPointerEnter: () => {
+        animate(velocityFactor, hoverFactor,);
+      },
+      onPointerLeave: () => {
+        animate(velocityFactor, 1,);
+      },
+      totalListSize,
+      state,
+      overflow,
+      loop,
+      as,
+    },),
   },);
 }
+var Ticker = /* @__PURE__ */ forwardRef(TickerComponent,);
 function ListView({
+  children,
   containerProps,
   containerRef,
   listRef,
@@ -24687,10 +24769,14 @@ function ListView({
   onPointerLeave,
   totalListSize,
   itemSize,
+  itemCrossSize,
   overflow,
   state,
+  loop,
+  as,
 },) {
-  return /* @__PURE__ */ jsx3(motion.div, {
+  const MotionComponent = useMemo2(() => motion.create(as,), [as,],);
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     ...containerProps,
     ref: containerRef,
     style: {
@@ -24700,39 +24786,45 @@ function ListView({
     },
     onPointerEnter,
     onPointerLeave,
-    children: /* @__PURE__ */ jsxs(motion.ul, {
-      ref: listRef,
-      style: {
-        ...listStyle,
-        flexDirection: axis === 'x' ? 'row' : 'column',
-        gap: `${gap}px`,
-        x: axis === 'x' ? renderedOffset : 0,
-        y: axis === 'y' ? renderedOffset : 0,
-        opacity: isMeasured || isStatic ? 1 : 0,
-        alignItems,
-        willChange: isMeasured && isInView ? 'transform' : void 0,
-        width: '100%',
-        height: '100%',
-        maxHeight: '100%',
-        maxWidth: '100%',
-      },
-      children: [
-        items.map((item, index,) =>
-          /* @__PURE__ */ jsx3(TickerItem, {
-            axis,
-            offset: renderedOffset,
-            listSize: totalListSize,
-            itemIndex: index,
-            bounds: state.itemPositions[index] ?? defaultBounds,
-            inset: state.inset,
-            alignItems,
-            itemSize,
-            children: item,
-          }, 'original-' + index,)
-        ),
-        clonedItems || null,
-      ],
-    },),
+    children: [
+      /* @__PURE__ */ jsxs(motion.ul, {
+        ref: listRef,
+        style: {
+          ...listStyle,
+          flexDirection: axis === 'x' ? 'row' : 'column',
+          gap: `${gap}px`,
+          x: axis === 'x' ? renderedOffset : 0,
+          y: axis === 'y' ? renderedOffset : 0,
+          opacity: isMeasured || isStatic ? 1 : 0,
+          alignItems,
+          willChange: isMeasured && isInView ? 'transform' : void 0,
+          width: '100%',
+          height: '100%',
+          maxHeight: '100%',
+          maxWidth: '100%',
+        },
+        role: 'group',
+        children: [
+          items.map((item, index,) =>
+            /* @__PURE__ */ jsx3(TickerItem, {
+              axis,
+              offset: renderedOffset,
+              listSize: totalListSize,
+              itemIndex: index,
+              bounds: state.itemPositions[index] ?? defaultBounds,
+              inset: state.inset,
+              alignItems,
+              size: itemSize,
+              crossSize: itemCrossSize,
+              reproject: loop,
+              children: item,
+            }, 'original-' + index,)
+          ),
+          clonedItems || null,
+        ],
+      },),
+      children,
+    ],
   },);
 }
 var defaultBounds = {
@@ -24762,60 +24854,124 @@ function getCumulativeOffset(element, axis,) {
   }
   return offset;
 }
-var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
+var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) {
   const {
     children,
     as: asProp,
     tickerEffectVelocity,
     tickerEffectHoverModifier,
-    tickerEffectDirection,
+    tickerEffectAxis,
     tickerEffectDirectionModifier,
     tickerEffectAlign,
     tickerEffectGap,
+    tickerEffectItemSize,
+    tickerEffectItemCrossSize,
+    tickerEffectOverflow,
     ...rest
   } = props;
   const Component18 = asProp ?? motion.div;
   const isStatic = useIsStaticRenderer();
-  const align = tickerEffectAlign ?? 'center';
-  const gap = typeof tickerEffectGap === 'string' ? parseInt(tickerEffectGap,) : 10;
-  const direction = tickerEffectDirection ?? 'row';
   const baseVelocity = tickerEffectVelocity ?? 100;
   const hoverModifier = tickerEffectHoverModifier ?? 1;
   const directionModifier = tickerEffectDirectionModifier ?? 1;
   const velocity = baseVelocity * directionModifier;
-  return /* @__PURE__ */ jsx3(Component18, {
+  return /* @__PURE__ */ jsx3(Ticker, {
     ref,
+    as: Component18,
     ...rest,
-    style: {
-      position: 'relative',
-      ...rest.style,
-    },
-    children: /* @__PURE__ */ jsx3(Ticker, {
-      items: unwrapFragments(children,),
-      gap: isFiniteNumber(gap,) ? gap : 10,
-      axis: direction === 'column' ? 'y' : 'x',
-      align,
-      isStatic,
-      style: {
-        height: '100%',
-        width: '100%',
-      },
-      velocity,
-      hoverFactor: hoverModifier,
-    },),
+    items: flattenChildrenToTickerItems(children,),
+    gap: tickerEffectGap,
+    axis: tickerEffectAxis,
+    align: tickerEffectAlign ?? 'center',
+    isStatic,
+    velocity,
+    hoverFactor: hoverModifier,
+    _itemCrossSize: tickerEffectItemCrossSize,
+    itemSize: tickerEffectItemSize,
+    overflow: tickerEffectOverflow,
   },);
 },);
-function unwrapFragments(children,) {
-  const result = [];
-  Children.forEach(children, (child) => {
-    if (isValidElement(child,) && child.type === Fragment) {
-      result.push(...unwrapFragments(child.props.children,),);
-    } else {
-      result.push(child,);
+var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props, ref,) {
+  const {
+    children,
+    as: asProp,
+    tickerEffectVelocity,
+    tickerEffectHoverModifier,
+    tickerEffectAxis,
+    tickerEffectDirectionModifier,
+    tickerEffectAlign,
+    tickerEffectGap,
+    tickerEffectItemSize,
+    tickerEffectItemCrossSize,
+    tickerEffectOverflow,
+    ...rest
+  } = props;
+  const Component18 = asProp ?? motion.div;
+  const baseVelocity = tickerEffectVelocity ?? 100;
+  const hoverModifier = tickerEffectHoverModifier ?? 1;
+  const directionModifier = tickerEffectDirectionModifier ?? 1;
+  const targetVelocity = baseVelocity * directionModifier;
+  const offsetMotionValue = useMotionValue(0,);
+  const lastDrag = useRef3(0,);
+  const dragMomentum = useRef3(false,);
+  const isHovering = useRef3(false,);
+  useAnimationFrame((_, delta,) => {
+    const velocity = Math.abs(offsetMotionValue.getVelocity(),);
+    const currentTargetVelocity = isHovering.current ? targetVelocity * hoverModifier : targetVelocity;
+    if (performance.now() > lastDrag.current && (!dragMomentum.current || velocity < Math.abs(currentTargetVelocity,))) {
+      const frameOffset = delta / 1e3 * currentTargetVelocity;
+      const updated = offsetMotionValue.get() - frameOffset;
+      if (dragMomentum.current) {
+        offsetMotionValue.stop();
+        dragMomentum.current = false;
+      }
+      offsetMotionValue.set(updated,);
     }
   },);
-  return result;
-}
+  return /* @__PURE__ */ jsx3(Ticker, {
+    ref,
+    as: Component18,
+    ...rest,
+    items: flattenChildrenToTickerItems(children,),
+    gap: tickerEffectGap,
+    axis: tickerEffectAxis,
+    align: tickerEffectAlign ?? 'center',
+    itemSize: tickerEffectItemSize,
+    _itemCrossSize: tickerEffectItemCrossSize,
+    overflow: tickerEffectOverflow,
+    _dragX: tickerEffectAxis === 'x' ? offsetMotionValue : void 0,
+    _dragY: tickerEffectAxis === 'y' ? offsetMotionValue : void 0,
+    offset: offsetMotionValue,
+    drag: tickerEffectAxis,
+    onDragEnd: () => {
+      lastDrag.current = performance.now();
+      dragMomentum.current = true;
+    },
+    onMouseEnter: () => {
+      isHovering.current = true;
+    },
+    onMouseLeave: () => {
+      isHovering.current = false;
+    },
+  },);
+},);
+var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
+  const {
+    tickerEffectDraggable,
+    ...rest
+  } = props;
+  const isStatic = useIsStaticRenderer();
+  if (isStatic || !tickerEffectDraggable) {
+    return /* @__PURE__ */ jsx3(BasicTicker, {
+      ...rest,
+      ref,
+    },);
+  }
+  return /* @__PURE__ */ jsx3(DraggableTicker, {
+    ...rest,
+    ref,
+  },);
+},);
 function manageCache(cache2, maxEntries,) {
   const size = cache2.size;
   if (size < maxEntries) return;
@@ -25479,8 +25635,10 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
       tickerEffectHoverModifier,
       tickerEffectDirectionModifier,
       tickerEffectGap,
-      tickerEffectDirection,
+      tickerEffectAxis,
       tickerEffectAlign,
+      tickerEffectItemSize,
+      tickerEffectItemCrossSize,
     } = props;
     return /* @__PURE__ */ jsx3(Ticker2, {
       ...dataProps,
@@ -25492,8 +25650,10 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
       tickerEffectHoverModifier,
       tickerEffectDirectionModifier,
       tickerEffectGap,
-      tickerEffectDirection,
+      tickerEffectAxis,
       tickerEffectAlign,
+      tickerEffectItemSize,
+      tickerEffectItemCrossSize,
       children,
     },);
   }
@@ -46489,7 +46649,7 @@ function findDuplicateFont(existingFonts, newFont,) {
   }
   return void 0;
 }
-function getCustomFontName(properties,) {
+function getLegacyFontFamilyName(properties,) {
   const {
     font,
   } = properties;
@@ -46528,7 +46688,7 @@ var CustomFontSource = class _CustomFontSource {
     );
     __publicField(this, 'fontFamilies', [],);
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'enableFontImprovements', false,);
+    __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
     __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
   }
   deprecatedImportFonts(assets,) {
@@ -46536,6 +46696,7 @@ var CustomFontSource = class _CustomFontSource {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
+    this.bySelector.clear();
     const fonts = [];
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
@@ -46543,7 +46704,7 @@ var CustomFontSource = class _CustomFontSource {
       }
       const variationAxesData = (_a = asset.properties) == null ? void 0 : _a.font.variationAxes;
       const assetIsVariableFont = Array.isArray(variationAxesData,);
-      const fontName = getCustomFontName(asset.properties,);
+      const fontName = getLegacyFontFamilyName(asset.properties,);
       const fontFamily = this.createFontFamily(fontName,);
       const openTypeData = (_b = asset.properties) == null ? void 0 : _b.font.openTypeData;
       const variant = assetIsVariableFont ? 'variable' : this.inferVariantName(fontName,);
@@ -46562,20 +46723,22 @@ var CustomFontSource = class _CustomFontSource {
       };
       fontFamily.fonts.push(font,);
       this.assetsByFamily.set(fontName, asset,);
+      this.bySelector.set(selector, font,);
       fonts.push(...fontFamily.fonts,);
     }
     return fonts;
   }
   importFonts(assets, enableFontImprovements,) {
     var _a, _b, _c;
-    this.enableFontImprovements = enableFontImprovements;
     if (!enableFontImprovements) {
       return this.deprecatedImportFonts(assets,);
     }
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
+    this.bySelector.clear();
     const fonts = {};
+    const legacyFonts = {};
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
         continue;
@@ -46590,8 +46753,12 @@ var CustomFontSource = class _CustomFontSource {
       const openTypeData = asset.properties.font.openTypeData;
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const ownerType = getAssetOwnerType(asset,);
-      const legacyFontFamilyName = getCustomFontName(asset.properties,);
       const selector = _CustomFontSource.createSelector(fontFamily.name, variant,);
+      const legacyFontFamilyName = getLegacyFontFamilyName(asset.properties,);
+      const legacyFontSelector = _CustomFontSource.createLegacySelector(legacyFontFamilyName,);
+      const cssFamilyName = enableFontImprovements
+        ? _CustomFontSource.cssFontFamilyFromSelector(selector,)
+        : _CustomFontSource.cssFontFamilyFromSelector(legacyFontSelector,);
       const font = {
         assetKey: asset.key,
         family: fontFamily,
@@ -46603,14 +46770,15 @@ var CustomFontSource = class _CustomFontSource {
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validateVariationAxes((_a = asset.properties) == null ? void 0 : _a.font.variationAxes,),
         owner: ownerType,
-        legacyFontSelector: _CustomFontSource.createLegacySelector(legacyFontFamilyName,),
-        cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(selector,),
+        legacyFontSelector,
+        cssFamilyName,
       };
       const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
       if (duplicateInfo && duplicateInfo.projectDuplicate) {
         if (font.owner === 'project') {
           fontFamily.fonts[duplicateInfo.index] = font;
-          fonts[font.selector] = font;
+          fonts[selector] = font;
+          legacyFonts[legacyFontSelector] = font;
         }
       } else if (duplicateInfo) {
         log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
@@ -46619,11 +46787,13 @@ var CustomFontSource = class _CustomFontSource {
         const existingIsWoff2 = ((_c = existingFont.file) == null ? void 0 : _c.endsWith('.woff2',)) ?? false;
         if (newIsWoff2 && !existingIsWoff2) {
           fontFamily.fonts[duplicateInfo.index] = font;
-          fonts[font.selector] = font;
+          fonts[selector] = font;
+          legacyFonts[legacyFontSelector] = font;
         }
       } else {
         fontFamily.fonts.push(font,);
-        fonts[font.selector] = font;
+        fonts[selector] = font;
+        legacyFonts[legacyFontSelector] = font;
       }
       fontFamily.owner = ownerType;
       this.assetsByFamily.set(family, asset,);
@@ -46632,6 +46802,14 @@ var CustomFontSource = class _CustomFontSource {
       if (fontFamily.fonts.length > 0) {
         updateFontRelationships(fontFamily,);
       }
+    }
+    for (const selector in fonts) {
+      if (!fonts[selector]) continue;
+      this.bySelector.set(selector, fonts[selector],);
+    }
+    for (const selector in legacyFonts) {
+      if (!legacyFonts[selector]) continue;
+      this.bySelector.set(selector, legacyFonts[selector],);
     }
     return Object.values(fonts,);
   }
@@ -46702,34 +46880,7 @@ var CustomFontSource = class _CustomFontSource {
   }
   getFontBySelector(selector,) {
     if (!isCustomFontSelector(selector,)) return void 0;
-    const isLegacySelector = isCustomFontSelectorLegacy(selector,);
-    const remainingSelector = isLegacySelector
-      ? selector.slice(customFontSelectorLegacyPrefix.length,)
-      : selector.slice(customFontSelectorPrefixV2.length,);
-    if (!remainingSelector) return void 0;
-    const matchingFonts = [];
-    for (const [familyName, fontFamily,] of this.byFamilyName) {
-      if (remainingSelector.startsWith(familyName,)) {
-        const exactMatches = fontFamily.fonts.filter((font) => {
-          if (isLegacySelector && this.enableFontImprovements) {
-            return font.legacyFontSelector === selector;
-          }
-          return font.selector === selector;
-        },);
-        matchingFonts.push(...exactMatches,);
-      }
-    }
-    if (matchingFonts.length > 0) {
-      if (matchingFonts.length > 1) {
-        const woff2Font = matchingFonts.find((font) => {
-          var _a;
-          return (_a = font.file) == null ? void 0 : _a.endsWith('.woff2',);
-        },);
-        if (woff2Font) return woff2Font;
-      }
-      return matchingFonts[0];
-    }
-    return void 0;
+    return this.bySelector.get(selector,);
   }
   getFontFamilyByName(family,) {
     const foundFontFamily = this.byFamilyName.get(family,);
