@@ -14,14 +14,16 @@ import {
   __toESM,
 } from './framer-chunks/chunk-VUHWYTYT.js';
 
-// /:https://app.framerstatic.com/chunk-WPXZNJRU.mjs
+// /:https://app.framerstatic.com/chunk-QQPGYYDD.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
-import { useCallback as useCallback2, useContext, useId, } from 'react';
-import { Fragment, jsx as jsx3, } from 'react/jsx-runtime';
-import { useMemo as useMemo2, useRef as useRef3, useState, } from 'react';
-import { useInsertionEffect, } from 'react';
+import { jsx, } from 'react/jsx-runtime';
+import { useContext, useId, useInsertionEffect, useRef, } from 'react';
+import { useMemo, } from 'react';
+import { useCallback as useCallback2, } from 'react';
+import { Fragment, } from 'react/jsx-runtime';
+import { useState, } from 'react';
 import { Children, isValidElement, } from 'react';
 import { jsxs, } from 'react/jsx-runtime';
 import { forwardRef, } from 'react';
@@ -3866,7 +3868,6 @@ function attachSpring(value, source, options,) {
     latestValue = v;
     latestSetter = (latest) => set(parseValue(latest, unit,),);
     frame.postRender(startAnimation2,);
-    return value.get();
   }, stopAnimation2,);
   if (isMotionValue(source,)) {
     const removeSourceOnChange = source.on('change', (v) => value.set(parseValue(v, unit,),),);
@@ -4209,36 +4210,6 @@ function composeRefs(...refs) {
 function useComposedRefs(...refs) {
   return React.useCallback(composeRefs(...refs,), refs,);
 }
-function usePresence(subscribe = true,) {
-  const context = useContext(PresenceContext,);
-  if (context === null) return [true, null,];
-  const {
-    isPresent: isPresent2,
-    onExitComplete,
-    register,
-  } = context;
-  const id4 = useId();
-  useEffect(() => {
-    if (subscribe) {
-      return register(id4,);
-    }
-  }, [subscribe,],);
-  const safeToRemove = useCallback2(() => subscribe && onExitComplete && onExitComplete(id4,), [id4, onExitComplete, subscribe,],);
-  return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
-}
-function useIsPresent() {
-  return isPresent(useContext(PresenceContext,),);
-}
-function isPresent(context,) {
-  return context === null ? true : context.isPresent;
-}
-function useConstant(init,) {
-  const ref = useRef3(null,);
-  if (ref.current === null) {
-    ref.current = init();
-  }
-  return ref.current;
-}
 var PopChildMeasure = class extends React.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
@@ -4269,8 +4240,8 @@ function PopChild({
   root,
 },) {
   const id4 = useId();
-  const ref = useRef3(null,);
-  const size = useRef3({
+  const ref = useRef(null,);
+  const size = useRef({
     width: 0,
     height: 0,
     top: 0,
@@ -4313,7 +4284,7 @@ function PopChild({
       }
     };
   }, [isPresent2,],);
-  return jsx3(PopChildMeasure, {
+  return jsx(PopChildMeasure, {
     isPresent: isPresent2,
     childRef: ref,
     sizeRef: size,
@@ -4321,6 +4292,13 @@ function PopChild({
       ref: composedRef,
     },),
   },);
+}
+function useConstant(init,) {
+  const ref = useRef(null,);
+  if (ref.current === null) {
+    ref.current = init();
+  }
+  return ref.current;
 }
 var PresenceChild = ({
   children,
@@ -4336,7 +4314,7 @@ var PresenceChild = ({
   const presenceChildren = useConstant(newChildrenMap,);
   const id4 = useId();
   let isReusedContext = true;
-  let context = useMemo2(() => {
+  let context = useMemo(() => {
     isReusedContext = false;
     return {
       id: id4,
@@ -4361,27 +4339,50 @@ var PresenceChild = ({
       ...context,
     };
   }
-  useMemo2(() => {
+  useMemo(() => {
     presenceChildren.forEach((_, key7,) => presenceChildren.set(key7, false,));
   }, [isPresent2,],);
   React.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
   if (mode === 'popLayout') {
-    children = jsx3(PopChild, {
+    children = jsx(PopChild, {
       isPresent: isPresent2,
       anchorX,
       root,
       children,
     },);
   }
-  return jsx3(PresenceContext.Provider, {
+  return jsx(PresenceContext.Provider, {
     value: context,
     children,
   },);
 };
 function newChildrenMap() {
   return /* @__PURE__ */ new Map();
+}
+function usePresence(subscribe = true,) {
+  const context = useContext(PresenceContext,);
+  if (context === null) return [true, null,];
+  const {
+    isPresent: isPresent2,
+    onExitComplete,
+    register,
+  } = context;
+  const id4 = useId();
+  useEffect(() => {
+    if (subscribe) {
+      return register(id4,);
+    }
+  }, [subscribe,],);
+  const safeToRemove = useCallback2(() => subscribe && onExitComplete && onExitComplete(id4,), [id4, onExitComplete, subscribe,],);
+  return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
+}
+function useIsPresent() {
+  return isPresent(useContext(PresenceContext,),);
+}
+function isPresent(context,) {
+  return context === null ? true : context.isPresent;
 }
 var getChildKey = (child) => child.key || '';
 function onlyElements(children,) {
@@ -4403,10 +4404,10 @@ var AnimatePresence = ({
   root,
 },) => {
   const [isParentPresent, safeToRemove,] = usePresence(propagate,);
-  const presentChildren = useMemo2(() => onlyElements(children,), [children,],);
+  const presentChildren = useMemo(() => onlyElements(children,), [children,],);
   const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey,);
-  const isInitialRender = useRef3(true,);
-  const pendingPresentChildren = useRef3(presentChildren,);
+  const isInitialRender = useRef(true,);
+  const pendingPresentChildren = useRef(presentChildren,);
   const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
   const [diffedChildren, setDiffedChildren,] = useState(presentChildren,);
   const [renderedChildren, setRenderedChildren,] = useState(presentChildren,);
@@ -4450,7 +4451,7 @@ var AnimatePresence = ({
   const {
     forceRender,
   } = useContext(LayoutGroupContext,);
-  return jsx3(Fragment, {
+  return jsx(Fragment, {
     children: renderedChildren.map((child) => {
       const key7 = getChildKey(child,);
       const isPresent2 = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key7,);
@@ -4471,7 +4472,7 @@ var AnimatePresence = ({
           onExitComplete && onExitComplete();
         }
       };
-      return jsx3(PresenceChild, {
+      return jsx(PresenceChild, {
         isPresent: isPresent2,
         initial: !isInitialRender.current || initial ? void 0 : false,
         custom,
@@ -4487,7 +4488,7 @@ var AnimatePresence = ({
 };
 var DeprecatedLayoutGroupContext = createContext(null,);
 function useIsMounted() {
-  const isMounted = useRef3(false,);
+  const isMounted = useRef(false,);
   useIsomorphicLayoutEffect(() => {
     isMounted.current = true;
     return () => {
@@ -4537,7 +4538,7 @@ var LayoutGroup = ({
   const layoutGroupContext = useContext(LayoutGroupContext,);
   const deprecatedLayoutGroupContext = useContext(DeprecatedLayoutGroupContext,);
   const [forceRender, key7,] = useForceUpdate();
-  const context = useRef3(null,);
+  const context = useRef(null,);
   const upstreamId = layoutGroupContext.id || deprecatedLayoutGroupContext;
   if (context.current === null) {
     if (shouldInheritId(inherit,) && upstreamId) {
@@ -4548,11 +4549,11 @@ var LayoutGroup = ({
       group: shouldInheritGroup(inherit,) ? layoutGroupContext.group || nodeGroup() : nodeGroup(),
     };
   }
-  const memoizedContext = useMemo2(() => ({
+  const memoizedContext = useMemo(() => ({
     ...context.current,
     forceRender,
   }), [key7,],);
-  return jsx3(LayoutGroupContext.Provider, {
+  return jsx(LayoutGroupContext.Provider, {
     value: memoizedContext,
     children,
   },);
@@ -4591,7 +4592,7 @@ function LazyMotion({
   strict = false,
 },) {
   const [, setIsLoaded,] = useState(!isLazyBundle(features,),);
-  const loadedRenderer = useRef3(void 0,);
+  const loadedRenderer = useRef(void 0,);
   if (!isLazyBundle(features,)) {
     const {
       renderer,
@@ -4612,7 +4613,7 @@ function LazyMotion({
       },);
     }
   }, [],);
-  return jsx3(LazyContext.Provider, {
+  return jsx(LazyContext.Provider, {
     value: {
       renderer: loadedRenderer.current,
       strict,
@@ -4692,8 +4693,8 @@ function MotionConfig({
     ...config,
   };
   config.isStatic = useConstant(() => config.isStatic);
-  const context = useMemo2(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
-  return jsx3(MotionConfigContext.Provider, {
+  const context = useMemo(() => config, [JSON.stringify(config.transition,), config.transformPagePoint, config.reducedMotion,],);
+  return jsx(MotionConfigContext.Provider, {
     value: context,
     children,
   },);
@@ -4877,7 +4878,7 @@ function useCreateMotionContext(props,) {
     initial,
     animate: animate22,
   } = getCurrentTreeVariants(props, useContext(MotionContext,),);
-  return useMemo2(() => ({
+  return useMemo(() => ({
     initial,
     animate: animate22,
   }), [variantLabelsAsDependency(initial,), variantLabelsAsDependency(animate22,),],);
@@ -4950,7 +4951,7 @@ function copyRawValuesOnly(target, source, props,) {
 function useInitialMotionValues({
   transformTemplate: transformTemplate2,
 }, visualState,) {
-  return useMemo2(() => {
+  return useMemo(() => {
     const state = createHtmlRenderState();
     buildHTMLStyles(state, visualState, transformTemplate2,);
     return Object.assign({}, state.vars, state.style,);
@@ -5047,7 +5048,7 @@ var createSvgRenderState = () => ({
 });
 var isSVGTag = (tag) => typeof tag === 'string' && tag.toLowerCase() === 'svg';
 function useSVGProps(props, visualState, _isStatic, Component33,) {
-  const visualProps = useMemo2(() => {
+  const visualProps = useMemo(() => {
     const state = createSvgRenderState();
     buildSVGAttrs(state, visualState, isSVGTag(Component33,), props.transformTemplate, props.style,);
     return {
@@ -5144,7 +5145,7 @@ function useRender(
   const {
     children,
   } = props;
-  const renderedChildren = useMemo2(() => isMotionValue(children,) ? children.get() : children, [children,],);
+  const renderedChildren = useMemo(() => isMotionValue(children,) ? children.get() : children, [children,],);
   return createElement(Component33, {
     ...elementProps,
     children: renderedChildren,
@@ -5221,7 +5222,7 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   const lazyContext = useContext(LazyContext,);
   const presenceContext = useContext(PresenceContext,);
   const reducedMotionConfig = useContext(MotionConfigContext,).reducedMotion;
-  const visualElementRef = useRef3(null,);
+  const visualElementRef = useRef(null,);
   createVisualElement = createVisualElement || lazyContext.renderer;
   if (!visualElementRef.current && createVisualElement) {
     visualElementRef.current = createVisualElement(Component33, {
@@ -5241,14 +5242,14 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   ) {
     createProjectionNode(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig,);
   }
-  const isMounted = useRef3(false,);
+  const isMounted = useRef(false,);
   useInsertionEffect(() => {
     if (visualElement && isMounted.current) {
       visualElement.update(props, presenceContext,);
     }
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
-  const wantsHandoff = useRef3(
+  const wantsHandoff = useRef(
     Boolean(optimisedAppearId,) && !((_a = window.MotionHandoffIsComplete) == null ? void 0 : _a.call(window, optimisedAppearId,)) &&
       ((_b = window.MotionHasOptimisedAnimation) == null ? void 0 : _b.call(window, optimisedAppearId,)),
   );
@@ -5352,7 +5353,7 @@ function createMotionComponent(
       value: context,
       children: [
         MeasureLayout2 && context.visualElement
-          ? jsx3(MeasureLayout2, {
+          ? jsx(MeasureLayout2, {
             visualElement: context.visualElement,
             ...configAndProps,
           },)
@@ -6452,7 +6453,6 @@ function createAnimationState(visualElement,) {
     getState: () => state,
     reset: () => {
       state = createState();
-      isInitialRender = true;
     },
   };
 }
@@ -7928,7 +7928,7 @@ var MeasureLayoutWithContext = class extends Component2 {
 function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
   const layoutGroup = useContext(LayoutGroupContext,);
-  return jsx3(MeasureLayoutWithContext, {
+  return jsx(MeasureLayoutWithContext, {
     ...props,
     layoutGroup,
     switchLayoutGroup: useContext(SwitchLayoutGroupContext,),
@@ -10054,8 +10054,8 @@ function useScroll({
   ...options
 } = {},) {
   const values = useConstant(createScrollMotionValues,);
-  const scrollAnimation = useRef3(null,);
-  const needsStart = useRef3(false,);
+  const scrollAnimation = useRef(null,);
+  const needsStart = useRef(false,);
   const start2 = useCallback2(() => {
     scrollAnimation.current = scroll((_progress, {
       x,
@@ -10191,7 +10191,7 @@ function useSpring(source, options = {},) {
   return value;
 }
 function useAnimationFrame(callback,) {
-  const initialTimestamp = useRef3(0,);
+  const initialTimestamp = useRef(0,);
   const {
     isStatic,
   } = useContext(MotionConfigContext,);
@@ -10968,7 +10968,7 @@ function useResetProjection() {
   return reset;
 }
 function useCycle(...items) {
-  const index = useRef3(0,);
+  const index = useRef(0,);
   const [item, setItem,] = useState(items[index.current],);
   const runCycle = useCallback2((next2) => {
     index.current = typeof next2 !== 'number' ? wrap(0, items.length, index.current + 1,) : next2;
@@ -11041,7 +11041,7 @@ function useInView(ref, {
 function useInstantTransition() {
   const [forceUpdate, forcedRenderCount,] = useForceUpdate();
   const startInstantLayoutTransition = useInstantLayoutTransition();
-  const unlockOnFrameRef = useRef3(-1,);
+  const unlockOnFrameRef = useRef(-1,);
   useEffect(() => {
     frame.postRender(() =>
       frame.postRender(() => {
@@ -11328,7 +11328,7 @@ function ReorderGroupComponent({
 }, externalRef,) {
   const Component33 = useConstant(() => motion[as]);
   const order = [];
-  const isReordering = useRef3(false,);
+  const isReordering = useRef(false,);
   invariant(Boolean(values,), 'Reorder.Group must be provided a values prop', 'reorder-values',);
   const context = {
     axis,
@@ -11356,11 +11356,11 @@ function ReorderGroupComponent({
   useEffect(() => {
     isReordering.current = false;
   },);
-  return jsx3(Component33, {
+  return jsx(Component33, {
     ...props,
     ref: externalRef,
     ignoreStrict: true,
-    children: jsx3(ReorderContext.Provider, {
+    children: jsx(ReorderContext.Provider, {
       value: context,
       children,
     },),
@@ -11398,7 +11398,7 @@ function ReorderItemComponent({
     registerItem,
     updateOrder,
   } = context;
-  return jsx3(Component33, {
+  return jsx(Component33, {
     drag: axis,
     ...props,
     dragSnapToOrigin: true,
@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4UJ3BCAV.mjs
+// /:https://app.framerstatic.com/framer.OE2ESE6X.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12389,7 +12389,7 @@ function lazy(factory, moduleName = 'default',) {
     if (!LoadedComponent) {
       throw load();
     }
-    return /* @__PURE__ */ jsx3(LoadedComponent, {
+    return /* @__PURE__ */ jsx(LoadedComponent, {
       ref,
       ...props,
     },);
@@ -12556,7 +12556,7 @@ function RouterAPIProvider({
   api,
   children,
 },) {
-  return /* @__PURE__ */ jsx3(RouterContext.Provider, {
+  return /* @__PURE__ */ jsx(RouterContext.Provider, {
     value: api,
     children,
   },);
@@ -12569,10 +12569,10 @@ function RoutesProvider({
   children,
 },) {
   const getRoute = useGetRouteCallback(routes,);
-  const api = useMemo2(() => ({
+  const api = useMemo(() => ({
     getRoute,
   }), [getRoute,],);
-  return /* @__PURE__ */ jsx3(RouterContext.Provider, {
+  return /* @__PURE__ */ jsx(RouterContext.Provider, {
     value: api,
     children,
   },);
@@ -12585,7 +12585,7 @@ function useCurrentRoute() {
   const id3 = (override == null ? void 0 : override.routeId) ?? router.currentRouteId;
   const pathVariables = (override == null ? void 0 : override.routeId) ? override.pathVariables : router.currentPathVariables;
   const route = id3 ? (_a = router.getRoute) == null ? void 0 : _a.call(router, id3,) : void 0;
-  return useMemo2(() => {
+  return useMemo(() => {
     if (!id3 || !route) return void 0;
     return {
       ...route,
@@ -13209,7 +13209,7 @@ function PageEffectsProvider({
   children,
   value,
 },) {
-  return /* @__PURE__ */ jsx3(PageEffectsContext.Provider, {
+  return /* @__PURE__ */ jsx(PageEffectsContext.Provider, {
     value,
     children,
   },);
@@ -13592,7 +13592,7 @@ async function startViewTransition(updateView, effect, signal,) {
 }
 function useViewTransition() {
   const sitePageEffects = usePageEffects();
-  const resolveHasPainted = useRef3(void 0,);
+  const resolveHasPainted = useRef(void 0,);
   useEffect(() => {
     if (resolveHasPainted.current) {
       resolveHasPainted.current();
@@ -13660,7 +13660,7 @@ function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEff
   }, deps,);
 }
 function useMonitorNextPaintAfterRender(label,) {
-  const resolveHasPainted = useRef3(void 0,);
+  const resolveHasPainted = useRef(void 0,);
   useAfterPaintEffect(
     () => {
       if (resolveHasPainted.current) {
@@ -13830,7 +13830,7 @@ var supportsNavigationAPI = /* @__PURE__ */ (() => {
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
-  const viewTransitionReady = useRef3(void 0,);
+  const viewTransitionReady = useRef(void 0,);
   const popStateHandler = useCallback2(async ({
     state,
   },) => {
@@ -14008,8 +14008,8 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
   } catch {}
 }
 function useNativeLoadingSpinner() {
-  const navigationPromise = useRef3(Promise.resolve(),);
-  const navigationController = useRef3();
+  const navigationPromise = useRef(Promise.resolve(),);
+  const navigationController = useRef();
   const navigateListener = useCallback2((navigateEvent) => {
     if (navigateEvent.navigationType === 'traverse' || !navigateEvent.canIntercept) return;
     const controller = navigationController.current;
@@ -14615,7 +14615,7 @@ function renderPage(Page4, defaultPageStyle,) {
     style: defaultPageStyle,
     'data-framer-root': '',
   };
-  return React42.isValidElement(Page4,) ? React42.cloneElement(Page4, props,) : /* @__PURE__ */ jsx3(Page4, {
+  return React42.isValidElement(Page4,) ? React42.cloneElement(Page4, props,) : /* @__PURE__ */ jsx(Page4, {
     ...props,
   },);
 }
@@ -18085,7 +18085,7 @@ addScaleCorrector({
 function MotionSetup({
   children,
 },) {
-  return /* @__PURE__ */ jsx3(Fragment, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children,
   },);
 }
@@ -18169,11 +18169,11 @@ function LayoutIdProvider({
 },) {
   const context = useContext(LayoutIdContext,);
   if (context.top) {
-    return /* @__PURE__ */ jsx3(Fragment, {
+    return /* @__PURE__ */ jsx(Fragment, {
       children,
     },);
   }
-  const cache2 = useRef3({
+  const cache2 = useRef({
     // When we provide a layoutId for a node based on it's first
     // duplicatedFrom id, we save it's layoutId mapped to it's actual id.
     // Future screen's nodes will check this cache first, to see if they've
@@ -18199,7 +18199,7 @@ function LayoutIdProvider({
       byName: {},
     },
   },);
-  const screen = useRef3({
+  const screen = useRef({
     byId: {},
     byName: {},
     byLastId: {},
@@ -18207,7 +18207,7 @@ function LayoutIdProvider({
     byLastName: {},
     byLayoutId: {},
   },);
-  const usedIds = useRef3(/* @__PURE__ */ new Set(),).current;
+  const usedIds = useRef(/* @__PURE__ */ new Set(),).current;
   const getLayoutId = useCallback2(({
     id: id3,
     name,
@@ -18353,13 +18353,13 @@ function LayoutIdProvider({
     };
     usedIds.clear();
   }, [],);
-  const contextValue = useRef3({
+  const contextValue = useRef({
     getLayoutId,
     persistLayoutIdCache,
     top: true,
     enabled: true,
   },).current;
-  return /* @__PURE__ */ jsx3(LayoutIdContext.Provider, {
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
     value: contextValue,
     children,
   },);
@@ -18381,19 +18381,19 @@ function AutomaticLayoutIds({
   ...props
 },) {
   const context = useContext(LayoutIdContext,);
-  const contextValue = useMemo2(() => {
+  const contextValue = useMemo(() => {
     return {
       ...context,
       enabled,
     };
   }, [enabled,],);
-  return /* @__PURE__ */ jsx3(LayoutIdContext.Provider, {
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
     ...props,
     value: contextValue,
   },);
 }
 function useConstant2(init,) {
-  const ref = useRef3(null,);
+  const ref = useRef(null,);
   if (ref.current === null) {
     ref.current = init();
   }
@@ -18449,12 +18449,12 @@ function ErrorPlaceholder(props,) {
   return /* @__PURE__ */ jsxs('div', {
     style: errorStyle,
     children: [
-      /* @__PURE__ */ jsx3('div', {
+      /* @__PURE__ */ jsx('div', {
         className: 'text',
         style: titleStyle,
         children: title,
       },),
-      message && /* @__PURE__ */ jsx3('div', {
+      message && /* @__PURE__ */ jsx('div', {
         className: 'text',
         style: messageStyle,
         children: message,
@@ -18542,7 +18542,7 @@ var ErrorBoundary = class extends Component2 {
   }
   render() {
     if (this.state.lastError) {
-      return /* @__PURE__ */ jsx3(ErrorPlaceholder, {
+      return /* @__PURE__ */ jsx(ErrorPlaceholder, {
         error: this.state.lastError.error.message,
         file: 'Prototype',
       },);
@@ -18636,7 +18636,7 @@ function Device({
     }
     : {};
   const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: {
       ...containerStyle2,
       ...resizeStyles,
@@ -18648,27 +18648,27 @@ function Device({
       },
       ref: deviceRef,
       children: [
-        handStyle && /* @__PURE__ */ jsx3('div', {
+        handStyle && /* @__PURE__ */ jsx('div', {
           style: handStyle,
         },),
-        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx3('div', {
+        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
           style: deviceImageStyle,
         },),
-        /* @__PURE__ */ jsx3('div', {
+        /* @__PURE__ */ jsx('div', {
           style: {
             ...screenStyle,
             pointerEvents: void 0,
             backgroundColor: children ? screenBackground : screenStyle.backgroundColor,
           },
           ref: screenRef,
-          children: /* @__PURE__ */ jsx3(MotionConfig, {
+          children: /* @__PURE__ */ jsx(MotionConfig, {
             transformPagePoint: invertScale2,
-            children: /* @__PURE__ */ jsx3(ErrorBoundary, {
+            children: /* @__PURE__ */ jsx(ErrorBoundary, {
               children,
             },),
           },),
         },),
-        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx3('div', {
+        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
           style: deviceImageStyle,
         },),
       ],
@@ -20094,12 +20094,12 @@ var ProvideParentSize = (props) => {
   }), [getParentWidth(parentSize,), getParentHeight(parentSize,),],);
   if (currentParentSize === 1) {
     return children
-      ? /* @__PURE__ */ jsx3(Fragment, {
+      ? /* @__PURE__ */ jsx(Fragment, {
         children,
       },)
       : null;
   }
-  return /* @__PURE__ */ jsx3(ConstraintsContext.Provider, {
+  return /* @__PURE__ */ jsx(ConstraintsContext.Provider, {
     value,
     children,
   },);
@@ -20111,7 +20111,7 @@ function getParentHeight(parentSize,) {
   return isSize(parentSize,) ? parentSize.height : parentSize;
 }
 function useProvideParentSize(node, parentSize,) {
-  return /* @__PURE__ */ jsx3(ProvideParentSize, {
+  return /* @__PURE__ */ jsx(ProvideParentSize, {
     parentSize,
     children: node,
   },);
@@ -23248,14 +23248,14 @@ var DeviceCodeComponentInner = ({
     injectComponentCSSRules();
   }, [],);
   if (!deviceOptions) {
-    return /* @__PURE__ */ jsx3('div', {
+    return /* @__PURE__ */ jsx('div', {
       'data-framer-component-type': 'DeviceComponent',
       className: 'no-device',
       style: {
         width: '100%',
         height: '100%',
       },
-      children: /* @__PURE__ */ jsx3(ProvideParentSize, {
+      children: /* @__PURE__ */ jsx(ProvideParentSize, {
         parentSize: 1,
         children,
       },),
@@ -23268,7 +23268,7 @@ var DeviceCodeComponentInner = ({
       height: deviceOptions.screenHeight,
     },)
     : null;
-  return /* @__PURE__ */ jsx3(Device, {
+  return /* @__PURE__ */ jsx(Device, {
     scaleTo: 'dynamic',
     deviceOptions,
     children: resizedChild,
@@ -23451,7 +23451,7 @@ var implementation = {
   },
   useImageElement(image, rect, nodeId,) {
     const src = runtime.useImageSource(image, rect, nodeId,);
-    return useMemo2(() => {
+    return useMemo(() => {
       const element = new Image();
       element.src = src;
       if (image.srcSet) element.srcset = image.srcSet;
@@ -23568,7 +23568,7 @@ function StaticImage({
   return (
     // eslint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
     /* @__PURE__ */
-    jsx3('img', {
+    jsx('img', {
       ref: onImageMount,
       decoding,
       fetchPriority: image.fetchPriority,
@@ -23602,7 +23602,7 @@ function CanvasImage({
     };
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     ref: wrapperRef,
     style: {
       display: 'contents',
@@ -23623,7 +23623,7 @@ function OptimizedCanvasImage({
     const imageStyle = getImageStyle(image,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source,],);
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     ref: wrapperRef,
     style: {
       display: 'contents',
@@ -23666,7 +23666,7 @@ function BackgroundImageComponent({
       imageNode = null;
       needsMotion = true;
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
-      imageNode = /* @__PURE__ */ jsx3(StaticImage, {
+      imageNode = /* @__PURE__ */ jsx(StaticImage, {
         image,
         avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
@@ -23675,12 +23675,12 @@ function BackgroundImageComponent({
       // biome-ignore lint/correctness/useHookAtTopLevel: This is ok since this function acts just like a util to get the source.
       runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)
     ) {
-      imageNode = /* @__PURE__ */ jsx3(OptimizedCanvasImage, {
+      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
         image,
         ...props,
       },);
     } else {
-      imageNode = /* @__PURE__ */ jsx3(CanvasImage, {
+      imageNode = /* @__PURE__ */ jsx(CanvasImage, {
         image,
         ...props,
       },);
@@ -23691,13 +23691,13 @@ function BackgroundImageComponent({
     ...getPlaceholderStyle(),
   };
   return needsMotion || !motionDivToDivBackgroundImage
-    ? /* @__PURE__ */ jsx3(motion.div, {
+    ? /* @__PURE__ */ jsx(motion.div, {
       layoutId,
       style: style2,
       'data-framer-background-image-wrapper': true,
       children: imageNode,
     },)
-    : /* @__PURE__ */ jsx3('div', {
+    : /* @__PURE__ */ jsx('div', {
       style: style2,
       'data-framer-background-image-wrapper': true,
       children: imageNode,
@@ -23758,12 +23758,12 @@ function Border(props,) {
   };
   if (props.border) {
     style2.border = props.border;
-    return /* @__PURE__ */ jsx3(motion.div, {
+    return /* @__PURE__ */ jsx(motion.div, {
       style: style2,
     },);
   }
   collectBorderStyleForProps(props, style2, false,);
-  return /* @__PURE__ */ jsx3(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     'data-frame-border': true,
     style: style2,
     layoutId,
@@ -24036,7 +24036,7 @@ function useLayoutId2(props, {
     getLayoutId,
     enabled,
   } = useContext(LayoutIdContext,);
-  return useMemo2(() => {
+  return useMemo(() => {
     if (!enabled) return props.layoutId;
     const existingLayoutId = specificLayoutId || props.layoutId;
     if (!existingLayoutId) {
@@ -24132,7 +24132,7 @@ var withMeasuredSize = (Component18) => (props) => {
   const shouldRender = Boolean(size,);
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: {
       width: '100%',
       height: '100%',
@@ -24140,7 +24140,7 @@ var withMeasuredSize = (Component18) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx3(Component18, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component18, {
       ...props,
       width: (size == null ? void 0 : size.width) ?? fallbackWidth,
       height: (size == null ? void 0 : size.height) ?? fallbackHeight,
@@ -24315,7 +24315,7 @@ function TickerItem({
   crossSize = 'fit-content',
   ...props
 },) {
-  const ref = useRef3(null,);
+  const ref = useRef(null,);
   const {
     start: start2,
     end,
@@ -24343,11 +24343,11 @@ function TickerItem({
   },);
   const itemWrapperOffAxisSize = alignItems === 'stretch' ? '100%' : crossSize;
   const isClone = cloneIndex !== void 0;
-  return /* @__PURE__ */ jsx3(TickerItemContext.Provider, {
+  return /* @__PURE__ */ jsx(TickerItemContext.Provider, {
     value: {
       offset: itemOffset,
     },
-    children: /* @__PURE__ */ jsx3(motion.li, {
+    children: /* @__PURE__ */ jsx(motion.li, {
       ref,
       ...props,
       className: cloneIndex === void 0 ? 'ticker-item' : 'clone-item',
@@ -24366,7 +24366,7 @@ function TickerItem({
   },);
 }
 function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus,) {
-  const isFocusTrapped = useRef3(false,);
+  const isFocusTrapped = useRef(false,);
   useEffect(() => {
     const container = containerRef.current;
     if (!container) {
@@ -24571,7 +24571,7 @@ function TickerComponent({
   const alignItems = alignAlias[align] || align;
   if (isStatic) {
     const renderedOffset2 = useMotionValue(0,);
-    return /* @__PURE__ */ jsx3(ListView, {
+    return /* @__PURE__ */ jsx(ListView, {
       containerProps: props,
       containerRef: ref,
       children,
@@ -24597,9 +24597,9 @@ function TickerComponent({
   },);
   const focusOffset = useMotionValue(0,);
   const renderedOffset = hasFocus ? focusOffset : loop ? wrappedOffset : offset;
-  const internalContainerRef = useRef3(null,);
+  const internalContainerRef = useRef(null,);
   const containerRef = useComposedRefs(ref, internalContainerRef,);
-  const listRef = useRef3(null,);
+  const listRef = useRef(null,);
   const isInViewport = useInView(internalContainerRef, {
     margin: '100px',
   },);
@@ -24675,7 +24675,7 @@ function TickerComponent({
       }
       : noop,
   );
-  const cloneCount = useMemo2(() => {
+  const cloneCount = useMemo(() => {
     if (!isMeasured || !state.visibleLength) {
       return 0;
     }
@@ -24695,7 +24695,7 @@ function TickerComponent({
             end: originalBounds.end + cloneOffset,
           }
           : defaultBounds;
-        clonedItems.push(/* @__PURE__ */ jsx3(TickerItem, {
+        clonedItems.push(/* @__PURE__ */ jsx(TickerItem, {
           offset: renderedOffset,
           axis,
           listSize: totalListSize,
@@ -24709,19 +24709,19 @@ function TickerComponent({
         }, `clone-${i}-${itemIndex}`,),);
       },);
       const id3 = `ticker-group-${i}`;
-      clonedItemGroups.push(/* @__PURE__ */ jsx3(LayoutGroup, {
+      clonedItemGroups.push(/* @__PURE__ */ jsx(LayoutGroup, {
         id: id3,
         children: clonedItems,
       }, id3,),);
     }
   }
   useFocusNavigation(internalContainerRef, axis, focusOffset, offset, setHasFocus,);
-  return /* @__PURE__ */ jsx3(TickerContext.Provider, {
+  return /* @__PURE__ */ jsx(TickerContext.Provider, {
     value: {
       ...state,
       gap,
     },
-    children: /* @__PURE__ */ jsx3(ListView, {
+    children: /* @__PURE__ */ jsx(ListView, {
       containerProps: props,
       children,
       containerRef,
@@ -24775,7 +24775,7 @@ function ListView({
   loop,
   as,
 },) {
-  const MotionComponent = useMemo2(() => motion.create(as,), [as,],);
+  const MotionComponent = useMemo(() => motion.create(as,), [as,],);
   return /* @__PURE__ */ jsxs(MotionComponent, {
     ...containerProps,
     ref: containerRef,
@@ -24806,7 +24806,7 @@ function ListView({
         role: 'group',
         children: [
           items.map((item, index,) =>
-            /* @__PURE__ */ jsx3(TickerItem, {
+            /* @__PURE__ */ jsx(TickerItem, {
               axis,
               offset: renderedOffset,
               listSize: totalListSize,
@@ -24875,7 +24875,7 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
   const hoverModifier = tickerEffectHoverModifier ?? 1;
   const directionModifier = tickerEffectDirectionModifier ?? 1;
   const velocity = baseVelocity * directionModifier;
-  return /* @__PURE__ */ jsx3(Ticker, {
+  return /* @__PURE__ */ jsx(Ticker, {
     ref,
     as: Component18,
     ...rest,
@@ -24912,9 +24912,9 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
   const directionModifier = tickerEffectDirectionModifier ?? 1;
   const targetVelocity = baseVelocity * directionModifier;
   const offsetMotionValue = useMotionValue(0,);
-  const lastDrag = useRef3(0,);
-  const dragMomentum = useRef3(false,);
-  const isHovering = useRef3(false,);
+  const lastDrag = useRef(0,);
+  const dragMomentum = useRef(false,);
+  const isHovering = useRef(false,);
   useAnimationFrame((_, delta,) => {
     const velocity = Math.abs(offsetMotionValue.getVelocity(),);
     const currentTargetVelocity = isHovering.current ? targetVelocity * hoverModifier : targetVelocity;
@@ -24928,7 +24928,7 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
       offsetMotionValue.set(updated,);
     }
   },);
-  return /* @__PURE__ */ jsx3(Ticker, {
+  return /* @__PURE__ */ jsx(Ticker, {
     ref,
     as: Component18,
     ...rest,
@@ -24962,12 +24962,12 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   } = props;
   const isStatic = useIsStaticRenderer();
   if (isStatic || !tickerEffectDraggable) {
-    return /* @__PURE__ */ jsx3(BasicTicker, {
+    return /* @__PURE__ */ jsx(BasicTicker, {
       ...rest,
       ref,
     },);
   }
-  return /* @__PURE__ */ jsx3(DraggableTicker, {
+  return /* @__PURE__ */ jsx(DraggableTicker, {
     ...rest,
     ref,
   },);
@@ -25582,7 +25582,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   const motionProps = getMotionProps(propsWithOverrides,);
   const layoutId = useLayoutId2(props,);
   const cursor = getCursorFromEvents(props,);
-  const fallbackRef = useRef3(null,);
+  const fallbackRef = useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
   const dataProps = {
     'data-framer-component-type': props.componentType ?? 'Frame',
@@ -25611,7 +25611,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     /* @__PURE__ */ jsxs(Fragment, {
       children: [
         backgroundImage
-          ? /* @__PURE__ */ jsx3(BackgroundImageComponent, {
+          ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
             alt: props.alt ?? '',
             image: backgroundImage,
             containerSize: rect ?? void 0,
@@ -25620,7 +25620,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
           },)
           : null,
         children,
-        /* @__PURE__ */ jsx3(Border, {
+        /* @__PURE__ */ jsx(Border, {
           ..._border,
           border,
           layoutId,
@@ -25640,7 +25640,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
       tickerEffectItemSize,
       tickerEffectItemCrossSize,
     } = props;
-    return /* @__PURE__ */ jsx3(Ticker2, {
+    return /* @__PURE__ */ jsx(Ticker2, {
       ...dataProps,
       ...motionProps,
       layoutId,
@@ -25678,7 +25678,7 @@ var FrameWithMotion = /* @__PURE__ */ forwardRef(function FrameWithMotion2(props
     visible = true,
   } = props;
   if (!visible) return null;
-  return /* @__PURE__ */ jsx3(VisibleFrame, {
+  return /* @__PURE__ */ jsx(VisibleFrame, {
     ...props,
     ref,
   },);
@@ -25730,7 +25730,7 @@ function EmptyState({
   } = RenderEnvironment;
   const childCount = React42.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
-    return /* @__PURE__ */ jsx3(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       ...size,
       'data-name': 'placeholder',
     },);
@@ -25738,7 +25738,7 @@ function EmptyState({
   if (target !== RenderTarget.canvas) return null;
   if (hide) return null;
   if (childCount !== 0) return null;
-  return /* @__PURE__ */ jsx3(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
     left: 0,
@@ -25748,7 +25748,7 @@ function EmptyState({
       position,
       ...size,
     },
-    children: /* @__PURE__ */ jsx3('div', {
+    children: /* @__PURE__ */ jsx('div', {
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -25767,10 +25767,10 @@ function EmptyState({
           WebkitMaskImage: `linear-gradient(90deg, black, black calc(100% - 12px * ${scaleFactor}), transparent)`,
         },
         children: [
-          /* @__PURE__ */ jsx3(Title, {
+          /* @__PURE__ */ jsx(Title, {
             children: title,
           },),
-          /* @__PURE__ */ jsx3(Description, {
+          /* @__PURE__ */ jsx(Description, {
             children: description,
           },),
         ],
@@ -25782,7 +25782,7 @@ var scaleFactor = 'var(--framerInternalCanvas-canvasPlaceholderContentScaleFacto
 function Title({
   children,
 },) {
-  return /* @__PURE__ */ jsx3('span', {
+  return /* @__PURE__ */ jsx('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -25798,7 +25798,7 @@ function Title({
 function Description({
   children,
 },) {
-  return /* @__PURE__ */ jsx3('span', {
+  return /* @__PURE__ */ jsx('span', {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -25882,7 +25882,7 @@ var SharedLayoutRoot = class extends Component2 {
     }
   }
   render() {
-    return /* @__PURE__ */ jsx3(SharedLayoutContext.Provider, {
+    return /* @__PURE__ */ jsx(SharedLayoutContext.Provider, {
       value: this.sharedLayoutContext,
       children: this.props.children,
     },);
@@ -25894,7 +25894,7 @@ var rootStyles = {
   backgroundColor: 'none',
 };
 function MagicMotionCrossfadeRoot(props,) {
-  return /* @__PURE__ */ jsx3(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     layoutId: TREE_ROOT_ID,
     style: rootStyles,
     children: props.children,
@@ -25905,8 +25905,8 @@ function useMemoOne(factory, inputs,) {
     inputs,
     result: factory(),
   }))[0];
-  const isFirstRun = useRef3(true,);
-  const committed = useRef3(initial,);
+  const isFirstRun = useRef(true,);
+  const committed = useRef(initial,);
   const useCache = isFirstRun.current || Boolean(inputs && committed.current.inputs && isEqual(inputs, committed.current.inputs, false,),);
   const cache2 = useCache ? committed.current : {
     inputs,
@@ -25992,7 +25992,7 @@ function useStableRefWithObserver() {
   });
 }
 function useObserverRef(forwardedRef,) {
-  const fallbackRef = useRef3(null,);
+  const fallbackRef = useRef(null,);
   const createStableRefWithObserver = useStableRefWithObserver();
   return useConstant2(() => {
     if (isMutableRef(forwardedRef,)) return createStableRefWithObserver(forwardedRef,);
@@ -26001,8 +26001,8 @@ function useObserverRef(forwardedRef,) {
   },);
 }
 function useRefEffect(ref, effect, deps,) {
-  const effectRef = useRef3();
-  const depsChangedRef = useRef3();
+  const effectRef = useRef();
+  const depsChangedRef = useRef();
   useMemoOne(() => {
     if (depsChangedRef.current !== void 0) {
       depsChangedRef.current = true;
@@ -26197,7 +26197,7 @@ var LayoutTree = class extends Component2 {
     }
   }
   render() {
-    return /* @__PURE__ */ jsx3(SwitchLayoutGroupContext.Provider, {
+    return /* @__PURE__ */ jsx(SwitchLayoutGroupContext.Provider, {
       value: this.switchLayoutGroupContext,
       children: this.props.children,
     },);
@@ -26205,7 +26205,7 @@ var LayoutTree = class extends Component2 {
 };
 var SharedLayoutTree = (props) => {
   const sharedLayoutContext = React42.useContext(SharedLayoutContext,);
-  return /* @__PURE__ */ jsx3(LayoutTree, {
+  return /* @__PURE__ */ jsx(LayoutTree, {
     ...props,
     sharedLayoutContext,
   },);
@@ -26245,7 +26245,7 @@ var NavigationTargetWrapper = ({
     callbacks.delete(fn,);
   }, [callbacks,/* constant, so should never change */
   ],);
-  const value = useRef3({
+  const value = useRef({
     register,
     deregister,
   },).current;
@@ -26263,7 +26263,7 @@ var NavigationTargetWrapper = ({
     };
   }, [isCurrent, isOverlayed, callbacks,/* constant, so should never change */
   ],);
-  return /* @__PURE__ */ jsx3(NavigationTargetContext.Provider, {
+  return /* @__PURE__ */ jsx(NavigationTargetContext.Provider, {
     value,
     children,
   },);
@@ -26313,14 +26313,14 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
   const {
     persistLayoutIdCache,
   } = useContext(LayoutIdContext,);
-  const previousState = useRef3({
+  const previousState = useRef({
     wasCurrent: void 0,
     wasPrevious: false,
     wasBeingRemoved: false,
     wasReset: true,
     origins: getOriginProps({}, initialProps, transitionProps,),
   },);
-  const viewportRef = useRef3(null,);
+  const viewportRef = useRef(null,);
   const isBeingRemoved = presence !== null && !presence.isPresent;
   if (isCurrent && previousState.current.wasCurrent === void 0) persistLayoutIdCache();
   useEffect(() => {
@@ -26448,7 +26448,7 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
       perspective,
     },
     children: [
-      isLayeredContainer && /* @__PURE__ */ jsx3(FrameWithMotion, {
+      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion, {
         width: '100%',
         height: '100%',
         'data-framer-component-type': 'NavigationContainerBackdrop',
@@ -26465,7 +26465,7 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
         backgroundColor: backdropColor ? backdropColor : 'transparent',
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
-      /* @__PURE__ */ jsx3(FrameWithMotion, {
+      /* @__PURE__ */ jsx(FrameWithMotion, {
         ...layout2,
         ...animations2,
         transition: {
@@ -26492,14 +26492,14 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
         },
         'data-is-present': isPresent2 ? void 0 : false,
         ref: viewportRef,
-        children: /* @__PURE__ */ jsx3(ViewportContext.Provider, {
+        children: /* @__PURE__ */ jsx(ViewportContext.Provider, {
           value: viewportRef,
-          children: /* @__PURE__ */ jsx3(NavigationContainerContext.Provider, {
+          children: /* @__PURE__ */ jsx(NavigationContainerContext.Provider, {
             value: isCurrentTarget,
-            children: /* @__PURE__ */ jsx3(NavigationTargetWrapper, {
+            children: /* @__PURE__ */ jsx(NavigationTargetWrapper, {
               isCurrent: isCurrentTarget,
               isOverlayed,
-              children: /* @__PURE__ */ jsx3(SharedLayoutTree, {
+              children: /* @__PURE__ */ jsx(SharedLayoutTree, {
                 isLead: isCurrent,
                 animatesLayout: !!withMagicMotion,
                 transition,
@@ -27249,7 +27249,7 @@ var Navigation = /* @__PURE__ */ (() => {
         const areMagicMotionLayersPresent = isCurrent ? false : removed;
         const withMagicMotion = ((_a2 = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a2.withMagicMotion) ||
           isCurrent && !!this.state.previousTransition;
-        contentContainers.push(/* @__PURE__ */ jsx3(NavigationContainer, {
+        contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
           id: key7,
           index: visualIndex,
           isInitial,
@@ -27267,7 +27267,7 @@ var Navigation = /* @__PURE__ */ (() => {
           exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
           withMagicMotion,
           areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
-          children: /* @__PURE__ */ jsx3(MagicMotionCrossfadeRoot, {
+          children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
             children: containerContent({
               component,
               transition: historyItem == null ? void 0 : historyItem.transition,
@@ -27276,7 +27276,7 @@ var Navigation = /* @__PURE__ */ (() => {
         }, key7,),);
       }
       const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
-        return /* @__PURE__ */ jsx3(NavigationContainer, {
+        return /* @__PURE__ */ jsx(NavigationContainer, {
           isLayeredContainer: true,
           isCurrent: stackIndex === this.state.currentOverlay,
           position: item.transition.position,
@@ -27296,7 +27296,7 @@ var Navigation = /* @__PURE__ */ (() => {
           },),
         }, item.key,);
       },);
-      return /* @__PURE__ */ jsx3(FrameWithMotion, {
+      return /* @__PURE__ */ jsx(FrameWithMotion, {
         'data-framer-component-type': 'NavigationRoot',
         top: 0,
         left: 0,
@@ -27309,12 +27309,12 @@ var Navigation = /* @__PURE__ */ (() => {
           pointerEvents: void 0,
           ...this.props.style,
         },
-        children: /* @__PURE__ */ jsx3(NavigationContext.Provider, {
+        children: /* @__PURE__ */ jsx(NavigationContext.Provider, {
           value: this,
           children: /* @__PURE__ */ jsxs(IsInitialNavigationContext.Provider, {
             value: isInitial,
             children: [
-              /* @__PURE__ */ jsx3(NavigationContainer, {
+              /* @__PURE__ */ jsx(NavigationContainer, {
                 isLayeredContainer: true,
                 position: void 0,
                 initialProps: {},
@@ -27326,16 +27326,16 @@ var Navigation = /* @__PURE__ */ (() => {
                 backdropColor: void 0,
                 onTapBackdrop: void 0,
                 index: 0,
-                children: /* @__PURE__ */ jsx3(LayoutIdProvider, {
-                  children: /* @__PURE__ */ jsx3(SharedLayoutRoot, {
-                    children: /* @__PURE__ */ jsx3(AnimatePresence, {
+                children: /* @__PURE__ */ jsx(LayoutIdProvider, {
+                  children: /* @__PURE__ */ jsx(SharedLayoutRoot, {
+                    children: /* @__PURE__ */ jsx(AnimatePresence, {
                       presenceAffectsLayout: false,
                       children: contentContainers,
                     },),
                   },),
                 },),
               },),
-              /* @__PURE__ */ jsx3(AnimatePresence, {
+              /* @__PURE__ */ jsx(AnimatePresence, {
                 children: overlayContainers,
               },),
             ],
@@ -27597,7 +27597,7 @@ function NavigationWrapper(props,) {
   React42.useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
-  return /* @__PURE__ */ jsx3(Navigation, {
+  return /* @__PURE__ */ jsx(Navigation, {
     ...props,
     resetProjection,
     skipLayoutAnimation,
@@ -27622,7 +27622,7 @@ var NavigationTransitionType = /* @__PURE__ */ ((NavigationTransitionType2) => {
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
   const InternalWithNavigator = class extends React42.Component {
     render() {
-      return /* @__PURE__ */ jsx3(NavigationContext.Consumer, {
+      return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
         children: (navigation) => {
           const navigate = () => {
             if (navigationTransition === 'goBack') {
@@ -27675,7 +27675,7 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
           } else {
             props.onTap = navigate;
           }
-          return /* @__PURE__ */ jsx3(BaseComponent, {
+          return /* @__PURE__ */ jsx(BaseComponent, {
             ...props,
           },);
         },
@@ -28457,11 +28457,11 @@ function WithDragging(Component18,) {
       originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, originalProps.onMouseWheelEnd,);
       originalProps.left = this.x;
       originalProps.top = this.y;
-      return /* @__PURE__ */ jsx3(DraggingContext.Provider, {
+      return /* @__PURE__ */ jsx(DraggingContext.Provider, {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx3(Component18, {
+        children: /* @__PURE__ */ jsx(Component18, {
           ...originalProps,
         },),
       },);
@@ -28601,10 +28601,10 @@ function WithEvents(BaseComponent,) {
       },);
     }
     render() {
-      return /* @__PURE__ */ jsx3(DraggingContext.Consumer, {
+      return /* @__PURE__ */ jsx(DraggingContext.Consumer, {
         children: (value) => {
           this.shouldCancelTap = value.dragging;
-          return /* @__PURE__ */ jsx3(BaseComponent, {
+          return /* @__PURE__ */ jsx(BaseComponent, {
             ...this.props,
             ref: this.component,
           },);
@@ -28925,7 +28925,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       children: [
         filterElements,
         shadows.length > 1
-          ? /* @__PURE__ */ jsx3('feMerge', {
+          ? /* @__PURE__ */ jsx('feMerge', {
             children: mergeElements,
           },)
           : null,
@@ -28936,22 +28936,22 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       id: maskId.id,
       ...svgRect,
       children: [
-        /* @__PURE__ */ jsx3('rect', {
+        /* @__PURE__ */ jsx('rect', {
           ...svgRect,
           fill: 'white',
         },),
-        /* @__PURE__ */ jsx3('use', {
+        /* @__PURE__ */ jsx('use', {
           href: shapeId.link,
           fill: 'black',
           fillOpacity: fillEnabled ? void 0 : 0,
         },),
       ],
     },);
-    outsetElement = /* @__PURE__ */ jsx3('g', {
+    outsetElement = /* @__PURE__ */ jsx('g', {
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
       mask: maskId.urlLink,
-      children: /* @__PURE__ */ jsx3('use', {
+      children: /* @__PURE__ */ jsx('use', {
         ...svgStrokeAttributes,
         fill: 'black',
         fillOpacity: fillEnabled ? void 0 : 0,
@@ -29002,7 +29002,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       children: [
         filterElements,
         insetShadows.length > 1
-          ? /* @__PURE__ */ jsx3('feMerge', {
+          ? /* @__PURE__ */ jsx('feMerge', {
             children: mergeElements,
           },)
           : null,
@@ -29012,7 +29012,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
     if (needsStrokeClip) {
       clipPath = strokeClipId.urlLink;
     }
-    insetElement = /* @__PURE__ */ jsx3('use', {
+    insetElement = /* @__PURE__ */ jsx('use', {
       fill: 'black',
       fillOpacity: '1',
       filter: insideShadowId.urlLink,
@@ -29031,11 +29031,11 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
 }
 function outerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_outer_shadow' + index,);
-  const filterElements = /* @__PURE__ */ jsx3(OuterShadowFilterElements, {
+  const filterElements = /* @__PURE__ */ jsx(OuterShadowFilterElements, {
     shadow,
     shadowKey,
   }, shadowKey.id + '-filters',);
-  const mergeElement = /* @__PURE__ */ jsx3('feMergeNode', {
+  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', {
     in: shadowKey.id,
   }, shadowKey.id + '-merge',);
   return {
@@ -29053,22 +29053,22 @@ var OuterShadowFilterElements = (props) => {
   const floodId = shadowKey.add('flood',).id;
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx3('feOffset', {
+      /* @__PURE__ */ jsx('feOffset', {
         dx: shadow.x,
         dy: shadow.y,
         in: 'SourceAlpha',
         result: offsetId,
       },),
-      /* @__PURE__ */ jsx3('feGaussianBlur', {
+      /* @__PURE__ */ jsx('feGaussianBlur', {
         stdDeviation: shadow.blur / 2,
         in: offsetId,
         result: blurId,
       },),
-      /* @__PURE__ */ jsx3('feFlood', {
+      /* @__PURE__ */ jsx('feFlood', {
         floodColor: shadow.color,
         result: floodId,
       },),
-      /* @__PURE__ */ jsx3('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         in: floodId,
         in2: blurId,
         operator: 'in',
@@ -29079,11 +29079,11 @@ var OuterShadowFilterElements = (props) => {
 };
 function innerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_inside_shadow' + index,);
-  const filterElements = /* @__PURE__ */ jsx3(InnerShadowFilterElements, {
+  const filterElements = /* @__PURE__ */ jsx(InnerShadowFilterElements, {
     shadow,
     shadowKey,
   }, shadowKey.id + '-filters',);
-  const mergeElement = /* @__PURE__ */ jsx3('feMergeNode', {
+  const mergeElement = /* @__PURE__ */ jsx('feMergeNode', {
     in: shadowKey.id,
   }, shadowKey.id + '-merge',);
   return {
@@ -29102,18 +29102,18 @@ var InnerShadowFilterElements = (props) => {
   const floodId = shadowKey.add('flood',).id;
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx3('feGaussianBlur', {
+      /* @__PURE__ */ jsx('feGaussianBlur', {
         stdDeviation: shadow.blur / 2,
         in: 'SourceAlpha',
         result: blurId,
       },),
-      /* @__PURE__ */ jsx3('feOffset', {
+      /* @__PURE__ */ jsx('feOffset', {
         dx: shadow.x,
         dy: shadow.y,
         in: blurId,
         result: offsetId,
       },),
-      /* @__PURE__ */ jsx3('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         in: offsetId,
         in2: 'SourceAlpha',
         operator: 'arithmetic',
@@ -29121,11 +29121,11 @@ var InnerShadowFilterElements = (props) => {
         k3: '1',
         result: compositeId,
       },),
-      /* @__PURE__ */ jsx3('feFlood', {
+      /* @__PURE__ */ jsx('feFlood', {
         floodColor: shadow.color,
         result: floodId,
       },),
-      /* @__PURE__ */ jsx3('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         in: floodId,
         in2: compositeId,
         operator: 'in',
@@ -29575,11 +29575,11 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         ref: this.setElement,
         className: className2,
         children: [
-          /* @__PURE__ */ jsx3(ProvideParentSize, {
+          /* @__PURE__ */ jsx(ProvideParentSize, {
             parentSize,
             children: this.layoutChildren(),
           },),
-          /* @__PURE__ */ jsx3(Border, {
+          /* @__PURE__ */ jsx(Border, {
             ...this.props,
           },),
         ],
@@ -29603,7 +29603,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         }
       },);
       if (children && children.length === 1 && typeof children[0] === 'string') {
-        children = [/* @__PURE__ */ jsx3(Center, {
+        children = [/* @__PURE__ */ jsx(Center, {
           children,
         }, '0',),];
       }
@@ -29637,7 +29637,7 @@ function Center(props,) {
     justifyContent: 'center',
     fontFamily: 'Helvetica',
   }, props.style || {},);
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: style2,
     children: props.children,
   },);
@@ -29708,12 +29708,12 @@ var Frame = /* @__PURE__ */ (() => {
     const parentSize = useParentSize();
     if (isDeprecatedFrameProps(props,)) {
       const currentParentSize = props.parentSize || deprecatedParentSize(parentSize,);
-      return /* @__PURE__ */ jsx3(DeprecatedFrameWithEvents, {
+      return /* @__PURE__ */ jsx(DeprecatedFrameWithEvents, {
         ...props,
         parentSize: currentParentSize,
       },);
     }
-    return /* @__PURE__ */ jsx3(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       ...props,
       ref,
     },);
@@ -29728,7 +29728,7 @@ function useInfiniteScroll({
   rootMargin = '0px',
   paginationInfo,
 },) {
-  const isVisibleRef = useRef3(false,);
+  const isVisibleRef = useRef(false,);
   const callback = React42.useCallback((entry) => {
     if (!entry.isIntersecting) {
       isVisibleRef.current = false;
@@ -29765,7 +29765,7 @@ function withInfiniteScroll(Component18,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -29795,7 +29795,7 @@ function useWheelScroll(ref, {
   onScroll,
   onScrollEnd,
 },) {
-  const isWheelScrollActive = useRef3(false,);
+  const isWheelScrollActive = useRef(false,);
   const getPointData = useCallback2(() => {
     const point2 = getPoint(offsetX, offsetY,);
     const data2 = {
@@ -30014,7 +30014,7 @@ var Stack = /* @__PURE__ */ (() => {
       if (styleProp == null ? void 0 : styleProp.width) contentWrapperStyle.width = styleProp == null ? void 0 : styleProp.width;
       if (styleProp == null ? void 0 : styleProp.height) contentWrapperStyle.height = styleProp == null ? void 0 : styleProp.height;
     }
-    return /* @__PURE__ */ jsx3(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion, {
       as,
       background: fromCanvasComponent ? void 0 : 'none',
       ...props,
@@ -30024,7 +30024,7 @@ var Stack = /* @__PURE__ */ (() => {
       style: style2,
       className: className2,
       layoutScroll: true,
-      children: /* @__PURE__ */ jsx3(motion.div, {
+      children: /* @__PURE__ */ jsx(motion.div, {
         'data-framer-stack-content-wrapper': true,
         'data-framer-stack-direction-reverse': isReverse,
         'data-framer-stack-gap-enabled': gapEnabled,
@@ -30177,7 +30177,7 @@ function wrapInGapElementForLegacyGap(children, gap, direction, justifyContent, 
     asRecord(gapStyle,)['--stack-gap-x'] = `${isVertical ? 0 : gap}px`;
     asRecord(gapStyle,)['--stack-gap-y'] = `${isVertical ? gap : 0}px`;
   }
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     'data-framer-legacy-stack-gap-enabled': gapEnabled,
     'data-framer-stack-flexbox-gap': useFlexboxGap,
     style: gapStyle,
@@ -30255,7 +30255,7 @@ function PageContainer({
   const wrapperHeight = hasAutoHeight ? 'auto' : '100%';
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
-  return /* @__PURE__ */ jsx3(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
     width: containerWidth,
@@ -30276,7 +30276,7 @@ function PageContainer({
       paddingRight: hasHorizontalGap ? gap : 0,
       paddingBottom: hasVerticalGap ? gap : 0,
     },
-    children: /* @__PURE__ */ jsx3(FrameWithMotion, {
+    children: /* @__PURE__ */ jsx(FrameWithMotion, {
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
       width: wrapperWidth,
@@ -30603,7 +30603,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
       }
     }
     pageEffectValuesRef.current.push(effectDictionary,);
-    return /* @__PURE__ */ jsx3(PageContainer, {
+    return /* @__PURE__ */ jsx(PageContainer, {
       effect: effectDictionary,
       dragEnabled,
       direction,
@@ -30634,7 +30634,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
     onScroll,
     onScrollEnd,
   },);
-  return /* @__PURE__ */ jsx3(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
     perspective: hasEffect(props,) ? 1200 : void 0,
@@ -30665,7 +30665,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
         pointerEvents: (_a = props.style) == null ? void 0 : _a.pointerEvents,
       },
       children: [
-        /* @__PURE__ */ jsx3(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
           size: containerSizeRef.current,
@@ -31614,7 +31614,7 @@ var useUpdateChildSize = ({
   children,
   fromCanvasComponent,
 },) => {
-  return useMemo2(() => {
+  return useMemo(() => {
     return React42.Children.map(children, (child) => {
       if (child === null || typeof child !== 'object' || typeof child.type === 'string') {
         return child;
@@ -31680,10 +31680,10 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
   const defaultY = useMotionValue(typeof contentOffsetY === 'number' ? contentOffsetY : 0,);
   const x = isMotionValue2(contentOffsetX,) ? contentOffsetX : defaultX;
   const y = isMotionValue2(contentOffsetY,) ? contentOffsetY : defaultY;
-  const measuredConstraints = useRef3(null,);
+  const measuredConstraints = useRef(null,);
   const dragControls = useDragControls();
   const isInTarget = useIsInCurrentNavigationTarget();
-  const wasInTargetRef = useRef3(true,);
+  const wasInTargetRef = useRef(true,);
   useInsertionEffect(() => {
     injectComponentCSSRules();
   }, [],);
@@ -31696,7 +31696,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
   const {
     initial,
     prev,
-  } = useRef3({
+  } = useRef({
     initial: {
       x: 0,
       y: 0,
@@ -31707,10 +31707,10 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
     },
   },).current;
   const isPreview = RenderTarget.current() === RenderTarget.preview;
-  const containerFallbackRef = useRef3(null,);
+  const containerFallbackRef = useRef(null,);
   const containerRef = forwardedRef || containerFallbackRef;
-  const contentRef = useRef3(null,);
-  const lastOffsetRef = useRef3(null,);
+  const contentRef = useRef(null,);
+  const lastOffsetRef = useRef(null,);
   function shouldResetScroll(inTarget,) {
     const hasEnteredTarget = inTarget && wasInTargetRef.current === false;
     return resetOffset && hasEnteredTarget;
@@ -31877,7 +31877,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsx3(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion, {
     'data-framer-component-type': 'Scroll',
     background: 'none',
     ...containerProps,
@@ -31929,7 +31929,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
       },
       preserve3d: containerProps.preserve3d,
       children: [
-        /* @__PURE__ */ jsx3(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
             height: isFiniteNumber(containerProps.height,) ? containerProps.height : '100%',
@@ -32386,7 +32386,7 @@ var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(pro
     layoutScroll: true,
     className: cx(className2, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
-      /* @__PURE__ */ jsx3(EmptyState, {
+      /* @__PURE__ */ jsx(EmptyState, {
         children,
         size: {
           width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -32403,12 +32403,12 @@ var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(pro
 var Scroll = /* @__PURE__ */ (() => {
   const ScrollInner = React42.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
-      return /* @__PURE__ */ jsx3(NativeScroll, {
+      return /* @__PURE__ */ jsx(NativeScroll, {
         ref: forwardedRef,
         ...props,
       },);
     } else {
-      return /* @__PURE__ */ jsx3(EmulatedScroll, {
+      return /* @__PURE__ */ jsx(EmulatedScroll, {
         ref: forwardedRef,
         ...props,
       },);
@@ -32577,14 +32577,14 @@ function createData(defaultState2, actions,) {
   const useData = (id3, initialState2,) => {
     const contextId = useContext(DataContext,);
     id3 = id3 || contextId;
-    const store = useMemo2(() => {
+    const store = useMemo(() => {
       if (!stores.has(id3,)) {
         stores.set(id3, createStore(initialState2 || defaultState2, actions,),);
       }
       return stores.get(id3,);
     }, [id3,],);
     const [, notifyUpdates,] = useState(store.getVersion(),);
-    const storeValueAtHookCallTime = useMemo2(() => store.get(), [store,],);
+    const storeValueAtHookCallTime = useMemo(() => store.get(), [store,],);
     useEffect(() => {
       const unsubscribe = store.subscribe(notifyUpdates,);
       if (storeValueAtHookCallTime !== store.get()) {
@@ -32638,7 +32638,7 @@ var DataObserver = class extends Component2 {
       const observer2 = Data.addObserver(d, this.observer,);
       this.observers.push(observer2,);
     },);
-    return /* @__PURE__ */ jsx3(DataObserverContext.Provider, {
+    return /* @__PURE__ */ jsx(DataObserverContext.Provider, {
       value: {
         ...this.state,
       },
@@ -32681,7 +32681,7 @@ function WithOverride(Component18, override,) {
       style: style2,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...rest,
       ...overrideProps,
       _initialStyle: style2,
@@ -32721,7 +32721,7 @@ function cloneChildrenWithProps(children, props, asNode,) {
     return child;
   },);
   if (asNode) return cloned;
-  return /* @__PURE__ */ jsx3(Fragment, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children: cloned,
   },);
 }
@@ -32786,7 +32786,7 @@ function createHook(forwardedRef,) {
     },);
   }
   const cloneAsElement = function cloneAsElement2(children, props,) {
-    return /* @__PURE__ */ jsx3(Fragment, {
+    return /* @__PURE__ */ jsx(Fragment, {
       children: cloneChildrenWithPropsAndRef(children, props,),
     },);
   };
@@ -32848,7 +32848,7 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css22.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
       ref,
     },);
@@ -32933,7 +32933,7 @@ function renderBranchedChildrenFromPropertyOverrides(
       // comparing arrays, so it might not really be an optimization. And since it's just a context, it doesn't
       // affect the size of the generated HTML.
       /* @__PURE__ */
-      jsx3(SSRParentVariantsContext.Provider, {
+      jsx(SSRParentVariantsContext.Provider, {
         value: {
           primaryVariantId,
           variants: new Set(variants,),
@@ -32951,7 +32951,7 @@ function renderBranchedChildrenFromPropertyOverrides(
     const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
     if (hiddenClassNames.length) {
       assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-      element = /* @__PURE__ */ jsx3('div', {
+      element = /* @__PURE__ */ jsx('div', {
         className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
         children: element,
       }, key7,);
@@ -33180,7 +33180,7 @@ function withOptimizedAppearEffect(Component18,) {
       );
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ref,
       ...props,
       ...disabledProps,
@@ -33288,7 +33288,7 @@ var loopOptionsKeys = /* @__PURE__ */ new Set([
   'loopPauseOffscreen',
 ],);
 var useDelay = () => {
-  const timeoutRef = useRef3();
+  const timeoutRef = useRef();
   useEffect(() => {
     return () => {
       clearTimeout(timeoutRef.current,);
@@ -33311,9 +33311,9 @@ function useLoop({
 }, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const values = useConstant2(makeFXValues,);
-  const mirrorStateRef = useRef3(false,);
+  const mirrorStateRef = useRef(false,);
   const delay3 = useDelay();
-  const animationPromiseRef = useRef3(null,);
+  const animationPromiseRef = useRef(null,);
   const animateValues = useCallback2(async () => {
     if (!loop) return;
     const transition = loopTransition || void 0;
@@ -33338,7 +33338,7 @@ function useLoop({
     return animationPromiseRef.current;
   }, [loop, loopRepeatType, loopTransition, shouldReduceMotion,],);
   const [isRunning, setIsRunning,] = useState(false,);
-  const shouldRunRef = useRef3(false,);
+  const shouldRunRef = useRef(false,);
   const animateLoop = useCallback2(async () => {
     if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues();
@@ -33391,7 +33391,7 @@ function useLoop({
   useEffect(() => {
     return () => stop();
   }, [stop,],);
-  const isIntersectingRef = useRef3(false,);
+  const isIntersectingRef = useRef(false,);
   const stopAfterAnimationEnds = useCallback2(async () => {
     if (!animationPromiseRef.current) return;
     await animationPromiseRef.current;
@@ -33411,7 +33411,7 @@ function useLoop({
     enabled: hasLoop && loopPauseOffscreen,
   },);
   const addWillChange = isRunning || !loopPauseOffscreen;
-  return useMemo2(() => {
+  return useMemo(() => {
     return {
       values,
       style: hasLoop && addWillChange ? effectEnabledStyle : effectDisabledStyle,
@@ -33536,7 +33536,7 @@ function usePresenceAnimation(
   const animateConfig = presenceAnimate ?? motionAnimate;
   const exit = presenceExit ?? motionExit;
   const [isPresent2, safeToRemove,] = usePresence();
-  const internalState = useRef3({
+  const internalState = useRef({
     lastPresence: false,
     lastAnimate: animateConfig,
     hasMounted: false,
@@ -33627,7 +33627,7 @@ function usePresenceAnimation(
     );
   },);
   const effectEnabled = enabled && animateConfig;
-  return useMemo2(() => {
+  return useMemo(() => {
     return {
       values: effect.values,
       style: effectEnabled ? effectEnabledStyle : effectDisabledStyle,
@@ -33901,7 +33901,7 @@ function useStyleAppearEffect(options, ref,) {
       effect.values[key7].set(((_a = variants.initial) == null ? void 0 : _a[key7]) ?? defaultFXValues[key7],);
     }
   },);
-  return useMemo2(() => {
+  return useMemo(() => {
     return {
       values: effect.values,
       style: enabled ? effectEnabledStyle : effectDisabledStyle,
@@ -34143,7 +34143,7 @@ var withFX = (Component18) =>
   React42.forwardRef((props, forwardedRef,) => {
     var _a;
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx3(Component18, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...props,
         animate: void 0,
         initial: void 0,
@@ -34153,7 +34153,7 @@ var withFX = (Component18) =>
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     if (disabledProps) {
-      return /* @__PURE__ */ jsx3(Component18, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...props,
         ...disabledProps,
         ref: forwardedRef,
@@ -34248,7 +34248,7 @@ var withFX = (Component18) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -34272,11 +34272,11 @@ function ComponentPresetsProvider({
   presets,
   children,
 },) {
-  const lastPresets = useRef3(presets,);
+  const lastPresets = useRef(presets,);
   if (!isEqual(presets, lastPresets.current, false,)) {
     lastPresets.current = presets;
   }
-  return /* @__PURE__ */ jsx3(Context.Provider, {
+  return /* @__PURE__ */ jsx(Context.Provider, {
     value: lastPresets.current,
     children,
   },);
@@ -34308,7 +34308,7 @@ var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function Comp
     };
   }, [width, height, y,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
-  return /* @__PURE__ */ jsx3(ComponentViewportContext.Provider, {
+  return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
     value: componentViewport,
     children: cloneWithPropsAndRef(children, rest,),
   },);
@@ -34316,7 +34316,7 @@ var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function Comp
 var withGeneratedLayoutId = (Component18) =>
   React42.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -34376,7 +34376,7 @@ function isSuspense426Error(error,) {
 var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
   if (typeof window === 'undefined' || shouldSuspenseBoundariesBeActive) {
-    return /* @__PURE__ */ jsx3('div', {
+    return /* @__PURE__ */ jsx('div', {
       hidden: true,
       dangerouslySetInnerHTML: {
         __html: '<!-- SuspenseThatPreservesDOM fallback rendered -->',
@@ -34385,7 +34385,7 @@ function Suspend() {
   }
   throw suspendPromise;
 }
-var suspend = /* @__PURE__ */ jsx3(Suspend, {},);
+var suspend = /* @__PURE__ */ jsx(Suspend, {},);
 var DisableSuspenseSuspenseThatPreservesDomContext = createContext(false,);
 DisableSuspenseSuspenseThatPreservesDomContext.displayName = 'DisableSuspenseSuspenseThatPreservesDomContext';
 function SuspenseThatPreservesDom({
@@ -34393,24 +34393,24 @@ function SuspenseThatPreservesDom({
 },) {
   const isSuspenseBoundaryDisabled = useContext(DisableSuspenseSuspenseThatPreservesDomContext,);
   if (isSuspenseBoundaryDisabled) {
-    return /* @__PURE__ */ jsx3(Fragment, {
+    return /* @__PURE__ */ jsx(Fragment, {
       children,
     },);
   }
-  return /* @__PURE__ */ jsx3(Suspense2, {
+  return /* @__PURE__ */ jsx(Suspense2, {
     fallback: suspend,
     children,
   },);
 }
 function NullFallback() {
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     hidden: true,
     dangerouslySetInnerHTML: {
       __html: '<!-- Code boundary fallback rendered -->',
     },
   },);
 }
-var nullFallback = /* @__PURE__ */ jsx3(NullFallback, {},);
+var nullFallback = /* @__PURE__ */ jsx(NullFallback, {},);
 function collectErrorToAnalytics(error, errorInfo,) {
   if (!isWindow) return;
   if (Math.random() > 0.01) return;
@@ -34438,9 +34438,9 @@ function CodeComponentBoundary({
   if (!shouldEnableCodeBoundaries()) {
     return children;
   }
-  return /* @__PURE__ */ jsx3(ServerSideErrorBoundary, {
+  return /* @__PURE__ */ jsx(ServerSideErrorBoundary, {
     fallback,
-    children: /* @__PURE__ */ jsx3(ClientSideErrorBoundary, {
+    children: /* @__PURE__ */ jsx(ClientSideErrorBoundary, {
       fallback,
       getErrorMessage,
       children,
@@ -34482,7 +34482,7 @@ function ServerSideErrorBoundary({
     ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
     // and render the actual error fallback if Suspense activates.
     /* @__PURE__ */
-    jsx3(Suspense2, {
+    jsx(Suspense2, {
       fallback,
       children,
     },)
@@ -34492,7 +34492,7 @@ function ServerSideErrorBoundary({
     // “Why won’t you just render plain children without Suspense?” Because that would cause a hydration mismatch
     // (the server has Suspense, the client doesn’t).
     /* @__PURE__ */
-    jsx3(SuspenseThatPreservesDom, {
+    jsx(SuspenseThatPreservesDom, {
       children,
     },);
 }
@@ -34554,7 +34554,7 @@ function IsExternalComponent({
     nodeId,
     parent,
   }), [scopeId, nodeId, parent,],);
-  return /* @__PURE__ */ jsx3(ExternalComponentContext.Provider, {
+  return /* @__PURE__ */ jsx(ExternalComponentContext.Provider, {
     value: newValue,
     children,
   },);
@@ -34628,7 +34628,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
     // the new boundary.
     isUndefined(scopeId,) || isUndefined(nodeId,)
   ) {
-    return /* @__PURE__ */ jsx3(DeprecatedContainerErrorBoundary, {
+    return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
       children,
     },);
   }
@@ -34641,14 +34641,14 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
     inComponentSlot ?? false,
   );
   if (shouldWrapWithBoundary) {
-    children = /* @__PURE__ */ jsx3(CodeComponentBoundary, {
+    children = /* @__PURE__ */ jsx(CodeComponentBoundary, {
       getErrorMessage: getErrorMessageForComponent.bind(null, scopeId, nodeId,),
       fallback: null,
       children,
     },);
   }
   if (isModuleExternal) {
-    children = /* @__PURE__ */ jsx3(IsExternalComponent, {
+    children = /* @__PURE__ */ jsx(IsExternalComponent, {
       scopeId,
       nodeId,
       children,
@@ -34684,17 +34684,17 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
     isModuleExternal,
     inComponentSlot,
   );
-  return /* @__PURE__ */ jsx3(MotionComponent, {
+  return /* @__PURE__ */ jsx(MotionComponent, {
     layoutId: outerLayoutId,
     ...props,
     ref,
-    children: /* @__PURE__ */ jsx3(ComponentContainerContext.Provider, {
+    children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
       value: true,
-      children: /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+      children: /* @__PURE__ */ jsx(NodeIdContext.Provider, {
         value: nodeId ?? null,
-        children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
+        children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
           enabled: false,
-          children: /* @__PURE__ */ jsx3(LayoutGroup, {
+          children: /* @__PURE__ */ jsx(LayoutGroup, {
             id: layoutId ?? '',
             inherit: 'id',
             children: childrenWithCodeBoundary,
@@ -34730,9 +34730,9 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef((props, r
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
     const Component18 = htmlElementAsMotionComponent(tagName,);
-    return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+    return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx3(Component18, {
+      children: /* @__PURE__ */ jsx(Component18, {
         ...otherProps,
         ref,
         style: props.style,
@@ -34746,9 +34746,9 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef((props, r
       layoutDependency,
       ...plainHTMLRenderableProps
     } = otherProps;
-    return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+    return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx3(Component18, {
+      children: /* @__PURE__ */ jsx(Component18, {
         ...plainHTMLRenderableProps,
         ref,
         style: props.style,
@@ -34799,7 +34799,7 @@ var CustomCursorContextProvider = /* @__PURE__ */ memo2(function CustomCursorLis
   const shouldReduceMotion = useReducedMotionConfig();
   return /* @__PURE__ */ jsxs(CustomCursorContext.Provider, {
     value,
-    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx3(CustomCursorComponent, {},),],
+    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {},),],
   },);
 },);
 var CustomCursorHost =
@@ -34876,8 +34876,8 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
-  const cursorRef = useRef3(null,);
-  const internalState = useRef3({
+  const cursorRef = useRef(null,);
+  const internalState = useRef({
     cursors: {},
     cursorHash: void 0,
   },);
@@ -35015,8 +35015,8 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     placement,
   ],);
   if (!hasHoverCapability || !cursor || !Cursor) return null;
-  return /* @__PURE__ */ jsx3(Suspense2, {
-    children: /* @__PURE__ */ jsx3(Cursor, {
+  return /* @__PURE__ */ jsx(Suspense2, {
+    children: /* @__PURE__ */ jsx(Cursor, {
       transformTemplate: transformTemplate2,
       style: {
         ...staticCursorStyle,
@@ -35240,7 +35240,7 @@ var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
 function ResetOuterLinkContext({
   children,
 },) {
-  return /* @__PURE__ */ jsx3(OuterLinkContext.Provider, {
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
     value: void 0,
     children,
   },);
@@ -35248,14 +35248,14 @@ function ResetOuterLinkContext({
 function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
   const outerLink = useContext(OuterLinkContext,);
   const furthestExternalComponent = useFurthestExternalComponent();
-  const innerLink = useMemo2(() => ({
+  const innerLink = useMemo(() => ({
     scopeId,
     nodeId,
     furthestExternalComponent,
   }), [scopeId, nodeId, furthestExternalComponent,],);
   const router = useRouter();
   const currentRoute = useCurrentRoute();
-  const route = useMemo2(() => {
+  const route = useMemo(() => {
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
     return getRouteFromPageLink(pageLink, router, currentRoute,);
@@ -35341,7 +35341,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       }, childChildren,);
     },);
   }
-  return /* @__PURE__ */ jsx3(OuterLinkContext.Provider, {
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
     value: innerLink,
     children: replacedChildren,
   },);
@@ -36050,7 +36050,7 @@ function Floating({
       ...rest,
       children: [
         safeArea
-          ? /* @__PURE__ */ jsx3('div', {
+          ? /* @__PURE__ */ jsx('div', {
             ref: safeAreaRef,
             style: {
               position: 'absolute',
@@ -36059,7 +36059,7 @@ function Floating({
           },)
           : // biome-ignore lint/a11y/useKeyWithClickEvents: overlays don't support key events yet.
           /* @__PURE__ */
-          jsx3('div', {
+          jsx('div', {
             style: {
               position: 'fixed',
               inset: 0,
@@ -36067,12 +36067,12 @@ function Floating({
             'aria-hidden': true,
             onClick: onDismiss,
           },),
-        /* @__PURE__ */ jsx3(FloatingStackingContext.Provider, {
+        /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
           value: descendantContext,
-          children: /* @__PURE__ */ jsx3(ResetOuterLinkContext, {
-            children: /* @__PURE__ */ jsx3(InjectSelectionStyle, {
+          children: /* @__PURE__ */ jsx(ResetOuterLinkContext, {
+            children: /* @__PURE__ */ jsx(InjectSelectionStyle, {
               triggerId: ((_a = anchorRef.current) == null ? void 0 : _a.id) ?? void 0,
-              children: /* @__PURE__ */ jsx3('div', {
+              children: /* @__PURE__ */ jsx('div', {
                 ref: contentRef,
                 children: childrenWithOrigin(children, origin,),
               },),
@@ -36089,7 +36089,7 @@ var Instance = /* @__PURE__ */ React42.forwardRef(function Instance2({
   ...props
 }, ref,) {
   return Component18
-    ? /* @__PURE__ */ jsx3(Component18, {
+    ? /* @__PURE__ */ jsx(Component18, {
       ...props,
       ref,
     },)
@@ -36150,7 +36150,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
       // This has the caveat that we will slightly modify the DOM, but it appears to be fine in this case.
       // The alternative would be to queue a new task that runs after and then set the innerHTML (= avoids the dummy-div), but that means we'll have DOM -> no DOM -> DOM transitions. With the div, we have DOM -> DOM and remove possible race-conditions.
       /* @__PURE__ */
-      jsx3('div', {
+      jsx('div', {
         style: {
           display: 'contents',
         },
@@ -36246,14 +36246,14 @@ function findAnchorElement(target, withinElement,) {
 function ChildrenCanSuspend({
   children,
 },) {
-  return /* @__PURE__ */ jsx3(SuspenseThatPreservesDom, {
+  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
     children,
   },);
 }
 function withChildrenCanSuspend(Component18,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
-    return /* @__PURE__ */ jsx3(ChildrenCanSuspend, {
-      children: /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
+      children: /* @__PURE__ */ jsx(Component18, {
         ...props,
         ref,
       },),
@@ -36775,7 +36775,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     href,
     activeLocale,
   },);
-  const propsAddedByLink = useMemo2(() => {
+  const propsAddedByLink = useMemo(() => {
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
@@ -37287,7 +37287,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       },)
     );
   };
-  return /* @__PURE__ */ jsx3(motion.form, {
+  return /* @__PURE__ */ jsx(motion.form, {
     ...props,
     onSubmit: stateCanSubmitForm(state,) ? handleSubmit : preventDefault,
     onKeyDown: handleKeyDown,
@@ -37372,7 +37372,7 @@ function EditorBarLauncher({
   const libraryFeatures = useLibraryFeatures();
   const framerSiteId = useContext(FormContext,);
   const enabled = useSyncExternalStore(noOpSubscribe, fast ? isPrioritized : isntPrioritized, getServerSnapshot,);
-  const editorBarFeatures = useMemo2(() => {
+  const editorBarFeatures = useMemo(() => {
     const features = {};
     let key7;
     for (key7 in libraryFeatures) {
@@ -37383,9 +37383,9 @@ function EditorBarLauncher({
     return features;
   }, [libraryFeatures,],);
   if (!EditorBar || !framerSiteId || !enabled) return null;
-  return /* @__PURE__ */ jsx3(IgnoreErrors, {
-    children: /* @__PURE__ */ jsx3(Suspense2, {
-      children: /* @__PURE__ */ jsx3(EditorBar, {
+  return /* @__PURE__ */ jsx(IgnoreErrors, {
+    children: /* @__PURE__ */ jsx(Suspense2, {
+      children: /* @__PURE__ */ jsx(EditorBar, {
         framerSiteId,
         features: editorBarFeatures,
       },),
@@ -37410,8 +37410,8 @@ function setTimezoneAndLocaleForTracking() {
 requestIdleCallback(setTimezoneAndLocaleForTracking,);
 var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, collectionUtils, activeLocale,) => {
   const framerSiteId = useContext(FormContext,);
-  const pageviewEventData = useRef3();
-  const skipFirstPageView = useRef3(true,);
+  const pageviewEventData = useRef();
+  const skipFirstPageView = useRef(true,);
   useEffect(() => {
     function getFullPageviewEventData() {
       if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
@@ -37497,7 +37497,7 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
   window.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
-  const actions = useRef3([],);
+  const actions = useRef([],);
   useLayoutEffect(() => {
     var _a;
     if (!((_a = actions.current) == null ? void 0 : _a.length)) return;
@@ -37519,7 +37519,7 @@ function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
 }
 function useNavigationTransition() {
   const startNativeSpinner = useNativeLoadingSpinner();
-  const navigationController = useRef3(void 0,);
+  const navigationController = useRef(void 0,);
   return useCallback2(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
     var _a, _b;
     const hasUpdateURL = updateURL !== void 0;
@@ -37585,19 +37585,19 @@ function Router({
   const {
     synchronousNavigationOnDesktop,
   } = useLibraryFeatures();
-  const transitionFn = useMemo2(() => {
+  const transitionFn = useMemo(() => {
     if (!synchronousNavigationOnDesktop || !isDesktop()) {
       return startTransition2;
     }
     return (fn) => fn();
   }, [synchronousNavigationOnDesktop,],);
-  const isInitialNavigationRef = useRef3(true,);
-  const currentPathnameWithHashRef = useRef3();
-  const currentRouteRef = useRef3(initialRoute,);
-  const currentPathVariablesRef = useRef3(initialPathVariables,);
-  const currentLocaleIdRef = useRef3(initialLocaleId,);
+  const isInitialNavigationRef = useRef(true,);
+  const currentPathnameWithHashRef = useRef();
+  const currentRouteRef = useRef(initialRoute,);
+  const currentPathVariablesRef = useRef(initialPathVariables,);
+  const currentLocaleIdRef = useRef(initialLocaleId,);
   const currentLocaleId = currentLocaleIdRef.current;
-  const activeLocale = useMemo2(() => {
+  const activeLocale = useMemo(() => {
     return locales.find(({
       id: id3,
     },) => {
@@ -37611,7 +37611,7 @@ function Router({
     if (!adaptLayoutToTextDirection) return;
     document.documentElement.setAttribute('dir', textDirection,);
   }, [textDirection, adaptLayoutToTextDirection,],);
-  const localeInfo = useMemo2(() => {
+  const localeInfo = useMemo(() => {
     return {
       activeLocale,
       locales,
@@ -37835,7 +37835,7 @@ function Router({
     activeLocale,
   );
   const isInitialNavigation = isInitialNavigationRef.current;
-  const api = useMemo2(() => ({
+  const api = useMemo(() => ({
     navigate,
     getRoute,
     currentRouteId,
@@ -37871,18 +37871,18 @@ function Router({
     ...defaultPageStyle,
     display: 'contents',
   }));
-  return /* @__PURE__ */ jsx3(RouterAPIProvider, {
+  return /* @__PURE__ */ jsx(RouterAPIProvider, {
     api,
-    children: /* @__PURE__ */ jsx3(LocaleInfoContext.Provider, {
+    children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
       value: localeInfo,
       children: /* @__PURE__ */ jsxs(LayoutDirectionContext.Provider, {
         value: layoutDirection,
         children: [
-          EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
+          EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
             EditorBar,
             fast: true,
           },),
-          /* @__PURE__ */ jsx3(SynchronousSuspenseErrorBoundary, {
+          /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
             children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
               children: [
                 /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
@@ -37890,13 +37890,13 @@ function Router({
                   defaultPageStyle,
                   forceUpdateKey: dep,
                   children: [
-                    /* @__PURE__ */ jsx3(MarkSuspenseEffects.Start, {},),
-                    /* @__PURE__ */ jsx3(WithLayoutTemplate, {
+                    /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+                    /* @__PURE__ */ jsx(WithLayoutTemplate, {
                       LayoutTemplate,
                       routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
                       style: defaultPageStyle,
                       children: (inLayoutTemplate) => {
-                        return /* @__PURE__ */ jsx3(Fragment, {
+                        return /* @__PURE__ */ jsx(Fragment, {
                           children: pageExistsInCurrentLocale
                             ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
                             : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
@@ -37906,11 +37906,11 @@ function Router({
                     },),
                   ],
                 },),
-                EditorBar && /* @__PURE__ */ jsx3(EditorBarLauncher, {
+                EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
                   EditorBar,
                 },),
-                /* @__PURE__ */ jsx3(TurnOnReactEventHandling, {},),
-                /* @__PURE__ */ jsx3(MarkSuspenseEffects.End, {},),
+                /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+                /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
               ],
             },),
           },),
@@ -37926,7 +37926,7 @@ function WithLayoutTemplate({
   children,
 },) {
   if (!LayoutTemplate) return children(false,);
-  return /* @__PURE__ */ jsx3(LayoutTemplate, {
+  return /* @__PURE__ */ jsx(LayoutTemplate, {
     routeId,
     style: style2,
     children,
@@ -38261,9 +38261,9 @@ var FetchClientProvider = ({
     },);
     return () => client.unmount();
   }, [client,],);
-  return /* @__PURE__ */ jsx3(IsRestoringCacheContext.Provider, {
+  return /* @__PURE__ */ jsx(IsRestoringCacheContext.Provider, {
     value: isRestoring,
-    children: /* @__PURE__ */ jsx3(FetchClientContext.Provider, {
+    children: /* @__PURE__ */ jsx(FetchClientContext.Provider, {
       value: client,
       children,
     },),
@@ -38444,13 +38444,13 @@ function PageRoot({
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx3(MotionConfig, {
+    return /* @__PURE__ */ jsx(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx3(FetchClientProvider, {
-        children: /* @__PURE__ */ jsx3(CustomCursorHost, {
-          children: /* @__PURE__ */ jsx3(FormContext.Provider, {
+      children: /* @__PURE__ */ jsx(FetchClientProvider, {
+        children: /* @__PURE__ */ jsx(CustomCursorHost, {
+          children: /* @__PURE__ */ jsx(FormContext.Provider, {
             value: framerSiteId,
-            children: /* @__PURE__ */ jsx3(Router, {
+            children: /* @__PURE__ */ jsx(Router, {
               initialRoute: routeId,
               initialPathVariables: pathVariables,
               initialLocaleId: localeId,
@@ -38475,10 +38475,10 @@ function PageRoot({
     },);
   } else {
     const Wrapper = includeDataObserver ? DataObserver : React42.Fragment;
-    return /* @__PURE__ */ jsx3(Wrapper, {
-      children: /* @__PURE__ */ jsx3(RoutesProvider, {
+    return /* @__PURE__ */ jsx(Wrapper, {
+      children: /* @__PURE__ */ jsx(RoutesProvider, {
         routes,
-        children: /* @__PURE__ */ jsx3(NavigationWrapper, {
+        children: /* @__PURE__ */ jsx(NavigationWrapper, {
           children: React42.isValidElement(RootComponent,) ? RootComponent : React42.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
@@ -43254,7 +43254,7 @@ function useActiveVariantCallback(baseVariant,) {
   useEffect(() => {
     rejectPending(pendingTimers, pendingPromises,);
   }, [baseVariant,],);
-  return useRef3({
+  return useRef({
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */
@@ -43279,7 +43279,7 @@ function useActiveVariantCallback(baseVariant,) {
 }
 function useActiveTargetCallback() {
   const value = useActiveVariantCallback(void 0,);
-  return useRef3({
+  return useRef({
     activeTargetCallback: value.activeVariantCallback,
     delay: value.delay,
   },).current;
@@ -43341,8 +43341,8 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
   const isInitialNavigation = useContext(IsInitialNavigationContext,);
   const isStaticRenderer2 = useIsStaticRenderer();
   const usesMediaQueries = !isStaticRenderer2 && isBrowser2();
-  const baseVariant = useRef3(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
-  const basePropsVariant = useRef3(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
+  const baseVariant = useRef(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate2();
   const instantTransition = useInstantTransition();
   const setActiveVariantInstant = useCallback2((variant) => {
@@ -43448,7 +43448,7 @@ function isSuspenseBoundaryEnd(node,) {
   return (node == null ? void 0 : node.nodeType) === Node.COMMENT_NODE && node.textContent === '/$';
 }
 function useDataRecord(collection, variables,) {
-  return useMemo2(() => {
+  return useMemo(() => {
     if (!Array.isArray(collection,)) {
       return null;
     }
@@ -43483,7 +43483,7 @@ function useSiteRefs() {
   const {
     activeLocale,
   } = useLocaleInfo();
-  const path = useMemo2(() => {
+  const path = useMemo(() => {
     return getPathForRoute(route, {
       currentRoutePath: route == null ? void 0 : route.path,
       currentRoutePathLocalized: route == null ? void 0 : route.pathLocalized,
@@ -43969,8 +43969,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       ? void 0
       : _d.currentPage) ?? 1,
   );
-  const currentPageRef = useRef3(currentPage,);
-  const paginationInfo = useMemo2(() => {
+  const currentPageRef = useRef(currentPage,);
+  const paginationInfo = useMemo(() => {
     return {
       currentPage,
       totalPages,
@@ -44012,7 +44012,7 @@ function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
     paginationInfo,
     loadMore,
   } = useLoadMorePagination(count, pageSize, hash2, true,);
-  const paginatedQuery = useMemo2(() => {
+  const paginatedQuery = useMemo(() => {
     let limit = pageSize * paginationInfo.currentPage;
     if (query.limit) {
       if (query.limit.type !== 'LiteralValue' || typeof query.limit.value !== 'number') {
@@ -44083,8 +44083,8 @@ function safeBaseVariant(targetVariant, fallbackVariant, validBaseVariants,) {
 }
 var CycleVariantState = /* @__PURE__ */ Symbol('cycle',);
 function useRunCallbackIfPageIsVisible() {
-  const listenerRef = useRef3();
-  const callbackRef = useRef3();
+  const listenerRef = useRef();
+  const callbackRef = useRef();
   const clean = useCallback2(() => {
     if (!listenerRef.current) return;
     document.removeEventListener('visibilitychange', listenerRef.current,);
@@ -44115,9 +44115,9 @@ function useRunCallbackIfPageIsVisible() {
   }, [clean,],);
 }
 function useRunCallbackIfElementIsInView() {
-  const observerRefCleanup = useRef3();
-  const isInViewRef = useRef3(false,);
-  const callbackRef = useRef3();
+  const observerRefCleanup = useRef();
+  const isInViewRef = useRef(false,);
+  const callbackRef = useRef();
   const observers2 = useContext(SharedIntersectionObserverContext,);
   useEffect(() => {
     return () => {
@@ -44215,7 +44215,7 @@ function useVariantState({
   } = useLibraryFeatures();
   useWaitForGlobalClick(yieldOnTapFeatureOn,);
   const runUpdateIfVisible = useUpdateIfVisible(ref,);
-  const internalState = useRef3({
+  const internalState = useRef({
     isHovered: false,
     isHoveredHasUpdated: false,
     isPressed: false,
@@ -44345,7 +44345,7 @@ function useVariantState({
     loadedBaseVariant,
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
-  return useMemo2(() => {
+  return useMemo(() => {
     var _a;
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
@@ -44438,15 +44438,15 @@ function withCodeBoundaryForOverrides(Component18, {
     );
     if (shouldWrapWithBoundary) {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+        return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
           value: nodeId,
-          children: /* @__PURE__ */ jsx3(CodeComponentBoundary, {
+          children: /* @__PURE__ */ jsx(CodeComponentBoundary, {
             getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
-            fallback: /* @__PURE__ */ jsx3(Component18, {
+            fallback: /* @__PURE__ */ jsx(Component18, {
               ...props,
               ref,
             },),
-            children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
+            children: /* @__PURE__ */ jsx(appliedOverride.Component, {
               ...props,
               ref,
             },),
@@ -44459,16 +44459,16 @@ function withCodeBoundaryForOverrides(Component18, {
           collectErrorToAnalytics(appliedOverride.error,);
           hasErrorBeenLogged = true;
         }
-        return /* @__PURE__ */ jsx3(Component18, {
+        return /* @__PURE__ */ jsx(Component18, {
           ...props,
           ref,
         },);
       }
     } else {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx3(NodeIdContext.Provider, {
+        return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
           value: nodeId,
-          children: /* @__PURE__ */ jsx3(appliedOverride.Component, {
+          children: /* @__PURE__ */ jsx(appliedOverride.Component, {
             ...props,
             ref,
           },),
@@ -44555,7 +44555,7 @@ var withV1StrokeFX = (Component18) =>
         strokeDashoffset: value,
       }
       : void 0;
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...restProps,
       ...effect,
       ref: forwardedRef,
@@ -44564,12 +44564,12 @@ var withV1StrokeFX = (Component18) =>
 var withTickerFX = (Component18) => {
   return (props) => {
     if (props.tickerEffectEnabled) {
-      return /* @__PURE__ */ jsx3(Ticker2, {
+      return /* @__PURE__ */ jsx(Ticker2, {
         ...props,
         as: Component18,
       },);
     }
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
     },);
   };
@@ -44591,7 +44591,7 @@ function withMappedReactProps(Component18, info,) {
     for (const key7 in rawProps) {
       asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
     },);
   };
@@ -44635,7 +44635,7 @@ function createInputOutputRanges2(transformTargets, threshold, exitTarget,) {
 var withVariantAppearEffect = (Component18) =>
   React42.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx3(Component18, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...props,
         ref: forwardedRef,
       },);
@@ -44707,13 +44707,13 @@ var withVariantAppearEffect = (Component18) =>
       startTransition2(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx3(Component18, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx3(Component18, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...rest,
       },);
     }
@@ -44735,7 +44735,7 @@ var withVariantFX = (Component18) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx3(Component18, {
+    return /* @__PURE__ */ jsx(Component18, {
       ...props,
       style: {
         ...(props == null ? void 0 : props.style),
@@ -46688,7 +46688,6 @@ var CustomFontSource = class _CustomFontSource {
     );
     __publicField(this, 'fontFamilies', [],);
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'bySelector', /* @__PURE__ */ new Map(),);
     __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
   }
   deprecatedImportFonts(assets,) {
@@ -46696,7 +46695,6 @@ var CustomFontSource = class _CustomFontSource {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
-    this.bySelector.clear();
     const fonts = [];
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
@@ -46710,6 +46708,11 @@ var CustomFontSource = class _CustomFontSource {
       const variant = assetIsVariableFont ? 'variable' : this.inferVariantName(fontName,);
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const selector = _CustomFontSource.createLegacySelector(fontName,);
+      const {
+        family,
+        variant: v2Variant,
+      } = getCustomFontInfo(asset.properties.font,);
+      const v2Selector = _CustomFontSource.createSelector(family, v2Variant,);
       const font = {
         assetKey: asset.key,
         family: fontFamily,
@@ -46720,25 +46723,28 @@ var CustomFontSource = class _CustomFontSource {
         variationAxes: validateVariationAxes(variationAxesData,),
         owner: getAssetOwnerType(asset,),
         cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(selector,),
+        alternativeSelectors: {
+          [v2Selector]: {
+            variant: v2Variant,
+            cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(v2Selector,),
+          },
+        },
       };
       fontFamily.fonts.push(font,);
       this.assetsByFamily.set(fontName, asset,);
-      this.bySelector.set(selector, font,);
       fonts.push(...fontFamily.fonts,);
     }
     return fonts;
   }
   importFonts(assets, enableFontImprovements,) {
-    var _a, _b, _c;
+    var _a, _b;
     if (!enableFontImprovements) {
       return this.deprecatedImportFonts(assets,);
     }
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByFamily.clear();
-    this.bySelector.clear();
     const fonts = {};
-    const legacyFonts = {};
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
         continue;
@@ -46749,16 +46755,15 @@ var CustomFontSource = class _CustomFontSource {
         weight,
         style: style2,
       } = getCustomFontInfo(asset.properties.font,);
-      const fontFamily = this.createFontFamily(family,);
+      const variationAxesData = asset.properties.font.variationAxes;
+      const assetIsVariableFont = Array.isArray(variationAxesData,);
       const openTypeData = asset.properties.font.openTypeData;
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const ownerType = getAssetOwnerType(asset,);
-      const selector = _CustomFontSource.createSelector(fontFamily.name, variant,);
       const legacyFontFamilyName = getLegacyFontFamilyName(asset.properties,);
-      const legacyFontSelector = _CustomFontSource.createLegacySelector(legacyFontFamilyName,);
-      const cssFamilyName = enableFontImprovements
-        ? _CustomFontSource.cssFontFamilyFromSelector(selector,)
-        : _CustomFontSource.cssFontFamilyFromSelector(legacyFontSelector,);
+      const legacySelector = _CustomFontSource.createLegacySelector(legacyFontFamilyName,);
+      const fontFamily = this.createFontFamily(family,);
+      const selector = _CustomFontSource.createSelector(fontFamily.name, variant,);
       const font = {
         assetKey: asset.key,
         family: fontFamily,
@@ -46768,32 +46773,34 @@ var CustomFontSource = class _CustomFontSource {
         style: style2,
         file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
-        variationAxes: validateVariationAxes((_a = asset.properties) == null ? void 0 : _a.font.variationAxes,),
+        variationAxes: validateVariationAxes(variationAxesData,),
         owner: ownerType,
-        legacyFontSelector,
-        cssFamilyName,
+        alternativeSelectors: {
+          [legacySelector]: {
+            variant: assetIsVariableFont ? 'variable' : this.inferVariantName(legacyFontFamilyName,),
+            cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(legacySelector,),
+          },
+        },
+        cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(selector,),
       };
       const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
-      if (duplicateInfo && duplicateInfo.projectDuplicate) {
+      if (duplicateInfo == null ? void 0 : duplicateInfo.projectDuplicate) {
         if (font.owner === 'project') {
           fontFamily.fonts[duplicateInfo.index] = font;
           fonts[selector] = font;
-          legacyFonts[legacyFontSelector] = font;
         }
       } else if (duplicateInfo) {
         log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
         const existingFont = duplicateInfo.existingFont;
-        const newIsWoff2 = ((_b = font.file) == null ? void 0 : _b.endsWith('.woff2',)) ?? false;
-        const existingIsWoff2 = ((_c = existingFont.file) == null ? void 0 : _c.endsWith('.woff2',)) ?? false;
+        const newIsWoff2 = ((_a = font.file) == null ? void 0 : _a.endsWith('.woff2',)) ?? false;
+        const existingIsWoff2 = ((_b = existingFont.file) == null ? void 0 : _b.endsWith('.woff2',)) ?? false;
         if (newIsWoff2 && !existingIsWoff2) {
           fontFamily.fonts[duplicateInfo.index] = font;
           fonts[selector] = font;
-          legacyFonts[legacyFontSelector] = font;
         }
       } else {
         fontFamily.fonts.push(font,);
         fonts[selector] = font;
-        legacyFonts[legacyFontSelector] = font;
       }
       fontFamily.owner = ownerType;
       this.assetsByFamily.set(family, asset,);
@@ -46802,14 +46809,6 @@ var CustomFontSource = class _CustomFontSource {
       if (fontFamily.fonts.length > 0) {
         updateFontRelationships(fontFamily,);
       }
-    }
-    for (const selector in fonts) {
-      if (!fonts[selector]) continue;
-      this.bySelector.set(selector, fonts[selector],);
-    }
-    for (const selector in legacyFonts) {
-      if (!legacyFonts[selector]) continue;
-      this.bySelector.set(selector, legacyFonts[selector],);
     }
     return Object.values(fonts,);
   }
@@ -46825,12 +46824,6 @@ var CustomFontSource = class _CustomFontSource {
       return selector.slice(customFontSelectorLegacyPrefix.length,);
     }
     return selector.slice(customFontSelectorPrefixV2.length,);
-  }
-  static legacyCSSFontFamilyForSelector(selector, font,) {
-    if (font.family.source !== 'custom') return;
-    if (!isCustomFontSelectorLegacy(selector,)) return;
-    if (selector !== font.legacyFontSelector) return;
-    return _CustomFontSource.cssFontFamilyFromSelector(font.legacyFontSelector,);
   }
   isValidCustomFontAsset(asset,) {
     var _a;
@@ -46877,10 +46870,6 @@ var CustomFontSource = class _CustomFontSource {
   addFontFamily(fontFamily,) {
     this.fontFamilies.push(fontFamily,);
     this.byFamilyName.set(fontFamily.name, fontFamily,);
-  }
-  getFontBySelector(selector,) {
-    if (!isCustomFontSelector(selector,)) return void 0;
-    return this.bySelector.get(selector,);
   }
   getFontFamilyByName(family,) {
     const foundFontFamily = this.byFamilyName.get(family,);
@@ -47532,6 +47521,9 @@ var FontStore = class {
     __publicField(this, 'framer',);
     __publicField(this, 'custom',);
     __publicField(this, 'bySelectorValuesCache',);
+    __publicField(this, 'testing', {
+      addFont: this.addFont.bind(this,),
+    },);
     this.local = new LocalFontSource();
     this.google = new GoogleFontSource();
     this.fontshare = new FontshareSource();
@@ -47545,8 +47537,10 @@ var FontStore = class {
   }
   addFont(font,) {
     this.bySelector.set(font.selector, font,);
-    if (font.legacyFontSelector) {
-      this.bySelector.set(font.legacyFontSelector, font,);
+    if (font.alternativeSelectors) {
+      for (const altSelector of Object.keys(font.alternativeSelectors,)) {
+        this.bySelector.set(altSelector, font,);
+      }
     }
   }
   getAvailableFonts() {
@@ -47565,7 +47559,7 @@ var FontStore = class {
   importLocalFonts() {
     for (const font of this.local.importFonts()) {
       this.addFont(font,);
-      this.loadFont(font,);
+      void this.loadFont(font.selector,);
     }
   }
   async importGoogleFonts() {
@@ -47644,10 +47638,16 @@ var FontStore = class {
   }
   getFontBySelector(selector,) {
     if (!selector) return void 0;
-    if (isCustomFontSelector(selector,)) {
-      return this.custom.getFontBySelector(selector,);
+    let font;
+    font = this.bySelector.get(selector,);
+    if (!font) return void 0;
+    if (font.alternativeSelectors && selector in font.alternativeSelectors) {
+      return {
+        ...font,
+        ...font.alternativeSelectors[selector],
+      };
     }
-    return this.bySelector.get(selector,);
+    return font;
   }
   // Function called by draft to get font properties for a selector, before the (google) font is available in the store
   // It replaces a previous function that created Font instances and added them to the store
@@ -47656,12 +47656,11 @@ var FontStore = class {
   getDraftPropertiesBySelector(selector,) {
     const font = this.getFontBySelector(selector,);
     if (font) {
-      const cssFamilyName = CustomFontSource.legacyCSSFontFamilyForSelector(selector, font,) ?? font.cssFamilyName;
       return {
         style: font.style,
         weight: font.weight,
         variant: font.variant,
-        cssFamilyName,
+        cssFamilyName: font.cssFamilyName,
         source: font.family.source,
         category: font.category,
       };
@@ -47717,29 +47716,26 @@ var FontStore = class {
     }
     return null;
   }
-  createLoadedSelectorKey(selector, cssFontFamilyOverride,) {
-    if (!cssFontFamilyOverride) return selector;
-    return selector + '---' + cssFontFamilyOverride;
-  }
-  isSelectorLoaded(selector, cssFontFamilyOverride,) {
-    return this.loadedSelectors.has(this.createLoadedSelectorKey(selector, cssFontFamilyOverride,),);
-  }
-  didLoadSelector(selector, cssFontFamilyOverride,) {
-    this.loadedSelectors.add(this.createLoadedSelectorKey(selector, cssFontFamilyOverride,),);
+  isSelectorLoaded(selector,) {
+    return this.loadedSelectors.has(selector,);
   }
   /**
    * Load a single font
    */
-  async loadFont(font, cssFontFamilyOverride,) {
-    if (this.isSelectorLoaded(font.selector, cssFontFamilyOverride,)) {
+  async loadFont(selector,) {
+    const font = this.getFontBySelector(selector,);
+    if (!font) {
+      return 2;
+    }
+    if (this.loadedSelectors.has(selector,)) {
       return 0;
     }
-    const family = cssFontFamilyOverride ?? font.cssFamilyName;
+    const family = font.cssFamilyName;
     const source = font.family.source;
     const fontIsVariable = isVariableFont(font,);
     switch (source) {
       case 'local':
-        this.didLoadSelector(font.selector, cssFontFamilyOverride,);
+        this.loadedSelectors.add(selector,);
         return 1;
       case 'framer':
         if (!isTest()) {
@@ -47747,7 +47743,7 @@ var FontStore = class {
         }
         if (fontIsVariable) {
           if (!font.file) {
-            return Promise.reject(`Unable to load font: ${font.selector}`,);
+            return Promise.reject(`Unable to load font: ${selector}`,);
           }
           await loadFont({
             family,
@@ -47756,14 +47752,14 @@ var FontStore = class {
             style: font.style,
           }, document,);
         }
-        this.didLoadSelector(font.selector, cssFontFamilyOverride,);
+        this.loadedSelectors.add(selector,);
         return 1;
       case 'google':
       case 'fontshare':
       case 'builtIn':
       case 'custom':
         if (!font.file) {
-          return Promise.reject(`Unable to load font: ${font.selector}`,);
+          return Promise.reject(`Unable to load font: ${selector}`,);
         }
         await loadFont({
           family,
@@ -47771,7 +47767,7 @@ var FontStore = class {
           weight: font.weight,
           style: font.style,
         }, document,);
-        this.didLoadSelector(font.selector, cssFontFamilyOverride,);
+        this.loadedSelectors.add(selector,);
         return 1;
       default:
         assertNever(source,);
@@ -47815,10 +47811,7 @@ var FontStore = class {
     }
     const loadingPromises = [];
     for (const selector of selectors) {
-      const font = this.bySelector.get(selector,);
-      if (font) {
-        loadingPromises.push(this.loadFont(font, CustomFontSource.legacyCSSFontFamilyForSelector(selector, font,),),);
-      }
+      loadingPromises.push(this.loadFont(selector,),);
     }
     return Promise.allSettled(loadingPromises,);
   }
@@ -47839,12 +47832,12 @@ var FontStore = class {
    */
   async loadMissingFonts(fontSelectors, fontsLoadedCallback,) {
     const selectors = fontSelectors.filter((selector) => {
-      return !fontStore.isSelectorLoaded(selector,);
+      return !fontStore.loadedSelectors.has(selector,);
     },);
     if (selectors.length === 0) return;
     await fontStore.loadWebFontsFromSelectors(selectors,);
     const isEachFontLoaded = selectors.every((selector) => {
-      return fontStore.isSelectorLoaded(selector,);
+      return fontStore.loadedSelectors.has(selector,);
     },);
     if (isEachFontLoaded && fontsLoadedCallback) fontsLoadedCallback();
   }
@@ -47872,7 +47865,7 @@ function CustomProperties({
   children,
   customProperties,
 },) {
-  return /* @__PURE__ */ jsx3('div', {
+  return /* @__PURE__ */ jsx('div', {
     style: customProperties,
     children,
   },);
@@ -47916,10 +47909,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
       const {
         RenderPlaceholder,
       } = runtime;
-      return /* @__PURE__ */ jsx3(FrameWithMotion, {
+      return /* @__PURE__ */ jsx(FrameWithMotion, {
         ...this.props,
         background: null,
-        children: /* @__PURE__ */ jsx3(RenderPlaceholder, {
+        children: /* @__PURE__ */ jsx(RenderPlaceholder, {
           error,
         },),
       },);
@@ -47999,10 +47992,10 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
             return child;
           }
           if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ jsx3(LayoutGroup, {
+            return /* @__PURE__ */ jsx(LayoutGroup, {
               inherit: false,
               id: this.props.__layoutId,
-              children: /* @__PURE__ */ jsx3(AutomaticLayoutIds, {
+              children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
                 enabled: false,
                 children: React42.cloneElement(child, childProps,),
               },),
@@ -48047,9 +48040,9 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
          * See the stackBackgroundTest.tsx integration test for an example of such a case
          */
         /* @__PURE__ */
-        jsx3(ComponentContainerContext.Provider, {
+        jsx(ComponentContainerContext.Provider, {
           value: true,
-          children: /* @__PURE__ */ jsx3(FrameWithMotion, {
+          children: /* @__PURE__ */ jsx(FrameWithMotion, {
             'data-framer-component-container': true,
             background: null,
             overflow: 'visible',
@@ -48134,20 +48127,20 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
   }, [onChange,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (type === 'hidden') {
-    return /* @__PURE__ */ jsx3(motion.input, {
+    return /* @__PURE__ */ jsx(motion.input, {
       type: 'hidden',
       name: inputName,
       defaultValue,
     },);
   }
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
-  return /* @__PURE__ */ jsx3(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     ref,
     style: style2,
     className: cx(textInputWrapperClassName, inputWrapperClassName, className2,),
     ...rest,
     children: type === 'textarea'
-      ? /* @__PURE__ */ jsx3(motion.textarea, {
+      ? /* @__PURE__ */ jsx(motion.textarea, {
         ...dataProps,
         ...eventHandlers,
         required,
@@ -48158,7 +48151,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
         defaultValue,
         maxLength,
       }, defaultValue,)
-      : /* @__PURE__ */ jsx3(motion.input, {
+      : /* @__PURE__ */ jsx(motion.input, {
         ...dataProps,
         ...eventHandlers,
         type,
@@ -48324,7 +48317,7 @@ var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormPlainTextInpu
       defaultChecked,
     };
   const eventHandlers = useCustomValidity(onValid, props.onInvalid, props.onChange, props.onBlur, props.onFocus,);
-  return /* @__PURE__ */ jsx3(motion.input, {
+  return /* @__PURE__ */ jsx(motion.input, {
     ...rest,
     ...attributes,
     ...eventHandlers,
@@ -48481,18 +48474,18 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
   const eventHandlers = useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,);
   const key7 = Array.isArray(defaultValue,) ? defaultValue[0] : defaultValue;
   if (hidden) {
-    return /* @__PURE__ */ jsx3(motion.input, {
+    return /* @__PURE__ */ jsx(motion.input, {
       type: 'hidden',
       name: inputName,
       defaultValue,
     },);
   }
-  return /* @__PURE__ */ jsx3(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     ref: measureRef,
     style: style2,
     className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
     ...rest,
-    children: /* @__PURE__ */ jsx3(motion.select, {
+    children: /* @__PURE__ */ jsx(motion.select, {
       name: inputName,
       autoFocus,
       required,
@@ -48502,12 +48495,12 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
       children: selectOptions == null ? void 0 : selectOptions.map((option, index,) => {
         switch (option.type) {
           case 'divider':
-            return /* @__PURE__ */ jsx3('hr', {}, index,);
+            return /* @__PURE__ */ jsx('hr', {}, index,);
           case 'option':
             return (
               // biome-ignore lint/suspicious/noArrayIndexKey: Values can be duplicated, so we could only use UUIDs here (but that isn't really better)
               /* @__PURE__ */
-              jsx3('option', {
+              jsx('option', {
                 value: option.value ?? option.title,
                 disabled: option.disabled,
                 children: option.title ?? option.value,
@@ -48651,7 +48644,7 @@ function getTotalHorizontalPadding(lightbox,) {
     getSidePadding(lightbox == null ? void 0 : lightbox.paddingRight, lightbox == null ? void 0 : lightbox.padding,);
 }
 function useStableCallback(callback,) {
-  const latest = useRef3(callback,);
+  const latest = useRef(callback,);
   latest.current = callback;
   return useCallback2((...args) => latest.current(...args,), [],);
 }
@@ -48733,10 +48726,10 @@ function withLightboxEffect(Component18,) {
     ...props
   }, forwardedRef,) {
     const config = useContext(MotionConfigContext,);
-    const fallbackRef = useRef3(null,);
+    const fallbackRef = useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
-    const decodePromiseRef = useRef3();
-    const image = useMemo2(() => createImageWithSrcSet(lightbox, props.background,), [lightbox, props.background,],);
+    const decodePromiseRef = useRef();
+    const image = useMemo(() => createImageWithSrcSet(lightbox, props.background,), [lightbox, props.background,],);
     const [open, setOpen,] = useState(false,);
     const [openOverrides, setOpenOverrides,] = useState();
     const onOpen = useCallback2(() => {
@@ -48871,7 +48864,7 @@ function withLightboxEffect(Component18,) {
     const layoutDependency = open ? props.layoutDependency ? `${props.layoutDependency}-open` : 'open' : props.layoutDependency;
     return /* @__PURE__ */ jsxs(Fragment, {
       children: [
-        /* @__PURE__ */ jsx3(Component18, {
+        /* @__PURE__ */ jsx(Component18, {
           ...props,
           style: style2,
           onClick: handleClick,
@@ -48880,12 +48873,12 @@ function withLightboxEffect(Component18,) {
           layoutDependency,
           transition,
         },),
-        /* @__PURE__ */ jsx3(AnimatePresence, {
-          children: open && lightbox && image && /* @__PURE__ */ jsx3(Fragment, {
+        /* @__PURE__ */ jsx(AnimatePresence, {
+          children: open && lightbox && image && /* @__PURE__ */ jsx(Fragment, {
             children: createPortal(
               /* @__PURE__ */ jsxs(Fragment, {
                 children: [
-                  /* @__PURE__ */ jsx3(motion.div, {
+                  /* @__PURE__ */ jsx(motion.div, {
                     ...portalProps,
                     className: lightboxClassName,
                     onClick: onClose,
@@ -48905,7 +48898,7 @@ function withLightboxEffect(Component18,) {
                       },);
                     },
                   },),
-                  /* @__PURE__ */ jsx3('div', {
+                  /* @__PURE__ */ jsx('div', {
                     ...portalProps,
                     className: lightboxClassName,
                     style: {
@@ -48917,7 +48910,7 @@ function withLightboxEffect(Component18,) {
                       position: 'fixed',
                       zIndex: lightbox.zIndex,
                     },
-                    children: /* @__PURE__ */ jsx3('div', {
+                    children: /* @__PURE__ */ jsx('div', {
                       style: {
                         alignItems: 'center',
                         aspectRatio: aspectRatio2,
@@ -48928,7 +48921,7 @@ function withLightboxEffect(Component18,) {
                         width: '100%',
                         maxWidth: lightbox.maxWidth,
                       },
-                      children: /* @__PURE__ */ jsx3(motion.div, {
+                      children: /* @__PURE__ */ jsx(motion.div, {
                         layoutId: props.layoutId ?? fallbackLayoutId,
                         transition,
                         onClick: onOpen,
@@ -48945,7 +48938,7 @@ function withLightboxEffect(Component18,) {
                           filter: filter2,
                           ...border,
                         },
-                        children: /* @__PURE__ */ jsx3(BackgroundImageComponent, {
+                        children: /* @__PURE__ */ jsx(BackgroundImageComponent, {
                           image,
                           alt: image.alt,
                           draggable: props.draggable,
@@ -48976,7 +48969,7 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
   const style2 = {
     ...styleFromProps,
   };
-  const intrinsicSize = useMemo2(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
+  const intrinsicSize = useMemo(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
   const [fallbackIntrinsicSize, setFallbackIntrinsicSize,] = useState();
   React42.useLayoutEffect(() => {
     if (!(background == null ? void 0 : background.src)) return;
@@ -49007,7 +49000,7 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
     style: style2,
     ref,
     children: [
-      background && /* @__PURE__ */ jsx3(BackgroundImageComponent, {
+      background && /* @__PURE__ */ jsx(BackgroundImageComponent, {
         image: background,
         alt,
         draggable,
@@ -49198,7 +49191,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
   } = props;
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef3(null,);
+  const fallbackLayoutRef = useRef(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const {
     navigate,
@@ -49304,7 +49297,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
   collectFiltersFromProps(props, style2,);
   collectTextShadowsForProps(props, style2,);
   Object.assign(style2, props.style,);
-  return /* @__PURE__ */ jsx3(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     id: id3,
     ref: layoutRef,
     ...rest,
@@ -49331,7 +49324,7 @@ function convertVerticalAlignment(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef3([],);
+  const prevFontsRef = useRef([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     void fontStore.loadFonts(fonts,).then(({
@@ -49410,7 +49403,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
   if (shouldReduceMotion) {
     const ref = newOverrideableRef();
     elements.add(ref,);
-    return /* @__PURE__ */ jsx3('span', {
+    return /* @__PURE__ */ jsx('span', {
       ref,
       style: style2,
       children: text,
@@ -49432,7 +49425,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         const short = word.length <= 12;
         return /* @__PURE__ */ jsxs(React.Fragment, {
           children: [
-            /* @__PURE__ */ jsx3('span', {
+            /* @__PURE__ */ jsx('span', {
               style: {
                 whiteSpace: short ? 'nowrap' : 'unset',
               },
@@ -49442,7 +49435,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
                 return (
                   // biome-ignore lint/suspicious/noArrayIndexKey: We are combining index with char.
                   /* @__PURE__ */
-                  jsx3('span', {
+                  jsx('span', {
                     ref,
                     style: style2,
                     children: char,
@@ -49464,7 +49457,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         elements.add(ref,);
         return /* @__PURE__ */ jsxs(React.Fragment, {
           children: [
-            /* @__PURE__ */ jsx3('span', {
+            /* @__PURE__ */ jsx('span', {
               ref,
               style: style2,
               children: char,
@@ -49811,7 +49804,7 @@ var BaseSVG = /* @__PURE__ */ forwardRef(function BaseSVG2(props, forwardedRef,)
   return (
     // biome-ignore lint/a11y/noSvgWithoutTitle: FIXME: FitText might be inaccessible to screen readers because it’s wrapped in an svg
     /* @__PURE__ */
-    jsx3('svg', {
+    jsx('svg', {
       ...props,
       ref: forwardedRef,
       children: props.children,
@@ -49825,11 +49818,11 @@ var FitText = /* @__PURE__ */ forwardRef(function FitText2({
   children,
   ...props
 }, forwardedRef,) {
-  return /* @__PURE__ */ jsx3(MotionSVG, {
+  return /* @__PURE__ */ jsx(MotionSVG, {
     ...props,
     ref: forwardedRef,
     viewBox,
-    children: /* @__PURE__ */ jsx3(motion.foreignObject, {
+    children: /* @__PURE__ */ jsx(motion.foreignObject, {
       width: '100%',
       height: '100%',
       className: 'framer-fit-text',
@@ -49887,7 +49880,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const isOnCanvas = useIsOnFramerCanvas();
   const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
-  const fallbackRef = useRef3(null,);
+  const fallbackRef = useRef(null,);
   const containerRef = forwardedRef ?? fallbackRef;
   useMeasureLayout(props, containerRef,);
   useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
@@ -49895,7 +49888,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     injectComponentCSSRules();
   }, [],);
   const textEffect = useTextEffect(effect, containerRef,);
-  const processedChildren = useMemo2(() => {
+  const processedChildren = useMemo(() => {
     if (!children) return;
     return processRichTextChildren(children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, void 0, textEffect.getTokenizer(),);
   }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, textEffect,],);
@@ -49955,7 +49948,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const dataFramerName = rest['data-framer-name'] ?? name;
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx3(Component18, {
+      return /* @__PURE__ */ jsx(Component18, {
         ...rest,
         ref: containerRef,
         style: containerStyle2,
@@ -49963,7 +49956,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         transformTemplate: template,
         'data-framer-name': dataFramerName,
         'data-framer-component-type': richTextContainerComponentType,
-        children: /* @__PURE__ */ jsx3(FitText, {
+        children: /* @__PURE__ */ jsx(FitText, {
           viewBox,
           viewBoxScale,
           style: {
@@ -49974,7 +49967,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         },),
       },);
     } else {
-      return /* @__PURE__ */ jsx3(FitText, {
+      return /* @__PURE__ */ jsx(FitText, {
         ...rest,
         ref: containerRef,
         style: containerStyle2,
@@ -49988,7 +49981,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       },);
     }
   }
-  return /* @__PURE__ */ jsx3(Component18, {
+  return /* @__PURE__ */ jsx(Component18, {
     ...rest,
     ref: containerRef,
     style: containerStyle2,
@@ -50044,7 +50037,7 @@ function processRichTextChildren(
       const slug = generateHeadingSlug(children, slugCounters,);
       props.id = slug;
       const className2 = cx('framer-text', anchorLinkStylePresetClassName,);
-      const anchorLink = /* @__PURE__ */ jsx3('a', {
+      const anchorLink = /* @__PURE__ */ jsx('a', {
         href: `#${slug}`,
         className: className2,
         children,
@@ -50095,7 +50088,7 @@ var RichText = /* @__PURE__ */ forwardRef(function RichText2({
       // We need to use the original prop name.
       [isString(html,) ? 'html' : 'htmlFromDesign']: content,
     };
-    return /* @__PURE__ */ jsx3(DeprecatedRichText, {
+    return /* @__PURE__ */ jsx(DeprecatedRichText, {
       ...props,
       ...contentProp,
       ref: forwardedRef,
@@ -50115,7 +50108,7 @@ var RichText = /* @__PURE__ */ forwardRef(function RichText2({
       };
     }
   }
-  return /* @__PURE__ */ jsx3(RichTextContainer, {
+  return /* @__PURE__ */ jsx(RichTextContainer, {
     ...props,
     ref: forwardedRef,
     children: isValidElement(content,) ? content : void 0,
@@ -50298,7 +50291,7 @@ var ImagePatternElement = ({
   offsetY,
 },) => {
   const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ jsx3('pattern', {
+  return /* @__PURE__ */ jsx('pattern', {
     id: id3,
     width: repeat ? width : '100%',
     height: repeat ? height : '100%',
@@ -50306,7 +50299,7 @@ var ImagePatternElement = ({
     patternUnits: repeat ? 'userSpaceOnUse' : void 0,
     x: repeat ? offsetX : void 0,
     y: repeat ? offsetY : void 0,
-    children: /* @__PURE__ */ jsx3('image', {
+    children: /* @__PURE__ */ jsx('image', {
       width: repeat ? width : 1,
       height: repeat ? height : 1,
       href,
@@ -50561,7 +50554,7 @@ var SVG = /* @__PURE__ */ forwardRef(function SVG2(props, forwardedRef,) {
   const ref = forwardedRef ?? layoutRef;
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ jsx3(SVGComponent, {
+  return /* @__PURE__ */ jsx(SVGComponent, {
     ...props,
     innerRef: ref,
     parentSize,
@@ -50800,7 +50793,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           y1,
           y2,
         } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx3('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
           width: '100%',
           height: '100%',
@@ -50808,14 +50801,14 @@ var SVGComponent = /* @__PURE__ */ (() => {
             position: 'absolute',
           },
           role: 'presentation',
-          children: /* @__PURE__ */ jsx3('linearGradient', {
+          children: /* @__PURE__ */ jsx('linearGradient', {
             id: gradientId,
             x1,
             x2,
             y1,
             y2,
             children: stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx3('stop', {
+              return /* @__PURE__ */ jsx('stop', {
                 offset: stop.position,
                 stopColor: stop.color,
                 stopOpacity: stop.alpha,
@@ -50828,7 +50821,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id3 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx3('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           ref: this.setSVGElement,
           width: '100%',
           height: '100%',
@@ -50836,13 +50829,13 @@ var SVGComponent = /* @__PURE__ */ (() => {
             position: 'absolute',
           },
           role: 'presentation',
-          children: /* @__PURE__ */ jsx3('radialGradient', {
+          children: /* @__PURE__ */ jsx('radialGradient', {
             id: gradientId,
             cy: gradient.centerAnchorY,
             cx: gradient.centerAnchorX,
             r: gradient.widthFactor,
             children: elementProperties.stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx3('stop', {
+              return /* @__PURE__ */ jsx('stop', {
                 offset: stop.position,
                 stopColor: stop.color,
                 stopOpacity: stop.alpha,
@@ -50854,7 +50847,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const imagePattern = imagePatternPropsForFill(fill, size, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ jsx3('svg', {
+          fillElement = /* @__PURE__ */ jsx('svg', {
             ref: this.setSVGElement,
             width: '100%',
             height: '100%',
@@ -50862,8 +50855,8 @@ var SVGComponent = /* @__PURE__ */ (() => {
               position: 'absolute',
             },
             role: 'presentation',
-            children: /* @__PURE__ */ jsx3('defs', {
-              children: /* @__PURE__ */ jsx3(ImagePatternElement, {
+            children: /* @__PURE__ */ jsx('defs', {
+              children: /* @__PURE__ */ jsx(ImagePatternElement, {
                 ...imagePattern,
               },),
             },),
@@ -50899,7 +50892,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         content = /* @__PURE__ */ jsxs(Fragment, {
           children: [
             fillElement,
-            /* @__PURE__ */ jsx3('div', {
+            /* @__PURE__ */ jsx('div', {
               className: 'svgContainer', suppressHydrationWarning: true,
               style: innerStyle,
               ref: this.container,
@@ -50941,7 +50934,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           target,
           rel,
         },
-        children: [content, /* @__PURE__ */ jsx3(SVGStyleSheet, {},),],
+        children: [content, /* @__PURE__ */ jsx(SVGStyleSheet, {},),],
       },);
     }
   },
@@ -50993,7 +50986,7 @@ function TextStyleSheet() {
 var Text2 = /* @__PURE__ */ React42.forwardRef(function Text3(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef3(null,);
+  const fallbackLayoutRef = useRef(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const {
     navigate,
@@ -51009,7 +51002,7 @@ var Text2 = /* @__PURE__ */ React42.forwardRef(function Text3(props, forwardedRe
     fonts,
     __fromCanvasComponent,
   } = props;
-  const prevFontsRef = useRef3([],);
+  const prevFontsRef = useRef([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
   useEffect(() => {
@@ -51041,7 +51034,7 @@ var Text2 = /* @__PURE__ */ React42.forwardRef(function Text3(props, forwardedRe
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ jsx3(TextComponent, {
+  return /* @__PURE__ */ jsx(TextComponent, {
     ...props,
     innerRef: layoutRef,
     layoutId,
@@ -51148,7 +51141,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           Object.assign(style2, styleProp,);
           if (alignment) asRecord(style2,)['--framer-text-alignment'] = alignment;
           const tabIndexProps = getTabIndexProps(tabIndex,);
-          return /* @__PURE__ */ jsx3(motion.div, {
+          return /* @__PURE__ */ jsx(motion.div, {
             layoutId,
             id: id3,
             ...tabIndexProps,
@@ -51188,10 +51181,10 @@ var TextComponent = /* @__PURE__ */ (() => {
     render() {
       return /* @__PURE__ */ jsxs(Fragment, {
         children: [
-          /* @__PURE__ */ jsx3(ComponentContainerContext.Consumer, {
+          /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, {
             children: this.renderMain,
           },),
-          /* @__PURE__ */ jsx3(TextStyleSheet, {},),
+          /* @__PURE__ */ jsx(TextStyleSheet, {},),
         ],
       },);
     }
@@ -51643,14 +51636,14 @@ var LinearGradientElement = class extends Component2 {
       y1,
       y2,
     } = this.props;
-    return /* @__PURE__ */ jsx3('linearGradient', {
+    return /* @__PURE__ */ jsx('linearGradient', {
       id: id3,
       x1,
       x2,
       y1,
       y2,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx3('stop', {
+        return /* @__PURE__ */ jsx('stop', {
           offset: stop.position,
           stopColor: stop.color,
           stopOpacity: stop.alpha,
@@ -51669,14 +51662,14 @@ var RadialGradientElement = class extends Component2 {
       heightFactor,
       stops,
     } = this.props;
-    return /* @__PURE__ */ jsx3('radialGradient', {
+    return /* @__PURE__ */ jsx('radialGradient', {
       id: id3,
       cy: centerAnchorY,
       cx: centerAnchorX,
       r: widthFactor,
       gradientTransform: getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, centerAnchorY,),
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx3('stop', {
+        return /* @__PURE__ */ jsx('stop', {
           offset: stop.position,
           stopColor: stop.color,
           stopOpacity: stop.alpha,
@@ -51728,7 +51721,7 @@ var SVGRoot = (props) => {
   const needsScale = isSafari() ? window.devicePixelRatio !== 1 : window.devicePixelRatio === 1;
   const needsTranslate = window.devicePixelRatio === 1;
   if (!needsScale && !needsTranslate) {
-    return /* @__PURE__ */ jsx3('svg', {
+    return /* @__PURE__ */ jsx('svg', {
       role: 'presentation',
       ...svgProps,
       style: svgStyle,
@@ -51740,14 +51733,14 @@ var SVGRoot = (props) => {
       transform: 'scale(2)',
     }
     : void 0;
-  return /* @__PURE__ */ jsx3('svg', {
+  return /* @__PURE__ */ jsx('svg', {
     role: 'presentation',
     ...svgProps,
     style: {
       ...svgStyle,
       ...svgTransform,
     },
-    children: /* @__PURE__ */ jsx3('g', {
+    children: /* @__PURE__ */ jsx('g', {
       style: {
         // The default value of transform-origin is 0 0 for all SVG elements except
         // for root <svg> elements:
@@ -51910,7 +51903,7 @@ var Vector = /* @__PURE__ */ (() => {
       const currentName = target === RenderTarget.preview ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ jsx3(motion.path, {
+        shapeReference = /* @__PURE__ */ jsx(motion.path, {
           ...{
             ...pathAttributes,
           },
@@ -51918,22 +51911,22 @@ var Vector = /* @__PURE__ */ (() => {
           transition,
         },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ jsx3('clipPath', {
+          strokeClipPath = /* @__PURE__ */ jsx('clipPath', {
             id: internalStrokeClipId.id,
-            children: /* @__PURE__ */ jsx3('use', {
+            children: /* @__PURE__ */ jsx('use', {
               xlinkHref: internalShapeId.link,
             },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ jsx3('use', {
+          mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             fillOpacity,
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ jsx3('use', {
+          strokeElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             clipPath: internalStrokeClipId.urlLink,
             fill: 'transparent',
@@ -51941,7 +51934,7 @@ var Vector = /* @__PURE__ */ (() => {
             strokeWidth,
           },);
         } else {
-          mainElement = /* @__PURE__ */ jsx3('use', {
+          mainElement = /* @__PURE__ */ jsx('use', {
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             fillOpacity,
@@ -51953,7 +51946,7 @@ var Vector = /* @__PURE__ */ (() => {
         }
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ jsx3(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           ...{
             ...pathAttributes,
             fill: vectorFill,
@@ -51966,18 +51959,18 @@ var Vector = /* @__PURE__ */ (() => {
         },);
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ jsx3(ImagePatternElement, {
+        ? /* @__PURE__ */ jsx(ImagePatternElement, {
           ...imagePattern,
           repeat: BackgroundImage.isImageObject(fill,) && fill.fit === 'tile',
         },)
         : void 0;
       let gradient;
       if (linearGradient) {
-        gradient = /* @__PURE__ */ jsx3(LinearGradientElement, {
+        gradient = /* @__PURE__ */ jsx(LinearGradientElement, {
           ...linearGradient,
         },);
       } else if (radialGradient) {
-        gradient = /* @__PURE__ */ jsx3(RadialGradientElement, {
+        gradient = /* @__PURE__ */ jsx(RadialGradientElement, {
           ...radialGradient,
         },);
       }
@@ -51989,7 +51982,7 @@ var Vector = /* @__PURE__ */ (() => {
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ jsx3(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           ...{
             ...pathAttributes,
             fill: vectorFill,
@@ -52024,7 +52017,7 @@ var Vector = /* @__PURE__ */ (() => {
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx3(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         id: id3,
         width,
         height,
@@ -52126,7 +52119,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
           name = defaultName;
         }
       }
-      return this.renderElement(/* @__PURE__ */ jsx3('g', {
+      return this.renderElement(/* @__PURE__ */ jsx('g', {
         transform: transformString2(transform2,),
         ...{
           name,
@@ -52149,7 +52142,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx3(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         id: id3,
         left,
         top,
@@ -52927,8 +52920,10 @@ export {
   pipe,
   Point,
   Polygon,
+  PopChild,
   positionalKeys,
   preloadImage,
+  PresenceChild,
   PresenceContext,
   press,
   print,
