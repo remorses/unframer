@@ -362,6 +362,7 @@ export async function configFromFetch({
     projectId,
     externalPackages = [] as string[],
     allExternal = false,
+    agent = '',
     outDir = undefined as undefined | string,
 }) {
     logger.log(`Fetching config for project ${projectId}`)
@@ -374,9 +375,10 @@ export async function configFromFetch({
         url: url || 'https://unframer.co',
         headers: {
             'X-Agent':
-                process.env.GITHUB_ACTIONS === 'true'
+                agent ||
+                (process.env.GITHUB_ACTIONS === 'true'
                     ? 'github-actions'
-                    : 'cli',
+                    : 'cli'),
         },
     })
 

@@ -2,16 +2,21 @@ import { describe, expect, test } from 'vitest'
 import { configFromFetch } from './cli.js'
 import { createExampleComponentCode } from './exporter.js'
 
-describe('createExampleComponentCode', () => {
-    test('should create example component code', async () => {
-        const projectId = 'cf755ed7d59e0319'
+describe(
+    'createExampleComponentCode',
+    () => {
+        test('should create example component code', async () => {
+            const projectId = 'cf755ed7d59e0319'
 
-        const { config } = await configFromFetch({ projectId })
-        const { exampleCode } = await createExampleComponentCode({
-            config,
-            outDir: 'src',
-        })
-        expect(exampleCode).toMatchInlineSnapshot(`
+            const { config } = await configFromFetch({
+                projectId,
+                agent: 'test',
+            })
+            const { exampleCode } = await createExampleComponentCode({
+                config,
+                outDir: 'src',
+            })
+            expect(exampleCode).toMatchInlineSnapshot(`
           "import './src/styles.css'
 
           import NavigationFramerComponent from './src/navigation'
@@ -67,5 +72,7 @@ describe('createExampleComponentCode', () => {
             );
           };"
         `)
-    })
-}, 1000 * 10)
+        })
+    },
+    1000 * 10,
+)
