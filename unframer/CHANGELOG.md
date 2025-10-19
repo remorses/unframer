@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.10
+
+### Patch Changes
+
+- 06b0f18: Update to latest Framer runtime, framer@2.4.1, framer-motion@
+
 ## 3.2.9
 
 ### Patch Changes
