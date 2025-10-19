@@ -1,4 +1,6 @@
 import { setMaxListeners } from 'events'
+import pkg from '../package.json'
+import { blue, bgBlue, green } from 'picocolors'
 import { fetch } from 'undici'
 import './sentry.js'
 
@@ -172,7 +174,7 @@ function fixOldUnframerPath() {
     }
     return false
 }
-import pkg from '../package.json'
+
 const version = pkg.version
 
 cli.version(version).help()
@@ -371,7 +373,10 @@ export async function configFromFetch({
     const client = await createClient({
         url: url || 'https://unframer.co',
         headers: {
-            'X-Agent': 'cli',
+            'X-Agent':
+                process.env.GITHUB_ACTIONS === 'true'
+                    ? 'github-actions'
+                    : 'cli',
         },
     })
 
@@ -390,11 +395,17 @@ export async function configFromFetch({
                 }
                 return 'A React Export subscription is required to download components.'
             })()
-            const details = buyUrl
-                ? `${message}\nPurchase subscription: ${buyUrl}`
-                : message
+
             // spinner.error(details)
-            throw new Error(details, { cause: error })
+            spinner.error(message)
+            console.info('')
+            console.info(
+                'Go to this url to buy the Framer React Export subscription:\n',
+            )
+            console.info(green(buyUrl))
+            console.info()
+            process.exit(1)
+            // throw new Error(details, { cause: error })
         }
         spinner.error('Error fetching project data:')
         console.error(error)

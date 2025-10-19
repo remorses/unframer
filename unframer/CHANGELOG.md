@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.11
+
+### Patch Changes
+
+- Add subscription link for buying
+
 ## 3.2.10
 
 ### Patch Changes
