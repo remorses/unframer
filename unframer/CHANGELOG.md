@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.12
+
+### Patch Changes
+
+- Filter out '!missing' package names during installation (Framer bug workaround)
+
 ## 3.2.11
 
 ### Patch Changes

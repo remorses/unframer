@@ -46,6 +46,8 @@ export async function installPackagesBatch({
     cwd: string
     isDev?: boolean
 }): Promise<{ success: boolean; error?: string }> {
+    // Framer sometimes has links that point to !missing for some reason. bug in Framer
+    packageNames = packageNames.filter((x) => x !== '!missing')
     if (packageNames.length === 0) {
         return { success: true }
     }
